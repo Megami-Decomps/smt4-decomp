@@ -1,20 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e783c(void);
+void FUN_002e783c(void);
 
-/* Supplied declaration required: FUN_002e783c. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 value;
+} Holder;
 
-
-void FUN_002eea7c(int param_1)
-
+/* Runs FUN_002e783c when the word at 4 is set. */
+void FUN_002eea7c(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 4) != 0) {
-    FUN_002e783c();
-  }
-  return;
+    if (object->value != 0) {
+        FUN_002e783c();
+    }
 }
 
 } /* extern "C" */

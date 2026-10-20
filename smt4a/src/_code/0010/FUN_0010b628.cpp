@@ -22,7 +22,7 @@ extern unsigned char g_systemTable; /* 0x59935c */
 #endif
 /* Supplied declaration required: FUN_0010b5bc. */
 /* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002f4d8c(unsigned int *, unsigned int **);
+extern int wordRefsDiffer_002f4d8c(unsigned int *, unsigned int **);
 
 
 unsigned long long FUN_0010b628(unsigned int param_1,unsigned int param_2,unsigned int param_3)
@@ -40,7 +40,7 @@ unsigned long long FUN_0010b628(unsigned int param_1,unsigned int param_2,unsign
   while( 1 ) {
     temp_v1 = *(unsigned int **)((*(int *)((unsigned char *)&g_systemTable + 0x1c)) + 0x10);
     temp_v2 = *temp_v1;
-    temp_v0 = FUN_002f4d8c((unsigned int *)&temp_v2,&temp_v1);
+    temp_v0 = wordRefsDiffer_002f4d8c((unsigned int *)&temp_v2,&temp_v1);
     if (temp_v0 == 0) break;
     (**(romwright_code **)(**(int **)(**(int **)((*(int *)((unsigned char *)&g_systemTable + 0x1c)) + 0x10) + 8) + 0xc))(&uStack_1c);
     FUN_0010b5bc(param_1,&uStack_1c);

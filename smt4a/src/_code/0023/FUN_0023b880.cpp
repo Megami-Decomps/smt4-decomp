@@ -1,23 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003d2d34(unsigned int, int, int);
+void FUN_003d2d34(u32 handle, s32 a, s32 b);
 
-extern int DAT_0057f290; /* 0x57f290 */
+typedef struct Record {
+    /* 0x000 */ u8 unk000[0x48C];
+    /* 0x48C */ u32 handle;
+} Record;
+extern Record *DAT_0057f290;
 
-/* Supplied declaration required: FUN_003d2d34. */
-
-
-unsigned int FUN_0023b880(void)
-
+/* Calls FUN_003d2d34(handle, 0, 0x3C) for the record at 0x57F290 and returns 1; returns 0 when there is none. */
+u32 FUN_0023b880(void)
 {
-/* irregular: 1 native warning(s); review required */
-  if (DAT_0057f290 == 0) {
-    return 0;
-  }
-  FUN_003d2d34(*(unsigned int *)(DAT_0057f290 + 0x48c),0,0x3c);
-  return 1;
+    if (DAT_0057f290 == NULL) {
+        return 0;
+    }
+    FUN_003d2d34(DAT_0057f290->handle, 0, 0x3C);
+    return 1;
 }
 
 } /* extern "C" */

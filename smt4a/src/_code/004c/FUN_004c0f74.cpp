@@ -9,7 +9,7 @@ int FUN_001aba54(void);
 int FUN_0034a290(void);
 int FUN_003e8bb0(unsigned char [2], unsigned int, unsigned int *);
 int FUN_003f0e20(int, int);
-int FUN_004c39b0(unsigned int *, unsigned int [5]);
+int source4CCopyHalves(unsigned int *, unsigned int [5]);
 int FUN_004c3ac0(int, unsigned int [5]);
 
 /* stack frame of param_2: 8 slot(s), 25 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned int DAT_0057140c; /* 0x57140c */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 extern int FUN_004bd098(unsigned int, int);
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: FUN_004c3ac0. */
 
 
@@ -70,7 +70,7 @@ unsigned int FUN_004c0f74(unsigned int *param_1,unsigned int param_2)
   temp_v5[2] = 0;
   temp_v5[3] = 0;
   temp_v5[4] = 0;
-  FUN_004c39b0(param_1,temp_v5);
+  source4CCopyHalves(param_1,temp_v5);
   temp_v1 = 0;
   do {
     temp_v2 = (unsigned int)*(unsigned short *)((int)temp_v5 + temp_v1 * 2);

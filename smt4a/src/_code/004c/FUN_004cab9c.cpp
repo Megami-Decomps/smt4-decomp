@@ -6,7 +6,7 @@ extern "C" {
 
 int btlGetMainState(void);
 int FUN_001568f8(int, int);
-int FUN_003eda04(unsigned int, int);
+int halfRecClear(unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned int DAT_0057aa6c; /* 0x57aa6c */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-/* Supplied declaration required: FUN_003eda04. */
+/* Supplied declaration required: halfRecClear. */
 
 
 void FUN_004cab9c(int param_1)
@@ -56,7 +56,7 @@ void FUN_004cab9c(int param_1)
     }
     if ((*(unsigned short *)(temp_v1 + 0x110) & 0x3dc2) != 0) {
       temp_v2 = btlGetMainState();
-      FUN_003eda04(temp_v2,temp_v1);
+      halfRecClear(temp_v2,temp_v1);
     }
     if ((-1 < *(short *)(param_1 + 0x68)) &&
        (temp_v3 = btlGetMainState(), *(int *)(temp_v3 + 0x1ffc) + *(short *)(param_1 + 0x68) * 0x408 != 0))

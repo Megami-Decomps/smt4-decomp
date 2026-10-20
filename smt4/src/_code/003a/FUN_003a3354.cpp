@@ -9,7 +9,7 @@ int FUN_0029cc44(...);
 int FUN_0019e0c0(...);
 int FUN_0022e740(...);
 int FUN_0022e818(...);
-int FUN_0022ea38(...);
+int dataTable17Sub0GetRecord(...);
 int FUN_0022fcb8(...);
 int FUN_00230234(...);
 int FUN_002302d8(...);
@@ -32,7 +32,7 @@ extern unsigned char LAB_003a3798; /* 0x3a3798 */
 /* Supplied declaration required: FUN_0019e0c0. */
 /* Supplied declaration required: FUN_0022e740. */
 /* Supplied declaration required: FUN_0022e818. */
-/* Supplied declaration required: FUN_0022ea38. */
+/* Supplied declaration required: dataTable17Sub0GetRecord. */
 /* Supplied declaration required: FUN_0022fcb8. */
 /* Supplied declaration required: FUN_00230234. */
 /* Supplied declaration required: FUN_002302d8. */
@@ -99,7 +99,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
         temp_v3 = FUN_00290eb0();
         if (temp_v3 != 0) {
           temp_v3 = FUN_00290e9c();
-          temp_v3 = FUN_0022ea38(&temp_v4,param_1[temp_v3 + 0x574b] + 4);
+          temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b] + 4);
           FUN_0029ee6c(temp_v3 + 0x40,0x323232ff);
         }
         temp_v3 = FUN_00290e78();
@@ -142,7 +142,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       temp_v3 = FUN_00290eb0();
       if (temp_v3 != 0) {
         temp_v3 = FUN_00290e9c();
-        temp_v3 = FUN_0022ea38(&temp_v4,param_1[temp_v3 + 0x574b]);
+        temp_v3 = dataTable17Sub0GetRecord(&temp_v4,param_1[temp_v3 + 0x574b]);
         FUN_0029ee6c(temp_v3 + 0x40,0x323232ff);
       }
       temp_v3 = FUN_00290e78();

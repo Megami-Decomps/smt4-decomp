@@ -19,7 +19,7 @@ int sysMemClear(...);
 int FUN_0031a400(...);
 int FUN_00342010(...);
 int FUN_003423cc(...);
-int FUN_00389fcc(...);
+int jobSetWork3C(...);
 int FUN_0039af48(...);
 int FUN_003afe2c(...);
 int FUN_003b61ec(...);
@@ -63,7 +63,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_00342010. */
 /* Supplied declaration required: FUN_003423cc. */
-/* Supplied declaration required: FUN_00389fcc. */
+/* Supplied declaration required: jobSetWork3C. */
 /* Supplied declaration required: FUN_0039af48. */
 /* Supplied declaration required: FUN_003afe2c. */
 /* Supplied declaration required: FUN_003b61ec. */
@@ -265,7 +265,7 @@ LAB_002e6874:
       }
       puVar8[temp_v9 + 1] = temp_v7;
       FUN_0014bdb4(*puVar8,puVar8[temp_v9 + 1]);
-      FUN_00389fcc(puVar8[temp_v9 + 1],*(unsigned char *)(puVar8[temp_v9 + 10] + 0xd) + 3);
+      jobSetWork3C(puVar8[temp_v9 + 1],*(unsigned char *)(puVar8[temp_v9 + 10] + 0xd) + 3);
     }
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 8);

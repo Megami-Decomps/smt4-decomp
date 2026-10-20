@@ -29,7 +29,7 @@ extern int FUN_00287800(void);
 /* Supplied declaration required: FUN_0028784c. */
 extern int FUN_00287874(unsigned short);
 extern int FUN_00287894(unsigned short);
-extern int FUN_002878a8(int);
+extern int dataTable2fSub1GetRecord(int);
 extern int FUN_0028f1bc(unsigned short);
 /* Supplied declaration required: FUN_00295a18. */
 extern int FUN_00298dc8(unsigned short);
@@ -69,7 +69,7 @@ int FUN_001a9104(void)
   temp_v14 = FUN_002c2950();
   temp_v17 = 0;
   if (DAT_0049f9c8 != '\0') {
-    temp_v3 = FUN_002878a8((int)*(short *)(temp_v14 + 0x2a));
+    temp_v3 = dataTable2fSub1GetRecord((int)*(short *)(temp_v14 + 0x2a));
     DAT_0049f9cc = (int)*(short *)(temp_v3 + 0x12);
     FUN_00295a18(DAT_0049f9cc,1);
     DAT_0049f9c8 = 0;

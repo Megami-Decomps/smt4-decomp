@@ -1,29 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+void scrSetResult(s32 value);
+s32 FUN_00184964(s32 a, s32 b);
+s32 scrGetArg(u32 index);
 
-extern int FUN_00184964(int, int);
-extern int scrGetArg(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_002cc2a0(void)
-
+/* Script command: result = arg0 * (FUN_00184964(arg1 << 10, arg2 << 10) / 100) >> 10; returns 1. */
+u32 FUN_002cc2a0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  temp_v1 = FUN_00184964(temp_v1 << 10,temp_v2 << 10);
-  temp_v1 = temp_v1 / 100;
-  scrSetResult(temp_v0 * temp_v1 >> 10);
-  return 1;
+    s32 arg0;
+    s32 arg1;
+    s32 arg2;
+    s32 ratio;
+
+    arg0 = scrGetArg(0);
+    arg1 = scrGetArg(1);
+    arg2 = scrGetArg(2);
+    ratio = FUN_00184964(arg1 << 10, arg2 << 10);
+    ratio = ratio / 100;
+    scrSetResult(arg0 * ratio >> 10);
+    return 1;
 }
 
 } /* extern "C" */

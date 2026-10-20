@@ -32,7 +32,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
@@ -100,7 +100,7 @@ unsigned int FUN_0031fec0(void)
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
     temp_v3 = g_renderCtx;
-    temp_v2 = FUN_00169294(6,1,0);
+    temp_v2 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v3 + 0x12b8);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -167,7 +167,7 @@ unsigned int FUN_0031fec0(void)
       *(unsigned char *)(temp_v3 + 0x12d0) = 0;
     }
     temp_v3 = g_renderCtx;
-    temp_v2 = FUN_00169294(6,7,0);
+    temp_v2 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v3 + 0x12b8);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -204,7 +204,7 @@ unsigned int FUN_0031fec0(void)
       *(unsigned char *)(temp_v3 + 0x12d0) = 0;
     }
     temp_v3 = g_renderCtx;
-    temp_v2 = FUN_00169294(6,1,0);
+    temp_v2 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v3 + 0x12b8);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];

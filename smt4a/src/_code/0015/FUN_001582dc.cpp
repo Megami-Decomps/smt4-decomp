@@ -1,31 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0016cb50(int, int);
+void FUN_0016cb50(s32 handle, s32 state);
 
-typedef struct fn_001582dc_arg0 fn_001582dc_arg0;
-struct fn_001582dc_arg0 {
-    unsigned char pad_0x0[0xc];
-    int field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x14];
-    byte field_0x24; /* +0x24 */
-    undefined1 field_0x25; /* +0x25 */
-};
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 handle;
+    /* 0x10 */ u8 unk10[0x14];
+    /* 0x24 */ u8 state;
+    /* 0x25 */ u8 released;
+} Holder;
 
-/* Supplied declaration required: FUN_0016cb50. */
-
-
-void FUN_001582dc(fn_001582dc_arg0 *param_1)
-
+/* If the handle is valid and the state is 1, releases it, sets the state to 0 and marks it released. */
+void FUN_001582dc(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((param_1->field_0xc != -1) && (param_1->field_0x24 == 1)) {
-    FUN_0016cb50(param_1->field_0xc, param_1->field_0x24);
-    param_1->field_0x24 = 0;
-    param_1->field_0x25 = 1;
-  }
-  return;
+    if (object->handle != -1 && object->state == 1) {
+        FUN_0016cb50(object->handle, object->state);
+        object->state = 0;
+        object->released = 1;
+    }
 }
 
 } /* extern "C" */

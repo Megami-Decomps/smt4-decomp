@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_001ab888(void);
 int FUN_0032fea0(int, int);
-int FUN_0032ff20(unsigned int);
+int unitRecordBuild(unsigned int);
 int FUN_0034c340(short [16], int, int, int);
 int FUN_003c3f1c(void);
 int FUN_004bcd90(int);
 int FUN_004da6e0(unsigned int, int, int, int, int);
-int FUN_004dbf54(unsigned int);
+int wordAt1B0Clear(unsigned int);
 
 /* stack frame of void: 11 slot(s), 44 byte(s) */
 typedef struct {
@@ -35,14 +35,14 @@ extern int FUN_001ab854(int);
 /* Supplied declaration required: FUN_001ab888. */
 extern int FUN_001b347c(void);
 /* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0034c340. */
 /* Supplied declaration required: FUN_003c3f1c. */
 /* Supplied declaration required: FUN_004bcd90. */
-extern int FUN_004bd21c(int);
+extern int getUnlockedSlotCount(int);
 /* Supplied declaration required: FUN_004da6e0. */
 extern int FUN_004db650(unsigned int, int, int, int);
-/* Supplied declaration required: FUN_004dbf54. */
+/* Supplied declaration required: wordAt1B0Clear. */
 extern int FUN_004dc3a8(void);
 
 
@@ -76,7 +76,7 @@ unsigned int FUN_00270498(void)
     temp_v3 = temp_v7[1];
   }
   if (temp_v7[0] != 0 && temp_v3 != 0) {
-    FUN_004dbf54(*(unsigned int *)(temp_v0 + 0x107c));
+    wordAt1B0Clear(*(unsigned int *)(temp_v0 + 0x107c));
     if (*(char *)(temp_v0 + 0x9b4) != '\x12') {
       temp_v3 = FUN_004dc3a8();
     }
@@ -85,7 +85,7 @@ unsigned int FUN_00270498(void)
     }
     if (temp_v3 != 0) {
       temp_v1 = temp_v0 + 0xe98;
-      FUN_0032ff20((*(unsigned int *)(temp_v0 + 0xe94) & 0x1ffff) >> 2);
+      unitRecordBuild((*(unsigned int *)(temp_v0 + 0xe94) & 0x1ffff) >> 2);
       FUN_004da6e0(*(unsigned int *)(temp_v0 + 0x107c),temp_v7[0],temp_v7[1],0,temp_v1);
       temp_v8[0] = 0;
       temp_v8[1] = 0;
@@ -158,7 +158,7 @@ LAB_0027069c:
       } while (temp_v4 < 8);
       if (*(char *)(temp_v0 + 0x9b4) == '\n') {
         FUN_0034c340(temp_v8,temp_v5,temp_v0 + 0xe90,0);
-        temp_v3 = FUN_004bd21c(temp_v1);
+        temp_v3 = getUnlockedSlotCount(temp_v1);
         temp_v4 = 0;
         do {
           if (((temp_v8[temp_v4] != 0) &&

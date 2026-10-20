@@ -18,7 +18,7 @@ typedef struct {
 extern unsigned char LAB_0032b34c; /* 0x32b34c */
 
 /* Supplied declaration required: FUN_00250d74. */
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b7bca. */
@@ -78,9 +78,9 @@ void FUN_003d0d1c(int *param_1,int param_2)
       if (-1 < *(char *)(temp_v1 + temp_v0 + 0x90f0)) {
         temp_v1 = FUN_002a8764();
         temp_v1 = FUN_002a8740((int)*(char *)(temp_v1 + temp_v0 + 0x90f0));
-        if ((((temp_v1 != 0) && (temp_v2 = FUN_0029ebac(temp_v1,1), temp_v2 == 0)) &&
-            (temp_v2 = FUN_0029ebac(temp_v1,10), temp_v2 == 0)) &&
-           (temp_v2 = FUN_0029ebac(temp_v1,2), temp_v2 == 0)) {
+        if ((((temp_v1 != 0) && (temp_v2 = flagWordTestBit(temp_v1,1), temp_v2 == 0)) &&
+            (temp_v2 = flagWordTestBit(temp_v1,10), temp_v2 == 0)) &&
+           (temp_v2 = flagWordTestBit(temp_v1,2), temp_v2 == 0)) {
           pbVar10 = pbVar2 + temp_v3 * 4;
           *pbVar10 = (unsigned char)temp_v0;
           pbVar10[1] = *(unsigned char *)(temp_v1 + 0x48);

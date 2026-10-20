@@ -12,14 +12,14 @@ int FUN_00280070(...);
 int FUN_002e5104(...);
 int FUN_002e512c(...);
 int FUN_0031b91c(void);
-int FUN_003d9174(...);
+int words5Clear(...);
 int FUN_003f9c6c(...);
 int FUN_004f112c(...);
 
 int FUN_001a1ee0(void);
 int FUN_001aff14(...);
 int FUN_00203a5c(void);
-int FUN_003d37bc(...);
+int pairSourceGet(...);
 int FUN_003d4dd4(...);
 int FUN_003d8f24(...);
 int FUN_004f0c80(float *, double);
@@ -131,10 +131,10 @@ extern int effectProcessIsActive(void);
 /* Supplied declaration required: FUN_002e5104. */
 /* Supplied declaration required: FUN_002e512c. */
 /* Supplied declaration required: FUN_0031b91c. */
-/* Supplied declaration required: FUN_003d37bc. */
+/* Supplied declaration required: pairSourceGet. */
 /* Supplied declaration required: FUN_003d4dd4. */
 /* Supplied declaration required: FUN_003d8f24. */
-/* Supplied declaration required: FUN_003d9174. */
+/* Supplied declaration required: words5Clear. */
 /* Supplied declaration required: FUN_003f9c6c. */
 /* Supplied declaration required: FUN_004f0c80. */
 /* Supplied declaration required: FUN_004f112c. */
@@ -528,7 +528,7 @@ LAB_004f33d8:
     }
     if (((unsigned int)param_1[0x193] & 0x40000) != 0) {
       FUN_003d8f24(param_1 + 0x11);
-      FUN_003d37bc(param_1 + 0x11,&temp_v38,&temp_v39);
+      pairSourceGet(param_1 + 0x11,&temp_v38,&temp_v39);
       temp_v3 = FUN_0022a00c(param_1 + 0x11);
       if (temp_v3 != 0) {
         param_1[0x11] = 0.0f;
@@ -543,7 +543,7 @@ LAB_004f33d8:
     temp_v43 = temp_v0;
     if (((unsigned int)param_1[0x193] & 0x400000) != 0) {
       FUN_003d8f24(param_1 + 0x16);
-      FUN_003d37bc(param_1 + 0x16,&temp_v42,&temp_v43);
+      pairSourceGet(param_1 + 0x16,&temp_v42,&temp_v43);
       temp_v3 = FUN_0022a00c(param_1 + 0x16);
       if (temp_v3 != 0) {
         param_1[0x16] = 0.0f;
@@ -701,10 +701,10 @@ LAB_004f33d8:
     fStack_10c = param_1[0x19d];
     FUN_0014f0dc(param_1 + 0x1b,&temp_v13,&temp_v15,temp_v44);
     FUN_00280070(param_1 + 0x1b,0);
-    FUN_003d9174(param_1 + 0x11);
-    FUN_003d9174(param_1 + 0x16);
+    words5Clear(param_1 + 0x11);
+    words5Clear(param_1 + 0x16);
     FUN_00203a5c();
-    FUN_003d9174();
+    words5Clear();
     break;
   case 0x5:
     return 0xffffffff;

@@ -9,7 +9,7 @@ int FUN_00169ddc(...);
 int FUN_001801a4(void);
 int FUN_001846d0(...);
 int FUN_0020b490(...);
-int FUN_003d2204(...);
+int roundObjFinish(...);
 
 int FUN_00100388(...);
 int qsort(int, int, int, unsigned char *);
@@ -39,7 +39,7 @@ int btlTalkBustUpSetUnk2F4(...);
 int FUN_003f33b0(int, unsigned int, int);
 int FUN_004bcb54(...);
 int FUN_004bcd90(...);
-int FUN_004bd3ec(...);
+int bitsAt60Set(...);
 int FUN_004bd6b0(int);
 
 /* stack frame of param_1: 10 slot(s), 38 byte(s) */
@@ -100,15 +100,15 @@ extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_0035da20. */
 /* Supplied declaration required: FUN_0035fc4c. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_003d2204. */
+/* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: FUN_003f33b0. */
 extern unsigned int FUN_003f3908(int);
 extern int FUN_004bcaa8(unsigned short, unsigned short, int, unsigned int *, unsigned char);
 /* Supplied declaration required: FUN_004bcb54. */
 /* Supplied declaration required: FUN_004bcd90. */
-extern int FUN_004bd21c(int);
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd3ec. */
+extern int getUnlockedSlotCount(int);
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Set. */
 /* Supplied declaration required: FUN_004bd6b0. */
 
 
@@ -170,7 +170,7 @@ void FUN_002f5064(int param_1)
       FUN_003f33b0(temp_v2,temp_v4,temp_v11 + 0x4564);
       temp_v12 = (unsigned int)(param_1 + 0x75d4);
       if (temp_v3 != 0) {
-        temp_v3 = FUN_004bd21c(temp_v2);
+        temp_v3 = getUnlockedSlotCount(temp_v2);
         temp_v10 = 0;
         do {
           if ((*(short *)(pcVar14 + temp_v10 * 2 + 0x138) != 0) && (temp_v9 = 0, 0 < temp_v3)) {
@@ -288,11 +288,11 @@ LAB_002f56d4:
       temp_v4 = *(unsigned int *)(param_1 + 0x43a8);
       FUN_00275bc8(temp_v4,puVar8);
       *(unsigned int *)(param_1 + 0x43ac) = temp_v4;
-      temp_v3 = FUN_004bd340(temp_v2,2);
+      temp_v3 = bitsAt60Test(temp_v2,2);
       FUN_004bcd90(temp_v2);
       FUN_004bcb54(temp_v2);
       if (temp_v3 != 0) {
-        FUN_004bd3ec(temp_v2,2);
+        bitsAt60Set(temp_v2,2);
       }
     }
     if (*(char *)(temp_v13 + 0x8a) == '\0') {
@@ -438,7 +438,7 @@ LAB_002f56d4:
           return;
         }
         FUN_002a7288();
-        FUN_003d2204(param_1);
+        roundObjFinish(param_1);
         return;
       }
       temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));

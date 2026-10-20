@@ -1,17 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f560; /* 0x57f560 */
+typedef struct Global57f560 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 value;
+} Global57f560;
+extern Global57f560 DAT_0057f560;
 
-
-void FUN_002c76c0(int param_1)
-
+/* Stores `value` at 0x4 of the global at 0x57F560 when it is -1, 0 or 1. */
+void FUN_002c76c0(s32 value)
 {
-  if (param_1 + 1U < 3) {
-    (*(int *)((unsigned char *)&DAT_0057f560 + 0x4)) = param_1;
-  }
-  return;
+    if (value + 1U < 3) {
+        DAT_0057f560.value = value;
+    }
 }
 
 } /* extern "C" */

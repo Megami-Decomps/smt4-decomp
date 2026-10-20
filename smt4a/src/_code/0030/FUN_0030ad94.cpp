@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0030aeb8(...);
-int FUN_0030aeea(...);
+int rbTreeRotateRight_0030aeb8(...);
+int rbTreeRotateLeft_0030aeea(...);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,8 +14,8 @@ typedef struct {
 } param_5_stack;
 
 extern char *FUN_0030ad72(int, unsigned int);
-/* Supplied declaration required: FUN_0030aeb8. */
-/* Supplied declaration required: FUN_0030aeea. */
+/* Supplied declaration required: rbTreeRotateRight_0030aeb8. */
+/* Supplied declaration required: rbTreeRotateLeft_0030aeea. */
 extern int FUN_0030f12c(int, unsigned int, int);
 
 
@@ -66,12 +66,12 @@ void FUN_0030ad94(unsigned int *param_1,int param_2,int param_3,int param_4,unsi
       pcVar4 = *(char **)(*(int *)(pcVar3 + 4) + 0xc);
       if ((pcVar4 == (char *)0x0) || (*pcVar4 != '\0')) {
         if (*(char **)(pcVar3 + 0xc) == pcVar5) {
-          FUN_0030aeea(param_2,pcVar3);
+          rbTreeRotateLeft_0030aeea(param_2,pcVar3);
           pcVar5 = pcVar3;
         }
         **(unsigned char **)(pcVar5 + 4) = 1;
         **(unsigned char **)(*(int *)(pcVar5 + 4) + 4) = 0;
-        FUN_0030aeb8(param_2,*(unsigned int *)(*(int *)(pcVar5 + 4) + 4));
+        rbTreeRotateRight_0030aeb8(param_2,*(unsigned int *)(*(int *)(pcVar5 + 4) + 4));
       }
       else {
         *pcVar3 = '\x01';
@@ -88,12 +88,12 @@ void FUN_0030ad94(unsigned int *param_1,int param_2,int param_3,int param_4,unsi
       continue;
     }
     if (*(char **)(pcVar3 + 8) == pcVar5) {
-      FUN_0030aeb8(param_2,pcVar3);
+      rbTreeRotateRight_0030aeb8(param_2,pcVar3);
       pcVar5 = pcVar3;
     }
     **(unsigned char **)(pcVar5 + 4) = 1;
     **(unsigned char **)(*(int *)(pcVar5 + 4) + 4) = 0;
-    FUN_0030aeea(param_2,*(unsigned int *)(*(int *)(pcVar5 + 4) + 4));
+    rbTreeRotateLeft_0030aeea(param_2,*(unsigned int *)(*(int *)(pcVar5 + 4) + 4));
   } while( 1 );
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019df1c(int);
 int FUN_002a2dc8(unsigned int);
-int FUN_002abb24(unsigned int, unsigned int);
+int sceneTraverserVisit(unsigned int, unsigned int);
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int DAT_00464b84; /* 0x464b84 */
@@ -18,7 +18,7 @@ extern unsigned int DAT_004dad80; /* 0x4dad80 */
 
 /* Supplied declaration required: FUN_0019df1c. */
 /* Supplied declaration required: FUN_002a2dc8. */
-/* Supplied declaration required: FUN_002abb24. */
+/* Supplied declaration required: sceneTraverserVisit. */
 
 
 void FUN_001db998(int param_1,int param_2)
@@ -51,7 +51,7 @@ void FUN_001db998(int param_1,int param_2)
   if (temp_v1 != 0) {
     FUN_0019df1c(param_1);
     temp_v2 = (unsigned int)(param_2 >= 3);
-    FUN_002abb24((&DAT_00464b7c)[temp_v2],(&DAT_00464b84)[temp_v2]);
+    sceneTraverserVisit((&DAT_00464b7c)[temp_v2],(&DAT_00464b84)[temp_v2]);
     (&DAT_004dad80)[temp_v2 * 6] = (&DAT_004dad80)[temp_v2 * 6] + 1;
     *(int *)(param_1 + 0xc) = param_2;
     *(int *)(param_1 + 0x10) = param_2;

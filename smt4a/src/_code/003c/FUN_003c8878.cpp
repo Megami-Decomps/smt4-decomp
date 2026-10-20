@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00100388(unsigned char [104], unsigned char *, unsigned int);
 int FUN_00272204(unsigned int, int *, int);
-int FUN_00338408(unsigned int *);
+int nodeListFree(unsigned int *);
 int FUN_00350ee0(unsigned int *, unsigned char [104], int, unsigned int, int);
 int FUN_00381874(unsigned int *);
 int FUN_003a1998(unsigned int *, unsigned int);
-int FUN_003a1a70(unsigned int *);
+int handleHolderFree(unsigned int *);
 int FUN_003c2df0(unsigned int, int, int);
 int FUN_003ca0ec(...);
 
@@ -33,12 +33,12 @@ extern unsigned int *DAT_0059dc20; /* 0x59dc20 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00272204. */
 extern int FUN_00300778(unsigned int, int);
-/* Supplied declaration required: FUN_00338408. */
+/* Supplied declaration required: nodeListFree. */
 /* Supplied declaration required: FUN_00350ee0. */
 /* Supplied declaration required: FUN_00381874. */
 /* Supplied declaration required: FUN_003a1998. */
-/* Supplied declaration required: FUN_003a1a70. */
-extern int FUN_003b2518(unsigned int *);
+/* Supplied declaration required: handleHolderFree. */
+extern int linkedObjGetValue(unsigned int *);
 extern int FUN_003c2d90(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_003c2df0. */
 /* Supplied declaration required: FUN_003ca0ec. */
@@ -65,11 +65,11 @@ unsigned char * FUN_003c8878(unsigned int param_1)
     FUN_00381874(DAT_0059dc20);
     temp_v5 = DAT_0059dc20[2];
     temp_v4 = FUN_003c2d90(DAT_0059dc20,temp_v3);
-    temp_v6 = FUN_003b2518(DAT_0059dc20);
+    temp_v6 = linkedObjGetValue(DAT_0059dc20);
     if (temp_v5 == 1) {
-      FUN_003a1a70(DAT_0059dc20);
+      handleHolderFree(DAT_0059dc20);
       DAT_0059dc20 = (unsigned int *)0x0;
-      FUN_00338408(DAT_0059dc1c);
+      nodeListFree(DAT_0059dc1c);
       DAT_0059dc1c = (unsigned int *)0x0;
     }
   }

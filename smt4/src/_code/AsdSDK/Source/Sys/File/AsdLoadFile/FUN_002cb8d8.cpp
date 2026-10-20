@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b90e6(...);
+int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
 int FUN_002be624(...);
 int FUN_002c3940(...);
@@ -30,7 +30,7 @@ extern signed char g_asdLoadFileUseRawPaths; /* 0x465040 */
 extern int asdLoadFileIsPatched(unsigned int);
 extern int asdLoadFileHasDevice(unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002b90e6. */
+/* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002c3940. */
@@ -79,7 +79,7 @@ unsigned int FUN_002cb8d8(unsigned int param_1)
   builtin_strncpy(temp_v2,"h\fB",4);
   temp_v5 = 0;
   temp_v6 = 0;
-  FUN_002b90e6(&temp_v5);
+  refIsNullOrZero(&temp_v5);
   while ((temp_v0 = FUN_002b90c8(puVar5,0x105,(unsigned int *)&temp_v5), temp_v0 != 0 &&
          (puVar2 = puVar4, FUN_002c618c(puVar4,puVar5,temp_v0,&temp_v5), puVar2 != (unsigned short *)0x0)
          )) {

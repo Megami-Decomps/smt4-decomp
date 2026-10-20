@@ -8,7 +8,7 @@ int FUN_001641c4(void);
 int FUN_001f4908(int, int, int);
 int FUN_00284168(int, int, int, int);
 int FUN_0037ed38(void);
-int FUN_003c58a8(int);
+int ref208SetPair1C(int);
 int FUN_003cbb0c(void);
 int FUN_003d2d34(int, int, int);
 int FUN_003d2d6c(int);
@@ -22,8 +22,8 @@ extern int FUN_001656a0(unsigned int);
 extern int FUN_002009a8(unsigned int);
 /* Supplied declaration required: FUN_00284168. */
 /* Supplied declaration required: FUN_0037ed38. */
-/* Supplied declaration required: FUN_003c58a8. */
-extern int FUN_003c8860(void);
+/* Supplied declaration required: ref208SetPair1C. */
+extern int ref208HasObj(void);
 /* Supplied declaration required: FUN_003cbb0c. */
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003d2d6c. */
@@ -46,12 +46,12 @@ unsigned int FUN_004cf140(int param_1)
     FUN_00284168(0,0,0x140,0xf0);
     *(unsigned int *)(param_1 + 0x2c) = temp_v0;
     *(unsigned char *)(param_1 + 0x24) = 0;
-    temp_v1 = FUN_003c8860();
+    temp_v1 = ref208HasObj();
     if (temp_v1 == 0) {
       FUN_0037ed38();
       *(unsigned char *)(param_1 + 0x24) = 1;
     }
-    FUN_003c58a8(1);
+    ref208SetPair1C(1);
     temp_v1 = FUN_002009a8(0x100003c);
     if (temp_v1 != 1) {
       FUN_003d2d34(0x100003c,0,0x3c);
@@ -95,7 +95,7 @@ unsigned int FUN_004cf140(int param_1)
         return 1;
       }
       *(unsigned char *)(param_1 + 0x25) = 0;
-      FUN_003c58a8(0);
+      ref208SetPair1C(0);
       if (*(char *)(param_1 + 0x24) != '\0') {
         FUN_003cbb0c();
       }

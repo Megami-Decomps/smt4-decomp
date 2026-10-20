@@ -12,7 +12,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002e410c. */
-extern unsigned int *FUN_002e4e86(unsigned int *, unsigned int *);
+extern unsigned int *wordRefMax(unsigned int *, unsigned int *);
 
 
 int FUN_00101518(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -34,7 +34,7 @@ int FUN_00101518(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   uStack_1c = param_2;
   uStack_18 = param_3;
   uStack_14 = param_4;
-  puVar1 = (unsigned int *)FUN_002e4e86(temp_v0,(unsigned int *)&uStack_18);
+  puVar1 = (unsigned int *)wordRefMax(temp_v0,(unsigned int *)&uStack_18);
   FUN_002e410c(param_1,*puVar1,param_4);
   return param_1 + 0xc;
 }

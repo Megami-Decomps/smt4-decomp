@@ -13,7 +13,7 @@ int FUN_0020ef94(...);
 int FUN_0020f054(...);
 int FUN_00233170(...);
 int FUN_002442ac(...);
-int FUN_00244894(...);
+int mapEplSlotsInit(...);
 int FUN_002496b8(...);
 int FUN_002c23cc(...);
 
@@ -52,7 +52,7 @@ extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_0020f054. */
 /* Supplied declaration required: FUN_00233170. */
 /* Supplied declaration required: FUN_002442ac. */
-/* Supplied declaration required: FUN_00244894. */
+/* Supplied declaration required: mapEplSlotsInit. */
 /* Supplied declaration required: FUN_002496b8. */
 /* Supplied declaration required: FUN_002c23cc. */
 
@@ -107,7 +107,7 @@ void FUN_00246720(void)
   *(unsigned char *)(puVar1 + 0x13) = 0;
   *(unsigned char *)((int)puVar1 + 0x4d) = 0;
   FUN_0020ec4c();
-  FUN_00244894();
+  mapEplSlotsInit();
   FUN_002496b8();
   FUN_002442ac();
   FUN_0020ef94();

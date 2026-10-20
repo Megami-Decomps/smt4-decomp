@@ -1,27 +1,13 @@
-#include "romwright_types.h"
+#include "shard/Shard0033.h"
 
 extern "C" {
 
-int FUN_004fdcd8(int, int, int, int, int, int, int, int);
+extern void FUN_004fdcd8(s32 a, u32 b, u16 c, s32 d, u16 e, u16 f, u32 g, s32 h);
 
-/* stack frame of void: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: FUN_004fdcd8. */
-
-
-unsigned int FUN_003358b4(void)
-
+u32 FUN_003358b4(void)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_004fdcd8(0,0,0,0,7,0,6,0);
-                    /* WARNING: Treating indirect jump as return */
-  return 1;
+    FUN_004fdcd8(0, 0, 0, 0, 7, 0, 6, 0);
+    return 1;
 }
 
 } /* extern "C" */

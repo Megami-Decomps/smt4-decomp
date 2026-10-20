@@ -19,7 +19,7 @@ int FUN_003180c4(...);
 int FUN_0031bca4(...);
 int FUN_0036f298(unsigned int);
 int FUN_003afe2c(unsigned int, int, int);
-int FUN_004bd30c(unsigned int, unsigned int, int);
+int dispatchIfFound(unsigned int, unsigned int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 extern int jobIsValid(void);
 extern int jobGetWork(unsigned int);
 /* Supplied declaration required: FUN_00167f24. */
-extern int FUN_0016a0f0(unsigned int);
+extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
@@ -50,7 +50,7 @@ extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_0031bca4. */
 /* Supplied declaration required: FUN_0036f298. */
 /* Supplied declaration required: FUN_003afe2c. */
-/* Supplied declaration required: FUN_004bd30c. */
+/* Supplied declaration required: dispatchIfFound. */
 extern unsigned int FUN_004d0cd4(void);
 
 
@@ -101,7 +101,7 @@ unsigned int FUN_003707a8(void)
     temp_v1 = FUN_0014bef4((temp_v6 - 1U) & 0xffff);
     temp_v5 = temp_v7[temp_v1];
     temp_v2 = FUN_004d0cd4();
-    FUN_004bd30c(temp_v2,temp_v5 & 0xffff,0);
+    dispatchIfFound(temp_v2,temp_v5 & 0xffff,0);
     FUN_00275fe4(0,1);
     DAT_00588008 = 0;
     FUN_00275fe4(1,temp_v5 & 0xffff);
@@ -143,7 +143,7 @@ unsigned int FUN_003707a8(void)
     FUN_002e342c(temp_v9,temp_v2);
     FUN_003180c4(8,temp_v8);
     FUN_003180c4(9,temp_v9);
-    temp_v1 = FUN_0016a0f0(0x1e);
+    temp_v1 = dataTableValueOrZero(0x1e);
     FUN_00167f24(0x15);
     temp_v7[0] = 0;
     FUN_00237898(temp_v1,0x38,DAT_00588008,6);

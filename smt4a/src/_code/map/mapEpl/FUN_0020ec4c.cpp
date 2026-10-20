@@ -1,46 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ec4c` (_code @ 0x20ec4c, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int asdMemoryAllocTracked(int, int, int, int, int);
+extern const char DAT_005319ec[]; /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEpl.cpp": __FILE__ */
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct MapEplEntry {
+    f32 x, y, z, w; /* 0x00 */
+    u32 unk10;      /* 0x10 */
+    u32 unk14;      /* 0x14 */
+} MapEplEntry;
 
-extern unsigned int *g_mapEpl; /* 0x580c88 */
+typedef struct MapEpl {
+    u32 unk00;
+    u32 unk04;
+    MapEplEntry entries[16]; /* 0x08 */
+} MapEpl;
 
-/* Supplied declaration required: asdMemoryAllocTracked. */
+extern MapEpl *g_mapEpl;
 
+extern void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
+/* Allocates the map effect list and clears its 16 entries. */
 void FUN_0020ec4c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAllocTracked(0x100,0x100,0,0x188,1);
-  g_mapEpl = puVar1;
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  temp_v0 = 0;
-  do {
-    temp_v1 = temp_v0 + 1;
-    puVar1[temp_v0 * 6 + 6] = 0;
-    puVar1[temp_v0 * 6 + 7] = 0;
-    puVar1[temp_v0 * 6 + 2] = 0;
-    puVar1[temp_v0 * 6 + 3] = 0;
-    puVar1[temp_v0 * 6 + 4] = 0;
-    puVar1[temp_v0 * 6 + 5] = 0;
-    temp_v0 = temp_v1;
-  } while (temp_v1 < 0x10);
-  return;
+    MapEpl *epl;
+    MapEplEntry *entry;
+    s32 i;
+
+    asdDebugTrace(DAT_005319ec, 100);
+    epl = (MapEpl *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapEpl), 1);
+    g_mapEpl = epl;
+    epl->unk00 = 0;
+    epl->unk04 = 0;
+    for (i = 0; i < 16; i++) {
+        entry = &epl->entries[i];
+        entry->unk10 = 0;
+        entry->unk14 = 0;
+        entry->x = 0.0f;
+        entry->y = 0.0f;
+        entry->z = 0.0f;
+        entry->w = 0.0f;
+    }
 }
 
 } /* extern "C" */

@@ -30,7 +30,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_003b21a4. */
@@ -86,7 +86,7 @@ void FUN_003217d0(int param_1)
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         efctSetSpeed();
         temp_v2 = g_renderCtx;
-        temp_v4 = FUN_00169294(6,1,0);
+        temp_v4 = packNibblesAndByte(6,1,0);
         piVar7 = (int *)(temp_v2 + 0x12b8);
         temp_v5 = piVar7[*piVar7 + 2];
         piVar7[*piVar7 + 2] = temp_v4;
@@ -96,7 +96,7 @@ void FUN_003217d0(int param_1)
         }
         FUN_001835b4(2,0xc,0x3e9,temp_v3,0,0x24);
         temp_v2 = g_renderCtx;
-        temp_v4 = FUN_00169294(6,7,0);
+        temp_v4 = packNibblesAndByte(6,7,0);
         piVar7 = (int *)(temp_v2 + 0x12b8);
         temp_v5 = piVar7[*piVar7 + 2];
         piVar7[*piVar7 + 2] = temp_v4;
@@ -114,7 +114,7 @@ void FUN_003217d0(int param_1)
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001634b4(param_1 + 0x1c4);
     temp_v2 = g_renderCtx;
-    temp_v4 = FUN_00169294(6,1,0);
+    temp_v4 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v2 + 0x12b8);
     temp_v5 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v4;
@@ -125,7 +125,7 @@ void FUN_003217d0(int param_1)
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001634b4(param_1 + 0x138);
     temp_v2 = g_renderCtx;
-    temp_v4 = FUN_00169294(6,7,0);
+    temp_v4 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v2 + 0x12b8);
     temp_v5 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v4;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0029e974(void);
+int dataTable06Sub1GetRecord(void);
 int FUN_002b9024(void);
-int FUN_002c09f4(...);
-int FUN_0033c164(void);
+int randNextInRange(...);
+int dataTable14Sub0GetRecord(void);
 
 typedef struct fn_0033be90_arg2 fn_0033be90_arg2;
 struct fn_0033be90_arg2 {
@@ -46,10 +46,10 @@ typedef struct {
 } param_3_stack;
 
 extern int padIsButtonDown(unsigned int);
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002b9024. */
-/* Supplied declaration required: FUN_002c09f4. */
-/* Supplied declaration required: FUN_0033c164. */
+/* Supplied declaration required: randNextInRange. */
+/* Supplied declaration required: dataTable14Sub0GetRecord. */
 
 
 short FUN_0033be90(unsigned int *param_1,int param_2,fn_0033be90_arg2 *param_3)
@@ -83,14 +83,14 @@ short FUN_0033be90(unsigned int *param_1,int param_2,fn_0033be90_arg2 *param_3)
     return 0;
   }
   temp_v1 = (unsigned int)*(unsigned short *)((int)param_1 + param_2 * 2);
-  FUN_0029e974();
+  dataTable06Sub1GetRecord();
   temp_v0 = *(unsigned char *)(temp_v1 + 3);
   temp_v2 = temp_v0 & 0x1f;
   temp_v1 = temp_v2;
-  FUN_0033c164();
+  dataTable14Sub0GetRecord();
   temp_v7 = 0;
   temp_v6 = 0;
-  temp_v3 = FUN_002c09f4(99);
+  temp_v3 = randNextInRange(99);
   do {
     temp_v6 = *(unsigned char *)(temp_v1 + 1 + temp_v7) + temp_v6;
     if (temp_v3 < temp_v6) break;
@@ -133,7 +133,7 @@ short FUN_0033be90(unsigned int *param_1,int param_2,fn_0033be90_arg2 *param_3)
   temp_v19 = param_3->field_0x6a;
   do {
     psVar6 = psVar9;
-    FUN_0029e974();
+    dataTable06Sub1GetRecord();
     if (((*(unsigned char *)((int)psVar6 + 3) & 0x80) != 0) && ((*(unsigned char *)((int)psVar6 + 3) & 0x1f) == temp_v2)
        ) {
       temp_v5 = 0;
@@ -147,11 +147,11 @@ LAB_0033c00c:
     psVar9 = (short *)(((int)psVar9 + 1U) & 0xffff);
   } while (psVar9 < (short *)0x1f5);
   if (temp_v4 != 0) {
-    temp_v4 = FUN_002c09f4((temp_v4 - 1U) & 0xffff);
+    temp_v4 = randNextInRange((temp_v4 - 1U) & 0xffff);
     psVar9 = (short *)0x1;
     do {
       psVar6 = psVar9;
-      FUN_0029e974();
+      dataTable06Sub1GetRecord();
       if (((*(unsigned char *)((int)psVar6 + 3) & 0x80) != 0) &&
          ((*(unsigned char *)((int)psVar6 + 3) & 0x1f) == temp_v2)) {
         temp_v5 = 0;

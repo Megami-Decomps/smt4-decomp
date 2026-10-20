@@ -1,16 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Pair {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+} Pair;
 
-void FUN_002efb90(unsigned int param_1,unsigned int *param_2,unsigned int *param_3)
-
+/* Copies the pair into `dest` when it is not NULL. */
+void FUN_002efb90(u32 unused, Pair *dest, Pair *source)
 {
-  if (param_2 != (unsigned int *)0x0) {
-    *param_2 = *param_3;
-    param_2[1] = param_3[1];
-  }
-  return;
+    if (dest != NULL) {
+        dest->first = source->first;
+        dest->second = source->second;
+    }
 }
 
 } /* extern "C" */

@@ -1,18 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_6_stack;
-
-
-unsigned int FUN_00310550(int param_1,int param_2,int param_3,int param_4,unsigned int param_5,int param_6)
-
+/* Packs four nibbles (a-d) into bits 16-31 and `e`, `f` into the low half. */
+u32 FUN_00310550(int a, int b, int c, int d, u32 e, int f)
 {
-  return param_5 | (param_6 << 8) | (param_1 << 0x10) | (param_2 << 0x14) | (param_3 << 0x18) |
-         (param_4 << 0x1c);
+    return e | (f << 8) | (a << 0x10) | (b << 0x14) | (c << 0x18) | (d << 0x1c);
 }
 
 } /* extern "C" */

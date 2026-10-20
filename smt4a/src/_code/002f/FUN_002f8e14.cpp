@@ -1,29 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[19];
+    /* 0x13 */ u8 member[0x51];
+} Entry;                        /* 100 bytes */
 
+u32 dataTableGet(u32 table, u32 arg);
+u32 dataTableGetCount(u32 table);
+Entry *dataTableGetEntries(void);
 
-int FUN_002f8e14(unsigned int param_1)
-
+/* Returns the address of the member at 0x13 of entry `index` of data table (0x16, 2) (100 bytes per entry), or NULL when the index is out of range. */
+u8 *FUN_002f8e14(u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x16,2);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_1 < temp_v2) {
-    temp_v1 = temp_v1 + param_1 * 100 + 0x13;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    u32 table;
+    Entry *entries;
+    u32 count;
+    u8 *member;
+
+    table = dataTableGet(0x16, 2);
+    entries = dataTableGetEntries();
+    count = dataTableGetCount(table);
+    if (index < count) {
+        member = entries[index].member;
+    } else {
+        member = NULL;
+    }
+    return member;
 }
 
 } /* extern "C" */

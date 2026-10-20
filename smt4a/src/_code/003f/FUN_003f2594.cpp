@@ -1,24 +1,16 @@
-#include "romwright_types.h"
+#include "shard/Shard003F.h"
 
 extern "C" {
 
-int FUN_0035b0a4(int);
-
-/* Supplied declaration required: FUN_0035b0a4. */
-
+extern void FUN_0035b0a4(s32 index);
 
 void FUN_003f2594(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    FUN_0035b0a4(temp_v0);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x20);
-  return;
+    s32 i;
+
+    for (i = 0; i < 0x20; i++) {
+        FUN_0035b0a4(i);
+    }
 }
 
 } /* extern "C" */

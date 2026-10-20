@@ -49,7 +49,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00244ee0. */
-extern unsigned int FUN_0025cbc0(unsigned int);
+extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 /* Supplied declaration required: FUN_0025cc34. */
 extern int FUN_0025cc54(void);
 /* Supplied declaration required: FUN_0025cc8c. */
@@ -85,7 +85,7 @@ extern int FUN_002beda4(void);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_002f1558(int param_1)
@@ -177,7 +177,7 @@ void FUN_002f1558(int param_1)
           if (*(char *)(temp_v13 + 0x5788) != '\0') {
             FUN_002bf538();
             temp_v8 = g_titleScene;
-            temp_v7 = FUN_002c5da8(6,1,0);
+            temp_v7 = packNibblesAndByte(6,1,0);
             piVar16 = (int *)(temp_v8 + 0x12ac);
             temp_v11 = piVar16[*piVar16 + 2];
             piVar16[*piVar16 + 2] = temp_v7;
@@ -188,7 +188,7 @@ void FUN_002f1558(int param_1)
             FUN_002bf288(2,0x15,0x19d,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,
                          0xce);
             temp_v6 = g_titleScene;
-            temp_v8 = FUN_002c5da8(6,7,0);
+            temp_v8 = packNibblesAndByte(6,7,0);
             piVar16 = (int *)(temp_v6 + 0x12ac);
             temp_v7 = piVar16[*piVar16 + 2];
             piVar16[*piVar16 + 2] = temp_v8;
@@ -225,7 +225,7 @@ void FUN_002f1558(int param_1)
             if (*(char *)(temp_v13 + 0x5788) != '\0') {
               FUN_002bf538();
               temp_v7 = g_titleScene;
-              temp_v11 = FUN_002c5da8(6,1,0);
+              temp_v11 = packNibblesAndByte(6,1,0);
               piVar16 = (int *)(temp_v7 + 0x12ac);
               temp_v12 = piVar16[*piVar16 + 2];
               piVar16[*piVar16 + 2] = temp_v11;
@@ -236,7 +236,7 @@ void FUN_002f1558(int param_1)
               FUN_002bf288(2,0x15,0x124,*(short *)(temp_v8 + 8) + temp_v4,*(short *)(temp_v8 + 10) + temp_v2
                            ,0xd8);
               temp_v8 = g_titleScene;
-              temp_v7 = FUN_002c5da8(6,7,0);
+              temp_v7 = packNibblesAndByte(6,7,0);
               piVar16 = (int *)(temp_v8 + 0x12ac);
               temp_v11 = piVar16[*piVar16 + 2];
               piVar16[*piVar16 + 2] = temp_v7;
@@ -257,7 +257,7 @@ void FUN_002f1558(int param_1)
             FUN_002bf538();
             temp_v6 = FUN_002bf4f8(0x15,*(unsigned int *)(temp_v13 + 0x5780));
             temp_v13 = g_titleScene;
-            temp_v8 = FUN_002c5da8(6,1,0);
+            temp_v8 = packNibblesAndByte(6,1,0);
             piVar16 = (int *)(temp_v13 + 0x12ac);
             temp_v7 = piVar16[*piVar16 + 2];
             piVar16[*piVar16 + 2] = temp_v8;
@@ -268,7 +268,7 @@ void FUN_002f1558(int param_1)
             FUN_002bf288(2,0x15,0x124,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,
                          0xce);
             temp_v13 = g_titleScene;
-            temp_v6 = FUN_002c5da8(6,7,0);
+            temp_v6 = packNibblesAndByte(6,7,0);
             piVar16 = (int *)(temp_v13 + 0x12ac);
             temp_v8 = piVar16[*piVar16 + 2];
             piVar16[*piVar16 + 2] = temp_v6;
@@ -365,7 +365,7 @@ void FUN_002f1558(int param_1)
         temp_v3 = padIsButtonDown(temp_v14 + 0x2e);
         if (temp_v3 != 0) {
           if (temp_v15 == temp_v5) {
-            temp_v10 = FUN_0025cbc0(temp_v14 & 0xff);
+            temp_v10 = dataTable16Sub2GetRecordS64(temp_v14 & 0xff);
             FUN_002be624(temp_v18,&LAB_002f25c0,temp_v10);
             break;
           }
@@ -375,7 +375,7 @@ void FUN_002f1558(int param_1)
       } while ((int)temp_v14 < 6);
     }
     else {
-      temp_v10 = FUN_0025cbc0(temp_v5 & 0xff);
+      temp_v10 = dataTable16Sub2GetRecordS64(temp_v5 & 0xff);
       FUN_002be624(temp_v18,&LAB_002f25c0,temp_v10);
     }
     temp_v3 = FUN_002bf4f8(0x15,0x12e);

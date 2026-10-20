@@ -30,7 +30,7 @@ extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_001aea28. */
 extern int FUN_0022e72c(void);
 /* Supplied declaration required: FUN_0022e774. */
-extern int FUN_00334158(void);
+extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_0041e3a0. */
 /* Supplied declaration required: FUN_00420a2c. */
 
@@ -65,7 +65,7 @@ void FUN_0041f110(fn_0041f110_arg0 *param_1)
     param_1->field_0x8 = param_1->field_0x8 + 1;
   }
   FUN_00420a2c(param_1);
-  temp_v1 = FUN_00334158();
+  temp_v1 = objBStateAllowsAction();
   if (((temp_v1 != 0) || (temp_v1 = FUN_0022e72c(), temp_v1 != 0)) && ((char)param_1[3].field_0x8 != '\0')
      ) {
     *(unsigned char *)&param_1[3].field_0x8 = 0;

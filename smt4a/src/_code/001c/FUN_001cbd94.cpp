@@ -1,27 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_001cbd94_arg0 fn_001cbd94_arg0;
-struct fn_001cbd94_arg0 {
-    unsigned char pad_0x0[0x5];
-    undefined1 field_0x5; /* +0x5 */
-    unsigned char pad_0x6[0x72];
-    undefined1 field_0x78; /* +0x78 */
-    unsigned char pad_0x79[0x3];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined1 field_0x80; /* +0x80 */
-};
+typedef struct Object {
+    /* 0x00 */ u8 unk00[5];
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ u8 unk06[0x72];
+    /* 0x78 */ u8 unk78;
+    /* 0x79 */ u8 unk79[3];
+    /* 0x7C */ u32 unk7C;
+    /* 0x80 */ u8 unk80;
+} Object;
 
-
-void FUN_001cbd94(fn_001cbd94_arg0 *param_1)
-
+/* Resets the object's state bytes and sets the byte at 5. */
+void FUN_001cbd94(Object *object)
 {
-  param_1->field_0x80 = 0;
-  param_1->field_0x78 = 0;
-  param_1->field_0x7c = 0;
-  param_1->field_0x5 = 1;
-  return;
+    object->unk80 = 0;
+    object->unk78 = 0;
+    object->unk7C = 0;
+    object->unk05 = 1;
 }
 
 } /* extern "C" */

@@ -8,7 +8,7 @@ int asdOperatorNewC(...);
 int FUN_002e3f68(unsigned char [4]);
 int FUN_002e5694(int, int, unsigned char *, int);
 int FUN_002e56a8(...);
-int FUN_002e56ec(int, int);
+int deletingDtor_002e56ec(int, int);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern int wstrlen(void);
 extern unsigned int FUN_002e5684(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002e5694. */
 /* Supplied declaration required: FUN_002e56a8. */
-/* Supplied declaration required: FUN_002e56ec. */
+/* Supplied declaration required: deletingDtor_002e56ec. */
 
 
 int * FUN_002e4d84(int *param_1,int param_2,int param_3,int param_4)
@@ -93,7 +93,7 @@ int * FUN_002e4d84(int *param_1,int param_2,int param_3,int param_4)
   for (; temp_v1 < 6; temp_v1 = temp_v1 + 1) {
     FUN_002e56a8(temp_v1 * 4 + temp_v0,temp_v5);
   }
-  FUN_002e56ec(*param_1,0x2e3f69);
+  deletingDtor_002e56ec(*param_1,0x2e3f69);
   *param_1 = temp_v0;
   param_1[1] = 6;
   FUN_002e3f68(temp_v4);

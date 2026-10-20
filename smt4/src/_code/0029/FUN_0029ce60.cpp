@@ -9,7 +9,7 @@ int FUN_00269bd0(...);
 int FUN_0029c6b0(unsigned char [72]);
 int FUN_0029d770(unsigned int, unsigned char [72]);
 int FUN_0029dc74(...);
-int FUN_0029e974(void);
+int dataTable06Sub1GetRecord(void);
 int FUN_002b9024(void);
 int FUN_002b99b8(void);
 int dataTableGetEntries(void);
@@ -68,7 +68,7 @@ extern int FUN_002973ec(void);
 /* Supplied declaration required: FUN_0029c6b0. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029dc74. */
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002b99b8. */
@@ -325,7 +325,7 @@ LAB_0029cf80:
   temp_v2 = 0;
   do {
     temp_v6 = (unsigned int)temp_v40[temp_v2];
-    if ((temp_v6 != 0) && (FUN_0029e974(), temp_v6 != 0)) {
+    if ((temp_v6 != 0) && (dataTable06Sub1GetRecord(), temp_v6 != 0)) {
       temp_v6 = *(unsigned char *)(temp_v6 + 3) & 0x1f;
       if (temp_v6 >= 0x20) {
         temp_v6 = 0x1f;
@@ -345,7 +345,7 @@ LAB_0029cf80:
   temp_v2 = 0;
   do {
     temp_v1 = (unsigned int)*(unsigned short *)(puVar12 + temp_v2 * 2 + 0x34);
-    if (((temp_v1 != 0) && (FUN_0029e974(), temp_v1 != 0)) && (temp_v4 < (*(unsigned char *)(temp_v1 + 3) & 0x1f))) {
+    if (((temp_v1 != 0) && (dataTable06Sub1GetRecord(), temp_v1 != 0)) && (temp_v4 < (*(unsigned char *)(temp_v1 + 3) & 0x1f))) {
       temp_v3 = 0;
       do {
         temp_v5 = temp_v6 + temp_v3 * 2;

@@ -7,7 +7,7 @@ extern "C" {
 int strCallWithTemp(int, unsigned int, unsigned int, unsigned char [24]);
 int FUN_002ec728(unsigned char [24], unsigned char [24]);
 int FUN_002ec75c(unsigned char [24]);
-int FUN_002ec890(unsigned char [24]);
+int destroyObj0055ae64(unsigned char [24]);
 int FUN_002ecbdc(unsigned int, unsigned char [24]);
 
 typedef int romwright_code(...);
@@ -24,7 +24,7 @@ extern int FUN_001222f4(int, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: strCallWithTemp. */
 /* Supplied declaration required: FUN_002ec728. */
 /* Supplied declaration required: FUN_002ec75c. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ecbdc. */
 
 
@@ -51,11 +51,11 @@ void FUN_00302058(unsigned int param_1,unsigned int param_2,unsigned int param_3
     if (temp_v0 == 0) {
       (**(romwright_code **)(*DAT_00599364 + 8))(temp_v2,DAT_00599364,param_2,param_3);
       FUN_002ec728(temp_v1,temp_v2);
-      FUN_002ec890(temp_v2);
+      destroyObj0055ae64(temp_v2);
       strCallWithTemp(DAT_00599360,param_2,param_3,temp_v1);
     }
     FUN_002ecbdc(temp_v3,temp_v1);
-    FUN_002ec890(temp_v1);
+    destroyObj0055ae64(temp_v1);
   }
   else {
     (**(romwright_code **)(*DAT_00599364 + 8))(param_1,DAT_00599364,param_2,param_3);

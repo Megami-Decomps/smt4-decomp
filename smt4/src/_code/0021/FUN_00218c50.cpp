@@ -16,7 +16,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern int FUN_002beda4(int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_00218c50(int param_1)
@@ -42,7 +42,7 @@ void FUN_00218c50(int param_1)
     temp_v5 = 0;
     do {
       temp_v4 = g_titleScene;
-      temp_v1 = FUN_002c5da8(6,1,0);
+      temp_v1 = packNibblesAndByte(6,1,0);
       piVar5 = (int *)(temp_v4 + 0x12ac);
       temp_v2 = piVar5[*piVar5 + 2];
       piVar5[*piVar5 + 2] = temp_v1;
@@ -56,7 +56,7 @@ void FUN_00218c50(int param_1)
         FUN_002b93c8(temp_v4 + 0x1600);
       }
       temp_v1 = g_titleScene;
-      temp_v2 = FUN_002c5da8(6,7,0);
+      temp_v2 = packNibblesAndByte(6,7,0);
       piVar5 = (int *)(temp_v1 + 0x12ac);
       temp_v3 = piVar5[*piVar5 + 2];
       piVar5[*piVar5 + 2] = temp_v2;
@@ -69,7 +69,7 @@ void FUN_00218c50(int param_1)
         FUN_002b93c8(temp_v4 + 0x20);
       }
       temp_v1 = g_titleScene;
-      temp_v2 = FUN_002c5da8(6,1,0);
+      temp_v2 = packNibblesAndByte(6,1,0);
       piVar5 = (int *)(temp_v1 + 0x12ac);
       temp_v3 = piVar5[*piVar5 + 2];
       piVar5[*piVar5 + 2] = temp_v2;
@@ -82,7 +82,7 @@ void FUN_00218c50(int param_1)
         FUN_002b93c8(temp_v4 + 0x1088);
       }
       temp_v1 = g_titleScene;
-      temp_v2 = FUN_002c5da8(6,7,0);
+      temp_v2 = packNibblesAndByte(6,7,0);
       piVar5 = (int *)(temp_v1 + 0x12ac);
       temp_v3 = piVar5[*piVar5 + 2];
       piVar5[*piVar5 + 2] = temp_v2;
@@ -97,7 +97,7 @@ void FUN_00218c50(int param_1)
       temp_v4 = g_titleScene;
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 10);
-    temp_v5 = FUN_002c5da8(6,1,0);
+    temp_v5 = packNibblesAndByte(6,1,0);
     piVar5 = (int *)(temp_v4 + 0x12ac);
     temp_v1 = piVar5[*piVar5 + 2];
     piVar5[*piVar5 + 2] = temp_v5;
@@ -138,7 +138,7 @@ void FUN_00218c50(int param_1)
       }
     }
     temp_v5 = g_titleScene;
-    temp_v4 = FUN_002c5da8(6,7,0);
+    temp_v4 = packNibblesAndByte(6,7,0);
     piVar5 = (int *)(temp_v5 + 0x12ac);
     temp_v1 = piVar5[*piVar5 + 2];
     piVar5[*piVar5 + 2] = temp_v4;
@@ -147,7 +147,7 @@ void FUN_00218c50(int param_1)
       *(unsigned char *)(temp_v5 + 0x12c4) = 0;
     }
     temp_v5 = g_titleScene;
-    temp_v4 = FUN_002c5da8(6,1,0);
+    temp_v4 = packNibblesAndByte(6,1,0);
     piVar5 = (int *)(temp_v5 + 0x12ac);
     temp_v1 = piVar5[*piVar5 + 2];
     piVar5[*piVar5 + 2] = temp_v4;
@@ -168,7 +168,7 @@ void FUN_00218c50(int param_1)
       temp_v4 = g_titleScene;
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x3c);
-    temp_v0 = FUN_002c5da8(6,7,0);
+    temp_v0 = packNibblesAndByte(6,7,0);
     piVar5 = (int *)(temp_v4 + 0x12ac);
     temp_v5 = piVar5[*piVar5 + 2];
     piVar5[*piVar5 + 2] = temp_v0;

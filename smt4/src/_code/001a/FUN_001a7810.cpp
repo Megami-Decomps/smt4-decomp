@@ -19,7 +19,7 @@ typedef struct {
 } param_6_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00288634(unsigned int);
+extern int dataTable24Sub0GetRecordS90(unsigned int);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -61,7 +61,7 @@ void FUN_001a7810(unsigned int param_1,unsigned int param_2,int param_3,int para
     FUN_002bf288(2,0x24,0x9c,param_3,param_4,0x6f);
   }
   FUN_002bf538();
-  temp_v0 = FUN_00288634(param_2);
+  temp_v0 = dataTable24Sub0GetRecordS90(param_2);
   temp_v1 = FUN_002bf4f8(0x24,0xa4);
   temp_v2 = temp_v0;
   FUN_002b6dd8(temp_v0,2);

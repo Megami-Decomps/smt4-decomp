@@ -1,23 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00189938(void);
+void FUN_00189938(void);
+extern s8 DAT_00589284;
 
-extern signed char DAT_00589284; /* 0x589284 */
-
-/* Supplied declaration required: FUN_00189938. */
-
-
+/* Runs FUN_00189938 when the flag at 0x589284 is set. */
 void FUN_0018991c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  if (DAT_00589284 != '\0') {
-    FUN_00189938();
-    return;
-  }
-  return;
+    if (DAT_00589284 != 0) {
+        FUN_00189938();
+        return;
+    }
 }
 
 } /* extern "C" */

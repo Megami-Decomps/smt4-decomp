@@ -1,18 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct DataTable {
+    /* 0x0 */ u32 magic;       /* 'TBL1' */
+    /* 0x4 */ u32 byteSize;
+    /* 0x8 */ u32 entrySize;
+    /* 0xC */ u32 unkC;
+    /* 0x10 */ u8 entries[1];
+} DataTable;
 
-int * dataTableGetEntries(int *param_1)
-
+/* Address of the first entry of a 'TBL1' data table, or NULL. */
+u8 *dataTableGetEntries(DataTable *table)
 {
-  if ((param_1 != (int *)0x0) && (*param_1 == 0x314c4254)) {
-    param_1 = param_1 + 4;
-  }
-  else {
-    param_1 = (int *)0x0;
-  }
-  return param_1;
+    u8 *entries;
+
+    if ((table != NULL) && (table->magic == 0x314c4254)) {
+        entries = table->entries;
+    } else {
+        entries = NULL;
+    }
+    return entries;
 }
 
 } /* extern "C" */

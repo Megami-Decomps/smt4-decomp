@@ -1,22 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ea714(void);
-int FUN_002eaa50(void);
+void FUN_002ea714(void);
+void FUN_002eaa50(void);
 
-/* Supplied declaration required: FUN_002ea714. */
-/* Supplied declaration required: FUN_002eaa50. */
+typedef struct Inner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 value;
+} Inner;
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ Inner *inner;
+} Holder;
 
-void FUN_002efcfc(unsigned int *param_1,int param_2)
-
+/* Runs FUN_002ea714 and FUN_002eaa50, then copies the word at 8 of the holder's inner object to `*out`. */
+void FUN_002efcfc(u32 *out, Holder *holder)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_002ea714();
-  FUN_002eaa50();
-  *param_1 = *(unsigned int *)(*(int *)(param_2 + 0x14) + 8);
-  return;
+    FUN_002ea714();
+    FUN_002eaa50();
+    *out = holder->inner->value;
 }
 
 } /* extern "C" */

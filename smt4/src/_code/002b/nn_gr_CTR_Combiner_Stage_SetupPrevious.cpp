@@ -1,30 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void nn_gr_CTR_Combiner_Stage_SetupPrevious(unsigned char *param_1)
-
+void nn_gr_CTR_Combiner_Stage_SetupPrevious(u8 *stage)
 {
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0xf;
-  param_1[5] = 0xf;
-  param_1[6] = 0xf;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  param_1[9] = 0;
-  param_1[10] = 0;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0xf;
-  param_1[0xe] = 0xf;
-  param_1[0xf] = 0xf;
-  param_1[0x10] = 0;
-  param_1[0x11] = 0;
-  return;
+    stage[0] = 0;
+    stage[1] = 0;
+    stage[2] = 0;
+    stage[3] = 0;
+    stage[4] = 15;
+    stage[5] = 15;
+    stage[6] = 15;
+    stage[7] = 0;
+    stage[8] = 0;
+    stage[9] = 0;
+    stage[10] = 0;
+    stage[11] = 0;
+    stage[12] = 0;
+    stage[13] = 15;
+    stage[14] = 15;
+    stage[15] = 15;
+    stage[16] = 0;
+    stage[17] = 0;
 }
 
 } /* extern "C" */

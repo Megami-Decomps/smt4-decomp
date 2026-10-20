@@ -1,32 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0011fdd8_arg0 fn_0011fdd8_arg0;
-typedef struct fn_0011fdd8_arg1 fn_0011fdd8_arg1;
-struct fn_0011fdd8_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined1 field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    undefined2 field_0xc; /* +0xc */
-};
-struct fn_0011fdd8_arg1 {
-    unsigned char pad_0x0[0x4];
-    byte field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    ushort field_0xc; /* +0xc */
-};
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 word08;
+    /* 0x0C */ u16 half0C;
+} Record;
 
-
-void FUN_0011fdd8(fn_0011fdd8_arg0 *param_1,fn_0011fdd8_arg1 *param_2)
-
+/* Copies the kind and the two values from `source` into `dest`. */
+void FUN_0011fdd8(Record *dest, const Record *source)
 {
-  param_1->field_0x4 = param_2->field_0x4;
-  param_1->field_0x8 = param_2->field_0x8;
-  param_1->field_0xc = param_2->field_0xc;
-  return;
+    dest->kind = source->kind;
+    dest->word08 = source->word08;
+    dest->half0C = source->half0C;
 }
 
 } /* extern "C" */

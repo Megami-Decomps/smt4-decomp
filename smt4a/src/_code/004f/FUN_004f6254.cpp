@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_001f5180(unsigned int, int, int);
-int FUN_003d9174(unsigned int);
+int words5Clear(unsigned int);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001f5180. */
 extern int FUN_0022a00c(void);
-/* Supplied declaration required: FUN_003d9174. */
+/* Supplied declaration required: words5Clear. */
 
 
 void FUN_004f6254(int param_1,int param_2,int param_3)
@@ -41,7 +41,7 @@ void FUN_004f6254(int param_1,int param_2,int param_3)
         (psVar5 = (short *)(temp_v3 + temp_v2 * 0x10), psVar5[1] != 0)) && (*psVar5 == param_2)) {
       temp_v0 = FUN_0022a00c();
       if (temp_v0 == 0) {
-        FUN_003d9174(*(unsigned int *)(param_1 + 0x33cc));
+        words5Clear(*(unsigned int *)(param_1 + 0x33cc));
       }
       VectorSignedToFloat((int)psVar5[3],(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)psVar5[2],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -52,7 +52,7 @@ void FUN_004f6254(int param_1,int param_2,int param_3)
        (*(short *)(temp_v0 + 8) == param_2)) {
       temp_v1 = FUN_0022a00c();
       if (temp_v1 == 0) {
-        FUN_003d9174(*(unsigned int *)(param_1 + 0x33d0));
+        words5Clear(*(unsigned int *)(param_1 + 0x33d0));
       }
       VectorSignedToFloat((int)*(short *)(temp_v0 + 0xe),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);

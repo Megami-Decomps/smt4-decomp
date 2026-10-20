@@ -35,7 +35,7 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_00282924. */
 extern int btlGetMainState(void);
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b4670. */
@@ -156,7 +156,7 @@ unsigned int FUN_003be334(int param_1,unsigned int param_2,unsigned int param_3,
       }
       else {
         temp_v4 = FUN_002a8740(param_6 - 0x6d);
-        temp_v3 = FUN_0029ebac(temp_v4,3);
+        temp_v3 = flagWordTestBit(temp_v4,3);
         temp_v6 = temp_v3 != 0;
         temp_v3 = 0;
         if (temp_v6) {

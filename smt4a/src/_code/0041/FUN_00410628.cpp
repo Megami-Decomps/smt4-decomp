@@ -13,7 +13,7 @@ int asdOperatorNewD(void);
 int FUN_002e6490(unsigned int *);
 int FUN_003d54f8(...);
 int FUN_003e503c(void);
-int FUN_003ee080(...);
+int btlReleaseEntries(...);
 int FUN_003efbac(...);
 int FUN_003f1b3c(int, unsigned int, int, int ***);
 int FUN_004012f0(...);
@@ -29,7 +29,7 @@ int FUN_004f5238(...);
 int FUN_004fb43c(...);
 int FUN_004feef8(unsigned int, unsigned int, int, unsigned int);
 int FUN_004fef70(unsigned int, int, unsigned int, int **);
-int FUN_0050d778(...);
+int fillThreeWordsWithByte(...);
 int rt_memcpy_w(unsigned int ****, unsigned char *, int);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
@@ -76,7 +76,7 @@ extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 /* Supplied declaration required: FUN_0013c174. */
 extern int FUN_0013def0(unsigned int);
 extern int btlGetMainState(void);
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_00163e84(unsigned int);
 extern int FUN_001656a0(unsigned int);
 extern int FUN_00187168(void);
@@ -90,11 +90,11 @@ extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003e503c. */
-/* Supplied declaration required: FUN_003ee080. */
+/* Supplied declaration required: btlReleaseEntries. */
 /* Supplied declaration required: FUN_003efbac. */
 /* Supplied declaration required: FUN_003f1b3c. */
 /* Supplied declaration required: FUN_004012f0. */
-extern int FUN_0040de1c(unsigned int, unsigned int);
+extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00411c04. */
 /* Supplied declaration required: FUN_00416610. */
 /* Supplied declaration required: FUN_0047f98c. */
@@ -107,7 +107,7 @@ extern int FUN_0040de1c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004feef8. */
 /* Supplied declaration required: FUN_004fef70. */
-/* Supplied declaration required: FUN_0050d778. */
+/* Supplied declaration required: fillThreeWordsWithByte. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -177,7 +177,7 @@ void FUN_00410628(int param_1)
     *(unsigned int *)(param_1 + 0x1b4) = 0;
     temp_v6 = 0;
     *(unsigned int *)(param_1 + 0x1b8) = 0;
-    FUN_0050d778(param_1 + 0x1bc,1);
+    fillThreeWordsWithByte(param_1 + 0x1bc,1);
     temp_v5 = 0;
     do {
       temp_v0 = temp_v5;
@@ -214,14 +214,14 @@ void FUN_00410628(int param_1)
         puVar8 = puVar8 + 2;
         temp_v5 = temp_v5 + 2;
       }
-      FUN_0050d778(&temp_v12,0xffffffff);
+      fillThreeWordsWithByte(&temp_v12,0xffffffff);
       temp_v3 = 0;
       temp_v7 = 0;
       temp_v5 = temp_v6;
       if (0 < (int)temp_v6) {
         do {
           temp_v5 = temp_v5 - 1;
-          temp_v1 = FUN_001633a0(temp_v5 & 0xffff);
+          temp_v1 = lcgRandomRange(temp_v5 & 0xffff);
           (&temp_v12)[temp_v3] = (unsigned int ***)puVar3[temp_v1];
           temp_v3 = temp_v3 + 1;
           if ((int)temp_v5 < 0) break;
@@ -303,7 +303,7 @@ void FUN_00410628(int param_1)
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0xc);
-    temp_v7 = FUN_0040de1c(DAT_005712f0,0);
+    temp_v7 = chainCountIdUnflagged(DAT_005712f0,0);
     temp_v3 = temp_v16;
     if (0 < temp_v7) {
       return;
@@ -375,7 +375,7 @@ void FUN_00410628(int param_1)
     temp_v3 = DAT_00571508;
     *(unsigned int *)(DAT_00571508 + 0xc) = *(unsigned int *)(DAT_00571508 + 0x14);
     *(unsigned int *)(temp_v3 + 0x10) = *(unsigned int *)(temp_v3 + 0x18);
-    FUN_003ee080(temp_v16);
+    btlReleaseEntries(temp_v16);
     if (*(int *)(param_1 + 0x184) != 0) {
       asdMemFree();
       *(unsigned int *)(param_1 + 0x184) = 0;

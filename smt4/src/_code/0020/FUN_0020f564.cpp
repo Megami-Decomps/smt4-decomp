@@ -1,47 +1,44 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00224f68(int, int);
+int FUN_00224f68(void *obj, int arg);
+extern int FUN_002a60b4(u32 table, int index);
 
-/* Supplied declaration required: FUN_00224f68. */
-extern int FUN_002a60b4(unsigned int, int);
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ void *target;
+} Obj;
 
-
-unsigned int FUN_0020f564(int param_1)
-
+/* Counts the set entries of tables 0x14 (5 entries) and 0x15 (4 entries); with 9 or more, calls FUN_00224f68. Returns 0. */
+u32 FUN_0020f564(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = *(int *)(param_1 + 0x20);
-  if (temp_v3 != 0) {
-    temp_v2 = 0;
-    temp_v1 = temp_v2;
-    do {
-      temp_v0 = FUN_002a60b4(0x14,temp_v1);
-      if (temp_v0 != 0) {
-        temp_v2 = temp_v2 + 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 5);
-    temp_v1 = 0;
-    do {
-      temp_v0 = FUN_002a60b4(0x15,temp_v1);
-      if (temp_v0 != 0) {
-        temp_v2 = temp_v2 + 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-    if (temp_v2 >= 9) {
-      FUN_00224f68(temp_v3,0);
-      return 0;
+    s32 i;
+    s32 count;
+    void *target = obj->target;
+
+    if (target != NULL) {
+        count = 0;
+        i = count;
+        do {
+            if (FUN_002a60b4(0x14, i) != 0) {
+                count++;
+            }
+            i++;
+        } while (i < 5);
+        i = 0;
+        do {
+            if (FUN_002a60b4(0x15, i) != 0) {
+                count++;
+            }
+            i++;
+        } while (i < 4);
+        if (count >= 9) {
+            FUN_00224f68(target, 0);
+            return 0;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

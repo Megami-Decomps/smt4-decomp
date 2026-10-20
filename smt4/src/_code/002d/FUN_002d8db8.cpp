@@ -1,24 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d8db8` (_code @ 0x2d8db8, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the code is identical; retail has one extra, unreferenced literal word (0x38) in front of the pool that the built code does not emit */
+/* Script command: asks the sequence to switch to state 8 if the object is flagged or the global is not -1. Returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int asdSequenceRequest(int, int);
+struct Obj002d8db8 {
+    /* 0x000 */ u8 unk000[0x2f8];
+    /* 0x2f8 */ u8 flagged;
+};
 
-extern int DAT_0049fd14; /* 0x49fd14 */
+extern s32 DAT_0049fd14;
 
-/* Supplied declaration required: asdSequenceRequest. */
+void asdSequenceRequest(s32 state, const void *arg, u32 size);
 
-
-unsigned int FUN_002d8db8(int param_1)
-
+u32 FUN_002d8db8(Obj002d8db8 *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((*(char *)(param_1 + 0x2f8) != '\0') || (DAT_0049fd14 != -1)) {
-    asdSequenceRequest(8,0);
-  }
-  return 1;
+    if (obj->flagged != 0 || DAT_0049fd14 != -1) {
+        asdSequenceRequest(8, NULL, 0);
+    }
+    return 1;
 }
 
-} /* extern "C" */
+}

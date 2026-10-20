@@ -64,7 +64,7 @@ extern unsigned char DAT_0055af64; /* 0x55af64 */
 extern int FUN_002e995c(int, unsigned int, int);
 extern unsigned int *FUN_002e9f80(fn_003022b4_arg0 *);
 /* Supplied declaration required: FUN_002eb530. */
-extern int FUN_002eb5e8(unsigned int *, unsigned int);
+extern int constructObj00559344(unsigned int *, unsigned int);
 
 
 unsigned long long
@@ -108,9 +108,9 @@ FUN_003022b4(fn_003022b4_arg0 *param_1,unsigned int param_2,unsigned int param_3
   *(unsigned int *)(temp_v0 + 0x38) = 0;
   *(unsigned char *)(temp_v0 - 0xb7) = 0;
   *(unsigned char *)(temp_v0 - 0xb6) = 0;
-  temp_v1 = FUN_002eb5e8((unsigned int *)&uStack_20,0);
+  temp_v1 = constructObj00559344((unsigned int *)&uStack_20,0);
   *(unsigned short *)(temp_v0 - 0x98) = *(unsigned short *)(temp_v1 + 4);
-  temp_v1 = FUN_002eb5e8((unsigned int *)&uStack_20,0);
+  temp_v1 = constructObj00559344((unsigned int *)&uStack_20,0);
   *(unsigned short *)(temp_v0 - 0x90) = *(unsigned short *)(temp_v1 + 4);
   *(unsigned char *)(temp_v0 - 0x78) = 0;
   *(unsigned short *)(temp_v0 - 0xa0) = 0;

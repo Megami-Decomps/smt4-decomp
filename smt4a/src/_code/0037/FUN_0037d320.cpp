@@ -7,7 +7,7 @@ extern "C" {
 int scrSetResult(...);
 
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_003dfe60(void);
+extern int playerAlignmentClass(void);
 
 
 unsigned int FUN_0037d320(void)
@@ -17,7 +17,7 @@ unsigned int FUN_0037d320(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_003dfe60();
+  temp_v0 = playerAlignmentClass();
   if (temp_v0 == 4) {
     temp_v1 = 1;
   }

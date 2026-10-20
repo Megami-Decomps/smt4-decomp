@@ -1,22 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a215c(unsigned int, int);
+int FUN_002a215c(u32 a, void *b);
+extern u32 FUN_002a2174(void);
 
-/* Supplied declaration required: FUN_002a215c. */
-extern unsigned int FUN_002a2174(void);
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x80];
+    /* 0x80 */ u8 unk80[1];
+} Obj;
 
-
-int FUN_00155634(int param_1)
-
+Obj *FUN_00155634(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_002a2174();
-  FUN_002a215c(temp_v0,param_1 + 0x80);
-  return param_1;
+    u32 a = FUN_002a2174();
+
+    FUN_002a215c(a, obj->unk80);
+    return obj;
 }
 
 } /* extern "C" */

@@ -20,10 +20,10 @@ typedef struct {
 extern int btlGetMainState(void);
 extern int FUN_00295d7c(int);
 extern unsigned int scrGetArg(unsigned int);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
-extern char FUN_002c09f4(unsigned int);
+extern char randNextInRange(unsigned int);
 
 
 unsigned int FUN_003188e8(void)
@@ -78,9 +78,9 @@ unsigned int FUN_003188e8(void)
       temp_v0 = *(char *)(temp_v3 + temp_v5 + 0x90f0);
       if (-1 < temp_v0) {
         temp_v3 = FUN_002a8740((int)temp_v0);
-        temp_v4 = FUN_0029ebac(temp_v3,1);
-        if ((((temp_v4 == 0) && (temp_v4 = FUN_0029ebac(temp_v3,10), temp_v4 == 0)) &&
-            (temp_v4 = FUN_0029ebac(temp_v3,2), temp_v4 == 0)) && (*(unsigned short *)(temp_v3 + 0x46) != temp_v2)) {
+        temp_v4 = flagWordTestBit(temp_v3,1);
+        if ((((temp_v4 == 0) && (temp_v4 = flagWordTestBit(temp_v3,10), temp_v4 == 0)) &&
+            (temp_v4 = flagWordTestBit(temp_v3,2), temp_v4 == 0)) && (*(unsigned short *)(temp_v3 + 0x46) != temp_v2)) {
           temp_v3 = FUN_00295d7c(temp_v3);
           if (temp_v3 == 0) {
             temp_v9[temp_v6] = temp_v0;
@@ -95,11 +95,11 @@ unsigned int FUN_003188e8(void)
       temp_v3 = FUN_002a8764();
     } while (temp_v5 < (int)(unsigned int)*(unsigned char *)(temp_v3 + 0x910b));
     if (temp_v6 >= 1) {
-      temp_v0 = FUN_002c09f4((temp_v6 - 1U) & 0xffff);
+      temp_v0 = randNextInRange((temp_v6 - 1U) & 0xffff);
       temp_v8 = temp_v9[temp_v0] + 0x6d;
     }
     else if (0 < temp_v7) {
-      temp_v1 = FUN_002c09f4((temp_v7 - 1U) & 0xffff);
+      temp_v1 = randNextInRange((temp_v7 - 1U) & 0xffff);
       temp_v0 = '\0';
       temp_v3 = 0;
       do {

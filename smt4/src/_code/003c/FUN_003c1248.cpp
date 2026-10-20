@@ -29,7 +29,7 @@ extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 extern int FUN_002561d8(int, int, unsigned int);
 /* Supplied declaration required: FUN_00262f68. */
 extern int btlGetMainState(void);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b06c4. */
@@ -71,7 +71,7 @@ void FUN_003c1248(int param_1,int param_2,int param_3,int param_4)
     temp_v3 = FUN_002a8764();
     temp_v4 = temp_v3 + param_2;
     temp_v5 = FUN_002a8740((int)*(char *)(temp_v4 + 0x90f0));
-    temp_v6 = FUN_0029ebac(temp_v5,1);
+    temp_v6 = flagWordTestBit(temp_v5,1);
     if (temp_v6 != 0) {
       *(unsigned short *)(temp_v5 + 0x2a) = *(unsigned short *)(temp_v5 + 0xe);
       FUN_00262f68(temp_v5,2);

@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001010f2. */
-extern int *FUN_002c6644(void);
+extern int *__aeabi_errno_addr(void);
 extern int *FUN_002c6a50(void);
 
 
@@ -33,7 +33,7 @@ unsigned char * FUN_00100e4e(unsigned char *param_1,unsigned int *param_2,unsign
   int temp_v2;
   
   temp_v2 = 0;
-  piVar1 = (int *)FUN_002c6644();
+  piVar1 = (int *)__aeabi_errno_addr();
   temp_v0 = *piVar1;
   pbVar5 = param_1;
   do {

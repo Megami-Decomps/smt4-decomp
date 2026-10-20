@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025c870(void);
-int FUN_0028c6b8(void);
+int effBlockCloneDeep(void);
 
 typedef struct fn_002f3208_arg0 fn_002f3208_arg0;
 typedef struct fn_002f3208_arg1 fn_002f3208_arg1;
@@ -31,7 +31,7 @@ struct fn_002f3208_arg1 {
 };
 
 /* Supplied declaration required: FUN_0025c870. */
-/* Supplied declaration required: FUN_0028c6b8. */
+/* Supplied declaration required: effBlockCloneDeep. */
 
 
 void FUN_002f3208(fn_002f3208_arg0 *param_1,fn_002f3208_arg1 *param_2)
@@ -40,7 +40,7 @@ void FUN_002f3208(fn_002f3208_arg0 *param_1,fn_002f3208_arg1 *param_2)
 /* irregular: 2 native warning(s); review required */
   fn_002f3208_arg1 *pfVar1;
   
-  FUN_0028c6b8();
+  effBlockCloneDeep();
   pfVar1 = param_2;
   FUN_0025c870();
   pfVar1->field_0xac = 0;

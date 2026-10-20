@@ -1,25 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0037c25c_arg0 fn_0037c25c_arg0;
-struct fn_0037c25c_arg0 {
-    unsigned char pad_0x0[0x15];
-    undefined1 field_0x15; /* +0x15 */
-    unsigned char pad_0x16[0x1];
-    undefined1 field_0x17; /* +0x17 */
-    unsigned char pad_0x18[0x8];
-    ushort field_0x20; /* +0x20 */
-};
+typedef struct Voice {
+    /* 0x00 */ int sdkVoices[2];
+    /* 0x08 */ int count;
+    /* 0x0C */ u8 unk0C[8];
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 unk15;
+    /* 0x16 */ u8 unk16;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ u16 dirtyFlags;
+    /* 0x22 */ u8 unk22[0x1E];
+    /* 0x40 */ int priority;
+} Voice;
 
-
-void nw_snd_internal_driver_Voice_Start(fn_0037c25c_arg0 *param_1)
-
+void nw_snd_internal_driver_Voice_Start(Voice *voice)
 {
-  param_1->field_0x15 = 1;
-  param_1->field_0x17 = 0;
-  param_1->field_0x20 = param_1->field_0x20 | 1;
-  return;
+    voice->unk15 = 1;
+    voice->unk17 = 0;
+    voice->dirtyFlags = voice->dirtyFlags | 1;
 }
 
 } /* extern "C" */

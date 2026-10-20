@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e75fa(...);
 int FUN_002e9318(...);
 int FUN_002e9c0c(...);
-int FUN_002ea0e4(...);
+int constructObj0055affc(...);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(...);
 int FUN_002ea974(...);
@@ -39,7 +39,7 @@ extern int FUN_002e760a(unsigned int);
 extern unsigned int FUN_002e7908(int *, unsigned int *);
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9c0c. */
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea974. */
@@ -75,7 +75,7 @@ void FUN_0011973c(int param_1)
   
   temp_v0 = FUN_003054ce(*(unsigned int *)(param_1 + 0x198));
   if (*(int *)(temp_v0 + 0x1c) != 2) {
-    FUN_002ea0e4(temp_v8);
+    constructObj0055affc(temp_v8);
     FUN_002ea974(temp_v6);
     temp_v1 = FUN_002ee568(temp_v7,&LAB_0011986c);
     temp_v0 = FUN_002fe22a(param_1 + 0x210,temp_v1);

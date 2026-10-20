@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u16 *counter;
+} GameDataBlocksView;
+extern GameDataBlocksView g_gameDataBlocks;
 
-
-unsigned short FUN_00203b08(void)
-
+/* Returns the game-data counter. */
+u16 FUN_00203b08(void)
 {
-  return *(*(unsigned short * *)((unsigned char *)&g_gameDataBlocks + 0xc));
+    return *g_gameDataBlocks.counter;
 }
 
 } /* extern "C" */

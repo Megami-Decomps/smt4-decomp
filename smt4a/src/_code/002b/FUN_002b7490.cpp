@@ -4,7 +4,7 @@ extern "C" {
 
 void FUN_0019c0e0(void *object);
 
-extern MapEplExt *DAT_00580c8c;
+extern MapEplExt *g_eplSlots;
 
 void FUN_002b7490(void)
 {
@@ -12,7 +12,7 @@ void FUN_002b7490(void)
     s32 i;
 
     for (i = 0; i < MAP_EPL_EXT_ENTRIES; i++) {
-        entry = &DAT_00580c8c->entries[i];
+        entry = &g_eplSlots->entries[i];
         if (entry->object != NULL) {
             FUN_0019c0e0(entry->object);
         }

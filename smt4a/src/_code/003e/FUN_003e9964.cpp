@@ -25,7 +25,7 @@ extern unsigned int DAT_005739f4; /* 0x5739f4 */
 extern unsigned int DAT_00573ae8; /* 0x573ae8 */
 extern unsigned int DAT_00573aec; /* 0x573aec */
 
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 unsigned int FUN_003e9964(fn_003e9964_arg0 *param_1)
@@ -45,7 +45,7 @@ unsigned int FUN_003e9964(fn_003e9964_arg0 *param_1)
       temp_v3 = DAT_0057392c;
     }
     if (temp_v4 && temp_v3 != 0) {
-      if ((DAT_00573934 != 0) && (temp_v0 = FUN_004bd340(DAT_00573934,1), temp_v0 == 0)) {
+      if ((DAT_00573934 != 0) && (temp_v0 = bitsAt60Test(DAT_00573934,1), temp_v0 == 0)) {
         return 1;
       }
       temp_v0 = 0;
@@ -57,7 +57,7 @@ unsigned int FUN_003e9964(fn_003e9964_arg0 *param_1)
           if (temp_v2 != 0) {
             temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0xca);
           }
-          if ((temp_v2 != 0 && temp_v3 != 0) && (temp_v1 = FUN_004bd340(temp_v2,1), temp_v1 == 0)) {
+          if ((temp_v2 != 0 && temp_v3 != 0) && (temp_v1 = bitsAt60Test(temp_v2,1), temp_v1 == 0)) {
             return 1;
           }
           temp_v0 = temp_v0 + 1;
@@ -78,7 +78,7 @@ unsigned int FUN_003e9964(fn_003e9964_arg0 *param_1)
       temp_v3 = DAT_0057392c;
     }
     if (temp_v4 && temp_v3 != 0) {
-      if ((DAT_00573934 != 0) && (temp_v0 = FUN_004bd340(DAT_00573934,1), temp_v0 == 0)) {
+      if ((DAT_00573934 != 0) && (temp_v0 = bitsAt60Test(DAT_00573934,1), temp_v0 == 0)) {
         return 1;
       }
       temp_v0 = 0;
@@ -90,7 +90,7 @@ unsigned int FUN_003e9964(fn_003e9964_arg0 *param_1)
           if (temp_v2 != 0) {
             temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0xca);
           }
-          if ((temp_v2 != 0 && temp_v3 != 0) && (temp_v1 = FUN_004bd340(temp_v2,1), temp_v1 == 0)) {
+          if ((temp_v2 != 0 && temp_v3 != 0) && (temp_v1 = bitsAt60Test(temp_v2,1), temp_v1 == 0)) {
             return 1;
           }
           temp_v0 = temp_v0 + 1;

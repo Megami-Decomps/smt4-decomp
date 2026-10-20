@@ -23,7 +23,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002fe9ea. */
-extern int FUN_002fe9f2(int **, int *);
+extern int wordRefsDiffer_002fe9f2(int **, int *);
 
 
 unsigned long long FUN_002fb25c(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -43,7 +43,7 @@ unsigned long long FUN_002fb25c(int *param_1,unsigned int param_2,unsigned int p
     uStack_14 = param_4;
     FUN_002e6e34(&uStack_1c,param_1 + 6);
     temp_v1 = (int *)param_1[2];
-    while (temp_v0 = FUN_002fe9f2(&temp_v1,param_1 + 4), temp_v0 != 0) {
+    while (temp_v0 = wordRefsDiffer_002fe9f2(&temp_v1,param_1 + 4), temp_v0 != 0) {
       (**(romwright_code **)(*temp_v1 + 0x10))(temp_v1,param_2);
       FUN_002fe9ea(&temp_v1);
     }

@@ -17,7 +17,7 @@ int asdOperatorNew(void);
 int asdTMTexTableLoadTmx(int, int);
 int FUN_003bb0ac(void);
 int FUN_003bb1f0(int);
-int FUN_003bb760(int);
+int spriteTable2aLoad(int);
 int FUN_003bbaf4(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -39,7 +39,7 @@ extern int FUN_002c2218(int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_003bb0ac. */
 /* Supplied declaration required: FUN_003bb1f0. */
-/* Supplied declaration required: FUN_003bb760. */
+/* Supplied declaration required: spriteTable2aLoad. */
 /* Supplied declaration required: FUN_003bbaf4. */
 
 
@@ -62,7 +62,7 @@ void FUN_003b8158(int param_1)
   FUN_0028d6d0();
   FUN_00240cec(0);
   FUN_003bbaf4(param_1 + 0xd58);
-  FUN_003bb760(param_1 + 0x9c);
+  spriteTable2aLoad(param_1 + 0x9c);
   FUN_00297468("mikado/talk.bf",(unsigned int *)(param_1 + 0xd7c),0);
   FUN_00297468("mikado/talk.mbm",param_1 + 0xd80,0);
   FUN_00297468("mikado/check.bf",param_1 + 0xd88,0);

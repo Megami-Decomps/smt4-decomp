@@ -10,7 +10,7 @@ int FUN_002804b0(...);
 int FUN_0035b304(...);
 int FUN_0037b450(...);
 int FUN_003e6c14(...);
-int FUN_003e6e90(...);
+int stepStateBattleStart(...);
 int FUN_004f6d34(...);
 int FUN_004f7b84(...);
 
@@ -31,7 +31,7 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_0037b450. */
 /* Supplied declaration required: FUN_003e6c14. */
 extern unsigned int *FUN_003e6dc8(unsigned int *);
-/* Supplied declaration required: FUN_003e6e90. */
+/* Supplied declaration required: stepStateBattleStart. */
 extern unsigned int *FUN_003e71a8(unsigned int *);
 /* Supplied declaration required: FUN_004f6d34. */
 /* Supplied declaration required: FUN_004f7b84. */
@@ -88,7 +88,7 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
     return puVar4;
   case 5:
     *param_1 = 7;
-    FUN_003e6e90(param_1);
+    stepStateBattleStart(param_1);
     return param_1;
   case 6:
     temp_v2 = param_1[3];
@@ -98,7 +98,7 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
           return (unsigned int *)0x0;
         }
         *param_1 = 7;
-        FUN_003e6e90(param_1);
+        stepStateBattleStart(param_1);
         return param_1;
       }
       temp_v2 = FUN_00224880(param_1[5]);
@@ -119,7 +119,7 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
     param_1[3] = temp_v1;
     break;
   case 7:
-    FUN_003e6e90(param_1);
+    stepStateBattleStart(param_1);
     return param_1;
   case 8:
     temp_v2 = FUN_00224880(param_1[5]);

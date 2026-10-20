@@ -14,12 +14,12 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-extern int *FUN_002e4e86(int *, unsigned int *);
+extern int *wordRefMax(int *, unsigned int *);
 /* Supplied declaration required: FUN_002f7b80. */
 /* Supplied declaration required: FUN_0030c5d8. */
 extern int FUN_0030c60c(int *, int, unsigned int);
-extern unsigned int FUN_0030c61a(unsigned int, int *);
-extern unsigned int FUN_0030d348(unsigned char *);
+extern unsigned int vectorGrowCapacity_0030c61a(unsigned int, int *);
+extern unsigned int initVtable00559504(unsigned char *);
 
 
 int * FUN_002ffa20(int *param_1,int param_2)
@@ -35,13 +35,13 @@ int * FUN_002ffa20(int *param_1,int param_2)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = FUN_0030d348(temp_v4);
+  temp_v0 = initVtable00559504(temp_v4);
   *param_1 = 0;
   param_1[1] = 0;
   param_1[2] = 0;
   temp_v5 = param_2;
-  temp_v6 = FUN_0030c61a(0,param_1);
-  piVar2 = (int *)FUN_002e4e86(&temp_v5,(unsigned int *)&temp_v6);
+  temp_v6 = vectorGrowCapacity_0030c61a(0,param_1);
+  piVar2 = (int *)wordRefMax(&temp_v5,(unsigned int *)&temp_v6);
   temp_v3 = *piVar2;
   temp_v1 = FUN_0030c60c(param_1,temp_v3,0);
   *param_1 = temp_v1;

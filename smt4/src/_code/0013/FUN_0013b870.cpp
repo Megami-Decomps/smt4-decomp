@@ -1,19 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_00465644; /* 0x465644 */
+extern u8 DAT_00465644[];
+extern u8 nn_os_LightEvent_TryWait(u8 *event);
 
-extern unsigned char nn_os_LightEvent_TryWait(unsigned int);
-
-
-unsigned char FUN_0013b870(void)
-
+u8 FUN_0013b870(void)
 {
-  unsigned char temp_v0;
-  
-  temp_v0 = nn_os_LightEvent_TryWait((unsigned int)&DAT_00465644);
-  return temp_v0;
+    return nn_os_LightEvent_TryWait(DAT_00465644);
 }
 
 } /* extern "C" */

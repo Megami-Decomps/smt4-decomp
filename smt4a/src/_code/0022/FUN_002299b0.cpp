@@ -15,7 +15,7 @@ extern unsigned char g_gameDataBlocks; /* 0x57f698 */
 
 extern int FUN_0018719c(unsigned int);
 extern unsigned char FUN_00371f3c(void);
-extern int FUN_003847e8(unsigned char);
+extern int gameFlagsClassify(unsigned char);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -65,7 +65,7 @@ void FUN_002299b0(unsigned short *param_1)
   *(unsigned int *)(temp_v0 + 0x54) = 0;
   *(unsigned short *)(temp_v0 + 0x58) = (unsigned short)*(unsigned char *)((int)param_1 + 0x3ded);
   *(unsigned short *)(temp_v0 + 0x5a) = (unsigned short)*(unsigned char *)(param_1 + 0x1ef7);
-  temp_v2 = FUN_003847e8(*(unsigned char *)((int)param_1 + 0x3ded));
+  temp_v2 = gameFlagsClassify(*(unsigned char *)((int)param_1 + 0x3ded));
   if (temp_v2 == 3) {
     *(unsigned short *)(temp_v0 + 0x58) = 1000;
   }

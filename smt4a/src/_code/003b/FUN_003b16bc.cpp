@@ -14,9 +14,9 @@ typedef struct {
 
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_003e84cc(unsigned int, unsigned int);
+extern int btlSlotStateIsNot456(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003f2280. */
-extern int FUN_003f298c(unsigned int, unsigned int);
+extern int btlSlotStateIs4To7(unsigned int, unsigned int);
 
 
 unsigned char FUN_003b16bc(void)
@@ -33,9 +33,9 @@ unsigned char FUN_003b16bc(void)
   temp_v2 = scrGetArg(1);
   temp_v0 = scrGetArg(2);
   temp_v3 = btlGetMainState();
-  temp_v4 = FUN_003f298c(temp_v3,0);
+  temp_v4 = btlSlotStateIs4To7(temp_v3,0);
   if (temp_v4 != 0) {
-    temp_v4 = FUN_003e84cc(temp_v3,0);
+    temp_v4 = btlSlotStateIsNot456(temp_v3,0);
     return temp_v4 != 0;
   }
   FUN_003f2280(temp_v3,0,temp_v2,temp_v1,temp_v0);

@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00154edc(int, int);
-int FUN_00155024(int, int);
+int surfaceCopy(int, int);
 int FUN_00157558(unsigned int);
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001546e8(unsigned int);
 /* Supplied declaration required: FUN_00154edc. */
-/* Supplied declaration required: FUN_00155024. */
+/* Supplied declaration required: surfaceCopy. */
 /* Supplied declaration required: FUN_00157558. */
 extern int jobGetWork(void);
 
@@ -59,7 +59,7 @@ unsigned int FUN_0013cd7c(void)
       piVar4 = (int *)(unaff_r5 + 0x9c);
       piVar6 = (int *)(unaff_r7 + 0x98);
       do {
-        FUN_00155024(*piVar7,*piVar6);
+        surfaceCopy(*piVar7,*piVar6);
         *(int *)(*piVar6 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
         *(int *)(*piVar6 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;
         while( 1 ) {
@@ -71,12 +71,12 @@ unsigned int FUN_0013cd7c(void)
           }
           if (temp_v2 == 0) break;
           if (temp_v2 != 1) {
-            FUN_00155024(*piVar4,*piVar4);
+            surfaceCopy(*piVar4,*piVar4);
             *(int *)(*piVar4 + 0x14) = *(int *)(*piVar4 + 0x14) >> 1;
             *(int *)(*piVar4 + 0x18) = *(int *)(*piVar4 + 0x18) >> 1;
           }
           else {
-            FUN_00155024(*piVar6,*piVar4);
+            surfaceCopy(*piVar6,*piVar4);
             *(int *)(*piVar4 + 0x14) = *(int *)(*piVar6 + 0x14) >> 1;
             *(int *)(*piVar4 + 0x18) = *(int *)(*piVar6 + 0x18) >> 1;
           }
@@ -88,7 +88,7 @@ unsigned int FUN_0013cd7c(void)
     temp_v2 = 0;
     if (temp_v2 < temp_v3) {
       do {
-        FUN_00155024(*piVar7,*piVar7);
+        surfaceCopy(*piVar7,*piVar7);
         temp_v2 = temp_v2 + 1;
         *(int *)(*piVar7 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
         *(int *)(*piVar7 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;

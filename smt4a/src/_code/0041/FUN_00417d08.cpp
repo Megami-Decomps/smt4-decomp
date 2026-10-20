@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003deeb4(...);
+int partyEntryGetBit5(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ extern int FUN_0019f18c(unsigned short);
 extern int FUN_0019f1a4(unsigned short, unsigned int);
 extern int FUN_001ab940(void);
 extern int FUN_001bd100(unsigned short);
-/* Supplied declaration required: FUN_003deeb4. */
-extern int FUN_003deecc(unsigned short);
+/* Supplied declaration required: partyEntryGetBit5. */
+extern int partyEntryGetBit6(unsigned short);
 
 
 void FUN_00417d08(int param_1)
@@ -35,7 +35,7 @@ void FUN_00417d08(int param_1)
     if (temp_v1 == 0) {
       return;
     }
-    temp_v1 = FUN_003deeb4(*(unsigned short *)(param_1 + 0xcce));
+    temp_v1 = partyEntryGetBit5(*(unsigned short *)(param_1 + 0xcce));
     if (temp_v1 != 0) {
       temp_v0 = *(unsigned short *)(param_1 + 0xcce);
       temp_v1 = FUN_001ab940();
@@ -43,7 +43,7 @@ void FUN_00417d08(int param_1)
       *(unsigned char *)(temp_v1 + 0x2a0) = *(unsigned char *)(temp_v1 + 0x2a0) & 0x9f;
       return;
     }
-    temp_v1 = FUN_003deecc(*(unsigned short *)(param_1 + 0xcce));
+    temp_v1 = partyEntryGetBit6(*(unsigned short *)(param_1 + 0xcce));
     if (temp_v1 == 0) {
       return;
     }
@@ -51,7 +51,7 @@ void FUN_00417d08(int param_1)
   else {
     temp_v1 = FUN_0019f18c(*(unsigned short *)(param_1 + 0xcce));
     if (temp_v1 != 0) {
-      temp_v1 = FUN_003deeb4();
+      temp_v1 = partyEntryGetBit5();
       if (temp_v1 == 0) {
         return;
       }
@@ -69,9 +69,9 @@ void FUN_00417d08(int param_1)
     if (temp_v1 != 0) {
       return;
     }
-    temp_v1 = FUN_003deeb4(*(unsigned short *)(param_1 + 0xcce));
+    temp_v1 = partyEntryGetBit5(*(unsigned short *)(param_1 + 0xcce));
     if (temp_v1 == 0) {
-      temp_v1 = FUN_003deecc(*(unsigned short *)(param_1 + 0xcce));
+      temp_v1 = partyEntryGetBit6(*(unsigned short *)(param_1 + 0xcce));
       if (temp_v1 == 0) {
         return;
       }

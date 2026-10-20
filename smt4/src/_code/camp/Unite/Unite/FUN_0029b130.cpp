@@ -10,7 +10,7 @@ int FUN_001df8d4(...);
 int FUN_00205568(...);
 int FUN_0026a69c(...);
 int FUN_00283e48(...);
-int FUN_0029e974(...);
+int dataTable06Sub1GetRecord(...);
 int FUN_002ae164(...);
 int FUN_002b7bca(...);
 int FUN_002b9024(...);
@@ -56,7 +56,7 @@ extern int FUN_0026a604(unsigned int);
 /* Supplied declaration required: FUN_0026a69c. */
 /* Supplied declaration required: FUN_00283e48. */
 extern int FUN_0029903c(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b9024. */
@@ -227,7 +227,7 @@ LAB_0029b3f4:
   if (0 < temp_v16) {
     do {
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v15 + temp_v1 * 2);
-      FUN_0029e974();
+      dataTable06Sub1GetRecord();
       temp_v1 = temp_v1 + 1;
       aiStack_80[*(unsigned char *)(temp_v3 + 2)] = aiStack_80[*(unsigned char *)(temp_v3 + 2)] + 1;
     } while (temp_v1 < temp_v16);

@@ -1,24 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184c00(int, int, int);
+void FUN_00184c00(u8 *member, s32 a, s32 b);
 
-/* Supplied declaration required: FUN_00184c00. */
+typedef struct Holder {
+    /* 0x0000 */ u8 unk0000[0x1A08];
+    /* 0x1A08 */ u8 member1A08[0x118];
+    /* 0x1B20 */ u8 state;
+} Holder;
 
-
-void FUN_00202410(int param_1)
-
+/* Unless the state is already 1 or 2, runs FUN_00184c00(member, 0x17, 0) and sets the state to 1. */
+void FUN_00202410(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  
-  temp_v0 = *(char *)(param_1 + 0x1b20);
-  if (temp_v0 != '\x02' && temp_v0 != '\x01') {
-    FUN_00184c00(param_1 + 0x1a08,0x17,0);
-    *(char *)(param_1 + 0x1b20) = '\x01';
-  }
-  return;
+    u8 state;
+
+    state = object->state;
+    if (state != 2 && state != 1) {
+        FUN_00184c00(object->member1A08, 0x17, 0);
+        object->state = 1;
+    }
 }
 
 } /* extern "C" */

@@ -12,9 +12,9 @@ int FUN_002e9318(unsigned char [8]);
 int FUN_002eaa50(...);
 int FUN_002eabe8(...);
 int FUN_0031160c(int, int, unsigned short [2]);
-int FUN_003116c8(int, int);
-int FUN_003116d6(int, int);
-int FUN_003116e8(unsigned int, int, int, int, int, int);
+int keyValueCopyConstruct(int, int);
+int word3CopyConstruct(int, int);
+int onlineObjectThreadRootSetupStart(unsigned int, int, int, int, int, int);
 
 /* stack frame of param_3: 10 slot(s), 34 byte(s) */
 typedef struct {
@@ -43,9 +43,9 @@ extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002eaa50. */
 /* Supplied declaration required: FUN_002eabe8. */
 /* Supplied declaration required: FUN_0031160c. */
-/* Supplied declaration required: FUN_003116c8. */
-/* Supplied declaration required: FUN_003116d6. */
-/* Supplied declaration required: FUN_003116e8. */
+/* Supplied declaration required: keyValueCopyConstruct. */
+/* Supplied declaration required: word3CopyConstruct. */
+/* Supplied declaration required: onlineObjectThreadRootSetupStart. */
 extern unsigned int FUN_00311700(int, unsigned char *, unsigned int);
 
 
@@ -104,7 +104,7 @@ unsigned int FUN_0011b970(int param_1,unsigned int param_2,unsigned int param_3)
       if (DAT_00594a5c != -0x80000000) {
         *(int *)(*(int *)(temp_v1 + 0xa0) + 0x20) = DAT_00594a5c;
       }
-      FUN_003116e8(*(unsigned int *)(temp_v1 + 0xa0),param_1,0x11baf5,0,temp_v4,0);
+      onlineObjectThreadRootSetupStart(*(unsigned int *)(temp_v1 + 0xa0),param_1,0x11baf5,0,temp_v4,0);
     }
     temp_v0 = (unsigned short)temp_v15;
     temp_v8[0] = (unsigned short)temp_v15;
@@ -113,7 +113,7 @@ unsigned int FUN_0011b970(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v10 = param_3;
     if (temp_v1 != *(int *)(param_1 + 0x48)) {
       *(int *)(param_1 + 0x44) = temp_v1 + 0xc;
-      FUN_003116d6(param_1 + 0x40,temp_v1);
+      word3CopyConstruct(param_1 + 0x40,temp_v1);
     }
     else {
       FUN_001339e0(param_1 + 0x40,temp_v1,temp_v8);
@@ -131,7 +131,7 @@ unsigned int FUN_0011b970(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v7 = param_3;
     if (temp_v4 != *(int *)(param_1 + 0x6c)) {
       *(int *)(param_1 + 0x68) = temp_v4 + 8;
-      FUN_003116c8(param_1 + 100,temp_v4);
+      keyValueCopyConstruct(param_1 + 100,temp_v4);
     }
     else {
       FUN_0031160c(param_1 + 100,temp_v4,temp_v6);

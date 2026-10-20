@@ -47,12 +47,12 @@ extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_003d2d6c. */
 extern int FUN_003ddfd8(void);
 /* Supplied declaration required: FUN_003de02c. */
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 extern int FUN_003e4940(void);
 extern int FUN_003e4cb4(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_00408184. */
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 extern int mapMainIsBusy(void);
 
 
@@ -150,10 +150,10 @@ void FUN_00331714(int param_1)
         FUN_00408184(0x24,temp_v12);
       }
       temp_v12 = *(int *)(param_1 + 0x34);
-      temp_v5 = FUN_003e0044(1);
+      temp_v5 = playerHasFlagBit(1);
       temp_v18 = 1.0f;
       temp_v19 = 0x42c800003c23d70a;
-      if ((temp_v5 == 0) && (temp_v5 = FUN_003e0044(10), temp_v5 == 0)) {
+      if ((temp_v5 == 0) && (temp_v5 = playerHasFlagBit(10), temp_v5 == 0)) {
         temp_v17 = temp_v18;
         puVar9 = (unsigned short *)FUN_001801a4();
         temp_v5 = 0;
@@ -208,8 +208,8 @@ void FUN_00331714(int param_1)
       do {
         if (-1 < *(char *)(temp_v4 + temp_v5 + 0x1c88)) {
           temp_v15 = FUN_001ab854();
-          temp_v9 = FUN_004bd340(temp_v15,1);
-          if ((temp_v9 == 0) && (temp_v9 = FUN_004bd340(temp_v15,10), temp_v9 == 0)) {
+          temp_v9 = bitsAt60Test(temp_v15,1);
+          if ((temp_v9 == 0) && (temp_v9 = bitsAt60Test(temp_v15,10), temp_v9 == 0)) {
             temp_v2 = 0;
             temp_v1 = *(char *)(temp_v4 + temp_v5 + 0x1c88);
             if ((*(char *)(temp_v4 + 0x1ca0) == temp_v1) ||

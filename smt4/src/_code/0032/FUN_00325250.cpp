@@ -1,31 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002451ac(unsigned int, int);
-int scrSetResult(int);
-
-/* Supplied declaration required: FUN_002451ac. */
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int btlGetMainState(void);
+int FUN_002451ac(u32 btl, int a);
+int scrSetResult(int result);
+extern u32 btlGetMainState(void);
 extern int scrGetArg(void);
-extern int dataTableGetEntries(void);
+extern u8 *dataTableGetEntries(void);
 
-
-unsigned int FUN_00325250(void)
-
+u32 FUN_00325250(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlGetMainState();
-  FUN_002451ac(temp_v1,4);
-  temp_v2 = dataTableGetEntries();
-  scrSetResult(*(unsigned short *)(temp_v2 + temp_v0 * 4));
-  return 1;
+    int row = scrGetArg();
+    u32 btl = btlGetMainState();
+    u8 *entries;
+
+    FUN_002451ac(btl, 4);
+    entries = dataTableGetEntries();
+    scrSetResult(*(u16 *)(entries + row * 4));
+    return 1;
 }
 
 } /* extern "C" */

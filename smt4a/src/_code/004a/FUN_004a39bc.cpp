@@ -5,9 +5,9 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_0031a218(unsigned int, int);
+int panelSetMode3(unsigned int, int);
 int FUN_003343f0(int);
-int FUN_0035db58(void);
+int objBInitBlocks274300(void);
 int FUN_003c5fc4(int);
 int FUN_00480fc0(int, int);
 int FUN_004a8750(unsigned int, int, int);
@@ -22,9 +22,9 @@ typedef struct {
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_00224880(unsigned int);
 extern int FUN_002a4b74(void);
-/* Supplied declaration required: FUN_0031a218. */
+/* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_0035db58. */
+/* Supplied declaration required: objBInitBlocks274300. */
 extern int FUN_00370794(void);
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: FUN_00480fc0. */
@@ -80,18 +80,18 @@ void FUN_004a39bc(int param_1)
         FUN_003343f0(0);
         *(unsigned int *)(param_1 + 0x14) = 5;
         *(unsigned int *)(param_1 + 0x18) = 0;
-        FUN_0035db58();
+        objBInitBlocks274300();
       }
     }
     else {
       temp_v0 = FUN_004cfe4c(param_1 + 0x20);
       temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x868);
       FUN_004a8750(temp_v1,*(unsigned char *)(param_1 + 0x861),0);
-      FUN_0031a218(-temp_v1,0);
+      panelSetMode3(-temp_v1,0);
       FUN_003343f0(1);
       *(unsigned int *)(param_1 + 0x14) = 4;
       *(unsigned int *)(param_1 + 0x18) = 0;
-      FUN_0035db58();
+      objBInitBlocks274300();
     }
     sysPlaySe(0x2f);
   }

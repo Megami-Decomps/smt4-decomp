@@ -9,7 +9,7 @@ int FUN_001a0990(...);
 int FUN_001bcd48(...);
 
 int FUN_0010032e(int *);
-int FUN_00100824(int *);
+int refIsNullOrZero(int *);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001858ec(...);
 int FUN_00187788(int, int *);
@@ -41,7 +41,7 @@ extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0010032e. */
-/* Supplied declaration required: FUN_00100824. */
+/* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(int *, unsigned int, unsigned int *);
 extern int FUN_00167f74(int *);
 /* Supplied declaration required: FUN_00178b04. */
@@ -155,7 +155,7 @@ void FUN_0014b66c(void)
             temp_v8 = 0;
             uStack_38 = 1;
             piVar7 = piVar8 + 0xb;
-            FUN_00100824(&temp_v7);
+            refIsNullOrZero(&temp_v7);
             piVar4 = &temp_v3;
             while ((temp_v0 = FUN_00100836(piVar7,0x105,(unsigned int *)&temp_v7), temp_v0 != 0 &&
                    (puVar3 = (unsigned short *)piVar4, FUN_002e3c44(piVar4,piVar7,temp_v0,&temp_v7),

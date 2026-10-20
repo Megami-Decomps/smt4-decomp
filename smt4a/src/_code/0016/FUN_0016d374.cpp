@@ -1,17 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Vector8 {
+    /* 0x00 */ u32 begin;
+    /* 0x04 */ u32 cursor;
+    /* 0x08 */ u32 end;
+    /* 0x0C */ u32 *count;
+    /* 0x10 */ u32 unk10;
+} Vector8;
 
-void FUN_0016d374(unsigned int *param_1,unsigned int param_2)
-
+/* Initialises the vector as empty at `begin`. */
+void FUN_0016d374(Vector8 *vector, u32 begin)
 {
-  *param_1 = param_2;
-  param_1[3] = 0;
-  param_1[1] = param_2;
-  param_1[4] = 0;
-  param_1[2] = param_2;
-  return;
+    vector->begin = begin;
+    vector->count = NULL;
+    vector->cursor = begin;
+    vector->unk10 = 0;
+    vector->end = begin;
 }
 
 } /* extern "C" */

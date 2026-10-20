@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0028850c. */
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a0d0c(void);
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
@@ -70,8 +70,8 @@ LAB_001b0880:
         if (-1 < *(char *)(temp_v3 + temp_v8 + 0x90f0)) {
           temp_v3 = FUN_002a8764();
           temp_v3 = FUN_002a8740((int)*(char *)(temp_v3 + temp_v8 + 0x90f0));
-          temp_v4 = FUN_0029ebac(temp_v3,10);
-          if ((temp_v4 == 0) && (temp_v4 = FUN_0029ebac(temp_v3,2), temp_v4 == 0)) {
+          temp_v4 = flagWordTestBit(temp_v3,10);
+          if ((temp_v4 == 0) && (temp_v4 = flagWordTestBit(temp_v3,2), temp_v4 == 0)) {
             if (temp_v5 == temp_v7) {
               FUN_0028850c(param_1,0xd,*(unsigned short *)(temp_v3 + 0x46),param_3);
               temp_v5 = FUN_002a8764();
@@ -155,8 +155,8 @@ LAB_001b0978:
         if (-1 < *(char *)(temp_v3 + temp_v8 + 0x90f0)) {
           temp_v3 = FUN_002a8764();
           temp_v3 = FUN_002a8740((int)*(char *)(temp_v3 + temp_v8 + 0x90f0));
-          temp_v4 = FUN_0029ebac(temp_v3,10);
-          if ((temp_v4 == 0) && (temp_v4 = FUN_0029ebac(temp_v3,2), temp_v4 == 0)) {
+          temp_v4 = flagWordTestBit(temp_v3,10);
+          if ((temp_v4 == 0) && (temp_v4 = flagWordTestBit(temp_v3,2), temp_v4 == 0)) {
             if (temp_v5 == temp_v7) {
               FUN_0028850c(param_1,0,*(unsigned short *)(temp_v3 + 0x46),param_3);
               temp_v5 = FUN_002a8764();

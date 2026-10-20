@@ -19,7 +19,7 @@ int FUN_00230b9c(...);
 int FUN_002804b0(...);
 int sysMemClear(...);
 int FUN_003e4140(...);
-int FUN_0050d794(...);
+int fillTwoWordsWithByte(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -61,7 +61,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e4140. */
-/* Supplied declaration required: FUN_0050d794. */
+/* Supplied declaration required: fillTwoWordsWithByte. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -133,7 +133,7 @@ void FUN_0034a544(void)
   puVar5[0x938] = 0;
   puVar5[0x939] = 0;
   puVar5[0x93a] = 0;
-  FUN_0050d794(puVar5 + 0x93d,0xffffffff);
+  fillTwoWordsWithByte(puVar5 + 0x93d,0xffffffff);
   *(unsigned char *)(puVar5 + 0x93c) = 0;
   puVar5[0x93f] = 0;
   puVar5 = DAT_00588fe8 + 0x962;

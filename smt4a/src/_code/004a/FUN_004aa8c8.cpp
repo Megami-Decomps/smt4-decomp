@@ -10,8 +10,8 @@ int FUN_00280030(void);
 int FUN_002ccde8(int, short [4], short [2]);
 int FUN_002fa7a8(int);
 int FUN_00336da0(int);
-int FUN_0034f018(int);
-int FUN_0037418c(int);
+int owner2DCInitSub(int);
+int menu32EnterState27(int);
 
 /* stack frame of void: 2 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,9 +27,9 @@ extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_002fa7a8. */
 /* Supplied declaration required: FUN_00336da0. */
-/* Supplied declaration required: FUN_0034f018. */
-/* Supplied declaration required: FUN_0037418c. */
-extern int FUN_00381198(int);
+/* Supplied declaration required: owner2DCInitSub. */
+/* Supplied declaration required: menu32EnterState27. */
+extern int menu32ModeIsNot5(int);
 
 
 void FUN_004aa8c8(void)
@@ -87,15 +87,15 @@ void FUN_004aa8c8(void)
   }
   else {
     *(unsigned int *)(temp_v0 + 0x74a0) = 0xc;
-    FUN_0037418c(temp_v1);
+    menu32EnterState27(temp_v1);
     temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-    temp_v1 = FUN_00381198((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
+    temp_v1 = menu32ModeIsNot5((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
     if (temp_v1 != 0) {
       temp_v1 = temp_v0 + 0x24bc;
       FUN_00280030();
       if (temp_v1 != 0) {
         FUN_00336da0(temp_v0 + 8);
-        FUN_0034f018(temp_v0 + 0x24bc);
+        owner2DCInitSub(temp_v0 + 0x24bc);
         return;
       }
     }

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-extern u8 *FUN_00348d64(void);
+extern u8 *gameDataBlockGetArea2D68(void);
 
 u8 FUN_003e46f4(u32 bit)
 {
-    u8 *flags = FUN_00348d64();
+    u8 *flags = gameDataBlockGetArea2D68();
 
     return (flags[bit >> 3] & (1 << (bit & 7))) != 0;
 }

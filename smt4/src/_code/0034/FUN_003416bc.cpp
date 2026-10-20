@@ -61,7 +61,7 @@ extern int FUN_0024530c(int, int);
 extern int asdModelGetSlotArray0(unsigned int);
 /* Supplied declaration required: FUN_002a8638. */
 /* Supplied declaration required: FUN_002a86a4. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c501c. */
@@ -245,7 +245,7 @@ LAB_00341948:
   temp_v20 = 0.0f;
   temp_v23 = *pfVar6;
   temp_v24 = *(unsigned long long *)(pfVar6 + 1);
-  if (((DAT_00476634 & 1) == 0) && (temp_v4 = FUN_002bfefc(&DAT_00476634), temp_v4 != 0)) {
+  if (((DAT_00476634 & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_00476634), temp_v4 != 0)) {
     DAT_004efd6c = temp_v2;
     DAT_004efd70 = temp_v20;
     DAT_004efd74 = temp_v20;

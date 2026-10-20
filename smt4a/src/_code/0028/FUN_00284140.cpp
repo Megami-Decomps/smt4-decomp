@@ -1,22 +1,18 @@
-#include "romwright_types.h"
+#include "shard/Block57f248.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f248; /* 0x57f248 */
-
-
-unsigned char FUN_00284140(int param_1)
-
+/* Returns the mode byte of the record at 0x57F248 when its id equals `id`, otherwise 0. */
+u8 FUN_00284140(s32 id)
 {
-  unsigned char temp_v0;
-  
-  if (*(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64e) == param_1) {
-    temp_v0 = *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 8);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u8 mode;
+
+    if (DAT_0057f248.record->unk64E == id) {
+        mode = DAT_0057f248.record->unk008;
+    } else {
+        mode = 0;
+    }
+    return mode;
 }
 
 } /* extern "C" */

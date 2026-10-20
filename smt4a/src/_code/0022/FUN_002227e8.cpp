@@ -94,7 +94,7 @@ extern int FUN_003646d4(unsigned int);
 /* Supplied declaration required: FUN_0036d984. */
 extern int FUN_003850b4(void);
 /* Supplied declaration required: FUN_003a26fc. */
-extern int FUN_003e5414(unsigned int);
+extern int linkHolderCallFirst(unsigned int);
 extern int FUN_004ff98c(unsigned int);
 extern int FUN_004ffa14(unsigned int);
 
@@ -231,7 +231,7 @@ LAB_00222b78:
       temp_v5 = *(float *)(g_lmapScene + 0x1c);
       FUN_002b5cb4();
       if (DAT_005f1a94 >= temp_v5) {
-        temp_v1 = FUN_003e5414(*(unsigned int *)(g_lmapScene + 0x1a8));
+        temp_v1 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if (temp_v1 != 2) {
           return;
         }
@@ -345,7 +345,7 @@ LAB_00222b78:
       if (DAT_005f1a90 <= temp_v8) {
         return;
       }
-      temp_v1 = FUN_003e5414(*(unsigned int *)(g_lmapScene + 0x1a8));
+      temp_v1 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
       if (temp_v1 != 2) {
         DAT_005f0ca4 = 0;
         DAT_005f0ca8 = 2;

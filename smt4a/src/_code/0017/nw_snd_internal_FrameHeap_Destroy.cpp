@@ -1,27 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0018c988(int);
-int nw_snd_internal_FrameHeap_ClearSection(int *);
-int nw_ut_FrameHeap_Free(int, int);
+s32 FUN_0018c988(s32 heap);
+s32 nw_snd_internal_FrameHeap_ClearSection(s32 *frameHeap);
+s32 nw_ut_FrameHeap_Free(s32 heap, s32 mode);
 
-/* Supplied declaration required: FUN_0018c988. */
-/* Supplied declaration required: nw_snd_internal_FrameHeap_ClearSection. */
-/* Supplied declaration required: nw_ut_FrameHeap_Free. */
-
-
-void nw_snd_internal_FrameHeap_Destroy(int *param_1)
-
+/* Frees the heap held in `*frameHeap` (clearing its section first) and resets the slot. */
+void nw_snd_internal_FrameHeap_Destroy(s32 *frameHeap)
 {
-/* irregular: 3 native warning(s); review required */
-  if (*param_1 != 0) {
-    nw_snd_internal_FrameHeap_ClearSection(param_1);
-    nw_ut_FrameHeap_Free(*param_1,3);
-    FUN_0018c988(*param_1);
-    *param_1 = 0;
-  }
-  return;
+    if (*frameHeap != 0) {
+        nw_snd_internal_FrameHeap_ClearSection(frameHeap);
+        nw_ut_FrameHeap_Free(*frameHeap, 3);
+        FUN_0018c988(*frameHeap);
+        *frameHeap = 0;
+    }
 }
 
 } /* extern "C" */

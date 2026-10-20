@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f118; /* 0x57f118 */
+extern void *DAT_0057f118;
 
-
-unsigned char FUN_002bf508(void)
-
+/* Returns whether there is an object at 0x57F118. */
+u8 FUN_002bf508(void)
 {
-  return DAT_0057f118 != 0;
+    return DAT_0057f118 != NULL;
 }
 
 } /* extern "C" */

@@ -1,26 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(...);
+int asdMemFree(void *ptr);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct GxCommandList {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ void *buffer;
+} GxCommandList;
 
-/* Supplied declaration required: asdMemFree. */
-
-
-void asdGxCommandListDestroy(int param_1)
-
+/* Frees the command list's buffer (if any), then the list itself. */
+void asdGxCommandListDestroy(GxCommandList *list)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x14) != 0) {
-    asdMemFree();
-  }
-  asdMemFree(param_1);
-  return;
+    if (list->buffer != NULL) {
+        asdMemFree(list->buffer);
+    }
+    asdMemFree(list);
 }
 
 } /* extern "C" */

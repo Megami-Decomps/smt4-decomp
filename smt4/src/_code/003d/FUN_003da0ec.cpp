@@ -82,7 +82,7 @@ extern unsigned int FUN_0024a6b0(int);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: FUN_002a5dc4. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: asdOperatorNew. */
 extern int *asdMemoryGetDefaultAllocator(void);
 extern unsigned int FUN_002c30c4(int *);
@@ -599,7 +599,7 @@ code_r0x0034ca74:
                   temp_v4 = piVar6[0x19] + temp_v8 * 0x40;
                   if (temp_v4 != 0) {
                     if (((DAT_00476634 & 1) == 0) &&
-                       (temp_v5 = FUN_002bfefc(&DAT_00476634), temp_v5 != 0)) {
+                       (temp_v5 = __cxa_guard_acquire(&DAT_00476634), temp_v5 != 0)) {
                       DAT_004efd6c = (unsigned int)temp_v17;
                       DAT_004efd70 = (unsigned int)((unsigned long long)temp_v17 >> 0x20);
                       DAT_004efd74 = DAT_004efd70;

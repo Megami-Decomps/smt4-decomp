@@ -1,27 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(unsigned int *);
+void asdMemFree(void *memory);
+s32 jobStop(u32 job, s32 flag);
+extern u32 *DAT_0057f578;
 
-extern unsigned int *DAT_0057f578; /* 0x57f578 */
-
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdMemFree. */
-
-
+/* Stops the job whose id DAT_0057f578 points at, frees that record and clears the pointer. */
 void FUN_0019e2dc(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = DAT_0057f578;
-  jobStop(*DAT_0057f578,0);
-  asdMemFree(puVar1);
-  DAT_0057f578 = (unsigned int *)0x0;
-  return;
+    u32 *job;
+
+    job = DAT_0057f578;
+    jobStop(*DAT_0057f578, 0);
+    asdMemFree(job);
+    DAT_0057f578 = NULL;
 }
 
 } /* extern "C" */

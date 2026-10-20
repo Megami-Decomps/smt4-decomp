@@ -13,7 +13,7 @@ AsdMdlObject *asdMdlManagerClone(AsdMdlObject *src, u32 arg)
 {
     AsdMdlObject *obj = asdMdlObjectNew();
 
-    obj->node->unk08 = src->node->unk08;
+    obj->node->param = src->node->param;
     FUN_00192694(obj->node, src->node, arg);
     asdListAdd(&g_asdMdlList, obj, 0);
     return obj;

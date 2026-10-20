@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00323f5c(void);
+int dataTable05Sub9GetCount(void);
 
 extern unsigned short *FUN_00248620(unsigned int);
 extern int FUN_002a0d0c(void);
-/* Supplied declaration required: FUN_00323f5c. */
+/* Supplied declaration required: dataTable05Sub9GetCount. */
 
 
 void FUN_002e3378(unsigned int param_1)
@@ -23,7 +23,7 @@ void FUN_002e3378(unsigned int param_1)
   unsigned int temp_v3;
   
   temp_v1 = param_1;
-  FUN_00323f5c();
+  dataTable05Sub9GetCount();
   temp_v3 = 0;
   if (temp_v1 != 0) {
     while ((puVar3 = (unsigned short *)FUN_00248620(temp_v3 & 0xffff), puVar3 == (unsigned short *)0x0 ||

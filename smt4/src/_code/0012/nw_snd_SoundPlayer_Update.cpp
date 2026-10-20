@@ -23,7 +23,7 @@ extern unsigned char DAT_004ead80; /* 0x4ead80 */
 /* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
 /* Supplied declaration required: FUN_0012fea0. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c5d5c. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2BAE30. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -49,7 +49,7 @@ void nw_snd_SoundPlayer_Update(int param_1)
     } while (piVar6 != (int *)(param_1 + 4));
   }
   if (*(unsigned int *)(param_1 + 0xc) >= 2) {
-    if (((DAT_0047353c & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_0047353c), temp_v0 != 0)) {
+    if (((DAT_0047353c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_0047353c), temp_v0 != 0)) {
       FUN_002c5d5c(&DAT_004ead80,&LAB_0014490c,0xc,0x80);
     }
     while (*(int *)(param_1 + 0xc) != 0) {

@@ -16,7 +16,7 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_003aacd0. */
-extern int FUN_003ad334(void);
+extern int spriteTable22AllLoaded(void);
 
 
 void FUN_003ab0b4(int param_1)
@@ -25,7 +25,7 @@ void FUN_003ab0b4(int param_1)
 /* irregular: 5 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_003ad334();
+  temp_v0 = spriteTable22AllLoaded();
   if (temp_v0 != 0) {
     temp_v0 = *(int *)(param_1 + 0x598);
     FUN_00297060(temp_v0,*(unsigned int *)(param_1 + 0x59c));

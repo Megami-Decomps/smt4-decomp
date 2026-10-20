@@ -18,7 +18,7 @@ typedef struct {
 extern int FUN_00429d80(int);
 /* Supplied declaration required: FUN_0042a44c. */
 /* Supplied declaration required: FUN_00430e58. */
-extern int FUN_00430f2c(unsigned int, unsigned int);
+extern int handlerRefForward(unsigned int, unsigned int);
 
 
 int FUN_00501c20(int *param_1)
@@ -33,7 +33,7 @@ int FUN_00501c20(int *param_1)
   
   temp_v1 = (**(romwright_code **)(*param_1 + 0x2c))(param_1,temp_v4,2,1,0,0);
   if (-1 < temp_v1) {
-    temp_v2 = FUN_00430f2c(0x36c0,4);
+    temp_v2 = handlerRefForward(0x36c0,4);
     if (temp_v2 == 0) {
       temp_v1 = -0x379ef40d;
     }

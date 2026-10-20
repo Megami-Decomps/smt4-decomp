@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Header {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s32 offset;
+} Header;
 
-int FUN_0014d354(int param_1)
-
+/* Address of the block the header's offset (relative to the header) points at. */
+s32 FUN_0014d354(Header *header)
 {
-  return param_1 + *(int *)(param_1 + 0x34);
+    return (s32)header + header->offset;
 }
 
 } /* extern "C" */

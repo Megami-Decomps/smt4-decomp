@@ -23,7 +23,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0011b020. */
-extern int FUN_001320e2(int *, void **);
+extern int wordRefsDiffer_001320e2(int *, void **);
 
 
 void FUN_0011b0ce(fn_0011b0ce_arg0 *param_1,int param_2,int param_3,void *param_4)
@@ -45,7 +45,7 @@ void FUN_0011b0ce(fn_0011b0ce_arg0 *param_1,int param_2,int param_3,void *param_
       do {
         while( 1 ) {
           temp_v3 = param_1->field_0x50;
-          temp_v1 = FUN_001320e2(&temp_v2,&temp_v3);
+          temp_v1 = wordRefsDiffer_001320e2(&temp_v2,&temp_v3);
           if (temp_v1 == 0) {
             return;
           }

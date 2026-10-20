@@ -8,7 +8,7 @@ int FUN_00167f08(void);
 int sysPlaySe(void);
 int FUN_00183f58(int, int, int, int);
 int FUN_00184528(int, int);
-int FUN_0037c8b4(unsigned int, int);
+int panelSetTarget(unsigned int, int);
 int FUN_0037c8e4(int, int);
 int FUN_003baa3c(int);
 int FUN_004935b0(int, unsigned int, unsigned int);
@@ -17,8 +17,8 @@ int FUN_004a8750(unsigned int, int, int);
 int FUN_004cf8dc(int, int);
 int FUN_004d0100(int);
 int FUN_004d01f8(int);
-int FUN_004d0440(void);
-int FUN_004d044c(void);
+int sendEvent100020D(void);
+int sendEvent100020E(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -40,7 +40,7 @@ extern int FUN_002c7ca0(void);
 extern int FUN_002f036c(void);
 extern int FUN_0031d174(int);
 extern int FUN_0035db94(void);
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 extern int FUN_0037df48(void);
 /* Supplied declaration required: FUN_003baa3c. */
@@ -51,8 +51,8 @@ extern int FUN_0037df48(void);
 extern int FUN_004cfe4c(int);
 /* Supplied declaration required: FUN_004d0100. */
 /* Supplied declaration required: FUN_004d01f8. */
-/* Supplied declaration required: FUN_004d0440. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sendEvent100020D. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d0524(void);
 
 
@@ -102,7 +102,7 @@ void FUN_004a1db4(int param_1)
     FUN_0037c8e4(1,0);
     temp_v3 = FUN_002a4b28(temp_v0);
     if (temp_v3 != 0) {
-      FUN_0037c8b4(-temp_v8,0);
+      panelSetTarget(-temp_v8,0);
       return;
     }
     FUN_003baa3c(1);
@@ -126,7 +126,7 @@ void FUN_004a1db4(int param_1)
         if ((temp_v7 == temp_v3) && (temp_v3 = FUN_0031d174(param_1 + 0x20), temp_v3 == temp_v6)) {
           return;
         }
-        FUN_004d0440();
+        sendEvent100020D();
         return;
       }
       temp_v7 = FUN_004d0524();
@@ -136,7 +136,7 @@ void FUN_004a1db4(int param_1)
         if ('\x01' < temp_v1) {
           *(unsigned char *)(param_1 + 0x861) = 0;
         }
-        FUN_004d044c();
+        sendEvent100020E();
         *(unsigned char *)(param_1 + 0x863) = 1;
         (*(unsigned int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = 0xffffffff;
         FUN_004a3b48(param_1);
@@ -163,7 +163,7 @@ void FUN_004a1db4(int param_1)
   if ((temp_v7 == temp_v3) && (temp_v3 = FUN_0031d174(param_1 + 0x20), temp_v3 == temp_v6)) {
     return;
   }
-  FUN_004d0440();
+  sendEvent100020D();
   return;
 }
 

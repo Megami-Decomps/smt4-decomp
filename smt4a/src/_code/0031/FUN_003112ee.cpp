@@ -1,18 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
-int FUN_002ea314(void);
+extern s32 FUN_002ea314(void *object, u32 value);
 
-/* Supplied declaration required: FUN_002ea314. */
-
-
-void FUN_003112ee(void)
-
+void FUN_003112ee(void *object, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002ea314();
-  return;
+    FUN_002ea314(object, value);
 }
 
 } /* extern "C" */

@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard0049.h"
 
 extern "C" {
 
-extern unsigned char DAT_00587fdc; /* 0x587fdc */
+typedef struct WordInt {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 value;
+} WordInt;
 
+extern WordInt DAT_00587fdc;
 
-unsigned char FUN_004931c4(void)
-
+u8 FUN_004931c4(void)
 {
-  return (*(int *)((unsigned char *)&DAT_00587fdc + 0x4)) > 100;
+    return DAT_00587fdc.value > 100;
 }
 
 } /* extern "C" */

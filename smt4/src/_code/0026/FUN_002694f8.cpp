@@ -1,13 +1,10 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_002694f8(int *param_1)
-
+void FUN_002694f8(int *counter)
 {
-  *param_1 = *param_1 + 1;
-  return;
+    *counter = *counter + 1;
 }
 
 } /* extern "C" */

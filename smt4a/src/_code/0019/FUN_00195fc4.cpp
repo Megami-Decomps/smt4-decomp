@@ -1,30 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00195fc4` (_code @ 0x195fc4, 0x4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Tail call into the function that follows. */
+#include "common.h"
 
 extern "C" {
 
-int software_interrupt(int);
+void FUN_00195fc8(void);
 
-typedef int romwright_code(...);
-extern romwright_code *DAT_00589280; /* 0x589280 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned long long FUN_00195fc4(unsigned int param_1,unsigned int param_2)
-
+void FUN_00195fc4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  romwright_code *pcVar1;
-  
-  pcVar1 = DAT_00589280;
-  if (DAT_00589280 != (romwright_code *)0x0) {
-    DAT_00589280 = (romwright_code *)0x0;
-    (*pcVar1)(0,0,0,0,0,param_2);
-  }
-  software_interrupt(0x3c);
-  return 0;
+    FUN_00195fc8();
 }
 
-} /* extern "C" */
+}

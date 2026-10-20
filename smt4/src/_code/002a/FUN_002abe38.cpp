@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a438c(void);
-int FUN_002a43ae(int);
+int __set_errno(int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 
@@ -13,7 +13,7 @@ int VectorSignedToFloat(...);
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern int ARM_fpclassifyf(float);
 /* Supplied declaration required: FUN_002a438c. */
-/* Supplied declaration required: FUN_002a43ae. */
+/* Supplied declaration required: __set_errno. */
 
 
 void FUN_002abe38(void)
@@ -37,7 +37,7 @@ void FUN_002abe38(void)
       return;
     }
     if (0x85a00000 < (unsigned int)((int)in_s0 << 1)) {
-      FUN_002a43ae(2);
+      __set_errno(2);
       if (((unsigned int)in_s0 & 0x80000000) == 0) {
         return;
       }
@@ -69,12 +69,12 @@ void FUN_002abe38(void)
            (temp_v4 * (temp_v4 * (temp_v4 * 0.04168231f + 0.16672924f) + 0.49999997f) + 0.99999994f) * temp_v4 +
           *(float *)(temp_v2 * 4 + 0x417e34));
   if (temp_v4 == 0.0f) {
-    FUN_002a43ae(2);
+    __set_errno(2);
     FUN_002a438c();
     return;
   }
   if (temp_v4 == INFINITY) {
-    FUN_002a43ae(2);
+    __set_errno(2);
     return;
   }
   temp_v1 = ARM_fpclassifyf(temp_v4);

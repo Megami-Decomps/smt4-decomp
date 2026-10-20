@@ -1,16 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_002fafba(unsigned int *param_1)
-
+/* Takes the word out of `*slot` (leaving 0) and returns it. */
+u32 FUN_002fafba(u32 *slot)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = *param_1;
-  *param_1 = 0;
-  return temp_v0;
+    u32 value;
+
+    value = *slot;
+    *slot = 0;
+    return value;
 }
 
 } /* extern "C" */

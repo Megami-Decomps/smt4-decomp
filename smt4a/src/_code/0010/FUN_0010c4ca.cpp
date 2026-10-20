@@ -1,32 +1,41 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002eac34(int);
-extern int FUN_002eb6ae(int, unsigned int);
+typedef struct KindInfo {
+    /* 0x00 */ u8 unk00[0xA4];
+    /* 0xA4 */ s32 enabled;
+} KindInfo;
 
+typedef struct Candidate {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u16 status;     /* low nibble is the state */
+} Candidate;
 
-unsigned int FUN_0010c4ca(unsigned int param_1,int param_2,int param_3,int param_4)
+KindInfo *FUN_002eac34(s32 kind);
+s32 FUN_002eb6ae(Candidate *candidate, u32 mask);
 
+/* Classifies `candidate` for `kind`: 0 when the kind is disabled, 6 or 9 for the two special
+ * cases of kinds 2 and 10, 5 otherwise. */
+u32 FUN_0010c4ca(u32 unused, Candidate *candidate, s32 kind, s32 blocked)
 {
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v1 = FUN_002eac34(param_3);
-  if (*(int *)(temp_v1 + 0xa4) == 0) {
-    return 0;
-  }
-  temp_v0 = *(unsigned short *)(param_2 + 0x3c) & 0xf;
-  if (((temp_v0 != 0) && (temp_v0 != 1)) &&
-     ((param_3 == 10 || (param_3 == 2)))) {
-    if (param_4 != 0) {
-      return 6;
+    u16 state;
+    KindInfo *info;
+
+    info = FUN_002eac34(kind);
+    if (info->enabled == 0) {
+        return 0;
     }
-    if ((temp_v0 == 3) && (temp_v1 = FUN_002eb6ae(param_2,0x10), temp_v1 != 0)) {
-      return 9;
+    state = candidate->status & 0xF;
+    if ((state != 0 && state != 1) && (kind == 10 || kind == 2)) {
+        if (blocked != 0) {
+            return 6;
+        }
+        if (state == 3 && FUN_002eb6ae(candidate, 0x10) != 0) {
+            return 9;
+        }
     }
-  }
-  return 5;
+    return 5;
 }
 
 } /* extern "C" */

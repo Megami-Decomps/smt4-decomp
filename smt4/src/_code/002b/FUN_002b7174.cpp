@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int *jobGetWork(void);
+extern u32 *jobGetWork(void);
 
-
-unsigned int FUN_002b7174(void)
-
+u32 FUN_002b7174(void)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)jobGetWork();
-  return *puVar1;
+    u32 *work = jobGetWork();
+
+    return *work;
 }
 
 } /* extern "C" */

@@ -24,7 +24,7 @@ int FUN_004c3c84(...);
 int FUN_004c571c(...);
 int FUN_004c8ee0(...);
 int FUN_004c9160(...);
-int FUN_004f63bc(unsigned int);
+int clearTwo200Buffers(unsigned int);
 int FUN_004fb670(int, unsigned int *);
 int FUN_004fcffc(int, int, unsigned int, int);
 int FUN_004fd508(int, unsigned int *, int, unsigned int);
@@ -120,7 +120,7 @@ extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004e9f74. */
 /* Supplied declaration required: FUN_004eb838. */
 extern int FUN_004f2708(int, int, unsigned int);
-/* Supplied declaration required: FUN_004f63bc. */
+/* Supplied declaration required: clearTwo200Buffers. */
 /* Supplied declaration required: FUN_004fb670. */
 /* Supplied declaration required: FUN_004fcffc. */
 /* Supplied declaration required: FUN_004fd508. */
@@ -240,7 +240,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
     *(unsigned int *)(temp_v19 + 0x50) = *(unsigned int *)(temp_v19 + 0x50) & 0xff7fffff;
     temp_v19 = temp_v25;
   } while (temp_v25 < 0x6d);
-  FUN_004f63bc(DAT_00573808);
+  clearTwo200Buffers(DAT_00573808);
   *(unsigned short *)(param_2[10] + 0x1be) = 0;
   *(unsigned short *)(param_2[10] + 0x1c0) = 0;
   *(unsigned int *)(param_2[8] + 0x150) = 0;

@@ -46,7 +46,7 @@ extern unsigned int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -91,7 +91,7 @@ unsigned int FUN_0038a478(void)
     FUN_002bf288(2,0xe,0x106,0,0,6);
     FUN_002bf538();
     temp_v4 = g_titleScene;
-    temp_v1 = FUN_002c5da8(6,1,0);
+    temp_v1 = packNibblesAndByte(6,1,0);
     piVar11 = (int *)(temp_v4 + 0x12ac);
     temp_v2 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v1;
@@ -102,7 +102,7 @@ unsigned int FUN_0038a478(void)
     VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(puVar2 + 0x156);
     temp_v4 = g_titleScene;
-    temp_v1 = FUN_002c5da8(6,7,0);
+    temp_v1 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v4 + 0x12ac);
     temp_v2 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v1;

@@ -17,8 +17,8 @@ int FUN_002844e4(void);
 int FUN_0034913c(void);
 int FUN_0038afe8(void);
 int FUN_00477d10(...);
-int FUN_004d06e4(unsigned int *);
-int FUN_004d097c(unsigned int *);
+int releaseEntriesA(unsigned int *);
+int releaseEntriesB(unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 1 byte(s) */
@@ -47,11 +47,11 @@ extern int FUN_002a4b74(void);
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_0034913c. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
-extern int FUN_0037d6c4(void);
+extern int obj04StateIs4(void);
 /* Supplied declaration required: FUN_0038afe8. */
 /* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: FUN_004d06e4. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesA. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_0047b224(unsigned int *param_1)
@@ -78,8 +78,8 @@ void FUN_0047b224(unsigned int *param_1)
     *param_1 = *param_1 & 0xffffffef;
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffffeff;
     *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
-    FUN_004d097c(param_1 + 0xba);
-    FUN_004d06e4(param_1 + 0xad);
+    releaseEntriesB(param_1 + 0xba);
+    releaseEntriesA(param_1 + 0xad);
     *(unsigned char *)(g_aocMain + 0xd50) = 2;
     temp_v2 = FUN_00357bc8(param_1[0xd4],&LAB_0047b49c);
     FUN_00275f44(param_1[0xd6],temp_v2);
@@ -140,7 +140,7 @@ void FUN_0047b224(unsigned int *param_1)
       param_1[0x82] = 0;
       return;
     }
-    temp_v1 = FUN_0037d6c4();
+    temp_v1 = obj04StateIs4();
     if (temp_v1 == 0) {
       return;
     }

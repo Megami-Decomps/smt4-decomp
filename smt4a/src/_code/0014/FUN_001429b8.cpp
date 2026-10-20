@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0016117c(void);
+int asdModelResetCommandBuffer(void);
 int FUN_0016120c(unsigned int, unsigned int);
 int FUN_00161474(unsigned int, unsigned int *);
 int FUN_001615e4(unsigned char *);
-int FUN_001615fc(int, int);
+int asdGfxSetCmdBufferState(int, int);
 int FUN_0016163c(void);
 int FUN_0017cff0(unsigned int);
 
@@ -20,11 +20,11 @@ typedef struct {
 extern unsigned char LAB_001536e0; /* 0x1536e0 */
 extern int DAT_0061a50c; /* 0x61a50c */
 
-/* Supplied declaration required: FUN_0016117c. */
+/* Supplied declaration required: asdModelResetCommandBuffer. */
 /* Supplied declaration required: FUN_0016120c. */
 /* Supplied declaration required: FUN_00161474. */
 /* Supplied declaration required: FUN_001615e4. */
-/* Supplied declaration required: FUN_001615fc. */
+/* Supplied declaration required: asdGfxSetCmdBufferState. */
 /* Supplied declaration required: FUN_0016163c. */
 /* Supplied declaration required: FUN_0017cff0. */
 
@@ -54,8 +54,8 @@ void FUN_001429b8(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
     do {
       FUN_0017cff0(param_1[temp_v0]);
       FUN_0016120c(param_1[3],param_1[4]);
-      FUN_001615fc(0x200,0x300);
-      FUN_0016117c();
+      asdGfxSetCmdBufferState(0x200,0x300);
+      asdModelResetCommandBuffer();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < (unsigned int)param_1[2]);
   }

@@ -1,65 +1,83 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001aea28(unsigned int, unsigned int);
+void FUN_001aea28(u32 owner, u32 handle);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00581038; /* 0x581038 */
+typedef struct Object {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 handle;
+} Object;
 
-/* Supplied declaration required: FUN_001aea28. */
+typedef struct Record {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[0x27];
+    /* 0x28 */ u8 enabled;
+    /* 0x29 */ u8 unk29[3];
+    /* 0x2C */ Object *object;
+    /* 0x30 */ u8 hasObject;
+    /* 0x31 */ u8 unk31[0x23];
+} Record;                       /* 0x54 */
 
+/* The table at 0x581038 holds 16 records from 0x5C and, overlapping their start, two rows of eight object slots from 0x20 (only seven per row are used). */
+typedef struct Table {
+    /* 0x00 */ u8 unk00[0x5C];
+    /* 0x5C */ Record records[0x10];
+} Table;
 
+typedef struct ObjectRows {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ Object *objects[2][8];
+} ObjectRows;
+
+extern u32 DAT_0056fcc0;
+extern Table *DAT_00581038;
+
+/* Releases the handle of every record object that is active, enabled and present, and of every object in the two rows of seven slots. */
 void FUN_002b7c2c(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  
-  temp_v5 = 0;
-  do {
-    temp_v0 = DAT_00581038 + temp_v5 * 0x54;
-    pcVar2 = (char *)(temp_v0 + 0x5c);
-    temp_v2 = 0;
-    if (*pcVar2 != '\0') {
-      temp_v2 = (unsigned int)*(unsigned char *)(pcVar2 + 0x28);
-    }
-    if (*pcVar2 != '\0' && temp_v2 != 0) {
-      temp_v2 = (unsigned int)*(unsigned char *)(pcVar2 + 0x30);
-      if (temp_v2 != 0) {
-        pcVar2 = *(char **)(pcVar2 + 0x2c);
-      }
-      if (temp_v2 != 0 && pcVar2 != (char *)0x0) {
-        temp_v2 = *(unsigned int *)(pcVar2 + 4);
-        if (temp_v2 != 0) {
-          FUN_001aea28(DAT_0056fcc0,temp_v2);
-        }
-      }
-    }
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 0x10);
-  temp_v5 = 0;
-  do {
-    temp_v0 = 0;
+    Record *record;
+    Object *object;
+    u32 handle;
+    s32 i;
+    s32 j;
+
+    i = 0;
     do {
-      temp_v1 = *(int *)(DAT_00581038 + temp_v5 * 0x20 + temp_v0 * 4 + 0x20);
-      if (temp_v1 != 0) {
-        temp_v2 = *(unsigned int *)(temp_v1 + 4);
-      }
-      if (temp_v1 != 0 && temp_v2 != 0) {
-        FUN_001aea28(DAT_0056fcc0,temp_v2);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 7);
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v5 < 2);
-  return;
+        record = &DAT_00581038->records[i];
+        handle = 0;
+        if (record->active != 0) {
+            handle = (u32)record->enabled;
+        }
+        if (record->active != 0 && handle != 0) {
+            handle = (u32)record->hasObject;
+            if (handle != 0) {
+                object = record->object;
+            }
+            if (handle != 0 && object != NULL) {
+                handle = object->handle;
+                if (handle != 0) {
+                    FUN_001aea28(DAT_0056fcc0, handle);
+                }
+            }
+        }
+        i = i + 1;
+    } while (i < 0x10);
+    i = 0;
+    do {
+        j = 0;
+        do {
+            object = ((ObjectRows *)DAT_00581038)->objects[i][j];
+            if (object != NULL) {
+                handle = object->handle;
+            }
+            if (object != NULL && handle != 0) {
+                FUN_001aea28(DAT_0056fcc0, handle);
+            }
+            j = j + 1;
+        } while (j < 7);
+        i = i + 1;
+    } while (i < 2);
 }
 
 } /* extern "C" */

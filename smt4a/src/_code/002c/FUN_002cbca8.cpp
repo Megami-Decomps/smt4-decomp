@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00192550(void);
 int FUN_00334214(unsigned int, int, int);
-int FUN_00334434(int, int);
+int objBInitBlock19D0(int, int);
 int FUN_0033449c(int);
 int FUN_003720a0(unsigned int, int);
 int FUN_00372100(int, int);
@@ -107,7 +107,7 @@ extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00192550. */
 extern unsigned int FUN_001ab854(fn_002cbca8_arg0 *);
 /* Supplied declaration required: FUN_00334214. */
-/* Supplied declaration required: FUN_00334434. */
+/* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_003720a0. */
 /* Supplied declaration required: FUN_00372100. */
@@ -296,7 +296,7 @@ LAB_002cbffc:
   }
   temp_v5 = FUN_001ab854(param_1);
   FUN_00334214(temp_v5,0,0);
-  FUN_00334434(temp_v2 + 0x10e4,0);
+  objBInitBlock19D0(temp_v2 + 0x10e4,0);
   return;
 }
 

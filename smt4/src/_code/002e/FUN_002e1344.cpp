@@ -1,34 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c0894(int);
+int FUN_002c0894(int resource);
 int asdMemFree(...);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Block {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 buffer;
+    /* 0x0C */ u8 unk0C[0x14];
+    /* 0x20 */ int extra;
+} Block;
 
-/* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: asdMemFree. */
+typedef struct Obj {
+    /* 0x0 */ Block *block;
+    /* 0x4 */ u8 unk4[8];
+    /* 0xC */ int resource;
+} Obj;
 
-
-void FUN_002e1344(int *param_1)
-
+void FUN_002e1344(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  if (*(int *)(temp_v0 + 0x20) != 0) {
-    asdMemFree();
-  }
-  asdMemFree(*(unsigned int *)(temp_v0 + 8));
-  asdMemFree(*param_1);
-  FUN_002c0894(param_1[3]);
-  asdMemFree(param_1);
-  return;
+    Block *block = obj->block;
+
+    if (block->extra != 0) {
+        asdMemFree(block->extra);
+    }
+    asdMemFree(block->buffer);
+    asdMemFree(obj->block);
+    FUN_002c0894(obj->resource);
+    asdMemFree(obj);
 }
 
 } /* extern "C" */

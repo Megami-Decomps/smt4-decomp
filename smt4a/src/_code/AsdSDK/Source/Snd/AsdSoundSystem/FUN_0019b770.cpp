@@ -59,7 +59,7 @@ extern unsigned int FUN_00184df8(unsigned int);
 /* Supplied declaration required: FUN_0019f678. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int param_3,int param_4)
@@ -97,7 +97,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
   unsigned char *temp_v24;
   
   temp_v18 = 0.0f;
-  if (((DAT_005c4c20 & 1) == 0) && (temp_v2 = FUN_002eba64(&DAT_005c4c20), temp_v2 != 0)) {
+  if (((DAT_005c4c20 & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_005c4c20), temp_v2 != 0)) {
     g_asdSoundListener = temp_v18;
     DAT_0064c018 = temp_v18;
     DAT_0064c01c = temp_v18;

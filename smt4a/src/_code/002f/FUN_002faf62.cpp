@@ -1,34 +1,47 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9f00(int, int);
+void FUN_002e9f00(u8 *member, s32 value);
+u32 *FUN_002fafba(u32 *slot);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e9f00. */
-extern int *FUN_002fafba(int);
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*destroy)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x90];
+    /* 0x090 */ u32 slotA;
+    /* 0x094 */ u8 unk094[4];
+    /* 0x098 */ u32 slotB;
+    /* 0x09C */ u8 unk09C[0x34];
+    /* 0x0D0 */ u8 memberD0[0xD8];
+    /* 0x1A8 */ Object *object;
+} Owner;
 
-void FUN_002faf62(int param_1)
-
+/* Destroys the objects taken out of the two slots at 0x90 and 0x98, then runs FUN_002e9f00 on the member at 0xD0 and destroys and clears the object at 0x1A8. */
+void FUN_002faf62(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  
-  if ((*(int *)(param_1 + 0x90) != 0) &&
-     (piVar1 = (int *)FUN_002fafba(param_1 + 0x90), piVar1 != (int *)0x0)) {
-    (**(romwright_code **)(*piVar1 + 4))(piVar1);
-  }
-  if ((*(int *)(param_1 + 0x98) != 0) &&
-     (piVar1 = (int *)FUN_002fafba(param_1 + 0x98), piVar1 != (int *)0x0)) {
-    (**(romwright_code **)(*piVar1 + 4))(piVar1);
-  }
-  FUN_002e9f00(param_1 + 0xd0,4);
-  if (*(int **)(param_1 + 0x1a8) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(param_1 + 0x1a8) + 4))(*(int **)(param_1 + 0x1a8));
-    *(unsigned int *)(param_1 + 0x1a8) = 0;
-  }
-  return;
+    Object *object;
+
+    if ((owner->slotA != 0) &&
+        (object = (Object *)FUN_002fafba(&owner->slotA), object != NULL)) {
+        object->vtbl->destroy(object);
+    }
+    if ((owner->slotB != 0) &&
+        (object = (Object *)FUN_002fafba(&owner->slotB), object != NULL)) {
+        object->vtbl->destroy(object);
+    }
+    FUN_002e9f00(owner->memberD0, 4);
+    if (owner->object != NULL) {
+        owner->object->vtbl->destroy(owner->object);
+        owner->object = NULL;
+    }
 }
 
 } /* extern "C" */

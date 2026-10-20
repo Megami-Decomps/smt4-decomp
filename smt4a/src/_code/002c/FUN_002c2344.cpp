@@ -1,15 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f65c; /* 0x57f65c */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x25];
+    /* 0x25 */ u8 value;
+} Record;
+extern Record *DAT_0057f65c;
 
-
-void FUN_002c2344(unsigned char param_1)
-
+/* Stores `value` in the byte at 0x25 of the record at 0x57F65C. */
+void FUN_002c2344(u8 value)
 {
-  *(unsigned char *)(DAT_0057f65c + 0x25) = param_1;
-  return;
+    DAT_0057f65c->value = value;
 }
 
 } /* extern "C" */

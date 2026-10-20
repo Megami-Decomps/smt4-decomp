@@ -16,7 +16,7 @@ int FUN_002e2afc(void);
 int FUN_0031a400(void);
 int FUN_003343f0(int);
 int FUN_00342010(void);
-int FUN_0034a98c(void);
+int objBInitBlock12DC(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -38,7 +38,7 @@ extern int *asdTMTexTableGetEntry(unsigned int);
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_0034a98c. */
+/* Supplied declaration required: objBInitBlock12DC. */
 extern int FUN_00399e04(void);
 
 
@@ -78,7 +78,7 @@ void FUN_004a76a8(int param_1)
   FUN_003343f0(1);
   temp_v1 = (unsigned int)*(unsigned char *)(param_1 + 0x95);
   if ((temp_v1 == 0) && (FUN_002e2afc(), temp_v1 != 0x2f)) {
-    FUN_0034a98c();
+    objBInitBlock12DC();
   }
   FUN_002804b0(&LAB_004a77a0,param_1 + 0x854,0);
   FUN_002804b0(0x4a77b0,param_1 + 0x858,0);

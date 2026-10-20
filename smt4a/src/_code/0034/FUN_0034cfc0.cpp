@@ -69,7 +69,7 @@ extern unsigned short *FUN_001801a4(void);
 extern unsigned int FUN_001ba3d4(int);
 /* Supplied declaration required: FUN_0026ec00. */
 extern int FUN_00284140(int);
-extern int FUN_0047fb50(int);
+extern int unitMatchesAlignment(int);
 /* Supplied declaration required: FUN_0047fc38. */
 /* Supplied declaration required: FUN_0048026c. */
 extern int FUN_00480960(int);
@@ -142,7 +142,7 @@ void FUN_0034cfc0(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v2 = temp_v22;
   FUN_0015f858(temp_v22,0);
   if (temp_v2 != 0) {
-    temp_v4 = FUN_0047fb50(temp_v22);
+    temp_v4 = unitMatchesAlignment(temp_v22);
     if (temp_v4 == 0) {
       temp_v10 = 0x9b9b9bff;
     }

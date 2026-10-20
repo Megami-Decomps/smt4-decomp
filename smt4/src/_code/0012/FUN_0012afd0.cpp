@@ -19,7 +19,7 @@ extern unsigned int DAT_004efd90; /* 0x4efd90 */
 extern unsigned int DAT_004efd94; /* 0x4efd94 */
 extern unsigned int DAT_004efd98; /* 0x4efd98 */
 
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int FUN_002c30c4(int);
 extern int rt_memcpy(int, int, unsigned int);
 
@@ -93,7 +93,7 @@ unsigned int * FUN_0012afd0(int *param_1,int param_2)
   puVar6[0x12] = 0;
   puVar6[0x13] = 0;
   puVar6[0x14] = 0;
-  if (((DAT_00476634 & 1) == 0) && (temp_v7 = FUN_002bfefc(&DAT_00476634), temp_v7 != 0)) {
+  if (((DAT_00476634 & 1) == 0) && (temp_v7 = __cxa_guard_acquire(&DAT_00476634), temp_v7 != 0)) {
     DAT_004efd6c = temp_v10;
     DAT_004efd70 = temp_v9;
     DAT_004efd74 = temp_v9;

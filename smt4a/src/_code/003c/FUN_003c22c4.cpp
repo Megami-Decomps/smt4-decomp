@@ -1,21 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Shard003C.h"
 
 extern "C" {
 
-int btlGetMainState(void);
-int btlMainClearUnk24(void);
+extern void *btlGetMainState(void);
+extern void btlMainClearUnk24(void *state);
 
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: btlMainClearUnk24. */
-
-
-unsigned int FUN_003c22c4(void)
-
+/* Script command: clears the battle state's field at +0x24. */
+u32 FUN_003c22c4(void)
 {
-/* irregular: 2 native warning(s); review required */
-  btlGetMainState();
-  btlMainClearUnk24();
-  return 1;
+    btlMainClearUnk24(btlGetMainState());
+    return 1;
 }
 
 } /* extern "C" */

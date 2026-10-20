@@ -77,8 +77,8 @@ extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003872b8. */
-extern int FUN_003deeb4(unsigned short);
-extern int FUN_003deecc(unsigned short);
+extern int partyEntryGetBit5(unsigned short);
+extern int partyEntryGetBit6(unsigned short);
 /* Supplied declaration required: FUN_003f86f8. */
 /* Supplied declaration required: FUN_00417de8. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -144,7 +144,7 @@ void FUN_002f0c18(void)
   do {
     temp_v2 = FUN_0019f1a4(temp_v0,2);
     if (((temp_v2 != 0) && (temp_v2 = FUN_001bd100(temp_v0), temp_v2 != 0)) &&
-       ((temp_v2 = FUN_003deeb4(temp_v0), temp_v2 != 0 || (temp_v2 = FUN_003deecc(temp_v0), temp_v2 != 0)))) {
+       ((temp_v2 = partyEntryGetBit5(temp_v0), temp_v2 != 0 || (temp_v2 = partyEntryGetBit6(temp_v0), temp_v2 != 0)))) {
       FUN_00417de8(temp_v0);
     }
     temp_v0 = temp_v0 + 1;
@@ -153,7 +153,7 @@ void FUN_002f0c18(void)
   do {
     temp_v2 = FUN_0019f1a4(temp_v0,2);
     if (((temp_v2 != 0) && (temp_v2 = FUN_001bd100(temp_v0), temp_v2 == 0)) &&
-       ((temp_v2 = FUN_003deeb4(temp_v0), temp_v2 != 0 || (temp_v2 = FUN_003deecc(temp_v0), temp_v2 != 0)))) {
+       ((temp_v2 = partyEntryGetBit5(temp_v0), temp_v2 != 0 || (temp_v2 = partyEntryGetBit6(temp_v0), temp_v2 != 0)))) {
       FUN_00417de8(temp_v0);
     }
     temp_v0 = temp_v0 + 1;

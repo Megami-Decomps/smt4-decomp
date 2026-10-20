@@ -1,44 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e7114` (_code @ 0x3e7114, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/SoundArchiveWrapper.h"
 
 extern "C" {
 
-int FUN_003e68a0(void);
+struct SoundTypeParams;
 
-/* Supplied declaration required: FUN_003e68a0. */
-extern unsigned short *FUN_003e6948(int);
-extern int nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo(unsigned int);
-extern int nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType(void);
+s32 FUN_003e711c(SoundArchiveRef *ref, u32 unused, SoundTypeParams *out);
 
-
-unsigned int FUN_003e7114(int param_1,unsigned int param_2,unsigned short *param_3)
-
+/* Passes the wrapper's ref on to FUN_003e711c, the function that follows it. */
+s32 FUN_003e7114(SoundArchiveWrapper *wrapper, u32 unused, SoundTypeParams *out)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned short *puVar4;
-  
-  temp_v0 = nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo
-                    (*(unsigned int *)(*(int *)(param_1 + 4) + 0x3c));
-  temp_v2 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType();
-    if (temp_v1 != 2) {
-      temp_v2 = 0;
-    }
-    else {
-      puVar4 = (unsigned short *)FUN_003e6948(temp_v0);
-      *param_3 = *puVar4;
-      param_3[1] = puVar4[1];
-      FUN_003e68a0();
-      *(char *)(param_3 + 2) = (char)(int)puVar4;
-      temp_v2 = 1;
-    }
-  }
-  return temp_v2;
+    return FUN_003e711c(wrapper->ref, unused, out);
 }
 
 } /* extern "C" */

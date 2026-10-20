@@ -41,7 +41,7 @@ extern int FUN_002a4878(int);
 /* Supplied declaration required: FUN_002c7bb0. */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_0031d1b4. */
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_004000a8. */
 /* Supplied declaration required: FUN_00400164. */
 /* Supplied declaration required: FUN_0047fbf0. */
@@ -139,7 +139,7 @@ void FUN_002fa7a8(int param_1)
     }
     if (((*(char *)(temp_v2 + 0x23) == '\x03') && ((*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5 == 2)) &&
        (((*(unsigned short *)(temp_v2 + 0x3a) & 0xfff) != 0 &&
-        (((*(unsigned int *)(temp_v2 + 0x3c) & 0x7f) != 1 && (temp_v2 = FUN_003e0044(1), temp_v2 != 0)))))) {
+        (((*(unsigned int *)(temp_v2 + 0x3c) & 0x7f) != 1 && (temp_v2 = playerHasFlagBit(1), temp_v2 != 0)))))) {
       temp_v2 = 0;
       do {
         if (*(char *)(param_1 + temp_v2 + 0x3c85) != '\0') {
@@ -206,7 +206,7 @@ void FUN_002fa7a8(int param_1)
       }
       if (((*(char *)(temp_v4 + 0x23) == '\x03') && ((*(unsigned int *)(temp_v4 + 0x28) & 0x1ff) >> 5 == 2)) &&
          (((*(unsigned short *)(temp_v4 + 0x3a) & 0xfff) != 0 &&
-          (((*(unsigned int *)(temp_v4 + 0x3c) & 0x7f) != 1 && (temp_v5 = FUN_003e0044(1), temp_v5 != 0)))))) {
+          (((*(unsigned int *)(temp_v4 + 0x3c) & 0x7f) != 1 && (temp_v5 = playerHasFlagBit(1), temp_v5 != 0)))))) {
         temp_v5 = 0;
         do {
           if (*(char *)(param_1 + temp_v5 + 0x3c85) != '\0') {
@@ -300,7 +300,7 @@ void FUN_002fa7a8(int param_1)
             return;
           }
         }
-        temp_v5 = FUN_003e0044(1);
+        temp_v5 = playerHasFlagBit(1);
         if (temp_v5 != 0) {
           temp_v5 = 0;
           while (*(char *)(param_1 + temp_v5 + 0x3c85) == '\0') {

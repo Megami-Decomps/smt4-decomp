@@ -11,7 +11,7 @@ int FUN_0022677c(...);
 int FUN_002804b0(...);
 int sysMemClear(void);
 int FUN_003fe86c(...);
-int FUN_00407360(...);
+int linkSlotSetFlag1C(...);
 int FUN_00407978(void);
 int FUN_00407ab0(...);
 int FUN_00408184(...);
@@ -48,7 +48,7 @@ extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_00407360. */
+/* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: FUN_00407978. */
 /* Supplied declaration required: FUN_00407ab0. */
 /* Supplied declaration required: FUN_00408184. */
@@ -201,7 +201,7 @@ LAB_0046a3b0:
   FUN_00407978();
   FUN_00407ab0(*(unsigned int *)(param_1 + 0xcdc),
                *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),0);
-  FUN_00407360(*(unsigned int *)(param_1 + 0xcdc),0);
+  linkSlotSetFlag1C(*(unsigned int *)(param_1 + 0xcdc),0);
   if (*(char *)(param_1 + 0x10) != '\x0e') {
     FUN_00100388(temp_v7 + 0x10,&LAB_0046a77c);
     FUN_00100388(temp_v6,&LAB_0046a7a0,(int)*(char *)(param_1 + 0x10));

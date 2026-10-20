@@ -28,7 +28,7 @@ extern int FUN_002e760a(unsigned int);
 extern int FUN_002e9300(int, char *);
 /* Supplied declaration required: FUN_002e9ff4. */
 extern unsigned int FUN_002fafd0(int, unsigned int);
-extern unsigned int FUN_003f2f0c(void);
+extern unsigned int wordByteClear(void);
 /* Supplied declaration required: FUN_003fa6a4. */
 extern int FUN_00432acc(void);
 
@@ -51,7 +51,7 @@ void FUN_003fa010(unsigned int *param_1)
                   );
       temp_v1 = 0;
       if (temp_v0 != 0) {
-        temp_v1 = FUN_003f2f0c();
+        temp_v1 = wordByteClear();
       }
       param_1[0xc] = temp_v1;
     }

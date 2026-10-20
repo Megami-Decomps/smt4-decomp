@@ -1,16 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 value;
+} Holder;
 
-unsigned int FUN_002ed344(int param_1,int param_2)
-
+/* Returns 1 unless the second object's value is below the first's (equal values give 1). */
+u32 FUN_002ed344(Holder *a, Holder *b)
 {
-  if ((*(int *)(param_2 + 4) != *(int *)(param_1 + 4)) &&
-     (*(int *)(param_2 + 4) - *(int *)(param_1 + 4) <= 0)) {
-    return 0;
-  }
-  return 1;
+    if ((b->value != a->value) && (b->value - a->value <= 0)) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

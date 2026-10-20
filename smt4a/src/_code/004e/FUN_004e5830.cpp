@@ -30,7 +30,7 @@ extern unsigned int DAT_00571214; /* 0x571214 */
 extern unsigned int DAT_005712e0; /* 0x5712e0 */
 extern unsigned int DAT_005712e4; /* 0x5712e4 */
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -88,10 +88,10 @@ void FUN_004e5830(int *param_1,unsigned int param_2,unsigned int param_3)
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 4);
   if (((!temp_v0 && !temp_v1) && (temp_v6 != 0)) &&
-     ((temp_v5 = FUN_001633a0(99), temp_v5 < 5 ||
+     ((temp_v5 = lcgRandomRange(99), temp_v5 < 5 ||
       ((*(unsigned int *)(*param_1 + 0x45ac) & DAT_005712e4) != 0 ||
        (*(unsigned int *)(*param_1 + 0x45a8) & DAT_005712e0) != 0)))) {
-    temp_v5 = FUN_001633a0((temp_v6 - 1U) & 0xffff);
+    temp_v5 = lcgRandomRange((temp_v6 - 1U) & 0xffff);
     temp_v6 = *(int *)(*param_1 + 0x1ed4) + *(int *)(temp_v2 + temp_v5 * 4) * 0x1d0;
     FUN_004fdb18(param_3,param_2,temp_v6,0x200,1);
     temp_v5 = *param_1;

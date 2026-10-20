@@ -16,8 +16,8 @@ AsdMdlObject *asdMdlManagerCreateFromSource(void *source, void *arg, u32 param)
 {
     AsdMdlObject *obj = asdMdlObjectNew();
 
-    obj->node->unk08 = param;
-    obj->node->unk04 = FUN_001847c4(source, arg);
+    obj->node->param = param;
+    obj->node->data = FUN_001847c4(source, arg);
     FUN_0019cba8(obj->node, param);
     FUN_00185b84(obj);
     asdListAdd(&g_asdMdlList, obj, 0);

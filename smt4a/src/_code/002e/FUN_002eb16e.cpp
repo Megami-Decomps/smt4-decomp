@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ea6ae(unsigned int, int, unsigned int);
+void FUN_002ea6ae(void *dest, void *source, u32 value);
 
-/* Supplied declaration required: FUN_002ea6ae. */
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 value;
+} Source;
 
-
-unsigned int FUN_002eb16e(unsigned int param_1,int param_2)
-
+/* Calls FUN_002ea6ae(dest, source, source's word at 0x10) and returns `dest`. */
+void *FUN_002eb16e(void *dest, Source *source)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002ea6ae(param_1,param_2,*(unsigned int *)(param_2 + 0x10));
-  return param_1;
+    FUN_002ea6ae(dest, source, source->value);
+    return dest;
 }
 
 } /* extern "C" */

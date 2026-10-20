@@ -50,7 +50,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 unsigned int FUN_002ed628(void)
@@ -92,7 +92,7 @@ unsigned int FUN_002ed628(void)
     temp_v2 = FUN_0026e6a0(0x28,0x50,0x3c,*(unsigned int *)(temp_v0 + 0x20),0);
     temp_v3 = g_titleScene;
     VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v1 = FUN_002c5da8(6,1,0);
+    temp_v1 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v3 + 0x12ac);
     temp_v4 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v1;
@@ -105,7 +105,7 @@ unsigned int FUN_002ed628(void)
     FUN_002bf538();
   }
   temp_v3 = g_titleScene;
-  temp_v1 = FUN_002c5da8(6,7,0);
+  temp_v1 = packNibblesAndByte(6,7,0);
   piVar7 = (int *)(temp_v3 + 0x12ac);
   temp_v4 = piVar7[*piVar7 + 2];
   piVar7[*piVar7 + 2] = temp_v1;
@@ -194,7 +194,7 @@ unsigned int FUN_002ed628(void)
       FUN_0026e70c();
       FUN_002bf538();
       temp_v3 = g_titleScene;
-      temp_v1 = FUN_002c5da8(6,1,0);
+      temp_v1 = packNibblesAndByte(6,1,0);
       piVar7 = (int *)(temp_v3 + 0x12ac);
       temp_v4 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v1;
@@ -204,7 +204,7 @@ unsigned int FUN_002ed628(void)
       }
       FUN_002bf380(2,0x2d,1,0,0,0xb);
       temp_v3 = g_titleScene;
-      temp_v1 = FUN_002c5da8(6,7,0);
+      temp_v1 = packNibblesAndByte(6,7,0);
       piVar7 = (int *)(temp_v3 + 0x12ac);
       temp_v4 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v1;
@@ -341,7 +341,7 @@ unsigned int FUN_002ed628(void)
     temp_v2 = FUN_0026e6a0(0,100,0xc,*(unsigned int *)(temp_v0 + 0x1c),0);
     temp_v3 = g_titleScene;
     VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v0 = FUN_002c5da8(6,1,0);
+    temp_v0 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v3 + 0x12ac);
     temp_v1 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v0;
@@ -353,7 +353,7 @@ unsigned int FUN_002ed628(void)
     FUN_002bf288(2,0x2d,0x31,0,0,0xe);
     FUN_002bf538();
     temp_v3 = g_titleScene;
-    temp_v0 = FUN_002c5da8(6,7,0);
+    temp_v0 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v3 + 0x12ac);
     temp_v1 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v0;

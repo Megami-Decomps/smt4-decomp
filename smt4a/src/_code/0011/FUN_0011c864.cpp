@@ -6,7 +6,7 @@ extern "C" {
 
 int strInit(...);
 int FUN_002eb588(int *);
-int FUN_002ec890(unsigned char [28]);
+int destroyObj0055ae64(unsigned char [28]);
 int FUN_002ec934(unsigned char [28], int, unsigned int);
 int strDestroy(...);
 int FUN_002ee524(unsigned char [24], unsigned char [40]);
@@ -29,7 +29,7 @@ typedef struct {
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002eb588. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ec934. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee524. */
@@ -79,7 +79,7 @@ int FUN_0011c864(int param_1)
   (**(romwright_code **)(**(int **)(param_1 + 4) + 8))(*(int **)(param_1 + 4),temp_v6,temp_v2);
   FUN_002ec934(temp_v12,temp_v3 + temp_v5,temp_v4);
   FUN_002f7ac4(*(unsigned int *)(param_1 + 4),temp_v12);
-  FUN_002ec890(temp_v12);
+  destroyObj0055ae64(temp_v12);
   strDestroy(temp_v2);
   FUN_002ee54c(temp_v11);
   strDestroy(temp_v6);

@@ -9,7 +9,7 @@ int FUN_001aba54(void);
 int FUN_003e8bb0(...);
 int FUN_004f7724(unsigned int, unsigned int, int, int);
 int FUN_004f7ea8(unsigned int, unsigned int, int, int);
-int FUN_004f9024(unsigned int, unsigned int, int, int);
+int obj4FQueryPairB(unsigned int, unsigned int, int, int);
 
 typedef struct fn_004e5650_arg1 fn_004e5650_arg1;
 struct fn_004e5650_arg1 {
@@ -43,7 +43,7 @@ extern unsigned int DAT_00573808; /* 0x573808 */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004f7724. */
 /* Supplied declaration required: FUN_004f7ea8. */
-/* Supplied declaration required: FUN_004f9024. */
+/* Supplied declaration required: obj4FQueryPairB. */
 
 
 void FUN_004e5650(unsigned int *param_1,fn_004e5650_arg1 *param_2)
@@ -72,7 +72,7 @@ void FUN_004e5650(unsigned int *param_1,fn_004e5650_arg1 *param_2)
     FUN_003e8bb0(temp_v7,*param_1);
     FUN_003e8bb0(temp_v7,*param_1,param_2->field_0x20);
     temp_v7[0] = temp_v7[0] & 0xffff;
-    FUN_004f9024(DAT_00573808,(temp_v8 & 0xffff) >> 8,(temp_v5 & temp_v2) == 0 && (temp_v1 & temp_v3) == 0,
+    obj4FQueryPairB(DAT_00573808,(temp_v8 & 0xffff) >> 8,(temp_v5 & temp_v2) == 0 && (temp_v1 & temp_v3) == 0,
                  temp_v6);
     return;
   }

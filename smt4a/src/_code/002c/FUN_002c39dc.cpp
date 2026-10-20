@@ -30,7 +30,7 @@ int FUN_002f8288(void);
 int FUN_00333694(...);
 int FUN_0035e540(void);
 int FUN_00372570(int);
-int FUN_003f525c(unsigned int, int);
+int pair40Set(unsigned int, int);
 int FUN_00480140(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -71,7 +71,7 @@ extern unsigned int FUN_002a4894(int);
 /* Supplied declaration required: FUN_0035e540. */
 /* Supplied declaration required: FUN_00372570. */
 /* Supplied declaration required: FUN_003f5220. */
-/* Supplied declaration required: FUN_003f525c. */
+/* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: FUN_00480140. */
 
 
@@ -115,7 +115,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     *(unsigned char *)(*(int *)(temp_v9 + 0xa10) + 0x25) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0xa10) + 0x27) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0xa10) + 0x26) = 0;
-    FUN_003f525c(*(unsigned int *)(temp_v9 + 0xa10),0);
+    pair40Set(*(unsigned int *)(temp_v9 + 0xa10),0);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 4);
   temp_v3 = 0;
@@ -124,7 +124,7 @@ void FUN_002c39dc(int param_1,unsigned int param_2,unsigned short param_3)
     *(unsigned char *)(*(int *)(temp_v9 + 0xa20) + 0x25) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0xa20) + 0x27) = 0;
     *(unsigned char *)(*(int *)(temp_v9 + 0xa20) + 0x26) = 0;
-    FUN_003f525c(*(unsigned int *)(temp_v9 + 0xa20),0);
+    pair40Set(*(unsigned int *)(temp_v9 + 0xa20),0);
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x18);
   switch(param_1) {

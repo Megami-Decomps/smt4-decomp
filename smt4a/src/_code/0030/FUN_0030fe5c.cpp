@@ -1,15 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_0030fe5c(int *param_1,int *param_2)
-
+/* Compares the two referenced words: 0 when equal, otherwise their difference. */
+s32 FUN_0030fe5c(s32 *a, s32 *b)
 {
-  if (*param_1 == *param_2) {
-    return 0;
-  }
-  return *param_1 - *param_2;
+    if (*a == *b) {
+        return 0;
+    }
+    return *a - *b;
 }
 
 } /* extern "C" */

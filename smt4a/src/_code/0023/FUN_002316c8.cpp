@@ -1,39 +1,51 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fac; /* 0x588fac */
-extern unsigned int DAT_0061951c; /* 0x61951c */
-extern unsigned int DAT_0061953c; /* 0x61953c */
+typedef struct Track {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 value;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 flags;
+} Track;                        /* 0x20 */
 
-extern int jyoucyuGetTableEntry(unsigned int);
+typedef struct Global588fac {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 mode;
+} Global588fac;
+extern Global588fac DAT_00588fac;
+extern Track DAT_0061951c;
+extern Track DAT_0061953c;
 
+s32 jyoucyuGetTableEntry(u32 index);
 
-void FUN_002316c8(unsigned int param_1)
-
+/* Restarts the track chosen by `mode` (0 or 1) with `value` when it has bit 1 set in its flags, unless table entry 1 is set. */
+void FUN_002316c8(u32 value)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    puVar2 = (unsigned int *)0x0;
-    if ((*(int *)((unsigned char *)&DAT_00588fac + 0x4)) == 0) {
-      puVar2 = &DAT_0061951c;
+    s32 entry;
+    Track *track;
+
+    entry = jyoucyuGetTableEntry(1);
+    if (entry == 0) {
+        track = NULL;
+        if (DAT_00588fac.mode == 0) {
+            track = &DAT_0061951c;
+        } else if (DAT_00588fac.mode == 1) {
+            track = &DAT_0061953c;
+        }
+        if ((track->flags & 2) != 0) {
+            track->unk04 = 0;
+            track->unk10 = 0;
+            track->value = value;
+            track->unk14 = 0;
+            track->unk18 = 0;
+            track->flags = 0x13;
+        }
     }
-    else if ((*(int *)((unsigned char *)&DAT_00588fac + 0x4)) == 1) {
-      puVar2 = &DAT_0061953c;
-    }
-    if ((puVar2[7] & 2) != 0) {
-      puVar2[1] = 0;
-      puVar2[4] = 0;
-      puVar2[2] = param_1;
-      puVar2[5] = 0;
-      puVar2[6] = 0;
-      puVar2[7] = 0x13;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

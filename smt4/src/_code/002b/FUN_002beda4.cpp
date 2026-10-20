@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ int value;   /* 20.12 fixed point */
+} Obj;
 
-int FUN_002beda4(int param_1)
-
+/* Integer part of the fixed-point value. */
+int FUN_002beda4(Obj *obj)
 {
-  return *(int *)(param_1 + 0xc) >> 0xc;
+    return obj->value >> 0xc;
 }
 
 } /* extern "C" */

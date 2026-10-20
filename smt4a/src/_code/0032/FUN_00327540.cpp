@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0035.h"
 
 extern "C" {
 
-extern int FUN_003564ec(void);
+extern Entry30 *dataTable4CGetEntry(u32 index);
 
-
-unsigned char FUN_00327540(void)
-
+u8 FUN_00327540(u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_003564ec();
-  return *(short *)(temp_v0 + 8) != 0;
+    return dataTable4CGetEntry(index)->unk08 != 0;
 }
 
 } /* extern "C" */

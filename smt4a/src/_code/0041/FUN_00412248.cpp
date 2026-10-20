@@ -31,7 +31,7 @@ extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00203d04. */
 extern int FUN_002619e0(void);
 extern int FUN_003ecd94(void);
-extern int FUN_0040de1c(unsigned int, unsigned int);
+extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00410628. */
 /* Supplied declaration required: FUN_00410d44. */
 /* Supplied declaration required: FUN_004112c4. */
@@ -125,7 +125,7 @@ void FUN_00412248(unsigned int *param_1)
     }
     break;
   case 9:
-    temp_v1 = FUN_0040de1c(DAT_005712f0,0);
+    temp_v1 = chainCountIdUnflagged(DAT_005712f0,0);
     if (temp_v1 < 1) {
       btlGetMainState();
       temp_v1 = FUN_003ecd94();

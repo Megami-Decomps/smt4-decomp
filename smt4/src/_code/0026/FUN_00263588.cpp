@@ -1,55 +1,64 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(...);
-int nw_gfx_res_ResGraphicsFile_Cleanup(int *);
+int asdMemFree(void *ptr);
+int nw_gfx_res_ResGraphicsFile_Cleanup(int *resource);
 
-typedef struct fn_00263588_arg0 fn_00263588_arg0;
-struct fn_00263588_arg0 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    void *field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x4];
-    int field_0x10; /* +0x10 */
-};
+struct PooledObject;
+struct Pool;
 
-typedef int romwright_code(...);
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
+typedef struct PoolVtbl {
+    /* 0x0 */ void *unk0[3];
+    /* 0xC */ void (*free)(struct Pool *pool, struct PooledObject *object);
+} PoolVtbl;
 
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
+typedef struct Pool {
+    /* 0x0 */ PoolVtbl *vtbl;
+} Pool;
 
+typedef struct PooledObjectVtbl {
+    /* 0x0 */ void (*destroy)(struct PooledObject *object);
+} PooledObjectVtbl;
 
-unsigned int FUN_00263588(fn_00263588_arg0 *param_1,unsigned int param_2,unsigned int param_3,int param_4)
+typedef struct PooledObject {
+    /* 0x0 */ PooledObjectVtbl *vtbl;
+    /* 0x4 */ Pool *pool;
+} PooledObject;
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ PooledObject *first;
+    /* 0x08 */ PooledObject *second;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ int resource;
+    /* 0x14 */ void *buffer;
+} Obj;
+
+u32 FUN_00263588(Obj *obj, u32 a, u32 b, int c)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = (unsigned int *)param_1->field_0x4;
-  if (puVar1 != (unsigned int *)0x0) {
-    (**(romwright_code **)*puVar1)(puVar1);
-    (**(romwright_code **)(*(int *)puVar1[1] + 0xc))((int *)puVar1[1],puVar1);
-    param_1->field_0x4 = (void *)0x0;
-  }
-  puVar1 = (unsigned int *)param_1->field_0x8;
-  if (puVar1 != (unsigned int *)0x0) {
-    (**(romwright_code **)*puVar1)(puVar1);
-    (**(romwright_code **)(*(int *)puVar1[1] + 0xc))((int *)puVar1[1],puVar1);
-    param_1->field_0x8 = (void *)0x0;
-  }
-  temp_v0 = param_1->field_0x10;
-  if (temp_v0 != 0) {
-    nw_gfx_res_ResGraphicsFile_Cleanup(&temp_v0);
-  }
-  asdMemFree(*(unsigned int *)(param_1 + 1));
-  asdMemFree(param_1);
-  return 1;
+    PooledObject *pooled;
+    int resource;
+
+    pooled = obj->first;
+    if (pooled != NULL) {
+        pooled->vtbl->destroy(pooled);
+        pooled->pool->vtbl->free(pooled->pool, pooled);
+        obj->first = NULL;
+    }
+    pooled = obj->second;
+    if (pooled != NULL) {
+        pooled->vtbl->destroy(pooled);
+        pooled->pool->vtbl->free(pooled->pool, pooled);
+        obj->second = NULL;
+    }
+    resource = obj->resource;
+    if (resource != 0) {
+        nw_gfx_res_ResGraphicsFile_Cleanup(&resource);
+    }
+    asdMemFree(obj->buffer);
+    asdMemFree(obj);
+    return 1;
 }
 
 } /* extern "C" */

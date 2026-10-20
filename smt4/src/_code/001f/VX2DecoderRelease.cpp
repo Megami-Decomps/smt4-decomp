@@ -1,32 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002580c4(unsigned int);
+int FUN_002580c4(u32 buffer);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct VX2Decoder {
+    /* 0x0 */ u32 buffer;
+    /* 0x4 */ u32 *planes;
+    /* 0x8 */ u32 planeCount;
+} VX2Decoder;
 
-/* Supplied declaration required: FUN_002580c4. */
-
-
-void VX2DecoderRelease(unsigned int *param_1)
-
+void VX2DecoderRelease(VX2Decoder *decoder)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  FUN_002580c4(*param_1);
-  if (param_1[1] != 0) {
-    for (temp_v0 = 0; temp_v0 < param_1[2]; temp_v0++) {
-      FUN_002580c4(*(unsigned int *)(param_1[1] + temp_v0 * 4));
+    u32 i;
+
+    FUN_002580c4(decoder->buffer);
+    if (decoder->planes != NULL) {
+        for (i = 0; i < decoder->planeCount; i++) {
+            FUN_002580c4(decoder->planes[i]);
+        }
+        FUN_002580c4((u32)decoder->planes);
+        return;
     }
-    FUN_002580c4(param_1[1]);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

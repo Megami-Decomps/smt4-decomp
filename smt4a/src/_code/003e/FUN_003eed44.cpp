@@ -26,7 +26,7 @@ extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_003f1b3c. */
 extern unsigned int FUN_0047f4cc(unsigned int);
 extern int FUN_0047f78c(void);
-extern int FUN_004ec93c(unsigned int);
+extern int hasFlag80Or1000(unsigned int);
 extern int btlUnitGet(unsigned int);
 
 
@@ -43,7 +43,7 @@ void FUN_003eed44(int param_1)
   
   if ((*(char *)(param_1 + 0x45b8) == '\0') && (*(char *)(param_1 + 0x45bb) == '\0')) {
     temp_v0 = btlUnitGet(g_btlScriptUnit);
-    if (((temp_v0 == 0) || (temp_v0 = FUN_004ec93c(g_btlScriptUnit), temp_v0 == 0)) &&
+    if (((temp_v0 == 0) || (temp_v0 = hasFlag80Or1000(g_btlScriptUnit), temp_v0 == 0)) &&
        (temp_v0 = param_1, FUN_003eebf4(param_1,1), temp_v0 < 0)) {
       puVar4 = (unsigned int *)(param_1 + 0x45a0);
       if ((DAT_00573a24 & *(unsigned int *)(param_1 + 0x45a4)) == 0 && (DAT_00573a20 & *puVar4) == 0) {

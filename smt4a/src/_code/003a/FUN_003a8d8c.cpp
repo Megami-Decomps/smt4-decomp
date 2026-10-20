@@ -1,25 +1,19 @@
-#include "romwright_types.h"
+#include "shard/Shard003A.h"
 
 extern "C" {
 
-int scrSetResult(int);
+extern s32 scrGetArg(s32 index);
+extern BtlStateB *btlGetMainState(void);
+extern void scrSetResult(s32 value);
 
-extern int btlGetMainState(void);
-extern int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003a8d8c(void)
-
+/* Script command: result is true when the battle's +0x2006 value is at most argument 0. */
+u32 FUN_003a8d8c(s32 argIndex)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlGetMainState();
-  scrSetResult(*(short *)(temp_v1 + 0x2006) <= temp_v0);
-  return 1;
+    s32 value = scrGetArg(argIndex);
+    BtlStateB *state = btlGetMainState();
+
+    scrSetResult(state->unk2006 <= value);
+    return 1;
 }
 
 } /* extern "C" */

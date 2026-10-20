@@ -1,27 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001a6f60(unsigned int, unsigned int);
-extern unsigned char DAT_005e2214[]; /* 0x5e2214 */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 value;
+    /* 0x08 */ u8 unk08[8];
+} Entry;                        /* 0x10 */
+extern Entry DAT_005e2214[];
 
-/* Supplied declaration required: FUN_001a6f60. */
+u32 FUN_001a6f60(u32 value, u32 arg);
 
-
-void dataTableGet(unsigned int param_1,unsigned int param_2)
-
+/* Looks up the value of entry `index` of the 0x50-entry table at 0x5E2214 (0 when out of range) and passes it, with `arg`, to FUN_001a6f60. */
+u32 dataTableGet(u32 index, u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (param_1 < 0x50) {
-    temp_v0 = *(unsigned int *)(DAT_005e2214 + param_1 * 0x10 + 4);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  FUN_001a6f60(temp_v0,param_2);
-  return;
+    u32 value;
+
+    if (index < 0x50) {
+        value = DAT_005e2214[index].value;
+    } else {
+        value = 0;
+    }
+    return FUN_001a6f60(value, arg);
 }
 
 } /* extern "C" */

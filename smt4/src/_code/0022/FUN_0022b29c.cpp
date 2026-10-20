@@ -13,11 +13,11 @@ int FUN_002be624(unsigned char [36], unsigned char *, int);
 int memClear(char [256], int);
 int FUN_00387f88(int, int);
 int FUN_00389444(int, int, int);
-int FUN_003bb5e8(int);
-int FUN_003bb5f4(int, int);
+int entryListReset(int);
+int entryListAppend(int, int);
 int FUN_003bb9d4(int);
-int FUN_003bbab0(void);
-int FUN_003bbac8(unsigned char *, unsigned int);
+int dataTable33Sub0GetCount(void);
+int dataTable33GroupGetCount(unsigned char *, unsigned int);
 int VectorSignedToFloat(...);
 
 extern unsigned char DAT_00404e04; /* 0x404e04 */
@@ -40,13 +40,13 @@ extern int FUN_002c09d0(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_00387f88. */
 /* Supplied declaration required: FUN_00389444. */
-/* Supplied declaration required: FUN_003bb5e8. */
-/* Supplied declaration required: FUN_003bb5f4. */
+/* Supplied declaration required: entryListReset. */
+/* Supplied declaration required: entryListAppend. */
 /* Supplied declaration required: FUN_003bb9d4. */
-extern int FUN_003bba2c(unsigned char *, unsigned int);
-extern int FUN_003bba68(unsigned char *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003bbab0. */
-/* Supplied declaration required: FUN_003bbac8. */
+extern int dataTable33Sub0GetRecord(unsigned char *, unsigned int);
+extern int dataTable33GroupGetRecord(unsigned char *, unsigned int, unsigned int);
+/* Supplied declaration required: dataTable33Sub0GetCount. */
+/* Supplied declaration required: dataTable33GroupGetCount. */
 
 
 void FUN_0022b29c(int param_1,int param_2,int param_3)
@@ -67,9 +67,9 @@ void FUN_0022b29c(int param_1,int param_2,int param_3)
   unsigned char temp_v8 [8];
   unsigned char temp_v9 [36];
   
-  temp_v0 = FUN_003bba2c(temp_v8,0);
+  temp_v0 = dataTable33Sub0GetRecord(temp_v8,0);
   puVar2 = temp_v8;
-  FUN_003bbab0();
+  dataTable33Sub0GetCount();
   temp_v1 = 0;
   *(unsigned int *)(param_1 + 0xd5c) = 0;
   if (0 < (int)puVar2) {
@@ -81,16 +81,16 @@ void FUN_0022b29c(int param_1,int param_2,int param_3)
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < (int)puVar2);
   }
-  FUN_003bb5e8(param_1 + 0x9c);
+  entryListReset(param_1 + 0x9c);
   if (param_3 != -1) {
     *(int *)(param_1 + 0xd64) = param_3;
   }
   else {
     *(int *)(param_1 + 0xd64) = (int)*(char *)(*(int *)(param_1 + 0xd5c) + 1);
   }
-  temp_v0 = FUN_003bba68(temp_v8,*(unsigned int *)(param_1 + 0xd64),0);
+  temp_v0 = dataTable33GroupGetRecord(temp_v8,*(unsigned int *)(param_1 + 0xd64),0);
   puVar2 = temp_v8;
-  FUN_003bbac8(puVar2,*(unsigned int *)(param_1 + 0xd64));
+  dataTable33GroupGetCount(puVar2,*(unsigned int *)(param_1 + 0xd64));
   memClear(acStack_150,0x100);
   temp_v1 = 0;
   if (temp_v1 < (int)puVar2) {
@@ -112,7 +112,7 @@ void FUN_0022b29c(int param_1,int param_2,int param_3)
         if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
            ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
           acStack_150[*(unsigned char *)(temp_v3 + 0x20)] = '\x01';
-          FUN_003bb5f4(param_1 + 0x9c,temp_v3);
+          entryListAppend(param_1 + 0x9c,temp_v3);
         }
       }
 LAB_0022b450:
@@ -142,7 +142,7 @@ LAB_0022b450:
         if (((*(short *)(temp_v3 + 0x3c) == 0) || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
            ((*(short *)(temp_v3 + 0x3e) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 == 0)))) {
           acStack_150[*(unsigned char *)(temp_v3 + 0x20)] = '\x01';
-          FUN_003bb5f4(param_1 + 0x9c,temp_v3);
+          entryListAppend(param_1 + 0x9c,temp_v3);
         }
       }
 LAB_0022b560:

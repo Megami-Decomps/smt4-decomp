@@ -15,7 +15,7 @@ int FUN_003180c4(...);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_00187010(unsigned int);
+extern int saveSlotFindById(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern char *dataTableGetEntries(void);
@@ -40,7 +40,7 @@ void FUN_00416d30(int param_1)
   FUN_002804b0("battle/Result.bf",param_1 + 0x18,0);
   FUN_002804b0("battle/ResultMsg.mbm",param_1 + 0x20,0);
   if ((-1 < (int)*(unsigned int *)(param_1 + 0x34)) &&
-     (temp_v1 = FUN_00187010(*(unsigned int *)(param_1 + 0x34) & 0xffff), temp_v1 != 0)) {
+     (temp_v1 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff), temp_v1 != 0)) {
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
     FUN_00180118(temp_v2);
     FUN_002e342c(temp_v5,temp_v2);

@@ -1,19 +1,14 @@
-#include "romwright_types.h"
+#include "shard/DriverVoice.h"
 
 extern "C" {
 
-
-void nw_snd_internal_driver_Voice_SetSurroundPan(int param_1)
-
+/* Sets the surround pan and marks it dirty, if it changed. */
+void nw_snd_internal_driver_Voice_SetSurroundPan(DriverVoice *voice, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  if (*(float *)(param_1 + 0x34) != in_s0) {
-    *(float *)(param_1 + 0x34) = in_s0;
-    *(unsigned short *)(param_1 + 0x20) = *(unsigned short *)(param_1 + 0x20) | 8;
-  }
-  return;
+    if (voice->surroundPan != value) {
+        voice->surroundPan = value;
+        voice->dirtyFlags = voice->dirtyFlags | 8;
+    }
 }
 
 } /* extern "C" */

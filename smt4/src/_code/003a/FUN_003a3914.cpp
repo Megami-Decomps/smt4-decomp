@@ -1,4 +1,4 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
@@ -6,122 +6,104 @@ int FUN_0028727c(void);
 int FUN_002917b8(void);
 int FUN_00291944(void);
 int FUN_00292c0c(void);
-int FUN_0029a128(int);
-int FUN_002a71fc(int);
+int FUN_0029a128(int a);
+int FUN_002a71fc(int a);
 int scrScriptProcessDestroy(void);
 int FUN_002a7890(void);
-int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
+int asdTMTexTableFreeEntry(int table);
+int FUN_002ae898(int table, int index);
 int FUN_002bff50(void);
 int asdMemFree(void);
-int jobStop(undefined4, int);
+int jobStop(u32 job, int mode);
+extern int jobIsValid(u32 job);
 
-typedef struct fn_003a3914_arg0 fn_003a3914_arg0;
-struct fn_003a3914_arg0 {
-    unsigned char pad_0x0[0x10];
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x14c];
-    int field_0x160; /* +0x160 */
-    int field_0x164; /* +0x164 */
-    int field_0x168; /* +0x168 */
-    int field_0x16c; /* +0x16c */
-    unsigned char pad_0x170[0x200];
-    int field_0x370; /* +0x370 */
-    int field_0x374; /* +0x374 */
-    int field_0x378; /* +0x378 */
-    unsigned char pad_0x37c[0x4e0];
-    void *field_0x85c; /* +0x85c */
-    unsigned char pad_0x860[0x154c4];
-    unsigned char field_0x15d24; /* +0x15d24 */
-    unsigned char pad_0x15d25[0x1b];
-    undefined4 field_0x15d40; /* +0x15d40 */
-    undefined4 field_0x15d44; /* +0x15d44 */
-};
+struct Object;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(struct Object *object);
+} ObjectVtbl;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Object {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Object;
 
-/* Supplied declaration required: FUN_0028727c. */
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: FUN_00291944. */
-/* Supplied declaration required: FUN_00292c0c. */
-/* Supplied declaration required: FUN_0029a128. */
-/* Supplied declaration required: FUN_002a71fc. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002a7890. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_002bff50. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
+typedef struct Scene {
+    /* 0x00000 */ u8 unk00000[0x10];
+    /* 0x00010 */ int mode;
+    /* 0x00014 */ u8 unk00014[0x14C];
+    /* 0x00160 */ int bufferA;
+    /* 0x00164 */ int bufferB;
+    /* 0x00168 */ int scriptA;
+    /* 0x0016C */ int scriptB;
+    /* 0x00170 */ u8 unk00170[0x200];
+    /* 0x00370 */ int bufferC;
+    /* 0x00374 */ int bufferD;
+    /* 0x00378 */ int scriptC;
+    /* 0x0037C */ u8 unk0037C[0x4E0];
+    /* 0x0085C */ Object *object;
+    /* 0x00860 */ u8 unk00860[0x154C4];
+    /* 0x15D24 */ int unk15D24;
+    /* 0x15D28 */ u8 unk15D28[0x18];
+    /* 0x15D40 */ u32 jobA;
+    /* 0x15D44 */ u32 jobB;
+} Scene;
 
-
-void FUN_003a3914(fn_003a3914_arg0 *param_1)
-
+void FUN_003a3914(Scene *scene)
 {
-/* irregular: 13 native warning(s); review required */
-  int temp_v0;
-  
-  int *obj = (int *)param_1->field_0x85c;
-  if (obj != 0) {
-    (**(romwright_code **)(*obj + 4))(obj);
-    param_1->field_0x85c = 0;
-  }
-  if (param_1->field_0x378 != 0) {
-    scrScriptProcessDestroy();
-    param_1->field_0x378 = 0;
-  }
-  if (param_1->field_0x370 != 0) {
-    asdMemFree();
-    param_1->field_0x370 = 0;
-  }
-  if (param_1->field_0x374 != 0) {
-    asdMemFree();
-    param_1->field_0x374 = 0;
-  }
-  FUN_002a7890();
-  temp_v0 = jobIsValid(param_1->field_0x15d40);
-  if (temp_v0 != 0) {
-    jobStop(param_1->field_0x15d40,0);
-  }
-  temp_v0 = jobIsValid(param_1->field_0x15d44);
-  if (temp_v0 != 0) {
-    jobStop(param_1->field_0x15d44,0);
-  }
-  FUN_002ae898(0x2b,0);
-  asdTMTexTableFreeEntry(0x2b);
-  if (param_1->field_0x168 != 0) {
-    scrScriptProcessDestroy();
-    param_1->field_0x168 = 0;
-  }
-  if (param_1->field_0x16c != 0) {
-    scrScriptProcessDestroy();
-    param_1->field_0x16c = 0;
-  }
-  if (param_1->field_0x160 != 0) {
-    asdMemFree();
-    param_1->field_0x160 = 0;
-  }
-  if (param_1->field_0x164 != 0) {
-    asdMemFree();
-    param_1->field_0x164 = 0;
-  }
-  if (*(int *)&param_1->field_0x15d24 != 0) {
-    FUN_0029a128(0);
-    FUN_00292c0c();
-  }
-  if (param_1->field_0x10 != 1) {
-    FUN_00291944();
-  }
-  FUN_002917b8();
-  FUN_0028727c();
-  FUN_002bff50();
-  FUN_002a71fc(1);
-  return;
+    Object *object = scene->object;
+
+    if (object != NULL) {
+        object->vtbl->destroy(object);
+        scene->object = NULL;
+    }
+    if (scene->scriptC != 0) {
+        scrScriptProcessDestroy();
+        scene->scriptC = 0;
+    }
+    if (scene->bufferC != 0) {
+        asdMemFree();
+        scene->bufferC = 0;
+    }
+    if (scene->bufferD != 0) {
+        asdMemFree();
+        scene->bufferD = 0;
+    }
+    FUN_002a7890();
+    if (jobIsValid(scene->jobA) != 0) {
+        jobStop(scene->jobA, 0);
+    }
+    if (jobIsValid(scene->jobB) != 0) {
+        jobStop(scene->jobB, 0);
+    }
+    FUN_002ae898(0x2b, 0);
+    asdTMTexTableFreeEntry(0x2b);
+    if (scene->scriptA != 0) {
+        scrScriptProcessDestroy();
+        scene->scriptA = 0;
+    }
+    if (scene->scriptB != 0) {
+        scrScriptProcessDestroy();
+        scene->scriptB = 0;
+    }
+    if (scene->bufferA != 0) {
+        asdMemFree();
+        scene->bufferA = 0;
+    }
+    if (scene->bufferB != 0) {
+        asdMemFree();
+        scene->bufferB = 0;
+    }
+    if (scene->unk15D24 != 0) {
+        FUN_0029a128(0);
+        FUN_00292c0c();
+    }
+    if (scene->mode != 1) {
+        FUN_00291944();
+    }
+    FUN_002917b8();
+    FUN_0028727c();
+    FUN_002bff50();
+    FUN_002a71fc(1);
 }
 
 } /* extern "C" */

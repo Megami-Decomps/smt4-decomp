@@ -1,25 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x0000 */ u8 unk0000[0x387C];
+    /* 0x387C */ s32 state;
+} Holder;
 
-unsigned int FUN_002cccf8(int param_1)
-
+/* Returns 1 when the state is one of 0, 6, 0x12..0x17, 0x19..0x1B and 0x28. */
+u32 FUN_002cccf8(Holder *object)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x387c);
-  if ((((temp_v0 == 0 || temp_v0 == 0x12) || (temp_v0 == 0x13 || temp_v0 == 0x14)) ||
-      (temp_v0 == 0x15 || temp_v0 == 0x16)) ||
-     (((temp_v0 == 0x17 || temp_v0 == 0x19 || (temp_v0 == 0x1a || temp_v0 == 0x1b)) ||
-      (temp_v0 == 6 || temp_v0 == 0x28)))) {
-    temp_v1 = 1;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    s32 state;
+    u32 result;
+
+    state = object->state;
+    if ((((state == 0 || state == 0x12) || (state == 0x13 || state == 0x14)) ||
+         (state == 0x15 || state == 0x16)) ||
+        (((state == 0x17 || state == 0x19 || (state == 0x1A || state == 0x1B)) ||
+          (state == 6 || state == 0x28)))) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

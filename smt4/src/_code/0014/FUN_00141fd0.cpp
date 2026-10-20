@@ -1,33 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00141fd0` (_code @ 0x141fd0, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/SoundArchiveWrapper.h"
 
 extern "C" {
 
-int nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType(void);
+s32 FUN_00141fd8(SoundArchiveRef *ref);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo(unsigned int);
-/* Supplied declaration required: nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType. */
-
-
-void FUN_00141fd0(int param_1)
-
+/* Passes the wrapper's ref on to FUN_00141fd8, the function that follows it. */
+s32 FUN_00141fd0(SoundArchiveWrapper *wrapper)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo
-                    (*(unsigned int *)(*(int *)(param_1 + 4) + 0x3c));
-  if (temp_v0 != 0) {
-    nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType();
-    return;
-  }
-  return;
+    return FUN_00141fd8(wrapper->ref);
 }
 
 } /* extern "C" */

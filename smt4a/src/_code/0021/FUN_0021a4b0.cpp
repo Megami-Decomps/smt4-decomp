@@ -16,7 +16,7 @@ int FUN_003d474c(void);
 int FUN_003dc38c(unsigned int);
 int FUN_003dea6c(unsigned int, int, int);
 int FUN_00417e08(unsigned int);
-int FUN_004da2d0(void);
+int optionsSetFlag1(void);
 
 extern int DAT_0057f28c; /* 0x57f28c */
 
@@ -35,7 +35,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_003dc38c. */
 /* Supplied declaration required: FUN_003dea6c. */
 /* Supplied declaration required: FUN_00417e08. */
-/* Supplied declaration required: FUN_004da2d0. */
+/* Supplied declaration required: optionsSetFlag1. */
 
 
 void FUN_0021a4b0(void)
@@ -56,7 +56,7 @@ void FUN_0021a4b0(void)
   temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v1 + temp_v0) * 2 + 0xad6);
   FUN_00417e08(temp_v4);
   FUN_001b34b8();
-  FUN_004da2d0();
+  optionsSetFlag1();
   FUN_003dc38c(temp_v4);
   FUN_001846d0(temp_v2 + 0x264,2);
   FUN_003dea6c(temp_v4,0,1);

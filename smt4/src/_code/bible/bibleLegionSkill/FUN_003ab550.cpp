@@ -15,7 +15,7 @@ int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
 int FUN_003aaeb0(...);
-int FUN_003acb28(void);
+int spriteTable22Acquire(void);
 int FUN_003ad0e0(void);
 
 typedef int romwright_code(...);
@@ -49,7 +49,7 @@ extern unsigned int *FUN_00233228(void);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_003aaeb0. */
-/* Supplied declaration required: FUN_003acb28. */
+/* Supplied declaration required: spriteTable22Acquire. */
 /* Supplied declaration required: FUN_003ad0e0. */
 
 
@@ -69,7 +69,7 @@ void FUN_003ab550(int *param_1)
   *(unsigned char *)(param_1 + 0x296c) = 0;
   FUN_0022e2fc(param_1 + 0x16a);
   (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  FUN_003acb28();
+  spriteTable22Acquire();
   piVar1 = (int *)0x100;
   asdMemAlloc(0x100,0x100,0,4,1);
   DAT_0043d9f8 = piVar1;

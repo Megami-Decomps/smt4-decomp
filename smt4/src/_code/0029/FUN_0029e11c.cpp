@@ -1,20 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u32 value;
+    /* 0x24 */ u8 unk24[0x3C];
+    /* 0x60 */ u8 unk60;
+    /* 0x61 */ u8 unk61;
+    /* 0x62 */ u8 disabled;
+} Obj;
 
-unsigned int FUN_0029e11c(int param_1)
-
+u32 FUN_0029e11c(Obj *obj)
 {
-  unsigned int temp_v0;
-  
-  if (*(char *)(param_1 + 0x62) == '\0') {
-    temp_v0 = *(unsigned int *)(param_1 + 0x20);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 value;
+
+    if (obj->disabled == 0) {
+        value = obj->value;
+    } else {
+        value = 0;
+    }
+    return value;
 }
 
 } /* extern "C" */

@@ -9,13 +9,13 @@ int FUN_0035e03c(...);
 int FUN_0017760c(...);
 int FUN_002b4dcc(void);
 int FUN_002b4e7c(void);
-int FUN_003df538(void);
-int FUN_003e0044(...);
-int FUN_003e00dc(...);
+int playerSyncPair2A(void);
+int playerHasFlagBit(...);
+int playerClearFlagMask(...);
 int FUN_004bcb54(int);
-int FUN_004bd340(...);
-int FUN_004bd3ec(int, int);
-int FUN_004bd400(...);
+int bitsAt60Test(...);
+int bitsAt60Set(int, int);
+int bitsAt60Clear(...);
 int SBORROW4(unsigned int, int);
 
 typedef struct fn_00287790_arg0 fn_00287790_arg0;
@@ -63,14 +63,14 @@ extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_0035e03c. */
 extern fn_00287790_arg0 *FUN_003b7430(fn_00287790_arg0 *, fn_00287790_arg1 *, int);
 extern int FUN_003d2b2c(fn_00287790_arg1 *, unsigned short);
-/* Supplied declaration required: FUN_003df538. */
-/* Supplied declaration required: FUN_003e0044. */
-/* Supplied declaration required: FUN_003e00dc. */
+/* Supplied declaration required: playerSyncPair2A. */
+/* Supplied declaration required: playerHasFlagBit. */
+/* Supplied declaration required: playerClearFlagMask. */
 extern int FUN_003e0164(void);
 /* Supplied declaration required: FUN_004bcb54. */
-/* Supplied declaration required: FUN_004bd340. */
-/* Supplied declaration required: FUN_004bd3ec. */
-/* Supplied declaration required: FUN_004bd400. */
+/* Supplied declaration required: bitsAt60Test. */
+/* Supplied declaration required: bitsAt60Set. */
+/* Supplied declaration required: bitsAt60Clear. */
 
 
 int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3,unsigned int *param_4,
@@ -122,7 +122,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
     if (temp_v7 == 0) {
       return 1;
     }
-    temp_v3 = FUN_004bd340(temp_v7,10);
+    temp_v3 = bitsAt60Test(temp_v7,10);
     if (temp_v3 != 0) {
       return 1;
     }
@@ -165,7 +165,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
       if (temp_v6 != 0) {
         temp_v7 = 0;
         do {
-          temp_v4 = FUN_003e0044(*(unsigned short *)((int)&temp_v10 + temp_v7 * 2));
+          temp_v4 = playerHasFlagBit(*(unsigned short *)((int)&temp_v10 + temp_v7 * 2));
           if (temp_v4 != 0) {
             pfVar10 = (fn_00287790_arg0 *)0x0;
             temp_v9 = 1;
@@ -192,13 +192,13 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
           }
         }
         else if (temp_v9) {
-          FUN_003df538();
+          playerSyncPair2A();
         }
       }
       else {
         temp_v6 = 0;
         do {
-          temp_v3 = FUN_004bd340(temp_v7,*(unsigned short *)((int)&temp_v10 + temp_v6 * 2));
+          temp_v3 = bitsAt60Test(temp_v7,*(unsigned short *)((int)&temp_v10 + temp_v6 * 2));
           if (temp_v3 != 0) {
             pfVar10 = (fn_00287790_arg0 *)0x0;
             temp_v9 = 1;
@@ -223,10 +223,10 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
           }
         }
         else if (temp_v9) {
-          temp_v6 = FUN_004bd340(temp_v7,2);
+          temp_v6 = bitsAt60Test(temp_v7,2);
           if (temp_v6 != 0) {
             FUN_004bcb54(temp_v7);
-            FUN_004bd3ec(temp_v7,2);
+            bitsAt60Set(temp_v7,2);
           }
           else {
             FUN_004bcb54(temp_v7);
@@ -236,10 +236,10 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
     }
     else {
       if (temp_v6 != 0) {
-        temp_v3 = FUN_003e0044(1);
+        temp_v3 = playerHasFlagBit(1);
       }
       else {
-        temp_v3 = FUN_004bd340(temp_v7,1);
+        temp_v3 = bitsAt60Test(temp_v7,1);
       }
       if (temp_v3 != 0) {
         return 1;
@@ -276,7 +276,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
         temp_v7 = FUN_003d2b2c(param_2,*(unsigned short *)(temp_v6 + 0x5e));
         if (temp_v7 != 0) {
           if (param_3 == 0) {
-            FUN_003e00dc();
+            playerClearFlagMask();
           }
           pfVar10 = (fn_00287790_arg0 *)0x0;
         }
@@ -293,7 +293,7 @@ int FUN_00287790(fn_00287790_arg0 *param_1,fn_00287790_arg1 *param_2,int param_3
 LAB_00287dec:
           if (temp_v8 != 0) {
 LAB_00287df4:
-            temp_v7 = FUN_003e0044(3);
+            temp_v7 = playerHasFlagBit(3);
             temp_v9 = temp_v7 != 0;
             temp_v4 = (int)*(short *)(temp_v6 + 0x2a);
             temp_v7 = 0;
@@ -331,7 +331,7 @@ LAB_00287df4:
 LAB_00287e74:
           if (temp_v8 != 0) {
 LAB_00287e7c:
-            temp_v7 = FUN_003e0044(3);
+            temp_v7 = playerHasFlagBit(3);
             temp_v9 = temp_v7 != 0;
             temp_v4 = (int)*(short *)(temp_v6 + 0x2c);
             temp_v7 = 0;
@@ -371,7 +371,7 @@ LAB_00287e7c:
         temp_v6 = FUN_003d2b2c(param_2,*(unsigned short *)(temp_v7 + 0x60));
         if (temp_v6 != 0) {
           if (param_3 == 0) {
-            FUN_004bd400(temp_v7);
+            bitsAt60Clear(temp_v7);
           }
           pfVar10 = (fn_00287790_arg0 *)0x0;
         }
@@ -388,7 +388,7 @@ LAB_00287e7c:
 LAB_00287f54:
           if (temp_v8 != 0) {
 LAB_00287f5c:
-            temp_v6 = FUN_004bd340(temp_v7,3);
+            temp_v6 = bitsAt60Test(temp_v7,3);
             temp_v9 = temp_v6 != 0;
             temp_v3 = (int)*(short *)(temp_v7 + 0x2a);
             temp_v6 = 0;
@@ -426,7 +426,7 @@ LAB_00287f5c:
 LAB_00287fe4:
           if (temp_v8 != 0) {
 LAB_00287fec:
-            temp_v6 = FUN_004bd340(temp_v7,3);
+            temp_v6 = bitsAt60Test(temp_v7,3);
             temp_v9 = temp_v6 != 0;
             temp_v3 = (int)*(short *)(temp_v7 + 0x2c);
             temp_v6 = 0;
@@ -493,7 +493,7 @@ LAB_00287fec:
       }
     }
     if (temp_v6 != 0) {
-      temp_v7 = FUN_003e0044(1);
+      temp_v7 = playerHasFlagBit(1);
       if (temp_v7 == 0) {
         if ((param_2->field_0x42 & 2) != 0) {
           FUN_0035e03c(temp_v11,param_2,pfVar10,param_3);
@@ -503,7 +503,7 @@ LAB_00287fec:
       }
       if (param_3 != 0) {
         if (param_4 != (unsigned int *)0x0) {
-          temp_v7 = FUN_003e0044(3);
+          temp_v7 = playerHasFlagBit(3);
           if (temp_v7 != 0) {
             *param_4 = 1;
           }
@@ -524,8 +524,8 @@ LAB_00287fec:
         }
       }
       else {
-        FUN_003e00dc(2);
-        temp_v7 = FUN_003e0044(3);
+        playerClearFlagMask(2);
+        temp_v7 = playerHasFlagBit(3);
         if (temp_v7 != 0) {
           temp_v2 = *(short *)(temp_v6 + 0x2a) + 1;
         }
@@ -548,11 +548,11 @@ LAB_00287fec:
       pfVar10 = (fn_00287790_arg0 *)0x0;
     }
     else {
-      temp_v6 = FUN_004bd340(temp_v7,1);
+      temp_v6 = bitsAt60Test(temp_v7,1);
       if (temp_v6 != 0) {
         if (param_3 != 0) {
           if (param_4 != (unsigned int *)0x0) {
-            temp_v7 = FUN_004bd340(temp_v7,3);
+            temp_v7 = bitsAt60Test(temp_v7,3);
             if (temp_v7 != 0) {
               *param_4 = 1;
             }
@@ -573,8 +573,8 @@ LAB_00287fec:
           }
         }
         else {
-          FUN_004bd400(temp_v7,2);
-          temp_v6 = FUN_004bd340(temp_v7,3);
+          bitsAt60Clear(temp_v7,2);
+          temp_v6 = bitsAt60Test(temp_v7,3);
           if (temp_v6 != 0) {
             temp_v2 = *(short *)(temp_v7 + 0x2a) + 1;
           }

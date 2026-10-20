@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0010ae04(void);
 int FUN_002eb588(int *);
-int FUN_002eee88(...);
+int arrayElementAddress_002eee88(...);
 int FUN_002ef8f8(int, int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0010ae04. */
 /* Supplied declaration required: FUN_002eb588. */
-/* Supplied declaration required: FUN_002eee88. */
+/* Supplied declaration required: arrayElementAddress_002eee88. */
 extern int FUN_002ef01c(unsigned int);
 /* Supplied declaration required: FUN_002ef8f8. */
 
@@ -34,8 +34,8 @@ void FUN_002eefc4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   temp_v2 = param_3;
   temp_v3 = param_4;
-  FUN_002eee88(param_1 + 0x9c);
-  piVar1 = (int *)FUN_002eee88(param_1 + 0x9c,param_2);
+  arrayElementAddress_002eee88(param_1 + 0x9c);
+  piVar1 = (int *)arrayElementAddress_002eee88(param_1 + 0x9c,param_2);
   temp_v0 = *piVar1;
   FUN_0010ae04();
   if (temp_v0 != 0) {

@@ -18,7 +18,7 @@ extern unsigned int FUN_002451ac(unsigned int, unsigned int);
 extern unsigned int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern unsigned short *dataTableGetEntries(void);
 /* Supplied declaration required: memClear. */
@@ -68,7 +68,7 @@ unsigned int FUN_0031cd5c(void)
       puVar4 = puVar4 + 1;
     } while (temp_v3 != 0);
   }
-  temp_v3 = FUN_002c09f4((temp_v4 - 1) & 0xffff);
+  temp_v3 = randNextInRange((temp_v4 - 1) & 0xffff);
   scrSetResult(temp_v5[temp_v3]);
   return 1;
 }

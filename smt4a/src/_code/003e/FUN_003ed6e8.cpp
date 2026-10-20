@@ -22,7 +22,7 @@ extern unsigned int DAT_00573a54; /* 0x573a54 */
 extern unsigned int DAT_00573ae8; /* 0x573ae8 */
 extern unsigned int DAT_00573aec; /* 0x573aec */
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_003eaf20. */
@@ -71,9 +71,9 @@ char FUN_003ed6e8(unsigned int *param_1)
         *puVar6 = param_1[0x135c];
         return '\x01';
       }
-      temp_v2 = FUN_001633a0(99);
+      temp_v2 = lcgRandomRange(99);
       if (temp_v2 <= (int)(unsigned int)*(unsigned char *)(temp_v1 + 0xb2)) {
-        temp_v2 = FUN_001633a0(99);
+        temp_v2 = lcgRandomRange(99);
         if (temp_v2 < 0x28) {
           temp_v1 = 1;
         }

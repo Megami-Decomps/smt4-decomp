@@ -1,22 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int * FUN_001af0d0(unsigned int *param_1,int param_2)
-
+/* Fills a two-word command (1, 0xF0000 | code) where code is 0x23C or, when `alt` is set, 0x23D; returns the address after it. */
+u32 *FUN_001af0d0(u32 *command, s32 alt)
 {
-  unsigned int temp_v0;
-  
-  if (param_2 == 0) {
-    temp_v0 = 0x23c;
-  }
-  else {
-    temp_v0 = 0x23d;
-  }
-  *param_1 = 1;
-  param_1[1] = temp_v0 | 0xf0000;
-  return param_1 + 2;
+    u32 code;
+
+    if (alt == 0) {
+        code = 0x23C;
+    } else {
+        code = 0x23D;
+    }
+    command[0] = 1;
+    command[1] = code | 0xF0000;
+    return command + 2;
 }
 
 } /* extern "C" */

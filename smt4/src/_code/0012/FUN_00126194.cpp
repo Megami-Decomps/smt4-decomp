@@ -23,7 +23,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf538. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_00126194(int param_1)
@@ -51,7 +51,7 @@ void FUN_00126194(int param_1)
     temp_v6 = (int)temp_v5;
     temp_v0 = *(char *)(param_1 + 9);
     if ((temp_v0 == '\a' || temp_v0 == '\b') || temp_v0 == '\t') {
-      temp_v3 = FUN_002c5da8(6,1,0);
+      temp_v3 = packNibblesAndByte(6,1,0);
       piVar6 = (int *)(temp_v1 + 0x12ac);
       temp_v4 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v3;
@@ -62,7 +62,7 @@ void FUN_00126194(int param_1)
       VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002b93c8(param_1 + 0x40c);
       temp_v1 = g_titleScene;
-      temp_v3 = FUN_002c5da8(6,7,0);
+      temp_v3 = packNibblesAndByte(6,7,0);
       piVar6 = (int *)(temp_v1 + 0x12ac);
       temp_v4 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v3;

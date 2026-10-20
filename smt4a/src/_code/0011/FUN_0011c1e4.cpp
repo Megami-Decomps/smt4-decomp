@@ -10,7 +10,7 @@ int FUN_0012240e(unsigned int, unsigned int, unsigned int, unsigned char [64]);
 int FUN_002e9afe(int, unsigned int);
 int FUN_002f4f00(unsigned char [64]);
 int FUN_00303cd8(unsigned char [64]);
-int FUN_003113e4(int *);
+int listHolderOwnerBack(int *);
 int FUN_003113ee(unsigned int, int, int);
 int FUN_0031144c(void);
 
@@ -33,7 +33,7 @@ extern unsigned int FUN_002e7908(unsigned char *, char **);
 extern int FUN_002ecf28(void);
 /* Supplied declaration required: FUN_002f4f00. */
 /* Supplied declaration required: FUN_00303cd8. */
-/* Supplied declaration required: FUN_003113e4. */
+/* Supplied declaration required: listHolderOwnerBack. */
 /* Supplied declaration required: FUN_003113ee. */
 /* Supplied declaration required: FUN_0031144c. */
 
@@ -75,14 +75,14 @@ void FUN_0011c1e4(int *param_1,int param_2,unsigned int param_3,unsigned int par
     }
     else {
       *param_5 = '\x01';
-      temp_v0 = FUN_003113e4(temp_v7);
+      temp_v0 = listHolderOwnerBack(temp_v7);
       temp_v2 = (char *)0x80010002;
       temp_v1 = FUN_002e7908(temp_v6,&temp_v2);
       FUN_002e9afe(temp_v0 + 0x20,temp_v1);
     }
     if (*param_5 != '\0') {
       FUN_003113ee(temp_v9,0,param_2);
-      temp_v1 = FUN_003113e4(temp_v7);
+      temp_v1 = listHolderOwnerBack(temp_v7);
       FUN_0012240e(temp_v9,temp_v1,temp_v5,temp_v4);
     }
     FUN_002f4f00(temp_v4);

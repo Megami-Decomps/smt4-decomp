@@ -1,34 +1,41 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001d1f5c(void);
-int FUN_001d2384(int);
-int FUN_001d239c(int);
+void FUN_001d1f5c(void);
+void FUN_001d2384(void *voice);
+void FUN_001d239c(void *voice);
 
-/* Supplied declaration required: FUN_001d1f5c. */
-/* Supplied declaration required: FUN_001d2384. */
-/* Supplied declaration required: FUN_001d239c. */
+typedef struct Voice {
+    /* 0x000 */ u8 unk000[0x139];
+    /* 0x139 */ u8 playing;
+    /* 0x13A */ u8 unk13A[0x72];
+    /* 0x1AC */ struct Voice *next;
+} Voice;
 
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[5];
+    /* 0x005 */ u8 active;
+    /* 0x006 */ u8 unk006[0x12A];
+    /* 0x130 */ Voice *voices;
+} Owner;
 
-void FUN_001d0b34(int param_1)
-
+/* Stops the owner's voice list: FUN_001d1f5c, then FUN_001d239c on every playing voice, FUN_001d2384 on every voice, and clears the list and the active flag. */
+void FUN_001d0b34(Owner *owner)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_001d1f5c();
-  for (temp_v0 = *(int *)(param_1 + 0x130); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x1ac)) {
-    if (*(char *)(temp_v0 + 0x139) != '\0') {
-      FUN_001d239c(temp_v0);
+    Voice *voice;
+
+    FUN_001d1f5c();
+    for (voice = owner->voices; voice != NULL; voice = voice->next) {
+        if (voice->playing != 0) {
+            FUN_001d239c(voice);
+        }
     }
-  }
-  for (temp_v0 = *(int *)(param_1 + 0x130); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x1ac)) {
-    FUN_001d2384(temp_v0);
-  }
-  *(unsigned int *)(param_1 + 0x130) = 0;
-  *(unsigned char *)(param_1 + 5) = 0;
-  return;
+    for (voice = owner->voices; voice != NULL; voice = voice->next) {
+        FUN_001d2384(voice);
+    }
+    owner->voices = NULL;
+    owner->active = 0;
 }
 
 } /* extern "C" */

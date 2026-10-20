@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_002e0798(int);
 int FUN_0034a290(void);
-int FUN_003df6a4(unsigned short [10], int);
+int playerGetWords(unsigned short [10], int);
 int FUN_003e00bc(int);
-int FUN_004bccd0(int, unsigned short [10]);
+int halves34Copy(int, unsigned short [10]);
 int FUN_004bd17c(int);
-int FUN_004bd3ec(int, int);
+int bitsAt60Set(int, int);
 int FUN_004cc8d8(int, int);
 int FUN_004ccbf0(int);
 int SBORROW4(int, int);
@@ -30,13 +30,13 @@ extern int FUN_001ab854(void);
 extern int FUN_002e5c2c(void);
 /* Supplied declaration required: FUN_0034a290. */
 extern int FUN_003df4a4(void);
-/* Supplied declaration required: FUN_003df6a4. */
-extern int FUN_003e0044(unsigned int);
+/* Supplied declaration required: playerGetWords. */
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e00bc. */
-/* Supplied declaration required: FUN_004bccd0. */
+/* Supplied declaration required: halves34Copy. */
 /* Supplied declaration required: FUN_004bd17c. */
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd3ec. */
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Set. */
 /* Supplied declaration required: FUN_004cc8d8. */
 /* Supplied declaration required: FUN_004ccbf0. */
 
@@ -92,12 +92,12 @@ unsigned int FUN_0035e03c(int param_1,int param_2,int param_3,int param_4)
     }
     else if ((param_3 == 0) && (temp_v4 = FUN_0014bef4(99), 0x18 >= temp_v4)) {
       if (temp_v9 != 0) {
-        FUN_003df6a4(temp_v12,0);
-        temp_v3 = FUN_003e0044(5);
+        playerGetWords(temp_v12,0);
+        temp_v3 = playerHasFlagBit(5);
       }
       else {
-        FUN_004bccd0(temp_v8,temp_v12);
-        temp_v3 = FUN_004bd340(temp_v8,5);
+        halves34Copy(temp_v8,temp_v12);
+        temp_v3 = bitsAt60Test(temp_v8,5);
       }
       if (temp_v3 == 0) {
         temp_v3 = 0;
@@ -111,7 +111,7 @@ unsigned int FUN_0035e03c(int param_1,int param_2,int param_3,int param_4)
           FUN_003e00bc(5);
         }
         else {
-          FUN_004bd3ec(temp_v8,5);
+          bitsAt60Set(temp_v8,5);
         }
         temp_v10 = 0;
       }

@@ -17,7 +17,7 @@ extern int DAT_00588fe8; /* 0x588fe8 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_002c7e3c(void);
-extern int FUN_003c1644(void);
+extern int fieldStateAllowsAction(void);
 
 
 void FUN_002f001c(unsigned int *param_1)
@@ -32,7 +32,7 @@ void FUN_002f001c(unsigned int *param_1)
   if ((-1 < *(short *)(DAT_00588fe8 + 0x598)) && (*(char *)(DAT_00588fe8 + 0x514) == '\x01')) {
     temp_v1 = FUN_002c7e3c();
     if ((temp_v1 != 0xe) && (temp_v1 != 7)) {
-      temp_v1 = FUN_003c1644();
+      temp_v1 = fieldStateAllowsAction();
       if (temp_v1 != 0) {
         temp_v2 = 0xf9;
         sysPlaySe(temp_v2);

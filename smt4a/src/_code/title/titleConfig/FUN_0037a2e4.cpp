@@ -16,7 +16,7 @@ int FUN_0019de98(...);
 int FUN_001a9110(...);
 int FUN_00203b40(...);
 int FUN_002804b0(...);
-int FUN_0050d794(...);
+int fillTwoWordsWithByte(...);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -63,7 +63,7 @@ extern int FUN_00162858(void);
 extern unsigned int FUN_003164ac(unsigned char);
 extern unsigned int FUN_0032b62c(unsigned char);
 extern unsigned int FUN_00358c60(unsigned char);
-/* Supplied declaration required: FUN_0050d794. */
+/* Supplied declaration required: fillTwoWordsWithByte. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -94,7 +94,7 @@ void FUN_0037a2e4(void)
   FUN_00203b40(puVar1 + 0x3c,3,3,1,0,1);
   puVar1[2] = 0;
   *(unsigned short *)((int)puVar1 + 0x1a) = 0;
-  FUN_0050d794(puVar1 + 7,0xffffffff);
+  fillTwoWordsWithByte(puVar1 + 7,0xffffffff);
   *(unsigned short *)(puVar1 + 9) = 0;
   FUN_002804b0(&LAB_0037a5a0,puVar1 + 0x55,0);
   FUN_002804b0(&LAB_0037a5b0,puVar1 + 0x56,0);

@@ -1,44 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001a6d00(unsigned char [128], int, int);
-int FUN_001ab914(int);
-int FUN_001ad150(void);
-int FUN_001ad15c(int, unsigned int);
-int sysMemClear(unsigned char [128], int);
+void FUN_001a6d00(u8 *buffer, s32 entry, s32 data);
+void FUN_001ab914(s32 entry);
+void FUN_001ad150(void);
+void FUN_001ad15c(s32 entry, u32 arg);
+void sysMemClear(u8 *block, s32 size);
+s32 FUN_001861c4(u32 a, u32 b);
+s32 FUN_001b2bd8(u32 a, s32 b, u32 c, u8 *buffer);
+s32 FUN_001b3214(u32 a);
 
-extern int FUN_001861c4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001a6d00. */
-/* Supplied declaration required: FUN_001ab914. */
-/* Supplied declaration required: FUN_001ad150. */
-/* Supplied declaration required: FUN_001ad15c. */
-extern int FUN_001b2bd8(unsigned int, int, unsigned int, unsigned char *);
-extern int FUN_001b3214(unsigned int);
-/* Supplied declaration required: sysMemClear. */
-
-
-int FUN_00191e00(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Builds and registers an entry: looks up the id for `b`, fills a 128-byte scratch buffer from it, creates the entry for (b, c), initialises it and returns it; returns 0 when any step fails. */
+s32 FUN_00191e00(u32 a, u32 b, u32 c, u32 d)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [128];
-  
-  temp_v0 = FUN_001b3214(param_2);
-  if (temp_v0 != -1) {
-    sysMemClear(temp_v2,0x80);
-    temp_v0 = FUN_001b2bd8(param_1,temp_v0,param_3,temp_v2);
-    if ((temp_v0 != 0) && (temp_v1 = FUN_001861c4(param_2,param_3), temp_v1 != 0)) {
-      FUN_001ad150();
-      FUN_001a6d00(temp_v2,temp_v1,temp_v0);
-      FUN_001ad15c(temp_v1,param_4);
-      FUN_001ab914(temp_v1);
-      return temp_v1;
+    s32 id;
+    s32 entry;
+    u8 buffer[128];
+
+    id = FUN_001b3214(b);
+    if (id != -1) {
+        sysMemClear(buffer, 0x80);
+        id = FUN_001b2bd8(a, id, c, buffer);
+        if ((id != 0) && (entry = FUN_001861c4(b, c), entry != 0)) {
+            FUN_001ad150();
+            FUN_001a6d00(buffer, entry, id);
+            FUN_001ad15c(entry, d);
+            FUN_001ab914(entry);
+            return entry;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

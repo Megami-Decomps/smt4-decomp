@@ -1,16 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Voice {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 dirtyFlags;
+    /* 0x22 */ u8 unk22[0xA];
+    /* 0x2C */ u8 panMode;
+    /* 0x2D */ u8 panCurve;
+} Voice;
 
-void nw_snd_internal_driver_Voice_SetPanMode(int param_1,unsigned char param_2)
-
+void nw_snd_internal_driver_Voice_SetPanMode(Voice *voice, u8 mode)
 {
-  if (*(unsigned char *)(param_1 + 0x2c) != param_2) {
-    *(char *)(param_1 + 0x2c) = param_2;
-    *(unsigned short *)(param_1 + 0x20) = *(unsigned short *)(param_1 + 0x20) | 8;
-  }
-  return;
+    if (voice->panMode != mode) {
+        voice->panMode = mode;
+        voice->dirtyFlags = voice->dirtyFlags | 8;
+    }
 }
 
 } /* extern "C" */

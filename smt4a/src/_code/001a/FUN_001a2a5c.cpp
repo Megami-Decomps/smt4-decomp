@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_005c0ab4; /* 0x5c0ab4 */
+extern u32 DAT_005c0ab4;
 
-
-unsigned int * FUN_001a2a5c(void)
-
+/* Returns the address of the word at 0x5C0AB4. */
+u32 *FUN_001a2a5c(void)
 {
-  return &DAT_005c0ab4;
+    return &DAT_005c0ab4;
 }
 
 } /* extern "C" */

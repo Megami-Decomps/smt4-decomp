@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 *ref;
+} Source;
 
-void FUN_0030f846(unsigned int *param_1,int param_2)
-
+/* Copies the word at 8 of the source's `ref` target into `*out`. */
+void FUN_0030f846(u32 *out, Source *source)
 {
-  *param_1 = *(unsigned int *)(*(int *)(param_2 + 0x10) + 8);
-  return;
+    *out = source->ref[2];
 }
 
 } /* extern "C" */

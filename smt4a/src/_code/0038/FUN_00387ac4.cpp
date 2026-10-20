@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0038.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+extern ScreenRef DAT_0057f0c4;
 
-
-void FUN_00387ac4(unsigned char param_1)
-
+void FUN_00387ac4(u8 value)
 {
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5ea) = param_1;
-  return;
+    DAT_0057f0c4.instance->unk5EA = value;
 }
 
 } /* extern "C" */

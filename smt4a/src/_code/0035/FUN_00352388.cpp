@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00292b84(void);
-int FUN_0032cb48(int);
+int settings5BSetValue(int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ extern unsigned char DAT_005806a0; /* 0x5806a0 */
 
 /* Supplied declaration required: FUN_00292b84. */
 extern int FUN_002d8ee0(void);
-/* Supplied declaration required: FUN_0032cb48. */
+/* Supplied declaration required: settings5BSetValue. */
 
 
 void FUN_00352388(void)
@@ -56,7 +56,7 @@ void FUN_00352388(void)
   FUN_00292b84();
   temp_v0 = FUN_002d8ee0();
   if (temp_v0 != 0) {
-    FUN_0032cb48(1);
+    settings5BSetValue(1);
     return;
   }
   return;

@@ -17,10 +17,10 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int *FUN_002e4e86(int *, unsigned int *);
+extern int *wordRefMax(int *, unsigned int *);
 extern int rt_malloc(int);
 /* Supplied declaration required: FUN_0030c588. */
-extern unsigned int FUN_00310684(unsigned int, int *);
+extern unsigned int bufGrowCapacity(unsigned int, int *);
 
 
 unsigned long long FUN_002f17e4(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -40,8 +40,8 @@ unsigned long long FUN_002f17e4(int *param_1,int param_2,unsigned int param_3,un
   param_1[2] = 0;
   temp_v2 = param_2;
   temp_v4 = param_4;
-  temp_v4 = FUN_00310684(0,param_1);
-  piVar1 = (int *)FUN_002e4e86(&temp_v2,(unsigned int *)&temp_v4);
+  temp_v4 = bufGrowCapacity(0,param_1);
+  piVar1 = (int *)wordRefMax(&temp_v2,(unsigned int *)&temp_v4);
   temp_v1 = *piVar1;
   temp_v0 = rt_malloc(temp_v1);
   *param_1 = temp_v0;

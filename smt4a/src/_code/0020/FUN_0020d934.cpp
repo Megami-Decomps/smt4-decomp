@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019de98(int, unsigned int);
 int FUN_0023f900(void);
-int FUN_00342348(int);
+int screenShowMessage(int);
 int FUN_00359b6c(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0023f900. */
-/* Supplied declaration required: FUN_00342348. */
+/* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: FUN_00359b6c. */
 
 
@@ -64,7 +64,7 @@ void FUN_0020d934(void)
     return;
   case 8:
   case 9:
-    FUN_00342348(*(unsigned short *)(DAT_0057f268 + 0x36));
+    screenShowMessage(*(unsigned short *)(DAT_0057f268 + 0x36));
     return;
   case 10:
   case 0x12:

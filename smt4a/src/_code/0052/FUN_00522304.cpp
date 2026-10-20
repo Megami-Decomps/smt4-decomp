@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00431400(unsigned char [16]);
+int wordsFlagClear(unsigned char [16]);
 int FUN_00522040(unsigned int, short **, unsigned char [12], int, int, short *);
 int FUN_00522278(...);
 int n_dbm_HierarchicalRomFileTableTemplate_nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_nn_fs_CTR_MPCore_detail_RomFsArchive_RomFsStorage_nn_fs_CTR_MPCore_detail_RomFsArchive_RomF(unsigned int, short **, int *, short **);
@@ -30,7 +30,7 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_00431400. */
+/* Supplied declaration required: wordsFlagClear. */
 extern unsigned int FUN_00501fb4(unsigned char *, int *);
 extern unsigned int FUN_00502038(unsigned char *, short **);
 /* Supplied declaration required: FUN_00522040. */
@@ -84,7 +84,7 @@ unsigned int FUN_00522304(unsigned int param_1,int *param_2,unsigned int *param_
   piStack_30 = param_2;
   temp_v22 = param_3;
   piStack_28 = param_4;
-  FUN_00431400(temp_v15);
+  wordsFlagClear(temp_v15);
   temp_v1 = nn_dbm_RomPathTool_PathParser_Initialize((unsigned int)temp_v15,param_6);
   if ((int)temp_v1 < 0) {
     return temp_v1;

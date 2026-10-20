@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u16 status;
+} Holder;
 
-unsigned short FUN_001242f0(int param_1)
-
+/* Returns the state held in the low nibble of `status`. */
+u16 FUN_001242f0(Holder *object)
 {
-  return *(unsigned short *)(param_1 + 0x3c) & 0xf;
+    return object->status & 0xF;
 }
 
 } /* extern "C" */

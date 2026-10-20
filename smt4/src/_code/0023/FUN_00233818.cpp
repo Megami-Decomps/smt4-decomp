@@ -1,27 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_002b8cc8(void);
 
-/* Supplied declaration required: FUN_002b8cc8. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ s16 count;
+} Obj;
 
-
-void FUN_00233818(int param_1)
-
+/* Runs FUN_002b8cc8 once per counted item, then clears the count. */
+void FUN_00233818(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (temp_v0 < *(short *)(param_1 + 0x30)) {
-    do {
-      FUN_002b8cc8();
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(short *)(param_1 + 0x30));
-  }
-  *(unsigned short *)(param_1 + 0x30) = 0;
-  return;
+    s32 i = 0;
+
+    if (i < obj->count) {
+        do {
+            FUN_002b8cc8();
+            i++;
+        } while (i < obj->count);
+    }
+    obj->count = 0;
 }
 
 } /* extern "C" */

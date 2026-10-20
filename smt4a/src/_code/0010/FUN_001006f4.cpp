@@ -15,7 +15,7 @@ int FUN_002e3494(...);
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_001008a2(void);
+extern int libc_strcat(void);
 /* Supplied declaration required: FUN_0010095c. */
 /* Supplied declaration required: FUN_002e3338. */
 /* Supplied declaration required: wstrlen. */
@@ -52,7 +52,7 @@ unsigned long long FUN_001006f4(int param_1,unsigned int param_2,unsigned int pa
     temp_v2 = wstrlen(temp_v0);
     asdOperatorNewC(temp_v1 + temp_v2 + 1);
     FUN_002e342c();
-    temp_v1 = FUN_001008a2();
+    temp_v1 = libc_strcat();
     FUN_002e3494(*(unsigned int *)(param_1 + 4));
     FUN_002e3494(temp_v0);
   }

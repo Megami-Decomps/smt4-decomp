@@ -32,7 +32,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_001654d8. */
 /* Supplied declaration required: FUN_001654e4. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -82,7 +82,7 @@ void FUN_003d939c(int param_1)
   case 2:
   case 0x11:
     if (*(char *)(param_1 + 0x2f5) != '\0') {
-      temp_v6 = FUN_00169294(6,1,0);
+      temp_v6 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -92,7 +92,7 @@ void FUN_003d939c(int param_1)
       }
       FUN_001634b4(param_1 + 0xac);
       temp_v8 = g_renderCtx;
-      temp_v6 = FUN_00169294(6,7,0);
+      temp_v6 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -104,7 +104,7 @@ void FUN_003d939c(int param_1)
     FUN_001634b4(param_1 + 0x20);
     break;
   case 3:
-    temp_v6 = FUN_00169294(6,7,0);
+    temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -115,7 +115,7 @@ void FUN_003d939c(int param_1)
     FUN_001634b4(param_1 + 0x20);
     temp_v8 = g_renderCtx;
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
-    temp_v6 = FUN_00169294(6,1,0);
+    temp_v6 = packNibblesAndByte(6,1,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -144,7 +144,7 @@ void FUN_003d939c(int param_1)
         if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
           efctSetSpeed();
           temp_v9 = g_renderCtx;
-          temp_v3 = FUN_00169294(6,1,0);
+          temp_v3 = packNibblesAndByte(6,1,0);
           piVar11 = (int *)(temp_v9 + 0x12b8);
           temp_v7 = piVar11[*piVar11 + 2];
           piVar11[*piVar11 + 2] = temp_v3;
@@ -160,7 +160,7 @@ void FUN_003d939c(int param_1)
           FUN_001835b4(2,0x10,temp_v6 + 0x4269,(int)(temp_v12 + (float)temp_v14 + temp_v13),
                        *(short *)(temp_v9 + 10) + temp_v8,0xc9);
           temp_v9 = g_renderCtx;
-          temp_v3 = FUN_00169294(6,7,0);
+          temp_v3 = packNibblesAndByte(6,7,0);
           piVar11 = (int *)(temp_v9 + 0x12b8);
           temp_v7 = piVar11[*piVar11 + 2];
           piVar11[*piVar11 + 2] = temp_v3;
@@ -176,7 +176,7 @@ void FUN_003d939c(int param_1)
     break;
   case 5:
     if (*(char *)(param_1 + 0x2f5) != '\0') {
-      temp_v6 = FUN_00169294(6,1,0);
+      temp_v6 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -187,7 +187,7 @@ void FUN_003d939c(int param_1)
       FUN_001634b4(param_1 + 0xac);
     }
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,7,0);
+    temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -198,7 +198,7 @@ void FUN_003d939c(int param_1)
     FUN_001634b4(param_1 + 0x20);
     temp_v8 = g_renderCtx;
     if (*(char *)(param_1 + 0x2f5) != '\0') {
-      temp_v6 = FUN_00169294(6,1,0);
+      temp_v6 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -209,7 +209,7 @@ void FUN_003d939c(int param_1)
       FUN_001634b4(param_1 + 0x138);
     }
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,7,0);
+    temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -228,7 +228,7 @@ void FUN_003d939c(int param_1)
     temp_v5 = FUN_001654e4(param_1 + 0x20);
     efctSetSpeed();
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,1,0);
+    temp_v6 = packNibblesAndByte(6,1,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -240,7 +240,7 @@ void FUN_003d939c(int param_1)
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001835b4(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,7,0);
+    temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -260,7 +260,7 @@ void FUN_003d939c(int param_1)
     FUN_00358e94(param_1 + 0xac,(int)temp_v1,(int)temp_v2);
     temp_v8 = g_renderCtx;
     if (*(int *)(param_1 + 0x2f0) == 7) {
-      temp_v6 = FUN_00169294(6,1,0);
+      temp_v6 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -276,7 +276,7 @@ void FUN_003d939c(int param_1)
   case 0xb:
   case 0xe:
     if (*(char *)(param_1 + 0x2f5) != '\0') {
-      temp_v6 = FUN_00169294(6,1,0);
+      temp_v6 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -286,7 +286,7 @@ void FUN_003d939c(int param_1)
       }
       FUN_001634b4(param_1 + 0x20);
       temp_v8 = g_renderCtx;
-      temp_v6 = FUN_00169294(6,7,0);
+      temp_v6 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -308,7 +308,7 @@ void FUN_003d939c(int param_1)
     break;
     efctSetSpeed();
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,1,0);
+    temp_v6 = packNibblesAndByte(6,1,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -318,7 +318,7 @@ void FUN_003d939c(int param_1)
     }
     FUN_001634b4(param_1 + 0xac);
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,7,0);
+    temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -330,7 +330,7 @@ void FUN_003d939c(int param_1)
     break;
   case 0xc:
   case 0x10:
-    temp_v6 = FUN_00169294(6,1,0);
+    temp_v6 = packNibblesAndByte(6,1,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -340,7 +340,7 @@ void FUN_003d939c(int param_1)
     }
     FUN_001634b4(param_1 + 0x20);
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,7,0);
+    temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -356,7 +356,7 @@ void FUN_003d939c(int param_1)
     temp_v5 = FUN_001654e4(param_1 + 0x20);
     efctSetSpeed();
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,1,0);
+    temp_v6 = packNibblesAndByte(6,1,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -368,7 +368,7 @@ void FUN_003d939c(int param_1)
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001835b4(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
     temp_v8 = g_renderCtx;
-    temp_v6 = FUN_00169294(6,7,0);
+    temp_v6 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v8 + 0x12b8);
     temp_v9 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v6;
@@ -397,7 +397,7 @@ LAB_003d9da8:
       temp_v14 = CONCAT44(temp_v5,in_s0);
       temp_v5 = FUN_001654e4(param_1 + 0x20);
       temp_v8 = g_renderCtx;
-      temp_v6 = FUN_00169294(6,1,0);
+      temp_v6 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -409,7 +409,7 @@ LAB_003d9da8:
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_001835b4(2,0x10,temp_v11,(int)(temp_v12 + (float)temp_v14),temp_v5,0xc9);
       temp_v8 = g_renderCtx;
-      temp_v6 = FUN_00169294(6,7,0);
+      temp_v6 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v6;
@@ -421,7 +421,7 @@ LAB_003d9da8:
     FUN_001634b4(param_1 + 0x20);
   }
   temp_v8 = g_renderCtx;
-  temp_v6 = FUN_00169294(6,7,0);
+  temp_v6 = packNibblesAndByte(6,7,0);
   piVar11 = (int *)(temp_v8 + 0x12b8);
   temp_v9 = piVar11[*piVar11 + 2];
   piVar11[*piVar11 + 2] = temp_v6;

@@ -1,27 +1,18 @@
-#include "romwright_types.h"
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
 
-int FUN_001397bc(unsigned short *, unsigned int);
+int FUN_001397bc(u16 *counter, u32 amount);
 
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
-
-/* Supplied declaration required: FUN_001397bc. */
-
-
-void FUN_00124594(unsigned int param_1)
-
+/* Takes `amount` off the counter (if it holds at least that much) and passes it on. */
+void FUN_00124594(u32 amount)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  
-  puVar1 = (*(unsigned short * *)((unsigned char *)&g_gameDataBlocks + 0xc));
-  if (param_1 <= *(*(unsigned short * *)((unsigned char *)&g_gameDataBlocks + 0xc))) {
-    *(*(unsigned short * *)((unsigned char *)&g_gameDataBlocks + 0xc)) = *(*(unsigned short * *)((unsigned char *)&g_gameDataBlocks + 0xc)) - (short)param_1;
-    FUN_001397bc(puVar1,param_1);
-    return;
-  }
-  return;
+    u16 *counter = g_gameDataBlocks.unk0C;
+
+    if (amount <= *g_gameDataBlocks.unk0C) {
+        *g_gameDataBlocks.unk0C = *g_gameDataBlocks.unk0C - (s16)amount;
+        FUN_001397bc(counter, amount);
+    }
 }
 
 } /* extern "C" */

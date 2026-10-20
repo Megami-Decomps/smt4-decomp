@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct FlagByteHolder {
+    /* 0x000 */ u8 unk000[0x109];
+    /* 0x109 */ u8 flag;
+} FlagByteHolder;
 
-void FUN_0010a0c4(int param_1,unsigned char param_2)
-
+/* Stores `flag` at 0x109. */
+void FUN_0010a0c4(FlagByteHolder *object, u8 flag)
 {
-  *(unsigned char *)(param_1 + 0x109) = param_2;
-  return;
+    object->flag = flag;
 }
 
 } /* extern "C" */

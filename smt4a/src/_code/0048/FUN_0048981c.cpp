@@ -11,10 +11,10 @@ int FUN_003a35a4(void);
 int FUN_003d2150(...);
 int FUN_0048816c(...);
 int FUN_0048d248(...);
-int FUN_0049277c(...);
-int FUN_00492b84(...);
+int rectRecRead(...);
+int sub68OwnerGetBlock60(...);
 int FUN_00492c18(...);
-int FUN_004d03ec(void);
+int setFullScreenRect(void);
 int FUN_004d040c(...);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
@@ -59,13 +59,13 @@ extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_0048816c. */
 /* Supplied declaration required: FUN_0048d248. */
-/* Supplied declaration required: FUN_0049277c. */
-/* Supplied declaration required: FUN_00492b84. */
+/* Supplied declaration required: rectRecRead. */
+/* Supplied declaration required: sub68OwnerGetBlock60. */
 extern int FUN_00492bc0(int);
 /* Supplied declaration required: FUN_00492c18. */
 extern int FUN_00492c5c(int);
 extern unsigned int FUN_00492c84(int);
-/* Supplied declaration required: FUN_004d03ec. */
+/* Supplied declaration required: setFullScreenRect. */
 /* Supplied declaration required: FUN_004d040c. */
 
 
@@ -101,7 +101,7 @@ unsigned int FUN_0048981c(int param_1)
   puVar8 = (unsigned char *)(param_1 + 0x7b91);
   temp_v7 = temp_v0;
   if (((*(unsigned int *)(param_1 + 0x10) & 0x2000000) != 0) &&
-     ((FUN_004d03ec(), temp_v0 == 0 || (DAT_005f1614 != '\0')))) {
+     ((setFullScreenRect(), temp_v0 == 0 || (DAT_005f1614 != '\0')))) {
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfdffffff;
   }
   temp_v0 = 0;
@@ -109,7 +109,7 @@ unsigned int FUN_0048981c(int param_1)
   do {
     temp_v4 = (unsigned int *)&temp_v6;
     temp_v5 = (unsigned int *)&uStack_54;
-    FUN_0049277c(0x13,temp_v0 + 0xfb5,temp_v9,&temp_v8);
+    rectRecRead(0x13,temp_v0 + 0xfb5,temp_v9,&temp_v8);
 LAB_004898d0:
     if (*(char *)(param_1 + 0xc) != '\0') {
 LAB_00489984:
@@ -137,12 +137,12 @@ LAB_00489984:
       if (temp_v1 != 0) {
         temp_v4 = (unsigned int *)&temp_v6;
         temp_v5 = (unsigned int *)&uStack_54;
-        FUN_0049277c(0x13,0x1237,temp_v9,&temp_v8);
+        rectRecRead(0x13,0x1237,temp_v9,&temp_v8);
       }
       else {
         temp_v4 = (unsigned int *)&temp_v6;
         temp_v5 = (unsigned int *)&uStack_54;
-        FUN_0049277c(0x13,0x1235,temp_v9,&temp_v8);
+        rectRecRead(0x13,0x1235,temp_v9,&temp_v8);
       }
       if (*(char *)(param_1 + 0xc) != '\0') goto LAB_00489984;
     }
@@ -195,7 +195,7 @@ LAB_004899f8:
             *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffcffff) | 0x2000000;
             *puVar7 = 1;
             *puVar8 = 1;
-            pfVar3 = (float *)FUN_00492b84(temp_v7);
+            pfVar3 = (float *)sub68OwnerGetBlock60(temp_v7);
             temp_v4 = (unsigned int *)romwright_f2u((float)((*pfVar3 * 2.0f)));
             temp_v5 = (unsigned int *)romwright_f2u((float)((pfVar3[1] * 2.0f)));
             FUN_00492c18(temp_v7,&temp_v4);
@@ -257,7 +257,7 @@ LAB_004899f8:
               temp_v1 = FUN_00492bc0(temp_v7);
               if (temp_v0 == temp_v1) {
                 *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
-                FUN_00492b84(temp_v7);
+                sub68OwnerGetBlock60(temp_v7);
                 temp_v10 = puVar9;
                 temp_v11 = puVar9;
                 FUN_00492c18(temp_v7,&temp_v10);
@@ -271,7 +271,7 @@ LAB_004899f8:
             }
             else {
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
-              FUN_00492b84(temp_v7);
+              sub68OwnerGetBlock60(temp_v7);
               temp_v10 = puVar9;
               temp_v11 = puVar9;
               FUN_00492c18(temp_v7,&temp_v10);
@@ -293,7 +293,7 @@ LAB_004899f8:
               temp_v1 = FUN_00492bc0(temp_v7);
               if (temp_v0 == temp_v1) {
                 *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
-                FUN_00492b84(temp_v7);
+                sub68OwnerGetBlock60(temp_v7);
                 temp_v10 = puVar9;
                 temp_v11 = puVar9;
                 FUN_00492c18(temp_v7,&temp_v10);
@@ -306,7 +306,7 @@ LAB_004899f8:
             }
             else {
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
-              FUN_00492b84(temp_v7);
+              sub68OwnerGetBlock60(temp_v7);
               temp_v10 = puVar9;
               temp_v11 = puVar9;
               FUN_00492c18(temp_v7,&temp_v10);
@@ -330,7 +330,7 @@ LAB_004899f8:
         *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffcffff) | 0x2000000;
         *puVar7 = 1;
         *puVar8 = 1;
-        pfVar3 = (float *)FUN_00492b84(temp_v7);
+        pfVar3 = (float *)sub68OwnerGetBlock60(temp_v7);
         temp_v4 = (unsigned int *)romwright_f2u((float)((*pfVar3 * 0.5f)));
         temp_v5 = (unsigned int *)romwright_f2u((float)((pfVar3[1] * 0.5f)));
         FUN_00492c18(temp_v7,&temp_v4);
@@ -364,7 +364,7 @@ LAB_004899f8:
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
               temp_v2 = FUN_00492c84(temp_v7);
               FUN_0048d248(param_1,temp_v2);
-              FUN_00492b84(temp_v7);
+              sub68OwnerGetBlock60(temp_v7);
               temp_v4 = puVar9;
               temp_v5 = puVar9;
               FUN_00492c18(temp_v7,&temp_v4);
@@ -392,7 +392,7 @@ LAB_004899f8:
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
             temp_v2 = FUN_00492c84(temp_v7);
             FUN_0048d248(param_1,temp_v2);
-            FUN_00492b84(temp_v7);
+            sub68OwnerGetBlock60(temp_v7);
             temp_v4 = puVar9;
             temp_v5 = puVar9;
             FUN_00492c18(temp_v7,&temp_v4);
@@ -403,7 +403,7 @@ LAB_004899f8:
             if (temp_v10[0x56e] != 0) {
               temp_v10[0x56e] = 0;
             }
-            FUN_00492b84(temp_v7);
+            sub68OwnerGetBlock60(temp_v7);
             temp_v4 = puVar9;
             temp_v5 = puVar9;
             FUN_00492c18(temp_v7,&temp_v4);
@@ -427,12 +427,12 @@ LAB_004899f8:
   if (temp_v1 != 0) {
     temp_v4 = (unsigned int *)&temp_v6;
     temp_v5 = (unsigned int *)&uStack_54;
-    FUN_0049277c(0x13,0x123e,temp_v9,&temp_v8);
+    rectRecRead(0x13,0x123e,temp_v9,&temp_v8);
   }
   else {
     temp_v4 = (unsigned int *)&temp_v6;
     temp_v5 = (unsigned int *)&uStack_54;
-    FUN_0049277c(0x13,0x123c,temp_v9,&temp_v8);
+    rectRecRead(0x13,0x123c,temp_v9,&temp_v8);
   }
   goto LAB_004898d0;
 }

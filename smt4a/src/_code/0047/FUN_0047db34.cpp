@@ -20,7 +20,7 @@ extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_00324c48. */
-extern char *FUN_004731a4(void);
+extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
 
 
@@ -34,7 +34,7 @@ unsigned int FUN_0047db34(unsigned int param_1,int param_2,unsigned int param_3,
   unsigned int temp_v2;
   
   temp_v2 = param_4;
-  pcVar2 = (char *)FUN_004731a4();
+  pcVar2 = (char *)gameBlockGetArea27E98();
   temp_v0 = *pcVar2;
   temp_v1 = 0;
   if (temp_v0 != '\x01') {

@@ -34,7 +34,7 @@ int FUN_00215978(int arg);
 int FUN_00284f90(int arg);
 int FUN_002a49e4(u32 owner, int kind);
 int FUN_0047e38c(void *queue);
-int FUN_0047e3e4(void *queue);
+int scriptHolderFree3(void *queue);
 int FUN_0047e4e4(void *queue);
 int FUN_004b7d88(Menu *menu);
 
@@ -48,7 +48,7 @@ void FUN_004b8a28(Menu *menu)
         return;
     }
     if (menu->phase == 1 && FUN_0047e4e4(g_aocMain->queue) != 0) {
-        FUN_0047e3e4(g_aocMain->queue);
+        scriptHolderFree3(g_aocMain->queue);
         FUN_004b7d88(menu);
         FUN_00215978(0);
         FUN_001f4e20(0, 0);

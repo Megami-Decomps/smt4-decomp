@@ -7,7 +7,7 @@ extern "C" {
 int memAlloc(int, int, int, int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_002e1450(unsigned int *);
-int FUN_00412648(unsigned int, int, int, int);
+int slotInit(unsigned int, int, int, int);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -21,8 +21,8 @@ extern unsigned char DAT_0054baf8; /* 0x54baf8 */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_002e1450. */
-/* Supplied declaration required: FUN_00412648. */
-extern unsigned int FUN_00412fd8(void);
+/* Supplied declaration required: slotInit. */
+extern unsigned int slotReset(void);
 
 
 unsigned int * FUN_002ce938(int param_1,int param_2,int param_3,unsigned short param_4)
@@ -44,9 +44,9 @@ unsigned int * FUN_002ce938(int param_1,int param_2,int param_3,unsigned short p
     temp_v2 = 0;
   }
   else {
-    temp_v2 = FUN_00412fd8();
+    temp_v2 = slotReset();
   }
-  FUN_00412648(temp_v2,0x25,param_3 * param_1 * 3,param_2 * param_1);
+  slotInit(temp_v2,0x25,param_3 * param_1 * 3,param_2 * param_1);
   *puVar1 = temp_v2;
   temp_v2 = 0x10000;
   memAlloc(0x10000,0x100,0,param_1 << 4,0x10,1);

@@ -44,7 +44,7 @@ extern unsigned int FUN_002eacbc(int);
 /* Supplied declaration required: FUN_002eb588. */
 extern int FUN_002eb6ae(int, unsigned int);
 extern int FUN_002eed8c(int);
-extern int *FUN_002eee88(int, unsigned char);
+extern int *arrayElementAddress_002eee88(int, unsigned char);
 /* Supplied declaration required: FUN_002eee90. */
 /* Supplied declaration required: FUN_002eefc4. */
 /* Supplied declaration required: FUN_002ef00c. */
@@ -108,7 +108,7 @@ void FUN_002ef34c(unsigned int param_1,int param_2,int param_3)
     if (*(short *)(param_3 + 0x120) == 0) {
       *(int *)(param_2 + 0x31c) = *(int *)(param_2 + 0x31c) + 1;
       temp_v1 = *(unsigned int *)(param_2 + 4);
-      piVar2 = (int *)FUN_002eee88(param_2 + 0x9c,*(unsigned char *)(param_3 + 0x84));
+      piVar2 = (int *)arrayElementAddress_002eee88(param_2 + 0x9c,*(unsigned char *)(param_3 + 0x84));
       temp_v0 = *piVar2;
       FUN_0010ae5a(temp_v0,param_3,temp_v2,temp_v1);
       if (temp_v0 == 0) {

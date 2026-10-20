@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail's function symbol excludes the string literal armcc emits right after the function; the code itself is identical and fdiff only reports the trailing literal-pool row(s) */
 /* Resets the object's pending state and re-registers its callback, bumping the reference count. */
 #include "common.h"
 

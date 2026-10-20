@@ -1,24 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002897b0(int);
-
-/* Supplied declaration required: FUN_002897b0. */
+int FUN_002897b0(int value);
 extern int FUN_002897e0(void);
 
-
-unsigned int FUN_003106e8(void)
-
+u32 FUN_003106e8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002897e0();
-  if (temp_v0 != 0) {
-    FUN_002897b0(1);
-  }
-  return 1;
+    if (FUN_002897e0() != 0) {
+        FUN_002897b0(1);
+    }
+    return 1;
 }
 
 } /* extern "C" */

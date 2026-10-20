@@ -1,20 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int onlineInstantiationContextClearSlot(unsigned int, unsigned int, unsigned int);
-extern unsigned int *FUN_002eeb90(unsigned int, unsigned int);
+u32 *arrayElementAddress_002eeb90(u32 table, u32 index);
+s32 onlineInstantiationContextClearSlot(u32 context, u32 a, u32 b);
 
+typedef struct SlotOwner {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u32 table;
+} SlotOwner;
 
-unsigned char FUN_001070b4(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Looks the slot up in the owner's table and returns whether clearing it succeeded. */
+u8 FUN_001070b4(SlotOwner *owner, u32 a, u32 b, u32 index)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = (unsigned int *)FUN_002eeb90(*(unsigned int *)(param_1 + 0x44),param_4);
-  temp_v0 = onlineInstantiationContextClearSlot(*puVar1,param_2,param_3);
-  return temp_v0 != 0;
+    u32 *slot = arrayElementAddress_002eeb90(owner->table, index);
+    return onlineInstantiationContextClearSlot(*slot, a, b) != 0;
 }
 
 } /* extern "C" */

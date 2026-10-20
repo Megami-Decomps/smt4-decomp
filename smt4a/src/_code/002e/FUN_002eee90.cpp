@@ -8,7 +8,7 @@ int FUN_00121240(int, unsigned int);
 int FUN_002e7526(unsigned int);
 int FUN_002eb164(unsigned char [4], int);
 int FUN_002ec674(...);
-int FUN_002ec890(unsigned char [12]);
+int destroyObj0055ae64(unsigned char [12]);
 int FUN_002ecb04(unsigned int, unsigned char [12]);
 int FUN_002ecdec(unsigned char [12], int);
 int FUN_002ece58(int, int);
@@ -32,7 +32,7 @@ extern int FUN_002eac34(unsigned int);
 /* Supplied declaration required: FUN_002eb164. */
 extern int FUN_002eb6ae(int, unsigned int);
 /* Supplied declaration required: FUN_002ec674. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ecb04. */
 /* Supplied declaration required: FUN_002ecdec. */
 extern int FUN_002ece14(int, unsigned int);
@@ -109,7 +109,7 @@ void FUN_002eee90(int param_1,int param_2,unsigned int param_3,int param_4)
       *pcVar7 = *(char *)(param_2 + 0x65) + *pcVar7;
       FUN_002ecb04(*(unsigned int *)(param_1 + 0x1c),temp_v9);
       (**(romwright_code **)(**(int **)(param_1 + 0x1c) + 0xc))(*(int **)(param_1 + 0x1c),temp_v1);
-      FUN_002ec890(temp_v9);
+      destroyObj0055ae64(temp_v9);
     }
     if (temp_v12 != 0) {
       FUN_002ece58(param_2,temp_v1);

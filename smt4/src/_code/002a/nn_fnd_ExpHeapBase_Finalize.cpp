@@ -1,21 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0035ac98(int);
+int FUN_0035ac98(u32 *block);
 
-/* Supplied declaration required: FUN_0035ac98. */
+typedef struct ExpHeapBase {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 block;
+} ExpHeapBase;
 
-
-void nn_fnd_ExpHeapBase_Finalize(int param_1)
-
+void nn_fnd_ExpHeapBase_Finalize(ExpHeapBase *heap)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x18) != 0) {
-    FUN_0035ac98(param_1 + 0x18);
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
+    if (heap->block != 0) {
+        FUN_0035ac98(&heap->block);
+        heap->block = 0;
+    }
 }
 
 } /* extern "C" */

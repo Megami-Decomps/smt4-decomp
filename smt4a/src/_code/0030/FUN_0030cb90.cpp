@@ -1,14 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030cb90` (_code @ 0x30cb90, 0x8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+__weak int FUN_0030cb90_hook(int x);
 
-void FUN_0030cb90(void)
-
+/* Passes `x` through the engine's (removed) release hook. */
+int FUN_0030cb90(int x)
 {
-  return;
+    return FUN_0030cb90_hook(x);
 }
 
 } /* extern "C" */

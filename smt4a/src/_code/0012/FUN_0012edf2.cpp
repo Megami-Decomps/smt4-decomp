@@ -22,7 +22,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002e9802. */
-extern int FUN_002e9832(int *, unsigned int *);
+extern int wordRefsDiffer_002e9832(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f12c. */
 /* Supplied declaration required: FUN_003103fa. */
 
@@ -80,7 +80,7 @@ int FUN_0012edf2(int param_1,unsigned int param_2)
   temp_v3 = 0;
   temp_v4[0] = temp_v1;
   temp_v5 = temp_v1;
-  while (temp_v1 = FUN_002e9832(temp_v4,(unsigned int *)&temp_v6), temp_v1 != 0) {
+  while (temp_v1 = wordRefsDiffer_002e9832(temp_v4,(unsigned int *)&temp_v6), temp_v1 != 0) {
     temp_v3 = temp_v3 + 1;
     FUN_002e9802(temp_v4);
   }

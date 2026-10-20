@@ -65,7 +65,7 @@ extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f5288. */
 /* Supplied declaration required: FUN_00310550. */
 /* Supplied declaration required: FUN_00343324. */
@@ -147,7 +147,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
   fStack_4c = temp_v12;
   FUN_00343324(g_titleScene,&temp_v13,0);
   temp_v0 = g_titleScene;
-  temp_v1 = FUN_002c5da8(6,7,0);
+  temp_v1 = packNibblesAndByte(6,7,0);
   piVar5 = (int *)(temp_v0 + 0x12ac);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

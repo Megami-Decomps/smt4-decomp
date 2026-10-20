@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(...);
 int FUN_00178b04(...);
-int FUN_0019f29c(int, int, int *);
+int lookupNameEntry(int, int, int *);
 int FUN_003fd784(...);
 int FUN_003fd7b4(...);
 int FUN_003fe86c(...);
@@ -37,7 +37,7 @@ extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_00102c30(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_0019f29c. */
+/* Supplied declaration required: lookupNameEntry. */
 /* Supplied declaration required: FUN_003fd784. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -136,7 +136,7 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
     do {
       temp_v2 = FUN_00102c30(*(unsigned int *)(temp_v8 + temp_v0 * 0xc + 0x14),&LAB_00407e80);
       if (temp_v2 != 0) {
-        FUN_0019f29c(temp_v9,temp_v2,&temp_v12);
+        lookupNameEntry(temp_v9,temp_v2,&temp_v12);
         param_1[param_1[3] * 3 + 0x188] = temp_v12;
         param_1[param_1[3] * 3 + 0x189] = temp_v13;
         param_1[param_1[3] * 3 + 0x18a] = temp_v14;

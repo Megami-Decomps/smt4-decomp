@@ -1,23 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct SectionRef {
+    /* 0x0 */ u16 kind;
+    /* 0x2 */ u16 unk2;
+    /* 0x4 */ s32 offset;
+    /* 0x8 */ u32 size;
+} SectionRef;
 
-int nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlock(int param_1)
+typedef struct WaveArchiveHeader {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ SectionRef sections[2];
+} WaveArchiveHeader;
 
+/* Finds the info block section (kind 0x6800) and returns the block's address. */
+s32 nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlock(WaveArchiveHeader *header)
 {
-  int temp_v0;
-  
-  if (*(short *)(param_1 + 0x14) == 0x6800) {
-    temp_v0 = param_1 + 0x14;
-  }
-  else if (*(short *)(param_1 + 0x20) == 0x6800) {
-    temp_v0 = param_1 + 0x20;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return param_1 + *(int *)(temp_v0 + 4);
+    SectionRef *section;
+
+    if (header->sections[0].kind == 0x6800) {
+        section = &header->sections[0];
+    } else if (header->sections[1].kind == 0x6800) {
+        section = &header->sections[1];
+    } else {
+        section = NULL;
+    }
+    return (s32)header + section->offset;
 }
 
 } /* extern "C" */

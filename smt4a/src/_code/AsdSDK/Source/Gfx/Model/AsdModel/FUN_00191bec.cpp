@@ -64,7 +64,7 @@ extern int FUN_00152f54(void);
 extern int FUN_001696f4(void);
 /* Supplied declaration required: FUN_0019c914. */
 extern int FUN_0019e31c(void);
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
 
@@ -132,7 +132,7 @@ LAB_00191d04:
   *(unsigned int *)(temp_v1 + 0x14) = *(unsigned int *)(temp_v0 + 0x1c);
   *(unsigned int *)(temp_v1 + 0x18) = temp_v2;
   *(unsigned int *)(temp_v1 + 0x1c) = temp_v3;
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c2c), temp_v1 != 0)) {
+  if (((DAT_005c4c2c & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v1 != 0)) {
     DAT_0064c054 = 0x3f800000;
     DAT_0064c058 = 0;
     DAT_0064c05c = 0;

@@ -1,8 +1,9 @@
-/* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before the item allocation. */
+/* NON_MATCHING: retail has the view-cursor getter inlined by armlink (`add r0,r4,#12; ldr r0,[r0,#28]` where this loads the cursor directly), and keeps listBox/label in r6/r7 the other way round. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-extern u8 LAB_002e11f0; /* item callback */
+extern const char DAT_00409d40[]; /* AsdListBox.cpp: __FILE__ */
 
 AsdListBoxModel *jobGetWork(AsdListBox *listBox);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -15,13 +16,16 @@ char *strncpy(char *dst, const char *src, u32 n);
 u32 asdListBoxAddItem(AsdListBox *listBox, const char *label)
 {
     AsdListBoxModel *model = jobGetWork(listBox);
-    AsdListBoxItem *item = (AsdListBoxItem *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdListBoxItem), 1);
+    AsdListBoxItem *item;
+
+    asdDebugTrace(DAT_00409d40, 1011);
+    item = (AsdListBoxItem *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdListBoxItem), 1);
 
     strncpy(item->label, label, ASD_LISTBOX_PATH_LEN);
     item->type = 0;
     item->id = model->nextItemId;
     model->nextItemId++;
-    asdListAdd(model, item, &LAB_002e11f0);
+    asdListAdd(model, item, (void *)0x002e11f0 /* item callback */);
     asdListBoxMarkDirty(listBox);
     asdListBoxViewRefresh(model->view);
     model->selectedCursor = model->viewCursor;

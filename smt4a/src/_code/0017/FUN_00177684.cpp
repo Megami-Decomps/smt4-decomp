@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017dd84(void);
-int FUN_0019601c(...);
+int asdGfxCmdBufferForward8(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -29,7 +29,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_0017dd84. */
-/* Supplied declaration required: FUN_0019601c. */
+/* Supplied declaration required: asdGfxCmdBufferForward8. */
 
 
 void FUN_00177684(unsigned int *param_1,unsigned int param_2,int param_3)
@@ -203,7 +203,7 @@ void FUN_00177684(unsigned int *param_1,unsigned int param_2,int param_3)
     if ((param_2 & 1) != 0) {
       temp_v3 = *param_1;
     }
-    FUN_0019601c(temp_v3,temp_v5,temp_v7,temp_v6,temp_v2,temp_v8,temp_v11,temp_v9);
+    asdGfxCmdBufferForward8(temp_v3,temp_v5,temp_v7,temp_v6,temp_v2,temp_v8,temp_v11,temp_v9);
   }
   return;
 }

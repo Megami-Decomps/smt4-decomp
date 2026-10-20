@@ -24,13 +24,13 @@ extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002ee774(unsigned int **, unsigned int *);
+extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002ee938. */
 extern int FUN_002ee96a(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ee978. */
 /* Supplied declaration required: FUN_002fe1b8. */
 /* Supplied declaration required: FUN_002fe35c. */
-extern int FUN_002fe38c(int *, unsigned int *);
+extern int wordRefsDiffer_002fe38c(int *, unsigned int *);
 
 
 unsigned char FUN_002ee64c(int param_1,unsigned int param_2)
@@ -64,7 +64,7 @@ unsigned char FUN_002ee64c(int param_1,unsigned int param_2)
       do {
         temp_v4 = (unsigned int *)*temp_v4;
         temp_v7 = *(unsigned int *)(param_1 + 0x2c);
-        temp_v0 = FUN_002ee774(&temp_v4,(unsigned int *)&temp_v7);
+        temp_v0 = wordRefsDiffer_002ee774(&temp_v4,(unsigned int *)&temp_v7);
         if (temp_v0 == 0) {
           temp_v5 = *(int *)(*(int *)(param_1 + 0x104) + 8);
           goto LAB_002ee75a;
@@ -95,7 +95,7 @@ unsigned char FUN_002ee64c(int param_1,unsigned int param_2)
   return temp_v2;
 LAB_002ee75a:
   temp_v8 = *(unsigned int *)(param_1 + 0x104);
-  temp_v0 = FUN_002fe38c(&temp_v5,(unsigned int *)&temp_v8);
+  temp_v0 = wordRefsDiffer_002fe38c(&temp_v5,(unsigned int *)&temp_v8);
   if (temp_v0 == 0) {
     FUN_002e6e5c(temp_v3);
     return 1;

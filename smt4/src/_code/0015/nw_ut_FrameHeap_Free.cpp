@@ -1,50 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_ut_FrameHeap_Free` (_code @ 0x1500b4, 0x90 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: everything matches (the tail call to the next function is armlink's nop) except the final `tailTop = tailBase` store, which retail does through r1 where this build reuses r0. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a7d70(...);
+/* A state record saved on the heap (a chain through `next`). */
+typedef struct FrameHeapState {
+    u8 unk00[8];
+    u32 tail;                       /* 0x08 */
+    struct FrameHeapState *next;    /* 0x0C */
+} FrameHeapState;
 
-typedef struct fn_001500b4_arg0 fn_001500b4_arg0;
-struct fn_001500b4_arg0 {
-    unsigned char pad_0x0[0xc];
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x14];
-    int field_0x28; /* +0x28 */
-    int field_0x2c; /* +0x2c */
-    void *field_0x30; /* +0x30 */
-};
+/* A frame heap grows from `head` upwards and from `tail` downwards. */
+typedef struct FrameHeap {
+    u8 unk00[0xc];
+    u32 headBase;                   /* 0x0C: first byte of the head side */
+    u32 tailBase;                   /* 0x10: end of the tail side */
+    u8 unk14[0x14];
+    u32 headTop;                    /* 0x28: next free byte from the head */
+    u32 tailTop;                    /* 0x2C: lowest used byte from the tail */
+    FrameHeapState *states;         /* 0x30 */
+} FrameHeap;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+__weak FrameHeap *nw_ut_FrameHeap_FreeHook(FrameHeap *heap);
+FrameHeap *FUN_00150140(FrameHeap *heap); /* returns its argument; follows this function */
+void FUN_002a7d70(FrameHeap *heap, u32 start, u32 size);
 
-/* Supplied declaration required: FUN_002a7d70. */
-
-
-int nw_ut_FrameHeap_Free(fn_001500b4_arg0 *param_1,unsigned int param_2)
-
+/* Releases the head side (bit 0) and/or the tail side (bit 1) of the heap. */
+FrameHeap *nw_ut_FrameHeap_Free(FrameHeap *heap, u32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  void *pvVar1;
-  
-  if ((param_2 & 1) != 0) {
-    FUN_002a7d70(param_1,param_1->field_0xc,param_1->field_0x28 - param_1->field_0xc);
-    param_1->field_0x30 = (void *)0x0;
-    param_1->field_0x28 = param_1->field_0xc;
-  }
-  if ((param_2 & 2) != 0) {
-    FUN_002a7d70(param_1,param_1->field_0x2c,param_1->field_0x10 - param_1->field_0x2c);
-    for (pvVar1 = param_1->field_0x30; pvVar1 != (void *)0x0; pvVar1 = *(void **)((int)pvVar1 + 0xc)
-        ) {
-      *(int *)((int)pvVar1 + 8) = param_1->field_0x10;
+    nw_ut_FrameHeap_FreeHook(heap);
+    if (mode & 1) {
+        FUN_002a7d70(heap, heap->headBase, heap->headTop - heap->headBase);
+        heap->headTop = heap->headBase;
+        heap->states = NULL;
     }
-    param_1->field_0x2c = param_1->field_0x10;
-  }
-  return (int)param_1;
+    if (mode & 2) {
+        FrameHeapState *state;
+
+        FUN_002a7d70(heap, heap->tailTop, heap->tailBase - heap->tailTop);
+        for (state = heap->states; state != NULL; state = state->next) {
+            state->tail = heap->tailBase;
+        }
+        heap->tailTop = heap->tailBase;
+    }
+    return FUN_00150140(heap);
 }
 
 } /* extern "C" */

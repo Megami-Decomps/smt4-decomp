@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(void);
 int FUN_003ee0c0(void);
 int FUN_003f0e20(int, int);
-int FUN_004bd3ec(...);
+int bitsAt60Set(...);
 int FUN_004fb43c(...);
 int FUN_004fbc30(...);
 int FUN_004fbe50(...);
@@ -43,7 +43,7 @@ extern int FUN_001ab854(int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004bd3ec. */
+/* Supplied declaration required: bitsAt60Set. */
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fbc30. */
@@ -78,7 +78,7 @@ unsigned int FUN_002f8edc(void)
   else {
     temp_v0 = FUN_001ab854(temp_v0 - 0x6d);
     *(unsigned short *)(temp_v0 + 0x2a) = 0;
-    FUN_004bd3ec(temp_v0,1);
+    bitsAt60Set(temp_v0,1);
     FUN_004fbfbc(0,temp_v1,0xf);
   }
   FUN_004fb43c(0,temp_v1,0x10000cd,1,0,0,0);

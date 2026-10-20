@@ -41,8 +41,8 @@ extern int FUN_002c2c68(int);
 extern int FUN_00348ed0(int);
 /* Supplied declaration required: FUN_003d18e0. */
 extern int FUN_003df004(unsigned int, int, int *);
-extern int FUN_00418584(unsigned int);
-extern int FUN_004185ec(unsigned short);
+extern int partyEntryFlagsBit3(unsigned int);
+extern int partyEntryFlagsBit1(unsigned short);
 
 
 void FUN_001ff724(void)
@@ -87,7 +87,7 @@ void FUN_001ff724(void)
             temp_v1 = 0;
             do {
               temp_v3 = FUN_003df004(temp_v7,temp_v1,temp_v10);
-              if ((temp_v3 != 0) && ((temp_v3 = FUN_00418584(temp_v7), temp_v3 != 0 || (0 < temp_v10[0]))))
+              if ((temp_v3 != 0) && ((temp_v3 = partyEntryFlagsBit3(temp_v7), temp_v3 != 0 || (0 < temp_v10[0]))))
               goto LAB_001ff908;
               temp_v1 = temp_v1 + 1;
             } while (temp_v1 < 4);
@@ -154,7 +154,7 @@ LAB_001ff908:
   } while( 1 );
   while (temp_v6 = temp_v6 + 1, temp_v6 < temp_v9) {
 LAB_001ff990:
-    temp_v4 = FUN_004185ec(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0xa10));
+    temp_v4 = partyEntryFlagsBit1(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0xa10));
     if (temp_v4 != 0) {
       FUN_002a4964(temp_v1,temp_v6);
       break;
@@ -165,7 +165,7 @@ LAB_001ff9d0:
   if (0 < temp_v8) {
     do {
       temp_v6 = temp_v5 + temp_v9 * 2;
-      temp_v4 = FUN_004185ec(*(unsigned short *)(temp_v6 + 0xad6));
+      temp_v4 = partyEntryFlagsBit1(*(unsigned short *)(temp_v6 + 0xad6));
       if (temp_v4 != 0) {
         temp_v7 = (unsigned int)*(unsigned short *)(temp_v6 + 0xad6);
         FUN_001ad9b4();

@@ -1,35 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a4584(unsigned int, unsigned char [128], unsigned int, int, int, int, int);
-int memClear(unsigned char [128], int);
+int FUN_002a4584(u32 a, u8 *buffer, u32 b, int c, int d, int e, int f);
+int memClear(u8 *ptr, int size);
+extern u32 g_aocDisplay; /* 0x433130 */
+extern int FUN_002a6e7c(u32 a, u32 b, u32 c, u8 *buffer);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-} param_3_stack;
-
-extern unsigned int g_aocDisplay; /* 0x433130 */
-
-/* Supplied declaration required: FUN_002a4584. */
-extern int FUN_002a6e7c(unsigned int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: memClear. */
-
-
-void FUN_00289d74(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+void FUN_00289d74(u32 a, u32 b, u32 c)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [128];
-  
-  memClear(temp_v1,0x80);
-  temp_v0 = FUN_002a6e7c(param_1,8,param_2,temp_v1);
-  if (temp_v0 != 0) {
-    FUN_002a4584(g_aocDisplay,temp_v1,param_3,temp_v0 + 8,1,0x80,0);
-  }
-  return;
+    int result;
+    u8 buffer[128];
+
+    memClear(buffer, 0x80);
+    result = FUN_002a6e7c(a, 8, b, buffer);
+    if (result != 0) {
+        FUN_002a4584(g_aocDisplay, buffer, c, result + 8, 1, 0x80, 0);
+    }
 }
 
 } /* extern "C" */

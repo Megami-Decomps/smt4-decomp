@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002e6da8(int, unsigned int);
+int emptyStub_002e6da8(int, unsigned int);
 
-/* Supplied declaration required: FUN_002e6da8. */
+/* Supplied declaration required: emptyStub_002e6da8. */
 
 
 void FUN_002e6d50(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002e6da8(8,param_1);
+  emptyStub_002e6da8(8,param_1);
   return;
 }
 

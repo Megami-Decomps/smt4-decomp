@@ -10,7 +10,7 @@ int FUN_002e6e14(...);
 int FUN_0030798e(unsigned int, int, unsigned int, int *);
 int FUN_003079ae(...);
 int FUN_003079c6(...);
-int FUN_0030fcf6(...);
+int vectorCount8_0030fcf6(...);
 
 /* stack frame of param_4: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -24,14 +24,14 @@ typedef struct {
 extern unsigned int FUN_001321fc(int *);
 /* Supplied declaration required: FUN_00135ae4. */
 /* Supplied declaration required: FUN_00135b4a. */
-extern int *FUN_002e4e86(int *, unsigned int *);
+extern int *wordRefMax(int *, unsigned int *);
 /* Supplied declaration required: FUN_002e6e14. */
 extern int FUN_00307984(int *, int, int);
 /* Supplied declaration required: FUN_0030798e. */
 /* Supplied declaration required: FUN_003079ae. */
 /* Supplied declaration required: FUN_003079c6. */
-/* Supplied declaration required: FUN_0030fcf6. */
-extern unsigned int FUN_0030fcfe(unsigned int, int *);
+/* Supplied declaration required: vectorCount8_0030fcf6. */
+extern unsigned int vectorGrowCapacity_0030fcfe(unsigned int, int *);
 
 
 void FUN_001340c6(int *param_1,int param_2,int param_3,unsigned int param_4)
@@ -58,7 +58,7 @@ void FUN_001340c6(int *param_1,int param_2,int param_3,unsigned int param_4)
     temp_v9 = param_2;
     iStack_1c = param_3;
     temp_v10 = param_4;
-    temp_v0 = FUN_0030fcf6();
+    temp_v0 = vectorCount8_0030fcf6();
     temp_v1 = FUN_001321fc(param_1);
     temp_v6 = param_3 * 8;
     if (temp_v1 >= (unsigned int)(temp_v0 + param_3)) {
@@ -78,18 +78,18 @@ void FUN_001340c6(int *param_1,int param_2,int param_3,unsigned int param_4)
       FUN_00135b4a(temp_v9,temp_v1,temp_v10);
     }
     else {
-      temp_v3 = FUN_0030fcf6(param_1);
-      temp_v8 = FUN_0030fcfe(temp_v3,param_1);
-      temp_v7 = FUN_0030fcf6(param_1);
+      temp_v3 = vectorCount8_0030fcf6(param_1);
+      temp_v8 = vectorGrowCapacity_0030fcfe(temp_v3,param_1);
+      temp_v7 = vectorCount8_0030fcf6(param_1);
       temp_v7 = temp_v7 + param_3;
-      piVar5 = (int *)FUN_002e4e86(&temp_v7,(unsigned int *)&temp_v8);
+      piVar5 = (int *)wordRefMax(&temp_v7,(unsigned int *)&temp_v8);
       temp_v0 = *piVar5;
       temp_v4 = FUN_00307984(param_1,temp_v0,*param_1);
       FUN_003079c6(*param_1,temp_v9,temp_v4,param_1);
       FUN_0030798e(((temp_v9 - *param_1) & 0xfffffff8U) + temp_v4,param_3,temp_v10,param_1);
       FUN_003079c6(temp_v9,param_1[1],(((temp_v9 - *param_1) >> 3) + param_3) * 8 + temp_v4,param_1)
       ;
-      temp_v5 = FUN_0030fcf6(param_1);
+      temp_v5 = vectorCount8_0030fcf6(param_1);
       FUN_003079ae(param_1,*param_1,param_1[1]);
       FUN_002e6e14(*param_1);
       *param_1 = temp_v4;

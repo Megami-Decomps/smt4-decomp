@@ -1,20 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard003B.h"
 
 extern "C" {
 
-extern int DAT_0057f268; /* 0x57f268 */
+extern StateHolder1C *DAT_0057f268;
 
-
-int FUN_003b6fc4(void)
-
+s32 FUN_003b6fc4(void)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (DAT_0057f268 != 0) {
-    temp_v0 = (int)*(short *)(DAT_0057f268 + 0x3c);
-  }
-  return temp_v0;
+    s32 value = 0;
+
+    if (DAT_0057f268 != NULL) {
+        value = DAT_0057f268->unk3C;
+    }
+    return value;
 }
 
 } /* extern "C" */

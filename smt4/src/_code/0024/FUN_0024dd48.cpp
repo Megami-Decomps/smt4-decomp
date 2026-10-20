@@ -1,23 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b1b8c(int, int);
+int FUN_001b1b8c(void *node, int flag);
 
-/* Supplied declaration required: FUN_001b1b8c. */
+typedef struct Node {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ struct Node *next;
+} Node;
 
-
-void FUN_0024dd48(int param_1)
-
+void FUN_0024dd48(Node *node)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_001b1b8c(param_1,1);
-  for (temp_v0 = *(int *)(param_1 + 0x34); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x34)) {
-    FUN_001b1b8c(temp_v0,0);
-  }
-  return;
+    Node *child;
+
+    FUN_001b1b8c(node, 1);
+    for (child = node->next; child != NULL; child = child->next) {
+        FUN_001b1b8c(child, 0);
+    }
 }
 
 } /* extern "C" */

@@ -8,7 +8,7 @@ int FUN_0010b250(unsigned int, int, unsigned int);
 int FUN_002e75fa(unsigned int);
 int strInit(unsigned char [32]);
 int FUN_002ec75c(unsigned char [28]);
-int FUN_002ec890(unsigned char [28]);
+int destroyObj0055ae64(unsigned char [28]);
 int strDestroy(unsigned char [32]);
 int FUN_002ee524(unsigned char [24], unsigned char [32]);
 int FUN_002ee54c(unsigned char [24]);
@@ -32,7 +32,7 @@ extern unsigned int FUN_001214f8(int, unsigned char *, unsigned int, unsigned in
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: strInit. */
 /* Supplied declaration required: FUN_002ec75c. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee524. */
 /* Supplied declaration required: FUN_002ee54c. */
@@ -43,7 +43,7 @@ extern int FUN_00301e8c(unsigned int, int, unsigned char *);
 extern unsigned int FUN_00303146(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_003031e4. */
 /* Supplied declaration required: FUN_00310dc6. */
-extern unsigned int FUN_00310e4e(unsigned char *, unsigned int);
+extern unsigned int vectorOwnerResize(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00310e5e. */
 
 
@@ -73,7 +73,7 @@ void FUN_0011dcb8(int param_1)
     FUN_002ec75c(temp_v6);
     strInit(temp_v4);
     FUN_002ee524(temp_v5,temp_v3);
-    temp_v1 = FUN_00310e4e(temp_v6,0x20);
+    temp_v1 = vectorOwnerResize(temp_v6,0x20);
     FUN_00310dc6(temp_v5,temp_v1,0x100);
     FUN_003031e4(temp_v5,&temp_v2);
     FUN_00303038(temp_v5,temp_v4);
@@ -91,7 +91,7 @@ void FUN_0011dcb8(int param_1)
     FUN_002e75fa(temp_v1);
     FUN_002ee54c(temp_v5);
     strDestroy(temp_v4);
-    FUN_002ec890(temp_v6);
+    destroyObj0055ae64(temp_v6);
     strDestroy(temp_v3);
   }
   FUN_00310e5e(param_1,*(unsigned char *)(param_1 + 0x90));

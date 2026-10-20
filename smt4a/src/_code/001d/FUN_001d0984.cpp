@@ -1,18 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001c7bf0(unsigned int, unsigned int);
+void FUN_001c7bf0(u32 channel, u32 value);
 
-/* Supplied declaration required: FUN_001c7bf0. */
+typedef struct Words {
+    /* 0x00 */ u32 words[1];
+} Words;
 
-
-void FUN_001d0984(int param_1,int param_2,unsigned int param_3)
-
+/* Calls FUN_001c7bf0 with word `index` of the object and `value`. */
+void FUN_001d0984(Words *object, s32 index, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001c7bf0(*(unsigned int *)(param_1 + param_2 * 4),param_3);
-  return;
+    FUN_001c7bf0(object->words[index], value);
 }
 
 } /* extern "C" */

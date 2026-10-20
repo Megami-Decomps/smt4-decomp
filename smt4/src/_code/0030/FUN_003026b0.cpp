@@ -1,26 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003026b0` (_code @ 0x3026b0, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Replaces the object's resource (+0x44): releases the old one, if any, then creates a new one for `arg`. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002491b4(void);
-int FUN_0025715c(void);
+struct Obj003026b0 {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ void *resource;
+};
 
-/* Supplied declaration required: FUN_002491b4. */
-/* Supplied declaration required: FUN_0025715c. */
+void FUN_0025715c(void *resource);
+void *FUN_002491b4(u32 arg);
 
-
-void FUN_003026b0(int param_1,unsigned int param_2)
-
+void FUN_003026b0(Obj003026b0 *obj, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x44) != 0) {
-    FUN_0025715c();
-  }
-  FUN_002491b4();
-  *(unsigned int *)(param_1 + 0x44) = param_2;
-  return;
+    if (obj->resource != NULL) {
+        FUN_0025715c(obj->resource);
+    }
+    obj->resource = FUN_002491b4(arg);
 }
 
-} /* extern "C" */
+}

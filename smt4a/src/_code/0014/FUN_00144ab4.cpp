@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00154180(int, int, int, int);
 int FUN_00154d68(unsigned char *, unsigned char *, unsigned int, unsigned int);
-int FUN_00161044(unsigned int);
+int asdGfxSetMode(unsigned int);
 int FUN_00161074(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned char DAT_0063ff88; /* 0x63ff88 */
 
 /* Supplied declaration required: FUN_00154180. */
 /* Supplied declaration required: FUN_00154d68. */
-/* Supplied declaration required: FUN_00161044. */
+/* Supplied declaration required: asdGfxSetMode. */
 /* Supplied declaration required: FUN_00161074. */
 
 
@@ -83,7 +83,7 @@ void FUN_00144ab4(int param_1)
   puVar1 = DAT_0063fef4;
   if (DAT_0063ff7c == 1) {
     temp_v2 = DAT_0063fef4[5];
-    FUN_00161044(*DAT_0063fef4);
+    asdGfxSetMode(*DAT_0063fef4);
     FUN_00161074(puVar1[temp_v2 + 2]);
     return;
   }

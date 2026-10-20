@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x0000 */ u8 unk0000[0x3894];
+    /* 0x3894 */ u8 value;
+} Holder;
 
-unsigned char FUN_002ccd58(int param_1,unsigned int param_2)
-
+/* Returns whether the byte at 0x3894 equals `value`. */
+u8 FUN_002ccd58(Holder *object, u32 value)
 {
-  return *(unsigned char *)(param_1 + 0x3894) == param_2;
+    return object->value == value;
 }
 
 } /* extern "C" */

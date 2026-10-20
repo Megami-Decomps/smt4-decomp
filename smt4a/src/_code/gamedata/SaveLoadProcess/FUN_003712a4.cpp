@@ -14,7 +14,7 @@ int FUN_002f4374(void);
 int FUN_00388068(void);
 int FUN_003fd63c(int, int);
 int FUN_0046e238(unsigned int);
-int FUN_004bd400(int, int);
+int bitsAt60Clear(int, int);
 int FUN_004d0c4c(void);
 int FUN_004d0d70(void);
 int rt_memcpy_w(unsigned int, int, int);
@@ -46,12 +46,12 @@ extern unsigned int FUN_00261458(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: FUN_002c9104. */
 /* Supplied declaration required: FUN_002f4374. */
-extern int FUN_003332d8(void);
+extern int byte1IsZero(void);
 /* Supplied declaration required: FUN_00388068. */
 /* Supplied declaration required: FUN_003fd63c. */
 /* Supplied declaration required: FUN_0046e238. */
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd400. */
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: FUN_004d0c4c. */
 /* Supplied declaration required: FUN_004d0d70. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -94,7 +94,7 @@ unsigned int FUN_003712a4(void)
   case 7:
     temp_v4 = FUN_00229c9c();
     if (temp_v4 != 1) goto joined_r0x003716c0;
-    temp_v4 = FUN_003332d8();
+    temp_v4 = byte1IsZero();
     if (temp_v4 == 0) {
       temp_v4 = *(int *)(temp_v1 + 8);
       temp_v6 = FUN_00261458();
@@ -140,15 +140,15 @@ unsigned int FUN_003712a4(void)
           do {
             temp_v2 = FUN_001ab854(temp_v4);
             if (((temp_v2 != 0) && (*(short *)(temp_v2 + 0x62) == 0)) &&
-               (temp_v3 = FUN_004bd340(temp_v2,2), temp_v3 != 0)) {
-              FUN_004bd400(temp_v2,4);
+               (temp_v3 = bitsAt60Test(temp_v2,2), temp_v3 != 0)) {
+              bitsAt60Clear(temp_v2,4);
             }
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 0x18);
           temp_v4 = 0;
           do {
             temp_v2 = FUN_001ab854(temp_v4);
-            if ((temp_v2 != 0) && (temp_v2 = FUN_004bd340(temp_v2,2), temp_v2 != 0)) goto LAB_0037156c;
+            if ((temp_v2 != 0) && (temp_v2 = bitsAt60Test(temp_v2,2), temp_v2 != 0)) goto LAB_0037156c;
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 0x18);
           temp_v4 = FUN_0014af84();
@@ -195,7 +195,7 @@ LAB_0037156c:
   case 9:
     temp_v4 = FUN_00229c9c();
     if (temp_v4 == 1) {
-      temp_v4 = FUN_003332d8();
+      temp_v4 = byte1IsZero();
       if (temp_v4 == 0) {
         puVar13 = *(unsigned int **)(temp_v1 + 8);
         puVar6 = (unsigned int *)FUN_00239294();

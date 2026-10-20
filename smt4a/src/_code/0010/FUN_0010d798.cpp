@@ -8,11 +8,11 @@ int strInit(unsigned char [32]);
 int FUN_002e9300(...);
 int FUN_002e9318(...);
 int FUN_002e9520(...);
-int FUN_002ea0e4(...);
+int constructObj0055affc(...);
 int FUN_002ea2e8(...);
 int FUN_002ea3a8(...);
 int FUN_002ec70c(...);
-int FUN_002ec890(...);
+int destroyObj0055ae64(...);
 int strDestroy(...);
 int FUN_002ee818(...);
 int FUN_002f42be(...);
@@ -46,12 +46,12 @@ extern unsigned char LAB_0010da30; /* 0x10da30 */
 /* Supplied declaration required: FUN_002e9300. */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9520. */
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 extern unsigned int FUN_002ea100(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 /* Supplied declaration required: FUN_002ec70c. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee818. */
 extern unsigned int FUN_002eea7c(unsigned char *);
@@ -106,7 +106,7 @@ void FUN_0010d798(int param_1)
   }
   temp_v2 = FUN_002f7a5c(temp_v8,temp_v7);
   FUN_002f7ac4(temp_v6,temp_v2);
-  FUN_002ec890(temp_v8);
+  destroyObj0055ae64(temp_v8);
   FUN_002f7af2(temp_v6,param_1 + 0x7c,temp_v11);
   FUN_002e9318(temp_v7);
   FUN_002ec70c(temp_v6);
@@ -120,11 +120,11 @@ void FUN_0010d798(int param_1)
   }
   temp_v2 = FUN_002f7a5c(temp_v7,param_1 + 0x14c);
   FUN_002f7ac4(temp_v6,temp_v2);
-  FUN_002ec890(temp_v7);
+  destroyObj0055ae64(temp_v7);
   FUN_002f7af2(temp_v6,param_1 + 0x7c,temp_v12);
   FUN_002e9318(temp_v9);
   FUN_002ec70c(temp_v6);
-  FUN_002ea0e4(temp_v17);
+  constructObj0055affc(temp_v17);
   FUN_002f42be(temp_v17,&LAB_0010d9f0,*(unsigned int *)(param_1 + 0x128));
   temp_v2 = FUN_002ea100(temp_v16,&LAB_0010d9f8);
   temp_v2 = FUN_002f7b34(temp_v13,temp_v2,temp_v17);

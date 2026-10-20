@@ -1,25 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int timerStart(int, int, int);
+int timerStart(void *timer, int a, int b);
 
-extern int DAT_0043e128; /* 0x43e128 */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u8 unk14[0x30];
+    /* 0x44 */ u8 timer[1];
+} Obj;
 
-/* Supplied declaration required: timerStart. */
-
+extern Obj *DAT_0043e128;
 
 void FUN_00295ba4(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = DAT_0043e128;
-  *(unsigned int *)(DAT_0043e128 + 8) = 5;
-  *(unsigned int *)(temp_v0 + 0x10) = 0x1e;
-  timerStart(temp_v0 + 0x44,1,0);
-  return;
+    Obj *obj = DAT_0043e128;
+
+    DAT_0043e128->unk08 = 5;
+    obj->unk10 = 0x1e;
+    timerStart(obj->timer, 1, 0);
 }
 
 } /* extern "C" */

@@ -1,17 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00213b5c(void);
+typedef struct Entry {
+    /* 0x00 */ u8 data[0x28];
+} Entry;
+extern Entry DAT_0057a6ec[];
 
+s32 FUN_00213b5c(void);
 
-int FUN_0028cb6c(void)
-
+/* Returns the address of entry `FUN_00213b5c()` (0x28 bytes each) of the table at 0x57A6EC. */
+Entry *FUN_0028cb6c(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00213b5c();
-  return temp_v0 * 0x28 + 0x57a6ec;
+    s32 index;
+
+    index = FUN_00213b5c();
+    return &DAT_0057a6ec[index];
 }
 
 } /* extern "C" */

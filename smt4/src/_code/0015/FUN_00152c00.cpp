@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a2dc8(unsigned int);
-int FUN_002abb24(unsigned int, unsigned int);
+int sceneTraverserVisit(unsigned int, unsigned int);
 int nw_gfx_SceneNode_AttachChild(unsigned int, int);
 
 typedef struct fn_00152c00_arg0 fn_00152c00_arg0;
@@ -34,7 +34,7 @@ extern unsigned char DAT_004dad85; /* 0x4dad85 */
 extern int DAT_004dad98; /* 0x4dad98 */
 
 /* Supplied declaration required: FUN_002a2dc8. */
-/* Supplied declaration required: FUN_002abb24. */
+/* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 
 
@@ -155,24 +155,24 @@ void FUN_00152c00(fn_00152c00_arg0 *param_1)
     (&DAT_004dad84)[temp_v3 * 0x18] = 0;
     (&DAT_004dad85)[temp_v3 * 0x18] = 0;
     nw_gfx_SceneNode_AttachChild((&DAT_00464b84)[temp_v3],(&DAT_00464b94)[temp_v3]);
-    FUN_002abb24((&DAT_00464b7c)[temp_v3],(&DAT_00464b84)[temp_v3]);
+    sceneTraverserVisit((&DAT_00464b7c)[temp_v3],(&DAT_00464b84)[temp_v3]);
   }
   if (param_1->field_0x14 != (void *)0x0) {
     if (*(int *)((int)param_1->field_0x14 + 8) == 0) {
-      FUN_002abb24(DAT_00464b7c,DAT_00464b84);
+      sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
       DAT_004dad80 = DAT_004dad80 - 1;
     }
     else {
-      FUN_002abb24(DAT_00464b80,DAT_00464b88);
+      sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
       DAT_004dad98 = DAT_004dad98 - 1;
     }
   }
   else if (param_1->field_0xc < 3) {
-    FUN_002abb24(DAT_00464b7c,DAT_00464b84);
+    sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
     DAT_004dad80 = DAT_004dad80 - 1;
   }
   else {
-    FUN_002abb24(DAT_00464b80,DAT_00464b88);
+    sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
     DAT_004dad98 = DAT_004dad98 - 1;
   }
   pvVar8 = param_1->field_0x14;

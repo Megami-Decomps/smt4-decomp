@@ -1,0 +1,14 @@
+#include "common.h"
+
+extern "C" {
+
+int dataTableGetEntries(void);
+int dataTableGet(int id, int index);
+
+void dataTable05Sub0GetEntries(void)
+{
+    dataTableGet(5, 0);
+    dataTableGetEntries();
+}
+
+} /* extern "C" */

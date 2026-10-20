@@ -12,7 +12,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_003fe86c. */
-extern unsigned int FUN_004ffb58(void);
+extern unsigned int slots4FGetActiveValue(void);
 
 
 void FUN_003e54b8(int param_1)
@@ -24,7 +24,7 @@ void FUN_003e54b8(int param_1)
   
   temp_v0 = *(int *)(*(int *)(param_1 + 8) + 4);
   if (temp_v0 != 0) {
-    temp_v1 = FUN_004ffb58();
+    temp_v1 = slots4FGetActiveValue();
     FUN_003fe86c(temp_v0,temp_v1,0);
     return;
   }

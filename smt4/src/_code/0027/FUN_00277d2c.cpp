@@ -10,9 +10,9 @@ int CONCAT44(...);
 int FUN_0020e738(...);
 int FUN_00291ba4(void);
 int FUN_00291c20(...);
-int FUN_00291e28(void);
+int dataTable2cSub0GetCount(void);
 int FUN_0030f654(void);
-int FUN_0031d51c(void);
+int dataTable2cSub3GetCount(void);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -103,16 +103,16 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0021dbc0. */
 /* Supplied declaration required: FUN_00291ba4. */
 /* Supplied declaration required: FUN_00291c20. */
-/* Supplied declaration required: FUN_00291e28. */
+/* Supplied declaration required: dataTable2cSub0GetCount. */
 extern int FUN_002c09d0(void);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern int FUN_002c2950(void);
 extern unsigned int *FUN_002d2a00(int);
-extern char *FUN_002d4f64(int);
-extern char *FUN_002fb42c(int);
+extern char *dataTable2cSub0GetRecord(int);
+extern char *dataTable2cSub3GetRecord(int);
 /* Supplied declaration required: FUN_0030f654. */
-extern unsigned int FUN_00316e44(int);
-/* Supplied declaration required: FUN_0031d51c. */
+extern unsigned int dataTable2cSub2GetRecord(int);
+/* Supplied declaration required: dataTable2cSub3GetCount. */
 extern int FUN_00323500(void);
 extern int FUN_00323570(void);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -243,13 +243,13 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
   DAT_0049fb24 = 0;
   DAT_0049fb28 = 0;
   DAT_0049fb2c = 0;
-  FUN_00291e28();
+  dataTable2cSub0GetCount();
   temp_v30 = 0.7111111f;
   temp_v28 = 0.0f;
   temp_v29 = 0x40a0000047800000;
   if (0 < (int)puVar3) {
     do {
-      pcVar4 = (char *)FUN_002d4f64(temp_v4);
+      pcVar4 = (char *)dataTable2cSub0GetRecord(temp_v4);
       puVar3 = (unsigned int *)(int)*pcVar4;
       if (puVar3 == (unsigned int *)0xffffffff) break;
       temp_v0 = pcVar4[2];
@@ -521,7 +521,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
         temp_v11 = VectorSignedToFloat((int)*(short *)(pcVar4 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v15 = VectorSignedToFloat((int)*(short *)(pcVar4 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v31 = VectorSignedToFloat((int)*(short *)(pcVar4 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v7 = FUN_00316e44((int)*(short *)(pcVar4 + 0x12));
+        temp_v7 = dataTable2cSub2GetRecord((int)*(short *)(pcVar4 + 0x12));
         temp_v2 = (int)DAT_004bf898 * 0x20;
         *(unsigned int *)(&DAT_004be698 + temp_v2) = temp_v9;
         *(float *)(temp_v2 + 0x4be69c) = temp_v28;
@@ -535,14 +535,14 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
         DAT_004bf898 = puVar3;
       }
       temp_v4 = temp_v4 + 1;
-      FUN_00291e28();
+      dataTable2cSub0GetCount();
     } while (temp_v4 < (int)puVar3);
   }
   temp_v4 = 0;
-  FUN_0031d51c();
+  dataTable2cSub3GetCount();
   if (0 < (int)puVar3) {
     do {
-      pcVar4 = (char *)FUN_002fb42c(temp_v4);
+      pcVar4 = (char *)dataTable2cSub3GetRecord(temp_v4);
       puVar3 = (unsigned int *)(int)*pcVar4;
       if (puVar3 == (unsigned int *)0xffffffff) break;
       if (pcVar4[2] != '\0') {
@@ -777,7 +777,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
         }
       }
       temp_v4 = temp_v4 + 1;
-      FUN_0031d51c();
+      dataTable2cSub3GetCount();
     } while (temp_v4 < (int)puVar3);
   }
   if (((*(char *)(temp_v1 + 0xde0) != '\0') &&
@@ -1204,7 +1204,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
           if (*(short *)(pcVar6 + 0x14) != 0) {
             temp_v4 = FUN_002c09d0();
             if (temp_v4 != 0) {
-              temp_v4 = FUN_002c09f4(99);
+              temp_v4 = randNextInRange(99);
               if (temp_v4 <= pcVar6[0x17]) {
 LAB_0027907c:
                 temp_v45 = (float)((unsigned long long)temp_v29 >> 0x20);
@@ -1395,7 +1395,7 @@ LAB_0027907c:
               }
             }
             else {
-              temp_v4 = FUN_002c09f4(99);
+              temp_v4 = randNextInRange(99);
               if (temp_v4 <= pcVar6[0x16]) {
                 temp_v5 = *(unsigned short *)(pcVar6 + 0x14);
                 goto LAB_0027907c;
@@ -1403,7 +1403,7 @@ LAB_0027907c:
             }
           }
           else {
-            temp_v4 = FUN_002c09f4(99);
+            temp_v4 = randNextInRange(99);
             if (temp_v4 <= pcVar6[0x17]) goto LAB_0027907c;
           }
         }
@@ -1425,7 +1425,7 @@ LAB_0027907c:
           if (*(short *)(pcVar6 + 0x14) != 0) {
             temp_v4 = FUN_002c09d0();
             if (temp_v4 != 0) {
-              temp_v4 = FUN_002c09f4(99);
+              temp_v4 = randNextInRange(99);
               if (temp_v4 <= pcVar6[0x17]) {
 LAB_00279850:
                 temp_v45 = (float)((unsigned long long)temp_v29 >> 0x20);
@@ -1615,7 +1615,7 @@ LAB_00279850:
               }
             }
             else {
-              temp_v4 = FUN_002c09f4(99);
+              temp_v4 = randNextInRange(99);
               if (temp_v4 <= pcVar6[0x16]) {
                 temp_v5 = *(unsigned short *)(pcVar6 + 0x14);
                 goto LAB_00279850;
@@ -1623,7 +1623,7 @@ LAB_00279850:
             }
           }
           else {
-            temp_v4 = FUN_002c09f4(99);
+            temp_v4 = randNextInRange(99);
             if (temp_v4 <= pcVar6[0x17]) goto LAB_00279850;
           }
         }

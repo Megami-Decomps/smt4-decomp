@@ -1,22 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_002b8cec(unsigned int);
+extern u32 FUN_002b8cec(u32 button);
 
-
-unsigned int FUN_003c2b14(int param_1)
-
+/* Button 3 or, when `alt` is set, also button 0xc. */
+u32 FUN_003c2b14(int alt)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002b8cec(3);
-  if (param_1 != 0) {
-    temp_v1 = FUN_002b8cec(0xc);
-    temp_v0 = temp_v0 | temp_v1;
-  }
-  return temp_v0;
+    u32 pressed = FUN_002b8cec(3);
+
+    if (alt != 0) {
+        pressed = pressed | FUN_002b8cec(0xc);
+    }
+    return pressed;
 }
 
 } /* extern "C" */

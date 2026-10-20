@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u8 flags;
+} Holder;
 
-unsigned char FUN_002f14a8(int param_1,unsigned char param_2)
-
+/* Returns whether any of the given bits is set in the byte at 0x1C. */
+u8 FUN_002f14a8(Holder *object, u8 bits)
 {
-  return (*(unsigned char *)(param_1 + 0x1c) & param_2) != 0;
+    return (object->flags & bits) != 0;
 }
 
 } /* extern "C" */

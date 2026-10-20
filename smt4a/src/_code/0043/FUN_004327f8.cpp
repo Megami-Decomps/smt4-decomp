@@ -28,7 +28,7 @@ struct fn_004327f8_arg2 {
 /* Supplied declaration required: FUN_001274fc. */
 /* Supplied declaration required: FUN_002e76b6. */
 /* Supplied declaration required: FUN_002fa010. */
-extern unsigned int FUN_003111fa(fn_004327f8_arg2 *);
+extern unsigned int rangeObjRemaining(fn_004327f8_arg2 *);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -47,11 +47,11 @@ unsigned int FUN_004327f8(int param_1,int param_2,fn_004327f8_arg2 *param_3)
   float temp_v6;
   
   FUN_001274fc(*(int *)(param_1 + 0x120) + 0x38);
-  temp_v0 = FUN_003111fa(param_3);
+  temp_v0 = rangeObjRemaining(param_3);
   if (temp_v0 < *(int *)(param_2 + 0x10) + 1U) {
     FUN_002fa010(param_3,*(int *)(param_2 + 0x10) + 1);
   }
-  temp_v1 = FUN_003111fa(param_3);
+  temp_v1 = rangeObjRemaining(param_3);
   *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x48) = temp_v1;
   temp_v1 = FUN_002e76b6(param_3);
   *(unsigned int *)(*(int *)(param_1 + 0x120) + 0x44) = temp_v1;

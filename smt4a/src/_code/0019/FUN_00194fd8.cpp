@@ -1,19 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00194fd8` (_code @ 0x194fd8, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/SoundArchiveWrapper.h"
 
 extern "C" {
 
-extern unsigned int *FUN_001a8d34(unsigned int);
+u32 FUN_00194fe0(SoundArchiveRef *ref);
 
-
-unsigned int FUN_00194fd8(int param_1)
-
+/* Passes the wrapper's ref on to FUN_00194fe0, the function that follows it. */
+u32 FUN_00194fd8(SoundArchiveWrapper *wrapper)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_001a8d34(*(unsigned int *)(*(int *)(param_1 + 4) + 0x3c));
-  return *puVar1;
+    return FUN_00194fe0(wrapper->ref);
 }
 
 } /* extern "C" */

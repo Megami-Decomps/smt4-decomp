@@ -16,7 +16,7 @@ extern unsigned char DAT_005595f0; /* 0x5595f0 */
 
 /* Supplied declaration required: FUN_00113d14. */
 extern int FUN_002f8728(unsigned int *);
-extern int FUN_002fbada(unsigned int **, unsigned int *);
+extern int wordRefsDiffer_002fbada(unsigned int **, unsigned int *);
 
 
 int FUN_002fbaec(unsigned int *param_1,int param_2,unsigned int *param_3,unsigned int param_4)
@@ -36,7 +36,7 @@ int FUN_002fbaec(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
   temp_v2 = (unsigned int *)**(unsigned int **)(param_2 + 0x10);
   while( 1 ) {
     temp_v3 = *(unsigned int *)(param_2 + 0x10);
-    temp_v1 = FUN_002fbada(&temp_v2,(unsigned int *)&temp_v3);
+    temp_v1 = wordRefsDiffer_002fbada(&temp_v2,(unsigned int *)&temp_v3);
     if (temp_v1 == 0) break;
     FUN_00113d14(temp_v0 - 8,temp_v2 + 2);
     temp_v2 = (unsigned int *)*temp_v2;

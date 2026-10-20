@@ -1,31 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0015e3bc(int, unsigned int);
+int FUN_0015e3bc(int item, u32 value);
 
-/* Supplied declaration required: FUN_0015e3bc. */
+typedef struct Obj {
+    /* 0x00 */ int items[2];
+    /* 0x08 */ int count;
+    /* 0x0C */ u8 unk0C[0x17];
+    /* 0x23 */ s8 value;
+} Obj;
 
-
-void FUN_002a1f84(int param_1,unsigned int param_2)
-
+void FUN_002a1f84(Obj *obj, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  if (temp_v1 < *(int *)(param_1 + 8)) {
-    do {
-      temp_v0 = *(int *)(param_1 + temp_v1 * 4);
-      if (temp_v0 != 0) {
-        FUN_0015e3bc(temp_v0,param_2);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(int *)(param_1 + 8));
-  }
-  *(char *)(param_1 + 0x23) = (char)param_2;
-  return;
+    int item;
+    int i = 0;
+
+    if (i < obj->count) {
+        do {
+            item = obj->items[i];
+            if (item != 0) {
+                FUN_0015e3bc(item, value);
+            }
+            i = i + 1;
+        } while (i < obj->count);
+    }
+    obj->value = (s8)value;
 }
 
 } /* extern "C" */

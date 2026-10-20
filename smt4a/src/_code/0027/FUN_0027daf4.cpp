@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_003768dc(void);
-int FUN_004842cc(int);
+int screenCloseDestroy(int);
 int FUN_00485abc(int);
 
 /* Supplied declaration required: FUN_003768dc. */
 extern int FUN_0037692c(void);
-/* Supplied declaration required: FUN_004842cc. */
+/* Supplied declaration required: screenCloseDestroy. */
 /* Supplied declaration required: FUN_00485abc. */
 
 
@@ -39,7 +39,7 @@ unsigned int FUN_0027daf4(int param_1)
         }
         return 0xffffffff;
       }
-      FUN_004842cc(temp_v2 + 0x10);
+      screenCloseDestroy(temp_v2 + 0x10);
       temp_v1 = 3;
       *(unsigned char *)(temp_v2 + 0xc) = 1;
     }

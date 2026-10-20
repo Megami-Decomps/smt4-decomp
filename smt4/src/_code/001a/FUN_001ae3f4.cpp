@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads indexer->index (0x18) before the layout pointer; built loads them in the opposite order. */
+/* Matches with --cpu=5TE (requested): this unit was built for the older core. */
 #include "common.h"
 
 extern "C" {

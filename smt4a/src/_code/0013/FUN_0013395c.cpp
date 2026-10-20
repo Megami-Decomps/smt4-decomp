@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e32a4(int, unsigned char *, unsigned char *);
 int FUN_002e6e14(int);
 int FUN_00307b08(int, int, int, int *);
-int FUN_00307b3c(int *);
+int vectorCount32_00307b3c(int *);
 int FUN_0030fd90(int *, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -23,12 +23,12 @@ extern unsigned char LAB_001339dc; /* 0x1339dc */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e32a4. */
-extern int *FUN_002e4e86(unsigned int *, unsigned int *);
+extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307b08. */
-extern unsigned int FUN_00307b2a(unsigned int, int *);
-/* Supplied declaration required: FUN_00307b3c. */
+extern unsigned int vectorGrowCapacity_00307b2a(unsigned int, int *);
+/* Supplied declaration required: vectorCount32_00307b3c. */
 /* Supplied declaration required: FUN_0030fd90. */
 
 
@@ -53,15 +53,15 @@ unsigned long long FUN_0013395c(int *param_1,unsigned int param_2)
     FUN_002e32a4(8,&LAB_001339dc,&LAB_001339dc);
   }
   if ((unsigned int)((param_1[2] - *param_1) >> 5) < temp_v5) {
-    temp_v0 = FUN_00307b3c(param_1);
-    temp_v4 = FUN_00307b2a(temp_v0,param_1);
-    piVar2 = (int *)FUN_002e4e86(&temp_v5,(unsigned int *)&temp_v4);
+    temp_v0 = vectorCount32_00307b3c(param_1);
+    temp_v4 = vectorGrowCapacity_00307b2a(temp_v0,param_1);
+    piVar2 = (int *)wordRefMax(&temp_v5,(unsigned int *)&temp_v4);
     temp_v1 = *piVar2;
     temp_v2 = rt_malloc();
     FUN_00307b08(*param_1,param_1[1],temp_v2,param_1);
     FUN_0030fd90(param_1,*param_1,param_1[1]);
     FUN_002e6e14(*param_1);
-    temp_v3 = FUN_00307b3c(param_1);
+    temp_v3 = vectorCount32_00307b3c(param_1);
     *param_1 = temp_v2;
     param_1[2] = temp_v2 + temp_v1 * 0x20;
     param_1[1] = temp_v3 * 0x20 + temp_v2;

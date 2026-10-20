@@ -1,24 +1,34 @@
-#include "romwright_types.h"
+#include "shard/Resource.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char g_handlerTable;
+typedef struct Node {
+    /* 0x00 */ u8 unk00[0x90];
+    /* 0x90 */ Resource *resource;
+    /* 0x94 */ u8 unk94[0x18];
+    /* 0xAC */ struct Node *next;
+} Node;
 
-void FUN_0019c8c0(int param_1)
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x84];
+    /* 0x84 */ u32 unk84;
+    /* 0x88 */ u8 unk88[4];
+    /* 0x8C */ Node *first;
+} Owner;
 
+/* Runs each node's resource handler callback (if its type has one) on the resource data, then clears the word at 0x84. */
+void FUN_0019c8c0(Owner *owner)
 {
-  romwright_code *pcVar1;
-  int temp_v0;
-  
-  for (temp_v0 = *(int *)(param_1 + 0x8c); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0xac)) {
-    pcVar1 = *(romwright_code **)((unsigned char *)&g_handlerTable + (unsigned int)*(unsigned short *)(*(int *)(temp_v0 + 0x90) + 4) * 0x44 + 0x1c);
-    if (pcVar1 != (romwright_code *)0x0) {
-      (*pcVar1)(*(unsigned int *)(*(int *)(temp_v0 + 0x90) + 8));
+    void (*callback)(void *data);
+    Node *node;
+
+    for (node = owner->first; node != NULL; node = node->next) {
+        callback = g_handlerTable[node->resource->type].callback;
+        if (callback != NULL) {
+            callback(node->resource->data);
+        }
     }
-  }
-  *(unsigned int *)(param_1 + 0x84) = 0;
-  return;
+    owner->unk84 = 0;
 }
 
 } /* extern "C" */

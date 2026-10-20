@@ -1,20 +1,24 @@
-/* Ported from Apocalypse's matching FUN_0042442c (FUN_0023a4f8 is its twin FUN_0042337c). */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0023a4f8(int);
+extern int FUN_0023a4f8(void *block);
 
-unsigned char FUN_0034fe14(int param_1)
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ u32 state;
+    /* 0x010 */ u8 unk010[0x148];
+    /* 0x158 */ u8 block[1];
+} Obj;
 
+u8 FUN_0034fe14(Obj *obj)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0023a4f8(param_1 + 0x158);
-  if (temp_v0 == 0) {
-    *(unsigned int *)(param_1 + 0xc) = 7;
-  }
-  return temp_v0 != 0;
+    int result = FUN_0023a4f8(obj->block);
+
+    if (result == 0) {
+        obj->state = 7;
+    }
+    return result != 0;
 }
 
 } /* extern "C" */

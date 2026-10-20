@@ -17,7 +17,7 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_2_stack;
 
-extern unsigned int FUN_002eac26(unsigned char *, unsigned char *);
+extern unsigned int byteRefMin(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002fbb60. */
 /* Supplied declaration required: FUN_002fbb68. */
 /* Supplied declaration required: FUN_002fbb70. */
@@ -42,7 +42,7 @@ void FUN_00120742(int param_1,int param_2)
   else {
     temp_v6[0] = 0;
     temp_v5[0] = *(unsigned char *)(param_2 + 4);
-    temp_v0 = FUN_002eac26(temp_v5,temp_v6);
+    temp_v0 = byteRefMin(temp_v5,temp_v6);
     FUN_002fbb60(param_1,temp_v0);
     temp_v1 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     temp_v3 = 0;

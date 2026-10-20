@@ -1,28 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00132384(int);
-int FUN_002fe9d2(int);
+void FUN_00132384(void *object);
+void FUN_002fe9d2(void *object);
 
-/* Supplied declaration required: FUN_00132384. */
-/* Supplied declaration required: FUN_002fe9d2. */
+typedef struct Node {
+    /* 0x00 */ struct Node *next;
+} Node;
 
+typedef struct Pool {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Node *free;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ Node *current;
+} Pool;
 
-int FUN_002f8760(int param_1)
-
+/* Returns the current node to the pool's free list (running FUN_002fe9d2 first and FUN_00132384 after); returns the pool. */
+Pool *FUN_002f8760(Pool *pool)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  if (*(int *)(param_1 + 0x10) != 0) {
-    FUN_002fe9d2(param_1);
-    puVar1 = *(unsigned int **)(param_1 + 0x10);
-    *puVar1 = *(unsigned int *)(param_1 + 4);
-    *(unsigned int **)(param_1 + 4) = puVar1;
-    FUN_00132384(param_1);
-  }
-  return param_1;
+    Node *node;
+
+    if (pool->current != NULL) {
+        FUN_002fe9d2(pool);
+        node = pool->current;
+        node->next = pool->free;
+        pool->free = node;
+        FUN_00132384(pool);
+    }
+    return pool;
 }
 
 } /* extern "C" */

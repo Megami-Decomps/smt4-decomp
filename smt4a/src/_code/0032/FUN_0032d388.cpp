@@ -1,125 +1,93 @@
-#include "romwright_types.h"
+#include "shard/Shard0032.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(...);
-int FUN_0019a7f4(int, int);
-int scrScriptProcessDestroy(void);
-int FUN_0019ea64(int);
-int FUN_001add24(int);
-int FUN_0021c354(int);
-int FUN_00237680(void);
-int FUN_002c0b5c(unsigned int *);
-int asdTMTexTableFreeEntry(int);
-int FUN_002e6dd0(unsigned int *, int);
-int FUN_003192f4(unsigned int *);
-int FUN_00319e58(void);
-int FUN_00321744(void);
-int FUN_0032e25c(unsigned int *, int);
-int FUN_0039a17c(unsigned int);
-int FUN_003d2d6c(int);
+#include "shard/Shard0031.h"
+extern OverlayRef DAT_0057f110;
+extern void FUN_0019ea64(u8 value);
+extern void asdMemFree(void *ptr);
+extern void scrScriptProcessDestroy(u32 process);
+extern void jobStop(u32 job, u16 arg);
+extern u8 FUN_00345388(u8 value);
+extern s32 FUN_002a469c(void);
+extern void FUN_0032e25c(void *block, s32 value);
+extern void cecProcessCall2(void);
+extern u32 FUN_002c0b5c(void *block);
+extern u32 *FUN_002e6dd0(void *block, u32 size);
+extern MarkEntry *FUN_00330a80(u32 index);
+extern void FUN_00237680(void);
+extern u32 FUN_001add24(u32 id);
+extern void FUN_00321744(void);
+extern void FUN_0019a7f4(s32 a, s32 b);
+extern void asdTMTexTableFreeEntry(s32 index);
+extern void statusSceneDestroy(StatusScene *scene);
+extern u8 *FUN_0039a17c(u32 handle);
+extern void FUN_003d2d6c(s32 value);
+extern void FUN_0021c354(u32 value);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern unsigned char DAT_0057f110; /* 0x57f110 */
-
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019a7f4. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0019ea64. */
-/* Supplied declaration required: FUN_001add24. */
-/* Supplied declaration required: FUN_0021c354. */
-/* Supplied declaration required: FUN_00237680. */
-extern int FUN_002a469c(void);
-/* Supplied declaration required: FUN_002c0b5c. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002e6dd0. */
-/* Supplied declaration required: FUN_003192f4. */
-/* Supplied declaration required: FUN_00319e58. */
-/* Supplied declaration required: FUN_00321744. */
-/* Supplied declaration required: FUN_0032e25c. */
-extern int FUN_00330a80(int);
-extern int FUN_00345388(unsigned int);
-/* Supplied declaration required: FUN_0039a17c. */
-/* Supplied declaration required: FUN_003d2d6c. */
-
-
-void FUN_0032d388(int param_1)
-
+/* Tears down the status screen. With `leaving` set to 0 it also runs the final switch. */
+void FUN_0032d388(s32 leaving)
 {
-/* irregular: 17 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4));
-  FUN_0019ea64(1);
-  if (puVar1[0x5a] != 0) {
-    if (puVar1[0x39] != 0) {
-      asdMemFree();
+    OverlayObj *overlay = DAT_0057f110.instance;
+    s32 i;
+    MarkEntry *entry;
+
+    FUN_0019ea64(1);
+    if (overlay->unk168 != 0) {
+        if (overlay->buffer0 != NULL) {
+            asdMemFree(overlay->buffer0);
+        }
+        if (overlay->buffer1 != NULL) {
+            asdMemFree(overlay->buffer1);
+        }
+        if (overlay->scriptProcess != 0) {
+            scrScriptProcessDestroy(overlay->scriptProcess);
+        }
+        jobStop(overlay->job, 0);
+        asdMemFree(overlay);
+        DAT_0057f110.instance = NULL;
+    } else {
+        if (overlay->unk16C != 0 && FUN_00345388(0x20) != 0) {
+            if (FUN_002a469c() == 0) {
+                FUN_0032e25c(DAT_0057f110.instance->block40, 0);
+            }
+            cecProcessCall2();
+            FUN_002c0b5c(DAT_0057f110.instance->block40);
+            if (FUN_002a469c() == 0) {
+                FUN_002e6dd0(DAT_0057f110.instance->block90, 0x14);
+            }
+        }
+        for (i = 0; i < 0x20; i++) {
+            entry = FUN_00330a80(i);
+            if ((entry->flags & 0x10) != 0) {
+                entry->flags &= ~0x10;
+            }
+        }
+        FUN_00237680();
+        FUN_001add24(0x25);
+        FUN_00321744();
+        if (overlay->buffer0 != NULL) {
+            asdMemFree(overlay->buffer0);
+        }
+        if (overlay->buffer1 != NULL) {
+            asdMemFree(overlay->buffer1);
+        }
+        FUN_001add24(0x4A);
+        if (overlay->scriptProcess != 0) {
+            scrScriptProcessDestroy(overlay->scriptProcess);
+        }
+        FUN_0019a7f4(0x2E, 0);
+        asdTMTexTableFreeEntry(0x2E);
+        statusSceneDestroy(&DAT_0057f110.instance->scene);
+        FUN_0039a17c(overlay->unk174);
+        jobStop(overlay->job, 0);
+        asdMemFree(overlay);
+        DAT_0057f110.instance = NULL;
+        if (leaving == 0) {
+            FUN_003d2d6c(0xF);
+            FUN_0021c354(0x2D);
+        }
     }
-    if (puVar1[0x3a] != 0) {
-      asdMemFree();
-    }
-    if (puVar1[0x3d] != 0) {
-      scrScriptProcessDestroy();
-    }
-    jobStop(*puVar1,0);
-    asdMemFree(puVar1);
-    (*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) = (unsigned int *)0x0;
-  }
-  else {
-    if ((*(char *)(puVar1 + 0x5b) != '\0') && (temp_v0 = FUN_00345388(0x20), temp_v0 != 0)) {
-      temp_v0 = FUN_002a469c();
-      if (temp_v0 == 0) {
-        FUN_0032e25c((*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x10,0);
-      }
-      FUN_00319e58();
-      FUN_002c0b5c((*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x10);
-      temp_v0 = FUN_002a469c();
-      if (temp_v0 == 0) {
-        FUN_002e6dd0((*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x24,0x14);
-      }
-    }
-    temp_v0 = 0;
-    do {
-      temp_v1 = FUN_00330a80(temp_v0);
-      temp_v0 = temp_v0 + 1;
-      if ((*(unsigned char *)(temp_v1 + 0x20) & 0x10) != 0) {
-        *(unsigned char *)(temp_v1 + 0x20) = *(unsigned char *)(temp_v1 + 0x20) & ~0x10;
-      }
-    } while (temp_v0 < 0x20);
-    FUN_00237680();
-    FUN_001add24(0x25);
-    FUN_00321744();
-    if (puVar1[0x39] != 0) {
-      asdMemFree();
-    }
-    if (puVar1[0x3a] != 0) {
-      asdMemFree();
-    }
-    FUN_001add24(0x4a);
-    if (puVar1[0x3d] != 0) {
-      scrScriptProcessDestroy();
-    }
-    FUN_0019a7f4(0x2e,0);
-    asdTMTexTableFreeEntry(0x2e);
-    FUN_003192f4((*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x2c);
-    FUN_0039a17c(puVar1[0x5d]);
-    jobStop(*puVar1,0);
-    asdMemFree(puVar1);
-    (*(unsigned int * *)((unsigned char *)&DAT_0057f110 + 0x4)) = (unsigned int *)0x0;
-    if (param_1 == 0) {
-      FUN_003d2d6c(0xf);
-      FUN_0021c354(0x2d);
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

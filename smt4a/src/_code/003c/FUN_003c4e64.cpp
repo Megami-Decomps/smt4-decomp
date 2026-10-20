@@ -11,7 +11,7 @@ extern unsigned char DAT_00588c40; /* 0x588c40 */
 extern int FUN_001ab854(int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_0032faf4(void);
+extern int flagAt4IsClearOrMissing(void);
 extern unsigned int FUN_003af94c(unsigned int);
 extern unsigned int FUN_003b6128(void);
 
@@ -35,7 +35,7 @@ unsigned int FUN_003c4e64(void)
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + *(int *)((*(int *)((unsigned char *)&DAT_00588c40 + 0x4)) + 0x75c8) * 2 + 0x34);
   }
   else {
-    temp_v2 = FUN_0032faf4();
+    temp_v2 = flagAt4IsClearOrMissing();
     if (temp_v2 != 0) {
       temp_v1 = 0;
     }

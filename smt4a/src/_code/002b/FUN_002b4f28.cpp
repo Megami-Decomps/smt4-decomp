@@ -17,7 +17,7 @@ typedef struct {
 
 extern int FUN_00298354(...); /* 0x298354 */
 extern unsigned char LAB_002b4ff0; /* 0x2b4ff0 */
-extern int FUN_003284cc(...); /* 0x3284cc */
+extern int jobPoolStopCurrent(...); /* 0x3284cc */
 extern unsigned char g_btlAction; /* 0x571138 */
 
 /* Supplied declaration required: taskCreateDraw. */
@@ -38,7 +38,7 @@ void FUN_002b4f28(unsigned int *param_1,unsigned int param_2,unsigned int param_
   jobIsValid(param_1[temp_v0 + 3]);
   FUN_004dcb40((*(unsigned int *)((unsigned char *)&g_btlAction + 0x4)),param_1,param_2,param_3,param_4,param_5);
   puVar2 = &LAB_002b4ff0;
-  taskCreateDraw(&LAB_002b4ff0,3,0,0,FUN_00298354,FUN_003284cc,param_1,*param_1);
+  taskCreateDraw(&LAB_002b4ff0,3,0,0,FUN_00298354,jobPoolStopCurrent,param_1,*param_1);
   param_1[param_1[0x29] + 3] = (unsigned int)puVar2;
   return;
 }

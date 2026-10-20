@@ -1,27 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e4e92(unsigned int, unsigned char *);
-int FUN_002e6e14(void);
+void *FUN_002e4e92(u32 object, u8 *callback);
+void FUN_002e6e14(void *memory);
 
-extern unsigned char LAB_0010724f; /* 0x10724f */
+typedef struct Holder {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 object;
+} Holder;
 
-/* Supplied declaration required: FUN_002e4e92. */
-/* Supplied declaration required: FUN_002e6e14. */
-
-
-void FUN_002f5044(unsigned int *param_1)
-
+/* Clears `first`; releases the held object (running FUN_002e4e92 with the callback at 0x10724F first) and clears it. */
+void FUN_002f5044(Holder *holder)
 {
-/* irregular: 2 native warning(s); review required */
-  *param_1 = 0;
-  if (param_1[1] != 0) {
-    FUN_002e4e92(param_1[1],&LAB_0010724f);
-    FUN_002e6e14();
-    param_1[1] = 0;
-  }
-  return;
+    holder->first = 0;
+    if (holder->object != 0) {
+        FUN_002e6e14(FUN_002e4e92(holder->object, (u8 *)0x10724F));
+        holder->object = 0;
+    }
 }
 
 } /* extern "C" */

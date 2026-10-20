@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_003e9f70(...);
 int FUN_003eaa14(...);
-int FUN_003f0240(...);
+int btlClearMode4D74(...);
 int FUN_004bcb54(...);
-int FUN_004bd340(...);
-int FUN_004bd3ec(...);
+int bitsAt60Test(...);
+int bitsAt60Set(...);
 int FUN_004fb798(...);
 
 /* stack frame of void: 9 slot(s), 36 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int DAT_00570d90; /* 0x570d90 */
 extern unsigned int DAT_00570d94; /* 0x570d94 */
 
 extern int btlGetMainState(void);
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 extern int FUN_001ab888(void);
 extern int FUN_00213b5c(void);
 extern unsigned int FUN_003e0154(void);
@@ -39,10 +39,10 @@ extern unsigned int FUN_003e0164(void);
 extern int FUN_003e46f4(unsigned int);
 /* Supplied declaration required: FUN_003e9f70. */
 /* Supplied declaration required: FUN_003eaa14. */
-/* Supplied declaration required: FUN_003f0240. */
+/* Supplied declaration required: btlClearMode4D74. */
 /* Supplied declaration required: FUN_004bcb54. */
-/* Supplied declaration required: FUN_004bd340. */
-/* Supplied declaration required: FUN_004bd3ec. */
+/* Supplied declaration required: bitsAt60Test. */
+/* Supplied declaration required: bitsAt60Set. */
 /* Supplied declaration required: FUN_004fb798. */
 
 
@@ -102,7 +102,7 @@ LAB_0035f460:
   do {
     temp_v6 = (int)*(char *)(temp_v4 + temp_v5 + 0x1ca0);
     if (-1 < temp_v6) {
-      temp_v0 = FUN_004bd340(temp_v4 + temp_v6 * 300 + 0x68,4);
+      temp_v0 = bitsAt60Test(temp_v4 + temp_v6 * 300 + 0x68,4);
       temp_v9[temp_v5] = temp_v0;
     }
     temp_v5 = temp_v5 + 1;
@@ -110,10 +110,10 @@ LAB_0035f460:
   temp_v5 = 0;
   do {
     temp_v8 = temp_v4 + temp_v5 * 300 + 0x68;
-    temp_v6 = FUN_004bd340(temp_v8,2);
+    temp_v6 = bitsAt60Test(temp_v8,2);
     FUN_004bcb54(temp_v8);
     if (temp_v6 != 0) {
-      FUN_004bd3ec(temp_v8,2);
+      bitsAt60Set(temp_v8,2);
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 0x18);
@@ -121,15 +121,15 @@ LAB_0035f460:
   do {
     temp_v6 = (int)*(char *)(temp_v4 + temp_v5 + 0x1ca0);
     if ((-1 < temp_v6) && (temp_v9[temp_v5] != '\0')) {
-      FUN_004bd3ec(temp_v4 + temp_v6 * 300 + 0x68,4);
+      bitsAt60Set(temp_v4 + temp_v6 * 300 + 0x68,4);
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 3);
-  temp_v4 = FUN_0015688c();
+  temp_v4 = saveSlotFindSelected();
   if (temp_v4 != 0) {
     FUN_004bcb54();
     FUN_003eaa14(temp_v1);
-    FUN_003f0240(temp_v1);
+    btlClearMode4D74(temp_v1);
   }
   if (0 < *(int *)(temp_v1 + 300)) {
     FUN_003e9f70(temp_v1);

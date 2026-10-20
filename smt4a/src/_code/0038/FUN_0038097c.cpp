@@ -16,7 +16,7 @@ extern unsigned int FUN_001ab854(int);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003f0e20. */
-extern unsigned int FUN_004bd340(unsigned int, unsigned int);
+extern unsigned int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: btlUnitGet. */
 
 
@@ -43,7 +43,7 @@ unsigned int FUN_0038097c(void)
   }
   else {
     temp_v3 = FUN_001ab854(temp_v0 - 0x6d);
-    temp_v1 = FUN_004bd340(temp_v3,temp_v1 & 0xffff);
+    temp_v1 = bitsAt60Test(temp_v3,temp_v1 & 0xffff);
   }
   scrSetResult(temp_v1 != 0);
   return 1;

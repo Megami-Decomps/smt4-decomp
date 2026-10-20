@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0043cddc(void);
+int md5Init(void);
 
-/* Supplied declaration required: FUN_0043cddc. */
+/* Supplied declaration required: md5Init. */
 
 
 void FUN_0012091c(int param_1)
@@ -14,7 +14,7 @@ void FUN_0012091c(int param_1)
 {
 /* irregular: 1 native warning(s); review required */
   *(unsigned char *)(param_1 + 0x68) = 0;
-  FUN_0043cddc();
+  md5Init();
   return;
 }
 

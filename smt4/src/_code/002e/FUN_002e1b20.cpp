@@ -1,23 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_002e1a00(void);
 
-extern int g_cecProcess; /* 0x43de68 */
+typedef struct CecProcess {
+    /* 0x0 */ u8 unk0[1];
+} CecProcess;
 
-/* Supplied declaration required: FUN_002e1a00. */
-
+extern CecProcess *g_cecProcess; /* 0x43de68 */
 
 void FUN_002e1b20(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  if (g_cecProcess != 0) {
-    FUN_002e1a00();
-    return;
-  }
-  return;
+    if (g_cecProcess != NULL) {
+        FUN_002e1a00();
+        return;
+    }
 }
 
 } /* extern "C" */

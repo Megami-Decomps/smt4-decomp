@@ -1,22 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Shard0038.h"
 
 extern "C" {
 
-int scrSetResult(int);
+extern PlayerData *FUN_001801a4(void);
+extern void scrSetResult(s32 value);
 
-extern int FUN_001801a4(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003808a8(void)
-
+/* Script command: result is the player's value at +0x1E. */
+u32 FUN_003808a8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_001801a4();
-  scrSetResult((int)*(short *)(temp_v0 + 0x1e));
-  return 1;
+    scrSetResult(FUN_001801a4()->unk1E);
+    return 1;
 }
 
 } /* extern "C" */

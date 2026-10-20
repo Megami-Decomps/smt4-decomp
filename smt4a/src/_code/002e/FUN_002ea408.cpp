@@ -1,18 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 kind;
+} Holder;
 
-unsigned int FUN_002ea408(int param_1)
-
+/* Returns 1 when `kind` is 2, 3 or 4. */
+u32 FUN_002ea408(Holder *object)
 {
-  char temp_v0;
-  
-  temp_v0 = *(char *)(param_1 + 0x10);
-  if (((temp_v0 != '\x02') && (temp_v0 != '\x03')) && (temp_v0 != '\x04')) {
-    return 0;
-  }
-  return 1;
+    u8 kind;
+
+    kind = object->kind;
+    if (((kind != 2) && (kind != 3)) && (kind != 4)) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

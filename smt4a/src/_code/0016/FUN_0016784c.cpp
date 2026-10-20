@@ -1,18 +1,12 @@
-#include "romwright_types.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-extern int jobGetWork(void);
-
-
-void FUN_0016784c(unsigned int param_1,unsigned char param_2)
-
+/* Stores `value` in the byte at 0x8C of the job work area. */
+void FUN_0016784c(u32 unused, u8 value)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  *(unsigned char *)(temp_v0 + 0x8c) = param_2;
-  return;
+    JobWork *work = jobGetWork();
+    work->unk008C = value;
 }
 
 } /* extern "C" */

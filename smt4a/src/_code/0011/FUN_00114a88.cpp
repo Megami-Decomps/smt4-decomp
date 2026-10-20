@@ -1,21 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_malloc(void);
+void rt_malloc(void);
 
-typedef int romwright_code(...);
-extern unsigned char g_flagBlock; /* 0x594958 */
+typedef struct FlagBlockView {
+    /* 0x00 */ u8 unk00[0x68];
+    /* 0x68 */ void (*hook)(s32 arg);
+} FlagBlockView;
+extern FlagBlockView g_flagBlock;
 
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_00114a88(int param_1)
+/* Runs the installed hook with `arg`, or rt_malloc when there is none. */
+void FUN_00114a88(s32 arg)
 {
-  if ((*(romwright_code * *)((unsigned char *)&g_flagBlock + 0x68)) != (romwright_code *)0x0) {
-    (*(*(romwright_code * *)((unsigned char *)&g_flagBlock + 0x68)))(param_1);
-    return;
-  }
-  rt_malloc();
+    if (g_flagBlock.hook != NULL) {
+        g_flagBlock.hook(arg);
+        return;
+    }
+    rt_malloc();
 }
+
 } /* extern "C" */

@@ -1,33 +1,20 @@
-#include "romwright_types.h"
+#include "shard/Shard0036.h"
 
 extern "C" {
 
-int FUN_00318544(unsigned int, unsigned int, int, unsigned int, unsigned int);
+extern u32 scrGetArg(s32 index);
+extern void FUN_00318544(u32 a, u32 b, s32 c, u32 d, u32 e);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00318544. */
-
-
-unsigned int FUN_0036f7b0(void)
-
+/* Script command: FUN_00318544 on four arguments. */
+u32 FUN_0036f7b0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  temp_v3 = scrGetArg(3);
-  FUN_00318544(temp_v0,temp_v1,0,temp_v2,temp_v3);
-  return 1;
+    u32 a = scrGetArg(0);
+    u32 b = scrGetArg(1);
+    u32 c = scrGetArg(2);
+    u32 d = scrGetArg(3);
+
+    FUN_00318544(a, b, 0, c, d);
+    return 1;
 }
 
 } /* extern "C" */

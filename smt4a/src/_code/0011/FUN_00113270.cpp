@@ -20,7 +20,7 @@ extern unsigned char LAB_00113304; /* 0x113304 */
 /* Supplied declaration required: FUN_002e9538. */
 extern unsigned int FUN_002ea3c0(unsigned int **, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern int FUN_002fd750(unsigned int **, unsigned int *);
+extern int wordRefsDiffer_002fd750(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002fdbec. */
 
 
@@ -41,7 +41,7 @@ void FUN_00113270(int param_1)
   do {
     temp_v4 = (unsigned int *)*temp_v4;
     temp_v5[0] = *(unsigned int *)(param_1 + 0x130);
-    temp_v2 = FUN_002fd750(&temp_v4,temp_v5);
+    temp_v2 = wordRefsDiffer_002fd750(&temp_v4,temp_v5);
     if (temp_v2 == 0) {
       puVar5 = &LAB_00112a0d;
       temp_v3 = FUN_002ea3c0(&temp_v4,puVar5,0,&LAB_00113304);

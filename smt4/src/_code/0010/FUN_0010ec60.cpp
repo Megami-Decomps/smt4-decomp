@@ -1,14 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_asdGxPresets; /* 0x4e39e0 */
+extern struct {
+    u8 unk000[0x1C0];
+    u32 unk1C0;
+} g_asdGxPresets;
 
-
-unsigned int FUN_0010ec60(void)
-
+u32 FUN_0010ec60(void)
 {
-  return (*(unsigned int *)((unsigned char *)&g_asdGxPresets + 0x1c0));
+    return g_asdGxPresets.unk1C0;
 }
 
 } /* extern "C" */

@@ -13,7 +13,7 @@ int FUN_00168594(...);
 int FUN_0016c69c(...);
 int FUN_0016c6f0(...);
 int FUN_00183bb0(...);
-int FUN_0049359c(...);
+int words2Copy(...);
 int VectorSignedToFloat(...);
 int rt_memcpy_w(...);
 
@@ -40,7 +40,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c6f0. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -57,7 +57,7 @@ void FUN_0048b260(int param_1)
   float temp_v5;
   float temp_v6;
   
-  FUN_0049359c(param_1 + 0x4d0,&temp_v5);
+  words2Copy(param_1 + 0x4d0,&temp_v5);
   temp_v0 = FUN_001692ac(1,0);
   FUN_0016c6f0(g_renderCtx,3,temp_v0);
   efctSetSpeed();

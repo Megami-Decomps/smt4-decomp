@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0011a4b8(unsigned int, unsigned int);
+void FUN_0011a4b8(u32 value, u32 arg);
 
-/* Supplied declaration required: FUN_0011a4b8. */
-
-
-void FUN_0011a718(unsigned int param_1,unsigned int *param_2,unsigned int param_3)
-
+/* Calls FUN_0011a4b8 with the word `*valueRef` and `arg` (the first argument is unused). */
+void FUN_0011a718(u32 unused, u32 *valueRef, u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0011a4b8(*param_2,param_3);
-  return;
+    FUN_0011a4b8(*valueRef, arg);
 }
 
 } /* extern "C" */

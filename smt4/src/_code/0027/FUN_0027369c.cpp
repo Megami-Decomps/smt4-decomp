@@ -1,31 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrScriptProcessDestroy(void);
-int asdMemFree(void);
+int scrScriptProcessDestroy(u32 process);
+int asdMemFree(u32 ptr);
 
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdMemFree. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u32 bufferA;
+    /* 0x10 */ u32 bufferB;
+    /* 0x14 */ u32 script;
+} Obj;
 
-
-void FUN_0027369c(int param_1)
-
+void FUN_0027369c(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0xc) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0xc) = 0;
-  }
-  if (*(int *)(param_1 + 0x10) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0x10) = 0;
-  }
-  if (*(int *)(param_1 + 0x14) != 0) {
-    scrScriptProcessDestroy();
-    *(unsigned int *)(param_1 + 0x14) = 0;
-  }
-  return;
+    if (obj->bufferA != 0) {
+        asdMemFree(obj->bufferA);
+        obj->bufferA = 0;
+    }
+    if (obj->bufferB != 0) {
+        asdMemFree(obj->bufferB);
+        obj->bufferB = 0;
+    }
+    if (obj->script != 0) {
+        scrScriptProcessDestroy(obj->script);
+        obj->script = 0;
+    }
 }
 
 } /* extern "C" */

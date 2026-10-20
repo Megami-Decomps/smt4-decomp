@@ -1,29 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002629a0(int, int);
-int FUN_002a03a0(int, int, int);
+int FUN_002629a0(int id, int arg);
+int FUN_002a03a0(int id, int a, int b);
 
-/* Supplied declaration required: FUN_002629a0. */
-/* Supplied declaration required: FUN_002a03a0. */
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x49D8];
+    /* 0x49D8 */ int current;
+} Obj;
 
-
-void FUN_00246cf8(int param_1,int param_2)
-
+/* Switches the current id: stops the old one, starts the new one. */
+void FUN_00246cf8(Obj *obj, int id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x49d8);
-  if (temp_v0 != param_2) {
-    if (temp_v0 != -1) {
-      FUN_002629a0(temp_v0,0);
+    int current = obj->current;
+
+    if (current != id) {
+        if (current != -1) {
+            FUN_002629a0(current, 0);
+        }
+        FUN_002a03a0(id, 0, 10);
+        obj->current = id;
     }
-    FUN_002a03a0(param_2,0,10);
-    *(int *)(param_1 + 0x49d8) = param_2;
-  }
-  return;
 }
 
 } /* extern "C" */

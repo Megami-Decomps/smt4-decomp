@@ -1,21 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
+void FUN_00184758(u8 *member, s32 a, s32 b);
 
-/* Supplied declaration required: FUN_00184758. */
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x2DC];
+    /* 0x2DC */ u8 member2DC[0x54];
+    /* 0x330 */ u8 done;
+} Holder;
 
-
-void FUN_002b24dc(int param_1)
-
+/* Restarts the member at 0x2DC (mode 2) unless `done` is set. */
+void FUN_002b24dc(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0x330) == '\0') {
-    FUN_00184758(param_1 + 0x2dc,2,1);
-    return;
-  }
-  return;
+    if (object->done == 0) {
+        FUN_00184758(object->member2DC, 2, 1);
+        return;
+    }
 }
 
 } /* extern "C" */

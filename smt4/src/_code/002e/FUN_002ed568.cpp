@@ -1,29 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b89e4(int, int);
+int FUN_002b89e4(void *state, int arg);
 
-/* Supplied declaration required: FUN_002b89e4. */
+typedef struct StateObj {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 state;
+    /* 0x09 */ u8 unk09;
+    /* 0x0A */ u8 unk0A[0x2A];
+    /* 0x34 */ u8 unk34;
+    /* 0x35 */ u8 unk35;
+} StateObj;
 
+typedef struct Owner {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ StateObj *state;
+} Owner;
 
-unsigned int FUN_002ed568(int param_1)
-
+u32 FUN_002ed568(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 4);
-  if (*(char *)(temp_v0 + 0x35) != '\0') {
-    FUN_002b89e4(temp_v0,*(unsigned char *)(temp_v0 + 9));
-    *(unsigned char *)(temp_v0 + 8) = 3;
-    *(unsigned char *)(temp_v0 + 0x34) = 0;
-    *(unsigned char *)(temp_v0 + 0x35) = 0;
-  }
-  else if (*(char *)(temp_v0 + 8) == '\0') {
-    return 1;
-  }
-  return 0;
+    StateObj *state = owner->state;
+
+    if (state->unk35 != 0) {
+        FUN_002b89e4(state, state->unk09);
+        state->state = 3;
+        state->unk34 = 0;
+        state->unk35 = 0;
+    } else if (state->state == 0) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

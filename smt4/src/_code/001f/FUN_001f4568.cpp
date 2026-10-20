@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00257dec(int, int);
 int FUN_00269bd0(int, int);
 int FUN_002b06c4(void);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 int FUN_002be624(...);
 
 typedef struct fn_001f4568_arg3 fn_001f4568_arg3;
@@ -36,7 +36,7 @@ extern int FUN_00257e0c(void);
 extern int FUN_00257e40(unsigned char);
 /* Supplied declaration required: FUN_00269bd0. */
 /* Supplied declaration required: FUN_002b06c4. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002be624. */
 extern unsigned int FUN_002c30c4(fn_001f4568_arg3 *);
 
@@ -189,16 +189,16 @@ LAB_001f4728:
       }
       FUN_002be624(temp_v9,pcVar6);
 LAB_001f4778:
-      FUN_002b64a0(param_4,temp_v9);
+      libc_strcat(param_4,temp_v9);
       unaff_r4 = unaff_r4 + 1;
       if ((int)unaff_r4 < temp_v5) {
         if (unaff_r4 != (unsigned char *)0x0) {
-          FUN_002b64a0(param_4,&LAB_001f4950);
+          libc_strcat(param_4,&LAB_001f4950);
         }
         goto LAB_001f4728;
       }
     }
-    FUN_002b64a0(param_4,&LAB_001f4960);
+    libc_strcat(param_4,&LAB_001f4960);
   }
   if (temp_v7 != 0) {
     temp_v3 = 0;
@@ -225,16 +225,16 @@ LAB_001f47d4:
       }
       FUN_002be624(temp_v9,pcVar6);
 LAB_001f4824:
-      FUN_002b64a0(param_4,temp_v9);
+      libc_strcat(param_4,temp_v9);
       temp_v3 = temp_v3 + 1;
       if (temp_v3 < temp_v7) {
         if (temp_v3 != 0) {
-          FUN_002b64a0(param_4,&LAB_001f4950);
+          libc_strcat(param_4,&LAB_001f4950);
         }
         goto LAB_001f47d4;
       }
     }
-    FUN_002b64a0(param_4,&LAB_001f497c);
+    libc_strcat(param_4,&LAB_001f497c);
   }
   if (temp_v6 != 0) {
     temp_v3 = 0;
@@ -261,19 +261,19 @@ LAB_001f4880:
       }
       FUN_002be624(temp_v9,pcVar6);
 LAB_001f48d0:
-      FUN_002b64a0(param_4,temp_v9);
+      libc_strcat(param_4,temp_v9);
       temp_v3 = temp_v3 + 1;
       if (temp_v3 < temp_v6) {
         if (temp_v3 != 0) {
-          FUN_002b64a0(param_4,&LAB_001f4950);
+          libc_strcat(param_4,&LAB_001f4950);
         }
         goto LAB_001f4880;
       }
     }
-    FUN_002b64a0(param_4,&LAB_001f4998);
+    libc_strcat(param_4,&LAB_001f4998);
   }
   if ((temp_v5 == 0 && temp_v7 == 0) && temp_v6 == 0) {
-    FUN_002b64a0(param_4,&LAB_001f49b0);
+    libc_strcat(param_4,&LAB_001f49b0);
   }
   temp_v4 = FUN_002c30c4(param_4);
   if (temp_v4 >= 0x5d) {

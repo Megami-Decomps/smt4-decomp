@@ -1,28 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00240d5c` (_code @ 0x240d5c, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_0029e11c(void);
+typedef struct Part {
+    u8 state;       /* 0x00 */
+    u8 unk01[15];
+    u8 sub[1];      /* 0x10 */
+} Part;
 
+extern void FUN_0029e11c(void *sub);
+extern void FUN_00240d74(void *sub);
 
-unsigned int FUN_00240d5c(char *param_1)
-
+/* Hands the sub-object to the handler for the part's state; state 1 is handled by the next function. */
+void FUN_00240d5c(Part *part)
 {
-  unsigned int temp_v0;
-  
-  if (*param_1 == '\x01') {
-    if (param_1[0x72] == '\0') {
-      temp_v0 = *(unsigned int *)(param_1 + 0x58);
+    if (part->state != 1) {
+        FUN_0029e11c(part->sub);
+        return;
     }
-    else {
-      temp_v0 = 0;
-    }
-    return temp_v0;
-  }
-  temp_v0 = FUN_0029e11c();
-  return temp_v0;
+    FUN_00240d74(part->sub);
 }
 
 } /* extern "C" */

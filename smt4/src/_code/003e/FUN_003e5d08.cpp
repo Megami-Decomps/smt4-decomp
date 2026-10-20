@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_0036a33c(unsigned int);
-extern unsigned int nw_gfx_TransformAnimBlendOp_PostBlendAccurateScale(void);
+extern u32 FUN_0036a33c(u32 a);
+extern u32 nw_gfx_TransformAnimBlendOp_PostBlendAccurateScale(void);
 
-
-unsigned int FUN_003e5d08(unsigned int param_1,unsigned int param_2)
+u32 FUN_003e5d08(u32 a, u32 b)
 {
-  return nw_gfx_TransformAnimBlendOp_PostBlendAccurateScale() & FUN_0036a33c(param_2);
+    return nw_gfx_TransformAnimBlendOp_PostBlendAccurateScale() & FUN_0036a33c(b);
 }
 
 } /* extern "C" */

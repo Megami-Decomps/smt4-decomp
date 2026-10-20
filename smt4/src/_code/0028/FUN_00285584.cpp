@@ -94,7 +94,7 @@ extern int FUN_002b8660(void);
 extern int *jobGetWork(void);
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c1d5c(void);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0033d3f8. */
 
 
@@ -211,7 +211,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
                        piVar2[4] + param_2 + (int)(float)piVar2[7] + temp_v1);
           FUN_002bf538();
           temp_v7 = g_titleScene;
-          temp_v8 = FUN_002c5da8(6,1,0);
+          temp_v8 = packNibblesAndByte(6,1,0);
           piVar6 = (int *)(temp_v7 + 0x12ac);
           temp_v9 = *piVar6;
           temp_v3 = piVar6[temp_v9 + 2];

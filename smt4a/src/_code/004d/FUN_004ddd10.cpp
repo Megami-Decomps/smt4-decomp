@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001aba54(void);
 int FUN_003e8bb0(unsigned char [4], int, unsigned int);
-int FUN_003f2230(int, int, int);
+int btlResetSlot(int, int, int);
 int FUN_003f2aac(...);
 int FUN_004ab8e4(unsigned int);
 int FUN_004c3c84(int, int, int);
@@ -14,7 +14,7 @@ int FUN_004c571c(int, int, int, int);
 int FUN_004c6b8c(unsigned int, int);
 int FUN_004f64f4(int);
 int FUN_004f95cc(void);
-int FUN_004f99fc(int, unsigned int);
+int state339CSetMode10(int, unsigned int);
 
 /* stack frame of param_2: 4 slot(s), 6 byte(s) */
 typedef struct {
@@ -46,10 +46,10 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_003e7adc(int);
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003f2230. */
-extern int FUN_003f298c(int, unsigned int);
+/* Supplied declaration required: btlResetSlot. */
+extern int btlSlotStateIs4To7(int, unsigned int);
 /* Supplied declaration required: FUN_003f2aac. */
-extern int FUN_0040de1c(unsigned int, unsigned int *);
+extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int FUN_004ab8bc(unsigned int);
 /* Supplied declaration required: FUN_004ab8e4. */
 /* Supplied declaration required: FUN_004c3c84. */
@@ -59,7 +59,7 @@ extern int FUN_004ab8bc(unsigned int);
 extern int FUN_004f8264(void);
 extern int FUN_004f90e0(int, unsigned int);
 /* Supplied declaration required: FUN_004f95cc. */
-/* Supplied declaration required: FUN_004f99fc. */
+/* Supplied declaration required: state339CSetMode10. */
 
 
 unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
@@ -82,9 +82,9 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
   temp_v4 = param_2[2];
   switch(temp_v4) {
   case 0:
-    temp_v2 = FUN_003f298c(*param_1,0);
+    temp_v2 = btlSlotStateIs4To7(*param_1,0);
     if (temp_v2 != 0) {
-      FUN_003f2230(*param_1,0,0x1e);
+      btlResetSlot(*param_1,0,0x1e);
     }
     param_2[2] = 1;
   case 1:
@@ -114,7 +114,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
     temp_v3 = *(unsigned int *)(*param_1 + 0x45a4);
     if (((DAT_00571210 & temp_v4) == 0 && (DAT_00571214 & temp_v3) == 0) ||
        ((temp_v4 & DAT_005712c0) != 0 || (temp_v3 & DAT_005712c4) != 0)) {
-      FUN_004f99fc(DAT_00573808,param_2[0x165]);
+      state339CSetMode10(DAT_00573808,param_2[0x165]);
     }
   case 3:
     param_2[2] = 4;
@@ -260,7 +260,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
     FUN_003f2aac(*param_1,(int)*(short *)(param_2[9] + 0x6a),0);
     return 1;
   case 6:
-    temp_v2 = FUN_0040de1c(DAT_005712f0,param_2);
+    temp_v2 = chainCountIdUnflagged(DAT_005712f0,param_2);
     if (0 < temp_v2) {
       return 0;
     }

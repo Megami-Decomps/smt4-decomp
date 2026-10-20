@@ -9,7 +9,7 @@ int FUN_0029f7d4(void);
 
 /* Supplied declaration required: FUN_0029cde0. */
 extern int FUN_0029ea68(unsigned short);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_0029f7d4. */
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
@@ -49,8 +49,8 @@ void FUN_0029b7b8(unsigned int param_1,int param_2,unsigned int *param_3)
           do {
             if (-1 < *(char *)(temp_v0 + temp_v3 + 0x90f0)) {
               temp_v1 = FUN_002a8740();
-              temp_v2 = FUN_0029ebac(temp_v1,10);
-              if (((temp_v2 == 0) && (temp_v2 = FUN_0029ebac(temp_v1,2), temp_v2 == 0)) &&
+              temp_v2 = flagWordTestBit(temp_v1,10);
+              if (((temp_v2 == 0) && (temp_v2 = flagWordTestBit(temp_v1,2), temp_v2 == 0)) &&
                  (*(short *)(temp_v1 + 0x46) == *(short *)(temp_v5 + 2))) {
                 *(unsigned short *)((int)param_3 + temp_v4 * 2) = 1;
                 goto LAB_0029b8c4;

@@ -47,7 +47,7 @@ extern unsigned int DAT_004efd68; /* 0x4efd68 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0020ffa0. */
 /* Supplied declaration required: FUN_00265b78. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int FUN_00316f70(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0032820c. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
@@ -160,7 +160,7 @@ LAB_00266768:
     temp_v12 = 0xc671e000c67d2000;
     temp_v13 = 0xc65ac000c63e0000;
     do {
-      if (((DAT_00476630 & 1) == 0) && (temp_v3 = FUN_002bfefc(&DAT_00476630), temp_v3 != 0)) {
+      if (((DAT_00476630 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476630), temp_v3 != 0)) {
         DAT_004efd4c = (unsigned int)temp_v9;
         DAT_004efd48 = temp_v1;
         DAT_004efd50 = DAT_004efd4c;

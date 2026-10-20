@@ -1,34 +1,15 @@
-#include "romwright_types.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
 
-int FUN_0039ae38(int, unsigned int, int, int, int, int, int, int, int);
+int FUN_0039ae38(u32 *block, u32 a, int b, int c, int d, int e, int f, int g, int h);
 
-/* stack frame of param_1: 6 slot(s), 24 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-extern int DAT_0044cdf0; /* 0x44cdf0 */
-
-/* Supplied declaration required: FUN_0039ae38. */
-
-
-void FUN_002eb1a4(unsigned int param_1)
-
+void FUN_002eb1a4(u32 a)
 {
-/* irregular: 2 native warning(s); review required */
-  if (DAT_0044cdf0 == 0) {
-    return;
-  }
-  FUN_0039ae38(DAT_0044cdf0 + 0x40,param_1,0,0,0,0,0,0,0);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    if (DAT_0044cdf0 == NULL) {
+        return;
+    }
+    FUN_0039ae38(DAT_0044cdf0->unk00040, a, 0, 0, 0, 0, 0, 0, 0);
 }
 
 } /* extern "C" */

@@ -1,18 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int copyObjectCtorDerived(unsigned char *, unsigned char *);
+u8 *copyObjectCtorDerived(u8 *dest, u8 *source);
 
-
-int FUN_00301c76(unsigned char *param_1,unsigned char *param_2)
-
+/* Copy constructor: copies the leading byte and the derived part at 8; returns the address that part's constructor hands back minus 8. */
+u8 *FUN_00301c76(u8 *dest, u8 *source)
 {
-  int temp_v0;
-  
-  *param_1 = *param_2;
-  temp_v0 = copyObjectCtorDerived(param_1 + 8,param_2 + 8);
-  return temp_v0 - 8;
+    u8 *part;
+
+    *dest = *source;
+    part = copyObjectCtorDerived(dest + 8, source + 8);
+    return part - 8;
 }
 
 } /* extern "C" */

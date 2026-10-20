@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Sys44de28.h"
 
 extern "C" {
 
-extern signed char DAT_0044de28; /* 0x44de28 */
-
-
-int FUN_00215a14(void)
-
+s32 FUN_00215a14(void)
 {
-  return (int)DAT_0044de28;
+    return DAT_0044de28.unk00;
 }
 
 } /* extern "C" */

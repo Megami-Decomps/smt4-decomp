@@ -1,37 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00295c04` (_code @ 0x295c04, 0x4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0029be5c(int, int);
+__declspec(noreturn) __weak void FUN_00295c04_hook(void);
 
-/* Supplied declaration required: FUN_0029be5c. */
-extern int *FUN_002a8764(void);
-
-
-void FUN_00295c04(int param_1)
-
+/* Calls the engine's (removed) noreturn hook; armlink turned the tail branch into a nop. */
+void FUN_00295c04(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  piVar1 = (int *)FUN_002a8764();
-  *piVar1 = *piVar1 + param_1;
-  if (0 < param_1) {
-    FUN_0029be5c(0,param_1);
-  }
-  temp_v0 = *piVar1;
-  if (temp_v0 < 1) {
-    temp_v0 = 0;
-  }
-  *piVar1 = temp_v0;
-  if (temp_v0 >= 1000000000) {
-    temp_v0 = 999999999;
-  }
-  *piVar1 = temp_v0;
-  return;
+    FUN_00295c04_hook();
 }
 
 } /* extern "C" */

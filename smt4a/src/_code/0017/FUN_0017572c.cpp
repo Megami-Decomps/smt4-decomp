@@ -1,20 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Node {
+    /* 0x00 */ struct Node *next;
+} Node;
 
-unsigned int FUN_0017572c(int param_1,unsigned int *param_2)
+typedef struct List {
+    /* 0x000 */ u8 unk000[0x16C];
+    /* 0x16C */ Node *head;
+    /* 0x170 */ Node *tail;
+    /* 0x174 */ u32 count;
+} List;
 
+/* Appends `node` to the list and returns the list's count. */
+u32 FUN_0017572c(List *list, Node *node)
 {
-  if (*(unsigned int **)(param_1 + 0x170) == (unsigned int *)0x0) {
-    *(unsigned int **)(param_1 + 0x16c) = param_2;
-  }
-  else {
-    **(unsigned int **)(param_1 + 0x170) = (unsigned int)param_2;
-  }
-  *(unsigned int **)(param_1 + 0x170) = param_2;
-  *param_2 = 0;
-  return *(unsigned int *)(param_1 + 0x174);
+    if (list->tail == NULL) {
+        list->head = node;
+    } else {
+        list->tail->next = node;
+    }
+    list->tail = node;
+    node->next = NULL;
+    return list->count;
 }
 
 } /* extern "C" */

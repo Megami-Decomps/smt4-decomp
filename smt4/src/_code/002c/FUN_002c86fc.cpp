@@ -1,36 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0024c2a8(int, int, int);
-int FUN_0024c2ec(...);
+int FUN_0024c2a8(int a, int b, int c);
+int FUN_0024c2ec(int a, int b);
 
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_6_stack;
-
-/* Supplied declaration required: FUN_0024c2a8. */
-/* Supplied declaration required: FUN_0024c2ec. */
-
-
-void FUN_002c86fc(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
-
+/* For each (a, b) pair that isn't (0, 0) and isn't known to FUN_0024c2ec, registers it with FUN_0024c2a8. */
+void FUN_002c86fc(int a1, int b1, int a2, int b2, int a3, int b3)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  if ((param_1 != 0 || param_2 != 0) && (temp_v0 = FUN_0024c2ec(param_1), temp_v0 == 0)) {
-    FUN_0024c2a8(param_1,param_2,1);
-  }
-  if ((param_3 != 0 || param_4 != 0) && (temp_v0 = FUN_0024c2ec(param_3,param_4), temp_v0 == 0)) {
-    FUN_0024c2a8(param_3,param_4,1);
-  }
-  if ((param_5 != 0 || param_6 != 0) && (temp_v0 = FUN_0024c2ec(param_5,param_6), temp_v0 == 0)) {
-    FUN_0024c2a8(param_5,param_6,1);
-    return;
-  }
-  return;
+    if ((a1 != 0 || b1 != 0) && (FUN_0024c2ec(a1, b1) == 0)) {
+        FUN_0024c2a8(a1, b1, 1);
+    }
+    if ((a2 != 0 || b2 != 0) && (FUN_0024c2ec(a2, b2) == 0)) {
+        FUN_0024c2a8(a2, b2, 1);
+    }
+    if ((a3 != 0 || b3 != 0) && (FUN_0024c2ec(a3, b3) == 0)) {
+        FUN_0024c2a8(a3, b3, 1);
+        return;
+    }
 }
 
 } /* extern "C" */

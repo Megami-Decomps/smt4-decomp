@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_001b3f7c(void);
-int FUN_0049277c(...);
+int rectRecRead(...);
 int FUN_004d091c(...);
 int FUN_004d09b8(...);
 int FUN_004d0a98(...);
@@ -17,7 +17,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001b3f7c. */
-/* Supplied declaration required: FUN_0049277c. */
+/* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: FUN_004d091c. */
 /* Supplied declaration required: FUN_004d09b8. */
 /* Supplied declaration required: FUN_004d0a98. */
@@ -36,19 +36,19 @@ void FUN_004940a8(unsigned int param_1,int param_2)
   temp_v0 = *(int *)(param_2 + 4);
   FUN_001b3f7c();
   if (temp_v0 != 9) {
-    FUN_0049277c(0x20,0xfa,&temp_v2,&uStack_20,&temp_v1,temp_v3);
+    rectRecRead(0x20,0xfa,&temp_v2,&uStack_20,&temp_v1,temp_v3);
     FUN_004d09b8(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
-    FUN_0049277c(0x20,0xfb,&temp_v2,&uStack_20,&temp_v1,temp_v3);
+    rectRecRead(0x20,0xfb,&temp_v2,&uStack_20,&temp_v1,temp_v3);
     FUN_004d0a98(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
-    FUN_0049277c(0x20,0xfc,&temp_v2,&uStack_20,&temp_v1,temp_v3);
+    rectRecRead(0x20,0xfc,&temp_v2,&uStack_20,&temp_v1,temp_v3);
     FUN_004d091c(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
     return;
   }
-  FUN_0049277c(0x20,0xfd,&temp_v2,&uStack_20,&temp_v1,temp_v3);
+  rectRecRead(0x20,0xfd,&temp_v2,&uStack_20,&temp_v1,temp_v3);
   FUN_004d09b8(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
-  FUN_0049277c(0x20,0xfe,&temp_v2,&uStack_20,&temp_v1,temp_v3);
+  rectRecRead(0x20,0xfe,&temp_v2,&uStack_20,&temp_v1,temp_v3);
   FUN_004d0a98(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
-  FUN_0049277c(0x20,0xff,&temp_v2,&uStack_20,&temp_v1,temp_v3);
+  rectRecRead(0x20,0xff,&temp_v2,&uStack_20,&temp_v1,temp_v3);
   FUN_004d091c(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
   return;
 }

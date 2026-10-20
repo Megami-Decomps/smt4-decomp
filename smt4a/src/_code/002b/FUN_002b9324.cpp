@@ -18,8 +18,8 @@ extern int FUN_001ba570(void);
 extern int FUN_001bd118(unsigned short);
 extern int FUN_003de830(unsigned short);
 extern int FUN_003df004(unsigned short, int, int *);
-extern int FUN_004185ec(unsigned short);
-extern int FUN_004186c0(unsigned short);
+extern int partyEntryFlagsBit1(unsigned short);
+extern int partyEntryBitsBit1(unsigned short);
 
 
 int FUN_002b9324(void)
@@ -41,11 +41,11 @@ int FUN_002b9324(void)
   else {
     temp_v0 = 100;
     do {
-      temp_v1 = FUN_004185ec(temp_v0);
+      temp_v1 = partyEntryFlagsBit1(temp_v0);
       if (temp_v1 != 0) {
         temp_v1 = FUN_001bd118(temp_v0);
         if (temp_v1 != 1) {
-          if (((temp_v1 == 0) && (temp_v1 = FUN_004186c0(temp_v0), temp_v1 != 0)) &&
+          if (((temp_v1 == 0) && (temp_v1 = partyEntryBitsBit1(temp_v0), temp_v1 != 0)) &&
              (temp_v1 = FUN_003de830(temp_v0), temp_v1 != 0)) {
             temp_v1 = 0;
             temp_v3 = temp_v1;
@@ -62,7 +62,7 @@ int FUN_002b9324(void)
           }
         }
         else {
-          temp_v1 = FUN_004186c0(temp_v0);
+          temp_v1 = partyEntryBitsBit1(temp_v0);
           if (temp_v1 != 0) {
             temp_v1 = 0;
             temp_v3 = temp_v1;

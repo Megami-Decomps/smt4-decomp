@@ -17,7 +17,7 @@ int nw_snd_internal_BankFile_VelocityRegion_IsIgnoreNoteOff(void);
 extern unsigned int *FUN_0014d5a8(unsigned int);
 /* Supplied declaration required: FUN_002a7c80. */
 extern int FUN_003e8194(int, unsigned int);
-extern int *FUN_003e828c(unsigned int);
+extern int *offsetRefResolveC(unsigned int);
 /* Supplied declaration required: FUN_003e82c4. */
 /* Supplied declaration required: FUN_003e8398. */
 /* Supplied declaration required: FUN_003e83c0. */
@@ -49,7 +49,7 @@ unsigned int FUN_003e6334(int param_1,unsigned int *param_2,int param_3,unsigned
     return 0;
   }
   if ((-1 < param_3) &&
-     (piVar1 = (int *)FUN_003e828c(*(unsigned int *)(param_1 + 4)), param_3 < *piVar1)) {
+     (piVar1 = (int *)offsetRefResolveC(*(unsigned int *)(param_1 + 4)), param_3 < *piVar1)) {
     temp_v0 = nw_snd_internal_BankFile_InfoBlockBody_GetInstrument
                       (*(unsigned int *)(param_1 + 4),param_3);
     if (temp_v0 == 0) {

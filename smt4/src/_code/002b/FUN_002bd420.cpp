@@ -1,70 +1,12 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_memcpy(void *, void *, int);
+int rt_memcpy(void *dst, void *src, int size);
 
-typedef struct fn_002bd420_arg0 fn_002bd420_arg0;
-typedef struct fn_002bd420_arg1 fn_002bd420_arg1;
-struct fn_002bd420_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    undefined4 field_0x24; /* +0x24 */
-    undefined4 field_0x28; /* +0x28 */
-    undefined4 field_0x2c; /* +0x2c */
-    undefined4 field_0x30; /* +0x30 */
-    undefined4 field_0x34; /* +0x34 */
-    undefined4 field_0x38; /* +0x38 */
-    byte field_0x3c; /* +0x3c */
-    byte field_0x3d; /* +0x3d */
-    byte field_0x3e; /* +0x3e */
-    unsigned char pad_0x3f[0xc];
-    byte field_0x4b; /* +0x4b */
-    byte field_0x4c; /* +0x4c */
-    byte field_0x4d; /* +0x4d */
-};
-struct fn_002bd420_arg1 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    unsigned char pad_0x20[0x20];
-    undefined4 field_0x40; /* +0x40 */
-    undefined4 field_0x44; /* +0x44 */
-    undefined4 field_0x48; /* +0x48 */
-    undefined4 field_0x4c; /* +0x4c */
-    undefined4 field_0x50; /* +0x50 */
-    undefined4 field_0x54; /* +0x54 */
-    undefined4 field_0x58; /* +0x58 */
-    undefined1 field_0x5c; /* +0x5c */
-    undefined1 field_0x5d; /* +0x5d */
-    undefined1 field_0x5e; /* +0x5e */
-    unsigned char pad_0x5f[0xc];
-    undefined1 field_0x6b; /* +0x6b */
-    undefined1 field_0x6c; /* +0x6c */
-    undefined1 field_0x6d; /* +0x6d */
-};
-
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_002bd420(fn_002bd420_arg0 *param_1,fn_002bd420_arg1 *param_2,int param_3)
-
+void FUN_002bd420(void *src, void *dst, int size)
 {
-/* irregular: 1 native warning(s); review required */
-  rt_memcpy(param_2,param_1,param_3);
-  return;
+    rt_memcpy(dst, src, size);
 }
 
 } /* extern "C" */

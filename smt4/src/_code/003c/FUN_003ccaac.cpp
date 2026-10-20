@@ -175,7 +175,7 @@ extern int FUN_003bcc70(unsigned int, unsigned int, int, int, unsigned int);
 /* Supplied declaration required: FUN_003be334. */
 /* Supplied declaration required: FUN_003be8c8. */
 /* Supplied declaration required: FUN_003beb58. */
-extern int FUN_003c83b4(void);
+extern int questGetCurrentRecordValue6(void);
 /* Supplied declaration required: FUN_003d0ac8. */
 extern int FUN_003dcad0(int);
 /* Supplied declaration required: FUN_003dda54. */
@@ -866,7 +866,7 @@ LAB_003cd944:
       }
       param_2[7] = temp_v16;
       if (((temp_v49 != (unsigned int *)0x0) && ((*temp_v49 & 2) != 0 && 0 < (int)temp_v4)) &&
-         (temp_v5 = FUN_003c83b4(), temp_v5 != 0)) {
+         (temp_v5 = questGetCurrentRecordValue6(), temp_v5 != 0)) {
         temp_v39 = (temp_v4 * temp_v5) / 100;
         temp_v5 = FUN_002499b4(*param_1,temp_v4 * temp_v5 * 0x51eb851f);
         if (temp_v5 != 0) {

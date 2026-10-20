@@ -1,24 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_001eb4e0(unsigned int);
+extern u32 FUN_001eb4e0(u32 value);
 
-
-unsigned int FUN_002cbe70(int param_1)
-
+u32 FUN_002cbe70(int mode)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0xe7e3ffff;
-  if (param_1 != 0) {
-    if (param_1 == 1) {
-      temp_v0 = 0;
+    u32 value = 0xe7e3ffff;
+
+    if (mode != 0) {
+        if (mode == 1) {
+            value = 0;
+        }
+        return value;
     }
-    return temp_v0;
-  }
-  temp_v0 = FUN_001eb4e0(0xe7e3ffff);
-  return temp_v0;
+    value = FUN_001eb4e0(0xe7e3ffff);
+    return value;
 }
 
 } /* extern "C" */

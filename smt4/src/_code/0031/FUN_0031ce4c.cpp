@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002abb24(unsigned int, unsigned int);
+int sceneTraverserVisit(unsigned int, unsigned int);
 int FUN_002b3acc(unsigned char *, int, unsigned int, unsigned int);
 int nw_gfx_SceneNode_IsCircularReference(void);
 
@@ -30,7 +30,7 @@ extern unsigned int DAT_00464b84; /* 0x464b84 */
 extern int DAT_004dad80; /* 0x4dad80 */
 
 extern int FUN_00252394(unsigned int);
-/* Supplied declaration required: FUN_002abb24. */
+/* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_002b3acc. */
 extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
@@ -151,7 +151,7 @@ LAB_0031d040:
       DAT_004dad80 = DAT_004dad80 + 1;
     } while (temp_v4 < *(unsigned int *)(*(int *)(param_1 + 0x9c) + 8));
   }
-  FUN_002abb24(DAT_00464b7c,DAT_00464b84);
+  sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
   return;
 }
 

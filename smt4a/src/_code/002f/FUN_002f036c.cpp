@@ -1,16 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f036c` (_code @ 0x2f036c, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+typedef struct State {
+    u8 unk0000[0x2014];
+    s8 mode; /* 0x2014 */
+} State;
 
+typedef struct Globals {
+    u32 unk00;
+    State *state; /* 0x04 */
+} Globals;
 
-int FUN_002f036c(void)
+extern Globals DAT_00588fd0;
 
+s32 FUN_002f036c(void)
 {
-  return (int)*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2014);
+    return DAT_00588fd0.state->mode;
 }
 
 } /* extern "C" */

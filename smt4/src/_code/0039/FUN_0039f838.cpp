@@ -1,15 +1,10 @@
-#include "romwright_types.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
-
-
-void FUN_0039f838(unsigned int param_1,unsigned int param_2)
-
+void FUN_0039f838(u32 unused, u32 map)
 {
-  *(unsigned int *)(DAT_0044cdf0 + 0x28) = param_2;
-  return;
+    DAT_0044cdf0->currentMap = map;
 }
 
 } /* extern "C" */

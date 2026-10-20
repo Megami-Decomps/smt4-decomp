@@ -14,7 +14,7 @@ int FUN_002b8b4c(...);
 int FUN_002b8da0(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
-int FUN_002c09f4(...);
+int randNextInRange(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -42,7 +42,7 @@ extern int FUN_002ae424(unsigned int);
 /* Supplied declaration required: FUN_002b8da0. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 
 
 void FUN_0028dcf4(int param_1,int param_2)
@@ -218,7 +218,7 @@ void FUN_0028dcf4(int param_1,int param_2)
     else {
       *(unsigned char *)(param_1 + 0x3c) = 0;
       *(unsigned char *)(param_1 + 0x3d) = 1;
-      temp_v2 = FUN_002c09f4(99);
+      temp_v2 = randNextInRange(99);
       *(unsigned char *)(param_1 + 0x3e) = (temp_v2 & 1) + 2;
       *(unsigned char *)(param_1 + 0x3f) = 4;
     }
@@ -226,10 +226,10 @@ void FUN_0028dcf4(int param_1,int param_2)
     temp_v7 = 0;
     if (0 < temp_v4) {
       do {
-        temp_v3 = FUN_002c09f4(10);
+        temp_v3 = randNextInRange(10);
         *(unsigned char *)(param_1 + temp_v7 + 0x46) = temp_v3;
-        temp_v4 = FUN_002c09f4((*(int *)(param_1 + 0x24) - 1U) & 0xffff);
-        temp_v5 = FUN_002c09f4((*(int *)(param_1 + 0x24) - 1U) & 0xffff);
+        temp_v4 = randNextInRange((*(int *)(param_1 + 0x24) - 1U) & 0xffff);
+        temp_v5 = randNextInRange((*(int *)(param_1 + 0x24) - 1U) & 0xffff);
         temp_v3 = *(unsigned char *)(temp_v4 + param_1 + 0x3c);
         temp_v7 = temp_v7 + 1;
         *(unsigned char *)(temp_v4 + param_1 + 0x3c) = *(unsigned char *)(temp_v5 + param_1 + 0x3c);
@@ -289,8 +289,8 @@ LAB_0028e528:
     }
     temp_v4 = 0;
     do {
-      temp_v7 = FUN_002c09f4(4);
-      temp_v5 = FUN_002c09f4(4);
+      temp_v7 = randNextInRange(4);
+      temp_v5 = randNextInRange(4);
       temp_v6 = temp_v11[temp_v7];
       temp_v4 = temp_v4 + 1;
       temp_v11[temp_v7] = temp_v11[temp_v5];

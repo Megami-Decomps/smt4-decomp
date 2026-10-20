@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_001008a2(...);
+int libc_strcat(...);
 int FUN_0019cac4(void);
 int FUN_004bd274(int, int);
 int FUN_004bd294(int, int);
@@ -27,11 +27,11 @@ extern unsigned char LAB_002ad974; /* 0x2ad974 */
 extern unsigned char LAB_002ada1c; /* 0x2ada1c */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001008a2. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_0019cac4. */
 extern unsigned int wstrlen(char *);
-extern int FUN_003dfe2c(void);
-extern int FUN_003dfea0(unsigned char);
+extern int playerPackedEntryLow10(void);
+extern int playerPackedEntryHigh(unsigned char);
 /* Supplied declaration required: FUN_004bd274. */
 /* Supplied declaration required: FUN_004bd294. */
 
@@ -80,14 +80,14 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
   temp_v8[7] = '\x13';
   if (param_1 != 0) {
     do {
-      temp_v3 = FUN_003dfea0(temp_v8[unaff_r4]);
+      temp_v3 = playerPackedEntryHigh(temp_v8[unaff_r4]);
       if (temp_v3 != 1) {
         if (temp_v3 == 2) {
           temp_v11[temp_v6] = temp_v8[unaff_r4];
           temp_v6 = temp_v6 + 1;
         }
         else {
-          temp_v3 = FUN_003dfe2c();
+          temp_v3 = playerPackedEntryLow10();
           if (temp_v3 < 100) {
             temp_v12[temp_v7] = temp_v8[unaff_r4];
             temp_v7 = temp_v7 + 1;
@@ -153,10 +153,10 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
   *param_4 = '\0';
   if (temp_v5 != 0) {
     if (temp_v5 >= 8) {
-      FUN_001008a2(param_4,&LAB_002ad8c0);
+      libc_strcat(param_4,&LAB_002ad8c0);
     }
     else {
-      FUN_001008a2(param_4,&LAB_002ad8e4);
+      libc_strcat(param_4,&LAB_002ad8e4);
       temp_v3 = 0;
       if (0 < temp_v5) {
         while( 1 ) {
@@ -185,11 +185,11 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
           case 0x13:
             FUN_00100388(temp_v9,(char *)0x52b8a0);
           }
-          FUN_001008a2(param_4,temp_v9);
+          libc_strcat(param_4,temp_v9);
           temp_v3 = temp_v3 + 1;
           if (temp_v5 <= temp_v3) break;
           if (temp_v3 != 0) {
-            FUN_001008a2(param_4,&LAB_002ad8f0);
+            libc_strcat(param_4,&LAB_002ad8f0);
           }
         }
       }
@@ -197,13 +197,13 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
   }
   if (temp_v7 != 0) {
     if (*param_4 != '\0') {
-      FUN_001008a2(param_4,&LAB_002ad914);
+      libc_strcat(param_4,&LAB_002ad914);
     }
     if (temp_v6 >= 8) {
-      FUN_001008a2(param_4,&LAB_002ad918);
+      libc_strcat(param_4,&LAB_002ad918);
     }
     else {
-      FUN_001008a2(param_4,&LAB_002ad940);
+      libc_strcat(param_4,&LAB_002ad940);
       temp_v3 = 0;
       if (0 < temp_v7) {
 LAB_002ad77c:
@@ -236,11 +236,11 @@ LAB_002ad77c:
         }
         FUN_00100388(temp_v9,pcVar6);
 LAB_002ad7c8:
-        FUN_001008a2(param_4,temp_v9);
+        libc_strcat(param_4,temp_v9);
         temp_v3 = temp_v3 + 1;
         if (temp_v3 < temp_v7) {
           if (temp_v3 != 0) {
-            FUN_001008a2(param_4,&LAB_002ad8f0);
+            libc_strcat(param_4,&LAB_002ad8f0);
           }
           goto LAB_002ad77c;
         }
@@ -249,13 +249,13 @@ LAB_002ad7c8:
   }
   if (temp_v6 != 0) {
     if (*param_4 != '\0') {
-      FUN_001008a2(param_4,&LAB_002ad914);
+      libc_strcat(param_4,&LAB_002ad914);
     }
     if (temp_v6 >= 8) {
-      FUN_001008a2(param_4,&LAB_002ad950);
+      libc_strcat(param_4,&LAB_002ad950);
     }
     else {
-      FUN_001008a2(param_4,&LAB_002ad974);
+      libc_strcat(param_4,&LAB_002ad974);
       temp_v3 = 0;
       if (0 < temp_v6) {
 LAB_002ad880:
@@ -288,11 +288,11 @@ LAB_002ad880:
         }
         FUN_00100388(temp_v9,pcVar6);
 LAB_002ad990:
-        FUN_001008a2(param_4,temp_v9);
+        libc_strcat(param_4,temp_v9);
         temp_v3 = temp_v3 + 1;
         if (temp_v3 < temp_v6) {
           if (temp_v3 != 0) {
-            FUN_001008a2(param_4,&LAB_002ad8f0);
+            libc_strcat(param_4,&LAB_002ad8f0);
           }
           goto LAB_002ad880;
         }
@@ -300,7 +300,7 @@ LAB_002ad990:
     }
   }
   if ((temp_v5 == 0 && temp_v7 == 0) && temp_v6 == 0) {
-    FUN_001008a2(param_4,&LAB_002ada1c);
+    libc_strcat(param_4,&LAB_002ada1c);
   }
   temp_v4 = wstrlen(param_4);
   if (temp_v4 >= 0x66) {

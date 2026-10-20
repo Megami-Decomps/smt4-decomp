@@ -19,13 +19,13 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_002d8b58(unsigned int, unsigned short);
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -44,19 +44,19 @@ unsigned int FUN_0020ecd4(void)
   unsigned char temp_v6 [72];
   
   FUN_00152f44();
-  temp_v0 = FUN_003e0044(5);
-  if ((((temp_v0 != 0) || (temp_v0 = FUN_003e0044(9), temp_v0 != 0)) && ((*(int *)((unsigned char *)&g_gameState + 0x390)) != 0)) &&
+  temp_v0 = playerHasFlagBit(5);
+  if ((((temp_v0 != 0) || (temp_v0 = playerHasFlagBit(9), temp_v0 != 0)) && ((*(int *)((unsigned char *)&g_gameState + 0x390)) != 0)) &&
      ((*(int *)((unsigned char *)&g_gameState + 0x390)) = (*(int *)((unsigned char *)&g_gameState + 0x390)) + 1, (*(int *)((unsigned char *)&g_gameState + 0x390)) >= 11)) {
     (*(int *)((unsigned char *)&g_gameState + 0x390)) = 0;
   }
   if (*g_popupState == 0) {
-    temp_v0 = FUN_0015688c();
+    temp_v0 = saveSlotFindSelected();
     if (temp_v0 == 0) {
       return 0;
     }
     temp_v1 = FUN_0018719c(0x1a2);
     if ((((temp_v1 == 0) || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33)) &&
-        ((temp_v1 = FUN_003e0044(5), temp_v1 != 0 || (temp_v1 = FUN_003e0044(9), temp_v1 != 0)))) &&
+        ((temp_v1 = playerHasFlagBit(5), temp_v1 != 0 || (temp_v1 = playerHasFlagBit(9), temp_v1 != 0)))) &&
        ((*(int *)((unsigned char *)&g_gameState + 0x390)) == 0)) {
       (*(int *)((unsigned char *)&g_gameState + 0x390)) = 1;
       temp_v2 = dataTableGet(0x43,0);
@@ -85,12 +85,12 @@ unsigned int FUN_0020ecd4(void)
             temp_v0 = FUN_002d8b58(4,*(unsigned short *)(temp_v0 + 300));
             g_popupState[5] = temp_v0;
             rt_memcpy(temp_v6,temp_v0,0x40);
-            temp_v0 = FUN_003e0044(5);
+            temp_v0 = playerHasFlagBit(5);
             if (temp_v0 != 0) {
               FUN_00100388((int)g_popupState + 0x25,temp_v6,&LAB_0020ef4c);
             }
             else {
-              temp_v0 = FUN_003e0044(9);
+              temp_v0 = playerHasFlagBit(9);
               if (temp_v0 != 0) {
                 FUN_00100388((int)g_popupState + 0x25,temp_v6,&LAB_0020ef5c);
               }

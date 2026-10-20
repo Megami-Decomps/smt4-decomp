@@ -1,0 +1,33 @@
+#include "shard/Shard0036.h"
+
+extern "C" {
+
+extern u32 scrGetArg(s32 index);
+extern u32 FUN_002deb84(void);
+extern u16 FUN_0037d9fc(u32 id);
+extern void saveSlotFindById(u32 id);
+extern void FUN_003c6034(s32 id, u16 value);
+extern u32 FUN_003c5fdc(void);
+
+/* Script command: starts the action for the id in argument 0 on the first call, then waits on FUN_003c5fdc. */
+u32 scrCommStartActionWait(void)
+{
+    u32 id;
+    u16 value;
+
+    if (FUN_002deb84() == 0) {
+        id = scrGetArg(0);
+        value = FUN_0037d9fc(id & 0xFFFF);
+        if (value == 0) {
+            return 1;
+        }
+        saveSlotFindById(id & 0xFFFF);
+        FUN_003c6034(id, value);
+    }
+    if (FUN_003c5fdc() != 0) {
+        return 1;
+    }
+    return 0;
+}
+
+} /* extern "C" */

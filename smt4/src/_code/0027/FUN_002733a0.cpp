@@ -1,23 +1,17 @@
-#include "romwright_types.h"
+#include "shard/JobBlock43e278.h"
 
 extern "C" {
 
-extern int DAT_0043e278; /* 0x43e278 */
-
-
-void FUN_002733a0(unsigned int param_1)
-
+void FUN_002733a0(u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = DAT_0043e278;
-  *(unsigned char *)(DAT_0043e278 + 0xf9a) = 1;
-  *(unsigned char *)(temp_v0 + 0xf9c) = 0;
-  *(unsigned char *)(temp_v0 + 0xf9d) = 0;
-  *(unsigned char *)(temp_v0 + 0xf9e) = 0;
-  *(unsigned int *)(temp_v0 + 0xfd0) = 0;
-  *(unsigned int *)(temp_v0 + 0xfd4) = param_1;
-  return;
+    JobBlock43e278 *block = DAT_0043e278;
+
+    DAT_0043e278->unkF9A = 1;
+    block->unkF9C = 0;
+    block->unkF9D = 0;
+    block->unkF9E = 0;
+    block->unkFD0 = 0;
+    block->unkFD4 = value;
 }
 
 } /* extern "C" */

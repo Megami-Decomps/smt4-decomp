@@ -1,16 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 size;
+} Source;
 
-unsigned int FUN_002e7378(int param_1,unsigned int param_2)
+typedef struct Stream {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 error;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ Source *source;
+    /* 0x0C */ u32 position;
+} Stream;
 
+/* Moves the read position to `position` if it lies within the source; returns whether it did. */
+u32 FUN_002e7378(Stream *stream, u32 position)
 {
-  if (*(unsigned int *)(*(int *)(param_1 + 8) + 0x10) < param_2) {
-    return 0;
-  }
-  *(unsigned int *)(param_1 + 0xc) = param_2;
-  return 1;
+    if (stream->source->size < position) {
+        return 0;
+    }
+    stream->position = position;
+    return 1;
 }
 
 } /* extern "C" */

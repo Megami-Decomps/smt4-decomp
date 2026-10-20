@@ -31,7 +31,7 @@ int FUN_00384830(void);
 int FUN_003ae6cc(void);
 int FUN_003d4ed8(...);
 int FUN_003fd63c(int, int);
-int FUN_00409d8c(...);
+int countersAddSaturating(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 11 slot(s), 44 byte(s) */
@@ -101,7 +101,7 @@ extern int FUN_00376fcc(int);
 /* Supplied declaration required: FUN_003ae6cc. */
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: FUN_003fd63c. */
-/* Supplied declaration required: FUN_00409d8c. */
+/* Supplied declaration required: countersAddSaturating. */
 extern int FUN_004813bc(unsigned int);
 
 
@@ -187,7 +187,7 @@ unsigned int FUN_002332f4(void)
             FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
             FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
             FUN_003ae6cc();
-            FUN_00409d8c(0x17,1);
+            countersAddSaturating(0x17,1);
             *(unsigned char *)(temp_v5 + 0x7c) = 1;
             *(unsigned int *)(temp_v5 + 0x60) = 2;
             *(unsigned int *)(temp_v5 + 100) = 0;
@@ -304,7 +304,7 @@ unsigned int FUN_002332f4(void)
               FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
               FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
               FUN_003ae6cc();
-              FUN_00409d8c(0x17,1);
+              countersAddSaturating(0x17,1);
               *(unsigned char *)(temp_v5 + 0x7c) = 1;
               *(unsigned int *)(temp_v5 + 0x60) = 2;
               *(unsigned int *)(temp_v5 + 100) = 0;
@@ -402,8 +402,8 @@ LAB_00233a04:
           FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
           FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
           FUN_003ae6cc();
-          FUN_00409d8c(0x17,1);
-          FUN_00409d8c(0x18,1);
+          countersAddSaturating(0x17,1);
+          countersAddSaturating(0x18,1);
           *(unsigned char *)(temp_v5 + 0x7c) = 1;
           *(unsigned int *)(temp_v5 + 0x60) = 2;
           *(unsigned int *)(temp_v5 + 100) = 0;

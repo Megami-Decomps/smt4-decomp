@@ -8,7 +8,7 @@ int FUN_001641c4(void);
 int FUN_00169ddc(int);
 int FUN_0019de98(int, unsigned int);
 int FUN_00275f44(unsigned int, unsigned int);
-int FUN_0050d778(int, unsigned int);
+int fillThreeWordsWithByte(int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern unsigned char DAT_00588e17; /* 0x588e17 */
 /* Supplied declaration required: FUN_00169ddc. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00275f44. */
-/* Supplied declaration required: FUN_0050d778. */
+/* Supplied declaration required: fillThreeWordsWithByte. */
 
 
 void FUN_0041e9d4(int param_1)
@@ -42,7 +42,7 @@ void FUN_0041e9d4(int param_1)
     } while (temp_v2 < *(int *)(param_1 + 0x448));
   }
   *(unsigned int *)(param_1 + 0x448) = 0;
-  FUN_0050d778(param_1 + 0x43c,0xffffffff);
+  fillThreeWordsWithByte(param_1 + 0x43c,0xffffffff);
   *(unsigned char *)(param_1 + 0x44c) = 0;
   *(unsigned char *)(param_1 + 0x44d) = 0;
   *(unsigned char *)(param_1 + 0x44e) = 0;

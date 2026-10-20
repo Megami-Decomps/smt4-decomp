@@ -89,7 +89,7 @@ extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0031eba0. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -169,7 +169,7 @@ void FUN_003b3388(int param_1,int param_2,int param_3)
     FUN_002bf288(2,0x28,6,temp_v14,param_3,0x6a);
   }
   temp_v14 = g_titleScene;
-  temp_v5 = FUN_002c5da8(6,1,0);
+  temp_v5 = packNibblesAndByte(6,1,0);
   piVar13 = (int *)(temp_v14 + 0x12ac);
   temp_v8 = piVar13[*piVar13 + 2];
   piVar13[*piVar13 + 2] = temp_v5;
@@ -216,7 +216,7 @@ LAB_003b35ac:
     temp_v8 = g_titleScene;
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 4);
-  temp_v14 = FUN_002c5da8(6,7,0);
+  temp_v14 = packNibblesAndByte(6,7,0);
   piVar13 = (int *)(temp_v8 + 0x12ac);
   temp_v21 = piVar13[*piVar13 + 2];
   piVar13[*piVar13 + 2] = temp_v14;
@@ -529,7 +529,7 @@ LAB_003b35ac:
       temp_v6 = aiStack_e0[temp_v14];
       if (*(char *)(param_1 + temp_v8 + 0xd4fe) != '\0') {
         if (temp_v21 == 0) {
-          temp_v7 = FUN_002c5da8(6,1,0);
+          temp_v7 = packNibblesAndByte(6,1,0);
           piVar13 = (int *)(temp_v5 + 0x12ac);
           temp_v10 = piVar13[*piVar13 + 2];
           piVar13[*piVar13 + 2] = temp_v7;
@@ -547,7 +547,7 @@ LAB_003b35ac:
     temp_v14 = temp_v14 + 1;
   } while (temp_v14 < 4);
   if (temp_v21 != 0) {
-    temp_v14 = FUN_002c5da8(6,7,0);
+    temp_v14 = packNibblesAndByte(6,7,0);
     piVar13 = (int *)(temp_v5 + 0x12ac);
     temp_v21 = piVar13[*piVar13 + 2];
     piVar13[*piVar13 + 2] = temp_v14;
@@ -663,7 +663,7 @@ LAB_003b4444:
   } while (temp_v14 < 6);
   temp_v14 = g_titleScene;
   if (0 < temp_v21) {
-    temp_v21 = FUN_002c5da8(6,1,0);
+    temp_v21 = packNibblesAndByte(6,1,0);
     piVar13 = (int *)(temp_v14 + 0x12ac);
     temp_v5 = piVar13[*piVar13 + 2];
     piVar13[*piVar13 + 2] = temp_v21;
@@ -694,7 +694,7 @@ LAB_003b4444:
     } while (temp_v21 < 6);
     FUN_002bf538();
     temp_v4 = g_titleScene;
-    temp_v14 = FUN_002c5da8(6,7,0);
+    temp_v14 = packNibblesAndByte(6,7,0);
     piVar13 = (int *)(temp_v4 + 0x12ac);
     temp_v21 = piVar13[*piVar13 + 2];
     piVar13[*piVar13 + 2] = temp_v14;

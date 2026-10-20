@@ -1,21 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Range {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s16 first;
+    /* 0x12 */ s16 last;
+} Range;
 
-unsigned int FUN_0022a00c(int param_1)
-
+/* Returns 1 when the range is set (first is not -1) and last is not before first. */
+u32 FUN_0022a00c(Range *range)
 {
-  unsigned int temp_v0;
-  
-  if ((*(short *)(param_1 + 0x10) == -1) ||
-     (*(short *)(param_1 + 0x12) < *(short *)(param_1 + 0x10))) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    u32 valid;
+
+    if ((range->first == -1) || (range->last < range->first)) {
+        valid = 0;
+    } else {
+        valid = 1;
+    }
+    return valid;
 }
 
 } /* extern "C" */

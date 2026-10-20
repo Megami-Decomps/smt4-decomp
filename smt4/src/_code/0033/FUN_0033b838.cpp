@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0029e974(void);
+int dataTable06Sub1GetRecord(void);
 int FUN_002b9024(void);
 
 extern int FUN_00245768(unsigned short);
 extern int padIsButtonDown(unsigned int);
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002b9024. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 unsigned int FUN_0033b838(int param_1,int param_2,int param_3)
@@ -34,7 +34,7 @@ unsigned int FUN_0033b838(int param_1,int param_2,int param_3)
     }
     temp_v1 = 0;
     do {
-      temp_v2 = FUN_002c09f4(99);
+      temp_v2 = randNextInRange(99);
       if (param_3 != 0) {
         temp_v2 = -1;
       }
@@ -42,7 +42,7 @@ unsigned int FUN_0033b838(int param_1,int param_2,int param_3)
         temp_v2 = 0;
         do {
           temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x34 + temp_v2 * 2);
-          FUN_0029e974();
+          dataTable06Sub1GetRecord();
           if ((*(unsigned char *)(temp_v0 + 3) & 0x40) != 0) {
             return 1;
           }

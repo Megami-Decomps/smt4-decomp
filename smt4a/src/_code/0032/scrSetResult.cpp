@@ -1,19 +1,16 @@
-#include "romwright_types.h"
+#include "shard/Shard0032.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588e3c; /* 0x588e3c */
+extern ScriptRef DAT_00588e3c;
 
-
-void scrSetResult(unsigned int param_1)
-
+/* Stores the script command's result and clears the waiting flag. */
+void scrSetResult(u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588e3c + 0x20));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00588e3c + 0x20)) + 0x3b) = 0;
-  *(unsigned int *)(temp_v0 + 0xa8) = param_1;
-  return;
+    ScriptState *state = DAT_00588e3c.state;
+
+    state->unk3B = 0;
+    state->result = value;
 }
 
 } /* extern "C" */

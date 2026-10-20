@@ -38,7 +38,7 @@ extern unsigned int DAT_005714ec; /* 0x5714ec */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_0018719c(unsigned int);
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: FUN_003f0e20. */
@@ -146,7 +146,7 @@ unsigned int FUN_004bf348(fn_004bf348_arg0 *param_1,int param_2,int param_3)
         temp_v4 = (unsigned int)(*(float *)(temp_v0 + 0x14) * temp_v5);
       }
     }
-    temp_v0 = FUN_001633a0(99);
+    temp_v0 = lcgRandomRange(99);
     if ((DAT_00571498 & puVar1[0x1168]) != 0 || (DAT_0057149c & puVar1[0x1169]) != 0) {
       if ((char)puVar1[0x1391] == '\0') {
         temp_v4 = 0;

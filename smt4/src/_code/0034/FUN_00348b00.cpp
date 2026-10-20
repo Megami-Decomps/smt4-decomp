@@ -1,20 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002adc88(void);
+extern u8 *FUN_002adc88(void);
 
-
-void FUN_00348b00(int param_1)
-
+/* Sets flag 1 of byte +2 and flag 0x80 of byte +0 of entry `index` (4-byte entries at +0x200). */
+void FUN_00348b00(int index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002adc88();
-  temp_v0 = temp_v0 + param_1 * 4;
-  *(unsigned char *)(temp_v0 + 0x202) = *(unsigned char *)(temp_v0 + 0x202) | 1;
-  *(unsigned char *)(temp_v0 + 0x200) = *(unsigned char *)(temp_v0 + 0x200) | 0x80;
-  return;
+    u8 *entry = FUN_002adc88();
+
+    entry = entry + index * 4;
+    entry[0x202] = entry[0x202] | 1;
+    entry[0x200] = entry[0x200] | 0x80;
 }
 
 } /* extern "C" */

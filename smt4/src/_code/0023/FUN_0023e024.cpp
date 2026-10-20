@@ -32,7 +32,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00191830. */
 /* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_0023e024(int param_1,int param_2,unsigned int param_3,unsigned int param_4,int param_5)
@@ -89,7 +89,7 @@ LAB_0023e0e4:
               if (temp_v1 != '\x01') {
                 if (temp_v1 != '\x02') {
                   if (temp_v1 == '\x03') {
-                    temp_v4 = FUN_002c5da8(5,0,1);
+                    temp_v4 = packNibblesAndByte(5,0,1);
                     piVar10 = (int *)(temp_v3 + 0x12ac);
                     temp_v6 = piVar10[*piVar10 + 2];
                     piVar10[*piVar10 + 2] = temp_v4;
@@ -100,7 +100,7 @@ LAB_0023e0e4:
                   }
                 }
                 else {
-                  temp_v4 = FUN_002c5da8(6,1,2);
+                  temp_v4 = packNibblesAndByte(6,1,2);
                   piVar10 = (int *)(temp_v3 + 0x12ac);
                   temp_v6 = piVar10[*piVar10 + 2];
                   piVar10[*piVar10 + 2] = temp_v4;
@@ -111,7 +111,7 @@ LAB_0023e0e4:
                 }
               }
               else {
-                temp_v4 = FUN_002c5da8(6,1,0);
+                temp_v4 = packNibblesAndByte(6,1,0);
                 piVar10 = (int *)(temp_v3 + 0x12ac);
                 temp_v6 = piVar10[*piVar10 + 2];
                 piVar10[*piVar10 + 2] = temp_v4;
@@ -122,7 +122,7 @@ LAB_0023e0e4:
               }
             }
             else {
-              temp_v4 = FUN_002c5da8(6,7,0);
+              temp_v4 = packNibblesAndByte(6,7,0);
               piVar10 = (int *)(temp_v3 + 0x12ac);
               temp_v6 = piVar10[*piVar10 + 2];
               piVar10[*piVar10 + 2] = temp_v4;

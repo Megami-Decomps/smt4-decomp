@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001836b0(int);
+int resourceListDestroy(int);
 int asdMemFree(int);
 
-extern int DAT_00580c8c; /* 0x580c8c */
+extern int g_eplSlots; /* 0x580c8c */
 
-/* Supplied declaration required: FUN_001836b0. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -22,9 +22,9 @@ void FUN_002b7534(void)
   
   temp_v1 = 0;
   do {
-    temp_v0 = temp_v1 * 100 + DAT_00580c8c + 0xc;
+    temp_v0 = temp_v1 * 100 + g_eplSlots + 0xc;
     if (*(int *)(temp_v0 + 0x5c) != 0) {
-      FUN_001836b0(*(int *)(temp_v0 + 0x5c));
+      resourceListDestroy(*(int *)(temp_v0 + 0x5c));
       *(unsigned int *)(temp_v0 + 0x5c) = 0;
       *(unsigned char *)(temp_v0 + 0x60) = 0;
     }
@@ -35,9 +35,9 @@ void FUN_002b7534(void)
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x10);
-  if (DAT_00580c8c != 0) {
-    asdMemFree(DAT_00580c8c);
-    DAT_00580c8c = 0;
+  if (g_eplSlots != 0) {
+    asdMemFree(g_eplSlots);
+    g_eplSlots = 0;
   }
   return;
 }

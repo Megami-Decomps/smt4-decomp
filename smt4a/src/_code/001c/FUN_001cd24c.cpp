@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Record {
+    /* 0x00 */ u32 a;
+    /* 0x04 */ u32 b;
+    /* 0x08 */ u16 c;
+} Record;
 
-void FUN_001cd24c(unsigned int *param_1)
-
+/* Clears the record. */
+void FUN_001cd24c(Record *record)
 {
-  *param_1 = 0;
-  param_1[1] = 0;
-  *(unsigned short *)(param_1 + 2) = 0;
-  return;
+    record->a = 0;
+    record->b = 0;
+    record->c = 0;
 }
 
 } /* extern "C" */

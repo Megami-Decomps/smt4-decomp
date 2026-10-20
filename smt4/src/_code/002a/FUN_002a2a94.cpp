@@ -1,23 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nn_snd_CTR_MasterManagerImpl_AuxUserCallback(unsigned char *);
+int nn_snd_CTR_MasterManagerImpl_AuxUserCallback(u8 *manager);
 
-extern unsigned char DAT_004ead10; /* 0x4ead10 */
+extern u8 DAT_004ead10;
 
-/* Supplied declaration required: nn_snd_CTR_MasterManagerImpl_AuxUserCallback. */
-
-
-void FUN_002a2a94(char *param_1)
-
+void FUN_002a2a94(char *enabled)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != '\0') {
-    nn_snd_CTR_MasterManagerImpl_AuxUserCallback(&DAT_004ead10);
-    return;
-  }
-  return;
+    if (*enabled != 0) {
+        nn_snd_CTR_MasterManagerImpl_AuxUserCallback(&DAT_004ead10);
+    }
 }
 
 } /* extern "C" */

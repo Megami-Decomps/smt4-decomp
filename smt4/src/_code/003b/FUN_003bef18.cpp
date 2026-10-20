@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 
@@ -19,7 +19,7 @@ void FUN_003bef18(void)
   for (temp_v3 = 0; temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x910b); temp_v3++) {
     if (*(signed char *)(temp_v0 + temp_v3 + 0x90f0) >= 0) {
       temp_v1 = FUN_002a8740();
-      temp_v2 = FUN_0029ebac(temp_v1,10);
+      temp_v2 = flagWordTestBit(temp_v1,10);
       if (temp_v2 == 0) {
         *(unsigned char *)(temp_v1 + 0x600) = 0;
       }

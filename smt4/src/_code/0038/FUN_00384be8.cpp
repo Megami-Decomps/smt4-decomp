@@ -13,7 +13,7 @@ int FUN_00297060(unsigned int, unsigned int);
 int FUN_002973d8(void);
 int FUN_00297468(unsigned char [64], unsigned int *, int);
 int scrScriptProcessDestroy(void);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 int FUN_002b8838(int);
 int FUN_002bcfc0(unsigned char [64], unsigned char [140]);
 int FUN_002be624(...);
@@ -36,7 +36,7 @@ extern unsigned char LAB_00385254; /* 0x385254 */
 
 extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00210194. */
-extern int FUN_00235378(unsigned int *, unsigned int);
+extern int dataTable27Sub0GetRecord(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00235554. */
 /* Supplied declaration required: FUN_00259258. */
 extern int FUN_0025a03c(unsigned int);
@@ -49,7 +49,7 @@ extern int FUN_00290eb0(void);
 /* Supplied declaration required: FUN_002973d8. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002b8838. */
 /* Supplied declaration required: FUN_002bcfc0. */
 /* Supplied declaration required: FUN_002be624. */
@@ -100,11 +100,11 @@ void FUN_00384be8(unsigned int *param_1)
     temp_v2 = 0;
     if (0 < (int)param_1[0x363]) {
       do {
-        temp_v4 = FUN_00235378(param_1 + 8,0);
+        temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);
         FUN_002bf694(temp_v6,temp_v4 + param_1[temp_v2 * 2 + 0x357] * 0x88);
         FUN_002bcfc0(temp_v6,temp_v8);
-        FUN_002b64a0(puVar6,temp_v8);
-        FUN_002b64a0(puVar6,"<br>");
+        libc_strcat(puVar6,temp_v8);
+        libc_strcat(puVar6,"<br>");
         param_1[param_1[0x368] + 0x364] = temp_v2;
         temp_v1 = param_1[0x368] + 1;
         param_1[0x368] = temp_v1;
@@ -191,7 +191,7 @@ void FUN_00384be8(unsigned int *param_1)
     }
     break;
   case 2:
-    temp_v4 = FUN_00235378(param_1 + 8,0);
+    temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);
     temp_v0 = *(unsigned short *)(temp_v4 + *(int *)param_1[0x36a] * 0x88 + 0x6a);
     FUN_002be624(temp_v6,&LAB_00385234,temp_v0,temp_v0);
     FUN_002be624(temp_v7,&LAB_00385254,temp_v0);
@@ -214,7 +214,7 @@ void FUN_00384be8(unsigned int *param_1)
       FUN_00297060(temp_v2,param_1[0x16f]);
       param_1[0x170] = temp_v2;
       *(unsigned int *)(temp_v2 + 0x108) = 2;
-      temp_v4 = FUN_00235378(param_1 + 8,0);
+      temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);
       temp_v5 = *(int *)*puVar6;
       jyoucyuGetTableEntry(0);
       temp_v3 = FUN_00290d74(*puVar8,temp_v4 + temp_v5 * 0x88 + 0x6c);

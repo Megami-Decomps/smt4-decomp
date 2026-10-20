@@ -1,25 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nnosAddressSpaceManagerInitialize(unsigned char *, unsigned int, unsigned int);
+void nnosAddressSpaceManagerInitialize(u8 *manager, u32 base, u32 size);
+extern s8 DAT_005c0ad4;
+extern u8 DAT_00643310[];
 
-extern signed char DAT_005c0ad4; /* 0x5c0ad4 */
-extern unsigned char DAT_00643310; /* 0x643310 */
-
-/* Supplied declaration required: nnosAddressSpaceManagerInitialize. */
-
-
-void FUN_00146bf4(unsigned int param_1,unsigned int param_2)
-
+/* Initialises the address-space manager at 0x643310 for the range (base, size) the first time it is called. */
+void FUN_00146bf4(u32 base, u32 size)
 {
-/* irregular: 1 native warning(s); review required */
-  if (DAT_005c0ad4 == '\0') {
-    DAT_005c0ad4 = 1;
-    nnosAddressSpaceManagerInitialize(&DAT_00643310,param_1,param_2);
-    return;
-  }
-  return;
+    if (DAT_005c0ad4 == 0) {
+        DAT_005c0ad4 = 1;
+        nnosAddressSpaceManagerInitialize(DAT_00643310, base, size);
+        return;
+    }
 }
 
 } /* extern "C" */

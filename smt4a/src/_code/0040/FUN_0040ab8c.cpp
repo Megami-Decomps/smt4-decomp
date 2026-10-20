@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Shard0040.h"
 
 extern "C" {
 
-
-unsigned char FUN_0040ab8c(int param_1)
-
+u8 FUN_0040ab8c(LockedObj *obj)
 {
-  return *(int *)(param_1 + 0x10) != 0;
+    return obj->unk10 != 0;
 }
 
 } /* extern "C" */

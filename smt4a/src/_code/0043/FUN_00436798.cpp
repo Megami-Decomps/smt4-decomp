@@ -7,7 +7,7 @@ extern "C" {
 int FUN_004352b0(int *, int *);
 int FUN_004383d8(void);
 int FUN_004387f0(int *, int);
-int FUN_00515580(int *, int *, int);
+int variantSetHalfB(int *, int *, int);
 int FUN_00515598(void);
 int FUN_00515618(int **, int);
 
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_004352b0. */
 /* Supplied declaration required: FUN_004383d8. */
 /* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: FUN_00515580. */
+/* Supplied declaration required: variantSetHalfB. */
 /* Supplied declaration required: FUN_00515598. */
 /* Supplied declaration required: FUN_00515618. */
 
@@ -56,7 +56,7 @@ unsigned int FUN_00436798(int *param_1,int *param_2,int *param_3)
     FUN_00515618(&temp_v3,*param_3 + 8);
     if (temp_v3 != (int *)0x0) {
       temp_v4 = temp_v2;
-      FUN_00515580(temp_v3 + 2,&temp_v4,*(unsigned short *)(*param_1 + 10));
+      variantSetHalfB(temp_v3 + 2,&temp_v4,*(unsigned short *)(*param_1 + 10));
       if (temp_v0 != 0) {
         piVar5 = (int *)0x0;
         do {
@@ -81,7 +81,7 @@ unsigned int FUN_00436798(int *param_1,int *param_2,int *param_3)
           }
           temp_v5 = temp_v2;
           temp_v3 = piVar1;
-          FUN_00515580(piVar1 + 2,&temp_v5,*(unsigned short *)(temp_v1 + 2));
+          variantSetHalfB(piVar1 + 2,&temp_v5,*(unsigned short *)(temp_v1 + 2));
           piVar5 = (int *)((int)piVar5 + 1);
         } while ((int)piVar5 < 3);
       }

@@ -9,9 +9,9 @@ extern unsigned int DAT_005f16d4; /* 0x5f16d4 */
 
 extern int FUN_00162e8c(void);
 extern int FUN_00376f94(void);
-extern int FUN_003a338c(unsigned int);
-extern int FUN_003a33c8(unsigned int);
-extern int FUN_003ae5e4(unsigned int);
+extern int dataTable2FType0GetEntry(unsigned int);
+extern int dataTable2FType1GetEntry(unsigned int);
+extern int dataTable2FType2GetEntry(unsigned int);
 
 
 void FUN_00352eec(void)
@@ -29,7 +29,7 @@ void FUN_00352eec(void)
   if (DAT_005f16d0 != 1) {
     if (DAT_005f16d0 != 2) {
       if (DAT_005f16d0 == 3) {
-        temp_v2 = FUN_003ae5e4(DAT_005f16d4);
+        temp_v2 = dataTable2FType2GetEntry(DAT_005f16d4);
         *(char *)(temp_v1 + 0x3a) = (char)*(unsigned short *)(temp_v2 + 0xc);
         *(char *)(temp_v1 + 0x3b) = (char)*(unsigned short *)(temp_v2 + 0xe);
         *(char *)(temp_v1 + 0x7c5) = (char)*(unsigned short *)(temp_v2 + 8);
@@ -37,7 +37,7 @@ void FUN_00352eec(void)
       }
     }
     else {
-      temp_v2 = FUN_003a33c8(DAT_005f16d4);
+      temp_v2 = dataTable2FType1GetEntry(DAT_005f16d4);
       *(char *)(temp_v1 + 0x3a) = (char)*(unsigned short *)(temp_v2 + 0xc);
       *(char *)(temp_v1 + 0x3b) = (char)*(unsigned short *)(temp_v2 + 0xe);
       *(char *)(temp_v1 + 0x7c5) = (char)*(unsigned short *)(temp_v2 + 10);
@@ -46,7 +46,7 @@ void FUN_00352eec(void)
     }
   }
   else {
-    temp_v2 = FUN_003a338c(DAT_005f16d4);
+    temp_v2 = dataTable2FType0GetEntry(DAT_005f16d4);
     *(char *)(temp_v1 + 0x3a) = (char)*(unsigned short *)(temp_v2 + 0xc);
     *(char *)(temp_v1 + 0x3b) = (char)*(unsigned short *)(temp_v2 + 0xe);
     *(char *)(temp_v1 + 0x7c5) = (char)*(unsigned short *)(temp_v2 + 10);

@@ -1,34 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b6668(int, int);
-int FUN_001b9f70(int);
-int FUN_001b9f8c(int, int);
+void FUN_001b6668(u8 *dest, u8 *source);
+void FUN_001b9f70(void *object);
+void FUN_001b9f8c(void *list, void *object);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 member04[1];
+} Owner;
 
-/* Supplied declaration required: FUN_001b6668. */
-/* Supplied declaration required: FUN_001b9f70. */
-/* Supplied declaration required: FUN_001b9f8c. */
+typedef struct Object {
+    /* 0x000 */ u8 unk000[0x1B0];
+    /* 0x1B0 */ u8 member1B0[1];
+} Object;
 
-
-void FUN_001b2040(int param_1,int param_2)
-
+/* Releases `object` from the owner: FUN_001b6668 on their members, then (when there is an object) FUN_001b9f70 and FUN_001b9f8c. */
+void FUN_001b2040(Owner *owner, Object *object)
 {
-/* irregular: 3 native warning(s); review required */
-  int a = param_1 + 4;
-  int b = param_2 + 0x1b0;
-  FUN_001b6668(a,b);
-  if (param_2 != 0) {
-    FUN_001b9f70(param_2);
-    FUN_001b9f8c(param_1,param_2);
-    return;
-  }
-  return;
+    u8 *a = owner->member04;
+    u8 *b = object->member1B0;
+
+    FUN_001b6668(a, b);
+    if (object != NULL) {
+        FUN_001b9f70(object);
+        FUN_001b9f8c(owner, object);
+        return;
+    }
 }
 
 } /* extern "C" */

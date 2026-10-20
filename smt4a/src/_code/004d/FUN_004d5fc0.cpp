@@ -16,7 +16,7 @@ extern unsigned int DAT_0057150c; /* 0x57150c */
 extern unsigned int DAT_00571510; /* 0x571510 */
 
 extern int FUN_0032c430(unsigned int);
-extern unsigned int *FUN_00340ec8(unsigned int, unsigned int);
+extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004f43b4. */
 
 
@@ -60,27 +60,27 @@ void FUN_004d5fc0(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v2 = DAT_00571508[0x193] | 0x80;
     break;
   case 3:
-    puVar3 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar3;
     puVar3 = &DAT_0057150c;
     *puVar3 = temp_v1;
     return;
   case 4:
-    puVar3 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     temp_v1 = *puVar3;
     puVar3 = &DAT_00571510;
     *puVar3 = temp_v1;
     return;
   case 5:
-    puVar3 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     *DAT_00571508 = *puVar3;
     return;
   case 6:
-    puVar3 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     DAT_00571508[1] = *puVar3;
     return;
   case 7:
-    puVar3 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10),param_3);
+    puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),param_3);
     DAT_00571508[2] = *puVar3;
     return;
   default:

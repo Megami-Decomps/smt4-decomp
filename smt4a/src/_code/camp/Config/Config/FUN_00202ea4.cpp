@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_003180c4(...);
-int FUN_003491e8(void);
+int obj04Finish(void);
 
 int FUN_0014e188(...);
 int FUN_001517b4(...);
@@ -28,7 +28,7 @@ int FUN_00275f44(...);
 int FUN_00284168(int, int, int, int);
 int FUN_003450d4(...);
 int FUN_003a76a8(...);
-int FUN_0050d778(int, unsigned int);
+int fillThreeWordsWithByte(int, unsigned int);
 
 /* stack frame of void: 4 slot(s), 13 byte(s) */
 typedef struct {
@@ -68,11 +68,11 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int FUN_00348ed0(int);
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_003a76a8. */
 extern int FUN_003d21dc(void);
 extern int FUN_003f86c8(unsigned int);
-/* Supplied declaration required: FUN_0050d778. */
+/* Supplied declaration required: fillThreeWordsWithByte. */
 
 
 void FUN_00202ea4(void)
@@ -138,7 +138,7 @@ void FUN_00202ea4(void)
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < *(short *)(temp_v7 + 0x78));
       }
-      FUN_0050d778(temp_v7 + 0x6c,0xffffffff);
+      fillThreeWordsWithByte(temp_v7 + 0x6c,0xffffffff);
       temp_v3 = *(int *)(temp_v7 + 0x8c);
       *(unsigned short *)(temp_v7 + 0x78) = 0;
       temp_v6 = FUN_00348ed0(temp_v7);
@@ -270,7 +270,7 @@ void FUN_00202ea4(void)
       }
       FUN_00275f44(temp_v4,temp_v9);
       FUN_00169ddc(0x100020e);
-      FUN_003491e8();
+      obj04Finish();
       FUN_003a76a8(1);
       sysPlaySe(0xa0);
       temp_v7 = g_config;

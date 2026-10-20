@@ -94,7 +94,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001d3d38. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int FUN_003facf4(int, unsigned int);
 /* Supplied declaration required: FUN_00419c34. */
 /* Supplied declaration required: FUN_00419ce0. */
@@ -192,7 +192,7 @@ void FUN_002fc0c8(unsigned int param_1)
   
   temp_v20 = 0;
   puVar8 = *(unsigned int **)(DAT_0056fcbc + 0xa8);
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c2c), temp_v0 != 0)) {
+  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
     in_s0 = 1.0f;
     DAT_0064c054 = 0x3f800000;
     DAT_0064c058 = (unsigned int)((unsigned long long)temp_v20 >> 0x20);

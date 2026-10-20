@@ -8,7 +8,7 @@ int FUN_00192608(void);
 
 extern unsigned short *FUN_001801a4(void);
 /* Supplied declaration required: FUN_00192608. */
-extern int FUN_003dfe60(void);
+extern int playerAlignmentClass(void);
 
 
 void FUN_0047ff00(int param_1)
@@ -21,7 +21,7 @@ void FUN_0047ff00(int param_1)
   int temp_v3;
   unsigned short *puVar5;
   
-  temp_v2 = FUN_003dfe60();
+  temp_v2 = playerAlignmentClass();
   temp_v3 = param_1;
   FUN_00192608();
   if ((temp_v3 != 0) &&

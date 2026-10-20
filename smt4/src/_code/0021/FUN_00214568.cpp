@@ -21,10 +21,10 @@ extern int DAT_0044dc20; /* 0x44dc20 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_00250d18(unsigned char, unsigned int);
+extern int dataTable09Sub3GetRecord(unsigned char, unsigned int);
 /* Supplied declaration required: FUN_00283e48. */
 extern int FUN_00295d08(unsigned int);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 extern int FUN_002b63ac(void);
@@ -97,7 +97,7 @@ void FUN_00214568(int param_1)
   if ((temp_v14 < 1) && (temp_v9 != 0)) {
     temp_v14 = 1;
   }
-  temp_v4 = FUN_00250d18(*(unsigned char *)(temp_v4 + 0x76),temp_v10);
+  temp_v4 = dataTable09Sub3GetRecord(*(unsigned char *)(temp_v4 + 0x76),temp_v10);
   temp_v4 = (temp_v14 * temp_v4) / 100;
   if ((temp_v4 < 1) && (temp_v14 != 0)) {
     temp_v4 = 1;
@@ -113,9 +113,9 @@ void FUN_00214568(int param_1)
   do {
     if (-1 < *(char *)(temp_v3 + temp_v4 + 0x90f0)) {
       temp_v9 = FUN_002a8740();
-      temp_v13 = FUN_0029ebac(temp_v9,1);
-      if (((temp_v13 == 0) && (temp_v13 = FUN_0029ebac(temp_v9,10), temp_v13 == 0)) &&
-         (temp_v13 = FUN_0029ebac(temp_v9,2), temp_v13 == 0)) {
+      temp_v13 = flagWordTestBit(temp_v9,1);
+      if (((temp_v13 == 0) && (temp_v13 = flagWordTestBit(temp_v9,10), temp_v13 == 0)) &&
+         (temp_v13 = flagWordTestBit(temp_v9,2), temp_v13 == 0)) {
         temp_v0 = *(char *)(temp_v3 + temp_v4 + 0x90f0);
         temp_v8 = 0;
         if (*(char *)(temp_v3 + 0x9108) != temp_v0) {
@@ -150,7 +150,7 @@ void FUN_00214568(int param_1)
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 8);
         temp_v6 = (unsigned int)(temp_v14 * (int)(temp_v17 * (float)((unsigned long long)temp_v19 >> 0x20))) / 100;
-        temp_v13 = FUN_00250d18(*(unsigned char *)(temp_v13 + 0x48),temp_v10);
+        temp_v13 = dataTable09Sub3GetRecord(*(unsigned char *)(temp_v13 + 0x48),temp_v10);
         temp_v7 = (temp_v6 * temp_v13) / 100;
         if ((temp_v7 == 0) && (temp_v6 != 0)) {
           temp_v7 = 1;

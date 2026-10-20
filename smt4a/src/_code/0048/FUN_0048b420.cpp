@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0049277c(int, int, int *, int *, int *, int *);
-int FUN_0049359c(int, float *);
+int rectRecRead(int, int, int *, int *, int *, int *);
+int words2Copy(int, float *);
 int FUN_004cfb64(int, int, int, int);
 int VectorSignedToFloat(int, int);
 
@@ -22,8 +22,8 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0049277c. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: rectRecRead. */
+/* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: FUN_004cfb64. */
 
 
@@ -45,8 +45,8 @@ void FUN_0048b420(int param_1,int param_2)
   
   temp_v0 = g_renderCtx;
   if (param_2 != 0) {
-    FUN_0049277c(0x13,0xfa4,&temp_v5,&temp_v3,&temp_v4,&uStack_18);
-    FUN_0049359c(param_1 + 0x4d0,&fStack_10);
+    rectRecRead(0x13,0xfa4,&temp_v5,&temp_v3,&temp_v4,&uStack_18);
+    words2Copy(param_1 + 0x4d0,&fStack_10);
     temp_v2 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = (int)(fStack_10 + temp_v2);
     temp_v2 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);

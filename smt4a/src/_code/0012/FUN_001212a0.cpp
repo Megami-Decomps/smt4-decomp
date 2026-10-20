@@ -1,37 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001212a0` (_code @ 0x1212a0, 0x26 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies r1 into r5 before r0 into r4. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0031008a(void);
+typedef struct Inner {
+    u8 unk00[0xb0];
+    u32 value; /* 0xb0 */
+} Inner;
 
-typedef struct fn_001212a0_arg0 fn_001212a0_arg0;
-struct fn_001212a0_arg0 {
-    unsigned char pad_0x0[0x4];
-    byte field_0x4; /* +0x4 */
-    undefined1 field_0x5; /* +0x5 */
-    unsigned char pad_0x6[0x6];
-    void *field_0xc; /* +0xc */
-};
+typedef struct Outer {
+    u8 unk00[4];
+    u8 enabled; /* 0x04 */
+    u8 result;  /* 0x05 */
+    u8 unk06[6];
+    Inner *inner; /* 0x0c */
+} Outer;
 
-extern unsigned char FUN_00306d18(unsigned int, void *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0031008a. */
+extern void handleWatcherPoll(void);
+extern u8 FUN_00306d18(u32 value, Inner *inner, int a, int b);
 
-
-void FUN_001212a0(fn_001212a0_arg0 *param_1,unsigned int param_2)
-
+void FUN_001212a0(Outer *outer, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  
-  FUN_0031008a();
-  *(unsigned int *)((int)param_1->field_0xc + 0xb0) = param_2;
-  if (param_1->field_0x4 != 0) {
-    temp_v0 = FUN_00306d18(param_2,param_1->field_0xc,1,0);
-    param_1->field_0x5 = temp_v0;
-  }
-  return;
+    handleWatcherPoll();
+    outer->inner->value = value;
+    if (outer->enabled) {
+        outer->result = FUN_00306d18(value, outer->inner, 1, 0);
+    }
 }
 
 } /* extern "C" */

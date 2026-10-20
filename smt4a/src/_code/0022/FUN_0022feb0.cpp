@@ -7,7 +7,7 @@ extern "C" {
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
 int sysMemClear(int *, int);
-int FUN_0040816c(int);
+int countersGetB(int);
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
@@ -16,7 +16,7 @@ extern unsigned int FUN_001b564c(unsigned short);
 extern unsigned int FUN_00261424(void);
 extern int FUN_002e50d4(void);
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0040816c. */
+/* Supplied declaration required: countersGetB. */
 
 
 void FUN_0022feb0(int param_1)
@@ -58,7 +58,7 @@ void FUN_0022feb0(int param_1)
               temp_v1 = FUN_001b564c(temp_v0 & 0xff);
               temp_v3 = param_1 + temp_v7 * 4;
               *(unsigned int *)(temp_v3 + 0x490) = temp_v1;
-              temp_v1 = FUN_0040816c(*puVar10 & 0xff);
+              temp_v1 = countersGetB(*puVar10 & 0xff);
             }
             else {
               temp_v1 = FUN_00261424();
@@ -70,7 +70,7 @@ void FUN_0022feb0(int param_1)
           }
           else {
             temp_v3 = FUN_002e50d4();
-            temp_v5 = FUN_0040816c(0x2e);
+            temp_v5 = countersGetB(0x2e);
             temp_v6 = param_1 + temp_v7 * 4;
             *(int *)(temp_v6 + 0x490) = temp_v3 - temp_v5;
             *(int *)(temp_v6 + 0x5c0) = temp_v3;

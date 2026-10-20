@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002e3328(void);
-int FUN_00417674(unsigned int *);
+int sceneObjDestroy(unsigned int *);
 
 extern unsigned char DAT_00588c40; /* 0x588c40 */
 
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_00417674. */
+/* Supplied declaration required: sceneObjDestroy. */
 
 
 unsigned int FUN_003c5fdc(void)
@@ -27,7 +27,7 @@ unsigned int FUN_003c5fdc(void)
     if (temp_v0 != 0) {
       return 0;
     }
-    FUN_00417674(puVar1);
+    sceneObjDestroy(puVar1);
     if ((*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)) != (unsigned int *)0x0) {
       FUN_002e3328();
       (*(unsigned int * *)((unsigned char *)&DAT_00588c40 + 0x8)) = (unsigned int *)0x0;

@@ -1,15 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043e278; /* 0x43e278 */
+typedef struct Work {
+    /* 0x000 */ u8 unk000[0xEDC];
+    /* 0xEDC */ u8 value;
+} Work;
 
+extern Work *DAT_0043e278;
 
-void FUN_0024ac68(unsigned char param_1)
-
+void FUN_0024ac68(u8 value)
 {
-  *(unsigned char *)(DAT_0043e278 + 0xedc) = param_1;
-  return;
+    DAT_0043e278->value = value;
 }
 
 } /* extern "C" */

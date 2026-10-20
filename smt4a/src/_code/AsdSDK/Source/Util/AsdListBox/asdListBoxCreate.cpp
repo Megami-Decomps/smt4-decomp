@@ -11,7 +11,7 @@ u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDel
 s32 jobIsValid(void *parent);
 void FUN_0014bdb4(void *parent, u32 handle);
 void FUN_00280468(void *widget, s32 rows, s32 unk);
-void FUN_0036ba44(void *widget, s32 a, s32 b, s32 c, s32 d);
+void colorSlotSet(void *widget, s32 a, s32 b, s32 c, s32 d);
 
 /* Creates a list box process at (x, y) in `group` and registers it with `parent`. */
 u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
@@ -39,7 +39,7 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
     box->flags |= 4;
     box->unk68 = 10;
     FUN_00280468(box->widget, 10, 0);
-    FUN_0036ba44(box->widget, 6, 5, 32, 32);
+    colorSlotSet(box->widget, 6, 5, 32, 32);
     box->unk34 = 0;
     return handle;
 }

@@ -27,7 +27,7 @@ int FUN_002ae898(...);
 int FUN_002af5c0(...);
 int FUN_002bc01c(...);
 int FUN_002bf4f8(...);
-int FUN_002c09f4(...);
+int randNextInRange(...);
 int FUN_00337a0c(...);
 int VectorSignedToFloat(...);
 
@@ -154,7 +154,7 @@ extern int FUN_002b8cec(unsigned int);
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
@@ -664,7 +664,7 @@ LAB_0019e7b8:
     if (temp_v4 != 0) {
       temp_v4 = 0;
       do {
-        temp_v12 = FUN_002c09f4(0xf);
+        temp_v12 = randNextInRange(0xf);
         temp_v17 = 1;
         temp_v18 = 1;
         FUN_0028a0d0(temp_v0,temp_v12 + 0x14,0);
@@ -692,8 +692,8 @@ LAB_0019ef1c:
     if (0 < iRam00439c9c) {
       do {
         if (iRam00439ca0 == temp_v8 * 8) {
-          temp_v2 = FUN_002c09f4(0x28);
-          temp_v3 = FUN_002c09f4(0x28);
+          temp_v2 = randNextInRange(0x28);
+          temp_v3 = randNextInRange(0x28);
           temp_v9 = DAT_00439ca8;
           temp_v4 = iRam00439ca4;
           temp_v20 = 1;

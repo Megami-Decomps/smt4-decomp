@@ -1,30 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_001801a4(void);
-extern int FUN_0018719c(unsigned int);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s16 first;
+    /* 0x04 */ u16 second;
+} Record;
 
+Record *FUN_001801a4(void);
+s32 FUN_0018719c(u32 flag);
 
-unsigned int FUN_002fa75c(void)
-
+/* Returns 1 when flag 0x410 is set and the record FUN_001801a4 returns has both halfwords (at 2 and 4) nonzero. */
+u32 FUN_002fa75c(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = FUN_0018719c(0x410);
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_001801a4();
-    temp_v2 = *(short *)(temp_v1 + 2) != 0;
-    if (temp_v2) {
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v1 + 4);
+    s32 flag;
+    Record *record;
+    u8 present;
+    u32 value;
+
+    flag = FUN_0018719c(0x410);
+    if (flag != 0) {
+        record = FUN_001801a4();
+        present = record->first != 0;
+        if (present) {
+            value = (u32)record->second;
+        }
+        if (present && value != 0) {
+            return 1;
+        }
     }
-    if (temp_v2 && temp_v1 != 0) {
-      return 1;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

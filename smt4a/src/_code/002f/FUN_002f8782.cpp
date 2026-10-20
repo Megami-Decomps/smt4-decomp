@@ -1,15 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Range {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 begin;
+    /* 0x08 */ s32 end;
+} Range;
 
-unsigned int FUN_002f8782(int param_1)
-
+/* Returns 1 when the range is empty. */
+u32 FUN_002f8782(Range *range)
 {
-  if (*(int *)(param_1 + 4) == *(int *)(param_1 + 8)) {
-    return 1;
-  }
-  return 0;
+    if (range->begin == range->end) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

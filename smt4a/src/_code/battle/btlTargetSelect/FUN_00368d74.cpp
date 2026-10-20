@@ -15,7 +15,7 @@ extern int g_btlTargetSelect; /* 0x57a9a8 */
 
 extern unsigned char FUN_0026264c(unsigned int);
 /* Supplied declaration required: FUN_002a1850. */
-extern unsigned int FUN_00340c10(unsigned int);
+extern unsigned int obj80Select(unsigned int);
 
 
 void FUN_00368d74(int param_1,unsigned int *param_2,unsigned int param_3,unsigned char param_4,
@@ -42,7 +42,7 @@ void FUN_00368d74(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
     *(unsigned char *)(puVar3 + 3) = param_7;
     *(unsigned char *)((int)puVar3 + 0xd) = param_8;
     *(unsigned char *)((int)puVar3 + 0xe) = param_9;
-    temp_v1 = FUN_00340c10(0);
+    temp_v1 = obj80Select(0);
     temp_v2 = *param_2;
     uStack_2c = param_2[1];
     uStack_28 = param_2[2];

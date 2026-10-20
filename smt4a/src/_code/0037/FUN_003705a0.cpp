@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00314bf8(int);
 int FUN_003ae6cc(void);
-int FUN_003c4d84(int);
+int sub68OwnerCall11(int);
 
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00314bf8. */
 /* Supplied declaration required: FUN_003ae6cc. */
-/* Supplied declaration required: FUN_003c4d84. */
+/* Supplied declaration required: sub68OwnerCall11. */
 
 
 unsigned int FUN_003705a0(void)
@@ -26,25 +26,25 @@ unsigned int FUN_003705a0(void)
     if (temp_v0 != 1) {
       if (temp_v0 != 2) {
         if (temp_v0 == 3) {
-          FUN_003c4d84(0x65);
-          FUN_003c4d84(0x65);
-          FUN_003c4d84(0x65);
-          FUN_003c4d84(0x65);
+          sub68OwnerCall11(0x65);
+          sub68OwnerCall11(0x65);
+          sub68OwnerCall11(0x65);
+          sub68OwnerCall11(0x65);
         }
       }
       else {
-        FUN_003c4d84(0x65);
+        sub68OwnerCall11(0x65);
       }
     }
     else {
-      FUN_003c4d84(0x65);
-      FUN_003c4d84(0x65);
-      FUN_003c4d84(0x65);
-      FUN_003c4d84(0x65);
+      sub68OwnerCall11(0x65);
+      sub68OwnerCall11(0x65);
+      sub68OwnerCall11(0x65);
+      sub68OwnerCall11(0x65);
     }
   }
   else {
-    FUN_003c4d84(0x65);
+    sub68OwnerCall11(0x65);
   }
   FUN_003ae6cc();
   return 1;

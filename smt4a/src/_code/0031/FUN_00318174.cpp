@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00186e2c(int, unsigned int);
 int FUN_002a21a4(unsigned int);
 int FUN_002e08c8(unsigned int);
-int FUN_00341060(unsigned int);
+int faderSetValue(unsigned int);
 int FUN_00359370(unsigned int, int);
 int FUN_003ae9d8(...);
 int FUN_00449814(int, int);
@@ -30,7 +30,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00186e2c. */
 /* Supplied declaration required: FUN_002a21a4. */
 /* Supplied declaration required: FUN_002e08c8. */
-/* Supplied declaration required: FUN_00341060. */
+/* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_00359370. */
 /* Supplied declaration required: FUN_003ae9d8. */
 /* Supplied declaration required: FUN_00449814. */
@@ -111,7 +111,7 @@ void FUN_00318174(int param_1,int param_2,unsigned int param_3)
   }
   piVar5 = (int *)(temp_v0 + 0x5e8);
   FUN_002e08c8(*(unsigned int *)(*(int *)(temp_v0 + 0x5e8) + 8));
-  pcVar4 = (romwright_code *)FUN_00341060(*(unsigned int *)(*piVar5 + 8));
+  pcVar4 = (romwright_code *)faderSetValue(*(unsigned int *)(*piVar5 + 8));
   if (param_2 == 0) {
     pcVar4 = FUN_001f3eec;
   }
@@ -170,7 +170,7 @@ void FUN_00318174(int param_1,int param_2,unsigned int param_3)
     }
   }
   FUN_002e08c8(*(unsigned int *)(*(int *)(temp_v0 + 0x5e8) + 8));
-  FUN_00341060(*(unsigned int *)(*piVar5 + 8));
+  faderSetValue(*(unsigned int *)(*piVar5 + 8));
   temp_v1 = *(int *)(*(int *)(*piVar5 + 8) + 0x4c);
   if (temp_v1 != 0) {
     temp_v2 = *(int *)(*(int *)(*(int *)(temp_v1 + 8) + 8) + 0x10);

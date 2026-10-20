@@ -9,7 +9,7 @@ int FUN_00176800(int, unsigned int, unsigned int);
 int FUN_00176e84(int, unsigned int, int);
 int FUN_0017712c(int, unsigned int, unsigned int, unsigned int);
 int FUN_0017721c(int, unsigned int, unsigned int, int);
-int FUN_0018cfe4(unsigned int, int);
+int sceneTraverserVisit(unsigned int, int);
 int FUN_0018e9d8(int, unsigned int);
 int FUN_00197eb0(int, unsigned int);
 int nw_gfx_RenderContext_ResetState_2B7478(unsigned int);
@@ -42,7 +42,7 @@ extern int FUN_001696f4(void);
 /* Supplied declaration required: FUN_00176e84. */
 /* Supplied declaration required: FUN_0017712c. */
 /* Supplied declaration required: FUN_0017721c. */
-/* Supplied declaration required: FUN_0018cfe4. */
+/* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_0018e9d8. */
 /* Supplied declaration required: FUN_00197eb0. */
 /* Supplied declaration required: nw_gfx_RenderContext_ResetState_2B7478. */
@@ -63,14 +63,14 @@ void FUN_00150618(void)
     FUN_0017712c(DAT_005b3cb8,g_effAsdLightHandle,DAT_005b3c14,DAT_005b3cc0);
     if ((DAT_00636e04 != '\0') && (DAT_00636e05 == '\0')) {
       FUN_00197eb0(DAT_005b3c88 + 0x10,DAT_005b3c90);
-      FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
+      sceneTraverserVisit(g_effAsdLightHandle,DAT_005b3c88);
     }
     if (DAT_00636e14 == '\0') {
       FUN_00176800(DAT_005b3cb8,g_effAsdLightHandle,DAT_005b3cc0);
     }
     if ((DAT_00636e04 != '\0') && (DAT_00636e05 == '\0')) {
       FUN_0018e9d8(DAT_005b3c88,DAT_005b3c90);
-      FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
+      sceneTraverserVisit(g_effAsdLightHandle,DAT_005b3c88);
     }
     temp_v0 = FUN_001696f4();
     if (temp_v0 != 1) {

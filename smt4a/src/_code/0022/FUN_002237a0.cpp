@@ -26,7 +26,7 @@ extern unsigned char DAT_005f19ee; /* 0x5f19ee */
 extern unsigned int FUN_0014af98(void);
 extern int FUN_0014bef4(unsigned int);
 extern unsigned int FUN_00152f44(void);
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: FUN_00169ddc. */
 /* Supplied declaration required: FUN_00234880. */
@@ -36,7 +36,7 @@ extern int FUN_0015688c(void);
 /* Supplied declaration required: FUN_00312af0. */
 extern int lmapSceneGetUnk0(void);
 extern int FUN_0033e0e8(void);
-extern int FUN_00344c9c(void);
+extern int countNonZeroRecords24(void);
 /* Supplied declaration required: FUN_00398258. */
 
 
@@ -63,7 +63,7 @@ void FUN_002237a0(void)
     break;
   case 2:
     g_popupState[1] = g_popupState[1] + 1;
-    temp_v2 = FUN_0015688c();
+    temp_v2 = saveSlotFindSelected();
     piVar2 = g_popupState;
     if (temp_v2 == 0) break;
     if (g_popupState[1] == 2) {
@@ -337,7 +337,7 @@ LAB_00223c28:
       }
     }
   }
-  temp_v3 = FUN_00344c9c();
+  temp_v3 = countNonZeroRecords24();
   if (temp_v3 >= 6) {
     DAT_005f1908 = DAT_005f1908 + 1;
   }

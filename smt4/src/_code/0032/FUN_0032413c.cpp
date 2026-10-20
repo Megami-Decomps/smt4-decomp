@@ -1,46 +1,38 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002451ac(unsigned int, int);
-int scrSetResult(int);
+int FUN_002451ac(u32 btl, int a);
+int scrSetResult(int result);
+extern u32 btlGetMainState(void);
+extern int scrGetArg(u32 index);
+extern u8 *dataTableGetEntries(void);
 
-/* Supplied declaration required: FUN_002451ac. */
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-extern int dataTableGetEntries(void);
-
-
-unsigned int FUN_0032413c(void)
-
+/* Script command: result is field `field` (1-3) of row `row` (6-byte rows) of the data table selected via FUN_002451ac(btl, 5). */
+u32 FUN_0032413c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned short temp_v4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlGetMainState();
-  FUN_002451ac(temp_v2,5);
-  temp_v3 = dataTableGetEntries();
-  temp_v4 = 0;
-  switch (temp_v1) {
-  case 1:
-    temp_v4 = *(unsigned short *)(temp_v3 + temp_v0 * 6);
-    break;
-  case 2:
-    temp_v4 = *(unsigned short *)(temp_v3 + temp_v0 * 6 + 2);
-    break;
-  case 3:
-    temp_v4 = *(unsigned short *)(temp_v3 + temp_v0 * 6 + 4);
-    break;
-  }
-  scrSetResult(temp_v4);
-  return 1;
+    int row = scrGetArg(0);
+    int field = scrGetArg(1);
+    u32 btl = btlGetMainState();
+    u8 *entries;
+    u16 value;
+
+    FUN_002451ac(btl, 5);
+    entries = dataTableGetEntries();
+    value = 0;
+    switch (field) {
+    case 1:
+        value = *(u16 *)(entries + row * 6);
+        break;
+    case 2:
+        value = *(u16 *)(entries + row * 6 + 2);
+        break;
+    case 3:
+        value = *(u16 *)(entries + row * 6 + 4);
+        break;
+    }
+    scrSetResult(value);
+    return 1;
 }
 
 } /* extern "C" */

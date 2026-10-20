@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00111438. */
 extern int FUN_002e760a(unsigned int);
-extern unsigned int FUN_002ea658(void);
+extern unsigned int initVtable00558630(void);
 
 
 void FUN_002fb084(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -33,7 +33,7 @@ void FUN_002fb084(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v0 = FUN_002e760a(0xc);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_002ea658();
+    temp_v1 = initVtable00558630();
   }
   FUN_00111438(param_1,temp_v1,param_2,param_3,param_4,param_5,param_6,param_1,temp_v2,param_3,temp_v3);
   return;

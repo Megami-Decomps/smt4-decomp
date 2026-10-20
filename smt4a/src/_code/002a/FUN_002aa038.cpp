@@ -33,7 +33,7 @@ extern int FUN_0022e9b8(void);
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
-extern unsigned int FUN_002ab7c4(unsigned int);
+extern unsigned int dataTableGetEntry24Byte0(unsigned int);
 extern int FUN_002c2c68(int);
 
 
@@ -64,7 +64,7 @@ void FUN_002aa038(int param_1,int param_2)
   temp_v1 = temp_v0 + 0x4fc;
   temp_v2 = FUN_002a4860();
   temp_v3 = FUN_002a4894(temp_v1);
-  temp_v4 = FUN_002ab7c4(*(unsigned int *)(temp_v0 + (temp_v3 + temp_v2) * 4 + 0x927c));
+  temp_v4 = dataTableGetEntry24Byte0(*(unsigned int *)(temp_v0 + (temp_v3 + temp_v2) * 4 + 0x927c));
   efctSetSpeed();
   temp_v2 = FUN_002a4894(temp_v1);
   temp_v2 = FUN_001834a4(0x1a,temp_v2 + 0xb6);

@@ -15,7 +15,7 @@ extern unsigned char LAB_00111b90; /* 0x111b90 */
 
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
-extern int FUN_002fd432(int, unsigned int **);
+extern int wordRefsEqual_002fd432(int, unsigned int **);
 
 
 void FUN_00111b44(int param_1)
@@ -30,7 +30,7 @@ void FUN_00111b44(int param_1)
   temp_v2 = *(unsigned int **)(param_1 + 0x1a0);
   *(unsigned int *)(param_1 + 0x1ac) = *temp_v2;
   *(unsigned char *)(param_1 + 0x1a8) = 0;
-  temp_v0 = FUN_002fd432(param_1 + 0x1ac,&temp_v2);
+  temp_v0 = wordRefsEqual_002fd432(param_1 + 0x1ac,&temp_v2);
   if (temp_v0 == 0) {
     temp_v1 = 0x111a09;
   }

@@ -1,16 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022e714` (_code @ 0x22e714, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+typedef struct Obj22e714 {
+    u8 unk00[0x2011];
+    s8 value;                      /* 0x2011 */
+} Obj22e714;
 
+typedef struct Global22e714 {
+    u8 unk00[4];
+    Obj22e714 *obj;                /* 0x04 */
+} Global22e714;
 
-int FUN_0022e714(void)
+extern Global22e714 DAT_00588fd0;
 
+s8 FUN_0022e714(void)
 {
-  return (int)*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2011);
+    return DAT_00588fd0.obj->value;
 }
 
 } /* extern "C" */

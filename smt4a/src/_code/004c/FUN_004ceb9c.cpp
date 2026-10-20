@@ -9,7 +9,7 @@ int FUN_001641b4(...);
 int sysPlaySe(...);
 int FUN_00275f44(...);
 int FUN_0034913c(...);
-int FUN_0037c8b4(...);
+int panelSetTarget(...);
 int FUN_0037c8e4(...);
 int FUN_00388758(...);
 int FUN_004cdbd4(...);
@@ -49,7 +49,7 @@ extern int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_0034913c. */
 extern int FUN_0034919c(void);
 extern int FUN_00357bc8(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_00388758. */
 /* Supplied declaration required: FUN_004cdbd4. */
@@ -97,7 +97,7 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
       temp_v0 = FUN_0034919c();
       if (temp_v0 == 0) {
         FUN_0037c8e4(1,0);
-        FUN_0037c8b4(-*(int *)(*(int *)&param_1->field_0x590 + *(int *)&param_1->field_0x554 * 4),0)
+        panelSetTarget(-*(int *)(*(int *)&param_1->field_0x590 + *(int *)&param_1->field_0x554 * 4),0)
         ;
       }
       param_1->field_0x598 = 6;

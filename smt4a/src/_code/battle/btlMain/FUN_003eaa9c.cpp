@@ -9,10 +9,10 @@ int FUN_00178b04(int, unsigned char *, int);
 int FUN_00201950(int);
 int FUN_00201984(int);
 int FUN_004d854c(unsigned int);
-int FUN_004d8638(unsigned int);
-int FUN_004d8650(unsigned int);
+int callOnHandleField4B(unsigned int);
+int callOnHandleField4C(unsigned int);
 int FUN_004d8724(void);
-int FUN_004d8804(unsigned int);
+int callOnHandleField4D(unsigned int);
 
 extern unsigned char LAB_003eac80; /* 0x3eac80 */
 
@@ -24,12 +24,12 @@ extern unsigned int FUN_001a6f60(int, unsigned int);
 /* Supplied declaration required: FUN_00201950. */
 /* Supplied declaration required: FUN_00201984. */
 /* Supplied declaration required: FUN_004d854c. */
-/* Supplied declaration required: FUN_004d8638. */
-/* Supplied declaration required: FUN_004d8650. */
+/* Supplied declaration required: callOnHandleField4B. */
+/* Supplied declaration required: callOnHandleField4C. */
 /* Supplied declaration required: FUN_004d8724. */
 extern int FUN_004d87e4(unsigned int);
-/* Supplied declaration required: FUN_004d8804. */
-extern unsigned int FUN_004d88c0(void);
+/* Supplied declaration required: callOnHandleField4D. */
+extern unsigned int clearWord(void);
 
 
 void FUN_003eaa9c(int param_1)
@@ -58,7 +58,7 @@ void FUN_003eaa9c(int param_1)
       FUN_00178b04(0x24,&LAB_003eac80,0x3649);
       temp_v3 = 0;
       if (temp_v2 != 0) {
-        temp_v3 = FUN_004d88c0();
+        temp_v3 = clearWord();
       }
       temp_v2 = param_1 + temp_v1 * 4;
       *(unsigned int *)(temp_v2 + 0x22bc) = temp_v3;
@@ -107,17 +107,17 @@ LAB_003eabd0:
       temp_v3 = *(unsigned int *)(temp_v4 + 0x22d0);
       temp_v5 = *(unsigned int *)(temp_v4 + 0x22d4);
       temp_v6 = *(unsigned int *)(temp_v4 + 0x22d8);
-      FUN_004d8638(*(unsigned int *)(temp_v2 + 0x22bc));
+      callOnHandleField4B(*(unsigned int *)(temp_v2 + 0x22bc));
       FUN_00201984(temp_v1);
       *(unsigned int *)(temp_v4 + 0x2300) = temp_v3;
       *(unsigned int *)(temp_v4 + 0x2304) = temp_v5;
       *(unsigned int *)(temp_v4 + 0x2308) = temp_v6;
-      FUN_004d8650(*(unsigned int *)(temp_v2 + 0x22bc));
+      callOnHandleField4C(*(unsigned int *)(temp_v2 + 0x22bc));
       in_s0 = (unsigned int)temp_v7;
       *(unsigned int *)(temp_v2 + 0x2330) = in_s0;
       in_s1 = in_s0;
       in_s2 = in_s0;
-      FUN_004d8804(*(unsigned int *)(temp_v2 + 0x22bc));
+      callOnHandleField4D(*(unsigned int *)(temp_v2 + 0x22bc));
       temp_v2 = param_1 + temp_v1;
       temp_v1 = temp_v1 + 1;
       *(unsigned char *)(temp_v2 + 0x2340) = 1;

@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 flags;
+} Holder;
 
-unsigned char FUN_001a7470(int param_1)
-
+/* Returns bit 0 of `flags`. */
+u8 FUN_001a7470(Holder *object)
 {
-  return *(unsigned char *)(param_1 + 0x10) & 1;
+    return object->flags & 1;
 }
 
 } /* extern "C" */

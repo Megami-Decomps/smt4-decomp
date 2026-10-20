@@ -1,37 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_002ecad4_arg0 fn_002ecad4_arg0;
-struct fn_002ecad4_arg0 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    unsigned char field_0x14; /* +0x14 */
-    unsigned char pad_0x15[0x3];
-    undefined4 field_0x18; /* +0x18 */
-    undefined1 field_0x1c; /* +0x1c */
-    undefined1 field_0x1d; /* +0x1d */
-    undefined1 field_0x1e; /* +0x1e */
-};
+u32 FUN_003100f6(void);
 
-extern unsigned int FUN_003100f6(void);
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 handle;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 arg;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u8 flagA;
+    /* 0x1D */ u8 flagB;
+    /* 0x1E */ u8 flagC;
+} Object;
 
-
-void FUN_002ecad4(fn_002ecad4_arg0 *param_1,unsigned int param_2,unsigned char param_3)
-
+/* Initialises the object with `arg` and `flagA`, clears the other fields and obtains a handle from FUN_003100f6. */
+void FUN_002ecad4(Object *object, u32 arg, u8 flagA)
 {
-  unsigned int temp_v0;
-  
-  *(unsigned int *)&param_1->field_0x14 = param_2;
-  param_1->field_0x1c = param_3;
-  param_1->field_0x10 = 0;
-  param_1->field_0x18 = 0;
-  temp_v0 = FUN_003100f6();
-  param_1->field_0xc = temp_v0;
-  param_1->field_0x1d = 0;
-  param_1->field_0x1e = 0;
-  return;
+    u32 handle;
+
+    object->arg = arg;
+    object->flagA = flagA;
+    object->unk10 = 0;
+    object->unk18 = 0;
+    handle = FUN_003100f6();
+    object->handle = handle;
+    object->flagB = 0;
+    object->flagC = 0;
 }
 
 } /* extern "C" */

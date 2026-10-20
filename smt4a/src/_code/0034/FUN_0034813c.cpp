@@ -13,7 +13,7 @@ extern int FUN_00100d60(char *, unsigned int);
 /* Supplied declaration required: FUN_0020214c. */
 extern int FUN_002e4c2c(int);
 /* Supplied declaration required: FUN_003478dc. */
-extern int FUN_0035bcdc(int);
+extern int findRecordByKey(int);
 
 
 int FUN_0034813c(char *param_1)
@@ -26,7 +26,7 @@ int FUN_0034813c(char *param_1)
   unsigned char temp_v3;
   
   temp_v1 = FUN_00100d60(param_1,0x2f);
-  temp_v2 = FUN_0035bcdc(temp_v1 + 1);
+  temp_v2 = findRecordByKey(temp_v1 + 1);
   if (temp_v2 != 0xff) {
     return temp_v2;
   }

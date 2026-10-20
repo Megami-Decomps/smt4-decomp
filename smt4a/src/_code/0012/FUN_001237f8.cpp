@@ -1,20 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0030f138(unsigned int, unsigned char *, int);
+void FUN_0030f138(u32 object, u8 *table, s32 flag);
+extern u8 DAT_00538b10[];
 
-extern unsigned char DAT_00538b10; /* 0x538b10 */
-
-/* Supplied declaration required: FUN_0030f138. */
-
-
-void FUN_001237f8(unsigned int param_1)
-
+/* Calls FUN_0030f138 with the table at 0x538B10 and 0. */
+void FUN_001237f8(u32 object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0030f138(param_1,&DAT_00538b10,0);
-  return;
+    FUN_0030f138(object, DAT_00538b10, 0);
 }
 
 } /* extern "C" */

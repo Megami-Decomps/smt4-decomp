@@ -9,11 +9,11 @@ int FUN_0023b45c(int);
 int FUN_002a7324(int);
 int FUN_002c8550(int);
 int FUN_002f0420(unsigned int);
-int FUN_00334434(unsigned char [16], int);
+int objBInitBlock19D0(unsigned char [16], int);
 int FUN_0033449c(int);
-int FUN_0034a98c(void);
+int objBInitBlock12DC(void);
 int FUN_0034a9c4(int, int);
-int FUN_0035db38(void);
+int objBInitBlock12DC5(void);
 int FUN_004a3e04(int);
 int FUN_004bcd90(unsigned char [16]);
 int rt_memcpy_w(unsigned char [16], int, int);
@@ -53,11 +53,11 @@ extern int FUN_002a4b28(unsigned short);
 extern int FUN_002c7e3c(void);
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_002f0420. */
-/* Supplied declaration required: FUN_00334434. */
+/* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_0034a98c. */
+/* Supplied declaration required: objBInitBlock12DC. */
 /* Supplied declaration required: FUN_0034a9c4. */
-/* Supplied declaration required: FUN_0035db38. */
+/* Supplied declaration required: objBInitBlock12DC5. */
 extern int FUN_00372014(void);
 /* Supplied declaration required: FUN_004a3e04. */
 /* Supplied declaration required: FUN_004bcd90. */
@@ -122,11 +122,11 @@ void FUN_004a3b48(int param_1)
     temp_v3 = FUN_002c7e3c();
     if (temp_v3 != 5) {
       if ((temp_v3 == 0xe) && (temp_v2 == 5)) {
-        FUN_0035db38();
+        objBInitBlock12DC5();
       }
     }
     else if (temp_v2 == 0xe) {
-      FUN_0034a98c();
+      objBInitBlock12DC();
     }
     FUN_002a7324(1);
     FUN_004a3e04(param_1);
@@ -145,7 +145,7 @@ void FUN_004a3b48(int param_1)
       FUN_0034a9c4(temp_v0,0);
       FUN_0033449c(0);
       if (temp_v2 != 5) {
-        FUN_0034a98c();
+        objBInitBlock12DC();
       }
       if (*(char *)(param_1 + 0x863) == '\0') {
         FUN_002a7324(1);
@@ -174,7 +174,7 @@ void FUN_004a3b48(int param_1)
       FUN_0034a9c4(temp_v0,0);
       FUN_002c8550(2);
       if ((temp_v2 == 5) && (temp_v2 = FUN_00372014(), temp_v2 != 0)) {
-        FUN_0035db38();
+        objBInitBlock12DC5();
       }
       FUN_00184310(temp_v0);
       rt_memcpy_w(temp_v8,temp_v3,300);
@@ -198,7 +198,7 @@ void FUN_004a3b48(int param_1)
       temp_v10 = FUN_0017760c(temp_v8);
       temp_v11 = temp_v9;
       temp_v12 = 0;
-      FUN_00334434(temp_v8,0);
+      objBInitBlock19D0(temp_v8,0);
       FUN_0033449c(1);
       if (*(char *)(param_1 + 0x863) != '\0') {
         temp_v4 = 1;

@@ -1,57 +1,40 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00343a04(unsigned int);
-int FUN_00343a2c(unsigned int);
-int FUN_00343a74(unsigned int);
-int FUN_00343ba0(unsigned int);
+int FUN_00343a04(u32 amount);
+int FUN_00343a2c(u32 amount);
+int FUN_00343a74(u32 amount);
+int FUN_00343ba0(u32 amount);
+extern u32 *FUN_002542a4(void);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern int FUN_002542a4(void);
-/* Supplied declaration required: FUN_00343a04. */
-/* Supplied declaration required: FUN_00343a2c. */
-/* Supplied declaration required: FUN_00343a74. */
-/* Supplied declaration required: FUN_00343ba0. */
-
-
-void FUN_0029be5c(int param_1,unsigned int param_2)
-
+/* Adds `amount` to counter `index` (saturating at 0xFFFFFFFF) and notifies the counter's handler. */
+void FUN_0029be5c(int index, u32 amount)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002542a4();
-  puVar2 = (unsigned int *)(temp_v0 + param_1 * 4);
-  temp_v1 = *puVar2;
-  if (~temp_v1 > param_2) {
-    temp_v1 = temp_v1 + param_2;
-  }
-  else {
-    temp_v1 = 0xffffffff;
-  }
-  *puVar2 = temp_v1;
-  switch (param_1) {
-  case 2:
-    FUN_00343a74(param_2);
-    return;
-  case 9:
-    FUN_00343ba0(param_2);
-    return;
-  case 0x13:
-    FUN_00343a04(param_2);
-    return;
-  case 0x26:
-    FUN_00343a2c(param_2);
-    return;
-  }
-  return;
+    u32 *table = FUN_002542a4();
+    u32 *counter = &table[index];
+    u32 value = *counter;
+
+    if (~value > amount) {
+        value = value + amount;
+    } else {
+        value = 0xffffffff;
+    }
+    *counter = value;
+    switch (index) {
+    case 2:
+        FUN_00343a74(amount);
+        return;
+    case 9:
+        FUN_00343ba0(amount);
+        return;
+    case 0x13:
+        FUN_00343a04(amount);
+        return;
+    case 0x26:
+        FUN_00343a2c(amount);
+        return;
+    }
 }
 
 } /* extern "C" */

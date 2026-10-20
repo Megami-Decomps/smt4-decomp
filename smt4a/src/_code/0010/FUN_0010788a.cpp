@@ -12,7 +12,7 @@ int FUN_002eea5c(...);
 int FUN_002efa58(int *, int, int);
 int FUN_002efb6c(int *, int);
 int FUN_002effdc(int *);
-int FUN_002f00e8(unsigned short **);
+int vectorCount2_002f00e8(unsigned short **);
 int FUN_002f012e(...);
 
 typedef int romwright_code(...);
@@ -47,7 +47,7 @@ extern int FUN_002e760a(unsigned int);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int *FUN_002ed258(int, int *);
 /* Supplied declaration required: FUN_002eea5c. */
-extern int *FUN_002efa50(int, int);
+extern int *arrayElementAddress_002efa50(int, int);
 /* Supplied declaration required: FUN_002efa58. */
 extern int FUN_002efa80(unsigned int *);
 /* Supplied declaration required: FUN_002efb6c. */
@@ -55,8 +55,8 @@ extern int *FUN_002eff58(int, unsigned int);
 extern int FUN_002eff84(void);
 extern int *FUN_002eff90(int, unsigned int);
 /* Supplied declaration required: FUN_002effdc. */
-extern int FUN_002f000c(int *, unsigned int *);
-/* Supplied declaration required: FUN_002f00e8. */
+extern int wordRefsDiffer_002f000c(int *, unsigned int *);
+/* Supplied declaration required: vectorCount2_002f00e8. */
 extern int FUN_002f00f0(int, int);
 /* Supplied declaration required: FUN_002f012e. */
 
@@ -133,7 +133,7 @@ void FUN_0010788a(int param_1)
   temp_v12 = param_1 + 0x164;
   temp_v17 = param_1 + 0x100;
   for (temp_v1 = 0; temp_v1 < (int)(*(unsigned short *)(temp_v17 + 4) + 1); temp_v1 = temp_v1 + 1) {
-    piVar3 = (int *)FUN_002efa50(temp_v11,temp_v1);
+    piVar3 = (int *)arrayElementAddress_002efa50(temp_v11,temp_v1);
     temp_v4 = *piVar3 == 0;
     do {
       if (temp_v4) goto LAB_00107af4;
@@ -147,14 +147,14 @@ void FUN_0010788a(int param_1)
     temp_v15 = temp_v6;
     temp_v14 = temp_v5;
     FUN_002efb6c(&temp_v14,0);
-    piVar3 = (int *)FUN_002efa50(temp_v11,temp_v1);
+    piVar3 = (int *)arrayElementAddress_002efa50(temp_v11,temp_v1);
     temp_v2 = *piVar3;
     temp_v6 = temp_v2 + 4;
     temp_v13[0] = *(short *)(temp_v2 + 0x24) - 1;
     temp_v18 = *(int *)(*(int *)(temp_v2 + 0x14) + 8);
     while( 1 ) {
       temp_v19 = *(unsigned int *)(temp_v6 + 0x10);
-      temp_v2 = FUN_002f000c(&temp_v18,(unsigned int *)&temp_v19);
+      temp_v2 = wordRefsDiffer_002f000c(&temp_v18,(unsigned int *)&temp_v19);
       if ((temp_v2 == 0) || ((unsigned int)*(unsigned short *)(temp_v18 + 0x14) != temp_v13[0] + 1)) break;
       temp_v13[0] = *(unsigned short *)(temp_v18 + 0x14);
       FUN_002effdc(&temp_v18);
@@ -172,7 +172,7 @@ void FUN_0010788a(int param_1)
     }
     while( 1 ) {
       temp_v19 = *(unsigned int *)(temp_v6 + 0x10);
-      temp_v2 = FUN_002f000c(&temp_v18,(unsigned int *)&temp_v19);
+      temp_v2 = wordRefsDiffer_002f000c(&temp_v18,(unsigned int *)&temp_v19);
       if (temp_v2 == 0) break;
       temp_v5 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v5 + 2)),*(unsigned short *)(temp_v18 + 0x14));
       if (temp_v9 != temp_v10) {
@@ -188,7 +188,7 @@ void FUN_0010788a(int param_1)
       temp_v9 = puVar6;
       FUN_002effdc(&temp_v18);
     }
-    temp_v2 = FUN_002f00e8(&temp_v8);
+    temp_v2 = vectorCount2_002f00e8(&temp_v8);
     temp_v3 = temp_v2 * 2 + 4;
     temp_v2 = FUN_002f00f0(piVar4[2],temp_v3);
     if (temp_v2 == 0) break;
@@ -228,7 +228,7 @@ void FUN_0010788a(int param_1)
     }
     temp_v7[0] = (unsigned char)temp_v1;
     FUN_002e9a56(piVar3,temp_v7);
-    temp_v7[0] = FUN_002f00e8(&temp_v8);
+    temp_v7[0] = vectorCount2_002f00e8(&temp_v8);
     FUN_002e9a56(piVar3,temp_v7);
     FUN_002eea5c(piVar3,temp_v13);
     for (puVar6 = temp_v8; piVar4 = piVar3, temp_v9 != puVar6; puVar6 = puVar6 + 1) {

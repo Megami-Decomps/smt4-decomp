@@ -1,35 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(int);
+int asdMemFree(int ptr);
 
-typedef struct fn_001a9f28_arg0 fn_001a9f28_arg0;
-struct fn_001a9f28_arg0 {
-    unsigned char pad_0x0[0x24];
-    int field_0x24; /* +0x24 */
-    unsigned char pad_0x28[0x4];
-    uint field_0x2c; /* +0x2c */
-    unsigned char pad_0x30[0x14];
-    int field_0x44; /* +0x44 */
-};
+typedef struct Buffers {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ int data;
+    /* 0x28 */ u8 unk28[4];
+    /* 0x2C */ u32 flags;
+    /* 0x30 */ u8 unk30[0x14];
+    /* 0x44 */ int extra;
+} Buffers;
 
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_001a9f28(fn_001a9f28_arg0 *param_1)
-
+/* Frees the data buffer (unless flag 0x10 marks it as borrowed) and the extra buffer. */
+void FUN_001a9f28(Buffers *buffers)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((param_1->field_0x24 != 0) && ((param_1->field_0x2c & 0x10) == 0)) {
-    asdMemFree(param_1->field_0x24);
-    param_1->field_0x24 = 0;
-  }
-  if (param_1->field_0x44 != 0) {
-    asdMemFree(param_1->field_0x44);
-    param_1->field_0x44 = 0;
-  }
-  return;
+    if (buffers->data != 0 && (buffers->flags & 0x10) == 0) {
+        asdMemFree(buffers->data);
+        buffers->data = 0;
+    }
+    if (buffers->extra != 0) {
+        asdMemFree(buffers->extra);
+        buffers->extra = 0;
+    }
 }
 
 } /* extern "C" */

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00280468(...);
-int FUN_0036ba44(int, int, int, int, int);
-int FUN_003ae918(...);
+int colorSlotSet(int, int, int, int, int);
+int colorHolderSet(...);
 int SBORROW4(int, int);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
@@ -16,8 +16,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00280468. */
-/* Supplied declaration required: FUN_0036ba44. */
-/* Supplied declaration required: FUN_003ae918. */
+/* Supplied declaration required: colorSlotSet. */
+/* Supplied declaration required: colorHolderSet. */
 extern long long __aeabi_idivmod(int, int, int, int, int);
 
 
@@ -52,16 +52,16 @@ void FUN_00203b40(int param_1,int param_2,int param_3,int param_4,int param_5,in
     }
     if (param_5 != 0) {
       FUN_00280468(param_1,temp_v1,temp_v0);
-      FUN_0036ba44(param_1,6,5,3,4);
+      colorSlotSet(param_1,6,5,3,4);
       if (param_6 != 0) {
-        FUN_003ae918(param_1,0xf,0xe,0xc,0xd);
+        colorHolderSet(param_1,0xf,0xe,0xc,0xd);
       }
     }
     else {
       FUN_00280468(param_1,temp_v1,temp_v0);
-      FUN_0036ba44(param_1,6,5,0x20,0x20);
+      colorSlotSet(param_1,6,5,0x20,0x20);
       if (param_6 != 0) {
-        FUN_003ae918(param_1,0xf,0xe,0x20,0x20);
+        colorHolderSet(param_1,0xf,0xe,0x20,0x20);
       }
     }
     if ((temp_v1 == 1) && (param_4 >= 2)) {
@@ -73,9 +73,9 @@ void FUN_00203b40(int param_1,int param_2,int param_3,int param_4,int param_5,in
     else {
       FUN_00280468(param_1 + 0x28,param_4);
     }
-    FUN_0036ba44(param_1 + 0x28,3,4,0x20,0x20);
+    colorSlotSet(param_1 + 0x28,3,4,0x20,0x20);
     if (param_6 != 0) {
-      FUN_003ae918(param_1 + 0x28,0xc,0xd,0x20,0x20);
+      colorHolderSet(param_1 + 0x28,0xc,0xd,0x20,0x20);
     }
     *(unsigned short *)(param_1 + 0x5c) = 0;
     *(unsigned short *)(param_1 + 0x5e) = 0;

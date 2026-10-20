@@ -8,7 +8,7 @@ int FUN_00224880(...);
 int FUN_00275f44(...);
 int FUN_002f0384(...);
 int FUN_003180c4(...);
-int FUN_0031a218(...);
+int panelSetMode3(...);
 int FUN_00359974(...);
 int FUN_003720a0(...);
 int FUN_003720e4(...);
@@ -18,15 +18,15 @@ int FUN_003d2150(...);
 int FUN_003df7c4(...);
 int FUN_00496a0c(...);
 int FUN_0049cd18(...);
-int FUN_004d00a4(...);
+int setListWindow(...);
 
 int FUN_001641c4(void);
 int sysPlaySe(...);
 int FUN_00184528(unsigned int *, int);
 int FUN_002c2c80(...);
-int FUN_00342348(...);
-int FUN_003491e8(void);
-int FUN_0037c8b4(...);
+int screenShowMessage(...);
+int obj04Finish(void);
+int panelSetTarget(...);
 int FUN_003a76a8(...);
 int FUN_004935b0(...);
 int FUN_00493660(unsigned int *, int, int, int);
@@ -37,8 +37,8 @@ int FUN_00498ff0(...);
 int FUN_0049cad0(...);
 int FUN_004cf8dc(...);
 int FUN_004cfe4c(...);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
 int FUN_004d0738(unsigned int *, unsigned int *);
 
 typedef int romwright_code(...);
@@ -66,18 +66,18 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002c2c80. */
 /* Supplied declaration required: FUN_002f0384. */
 /* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0031a218. */
+/* Supplied declaration required: panelSetMode3. */
 extern int FUN_0031d174(unsigned int *);
-extern int FUN_00334158(void);
-/* Supplied declaration required: FUN_00342348. */
-/* Supplied declaration required: FUN_003491e8. */
+extern int objBStateAllowsAction(void);
+/* Supplied declaration required: screenShowMessage. */
+/* Supplied declaration required: obj04Finish. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_003720a0. */
 /* Supplied declaration required: FUN_003720e4. */
 /* Supplied declaration required: FUN_00372100. */
-extern int FUN_0037c894(void);
-/* Supplied declaration required: FUN_0037c8b4. */
+extern int panelStateIs0(void);
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_003a76a8. */
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -98,9 +98,9 @@ extern int FUN_0049cc10(int);
 /* Supplied declaration required: FUN_0049cd18. */
 /* Supplied declaration required: FUN_004cf8dc. */
 /* Supplied declaration required: FUN_004cfe4c. */
-/* Supplied declaration required: FUN_004d00a4. */
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: setListWindow. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d0554(void);
 extern int FUN_004d0584(void);
 /* Supplied declaration required: FUN_004d0738. */
@@ -158,7 +158,7 @@ void FUN_0049b00c(unsigned int *param_1)
       if (param_1[0x2d0] != 8) {
         temp_v5 = -temp_v5;
       }
-      FUN_0037c8b4(temp_v5,0);
+      panelSetTarget(temp_v5,0);
     }
     break;
   case 2:
@@ -176,7 +176,7 @@ void FUN_0049b00c(unsigned int *param_1)
     }
     temp_v6 = param_1[0x2d0];
     temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
-    FUN_00342348(*(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74));
+    screenShowMessage(*(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74));
     temp_v6 = param_1[0x2d0];
     temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
     if (*puVar9 != 8) {
@@ -190,7 +190,7 @@ void FUN_0049b00c(unsigned int *param_1)
     if (param_1[0x2d0] != 8) {
       temp_v5 = -temp_v5;
     }
-    FUN_0037c8b4(temp_v5,0);
+    panelSetTarget(temp_v5,0);
     temp_v5 = FUN_004d0584();
     if ((temp_v5 != 0) && (param_1[0x5812] == temp_v1)) {
       if ((int)param_1[0x2d2] >= 1) {
@@ -200,7 +200,7 @@ void FUN_0049b00c(unsigned int *param_1)
           temp_v6 = 5;
         }
         else {
-          FUN_003491e8();
+          obj04Finish();
           if (param_1[1] == 0xd) {
             FUN_003a76a8(1);
           }
@@ -209,7 +209,7 @@ void FUN_0049b00c(unsigned int *param_1)
           temp_v6 = 4;
         }
         param_1[2] = temp_v6;
-        FUN_004d044c();
+        sendEvent100020E();
       }
       else {
         FUN_001641c4();
@@ -221,7 +221,7 @@ void FUN_0049b00c(unsigned int *param_1)
     if (temp_v5 != 0) {
       FUN_001641c4();
       FUN_001641c4();
-      FUN_004d0434();
+      sendEvent100020F();
       param_1[2] = 3;
     }
     else if (param_1[0x5812] != temp_v1) {
@@ -384,7 +384,7 @@ joined_r0x0049bb38:
     if (param_1[0x2d0] == 8) {
       temp_v3 = temp_v5;
     }
-    FUN_0031a218(temp_v3,0);
+    panelSetMode3(temp_v3,0);
     param_1[2] = 8;
     temp_v4 = FUN_00357bc8(param_1[0x61],&LAB_0049baac);
     FUN_00275f44(param_1[99],temp_v4);
@@ -403,7 +403,7 @@ joined_r0x0049bb38:
         *param_1 = *param_1 & 0xffffefff;
       }
     }
-    temp_v5 = FUN_0037c894();
+    temp_v5 = panelStateIs0();
     if ((temp_v5 == 1) && ((int)param_1[3] >= 0x1e)) {
       temp_v6 = param_1[0x2d0];
       temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
@@ -426,7 +426,7 @@ joined_r0x0049bb38:
         else if ((temp_v3 != 0) && ((int)param_1[temp_v6 * 0x1d + 0x2da] <= temp_v3 + temp_v5)) {
           temp_v3 = temp_v3 - 1;
         }
-        FUN_004d00a4(puVar9,temp_v5,temp_v3);
+        setListWindow(puVar9,temp_v5,temp_v3);
       }
     }
     break;
@@ -499,7 +499,7 @@ joined_r0x0049bb38:
     param_1[2] = temp_v6;
   }
   temp_v5 = FUN_0023b3f8();
-  if (((temp_v5 != 0) && (temp_v5 = FUN_00334158(), temp_v5 != 0)) &&
+  if (((temp_v5 != 0) && (temp_v5 = objBStateAllowsAction(), temp_v5 != 0)) &&
      ((*(char *)((int)param_1 + 0x23) == '\0' && (!temp_v7)))) {
     FUN_002f0384(1);
     *(unsigned char *)((int)param_1 + 0x23) = 1;

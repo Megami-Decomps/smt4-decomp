@@ -14,7 +14,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
-extern int FUN_004ffb58(int);
+extern int slots4FGetActiveValue(int);
 
 
 void FUN_0023534c(void)
@@ -48,7 +48,7 @@ void FUN_0023534c(void)
           FUN_003fd76c(temp_v4,temp_v3 + 0x18);
           FUN_003fdb18(temp_v4);
         }
-        temp_v1 = FUN_004ffb58(temp_v4);
+        temp_v1 = slots4FGetActiveValue(temp_v4);
         if (temp_v1 != *(int *)(temp_v3 + 0x34)) {
           FUN_003fe86c(temp_v4,*(int *)(temp_v3 + 0x34),2);
           *(int *)(temp_v4 + 0x1fc) = (int)((unsigned long long)temp_v5 >> 0x20);

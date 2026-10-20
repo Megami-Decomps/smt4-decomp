@@ -1,24 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043dd50; /* 0x43dd50 */
+typedef struct Obj {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ s32 state;
+} Obj;
 
+extern Obj *DAT_0043dd50;
 
-unsigned int FUN_00203610(void)
-
+/* 0 while the state is 0x11-0x13, otherwise 1. */
+u32 FUN_00203610(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(DAT_0043dd50 + 4);
-  if ((temp_v0 == 0x11 || temp_v0 == 0x12) || (temp_v0 == 0x13)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    s32 state = DAT_0043dd50->state;
+    u32 result;
+
+    if ((state == 0x11 || state == 0x12) || (state == 0x13)) {
+        result = 0;
+    } else {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

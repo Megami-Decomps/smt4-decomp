@@ -1,24 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002fd020(void);
+void FUN_002fd020(void *object);
+void *rt_malloc(u32 size);
 
-extern int rt_malloc(unsigned int);
-/* Supplied declaration required: FUN_002fd020. */
-
-
+/* Allocates an 8-byte object and initialises it with FUN_002fd020 if the allocation succeeded. */
 void FUN_00128ce0(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = rt_malloc(8);
-  if (temp_v0 != 0) {
-    FUN_002fd020();
-  }
-  return;
+    void *object = rt_malloc(8);
+
+    if (object != NULL) {
+        FUN_002fd020(object);
+    }
 }
 
 } /* extern "C" */

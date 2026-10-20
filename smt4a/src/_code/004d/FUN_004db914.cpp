@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_0023e32c(...);
-int FUN_0037e21c(void);
+int dataTable5GetEntries(void);
 int FUN_004dc214(unsigned short *, int, unsigned int, int);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
@@ -26,7 +26,7 @@ extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_0023e32c. */
 extern int FUN_002a4b28(unsigned int);
-/* Supplied declaration required: FUN_0037e21c. */
+/* Supplied declaration required: dataTable5GetEntries. */
 extern int FUN_003a8298(void);
 /* Supplied declaration required: FUN_004dc214. */
 extern int FUN_004dc3b4(unsigned short *, unsigned short *, unsigned short *, unsigned int *);
@@ -55,7 +55,7 @@ unsigned int FUN_004db914(unsigned short *param_1,unsigned short *param_2,unsign
   unsigned char temp_v10;
   
   temp_v0 = 0;
-  FUN_0037e21c();
+  dataTable5GetEntries();
   temp_v1 = FUN_004dc3b4(param_1,param_2,param_3,param_4);
   if (temp_v1 == 0) {
     return 0;

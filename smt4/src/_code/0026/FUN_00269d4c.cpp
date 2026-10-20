@@ -1,27 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043dd68; /* 0x43dd68 */
+extern int sys43e188GetState(void);
 
-extern int FUN_002a0ce8(void);
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x430];
+    /* 0x0430 */ u8 unk0430;
+    /* 0x0431 */ u8 unk0431[0x91A7];
+    /* 0x95D8 */ s32 unk95D8;
+} Obj;
 
+extern Obj *DAT_0043dd68;
 
-unsigned int FUN_00269d4c(void)
-
+u32 FUN_00269d4c(void)
 {
-  int temp_v0;
-  int base = DAT_0043dd68;
-  
-  if (base == 0) {
-    return base;
-  }
-  if (*(int *)(base + 0x95d8) != 0) {
-    if (*(char *)(base + 0x430) == '\0' || (temp_v0 = FUN_002a0ce8(), temp_v0 == 0)) {
-      return 1;
+    Obj *obj = DAT_0043dd68;
+
+    if (obj == NULL) {
+        return (u32)obj;
     }
-  }
-  return 0;
+    if (obj->unk95D8 != 0) {
+        if (obj->unk0430 == 0 || (sys43e188GetState() == 0)) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

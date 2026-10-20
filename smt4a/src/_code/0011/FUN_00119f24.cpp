@@ -1,31 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00119f24_arg0 fn_00119f24_arg0;
-struct fn_00119f24_arg0 {
-    unsigned char pad_0x0[0x4];
-    byte field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x7];
-    undefined4 field_0xc; /* +0xc */
-    byte field_0x10; /* +0x10 */
-};
+s32 FUN_00306d0e(u32 handle, u8 kind, u8 flag);
 
-extern int FUN_00306d0e(unsigned int, unsigned char, unsigned char);
+typedef struct Request {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0C */ u32 handle;
+    /* 0x10 */ u8 flag;
+} Request;
 
-
-unsigned char FUN_00119f24(fn_00119f24_arg0 *param_1)
-
+/* Submits the request; on success clears its flag. Returns whether it succeeded. */
+u8 FUN_00119f24(Request *request)
 {
-  int temp_v0;
-  
-  unsigned char a = param_1->field_0x4;
-  unsigned char b = param_1->field_0x10;
-  temp_v0 = FUN_00306d0e(param_1->field_0xc,a,b);
-  if (temp_v0 != 0) {
-    param_1->field_0x10 = 0;
-  }
-  return temp_v0 != 0;
+    s32 result;
+    u8 kind = request->kind;
+    u8 flag = request->flag;
+
+    result = FUN_00306d0e(request->handle, kind, flag);
+    if (result != 0) {
+        request->flag = 0;
+    }
+    return result != 0;
 }
 
 } /* extern "C" */

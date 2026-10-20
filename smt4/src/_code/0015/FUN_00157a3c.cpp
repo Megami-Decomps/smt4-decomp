@@ -1,46 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00157a3c` (_code @ 0x157a3c, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail receives `scale` on the stack (soft-float argument passing), ours in s0. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a2164(unsigned int, int);
-int FUN_002b7430(unsigned int, int);
+typedef struct Playback {
+    u8 unk00[0x0c];
+    u8 active;          /* 0x0c */
+    u8 pending;         /* 0x0d */
+    u8 unk0e[0x36];
+    u8 startTimer[0xc]; /* 0x44 */
+    u8 endTimer[0x14];  /* 0x50 */
+    u32 valueA;         /* 0x64 */
+    u32 valueB;         /* 0x68 */
+    u32 valueC;         /* 0x6c */
+    u8 flag;            /* 0x70 */
+    u8 unk71[3];
+    f32 scale;          /* 0x74 */
+} Playback;
 
-/* Supplied declaration required: FUN_002a2164. */
-extern unsigned int FUN_002a2174(void);
-/* Supplied declaration required: FUN_002b7430. */
-extern unsigned int FUN_002bd440(void);
+extern void *FUN_002bd440(void);
+extern void FUN_002b7430(void *manager, void *timer);
+extern void *FUN_002a2174(void);
+extern void FUN_002a2164(void *manager, void *timer);
 
-
-void FUN_00157a3c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned char param_5,unsigned int param_6)
-
+/* Restarts the playback: finishes a pending one, stores the new parameters and arms the start timer. */
+void FUN_00157a3c(Playback *playback, u32 valueA, u32 valueB, u32 valueC, u8 flag, f32 scale)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v2 = *(char *)(param_1 + 0xc) != '\0';
-  temp_v0 = '\0';
-  if (temp_v2) {
-    temp_v0 = *(char *)(param_1 + 0xd);
-  }
-  if (temp_v2 && temp_v0 != '\0') {
-    temp_v1 = FUN_002bd440();
-    FUN_002b7430(temp_v1,param_1 + 0x50);
-    *(unsigned char *)(param_1 + 0xd) = 0;
-  }
-  *(unsigned int *)(param_1 + 100) = param_2;
-  *(unsigned int *)(param_1 + 0x68) = param_3;
-  *(unsigned int *)(param_1 + 0x6c) = param_4;
-  *(unsigned char *)(param_1 + 0x70) = param_5;
-  *(unsigned int *)(param_1 + 0x74) = param_6;
-  temp_v1 = FUN_002a2174();
-  FUN_002a2164(temp_v1,param_1 + 0x44);
-  *(unsigned char *)(param_1 + 0xc) = 1;
-  return;
+    if (playback->active && playback->pending) {
+        FUN_002b7430(FUN_002bd440(), playback->endTimer);
+        playback->pending = 0;
+    }
+    playback->valueA = valueA;
+    playback->valueB = valueB;
+    playback->valueC = valueC;
+    playback->flag = flag;
+    playback->scale = scale;
+    FUN_002a2164(FUN_002a2174(), playback->startTimer);
+    playback->active = 1;
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00137ea0(int);
 int FUN_001386e8(int);
 int FUN_00169548(int);
-int FUN_002e56ec(int, unsigned char *);
+int deletingDtor_002e56ec(int, unsigned char *);
 int FUN_003a76a8(int);
 int FUN_00473710(int);
 int FUN_0047393c(int);
@@ -23,7 +23,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_00137ea0. */
 /* Supplied declaration required: FUN_001386e8. */
 /* Supplied declaration required: FUN_00169548. */
-/* Supplied declaration required: FUN_002e56ec. */
+/* Supplied declaration required: deletingDtor_002e56ec. */
 /* Supplied declaration required: FUN_003a76a8. */
 /* Supplied declaration required: FUN_00473710. */
 /* Supplied declaration required: FUN_0047393c. */
@@ -43,7 +43,7 @@ void FUN_0047c5f0(void)
   temp_v0 = g_aocMain;
   puVar2 = (unsigned int *)(g_aocMain + 0x678);
   if (*(int *)(g_aocMain + 0x678) != 0) {
-    FUN_002e56ec(*(int *)(g_aocMain + 0x678),&LAB_0047d8e8);
+    deletingDtor_002e56ec(*(int *)(g_aocMain + 0x678),&LAB_0047d8e8);
     *puVar2 = 0;
   }
   FUN_00473710(temp_v0);

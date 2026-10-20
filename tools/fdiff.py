@@ -51,6 +51,42 @@ def listing(tool, obj):
     pad = re.compile(r"^(\s*[0-9a-f]+: )(?:\.short\s+0x0000|movs\s+r0, r0)$")
     return [pad.sub(r"\1movs\tr0, r0", call.sub(r"\1bl\2", row)) for row in rows]
 
+def text_bytes(tool, obj):
+    """The raw bytes of .text."""
+    out = subprocess.run([tool, "-s", "-j", ".text", str(obj)], capture_output=True, text=True).stdout
+    data = bytearray()
+    for line in out.splitlines():
+        m = re.match(r"\s+[0-9a-f]+ ((?:[0-9a-f]{2,8} ?){1,4})", line)
+        if m:
+            data += bytes.fromhex(m[1].replace(" ", ""))
+    return bytes(data)
+
+
+def data_as_bytes(retail, built, retail_bytes, built_bytes):
+    """Rows where the compiled object holds data with no relocation (a string literal armcc put
+    between the code and a later pool word) compared by bytes: nothing in the retail object marks
+    those bytes as data, so objdump decodes them as instructions there."""
+    at = lambda row: int(row.split(":", 1)[0], 16)
+    is_data = lambda row: re.match(r"\s*[0-9a-f]+: \.(?:word|short|byte)\b", row) and "[R_ARM" not in row
+    runs, start = [], None
+    for i, row in enumerate(built):
+        if is_data(row) and start is None:
+            start = at(row)
+        if start is not None and not is_data(row):
+            runs.append((start, at(row)))
+            start = None
+    if start is not None:
+        runs.append((start, len(built_bytes)))
+    for lo, hi in runs:
+        retail_rows = [r for r in retail if lo <= at(r) < hi]
+        if all(is_data(r) for r in retail_rows) or hi > len(retail_bytes):
+            continue  # objdump already reads both as data, or retail's function ends earlier
+        for rows, raw in ((retail, retail_bytes), (built, built_bytes)):
+            keep = [r for r in rows if not lo <= at(r) < hi]
+            keep.append(f"{lo:4x}: data {raw[lo:hi].hex()}")
+            rows[:] = sorted(keep, key=at)
+
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
@@ -76,16 +112,24 @@ def main():
         if done.returncode:
             print("\n".join(line for line in (done.stdout + done.stderr).splitlines() if "Error" in line or line.startswith("  ")))
             sys.exit(2)
-        build.link_weak_calls(obj)  # what armlink did: calls to absent __weak debug hooks become MOV r0, r0
+        build.link_weak_calls(obj, unit)  # what armlink did: removed weak calls and branches to the next instruction
     tool = objdump(args.game)
     retail = listing(tool, ROOT / args.game / unit["target"])
     built = listing(tool, ROOT / args.game / unit["object"])
+    data_as_bytes(retail, built, text_bytes(tool, ROOT / args.game / unit["target"]), text_bytes(tool, ROOT / args.game / unit["object"]))
     strip = lambda rows: [re.sub(r"^\s*[0-9a-f]+: ", "", r) for r in rows]
     # armcc pads a Thumb function's section to 4 bytes: a trailing pad is not a difference.
     while len(built) > len(retail) and strip(built)[-1] in ("movs r0, r0", "nop", ".short 0x0000"):
         built.pop()
     if strip(retail) == strip(built):
         print(f"IDENTICAL: {args.game} {args.function} ({unit['source']})")
+        return
+    # A string literal armcc placed after the pool: retail's function ends before it, the same bytes
+    # follow in the image. relink.py checks them against the image; here only data rows may trail.
+    extra = strip(built)[len(retail):]
+    if extra and strip(built)[:len(retail)] == strip(retail) and all(r.startswith((".word", ".short", ".byte", ".ascii")) for r in extra):
+        print(f"IDENTICAL: {args.game} {args.function} ({unit['source']}), plus {len(extra)} rows of trailing literal data "
+              "that relink.py checks against the image")
         return
     print(f"DIFFERS: {args.game} {args.function} ({unit['source']}), retail {len(retail)} vs built {len(built)} rows")
     for line in difflib.unified_diff(strip(retail), strip(built), "retail", "built", n=2, lineterm=""):

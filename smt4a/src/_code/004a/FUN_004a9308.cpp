@@ -21,7 +21,7 @@ extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 /* Supplied declaration required: FUN_00231cdc. */
 /* Supplied declaration required: FUN_002cc96c. */
 /* Supplied declaration required: FUN_00321500. */
-extern int FUN_0038e704(int);
+extern int menu32ModeIsNot6(int);
 /* Supplied declaration required: FUN_0039ebcc. */
 
 
@@ -59,7 +59,7 @@ void FUN_004a9308(unsigned int param_1,unsigned int param_2,unsigned int param_3
     break;
   case 0xe:
     temp_v2 = 0xb;
-    temp_v1 = FUN_0038e704(temp_v0 + 8);
+    temp_v1 = menu32ModeIsNot6(temp_v0 + 8);
     if (temp_v1 != 0) {
       temp_v1 = temp_v0 + 0x24bc;
       FUN_0039ebcc();

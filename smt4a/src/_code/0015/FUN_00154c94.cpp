@@ -1,12 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+extern u32 DAT_005b3cec[];
 
-unsigned int FUN_00154c94(int param_1)
-
+/* Returns entry `index` of the table at 0x5B3CEC. */
+u32 FUN_00154c94(s32 index)
 {
-  return *(unsigned int *)(param_1 * 4 + 0x5b3cec);
+    return DAT_005b3cec[index];
 }
 
 } /* extern "C" */

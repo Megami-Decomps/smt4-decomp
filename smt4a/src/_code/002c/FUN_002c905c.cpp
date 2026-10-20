@@ -1,21 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f290; /* 0x57f290 */
+typedef struct Record {
+    /* 0x000 */ u8 unk000[0x430];
+    /* 0x430 */ u8 busy;
+    /* 0x431 */ u8 unk431[3];
+    /* 0x434 */ s32 request;
+} Record;
+extern Record *DAT_0057f290;
 
-
-unsigned int FUN_002c905c(void)
-
+/* Returns 1 when the record is busy with request 8..0xE. */
+u32 FUN_002c905c(void)
 {
-  int temp_v0;
-  
-  if ((*(char *)(DAT_0057f290 + 0x430) != '\0') &&
-     (((temp_v0 = *(int *)(DAT_0057f290 + 0x434), temp_v0 == 8 || temp_v0 == 9 ||
-       (temp_v0 == 10 || temp_v0 == 0xb)) || ((temp_v0 == 0xc || temp_v0 == 0xd) || temp_v0 == 0xe)))) {
-    return 1;
-  }
-  return 0;
+    s32 request;
+
+    if ((DAT_0057f290->busy != 0) &&
+        (((request = DAT_0057f290->request, request == 8 || request == 9 ||
+           (request == 10 || request == 0xB)) || ((request == 0xC || request == 0xD) || request == 0xE)))) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

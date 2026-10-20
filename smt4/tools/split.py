@@ -109,12 +109,13 @@ def thumb2_literal_load(first, second):
 def literal_pools(entry, code, thumb):
     """(merged data ranges, words a PC-relative LDR reads, end) of an ARM/Thumb function, as
     byte offsets: A32 LDR/LDRD/VLDR and Thumb LDR with PC as the base. One pass in address
-    order, so a pool word is data when the scan reaches it and is not decoded. `end` is where
-    the bytes end once every pool they read is counted (past `code` when a load reads a pool
-    behind it)."""
+    order, so a pool word is data when the scan reaches it and is not decoded. A PC-relative
+    ADD/ADR addresses a string literal armcc placed among the pools (C code takes no address of a
+    label): data up to its NUL, rounded up to the word. `end` is where the bytes end once every
+    pool they read is counted (past `code` when a load reads a pool behind it)."""
     length = len(code)
     skew = entry % 4
-    data, ranges, words = set(), [], []
+    data, ranges, words, addressed = set(), [], [], []
     reach = length
 
     def read(at, size, is_word):
@@ -139,6 +140,8 @@ def literal_pools(entry, code, thumb):
                 continue
             if half & 0xF800 == 0x4800:
                 read(((at + skew + 4) & ~3) - skew + (half & 0xFF) * 4, 4, True)
+            elif half & 0xF800 == 0xA000:  # ADR Rd, #imm8*4
+                addressed.append(((at + skew + 4) & ~3) - skew + (half & 0xFF) * 4)
             elif thumb_is_wide(half):
                 # a 32-bit instruction is one 4-byte unit: its second half is never decoded alone
                 if at + 4 <= length:
@@ -182,6 +185,15 @@ def literal_pools(entry, code, thumb):
                 to = target((word & 0xFF) * 4)
                 if to is not None:
                     read(to, 8 if word >> 8 & 1 else 4, False)
+            elif word & 0x0FFF0000 == 0x028F0000:  # ADD Rd, PC, #imm (ADR)
+                rotate = (word >> 8 & 0xF) * 2
+                imm = ((word & 0xFF) >> rotate | (word & 0xFF) << (32 - rotate)) & 0xFFFFFFFF if rotate else word & 0xFF
+                addressed.append(at + 8 + imm)
+    for to in addressed:
+        stop = code.find(b"\0", to) if 0 <= to < length else -1
+        if stop >= 0:
+            stop += 1
+            ranges.append((to, min(length, stop + (4 - (stop + skew) % 4) % 4)))
     merged = []
     for start, end in sorted(ranges):
         if merged and start <= merged[-1][1]:

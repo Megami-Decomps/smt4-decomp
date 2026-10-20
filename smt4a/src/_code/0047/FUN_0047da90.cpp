@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_004262fc(void);
+int resetFlag5891A4And65f8(void);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_004262fc. */
+/* Supplied declaration required: resetFlag5891A4And65f8. */
 
 
 int * FUN_0047da90(int *param_1)
@@ -16,7 +16,7 @@ int * FUN_0047da90(int *param_1)
 {
 /* irregular: 2 native warning(s); review required */
   if ((char)param_1[1] == '\x01') {
-    FUN_004262fc();
+    resetFlag5891A4And65f8();
     *(unsigned char *)(param_1 + 1) = 0;
   }
   if (*param_1 != 0) {

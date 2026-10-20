@@ -36,7 +36,7 @@ extern int dataTableGetEntries(void);
 extern int FUN_0023b3d0(void);
 extern int FUN_002857dc(void);
 /* Supplied declaration required: FUN_002f0384. */
-extern int FUN_0038b320(void);
+extern int byteTripleGetV0(void);
 /* Supplied declaration required: FUN_0041e58c. */
 /* Supplied declaration required: FUN_0041f020. */
 
@@ -50,7 +50,7 @@ void FUN_0041f4c0(fn_0041f4c0_arg0 *param_1)
   int temp_v2;
   
   temp_v2 = FUN_0023b3d0();
-  if (((temp_v2 != 0) && (temp_v2 = FUN_002857dc(), temp_v2 != 0)) && (temp_v2 = FUN_0038b320(), temp_v2 != 0)
+  if (((temp_v2 != 0) && (temp_v2 = FUN_002857dc(), temp_v2 != 0)) && (temp_v2 = byteTripleGetV0(), temp_v2 != 0)
      ) {
     FUN_0041e58c(param_1);
     param_1->field_0x44c = 0;

@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_002e56ec(unsigned int, unsigned char *);
+int deletingDtor_002e56ec(unsigned int, unsigned char *);
 
 extern unsigned char LAB_00124a43; /* 0x124a43 */
 
-/* Supplied declaration required: FUN_002e56ec. */
+/* Supplied declaration required: deletingDtor_002e56ec. */
 
 
 unsigned int * FUN_0012d568(unsigned int *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002e56ec(*param_1,&LAB_00124a43);
+  deletingDtor_002e56ec(*param_1,&LAB_00124a43);
   return param_1;
 }
 

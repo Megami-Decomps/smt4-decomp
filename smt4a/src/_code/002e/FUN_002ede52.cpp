@@ -1,17 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_002f34ac(void);
+u32 FUN_002f34ac(void);
 
-
-unsigned int FUN_002ede52(void)
-
+/* Returns the low bit of FUN_002f34ac's result flipped. */
+u32 FUN_002ede52(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_002f34ac();
-  return temp_v0 ^ 1;
+    u32 value;
+
+    value = FUN_002f34ac();
+    return value ^ 1;
 }
 
 } /* extern "C" */

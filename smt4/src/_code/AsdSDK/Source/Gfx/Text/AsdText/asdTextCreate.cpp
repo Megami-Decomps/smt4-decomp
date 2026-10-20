@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail wraps the object creation in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling (the file name literal is embedded in the function's pool) */
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -10,6 +10,7 @@ extern u32 DAT_00464d48[];
 /* Creates a text object with its defaults. */
 AsdText *asdTextCreate(u32 arg)
 {
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Text\\AsdText.cpp", 137);
     AsdText *text = FUN_00124bd8(0xb4, arg);
 
     text->unk34 = 0x402;

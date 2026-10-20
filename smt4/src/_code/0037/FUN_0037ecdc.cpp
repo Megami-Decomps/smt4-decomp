@@ -1,40 +1,45 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b7430(unsigned int, int);
-int FUN_0037a2a8(unsigned int, unsigned int);
+int FUN_002b7430(u32 a, int b);
+int FUN_0037a2a8(u32 a, u32 b);
 int nw_snd_internal_driver_Voice_Stop(void);
+extern u32 FUN_002bb020(void);
+extern u32 FUN_002bd440(void);
 
-/* Supplied declaration required: FUN_002b7430. */
-extern unsigned int FUN_002bb020(void);
-extern unsigned int FUN_002bd440(void);
-/* Supplied declaration required: FUN_0037a2a8. */
-/* Supplied declaration required: nw_snd_internal_driver_Voice_Stop. */
+typedef struct Voice {
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ u8 unk00C;
+    /* 0x00D */ u8 active;
+    /* 0x00E */ u8 unk00E[0x36];
+    /* 0x044 */ u8 unk044[0x1C];
+    /* 0x060 */ u32 unk060;
+    /* 0x064 */ u8 unk064[0x6C];
+    /* 0x0D0 */ u32 count;
+    /* 0x0D4 */ u8 unk0D4[0x34];
+    /* 0x108 */ u8 slots[1];
+} Voice;
 
-
-void FUN_0037ecdc(int param_1)
-
+void FUN_0037ecdc(Voice *voice)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = *(unsigned int *)(param_1 + 0x60);
-  temp_v0 = FUN_002bb020();
-  FUN_0037a2a8(temp_v0,temp_v1);
-  for (temp_v2 = 0; temp_v2 < *(unsigned int *)(param_1 + 0xd0); temp_v2++) {
-    if (*(int *)(param_1 + temp_v2 * 0x340 + 0x108) != 0) {
-      nw_snd_internal_driver_Voice_Stop();
+    u32 a;
+    u32 b;
+    u32 i;
+
+    b = voice->unk060;
+    a = FUN_002bb020();
+    FUN_0037a2a8(a, b);
+    for (i = 0; i < voice->count; i++) {
+        if (*(int *)((u8 *)voice + i * 0x340 + 0x108) != 0) {
+            nw_snd_internal_driver_Voice_Stop();
+        }
     }
-  }
-  if (*(char *)(param_1 + 0xd) != '\0') {
-    temp_v0 = FUN_002bd440();
-    FUN_002b7430(temp_v0,param_1 + 0x44);
-    *(unsigned char *)(param_1 + 0xd) = 0;
-  }
-  return;
+    if (voice->active != 0) {
+        a = FUN_002bd440();
+        FUN_002b7430(a, (int)voice + 0x44);
+        voice->active = 0;
+    }
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int FUN_001a0990(int);
 int FUN_001b4a58(unsigned int, int *, int, int, int, int, unsigned int, unsigned int);
 int FUN_001cc6c0(unsigned int, int);
 int FUN_001d0b28(unsigned int, int);
-int FUN_0045fb88(void);
+int word8HolderCopy0CTo14(void);
 int FUN_00462a18(void);
 int FUN_00462b74(int);
 int hasExclusiveAccess(int *);
@@ -33,7 +33,7 @@ extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cc6c0. */
 /* Supplied declaration required: FUN_001d0b28. */
 extern int FUN_0045b9a0(unsigned int);
-/* Supplied declaration required: FUN_0045fb88. */
+/* Supplied declaration required: word8HolderCopy0CTo14. */
 /* Supplied declaration required: FUN_00462a18. */
 /* Supplied declaration required: FUN_00462b74. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -146,7 +146,7 @@ LAB_00462ee4:
       if (temp_v1 == 0) {
         return;
       }
-      FUN_0045fb88();
+      word8HolderCopy0CTo14();
     }
     temp_v0 = *(char *)(temp_v6 + 0x14);
     if (temp_v0 == '\0') {

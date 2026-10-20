@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0050d6f8(short *);
+int clearWordAndByte(short *);
 
 /* stack frame of param_2: 5 slot(s), 10 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int FUN_0014bef4(short);
-/* Supplied declaration required: FUN_0050d6f8. */
+/* Supplied declaration required: clearWordAndByte. */
 
 
 unsigned int FUN_004cd340(int param_1,unsigned char *param_2)
@@ -37,7 +37,7 @@ unsigned int FUN_004cd340(int param_1,unsigned char *param_2)
   short temp_v11;
   short temp_v12;
   
-  FUN_0050d6f8(&temp_v8);
+  clearWordAndByte(&temp_v8);
   temp_v0 = *(short *)(param_1 + 4);
   temp_v1 = *(short *)(param_1 + 6);
   temp_v2 = *(short *)(param_1 + 8);

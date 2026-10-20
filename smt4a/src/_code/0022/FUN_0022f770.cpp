@@ -25,8 +25,8 @@ typedef struct {
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0021b390. */
-extern unsigned int FUN_002ab7c4(unsigned int);
-extern unsigned int FUN_002c9018(unsigned int);
+extern unsigned int dataTableGetEntry24Byte0(unsigned int);
+extern unsigned int dataTableGetEntry24Member(unsigned int);
 extern int FUN_0031fd08(void);
 
 
@@ -44,7 +44,7 @@ void FUN_0022f770(int param_1,int param_2,int param_3,int param_4,int param_5)
   unsigned int temp_v6;
   
   temp_v0 = param_1 + param_2 * 4;
-  temp_v6 = FUN_002ab7c4(*(unsigned int *)(temp_v0 + 0x927c));
+  temp_v6 = dataTableGetEntry24Byte0(*(unsigned int *)(temp_v0 + 0x927c));
   temp_v1 = FUN_0031fd08();
   efctSetSpeed();
   if (param_5 != 0) {
@@ -73,7 +73,7 @@ void FUN_0022f770(int param_1,int param_2,int param_3,int param_4,int param_5)
     temp_v3 = 0xffffffff;
     temp_v4 = 0xffffffff;
   }
-  temp_v2 = FUN_002c9018(*(unsigned int *)(temp_v0 + 0x927c));
+  temp_v2 = dataTableGetEntry24Member(*(unsigned int *)(temp_v0 + 0x927c));
   temp_v0 = FUN_001834a4(0x1a,0xa4);
   VectorSignedToFloat(*(short *)(temp_v0 + 10) + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v0 + 8) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

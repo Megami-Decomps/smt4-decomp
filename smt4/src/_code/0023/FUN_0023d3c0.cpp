@@ -1,26 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Provider;
+typedef struct ProviderVtbl {
+    /* 0x00 */ void *unk00[4];
+    /* 0x10 */ u32 *(*getEntry)(struct Provider *provider);
+} ProviderVtbl;
 
-void FUN_0023d3c0(int param_1,unsigned int *param_2)
+typedef struct Provider {
+    /* 0x0 */ ProviderVtbl *vtbl;
+} Provider;
 
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x258];
+    /* 0x258 */ Provider *provider;
+} Owner;
+
+/* Copies a 3-word vector into the provider's entry (when its flag 0x20000000 is set). */
+void FUN_0023d3c0(Owner *owner, u32 *vector)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(**(int **)(param_1 + 600) + 0x10))(*(int **)(param_1 + 600));
-  if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x20000000) == 0)) {
-    puVar1 = (unsigned int *)0x0;
-  }
-  temp_v0 = param_2[1];
-  temp_v1 = param_2[2];
-  puVar1[2] = *param_2;
-  puVar1[3] = temp_v0;
-  puVar1[4] = temp_v1;
-  return;
+    u32 *entry = owner->provider->vtbl->getEntry(owner->provider);
+    u32 y;
+    u32 z;
+
+    if (entry != NULL && (*entry & 0x20000000) == 0) {
+        entry = NULL;
+    }
+    y = vector[1];
+    z = vector[2];
+    entry[2] = *vector;
+    entry[3] = y;
+    entry[4] = z;
 }
 
 } /* extern "C" */

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001846d0. */
 extern int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0020ad6c. */
@@ -34,7 +34,7 @@ void FUN_0034ee5c(int param_1,int param_2,unsigned char param_3)
   *(unsigned char *)(param_1 + 0x38b3) = 0;
   *(unsigned int *)(param_1 + 0x3890) = 4;
   *(unsigned char *)(param_1 + 0x4ba8) = 0;
-  temp_v0 = FUN_0015688c();
+  temp_v0 = saveSlotFindSelected();
   if ((temp_v0 != 0) &&
      ((temp_v1 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),1), temp_v1 == 1 ||
       (temp_v0 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),1), temp_v0 == 4)))) {

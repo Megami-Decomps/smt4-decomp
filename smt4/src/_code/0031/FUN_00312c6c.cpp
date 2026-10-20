@@ -10,7 +10,7 @@ extern unsigned int FUN_002451ac(unsigned int, unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int btlGetMainState(void);
 extern int scrGetArg(unsigned int);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(unsigned int);
 
@@ -48,7 +48,7 @@ unsigned int FUN_00312c6c(void)
   }
   temp_v1 = dataTableGetEntries(temp_v6);
   temp_v2 = dataTableGetCount(temp_v6);
-  temp_v3 = FUN_002c09f4(99);
+  temp_v3 = randNextInRange(99);
   temp_v0 = 0;
   temp_v7 = 0;
   temp_v4 = 0;

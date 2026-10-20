@@ -49,7 +49,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 /* Supplied declaration required: FUN_001a063c. */
 extern int FUN_001a7a20(int *, char *, unsigned int);
 extern unsigned int wstrlen(void);
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 void FUN_0016c058(fn_0016c058_arg0 *param_1,int *param_2)
@@ -174,7 +174,7 @@ LAB_0016c188:
   }
   else {
     puVar8 = (unsigned int *)*piVar6;
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v3 = FUN_002eba64(&DAT_005c4c2c), temp_v3 != 0)) {
+    if (((DAT_005c4c2c & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v3 != 0)) {
       DAT_0064c054 = 0x3f800000;
       DAT_0064c058 = 0;
       DAT_0064c05c = 0;

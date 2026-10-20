@@ -1,47 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0011b312_arg0 fn_0011b312_arg0;
-typedef struct fn_0011b312_arg1 fn_0011b312_arg1;
-struct fn_0011b312_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined1 field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4];
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-};
-struct fn_0011b312_arg1 {
-    unsigned char pad_0x0[0x4];
-    byte field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4];
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-};
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u64 value08;
+    /* 0x10 */ u32 word10;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ u64 value18;
+} Record;
 
-
-void FUN_0011b312(fn_0011b312_arg0 *param_1,fn_0011b312_arg1 *param_2)
-
+/* Copies the kind, the two 64-bit values and the word at 0x10 from `source` into `dest`. */
+void FUN_0011b312(Record *dest, const Record *source)
 {
-  unsigned int temp_v0;
-  
-  param_1->field_0x4 = param_2->field_0x4;
-  temp_v0 = param_2->field_0x8;
-  param_1->field_0xc = param_2->field_0xc;
-  param_1->field_0x8 = temp_v0;
-  param_1->field_0x10 = param_2->field_0x10;
-  temp_v0 = param_2->field_0x18;
-  param_1->field_0x1c = param_2->field_0x1c;
-  param_1->field_0x18 = temp_v0;
-  return;
+    dest->kind = source->kind;
+    dest->value08 = source->value08;
+    dest->word10 = source->word10;
+    dest->value18 = source->value18;
 }
 
 } /* extern "C" */

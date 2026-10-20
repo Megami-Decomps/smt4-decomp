@@ -1,28 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7228(unsigned int);
-int FUN_002e7232(unsigned int);
-int FUN_002ea3d0(unsigned int, int *);
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*destroy)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e7228. */
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002ea3d0. */
+void FUN_002e7228(u32 pool);
+void FUN_002e7232(u32 pool);
+void FUN_002ea3d0(u32 pool, Object *object);
 
-
-void FUN_0010ece4(unsigned int param_1,int *param_2)
-
+/* Releases `object` within `pool`: runs FUN_002ea3d0, destroys the object if non-NULL, then closes the pool. */
+void FUN_0010ece4(u32 pool, Object *object)
 {
-/* irregular: 3 native warning(s); review required */
-  FUN_002e7228(param_1);
-  FUN_002ea3d0(param_1,param_2);
-  if (param_2 != (int *)0x0) {
-    (**(romwright_code **)(*param_2 + 4))(param_2);
-  }
-  FUN_002e7232(param_1);
-  return;
+    FUN_002e7228(pool);
+    FUN_002ea3d0(pool, object);
+    if (object != NULL) {
+        object->vtbl->destroy(object);
+    }
+    FUN_002e7232(pool);
 }
 
 } /* extern "C" */

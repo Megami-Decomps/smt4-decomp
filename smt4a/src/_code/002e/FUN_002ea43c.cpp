@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003106a8(unsigned int, int);
+void FUN_003106a8(u32 object, s32 mode);
 
-/* Supplied declaration required: FUN_003106a8. */
-
-
-void FUN_002ea43c(unsigned int param_1)
-
+/* Calls FUN_003106a8 with mode 5. */
+void FUN_002ea43c(u32 object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_003106a8(param_1,5);
-  return;
+    FUN_003106a8(object, 5);
 }
 
 } /* extern "C" */

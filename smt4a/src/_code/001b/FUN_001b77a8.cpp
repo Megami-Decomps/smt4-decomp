@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002eba64(...);
+int __cxa_guard_acquire(...);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 int nw_gfx_Skeleton_CreateCallbacks(unsigned int *, int *, unsigned int, unsigned int);
 int nw_ut_MoveArray_nn_math_MTX34_MoveArray_sub_object(int **);
@@ -68,7 +68,7 @@ extern unsigned int DAT_0064c118; /* 0x64c118 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002eba64. */
+/* Supplied declaration required: __cxa_guard_acquire. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_gfx_Skeleton_CreateCallbacks. */
 /* Supplied declaration required: nw_ut_MoveArray_nn_math_MTX34_MoveArray_sub_object. */
@@ -194,9 +194,9 @@ FUN_001b77a8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
     do {
       temp_v41 = (unsigned int *)temp_v11;
       if (((DAT_005c4c38 & 1) == 0) &&
-         (temp_v0 = FUN_002eba64(&DAT_005c4c38,(int)((unsigned long long)temp_v11 >> 0x20)), temp_v0 != 0)) {
+         (temp_v0 = __cxa_guard_acquire(&DAT_005c4c38,(int)((unsigned long long)temp_v11 >> 0x20)), temp_v0 != 0)) {
         temp_v30 = 0x7e1;
-        if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c2c), temp_v0 != 0)) {
+        if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
           DAT_0064c054 = (unsigned int)temp_v12;
           DAT_0064c058 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
           DAT_0064c05c = DAT_0064c058;
@@ -229,7 +229,7 @@ FUN_001b77a8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         *(unsigned int *)(temp_v3 + 0x38) = uStack_c0;
         *(unsigned int *)(temp_v3 + 0x3c) = temp_v38;
       }
-      if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c2c), temp_v0 != 0)) {
+      if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
         DAT_0064c054 = (unsigned int)temp_v12;
         DAT_0064c058 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
         DAT_0064c05c = DAT_0064c058;
@@ -251,7 +251,7 @@ FUN_001b77a8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         nn_math_ARMv6_MTX34CopyAsm(temp_v3,temp_v39);
       }
       puVar3 = temp_v39;
-      if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c2c), temp_v0 != 0)) {
+      if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
         DAT_0064c054 = (unsigned int)temp_v12;
         DAT_0064c058 = (unsigned int)((unsigned long long)temp_v12 >> 0x20);
         DAT_0064c05c = DAT_0064c058;

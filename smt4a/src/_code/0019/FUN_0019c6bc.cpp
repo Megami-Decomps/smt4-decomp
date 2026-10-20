@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_0019c6bc(unsigned int param_1)
-
+/* Returns whether `value` is at least 401. */
+u8 FUN_0019c6bc(u32 value)
 {
-  return param_1 >= 401;
+    return value >= 401;
 }
 
 } /* extern "C" */

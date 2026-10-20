@@ -1,24 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+int scrSetResult(int result);
+extern u8 *btlUnitGet(u32 id);
+extern int FUN_002d1974(u32 a, u32 b);
 
-extern int btlUnitGet(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-extern int FUN_002d1974(unsigned int, unsigned int);
-
-
-unsigned int FUN_003184dc(unsigned int *param_1)
-
+u32 FUN_003184dc(u32 *id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = btlUnitGet(*param_1);
-  temp_v0 = FUN_002d1974(*(unsigned int *)(temp_v0 + 0x24),0x20000);
-  scrSetResult(temp_v0 != 0);
-  return 1;
+    u8 *unit = btlUnitGet(*id);
+    int result = FUN_002d1974(*(u32 *)(unit + 0x24), 0x20000);
+
+    scrSetResult(result != 0);
+    return 1;
 }
 
 } /* extern "C" */

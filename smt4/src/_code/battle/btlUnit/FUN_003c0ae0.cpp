@@ -50,7 +50,7 @@ extern int FUN_0027dab0(int, fn_003c0ae0_arg1 *);
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: FUN_00293a04. */
 /* Supplied declaration required: FUN_002b06c4. */
-extern unsigned short FUN_002c09f4(unsigned int);
+extern unsigned short randNextInRange(unsigned int);
 
 
 void FUN_003c0ae0(int param_1,fn_003c0ae0_arg1 *param_2)
@@ -153,7 +153,7 @@ LAB_003c0ba0:
     FUN_0027da30(param_1,(int)param_2->field_0x62);
     temp_v5 = FUN_0027d9e8(param_1,*(unsigned int *)(temp_v4 + temp_v3 * 4 + 0xc));
     FUN_00293a04(temp_v5,0);
-    temp_v1 = FUN_002c09f4(((int)in_s0 - 1U) & 0xffff);
+    temp_v1 = randNextInRange(((int)in_s0 - 1U) & 0xffff);
     param_2->field_0x5a = temp_v1;
   }
   temp_v2 = DAT_00439cf8;

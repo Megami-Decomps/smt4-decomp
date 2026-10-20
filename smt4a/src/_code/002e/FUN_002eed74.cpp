@@ -1,23 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7232(void);
+void FUN_002e7232(void *buffer);
 
-/* Supplied declaration required: FUN_002e7232. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 first;
+    /* 0x08 */ void *buffer;
+    /* 0x0C */ u32 second;
+} Holder;
 
-
-void FUN_002eed74(int param_1)
-
+/* Frees the buffer at 8 (if any) and clears the three words. */
+void FUN_002eed74(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 8) != 0) {
-    FUN_002e7232();
-  }
-  *(unsigned int *)(param_1 + 8) = 0;
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  return;
+    if (object->buffer != NULL) {
+        FUN_002e7232(object->buffer);
+    }
+    object->buffer = NULL;
+    object->first = 0;
+    object->second = 0;
 }
 
 } /* extern "C" */

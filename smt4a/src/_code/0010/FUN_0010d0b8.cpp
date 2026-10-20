@@ -1,21 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7232(void);
+void FUN_002e7232(void *buffer);
 
-/* Supplied declaration required: FUN_002e7232. */
+typedef struct BufferHolder {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ void *buffer;
+} BufferHolder;
 
-
-void FUN_0010d0b8(int param_1)
-
+/* Frees the buffer if there is one and clears the pointer. */
+void FUN_0010d0b8(BufferHolder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x78) != 0) {
-    FUN_002e7232();
-  }
-  *(unsigned int *)(param_1 + 0x78) = 0;
-  return;
+    if (object->buffer != NULL) {
+        FUN_002e7232(object->buffer);
+    }
+    object->buffer = NULL;
 }
 
 } /* extern "C" */

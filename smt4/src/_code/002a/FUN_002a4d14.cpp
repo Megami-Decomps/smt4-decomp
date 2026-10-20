@@ -1,21 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0044ea58; /* 0x44ea58 */
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x80];
+    /* 0x080 */ u8 *unk80;
+    /* 0x084 */ u8 *unk84;
+    /* 0x088 */ u8 unk088[0x508];
+    /* 0x590 */ u8 unk590[1];
+} Obj;
 
+extern struct {
+    u8 unk0[4];
+    Obj *obj;
+} DAT_0044ea58;
 
 void FUN_002a4d14(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0044ea58 + 0x4));
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0044ea58 + 0x4)) + 0x590;
-  *(int *)((*(int *)((unsigned char *)&DAT_0044ea58 + 0x4)) + 0x80) = (*(int *)((unsigned char *)&DAT_0044ea58 + 0x4)) + 0x88;
-  *(int *)(temp_v0 + 0x84) = temp_v1;
-  return;
+    Obj *obj = DAT_0044ea58.obj;
+    u8 *second = DAT_0044ea58.obj->unk590;
+
+    DAT_0044ea58.obj->unk80 = DAT_0044ea58.obj->unk088;
+    obj->unk84 = second;
 }
 
 } /* extern "C" */

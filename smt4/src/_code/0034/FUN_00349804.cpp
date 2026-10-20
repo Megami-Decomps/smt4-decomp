@@ -1,23 +1,12 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00349520(int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, int, int);
+int FUN_00349520(int a, int b, int c, u32 d, u32 e, u32 f, u32 g, int h, int i);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_00349520. */
-
-
-void FUN_00349804(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_00349804(u32 a, u32 b, u32 c, u32 d)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00349520(0,0x6752,0x1401,param_1,param_2,param_3,param_4,1,0);
-  return;
+    FUN_00349520(0, 0x6752, 0x1401, a, b, c, d, 1, 0);
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int FUN_00130824(int [2], int, int);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
 int FUN_002ec728(int, unsigned int);
-int FUN_002ec890(...);
+int destroyObj0055ae64(...);
 int FUN_002ec8a8(int, unsigned int);
 int strDestroy(...);
 int FUN_002ecbdc(unsigned int *, unsigned int);
@@ -32,7 +32,7 @@ typedef struct {
 extern unsigned int strInit(int *);
 /* Supplied declaration required: FUN_002ec728. */
 extern unsigned int FUN_002ec75c(unsigned char *);
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ec8a8. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ecbdc. */
@@ -73,8 +73,8 @@ void FUN_002ec964(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   puVar3 = (unsigned int *)&temp_v2;
   FUN_002ecbdc(puVar3,temp_v0);
   FUN_00130588(temp_v4,param_1 + 0x20,puVar3 + -1);
-  FUN_002ec890(&temp_v2);
-  FUN_002ec890(temp_v5);
+  destroyObj0055ae64(&temp_v2);
+  destroyObj0055ae64(temp_v5);
   FUN_002ec728(temp_v4[0] + 0x14,temp_v10);
   FUN_002e6e5c(temp_v6);
   return;

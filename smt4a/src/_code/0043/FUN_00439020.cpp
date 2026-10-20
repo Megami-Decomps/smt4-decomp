@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_001a0380(...);
-int FUN_0042ce1c(...);
+int registerObj8Holder(...);
 
 /* Supplied declaration required: FUN_001a0380. */
-/* Supplied declaration required: FUN_0042ce1c. */
+/* Supplied declaration required: registerObj8Holder. */
 
 
 void FUN_00439020(int param_1)
@@ -19,7 +19,7 @@ void FUN_00439020(int param_1)
     FUN_001a0380("ngword:");
   }
   if (*(char *)(param_1 + 0x18) != '\0') {
-    FUN_0042ce1c(param_1 + 4);
+    registerObj8Holder(param_1 + 4);
   }
   *(unsigned char *)(param_1 + 0x18) = 0;
   *(unsigned char *)(param_1 + 0x19) = 0;

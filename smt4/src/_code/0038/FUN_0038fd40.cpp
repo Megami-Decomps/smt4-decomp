@@ -42,7 +42,7 @@ extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
 extern int FUN_00290e78(void);
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: FUN_00296f4c. */
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 extern int FUN_002a1520(unsigned int *);
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: FUN_002bc01c. */
@@ -135,7 +135,7 @@ void FUN_0038fd40(unsigned int *param_1)
         }
       }
       else {
-        temp_v1 = FUN_002a0ce8();
+        temp_v1 = sys43e188GetState();
         if ((temp_v1 != 0) && (temp_v1 = FUN_00290e78(), temp_v1 != 0)) {
           param_1[1] = 10;
           param_1[2] = 0;
@@ -160,7 +160,7 @@ void FUN_0038fd40(unsigned int *param_1)
     }
   }
   else {
-    temp_v1 = FUN_002a0ce8();
+    temp_v1 = sys43e188GetState();
     if (temp_v1 != 0) {
       temp_v2 = FUN_00290d74(param_1[0xd4],&LAB_00390028);
       FUN_00296f4c(param_1[0xd6],temp_v2);

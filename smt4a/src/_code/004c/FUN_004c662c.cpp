@@ -18,7 +18,7 @@ extern unsigned int DAT_005714f0; /* 0x5714f0 */
 extern unsigned int DAT_005714f4; /* 0x5714f4 */
 
 extern int btlGetMainState(void);
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_004bc420. */
 
 
@@ -69,7 +69,7 @@ unsigned int FUN_004c662c(void)
     if (temp_v8) {
       return 0;
     }
-    temp_v5 = FUN_001633a0(99);
+    temp_v5 = lcgRandomRange(99);
     if ((*(unsigned int *)(temp_v3 + 0x45ac) & DAT_005714e4) != 0 ||
         (*(unsigned int *)(temp_v3 + 0x45a8) & DAT_005714e0) != 0) {
       temp_v5 = -1;

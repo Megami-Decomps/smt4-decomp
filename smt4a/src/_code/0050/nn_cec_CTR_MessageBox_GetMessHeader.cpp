@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_00430ec8(unsigned char *, int);
+extern unsigned int releaseOrCopyHandle(unsigned char *, int);
 extern int FUN_00501f78(unsigned int, int);
 
 
@@ -22,7 +22,7 @@ unsigned int nn_cec_CTR_MessageBox_GetMessHeader(int param_1,int param_2,unsigne
       if (*(unsigned int *)(param_1 + 0x560) != *(unsigned int *)(param_1 + 0x3c0)) {
         return *(unsigned int *)(temp_v1 + 0x3cc);
       }
-      temp_v0 = FUN_00430ec8(temp_v3,param_1 + param_3 * 8 + 0x564);
+      temp_v0 = releaseOrCopyHandle(temp_v3,param_1 + param_3 * 8 + 0x564);
       temp_v2 = 0;
       if (*(int *)(param_1 + 0x3c0) != 0) {
         do {

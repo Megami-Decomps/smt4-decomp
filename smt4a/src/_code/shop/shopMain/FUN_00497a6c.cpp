@@ -9,7 +9,7 @@ int FUN_0031d174(...);
 int FUN_0049339c(int, unsigned int, int, int, unsigned int);
 int FUN_0049368c(...);
 int FUN_00494d68(...);
-int FUN_004d0a8c(...);
+int size40Set(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00494d68. */
 extern int FUN_004cfe4c(int);
 extern int FUN_004d0040(int);
-/* Supplied declaration required: FUN_004d0a8c. */
+/* Supplied declaration required: size40Set. */
 
 
 void FUN_00497a6c(int param_1,unsigned int param_2)
@@ -119,7 +119,7 @@ void FUN_00497a6c(int param_1,unsigned int param_2)
   }
   temp_v3 = FUN_0031d174(temp_v9);
   temp_v4 = FUN_002a482c(temp_v9);
-  FUN_004d0a8c(*(unsigned int *)(param_1 + 0xb3c),temp_v4,temp_v3);
+  size40Set(*(unsigned int *)(param_1 + 0xb3c),temp_v4,temp_v3);
   (**(romwright_code **)(**(int **)(param_1 + 0xb3c) + 0x10))(*(int **)(param_1 + 0xb3c),temp_v8);
   return;
 }

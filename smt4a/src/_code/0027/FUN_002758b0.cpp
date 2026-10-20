@@ -11,7 +11,7 @@ typedef struct {
 
 extern Hud *DAT_00587f28;
 
-int FUN_00487110(u8 *panel);
+int stateSetterSetState1(u8 *panel);
 int FUN_0048a378(u8 *panel);
 int FUN_004cf978(u8 *slider, int value);
 
@@ -22,7 +22,7 @@ void FUN_002758b0(int extra, int value)
 
     if (hud != NULL) {
         FUN_004cf978(hud->slider, (s8)value);
-        FUN_00487110(hud->panel);
+        stateSetterSetState1(hud->panel);
         if (extra != 0) {
             FUN_0048a378(hud->panel);
         }

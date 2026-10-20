@@ -1,43 +1,49 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0023d02c(unsigned int);
-int FUN_002b2368(unsigned int *);
-int asdMemFree(unsigned int);
+int FUN_0023d02c(u32 texture);
+int FUN_002b2368(void *object);
+int asdMemFree(u32 ptr);
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(void *object);
+} ObjectVtbl;
 
-extern unsigned char g_filter4PolyBaseVtable; /* 0x420798 */
+typedef struct Child {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Child;
 
-/* Supplied declaration required: FUN_0023d02c. */
-/* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: asdMemFree. */
+typedef struct Filter4Poly {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ u32 buffer;
+    /* 0x08 */ u32 texture;
+    /* 0x0C */ u8 unk0C[8];
+    /* 0x14 */ Child *child;
+    /* 0x18 */ u8 unk18[0x48];
+    /* 0x60 */ u32 extra;
+} Filter4Poly;
 
+extern u8 g_filter4PolyBaseVtable; /* 0x420798 */
 
-void FUN_003438e4(unsigned int *param_1)
-
+/* Destructor: restores the base vtable and releases the texture, buffer and child. */
+void FUN_003438e4(Filter4Poly *filter)
 {
-/* irregular: 3 native warning(s); review required */
-  *param_1 = (unsigned int)&g_filter4PolyBaseVtable;
-  if (param_1[2] != 0) {
-    FUN_0023d02c(param_1[2]);
-    param_1[2] = 0;
-  }
-  if (param_1[1] != 0) {
-    asdMemFree(param_1[1]);
-    param_1[1] = 0;
-  }
-  if ((int *)param_1[5] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[5] + 4))((int *)param_1[5]);
-    param_1[5] = 0;
-  }
-  FUN_002b2368(param_1);
-  return;
+    filter->vtbl = &g_filter4PolyBaseVtable;
+    if (filter->texture != 0) {
+        FUN_0023d02c(filter->texture);
+        filter->texture = 0;
+    }
+    if (filter->buffer != 0) {
+        asdMemFree(filter->buffer);
+        filter->buffer = 0;
+    }
+    if (filter->child != NULL) {
+        filter->child->vtbl->destroy(filter->child);
+        filter->child = NULL;
+    }
+    FUN_002b2368(filter);
 }
 
 } /* extern "C" */

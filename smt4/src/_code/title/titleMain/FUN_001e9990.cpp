@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0026faa4(void);
 int FUN_0029c2cc(...);
-int FUN_002b2b5c(...);
+int sndObjectForwardField8(...);
 
 int FUN_0019213c(void);
 int FUN_00210104(...);
@@ -134,7 +134,7 @@ extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_002a72c0. */
 /* Supplied declaration required: FUN_002a8638. */
 extern int FUN_002adee0(unsigned int);
-/* Supplied declaration required: FUN_002b2b5c. */
+/* Supplied declaration required: sndObjectForwardField8. */
 /* Supplied declaration required: FUN_002b827c. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b8838. */
@@ -674,7 +674,7 @@ LAB_001ea720:
         puVar10 = (unsigned int *)puVar13[0x24];
         *puVar10 = *puVar10 | 2;
         *(unsigned char *)(*(int *)(puVar10[2] + 0x2c) + 0x1f6) = 0;
-        FUN_002b2b5c(puVar13[0x24]);
+        sndObjectForwardField8(puVar13[0x24]);
         *(float *)&puVar13[0x26] = in_s0;
       }
       else {
@@ -688,7 +688,7 @@ LAB_001ea720:
         puVar10 = (unsigned int *)puVar13[0x23];
         *puVar10 = *puVar10 | 2;
         *(unsigned char *)(*(int *)(puVar10[2] + 0x2c) + 0x1f6) = 0;
-        FUN_002b2b5c(puVar13[0x23]);
+        sndObjectForwardField8(puVar13[0x23]);
         *(float *)&puVar13[0x26] = in_s0;
       }
       FUN_0029c2cc(puVar13[0x22],0);

@@ -51,10 +51,10 @@ extern unsigned int *g_campCecView; /* 0x57f130 */
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
-extern unsigned int FUN_003192e0(void);
+extern unsigned int overlayGetStatusScene(void);
 /* Supplied declaration required: FUN_00319aec. */
 /* Supplied declaration required: FUN_00330a80. */
-extern int FUN_0035a978(void);
+extern int playerSummaryIsIncomplete(void);
 /* Supplied declaration required: FUN_0036d4b0. */
 /* Supplied declaration required: FUN_0037b5e0. */
 /* Supplied declaration required: campCecDrawSetCreate. */
@@ -104,7 +104,7 @@ void FUN_003447a0(void)
   temp_v4 = 0x1f;
   do {
     FUN_00330a80(temp_v4);
-    temp_v1 = FUN_0035a978();
+    temp_v1 = playerSummaryIsIncomplete();
     if (temp_v1 != 0) {
       FUN_0036d4b0(temp_v4);
     }
@@ -119,7 +119,7 @@ void FUN_003447a0(void)
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 0x20);
   FUN_002804b0(&LAB_00344ba8,puVar3 + 0x4e,0);
-  temp_v2 = FUN_003192e0();
+  temp_v2 = overlayGetStatusScene();
   puVar3[2] = temp_v2;
   temp_v1 = FUN_00330a80(puVar3[0x45]);
   puVar3[3] = temp_v1;

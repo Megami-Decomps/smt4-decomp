@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a4878(...);
 int FUN_002cbca8(int, int, unsigned int);
 int FUN_003344b4(int, int);
-int FUN_003f525c(unsigned int, int, int);
+int pair40Set(unsigned int, int, int);
 int FUN_0047fbf0(...);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -23,7 +23,7 @@ extern int FUN_001ab888(void);
 extern int FUN_002a4894(unsigned int);
 /* Supplied declaration required: FUN_002cbca8. */
 /* Supplied declaration required: FUN_003344b4. */
-/* Supplied declaration required: FUN_003f525c. */
+/* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: FUN_0047fbf0. */
 
 
@@ -69,7 +69,7 @@ void FUN_002707d8(unsigned int param_1,int param_2)
       else {
         FUN_0047fbf0(0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v5,&temp_v6);
       }
-      FUN_003f525c(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0xa10),temp_v5,temp_v6);
+      pair40Set(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0xa10),temp_v5,temp_v6);
       FUN_003344b4(temp_v5,temp_v6);
       temp_v3 = 0;
       FUN_002cbca8(temp_v4,temp_v2,temp_v3);
@@ -90,7 +90,7 @@ void FUN_002707d8(unsigned int param_1,int param_2)
   }
   temp_v1 = temp_v0 + temp_v2 * 8;
   FUN_0047fbf0(*(unsigned int *)(temp_v1 + 0xa80),*(unsigned short *)(temp_v0 + 0x36),&temp_v5,&temp_v6);
-  FUN_003f525c(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0xa20),temp_v5,temp_v6);
+  pair40Set(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0xa20),temp_v5,temp_v6);
   FUN_003344b4(temp_v5,temp_v6);
   temp_v4 = *(int *)(temp_v1 + 0xa80);
   temp_v3 = 1;

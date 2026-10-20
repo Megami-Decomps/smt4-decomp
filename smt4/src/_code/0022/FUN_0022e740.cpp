@@ -15,7 +15,7 @@ extern unsigned char LAB_0022e800; /* 0x22e800 */
 extern unsigned char LAB_0022e80c; /* 0x22e80c */
 
 /* Supplied declaration required: FUN_0019e0c0. */
-extern unsigned int FUN_0022ea38(unsigned int *, int);
+extern unsigned int dataTable17Sub0GetRecord(unsigned int *, int);
 /* Supplied declaration required: FUN_0023553c. */
 extern unsigned int FUN_00290d74(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00296f4c. */
@@ -46,7 +46,7 @@ void FUN_0022e740(int param_1,int param_2,unsigned int param_3,unsigned int para
       else {
         temp_v1 = *piVar1 + 4;
       }
-      temp_v0 = FUN_0022ea38((unsigned int *)&uStack_20,temp_v1);
+      temp_v0 = dataTable17Sub0GetRecord((unsigned int *)&uStack_20,temp_v1);
       FUN_002bcfc0(temp_v0,0);
       FUN_002be624(param_1 + 0x170,&LAB_0022e80c,param_1 + 0x170,temp_v0);
       temp_v2 = temp_v2 + 1;

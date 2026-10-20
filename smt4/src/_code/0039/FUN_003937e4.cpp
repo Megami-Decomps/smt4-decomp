@@ -83,7 +83,7 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_002c5d5c. */
-extern float FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002cc22c(void);
 extern int asdSoundGetOption0(void);
 /* Supplied declaration required: FUN_002cc24c. */
@@ -210,10 +210,10 @@ LAB_00393954:
       temp_v4 = asdSoundGetOption3();
       temp_v10 = temp_v4 != 0;
       if (temp_v10) {
-        temp_v19[0x20] = (float)FUN_002c5da8(6,7,0);
-        temp_v19[0x21] = (float)FUN_002c5da8(6,1,0);
-        temp_v19[0x22] = (float)FUN_002c5da8(6,1,2);
-        temp_v20 = (float)FUN_002c5da8(5,0,1);
+        temp_v19[0x20] = (float)packNibblesAndByte(6,7,0);
+        temp_v19[0x21] = (float)packNibblesAndByte(6,1,0);
+        temp_v19[0x22] = (float)packNibblesAndByte(6,1,2);
+        temp_v20 = (float)packNibblesAndByte(5,0,1);
         FUN_002cc24c(temp_v19[(*(unsigned char *)(temp_v9 + 0xc) >> 6) + 0x20]);
       }
       if (((*(unsigned char *)(temp_v9 + 0xc) & 4) != 0) && (temp_v4 = 0, (*param_3 & 4) == 0)) {

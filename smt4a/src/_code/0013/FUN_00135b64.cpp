@@ -30,7 +30,7 @@ extern unsigned int FUN_002e3216(unsigned int *);
 extern unsigned long long FUN_002e354a(unsigned int, unsigned int *, unsigned int *, unsigned int);
 extern int FUN_002e3f88(unsigned int, unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002e6e14. */
-extern int FUN_002f1370(void);
+extern int vectorCount4_002f1370(void);
 /* Supplied declaration required: FUN_003077e8. */
 
 
@@ -230,7 +230,7 @@ unsigned int * FUN_00135b64(unsigned int *param_1,unsigned int param_2,unsigned 
   }
   if (temp_v8) {
     FUN_003077e8();
-    temp_v1 = FUN_002f1370();
+    temp_v1 = vectorCount4_002f1370();
     for (temp_v2 = *unaff_r6; temp_v2 != unaff_r6[1]; temp_v2 = temp_v2 + 4) {
     }
     FUN_002e6e14();

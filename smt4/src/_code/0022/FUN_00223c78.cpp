@@ -1,22 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00223c78` (_code @ 0x223c78, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one extra `bne` to the return after `moveq r0, #1` (armcc's branch layout for the nested if) */
+/* Returns 1 if the global object exists and its state (+0x400) is 20. */
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0044e190; /* 0x44e190 */
+struct Obj00223c78 {
+    /* 0x000 */ u8 unk000[0x400];
+    /* 0x400 */ s32 state;
+};
 
+extern Obj00223c78 *DAT_0044e190;
 
-unsigned int FUN_00223c78(void)
-
+s32 FUN_00223c78(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if ((DAT_0044e190 != 0) && (*(int *)(DAT_0044e190 + 0x400) == 0x14)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    Obj00223c78 *obj = DAT_0044e190;
+    s32 result = 0;
+
+    if (obj != NULL) {
+        if (obj->state == 20) {
+            result = 1;
+        }
+    }
+    return result;
 }
 
-} /* extern "C" */
+}

@@ -9,7 +9,7 @@ int scrScriptProcessDestroy(void);
 int FUN_002b2368(...);
 int asdMemFree(...);
 int jobStop(unsigned int, int);
-int FUN_003c9f28(void);
+int bufferArrayFree(void);
 
 extern unsigned int *DAT_0043dcf0; /* 0x43dcf0 */
 
@@ -19,7 +19,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002b2368. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_003c9f28. */
+/* Supplied declaration required: bufferArrayFree. */
 
 
 void FUN_0028a22c(void)
@@ -56,7 +56,7 @@ void FUN_0028a22c(void)
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0x18);
   if (puVar1[0x457] != 0) {
-    FUN_003c9f28();
+    bufferArrayFree();
     FUN_002b2368();
   }
   puVar1[0x457] = 0;

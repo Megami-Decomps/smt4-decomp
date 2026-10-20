@@ -1,21 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Node {
+    /* 0x00 */ u8 unk00[5];
+    /* 0x05 */ u8 flags;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ int id;
+    /* 0x0C */ struct Node *next;
+} Node;
 
-int FUN_0027e6bc(int param_1,int param_2)
+typedef struct List {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ Node *head;
+} List;
 
+/* Number of nodes with the given id that don't have flag 4 set. */
+int FUN_0027e6bc(List *list, int id)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  for (temp_v1 = *(int *)(param_1 + 8); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0xc)) {
-    if ((*(int *)(temp_v1 + 8) == param_2) && ((*(unsigned char *)(temp_v1 + 5) & 4) == 0)) {
-      temp_v0 = temp_v0 + 1;
+    int count = 0;
+    Node *node;
+
+    for (node = list->head; node != NULL; node = node->next) {
+        if ((node->id == id) && ((node->flags & 4) == 0)) {
+            count = count + 1;
+        }
     }
-  }
-  return temp_v0;
+    return count;
 }
 
 } /* extern "C" */

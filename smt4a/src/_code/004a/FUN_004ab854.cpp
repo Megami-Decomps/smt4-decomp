@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00280030(void);
 int FUN_00336da0(int);
-int FUN_0034f018(int);
+int owner2DCInitSub(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,8 +17,8 @@ extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_00280030. */
 /* Supplied declaration required: FUN_00336da0. */
-/* Supplied declaration required: FUN_0034f018. */
-extern int FUN_00381198(int);
+/* Supplied declaration required: owner2DCInitSub. */
+extern int menu32ModeIsNot5(int);
 
 
 void FUN_004ab854(void)
@@ -29,13 +29,13 @@ void FUN_004ab854(void)
   int temp_v1;
   
   temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-  temp_v1 = FUN_00381198((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
+  temp_v1 = menu32ModeIsNot5((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
   if (temp_v1 != 0) {
     temp_v1 = temp_v0 + 0x24bc;
     FUN_00280030();
     if (temp_v1 != 0) {
       FUN_00336da0(temp_v0 + 8);
-      FUN_0034f018(temp_v0 + 0x24bc);
+      owner2DCInitSub(temp_v0 + 0x24bc);
       return;
     }
   }

@@ -8,11 +8,11 @@ typedef struct Flags {
     /* 0x01 */ u8 step;
 } Flags;
 
-extern Flags *FUN_0037d494(void);
+extern Flags *gameDataBlocksGetHalf280C4(void);
 
 void FUN_0040a790(void)
 {
-    Flags *flags = FUN_0037d494();
+    Flags *flags = gameDataBlocksGetHalf280C4();
 
     u8 mode = flags->mode;
 

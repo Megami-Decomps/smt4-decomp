@@ -8,7 +8,7 @@ int jobStop(unsigned int, int, unsigned int, unsigned int, unsigned int);
 int asdMemFree(unsigned int *);
 int FUN_002e3328(int);
 int FUN_004b7a54(void);
-int FUN_004b87e4(int);
+int owner4DDestroy(int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern unsigned int *DAT_0057f578; /* 0x57f578 */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_004b7a54. */
-/* Supplied declaration required: FUN_004b87e4. */
+/* Supplied declaration required: owner4DDestroy. */
 
 
 void FUN_0019e290(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -32,7 +32,7 @@ void FUN_0019e290(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   unsigned int unaff_r4;
   
   FUN_004b7a54();
-  FUN_004b87e4(param_1);
+  owner4DDestroy(param_1);
   if (*(int *)(param_1 + 0x1218) != 0) {
     FUN_002e3328(*(int *)(param_1 + 0x1218));
   }

@@ -16,7 +16,7 @@ typedef struct {
 
 extern int FUN_001002c2(short);
 /* Supplied declaration required: FUN_00102dd2. */
-extern int *FUN_002e3cf8(void);
+extern int *__aeabi_errno_addr(void);
 
 
 short * FUN_002e934e(short *param_1,unsigned int *param_2,unsigned int param_3)
@@ -33,7 +33,7 @@ short * FUN_002e934e(short *param_1,unsigned int *param_2,unsigned int param_3)
   int temp_v3;
   
   temp_v3 = 0;
-  piVar2 = (int *)FUN_002e3cf8();
+  piVar2 = (int *)__aeabi_errno_addr();
   temp_v1 = *piVar2;
   psVar5 = param_1;
   do {

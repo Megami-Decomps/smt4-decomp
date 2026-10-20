@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f28c; /* 0x57f28c */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 state;
+} Record;
+extern Record *DAT_0057f28c;
 
-
-unsigned char FUN_002f151c(void)
-
+/* Returns whether the state of the record at 0x57F28C is 0. */
+u8 FUN_002f151c(void)
 {
-  return *(int *)(DAT_0057f28c + 4) == 0;
+    return DAT_0057f28c->state == 0;
 }
 
 } /* extern "C" */

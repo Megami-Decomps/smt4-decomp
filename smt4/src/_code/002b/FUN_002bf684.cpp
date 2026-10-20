@@ -1,12 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ int unk4;
+} Obj;
 
-unsigned char FUN_002bf684(int param_1)
-
+u8 FUN_002bf684(Obj *obj)
 {
-  return *(int *)(param_1 + 4) != 0;
+    return obj->unk4 != 0;
 }
 
 } /* extern "C" */

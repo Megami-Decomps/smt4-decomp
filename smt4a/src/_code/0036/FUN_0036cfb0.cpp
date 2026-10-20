@@ -12,8 +12,8 @@ int FUN_00275bc8(void);
 int FUN_00275f44(...);
 int FUN_002a6480(int);
 int FUN_0031d890(void);
-int FUN_0035b084(void);
-int FUN_004bd400(unsigned int, int);
+int cecProcessCall4(void);
+int bitsAt60Clear(unsigned int, int);
 
 typedef struct fn_0036cfb0_arg0 fn_0036cfb0_arg0;
 struct fn_0036cfb0_arg0 {
@@ -40,9 +40,9 @@ extern int FUN_00224880(int);
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: FUN_002a6480. */
 /* Supplied declaration required: FUN_0031d890. */
-/* Supplied declaration required: FUN_0035b084. */
-extern int FUN_004bd340(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004bd400. */
+/* Supplied declaration required: cecProcessCall4. */
+extern int bitsAt60Test(unsigned int, unsigned int);
+/* Supplied declaration required: bitsAt60Clear. */
 
 
 unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
@@ -73,10 +73,10 @@ unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
         do {
           if (-1 < *(char *)(temp_v0 + temp_v3 + 0x1c88)) {
             temp_v1 = FUN_001ab854();
-            temp_v2 = FUN_004bd340(temp_v1,2);
+            temp_v2 = bitsAt60Test(temp_v1,2);
             if (temp_v2 != 0) {
               temp_v1 = FUN_001ab854((int)*(char *)(temp_v0 + temp_v3 + 0x1c88));
-              FUN_004bd400(temp_v1,4);
+              bitsAt60Clear(temp_v1,4);
             }
           }
           temp_v3 = temp_v3 + 1;
@@ -96,7 +96,7 @@ unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
       FUN_00275f44();
       sysPlaySe(0x3e);
       cecProcessStart();
-      FUN_0035b084();
+      cecProcessCall4();
       FUN_00237680();
       FUN_002a6480(0);
       param_1->field_0x150 = param_1->field_0x150 + 1;

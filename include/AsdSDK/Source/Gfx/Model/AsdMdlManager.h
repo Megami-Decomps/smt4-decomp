@@ -7,8 +7,8 @@
 /* The shared part of a model object. */
 typedef struct AsdMdlNode {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ void *unk04;     /* what the loader built from the model source */
-    /* 0x08 */ u32 unk08;       /* caller supplied parameter */
+    /* 0x04 */ void *data;      /* what the loader built from the model source */
+    /* 0x08 */ u32 param;       /* caller supplied parameter */
     /* 0x0C */ s32 unk0c;
     /* 0x10 */ u8 unk10[0x18];
     /* 0x28 */ s32 count;
@@ -23,7 +23,7 @@ typedef struct AsdMdlRecord {
 /* A model object (0x1C bytes). */
 typedef struct AsdMdlObject {
     /* 0x00 */ u32 flags;       /* 0x200000 once initialized */
-    /* 0x04 */ void *unk04;
+    /* 0x04 */ void *request;   /* the queued file request the model data is loaded from */
     /* 0x08 */ AsdMdlNode *node;
     /* 0x0C */ u32 unk0c;
     /* 0x10 */ u32 unk10;

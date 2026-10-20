@@ -1,23 +1,20 @@
-#include "romwright_types.h"
+#include "shard/Dspsnd.h"
 
 extern "C" {
 
 extern int FUN_002bb274(void);
 
-
-unsigned char nn_snd_CTR_Dspsnd_SetSoundOutputMode(int param_1,unsigned short param_2)
-
+u8 nn_snd_CTR_Dspsnd_SetSoundOutputMode(DspsndState *state, u16 value)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = FUN_002bb274();
-  if (temp_v0 != 0) {
-    puVar2 = *(unsigned int **)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131e) * 4 + 0x10a0);
-    *(unsigned short *)((int)puVar2 + 0x16) = param_2;
-    *puVar2 = *puVar2 | 0x4000000;
-  }
-  return temp_v0 != 0;
+    int ok = FUN_002bb274();
+
+    if (ok != 0) {
+        DspCommand *params = state->commands[state->current];
+
+        params->soundOutputMode = value;
+        params->flags |= 0x4000000;
+    }
+    return ok != 0;
 }
 
 } /* extern "C" */

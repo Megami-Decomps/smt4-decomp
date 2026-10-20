@@ -1,24 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028975c(int, int, int);
-
-/* Supplied declaration required: FUN_0028975c. */
-
+int FUN_0028975c(int a, int b, int c);
 
 void FUN_00273f5c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    FUN_0028975c(temp_v0 + 0x310,0,1);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x10);
-  return;
+    int i = 0;
+
+    do {
+        FUN_0028975c(i + 0x310, 0, 1);
+        i++;
+    } while (i < 0x10);
 }
 
 } /* extern "C" */

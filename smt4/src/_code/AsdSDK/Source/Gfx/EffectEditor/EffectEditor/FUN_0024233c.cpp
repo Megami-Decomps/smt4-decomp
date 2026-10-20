@@ -7,13 +7,13 @@ extern "C" {
 int FUN_00192268(void);
 int FUN_0019db18(...);
 int taskRunWithObject(unsigned int, int, int);
-int FUN_002495d4(void);
+int effPartsSetData(void);
 int FUN_0024dd48(unsigned int *);
 int FUN_0024dd80(int);
 int FUN_0024dd90(unsigned int *);
-int FUN_0024fc18(void);
+int effBlockCreateFromBlock(void);
 int FUN_00250200(void);
-int FUN_0025c9dc(unsigned int, unsigned int [2], int);
+int effBlockSetBlobB(unsigned int, unsigned int [2], int);
 int FUN_002629a8(...);
 int FUN_002629f0(...);
 int FUN_002a3d58(...);
@@ -73,14 +73,14 @@ extern unsigned int uRam004d8ce8; /* 0x4d8ce8 */
 /* Supplied declaration required: FUN_0019db18. */
 /* Supplied declaration required: taskRunWithObject. */
 extern unsigned int FUN_00246908(unsigned int);
-/* Supplied declaration required: FUN_002495d4. */
+/* Supplied declaration required: effPartsSetData. */
 extern unsigned int FUN_0024c3f8(void);
 /* Supplied declaration required: FUN_0024dd48. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
-/* Supplied declaration required: FUN_0024fc18. */
+/* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: FUN_00250200. */
-/* Supplied declaration required: FUN_0025c9dc. */
+/* Supplied declaration required: effBlockSetBlobB. */
 /* Supplied declaration required: FUN_002629a8. */
 /* Supplied declaration required: FUN_002629f0. */
 /* Supplied declaration required: FUN_002a3d58. */
@@ -193,14 +193,14 @@ LAB_002424b8:
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v6 + 4);
       FUN_00192268();
       if (*(int *)(temp_v6 + 0xc) != 0) {
-        FUN_002495d4();
+        effPartsSetData();
       }
       if (*(int *)(temp_v6 + 0x1c) != 0) {
         taskRunWithObject(temp_v1,*(int *)(temp_v6 + 0x1c),*(unsigned short *)(temp_v6 + 0x18));
       }
       else {
         temp_v7[0] = 0;
-        FUN_0025c9dc(temp_v1,temp_v7,4);
+        effBlockSetBlobB(temp_v1,temp_v7,4);
       }
     }
     DAT_0044eacc = 0;
@@ -222,10 +222,10 @@ LAB_002424b8:
     rt_memcpy_w(&DAT_004d8ca0,temp_v6,0x80);
     DAT_0044ea9c = *(unsigned int *)(temp_v6 + 0x90);
     if (*(int *)(*piVar3 + 0xc) != 0) {
-      FUN_002495d4();
+      effPartsSetData();
     }
     temp_v2 = DAT_0044ea9c;
-    FUN_0024fc18();
+    effBlockCreateFromBlock();
     FUN_00250200();
     DAT_0044eab8 = piVar3[1];
     DAT_0044ea98 = temp_v2;
@@ -271,7 +271,7 @@ LAB_002424b8:
         uRam004d8ce8 = *(unsigned int *)(param_2 + 0x14);
         temp_v5 = FUN_0019db18(*(unsigned int *)(param_2 + 8));
         temp_v6 = temp_v5;
-        FUN_0024fc18();
+        effBlockCreateFromBlock();
         DAT_0044eaa0 = temp_v6;
         FUN_002629a8(temp_v5,3);
       }

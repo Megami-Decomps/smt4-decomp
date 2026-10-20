@@ -1,47 +1,48 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003210bc(int, int);
+void FUN_003210bc(void *object, s32 flag);
+s32 FUN_0018206c(u32 table, s32 index);
 
-extern int FUN_0018206c(unsigned int, int);
-/* Supplied declaration required: FUN_003210bc. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ void *object;
+} Holder;
 
-
-unsigned int FUN_002df66c(int param_1)
-
+/* Counts how many of the six entries of table 0xC and the five of table 0xD are set, and runs FUN_003210bc(object, 0) when there are 11 or more (and an object exists); always returns 0. */
+u32 FUN_002df66c(Holder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = *(int *)(param_1 + 0x10);
-  if (temp_v3 != 0) {
-    temp_v2 = 0;
-    temp_v1 = temp_v2;
-    do {
-      temp_v0 = FUN_0018206c(0xc,temp_v1);
-      if (temp_v0 != 0) {
-        temp_v2 = temp_v2 + 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 6);
-    temp_v1 = 0;
-    do {
-      temp_v0 = FUN_0018206c(0xd,temp_v1);
-      if (temp_v0 != 0) {
-        temp_v2 = temp_v2 + 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 5);
-    if (temp_v2 >= 11) {
-      FUN_003210bc(temp_v3,0);
-      return 0;
+    s32 flag;
+    s32 i;
+    s32 count;
+    void *object;
+
+    object = holder->object;
+    if (object != NULL) {
+        count = 0;
+        i = count;
+        do {
+            flag = FUN_0018206c(0xC, i);
+            if (flag != 0) {
+                count = count + 1;
+            }
+            i = i + 1;
+        } while (i < 6);
+        i = 0;
+        do {
+            flag = FUN_0018206c(0xD, i);
+            if (flag != 0) {
+                count = count + 1;
+            }
+            i = i + 1;
+        } while (i < 5);
+        if (count >= 11) {
+            FUN_003210bc(object, 0);
+            return 0;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

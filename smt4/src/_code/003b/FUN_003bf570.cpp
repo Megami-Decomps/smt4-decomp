@@ -1,15 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_003bf570(int param_1)
-
+/* 0 for values 4-0x35, otherwise 1. */
+u8 FUN_003bf570(int value)
 {
-  if (param_1 - 4U < 0x32) {
-    return 0;
-  }
-  return 1;
+    if (value - 4U < 0x32) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

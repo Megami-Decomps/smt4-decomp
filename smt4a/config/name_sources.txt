@@ -631,3 +631,1257 @@
 00100380 libc_sprintf inferred twin of smt4 libc_sprintf
 0051440c libc_snprintf inferred the C library's snprintf, named apart for the same reason as libc_sprintf
 002f30c4 _ZN9Obj558be04stopEv inferred Obj558be0::stop(): called first by its destructor; stops the child object once
+00147b84 sndSystemFinalize inferred twin of smt4 FUN_00110978
+00244894 mapEplSlotsInit inferred allocates the 16-slot table in mapEplExt and clears every slot
+00580c8c g_eplSlots inferred pointer to the table FUN_00244894 allocates
+0042b754 nn_fs_OpenLinkFile inferred twin of smt4 FUN_00356194
+0030015c effParticleRebuildHandles inferred twin of smt4 FUN_0021a37c
+003fab40 obj003fab40Release inferred releases handles, resources and buffer owned by the object, returns it
+002ed294 ringSetLimit inferred moves the position by the change of the limit and stores the new limit
+003e9f50 counterIncrementSaturating inferred saturating byte counter at +0x17c of the base, index below 21
+0018cfe4 sceneTraverserVisit inferred twin of smt4 FUN_002abb24
+004d8530 holderObjectCall inferred passes field +4 of the held object on, or returns 1 without an object
+001b5b40 entryIsAllowed inferred 1 if the entry is flagged or the tracker's counter is within 2 of the entry's counter
+001cd210 slotTableFillResult inferred copies a slot's pair into a result and appends FUN_001d13dc of it
+00363240 effParticleParamRebuildHandles3c inferred twin of smt4 FUN_002e7bb8
+0036332c effParticleParamCopy inferred twin of smt4 FUN_002e7ca4
+00291968 aocJobStop inferred twin of smt4 FUN_001e2010
+002eba64 __cxa_guard_acquire inferred static-local guard acquire called by every function-local static initializer
+002e3cf8 __aeabi_errno_addr inferred returns the int location the errno setter writes to
+001015aa __set_errno inferred stores its argument through __aeabi_errno_addr()
+001008a2 libc_strcat inferred hand-written copy loop: finds the end of dst, copies src including the NUL, returns dst
+0041d520 _ZN9Obj42099012addUvOffsetsEv inferred twin of smt4 Obj420990 addUvOffsets (vtable 0x557e10)
+0041da04 _ZN9Obj42099010setUvRectsEv inferred twin of smt4 Obj420990 setUvRects (vtable 0x557e10)
+00466370 _ZN2nw3snd8internal6driver25MmlSequenceTrackAllocator10AllocTrackEPv inferred twin of smt4 MmlSequenceTrackAllocator::AllocTrack (vtable 0x55c370)
+0050a3d4 _ZN2nw3snd8internal6driver9MmlParser17NoteOnCommandProcEPNS2_13SequenceTrackEiiii evidence existing nw SDK name: NoteOnCommandProc, vtable 0x55c3a0 slot 3
+003ae930 _ZN9Obj464cb010post0f0105Ev inferred twin of smt4 Obj464cb0 post0f0105 (vtable 0x5b3d14)
+003a4900 _ZN9Obj464cb010post0f0103Ev inferred twin of smt4 Obj464cb0 post0f0103 (vtable 0x5b3d14)
+003bf3ac _ZN9Obj4727b814releaseEntriesEv inferred twin of smt4 Obj4727b8 releaseEntries (vtable 0x5c1314)
+004516e4 _ZN9Obj4734b87vfunc00Ev inferred twin of smt4 Obj4734b8 vfunc00 (vtable 0x5c1d00)
+0045237c _ZN9Obj44e8a87vfunc0cEv inferred twin of smt4 Obj44e8a8 vfunc0c (vtable 0x59daac)
+00451e30 _ZN9Obj4723007vfunc04Ev inferred twin of smt4 Obj472300 vfunc04 (vtable 0x5c0f40)
+004520a8 _ZN9Obj4723007vfunc0cEv inferred twin of smt4 Obj472300 vfunc0c (vtable 0x5c0f40)
+00123a4e _ZN9Obj558c9c14isTargetActiveEv inferred vtable 0x558c9c slot 3 (inherited by 0x559f08 and 0x55a5d4): true when the object is ready and its kind-0xB target is active
+0011b6c2 _ZN9Obj559f087vfunc00Ev inferred vtable 0x559f08/0x55a5d4 slot 0: base check then FUN_0010aaf0 on the entry; sets loaded
+0010a000 _ZN9Obj558c007vfunc0cEP14Obj558c00Range inferred vtable 0x558c00 slot 3: passes the range start and size to FUN_0010a014
+00109fe4 _ZN9Obj558c007vfunc14EP14Obj558c00Range inferred vtable 0x558c00 slot 5: passes the range start and size to FUN_00109ff8
+002f8272 _ZN9Obj55927c7vfunc10EP12Obj55927cArg inferred vtable 0x55927c slot 4: converts the payload and hands it to FUN_0030d48e
+00122dac _ZN9Obj55b3487vfunc08Ev inferred vtable 0x55b348 slot 2: passes the word at 0x44 to FUN_00122d28
+002f742c _ZN9Obj5590d07vfunc08Ev inferred vtable 0x5590d0 slot 2: true when flag 0x03 is clear and mode is not 0x40000000
+002e9b0c _ZN9Obj55859c12freeResourceEv inferred called with this by the destructor FUN_002ea00c (vtable 0x55859c): hands the resource back and clears it
+002f9fc2 _ZN9Obj55922c5resetEPv inferred called with this by the destructor FUN_002f4fd8 (vtable 0x55922c): replaces the held pointer
+0030fb26 _ZN9Obj55b2d84initEv inferred called with this by the constructors FUN_002ee524 and FUN_002fde5c (vtable 0x55b2d8): initial state
+0010032c emptyStub_0010032c inferred empty function
+00100824 refIsNullOrZero inferred returns 1 for a NULL or zero-valued reference
+00100df2 emptyStub_00100df2 inferred empty function
+001037ac deletingDtor_001037ac inferred runs a destructor body, then frees the object
+0010390c initVtable00558510 inferred stores a vtable into an object returned by a getter
+00103eda stateTransitionIsValid inferred table of allowed from->to state pairs
+00103f8e deletingDtor_00103f8e inferred runs a destructor body, then frees the object
+00104010 destroyObj005585c0 inferred destructor storing the vtable at 0x005585c0
+00104068 emptyStub_00104068 inferred empty function
+00104728 constructObj00558620 inferred constructor storing the vtable at 0x00558620
+001052ee deletingDtor_001052ee inferred runs a destructor body, then frees the object
+00105904 deletingDtor_00105904 inferred runs a destructor body, then frees the object
+00105cb4 destroyObj005587fc inferred destructor storing the vtable at 0x005587fc
+00105ccc constructObj00558838 inferred constructor storing the vtable at 0x00558838
+00105d20 deletingDtor_00105d20 inferred runs a destructor body, then frees the object
+00109f42 deletingDtor_00109f42 inferred runs a destructor body, then frees the object
+0010a036 deletingDtor_0010a036 inferred runs a destructor body, then frees the object
+0010b188 deletingDtor_0010b188 inferred runs a destructor body, then frees the object
+0010b7e4 deletingDtor_0010b7e4 inferred runs a destructor body, then frees the object
+0010caa4 destroyObj00558f18 inferred destructor storing the vtable at 0x00558f18
+0010cbdc deletingDtor_0010cbdc inferred runs a destructor body, then frees the object
+0010cfe8 constructObj0055908c inferred constructor storing the vtable at 0x0055908c
+0010d2b0 deletingDtor_0010d2b0 inferred runs a destructor body, then frees the object
+0010e2f2 deletingDtor_0010e2f2 inferred runs a destructor body, then frees the object
+0010eee8 deletingDtor_0010eee8 inferred runs a destructor body, then frees the object
+0010f1a0 destroyObj0055929c inferred destructor storing the vtable at 0x0055929c
+00110244 destroyObj005592e4 inferred destructor storing the vtable at 0x005592e4
+00110330 emptyStub_00110330 inferred empty function
+001106d0 destroyObj005593a0 inferred destructor storing the vtable at 0x005593a0
+0011076c initVtable005593b0 inferred stores a vtable into an object returned by a getter
+00110784 deletingDtor_00110784 inferred runs a destructor body, then frees the object
+001117ea deletingDtor_001117ea inferred runs a destructor body, then frees the object
+001144e8 destroyObj00559684 inferred destructor storing the vtable at 0x00559684
+00114c76 deletingDtor_00114c76 inferred runs a destructor body, then frees the object
+00114c82 deletingDtor_00114c82 inferred runs a destructor body, then frees the object
+00115544 initVtable00559814 inferred stores a vtable into an object returned by a getter
+00115ac4 deletingDtor_00115ac4 inferred runs a destructor body, then frees the object
+00115aec widthToBucketSize inferred 4/8 -> 8, 16/32 -> 32, else 256
+00115c60 deletingDtor_00115c60 inferred runs a destructor body, then frees the object
+0011734c deletingDtor_0011734c inferred runs a destructor body, then frees the object
+00117548 destroyObj00559e70 inferred destructor storing the vtable at 0x00559e70
+00118564 emptyStub_00118564 inferred empty function
+00118bc8 emptyStub_00118bc8 inferred empty function
+00118e5c emptyStub_00118e5c inferred empty function
+00118e5e emptyStub_00118e5e inferred empty function
+00119eda deletingDtor_00119eda inferred runs a destructor body, then frees the object
+0011a2e8 destroyObj0055a350 inferred destructor storing the vtable at 0x0055a350
+0011b008 destroyObj0055a3c4 inferred destructor storing the vtable at 0x0055a3c4
+0011b148 deletingDtor_0011b148 inferred runs a destructor body, then frees the object
+0011b164 initVtable0055a4a0 inferred stores a vtable into an object returned by a getter
+0011b3d4 destroyObj0055a4e0 inferred destructor storing the vtable at 0x0055a4e0
+0011b498 destroyObj0055a520 inferred destructor storing the vtable at 0x0055a520
+0011b4c0 initVtable0055a580 inferred stores a vtable into an object returned by a getter
+0011c01c destroyObj0055a7f8 inferred destructor storing the vtable at 0x0055a7f8
+0011c7b0 destroyObj0055a8a4 inferred destructor storing the vtable at 0x0055a8a4
+0011ef68 destroyObj0055ac60 inferred destructor storing the vtable at 0x0055ac60
+0011f40c emptyStub_0011f40c inferred empty function
+0011f50e emptyStub_0011f50e inferred empty function
+0011f578 emptyStub_0011f578 inferred empty function
+001204d4 destroyObj0055ad6c inferred destructor storing the vtable at 0x0055ad6c
+0012056c destroyObj0055ad7c inferred destructor storing the vtable at 0x0055ad7c
+0012071c destroyObj0055ad9c inferred destructor storing the vtable at 0x0055ad9c
+001207b4 destroyObj0055adc0 inferred destructor storing the vtable at 0x0055adc0
+001208e6 deletingDtor_001208e6 inferred runs a destructor body, then frees the object
+001208f2 deletingDtor_001208f2 inferred runs a destructor body, then frees the object
+00121252 deletingDtor_00121252 inferred runs a destructor body, then frees the object
+0012127a deletingDtor_0012127a inferred runs a destructor body, then frees the object
+00121368 destroyObj0055afbc inferred destructor storing the vtable at 0x0055afbc
+00121a12 deletingDtor_00121a12 inferred runs a destructor body, then frees the object
+00122094 vectorTeardown_00122094 inferred destroys elements, frees storage, returns the vector
+001220c4 vectorTeardown_001220c4 inferred destroys elements, frees storage, returns the vector
+001220da vectorTeardown_001220da inferred destroys elements, frees storage, returns the vector
+001220f0 vectorTeardown_001220f0 inferred destroys elements, frees storage, returns the vector
+00122106 vectorTeardown_00122106 inferred destroys elements, frees storage, returns the vector
+0012218c vectorTeardown_0012218c inferred destroys elements, frees storage, returns the vector
+00122370 deletingDtor_00122370 inferred runs a destructor body, then frees the object
+00122492 deletingDtor_00122492 inferred runs a destructor body, then frees the object
+001224e4 bitCursorSetPosition inferred byte index = bit >> 3, bit index = 7 - (bit & 7)
+00122686 deletingDtor_00122686 inferred runs a destructor body, then frees the object
+00122770 destroyObj0055b2f0 inferred destructor storing the vtable at 0x0055b2f0
+00122c3a deletingDtor_00122c3a inferred runs a destructor body, then frees the object
+00122dc4 deletingDtor_00122dc4 inferred runs a destructor body, then frees the object
+001234d4 sizeWithHeaderAligned inferred size + 8, rounded up to 4
+00123e78 codeIs0x40 inferred halfword at 0x1C equals 0x40
+0012433e wordRefEqual inferred compares two referenced words
+00124480 bitCursorGetPosition inferred inverse of bitCursorSetPosition
+00124b74 deletingDtor_00124b74 inferred runs a destructor body, then frees the object
+00124b88 sharedRefCopy inferred copy of a counted reference: shares and bumps the count
+00124b94 deletingDtor_00124b94 inferred runs a destructor body, then frees the object
+00128638 inflateInitDefault inferred zlib_inflateInit2_ with a 15-bit window
+00128eac destroyObj00558ac4 inferred destructor storing the vtable at 0x00558ac4
+00129490 destroyObj005598b4 inferred destructor storing the vtable at 0x005598b4
+001295b4 destroyObj005598d8 inferred destructor storing the vtable at 0x005598d8
+0012d0b4 wordMoveOut_0012d0b4 inferred moves a word out of the source and resets it
+0012d10c vectorGrowCapacity_0012d10c inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d11e vectorGrowCapacity_0012d11e inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d130 vectorGrowCapacity_0012d130 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d142 vectorGrowCapacity_0012d142 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d154 vectorGrowCapacity_0012d154 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d166 vectorGrowCapacity_0012d166 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d178 vectorGrowCapacity_0012d178 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d18a vectorGrowCapacity_0012d18a inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d19c vectorGrowCapacity_0012d19c inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d1ae vectorGrowCapacity_0012d1ae inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d1c0 vectorGrowCapacity_0012d1c0 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d1d2 vectorGrowCapacity_0012d1d2 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d1e4 vectorGrowCapacity_0012d1e4 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d1f6 vectorGrowCapacity_0012d1f6 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d208 vectorGrowCapacity_0012d208 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d21a vectorGrowCapacity_0012d21a inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d22c vectorGrowCapacity_0012d22c inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d23e vectorGrowCapacity_0012d23e inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d250 vectorGrowCapacity_0012d250 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d262 vectorGrowCapacity_0012d262 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d274 vectorGrowCapacity_0012d274 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d286 vectorGrowCapacity_0012d286 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d298 vectorGrowCapacity_0012d298 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d2aa vectorGrowCapacity_0012d2aa inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d2bc vectorGrowCapacity_0012d2bc inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d2ce vectorGrowCapacity_0012d2ce inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d2e0 vectorGrowCapacity_0012d2e0 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d2f2 vectorGrowCapacity_0012d2f2 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d304 vectorGrowCapacity_0012d304 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d316 vectorGrowCapacity_0012d316 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d328 vectorGrowCapacity_0012d328 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d33a vectorGrowCapacity_0012d33a inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d34c vectorGrowCapacity_0012d34c inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d35e vectorGrowCapacity_0012d35e inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d370 vectorGrowCapacity_0012d370 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d382 vectorGrowCapacity_0012d382 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d394 vectorGrowCapacity_0012d394 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d3a6 vectorGrowCapacity_0012d3a6 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d3b8 vectorGrowCapacity_0012d3b8 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d3ca vectorGrowCapacity_0012d3ca inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d3dc vectorGrowCapacity_0012d3dc inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d3ee vectorGrowCapacity_0012d3ee inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d400 vectorGrowCapacity_0012d400 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d412 vectorGrowCapacity_0012d412 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d424 vectorGrowCapacity_0012d424 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d436 vectorGrowCapacity_0012d436 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d448 vectorGrowCapacity_0012d448 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d45a vectorGrowCapacity_0012d45a inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d46c vectorGrowCapacity_0012d46c inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d47e vectorGrowCapacity_0012d47e inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d490 vectorGrowCapacity_0012d490 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d4a2 vectorGrowCapacity_0012d4a2 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d4b4 vectorGrowCapacity_0012d4b4 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0012d4c6 vectorGrowCapacity_0012d4c6 inferred new capacity = max(cap + 0x20, cap * 1.625)
+001320e2 wordRefsDiffer_001320e2 inferred compares two referenced words (iterator !=)
+00132102 wordRefsDiffer_00132102 inferred compares two referenced words (iterator !=)
+00132112 wordRefsDiffer_00132112 inferred compares two referenced words (iterator !=)
+00132122 wordRefsDiffer_00132122 inferred compares two referenced words (iterator !=)
+00132132 wordRefsDiffer_00132132 inferred compares two referenced words (iterator !=)
+00132142 wordRefsDiffer_00132142 inferred compares two referenced words (iterator !=)
+00132152 wordRefsDiffer_00132152 inferred compares two referenced words (iterator !=)
+00132162 wordRefsEqual_00132162 inferred compares two referenced words (iterator ==)
+00132172 wordRefsDiffer_00132172 inferred compares two referenced words (iterator !=)
+00132182 wordRefsEqual_00132182 inferred compares two referenced words (iterator ==)
+00132192 wordRefsEqual_00132192 inferred compares two referenced words (iterator ==)
+001321a2 wordRefsEqual_001321a2 inferred compares two referenced words (iterator ==)
+001321b2 wordRefsDiffer_001321b2 inferred compares two referenced words (iterator !=)
+001321c2 wordRefsDiffer_001321c2 inferred compares two referenced words (iterator !=)
+0013dbb4 jobRenderOnce inferred renders once into a 0x200 surface when enabled
+0013dd78 resourceDestroy inferred releases data via the handler table, frees both buffers and the resource
+00155024 surfaceCopy inferred copies a surface buffer using the destination geometry
+0015688c saveSlotFindSelected inferred slot whose id equals the selected id
+0015f0dc initVtable0055c618 inferred stores a vtable into an object returned by a getter
+00160064 modeIsOneOrTwo inferred mode byte is 1 or 2
+001633a0 lcgRandomRange inferred LCG step 0x41C64E6D/0x3039; returns a value in 0..limit
+00169294 packNibblesAndByte inferred packs two nibbles and a byte into one word
+0016a0f0 dataTableValueOrZero inferred value of entry of the 0x50-entry table
+0017e050 registerBlockRequestGroups inferred ORs register bits for each requested group
+001836b0 resourceListDestroy inferred frees a node list and the resources it owns
+00184aa8 dataTableGetEntry0e inferred entry of data table 0x0E (0x10 bytes)
+001861ec dataTableGetEntry49 inferred entry of data table 0x49 (0x4C bytes)
+00187010 saveSlotFindById inferred slot with the given id among 12
+0018793c flagBitsMergeRange inferred merges flag bits 0x200..0x8000 and returns the missing ones
+001914b8 constructObj0055c19c inferred constructor storing the vtable at 0x0055c19c
+0019241c destroyObj0055c6e4 inferred destructor storing the vtable at 0x0055c6e4
+0019f29c lookupNameEntry inferred looks a wide string up in the name table and copies the entry values
+001a5aac constructObj0055bee4 inferred constructor storing the vtable at 0x0055bee4
+001a5c0c constructObj0055bfc4 inferred constructor storing the vtable at 0x0055bfc4
+001a64bc constructObj0055c3b8 inferred constructor storing the vtable at 0x0055c3b8
+001b1ed8 lcgRandomHigh16 inferred LCG step 0x19660D/0x3C6EF35F; returns the high 16 bits
+001f4270 outStoreOneTwoZero inferred stores 1, 2, 0 through three pointers
+00228024 dataTableLookupValue0103 inferred value mapped by data table (1,3)
+00240628 compareWithFeedbackColor inferred sets a colour per comparison outcome and returns -1/0/1
+0028122c matrix43Multiply inferred affine 4x3 matrix product
+00284dc4 dataTableHasMatchingEntry35 inferred entry of data table 0x35 whose flag conditions hold
+00284fa4 dataTableGetEntry37 inferred entry of data table 0x37 (0x40 bytes)
+002ab7c4 dataTableGetEntry24Byte0 inferred first byte of entry of data table 0x24
+002c277c computeCountLimit inferred base count plus per-item bonuses, capped at 99 or 999
+002c9018 dataTableGetEntry24Member inferred member 8 of entry of data table 0x24
+002e363c isAsciiDigit inferred character - 0x30 < 10
+002e4e86 wordRefMax inferred pointer to the larger referenced word
+002e5220 dataTableGetEntry0102Value inferred value of entry of data table (1,2)
+002e56ec deletingDtor_002e56ec inferred runs a destructor body, then frees the object
+002e6234 dataTableFindMatching35 inferred first entry of data table 0x35 whose flag conditions hold
+002e6da8 emptyStub_002e6da8 inferred empty function
+002e97e2 wordRefsEqual_002e97e2 inferred compares two referenced words (iterator ==)
+002e97f2 wordRefsEqual_002e97f2 inferred compares two referenced words (iterator ==)
+002e9832 wordRefsDiffer_002e9832 inferred compares two referenced words (iterator !=)
+002e9842 wordRefsDiffer_002e9842 inferred compares two referenced words (iterator !=)
+002e9b20 wordRefsDiffer_002e9b20 inferred compares two referenced words (iterator !=)
+002ea0e4 constructObj0055affc inferred constructor storing the vtable at 0x0055affc
+002ea42c wordRefsEqual_002ea42c inferred compares two referenced words (iterator ==)
+002ea4ac wordRefsEqual_002ea4ac inferred compares two referenced words (iterator ==)
+002ea658 initVtable00558630 inferred stores a vtable into an object returned by a getter
+002ea764 wordRefsDiffer_002ea764 inferred compares two referenced words (iterator !=)
+002eac26 byteRefMin inferred pointer to the smaller referenced byte
+002ead28 wordRefsEqual_002ead28 inferred compares two referenced words (iterator ==)
+002eb358 wordRefsDiffer_002eb358 inferred compares two referenced words (iterator !=)
+002eb452 wordRefsDiffer_002eb452 inferred compares two referenced words (iterator !=)
+002eb5e8 constructObj00559344 inferred constructor storing the vtable at 0x00559344
+002eb67c constructObj0055a284 inferred constructor storing the vtable at 0x0055a284
+002eb690 wordRefsDiffer_002eb690 inferred compares two referenced words (iterator !=)
+002eba2c wordRefsDiffer_002eba2c inferred compares two referenced words (iterator !=)
+002ec714 destroyObj00559e44 inferred destructor storing the vtable at 0x00559e44
+002ec890 destroyObj0055ae64 inferred destructor storing the vtable at 0x0055ae64
+002eccc4 vectorCount4_002eccc4 inferred element count of a vector of fixed-size elements
+002ecfd2 wordRefsEqual_002ecfd2 inferred compares two referenced words (iterator ==)
+002ed044 wordRefsDiffer_002ed044 inferred compares two referenced words (iterator !=)
+002ed2a2 wordRefMin inferred pointer to the smaller referenced word
+002ed338 constructObj00559334 inferred constructor storing the vtable at 0x00559334
+002ed902 wordRefsEqual_002ed902 inferred compares two referenced words (iterator ==)
+002edb7c wordMoveOut_002edb7c inferred moves a word out of the source and resets it
+002ede12 wordRefsDiffer_002ede12 inferred compares two referenced words (iterator !=)
+002ee774 wordRefsDiffer_002ee774 inferred compares two referenced words (iterator !=)
+002ee988 wordRefsDiffer_002ee988 inferred compares two referenced words (iterator !=)
+002eeb88 vectorCount4_002eeb88 inferred element count of a vector of fixed-size elements
+002eeb90 arrayElementAddress_002eeb90 inferred address of an element of a pointer-held array
+002eee88 arrayElementAddress_002eee88 inferred address of an element of a pointer-held array
+002efa50 arrayElementAddress_002efa50 inferred address of an element of a pointer-held array
+002f000c wordRefsDiffer_002f000c inferred compares two referenced words (iterator !=)
+002f00e8 vectorCount2_002f00e8 inferred element count of a vector of fixed-size elements
+002f1324 wordMoveOut_002f1324 inferred moves a word out of the source and resets it
+002f1352 vectorCount8_002f1352 inferred element count of a vector of fixed-size elements
+002f135a vectorTeardown_002f135a inferred destroys elements, frees storage, returns the vector
+002f1370 vectorCount4_002f1370 inferred element count of a vector of fixed-size elements
+002f14a0 arrayElementAddress_002f14a0 inferred address of an element of a pointer-held array
+002f1774 vectorGrowCapacity_002f1774 inferred new capacity = max(cap + 0x20, cap * 1.625)
+002f1786 vectorGrowCapacity_002f1786 inferred new capacity = max(cap + 0x20, cap * 1.625)
+002f2968 wordRefsDiffer_002f2968 inferred compares two referenced words (iterator !=)
+002f2dec wordRefsDiffer_002f2dec inferred compares two referenced words (iterator !=)
+002f3084 destroyObj00558be8 inferred destructor storing the vtable at 0x00558be8
+002f31f0 destroyObj005596e4 inferred destructor storing the vtable at 0x005596e4
+002f3204 wordRefsDiffer_002f3204 inferred compares two referenced words (iterator !=)
+002f32d4 arrayElementAddress_002f32d4 inferred address of an element of a pointer-held array
+002f33ac vectorCount4_002f33ac inferred element count of a vector of fixed-size elements
+002f3594 wordRefsDiffer_002f3594 inferred compares two referenced words (iterator !=)
+002f35ec wordRefsEqual_002f35ec inferred compares two referenced words (iterator ==)
+002f35fc wordRefsDiffer_002f35fc inferred compares two referenced words (iterator !=)
+002f3724 wordMoveOut_002f3724 inferred moves a word out of the source and resets it
+002f3764 wordMoveOut_002f3764 inferred moves a word out of the source and resets it
+002f3b14 dataTableGetEntry24Byte1 inferred second byte of entry of data table 0x24
+002f3e5a wordRefsDiffer_002f3e5a inferred compares two referenced words (iterator !=)
+002f3ecc wordRefsDiffer_002f3ecc inferred compares two referenced words (iterator !=)
+002f4002 wordRefsEqual_002f4002 inferred compares two referenced words (iterator ==)
+002f4370 emptyStub_002f4370 inferred empty function
+002f4474 wordRefsDiffer_002f4474 inferred compares two referenced words (iterator !=)
+002f44fc wordRefsEqual_002f44fc inferred compares two referenced words (iterator ==)
+002f450c wordRefsDiffer_002f450c inferred compares two referenced words (iterator !=)
+002f4ba0 vectorCount4_002f4ba0 inferred element count of a vector of fixed-size elements
+002f4d8c wordRefsDiffer_002f4d8c inferred compares two referenced words (iterator !=)
+002f4f90 destroyObj00558d28 inferred destructor storing the vtable at 0x00558d28
+002f6d4c wordRefsDiffer_002f6d4c inferred compares two referenced words (iterator !=)
+002f6d6c wordRefsEqual_002f6d6c inferred compares two referenced words (iterator ==)
+002f6d7c wordMoveOut_002f6d7c inferred moves a word out of the source and resets it
+002f74e8 emptyStub_002f74e8 inferred empty function
+002f7bc4 menuItemPlaySe inferred maps menu item ids to sound effects
+002fa114 wordRefsDiffer_002fa114 inferred compares two referenced words (iterator !=)
+002fb30c wordRefsDiffer_002fb30c inferred compares two referenced words (iterator !=)
+002fb3a6 wordRefsEqual_002fb3a6 inferred compares two referenced words (iterator ==)
+002fb3b6 wordRefsDiffer_002fb3b6 inferred compares two referenced words (iterator !=)
+002fbada wordRefsDiffer_002fbada inferred compares two referenced words (iterator !=)
+002fd360 destroyObj00559ef4 inferred destructor storing the vtable at 0x00559ef4
+002fd432 wordRefsEqual_002fd432 inferred compares two referenced words (iterator ==)
+002fd684 wordRefsDiffer_002fd684 inferred compares two referenced words (iterator !=)
+002fd750 wordRefsDiffer_002fd750 inferred compares two referenced words (iterator !=)
+002fe38c wordRefsDiffer_002fe38c inferred compares two referenced words (iterator !=)
+002fe9f2 wordRefsDiffer_002fe9f2 inferred compares two referenced words (iterator !=)
+002fee88 wordRefsDiffer_002fee88 inferred compares two referenced words (iterator !=)
+002ff078 wordRefsEqual_002ff078 inferred compares two referenced words (iterator ==)
+002ff370 wordRefsEqual_002ff370 inferred compares two referenced words (iterator ==)
+002ff3b8 wordMoveOut_002ff3b8 inferred moves a word out of the source and resets it
+002ff3f8 wordRefsDiffer_002ff3f8 inferred compares two referenced words (iterator !=)
+002ff8b4 vectorGrowCapacity_002ff8b4 inferred new capacity = max(cap + 0x20, cap * 1.625)
+002ff8c6 vectorCount4_002ff8c6 inferred element count of a vector of fixed-size elements
+00300366 wordRefsDiffer_00300366 inferred compares two referenced words (iterator !=)
+00300376 wordMoveOut_00300376 inferred moves a word out of the source and resets it
+0030060c wordRefsEqual_0030060c inferred compares two referenced words (iterator ==)
+003008f0 wordRefsEqual_003008f0 inferred compares two referenced words (iterator ==)
+00300bf0 destroyObj00558c98 inferred destructor storing the vtable at 0x00558c98
+00301734 wordRefsEqual_00301734 inferred compares two referenced words (iterator ==)
+00301744 wordRefsDiffer_00301744 inferred compares two referenced words (iterator !=)
+00301c5c arrayElementAddress_00301c5c inferred address of an element of a pointer-held array
+003023f8 destroyObj0055b33c inferred destructor storing the vtable at 0x0055b33c
+00306e60 wordRefsDiffer_00306e60 inferred compares two referenced words (iterator !=)
+003070ec wordRefsDiffer_003070ec inferred compares two referenced words (iterator !=)
+003070fc initVtable00558fb4 inferred stores a vtable into an object returned by a getter
+00307368 vectorTeardown_00307368 inferred destroys elements, frees storage, returns the vector
+0030756a vectorCount8_0030756a inferred element count of a vector of fixed-size elements
+003075ca vectorCount4_003075ca inferred element count of a vector of fixed-size elements
+00307746 vectorCount8_00307746 inferred element count of a vector of fixed-size elements
+00307792 vectorGrowCapacity_00307792 inferred new capacity = max(cap + 0x20, cap * 1.625)
+003077a4 vectorCount8_003077a4 inferred element count of a vector of fixed-size elements
+003077c6 vectorCount4_003077c6 inferred element count of a vector of fixed-size elements
+0030781c vectorCount4_0030781c inferred element count of a vector of fixed-size elements
+00307858 vectorCount4_00307858 inferred element count of a vector of fixed-size elements
+00307860 vectorGrowCapacity_00307860 inferred new capacity = max(cap + 0x20, cap * 1.625)
+003078de vectorGrowCapacity_003078de inferred new capacity = max(cap + 0x20, cap * 1.625)
+00307962 vectorGrowCapacity_00307962 inferred new capacity = max(cap + 0x20, cap * 1.625)
+00307a18 vectorCountx1C_00307a18 inferred element count of a vector of fixed-size elements
+00307a4a vectorGrowCapacity_00307a4a inferred new capacity = max(cap + 0x20, cap * 1.625)
+00307b2a vectorGrowCapacity_00307b2a inferred new capacity = max(cap + 0x20, cap * 1.625)
+00307b3c vectorCount32_00307b3c inferred element count of a vector of fixed-size elements
+00307b66 vectorGrowCapacity_00307b66 inferred new capacity = max(cap + 0x20, cap * 1.625)
+00307b8a vectorCountx18_00307b8a inferred element count of a vector of fixed-size elements
+00307bbc vectorGrowCapacity_00307bbc inferred new capacity = max(cap + 0x20, cap * 1.625)
+00307c16 vectorCount32_00307c16 inferred element count of a vector of fixed-size elements
+00307c1e vectorCount32_00307c1e inferred element count of a vector of fixed-size elements
+00307c56 vectorCountxB8_00307c56 inferred element count of a vector of fixed-size elements
+00307cf0 wordRefsDiffer_00307cf0 inferred compares two referenced words (iterator !=)
+00307d28 wordRefsDiffer_00307d28 inferred compares two referenced words (iterator !=)
+00307ffa rbTreeRotateRight_00307ffa inferred rotation with the left child as pivot
+0030802c rbTreeRotateLeft_0030802c inferred rotation with the right child as pivot
+0030840e rbTreeRotateRight_0030840e inferred rotation with the left child as pivot
+00308440 rbTreeRotateLeft_00308440 inferred rotation with the right child as pivot
+003084c2 rbTreeRotateRight_003084c2 inferred rotation with the left child as pivot
+003084f4 rbTreeRotateLeft_003084f4 inferred rotation with the right child as pivot
+00308556 wordRefsEqual_00308556 inferred compares two referenced words (iterator ==)
+0030898c rbTreeRotateRight_0030898c inferred rotation with the left child as pivot
+003089be rbTreeRotateLeft_003089be inferred rotation with the right child as pivot
+00308a14 rbTreeRotateRight_00308a14 inferred rotation with the left child as pivot
+00308a46 rbTreeRotateLeft_00308a46 inferred rotation with the right child as pivot
+00308a78 wordRefsEqual_00308a78 inferred compares two referenced words (iterator ==)
+00308e38 rbTreeRotateRight_00308e38 inferred rotation with the left child as pivot
+00308e6a rbTreeRotateLeft_00308e6a inferred rotation with the right child as pivot
+00308e9c wordRefsEqual_00308e9c inferred compares two referenced words (iterator ==)
+00308fd6 rbTreeRotateRight_00308fd6 inferred rotation with the left child as pivot
+00309008 rbTreeRotateLeft_00309008 inferred rotation with the right child as pivot
+00309194 rbTreeRotateRight_00309194 inferred rotation with the left child as pivot
+003091c6 rbTreeRotateLeft_003091c6 inferred rotation with the right child as pivot
+003095a8 rbTreeRotateRight_003095a8 inferred rotation with the left child as pivot
+003095da rbTreeRotateLeft_003095da inferred rotation with the right child as pivot
+0030963c wordRefsEqual_0030963c inferred compares two referenced words (iterator ==)
+00309776 rbTreeRotateRight_00309776 inferred rotation with the left child as pivot
+003097a8 rbTreeRotateLeft_003097a8 inferred rotation with the right child as pivot
+003097da rbTreeRotateRight_003097da inferred rotation with the left child as pivot
+0030980c rbTreeRotateLeft_0030980c inferred rotation with the right child as pivot
+00309d04 rbTreeRotateRight_00309d04 inferred rotation with the left child as pivot
+00309d36 rbTreeRotateLeft_00309d36 inferred rotation with the right child as pivot
+00309d98 rbTreeRotateRight_00309d98 inferred rotation with the left child as pivot
+00309dca rbTreeRotateLeft_00309dca inferred rotation with the right child as pivot
+00309f28 rbTreeRotateRight_00309f28 inferred rotation with the left child as pivot
+00309f5a rbTreeRotateLeft_00309f5a inferred rotation with the right child as pivot
+00309fbc wordRefsEqual_00309fbc inferred compares two referenced words (iterator ==)
+0030a160 rbTreeRotateRight_0030a160 inferred rotation with the left child as pivot
+0030a192 rbTreeRotateLeft_0030a192 inferred rotation with the right child as pivot
+0030a1f4 wordRefsEqual_0030a1f4 inferred compares two referenced words (iterator ==)
+0030a5be rbTreeRotateRight_0030a5be inferred rotation with the left child as pivot
+0030a5f0 rbTreeRotateLeft_0030a5f0 inferred rotation with the right child as pivot
+0030a728 wordRefsDiffer_0030a728 inferred compares two referenced words (iterator !=)
+0030a758 rbTreeRotateRight_0030a758 inferred rotation with the left child as pivot
+0030a78a rbTreeRotateLeft_0030a78a inferred rotation with the right child as pivot
+0030a80c rbTreeRotateRight_0030a80c inferred rotation with the left child as pivot
+0030a83e rbTreeRotateLeft_0030a83e inferred rotation with the right child as pivot
+0030a8a0 wordRefsEqual_0030a8a0 inferred compares two referenced words (iterator ==)
+0030a9e6 rbTreeRotateRight_0030a9e6 inferred rotation with the left child as pivot
+0030aa18 rbTreeRotateLeft_0030aa18 inferred rotation with the right child as pivot
+0030aa7a wordRefsEqual_0030aa7a inferred compares two referenced words (iterator ==)
+0030aaaa rbTreeRotateRight_0030aaaa inferred rotation with the left child as pivot
+0030aadc rbTreeRotateLeft_0030aadc inferred rotation with the right child as pivot
+0030ab3e wordRefsEqual_0030ab3e inferred compares two referenced words (iterator ==)
+0030acce rbTreeRotateRight_0030acce inferred rotation with the left child as pivot
+0030ad00 rbTreeRotateLeft_0030ad00 inferred rotation with the right child as pivot
+0030aeb8 rbTreeRotateRight_0030aeb8 inferred rotation with the left child as pivot
+0030aeea rbTreeRotateLeft_0030aeea inferred rotation with the right child as pivot
+0030af50 rbTreeRotateRight_0030af50 inferred rotation with the left child as pivot
+0030af82 rbTreeRotateLeft_0030af82 inferred rotation with the right child as pivot
+0030afe4 wordRefsEqual_0030afe4 inferred compares two referenced words (iterator ==)
+0030b12c rbTreeRotateRight_0030b12c inferred rotation with the left child as pivot
+0030b15e rbTreeRotateLeft_0030b15e inferred rotation with the right child as pivot
+0030b574 rbTreeRotateRight_0030b574 inferred rotation with the left child as pivot
+0030b5a6 rbTreeRotateLeft_0030b5a6 inferred rotation with the right child as pivot
+0030b5d8 wordRefsEqual_0030b5d8 inferred compares two referenced words (iterator ==)
+0030b99c rbTreeRotateRight_0030b99c inferred rotation with the left child as pivot
+0030b9ce rbTreeRotateLeft_0030b9ce inferred rotation with the right child as pivot
+0030ba00 wordRefsEqual_0030ba00 inferred compares two referenced words (iterator ==)
+0030bdc6 rbTreeRotateRight_0030bdc6 inferred rotation with the left child as pivot
+0030bdf8 rbTreeRotateLeft_0030bdf8 inferred rotation with the right child as pivot
+0030bf64 rbTreeRotateRight_0030bf64 inferred rotation with the left child as pivot
+0030bf96 rbTreeRotateLeft_0030bf96 inferred rotation with the right child as pivot
+0030c12a rbTreeRotateRight_0030c12a inferred rotation with the left child as pivot
+0030c15c rbTreeRotateLeft_0030c15c inferred rotation with the right child as pivot
+0030c1ae rbTreeRotateRight_0030c1ae inferred rotation with the left child as pivot
+0030c1e0 rbTreeRotateLeft_0030c1e0 inferred rotation with the right child as pivot
+0030c242 wordRefsEqual_0030c242 inferred compares two referenced words (iterator ==)
+0030c272 rbTreeRotateRight_0030c272 inferred rotation with the left child as pivot
+0030c2a4 rbTreeRotateLeft_0030c2a4 inferred rotation with the right child as pivot
+0030c2d6 wordRefsEqual_0030c2d6 inferred compares two referenced words (iterator ==)
+0030c41a rbTreeRotateRight_0030c41a inferred rotation with the left child as pivot
+0030c44c rbTreeRotateLeft_0030c44c inferred rotation with the right child as pivot
+0030c4a2 rbTreeRotateRight_0030c4a2 inferred rotation with the left child as pivot
+0030c4d4 rbTreeRotateLeft_0030c4d4 inferred rotation with the right child as pivot
+0030c536 wordRefsEqual_0030c536 inferred compares two referenced words (iterator ==)
+0030c5b4 vectorGrowCapacity_0030c5b4 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0030c5c6 vectorGrowCapacity_0030c5c6 inferred new capacity = max(cap + 0x20, cap * 1.625)
+0030c61a vectorGrowCapacity_0030c61a inferred new capacity = max(cap + 0x20, cap * 1.625)
+0030c774 vectorCount4_0030c774 inferred element count of a vector of fixed-size elements
+0030c8ce vectorCount4_0030c8ce inferred element count of a vector of fixed-size elements
+0030cd14 wordRefsEqual_0030cd14 inferred compares two referenced words (iterator ==)
+0030cdae wordRefsDiffer_0030cdae inferred compares two referenced words (iterator !=)
+0030cf7c wordRefsEqual_0030cf7c inferred compares two referenced words (iterator ==)
+0030cf9e wordRefsDiffer_0030cf9e inferred compares two referenced words (iterator !=)
+0030d03c vectorTeardown_0030d03c inferred destroys elements, frees storage, returns the vector
+0030d348 initVtable00559504 inferred stores a vtable into an object returned by a getter
+0030d3b2 vectorCount8_0030d3b2 inferred element count of a vector of fixed-size elements
+0030d4b0 wordRefsEqual_0030d4b0 inferred compares two referenced words (iterator ==)
+0030eb14 arrayElementAddress_0030eb14 inferred address of an element of a pointer-held array
+0030f05c wordRefsEqual_0030f05c inferred compares two referenced words (iterator ==)
+0030f0ac wordRefsDiffer_0030f0ac inferred compares two referenced words (iterator !=)
+0030f814 wordRefsDiffer_0030f814 inferred compares two referenced words (iterator !=)
+0030f836 wordMoveOut_0030f836 inferred moves a word out of the source and resets it
+0030f88a wordRefsDiffer_0030f88a inferred compares two referenced words (iterator !=)
+0030fbec wordRefsEqual_0030fbec inferred compares two referenced words (iterator ==)
+0030fbfc wordRefsEqual_0030fbfc inferred compares two referenced words (iterator ==)
+0030fcf6 vectorCount8_0030fcf6 inferred element count of a vector of fixed-size elements
+0030fcfe vectorGrowCapacity_0030fcfe inferred new capacity = max(cap + 0x20, cap * 1.625)
+0030fd70 vectorCountx28_0030fd70 inferred element count of a vector of fixed-size elements
+0030fd7e vectorGrowCapacity_0030fd7e inferred new capacity = max(cap + 0x20, cap * 1.625)
+00161044 asdGfxSetMode inferred twin of smt4 asdGfxSetMode (same code)
+0016117c asdModelResetCommandBuffer inferred twin of smt4 asdModelResetCommandBuffer (same code)
+001615fc asdGfxSetCmdBufferState inferred twin of smt4 asdGfxSetCmdBufferState (same code)
+0017d258 asdGfxCmdBufferForward5 inferred twin of smt4 asdGfxCmdBufferForward5 (same code)
+0019601c asdGfxCmdBufferForward8 inferred twin of smt4 asdGfxCmdBufferForward8 (same code)
+001960fc asdModelAdvanceCommandCursor inferred twin of smt4 asdModelAdvanceCommandCursor (same code)
+001b0e10 nw_gfx_SceneBuilder_CreateObject inferred twin of smt4 nw_gfx_SceneBuilder_CreateObject (same code)
+002ddd8c mapTableGetValue inferred twin of smt4 mapTableGetValue (same code)
+00310684 bufGrowCapacity inferred buffer capacity growth policy (1.625x, min +0x20)
+00310f8c bufGrowCapacity2 inferred buffer capacity growth policy (1.625x, min +0x20)
+0031147e bufGrowCapacity3 inferred buffer capacity growth policy (1.625x, min +0x20)
+00311520 bufGrowCapacity4 inferred buffer capacity growth policy (1.625x, min +0x20)
+00311532 bufGrowCapacity5 inferred buffer capacity growth policy (1.625x, min +0x20)
+00310010 slotSetGet inferred returns slot by index (0 inline, others in array)
+0031008a handleWatcherPoll inferred polls handle readiness and clears pending flag
+00310212 listInitEmpty inferred allocates sentinel node, links to itself
+00310272 listInitEmpty2 inferred allocates sentinel node, links to itself
+003104fc lockedLeave inferred leaves nn::os::CriticalSection at +8
+00310506 lockedEnter inferred enters nn::os::CriticalSection at +8
+003105a0 iterNotEqual inferred iterator != comparison
+00310c2c iterNotEqual2 inferred iterator != comparison
+003112cc iterEqual inferred iterator == comparison
+0031076a ownedPtrReset inferred releases old object via vtable slot 1, stores new one
+00310d4a stringSetValue1 inferred forwards to FUN_002e7674 with count 1
+00310d54 stringSetValue4 inferred forwards to FUN_002e7674 with count 4
+00310e4e vectorOwnerResize inferred resize vector at +0xc, return begin
+00311092 objectNew40 inferred malloc 0x40 and construct
+003111ea stateObjIsFinished inferred state byte == 2
+003111fa rangeObjRemaining inferred end - pos
+00311254 childOwnerHasActiveChild inferred child at +0x94 exists and mode != 5
+003112dc listHolderBack inferred back() of list or 0
+003113e4 listHolderOwnerBack inferred calls FUN_003112dc on holder at +0x2c
+00311470 allocElements184 inferred rt_malloc(count * 0xb8)
+00311544 handleLockRelease inferred FUN_001a08d8 then FUN_001a0990 when locked
+003116c8 keyValueCopyConstruct inferred placement copy of {u16,u32}
+003116d6 word3CopyConstruct inferred placement copy of 3 words
+003116e8 onlineObjectThreadRootSetupStart inferred stores 4 params then onlineObjectThreadRootStart
+00314bd8 sub68OwnerCall1 inferred calls FUN_0048c380 on sub-object at +0x68 of global DAT_00587f28
+00314c18 sub68OwnerCall2 inferred calls FUN_00486304 on sub-object at +0x68 of global DAT_00587f28
+00317450 asdListBoxGetIntValuePtr inferred &item->intValue or NULL
+00317464 asdListBoxSetIntItem inferred sets INT item value/range and marks dirty
+00317c60 taggedOwnerRelease inferred releases tagged pointer via vtable slot 12
+003192e0 overlayGetStatusScene inferred &instance->scene of DAT_0057f110
+003192f4 statusSceneDestroy inferred destroys status camera, resets, releases object
+00319e38 cecProcessCall1 inferred calls FUN_00358f70 with cec process handle
+00319e58 cecProcessCall2 inferred calls FUN_00358fbc with cec process handle
+0031934c jobSceneWaitStep inferred state step: job==2 then flag, se 0x10d, next state 3
+00319acc dataTable4AGetEntry inferred entries of table 0x4a type 3 + index
+00319d2c valueAtMostFifthOfTotal inferred (v<<12) <= max(total*20%, 1.0 fixed)
+00319d64 heldAmountLessThan inferred compares held amount of id (or player value when id<0) with amount
+0031a044 scrCommClassifyId inferred script command: classify id into 0/1/2/3/-1 and set result
+0031a0d8 scrCommGetGameDataValue inferred script command: result = FUN_0031cfb4()
+0031a218 panelSetMode3 inferred sets panel state 3, value, flag
+0031b934 entryIsValid inferred index < count && entry->unkd8 > 0
+0031baf8 handleSetReset inferred releases all handles in 4 lists and clears counts
+0031bfc0 scrCommCallTableEntry inferred script command: FUN_0039b2d0(table[arg0],0,0,arg1)
+0031c000 scrCommStartAndWaitJob inferred starts FUN_0039b2d0 job, waits for it
+0031cb74 objectE0Reset inferred sets flag 0x144e and clears fields, stores value
+0031cfb4 gameDataBlocksGetWord inferred reads word at block+0x21e14
+0031d270 getByteTableAValue inferred signed byte at DAT_0057f560+2
+0031d478 jobRefStop inferred stops job via ref if valid
+0031d864 objIsNotInState0xF inferred DAT_0057f268 null or state != 0xf
+0031f0d8 gameDataBlocksSetWord inferred writes word at block+0x21e14
+0031f664 objStateNotEnding inferred state != 0x15 && != 0x17
+0031faa4 pairLogAppend inferred appends (a,b) to two parallel u16 arrays
+0031fdf0 region9100IsClear inferred byte at +0x91ac == 0
+00321310 menu32PlayCursorSeAndSelect inferred plays se from FUN_00341f88 then FUN_0020ad6c(menu, unk3880, 1)
+0032135c menu32ModeIsNot2 inferred mode(+0x243c) != 2
+00325140 flagsSetIfUnset3 inferred sets up to three flags (group,bit) if not already set
+00327638 dataTable2EGetEntry inferred entry (0x2c bytes) of table 0x2e or NULL
+00328370 scrCommCheckCount inferred script command: wait condition on counts
+003284cc jobPoolStopCurrent inferred stops pool->jobs[current] if valid
+0032c1ac settings5BGetValue inferred signed byte at +2
+0032cb48 settings5BSetValue inferred stores byte at +2
+0032c5ac settings5BAddFlags inferred ors flags at +8
+0032c450 asdListBoxSetToggleItem inferred item -> TOGGLE with value, range 0..1
+0032c8dc colorForMode inferred mode 0/1/other -> 0xE7E3FFFF variants
+0032cdb8 flagsAt6CGet inferred byte at DAT_006306f8+0x6c
+0032cfb0 screenGetEntry inferred &instance->entries[index] (0x40 stride at +0x5f0)
+0032ff20 unitRecordBuild inferred fills 300-byte record from table entry
+0032e30c playerSummaryFill inferred fill summary from party data
+0032e21c stateAtF4IsActive inferred mode==1 && phase in {1,-1}
+0032e478 overlayGetBuffer1 inferred instance->buffer1 of DAT_0057f110
+0032ece8 dataTable4AGetEntry2C inferred entry (0x2c) of table 0x4a type 0
+0032faf4 flagAt4IsClearOrMissing inferred obj null or obj->flag==0
+00330014 cecProcessGetEntry inferred entries[index] of g_cecProcess (100 bytes at +0x98) or NULL
+00330414 menuStateSetMode4 inferred mode=4, value, clear +0x2b1
+00330464 scrCommCompareRanges inferred script command: result = FUN_0019a37c(arg, FUN_003fd528(), 0x12) == 0
+0033099c objectE0ResetFlags1040 inferred sets flag +0x1040 and clears +0x1043..5
+00330ab8 gameDataBlocksGetWord27E8C inferred reads word at block+0x27e8c
+00330fc4 scrCommDispatch6 inferred script command switch over arg 0 (0,1,2,10,11,12)
+00331194 panelIsMissingOrFlagClear inferred panel null or flag08==0
+00331498 scrCommRunScene inferred script command with FUN_0038b6f0 completion check
+003332d8 byte1IsZero inferred DAT_0057f6c8 byte +1 == 0
+00333be0 obj7ECSetPair inferred stores two words at +0x7ec/+0x7f0
+00334158 objBStateAllowsAction inferred state in {5,6,7,9} && FUN_003e5ae8(unk2034)
+00334434 objBInitBlock19D0 inferred calls FUN_0026fd50 on +0x19d0, optionally copies pair
+00336aa4 menu32State387CIs345 inferred unk387C in {3,4,5}
+00336ad0 menu32State387CIs6 inferred unk387C == 6
+00336d68 menu32ModeIsNot3 inferred mode != 3
+00336d84 menu32ModeIsNot4 inferred mode != 4
+00338408 nodeListFree inferred frees node chain (next at +0x40), buffer, list
+00338448 infoHolderInitItems inferred FUN_00390368 per kind-3 item with entry unk10==0
+003385e4 nodeChainCount inferred length of chain at +0x8c (next at +0xac)
+00338800 resource28Free inferred frees owned resources and the object
+00338dec byte76Get inferred signed byte DAT_005f0c7c+0x76
+0033aae4 gameFlagsGet inferred flags[index] at obj+0xc0c
+0033aafc gameFlagsSet inferred flags[index] = value if index < 0x40
+0033f7c0 dataTable2EType1GetEntry inferred entry of data table 0x2E type 1 or NULL
+0033f7f8 dataTable2EType0GetEntry inferred entry of data table 0x2E type 0 or NULL
+0033f830 dataTable2DGetEntry inferred entry of data table 0x2D type 5 or NULL
+0033f868 dataTable2CGetEntry inferred entry of data table 0x2C type 0 or NULL
+00340a18 childOwnerUpdateKind123 inferred if child kind in {1,2,3} and has data: FUN_004b9588(data)
+00340a54 jobRefIsAlive inferred job found or flag +5 clear
+00340c10 obj80Select inferred instance->unk80 when which==0 else unk84
+00340eb0 swapSlotExchange inferred exchange DAT_005b3268+4
+00340ec8 asdListBoxGetFloatValuePtr inferred &item->floatValue or NULL
+00341060 faderSetValue inferred stores value, scaled into up to two targets
+003417ec taggedOwnerRelease2 inferred releases tagged pointer via vtable slot 12
+00341f00 bustupCutAnimClearFlags inferred clears +0x8c of work of slots 1..3
+00341f54 screenGetSlotValue inferred slots[index].value (index<6) or 0
+00342348 screenShowMessage inferred sets screen flags and starts FUN_002a1f60 for id, or clears
+00343cc8 ownerSetName inferred copies 0x12-byte name to +0xe
+00343cdc stateAtF4Apply inferred FUN_003a4980(unkC, unk8, unk58) if state exists
+00344c6c overlayIsNotBusy inferred no overlay or unk1a0 not in {1,2}
+00344c9c countNonZeroRecords24 inferred count of 0x18 records with non-zero first s16
+003452d0 bitsHolderSetBit inferred sets bit in array at +0x55
+003483a8 jobSetWork16 inferred stores byte +0x16 of job work
+003483bc flagBrowserStep inferred debug flag browser cursor/toggle step
+003486ec scrCommStopJob inferred script command: jobStop(arg0) if valid
+003487b0 scrCommRunScene2 inferred script command: start scene then poll FUN_00162880
+00348cd8 gameDataBlocks2GetWord4 inferred block2->unk04
+00348d4c gameDataBlockGetArea28350 inferred &block->unk28350
+00348d64 gameDataBlockGetArea2D68 inferred &block->unk2D68
+003491b8 panelIsActiveState2 inferred unk8E set and state == 2
+003491e8 obj04Finish inferred if obj04 has state: set flags, FUN_00165088, state=3, clear
+0034a98c objBInitBlock12DC inferred FUN_00184758(&obj->block12DC, 0xf, 0)
+0034aa94 objBSetWordByIndex inferred stores value into +0x205c/+0x2060/+0x2064 by index 0..2
+0034da10 jobWorkDestroy0 inferred FUN_0023917c(work->first), free work
+0034dab0 jobWorkDestroy34 inferred releases +0x34 then frees work
+0034dddc scrCommAddOrRemove inferred script command: add/remove amount for id, announce when FUN_003311b8
+0034e4e4 scrCommBattleCounterAtMost inferred script command: result = state->unk45b8 + 1 <= arg
+0034edc8 menu32Advance inferred menu state transitions via FUN_0020ad6c
+0034f018 owner2DCInitSub inferred FUN_00184758(&owner->sub@0x2dc, 3, 1)
+0034f028 kindRefTieBreak inferred compare ranks of two refs; call FUN_003811ec when equal
+0034f40c flagRecCompare inferred comparator for 4-byte records
+00350ca4 block6Free inferred frees owned pieces, buffer and block
+003522f8 byte76Set inferred stores byte DAT_005f0c7c+0x76
+00352d18 gameFlags2Get inferred flags2[index] at obj+0xc4c
+00352ddc applyIfIdValid inferred id=FUN_003a32a8(v); if valid FUN_002d23f0(id), FUN_00274970(v)
+00353d68 clearByte inferred *p = 0
+003564ec dataTable4CGetEntry inferred entry (0x30) of table 0x4c or NULL
+00357a90 sub68OwnerCall3 inferred calls FUN_0048b858 on sub-object at +0x68 of global DAT_00587f28
+00357ad8 sub68OwnerCall4 inferred calls FUN_0048b244 on sub-object at +0x68 of global DAT_00587f28
+00357af8 sub68OwnerCall5 inferred calls FUN_0048b250 on sub-object at +0x68 of global DAT_00587f28
+003594f8 settings5BClearFlags inferred clears flags at +8
+003595cc work20RefFree inferred frees first object pieces, handle and ref
+003599e8 screenSetColor670 inferred stores word +0x670 and bytes +0x674..6
+0035a978 playerSummaryIsIncomplete inferred false only when name and all 7 stats are set
+0035a9e4 dataTable4ACount inferred dataTableGetCount(dataTableGet(0x4a,3))
+0035b068 cecProcessCall3 inferred FUN_0035af44(g_cecProcess) if set
+0035b084 cecProcessCall4 inferred FUN_004bb31c(handle) if set
+0035b130 scrCommArmWork150 inferred script command: work->unk164=arg0, unk150=10, unk154=3
+0035bcdc findRecordByKey inferred first record index whose key matches, 0xff if none
+0035bf2c eventTexClearFlagB8 inferred clears +0xb8 of current event texture job work
+0035d88c byteTableASetValue inferred stores byte at DAT_0057f560+2
+0035db38 objBInitBlock12DC5 inferred FUN_00184758(&obj->block12DC, 5, 0)
+0035db58 objBInitBlocks274300 inferred sets +0x20ad and calls FUN_001846d0 on two blocks
+0035dbf0 stateHolder4IsD inferred DAT_0057f28c->state == 0xd
+0035e99c scrCommSetPanelValue inferred script command: DAT_005710e0 = arg0; FUN_0031a218 if panel flag
+0035ef38 scrCommBattleMaxAtMost inferred script command: result = max(unk4c70, unk4c72) <= arg
+0035f6e0 scrCommGetPartyWord0 inferred script command: result = *FUN_001ab888()
+0035f9fc menu32State387CIs2 inferred unk387C == 2
+0035fb28 menu32State387CIs7 inferred unk387C == 7
+0035fb44 menu32InitBlock96C inferred FUN_00184758(&menu->block96c, 0xd, 0); select 0xe
+00365b7c recTableFireType3 inferred FUN_002d23f0(handle) for active type-3 records of 0x80
+00368390 clearFlags310To31F inferred FUN_003fd63c(0x310+i, 0, 1) for i<16
+00368b4c sub68OwnerCall6 inferred calls FUN_0048ba34 on sub-object at +0x68 of global DAT_00587f28
+00368b6c sub68OwnerCall7 inferred calls FUN_0048b11c on sub-object at +0x68 of global DAT_00587f28
+00368b8c sub68OwnerStart1 inferred calls FUN_004882c0 on sub-object at +0x68 of DAT_00587f28 with value
+00368bd8 sub68OwnerStart2 inferred calls FUN_004883c8 on sub-object at +0x68 of DAT_00587f28 with value
+00368c7c scrCommIgnoreArgs5 inferred script command that reads 5 args and ignores them
+0036ba44 colorSlotSet inferred sets rgba at +4, copy word at +8
+0036c8f0 handleArray10Free inferred releases 10 handles and frees array
+0036df34 obj04ApplyPending inferred if unk35: apply and state=3; returns 1 if idle
+0036df88 ref208StateIs7 inferred DAT_0057f208.work->state == 7
+0036dfa8 ref208Destroy inferred frees work area of job, clears DAT_0057f208.work
+0036f750 scrCommStopJob2 inferred script command: jobStop(arg0) if valid
+0036f860 scrCommStartActionWait inferred script command: start action for id once, wait for FUN_003c5fdc
+0036fe58 byteTableAGetValue3 inferred signed byte at DAT_0057f560+3
+003706dc scrCommRun3 inferred script command: FUN_003847ac(a1,a2); FUN_00376fa4(a0); FUN_0036af24()
+00370f7c obj25CRefreshFlags inferred sets unk334, flags[i]=1 where FUN_004801ac != 1
+00370fe8 addStepCostTotal inferred adds sum of FUN_004ccbf0(id+i) minus credit to counter +0x7870
+00371dec stateHolderCountMinus1 inferred FUN_002c2c68(+0x5ec) - 1, or 0
+00371e18 stateHolderStateIsNot4 inferred state != 4
+00372170 stateHolder4Request inferred sets +0x93d=1, +0x945=value, runs FUN_001ff724/FUN_0031f924
+0037391c scrCommBattleCounterAtLeast inferred script command: result = arg <= state->unk45b8 + 1
+00373958 scrCommGetBattleWord inferred script command: result = state->words[arg0]
+00373af4 scrCommSetBattleWord inferred script command: state->words[arg0] = arg1
+00373d40 scrCommIsState0xD inferred script command: result = obj->state == 0xd
+00373eec scrCommGetBattleTable23A4 inferred script command: result = state->table23a4[arg0]
+003740b8 scrCommUnitApply inferred script command: FUN_004bcd1c/FUN_004bd2b4 on roster or party unit
+0037418c menu32EnterState27 inferred if unk387c != 0: select 0x27, FUN_0038e4cc(9)
+00375688 menu32State387CNotIn22To25 inferred unk387c not in 0x22..0x25
+00376888 handleBlockFree inferred releases +0x140/+0x144/+0x13c handles and frees block
+00377084 gameOwnedBitTest inferred fold variant ids then test bit in bitset at +0xccc
+00379734 dataTable29GetEntry inferred entry (0x10) of table 0x29 type 5 or NULL
+00379d18 payloadWorkRelease inferred kind 1: FUN_00408c3c(first); kind 2: FUN_00418960(second)
+0037a854 jobSetWork7C inferred stores two words at +0x7c/+0x80 of job work
+0037b538 screenGetSlotFlag inferred slots[index].flag (index<6) or 0
+0037b578 screenStartOrClear inferred starts FUN_002a1f60 for id or clears screen state
+0037b708 stateAtF4Destroy inferred saves record, frees buffers/job of DAT_0057f118 state
+0037bdfc jobScene360WaitStep inferred job==2: flags update, FUN_003fd63c(0x551), next state 3
+0037c894 panelStateIs0 inferred panel->state == 0
+0037c8b4 panelSetTarget inferred sets value, flag and arms the panel
+0037d024 jobSetWork31 inferred stores byte +0x31 of job work
+0037d1cc stateRef568IsState2 inferred 1 when obj exists and state == 2; else runs FUN_0037d770 if no obj
+0037d208 jobsOwnerStopSubJobs inferred stops valid sub-jobs 1..3
+0037d400 jobRefStopAndFree inferred stops DAT_00589144 job, frees and clears it
+0037d478 gameDataBlocksGetWord27E90 inferred word at block+0x27e90
+0037d494 gameDataBlocksGetHalf280C4 inferred &block->unk280c4[index]
+0037d6c4 obj04StateIs4 inferred DAT_0057f588.unk04->state == 4
+0037d9dc obj14IsZero inferred DAT_0057f254.instance->unk14 == 0
+0037de3c byteTableASetValue3 inferred stores byte at DAT_0057f560+3
+0037de4c stateHolderStateIs8Or10 inferred object exists and state in {8,10}
+0037e21c dataTable5GetEntries inferred dataTableGetEntries(dataTableGet(5,0))
+0037f744 scrCommUnitCheck inferred script command: result = FUN_003248e4(unit->unk20) != 0
+0037fdc0 scrCommPartyWordAtMost inferred script command: FUN_00232388(arg1); result = *party <= arg0
+003800bc scrCommBattleValuesDiffer inferred script command: result = arg0 && state->unk4e58 != state->unk4e5c
+0038110c scrCommBattleMessage2B inferred script command: FUN_003f2498(battleState, 0x100002b)
+00381198 menu32ModeIsNot5 inferred mode != 5
+00381734 childHolderCopyOut inferred copies child pointer and its +0x14/+0x18 into out
+003834f8 handlePairCopy inferred copy handle from src (D0 kind else CC kind), releasing dst old one
+003847e8 gameFlagsClassify inferred 0/1/2 from unk03/unkE71 and id 0x18
+003858d4 dataTable2CType3GetEntry inferred entry (0x14 bytes) of data table 0x2c type 3 or NULL
+00385910 dataTable2CType1GetEntry inferred entry (0x14 bytes) of data table 0x2c type 1 or NULL
+0038594c dataTable2ECount inferred dataTableGetCount(dataTableGet(0x2e,2))
+0038599c dataTable23GetEntry inferred entry (0x8 bytes) of data table 0x23 type 9 or NULL
+003859d4 dataTable2CType4GetEntry inferred entry (0x1c bytes) of data table 0x2c type 4 or NULL
+00385afc sub68OwnerCall8 inferred calls FUN_0048c1ac on sub-object at +0x68 of DAT_00587f28
+00385b1c sub68OwnerCall9 inferred calls FUN_0048ba5c on sub-object at +0x68 of DAT_00587f28
+00385b3c scrCommThreePhase inferred script command: 3-phase sequence on step counter
+00388024 maskToCode inferred bitmask -> small code (priority 8,1,4,2,0x10)
+003881b0 dataTable4AGetEntry8 inferred entry (8 bytes) of table 0x4a type 2
+00389fcc jobSetWork3C inferred stores word +0x3c of job work
+0038a184 modelWorkDestroy inferred destroys job work: FUN_001f42b0, model manager, FUN_001ad6d8
+0038a408 scrCommStopJob3 inferred script command: jobStop(arg0) if valid
+0038ae18 scrCommLmapRefresh inferred script command: FUN_00312d6c(); lmapMainCallIfActive()
+0038b310 byteTripleGetV2 inferred signed byte v2 of DAT_0057f6bc
+0038b320 byteTripleGetV0 inferred signed byte v0 of DAT_0057f6bc
+0038b348 byteTripleGetV1 inferred signed byte v1 of DAT_0057f6bc
+0038b688 objBSetRecord2000 inferred copies 3 words + halfword to +0x2000
+0038b6bc objBMarkAndInit20D4 inferred sets +0x20d1, FUN_003e4140(&obj->block20d4)
+0038b6f0 stateHolder4IsZero inferred DAT_0057f28c->state == 0
+0038b79c pairLogDestroy inferred FUN_001add24(0x25); FUN_00321744(); stop job; free; clear
+0038b7d8 dataTable5Count inferred dataTableGetCount(dataTableGet(5,4))
+0038d200 scrCommBattleCounterMod inferred script command: result = (state->unk45b8 + 1) % arg
+0038e704 menu32ModeIsNot6 inferred mode != 6
+00398048 gameFlagsGetWord1590Ptr inferred &obj->words1590[i] for i<8 else NULL
+00398388 dataTable2EType1Count inferred dataTableGetCount(dataTableGet(0x2e,1))
+003983a0 dataTable2EType0Count inferred dataTableGetCount(dataTableGet(0x2e,0))
+00398438 dataTable2CType0Count inferred dataTableGetCount(dataTableGet(0x2c,0))
+003993d0 dataTable20GetEntry inferred entry (4 bytes) of table 0x20 or NULL
+00399c60 displayIsStereoActive inferred DAT_0063fd88.mode == 1 && stereo allowed
+0039a184 handles5Free inferred releases 4 handles and frees block
+0039a530 dataTable4AType1GetEntry8 inferred entry (8 bytes) of table 0x4a type 1
+0039a550 convertToBufferAndStore inferred builds 0x100-byte buffer from src, FUN_00102af4 into dst, FUN_00438944
+0039a678 panelInitBlockB00 inferred FUN_001654d8(&panel->blockb00)
+0039b418 scrCommWaitEventTexSlots inferred script command: result = eventTexSlotsReady(); returns it
+0039b448 scrCommRestartJobWork inferred script command: work->unk6c = unk10; unk64 = 0; unk68 = arg1
+0039b498 scrCommWaitEventTexHandles inferred script command: result = eventTexHandlesReady(); returns it
+0039b59c scrCommMapRefreshWhenReady inferred script command: map refresh once FUN_00239194
+0039ba04 flagAt4IsClear inferred DAT_0057f244->flag == 0
+0039bb54 unitRecordFromSummary inferred clears 100 bytes, copies 0xe bytes, name, id from summary
+0039c3b0 stateHolderGetCurrentEntry inferred table59c[unk654]
+0039c3d0 stateHolderStateIs0x12 inferred state == 0x12
+0039c3f0 stateHolderStateIs0xD inferred state == 0xd
+0039e970 menu32QueueAction inferred queues action: saves previous (+0x4b14), resets fields, sets +0x4b28 by flag 0x4c9
+0039ea64 menu32State387CIs0x30 inferred unk387c == 0x30
+0039ea80 menu32NotInState1F inferred menu null or unk387c != 0x1f
+0039ede0 quadSourceCopyOut inferred copies 4 words at rec+0x10 to out
+003a1988 getFloatPairValue inferred signed byte DAT_005c10c0
+003a1a9c floatPairAddA inferred DAT_005c10c0.a += delta
+003a1ab4 floatPairAddB inferred DAT_005c10c0.b += delta
+003a1a70 handleHolderFree inferred releases +0x38/+0x40 handles then frees object
+003a31d4 dataTable29Type6GetEntry inferred entry (0x10 bytes) of data table 0x29 type 6 or NULL
+003a338c dataTable2FType0GetEntry inferred entry (0x24 bytes) of data table 0x2f type 0 or NULL
+003a33c8 dataTable2FType1GetEntry inferred entry (0x20 bytes) of data table 0x2f type 1 or NULL
+003a3ae0 scriptObjDestroy inferred frees DAT_00573c50 object pieces and stops job at work+0x50
+003a43ec freeTexTable24 inferred FUN_0019a7f4(0x24,0); asdTMTexTableFreeEntry(0x24)
+003a48b4 packFields inferred packs six small fields into one word
+003a60a8 dataSceneWaitStep inferred data store finished: flags update, next state 3
+003a62c0 dataTable15GetEntry inferred entry (100 bytes) of table 0x15
+003a7064 bufRefFree inferred frees *owner->slot and clears it
+003a7438 scrCommRefreshActiveMap inferred script command: refresh map or lmap, whichever is active
+003a7b88 stateHolderIsMissingOrState0 inferred object null or state == 0
+003a7c1c stateHolder4IsZero2 inferred DAT_0057f28c->state == 0
+003a9170 battleTryFinishEncount inferred btlEncountTryFinish(btlGetMainState()) != 0
+003a99e8 scrCommGetBattleTableValue inferred script command: result = rows[arg0].values[arg1] of battle table 9
+003addd8 flagPairCondition inferred (a==0 || flag(a)) && (b==0 || !flag(b))
+003ade20 gameOwnedBitTest2 inferred fold variant ids then test bit in bitset at +0xd0c
+003adff8 fireEntriesMatchingPair inferred FUN_002d23f0(i) for entries containing pair (a,b); stops at unused entry
+003ae498 dataTable2CType2GetEntry inferred entry (0x20 bytes) of data table 0x2c type 2 or NULL
+003ae5e4 dataTable2FType2GetEntry inferred entry (0x10 bytes) of data table 0x2f type 2 or NULL
+003ae704 scrCommThreePhase2 inferred script command: 3-phase sequence on step counter
+003ae770 renderObjAttach inferred FUN_0016c4b8/FUN_00157558 with render ctx when DAT_00573c50->unk30 exists
+003ae918 colorHolderSet inferred sets rgba at +8
+003af934 dataTable4AType2Count inferred dataTableGetCount(dataTableGet(0x4a,2))
+003af9ac scrCommResetPanel inferred script command: panel->unk17c = 4; release +0x18c
+003b0700 scrCommGetShopResultByte inferred script command: result = shopGetResult()->unk1604c
+003b13b8 scrCommUnitHasFlag20000 inferred script command: result = FUN_003389d0(unit->unk24, 0x20000) != 0
+003b1738 scrCommRefreshSlotAndBattle inferred script command: FUN_004bcb54(FUN_0015688c()); FUN_003eaa14(btlGetMainState())
+003b1758 scrCommGetFlagBit3 inferred script command: result = (rec->unk16 & 0xf) >> 3
+003b1784 scrCommGetFlagBit2 inferred script command: result = (rec->unk16 & 0x7) >> 2
+003b1a28 scrCommGetFlagBit4 inferred script command: result = (rec->unk16 & 0x1f) >> 4
+003b1ac0 scrCommGetGameBlockByte27E3F inferred script command: result = FUN_0014af84()->unk27e3f
+003b1cf4 scrCommUpdateSlotIfQualified inferred script command: if FUN_004bd340(slot,1): update slot, refresh battle
+003b1dc4 scrCommSetBattleTable2344 inferred script command: state->table2344[arg1] = arg0
+003b24f0 quadHolderCopyOut inferred copies 4 words at *(obj+0x20) to out
+003b2518 linkedObjGetValue inferred obj->link->value
+003b2524 modelStateCopy inferred copies kind; for kind 3 clones the model manager and flags it
+003b5e80 packThreeFields inferred a | b<<4 | c<<8
+003b6110 dataTable4AType1Count inferred dataTableGetCount(dataTableGet(0x4a,1))
+003b61b0 scrCommArmPanel3 inferred script command: panel flags, state 3, init block +0x1820
+003b6cb0 scrCommRun3Variants inferred script command: FUN_003ae9d8(a,b); (0,2); (0,3)
+003b60c8 stateTableMarkIfUnlocked inferred states[index]=1 unless 2/3, when not locked
+003b5fd0 resSetFree inferred frees 3x handle arrays, registered textures and the set
+003b6e04 scrCommIsHalfZero inferred script command: result = flags->halves[arg0] == 0
+003b70c0 byteArr5Get3 inferred signed byte DAT_0057f6bc+3
+003b70d0 byteArr5Get4 inferred signed byte DAT_0057f6bc+4
+003b7314 stateHolderMarkAndInit2588 inferred sets +0x2584, FUN_003e4140(&obj->block2588)
+003b8488 scrCommUnitHasFlag40000 inferred script command: result = FUN_003389d0(unit->unk24, 0x40000) != 0
+003b8590 scrCommReleaseBattleObj2298 inferred script command: release +0x2298, clear +0x22b4
+003b85f0 scrCommGetFlagBit5 inferred script command: result = (rec->unk16 & 0x3f) >> 5
+003b8e1c scrCommCopyRows4B inferred script command: rows[a..b].unk34 = unk60 for table 0x4b
+003b93ec handlePair144Copy inferred copy handle from src (144 kind else 140 kind), releasing dst old one
+003b998c dataTable2CType3Count inferred dataTableGetCount(dataTableGet(0x2c,3))
+003b99a4 dataTable2CType1Count inferred dataTableGetCount(dataTableGet(0x2c,1))
+003b99bc dataTable23Count inferred dataTableGetCount(dataTableGet(0x23,9))
+003ba534 floatOwnerIsDone inferred no child or current >= limit
+003bb194 scrCommPickEntryHalf inferred script command: result = n-th active entry halfword or 0xad
+003bbc5c scrCommUnitHasCounters inferred script command: result = unit obj +0xac > 0 || +0xb4 > 0
+003bcb34 scrCommGetFlagBitA5 inferred script command: result = (rec->unka5 & 3) >> 1
+003bcf88 menu32InitBlock368 inferred FUN_001846d0(&menu->block368, 4); unk3f4=0; unk3f8=5
+003bf70c stageIntro inferred per-kind intro FUN_00314c38 then FUN_003fd63c(unk24,1,1)
+003bf840 dataTable49GetEntry inferred entry (0x14 bytes) of data table 0x49 type 1 or NULL
+003bfc90 stepObjStart inferred if FUN_00387ad8: set fields, return 3
+003c1644 fieldStateAllowsAction inferred chain of field-state checks
+003c2d78 menu32IsMissingOrState6 inferred menu null or unk3f8 == 6
+003c31ec scrCommGetChildValue inferred script command: result = child->unk75d0 or FUN_0037c678
+003c3ba0 scrCommReleaseJobBlock inferred script command: frees empty block, else FUN_0031baf8(set) when ready
+003c3f74 dataTable5Type9Count inferred dataTableGetCount(dataTableGet(5,9))
+003c48fc scrCommGetBattleTable5Value inferred script command: result = rows[arg0].v[arg1-1]
+003c4ce8 byteArr51Get50 inferred signed byte DAT_005f19fc+0x50
+003c4cfc stageRefHasLinkedObject inferred sub active and FUN_004ffba8(link->unk04)
+003c4d34 dataTable2FType0Count inferred dataTableGetCount(dataTableGet(0x2f,0))
+003c4d4c dataTable2FType1Count inferred dataTableGetCount(dataTableGet(0x2f,1))
+003c4d64 sub68OwnerCall10 inferred calls FUN_0049204c on sub-object at +0x68 of DAT_00587f28
+003c4d84 sub68OwnerCall11 inferred calls FUN_002bf18c on sub-object at +0x68 of DAT_00587f28 with value
+003c58a8 ref208SetPair1C inferred stores bytes +0x1c/+0x1d of DAT_0057f208.obj if set
+003c5fac lmapSceneIsNot0x2D inferred lmapSceneGetUnk0() != 0x2d
+003c6038 work8BufDestroy inferred three cleanups, frees buffer at +8 and the work
+003c68e8 scrCommGetBattleTable4V1 inferred script command: result = rows[arg0].v1 of battle table 4
+003c691c scrCommGetBattleTable4V0 inferred script command: result = rows[arg0].v0 of battle table 4
+003c8520 dataTable2FType2Count inferred dataTableGetCount(dataTableGet(0x2f,2))
+003c8740 resSetAllReady inferred false when a state-2 entry is not set
+003c8860 ref208HasObj inferred DAT_0057f208.obj != NULL
+003c9d60 scrCommUnitIsType13 inferred script command: result = FUN_004c3a98(unit->obj->unk08, 0x13) > 0
+003caae8 scrCommUnitHasCountersB inferred script command: result = unit obj +0xb0 > 0 || +0xb8 > 0
+003cbadc isButton0Pressed inferred FUN_001656a0(0) != 0
+003cc670 stepObjBStart inferred if FUN_00387ad8: set fields, return 3
+003cd700 scrCommGetPartyEntryValue inferred script command: FUN_0019e52c(selected entry halfword +0x12c)
+003d2204 roundObjFinish inferred finish round: release resources, advance counter, choose state
+003d2da0 sub68OwnerDestroyAll inferred cleanup calls, stop job, FUN_0049274c(sub), free DAT_00587f28
+003de124 sub68OwnerDestroy inferred FUN_00493154(), stop job, FUN_0049274c(sub), free DAT_00587f28
+003d37bc pairSourceGet inferred copies words +8/+0xc to outputs
+003d9174 words5Clear inferred zeros 5 words
+003de0e0 jobFlagObjStop inferred clears flag +0x1d via FUN_00203d04 when allowed, stops job
+003deeb4 partyEntryGetBit5 inferred (entry[0] & 0x20) >> 5
+003deecc partyEntryGetBit6 inferred (entry[0] & 0x40) >> 6
+003df538 playerSyncPair2A inferred clears +0x5e, copies +0x1c/+0x1e to +0x2a/+0x2c
+003df6a4 playerGetWords inferred copies 4 words at +0x34 (and unit halfword) to out
+003dfd5c countUnlockedSlots inferred slot count from bits 0x77..0x7a, max 8
+003dfe2c playerPackedEntryLow10 inferred packed[index] & 0x3ff
+003dfea0 playerPackedEntryHigh inferred packed[index] >> 10
+003dfe60 playerAlignmentClass inferred 5/4/1 from unk60 thresholds ±9
+003dff08 playerAlignmentExtreme inferred id 4: unk60 >= 800; id 5: unk60 <= -800
+003dff50 playerSyncPair2AOnce inferred copies +0x1c/+0x1e to +0x2a/+0x2c
+003e0044 playerHasFlagBit inferred (player->unk5e & (1 << bit)) != 0
+003e00dc playerClearFlagMask inferred player->unk5e &= ~mask
+003e43c8 updateUnlockedEntryCount inferred counts unlocked entries from bitset bytes 9..11, stores to party+0x1ca3
+003e5414 linkHolderCallFirst inferred FUN_004ffb58(first->data) if set
+003e544c linkHolderCopyWords inferred copies 3 words at data+0x1b4 to out
+003e549c linkHolderApplyFirst inferred FUN_003fe86c(first->data, value, 2) if set
+003e5504 linkHolderRunAll inferred FUN_003fd76c(data, arg) for first and the 3 slots
+003e56f0 linkHolderCheckFirst inferred FUN_004ffba8(first->data) if set
+003e5ae8 fourPtrsAllNull inferred all of +4/+0x1c/+0x78/+0xd4 are NULL
+003e5b1c linkHolderSetFlag inferred sets bit 0 of flags of linked data
+003e5b9c linkHolderClearFlag inferred clears bit 0 of flags of linked data
+003e6878 stateAtCIs4 inferred +0xc == 4
+003e6bc4 words3Clear inferred zeros 3 words
+003e6bd8 bufProcRelease inferred frees +4 buffer and +8 script process
+003e6e90 stepStateBattleStart inferred state machine step: wait for inputs 3/3, start job, next state 9/10
+003e84cc btlSlotStateIsNot456 inferred table4d30[index] not in {4,5,6}
+003e9b28 valueAtF0IsReady inferred FUN_002626e0() && unkf0 >= 0
+003eaa6c pairQueueAppend inferred entries[count++] = {value, key}
+003eda04 halfRecClear inferred zeros 4 halfwords at +0x1ce
+003ee080 btlReleaseEntries inferred FUN_0040a244(obj) for each of 12 entries, clearing
+003ef9b8 halfTableGet inferred values[index] if index < count else 0
+003eec8c btlStartEntries inferred steps each entry through two start-up phases; true when all done
+003f01a4 btlSelectMode4D74 inferred unk4d74 = bit 0x8c ? 2 : 3
+003f0240 btlClearMode4D74 inferred unk4d74 = -1
+003f24a0 btlSwitchId4CE4 inferred stop previous, start id, remember
+003f298c btlSlotStateIs4To7 inferred table4d30[index] in 4..7
+003f2230 btlResetSlot inferred resets slot arrays at +0x4d18.. for index, sets target
+003f2f0c wordByteClear inferred word=0; flag=0
+003f3d44 valueIs1 inferred *p == 1
+003f3fcc obj48Arm inferred unk48=1; unk4c=value; unk50=0
+003f525c pair40Set inferred stores words +0x40/+0x44
+003f995c state40CIsNot4 inferred +0x40c != 4
+003f9fdc bufBlockFree inferred stores first, frees 3 buffers and block
+003fd508 partyCopyRecord100 inferred rt_memcpy(party + 0x100, src, 0x44)
+003fd528 gameBlockGetArea221AA inferred FUN_0014af84() + 0x221aa
+003fd56c partyFlagRange inferred clears party block, sets bit 0x20 on entries 0x15e..0x18f
+003fd6b0 flagsAtSetBits01 inferred *FUN_002840c4(i) |= 3
+003fd6c8 flagsAtGetBit0 inferred *FUN_002840c4(i) & 1
+003fd708 flagsAtGetBit1 inferred (*FUN_002840c4(i) & 2) >> 1
+003ff17c flagsBGetBit0 inferred *FUN_002840e0(i) & 1
+003ff190 flagsBGetBit1 inferred (*FUN_002840e0(i) & 2) >> 1
+003ff1f4 flagsBGetBit2 inferred (*FUN_002840e0(i) & 4) >> 2
+003fcf5c nkdwLoaderParse inferred one-time parse of NKDW file header into table pointers
+0040132c objectOwner3Release inferred shuts down DAT_0056fcc0 object, releases 3 owned objects
+0040223c workOwnerRelease inferred releases work ref (+8) and 3 buffers (+0x10)
+004057dc sortOwnerRun inferred sorts table +0x408 with comparator by mode (0x34/0x1b)
+00406204 objectVectorClear inferred releases each object via vtable, then empties vector
+004063a4 table108Owner inferred owner->table + index (8-byte entries)
+00407360 linkSlotSetFlag1C inferred sets/clears flag bit 0 of link1C data when +0x15 set
+00407424 linkSlotSetFlag20 inferred sets/clears flag bit 0 of link20 data when +0x15 set
+0040816c countersGetB inferred counters->b[index]
+00409cd8 countersRaiseA inferred a[index] = max(a[index], value)
+00409d8c countersAddSaturating inferred a[index] += value saturating
+00409dbc countersGetA inferred counters->a[index]
+004085c0 ifaceOwnerGetAndSet inferred *out = vtbl->get(arg); vtbl->set(arg, value)
+00408770 vtblHolderInit557bbc inferred stores vtable DAT_00557bbc
+0040970c block5B8OwnerGetBlock inferred &owner->block5b8
+0040978c block530OwnerReset inferred FUN_00187a84(owner); FUN_00187d90(handle, &block1198); clear +0x5f8
+00409dd4 targetOwnerArm inferred if FUN_00341930(target): arm inner object
+00409f80 filter4PolyBaseDestroy inferred restore base vtable, free resources, free object
+0040a4b4 isFlag10Set inferred FUN_001519ac()->unk10 != 0
+0040a548 setFlag10 inferred FUN_001519ac()->unk10 = 1
+0040a75c tableByteGet1 inferred byte 1 of FUN_0037d494(index)
+0040a7cc tableFlagBit2 inferred (*flags & 4) >> 2 of FUN_0037d494(i)
+0040a7e4 tableFlagBit0 inferred *flags & 1 of FUN_0037d494(i)
+0040a7f8 tableFlagBit1 inferred (*flags & 2) >> 1 of FUN_0037d494(i)
+0040a810 tableClearFlags300 inferred clears flags of 300 entries
+0040de1c chainCountIdUnflagged inferred count nodes with id and flag bit 2 clear
+004120f8 isZero inferred *p == 0
+00412648 slotInit inferred sets fields, FUN_00412854(slot), marks used
+00412fd8 slotReset inferred resets slot fields to idle (unk08=0xff, unk20=0x2010000)
+00415450 filter4PolyBaseDestroy2 inferred restore base vtable, free resources, free object
+004154b8 targetOwnerArm3 inferred if FUN_00341930(target): arm inner object (state 3)
+004160e0 filter4PolyExtDestroy inferred extended filter destroy: free extra, base destroy
+00416294 destroyAndFree inferred FUN_002e3328(FUN_004162a4(obj))
+00417674 sceneObjDestroy inferred scene teardown: resets, closing se, frees buffers/processes
+00418130 partyEntrySetBit0AndFlag80 inferred e[i].bits |= 1; e[i].flags |= 0x80
+0041815c partyEntryBitsBit5 inferred (e[i].bits & 0x20) >> 5
+00418584 partyEntryFlagsBit3 inferred (e[i].flags & 8) >> 3
+004185a4 partyEntrySetBitsBit4 inferred e[i].bits |= 0x10
+004185ec partyEntryFlagsBit1 inferred (e[i].flags & 2) >> 1
+0041860c partyEntryBitsBit3 inferred (e[i].bits & 8) >> 3
+004186c0 partyEntryBitsBit1 inferred (e[i].bits & 2) >> 1
+004186f4 partyEntryBitsBit4 inferred (e[i].bits & 0x10) >> 4
+00418858 partyEntryGetByte1 inferred e[i].byte1
+004188e0 flag0CSet inferred +0xc = 1
+0041a080 itemTableClear inferred frees items, handle, item array, resets count
+0041a408 tablePairDestroy inferred vtable reset, clear both item tables (twice), free
+0041c44c pair10Clear inferred zeros +0x10/+0x14
+00420dd8 state2CIs4 inferred +0x2c == 4
+00421248 state2CIsNot1 inferred +0x2c != 1
+004222dc childOwner10Release inferred clears child->unk24, releases child, clears pointer
+0042326c counterPairReset inferred if FUN_005135d0(obj): zero counters
+0042348c counterPairRemaining inferred unk58 - unk5c
+00423654 deblockerHandleRelease inferred release handle, clear
+00423c44 playHandleStart inferred start handle once
+00423fa8 vcallSlot0ThenSlot1 inferred b->slot0(b); a->slot1(a, b)
+00423fe4 vcallSlot0ThenSlot12 inferred b->slot0(b); a->slot1(a, b)
+0042442c block158OwnerCheck inferred sets +0xc = 7 when FUN_0042337c fails
+00424e6c block158OwnerReady inferred ready check of block at +0x158
+004250d0 table46COwnerGet inferred table[index] at +0x46c
+00425430 block158OwnerHasRemaining inferred FUN_0042348c(block158) != 0
+0042616c vtblHolderInit557f34 inferred stores vtable DAT_00557f34, releases handle
+004261bc vtblHolderInit557f7c inferred stores vtable DAT_00557f7c, releases handle
+004262b4 resetFlag5891A4And6530 inferred if DAT_005891a4: run, clear, then FUN_00426530()
+004262fc resetFlag5891A4And65f8 inferred if DAT_005891a4: run, clear, then FUN_004265f8()
+00427348 halfPair48LowByteA inferred unk48 & 0xff
+00427354 halfPair48LowByteB inferred unk4a & 0xff
+00427d34 recordTableAppend inferred copies 0x40 bytes to table[count++]
+00429f6c fileHolderTryRead inferred TryRead(&file->base, buffer, size, offset)
+0042b164 objectReleaseIfSet inferred object->release() if not NULL
+0042b280 vcallSlot0With3 inferred FUN_001884c8(1); obj->slot0(obj, a, c, d)
+0042ce1c registerObj8Holder inferred FUN_001bd438(&DAT_00643310, obj) when +8 set
+00430ec8 releaseOrCopyHandle inferred copy or release by flag, returns first
+00430ef0 releaseOrCopyHandle2 inferred copy or release by flag, returns first
+00430f2c handlerRefForward inferred DAT_005c1484.handler->slot0(handler, a, b) if set
+00431140 lookupTable5B47D0 inferred DAT_005b47d0[index] or 0 (index < 0x7)
+00431158 lookupTable5B44A4 inferred DAT_005b44a4[index] or 0 (index < 0xbb)
+004311a8 lookupTable5B47A0 inferred DAT_005b47a0[index] or 0 (index < 0xc)
+00431400 wordsFlagClear inferred zero 3 words and flag
+004315bc classifyPair inferred 0/1/2 from (a,b)
+00434668 halfSourceNext inferred sink->value = values[index++], flag = 0
+004351a8 words2Clear inferred zero 2 words
+00438930 words3Clear2 inferred zero 3 words
+0043b9f0 matrixSetTranslation inferred 4x4 identity with translation column (words)
+0043bfdc initBlockE30 inferred clear 0xe30 bytes, first halfword = 3
+0043c2a8 clearBlock10808 inferred sysMemClear(block, 0x10808)
+0043cddc md5Init inferred MD5 init (67452301 efcdab89 98badcfe 10325476)
+0043f990 mul12 inferred index * 12
+0043d604 entry3F94Address inferred base + 0x3f94 + index * 12
+00441f48 appletIsRegistered406 inferred nn_applet_CTR_detail_IsRegistered(0x406)
+00442c5c setMinus1ReturnPtr inferred *p = -1; return p
+004464dc ifaceHolderDestroy inferred vtable reset, iface release, clear 4 handle pairs
+0044949c ifaceOwnerForEach49c inferred slot3 for each element of range +0x164..+0x168
+004494fc ifaceOwnerForEach4fc inferred slot3 for each element of range +0x164..+0x168
+00449544 ifaceOwnerForEach544 inferred slot3 for each element of range +0x164..+0x168
+004509fc handlerTableDispatch1 inferred DAT_005c1d10[kind==0x80000000 ? 0 : 1](obj)
+00451684 handlerTableDispatch2 inferred DAT_0059dae4[kind==0x80000000 ? 0 : 1](obj)
+0045b510 setFourMinus1 inferred sets four consecutive words to -1
+0045b830 soundHandleDetachReturn inferred DetachSound(h); return h
+0045bb30 ownerRef20Clear inferred (*ref)->unk20 = 0 if set
+0045c11c installVtbl55BDE0 inferred FUN_00460e9c(arg,0)->vtbl = &DAT_0055bde0
+0045f46c obj50Set inferred +0x50 = value; +0x9d = flag
+0045f6d8 counters3Advance inferred increments each counter below its limit
+0045f718 word14Clear inferred +0x14 = 0
+0045f780 vslot9ObjRefresh inferred store flag, re-register, call slot 9
+0045f7dc soundOwnerDetach inferred DetachSound(obj->sound)
+0045fb28 word8HolderSetFromTable inferred obj->unk10 = DAT_0054bcdc[index]
+0045fb88 word8HolderCopy0CTo14 inferred +0x14 = +0xc
+004606b0 obj118Reset inferred FUN_0045f268(obj); unk118=0; unk120=1; unk121=0
+00460a5c wordsFlag8Reset inferred if flag: zero
+00460b34 range18Set inferred sets +0x18/+0x1c, -1 for +0x20/+0x24
+004611d0 vtblHandleInit55C11C inferred vtbl = DAT_0055c11c; handle = 0
+004617d0 words2Clear2 inferred zero 2 words
+004617e0 wordsFlagReset inferred if flag: zero
+00461804 words38Clear inferred zero +0x38..+0x40
+00461e58 voiceOwnerClear inferred FUN_001d2384(v) for each voice; clear list
+00461e8c halfArrayOwnerGet inferred &values[i] for i < 16
+00461ea8 voiceOwnerSetPaused inferred pause/resume active voices
+00461f10 voiceOwnerRefresh inferred refresh active voices
+00462980 callerARelease3C inferred FUN_0045b96c(unk24) when +0x3c set
+004658a8 callerARelease78 inferred FUN_0045b96c(unk24) when +0x78 set
+00462664 voiceOwnerDestroy inferred vtable reset, stop/release voices, reset
+00463298 constructTrackBase inferred FUN_004625c0(obj)->vtbl = &DAT_0055c270
+004632b0 playerInitReset inferred idle reset of player init fields
+00465c8c sinkOwnerForward inferred owner->sink->slot2(sink, owner, a, b)
+00466810 voiceStateSetIdle inferred set state 4, lower priority when idle
+00466d04 obj118Reset2 inferred FUN_0045f268(obj); unk118=0; unk120=1; unk121=0
+004693d4 jobStateObjWaitDone inferred job==2 -> state 4
+0046a0b8 jobStateObjWaitDone2 inferred job==2 -> state 4, FUN_0019ea64(0)
+0046a33c setBit0 inferred *flags |= 1
+0046b178 stateAt4IsAbove2 inferred +4 > 2
+0046bba0 dataTable28Type1GetEntry inferred entry (0x40) of data table 0x28 type 1 or NULL (2nd arg is the index)
+0046bbd8 dataTable27GetEntry inferred entry (0x88) of data table 0x27 type 0 or NULL (2nd arg is the index)
+0046bc3c dataTable28Type0GetEntry inferred entry (0x40) of data table 0x28 type 0 or NULL (2nd arg is the index)
+0046bc1c dataTable27Count inferred dataTableGetCount(dataTableGet(0x27,0))
+0046be60 aocDrawText8 inferred builds type 8 record, FUN_001b2ebc on display
+0046bed0 aocDrawText7 inferred builds type 7 record, FUN_001b2ebc on display
+0046a0f0 idOwnerGetRecordHalf inferred *FUN_001ad9b4(id & 0xffff)
+00468878 pickObjStart inferred pick entry (key290 else key284) and start job
+00465120 voiceBankStop inferred stop all voice slots and unregister
+00460328 taggedHolderRelease inferred release tagged object when +0x50/+0x51 set
+00471200 aocRunType32 inferred FUN_00472350 when FUN_001b2bd8(a,0x32,0,c)
+00471940 aocClearFlagD_C inferred clears byte +0xd of FUN_001b2ca4(a,0xc,b)
+00471e60 aocClearFlagD_10 inferred clears byte +0xd of FUN_001b2ca4(a,0x10,b)
+00472514 flagObjAdvance inferred bits 0x10 and 0x20 -> state 3, reset blocks
+004731a4 gameBlockGetArea27E98 inferred FUN_0014af84() + 0x27e98
+00473244 gameBlockByte27E98Is1To3 inferred 1 <= byte@0x27e98 <= 3
+004733bc destroyAndFree2 inferred FUN_002e3328(FUN_004d0ba4(obj))
+00473d28 block88OwnerCheck inferred FUN_0047d754(&obj->block88) != 0
+00473d40 countOwnerIsValidIndex inferred index < count
+00474aec holderOwnerFree inferred release and free holder
+00474b18 vtblPairInit55C724 inferred vtbl = DAT_0055c724, clear fields
+00476fb4 restartObjRun inferred restart sequence with FUN_003d54f8
+00478a70 cycleWorkStep inferred counter = (counter+1) % 0x28; flag 0x200 when > 0x14
+0047b1e4 jobFlagsWorkStop inferred clears bits 8-9, stops job
+0047dacc startsWithH inferred *text == 'h'
+0047dae0 isEmptyString inferred *text == 0
+0047df1c scriptHolderFree1 inferred frees buf0c/buf10/proc14 and runs FUN_0037b450 when +8 set
+0047e32c scriptHolderFree2 inferred frees buf0c/buf10/proc14 and runs FUN_0037b450 when +8 set
+0047e3e4 scriptHolderFree3 inferred frees buf0c/buf10/proc14
+0047f2d8 repackWord inferred bit-field repack when both fields non-zero
+0047df7c scriptHolderBReset inferred state 0xc, flag, free buffers and process
+0047f664 callJyoucyuGetTableEntry1 inferred jyoucyuGetTableEntry(1)
+0047f778 callJyoucyuGetTableEntry1B inferred jyoucyuGetTableEntry(1)
+0047fb50 unitMatchesAlignment inferred unit flags vs player alignment class
+0048285c stateSetterSetFlag8 inferred flags |= 8
+00487110 stateSetterSetState1 inferred state = 0x1; unk08 = 0
+0048b858 stateSetterSetState5 inferred state = 0x5; unk08 = 0
+0048ba34 stateSetterSetState15 inferred state = 0xf; unk08 = 0
+0048c1ac stateSetterSetState16 inferred state = 0x10; unk08 = 0
+00486304 stateSetterIsState4Or6Or16 inferred state in {4,6,0x10}
+0048c380 stateSetterFlagsClear inferred flags == 0
+00483abc stateSetterSetFromBase inferred state = base + 100; unk08 = value
+00483b30 twoObjectsRelease inferred release first/second via vtable
+004850c4 stateSetterStart9 inferred FUN_004853fc(obj, 9); first byte = 1
+004850e4 rect48Init inferred FUN_004853fc(obj,1); unka4=0x140; unka8=0; unkac=0x140
+0048b11c block12DCOwnerStart6 inferred unk12d1=1; FUN_00184758(&block12dc, 6, 0)
+0048b244 block66OwnerClear inferred FUN_002e6dd4(&block66, 0x100)
+0048b250 block3E6OwnerClear inferred FUN_002e6dd4(&block3e6, 0xa0)
+00483d00 jobAt26CWaitDone inferred job==2 -> state 2 and se 0x97
+004828a4 params95Set inferred stores six parameters and arms +0x95
+004842cc screenCloseDestroy inferred closing sound, release entries/textures/process/buffers
+004827e0 owner1DDestroy inferred vtable reset, release first/second (after FUN_001aea28)
+004915d4 pair20638Set inferred stores a, b at +0x20638/+0x2063c
+0049204c sub20634Reset inferred unk20634=0; unk20648=0xa0; unk2064c=0x78
+0049274c texOwner1480Free inferred frees texture handle +0x1480, entry 0x28
+00492b84 sub68OwnerGetBlock60 inferred &DAT_00587f28->block60
+0049359c words2Copy inferred dst = src (2 words)
+0049364c pairAt8Get inferred out = {+8, +0xc}
+004937c4 dataTable2BType3GetEntry inferred entry (0x10) of data table 0x2b type 3 or NULL (2nd arg is the index)
+00493834 dataTable2BType1GetEntry inferred entry (0x18) of data table 0x2b type 1 or NULL (2nd arg is the index)
+00493888 dataTable2BType3Count inferred dataTableGetCount(dataTableGet(0x2b,3))
+004938b8 dataTable2BType1Count inferred dataTableGetCount(dataTableGet(0x2b,1))
+0049391c halfDifference inferred FUN_0049c9a0(b) - FUN_0049c9a0(a)
+00496674 selector16038Pick inferred picks +0x16038 / +0x1603c / +0x16040 by flags
+0049cf5c dataTable17Type1GetEntry inferred entry (0x8c) of data table 0x17 type 1 or NULL (2nd arg is the index)
+0049cfcc dataTable17Type0GetEntry inferred entry (0x80) of data table 0x17 type 0 or NULL (2nd arg is the index)
+0049d030 dataTable17Count inferred dataTableGetCount(dataTableGet(0x17,1))
+0049277c rectRecRead inferred reads record shorts and rect pair
+004a69bc compareByRankAscending inferred FUN_002e5220(*a) - FUN_002e5220(*b)
+004a6e30 compareByRankDescending inferred FUN_002e5220(*b) - FUN_002e5220(*a)
+004a6ce4 words4At20Clear inferred zero 4 words at +0x20
+004ac06c resetFlagGroupsCD inferred FUN_0014384c(0xc/0xd), FUN_001acf98 for each index
+004ac19c flagGroupsCDAtLeast11 inferred >= 11 of the 11 entries set
+004acfc4 registerFour4AD02C inferred registers four callbacks (modes 1,3,2,4)
+004a68cc constructFlagged4A inferred construct base, set vtable, FUN_004a4bc8, clear +0x860
+004a374c screen4AFinish inferred job done -> state 2 and se
+004a1d54 screen4AEnter inferred state 0xd setup
+004a77c0 owner4ASetSizeAndCall inferred sets size on object then calls vtable slot 4
+004a4a8c menu4BUpdate inferred page tracking / confirm / scroll
+004b9680 menu4CSetValue42 inferred copy value into +0x42, set flag 0x10
+004ba660 menu4CGetEntry inferred obj->list[index]
+004ba66c menu4CClearFlag84 inferred flag84=0; FUN_004d06e4(&block74)
+004ba67c isFlag1F0Set inferred FUN_0018206c(0x1f,0) != 0
+004ba790 menu4CGetCurrentEntry inferred list[FUN_004cfe4c(obj)]
+004bad0c resetFlagGroup1F inferred FUN_0014384c(0x1f); FUN_001acf98(0x1f,0)
+004bb020 menu4CStartBlock74 inferred FUN_004d05c4(&block74,0x1f,5,10); flag84=1
+004bb048 freeTexEntry1F inferred FUN_0019a7f4(0x1f,0); asdTMTexTableFreeEntry(0x1f)
+004bb0bc dataTable33Type0GetEntry inferred entry (0x88) of data table 0x33 type 0 or NULL (2nd arg is the index)
+004bb0f8 dataTable33GetEntryByGroup inferred entry (0xd0) of table 0x33 type group+1
+004bb138 loadDataTable33 inferred FUN_003f86c8(0x33)
+004bb140 dataTable33Type0Count inferred count of table 0x33 type 0
+004bb158 dataTable33GroupCount inferred count of table 0x33 type group+1
+004bb170 dataTable33Entries inferred entries of table 0x33
+004ba83c menu4CScrollToKind inferred scrolls to entries of given kind
+004ba7a8 menu4CReleaseSlots inferred free flagged slots; 1 when all pairs clear
+004bad28 menu4CReset inferred reset page state and mark next slot
+004b87e4 owner4DDestroy inferred frees buffers/processes/textures
+004bb184 dataTable33TypeCount inferred count of table 0x33 type
+004bb198 unloadDataTable33 inferred FUN_003f86f8(0x33)
+004bb1a8 clearThreeHalfwords inferred zero 3 halfwords
+004bb4e0 ownerBufDestroy inferred vtbl set, free two buffers, free self
+004bc2c4 dataTable3Type0Count inferred count of table 3 type 0
+004bccd0 halves34Copy inferred copies 8 halfwords at +0x34
+004bd21c getUnlockedSlotCount inferred 4..8 based on flags 0x7b..0x7e
+004bd340 bitsAt60Test inferred test bit in halfword +0x60
+004bd30c dispatchIfFound inferred FUN_002305d0 when FUN_001ab854 finds a match
+004bd3ec bitsAt60Set inferred set bit in halfword +0x60
+004bd400 bitsAt60Clear inferred clear mask bits in halfword +0x60
+004c39b0 source4CCopyHalves inferred copies halves from the first non-null source
+004c6e10 isOutsideRange4To53 inferred 0 when 4 <= value < 0x36
+004c86cc halfTable152TopIs2 inferred values[index] >> 10 == 2
+004c97b4 ptrAt8Reset inferred FUN_001a6f60(target, 0) when set
+004cb638 hasAnyOf3DC2 inferred (mask & 0x3dc2) != 0
+004ccd5c dataTable9Type3GetClamped inferred halfword at clamp(a-b+10,0,count-1)
+004cfd2c getMaskType5 inferred FUN_00164af0(0x5) | optional FUN_00164af0(0xe)
+004cfd5c getMaskB5 inferred FUN_001656a0(0x5) | optional FUN_001656a0(0xe)
+004cfd8c getMaskType6 inferred FUN_00164af0(0x6) | optional FUN_00164af0(0xf)
+004cfdbc getMaskType4 inferred FUN_00164af0(0x4) | optional FUN_00164af0(0xd)
+004cfdec getMaskType3 inferred FUN_00164af0(0x3) | optional FUN_00164af0(0xc)
+004cfe1c getMaskB6 inferred FUN_001656a0(0x6) | optional FUN_001656a0(0xf)
+004d00a4 setListWindow inferred sets the two window values of the mode-dependent sub block
+004d0310 sub10OwnerStart inferred FUN_00228b04(&block10,1) when +8 set
+004d03b4 flagsDESet inferred unk0d=0; unk0e=1
+004d03ec setFullScreenRect inferred FUN_00152cf8(0,0,320,240,0)
+004d0434 sendEvent100020F inferred FUN_00169ddc(0x100020f)
+004d0440 sendEvent100020D inferred FUN_00169ddc(0x100020d)
+004d044c sendEvent100020E inferred FUN_00169ddc(0x100020e)
+004d0458 sendEvent1000210 inferred FUN_00169ddc(0x1000210)
+004d066c selectOwnerGetSelected inferred selected when active else -1
+004d0720 selectOwnerReset inferred clears +0x11/+0x12, selected = -1
+004d06e4 releaseEntriesA inferred FUN_001641c4 per entry; count at +0x30 = 0
+004d097c releaseEntriesB inferred FUN_001641c4 per entry; count at +0x5a = 0
+004d0a8c size40Set inferred width/height at +0x40/+0x44
+004d0eac isPartySlotBit1Clear inferred bit 1 of slot flags is clear (or index < 0)
+004d84e8 isEntryUsable inferred 0 when empty or type 10 with obj[10] < 1
+004d8518 callOnHandleField4A inferred FUN_004ff98c(handle->value) when set
+004d8638 callOnHandleField4B inferred FUN_003fd7b4(handle->value) when set
+004d8650 callOnHandleField4C inferred FUN_003fdb18(handle->value) when set
+004d8804 callOnHandleField4D inferred FUN_003fd784(handle->value) when set
+004d87bc setHandleEnabled inferred sets/clears bit 0 of the inner flags
+004d88c0 clearWord inferred *value = 0
+004d9e20 optionsApplyOverride inferred when flag 1 set: FUN_002305d0 and clear +0x12c
+004d9fe4 optionsResetIfNoFlag inferred clears the block when unk62 == 0x4b1
+004da2d0 optionsSetFlag1 inferred flag 1 set, unk62 and unk12c cleared
+004da2f8 optionsClearFlag1 inferred flag 1 cleared, unk62 and unk12c cleared
+004da900 recSet148 inferred sets +0x148/+0x14a
+004da914 recSet150 inferred sets +0x150/+0x154
+004daaf4 recSet16E inferred sets +0x16e/0x170/0x172
+004db034 recSet14C inferred sets +0x14c/+0x14e
+004db288 recSet174 inferred sets +0x174/0x176/0x178
+004dbde8 recSet17B inferred sets +0x17b/+0x17c
+004dbf54 wordAt1B0Clear inferred +0x1b0 = 0
+004db29c rec16ASet inferred sets +0x16a, optionally +0x16c
+004dc6fc ptrTable44FreeAll inferred asdMemFree each non-null pointer
+004d88cc objectRefRelease inferred release *ref via vtable and clear
+004d8f04 state4DStart inferred unka0 = 1; unkbc = 0
+004d8d14 state4DStop inferred
+004d93e8 vtblObjInit inferred calls slot 4, zeroes counters, stores slot 6 result
+004d9470 vtblObjRemove inferred decrements counters, calls slot 7
+004d9168 treeFreeNodes inferred recursive post-order node free
+004d90dc treeClear inferred frees nodes, resets to empty
+004ec93c hasFlag80Or1000 inferred flags & (0x80|0x1000) != 0
+004f282c words10CopyHighToLow inferred w[0..2] = w[7..9]
+004f3fb4 obj4FStartSwitch inferred state 3 after FUN_003f9c0c
+004f5e1c obj4FQueryPair inferred two FUN_00335660 lookups stored at +0x1f54/+0x1f58
+004f9024 obj4FQueryPairB inferred two FUN_003c609c lookups stored at +0x1f54/+0x1f58
+004f6184 state339CFinish inferred flag 4 -> flag 8 after FUN_0031b9d4
+004f99fc state339CSetMode10 inferred mode bits (0xe0) = 0x10
+004f63bc clearTwo200Buffers inferred sysMemClear x2
+004f65a4 objRef1F50Release inferred release object at +0x1f50
+004f6aa0 obj33C8IsEnabled inferred bit 13 of flags when link has flag 1
+004f7ca4 runFourUpdates inferred four updates in order, returns 1
+004ffb58 slots4FGetActiveValue inferred first active of three sources else 0xffff
+004f6e20 obj4FSlotsReset inferred resets 0x32 slots of 0x3c bytes at +0x1398
+004f7a58 resolveBattleValue inferred 5 in battle-lock, else record value or default
+004f2518 flags64CSetTarget inferred FUN_001f5180(+0x58, (s16)z, 0, x, y); flag 0x400000
+004f7590 obj4FSlots28Reset inferred resets 0x32 slots of 0x28 bytes at +0x190, releasing objects
+005001a4 table30GetEntry inferred entry (0x30 bytes) of the table block, or NULL
+005001f8 table30GetEntryB inferred entry (0x30 bytes) of the table block, or NULL (clears out first)
+00502328 validateSetupArgs inferred returns SDK error codes
+00506f7c blendOpAndCheckB9BC inferred
+0050704c blendOpAndCheckBE50 inferred
+00507dcc getSectionAt4_7dcc inferred base + *(s32*)(base+0x4)
+005085f4 getSectionAt1C_85f4 inferred base + *(s32*)(base+0x1c)
+00508600 getSectionAt14_8600 inferred base + *(s32*)(base+0x14)
+0050883c getSectionAt10_883c inferred base + *(s32*)(base+0x10)
+00508848 getSectionAt10_8848 inferred base + *(s32*)(base+0x10)
+0050abd4 getSectionAtC_abd4 inferred base + *(s32*)(base+0xc)
+0050af5c getSectionAtC_af5c inferred base + *(s32*)(base+0xc)
+00508dc8 isValidFileHeader inferred magic 0x4d545343 and version in range
+005090d4 soundInfoUserParamIfAny inferred
+0050af68 getSectionPlusOffset inferred *(base+4) + offset
+0050af74 getTableSectionByIndex inferred
+0050d3a0 isSecondWordZero inferred w[1] == 0
+0050d6e4 clearThreeWords inferred
+0050d6f8 clearWordAndByte inferred
+0050d708 clearWordHalfByte inferred
+0050d71c clearTwoWords inferred
+0050d72c clearTwoWordsAndByte inferred
+0050d778 fillThreeWordsWithByte inferred
+0050d794 fillTwoWordsWithByte inferred
+00501f28 copy0x70Bytes inferred rt_memcpy(dest, src, 0x70)
+00507cbc soundLoaderLoadFile inferred tries source then archive, else loads via vtable
+0050d138 vtblCopyAssign inferred slot6 copy then unk14 when slot4 reports true
+0050d558 posOwnerReach inferred marks reached when position is within [low, high]
+00512850 returnMinusOne1 inferred returns -1
+00512858 returnMinusOne2 inferred returns -1
+00512860 returnMinusOne3 inferred returns -1
+00512868 returnMinusOne4 inferred returns -1
+00513ff0 readInnerWord6 inferred reads word 6 of the block at inner+0x141c; returns ref == NULL
+005144c8 words4BClear inferred
+00514bd4 expHeapBaseDestroyA inferred sets vtable, finalizes, base destructor
+00514c88 expHeapBaseDestroyB inferred sets vtable, finalizes, base destructor
+00515384 variantSetByteA inferred sets type/arg and copies value
+00515550 variantSetByteB inferred sets type/arg and copies value
+0051539c variantSetWordA inferred sets type/arg and copies value
+00515568 variantSetWordB inferred sets type/arg and copies value
+005153b4 variantSetHalfA inferred sets type/arg and copies value
+00515580 variantSetHalfB inferred sets type/arg and copies value
+0051553c variantSetPlain inferred type 1, value
+00512ebc recordFree inferred frees buf3, buf0 and the record via the allocator free callback
+00513f90 runItemsOfInner inferred
+005210a4 listNodeUnlinkOrFree inferred unlinks node, or frees the payload when alone

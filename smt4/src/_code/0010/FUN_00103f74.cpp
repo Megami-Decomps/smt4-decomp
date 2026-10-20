@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Sys4650a0.h"
 
 extern "C" {
 
-extern unsigned char DAT_004650a0; /* 0x4650a0 */
-
-
-unsigned char FUN_00103f74(int param_1)
-
+/* Sets DAT_004650a0.unk10 when the argument is nonzero; returns whether it was. */
+u8 FUN_00103f74(s32 value)
 {
-  if (param_1 != 0) {
-    (*(int *)((unsigned char *)&DAT_004650a0 + 0x10)) = param_1;
-  }
-  return param_1 != 0;
+    if (value != 0) {
+        DAT_004650a0.unk10 = value;
+    }
+    return value != 0;
 }
 
 } /* extern "C" */

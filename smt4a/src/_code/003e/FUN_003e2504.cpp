@@ -42,7 +42,7 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_004aa2e0. */
 /* Supplied declaration required: FUN_004d7a70. */
 /* Supplied declaration required: FUN_004d7fe4. */
-extern int FUN_004d84e8(void);
+extern int isEntryUsable(void);
 
 
 unsigned int * FUN_003e2504(unsigned int *param_1,int param_2)
@@ -55,7 +55,7 @@ unsigned int * FUN_003e2504(unsigned int *param_1,int param_2)
   
   puVar3 = (unsigned int *)(param_2 + 0x45a0);
   if (param_1[4] != 0) {
-    temp_v0 = FUN_004d84e8();
+    temp_v0 = isEntryUsable();
     if (temp_v0 == 0) {
       if ((*(unsigned int *)(param_2 + 0x45a4) & DAT_0057385c) == 0 && (*puVar3 & DAT_00573858) == 0) {
         FUN_003ed6e8(param_2);

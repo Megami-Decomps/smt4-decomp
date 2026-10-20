@@ -8,7 +8,7 @@ int FUN_00190fc8(unsigned char [16], unsigned int);
 int FUN_001cbd00(unsigned int, int);
 int FUN_0045f9fc(int, int);
 int FUN_0045fab0(int, int);
-int FUN_0045fb28(int, int);
+int word8HolderSetFromTable(int, int);
 int FUN_00460a7c(unsigned char [16], unsigned int, int);
 int FUN_00466478(int, int, unsigned char *, int);
 int FUN_00466780(int, unsigned char [4], unsigned int, unsigned int);
@@ -27,7 +27,7 @@ extern unsigned char LAB_00462da8; /* 0x462da8 */
 /* Supplied declaration required: FUN_001cbd00. */
 /* Supplied declaration required: FUN_0045f9fc. */
 /* Supplied declaration required: FUN_0045fab0. */
-/* Supplied declaration required: FUN_0045fb28. */
+/* Supplied declaration required: word8HolderSetFromTable. */
 /* Supplied declaration required: FUN_00460a7c. */
 /* Supplied declaration required: FUN_00466478. */
 /* Supplied declaration required: FUN_00466780. */
@@ -78,7 +78,7 @@ unsigned int FUN_00462a18(int param_1)
       if (temp_v3 == 0) {
         return 0;
       }
-      FUN_0045fb28(temp_v2 + 0x98,*(unsigned char *)(param_1 + 0x8c));
+      word8HolderSetFromTable(temp_v2 + 0x98,*(unsigned char *)(param_1 + 0x8c));
       nw_snd_internal_CurveAdshr_SetHold(temp_v2 + 0x98,*(unsigned char *)(param_1 + 0x8f));
       FUN_0045fab0(temp_v2 + 0x98,*(unsigned char *)(param_1 + 0x8d));
       *(unsigned char *)(temp_v2 + 0xb0) = *(unsigned char *)(param_1 + 0x8e);

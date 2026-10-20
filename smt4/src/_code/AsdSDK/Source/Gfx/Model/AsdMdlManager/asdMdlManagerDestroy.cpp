@@ -36,7 +36,7 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
         asdMemFree(obj->records);
         obj->records = NULL;
     }
-    FUN_00152894(obj->node, obj->unk04);
+    FUN_00152894(obj->node, obj->request);
     removed = FUN_00153228(&g_asdMdlList, obj);
     if (removed != 0) {
         FUN_002b26d4(&g_asdMdlList);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001628c0(char *, unsigned int, int, unsigned int);
-int FUN_001633a0(int);
+int lcgRandomRange(int);
 int FUN_00184310(void);
 int dataTableGet(int, int);
 int FUN_002e6dd0(char *, int);
@@ -17,7 +17,7 @@ int rt_memcpy(unsigned char [4], int, int);
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_001628c0. */
-/* Supplied declaration required: FUN_001633a0. */
+/* Supplied declaration required: lcgRandomRange. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetCount(void);
@@ -75,7 +75,7 @@ void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   temp_v1 = 0;
   switch(param_2) {
   case 0:
-    temp_v2 = FUN_001633a0(2);
+    temp_v2 = lcgRandomRange(2);
     if (temp_v2 != 0) {
       if (temp_v2 != 1) {
         temp_v1 = 2;
@@ -85,7 +85,7 @@ void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     }
     break;
   case 1:
-    temp_v1 = FUN_001633a0(2);
+    temp_v1 = lcgRandomRange(2);
     if (temp_v1 != 0) {
       if (temp_v1 == 1) {
         temp_v1 = 5;
@@ -100,7 +100,7 @@ void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     temp_v1 = 0xb;
     break;
   case 3:
-    temp_v1 = FUN_001633a0(1);
+    temp_v1 = lcgRandomRange(1);
     if (temp_v1 != 0) {
       temp_v1 = 5;
       break;
@@ -108,7 +108,7 @@ void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     temp_v1 = 4;
     break;
   case 4:
-    temp_v3 = FUN_001633a0(9);
+    temp_v3 = lcgRandomRange(9);
     if (5 >= temp_v3) {
       temp_v1 = 3;
       break;
@@ -120,7 +120,7 @@ void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     temp_v1 = 4;
     break;
   case 5:
-    temp_v1 = FUN_001633a0(1);
+    temp_v1 = lcgRandomRange(1);
     if (temp_v1 != 0) {
       temp_v1 = 9;
       break;
@@ -137,7 +137,7 @@ void FUN_0015f490(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     temp_v1 = 1;
     break;
   case 9:
-    temp_v2 = FUN_001633a0(1);
+    temp_v2 = lcgRandomRange(1);
     if (temp_v2 == 0) break;
     temp_v1 = 10;
     break;
@@ -168,7 +168,7 @@ LAB_0015f650:
           temp_v3 = (unsigned int)puVar9[1];
         }
         if (temp_v8 && temp_v3 == param_4) {
-          temp_v3 = FUN_001633a0(99);
+          temp_v3 = lcgRandomRange(99);
           if (temp_v3 < *(unsigned char *)(temp_v1 + temp_v7 * 8 + 6)) {
             temp_v3 = 0xffffffff;
             temp_v1 = -1;

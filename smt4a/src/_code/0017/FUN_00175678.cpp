@@ -10,7 +10,7 @@ extern unsigned int DAT_005c0f64; /* 0x5c0f64 */
 extern unsigned char DAT_00646818; /* 0x646818 */
 
 /* Supplied declaration required: FUN_0019138c. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 unsigned char * FUN_00175678(void)
@@ -19,7 +19,7 @@ unsigned char * FUN_00175678(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  if (((DAT_005c0f64 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c0f64), temp_v0 != 0)) {
+  if (((DAT_005c0f64 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c0f64), temp_v0 != 0)) {
     FUN_0019138c(&DAT_00646818);
   }
   return &DAT_00646818;

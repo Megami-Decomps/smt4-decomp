@@ -11,7 +11,7 @@ int FUN_004249e8(int);
 int FUN_00424c4c(int);
 int FUN_00424ecc(int);
 int FUN_00513f84(unsigned int, unsigned int);
-int FUN_00513ff0(unsigned int, int *);
+int readInnerWord6(unsigned int, int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00424c4c. */
 /* Supplied declaration required: FUN_00424ecc. */
 /* Supplied declaration required: FUN_00513f84. */
-/* Supplied declaration required: FUN_00513ff0. */
+/* Supplied declaration required: readInnerWord6. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -94,7 +94,7 @@ void FUN_004257e4(int param_1,unsigned int param_2,unsigned int param_3,int para
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < 2);
       }
-      FUN_00513ff0(**(unsigned int **)(param_1 + 0x18),&temp_v5);
+      readInnerWord6(**(unsigned int **)(param_1 + 0x18),&temp_v5);
       if (temp_v5 != 0) {
         temp_v2 = 0;
         if (temp_v2 < *(int *)(param_1 + 0x484)) {

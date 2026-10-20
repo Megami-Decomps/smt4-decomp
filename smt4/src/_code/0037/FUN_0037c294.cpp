@@ -1,46 +1,39 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_0037c7d4(void);
 
-typedef struct fn_0037c294_arg0 fn_0037c294_arg0;
-struct fn_0037c294_arg0 {
-    unsigned char pad_0x0[0x34];
-    undefined4 field_0x34; /* +0x34 */
-    undefined4 field_0x38; /* +0x38 */
-    undefined4 field_0x3c; /* +0x3c */
-    unsigned char pad_0x40[0x4];
-    undefined4 field_0x44; /* +0x44 */
-    undefined4 field_0x48; /* +0x48 */
-    undefined1 field_0x4c; /* +0x4c */
-    undefined1 field_0x4d; /* +0x4d */
-    unsigned char pad_0x4e[0xa42];
-    undefined1 field_0xa90; /* +0xa90 */
-    unsigned char pad_0xa91[0x193];
-    undefined4 field_0xc24; /* +0xc24 */
-    undefined4 field_0xc28; /* +0xc28 */
-};
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x34];
+    /* 0x034 */ u32 unk034;
+    /* 0x038 */ u32 unk038;
+    /* 0x03C */ u32 unk03C;
+    /* 0x040 */ u8 unk040[4];
+    /* 0x044 */ u32 unk044;
+    /* 0x048 */ u32 unk048;
+    /* 0x04C */ u8 unk04C;
+    /* 0x04D */ u8 unk04D;
+    /* 0x04E */ u8 unk04E[0xA42];
+    /* 0xA90 */ u8 unkA90;
+    /* 0xA91 */ u8 unkA91[0x193];
+    /* 0xC24 */ u32 unkC24;
+    /* 0xC28 */ u32 unkC28;
+} Obj;
 
-/* Supplied declaration required: FUN_0037c7d4. */
-
-
-void FUN_0037c294(fn_0037c294_arg0 *param_1)
-
+void FUN_0037c294(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0037c7d4();
-  param_1->field_0x34 = 0;
-  param_1->field_0x38 = 0xffffffff;
-  param_1->field_0x3c = 0;
-  param_1->field_0x44 = 0;
-  param_1->field_0x48 = 0;
-  param_1->field_0x4c = 0;
-  param_1->field_0x4d = 0;
-  param_1->field_0xa90 = 3;
-  param_1->field_0xc24 = 0;
-  param_1->field_0xc28 = 0;
-  return;
+    FUN_0037c7d4();
+    obj->unk034 = 0;
+    obj->unk038 = 0xffffffff;
+    obj->unk03C = 0;
+    obj->unk044 = 0;
+    obj->unk048 = 0;
+    obj->unk04C = 0;
+    obj->unk04D = 0;
+    obj->unkA90 = 3;
+    obj->unkC24 = 0;
+    obj->unkC28 = 0;
 }
 
 } /* extern "C" */

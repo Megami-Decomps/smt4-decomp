@@ -12,7 +12,7 @@ int FUN_001d1038(...);
 int FUN_001d10ac(...);
 int FUN_001d25ec(...);
 int FUN_002e3140(...);
-int FUN_002e56ec(...);
+int deletingDtor_002e56ec(...);
 int FUN_002fb0d4(...);
 int FUN_00429f38(...);
 int FUN_0046c528(...);
@@ -36,7 +36,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_2_stack;
 
-extern int FUN_0019241c(...); /* 0x19241c */
+extern int destroyObj0055c6e4(...); /* 0x19241c */
 extern int FUN_00471adc(...); /* 0x471adc */
 extern unsigned char LAB_00514a94; /* 0x514a94 */
 extern unsigned char LAB_00514b38; /* 0x514b38 */
@@ -54,7 +54,7 @@ extern int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001d10ac. */
 /* Supplied declaration required: FUN_001d25ec. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002e56ec. */
+/* Supplied declaration required: deletingDtor_002e56ec. */
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: FUN_00429f38. */
 /* Supplied declaration required: FUN_0046c528. */
@@ -133,7 +133,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
         return;
       }
       if (*(int *)(param_2 + 0x318) != 0) {
-        FUN_002e56ec(*(int *)(param_2 + 0x318),FUN_0019241c);
+        deletingDtor_002e56ec(*(int *)(param_2 + 0x318),destroyObj0055c6e4);
         *(unsigned int *)(param_2 + 0x318) = 0;
       }
       FUN_0046e334(&temp_v8,param_2);
@@ -304,7 +304,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
   *(unsigned int *)(param_2 + 0x314) = 0;
   *(unsigned int *)(param_2 + 0x350) = 0;
   if (*(int *)(param_2 + 0x318) != 0) {
-    FUN_002e56ec(*(int *)(param_2 + 0x318),FUN_0019241c);
+    deletingDtor_002e56ec(*(int *)(param_2 + 0x318),destroyObj0055c6e4);
     *(unsigned int *)(param_2 + 0x318) = 0;
   }
   FUN_00191f68(param_2);

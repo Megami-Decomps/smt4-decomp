@@ -8,7 +8,7 @@ int FUN_002a7324(...);
 int FUN_0031f718(...);
 int FUN_0032d0c8(...);
 int FUN_00334214(...);
-int FUN_00334434(...);
+int objBInitBlock19D0(...);
 
 int FUN_00228b04(...);
 int FUN_0022e774(void);
@@ -21,7 +21,7 @@ int FUN_002e2680(...);
 int FUN_002f3bc4(...);
 int FUN_003343c0(...);
 int FUN_0033449c(...);
-int FUN_003599e8(...);
+int screenSetColor670(...);
 int FUN_003a5094(void);
 
 int FUN_001517b4(...);
@@ -130,21 +130,21 @@ extern int FUN_002c2c4c(int);
 /* Supplied declaration required: FUN_00319aec. */
 extern unsigned int FUN_0031d18c(int);
 /* Supplied declaration required: FUN_0031d1b4. */
-extern int FUN_0031d864(void);
+extern int objIsNotInState0xF(void);
 /* Supplied declaration required: FUN_0031f718. */
-extern int FUN_0031fdf0(void);
+extern int region9100IsClear(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_0032d388. */
-extern int FUN_0032e21c(void);
+extern int stateAtF4IsActive(void);
 extern int FUN_00330b58(void);
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
-/* Supplied declaration required: FUN_00334434. */
+/* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 extern int FUN_0034919c(void);
 extern int FUN_00349af0(void);
 /* Supplied declaration required: FUN_0034c940. */
-/* Supplied declaration required: FUN_003599e8. */
+/* Supplied declaration required: screenSetColor670. */
 extern int FUN_0035a094(void);
 extern int FUN_0035db94(void);
 extern int FUN_0035dde8(void);
@@ -227,7 +227,7 @@ void FUN_003dc628(void)
   if (((((temp_v5 == 0) && (temp_v5 = FUN_0018719c(0x418), temp_v5 == 0)) ||
        ((temp_v5 = FUN_0020a2fc(), temp_v5 == 0 &&
         ((temp_v5 = FUN_0018719c(0x453), temp_v5 != 0 && (temp_v5 = FUN_0018719c(0x425), temp_v5 == 0))))))
-      || (((temp_v5 = FUN_0020a2fc(), temp_v5 == 0 && (temp_v5 = FUN_0031fdf0(), temp_v5 == 0)) ||
+      || (((temp_v5 = FUN_0020a2fc(), temp_v5 == 0 && (temp_v5 = region9100IsClear(), temp_v5 == 0)) ||
           (temp_v5 = FUN_0035dde8(), temp_v5 != 0)))) ||
      ((((temp_v5 = FUN_0020a2fc(), temp_v5 == 0 && (temp_v5 = FUN_0018719c(0x459), temp_v5 == 0)) &&
        (temp_v5 = FUN_002ab790(), temp_v5 == 0x19)) && (temp_v5 = FUN_0023c068(), temp_v5 == 0)))) {
@@ -257,7 +257,7 @@ void FUN_003dc628(void)
     FUN_0019de98(temp_v6,0xf4f4f4ff);
     *(int *)(temp_v9 + 0x33bc) = temp_v5;
   }
-  temp_v5 = FUN_0031d864();
+  temp_v5 = objIsNotInState0xF();
   if (temp_v5 == 0) {
     FUN_0020b660(0x2d);
     return;
@@ -620,7 +620,7 @@ LAB_003dcd84:
               }
             }
             else {
-              temp_v5 = FUN_0032e21c();
+              temp_v5 = stateAtF4IsActive();
               if (temp_v5 != 0) {
                 FUN_002309dc();
                 FUN_0038800c(4);
@@ -882,7 +882,7 @@ LAB_003dda0c:
                     temp_v6 = FUN_0036d18c();
                     FUN_0019de98(temp_v6,0xf4f4f4ff);
                     if (temp_v5 == 0x2f) {
-                      FUN_003599e8(0x48c722ff,1,0x12,0x15);
+                      screenSetColor670(0x48c722ff,1,0x12,0x15);
                     }
                   }
                 }
@@ -920,7 +920,7 @@ LAB_003dda0c:
                   temp_v6 = FUN_0036d18c();
                   FUN_0019de98(temp_v6,0xf4f4f4ff);
                   if (temp_v5 == 0x2f) {
-                    FUN_003599e8(0x48c722ff,1,0x12,0x15);
+                    screenSetColor670(0x48c722ff,1,0x12,0x15);
                   }
                 }
               }
@@ -956,7 +956,7 @@ LAB_003ddbfc:
               temp_v6 = FUN_0036d18c();
               FUN_0019de98(temp_v6,0xf4f4f4ff);
               if (temp_v5 == 0x2f) {
-                FUN_003599e8(0x48c722ff,1,0x12,0x15);
+                screenSetColor670(0x48c722ff,1,0x12,0x15);
               }
             }
           }
@@ -982,7 +982,7 @@ LAB_003ddd08:
         temp_v6 = FUN_0036d18c();
         FUN_0019de98(temp_v6,0xf4f4f4ff);
         if (temp_v9 == 0x2f) {
-          FUN_003599e8(0x48c722ff,1,0x12,0x15);
+          screenSetColor670(0x48c722ff,1,0x12,0x15);
         }
         FUN_0033449c(0);
         FUN_0037e1b0(0xffffffff,1);
@@ -1027,7 +1027,7 @@ LAB_003ddd08:
       else {
         FUN_0033449c(1);
         FUN_0031f718((int)temp_v19,0);
-        FUN_00334434(&temp_v16,1,0);
+        objBInitBlock19D0(&temp_v16,1,0);
         FUN_003343c0(0);
       }
       FUN_0032d0c8(0,1,temp_v19,&temp_v16);

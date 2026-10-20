@@ -16,7 +16,7 @@ int FUN_0037a2e4(void);
 int FUN_0037b450(void);
 int FUN_0037dab0(void);
 int FUN_0039c0e4(void);
-int FUN_003a43ec(void);
+int freeTexTable24(void);
 int FUN_003a76b8(void);
 int FUN_003b01e8(void);
 int FUN_003b6dc4(void);
@@ -32,15 +32,15 @@ int FUN_002e2680(...);
 int FUN_00319aec(...);
 int FUN_0032d388(...);
 int FUN_0034aae4(void);
-int FUN_00357ad8(void);
+int sub68OwnerCall4(void);
 int FUN_0035d8a4(void);
-int FUN_00368390(void);
+int clearFlags310To31F(void);
 int FUN_003881e0(...);
 int FUN_00388758(...);
 int FUN_0039c244(void);
 int FUN_0039c2a4(...);
 int FUN_003d0bc0(...);
-int FUN_004188e0(...);
+int flag0CSet(...);
 
 int FUN_0014afa8(void);
 int FUN_001517b4(void);
@@ -90,7 +90,7 @@ int FUN_003492dc(void);
 int FUN_0035ab90(void);
 int FUN_0035dbd4(...);
 int FUN_0036b6cc(...);
-int FUN_00370f7c(...);
+int obj25CRefreshFlags(...);
 int FUN_0037e1b0(...);
 int FUN_003a7788(void);
 int FUN_003a7c00(...);
@@ -103,11 +103,11 @@ int configDestroy(void);
 int playLogDestroy(void);
 int FUN_00284ee4(...);
 int FUN_0028b088(...);
-int FUN_002f7bc4(...);
+int menuItemPlaySe(...);
 int FUN_0031f718(...);
 int FUN_00334214(...);
 int FUN_003343c0(...);
-int FUN_00334434(...);
+int objBInitBlock19D0(...);
 int FUN_0033449c(...);
 int FUN_003423e8(...);
 int FUN_003dc628(void);
@@ -129,7 +129,7 @@ int FUN_002f3bc4(...);
 int FUN_002f78a0(...);
 int FUN_00331380(...);
 int FUN_003343f0(...);
-int FUN_003599e8(int, int, int, int);
+int screenSetColor670(int, int, int, int);
 int FUN_0035a094(...);
 int FUN_0037c8e4(...);
 int FUN_0038843c(void);
@@ -267,11 +267,11 @@ extern int FUN_002f153c(void);
 extern int FUN_002f3b90(void);
 /* Supplied declaration required: FUN_002f3bc4. */
 /* Supplied declaration required: FUN_002f78a0. */
-/* Supplied declaration required: FUN_002f7bc4. */
+/* Supplied declaration required: menuItemPlaySe. */
 /* Supplied declaration required: FUN_00312d6c. */
 /* Supplied declaration required: FUN_00319aec. */
 /* Supplied declaration required: FUN_0031d088. */
-extern int FUN_0031d864(void);
+extern int objIsNotInState0xF(void);
 /* Supplied declaration required: FUN_0031d890. */
 /* Supplied declaration required: FUN_0031db84. */
 /* Supplied declaration required: FUN_0031f718. */
@@ -288,20 +288,20 @@ extern int FUN_0033413c(void);
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00334434. */
+/* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 extern int FUN_00334518(void);
 extern char FUN_00334530(void);
 extern int FUN_00334548(void);
 /* Supplied declaration required: FUN_003423e8. */
-extern int FUN_00344c6c(void);
+extern int overlayIsNotBusy(void);
 extern int FUN_0034919c(void);
 /* Supplied declaration required: FUN_003492dc. */
 extern int FUN_00349af0(void);
 extern unsigned int FUN_0034a9ac(void);
 /* Supplied declaration required: FUN_0034aae4. */
-/* Supplied declaration required: FUN_00357ad8. */
-/* Supplied declaration required: FUN_003599e8. */
+/* Supplied declaration required: sub68OwnerCall4. */
+/* Supplied declaration required: screenSetColor670. */
 extern int FUN_0035a028(void);
 extern int FUN_0035a044(void);
 /* Supplied declaration required: FUN_0035a094. */
@@ -310,19 +310,19 @@ extern int FUN_0035a044(void);
 /* Supplied declaration required: FUN_0035d8a4. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0035dbd4. */
-/* Supplied declaration required: FUN_00368390. */
+/* Supplied declaration required: clearFlags310To31F. */
 /* Supplied declaration required: FUN_0036b6cc. */
 extern int FUN_0036cf78(void);
 extern unsigned char FUN_0036d134(void);
 extern unsigned int FUN_0036d18c(int);
-/* Supplied declaration required: FUN_00370f7c. */
+/* Supplied declaration required: obj25CRefreshFlags. */
 extern unsigned short FUN_00372140(void);
 extern int FUN_00372158(void);
 /* Supplied declaration required: FUN_0037a2e4. */
 /* Supplied declaration required: FUN_0037b450. */
 /* Supplied declaration required: FUN_0037c8e4. */
 extern int FUN_0037d438(void);
-extern int FUN_0037d9dc(void);
+extern int obj14IsZero(void);
 /* Supplied declaration required: FUN_0037dab0. */
 extern int FUN_0037db9c(void);
 /* Supplied declaration required: FUN_0037e1b0. */
@@ -334,13 +334,13 @@ extern int FUN_003881d0(void);
 /* Supplied declaration required: gauntletAppMenuKillTask. */
 extern int FUN_0038b358(void);
 extern int FUN_0038b568(void);
-extern int FUN_0039ba04(void);
+extern int flagAt4IsClear(void);
 /* Supplied declaration required: FUN_0039c0e4. */
 /* Supplied declaration required: FUN_0039c244. */
 /* Supplied declaration required: FUN_0039c2a4. */
 extern int FUN_0039c608(void);
 extern unsigned short FUN_0039c628(void);
-/* Supplied declaration required: FUN_003a43ec. */
+/* Supplied declaration required: freeTexTable24. */
 /* Supplied declaration required: FUN_003a76b8. */
 /* Supplied declaration required: FUN_003a7788. */
 /* Supplied declaration required: FUN_003a7c00. */
@@ -349,7 +349,7 @@ extern int FUN_003ae848(void);
 /* Supplied declaration required: FUN_003b078c. */
 /* Supplied declaration required: FUN_003b6dc4. */
 extern unsigned char FUN_003b6f00(void);
-extern int FUN_003b70d0(void);
+extern int byteArr5Get4(void);
 extern unsigned char FUN_003c0dcc(void);
 extern int FUN_003c3ec4(void);
 /* Supplied declaration required: FUN_003d0bc0. */
@@ -363,7 +363,7 @@ extern int FUN_003deee4(unsigned int);
 extern unsigned char FUN_003e42f0(void);
 extern int FUN_003f86c8(unsigned int);
 extern int FUN_00418768(unsigned int);
-/* Supplied declaration required: FUN_004188e0. */
+/* Supplied declaration required: flag0CSet. */
 extern int FUN_00481104(unsigned int);
 extern int mapMainIsBusy(void);
 
@@ -517,7 +517,7 @@ unsigned int FUN_003d56dc(void)
             FUN_0019de98(temp_v6,0xf4f4f4ff);
           }
           if (temp_v4 == 0x2f) {
-            FUN_003599e8(0x48c722ff,1,0x12,0x15);
+            screenSetColor670(0x48c722ff,1,0x12,0x15);
           }
         }
         temp_v4 = FUN_002e26c4(temp_v4);
@@ -761,7 +761,7 @@ unsigned int FUN_003d56dc(void)
       sysPlaySe(temp_v5);
     }
     else {
-      FUN_002f7bc4(temp_v6);
+      menuItemPlaySe(temp_v6);
     }
     FUN_0028b088(temp_v6);
     temp_v4 = puVar2[9];
@@ -874,7 +874,7 @@ unsigned int FUN_003d56dc(void)
         else {
           FUN_0033449c(1);
           FUN_0031f718((int)(short)temp_v17,0);
-          FUN_00334434(&temp_v15,1,0);
+          objBInitBlock19D0(&temp_v15,1,0);
           FUN_003343c0(0);
         }
         FUN_002a7324(1);
@@ -1012,7 +1012,7 @@ LAB_003d6870:
       break;
     }
     FUN_002e738c(2);
-    FUN_00370f7c(puVar12[0xcee]);
+    obj25CRefreshFlags(puVar12[0xcee]);
     puVar12[8] = 1;
     break;
   case 0xf:
@@ -1393,7 +1393,7 @@ LAB_003d6870:
           else {
             FUN_0033449c(1);
             FUN_0031f718((int)(short)temp_v17,0);
-            FUN_00334434(&temp_v15,1,0);
+            objBInitBlock19D0(&temp_v15,1,0);
             FUN_003343c0(0);
           }
           FUN_0037e1b0((int)*(char *)(puVar2 + 0x2e),1);
@@ -1532,8 +1532,8 @@ LAB_003d6870:
       if (DAT_005e1eb4 != '\0') {
         temp_v9 = FUN_00162e8c();
         *(unsigned short *)(temp_v9 + 0x22) = 0;
-        FUN_00368390();
-        FUN_00357ad8();
+        clearFlags310To31F();
+        sub68OwnerCall4();
       }
       if (!((((temp_v4 == 0 && temp_v10 == 0) && temp_v12 == 0) && temp_v11 == 0) && temp_v8 == 0)) {
         g_campState = (char)temp_v4;
@@ -1604,7 +1604,7 @@ LAB_003d6870:
     }
     break;
   case 0x2d:
-    temp_v4 = FUN_0031d864();
+    temp_v4 = objIsNotInState0xF();
     if (temp_v4 != 0) {
       FUN_002add8c();
       temp_v4 = 6;
@@ -1650,7 +1650,7 @@ joined_r0x003d7c38:
     } while (temp_v4 < 8);
     FUN_00163aa4(puVar2 + 0x222);
     if ((puVar2[5] == 1) && (FUN_0039c2a4(1), puVar2[7] == 0x37)) {
-      FUN_004188e0(DAT_00588e2c);
+      flag0CSet(DAT_00588e2c);
     }
     if ((((int)puVar2[5] >= 2) && (*(char *)((int)puVar2 + 0x6e2) != '\0')) &&
        (temp_v4 = FUN_002ef9f0(), temp_v4 == 0)) {
@@ -1661,7 +1661,7 @@ joined_r0x003d7c38:
         FUN_002f78a0(puVar2);
       }
       else {
-        temp_v4 = FUN_003b70d0();
+        temp_v4 = byteArr5Get4();
         if (temp_v4 == 0) {
           temp_v6 = 0x39;
         }
@@ -1774,7 +1774,7 @@ LAB_003d801c:
     break;
   case 0x36:
     if (puVar2[0xb] != 0) {
-      if ((puVar2[0xb] == 1) && (temp_v4 = FUN_00344c6c(), temp_v4 != 0)) {
+      if ((puVar2[0xb] == 1) && (temp_v4 = overlayIsNotBusy(), temp_v4 != 0)) {
         FUN_0032d388(1);
         FUN_0020b660(0x37);
         temp_v4 = 0;
@@ -1782,7 +1782,7 @@ LAB_003d801c:
       }
     }
     else {
-      temp_v4 = FUN_00344c6c();
+      temp_v4 = overlayIsNotBusy();
       if (temp_v4 != 0) {
         temp_v4 = puVar2[0xb] + 1;
         puVar2[0xb] = temp_v4;
@@ -1793,7 +1793,7 @@ LAB_003d801c:
     temp_v4 = puVar2[0xb];
     if (temp_v4 != 0) {
       if (temp_v4 != 1) {
-        if ((temp_v4 == 2) && (temp_v4 = FUN_00344c6c(), temp_v4 != 0)) {
+        if ((temp_v4 == 2) && (temp_v4 = overlayIsNotBusy(), temp_v4 != 0)) {
           temp_v4 = FUN_003881d0();
           if (temp_v4 != 0) {
             FUN_003881e0(0);
@@ -1837,7 +1837,7 @@ LAB_003d801c:
       break;
     }
     if (temp_v4 != 1) {
-      if ((temp_v4 == 2) && (temp_v4 = FUN_00344c6c(), temp_v4 != 0)) {
+      if ((temp_v4 == 2) && (temp_v4 = overlayIsNotBusy(), temp_v4 != 0)) {
         puVar2[9] = 6;
         puVar2[0xb] = 0;
         temp_v4 = 5;
@@ -2101,7 +2101,7 @@ LAB_003d801c:
     }
     break;
   case 0x50:
-    temp_v4 = FUN_0039ba04();
+    temp_v4 = flagAt4IsClear();
     if (temp_v4 != 0) {
       FUN_003b01e8();
       puVar12 = DAT_0057f108;
@@ -2118,7 +2118,7 @@ LAB_003d801c:
     }
     break;
   case 0x51:
-    temp_v4 = FUN_0037d9dc();
+    temp_v4 = obj14IsZero();
     if (temp_v4 != 0) {
       FUN_0039c0e4();
       puVar12 = DAT_0057f108;
@@ -2157,7 +2157,7 @@ LAB_003d801c:
   case 0x54:
     temp_v4 = titleConfigIsClosed();
     if (temp_v4 != 0) {
-      FUN_003a43ec();
+      freeTexTable24();
       FUN_001add24(0x3a);
       FUN_00184758(puVar2 + 0x1b9,3,0);
       FUN_0028b088(0);

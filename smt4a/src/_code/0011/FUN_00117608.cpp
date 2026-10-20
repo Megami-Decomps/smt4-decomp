@@ -1,27 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00117608` (_code @ 0x117608, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002fb208(void);
+typedef struct Lock {
+    u8 unk00[4];
+    s32 depth;   /* 0x04 */
+    u32 owner;   /* 0x08 */
+} Lock;
 
-/* Supplied declaration required: FUN_002fb208. */
+extern u32 FUN_002fb208(void);
 
-
-void FUN_00117608(int param_1)
-
+/* Takes a recursive lock: records the owner on the first entry and counts the depth. */
+void FUN_00117608(Lock *lock)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 4);
-  if (temp_v0 == 0) {
-    FUN_002fb208();
-    *(int *)(param_1 + 8) = temp_v0;
-  }
-  *(int *)(param_1 + 4) = *(int *)(param_1 + 4) + 1;
-  return;
+    if (lock->depth == 0) {
+        lock->owner = FUN_002fb208();
+    }
+    lock->depth++;
 }
 
 } /* extern "C" */

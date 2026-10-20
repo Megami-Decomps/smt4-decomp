@@ -1,23 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003a1098(int, unsigned int, unsigned int);
+void FUN_003a1098(s32 a, u32 handle, u32 value);
+extern u32 DAT_00647194[];
 
-extern unsigned int DAT_00647194; /* 0x647194 */
-
-/* Supplied declaration required: FUN_003a1098. */
-
-
-void FUN_00300100(int param_1,unsigned int param_2)
-
+/* Calls FUN_003a1098(0, handle, value) with entry `index` of the handle table at 0x647194, if it is set. */
+void FUN_00300100(s32 index, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((&DAT_00647194)[param_1] != 0) {
-    FUN_003a1098(0,(&DAT_00647194)[param_1],param_2);
-    return;
-  }
-  return;
+    if (DAT_00647194[index] != 0) {
+        FUN_003a1098(0, DAT_00647194[index], value);
+        return;
+    }
 }
 
 } /* extern "C" */

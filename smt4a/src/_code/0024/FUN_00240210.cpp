@@ -17,7 +17,7 @@ extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_0021b390. */
 extern int FUN_0026140c(void);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 unsigned char FUN_00240210(int param_1,int param_2,unsigned int param_3,int param_4)
@@ -59,7 +59,7 @@ unsigned char FUN_00240210(int param_1,int param_2,unsigned int param_3,int para
       if (-1 < *(char *)(temp_v3 + temp_v8 + 0x1c88)) {
         temp_v3 = FUN_001ab888();
         temp_v3 = FUN_001ab854((int)*(char *)(temp_v3 + temp_v8 + 0x1c88));
-        temp_v4 = FUN_004bd340(temp_v3,10);
+        temp_v4 = bitsAt60Test(temp_v3,10);
         if (temp_v4 == 0) {
           if (temp_v5 == temp_v7) {
             FUN_0021b390(param_1,0xe,*(unsigned short *)(temp_v3 + 0x62),param_3);
@@ -162,7 +162,7 @@ LAB_00240390:
       if (-1 < *(char *)(temp_v3 + temp_v8 + 0x1c88)) {
         temp_v3 = FUN_001ab888();
         temp_v3 = FUN_001ab854((int)*(char *)(temp_v3 + temp_v8 + 0x1c88));
-        temp_v4 = FUN_004bd340(temp_v3,10);
+        temp_v4 = bitsAt60Test(temp_v3,10);
         if (temp_v4 == 0) {
           if (temp_v5 == temp_v7) {
             FUN_0021b390(param_1,0,*(unsigned short *)(temp_v3 + 0x62),param_3);

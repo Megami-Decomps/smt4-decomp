@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002e75fa(void);
-int FUN_0030fb26(unsigned int *);
+int _ZN9Obj55b2d84initEv(unsigned int *);
 
 extern unsigned char DAT_0055b2e0; /* 0x55b2e0 */
 
 /* Supplied declaration required: FUN_002e75fa. */
-/* Supplied declaration required: FUN_0030fb26. */
+/* Supplied declaration required: _ZN9Obj55b2d84initEv. */
 
 
 unsigned int * FUN_002ee524(unsigned int *param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ unsigned int * FUN_002ee524(unsigned int *param_1,unsigned int param_2)
   *param_1 = (unsigned int)&DAT_0055b2e0;
   param_1[2] = param_2;
   FUN_002e75fa();
-  FUN_0030fb26(param_1);
+  _ZN9Obj55b2d84initEv(param_1);
   param_1[5] = *(int *)(param_1[2] + 0x10) << 3;
   return param_1;
 }

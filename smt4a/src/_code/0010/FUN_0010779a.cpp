@@ -1,32 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ef268(int, int);
+void FUN_002ef268(void *object, s32 mode);
 
-/* Supplied declaration required: FUN_002ef268. */
+typedef struct ModeObject {
+    /* 0x000 */ u8 unk000[0xC0];
+    /* 0x0C0 */ s32 mode;
+    /* 0x0C4 */ u8 unk0C4[0x86];
+    /* 0x14A */ s8 lastMode;      /* last mode other than 2 */
+    /* 0x14B */ u8 unk14B[0x121];
+    /* 0x26C */ s8 skipNext;      /* swallows the next mode change */
+} ModeObject;
 
-
-void FUN_0010779a(int param_1,int param_2,int param_3)
-
+/* Changes the object's mode: a pending skip cancels the change; otherwise it is set (through FUN_002ef268 when `apply` is set) and remembered unless it is 2. */
+void FUN_0010779a(ModeObject *object, s32 mode, s32 apply)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0x26c) != '\0') {
-    *(unsigned char *)(param_1 + 0x26c) = 0;
-  }
-  else {
-    if (param_3 != 0) {
-      FUN_002ef268(param_1,param_2);
+    if (object->skipNext != 0) {
+        object->skipNext = 0;
+    } else {
+        if (apply != 0) {
+            FUN_002ef268(object, mode);
+        } else {
+            object->mode = mode;
+        }
+        if (mode != 2) {
+            object->lastMode = (s8)mode;
+            return;
+        }
     }
-    else {
-      *(int *)(param_1 + 0xc0) = param_2;
-    }
-    if (param_2 != 2) {
-      *(char *)(param_1 + 0x14a) = (char)param_2;
-      return;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

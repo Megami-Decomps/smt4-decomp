@@ -35,7 +35,7 @@ extern int FUN_00330a80(int);
 /* Supplied declaration required: FUN_0036c8a0. */
 /* Supplied declaration required: FUN_0036c91c. */
 /* Supplied declaration required: FUN_0036ca3c. */
-extern unsigned int FUN_0037d478(void);
+extern unsigned int gameDataBlocksGetWord27E90(void);
 
 
 unsigned int FUN_002e241c(void)
@@ -67,7 +67,7 @@ unsigned int FUN_002e241c(void)
     (**(romwright_code **)(temp_v8 + 0x1274))();
     *(unsigned char *)(temp_v8 + 0x1270) = 0;
   }
-  temp_v3 = FUN_0037d478();
+  temp_v3 = gameDataBlocksGetWord27E90();
   FUN_0036ca3c(temp_v1 + 0xa0,0,0,temp_v3,0);
   temp_v8 = 0;
   do {

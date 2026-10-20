@@ -36,7 +36,7 @@ extern int FUN_001801a4(void);
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002626e0(void);
 /* Supplied declaration required: FUN_003e8bb0. */
-extern int FUN_003e9b28(int);
+extern int valueAtF0IsReady(int);
 /* Supplied declaration required: FUN_004bfcfc. */
 /* Supplied declaration required: FUN_004c4604. */
 
@@ -115,7 +115,7 @@ unsigned int FUN_004ea200(int *param_1,int param_2,int param_3,unsigned int para
               }
               if (((temp_v2 != 0x493 && temp_v0 != 0x94) && (temp_v2 != 0x495 && temp_v2 != 0x496)) &&
                  ((temp_v0 = FUN_002626e0(), temp_v0 == 0 ||
-                  (temp_v0 = FUN_003e9b28(*param_1), temp_v0 != 0)))) goto LAB_004ea470;
+                  (temp_v0 = valueAtF0IsReady(*param_1), temp_v0 != 0)))) goto LAB_004ea470;
             }
           }
           puVar6 = (unsigned int *)(int)*(short *)(*(int *)(param_2 + 0x24) + 0x6a);

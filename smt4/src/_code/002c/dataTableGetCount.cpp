@@ -1,20 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int __aeabi_uidivmod(int);
+typedef struct DataTable {
+    /* 0x0 */ u32 magic;       /* 'TBL1' */
+    /* 0x4 */ u32 byteSize;
+    /* 0x8 */ u32 entrySize;
+    /* 0xC */ u32 unkC;
+    /* 0x10 */ u8 entries[1];
+} DataTable;
 
-
-unsigned int dataTableGetCount(int *param_1)
-
+/* Number of entries of a 'TBL1' (0x314c4254) data table, or 0 when it is missing or malformed. */
+u32 dataTableGetCount(DataTable *table)
 {
-  unsigned int temp_v0;
-  
-  if (((param_1 != (int *)0x0) && (*param_1 == 0x314c4254)) && (param_1[2] != 0)) {
-    temp_v0 = __aeabi_uidivmod(param_1[1]);
-    return temp_v0;
-  }
-  return 0;
+    if (((table != NULL) && (table->magic == 0x314c4254)) && (table->entrySize != 0)) {
+        return table->byteSize / table->entrySize;
+    }
+    return 0;
 }
 
 } /* extern "C" */

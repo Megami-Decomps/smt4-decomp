@@ -1,16 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Voice {
+    /* 0x000 */ u8 unk000[0x1A0];
+    /* 0x1A0 */ u32 callback;
+    /* 0x1A4 */ u32 userData;
+} Voice;
 
-void FUN_001d2384(int param_1)
-
+/* Clears the voice's callback and user data, if there is a voice. */
+void FUN_001d2384(Voice *voice)
 {
-  if (param_1 != 0) {
-    *(unsigned int *)(param_1 + 0x1a0) = 0;
-    *(unsigned int *)(param_1 + 0x1a4) = 0;
-  }
-  return;
+    if (voice != NULL) {
+        voice->callback = 0;
+        voice->userData = 0;
+    }
 }
 
 } /* extern "C" */

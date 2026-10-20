@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0031cb74(int);
+int objectE0Reset(int);
 
 extern int DAT_0057a6e8; /* 0x57a6e8 */
 
-/* Supplied declaration required: FUN_0031cb74. */
+/* Supplied declaration required: objectE0Reset. */
 
 
 void FUN_004f56cc(int param_1,int param_2)
@@ -23,7 +23,7 @@ void FUN_004f56cc(int param_1,int param_2)
       temp_v0 = param_2;
     }
     if (0 < temp_v0) {
-      FUN_0031cb74(temp_v0);
+      objectE0Reset(temp_v0);
       *(int *)(param_1 + 0x3588) = temp_v0;
     }
   }

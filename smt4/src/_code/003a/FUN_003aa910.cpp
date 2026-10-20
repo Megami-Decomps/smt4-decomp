@@ -1,19 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00288118(unsigned short);
+extern int dataTableGetEntry0102Value(u16 id);
 
-
-int FUN_003aa910(unsigned short *param_1,unsigned short *param_2)
-
+int FUN_003aa910(u16 *a, u16 *b)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00288118(*param_1);
-  temp_v1 = FUN_00288118(*param_2);
-  return temp_v0 - temp_v1;
+    int valueA = dataTableGetEntry0102Value(*a);
+    int valueB = dataTableGetEntry0102Value(*b);
+
+    return valueA - valueB;
 }
 
 } /* extern "C" */

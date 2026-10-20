@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00214da4(void);
 int FUN_002a4b74(void);
-int FUN_002e6234(void);
+int dataTableFindMatching35(void);
 int FUN_0034913c(void);
-int FUN_0037c8b4(int, int);
+int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
 int FUN_0037d6e4(int);
 int FUN_00388758(int);
@@ -24,12 +24,12 @@ extern unsigned int FUN_0019de98(unsigned int, unsigned int);
 extern int FUN_00224880(unsigned int);
 extern int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_002a4b74. */
-/* Supplied declaration required: FUN_002e6234. */
+/* Supplied declaration required: dataTableFindMatching35. */
 extern int FUN_0031d62c(void);
 /* Supplied declaration required: FUN_0034913c. */
 extern int FUN_0034919c(void);
-extern int FUN_003491b8(void);
-/* Supplied declaration required: FUN_0037c8b4. */
+extern int panelIsActiveState2(void);
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_0037d6e4. */
 /* Supplied declaration required: FUN_00388758. */
@@ -37,7 +37,7 @@ extern int FUN_003491b8(void);
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int FUN_00467df8(void);
-extern unsigned int FUN_0046bba0(int, unsigned char);
+extern unsigned int dataTable28Type1GetEntry(int, unsigned char);
 
 
 void FUN_00468fec(unsigned int *param_1)
@@ -64,14 +64,14 @@ void FUN_00468fec(unsigned int *param_1)
           temp_v4 = 7;
         }
       }
-      temp_v2 = FUN_0046bba0((int)param_1 + 0x19,temp_v4);
+      temp_v2 = dataTable28Type1GetEntry((int)param_1 + 0x19,temp_v4);
       temp_v3 = FUN_0019de98(temp_v2,0xf4f4f4ff);
       if (temp_v0 != -1) {
         temp_v3 = (unsigned int)(unsigned char)param_1[6];
       }
       if (temp_v0 != -1 && temp_v3 != 0) {
         if (temp_v0 != 0) {
-          temp_v1 = FUN_003491b8();
+          temp_v1 = panelIsActiveState2();
           if (temp_v1 != 0) {
             FUN_00388758(0);
           }
@@ -82,7 +82,7 @@ void FUN_00468fec(unsigned int *param_1)
             FUN_0037c8e4(1,0);
             temp_v1 = FUN_00467df8();
             if (temp_v1 != 0) {
-              FUN_0037c8b4(-temp_v1,0);
+              panelSetTarget(-temp_v1,0);
             }
             FUN_003c5fc4(1);
           }
@@ -125,7 +125,7 @@ void FUN_00468fec(unsigned int *param_1)
       FUN_0037d6e4(1);
       temp_v0 = 1;
       *(unsigned short *)(param_1 + 0x33d) = 1;
-      FUN_002e6234();
+      dataTableFindMatching35();
       if (temp_v0 != 0) {
         *(unsigned char *)((int)param_1 + 0xe4a) = *(unsigned char *)(temp_v0 + 0x52);
         *(unsigned short *)(param_1 + 0x393) = *(unsigned short *)(temp_v0 + 8);

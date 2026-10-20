@@ -71,16 +71,16 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0015f7c8. */
-extern unsigned int FUN_001a0fb4(unsigned int);
+extern unsigned int dataTableLookupValue0103(unsigned int);
 /* Supplied declaration required: FUN_0023e388. */
 /* Supplied declaration required: FUN_002929d8. */
 extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
 extern int lmapMainIsRunning(void);
 extern int FUN_002b8804(void);
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: asdMemoryAlloc. */
-extern float FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -153,7 +153,7 @@ void FUN_0033e8a8(int param_1)
       temp_v19 = 0x4248000000000000;
     }
     else {
-      temp_v4 = FUN_001a0fb4((*(int *)(param_1 + 0xc) + 1U) & 0xffff);
+      temp_v4 = dataTableLookupValue0103((*(int *)(param_1 + 0xc) + 1U) & 0xffff);
       temp_v8 = VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v19 = (unsigned long long)temp_v8 << 0x20;
     }
@@ -278,7 +278,7 @@ void FUN_0033e8a8(int param_1)
                                     ((unsigned int)*(unsigned char *)((int)pfVar12 + 0x23),
                                      (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v18 = CONCAT44(temp_v10,temp_v13 / temp_v11 + temp_v16 * (float)temp_v20);
-          if (((DAT_00476634 & 1) == 0) && (temp_v3 = FUN_002bfefc(&DAT_00476634), temp_v3 != 0)) {
+          if (((DAT_00476634 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476634), temp_v3 != 0)) {
             DAT_004efd6c = (unsigned int)temp_v22;
             DAT_004efd70 = (unsigned int)(temp_v20 >> 0x20);
             DAT_004efd74 = DAT_004efd70;
@@ -392,22 +392,22 @@ void FUN_0033e8a8(int param_1)
             if (temp_v1 != '\x01') {
               if (temp_v1 != '\x02') {
                 if (temp_v1 == '\x03') {
-                  temp_v10 = (float)FUN_002c5da8(5,0,1);
+                  temp_v10 = (float)packNibblesAndByte(5,0,1);
                   pfVar13[0x15] = temp_v10;
                 }
               }
               else {
-                temp_v10 = (float)FUN_002c5da8(6,1,2);
+                temp_v10 = (float)packNibblesAndByte(6,1,2);
                 pfVar13[0x15] = temp_v10;
               }
             }
             else {
-              temp_v10 = (float)FUN_002c5da8(6,1,0);
+              temp_v10 = (float)packNibblesAndByte(6,1,0);
               pfVar13[0x15] = temp_v10;
             }
           }
           else {
-            temp_v10 = (float)FUN_002c5da8(6,7,0);
+            temp_v10 = (float)packNibblesAndByte(6,7,0);
             pfVar13[0x15] = temp_v10;
           }
           temp_v8 = temp_v8 + 1;

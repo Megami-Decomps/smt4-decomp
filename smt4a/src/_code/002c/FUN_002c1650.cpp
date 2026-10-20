@@ -1,18 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int sysMemClear(int, int);
+void sysMemClear(void *block, s32 size);
+extern u8 DAT_005cb200[];
 
-/* Supplied declaration required: sysMemClear. */
-
-
+/* Clears the 0x1308-byte block at 0x5CB200. */
 void FUN_002c1650(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  sysMemClear(0x5cb200,0x1308);
-  return;
+    sysMemClear(DAT_005cb200, 0x1308);
 }
 
 } /* extern "C" */

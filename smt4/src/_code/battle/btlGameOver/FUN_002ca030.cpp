@@ -1,34 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ca030` (_code @ 0x2ca030, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Hands the job work area to FUN_00335b80 for the game-over object (a tail call), or returns 0 without one. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00335b80(int, unsigned int);
+u32 jobGetWork(void);
+u32 FUN_00335b80(s32 gameOver, u32 work);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+extern s32 g_btlGameOver;
 
-extern int g_btlGameOver; /* 0x435d60 */
-
-extern unsigned int jobGetWork(void);
-/* Supplied declaration required: FUN_00335b80. */
-
-
-void FUN_002ca030(void)
-
+u32 FUN_002ca030(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  if (g_btlGameOver != 0) {
-    FUN_00335b80(g_btlGameOver,temp_v0);
-    return;
-  }
-  return;
+    u32 work = jobGetWork();
+
+    if (g_btlGameOver != 0) {
+        return FUN_00335b80(g_btlGameOver, work);
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

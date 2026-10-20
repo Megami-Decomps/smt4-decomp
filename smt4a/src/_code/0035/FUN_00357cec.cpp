@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0015688c(void);
+int saveSlotFindSelected(void);
 int FUN_003e4e4c(int);
 int FUN_004bd410(int);
 
-/* Supplied declaration required: FUN_0015688c. */
+/* Supplied declaration required: saveSlotFindSelected. */
 extern int FUN_00187168(void);
 extern int FUN_0019e52c(unsigned short);
 extern unsigned short scrGetArg(void);
@@ -27,7 +27,7 @@ unsigned int FUN_00357cec(void)
   temp_v1 = FUN_0019e52c(temp_v0);
   if (temp_v1 != 0) {
     FUN_004bd410(temp_v0);
-    FUN_0015688c();
+    saveSlotFindSelected();
     temp_v1 = FUN_00187168();
     if (temp_v1 == 0) {
       FUN_003e4e4c(temp_v0);

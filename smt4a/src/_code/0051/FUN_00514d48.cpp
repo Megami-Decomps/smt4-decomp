@@ -9,7 +9,7 @@ int rt_malloc(...);
 int FUN_002e6e14(unsigned int);
 int FUN_002e9318(unsigned char *[2]);
 int FUN_002e9518(int, int);
-int FUN_002ea0e4(...);
+int constructObj0055affc(...);
 int FUN_002fd2a4(unsigned char **);
 
 /* stack frame of param_2: 16 slot(s), 61 byte(s) */
@@ -47,7 +47,7 @@ extern unsigned char DAT_0055ad28; /* 0x55ad28 */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9518. */
 extern int FUN_002e9520(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002fd2a4. */
 extern int FUN_00302f28(int);
 extern int FUN_00303146(int, unsigned int *);
@@ -93,7 +93,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   temp_v14 = &DAT_00559ee4;
   temp_v15 = 0;
   temp_v13 = param_1;
-  temp_v0 = FUN_002ea0e4(temp_v16);
+  temp_v0 = constructObj0055affc(temp_v16);
   temp_v0 = FUN_003038fc(temp_v0 + 0xc,0);
   temp_v17 = 0;
   temp_v18 = 0;
@@ -109,7 +109,7 @@ int * FUN_00514d48(int *param_1,unsigned int param_2)
   temp_v0 = FUN_00302f28(temp_v0 + 8);
   temp_v0 = FUN_00302f28(temp_v0 + 0x18);
   temp_v0 = FUN_00302f28(temp_v0 + 8);
-  FUN_002ea0e4(temp_v7);
+  constructObj0055affc(temp_v7);
   *(int *)(temp_v0 + 8) = 0;
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 0;

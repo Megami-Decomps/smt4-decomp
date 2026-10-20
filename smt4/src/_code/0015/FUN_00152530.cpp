@@ -1,81 +1,65 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00152530` (_code @ 0x152530, 0x9c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register choice differs (retail reuses r1 for src+16 and r0 for the constant 2) */
+/* Initialises the object from `src`: clears its slots, takes the two words at src+4/+8 and a data pointer at src+0x10, runs FUN_002b8cc8 once per recorded entry, clears the entry count and sets the 6-byte handle to all ones. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b8cc8(void);
-
-typedef struct fn_00152530_arg0 fn_00152530_arg0;
-struct fn_00152530_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined2 field_0x4; /* +0x4 */
-    unsigned char pad_0x6[0x2];
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    undefined4 field_0x24; /* +0x24 */
-    undefined4 field_0x28; /* +0x28 */
-    undefined4 field_0x2c; /* +0x2c */
-    undefined4 field_0x30; /* +0x30 */
-    undefined4 field_0x34; /* +0x34 */
-    undefined4 field_0x38; /* +0x38 */
-    undefined4 field_0x3c; /* +0x3c */
-    unsigned char pad_0x40[0xc];
-    undefined1 field_0x4c; /* +0x4c */
-    unsigned char pad_0x4d[0x3];
-    int field_0x50; /* +0x50 */
-    undefined4 field_0x54; /* +0x54 */
-    undefined2 field_0x58; /* +0x58 */
-    short field_0x5a; /* +0x5a */
+struct Obj00152530 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 unk04;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u32 slot[12];
+    /* 0x38 */ u32 srcWord1;
+    /* 0x3c */ u32 srcWord2;
+    /* 0x40 */ u8 unk40[0xc];
+    /* 0x4c */ u8 mode;
+    /* 0x4d */ u8 unk4d[3];
+    /* 0x50 */ void *data;
+    /* 0x54 */ s32 handle;
+    /* 0x58 */ u16 handleTag;
+    /* 0x5a */ s16 entryCount;
 };
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+struct Src00152530 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 word1;
+    /* 0x08 */ u32 word2;
+    /* 0x0c */ u8 unk0c[4];
+};
 
-/* Supplied declaration required: FUN_002b8cc8. */
+void FUN_002b8cc8(void);
+void ARM_common_memset4_6(void *dst, u32 value);
 
-
-void FUN_00152530(fn_00152530_arg0 *param_1,int param_2)
-
+void FUN_00152530(Obj00152530 *obj, Src00152530 *src)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  param_1->field_0x4 = 0;
-  param_1->field_0x14 = 0;
-  param_1->field_0x10 = 0;
-  param_1->field_0xc = 0;
-  param_1->field_0x8 = 0;
-  param_1->field_0x24 = 0;
-  param_1->field_0x20 = 0;
-  param_1->field_0x1c = 0;
-  param_1->field_0x18 = 0;
-  param_1->field_0x34 = 0;
-  param_1->field_0x30 = 0;
-  param_1->field_0x2c = 0;
-  param_1->field_0x28 = 0;
-  param_1->field_0x38 = *(unsigned int *)(param_2 + 4);
-  param_1->field_0x3c = *(unsigned int *)(param_2 + 8);
-  param_1->field_0x50 = param_2 + 0x10;
-  param_1->field_0x4c = 2;
-  if (0 < param_1->field_0x5a) {
-    temp_v0 = 0;
-    do {
-      FUN_002b8cc8();
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < param_1->field_0x5a);
-  }
-  param_1->field_0x5a = 0;
-  param_1->field_0x54 = 0xffffffff;
-  param_1->field_0x58 = 0xffff;
-  return;
+    s32 i;
+
+    obj->unk04 = 0;
+    obj->slot[3] = 0;
+    obj->slot[2] = 0;
+    obj->slot[1] = 0;
+    obj->slot[0] = 0;
+    obj->slot[7] = 0;
+    obj->slot[6] = 0;
+    obj->slot[5] = 0;
+    obj->slot[4] = 0;
+    obj->slot[11] = 0;
+    obj->slot[10] = 0;
+    obj->slot[9] = 0;
+    obj->slot[8] = 0;
+    obj->srcWord1 = src->word1;
+    obj->srcWord2 = src->word2;
+    obj->data = src + 1;
+    obj->mode = 2;
+    if (obj->entryCount > 0) {
+        i = 0;
+        do {
+            FUN_002b8cc8();
+            i++;
+        } while (i < obj->entryCount);
+    }
+    obj->entryCount = 0;
+    ARM_common_memset4_6(&obj->handle, -1);
 }
 
-} /* extern "C" */
+}

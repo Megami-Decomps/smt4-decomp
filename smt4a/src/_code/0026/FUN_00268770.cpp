@@ -17,10 +17,10 @@ int FUN_002f7f6c(...);
 int FUN_0031aa04(void);
 int FUN_0031d1b4(...);
 int FUN_00335510(...);
-int FUN_00342348(...);
-int FUN_003491e8(void);
+int screenShowMessage(...);
+int obj04Finish(void);
 int FUN_00359b6c(...);
-int FUN_0037b578(...);
+int screenStartOrClear(...);
 int FUN_003d4104(void);
 
 int qsort(...);
@@ -137,18 +137,18 @@ extern int FUN_002c7e54(void);
 extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_00335510. */
-/* Supplied declaration required: FUN_00342348. */
+/* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: FUN_003423e8. */
 /* Supplied declaration required: FUN_003450d4. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 extern int FUN_0035988c(unsigned int);
 /* Supplied declaration required: FUN_00359b6c. */
 /* Supplied declaration required: FUN_0035d8a4. */
 extern int FUN_0037b564(void);
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_0039c488. */
-extern int FUN_003c1644(void);
+extern int fieldStateAllowsAction(void);
 extern unsigned int FUN_003d2150(unsigned int);
 /* Supplied declaration required: FUN_003d4104. */
 /* Supplied declaration required: FUN_003e40d0. */
@@ -254,7 +254,7 @@ unsigned int FUN_00268770(void)
         temp_v15 = temp_v6 != 7;
         temp_v7 = 0x29;
         temp_v12 = 0;
-        temp_v6 = FUN_003c1644();
+        temp_v6 = fieldStateAllowsAction();
         if (temp_v6 != 0) {
           temp_v7 = 0xfa;
         }
@@ -285,14 +285,14 @@ unsigned int FUN_00268770(void)
                 if (temp_v6 != 2) {
                   if (*(short *)(temp_v2 + 0x598) < 0) {
                     temp_v7 = 0x1f;
-                    temp_v6 = FUN_003c1644();
+                    temp_v6 = fieldStateAllowsAction();
                     if (temp_v6 != 0) {
                       temp_v7 = 0xf9;
                     }
                   }
                   else {
                     temp_v7 = 0x29;
-                    temp_v6 = FUN_003c1644();
+                    temp_v6 = fieldStateAllowsAction();
                     if (temp_v6 != 0) {
                       temp_v7 = 0xfa;
                     }
@@ -300,7 +300,7 @@ unsigned int FUN_00268770(void)
                 }
                 else {
                   temp_v7 = 0x2a;
-                  temp_v6 = FUN_003c1644();
+                  temp_v6 = fieldStateAllowsAction();
                   if (temp_v6 != 0) {
                     temp_v7 = 0xfb;
                   }
@@ -456,7 +456,7 @@ LAB_00268d68:
             }
             break;
           }
-          temp_v6 = FUN_003c1644();
+          temp_v6 = fieldStateAllowsAction();
           if (temp_v6 != 0) {
             temp_v6 = 10;
             FUN_001517b4(10,1);
@@ -1244,7 +1244,7 @@ LAB_00269f7c:
     }
     temp_v6 = FUN_0023c068();
     if (temp_v6 == 0) {
-      FUN_003491e8();
+      obj04Finish();
     }
     FUN_0019de98(0,0xf4f4f4ff);
     FUN_002a7288();
@@ -1268,7 +1268,7 @@ LAB_00269f7c:
         if (*(char *)(temp_v2 + 0x52b) != '\0') {
           temp_v6 = FUN_0023c068();
           if (temp_v6 == 0) {
-            FUN_003491e8();
+            obj04Finish();
           }
           FUN_0019de98(0,0xf4f4f4ff);
           FUN_002a7288();
@@ -1293,7 +1293,7 @@ LAB_00269f7c:
         *(unsigned int *)(temp_v2 + 0x249c) = 0;
         temp_v6 = FUN_0023c068();
         if (temp_v6 == 0) {
-          FUN_003491e8();
+          obj04Finish();
         }
         FUN_0019de98(0,0xf4f4f4ff);
         FUN_002a7288();
@@ -1356,7 +1356,7 @@ LAB_00269f7c:
     }
     temp_v6 = FUN_0023c068();
     if (temp_v6 == 0) {
-      FUN_003491e8();
+      obj04Finish();
     }
     FUN_0019de98(0,0xf4f4f4ff);
     FUN_002a7288();
@@ -1392,7 +1392,7 @@ LAB_00269f7c:
       temp_v4 = *(short *)(temp_v8 + temp_v14 * 8);
       temp_v14 = FUN_002a4894(temp_v6 + 0x2500);
       if (temp_v14 >= *(int *)(temp_v6 + 0x24ec)) {
-        FUN_0037b578(*(unsigned int *)(temp_v6 + 0x256c),7);
+        screenStartOrClear(*(unsigned int *)(temp_v6 + 0x256c),7);
       }
       else if (temp_v4 != 0) {
         FUN_00359b6c(temp_v4);
@@ -1421,7 +1421,7 @@ LAB_00269f7c:
       temp_v4 = *(short *)(temp_v8 + temp_v14 * 8);
       temp_v14 = FUN_002a4894(temp_v6 + 0x2500);
       if (temp_v14 >= *(int *)(temp_v6 + 0x24ec)) {
-        FUN_0037b578(*(unsigned int *)(temp_v6 + 0x256c),7);
+        screenStartOrClear(*(unsigned int *)(temp_v6 + 0x256c),7);
       }
       else if (temp_v4 != 0) {
         FUN_00359b6c(temp_v4);
@@ -1558,7 +1558,7 @@ LAB_0026adc4:
     else if (temp_v14 == 6) {
       temp_v13 = *(unsigned short *)(temp_v2 + 0x678);
     }
-    FUN_00342348(temp_v13);
+    screenShowMessage(temp_v13);
   }
   if (*(int *)(temp_v2 + 0x518) == 0x14) {
     if (temp_v16) {

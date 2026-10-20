@@ -1,22 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Message {
+    /* 0x00 */ s32 type;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ s32 value;
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ s32 extra;
+} Message;
 
-int FUN_0013840c(int *param_1,int *param_2)
-
+/* For type 4 messages returns the value and writes the extra word to *extra; otherwise returns 0 and writes 0. */
+s32 FUN_0013840c(Message *message, s32 *extra)
 {
-  int temp_v0;
-  
-  *param_2 = 0;
-  if (*param_1 == 4) {
-    *param_2 = param_1[6];
-    temp_v0 = param_1[3];
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    s32 value;
+
+    *extra = 0;
+    if (message->type == 4) {
+        *extra = message->extra;
+        value = message->value;
+    } else {
+        value = 0;
+    }
+    return value;
 }
 
 } /* extern "C" */

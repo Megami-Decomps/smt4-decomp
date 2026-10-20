@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00344cd0(int, int, int, int, int, int, int, int, int, int, int, int, int, int, unsigned int, int);
 int FUN_004934ac(unsigned int, int, int, int, unsigned int);
-int FUN_0049359c(unsigned int, float *);
+int words2Copy(unsigned int, float *);
 
 typedef struct fn_004a6b18_arg0 fn_004a6b18_arg0;
 struct fn_004a6b18_arg0 {
@@ -36,7 +36,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00344cd0. */
 /* Supplied declaration required: FUN_004934ac. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 
 
 void FUN_004a6b18(fn_004a6b18_arg0 *param_1,unsigned int param_2)
@@ -47,7 +47,7 @@ void FUN_004a6b18(fn_004a6b18_arg0 *param_1,unsigned int param_2)
   float fStack_1c;
   
   if (param_1->field_0x50 != 0) {
-    FUN_0049359c(*(unsigned int *)&param_1[1].field_0x8,&temp_v0);
+    words2Copy(*(unsigned int *)&param_1[1].field_0x8,&temp_v0);
     FUN_004934ac(*(unsigned int *)&param_1[1].field_0x8,0x5d5,(int)temp_v0,(int)fStack_1c,param_2);
     FUN_00344cd0(param_1->field_0x50,(int)temp_v0,(int)fStack_1c,0x14,0x56a,0x56b,0x56c,0x566,0x568
                  ,0x567,0x569,(int)param_1->field_0x58,(int)param_1->field_0x54,

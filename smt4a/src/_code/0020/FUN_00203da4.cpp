@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0014bf2c(unsigned int, int);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, int);
 int FUN_002a1f60(...);
-int FUN_00341f00(void);
-int FUN_0035bf2c(void);
+int bustupCutAnimClearFlags(void);
+int eventTexClearFlagB8(void);
 
 typedef struct fn_00203da4_arg0 fn_00203da4_arg0;
 struct fn_00203da4_arg0 {
@@ -48,8 +48,8 @@ extern unsigned char LAB_00204014; /* 0x204014 */
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002a1f60. */
-/* Supplied declaration required: FUN_00341f00. */
-/* Supplied declaration required: FUN_0035bf2c. */
+/* Supplied declaration required: bustupCutAnimClearFlags. */
+/* Supplied declaration required: eventTexClearFlagB8. */
 extern int FUN_00399ddc(void);
 
 
@@ -71,8 +71,8 @@ void FUN_00203da4(fn_00203da4_arg0 *param_1,int param_2,unsigned int param_3,int
   temp_v0 = param_1->field_0x8;
   temp_v3 = param_1->field_0xc;
   FUN_0014bf2c(temp_v5,8);
-  FUN_00341f00();
-  FUN_0035bf2c();
+  bustupCutAnimClearFlags();
+  eventTexClearFlagB8();
   if (param_2 == 0) {
     param_1->field_0x2c = 1;
   }
@@ -108,8 +108,8 @@ void FUN_00203da4(fn_00203da4_arg0 *param_1,int param_2,unsigned int param_3,int
       FUN_002a1f60(temp_v5,3,0xffffffff,0,3,param_2,param_3);
     }
   }
-  FUN_00341f00();
-  FUN_0035bf2c();
+  bustupCutAnimClearFlags();
+  eventTexClearFlagB8();
   if (param_1->field_0x19c5 == '\x15') {
     param_1->field_0x9 = (char)param_4;
   }

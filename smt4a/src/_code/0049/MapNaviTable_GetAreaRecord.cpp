@@ -1,29 +1,22 @@
-#include "romwright_types.h"
+#include "shard/Shard0049.h"
 
 extern "C" {
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+extern void *dataTableGet(u32 index, u32 type);
+extern Entry10 *dataTableGetEntries(void *table);
+extern u32 dataTableGetCount(void *table);
 
-
-int MapNaviTable_GetAreaRecord(unsigned int param_1,unsigned int param_2)
-
+/* Entry `index` of data table 0x2B (type 2), or NULL when out of range. */
+Entry10 *MapNaviTable_GetAreaRecord(u32 unused, u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x2b,2);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_2 >= temp_v2) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = temp_v1 + param_2 * 0x10;
-  }
-  return temp_v1;
+    void *table = dataTableGet(0x2B, 2);
+    Entry10 *entries = dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+
+    if (index >= count) {
+        return NULL;
+    }
+    return &entries[index];
 }
 
 } /* extern "C" */

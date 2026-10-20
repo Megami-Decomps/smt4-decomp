@@ -49,7 +49,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002355fc. */
 /* Supplied declaration required: FUN_00236288. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_gfx_CalculatedTransform_UpdateRotateFlags. */
 /* Supplied declaration required: nw_gfx_CalculatedTransform_UpdateTranslateFlags. */
@@ -275,7 +275,7 @@ unsigned int FUN_003e8f70(int *param_1,float *param_2,unsigned int param_3,unsig
   }
   else {
     temp_v21 = 1.0f;
-    if (((DAT_00476634 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476634), temp_v0 != 0)) {
+    if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
       DAT_004efd6c = temp_v21;
       DAT_004efd70 = temp_v20;
       DAT_004efd74 = temp_v20;

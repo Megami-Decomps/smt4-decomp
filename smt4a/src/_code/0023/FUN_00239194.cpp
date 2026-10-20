@@ -1,32 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e3328(void);
+void FUN_002e3328(void);
+s32 jobIsValid(u32 job);
+extern u32 *DAT_0057f678;
 
-extern unsigned int *DAT_0057f678; /* 0x57f678 */
-
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_002e3328. */
-
-
-unsigned int FUN_00239194(void)
-
+/* Returns 0 while the job whose id DAT_0057f678 points at is valid; once it is not, frees the record and returns 1. */
+u32 FUN_00239194(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (DAT_0057f678 != (unsigned int *)0x0) {
-    temp_v0 = jobIsValid(*DAT_0057f678);
-    if (temp_v0 != 0) {
-      return 0;
+    s32 valid;
+
+    if (DAT_0057f678 != NULL) {
+        valid = jobIsValid(*DAT_0057f678);
+        if (valid != 0) {
+            return 0;
+        }
+        if (DAT_0057f678 != NULL) {
+            FUN_002e3328();
+            DAT_0057f678 = NULL;
+        }
     }
-    if (DAT_0057f678 != (unsigned int *)0x0) {
-      FUN_002e3328();
-      DAT_0057f678 = (unsigned int *)0x0;
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

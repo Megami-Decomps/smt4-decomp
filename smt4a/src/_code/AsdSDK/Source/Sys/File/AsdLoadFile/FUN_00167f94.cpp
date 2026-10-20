@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_00100824(int *);
+int refIsNullOrZero(int *);
 int FUN_001883b0(unsigned int *, unsigned short [264], int);
 int vcallSlot12IfValid(unsigned int);
 int FUN_00195fc8(void);
@@ -27,7 +27,7 @@ typedef struct {
 extern signed char g_asdLoadFileUseRawPaths; /* 0x5b3fe0 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00100824. */
+/* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
 extern int asdFileHashPackIsOpen(void);
 extern int FUN_001860e4(unsigned char *);
@@ -82,7 +82,7 @@ unsigned int FUN_00167f94(unsigned int param_1)
   temp_v4[3] = '\0';
   temp_v6 = 0;
   temp_v7 = 0;
-  FUN_00100824(&temp_v6);
+  refIsNullOrZero(&temp_v6);
   while ((temp_v1 = FUN_00100836(puVar6,0x105,(unsigned int *)&temp_v6), temp_v1 != 0 &&
          (puVar3 = puVar5, FUN_002e3c44(puVar5,puVar6,temp_v1,&temp_v6), puVar3 != (unsigned short *)0x0)
          )) {

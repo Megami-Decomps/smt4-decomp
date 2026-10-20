@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002f9fc2(int, int *);
+int _ZN9Obj55922c5resetEPv(int, int *);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002f9fc2. */
+/* Supplied declaration required: _ZN9Obj55922c5resetEPv. */
 extern int *FUN_0030170c(int *, unsigned int, unsigned int, unsigned int, unsigned int);
 
 
@@ -26,7 +26,7 @@ unsigned int FUN_002fba58(int *param_1,int param_2,unsigned int param_3,unsigned
   **(int **)(temp_v0 + 4) = (int)piVar1;
   *(int **)(temp_v0 + 4) = piVar1;
   param_1[0xd] = param_1[0xd] + 1;
-  FUN_002f9fc2(param_2,param_1);
+  _ZN9Obj55922c5resetEPv(param_2,param_1);
   (**(romwright_code **)(*param_1 + 0x38))(param_1);
   return 1;
 }

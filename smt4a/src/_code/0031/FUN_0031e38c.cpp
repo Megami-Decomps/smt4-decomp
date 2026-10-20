@@ -11,7 +11,7 @@ int FUN_00275bb0(int);
 int FUN_00275fe4(...);
 int FUN_003dea6c(int, int, int);
 int FUN_00417e08(int);
-int FUN_004da2d0(void);
+int optionsSetFlag1(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_001695a0. */
-extern int FUN_0016a0f0(unsigned int);
+extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00237898. */
@@ -30,7 +30,7 @@ extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_00417e08. */
 extern int FUN_004186a4(void);
 extern int FUN_004186e0(void);
-/* Supplied declaration required: FUN_004da2d0. */
+/* Supplied declaration required: optionsSetFlag1. */
 
 
 unsigned int FUN_0031e38c(void)
@@ -50,7 +50,7 @@ unsigned int FUN_0031e38c(void)
     FUN_00275fe4(0);
     FUN_00275fe4(1,0);
   }
-  temp_v3 = FUN_0016a0f0(0x1e);
+  temp_v3 = dataTableValueOrZero(0x1e);
   temp_v2 = FUN_00275bb0(0);
   if (temp_v2 == 0) {
     FUN_003dea6c(temp_v1,0,1);
@@ -69,7 +69,7 @@ unsigned int FUN_0031e38c(void)
         if ((temp_v2 != 0 && temp_v1 != 0) &&
            ((temp_v0 = *(char *)(temp_v2 + 6), (temp_v0 != '\x05' && temp_v0 != '\x04') && temp_v0 != '\x01'
             || (*(char *)(temp_v1 + 6) != '\0' && *(char *)(temp_v1 + 6) != '\n')))) {
-          FUN_004da2d0();
+          optionsSetFlag1();
         }
       }
       return 1;

@@ -21,7 +21,7 @@ extern unsigned char DAT_0057a6e4; /* 0x57a6e4 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: qsort. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 extern int FUN_003e8430(int);
@@ -209,7 +209,7 @@ LAB_004e66b8:
         temp_v5 = 1;
         if (temp_v6 - 2 >= 2) {
           do {
-            temp_v2 = FUN_001633a0(((temp_v6 - temp_v5) - 1) & 0xffff);
+            temp_v2 = lcgRandomRange(((temp_v6 - temp_v5) - 1) & 0xffff);
             temp_v2 = temp_v2 + temp_v5;
             pfVar6 = pfVar5 + temp_v5;
             temp_v11 = pfVar5[temp_v2];

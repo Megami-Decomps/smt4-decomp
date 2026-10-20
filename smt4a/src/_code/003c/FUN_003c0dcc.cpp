@@ -20,13 +20,13 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_0039b984. */
-extern unsigned int FUN_0040a75c(unsigned int);
+extern unsigned int tableByteGet1(unsigned int);
 /* Supplied declaration required: FUN_0040a76c. */
 /* Supplied declaration required: FUN_0040a790. */
 /* Supplied declaration required: FUN_0040a7b4. */
-extern int FUN_0040a7cc(unsigned int);
-extern int FUN_0040a7e4(unsigned int);
-extern int FUN_0040a7f8(unsigned int);
+extern int tableFlagBit2(unsigned int);
+extern int tableFlagBit0(unsigned int);
+extern int tableFlagBit1(unsigned int);
 /* Supplied declaration required: FUN_0040a844. */
 /* Supplied declaration required: FUN_0040a864. */
 extern int FUN_004717e0(unsigned int);
@@ -62,22 +62,22 @@ unsigned int FUN_003c0dcc(void)
       psVar4 = (short *)(temp_v7 & 0xffff);
       FUN_0039b984();
       if ((psVar4 != (short *)0x0) && (temp_v8 = temp_v8 + 1, *psVar4 != 0)) {
-        temp_v3 = FUN_0040a7e4(temp_v7);
+        temp_v3 = tableFlagBit0(temp_v7);
         if (temp_v3 != 0) {
           temp_v3 = FUN_0018719c(psVar4[0x2d]);
           if (!(psVar4[0x2d] == 0 || temp_v3 == 0)) {
             FUN_0040a7b4();
           }
           else {
-            temp_v3 = FUN_0040a7f8(temp_v7);
+            temp_v3 = tableFlagBit1(temp_v7);
             if (temp_v3 != 0) {
               return 1;
             }
-            temp_v3 = FUN_0040a7cc(temp_v7);
+            temp_v3 = tableFlagBit2(temp_v7);
             if (temp_v3 != 0) {
               return 1;
             }
-            temp_v4 = FUN_0040a75c(temp_v7);
+            temp_v4 = tableByteGet1(temp_v7);
             temp_v6 = temp_v4;
             if (temp_v4 < 5) {
               temp_v5 = 0;

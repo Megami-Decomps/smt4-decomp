@@ -1,17 +1,13 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_005b4464; /* 0x5b4464 */
-
-
-void FUN_0018b850(int param_1)
-
+/* Stores `value` in the word at 0x8 of the global at 0x5B4464 unless it is already set. */
+void FUN_0018b850(s32 value)
 {
-  if ((*(int *)((unsigned char *)&DAT_005b4464 + 0x8)) == 0) {
-    (*(int *)((unsigned char *)&DAT_005b4464 + 0x8)) = param_1;
-  }
-  return;
+    if (DAT_005b4464.unk08 == 0) {
+        DAT_005b4464.unk08 = value;
+    }
 }
 
 } /* extern "C" */

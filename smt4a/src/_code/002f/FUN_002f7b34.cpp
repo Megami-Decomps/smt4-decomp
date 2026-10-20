@@ -1,26 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9598(unsigned int *, unsigned int);
+extern const u8 DAT_00559504[];  /* vtable */
+void FUN_002e9598(u32 *member, u32 value);
 
-extern unsigned char DAT_00559504; /* 0x559504 */
+typedef struct Object559504 {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ u32 first;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ u32 second;
+} Object559504;
 
-/* Supplied declaration required: FUN_002e9598. */
-extern unsigned int *FUN_002fd284(void);
+Object559504 *FUN_002fd284(void);
 
-
-unsigned int * FUN_002f7b34(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Creates the object through FUN_002fd284, sets its vtable and fills its two members; returns it. */
+Object559504 *FUN_002f7b34(u32 unused, u32 first, u32 second)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_002fd284();
-  *puVar1 = (unsigned int)&DAT_00559504;
-  FUN_002e9598(puVar1 + 2,param_2);
-  FUN_002e9598(puVar1 + 4,param_3);
-  return puVar1;
+    Object559504 *object;
+
+    object = FUN_002fd284();
+    object->vtbl = DAT_00559504;
+    FUN_002e9598(&object->first, first);
+    FUN_002e9598(&object->second, second);
+    return object;
 }
 
 } /* extern "C" */

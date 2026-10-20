@@ -148,7 +148,7 @@ static float romwright_sqrt_4(float value)
 extern int FUN_00269a58(void);
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002f81b0. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
@@ -410,7 +410,7 @@ void FUN_002dea74(int param_1)
   temp_v65 = fStack_164;
   temp_v66 = temp_v11;
   temp_v67 = temp_v64;
-  if (((DAT_00476638 & 1) == 0) && (temp_v1 = FUN_002bfefc(&DAT_00476638), temp_v1 != 0)) {
+  if (((DAT_00476638 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_00476638), temp_v1 != 0)) {
     DAT_004efda0 = (unsigned int)temp_v26;
     DAT_004efd9c = 0x3f800000;
     DAT_004efdb0 = 0x3f800000;

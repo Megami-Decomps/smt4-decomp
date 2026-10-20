@@ -1,21 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f110; /* 0x57f110 */
+extern OverlayRef DAT_0057f110;
 
-
-void FUN_00319aec(unsigned char param_1)
-
+void FUN_00319aec(u8 value)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f110 + 0x4));
-  if ((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x1a4) = param_1;
-    *(unsigned int *)(temp_v0 + 0x1a0) = 1;
-  }
-  return;
+    OverlayObj *overlay = DAT_0057f110.instance;
+
+    if (overlay != NULL) {
+        overlay->unk1A4 = value;
+        overlay->unk1A0 = 1;
+    }
 }
 
 } /* extern "C" */

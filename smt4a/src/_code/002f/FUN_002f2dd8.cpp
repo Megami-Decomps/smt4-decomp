@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x122];
+    /* 0x122 */ s16 count;
+} Holder;
 
-void FUN_002f2dd8(int param_1)
-
+/* Increments the 16-bit counter at 0x122. */
+void FUN_002f2dd8(Holder *object)
 {
-  *(short *)(param_1 + 0x122) = *(short *)(param_1 + 0x122) + 1;
-  return;
+    object->count = object->count + 1;
 }
 
 } /* extern "C" */

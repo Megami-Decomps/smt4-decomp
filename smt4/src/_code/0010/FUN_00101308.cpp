@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00103504(...);
-int FUN_00103cd0(...);
+int appletReplySleepQueryAllow(...);
 int FUN_00103f90(...);
 int FUN_001042b8(...);
 int FUN_00106e60(...);
@@ -21,7 +21,7 @@ int FUN_00102438(...);
 int asdProcessUpdate(...);
 int FUN_00103c9c(...);
 int FUN_00103d48(...);
-int FUN_00103e60(...);
+int randSetSeed(...);
 int asdPrimSwapBuffers(...);
 int FUN_0010402c(...);
 int FUN_001041e8(...);
@@ -35,7 +35,7 @@ int FUN_00105e00(...);
 int FUN_00105e98(...);
 int FUN_00105f98(...);
 int FUN_0010633c(...);
-int FUN_00107210(...);
+int dataTable02Sub3GetRecord(...);
 int FUN_00107264(...);
 int FUN_00107598(...);
 int FUN_0010b5e8(...);
@@ -83,7 +83,7 @@ int FUN_00102b10(...);
 int asdProcessInit(...);
 int asdMemoryInit(...);
 int asdNgcInit(...);
-int FUN_00103c84(...);
+int appletCloseApplication(...);
 int FUN_00103cec(...);
 int FUN_00103fec(...);
 int FUN_0010421c(...);
@@ -92,7 +92,7 @@ int asdPrimInit(...);
 int FUN_001049ac(...);
 int asdTMTexTableLoadList(...);
 int FUN_00105254(...);
-int FUN_00105494(...);
+int gfxSetupResGraphicsFile(...);
 int FUN_001054bc(...);
 int FUN_00105a10(...);
 int FUN_00105b94(...);
@@ -287,14 +287,14 @@ extern unsigned int asdModelGetStringConst(void);
 extern unsigned int asdModelGetStatic3C(void);
 /* Supplied declaration required: asdMemoryInit. */
 /* Supplied declaration required: asdNgcInit. */
-/* Supplied declaration required: FUN_00103c84. */
+/* Supplied declaration required: appletCloseApplication. */
 /* Supplied declaration required: FUN_00103c9c. */
-/* Supplied declaration required: FUN_00103cd0. */
+/* Supplied declaration required: appletReplySleepQueryAllow. */
 /* Supplied declaration required: FUN_00103cec. */
 extern unsigned long long FUN_00103d38(unsigned int);
 /* Supplied declaration required: FUN_00103d48. */
 extern int FUN_00103e50(void);
-/* Supplied declaration required: FUN_00103e60. */
+/* Supplied declaration required: randSetSeed. */
 extern unsigned long long FUN_00103e70(void);
 extern int FUN_00103ec8(void);
 /* Supplied declaration required: FUN_00103f74. */
@@ -304,7 +304,7 @@ extern int FUN_00103ec8(void);
 /* Supplied declaration required: FUN_0010402c. */
 /* Supplied declaration required: FUN_00104074. */
 extern int FUN_001041c8(void);
-extern int FUN_001041d8(void);
+extern int appletGetBusyFlag(void);
 /* Supplied declaration required: FUN_001041e8. */
 /* Supplied declaration required: FUN_0010421c. */
 /* Supplied declaration required: FUN_001042b8. */
@@ -320,12 +320,12 @@ extern int FUN_00104e0c(void);
 /* Supplied declaration required: FUN_00104ec4. */
 extern int FUN_001050cc(void);
 /* Supplied declaration required: asdTMTexTableLoadList. */
-extern unsigned long long FUN_001051f0(void);
+extern unsigned long long appletProcessHomeButton(void);
 /* Supplied declaration required: FUN_00105254. */
 /* Supplied declaration required: FUN_001052d8. */
 /* Supplied declaration required: FUN_00105394. */
 extern unsigned long long FUN_00105478(void);
-/* Supplied declaration required: FUN_00105494. */
+/* Supplied declaration required: gfxSetupResGraphicsFile. */
 /* Supplied declaration required: FUN_001054bc. */
 /* Supplied declaration required: FUN_001058a4. */
 /* Supplied declaration required: FUN_00105948. */
@@ -359,7 +359,7 @@ extern unsigned int FUN_00106708(void);
 /* Supplied declaration required: FUN_0010707c. */
 /* Supplied declaration required: FUN_001070ac. */
 /* Supplied declaration required: FUN_001071a0. */
-/* Supplied declaration required: FUN_00107210. */
+/* Supplied declaration required: dataTable02Sub3GetRecord. */
 /* Supplied declaration required: FUN_00107264. */
 extern int FUN_00107538(unsigned int);
 /* Supplied declaration required: FUN_00107598. */
@@ -392,7 +392,7 @@ extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: asdLoadFileSync. */
 /* Supplied declaration required: FUN_002c5d5c. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
-extern unsigned int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int nn_applet_CTR_detail_CloseApplication(unsigned char *, unsigned int, unsigned int);
 extern void nn_cfg_CTR_Initialize(void);
 extern void nn_pl_CTR_InitializeGameCoin(void);
@@ -475,7 +475,7 @@ void FUN_00101308(void)
   FUN_00106d40();
   temp_v2 = FUN_00103ec8();
   if (temp_v2 == 0) {
-    FUN_00103c84();
+    appletCloseApplication();
   }
   asdNgcInit();
   temp_v34 = 0;
@@ -495,7 +495,7 @@ void FUN_00101308(void)
   FUN_00105b94();
   temp_v2 = g_titleScene;
   *(unsigned int *)(g_titleScene + 0x136c) = 0;
-  temp_v3 = FUN_002c5da8(6,7,0);
+  temp_v3 = packNibblesAndByte(6,7,0);
   *(unsigned int *)(temp_v2 + 0x1384) = temp_v3;
   temp_v2 = g_titleScene;
   temp_v3 = FUN_002c5d80(5,1);
@@ -523,7 +523,7 @@ void FUN_00101308(void)
   temp_v45 = 8;
   FUN_00105254(&temp_v40,0);
   asdLoadFileSync(&LAB_001017b4,0,1,0x80);
-  FUN_00105494();
+  gfxSetupResGraphicsFile();
   FUN_00105e28(1);
   puVar6 = (unsigned int *)asdModelGetStatic3C();
   *puVar6 = 0x40400000;
@@ -702,7 +702,7 @@ void FUN_00101308(void)
   DAT_00446db3 = 0;
   FUN_002c567c(&temp_v26);
   temp_v3 = (unsigned int)(romwright_zext_4_8(temp_v26) * 1000000);
-  FUN_00103e60(temp_v3,(int)(romwright_zext_4_8(temp_v26) * 1000000 >> 0x20));
+  randSetSeed(temp_v3,(int)(romwright_zext_4_8(temp_v26) * 1000000 >> 0x20));
   temp_v23 = FUN_00103d38(temp_v3);
   temp_v16 = 100.0f;
 LAB_00101b80:
@@ -746,7 +746,7 @@ LAB_00101b80:
               FUN_0010402c(1);
               temp_v2 = FUN_00107538(1);
               if (temp_v2 != 0) {
-                FUN_00107210();
+                dataTable02Sub3GetRecord();
                 FUN_00107264();
               }
             }
@@ -831,7 +831,7 @@ LAB_00101b80:
             if (temp_v2 != 0) {
               FUN_00103d48();
             }
-            temp_v2 = FUN_001041d8();
+            temp_v2 = appletGetBusyFlag();
             if (temp_v2 != 0) {
               FUN_00103c9c();
             }
@@ -841,7 +841,7 @@ LAB_00101b80:
             }
             asdSoundShutdown();
             FUN_00103504();
-            FUN_00103c84();
+            appletCloseApplication();
           }
         }
         temp_v24 = FUN_00103e70();
@@ -850,7 +850,7 @@ LAB_00101b80:
           if (g_mobiclipProcess != 0) {
             FUN_002c5630(2);
           }
-          FUN_00103cd0();
+          appletReplySleepQueryAllow();
           FUN_002c5620();
           FUN_001042b8();
           temp_v3 = temp_v7;
@@ -861,7 +861,7 @@ LAB_00101b80:
         }
         temp_v23 = romwright_piece_4_4(temp_v3,(unsigned int)DAT_00446db3);
       } while (DAT_00446db3 != 0);
-      temp_v24 = FUN_001051f0();
+      temp_v24 = appletProcessHomeButton();
       temp_v3 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
       temp_v2 = (int)temp_v24;
       if (!(temp_v2 == 1 || temp_v2 == 2)) {

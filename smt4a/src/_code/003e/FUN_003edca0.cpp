@@ -22,13 +22,13 @@ extern unsigned int DAT_00573b40; /* 0x573b40 */
 extern unsigned int DAT_00573b44; /* 0x573b44 */
 
 extern int FUN_0014af84(void);
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_001801a4(void);
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019cac4. */
 extern int FUN_001ab888(void);
 extern int FUN_001b347c(void);
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 extern int FUN_003e46f4(unsigned int);
 extern int __aeabi_idivmod(int, unsigned int);
 
@@ -47,7 +47,7 @@ unsigned int FUN_003edca0(int param_1)
   unsigned int *puVar8;
   int temp_v6;
   
-  temp_v1 = FUN_003e0044(1);
+  temp_v1 = playerHasFlagBit(1);
   if ((temp_v1 == 0) &&
      ((*(unsigned int *)(param_1 + 0x45a0) & DAT_00573a50) == 0 &&
       (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a54) == 0)) {
@@ -146,7 +146,7 @@ unsigned int FUN_003edca0(int param_1)
             if (temp_v3 != 0) {
               temp_v1 = temp_v1 + 0x14;
             }
-            temp_v3 = FUN_001633a0(99);
+            temp_v3 = lcgRandomRange(99);
             if (temp_v1 < temp_v3) {
               return 0;
             }

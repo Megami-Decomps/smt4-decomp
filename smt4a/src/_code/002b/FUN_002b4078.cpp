@@ -1,34 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b4078` (_code @ 0x2b4078, 0x68 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00544b38[]; /* ././effMisc.h: __FILE__ */
 
-int memAlloc(int, int, int, int, int, int);
-int FUN_002e6dd4(void);
+void *memAlloc(int, int, int, int size, int align, int);
+void FUN_002e6dd4(void *block, s32 size);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002e6dd4. */
-
-
-unsigned int * FUN_002b4078(unsigned int param_1)
-
+/* Allocates a zeroed effect object of `size` bytes from the main heap, 16-byte aligned. */
+static __inline void *effAllocCleared(s32 size)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0x5c,0x10,1);
-  FUN_002e6dd4();
-  puVar1[1] = 0xffffffff;
-  *puVar1 = param_1;
-  puVar1[2] = 0x3f800000;
-  return puVar1;
+    void *block;
+
+    asdDebugTrace(DAT_00544b38, 450);
+    block = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
+    FUN_002e6dd4(block, size);
+    return block;
+}
+
+/* Creates an emitter object able to hold `maxCount` particles. */
+EffEmitter *FUN_002b4078(u32 maxCount)
+{
+    EffEmitter *emitter = (EffEmitter *)effAllocCleared(sizeof(EffEmitter));
+
+    emitter->unk04 = -1;
+    emitter->maxCount = maxCount;
+    emitter->scale = 1.0f;
+    return emitter;
 }
 
 } /* extern "C" */

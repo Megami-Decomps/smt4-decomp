@@ -1,30 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00192780` (_code @ 0x192780, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+int dataTableGet(int arg0, int arg1);
+int dataTableGetEntries(void);
 
-extern int *dataTableGet(unsigned int, unsigned int);
-
-
-int * FUN_00192780(void)
-
+/* Selects table entry (24, 0), then returns the table's entries. */
+int FUN_00192780(void)
 {
-  int *piVar1;
-  
-  piVar1 = (int *)dataTableGet(0x18,0);
-  if ((piVar1 != (int *)0x0) && (*piVar1 == 0x314c4254)) {
-    piVar1 = piVar1 + 4;
-  }
-  else {
-    piVar1 = (int *)0x0;
-  }
-  return piVar1;
+    dataTableGet(24, 0);
+    return dataTableGetEntries();
 }
 
 } /* extern "C" */

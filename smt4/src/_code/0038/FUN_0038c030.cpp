@@ -1,17 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0042221c; /* 0x42221c */
+extern u8 DAT_0042221c;
 
+typedef struct Obj {
+    /* 0x0 */ const void *vtbl;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u32 unk8;
+} Obj;
 
-void FUN_0038c030(unsigned int *param_1)
-
+/* Constructor: installs the vtable at DAT_0042221c and clears the fields. */
+void FUN_0038c030(Obj *obj)
 {
-  param_1[1] = 0;
-  *param_1 = (unsigned int)&DAT_0042221c;
-  param_1[2] = 0;
-  return;
+    obj->unk4 = 0;
+    obj->vtbl = &DAT_0042221c;
+    obj->unk8 = 0;
 }
 
 } /* extern "C" */

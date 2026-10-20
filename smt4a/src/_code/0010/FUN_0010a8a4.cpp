@@ -8,9 +8,9 @@ int FUN_001322b6(int, unsigned char [4]);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
 int FUN_002eb588(unsigned char [8]);
-int FUN_002f3724(unsigned char [4], int *, int);
+int wordMoveOut_002f3724(unsigned char [4], int *, int);
 int FUN_002f3734(int *);
-int FUN_002f3764(int *, int *, int);
+int wordMoveOut_002f3764(int *, int *, int);
 int FUN_002f3774(unsigned char [4], int, int *);
 int FUN_002f39fa(int *);
 int SBORROW4(...);
@@ -33,11 +33,11 @@ extern unsigned char DAT_00594a58; /* 0x594a58 */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern unsigned long long FUN_002eab1c(unsigned char *, int);
 /* Supplied declaration required: FUN_002eb588. */
-extern int FUN_002f3594(int *, unsigned int *);
-extern int FUN_002f35fc(int *, unsigned int *);
-/* Supplied declaration required: FUN_002f3724. */
+extern int wordRefsDiffer_002f3594(int *, unsigned int *);
+extern int wordRefsDiffer_002f35fc(int *, unsigned int *);
+/* Supplied declaration required: wordMoveOut_002f3724. */
 /* Supplied declaration required: FUN_002f3734. */
-/* Supplied declaration required: FUN_002f3764. */
+/* Supplied declaration required: wordMoveOut_002f3764. */
 /* Supplied declaration required: FUN_002f3774. */
 /* Supplied declaration required: FUN_002f39fa. */
 
@@ -66,14 +66,14 @@ void FUN_0010a8a4(int param_1)
   temp_v5 = *(int *)(*(int *)(param_1 + 0x18) + 8);
   while( 1 ) {
     temp_v7 = *(unsigned int *)(param_1 + 0x18);
-    temp_v1 = FUN_002f35fc(&temp_v5,(unsigned int *)&temp_v7);
+    temp_v1 = wordRefsDiffer_002f35fc(&temp_v5,(unsigned int *)&temp_v7);
     temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x14));
     if (temp_v1 == 0) break;
     temp_v3 = FUN_002eab1c(temp_v8,temp_v5 + 0x50);
     temp_v1 = (int)((unsigned long long)temp_v3 >> 0x20);
     temp_v2 = temp_v0 < (unsigned int)temp_v3;
     if ((int)(-(unsigned int)temp_v2 - temp_v1) < 0 != (SBORROW4(0,temp_v1) != SBORROW4(-temp_v1,(unsigned int)temp_v2))) {
-      FUN_002f3724(temp_v4,&temp_v5,0);
+      wordMoveOut_002f3724(temp_v4,&temp_v5,0);
       FUN_001322b6(param_1 + 8,temp_v4);
     }
     else {
@@ -83,14 +83,14 @@ void FUN_0010a8a4(int param_1)
   temp_v6 = *(int *)(*(int *)(param_1 + 0x34) + 8);
   while( 1 ) {
     temp_v10 = *(unsigned int *)(param_1 + 0x34);
-    temp_v1 = FUN_002f3594(&temp_v6,(unsigned int *)&temp_v10);
+    temp_v1 = wordRefsDiffer_002f3594(&temp_v6,(unsigned int *)&temp_v10);
     temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x14));
     if (temp_v1 == 0) break;
     temp_v3 = FUN_002eab1c(temp_v8,temp_v6 + 0x30);
     temp_v1 = (int)((unsigned long long)temp_v3 >> 0x20);
     temp_v2 = temp_v0 < (unsigned int)temp_v3;
     if ((int)(-(unsigned int)temp_v2 - temp_v1) < 0 != (SBORROW4(0,temp_v1) != SBORROW4(-temp_v1,(unsigned int)temp_v2))) {
-      FUN_002f3764(&temp_v11,&temp_v6,0);
+      wordMoveOut_002f3764(&temp_v11,&temp_v6,0);
       temp_v12 = temp_v11;
       FUN_002f3774(temp_v13,param_1 + 0x24,&temp_v12);
     }

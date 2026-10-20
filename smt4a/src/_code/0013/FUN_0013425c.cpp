@@ -22,7 +22,7 @@ extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e9afe. */
 /* Supplied declaration required: vectorSize12A. */
 /* Supplied declaration required: FUN_00307940. */
-extern int FUN_00307962(unsigned int, int *);
+extern int vectorGrowCapacity_00307962(unsigned int, int *);
 /* Supplied declaration required: FUN_00307974. */
 /* Supplied declaration required: FUN_0030d358. */
 extern int __aeabi_idivmod(int, unsigned int);
@@ -57,7 +57,7 @@ void FUN_0013425c(int *param_1,int param_2,unsigned int param_3)
   }
   else {
     temp_v2 = vectorSize12A(param_1);
-    temp_v6 = FUN_00307962(temp_v2,param_1);
+    temp_v6 = vectorGrowCapacity_00307962(temp_v2,param_1);
     temp_v3 = rt_malloc();
     FUN_00307940(*param_1,param_2,temp_v3,param_1);
     temp_v5 = __aeabi_idivmod(param_2 - *param_1,0xc);

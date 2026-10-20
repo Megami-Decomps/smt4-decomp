@@ -1,13 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Shard0032.h"
 
 extern "C" {
 
-
-void FUN_0032134c(int param_1,unsigned char param_2)
-
+void FUN_0032134c(Menu32 *menu, u8 value)
 {
-  *(unsigned char *)(param_1 + 0x38b9) = param_2;
-  return;
+    menu->unk38B9 = value;
 }
 
 } /* extern "C" */

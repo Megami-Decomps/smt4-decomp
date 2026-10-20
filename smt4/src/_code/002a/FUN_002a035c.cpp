@@ -9,7 +9,7 @@ int FUN_00296e90(void);
 extern int DAT_0043dd68; /* 0x43dd68 */
 
 /* Supplied declaration required: FUN_00296e90. */
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 
 
 void FUN_002a035c(void)
@@ -19,7 +19,7 @@ void FUN_002a035c(void)
   int temp_v0;
   
   if (DAT_0043dd68 != 0) {
-    if ((*(char *)(DAT_0043dd68 + 0x430) != '\0') && (temp_v0 = FUN_002a0ce8(), temp_v0 == 0)) {
+    if ((*(char *)(DAT_0043dd68 + 0x430) != '\0') && (temp_v0 = sys43e188GetState(), temp_v0 == 0)) {
       FUN_00296e90();
     }
     if (DAT_0043dd68 != 0) {

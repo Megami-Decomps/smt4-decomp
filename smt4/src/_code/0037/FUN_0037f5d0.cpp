@@ -1,25 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_004ea494; /* 0x4ea494 */
+extern u16 DAT_004ea494[];
 
-
-int FUN_0037f5d0(int param_1,int param_2)
-
+/* Address of halfword `index` (0-15 in the object at +0xCC, 16-31 in the global table), or 0. */
+int FUN_0037f5d0(int obj, int index)
 {
-  int temp_v0;
-  
-  if (param_2 < 0x10) {
-    temp_v0 = param_1 + param_2 * 2 + 0xcc;
-  }
-  else if (param_2 < 0x20) {
-    temp_v0 = (int)&(*(unsigned int *)((unsigned char *)&DAT_004ea494 - 0x20)) + param_2 * 2;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    int address;
+
+    if (index < 0x10) {
+        address = obj + index * 2 + 0xcc;
+    } else if (index < 0x20) {
+        address = (int)&DAT_004ea494[index - 0x10];
+    } else {
+        address = 0;
+    }
+    return address;
 }
 
 } /* extern "C" */

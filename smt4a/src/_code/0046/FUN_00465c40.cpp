@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00461ea8(int, unsigned int);
+int voiceOwnerSetPaused(int, unsigned int);
 
-/* Supplied declaration required: FUN_00461ea8. */
+/* Supplied declaration required: voiceOwnerSetPaused. */
 
 
 void FUN_00465c40(int param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ void FUN_00465c40(int param_1,unsigned int param_2)
   *(char *)(param_1 + 0xe) = (char)param_2;
   do {
     if ((temp_v1 < 0x10) && (temp_v0 = *(int *)(param_1 + temp_v1 * 4 + 0x90), temp_v0 != 0)) {
-      FUN_00461ea8(temp_v0,param_2);
+      voiceOwnerSetPaused(temp_v0,param_2);
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x10);

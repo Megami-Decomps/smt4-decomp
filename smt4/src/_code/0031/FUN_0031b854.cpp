@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_0031b854(unsigned int param_1,int param_2,int param_3)
-
+/* Packs `a` with `b` shifted into bits 4+ and `c` into bits 8+. */
+u32 FUN_0031b854(u32 a, int b, int c)
 {
-  return param_1 | (param_2 << 4) | (param_3 << 8);
+    return a | (b << 4) | (c << 8);
 }
 
 } /* extern "C" */

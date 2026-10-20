@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002db06c(void);
 int FUN_003541c0(void);
-int FUN_003e544c(...);
+int linkHolderCopyWords(...);
 int FUN_003fda64(...);
 int FUN_0040ace8(...);
 
@@ -15,10 +15,10 @@ int FUN_003135bc(void);
 int FUN_00324cd0(void);
 int FUN_00324e38(...);
 int FUN_00385578(void);
-int FUN_003e5414(...);
+int linkHolderCallFirst(...);
 int FUN_003e542c(...);
-int FUN_003e549c(...);
-int FUN_003e5504(int, int *);
+int linkHolderApplyFirst(...);
+int linkHolderRunAll(int, int *);
 int FUN_003e5558(int);
 int FUN_003e566c(int);
 int FUN_003e5858(int);
@@ -84,11 +84,11 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_003541c0. */
 /* Supplied declaration required: FUN_00385578. */
-/* Supplied declaration required: FUN_003e5414. */
+/* Supplied declaration required: linkHolderCallFirst. */
 /* Supplied declaration required: FUN_003e542c. */
-/* Supplied declaration required: FUN_003e544c. */
-/* Supplied declaration required: FUN_003e549c. */
-/* Supplied declaration required: FUN_003e5504. */
+/* Supplied declaration required: linkHolderCopyWords. */
+/* Supplied declaration required: linkHolderApplyFirst. */
+/* Supplied declaration required: linkHolderRunAll. */
 /* Supplied declaration required: FUN_003e5558. */
 /* Supplied declaration required: FUN_003e566c. */
 /* Supplied declaration required: FUN_003e5858. */
@@ -183,7 +183,7 @@ void FUN_00296530(void)
     piVar12 = (int *)0xc7c34f80;
     temp_v9 = (int *)0xc7c34f80;
     temp_v10 = 0;
-    FUN_003e5504(g_lmapScene[0x6a],&temp_v8);
+    linkHolderRunAll(g_lmapScene[0x6a],&temp_v8);
     piVar6 = g_lmapScene;
     *(unsigned int *)(*(int *)(g_lmapScene[0x60] + 4) + 4) =
          *(unsigned int *)(*(int *)(g_lmapScene[0x60] + 4) + 4) | 3;
@@ -196,7 +196,7 @@ void FUN_00296530(void)
     piVar6 = (int *)g_lmapScene[8];
     temp_v10 = g_lmapScene[9];
     temp_v9 = piVar6;
-    FUN_003e5504(g_lmapScene[0x6a],&temp_v8);
+    linkHolderRunAll(g_lmapScene[0x6a],&temp_v8);
     FUN_003e566c(g_lmapScene[0x6a]);
     piVar12 = (int *)0x3f800000;
     FUN_003e5558(g_lmapScene[0x6a]);
@@ -259,7 +259,7 @@ void FUN_00296530(void)
     }
   }
   if ((char)g_lmapScene[0x17] == '\0') {
-    piVar2 = (int *)FUN_003e5414(g_lmapScene[0x6a]);
+    piVar2 = (int *)linkHolderCallFirst(g_lmapScene[0x6a]);
     piVar5 = g_lmapScene;
     piVar6 = (int *)g_lmapScene[0x15];
     if (piVar2 != piVar6) goto LAB_00296958;
@@ -290,7 +290,7 @@ LAB_00296958:
     piVar12 = g_lmapScene;
     *(unsigned char *)(g_lmapScene + 0x17) = 0;
     piVar12[0x18] = 0;
-    FUN_003e549c(piVar12[0x6a],piVar12[0x15]);
+    linkHolderApplyFirst(piVar12[0x6a],piVar12[0x15]);
     g_lmapScene[0x19] = (int)piVar13;
   }
   piVar13 = g_lmapScene;
@@ -364,9 +364,9 @@ LAB_00296958:
         }
       }
       *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) & 0xfffffffc;
-      temp_v1 = FUN_003e5414(piVar13[0x6a]);
+      temp_v1 = linkHolderCallFirst(piVar13[0x6a]);
       if (temp_v1 != 2) {
-        FUN_003e544c(g_lmapScene[0x6a],&temp_v11);
+        linkHolderCopyWords(g_lmapScene[0x6a],&temp_v11);
         FUN_003fda64(*(unsigned int *)(*(int *)(g_lmapScene[0x6a] + 8) + 4),&LAB_00296d2c,temp_v14)
         ;
         temp_v11 = temp_v15;

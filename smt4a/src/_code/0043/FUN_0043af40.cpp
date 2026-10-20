@@ -1,23 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043af40` (_code @ 0x43af40, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0043b42c(int);
+typedef struct Queue {
+    u8 unk00[4];
+    s32 count;     /* 0x04 */
+    u8 unk08[4];
+    u8 entries[1]; /* 0x0c */
+} Queue;
 
-/* Supplied declaration required: FUN_0043b42c. */
+extern u32 FUN_0043b42c(void *entries);
 
-
-void FUN_0043af40(int param_1)
-
+/* Processes the queue's entries; an empty queue fails with result code 0xd8a0a064. */
+u32 FUN_0043af40(Queue *queue)
 {
-/* irregular: 1 native warning(s); review required */
-  if (0 < *(int *)(param_1 + 4)) {
-    FUN_0043b42c(param_1 + 0xc);
-    return;
-  }
-  return;
+    if (queue->count <= 0) {
+        return 0xd8a0a064;
+    }
+    return FUN_0043b42c(queue->entries);
 }
 
 } /* extern "C" */

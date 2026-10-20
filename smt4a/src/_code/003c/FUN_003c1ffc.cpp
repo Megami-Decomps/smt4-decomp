@@ -1,34 +1,29 @@
-#include "romwright_types.h"
+#include "shard/Shard003C.h"
 
 extern "C" {
 
-int btlGetMainState(void);
-int scrSetResult(unsigned int);
+typedef struct ScriptObj18 {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 unk18;
+} ScriptObj18;
 
-extern int DAT_00573c50; /* 0x573c50 */
+extern ScriptObj18 *DAT_00573c50;
+extern void *btlGetMainState(void);
+extern u8 FUN_003eb1cc(void *state);
+extern void scrSetResult(u32 value);
 
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrSetResult. */
-extern int FUN_003eb1cc(void);
-
-
-unsigned int FUN_003c1ffc(void)
-
+/* Script command: result is the script object's value at +0x18 while FUN_003eb1cc accepts the battle state, else 2. */
+u32 FUN_003c1ffc(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  btlGetMainState();
-  temp_v0 = FUN_003eb1cc();
-  if (temp_v0 != 0) {
-    temp_v1 = *(unsigned int *)(DAT_00573c50 + 0x18);
-  }
-  else {
-    temp_v1 = 2;
-  }
-  scrSetResult(temp_v1);
-  return 1;
+    u32 value;
+
+    if (FUN_003eb1cc(btlGetMainState()) != 0) {
+        value = DAT_00573c50->unk18;
+    } else {
+        value = 2;
+    }
+    scrSetResult(value);
+    return 1;
 }
 
 } /* extern "C" */

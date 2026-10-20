@@ -1,18 +1,12 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jyoucyuGetTableEntry(int);
-
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-
+int jyoucyuGetTableEntry(int index);
 
 void FUN_00394cc4(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  jyoucyuGetTableEntry(1);
-  return;
+    jyoucyuGetTableEntry(1);
 }
 
 } /* extern "C" */

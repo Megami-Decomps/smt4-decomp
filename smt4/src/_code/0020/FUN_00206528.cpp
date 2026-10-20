@@ -23,7 +23,7 @@ extern int FUN_002a60b4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ae898. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002e0da0. */
 /* Supplied declaration required: FUN_0032c3fc. */
 
@@ -134,7 +134,7 @@ unsigned int FUN_00206528(void)
               *(unsigned char *)(temp_v4 + 0x2dc) = 0;
             }
           }
-          else if ((*(int *)(temp_v0 + 0x2ec) % 10 == 0) && (temp_v2 = FUN_002c09f4(3), temp_v2 == temp_v1))
+          else if ((*(int *)(temp_v0 + 0x2ec) % 10 == 0) && (temp_v2 = randNextInRange(3), temp_v2 == temp_v1))
           {
             FUN_002bee58(temp_v0 + temp_v1 * 0x8c + 0xac,6);
             *(unsigned char *)(temp_v4 + 0x2dc) = 1;

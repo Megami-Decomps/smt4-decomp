@@ -1,31 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
+int jobStop(u32 job, int mode);
+extern int jobIsValid(u32 job);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Worker {
+    /* 0x0 */ u32 job;
+} Worker;
 
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: jobStop. */
-
-
-void FUN_001db358(unsigned int *param_1)
-
+void FUN_001db358(Worker **owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  param_1 = (unsigned int *)*param_1;
-  temp_v0 = jobIsValid(*param_1);
-  if (temp_v0 != 0) {
-    jobStop(*param_1,0);
-    return;
-  }
-  return;
+    Worker *worker = *owner;
+
+    if (jobIsValid(worker->job) != 0) {
+        jobStop(worker->job, 0);
+    }
 }
 
 } /* extern "C" */

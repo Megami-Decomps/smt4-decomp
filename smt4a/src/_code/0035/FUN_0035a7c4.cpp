@@ -20,7 +20,7 @@ struct fn_0035a7c4_arg0 {
 
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
-extern unsigned int FUN_00388024(void);
+extern unsigned int maskToCode(void);
 
 
 unsigned int FUN_0035a7c4(fn_0035a7c4_arg0 *param_1)
@@ -36,7 +36,7 @@ unsigned int FUN_0035a7c4(fn_0035a7c4_arg0 *param_1)
     if ((param_1->field_0x3bc == 1) && (temp_v0 = FUN_00224880(param_1->field_0x360), temp_v0 == 2)) {
       param_1->field_0x3dc = param_1->field_0x3dc & 0xffffffef;
       param_1->field_0x3bc = 0;
-      temp_v1 = FUN_00388024();
+      temp_v1 = maskToCode();
       temp_v2 = 3;
       param_1->field_0x3b0 = temp_v1;
     }

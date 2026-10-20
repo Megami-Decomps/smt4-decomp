@@ -1,29 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fb1ea` (_code @ 0x2fb1ea, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e3140(void);
+void FUN_002e3140(void);
+s32 FUN_001d3f10(u32 handle, u32 priority);
+u32 nn_os_detail_ConvertLibraryToSvcPriority(u32 priority);
 
-extern int FUN_001d3f10(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e3140. */
-extern unsigned int nn_os_detail_ConvertLibraryToSvcPriority(unsigned int);
-
-
-void FUN_002fb1ea(unsigned int *param_1,unsigned int param_2)
-
+/* Sets the thread priority of the handle `*handle` (converted to the SVC range) and calls the failure handler when that returns an error. */
+void FUN_002fb1ea(u32 *handle, u32 priority)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = nn_os_detail_ConvertLibraryToSvcPriority(param_2);
-  temp_v1 = FUN_001d3f10(*param_1,temp_v0);
-  if (temp_v1 < 0) {
-    FUN_002e3140();
-  }
-  return;
+    u32 svcPriority;
+    s32 result;
+
+    svcPriority = nn_os_detail_ConvertLibraryToSvcPriority(priority);
+    result = FUN_001d3f10(*handle, svcPriority);
+    if (result < 0) {
+        FUN_002e3140();
+    }
 }
 
 } /* extern "C" */

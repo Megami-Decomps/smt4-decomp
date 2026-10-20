@@ -12,7 +12,7 @@ int FUN_00134abc(int, int);
 int FUN_00134b44(int *, unsigned int, unsigned int, int *);
 int FUN_001351b8(int, int, int);
 int FUN_002edb54(int, int, int);
-int FUN_002f1370(int *);
+int vectorCount4_002f1370(int *);
 int FUN_002f13c2(int, unsigned int, unsigned int);
 
 /* stack frame of param_2: 6 slot(s), 24 byte(s) */
@@ -35,7 +35,7 @@ typedef struct {
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002edb54. */
 extern int FUN_002ef01c(unsigned int);
-/* Supplied declaration required: FUN_002f1370. */
+/* Supplied declaration required: vectorCount4_002f1370. */
 extern unsigned int FUN_002f1378(void);
 /* Supplied declaration required: FUN_002f13c2. */
 
@@ -65,14 +65,14 @@ void FUN_002f091c(int param_1,int param_2)
   piVar10 = (int *)(param_1 + 0x130);
   temp_v6 = 0;
   temp_v5 = param_2 + 1;
-  temp_v0 = FUN_002f1370(piVar10);
+  temp_v0 = vectorCount4_002f1370(piVar10);
   if (temp_v0 < temp_v5) {
     temp_v1 = *(unsigned int *)(param_1 + 0x134);
-    temp_v2 = FUN_002f1370(piVar10);
+    temp_v2 = vectorCount4_002f1370(piVar10);
     FUN_00134b44(piVar10,temp_v1,temp_v5 - temp_v2,&temp_v6);
   }
   else {
-    temp_v0 = FUN_002f1370(piVar10);
+    temp_v0 = vectorCount4_002f1370(piVar10);
     if (temp_v5 < temp_v0) {
       puVar6 = (unsigned int *)*piVar10 + temp_v5;
       puVar7 = *(unsigned int **)(param_1 + 0x134);

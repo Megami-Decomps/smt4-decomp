@@ -1,27 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_002992bc_arg0 fn_002992bc_arg0;
-struct fn_002992bc_arg0 {
-    unsigned char pad_0x0[0x48];
-    int field_0x48; /* +0x48 */
-    unsigned char pad_0x4c[0x15];
-    undefined1 field_0x61; /* +0x61 */
-    byte field_0x62; /* +0x62 */
-};
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ int value;
+    /* 0x4C */ u8 unk4C[0x15];
+    /* 0x61 */ u8 changed;
+    /* 0x62 */ u8 locked;
+} Obj;
 
-
-void FUN_002992bc(fn_002992bc_arg0 *param_1,int param_2)
-
+/* Sets the value (unless locked), marking the object changed when it differs. */
+void FUN_002992bc(Obj *obj, int value)
 {
-  if (param_1->field_0x62 == 0) {
-    if (param_1->field_0x48 != param_2) {
-      param_1->field_0x61 = 1;
+    if (obj->locked == 0) {
+        if (obj->value != value) {
+            obj->changed = 1;
+        }
+        obj->value = value;
     }
-    param_1->field_0x48 = param_2;
-  }
-  return;
 }
 
 } /* extern "C" */

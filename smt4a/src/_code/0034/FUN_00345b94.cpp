@@ -21,8 +21,8 @@ extern int FUN_001692ac(unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_00280840. */
 /* Supplied declaration required: FUN_00300100. */
-extern int FUN_00399c60(void);
-extern int FUN_003a1988(void);
+extern int displayIsStereoActive(void);
+extern int getFloatPairValue(void);
 
 
 void FUN_00345b94(void)
@@ -49,9 +49,9 @@ void FUN_00345b94(void)
   }
   FUN_0016c4b8(g_renderCtx,0);
   temp_v4 = 1;
-  temp_v1 = FUN_003a1988();
+  temp_v1 = getFloatPairValue();
   if (((temp_v1 != 0) && (*(int *)(g_renderCtx + 0x52c) == 0)) &&
-     (temp_v1 = FUN_00399c60(), temp_v1 != 0)) {
+     (temp_v1 = displayIsStereoActive(), temp_v1 != 0)) {
     temp_v4 = 0;
   }
   FUN_00300100(0,temp_v4);

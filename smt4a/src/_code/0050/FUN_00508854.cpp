@@ -1,45 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00508854` (_code @ 0x508854, 0x90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0019a37c(unsigned int, int, unsigned int);
-extern unsigned int wstrlen(unsigned int);
+struct NameTable;
 
+typedef struct Wrapper00508854 {
+    /* 0x00 */ u8 unk00[0x8];
+    /* 0x08 */ NameTable *table;
+} Wrapper00508854;
 
-unsigned int FUN_00508854(int param_1,unsigned int param_2,unsigned int *param_3)
+s32 FUN_0050885c(NameTable *table, const char *name, u32 *outValue);
 
+/* Passes the wrapper's table on to FUN_0050885c, the function that follows it. */
+s32 FUN_00508854(Wrapper00508854 *wrapper, const char *name, u32 *outValue)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  puVar1 = *(unsigned int **)(param_1 + 8);
-  temp_v0 = wstrlen(param_2);
-  temp_v1 = *puVar1;
-  temp_v3 = 0;
-  if ((int)temp_v3 < (int)temp_v1) {
-    do {
-      if (temp_v3 >= temp_v1) {
-        temp_v4 = 0;
-      }
-      else {
-        temp_v4 = puVar1[temp_v3 * 2 + 2] + (int)puVar1;
-      }
-      temp_v2 = FUN_0019a37c(param_2,temp_v4 + 0xc,temp_v0);
-      if (temp_v2 == 0) {
-        *param_3 = *(unsigned int *)(temp_v4 + 4);
-        return 1;
-      }
-      temp_v1 = *puVar1;
-      temp_v3 = temp_v3 + 1;
-    } while ((int)temp_v3 < (int)temp_v1);
-  }
-  return 0;
+    return FUN_0050885c(wrapper->table, name, outValue);
 }
 
 } /* extern "C" */

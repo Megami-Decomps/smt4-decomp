@@ -10,7 +10,7 @@ int FUN_00183e58(void);
 int FUN_001f4908(int, int, int);
 int FUN_002844e4(void);
 int FUN_002bf4f4(int);
-int FUN_00468878(int, unsigned char *);
+int pickObjStart(int, unsigned char *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern int FUN_002802c8(void);
 /* Supplied declaration required: FUN_002844e4. */
 /* Supplied declaration required: FUN_002bf4f4. */
 extern int FUN_002e19f8(void);
-/* Supplied declaration required: FUN_00468878. */
+/* Supplied declaration required: pickObjStart. */
 
 
 void FUN_0046af60(int param_1)
@@ -40,7 +40,7 @@ void FUN_0046af60(int param_1)
   
   temp_v0 = *(int *)(param_1 + 8);
   if (temp_v0 == 0) {
-    FUN_00468878(param_1,&LAB_0046b060);
+    pickObjStart(param_1,&LAB_0046b060);
     sysPlaySe(0xa0);
     *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
     return;

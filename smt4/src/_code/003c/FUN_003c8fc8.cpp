@@ -1,20 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef __packed struct Obj {
+    /* 0x000 */ u8 unk000[0x120];
+    /* 0x120 */ u8 kind;
+    /* 0x121 */ u8 flag;
+    /* 0x122 */ u32 a;
+    /* 0x126 */ u32 b;
+    /* 0x12A */ u32 c;
+    /* 0x12E */ u32 d;
+} Obj;
 
-void FUN_003c8fc8(int param_1,unsigned char param_2,unsigned char param_3,unsigned int *param_4)
-
+void FUN_003c8fc8(Obj *obj, u8 kind, u8 flag, u32 *values)
 {
-  *(unsigned char *)(param_1 + 0x120) = param_2;
-  *(unsigned char *)(param_1 + 0x121) = param_3;
-  if (param_4 != (unsigned int *)0x0) {
-    *(unsigned int *)(param_1 + 0x122) = *param_4;
-    *(unsigned int *)(param_1 + 0x126) = param_4[1];
-    *(unsigned int *)(param_1 + 0x12a) = param_4[2];
-    *(unsigned int *)(param_1 + 0x12e) = param_4[3];
-  }
-  return;
+    obj->kind = kind;
+    obj->flag = flag;
+    if (values != NULL) {
+        obj->a = values[0];
+        obj->b = values[1];
+        obj->c = values[2];
+        obj->d = values[3];
+    }
 }
 
 } /* extern "C" */

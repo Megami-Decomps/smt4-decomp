@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00513ff0(unsigned int, unsigned int *);
+int readInnerWord6(unsigned int, unsigned int *);
 int FUN_0051415c(unsigned int, unsigned int, int *);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp54; /* 0x54: local_54 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00513ff0. */
+/* Supplied declaration required: readInnerWord6. */
 /* Supplied declaration required: FUN_0051415c. */
 
 
@@ -38,7 +38,7 @@ void FUN_00424c4c(int param_1)
   unsigned int temp_v4;
   unsigned int uStack_2c;
   
-  FUN_00513ff0(**(unsigned int **)(param_1 + 0x18),&temp_v2);
+  readInnerWord6(**(unsigned int **)(param_1 + 0x18),&temp_v2);
   piVar4 = (int *)(param_1 + 0x484);
   puVar3 = (unsigned int *)(param_1 + 0x550);
   if (temp_v2 != 0) {

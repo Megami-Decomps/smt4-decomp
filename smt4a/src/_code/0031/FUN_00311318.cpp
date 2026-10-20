@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00130e3c(int [2], int, int *);
 int FUN_002e9318(unsigned char [8]);
-int FUN_002ea0e4(unsigned char [8]);
+int constructObj0055affc(unsigned char [8]);
 int FUN_002f42be(unsigned char [8], unsigned char *, unsigned int, int);
 int FUN_002f44ec(...);
 
@@ -30,11 +30,11 @@ extern unsigned int FUN_00113fa0(int, unsigned char *);
 /* Supplied declaration required: FUN_00130e3c. */
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002f42be. */
 /* Supplied declaration required: FUN_002f44ec. */
-extern int FUN_002fee88(int *, unsigned int *);
-extern int FUN_002ff078(int *, unsigned int *);
+extern int wordRefsDiffer_002fee88(int *, unsigned int *);
+extern int wordRefsEqual_002ff078(int *, unsigned int *);
 
 
 unsigned int FUN_00311318(int param_1,unsigned int param_2)
@@ -72,19 +72,19 @@ unsigned int FUN_00311318(int param_1,unsigned int param_2)
   }
   temp_v11 = *(unsigned int *)(param_1 + 0x1c);
   temp_v10 = temp_v3;
-  temp_v0 = FUN_002ff078(&temp_v10,(unsigned int *)&temp_v11);
+  temp_v0 = wordRefsEqual_002ff078(&temp_v10,(unsigned int *)&temp_v11);
   if ((temp_v0 != 0) ||
      (temp_v0 = FUN_002f44ec(param_1 + 0x25,&temp_v12,temp_v10 + 0x10), temp_v8 = temp_v10,
      temp_v0 != 0)) {
     temp_v8 = *(int *)(param_1 + 0x1c);
   }
   temp_v9[0] = *(unsigned int *)(param_1 + 0x1c);
-  temp_v0 = FUN_002fee88(&temp_v8,temp_v9);
+  temp_v0 = wordRefsDiffer_002fee88(&temp_v8,temp_v9);
   if (temp_v0 != 0) {
     temp_v1 = *(unsigned int *)(temp_v8 + 0x14);
   }
   else {
-    FUN_002ea0e4(temp_v7);
+    constructObj0055affc(temp_v7);
     FUN_002f42be(temp_v7,&LAB_003113d8,*(unsigned int *)(param_1 + 8),temp_v12);
     temp_v0 = FUN_002e760a(0x4c);
     temp_v1 = 0;

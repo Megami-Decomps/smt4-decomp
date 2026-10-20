@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemoryAlloc(int, int, int, int, int);
 int asdMemoryGetDefaultAllocator(void);
-int FUN_001b0e10(int *, unsigned int, unsigned int);
+int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 int FUN_001b0e44(int *, int *, unsigned int, unsigned int, int);
 int FUN_001b12a4(int *, int *);
 
@@ -36,7 +36,7 @@ typedef struct {
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 extern unsigned int asdMemoryGetAllocatorA(void);
-/* Supplied declaration required: FUN_001b0e10. */
+/* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: FUN_001b0e44. */
 /* Supplied declaration required: FUN_001b12a4. */
 extern int FUN_00455748(int *, unsigned int);
@@ -111,7 +111,7 @@ int FUN_003a4448(int param_1)
     temp_v20 = 1;
     temp_v18 = 4;
     temp_v11 = temp_v6;
-    FUN_001b0e10(piVar11,temp_v2,temp_v3);
+    nw_gfx_SceneBuilder_CreateObject(piVar11,temp_v2,temp_v3);
     if (piVar11 != (int *)0x0) {
       piVar5 = (int *)(**(romwright_code **)(*piVar11 + 8))(piVar11);
       do {

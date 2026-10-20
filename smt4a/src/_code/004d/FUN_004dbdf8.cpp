@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00184310(void);
 int FUN_0035dd74(void);
-int FUN_0038b7d8(void);
+int dataTable5Count(void);
 
 /* stack frame of void: 1 slot(s), 2 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern int FUN_001ab888(void);
 extern int FUN_00239234(unsigned short, unsigned char *);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0035dd74. */
-/* Supplied declaration required: FUN_0038b7d8. */
+/* Supplied declaration required: dataTable5Count. */
 
 
 short FUN_004dbdf8(void)
@@ -38,7 +38,7 @@ short FUN_004dbdf8(void)
   temp_v1 = 0;
   temp_v2 = FUN_001ab888();
   temp_v4 = 0;
-  FUN_0038b7d8();
+  dataTable5Count();
   if (temp_v2 != 0) {
     do {
       temp_v3 = temp_v4;
@@ -70,7 +70,7 @@ short FUN_004dbdf8(void)
       }
       temp_v3 = temp_v4 + 1;
       temp_v4 = temp_v3;
-      FUN_0038b7d8();
+      dataTable5Count();
     } while (temp_v4 < temp_v3);
   }
   return temp_v1;

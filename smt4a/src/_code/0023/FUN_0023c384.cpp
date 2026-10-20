@@ -12,7 +12,7 @@ int FUN_001ab854(int);
 int FUN_00358e94(int, int, int);
 int FUN_00387240(int, int, int);
 int FUN_004bd0d8(...);
-int FUN_004bd3ec(int, int);
+int bitsAt60Set(int, int);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -42,8 +42,8 @@ extern long long FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_004bd0d8. */
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd3ec. */
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Set. */
 extern unsigned int FUN_004ccdb8(unsigned short, int, int);
 
 
@@ -149,10 +149,10 @@ void FUN_0023c384(int param_1)
               temp_v15 = temp_v16 >> 0x14;
               if (temp_v15 < *(unsigned int *)(temp_v12 + 0x78ac) ||
                   *(unsigned int *)(temp_v12 + 0x78ac) - temp_v15 < (unsigned int)(temp_v7 <= *puVar10)) {
-                temp_v8 = FUN_004bd340(temp_v11,2);
+                temp_v8 = bitsAt60Test(temp_v11,2);
                 *(unsigned short *)(temp_v11 + 0x60) = 0;
                 if (temp_v8 != 0) {
-                  FUN_004bd3ec(temp_v11,2);
+                  bitsAt60Set(temp_v11,2);
                 }
                 temp_v16 = *puVar10 + temp_v16 * -0x1000;
                 temp_v9 = *puVar14;

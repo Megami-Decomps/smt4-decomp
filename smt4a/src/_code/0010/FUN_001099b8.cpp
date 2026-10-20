@@ -84,7 +84,7 @@ extern int FUN_002e76b6(void);
 extern int FUN_002eac34(unsigned char);
 /* Supplied declaration required: FUN_002eb588. */
 extern int FUN_002eb5f4(void);
-extern int FUN_002eb690(unsigned int *, int *);
+extern int wordRefsDiffer_002eb690(unsigned int *, int *);
 extern int FUN_002eb6ae(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002eb6b8. */
 /* Supplied declaration required: FUN_002eb744. */
@@ -246,7 +246,7 @@ LAB_00109b02:
     temp_v13 = temp_v25 + 0x120;
     while( 1 ) {
       temp_v21 = temp_v26[4];
-      temp_v1 = FUN_002eb690(&temp_v10,&temp_v21);
+      temp_v1 = wordRefsDiffer_002eb690(&temp_v10,&temp_v21);
       if (temp_v1 == 0) break;
       FUN_002ed838(piVar4);
       (**(romwright_code **)(*temp_v11 + 0x20))(temp_v11,temp_v3,piVar4);
@@ -289,7 +289,7 @@ LAB_00109b02:
         else {
           while( 1 ) {
             temp_v24 = temp_v26[4];
-            temp_v1 = FUN_002eb690(&temp_v10,&temp_v24);
+            temp_v1 = wordRefsDiffer_002eb690(&temp_v10,&temp_v24);
             if (temp_v1 == 0) break;
             temp_v23 = temp_v10;
             temp_v17 = temp_v10;

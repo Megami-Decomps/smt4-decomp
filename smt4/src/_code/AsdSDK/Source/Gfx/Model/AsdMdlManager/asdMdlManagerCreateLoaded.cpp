@@ -23,12 +23,12 @@ AsdMdlObject *asdMdlManagerCreateLoaded(void *source, u32 param)
     u32 flags;
     u32 data;
 
-    obj->node->unk08 = param;
-    obj->unk04 = asdFileQueueRequest(source, 0);
-    FUN_002b0184(obj->unk04, 1);
-    asdFileWait(obj->unk04);
-    data = FUN_0013840c(obj->unk04, &flags);
-    obj->node->unk04 = FUN_002b2988(data, flags);
+    obj->node->param = param;
+    obj->request = asdFileQueueRequest(source, 0);
+    FUN_002b0184(obj->request, 1);
+    asdFileWait(obj->request);
+    data = FUN_0013840c(obj->request, &flags);
+    obj->node->data = FUN_002b2988(data, flags);
     FUN_002a91f4(obj->node, param);
     FUN_002b2770(obj);
     asdListAdd(&g_asdMdlList, obj, 0);

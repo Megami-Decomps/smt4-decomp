@@ -23,7 +23,7 @@ int FUN_00296f4c(...);
 int FUN_002b8244(...);
 int FUN_002bc01c(...);
 int FUN_003c2d84(unsigned int *, int);
-int FUN_003c2e44(unsigned int *);
+int recordResetIndex(unsigned int *);
 int FUN_003c2ef0(unsigned int *, unsigned int *);
 
 typedef int romwright_code(...);
@@ -75,7 +75,7 @@ extern int FUN_002af600(int);
 /* Supplied declaration required: memClear. */
 extern int FUN_0039411c(int);
 /* Supplied declaration required: FUN_003c2d84. */
-/* Supplied declaration required: FUN_003c2e44. */
+/* Supplied declaration required: recordResetIndex. */
 /* Supplied declaration required: FUN_003c2ef0. */
 
 
@@ -162,7 +162,7 @@ void FUN_003901bc(unsigned int *param_1)
       temp_v3 = param_1[0xb0];
     }
     if ((temp_v5 && temp_v6) && temp_v3 != 0xffffffff) {
-      FUN_003c2e44(puVar3);
+      recordResetIndex(puVar3);
       temp_v2 = FUN_00240d5c(temp_v8);
       temp_v4 = 0;
       if (temp_v4 < (int)param_1[0xb0]) {

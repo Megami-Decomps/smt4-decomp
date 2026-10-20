@@ -17,7 +17,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_001695a0. */
-extern int FUN_0016a0f0(unsigned int);
+extern int dataTableValueOrZero(unsigned int);
 extern unsigned short scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00237898. */
 /* Supplied declaration required: FUN_00275bb0. */
@@ -43,7 +43,7 @@ unsigned char scrComm_Message_ShowConfirmAndApply(void)
     FUN_003dea6c(temp_v0,0,1);
     FUN_001695a0();
   }
-  temp_v1 = FUN_0016a0f0(0x1e);
+  temp_v1 = dataTableValueOrZero(0x1e);
   temp_v2 = FUN_00275bb0(0);
   FUN_00237898(temp_v1,0x10,temp_v2,6,0);
   temp_v3 = FUN_00275bb0(0);

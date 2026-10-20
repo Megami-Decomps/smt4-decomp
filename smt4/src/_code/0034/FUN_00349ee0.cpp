@@ -1,52 +1,63 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_002c6a10(void);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002c6a10. */
+struct Object;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(struct Object *object);
+} ObjectVtbl;
 
+typedef struct Object {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Object;
 
-void FUN_00349ee0(int param_1)
+typedef struct Pool {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Object **listB;
+    /* 0x08 */ Object **listA;
+    /* 0x0C */ Object **listC;
+    /* 0x10 */ int count;
+} Pool;
 
+/* Destroys the objects of the three parallel lists and frees the lists. */
+void FUN_00349ee0(Pool *pool)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (temp_v0 < *(int *)(param_1 + 0x10)) {
-    do {
-      piVar1 = *(int **)(*(int *)(param_1 + 8) + temp_v0 * 4);
-      if (piVar1 != (int *)0x0) {
-        (**(romwright_code **)(*piVar1 + 4))(piVar1);
-      }
-      piVar1 = *(int **)(*(int *)(param_1 + 4) + temp_v0 * 4);
-      if (piVar1 != (int *)0x0) {
-        (**(romwright_code **)(*piVar1 + 4))(piVar1);
-      }
-      piVar1 = *(int **)(*(int *)(param_1 + 0xc) + temp_v0 * 4);
-      if (piVar1 != (int *)0x0) {
-        (**(romwright_code **)(*piVar1 + 4))(piVar1);
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(param_1 + 0x10));
-  }
-  *(unsigned int *)(param_1 + 0x10) = 0;
-  if (*(int *)(param_1 + 8) != 0) {
-    FUN_002c6a10();
-  }
-  if (*(int *)(param_1 + 4) != 0) {
-    FUN_002c6a10();
-  }
-  if (*(int *)(param_1 + 0xc) != 0) {
-    FUN_002c6a10();
-  }
-  *(unsigned int *)(param_1 + 8) = 0;
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  return;
+    Object *object;
+    int i = 0;
+
+    if (i < pool->count) {
+        do {
+            object = pool->listA[i];
+            if (object != NULL) {
+                object->vtbl->destroy(object);
+            }
+            object = pool->listB[i];
+            if (object != NULL) {
+                object->vtbl->destroy(object);
+            }
+            object = pool->listC[i];
+            if (object != NULL) {
+                object->vtbl->destroy(object);
+            }
+            i = i + 1;
+        } while (i < pool->count);
+    }
+    pool->count = 0;
+    if (pool->listA != NULL) {
+        FUN_002c6a10();
+    }
+    if (pool->listB != NULL) {
+        FUN_002c6a10();
+    }
+    if (pool->listC != NULL) {
+        FUN_002c6a10();
+    }
+    pool->listA = NULL;
+    pool->listB = NULL;
+    pool->listC = NULL;
 }
 
 } /* extern "C" */

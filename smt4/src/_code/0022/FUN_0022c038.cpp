@@ -1,29 +1,49 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Node;
+struct Pool;
 
-unsigned int * FUN_0022c038(unsigned int *param_1)
+typedef struct PoolVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*release)(struct Pool *pool, void *item);
+} PoolVtbl;
 
+typedef struct Pool {
+    /* 0x0 */ PoolVtbl *vtbl;
+} Pool;
+
+typedef struct Item {
+    /* 0x0 */ void (**vtbl)(struct Item *item);
+} Item;
+
+/* A pooled item linked into a circular list of nodes sharing one item. */
+typedef struct Node {
+    /* 0x0 */ Pool *pool;
+    /* 0x4 */ Item *item;
+    /* 0x8 */ struct Node *next;
+    /* 0xC */ struct Node *prev;
+} Node;
+
+/* Unlinks the node; the last node of a list destroys the item and returns it to the pool. */
+Node *FUN_0022c038(Node *node)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)param_1[2];
-  if (puVar1 == (unsigned int *)0x0 || puVar1 == param_1) {
-    if ((unsigned int *)param_1[1] != (unsigned int *)0x0) {
-      (*(romwright_code *)**(unsigned int **)param_1[1])(param_1[1]);
-      (**(romwright_code **)(*(int *)*param_1 + 4))((int *)*param_1,param_1[1]);
+    Node *next = node->next;
+
+    if (next == NULL || next == node) {
+        if (node->item != NULL) {
+            node->item->vtbl[0](node->item);
+            node->pool->vtbl->release(node->pool, node->item);
+        }
+    } else {
+        next->prev = node->prev;
+        node->prev->next = node->next;
+        node->next = NULL;
+        node->prev = NULL;
     }
-  }
-  else {
-    puVar1[3] = param_1[3];
-    *(unsigned int *)(param_1[3] + 8) = param_1[2];
-    param_1[2] = 0;
-    param_1[3] = 0;
-  }
-  param_1[1] = 0;
-  return param_1;
+    node->item = NULL;
+    return node;
 }
 
 } /* extern "C" */

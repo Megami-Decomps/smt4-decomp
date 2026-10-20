@@ -1,39 +1,33 @@
-#include "romwright_types.h"
+#include "shard/DriverVoice.h"
 
 extern "C" {
 
-int FUN_001afdc4(void);
-int nw_snd_internal_driver_VoiceManager_FreeVoice(unsigned int, int);
+void FUN_001afdc4(u32 channel);
+void nw_snd_internal_driver_VoiceManager_FreeVoice(u32 manager, DriverVoice *voice);
+u32 FUN_001c2484(void);
 
-/* Supplied declaration required: FUN_001afdc4. */
-extern unsigned int FUN_001c2484(void);
-/* Supplied declaration required: nw_snd_internal_driver_VoiceManager_FreeVoice. */
-
-
-void nw_snd_internal_driver_Voice_Free(int param_1)
-
+/* Frees an allocated voice: releases each of its channels, clears the channel count, returns the voice to the voice manager and marks it unallocated. */
+void nw_snd_internal_driver_Voice_Free(DriverVoice *voice)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if (*(char *)(param_1 + 0x14) != '\0') {
-    temp_v1 = 0;
-    if (temp_v1 < *(int *)(param_1 + 8)) {
-      do {
-        if (*(int *)(param_1 + temp_v1 * 4) != 0) {
-          FUN_001afdc4();
-          *(unsigned int *)(param_1 + temp_v1 * 4) = 0;
+    s32 i;
+    u32 manager;
+
+    if (voice->allocated != 0) {
+        i = 0;
+        if (i < voice->channelCount) {
+            do {
+                if (voice->channels[i] != 0) {
+                    FUN_001afdc4(voice->channels[i]);
+                    voice->channels[i] = 0;
+                }
+                i = i + 1;
+            } while (i < voice->channelCount);
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < *(int *)(param_1 + 8));
+        voice->channelCount = 0;
+        manager = FUN_001c2484();
+        nw_snd_internal_driver_VoiceManager_FreeVoice(manager, voice);
+        voice->allocated = 0;
     }
-    *(unsigned int *)(param_1 + 8) = 0;
-    temp_v0 = FUN_001c2484();
-    nw_snd_internal_driver_VoiceManager_FreeVoice(temp_v0,param_1);
-    *(unsigned char *)(param_1 + 0x14) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

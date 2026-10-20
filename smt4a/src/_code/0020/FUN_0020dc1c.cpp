@@ -40,7 +40,7 @@ int FUN_0033449c(...);
 int FUN_003450d4(...);
 int FUN_00372100(...);
 int FUN_0037245c(int, int, int);
-int FUN_0038b688(...);
+int objBSetRecord2000(...);
 int FUN_003df7c4(...);
 int FUN_0048053c(...);
 int rt_memcpy_w(...);
@@ -106,7 +106,7 @@ extern int FUN_00320af8(int, int);
 /* Supplied declaration required: FUN_003720a0. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0037245c. */
-/* Supplied declaration required: FUN_0038b688. */
+/* Supplied declaration required: objBSetRecord2000. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: FUN_004803e4. */
@@ -248,7 +248,7 @@ LAB_0020de28:
       }
       FUN_003df7c4(&temp_v7);
       FUN_00372100(&temp_v7,0);
-      FUN_0038b688(&temp_v13);
+      objBSetRecord2000(&temp_v13);
       FUN_003343c0(1);
       FUN_0033449c(1);
       FUN_002a7324(1);
@@ -282,7 +282,7 @@ LAB_0020de28:
       }
       FUN_003df7c4(temp_v12);
       FUN_00372100(temp_v12,0);
-      FUN_0038b688(&temp_v18);
+      objBSetRecord2000(&temp_v18);
       FUN_003343c0(1);
       temp_v4 = FUN_00320af8(temp_v4,temp_v6 + temp_v5);
     }
@@ -330,7 +330,7 @@ LAB_0020de28:
         }
         FUN_003df7c4(temp_v12);
         FUN_00372100(temp_v12,0);
-        FUN_0038b688(&temp_v7);
+        objBSetRecord2000(&temp_v7);
         FUN_003343c0(1);
         temp_v6 = FUN_002a4860(temp_v4 + 0xc0);
         temp_v5 = FUN_002a4894(temp_v4 + 0xc0);
@@ -361,7 +361,7 @@ LAB_0020de28:
       }
       FUN_003df7c4(temp_v12);
       FUN_00372100(temp_v12,0);
-      FUN_0038b688(&temp_v18);
+      objBSetRecord2000(&temp_v18);
       FUN_003343c0(1);
       temp_v4 = FUN_00320af8(temp_v4,temp_v6 + temp_v5);
     }

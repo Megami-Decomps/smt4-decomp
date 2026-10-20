@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019de98(int, unsigned int);
 int FUN_001ad9b4(void);
 int FUN_003defe0(void);
-int FUN_00418584(...);
+int partyEntryFlagsBit3(...);
 int FUN_004186e0(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -26,10 +26,10 @@ extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
 extern int FUN_003de75c(unsigned int);
 /* Supplied declaration required: FUN_003defe0. */
-/* Supplied declaration required: FUN_00418584. */
-extern int FUN_004185ec(void);
+/* Supplied declaration required: partyEntryFlagsBit3. */
+extern int partyEntryFlagsBit1(void);
 /* Supplied declaration required: FUN_004186e0. */
-extern int FUN_004186f4(unsigned int);
+extern int partyEntryBitsBit4(unsigned int);
 
 
 /* WARNING: Removing unreachable block (ram,0x003d485c) */
@@ -66,13 +66,13 @@ void FUN_003d474c(void)
     return;
   }
   if (*(char *)(temp_v4 + 0x90c) != '\0') {
-    temp_v4 = FUN_004185ec();
+    temp_v4 = partyEntryFlagsBit1();
     if (temp_v4 != 0) {
       temp_v4 = FUN_004186e0();
       if (temp_v4 == 0) goto LAB_003d48cc;
     }
     else {
-      temp_v4 = FUN_00418584(temp_v8);
+      temp_v4 = partyEntryFlagsBit3(temp_v8);
       if (temp_v4 != 0) goto LAB_003d4938;
     }
     temp_v8 = 6;
@@ -82,9 +82,9 @@ void FUN_003d474c(void)
     FUN_001ad9b4();
     temp_v0 = *(char *)(temp_v7 + 6);
     if (!((temp_v0 == '\x06' || temp_v0 == '\t') || temp_v0 == '\v')) {
-      temp_v4 = FUN_00418584();
+      temp_v4 = partyEntryFlagsBit3();
       if (temp_v4 != 0) {
-        temp_v4 = FUN_004186f4(temp_v8);
+        temp_v4 = partyEntryBitsBit4(temp_v8);
         if (temp_v4 == 0) {
           FUN_003defe0();
 joined_r0x003d4934:
@@ -101,12 +101,12 @@ LAB_003d4938:
     else {
       temp_v4 = FUN_003de75c(temp_v8);
       if (temp_v4 == 0) {
-        temp_v4 = FUN_00418584(temp_v8);
+        temp_v4 = partyEntryFlagsBit3(temp_v8);
         if (temp_v4 == 0) {
           temp_v8 = 5;
           goto LAB_003d493c;
         }
-        temp_v4 = FUN_004186f4(temp_v8);
+        temp_v4 = partyEntryBitsBit4(temp_v8);
         if (temp_v4 == 0) {
           FUN_003defe0();
           goto joined_r0x003d4934;
@@ -115,7 +115,7 @@ LAB_003d4938:
       }
       temp_v5 = FUN_004186e0();
       if (temp_v5 != temp_v8) {
-        temp_v4 = FUN_00418584(temp_v8);
+        temp_v4 = partyEntryFlagsBit3(temp_v8);
         if (temp_v4 != 0) {
           temp_v8 = 2;
         }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00126468(void);
 int FUN_002b6480(unsigned char [64], int, int, unsigned char *, unsigned char *);
-int FUN_002b64a0(unsigned char [64], unsigned char [72]);
+int libc_strcat(unsigned char [64], unsigned char [72]);
 int FUN_002be624(...);
 int FUN_002bf694(int, unsigned char [64]);
 int FUN_002c3940(...);
@@ -25,7 +25,7 @@ extern signed char DAT_004c581a; /* 0x4c581a */
 
 /* Supplied declaration required: FUN_00126468. */
 /* Supplied declaration required: FUN_002b6480. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002c1d5c(void);
@@ -56,7 +56,7 @@ unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,
   }
   FUN_002be624(temp_v3,&LAB_002bfda0);
   FUN_002be624(temp_v4,&LAB_002bfdac,param_2);
-  FUN_002b64a0(temp_v3,temp_v4);
+  libc_strcat(temp_v3,temp_v4);
   FUN_002be624(temp_v2,&LAB_002bfdb4,temp_v3);
   FUN_00126468();
   temp_v1 = 0;

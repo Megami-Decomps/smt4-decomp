@@ -3,7 +3,7 @@
 extern "C" {
 
 void asdMemFree(void *block);
-void FUN_002c2264(void *object);
+void resourceListDestroy(void *object);
 
 extern MapEpl *g_mapEpl;
 
@@ -16,7 +16,7 @@ void mapEplFree(void)
     for (i = 0; i < MAP_EPL_ENTRIES; i++) {
         entry = &g_mapEpl->entries[i];
         if (entry->object != NULL) {
-            FUN_002c2264(entry->object);
+            resourceListDestroy(entry->object);
             entry->object = NULL;
         }
         if (entry->data != NULL) {

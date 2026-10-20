@@ -25,7 +25,7 @@ extern int FUN_003a7938(...); /* 0x3a7938 */
 extern unsigned char LAB_003c1468; /* 0x3c1468 */
 extern unsigned char LAB_003c1474; /* 0x3c1474 */
 extern unsigned char LAB_003c1480; /* 0x3c1480 */
-extern int FUN_003c6038(...); /* 0x3c6038 */
+extern int work8BufDestroy(...); /* 0x3c6038 */
 extern unsigned char DAT_0057f6bc; /* 0x57f6bc */
 extern unsigned char DAT_0057f6bd; /* 0x57f6bd */
 extern unsigned char DAT_0057f6be; /* 0x57f6be */
@@ -70,7 +70,7 @@ unsigned int FUN_003c12d8(int param_1,unsigned char param_2)
   DAT_0057f6c4 = 0;
   DAT_0057f6c2 = 0;
   puVar4 = &LAB_003c1468;
-  asdProcessCreateSimple(&LAB_003c1468,4,0,0,FUN_003712a4,FUN_003c6038,puVar2);
+  asdProcessCreateSimple(&LAB_003c1468,4,0,0,FUN_003712a4,work8BufDestroy,puVar2);
   *puVar2 = (unsigned int)puVar4;
   FUN_002a2d14();
   if (param_1 < 2) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0030eb14(int, unsigned int);
+int arrayElementAddress_0030eb14(int, unsigned int);
 int FUN_0030ebe4(int, unsigned int, int *);
 
 typedef int romwright_code(...);
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned int DAT_005c4c3c; /* 0x5c4c3c */
 
-/* Supplied declaration required: FUN_0030eb14. */
+/* Supplied declaration required: arrayElementAddress_0030eb14. */
 /* Supplied declaration required: FUN_0030ebe4. */
 
 
@@ -43,13 +43,13 @@ void FUN_0030eb40(int *param_1,int *param_2,unsigned int *param_3,unsigned int p
     temp_v2 = 0;
     FUN_0030ebe4(*param_1 + 8,temp_v1 + 1,&temp_v2);
   }
-  piVar1 = (int *)FUN_0030eb14(*param_1 + 8,temp_v1);
+  piVar1 = (int *)arrayElementAddress_0030eb14(*param_1 + 8,temp_v1);
   piVar1 = (int *)*piVar1;
   if ((piVar1 != (int *)0x0) && (temp_v0 = piVar1[3], piVar1[3] = temp_v0 - 1, temp_v0 - 1 == 0)) {
     (**(romwright_code **)(*piVar1 + 4))();
   }
   param_2[3] = param_2[3] + 1;
-  puVar2 = (unsigned int *)FUN_0030eb14(*param_1 + 8,temp_v1);
+  puVar2 = (unsigned int *)arrayElementAddress_0030eb14(*param_1 + 8,temp_v1);
   *puVar2 = (unsigned int)param_2;
   return;
 }

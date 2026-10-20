@@ -30,7 +30,7 @@ extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_00203d04. */
 extern int FUN_002619e0(void);
 /* Supplied declaration required: FUN_003eb26c. */
-extern int FUN_003eec8c(void);
+extern int btlStartEntries(void);
 /* Supplied declaration required: FUN_00411bb4. */
 /* Supplied declaration required: FUN_004a9d1c. */
 extern int FUN_004ab6b4(unsigned int);
@@ -50,7 +50,7 @@ void FUN_004112c4(int param_1)
       if (temp_v0 != 2) {
         if (temp_v0 == 3) {
           btlGetMainState();
-          temp_v0 = FUN_003eec8c();
+          temp_v0 = btlStartEntries();
           if (temp_v0 != 0) {
             *(unsigned int *)(param_1 + 8) = 3;
           }

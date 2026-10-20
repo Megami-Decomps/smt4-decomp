@@ -8,9 +8,9 @@ int FUN_001d1438(unsigned char *, int);
 int rt_memcpy(unsigned char *, int, int);
 
 /* Supplied declaration required: FUN_001d1438. */
-extern int FUN_0050af5c(int);
-extern unsigned int FUN_0050af68(int, int);
-extern int FUN_0050af74(int, int);
+extern int getSectionAtC_af5c(int);
+extern unsigned int getSectionPlusOffset(int, int);
+extern int getTableSectionByIndex(int, int);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -48,13 +48,13 @@ unsigned int FUN_005081b8(int *param_1,unsigned char *param_2)
     *(unsigned int *)(param_2 + 0x14) = temp_v1;
     for (; temp_v4 < *(int *)(param_1[1] + 0x14); temp_v4 = temp_v4 + 1) {
       if (temp_v4 < 2) {
-        temp_v2 = FUN_0050af74(param_1[1],temp_v4);
+        temp_v2 = getTableSectionByIndex(param_1[1],temp_v4);
         if (*(int *)(temp_v2 + 0xc) != 0) {
-          temp_v3 = FUN_0050af5c(temp_v2);
+          temp_v3 = getSectionAtC_af5c(temp_v2);
           rt_memcpy(param_2 + temp_v4 * 0x30 + 0x1c,temp_v3,0x26);
           FUN_001d1438(param_2 + temp_v4 * 0x30 + 0x42,temp_v3 + 0x26);
         }
-        temp_v1 = FUN_0050af68(temp_v2,param_1[2]);
+        temp_v1 = getSectionPlusOffset(temp_v2,param_1[2]);
         *(unsigned int *)(param_2 + temp_v4 * 0x30 + 0x18) = temp_v1;
       }
     }

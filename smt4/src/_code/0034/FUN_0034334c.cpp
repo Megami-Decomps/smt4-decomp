@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_0034334c(int param_1)
-
+/* Address of the sub block at +0xc04 of the object. */
+int FUN_0034334c(int obj)
 {
-  return param_1 + 0xc04;
+    return obj + 0xc04;
 }
 
 } /* extern "C" */

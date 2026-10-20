@@ -1,39 +1,40 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct { unsigned int flags; unsigned char pad[0x284]; } E;
-int scrSetResult(int);
+int scrSetResult(int result);
+extern int FUN_00247004(void *unit);
+extern u8 *btlGetMainState(void);
 
-extern int FUN_00247004(int);
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
+typedef struct BtlUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x284];
+} BtlUnit;
 
-
-unsigned int FUN_002f6e38(void)
-
+/* Script command: result 1 when any of the 0x6D units is active (0x10), present (1), not hidden (0x40) and accepted by FUN_00247004. */
+u32 FUN_002f6e38(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  E *pE;
-  
-  temp_v2 = 0;
-  while( 1 ) {
-    temp_v0 = btlGetMainState();
-    pE = *(E **)(temp_v0 + 0x1fc0) + temp_v2;
-    temp_v1 = pE->flags;
-    if ((((temp_v1 & 0x10) != 0 && (temp_v1 & 1) != 0) && ((temp_v1 & 0x40) == 0)) &&
-       (temp_v0 = FUN_00247004((int)pE), temp_v0 != 0)) break;
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
+    int i = 0;
+    u8 *btl;
+    BtlUnit *unit;
+    u32 flags;
+
+    while (1) {
+        btl = btlGetMainState();
+        unit = *(BtlUnit **)(btl + 0x1fc0) + i;
+        flags = unit->flags;
+        if ((((flags & 0x10) != 0 && (flags & 1) != 0) && ((flags & 0x40) == 0)) &&
+            (FUN_00247004(unit) != 0)) {
+            break;
+        }
+        i = i + 1;
+        if (i >= 0x6d) {
+            scrSetResult(0);
+            return 1;
+        }
     }
-  }
-  scrSetResult(1);
-  return 1;
+    scrSetResult(1);
+    return 1;
 }
 
 } /* extern "C" */

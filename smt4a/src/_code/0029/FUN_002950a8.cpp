@@ -9,7 +9,7 @@ int FUN_00152f44(void);
 extern int *g_popupState; /* 0x58104c */
 
 /* Supplied declaration required: FUN_00152f44. */
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 extern int FUN_002d8b58(unsigned int);
 
 
@@ -21,7 +21,7 @@ void FUN_002950a8(void)
   int temp_v0;
   
   FUN_00152f44();
-  if ((*g_popupState == 0) && (temp_v0 = FUN_0015688c(), piVar1 = g_popupState, temp_v0 != 0)) {
+  if ((*g_popupState == 0) && (temp_v0 = saveSlotFindSelected(), piVar1 = g_popupState, temp_v0 != 0)) {
     *g_popupState = 0x16;
     piVar1[6] = (unsigned int)*(unsigned short *)(temp_v0 + 300);
     temp_v0 = FUN_002d8b58(0x19);

@@ -55,7 +55,7 @@ extern int dataTableGetCount(unsigned int);
 extern int FUN_003f1230(int);
 /* Supplied declaration required: FUN_003f1994. */
 /* Supplied declaration required: FUN_003f26d4. */
-extern int FUN_0040de1c(unsigned int, unsigned int *);
+extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_004aa2e0. */
 /* Supplied declaration required: FUN_004f3ee0. */
 /* Supplied declaration required: FUN_004f41b0. */
@@ -87,7 +87,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
     if (temp_v0 != 1) {
       puVar10 = (unsigned int *)(param_2 + 0x45a0);
       if (temp_v0 != 2) {
-        temp_v0 = FUN_0040de1c(DAT_005712f0,param_1);
+        temp_v0 = chainCountIdUnflagged(DAT_005712f0,param_1);
         if (0 < temp_v0) {
           return;
         }

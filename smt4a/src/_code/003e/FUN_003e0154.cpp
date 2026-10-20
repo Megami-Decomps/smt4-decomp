@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard003E.h"
 
 extern "C" {
 
-extern int FUN_001801a4(void);
+extern PlayerData *FUN_001801a4(void);
 
-
-int FUN_003e0154(void)
-
+s32 FUN_003e0154(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_001801a4();
-  return (int)*(short *)(temp_v0 + 0x1c);
+    return FUN_001801a4()->unk1C;
 }
 
 } /* extern "C" */

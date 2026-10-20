@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001ad9b4(void);
 
 /* Supplied declaration required: FUN_001ad9b4. */
-extern unsigned int FUN_00418584(unsigned short);
+extern unsigned int partyEntryFlagsBit3(unsigned short);
 
 
 void FUN_002417a8(unsigned short *param_1,unsigned short *param_2)
@@ -18,9 +18,9 @@ void FUN_002417a8(unsigned short *param_1,unsigned short *param_2)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00418584(*param_1);
+  temp_v0 = partyEntryFlagsBit3(*param_1);
   temp_v2 = 0;
-  temp_v1 = FUN_00418584(*param_2);
+  temp_v1 = partyEntryFlagsBit3(*param_2);
   if ((temp_v1 & ~temp_v0) != 0) {
     temp_v2 = -1;
   }

@@ -1,24 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0015a138(unsigned int);
+int FUN_0015a138(u32 value);
 
-/* Supplied declaration required: FUN_0015a138. */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x68];
+    /* 0x68 */ u32 unk68;
+} Entry;
 
+typedef struct Table {
+    /* 0x0000 */ u8 unk0000[0x15DC];
+    /* 0x15DC */ Entry *entries[0x18];
+} Table;
 
-void FUN_0013a668(int param_1)
-
+void FUN_0013a668(Table *table)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    FUN_0015a138(*(unsigned int *)(*(int *)(param_1 + temp_v0 * 4 + 0x15dc) + 0x68));
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x18);
-  return;
+    s32 i = 0;
+
+    do {
+        FUN_0015a138(table->entries[i]->unk68);
+        i++;
+    } while (i < 0x18);
 }
 
 } /* extern "C" */

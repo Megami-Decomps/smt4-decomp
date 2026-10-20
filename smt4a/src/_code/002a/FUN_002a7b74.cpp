@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_003491e8(void);
+int obj04Finish(void);
 
 extern int DAT_0057f290; /* 0x57f290 */
 
 extern int FUN_0026272c(void);
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 
 
 void FUN_002a7b74(void)
@@ -20,7 +20,7 @@ void FUN_002a7b74(void)
   
   if (DAT_0057f290 != 0) {
     if ((*(char *)(DAT_0057f290 + 0x430) != '\0') && (temp_v0 = FUN_0026272c(), temp_v0 == 0)) {
-      FUN_003491e8();
+      obj04Finish();
     }
     if (DAT_0057f290 != 0) {
       *(unsigned int *)(DAT_0057f290 + 0x488) = 0xffffffff;

@@ -1,28 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0014166c(void);
+typedef struct Flags {
+    /* 0x00 */ s8 blocked;
+    /* 0x01 */ s8 requested;
+} Flags;
 
-extern signed char DAT_0057ffd0; /* 0x57ffd0 */
+void FUN_0014166c(void);
+s32 FUN_001696f4(void);
+extern Flags DAT_0057ffd0;
 
-/* Supplied declaration required: FUN_0014166c. */
-extern int FUN_001696f4(void);
-
-
-unsigned int FUN_0013710c(void)
-
+/* When FUN_001696f4 reports 1 and the request flag is set without the blocked flag, runs FUN_0014166c; always returns 0. */
+u32 FUN_0013710c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_001696f4();
-  if (temp_v0 == 1) {
-    if (((*(signed char *)((unsigned char *)&DAT_0057ffd0 + 0x1)) != '\0') && (DAT_0057ffd0 == '\0')) {
-      FUN_0014166c();
+    if (FUN_001696f4() == 1) {
+        if (DAT_0057ffd0.requested != 0 && DAT_0057ffd0.blocked == 0) {
+            FUN_0014166c();
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

@@ -73,9 +73,9 @@ extern unsigned int FUN_002a7bc0(void);
 /* Supplied declaration required: FUN_002b90f8. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34ToMTX33Asm. */
@@ -143,7 +143,7 @@ void FUN_001aa6a4(int param_1)
     if (temp_v9 != 1) {
       if (temp_v9 != 2) {
         if (temp_v9 == 3) {
-          temp_v8 = FUN_002c5da8(5,0,1);
+          temp_v8 = packNibblesAndByte(5,0,1);
           piVar6 = (int *)(temp_v3 + 0x12ac);
           temp_v1 = piVar6[*piVar6 + 2];
           piVar6[*piVar6 + 2] = temp_v8;
@@ -154,7 +154,7 @@ void FUN_001aa6a4(int param_1)
         }
       }
       else {
-        temp_v8 = FUN_002c5da8(6,1,2);
+        temp_v8 = packNibblesAndByte(6,1,2);
         piVar6 = (int *)(temp_v3 + 0x12ac);
         temp_v1 = piVar6[*piVar6 + 2];
         piVar6[*piVar6 + 2] = temp_v8;
@@ -165,7 +165,7 @@ void FUN_001aa6a4(int param_1)
       }
     }
     else {
-      temp_v8 = FUN_002c5da8(6,1,0);
+      temp_v8 = packNibblesAndByte(6,1,0);
       piVar6 = (int *)(temp_v3 + 0x12ac);
       temp_v1 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v8;
@@ -176,7 +176,7 @@ void FUN_001aa6a4(int param_1)
     }
   }
   else {
-    temp_v8 = FUN_002c5da8(6,7,0);
+    temp_v8 = packNibblesAndByte(6,7,0);
     piVar6 = (int *)(temp_v3 + 0x12ac);
     temp_v1 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v8;
@@ -229,7 +229,7 @@ void FUN_001aa6a4(int param_1)
     temp_v9 = temp_v4;
   }
   else if (*(char *)(param_1 + 0x380) != '\0') {
-    if (((DAT_00476634 & 1) == 0) && (temp_v3 = FUN_002bfefc(&DAT_00476634), temp_v3 != 0)) {
+    if (((DAT_00476634 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476634), temp_v3 != 0)) {
       DAT_004efd6c = temp_v10;
       DAT_004efd70 = temp_v11;
       DAT_004efd74 = temp_v11;

@@ -1,25 +1,22 @@
-#include "romwright_types.h"
+#include "shard/Dspsnd.h"
 
 extern "C" {
 
-extern int FUN_001c6e20(void);
+s32 FUN_001c6e20(void);
 
-
-int nn_snd_CTR_Dspsnd_GetDroppedFrameCount(int param_1)
-
+/* Returns the dropped frame count of the active status block, or -1 when the DSP is not available. */
+s32 nn_snd_CTR_Dspsnd_GetDroppedFrameCount(DspsndState *state)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_001c6e20();
-  if (temp_v0 == 0) {
-    temp_v1 = 0xffffffff;
-  }
-  else {
-    temp_v1 = (unsigned int)*(unsigned short *)
-                   (*(int *)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131c) * 4 + 0x10a8) + 2);
-  }
-  return temp_v1;
+    s32 result;
+    u32 count;
+
+    result = FUN_001c6e20();
+    if (result == 0) {
+        count = 0xFFFFFFFF;
+    } else {
+        count = (u32)state->statuses[state->statusIndex]->droppedFrames;
+    }
+    return count;
 }
 
 } /* extern "C" */

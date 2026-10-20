@@ -1,15 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_005b3bf4; /* 0x5b3bf4 */
+typedef struct Global5b3bf4 {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 unk03;
+} Global5b3bf4;
+extern Global5b3bf4 DAT_005b3bf4;
 
-
-void FUN_0013a608(unsigned char param_1)
-
+/* Stores `value` in the byte at 0x3 of the global at 0x5B3BF4. */
+void FUN_0013a608(u8 value)
 {
-  (*(unsigned char *)((unsigned char *)&DAT_005b3bf4 + 0x3)) = param_1;
-  return;
+    DAT_005b3bf4.unk03 = value;
 }
 
 } /* extern "C" */

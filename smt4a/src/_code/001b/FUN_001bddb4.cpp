@@ -1,37 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
+void nn_snd_CTR_Dspsnd_InitializeChannelParameters(u8 *state, u8 channel);
+void nn_snd_CTR_Dspsnd_SetChannelPlayStop(u8 *state, u8 channel);
+extern u8 g_dspsndState[];
 
-extern unsigned char g_dspsndState; /* 0x6433d0 */
+typedef struct Channel {
+    /* 0x00 */ u32 index;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u8 playing;
+    /* 0x0D */ u8 mode;
+} Channel;
 
-extern unsigned char nn_snd_CTR_Dspsnd_InitializeChannelParameters(unsigned int, unsigned char);
-extern unsigned char nn_snd_CTR_Dspsnd_SetChannelPlayStop(unsigned int, unsigned char);
-
-
-unsigned int * FUN_001bddb4(unsigned int *param_1,int param_2)
-
+/* Sets the channel mode: mode 1 stops the channel and re-initialises its parameters, mode 2 only stops it. */
+void FUN_001bddb4(Channel *channel, s32 mode)
 {
-  unsigned char temp_v0;
-  
-  *(char *)((int)param_1 + 0xd) = (char)param_2;
-  if (param_2 != 0) {
-    if (param_2 == 1) {
-      nn_snd_CTR_Dspsnd_SetChannelPlayStop((unsigned int)&g_dspsndState,(unsigned char)*param_1);
-      *(unsigned char *)(param_1 + 3) = 0;
-      temp_v0 = nn_snd_CTR_Dspsnd_InitializeChannelParameters((unsigned int)&g_dspsndState,(unsigned char)*param_1);
-      return (unsigned int *)(unsigned int)temp_v0;
+    channel->mode = (u8)mode;
+    if (mode != 0) {
+        if (mode == 1) {
+            nn_snd_CTR_Dspsnd_SetChannelPlayStop(g_dspsndState, (u8)channel->index);
+            channel->playing = 0;
+            nn_snd_CTR_Dspsnd_InitializeChannelParameters(g_dspsndState, (u8)channel->index);
+            return;
+        }
+        if (mode == 2) {
+            nn_snd_CTR_Dspsnd_SetChannelPlayStop(g_dspsndState, (u8)channel->index);
+            return;
+        }
     }
-    if (param_2 == 2) {
-      temp_v0 = nn_snd_CTR_Dspsnd_SetChannelPlayStop((unsigned int)&g_dspsndState,(unsigned char)*param_1);
-      return (unsigned int *)(unsigned int)temp_v0;
-    }
-  }
-  return param_1;
 }
 
 } /* extern "C" */

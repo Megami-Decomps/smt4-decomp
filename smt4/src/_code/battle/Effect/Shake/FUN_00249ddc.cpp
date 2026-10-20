@@ -1,33 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00249ddc` (_code @ 0x249ddc, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int asdMemoryAlloc(int, int, int, int, int);
+typedef struct ShakeEffect {
+    u32 unk00; /* 0x00 */
+    u32 unk04; /* 0x04 */
+    u32 unk08; /* 0x08 */
+    u32 unk0c; /* 0x0c */
+    u32 unk10; /* 0x10 */
+} ShakeEffect;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+extern void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-void FUN_00249ddc(void)
-
+/* Allocates a zeroed shake effect from the back of the main heap. */
+ShakeEffect *FUN_00249ddc(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x14,0);
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  puVar1[4] = 0;
-  return;
+    ShakeEffect *shake;
+
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\Effect\\Shake.c", 35);
+    shake = (ShakeEffect *)asdMemoryAlloc(0x100, 0x100, 0, sizeof(ShakeEffect), 0);
+    shake->unk00 = 0;
+    shake->unk04 = 0;
+    shake->unk08 = 0;
+    shake->unk0c = 0;
+    shake->unk10 = 0;
+    return shake;
 }
 
 } /* extern "C" */

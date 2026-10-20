@@ -44,7 +44,7 @@ extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f5288. */
 /* Supplied declaration required: FUN_00343324. */
 extern unsigned int FUN_003deab0(unsigned int, unsigned int);
@@ -104,7 +104,7 @@ void FUN_00258618(int param_1)
   uStack_2c = 0x3f800000;
   FUN_00343324(g_titleScene,temp_v8,0);
   temp_v0 = g_titleScene;
-  temp_v1 = FUN_002c5da8(6,7,0);
+  temp_v1 = packNibblesAndByte(6,7,0);
   piVar6 = (int *)(temp_v0 + 0x12ac);
   temp_v3 = *piVar6;
   temp_v4 = piVar6[temp_v3 + 2];

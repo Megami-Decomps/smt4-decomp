@@ -14,7 +14,7 @@ int FUN_00222160(...);
 int FUN_00243c24(void);
 int FUN_002b30e4(void);
 int FUN_00323bc4(...);
-int FUN_00340eb0(...);
+int swapSlotExchange(...);
 int FUN_00350a8c(void);
 int FUN_003874ec(...);
 int FUN_00399768(...);
@@ -30,7 +30,7 @@ int FUN_00243ce8(...);
 int effPartCreate(void);
 int FUN_002e6dd4(void);
 int FUN_00300778(...);
-int FUN_003385e4(...);
+int nodeChainCount(...);
 int FUN_003ba614(...);
 int rt_memcpy_w(...);
 
@@ -125,8 +125,8 @@ extern unsigned char *FUN_00200bcc(unsigned char *);
 extern unsigned int FUN_0030061c(int);
 /* Supplied declaration required: FUN_00300778. */
 /* Supplied declaration required: FUN_00323bc4. */
-/* Supplied declaration required: FUN_003385e4. */
-/* Supplied declaration required: FUN_00340eb0. */
+/* Supplied declaration required: nodeChainCount. */
+/* Supplied declaration required: swapSlotExchange. */
 /* Supplied declaration required: FUN_00350a8c. */
 extern int FUN_0037652c(int);
 /* Supplied declaration required: FUN_003874ec. */
@@ -172,7 +172,7 @@ unsigned int FUN_00388aac(void)
   if (DAT_0059dbf4 == 0) {
     effPartCreate();
   }
-  temp_v2 = FUN_003385e4();
+  temp_v2 = nodeChainCount();
   temp_v1 = 0;
   if (DAT_0059dc14 == &DAT_0059e9a8) {
     if (DAT_0059e9b4 != 0) {
@@ -575,7 +575,7 @@ LAB_003894e4:
       DAT_0059dc00 = 0;
     }
     temp_v10 = DAT_0059e9b4 + DAT_0059dbec;
-    temp_v2 = FUN_003385e4(DAT_0059dbf4);
+    temp_v2 = nodeChainCount(DAT_0059dbf4);
     if (temp_v10 < temp_v2) {
       if (DAT_0059dbf0 != 0) {
         FUN_003ba614(DAT_0059dbf0,3);
@@ -604,7 +604,7 @@ LAB_00389604:
       FUN_003874ec(1);
     }
   }
-  FUN_00340eb0(temp_v11);
+  swapSlotExchange(temp_v11);
   if (DAT_0059dbe0 != '\0') {
     FUN_00243ce8(0xaa,0,6,&LAB_00389790);
   }
@@ -685,7 +685,7 @@ LAB_003897fc:
     }
   }
   temp_v10 = DAT_0059e9b4 + DAT_0059dbec;
-  temp_v2 = FUN_003385e4(DAT_0059dbf4);
+  temp_v2 = nodeChainCount(DAT_0059dbf4);
   if (temp_v10 < temp_v2) {
     temp_v4 = FUN_00300778(DAT_0059dbf4,temp_v10);
     temp_v3 = temp_v4;
@@ -747,7 +747,7 @@ LAB_003898ec:
   }
   if (DAT_0059dbf0 == 0) {
     temp_v10 = DAT_0059e9b4 + DAT_0059dbec;
-    temp_v2 = FUN_003385e4(DAT_0059dbf4);
+    temp_v2 = nodeChainCount(DAT_0059dbf4);
     if (temp_v10 < temp_v2) {
       puVar17 = (unsigned int *)FUN_00300778(DAT_0059dbf4,temp_v10);
       puVar6 = puVar17;

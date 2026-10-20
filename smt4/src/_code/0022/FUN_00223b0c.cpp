@@ -1,15 +1,10 @@
-#include "romwright_types.h"
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
-
-
-void FUN_00223b0c(unsigned int param_1)
-
+void FUN_00223b0c(u32 value)
 {
-  *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x1f4dc) = param_1;
-  return;
+    *(u32 *)(g_gameDataBlocks.unk04 + 0x1f4dc) = value;
 }
 
 } /* extern "C" */

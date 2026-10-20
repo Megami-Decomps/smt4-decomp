@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0019cac4(void);
 int FUN_0026fd50(int, unsigned char [52], int, unsigned int);
 int FUN_002cb55c(int, unsigned int, unsigned int);
-int FUN_0032ff20(unsigned int, unsigned char [52]);
+int unitRecordBuild(unsigned int, unsigned char [52]);
 int FUN_0034dae0(int, unsigned int);
 int FUN_0036d318(void);
 
@@ -28,7 +28,7 @@ extern int FUN_002626e0(void);
 /* Supplied declaration required: FUN_0026fd50. */
 extern int FUN_002b4dcc(unsigned char *);
 /* Supplied declaration required: FUN_002cb55c. */
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0034dae0. */
 /* Supplied declaration required: FUN_0036d318. */
 
@@ -85,7 +85,7 @@ void FUN_0031f718(unsigned int param_1,int param_2,unsigned int param_3)
     }
   }
   else {
-    FUN_0032ff20(param_1 & 0xffff,temp_v5);
+    unitRecordBuild(param_1 & 0xffff,temp_v5);
     *(unsigned char *)(temp_v0 + 0x2017) = 1;
     FUN_0026fd50(temp_v0 + 0x1390,temp_v5,0,param_3);
   }

@@ -1,24 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
-int asdListBoxMarkDirty(unsigned int);
+extern ListBoxWork *jobGetWork(u32 job);
+extern void asdListBoxMarkDirty(u32 listBox);
 
-extern int jobGetWork(unsigned int);
-/* Supplied declaration required: asdListBoxMarkDirty. */
-
-
-void FUN_00317508(unsigned int param_1,unsigned char param_2)
-
+void FUN_00317508(u32 listBox, u8 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jobGetWork(param_1);
-  asdListBoxMarkDirty(param_1);
-  *(unsigned char *)(temp_v0 + 0x3d) = param_2;
-  *(unsigned int *)(temp_v0 + 0x40) = 2;
-  return;
+    ListBoxWork *work = jobGetWork(listBox);
+
+    asdListBoxMarkDirty(listBox);
+    work->unk3D = value;
+    work->unk40 = 2;
 }
 
 } /* extern "C" */

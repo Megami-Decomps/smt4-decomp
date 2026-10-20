@@ -30,7 +30,7 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0020cb74. */
 
@@ -89,7 +89,7 @@ LAB_004ff118:
               if (temp_v1 != '\x01') {
                 if (temp_v1 != '\x02') {
                   if (temp_v1 == '\x03') {
-                    temp_v4 = FUN_00169294(5,0,1);
+                    temp_v4 = packNibblesAndByte(5,0,1);
                     piVar10 = (int *)(temp_v3 + 0x12b8);
                     temp_v6 = piVar10[*piVar10 + 2];
                     piVar10[*piVar10 + 2] = temp_v4;
@@ -100,7 +100,7 @@ LAB_004ff118:
                   }
                 }
                 else {
-                  temp_v4 = FUN_00169294(6,1,2);
+                  temp_v4 = packNibblesAndByte(6,1,2);
                   piVar10 = (int *)(temp_v3 + 0x12b8);
                   temp_v6 = piVar10[*piVar10 + 2];
                   piVar10[*piVar10 + 2] = temp_v4;
@@ -111,7 +111,7 @@ LAB_004ff118:
                 }
               }
               else {
-                temp_v4 = FUN_00169294(6,1,0);
+                temp_v4 = packNibblesAndByte(6,1,0);
                 piVar10 = (int *)(temp_v3 + 0x12b8);
                 temp_v6 = piVar10[*piVar10 + 2];
                 piVar10[*piVar10 + 2] = temp_v4;
@@ -122,7 +122,7 @@ LAB_004ff118:
               }
             }
             else {
-              temp_v4 = FUN_00169294(6,7,0);
+              temp_v4 = packNibblesAndByte(6,7,0);
               piVar10 = (int *)(temp_v3 + 0x12b8);
               temp_v6 = piVar10[*piVar10 + 2];
               piVar10[*piVar10 + 2] = temp_v4;

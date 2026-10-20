@@ -1,28 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184c00(int, int, int);
-int FUN_00388758(int);
+void FUN_00184c00(u8 *member, s32 a, s32 b);
+void FUN_00388758(s32 value);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct Game {
+    /* 0x0000 */ u8 unk0000[0x1634];
+    /* 0x1634 */ u8 member1634[1];
+} Game;
+extern Game *DAT_0057f108;
 
-extern int DAT_0057f108; /* 0x57f108 */
-
-/* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_00388758. */
-
-
+/* Runs FUN_00388758(1), then FUN_00184c00 on the game's member at 0x1634. */
 void FUN_00237650(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_00388758(1);
-  FUN_00184c00(DAT_0057f108 + 0x1634,7,0);
-  return;
+    FUN_00388758(1);
+    FUN_00184c00(DAT_0057f108->member1634, 7, 0);
 }
 
 } /* extern "C" */

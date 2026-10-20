@@ -1,36 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int mapIfStart(void);
 
-extern int *DAT_00447a98; /* 0x447a98 */
+typedef struct MapIfTimer {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ s32 frames;
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ s32 unk14;
+} MapIfTimer;
 
-/* Supplied declaration required: mapIfStart. */
+extern MapIfTimer *DAT_00447a98;
 
-
+/* Counts frames while the timer is in state 1-3; starts the map interface at frame 8 and resets after 60. */
 void FUN_0019dc04(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  
-  piVar1 = DAT_00447a98;
-  if ((*piVar1 != 0) && ((*piVar1 == 1 || *piVar1 == 2) || *piVar1 == 3)) {
-    piVar1[1] = piVar1[1] + 1;
-    if (piVar1[1] == 8) {
-      if (piVar1[5] == 0) {
-        return;
-      }
-      mapIfStart();
+    MapIfTimer *timer = DAT_00447a98;
+
+    if (timer->state != 0 && ((timer->state == 1 || timer->state == 2) || timer->state == 3)) {
+        timer->frames = timer->frames + 1;
+        if (timer->frames == 8) {
+            if (timer->unk14 == 0) {
+                return;
+            }
+            mapIfStart();
+        }
+        timer = DAT_00447a98;
+        if (timer->frames > 60) {
+            timer->state = 0;
+            timer->frames = 0;
+        }
     }
-    piVar1 = DAT_00447a98;
-    if (piVar1[1] > 60) {
-      *piVar1 = 0;
-      piVar1[1] = 0;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

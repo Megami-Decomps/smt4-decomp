@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002f8b88(int);
-int FUN_00311544(int);
+int handleLockRelease(int);
 
 /* Supplied declaration required: FUN_002f8b88. */
-/* Supplied declaration required: FUN_00311544. */
+/* Supplied declaration required: handleLockRelease. */
 
 
 void FUN_00122700(int param_1)
@@ -20,7 +20,7 @@ void FUN_00122700(int param_1)
   
   while (temp_v1 = *(int *)(param_1 + 0x38), 0 < temp_v1) {
     for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
-      FUN_00311544(param_1);
+      handleLockRelease(param_1);
     }
     if (0 < *(int *)(param_1 + 0x38)) {
       FUN_002f8b88(1);

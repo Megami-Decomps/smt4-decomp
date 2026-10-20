@@ -52,10 +52,10 @@ typedef struct {
 extern int FUN_00295cec(void);
 extern int FUN_00295d08(unsigned int);
 /* Supplied declaration required: FUN_00295f28. */
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002b63ac(void);
-extern unsigned int FUN_002c09f4(unsigned int);
+extern unsigned int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_00334018. */
 
 
@@ -87,7 +87,7 @@ unsigned int FUN_002e33f4(fn_002e33f4_arg0 *param_1,fn_002e33f4_arg1 *param_2,in
   if (param_4 == 0) {
     if (param_2->field_0x60 != 0xb) {
       if ((!(param_2->field_0x60 != 0xc || param_3 != 0)) &&
-         (temp_v2 = FUN_002c09f4(99), 0x18 >= temp_v2)) {
+         (temp_v2 = randNextInRange(99), 0x18 >= temp_v2)) {
         if (temp_v4 != 0) {
           temp_v0 = *(short *)(temp_v4 + 0x2c);
         }
@@ -103,14 +103,14 @@ unsigned int FUN_002e33f4(fn_002e33f4_arg0 *param_1,fn_002e33f4_arg1 *param_2,in
         temp_v5 = 0;
       }
     }
-    else if ((param_3 == 0) && (temp_v2 = FUN_002c09f4(99), 0x18 >= temp_v2)) {
+    else if ((param_3 == 0) && (temp_v2 = randNextInRange(99), 0x18 >= temp_v2)) {
       if (temp_v4 != 0) {
         FUN_00283f30(temp_v6,0);
         temp_v1 = FUN_00295d08(5);
       }
       else {
         FUN_002485d4(temp_v3,temp_v6);
-        temp_v1 = FUN_0029ebac(temp_v3,5);
+        temp_v1 = flagWordTestBit(temp_v3,5);
       }
       if (temp_v1 == 0) {
         temp_v1 = 0;

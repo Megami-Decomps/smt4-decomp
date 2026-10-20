@@ -33,14 +33,14 @@ extern unsigned char *FUN_002e09b4(unsigned char **, int, unsigned int);
 extern unsigned char *FUN_002e0c48(unsigned char **);
 /* Supplied declaration required: FUN_002e0c80. */
 extern unsigned char *FUN_002e0fac(void);
-extern unsigned char *FUN_00317c60(unsigned char **);
+extern unsigned char *taggedOwnerRelease(unsigned char **);
 /* Supplied declaration required: FUN_00317c98. */
 extern unsigned char *FUN_00317d48(unsigned char **);
 /* Supplied declaration required: FUN_00317e50. */
 extern unsigned char *FUN_0032c900(unsigned char **, int, unsigned int);
 /* Supplied declaration required: FUN_0032c9fc. */
 extern unsigned char *FUN_0032cab4(unsigned char **);
-extern unsigned char *FUN_003417ec(unsigned char **);
+extern unsigned char *taggedOwnerRelease2(unsigned char **);
 /* Supplied declaration required: FUN_00341824. */
 extern unsigned char *FUN_00359608(void);
 /* Supplied declaration required: FUN_003596e0. */
@@ -170,7 +170,7 @@ unsigned int FUN_0037adac(int param_1,int param_2,unsigned int param_3,unsigned 
             }
           }
           else {
-            puVar5 = (unsigned char *)FUN_003417ec(&temp_v0);
+            puVar5 = (unsigned char *)taggedOwnerRelease2(&temp_v0);
           }
         }
         else {
@@ -178,7 +178,7 @@ unsigned int FUN_0037adac(int param_1,int param_2,unsigned int param_3,unsigned 
         }
       }
       else {
-        puVar5 = (unsigned char *)FUN_00317c60(&temp_v0);
+        puVar5 = (unsigned char *)taggedOwnerRelease(&temp_v0);
       }
       if (-1 < (int)puVar5) {
         FUN_00188374(&temp_v0,0);

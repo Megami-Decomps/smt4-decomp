@@ -1,0 +1,10 @@
+#include "common.h"
+
+extern "C" {
+
+/* Empty function. */
+void emptyStub_00118e5c(void)
+{
+}
+
+} /* extern "C" */

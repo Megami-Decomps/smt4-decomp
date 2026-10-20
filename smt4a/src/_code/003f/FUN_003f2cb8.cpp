@@ -18,7 +18,7 @@ typedef struct {
 
 extern int FUN_0040167c(...); /* 0x40167c */
 extern int FUN_00413094(...); /* 0x413094 */
-extern int FUN_0045b830(...); /* 0x45b830 */
+extern int soundHandleDetachReturn(...); /* 0x45b830 */
 extern int FUN_0045bc3c(...); /* 0x45bc3c */
 extern int FUN_00467080(...); /* 0x467080 */
 extern unsigned char DAT_0055bd6c; /* 0x55bd6c */
@@ -43,7 +43,7 @@ void FUN_003f2cb8(int param_1)
   int temp_v0;
   unsigned int *puVar2;
   
-  FUN_002e5700(param_1 - 0x1ec,FUN_0045b830,4,0x10);
+  FUN_002e5700(param_1 - 0x1ec,soundHandleDetachReturn,4,0x10);
   FUN_002e5700(param_1 - 0xa6c,FUN_0045bc3c,0x88,0x10);
   *(unsigned char **)(param_1 - 0xaa8) = &DAT_0055bda8;
   *(unsigned char **)(param_1 - 0xaa4) = &DAT_0055bdc8;

@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002f4ab0. */
-extern unsigned int FUN_002f4ba0(unsigned int);
+extern unsigned int vectorCount4_002f4ba0(unsigned int);
 
 
 long long FUN_002f4bfc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -49,7 +49,7 @@ long long FUN_002f4bfc(int param_1,unsigned int param_2,unsigned int param_3,uns
     temp_v1 = 0;
     temp_v2 = param_1 + 0x38;
     while( 1 ) {
-      temp_v0 = FUN_002f4ba0(temp_v2);
+      temp_v0 = vectorCount4_002f4ba0(temp_v2);
       puVar3 = *(unsigned int **)(param_1 + 0x38);
       if (temp_v0 <= temp_v1) break;
       FUN_002f4ab0(puVar3[temp_v1],0xffffffff);

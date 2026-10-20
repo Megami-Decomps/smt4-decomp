@@ -23,7 +23,7 @@ extern unsigned char LAB_0011b0c8; /* 0x11b0c8 */
 extern int FUN_002f7896(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_00307084. */
 /* Supplied declaration required: FUN_003070aa. */
-extern int FUN_003070ec(unsigned int **, unsigned int *);
+extern int wordRefsDiffer_003070ec(unsigned int **, unsigned int *);
 
 
 unsigned int FUN_0011b020(int param_1,int param_2)
@@ -51,7 +51,7 @@ unsigned int FUN_0011b020(int param_1,int param_2)
       temp_v0 = param_1 + 0x60;
       while( 1 ) {
         temp_v7 = *(unsigned int *)(param_1 + 0x70);
-        temp_v1 = FUN_003070ec(&temp_v6,(unsigned int *)&temp_v7);
+        temp_v1 = wordRefsDiffer_003070ec(&temp_v6,(unsigned int *)&temp_v7);
         if (temp_v1 == 0) break;
         if (*(int *)(param_2 + 0x10) == temp_v6[6]) {
           puVar3 = temp_v6 + 8;

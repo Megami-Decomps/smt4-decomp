@@ -1,7 +1,7 @@
-/* NON_MATCHING: retail evaluates a (file, line) pair for the allocation (debug-allocation macro arguments) before the call and discards it; nothing uses the pair */
 /* Creates a list of ten sprite handles with their counters cleared. */
 #include "common.h"
 #include "camp/CampCec/CampCecDraw.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -10,6 +10,7 @@ extern u32 spriteHandleCreate(u32 type);
 
 CampCecDrawList *campCecDrawListCreate(void)
 {
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\CampCec\\CampCecDraw.cpp", 2284);
     CampCecDrawList *list = (CampCecDrawList *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x98, 1);
     int i;
 

@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002c2950(void);
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 unk20;
+} Obj;
 
+extern Obj *FUN_002c2950(void);
 
-void FUN_0027d8b4(unsigned short param_1)
-
+void FUN_0027d8b4(u16 value)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002c2950();
-  *(unsigned short *)(temp_v0 + 0x20) = param_1;
-  return;
+    Obj *obj = FUN_002c2950();
+
+    obj->unk20 = value;
 }
 
 } /* extern "C" */

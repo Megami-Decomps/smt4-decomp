@@ -50,7 +50,7 @@ extern int FUN_002973d8(void);
 extern unsigned int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: FUN_002bc01c. */
 /* Supplied declaration required: FUN_002c1658. */
-extern int FUN_002f61e8(void);
+extern int sys43e188GetStateB(void);
 /* Supplied declaration required: FUN_002fea6c. */
 
 
@@ -140,7 +140,7 @@ void FUN_00391e48(unsigned int *param_1)
       param_1[0x82] = 0;
       return;
     }
-    temp_v1 = FUN_002f61e8();
+    temp_v1 = sys43e188GetStateB();
     if (temp_v1 == 0) {
       return;
     }

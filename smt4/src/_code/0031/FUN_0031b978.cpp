@@ -1,46 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002958f8(int, int);
-int FUN_002a780c(unsigned int);
-int asdMemFree(unsigned int *);
+int FUN_002958f8(int a, int b);
+int FUN_002a780c(u32 value);
+int asdMemFree(u32 *ptr);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_002958f8. */
-/* Supplied declaration required: FUN_002a780c. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_0031b978(unsigned int *param_1)
-
+/* Releases the object's 7 + 3 + 8 + 3 owned resources (word indices 2-8, 1, 0, 0xD, 0x12-0x19, 0xE, 0x10, 0x23), then the object. */
+void FUN_0031b978(u32 *obj)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    FUN_002a780c(param_1[temp_v0 + 2]);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 7);
-  FUN_002a780c(param_1[1]);
-  FUN_002a780c(*param_1);
-  FUN_002a780c(param_1[0xd]);
-  temp_v0 = 0;
-  do {
-    FUN_002a780c(param_1[temp_v0 + 0x12]);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 8);
-  FUN_002a780c(param_1[0xe]);
-  FUN_002a780c(param_1[0x10]);
-  FUN_002a780c(param_1[0x23]);
-  FUN_002958f8((int)*(short *)(param_1 + 0x22),1);
-  asdMemFree(param_1);
-  return;
+    int i = 0;
+
+    do {
+        FUN_002a780c(obj[i + 2]);
+        i = i + 1;
+    } while (i < 7);
+    FUN_002a780c(obj[1]);
+    FUN_002a780c(*obj);
+    FUN_002a780c(obj[0xd]);
+    i = 0;
+    do {
+        FUN_002a780c(obj[i + 0x12]);
+        i = i + 1;
+    } while (i < 8);
+    FUN_002a780c(obj[0xe]);
+    FUN_002a780c(obj[0x10]);
+    FUN_002a780c(obj[0x23]);
+    FUN_002958f8((int)*(s16 *)(obj + 0x22), 1);
+    asdMemFree(obj);
 }
 
 } /* extern "C" */

@@ -15,9 +15,9 @@ AsdMdlObject *asdMdlManagerCreateSecondList(void *source, u32 param)
 {
     AsdMdlObject *obj = asdMdlObjectNew();
 
-    obj->node->unk08 = param;
-    obj->unk04 = FUN_0023716c(source, 0);
-    FUN_001bce84(obj->unk04, 1);
+    obj->node->param = param;
+    obj->request = FUN_0023716c(source, 0);
+    FUN_001bce84(obj->request, 1);
     asdListAdd(&g_asdMdlList2, obj, 0);
     return obj;
 }

@@ -81,7 +81,7 @@ extern int FUN_0029c8f4(int);
 /* Supplied declaration required: FUN_0029ca58. */
 /* Supplied declaration required: FUN_0029d8f4. */
 extern int FUN_0029ea68(void);
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int FUN_002a8740(int);
 /* Supplied declaration required: FUN_002b63ac. */
@@ -364,7 +364,7 @@ LAB_002174ac:
       }
       break;
     case 3:
-      temp_v2 = FUN_002a0ce8();
+      temp_v2 = sys43e188GetState();
       if (temp_v2 == 0) {
         return;
       }
@@ -399,7 +399,7 @@ LAB_002174ac:
         if (temp_v3 != 10) {
           return;
         }
-        temp_v2 = FUN_002a0ce8();
+        temp_v2 = sys43e188GetState();
         if (temp_v2 == 0) {
           return;
         }

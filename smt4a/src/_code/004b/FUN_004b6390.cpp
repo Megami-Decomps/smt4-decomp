@@ -17,8 +17,8 @@ int FUN_002c85b0(...);
 int FUN_00342010(void);
 int FUN_0036b644(...);
 int FUN_00371c3c(...);
-int FUN_0038b6bc(void);
-int FUN_003b7314(void);
+int objBMarkAndInit20D4(void);
+int stateHolderMarkAndInit2588(void);
 int FUN_003e4140(...);
 int FUN_003f881c(int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
@@ -51,8 +51,8 @@ extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_00342010. */
 /* Supplied declaration required: FUN_0036b644. */
 /* Supplied declaration required: FUN_00371c3c. */
-/* Supplied declaration required: FUN_0038b6bc. */
-/* Supplied declaration required: FUN_003b7314. */
+/* Supplied declaration required: objBMarkAndInit20D4. */
+/* Supplied declaration required: stateHolderMarkAndInit2588. */
 /* Supplied declaration required: FUN_003e4140. */
 /* Supplied declaration required: FUN_003f881c. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
@@ -238,8 +238,8 @@ void FUN_004b6390(int param_1)
   FUN_002c8538(0);
   FUN_00342010();
   FUN_003e4140(param_1 + 0x7f40);
-  FUN_0038b6bc();
-  FUN_003b7314();
+  objBMarkAndInit20D4();
+  stateHolderMarkAndInit2588();
   return;
 }
 

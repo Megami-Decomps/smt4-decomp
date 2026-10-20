@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00188b60(...);
 int FUN_001a089c(...);
-int FUN_002f4370(...);
+int emptyStub_002f4370(...);
 int FUN_002f5020(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -38,7 +38,7 @@ extern unsigned int DAT_00646074; /* 0x646074 */
 
 /* Supplied declaration required: FUN_00188b60. */
 /* Supplied declaration required: FUN_001a089c. */
-/* Supplied declaration required: FUN_002f4370. */
+/* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
 
 
@@ -73,7 +73,7 @@ void FUN_00511fb8(unsigned int *param_1)
   DAT_00646070 = 0;
   DAT_00646074 = 0;
   FUN_002f5020(&DAT_005c0b08,&LAB_0042d1c0,4,2);
-  FUN_002f4370(0,0x1f3ddc,0x100000);
+  emptyStub_002f4370(0,0x1f3ddc,0x100000);
   return;
 }
 

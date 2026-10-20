@@ -34,7 +34,7 @@ extern unsigned int DAT_00594b64; /* 0x594b64 */
 
 /* Supplied declaration required: FUN_001055c0. */
 /* Supplied declaration required: FUN_002eb338. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002eba78. */
 extern int FUN_002eba9c(int *, unsigned int *);
 /* Supplied declaration required: FUN_002ebab4. */
@@ -63,7 +63,7 @@ void FUN_002ebadc(unsigned int *param_1,int param_2)
   
   puStack_1c = param_1;
   temp_v13 = param_2;
-  if (((DAT_00594b04 & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_00594b04), temp_v1 != 0)) {
+  if (((DAT_00594b04 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_00594b04), temp_v1 != 0)) {
     DAT_00594b60 = 0;
     DAT_00594b64 = 0;
   }

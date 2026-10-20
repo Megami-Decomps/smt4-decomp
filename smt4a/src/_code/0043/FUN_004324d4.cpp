@@ -42,7 +42,7 @@ extern unsigned int FUN_00104fe0(int, unsigned char);
 /* Supplied declaration required: FUN_0010cd04. */
 /* Supplied declaration required: FUN_00111560. */
 /* Supplied declaration required: FUN_0011169c. */
-extern unsigned int *FUN_00115544(void);
+extern unsigned int *initVtable00559814(void);
 extern int FUN_002e760a(unsigned int);
 extern unsigned int FUN_002eac34(unsigned char);
 /* Supplied declaration required: FUN_002f5940. */
@@ -63,7 +63,7 @@ FUN_004324d4(fn_004324d4_arg0 *param_1,unsigned int param_2,unsigned int param_3
   uStack_24 = param_2;
   uStack_20 = param_3;
   uStack_1c = param_4;
-  puVar1 = (unsigned int *)FUN_00115544();
+  puVar1 = (unsigned int *)initVtable00559814();
   *(char *)(puVar1 + 9) = (char)param_2;
   *puVar1 = (unsigned int)&DAT_00558cc4;
   puVar1[8] = param_3;

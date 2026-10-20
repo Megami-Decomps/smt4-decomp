@@ -21,8 +21,8 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int FUN_0015688c(void);
-extern int FUN_001633a0(unsigned int);
+extern int saveSlotFindSelected(void);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_00187168(void);
 extern unsigned int FUN_0019acdc(short, unsigned int);
 extern int FUN_003e48bc(void);
@@ -82,7 +82,7 @@ void FUN_003f0070(unsigned int param_1)
     temp_v5 = temp_v5 + 1;
   } while ((int)temp_v5 < 0xc);
   if (temp_v0 == 0) {
-    temp_v1 = FUN_0015688c();
+    temp_v1 = saveSlotFindSelected();
     if (temp_v1 == 0) {
       temp_v4 = 0;
       if (temp_v4 != 0) {
@@ -96,7 +96,7 @@ void FUN_003f0070(unsigned int param_1)
     temp_v0 = 1;
     temp_v7[0] = *(unsigned short *)(temp_v1 + 300);
   }
-  temp_v0 = FUN_001633a0((temp_v0 - 1U) & 0xffff);
+  temp_v0 = lcgRandomRange((temp_v0 - 1U) & 0xffff);
   temp_v4 = temp_v7[temp_v0];
   if (temp_v4 != 0) {
     temp_v3 = FUN_0019acdc(temp_v4,1);

@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00184310(void);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_0032fea0(...);
-int FUN_0032ff20(...);
+int unitRecordBuild(...);
 int FUN_0034c340(...);
 int FUN_003c3f1c(void);
-int FUN_004bd21c(...);
+int getUnlockedSlotCount(...);
 
 /* stack frame of param_3: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -29,10 +29,10 @@ extern int DAT_0057f290; /* 0x57f290 */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0034c340. */
 /* Supplied declaration required: FUN_003c3f1c. */
-/* Supplied declaration required: FUN_004bd21c. */
+/* Supplied declaration required: getUnlockedSlotCount. */
 
 
 void FUN_0028a538(unsigned short *param_1,int param_2,int param_3)
@@ -165,8 +165,8 @@ LAB_0028a7a8:
       FUN_00203b40(temp_v0 + 0x8e14,temp_v7,8,1,1,1);
       FUN_0034c340(temp_v8,temp_v7,&temp_v10,0);
       FUN_0034c340(temp_v9,temp_v5,&temp_v10,0);
-      FUN_0032ff20(*param_1,temp_v6);
-      FUN_004bd21c(temp_v6);
+      unitRecordBuild(*param_1,temp_v6);
+      getUnlockedSlotCount(temp_v6);
       return;
     }
   } while( 1 );

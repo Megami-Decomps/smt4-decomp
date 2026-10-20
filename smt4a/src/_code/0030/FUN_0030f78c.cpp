@@ -1,14 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030f78c` (_code @ 0x30f78c, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Vec0030f78c {
+    u8 unk00[0x38];
+    s32 *begin;                    /* 0x38 */
+    s32 *end;                      /* 0x3C */
+} Vec0030f78c;
 
-int FUN_0030f78c(int param_1)
+typedef struct Owner0030f78c {
+    u8 unk00[0xc];
+    Vec0030f78c *vec;              /* 0x0C */
+} Owner0030f78c;
 
+/* Number of elements between the vector's begin and end pointers. */
+int FUN_0030f78c(Owner0030f78c *owner)
 {
-  return (*(int *)(*(int *)(param_1 + 0xc) + 0x3c) - *(int *)(*(int *)(param_1 + 0xc) + 0x38)) >> 2;
+    Vec0030f78c *vec = owner->vec;
+
+    return vec->end - vec->begin;
 }
 
 } /* extern "C" */

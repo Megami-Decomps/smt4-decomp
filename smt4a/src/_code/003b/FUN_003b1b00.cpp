@@ -30,7 +30,7 @@ extern int FUN_001ab888(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern int FUN_004bd0d8(int);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 unsigned int FUN_003b1b00(void)
@@ -86,8 +86,8 @@ unsigned int FUN_003b1b00(void)
       temp_v0 = *(char *)(temp_v3 + temp_v6 + 0x1c88);
       if (-1 < temp_v0) {
         temp_v3 = FUN_001ab854((int)temp_v0);
-        temp_v4 = FUN_004bd340(temp_v3,1);
-        if (((temp_v4 == 0) && (temp_v4 = FUN_004bd340(temp_v3,10), temp_v4 == 0)) &&
+        temp_v4 = bitsAt60Test(temp_v3,1);
+        if (((temp_v4 == 0) && (temp_v4 = bitsAt60Test(temp_v3,10), temp_v4 == 0)) &&
            (*(unsigned short *)(temp_v3 + 0x62) != temp_v2)) {
           temp_v3 = FUN_004bd0d8(temp_v3);
           if (temp_v3 == 0) {

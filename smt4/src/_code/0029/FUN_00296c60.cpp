@@ -1,18 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Color {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u8 r;
+    /* 0x5 */ u8 g;
+    /* 0x6 */ u8 b;
+    /* 0x7 */ u8 a;
+    /* 0x8 */ u32 packed;
+} Color;
 
-void FUN_00296c60(int param_1,unsigned char param_2,unsigned char param_3,unsigned char param_4,
-                 unsigned char param_5)
-
+/* Sets the four components and the packed RGBA word. */
+void FUN_00296c60(Color *color, u8 r, u8 g, u8 b, u8 a)
 {
-  *(unsigned char *)(param_1 + 4) = param_2;
-  *(unsigned char *)(param_1 + 5) = param_3;
-  *(unsigned char *)(param_1 + 6) = param_4;
-  *(unsigned char *)(param_1 + 7) = param_5;
-  *(unsigned int *)(param_1 + 8) = *(unsigned int *)(param_1 + 4);
-  return;
+    color->r = r;
+    color->g = g;
+    color->b = b;
+    color->a = a;
+    color->packed = *(u32 *)&color->r;
 }
 
 } /* extern "C" */

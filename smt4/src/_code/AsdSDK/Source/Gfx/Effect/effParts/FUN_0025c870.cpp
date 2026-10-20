@@ -1,39 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025c870` (_code @ 0x25c870, 0x78 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: stores of unk88..unk8a use r2/r1 for the constants where retail uses r1/r0 and schedules `mov r0, r4` before the last strb. */
+#include "AsdSDK/Source/Gfx/Effect/effParts.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int FUN_002a3d58(int);
-int memAlloc(int, int, int, int, int, int);
-int memClear(...);
+extern const char DAT_00409378[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+void *memAlloc(int, int, int, int size, int align, int);
+void memClear(void *block, s32 size);
+void FUN_002a3d58(EffPart *part);
 
-/* Supplied declaration required: FUN_002a3d58. */
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: memClear. */
-
-
-int FUN_0025c870(void)
-
+/* Creates the 0xC0-byte variant of a part: cleared, its first 0x90 bytes cleared again, flags set, initialized. */
+EffPart *FUN_0025c870(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0x10000;
-  memAlloc(0x10000,0x100,0,0xc0,0x10,1);
-  memClear();
-  memClear(temp_v0,0x90);
-  *(unsigned int *)(temp_v0 + 0x84) = 1;
-  *(unsigned char *)(temp_v0 + 0x88) = 8;
-  *(unsigned char *)(temp_v0 + 0x89) = 0;
-  *(unsigned char *)(temp_v0 + 0x8a) = 0;
-  FUN_002a3d58(temp_v0);
-  return temp_v0;
+    EffPart *part;
+
+    asdDebugTrace(DAT_00409378, 1482);
+    part = (EffPart *)memAlloc(0x10000, 0x100, 0, 0xc0, 0x10, 1);
+    memClear(part, 0xc0);
+    memClear(part, 0x90);
+    part->unk84 = 1;
+    part->unk88 = 8;
+    part->unk89 = 0;
+    part->unk8a = 0;
+    FUN_002a3d58(part);
+    return part;
 }
 
 } /* extern "C" */

@@ -1,16 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_0014f280(int param_1,int *param_2,unsigned short param_3,int param_4)
-
+/* Writes `value` at the cursor in the 16-bit buffer (unless `countOnly` is set) and advances the cursor; always returns 1. */
+u32 FUN_0014f280(u16 *buffer, s32 *cursor, u16 value, s32 countOnly)
 {
-  if (param_4 == 0) {
-    *(unsigned short *)(param_1 + *param_2 * 2) = param_3;
-  }
-  *param_2 = *param_2 + 1;
-  return 1;
+    if (countOnly == 0) {
+        buffer[*cursor] = value;
+    }
+    *cursor = *cursor + 1;
+    return 1;
 }
 
 } /* extern "C" */

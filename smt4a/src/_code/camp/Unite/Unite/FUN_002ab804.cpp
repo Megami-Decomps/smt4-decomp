@@ -107,7 +107,7 @@ extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003f9e80. */
 /* Supplied declaration required: FUN_003fd63c. */
 extern int FUN_0040ac08(void);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 extern int FUN_004dad8c(void);
 /* Supplied declaration required: FUN_004db450. */
 /* Supplied declaration required: FUN_004dc4b4. */
@@ -210,7 +210,7 @@ void FUN_002ab804(void)
     else {
       temp_v2 = FUN_001ab854();
       if ((*(short *)(temp_v2 + 0x62) != *(short *)(temp_v1 + 0x24)) ||
-         (temp_v2 = FUN_004bd340(temp_v2,10), temp_v2 != 0)) {
+         (temp_v2 = bitsAt60Test(temp_v2,10), temp_v2 != 0)) {
         *(unsigned short *)(temp_v1 + 0x20) = 0xffff;
         *(unsigned short *)(temp_v1 + 0x24) = 0;
       }

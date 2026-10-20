@@ -8,7 +8,7 @@ int FUN_00100388(int *, unsigned char *, int, unsigned int);
 int qsort(int, unsigned int, int, unsigned char *);
 int FUN_0018719c(...);
 int FUN_003fe388(...);
-int FUN_0046bc1c(void);
+int dataTable27Count(void);
 int rt_memcpy(int *, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -48,8 +48,8 @@ extern unsigned int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
 extern int FUN_003f86c0(int);
 /* Supplied declaration required: FUN_003fe388. */
-extern int FUN_0046bbd8(int, unsigned int);
-/* Supplied declaration required: FUN_0046bc1c. */
+extern int dataTable27GetEntry(int, unsigned int);
+/* Supplied declaration required: dataTable27Count. */
 extern int FUN_0046bc34(int);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -86,10 +86,10 @@ void FUN_00469400(int param_1)
   if (temp_v5 == 0) {
     return;
   }
-  temp_v5 = FUN_0046bbd8(param_1 + 0x19,0);
+  temp_v5 = dataTable27GetEntry(param_1 + 0x19,0);
   temp_v11 = 0;
   temp_v6 = param_1 + 0x19;
-  FUN_0046bc1c();
+  dataTable27Count();
   piVar14 = (int *)(param_1 + 0xab8);
   if (0 < temp_v6) {
     do {
@@ -117,7 +117,7 @@ void FUN_00469400(int param_1)
 LAB_00469530:
       temp_v11 = temp_v11 + 1;
       temp_v6 = param_1 + 0x19;
-      FUN_0046bc1c();
+      dataTable27Count();
     } while (temp_v11 < temp_v6);
   }
   qsort(param_1 + 0xa70,*(unsigned int *)(param_1 + 0xab8),8,&LAB_00467de8);
@@ -178,7 +178,7 @@ LAB_00469530:
         if (temp_v6 < *(int *)(param_1 + 0xab8)) {
           do {
             if (*(int *)(param_1 + temp_v6 * 8 + 0xa74) == temp_v5 + 1) {
-              temp_v6 = FUN_0046bbd8(param_1 + 0x19,*(unsigned int *)(param_1 + temp_v6 * 8 + 0xa70));
+              temp_v6 = dataTable27GetEntry(param_1 + 0x19,*(unsigned int *)(param_1 + temp_v6 * 8 + 0xa70));
               temp_v0 = *(short *)(temp_v6 + 100);
               if ((temp_v0 == 1) || (temp_v9 = (unsigned int)(temp_v0 == 2), temp_v0 != 2)) {
                 temp_v9 = 2;

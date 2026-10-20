@@ -12,7 +12,7 @@ int FUN_00429f38(void);
 int aocClearDisplayFlag(int);
 int FUN_0046e2d0(int);
 int FUN_0046f3ac(int *, int);
-int FUN_00472514(int);
+int flagObjAdvance(int);
 int FUN_0047306c(int, int, int, int);
 int FUN_0047314c(int);
 
@@ -42,11 +42,11 @@ extern int FUN_001d10ac(unsigned int *);
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0046e2d0. */
 /* Supplied declaration required: FUN_0046f3ac. */
-/* Supplied declaration required: FUN_00472514. */
+/* Supplied declaration required: flagObjAdvance. */
 /* Supplied declaration required: FUN_0047306c. */
 /* Supplied declaration required: FUN_0047314c. */
-extern int FUN_0047dacc(unsigned int *);
-extern int FUN_0047dae0(unsigned int *);
+extern int startsWithH(unsigned int *);
+extern int isEmptyString(unsigned int *);
 
 
 unsigned int FUN_0024b280(void)
@@ -134,14 +134,14 @@ unsigned int FUN_0024b280(void)
       temp_v5 = *(unsigned int *)(g_aocMain + 0x754);
       *(unsigned int *)(g_aocMain + 0x754) = temp_v5 & 0xffffff8f;
       if ((temp_v5 & 0x10) == 0) {
-        temp_v3 = FUN_0047dacc((unsigned int *)&temp_v6);
+        temp_v3 = startsWithH((unsigned int *)&temp_v6);
         if (temp_v3 != 0) {
           *(unsigned char *)(temp_v0 + 8) = 0;
           FUN_0047306c(temp_v0 + 0xc,0xbe,2,0);
           *(unsigned char *)(temp_v0 + 9) = 1;
           return 0;
         }
-        temp_v3 = FUN_0047dae0((unsigned int *)&temp_v6);
+        temp_v3 = isEmptyString((unsigned int *)&temp_v6);
         if ((temp_v3 == 0) && (temp_v3 = FUN_001d10ac((unsigned int *)&temp_v6), temp_v3 == 0)) {
           return 0;
         }
@@ -162,7 +162,7 @@ unsigned int FUN_0024b280(void)
         if (*(unsigned int *)(temp_v0 + 0x5f0) < 0x1e) {
           return 0;
         }
-        FUN_00472514(temp_v0 + 0xc);
+        flagObjAdvance(temp_v0 + 0xc);
       }
       *(unsigned char *)(temp_v0 + 8) = 3;
       break;

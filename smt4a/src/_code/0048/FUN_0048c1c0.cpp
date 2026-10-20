@@ -8,7 +8,7 @@ int FUN_00163aa4(int);
 int FUN_00168980(int);
 int FUN_00184528(int, int);
 int FUN_002844e4(void);
-int FUN_003de124(void);
+int sub68OwnerDestroy(void);
 int FUN_004935b0(int, unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned int FUN_001654e4(int);
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_002844e4. */
 extern int FUN_002e19f8(void);
-/* Supplied declaration required: FUN_003de124. */
+/* Supplied declaration required: sub68OwnerDestroy. */
 /* Supplied declaration required: FUN_004935b0. */
 
 
@@ -58,7 +58,7 @@ void FUN_0048c1c0(int param_1)
     if (temp_v0 == 2) {
       if (DAT_005f1a5d != '\0') {
         *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffffff7;
-        FUN_003de124();
+        sub68OwnerDestroy();
         DAT_005f1a5d = '\0';
       }
       *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffffff7;

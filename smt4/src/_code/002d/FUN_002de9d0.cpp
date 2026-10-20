@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 extern int FUN_00269a58(void);
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ int total;
+} Obj;
 
-void FUN_002de9d0(int param_1)
-
+void FUN_002de9d0(Obj *obj)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00269a58();
-  *(int *)(param_1 + 0x2c) = temp_v0 + *(int *)(param_1 + 0x2c);
-  return;
+    int value = FUN_00269a58();
+
+    obj->total = value + obj->total;
 }
 
 } /* extern "C" */

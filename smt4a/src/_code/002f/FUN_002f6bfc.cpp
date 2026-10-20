@@ -1,31 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int strAssign(unsigned int, unsigned char [20], int, unsigned int);
-int FUN_002ea668(unsigned char [88]);
-int FUN_002ea6bc(unsigned char [88], int, unsigned int);
-int FUN_002ea6cc(unsigned char [88]);
+void strAssign(u32 dest, u8 *source, s32 length, u32 flags);
+void FUN_002ea668(u8 *object);
+void FUN_002ea6bc(u8 *object, s32 data, u32 size);
+void FUN_002ea6cc(u8 *object);
 
-/* Supplied declaration required: strAssign. */
-/* Supplied declaration required: FUN_002ea668. */
-/* Supplied declaration required: FUN_002ea6bc. */
-/* Supplied declaration required: FUN_002ea6cc. */
+typedef struct DataRange {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 base;
+    /* 0x10 */ u32 size;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ s32 offset;
+} DataRange;
 
-
-unsigned int FUN_002f6bfc(unsigned int param_1,int param_2,unsigned int param_3)
-
+/* Builds a temporary object over the range's data and assigns a 16-byte string to `dest`; always returns 1. */
+u32 FUN_002f6bfc(u32 unused, DataRange *range, u32 dest)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char temp_v0 [88];
-  unsigned char temp_v1 [20];
-  
-  FUN_002ea668(temp_v0);
-  FUN_002ea6bc(temp_v0,*(int *)(param_2 + 0xc) + *(int *)(param_2 + 0x18),
-               *(unsigned int *)(param_2 + 0x10));
-  FUN_002ea6cc(temp_v0);
-  strAssign(param_3,temp_v1,0x10,0xffffffff);
-  return 1;
+    u8 object[88];
+    u8 text[20];
+
+    FUN_002ea668(object);
+    FUN_002ea6bc(object, range->base + range->offset, range->size);
+    FUN_002ea6cc(object);
+    strAssign(dest, text, 0x10, 0xFFFFFFFF);
+    return 1;
 }
 
 } /* extern "C" */

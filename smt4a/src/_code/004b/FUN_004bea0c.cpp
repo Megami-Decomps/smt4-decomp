@@ -15,7 +15,7 @@ int FUN_002a4964(int, int);
 int FUN_002a7324(...);
 int FUN_0032d0c8(...);
 int FUN_003343f0(int);
-int FUN_00342348(...);
+int screenShowMessage(...);
 int FUN_0035d03c(int);
 int FUN_0037e0d0(...);
 int FUN_003e4d68(...);
@@ -52,7 +52,7 @@ extern int FUN_002a4894(int);
 extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00342348. */
+/* Supplied declaration required: screenShowMessage. */
 extern int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0035d03c. */
 extern int FUN_0035db94(void);
@@ -189,7 +189,7 @@ void FUN_004bea0c(int param_1)
   temp_v4 = FUN_0023b3b8();
   if (temp_v4 != 1) {
     if (*(char *)(param_1 + 4) == '\x02') {
-      FUN_00342348(*(unsigned int *)(param_1 + 0x334));
+      screenShowMessage(*(unsigned int *)(param_1 + 0x334));
       return;
     }
     temp_v4 = FUN_003e4d68(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) & 0xffff);

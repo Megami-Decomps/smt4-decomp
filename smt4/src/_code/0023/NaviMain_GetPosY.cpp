@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
-
-
-unsigned int NaviMain_GetPosY(void)
-
+u32 NaviMain_GetPosY(void)
 {
-  return *(unsigned int *)(DAT_0044cdf0 + 0x10);
+    return DAT_0044cdf0->posY;
 }
 
 } /* extern "C" */

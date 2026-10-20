@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_00508778(void);
 
-extern unsigned int *FUN_00508600(unsigned short *);
+extern unsigned int *getSectionAt14_8600(unsigned short *);
 extern unsigned int *FUN_0050860c(unsigned short *);
 extern unsigned int *FUN_00508628(unsigned short *);
 /* Supplied declaration required: FUN_00508778. */
 extern unsigned int *FUN_005087a0(unsigned short *);
-extern unsigned short *FUN_0050883c(void);
-extern unsigned short *FUN_00508848(int);
+extern unsigned short *getSectionAt10_883c(void);
+extern unsigned short *getSectionAt10_8848(int);
 extern int nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo(unsigned int);
 extern int nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType(void);
 
@@ -47,7 +47,7 @@ unsigned int FUN_00509110(int param_1,unsigned int param_2,unsigned short *param
     }
     else {
       if (*(unsigned int *)(param_1 + 8) >= 0x2030100) {
-        puVar5 = (unsigned short *)FUN_0050883c();
+        puVar5 = (unsigned short *)getSectionAt10_883c();
         *param_3 = *puVar5;
         param_3[1] = puVar5[1];
         puVar6 = (unsigned int *)FUN_00508628(puVar5);
@@ -59,7 +59,7 @@ unsigned int FUN_00509110(int param_1,unsigned int param_2,unsigned short *param
         }
         *(unsigned char *)((int)param_3 + 0x3f) = temp_v0;
         *(unsigned int *)(param_3 + 0x1c) = *(unsigned int *)(puVar5 + 6);
-        puVar6 = (unsigned int *)FUN_00508600(puVar5);
+        puVar6 = (unsigned int *)getSectionAt14_8600(puVar5);
         temp_v3 = *puVar6;
         *(char *)(param_3 + 0x1e) = (char)temp_v3;
         *(char *)((int)param_3 + 0x3d) = (char)((unsigned int)temp_v3 >> 8);
@@ -73,7 +73,7 @@ unsigned int FUN_00509110(int param_1,unsigned int param_2,unsigned short *param
         puVar7 = (unsigned int *)FUN_0050860c(puVar5);
       }
       else {
-        puVar8 = (unsigned short *)FUN_00508848(temp_v1);
+        puVar8 = (unsigned short *)getSectionAt10_8848(temp_v1);
         *param_3 = *puVar8;
         param_3[1] = puVar8[1];
         puVar5 = puVar8;

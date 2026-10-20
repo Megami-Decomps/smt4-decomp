@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_001006ec(int, unsigned int, int);
-int FUN_001836b0(void);
+int resourceListDestroy(void);
 int FUN_002e3328(int);
 
 /* Supplied declaration required: FUN_001006ec. */
-/* Supplied declaration required: FUN_001836b0. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: FUN_002e3328. */
 
 
@@ -28,7 +28,7 @@ unsigned int * FUN_0041c63c(unsigned int *param_1)
     temp_v1 = *piVar2;
     if (temp_v1 != 0) {
       if (*(int *)(temp_v1 + 0xc) != 0) {
-        FUN_001836b0();
+        resourceListDestroy();
         *(unsigned int *)(temp_v1 + 0xc) = 0;
       }
       FUN_002e3328(temp_v1);

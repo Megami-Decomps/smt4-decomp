@@ -1,44 +1,48 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00280d2c(void);
+void FUN_00280d2c(void);
+s32 jobIsValid(u32 job);
+s32 jobGetWork(u32 job);
+u32 scrGetArg(...);
+s32 FUN_002deb84(void);
 
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(unsigned int);
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: FUN_00280d2c. */
-extern int FUN_002deb84(void);
+typedef struct Task {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 state;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ s32 pending;
+} Task;
 
-
-unsigned int FUN_002c1f48(void)
-
+/* Script command: when FUN_002deb84 reports 0 and the job (script argument) is valid, finishes its task (FUN_00280d2c if it has one pending, then clears the word at 0xC and sets state 3); returns 1 when the job is not valid, 0 otherwise. */
+u32 FUN_002c1f48(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = FUN_002deb84();
-  if (temp_v1 != 0) {
-    temp_v1 = jobIsValid(temp_v0);
-    if (temp_v1 == 0) {
-      return 1;
+    u32 job;
+    s32 result;
+    Task *task;
+
+    job = scrGetArg();
+    result = FUN_002deb84();
+    if (result != 0) {
+        result = jobIsValid(job);
+        if (result == 0) {
+            return 1;
+        }
+    } else {
+        result = jobIsValid(job);
+        if (result == 0) {
+            return 1;
+        }
+        task = (Task *)jobGetWork(job);
+        if (task->pending != 0) {
+            FUN_00280d2c();
+        }
+        task->unk0C = 0;
+        task->state = 3;
     }
-  }
-  else {
-    temp_v1 = jobIsValid(temp_v0);
-    if (temp_v1 == 0) {
-      return 1;
-    }
-    temp_v1 = jobGetWork(temp_v0);
-    if (*(int *)(temp_v1 + 0x18) != 0) {
-      FUN_00280d2c();
-    }
-    *(unsigned int *)(temp_v1 + 0xc) = 0;
-    *(unsigned int *)(temp_v1 + 8) = 3;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

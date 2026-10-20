@@ -1,14 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Pair {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+} Pair;
 
-void FUN_001216bc(unsigned int *param_1)
-
+void FUN_001216bc(Pair *pair)
 {
-  *param_1 = 0;
-  param_1[1] = 0;
-  return;
+    pair->unk0 = 0;
+    pair->unk4 = 0;
 }
 
 } /* extern "C" */

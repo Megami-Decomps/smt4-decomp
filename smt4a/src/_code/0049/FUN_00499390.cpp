@@ -9,7 +9,7 @@ int FUN_001f4908(int, int, int);
 int FUN_00275bc8(void);
 int FUN_00275f44(unsigned int, unsigned int);
 int FUN_002804b0(unsigned char *, int, int);
-int FUN_0031cfb4(void);
+int gameDataBlocksGetWord(void);
 int FUN_0035d03c(...);
 int FUN_00388758(int);
 
@@ -31,7 +31,7 @@ extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002802c8(void);
 /* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_0031cfb4. */
+/* Supplied declaration required: gameDataBlocksGetWord. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0035d03c. */
 /* Supplied declaration required: FUN_00388758. */
@@ -62,9 +62,9 @@ void FUN_00499390(int param_1,int param_2)
   case 1:
     temp_v3 = FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
     if (temp_v3 == 2) {
-      temp_v3 = FUN_0031cfb4();
+      temp_v3 = gameDataBlocksGetWord();
       if (temp_v3 != 0) {
-        temp_v0 = FUN_0031cfb4();
+        temp_v0 = gameDataBlocksGetWord();
         temp_v1 = FUN_004d05b4();
         if (temp_v0 <= temp_v1) {
           temp_v2 = 2;

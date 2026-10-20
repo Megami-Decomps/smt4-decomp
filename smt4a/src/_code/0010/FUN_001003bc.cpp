@@ -1,25 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001003ea(int, int, int);
-int FUN_001028f4(int, int, int);
+void FUN_001003ea(void *object, s32 a, s32 b);
+void FUN_001028f4(void *object, s32 a, s32 b);
 
-/* Supplied declaration required: FUN_001003ea. */
-/* Supplied declaration required: FUN_001028f4. */
+typedef struct Dispatcher {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 variant;    /* nonzero selects the alternate handler */
+} Dispatcher;
 
-
-unsigned int FUN_001003bc(int param_1,int param_2,int param_3)
-
+/* Forwards to the alternate handler when `variant` is set and to the default one otherwise; always succeeds. */
+u32 FUN_001003bc(Dispatcher *object, s32 a, s32 b)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x14) != 0) {
-    FUN_001028f4(param_1,param_2,param_3);
-  }
-  else {
-    FUN_001003ea(param_1,param_2,param_3);
-  }
-  return 1;
+    if (object->variant != 0) {
+        FUN_001028f4(object, a, b);
+    } else {
+        FUN_001003ea(object, a, b);
+    }
+    return 1;
 }
 
 } /* extern "C" */

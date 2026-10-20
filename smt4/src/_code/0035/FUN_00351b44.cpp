@@ -1,20 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00360364(unsigned int *);
-
-extern unsigned int DAT_00471bac; /* 0x471bac */
-
-/* Supplied declaration required: FUN_00360364. */
-
+int FUN_00360364(u32 *block);
+extern u32 DAT_00471bac;
 
 void FUN_00351b44(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00360364(&DAT_00471bac);
-  return;
+    FUN_00360364(&DAT_00471bac);
 }
 
 } /* extern "C" */

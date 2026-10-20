@@ -1,21 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0016cae0(void);
+void FUN_0016cae0(void);
 
-/* Supplied declaration required: FUN_0016cae0. */
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u32 flags;
+    /* 0x008 */ u8 unk008[0x254];
+    /* 0x25C */ s32 pending;
+} Holder;
 
-
-void FUN_00156974(int param_1)
-
+/* Calls FUN_0016cae0 when bit 0 of `flags` is clear and there is something pending. */
+void FUN_00156974(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  if (((*(unsigned int *)(param_1 + 4) & 1) == 0) && (*(int *)(param_1 + 0x25c) != 0)) {
-    FUN_0016cae0();
-    return;
-  }
-  return;
+    if ((object->flags & 1) == 0 && object->pending != 0) {
+        FUN_0016cae0();
+        return;
+    }
 }
 
 } /* extern "C" */

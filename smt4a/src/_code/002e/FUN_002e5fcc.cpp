@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Cursor {
+    /* 0x00 */ u16 *current;
+    /* 0x04 */ u16 *end;
+} Cursor;
 
-void FUN_002e5fcc(unsigned short param_1,unsigned int *param_2)
-
+/* Appends `value` at the cursor (a 16-bit output position) unless the end has been reached. */
+void FUN_002e5fcc(u16 value, Cursor *cursor)
 {
-  unsigned short *puVar1;
-  
-  unsigned short *puVar2 = (unsigned short *)param_2[1];
-  puVar1 = (unsigned short *)*param_2;
-  if (puVar1 < puVar2) {
-    *param_2 = (unsigned int)(puVar1 + 1);
-    *puVar1 = param_1;
-  }
-  return;
+    u16 *current;
+    u16 *end = cursor->end;
+
+    current = cursor->current;
+    if (current < end) {
+        cursor->current = current + 1;
+        *current = value;
+    }
 }
 
 } /* extern "C" */

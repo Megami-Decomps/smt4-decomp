@@ -1,43 +1,48 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001221e4(void);
-int FUN_002e9afe(unsigned int, unsigned char [12]);
-int FUN_002ea6fc(...);
+typedef struct Name {
+    /* 0x00 */ u8 data[12];
+} Name;
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 2 slot(s), 2 byte(s) */
-typedef struct {
-    unsigned char sp18; /* 0x18: local_18 */
-    unsigned char sp1C; /* 0x1c: local_1c */
-} param_2_stack;
+typedef struct Source Source;
+typedef struct SourceVtbl {
+    /* 0x00 */ void *unk00[23];
+    /* 0x5C */ void (*getName)(Name *out, Source *source, u32 key);
+} SourceVtbl;
+struct Source {
+    /* 0x00 */ const SourceVtbl *vtbl;
+};
 
-/* Supplied declaration required: FUN_001221e4. */
-/* Supplied declaration required: FUN_002e9afe. */
-/* Supplied declaration required: FUN_002ea6fc. */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x70];
+    /* 0x70 */ u32 key;
+    /* 0x74 */ u8 unk74[0x1C];
+    /* 0x90 */ Source *source;
+} Entry;
 
+void FUN_001221e4(void);
+s32 FUN_002ea6fc(u32 object, u8 *status);
+void FUN_002e9afe(u32 object, Name *name);
 
-void FUN_0010c936(unsigned int param_1,int param_2)
-
+/* Clears `object`'s status and, when that succeeds and the entry has a source, stores the source's name for the entry's key and clears the status again. */
+void FUN_0010c936(u32 object, Entry *entry)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  unsigned char temp_v1 [12];
-  unsigned char temp_v2 [4];
-  unsigned char temp_v3 [8];
-  
-  FUN_001221e4();
-  temp_v2[0] = 0;
-  temp_v0 = FUN_002ea6fc(param_1,temp_v2);
-  if ((temp_v0 == 0) && (piVar2 = *(int **)(param_2 + 0x90), piVar2 != (int *)0x0)) {
-    (**(romwright_code **)(*piVar2 + 0x5c))(temp_v1,piVar2,*(unsigned int *)(param_2 + 0x70));
-    FUN_002e9afe(param_1,temp_v1);
-    temp_v3[0] = 0;
-    FUN_002ea6fc(param_1,temp_v3);
-  }
-  return;
+    Name name;
+    u8 status;
+    u8 statusAfter;
+    s32 failed;
+
+    FUN_001221e4();
+    status = 0;
+    failed = FUN_002ea6fc(object, &status);
+    if (failed == 0 && entry->source != NULL) {
+        entry->source->vtbl->getName(&name, entry->source, entry->key);
+        FUN_002e9afe(object, &name);
+        statusAfter = 0;
+        FUN_002ea6fc(object, &statusAfter);
+    }
 }
 
 } /* extern "C" */

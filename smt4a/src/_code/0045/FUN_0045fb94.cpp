@@ -8,7 +8,7 @@ int FUN_001911a4(unsigned int, int);
 int FUN_001af148(int);
 int FUN_001af214(void);
 int FUN_0045f268(int *);
-int FUN_004632b0(int *);
+int playerInitReset(int *);
 
 typedef int romwright_code(...);
 extern unsigned int FUN_00175678(void);
@@ -16,7 +16,7 @@ extern unsigned int FUN_00175678(void);
 /* Supplied declaration required: FUN_001af148. */
 /* Supplied declaration required: FUN_001af214. */
 /* Supplied declaration required: FUN_0045f268. */
-/* Supplied declaration required: FUN_004632b0. */
+/* Supplied declaration required: playerInitReset. */
 
 
 void FUN_0045fb94(int *param_1)
@@ -36,7 +36,7 @@ void FUN_0045fb94(int *param_1)
     FUN_001af148(temp_v0 + 4);
   }
   FUN_0045f268(param_1);
-  FUN_004632b0(param_1 + 0x8c5);
+  playerInitReset(param_1 + 0x8c5);
   param_1[0xc10] = 0;
   temp_v0 = 0;
   do {

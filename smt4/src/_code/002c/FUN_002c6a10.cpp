@@ -1,21 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(void);
+int asdMemFree(int ptr);
 
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_002c6a10(int param_1)
-
+void FUN_002c6a10(int ptr)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1 != 0) {
-    asdMemFree();
-    return;
-  }
-  return;
+    if (ptr != 0) {
+        asdMemFree(ptr);
+        return;
+    }
 }
 
 } /* extern "C" */

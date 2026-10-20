@@ -8,14 +8,14 @@ int FUN_001641c4(void);
 int sysPlaySe(int);
 int FUN_001b4a90(int, int, unsigned int);
 int FUN_00275f44(unsigned int, int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 
 /* Supplied declaration required: FUN_001641c4. */
 extern unsigned short FUN_001643b4(unsigned int, int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_00275f44. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 
 
 void FUN_004853fc(int param_1,int param_2)
@@ -62,7 +62,7 @@ void FUN_004853fc(int param_1,int param_2)
     FUN_00275f44(*(unsigned int *)(param_1 + 0x26c),0);
   }
   if (param_2 == 4 || param_2 == 5) {
-    FUN_003491e8();
+    obj04Finish();
     *(unsigned char *)(param_1 + 0x270) = 0;
   }
   return;

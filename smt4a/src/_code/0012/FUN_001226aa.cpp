@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001226b2(void);
+void FUN_001226b2(void);
 
-/* Supplied declaration required: FUN_001226b2. */
-
-
+/* Forwards to FUN_001226b2. */
 void FUN_001226aa(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001226b2();
-  return;
+    FUN_001226b2();
 }
 
 } /* extern "C" */

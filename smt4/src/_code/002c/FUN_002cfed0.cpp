@@ -1,83 +1,90 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00199424(void);
-int FUN_0028cf30(int, unsigned int, unsigned int);
+int FUN_0028cf30(void *scene, u32 a, u32 b);
 int btlGetMainState(void);
-int FUN_00298140(int, int, int);
-int FUN_0029ee6c(int, int);
-int FUN_002af5c0(int, int, int);
-int FUN_002b8838(int);
-int FUN_002bee58(int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_00199424. */
-/* Supplied declaration required: FUN_0028cf30. */
+int FUN_00298140(void *scene, int a, int b);
+int FUN_0029ee6c(int a, int color);
+int FUN_002af5c0(void *block, int a, int b);
+int FUN_002b8838(int a);
+int FUN_002bee58(void *block, int a);
 extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_00298140. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002af5c0. */
-/* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002b898c(void);
-/* Supplied declaration required: FUN_002bee58. */
 
+typedef struct BtlMain {
+    /* 0x0000 */ u8 unk0000[0x44A0];
+    /* 0x44A0 */ u32 flags;
+} BtlMain;
 
-void FUN_002cfed0(int param_1,unsigned int param_2,unsigned char param_3,unsigned int param_4)
+typedef struct Scene {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ u8 blockA[0x118];
+    /* 0x0138 */ u8 blocksB[8][0x8C];
+    /* 0x0598 */ u8 unk0598[0x8C0];
+    /* 0x0E58 */ u8 blocksC[6][0x8C];
+    /* 0x11A0 */ u8 unk11A0[0x1EA8];
+    /* 0x3048 */ int state;
+    /* 0x304C */ u8 unk304C[8];
+    /* 0x3054 */ u32 unk3054;
+    /* 0x3058 */ u8 unk3058[4];
+    /* 0x305C */ u32 unk305C;
+    /* 0x3060 */ u8 unk3060[0x1D];
+    /* 0x307D */ u8 unk307D;
+    /* 0x307E */ s8 unk307E;
+    /* 0x307F */ u8 unk307F;
+    /* 0x3080 */ u8 unk3080;
+} Scene;
 
+void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  
-  *(unsigned char *)(param_1 + 0x307d) = param_3;
-  *(char *)(param_1 + 0x307e) = (char)param_4;
-  *(unsigned int *)(param_1 + 0x305c) = param_2;
-  FUN_00199424();
-  if (*(char *)(param_1 + 0x3080) == '\0') {
-    temp_v0 = 0;
-    do {
-      FUN_002af5c0(param_1 + temp_v0 * 0x8c + 0xe58,0,0);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 6);
-    if (*(char *)(param_1 + 0x3080) == '\0') {
-      btlGetMainState();
-      temp_v0 = FUN_00293230();
-      if ((temp_v0 == 0) && (temp_v0 = btlGetMainState(), (*(unsigned int *)(temp_v0 + 0x44a0) & 0x200) == 0)) {
-        if (*(int *)(param_1 + 0x3048) == 0x17) {
-          FUN_0028cf30(param_1,*(unsigned int *)(param_1 + 0x305c),param_4);
-          return;
-        }
-        FUN_002bee58(param_1 + 0x20,0);
-        temp_v0 = 0;
+    int i;
+    int result;
+
+    scene->unk307D = b;
+    scene->unk307E = (s8)c;
+    scene->unk305C = a;
+    FUN_00199424();
+    if (scene->unk3080 == 0) {
+        i = 0;
         do {
-          FUN_002bee58(param_1 + temp_v0 * 0x8c + 0x138,0);
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < 8);
-        *(unsigned int *)(param_1 + 0x3054) = 0x11;
-        FUN_00298140(param_1,0x10,1);
-        return;
-      }
-      FUN_0029ee6c(0,0x323232ff);
-      FUN_00298140(param_1,0x28,1);
-      temp_v0 = FUN_002b898c();
-      if (temp_v0 != 0x3d) {
-        btlGetMainState();
-        temp_v0 = FUN_00293230();
-        if (temp_v0 != 0) {
-          FUN_002b8838(0x3d);
-          return;
+            FUN_002af5c0(scene->blocksC[i], 0, 0);
+            i = i + 1;
+        } while (i < 6);
+        if (scene->unk3080 == 0) {
+            btlGetMainState();
+            result = FUN_00293230();
+            if ((result == 0) && (result = btlGetMainState(), (((BtlMain *)result)->flags & 0x200) == 0)) {
+                if (scene->state == 0x17) {
+                    FUN_0028cf30(scene, scene->unk305C, c);
+                    return;
+                }
+                FUN_002bee58(scene->blockA, 0);
+                i = 0;
+                do {
+                    FUN_002bee58(scene->blocksB[i], 0);
+                    i = i + 1;
+                } while (i < 8);
+                scene->unk3054 = 0x11;
+                FUN_00298140(scene, 0x10, 1);
+                return;
+            }
+            FUN_0029ee6c(0, 0x323232ff);
+            FUN_00298140(scene, 0x28, 1);
+            result = FUN_002b898c();
+            if (result != 0x3d) {
+                btlGetMainState();
+                result = FUN_00293230();
+                if (result != 0) {
+                    FUN_002b8838(0x3d);
+                    return;
+                }
+            }
+            return;
         }
-      }
-      return;
     }
-  }
-  FUN_00298140(param_1,0x2a,1);
-  return;
+    FUN_00298140(scene, 0x2a, 1);
 }
 
 } /* extern "C" */

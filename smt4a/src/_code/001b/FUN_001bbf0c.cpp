@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001015aa(int);
+int __set_errno(int);
 int FUN_001c4370(unsigned int [2]);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -19,7 +19,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_001015aa. */
+/* Supplied declaration required: __set_errno. */
 /* Supplied declaration required: FUN_001c4370. */
 
 
@@ -70,7 +70,7 @@ void FUN_001bbf0c(void)
     return;
   }
   if ((int)in_s0 * 2 == 0xff000000) {
-    FUN_001015aa(1);
+    __set_errno(1);
     return;
   }
   return;

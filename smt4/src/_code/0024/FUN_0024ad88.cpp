@@ -1,4 +1,4 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
@@ -6,37 +6,29 @@ int FUN_00253ce4(void);
 int FUN_00253d24(void);
 int FUN_002b2368(void);
 int FUN_002c0894(void);
-int asdMemFree(...);
+int asdMemFree(void *ptr);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Obj {
+    /* 0x00 */ s32 unk00;
+    /* 0x04 */ void *buffer;
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ s32 unk14;
+} Obj;
 
-/* Supplied declaration required: FUN_00253ce4. */
-/* Supplied declaration required: FUN_00253d24. */
-/* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_0024ad88(int *param_1)
-
+void FUN_0024ad88(Obj *obj)
 {
-/* irregular: 5 native warning(s); review required */
-  if (*param_1 != 0) {
-    FUN_00253d24();
-    if (*param_1 != 0) {
-      FUN_00253ce4();
-      FUN_002b2368();
+    if (obj->unk00 != 0) {
+        FUN_00253d24();
+        if (obj->unk00 != 0) {
+            FUN_00253ce4();
+            FUN_002b2368();
+        }
     }
-  }
-  if (param_1[5] != 0) {
-    FUN_002c0894();
-  }
-  asdMemFree(param_1[1]);
-  asdMemFree(param_1);
-  return;
+    if (obj->unk14 != 0) {
+        FUN_002c0894();
+    }
+    asdMemFree(obj->buffer);
+    asdMemFree(obj);
 }
 
 } /* extern "C" */

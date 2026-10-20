@@ -39,7 +39,7 @@ extern unsigned int FUN_00261458(void);
 /* Supplied declaration required: FUN_00268250. */
 /* Supplied declaration required: FUN_002c9104. */
 extern unsigned int FUN_00330b58(void);
-extern int FUN_003332d8(void);
+extern int byte1IsZero(void);
 /* Supplied declaration required: FUN_00333594. */
 /* Supplied declaration required: FUN_00358dbc. */
 extern int FUN_003881d0(void);
@@ -108,7 +108,7 @@ unsigned int FUN_00371750(void)
   case 1:
     temp_v4 = FUN_00229c9c();
     if (temp_v4 == 1) {
-      temp_v4 = FUN_003332d8();
+      temp_v4 = byte1IsZero();
       if (temp_v4 == 0) {
         asdMemFree(*(unsigned int *)(temp_v1 + 8));
         *(unsigned int *)(temp_v1 + 4) = 2;
@@ -152,7 +152,7 @@ unsigned int FUN_00371750(void)
   case 3:
     temp_v4 = FUN_00229c9c();
     if (temp_v4 == 1) {
-      temp_v4 = FUN_003332d8();
+      temp_v4 = byte1IsZero();
       if (temp_v4 == 0) {
         asdMemFree(*(unsigned int *)(temp_v1 + 8));
         *(unsigned int *)(temp_v1 + 4) = 4;

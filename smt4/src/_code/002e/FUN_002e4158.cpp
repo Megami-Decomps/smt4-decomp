@@ -1,22 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(unsigned int);
+int scrSetResult(u32 result);
+extern u32 *FUN_002a8764(void);
 
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int *FUN_002a8764(void);
-
-
-unsigned int FUN_002e4158(void)
-
+u32 FUN_002e4158(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_002a8764();
-  scrSetResult(*puVar1);
-  return 1;
+    u32 *party = FUN_002a8764();
+
+    scrSetResult(*party);
+    return 1;
 }
 
 } /* extern "C" */

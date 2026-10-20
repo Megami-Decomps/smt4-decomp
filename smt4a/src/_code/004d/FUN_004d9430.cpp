@@ -1,28 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d9430` (_code @ 0x4d9430, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the handle is loaded before the object pointer is copied, and the virtual slot is fetched through r2 in retail; the built code differs in register use only */
+/* Releases the object's handle once (virtual slot 7), then destroys it (virtual slot 8, a tail call). */
+#include "common.h"
 
-extern "C" {
+class Obj004d9430 {
+public:
+    virtual void v0();
+    virtual void v1();
+    virtual void v2();
+    virtual void v3();
+    virtual void v4();
+    virtual void v5();
+    virtual void v6();
+    virtual void releaseHandle();
+    virtual void destroy();
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+    u32 unk04[3];
+    u32 handle;
+};
 
-
-void FUN_004d9430(int *param_1)
-
+extern "C" void FUN_004d9430(Obj004d9430 *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  if (param_1[4] != 0) {
-    (**(romwright_code **)(*param_1 + 0x1c))(param_1);
-    param_1[4] = 0;
-  }
-                    /* WARNING: Could not recover jumptable at 0x004d946c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  return;
+    if (obj->handle != 0) {
+        obj->releaseHandle();
+        obj->handle = 0;
+    }
+    obj->destroy();
 }
-
-} /* extern "C" */

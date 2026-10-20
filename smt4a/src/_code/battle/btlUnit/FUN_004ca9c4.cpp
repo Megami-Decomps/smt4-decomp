@@ -73,7 +73,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 /* Supplied declaration required: FUN_004d854c. */
 extern int FUN_004d87e4(void);
 /* Supplied declaration required: FUN_004d881c. */
-extern int FUN_004d88c0(void);
+extern int clearWord(void);
 
 
 void FUN_004ca9c4(int param_1,fn_004ca9c4_arg1 *param_2)
@@ -113,7 +113,7 @@ void FUN_004ca9c4(int param_1,fn_004ca9c4_arg1 *param_2)
         FUN_00178b04(0x24,"c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlUnit.cpp",0x642);
         temp_v3 = 0;
         if (temp_v2 != 0) {
-          temp_v3 = FUN_004d88c0();
+          temp_v3 = clearWord();
         }
         param_2->field_0x1bc = temp_v3;
         temp_v4 = 0;

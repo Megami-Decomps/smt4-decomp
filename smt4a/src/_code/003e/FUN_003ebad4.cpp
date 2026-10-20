@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_004d8638(unsigned int);
-int FUN_004d8650(unsigned int);
-int FUN_004d87bc(int, int);
-int FUN_004d8804(unsigned int);
+int callOnHandleField4B(unsigned int);
+int callOnHandleField4C(unsigned int);
+int setHandleEnabled(int, int);
+int callOnHandleField4D(unsigned int);
 
-/* Supplied declaration required: FUN_004d8638. */
-/* Supplied declaration required: FUN_004d8650. */
-/* Supplied declaration required: FUN_004d87bc. */
-/* Supplied declaration required: FUN_004d8804. */
+/* Supplied declaration required: callOnHandleField4B. */
+/* Supplied declaration required: callOnHandleField4C. */
+/* Supplied declaration required: setHandleEnabled. */
+/* Supplied declaration required: callOnHandleField4D. */
 
 
 void FUN_003ebad4(int param_1)
@@ -63,15 +63,15 @@ LAB_003ebb40:
           else {
             temp_v5 = 1;
           }
-          FUN_004d87bc(temp_v4,temp_v5);
+          setHandleEnabled(temp_v4,temp_v5);
         }
         else {
 LAB_003ebb8c:
-          FUN_004d87bc(temp_v4,1);
+          setHandleEnabled(temp_v4,1);
         }
-        FUN_004d8638(*(unsigned int *)(temp_v3 + 0x22bc));
-        FUN_004d8650(*(unsigned int *)(temp_v3 + 0x22bc));
-        FUN_004d8804(*(unsigned int *)(temp_v3 + 0x22bc));
+        callOnHandleField4B(*(unsigned int *)(temp_v3 + 0x22bc));
+        callOnHandleField4C(*(unsigned int *)(temp_v3 + 0x22bc));
+        callOnHandleField4D(*(unsigned int *)(temp_v3 + 0x22bc));
       }
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 4);

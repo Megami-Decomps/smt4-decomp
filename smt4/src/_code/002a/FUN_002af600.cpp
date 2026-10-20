@@ -1,27 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043dcb0; /* 0x43dcb0 */
+typedef struct Counters {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ u8 unk008;
+    /* 0x009 */ u8 unk009[0x645];
+    /* 0x64E */ s16 unk64E;
+    /* 0x650 */ s16 unk650;
+} Counters;
 
+extern struct {
+    u8 unk0[4];
+    Counters *counters;
+} DAT_0043dcb0;
 
-unsigned int FUN_002af600(unsigned int param_1)
-
+u32 FUN_002af600(u32 id)
 {
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v1 = (int)*(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x64e) == param_1;
-  if (temp_v1) {
-    param_1 = (unsigned int)*(unsigned char *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 8);
-  }
-  if ((temp_v1 && param_1 == 1) && (*(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x650) < 1)) {
-    temp_v0 = 1;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 result;
+    u8 matches;
+
+    matches = (int)DAT_0043dcb0.counters->unk64E == id;
+    if (matches) {
+        id = DAT_0043dcb0.counters->unk008;
+    }
+    if ((matches && id == 1) && (DAT_0043dcb0.counters->unk650 < 1)) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

@@ -1,17 +1,13 @@
-#include "romwright_types.h"
+#include "shard/Counters43dcb0.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043dcb0; /* 0x43dcb0 */
-
-
+/* Counts unk64A down towards 10. */
 void FUN_002b8cc8(void)
-
 {
-  if (*(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x64a) > 10) {
-    *(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x64a) = *(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x64a) - 1;
-  }
-  return;
+    if (DAT_0043dcb0.counters->unk64A > 10) {
+        DAT_0043dcb0.counters->unk64A = DAT_0043dcb0.counters->unk64A - 1;
+    }
 }
 
 } /* extern "C" */

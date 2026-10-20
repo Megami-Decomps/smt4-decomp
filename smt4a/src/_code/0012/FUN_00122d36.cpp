@@ -1,28 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7232(unsigned int);
-int FUN_0030f8a2(int, unsigned int, unsigned int);
+void FUN_002e7232(void *buffer);
+void FUN_0030f8a2(void *object, void *buffer, u32 arg);
 
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_0030f8a2. */
+typedef struct BufferOwner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ void *buffer;
+    /* 0x08 */ u8 attached;
+} BufferOwner;
 
-
-void FUN_00122d36(int param_1,unsigned int param_2)
-
+/* Releases the buffer (detaching it first through FUN_0030f8a2 when attached) and clears both fields. */
+void FUN_00122d36(BufferOwner *object, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = *(unsigned int *)(param_1 + 4);
-  if (*(char *)(param_1 + 8) != '\0') {
-    FUN_0030f8a2(param_1,temp_v0,param_2);
-  }
-  FUN_002e7232(temp_v0);
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned char *)(param_1 + 8) = 0;
-  return;
+    void *buffer = object->buffer;
+
+    if (object->attached != 0) {
+        FUN_0030f8a2(object, buffer, arg);
+    }
+    FUN_002e7232(buffer);
+    object->buffer = NULL;
+    object->attached = 0;
 }
 
 } /* extern "C" */

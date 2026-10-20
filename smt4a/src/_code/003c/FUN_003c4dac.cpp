@@ -13,7 +13,7 @@ extern unsigned int FUN_001ab854(void);
 extern int scrGetArg(void);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int FUN_0032fac0(void);
-extern int FUN_0032faf4(void);
+extern int flagAt4IsClearOrMissing(void);
 /* Supplied declaration required: FUN_003e503c. */
 
 
@@ -48,7 +48,7 @@ unsigned int FUN_003c4dac(void)
     }
   }
   else {
-    temp_v0 = FUN_0032faf4();
+    temp_v0 = flagAt4IsClearOrMissing();
     if (temp_v0 != 0) {
       scrSetResult(0);
       return 1;

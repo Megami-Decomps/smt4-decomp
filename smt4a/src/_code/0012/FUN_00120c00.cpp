@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0011eee2(unsigned int, unsigned char **);
-int FUN_0011ef68(unsigned char **);
+int destroyObj0055ac60(unsigned char **);
 int FUN_00303d3a(unsigned int, int);
 int FUN_00304e82(void);
 int FUN_00310cf2(int *, unsigned int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_0055a55c; /* 0x55a55c */
 extern unsigned char DAT_0055ac60; /* 0x55ac60 */
 
 /* Supplied declaration required: FUN_0011eee2. */
-/* Supplied declaration required: FUN_0011ef68. */
+/* Supplied declaration required: destroyObj0055ac60. */
 extern unsigned int FUN_002e7908(unsigned char **, unsigned int *);
 extern int FUN_002fafc4(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00303d3a. */
@@ -69,7 +69,7 @@ void FUN_00120c00(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       (**(romwright_code **)(*param_1 + 0x5c))(param_1,&temp_v3);
       FUN_00303d3a(param_3,0x8001);
     }
-    FUN_0011ef68(&temp_v3);
+    destroyObj0055ac60(&temp_v3);
     *temp_v7 = 1;
   }
   return;

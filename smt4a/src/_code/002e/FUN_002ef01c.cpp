@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00310010(unsigned char *, unsigned int);
+int slotSetGet(unsigned char *, unsigned int);
 
 extern unsigned char DAT_0062e6d0; /* 0x62e6d0 */
 
-/* Supplied declaration required: FUN_00310010. */
+/* Supplied declaration required: slotSetGet. */
 extern unsigned int FUN_00310024(unsigned char *);
 
 
@@ -19,7 +19,7 @@ void FUN_002ef01c(int param_1)
   unsigned int temp_v0;
   
   temp_v0 = FUN_00310024(&DAT_0062e6d0 + (unsigned int)*(unsigned char *)(param_1 + 4) * 0x1c0);
-  FUN_00310010(&DAT_0062e6d0 + (unsigned int)*(unsigned char *)(param_1 + 4) * 0x1c0,temp_v0);
+  slotSetGet(&DAT_0062e6d0 + (unsigned int)*(unsigned char *)(param_1 + 4) * 0x1c0,temp_v0);
   return;
 }
 

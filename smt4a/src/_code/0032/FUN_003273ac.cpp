@@ -35,7 +35,7 @@ extern char s_____X___005813ae[17]; /* 0x5813ae */
 
 extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_002296b0. */
-extern int FUN_003564ec(fn_003273ac_arg0 *);
+extern int dataTable4CGetEntry(fn_003273ac_arg0 *);
 
 
 void FUN_003273ac(fn_003273ac_arg0 *param_1)
@@ -54,7 +54,7 @@ void FUN_003273ac(fn_003273ac_arg0 *param_1)
   int temp_v9;
   
   temp_v2 = FUN_00162e8c();
-  temp_v3 = FUN_003564ec(param_1);
+  temp_v3 = dataTable4CGetEntry(param_1);
   temp_v0 = *(short *)(temp_v3 + 8) * 0x10;
   temp_v6 = *(int *)(&DAT_005813a4 + temp_v0);
   *(unsigned char *)(temp_v2 + 0xe04) = *(unsigned char *)(temp_v0 + 0x5813a8);

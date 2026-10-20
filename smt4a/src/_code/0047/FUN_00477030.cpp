@@ -28,7 +28,7 @@ extern int FUN_001d25ec(unsigned int *);
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_0047bc90. */
-extern int FUN_0047dae0(unsigned int *);
+extern int isEmptyString(unsigned int *);
 /* Supplied declaration required: FUN_0047daf4. */
 
 
@@ -121,7 +121,7 @@ void FUN_00477030(int param_1)
     uStack_48 = uStack_34;
     uStack_44 = temp_v5;
     uStack_40 = uStack_2c;
-    temp_v0 = FUN_0047dae0(&temp_v2);
+    temp_v0 = isEmptyString(&temp_v2);
     if (temp_v0 != 0) {
       temp_v1 = 2;
       *(unsigned int *)(param_1 + 8) = temp_v1;
@@ -136,7 +136,7 @@ void FUN_00477030(int param_1)
     uStack_48 = uStack_34;
     uStack_44 = temp_v5;
     uStack_40 = uStack_2c;
-    temp_v0 = FUN_0047dae0(&temp_v2);
+    temp_v0 = isEmptyString(&temp_v2);
     if (temp_v0 != 0) {
       temp_v1 = 4;
       *(unsigned int *)(param_1 + 8) = temp_v1;

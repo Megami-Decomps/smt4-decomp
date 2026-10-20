@@ -28,7 +28,7 @@ int FUN_00339e38(...);
 int FUN_0033a01c(...);
 int FUN_00394c6c(...);
 int FUN_003ae720(...);
-int FUN_003d6ffc(...);
+int vec3CopyFromOffsetC(...);
 
 int FUN_0023f410(...);
 int FUN_0023f79c(...);
@@ -148,9 +148,9 @@ extern int FUN_003391d0(int, unsigned int);
 /* Supplied declaration required: FUN_0033a01c. */
 /* Supplied declaration required: FUN_0033a144. */
 /* Supplied declaration required: FUN_00394c6c. */
-extern int FUN_003adc3c(unsigned int);
+extern int stateBlockCall(unsigned int);
 /* Supplied declaration required: FUN_003ae720. */
-/* Supplied declaration required: FUN_003d6ffc. */
+/* Supplied declaration required: vec3CopyFromOffsetC. */
 extern int FUN_003db7b4(int);
 /* Supplied declaration required: func_0x0027e38c. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -628,7 +628,7 @@ LAB_003343b0:
     }
     FUN_0033a01c(temp_v11);
     FUN_00339e38(temp_v11);
-    FUN_003d6ffc(g_btlMain);
+    vec3CopyFromOffsetC(g_btlMain);
     if ((*(char *)(temp_v11 + 0x44b7) == '\0') &&
        (((*(unsigned int *)(temp_v11 + 0xe0) & 0x2000000) != 0 || ((*puVar20 & 2) != 0)))) {
       temp_v15 = 4;
@@ -814,7 +814,7 @@ code_r0x00240678:
         (temp_v15 = FUN_0027e6bc(DAT_00434290,puVar19), temp_v15 < 1)) &&
        ((temp_v15 = FUN_002404e8(DAT_00435d18), temp_v15 != 0 &&
         (((*(unsigned int *)(temp_v11 + 0x44a0) & 8) == 0 ||
-         (temp_v15 = FUN_003adc3c(DAT_00439ca8), temp_v15 != 0)))))) {
+         (temp_v15 = stateBlockCall(DAT_00439ca8), temp_v15 != 0)))))) {
       if ((*(unsigned int *)(temp_v11 + 0xe0) & 0x4000000) != 0) {
         temp_v16 = 4;
         temp_v15 = 4;
@@ -914,7 +914,7 @@ code_r0x00240678:
     FUN_0033a144(temp_v11);
     FUN_00338424(temp_v11);
     FUN_00339de0(temp_v11);
-    FUN_003d6ffc(g_btlMain);
+    vec3CopyFromOffsetC(g_btlMain);
     if ((*(char *)(temp_v11 + 0x44b7) == '\0') &&
        (((*(unsigned int *)(temp_v11 + 0xe0) & 0x2000000) != 0 || ((*puVar20 & 2) != 0)))) {
       temp_v15 = 4;

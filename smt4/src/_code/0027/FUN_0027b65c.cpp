@@ -8,7 +8,7 @@ int FUN_002a7c80(...);
 
 int FUN_002481e8(...);
 int FUN_0024f24c(...);
-int FUN_0024f4d0(void);
+int dataTable2fSub0GetCount(void);
 int FUN_0025b670(void);
 int FUN_00263cb8(...);
 int FUN_00298dc8(int);
@@ -17,8 +17,8 @@ int FUN_002c09d0(void);
 int FUN_002dfe08(...);
 int FUN_002eaec0(int, unsigned char [20]);
 int FUN_00308cd4(...);
-int FUN_00324528(void);
-int FUN_00326e7c(void);
+int dataTable2fSub1GetCount(void);
+int dataTable2fSub2GetCount(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_2: 26 slot(s), 104 byte(s) */
@@ -66,14 +66,14 @@ extern int FUN_002481b0(void);
 extern unsigned int *FUN_00248248(unsigned int);
 extern int FUN_002482a8(void);
 /* Supplied declaration required: FUN_0024f24c. */
-/* Supplied declaration required: FUN_0024f4d0. */
+/* Supplied declaration required: dataTable2fSub0GetCount. */
 /* Supplied declaration required: FUN_0025b670. */
 /* Supplied declaration required: FUN_00263cb8. */
 extern unsigned int FUN_00276060(int);
-extern unsigned int *FUN_002760fc(int);
+extern unsigned int *dataTable2fSub0GetRecord(int);
 extern int FUN_00276264(int);
 extern int FUN_0027d968(void);
-extern unsigned int *FUN_002878a8(int);
+extern unsigned int *dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_00298dc8. */
 /* Supplied declaration required: FUN_002a7c80. */
 /* Supplied declaration required: FUN_002bf694. */
@@ -87,11 +87,11 @@ extern int FUN_002eb024(void);
 extern int FUN_002f3614(int);
 /* Supplied declaration required: FUN_00308cd4. */
 extern int FUN_0030f6cc(void);
-extern unsigned int *FUN_00316e7c(int);
+extern unsigned int *dataTable2fSub2GetRecord(int);
 extern unsigned int FUN_0031b7b0(void);
 extern int FUN_003218b4(void);
-/* Supplied declaration required: FUN_00324528. */
-/* Supplied declaration required: FUN_00326e7c. */
+/* Supplied declaration required: dataTable2fSub1GetCount. */
+/* Supplied declaration required: dataTable2fSub2GetCount. */
 
 
 void FUN_0027b65c(int param_1,int param_2)
@@ -262,10 +262,10 @@ LAB_0027b7d0:
 LAB_0027b92c:
             temp_v3 = *puVar2;
             temp_v1 = 0;
-            FUN_0024f4d0();
+            dataTable2fSub0GetCount();
             if (0 < (int)temp_v4) {
               do {
-                puVar4 = (unsigned int *)FUN_002760fc(temp_v1);
+                puVar4 = (unsigned int *)dataTable2fSub0GetRecord(temp_v1);
                 temp_v4 = *puVar4;
                 if (temp_v4 == 0xffffffff) break;
                 if (temp_v4 == temp_v3) {
@@ -284,17 +284,17 @@ LAB_0027b92c:
                 }
 LAB_0027b99c:
                 temp_v1 = temp_v1 + 1;
-                FUN_0024f4d0();
+                dataTable2fSub0GetCount();
               } while (temp_v1 < (int)temp_v4);
             }
             temp_v33 = -1;
 LAB_0027ba18:
             temp_v3 = *puVar2;
             temp_v1 = 0;
-            FUN_00324528();
+            dataTable2fSub1GetCount();
             if (0 < (int)temp_v4) {
               do {
-                puVar4 = (unsigned int *)FUN_002878a8(temp_v1);
+                puVar4 = (unsigned int *)dataTable2fSub1GetRecord(temp_v1);
                 temp_v4 = *puVar4;
                 if (temp_v4 == 0xffffffff) break;
                 if (temp_v4 == temp_v3) {
@@ -323,17 +323,17 @@ LAB_0027ba18:
                 }
 LAB_0027baf8:
                 temp_v1 = temp_v1 + 1;
-                FUN_00324528();
+                dataTable2fSub1GetCount();
               } while (temp_v1 < (int)temp_v4);
               temp_v33 = -1;
             }
 LAB_0027bb14:
             temp_v3 = *puVar2;
             temp_v1 = 0;
-            FUN_00326e7c();
+            dataTable2fSub2GetCount();
             if (0 < (int)temp_v4) {
               do {
-                puVar4 = (unsigned int *)FUN_00316e7c(temp_v1);
+                puVar4 = (unsigned int *)dataTable2fSub2GetRecord(temp_v1);
                 temp_v4 = *puVar4;
                 if (temp_v4 == 0xffffffff) break;
                 if (temp_v4 == temp_v3) {
@@ -352,7 +352,7 @@ LAB_0027bb14:
                 }
 LAB_0027bbb0:
                 temp_v1 = temp_v1 + 1;
-                FUN_00326e7c();
+                dataTable2fSub2GetCount();
               } while (temp_v1 < (int)temp_v4);
               temp_v33 = -1;
             }

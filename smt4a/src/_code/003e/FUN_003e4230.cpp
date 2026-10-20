@@ -10,7 +10,7 @@ extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00186f58. */
 extern int FUN_0018719c(void);
 extern unsigned int FUN_002e5c2c(void);
-extern int FUN_00348d64(void);
+extern int gameDataBlockGetArea2D68(void);
 
 
 unsigned char FUN_003e4230(int param_1)
@@ -39,7 +39,7 @@ unsigned char FUN_003e4230(int param_1)
     while( 1 ) {
       temp_v0 = *(unsigned short *)(temp_v1 + temp_v2 * 2 + 0x32);
       if ((temp_v0 != 0) &&
-         (temp_v3 = FUN_00348d64(),
+         (temp_v3 = gameDataBlockGetArea2D68(),
          ((unsigned int)*(unsigned char *)(temp_v3 + (unsigned int)(temp_v0 >> 3)) & (1 << (temp_v0 & 7))) == 0)) break;
       temp_v2 = temp_v2 + 1;
       if (temp_v2 >= 3) {

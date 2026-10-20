@@ -39,7 +39,7 @@ extern unsigned int DAT_00571260; /* 0x571260 */
 extern unsigned int DAT_00571264; /* 0x571264 */
 
 extern unsigned int btlGetMainState(void);
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004de7a0. */
@@ -110,7 +110,7 @@ void FUN_004e6b64(int *param_1,fn_004e6b64_arg1 *param_2,short *param_3)
     if (((*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0 &&
          (*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0) && (temp_v9 = temp_v8, temp_v8 < temp_v6))
     {
-      temp_v6 = FUN_001633a0((temp_v6 - temp_v8) & 0xffff);
+      temp_v6 = lcgRandomRange((temp_v6 - temp_v8) & 0xffff);
       temp_v9 = temp_v8 + temp_v6;
     }
     do {
@@ -177,7 +177,7 @@ void FUN_004e6b64(int *param_1,fn_004e6b64_arg1 *param_2,short *param_3)
         temp_v3 = (short)(int)piVar7;
       }
       else {
-        temp_v6 = FUN_001633a0((temp_v7 - 1U) & 0xffff);
+        temp_v6 = lcgRandomRange((temp_v7 - 1U) & 0xffff);
         temp_v3 = asStack_244[temp_v6 * 2];
         asStack_244[temp_v6 * 2 + 1] = asStack_244[temp_v6 * 2 + 1] + 1;
       }

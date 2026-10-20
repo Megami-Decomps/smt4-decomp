@@ -17,8 +17,8 @@ int FUN_002b3c9c(...);
 int FUN_002e59f8(...);
 int FUN_002ff8e8(...);
 int FUN_00323f50(...);
-int FUN_0039ede0(...);
-int FUN_003b24f0(...);
+int quadSourceCopyOut(...);
+int quadHolderCopyOut(...);
 int SUB41(double, int);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
@@ -117,8 +117,8 @@ extern unsigned int FUN_00290df4(unsigned int, unsigned int);
 extern int FUN_002fe3bc(void *);
 /* Supplied declaration required: FUN_002ff8e8. */
 /* Supplied declaration required: FUN_00323f50. */
-/* Supplied declaration required: FUN_0039ede0. */
-/* Supplied declaration required: FUN_003b24f0. */
+/* Supplied declaration required: quadSourceCopyOut. */
+/* Supplied declaration required: quadHolderCopyOut. */
 
 
 void FUN_00322984(fn_00322984_arg0 *param_1)
@@ -236,8 +236,8 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
       FUN_002b3538(temp_v8,4,&temp_v47);
       FUN_002b3538(temp_v8,0x20,&temp_v48);
       if ((*(unsigned int *)((int)pvVar11 + 0xc) & 1) != 0) {
-        FUN_0039ede0(pvVar11,&temp_v59);
-        FUN_003b24f0(pvVar11,&temp_v35);
+        quadSourceCopyOut(pvVar11,&temp_v59);
+        quadHolderCopyOut(pvVar11,&temp_v35);
         DAT_006472dc = temp_v59;
         DAT_006472e0 = fStack_84;
         DAT_006472e4 = fStack_80;
@@ -404,8 +404,8 @@ void FUN_00322984(fn_00322984_arg0 *param_1)
       FUN_00212500();
       temp_v14 = (float)temp_v29;
       if ((*(unsigned int *)((int)pvVar11 + 0xc) & 1) != 0) {
-        FUN_0039ede0(pvVar11,&temp_v59);
-        FUN_003b24f0(pvVar11,&temp_v35);
+        quadSourceCopyOut(pvVar11,&temp_v59);
+        quadHolderCopyOut(pvVar11,&temp_v35);
         DAT_006472dc = temp_v59;
         DAT_006472e0 = fStack_84;
         DAT_006472e4 = fStack_80;

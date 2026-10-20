@@ -41,7 +41,7 @@ extern unsigned int DAT_0063077c; /* 0x63077c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
 
@@ -177,7 +177,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
       return;
     }
     if (param_12 != 0) {
-      temp_v4 = FUN_00169294(6,1,0);
+      temp_v4 = packNibblesAndByte(6,1,0);
       piVar7 = (int *)(temp_v1 + 0x12b8);
       temp_v3 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v4;
@@ -189,7 +189,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
     FUN_00185dd4(2,param_5,param_7,param_10 + temp_v9,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
     temp_v1 = g_renderCtx;
-    temp_v0 = FUN_00169294(6,7,0);
+    temp_v0 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12b8);
     temp_v5 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v0;
@@ -252,7 +252,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
       return;
     }
     if (param_12 != 0) {
-      temp_v4 = FUN_00169294(6,1,0);
+      temp_v4 = packNibblesAndByte(6,1,0);
       piVar7 = (int *)(temp_v1 + 0x12b8);
       temp_v3 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v4;
@@ -264,7 +264,7 @@ void FUN_00183788(int param_1,int param_2,int param_3,int param_4,unsigned int p
     FUN_00185dd4(2,param_5,param_8,param_10 + temp_v7,(int)param_11,temp_v5,
                  (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),(int)((unsigned long long)param_11 >> 0x20));
     temp_v1 = g_renderCtx;
-    temp_v0 = FUN_00169294(6,7,0);
+    temp_v0 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12b8);
     temp_v5 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v0;

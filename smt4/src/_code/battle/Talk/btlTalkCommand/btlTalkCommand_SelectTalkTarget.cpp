@@ -9,7 +9,7 @@ int scrSetResult(...);
 int FUN_002b06c4(void);
 int FUN_002b9024(...);
 int FUN_002bd06c(int);
-int FUN_002c09f4(unsigned int);
+int randNextInRange(unsigned int);
 int asdMemFree(int);
 int asdMemAlloc(int, int, int, int, int);
 int SBORROW4(...);
@@ -28,7 +28,7 @@ extern int FUN_00296d6c(int, unsigned int);
 extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemAlloc. */
 
@@ -103,7 +103,7 @@ unsigned int btlTalkCommand_SelectTalkTarget(void)
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 0x4b1);
       if (temp_v6 != 0) {
-        FUN_002c09f4((temp_v6 - 1) & 0xffff);
+        randNextInRange((temp_v6 - 1) & 0xffff);
       }
       scrSetResult();
     }

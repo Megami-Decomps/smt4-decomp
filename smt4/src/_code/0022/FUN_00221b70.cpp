@@ -1,25 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_00433278; /* 0x433278 */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0xD8];
+    /* 0xD8 */ s32 unkD8;
+} Entry;
 
-extern int FUN_001ed250(int);
+extern int DAT_00433278;
+extern Entry *FUN_001ed250(int index);
 
-
-unsigned int FUN_00221b70(int param_1)
-
+u32 FUN_00221b70(int index)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (((DAT_00433278 - param_1) - 1 < 0) || (temp_v0 = FUN_001ed250(param_1), *(int *)(temp_v0 + 0xd8) <= 0)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    Entry *entry;
+    u32 result;
+
+    if (((DAT_00433278 - index) - 1 < 0) || (entry = FUN_001ed250(index), entry->unkD8 <= 0)) {
+        result = 0;
+    } else {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

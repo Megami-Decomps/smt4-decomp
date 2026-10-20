@@ -1,64 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00186f54` (_code @ 0x186f54, 0x4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00100854(unsigned char [32], unsigned int, unsigned int, int, unsigned char *);
+__declspec(noreturn) __weak void FUN_00186f54_hook(void);
 
-extern unsigned char LAB_0019dfd4; /* 0x19dfd4 */
-
-/* Supplied declaration required: FUN_00100854. */
-extern int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(int);
-extern unsigned int dataTableGetEntries(int);
-
-
-void FUN_00186f54(int param_1)
-
+/* Calls the engine's (removed) noreturn hook; armlink turned the tail branch into a nop. */
+void FUN_00186f54(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  char *pcVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned char temp_v3 [32];
-  unsigned short uStack_30;
-  
-  temp_v0 = dataTableGet(0xb,0);
-  if (temp_v0 == 0) {
-    return;
-  }
-  if (param_1 == 0x8b) {
-    pcVar2 = "撂鎂钂辂趂膂䂁憂辂辂鎂钂";
-  }
-  else if (param_1 == 0x8c) {
-    pcVar2 = "抂辂趂薂节膂莂讂";
-  }
-  else if (param_1 == 0x81) {
-    pcVar2 = "斂銂薂躂骂馂";
-  }
-  else if (param_1 == 0x80) {
-    pcVar2 = "悂躂躂覂袂覂貂膂钂覂辂躂";
-  }
-  else {
-    if (param_1 != 0) {
-      temp_v1 = dataTableGetEntries(temp_v0);
-      temp_v2 = dataTableGetCount(temp_v0);
-      uStack_30 = (unsigned short)param_1;
-      FUN_00100854(temp_v3,temp_v1,temp_v2,0x40,&LAB_0019dfd4);
-      return;
-    }
-    pcVar2 = (char *)0x531118;
-  }
-  if (pcVar2 != (char *)0x0) {
-    return;
-  }
-  temp_v1 = dataTableGetEntries(temp_v0);
-  temp_v2 = dataTableGetCount(temp_v0);
-  uStack_30 = (unsigned short)param_1;
-  FUN_00100854(temp_v3,temp_v1,temp_v2,0x40,&LAB_0019dfd4);
-  return;
+    FUN_00186f54_hook();
 }
 
 } /* extern "C" */

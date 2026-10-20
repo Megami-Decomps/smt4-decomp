@@ -21,7 +21,7 @@ int FUN_00338458(int);
 int FUN_00339de0(int);
 int FUN_0033a144(int);
 int FUN_00394c6c(...);
-int FUN_003d6ffc(unsigned int);
+int vec3CopyFromOffsetC(unsigned int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -53,7 +53,7 @@ extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: FUN_00339de0. */
 /* Supplied declaration required: FUN_0033a144. */
 /* Supplied declaration required: FUN_00394c6c. */
-/* Supplied declaration required: FUN_003d6ffc. */
+/* Supplied declaration required: vec3CopyFromOffsetC. */
 
 
 void FUN_0023f500(unsigned int *param_1,int param_2)
@@ -96,7 +96,7 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
     FUN_0033a144(param_2);
     FUN_00338424(param_2);
     FUN_00339de0(param_2);
-    FUN_003d6ffc(g_btlMain);
+    vec3CopyFromOffsetC(g_btlMain);
     if ((*(char *)(param_2 + 0x44b7) == '\0') &&
        (((*(unsigned int *)(param_2 + 0xe0) & 0x2000000) != 0 || ((*puVar5 & 2) != 0)))) {
       temp_v2 = 4;

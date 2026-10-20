@@ -1,36 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00360110(int, int);
-int nw_snd_internal_driver_VoiceManager_ChangeVoicePriority(unsigned int, int);
+int FUN_00360110(int sdkVoice, int priority);
+int nw_snd_internal_driver_VoiceManager_ChangeVoicePriority(u32 manager, void *voice);
+extern u32 FUN_002baf30(void);
 
-extern unsigned int FUN_002baf30(void);
-/* Supplied declaration required: FUN_00360110. */
-/* Supplied declaration required: nw_snd_internal_driver_VoiceManager_ChangeVoicePriority. */
+typedef struct Voice {
+    /* 0x00 */ int sdkVoices[2];
+    /* 0x08 */ int count;
+    /* 0x0C */ u8 unk0C[8];
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 unk15;
+    /* 0x16 */ u8 unk16;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ u16 dirtyFlags;
+    /* 0x22 */ u8 unk22[0x1E];
+    /* 0x40 */ int priority;
+} Voice;
 
-
-void nw_snd_internal_driver_Voice_SetPriority(int param_1,unsigned int param_2)
-
+void nw_snd_internal_driver_Voice_SetPriority(Voice *voice, u32 priority)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  *(unsigned int *)(param_1 + 0x40) = param_2;
-  temp_v0 = FUN_002baf30();
-  nw_snd_internal_driver_VoiceManager_ChangeVoicePriority(temp_v0,param_1);
-  if ((*(int *)(param_1 + 0x40) == 1) && (temp_v2 = 0, 0 < *(int *)(param_1 + 8))) {
-    do {
-      temp_v1 = *(int *)(param_1 + temp_v2 * 4);
-      if (temp_v1 != 0) {
-        FUN_00360110(temp_v1,1);
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(param_1 + 8));
-  }
-  return;
+    u32 manager;
+    int sdkVoice;
+    int i;
+
+    voice->priority = priority;
+    manager = FUN_002baf30();
+    nw_snd_internal_driver_VoiceManager_ChangeVoicePriority(manager, voice);
+    if ((voice->priority == 1) && (i = 0, 0 < voice->count)) {
+        do {
+            sdkVoice = voice->sdkVoices[i];
+            if (sdkVoice != 0) {
+                FUN_00360110(sdkVoice, 1);
+            }
+            i = i + 1;
+        } while (i < voice->count);
+    }
 }
 
 } /* extern "C" */

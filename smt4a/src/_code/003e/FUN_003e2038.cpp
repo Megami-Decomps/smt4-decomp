@@ -18,7 +18,7 @@ extern int FUN_003ec620(int, unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(int, unsigned int);
 /* Supplied declaration required: FUN_003fce8c. */
-extern int FUN_003fcf5c(int);
+extern int nkdwLoaderParse(int);
 
 
 unsigned int * FUN_003e2038(unsigned int *param_1,int param_2)
@@ -38,7 +38,7 @@ unsigned int * FUN_003e2038(unsigned int *param_1,int param_2)
       temp_v1 = param_2 + temp_v4 * 8;
       temp_v2 = FUN_003ec620(param_2,*(unsigned int *)(temp_v1 + 0x2020));
       if ((*(unsigned int *)(temp_v1 + 0x201c) & 1) == 0) {
-        temp_v3 = FUN_003fcf5c(temp_v2);
+        temp_v3 = nkdwLoaderParse(temp_v2);
         if (temp_v3 == 0) {
           temp_v0 = 0;
         }

@@ -1,22 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c7bf0` (_code @ 0x1c7bf0, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_dspsndState; /* 0x6433d0 */
+typedef struct Voice {
+    u8 unk00[0x68];
+    u32 *channel;                  /* 0x68 */
+} Voice;
 
-extern unsigned char nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(unsigned int, unsigned char, unsigned int);
+u8 FUN_001c7bf8(u32 *channel, u32 param);
 
-
-unsigned char FUN_001c7bf0(int param_1,unsigned int param_2)
-
+/* Passes the voice's channel index on to FUN_001c7bf8, the function that follows it. */
+u8 FUN_001c7bf0(Voice *voice, u32 param)
 {
-  unsigned char temp_v0;
-  
-  temp_v0 = nn_snd_CTR_Dspsnd_SetChannelAdpcmParam
-                    ((unsigned int)&g_dspsndState,(unsigned char)**(unsigned int **)(param_1 + 0x68),param_2);
-  return temp_v0;
+    return FUN_001c7bf8(voice->channel, param);
 }
 
 } /* extern "C" */

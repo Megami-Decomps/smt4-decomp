@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00123e98(unsigned char [32]);
-int FUN_002ec890(unsigned char [32]);
+int destroyObj0055ae64(unsigned char [32]);
 int FUN_002ee54c(unsigned char [8]);
 int FUN_002f6ed2(int, int *);
 int FUN_002fde5c(unsigned char [8]);
@@ -23,7 +23,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00123e98. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ee54c. */
 /* Supplied declaration required: FUN_002f6ed2. */
 /* Supplied declaration required: FUN_002fde5c. */
@@ -31,7 +31,7 @@ extern int FUN_00303158(unsigned int, int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00306e7a. */
 /* Supplied declaration required: FUN_0030ff74. */
 /* Supplied declaration required: FUN_00310dc6. */
-extern unsigned int FUN_00310e4e(int, unsigned int);
+extern unsigned int vectorOwnerResize(int, unsigned int);
 
 
 void FUN_0012143c(int param_1,unsigned int param_2)
@@ -59,11 +59,11 @@ void FUN_0012143c(int param_1,unsigned int param_2)
     temp_v5 = temp_v8;
     FUN_002f6ed2(param_1 + 0x50,&temp_v4);
     FUN_0030ff74(temp_v2,param_1 + 0x2c,4,1);
-    temp_v1 = FUN_00310e4e(param_1 + 0x34,0x20);
+    temp_v1 = vectorOwnerResize(param_1 + 0x34,0x20);
     FUN_00310dc6(temp_v2,temp_v1,0x100);
   }
   FUN_002ee54c(temp_v2);
-  FUN_002ec890(temp_v6);
+  destroyObj0055ae64(temp_v6);
   return;
 }
 

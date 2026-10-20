@@ -1,19 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0044de98; /* 0x44de98 */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x3B];
+    /* 0x3B */ u8 unk3B;
+    /* 0x3C */ u8 unk3C[0x6C];
+    /* 0xA8 */ u32 result;
+} Obj;
 
+extern struct {
+    u8 unk00[0x20];
+    Obj *obj;
+} DAT_0044de98;
 
-void scrSetResult(unsigned int param_1)
-
+void scrSetResult(u32 result)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0044de98 + 0x20));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0044de98 + 0x20)) + 0x3b) = 0;
-  *(unsigned int *)(temp_v0 + 0xa8) = param_1;
-  return;
+    Obj *obj = DAT_0044de98.obj;
+
+    DAT_0044de98.obj->unk3B = 0;
+    obj->result = result;
 }
 
 } /* extern "C" */

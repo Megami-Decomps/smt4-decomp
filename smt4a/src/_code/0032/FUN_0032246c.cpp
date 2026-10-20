@@ -14,8 +14,8 @@ int FUN_00222160(...);
 int FUN_0023235c(...);
 int FUN_002914bc(...);
 int FUN_003008c4(...);
-int FUN_0039ede0(...);
-int FUN_003b24f0(...);
+int quadSourceCopyOut(...);
+int quadHolderCopyOut(...);
 
 typedef struct fn_0032246c_arg0 fn_0032246c_arg0;
 typedef struct fn_0032246c_arg0_p4c fn_0032246c_arg0_p4c;
@@ -84,8 +84,8 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: FUN_0023235c. */
 /* Supplied declaration required: FUN_002914bc. */
 /* Supplied declaration required: FUN_003008c4. */
-/* Supplied declaration required: FUN_0039ede0. */
-/* Supplied declaration required: FUN_003b24f0. */
+/* Supplied declaration required: quadSourceCopyOut. */
+/* Supplied declaration required: quadHolderCopyOut. */
 
 
 void FUN_0032246c(fn_0032246c_arg0 *param_1)
@@ -138,8 +138,8 @@ void FUN_0032246c(fn_0032246c_arg0 *param_1)
       pfVar2 = (float *)pfVar4->field_0x18;
       temp_v2 = pfVar4->field_0x8;
       if ((pfVar4->field_0xc & 1) != 0) {
-        FUN_0039ede0(pfVar4,&temp_v26);
-        FUN_003b24f0(pfVar4,&temp_v22);
+        quadSourceCopyOut(pfVar4,&temp_v26);
+        quadHolderCopyOut(pfVar4,&temp_v22);
         DAT_006472dc = temp_v26;
         DAT_006472e0 = fStack_84;
         DAT_006472e4 = fStack_80;
@@ -233,8 +233,8 @@ void FUN_0032246c(fn_0032246c_arg0 *param_1)
     pfVar2 = (float *)pfVar4->field_0x18;
     temp_v2 = pfVar4->field_0x8;
     if ((pfVar4->field_0xc & 1) != 0) {
-      FUN_0039ede0(pfVar4,&temp_v26);
-      FUN_003b24f0(pfVar4,&temp_v22);
+      quadSourceCopyOut(pfVar4,&temp_v26);
+      quadHolderCopyOut(pfVar4,&temp_v22);
       DAT_006472dc = temp_v26;
       DAT_006472e0 = fStack_84;
       DAT_006472e4 = fStack_80;

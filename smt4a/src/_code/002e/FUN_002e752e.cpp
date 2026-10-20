@@ -1,27 +1,40 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002e7328(int, unsigned int);
-extern int FUN_002e76b6(unsigned int);
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 size;
+} Source;
 
+typedef struct Stream {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 error;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ Source *source;
+    /* 0x0C */ u32 position;
+} Stream;
 
-unsigned int FUN_002e752e(int param_1,unsigned char *param_2)
+u32 FUN_002e7328(Stream *stream, u32 count);
+s32 FUN_002e76b6(Source *source);
 
+/* Reads a byte at the read position into `*out` and advances; stores 0 and returns 0 when it does not fit. */
+u32 FUN_002e752e(Stream *stream, u8 *out)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002e7328(param_1,1);
-  if (temp_v0 != 0) {
-    temp_v0 = FUN_002e76b6(*(unsigned int *)(param_1 + 8));
-    int off = *(int *)(param_1 + 0xc);
-    unsigned char *p = (unsigned char *)(temp_v0 + off);
-    *param_2 = *p;
-    *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;
-    return 1;
-  }
-  *param_2 = 0;
-  return 0;
+    s32 base;
+    s32 result;
+
+    result = FUN_002e7328(stream, 1);
+    if (result != 0) {
+        base = FUN_002e76b6(stream->source);
+        s32 offset = stream->position;
+        u8 *value = (u8 *)(base + offset);
+        *out = *value;
+        stream->position = stream->position + 1;
+        return 1;
+    }
+    *out = 0;
+    return 0;
 }
 
 } /* extern "C" */

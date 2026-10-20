@@ -1,24 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002b63ac(void);
+typedef struct Stick {
+    /* 0x00 */ u8 unk00[0x74];
+    /* 0x74 */ s16 x;
+} Stick;
 
+extern Stick *FUN_002b63ac(void);
 
-unsigned int FUN_0024dc1c(int param_1)
+/* Direction 4 (right) triggers at x >= 800, direction 5 (left) at x <= -800. */
+u32 FUN_0024dc1c(int direction)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002b63ac();
-  if (param_1 != 4) {
-    if (param_1 == 5 && *(short *)(temp_v0 + 0x74) <= -800) {
-      return 1;
+    Stick *stick = FUN_002b63ac();
+
+    if (direction != 4) {
+        if (direction == 5 && stick->x <= -800) {
+            return 1;
+        }
+        return 0;
+    }
+    if (stick->x >= 800) {
+        return 1;
     }
     return 0;
-  }
-  if (*(short *)(temp_v0 + 0x74) >= 800) {
-    return 1;
-  }
-  return 0;
 }
+
 } /* extern "C" */

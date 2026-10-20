@@ -1,25 +1,40 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Owner Owner;
+typedef struct Item Item;
+typedef struct OwnerVtbl {
+    /* 0x00 */ void *unk00[12];
+    /* 0x30 */ void (*attach)(Owner *owner, Item *item, Item *holder);
+    /* 0x34 */ void (*detach)(Owner *owner, Item *item, Item *holder);
+} OwnerVtbl;
+struct Owner {
+    /* 0x00 */ const OwnerVtbl *vtbl;
+};
 
-void FUN_002eac8e(int param_1,int param_2)
+struct Item {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Owner *owner;
+    /* 0x08 */ u8 unk08[0x74];
+    /* 0x7C */ Item *current;
+};
 
+/* Replaces the item attached at 0x7C: detaches the old one and attaches `item` through the owner's vtable (when there is an owner), then stores it. */
+void FUN_002eac8e(Item *holder, Item *item)
 {
-  int *piVar1;
-  
-  piVar1 = *(int **)(param_1 + 4);
-  if (piVar1 != (int *)0x0) {
-    if (*(int *)(param_1 + 0x7c) != 0) {
-      (**(romwright_code **)(*piVar1 + 0x34))(piVar1,*(int *)(param_1 + 0x7c),param_1);
+    Owner *owner;
+
+    owner = holder->owner;
+    if (owner != NULL) {
+        if (holder->current != NULL) {
+            owner->vtbl->detach(owner, holder->current, holder);
+        }
+        if (item != NULL) {
+            holder->owner->vtbl->attach(holder->owner, item, holder);
+        }
     }
-    if (param_2 != 0) {
-      (**(romwright_code **)(**(int **)(param_1 + 4) + 0x30))(*(int **)(param_1 + 4),param_2,param_1);
-    }
-  }
-  *(int *)(param_1 + 0x7c) = param_2;
-  return;
+    holder->current = item;
 }
 
 } /* extern "C" */

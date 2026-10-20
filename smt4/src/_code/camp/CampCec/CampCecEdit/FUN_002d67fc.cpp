@@ -59,7 +59,7 @@ extern unsigned int FUN_0025463c(void);
 extern unsigned int FUN_0026ef04(void);
 /* Supplied declaration required: FUN_0026f204. */
 /* Supplied declaration required: FUN_00297468. */
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 extern int FUN_002a8764(void);
 extern unsigned int FUN_002b63ac(void);
@@ -186,10 +186,10 @@ void FUN_002d67fc(unsigned char param_1)
   do {
     if (-1 < *(char *)(temp_v4 + temp_v3 + 0x90f0)) {
       temp_v0 = FUN_002a8740();
-      temp_v2 = FUN_0029ebac(temp_v0,10);
+      temp_v2 = flagWordTestBit(temp_v0,10);
       if (temp_v2 == 0) {
         temp_v0 = FUN_002a8740((int)*(char *)(temp_v4 + temp_v3 + 0x90f0));
-        temp_v2 = FUN_0029ebac(temp_v0,1);
+        temp_v2 = flagWordTestBit(temp_v0,1);
         if (temp_v2 == 0) {
           puVar1[0x47] = puVar1[0x47] + 1;
         }

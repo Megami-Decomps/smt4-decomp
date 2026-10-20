@@ -1,24 +1,21 @@
-#include "romwright_types.h"
+#include "shard/HeapObject.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_004215ac; /* 0x4215ac */
+extern u8 DAT_004215ac;
 
-
-unsigned int * FUN_0013ec9c(int *param_1,unsigned int param_2)
-
+/* Allocates and initializes a 16-byte object from `heap`; returns it, or NULL if the allocation failed. */
+HeapObject *FUN_0013ec9c(Heap *heap, u32 value)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_1 + 8))(param_1,0x10,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    puVar1[1] = (unsigned int)param_1;
-    *(unsigned char *)(puVar1 + 2) = 0;
-    *puVar1 = (unsigned int)&DAT_004215ac;
-    puVar1[3] = param_2;
-  }
-  return puVar1;
+    HeapObject *obj = (HeapObject *)heap->vtbl->alloc(heap, sizeof(HeapObject), 4);
+
+    if (obj != NULL) {
+        obj->heap = heap;
+        obj->flag = 0;
+        obj->vtbl = &DAT_004215ac;
+        obj->value = value;
+    }
+    return obj;
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 
-extern int FUN_004ec93c(unsigned int);
+extern int hasFlag80Or1000(unsigned int);
 extern int btlUnitGet(unsigned int);
 
 
@@ -18,7 +18,7 @@ unsigned int FUN_003e8430(void)
   
   temp_v0 = btlUnitGet(g_btlScriptUnit);
   temp_v1 = 0;
-  if ((temp_v0 != 0) && (temp_v0 = FUN_004ec93c(g_btlScriptUnit), temp_v1 = 0, temp_v0 != 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = hasFlag80Or1000(g_btlScriptUnit), temp_v1 = 0, temp_v0 != 0)) {
     temp_v1 = 1;
   }
   return temp_v1;

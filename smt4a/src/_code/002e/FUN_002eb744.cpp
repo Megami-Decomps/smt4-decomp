@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_002eb690(int **, int *);
+extern int wordRefsDiffer_002eb690(int **, int *);
 
 
 unsigned long long FUN_002eb744(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4)
@@ -34,7 +34,7 @@ unsigned long long FUN_002eb744(int *param_1,unsigned int param_2,unsigned int p
   temp_v4 = param_4;
   while( 1 ) {
     temp_v3 = param_1[4];
-    temp_v0 = FUN_002eb690(&temp_v2,&temp_v3);
+    temp_v0 = wordRefsDiffer_002eb690(&temp_v2,&temp_v3);
     if (temp_v0 == 0) break;
     temp_v1 = temp_v2;
     (**(romwright_code **)(*param_1 + 0x14))(&temp_v4,param_1,&temp_v1);

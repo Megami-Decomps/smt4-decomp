@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdLoadFileAsync(unsigned char [68], int, unsigned int, unsigned char *, int *, int);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 int FUN_002bf694(unsigned char [68], int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern unsigned char LAB_002a6250; /* 0x2a6250 */
 extern unsigned char LAB_002a6258; /* 0x2a6258 */
 
 /* Supplied declaration required: asdLoadFileAsync. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 extern int *asdTMTexTableCallFileB(void);
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002c30c4(unsigned int);
@@ -44,16 +44,16 @@ int * FUN_0023e3ec(void)
   FUN_002bf694(temp_v3,*piVar1 + 0xc);
   pcVar3 = *(char **)(temp_v2 + 8);
   if (*pcVar3 != '-') {
-    FUN_002b64a0(temp_v3);
+    libc_strcat(temp_v3);
   }
   else {
-    FUN_002b64a0(temp_v3,*(unsigned int *)(piVar1[pcVar3[1] * -8 + 0x181] + 8));
+    libc_strcat(temp_v3,*(unsigned int *)(piVar1[pcVar3[1] * -8 + 0x181] + 8));
   }
   if (*(char *)(piVar1[1] + 0xd) != '\0') {
-    FUN_002b64a0(temp_v3,&LAB_002a6250);
+    libc_strcat(temp_v3,&LAB_002a6250);
   }
   else {
-    FUN_002b64a0(temp_v3,&LAB_002a6258);
+    libc_strcat(temp_v3,&LAB_002a6258);
   }
   temp_v2 = FUN_002c30c4(*(unsigned int *)(temp_v2 + 8));
   if (temp_v2 == 0) {

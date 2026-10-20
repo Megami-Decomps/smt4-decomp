@@ -1,4 +1,4 @@
-/* NON_MATCHING: the loop is inverted (test duplicated before the body); retail enters it with an unconditional branch to the bottom test. */
+/* Matches with -Ospace (requested): the container code was built for size. */
 #include "common.h"
 
 extern "C" {

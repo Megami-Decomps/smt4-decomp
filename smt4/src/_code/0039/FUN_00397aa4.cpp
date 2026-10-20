@@ -1,54 +1,46 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_002917b8(void);
-int scrScriptProcessDestroy(unsigned int);
-int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
+int scrScriptProcessDestroy(u32 process);
+int asdTMTexTableFreeEntry(int table);
+int FUN_002ae898(int table, int index);
 int FUN_002b8cc8(void);
 int FUN_002bff50(void);
-int asdMemFree(unsigned int);
-int FUN_002c424c(int, int, unsigned int);
+int asdMemFree(u32 ptr);
+int FUN_002c424c(void *dst, int size, u32 value);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x64C];
+    /* 0x64C */ u32 bufferB;
+    /* 0x650 */ u32 bufferA;
+    /* 0x654 */ u32 script;
+    /* 0x658 */ u8 unk658[0x1C8];
+    /* 0x820 */ u8 table[0x11E];
+    /* 0x93E */ s16 count;
+} Obj;
 
-/* Supplied declaration required: FUN_002917b8. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: FUN_002bff50. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c424c. */
-
-
-void FUN_00397aa4(int param_1)
-
+void FUN_00397aa4(Obj *obj)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_002917b8();
-  if (0 < *(short *)(param_1 + 0x93e)) {
-    temp_v0 = 0;
-    do {
-      FUN_002b8cc8();
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(short *)(param_1 + 0x93e));
-    FUN_002c424c(param_1 + 0x820,0x11e,0xffffffff);
-    *(unsigned short *)(param_1 + 0x93e) = 0;
-  }
-  FUN_002ae898(0x2e,0);
-  asdTMTexTableFreeEntry(0x2e);
-  scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0x654));
-  asdMemFree(*(unsigned int *)(param_1 + 0x650));
-  asdMemFree(*(unsigned int *)(param_1 + 0x64c));
-  FUN_002bff50();
-  return;
+    int i;
+
+    FUN_002917b8();
+    if (0 < obj->count) {
+        i = 0;
+        do {
+            FUN_002b8cc8();
+            i = i + 1;
+        } while (i < obj->count);
+        FUN_002c424c(obj->table, 0x11e, 0xffffffff);
+        obj->count = 0;
+    }
+    FUN_002ae898(0x2e, 0);
+    asdTMTexTableFreeEntry(0x2e);
+    scrScriptProcessDestroy(obj->script);
+    asdMemFree(obj->bufferA);
+    asdMemFree(obj->bufferB);
+    FUN_002bff50();
 }
 
 } /* extern "C" */

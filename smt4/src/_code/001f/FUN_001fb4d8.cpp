@@ -1,16 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fb4d8` (_code @ 0x1fb4d8, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_00448c20; /* 0x448c20 */
+typedef struct Obj001fb4d8 {
+    /* 0x00 */ u8 unk00[9];
+    /* 0x09 */ s8 value;
+} Obj001fb4d8;
 
+extern Obj001fb4d8 *DAT_00448c20;
 
-int FUN_001fb4d8(void)
-
+/* Returns the signed byte at +9 of the object DAT_00448c20 points to. */
+s8 FUN_001fb4d8(void)
 {
-  return (int)*(char *)(DAT_00448c20 + 9);
+    return DAT_00448c20->value;
 }
 
 } /* extern "C" */

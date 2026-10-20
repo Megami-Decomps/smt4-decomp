@@ -1,23 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030f34c` (_code @ 0x30f34c, 0x12 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0012cf3c(unsigned int *);
+extern u8 DAT_0055b05c; /* vtable */
 
-extern unsigned char DAT_0055b05c; /* 0x55b05c */
+extern void FUN_0012cf3c(u32 *object);
 
-/* Supplied declaration required: FUN_0012cf3c. */
-
-
-unsigned int * FUN_0030f34c(unsigned int *param_1)
-
+/* Constructor: sets the vtable and runs the base constructor. */
+u32 *FUN_0030f34c(u32 *object)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_0055b05c;
-  FUN_0012cf3c(param_1);
-  return param_1;
+    *object = (u32)&DAT_0055b05c;
+    FUN_0012cf3c(object);
+    return object;
 }
 
 } /* extern "C" */

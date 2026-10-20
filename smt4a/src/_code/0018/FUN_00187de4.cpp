@@ -1,21 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(void);
+void asdMemFree(void *memory);
 
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_00187de4(int *param_1)
-
+/* Frees the buffer held in `*slot` (if any) and clears the slot. */
+void FUN_00187de4(void **slot)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != 0) {
-    asdMemFree();
-    *param_1 = 0;
-  }
-  return;
+    if (*slot != NULL) {
+        asdMemFree(*slot);
+        *slot = NULL;
+    }
 }
 
 } /* extern "C" */

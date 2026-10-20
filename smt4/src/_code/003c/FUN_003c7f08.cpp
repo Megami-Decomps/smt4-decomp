@@ -1,23 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c7f08` (_code @ 0x3c7f08, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Hands the unit's signed halfword at +0x8c to FUN_00263630 if it is not negative. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00263630(int, int);
+struct Obj003c7f08 {
+    /* 0x00 */ u8 unk00[0x8c];
+    /* 0x8c */ s16 index;
+};
 
-/* Supplied declaration required: FUN_00263630. */
+void FUN_00263630(s32 index, u32 flag);
 
-
-void FUN_003c7f08(int param_1)
-
+void FUN_003c7f08(Obj003c7f08 *o)
 {
-/* irregular: 1 native warning(s); review required */
-  if (-1 < *(short *)(param_1 + 0x8c)) {
-    FUN_00263630((int)*(short *)(param_1 + 0x8c),0);
-    return;
-  }
-  return;
+    if (o->index >= 0) {
+        FUN_00263630(o->index, 0);
+    }
 }
 
-} /* extern "C" */
+}

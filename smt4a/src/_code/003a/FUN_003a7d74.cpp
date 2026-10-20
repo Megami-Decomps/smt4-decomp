@@ -17,7 +17,7 @@ int FUN_003180c4(...);
 int FUN_0034a240(int);
 int FUN_0035dd74(void);
 int FUN_003b7348(...);
-int FUN_003c3f74(void);
+int dataTable5Type9Count(void);
 int FUN_004da858(...);
 int FUN_004db450(int, int *);
 
@@ -42,7 +42,7 @@ extern int FUN_00330bb4(unsigned short);
 /* Supplied declaration required: FUN_0034a240. */
 /* Supplied declaration required: FUN_0035dd74. */
 /* Supplied declaration required: FUN_003b7348. */
-/* Supplied declaration required: FUN_003c3f74. */
+/* Supplied declaration required: dataTable5Type9Count. */
 /* Supplied declaration required: FUN_003fd63c. */
 /* Supplied declaration required: FUN_004da858. */
 extern int FUN_004db07c(int, unsigned short, unsigned int *);
@@ -226,7 +226,7 @@ unsigned int FUN_003a7d74(void)
   temp_v3 = 0;
   temp_v4 = FUN_0018719c(0x52b);
   if (temp_v4 != 0) {
-    FUN_003c3f74();
+    dataTable5Type9Count();
     if (temp_v4 != 0) {
       unaff_r11 = 0x45a;
     }

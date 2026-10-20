@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0031076a(int);
+void ownedPtrReset(u8 *member);
 
-/* Supplied declaration required: FUN_0031076a. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 member04[1];
+} Holder;
 
-
-int FUN_002fb008(int param_1)
-
+/* Runs ownedPtrReset on the member at 4 and returns the object. */
+Holder *FUN_002fb008(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0031076a(param_1 + 4);
-  return param_1;
+    ownedPtrReset(object->member04);
+    return object;
 }
 
 } /* extern "C" */

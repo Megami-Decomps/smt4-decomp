@@ -1,20 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+/* Intrusive list: each object holds an ObjectLink at `nodeOffset`. */
+typedef struct ObjectLink {
+    /* 0x0 */ void *prev;
+    /* 0x4 */ void *next;
+} ObjectLink;
 
-unsigned int nn_fnd_detail_GetNextListObject(unsigned int *param_1,int param_2)
+typedef struct ObjectList {
+    /* 0x0 */ void *head;
+    /* 0x4 */ void *tail;
+    /* 0x8 */ u16 count;
+    /* 0xA */ u16 nodeOffset;
+} ObjectList;
 
+/* Returns the list head when `object` is NULL, otherwise the object after it. */
+void *nn_fnd_detail_GetNextListObject(ObjectList *list, u8 *object)
 {
-  unsigned int temp_v0;
-  
-  if (param_2 == 0) {
-    temp_v0 = *param_1;
-  }
-  else {
-    temp_v0 = *(unsigned int *)((unsigned int)*(unsigned short *)((int)param_1 + 10) + param_2 + 4);
-  }
-  return temp_v0;
+    void *next;
+
+    if (object == NULL) {
+        next = list->head;
+    } else {
+        next = ((ObjectLink *)(object + list->nodeOffset))->next;
+    }
+    return next;
 }
 
 } /* extern "C" */

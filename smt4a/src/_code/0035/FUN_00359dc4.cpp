@@ -12,10 +12,10 @@ int FUN_002e1c94(int, int, unsigned int);
 int FUN_002e207c(void);
 int FUN_002e2114(void);
 int FUN_002e2184(unsigned int, unsigned int);
-int FUN_003192e0(void);
-int FUN_00344c6c(void);
+int overlayGetStatusScene(void);
+int overlayIsNotBusy(void);
 int FUN_0035a0bc(unsigned int, int);
-int FUN_0037b578(unsigned int, int);
+int screenStartOrClear(unsigned int, int);
 int FUN_003a4980(unsigned int, unsigned int, unsigned int);
 int FUN_003a7a88(int, int);
 int FUN_003e5810(unsigned int, int);
@@ -30,12 +30,12 @@ extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_002e207c. */
 /* Supplied declaration required: FUN_002e2114. */
 /* Supplied declaration required: FUN_002e2184. */
-/* Supplied declaration required: FUN_003192e0. */
+/* Supplied declaration required: overlayGetStatusScene. */
 extern int FUN_0032cfc8(void);
-extern unsigned int FUN_0032e478(void);
-/* Supplied declaration required: FUN_00344c6c. */
+extern unsigned int overlayGetBuffer1(void);
+/* Supplied declaration required: overlayIsNotBusy. */
 /* Supplied declaration required: FUN_0035a0bc. */
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_003a4980. */
 /* Supplied declaration required: FUN_003a7a88. */
 /* Supplied declaration required: FUN_003e5810. */
@@ -57,16 +57,16 @@ void FUN_00359dc4(int param_1)
      ((temp_v0 = (int)*(short *)(*(int *)(param_1 + 0xc) + 0x90), temp_v0 == 0 ||
       (FUN_003a7a88(temp_v0,1), temp_v0 != 0)))) {
     if (*(char *)(param_1 + 0x194) == '\0') {
-      temp_v0 = FUN_003192e0();
+      temp_v0 = overlayGetStatusScene();
       FUN_003e5810(*(unsigned int *)(temp_v0 + 0x1c),0);
-      temp_v0 = FUN_003192e0();
+      temp_v0 = overlayGetStatusScene();
       FUN_003e5810(*(unsigned int *)(temp_v0 + 0x1c),1);
-      temp_v0 = FUN_003192e0();
+      temp_v0 = overlayGetStatusScene();
       FUN_003e5810(*(unsigned int *)(temp_v0 + 0x1c),2);
       temp_v1 = FUN_001801a4();
-      temp_v2 = FUN_003192e0();
+      temp_v2 = overlayGetStatusScene();
       FUN_002e2184(temp_v2,temp_v1);
-      FUN_003192e0();
+      overlayGetStatusScene();
       FUN_002e207c();
       *(unsigned char *)(param_1 + 0x194) = 1;
     }
@@ -99,8 +99,8 @@ void FUN_00359dc4(int param_1)
                        *(unsigned int *)(param_1 + 0x58));
           temp_v0 = FUN_0032cfc8();
           if (temp_v0 == 0) {
-            temp_v1 = FUN_0032e478();
-            FUN_0037b578(temp_v1,0xf);
+            temp_v1 = overlayGetBuffer1();
+            screenStartOrClear(temp_v1,0xf);
           }
           if (*(char *)(param_1 + 0x113) != '\0') {
             sysPlaySe(0xe4);
@@ -118,7 +118,7 @@ void FUN_00359dc4(int param_1)
             temp_v0 = temp_v0 + 1;
             *(int *)(temp_v3 + 0x1c) = *(int *)(temp_v3 + 0x1c) + 1;
           } while (temp_v0 < 2);
-          FUN_00344c6c();
+          overlayIsNotBusy();
           return;
         }
       }

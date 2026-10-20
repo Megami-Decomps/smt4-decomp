@@ -29,13 +29,13 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern int FUN_00483d00(...); /* 0x483d00 */
+extern int jobAt26CWaitDone(...); /* 0x483d00 */
 extern int FUN_00483d34(...); /* 0x483d34 */
 extern int FUN_00484378(...); /* 0x484378 */
 extern unsigned char LAB_0048502c; /* 0x48502c */
 extern unsigned char LAB_0048503c; /* 0x48503c */
-extern int FUN_004850c4(...); /* 0x4850c4 */
-extern int FUN_004850e4(...); /* 0x4850e4 */
+extern int stateSetterStart9(...); /* 0x4850c4 */
+extern int rect48Init(...); /* 0x4850e4 */
 extern int FUN_004852a0(...); /* 0x4852a0 */
 extern int FUN_00485308(...); /* 0x485308 */
 extern int FUN_0048550c(...); /* 0x48550c */
@@ -59,7 +59,7 @@ extern unsigned int *FUN_00261828(void);
 /* Supplied declaration required: FUN_00275bc8. */
 extern unsigned int *FUN_002840ac(void);
 /* Supplied declaration required: FUN_00342010. */
-extern unsigned int *FUN_003fd528(void);
+extern unsigned int *gameBlockGetArea221AA(void);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -70,7 +70,7 @@ void FUN_00484cb0(unsigned char *param_1,unsigned char param_2)
   unsigned int *puVar1;
   unsigned char *puVar2;
   
-  *(romwright_code **)(param_1 + 0xd4) = FUN_004850e4;
+  *(romwright_code **)(param_1 + 0xd4) = rect48Init;
   *(unsigned int *)(param_1 + 0xd8) = 0;
   *(romwright_code **)(param_1 + 0xdc) = FUN_004852a0;
   *(unsigned int *)(param_1 + 0xe0) = 0;
@@ -82,11 +82,11 @@ void FUN_00484cb0(unsigned char *param_1,unsigned char param_2)
   *(unsigned int *)(param_1 + 0xf8) = 0;
   *(romwright_code **)(param_1 + 0xfc) = FUN_00485308;
   *(unsigned int *)(param_1 + 0x100) = 0;
-  *(romwright_code **)(param_1 + 0x104) = FUN_00483d00;
+  *(romwright_code **)(param_1 + 0x104) = jobAt26CWaitDone;
   *(unsigned int *)(param_1 + 0x108) = 0;
   *(romwright_code **)(param_1 + 0x10c) = FUN_0048550c;
   *(unsigned int *)(param_1 + 0x110) = 0;
-  *(romwright_code **)(param_1 + 0x114) = FUN_004850c4;
+  *(romwright_code **)(param_1 + 0x114) = stateSetterStart9;
   *(unsigned int *)(param_1 + 0x118) = 0;
   *(unsigned int *)(param_1 + 0x11c) = 0x485ab8;
   *(unsigned int *)(param_1 + 0x120) = 0;
@@ -129,7 +129,7 @@ void FUN_00484cb0(unsigned char *param_1,unsigned char param_2)
     *(unsigned short *)(param_1 + 0xc0) = *(unsigned short *)(puVar1 + 4);
   }
   if (param_1[0x261] == '\x02') {
-    puVar1 = (unsigned int *)FUN_003fd528();
+    puVar1 = (unsigned int *)gameBlockGetArea221AA();
     *(unsigned int *)(param_1 + 0xb0) = *puVar1;
     *(unsigned int *)(param_1 + 0xb4) = puVar1[1];
     *(unsigned int *)(param_1 + 0xb8) = puVar1[2];

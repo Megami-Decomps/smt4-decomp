@@ -19,7 +19,7 @@ typedef struct Object {
 extern u32 DAT_00464b7c;
 extern u32 DAT_00464b84;
 
-extern void FUN_002abb24(u32 a, u32 b);
+extern void sceneTraverserVisit(u32 a, u32 b);
 extern void asdMemFree(Object *obj);
 extern void FUN_002d5604(void *resource);
 
@@ -31,7 +31,7 @@ void FUN_001f65bc(Object *obj)
         FUN_002d5604(obj->resource);
     }
     asdMemFree(obj);
-    FUN_002abb24(DAT_00464b7c, DAT_00464b84);
+    sceneTraverserVisit(DAT_00464b7c, DAT_00464b84);
 }
 
 }

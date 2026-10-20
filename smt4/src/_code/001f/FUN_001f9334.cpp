@@ -44,7 +44,7 @@ extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287aec. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002c09d0. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern int FUN_002c2950(void);
 /* Supplied declaration required: FUN_002f3c28. */
 
@@ -262,11 +262,11 @@ LAB_001f9924:
                       else if ((temp_v12) && (pcVar9[10] != '\x03')) {
                         *(unsigned int *)(temp_v7 + 0xb8) = 2;
                         *(unsigned int *)(temp_v7 + 0xbc) = 0;
-                        temp_v6 = FUN_002c09f4(100);
+                        temp_v6 = randNextInRange(100);
                         *(int *)(temp_v7 + 0xc0) = temp_v6 + 0x1e;
                         *(unsigned int *)(temp_v7 + 0xc4) = 0;
                         *(unsigned int *)(temp_v7 + 0x1a0) = 0;
-                        temp_v6 = FUN_002c09f4(0x96);
+                        temp_v6 = randNextInRange(0x96);
                         *(int *)(temp_v7 + 0xd8) = temp_v6 + 1;
                         *(unsigned char *)(temp_v7 + 0x170) = 0;
                         *(unsigned char *)(temp_v7 + 0x171) = 0;
@@ -399,11 +399,11 @@ LAB_001f9924:
                 if ((temp_v6 < 0x43480000) && (pcVar9[10] != '\x03')) {
                   *(unsigned int *)(temp_v7 + 0xb8) = 2;
                   *(unsigned int *)(temp_v7 + 0xbc) = 0;
-                  temp_v6 = FUN_002c09f4(100);
+                  temp_v6 = randNextInRange(100);
                   *(int *)(temp_v7 + 0xc0) = temp_v6 + 0x1e;
                   *(unsigned int *)(temp_v7 + 0xc4) = 0;
                   *(unsigned int *)(temp_v7 + 0x1a0) = 0;
-                  temp_v6 = FUN_002c09f4(0x96);
+                  temp_v6 = randNextInRange(0x96);
                   *(int *)(temp_v7 + 0xd8) = temp_v6 + 1;
                   *(unsigned char *)(temp_v7 + 0x170) = 0;
                   *(unsigned char *)(temp_v7 + 0x171) = 0;

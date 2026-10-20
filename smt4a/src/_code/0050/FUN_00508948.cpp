@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00460378(int, unsigned int, int, int, int, unsigned char *, int);
-int FUN_00460b34(void);
+int range18Set(void);
 int FUN_00460d1c(int, int);
 
 /* stack frame of param_7: 2 slot(s), 8 byte(s) */
@@ -18,7 +18,7 @@ extern unsigned char LAB_00460e6c; /* 0x460e6c */
 
 extern int FUN_00460108(int, unsigned int);
 /* Supplied declaration required: FUN_00460378. */
-/* Supplied declaration required: FUN_00460b34. */
+/* Supplied declaration required: range18Set. */
 /* Supplied declaration required: FUN_00460d1c. */
 
 
@@ -66,7 +66,7 @@ int FUN_00508948(int param_1,int param_2,unsigned int param_3,unsigned int param
     else {
       FUN_00460d1c(temp_v0,temp_v1);
       if ((temp_v0 != 0 && param_5 != 0) && param_6 != 0) {
-        FUN_00460b34();
+        range18Set();
       }
     }
   }

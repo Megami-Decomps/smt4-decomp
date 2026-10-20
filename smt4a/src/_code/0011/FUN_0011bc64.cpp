@@ -11,8 +11,8 @@ int FUN_002e9318(unsigned char [12]);
 int FUN_002f5020(int, unsigned char *, int, int);
 int FUN_002f5928(...);
 int FUN_002f9e68(int, int);
-int FUN_003116c8(int *, int, unsigned int);
-int FUN_003116d6(int *, int, unsigned int *);
+int keyValueCopyConstruct(int *, int, unsigned int);
+int word3CopyConstruct(int *, int, unsigned int *);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern int DAT_00594a5c; /* 0x594a5c */
 
 extern int FUN_0012272c(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00133ab8. */
-extern int *FUN_002e4e86(int *, unsigned int *);
+extern int *wordRefMax(int *, unsigned int *);
 /* Supplied declaration required: rt_malloc. */
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002e9300. */
@@ -41,10 +41,10 @@ extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_002f5928. */
 /* Supplied declaration required: FUN_002f9e68. */
-extern unsigned int FUN_00311520(unsigned int, int *);
-extern unsigned int FUN_00311532(unsigned int, int *);
-/* Supplied declaration required: FUN_003116c8. */
-/* Supplied declaration required: FUN_003116d6. */
+extern unsigned int bufGrowCapacity4(unsigned int, int *);
+extern unsigned int bufGrowCapacity5(unsigned int, int *);
+/* Supplied declaration required: keyValueCopyConstruct. */
+/* Supplied declaration required: word3CopyConstruct. */
 extern unsigned int FUN_00311700(int, unsigned char *, unsigned int);
 
 
@@ -81,14 +81,14 @@ int FUN_0011bc64(unsigned int *param_1)
   *(unsigned int *)(temp_v0 + 0x3c) = 0;
   *(unsigned int *)(temp_v0 + 0x40) = 0;
   temp_v11 = 0;
-  temp_v12[0] = FUN_00311532(0,piVar6);
-  piVar2 = (int *)FUN_002e4e86(&temp_v11,temp_v12);
+  temp_v12[0] = bufGrowCapacity5(0,piVar6);
+  piVar2 = (int *)wordRefMax(&temp_v11,temp_v12);
   temp_v4 = *piVar2;
   temp_v1 = rt_malloc(temp_v4 * 0xc);
   *piVar6 = temp_v1;
   temp_v8 = &temp_v6;
   for (temp_v2 = temp_v11; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-    FUN_003116d6(piVar6,temp_v1,temp_v8);
+    word3CopyConstruct(piVar6,temp_v1,temp_v8);
     temp_v1 = temp_v1 + 0xc;
   }
   *(int *)(temp_v0 + 0x40) = *piVar6 + temp_v4 * 0xc;
@@ -102,14 +102,14 @@ int FUN_0011bc64(unsigned int *param_1)
   *(unsigned int *)(temp_v0 + 0x14) = 0;
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   temp_v10 = 0;
-  temp_v12[0] = FUN_00311520(0,piVar6);
-  piVar2 = (int *)FUN_002e4e86(&temp_v10,temp_v12);
+  temp_v12[0] = bufGrowCapacity4(0,piVar6);
+  piVar2 = (int *)wordRefMax(&temp_v10,temp_v12);
   temp_v1 = *piVar2;
   temp_v4 = rt_malloc();
   *piVar6 = temp_v4;
   temp_v6 = (unsigned int)temp_v7;
   for (temp_v2 = temp_v10; temp_v2 != 0; temp_v2 = temp_v2 - 1) {
-    FUN_003116c8(piVar6,temp_v4,temp_v6);
+    keyValueCopyConstruct(piVar6,temp_v4,temp_v6);
     temp_v4 = temp_v4 + 8;
   }
   *(int *)(temp_v0 + 0x18) = *piVar6 + temp_v1 * 8;

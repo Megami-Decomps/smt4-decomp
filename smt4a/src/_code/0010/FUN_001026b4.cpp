@@ -27,7 +27,7 @@ extern unsigned char DAT_0064c010; /* 0x64c010 */
 /* Supplied declaration required: FUN_002e32a4. */
 /* Supplied declaration required: FUN_002e40ec. */
 /* Supplied declaration required: FUN_002e410c. */
-extern unsigned int *FUN_002e4e86(unsigned int *, unsigned int *);
+extern unsigned int *wordRefMax(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e5780. */
 /* Supplied declaration required: FUN_002e5f10. */
 
@@ -96,7 +96,7 @@ int FUN_001026b4(unsigned int *param_1,unsigned int param_2,unsigned int param_3
         temp_v6 = temp_v2 + 0x80;
       }
       temp_v7 = temp_v5;
-      puVar2 = (unsigned int *)FUN_002e4e86(&temp_v6,&temp_v7);
+      puVar2 = (unsigned int *)wordRefMax(&temp_v6,&temp_v7);
       puVar3 = param_1;
       FUN_002e410c(param_1,*puVar2,temp_v5);
       if (param_2 != 0) {

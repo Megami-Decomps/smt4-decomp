@@ -26,7 +26,7 @@ typedef struct {
 extern int FUN_002e6e5c(unsigned char *);
 extern unsigned int FUN_002ea714(void);
 /* Supplied declaration required: FUN_002ea734. */
-extern int FUN_002ea764(int *, int *);
+extern int wordRefsDiffer_002ea764(int *, int *);
 /* Supplied declaration required: FUN_002eab08. */
 extern unsigned long long FUN_002eab1c(unsigned char *, int *);
 /* Supplied declaration required: FUN_002eab2a. */
@@ -74,7 +74,7 @@ int FUN_00104952(int *param_1)
       temp_v9 = *(int *)(param_1[0x19] + 8);
       while( 1 ) {
         temp_v7 = param_1[0x19];
-        temp_v1 = FUN_002ea764(&temp_v9,&temp_v7);
+        temp_v1 = wordRefsDiffer_002ea764(&temp_v9,&temp_v7);
         if (temp_v1 == 0) break;
         FUN_002eab2a(*(unsigned int *)(temp_v9 + 0x34));
         FUN_002ea734(&temp_v9);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_00357a90(void);
+int sub68OwnerCall3(void);
 int FUN_00379be8(void);
 int FUN_003b61ec(void);
 int FUN_003c5848(void);
@@ -15,7 +15,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_0018719c(unsigned int);
 extern int scrGetArg(void);
-/* Supplied declaration required: FUN_00357a90. */
+/* Supplied declaration required: sub68OwnerCall3. */
 /* Supplied declaration required: FUN_00379be8. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_003c5848. */
@@ -45,7 +45,7 @@ unsigned int FUN_0038ae5c(void)
     else {
       FUN_003b61ec();
     }
-    FUN_00357a90();
+    sub68OwnerCall3();
   }
   return 1;
 }

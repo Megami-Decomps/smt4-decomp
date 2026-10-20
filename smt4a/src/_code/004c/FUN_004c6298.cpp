@@ -14,11 +14,11 @@ extern unsigned int uRam005714c4; /* 0x5714c4 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int btlGetMainState(void);
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_003fd63c. */
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 unsigned int FUN_004c6298(void)
@@ -45,7 +45,7 @@ unsigned int FUN_004c6298(void)
       do {
         if (-1 < *(char *)(temp_v1 + temp_v7 + 0x1c88)) {
           temp_v2 = FUN_001ab854();
-          temp_v3 = FUN_004bd340(temp_v2,10);
+          temp_v3 = bitsAt60Test(temp_v2,10);
           if (temp_v3 != 0) {
             temp_v0 = *(unsigned char *)(temp_v2 + 0x12a);
             if (temp_v0 < 2) {
@@ -65,7 +65,7 @@ unsigned int FUN_004c6298(void)
                 (*(unsigned int *)(temp_v4 + 0x45a8) & uRam005714c0) != 0) {
               temp_v3 = 100;
             }
-            temp_v5 = FUN_001633a0(99);
+            temp_v5 = lcgRandomRange(99);
             temp_v9 = SBORROW4(temp_v5,temp_v3);
             temp_v4 = temp_v5 - temp_v3;
             if (temp_v5 < temp_v3) {

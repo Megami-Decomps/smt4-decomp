@@ -17,8 +17,8 @@ int FUN_003847d4(...);
 int FUN_003b5064(void);
 int FUN_003c91e8(void);
 int FUN_003d2d6c(...);
-int FUN_00406204(...);
-int FUN_00483b30(...);
+int objectVectorClear(...);
+int twoObjectsRelease(...);
 int func_0x003d2d9c(void);
 int func_0x003de0dc(void);
 
@@ -56,11 +56,11 @@ int FUN_00338bf0(...);
 int FUN_0033f9f4(void);
 int FUN_00398024(void);
 int FUN_003a2278(...);
-int FUN_0047df1c(...);
-int FUN_0047df7c(...);
-int FUN_0047e32c(...);
+int scriptHolderFree1(...);
+int scriptHolderBReset(...);
+int scriptHolderFree2(...);
 int FUN_0047e38c(...);
-int FUN_0047e3e4(...);
+int scriptHolderFree3(...);
 int FUN_0047e430(...);
 int FUN_00483acc(...);
 int func_0x00245d78(...);
@@ -76,12 +76,12 @@ int FUN_002c2610(void);
 int FUN_002c3398(...);
 int FUN_00312aa0(void);
 int FUN_003254a0(void);
-int FUN_0033099c(void);
+int objectE0ResetFlags1040(void);
 int FUN_0033a988(void);
 int FUN_00341fa4(...);
-int FUN_00357a90(void);
-int FUN_00357ad8(void);
-int FUN_00368390(void);
+int sub68OwnerCall3(void);
+int sub68OwnerCall4(void);
+int clearFlags310To31F(void);
 int FUN_00379be8(void);
 int FUN_0037b3fc(...);
 int FUN_0039933c(void);
@@ -164,7 +164,7 @@ int FUN_00399290(...);
 int FUN_003d502c(...);
 int FUN_0048389c(...);
 int FUN_004839b4(...);
-int FUN_00483abc(...);
+int stateSetterSetFromBase(...);
 int func_0x00352dd4(...);
 int rt_memcpy_w(...);
 
@@ -213,7 +213,7 @@ int FUN_003b5050(void);
 int FUN_003b5714(...);
 int FUN_003de898(int);
 int FUN_003fd63c(...);
-int FUN_00409d8c(int, int);
+int countersAddSaturating(int, int);
 int FUN_0040ae70(...);
 int FUN_0040b0f8(...);
 int FUN_004bb904(int);
@@ -393,7 +393,7 @@ extern int FUN_0014af84(void);
 /* Supplied declaration required: FUN_0014bef4. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0015f858. */
 extern int FUN_00162858(void);
 extern int FUN_00162e8c(void);
@@ -502,10 +502,10 @@ extern int FUN_0031d230(void);
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_003254a0. */
 /* Supplied declaration required: FUN_00328794. */
-/* Supplied declaration required: FUN_0033099c. */
+/* Supplied declaration required: objectE0ResetFlags1040. */
 /* Supplied declaration required: FUN_00338bf0. */
 /* Supplied declaration required: FUN_0033a988. */
-extern int FUN_0033aae4(unsigned int);
+extern int gameFlagsGet(unsigned int);
 extern int FUN_0033bfac(void);
 extern int FUN_0033ded8(void);
 /* Supplied declaration required: FUN_0033e014. */
@@ -516,8 +516,8 @@ extern int FUN_0033ded8(void);
 /* Supplied declaration required: FUN_00352d30. */
 extern int FUN_00356380(void);
 /* Supplied declaration required: FUN_00356674. */
-/* Supplied declaration required: FUN_00357a90. */
-/* Supplied declaration required: FUN_00357ad8. */
+/* Supplied declaration required: sub68OwnerCall3. */
+/* Supplied declaration required: sub68OwnerCall4. */
 /* Supplied declaration required: FUN_00357bc8. */
 /* Supplied declaration required: FUN_00358f38. */
 /* Supplied declaration required: FUN_0035c6ac. */
@@ -525,7 +525,7 @@ extern int FUN_00356380(void);
 /* Supplied declaration required: FUN_003644e0. */
 /* Supplied declaration required: FUN_00364740. */
 /* Supplied declaration required: mapIfClose. */
-/* Supplied declaration required: FUN_00368390. */
+/* Supplied declaration required: clearFlags310To31F. */
 /* Supplied declaration required: FUN_003699e4. */
 /* Supplied declaration required: FUN_0036a434. */
 /* Supplied declaration required: FUN_0036aa04. */
@@ -549,7 +549,7 @@ extern char FUN_00386720(void);
 /* Supplied declaration required: FUN_0039933c. */
 /* Supplied declaration required: FUN_003a2278. */
 /* Supplied declaration required: FUN_003a2f54. */
-extern int FUN_003a338c(int);
+extern int dataTable2FType0GetEntry(int);
 /* Supplied declaration required: FUN_003adc58. */
 /* Supplied declaration required: FUN_003adef4. */
 extern int FUN_003ae4d0(unsigned int);
@@ -570,8 +570,8 @@ extern int FUN_003e46f4(unsigned int);
 /* Supplied declaration required: FUN_003fd63c. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_0040619c. */
-/* Supplied declaration required: FUN_00406204. */
-/* Supplied declaration required: FUN_00409d8c. */
+/* Supplied declaration required: objectVectorClear. */
+/* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: FUN_0040aa6c. */
@@ -586,16 +586,16 @@ extern int FUN_004186e0(void);
 /* Supplied declaration required: FUN_00471d00. */
 /* Supplied declaration required: FUN_004731b8. */
 /* Supplied declaration required: FUN_004731d8. */
-extern int FUN_00473244(void);
+extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: FUN_0047db34. */
-/* Supplied declaration required: FUN_0047df1c. */
-/* Supplied declaration required: FUN_0047df7c. */
+/* Supplied declaration required: scriptHolderFree1. */
+/* Supplied declaration required: scriptHolderBReset. */
 extern int FUN_0047dfec(int);
 extern int FUN_0047dff0(int);
 extern int FUN_0047e150(int);
-/* Supplied declaration required: FUN_0047e32c. */
+/* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: FUN_0047e38c. */
-/* Supplied declaration required: FUN_0047e3e4. */
+/* Supplied declaration required: scriptHolderFree3. */
 /* Supplied declaration required: FUN_0047e430. */
 extern int FUN_0047e4e4(int);
 /* Supplied declaration required: FUN_00482c04. */
@@ -603,9 +603,9 @@ extern int FUN_0047e4e4(int);
 /* Supplied declaration required: FUN_00483834. */
 /* Supplied declaration required: FUN_0048389c. */
 /* Supplied declaration required: FUN_004839b4. */
-/* Supplied declaration required: FUN_00483abc. */
+/* Supplied declaration required: stateSetterSetFromBase. */
 /* Supplied declaration required: FUN_00483acc. */
-/* Supplied declaration required: FUN_00483b30. */
+/* Supplied declaration required: twoObjectsRelease. */
 extern int FUN_004a0404(void);
 extern int FUN_004a0f5c(void);
 /* Supplied declaration required: FUN_004bb904. */
@@ -753,7 +753,7 @@ unsigned int FUN_00276264(void)
         }
         FUN_00239b10(1);
         FUN_00215978(0);
-        FUN_00409d8c(3,1);
+        countersAddSaturating(3,1);
         temp_v0 = 1;
         DAT_005f18c0 = 0;
         break;
@@ -1169,7 +1169,7 @@ LAB_00276f5c:
           *(unsigned int *)(temp_v8 + 0xc0) = temp_v22;
           *(unsigned int *)(temp_v8 + 0xc4) = temp_v9;
           DAT_005f1614 = '\x01';
-          FUN_00483abc(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
+          stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
           FUN_0048389c(puVar2 + 0x3d);
           if (g_lmapMainState[0x10] != 100) {
             temp_v10 = puVar2[0x3d] & 0xfffffffe;
@@ -1815,7 +1815,7 @@ LAB_00278b38:
                                     DAT_005f1864 = 0;
                                     DAT_005f187c = 0;
                                     FUN_0020ef68();
-                                    temp_v8 = FUN_0015688c();
+                                    temp_v8 = saveSlotFindSelected();
                                     if (temp_v8 != 0) {
                                       DAT_005f18c8 = (unsigned int)*(unsigned short *)(temp_v8 + 300);
                                       temp_v8 = FUN_001801a4();
@@ -1935,7 +1935,7 @@ LAB_00278b38:
                                 FUN_0020ef68();
                                 return 0;
                               }
-                              temp_v8 = FUN_0033aae4(DAT_005f16d4);
+                              temp_v8 = gameFlagsGet(DAT_005f16d4);
                               if (temp_v8 == 0xff) {
                                 DAT_005f1668 = 0x325f61;
                                 DAT_005f1660 = 0x5f726373;
@@ -2216,7 +2216,7 @@ LAB_00278774:
     }
     if (puVar2[4] == 5) {
       DAT_005f185c = 1;
-      FUN_0033099c();
+      objectE0ResetFlags1040();
       FUN_002c2160(1);
       FUN_00379be8();
     }
@@ -2272,7 +2272,7 @@ LAB_00278774:
     FUN_002c23cc(1);
     DAT_005f161f = 0;
     FUN_0036a434(puVar2);
-    FUN_00357a90();
+    sub68OwnerCall3();
     FUN_003794bc(1);
     puVar19 = g_lmapMainState;
     if (g_lmapMainState[0x10] != 100) {
@@ -2294,7 +2294,7 @@ LAB_00278774:
     FUN_002737a8();
     puVar2[3] = 0x10;
     puVar2[4] = 0;
-    temp_v8 = FUN_0015688c();
+    temp_v8 = saveSlotFindSelected();
     if (temp_v8 != 0) {
       if (DAT_005f18c8 != *(unsigned short *)(temp_v8 + 300)) {
         FUN_00312aa0();
@@ -2376,8 +2376,8 @@ LAB_00279444:
       DAT_005f17aa = 1;
     }
     *(unsigned short *)(temp_v5 + 0x22) = 0;
-    FUN_00368390();
-    FUN_00357ad8();
+    clearFlags310To31F();
+    sub68OwnerCall4();
     if (pcVar11[2] != '\0') {
       DAT_005f17a8 = 1;
     }
@@ -2388,7 +2388,7 @@ LAB_00279444:
     }
     *(unsigned short *)(temp_v5 + 0x1e) = *(unsigned short *)(pcVar11 + 6);
     FUN_00483294(puVar2 + 0x3d);
-    FUN_00483abc(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
+    stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
     func_0x00482fd4(puVar2 + 0x3d);
     FUN_0039933c();
     FUN_002df914();
@@ -2531,7 +2531,7 @@ LAB_00279834:
     if (temp_v8 == 0) {
       return 0;
     }
-    FUN_0047e3e4(g_aocMain + 0xa8);
+    scriptHolderFree3(g_aocMain + 0xa8);
     FUN_0039933c();
     FUN_003adc58();
     DAT_005f1614 = '\0';
@@ -2547,7 +2547,7 @@ LAB_00279834:
     FUN_00387014();
     FUN_0020ef68();
     if (puVar2[4] == 0) {
-      FUN_0047df7c(g_aocMain + 0xa8,1);
+      scriptHolderBReset(g_aocMain + 0xa8,1);
       temp_v5 = puVar2[4] + 1;
       puVar2[4] = temp_v5;
       break;
@@ -2556,9 +2556,9 @@ LAB_00279834:
     if (temp_v8 == 0) {
       return 0;
     }
-    FUN_0047df1c(g_aocMain + 0xa8);
+    scriptHolderFree1(g_aocMain + 0xa8);
     FUN_003adc58();
-    temp_v8 = FUN_00473244();
+    temp_v8 = gameBlockByte27E98Is1To3();
     if (temp_v8 == 0) {
       DAT_005f1614 = 0;
       DAT_005f161c = 0;
@@ -2583,9 +2583,9 @@ LAB_00279834:
       if (temp_v8 == 0) {
         return 0;
       }
-      FUN_0047e32c(g_aocMain + 0xa8);
+      scriptHolderFree2(g_aocMain + 0xa8);
       FUN_003adc58();
-      temp_v8 = FUN_00473244();
+      temp_v8 = gameBlockByte27E98Is1To3();
       if (temp_v8 == 0) {
         DAT_005f1614 = 0;
         DAT_005f161c = 0;
@@ -3093,14 +3093,14 @@ LAB_0027a030:
       return 0;
     }
     FUN_0039933c();
-    FUN_00357ad8();
+    sub68OwnerCall4();
     puVar19 = g_lmapMainState;
     if (g_lmapMainState != (unsigned int *)0x0) {
       FUN_00483acc(g_lmapMainState + 0x3d);
-      FUN_00483abc(puVar19 + 0x3d,puVar19[0x10] - 100,puVar19[0x12]);
+      stateSetterSetFromBase(puVar19 + 0x3d,puVar19[0x10] - 100,puVar19[0x12]);
       FUN_004839b4(puVar19 + 0x3d);
     }
-    FUN_00357a90();
+    sub68OwnerCall3();
     FUN_002df914();
     temp_v8 = 0xd;
     DAT_005f1614 = '\0';
@@ -3239,7 +3239,7 @@ LAB_0027a030:
     }
     temp_v8 = FUN_001b4aa0();
     if (temp_v8 != 4) {
-      FUN_00357a90();
+      sub68OwnerCall3();
     }
     FUN_00215978(0);
     FUN_0039933c();
@@ -3272,14 +3272,14 @@ LAB_0027a030:
       return 0;
     }
     FUN_0039933c();
-    FUN_00357ad8();
+    sub68OwnerCall4();
     puVar19 = g_lmapMainState;
     if (g_lmapMainState != (unsigned int *)0x0) {
       FUN_00483acc(g_lmapMainState + 0x3d);
-      FUN_00483abc(puVar19 + 0x3d,puVar19[0x10] - 100,puVar19[0x12]);
+      stateSetterSetFromBase(puVar19 + 0x3d,puVar19[0x10] - 100,puVar19[0x12]);
       FUN_004839b4(puVar19 + 0x3d);
     }
-    FUN_00357a90();
+    sub68OwnerCall3();
     FUN_002df914();
     temp_v8 = 0xd;
     DAT_005f1614 = '\0';
@@ -3438,7 +3438,7 @@ LAB_0027a030:
       }
     }
     else {
-      temp_v8 = FUN_003a338c((int)*(short *)(temp_v5 + 0x2a));
+      temp_v8 = dataTable2FType0GetEntry((int)*(short *)(temp_v5 + 0x2a));
       temp_v8 = (int)*(short *)(temp_v8 + 8);
       FUN_00376fb8(temp_v8);
     }
@@ -4135,7 +4135,7 @@ LAB_0027a030:
     break;
   case 99:
     FUN_002d8748();
-    FUN_00483abc(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
+    stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
     FUN_0048389c(puVar2 + 0x3d);
     if (g_lmapMainState[0x10] != 100) {
       temp_v10 = puVar2[0x3d] & 0xfffffffe;
@@ -4309,7 +4309,7 @@ LAB_0027ca0c:
     FUN_002a2e98(puVar2[0x10],puVar2[0x12]);
     FUN_002df914();
     FUN_00483acc(puVar2 + 0x3d);
-    FUN_00483abc(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
+    stateSetterSetFromBase(puVar2 + 0x3d,puVar2[0x10] - 100,puVar2[0x12]);
     FUN_004839b4(puVar2 + 0x3d);
     puVar2[3] = puVar2[3] + 1;
     break;
@@ -4428,7 +4428,7 @@ joined_r0x0027ce58:
       }
     }
     FUN_00483acc(puVar2 + 0x3d);
-    FUN_00483b30(puVar2 + 0x3d);
+    twoObjectsRelease(puVar2 + 0x3d);
     temp_v5 = puVar2[0x2f];
     temp_v8 = temp_v19;
     if (temp_v5 != 0) {
@@ -4504,7 +4504,7 @@ joined_r0x0027ce58:
       unaff_r5 = unaff_r5 + 1;
     } while (unaff_r5 < 0x20);
     if (puVar2[0x2b9] != 0) {
-      FUN_00406204(*(unsigned int *)(puVar2[0x2b9] + 8));
+      objectVectorClear(*(unsigned int *)(puVar2[0x2b9] + 8));
       if ((int *)puVar2[0x2b9] != (int *)0x0) {
         (**(romwright_code **)(*(int *)puVar2[0x2b9] + 4))();
         puVar2[0x2b9] = unaff_r7;
@@ -4512,7 +4512,7 @@ joined_r0x0027ce58:
     }
     piVar12 = (int *)(puVar2 + 0x13be);
     if (*piVar12 != 0) {
-      FUN_00406204(*(unsigned int *)(*piVar12 + 8));
+      objectVectorClear(*(unsigned int *)(*piVar12 + 8));
       if ((int *)*piVar12 != (int *)0x0) {
         (**(romwright_code **)(*(int *)*piVar12 + 4))();
         *piVar12 = unaff_r7;

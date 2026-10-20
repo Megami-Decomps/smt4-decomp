@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0013400a(int, int, int *);
 int FUN_001341d4(int, unsigned int);
 int FUN_002e9318(int *);
-int FUN_002ea0e4(int *);
+int constructObj0055affc(int *);
 int FUN_002fbc1a(int, int *);
 int FUN_00306d44(...);
 int FUN_0030d3ba(int, int);
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0013400a. */
 /* Supplied declaration required: FUN_001341d4. */
 /* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 extern int FUN_002ed28c(int, unsigned int *);
 /* Supplied declaration required: FUN_002fbc1a. */
 /* Supplied declaration required: FUN_00306d44. */
@@ -48,7 +48,7 @@ void FUN_00128ee6(int param_1,int param_2,unsigned int param_3,unsigned int para
       if (*(char *)(param_1 + 4) != '\0') {
         return;
       }
-      FUN_002ea0e4(&iStack_20);
+      constructObj0055affc(&iStack_20);
       FUN_002fbc1a(param_1,&iStack_20);
       if (*(char *)(param_1 + 4) != '\0') {
         FUN_00306d44();

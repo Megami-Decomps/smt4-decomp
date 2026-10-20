@@ -1,32 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003d2d34(unsigned int, int, int);
+void FUN_003d2d34(u32 handle, s32 a, s32 b);
+s32 FUN_002009a8(u32 handle);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Inner {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u32 handle;
+} Inner;
 
-extern int FUN_002009a8(unsigned int);
-/* Supplied declaration required: FUN_003d2d34. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Inner *inner;
+} Holder;
 
-
-void FUN_002de960(int param_1)
-
+/* Calls FUN_003d2d34(handle, 0, 0x3C) for the inner object's handle unless FUN_002009a8 reports 1 or 2 for it. */
+void FUN_002de960(Holder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = *(unsigned int *)(*(int *)(param_1 + 8) + 0x34);
-  temp_v0 = FUN_002009a8(temp_v1);
-  if (temp_v0 != 1 && temp_v0 != 2) {
-    FUN_003d2d34(temp_v1,0,0x3c);
-    return;
-  }
-  return;
+    s32 state;
+    u32 handle;
+
+    handle = holder->inner->handle;
+    state = FUN_002009a8(handle);
+    if (state != 1 && state != 2) {
+        FUN_003d2d34(handle, 0, 0x3C);
+        return;
+    }
 }
 
 } /* extern "C" */

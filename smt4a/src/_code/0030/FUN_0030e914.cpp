@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u16 *flags;
+} Holder;
 
-unsigned char FUN_0030e914(int param_1,unsigned short param_2,int param_3)
-
+/* Returns whether any of the bits `mask` selects is set in entry `index` of the 16-bit flag array. */
+u8 FUN_0030e914(Holder *object, u16 mask, s32 index)
 {
-  return (*(unsigned short *)(*(int *)(param_1 + 0x14) + param_3 * 2) & param_2) != 0;
+    return (object->flags[index] & mask) != 0;
 }
 
 } /* extern "C" */

@@ -30,7 +30,7 @@ extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 void FUN_004e980c(int *param_1,int param_2)
@@ -100,8 +100,8 @@ void FUN_004e980c(int *param_1,int param_2)
       if (-1 < *(char *)(temp_v4 + temp_v7 + 0x1c88)) {
         temp_v4 = FUN_001ab888();
         temp_v4 = FUN_001ab854((int)*(char *)(temp_v4 + temp_v7 + 0x1c88));
-        if (((temp_v4 != 0) && (temp_v5 = FUN_004bd340(temp_v4,1), temp_v5 == 0)) &&
-           (temp_v5 = FUN_004bd340(temp_v4,10), temp_v5 == 0)) {
+        if (((temp_v4 != 0) && (temp_v5 = bitsAt60Test(temp_v4,1), temp_v5 == 0)) &&
+           (temp_v5 = bitsAt60Test(temp_v4,10), temp_v5 == 0)) {
           pbVar16 = pbVar5 + temp_v9 * 6;
           *pbVar16 = (unsigned char)temp_v7;
           *(unsigned short *)(pbVar16 + 2) = *(unsigned short *)(temp_v4 + 100);

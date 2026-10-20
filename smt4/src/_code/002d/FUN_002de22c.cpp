@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002495d4(unsigned int, int, unsigned int, int);
-int FUN_0024fc18(unsigned int);
+int effPartsSetData(unsigned int, int, unsigned int, int);
+int effBlockCreateFromBlock(unsigned int);
 int FUN_00250200(void);
 
 extern unsigned char DAT_0044ea80; /* 0x44ea80 */
 
-/* Supplied declaration required: FUN_002495d4. */
-/* Supplied declaration required: FUN_0024fc18. */
+/* Supplied declaration required: effPartsSetData. */
+/* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: FUN_00250200. */
 
 
@@ -22,11 +22,11 @@ unsigned int FUN_002de22c(int param_1)
   unsigned int temp_v0;
   
   if (*(int *)(param_1 + 0xc) != 0) {
-    FUN_002495d4((*(unsigned int *)((unsigned char *)&DAT_0044ea80 + 0x1c)),*(int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 0x10),
+    effPartsSetData((*(unsigned int *)((unsigned char *)&DAT_0044ea80 + 0x1c)),*(int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 0x10),
                  *(unsigned short *)(param_1 + 8));
   }
   temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_0044ea80 + 0x1c));
-  FUN_0024fc18((*(unsigned int *)((unsigned char *)&DAT_0044ea80 + 0x1c)));
+  effBlockCreateFromBlock((*(unsigned int *)((unsigned char *)&DAT_0044ea80 + 0x1c)));
   FUN_00250200();
   return temp_v0;
 }

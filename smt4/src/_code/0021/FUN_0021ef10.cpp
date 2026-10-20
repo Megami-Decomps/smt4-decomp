@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024f5d4(...);
+int dataTable2eSub2GetCount(...);
 int FUN_0025090c(int, int, int, unsigned char [144]);
 int FUN_0025b750(void);
 int FUN_002be5a4(int, unsigned int, unsigned char [144]);
@@ -25,8 +25,8 @@ extern int g_mapIf; /* 0x447a78 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0024f594(int);
-/* Supplied declaration required: FUN_0024f5d4. */
+extern int dataTable2eSub2GetRecord(int);
+/* Supplied declaration required: dataTable2eSub2GetCount. */
 /* Supplied declaration required: FUN_0025090c. */
 /* Supplied declaration required: FUN_0025b750. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -129,11 +129,11 @@ unsigned int FUN_0021ef10(void)
       }
     }
     temp_v3 = 0;
-    FUN_0024f5d4(temp_v2,temp_v4);
+    dataTable2eSub2GetCount(temp_v2,temp_v4);
     temp_v7 = (float)temp_v8;
     if (0 < temp_v2) {
       do {
-        temp_v4 = FUN_0024f594(temp_v3);
+        temp_v4 = dataTable2eSub2GetRecord(temp_v3);
         temp_v7 = (float)temp_v8;
         temp_v4 = (int)*(short *)(temp_v4 + 0x20);
         if (temp_v4 == -1) {
@@ -141,7 +141,7 @@ unsigned int FUN_0021ef10(void)
         }
         if (temp_v4 == *(short *)(temp_v1 + 0xccbc)) break;
         temp_v3 = temp_v3 + 1;
-        FUN_0024f5d4();
+        dataTable2eSub2GetCount();
         temp_v7 = (float)temp_v8;
       } while (temp_v3 < temp_v4);
     }

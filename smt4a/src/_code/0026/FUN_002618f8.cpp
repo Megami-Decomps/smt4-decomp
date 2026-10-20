@@ -1,15 +1,11 @@
-#include "romwright_types.h"
+#include "shard/Block57f248.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f248; /* 0x57f248 */
-
-
-int FUN_002618f8(void)
-
+/* Returns the difference of the 16-bit values at 0x660 and 0x658 of the record at 0x57F248. */
+s32 FUN_002618f8(void)
 {
-  return (int)(short)((short)*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x660) -
-                     (short)*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x658));
+    return (s16)((s16)DAT_0057f248.record->unk660 - (s16)DAT_0057f248.record->unk658);
 }
 
 } /* extern "C" */

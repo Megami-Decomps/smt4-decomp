@@ -69,7 +69,7 @@ extern unsigned int FUN_00156868(unsigned int);
 extern int FUN_001654e4(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -81,7 +81,7 @@ extern int dataTableGetEntries(void);
 extern int FUN_0019f18c(unsigned int);
 /* Supplied declaration required: FUN_001ab940. */
 /* Supplied declaration required: FUN_001ad9b4. */
-extern short *FUN_00284fa4(unsigned int);
+extern short *dataTableGetEntry37(unsigned int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002c0940. */
@@ -92,7 +92,7 @@ extern int FUN_003de75c(unsigned int);
 extern int FUN_003de830(unsigned int);
 extern unsigned int aocGetEntryData(unsigned short);
 extern int FUN_003df004(unsigned int, int, unsigned char **);
-extern int FUN_00418584(unsigned int);
+extern int partyEntryFlagsBit3(unsigned int);
 extern unsigned int FUN_004186e0(void);
 
 
@@ -196,7 +196,7 @@ void FUN_00218640(void)
   temp_v18 = (float)((unsigned long long)temp_v20 >> 0x20);
   if (temp_v25 != 0) {
     FUN_001879d0(g_renderCtx);
-    temp_v13 = FUN_00418584(temp_v25);
+    temp_v13 = partyEntryFlagsBit3(temp_v25);
     temp_v12 = temp_v4 + (int)temp_v18;
     if (temp_v13 != 0) {
       FUN_001835b4(2,0x1e,0x10,temp_v12,temp_v5,0x68);
@@ -304,7 +304,7 @@ void FUN_00218640(void)
 LAB_00218eb4:
       efctSetSpeed();
       temp_v12 = g_renderCtx;
-      temp_v9 = FUN_00169294(6,1,0);
+      temp_v9 = packNibblesAndByte(6,1,0);
       piVar16 = (int *)(temp_v12 + 0x12b8);
       temp_v10 = piVar16[*piVar16 + 2];
       piVar16[*piVar16 + 2] = temp_v9;
@@ -314,7 +314,7 @@ LAB_00218eb4:
       }
       FUN_001835b4(2,0x1e,0x60,temp_v6,temp_v13,0x68);
       temp_v12 = g_renderCtx;
-      temp_v9 = FUN_00169294(6,7,0);
+      temp_v9 = packNibblesAndByte(6,7,0);
       piVar16 = (int *)(temp_v12 + 0x12b8);
       temp_v10 = piVar16[*piVar16 + 2];
       piVar16[*piVar16 + 2] = temp_v9;
@@ -359,7 +359,7 @@ LAB_00218d20:
   FUN_001ad9b4();
   temp_v29 = temp_v19;
   if (*(char *)(temp_v30 + 0xc) != '\0') {
-    temp_v9 = FUN_00418584(temp_v25);
+    temp_v9 = partyEntryFlagsBit3(temp_v25);
     if (temp_v9 != 0) {
       FUN_001835b4(2,0x1e,0x2b,temp_v6,temp_v13,0x68);
     }
@@ -367,7 +367,7 @@ LAB_00218d20:
   else {
     temp_v0 = *(char *)(temp_v19 + 6);
     if ((temp_v0 != '\x06') && (temp_v0 != '\t' && temp_v0 != '\v')) {
-      temp_v9 = FUN_00418584(temp_v25);
+      temp_v9 = partyEntryFlagsBit3(temp_v25);
       if (temp_v9 != 0) {
         FUN_001835b4(2,0x1e,0x2b,temp_v6,temp_v13,0x68);
       }
@@ -386,14 +386,14 @@ LAB_00218d20:
           }
         }
         else {
-          temp_v9 = FUN_00418584(temp_v25);
+          temp_v9 = partyEntryFlagsBit3(temp_v25);
           if (temp_v9 != 0) {
             FUN_001835b4(2,0x1e,0x2b,temp_v6,temp_v13,0x68);
           }
         }
       }
       else {
-        temp_v9 = FUN_00418584(temp_v25);
+        temp_v9 = partyEntryFlagsBit3(temp_v25);
         if (temp_v9 != 0) {
           FUN_001835b4(2,0x1e,0x2b,temp_v6,temp_v13,0x68);
         }
@@ -473,7 +473,7 @@ LAB_00218d20:
           temp_v7 = 0;
           if (0 < (int)temp_v19) {
             do {
-              psVar13 = (short *)FUN_00284fa4(temp_v7);
+              psVar13 = (short *)dataTableGetEntry37(temp_v7);
               temp_v11 = (int)(short)temp_v21;
               temp_v10 = (int)*psVar13;
               temp_v15 = SBORROW4(temp_v10,temp_v11);

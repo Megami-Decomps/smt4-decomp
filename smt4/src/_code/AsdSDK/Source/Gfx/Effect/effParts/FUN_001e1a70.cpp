@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025c650(unsigned int *, int, int);
 int FUN_0025c870(void);
-int FUN_0028c6b8(void);
+int effBlockCloneDeep(void);
 int FUN_002a3d58(...);
 int FUN_002bf694(int, int);
 int memAlloc(int, int, int, int, int, int);
@@ -37,7 +37,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0025c650. */
 /* Supplied declaration required: FUN_0025c870. */
-/* Supplied declaration required: FUN_0028c6b8. */
+/* Supplied declaration required: effBlockCloneDeep. */
 /* Supplied declaration required: FUN_002a3d58. */
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: memAlloc. */
@@ -125,7 +125,7 @@ LAB_001e1b4c:
       }
       else {
         temp_v7 = temp_v0 + (int)puVar2;
-        FUN_0028c6b8();
+        effBlockCloneDeep();
         temp_v0 = temp_v7;
         FUN_0025c870();
         *(int *)(temp_v0 + 0x90) = temp_v7;

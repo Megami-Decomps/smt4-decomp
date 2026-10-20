@@ -11,7 +11,7 @@ extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_004e5b5c. */
 extern int FUN_004e9ae8(int *, int *, int, unsigned int);
 extern int btlUnitGet(int *);
@@ -79,7 +79,7 @@ void FUN_004e84fc(int *param_1)
     FUN_004e5b5c(param_1);
     return;
   }
-  temp_v1 = FUN_001633a0((temp_v1 - 1U) & 0xffff);
+  temp_v1 = lcgRandomRange((temp_v1 - 1U) & 0xffff);
   temp_v2 = btlUnitGet(param_1);
   *(unsigned char *)(aiStack_1d8[temp_v1] + temp_v2 + 0x38) = 1;
   return;

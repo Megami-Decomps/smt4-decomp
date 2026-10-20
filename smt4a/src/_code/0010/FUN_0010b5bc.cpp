@@ -20,7 +20,7 @@ extern unsigned char g_systemTable; /* 0x59935c */
 /* Supplied declaration required: FUN_002e9318. */
 extern int FUN_002ee96a(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002f4d64. */
-extern int FUN_002f4d8c(unsigned int **, unsigned int *);
+extern int wordRefsDiffer_002f4d8c(unsigned int **, unsigned int *);
 
 
 unsigned int FUN_0010b5bc(unsigned int param_1,unsigned int param_2)
@@ -38,7 +38,7 @@ unsigned int FUN_0010b5bc(unsigned int param_1,unsigned int param_2)
   do {
     temp_v1 = (unsigned int *)*temp_v1;
     temp_v3 = *(unsigned int *)((*(int *)((unsigned char *)&g_systemTable + 0x1c)) + 0x10);
-    temp_v0 = FUN_002f4d8c(&temp_v1,(unsigned int *)&temp_v3);
+    temp_v0 = wordRefsDiffer_002f4d8c(&temp_v1,(unsigned int *)&temp_v3);
     if (temp_v0 == 0) {
       return 0;
     }

@@ -1,39 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010d35c(void);
-int FUN_002e7232(void);
-int FUN_002ea4bc(void);
-int FUN_003104fc(unsigned char *);
-int FUN_00310506(unsigned char *);
+void FUN_0010d35c(void);
+void FUN_002e7232(void);
+s32 FUN_002ea4bc(void);
+void lockedLeave(u8 *lock);
+void lockedEnter(u8 *lock);
+extern u8 DAT_0062e6a0[];
 
-extern unsigned char g_flagBlock; /* 0x594958 */
-extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
+typedef struct FlagBlockView {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 flag;
+} FlagBlockView;
+extern FlagBlockView g_flagBlock;
 
-/* Supplied declaration required: FUN_0010d35c. */
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002ea4bc. */
-/* Supplied declaration required: FUN_003104fc. */
-/* Supplied declaration required: FUN_00310506. */
-
-
+/* Under the lock at 0x62E6A0: runs FUN_002ea4bc, FUN_002e7232 and FUN_0010d35c, then clears the flag at 3 of g_flagBlock if FUN_002ea4bc now reports 0. */
 void FUN_002ecf40(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_00310506(&DAT_0062e6a0);
-  FUN_002ea4bc();
-  FUN_002e7232();
-  FUN_0010d35c();
-  temp_v0 = FUN_002ea4bc();
-  if (temp_v0 == 0) {
-    (*(unsigned char *)((unsigned char *)&g_flagBlock + 0x3)) = 0;
-  }
-  FUN_003104fc(&DAT_0062e6a0);
-  return;
+    s32 result;
+
+    lockedEnter(DAT_0062e6a0);
+    FUN_002ea4bc();
+    FUN_002e7232();
+    FUN_0010d35c();
+    result = FUN_002ea4bc();
+    if (result == 0) {
+        g_flagBlock.flag = 0;
+    }
+    lockedLeave(DAT_0062e6a0);
 }
 
 } /* extern "C" */

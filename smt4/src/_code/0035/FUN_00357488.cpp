@@ -1,20 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_004e6ef0; /* 0x4e6ef0 */
+extern u8 DAT_004e6ef0;
+extern void nn_os_AddressSpaceManager_Free(u8 *manager, void *address);
 
-extern void nn_os_AddressSpaceManager_Free(unsigned int, unsigned int);
+typedef struct Block {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ int unk8;
+} Block;
 
-
-void FUN_00357488(int param_1)
-
+void FUN_00357488(Block *block)
 {
-  if (*(int *)(param_1 + 8) != 0) {
-    nn_os_AddressSpaceManager_Free((unsigned int)&DAT_004e6ef0,param_1);
-    return;
-  }
-  return;
+    if (block->unk8 != 0) {
+        nn_os_AddressSpaceManager_Free(&DAT_004e6ef0, block);
+        return;
+    }
 }
 
 } /* extern "C" */

@@ -1,38 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022a11c` (_code @ 0x22a11c, 0x70 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Matches with -O1 (requested): the add-on content code was built at a lower optimisation level. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00234bb4(unsigned int, unsigned char [132], unsigned int, unsigned int, int, int, int);
-int memClear(unsigned char [132], int);
+typedef struct AocRequest {
+    u8 data[128]; /* 0x00 */
+} AocRequest;
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spA0; /* 0xa0: local_a0 */
-    unsigned int spA8; /* 0xa8: local_a8 */
-} param_4_stack;
+extern u32 g_aocDisplay;
 
-extern unsigned int g_aocDisplay; /* 0x433130 */
+extern void memClear(void *block, s32 size);
+extern s32 FUN_002a6e7c(u32 context, s32 kind, u32 arg, AocRequest *request);
+extern void FUN_00234bb4(u32 display, AocRequest *request, u32 arg3, u32 arg2, s32 a, s32 mode, s32 b);
 
-/* Supplied declaration required: FUN_00234bb4. */
-extern int FUN_002a6e7c(unsigned int, unsigned int, unsigned int, unsigned char *);
-/* Supplied declaration required: memClear. */
-
-
-void FUN_0022a11c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Fills a request for the add-on content and, when it is accepted, hands it to the display. */
+void FUN_0022a11c(u32 context, u32 arg, u32 second, u32 third)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [132];
-  
-  memClear(temp_v1,0x80);
-  temp_v0 = FUN_002a6e7c(param_1,0x1f,param_2,temp_v1);
-  if (temp_v0 != 0) {
-    FUN_00234bb4(g_aocDisplay,temp_v1,param_4,param_3,0,4,0);
-  }
-  return;
+    AocRequest request;
+
+    memClear(&request, sizeof(request));
+    if (FUN_002a6e7c(context, 31, arg, &request) != 0) {
+        FUN_00234bb4(g_aocDisplay, &request, third, second, 0, 4, 0);
+    }
 }
 
 } /* extern "C" */

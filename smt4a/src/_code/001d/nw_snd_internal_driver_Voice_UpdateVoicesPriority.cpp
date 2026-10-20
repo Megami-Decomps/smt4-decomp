@@ -1,29 +1,22 @@
-#include "romwright_types.h"
+#include "shard/DriverVoice.h"
 
 extern "C" {
 
-int FUN_001d3714(int, unsigned int);
+void FUN_001d3714(u32 channel, s32 priority);
 
-/* Supplied declaration required: FUN_001d3714. */
-
-
-void nw_snd_internal_driver_Voice_UpdateVoicesPriority(int param_1)
-
+/* Applies the voice's priority to each of its channels (unless it is 1, which SetPriority already handles). */
+void nw_snd_internal_driver_Voice_UpdateVoicesPriority(DriverVoice *voice)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if ((*(int *)(param_1 + 0x40) != 1) && (temp_v1 = 0, 0 < *(int *)(param_1 + 8))) {
-    do {
-      temp_v0 = *(int *)(param_1 + temp_v1 * 4);
-      if (temp_v0 != 0) {
-        FUN_001d3714(temp_v0,*(unsigned int *)(param_1 + 0x40));
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(int *)(param_1 + 8));
-  }
-  return;
+    s32 i;
+
+    if ((voice->priority != 1) && (i = 0, 0 < voice->channelCount)) {
+        do {
+            if (voice->channels[i] != 0) {
+                FUN_001d3714(voice->channels[i], voice->priority);
+            }
+            i = i + 1;
+        } while (i < voice->channelCount);
+    }
 }
 
 } /* extern "C" */

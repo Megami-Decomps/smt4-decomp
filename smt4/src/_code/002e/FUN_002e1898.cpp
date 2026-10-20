@@ -12,7 +12,7 @@ int FUN_0031e384(void);
 extern int DAT_0043daa8; /* 0x43daa8 */
 
 extern unsigned int FUN_002228d4(void);
-extern int FUN_00259594(unsigned int);
+extern int gameDataBlockTestFlag(unsigned int);
 extern int FUN_00262f14(void);
 extern int FUN_0026efec(int);
 /* Supplied declaration required: FUN_002990a0. */
@@ -62,7 +62,7 @@ unsigned int FUN_002e1898(int param_1)
       }
     }
     else {
-      if ((*(char *)(param_1 + 0xd60) != '\0') && (temp_v0 = FUN_00259594(0x20), temp_v0 != 0)) {
+      if ((*(char *)(param_1 + 0xd60) != '\0') && (temp_v0 = gameDataBlockTestFlag(0x20), temp_v0 != 0)) {
         temp_v3 = 7;
       }
       else {

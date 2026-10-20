@@ -137,9 +137,9 @@ extern int FUN_003798f0(void);
 /* Supplied declaration required: FUN_003d54f8. */
 extern unsigned int FUN_003e0034(void);
 /* Supplied declaration required: FUN_003e0090. */
-extern int FUN_003e5414(unsigned int);
+extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e54b8. */
-extern int FUN_003e56f0(unsigned int);
+extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_003e5728. */
 /* Supplied declaration required: FUN_003fd63c. */
 /* Supplied declaration required: FUN_00480fc0. */
@@ -627,9 +627,9 @@ LAB_002dad8c:
         if (*(int *)(g_lmapScene + 8) == 7) {
           FUN_002d1f40(4,0x32,0);
         }
-        temp_v6 = FUN_003e5414(*(unsigned int *)(g_lmapScene + 0x1a8));
+        temp_v6 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if ((temp_v6 == 0x23) &&
-           (temp_v6 = FUN_003e56f0(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v6 != 0)) {
+           (temp_v6 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v6 != 0)) {
           FUN_00303460(0x17);
           temp_v6 = g_lmapScene;
           *(unsigned int *)(g_lmapScene + 0x54) = 0x24;
@@ -659,9 +659,9 @@ LAB_002dad8c:
                   *(unsigned int *)(g_lmapScene + 0x54) = 0x11;
                   *(unsigned int *)(temp_v6 + 0x58) = temp_v11;
                 }
-                temp_v6 = FUN_003e5414(*(unsigned int *)(g_lmapScene + 0x1a8));
+                temp_v6 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
                 if (temp_v6 == 0x11) {
-                  temp_v6 = FUN_003e56f0(*(unsigned int *)(g_lmapScene + 0x1a8));
+                  temp_v6 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
                   if (temp_v6 != 0) {
                     FUN_003e5728(*(unsigned int *)(g_lmapScene + 0x1a8));
                     temp_v6 = g_lmapScene;
@@ -790,7 +790,7 @@ LAB_002dad8c:
     }
   }
   else {
-    temp_v6 = FUN_003e56f0(*(unsigned int *)(g_lmapScene + 0x1a8));
+    temp_v6 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
     if (temp_v6 != 0) {
       temp_v6 = FUN_002e07f4();
       if (temp_v6 != 0) {

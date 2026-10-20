@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned int *FUN_0015687c(void);
 extern int FUN_00163aa4(int);
 extern unsigned int *FUN_00261828(void);
-extern unsigned int *FUN_003fd528(void);
+extern unsigned int *gameBlockGetArea221AA(void);
 /* Supplied declaration required: FUN_00484264. */
 /* Supplied declaration required: FUN_004853fc. */
 
@@ -48,7 +48,7 @@ void FUN_0048550c(int param_1)
       FUN_00484264(param_1,puVar2);
     }
     if (*(char *)(param_1 + 0x261) == '\x02') {
-      puVar2 = (unsigned int *)FUN_003fd528();
+      puVar2 = (unsigned int *)gameBlockGetArea221AA();
       *puVar2 = 0;
       puVar2[1] = 0;
       puVar2[2] = 0;
@@ -57,7 +57,7 @@ void FUN_0048550c(int param_1)
       FUN_00484264(param_1,puVar2);
     }
     if (*(char *)(param_1 + 0x261) == '\x04') {
-      puVar2 = (unsigned int *)FUN_003fd528();
+      puVar2 = (unsigned int *)gameBlockGetArea221AA();
       *puVar2 = 0;
       puVar2[1] = 0;
       puVar2[2] = 0;

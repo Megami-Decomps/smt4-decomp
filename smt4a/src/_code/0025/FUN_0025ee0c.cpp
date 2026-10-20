@@ -1,31 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0025ee0c_arg0 fn_0025ee0c_arg0;
-struct fn_0025ee0c_arg0 {
-    unsigned char pad_0x0[0x18];
-    int field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0xa0];
-    int field_0xbc; /* +0xbc */
-    unsigned char pad_0xc0[0x28];
-    int field_0xe8; /* +0xe8 */
-};
+u32 FUN_003d2004(void);
 
-extern unsigned int FUN_003d2004(void);
+typedef struct Step {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 slot;
+} Step;
 
+typedef struct Sequence {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 index;
+    /* 0x1C */ u8 unk1C[0xA0];
+    /* 0xBC */ Step *steps;
+    /* 0xC0 */ u8 unkC0[0x28];
+    /* 0xE8 */ u32 *slots;
+} Sequence;
 
-unsigned int FUN_0025ee0c(fn_0025ee0c_arg0 *param_1)
-
+/* Stores FUN_003d2004's result in the slot of the current step, advances to the next step and returns 1. */
+u32 FUN_0025ee0c(Sequence *sequence)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_003d2004();
-  *(unsigned int *)
-   (param_1->field_0xe8 + (unsigned int)*(unsigned short *)(param_1->field_0xbc + param_1->field_0x18 * 4 + 2) * 4)
-       = temp_v0;
-  param_1->field_0x18 = param_1->field_0x18 + 1;
-  return 1;
+    u32 value;
+
+    value = FUN_003d2004();
+    sequence->slots[sequence->steps[sequence->index].slot] = value;
+    sequence->index = sequence->index + 1;
+    return 1;
 }
 
 } /* extern "C" */

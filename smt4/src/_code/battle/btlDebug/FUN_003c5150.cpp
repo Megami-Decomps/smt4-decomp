@@ -12,7 +12,7 @@ int FUN_0025c58c(unsigned int, int, int);
 int FUN_00262914(unsigned int, unsigned char *);
 int dataTableGetEntries(void);
 int FUN_003bbf3c(void);
-int FUN_003bc670(void);
+int dataTable03Sub0GetCount(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -35,7 +35,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003bbf3c. */
-/* Supplied declaration required: FUN_003bc670. */
+/* Supplied declaration required: dataTable03Sub0GetCount. */
 
 
 void FUN_003c5150(int param_1,int param_2)
@@ -54,7 +54,7 @@ void FUN_003c5150(int param_1,int param_2)
   FUN_00262914(*(unsigned int *)(param_1 + 0x10),&LAB_003c5364);
   temp_v1 = (unsigned int)DAT_00434388;
   if (temp_v1 != 0) {
-    FUN_003bc670();
+    dataTable03Sub0GetCount();
     FUN_0022a3a8(*(unsigned int *)(param_1 + 0x10),0,DAT_0043438c,0,temp_v1 - 1,0);
     FUN_0022a400(*(unsigned int *)(param_1 + 0x10),1,(int)(char)DAT_00434388);
   }

@@ -20,7 +20,7 @@ extern unsigned int DAT_004d491c; /* 0x4d491c */
 extern unsigned int DAT_004d4920; /* 0x4d4920 */
 
 /* Supplied declaration required: FUN_002c5d5c. */
-extern unsigned int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_003ec998(unsigned int param_1,unsigned int param_2,unsigned int *param_3)
@@ -36,10 +36,10 @@ void FUN_003ec998(unsigned int param_1,unsigned int param_2,unsigned int *param_
   DAT_004d46a4 = 0x3f800000;
   DAT_004d46a8 = 0x3f800000;
   FUN_002c5d5c(&DAT_004d46ac,&LAB_00141adc,0x10,4);
-  DAT_004d4914 = FUN_002c5da8(6,7,0);
-  DAT_004d4918 = FUN_002c5da8(6,1,0);
-  DAT_004d491c = FUN_002c5da8(6,1,2);
-  DAT_004d4920 = FUN_002c5da8(5,0,1);
+  DAT_004d4914 = packNibblesAndByte(6,7,0);
+  DAT_004d4918 = packNibblesAndByte(6,1,0);
+  DAT_004d491c = packNibblesAndByte(6,1,2);
+  DAT_004d4920 = packNibblesAndByte(5,0,1);
   return;
 }
 

@@ -1,39 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowPlainFromBattle` (_code @ 0x211888, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
+typedef struct BattleMainState {
+    u8 unk0000[0x2234];
+    u32 unk2234;                   /* 0x2234 */
+} BattleMainState;
 
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+BattleMainState *btlGetMainState(void);
+void FUN_002118a0(u32 unit);
 
-/* Supplied declaration required: FUN_002866b4. */
-extern unsigned int FUN_002893d8(void);
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-
-
+/* Passes the battle state's unk2234 on to FUN_002118a0, the script command body that follows it. */
 void scrComm_Message_ShowPlainFromBattle(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = *(unsigned int *)(temp_v0 + 0x2234);
-  temp_v2 = scrGetArg(0);
-  temp_v3 = FUN_002893d8();
-  FUN_002866b4(temp_v1,temp_v2,temp_v3,7,0,0);
-  return;
+    FUN_002118a0(btlGetMainState()->unk2234);
 }
 
 } /* extern "C" */

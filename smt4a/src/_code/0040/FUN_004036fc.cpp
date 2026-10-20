@@ -11,7 +11,7 @@ int FUN_00203b40(int, unsigned int, unsigned int, int, int, int);
 int FUN_0039b984(void);
 int FUN_004029f4(int, int, int);
 int FUN_00403b84(int);
-int FUN_004057dc(int);
+int sortOwnerRun(int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern int FUN_00341940(unsigned int);
 /* Supplied declaration required: FUN_0039b984. */
 /* Supplied declaration required: FUN_004029f4. */
 /* Supplied declaration required: FUN_00403b84. */
-/* Supplied declaration required: FUN_004057dc. */
+/* Supplied declaration required: sortOwnerRun. */
 extern int FUN_004717e0(unsigned int);
 extern int FUN_00471960(unsigned int);
 
@@ -112,7 +112,7 @@ void FUN_004036fc(int param_1)
   temp_v4 = (unsigned int)*(unsigned short *)(param_1 + 0x408);
   FUN_0039b984();
   *(unsigned int *)(param_1 + 0x664) = temp_v4;
-  FUN_004057dc(param_1);
+  sortOwnerRun(param_1);
   FUN_00202400();
   FUN_004029f4(param_1,2,3);
   return;

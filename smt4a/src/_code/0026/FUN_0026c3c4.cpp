@@ -23,9 +23,9 @@ extern unsigned char DAT_00588fd0; /* 0x588fd0 */
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: FUN_002f01e0. */
 /* Supplied declaration required: FUN_0035da20. */
-extern unsigned int FUN_003dfd5c(void);
+extern unsigned int countUnlockedSlots(void);
 extern char FUN_004bcaa8(unsigned short, unsigned short, int, unsigned int *, unsigned char);
-extern unsigned int FUN_004bd21c(void);
+extern unsigned int getUnlockedSlotCount(void);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -47,11 +47,11 @@ void FUN_0026c3c4(unsigned int param_1)
   temp_v3 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
   temp_v4 = 8;
   if (*(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390) < 0) {
-    temp_v4 = FUN_003dfd5c();
+    temp_v4 = countUnlockedSlots();
   }
   else if ((0 < *(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390)) && (*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017) != '\a')) {
     slotRecordFindById(*(unsigned short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390));
-    temp_v4 = FUN_004bd21c();
+    temp_v4 = getUnlockedSlotCount();
   }
   temp_v1 = temp_v3 + 0x13e0;
   rt_memcpy(temp_v1,param_1,temp_v4 << 1);

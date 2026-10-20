@@ -12,7 +12,7 @@ typedef struct {
 extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
-extern int FUN_001633a0(short);
+extern int lcgRandomRange(short);
 extern short FUN_004e9ae8(int *, int *, int, unsigned int);
 extern int btlUnitGet(int *);
 
@@ -49,7 +49,7 @@ void FUN_004e5a90(int *param_1,unsigned int param_2)
     psVar4 = psVar4 + 0x204;
   } while (temp_v2 != 0);
   temp_v0 = FUN_004e9ae8(temp_v3,aiStack_1e0,temp_v1,1);
-  temp_v1 = FUN_001633a0(temp_v0 - 1);
+  temp_v1 = lcgRandomRange(temp_v0 - 1);
   temp_v2 = btlUnitGet(temp_v3);
   *(unsigned char *)(aiStack_1e0[temp_v1] + temp_v2 + 0x38) = 1;
   return;

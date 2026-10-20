@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_004853fc(int, int);
-int FUN_004d0440(void);
-int FUN_004d044c(void);
+int sendEvent100020D(void);
+int sendEvent100020E(void);
 
 extern int FUN_0031d18c(int);
 /* Supplied declaration required: FUN_004853fc. */
-/* Supplied declaration required: FUN_004d0440. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sendEvent100020D. */
+/* Supplied declaration required: sendEvent100020E. */
 
 
 unsigned int FUN_0048408c(int param_1)
@@ -66,7 +66,7 @@ unsigned int FUN_0048408c(int param_1)
       } while (0 < temp_v1);
       *(unsigned char *)(param_1 + 8) = 1;
       FUN_004853fc(param_1,4);
-      FUN_004d044c();
+      sendEvent100020E();
       return 1;
     }
     if ('\x06' < *(char *)(param_1 + 0x22)) {
@@ -83,7 +83,7 @@ unsigned int FUN_0048408c(int param_1)
     temp_v1 = *(int *)(param_1 + 0x568);
   }
   if (temp_v1 == 0) {
-    FUN_004d0440();
+    sendEvent100020D();
   }
   return 1;
 }

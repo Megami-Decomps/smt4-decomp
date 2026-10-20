@@ -42,7 +42,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 extern int btlGetMainState(void);
 extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_001628c0. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
 extern unsigned int dataTableGetCount(unsigned int);
@@ -54,7 +54,7 @@ extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_003eaf20. */
 extern unsigned char *FUN_004aa7b0(unsigned int);
-extern unsigned char *FUN_004ec93c(unsigned int);
+extern unsigned char *hasFlag80Or1000(unsigned int);
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -101,7 +101,7 @@ unsigned char * FUN_003ece9c(int param_1)
   
   temp_v0 = btlUnitGet(g_btlScriptUnit);
   if ((temp_v0 != 0) &&
-     (puVar2 = (unsigned char *)FUN_004ec93c(g_btlScriptUnit), puVar2 != (unsigned char *)0x0)) {
+     (puVar2 = (unsigned char *)hasFlag80Or1000(g_btlScriptUnit), puVar2 != (unsigned char *)0x0)) {
     return puVar2;
   }
   temp_v0 = param_1;
@@ -333,7 +333,7 @@ unsigned char * FUN_003ece9c(int param_1)
               temp_v3 = temp_v3 + 1;
             } while (temp_v3 < temp_v6);
           }
-          temp_v3 = FUN_001633a0((temp_v16 - 1U) & 0xffff);
+          temp_v3 = lcgRandomRange((temp_v16 - 1U) & 0xffff);
           temp_v1 = *(unsigned int *)(*(int *)(temp_v14 + *(int *)(temp_v15 + temp_v3 * 4) * 4) + 8);
           if (((temp_v1 & 0xfff) != 0) && ((temp_v1 & 0xffffff) >> 0xc != 0)) {
             temp_v1 = (temp_v1 << 0x14) | (((temp_v1 & 0xffffff) >> 0xc) << 8) | ((temp_v1 >> 0x14) & 0xf0);

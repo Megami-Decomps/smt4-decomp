@@ -1,35 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003601c4(int, int);
+int FUN_003601c4(int sdkVoice, int type);
 
-/* Supplied declaration required: FUN_003601c4. */
+typedef struct Voice {
+    /* 0x0 */ int sdkVoices[2];
+    /* 0x8 */ int count;
+} Voice;
 
-
-void nw_snd_internal_driver_Voice_SetInterpolationType(int param_1,int param_2)
-
+/* Applies the interpolation type (0 -> 0, 1 -> 1, 2 -> 2, else 0) to every SDK voice. */
+void nw_snd_internal_driver_Voice_SetInterpolationType(Voice *voice, int type)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v1 = 0;
-  if (temp_v1 < *(int *)(param_1 + 8)) {
-    do {
-      temp_v0 = *(int *)(param_1 + temp_v1 * 4);
-      if (temp_v0 != 0) {
-        temp_v2 = 0;
-        if (((param_2 != 0) && (temp_v2 = param_2 == 1, !temp_v2)) && (param_2 == 2)) {
-          temp_v2 = 2;
-        }
-        FUN_003601c4(temp_v0,temp_v2);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(int *)(param_1 + 8));
-  }
-  return;
+    int sdkVoice;
+    int i;
+    u8 value;
+
+    i = 0;
+    if (i < voice->count) {
+        do {
+            sdkVoice = voice->sdkVoices[i];
+            if (sdkVoice != 0) {
+                value = 0;
+                if (((type != 0) && (value = type == 1, !value)) && (type == 2)) {
+                    value = 2;
+                }
+                FUN_003601c4(sdkVoice, value);
+            }
+            i = i + 1;
+        } while (i < voice->count);
+    }
 }
 
 } /* extern "C" */

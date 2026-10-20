@@ -17,7 +17,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001a08d8. */
 /* Supplied declaration required: FUN_001bcd48. */
 extern int FUN_0042337c(int);
-extern int FUN_0042348c(int);
+extern int counterPairRemaining(int);
 /* Supplied declaration required: FUN_00425448. */
 extern int __aeabi_idivmod(int, int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -39,7 +39,7 @@ unsigned int FUN_00424018(int param_1,unsigned int param_2,unsigned int param_3,
   int temp_v7;
   
   temp_v7 = param_4;
-  temp_v0 = FUN_0042348c(param_1 + 0x158);
+  temp_v0 = counterPairRemaining(param_1 + 0x158);
   if (temp_v0 != 0) {
     temp_v0 = FUN_0042337c(param_1 + 0x158);
     if (temp_v0 == 0) {

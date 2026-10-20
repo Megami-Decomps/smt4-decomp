@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 
 
 int FUN_004c518c(int param_1)
@@ -61,7 +61,7 @@ int FUN_004c518c(int param_1)
   if (temp_v0 == 0) {
     return -1;
   }
-  temp_v1 = FUN_001633a0((temp_v0 - 1) & 0xffff);
+  temp_v1 = lcgRandomRange((temp_v0 - 1) & 0xffff);
   temp_v1 = temp_v4[temp_v1];
   puVar3 = (unsigned short *)(param_1 + temp_v1 * 2 + 0x2b6);
   temp_v2 = *puVar3;

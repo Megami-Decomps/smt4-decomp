@@ -1,39 +1,26 @@
-#include "romwright_types.h"
+#include "shard/DriverVoice.h"
 
 extern "C" {
 
-int nw_snd_internal_driver_VoiceManager_FreeVoice(unsigned int, unsigned int *);
+void nw_snd_internal_driver_VoiceManager_FreeVoice(u32 manager, DriverVoice *voice);
+u32 FUN_001c2484(void);
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int FUN_001c2484(void);
-/* Supplied declaration required: nw_snd_internal_driver_VoiceManager_FreeVoice. */
-
-
-void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc(unsigned int param_1,unsigned int *param_2)
-
+/* Called when the SDK drops the voice: clears its channels and flags, returns it to the voice manager and notifies the voice's callback (reason 3). */
+void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc(u32 unused, DriverVoice *voice)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  *param_2 = 0;
-  *(unsigned char *)((int)param_2 + 0x17) = 0;
-  *(unsigned char *)((int)param_2 + 0x15) = 0;
-  param_2[2] = 0;
-  temp_v0 = FUN_001c2484();
-  nw_snd_internal_driver_VoiceManager_FreeVoice(temp_v0,param_2);
-  *(unsigned char *)(param_2 + 5) = 0;
-  if ((romwright_code *)param_2[3] != (romwright_code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x001d1e6c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*(romwright_code *)param_2[3])(param_2,3,param_2[4]);
-    return;
-  }
-  return;
+    u32 manager;
+
+    voice->channels[0] = 0;
+    voice->paused = 0;
+    voice->started = 0;
+    voice->channelCount = 0;
+    manager = FUN_001c2484();
+    nw_snd_internal_driver_VoiceManager_FreeVoice(manager, voice);
+    voice->allocated = 0;
+    if (voice->callback != NULL) {
+        voice->callback(voice, 3, voice->userData);
+        return;
+    }
 }
 
 } /* extern "C" */

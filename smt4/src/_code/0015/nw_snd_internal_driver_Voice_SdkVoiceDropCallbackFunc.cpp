@@ -1,39 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_snd_internal_driver_VoiceManager_FreeVoice(unsigned int, unsigned int *);
+int nw_snd_internal_driver_VoiceManager_FreeVoice(u32 manager, void *voice);
+extern u32 FUN_002baf30(void);
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Voice {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ void (*callback)(struct Voice *voice, int status, u32 userData);
+    /* 0x10 */ u32 callbackData;
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 unk15;
+    /* 0x16 */ u8 unk16;
+    /* 0x17 */ u8 unk17;
+} Voice;
 
-extern unsigned int FUN_002baf30(void);
-/* Supplied declaration required: nw_snd_internal_driver_VoiceManager_FreeVoice. */
-
-
-void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc(unsigned int param_1,unsigned int *param_2)
-
+/* The DSP dropped the voice: clears it, returns it to the voice manager and reports status 3 to its callback. */
+void nw_snd_internal_driver_Voice_SdkVoiceDropCallbackFunc(u32 sdkVoice, Voice *voice)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  *param_2 = 0;
-  *(unsigned char *)((int)param_2 + 0x17) = 0;
-  *(unsigned char *)((int)param_2 + 0x15) = 0;
-  param_2[2] = 0;
-  temp_v0 = FUN_002baf30();
-  nw_snd_internal_driver_VoiceManager_FreeVoice(temp_v0,param_2);
-  *(unsigned char *)(param_2 + 5) = 0;
-  if ((romwright_code *)param_2[3] != (romwright_code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x0015e594. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*(romwright_code *)param_2[3])(param_2,3,param_2[4]);
-    return;
-  }
-  return;
+    voice->unk00 = 0;
+    voice->unk17 = 0;
+    voice->unk15 = 0;
+    voice->unk08 = 0;
+    nw_snd_internal_driver_VoiceManager_FreeVoice(FUN_002baf30(), voice);
+    voice->unk14 = 0;
+    if (voice->callback != NULL) {
+        voice->callback(voice, 3, voice->callbackData);
+    }
 }
 
 } /* extern "C" */

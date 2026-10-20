@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_004eac5c; /* 0x4eac5c */
+extern void nn_os_AddressSpaceManager_Free(u8 *manager, u32 address);
 
-extern void nn_os_AddressSpaceManager_Free(unsigned int, unsigned int);
+extern u8 DAT_004eac5c;
 
-
-void FUN_001597a4(unsigned int param_1)
-
+void FUN_001597a4(u32 address)
 {
-  nn_os_AddressSpaceManager_Free((unsigned int)&DAT_004eac5c,param_1);
-  return;
+    nn_os_AddressSpaceManager_Free(&DAT_004eac5c, address);
 }
 
 } /* extern "C" */

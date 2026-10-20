@@ -1,17 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_002fd444(void);
+u32 FUN_002fd444(void);
 
-
-unsigned int FUN_002fd454(void)
-
+/* Returns bit 1 of FUN_002fd444's result (0 or 1). */
+u32 FUN_002fd454(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_002fd444();
-  return (temp_v0 & 3) >> 1;
+    u32 value;
+
+    value = FUN_002fd444();
+    return (value & 3) >> 1;
 }
 
 } /* extern "C" */

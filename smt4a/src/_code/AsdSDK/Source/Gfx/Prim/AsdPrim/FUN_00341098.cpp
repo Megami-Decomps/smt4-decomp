@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_00412648(unsigned int, unsigned int, int, int);
+int slotInit(unsigned int, unsigned int, int, int);
 
 extern unsigned char LAB_003410e8; /* 0x3410e8 */
 
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_00412648. */
-extern unsigned int FUN_00412fd8(void);
+/* Supplied declaration required: slotInit. */
+extern unsigned int slotReset(void);
 
 
 unsigned int FUN_00341098(int param_1,unsigned int param_2)
@@ -27,9 +27,9 @@ unsigned int FUN_00341098(int param_1,unsigned int param_2)
     temp_v1 = 0;
   }
   else {
-    temp_v1 = FUN_00412fd8();
+    temp_v1 = slotReset();
   }
-  FUN_00412648(temp_v1,param_2,param_1 * 6,param_1 << 2);
+  slotInit(temp_v1,param_2,param_1 * 6,param_1 << 2);
   return temp_v1;
 }
 

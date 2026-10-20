@@ -1,20 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002f9f12(void);
+void FUN_002f9f12(void);
 
-/* Supplied declaration required: FUN_002f9f12. */
-
-
-int * FUN_002eea6a(int *param_1)
-
+/* Runs FUN_002f9f12 when `*slot` is set; returns the slot. */
+s32 *FUN_002eea6a(s32 *slot)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != 0) {
-    FUN_002f9f12();
-  }
-  return param_1;
+    if (*slot != 0) {
+        FUN_002f9f12();
+    }
+    return slot;
 }
 
 } /* extern "C" */

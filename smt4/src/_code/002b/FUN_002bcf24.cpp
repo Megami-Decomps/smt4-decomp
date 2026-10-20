@@ -1,16 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_002bcf24(int param_1,int *param_2,unsigned short param_3,int param_4)
-
+/* Writes `ch` at the cursor of a UTF-16 buffer (unless only counting), then advances the cursor; always succeeds. */
+u32 FUN_002bcf24(u16 *buffer, int *cursor, u16 ch, int countOnly)
 {
-  if (param_4 == 0) {
-    *(unsigned short *)(param_1 + *param_2 * 2) = param_3;
-  }
-  *param_2 = *param_2 + 1;
-  return 1;
+    if (countOnly == 0) {
+        buffer[*cursor] = ch;
+    }
+    *cursor = *cursor + 1;
+    return 1;
 }
 
 } /* extern "C" */

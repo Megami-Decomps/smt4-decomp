@@ -51,7 +51,7 @@ extern int FUN_00220cf4(void);
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: FUN_00296f4c. */
 extern int FUN_002973d8(void);
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 
 
 void FUN_00397470(fn_00397470_arg0 *param_1)
@@ -80,7 +80,7 @@ void FUN_00397470(fn_00397470_arg0 *param_1)
     }
   }
   else {
-    temp_v0 = FUN_002a0ce8();
+    temp_v0 = sys43e188GetState();
     if (temp_v0 != 0) {
       FUN_00296f4c(*(unsigned int *)&param_1->field_0x654,3);
       param_1->field_0x658 = '\x01';

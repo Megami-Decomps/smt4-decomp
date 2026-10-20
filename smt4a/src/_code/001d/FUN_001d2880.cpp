@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001015aa(int);
+int __set_errno(int);
 int FUN_001d3288(void);
 int SUB84(double, int);
 
@@ -20,7 +20,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_001015aa. */
+/* Supplied declaration required: __set_errno. */
 /* Supplied declaration required: FUN_001d3288. */
 extern double FUN_001d32a0(unsigned int, unsigned int, unsigned int);
 
@@ -44,13 +44,13 @@ void FUN_001d2880(double *param_1,unsigned int param_2)
   if (temp_v0 && temp_v2 != 0.0) {
     temp_v2 = (double)FUN_001d32a0(SUB84(temp_v2,0),temp_v1,param_2);
     if (((unsigned int)((unsigned long long)temp_v2 >> 0x34) & 0x7ff) == 0x7ff) {
-      FUN_001015aa(2);
+      __set_errno(2);
       temp_v2 = (double)((unsigned long long)
                           (((unsigned int)((unsigned long long)temp_v2 >> 0x20) & 0x80000000) | 0x7ff00000) << 0x20)
       ;
     }
     else if (temp_v2 == in_d9) {
-      FUN_001015aa(2);
+      __set_errno(2);
       temp_v1 = (unsigned int)((unsigned long long)temp_v2 >> 0x20);
       FUN_001d3288();
       temp_v2 = (double)romwright_piece_4_4(((unsigned int)((unsigned long long)in_d0 >> 0x20) & 0x7fffffff) |

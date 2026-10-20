@@ -1,14 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_006357d8; /* 0x6357d8 */
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 state;
+    /* 0x11 */ u8 unk11[3];
+} Slot;                         /* 0x14 */
+extern Slot DAT_006357d8[];
 
-
-unsigned char FUN_0013def0(int param_1)
-
+/* Returns the state byte of slot `index`. */
+u8 FUN_0013def0(s32 index)
 {
-  return (&(*(unsigned char *)((unsigned char *)&DAT_006357d8 + 0x10)))[param_1 * 0x14];
+    return DAT_006357d8[index].state;
 }
 
 } /* extern "C" */

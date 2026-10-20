@@ -8,16 +8,16 @@ int FUN_001641c4(void);
 int FUN_00184528(int, int);
 int FUN_0019de98(int, unsigned int);
 int FUN_00224880(unsigned int);
-int FUN_003491e8(void);
-int FUN_0037c8b4(int);
+int obj04Finish(void);
+int panelSetTarget(int);
 int FUN_0038b010(int);
 int FUN_0049706c(int);
 int FUN_00498494(int, int);
 int FUN_00498994(int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
-int FUN_004d06e4(int);
-int FUN_004d097c(unsigned int);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
+int releaseEntriesA(int);
+int releaseEntriesB(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,8 +28,8 @@ typedef struct {
 /* Supplied declaration required: FUN_00184528. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00224880. */
-/* Supplied declaration required: FUN_003491e8. */
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: obj04Finish. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0038b010. */
 extern int FUN_004954e8(int);
 /* Supplied declaration required: FUN_0049706c. */
@@ -38,13 +38,13 @@ extern int FUN_004954e8(int);
 extern unsigned int FUN_0049cad0(unsigned short *);
 extern int FUN_0049cbac(unsigned short, unsigned int);
 extern int FUN_004cfe4c(int);
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d04f4(void);
 extern int FUN_004d0554(void);
 extern int FUN_004d0584(void);
-/* Supplied declaration required: FUN_004d06e4. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesA. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_00499e00(int param_1)
@@ -72,7 +72,7 @@ void FUN_00499e00(int param_1)
     return;
   }
   FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
-  FUN_0037c8b4(0);
+  panelSetTarget(0);
   temp_v0 = FUN_004954e8(param_1);
   FUN_00498994(param_1);
   if ((0 < *(int *)(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb68)) &&
@@ -87,14 +87,14 @@ void FUN_00499e00(int param_1)
     temp_v1 = FUN_0049cbac(*puVar5,temp_v3);
     if (temp_v1 != 0) {
       if (temp_v0 != 0) {
-        FUN_004d044c();
+        sendEvent100020E();
         FUN_00498494(param_1,0xc);
         return;
       }
     }
   }
   else if (temp_v0 != 0) {
-    FUN_004d044c();
+    sendEvent100020E();
     FUN_00498494(param_1,0xc);
     return;
   }
@@ -102,11 +102,11 @@ void FUN_00499e00(int param_1)
   if (temp_v0 != 0) {
     *(unsigned int *)(param_1 + 0x16040) = 0;
     FUN_0038b010(0);
-    FUN_004d0434();
+    sendEvent100020F();
     FUN_00184528(param_1 + 0x3cc,1);
-    FUN_003491e8();
-    FUN_004d097c(*(unsigned int *)(param_1 + 0xb3c));
-    FUN_004d06e4(param_1 + 0xb08);
+    obj04Finish();
+    releaseEntriesB(*(unsigned int *)(param_1 + 0xb3c));
+    releaseEntriesA(param_1 + 0xb08);
     temp_v0 = 0;
     if (temp_v0 < *(short *)(param_1 + 0x16030)) {
       do {
@@ -121,7 +121,7 @@ void FUN_00499e00(int param_1)
   if (temp_v0 == 0) {
     return;
   }
-  FUN_004d044c();
+  sendEvent100020E();
   FUN_0049706c(param_1);
   return;
 }

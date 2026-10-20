@@ -1,50 +1,47 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
-int FUN_0037c8e4(int, int);
-int FUN_0038843c(void);
+void FUN_001846d0(u8 *member, s32 flag);
+void FUN_00184758(u8 *unit, s32 a, s32 b);
+void FUN_00184c00(u8 *unit, s32 a, s32 b);
+void FUN_0037c8e4(s32 a, s32 b);
+void FUN_0038843c(void);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+typedef struct Unit {
+    /* 0x00 */ u8 data[0x8C];
+} Unit;
 
-extern int DAT_0057f108; /* 0x57f108 */
+typedef struct Game {
+    /* 0x0000 */ u8 unk0000[0x18];
+    /* 0x0018 */ u32 unk18;
+    /* 0x001C */ u8 unk1C[0xE70];
+    /* 0x0E8C */ Unit units[13];
+    /* 0x15A8 */ u8 member15A8[0x8C];
+    /* 0x1634 */ u8 member1634[0x348];
+    /* 0x197C */ u8 member197C[1];
+} Game;
+extern Game *DAT_0057f108;
 
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_0038843c. */
-
-
+/* Resets the game screen: runs the two set-up calls, then restarts the 13 units and the three members and clears the word at 0x18. */
 void FUN_002277d8(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  FUN_0037c8e4(1,0);
-  FUN_0038843c();
-  temp_v0 = DAT_0057f108;
-  temp_v1 = 0;
-  do {
-    temp_v2 = temp_v0 + temp_v1 * 0x8c + 0xe8c;
-    FUN_00184758(temp_v2,10,0);
-    FUN_00184c00(temp_v2,0x13,0);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0xd);
-  FUN_00184c00(temp_v0 + 0x15a8,6,0);
-  FUN_001846d0(temp_v0 + 0x197c,8);
-  *(unsigned int *)(temp_v0 + 0x18) = 0;
-  FUN_00184c00(temp_v0 + 0x1634,0x16,0);
-  return;
+    Game *game;
+    s32 i;
+
+    FUN_0037c8e4(1, 0);
+    FUN_0038843c();
+    game = DAT_0057f108;
+    i = 0;
+    do {
+        FUN_00184758(game->units[i].data, 10, 0);
+        FUN_00184c00(game->units[i].data, 0x13, 0);
+        i = i + 1;
+    } while (i < 0xD);
+    FUN_00184c00(game->member15A8, 6, 0);
+    FUN_001846d0(game->member197C, 8);
+    game->unk18 = 0;
+    FUN_00184c00(game->member1634, 0x16, 0);
 }
 
 } /* extern "C" */

@@ -1,19 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001262fc` (_code @ 0x1262fc, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int jobGetWork(void);
+typedef struct Work1262fc {
+    u8 unk00[0x94];
+    s8 value;                      /* 0x94 */
+} Work1262fc;
 
+Work1262fc *jobGetWork(void);
 
-int FUN_001262fc(void)
-
+/* Returns the signed byte at 0x94 of the job's work area. */
+s8 FUN_001262fc(void)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  return (int)*(char *)(temp_v0 + 0x94);
+    return jobGetWork()->value;
 }
 
 } /* extern "C" */

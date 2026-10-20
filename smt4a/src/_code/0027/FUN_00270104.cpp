@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(void);
 int FUN_0019de98(unsigned int, unsigned int);
 int FUN_0032d0c8(unsigned int, int, int, unsigned int);
-int FUN_00342348(int);
+int screenShowMessage(int);
 int FUN_00359b6c(unsigned int);
 int FUN_00399e20(unsigned int, int);
 int FUN_003aeb18(unsigned int, int);
@@ -35,12 +35,12 @@ extern int FUN_002a4894(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int FUN_002f8e14(unsigned int);
 /* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_00342348. */
+/* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: FUN_00359b6c. */
 /* Supplied declaration required: FUN_00399e20. */
 /* Supplied declaration required: FUN_003aeb18. */
 extern int FUN_003e46f4(unsigned int);
-extern unsigned int FUN_003ef9b8(unsigned int, unsigned int);
+extern unsigned int halfTableGet(unsigned int, unsigned int);
 
 
 void FUN_00270104(int param_1)
@@ -67,7 +67,7 @@ void FUN_00270104(int param_1)
     if (temp_v1 != 2) {
       temp_v1 = FUN_002cc9e0(param_1,0);
       if (temp_v1 == 7) {
-        FUN_00342348(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x3ca8));
+        screenShowMessage(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x3ca8));
         return;
       }
       temp_v1 = FUN_002cc9e0(param_1,0);
@@ -108,7 +108,7 @@ void FUN_00270104(int param_1)
       if (!((*(unsigned int *)(temp_v1 + 0x45a8) & (*(unsigned int *)((unsigned char *)&DAT_00573b88 + 0x40))) == 0 &&
            (*(unsigned int *)(temp_v1 + 0x45ac) & DAT_00573bcc) == 0)) {
         temp_v3 = btlGetMainState();
-        temp_v4 = FUN_003ef9b8(temp_v3,temp_v4);
+        temp_v4 = halfTableGet(temp_v3,temp_v4);
       }
       else {
         btlGetMainState();

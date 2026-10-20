@@ -10,7 +10,7 @@ int FUN_002c7388(...);
 int asdSaveWriteBlock(int, unsigned char [128], unsigned char [132], unsigned int, unsigned int);
 int FUN_002e342c(unsigned char [128], unsigned char *);
 int FUN_002e6dd0(unsigned char *, int);
-int FUN_0032c8dc(...);
+int colorForMode(...);
 int FUN_00399c90(int, unsigned char *);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned char DAT_005e2114; /* 0x5e2114 */
 /* Supplied declaration required: FUN_002e6dd0. */
 extern int FUN_002ef7f0(unsigned int, unsigned char *);
 extern int FUN_0032c8c8(void);
-/* Supplied declaration required: FUN_0032c8dc. */
+/* Supplied declaration required: colorForMode. */
 /* Supplied declaration required: FUN_00399c90. */
 
 
@@ -93,7 +93,7 @@ void FUN_00349ca4(unsigned int param_1)
       return;
     }
   }
-  FUN_0032c8dc(temp_v1);
+  colorForMode(temp_v1);
   return;
 }
 

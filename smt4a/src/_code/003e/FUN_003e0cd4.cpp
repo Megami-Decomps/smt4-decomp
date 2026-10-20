@@ -51,7 +51,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_00229ffc. */
 /* Supplied declaration required: FUN_003d9164. */
 /* Supplied declaration required: FUN_003e9cd0. */
-extern int FUN_0040de1c(unsigned int, unsigned int *);
+extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int FUN_004a96d4(unsigned int);
 extern int FUN_004f2708(int, fn_003e0cd4_arg1 *, unsigned int);
 extern int FUN_004f6384(unsigned int);
@@ -77,7 +77,7 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
   int temp_v13;
   unsigned int *puVar15;
   
-  if ((((param_2[1].field_0x17 == '\0') || (temp_v8 = FUN_0040de1c(DAT_005712f0,param_1), temp_v8 < 1))
+  if ((((param_2[1].field_0x17 == '\0') || (temp_v8 = chainCountIdUnflagged(DAT_005712f0,param_1), temp_v8 < 1))
       && (temp_v8 = FUN_004f6384(DAT_00573808), temp_v8 != 0)) &&
      (((param_2->field_0x45a0 & DAT_00573860) == 0 && (*(unsigned int *)(param_2 + 1) & DAT_00573864) == 0
       || (temp_v8 = FUN_004a96d4(DAT_0057a9c8), temp_v8 != 0)))) {
@@ -135,7 +135,7 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
     param_1[4] = 0;
     *param_1 = 0x1a;
     param_1[3] = 0;
-    temp_v8 = FUN_0040de1c(DAT_005712f0,param_1);
+    temp_v8 = chainCountIdUnflagged(DAT_005712f0,param_1);
     if (((temp_v8 < 1) && (temp_v8 = FUN_004f6384(DAT_00573808), temp_v8 != 0)) &&
        ((temp_v8 = DAT_00571508, FUN_00229ffc(), temp_v8 != 0 &&
         ((*(unsigned int *)(DAT_00571508 + 0x64c) & 0x80000) == 0)))) {

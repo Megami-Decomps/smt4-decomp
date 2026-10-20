@@ -1,20 +1,16 @@
-#include "romwright_types.h"
+#include "shard/Shard004D.h"
 
 extern "C" {
 
-extern int gameGetOptions(void);
-
+extern OptionsBlock4D *gameGetOptions(void);
 
 void FUN_004d9fc4(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = gameGetOptions();
-  if ((*(unsigned short *)(temp_v0 + 0x130) & 1) != 0) {
-    *(unsigned short *)(temp_v0 + 0x62) = 0;
-  }
-  return;
+    OptionsBlock4D *options = gameGetOptions();
+
+    if ((options->flags & 1) != 0) {
+        options->unk62 = 0;
+    }
 }
 
 } /* extern "C" */

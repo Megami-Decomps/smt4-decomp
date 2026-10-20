@@ -1,24 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f290; /* 0x57f290 */
+typedef struct Record {
+    /* 0x0000 */ u8 unk0000[0x430];
+    /* 0x0430 */ u8 busy;
+    /* 0x0431 */ u8 unk0431[0x8E2B];
+    /* 0x925C */ s32 pending;
+} Record;
+extern Record *DAT_0057f290;
 
-extern int FUN_0026272c(void);
+s32 FUN_0026272c(void);
 
-
-unsigned int FUN_002c90b0(void)
-
+/* Returns 1 when the record has a pending item and is either idle or FUN_0026272c reports 0; 0 when there is no record. */
+u32 FUN_002c90b0(void)
 {
-  int temp_v0;
-  
-  if (DAT_0057f290 == 0) {
+    if (DAT_0057f290 == NULL) {
+        return 0;
+    }
+    if (DAT_0057f290->pending != 0 && (DAT_0057f290->busy == 0 || FUN_0026272c() == 0)) {
+        return 1;
+    }
     return 0;
-  }
-  if (*(int *)(DAT_0057f290 + 0x925c) != 0 && (*(char *)(DAT_0057f290 + 0x430) == '\0' || FUN_0026272c() == 0)) {
-    return 1;
-  }
-  return 0;
 }
 
 } /* extern "C" */

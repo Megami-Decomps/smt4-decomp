@@ -18,7 +18,7 @@ int FUN_002b3c9c(...);
 int FUN_002ff7ac(unsigned short *, int, int);
 int FUN_0034f8b4(...);
 int FUN_0038136c(unsigned int, int, int, int);
-int FUN_00381734(...);
+int childHolderCopyOut(...);
 int SBORROW4(int, int);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -146,11 +146,11 @@ extern int FUN_001acf08(void);
 /* Supplied declaration required: FUN_00290e04. */
 /* Supplied declaration required: FUN_00291644. */
 /* Supplied declaration required: FUN_002b3c9c. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002ff7ac. */
 /* Supplied declaration required: FUN_0034f8b4. */
 /* Supplied declaration required: FUN_0038136c. */
-/* Supplied declaration required: FUN_00381734. */
+/* Supplied declaration required: childHolderCopyOut. */
 
 
 void FUN_003516c0(int param_1)
@@ -361,7 +361,7 @@ void FUN_003516c0(int param_1)
     FUN_00212500(temp_v77);
   }
   else {
-    FUN_00381734(puVar9,&temp_v80);
+    childHolderCopyOut(puVar9,&temp_v80);
     temp_v2 = temp_v80 << 4;
     temp_v9 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v24 = (float)VectorSignedToFloat(temp_v81 << 4,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -410,7 +410,7 @@ void FUN_003516c0(int param_1)
   temp_v65 = fStack_164;
   temp_v66 = temp_v11;
   temp_v67 = temp_v64;
-  if (((DAT_005c4c30 & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c30), temp_v1 != 0)) {
+  if (((DAT_005c4c30 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c30), temp_v1 != 0)) {
     DAT_0064c088 = (unsigned int)temp_v26;
     DAT_0064c084 = 0x3f800000;
     DAT_0064c098 = 0x3f800000;

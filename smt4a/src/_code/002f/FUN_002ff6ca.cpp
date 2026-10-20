@@ -1,29 +1,46 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00308576(unsigned int *);
+s32 FUN_00308576(void *list);
 
+typedef struct Node {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ struct Node *prev;
+    /* 0x0C */ struct Node *next;
+} Node;
 
-unsigned int * FUN_002ff6ca(unsigned int *param_1,unsigned char *param_2,unsigned char param_3)
+typedef struct List {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ Node *head;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u8 flagA;
+    /* 0x19 */ u8 flagB;
+} List;
 
+/* Constructor: clears the list, stores the two flags and allocates its sentinel node, which points at itself both ways. */
+List *FUN_002ff6ca(List *list, u8 *flagB, u8 flagA)
 {
-  int temp_v0;
-  
-  *param_1 = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  *(unsigned char *)(param_1 + 6) = param_3;
-  *(unsigned char *)((int)param_1 + 0x19) = *param_2;
-  param_1[3] = 0;
-  param_1[2] = 0;
-  param_1[1] = 0;
-  temp_v0 = FUN_00308576(param_1);
-  param_1[4] = temp_v0;
-  *(unsigned int *)(temp_v0 + 4) = 0;
-  *(unsigned int *)(param_1[4] + 8) = param_1[4];
-  *(unsigned int *)(param_1[4] + 0xc) = param_1[4];
-  return param_1;
+    Node *node;
+
+    list->unk00 = 0;
+    list->head = NULL;
+    list->unk14 = 0;
+    list->flagA = flagA;
+    list->flagB = *flagB;
+    list->unk0C = 0;
+    list->unk08 = 0;
+    list->unk04 = 0;
+    node = (Node *)FUN_00308576(list);
+    list->head = node;
+    node->unk04 = 0;
+    list->head->prev = list->head;
+    list->head->next = list->head;
+    return list;
 }
 
 } /* extern "C" */

@@ -21,7 +21,7 @@ extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
 
 /* Supplied declaration required: FUN_00262f68. */
 extern unsigned int FUN_0026e61c(unsigned int, unsigned int);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 
 
 void FUN_002595e0(fn_002595e0_arg0 *param_1)
@@ -48,7 +48,7 @@ void FUN_002595e0(fn_002595e0_arg0 *param_1)
     temp_v3 = 0;
     do {
       temp_v0 = (int)*(char *)(temp_v4 + temp_v3 + 0x90f0);
-      if ((-1 < temp_v0) && (temp_v0 = FUN_0029ebac((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + temp_v0 * 0x604 + 0x11c,2), temp_v0 != 0)
+      if ((-1 < temp_v0) && (temp_v0 = flagWordTestBit((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + temp_v0 * 0x604 + 0x11c,2), temp_v0 != 0)
          ) {
         FUN_00262f68((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + *(char *)(temp_v4 + temp_v3 + 0x90f0) * 0x604 + 0x11c,4);
       }

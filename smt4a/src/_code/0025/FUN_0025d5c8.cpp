@@ -1,37 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025d5c8` (_code @ 0x25d5c8, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Matches with --cpu=5TE (requested): this unit was built for the older core. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct MachineState MachineState;
+typedef s32 (*StateHandler)(MachineState *machine);
 
-unsigned int FUN_0025d5c8(int *param_1)
+#define MACHINE_HANDLER_DONE 3
+#define MACHINE_STATE_FINISHED 9
 
+struct MachineState {
+    u8 unk000[12];
+    StateHandler handlers[231];   /* 0x00c */
+    u32 previousState;            /* 0x3a8 */
+    s32 state;                    /* 0x3ac */
+    s32 nextState;                /* 0x3b0 */
+    u8 unk3b4[0x34];
+    u8 finished;                  /* 0x3e8 */
+};
+
+/* Runs the current state's handler; when it reports completion and a next state is queued, switches to it. */
+u32 FUN_0025d5c8(MachineState **owner)
 {
-  int temp_v0;
-  romwright_code *pcVar2;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = *param_1;
-  pcVar2 = *(romwright_code **)(temp_v2 + *(int *)(temp_v2 + 0x3ac) * 4 + 0xc);
-  if (((pcVar2 != (romwright_code *)0x0) && (temp_v0 = (*pcVar2)(temp_v2), temp_v0 == 3)) &&
-     (temp_v0 = *(int *)(temp_v2 + 0x3b0), temp_v0 != -1)) {
-    temp_v1 = *(unsigned int *)(temp_v2 + 0x3ac);
-    *(int *)(temp_v2 + 0x3ac) = temp_v0;
-    temp_v3 = temp_v0 == 9;
-    *(unsigned int *)(temp_v2 + 0x3a8) = temp_v1;
-    if (temp_v3) {
-      temp_v0 = 1;
+    MachineState *machine = *owner;
+    StateHandler handler = machine->handlers[machine->state];
+    s32 result;
+    s32 next;
+    u32 old;
+    u8 finishing;
+
+    if (handler != NULL && (result = handler(machine), result == MACHINE_HANDLER_DONE) &&
+        (next = machine->nextState, next != -1)) {
+        old = machine->state;
+        machine->state = next;
+        finishing = next == MACHINE_STATE_FINISHED;
+        machine->previousState = old;
+        if (finishing) {
+            result = 1;
+        }
+        machine->nextState = -1;
+        if (finishing) {
+            machine->finished = result;
+        }
     }
-    *(unsigned int *)(temp_v2 + 0x3b0) = 0xffffffff;
-    if (temp_v3) {
-      *(char *)(temp_v2 + 1000) = (char)temp_v0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

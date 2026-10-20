@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ec890(...);
+int destroyObj0055ae64(...);
 
 typedef struct fn_0010600c_arg0 fn_0010600c_arg0;
 struct fn_0010600c_arg0 {
@@ -17,8 +17,8 @@ struct fn_0010600c_arg0 {
 };
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002ec890. */
-extern unsigned int FUN_002eccc4(int *);
+/* Supplied declaration required: destroyObj0055ae64. */
+extern unsigned int vectorCount4_002eccc4(int *);
 extern int FUN_002ecec0(int);
 
 
@@ -31,7 +31,7 @@ int FUN_0010600c(fn_0010600c_arg0 *param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  for (temp_v2 = 0; temp_v0 = FUN_002eccc4(&param_1->field_0x4), temp_v2 < temp_v0; temp_v2 = temp_v2 + 1) {
+  for (temp_v2 = 0; temp_v0 = vectorCount4_002eccc4(&param_1->field_0x4), temp_v2 < temp_v0; temp_v2 = temp_v2 + 1) {
     piVar1 = *(int **)(param_1->field_0x4 + temp_v2 * 4);
     if (piVar1 != (int *)0x0) {
       (**(romwright_code **)(*piVar1 + 4))();
@@ -44,9 +44,9 @@ int FUN_0010600c(fn_0010600c_arg0 *param_1)
   if (param_1->field_0x1c != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1->field_0x1c + 4))();
   }
-  temp_v1 = FUN_002ec890(&param_1[2].field_0x10);
-  temp_v1 = FUN_002ec890(temp_v1 - 0x18);
-  temp_v1 = FUN_002ec890(temp_v1 - 0x18);
+  temp_v1 = destroyObj0055ae64(&param_1[2].field_0x10);
+  temp_v1 = destroyObj0055ae64(temp_v1 - 0x18);
+  temp_v1 = destroyObj0055ae64(temp_v1 - 0x18);
   temp_v1 = FUN_002ecec0(temp_v1 - 0x10);
   temp_v1 = FUN_002ecec0(temp_v1 - 0xc);
   return temp_v1 - 4;

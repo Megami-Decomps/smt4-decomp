@@ -16,7 +16,7 @@ int FUN_003edbd0(int);
 int FUN_003f0b28(int);
 int FUN_003f0d50(int);
 int FUN_003f26d4(int);
-int FUN_004f282c(unsigned int);
+int words10CopyHighToLow(unsigned int);
 int FUN_004fb43c(int, int, int, int, int, int, int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -52,7 +52,7 @@ extern unsigned int FUN_003efa38(int);
 extern int FUN_003f10c8(int, unsigned short);
 /* Supplied declaration required: FUN_003f26d4. */
 extern int FUN_0046ebf0(unsigned int);
-/* Supplied declaration required: FUN_004f282c. */
+/* Supplied declaration required: words10CopyHighToLow. */
 /* Supplied declaration required: FUN_004fb43c. */
 
 
@@ -81,7 +81,7 @@ void FUN_003e1454(unsigned int *param_1,int param_2)
     FUN_003f0d50(param_2);
     FUN_003edb9c(param_2);
     FUN_003f0b28(param_2);
-    FUN_004f282c(DAT_00571508);
+    words10CopyHighToLow(DAT_00571508);
     temp_v1 = FUN_003e0f94(param_1,param_2);
     puVar7 = (unsigned int *)(param_2 + 0x45a0);
     if ((temp_v1 == 1) || (temp_v1 == 2 || temp_v1 == 5)) {

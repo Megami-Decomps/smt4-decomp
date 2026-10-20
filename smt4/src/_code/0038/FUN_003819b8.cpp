@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 unsigned int FUN_003819b8(int param_1)
@@ -20,7 +20,7 @@ unsigned int FUN_003819b8(int param_1)
   if (*(char *)(param_1 + 8) == '\x0f') {
     *(unsigned char *)(param_1 + 8) = 0;
   }
-  temp_v3 = FUN_002c09f4(3);
+  temp_v3 = randNextInRange(3);
   temp_v1 = *(unsigned char *)(param_1 + 8);
   do {
     while( 1 ) {

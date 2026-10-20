@@ -73,7 +73,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00180310. */
@@ -90,8 +90,8 @@ extern unsigned int FUN_0025e684(int);
 extern int btlMainGetUnk14(void);
 extern int FUN_002b4dcc(int);
 /* Supplied declaration required: FUN_002b4e7c. */
-extern int FUN_00319d2c(int, int);
-extern unsigned int FUN_00319d64(int, int);
+extern int valueAtMostFifthOfTotal(int, int);
+extern unsigned int heldAmountLessThan(int, int);
 /* Supplied declaration required: FUN_003a6404. */
 /* Supplied declaration required: FUN_003f3a90. */
 /* Supplied declaration required: FUN_003f3d90. */
@@ -148,7 +148,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
       temp_v6 = FUN_002b4dcc(temp_v1);
       temp_v15 = (int)*(short *)(temp_v1 + 0x10);
       if (param_1->field_0x34 != (void *)0xfffffffe) {
-        temp_v17 = FUN_00319d64((int)(short)temp_v6,temp_v10);
+        temp_v17 = heldAmountLessThan((int)(short)temp_v6,temp_v10);
       }
       else {
         temp_v17 = (unsigned int)(temp_v5 < temp_v6);
@@ -167,7 +167,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
     FUN_002b4e7c(temp_v6);
     temp_v1 = FUN_001801a4();
     temp_v15 = (int)*(short *)(temp_v1 + 0x1e);
-    temp_v17 = FUN_00319d64((int)(short)temp_v6,temp_v10);
+    temp_v17 = heldAmountLessThan((int)(short)temp_v6,temp_v10);
   }
   efctSetSpeed();
   if (param_1->field_0x22 != 0) {
@@ -290,7 +290,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           }
           temp_v10 = g_renderCtx;
           if (param_1->field_0x48 != 0) {
-            temp_v6 = FUN_00169294(6,1,0);
+            temp_v6 = packNibblesAndByte(6,1,0);
             piVar7 = (int *)(temp_v10 + 0x12b8);
             temp_v5 = piVar7[*piVar7 + 2];
             piVar7[*piVar7 + 2] = temp_v6;
@@ -304,7 +304,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
             FUN_001835b4(2,0x11,0x7d1,param_2,param_3,0x79);
             FUN_00183bb0();
             temp_v10 = g_renderCtx;
-            temp_v6 = FUN_00169294(6,7,0);
+            temp_v6 = packNibblesAndByte(6,7,0);
             piVar7 = (int *)(temp_v10 + 0x12b8);
             temp_v5 = piVar7[*piVar7 + 2];
             piVar7[*piVar7 + 2] = temp_v6;
@@ -356,7 +356,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
                      0x74,0);
         FUN_0025e704(temp_v7,temp_v15,*(unsigned int *)&param_1->field_0x44,0,0x11,9,0xb,10,param_2,
                      param_3,0x75,0);
-        temp_v10 = FUN_00319d2c(temp_v5,temp_v6);
+        temp_v10 = valueAtMostFifthOfTotal(temp_v5,temp_v6);
         if (temp_v10 != 0) {
           temp_v2 = 0xdc0f14ff;
           FUN_00184e64(temp_v2);
@@ -392,7 +392,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
         }
         temp_v10 = g_renderCtx;
         if (param_1->field_0x48 != 0) {
-          temp_v6 = FUN_00169294(6,1,0);
+          temp_v6 = packNibblesAndByte(6,1,0);
           piVar7 = (int *)(temp_v10 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v6;
@@ -406,7 +406,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           FUN_001835b4(2,0x11,2000,param_2,param_3,0x79);
           FUN_00183bb0();
           temp_v10 = g_renderCtx;
-          temp_v6 = FUN_00169294(6,7,0);
+          temp_v6 = packNibblesAndByte(6,7,0);
           piVar7 = (int *)(temp_v10 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v6;

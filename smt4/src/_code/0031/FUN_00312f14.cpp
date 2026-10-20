@@ -25,7 +25,7 @@ typedef struct {
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002ad8b4. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 extern int __aeabi_idivmod(int, unsigned int);
@@ -121,7 +121,7 @@ unsigned int FUN_00312f14(void)
   temp_v9 = temp_v3 + temp_v1;
   temp_v10 = temp_v4 + temp_v9;
   temp_v11 = temp_v8 + temp_v10;
-  temp_v5 = FUN_002c09f4((temp_v11 - 1U) & 0xffff);
+  temp_v5 = randNextInRange((temp_v11 - 1U) & 0xffff);
   temp_v12 = temp_v1 == 0;
   temp_v0 = temp_v1;
   if (0 < temp_v1) {

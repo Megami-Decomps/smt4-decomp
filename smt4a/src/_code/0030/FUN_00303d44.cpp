@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ u32 allowed;
+} Holder;
 
-unsigned int FUN_00303d44(int param_1,unsigned int param_2)
-
+/* Returns 1 when every bit of `bits` is set in the word at 0x2C. */
+u32 FUN_00303d44(Holder *object, u32 bits)
 {
-  if ((param_2 & ~*(unsigned int *)(param_1 + 0x2c)) != 0) {
-    return 0;
-  }
-  return 1;
+    if ((bits & ~object->allowed) != 0) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,83 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00321fc8` (_code @ 0x321fc8, 0xfc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the shared block size (12) and the constant 1 in r8/r9 across the allocation and saves one more register */
+#include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_005449ec[]; /* __FILE__ */
 
-int memAlloc(int, int, int, int, int, int);
-int FUN_00271be0(unsigned int, unsigned int);
-int FUN_002e6dd4(void);
-int asdEffectTextureCreate(void);
+EffMiscObject *FUN_00271be0(u32 kind, void *params);
+void *FUN_002b41c4(EffMiscDesc *desc);
+u32 *FUN_002721e4(EffMiscDesc *desc);
+void *FUN_0037a834(u32 id);
+void *FUN_0037a7f4(u32 *resource);
+void *asdEffectTextureCreate(u32 *resource);
+void *memAlloc(int, int, int, int size, int align, int);
+void FUN_002e6dd4(void *block, s32 size);
 
-typedef struct fn_00321fc8_arg0 fn_00321fc8_arg0;
-struct fn_00321fc8_arg0 {
-    undefined4 field_0x0; /* +0x0 */
-    unsigned char pad_0x4[0x8];
-    ushort field_0xc; /* +0xc */
-    unsigned char pad_0xe[0xe];
-    ushort field_0x1c; /* +0x1c */
-};
+extern EffMiscKind DAT_005c1078[];
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_00271be0. */
-extern unsigned int *FUN_002721e4(fn_00321fc8_arg0 *);
-extern unsigned int FUN_002b41c4(void);
-/* Supplied declaration required: FUN_002e6dd4. */
-extern unsigned int FUN_0037a7f4(unsigned int *);
-extern unsigned int *FUN_0037a834(unsigned int);
-/* Supplied declaration required: asdEffectTextureCreate. */
-
-
-unsigned int FUN_00321fc8(fn_00321fc8_arg0 *param_1)
-
+/* Creates an effect object from an effect description: the kind and parameters come from the
+ * description and, for kinds that take one, its resource is attached as a shared resource. */
+EffMiscObject *FUN_00321fc8(EffMiscDesc *desc)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_002b41c4();
-  temp_v1 = (unsigned int)param_1->field_0xc;
-  FUN_00271be0(temp_v1,temp_v0);
-  puVar2 = (unsigned int *)FUN_002721e4(param_1);
-  if (puVar2 == (unsigned int *)0x0) {
-    return temp_v1;
-  }
-  if (*(char *)(*(int *)(temp_v1 + 0x18) * 0x18 + 0x5c1088) == '\0') {
-    return temp_v1;
-  }
-  temp_v2 = (unsigned int)param_1->field_0x1c;
-  puVar3 = (unsigned int *)0x10000;
-  memAlloc(0x10000,0x100,0,0xc,0x10,1);
-  FUN_002e6dd4();
-  *puVar3 = temp_v2;
-  puVar3[1] = 1;
-  if (temp_v2 != 1) {
-    if (temp_v2 != 4) {
-      if (temp_v2 != 9) {
-        *(unsigned int **)(temp_v1 + 0x28) = puVar3;
-        return temp_v1;
-      }
-      asdEffectTextureCreate();
+    void *params = FUN_002b41c4(desc);
+    u32 kind = desc->kind;
+    EffMiscObject *obj = FUN_00271be0(kind, params);
+    u32 *resource = FUN_002721e4(desc);
+    EffMiscShared *shared;
+    u32 type;
+
+    if (resource == NULL) {
+        return obj;
     }
-    else {
-      puVar2 = (unsigned int *)FUN_0037a834(*puVar2 & 0xffff);
+    if (DAT_005c1078[obj->kind].sharesData == 0) {
+        return obj;
     }
-    puVar3[2] = (unsigned int)puVar2;
-  }
-  else {
-    temp_v2 = FUN_0037a7f4(puVar2);
-    puVar3[2] = temp_v2;
-  }
-  *(unsigned int **)(temp_v1 + 0x28) = puVar3;
-  return temp_v1;
+    type = desc->resourceType;
+    asdDebugTrace(DAT_005449ec, 450);
+    shared = (EffMiscShared *)memAlloc(0x10000, 0x100, 0, 0xc, 0x10, 1);
+    FUN_002e6dd4(shared, 0xc);
+    shared->type = type;
+    shared->refCount = 1;
+    switch (type) {
+    case 1:
+        shared->resource = FUN_0037a7f4(resource);
+        break;
+    case 4:
+        shared->resource = FUN_0037a834(*resource & 0xffff);
+        break;
+    case 9:
+        shared->resource = asdEffectTextureCreate(resource);
+        break;
+    }
+    obj->shared = shared;
+    return obj;
 }
 
 } /* extern "C" */

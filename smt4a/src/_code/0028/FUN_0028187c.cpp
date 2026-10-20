@@ -1,23 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00275f44(unsigned int, unsigned int);
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0xF4];
+    /* 0xF4 */ u32 handle;
+} Object;
 
-extern unsigned char DAT_0057f110; /* 0x57f110 */
+typedef struct Global57f110 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Object *object;
+} Global57f110;
+extern Global57f110 DAT_0057f110;
 
-/* Supplied declaration required: FUN_00275f44. */
+void FUN_00275f44(u32 handle, u32 request);
 
-
-void FUN_0028187c(unsigned int param_1)
-
+/* Passes the held object's handle and `request` to FUN_00275f44, if there is an object. */
+void FUN_0028187c(u32 request)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) != 0) {
-    FUN_00275f44(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0xf4),param_1);
-    return;
-  }
-  return;
+    if (DAT_0057f110.object != NULL) {
+        FUN_00275f44(DAT_0057f110.object->handle, request);
+        return;
+    }
 }
 
 } /* extern "C" */

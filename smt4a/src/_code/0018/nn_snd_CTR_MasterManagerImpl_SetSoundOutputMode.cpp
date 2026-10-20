@@ -1,33 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nn_snd_CTR_Dspsnd_SetSoundOutputMode(unsigned char *, unsigned int);
+void nn_snd_CTR_Dspsnd_SetSoundOutputMode(u8 *state, u32 mode);
+s32 FUN_001c6e20(void);
+extern u8 g_dspsndState[];
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct MasterManagerImpl {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ u8 outputMode;
+} MasterManagerImpl;
 
-extern unsigned char g_dspsndState; /* 0x6433d0 */
-
-extern int FUN_001c6e20(void);
-/* Supplied declaration required: nn_snd_CTR_Dspsnd_SetSoundOutputMode. */
-
-
-void nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode(int param_1,unsigned int param_2)
-
+/* Records the sound output mode and forwards it to the DSP sound state, if FUN_001c6e20 allows it. */
+void nn_snd_CTR_MasterManagerImpl_SetSoundOutputMode(MasterManagerImpl *manager, u32 mode)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_001c6e20();
-  if (temp_v0 != 0) {
-    *(char *)(param_1 + 2) = (char)param_2;
-    nn_snd_CTR_Dspsnd_SetSoundOutputMode(&g_dspsndState,param_2);
-    return;
-  }
-  return;
+    if (FUN_001c6e20() != 0) {
+        manager->outputMode = (u8)mode;
+        nn_snd_CTR_Dspsnd_SetSoundOutputMode(g_dspsndState, mode);
+        return;
+    }
 }
 
 } /* extern "C" */

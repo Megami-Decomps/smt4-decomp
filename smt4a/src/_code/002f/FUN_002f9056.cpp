@@ -1,17 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Target Target;
+typedef struct TargetVtbl {
+    /* 0x00 */ void *unk00[10];
+    /* 0x28 */ void (*handle)(Target *target, s32 arg);
+} TargetVtbl;
+struct Target {
+    /* 0x00 */ const TargetVtbl *vtbl;
+};
 
-void FUN_002f9056(int param_1,int param_2)
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ Target *target;
+} Holder;
 
+/* Forwards `arg` to the held target's handle method (slot 10). */
+void FUN_002f9056(Holder *object, s32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Could not recover jumptable at 0x002f905c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(**(int **)(param_1 + 0x3c) + 0x28))(*(int *)(param_1 + 0x3c),param_2);
-  return;
+    object->target->vtbl->handle(object->target, arg);
 }
 
 } /* extern "C" */

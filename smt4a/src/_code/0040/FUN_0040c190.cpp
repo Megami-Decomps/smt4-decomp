@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0016c410(int);
 int FUN_0016c560(int);
 int FUN_0037aa68(unsigned int, int);
-int FUN_0040978c(int, float *, int);
+int block530OwnerReset(int, float *, int);
 int FUN_004097b4(int, int *, int, int);
 int FUN_004ff058(unsigned int, unsigned int, float *, unsigned int, int);
 int VectorSignedToFloat(...);
@@ -43,14 +43,14 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
 /* Supplied declaration required: FUN_0037aa68. */
 extern int FUN_00387580(unsigned int);
 extern int FUN_003b5e48(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0040978c. */
+/* Supplied declaration required: block530OwnerReset. */
 /* Supplied declaration required: FUN_004097b4. */
 /* Supplied declaration required: FUN_004ff058. */
 extern unsigned int FUN_004ff4b0(unsigned int, unsigned int);
@@ -132,9 +132,9 @@ void FUN_0040c190(int param_1)
   temp_v25 = temp_v7;
   temp_v26 = temp_v7;
   fStack_34 = temp_v8;
-  FUN_0040978c(g_renderCtx,&temp_v12,0);
+  block530OwnerReset(g_renderCtx,&temp_v12,0);
   temp_v0 = g_renderCtx;
-  temp_v2 = FUN_00169294(6,7,0);
+  temp_v2 = packNibblesAndByte(6,7,0);
   piVar6 = (int *)(temp_v0 + 0x12b8);
   temp_v3 = *piVar6;
   temp_v4 = piVar6[temp_v3 + 2];

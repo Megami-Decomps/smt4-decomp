@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_002f4ab0(int, unsigned int);
-int FUN_00311544(int *);
+int handleLockRelease(int *);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002f4ab0. */
-/* Supplied declaration required: FUN_00311544. */
+/* Supplied declaration required: handleLockRelease. */
 extern int vectorSize12B(int *);
 
 
@@ -31,7 +31,7 @@ void FUN_0011bbb6(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
     for (temp_v1 = 0; temp_v1 < temp_v0; temp_v1 = temp_v1 + 1) {
       (**(romwright_code **)(*param_1 + 0x14))(param_1,*(unsigned short *)((int)&uStack_18 + temp_v1 * 2));
     }
-    FUN_00311544(param_1 + 0x2a);
+    handleLockRelease(param_1 + 0x2a);
     if (*(char *)(param_1[0x46] + 0x1c) != '\0') {
       FUN_002f4ab0(param_1[0x46],0xffffffff);
     }

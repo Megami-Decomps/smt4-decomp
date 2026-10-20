@@ -32,7 +32,7 @@ extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_0037c770. */
 /* Supplied declaration required: FUN_0038e4c4. */
 /* Supplied declaration required: FUN_003a7b54. */
-extern int FUN_003a7b88(void);
+extern int stateHolderIsMissingOrState0(void);
 /* Supplied declaration required: FUN_003a7bdc. */
 /* Supplied declaration required: FUN_00480e30. */
 /* Supplied declaration required: FUN_00480fc0. */
@@ -63,7 +63,7 @@ unsigned int FUN_0035e824(void)
         }
       }
       else {
-        temp_v1 = FUN_003a7b88();
+        temp_v1 = stateHolderIsMissingOrState0();
         if (temp_v1 != 0) {
           FUN_003a7b54();
           FUN_0022e774();

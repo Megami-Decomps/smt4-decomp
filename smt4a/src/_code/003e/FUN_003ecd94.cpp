@@ -31,9 +31,9 @@ typedef struct {
 
 extern GameState g_btlMain;
 
-int FUN_004bd340(void *object, int arg);
+int bitsAt60Test(void *object, int arg);
 
-/* Returns 1 when the object at 0x14 or some live party entry still fails the FUN_004bd340 check. */
+/* Returns 1 when the object at 0x14 or some live party entry still fails the bitsAt60Test check. */
 u32 FUN_003ecd94(u8 *owner)
 {
     int i;
@@ -44,14 +44,14 @@ u32 FUN_003ecd94(u8 *owner)
     if (g_btlMain.party == NULL) {
         return 0;
     }
-    if (g_btlMain.unk14 != NULL && FUN_004bd340(g_btlMain.unk14, 1) == 0) {
+    if (g_btlMain.unk14 != NULL && bitsAt60Test(g_btlMain.unk14, 1) == 0) {
         return 1;
     }
     for (i = 0; i < g_btlMain.party->count; i++) {
         PartyEntry *entry = &((PartyEntry *)g_btlMain.party)[i];
         PartySub *sub = &entry->sub;
 
-        if (sub != NULL && sub->unk62 != 0 && FUN_004bd340(sub, 1) == 0) {
+        if (sub != NULL && sub->unk62 != 0 && bitsAt60Test(sub, 1) == 0) {
             return 1;
         }
     }

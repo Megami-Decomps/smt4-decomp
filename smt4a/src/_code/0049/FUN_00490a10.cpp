@@ -12,7 +12,7 @@ int FUN_00184e64(unsigned int);
 int FUN_00185dd4(...);
 int FUN_002e1208(...);
 int FUN_0037b138(...);
-int FUN_0049359c(int, float *);
+int words2Copy(int, float *);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -40,7 +40,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_002e1208. */
 /* Supplied declaration required: FUN_0037b138. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 
 
 void FUN_00490a10(int param_1)
@@ -70,7 +70,7 @@ void FUN_00490a10(int param_1)
   int temp_v18 [15];
   
   temp_v2 = FUN_00162e8c();
-  FUN_0049359c(param_1 + 0x4d0,&temp_v15);
+  words2Copy(param_1 + 0x4d0,&temp_v15);
   temp_v12 = 0.0f;
   temp_v18[0] = 0;
   temp_v17 = 0;

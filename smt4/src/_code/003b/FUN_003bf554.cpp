@@ -1,22 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00282924(unsigned int, unsigned int);
+int FUN_00282924(u32 btl, u32 id);
+extern u32 btlGetMainState(void);
 
-/* Supplied declaration required: FUN_00282924. */
-extern unsigned int btlGetMainState(void);
-
-
-unsigned int FUN_003bf554(unsigned int param_1)
-
+u32 FUN_003bf554(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = btlGetMainState();
-  FUN_00282924(temp_v0,param_1);
-  return 0;
+    u32 btl = btlGetMainState();
+
+    FUN_00282924(btl, id);
+    return 0;
 }
 
 } /* extern "C" */

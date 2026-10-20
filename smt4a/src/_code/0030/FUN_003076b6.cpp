@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Pair {
+    /* 0x00 */ s32 first;
+    /* 0x04 */ s32 second;
+} Pair;
 
-unsigned int FUN_003076b6(int *param_1,int *param_2)
-
+/* Returns 1 when the two pairs differ. */
+u32 FUN_003076b6(Pair *a, Pair *b)
 {
-  unsigned int temp_v0;
-  
-  if ((*param_1 == *param_2) && (param_1[1] == param_2[1])) {
-    temp_v0 = 1;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0 ^ 1;
+    u32 equal;
+
+    if ((a->first == b->first) && (a->second == b->second)) {
+        equal = 1;
+    } else {
+        equal = 0;
+    }
+    return equal ^ 1;
 }
 
 } /* extern "C" */

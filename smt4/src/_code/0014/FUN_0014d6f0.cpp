@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int FUN_002a43ae(unsigned int);
+extern unsigned int __set_errno(unsigned int);
 extern unsigned int frem(void);
 
 
@@ -19,7 +19,7 @@ unsigned int FUN_0014d6f0(void)
   if (((-1 < (int)(0x7f800000 - (in_s0 & 0x7fffffff))) &&
       (-1 < (int)(0x7f800000 - (in_s1 & 0x7fffffff)))) &&
      (((in_s0 & 0x7fffffff) == 0x7f800000 || ((in_s1 & 0x7fffffff) == 0)))) {
-    temp_v0 = FUN_002a43ae(1);
+    temp_v0 = __set_errno(1);
     return temp_v0;
   }
   temp_v0 = frem();

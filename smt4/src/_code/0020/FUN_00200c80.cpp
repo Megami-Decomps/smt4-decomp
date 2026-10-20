@@ -1,17 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern char s_normal_00433a70[7]; /* 0x433a70 */
+extern u8 DAT_00433a70[][0x30];
 
-
-char * FUN_00200c80(int param_1)
-
+/* Entry `index` of the 0x30-byte table (entry 0 for out-of-range indices). */
+u8 *FUN_00200c80(s32 index)
 {
-  if (param_1 >= 0xe) {
-    param_1 = 0;
-  }
-  return s_normal_00433a70 + param_1 * 0x30;
+    if (index >= 0xe) {
+        index = 0;
+    }
+    return DAT_00433a70[index];
 }
 
 } /* extern "C" */

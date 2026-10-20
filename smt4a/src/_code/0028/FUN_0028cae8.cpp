@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the callback's pool word differs: retail embeds the raw address 0x3D4E88 (a label inside another function); built has a relocation to LAB_003d4e88, and a literal here would be CSE'd into one register */
 /* Loads data set 0x16 and registers the 0x64-byte entries of its two tables; returns the load result. */
 #include "common.h"
 

@@ -1,31 +1,25 @@
-#include "romwright_types.h"
+#include "shard/Shard004A.h"
 
 extern "C" {
 
-extern unsigned int g_lmapScene; /* 0x581288 */
-extern unsigned int DAT_00587f28; /* 0x587f28 */
-extern unsigned char g_gameState; /* 0x5f15fc */
+extern u8 *g_lmapScene;
+extern u8 *DAT_00587f28;
+extern u8 g_gameState;
 
-
-int lmapSceneGetObj(void)
-
+/* The active map scene object: the navi scene when the flag at g_gameState+0x460 is set, else the field scene. */
+u8 *lmapSceneGetObj(void)
 {
-  int *piVar1;
-  int temp_v0;
-  
-  if ((*(signed char *)((unsigned char *)&g_gameState + 0x460)) != '\0') {
-    piVar1 = (int *)&DAT_00587f28;
-  }
-  else {
-    piVar1 = (int *)&g_lmapScene;
-  }
-  if ((*(signed char *)((unsigned char *)&g_gameState + 0x460)) != '\0') {
-    temp_v0 = *piVar1 + 0x4c;
-  }
-  else {
-    temp_v0 = *piVar1 + 0x1c;
-  }
-  return temp_v0;
+    u8 **scene;
+
+    if (*((s8 *)&g_gameState + 0x460) != 0) {
+        scene = &DAT_00587f28;
+    } else {
+        scene = &g_lmapScene;
+    }
+    if (*((s8 *)&g_gameState + 0x460) != 0) {
+        return *scene + 0x4C;
+    }
+    return *scene + 0x1C;
 }
 
 } /* extern "C" */

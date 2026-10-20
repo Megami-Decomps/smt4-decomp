@@ -16,7 +16,7 @@ typedef struct EntryTable {
     /* 0x0C */ u8 entries[1];   /* 4-byte stride; the fields above are addressed from entry + 0xC */
 } EntryTable;
 
-extern void FUN_001836b0(void *resource);
+extern void resourceListDestroy(void *resource);
 extern void asdMemFree(void *resource);
 
 void FUN_00244848(EntryTable **table, s32 index)
@@ -24,7 +24,7 @@ void FUN_00244848(EntryTable **table, s32 index)
     EntryFields *entry = (EntryFields *)((u8 *)*table + index * 4 + 0xC);
 
     if (entry->resourceA != NULL) {
-        FUN_001836b0(entry->resourceA);
+        resourceListDestroy(entry->resourceA);
         entry->resourceA = NULL;
         entry->dirty = 0;
     }

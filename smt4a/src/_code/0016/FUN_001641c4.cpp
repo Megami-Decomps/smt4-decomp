@@ -1,17 +1,13 @@
-#include "romwright_types.h"
+#include "shard/Block57f248.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f248; /* 0x57f248 */
-
-
+/* Decrements the counter at 0x64A of the record at 0x57F248 while it is above 10. */
 void FUN_001641c4(void)
-
 {
-  if (*(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64a) > 10) {
-    *(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64a) = *(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64a) - 1;
-  }
-  return;
+    if (DAT_0057f248.record->unk64A > 10) {
+        DAT_0057f248.record->unk64A = DAT_0057f248.record->unk64A - 1;
+    }
 }
 
 } /* extern "C" */

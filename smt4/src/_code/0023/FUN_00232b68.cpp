@@ -48,7 +48,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00269bf0. */
 extern int btlGetMainState(void);
 extern int FUN_00295d08(unsigned int);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002e33f4. */
@@ -89,11 +89,11 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
     if (temp_v6 == 0) {
       return 1;
     }
-    temp_v9 = FUN_0029ebac(temp_v6,10);
+    temp_v9 = flagWordTestBit(temp_v6,10);
     if (temp_v9 != 0) {
       return 1;
     }
-    temp_v9 = FUN_0029ebac(temp_v6,2);
+    temp_v9 = flagWordTestBit(temp_v6,2);
     if (temp_v9 != 0) {
       return 1;
     }
@@ -129,7 +129,7 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
       temp_v3 = FUN_00295d08(1);
     }
     else {
-      temp_v3 = FUN_0029ebac(temp_v6,1);
+      temp_v3 = flagWordTestBit(temp_v6,1);
     }
     if (temp_v3 != 0) {
       return 1;
@@ -258,7 +258,7 @@ LAB_00232fa8:
 LAB_00233080:
         if (temp_v7 != 0) {
 LAB_00233088:
-          temp_v5 = FUN_0029ebac(temp_v6,3);
+          temp_v5 = flagWordTestBit(temp_v6,3);
           temp_v10 = temp_v5 != 0;
           temp_v9 = (int)*(short *)(temp_v6 + 0x2a);
           temp_v5 = 0;
@@ -297,7 +297,7 @@ LAB_00233088:
 LAB_0023310c:
         if (temp_v7 != 0) {
 LAB_00233114:
-          temp_v5 = FUN_0029ebac(temp_v6,3);
+          temp_v5 = flagWordTestBit(temp_v6,3);
           temp_v10 = temp_v5 != 0;
           temp_v9 = (int)*(short *)(temp_v6 + 0x2c);
           temp_v5 = 0;
@@ -391,11 +391,11 @@ LAB_00233114:
     pfVar11 = (fn_00232b68_arg0 *)0x0;
   }
   else {
-    temp_v5 = FUN_0029ebac(temp_v6,1);
+    temp_v5 = flagWordTestBit(temp_v6,1);
     if (temp_v5 != 0) {
       if (param_3 != (unsigned int *)0x0) {
         if (param_4 != (unsigned int *)0x0) {
-          temp_v5 = FUN_0029ebac(temp_v6,3);
+          temp_v5 = flagWordTestBit(temp_v6,3);
           if (temp_v5 != 0) {
             *param_4 = 1;
           }
@@ -417,7 +417,7 @@ LAB_00233114:
       }
       else {
         FUN_00262f68(temp_v6,2);
-        temp_v5 = FUN_0029ebac(temp_v6,3);
+        temp_v5 = flagWordTestBit(temp_v6,3);
         if (temp_v5 != 0) {
           temp_v2 = *(short *)(temp_v6 + 0x2a) + 1;
         }

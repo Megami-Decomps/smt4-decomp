@@ -34,7 +34,7 @@ extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002e1a18. */
 /* Supplied declaration required: FUN_002f0384. */
-extern int FUN_00334158(void);
+extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0038b5fc. */
@@ -58,7 +58,7 @@ void FUN_0041f22c(int param_1)
   unsigned char temp_v5;
   float temp_v6;
   
-  temp_v2 = FUN_00334158();
+  temp_v2 = objBStateAllowsAction();
   if (temp_v2 != 0) {
     if (*(char *)(param_1 + 0x5c) != '\0') {
       *(unsigned char *)(param_1 + 0x5c) = 0;
@@ -102,7 +102,7 @@ LAB_0041f2b8:
   FUN_0041e7c0(param_1);
   FUN_0041fc24(param_1);
   FUN_0041e2d8(param_1);
-  temp_v2 = FUN_00334158();
+  temp_v2 = objBStateAllowsAction();
   if (((temp_v2 != 0) && (temp_v2 = FUN_001656a0(1), temp_v2 != 0)) ||
      (temp_v2 = FUN_002e1a18(2), temp_v2 != 0)) {
     FUN_00169ddc(0x100020f);

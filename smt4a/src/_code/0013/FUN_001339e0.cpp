@@ -8,7 +8,7 @@ int FUN_002e6e14(int);
 int FUN_00307ad6(...);
 int FUN_00307af8(...);
 int vectorSize12B(int *);
-int FUN_003116d6(...);
+int word3CopyConstruct(...);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,9 +20,9 @@ extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307ad6. */
 /* Supplied declaration required: FUN_00307af8. */
-extern int FUN_00311532(unsigned int, int *);
+extern int bufGrowCapacity5(unsigned int, int *);
 /* Supplied declaration required: vectorSize12B. */
-/* Supplied declaration required: FUN_003116d6. */
+/* Supplied declaration required: word3CopyConstruct. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -47,7 +47,7 @@ void FUN_001339e0(int *param_1,unsigned int *param_2,unsigned int *param_3)
   if (temp_v1 < temp_v0) {
     puVar9 = (unsigned int *)param_1[1];
     param_1[1] = (int)(puVar9 + 3);
-    FUN_003116d6(param_1,puVar9);
+    word3CopyConstruct(param_1,puVar9);
     puVar11 = puVar9 + -3;
     while (param_2 != puVar11) {
       temp_v6 = puVar11[-2];
@@ -66,11 +66,11 @@ void FUN_001339e0(int *param_1,unsigned int *param_2,unsigned int *param_3)
   }
   else {
     temp_v6 = vectorSize12B(param_1);
-    temp_v2 = FUN_00311532(temp_v6,param_1);
+    temp_v2 = bufGrowCapacity5(temp_v6,param_1);
     temp_v3 = rt_malloc();
     FUN_00307ad6(*param_1,param_2,temp_v3,param_1);
     temp_v4 = __aeabi_idivmod((int)param_2 - *param_1,0xc);
-    FUN_003116d6(param_1,temp_v4 * 0xc + temp_v3,param_3);
+    word3CopyConstruct(param_1,temp_v4 * 0xc + temp_v3,param_3);
     temp_v4 = __aeabi_idivmod((int)param_2 - *param_1,0xc);
     FUN_00307ad6(param_2,param_1[1],temp_v4 * 0xc + temp_v3 + 0xc,param_1);
     temp_v5 = vectorSize12B(param_1);

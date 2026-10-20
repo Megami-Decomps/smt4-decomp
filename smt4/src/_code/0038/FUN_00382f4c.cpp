@@ -40,7 +40,7 @@ extern int FUN_002c09d0(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 extern int FUN_002d8e10(void);
 /* Supplied declaration required: FUN_002f6208. */
-extern unsigned int FUN_00385ab4(int, unsigned char);
+extern unsigned int dataTable28Sub1GetRecord(int, unsigned char);
 
 
 void FUN_00382f4c(int param_1)
@@ -62,7 +62,7 @@ void FUN_00382f4c(int param_1)
       else {
         temp_v1 = 0x40571b;
       }
-      temp_v2 = FUN_00385ab4(param_1 + 0x20,*(unsigned char *)(temp_v1 + temp_v0));
+      temp_v2 = dataTable28Sub1GetRecord(param_1 + 0x20,*(unsigned char *)(temp_v1 + temp_v0));
       FUN_0029ee6c(temp_v2,0x323232ff);
       if (temp_v0 != -1) {
         if (*(char *)(param_1 + 0x18) != '\0') {

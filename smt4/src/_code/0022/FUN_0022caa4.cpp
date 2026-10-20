@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0024f5d4(void);
+int dataTable2eSub2GetCount(void);
 
 extern char *DAT_0044cdf4; /* 0x44cdf4 */
 extern char s_d_____0044ce08[14]; /* 0x44ce08 */
 
-extern char *FUN_0024f594(int);
-/* Supplied declaration required: FUN_0024f5d4. */
+extern char *dataTable2eSub2GetRecord(int);
+/* Supplied declaration required: dataTable2eSub2GetCount. */
 
 
 char * FUN_0022caa4(int param_1,int param_2)
@@ -34,10 +34,10 @@ char * FUN_0022caa4(int param_1,int param_2)
   }
   else {
     temp_v0 = 0;
-    FUN_0024f5d4();
+    dataTable2eSub2GetCount();
     if (0 < param_1) {
       do {
-        pcVar2 = (char *)FUN_0024f594(temp_v0);
+        pcVar2 = (char *)dataTable2eSub2GetRecord(temp_v0);
         if (*(short *)(pcVar2 + 0x20) == -1) {
           return DAT_0044cdf4;
         }
@@ -45,7 +45,7 @@ char * FUN_0022caa4(int param_1,int param_2)
           return pcVar2;
         }
         temp_v0 = temp_v0 + 1;
-        FUN_0024f5d4();
+        dataTable2eSub2GetCount();
       } while (temp_v0 < (int)pcVar2);
     }
   }

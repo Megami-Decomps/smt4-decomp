@@ -1,30 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int asdMdlManagerDestroy(void);
+extern int asdMdlManagerClone(u32 model, u32 flags);
 
-extern int asdMdlManagerClone(unsigned int, unsigned int);
-/* Supplied declaration required: asdMdlManagerDestroy. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u16 type;
+    /* 0x0E */ u8 unk0E[0x46];
+    /* 0x54 */ int model;
+} Obj;
 
-
-void FUN_00318cb8(int param_1,int param_2)
-
+void FUN_00318cb8(Obj *dst, Obj *src)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (*(short *)(param_2 + 0xc) == 3) {
-    if (*(int *)(param_1 + 0x54) != 0) {
-      asdMdlManagerDestroy();
+    int clone;
+
+    if (src->type == 3) {
+        if (dst->model != 0) {
+            asdMdlManagerDestroy();
+        }
+        clone = asdMdlManagerClone(src->model, 0);
+        dst->model = clone;
+        *(u32 *)(*(int *)(*(int *)(*(int *)(*(int *)(clone + 8) + 0x2c) + 0x220) + 8) + 0x28) = 1;
     }
-    temp_v0 = asdMdlManagerClone(*(unsigned int *)(param_2 + 0x54),0);
-    *(int *)(param_1 + 0x54) = temp_v0;
-    *(unsigned int *)(*(int *)(*(int *)(*(int *)(*(int *)(temp_v0 + 8) + 0x2c) + 0x220) + 8) + 0x28) = 1
-    ;
-  }
-  *(unsigned short *)(param_1 + 0xc) = *(unsigned short *)(param_2 + 0xc);
-  return;
+    dst->type = src->type;
 }
 
 } /* extern "C" */

@@ -41,7 +41,7 @@ extern int FUN_0012f32c(void);
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002e9318. */
-extern unsigned int *FUN_003070fc(fn_002ed0dc_arg0 *, unsigned int);
+extern unsigned int *initVtable00558fb4(fn_002ed0dc_arg0 *, unsigned int);
 extern unsigned int FUN_0030710c(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00307134. */
 
@@ -56,7 +56,7 @@ unsigned int * FUN_002ed0dc(fn_002ed0dc_arg0 *param_1,unsigned int param_2)
   unsigned int temp_v1;
   unsigned char temp_v2 [12];
   
-  puVar1 = (unsigned int *)FUN_003070fc(param_1,1);
+  puVar1 = (unsigned int *)initVtable00558fb4(param_1,1);
   *puVar1 = (unsigned int)&DAT_0055a400;
   puVar1[0x10] = 0;
   puVar1[0x14] = 0;

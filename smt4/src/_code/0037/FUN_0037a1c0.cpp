@@ -1,20 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0037d604(unsigned int *);
-extern int FUN_0037f188(int);
+extern int FUN_0037d604(u32 *block);
+extern int FUN_0037f188(int block);
 
-
-int FUN_0037a1c0(unsigned int *param_1,unsigned int param_2)
-
+int FUN_0037a1c0(u32 *obj, u32 value)
 {
-  int temp_v0;
-  
-  *param_1 = param_2;
-  temp_v0 = FUN_0037d604(param_1 + 0x754);
-  temp_v0 = FUN_0037f188(temp_v0 - 0x1c5c);
-  return temp_v0 - 0xf4;
+    int block;
+
+    *obj = value;
+    block = FUN_0037d604(obj + 0x754);
+    block = FUN_0037f188(block - 0x1c5c);
+    return block - 0xf4;
 }
 
 } /* extern "C" */

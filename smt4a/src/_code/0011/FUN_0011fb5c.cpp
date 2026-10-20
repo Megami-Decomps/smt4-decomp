@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e75fa(...);
 int FUN_002e9318(...);
 int FUN_002e9c0c(...);
-int FUN_002ea0e4(...);
+int constructObj0055affc(...);
 int FUN_002ea3c0(...);
 int FUN_002ea3d0(...);
 int FUN_002ea974(...);
@@ -19,7 +19,7 @@ int FUN_002f7cb0(...);
 int FUN_002f7cba(...);
 int FUN_003056a0(...);
 int FUN_003056e4(...);
-int FUN_0031076a(...);
+int ownedPtrReset(...);
 int FUN_00310784(...);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -40,7 +40,7 @@ extern int FUN_002e760a(unsigned int);
 extern unsigned int FUN_002e7908(int *, unsigned int *);
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9c0c. */
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002ea3c0. */
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea974. */
@@ -56,7 +56,7 @@ extern int FUN_003054ce(unsigned int);
 extern unsigned long long FUN_00305696(unsigned int, int *);
 /* Supplied declaration required: FUN_003056a0. */
 /* Supplied declaration required: FUN_003056e4. */
-/* Supplied declaration required: FUN_0031076a. */
+/* Supplied declaration required: ownedPtrReset. */
 /* Supplied declaration required: FUN_00310784. */
 
 
@@ -77,7 +77,7 @@ void FUN_0011fb5c(int param_1)
   
   temp_v0 = FUN_003054ce(*(unsigned int *)(param_1 + 400));
   if (*(int *)(temp_v0 + 0x1c) != 2) {
-    FUN_002ea0e4(temp_v8);
+    constructObj0055affc(temp_v8);
     FUN_002ea974(temp_v6);
     temp_v1 = FUN_002ee568(temp_v7,&LAB_0011fca0);
     temp_v0 = FUN_002fe22a(param_1 + 0x208,temp_v1);
@@ -96,7 +96,7 @@ void FUN_0011fb5c(int param_1)
     }
     temp_v1 = *(unsigned int *)(param_1 + 0x30c);
     *(unsigned int *)(param_1 + 0x30c) = 0;
-    FUN_0031076a(&DAT_00594ec8,temp_v1);
+    ownedPtrReset(&DAT_00594ec8,temp_v1);
     FUN_002e9c0c();
     temp_v4[3] = *(unsigned int *)(param_1 + 800);
     temp_v5 = *(unsigned int *)(param_1 + 0x324);

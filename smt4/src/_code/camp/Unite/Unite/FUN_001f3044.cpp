@@ -69,7 +69,7 @@ extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00297410. */
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 extern int FUN_0029aef0(void);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_002a019c. */
 extern int lmapSceneGetScript(void);
 extern int FUN_002a0d0c(void);
@@ -188,8 +188,8 @@ void FUN_001f3044(void)
     else {
       temp_v1 = FUN_002a8740();
       if (((*(short *)(temp_v1 + 0x46) != *(short *)(temp_v0 + 0x20)) ||
-          (temp_v2 = FUN_0029ebac(temp_v1,10), temp_v2 != 0)) ||
-         (temp_v1 = FUN_0029ebac(temp_v1,2), temp_v1 != 0)) {
+          (temp_v2 = flagWordTestBit(temp_v1,10), temp_v2 != 0)) ||
+         (temp_v1 = flagWordTestBit(temp_v1,2), temp_v1 != 0)) {
         *(unsigned short *)(temp_v0 + 0x1c) = 0xffff;
         *(unsigned short *)(temp_v0 + 0x20) = 0;
       }

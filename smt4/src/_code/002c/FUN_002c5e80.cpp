@@ -17,7 +17,7 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_00100d1c. */
-extern unsigned int *FUN_002c6644(void);
+extern unsigned int *__aeabi_errno_addr(void);
 extern int *FUN_002c6a50(void);
 
 
@@ -57,13 +57,13 @@ unsigned long long FUN_002c5e80(unsigned char *param_1,unsigned int *param_2,uns
     temp_v1 = pbVar4 != (unsigned char *)0x0;
     pbVar4 = pbVar3;
     if (temp_v1 && -1 < (int)pbVar3) {
-      puVar2 = (unsigned int *)FUN_002c6644();
+      puVar2 = (unsigned int *)__aeabi_errno_addr();
       *puVar2 = 2;
       pbVar4 = (unsigned char *)0x80000000;
     }
   }
   else if ((int)pbVar4 < 0) {
-    puVar2 = (unsigned int *)FUN_002c6644();
+    puVar2 = (unsigned int *)__aeabi_errno_addr();
     *puVar2 = 2;
     return romwright_piece_4_4(param_1,0x7fffffff);
   }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e7658(unsigned char [16]);
 int FUN_002ed258(unsigned char [16]);
-int FUN_002ed294(unsigned int, int);
+int ringSetLimit(unsigned int, int);
 
 /* stack frame of param_2: 4 slot(s), 10 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_002ed278(unsigned char *, unsigned char *);
 extern int FUN_002ed280(unsigned char *, unsigned int);
 extern int FUN_002ed28c(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_002ed294. */
+/* Supplied declaration required: ringSetLimit. */
 
 
 unsigned int FUN_00106250(unsigned int param_1,int param_2)
@@ -49,7 +49,7 @@ unsigned int FUN_00106250(unsigned int param_1,int param_2)
           temp_v0 = FUN_002ed28c(temp_v1,temp_v5);
           if (temp_v0 != 0) {
             *(unsigned int *)(param_2 + 0xc4) = temp_v5[0];
-            FUN_002ed294(*(unsigned int *)(param_2 + 0xd8),0xc);
+            ringSetLimit(*(unsigned int *)(param_2 + 0xd8),0xc);
             FUN_002e7658(temp_v1);
             return 1;
           }

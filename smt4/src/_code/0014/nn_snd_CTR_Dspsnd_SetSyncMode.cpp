@@ -1,22 +1,19 @@
-#include "romwright_types.h"
+#include "shard/Dspsnd.h"
 
 extern "C" {
 
 extern int FUN_002bb274(void);
 
-
-void nn_snd_CTR_Dspsnd_SetSyncMode(int param_1,unsigned short param_2)
-
+void nn_snd_CTR_Dspsnd_SetSyncMode(DspsndState *state, u16 value)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002bb274();
-  if (temp_v0 != 0) {
-    temp_v0 = *(int *)(param_1 + (unsigned int)*(unsigned short *)(param_1 + 0x131e) * 4 + 0x10a0);
-    *(unsigned short *)(temp_v0 + 0xbc) = param_2;
-    *(unsigned int *)(temp_v0 + 0xc0) = *(unsigned int *)(temp_v0 + 0xc0) | 0x10000;
-  }
-  return;
+    int ok = FUN_002bb274();
+
+    if (ok != 0) {
+        DspCommand *params = state->commands[state->current];
+
+        params->syncMode = value;
+        params->syncFlags |= 0x10000;
+    }
 }
 
 } /* extern "C" */

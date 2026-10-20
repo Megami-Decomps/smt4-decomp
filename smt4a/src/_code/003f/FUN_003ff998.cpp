@@ -59,7 +59,7 @@ extern int FUN_003ff5b8(unsigned int *);
 extern int FUN_003ff888(void);
 extern int FUN_004c3a98(int, unsigned int);
 extern int FUN_004c6b8c(int, int);
-extern int FUN_004c86cc(unsigned int *, unsigned int);
+extern int halfTable152TopIs2(unsigned int *, unsigned int);
 extern int btlUnitGet(unsigned int);
 
 
@@ -300,14 +300,14 @@ LAB_003ffb9c:
   }
   if ((((temp_v6 & 0x20000000) != 0) &&
       (temp_v5 = FUN_004c3a98((int)*(short *)((int)param_1 + 0x6e),0x17), temp_v5 < 1)) &&
-     ((((temp_v5 = FUN_004c86cc(param_1 + 0x59,0), temp_v5 != 0 ||
-        ((((temp_v5 = FUN_004c86cc(param_1 + 0x59,1), temp_v5 != 0 ||
-           (temp_v5 = FUN_004c86cc(param_1 + 0x59,2), temp_v5 != 0)) ||
-          (temp_v5 = FUN_004c86cc(param_1 + 0x59,3), temp_v5 != 0)) ||
-         ((temp_v5 = FUN_004c86cc(param_1 + 0x59,4), temp_v5 != 0 ||
-          (temp_v5 = FUN_004c86cc(param_1 + 0x59,5), temp_v5 != 0)))))) ||
-       (temp_v5 = FUN_004c86cc(param_1 + 0x59,6), temp_v5 != 0)) ||
-      (temp_v5 = FUN_004c86cc(param_1 + 0x59,7), temp_v5 != 0)))) {
+     ((((temp_v5 = halfTable152TopIs2(param_1 + 0x59,0), temp_v5 != 0 ||
+        ((((temp_v5 = halfTable152TopIs2(param_1 + 0x59,1), temp_v5 != 0 ||
+           (temp_v5 = halfTable152TopIs2(param_1 + 0x59,2), temp_v5 != 0)) ||
+          (temp_v5 = halfTable152TopIs2(param_1 + 0x59,3), temp_v5 != 0)) ||
+         ((temp_v5 = halfTable152TopIs2(param_1 + 0x59,4), temp_v5 != 0 ||
+          (temp_v5 = halfTable152TopIs2(param_1 + 0x59,5), temp_v5 != 0)))))) ||
+       (temp_v5 = halfTable152TopIs2(param_1 + 0x59,6), temp_v5 != 0)) ||
+      (temp_v5 = halfTable152TopIs2(param_1 + 0x59,7), temp_v5 != 0)))) {
     temp_v8 = temp_v8 | 0x20000000;
   }
   if ((temp_v6 & 0x40000000) != 0) {

@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int FUN_00476fb4(...); /* 0x476fb4 */
+extern int restartObjRun(...); /* 0x476fb4 */
 extern int FUN_00477030(...); /* 0x477030 */
 extern int FUN_004772b0(...); /* 0x4772b0 */
 extern int FUN_00477744(...); /* 0x477744 */
@@ -50,7 +50,7 @@ void FUN_0047c65c(int param_1)
   } while (temp_v1 != 0);
   *(romwright_code **)(param_1 + 0x10) = FUN_004791d4;
   *(unsigned int *)(param_1 + 0x14) = 0;
-  *(romwright_code **)(param_1 + 0x18) = FUN_00476fb4;
+  *(romwright_code **)(param_1 + 0x18) = restartObjRun;
   *(unsigned int *)(param_1 + 0x1c) = 0;
   *(romwright_code **)(param_1 + 0x20) = FUN_00477744;
   *(unsigned int *)(param_1 + 0x24) = 0;

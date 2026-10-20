@@ -1,15 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_00208bfc(int param_1)
-
+/* Returns the address 8 bytes into the object, or NULL when there is none. */
+u8 *FUN_00208bfc(u8 *object)
 {
-  if (param_1 != 0) {
-    param_1 = param_1 + 8;
-  }
-  return param_1;
+    if (object != NULL) {
+        object = object + 8;
+    }
+    return object;
 }
 
 } /* extern "C" */

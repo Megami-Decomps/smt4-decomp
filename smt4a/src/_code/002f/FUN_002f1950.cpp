@@ -1,20 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_002eabfc(void);
-extern unsigned char *FUN_002eac18(unsigned int, unsigned int);
+u32 FUN_002eabfc(void);
+u8 *FUN_002eac18(u32 object, u32 offset);
 
-
-unsigned char FUN_002f1950(unsigned int param_1)
-
+/* Returns the byte at the address FUN_002eac18 yields for the object and FUN_002eabfc's offset. */
+u8 FUN_002f1950(u32 object)
 {
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = FUN_002eabfc();
-  puVar2 = (unsigned char *)FUN_002eac18(param_1,temp_v0);
-  return *puVar2;
+    u32 offset;
+    u8 *address;
+
+    offset = FUN_002eabfc();
+    address = FUN_002eac18(object, offset);
+    return *address;
 }
 
 } /* extern "C" */

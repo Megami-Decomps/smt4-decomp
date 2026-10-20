@@ -9,7 +9,7 @@ int FUN_00184310(void);
 int dataTableGet(...);
 int dataTableGetEntries(void);
 int FUN_001a9698(void);
-int FUN_0032ff20(...);
+int unitRecordBuild(...);
 int FUN_0035ad50(unsigned int, unsigned char [104]);
 int FUN_003c3f1c(void);
 int FUN_004bcd90(unsigned char [104]);
@@ -66,7 +66,7 @@ extern signed char DAT_0057f0ac; /* 0x57f0ac */
 /* Supplied declaration required: FUN_001a9698. */
 extern int FUN_001ab888(void);
 extern int FUN_00213b5c(void);
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_003c3f1c. */
 extern int FUN_003e46f4(unsigned int);
@@ -208,7 +208,7 @@ LAB_004a8864:
     }
   }
   else {
-    FUN_0032ff20(temp_v42,temp_v19);
+    unitRecordBuild(temp_v42,temp_v19);
   }
   temp_v11 = (float)VectorSignedToFloat((int)*(short *)(puVar12 + 0x10),(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v10 = (float)VectorSignedToFloat((int)*(short *)(puVar12 + 0xe),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -308,7 +308,7 @@ LAB_004a8864:
   temp_v8 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001a9698();
   temp_v10 = (float)VectorSignedToFloat(temp_v41,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_0032ff20(temp_v42,temp_v36);
+  unitRecordBuild(temp_v42,temp_v36);
   temp_v6 = 0;
   if (DAT_0057f0ac != '\0') {
     jyoucyuGetTableEntry(0);

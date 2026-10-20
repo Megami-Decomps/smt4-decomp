@@ -1,31 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_003c2a30_arg0 fn_003c2a30_arg0;
-struct fn_003c2a30_arg0 {
-    undefined1 field_0x0; /* +0x0 */
-    unsigned char pad_0x1[0x3];
-    undefined4 field_0x4; /* +0x4 */
-    undefined1 field_0x8; /* +0x8 */
-    undefined1 field_0x9; /* +0x9 */
-    undefined1 field_0xa; /* +0xa */
-    undefined1 field_0xb; /* +0xb */
-    undefined1 field_0xc; /* +0xc */
-};
+typedef struct Flags {
+    /* 0x0 */ u8 unk0;
+    /* 0x1 */ u8 unk1[3];
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u8 unk8;
+    /* 0x9 */ u8 unk9;
+    /* 0xA */ u8 unkA;
+    /* 0xB */ u8 unkB;
+    /* 0xC */ u8 unkC;
+} Flags;
 
-
-void NaviMain_ResetFlags(fn_003c2a30_arg0 *param_1,unsigned char param_2)
-
+void NaviMain_ResetFlags(Flags *flags, u8 value)
 {
-  param_1->field_0xc = param_2;
-  param_1->field_0x4 = 0;
-  param_1->field_0x8 = 0;
-  param_1->field_0x9 = 0;
-  param_1->field_0xa = 0;
-  param_1->field_0xb = 0;
-  param_1->field_0x0 = 0;
-  return;
+    flags->unkC = value;
+    flags->unk4 = 0;
+    flags->unk8 = 0;
+    flags->unk9 = 0;
+    flags->unkA = 0;
+    flags->unkB = 0;
+    flags->unk0 = 0;
 }
 
 } /* extern "C" */

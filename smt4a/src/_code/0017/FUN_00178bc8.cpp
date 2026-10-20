@@ -1,13 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_00178bc8(unsigned int *param_1)
-
+/* Sets the referenced word to 1. */
+void FUN_00178bc8(u32 *flag)
 {
-  *param_1 = 1;
-  return;
+    *flag = 1;
 }
 
 } /* extern "C" */

@@ -1,43 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+int scrSetResult(int result);
 int btlGetMainState(void);
-
-extern int FUN_002499b4(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
+extern u8 *FUN_002499b4(void);
 extern int scrGetArg(void);
 
-
-unsigned int FUN_0031ef28(void)
-
+/* Script command: tests the status counter selected by argument 0 (0 -> slot 7, 1 -> slot 10, 2 -> slot 11) of the current unit. */
+u32 FUN_0031ef28(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = 0;
-  if (temp_v0 == 0) {
-    temp_v1 = 7;
-  }
-  else if (temp_v0 == 1) {
-    temp_v1 = 10;
-  }
-  else if (temp_v0 == 2) {
-    temp_v1 = 0xb;
-  }
-  btlGetMainState();
-  temp_v0 = FUN_002499b4();
-  if (temp_v0 != 0) {
-    scrSetResult(*(short *)(temp_v0 + temp_v1 * 2 + 0x72) >= 1);
-  }
-  else {
-    scrSetResult(0);
-  }
-  return 1;
+    int which;
+    int slot;
+    u8 *unit;
+
+    which = scrGetArg();
+    slot = 0;
+    if (which == 0) {
+        slot = 7;
+    } else if (which == 1) {
+        slot = 10;
+    } else if (which == 2) {
+        slot = 0xb;
+    }
+    btlGetMainState();
+    unit = FUN_002499b4();
+    if (unit != NULL) {
+        scrSetResult(*(s16 *)(unit + slot * 2 + 0x72) >= 1);
+    } else {
+        scrSetResult(0);
+    }
+    return 1;
 }
 
 } /* extern "C" */

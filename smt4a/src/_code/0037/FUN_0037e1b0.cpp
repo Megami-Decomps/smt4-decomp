@@ -1,24 +1,20 @@
-#include "romwright_types.h"
+#include "shard/Shard0037.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern ObjBRef DAT_00588fd0;
 
-
-void FUN_0037e1b0(int param_1,unsigned char param_2)
-
+/* Stores the value; a negative value also clears the companion byte at +0x1384, else sets it to `flag`. */
+void FUN_0037e1b0(s32 value, u8 flag)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
-  *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x137f) = (char)param_1;
-  if (param_1 < 0) {
-    *(unsigned char *)(temp_v0 + 0x1384) = 0;
-  }
-  else {
-    *(unsigned char *)(temp_v0 + 0x1384) = param_2;
-  }
-  return;
+    ObjB *obj = DAT_00588fd0.instance;
+
+    obj->unk137F = value;
+    if (value < 0) {
+        obj->unk1384 = 0;
+    } else {
+        obj->unk1384 = flag;
+    }
 }
 
 } /* extern "C" */

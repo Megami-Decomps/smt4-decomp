@@ -39,7 +39,7 @@ extern int FUN_00162e8c(void);
 /* Supplied declaration required: FUN_003fd784. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fe86c. */
-extern int FUN_004ffb58(int);
+extern int slots4FGetActiveValue(int);
 
 
 void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
@@ -95,7 +95,7 @@ void FUN_0036aa04(fn_0036aa04_arg0 *param_1)
     }
     FUN_003fd76c(temp_v3,g_lmapScene + 0x1c);
     FUN_003fd784(temp_v3);
-    temp_v0 = FUN_004ffb58(temp_v3);
+    temp_v0 = slots4FGetActiveValue(temp_v3);
     if (temp_v0 != 0) {
       FUN_003fe86c(temp_v3,0,2);
     }

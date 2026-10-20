@@ -38,7 +38,7 @@ GameState *btlGetMainState(void);
 Entity *FUN_00282924(GameState *state, int index);
 int FUN_0024ea50(u16 type);
 int scrSetResult(int id);
-int FUN_002c09f4(u32 range);
+int randNextInRange(u32 range);
 int memClear(Entity **buffer, int size);
 
 /* Collects the eligible other-group entities no stronger than the player's and reports the id of a random one (-1 if none). */
@@ -69,7 +69,7 @@ u32 FUN_0031f400(void)
     if (count == 0) {
         id = -1;
     } else {
-        id = candidates[FUN_002c09f4((count - 1) & 0xffff)]->id;
+        id = candidates[randNextInRange((count - 1) & 0xffff)]->id;
     }
     scrSetResult(id);
     return 1;

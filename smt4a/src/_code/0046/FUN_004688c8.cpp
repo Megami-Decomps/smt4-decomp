@@ -15,13 +15,13 @@ int FUN_002f0c18(void);
 int FUN_003315c4(void);
 int FUN_00331714(int *);
 int FUN_0034aae4(void);
-int FUN_00372170(int);
+int stateHolder4Request(int);
 int FUN_003dec50(void);
 int FUN_003df168(int *, int);
 int FUN_003fd63c(...);
 int FUN_00417a60(int);
 int FUN_00417e08(int);
-int FUN_00468878(unsigned int *, unsigned char *);
+int pickObjStart(unsigned int *, unsigned char *);
 int FUN_00480fc0(int, unsigned int);
 int FUN_004d0d70(void);
 
@@ -70,14 +70,14 @@ extern unsigned int FUN_0031f8cc(void);
 /* Supplied declaration required: FUN_003315c4. */
 /* Supplied declaration required: FUN_00331714. */
 /* Supplied declaration required: FUN_0034aae4. */
-extern int FUN_0035dbf0(void);
-/* Supplied declaration required: FUN_00372170. */
+extern int stateHolder4IsD(void);
+/* Supplied declaration required: stateHolder4Request. */
 /* Supplied declaration required: FUN_003dec50. */
 /* Supplied declaration required: FUN_003df168. */
 /* Supplied declaration required: FUN_003fd63c. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00417e08. */
-/* Supplied declaration required: FUN_00468878. */
+/* Supplied declaration required: pickObjStart. */
 /* Supplied declaration required: FUN_00480fc0. */
 /* Supplied declaration required: FUN_004d0d70. */
 
@@ -152,12 +152,12 @@ LAB_004689f8:
               sysPlaySe(0xa5);
               FUN_0019de98(0,0xf4f4f4ff);
               FUN_0019ea64(1);
-              FUN_00468878(param_1,&LAB_00468d60);
+              pickObjStart(param_1,&LAB_00468d60);
               temp_v4 = param_1[2] + 1;
             }
             else {
               FUN_002f0c18();
-              FUN_00372170((int)(char)param_1[4]);
+              stateHolder4Request((int)(char)param_1[4]);
               temp_v4 = 3;
             }
             param_1[2] = temp_v4;
@@ -173,7 +173,7 @@ LAB_004689f8:
       return;
     }
     sysPlaySe(0xa5);
-    FUN_00468878(param_1,&LAB_00468d74);
+    pickObjStart(param_1,&LAB_00468d74);
     temp_v4 = 10;
     break;
   case 1:
@@ -184,16 +184,16 @@ LAB_004689f8:
     param_1[2] = param_1[2] + 1;
   case 2:
     FUN_002f0c18();
-    FUN_00372170((int)(char)param_1[4]);
+    stateHolder4Request((int)(char)param_1[4]);
     temp_v4 = param_1[2] + 1;
     break;
   case 3:
-    temp_v2 = FUN_0035dbf0();
+    temp_v2 = stateHolder4IsD();
     if (temp_v2 != 0) {
       temp_v4 = FUN_0031f8cc();
       param_1[0x283] = temp_v4;
       param_1[2] = 4;
-      FUN_00372170((int)(char)param_1[4]);
+      stateHolder4Request((int)(char)param_1[4]);
       sysPlaySe(0xa5);
     }
     temp_v2 = FUN_002a746c();
@@ -210,7 +210,7 @@ LAB_004689f8:
     }
     FUN_0034aae4();
     *param_1 = *param_1 & 0xffffffdf;
-    FUN_00468878(param_1,&LAB_00468d84);
+    pickObjStart(param_1,&LAB_00468d84);
     temp_v4 = 6;
     break;
   case 5:
@@ -301,7 +301,7 @@ LAB_004689f8:
     FUN_00417a60(*puVar5);
     FUN_003dec50();
     sysPlaySe(0xa5);
-    FUN_00468878(param_1,&LAB_00468e88);
+    pickObjStart(param_1,&LAB_00468e88);
     temp_v4 = 8;
     break;
   case 8:

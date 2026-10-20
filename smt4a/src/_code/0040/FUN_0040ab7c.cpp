@@ -1,15 +1,13 @@
-#include "romwright_types.h"
+#include "shard/Shard0040.h"
 
 extern "C" {
 
-
-void FUN_0040ab7c(int param_1,unsigned int param_2)
-
+/* Stores `value` unless the object is locked (+4 non-zero). */
+void FUN_0040ab7c(LockedObj *obj, u32 value)
 {
-  if (*(int *)(param_1 + 4) == 0) {
-    *(unsigned int *)(param_1 + 0x14) = param_2;
-  }
-  return;
+    if (obj->locked == 0) {
+        obj->unk14 = value;
+    }
 }
 
 } /* extern "C" */

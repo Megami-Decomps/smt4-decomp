@@ -1,35 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+int scrSetResult(int result);
+extern u8 *btlGetMainState(void);
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-
-
-unsigned int FUN_00325178(void)
-
+/* Script command: result 1 when any of the 0x6D battle units is active, present, visible and not flagged 0x100. */
+u32 FUN_00325178(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  while( 1 ) {
-    temp_v0 = btlGetMainState();
-    temp_v1 = *(unsigned int *)(*(int *)(temp_v0 + 0x1fc0) + temp_v2 * 0x288);
-    if (((temp_v1 & 0x10) != 0 && (temp_v1 & 1) != 0) && ((temp_v1 & 0x40) == 0) && ((temp_v1 & 0x100) == 0))
-    break;
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 0x6d) {
-      scrSetResult(0);
-      return 1;
+    int i = 0;
+    u8 *btl;
+    u32 flags;
+
+    while (1) {
+        btl = btlGetMainState();
+        flags = *(u32 *)(*(u8 **)(btl + 0x1fc0) + i * 0x288);
+        if (((flags & 0x10) != 0 && (flags & 1) != 0) && ((flags & 0x40) == 0) && ((flags & 0x100) == 0)) {
+            break;
+        }
+        i = i + 1;
+        if (i >= 0x6d) {
+            scrSetResult(0);
+            return 1;
+        }
     }
-  }
-  scrSetResult(1);
-  return 1;
+    scrSetResult(1);
+    return 1;
 }
 
 } /* extern "C" */

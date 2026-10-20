@@ -9,7 +9,7 @@ int FUN_00268250(int, int, int, unsigned int, int);
 int FUN_002e342c(unsigned char [132], unsigned int);
 int FUN_002e6dd0(...);
 int FUN_00320c64(void);
-int FUN_003332d8(void);
+int byte1IsZero(void);
 int FUN_003416a0(int, unsigned char [132]);
 int aocBootStop(void);
 int FUN_003c113c(void);
@@ -27,11 +27,11 @@ extern int aocBootIsFinished(void);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_00320c64. */
-/* Supplied declaration required: FUN_003332d8. */
+/* Supplied declaration required: byte1IsZero. */
 /* Supplied declaration required: FUN_003416a0. */
 /* Supplied declaration required: aocBootStop. */
 extern unsigned int FUN_00371b10(unsigned int);
-extern int FUN_0038b310(void);
+extern int byteTripleGetV2(void);
 /* Supplied declaration required: FUN_003c113c. */
 
 
@@ -49,7 +49,7 @@ void FUN_00408610(int param_1)
     FUN_003c113c();
     *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
   case 1:
-    temp_v2 = FUN_0038b310();
+    temp_v2 = byteTripleGetV2();
     if (temp_v2 == 0) {
       return;
     }
@@ -77,7 +77,7 @@ void FUN_00408610(int param_1)
       if (temp_v2 == 0) {
         return;
       }
-      FUN_003332d8();
+      byte1IsZero();
       *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
       asdSequenceRequest(1,0);
       *(unsigned char *)(param_1 + 4) = 1;
@@ -91,7 +91,7 @@ void FUN_00408610(int param_1)
     if (temp_v2 == 0) {
       return;
     }
-    FUN_003332d8();
+    byte1IsZero();
     *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
   case 5:
     asdSequenceRequest(1,0);

@@ -23,11 +23,11 @@ int FUN_002c0b10(...);
 int FUN_002c0b5c(...);
 int sysMemClear(void);
 int FUN_002e6dd0(...);
-int FUN_00319e58(void);
+int cecProcessCall2(void);
 int FUN_0031f0a8(...);
 int FUN_0032e25c(...);
 int FUN_00331380(int);
-int FUN_00343cc8(...);
+int ownerSetName(...);
 int FUN_00343d04(unsigned int *);
 int FUN_0035a074(...);
 int FUN_00387edc(...);
@@ -64,7 +64,7 @@ extern int FUN_002bfd2c(...); /* 0x2bfd2c */
 extern int FUN_002e221c(...); /* 0x2e221c */
 extern int FUN_002e2284(...); /* 0x2e2284 */
 extern int FUN_002e2384(...); /* 0x2e2384 */
-extern int FUN_0031934c(...); /* 0x31934c */
+extern int jobSceneWaitStep(...); /* 0x31934c */
 extern unsigned char LAB_003193a0; /* 0x3193a0 */
 extern unsigned char LAB_0035a2a4; /* 0x35a2a4 */
 extern int FUN_0036cfb0(...); /* 0x36cfb0 */
@@ -102,13 +102,13 @@ extern int wstrlen(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
 extern int rt_memcmp(unsigned char *, unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_00319e58. */
+/* Supplied declaration required: cecProcessCall2. */
 extern unsigned char FUN_0031cee0(void);
 /* Supplied declaration required: FUN_0031f0a8. */
 /* Supplied declaration required: FUN_0032e25c. */
-extern unsigned int FUN_00330ab8(void);
+extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00331380. */
-/* Supplied declaration required: FUN_00343cc8. */
+/* Supplied declaration required: ownerSetName. */
 /* Supplied declaration required: FUN_00343d04. */
 extern int FUN_00345388(unsigned int);
 /* Supplied declaration required: FUN_0035a074. */
@@ -119,7 +119,7 @@ extern int FUN_00345388(unsigned int);
 /* Supplied declaration required: FUN_003f881c. */
 extern int FUN_003fd63c(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004310c0. */
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: nn_cfg_CTR_IsRestrictP2pCec. */
 
 
@@ -198,7 +198,7 @@ void FUN_002bf534(int param_1)
   puVar4[10] = (unsigned int)FUN_002a283c;
   puVar4[0xc] = (unsigned int)FUN_0036cfb0;
   puVar4[0xe] = (unsigned int)&LAB_003193a0;
-  puVar4[0xf] = (unsigned int)FUN_0031934c;
+  puVar4[0xf] = (unsigned int)jobSceneWaitStep;
   temp_v2 = FUN_003fd63c(0x4ca,0,1);
   puVar4[0x5a] = 0;
   nn_cfg_CTR_IsRestrictP2pCec();
@@ -248,7 +248,7 @@ void FUN_002bf534(int param_1)
   temp_v1 = FUN_002a46d8();
   *(unsigned char *)((int)DAT_0057f114 + 99) = temp_v1;
   temp_v3 = FUN_002840ac();
-  FUN_00343cc8(DAT_0057f114 + 0x10,temp_v3);
+  ownerSetName(DAT_0057f114 + 0x10,temp_v3);
   FUN_002a4664(&temp_v10);
   temp_v9 = (romwright_code *)romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v9 + 2)),temp_v13);
   FUN_0035a074(DAT_0057f114 + 0x10,temp_v10,temp_v11,temp_v12);
@@ -256,7 +256,7 @@ void FUN_002bf534(int param_1)
   *(unsigned char *)((int)DAT_0057f114 + 0x82) = temp_v1;
   temp_v3 = FUN_002a469c();
   FUN_0032e25c(DAT_0057f114 + 0x10,temp_v3);
-  temp_v3 = FUN_00330ab8();
+  temp_v3 = gameDataBlocksGetWord27E8C();
   DAT_0057f114[0x19] = temp_v3;
   puVar2 = DAT_0057f114;
   psVar11 = (short *)(DAT_0057f114 + 0x10);
@@ -297,7 +297,7 @@ void FUN_002bf534(int param_1)
   temp_v1 = FUN_002a46d8();
   *(unsigned char *)((int)DAT_0057f114 + 99) = temp_v1;
   temp_v3 = FUN_002840ac();
-  FUN_00343cc8(DAT_0057f114 + 0x10,temp_v3);
+  ownerSetName(DAT_0057f114 + 0x10,temp_v3);
   FUN_002a4664(&temp_v10);
   temp_v9 = (romwright_code *)romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v9 + 2)),temp_v13);
   FUN_0035a074(DAT_0057f114 + 0x10,temp_v10,temp_v11,temp_v12);
@@ -305,13 +305,13 @@ void FUN_002bf534(int param_1)
   *(unsigned char *)((int)DAT_0057f114 + 0x82) = temp_v1;
   temp_v3 = FUN_002a469c();
   FUN_0032e25c(DAT_0057f114 + 0x10,temp_v3);
-  temp_v3 = FUN_00330ab8();
+  temp_v3 = gameDataBlocksGetWord27E8C();
   DAT_0057f114[0x19] = temp_v3;
 LAB_002bfb8c:
   temp_v2 = FUN_001ab888();
   temp_v7 = 0;
   while (((*(char *)(temp_v2 + temp_v7 + 0x1c88) < '\0' || (temp_v4 = FUN_001ab854(), temp_v4 == 0)) ||
-         (temp_v5 = FUN_004bd340(temp_v4,2), temp_v5 == 0))) {
+         (temp_v5 = bitsAt60Test(temp_v4,2), temp_v5 == 0))) {
     temp_v7 = temp_v7 + 1;
     if (temp_v7 >= 0x18) {
 LAB_002bfc18:
@@ -323,7 +323,7 @@ LAB_002bfc18:
         FUN_002c0b10(&temp_v9);
         temp_v2 = rt_memcmp(temp_v14,DAT_0057f114 + 0x24,0x14);
         if (temp_v2 != 0) {
-          FUN_00319e58();
+          cecProcessCall2();
           FUN_002c0b5c(DAT_0057f114 + 0x10);
         }
       }

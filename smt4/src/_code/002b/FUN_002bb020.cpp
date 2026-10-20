@@ -10,7 +10,7 @@ extern unsigned char LAB_00144924; /* 0x144924 */
 extern unsigned int DAT_0047236c; /* 0x47236c */
 extern unsigned char DAT_004ea6d0; /* 0x4ea6d0 */
 
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c5d5c. */
 
 
@@ -21,7 +21,7 @@ unsigned char * FUN_002bb020(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  if (((DAT_0047236c & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_0047236c), temp_v0 != 0)) {
+  if (((DAT_0047236c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_0047236c), temp_v0 != 0)) {
     puVar2 = &DAT_004ea6d0;
     FUN_002c5d5c(&DAT_004ea6d0,&LAB_00144924,0xc,3);
     *(unsigned int *)(puVar2 + 0x24) = 0;

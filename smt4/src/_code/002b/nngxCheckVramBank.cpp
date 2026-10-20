@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Sys471a70.h"
 
 extern "C" {
 
-extern unsigned char DAT_00471a70; /* 0x471a70 */
-
-
-int nngxCheckVramBank(void)
-
+s32 nngxCheckVramBank(void)
 {
-  return (int)(*(signed char *)((unsigned char *)&DAT_00471a70 + 0x1));
+    return DAT_00471a70.unk01;
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001006ec(int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_00442c5c(...);
+int setMinus1ReturnPtr(...);
 int rt_memcpy_w(int, int, int);
 
 extern unsigned char LAB_004066cc; /* 0x4066cc */
@@ -14,7 +14,7 @@ extern unsigned char LAB_004066cc; /* 0x4066cc */
 extern int *FUN_001006c2(int, unsigned int);
 /* Supplied declaration required: FUN_001006ec. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_00442c5c. */
+/* Supplied declaration required: setMinus1ReturnPtr. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -46,10 +46,10 @@ void FUN_004064a8(int param_1,int param_2,int param_3,unsigned int *param_4)
   else {
     *puVar2 = 0;
     *(unsigned int *)(puVar2 + 4) = 0;
-    temp_v4 = FUN_00442c5c(puVar2 + 0x38);
-    temp_v4 = FUN_00442c5c(temp_v4 + 4);
-    temp_v4 = FUN_00442c5c(temp_v4 + 4);
-    temp_v1 = FUN_00442c5c(temp_v4 + 4);
+    temp_v4 = setMinus1ReturnPtr(puVar2 + 0x38);
+    temp_v4 = setMinus1ReturnPtr(temp_v4 + 4);
+    temp_v4 = setMinus1ReturnPtr(temp_v4 + 4);
+    temp_v1 = setMinus1ReturnPtr(temp_v4 + 4);
     temp_v4 = temp_v1 - 0x44;
     *(unsigned int *)(temp_v1 + 0x30) = 0;
     *(unsigned int *)(temp_v1 + 0x34) = 0;

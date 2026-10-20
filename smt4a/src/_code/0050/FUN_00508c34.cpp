@@ -16,7 +16,7 @@ int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetSendValue(unsigned int, int, 
 int nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetSurroundPan(void);
 
 /* Supplied declaration required: FUN_001a90f0. */
-extern unsigned int FUN_00507dcc(void);
+extern unsigned int getSectionAt4_7dcc(void);
 /* Supplied declaration required: FUN_00507dd8. */
 /* Supplied declaration required: FUN_00507ee8. */
 /* Supplied declaration required: FUN_00507f20. */
@@ -38,7 +38,7 @@ unsigned int FUN_00508c34(int *param_1,unsigned int *param_2,unsigned int param_
   unsigned int in_s0;
   
   nw_snd_internal_WaveSoundFile_InfoBlockBody_GetWaveSoundData(param_1[1],param_3);
-  temp_v1 = FUN_00507dcc();
+  temp_v1 = getSectionAt4_7dcc();
   nw_snd_internal_WaveSoundFile_WaveSoundInfo_GetPitch();
   *param_2 = in_s0;
   temp_v2 = temp_v1;

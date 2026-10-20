@@ -1,18 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0038.h"
 
 extern "C" {
 
-extern int FUN_00162e8c(void);
+extern Flags0C0C *FUN_00162e8c(void);
 
-
-void FUN_003847d4(unsigned int param_1)
-
+void FUN_003847d4(u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00162e8c();
-  *(unsigned int *)(temp_v0 + 0x18) = param_1;
-  return;
+    FUN_00162e8c()->unk18 = value;
 }
 
 } /* extern "C" */

@@ -54,8 +54,8 @@ extern unsigned int FUN_002499b4(int);
 extern int FUN_0027e6bc(unsigned int);
 /* Supplied declaration required: FUN_00282924. */
 /* Supplied declaration required: FUN_003c05e8. */
-extern int FUN_003c83b4(void);
-extern int FUN_003c85c8(void);
+extern int questGetCurrentRecordValue6(void);
+extern int questGetCurrentRecordValue8(void);
 extern int FUN_003c85f4(void);
 extern int FUN_003c8880(void);
 extern unsigned int FUN_003c88b8(void);
@@ -282,13 +282,13 @@ LAB_003cb60c:
     temp_v0 = *(short *)(temp_v7 + 8);
     temp_v3 = *(int *)(*param_1 + 0x1e98);
     temp_v4 = FUN_00255158(0,2);
-    temp_v5 = FUN_003c83b4();
+    temp_v5 = questGetCurrentRecordValue6();
     temp_v2 = 0;
     if (temp_v5 != 0) {
       temp_v2 = temp_v4;
     }
     if (!((temp_v5 == 0 || temp_v4 == 0) || temp_v2 < 0)) {
-      temp_v2 = FUN_003c85c8();
+      temp_v2 = questGetCurrentRecordValue8();
       if (temp_v2 == 0) {
         *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
         return 1;

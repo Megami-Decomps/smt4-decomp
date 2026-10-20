@@ -1,48 +1,58 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00121c68(int);
-int FUN_002f6c32(unsigned int, unsigned char *, int);
+typedef struct KindInfo {
+    /* 0x00 */ u8 unk00[0xA4];
+    /* 0xA4 */ u32 value;
+} KindInfo;
 
-extern unsigned char g_flagBlock; /* 0x594958 */
-extern unsigned char DAT_00594e7c; /* 0x594e7c */
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x31C];
+    /* 0x31C */ u32 primary;
+    /* 0x320 */ u32 fallback;
+} Owner;
 
-/* Supplied declaration required: FUN_00121c68. */
-extern int FUN_002eac34(unsigned int);
-/* Supplied declaration required: FUN_002f6c32. */
+typedef struct FlagBlockView {
+    /* 0x00 */ u8 unk00[0x19];
+    /* 0x19 */ s8 setPrimary;
+    /* 0x1A */ s8 setFallbacks;
+} FlagBlockView;
+extern FlagBlockView g_flagBlock;
+extern u8 DAT_00594e7c[];
 
+KindInfo *FUN_002eac34(s32 kind);
+void FUN_002f6c32(u32 value, u8 *table, s32 size);
+void FUN_00121c68(Owner *owner);
 
-void FUN_00121b6c(int param_1)
-
+/* Registers the owner's values in the kind table: kind 10 gets the primary value, and kinds 9, 1 and 8 get the fallback value if they have none yet. */
+void FUN_00121b6c(Owner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_002f6c32(*(unsigned int *)(param_1 + 0x31c),&DAT_00594e7c,0x10);
-  FUN_00121c68(param_1);
-  if (*(signed char *)(&g_flagBlock + 0x19) != '\0') {
-    temp_v0 = FUN_002eac34(10);
-    *(unsigned int *)(temp_v0 + 0xa4) = *(unsigned int *)(param_1 + 0x31c);
-  }
-  if (*(signed char *)(&g_flagBlock + 0x1a) != '\0') {
-    temp_v0 = FUN_002eac34(9);
-    if (*(int *)(temp_v0 + 0xa4) == 0) {
-      temp_v0 = FUN_002eac34(9);
-      *(unsigned int *)(temp_v0 + 0xa4) = *(unsigned int *)(param_1 + 800);
+    KindInfo *info;
+
+    FUN_002f6c32(owner->primary, DAT_00594e7c, 0x10);
+    FUN_00121c68(owner);
+    if (g_flagBlock.setPrimary != 0) {
+        info = FUN_002eac34(10);
+        info->value = owner->primary;
     }
-    temp_v0 = FUN_002eac34(1);
-    if (*(int *)(temp_v0 + 0xa4) == 0) {
-      temp_v0 = FUN_002eac34(1);
-      *(unsigned int *)(temp_v0 + 0xa4) = *(unsigned int *)(param_1 + 800);
+    if (g_flagBlock.setFallbacks != 0) {
+        info = FUN_002eac34(9);
+        if (info->value == 0) {
+            info = FUN_002eac34(9);
+            info->value = owner->fallback;
+        }
+        info = FUN_002eac34(1);
+        if (info->value == 0) {
+            info = FUN_002eac34(1);
+            info->value = owner->fallback;
+        }
+        info = FUN_002eac34(8);
+        if (info->value == 0) {
+            info = FUN_002eac34(8);
+            info->value = owner->fallback;
+        }
     }
-    temp_v0 = FUN_002eac34(8);
-    if (*(int *)(temp_v0 + 0xa4) == 0) {
-      temp_v0 = FUN_002eac34(8);
-      *(unsigned int *)(temp_v0 + 0xa4) = *(unsigned int *)(param_1 + 800);
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

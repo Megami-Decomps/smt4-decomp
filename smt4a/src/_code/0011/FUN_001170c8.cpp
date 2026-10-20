@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0012143c(int *, unsigned int, unsigned char [24]);
 int strInit(...);
-int FUN_002ec890(...);
+int destroyObj0055ae64(...);
 int FUN_002ec934(unsigned char [24], int, unsigned int);
 int strDestroy(...);
 int FUN_002ee524(...);
@@ -48,7 +48,7 @@ extern int FUN_001242f8(int *);
 extern unsigned long long FUN_00124458(unsigned char *, unsigned char *);
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: strInit. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ec934. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002ee524. */
@@ -176,7 +176,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
             strDestroy(temp_v21);
             strDestroy(temp_v20);
             strDestroy(temp_v18);
-            FUN_002ec890(temp_v19);
+            destroyObj0055ae64(temp_v19);
             strDestroy(temp_v3);
             FUN_002ee54c(temp_v7);
             strDestroy(temp_v17);
@@ -195,7 +195,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
         strDestroy(temp_v21);
         strDestroy(temp_v20);
         strDestroy(temp_v18);
-        FUN_002ec890(temp_v19);
+        destroyObj0055ae64(temp_v19);
         strDestroy(temp_v3);
         FUN_002ee54c(temp_v7);
         strDestroy(temp_v17);
@@ -213,7 +213,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
   FUN_0030314e(temp_v26,temp_v24);
   FUN_002ee54c(temp_v24);
   strDestroy(temp_v18);
-  FUN_002ec890(temp_v19);
+  destroyObj0055ae64(temp_v19);
   strDestroy(temp_v3);
   FUN_002ee54c(temp_v7);
   strDestroy(temp_v17);

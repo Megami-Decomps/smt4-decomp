@@ -10,7 +10,7 @@ int FUN_002e7228(int *);
 int FUN_002e78d0(int, int *, int);
 int FUN_002eb588(unsigned int *);
 int FUN_0030f824(int, int [2]);
-int FUN_0030f836(int [2], int *[2], int);
+int wordMoveOut_0030f836(int [2], int *[2], int);
 int FUN_0030f846(int *[2]);
 int FUN_0030f89a(...);
 int FUN_0030f90c(int **, int, int *[2]);
@@ -34,11 +34,11 @@ typedef struct {
 /* Supplied declaration required: FUN_002e7228. */
 /* Supplied declaration required: FUN_002e78d0. */
 /* Supplied declaration required: FUN_002eb588. */
-extern int FUN_0030f814(int **, int **);
+extern int wordRefsDiffer_0030f814(int **, int **);
 /* Supplied declaration required: FUN_0030f824. */
-/* Supplied declaration required: FUN_0030f836. */
+/* Supplied declaration required: wordMoveOut_0030f836. */
 /* Supplied declaration required: FUN_0030f846. */
-extern int FUN_0030f88a(int **, int);
+extern int wordRefsDiffer_0030f88a(int **, int);
 /* Supplied declaration required: FUN_0030f89a. */
 /* Supplied declaration required: FUN_0030f90c. */
 /* Supplied declaration required: FUN_0030facc. */
@@ -72,7 +72,7 @@ unsigned int FUN_0030f974(int param_1)
   FUN_0030f846(temp_v4);
   while( 1 ) {
     temp_v12 = *(int **)(param_1 + 0x120);
-    temp_v1 = FUN_0030f814(temp_v4,&temp_v12);
+    temp_v1 = wordRefsDiffer_0030f814(temp_v4,&temp_v12);
     if (temp_v1 == 0) break;
     piVar3 = (int *)temp_v4[0][6];
     temp_v13 = (unsigned int *)(temp_v4[0] + 4);
@@ -80,7 +80,7 @@ unsigned int FUN_0030f974(int param_1)
          (temp_v1 = (**(romwright_code **)(*piVar3 + 0x20))(piVar3), temp_v1 == 0)) &&
         (*(char *)((int)piVar3 + 0x22) != '\x05')) &&
        (temp_v6 <= temp_v13[1] && (unsigned int)(*temp_v13 <= temp_v5) <= temp_v6 - temp_v13[1])) break;
-    FUN_0030f836(temp_v3,temp_v4,0);
+    wordMoveOut_0030f836(temp_v3,temp_v4,0);
     FUN_0030f824(param_1 + 0x110,temp_v3);
     if (*(char *)((int)piVar3 + 0x22) != '\x01') {
       FUN_0030facc(param_1,piVar3);
@@ -94,7 +94,7 @@ unsigned int FUN_0030f974(int param_1)
   temp_v3[0] = param_1 + 0xfc;
   temp_v7 = *(int **)(param_1 + 0x100);
   temp_v11 = param_1 + 0x108;
-  while (temp_v1 = FUN_0030f88a(&temp_v7,temp_v11), piVar3 = temp_v7, temp_v1 != 0) {
+  while (temp_v1 = wordRefsDiffer_0030f88a(&temp_v7,temp_v11), piVar3 = temp_v7, temp_v1 != 0) {
     temp_v0 = *(char *)((int)temp_v7 + 0x22);
     if (temp_v0 == '\x02') {
       (**(romwright_code **)(*temp_v7 + 0x10))(temp_v7);

@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard003B.h"
 
 extern "C" {
 
-extern int DAT_00588fe8; /* 0x588fe8 */
-
+extern StateHolder518 *DAT_00588fe8;
 
 void FUN_003b0744(void)
-
 {
-  if (DAT_00588fe8 != 0) {
-    *(unsigned char *)(DAT_00588fe8 + 0x24a9) = 1;
-  }
-  return;
+    if (DAT_00588fe8 != NULL) {
+        DAT_00588fe8->unk24A9 = 1;
+    }
 }
 
 } /* extern "C" */

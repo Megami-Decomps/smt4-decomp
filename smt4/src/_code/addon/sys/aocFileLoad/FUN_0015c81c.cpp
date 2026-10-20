@@ -12,7 +12,7 @@ int FUN_002a1248(...);
 int FUN_002a126c(...);
 int FUN_002a12d8(...);
 int asdLoadFileAsync(...);
-int FUN_002b90e6(...);
+int refIsNullOrZero(...);
 int FUN_002ba968(...);
 int FUN_002baa40(...);
 int FUN_002bb5a4(...);
@@ -69,7 +69,7 @@ extern int FUN_002a1534(int);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: asdLoadFileAsync. */
 extern int FUN_002b90c8(int, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002b90e6. */
+/* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002ba968. */
 /* Supplied declaration required: FUN_002baa40. */
 extern unsigned int FUN_002bad5c(char *);
@@ -228,7 +228,7 @@ void FUN_0015c81c(int param_1,int param_2)
           temp_v24 = &temp_v10;
           temp_v25 = 0;
           temp_v26 = 0;
-          FUN_002b90e6(&temp_v25);
+          refIsNullOrZero(&temp_v25);
           while ((temp_v3 = FUN_002b90c8(temp_v2,0x105,(unsigned int *)&temp_v25), temp_v3 != 0 &&
                  (puVar8 = puVar3, FUN_002c618c(puVar3,temp_v2,temp_v3,&temp_v25),
                  puVar8 != (unsigned int *)0x0))) {

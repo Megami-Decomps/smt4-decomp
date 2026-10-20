@@ -105,7 +105,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0014ce2c. */
 /* Supplied declaration required: FUN_00265b78. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern int FUN_002c501c(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
@@ -385,7 +385,7 @@ void FUN_00265180(void)
           temp_v61[0xc] = temp_v19;
           temp_v62 = temp_v19;
           temp_v63 = temp_v19;
-          if (((DAT_00476630 & 1) == 0) && (temp_v6 = FUN_002bfefc(&DAT_00476630), temp_v6 != 0)) {
+          if (((DAT_00476630 & 1) == 0) && (temp_v6 = __cxa_guard_acquire(&DAT_00476630), temp_v6 != 0)) {
             DAT_004efd48 = temp_v14;
             DAT_004efd4c = temp_v36;
             DAT_004efd50 = temp_v36;

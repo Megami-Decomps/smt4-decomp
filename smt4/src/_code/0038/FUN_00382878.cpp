@@ -8,7 +8,7 @@ int FUN_00287528(unsigned char **);
 int FUN_00287704(int);
 int FUN_0028975c(int, int);
 int FUN_00296b3c(...);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 int FUN_002bcf4c(void);
 int FUN_002bcfc0(...);
 int FUN_002c09d0(int);
@@ -26,13 +26,13 @@ typedef struct {
 extern unsigned char LAB_00382cd0; /* 0x382cd0 */
 
 extern int FUN_00235414(unsigned char);
-extern int FUN_002355c0(int, unsigned char, unsigned int);
+extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
 /* Supplied declaration required: FUN_00287528. */
 extern int FUN_002876f0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287704. */
 /* Supplied declaration required: FUN_0028975c. */
 /* Supplied declaration required: FUN_00296b3c. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002bcf4c. */
 /* Supplied declaration required: FUN_002bcfc0. */
 extern unsigned int FUN_002bd1fc(void);
@@ -41,7 +41,7 @@ extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_00381958. */
 extern int FUN_003819b8(void);
 /* Supplied declaration required: FUN_00381ac0. */
-extern int FUN_003ea2cc(int, unsigned char, unsigned int);
+extern int dataTable26GroupGetRecordS2(int, unsigned char, unsigned int);
 
 
 void FUN_00382878(int param_1)
@@ -164,8 +164,8 @@ void FUN_00382878(int param_1)
     }
   }
   temp_v1 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
-  temp_v3 = FUN_003ea2cc(param_1 + 0x20,*(unsigned char *)(param_1 + 0x18),0);
-  temp_v4 = FUN_002355c0(param_1 + 0x20,*(unsigned char *)(param_1 + 0x18),0);
+  temp_v3 = dataTable26GroupGetRecordS2(param_1 + 0x20,*(unsigned char *)(param_1 + 0x18),0);
+  temp_v4 = dataTable26GroupGetRecord(param_1 + 0x20,*(unsigned char *)(param_1 + 0x18),0);
   puVar10 = (unsigned char *)(temp_v3 + (unsigned int)*(unsigned char *)(temp_v1 + 10) * 0x20);
   temp_v5 = FUN_00235414(*(unsigned char *)(param_1 + 0x18));
   if ((temp_v5 != 0) && (*(int *)(param_1 + 0x1c) == 0)) {
@@ -184,19 +184,19 @@ void FUN_00382878(int param_1)
         temp_v7 = (unsigned int)*(unsigned short *)(temp_v4 + temp_v5 * 0x20 + 0x16);
         if (temp_v7 != 0) {
           FUN_002bcf4c();
-          FUN_002b64a0(temp_v11,temp_v7);
+          libc_strcat(temp_v11,temp_v7);
         }
         else {
-          FUN_002b64a0(temp_v11);
+          libc_strcat(temp_v11);
         }
       }
       else {
         temp_v2 = FUN_002bd1fc();
-        FUN_002b64a0(temp_v11,temp_v2);
+        libc_strcat(temp_v11,temp_v2);
       }
     }
     else {
-      FUN_002b64a0(temp_v11,&LAB_00382cd0);
+      libc_strcat(temp_v11,&LAB_00382cd0);
     }
     FUN_002bcfc0(temp_v11,temp_v10);
     if (temp_v3 != 0) {

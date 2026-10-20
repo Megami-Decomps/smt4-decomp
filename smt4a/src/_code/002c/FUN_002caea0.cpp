@@ -17,7 +17,7 @@ int FUN_00212204(...);
 int FUN_00280c5c(...);
 int FUN_00280d2c(...);
 int FUN_002e08c8(...);
-int FUN_00341060(...);
+int faderSetValue(...);
 int FUN_00359370(...);
 int FUN_00359510(...);
 int FUN_0037a898(...);
@@ -48,13 +48,13 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_00280c5c. */
 /* Supplied declaration required: FUN_00280d2c. */
 /* Supplied declaration required: FUN_002e08c8. */
-/* Supplied declaration required: FUN_00341060. */
+/* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_00359370. */
 /* Supplied declaration required: FUN_00359510. */
 /* Supplied declaration required: FUN_0037a898. */
 extern unsigned int FUN_00387350(char *);
 /* Supplied declaration required: FUN_003ae864. */
-extern int FUN_003ba534(unsigned int);
+extern int floatOwnerIsDone(unsigned int);
 /* Supplied declaration required: FUN_003ba560. */
 /* Supplied declaration required: FUN_003d502c. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -97,7 +97,7 @@ unsigned int FUN_002caea0(void)
         FUN_00359510(*(unsigned int *)(*piVar4 + 8),1);
         FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
         FUN_002e08c8(*(unsigned int *)(*piVar4 + 8));
-        FUN_00341060(*(unsigned int *)(*piVar4 + 8));
+        faderSetValue(*(unsigned int *)(*piVar4 + 8));
       }
       FUN_003d502c(0);
       temp_v2 = *(unsigned int *)(temp_v0 + *(int *)(temp_v0 + 0x574) * 4 + 0x560);
@@ -118,7 +118,7 @@ unsigned int FUN_002caea0(void)
     }
     break;
   case 2:
-    temp_v1 = FUN_003ba534(*(unsigned int *)(temp_v0 + 0x55c));
+    temp_v1 = floatOwnerIsDone(*(unsigned int *)(temp_v0 + 0x55c));
     if ((temp_v1 != 0) || (temp_v1 = FUN_00162ea4(), temp_v1 != 0)) {
       piVar4 = (int *)(temp_v0 + 0x558);
       FUN_00183764(*(unsigned int *)(*(int *)(temp_v0 + 0x558) + 8));

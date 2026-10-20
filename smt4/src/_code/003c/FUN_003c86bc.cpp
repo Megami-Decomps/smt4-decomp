@@ -10,7 +10,7 @@ int memClear(unsigned short *, int);
 extern int FUN_002b63ac(void);
 extern int FUN_002b6a54(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetOptions. */
-extern int FUN_002c09f4(short);
+extern int randNextInRange(short);
 /* Supplied declaration required: memClear. */
 extern unsigned int FUN_002eea80(unsigned int, unsigned char);
 
@@ -43,7 +43,7 @@ void FUN_003c86bc(void)
   if (*(short *)(temp_v8 + 0x60e) != 0) {
     temp_v11 = temp_v11 + 1;
   }
-  temp_v9 = FUN_002c09f4(temp_v11 - 1);
+  temp_v9 = randNextInRange(temp_v11 - 1);
   temp_v10 = 0;
   do {
     if (*(short *)(temp_v8 + temp_v10 * 2 + 0x60a) != 0) {

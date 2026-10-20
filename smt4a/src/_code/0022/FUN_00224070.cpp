@@ -1,46 +1,69 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e6dd4(int, int);
+void FUN_002e6dd4(u8 *block, s32 size);
 
-extern unsigned int *g_popupState; /* 0x58104c */
+typedef struct PopupState {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 unk08[0x10];
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u32 unk20;
+    /* 0x24 */ u8 unk24;
+    /* 0x25 */ u8 name[0x48];
+    /* 0x6D */ u8 unk6D[0x43];
+    /* 0xB0 */ u32 unkB0;
+    /* 0xB4 */ u32 unkB4;
+    /* 0xB8 */ u32 unkB8;
+    /* 0xBC */ u32 unkBC;
+    /* 0xC0 */ u32 unkC0;
+    /* 0xC4 */ u32 unkC4;
+    /* 0xC8 */ u32 unkC8;
+    /* 0xCC */ u32 unkCC;
+    /* 0xD0 */ u32 unkD0;
+    /* 0xD4 */ u32 unkD4;
+    /* 0xD8 */ u32 unkD8;
+    /* 0xDC */ u32 unkDC;
+    /* 0xE0 */ u32 unkE0;
+    /* 0xE4 */ u32 unkE4;
+    /* 0xE8 */ u32 unkE8;
+    /* 0xEC */ u32 unkEC;
+    /* 0xF0 */ u32 unkF0;
+} PopupState;
+extern PopupState *g_popupState;
 
-/* Supplied declaration required: FUN_002e6dd4. */
-
-
+/* Clears the popup state: the leading words, the 0x48-byte block at 0x25 and the 17 words from 0xB0 on. */
 void FUN_00224070(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = g_popupState;
-  *g_popupState = 0;
-  puVar1[1] = 0;
-  puVar1[6] = 0;
-  puVar1[8] = 0;
-  puVar1[7] = 0;
-  FUN_002e6dd4((int)puVar1 + 0x25,0x48);
-  puVar1 = g_popupState;
-  g_popupState[0x2c] = 0;
-  puVar1[0x2d] = 0;
-  puVar1[0x2e] = 0;
-  puVar1[0x2f] = 0;
-  puVar1[0x30] = 0;
-  puVar1[0x31] = 0;
-  puVar1[0x32] = 0;
-  puVar1[0x33] = 0;
-  puVar1[0x34] = 0;
-  puVar1[0x35] = 0;
-  puVar1[0x36] = 0;
-  puVar1[0x37] = 0;
-  puVar1[0x38] = 0;
-  puVar1[0x39] = 0;
-  puVar1[0x3a] = 0;
-  puVar1[0x3b] = 0;
-  puVar1[0x3c] = 0;
-  return;
+    PopupState *popup;
+
+    popup = g_popupState;
+    g_popupState->unk00 = 0;
+    popup->unk04 = 0;
+    popup->unk18 = 0;
+    popup->unk20 = 0;
+    popup->unk1C = 0;
+    FUN_002e6dd4(popup->name, 0x48);
+    popup = g_popupState;
+    g_popupState->unkB0 = 0;
+    popup->unkB4 = 0;
+    popup->unkB8 = 0;
+    popup->unkBC = 0;
+    popup->unkC0 = 0;
+    popup->unkC4 = 0;
+    popup->unkC8 = 0;
+    popup->unkCC = 0;
+    popup->unkD0 = 0;
+    popup->unkD4 = 0;
+    popup->unkD8 = 0;
+    popup->unkDC = 0;
+    popup->unkE0 = 0;
+    popup->unkE4 = 0;
+    popup->unkE8 = 0;
+    popup->unkEC = 0;
+    popup->unkF0 = 0;
 }
 
 } /* extern "C" */

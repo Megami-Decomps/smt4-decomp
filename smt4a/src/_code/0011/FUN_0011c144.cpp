@@ -1,20 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0011c290(void);
+void FUN_0011c290(void *object);
 
-/* Supplied declaration required: FUN_0011c290. */
+typedef struct Context {
+    /* 0x00 */ u8 unk00[0x7C];
+    /* 0x7C */ u32 current;
+} Context;
 
-
-void FUN_0011c144(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Runs FUN_0011c290 with `current` set to `value` for the duration of the call. */
+void FUN_0011c144(Context *context, u32 unused, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(param_1 + 0x7c) = param_3;
-  FUN_0011c290();
-  *(unsigned int *)(param_1 + 0x7c) = 0;
-  return;
+    context->current = value;
+    FUN_0011c290(context);
+    context->current = 0;
 }
 
 } /* extern "C" */

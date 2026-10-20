@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard003B.h"
 
 extern "C" {
 
-extern int FUN_003958cc(void);
+extern s32 FUN_003958cc(void);
 
-
-unsigned char FUN_003bb2e0(void)
-
+u8 FUN_003bb2e0(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_003958cc();
-  return temp_v0 != 0;
+    return FUN_003958cc() != 0;
 }
 
 } /* extern "C" */

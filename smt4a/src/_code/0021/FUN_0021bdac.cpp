@@ -41,8 +41,8 @@ extern unsigned int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_0028b350. */
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: scrSetResult. */
-extern unsigned short FUN_00341f54(unsigned int);
-extern unsigned char FUN_0037b538(unsigned int);
+extern unsigned short screenGetSlotValue(unsigned int);
+extern unsigned char screenGetSlotFlag(unsigned int);
 extern int FUN_003aeaf0(unsigned int);
 
 
@@ -182,9 +182,9 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
       temp_v3 = 0;
       *(unsigned short *)(temp_v5 + 0x19c6) = 0;
       do {
-        temp_v0 = FUN_0037b538(temp_v3 & 0xff);
+        temp_v0 = screenGetSlotFlag(temp_v3 & 0xff);
         *(unsigned char *)(temp_v5 + temp_v3 + 0x19c8) = temp_v0;
-        temp_v1 = FUN_00341f54(temp_v3 & 0xff);
+        temp_v1 = screenGetSlotValue(temp_v3 & 0xff);
         temp_v2 = temp_v3 * 2;
         temp_v3 = temp_v3 + 1;
         *(unsigned short *)(temp_v5 + temp_v2 + 0x19ce) = temp_v1;

@@ -49,7 +49,7 @@ extern int FUN_00272d44(void);
 /* Supplied declaration required: FUN_0031e6b0. */
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_003e0024(void);
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 extern int FUN_003e0154(void);
 
 
@@ -81,17 +81,17 @@ void FUN_00338dfc(void)
     FUN_00100388(0x5f0cc1,&LAB_0033915c);
   }
   else {
-    temp_v0 = FUN_003e0044(5);
-    if ((temp_v0 != 0) || (temp_v0 = FUN_003e0044(9), temp_v0 != 0)) {
+    temp_v0 = playerHasFlagBit(5);
+    if ((temp_v0 != 0) || (temp_v0 = playerHasFlagBit(9), temp_v0 != 0)) {
       if (DAT_005f1aa8 == 0) {
         DAT_005f1aa8 = 5;
-        temp_v0 = FUN_003e0044(5);
+        temp_v0 = playerHasFlagBit(5);
         if (temp_v0 != 0) {
           temp_v0 = FUN_0014bef4(1);
           temp_v0 = temp_v0 + 1;
         }
         else {
-          temp_v0 = FUN_003e0044(9);
+          temp_v0 = playerHasFlagBit(9);
           if (temp_v0 == 0) goto LAB_00338f14;
           temp_v0 = FUN_0014bef4(1);
           temp_v0 = temp_v0 + 3;
@@ -131,8 +131,8 @@ LAB_00338f14:
       temp_v6 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       in_s0 = (temp_v7 / temp_v6) * temp_v8;
       if ((int)in_s0 >= 0x42960000) {
-        temp_v0 = FUN_003e0044(5);
-        if ((temp_v0 == 0) && (temp_v0 = FUN_003e0044(9), temp_v0 == 0)) {
+        temp_v0 = playerHasFlagBit(5);
+        if ((temp_v0 == 0) && (temp_v0 = playerHasFlagBit(9), temp_v0 == 0)) {
           DAT_005f1aac = 5;
           temp_v0 = FUN_0014bef4(1);
           temp_v0 = temp_v0 + 1;

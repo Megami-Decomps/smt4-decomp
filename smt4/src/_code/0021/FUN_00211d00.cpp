@@ -1,32 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdTMTexTableLoadSprites(int);
-int FUN_002c58c8(int, int);
+int FUN_002c58c8(int table, int index);
+int asdTMTexTableLoadSprites(int table);
 
-extern signed char DAT_0043dc70; /* 0x43dc70 */
+extern s8 DAT_0043dc70;
 
-/* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: FUN_002c58c8. */
-
-
+/* Loads the table on the first reference. */
 void FUN_00211d00(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  if (DAT_0043dc70 <= 0) {
-    asdTMTexTableLoadSprites(0x13);
-    temp_v0 = 0;
-    do {
-      FUN_002c58c8(0x13,temp_v0);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 8);
-  }
-  DAT_0043dc70 = DAT_0043dc70 + '\x01';
-  return;
+    s32 i;
+
+    if (DAT_0043dc70 <= 0) {
+        asdTMTexTableLoadSprites(19);
+        i = 0;
+        do {
+            FUN_002c58c8(19, i);
+            i++;
+        } while (i < 8);
+    }
+    DAT_0043dc70 = DAT_0043dc70 + 1;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001015aa(int);
+int __set_errno(int);
 int FUN_001c4360(void);
 int FUN_001c459c(double);
 
@@ -16,7 +16,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 extern int ARM_fpclassifyf(void);
-/* Supplied declaration required: FUN_001015aa. */
+/* Supplied declaration required: __set_errno. */
 /* Supplied declaration required: FUN_001c4360. */
 /* Supplied declaration required: FUN_001c459c. */
 
@@ -44,7 +44,7 @@ void FUN_0050d7ac(void)
   if (0xff000000 < (unsigned int)((int)in_s0 << 1)) {
     return;
   }
-  FUN_001015aa(1);
+  __set_errno(1);
   return;
 }
 

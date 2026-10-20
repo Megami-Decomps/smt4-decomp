@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00430ec8(int *, int);
-int FUN_00430ef0(int *, char [9]);
+int releaseOrCopyHandle(int *, int);
+int releaseOrCopyHandle2(int *, char [9]);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -15,8 +15,8 @@ typedef struct {
 
 extern char s_ERROR____005b4499[9]; /* 0x5b4499 */
 
-/* Supplied declaration required: FUN_00430ec8. */
-/* Supplied declaration required: FUN_00430ef0. */
+/* Supplied declaration required: releaseOrCopyHandle. */
+/* Supplied declaration required: releaseOrCopyHandle2. */
 extern int FUN_00501f78(unsigned int, unsigned int *);
 extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
 
@@ -44,10 +44,10 @@ unsigned int FUN_005019e4(int param_1,int param_2,unsigned int param_3)
     do {
       temp_v0 = nn_cec_CTR_MessageBox_GetMessHeader(param_1,param_2,temp_v1);
       if (!(temp_v0 == 0 || temp_v0 == -0x20)) {
-        FUN_00430ec8(&temp_v4,temp_v0 + 0x20);
+        releaseOrCopyHandle(&temp_v4,temp_v0 + 0x20);
       }
       else {
-        FUN_00430ef0(&temp_v4,s_ERROR____005b4499);
+        releaseOrCopyHandle2(&temp_v4,s_ERROR____005b4499);
       }
       temp_v3 = temp_v4;
       uStack_2c = uStack_24;

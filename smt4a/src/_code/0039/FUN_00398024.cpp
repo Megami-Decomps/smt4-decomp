@@ -1,21 +1,18 @@
-#include "romwright_types.h"
+#include "shard/Shard0039.h"
 
 extern "C" {
 
-extern int FUN_004186a4(void);
-extern int FUN_004186e0(void);
+extern s32 FUN_004186a4(void);
+extern s32 FUN_004186e0(void);
 
-
-int FUN_00398024(void)
-
+s32 FUN_00398024(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_004186a4();
-  if ((temp_v0 == 0) || (temp_v0 = FUN_004186e0(), temp_v0 <= 0)) {
-    temp_v0 = -1;
-  }
-  return temp_v0;
+    s32 result = FUN_004186a4();
+
+    if (result == 0 || (result = FUN_004186e0()) <= 0) {
+        result = -1;
+    }
+    return result;
 }
 
 } /* extern "C" */

@@ -1,22 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_005f0c7c; /* 0x5f0c7c */
+typedef struct Global5f0c7c {
+    /* 0x00 */ u8 unk00[0xA0];
+    /* 0xA0 */ u8 value;
+} Global5f0c7c;
+extern Global5f0c7c DAT_005f0c7c;
 
-extern int FUN_0018719c(unsigned int);
+s32 FUN_0018719c(u32 flag);
 
-
-void FUN_003024a0(unsigned char param_1)
-
+/* Stores `value` in the byte at 0xA0 of the global at 0x5F0C7C when flag 0x4D0 is set. */
+void FUN_003024a0(u8 value)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0018719c(0x4d0);
-  if (temp_v0 != 0) {
-    (*(unsigned char *)((unsigned char *)&DAT_005f0c7c + 0xa0)) = param_1;
-  }
-  return;
+    s32 flag;
+
+    flag = FUN_0018719c(0x4D0);
+    if (flag != 0) {
+        DAT_005f0c7c.value = value;
+    }
 }
 
 } /* extern "C" */

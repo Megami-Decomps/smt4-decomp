@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0014af84(void);
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_001ab888(void);
@@ -22,7 +22,7 @@ extern int FUN_00228ab0(int);
 /* Supplied declaration required: FUN_002e59f8. */
 extern unsigned char FUN_0031cf94(void);
 /* Supplied declaration required: FUN_0031f0a8. */
-extern unsigned int FUN_0037d478(void);
+extern unsigned int gameDataBlocksGetWord27E90(void);
 
 
 void FUN_00387edc(int param_1)
@@ -49,12 +49,12 @@ void FUN_00387edc(int param_1)
     FUN_0031f0a8(4,1);
   }
   *(unsigned char *)(param_1 + 0x21) = 0;
-  temp_v3 = FUN_0037d478();
+  temp_v3 = gameDataBlocksGetWord27E90();
   *(unsigned int *)(param_1 + 0x30) = temp_v3;
   *(unsigned char *)(param_1 + 0x22) = 0;
   *(unsigned char *)(param_1 + 0x23) = 0;
   *(unsigned short *)(param_1 + 0x38) = *(unsigned short *)(temp_v1 + 0x2c4c);
-  temp_v1 = FUN_0015688c();
+  temp_v1 = saveSlotFindSelected();
   if (temp_v1 == 0) {
     *(unsigned short *)(param_1 + 0x44) = 0;
     *(unsigned short *)(param_1 + 0x3a) = 0;

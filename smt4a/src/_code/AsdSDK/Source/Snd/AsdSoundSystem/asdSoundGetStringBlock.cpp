@@ -1,44 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdSoundGetStringBlock` (_code @ 0x141428, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reads the string block back through a pointer computed before the branch (the globals are one data block of this unit). */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int FUN_0015e978(unsigned char *, unsigned int, unsigned int);
-int asdMemoryAlloc(int, int, int, unsigned int, int);
+/* The sound system's archive state: the archive reader, its file header and the string block loaded from it. */
+typedef struct AsdSoundArchive {
+    u8 reader[0x13c];       /* 0x000 */
+    u8 fileHeader[0x4a4 - 0x13c + 0x3c]; /* 0x13c */
+    void *stringBlock;      /* 0x4e0 */
+} AsdSoundArchive;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+extern AsdSoundArchive DAT_0063e1e8;
 
-extern unsigned char DAT_0063e1e8; /* 0x63e1e8 */
-extern unsigned char DAT_0063e324; /* 0x63e324 */
-extern unsigned int DAT_0063e6c8; /* 0x63e6c8 */
+extern s32 FUN_0015fe30(void *reader);
+extern u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(void *fileHeader);
+extern void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
+extern void FUN_0015e978(void *reader, void *stringBlock, u32 size);
 
-/* Supplied declaration required: FUN_0015e978. */
-extern int FUN_0015fe30(unsigned char *);
-/* Supplied declaration required: asdMemoryAlloc. */
-extern unsigned int nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(unsigned char *);
-
-
-unsigned int asdSoundGetStringBlock(void)
-
+/* Returns the archive's string block, loading it into the main heap on first use. */
+void *asdSoundGetStringBlock(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_0015fe30(&DAT_0063e1e8);
-  if (temp_v0 != 0) {
-    temp_v1 = nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(&DAT_0063e324);
-    temp_v2 = 0x10000;
-    asdMemoryAlloc(0x10000,0x100,0,temp_v1,1);
-    DAT_0063e6c8 = temp_v2;
-    FUN_0015e978(&DAT_0063e1e8,temp_v2,temp_v1);
-  }
-  return DAT_0063e6c8;
+    AsdSoundArchive *archive = &DAT_0063e1e8;
+    void **stringBlock = &archive->stringBlock;
+
+    if (FUN_0015fe30(archive->reader)) {
+        u32 size = nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(archive->fileHeader);
+
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 1103);
+        *stringBlock = asdMemoryAlloc(0x10000, 0x100, 0, size, 1);
+        FUN_0015e978(archive->reader, *stringBlock, size);
+    }
+    return *stringBlock;
 }
 
 } /* extern "C" */

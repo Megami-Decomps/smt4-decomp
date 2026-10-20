@@ -1,17 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043daa8; /* 0x43daa8 */
+typedef struct Scene {
+    /* 0x000 */ u8 unk000[0xD34];
+    /* 0xD34 */ u32 unkD34;
+} Scene;
 
+extern Scene *DAT_0043daa8;
 
-void FUN_00269cb8(unsigned int param_1)
-
+void FUN_00269cb8(u32 value)
 {
-  if (DAT_0043daa8 != 0) {
-    *(unsigned int *)(DAT_0043daa8 + 0xd34) = param_1;
-  }
-  return;
+    if (DAT_0043daa8 != NULL) {
+        DAT_0043daa8->unkD34 = value;
+    }
 }
 
 } /* extern "C" */

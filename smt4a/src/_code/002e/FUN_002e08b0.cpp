@@ -1,21 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_002e08b0(unsigned int *param_1,int param_2)
-
+/* Sets or clears bit 2 of `*flags`. */
+void FUN_002e08b0(u32 *flags, s32 enable)
 {
-  unsigned int temp_v0;
-  
-  if (param_2 != 0) {
-    temp_v0 = *param_1 | 4;
-  }
-  else {
-    temp_v0 = *param_1 & 0xfffffffb;
-  }
-  *param_1 = temp_v0;
-  return;
+    u32 value;
+
+    if (enable != 0) {
+        value = *flags | 4;
+    } else {
+        value = *flags & 0xFFFFFFFB;
+    }
+    *flags = value;
 }
 
 } /* extern "C" */

@@ -1,21 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u8 flagA;
+    /* 0x31 */ u8 flagB;
+} Record;
 
+typedef struct Global57f588 {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Record *record;
+} Global57f588;
+extern Global57f588 DAT_0057f588;
 
+/* Sets both flags of the record at 0x57F588 + 8 (the first one only if it exists). */
 void FUN_002292ac(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
-  if ((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x30) = 1;
-  }
-  *(unsigned char *)(temp_v0 + 0x31) = 1;
-  return;
+    Record *record;
+
+    record = DAT_0057f588.record;
+    if (DAT_0057f588.record != NULL) {
+        DAT_0057f588.record->flagA = 1;
+    }
+    record->flagB = 1;
 }
 
 } /* extern "C" */

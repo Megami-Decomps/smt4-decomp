@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard0037.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern ObjBRef DAT_00588fd0;
 
-
-void FUN_003720e4(unsigned char param_1)
-
+void FUN_003720e4(u8 value)
 {
-  if ((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2016) = param_1;
-  }
-  return;
+    if (DAT_00588fd0.instance != NULL) {
+        DAT_00588fd0.instance->unk2016 = value;
+    }
 }
 
 } /* extern "C" */

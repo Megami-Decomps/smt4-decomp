@@ -7,13 +7,13 @@ extern "C" {
 int FUN_003ec668(...);
 int FUN_003f0e20(...);
 int FUN_003f2638(...);
-int FUN_004d8518(...);
+int callOnHandleField4A(...);
 int FUN_004d8668(...);
 int FUN_004d86a0(...);
 int FUN_004d86c0(...);
 int FUN_004d8700(...);
 int FUN_004d888c(...);
-int FUN_004f3fb4(...);
+int obj4FStartSwitch(...);
 int FUN_004fd2cc(...);
 int FUN_004fecd4(...);
 
@@ -55,8 +55,8 @@ extern int FUN_0018719c(unsigned int);
 extern unsigned long long FUN_003eca48(fn_004cae58_arg0 *, unsigned short);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f2638. */
-/* Supplied declaration required: FUN_004d8518. */
-extern int FUN_004d8530(unsigned int);
+/* Supplied declaration required: callOnHandleField4A. */
+extern int holderObjectCall(unsigned int);
 /* Supplied declaration required: FUN_004d8668. */
 /* Supplied declaration required: FUN_004d86a0. */
 /* Supplied declaration required: FUN_004d86c0. */
@@ -64,7 +64,7 @@ extern int FUN_004d8530(unsigned int);
 extern int FUN_004d87a0(unsigned int);
 /* Supplied declaration required: FUN_004d888c. */
 extern int btlUnitGet(unsigned int);
-/* Supplied declaration required: FUN_004f3fb4. */
+/* Supplied declaration required: obj4FStartSwitch. */
 /* Supplied declaration required: FUN_004fd2cc. */
 /* Supplied declaration required: FUN_004fecd4. */
 extern int __aeabi_idivmod(int, unsigned int);
@@ -97,7 +97,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
     if (temp_v2 != 0) {
       temp_v2 = FUN_0016345c();
       if (temp_v2 != 0) {
-        temp_v2 = FUN_004d8518(*(unsigned int *)(param_2 + 0x1bc));
+        temp_v2 = callOnHandleField4A(*(unsigned int *)(param_2 + 0x1bc));
         if (temp_v2 == 0xd) {
           return;
         }
@@ -112,7 +112,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
         FUN_004d888c(*(unsigned int *)(param_2 + 0x1bc),0xd,1);
         return;
       }
-      temp_v2 = FUN_004d8518(*(unsigned int *)(param_2 + 0x1bc));
+      temp_v2 = callOnHandleField4A(*(unsigned int *)(param_2 + 0x1bc));
       if (temp_v2 != 0xd) {
         return;
       }
@@ -120,7 +120,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
       temp_v4 = temp_v5;
     }
     else {
-      temp_v11 = FUN_004d8518(*(unsigned int *)(param_2 + 0x1bc));
+      temp_v11 = callOnHandleField4A(*(unsigned int *)(param_2 + 0x1bc));
       temp_v4 = (unsigned int)((unsigned long long)temp_v11 >> 0x20);
       if ((int)temp_v11 == 0xd) {
         FUN_003f2638(param_1,1,param_2,0);
@@ -158,7 +158,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
   if (temp_v2 != 0) {
     if ((((*(unsigned char *)(temp_v2 + 0x39) & 1) != 0) && (*(int *)(DAT_00571508 + 0x38) != 3)) &&
        ((*(unsigned int *)(param_2 + 0x50) & 0x400000) == 0)) {
-      FUN_004f3fb4(DAT_00571508,(int)*(short *)(temp_v2 + 0x3a));
+      obj4FStartSwitch(DAT_00571508,(int)*(short *)(temp_v2 + 0x3a));
       *(unsigned int *)(param_2 + 0x50) = *(unsigned int *)(param_2 + 0x50) | 0x400000;
       if ((*(unsigned char *)(temp_v2 + 0x39) & 2) == 0) {
         *(unsigned char *)(DAT_00571508 + 0x6a8) = 0;
@@ -174,7 +174,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
       }
       FUN_004fecd4(1,temp_v3);
     }
-    temp_v3 = FUN_004d8518(*(unsigned int *)(param_2 + 0x1bc));
+    temp_v3 = callOnHandleField4A(*(unsigned int *)(param_2 + 0x1bc));
     if (*(unsigned short *)(param_2 + 0x1ce) >= 3) {
       return;
     }
@@ -219,7 +219,7 @@ LAB_004cb0b4:
           }
         }
         else {
-          temp_v2 = FUN_004d8530(*(unsigned int *)(param_2 + 0x1bc));
+          temp_v2 = holderObjectCall(*(unsigned int *)(param_2 + 0x1bc));
           if (temp_v2 == 0) {
             return;
           }
@@ -228,7 +228,7 @@ LAB_004cb0b4:
         return;
       }
       temp_v3 = FUN_004d87a0(*(unsigned int *)(param_2 + 0x1bc));
-      if ((temp_v3 == 0) && (temp_v3 = FUN_004d8530(*(unsigned int *)(param_2 + 0x1bc)), temp_v3 == 0)) {
+      if ((temp_v3 == 0) && (temp_v3 = holderObjectCall(*(unsigned int *)(param_2 + 0x1bc)), temp_v3 == 0)) {
         return;
       }
     }

@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001add24(int);
+void FUN_001add24(s32 code);
 
-/* Supplied declaration required: FUN_001add24. */
-
-
+/* Calls FUN_001add24 with 0x36. */
 void FUN_002c1648(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001add24(0x36);
-  return;
+    FUN_001add24(0x36);
 }
 
 } /* extern "C" */

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00229f18(void);
+int dataTable05Sub0GetEntries(void);
 int FUN_002b9024(void);
 
-/* Supplied declaration required: FUN_00229f18. */
+/* Supplied declaration required: dataTable05Sub0GetEntries. */
 /* Supplied declaration required: FUN_002b9024. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 unsigned char FUN_003c88f0(int param_1,int param_2,int param_3)
@@ -22,7 +22,7 @@ unsigned char FUN_003c88f0(int param_1,int param_2,int param_3)
   unsigned int temp_v3;
   unsigned char temp_v4;
   
-  FUN_00229f18();
+  dataTable05Sub0GetEntries();
   temp_v0 = *(unsigned char *)(param_1 + 1);
   temp_v1 = (unsigned int)*(unsigned short *)(param_2 + 0x46);
   FUN_002b9024();
@@ -39,16 +39,16 @@ unsigned char FUN_003c88f0(int param_1,int param_2,int param_3)
   if ((*(unsigned short *)(param_2 + 0x44) & 2) != 0) {
     if ((*(unsigned short *)(param_3 + 0x44) & 2) != 0) {
       temp_v3 = temp_v3 / 3;
-      temp_v2 = FUN_002c09f4((temp_v3 - 1) & 0xffff);
+      temp_v2 = randNextInRange((temp_v3 - 1) & 0xffff);
       return temp_v2 == 1;
     }
   }
   else if ((*(unsigned short *)(param_3 + 0x44) & 2) == 0) {
-    temp_v2 = FUN_002c09f4((temp_v3 - 1) & 0xffff);
+    temp_v2 = randNextInRange((temp_v3 - 1) & 0xffff);
     return temp_v2 == 1;
   }
   temp_v3 = (unsigned int)(temp_v0 >> 1);
-  temp_v2 = FUN_002c09f4((temp_v3 - 1) & 0xffff);
+  temp_v2 = randNextInRange((temp_v3 - 1) & 0xffff);
   return temp_v2 == 1;
 }
 

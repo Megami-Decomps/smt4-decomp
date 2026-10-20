@@ -1,24 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_snd_CTR_Voice_SetBiquadFilterCoefficients` (_code @ 0x15a498, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+struct VoiceBody;
 
-void nn_snd_CTR_Voice_SetBiquadFilterCoefficients(int param_1,unsigned int *param_2)
+typedef struct BiquadCoefficients {
+    u32 coef0;                     /* 0x00 */
+    u32 coef1;                     /* 0x04 */
+    u16 coef2;                     /* 0x08 */
+} BiquadCoefficients;
 
+typedef struct Voice {
+    u8 unk00[0xc];
+    BiquadCoefficients biquad;     /* 0x0C */
+    u8 unk18[0x50];
+    struct VoiceBody *body;        /* 0x68 */
+} Voice;
+
+void FUN_0015a4c0(struct VoiceBody *body, const BiquadCoefficients *coefficients);
+
+/* Copies the coefficients into the voice, then passes them to FUN_0015a4c0 (the function that follows it) for the voice's body. */
+void nn_snd_CTR_Voice_SetBiquadFilterCoefficients(Voice *voice, const BiquadCoefficients *coefficients)
 {
-  int temp_v0;
-  
-  *(unsigned int *)(param_1 + 0xc) = *param_2;
-  *(unsigned int *)(param_1 + 0x10) = param_2[1];
-  *(unsigned short *)(param_1 + 0x14) = *(unsigned short *)(param_2 + 2);
-  temp_v0 = *(int *)(param_1 + 0x68);
-  *(unsigned int *)(temp_v0 + 0x14) = *(unsigned int *)(param_1 + 0xc);
-  *(unsigned int *)(temp_v0 + 0x18) = *(unsigned int *)(param_1 + 0x10);
-  *(unsigned short *)(temp_v0 + 0x1c) = *(unsigned short *)(param_1 + 0x14);
-  *(unsigned short *)(temp_v0 + 0x6c) = *(unsigned short *)(temp_v0 + 0x6c) | 0x10;
-  return;
+    voice->biquad.coef0 = coefficients->coef0;
+    voice->biquad.coef1 = coefficients->coef1;
+    voice->biquad.coef2 = coefficients->coef2;
+    FUN_0015a4c0(voice->body, &voice->biquad);
 }
 
 } /* extern "C" */

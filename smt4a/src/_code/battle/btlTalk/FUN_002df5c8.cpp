@@ -1,61 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002df5c8` (_code @ 0x2df5c8, 0x98 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Matches with -O2 (requested): built at a lower optimisation level than the game code. */
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(...);
-int scrScriptProcessDestroy(void);
-int FUN_004ab734(unsigned int);
+typedef struct JobState {
+    u8 unk00[0x40];
+    u32 job; /* 0x40 */
+} JobState;
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct BtlTalk {
+    u8 unk00[8];
+    void *buffer0;  /* 0x08 */
+    void *buffer1;  /* 0x0c */
+    void *script;   /* 0x10 */
+    void *buffer2;  /* 0x14 */
+} BtlTalk;
 
-extern int g_btlTalk; /* 0x57a7b8 */
-extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
+extern JobState *jobGetWork(void);
+extern BtlTalk *g_btlTalk;
+extern u32 DAT_0057a9c8;
 
-/* Supplied declaration required: jobStop. */
-extern int jobGetWork(void);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_004ab734. */
+extern void FUN_004ab734(u32 arg);
+extern void asdMemFree(void *block);
+extern void scrScriptProcessDestroy(void *script);
+extern void jobStop(u32 job, int arg);
 
-
+/* Frees the talk window's buffers and script, then stops the job. */
 void FUN_002df5c8(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = jobGetWork();
-  temp_v0 = g_btlTalk;
-  if (g_btlTalk != 0) {
-    FUN_004ab734(DAT_0057a9c8);
-    if (*(int *)(temp_v0 + 8) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v0 + 8) = 0;
+    JobState *work = jobGetWork();
+    BtlTalk *talk = g_btlTalk;
+
+    if (talk != NULL) {
+        FUN_004ab734(DAT_0057a9c8);
+        if (talk->buffer0 != NULL) {
+            asdMemFree(talk->buffer0);
+            talk->buffer0 = NULL;
+        }
+        if (talk->script != NULL) {
+            scrScriptProcessDestroy(talk->script);
+            talk->script = NULL;
+        }
+        if (talk->buffer1 != NULL) {
+            asdMemFree(talk->buffer1);
+            talk->buffer1 = NULL;
+        }
+        if (talk->buffer2 != NULL) {
+            asdMemFree(talk->buffer2);
+            talk->buffer2 = NULL;
+        }
+        asdMemFree(g_btlTalk);
+        g_btlTalk = NULL;
     }
-    if (*(int *)(temp_v0 + 0x10) != 0) {
-      scrScriptProcessDestroy();
-      *(unsigned int *)(temp_v0 + 0x10) = 0;
-    }
-    if (*(int *)(temp_v0 + 0xc) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v0 + 0xc) = 0;
-    }
-    if (*(int *)(temp_v0 + 0x14) != 0) {
-      asdMemFree();
-      *(unsigned int *)(temp_v0 + 0x14) = 0;
-    }
-    asdMemFree(g_btlTalk);
-    g_btlTalk = 0;
-  }
-  jobStop(*(unsigned int *)(temp_v1 + 0x40),0);
-  return;
+    jobStop(work->job, 0);
 }
 
 } /* extern "C" */

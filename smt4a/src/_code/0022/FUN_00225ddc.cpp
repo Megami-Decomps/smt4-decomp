@@ -11,7 +11,7 @@ int FUN_002852f0(...);
 int FUN_00324c48(...);
 int FUN_004731d8(void);
 int FUN_0047db34(...);
-int FUN_0047e32c(...);
+int scriptHolderFree2(...);
 
 int FUN_00100388(...);
 int sysPlaySe(int);
@@ -29,17 +29,17 @@ int FUN_0031a400(void);
 int FUN_00342010(void);
 int FUN_0035b304(void);
 int FUN_0035bea0(void);
-int FUN_0035d88c(...);
+int byteTableASetValue(...);
 int bustupCutAnimStopJob(void);
 int FUN_0037b450(void);
-int FUN_0037de3c(int);
+int byteTableASetValue3(int);
 int FUN_003b61ec(void);
 int eventCommandStop(void);
 int FUN_003bb45c(void);
 int FUN_003d54f8(...);
 int FUN_003fd63c(...);
-int FUN_0046be60(int, unsigned int, int);
-int FUN_0046bed0(int, unsigned int, int);
+int aocDrawText8(int, unsigned int, int);
+int aocDrawText7(int, unsigned int, int);
 int FUN_0047e430(int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -88,32 +88,32 @@ extern int FUN_002a4b60(void);
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_0031a400. */
-extern int FUN_0031d270(void);
+extern int getByteTableAValue(void);
 /* Supplied declaration required: FUN_00324c48. */
 /* Supplied declaration required: FUN_00342010. */
 extern int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0035b304. */
 /* Supplied declaration required: FUN_0035bea0. */
-/* Supplied declaration required: FUN_0035d88c. */
-extern int FUN_0036fe58(void);
+/* Supplied declaration required: byteTableASetValue. */
+extern int byteTableAGetValue3(void);
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: FUN_0037b450. */
-/* Supplied declaration required: FUN_0037de3c. */
+/* Supplied declaration required: byteTableASetValue3. */
 extern int FUN_00399e04(void);
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: FUN_003bb45c. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003fd63c. */
-/* Supplied declaration required: FUN_0046be60. */
-/* Supplied declaration required: FUN_0046bed0. */
+/* Supplied declaration required: aocDrawText8. */
+/* Supplied declaration required: aocDrawText7. */
 extern int FUN_0046e08c(int, unsigned int, unsigned int);
-extern char *FUN_004731a4(void);
+extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
-extern int FUN_00473244(void);
+extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: FUN_0047db34. */
 extern int FUN_0047dfec(int);
-/* Supplied declaration required: FUN_0047e32c. */
+/* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: FUN_0047e430. */
 
 
@@ -165,10 +165,10 @@ unsigned int FUN_00225ddc(void)
       temp_v3 = FUN_0046e08c(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;
-        FUN_0046bed0(g_aocSystem,puVar2[5],0);
+        aocDrawText7(g_aocSystem,puVar2[5],0);
         puVar2[0xb] = temp_v3;
         temp_v3 = g_aocSystem;
-        FUN_0046be60(g_aocSystem,puVar2[5],0);
+        aocDrawText8(g_aocSystem,puVar2[5],0);
         puVar2[0xd] = temp_v3;
         if (puVar2[0xb] == 0 || temp_v3 == 0) {
           puVar2[2] = 0x5f;
@@ -232,15 +232,15 @@ unsigned int FUN_00225ddc(void)
     else {
       temp_v3 = FUN_0013def0(0);
       if (((temp_v3 != 3) || (temp_v3 = FUN_0013def0(1), temp_v3 != 3)) &&
-         (temp_v3 = FUN_0031d270(), temp_v3 != 0)) {
-        FUN_0035d88c(0);
+         (temp_v3 = getByteTableAValue(), temp_v3 != 0)) {
+        byteTableASetValue(0);
       }
-      temp_v3 = FUN_0036fe58();
+      temp_v3 = byteTableAGetValue3();
       if (temp_v3 != 0) {
-        FUN_0037de3c(0);
-        FUN_0035d88c(0);
+        byteTableASetValue3(0);
+        byteTableASetValue(0);
       }
-      temp_v3 = FUN_0031d270();
+      temp_v3 = getByteTableAValue();
       if ((temp_v3 == 0) || (temp_v3 = FUN_00162ea4(), temp_v3 != 0)) {
         temp_v3 = FUN_00224880(puVar2[0xc]);
         if (temp_v3 == 2) {
@@ -297,7 +297,7 @@ unsigned int FUN_00225ddc(void)
       }
       FUN_003d54f8(0,5);
       FUN_003d54f8(1,5);
-      FUN_0035d88c(0);
+      byteTableASetValue(0);
       temp_v2 = 0xb;
     }
     puVar2[2] = temp_v2;
@@ -308,8 +308,8 @@ unsigned int FUN_00225ddc(void)
     if (temp_v3 == 0) {
       return 0;
     }
-    FUN_0047e32c(g_aocMain + 0xa8);
-    temp_v3 = FUN_00473244();
+    scriptHolderFree2(g_aocMain + 0xa8);
+    temp_v3 = gameBlockByte27E98Is1To3();
     if (temp_v3 == 0) {
       temp_v2 = 0x62;
     }
@@ -361,7 +361,7 @@ unsigned int FUN_00225ddc(void)
     }
   }
   else {
-    pcVar7 = (char *)FUN_004731a4();
+    pcVar7 = (char *)gameBlockGetArea27E98();
     temp_v0 = *pcVar7;
     if (temp_v0 != '\x01') {
       if (temp_v0 != '\x02') {

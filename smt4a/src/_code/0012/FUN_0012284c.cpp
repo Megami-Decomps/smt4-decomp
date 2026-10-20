@@ -54,7 +54,7 @@ extern int FUN_002f7064(int);
 extern unsigned int FUN_002f815c(void);
 /* Supplied declaration required: FUN_002fd784. */
 extern int FUN_0030fb0c(int);
-extern int FUN_00311254(int);
+extern int childOwnerHasActiveChild(int);
 /* Supplied declaration required: FUN_00442100. */
 extern int FUN_004421dc(unsigned int, char *, char *);
 
@@ -121,7 +121,7 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
               FUN_002e7232();
               *(unsigned int *)(param_2 + 0x11c) = 0;
             }
-            temp_v1 = FUN_00311254(param_2);
+            temp_v1 = childOwnerHasActiveChild(param_2);
             if ((((temp_v1 == 0) && (*(int *)(param_2 + 0x78) == 0)) &&
                 (temp_v1 = FUN_0030fb0c(param_2), temp_v1 == 0)) &&
                (temp_v1 = FUN_002f7064(param_2), temp_v1 == 0)) {

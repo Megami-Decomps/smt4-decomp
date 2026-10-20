@@ -48,7 +48,7 @@ int FUN_003eed44(...);
 int FUN_0040082c(void);
 int FUN_0047fbf0(...);
 int FUN_004bcbb4(...);
-int FUN_004bd340(...);
+int bitsAt60Test(...);
 
 int FUN_001517b4(...);
 int FUN_001641b4(...);
@@ -137,7 +137,7 @@ extern unsigned short DAT_005e1568; /* 0x5e1568 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001517b4. */
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_001641b4. */
@@ -203,17 +203,17 @@ extern int FUN_00348ed0(int *);
 /* Supplied declaration required: FUN_00370ecc. */
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_003756c8. */
-extern int FUN_0037c894(void);
+extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_00388758. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_0038e4cc. */
 /* Supplied declaration required: FUN_003a7a88. */
 /* Supplied declaration required: FUN_003a7b54. */
-extern int FUN_003a7b88(void);
+extern int stateHolderIsMissingOrState0(void);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003df57c. */
 extern int FUN_003e0024(void);
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e46f4. */
 extern unsigned int FUN_003e53ec(void);
 extern int FUN_003e8430(int);
@@ -222,7 +222,7 @@ extern int FUN_003e9b54(int, int);
 /* Supplied declaration required: FUN_003ec6d8. */
 /* Supplied declaration required: FUN_003eeb4c. */
 /* Supplied declaration required: FUN_003eed44. */
-extern unsigned int FUN_003ef9b8(unsigned int, int);
+extern unsigned int halfTableGet(unsigned int, int);
 /* Supplied declaration required: FUN_003f1114. */
 /* Supplied declaration required: FUN_003f1b3c. */
 /* Supplied declaration required: FUN_0040082c. */
@@ -232,7 +232,7 @@ extern int FUN_0047fbb4(unsigned int);
 /* Supplied declaration required: FUN_0047fbf0. */
 extern int FUN_00481104(unsigned int);
 /* Supplied declaration required: FUN_004bcbb4. */
-/* Supplied declaration required: FUN_004bd340. */
+/* Supplied declaration required: bitsAt60Test. */
 extern int FUN_004c3a98(int, unsigned int);
 extern int FUN_004c52ec(unsigned int);
 extern int FUN_004c87e0(void);
@@ -796,7 +796,7 @@ LAB_0021e058:
               if (!((*(unsigned int *)(temp_v7 + 0x45a8) & DAT_00573bc8) == 0 &&
                    (*(unsigned int *)(temp_v7 + 0x45ac) & DAT_00573bcc) == 0)) {
                 temp_v10 = btlGetMainState();
-                temp_v10 = FUN_003ef9b8(temp_v10,temp_v4);
+                temp_v10 = halfTableGet(temp_v10,temp_v4);
                 *(unsigned int *)(param_1 + 0x389c) = temp_v10;
                 DAT_00573b90 = temp_v4;
               }
@@ -868,14 +868,14 @@ LAB_0021e5b0:
                   }
                   temp_v4 = temp_v4 + 1;
                 } while (temp_v4 < 3);
-                temp_v4 = FUN_003e0044(1);
+                temp_v4 = playerHasFlagBit(1);
                 if (temp_v4 != 0) {
                   *(unsigned char *)puVar18 = 0;
                 }
               }
               else {
                 temp_v10 = btlMainGetUnk14();
-                temp_v4 = FUN_004bd340(temp_v10,1);
+                temp_v4 = bitsAt60Test(temp_v10,1);
                 temp_v7 = 0;
                 if (temp_v4 != 0) {
                   *(unsigned char *)puVar18 = 0;
@@ -884,7 +884,7 @@ LAB_0021e5b0:
                   temp_v4 = FUN_001ab888();
                   if (*(char *)(temp_v4 + temp_v7 + 0x1ca0) >= '\0') {
                     temp_v10 = FUN_001ab854((int)*(char *)(temp_v35[2] + temp_v7 + 0x1ca0));
-                    temp_v4 = FUN_004bd340(temp_v10,1);
+                    temp_v4 = bitsAt60Test(temp_v10,1);
                     if (temp_v4 != 0) {
                       *(unsigned char *)(param_1 + temp_v7 + 0x3c85) = 0;
                     }
@@ -1991,7 +1991,7 @@ joined_r0x0022027c:
     }
     break;
   case 0x25:
-    temp_v4 = FUN_0037c894();
+    temp_v4 = panelStateIs0();
     if (temp_v4 == 1) {
       FUN_00388758(1);
       FUN_0020ad6c(param_1,0x26,0);
@@ -2022,7 +2022,7 @@ joined_r0x0022027c:
     break;
   case 0x2b:
     FUN_00163aa4(param_1 + 0x12b8);
-    temp_v4 = FUN_003a7b88();
+    temp_v4 = stateHolderIsMissingOrState0();
     if (temp_v4 != 0) {
       FUN_003a7b54();
       FUN_0022e774();
@@ -2127,7 +2127,7 @@ joined_r0x0022027c:
       temp_v4 = 1;
       do {
         if (((*(short *)(param_1 + temp_v4 * 2 + 0x4210) < 0) || (temp_v7 = FUN_001ab854(), temp_v7 == 0))
-           || (temp_v7 = FUN_004bd340(temp_v7,1), temp_v7 != 0)) {
+           || (temp_v7 = bitsAt60Test(temp_v7,1), temp_v7 != 0)) {
           *(unsigned char *)(param_1 + temp_v4 + 0x41ed) = 1;
         }
         temp_v1 = DAT_005e1568;
@@ -2149,7 +2149,7 @@ LAB_002209d8:
       if (*(int *)(param_1 + 0x4bac) != 0) {
         if (*(int *)(param_1 + 0x4bac) != 1) goto LAB_00220930;
         temp_v4 = btlMainGetUnk14();
-        if ((temp_v4 != 0) && (temp_v4 = FUN_004bd340(temp_v4,4), temp_v4 != 0)) {
+        if ((temp_v4 != 0) && (temp_v4 = bitsAt60Test(temp_v4,4), temp_v4 != 0)) {
           *(unsigned short *)(param_1 + 0x4b2c) = 5;
         }
       }
@@ -2411,7 +2411,7 @@ LAB_00220b54:
       if (*temp_v27 >= 0x25) {
         *(unsigned char *)(temp_v7 + 0x4ae5) = 0;
         *temp_v27 = 0;
-        temp_v9 = FUN_004bd340(temp_v26,4);
+        temp_v9 = bitsAt60Test(temp_v26,4);
         if (temp_v9 != 0) {
           *(unsigned char *)(temp_v7 + 0x4b54) = 1;
           temp_v32[0x1b] = 0;
@@ -2573,7 +2573,7 @@ LAB_0022129c:
               }
             }
             else if (*(short *)(param_1 + 0x4b1e) != -1) {
-              temp_v4 = FUN_0015688c();
+              temp_v4 = saveSlotFindSelected();
               temp_v1 = *(unsigned short *)(temp_v4 + 300);
               FUN_00370ecc(temp_v1);
               temp_v10 = FUN_0019acdc(temp_v1,1);
@@ -2605,7 +2605,7 @@ LAB_00220930:
   if ((0 < *(int *)(param_1 + temp_v4 * 4 + 0x4bb0)) &&
      (temp_v7 = param_1 + temp_v4 * 2, -1 < *(short *)(temp_v7 + 0x4210))) {
     temp_v10 = FUN_001ab854();
-    temp_v9 = FUN_004bd340(temp_v10,4);
+    temp_v9 = bitsAt60Test(temp_v10,4);
     if (temp_v9 != 0) {
       *(unsigned short *)(temp_v7 + 0x4b2c) = 5;
     }

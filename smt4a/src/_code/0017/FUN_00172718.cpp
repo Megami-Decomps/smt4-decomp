@@ -20,7 +20,7 @@ extern unsigned int DAT_0064c07c; /* 0x64c07c */
 extern unsigned int DAT_0064c080; /* 0x64c080 */
 
 extern unsigned int wstrlen(int);
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern int rt_memcpy(int, int, unsigned int);
 
 
@@ -96,7 +96,7 @@ unsigned int * FUN_00172718(int *param_1,int param_2)
   puVar6[0x12] = 0;
   puVar6[0x13] = 0;
   puVar6[0x14] = 0;
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v7 = FUN_002eba64(&DAT_005c4c2c), temp_v7 != 0)) {
+  if (((DAT_005c4c2c & 1) == 0) && (temp_v7 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v7 != 0)) {
     DAT_0064c054 = temp_v10;
     DAT_0064c058 = temp_v9;
     DAT_0064c05c = temp_v9;

@@ -1,18 +1,12 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int memClear(unsigned int, int);
+int memClear(u32 ptr, int size);
 
-/* Supplied declaration required: memClear. */
-
-
-void FUN_003611b8(unsigned int param_1)
-
+void FUN_003611b8(u32 block)
 {
-/* irregular: 1 native warning(s); review required */
-  memClear(param_1,0xb2c8);
-  return;
+    memClear(block, 0xb2c8);
 }
 
 } /* extern "C" */

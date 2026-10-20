@@ -12,7 +12,7 @@ int FUN_002e9538(...);
 int FUN_002eb588(...);
 int FUN_002ec8a8(...);
 int FUN_00301484(...);
-int FUN_00311544(...);
+int handleLockRelease(...);
 
 typedef struct fn_0011ca76_arg1 fn_0011ca76_arg1;
 struct fn_0011ca76_arg1 {
@@ -40,7 +40,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ec8a8. */
 /* Supplied declaration required: FUN_00301484. */
 extern int *FUN_00311202(int);
-/* Supplied declaration required: FUN_00311544. */
+/* Supplied declaration required: handleLockRelease. */
 
 
 unsigned int FUN_0011ca76(int param_1,fn_0011ca76_arg1 *param_2,unsigned int param_3)
@@ -85,7 +85,7 @@ unsigned int FUN_0011ca76(int param_1,fn_0011ca76_arg1 *param_2,unsigned int par
       temp_v1 = 1;
       *(fn_0011ca76_arg1 **)(*(int *)(param_1 + 0x48) + 0x38) = param_2;
       if (*(int *)(param_1 + 0x26c) != 0) {
-        FUN_00311544();
+        handleLockRelease();
       }
     }
     FUN_002e6e5c(temp_v4);

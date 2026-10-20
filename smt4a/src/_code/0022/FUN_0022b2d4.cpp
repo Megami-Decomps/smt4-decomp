@@ -22,7 +22,7 @@ int FUN_001879d0(...);
 int FUN_0019acdc(...);
 int FUN_0019d880(void);
 int FUN_0022e9c8(void);
-int FUN_00240628(...);
+int compareWithFeedbackColor(...);
 int FUN_0025e704(...);
 int FUN_00334e1c(...);
 int FUN_00345098(void);
@@ -120,7 +120,7 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_001676b0. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001689e8. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
@@ -141,14 +141,14 @@ extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0019d880. */
 /* Supplied declaration required: FUN_0022e9c8. */
 /* Supplied declaration required: FUN_00230a50. */
-/* Supplied declaration required: FUN_00240628. */
+/* Supplied declaration required: compareWithFeedbackColor. */
 /* Supplied declaration required: FUN_0025e704. */
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_002a6c3c. */
 extern int FUN_002ef9f0(void);
-extern int FUN_00319d2c(unsigned char *, unsigned char *);
-extern unsigned int FUN_00319d64(int, int);
+extern int valueAtMostFifthOfTotal(unsigned char *, unsigned char *);
+extern unsigned int heldAmountLessThan(int, int);
 extern int FUN_0031e6d4(void);
 /* Supplied declaration required: FUN_00334044. */
 /* Supplied declaration required: FUN_00334e1c. */
@@ -654,10 +654,10 @@ LAB_0022b9b8:
         if (*(char *)(temp_v2 + 0x2013) != '\0') {
           puVar25 = (unsigned int *)(temp_v28 + 0x19d4);
           puVar22 = (unsigned char *)*puVar25;
-          temp_v7 = FUN_00240628(*(unsigned short *)(temp_v28 + 0x19d2),*(unsigned short *)(temp_v4 + 0x1392),0
+          temp_v7 = compareWithFeedbackColor(*(unsigned short *)(temp_v28 + 0x19d2),*(unsigned short *)(temp_v4 + 0x1392),0
                                );
           if ((temp_v7 == 0) &&
-             (temp_v3 = FUN_00240628(*(unsigned int *)(temp_v3 + 0x1394),*puVar25,0), temp_v3 == 0)) {
+             (temp_v3 = compareWithFeedbackColor(*(unsigned int *)(temp_v3 + 0x1394),*puVar25,0), temp_v3 == 0)) {
             FUN_00184e64(0xdcdcdcff);
           }
         }
@@ -695,7 +695,7 @@ LAB_0022b9b8:
       if (((temp_v0 == '\0' || temp_v0 == '\x02') || (temp_v0 == '\x04' || temp_v0 == '\x11')) &&
          (*(char *)(temp_v2 + 0x2018) != '\n')) {
         if (temp_v0 != '\x11') {
-          temp_v10 = FUN_00319d64((int)(short)(int)puVar8,(int)*(short *)(temp_v4 + 0x1390));
+          temp_v10 = heldAmountLessThan((int)(short)(int)puVar8,(int)*(short *)(temp_v4 + 0x1390));
         }
         else {
           temp_v10 = (unsigned int)((int)*(short *)(temp_v4 + 0x13ae) < (int)puVar8);
@@ -730,7 +730,7 @@ LAB_0022b9b8:
       else if (temp_v10 != 0) {
         FUN_00184e64(0x6ef0ffff);
       }
-      temp_v7 = FUN_00319d2c(puVar22,puVar8);
+      temp_v7 = valueAtMostFifthOfTotal(puVar22,puVar8);
       if (temp_v7 != 0) {
         FUN_00184e64(0xdc0f14ff);
       }
@@ -1523,7 +1523,7 @@ LAB_0022e46c:
     if (temp_v21 < *(float *)(temp_v28 + 0x294)) {
       efctSetSpeed();
       temp_v2 = g_renderCtx;
-      temp_v4 = FUN_00169294(6,1,0);
+      temp_v4 = packNibblesAndByte(6,1,0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
       piVar19[*piVar19 + 2] = temp_v4;
@@ -1534,7 +1534,7 @@ LAB_0022e46c:
       temp_v24 = 3.09687e-43f;
       FUN_001835b4(2,0x12,0xc6,temp_v27[5],0);
       temp_v2 = g_renderCtx;
-      temp_v4 = FUN_00169294(6,7,0);
+      temp_v4 = packNibblesAndByte(6,7,0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
       piVar19[*piVar19 + 2] = temp_v4;
@@ -1547,7 +1547,7 @@ LAB_0022e46c:
     if (temp_v21 < *(float *)(temp_v28 + 800)) {
       efctSetSpeed();
       temp_v2 = g_renderCtx;
-      temp_v4 = FUN_00169294(6,1,0);
+      temp_v4 = packNibblesAndByte(6,1,0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
       piVar19[*piVar19 + 2] = temp_v4;
@@ -1558,7 +1558,7 @@ LAB_0022e46c:
       temp_v24 = 3.09687e-43f;
       FUN_001835b4(2,0x12,0xc6,temp_v27[5],0);
       temp_v2 = g_renderCtx;
-      temp_v4 = FUN_00169294(6,7,0);
+      temp_v4 = packNibblesAndByte(6,7,0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
       piVar19[*piVar19 + 2] = temp_v4;
@@ -1580,7 +1580,7 @@ LAB_0022e46c:
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
   temp_v2 = g_renderCtx;
-  temp_v4 = FUN_00169294(6,7,0);
+  temp_v4 = packNibblesAndByte(6,7,0);
   piVar19 = (int *)(temp_v2 + 0x12b8);
   temp_v3 = piVar19[*piVar19 + 2];
   piVar19[*piVar19 + 2] = temp_v4;

@@ -8,8 +8,8 @@ int FUN_002bd808(unsigned char *, int);
 int rt_memcpy(unsigned char *, int, int);
 
 /* Supplied declaration required: FUN_002bd808. */
-extern int FUN_003e8614(int);
-extern unsigned int FUN_003e8620(int, int);
+extern int offsetRefResolveCAlt(int);
+extern unsigned int offsetRefAddAtBase4(int, int);
 extern int nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo(int, int);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -39,11 +39,11 @@ unsigned int nw_snd_internal_WaveFileReader_ReadWaveInfo(int *param_1,unsigned c
     if (temp_v4 < 2) {
       temp_v1 = nw_snd_internal_WaveFile_InfoBlockBody_GetChannelInfo(*param_1,temp_v4);
       if (*(int *)(temp_v1 + 0xc) != 0) {
-        temp_v2 = FUN_003e8614(temp_v1);
+        temp_v2 = offsetRefResolveCAlt(temp_v1);
         rt_memcpy(param_2 + temp_v4 * 0x30 + 0x18,temp_v2,0x26);
         FUN_002bd808(param_2 + temp_v4 * 0x30 + 0x3e,temp_v2 + 0x26);
       }
-      temp_v3 = FUN_003e8620(temp_v1,param_1[1]);
+      temp_v3 = offsetRefAddAtBase4(temp_v1,param_1[1]);
       *(unsigned int *)(param_2 + temp_v4 * 0x30 + 0x14) = temp_v3;
     }
   }

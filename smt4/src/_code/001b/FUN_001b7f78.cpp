@@ -553,7 +553,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: FUN_00275f8c. */
 extern int FUN_00276060(unsigned int);
 /* Supplied declaration required: FUN_00276078. */
-extern int FUN_002760fc(int);
+extern int dataTable2fSub0GetRecord(int);
 /* Supplied declaration required: FUN_00276218. */
 /* Supplied declaration required: FUN_00276238. */
 extern int FUN_00276264(void);
@@ -624,7 +624,7 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_00285ca4. */
 extern int FUN_00287800(void);
 extern int FUN_00287894(void);
-extern int FUN_002878a8(int);
+extern int dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_002878e4. */
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: FUN_002893ec. */
@@ -2177,7 +2177,7 @@ LAB_001ba78c:
                             uStack_1c4 = (unsigned int)DAT_0049fa19;
                             uStack_1c8 = (unsigned int)DAT_0049fa18;
                             FUN_0028529c(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
-                            temp_v9 = FUN_002760fc((int)*(short *)(temp_v9 + 0x2a));
+                            temp_v9 = dataTable2fSub0GetRecord((int)*(short *)(temp_v9 + 0x2a));
                             DAT_0049f970 = (unsigned int)*(short *)(temp_v9 + 0x12);
                             FUN_002bf694(&DAT_0049f978,temp_v9 + 0x14);
                             puVar14[9] = 0x6c;
@@ -3362,7 +3362,7 @@ LAB_001bc008:
       temp_v9 = 0;
     }
     else {
-      temp_v9 = FUN_002760fc((int)*(short *)(temp_v9 + 0x2a));
+      temp_v9 = dataTable2fSub0GetRecord((int)*(short *)(temp_v9 + 0x2a));
       temp_v9 = (int)*(short *)(temp_v9 + 8);
     }
     FUN_0027d5ac(temp_v9);
@@ -3572,7 +3572,7 @@ LAB_001bc008:
       func_0x00276138();
       *(unsigned char *)(temp_v9 + 0x790) = 1;
       if (temp_v8 == 1) {
-        temp_v9 = FUN_002760fc((int)temp_v7);
+        temp_v9 = dataTable2fSub0GetRecord((int)temp_v7);
         DAT_0049f970 = (unsigned int)*(short *)(temp_v9 + 0x12);
         FUN_002bf694(&DAT_0049f978,temp_v9 + 0x14);
         FUN_002bf810(0x10000bc);
@@ -3596,7 +3596,7 @@ LAB_001bc008:
       }
       FUN_002b8e84(0x1000184);
       *(unsigned char *)((int)puVar14 + 0xd) = 1;
-      temp_v9 = FUN_002878a8((int)temp_v7);
+      temp_v9 = dataTable2fSub1GetRecord((int)temp_v7);
       FUN_0027d8b4((int)*(short *)(temp_v9 + 0x10));
       puVar14[9] = 0x6e;
       puVar14[10] = 0;
@@ -3638,7 +3638,7 @@ LAB_001bc008:
       temp_v9 = 0;
     }
     else {
-      temp_v9 = FUN_002760fc((int)*(short *)(temp_v9 + 0x2a));
+      temp_v9 = dataTable2fSub0GetRecord((int)*(short *)(temp_v9 + 0x2a));
       temp_v9 = (int)*(short *)(temp_v9 + 8);
     }
     FUN_0027d5ac(temp_v9);

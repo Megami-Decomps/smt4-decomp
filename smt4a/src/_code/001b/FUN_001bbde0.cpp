@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001015aa(int);
+int __set_errno(int);
 int FUN_001c459c(double);
 
 #ifndef ROMWRIGHT_FABS_4_DEFINED
@@ -14,7 +14,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_001015aa. */
+/* Supplied declaration required: __set_errno. */
 /* Supplied declaration required: FUN_001c459c. */
 
 
@@ -36,7 +36,7 @@ void FUN_001bbde0(void)
   if (0xff000000 < (unsigned int)((int)in_s0 << 1)) {
     return;
   }
-  FUN_001015aa(1);
+  __set_errno(1);
   return;
 }
 

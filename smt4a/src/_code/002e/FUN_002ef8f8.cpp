@@ -20,7 +20,7 @@ extern unsigned int FUN_002eacbc(int);
 /* Supplied declaration required: FUN_002eb188. */
 /* Supplied declaration required: FUN_002eb588. */
 extern int FUN_002eed8c(int);
-extern unsigned int *FUN_002eee88(int, int);
+extern unsigned int *arrayElementAddress_002eee88(int, int);
 extern int FUN_002ef01c(unsigned int);
 /* Supplied declaration required: FUN_002ef584. */
 /* Supplied declaration required: FUN_0043222c. */
@@ -46,7 +46,7 @@ void FUN_002ef8f8(int param_1,int param_2,unsigned int param_3,unsigned int para
   if ((*(unsigned short *)(param_2 + 0x3c) & 0xf) == 3) {
     temp_v4 = param_1 + 0x9c;
     for (temp_v3 = 0; temp_v3 < (int)(*(unsigned short *)(param_1 + 0x104) + 1); temp_v3 = temp_v3 + 1) {
-      puVar1 = (unsigned int *)FUN_002eee88(temp_v4,temp_v3);
+      puVar1 = (unsigned int *)arrayElementAddress_002eee88(temp_v4,temp_v3);
       temp_v0 = FUN_0010acb8(*puVar1);
       if (temp_v0 != 0) {
         *(int *)(param_1 + 0x2ac) = *(int *)(param_1 + 0x2ac) + 1;

@@ -1,49 +1,49 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001656e0(unsigned int, int);
-int FUN_0016572c(unsigned int, int);
+void FUN_001656e0(u32 job, s32 flag);
+void FUN_0016572c(u32 job, s32 flag);
+s32 jobIsValid(u32 job);
+s32 FUN_00165058(u32 job);
 
-extern int jobIsValid(unsigned int);
-extern int FUN_00165058(unsigned int);
-/* Supplied declaration required: FUN_001656e0. */
-/* Supplied declaration required: FUN_0016572c. */
+typedef struct JobSet {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 jobs[16];
+    /* 0x44 */ s32 jobCount;
+    /* 0x48 */ u8 unk48[4];
+    /* 0x4C */ u32 extraJobs[16];
+} JobSet;
 
-
-unsigned int FUN_002e536c(int *param_1)
-
+/* Stops the jobs of the set `*set` (the first ones unless they are in state 4, then all 16 extra ones); always returns 1. */
+u32 FUN_002e536c(JobSet **set)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v2 = *param_1;
-  if (temp_v2 != 0) {
-    temp_v1 = 0;
-    if (temp_v1 < *(int *)(temp_v2 + 0x44)) {
-      do {
-        temp_v3 = temp_v2 + temp_v1 * 4;
-        temp_v0 = jobIsValid(*(unsigned int *)(temp_v3 + 4));
-        if ((temp_v0 != 0) && (temp_v0 = FUN_00165058(*(unsigned int *)(temp_v3 + 4)), temp_v0 != 4)) {
-          FUN_001656e0(*(unsigned int *)(temp_v3 + 4),0);
+    s32 valid;
+    s32 i;
+    JobSet *jobs;
+
+    jobs = *set;
+    if (jobs != NULL) {
+        i = 0;
+        if (i < jobs->jobCount) {
+            do {
+                valid = jobIsValid(jobs->jobs[i]);
+                if ((valid != 0) && (valid = FUN_00165058(jobs->jobs[i]), valid != 4)) {
+                    FUN_001656e0(jobs->jobs[i], 0);
+                }
+                i = i + 1;
+            } while (i < jobs->jobCount);
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < *(int *)(temp_v2 + 0x44));
+        i = 0;
+        do {
+            valid = jobIsValid(jobs->extraJobs[i]);
+            if (valid != 0) {
+                FUN_0016572c(jobs->extraJobs[i], 0);
+            }
+            i = i + 1;
+        } while (i < 0x10);
     }
-    temp_v1 = 0;
-    do {
-      temp_v3 = temp_v2 + temp_v1 * 4;
-      temp_v0 = jobIsValid(*(unsigned int *)(temp_v3 + 0x4c));
-      if (temp_v0 != 0) {
-        FUN_0016572c(*(unsigned int *)(temp_v3 + 0x4c),0);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x10);
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

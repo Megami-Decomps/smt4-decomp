@@ -30,7 +30,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002419c4. */
 /* Supplied declaration required: FUN_002980e4. */
-extern int FUN_004d84e8(unsigned int);
+extern int isEntryUsable(unsigned int);
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004f5a78. */
 /* Supplied declaration required: FUN_004fb6f4. */
@@ -52,7 +52,7 @@ void FUN_003a969c(void)
   
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_004d84e8(g_btlEvent);
+  temp_v2 = isEntryUsable(g_btlEvent);
   if (((temp_v2 == 0) || (temp_v2 = DAT_00573808, FUN_004f5a78(), temp_v2 != 0)) && (temp_v1 != 0)) {
     FUN_002980e4(temp_v1,1);
     temp_v2 = btlGetMainState();

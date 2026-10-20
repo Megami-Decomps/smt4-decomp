@@ -1,29 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int dataTableGetCount(unsigned int);
+extern u32 dataTableGetCount(u32 table);
 extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
+extern u32 dataTableGet(u32 id, u32 index);
 
-
-int MapNaviTable_GetCategoryRecord(unsigned int param_1,unsigned int param_2)
-
+/* Address of record `index` (0x14-byte records) of data table 0x2b/0, or 0 when out of range. */
+int MapNaviTable_GetCategoryRecord(u32 unused, u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x2b,0);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_2 >= temp_v2) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = temp_v1 + param_2 * 0x14;
-  }
-  return temp_v1;
+    u32 table = dataTableGet(0x2b, 0);
+    int entries = dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+
+    if (index >= count) {
+        entries = 0;
+    } else {
+        entries = entries + index * 0x14;
+    }
+    return entries;
 }
 
 } /* extern "C" */

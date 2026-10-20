@@ -20,7 +20,7 @@ extern unsigned char DAT_00538908; /* 0x538908 */
 /* Supplied declaration required: FUN_002ea6ae. */
 /* Supplied declaration required: FUN_002ea6bc. */
 /* Supplied declaration required: FUN_002ea6cc. */
-extern int *FUN_002ed2a2(unsigned char *, unsigned int *);
+extern int *wordRefMin(unsigned char *, unsigned int *);
 
 
 void FUN_002ed2b0(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4,
@@ -47,7 +47,7 @@ void FUN_002ed2b0(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   if ((param_6 != 0) && (param_7 != 0)) {
     temp_v0 = param_7;
     if (param_2 == 0) {
-      piVar1 = (int *)FUN_002ed2a2(&DAT_00538908,(unsigned int *)&param_7);
+      piVar1 = (int *)wordRefMin(&DAT_00538908,(unsigned int *)&param_7);
       temp_v0 = *piVar1;
     }
     FUN_002ea6bc(temp_v1,param_6,temp_v0);

@@ -34,7 +34,7 @@ extern int FUN_002aeaac(unsigned int, int);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00398aa0. */
 
 
@@ -146,7 +146,7 @@ void FUN_00397db0(int param_1)
           if (*(char *)(param_1 + 1) == '\x02') {
             FUN_002bf538();
             temp_v8 = g_titleScene;
-            temp_v5 = FUN_002c5da8(6,1,0);
+            temp_v5 = packNibblesAndByte(6,1,0);
             piVar10 = (int *)(temp_v8 + 0x12ac);
             temp_v6 = piVar10[*piVar10 + 2];
             piVar10[*piVar10 + 2] = temp_v5;
@@ -163,7 +163,7 @@ void FUN_00397db0(int param_1)
               FUN_002bf288(2,0x2e,0x21,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v9 + 8));
             }
             temp_v9 = g_titleScene;
-            temp_v8 = FUN_002c5da8(6,7,0);
+            temp_v8 = packNibblesAndByte(6,7,0);
             piVar10 = (int *)(temp_v9 + 0x12ac);
             temp_v5 = piVar10[*piVar10 + 2];
             piVar10[*piVar10 + 2] = temp_v8;
@@ -206,7 +206,7 @@ void FUN_00397db0(int param_1)
             FUN_002bf538();
             FUN_002bf538();
             temp_v9 = g_titleScene;
-            temp_v5 = FUN_002c5da8(6,1,0);
+            temp_v5 = packNibblesAndByte(6,1,0);
             piVar10 = (int *)(temp_v9 + 0x12ac);
             temp_v6 = piVar10[*piVar10 + 2];
             piVar10[*piVar10 + 2] = temp_v5;
@@ -218,7 +218,7 @@ void FUN_00397db0(int param_1)
             temp_v13 = 0x29;
             FUN_002bf380(2,0x2e,6,*(int *)(param_1 + 0xa4) + (int)*(short *)(temp_v8 + 8));
             temp_v9 = g_titleScene;
-            temp_v5 = FUN_002c5da8(6,7,0);
+            temp_v5 = packNibblesAndByte(6,7,0);
             piVar10 = (int *)(temp_v9 + 0x12ac);
             temp_v6 = piVar10[*piVar10 + 2];
             piVar10[*piVar10 + 2] = temp_v5;

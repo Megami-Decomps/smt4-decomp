@@ -19,7 +19,7 @@ typedef struct {
 #endif
 extern int FUN_001010d4(char, int);
 extern long long FUN_0015f898(int, int, unsigned int, unsigned int);
-extern unsigned int *FUN_002c6644(void);
+extern unsigned int *__aeabi_errno_addr(void);
 
 
 unsigned long long FUN_001010f2(char *param_1,unsigned int *param_2,int param_3)
@@ -84,7 +84,7 @@ unsigned long long FUN_001010f2(char *param_1,unsigned int *param_2,int param_3)
     *param_2 = (unsigned int)param_1;
   }
   if (temp_v1) {
-    puVar6 = (unsigned int *)FUN_002c6644();
+    puVar6 = (unsigned int *)__aeabi_errno_addr();
     *puVar6 = 2;
     temp_v7 = 0xffffffff;
     temp_v5 = temp_v7;

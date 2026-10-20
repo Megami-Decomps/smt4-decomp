@@ -1,46 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00290d74(...);
-int FUN_00296f4c(unsigned int, int);
+int FUN_00296f4c(u32 a, int b);
 
-typedef struct fn_00235554_arg0 fn_00235554_arg0;
-struct fn_00235554_arg0 {
-    unsigned char pad_0x0[0x5a0];
-    undefined4 field_0x5a0; /* +0x5a0 */
-    unsigned char pad_0x5a4[0x4];
-    unsigned char field_0x5a8; /* +0x5a8 */
-    unsigned char pad_0x5a9[0x3];
-    undefined4 field_0x5ac; /* +0x5ac */
-    unsigned char pad_0x5b0[0x4];
-    unsigned char field_0x5b4; /* +0x5b4 */
-    unsigned char pad_0x5b5[0xf];
-    void *field_0x5c4; /* +0x5c4 */
-};
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x5A0];
+    /* 0x5A0 */ u32 unk5A0;
+    /* 0x5A4 */ u8 unk5A4[4];
+    /* 0x5A8 */ u32 slotA;
+    /* 0x5AC */ u32 unk5AC;
+    /* 0x5B0 */ u8 unk5B0[4];
+    /* 0x5B4 */ u32 slotB;
+    /* 0x5B8 */ u8 unk5B8[0xC];
+    /* 0x5C4 */ u32 *current;
+} Obj;
 
-/* Supplied declaration required: FUN_00290d74. */
-/* Supplied declaration required: FUN_00296f4c. */
-
-
-int FUN_00235554(fn_00235554_arg0 *param_1,unsigned int param_2)
-
+int FUN_00235554(Obj *obj, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = FUN_00290d74(param_1->field_0x5ac);
-  if (temp_v0 != -1) {
-    puVar2 = (unsigned int *)&param_1->field_0x5b4;
-  }
-  else {
-    temp_v0 = FUN_00290d74(param_1->field_0x5a0,param_2);
-    puVar2 = (unsigned int *)&param_1->field_0x5a8;
-  }
-  param_1->field_0x5c4 = puVar2;
-  FUN_00296f4c(*puVar2,temp_v0);
-  return temp_v0;
+    int result;
+    u32 *slot;
+
+    result = FUN_00290d74(obj->unk5AC);
+    if (result != -1) {
+        slot = &obj->slotB;
+    } else {
+        result = FUN_00290d74(obj->unk5A0, arg);
+        slot = &obj->slotA;
+    }
+    obj->current = slot;
+    FUN_00296f4c(*slot, result);
+    return result;
 }
 
 } /* extern "C" */

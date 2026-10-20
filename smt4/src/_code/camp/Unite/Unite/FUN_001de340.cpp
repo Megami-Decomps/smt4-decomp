@@ -85,7 +85,7 @@ extern int *DAT_0043dd68; /* 0x43dd68 */
 extern int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029defc. */
 extern int FUN_0029ea68(unsigned short);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_0029f848. */
 extern int FUN_002a0d0c(void);
 extern int FUN_002a8740(int);
@@ -275,9 +275,9 @@ void FUN_001de340(int *param_1)
             temp_v2 = 0xb;
           }
           temp_v4 = FUN_002a8740((int)*temp_v26);
-          temp_v5 = FUN_0029ebac(temp_v4,10);
+          temp_v5 = flagWordTestBit(temp_v4,10);
           if (temp_v5 == 0) {
-            temp_v5 = FUN_0029ebac(temp_v4,2);
+            temp_v5 = flagWordTestBit(temp_v4,2);
             temp_v1 = 0;
             if (temp_v5 == 0) {
               do {
@@ -289,8 +289,8 @@ void FUN_001de340(int *param_1)
                   param_1[param_1[0x16d] * 2 + 0x4e4] =
                        (param_1[param_1[0x16d] * 2 + 0x4e4] & 0x3fffffffU) | 0x40000000;
                   temp_v5 = FUN_002b066c(temp_v1);
-                  if (((temp_v5 == 0) || (temp_v6 = FUN_0029ebac(temp_v5,10), temp_v6 != 0)) ||
-                     (temp_v6 = FUN_0029ebac(temp_v5,2), temp_v6 != 0)) {
+                  if (((temp_v5 == 0) || (temp_v6 = flagWordTestBit(temp_v5,10), temp_v6 != 0)) ||
+                     (temp_v6 = flagWordTestBit(temp_v5,2), temp_v6 != 0)) {
                     FUN_00288154(temp_v1,temp_v24);
                     if ('\0' < *(char *)((int)temp_v26 + 0x17)) {
                       temp_v13 = (unsigned int)temp_v24[0];
@@ -377,8 +377,8 @@ LAB_001dea48:
                      ) break;
                   FUN_00269bc4(*piVar9);
                   if ((temp_v4 == 0) ||
-                     ((temp_v6 = FUN_0029ebac(temp_v4,10), temp_v6 != 0 ||
-                      (temp_v6 = FUN_0029ebac(temp_v4,2), temp_v6 != 0)))) {
+                     ((temp_v6 = flagWordTestBit(temp_v4,10), temp_v6 != 0 ||
+                      (temp_v6 = flagWordTestBit(temp_v4,2), temp_v6 != 0)))) {
                     temp_v6 = FUN_002c09bc();
                     temp_v6 = temp_v6 + temp_v41 * 4;
                     if (*(char *)(temp_v2 + 0x33) < '\x01') {
@@ -405,8 +405,8 @@ LAB_001decc4:
                     piVar12[0x4e4] = temp_v13;
                     temp_v13 = (unsigned int)*(unsigned short *)(temp_v17 + temp_v5 * 2);
                     temp_v23 = FUN_002b066c(temp_v13);
-                    if (((temp_v23 == 0) || (temp_v6 = FUN_0029ebac(temp_v23,10), temp_v6 != 0)) ||
-                       (temp_v6 = FUN_0029ebac(temp_v23,2), temp_v6 != 0)) {
+                    if (((temp_v23 == 0) || (temp_v6 = flagWordTestBit(temp_v23,10), temp_v6 != 0)) ||
+                       (temp_v6 = flagWordTestBit(temp_v23,2), temp_v6 != 0)) {
                       temp_v6 = FUN_002c09bc();
                       temp_v6 = temp_v6 + temp_v13 * 0x34;
                       if ('\0' < *(char *)(temp_v2 + 0x33)) {
@@ -468,10 +468,10 @@ LAB_001dedf4:
                 temp_v5 = FUN_002a8764();
                 temp_v5 = FUN_002a8740((int)*(char *)(temp_v5 + temp_v4 + 0x90f0));
                 if (temp_v2 == 0 || temp_v5 == 0) break;
-                temp_v6 = FUN_0029ebac(temp_v2,10);
-                if (((temp_v6 == 0) && (temp_v6 = FUN_0029ebac(temp_v5,10), temp_v6 == 0)) &&
-                   ((temp_v6 = FUN_0029ebac(temp_v2,2), temp_v6 == 0 &&
-                    (temp_v6 = FUN_0029ebac(temp_v5,2), temp_v6 == 0)))) {
+                temp_v6 = flagWordTestBit(temp_v2,10);
+                if (((temp_v6 == 0) && (temp_v6 = flagWordTestBit(temp_v5,10), temp_v6 == 0)) &&
+                   ((temp_v6 = flagWordTestBit(temp_v2,2), temp_v6 == 0 &&
+                    (temp_v6 = flagWordTestBit(temp_v5,2), temp_v6 == 0)))) {
                   FUN_00269bc4(*param_1);
                   FUN_00262770(*param_1,0,temp_v2 + 0x34);
                   FUN_00262770(*param_1,1,temp_v5 + 0x34);

@@ -15,7 +15,7 @@ extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: FUN_00295a18. */
 extern int FUN_002b8dc0(unsigned short);
 extern int FUN_002c09d0(void);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
@@ -67,7 +67,7 @@ unsigned short FUN_0021e7f4(unsigned int param_1,int param_2)
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
       if (temp_v7 != 0) {
-        temp_v6 = FUN_002c09f4((temp_v7 - 1U) & 0xffff);
+        temp_v6 = randNextInRange((temp_v7 - 1U) & 0xffff);
         temp_v3 = 0;
         temp_v7 = 0;
         while ((psVar9 = (short *)(temp_v1 + temp_v7 * 8), *psVar9 == 0 ||

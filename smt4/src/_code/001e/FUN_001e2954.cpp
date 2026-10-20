@@ -1,18 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 extern int FUN_0025c05c(void);
-extern unsigned char DAT_00447620[];
+extern u8 DAT_00447620[];
 
-
-unsigned char FUN_001e2954(void)
-
+u8 FUN_001e2954(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0025c05c();
-  return DAT_00447620[temp_v0];
+    int index = FUN_0025c05c();
+
+    return DAT_00447620[index];
 }
 
 } /* extern "C" */

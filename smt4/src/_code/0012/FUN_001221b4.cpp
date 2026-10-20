@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Ring {
+    /* 0x00 */ u8 unk00[0x7C];
+    /* 0x7C */ s32 capacity;
+    /* 0x80 */ s32 used;
+} Ring;
 
-int FUN_001221b4(int param_1)
-
+/* Remaining room: capacity minus used, or 0 when used has reached capacity. */
+s32 FUN_001221b4(Ring *ring)
 {
-  int temp_v0;
-  
-  if (*(int *)(param_1 + 0x80) >= *(int *)(param_1 + 0x7c)) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = *(int *)(param_1 + 0x7c) - *(int *)(param_1 + 0x80);
-  }
-  return temp_v0;
+    s32 free;
+
+    if (ring->used >= ring->capacity) {
+        free = 0;
+    } else {
+        free = ring->capacity - ring->used;
+    }
+    return free;
 }
 
 } /* extern "C" */

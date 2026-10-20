@@ -1,30 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042b734` (_code @ 0x42b734, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nn_fs_ipc_File_OpenLinkFile(int *, unsigned int);
+/* A file handle as the nn::fs IPC layer takes it. */
+typedef struct FsFile {
+    u32 handle; /* 0x00 */
+} FsFile;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
+extern u32 FUN_0050096c(void);
+extern u32 nn_fs_ipc_File_OpenLinkFile(FsFile *file, u32 arg);
 
-extern unsigned int FUN_0050096c(void);
-/* Supplied declaration required: nn_fs_ipc_File_OpenLinkFile. */
-
-
-void FUN_0042b734(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Takes a file handle and opens the link file for it. */
+void FUN_0042b734(u32 unused, u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = param_4;
-  temp_v0 = FUN_0050096c();
-  nn_fs_ipc_File_OpenLinkFile(&temp_v0,param_2);
-  return;
+    FsFile file;
+
+    file.handle = FUN_0050096c();
+    nn_fs_ipc_File_OpenLinkFile(&file, arg);
 }
 
 } /* extern "C" */

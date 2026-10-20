@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Object;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*method1)(struct Object *object);
+} ObjectVtbl;
 
-void FUN_001ab998(int *param_1)
+typedef struct Object {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Object;
 
+/* Calls virtual method 1 when the object exists. */
+void FUN_001ab998(Object *object)
 {
-/* irregular: 2 native warning(s); review required */
-  if (param_1 != (int *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x001ab9a8. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(*param_1 + 4))(param_1);
-    return;
-  }
-  return;
+    if (object != NULL) {
+        object->vtbl->method1(object);
+    }
 }
 
 } /* extern "C" */

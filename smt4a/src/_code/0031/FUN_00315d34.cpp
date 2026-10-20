@@ -12,7 +12,7 @@ int FUN_001835b4(int, int, int, int, int, int);
 int FUN_002371b0(void);
 int FUN_00379664(int, int);
 int FUN_003849cc(int, int, int, unsigned char [144], unsigned int);
-int FUN_0038594c(...);
+int dataTable2ECount(...);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -33,10 +33,10 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern unsigned long long FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_002371b0. */
-extern int FUN_00327638(int);
+extern int dataTable2EGetEntry(int);
 /* Supplied declaration required: FUN_00379664. */
 /* Supplied declaration required: FUN_003849cc. */
-/* Supplied declaration required: FUN_0038594c. */
+/* Supplied declaration required: dataTable2ECount. */
 
 
 unsigned int FUN_00315d34(void)
@@ -142,11 +142,11 @@ unsigned int FUN_00315d34(void)
     }
   }
   temp_v4 = 0;
-  FUN_0038594c(temp_v3,temp_v2);
+  dataTable2ECount(temp_v3,temp_v2);
   temp_v7 = (float)temp_v8;
   if (0 < temp_v3) {
     do {
-      temp_v2 = FUN_00327638(temp_v4);
+      temp_v2 = dataTable2EGetEntry(temp_v4);
       temp_v7 = (float)temp_v8;
       temp_v2 = (int)*(short *)(temp_v2 + 0x20);
       if (temp_v2 == -1) {
@@ -154,7 +154,7 @@ unsigned int FUN_00315d34(void)
       }
       if (temp_v2 == *(short *)(temp_v1 + 0xccec)) break;
       temp_v4 = temp_v4 + 1;
-      FUN_0038594c();
+      dataTable2ECount();
       temp_v7 = (float)temp_v8;
     } while (temp_v4 < temp_v2);
   }

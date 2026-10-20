@@ -31,7 +31,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_001c5888. */
 /* Supplied declaration required: FUN_001c58b8. */
-extern unsigned int *FUN_002e3cf8(void);
+extern unsigned int *__aeabi_errno_addr(void);
 extern unsigned int FUN_002e418c(unsigned int);
 /* Supplied declaration required: FUN_002e4194. */
 extern long long FUN_002e49c4(int, int, unsigned int, unsigned int);
@@ -178,7 +178,7 @@ void FUN_0010195c(int *param_1,unsigned char *param_2,unsigned char *param_3,int
         }
         if ((((unsigned int)piVar9 & 0x7fffffff) == 0 && temp_v6 == 0) ||
            (((unsigned int)piVar9 & 0x7fffffff) >> 0x14 == 0x7ff)) {
-          puVar4 = (unsigned int *)FUN_002e3cf8();
+          puVar4 = (unsigned int *)__aeabi_errno_addr();
           *puVar4 = 2;
           if (((unsigned int)piVar9 & 0x7fffffff) >> 0x14 == 0x7ff) {
             *param_1 = 0;
@@ -194,7 +194,7 @@ void FUN_0010195c(int *param_1,unsigned char *param_2,unsigned char *param_3,int
       param_1[1] = 0x7ff00000;
       param_1[1] = (temp_v12 << 0x1f) | 0x7ff00000;
     }
-    puVar4 = (unsigned int *)FUN_002e3cf8();
+    puVar4 = (unsigned int *)__aeabi_errno_addr();
     *puVar4 = 2;
   }
   return;

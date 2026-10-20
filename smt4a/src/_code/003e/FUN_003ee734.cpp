@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_0034a290(void);
-int FUN_003df6a4(unsigned short [30], int);
+int playerGetWords(unsigned short [30], int);
 int FUN_003e0064(int);
 int FUN_003e0090(int);
-int FUN_003e00dc(int);
+int playerClearFlagMask(int);
 int FUN_003e4e64(void);
-int FUN_004bccd0(int, unsigned short [30]);
+int halves34Copy(int, unsigned short [30]);
 int FUN_004bd354(int, int);
 int FUN_004bd3bc(int, int);
 int VectorSignedToFloat(...);
@@ -35,18 +35,18 @@ extern int FUN_001801a4(void);
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_0034a290. */
-/* Supplied declaration required: FUN_003df6a4. */
+/* Supplied declaration required: playerGetWords. */
 extern short FUN_003e0024(void);
 extern short FUN_003e0034(void);
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e0064. */
 /* Supplied declaration required: FUN_003e0090. */
-/* Supplied declaration required: FUN_003e00dc. */
+/* Supplied declaration required: playerClearFlagMask. */
 extern unsigned int FUN_003e0154(void);
 extern unsigned int FUN_003e0164(void);
 /* Supplied declaration required: FUN_003e4e64. */
-/* Supplied declaration required: FUN_004bccd0. */
-extern int FUN_004bd340(int, unsigned int);
+/* Supplied declaration required: halves34Copy. */
+extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: FUN_004bd354. */
 /* Supplied declaration required: FUN_004bd3bc. */
 
@@ -81,7 +81,7 @@ void FUN_003ee734(int param_1)
     temp_v12 = 0.0f;
     temp_v9 = temp_v12;
     temp_v10 = temp_v12;
-    FUN_003df6a4(temp_v19,1);
+    playerGetWords(temp_v19,1);
     temp_v13 = 10.0f;
     temp_v14 = 7.0f;
     temp_v15 = 5.0f;
@@ -120,9 +120,9 @@ void FUN_003ee734(int param_1)
     if ((romwright_subpiece_4_1_0(temp_v2 >> 0x1d,0)) && (temp_v10 = temp_v9, (int)temp_v9 >= 0x42c80001)) {
       temp_v10 = temp_v17;
     }
-    temp_v6 = FUN_003e0044(1);
+    temp_v6 = playerHasFlagBit(1);
     temp_v18 = 0x3c23d70a;
-    if ((temp_v6 == 0) && (temp_v6 = FUN_003e0044(10), temp_v6 == 0)) {
+    if ((temp_v6 == 0) && (temp_v6 = playerHasFlagBit(10), temp_v6 == 0)) {
       temp_v1 = FUN_003e0024();
       temp_v3 = FUN_003e0154();
       temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(temp_v2 >> 0x16) & 3);
@@ -160,7 +160,7 @@ void FUN_003ee734(int param_1)
           temp_v19[7] = 0;
           temp_v19[8] = 0;
           temp_v19[9] = 0;
-          FUN_004bccd0(temp_v4,temp_v19);
+          halves34Copy(temp_v4,temp_v19);
           temp_v7 = 0;
           do {
             temp_v5 = (unsigned int)temp_v19[temp_v7];
@@ -194,8 +194,8 @@ void FUN_003ee734(int param_1)
           if ((romwright_subpiece_4_1_0(temp_v2 >> 0x1d,0)) && (temp_v9 = temp_v10, (int)temp_v10 >= 0x42c80001)) {
             temp_v9 = temp_v17;
           }
-          temp_v7 = FUN_004bd340(temp_v4,1);
-          if ((temp_v7 == 0) && (temp_v7 = FUN_004bd340(temp_v4,10), temp_v7 == 0)) {
+          temp_v7 = bitsAt60Test(temp_v4,1);
+          if ((temp_v7 == 0) && (temp_v7 = bitsAt60Test(temp_v4,10), temp_v7 == 0)) {
             temp_v3 = FUN_0017760c(temp_v4);
             temp_v10 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(temp_v2 >> 0x16) & 3);
             temp_v7 = (int)(short)((short)(int)(temp_v10 * temp_v11 * (float)temp_v18) +
@@ -218,9 +218,9 @@ void FUN_003ee734(int param_1)
       } while (temp_v8 < (int)(unsigned int)temp_v0);
     }
   }
-  temp_v6 = FUN_003e0044(1);
+  temp_v6 = playerHasFlagBit(1);
   if (temp_v6 != 0) {
-    FUN_003e00dc(2);
+    playerClearFlagMask(2);
     FUN_003e0064(1);
   }
   FUN_003e4e64();

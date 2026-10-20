@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Triple {
+    /* 0x00 */ u32 a;
+    /* 0x04 */ u32 b;
+    /* 0x08 */ u32 c;
+} Triple;
 
-void FUN_002f12fc(unsigned int *param_1)
-
+/* Clears the three words. */
+void FUN_002f12fc(Triple *object)
 {
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  return;
+    object->a = 0;
+    object->b = 0;
+    object->c = 0;
 }
 
 } /* extern "C" */

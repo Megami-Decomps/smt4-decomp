@@ -1,32 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ee80e(void);
+void FUN_002ee80e(void *object);
 
-typedef struct fn_002f32dc_arg0 fn_002f32dc_arg0;
-struct fn_002f32dc_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    int field_0xc; /* +0xc */
-    undefined2 field_0x10; /* +0x10 */
-};
+typedef struct SmallBuffer {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 *begin;
+    /* 0x08 */ u32 capacity;
+    /* 0x0C */ u8 *end;
+    /* 0x10 */ u16 inlineData[1];
+} SmallBuffer;
 
-/* Supplied declaration required: FUN_002ee80e. */
-
-
-void FUN_002f32dc(fn_002f32dc_arg0 *param_1)
-
+/* Resets the buffer to its inline storage at 0x10 (capacity 0x100, empty). */
+void FUN_002f32dc(SmallBuffer *buffer)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002ee80e();
-  int q = (int)&param_1->field_0x10;
-  param_1->field_0xc = q;
-  param_1->field_0x8 = 0x100;
-  param_1->field_0x4 = q;
-  param_1->field_0x10 = 0;
-  return;
+    u8 *inlineData;
+
+    FUN_002ee80e(buffer);
+    inlineData = (u8 *)&buffer->inlineData[0];
+    buffer->end = inlineData;
+    buffer->capacity = 0x100;
+    buffer->begin = inlineData;
+    buffer->inlineData[0] = 0;
 }
 
 } /* extern "C" */

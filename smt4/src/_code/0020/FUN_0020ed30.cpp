@@ -1,32 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0039309c(void);
+int FUN_0039309c(void *target);
 
-/* Supplied declaration required: FUN_0039309c. */
+typedef struct Target {
+    /* 0x00 */ u8 unk00[0x1A];
+    /* 0x1A */ u8 kind;
+    /* 0x1B */ u8 unk1B;
+    /* 0x1C */ void *unk1C;
+} Target;
 
-
-unsigned int FUN_0020ed30(int *param_1)
-
+u32 FUN_0020ed30(Target **owner)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = *param_1;
-  temp_v0 = *(char *)(temp_v1 + 0x1a);
-  if ((temp_v0 == '\x01' || temp_v0 == '\x02') || temp_v0 == '\x03') {
-    temp_v2 = 0;
-    if (temp_v1 != 0) {
-      temp_v2 = *(int *)(temp_v1 + 0x1c);
+    Target *target = *owner;
+    void *sub;
+
+    if (target->kind == 1 || target->kind == 2 || target->kind == 3) {
+        sub = NULL;
+        if (target != NULL) {
+            sub = target->unk1C;
+        }
+        if (target != NULL && sub != NULL) {
+            FUN_0039309c(sub);
+        }
     }
-    if (temp_v1 != 0 && temp_v2 != 0) {
-      FUN_0039309c();
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

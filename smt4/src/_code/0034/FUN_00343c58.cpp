@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023f2e4(unsigned int, int, char [4], unsigned int);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern char s__B_B_B_B_B_B_B_B_B_B_0044d1f0[367]; /* 0x44d1f0 */
 extern char s__B_B_B_______________0044d6f8[1171]; /* 0x44d6f8 */
 
 /* Supplied declaration required: FUN_0023f2e4. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 
 
 void FUN_00343c58(unsigned int param_1,int param_2,int param_3,unsigned int param_4)
@@ -64,9 +64,9 @@ void FUN_00343c58(unsigned int param_1,int param_2,int param_3,unsigned int para
   uStack_1c = 0;
   uStack_18 = 0;
   uStack_14 = 0;
-  FUN_002b64a0(temp_v0,*(unsigned int *)(s__B_B_B_B_B_B_B_B_B_B_0044d1f0 + param_3 * 4));
-  FUN_002b64a0(temp_v0,*(unsigned int *)(s__B_B_B_______________0044d6f8 + param_2 * 4));
-  FUN_002b64a0(temp_v0,&LAB_00343cdc);
+  libc_strcat(temp_v0,*(unsigned int *)(s__B_B_B_B_B_B_B_B_B_B_0044d1f0 + param_3 * 4));
+  libc_strcat(temp_v0,*(unsigned int *)(s__B_B_B_______________0044d6f8 + param_2 * 4));
+  libc_strcat(temp_v0,&LAB_00343cdc);
   FUN_0023f2e4(param_1,param_2,temp_v0,param_4);
   return;
 }

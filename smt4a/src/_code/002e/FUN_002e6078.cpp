@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern unsigned int *FUN_002e3cf8(void);
+extern unsigned int *__aeabi_errno_addr(void);
 extern int FUN_002e49dc(char, int);
 
 
@@ -74,7 +74,7 @@ unsigned int FUN_002e6078(char *param_1,unsigned int *param_2,int param_3)
     *param_2 = (unsigned int)param_1;
   }
   if (temp_v1) {
-    puVar6 = (unsigned int *)FUN_002e3cf8();
+    puVar6 = (unsigned int *)__aeabi_errno_addr();
     *puVar6 = 2;
     temp_v6 = 0xffffffff;
   }

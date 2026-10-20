@@ -1,21 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0030ff80(unsigned int *, unsigned int);
+extern const u8 DAT_0055affc[];  /* vtable */
+void FUN_0030ff80(u32 *member, u32 value);
 
-extern unsigned char DAT_0055affc; /* 0x55affc */
+typedef struct Object55affc {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ u32 member04;
+} Object55affc;
 
-/* Supplied declaration required: FUN_0030ff80. */
-
-
-unsigned int * FUN_002e9520(unsigned int *param_1,int param_2)
-
+/* Copy constructor: sets the vtable and copies the member at 4 through FUN_0030ff80. */
+Object55affc *FUN_002e9520(Object55affc *self, const Object55affc *source)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_0055affc;
-  FUN_0030ff80(param_1 + 1,*(unsigned int *)(param_2 + 4));
-  return param_1;
+    self->vtbl = DAT_0055affc;
+    FUN_0030ff80(&self->member04, source->member04);
+    return self;
 }
 
 } /* extern "C" */

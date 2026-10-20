@@ -1,30 +1,26 @@
-#include "romwright_types.h"
+#include "shard/PadState.h"
 
 extern "C" {
 
-extern int FUN_002b63ac(void);
-extern int FUN_002c09d0(unsigned int);
+extern PadState *FUN_002b63ac(void);
+extern int FUN_002c09d0(u32 id);
 
-
-void FUN_00333e30(int param_1)
-
+/* Adds `delta` to the pad's value at +0x74 (clamped to -999..999) unless one of the flags 0x1FD-0x1FF is set. */
+void FUN_00333e30(int delta)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002c09d0(0x1fd);
-  if (((temp_v0 == 0) && (temp_v0 = FUN_002c09d0(0x1fe), temp_v0 == 0)) &&
-     (temp_v0 = FUN_002c09d0(0x1ff), temp_v0 == 0)) {
-    temp_v0 = FUN_002b63ac();
-    param_1 = *(short *)(temp_v0 + 0x74) + param_1;
-    if (param_1 < -999) {
-      param_1 = -999;
+    PadState *pad;
+
+    if (((FUN_002c09d0(0x1fd) == 0) && (FUN_002c09d0(0x1fe) == 0)) &&
+        (FUN_002c09d0(0x1ff) == 0)) {
+        pad = FUN_002b63ac();
+        delta = pad->x + delta;
+        if (delta < -999) {
+            delta = -999;
+        } else if (delta >= 1000) {
+            delta = 999;
+        }
+        pad->x = (s16)delta;
     }
-    else if (param_1 >= 1000) {
-      param_1 = 999;
-    }
-    *(short *)(temp_v0 + 0x74) = (short)param_1;
-  }
-  return;
 }
 
 } /* extern "C" */

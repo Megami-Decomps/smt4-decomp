@@ -1,22 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f290; /* 0x57f290 */
+typedef struct Record {
+    /* 0x0000 */ u8 unk0000[0x400];
+    /* 0x0400 */ s32 state;
+    /* 0x0404 */ u8 unk0404[0x8C8C];
+    /* 0x9090 */ u8 busy;
+} Record;
+extern Record *DAT_0057f290;
 
-
-unsigned int FUN_002f3b90(void)
-
+/* Returns 1 when the record's state is 2 and it is not busy. */
+u32 FUN_002f3b90(void)
 {
-  unsigned int temp_v0;
-  
-  if ((*(int *)(DAT_0057f290 + 0x400) == 2) && (*(char *)(DAT_0057f290 + 0x9090) == '\0')) {
-    temp_v0 = 1;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 result;
+
+    if ((DAT_0057f290->state == 2) && (DAT_0057f290->busy == 0)) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

@@ -17,7 +17,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 /* Supplied declaration required: FUN_001801a4. */
 /* Supplied declaration required: FUN_00192608. */
 /* Supplied declaration required: FUN_0034a290. */
-extern int FUN_004ccd5c(unsigned short, unsigned int);
+extern int dataTable9Type3GetClamped(unsigned short, unsigned int);
 
 
 unsigned long long FUN_0022fd80(int param_1,unsigned int param_2)
@@ -83,7 +83,7 @@ unsigned long long FUN_0022fd80(int param_1,unsigned int param_2)
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 7);
   temp_v1 = (unsigned int)(param_1 * (int)(temp_v6 * 100.0f)) / 100;
-  temp_v0 = FUN_004ccd5c(*(unsigned short *)(temp_v0 + 0x62),param_2);
+  temp_v0 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v0 + 0x62),param_2);
   temp_v3 = temp_v1 * temp_v0;
   temp_v2 = temp_v3 / 100;
   if ((temp_v2 == 0) && (temp_v1 != 0)) {

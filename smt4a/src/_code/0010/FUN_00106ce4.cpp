@@ -1,24 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010ca78(int, unsigned int, unsigned int);
+void FUN_0010ca78(void *object, u32 a, u32 b);
+void *FUN_002e760a(u32 size);
 
-/* Supplied declaration required: FUN_0010ca78. */
-extern int FUN_002e760a(unsigned int);
-
-
-void FUN_00106ce4(unsigned int param_1,unsigned int param_2)
-
+/* Allocates a 0x9C-byte object and constructs it from the two arguments, if the allocation succeeded. */
+void FUN_00106ce4(u32 a, u32 b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002e760a(0x9c);
-  if (temp_v0 != 0) {
-    FUN_0010ca78(temp_v0,param_1,param_2);
-  }
-  return;
+    void *object = FUN_002e760a(0x9C);
+
+    if (object != NULL) {
+        FUN_0010ca78(object, a, b);
+    }
 }
 
 } /* extern "C" */

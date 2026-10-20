@@ -32,7 +32,7 @@ extern unsigned int *DAT_0043d9e4; /* 0x43d9e4 */
 
 /* Supplied declaration required: FUN_002af5c0. */
 /* Supplied declaration required: FUN_002bd954. */
-extern short FUN_002c09f4(unsigned int);
+extern short randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002c312c. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -74,13 +74,13 @@ void FUN_003ad0e0(void)
       puVar2[0x9d] = 0;
       puVar2[0x9f] = temp_v2;
       *(unsigned short *)(puVar2 + 0xa1) = 0;
-      temp_v0 = FUN_002c09f4(200);
+      temp_v0 = randNextInRange(200);
       *(short *)(puVar2 + 0xa2) = temp_v0 + 100;
       *(unsigned char *)(puVar2 + 0xa3) = 0;
       puVar2[0x9e] = temp_v3;
       puVar2[0xa0] = 0xc0400000;
       *(unsigned short *)((int)puVar2 + 0x286) = 0;
-      temp_v0 = FUN_002c09f4(200);
+      temp_v0 = randNextInRange(200);
       *(short *)((int)puVar2 + 0x28a) = temp_v0 + 100;
       *(unsigned char *)((int)puVar2 + 0x28d) = 0;
       memClear(puVar2 + 0xa4,0x1e0);

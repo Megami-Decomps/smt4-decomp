@@ -8,12 +8,12 @@ int CONCAT44(...);
 int FUN_001bc460(...);
 int FUN_00226cb0(...);
 int FUN_00237354(...);
-int FUN_0028122c(...);
+int matrix43Multiply(...);
 int FUN_002a2048(...);
 int FUN_002e1450(...);
 int FUN_00381f00(...);
-int FUN_0039ede0(...);
-int FUN_003b24f0(...);
+int quadSourceCopyOut(...);
+int quadHolderCopyOut(...);
 int FUN_003bcff8(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -158,12 +158,12 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: FUN_001bc460. */
 /* Supplied declaration required: FUN_00226cb0. */
 /* Supplied declaration required: FUN_00237354. */
-/* Supplied declaration required: FUN_0028122c. */
+/* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: FUN_002a2048. */
 /* Supplied declaration required: FUN_002e1450. */
 /* Supplied declaration required: FUN_00381f00. */
-/* Supplied declaration required: FUN_0039ede0. */
-/* Supplied declaration required: FUN_003b24f0. */
+/* Supplied declaration required: quadSourceCopyOut. */
+/* Supplied declaration required: quadHolderCopyOut. */
 /* Supplied declaration required: FUN_003bcff8. */
 
 
@@ -284,8 +284,8 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
       temp_v13 = CONCAT44(0x3f000000,DAT_006472e0);
       temp_v16 = (unsigned long long)(unsigned int)DAT_006472e4 << 0x20;
       if ((pfVar2->field_0xc & 1) != 0) {
-        FUN_0039ede0(pfVar2,&temp_v26);
-        FUN_003b24f0(param_1->field_0x9c,&temp_v62);
+        quadSourceCopyOut(pfVar2,&temp_v26);
+        quadHolderCopyOut(param_1->field_0x9c,&temp_v62);
         DAT_006472dc = temp_v26;
         DAT_006472e0 = fStack_1b4;
         DAT_006472e4 = fStack_1b0;
@@ -426,7 +426,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
         }
       }
       else {
-        FUN_0039ede0(pfVar2,&temp_v26);
+        quadSourceCopyOut(pfVar2,&temp_v26);
         DAT_006472dc = temp_v26;
         DAT_006472e0 = fStack_1b4;
         DAT_006472e4 = fStack_1b0;
@@ -488,7 +488,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                 FUN_00237354(temp_v55,&temp_v19,0);
               }
               FUN_002e1450(&temp_v30);
-              FUN_0028122c(&temp_v30,temp_v55,&temp_v39);
+              matrix43Multiply(&temp_v30,temp_v55,&temp_v39);
               temp_v2 = pfVar9->field_0x0;
               *(unsigned int *)(temp_v2 + 0x4c) = temp_v30;
               *(unsigned int *)(temp_v2 + 0x5c) = temp_v33;

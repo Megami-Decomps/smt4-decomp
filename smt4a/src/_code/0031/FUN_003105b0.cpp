@@ -18,12 +18,12 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int *FUN_002e4e86(int **, unsigned int *);
+extern int *wordRefMax(int **, unsigned int *);
 extern int rt_malloc(int);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_003075f2. */
 /* Supplied declaration required: FUN_0031066a. */
-extern unsigned int FUN_00310684(int, int *);
+extern unsigned int bufGrowCapacity(int, int *);
 
 
 unsigned long long FUN_003105b0(int *param_1,int *param_2,unsigned int param_3,unsigned int param_4)
@@ -49,9 +49,9 @@ unsigned long long FUN_003105b0(int *param_1,int *param_2,unsigned int param_3,u
     temp_v7 = param_3;
     uStack_18 = param_4;
     if ((unsigned int)(param_1[2] - temp_v3) < temp_v1) {
-      temp_v7 = FUN_00310684(param_1[1] - temp_v3,param_1);
+      temp_v7 = bufGrowCapacity(param_1[1] - temp_v3,param_1);
       temp_v6 = (int *)(param_2[1] - *param_2);
-      piVar2 = (int *)FUN_002e4e86(&temp_v6,(unsigned int *)&temp_v7);
+      piVar2 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v7);
       temp_v5 = *piVar2;
       temp_v0 = rt_malloc(temp_v5);
       FUN_0031066a(*param_2,param_2[1],temp_v0,param_1);

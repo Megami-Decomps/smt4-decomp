@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0023e6d8(int, int, unsigned int);
 int FUN_002b4e7c(void);
-int FUN_003e00dc(...);
-int FUN_004bd400(...);
+int playerClearFlagMask(...);
+int bitsAt60Clear(...);
 
 /* stack frame of param_5: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -27,10 +27,10 @@ extern int FUN_00291e14(void);
 extern int FUN_002b4dcc(void);
 /* Supplied declaration required: FUN_002b4e7c. */
 extern unsigned int FUN_003d2c20(int, unsigned short);
-extern int FUN_003e0044(unsigned int);
-/* Supplied declaration required: FUN_003e00dc. */
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd400. */
+extern int playerHasFlagBit(unsigned int);
+/* Supplied declaration required: playerClearFlagMask. */
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Clear. */
 
 
 unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param_4,int *param_5)
@@ -63,7 +63,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
     if (temp_v6 == 0) {
       return 1;
     }
-    temp_v2 = FUN_004bd340(temp_v6,10);
+    temp_v2 = bitsAt60Test(temp_v6,10);
     if (temp_v2 != 0) {
       return 1;
     }
@@ -98,13 +98,13 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
       if (*(char *)(param_3 + 0x23) == '\a') {
         return 1;
       }
-      temp_v6 = FUN_003e0044(1);
+      temp_v6 = playerHasFlagBit(1);
       if (temp_v6 == 0) {
         return 1;
       }
       if (param_4 == 0) {
-        FUN_003e00dc(2);
-        temp_v6 = FUN_003e0044(3);
+        playerClearFlagMask(2);
+        temp_v6 = playerHasFlagBit(3);
         if (temp_v6 != 0) {
           temp_v1 = *(short *)(temp_v5 + 0x2a) + 1;
         }
@@ -122,7 +122,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
       if (param_5 == (int *)0x0) {
         return 0;
       }
-      temp_v6 = FUN_003e0044(3);
+      temp_v6 = playerHasFlagBit(3);
       if (temp_v6 == 0) {
         FUN_0023e6d8(param_3,(int)temp_v1,param_1);
         *param_5 = param_3;
@@ -130,13 +130,13 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
       }
     }
     else {
-      temp_v5 = FUN_004bd340(temp_v6,1);
+      temp_v5 = bitsAt60Test(temp_v6,1);
       if (temp_v5 == 0) {
         return 1;
       }
       if (param_4 == 0) {
-        FUN_004bd400(temp_v6,2);
-        temp_v5 = FUN_004bd340(temp_v6,3);
+        bitsAt60Clear(temp_v6,2);
+        temp_v5 = bitsAt60Test(temp_v6,3);
         if (temp_v5 != 0) {
           temp_v1 = *(short *)(temp_v6 + 0x2a) + 1;
         }
@@ -154,7 +154,7 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
       if (param_5 == (int *)0x0) {
         return 0;
       }
-      temp_v6 = FUN_004bd340(temp_v6,3);
+      temp_v6 = bitsAt60Test(temp_v6,3);
       if (temp_v6 == 0) {
         FUN_0023e6d8(param_3,(int)temp_v0,param_1);
         *param_5 = param_3;
@@ -165,20 +165,20 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
     return 0;
   }
   if (temp_v5 == 0) {
-    temp_v5 = FUN_004bd340(temp_v6,1);
+    temp_v5 = bitsAt60Test(temp_v6,1);
     if (temp_v5 != 0) {
       return 1;
     }
     temp_v4 = FUN_003d2c20(param_3,*(unsigned short *)(temp_v6 + 0x60));
     if (temp_v4 != 0) {
       if (param_4 == 0) {
-        FUN_004bd400(temp_v6,temp_v4 & 0xffff);
+        bitsAt60Clear(temp_v6,temp_v4 & 0xffff);
       }
       temp_v7 = 0;
     }
     FUN_0023e6d8(param_3,(int)temp_v0,param_1);
     if (param_3 != 0) {
-      temp_v5 = FUN_004bd340(temp_v6,3);
+      temp_v5 = bitsAt60Test(temp_v6,3);
       temp_v1 = *(short *)(temp_v6 + 0x2a);
       if (temp_v5 != 0) {
         param_3 = 1;
@@ -213,20 +213,20 @@ unsigned int FUN_0028809c(unsigned int param_1,int param_2,int param_3,int param
     *(short *)(temp_v6 + 0x2a) = (short)temp_v8;
     return temp_v7;
   }
-  temp_v6 = FUN_003e0044(1);
+  temp_v6 = playerHasFlagBit(1);
   if (temp_v6 != 0) {
     return 1;
   }
   temp_v4 = FUN_003d2c20(param_3,*(unsigned short *)(temp_v5 + 0x5e));
   if (temp_v4 != 0) {
     if (param_4 == 0) {
-      FUN_003e00dc(temp_v4 & 0xffff);
+      playerClearFlagMask(temp_v4 & 0xffff);
     }
     temp_v7 = 0;
   }
   FUN_0023e6d8(param_3,(int)temp_v1,param_1);
   if (param_3 != 0) {
-    temp_v6 = FUN_003e0044(3);
+    temp_v6 = playerHasFlagBit(3);
     temp_v1 = *(short *)(temp_v5 + 0x2a);
     if (temp_v6 != 0) {
       param_3 = 1;

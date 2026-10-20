@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001a75d0(...);
 int FUN_001a7810(...);
 int FUN_001af670(...);
-int FUN_002627cc(...);
+int dataTable24Sub0GetRecord(...);
 int FUN_0029efc0(...);
 int FUN_002bdf94(...);
 int FUN_002be5a4(int, unsigned int, unsigned char [72]);
@@ -39,7 +39,7 @@ extern unsigned char LAB_001de11c; /* 0x1de11c */
 /* Supplied declaration required: FUN_001a75d0. */
 /* Supplied declaration required: FUN_001a7810. */
 /* Supplied declaration required: FUN_001af670. */
-/* Supplied declaration required: FUN_002627cc. */
+/* Supplied declaration required: dataTable24Sub0GetRecord. */
 extern int FUN_0026280c(void);
 extern int FUN_0029d644(int);
 extern unsigned int FUN_0029dde0(void);
@@ -108,7 +108,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
         if (temp_v6 != temp_v10) {
           FUN_002bf538();
           temp_v6 = temp_v4 + temp_v10;
-          temp_v7 = FUN_002627cc();
+          temp_v7 = dataTable24Sub0GetRecord();
           temp_v8 = FUN_002bf4f8(0x24,temp_v10 + 0xa9);
           if (temp_v14 != 0) {
             if (temp_v14 != 1) {
@@ -161,7 +161,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
                 temp_v7 = 0;
                 if (temp_v7 < temp_v6) {
                   do {
-                    temp_v9 = FUN_002627cc(temp_v7);
+                    temp_v9 = dataTable24Sub0GetRecord(temp_v7);
                     if (temp_v9 == 2) {
                       temp_v8 = temp_v8 + 1;
                     }
@@ -189,7 +189,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
     temp_v4 = FUN_0029efc0(temp_v2);
     temp_v5 = FUN_0029efa8(temp_v2);
     temp_v4 = temp_v4 + temp_v5;
-    temp_v5 = FUN_002627cc(temp_v4);
+    temp_v5 = dataTable24Sub0GetRecord(temp_v4);
     temp_v2 = FUN_0029efa8(temp_v2);
     temp_v2 = FUN_002bf4f8(0x24,temp_v2 + 0xa9);
     if (temp_v5 != 0) {
@@ -199,7 +199,7 @@ void FUN_001dddd8(int param_1,int param_2,int param_3)
           temp_v5 = 0;
           if (temp_v5 < temp_v4) {
             do {
-              temp_v11 = FUN_002627cc(temp_v5);
+              temp_v11 = dataTable24Sub0GetRecord(temp_v5);
               if (temp_v11 == 2) {
                 temp_v10 = temp_v10 + 1;
               }

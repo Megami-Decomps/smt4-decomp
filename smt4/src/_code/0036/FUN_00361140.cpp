@@ -1,19 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int memClear(unsigned short *, int);
+int memClear(u16 *ptr, int size);
 
-/* Supplied declaration required: memClear. */
-
-
-void FUN_00361140(unsigned short *param_1)
-
+void FUN_00361140(u16 *block)
 {
-/* irregular: 1 native warning(s); review required */
-  memClear(param_1,0xe30);
-  *param_1 = 2;
-  return;
+    memClear(block, 0xe30);
+    *block = 2;
 }
 
 } /* extern "C" */

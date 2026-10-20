@@ -8,7 +8,7 @@ int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(unsigned int);
 int sysMemClear(void);
 int FUN_00337f9c(unsigned int, int, int, int, unsigned char *, int);
-int FUN_00350ca4(unsigned int);
+int block6Free(unsigned int);
 int FUN_00390164(unsigned int, unsigned int, unsigned char *, int, int);
 int FUN_003932d0(...);
 int VectorUnsignedToFloat(...);
@@ -31,7 +31,7 @@ extern unsigned char DAT_005c1f8e; /* 0x5c1f8e */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00337f9c. */
-/* Supplied declaration required: FUN_00350ca4. */
+/* Supplied declaration required: block6Free. */
 /* Supplied declaration required: FUN_00390164. */
 /* Supplied declaration required: FUN_003932d0. */
 
@@ -67,8 +67,8 @@ void FUN_0038439c(unsigned int *param_1,unsigned int param_2,unsigned int *param
   if (*param_1 != 0) {
     temp_v0 = param_1[10];
     if (temp_v0 != 0) {
-      FUN_00350ca4(*(unsigned int *)(temp_v0 + 0x10));
-      FUN_00350ca4(*(unsigned int *)(temp_v0 + 0x14));
+      block6Free(*(unsigned int *)(temp_v0 + 0x10));
+      block6Free(*(unsigned int *)(temp_v0 + 0x14));
       asdMemFree(temp_v0);
     }
     temp_v1 = *param_3;

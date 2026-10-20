@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_00284140(int);
-extern int FUN_003fd708(unsigned short);
+extern int flagsAtGetBit1(unsigned short);
 
 
 void FUN_0049d938(int param_1,int param_2,int param_3)
@@ -91,7 +91,7 @@ void FUN_0049d938(int param_1,int param_2,int param_3)
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(3,temp_v9,puVar8 + 2,temp_v4);
-      temp_v3 = FUN_003fd708(*puVar8);
+      temp_v3 = flagsAtGetBit1(*puVar8);
       if (temp_v3 != 0) {
         temp_v3 = FUN_001834a4(0x33,0x70);
         temp_v0 = *(short *)(temp_v3 + 8);
@@ -117,7 +117,7 @@ void FUN_0049d938(int param_1,int param_2,int param_3)
       VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v3 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(2,0xffffffff,puVar8 + 2,temp_v6);
-      temp_v3 = FUN_003fd708(*puVar8);
+      temp_v3 = flagsAtGetBit1(*puVar8);
       if (temp_v3 != 0) {
         temp_v3 = FUN_001834a4(0x33,0x5b);
         temp_v0 = *(short *)(temp_v3 + 8);

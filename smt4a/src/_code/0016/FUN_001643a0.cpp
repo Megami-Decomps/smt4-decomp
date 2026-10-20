@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/Block57f248.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f248; /* 0x57f248 */
-
-
-unsigned char FUN_001643a0(void)
-
+/* Returns the byte at 0x8 of the record at 0x57F248. */
+u8 FUN_001643a0(void)
 {
-  return *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 8);
+    return DAT_0057f248.record->unk008;
 }
 
 } /* extern "C" */

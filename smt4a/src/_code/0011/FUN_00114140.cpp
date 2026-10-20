@@ -13,7 +13,7 @@ int FUN_002e9f64(...);
 int FUN_002eb588(unsigned int *);
 int FUN_002f3dde(unsigned int, unsigned int);
 int FUN_002ff3b0(unsigned int **, unsigned int *, int, unsigned int);
-int FUN_002ff3b8(int [2], int *, int);
+int wordMoveOut_002ff3b8(int [2], int *, int);
 int FUN_002ff3c8(int *, unsigned int);
 
 /* stack frame of param_1: 10 slot(s), 40 byte(s) */
@@ -40,9 +40,9 @@ extern unsigned int FUN_002e7908(unsigned char *, int *);
 /* Supplied declaration required: FUN_002eb588. */
 /* Supplied declaration required: FUN_002f3dde. */
 /* Supplied declaration required: FUN_002ff3b0. */
-/* Supplied declaration required: FUN_002ff3b8. */
+/* Supplied declaration required: wordMoveOut_002ff3b8. */
 /* Supplied declaration required: FUN_002ff3c8. */
-extern int FUN_002ff3f8(int *, unsigned int *);
+extern int wordRefsDiffer_002ff3f8(int *, unsigned int *);
 extern unsigned long long FUN_002ff424(int, unsigned int *);
 
 
@@ -79,7 +79,7 @@ void FUN_00114140(int param_1)
   do {
     while( 1 ) {
       temp_v15 = *(unsigned int *)(param_1 + 0x30);
-      temp_v3 = FUN_002ff3f8(&temp_v14,(unsigned int *)&temp_v15);
+      temp_v3 = wordRefsDiffer_002ff3f8(&temp_v14,(unsigned int *)&temp_v15);
       temp_v1 = temp_v13;
       temp_v0 = temp_v12;
       puVar7 = temp_v10;
@@ -121,7 +121,7 @@ void FUN_00114140(int param_1)
     FUN_002ff3b0(&temp_v10,temp_v11,temp_v16,temp_v17);
     temp_v9[1] = 0x8001000b;
     temp_v2 = FUN_002e7908(temp_v18,temp_v9 + 1);
-    FUN_002ff3b8(temp_v9,&temp_v14,0);
+    wordMoveOut_002ff3b8(temp_v9,&temp_v14,0);
     FUN_002f3dde(*(unsigned int *)(temp_v9[0] + 0x14),temp_v2);
     FUN_002e9f64(&temp_v16);
   } while( 1 );

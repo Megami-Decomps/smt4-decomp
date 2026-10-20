@@ -6,7 +6,7 @@ extern "C" {
 
 int sysMemClear(unsigned char *, int);
 int FUN_002e6dd4(unsigned char *, int);
-int FUN_0050d71c(unsigned char *);
+int clearTwoWords(unsigned char *);
 
 typedef struct fn_003ea69c_arg2 fn_003ea69c_arg2;
 struct fn_003ea69c_arg2 {
@@ -33,10 +33,10 @@ struct fn_003ea69c_arg2 {
 
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
-extern unsigned short FUN_003dfe2c(unsigned int);
-extern int FUN_003dfe60(void);
-extern short FUN_003dfea0(unsigned int);
-/* Supplied declaration required: FUN_0050d71c. */
+extern unsigned short playerPackedEntryLow10(unsigned int);
+extern int playerAlignmentClass(void);
+extern short playerPackedEntryHigh(unsigned int);
+/* Supplied declaration required: clearTwoWords. */
 
 
 void FUN_003ea69c(unsigned int param_1,unsigned char *param_2,fn_003ea69c_arg2 *param_3)
@@ -89,22 +89,22 @@ void FUN_003ea69c(unsigned int param_1,unsigned char *param_2,fn_003ea69c_arg2 *
   *(unsigned short *)(param_2 + 0x114) = 0;
   *(unsigned short *)(param_2 + 0x116) = param_3->field_0x62;
   *(unsigned int *)(param_2 + 0x228) = 0;
-  FUN_0050d71c(param_2 + 0x1be);
-  FUN_0050d71c(param_2 + 0x1c6);
-  FUN_0050d71c(param_2 + 0x1ce);
+  clearTwoWords(param_2 + 0x1be);
+  clearTwoWords(param_2 + 0x1c6);
+  clearTwoWords(param_2 + 0x1ce);
   FUN_002e6dd4(param_2 + 0x1d6,0x50);
   temp_v9 = 0;
   do {
-    temp_v3 = FUN_003dfe2c(temp_v9 & 0xff);
+    temp_v3 = playerPackedEntryLow10(temp_v9 & 0xff);
     *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
          (temp_v3 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0xfc00);
-    temp_v4 = FUN_003dfea0(temp_v9 & 0xff);
+    temp_v4 = playerPackedEntryHigh(temp_v9 & 0xff);
     *(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) =
          (temp_v4 << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x128) & 0x3ff);
-    temp_v3 = FUN_003dfe2c(temp_v9 & 0xff);
+    temp_v3 = playerPackedEntryLow10(temp_v9 & 0xff);
     *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
          (temp_v3 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0xfc00);
-    temp_v4 = FUN_003dfea0(temp_v9 & 0xff);
+    temp_v4 = playerPackedEntryHigh(temp_v9 & 0xff);
     *(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) =
          (temp_v4 << 10) | (*(unsigned short *)(param_2 + temp_v9 * 2 + 0x152) & 0x3ff);
     temp_v10 = temp_v9 + 1;
@@ -112,7 +112,7 @@ void FUN_003ea69c(unsigned int param_1,unsigned char *param_2,fn_003ea69c_arg2 *
     temp_v9 = temp_v10;
   } while ((int)temp_v10 < 0x15);
   param_2[0x1bb] = 100;
-  temp_v5 = FUN_003dfe60();
+  temp_v5 = playerAlignmentClass();
   if (temp_v5 == 1) {
     param_2[0x1bc] = 1;
   }

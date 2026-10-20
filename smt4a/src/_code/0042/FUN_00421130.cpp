@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_001aea28(unsigned int, int);
 int FUN_0040619c(int, int);
-int FUN_00406204(unsigned int);
+int objectVectorClear(unsigned int);
 
 typedef int romwright_code(...);
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 
 /* Supplied declaration required: FUN_001aea28. */
 /* Supplied declaration required: FUN_0040619c. */
-/* Supplied declaration required: FUN_00406204. */
+/* Supplied declaration required: objectVectorClear. */
 
 
 void FUN_00421130(int param_1)
@@ -56,7 +56,7 @@ void FUN_00421130(int param_1)
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v2);
   }
-  FUN_00406204(*(unsigned int *)(*(int *)(param_1 + 8) + 8));
+  objectVectorClear(*(unsigned int *)(*(int *)(param_1 + 8) + 8));
   if (*(int **)(param_1 + 8) != (int *)0x0) {
     (**(romwright_code **)(**(int **)(param_1 + 8) + 4))();
     *(unsigned int *)(param_1 + 8) = 0;

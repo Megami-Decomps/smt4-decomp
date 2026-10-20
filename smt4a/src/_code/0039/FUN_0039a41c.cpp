@@ -32,7 +32,7 @@ extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_002e2114. */
 /* Supplied declaration required: FUN_002e2184. */
 /* Supplied declaration required: FUN_003e5c68. */
-extern int FUN_0047fb50(int);
+extern int unitMatchesAlignment(int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -57,7 +57,7 @@ void FUN_0039a41c(int param_1)
   if (DAT_0057f118 != 0) {
     temp_v2 = FUN_001801a4();
     rt_memcpy_w(&temp_v5,temp_v2,100);
-    temp_v3 = FUN_0047fb50(param_1);
+    temp_v3 = unitMatchesAlignment(param_1);
     if (temp_v3 != 0) {
       temp_v3 = param_1;
       FUN_00192608();

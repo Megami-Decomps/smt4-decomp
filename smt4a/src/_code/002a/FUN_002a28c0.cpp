@@ -13,10 +13,10 @@ int FUN_002c0b10(unsigned short [2]);
 int FUN_002c0b5c(void);
 int FUN_002cd8fc(void);
 int FUN_002e6dd0(int, int);
-int FUN_00319e58(void);
+int cecProcessCall2(void);
 int FUN_0032e25c(...);
 int FUN_00333bfc(void);
-int FUN_00343cc8(unsigned int, unsigned int);
+int ownerSetName(unsigned int, unsigned int);
 int FUN_0035a074(unsigned int, int, unsigned int, unsigned int);
 int FUN_00387edc(void);
 int FUN_003f86f8(int);
@@ -67,12 +67,12 @@ extern unsigned char FUN_002a46d8(void);
 /* Supplied declaration required: FUN_002cd8fc. */
 /* Supplied declaration required: FUN_002e6dd0. */
 extern int rt_memcmp(unsigned char *, int, unsigned int);
-/* Supplied declaration required: FUN_00319e58. */
+/* Supplied declaration required: cecProcessCall2. */
 extern unsigned char FUN_0031cee0(void);
 /* Supplied declaration required: FUN_0032e25c. */
-extern unsigned int FUN_00330ab8(void);
+extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00333bfc. */
-/* Supplied declaration required: FUN_00343cc8. */
+/* Supplied declaration required: ownerSetName. */
 extern int FUN_00345388(unsigned int);
 /* Supplied declaration required: FUN_0035a074. */
 /* Supplied declaration required: FUN_00387edc. */
@@ -129,7 +129,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       *(unsigned char *)(temp_v4 + 0x23) = temp_v0;
       temp_v1 = FUN_002840ac();
       temp_v2 = FUN_002bf520();
-      FUN_00343cc8(temp_v2,temp_v1);
+      ownerSetName(temp_v2,temp_v1);
       FUN_002a4664(&temp_v7);
       temp_v1 = FUN_002bf520();
       temp_v6[0] = temp_v8;
@@ -140,7 +140,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       temp_v1 = FUN_002a469c();
       temp_v2 = FUN_002bf520();
       FUN_0032e25c(temp_v2,temp_v1);
-      temp_v1 = FUN_00330ab8();
+      temp_v1 = gameDataBlocksGetWord27E8C();
       temp_v4 = FUN_002bf520();
       *(unsigned int *)(temp_v4 + 0x24) = temp_v1;
       temp_v4 = FUN_002a469c();
@@ -159,14 +159,14 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
           if (temp_v4 != 0) {
             temp_v4 = FUN_002bf520();
             if (*(short *)(temp_v4 + 0x60) != 0) {
-              FUN_00319e58();
+              cecProcessCall2();
               FUN_002bf520();
               FUN_002c0b5c();
             }
             else {
               temp_v1 = FUN_002bf520();
               FUN_0032e25c(temp_v1,0);
-              FUN_00319e58();
+              cecProcessCall2();
               FUN_002bf520();
               FUN_002c0b5c();
               temp_v4 = FUN_002bf520();

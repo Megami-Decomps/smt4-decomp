@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_00409cd8(int, unsigned int);
+int countersRaiseA(int, unsigned int);
 int rt_memcpy_w(...);
 
 /* stack frame of param_1: 17 slot(s), 39 byte(s) */
@@ -32,7 +32,7 @@ typedef struct {
 extern int DAT_0057f69c; /* 0x57f69c */
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00409cd8. */
+/* Supplied declaration required: countersRaiseA. */
 extern unsigned int __aeabi_idivmod(int, int);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -126,7 +126,7 @@ LAB_002a5f00:
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x4ff);
     temp_v0 = __aeabi_idivmod(temp_v4 * 100,temp_v3);
-    FUN_00409cd8(5,temp_v0);
+    countersRaiseA(5,temp_v0);
   }
   return;
 }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00466458(...);
-int FUN_00466810(...);
+int voiceStateSetIdle(...);
 
 typedef struct fn_00461fe0_arg0 fn_00461fe0_arg0;
 typedef struct fn_00461fe0_arg0_p130 fn_00461fe0_arg0_p130;
@@ -37,7 +37,7 @@ struct fn_00461fe0_arg0_p130 {
 };
 
 /* Supplied declaration required: FUN_00466458. */
-/* Supplied declaration required: FUN_00466810. */
+/* Supplied declaration required: voiceStateSetIdle. */
 
 
 void FUN_00461fe0(fn_00461fe0_arg0 *param_1)
@@ -58,7 +58,7 @@ void FUN_00461fe0(fn_00461fe0_arg0 *param_1)
       }
       if (((unaff_r4->field_0x190 == 0) && (unaff_r4->field_0x98 != 4)) &&
          (param_1->field_0x82 == 0)) {
-        FUN_00466810();
+        voiceStateSetIdle();
       }
       if (unaff_r4->field_0x13b == 0) {
         FUN_00466458(unaff_r4,1);

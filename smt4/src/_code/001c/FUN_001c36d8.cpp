@@ -75,7 +75,7 @@ extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029c1c8. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(unsigned int);
 extern int FUN_002c09bc(void);
 /* Supplied declaration required: FUN_002c09d0. */
@@ -393,7 +393,7 @@ void FUN_001c36d8(int param_1)
                     do {
                       temp_v6 = temp_v3 + temp_v0 * 0x604;
                       temp_v8 = temp_v6 + 0x94;
-                      temp_v4 = FUN_0029ebac(temp_v8,2);
+                      temp_v4 = flagWordTestBit(temp_v8,2);
                       if (temp_v4 != 0) {
                         FUN_0029c1c8(0,*(unsigned short *)(temp_v6 + 0xda));
                         temp_v6 = FUN_002a8740(0);

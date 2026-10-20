@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002f3b6e(int *, unsigned int);
+void FUN_002f3b6e(void *object, u32 arg);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002f3b6e. */
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00[8];
+    /* 0x20 */ void (*reset)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
-
-void FUN_002ee50c(int *param_1,unsigned int param_2)
-
+/* Resets the object through its vtable, then runs FUN_002f3b6e(object, arg). */
+void FUN_002ee50c(Object *object, u32 arg)
 {
-/* irregular: 1 native warning(s); review required */
-  (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  FUN_002f3b6e(param_1,param_2);
-  return;
+    object->vtbl->reset(object);
+    FUN_002f3b6e(object, arg);
 }
 
 } /* extern "C" */

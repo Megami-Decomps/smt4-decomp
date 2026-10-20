@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
+extern u32 DAT_00464b7c[];
 
-
-unsigned int FUN_002a4258(int param_1)
-
+u32 FUN_002a4258(int index)
 {
-  return (&DAT_00464b7c)[param_1];
+    return DAT_00464b7c[index];
 }
 
 } /* extern "C" */

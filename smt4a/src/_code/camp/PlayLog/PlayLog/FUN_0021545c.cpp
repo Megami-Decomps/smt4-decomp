@@ -38,7 +38,7 @@ extern int FUN_002a4894(int);
 extern int FUN_002c2c68(int);
 extern int FUN_002e50d4(void);
 /* Supplied declaration required: FUN_003450d4. */
-extern int FUN_0040816c(unsigned int);
+extern int countersGetB(unsigned int);
 
 
 void FUN_0021545c(void)
@@ -91,7 +91,7 @@ void FUN_0021545c(void)
         if (((temp_v8 < temp_v3) && (psVar5 = (short *)(temp_v7 + temp_v8 * 0x40), psVar5 != (short *)0x0)
             ) && (*psVar5 == 0x2e)) {
           temp_v7 = FUN_002e50d4();
-          temp_v4 = FUN_0040816c(0x2e);
+          temp_v4 = countersGetB(0x2e);
           temp_v5 = temp_v0 + temp_v6 * 4;
           *(int *)(temp_v5 + 0x490) = temp_v7 - temp_v4;
           *(int *)(temp_v5 + 0x5c0) = temp_v7;

@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_2_stack;
 
-extern int FUN_00131968(...); /* 0x131968 */
+extern int destroyObj0055c6e4(...); /* 0x131968 */
 extern int FUN_0038a048(...); /* 0x38a048 */
 extern unsigned char LAB_003f6ef4; /* 0x3f6ef4 */
 extern unsigned char LAB_003f6fa4; /* 0x3f6fa4 */
@@ -134,7 +134,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
         return;
       }
       if (*(int *)(param_2 + 0x318) != 0) {
-        FUN_002b4b88(*(int *)(param_2 + 0x318),FUN_00131968);
+        FUN_002b4b88(*(int *)(param_2 + 0x318),destroyObj0055c6e4);
         *(unsigned int *)(param_2 + 0x318) = 0;
       }
       FUN_00387b54(&temp_v8,param_2);
@@ -306,7 +306,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
   *(unsigned int *)(param_2 + 0x314) = 0;
   *(unsigned int *)(param_2 + 0x350) = 0;
   if (*(int *)(param_2 + 0x318) != 0) {
-    FUN_002b4b88(*(int *)(param_2 + 0x318),FUN_00131968);
+    FUN_002b4b88(*(int *)(param_2 + 0x318),destroyObj0055c6e4);
     *(unsigned int *)(param_2 + 0x318) = 0;
   }
   FUN_002b486c(param_2);

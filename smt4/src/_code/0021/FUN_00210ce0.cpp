@@ -1,19 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Obj43da28.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043da28; /* 0x43da28 */
+extern int FUN_00296f4c(u32 a, u32 b);
 
-extern int FUN_00296f4c(unsigned int, unsigned int);
-
-
-unsigned char FUN_00210ce0(unsigned int param_1)
-
+u8 FUN_00210ce0(u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00296f4c(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x560),param_1);
-  return temp_v0 != 0;
+    return FUN_00296f4c(DAT_0043da28.obj->unk560, value) != 0;
 }
 
 } /* extern "C" */

@@ -26,8 +26,8 @@ typedef struct {
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 extern int btlGetMainState(void);
-extern int FUN_0015688c(void);
-extern int FUN_001633a0(unsigned int);
+extern int saveSlotFindSelected(void);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_00187168(void);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002a49e4. */
@@ -75,19 +75,19 @@ void FUN_00412488(void)
     temp_v3 = temp_v3 + 1;
   } while ((int)temp_v3 < 0xc);
   if (temp_v5 == 0) {
-    temp_v0 = FUN_0015688c();
+    temp_v0 = saveSlotFindSelected();
     if (temp_v0 == 0) {
       temp_v4 = 0;
     }
     else {
       temp_v5 = 1;
       temp_v6 = (unsigned int *)romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v6 + 2)),*(unsigned short *)(temp_v0 + 300));
-      temp_v5 = FUN_001633a0((temp_v5 - 1U) & 0xffff);
+      temp_v5 = lcgRandomRange((temp_v5 - 1U) & 0xffff);
       temp_v4 = *(unsigned short *)((int)&temp_v6 + temp_v5 * 2);
     }
   }
   else {
-    temp_v5 = FUN_001633a0((temp_v5 - 1U) & 0xffff);
+    temp_v5 = lcgRandomRange((temp_v5 - 1U) & 0xffff);
     temp_v4 = *(unsigned short *)((int)&temp_v6 + temp_v5 * 2);
   }
   temp_v5 = btlGetMainState();

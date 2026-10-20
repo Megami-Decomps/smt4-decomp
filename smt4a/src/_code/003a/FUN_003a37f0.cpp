@@ -11,7 +11,7 @@ int FUN_003e503c(void);
 int FUN_003fd63c(int, int);
 
 extern int FUN_0014af84(void);
-extern int FUN_00187010(short);
+extern int saveSlotFindById(short);
 extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_003e48dc. */
@@ -49,7 +49,7 @@ unsigned int FUN_003a37f0(void)
   temp_v5 = 0;
   do {
     temp_v0 = *(short *)(temp_v1 + temp_v5 * 2 + 0x29814);
-    if (((temp_v0 != 0) && (temp_v3 = FUN_00187010(temp_v0), temp_v3 != 0)) &&
+    if (((temp_v0 != 0) && (temp_v3 = saveSlotFindById(temp_v0), temp_v3 != 0)) &&
        (temp_v3 = FUN_00187168(), temp_v3 != 0)) {
       FUN_003e48dc(temp_v0);
     }

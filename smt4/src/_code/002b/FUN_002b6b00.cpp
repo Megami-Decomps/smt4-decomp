@@ -1,16 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b6b00` (_code @ 0x2b6b00, 0x4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043e128; /* 0x43e128 */
+/* A debug hook armlink removed (the jump to it became a nop). */
+__declspec(noreturn) __weak void FUN_002b6b00_hook(void);
 
-
-unsigned char FUN_002b6b00(void)
-
+void FUN_002b6b00(void)
 {
-  return *(int *)(DAT_0043e128 + 8) != 0;
+    FUN_002b6b00_hook();
 }
 
 } /* extern "C" */

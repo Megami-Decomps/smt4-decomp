@@ -1,51 +1,69 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e6e26(void);
-int FUN_002e7232(unsigned int);
-int FUN_002f4ab0(int, unsigned int);
-int FUN_002f8e58(unsigned int, unsigned int);
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*destroy)(Object *object);
+    /* 0x08 */ void *unk08;
+    /* 0x0C */ void (*shutdown)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+    /* 0x04 */ u8 unk04[0x18];
+    /* 0x1C */ u8 active;
+};
 
-typedef int romwright_code(...);
-extern unsigned char g_flagBlock; /* 0x594958 */
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x14C];
+    /* 0x14C */ Object *primary;
+    /* 0x150 */ Object *secondary;
+    /* 0x154 */ void *buffer;
+    /* 0x158 */ u8 unk158[0x70];
+    /* 0x1C8 */ u8 closing;
+} Owner;
 
-/* Supplied declaration required: FUN_002e6e26. */
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002f4ab0. */
-/* Supplied declaration required: FUN_002f8e58. */
+typedef struct FlagBlockView {
+    /* 0x00 */ u8 unk00[0x12];
+    /* 0x12 */ s8 secondaryEnabled;
+} FlagBlockView;
+extern FlagBlockView g_flagBlock;
 
+void FUN_002f4ab0(Object *object, u32 mode);
+void FUN_002e7232(void *buffer);
+u32 FUN_002e6e26(void);
+void FUN_002f8e58(u32 pool, void *buffer);
 
-unsigned int FUN_0010e6a4(int param_1)
-
+/* Marks the owner as closing, then releases its primary and secondary objects and its buffer; always returns 1. */
+u32 FUN_0010e6a4(Owner *owner)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  *(unsigned char *)(param_1 + 0x1c8) = 1;
-  temp_v0 = *(int *)(param_1 + 0x14c);
-  if ((temp_v0 != 0) && (*(char *)(temp_v0 + 0x1c) != '\0')) {
-    FUN_002f4ab0(temp_v0,0xffffffff);
-    if (*(int **)(param_1 + 0x14c) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x14c) + 4))(*(int **)(param_1 + 0x14c));
+    Object *primary;
+    u32 pool;
+
+    owner->closing = 1;
+    primary = owner->primary;
+    if (primary != NULL && primary->active != 0) {
+        FUN_002f4ab0(primary, 0xFFFFFFFF);
+        if (owner->primary != NULL) {
+            owner->primary->vtbl->destroy(owner->primary);
+        }
+        owner->primary = NULL;
     }
-    *(unsigned int *)(param_1 + 0x14c) = 0;
-  }
-  if (((*(signed char *)((unsigned char *)&g_flagBlock + 0x12)) != '\0') && (*(int **)(param_1 + 0x150) != (int *)0x0)) {
-    (**(romwright_code **)(**(int **)(param_1 + 0x150) + 0xc))(*(int **)(param_1 + 0x150));
-    if (*(int **)(param_1 + 0x150) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x150) + 4))(*(int **)(param_1 + 0x150));
+    if (g_flagBlock.secondaryEnabled != 0 && owner->secondary != NULL) {
+        owner->secondary->vtbl->shutdown(owner->secondary);
+        if (owner->secondary != NULL) {
+            owner->secondary->vtbl->destroy(owner->secondary);
+        }
+        owner->secondary = NULL;
     }
-    *(unsigned int *)(param_1 + 0x150) = 0;
-  }
-  if ((*(int *)(param_1 + 0x154) != 0) && (temp_v0 = FUN_002e6e26(), temp_v0 != 0)) {
-    temp_v1 = FUN_002e6e26();
-    FUN_002f8e58(temp_v1,*(unsigned int *)(param_1 + 0x154));
-    FUN_002e7232(*(unsigned int *)(param_1 + 0x154));
-    *(unsigned int *)(param_1 + 0x154) = 0;
-  }
-  return 1;
+    if (owner->buffer != NULL && FUN_002e6e26() != 0) {
+        pool = FUN_002e6e26();
+        FUN_002f8e58(pool, owner->buffer);
+        FUN_002e7232(owner->buffer);
+        owner->buffer = NULL;
+    }
+    return 1;
 }
 
 } /* extern "C" */

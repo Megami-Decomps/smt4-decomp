@@ -10,7 +10,7 @@ int sysMemClear(...);
 int FUN_002e6dd4(...);
 int FUN_004bd274(...);
 int FUN_004bd294(...);
-int FUN_0050d71c(...);
+int clearTwoWords(...);
 
 typedef struct fn_003ecfb4_arg2 fn_003ecfb4_arg2;
 struct fn_003ecfb4_arg2 {
@@ -35,14 +35,14 @@ struct fn_003ecfb4_arg2 {
     ushort field_0x64; /* +0x64 */
 };
 
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0017760c. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_004bd274. */
 /* Supplied declaration required: FUN_004bd294. */
-/* Supplied declaration required: FUN_0050d71c. */
+/* Supplied declaration required: clearTwoWords. */
 
 
 void FUN_003ecfb4(unsigned int param_1,unsigned char *param_2,fn_003ecfb4_arg2 *param_3,int param_4)
@@ -70,7 +70,7 @@ void FUN_003ecfb4(unsigned int param_1,unsigned char *param_2,fn_003ecfb4_arg2 *
   param_2[0xd6] = 0;
   param_2[0xd7] = 0;
   if (param_4 != 0) {
-    temp_v3 = FUN_0015688c();
+    temp_v3 = saveSlotFindSelected();
     *(int *)(param_2 + 0xd8) = (int)*(short *)(temp_v3 + 0x2a);
     temp_v4 = FUN_0017760c(temp_v3);
     *(unsigned int *)(param_2 + 0xdc) = temp_v4;
@@ -102,9 +102,9 @@ void FUN_003ecfb4(unsigned int param_1,unsigned char *param_2,fn_003ecfb4_arg2 *
   *(unsigned short *)(param_2 + 0x114) = 0;
   *(unsigned short *)(param_2 + 0x116) = param_3->field_0x64;
   *(unsigned int *)(param_2 + 0x228) = 0;
-  FUN_0050d71c(param_2 + 0x1be);
-  FUN_0050d71c(param_2 + 0x1c6);
-  FUN_0050d71c(param_2 + 0x1ce);
+  clearTwoWords(param_2 + 0x1be);
+  clearTwoWords(param_2 + 0x1c6);
+  clearTwoWords(param_2 + 0x1ce);
   FUN_002e6dd4(param_2 + 0x1d6,0x50);
   temp_v5 = 0;
   do {

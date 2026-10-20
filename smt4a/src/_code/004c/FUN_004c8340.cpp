@@ -8,7 +8,7 @@ int btlGetMainState(void);
 int FUN_0034a290(void);
 int FUN_003e8bb0(unsigned int [9], int, int);
 int FUN_003f0e20(...);
-int FUN_004c39b0(void);
+int source4CCopyHalves(void);
 int FUN_004c3ac0(unsigned int, int [2]);
 
 /* stack frame of param_5: 9 slot(s), 36 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: FUN_004c3ac0. */
 
 
@@ -150,7 +150,7 @@ unsigned int FUN_004c8340(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v10[7] = 0;
     temp_v10[8] = 0;
     temp_v10[9] = 0;
-    FUN_004c39b0();
+    source4CCopyHalves();
     temp_v3 = 0;
     do {
       temp_v5 = (unsigned int)temp_v10[temp_v3];

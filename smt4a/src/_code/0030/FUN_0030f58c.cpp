@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0030c62c(int, unsigned int *, int);
 
 /* Supplied declaration required: FUN_0030c62c. */
-extern int FUN_0030f88a(int, int);
+extern int wordRefsDiffer_0030f88a(int, int);
 
 
 void FUN_0030f58c(int param_1,unsigned int *param_2)
@@ -17,7 +17,7 @@ void FUN_0030f58c(int param_1,unsigned int *param_2)
   int temp_v0;
   unsigned int *puVar2;
   
-  temp_v0 = FUN_0030f88a(param_1 + 4,param_1 + 0xc);
+  temp_v0 = wordRefsDiffer_0030f88a(param_1 + 4,param_1 + 0xc);
   if (temp_v0 != 0) {
     FUN_0030c62c(param_1,param_2,param_1 + 4);
     puVar2 = (unsigned int *)(param_1 + 4);

@@ -13,7 +13,7 @@ int FUN_002df914(void);
 int FUN_0033feb8(int);
 int FUN_00364740(unsigned int, unsigned int);
 int FUN_004839b4(int);
-int FUN_00483abc(int, int, unsigned int);
+int stateSetterSetFromBase(int, int, unsigned int);
 int VectorSignedToFloat(int, int);
 
 extern int g_lmapMainState; /* 0x580238 */
@@ -32,7 +32,7 @@ extern unsigned char DAT_005f185a; /* 0x5f185a */
 /* Supplied declaration required: FUN_0033feb8. */
 /* Supplied declaration required: FUN_00364740. */
 /* Supplied declaration required: FUN_004839b4. */
-/* Supplied declaration required: FUN_00483abc. */
+/* Supplied declaration required: stateSetterSetFromBase. */
 
 
 unsigned int FUN_00386720(void)
@@ -102,7 +102,7 @@ unsigned int FUN_00386720(void)
     FUN_002747dc();
     FUN_00364740(temp_v4,*(unsigned int *)(temp_v1 + 0x48));
     FUN_002ddea0();
-    FUN_00483abc(temp_v0 + 0xf4,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
+    stateSetterSetFromBase(temp_v0 + 0xf4,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
     FUN_004839b4(temp_v0 + 0xf4);
     DAT_005f1614 = 0;
     DAT_005f185a = 1;

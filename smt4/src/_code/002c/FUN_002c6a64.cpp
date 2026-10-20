@@ -29,7 +29,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_002c6a64(int param_1)
@@ -77,7 +77,7 @@ void FUN_002c6a64(int param_1)
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         FUN_002bf538();
         temp_v2 = g_titleScene;
-        temp_v4 = FUN_002c5da8(6,1,0);
+        temp_v4 = packNibblesAndByte(6,1,0);
         piVar7 = (int *)(temp_v2 + 0x12ac);
         temp_v5 = piVar7[*piVar7 + 2];
         piVar7[*piVar7 + 2] = temp_v4;
@@ -87,7 +87,7 @@ void FUN_002c6a64(int param_1)
         }
         FUN_002bf288(2,0x14,0x3e9,temp_v3,0,0x24);
         temp_v2 = g_titleScene;
-        temp_v4 = FUN_002c5da8(6,7,0);
+        temp_v4 = packNibblesAndByte(6,7,0);
         piVar7 = (int *)(temp_v2 + 0x12ac);
         temp_v5 = piVar7[*piVar7 + 2];
         piVar7[*piVar7 + 2] = temp_v4;
@@ -103,7 +103,7 @@ void FUN_002c6a64(int param_1)
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(param_1 + 0x20);
     temp_v2 = g_titleScene;
-    temp_v4 = FUN_002c5da8(6,1,0);
+    temp_v4 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v2 + 0x12ac);
     temp_v5 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v4;
@@ -114,7 +114,7 @@ void FUN_002c6a64(int param_1)
     VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b93c8(param_1 + 0x138);
     temp_v2 = g_titleScene;
-    temp_v4 = FUN_002c5da8(6,7,0);
+    temp_v4 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v2 + 0x12ac);
     temp_v5 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v4;

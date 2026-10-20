@@ -1,20 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*destroy)(Object *object);
+    /* 0x08 */ void (*release)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
-void FUN_0011b880(unsigned int param_1,unsigned int *param_2)
-
+/* Releases the object `*objectRef`, then destroys it if it exists (the first argument is unused). */
+void FUN_0011b880(u32 unused, Object **objectRef)
 {
-  int *piVar1;
-  
-  piVar1 = (int *)*param_2;
-  (**(romwright_code **)(*piVar1 + 8))(piVar1);
-  if (piVar1 != (int *)0x0) {
-    (**(romwright_code **)(*piVar1 + 4))(piVar1);
-  }
-  return;
+    Object *object = *objectRef;
+
+    object->vtbl->release(object);
+    if (object != NULL) {
+        object->vtbl->destroy(object);
+    }
 }
 
 } /* extern "C" */

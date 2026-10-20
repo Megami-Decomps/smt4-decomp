@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned char LAB_001b1aa8; /* 0x1b1aa8 */
 extern unsigned char DAT_0055c2f8; /* 0x55c2f8 */
 
-extern int FUN_001a5c0c(unsigned int, unsigned int *);
+extern int constructObj0055bfc4(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_001a6350. */
 extern unsigned int FUN_001b1f04(void);
 extern unsigned int *FUN_001b95dc(unsigned int, int);
@@ -59,7 +59,7 @@ unsigned int FUN_0019029c(int param_1,int param_2,unsigned int *param_3,int para
             temp_v2 = 0;
           }
           else {
-            temp_v2 = FUN_001a5c0c(temp_v4,(unsigned int *)(param_1 + 0x20));
+            temp_v2 = constructObj0055bfc4(temp_v4,(unsigned int *)(param_1 + 0x20));
           }
           nw_ut_internal_LinkListImpl_insert(param_1 + 0x34,param_1 + 0x38,temp_v2 + 0xf8);
           temp_v5 = temp_v5 + 1;

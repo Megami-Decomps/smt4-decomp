@@ -25,7 +25,7 @@ extern unsigned int *FUN_001b5acc(unsigned char *);
 extern int FUN_001d25ec(int);
 extern int FUN_004288bc(int);
 /* Supplied declaration required: FUN_00473acc. */
-extern int FUN_00473d28(int);
+extern int block88OwnerCheck(int);
 /* Supplied declaration required: FUN_00473da0. */
 /* Supplied declaration required: FUN_0047d904. */
 
@@ -61,7 +61,7 @@ void FUN_00475ea8(unsigned char *param_1,int param_2)
   temp_v1 = *(int *)(param_2 + 4);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {
-      if ((temp_v1 == 2) && (temp_v2 = FUN_00473d28(g_aocMain), temp_v2 != 0)) {
+      if ((temp_v1 == 2) && (temp_v2 = block88OwnerCheck(g_aocMain), temp_v2 != 0)) {
         *(unsigned int *)(param_2 + 4) = 3;
         *(unsigned char *)puVar8 = 0;
         return;

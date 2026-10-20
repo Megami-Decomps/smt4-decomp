@@ -11,7 +11,7 @@ int FUN_002a0428(...);
 int FUN_002a5710(...);
 int FUN_002ad8b4(...);
 int FUN_002be624(...);
-int FUN_0031d534(void);
+int dataTable2cSub1GetCount(void);
 int VectorSignedToFloat(...);
 
 extern unsigned char LAB_002f4340; /* 0x2f4340 */
@@ -28,8 +28,8 @@ extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ad8b4. */
 extern int FUN_002adee0(int);
 /* Supplied declaration required: FUN_002be624. */
-extern char *FUN_002fb468(int);
-/* Supplied declaration required: FUN_0031d534. */
+extern char *dataTable2cSub1GetRecord(int);
+/* Supplied declaration required: dataTable2cSub1GetCount. */
 
 
 unsigned int FUN_002f400c(void)
@@ -190,10 +190,10 @@ unsigned int FUN_002f400c(void)
       if (temp_v1 == 0x1e) {
         temp_v1 = 0;
         DAT_00447e10[1] = 0;
-        FUN_0031d534();
+        dataTable2cSub1GetCount();
         if (0 < (int)piVar3) {
           do {
-            pcVar4 = (char *)FUN_002fb468(temp_v1);
+            pcVar4 = (char *)dataTable2cSub1GetRecord(temp_v1);
             piVar3 = DAT_00447e10;
             if (*pcVar4 == -1) break;
             if (((int)*pcVar4 == (int)(short)DAT_00447e10[3]) &&
@@ -229,7 +229,7 @@ LAB_002f45c4:
               DAT_00447e10[1] = DAT_00447e10[1] + 1;
             }
             temp_v1 = temp_v1 + 1;
-            FUN_0031d534();
+            dataTable2cSub1GetCount();
           } while (temp_v1 < (int)piVar3);
         }
         *DAT_00447e10 = 99;

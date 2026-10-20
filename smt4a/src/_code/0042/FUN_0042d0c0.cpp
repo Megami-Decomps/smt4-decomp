@@ -8,7 +8,7 @@ int FUN_0014a918(void);
 int FUN_002e3140(void);
 int FUN_0042d328(int, unsigned char [32]);
 int FUN_00514428(unsigned char [32], unsigned int);
-int FUN_005144c8(int);
+int words4BClear(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0042d328. */
 /* Supplied declaration required: FUN_00514428. */
 extern int FUN_005144b8(unsigned char *);
-/* Supplied declaration required: FUN_005144c8. */
+/* Supplied declaration required: words4BClear. */
 
 
 int FUN_0042d0c0(int param_1,unsigned int param_2)
@@ -53,7 +53,7 @@ int FUN_0042d0c0(int param_1,unsigned int param_2)
   FUN_00514428(temp_v2,param_2);
   temp_v0 = FUN_005144b8(temp_v2);
   temp_v0 = temp_v0 - 0x18;
-  FUN_005144c8(temp_v0);
+  words4BClear(temp_v0);
   FUN_0042d328(temp_v0,temp_v2);
   return temp_v0;
 }

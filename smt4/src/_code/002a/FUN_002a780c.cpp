@@ -1,27 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(...);
+int asdMemFree(int ptr);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_002a780c(int *param_1)
-
+void FUN_002a780c(int *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != 0) {
-    asdMemFree();
-    *param_1 = 0;
-  }
-  asdMemFree(param_1);
-  return;
+    if (*obj != 0) {
+        asdMemFree(*obj);
+        *obj = 0;
+    }
+    asdMemFree((int)obj);
 }
 
 } /* extern "C" */

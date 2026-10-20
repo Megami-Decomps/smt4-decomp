@@ -16,7 +16,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_00100388. */
 extern int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_001801a4(void);
 extern int FUN_0018719c(unsigned int);
@@ -38,7 +38,7 @@ void FUN_00246344(void)
   unsigned char temp_v5 [72];
   
   FUN_00152f44();
-  if (((*g_popupState == 0) && (temp_v0 = FUN_0015688c(), temp_v0 != 0)) &&
+  if (((*g_popupState == 0) && (temp_v0 = saveSlotFindSelected(), temp_v0 != 0)) &&
      ((temp_v1 = FUN_0018719c(0x1a2), temp_v1 == 0 || (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 >= 0x33)))) {
     temp_v3 = (*(unsigned int *)((unsigned char *)&g_gameState + 0x308));
     temp_v2 = (*(unsigned int *)((unsigned char *)&g_gameState + 0x308));

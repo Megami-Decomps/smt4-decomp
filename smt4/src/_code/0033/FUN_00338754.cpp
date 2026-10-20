@@ -1,25 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00288728(void);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00288728. */
+struct Script;
+typedef struct ScriptVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(struct Script *script);
+} ScriptVtbl;
 
+typedef struct Script {
+    /* 0x0 */ ScriptVtbl *vtbl;
+} Script;
 
-void FUN_00338754(int param_1)
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x4394];
+    /* 0x4394 */ Script *script;
+} Obj;
 
+void FUN_00338754(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x4394) != 0) {
-    FUN_00288728();
-    if (*(int **)(param_1 + 0x4394) != (int *)0x0) {
-      (**(romwright_code **)(**(int **)(param_1 + 0x4394) + 4))(*(int **)(param_1 + 0x4394));
+    if (obj->script != NULL) {
+        FUN_00288728();
+        if (obj->script != NULL) {
+            obj->script->vtbl->destroy(obj->script);
+        }
+        obj->script = NULL;
     }
-    *(unsigned int *)(param_1 + 0x4394) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

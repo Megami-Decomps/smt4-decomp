@@ -1,24 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdListBoxMarkDirty(unsigned int);
+int asdListBoxMarkDirty(u32 listBox);
 
-/* Supplied declaration required: asdListBoxMarkDirty. */
-extern int jobGetWork(unsigned int);
+typedef struct JobWork {
+    /* 0x00 */ u8 unk00[0x3D];
+    /* 0x3D */ u8 unk3D;
+    /* 0x3E */ u8 unk3E[2];
+    /* 0x40 */ u32 unk40;
+} JobWork;
 
+extern JobWork *jobGetWork(u32 listBox);
 
-void FUN_0025c2ec(unsigned int param_1,unsigned char param_2)
-
+void FUN_0025c2ec(u32 listBox, u8 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jobGetWork(param_1);
-  asdListBoxMarkDirty(param_1);
-  *(unsigned char *)(temp_v0 + 0x3d) = param_2;
-  *(unsigned int *)(temp_v0 + 0x40) = 2;
-  return;
+    JobWork *work = jobGetWork(listBox);
+
+    asdListBoxMarkDirty(listBox);
+    work->unk3D = value;
+    work->unk40 = 2;
 }
 
 } /* extern "C" */

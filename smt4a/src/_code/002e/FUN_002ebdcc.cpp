@@ -40,7 +40,7 @@ int FUN_003df168(int *, unsigned int);
 int FUN_003fd63c(...);
 int FUN_00417a60(...);
 int FUN_004185c4(unsigned int, int);
-int FUN_004da2f8(void);
+int optionsClearFlag1(void);
 
 /* stack frame of void: 14 slot(s), 56 byte(s) */
 typedef struct {
@@ -66,7 +66,7 @@ extern int FUN_00162880(void);
 extern int FUN_00162e8c(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
-extern int FUN_0016a0f0(unsigned int);
+extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_001ad9b4. */
@@ -109,7 +109,7 @@ extern int FUN_004186a4(void);
 extern unsigned int FUN_004186e0(void);
 /* Supplied declaration required: FUN_00480fc0. */
 /* Supplied declaration required: FUN_004d0d70. */
-/* Supplied declaration required: FUN_004da2f8. */
+/* Supplied declaration required: optionsClearFlag1. */
 
 
 unsigned int FUN_002ebdcc(void)
@@ -191,7 +191,7 @@ unsigned int FUN_002ebdcc(void)
     scrSetResult(0);
     return 1;
   }
-  temp_v2 = FUN_0016a0f0(0x1e);
+  temp_v2 = dataTableValueOrZero(0x1e);
   temp_v4 = temp_v1;
   FUN_001ad9b4();
   temp_v3 = FUN_00275bb0(0);
@@ -255,7 +255,7 @@ unsigned int FUN_002ebdcc(void)
       }
       temp_v2 = FUN_004186a4();
       if ((temp_v2 != 0) && (temp_v4 = FUN_004186e0(), temp_v4 == temp_v1)) {
-        FUN_004da2f8();
+        optionsClearFlag1();
       }
       FUN_00417a60(temp_v1);
       FUN_003deea4(0);

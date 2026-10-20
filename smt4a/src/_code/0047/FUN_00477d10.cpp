@@ -29,7 +29,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_002bf4f4. */
 /* Supplied declaration required: FUN_003423cc. */
-extern int FUN_00473d40(int, unsigned int);
+extern int countOwnerIsValidIndex(int, unsigned int);
 extern int FUN_0047d7f0(int);
 /* Supplied declaration required: FUN_004cfe4c. */
 
@@ -90,7 +90,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
     FUN_00183f58(2,0xb,0x4b,1);
     FUN_00183f58(3,0,0,1);
     temp_v0 = FUN_004cfe4c(param_1 + 0x90);
-    temp_v1 = FUN_00473d40(temp_v2,temp_v0);
+    temp_v1 = countOwnerIsValidIndex(temp_v2,temp_v0);
     if (temp_v1 != 0) {
       temp_v1 = FUN_004cfe4c(param_1 + 0x90);
       if (*(char *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9b3) != '\0') {

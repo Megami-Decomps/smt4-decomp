@@ -8,8 +8,8 @@ int FUN_0022e774(void);
 int FUN_003344b4(...);
 int FUN_0036cf98(...);
 int FUN_0038b548(...);
-int FUN_003f3fcc(...);
-int FUN_003f525c(...);
+int obj48Arm(...);
+int pair40Set(...);
 
 int sysPlaySe(...);
 int FUN_00215bbc(void);
@@ -112,7 +112,7 @@ extern int FUN_002c90b0(void);
 /* Supplied declaration required: FUN_002f0c18. */
 /* Supplied declaration required: FUN_00319b10. */
 /* Supplied declaration required: FUN_0031f924. */
-extern int FUN_0032e21c(void);
+extern int stateAtF4IsActive(void);
 /* Supplied declaration required: FUN_0032fbd0. */
 extern int FUN_00330b58(void);
 /* Supplied declaration required: FUN_003344b4. */
@@ -133,8 +133,8 @@ extern int FUN_0035a044(void);
 /* Supplied declaration required: FUN_003c3e48. */
 /* Supplied declaration required: FUN_003d386c. */
 extern int FUN_003da8f4(int, unsigned int);
-/* Supplied declaration required: FUN_003f3fcc. */
-/* Supplied declaration required: FUN_003f525c. */
+/* Supplied declaration required: obj48Arm. */
+/* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: FUN_003f86f8. */
 extern unsigned int FUN_003fd63c(unsigned int, unsigned int);
 
@@ -519,7 +519,7 @@ void FUN_002a4cfc(void)
     FUN_0039a638();
     return;
   case 0x3a:
-    temp_v2 = FUN_0032e21c();
+    temp_v2 = stateAtF4IsActive();
     if (temp_v2 != 0) {
       *(unsigned int *)(temp_v3 + 0x1c) = 0x3e;
       FUN_0038800c(1);
@@ -527,7 +527,7 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x3b:
-    temp_v2 = FUN_0032e21c();
+    temp_v2 = stateAtF4IsActive();
     if (temp_v2 != 0) {
       *(unsigned int *)(temp_v3 + 0x1c) = 0x3f;
       FUN_0038800c(2);
@@ -535,7 +535,7 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x3c:
-    temp_v2 = FUN_0032e21c();
+    temp_v2 = stateAtF4IsActive();
     if (temp_v2 != 0) {
       *(unsigned int *)(temp_v3 + 0x1c) = 0x40;
       FUN_0038800c(3);
@@ -546,7 +546,7 @@ void FUN_002a4cfc(void)
     *(unsigned int *)(temp_v3 + 0x24) = 0x41;
     return;
   case 0x3e:
-    temp_v2 = FUN_0032e21c();
+    temp_v2 = stateAtF4IsActive();
     if (temp_v2 != 0) {
       *(unsigned int *)(temp_v3 + 0x1c) = 0x42;
       FUN_0038800c(5);
@@ -554,7 +554,7 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x3f:
-    temp_v2 = FUN_0032e21c();
+    temp_v2 = stateAtF4IsActive();
     if (temp_v2 != 0) {
       *(unsigned int *)(temp_v3 + 0x1c) = 0x43;
       FUN_0038800c(6);
@@ -562,7 +562,7 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x40:
-    temp_v2 = FUN_0032e21c();
+    temp_v2 = stateAtF4IsActive();
     if (temp_v2 != 0) {
       *(unsigned int *)(temp_v3 + 0x1c) = 0x44;
       FUN_0038800c(7);
@@ -630,7 +630,7 @@ void FUN_002a4cfc(void)
         temp_v2 = 0;
         do {
           temp_v6 = temp_v3 + temp_v2 * 4;
-          FUN_003f525c(*(unsigned int *)(temp_v6 + 0xa10),0);
+          pair40Set(*(unsigned int *)(temp_v6 + 0xa10),0);
           *(unsigned char *)(*(int *)(temp_v6 + 0xa10) + 0x25) = 0;
           *(unsigned char *)(*(int *)(temp_v6 + 0xa10) + 0x27) = 0;
           temp_v2 = temp_v2 + 1;
@@ -638,26 +638,26 @@ void FUN_002a4cfc(void)
         temp_v2 = 0;
         do {
           temp_v6 = temp_v3 + temp_v2 * 4;
-          FUN_003f525c(*(unsigned int *)(temp_v6 + 0xa20),0);
+          pair40Set(*(unsigned int *)(temp_v6 + 0xa20),0);
           *(unsigned char *)(*(int *)(temp_v6 + 0xa20) + 0x25) = 0;
           *(unsigned char *)(*(int *)(temp_v6 + 0xa20) + 0x27) = 0;
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < 0x18);
         FUN_003344b4(0);
         if (*(char *)(temp_v3 + 0x9c0) != '\0') {
-          FUN_003f3fcc(*(unsigned int *)(temp_v3 + 0xa10),0xff);
+          obj48Arm(*(unsigned int *)(temp_v3 + 0xa10),0xff);
         }
         temp_v2 = 0;
         do {
           if (*(char *)(temp_v3 + temp_v2 + 0x9c1) != '\0') {
-            FUN_003f3fcc(*(unsigned int *)(temp_v3 + temp_v2 * 4 + 0xa14),0xff);
+            obj48Arm(*(unsigned int *)(temp_v3 + temp_v2 * 4 + 0xa14),0xff);
           }
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < 3);
         temp_v2 = 0;
         do {
           if (*(short *)(temp_v3 + temp_v2 * 8 + 0xa84) != 0) {
-            FUN_003f3fcc(*(unsigned int *)(temp_v3 + temp_v2 * 4 + 0xa20),0xff);
+            obj48Arm(*(unsigned int *)(temp_v3 + temp_v2 * 4 + 0xa20),0xff);
           }
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < 0x18);

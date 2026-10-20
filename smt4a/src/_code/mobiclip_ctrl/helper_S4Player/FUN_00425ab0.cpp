@@ -12,7 +12,7 @@ int FUN_001a089c(...);
 int FUN_001a08d8(...);
 int FUN_002e3140(...);
 int FUN_002fb0d4(...);
-int FUN_0042326c(...);
+int counterPairReset(...);
 
 /* stack frame of param_6: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -40,7 +40,7 @@ extern unsigned int *DAT_00588104; /* 0x588104 */
 /* Supplied declaration required: FUN_001a08d8. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002fb0d4. */
-/* Supplied declaration required: FUN_0042326c. */
+/* Supplied declaration required: counterPairReset. */
 
 
 unsigned int
@@ -87,7 +87,7 @@ FUN_00425ab0(int param_1,int param_2,int param_3,int param_4,int param_5,unsigne
     *(unsigned int *)(param_1 + 0x144) = 0;
     *(unsigned int *)(param_1 + 0x148) = 0;
     *(unsigned int *)(param_1 + 0x14c) = 0;
-    FUN_0042326c(param_1 + 0x158);
+    counterPairReset(param_1 + 0x158);
     FUN_001a089c(param_1 + 0x20,1);
     FUN_00188b60(param_1);
     FUN_001a08d8(param_1 + 0x20);

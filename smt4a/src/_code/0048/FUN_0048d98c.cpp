@@ -15,7 +15,7 @@ int FUN_001835b4(...);
 int FUN_00184e64(...);
 int FUN_00185dd4(...);
 int FUN_0037b138(...);
-int FUN_0049359c(int, float *);
+int words2Copy(int, float *);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -48,9 +48,9 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: FUN_00184e64. */
 /* Supplied declaration required: FUN_00185dd4. */
 extern int FUN_0018719c(unsigned int);
-extern int FUN_00377084(unsigned int);
+extern int gameOwnedBitTest(unsigned int);
 /* Supplied declaration required: FUN_0037b138. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 
 
 void FUN_0048d98c(int param_1)
@@ -80,7 +80,7 @@ void FUN_0048d98c(int param_1)
   unsigned int temp_v15 [30];
   int temp_v16;
   
-  FUN_0049359c(param_1 + 0x4d0,&temp_v13);
+  words2Copy(param_1 + 0x4d0,&temp_v13);
   piVar10 = (int *)(param_1 + 0x84f4);
   temp_v7 = 0;
   temp_v4 = *piVar10;
@@ -373,7 +373,7 @@ LAB_0048dfc4:
           }
         }
         if (*(unsigned char *)(temp_v4 + 0x1791) == 0xff) {
-          temp_v7 = FUN_00377084(*(unsigned int *)(temp_v4 + 0x17e8));
+          temp_v7 = gameOwnedBitTest(*(unsigned int *)(temp_v4 + 0x17e8));
           if (temp_v7 == 0) {
             *(unsigned int *)(temp_v4 + 0x17d4) = 0xffffff88;
             temp_v12 = 0x88;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_003e4d68(unsigned int);
 extern int FUN_003e4d98(void);
 
@@ -30,7 +30,7 @@ unsigned int FUN_0047f5b8(void)
     temp_v2 = temp_v2 + 1;
   } while ((int)temp_v2 < 0xc);
   if (temp_v3 != 0) {
-    temp_v3 = FUN_001633a0((temp_v3 - 1U) & 0xffff);
+    temp_v3 = lcgRandomRange((temp_v3 - 1U) & 0xffff);
     temp_v0 = 0;
     do {
       if (*(unsigned int *)(temp_v0 * 8 + 0x57a46c) == temp_v4[temp_v3]) {

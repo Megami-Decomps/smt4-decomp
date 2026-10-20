@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdTMSprDecompress(int, unsigned int, int);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 int asdTextureCreate(void);
 int FUN_002bf694(unsigned char [64], int);
 int asdMemFree(int);
@@ -20,7 +20,7 @@ extern unsigned char LAB_002b93a0; /* 0x2b93a0 */
 extern unsigned char LAB_002b93a8; /* 0x2b93a8 */
 
 /* Supplied declaration required: asdTMSprDecompress. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_002bf694. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
@@ -45,16 +45,16 @@ unsigned int FUN_002b9178(int *param_1)
   FUN_002bf694(temp_v4,*param_1 + 0xc);
   pcVar2 = *(char **)(temp_v2 + 8);
   if (*pcVar2 != '-') {
-    FUN_002b64a0(temp_v4);
+    libc_strcat(temp_v4);
   }
   else {
-    FUN_002b64a0(temp_v4,*(unsigned int *)(param_1[pcVar2[1] * -8 + 0x181] + 8));
+    libc_strcat(temp_v4,*(unsigned int *)(param_1[pcVar2[1] * -8 + 0x181] + 8));
   }
   if (*(char *)(param_1[1] + 0xd) != '\0') {
-    FUN_002b64a0(temp_v4,&LAB_002b9398);
+    libc_strcat(temp_v4,&LAB_002b9398);
   }
   else {
-    FUN_002b64a0(temp_v4,&LAB_002b93a0);
+    libc_strcat(temp_v4,&LAB_002b93a0);
   }
   temp_v2 = FUN_002c30c4(*(unsigned int *)(temp_v2 + 8));
   if (temp_v2 == 0) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002117a8(void);
+int dataTable15Sub0GetCount(void);
 int FUN_0029e8b8(int, int);
 int FUN_0029f848(int, int, int, int, int, int);
 int FUN_002c09d0(void);
@@ -18,13 +18,13 @@ typedef struct {
 
 extern int DAT_0043da90; /* 0x43da90 */
 
-/* Supplied declaration required: FUN_002117a8. */
+/* Supplied declaration required: dataTable15Sub0GetCount. */
 extern int FUN_00292844(unsigned int);
 extern int padIsButtonDown(void);
 /* Supplied declaration required: FUN_0029e8b8. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002c09d0. */
-extern int FUN_003106c0(unsigned int);
+extern int dataTable15Sub0GetEntries(unsigned int);
 
 
 void FUN_00298ad8(void)
@@ -58,11 +58,11 @@ void FUN_00298ad8(void)
   } while ((int)temp_v7 < 0x35);
   temp_v0 = 0;
   temp_v3 = 0;
-  FUN_002117a8();
+  dataTable15Sub0GetCount();
   temp_v7 = 0;
   if (temp_v7 < temp_v4) {
     do {
-      temp_v5 = FUN_003106c0(temp_v7);
+      temp_v5 = dataTable15Sub0GetEntries(temp_v7);
       if ((((temp_v5 != 0) && ((unsigned int)*(unsigned char *)(temp_v5 + 1) == (int)*(char *)(temp_v2 + 0x98))) &&
           ((*(short *)(temp_v5 + 0x56) == 0 || (temp_v6 = FUN_002c09d0(), temp_v6 != 0)))) &&
          (((((*(short *)(temp_v5 + 0x58) == 0 || (temp_v6 = padIsButtonDown(), temp_v6 != 0)) &&

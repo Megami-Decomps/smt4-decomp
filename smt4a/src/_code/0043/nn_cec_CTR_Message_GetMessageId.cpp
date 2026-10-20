@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001a9110(...);
-int FUN_0050d71c(void);
+int clearTwoWords(void);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,8 +13,8 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_001a9110. */
-extern unsigned int FUN_00430ec8(unsigned char *, int);
-/* Supplied declaration required: FUN_0050d71c. */
+extern unsigned int releaseOrCopyHandle(unsigned char *, int);
+/* Supplied declaration required: clearTwoWords. */
 
 
 unsigned int nn_cec_CTR_Message_GetMessageId(unsigned int param_1,int param_2,int param_3)
@@ -25,14 +25,14 @@ unsigned int nn_cec_CTR_Message_GetMessageId(unsigned int param_1,int param_2,in
   unsigned char temp_v1 [8];
   
   if (param_3 != 0) {
-    temp_v0 = FUN_00430ec8(temp_v1,param_2 + 0x20);
+    temp_v0 = releaseOrCopyHandle(temp_v1,param_2 + 0x20);
     FUN_001a9110(param_3,temp_v0);
   }
   if (param_2 != -0x20) {
     FUN_001a9110();
   }
   else {
-    FUN_0050d71c();
+    clearTwoWords();
   }
   return param_1;
 }

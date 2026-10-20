@@ -46,7 +46,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00162330. */
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: FUN_001aff14. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -194,7 +194,7 @@ void FUN_004f112c(int param_1,char *param_2,unsigned int *param_3,unsigned int *
       *(float *)(param_2 + 0x60) = temp_v7;
       *(float *)(param_2 + 100) = -(temp_v8 * temp_v12 + temp_v9 * temp_v3 + temp_v10 * temp_v7);
     }
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c2c), temp_v1 != 0)) {
+    if (((DAT_005c4c2c & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v1 != 0)) {
       DAT_0064c054 = temp_v16;
       DAT_0064c058 = temp_v15;
       DAT_0064c05c = temp_v15;
@@ -237,7 +237,7 @@ void FUN_004f112c(int param_1,char *param_2,unsigned int *param_3,unsigned int *
     if (*param_2 == '\0') {
       return;
     }
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c2c), temp_v1 != 0)) {
+    if (((DAT_005c4c2c & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v1 != 0)) {
       DAT_0064c054 = temp_v16;
       DAT_0064c058 = temp_v15;
       DAT_0064c05c = temp_v15;

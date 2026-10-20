@@ -8,7 +8,7 @@ int efctSetSpeed(void);
 int FUN_00185dd4(...);
 int FUN_002e1208(int, unsigned int, unsigned int [3], int *);
 int FUN_00492c34(int);
-int FUN_0049359c(int, float *);
+int words2Copy(int, float *);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 
@@ -41,9 +41,9 @@ extern int FUN_00162e8c(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_002e1208. */
-extern unsigned long long *FUN_00492b84(void);
+extern unsigned long long *sub68OwnerGetBlock60(void);
 /* Supplied declaration required: FUN_00492c34. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 extern int NaviMain_GetCurrentMap(int);
 
 
@@ -91,7 +91,7 @@ void FUN_004884d8(int param_1)
   temp_v2 = FUN_00162e8c();
   temp_v25 = 0xb;
   temp_v29 = param_1 + 0x4cc;
-  puVar4 = (unsigned long long *)FUN_00492b84();
+  puVar4 = (unsigned long long *)sub68OwnerGetBlock60();
   temp_v30 = temp_v2 + 0xd00;
   temp_v16 = *puVar4;
   if (*(char *)(temp_v2 + 0xd8e) == '\f') {
@@ -105,7 +105,7 @@ void FUN_004884d8(int param_1)
   FUN_002e1208(0xb,temp_v3,temp_v24,&temp_v26);
   temp_v4 = *(unsigned int *)(param_1 + 0x10);
   FUN_00492c34(temp_v29);
-  FUN_0049359c(param_1 + 0x4d0,&temp_v27);
+  words2Copy(param_1 + 0x4d0,&temp_v27);
   temp_v7 = 0;
   temp_v21 = 160.0f;
   temp_v22 = 120.0f;

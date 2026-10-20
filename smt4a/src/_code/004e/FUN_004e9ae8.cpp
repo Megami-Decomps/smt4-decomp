@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004c5f90(void);
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_004c5f90. */
 
 
@@ -26,7 +26,7 @@ void FUN_004e9ae8(int *param_1,int param_2,int param_3,int param_4)
       temp_v1 = (int)*(short *)(*(int *)(*param_1 + 0x1ffc) + *(int *)(param_2 + temp_v3 * 4) * 0x408 +
                              8);
       FUN_004c5f90();
-      if ((temp_v1 != 0) && ((param_4 != 0 || (temp_v2 = FUN_001633a0(99), temp_v2 <= temp_v1)))) {
+      if ((temp_v1 != 0) && ((param_4 != 0 || (temp_v2 = lcgRandomRange(99), temp_v2 <= temp_v1)))) {
         temp_v0 = 1;
         *(unsigned int *)(param_2 + temp_v3 * 4) = 0xffffffff;
       }

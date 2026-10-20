@@ -1,29 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard003C.h"
 
 extern "C" {
 
-int FUN_003c8738(void);
-
-extern int DAT_0057f118; /* 0x57f118 */
-
-/* Supplied declaration required: FUN_003c8738. */
-
+#include "shard/Shard0032.h"
+extern StateAtF4 *DAT_0057f118;
+extern void FUN_003c8738(void);
 
 void FUN_003c8790(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (DAT_0057f118 != 0) {
-    temp_v0 = *(int *)(DAT_0057f118 + 0xc);
-  }
-  if (DAT_0057f118 == 0 || temp_v0 == 0) {
-    return;
-  }
-  FUN_003c8738();
-  return;
+    if (DAT_0057f118 == NULL || DAT_0057f118->unk0C == NULL) {
+        return;
+    }
+    FUN_003c8738();
 }
 
 } /* extern "C" */

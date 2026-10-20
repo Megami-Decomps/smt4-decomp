@@ -1,30 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bc9cc(...);
+int FUN_002bc9cc(s32 resource);
 
-/* Supplied declaration required: FUN_002bc9cc. */
+typedef struct ResourceTable {
+    /* 0x00 */ s32 slots[0x20];
+    /* 0x80 */ u32 unk80;
+    /* 0x84 */ u32 unk84;
+} ResourceTable;
 
+typedef struct ResourceOwner {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ ResourceTable *table;
+} ResourceOwner;
 
-unsigned int FUN_0010e530(int param_1)
-
+/* Releases every nonzero slot of the owner's table, then its two trailing entries. */
+s32 FUN_0010e530(ResourceOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  temp_v1 = *(int *)(param_1 + 4);
-  do {
-    if (*(int *)(temp_v1 + temp_v0 * 4) != 0) {
-      FUN_002bc9cc();
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x20);
-  FUN_002bc9cc(*(unsigned int *)(temp_v1 + 0x80));
-  FUN_002bc9cc(*(unsigned int *)(temp_v1 + 0x84));
-  return 0;
+    s32 i = 0;
+    ResourceTable *table = owner->table;
+
+    do {
+        if (table->slots[i] != 0) {
+            FUN_002bc9cc(table->slots[i]);
+        }
+        i++;
+    } while (i < 0x20);
+    FUN_002bc9cc(table->unk80);
+    FUN_002bc9cc(table->unk84);
+    return 0;
 }
 
 } /* extern "C" */

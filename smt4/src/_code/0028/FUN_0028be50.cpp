@@ -1,23 +1,16 @@
-#include "romwright_types.h"
+#include "shard/PlayScene.h"
 
 extern "C" {
 
-int timerStart(int, int);
+int timerStart(void *timer, int a);
 
-/* Supplied declaration required: timerStart. */
-
-
-void FUN_0028be50(int param_1)
-
+void FUN_0028be50(PlayScene *scene)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x2180) == 0) {
-    *(unsigned int *)(param_1 + 0x217c) = 0;
-    *(unsigned int *)(param_1 + 0x2180) = 5;
-    timerStart(param_1 + 0x20f0,0);
-    return;
-  }
-  return;
+    if (scene->unk2180 == 0) {
+        scene->unk217C = 0;
+        scene->unk2180 = 5;
+        timerStart(scene->timerFade, 0);
+    }
 }
 
 } /* extern "C" */

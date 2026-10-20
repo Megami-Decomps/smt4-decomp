@@ -10,7 +10,7 @@ int FUN_002ea41e(unsigned char [4], int);
 int FUN_00301a60(...);
 int FUN_00301bd4(...);
 int FUN_00301be2(int *, int, int *, int [6]);
-int FUN_00301c5c(...);
+int arrayElementAddress_00301c5c(...);
 int FUN_00301c66(...);
 int FUN_00301c76(...);
 int FUN_00301c88(...);
@@ -49,7 +49,7 @@ extern int FUN_002f4e86(unsigned int);
 extern int vectorSize12A(void);
 /* Supplied declaration required: FUN_00301bd4. */
 /* Supplied declaration required: FUN_00301be2. */
-/* Supplied declaration required: FUN_00301c5c. */
+/* Supplied declaration required: arrayElementAddress_00301c5c. */
 /* Supplied declaration required: FUN_00301c66. */
 /* Supplied declaration required: FUN_00301c76. */
 /* Supplied declaration required: FUN_00301c88. */
@@ -121,8 +121,8 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
       temp_v10[2] = *(int *)(temp_v10[0] + 8);
       param_3 = temp_v10 + 2;
       FUN_00301be2(temp_v10 + 3,*(int *)(temp_v14 + 0xc),param_3,temp_v10);
-      piVar4 = (int *)FUN_00301c5c(temp_v8,0);
-      for (temp_v0 = *piVar4; temp_v1 = FUN_00301c5c(temp_v8,0), *(int *)(temp_v1 + 4) != temp_v0;
+      piVar4 = (int *)arrayElementAddress_00301c5c(temp_v8,0);
+      for (temp_v0 = *piVar4; temp_v1 = arrayElementAddress_00301c5c(temp_v8,0), *(int *)(temp_v1 + 4) != temp_v0;
           temp_v0 = temp_v0 + 0x28) {
         temp_v2 = *(unsigned int *)(temp_v14 + 0xc);
         FUN_00301c66(temp_v16,temp_v0 + 5,temp_v0 + 8);
@@ -168,8 +168,8 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
         *(unsigned int *)(temp_v10[4] + 4) = 0;
         *(int *)(temp_v10[4] + 8) = temp_v10[4];
         *(int *)(temp_v10[4] + 0xc) = temp_v10[4];
-        piVar4 = (int *)FUN_00301c5c(temp_v8,temp_v6);
-        for (temp_v0 = *piVar4; temp_v1 = FUN_00301c5c(temp_v8,temp_v6), *(int *)(temp_v1 + 4) != temp_v0;
+        piVar4 = (int *)arrayElementAddress_00301c5c(temp_v8,temp_v6);
+        for (temp_v0 = *piVar4; temp_v1 = arrayElementAddress_00301c5c(temp_v8,temp_v6), *(int *)(temp_v1 + 4) != temp_v0;
             temp_v0 = temp_v0 + 0x28) {
           temp_v13 = temp_v10;
           FUN_00301c66(temp_v16,temp_v0 + 5,temp_v0 + 8);

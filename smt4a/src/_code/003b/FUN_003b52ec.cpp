@@ -25,7 +25,7 @@ extern int FUN_00162e8c(void);
 extern int dataTableGetEntries(void);
 extern int FUN_0032526c(void);
 extern unsigned int FUN_00376f94(void);
-extern int FUN_004185ec(short);
+extern int partyEntryFlagsBit1(short);
 
 
 unsigned char * FUN_003b52ec(void)
@@ -75,7 +75,7 @@ unsigned char * FUN_003b52ec(void)
               if (temp_v3 != 0) {
                 if (*(short *)(pbVar8 + 6) != 0) goto LAB_003b53e8;
                 if (((*(short *)(pbVar8 + 8) == 0) ||
-                    (temp_v3 = FUN_004185ec(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
+                    (temp_v3 = partyEntryFlagsBit1(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
                    (*(short *)(pbVar8 + 10) != 1 || temp_v1 != 0)) {
                   if (*(unsigned int *)(temp_v0 + 0xe88) == temp_v6) {
                     return (unsigned char *)0x0;
@@ -90,7 +90,7 @@ LAB_003b53e8:
               temp_v3 = FUN_0018719c((int)*(short *)(pbVar8 + 6));
               if (temp_v3 == 0) {
                 if (((*(short *)(pbVar8 + 8) == 0) ||
-                    (temp_v3 = FUN_004185ec(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
+                    (temp_v3 = partyEntryFlagsBit1(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
                    (*(short *)(pbVar8 + 10) != 1 || temp_v1 != 0)) {
                   if (*(unsigned int *)(temp_v0 + 0xe88) == temp_v6) {
                     return (unsigned char *)0x0;
@@ -134,7 +134,7 @@ LAB_003b53e8:
               if (*(short *)(pbVar8 + 6) != 0) goto LAB_003b5564;
 LAB_003b558c:
               if (((*(short *)(pbVar8 + 8) == 0) ||
-                  (temp_v3 = FUN_004185ec(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
+                  (temp_v3 = partyEntryFlagsBit1(*(short *)(pbVar8 + 8)), temp_v3 != 0)) &&
                  (*(short *)(pbVar8 + 10) != 1 || temp_v1 != 0)) {
                 if (*(unsigned int *)(temp_v0 + 0xe88) == temp_v6) {
                   return (unsigned char *)0x0;

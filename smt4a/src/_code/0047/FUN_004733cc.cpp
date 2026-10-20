@@ -10,7 +10,7 @@ int FUN_002e3494(int);
 int asdOperatorNewE(void);
 int FUN_0042979c(int *, int, int);
 int FUN_004ffee0(int *, unsigned char [4], unsigned char [8], unsigned short [12]);
-int FUN_005001f8(unsigned char [4], unsigned int, unsigned int);
+int table30GetEntryB(unsigned char [4], unsigned int, unsigned int);
 int FUN_005003b4(int *, int, int, int);
 
 /* stack frame of param_1: 5 slot(s), 18 byte(s) */
@@ -32,7 +32,7 @@ extern int FUN_001a7470(unsigned short *);
 /* Supplied declaration required: FUN_0042979c. */
 extern unsigned int FUN_004ffd4c(unsigned char *);
 /* Supplied declaration required: FUN_004ffee0. */
-/* Supplied declaration required: FUN_005001f8. */
+/* Supplied declaration required: table30GetEntryB. */
 /* Supplied declaration required: FUN_005003b4. */
 
 
@@ -64,7 +64,7 @@ unsigned char * FUN_004733cc(int param_1)
   if ((unsigned char *)-(temp_v0 >> 0x1f) != (unsigned char *)0x0) {
     return (unsigned char *)-(temp_v0 >> 0x1f);
   }
-  FUN_005001f8(temp_v9,*(unsigned int *)(temp_v3 + 0x5a8),*(unsigned int *)(param_1 + 0x14));
+  table30GetEntryB(temp_v9,*(unsigned int *)(temp_v3 + 0x5a8),*(unsigned int *)(param_1 + 0x14));
   temp_v1 = FUN_004ffd4c(temp_v9);
   temp_v0 = temp_v1 << 1;
   asdOperatorNewE();

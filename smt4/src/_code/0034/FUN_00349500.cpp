@@ -1,19 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_snd_SoundHandle_DetachSound(int);
+int nw_snd_SoundHandle_DetachSound(void *handle);
 
-/* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
+typedef struct HandlePair {
+    /* 0x0 */ u8 first[4];
+    /* 0x4 */ u8 second[4];
+} HandlePair;
 
-
-int FUN_00349500(int param_1)
-
+HandlePair *FUN_00349500(HandlePair *pair)
 {
-/* irregular: 1 native warning(s); review required */
-  nw_snd_SoundHandle_DetachSound(param_1 + 4);
-  nw_snd_SoundHandle_DetachSound(param_1);
-  return param_1;
+    nw_snd_SoundHandle_DetachSound(pair->second);
+    nw_snd_SoundHandle_DetachSound(pair->first);
+    return pair;
 }
 
 } /* extern "C" */

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_004938b8(void);
+int dataTable2BType1Count(void);
 
-extern int FUN_00493834(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_004938b8. */
+extern int dataTable2BType1GetEntry(unsigned int *, unsigned int);
+/* Supplied declaration required: dataTable2BType1Count. */
 
 
 int FUN_0048b140(unsigned int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -23,8 +23,8 @@ int FUN_0048b140(unsigned int param_1,int param_2,unsigned int param_3,unsigned 
   
   puVar1 = (unsigned int *)&uStack_18;
   uStack_18 = param_4;
-  FUN_004938b8();
-  temp_v0 = FUN_00493834((unsigned int *)&uStack_18,0);
+  dataTable2BType1Count();
+  temp_v0 = dataTable2BType1GetEntry((unsigned int *)&uStack_18,0);
   temp_v1 = 0;
   if (temp_v1 < (int)puVar1) {
     do {

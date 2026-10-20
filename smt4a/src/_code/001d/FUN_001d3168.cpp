@@ -1,18 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_dspsndState; /* 0x6433d0 */
+void nn_snd_CTR_Dspsnd_SetChannelPlayStart(u8 *state, u8 channel);
+extern u8 g_dspsndState[];
 
-extern unsigned char nn_snd_CTR_Dspsnd_SetChannelPlayStart(unsigned int, unsigned char);
+typedef struct Channel {
+    /* 0x00 */ u32 index;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u8 playing;
+} Channel;
 
-
-void FUN_001d3168(unsigned int *param_1)
-
+/* Starts the channel on the DSP and marks it playing. */
+void FUN_001d3168(Channel *channel)
 {
-  nn_snd_CTR_Dspsnd_SetChannelPlayStart((unsigned int)&g_dspsndState,(unsigned char)*param_1);
-  *(unsigned char *)(param_1 + 3) = 1;
-  return;
+    nn_snd_CTR_Dspsnd_SetChannelPlayStart(g_dspsndState, (u8)channel->index);
+    channel->playing = 1;
 }
 
 } /* extern "C" */

@@ -41,7 +41,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00184e64. */
 extern unsigned int FUN_0019e130(int);
 extern unsigned int FUN_002b4dcc(int);
-extern int FUN_00319d2c(int, unsigned int);
+extern int valueAtMostFifthOfTotal(int, unsigned int);
 /* Supplied declaration required: FUN_004bda84. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -84,7 +84,7 @@ void FUN_004bde34(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v5 = FUN_001834a4(0x11,0xaa);
   temp_v2 = *(short *)(temp_v5 + 8);
   temp_v5 = *(short *)(temp_v5 + 10) + param_5;
-  temp_v6 = FUN_00319d2c(temp_v8,temp_v4);
+  temp_v6 = valueAtMostFifthOfTotal(temp_v8,temp_v4);
   if (temp_v6 != 0) {
     FUN_00184e64(0xdc0f14ff);
   }

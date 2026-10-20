@@ -9,7 +9,7 @@ int FUN_00406768(...);
 
 int asdSequenceRequest(...);
 int FUN_001695a0(void);
-int FUN_001836b0(void);
+int resourceListDestroy(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_0019e2dc(void);
@@ -31,7 +31,7 @@ int FUN_003d2150(...);
 int FUN_003d2158(...);
 int FUN_003d2d6c(...);
 int FUN_003e5858(void);
-int FUN_003e5b9c(...);
+int linkHolderClearFlag(...);
 int FUN_003e5c00(void);
 int VectorFloatToUnsigned(double, int);
 
@@ -56,10 +56,10 @@ int FUN_003d2d34(...);
 int FUN_003d54f8(...);
 int FUN_003e542c(...);
 int FUN_003e5478(...);
-int FUN_003e549c(...);
+int linkHolderApplyFirst(...);
 int FUN_003e54b8(...);
 int FUN_003e5728(...);
-int FUN_003e5b1c(...);
+int linkHolderSetFlag(...);
 
 int FUN_0013c174(...);
 int FUN_0013c884(...);
@@ -137,7 +137,7 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_001836b0. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019c0e0. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -179,17 +179,17 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_003d2d6c. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003e4740. */
-extern int FUN_003e5414(unsigned int);
+extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e542c. */
 /* Supplied declaration required: FUN_003e5478. */
-/* Supplied declaration required: FUN_003e549c. */
+/* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: FUN_003e54b8. */
-extern int FUN_003e56f0(unsigned int);
+extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_003e5728. */
 /* Supplied declaration required: FUN_003e5858. */
-extern int FUN_003e5ae8(unsigned int);
-/* Supplied declaration required: FUN_003e5b1c. */
-/* Supplied declaration required: FUN_003e5b9c. */
+extern int fourPtrsAllNull(unsigned int);
+/* Supplied declaration required: linkHolderSetFlag. */
+/* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003e5c00. */
 extern unsigned int *FUN_003e5d10(void);
 /* Supplied declaration required: FUN_003f9c0c. */
@@ -425,7 +425,7 @@ unsigned int FUN_00328838(void)
     *(unsigned char *)(temp_v0 + 0x559) = 0;
     break;
   case 2:
-    temp_v4 = FUN_003e5ae8(*(unsigned int *)(temp_v0 + 0x28));
+    temp_v4 = fourPtrsAllNull(*(unsigned int *)(temp_v0 + 0x28));
     if (temp_v4 == 0) break;
     FUN_003e5478(*(unsigned int *)(temp_v0 + 0x28),0);
     FUN_003e5728(*(unsigned int *)(temp_v0 + 0x28));
@@ -482,16 +482,16 @@ unsigned int FUN_00328838(void)
       *(unsigned int *)(temp_v0 + 8) = 0xe;
       *(unsigned int *)(temp_v0 + 0xc) = 0;
     }
-    temp_v4 = FUN_003e5414(*(unsigned int *)(temp_v0 + 0x28));
+    temp_v4 = linkHolderCallFirst(*(unsigned int *)(temp_v0 + 0x28));
     if ((temp_v4 != 0x13) || (FUN_003e542c(*(unsigned int *)(temp_v0 + 0x28)), in_s0 < 0x41a00000)) break;
     FUN_003e54b8(*(unsigned int *)(temp_v0 + 0x28));
     temp_v3 = *(unsigned int *)(temp_v0 + 0x28);
     FUN_003e5728(temp_v3);
     break;
   case 5:
-    temp_v4 = FUN_003e56f0(*(unsigned int *)(temp_v0 + 0x28));
+    temp_v4 = linkHolderCheckFirst(*(unsigned int *)(temp_v0 + 0x28));
     if (temp_v4 != 0) {
-      FUN_003e549c(*(unsigned int *)(temp_v0 + 0x28),0);
+      linkHolderApplyFirst(*(unsigned int *)(temp_v0 + 0x28),0);
     }
     temp_v4 = 6;
     FUN_001517b4(6,2);
@@ -519,7 +519,7 @@ unsigned int FUN_00328838(void)
             if (temp_v4 != 0xb4) {
               if (temp_v4 != 0x13f) {
                 if (temp_v4 == 0x144) {
-                  FUN_003e5b1c(*(unsigned int *)(temp_v0 + 0x28));
+                  linkHolderSetFlag(*(unsigned int *)(temp_v0 + 0x28));
                   break;
                 }
                 if (temp_v4 != 0x17f) break;
@@ -566,7 +566,7 @@ unsigned int FUN_00328838(void)
   case 7:
     temp_v4 = FUN_002802c8();
     if (temp_v4 != 0) break;
-    FUN_003e5b1c(*(unsigned int *)(temp_v0 + 0x28));
+    linkHolderSetFlag(*(unsigned int *)(temp_v0 + 0x28));
     *(unsigned char *)(temp_v0 + 0x56c) = 0;
     *(unsigned char *)(temp_v0 + 0x578) = 0;
     *(unsigned int *)(temp_v0 + 8) = 9;
@@ -647,8 +647,8 @@ unsigned int FUN_00328838(void)
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     FUN_00214da4();
     if (*(char *)(temp_v0 + 0x550) != '\0') {
-      FUN_003e5b9c(*(unsigned int *)(temp_v0 + 0x28));
-      FUN_003e549c(*(unsigned int *)(temp_v0 + 0x28),0x13);
+      linkHolderClearFlag(*(unsigned int *)(temp_v0 + 0x28));
+      linkHolderApplyFirst(*(unsigned int *)(temp_v0 + 0x28),0x13);
       *(unsigned char *)(temp_v0 + 0x550) = 0;
     }
     FUN_0022677c(0,0xff);
@@ -715,7 +715,7 @@ unsigned int FUN_00328838(void)
       do {
         temp_v2 = temp_v4 + temp_v6 * 0xc;
         if (*(int *)(temp_v2 + 0x568) != 0) {
-          FUN_001836b0();
+          resourceListDestroy();
           *(unsigned int *)(temp_v2 + 0x568) = 0;
         }
         if (*(int *)(temp_v2 + 0x564) != 0) {
@@ -775,13 +775,13 @@ unsigned int FUN_00328838(void)
       FUN_0019c8c0(*(unsigned int *)(temp_v0 + 0x58c));
     }
     if (*(int *)(temp_v0 + 0x554) == 0x55) {
-      FUN_003e5b9c(*(unsigned int *)(temp_v0 + 0x28));
+      linkHolderClearFlag(*(unsigned int *)(temp_v0 + 0x28));
       FUN_003e5478(*(unsigned int *)(temp_v0 + 0x28),0x1a);
       FUN_003e5728(*(unsigned int *)(temp_v0 + 0x28));
     }
     if ((*(int *)(temp_v0 + 0x554) >= 0x88) &&
-       (temp_v4 = FUN_003e56f0(*(unsigned int *)(temp_v0 + 0x28)), temp_v4 != 0)) {
-      FUN_003e549c(*(unsigned int *)(temp_v0 + 0x28),0);
+       (temp_v4 = linkHolderCheckFirst(*(unsigned int *)(temp_v0 + 0x28)), temp_v4 != 0)) {
+      linkHolderApplyFirst(*(unsigned int *)(temp_v0 + 0x28),0);
       FUN_003e4740(temp_v0,2);
       *(unsigned char *)(temp_v0 + 0x550) = 0;
     }

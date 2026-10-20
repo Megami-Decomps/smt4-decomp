@@ -1,34 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_snd_SoundActor_Initialize(void *, unsigned int);
+int nw_snd_SoundActor_Initialize(void *actor, u32 player);
 
-typedef struct fn_00120eb4_arg0 fn_00120eb4_arg0;
-struct fn_00120eb4_arg0 {
-    unsigned char pad_0x0[0x5c];
-    undefined4 field_0x5c; /* +0x5c */
-    undefined4 field_0x60; /* +0x60 */
-    unsigned char pad_0x64[0x1d];
-    byte field_0x81; /* +0x81 */
-    undefined1 field_0x82; /* +0x82 */
-};
+typedef struct Sound3DActor {
+    /* 0x00 */ u8 unk00[0x5C];
+    /* 0x5C */ u32 unk5C;
+    /* 0x60 */ u32 player;
+    /* 0x64 */ u8 unk64[0x1D];
+    /* 0x81 */ u8 initialized;
+    /* 0x82 */ u8 unk82;
+} Sound3DActor;
 
-/* Supplied declaration required: nw_snd_SoundActor_Initialize. */
-
-
-void nw_snd_Sound3DActor_Initialize(fn_00120eb4_arg0 *param_1,unsigned int param_2,unsigned int param_3)
-
+void nw_snd_Sound3DActor_Initialize(Sound3DActor *actor, u32 player, u32 param)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1->field_0x81 == 0) {
-    nw_snd_SoundActor_Initialize(param_1, param_2);
-    param_1->field_0x81 = 1;
-    param_1->field_0x5c = param_3;
-    param_1->field_0x82 = 0;
-    param_1->field_0x60 = param_2;
-  }
-  return;
+    if (actor->initialized == 0) {
+        nw_snd_SoundActor_Initialize(actor, player);
+        actor->initialized = 1;
+        actor->unk5C = param;
+        actor->unk82 = 0;
+        actor->player = player;
+    }
 }
 
 } /* extern "C" */

@@ -7,13 +7,13 @@ extern "C" {
 int FUN_001641c4(void);
 int FUN_001834a4(int, int);
 int FUN_00284168(int, int, int, int);
-int FUN_0050d794(int, unsigned int);
+int fillTwoWordsWithByte(int, unsigned int);
 
 /* Supplied declaration required: FUN_001641c4. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00284168. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_0050d794. */
+/* Supplied declaration required: fillTwoWordsWithByte. */
 
 
 void FUN_0024b0ec(int *param_1)
@@ -33,7 +33,7 @@ void FUN_0024b0ec(int *param_1)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(short *)(temp_v3 + 0x24));
   }
-  FUN_0050d794(temp_v3 + 0x1c,0xffffffff);
+  fillTwoWordsWithByte(temp_v3 + 0x1c,0xffffffff);
   *(unsigned short *)(temp_v3 + 0x24) = 0;
   temp_v2 = FUN_002a4894(temp_v3 + 0xf0);
   temp_v2 = FUN_001834a4(0x24,temp_v2 + 0x1f);

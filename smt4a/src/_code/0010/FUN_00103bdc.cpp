@@ -8,7 +8,7 @@ int FUN_002e95c4(...);
 int FUN_002e9768(...);
 int FUN_002e97b4(...);
 int FUN_002e9802(...);
-int FUN_002e9832(...);
+int wordRefsDiffer_002e9832(...);
 int FUN_002e98a4(...);
 
 typedef struct fn_00103bdc_arg0 fn_00103bdc_arg0;
@@ -52,11 +52,11 @@ extern int FUN_002e783c(unsigned char *);
 /* Supplied declaration required: FUN_002e95c4. */
 /* Supplied declaration required: FUN_002e9768. */
 /* Supplied declaration required: FUN_002e97b4. */
-extern int FUN_002e97e2(int *, void **);
-extern int FUN_002e97f2(int *, void **);
+extern int wordRefsEqual_002e97e2(int *, void **);
+extern int wordRefsEqual_002e97f2(int *, void **);
 /* Supplied declaration required: FUN_002e9802. */
-/* Supplied declaration required: FUN_002e9832. */
-extern int FUN_002e9842(int *, void **);
+/* Supplied declaration required: wordRefsDiffer_002e9832. */
+extern int wordRefsDiffer_002e9842(int *, void **);
 extern int FUN_002e9854(int, int);
 /* Supplied declaration required: FUN_002e98a4. */
 
@@ -145,10 +145,10 @@ void FUN_00103bdc(fn_00103bdc_arg0 *param_1)
   temp_v12 = *(int *)((int)param_1->field_0x1c + 8);
   do {
     temp_v13 = param_1->field_0x38;
-    temp_v8 = FUN_002e9832(&temp_v11,&temp_v13);
+    temp_v8 = wordRefsDiffer_002e9832(&temp_v11,&temp_v13);
     if (temp_v8 == 0) {
       temp_v16 = param_1->field_0x1c;
-      temp_v8 = FUN_002e9842(&temp_v12,&temp_v16);
+      temp_v8 = wordRefsDiffer_002e9842(&temp_v12,&temp_v16);
       if (temp_v8 == 0) {
         if (param_1->field_0x58 != 0) {
           puVar9 = temp_v17 + (int)puVar14 * 2;
@@ -158,7 +158,7 @@ void FUN_00103bdc(fn_00103bdc_arg0 *param_1)
           temp_v14 = *(void **)((int)param_1->field_0x54 + 8);
           while( 1 ) {
             temp_v15 = param_1->field_0x54;
-            temp_v8 = FUN_002e9832(&temp_v14,&temp_v15);
+            temp_v8 = wordRefsDiffer_002e9832(&temp_v14,&temp_v15);
             if (temp_v8 == 0) break;
             if (temp_v3) {
               puVar14 = temp_v17 + (int)puVar9 * 2;
@@ -187,10 +187,10 @@ void FUN_00103bdc(fn_00103bdc_arg0 *param_1)
     }
     temp_v14 = param_1->field_0x38;
     pvVar15 = (void *)0x0;
-    temp_v8 = FUN_002e97e2(&temp_v11,&temp_v14);
+    temp_v8 = wordRefsEqual_002e97e2(&temp_v11,&temp_v14);
     if (temp_v8 == 0) {
       temp_v10 = param_1->field_0x1c;
-      temp_v8 = FUN_002e97f2(&temp_v12,&temp_v10);
+      temp_v8 = wordRefsEqual_002e97f2(&temp_v12,&temp_v10);
       if ((temp_v8 != 0) || (temp_v8 = FUN_002e9854(temp_v11 + 0x10,temp_v12 + 0x10), temp_v8 != 0))
       {
         temp_v9 = *(unsigned int *)(temp_v11 + 0x14);

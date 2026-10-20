@@ -14,7 +14,7 @@ int FUN_00163aa4(unsigned int *);
 int FUN_0019de98(...);
 int FUN_00224880(...);
 int FUN_0031d62c(...);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_00388758(...);
 int FUN_004935b0(unsigned int *, unsigned int, unsigned int);
 int FUN_004964e0(...);
@@ -22,7 +22,7 @@ int FUN_00496a0c(...);
 int FUN_00497690(...);
 int FUN_004989f0(...);
 int FUN_00499d14(...);
-int FUN_0049cfcc(unsigned char [16], unsigned int);
+int dataTable17Type0GetEntry(unsigned char [16], unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -46,8 +46,8 @@ extern unsigned int FUN_001654e4(unsigned int *);
 extern int FUN_002a4b60(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_0031d62c. */
-extern int FUN_00331194(void);
-/* Supplied declaration required: FUN_003491e8. */
+extern int panelIsMissingOrFlagClear(void);
+/* Supplied declaration required: obj04Finish. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00388758. */
 extern int FUN_0040a4cc(unsigned int);
@@ -58,7 +58,7 @@ extern int FUN_0040a4cc(unsigned int);
 /* Supplied declaration required: FUN_00497690. */
 /* Supplied declaration required: FUN_004989f0. */
 /* Supplied declaration required: FUN_00499d14. */
-/* Supplied declaration required: FUN_0049cfcc. */
+/* Supplied declaration required: dataTable17Type0GetEntry. */
 
 
 void FUN_004995b0(unsigned int *param_1)
@@ -87,12 +87,12 @@ void FUN_004995b0(unsigned int *param_1)
         temp_v3 = FUN_0031d62c((int)*(char *)((int)param_1 + 0x502));
         if (temp_v3 != 0) {
           temp_v3 = FUN_002a4b60();
-          temp_v3 = FUN_0049cfcc(temp_v5,param_1[temp_v3 + 0x5803] + 4);
+          temp_v3 = dataTable17Type0GetEntry(temp_v5,param_1[temp_v3 + 0x5803] + 4);
           FUN_0019de98(temp_v3 + 0x40,0xf4f4f4ff);
         }
-        temp_v3 = FUN_00331194();
+        temp_v3 = panelIsMissingOrFlagClear();
         if (temp_v3 != 0) {
-          FUN_003491e8();
+          obj04Finish();
           FUN_0019de98(0,0xf4f4f4ff);
           temp_v3 = FUN_002a4b74();
           if (temp_v3 != -1) {
@@ -101,7 +101,7 @@ void FUN_004995b0(unsigned int *param_1)
             param_1[4] = param_1[1];
             param_1[1] = 6;
             param_1[2] = 0;
-            FUN_003491e8();
+            obj04Finish();
             FUN_00499d14(param_1);
             return;
           }
@@ -130,12 +130,12 @@ void FUN_004995b0(unsigned int *param_1)
         temp_v3 = FUN_0031d62c();
         if (temp_v3 != 0) {
           temp_v3 = FUN_002a4b60();
-          temp_v3 = FUN_0049cfcc(temp_v5,param_1[temp_v3 + 0x5803]);
+          temp_v3 = dataTable17Type0GetEntry(temp_v5,param_1[temp_v3 + 0x5803]);
           FUN_0019de98(temp_v3 + 0x40,0xf4f4f4ff);
         }
-        temp_v3 = FUN_00331194();
+        temp_v3 = panelIsMissingOrFlagClear();
         if (temp_v3 != 0) {
-          FUN_003491e8();
+          obj04Finish();
           FUN_0019de98(0,0xf4f4f4ff);
           temp_v3 = FUN_002a4b74();
           if (temp_v3 == -1) {
@@ -154,7 +154,7 @@ void FUN_004995b0(unsigned int *param_1)
                 param_1[4] = param_1[1];
                 param_1[1] = 6;
                 param_1[2] = 0;
-                FUN_003491e8();
+                obj04Finish();
                 return;
               }
               if (temp_v0 != 3) {
@@ -165,7 +165,7 @@ void FUN_004995b0(unsigned int *param_1)
               param_1[4] = param_1[1];
               param_1[1] = 6;
               param_1[2] = 0;
-              FUN_003491e8();
+              obj04Finish();
               return;
             }
             FUN_00497690(param_1,2);
@@ -192,7 +192,7 @@ void FUN_004995b0(unsigned int *param_1)
           param_1[4] = param_1[1];
           param_1[1] = 6;
           param_1[2] = 0;
-          FUN_003491e8();
+          obj04Finish();
           FUN_00499d14(param_1);
           return;
         }

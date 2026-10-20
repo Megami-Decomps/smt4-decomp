@@ -1,22 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Shard0039.h"
 
 extern "C" {
 
-int scrSetResult(int);
+extern s32 FUN_001b4aa0(void);
+extern void scrSetResult(s32 value);
 
-extern int FUN_001b4aa0(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0039dc50(void)
-
+/* Script command: result is whether FUN_001b4aa0 returns 4. */
+u32 FUN_0039dc50(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_001b4aa0();
-  scrSetResult(temp_v0 == 4);
-  return 1;
+    scrSetResult(FUN_001b4aa0() == 4);
+    return 1;
 }
 
 } /* extern "C" */

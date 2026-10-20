@@ -1,14 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Node {
+    /* 0x00 */ struct Node *next;
+} Node;
 
-void FUN_001b9f8c(unsigned int *param_1,unsigned int *param_2)
+typedef struct List {
+    /* 0x00 */ Node *head;
+} List;
 
+/* Pushes `node` onto the front of the list. */
+void FUN_001b9f8c(List *list, Node *node)
 {
-  *param_2 = *param_1;
-  *param_1 = (unsigned int)param_2;
-  return;
+    node->next = list->head;
+    list->head = node;
 }
 
 } /* extern "C" */

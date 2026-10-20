@@ -1,29 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a1bac` (_code @ 0x2a1bac, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Matches with --cpu=5TE -Ospace (requested): the memory module was built for the older core, for size. */
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 
-extern unsigned char g_asdMemory; /* 0x5b406c */
+extern AsdMemoryApoc g_asdMemory;
 
-extern unsigned int FUN_00431f04(int);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
+extern u32 FUN_00431f04(void *heap);
+extern void nn_os_CriticalSection_Enter(void *lock);
+extern void nn_os_CriticalSection_Leave(void *lock);
 
-
-unsigned int FUN_002a1bac(void)
-
+/* Queries the main heap (its free size or similar) under the heap's lock. */
+u32 FUN_002a1bac(void)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = (*(int *)((unsigned char *)&g_asdMemory + 0x4)) + 0x1c;
-  temp_v1 = (*(int *)((unsigned char *)&g_asdMemory + 0x4)) + 0x74;
-  nn_os_CriticalSection_Enter(temp_v1);
-  temp_v0 = FUN_00431f04(temp_v2);
-  nn_os_CriticalSection_Leave(temp_v1);
-  return temp_v0;
+    void *heap = g_asdMemory.system->mainHeap;
+    void *lock = g_asdMemory.system->mainLock;
+    u32 result;
+
+    nn_os_CriticalSection_Enter(lock);
+    result = FUN_00431f04(heap);
+    nn_os_CriticalSection_Leave(lock);
+    return result;
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003eaf20(void);
 int FUN_004abba8(unsigned int, unsigned int);
-int FUN_004ec93c(unsigned int);
+int hasFlag80Or1000(unsigned int);
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int g_btlMain; /* 0x573920 */
@@ -19,7 +19,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_004abba8. */
-/* Supplied declaration required: FUN_004ec93c. */
+/* Supplied declaration required: hasFlag80Or1000. */
 extern int btlUnitGet(unsigned int);
 
 
@@ -52,13 +52,13 @@ unsigned int FUN_003ed878(int param_1)
     *(unsigned int *)(param_1 + 0x4d68) = *(unsigned int *)(temp_v0 + 0x400);
     temp_v0 = btlUnitGet(g_btlScriptUnit);
     temp_v2 = 0;
-    if ((temp_v0 != 0) && (temp_v0 = FUN_004ec93c(g_btlScriptUnit), temp_v0 != 0)) {
+    if ((temp_v0 != 0) && (temp_v0 = hasFlag80Or1000(g_btlScriptUnit), temp_v0 != 0)) {
       temp_v2 = 1;
     }
     FUN_004abba8(DAT_0057a9c8,temp_v2 ^ 1);
     temp_v0 = btlUnitGet(g_btlScriptUnit);
     if (temp_v0 != 0) {
-      FUN_004ec93c(g_btlScriptUnit);
+      hasFlag80Or1000(g_btlScriptUnit);
     }
     temp_v2 = *(unsigned int *)(param_1 + 0x45a4) | DAT_00573a2c;
     *puVar3 = *puVar3 | DAT_00573a28;

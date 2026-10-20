@@ -1,37 +1,27 @@
-#include "romwright_types.h"
+#include "shard/Scene43dcf0.h"
 
 extern "C" {
 
-int FUN_0029378c(unsigned int, unsigned int);
-int timerStart(int, int, int);
-
-extern int DAT_0043dcf0; /* 0x43dcf0 */
-
-/* Supplied declaration required: FUN_0029378c. */
-/* Supplied declaration required: timerStart. */
-
+int FUN_0029378c(u32 a, u32 b);
+int timerStart(void *timer, int a, int b);
 
 void FUN_00293268(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0043dcf0;
-  *(unsigned int *)(DAT_0043dcf0 + 0x2c) = *(unsigned int *)(DAT_0043dcf0 + 0x2c) ^ 1;
-  timerStart(temp_v0 + 0x180,4,0);
-  temp_v1 = 0;
-  do {
-    FUN_0029378c(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0x6c8),*(unsigned int *)(temp_v0 + 0x2c));
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  temp_v1 = 0;
-  do {
-    FUN_0029378c(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0x6d8),*(unsigned int *)(temp_v0 + 0x2c));
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  return;
+    Scene43dcf0 *scene = DAT_0043dcf0;
+    int i;
+
+    DAT_0043dcf0->unk2C = DAT_0043dcf0->unk2C ^ 1;
+    timerStart(scene->timerC, 4, 0);
+    i = 0;
+    do {
+        FUN_0029378c(scene->unk6C8[i], scene->unk2C);
+        i++;
+    } while (i < 4);
+    i = 0;
+    do {
+        FUN_0029378c(scene->unk6D8[i], scene->unk2C);
+        i++;
+    } while (i < 0x18);
 }
 
 } /* extern "C" */

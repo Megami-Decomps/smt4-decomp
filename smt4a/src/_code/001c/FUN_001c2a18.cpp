@@ -1,22 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Slot {
+    /* 0x00 */ f32 a;
+    /* 0x04 */ f32 b;
+    /* 0x08 */ f32 c;
+    /* 0x0C */ u8 unk0C[0x18];
+} Slot;                        /* 0x24 */
 
-void FUN_001c2a18(int param_1,unsigned int param_2,float in_s0)
+typedef struct Mixer {
+    /* 0x0000 */ u8 unk0000[0x224];
+    /* 0x0224 */ u32 slotCount;
+    /* 0x0228 */ u8 unk0228[0x1E58];
+    /* 0x2080 */ Slot slots[1];
+} Mixer;
 
+/* Sets field `b` of every slot whose bit is set in `mask` (bit 0 is slot 0), up to the slot count. */
+void FUN_001c2a18(Mixer *mixer, u32 mask, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  for (; (temp_v0 < *(unsigned int *)(param_1 + 0x224) && (param_2 != 0)); param_2 = param_2 >> 1) {
-    if ((param_2 & 1) != 0) {
-      *(float *)(param_1 + temp_v0 * 0x24 + 0x2084) = in_s0;
+    u32 i;
+
+    i = 0;
+    for (; (i < mixer->slotCount && (mask != 0)); mask = mask >> 1) {
+        if ((mask & 1) != 0) {
+            mixer->slots[i].b = value;
+        }
+        i = i + 1;
     }
-    temp_v0 = temp_v0 + 1;
-  }
-  return;
 }
 
 } /* extern "C" */

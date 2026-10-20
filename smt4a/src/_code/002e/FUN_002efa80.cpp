@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Mask {
+    /* 0x00 */ u32 *flags;
+    /* 0x04 */ u32 bits;
+} Mask;
 
-unsigned char FUN_002efa80(unsigned int *param_1)
-
+/* Returns whether any of the mask's bits is set in the word `*flags` refers to. */
+u8 FUN_002efa80(Mask *mask)
 {
-  return (*(unsigned int *)*param_1 & param_1[1]) != 0;
+    return (*mask->flags & mask->bits) != 0;
 }
 
 } /* extern "C" */

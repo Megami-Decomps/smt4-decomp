@@ -11,7 +11,7 @@ extern int DAT_0063e948; /* 0x63e948 */
 
 /* Supplied declaration required: FUN_0015e76c. */
 extern int FUN_00160050(void);
-extern int FUN_00160064(void);
+extern int modeIsOneOrTwo(void);
 
 
 unsigned int FUN_001414d4(int param_1,int param_2,unsigned int param_3)
@@ -30,7 +30,7 @@ unsigned int FUN_001414d4(int param_1,int param_2,unsigned int param_3)
         if (param_2 != 0) {
           if ((param_2 == 1) && ((*(unsigned char *)(piVar3 + 3) & 0x20) == 0)) {
             if (*piVar3 == 0) goto LAB_001415e4;
-            temp_v1 = FUN_00160064();
+            temp_v1 = modeIsOneOrTwo();
             if (temp_v1 != 0) {
               if (*piVar3 != 0) {
                 FUN_0015e76c(*piVar3,0,param_3);
@@ -41,7 +41,7 @@ unsigned int FUN_001414d4(int param_1,int param_2,unsigned int param_3)
           }
         }
         else if (((*(unsigned char *)(piVar3 + 3) & 0x10) == 0) &&
-                ((*piVar3 == 0 || (temp_v1 = FUN_00160064(), temp_v1 == 0)))) {
+                ((*piVar3 == 0 || (temp_v1 = modeIsOneOrTwo(), temp_v1 == 0)))) {
           if (*piVar3 != 0) {
             FUN_0015e76c(*piVar3,1,param_3);
           }

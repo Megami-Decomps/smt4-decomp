@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct MaxTracker {
+    /* 0x000 */ u8 unk000[0x2E4];
+    /* 0x2E4 */ u32 max;
+} MaxTracker;
 
-void FUN_0010e9e0(int param_1,unsigned int param_2)
-
+/* Raises the tracked maximum to `value` if it is larger. */
+void FUN_0010e9e0(MaxTracker *tracker, u32 value)
 {
-  if (*(unsigned int *)(param_1 + 0x2e4) < param_2) {
-    *(unsigned int *)(param_1 + 0x2e4) = param_2;
-  }
-  return;
+    if (tracker->max < value) {
+        tracker->max = value;
+        return;
+    }
 }
 
 } /* extern "C" */

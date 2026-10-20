@@ -1,25 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002684ac` (_code @ 0x2684ac, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Adds `mask` to the game data block's flags (+0x18), clears its byte +1 and continues with FUN_00140e00(0) (a tail call). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00140e00(int);
+struct Blocks002684ac {
+    /* 0x00 */ u8 unk00[1];
+    /* 0x01 */ u8 dirty;
+    /* 0x02 */ u8 unk02[0x16];
+    /* 0x18 */ u32 flags;
+};
 
-extern unsigned char DAT_0057f699; /* 0x57f699 */
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+extern Blocks002684ac g_gameDataBlocks;
 
-/* Supplied declaration required: FUN_00140e00. */
+void FUN_00140e00(u32 arg);
 
-
-void FUN_002684ac(unsigned int param_1)
-
+void FUN_002684ac(u32 mask)
 {
-/* irregular: 1 native warning(s); review required */
-  DAT_0057f699 = 0;
-  (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18)) = param_1 | (*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0x18));
-  FUN_00140e00(0);
-  return;
+    g_gameDataBlocks.dirty = 0;
+    g_gameDataBlocks.flags |= mask;
+    FUN_00140e00(0);
 }
 
-} /* extern "C" */
+}

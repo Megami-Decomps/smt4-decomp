@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e6e14(void);
 int FUN_00307770(...);
-int FUN_003077a4(int *);
+int vectorCount8_003077a4(int *);
 int FUN_0030d010(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -17,8 +17,8 @@ typedef struct {
 extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307770. */
-extern int FUN_00307792(unsigned int, int *);
-/* Supplied declaration required: FUN_003077a4. */
+extern int vectorGrowCapacity_00307792(unsigned int, int *);
+/* Supplied declaration required: vectorCount8_003077a4. */
 /* Supplied declaration required: FUN_0030d010. */
 
 
@@ -40,7 +40,7 @@ void FUN_00134dfe(int *param_1,unsigned int *param_2,unsigned int *param_3)
   temp_v4 = *param_1;
   piVar9 = param_1;
   puVar7 = param_2;
-  temp_v1 = FUN_003077a4(param_1);
+  temp_v1 = vectorCount8_003077a4(param_1);
   if (temp_v1 < (unsigned int)((temp_v0 - temp_v4) >> 3)) {
     puVar7 = (unsigned int *)param_1[1];
     param_1[1] = (int)(puVar7 + 2);
@@ -58,13 +58,13 @@ void FUN_00134dfe(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[1] = temp_v5;
     return;
   }
-  temp_v5 = FUN_003077a4(param_1);
-  temp_v0 = FUN_00307792(temp_v5,param_1);
+  temp_v5 = vectorCount8_003077a4(param_1);
+  temp_v0 = vectorGrowCapacity_00307792(temp_v5,param_1);
   temp_v4 = rt_malloc();
   FUN_00307770(*param_1,param_2,temp_v4,param_1,piVar9,puVar7);
   FUN_0030d010(param_1,(((int)param_2 - *param_1) & 0xfffffff8U) + temp_v4,param_3);
   FUN_00307770(param_2,param_1[1],(((int)param_2 - *param_1) & 0xfffffff8U) + temp_v4 + 8,param_1);
-  temp_v2 = FUN_003077a4(param_1);
+  temp_v2 = vectorCount8_003077a4(param_1);
   for (temp_v3 = *param_1; temp_v3 != param_1[1]; temp_v3 = temp_v3 + 8) {
   }
   FUN_002e6e14();

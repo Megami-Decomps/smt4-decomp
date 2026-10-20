@@ -9,7 +9,7 @@ int FUN_00342134(int, unsigned int, int);
 
 /* Supplied declaration required: FUN_00256810. */
 extern int FUN_002ae3c4(void);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_00342134. */
 
 
@@ -51,7 +51,7 @@ unsigned int FUN_003a61b4(unsigned int param_1,int param_2,unsigned int param_3)
     if (temp_v1 == 0) {
       return 0;
     }
-    temp_v0 = FUN_002c09f4((temp_v1 - 1) & 0xffff);
+    temp_v0 = randNextInRange((temp_v1 - 1) & 0xffff);
     temp_v2 = 0;
     temp_v4 = 0;
     do {

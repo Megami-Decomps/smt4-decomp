@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001029f4(unsigned int, int, int);
 
 /* Supplied declaration required: FUN_001029f4. */
-extern unsigned int *FUN_002e3cf8(void);
+extern unsigned int *__aeabi_errno_addr(void);
 
 
 void FUN_001029da(unsigned int param_1)
@@ -17,7 +17,7 @@ void FUN_001029da(unsigned int param_1)
   unsigned int *puVar1;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_002e3cf8();
+  puVar1 = (unsigned int *)__aeabi_errno_addr();
   temp_v0 = *puVar1;
   FUN_001029f4(param_1,0,10);
   *puVar1 = temp_v0;

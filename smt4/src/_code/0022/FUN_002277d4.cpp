@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00228220. */
 /* Supplied declaration required: FUN_0022899c. */
 extern int FUN_0029e9cc(unsigned short);
-extern unsigned short FUN_003be64c(unsigned char);
+extern unsigned short categoryMaskFromId(unsigned char);
 
 
 unsigned int
@@ -88,7 +88,7 @@ LAB_00227840:
               FUN_0022899c(temp_v4,0,0,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x62),
                            (int)*(short *)(*(int *)(param_4 + temp_v5 * 4) + 8),unaff_r11);
               if ((((param_6 == 0) || (temp_v4 == 2)) &&
-                  (temp_v2 = FUN_003be64c(*(unsigned char *)(param_3 + 0x2f)),
+                  (temp_v2 = categoryMaskFromId(*(unsigned char *)(param_3 + 0x2f)),
                   (temp_v2 & *(unsigned short *)(*(int *)(param_4 + temp_v5 * 4) + 0x1c6)) == 0)) &&
                  (temp_v1 = 1, !temp_v6)) {
                 *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x14c) = 2;

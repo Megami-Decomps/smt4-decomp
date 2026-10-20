@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004617d0(int *);
+int words2Clear2(int *);
 int FUN_004639e4(int);
 int FUN_00463c28(int, int *);
 int FUN_00508490(void);
@@ -40,7 +40,7 @@ extern unsigned char DAT_00647d80; /* 0x647d80 */
 
 extern unsigned char FUN_001d07e0(unsigned char);
 extern int FUN_00461508(int, int *, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_004617d0. */
+/* Supplied declaration required: words2Clear2. */
 /* Supplied declaration required: FUN_004639e4. */
 /* Supplied declaration required: FUN_00463c28. */
 /* Supplied declaration required: FUN_00508490. */
@@ -90,7 +90,7 @@ void FUN_004632f8(int param_1,int param_2)
   unsigned short temp_v28;
   unsigned short temp_v29;
   
-  FUN_004617d0(&temp_v10);
+  words2Clear2(&temp_v10);
   temp_v2 = FUN_00461508(param_1,&temp_v10,&DAT_00647d80,0x4000);
   if (temp_v2 != 0) {
     *(unsigned int *)(param_2 + 0x10) = *(unsigned int *)(param_1 + 0x10);

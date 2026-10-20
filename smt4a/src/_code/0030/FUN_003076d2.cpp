@@ -1,22 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002efb6c(unsigned int, unsigned int);
+void FUN_002efb6c(u32 dest, u32 value);
+u32 FUN_002efa80(u32 source);
 
-extern unsigned int FUN_002efa80(unsigned int);
-/* Supplied declaration required: FUN_002efb6c. */
-
-
-void FUN_003076d2(unsigned int param_1,unsigned int param_2)
-
+/* Calls FUN_002efb6c(dest, FUN_002efa80(source)). */
+void FUN_003076d2(u32 dest, u32 source)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_002efa80(param_2);
-  FUN_002efb6c(param_1,temp_v0);
-  return;
+    u32 value;
+
+    value = FUN_002efa80(source);
+    FUN_002efb6c(dest, value);
 }
 
 } /* extern "C" */

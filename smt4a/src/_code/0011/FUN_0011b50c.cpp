@@ -23,7 +23,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00110ab0. */
-extern unsigned int FUN_002eac26(unsigned char *, unsigned char *);
+extern unsigned int byteRefMin(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002fbb60. */
 /* Supplied declaration required: FUN_002fbb68. */
 /* Supplied declaration required: FUN_002fbb70. */
@@ -52,7 +52,7 @@ void FUN_0011b50c(int param_1,int param_2)
   if (temp_v0 == '\0') {
     temp_v7[0] = 1;
     temp_v6[0] = *(unsigned char *)(param_2 + 4);
-    temp_v1 = FUN_002eac26(temp_v6,temp_v7);
+    temp_v1 = byteRefMin(temp_v6,temp_v7);
     FUN_002fbb60(param_1,temp_v1);
     temp_v3 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     temp_v4 = 0;

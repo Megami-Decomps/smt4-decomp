@@ -1,16 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00421c98; /* 0x421c98 */
+extern u8 DAT_00421c98;
 
+typedef struct Obj {
+    /* 0x0 */ const void *vtbl;
+    /* 0x4 */ u32 unk4;
+} Obj;
 
-void FUN_0037b7c4(unsigned int *param_1)
-
+void FUN_0037b7c4(Obj *obj)
 {
-  *param_1 = (unsigned int)&DAT_00421c98;
-  param_1[1] = 0;
-  return;
+    obj->vtbl = &DAT_00421c98;
+    obj->unk4 = 0;
 }
 
 } /* extern "C" */

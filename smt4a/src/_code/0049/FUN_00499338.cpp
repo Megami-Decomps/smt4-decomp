@@ -11,7 +11,7 @@ int FUN_002c85b0(void);
 int FUN_0031f718(unsigned int, int, int, unsigned int, unsigned int);
 int FUN_00333f6c(void);
 int FUN_00345718(int);
-int FUN_0034aa94(int, int);
+int objBSetWordByIndex(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -32,7 +32,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_00345718. */
-/* Supplied declaration required: FUN_0034aa94. */
+/* Supplied declaration required: objBSetWordByIndex. */
 extern int FUN_004cfe4c(int);
 
 
@@ -68,15 +68,15 @@ void FUN_00499338(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       if (temp_v0 != 0) {
         temp_v1 = FUN_00192718(temp_v0);
         if (temp_v1 == 4) {
-          FUN_0034aa94(0,temp_v0);
+          objBSetWordByIndex(0,temp_v0);
         }
         temp_v1 = FUN_00192718(temp_v0);
         if (temp_v1 == 5) {
-          FUN_0034aa94(1,temp_v0);
+          objBSetWordByIndex(1,temp_v0);
         }
         temp_v1 = FUN_00192718(temp_v0);
         if (temp_v1 == 6) {
-          FUN_0034aa94(2,temp_v0);
+          objBSetWordByIndex(2,temp_v0);
         }
       }
       *(unsigned int *)(param_1 + 0x16004) = 2;

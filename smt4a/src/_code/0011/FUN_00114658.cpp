@@ -1,31 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int strInit(unsigned char [36]);
-int FUN_002ec8a8(unsigned int, unsigned char [36]);
-int strDestroy(unsigned char [36]);
+void strInit(u8 *str);
+void strDestroy(u8 *str);
+void FUN_002ec8a8(u32 dest, u8 *str);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: strInit. */
-/* Supplied declaration required: FUN_002ec8a8. */
-/* Supplied declaration required: strDestroy. */
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00[2];
+    /* 0x08 */ s32 (*fill)(Object *object, u32 key, u8 *str);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
-
-int FUN_00114658(int *param_1,unsigned int param_2)
-
+/* Asks the object to fill a temporary string for `key`; on success (0) copies it to `key` via FUN_002ec8a8. Returns the object's result. */
+s32 FUN_00114658(Object *object, u32 key)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [36];
-  
-  strInit(temp_v1);
-  temp_v0 = (**(romwright_code **)(*param_1 + 8))(param_1,param_2,temp_v1);
-  if (temp_v0 == 0) {
-    FUN_002ec8a8(param_2,temp_v1);
-  }
-  strDestroy(temp_v1);
-  return temp_v0;
+    s32 result;
+    u8 str[36];
+
+    strInit(str);
+    result = object->vtbl->fill(object, key, str);
+    if (result == 0) {
+        FUN_002ec8a8(key, str);
+    }
+    strDestroy(str);
+    return result;
 }
 
 } /* extern "C" */

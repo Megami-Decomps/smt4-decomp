@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0063fd88; /* 0x63fd88 */
+typedef struct Global63fd88 {
+    /* 0x000 */ u8 unk000[0x1C0];
+    /* 0x1C0 */ u32 unk1C0;
+} Global63fd88;
+extern Global63fd88 DAT_0063fd88;
 
-
-unsigned int FUN_00144eec(void)
-
+/* Returns the word at 0x1C0 of the global at 0x63FD88. */
+u32 FUN_00144eec(void)
 {
-  return (*(unsigned int *)((unsigned char *)&DAT_0063fd88 + 0x1c0));
+    return DAT_0063fd88.unk1C0;
 }
 
 } /* extern "C" */

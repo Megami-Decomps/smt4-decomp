@@ -1,22 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c3424(int);
-int FUN_003511cc(int);
+int FUN_002c3424(void *event);
+int FUN_003511cc(void *obj);
 
-/* Supplied declaration required: FUN_002c3424. */
-/* Supplied declaration required: FUN_003511cc. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 done;
+    /* 0x11 */ u8 unk11[0xF];
+    /* 0x20 */ u8 event[1];
+} Obj;
 
-
-void FUN_0034fb94(int param_1)
-
+/* Waits on the event, running FUN_003511cc until the object is done. */
+void FUN_0034fb94(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  while (FUN_002c3424(param_1 + 0x20), *(char *)(param_1 + 0x10) != '\x01') {
-    FUN_003511cc(param_1);
-  }
-  return;
+    while (FUN_002c3424(obj->event), obj->done != 1) {
+        FUN_003511cc(obj);
+    }
 }
 
 } /* extern "C" */

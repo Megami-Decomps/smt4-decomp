@@ -1,31 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+u32 FUN_002a4878(u8 *member);
+u32 FUN_003da8f4(s32 value, u32 arg);
 
-extern int DAT_0057f108; /* 0x57f108 */
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ u8 member40[0x64];
+    /* 0xA4 */ s8 value;
+} Object;
+extern Object *DAT_0057f108;
 
-extern unsigned int FUN_002a4878(int);
-extern unsigned int FUN_003da8f4(int, unsigned int);
-
-
-unsigned int FUN_002e2afc(void)
-
+/* Returns FUN_003da8f4(value, FUN_002a4878(member)) for the object at 0x57F108, or 0 when there is none. */
+u32 FUN_002e2afc(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = DAT_0057f108;
-  if (DAT_0057f108 != 0) {
-    temp_v1 = FUN_002a4878(DAT_0057f108 + 0x40);
-    temp_v1 = FUN_003da8f4((int)*(signed char *)(temp_v0 + 0xa4),temp_v1);
-    return temp_v1;
-  }
-  return 0;
+    Object *object;
+    u32 arg;
+
+    object = DAT_0057f108;
+    if (DAT_0057f108 != NULL) {
+        arg = FUN_002a4878(DAT_0057f108->member40);
+        arg = FUN_003da8f4((s32)object->value, arg);
+        return arg;
+    }
+    return 0;
 }
 
 } /* extern "C" */

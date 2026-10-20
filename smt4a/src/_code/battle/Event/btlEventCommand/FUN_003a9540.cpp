@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(int *, unsigned char *, unsigned int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_004d854c(unsigned int);
-int FUN_004d8804(unsigned int);
+int callOnHandleField4D(unsigned int);
 int FUN_004d881c(void);
 
 /* stack frame of void: 16 slot(s), 64 byte(s) */
@@ -40,9 +40,9 @@ extern unsigned int FUN_002360dc(unsigned int);
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_004d854c. */
 extern int FUN_004d87e4(unsigned int);
-/* Supplied declaration required: FUN_004d8804. */
+/* Supplied declaration required: callOnHandleField4D. */
 /* Supplied declaration required: FUN_004d881c. */
-extern unsigned int FUN_004d88c0(void);
+extern unsigned int clearWord(void);
 
 
 unsigned int FUN_003a9540(void)
@@ -77,7 +77,7 @@ unsigned int FUN_003a9540(void)
       return 0;
     }
     FUN_004d854c(*(unsigned int *)(temp_v0 + 0x2298));
-    FUN_004d8804(*(unsigned int *)(temp_v0 + 0x2298));
+    callOnHandleField4D(*(unsigned int *)(temp_v0 + 0x2298));
     *(unsigned char *)(temp_v0 + 0x22b4) = 1;
   }
   else {
@@ -104,7 +104,7 @@ unsigned int FUN_003a9540(void)
       FUN_00178b04(0x24,&LAB_003a965c,0x54b);
       temp_v2 = 0;
       if (temp_v1 != 0) {
-        temp_v2 = FUN_004d88c0();
+        temp_v2 = clearWord();
       }
       *(unsigned int *)(temp_v0 + 0x2298) = temp_v2;
       FUN_004d881c();

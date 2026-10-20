@@ -37,7 +37,7 @@ struct fn_0048243c_arg1 {
 
 /* Supplied declaration required: FUN_0014bef4. */
 extern int FUN_0018719c(int);
-extern unsigned short *FUN_00379734(fn_0048243c_arg1 *);
+extern unsigned short *dataTable29GetEntry(fn_0048243c_arg1 *);
 
 
 unsigned char FUN_0048243c(fn_0048243c_arg0 *param_1,fn_0048243c_arg1 *param_2)
@@ -52,7 +52,7 @@ unsigned char FUN_0048243c(fn_0048243c_arg0 *param_1,fn_0048243c_arg1 *param_2)
   unsigned char temp_v4;
   
   temp_v4 = 0;
-  puVar4 = (unsigned short *)FUN_00379734(param_2);
+  puVar4 = (unsigned short *)dataTable29GetEntry(param_2);
   temp_v2 = FUN_0014bef4(puVar4[2]);
   param_1->field_0x84 = temp_v2 + puVar4[1];
   temp_v3 = FUN_0014bef4(puVar4[4]);

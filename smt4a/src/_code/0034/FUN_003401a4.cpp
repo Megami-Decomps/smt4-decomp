@@ -17,8 +17,8 @@ int FUN_0033e014(unsigned int, unsigned int);
 int FUN_00353a88(void);
 int mapIfClose(void);
 int mapIfReleaseSlot0AndReset(void);
-int FUN_00368b6c(void);
-int FUN_00385b1c(void);
+int sub68OwnerCall7(void);
+int sub68OwnerCall9(void);
 int FUN_003868dc(int);
 int FUN_003d2150(int);
 int FUN_003d4ed8(int);
@@ -70,8 +70,8 @@ extern int FUN_00224880(unsigned int);
 extern unsigned int FUN_00357bc8(unsigned int, unsigned int *);
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapIfReleaseSlot0AndReset. */
-/* Supplied declaration required: FUN_00368b6c. */
-/* Supplied declaration required: FUN_00385b1c. */
+/* Supplied declaration required: sub68OwnerCall7. */
+/* Supplied declaration required: sub68OwnerCall9. */
 /* Supplied declaration required: FUN_003868dc. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
@@ -326,7 +326,7 @@ void FUN_003401a4(int param_1)
     switch(*(unsigned int *)(param_1 + 0xd0)) {
     case 0:
       DAT_005f1859 = 0;
-      FUN_00385b1c();
+      sub68OwnerCall9();
       FUN_002d88e0();
       temp_v7 = g_lmapScene;
       puVar10 = (unsigned int *)(g_lmapScene + 0x20);
@@ -388,7 +388,7 @@ void FUN_003401a4(int param_1)
       return;
     case 5:
       FUN_00353a88();
-      FUN_00368b6c();
+      sub68OwnerCall7();
       *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
       *(unsigned int *)(param_1 + 0xd4) = 0;
       return;

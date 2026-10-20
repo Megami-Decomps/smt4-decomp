@@ -20,7 +20,7 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_0031bd24(...); /* 0x31bd24 */
-extern int FUN_0038a184(...); /* 0x38a184 */
+extern int modelWorkDestroy(...); /* 0x38a184 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0013c884. */
@@ -68,7 +68,7 @@ void FUN_003a6dec(unsigned int param_1,unsigned int param_2)
     puVar1[2] = 1;
   }
   temp_v2 = FUN_0031bd24;
-  temp_v3 = FUN_0038a184;
+  temp_v3 = modelWorkDestroy;
   pcVar4 = "Event3dModelMap_Calc";
   puStack_50 = puVar1;
   asdProcessCreateSimple("Event3dModelMap_Calc",4,0);

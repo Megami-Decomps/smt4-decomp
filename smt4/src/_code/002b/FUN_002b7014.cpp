@@ -1,22 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdModelAdvanceCommandCursor(int);
+int asdModelAdvanceCommandCursor(int bytes);
 
-extern unsigned int DAT_004729e0; /* 0x4729e0 */
-
-/* Supplied declaration required: asdModelAdvanceCommandCursor. */
-
+extern struct {
+    u32 unk0;
+    int count;
+} DAT_004729e0;
 
 void FUN_002b7014(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  asdModelAdvanceCommandCursor((*(int *)((unsigned char *)&DAT_004729e0 + 0x4)) << 2);
-  DAT_004729e0 = 0;
-  (*(int *)((unsigned char *)&DAT_004729e0 + 0x4)) = 0;
-  return;
+    asdModelAdvanceCommandCursor(DAT_004729e0.count << 2);
+    DAT_004729e0.unk0 = 0;
+    DAT_004729e0.count = 0;
 }
 
 } /* extern "C" */

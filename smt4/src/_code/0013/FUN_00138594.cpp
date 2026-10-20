@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_00138594(int *param_1)
-
+u8 FUN_00138594(s32 *message)
 {
-  return *param_1 == 4 || *param_1 == 5;
+    return *message == 4 || *message == 5;
 }
 
 } /* extern "C" */

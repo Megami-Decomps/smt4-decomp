@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-
-
-unsigned int FUN_00146ab0(void)
-
+/* Returns the word at 0x1FF80040: entry 16 of the 3DS kernel configuration page. */
+u32 FUN_00146ab0(void)
 {
-  return ((unsigned int *)0x1ff80000)[16];
+    return ((u32 *)0x1FF80000)[16];
 }
 
 } /* extern "C" */

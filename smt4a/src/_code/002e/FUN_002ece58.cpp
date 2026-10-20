@@ -1,19 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7232(void);
+void FUN_002e7232(void);
 
-/* Supplied declaration required: FUN_002e7232. */
+typedef struct Part {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 handle;
+} Part;
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0xC0];
+    /* 0xC0 */ Part part;
+} Holder;
 
-unsigned int FUN_002ece58(int param_1,unsigned int param_2)
+/* Releases the handle of the part at 0xC0 (if any), stores `handle` in its place and returns 1. */
+u32 FUN_002ece58(Holder *object, u32 handle)
 {
-  int *p = (int *)(param_1 + 0xc0);
-  if (p[6] != 0) {
-    FUN_002e7232();
-  }
-  p[6] = param_2;
-  return 1;
+    Part *part = &object->part;
+
+    if (part->handle != 0) {
+        FUN_002e7232();
+    }
+    part->handle = handle;
+    return 1;
 }
+
 } /* extern "C" */

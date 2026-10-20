@@ -1,28 +1,16 @@
-#include "romwright_types.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
-typedef struct fn_0031d1d8_arg0 fn_0031d1d8_arg0;
-struct fn_0031d1d8_arg0 {
-    unsigned char pad_0x0[0x20];
-    int field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x3c];
-    undefined1 field_0x60; /* +0x60 */
-    unsigned char pad_0x61[0x1];
-    byte field_0x62; /* +0x62 */
-};
-
-
-void FUN_0031d1d8(fn_0031d1d8_arg0 *param_1,int param_2)
-
+/* Stores `value` unless the entry is inactive; marks it dirty when the value changes. */
+void FUN_0031d1d8(FlaggedEntry *entry, s32 value)
 {
-  if (param_1->field_0x62 == 0) {
-    if (param_1->field_0x20 != param_2) {
-      param_1->field_0x60 = 1;
+    if (entry->inactive == 0) {
+        if (entry->unk20 != value) {
+            entry->dirty20 = 1;
+        }
+        entry->unk20 = value;
     }
-    param_1->field_0x20 = param_2;
-  }
-  return;
 }
 
 } /* extern "C" */

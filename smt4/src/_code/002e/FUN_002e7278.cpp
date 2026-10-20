@@ -11,7 +11,7 @@ int FUN_0024f890(...);
 int FUN_0024fd70(...);
 int FUN_0024febc(...);
 int FUN_002569fc(...);
-int FUN_00259938(...);
+int matrix43Multiply(...);
 int FUN_002a2c7c(...);
 int FUN_002f8938(...);
 int FUN_0031f554(...);
@@ -161,7 +161,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: FUN_0024fd70. */
 /* Supplied declaration required: FUN_0024febc. */
 /* Supplied declaration required: FUN_002569fc. */
-/* Supplied declaration required: FUN_00259938. */
+/* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: FUN_002a2c7c. */
 /* Supplied declaration required: FUN_002f8938. */
 /* Supplied declaration required: FUN_0031f554. */
@@ -488,7 +488,7 @@ void FUN_002e7278(fn_002e7278_arg0 *param_1)
                 FUN_001a9f6c(temp_v55,&temp_v19,0);
               }
               FUN_002569fc(&temp_v30);
-              FUN_00259938(&temp_v30,temp_v55,&temp_v39);
+              matrix43Multiply(&temp_v30,temp_v55,&temp_v39);
               temp_v2 = pfVar9->field_0x0;
               *(unsigned int *)(temp_v2 + 0x4c) = temp_v30;
               *(unsigned int *)(temp_v2 + 0x5c) = temp_v33;

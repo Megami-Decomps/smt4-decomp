@@ -1,31 +1,42 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Provider;
+typedef struct ProviderVtbl {
+    /* 0x00 */ void *unk00[5];
+    /* 0x14 */ u32 *(*getEntry)(struct Provider *provider);
+} ProviderVtbl;
 
-void FUN_002a8638(int param_1,unsigned int *param_2,unsigned int *param_3,unsigned int *param_4,unsigned int *param_5)
+typedef struct Provider {
+    /* 0x0 */ ProviderVtbl *vtbl;
+} Provider;
 
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x260];
+    /* 0x260 */ Provider *provider;
+} Owner;
+
+/* Reads four words of the provider's entry (when its flag 0x20000000 is set) into the non-NULL outputs. */
+void FUN_002a8638(Owner *owner, u32 *a, u32 *b, u32 *c, u32 *d)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(**(int **)(param_1 + 0x260) + 0x14))(*(int **)(param_1 + 0x260));
-  if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x20000000) == 0)) {
-    puVar1 = (unsigned int *)0x0;
-  }
-  if (param_2 != (unsigned int *)0x0) {
-    *param_2 = puVar1[4];
-  }
-  if (param_3 != (unsigned int *)0x0) {
-    *param_3 = puVar1[3];
-  }
-  if (param_4 != (unsigned int *)0x0) {
-    *param_4 = puVar1[1];
-  }
-  if (param_5 != (unsigned int *)0x0) {
-    *param_5 = puVar1[2];
-  }
-  return;
+    u32 *entry = owner->provider->vtbl->getEntry(owner->provider);
+
+    if (entry != NULL && (*entry & 0x20000000) == 0) {
+        entry = NULL;
+    }
+    if (a != NULL) {
+        *a = entry[4];
+    }
+    if (b != NULL) {
+        *b = entry[3];
+    }
+    if (c != NULL) {
+        *c = entry[1];
+    }
+    if (d != NULL) {
+        *d = entry[2];
+    }
 }
 
 } /* extern "C" */

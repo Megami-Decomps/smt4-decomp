@@ -1,38 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00164ce0(unsigned int, int);
-int FUN_00167f24(int);
+void FUN_00164ce0(u32 job, s32 flag);
+void FUN_00167f24(s32 mode);
+s32 jobIsValid(u32 job);
 
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_00164ce0. */
-/* Supplied declaration required: FUN_00167f24. */
+typedef struct JobSet {
+    /* 0x000 */ u8 unk000[0x634];
+    /* 0x634 */ u32 jobs[4];
+} JobSet;
 
-
-unsigned int FUN_002e5728(int *param_1)
-
+/* Stops jobs 1..3 of the set `*set` (index 0 is skipped), then runs FUN_00167f24(2); always returns 1. */
+u32 FUN_002e5728(JobSet **set)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = *param_1;
-  if (temp_v3 != 0) {
-    temp_v1 = 1;
-    do {
-      temp_v2 = temp_v3 + temp_v1 * 4;
-      temp_v0 = jobIsValid(*(unsigned int *)(temp_v2 + 0x634));
-      if (temp_v0 != 0) {
-        FUN_00164ce0(*(unsigned int *)(temp_v2 + 0x634),1);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 4);
-  }
-  FUN_00167f24(2);
-  return 1;
+    s32 valid;
+    s32 i;
+    JobSet *jobs;
+
+    jobs = *set;
+    if (jobs != NULL) {
+        i = 1;
+        do {
+            valid = jobIsValid(jobs->jobs[i]);
+            if (valid != 0) {
+                FUN_00164ce0(jobs->jobs[i], 1);
+            }
+            i = i + 1;
+        } while (i < 4);
+    }
+    FUN_00167f24(2);
+    return 1;
 }
 
 } /* extern "C" */

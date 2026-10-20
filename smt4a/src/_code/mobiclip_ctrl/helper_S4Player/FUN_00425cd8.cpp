@@ -10,7 +10,7 @@ int FUN_001a08d8(int);
 int FUN_001a0d08(int);
 int FUN_002e3140(void);
 int FUN_002e3328(int);
-int FUN_00423654(int);
+int deblockerHandleRelease(int);
 int FUN_00424b54(int);
 int software_interrupt(int);
 
@@ -25,7 +25,7 @@ extern int DAT_00588104; /* 0x588104 */
 /* Supplied declaration required: FUN_001a0d08. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_00423654. */
+/* Supplied declaration required: deblockerHandleRelease. */
 /* Supplied declaration required: FUN_00424b54. */
 
 
@@ -93,7 +93,7 @@ void FUN_00425cd8(int param_1)
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < *(int *)(param_1 + 0x1c4));
     }
-    FUN_00423654(param_1 + 0x158);
+    deblockerHandleRelease(param_1 + 0x158);
     *(unsigned int *)(param_1 + 0x14) = 0;
     *(unsigned int *)(param_1 + 0x18) = 0;
     *(unsigned int *)(param_1 + 0x1b8) = 0;

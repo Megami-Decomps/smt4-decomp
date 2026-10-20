@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001517b4(int, int);
 int FUN_001641b4(int);
-int FUN_00187010(unsigned int);
+int saveSlotFindById(unsigned int);
 int FUN_00275f44(unsigned int, int);
 int FUN_003180c4(int, unsigned int);
 int FUN_00333dc8(int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_003e4e4c(unsigned int);
 int FUN_004bd6b0(unsigned int, int, unsigned int);
 
@@ -18,13 +18,13 @@ int FUN_004bd6b0(unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001641b4. */
 extern unsigned int FUN_00180114(unsigned short);
 extern int FUN_001801a4(void);
-/* Supplied declaration required: FUN_00187010. */
+/* Supplied declaration required: saveSlotFindById. */
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 extern int FUN_003df4a4(unsigned short);
 extern int FUN_003e4cb4(void);
 /* Supplied declaration required: FUN_003e4e4c. */
@@ -55,7 +55,7 @@ unsigned int FUN_0041774c(int param_1)
       if ((temp_v3 == 0) || (*(int *)(param_1 + 0x14) < 3)) break;
     }
     FUN_001641b4(0x100020e);
-    FUN_003491e8();
+    obj04Finish();
     if (*(char *)(param_1 + 0x40) != '\0') {
       if ((-1 < *(int *)(param_1 + 0x3c)) &&
          (temp_v3 = FUN_003df4a4(*(unsigned short *)(param_1 + 0x38)), temp_v3 == 0)) {
@@ -67,7 +67,7 @@ unsigned int FUN_0041774c(int param_1)
       *(unsigned int *)(param_1 + 0xc) = 5;
     }
     else {
-      temp_v2 = FUN_00187010(*(unsigned int *)(param_1 + 0x34) & 0xffff);
+      temp_v2 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
       temp_v3 = FUN_004bca68(temp_v2,*(unsigned short *)(param_1 + 0x38));
       if (temp_v3 == 0) {
         temp_v0 = FUN_004bd068(temp_v2);
@@ -78,7 +78,7 @@ unsigned int FUN_0041774c(int param_1)
     }
     break;
   case 2:
-    temp_v3 = FUN_00187010(*(unsigned int *)(param_1 + 0x34) & 0xffff);
+    temp_v3 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
     temp_v1 = FUN_003e4cb4();
     if (temp_v1 != 0) {
       *(unsigned int *)(param_1 + 0xc) = 5;
@@ -95,7 +95,7 @@ unsigned int FUN_0041774c(int param_1)
       temp_v3 = FUN_002a4b74();
       if (temp_v3 == 0) {
         FUN_003e4e4c(*(unsigned int *)(param_1 + 0x34) & 0xffff);
-        temp_v3 = FUN_00187010(*(unsigned int *)(param_1 + 0x34) & 0xffff);
+        temp_v3 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
         temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
         FUN_003180c4(0,temp_v2);
         FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0x14);

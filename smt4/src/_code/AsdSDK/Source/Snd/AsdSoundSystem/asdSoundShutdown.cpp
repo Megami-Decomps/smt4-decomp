@@ -7,7 +7,7 @@ extern AsdSndDuck g_asdSoundDuck;
 void FUN_001177e0(void);
 void FUN_0010c350(void);
 void FUN_0010bf78(void);
-void FUN_00110978(void);
+void sndSystemFinalize(void);
 void FUN_0010ff4c(void);
 void FUN_0010fc60(void);
 void FUN_0010fc90(void);
@@ -31,7 +31,7 @@ void asdSoundShutdown(void)
     if (g_asdSound.workBuffer != NULL) {
         asdMemFree(g_asdSound.workBuffer);
     }
-    FUN_00110978();
+    sndSystemFinalize();
     FUN_0010ff4c();
     FUN_0010fc60();
     FUN_0010fc90();

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00186f58(void);
 
 /* Supplied declaration required: FUN_00186f58. */
-extern int FUN_00348d64(void);
+extern int gameDataBlockGetArea2D68(void);
 extern int FUN_003e4230(unsigned int);
 
 
@@ -22,7 +22,7 @@ void FUN_003e416c(void)
   unsigned char *pbVar5;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_00348d64();
+  temp_v1 = gameDataBlockGetArea2D68();
   temp_v4 = 1;
   do {
     temp_v2 = temp_v4;

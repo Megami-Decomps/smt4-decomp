@@ -1,22 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e2054` (_code @ 0x2e2054, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: one extra `bne` to the return after `moveq r0, #1` (armcc's branch layout for the nested if) */
+/* Returns 1 if the second global object exists and its state (+0x140) is 2. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f110; /* 0x57f110 */
+struct ObjFUN_002e2054 {
+    /* 0x000 */ u8 unk000[0x140];
+    /* 0x140 */ s32 state;
+};
 
+struct GlobalFUN_002e2054 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ ObjFUN_002e2054 *current;
+};
 
-unsigned int FUN_002e2054(void)
+extern GlobalFUN_002e2054 DAT_0057f110;
 
+s32 FUN_002e2054(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) != 0) && (*(int *)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x140) == 2)) {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    ObjFUN_002e2054 *obj = DAT_0057f110.current;
+    s32 result = 0;
+
+    if (obj != NULL) {
+        if (obj->state == 2) {
+            result = 1;
+        }
+    }
+    return result;
 }
 
-} /* extern "C" */
+}

@@ -25,7 +25,7 @@ extern unsigned int DAT_0064c0bc; /* 0x64c0bc */
 extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 unsigned int FUN_0018a9bc(unsigned int param_1)
@@ -34,7 +34,7 @@ unsigned int FUN_0018a9bc(unsigned int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c30), temp_v0 != 0)) {
+  if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c30), temp_v0 != 0)) {
     DAT_0064c084 = 0x3f800000;
     DAT_0064c088 = 0;
     DAT_0064c08c = 0;

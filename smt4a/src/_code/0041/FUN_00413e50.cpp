@@ -83,7 +83,7 @@ extern int rt_malloc(unsigned int);
 /* Supplied declaration required: FUN_002e760a. */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9598. */
-extern int FUN_002ea0e4(unsigned char *);
+extern int constructObj0055affc(unsigned char *);
 /* Supplied declaration required: FUN_002ea100. */
 /* Supplied declaration required: FUN_002f4cac. */
 /* Supplied declaration required: FUN_002f4cd6. */
@@ -157,7 +157,7 @@ void FUN_00413e50(int param_1)
   }
   temp_v8 = &DAT_0055ac40;
   temp_v9 = 0;
-  temp_v0 = FUN_002ea0e4(temp_v11);
+  temp_v0 = constructObj0055affc(temp_v11);
   temp_v0 = FUN_003038fc(temp_v0 + 0xc,0);
   temp_v34 = 0;
   temp_v35 = 0;

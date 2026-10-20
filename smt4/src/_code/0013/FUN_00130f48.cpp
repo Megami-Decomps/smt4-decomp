@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00147004(...);
-int FUN_002bfefc(...);
+int __cxa_guard_acquire(...);
 int nn_snd_CTR_StartSoundThread(...);
 int nw_snd_internal_driver_SoundThread_SoundThread_sub_object(...);
 
@@ -32,7 +32,7 @@ extern unsigned int DAT_00472364; /* 0x472364 */
 extern unsigned char DAT_004ea4c8; /* 0x4ea4c8 */
 
 /* Supplied declaration required: FUN_00147004. */
-/* Supplied declaration required: FUN_002bfefc. */
+/* Supplied declaration required: __cxa_guard_acquire. */
 /* Supplied declaration required: nn_snd_CTR_StartSoundThread. */
 /* Supplied declaration required: nw_snd_internal_driver_SoundThread_SoundThread_sub_object. */
 
@@ -66,14 +66,14 @@ int FUN_00130f48(fn_00130f48_arg0 *param_1,unsigned int param_2,unsigned int par
   uStack_38 = param_3;
   uStack_34 = param_4;
   if ((DAT_00472364 & 1) == 0) {
-    temp_v1 = FUN_002bfefc(&DAT_00472364);
+    temp_v1 = __cxa_guard_acquire(&DAT_00472364);
     param_2 = (unsigned int)((unsigned long long)temp_v1 >> 0x20);
     if ((int)temp_v1 != 0) {
       nw_snd_internal_driver_SoundThread_SoundThread_sub_object(&DAT_004ea4c8);
       param_2 = 0x141040;
     }
   }
-  if (((DAT_00472364 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00472364,param_2), temp_v0 != 0)) {
+  if (((DAT_00472364 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00472364,param_2), temp_v0 != 0)) {
     nw_snd_internal_driver_SoundThread_SoundThread_sub_object(&DAT_004ea4c8);
   }
   puVar2 = (unsigned int *)&temp_v2;

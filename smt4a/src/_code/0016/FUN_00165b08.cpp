@@ -53,7 +53,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184e64. */
 extern int FUN_00184ed0(void);
-extern int FUN_00187010(unsigned int);
+extern int saveSlotFindById(unsigned int);
 extern int FUN_00187068(int);
 extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_001879d0. */
@@ -108,7 +108,7 @@ void FUN_00165b08(void)
       temp_v8 = 0;
       do {
         if (*(int *)(temp_v7 + 0x9c) < temp_v8) break;
-        temp_v6 = FUN_00187010(*(unsigned int *)(temp_v7 + temp_v8 * 4 + 0xac) & 0xffff);
+        temp_v6 = saveSlotFindById(*(unsigned int *)(temp_v7 + temp_v8 * 4 + 0xac) & 0xffff);
         if ((*(char *)(temp_v7 + temp_v8 + 0xdc) == '\0') &&
            (*(short *)(temp_v3 + 300) == *(short *)(temp_v6 + 300))) {
           temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v8 * 0x8c + 0xdbc);
@@ -184,7 +184,7 @@ LAB_00165eec:
       temp_v14 = (unsigned int)*(unsigned char *)(temp_v14 + 0xdc);
     }
     if ((temp_v12 && temp_v14 != 0) && (temp_v14 = *(unsigned int *)(temp_v7 + temp_v9 * 4 + 0xac), temp_v14 != 0)) {
-      temp_v3 = FUN_00187010(temp_v14 & 0xffff);
+      temp_v3 = saveSlotFindById(temp_v14 & 0xffff);
       temp_v4 = FUN_001654d8((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v9 * 0x8c + 0xdbc);
       temp_v5 = FUN_001654e4((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + temp_v9 * 0x8c + 0xdbc);
       efctSetSpeed();

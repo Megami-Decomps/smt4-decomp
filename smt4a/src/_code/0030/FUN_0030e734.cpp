@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned char DAT_00558ce4; /* 0x558ce4 */
 
 extern int FUN_002f4424(void);
-extern int FUN_002f4474(int, int);
+extern int wordRefsDiffer_002f4474(int, int);
 
 
 unsigned int * FUN_0030e734(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
@@ -23,7 +23,7 @@ unsigned int * FUN_0030e734(unsigned int *param_1,unsigned int param_2,unsigned 
   param_1[2] = 0;
   *(unsigned char *)(param_1 + 5) = 0;
   temp_v0 = FUN_002f4424();
-  temp_v1 = FUN_002f4474(temp_v0 + 4,temp_v0 + 0xc);
+  temp_v1 = wordRefsDiffer_002f4474(temp_v0 + 4,temp_v0 + 0xc);
   if (temp_v1 != 0) {
     *(unsigned int **)(*(int *)(temp_v0 + 8) + 4) = param_1;
     param_1[2] = *(unsigned int *)(temp_v0 + 8);

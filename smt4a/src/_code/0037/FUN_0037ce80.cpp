@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_0019f18c(int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001bd100(int);
-extern int FUN_00418584(void);
+extern int partyEntryFlagsBit3(void);
 
 
 void FUN_0037ce80(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -33,7 +33,7 @@ void FUN_0037ce80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_00418584();
+  temp_v0 = partyEntryFlagsBit3();
   temp_v1 = FUN_001bd100(param_1);
   if (temp_v1 != 0) {
     if (temp_v0 == 0) {

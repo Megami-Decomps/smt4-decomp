@@ -1,20 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002a6d50(unsigned int, unsigned int, unsigned int);
+extern u8 *FUN_002a6d50(u32 a, u32 b, u32 c);
 
-
-void FUN_0038a134(unsigned int param_1,unsigned int param_2)
-
+void FUN_0038a134(u32 a, u32 b)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002a6d50(param_1,0x10,param_2);
-  if (temp_v0 != 0) {
-    *(unsigned char *)(temp_v0 + 0xd) = 0;
-  }
-  return;
+    u8 *entry = FUN_002a6d50(a, 0x10, b);
+
+    if (entry != NULL) {
+        entry[0xd] = 0;
+    }
 }
 
 } /* extern "C" */

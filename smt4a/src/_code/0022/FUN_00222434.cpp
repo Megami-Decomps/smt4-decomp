@@ -1,36 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001800b8(unsigned int);
-int asdMemFree(unsigned int);
+void FUN_001800b8(u32 handle);
+void asdMemFree(void *memory);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Shared {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 count;
+    /* 0x08 */ u8 unk08[0x0C];
+    /* 0x14 */ u32 *handles;
+    /* 0x18 */ u8 unk18[4];
+    /* 0x1C */ s32 refCount;
+    /* 0x20 */ u8 unk20[4];
+    /* 0x24 */ void *buffer;
+} Shared;
 
-/* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_00222434(int param_1)
-
+/* Drops one reference: on the last one releases the handles and the buffer. */
+void FUN_00222434(Shared *shared)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x1c) - 1;
-  *(int *)(param_1 + 0x1c) = temp_v0;
-  if (temp_v0 == 0) {
-    for (temp_v1 = 0; temp_v1 < *(unsigned int *)(param_1 + 4); temp_v1++) {
-      FUN_001800b8(*(unsigned int *)(*(int *)(param_1 + 0x14) + temp_v1 * 4));
+    s32 remaining;
+    u32 i;
+
+    remaining = shared->refCount - 1;
+    shared->refCount = remaining;
+    if (remaining == 0) {
+        for (i = 0; i < shared->count; i++) {
+            FUN_001800b8(shared->handles[i]);
+        }
+        asdMemFree(shared->buffer);
+        return;
     }
-    asdMemFree(*(unsigned int *)(param_1 + 0x24));
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

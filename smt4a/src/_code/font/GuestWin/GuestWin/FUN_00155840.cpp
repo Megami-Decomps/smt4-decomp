@@ -42,7 +42,7 @@ extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_00168518(int, unsigned short);
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
 extern unsigned int FUN_0017760c(int);
@@ -104,7 +104,7 @@ unsigned int FUN_00155840(void)
     temp_v7 = g_renderCtx;
     temp_v8 = temp_v3 + (int)temp_v9 + (int)*(short *)(temp_v2 + 8);
     temp_v4 = *(short *)(temp_v2 + 10) + temp_v4;
-    temp_v3 = FUN_00169294(6,1,0);
+    temp_v3 = packNibblesAndByte(6,1,0);
     piVar10 = (int *)(temp_v7 + 0x12b8);
     temp_v2 = piVar10[*piVar10 + 2];
     piVar10[*piVar10 + 2] = temp_v3;
@@ -114,7 +114,7 @@ unsigned int FUN_00155840(void)
     }
     FUN_001835b4(2,8,0xc9,temp_v8,temp_v4,0x15);
     temp_v3 = g_renderCtx;
-    temp_v2 = FUN_00169294(6,7,0);
+    temp_v2 = packNibblesAndByte(6,7,0);
     piVar10 = (int *)(temp_v3 + 0x12b8);
     temp_v7 = piVar10[*piVar10 + 2];
     piVar10[*piVar10 + 2] = temp_v2;

@@ -65,7 +65,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
-extern unsigned int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 char FUN_00116a54(void)
@@ -175,7 +175,7 @@ char FUN_00116a54(void)
                 temp_v17 = 0x13;
                 temp_v16 = 0;
                 FUN_002bf288(2,0xe,0x116,temp_v5);
-                temp_v6 = FUN_002c5da8(6,1,0);
+                temp_v6 = packNibblesAndByte(6,1,0);
                 FUN_002bee04(g_titleScene,6,temp_v6);
                 FUN_002bf538();
                 temp_v17 = 0x15;
@@ -220,7 +220,7 @@ char FUN_00116a54(void)
       temp_v16 = (int)*(float *)(temp_v4 + 0xa30);
       temp_v17 = 0x1a;
       FUN_002bf288(2,0xe,0x182,temp_v5);
-      temp_v6 = FUN_002c5da8(6,1,0);
+      temp_v6 = packNibblesAndByte(6,1,0);
       FUN_002bee04(g_titleScene,6,temp_v6);
       FUN_002bf538();
       temp_v16 = (int)*(float *)(temp_v4 + 0xa30);

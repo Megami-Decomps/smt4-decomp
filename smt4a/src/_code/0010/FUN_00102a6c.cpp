@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int *FUN_002e3cf8(void);
+extern unsigned int *__aeabi_errno_addr(void);
 
 
 int FUN_00102a6c(int param_1)
@@ -16,7 +16,7 @@ int FUN_00102a6c(int param_1)
   
   temp_v1 = *(unsigned int *)(param_1 + 0xc);
   if ((temp_v1 & 3) == 0) {
-    puVar2 = (unsigned int *)FUN_002e3cf8();
+    puVar2 = (unsigned int *)__aeabi_errno_addr();
     *puVar2 = 1;
     return -1;
   }

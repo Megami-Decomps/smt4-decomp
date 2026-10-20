@@ -1,16 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Record {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 value;
+} Record;
 
-void FUN_0030d010(unsigned int param_1,unsigned char *param_2,unsigned char *param_3)
-
+/* Copies `source` into `dest` when `dest` is not NULL. */
+void FUN_0030d010(u32 unused, Record *dest, Record *source)
 {
-  if (param_2 != (unsigned char *)0x0) {
-    *param_2 = *param_3;
-    *(unsigned int *)(param_2 + 4) = *(unsigned int *)(param_3 + 4);
-  }
-  return;
+    if (dest != NULL) {
+        dest->kind = source->kind;
+        dest->value = source->value;
+    }
 }
 
 } /* extern "C" */

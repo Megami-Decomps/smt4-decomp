@@ -15,8 +15,8 @@ extern int FUN_0019f18c(int);
 /* Supplied declaration required: FUN_002ae320. */
 extern int FUN_002f7730(int, int);
 /* Supplied declaration required: FUN_003defe0. */
-extern int FUN_004185ec(int);
-extern int FUN_00418858(int);
+extern int partyEntryFlagsBit1(int);
+extern int partyEntryGetByte1(int);
 
 
 void FUN_003dc38c(int param_1)
@@ -42,7 +42,7 @@ void FUN_003dc38c(int param_1)
     if ((*(unsigned char *)(temp_v2 + 7) & 0x20) != 0) {
       *piVar5 = *(int *)(temp_v1 + 0x918) + 1;
     }
-    temp_v2 = FUN_00418858(param_1);
+    temp_v2 = partyEntryGetByte1(param_1);
     if (0 < temp_v2) {
       *piVar5 = *(int *)(temp_v1 + 0x918) + 1;
     }
@@ -53,14 +53,14 @@ void FUN_003dc38c(int param_1)
   if ((temp_v2 != 0) && (temp_v2 = param_1, FUN_001ad9b4(), *(char *)(temp_v2 + 6) == '\0')) {
     temp_v0 = 1;
   }
-  temp_v2 = FUN_004185ec(param_1);
+  temp_v2 = partyEntryFlagsBit1(param_1);
   if (temp_v2 != 0 || temp_v0) {
     temp_v2 = param_1;
     FUN_001ad9b4();
     if ((*(unsigned char *)(temp_v2 + 7) & 0x20) != 0) {
       *piVar5 = *(int *)(temp_v1 + 0x918) + 1;
     }
-    temp_v2 = FUN_00418858(param_1);
+    temp_v2 = partyEntryGetByte1(param_1);
     if (0 < temp_v2) {
       *piVar5 = *(int *)(temp_v1 + 0x918) + 1;
     }

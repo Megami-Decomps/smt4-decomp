@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002954bc(...);
 int FUN_0029c6b0(...);
-int FUN_0029e974(...);
+int dataTable06Sub1GetRecord(...);
 int FUN_002b7bca(...);
 int FUN_002b9024(...);
 int asdMemFree(...);
@@ -41,10 +41,10 @@ extern unsigned char LAB_0032b33c; /* 0x32b33c */
 
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: FUN_0029c6b0. */
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b9024. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAlloc. */
 
@@ -82,14 +82,14 @@ unsigned short FUN_0033b960(fn_0033b960_arg0 *param_1)
   do {
     temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + temp_v5 * 2 + 0x3c);
     if (temp_v2 != 0) {
-      FUN_0029e974();
+      dataTable06Sub1GetRecord();
       if (temp_v6 < (*(unsigned char *)(temp_v2 + 3) & 0x1f)) {
         temp_v6 = *(unsigned char *)(temp_v2 + 3) & 0x1f;
       }
     }
     temp_v5 = temp_v5 + 1;
   } while (temp_v5 < 8);
-  temp_v5 = FUN_002c09f4(99);
+  temp_v5 = randNextInRange(99);
   temp_v7 = param_1->field_0x34;
   uStack_3c = param_1->field_0x38;
   uStack_38 = param_1->field_0x3c;
@@ -111,7 +111,7 @@ unsigned short FUN_0033b960(fn_0033b960_arg0 *param_1)
     temp_v1 = 1;
     do {
       temp_v2 = temp_v1;
-      FUN_0029e974();
+      dataTable06Sub1GetRecord();
       if (((*(unsigned char *)(temp_v2 + 3) & 0x80) != 0) && ((*(unsigned char *)(temp_v2 + 3) & 0x1f) == temp_v6)) {
         temp_v3 = 0;
         do {
@@ -128,7 +128,7 @@ LAB_0033bab0:
   } while ((temp_v5 < 1) && (temp_v6 = temp_v6 - 1, -1 < (int)temp_v6));
   temp_v4 = 0;
   if (0 < temp_v5) {
-    temp_v5 = FUN_002c09f4((temp_v5 - 1U) & 0xffff);
+    temp_v5 = randNextInRange((temp_v5 - 1U) & 0xffff);
     temp_v3 = 0;
     do {
       if (*(short *)((int)&param_1->field_0x34 + temp_v3 * 2) == 0) {

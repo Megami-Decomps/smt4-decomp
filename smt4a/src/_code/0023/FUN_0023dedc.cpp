@@ -25,8 +25,8 @@ extern int FUN_003de75c(void);
 extern int FUN_003de830(int);
 extern int FUN_003dee58(int);
 extern int FUN_003df004(int, int, int *);
-extern int FUN_00418584(int);
-extern int FUN_004185ec(void);
+extern int partyEntryFlagsBit3(int);
+extern int partyEntryFlagsBit1(void);
 extern int FUN_004186e0(void);
 
 
@@ -57,7 +57,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
   uStack_2c = param_3;
   uStack_28 = param_4;
   if (*(char *)(DAT_0057f28c + 0x90c) != '\0') {
-    temp_v0 = FUN_004185ec();
+    temp_v0 = partyEntryFlagsBit1();
     if (temp_v0 != 0) {
       temp_v0 = FUN_004186e0();
       if (temp_v0 == 0) {
@@ -73,7 +73,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       FUN_001835b4(2,0x1e,0x92);
     }
     else {
-      temp_v0 = FUN_00418584(temp_v5);
+      temp_v0 = partyEntryFlagsBit3(temp_v5);
       if (temp_v0 == 0) {
         return temp_v2;
       }
@@ -100,7 +100,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
             }
             return 0x57d8ffff;
           }
-          temp_v0 = FUN_00418584(temp_v5);
+          temp_v0 = partyEntryFlagsBit3(temp_v5);
           if (temp_v0 == 0) {
             return temp_v2;
           }
@@ -112,7 +112,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
           FUN_001835b4(2,0x1e,0x91,temp_v6,param_3,param_4);
         }
         else {
-          temp_v0 = FUN_00418584(temp_v5);
+          temp_v0 = partyEntryFlagsBit3(temp_v5);
           if (temp_v0 != 0) {
             FUN_001835b4(2,0x1e,0x93,temp_v6,param_3,param_4);
           }
@@ -122,7 +122,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         }
       }
       else {
-        temp_v0 = FUN_00418584(temp_v5);
+        temp_v0 = partyEntryFlagsBit3(temp_v5);
         if (temp_v0 == 0) {
           return temp_v2;
         }
@@ -134,7 +134,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       temp_v3 = 1;
       do {
         temp_v1 = FUN_003df004(temp_v5,temp_v0,temp_v4);
-        if ((temp_v1 != 0) && ((temp_v1 = FUN_00418584(temp_v5), temp_v1 != 0 || (0 < temp_v4[0])))) {
+        if ((temp_v1 != 0) && ((temp_v1 = partyEntryFlagsBit3(temp_v5), temp_v1 != 0 || (0 < temp_v4[0])))) {
           temp_v3 = 0;
           break;
         }
@@ -142,7 +142,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       } while (temp_v0 < 4);
       temp_v0 = FUN_003de830(temp_v5);
       if (temp_v0 == 0) {
-        temp_v0 = FUN_00418584(temp_v5);
+        temp_v0 = partyEntryFlagsBit3(temp_v5);
         if (temp_v0 == 0) {
           FUN_001835b4(2,0x1e,0xc2,temp_v6,param_3,param_4);
           return temp_v2;
@@ -154,7 +154,7 @@ FUN_0023dedc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         FUN_00164b5c(2,0x1e,0xe,temp_v6,param_3,param_4);
         return temp_v2;
       }
-      temp_v0 = FUN_00418584(temp_v5);
+      temp_v0 = partyEntryFlagsBit3(temp_v5);
       if (temp_v0 == 0) {
         return temp_v2;
       }

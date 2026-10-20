@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Counters43dcb0.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043dcb0; /* 0x43dcb0 */
-
-
-unsigned char FUN_002b8d54(void)
-
+u8 FUN_002b8d54(void)
 {
-  return *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 8);
+    return DAT_0043dcb0.counters->unk08;
 }
 
 } /* extern "C" */

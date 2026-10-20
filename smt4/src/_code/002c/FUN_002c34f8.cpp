@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00465198; /* 0x465198 */
+extern struct {
+    u8 unk00;
+    s8 unk01;
+} DAT_00465198;
 
-
-int FUN_002c34f8(signed char param_1)
-
+/* Sets the flag byte and returns its previous value. */
+int FUN_002c34f8(s8 value)
 {
-  int temp_v0;
-  
-  temp_v0 = (int)(*(signed char *)((unsigned char *)&DAT_00465198 + 0x1));
-  (*(signed char *)((unsigned char *)&DAT_00465198 + 0x1)) = param_1;
-  return temp_v0;
+    int old = DAT_00465198.unk01;
+
+    DAT_00465198.unk01 = value;
+    return old;
 }
 
 } /* extern "C" */

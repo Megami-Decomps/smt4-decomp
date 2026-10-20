@@ -6,17 +6,17 @@ extern "C" {
 
 int asdMemFree(void);
 int sysMemClear(int, int);
-int FUN_0040223c(int);
+int workOwnerRelease(int);
 int FUN_004f612c(int);
-int FUN_004f7590(int);
+int obj4FSlots28Reset(int);
 int FUN_004f7f08(void);
 int FUN_004f8fa0(int);
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0040223c. */
+/* Supplied declaration required: workOwnerRelease. */
 /* Supplied declaration required: FUN_004f612c. */
-/* Supplied declaration required: FUN_004f7590. */
+/* Supplied declaration required: obj4FSlots28Reset. */
 /* Supplied declaration required: FUN_004f7f08. */
 /* Supplied declaration required: FUN_004f8fa0. */
 
@@ -32,13 +32,13 @@ void FUN_004f55c8(int param_1)
   FUN_004f7f08();
   FUN_004f612c(param_1);
   FUN_004f8fa0(param_1);
-  FUN_004f7590(param_1);
+  obj4FSlots28Reset(param_1);
   temp_v1 = 0;
   do {
     temp_v0 = param_1 + temp_v1 * 0x3c;
     *(unsigned int *)(temp_v0 + 0x139c) = 0;
     *(unsigned int *)(temp_v0 + 0x1398) = 0xffffffff;
-    FUN_0040223c(temp_v0 + 0x13a0);
+    workOwnerRelease(temp_v0 + 0x13a0);
     temp_v1 = temp_v1 + 1;
     *(unsigned int *)(temp_v0 + 0x13d0) = 0;
   } while (temp_v1 < 0x32);

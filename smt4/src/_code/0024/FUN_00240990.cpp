@@ -1,58 +1,65 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c424c(unsigned int [43], int, unsigned int);
-int FUN_0030a728(unsigned int [43], int, unsigned int);
-int FUN_00334838(unsigned int *, int);
-int FUN_00336da8(int);
-int FUN_00338318(int, int);
-int FUN_00339210(int, unsigned int);
+int FUN_002c424c(u32 *dst, int size, u32 value);
+int FUN_0030a728(u32 *dst, int max, u32 seed);
+int FUN_00334838(void *result, void *obj);
+int FUN_00336da8(void *obj);
+int FUN_00338318(void *obj, int id);
+int FUN_00339210(void *obj, u32 value);
+extern u32 FUN_00294090(u32 id, u32 flag);
+extern int FUN_003391d0(void *obj, u32 id);
 
-extern unsigned int FUN_00294090(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: FUN_0030a728. */
-/* Supplied declaration required: FUN_00334838. */
-/* Supplied declaration required: FUN_00336da8. */
-/* Supplied declaration required: FUN_00338318. */
-extern int FUN_003391d0(int, unsigned int);
-/* Supplied declaration required: FUN_00339210. */
+typedef struct Slot {
+    /* 0x0 */ u32 id;
+    /* 0x4 */ u32 unk4;
+} Slot;
 
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x1E88];
+    /* 0x1E88 */ u32 seed;
+    /* 0x1E8C */ u8 unk1E8C[0x15C];
+    /* 0x1FE8 */ Slot slots[1];
+} Obj;
 
-void FUN_00240990(unsigned int *param_1,int param_2)
+typedef struct Result {
+    /* 0x0 */ u32 kind;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u32 count;
+} Result;
 
+/* Collects up to 43 ids for the object, registers the ones it doesn't have yet in its slot table, and reports the number added. */
+void FUN_00240990(Result *result, Obj *obj)
 {
-/* irregular: 6 native warning(s); review required */
-  int count;
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4 [43];
-  
-  FUN_00336da8(param_2);
-  temp_v1 = *(unsigned int *)(param_2 + 0x1e88);
-  FUN_002c424c(temp_v4,0xa8,0xffffffff);
-  count = FUN_0030a728(temp_v4,0x2a,temp_v1);
-  temp_v3 = 0;
-  temp_v2 = 0;
-  if (temp_v2 < count) {
-    do {
-      temp_v0 = FUN_003391d0(param_2,temp_v4[temp_v2]);
-      if (temp_v0 == 0) {
-        temp_v1 = FUN_00294090(temp_v4[temp_v2],1);
-        FUN_00339210(param_2,temp_v1);
-        *(unsigned int *)(param_2 + temp_v3 * 8 + 0x1fe8) = temp_v4[temp_v2];
-        FUN_00338318(param_2,(int)(short)temp_v4[temp_v2]);
-        temp_v3 = temp_v3 + 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < count);
-  }
-  *param_1 = 5;
-  param_1[2] = temp_v3;
-  FUN_00334838(param_1,param_2);
-  return;
+    int count;
+    u32 value;
+    int added;
+    int i;
+    u32 ids[43];
+    u32 seed;
+
+    FUN_00336da8(obj);
+    seed = obj->seed;
+    FUN_002c424c(ids, 0xa8, 0xffffffff);
+    count = FUN_0030a728(ids, 0x2a, seed);
+    added = 0;
+    i = 0;
+    if (i < count) {
+        do {
+            if (FUN_003391d0(obj, ids[i]) == 0) {
+                value = FUN_00294090(ids[i], 1);
+                FUN_00339210(obj, value);
+                obj->slots[added].id = ids[i];
+                FUN_00338318(obj, (s16)ids[i]);
+                added++;
+            }
+            i++;
+        } while (i < count);
+    }
+    result->kind = 5;
+    result->count = added;
+    FUN_00334838(result, obj);
 }
 
 } /* extern "C" */

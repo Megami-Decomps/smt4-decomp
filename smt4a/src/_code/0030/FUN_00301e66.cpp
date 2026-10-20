@@ -1,24 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ec728(int, unsigned int);
-int FUN_002ecb04(int);
-int FUN_002f7ac4(int, unsigned int);
+void FUN_002ec728(u8 *dest, u32 arg);
+void FUN_002ecb04(u8 *member);
+void FUN_002f7ac4(u8 *member, u32 arg);
 
-/* Supplied declaration required: FUN_002ec728. */
-/* Supplied declaration required: FUN_002ecb04. */
-/* Supplied declaration required: FUN_002f7ac4. */
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u8 member004[0x230];
+    /* 0x234 */ u8 member234[0xB0];
+    /* 0x2E4 */ u8 member2E4[1];
+} Holder;
 
-
-void FUN_00301e66(int param_1,unsigned int param_2)
-
+/* Runs FUN_002ecb04 on the member at 4, then FUN_002f7ac4 and FUN_002ec728 (with `arg`) on the members at 0x234 and 0x2E4. */
+void FUN_00301e66(Holder *object, u32 arg)
 {
-/* irregular: 3 native warning(s); review required */
-  FUN_002ecb04(param_1 + 4);
-  FUN_002f7ac4(param_1 + 0x234,param_2);
-  FUN_002ec728(param_1 + 0x2e4,param_2);
-  return;
+    FUN_002ecb04(object->member004);
+    FUN_002f7ac4(object->member234, arg);
+    FUN_002ec728(object->member2E4, arg);
 }
 
 } /* extern "C" */

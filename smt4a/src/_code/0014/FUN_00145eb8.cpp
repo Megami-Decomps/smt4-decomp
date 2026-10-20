@@ -1,14 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x524];
+    /* 0x524 */ u32 first;
+    /* 0x528 */ u32 second;
+} Holder;
 
-void FUN_00145eb8(int param_1)
-
+/* Clears the two words at 0x524 and 0x528. */
+void FUN_00145eb8(Holder *object)
 {
-  *(unsigned int *)(param_1 + 0x524) = 0;
-  *(unsigned int *)(param_1 + 0x528) = 0;
-  return;
+    object->first = 0;
+    object->second = 0;
 }
 
 } /* extern "C" */

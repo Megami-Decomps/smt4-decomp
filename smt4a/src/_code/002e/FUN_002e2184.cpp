@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003e5b1c(void);
+int linkHolderSetFlag(void);
 int FUN_0040ba84(unsigned int, unsigned int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern int FUN_003e5414(void);
-/* Supplied declaration required: FUN_003e5b1c. */
+extern int linkHolderCallFirst(void);
+/* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: FUN_0040ba84. */
 
 
@@ -29,7 +29,7 @@ void FUN_002e2184(unsigned int *param_1,unsigned int param_2)
   if (param_1[7] != 0) {
     param_1[6] = 0x3c449ba6;
     param_1[4] = 0x43af0000;
-    temp_v0 = FUN_003e5414();
+    temp_v0 = linkHolderCallFirst();
     if (temp_v0 == 0x23) {
       temp_v1 = 0x3f800000;
       temp_v2 = 0x40accccd;
@@ -46,7 +46,7 @@ void FUN_002e2184(unsigned int *param_1,unsigned int param_2)
     param_1[8] = param_2;
     FUN_0040ba84(param_1[7],param_2,7);
     if (param_1[7] != 0) {
-      FUN_003e5b1c();
+      linkHolderSetFlag();
       return;
     }
   }

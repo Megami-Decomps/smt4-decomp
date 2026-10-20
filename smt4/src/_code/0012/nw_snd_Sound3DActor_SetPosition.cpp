@@ -1,38 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00120ef4_arg0 fn_00120ef4_arg0;
-struct fn_00120ef4_arg0 {
-    unsigned char pad_0x0[0x68];
-    float field_0x68; /* +0x68 */
-    float field_0x6c; /* +0x6c */
-    float field_0x70; /* +0x70 */
-    float field_0x74; /* +0x74 */
-    float field_0x78; /* +0x78 */
-    float field_0x7c; /* +0x7c */
-    byte field_0x80; /* +0x80 */
-};
+typedef struct Sound3DActor {
+    /* 0x00 */ u8 unk00[0x68];
+    /* 0x68 */ f32 position[3];
+    /* 0x74 */ f32 velocity[3];
+    /* 0x80 */ u8 positionSet;
+} Sound3DActor;
 
-
-void nw_snd_Sound3DActor_SetPosition(fn_00120ef4_arg0 *param_1,float *param_2)
-
+/* Stores the new position and, unless it is the first one, the velocity (difference to the previous position). */
+void nw_snd_Sound3DActor_SetPosition(Sound3DActor *actor, f32 *position)
 {
-  float temp_v0;
-  float temp_v1;
-  
-  if (param_1->field_0x80 == 0) {
-    param_1->field_0x74 = *param_2 - param_1->field_0x68;
-    param_1->field_0x78 = param_2[1] - param_1->field_0x6c;
-    param_1->field_0x7c = param_2[2] - param_1->field_0x70;
-  }
-  temp_v0 = *param_2;
-  temp_v1 = param_2[1];
-  param_1->field_0x70 = param_2[2];
-  param_1->field_0x68 = temp_v0;
-  param_1->field_0x6c = temp_v1;
-  param_1->field_0x80 = 0;
-  return;
+    f32 x;
+    f32 y;
+
+    if (actor->positionSet == 0) {
+        actor->velocity[0] = position[0] - actor->position[0];
+        actor->velocity[1] = position[1] - actor->position[1];
+        actor->velocity[2] = position[2] - actor->position[2];
+    }
+    x = position[0];
+    y = position[1];
+    actor->position[2] = position[2];
+    actor->position[0] = x;
+    actor->position[1] = y;
+    actor->positionSet = 0;
 }
 
 } /* extern "C" */

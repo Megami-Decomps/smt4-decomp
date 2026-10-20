@@ -1,17 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00188b30(void);
+s32 FUN_00188b30(void);
 
-
-unsigned char FUN_0016f144(void)
-
+/* Returns whether FUN_00188b30 reports 4. */
+u8 FUN_0016f144(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00188b30();
-  return temp_v0 == 4;
+    return FUN_00188b30() == 4;
 }
 
 } /* extern "C" */

@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned char LAB_002b7784; /* 0x2b7784 */
 extern unsigned char LAB_002b77a0; /* 0x2b77a0 */
-extern int DAT_00580c8c; /* 0x580c8c */
+extern int g_eplSlots; /* 0x580c8c */
 extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00100388. */
@@ -38,11 +38,11 @@ void FUN_002b75b0(void)
   unsigned int temp_v3 [2];
   unsigned char temp_v4 [32];
   
-  if (DAT_00580c8c == 0) {
+  if (g_eplSlots == 0) {
     temp_v3[0] = 1;
     temp_v0 = 0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x64c);
-    DAT_00580c8c = temp_v0;
+    g_eplSlots = temp_v0;
     FUN_0014aa88();
     temp_v1 = 0;
     do {
@@ -78,9 +78,9 @@ void FUN_002b75b0(void)
   }
   if (g_gameState == 0x26) {
     FUN_00100388(temp_v4,&LAB_002b7784);
-    temp_v1 = DAT_00580c8c;
+    temp_v1 = g_eplSlots;
     puVar3 = temp_v4;
-    if (*(int *)(DAT_00580c8c + 0x68) == 0) {
+    if (*(int *)(g_eplSlots + 0x68) == 0) {
       FUN_001642e4(puVar3,temp_v3,1,0x80);
       *(unsigned char **)(temp_v1 + 100) = puVar3;
       FUN_001abbc4();
@@ -89,18 +89,18 @@ void FUN_002b75b0(void)
   }
   if ((g_gameState == 0x2b || g_gameState == 0x2c) || g_gameState == 0x2f) {
     FUN_00100388(temp_v4,&LAB_002b7784);
-    temp_v1 = DAT_00580c8c;
+    temp_v1 = g_eplSlots;
     puVar3 = temp_v4;
-    if (*(int *)(DAT_00580c8c + 0x68) == 0) {
+    if (*(int *)(g_eplSlots + 0x68) == 0) {
       FUN_001642e4(puVar3,temp_v3,1,0x80);
       *(unsigned char **)(temp_v1 + 100) = puVar3;
       FUN_001abbc4();
       *(unsigned char **)(temp_v1 + 0x68) = puVar3;
     }
   }
-  temp_v1 = DAT_00580c8c;
+  temp_v1 = g_eplSlots;
   puVar3 = &LAB_002b77a0;
-  if (*(int *)(DAT_00580c8c + 0x194) == 0) {
+  if (*(int *)(g_eplSlots + 0x194) == 0) {
     FUN_001642e4(&LAB_002b77a0,temp_v3,1,0x80);
     *(unsigned char **)(temp_v1 + 400) = puVar3;
     FUN_001abbc4();

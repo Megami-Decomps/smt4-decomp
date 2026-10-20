@@ -11,7 +11,7 @@ int FUN_001aeafc(void);
 int FUN_0020b6d4(...);
 int statusCameraDestroy(void);
 int FUN_003857b4(int);
-int FUN_003e5504(unsigned int, int *);
+int linkHolderRunAll(unsigned int, int *);
 int FUN_003e5c00(void);
 
 typedef int romwright_code(...);
@@ -35,7 +35,7 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: statusCameraDestroy. */
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
-/* Supplied declaration required: FUN_003e5504. */
+/* Supplied declaration required: linkHolderRunAll. */
 /* Supplied declaration required: FUN_003e5c00. */
 
 
@@ -62,7 +62,7 @@ void FUN_0022e774(void)
         temp_v4 = *(unsigned int *)(temp_v0 + 0x2038);
         temp_v5 = *(float *)(temp_v0 + 0x203c) + 1000.0f;
         uStack_20 = *(unsigned int *)(temp_v0 + 0x2040);
-        FUN_003e5504(*(unsigned int *)(temp_v0 + 0x2034),&temp_v4);
+        linkHolderRunAll(*(unsigned int *)(temp_v0 + 0x2034),&temp_v4);
         FUN_003857b4(1);
         if (*(int *)(temp_v0 + 0x2034) != 0) {
           statusCameraDestroy();

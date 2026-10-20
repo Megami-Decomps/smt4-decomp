@@ -22,10 +22,10 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_002e7232. */
-extern int FUN_002eb690(int *, int *);
+extern int wordRefsDiffer_002eb690(int *, int *);
 /* Supplied declaration required: FUN_002eb6b8. */
 /* Supplied declaration required: FUN_002f2de4. */
-extern int FUN_002f2dec(int *, int);
+extern int wordRefsDiffer_002f2dec(int *, int);
 /* Supplied declaration required: FUN_002f87e8. */
 /* Supplied declaration required: FUN_002f9cc8. */
 /* Supplied declaration required: FUN_002f9d6a. */
@@ -45,7 +45,7 @@ void FUN_0010e8c4(int param_1)
   temp_v2[0] = *(int *)(*(int *)(param_1 + 500) + 8);
   while( 1 ) {
     temp_v3 = *(int *)(*(int *)(param_1 + 500) + 0x10);
-    temp_v0 = FUN_002eb690(temp_v2,&temp_v3);
+    temp_v0 = wordRefsDiffer_002eb690(temp_v2,&temp_v3);
     if (temp_v0 == 0) break;
     if ((*(int *)(temp_v2[0] + 0xd8) != 0) &&
        (-1 >= (int)((unsigned int)*(unsigned char *)(*(int *)(temp_v2[0] + 0xd8) + 0x1c) << 0x1d))) {
@@ -58,7 +58,7 @@ void FUN_0010e8c4(int param_1)
     }
   }
   temp_v2[0] = *(int *)(param_1 + 0x1fc);
-  while (temp_v0 = FUN_002f2dec(temp_v2,param_1 + 0x204), temp_v0 != 0) {
+  while (temp_v0 = wordRefsDiffer_002f2dec(temp_v2,param_1 + 0x204), temp_v0 != 0) {
     if ((*(int *)(temp_v2[0] + 0xd8) != 0) &&
        (-1 >= (int)((unsigned int)*(unsigned char *)(*(int *)(temp_v2[0] + 0xd8) + 0x1c) << 0x1d))) {
       FUN_002e7232(temp_v2[0]);
@@ -73,7 +73,7 @@ void FUN_0010e8c4(int param_1)
   temp_v2[0] = *(int *)(param_1 + 0x1dc);
   while( 1 ) {
     temp_v3 = *(int *)(param_1 + 0x1e4);
-    temp_v0 = FUN_002eb690(temp_v2,&temp_v3);
+    temp_v0 = wordRefsDiffer_002eb690(temp_v2,&temp_v3);
     if (temp_v0 == 0) break;
     if ((*(int *)(temp_v2[0] + 0xd8) != 0) &&
        (-1 >= (int)((unsigned int)*(unsigned char *)(*(int *)(temp_v2[0] + 0xd8) + 0x1c) << 0x1d))) {

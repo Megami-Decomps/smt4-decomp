@@ -1,43 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00257568(unsigned int *, unsigned int *);
+int FUN_00257568(void *a, void *b);
+extern int FUN_0029a924(u32 id);
+extern int FUN_0029a9d4(u32 id, int flag);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Entry {
+    /* 0x0 */ u32 id;
+    /* 0x4 */ s32 key;
+} Entry;
 
-/* Supplied declaration required: FUN_00257568. */
-extern int FUN_0029a924(unsigned int);
-extern int FUN_0029a9d4(unsigned int, unsigned int);
-
-
-int FUN_001f5f20(unsigned int *param_1,unsigned int *param_2)
-
+/* Compares two entries by the value FUN_0029a924/FUN_0029a9d4 gives their id; falls back to FUN_00257568 on a tie. */
+int FUN_001f5f20(Entry *a, Entry *b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if ((int)param_1[1] < 0) {
-    temp_v0 = FUN_0029a9d4(*param_1,1);
-  }
-  else {
-    temp_v0 = FUN_0029a924(*param_1);
-  }
-  if ((int)param_2[1] < 0) {
-    temp_v1 = FUN_0029a9d4(*param_2,1);
-  }
-  else {
-    temp_v1 = FUN_0029a924(*param_2);
-  }
-  temp_v1 = temp_v1 - temp_v0;
-  if (temp_v1 == 0) {
-    return FUN_00257568(param_1,param_2);
-  }
-  return temp_v1;
+    int valueA;
+    int valueB;
+
+    if (a->key < 0) {
+        valueA = FUN_0029a9d4(a->id, 1);
+    } else {
+        valueA = FUN_0029a924(a->id);
+    }
+    if (b->key < 0) {
+        valueB = FUN_0029a9d4(b->id, 1);
+    } else {
+        valueB = FUN_0029a924(b->id);
+    }
+    valueB = valueB - valueA;
+    if (valueB == 0) {
+        return FUN_00257568(a, b);
+    }
+    return valueB;
 }
 
 } /* extern "C" */

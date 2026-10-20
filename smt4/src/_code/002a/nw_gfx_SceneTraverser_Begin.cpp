@@ -1,77 +1,79 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_002abb68_arg1 fn_002abb68_arg1;
-struct fn_002abb68_arg1 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x8];
-    undefined4 field_0x1c; /* +0x1c */
-    undefined4 field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x8];
-    undefined4 field_0x2c; /* +0x2c */
-    undefined4 field_0x30; /* +0x30 */
-    unsigned char pad_0x34[0x8];
-    undefined4 field_0x3c; /* +0x3c */
-    undefined4 field_0x40; /* +0x40 */
-    unsigned char pad_0x44[0x8];
-    undefined4 field_0x4c; /* +0x4c */
-    undefined4 field_0x50; /* +0x50 */
-    unsigned char pad_0x54[0x8];
-    undefined4 field_0x5c; /* +0x5c */
-    undefined4 field_0x60; /* +0x60 */
-    unsigned char pad_0x64[0x8];
-    undefined4 field_0x6c; /* +0x6c */
-    undefined4 field_0x70; /* +0x70 */
-    unsigned char pad_0x74[0x8];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-    unsigned char pad_0x84[0x8];
-    undefined4 field_0x8c; /* +0x8c */
-    undefined4 field_0x90; /* +0x90 */
-    unsigned char pad_0x94[0x8];
-    undefined4 field_0x9c; /* +0x9c */
-    undefined4 field_0xa0; /* +0xa0 */
-    unsigned char pad_0xa4[0x8];
-    undefined4 field_0xac; /* +0xac */
-    undefined4 field_0xb0; /* +0xb0 */
-    unsigned char pad_0xb4[0x8];
-    undefined4 field_0xbc; /* +0xbc */
-    undefined4 field_0xc0; /* +0xc0 */
-    unsigned char pad_0xc4[0x8];
-    undefined4 field_0xcc; /* +0xcc */
-    undefined4 field_0xd0; /* +0xd0 */
-    unsigned char pad_0xd4[0x8];
-    undefined4 field_0xdc; /* +0xdc */
-    undefined4 field_0xe0; /* +0xe0 */
-    unsigned char pad_0xe4[0x8];
-    undefined4 field_0xec; /* +0xec */
-    undefined4 field_0xf0; /* +0xf0 */
-};
+typedef struct Traverser {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u8 unk14[0x8];
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u32 unk20;
+    /* 0x24 */ u8 unk24[0x8];
+    /* 0x2C */ u32 unk2C;
+    /* 0x30 */ u32 unk30;
+    /* 0x34 */ u8 unk34[0x8];
+    /* 0x3C */ u32 unk3C;
+    /* 0x40 */ u32 unk40;
+    /* 0x44 */ u8 unk44[0x8];
+    /* 0x4C */ u32 unk4C;
+    /* 0x50 */ u32 unk50;
+    /* 0x54 */ u8 unk54[0x8];
+    /* 0x5C */ u32 unk5C;
+    /* 0x60 */ u32 unk60;
+    /* 0x64 */ u8 unk64[0x8];
+    /* 0x6C */ u32 unk6C;
+    /* 0x70 */ u32 unk70;
+    /* 0x74 */ u8 unk74[0x8];
+    /* 0x7C */ u32 unk7C;
+    /* 0x80 */ u32 unk80;
+    /* 0x84 */ u8 unk84[0x8];
+    /* 0x8C */ u32 unk8C;
+    /* 0x90 */ u32 unk90;
+    /* 0x94 */ u8 unk94[0x8];
+    /* 0x9C */ u32 unk9C;
+    /* 0xA0 */ u32 unkA0;
+    /* 0xA4 */ u8 unkA4[0x8];
+    /* 0xAC */ u32 unkAC;
+    /* 0xB0 */ u32 unkB0;
+    /* 0xB4 */ u8 unkB4[0x8];
+    /* 0xBC */ u32 unkBC;
+    /* 0xC0 */ u32 unkC0;
+    /* 0xC4 */ u8 unkC4[0x8];
+    /* 0xCC */ u32 unkCC;
+    /* 0xD0 */ u32 unkD0;
+    /* 0xD4 */ u8 unkD4[0x8];
+    /* 0xDC */ u32 unkDC;
+    /* 0xE0 */ u32 unkE0;
+    /* 0xE4 */ u8 unkE4[0x8];
+    /* 0xEC */ u32 unkEC;
+    /* 0xF0 */ u32 unkF0;
+} Traverser;
 
+typedef struct Context {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ Traverser *traverser;
+} Context;
 
-void nw_gfx_SceneTraverser_Begin(int param_1,fn_002abb68_arg1 *param_2)
-
+/* Starts a traversal: every saved slot (+0x10, +0x20, ...) is reset from its initial value. */
+void nw_gfx_SceneTraverser_Begin(Context *context, Traverser *traverser)
 {
-  *(fn_002abb68_arg1 **)(param_1 + 8) = param_2;
-  param_2->field_0x10 = param_2->field_0xc;
-  param_2->field_0x20 = param_2->field_0x1c;
-  param_2->field_0x30 = param_2->field_0x2c;
-  param_2->field_0x40 = param_2->field_0x3c;
-  param_2->field_0x70 = param_2->field_0x6c;
-  param_2->field_0x80 = param_2->field_0x7c;
-  param_2->field_0x90 = param_2->field_0x8c;
-  param_2->field_0xa0 = param_2->field_0x9c;
-  param_2->field_0xb0 = param_2->field_0xac;
-  param_2->field_0x50 = param_2->field_0x4c;
-  param_2->field_0x60 = param_2->field_0x5c;
-  param_2->field_0xc0 = param_2->field_0xbc;
-  param_2->field_0xd0 = param_2->field_0xcc;
-  param_2->field_0xe0 = param_2->field_0xdc;
-  param_2->field_0xf0 = param_2->field_0xec;
-  return;
+    context->traverser = traverser;
+    traverser->unk10 = traverser->unk0C;
+    traverser->unk20 = traverser->unk1C;
+    traverser->unk30 = traverser->unk2C;
+    traverser->unk40 = traverser->unk3C;
+    traverser->unk70 = traverser->unk6C;
+    traverser->unk80 = traverser->unk7C;
+    traverser->unk90 = traverser->unk8C;
+    traverser->unkA0 = traverser->unk9C;
+    traverser->unkB0 = traverser->unkAC;
+    traverser->unk50 = traverser->unk4C;
+    traverser->unk60 = traverser->unk5C;
+    traverser->unkC0 = traverser->unkBC;
+    traverser->unkD0 = traverser->unkCC;
+    traverser->unkE0 = traverser->unkDC;
+    traverser->unkF0 = traverser->unkEC;
 }
 
 } /* extern "C" */

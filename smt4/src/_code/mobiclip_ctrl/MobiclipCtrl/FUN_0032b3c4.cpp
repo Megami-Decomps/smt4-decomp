@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b90e6(int *);
+int refIsNullOrZero(int *);
 int FUN_002bb5a4(unsigned int *, unsigned char **, int);
 int FUN_002c52f8(void);
 int FUN_002c618c(unsigned char **, int, int, int *);
@@ -35,7 +35,7 @@ extern unsigned int DAT_004c40f0; /* 0x4c40f0 */
 extern unsigned int DAT_004c40f4; /* 0x4c40f4 */
 
 extern int FUN_002b90c8(int, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002b90e6. */
+/* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_002c618c. */
@@ -64,7 +64,7 @@ void FUN_0032b3c4(int param_1)
   puVar5 = &DAT_004c40e4;
   temp_v3 = 0;
   temp_v4 = 0;
-  FUN_002b90e6(&temp_v3);
+  refIsNullOrZero(&temp_v3);
   while ((temp_v0 = FUN_002b90c8(param_1,0x105,(unsigned int *)&temp_v3), temp_v0 != 0 &&
          (puVar2 = (unsigned short *)ppuVar4, FUN_002c618c(ppuVar4,param_1,temp_v0,&temp_v3),
          puVar2 != (unsigned short *)0x0))) {

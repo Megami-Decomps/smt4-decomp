@@ -9,9 +9,9 @@ int FUN_004954e8(void);
 int FUN_00496a0c(int, int);
 int FUN_0049706c(int);
 int FUN_00498994(int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
-int FUN_004d0458(void);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
+int sendEvent1000210(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,9 +24,9 @@ extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_00496a0c. */
 /* Supplied declaration required: FUN_0049706c. */
 /* Supplied declaration required: FUN_00498994. */
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
-/* Supplied declaration required: FUN_004d0458. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
+/* Supplied declaration required: sendEvent1000210. */
 extern int FUN_004d0464(void);
 extern int FUN_004d0494(void);
 extern int FUN_004d04f4(void);
@@ -45,7 +45,7 @@ void FUN_00498594(int param_1)
   if ((temp_v0 != 0) || (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v0 == 6)) {
     *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f78);
     FUN_00496a0c(param_1,1);
-    FUN_004d0458();
+    sendEvent1000210();
     return;
   }
   temp_v0 = FUN_004d0494();
@@ -53,7 +53,7 @@ void FUN_00498594(int param_1)
     temp_v0 = FUN_004d0554();
     if (temp_v0 != 0) {
       FUN_00184528(param_1 + 0x3cc,1);
-      FUN_004d0434();
+      sendEvent100020F();
       *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
       *(unsigned int *)(param_1 + 4) = 0x13;
       *(unsigned int *)(param_1 + 8) = 0;
@@ -61,7 +61,7 @@ void FUN_00498594(int param_1)
     else {
       temp_v0 = FUN_004d04f4();
       if (temp_v0 != 0) {
-        FUN_004d044c();
+        sendEvent100020E();
         FUN_0049706c(param_1);
         return;
       }
@@ -70,7 +70,7 @@ void FUN_00498594(int param_1)
   }
   *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f7c);
   FUN_00496a0c(param_1,1);
-  FUN_004d0458();
+  sendEvent1000210();
   return;
 }
 

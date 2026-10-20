@@ -7,7 +7,7 @@ extern "C" {
 int strAssign(unsigned char [32], unsigned int, unsigned int, unsigned int);
 int FUN_002e7614(unsigned char [12], int);
 int strInit(unsigned char [32]);
-int FUN_002ea658(unsigned char [12]);
+int initVtable00558630(unsigned char [12]);
 int strDestroy(...);
 int FUN_002f6be2(...);
 int FUN_002f6bf0(...);
@@ -36,7 +36,7 @@ typedef struct {
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7614. */
 /* Supplied declaration required: strInit. */
-/* Supplied declaration required: FUN_002ea658. */
+/* Supplied declaration required: initVtable00558630. */
 /* Supplied declaration required: strDestroy. */
 extern unsigned int FUN_002eea7c(unsigned int);
 extern int FUN_002f6bcc(void);
@@ -77,7 +77,7 @@ void FUN_0010cd2c(fn_0010cd2c_arg0 *param_1,unsigned int param_2)
     param_1->field_0x8 = (char)temp_v3;
     param_1->field_0xc = temp_v0;
     if (param_1->field_0xa4 != 0) {
-      FUN_002ea658(temp_v11);
+      initVtable00558630(temp_v11);
       strInit(temp_v9);
       FUN_002e7614(temp_v4,0x10);
       FUN_002f6be2(param_2,temp_v8);

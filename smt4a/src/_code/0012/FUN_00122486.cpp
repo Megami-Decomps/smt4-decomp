@@ -1,18 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003112dc(int);
+void listHolderBack(u8 *member);
 
-/* Supplied declaration required: FUN_003112dc. */
+typedef struct Inner {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ u8 member2C[1];
+} Inner;
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ Inner *inner;
+} Holder;
 
-void FUN_00122486(int param_1)
-
+/* Calls listHolderBack on the member at 0x2C of the inner object. */
+void FUN_00122486(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_003112dc(*(int *)(param_1 + 0x28) + 0x2c);
-  return;
+    listHolderBack(object->inner->member2C);
 }
 
 } /* extern "C" */

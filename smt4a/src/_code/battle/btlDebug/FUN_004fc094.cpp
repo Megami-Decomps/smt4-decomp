@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00409cd8(...);
+int countersRaiseA(...);
 
 int qsort(int [5], int, int, unsigned char *);
 int btlGetMainState(void);
@@ -64,7 +64,7 @@ extern int FUN_003eb1cc(void);
 extern int FUN_003ef9e0(unsigned int, int);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_00409cd8. */
+/* Supplied declaration required: countersRaiseA. */
 /* Supplied declaration required: FUN_004102d8. */
 extern int FUN_004c1480(int);
 extern short FUN_004c3a98(int, unsigned int);
@@ -523,7 +523,7 @@ LAB_004fca64:
       else {
         FUN_00408184(0x2d,1);
       }
-      FUN_00409cd8(0xe,param_6);
+      countersRaiseA(0xe,param_6);
     }
     else if ((*temp_v19 & (DAT_00573c08 | DAT_00573c10)) != 0 ||
              (temp_v19[1] & (DAT_00573c0c | DAT_00573c14)) != 0) {

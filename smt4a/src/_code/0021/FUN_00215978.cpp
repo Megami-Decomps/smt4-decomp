@@ -1,15 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct Table {
+    /* 0x00000 */ u8 unk00000[0x21610];
+    /* 0x21610 */ u8 flag;
+} Table;
 
+typedef struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Table *table;
+} GameDataBlocksView;
+extern GameDataBlocksView g_gameDataBlocks;
 
-void FUN_00215978(unsigned char param_1)
-
+/* Stores `value` in the byte at 0x21610 of the game-data table. */
+void FUN_00215978(u8 value)
 {
-  *(unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x21610) = param_1;
-  return;
+    g_gameDataBlocks.table->flag = value;
 }
 
 } /* extern "C" */

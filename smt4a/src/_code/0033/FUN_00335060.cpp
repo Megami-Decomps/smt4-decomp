@@ -23,7 +23,7 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 extern unsigned int FUN_001654d8(int);
 /* Supplied declaration required: FUN_001654e4. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -71,9 +71,9 @@ void FUN_00335060(int param_1)
   FUN_0037e8a4(param_1);
   temp_v3 = 1;
   temp_v9 = 0xffffffff;
-  temp_v4 = FUN_0015688c();
+  temp_v4 = saveSlotFindSelected();
   if (temp_v4 != 0) {
-    temp_v4 = FUN_0015688c();
+    temp_v4 = saveSlotFindSelected();
     temp_v9 = (unsigned int)*(unsigned short *)(temp_v4 + 300);
   }
   temp_v4 = 0;

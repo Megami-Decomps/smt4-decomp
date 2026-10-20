@@ -1,35 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(...);
+int asdMemFree(void *ptr);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Node {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ struct Node *next;
+} Node;
 
-/* Supplied declaration required: asdMemFree. */
+typedef struct Owner {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ void *buffer;
+    /* 0x8 */ Node *head;
+} Owner;
 
-
-void FUN_00247200(int param_1)
-
+/* Frees the owner's node list, its buffer and the owner. */
+void FUN_00247200(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  while (temp_v0 != 0) {
-    temp_v1 = *(int *)(temp_v0 + 0x40);
-    asdMemFree(temp_v0);
-    temp_v0 = temp_v1;
-  }
-  if (*(int *)(param_1 + 4) != 0) {
-    asdMemFree(*(int *)(param_1 + 4));
-  }
-  asdMemFree(param_1);
-  return;
+    Node *node = owner->head;
+    Node *next;
+
+    while (node != NULL) {
+        next = node->next;
+        asdMemFree(node);
+        node = next;
+    }
+    if (owner->buffer != NULL) {
+        asdMemFree(owner->buffer);
+    }
+    asdMemFree(owner);
 }
 
 } /* extern "C" */

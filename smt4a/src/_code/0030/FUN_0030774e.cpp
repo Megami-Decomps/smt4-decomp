@@ -1,4 +1,4 @@
-/* NON_MATCHING: loop shape only: retail enters the loop with `b.n` to the bottom test, built tests first (`cmp; beq`) */
+/* Matches with -Ospace (requested): the container code was built for size. */
 /* Copies the 8-byte elements in [first, last) one by one through FUN_002efb90 into the output run starting at `out`; returns the end of the output. */
 #include "common.h"
 

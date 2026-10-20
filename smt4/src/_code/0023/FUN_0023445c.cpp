@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u16 value;
+} Obj;
 
-unsigned short FUN_0023445c(int param_1)
-
+/* Low byte of the halfword at +0x48. */
+u16 FUN_0023445c(Obj *obj)
 {
-  return *(unsigned short *)(param_1 + 0x48) & 0xff;
+    return obj->value & 0xff;
 }
 
 } /* extern "C" */

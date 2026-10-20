@@ -16,15 +16,15 @@ int FUN_00203d04(int);
 int FUN_00275f44(...);
 int FUN_002bf4f4(...);
 int FUN_004072b0(unsigned int, unsigned char *, int);
-int FUN_00407360(unsigned int, int);
+int linkSlotSetFlag1C(unsigned int, int);
 int FUN_0040738c(unsigned int);
-int FUN_00407424(unsigned int, int);
+int linkSlotSetFlag20(unsigned int, int);
 int FUN_0040792c(unsigned int, int);
 int FUN_00407a80(unsigned int);
 int FUN_004080bc(...);
 int FUN_004b7d88(...);
-int FUN_004bad28(...);
-int FUN_004bb020(...);
+int menu4CReset(...);
+int menu4CStartBlock74(...);
 int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_004b8200; /* 0x4b8200 */
@@ -44,19 +44,19 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_002bf4f4. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004072b0. */
-/* Supplied declaration required: FUN_00407360. */
+/* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: FUN_0040738c. */
-/* Supplied declaration required: FUN_00407424. */
+/* Supplied declaration required: linkSlotSetFlag20. */
 /* Supplied declaration required: FUN_0040792c. */
 /* Supplied declaration required: FUN_00407a80. */
 /* Supplied declaration required: FUN_004080bc. */
 extern int FUN_004186e0(void);
 /* Supplied declaration required: FUN_004b726c. */
 /* Supplied declaration required: FUN_004b7d88. */
-extern int FUN_004ba660(int, int);
+extern int menu4CGetEntry(int, int);
 extern int FUN_004ba698(int);
-/* Supplied declaration required: FUN_004bad28. */
-/* Supplied declaration required: FUN_004bb020. */
+/* Supplied declaration required: menu4CReset. */
+/* Supplied declaration required: menu4CStartBlock74. */
 
 
 void FUN_004b7e20(int param_1)
@@ -93,8 +93,8 @@ void FUN_004b7e20(int param_1)
             if (DAT_0058800c != 0) {
               FUN_0019ea64(1);
               FUN_004b7d88(param_1);
-              FUN_004bb020(param_1 + 0x9c);
-              FUN_004bad28(param_1 + 0x9c);
+              menu4CStartBlock74(param_1 + 0x9c);
+              menu4CReset(param_1 + 0x9c);
               *(unsigned char *)(param_1 + 0xa88) = 0;
               temp_v2 = 0x28;
               DAT_0058800c = 0;
@@ -113,7 +113,7 @@ void FUN_004b7e20(int param_1)
               }
               else {
                 if (*(char *)(param_1 + 0x1214) != '\0') {
-                  temp_v2 = FUN_004ba660(param_1 + 0x9c,(int)*(short *)(param_1 + 0x4c));
+                  temp_v2 = menu4CGetEntry(param_1 + 0x9c,(int)*(short *)(param_1 + 0x4c));
                   if (!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) {
                     FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28),
                                  (int)*(char *)(temp_v2 + 0x2a));
@@ -122,7 +122,7 @@ void FUN_004b7e20(int param_1)
                     temp_v0 = *(char *)(temp_v2 + 0x2a);
                     if (!(temp_v0 == '\0' || temp_v0 == '\x06')) {
                       FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v2 + 0x28));
-                      FUN_00407424(*(unsigned int *)(param_1 + 0x1218),0);
+                      linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),0);
                       temp_v1 = *(unsigned int *)(param_1 + 0x1218);
                     }
                     else {
@@ -131,10 +131,10 @@ void FUN_004b7e20(int param_1)
                                    (int)*(char *)(temp_v2 + 0x2a));
                       FUN_004072b0(*(unsigned int *)(param_1 + 0x1218),&LAB_004b820c,0);
                       FUN_0040792c(*(unsigned int *)(param_1 + 0x1218),0);
-                      FUN_00407424(*(unsigned int *)(param_1 + 0x1218),1);
+                      linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),1);
                       temp_v1 = *(unsigned int *)(param_1 + 0x1218);
                     }
-                    FUN_00407360(temp_v1,temp_v0 != '\0' && temp_v0 != '\x06');
+                    linkSlotSetFlag1C(temp_v1,temp_v0 != '\0' && temp_v0 != '\x06');
                   }
                 }
                 *(unsigned int *)(param_1 + 0x38) = 0;
@@ -193,8 +193,8 @@ void FUN_004b7e20(int param_1)
       }
       *(unsigned int *)(param_1 + 0x2c) = 0x1f;
       FUN_004b7d88(param_1);
-      FUN_004bb020(param_1 + 0x9c);
-      FUN_004bad28(param_1 + 0x9c);
+      menu4CStartBlock74(param_1 + 0x9c);
+      menu4CReset(param_1 + 0x9c);
       *(unsigned char *)(param_1 + 0xa88) = 0;
       DAT_0058800c = 0;
       FUN_002bf4f4(1);

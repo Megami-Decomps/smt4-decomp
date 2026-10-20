@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014e188(int, int, int, int, int);
 int FUN_001846d0(int, int);
 int FUN_00184758(int, int, int);
-int FUN_00187010(unsigned int);
+int saveSlotFindById(unsigned int);
 int FUN_003d2150(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char DAT_0057f588; /* 0x57f588 */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00187010. */
+/* Supplied declaration required: saveSlotFindById. */
 extern int FUN_00187168(void);
 extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002deb84(void);
@@ -38,7 +38,7 @@ unsigned int FUN_003b5a5c(void)
   
   temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
   temp_v1 = scrGetArg(0);
-  FUN_00187010(temp_v1 & 0xffff);
+  saveSlotFindById(temp_v1 & 0xffff);
   temp_v2 = FUN_00187168();
   if (temp_v2 != 0) {
     temp_v3 = FUN_002deb84();

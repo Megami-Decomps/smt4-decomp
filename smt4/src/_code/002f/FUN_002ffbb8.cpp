@@ -1,67 +1,59 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002499fc(unsigned int, int *, int *);
-int scrSetResult(int);
-int btlGetMainState(void);
-int scrGetArg(int);
+int FUN_002499fc(u32 a, int *first, int *count);
+int scrSetResult(int result);
+extern u8 *btlGetMainState(void);
+int scrGetArg(int index);
+extern u8 *FUN_002499b4(void);
+extern u32 FUN_00249a54(void);
 
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct BtlUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x1EE];
+    /* 0x1F2 */ u16 slots[1];
+} BtlUnit;
 
-extern int FUN_002499b4(void);
-/* Supplied declaration required: FUN_002499fc. */
-extern unsigned int FUN_00249a54(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_002ffbb8(void)
-
+/* Script command: result 1 when a living, visible unit in the current group (or the extra unit) has state 4 in the status slot given by argument 0. */
+u32 FUN_002ffbb8(void)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar4;
-  unsigned int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  
-  temp_v0 = scrGetArg(0);
-  scrGetArg(1);
-  temp_v1 = FUN_00249a54();
-  FUN_002499fc(temp_v1,&temp_v5,&temp_v6);
-  temp_v4 = temp_v5;
-  if (temp_v5 < temp_v6 + temp_v5) {
-    do {
-      temp_v2 = btlGetMainState();
-      puVar4 = (unsigned int *)(*(int *)(temp_v2 + 0x1fc0) + temp_v4 * 0x288);
-      if (((((*puVar4 & 0x10) == 0) && ((*puVar4 & 1) != 0)) && ((*puVar4 & 0x40) == 0)) &&
-         (*(unsigned short *)((int)puVar4 + temp_v0 * 2 + 0x1f2) >> 10 == 4)) {
-        scrSetResult(1);
-        return 1;
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < temp_v5 + temp_v6);
-  }
-  temp_v4 = btlGetMainState() + 0x4900;
-  if (*(char *)(temp_v4 + 0xc5) != '\0') {
-    btlGetMainState();
-    temp_v4 = FUN_002499b4();
-    if ((temp_v4 != 0) && (*(unsigned short *)(temp_v4 + temp_v0 * 2 + 0x1f2) >> 10 == 4)) {
-      scrSetResult(1);
-      return 1;
+    int slot = scrGetArg(0);
+    int first;
+    int count;
+    int i;
+    u32 group;
+    BtlUnit *unit;
+    u8 *btl;
+    BtlUnit *extra;
+
+    scrGetArg(1);
+    group = FUN_00249a54();
+    FUN_002499fc(group, &first, &count);
+    i = first;
+    if (first < count + first) {
+        do {
+            btl = btlGetMainState();
+            unit = (BtlUnit *)(*(u8 **)(btl + 0x1fc0) + i * 0x288);
+            if (((((unit->flags & 0x10) == 0) && ((unit->flags & 1) != 0)) && ((unit->flags & 0x40) == 0)) &&
+                (unit->slots[slot] >> 10 == 4)) {
+                scrSetResult(1);
+                return 1;
+            }
+            i = i + 1;
+        } while (i < first + count);
     }
-  }
-  scrSetResult(0);
-  return 1;
+    btl = btlGetMainState() + 0x4900;
+    if (*(s8 *)(btl + 0xc5) != 0) {
+        btlGetMainState();
+        extra = (BtlUnit *)FUN_002499b4();
+        if ((extra != NULL) && (extra->slots[slot] >> 10 == 4)) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
 }
 
 } /* extern "C" */

@@ -8,7 +8,7 @@ int sysMemClear(int, int);
 int FUN_00474734(unsigned int *, int);
 int FUN_00476e58(unsigned int *, int, int);
 int FUN_00477d10(unsigned int *, int, int);
-int FUN_0047b1e4(unsigned int *);
+int jobFlagsWorkStop(unsigned int *);
 int FUN_0047bc90(unsigned int *, unsigned int *);
 int FUN_0047bcdc(unsigned int *, int);
 int FUN_0047daf4(unsigned int *);
@@ -29,10 +29,10 @@ extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: FUN_0047b1e4. */
+/* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: FUN_0047bcdc. */
-extern int FUN_0047dae0(unsigned int *);
+extern int isEmptyString(unsigned int *);
 /* Supplied declaration required: FUN_0047daf4. */
 
 
@@ -101,7 +101,7 @@ void FUN_004772b0(unsigned int *param_1)
         uStack_50 = uStack_3c;
         uStack_4c = uStack_38;
         uStack_48 = uStack_34;
-        temp_v1 = FUN_0047dae0(&temp_v2);
+        temp_v1 = isEmptyString(&temp_v2);
         if (temp_v1 != 0) {
           if ((int *)param_1[0x82] != (int *)0x0) {
             (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
@@ -117,7 +117,7 @@ void FUN_004772b0(unsigned int *param_1)
         if (temp_v1 == 0) {
           return;
         }
-        FUN_0047b1e4(param_1);
+        jobFlagsWorkStop(param_1);
         param_1[2] = 9999;
         param_1[0x84] = temp_v2;
         param_1[0x85] = uStack_54;
@@ -135,7 +135,7 @@ void FUN_004772b0(unsigned int *param_1)
       uStack_50 = uStack_3c;
       uStack_4c = uStack_38;
       uStack_48 = uStack_34;
-      temp_v1 = FUN_0047dae0(&temp_v2);
+      temp_v1 = isEmptyString(&temp_v2);
       if (temp_v1 != 0) {
         param_1[2] = 2;
         return;
@@ -144,7 +144,7 @@ void FUN_004772b0(unsigned int *param_1)
       if (temp_v1 == 0) {
         return;
       }
-      FUN_0047b1e4(param_1);
+      jobFlagsWorkStop(param_1);
     }
     else {
       if (temp_v0 == 5) {
@@ -190,7 +190,7 @@ void FUN_004772b0(unsigned int *param_1)
       uStack_50 = uStack_3c;
       uStack_4c = uStack_38;
       uStack_48 = uStack_34;
-      temp_v1 = FUN_0047dae0(&temp_v2);
+      temp_v1 = isEmptyString(&temp_v2);
       if (temp_v1 != 0) {
         param_1[1] = 10;
         param_1[2] = 0;
@@ -222,7 +222,7 @@ void FUN_004772b0(unsigned int *param_1)
       if (temp_v1 == 0) {
         return;
       }
-      FUN_0047b1e4(param_1);
+      jobFlagsWorkStop(param_1);
     }
   }
   else {
@@ -235,7 +235,7 @@ void FUN_004772b0(unsigned int *param_1)
     uStack_50 = uStack_3c;
     uStack_4c = uStack_38;
     uStack_48 = uStack_34;
-    temp_v1 = FUN_0047dae0(&temp_v2);
+    temp_v1 = isEmptyString(&temp_v2);
     if (temp_v1 != 0) {
       param_1[2] = 5;
       FUN_0047bcdc(param_1,1);
@@ -245,7 +245,7 @@ void FUN_004772b0(unsigned int *param_1)
     if (temp_v1 == 0) {
       return;
     }
-    FUN_0047b1e4(param_1);
+    jobFlagsWorkStop(param_1);
   }
   if ((temp_v2 & 0xff) == 0x66) {
     temp_v4 = temp_v2;

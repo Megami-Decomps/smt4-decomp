@@ -7,7 +7,7 @@ extern "C" {
 typedef int romwright_code(...);
 extern int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_002571e8(unsigned int param_1)
@@ -22,7 +22,7 @@ void FUN_002571e8(unsigned int param_1)
   switch(param_1) {
   case 0:
   case 1:
-    temp_v1 = FUN_002c5da8(6,7,0);
+    temp_v1 = packNibblesAndByte(6,7,0);
     piVar4 = (int *)(temp_v0 + 0x12ac);
     temp_v2 = piVar4[*piVar4 + 2];
     piVar4[*piVar4 + 2] = temp_v1;
@@ -31,7 +31,7 @@ void FUN_002571e8(unsigned int param_1)
     }
     break;
   case 2:
-    temp_v1 = FUN_002c5da8(6,1,0);
+    temp_v1 = packNibblesAndByte(6,1,0);
     piVar4 = (int *)(temp_v0 + 0x12ac);
     temp_v2 = piVar4[*piVar4 + 2];
     piVar4[*piVar4 + 2] = temp_v1;
@@ -41,7 +41,7 @@ void FUN_002571e8(unsigned int param_1)
     break;
   case 3:
   case 4:
-    temp_v1 = FUN_002c5da8(6,1,2);
+    temp_v1 = packNibblesAndByte(6,1,2);
     piVar4 = (int *)(temp_v0 + 0x12ac);
     temp_v2 = piVar4[*piVar4 + 2];
     piVar4[*piVar4 + 2] = temp_v1;
@@ -51,7 +51,7 @@ void FUN_002571e8(unsigned int param_1)
     break;
   case 5:
   case 6:
-    temp_v1 = FUN_002c5da8(5,0,1);
+    temp_v1 = packNibblesAndByte(5,0,1);
     piVar4 = (int *)(temp_v0 + 0x12ac);
     temp_v2 = piVar4[*piVar4 + 2];
     piVar4[*piVar4 + 2] = temp_v1;

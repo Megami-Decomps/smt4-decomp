@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_003eb068(unsigned int *param_1)
-
+void FUN_003eb068(u32 *obj)
 {
-  *param_1 = 0;
-  *(unsigned char *)(param_1 + 1) = 0;
-  return;
+    obj[0] = 0;
+    *(u8 *)(obj + 1) = 0;
 }
 
 } /* extern "C" */

@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_0035fb44(BtlUiObjCA *obj);
+void menu32InitBlock96C(BtlUiObjCA *obj);
 
 extern BtlUiGlobalsA DAT_0057a9b8;
 
 void FUN_004aa1d0(void)
 {
-    FUN_0035fb44(&DAT_0057a9b8.ui->objC);
+    menu32InitBlock96C(&DAT_0057a9b8.ui->objC);
 }
 
 } /* extern "C" */

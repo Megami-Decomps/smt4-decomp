@@ -12,14 +12,14 @@ int FUN_003e8704(...);
 int FUN_003e8794(...);
 int FUN_003eacb4(...);
 int FUN_003ef978(...);
-int FUN_003f01a4(...);
-int FUN_00409d8c(...);
+int btlSelectMode4D74(...);
+int countersAddSaturating(...);
 int FUN_0041a7dc(...);
 int FUN_0047f288(...);
 int FUN_004a9c24(...);
 int FUN_004bd354(...);
-int FUN_004bd400(...);
-int FUN_004d88cc(...);
+int bitsAt60Clear(...);
+int objectRefRelease(...);
 int FUN_004fb43c(...);
 
 typedef struct fn_004c9d04_arg0 fn_004c9d04_arg0;
@@ -76,15 +76,15 @@ extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_003e8794. */
 /* Supplied declaration required: FUN_003eacb4. */
 /* Supplied declaration required: FUN_003ef978. */
-/* Supplied declaration required: FUN_003f01a4. */
-/* Supplied declaration required: FUN_00409d8c. */
+/* Supplied declaration required: btlSelectMode4D74. */
+/* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_0041a7dc. */
 /* Supplied declaration required: FUN_0047f288. */
 /* Supplied declaration required: FUN_004a9c24. */
-extern int FUN_004bd340(unsigned int, unsigned int);
+extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004bd354. */
-/* Supplied declaration required: FUN_004bd400. */
-/* Supplied declaration required: FUN_004d88cc. */
+/* Supplied declaration required: bitsAt60Clear. */
+/* Supplied declaration required: objectRefRelease. */
 /* Supplied declaration required: FUN_004fb43c. */
 
 
@@ -144,7 +144,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
             *(short *)((int)puVar13 + 0x6e)) {
           temp_v10 = *(int *)(temp_v5 + 0x1ed4) + temp_v12 * 0x1d0;
           if (((*(unsigned int *)(temp_v10 + 0x50) & 0x200000) != 0) && (*(int *)(temp_v10 + 0x1bc) != 0)) {
-            FUN_004d88cc();
+            objectRefRelease();
             FUN_002e3328();
             *(unsigned int *)(temp_v10 + 0x1bc) = 0;
           }
@@ -212,11 +212,11 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
             temp_v6 = 5;
           }
         } while (puVar13[0xeb] != temp_v6);
-        FUN_00409d8c(1);
+        countersAddSaturating(1);
         temp_v6 = (unsigned int)*(unsigned short *)puVar13[0x101];
         FUN_00184310();
         if ((temp_v6 != 0) && (*(char *)(temp_v6 + 2) == '\'')) {
-          FUN_00409d8c(2,1);
+          countersAddSaturating(2,1);
         }
         puVar13[0x101] = 0;
         puVar13[0xec] = 0;
@@ -234,7 +234,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
         if (temp_v6 != 0 && temp_v8 != 0) {
           *(unsigned short *)(temp_v6 + 0x60) = 2;
           *(unsigned short *)(puVar13[0x100] + 0x2a) = 0;
-          FUN_003f01a4(temp_v5);
+          btlSelectMode4D74(temp_v5);
         }
         *(unsigned char *)(temp_v5 + 0x4cd0) = 0;
       }
@@ -303,18 +303,18 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
           }
         }
         else if (puVar13[0xff] != 0) {
-          temp_v12 = FUN_004bd340(puVar13[0xff],10);
+          temp_v12 = bitsAt60Test(puVar13[0xff],10);
           if (temp_v12 != 0) {
-            FUN_004bd400(puVar13[0xff],0x10);
-            FUN_004bd400(puVar13[0xff],0x20);
-            FUN_004bd400(puVar13[0xff],0x40);
-            FUN_004bd400(puVar13[0xff],0x80);
-            FUN_004bd400(puVar13[0xff],0x100);
-            FUN_004bd400(puVar13[0xff],0x200);
-            FUN_004bd400(puVar13[0xff],8);
-            FUN_004bd400(puVar13[0xff],0x800);
-            FUN_004bd400(puVar13[0xff],0x1000);
-            FUN_004bd400(puVar13[0xff],0x2000);
+            bitsAt60Clear(puVar13[0xff],0x10);
+            bitsAt60Clear(puVar13[0xff],0x20);
+            bitsAt60Clear(puVar13[0xff],0x40);
+            bitsAt60Clear(puVar13[0xff],0x80);
+            bitsAt60Clear(puVar13[0xff],0x100);
+            bitsAt60Clear(puVar13[0xff],0x200);
+            bitsAt60Clear(puVar13[0xff],8);
+            bitsAt60Clear(puVar13[0xff],0x800);
+            bitsAt60Clear(puVar13[0xff],0x1000);
+            bitsAt60Clear(puVar13[0xff],0x2000);
           }
           if (((unsigned short)puVar13[0x9d] & 0x400) != 0) {
             *(unsigned short *)(puVar13 + 0x9d) = (unsigned short)puVar13[0x9d] & 0xc407;

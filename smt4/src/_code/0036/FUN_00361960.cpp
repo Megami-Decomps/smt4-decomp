@@ -1,18 +1,12 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nn_applet_CTR_detail_IsRegistered(int);
-
-/* Supplied declaration required: nn_applet_CTR_detail_IsRegistered. */
-
+int nn_applet_CTR_detail_IsRegistered(int id);
 
 void FUN_00361960(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  nn_applet_CTR_detail_IsRegistered(0x406);
-  return;
+    nn_applet_CTR_detail_IsRegistered(0x406);
 }
 
 } /* extern "C" */

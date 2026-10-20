@@ -1,20 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nn_snd_CTR_MasterManager_GetAuxCallback(unsigned char *, unsigned int, unsigned int, unsigned int);
+void nn_snd_CTR_MasterManager_GetAuxCallback(u8 *manager, u32 a, u32 b, u32 c);
+extern u8 DAT_00643380[];
 
-extern unsigned char DAT_00643380; /* 0x643380 */
-
-/* Supplied declaration required: nn_snd_CTR_MasterManager_GetAuxCallback. */
-
-
-void FUN_00189e18(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Forwards its three arguments to GetAuxCallback on the master manager at 0x643380. */
+void FUN_00189e18(u32 a, u32 b, u32 c)
 {
-/* irregular: 1 native warning(s); review required */
-  nn_snd_CTR_MasterManager_GetAuxCallback(&DAT_00643380,param_1,param_2,param_3);
-  return;
+    nn_snd_CTR_MasterManager_GetAuxCallback(DAT_00643380, a, b, c);
 }
 
 } /* extern "C" */

@@ -21,7 +21,7 @@ extern int FUN_001d07e0(unsigned char);
 /* Supplied declaration required: FUN_005084a8. */
 /* Supplied declaration required: FUN_005084bc. */
 /* Supplied declaration required: FUN_005084d4. */
-extern int FUN_00508dc8(int *, unsigned char *);
+extern int isValidFileHeader(int *, unsigned char *);
 extern int FUN_00508e00(int *, unsigned char *);
 extern int nw_snd_internal_StreamSoundFile_InfoBlockBody_GetStreamSoundInfo(int);
 
@@ -41,7 +41,7 @@ unsigned int FUN_00461508(unsigned int *param_1,int *param_2,unsigned int param_
   temp_v0 = (**(romwright_code **)(*(int *)*param_1 + 0x24))((int *)*param_1,temp_v3,0x60);
   if (temp_v0 == 0x60) {
     puVar2 = temp_v3;
-    temp_v0 = FUN_00508dc8(param_2,puVar2);
+    temp_v0 = isValidFileHeader(param_2,puVar2);
     if (temp_v0 != 0) {
       puVar4 = puVar2;
       FUN_005084a8();

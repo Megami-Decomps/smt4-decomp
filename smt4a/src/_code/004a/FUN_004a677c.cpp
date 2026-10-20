@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_004a4a8c(int);
+int menu4BUpdate(int);
 int FUN_004a580c(void);
 int FUN_004a5d5c(int);
 int FUN_004a6c50(int, int);
-int FUN_004a6ce4(int);
+int words4At20Clear(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,11 +16,11 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_002a482c(int);
-/* Supplied declaration required: FUN_004a4a8c. */
+/* Supplied declaration required: menu4BUpdate. */
 /* Supplied declaration required: FUN_004a580c. */
 /* Supplied declaration required: FUN_004a5d5c. */
 /* Supplied declaration required: FUN_004a6c50. */
-/* Supplied declaration required: FUN_004a6ce4. */
+/* Supplied declaration required: words4At20Clear. */
 extern int FUN_004d0040(int);
 
 
@@ -40,10 +40,10 @@ void FUN_004a677c(int param_1)
     FUN_004a580c();
   }
   else {
-    FUN_004a4a8c(param_1);
+    menu4BUpdate(param_1);
   }
   FUN_004a5d5c(param_1);
-  FUN_004a6ce4(param_1 + 0x96);
+  words4At20Clear(param_1 + 0x96);
   temp_v1 = FUN_004d0040(param_1 + 0x20);
   if (0 < temp_v1) {
     unaff_r7 = param_1 + 0x800;

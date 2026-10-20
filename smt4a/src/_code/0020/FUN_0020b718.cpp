@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_003343f0(void);
 int FUN_003344b4(int);
-int FUN_003f3fcc(unsigned int, int);
-int FUN_003f525c(unsigned int, int);
+int obj48Arm(unsigned int, int);
+int pair40Set(unsigned int, int);
 
 extern int DAT_0057f268; /* 0x57f268 */
 
@@ -15,8 +15,8 @@ extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_003344b4. */
 extern int FUN_0038b568(void);
-/* Supplied declaration required: FUN_003f3fcc. */
-/* Supplied declaration required: FUN_003f525c. */
+/* Supplied declaration required: obj48Arm. */
+/* Supplied declaration required: pair40Set. */
 
 
 void FUN_0020b718(int param_1,int param_2)
@@ -49,7 +49,7 @@ void FUN_0020b718(int param_1,int param_2)
     temp_v1 = 0;
     do {
       temp_v2 = temp_v0 + temp_v1 * 4;
-      FUN_003f525c(*(unsigned int *)(temp_v2 + 0xa10),0);
+      pair40Set(*(unsigned int *)(temp_v2 + 0xa10),0);
       *(unsigned char *)(*(int *)(temp_v2 + 0xa10) + 0x25) = 0;
       *(unsigned char *)(*(int *)(temp_v2 + 0xa10) + 0x27) = 0;
       temp_v1 = temp_v1 + 1;
@@ -57,7 +57,7 @@ void FUN_0020b718(int param_1,int param_2)
     temp_v1 = 0;
     do {
       temp_v2 = temp_v0 + temp_v1 * 4;
-      FUN_003f525c(*(unsigned int *)(temp_v2 + 0xa20),0);
+      pair40Set(*(unsigned int *)(temp_v2 + 0xa20),0);
       *(unsigned char *)(*(int *)(temp_v2 + 0xa20) + 0x25) = 0;
       *(unsigned char *)(*(int *)(temp_v2 + 0xa20) + 0x27) = 0;
       temp_v1 = temp_v1 + 1;
@@ -68,7 +68,7 @@ void FUN_0020b718(int param_1,int param_2)
     temp_v1 = 0;
     do {
       temp_v2 = temp_v0 + temp_v1 * 4;
-      FUN_003f525c(*(unsigned int *)(temp_v2 + 0xa10),0);
+      pair40Set(*(unsigned int *)(temp_v2 + 0xa10),0);
       *(unsigned char *)(*(int *)(temp_v2 + 0xa10) + 0x25) = 0;
       *(unsigned char *)(*(int *)(temp_v2 + 0xa10) + 0x27) = 0;
       temp_v1 = temp_v1 + 1;
@@ -76,26 +76,26 @@ void FUN_0020b718(int param_1,int param_2)
     temp_v1 = 0;
     do {
       temp_v2 = temp_v0 + temp_v1 * 4;
-      FUN_003f525c(*(unsigned int *)(temp_v2 + 0xa20),0);
+      pair40Set(*(unsigned int *)(temp_v2 + 0xa20),0);
       *(unsigned char *)(*(int *)(temp_v2 + 0xa20) + 0x25) = 0;
       *(unsigned char *)(*(int *)(temp_v2 + 0xa20) + 0x27) = 0;
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 0x18);
     FUN_003344b4(0);
     if (*(char *)(temp_v0 + 0x9c0) != '\0') {
-      FUN_003f3fcc(*(unsigned int *)(temp_v0 + 0xa10),0xff);
+      obj48Arm(*(unsigned int *)(temp_v0 + 0xa10),0xff);
     }
     temp_v1 = 0;
     do {
       if (*(char *)(temp_v0 + temp_v1 + 0x9c1) != '\0') {
-        FUN_003f3fcc(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa14),0xff);
+        obj48Arm(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa14),0xff);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 3);
     temp_v1 = 0;
     do {
       if (*(short *)(temp_v0 + temp_v1 * 8 + 0xa84) != 0) {
-        FUN_003f3fcc(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa20),0xff);
+        obj48Arm(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa20),0xff);
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 0x18);

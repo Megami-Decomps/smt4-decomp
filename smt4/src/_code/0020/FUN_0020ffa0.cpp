@@ -1,25 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_gfx_SceneNode_AttachChild(unsigned int, unsigned int);
+int nw_gfx_SceneNode_AttachChild(u32 parent, u32 child);
+extern int DAT_004dad80;
+extern u32 FUN_00252394(u32 index);
 
-extern int DAT_004dad80; /* 0x4dad80 */
-
-extern unsigned int FUN_00252394(unsigned int);
-/* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
-
-
-void FUN_0020ffa0(int *param_1,int param_2)
-
+void FUN_0020ffa0(u32 **nodes, int index)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_00252394(1);
-  nw_gfx_SceneNode_AttachChild(temp_v0,*(unsigned int *)(*param_1 + param_2 * 4));
-  DAT_004dad80 = DAT_004dad80 + 1;
-  return;
+    u32 parent = FUN_00252394(1);
+
+    nw_gfx_SceneNode_AttachChild(parent, (*nodes)[index]);
+    DAT_004dad80 = DAT_004dad80 + 1;
 }
 
 } /* extern "C" */

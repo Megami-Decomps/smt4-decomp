@@ -9,7 +9,7 @@ int FUN_00280030(void);
 extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_00280030. */
-extern int FUN_00381198(int);
+extern int menu32ModeIsNot5(int);
 
 
 void FUN_004abac8(void)
@@ -18,7 +18,7 @@ void FUN_004abac8(void)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00381198((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
+  temp_v0 = menu32ModeIsNot5((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
   if (temp_v0 != 0) {
     FUN_00280030();
   }

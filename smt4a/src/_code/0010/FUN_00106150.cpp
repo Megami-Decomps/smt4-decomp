@@ -14,7 +14,7 @@ extern unsigned char DAT_00558914; /* 0x558914 */
 extern unsigned char DAT_0055ab2c; /* 0x55ab2c */
 
 /* Supplied declaration required: FUN_001060e6. */
-extern unsigned int FUN_001106d0(void);
+extern unsigned int destroyObj005593a0(void);
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_002e760a(unsigned int);
 extern unsigned int *FUN_002e9f80(void);
@@ -52,7 +52,7 @@ int FUN_00106150(void)
   temp_v1 = FUN_002e760a(0x3c);
   temp_v2 = 0;
   if (temp_v1 != 0) {
-    temp_v2 = FUN_001106d0();
+    temp_v2 = destroyObj005593a0();
   }
   *(unsigned int *)(temp_v0 - 0x1c) = temp_v2;
   temp_v1 = FUN_002e760a(0x9c);

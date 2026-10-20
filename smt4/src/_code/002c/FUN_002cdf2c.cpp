@@ -39,7 +39,7 @@ extern int FUN_00295d08(unsigned int);
 extern int FUN_00298f88(unsigned short);
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_0029c3b0. */
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_002a03a0. */
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
@@ -148,9 +148,9 @@ void FUN_002cdf2c(int param_1)
       do {
         if (-1 < *(char *)(temp_v3 + temp_v4 + 0x90f0)) {
           temp_v14 = FUN_002a8740();
-          temp_v8 = FUN_0029ebac(temp_v14,1);
-          if (((temp_v8 == 0) && (temp_v8 = FUN_0029ebac(temp_v14,10), temp_v8 == 0)) &&
-             (temp_v8 = FUN_0029ebac(temp_v14,2), temp_v8 == 0)) {
+          temp_v8 = flagWordTestBit(temp_v14,1);
+          if (((temp_v8 == 0) && (temp_v8 = flagWordTestBit(temp_v14,10), temp_v8 == 0)) &&
+             (temp_v8 = flagWordTestBit(temp_v14,2), temp_v8 == 0)) {
             temp_v1 = 0;
             temp_v0 = *(char *)(temp_v3 + temp_v4 + 0x90f0);
             if (((*(char *)(temp_v3 + 0x9108) == temp_v0) || (*(char *)(temp_v3 + 0x9109) == temp_v0)) ||

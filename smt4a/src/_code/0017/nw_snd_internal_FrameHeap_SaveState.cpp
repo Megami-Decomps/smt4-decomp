@@ -1,35 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_ut_FrameHeap_FreeByState(unsigned int, int);
+s32 nw_ut_FrameHeap_FreeByState(u32 heap, s32 state);
+s32 nw_snd_internal_FrameHeap_NewSection(u32 *frameHeap);
+s32 nw_ut_FrameHeap_RecordState(u32 heap, u32 label);
 
-extern int nw_snd_internal_FrameHeap_NewSection(unsigned int *);
-/* Supplied declaration required: nw_ut_FrameHeap_FreeByState. */
-extern int nw_ut_FrameHeap_RecordState(unsigned int, unsigned int);
-
-
-int nw_snd_internal_FrameHeap_SaveState(unsigned int *param_1)
-
+/* Records a state on the heap and opens a new section; returns the state's index (count - 1), or -1 if either step failed (undoing the recorded state if only the section failed). */
+s32 nw_snd_internal_FrameHeap_SaveState(u32 *frameHeap)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = nw_ut_FrameHeap_RecordState(*param_1,param_1[1]);
-  if (temp_v0 == 0) {
-    temp_v0 = -1;
-  }
-  else {
-    temp_v0 = nw_snd_internal_FrameHeap_NewSection(param_1);
-    if (temp_v0 != 0) {
-      temp_v0 = param_1[1] - 1;
+    s32 result;
+
+    result = nw_ut_FrameHeap_RecordState(frameHeap[0], frameHeap[1]);
+    if (result == 0) {
+        result = -1;
+    } else {
+        result = nw_snd_internal_FrameHeap_NewSection(frameHeap);
+        if (result != 0) {
+            result = frameHeap[1] - 1;
+        } else {
+            nw_ut_FrameHeap_FreeByState(frameHeap[0], 0);
+            result = -1;
+        }
     }
-    else {
-      nw_ut_FrameHeap_FreeByState(*param_1,0);
-      temp_v0 = -1;
-    }
-  }
-  return temp_v0;
+    return result;
 }
 
 } /* extern "C" */

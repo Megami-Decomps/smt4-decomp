@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Pair {
+    /* 0x00 */ u32 word;
+    /* 0x04 */ u16 half;
+} Pair;
 
-void FUN_001a90e0(unsigned int *param_1)
-
+/* Clears the word and the halfword. */
+void FUN_001a90e0(Pair *object)
 {
-  *param_1 = 0;
-  *(unsigned short *)(param_1 + 1) = 0;
-  return;
+    object->word = 0;
+    object->half = 0;
 }
 
 } /* extern "C" */

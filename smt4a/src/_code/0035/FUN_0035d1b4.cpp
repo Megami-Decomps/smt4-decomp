@@ -1,28 +1,19 @@
-#include "romwright_types.h"
+#include "shard/Shard0035.h"
 
 extern "C" {
 
-int FUN_0019f1a4(int, unsigned int);
-int scrGetArg(...);
-int scrSetResult(void);
+extern u32 scrGetArg(s32 index);
+extern u32 FUN_0019f1a4(u32 a, u32 b);
+extern void scrSetResult(u32 value);
 
-/* Supplied declaration required: FUN_0019f1a4. */
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0035d1b4(void)
-
+/* Script command: result is FUN_0019f1a4 of arguments 0 and 1. */
+u32 FUN_0035d1b4(s32 argIndex)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = scrGetArg(1);
-  FUN_0019f1a4(temp_v0,temp_v1);
-  scrSetResult();
-  return 1;
+    u16 a = scrGetArg(argIndex);
+    u32 b = scrGetArg(1);
+
+    scrSetResult(FUN_0019f1a4(a, b));
+    return 1;
 }
 
 } /* extern "C" */

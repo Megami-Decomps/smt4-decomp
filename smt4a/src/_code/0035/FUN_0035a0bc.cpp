@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_003e5478(unsigned int, unsigned int);
-int FUN_003e5504(unsigned int, int *);
+int linkHolderRunAll(unsigned int, int *);
 
 /* Supplied declaration required: FUN_003e5478. */
-/* Supplied declaration required: FUN_003e5504. */
+/* Supplied declaration required: linkHolderRunAll. */
 
 
 void FUN_0035a0bc(unsigned int *param_1,unsigned int param_2)
@@ -78,7 +78,7 @@ void FUN_0035a0bc(unsigned int *param_1,unsigned int param_2)
     uStack_18 = *param_1;
     uStack_14 = param_1[1];
     uStack_10 = param_1[2];
-    FUN_003e5504(param_1[7],&uStack_18);
+    linkHolderRunAll(param_1[7],&uStack_18);
     return;
   default:
     temp_v1 = 0;
@@ -87,7 +87,7 @@ void FUN_0035a0bc(unsigned int *param_1,unsigned int param_2)
     uStack_18 = *param_1;
     uStack_14 = param_1[1];
     uStack_10 = param_1[2];
-    FUN_003e5504(param_1[7],&uStack_18);
+    linkHolderRunAll(param_1[7],&uStack_18);
     return;
   }
   param_1[0xc] = temp_v0;
@@ -95,7 +95,7 @@ void FUN_0035a0bc(unsigned int *param_1,unsigned int param_2)
   uStack_18 = *param_1;
   uStack_14 = param_1[1];
   uStack_10 = param_1[2];
-  FUN_003e5504(param_1[7],&uStack_18);
+  linkHolderRunAll(param_1[7],&uStack_18);
   return;
 }
 

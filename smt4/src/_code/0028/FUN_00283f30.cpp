@@ -1,32 +1,38 @@
-#include "romwright_types.h"
+#include "shard/PadState.h"
 
 extern "C" {
 
-unsigned int FUN_002b45e8(unsigned int);
+unsigned int FUN_002b45e8(u32 id);
+extern PadState *FUN_002b63ac(void);
 
-/* Supplied declaration required: FUN_002b45e8. */
-extern int FUN_002b63ac(void);
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x6A];
+    /* 0x6A */ u16 unk6A;
+} Source;
 
+typedef struct Dest {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u16 unk10;
+} Dest;
 
-void FUN_00283f30(unsigned int *param_1,int param_2)
-
+void FUN_00283f30(Dest *dest, int withSource)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002b63ac();
-  *param_1 = *(unsigned int *)(temp_v0 + 0x34);
-  param_1[1] = *(unsigned int *)(temp_v0 + 0x38);
-  param_1[2] = *(unsigned int *)(temp_v0 + 0x3c);
-  param_1[3] = *(unsigned int *)(temp_v0 + 0x40);
-  if (param_2 != 0) {
-    temp_v1 = FUN_002b45e8(*(unsigned short *)(temp_v0 + 0xc));
-    if (temp_v1 != 0) {
-      *(unsigned short *)(param_1 + 4) = *(unsigned short *)(temp_v1 + 0x6a);
+    PadState *pad = FUN_002b63ac();
+    Source *source;
+
+    dest->unk00 = pad->unk34;
+    dest->unk04 = pad->unk38;
+    dest->unk08 = pad->unk3C;
+    dest->unk0C = pad->unk40;
+    if (withSource != 0) {
+        source = (Source *)FUN_002b45e8(pad->unk0C);
+        if (source != NULL) {
+            dest->unk10 = source->unk6A;
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

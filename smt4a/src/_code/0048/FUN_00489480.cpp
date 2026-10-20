@@ -13,10 +13,10 @@ int FUN_002d22c0(int);
 int FUN_00357a48(void);
 int FUN_00398450(void);
 int FUN_003d2150(int);
-int FUN_0049277c(int, int, int *, int *);
-int FUN_00492b84(int);
+int rectRecRead(int, int, int *, int *);
+int sub68OwnerGetBlock60(int);
 int FUN_00492c18(int, unsigned int **);
-int FUN_004d03ec(void);
+int setFullScreenRect(void);
 int FUN_004d0420(int, int, int, int);
 int NaviMain_GetCurrentMap(...);
 
@@ -47,14 +47,14 @@ extern int FUN_0018719c(unsigned int);
 extern int lmapSceneGetUnk0(void);
 extern int FUN_0033ded8(void);
 /* Supplied declaration required: FUN_00357a48. */
-extern int FUN_003847e8(void);
+extern int gameFlagsClassify(void);
 /* Supplied declaration required: FUN_00398450. */
 /* Supplied declaration required: FUN_003d2150. */
-/* Supplied declaration required: FUN_0049277c. */
-/* Supplied declaration required: FUN_00492b84. */
+/* Supplied declaration required: rectRecRead. */
+/* Supplied declaration required: sub68OwnerGetBlock60. */
 extern int FUN_00492bc0(int);
 /* Supplied declaration required: FUN_00492c18. */
-/* Supplied declaration required: FUN_004d03ec. */
+/* Supplied declaration required: setFullScreenRect. */
 /* Supplied declaration required: FUN_004d0420. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 
@@ -79,7 +79,7 @@ unsigned int FUN_00489480(int param_1)
   temp_v8 = FUN_00162e8c();
   temp_v0 = *(unsigned int *)(param_1 + 0x10);
   temp_v3 = 0;
-  if (((temp_v0 & 0x2000000) != 0) && ((FUN_004d03ec(), temp_v0 == 0 || (DAT_005f1614 != '\0')))) {
+  if (((temp_v0 & 0x2000000) != 0) && ((setFullScreenRect(), temp_v0 == 0 || (DAT_005f1614 != '\0')))) {
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfdffffff;
   }
   temp_v1 = FUN_0018719c(0x49a);
@@ -92,13 +92,13 @@ unsigned int FUN_00489480(int param_1)
   }
   temp_v7 = param_1 + 0x4cc;
   NaviMain_GetCurrentMap();
-  temp_v1 = FUN_003847e8();
+  temp_v1 = gameFlagsClassify();
   if (temp_v1 == 2 || temp_v1 == 3) {
     return 0;
   }
   temp_v5 = (unsigned int *)&uStack_34;
   temp_v4 = (unsigned int *)&uStack_38;
-  FUN_0049277c(0x13,0x112d,&temp_v6,&uStack_3c);
+  rectRecRead(0x13,0x112d,&temp_v6,&uStack_3c);
   if (DAT_005f1614 != '\0') {
     return 0;
   }
@@ -124,7 +124,7 @@ unsigned int FUN_00489480(int param_1)
       *(unsigned char *)(param_1 + 0x5c) = 5;
       *(unsigned int *)(param_1 + 8) = 0;
       *(unsigned int *)(param_1 + 4) = 0xd;
-      FUN_00492b84(temp_v7);
+      sub68OwnerGetBlock60(temp_v7);
       temp_v4 = (unsigned int *)0x0;
       temp_v5 = (unsigned int *)0x0;
       FUN_00492c18(temp_v7,&temp_v4);

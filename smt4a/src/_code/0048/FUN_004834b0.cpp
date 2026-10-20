@@ -27,7 +27,7 @@ static float romwright_sqrt_4(float value)
 extern int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
 /* Supplied declaration required: FUN_00356308. */
-extern int FUN_00379734(unsigned short);
+extern int dataTable29GetEntry(unsigned short);
 /* Supplied declaration required: FUN_00483304. */
 
 
@@ -90,7 +90,7 @@ LAB_00483524:
           if ((((*(short *)(temp_v5 + 10) != 1) ||
                ((temp_v2 = FUN_0018719c(0x137), temp_v2 != 0 &&
                 (temp_v2 = FUN_0018719c(0x147), temp_v2 == 0)))) &&
-              (temp_v2 = FUN_00379734(*(unsigned short *)(temp_v5 + 8)), *(char *)(temp_v2 + 10) == '\x03'))
+              (temp_v2 = dataTable29GetEntry(*(unsigned short *)(temp_v5 + 8)), *(char *)(temp_v2 + 10) == '\x03'))
              && (temp_v2 = FUN_0018719c((int)*(short *)(temp_v2 + 0xc)), temp_v2 == 0)) {
             FUN_00483304(param_1,temp_v12[temp_v0]);
           }
@@ -113,7 +113,7 @@ LAB_00483524:
       FUN_00356308();
       if (((*(short *)(temp_v1 + 10) != 1) ||
           ((temp_v2 = FUN_0018719c(0x137), temp_v2 != 0 && (temp_v2 = FUN_0018719c(0x147), temp_v2 == 0))))
-         && ((temp_v2 = FUN_00379734(*(unsigned short *)(temp_v1 + 8)), *(char *)(temp_v2 + 10) != '\x03' ||
+         && ((temp_v2 = dataTable29GetEntry(*(unsigned short *)(temp_v1 + 8)), *(char *)(temp_v2 + 10) != '\x03' ||
              (temp_v2 = FUN_0018719c((int)*(short *)(temp_v2 + 0xc)), temp_v2 == 0)))) {
         temp_v7 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 2),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v8 = (float)VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3)

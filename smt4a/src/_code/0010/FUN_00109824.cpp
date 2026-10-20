@@ -11,7 +11,7 @@ int strAssign(...);
 int FUN_002e7658(...);
 int FUN_002eb17c(...);
 int FUN_002ed258(...);
-int FUN_002ed294(...);
+int ringSetLimit(...);
 
 typedef struct fn_00109824_arg3 fn_00109824_arg3;
 struct fn_00109824_arg3 {
@@ -56,7 +56,7 @@ extern int FUN_002e760a(unsigned int);
 extern int FUN_002eb5f4(void);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ed258. */
-/* Supplied declaration required: FUN_002ed294. */
+/* Supplied declaration required: ringSetLimit. */
 extern int FUN_002eff84(void);
 extern int *FUN_002f2a44(void);
 extern int FUN_002f2a70(int *);
@@ -132,7 +132,7 @@ LAB_00109882:
     temp_v0 = (**(romwright_code **)(**(int **)(temp_v5 + 0x11c) + 0x18))
                       (*(int **)(temp_v5 + 0x11c),temp_v4,piVar2,&temp_v2);
     if (temp_v0 != 0) {
-      FUN_002ed294(param_4,param_4->field_0x18 + temp_v2);
+      ringSetLimit(param_4,param_4->field_0x18 + temp_v2);
     }
     else {
       FUN_002e7232(piVar2);

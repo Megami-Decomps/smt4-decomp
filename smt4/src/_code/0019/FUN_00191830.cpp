@@ -69,7 +69,7 @@ extern float DAT_004efd98; /* 0x4efd98 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002929d8. */
 /* Supplied declaration required: FUN_002ba1e0. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -114,7 +114,7 @@ void FUN_00191830(int param_1,unsigned long long *param_2,float *param_3,unsigne
   if (param_1 != 0) {
     temp_v9 = 0x3f800000;
     temp_v10 = 0.0f;
-    if (((DAT_00476634 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476634), temp_v0 != 0)) {
+    if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
       DAT_004efd6c = temp_v9;
       DAT_004efd70 = temp_v10;
       DAT_004efd74 = temp_v10;

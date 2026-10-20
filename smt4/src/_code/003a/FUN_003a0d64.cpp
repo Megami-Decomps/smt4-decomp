@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002308fc(...);
-int FUN_00230914(...);
+int dataTable17Sub1GetCount(...);
+int dataTable17Sub1GetRecord(...);
 int FUN_0026374c(...);
 int FUN_00297060(...);
 int FUN_0029e620(...);
@@ -35,8 +35,8 @@ struct fn_003a0d64_arg0 {
 };
 
 extern int FUN_00221e00(unsigned int);
-/* Supplied declaration required: FUN_002308fc. */
-/* Supplied declaration required: FUN_00230914. */
+/* Supplied declaration required: dataTable17Sub1GetCount. */
+/* Supplied declaration required: dataTable17Sub1GetRecord. */
 /* Supplied declaration required: FUN_0026374c. */
 extern int FUN_0028e9d0(unsigned int);
 /* Supplied declaration required: FUN_00297060. */
@@ -92,9 +92,9 @@ void FUN_003a0d64(fn_003a0d64_arg0 *param_1)
         FUN_0029e620(0);
         temp_v0 = param_1->field_0x14;
         temp_v6 = param_1->field_0x18;
-        temp_v2 = FUN_00230914(temp_v8,0);
+        temp_v2 = dataTable17Sub1GetRecord(temp_v8,0);
         temp_v4 = 0;
-        FUN_002308fc();
+        dataTable17Sub1GetCount();
         temp_v1 = -1;
         if (0 < (int)puVar5) {
           do {
@@ -107,11 +107,11 @@ void FUN_003a0d64(fn_003a0d64_arg0 *param_1)
             if (temp_v7 && temp_v3 == temp_v6) break;
             temp_v4 = temp_v4 + 1;
             puVar5 = temp_v8;
-            FUN_002308fc();
+            dataTable17Sub1GetCount();
             temp_v1 = -1;
           } while (temp_v4 < (int)puVar5);
         }
-        FUN_00230914(temp_v9,temp_v1);
+        dataTable17Sub1GetRecord(temp_v9,temp_v1);
         FUN_0026374c();
         temp_v5 = 0x3b7;
         do {

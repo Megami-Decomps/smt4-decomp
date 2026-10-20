@@ -1,22 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x4A24];
+    /* 0x4A24 */ int states[2];
+} Obj;
 
-unsigned int FUN_0033b390(int param_1,int param_2)
-
+/* 1 while the slot's state is 4-7. */
+u32 FUN_0033b390(Obj *obj, int slot)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + param_2 * 4 + 0x4a24);
-  if ((temp_v0 == 4 || temp_v0 == 5) || (temp_v0 == 6 || temp_v0 == 7)) {
-    temp_v1 = 1;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    int state = obj->states[slot];
+    u32 result;
+
+    if ((state == 4 || state == 5) || (state == 6 || state == 7)) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

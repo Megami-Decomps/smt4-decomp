@@ -1,29 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f60ec` (_code @ 0x3f60ec, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Queries FUN_0017f9f4 (its three results are unused), then stores the two words in the global pair. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0017f9f4(unsigned char [4], unsigned char [4], unsigned char [4]);
+struct Pair003f60ec {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+};
 
-extern unsigned int DAT_0044e960; /* 0x44e960 */
-extern unsigned int DAT_0044e964; /* 0x44e964 */
+extern Pair003f60ec DAT_0044e960;
 
-/* Supplied declaration required: FUN_0017f9f4. */
+void FUN_0017f9f4(u8 *a, u8 *b, u8 *c);
+__weak void FUN_003f60ec_hook(s32 zero, u32 code);
 
-
-void FUN_003f60ec(unsigned int param_1,unsigned int param_2)
-
+void FUN_003f60ec(u32 first, u32 second)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0 [4];
-  unsigned char temp_v1 [4];
-  unsigned char temp_v2 [4];
-  
-  FUN_0017f9f4(temp_v0,temp_v1,temp_v2);
-  DAT_0044e960 = param_1;
-  DAT_0044e964 = param_2;
-  return;
+    u8 a[4];
+    u8 b[4];
+    u8 c[4];
+
+    FUN_003f60ec_hook(0, 0x040000a9);
+    FUN_0017f9f4(a, b, c);
+    DAT_0044e960.first = first;
+    DAT_0044e960.second = second;
 }
 
-} /* extern "C" */
+}

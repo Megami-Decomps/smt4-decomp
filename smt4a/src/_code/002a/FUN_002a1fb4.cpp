@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00212510(...);
-int FUN_0028122c(unsigned char [72], unsigned int, unsigned int);
+int matrix43Multiply(unsigned char [72], unsigned int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00212510. */
-/* Supplied declaration required: FUN_0028122c. */
+/* Supplied declaration required: matrix43Multiply. */
 
 
 unsigned int FUN_002a1fb4(unsigned int param_1,unsigned int param_2,int param_3)
@@ -28,12 +28,12 @@ unsigned int FUN_002a1fb4(unsigned int param_1,unsigned int param_2,int param_3)
         param_1 = 0;
       }
       else {
-        FUN_0028122c(temp_v0,param_1,param_2);
+        matrix43Multiply(temp_v0,param_1,param_2);
         FUN_00212510(param_1,temp_v0);
       }
     }
     else {
-      FUN_0028122c(temp_v0,param_2,param_1);
+      matrix43Multiply(temp_v0,param_2,param_1);
       FUN_00212510(param_1,temp_v0);
     }
   }

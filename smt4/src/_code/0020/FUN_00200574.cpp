@@ -1,20 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002a0d0c(void);
+extern u8 *FUN_002a0d0c(void);
 
-
-unsigned char FUN_00200574(unsigned int param_1)
-
+/* 1 when bit `index` of the bitset at +0x51 of FUN_002a0d0c's block is clear. */
+u8 FUN_00200574(u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002a0d0c();
-  if (((unsigned int)*(unsigned char *)(temp_v0 + (param_1 >> 3) + 0x51) & (1 << (param_1 & 7))) != 0) {
-    return 0;
-  }
-  return 1;
+    u8 *block = FUN_002a0d0c();
+
+    if (((u32)block[(index >> 3) + 0x51] & (1 << (index & 7))) != 0) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

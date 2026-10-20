@@ -1,17 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-unsigned short *FUN_002b63c0(unsigned short);
+u16 *FUN_002b63c0(u16 id);
 
-/* Supplied declaration required: FUN_002b63c0. */
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0xD0C];
+    /* 0xD0C */ u32 id;
+} Obj;
 
-
-unsigned short FUN_00383674(int param_1)
-
+u16 FUN_00383674(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  return *FUN_002b63c0((unsigned short)*(unsigned int *)(param_1 + 0xd0c));
+    return *FUN_002b63c0((u16)obj->id);
 }
 
 } /* extern "C" */

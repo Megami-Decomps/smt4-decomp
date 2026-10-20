@@ -1,22 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern int FUN_0030161c(int *);
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00[15];
+    /* 0x3C */ void (*update)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
+s32 FUN_0030161c(Object *object);
 
-unsigned int FUN_00115b4a(int *param_1)
-
+/* Runs the object's update method and returns 1 when FUN_0030161c then reports 0x4. */
+u32 FUN_00115b4a(Object *object)
 {
-  int temp_v0;
-  
-  (**(romwright_code **)(*param_1 + 0x3c))(param_1);
-  temp_v0 = FUN_0030161c(param_1);
-  if (temp_v0 != 4) {
-    return 0;
-  }
-  return 1;
+    object->vtbl->update(object);
+    if (FUN_0030161c(object) != 0x4) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

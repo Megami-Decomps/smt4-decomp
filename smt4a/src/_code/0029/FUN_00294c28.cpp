@@ -1,50 +1,58 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152f44(void);
-int FUN_00162e8c(void);
+typedef struct PopupState {
+    /* 0x00 */ s32 mode;
+    /* 0x04 */ s32 unk04;
+    /* 0x08 */ s32 unk08[3];
+    /* 0x14 */ s32 handle;
+} PopupState;
+extern PopupState *g_popupState;
 
-extern int *g_popupState; /* 0x58104c */
-extern unsigned char g_gameState; /* 0x5f15fc */
+typedef struct Candidate {
+    /* 0x000 */ u8 unk000[300];
+    /* 0x12C */ u16 id;
+} Candidate;
 
-extern int FUN_0014bef4(unsigned int);
-/* Supplied declaration required: FUN_00152f44. */
-extern int FUN_0015688c(void);
-/* Supplied declaration required: FUN_00162e8c. */
-extern int FUN_0018719c(unsigned int);
-extern int FUN_002d8b58(unsigned int, unsigned short);
+typedef struct GameState {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s8 busy;
+} GameState;
+extern GameState g_gameState;
 
+void FUN_00152f44(void);
+void FUN_00162e8c(void);
+s32 FUN_0014bef4(u32 id);
+Candidate *saveSlotFindSelected(void);
+s32 FUN_0018719c(u32 flag);
+s32 FUN_002d8b58(u32 kind, u16 id);
 
+/* Starts the mode-2 popup when nothing is busy, flag 0x49A is set, a candidate exists and flag 0x1A2 is clear or the level is above 0x32; with level above 0x3C and flag 0x10 set it uses id 0xAD instead of the candidate's. */
 void FUN_00294c28(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  unsigned short temp_v2;
-  
-  FUN_00162e8c();
-  FUN_00152f44();
-  if (((((*(signed char *)((unsigned char *)&g_gameState + 0x18)) == '\0') && (*g_popupState == 0)) && (temp_v0 = FUN_0018719c(0x49a), temp_v0 != 0)
-      ) && ((temp_v0 = FUN_0015688c(), temp_v0 != 0 &&
-            ((temp_v1 = FUN_0018719c(0x1a2), temp_v1 == 0 ||
-             (temp_v1 = FUN_0014bef4(99), temp_v1 + 1 > 0x32)))))) {
-    temp_v1 = FUN_0014bef4(99);
-    if ((temp_v1 + 1 > 0x3c) && (temp_v1 = FUN_0018719c(0x10), temp_v1 != 0)) {
-      temp_v2 = 0xad;
+    PopupState *popup;
+    Candidate *candidate;
+    s32 value;
+    u16 id;
+
+    FUN_00162e8c();
+    FUN_00152f44();
+    if (((((g_gameState.busy == 0) && (g_popupState->mode == 0)) && (value = FUN_0018719c(0x49A), value != 0)) &&
+         ((candidate = saveSlotFindSelected(), candidate != NULL) &&
+          ((value = FUN_0018719c(0x1A2), value == 0 || (value = FUN_0014bef4(99), value + 1 > 0x32)))))) {
+        value = FUN_0014bef4(99);
+        if ((value + 1 > 0x3C) && (value = FUN_0018719c(0x10), value != 0)) {
+            id = 0xAD;
+        } else {
+            id = candidate->id;
+        }
+        value = FUN_002d8b58(0, id);
+        popup = g_popupState;
+        g_popupState->handle = value;
+        popup->mode = 2;
+        popup->unk04 = 0;
     }
-    else {
-      temp_v2 = *(unsigned short *)(temp_v0 + 300);
-    }
-    temp_v0 = FUN_002d8b58(0,temp_v2);
-    piVar1 = g_popupState;
-    g_popupState[5] = temp_v0;
-    *piVar1 = 2;
-    piVar1[1] = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

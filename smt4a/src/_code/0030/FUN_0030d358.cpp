@@ -1,25 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Triple {
+    /* 0x00 */ u32 a;
+    /* 0x04 */ u32 b;
+    /* 0x08 */ u32 c;
+} Triple;
 
-void FUN_0030d358(unsigned int param_1,unsigned int *param_2,unsigned int *param_3)
-
+/* Copies the three words of `source` into `dest` when `dest` is not NULL. */
+void FUN_0030d358(u32 unused, Triple *dest, Triple *source)
 {
-  unsigned int t0;
-  unsigned int t1;
-  unsigned int t2;
-  
-  if (param_2 != (unsigned int *)0x0) {
-    t0 = param_3[0];
-    t1 = param_3[1];
-    t2 = param_3[2];
-    param_2[0] = t0;
-    param_2[1] = t1;
-    param_2[2] = t2;
+    u32 a;
+    u32 b;
+    u32 c;
 
-  }
-  return;
+    if (dest != NULL) {
+        a = source->a;
+        b = source->b;
+        c = source->c;
+        dest->a = a;
+        dest->b = b;
+        dest->c = c;
+    }
 }
 
 } /* extern "C" */

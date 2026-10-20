@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b90e6(...);
+int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
 int FUN_002be624(...);
 int memClear(...);
@@ -30,7 +30,7 @@ extern unsigned char LAB_0024043c; /* 0x24043c */
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 extern int asdLoadFileIsPatched(unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002b90e6. */
+/* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: memClear. */
@@ -74,7 +74,7 @@ int FUN_002402c4(unsigned int param_1,unsigned int param_2)
   builtin_strncpy(temp_v3,"h\fB",4);
   temp_v5 = 0;
   temp_v6 = 0;
-  FUN_002b90e6(&temp_v5);
+  refIsNullOrZero(&temp_v5);
   while ((temp_v0 = FUN_002b90c8(puVar5,0x105,(unsigned int *)&temp_v5), temp_v0 != 0 &&
          (puVar2 = puVar4, FUN_002c618c(puVar4,puVar5,temp_v0,&temp_v5), puVar2 != (unsigned short *)0x0)
          )) {

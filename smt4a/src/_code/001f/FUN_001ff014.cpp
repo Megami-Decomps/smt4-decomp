@@ -17,8 +17,8 @@ int FUN_0035ad50(unsigned int, unsigned char [98]);
 int FUN_003c3f1c(void);
 int FUN_004bcd90(...);
 int FUN_004bd17c(...);
-int FUN_004bd30c(unsigned int, unsigned int, int);
-int FUN_004bd400(int, int);
+int dispatchIfFound(unsigned int, unsigned int, int);
+int bitsAt60Clear(int, int);
 int FUN_004d0d70(void);
 int FUN_004da6e0(...);
 int FUN_004db914(int, int, unsigned int, int *);
@@ -70,9 +70,9 @@ extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: FUN_004bd17c. */
-extern int FUN_004bd21c(int);
-/* Supplied declaration required: FUN_004bd30c. */
-/* Supplied declaration required: FUN_004bd400. */
+extern int getUnlockedSlotCount(int);
+/* Supplied declaration required: dispatchIfFound. */
+/* Supplied declaration required: bitsAt60Clear. */
 extern unsigned int FUN_004d0cd4(void);
 /* Supplied declaration required: FUN_004d0d70. */
 extern int FUN_004da520(int, unsigned char *, unsigned char *);
@@ -180,11 +180,11 @@ unsigned char FUN_001ff014(int param_1)
   }
   temp_v2 = FUN_001ba514(temp_v33);
   if ((temp_v2 < 0x18) && (temp_v1 = FUN_001ab854(), temp_v1 != 0)) {
-    FUN_004bd400(temp_v1,4);
+    bitsAt60Clear(temp_v1,4);
   }
   temp_v2 = FUN_001ba514(temp_v31);
   if ((temp_v2 < 0x18) && (temp_v1 = FUN_001ab854(), temp_v1 != 0)) {
-    FUN_004bd400(temp_v1,4);
+    bitsAt60Clear(temp_v1,4);
   }
   if ((unsigned int)piVar1[param_1 * 2 + 0x4ee] >> 0x1e == 1) {
     FUN_001ba514(temp_v33);
@@ -196,7 +196,7 @@ unsigned char FUN_001ff014(int param_1)
   }
   temp_v3 = FUN_004d0cd4();
   temp_v1 = FUN_002a4b28((piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2);
-  FUN_004bd30c(temp_v3,(piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
+  dispatchIfFound(temp_v3,(piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
   if (temp_v10 != 0) {
     temp_v35 = (unsigned short)((unsigned int)(piVar1[param_1 * 2 + 0x4ef] << 0xf) >> 0x11);
     FUN_004da6e0(*piVar1,temp_v38,temp_v30,0,temp_v34);
@@ -267,7 +267,7 @@ unsigned char FUN_001ff014(int param_1)
       } while (temp_v7 < 8);
       qsort(temp_v4 + 0x34,8,2,FUN_0034f3b4);
       qsort(&temp_v14,0x20,2,FUN_0034f3b4);
-      temp_v7 = FUN_004bd21c(temp_v4);
+      temp_v7 = getUnlockedSlotCount(temp_v4);
       temp_v8 = 0;
       if (temp_v8 < temp_v7) {
         do {
@@ -300,7 +300,7 @@ unsigned char FUN_001ff014(int param_1)
     }
     else {
       qsort(&temp_v14,0x20,2,FUN_0034f3b4);
-      temp_v7 = FUN_004bd21c(temp_v4);
+      temp_v7 = getUnlockedSlotCount(temp_v4);
       temp_v8 = 0;
       do {
         psVar13 = (short *)((int)&temp_v14 + temp_v8 * 2);
@@ -363,7 +363,7 @@ unsigned char FUN_001ff014(int param_1)
     *(int *)(temp_v4 + 0x9c) = temp_v11;
     *(int *)(temp_v4 + 0xa0) = temp_v12;
     *(int *)(temp_v4 + 0xa4) = temp_v13;
-    temp_v7 = FUN_004bd21c(temp_v4);
+    temp_v7 = getUnlockedSlotCount(temp_v4);
     rt_memcpy_w(temp_v4 + 0x34,piVar1 + 0x19b4,temp_v7 << 1);
     FUN_004bcd90(temp_v4);
     piVar1[0x2426] = 1;

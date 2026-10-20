@@ -54,11 +54,11 @@ extern int FUN_002a4894(int);
 extern int FUN_00348ed0(int);
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: FUN_0037ce80. */
-extern int FUN_003deeb4(unsigned int);
-extern int FUN_003deecc(unsigned int);
+extern int partyEntryGetBit5(unsigned int);
+extern int partyEntryGetBit6(unsigned int);
 /* Supplied declaration required: FUN_003defe0. */
-extern int FUN_00418584(unsigned int);
-extern int FUN_004186f4(unsigned int);
+extern int partyEntryFlagsBit3(unsigned int);
+extern int partyEntryBitsBit4(unsigned int);
 
 
 void FUN_0022ecfc(void)
@@ -136,20 +136,20 @@ void FUN_0022ecfc(void)
           FUN_0037ce80(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f);
           temp_v5 = FUN_001834a4(0x1e,0x9d);
-          temp_v8 = FUN_003deeb4(temp_v11);
+          temp_v8 = partyEntryGetBit5(temp_v11);
           if (temp_v8 != 0) {
             FUN_00164b5c(2,0x1e,0xf,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                          (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x74);
           }
           else {
-            temp_v8 = FUN_004186f4(temp_v11);
+            temp_v8 = partyEntryBitsBit4(temp_v11);
             if ((temp_v8 == 0) && (temp_v6 = temp_v11, FUN_003defe0(), temp_v6 != 0)) {
               FUN_00164b5c(2,0x1e,0x13,
                            (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                            (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x74);
             }
             else {
-              temp_v8 = FUN_003deecc(temp_v11);
+              temp_v8 = partyEntryGetBit6(temp_v11);
               if (temp_v8 != 0) {
                 FUN_00164b5c(2,0x1e,0x10,
                              (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
@@ -245,7 +245,7 @@ void FUN_0022ecfc(void)
     VectorSignedToFloat((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,temp_v11,temp_v16,(int)*(short *)(temp_v12 + 8));
-    temp_v12 = FUN_00418584(temp_v6);
+    temp_v12 = partyEntryFlagsBit3(temp_v6);
     temp_v4 = *(short *)(temp_v10 + 10) + temp_v2;
     temp_v5 = *(short *)(temp_v10 + 8) + temp_v1;
     if (temp_v12 != 0) {
@@ -258,20 +258,20 @@ void FUN_0022ecfc(void)
     FUN_0037ce80(temp_v6,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
     temp_v12 = FUN_001834a4(0x1e,0xb4);
-    temp_v4 = FUN_003deeb4(temp_v6);
+    temp_v4 = partyEntryGetBit5(temp_v6);
     if (temp_v4 != 0) {
       FUN_00164b5c(2,0x1e,0xf,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
     }
     else {
-      temp_v4 = FUN_004186f4(temp_v6);
+      temp_v4 = partyEntryBitsBit4(temp_v6);
       temp_v11 = temp_v6;
       if ((temp_v4 == 0) && (FUN_003defe0(), temp_v6 != 0)) {
         FUN_00164b5c(2,0x1e,0x13,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,
                      (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
       }
       else {
-        temp_v4 = FUN_003deecc(temp_v11);
+        temp_v4 = partyEntryGetBit6(temp_v11);
         if (temp_v4 != 0) {
           FUN_00164b5c(2,0x1e,0x10,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1
                        ,(int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);

@@ -1,32 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002af5c0(unsigned int *, int, int);
+int FUN_002af5c0(void *block, int a, int b);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Obj {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[4];
+    /* 0x008 */ u32 unk008;
+    /* 0x00C */ u8 unk00C[0x434];
+    /* 0x440 */ u8 blockA[0x118];
+    /* 0x558 */ u8 blockB[1];
+} Obj;
 
-/* Supplied declaration required: FUN_002af5c0. */
-
-
-void FUN_0027e9c0(unsigned int *param_1)
-
+void FUN_0027e9c0(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = *param_1;
-  if ((temp_v0 & 0x10) != 0 && (temp_v0 & 0x20) != 0) {
-    param_1[2] = 3;
-    *param_1 = temp_v0 & 0xffffffdf;
-    FUN_002af5c0(param_1 + 0x110,2,0);
-    FUN_002af5c0(param_1 + 0x156,2,0);
-    return;
-  }
-  return;
+    u32 flags = obj->flags;
+
+    if ((flags & 0x10) != 0 && (flags & 0x20) != 0) {
+        obj->unk008 = 3;
+        obj->flags = flags & 0xffffffdf;
+        FUN_002af5c0(obj->blockA, 2, 0);
+        FUN_002af5c0(obj->blockB, 2, 0);
+        return;
+    }
 }
 
 } /* extern "C" */

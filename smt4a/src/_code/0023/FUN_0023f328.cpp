@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 extern int FUN_001801a4(void);
 extern int FUN_00187168(void);
 extern int FUN_001ab854(int);
@@ -21,7 +21,7 @@ extern int FUN_001ab888(void);
 extern int btlMainGetUnk14(void);
 extern int FUN_003e8430(unsigned int);
 extern int FUN_003e9b54(unsigned int, int);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 
 
@@ -54,7 +54,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
   }
   if (param_2 != 0) {
     if (param_2 == 4) {
-      temp_v4 = FUN_0015688c();
+      temp_v4 = saveSlotFindSelected();
       temp_v5 = FUN_00187168();
       if (temp_v5 == 0) {
         return;
@@ -81,7 +81,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
         *(unsigned short *)(param_1 + 0x41fc) = *(unsigned short *)(temp_v4 + 0x2c);
         *(unsigned short *)(param_1 + 0x4206) = *(unsigned short *)(temp_v4 + 100);
         *(unsigned int *)(param_1 + 0x421c) = (unsigned int)*(unsigned short *)(temp_v4 + 0x62);
-        temp_v4 = FUN_004bd340(temp_v4,1);
+        temp_v4 = bitsAt60Test(temp_v4,1);
         if (temp_v4 == 0) {
           temp_v0 = 0;
           *(unsigned char *)(param_1 + 0x41ed) = temp_v0;
@@ -132,7 +132,7 @@ void FUN_0023f328(int param_1,int param_2,int param_3)
         *(unsigned short *)(temp_v4 + 0x4206) = *(unsigned short *)(temp_v3 + 100);
         *(unsigned int *)(temp_v6 + 0x21c) = (unsigned int)*(unsigned short *)(temp_v3 + 0x62);
         *(unsigned char *)(temp_v5 + 0x41ed) = 0;
-        temp_v4 = FUN_004bd340(temp_v3,1);
+        temp_v4 = bitsAt60Test(temp_v3,1);
         if ((temp_v4 != 0) &&
            (temp_v4 = FUN_003e9b54(*(unsigned int *)(param_1 + 0x3874),param_2), temp_v4 == 0)) {
           *(unsigned char *)(temp_v7 + 0x1ed) = 1;

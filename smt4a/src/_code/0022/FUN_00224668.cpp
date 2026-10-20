@@ -1,37 +1,39 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(unsigned int *);
-int FUN_0049274c(unsigned int *);
+void texOwner1480Free(u32 *member);
+void asdMemFree(void *memory);
+s32 jobFind(u32 job);
 
-extern unsigned int *DAT_00587f28; /* 0x587f28 */
+typedef struct Scene {
+    /* 0x00 */ u32 job;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ u8 running;
+    /* 0x09 */ u8 unk09[0x5F];
+    /* 0x68 */ u32 member68[1];
+} Scene;
+extern Scene *DAT_00587f28;
 
-extern int jobFind(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0049274c. */
-
-
-unsigned int FUN_00224668(void)
-
+/* Returns 1 while the scene's job is still found or the scene has not started running; otherwise destroys the scene and returns 0. */
+u32 FUN_00224668(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = DAT_00587f28;
-  if (DAT_00587f28 != (unsigned int *)0x0) {
-    temp_v0 = jobFind(*DAT_00587f28);
-    if ((temp_v0 != 0) || (*(char *)(puVar1 + 2) == '\0')) {
-      return 1;
+    Scene *scene;
+    s32 found;
+
+    scene = DAT_00587f28;
+    if (DAT_00587f28 != NULL) {
+        found = jobFind(DAT_00587f28->job);
+        if ((found != 0) || (scene->running == 0)) {
+            return 1;
+        }
+        if (DAT_00587f28 != NULL) {
+            texOwner1480Free(DAT_00587f28->member68);
+            asdMemFree(DAT_00587f28);
+            DAT_00587f28 = NULL;
+        }
     }
-    if (DAT_00587f28 != (unsigned int *)0x0) {
-      FUN_0049274c(DAT_00587f28 + 0x1a);
-      asdMemFree(DAT_00587f28);
-      DAT_00587f28 = (unsigned int *)0x0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

@@ -10,7 +10,7 @@ int FUN_002804b0(unsigned char *, int *, int);
 int FUN_003a36b4(void);
 int FUN_00418070(unsigned int, int);
 int FUN_004731d8(void);
-int FUN_004da2f8(void);
+int optionsClearFlag1(void);
 
 extern unsigned char LAB_0047e5dc; /* 0x47e5dc */
 extern unsigned char LAB_0047e5f4; /* 0x47e5f4 */
@@ -23,7 +23,7 @@ extern int FUN_00224880(int);
 /* Supplied declaration required: FUN_00418070. */
 extern unsigned int FUN_004186e0(void);
 /* Supplied declaration required: FUN_004731d8. */
-/* Supplied declaration required: FUN_004da2f8. */
+/* Supplied declaration required: optionsClearFlag1. */
 
 
 unsigned int FUN_0047e4e4(int *param_1)
@@ -43,7 +43,7 @@ unsigned int FUN_0047e4e4(int *param_1)
         }
         temp_v1 = FUN_004186e0();
         FUN_00418070(temp_v1,0);
-        FUN_004da2f8();
+        optionsClearFlag1();
         FUN_003a36b4();
         FUN_004731d8();
         *param_1 = 4;

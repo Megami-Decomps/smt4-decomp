@@ -16,7 +16,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_00474b18(int);
+extern int vtblPairInit55C724(int);
 /* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 
 
@@ -32,7 +32,7 @@ int FUN_0047d83c(int param_1,unsigned int *param_2,unsigned int param_3)
   
   *param_2 = param_3;
   param_2[1] = param_3;
-  temp_v1 = FUN_00474b18(param_1 + 0x9bc);
+  temp_v1 = vtblPairInit55C724(param_1 + 0x9bc);
   sysMemClear(temp_v1 - 0x9bc,0x80);
   sysMemClear(temp_v1 - 0x93c,0x100);
   sysMemClear(temp_v1 - 0x83c,0x800);

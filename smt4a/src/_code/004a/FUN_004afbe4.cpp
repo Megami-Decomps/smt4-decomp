@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_004acfc4(unsigned int *);
+int registerFour4AD02C(unsigned int *);
 int FUN_004d92b8(...);
 
 extern unsigned char LAB_00521110; /* 0x521110 */
 extern int FUN_00521120(...); /* 0x521120 */
 
-/* Supplied declaration required: FUN_004acfc4. */
+/* Supplied declaration required: registerFour4AD02C. */
 /* Supplied declaration required: FUN_004d92b8. */
 extern int FUN_005203c0(unsigned int *);
 
@@ -63,7 +63,7 @@ unsigned int * FUN_004afbe4(unsigned int *param_1,unsigned int param_2,unsigned 
   param_1[0x12] = param_2;
   FUN_004d92b8(puVar2,&LAB_00521110);
   puVar2[9] = param_2;
-  FUN_004acfc4(puVar2 + -1);
+  registerFour4AD02C(puVar2 + -1);
   return puVar2 + -0x526;
 }
 

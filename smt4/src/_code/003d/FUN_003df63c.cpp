@@ -1,12 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Inner {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u32 value;
+} Inner;
 
-unsigned int FUN_003df63c(int *param_1)
-
+u32 FUN_003df63c(Inner **obj)
 {
-  return *(unsigned int *)(*param_1 + 0x28);
+    return (*obj)->value;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a43ae(int);
+int __set_errno(int);
 int VectorSignedToFloat(int, int);
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -12,7 +12,7 @@ int VectorSignedToFloat(int, int);
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002a43ae. */
+/* Supplied declaration required: __set_errno. */
 
 
 void FUN_003eb108(void)
@@ -32,12 +32,12 @@ void FUN_003eb108(void)
       return;
     }
     if (in_s0 < 0.0f) {
-      FUN_002a43ae(1);
+      __set_errno(1);
       return;
     }
     in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == 0.0f) << 0x1e);
     if (romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) {
-      FUN_002a43ae(2);
+      __set_errno(2);
       return;
     }
     temp_v0 = -0x17;

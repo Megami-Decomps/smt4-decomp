@@ -1,18 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_snd_SoundHandle_DetachSound(unsigned int);
+int nw_snd_SoundHandle_DetachSound(u32 handle);
 
-/* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u32 handle;
+} Obj;
 
-
-void FUN_003799bc(int param_1)
-
+void FUN_003799bc(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  nw_snd_SoundHandle_DetachSound(*(unsigned int *)(param_1 + 0xc));
-  return;
+    nw_snd_SoundHandle_DetachSound(obj->handle);
 }
 
 } /* extern "C" */

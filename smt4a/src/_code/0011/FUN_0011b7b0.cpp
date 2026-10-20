@@ -45,7 +45,7 @@ extern unsigned int DAT_00594a20; /* 0x594a20 */
 /* Supplied declaration required: FUN_002e75fa. */
 /* Supplied declaration required: FUN_002eb338. */
 /* Supplied declaration required: FUN_002eb588. */
-extern int FUN_002eb690(int *, int *);
+extern int wordRefsDiffer_002eb690(int *, int *);
 extern int FUN_002f2a70(int);
 /* Supplied declaration required: FUN_002f2da0. */
 
@@ -74,7 +74,7 @@ void FUN_0011b7b0(int param_1,int *param_2)
   piStack_18 = param_2;
   while( 1 ) {
     temp_v7 = param_2[4];
-    temp_v2 = FUN_002eb690(&temp_v6,&temp_v7);
+    temp_v2 = wordRefsDiffer_002eb690(&temp_v6,&temp_v7);
     temp_v1 = temp_v6;
     if (temp_v2 == 0) break;
     if (((s______00594975.whole[0] == '\0') || (temp_v2 = FUN_002f2a70(temp_v6), temp_v2 == 0)) ||

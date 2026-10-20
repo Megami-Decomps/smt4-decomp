@@ -1,16 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Header {
+    /* 0x00 */ union {
+        u32 word;
+        struct {
+            u8 type;
+            u8 mode;
+        } fields;
+    } head;
+    /* 0x04 */ u32 value;
+} Header;
 
-void FUN_00300c10(unsigned int *param_1)
-
+/* Initialises the header: type 8, mode 2, value 0. */
+void FUN_00300c10(Header *header)
 {
-  *param_1 = 0;
-  *(unsigned char *)((int)param_1 + 1) = 2;
-  *(unsigned char *)param_1 = 8;
-  param_1[1] = 0;
-  return;
+    header->head.word = 0;
+    header->head.fields.mode = 2;
+    header->head.fields.type = 8;
+    header->value = 0;
 }
 
 } /* extern "C" */

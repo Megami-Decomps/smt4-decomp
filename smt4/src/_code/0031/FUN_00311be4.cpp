@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTableGetEntries(...);
 
-extern unsigned int FUN_002c09f4(unsigned int);
+extern unsigned int randNextInRange(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -48,7 +48,7 @@ unsigned int FUN_00311be4(void)
     temp_v6 = temp_v6 + temp_v5;
   }
   puVar4 = (unsigned int *)dataTableGetEntries(temp_v1);
-  temp_v6 = FUN_002c09f4((temp_v6 - 1) & 0xffff);
+  temp_v6 = randNextInRange((temp_v6 - 1) & 0xffff);
   temp_v4 = 0;
   temp_v3 = 0;
   if (temp_v3 < temp_v2) {

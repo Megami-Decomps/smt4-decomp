@@ -13,7 +13,7 @@ int FUN_002e2680(...);
 int FUN_0032ef0c(...);
 int FUN_00344bc8(...);
 int FUN_0035a0bc(...);
-int FUN_0037b578(...);
+int screenStartOrClear(...);
 int FUN_00387ad8(int, int);
 int FUN_003a4980(...);
 int FUN_003d2150(...);
@@ -41,13 +41,13 @@ extern int FUN_001656a0(unsigned int);
 /* Supplied declaration required: FUN_002844e4. */
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e2680. */
-extern unsigned int FUN_003192e0(void);
+extern unsigned int overlayGetStatusScene(void);
 extern unsigned int FUN_0032ec7c(void);
 extern int FUN_0032ecac(void);
 /* Supplied declaration required: FUN_0032ef0c. */
 /* Supplied declaration required: FUN_00344bc8. */
 /* Supplied declaration required: FUN_0035a0bc. */
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_00387ad8. */
 /* Supplied declaration required: FUN_003a4980. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -430,7 +430,7 @@ unsigned int FUN_003aef48(int param_1)
           else {
             *(char *)(*(int *)(param_1 + 8) + 0x42) =
                  (char)temp_v1 + (char)*(unsigned int *)(param_1 + 0x120);
-            temp_v4 = FUN_003192e0();
+            temp_v4 = overlayGetStatusScene();
             FUN_0035a0bc(temp_v4,*(int *)(param_1 + 0x128) + *(int *)(param_1 + 0x120));
           }
         }
@@ -438,7 +438,7 @@ unsigned int FUN_003aef48(int param_1)
           temp_v0 = FUN_00344bc8(temp_v1 + *(int *)(param_1 + 0x120));
           *(unsigned char *)(*(int *)(param_1 + 8) + 0x23) = temp_v0;
           temp_v4 = FUN_0032ec7c();
-          FUN_0037b578(*(unsigned int *)(param_1 + 0x58),temp_v4);
+          screenStartOrClear(*(unsigned int *)(param_1 + 0x58),temp_v4);
         }
       }
       else {
@@ -476,7 +476,7 @@ unsigned int FUN_003aef48(int param_1)
           }
           else {
             *(char *)(*(int *)(param_1 + 8) + 0x42) = (char)*(unsigned int *)(param_1 + 0x160);
-            temp_v9 = FUN_003192e0();
+            temp_v9 = overlayGetStatusScene();
             FUN_0035a0bc(temp_v9,*(unsigned int *)(param_1 + 0x160));
           }
         }

@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Sys44e190.h"
 
 extern "C" {
 
-extern int DAT_0044e190; /* 0x44e190 */
-
-
-void FUN_0029c424(unsigned char param_1)
-
+void FUN_0029c424(u8 value)
 {
-  if (DAT_0044e190 != 0) {
-    *(unsigned char *)(DAT_0044e190 + 0x412) = param_1;
-  }
-  return;
+    if (DAT_0044e190 != NULL) {
+        DAT_0044e190->unk412 = value;
+    }
 }
 
 } /* extern "C" */

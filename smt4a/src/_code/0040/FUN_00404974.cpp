@@ -24,8 +24,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002e08b0. */
 extern int FUN_00341940(unsigned int);
 /* Supplied declaration required: FUN_00403a34. */
-extern int FUN_0040a7cc(unsigned short);
-extern int FUN_0040a7f8(unsigned short);
+extern int tableFlagBit2(unsigned short);
+extern int tableFlagBit1(unsigned short);
 /* Supplied declaration required: FUN_0040a844. */
 /* Supplied declaration required: FUN_0040a864. */
 
@@ -61,8 +61,8 @@ void FUN_00404974(int param_1)
   FUN_002e08b0(param_1 + 0x28,0);
   *(unsigned int *)(param_1 + 0x108) = 0;
   *(unsigned int *)(param_1 + 0x8c) = 0;
-  temp_v0 = FUN_0040a7f8(**(unsigned short **)(param_1 + 0x664));
-  if ((temp_v0 == 0) && (temp_v0 = FUN_0040a7cc(**(unsigned short **)(param_1 + 0x664)), temp_v0 == 0)) {
+  temp_v0 = tableFlagBit1(**(unsigned short **)(param_1 + 0x664));
+  if ((temp_v0 == 0) && (temp_v0 = tableFlagBit2(**(unsigned short **)(param_1 + 0x664)), temp_v0 == 0)) {
     return;
   }
   FUN_0040a864(**(unsigned short **)(param_1 + 0x664),0);

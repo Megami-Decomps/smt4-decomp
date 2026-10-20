@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e32a4(int, unsigned char *, unsigned char *);
 int FUN_002e6e14(int);
 int FUN_00307c28(int, int, int, int *);
-int FUN_00307c56(int *);
+int vectorCountxB8_00307c56(int *);
 int FUN_0030fdd8(int *, int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -23,13 +23,13 @@ extern unsigned char LAB_00133504; /* 0x133504 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e32a4. */
-extern int *FUN_002e4e86(unsigned int *, unsigned int *);
+extern int *wordRefMax(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307c28. */
-/* Supplied declaration required: FUN_00307c56. */
+/* Supplied declaration required: vectorCountxB8_00307c56. */
 /* Supplied declaration required: FUN_0030fdd8. */
-extern int FUN_00311470(int *, int, int);
-extern unsigned int FUN_0031147e(unsigned int, int *);
+extern int allocElements184(int *, int, int);
+extern unsigned int bufGrowCapacity3(unsigned int, int *);
 extern unsigned int __aeabi_idivmod(int, unsigned int);
 
 
@@ -56,15 +56,15 @@ unsigned long long FUN_00133478(int *param_1,unsigned int param_2)
   }
   temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0xb8);
   if (temp_v0 < temp_v6) {
-    temp_v1 = FUN_00307c56(param_1);
-    temp_v5 = FUN_0031147e(temp_v1,param_1);
-    piVar3 = (int *)FUN_002e4e86(&temp_v6,(unsigned int *)&temp_v5);
+    temp_v1 = vectorCountxB8_00307c56(param_1);
+    temp_v5 = bufGrowCapacity3(temp_v1,param_1);
+    piVar3 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v5);
     temp_v4 = *piVar3;
-    temp_v2 = FUN_00311470(param_1,temp_v4,*param_1);
+    temp_v2 = allocElements184(param_1,temp_v4,*param_1);
     FUN_00307c28(*param_1,param_1[1],temp_v2,param_1);
     FUN_0030fdd8(param_1,*param_1,param_1[1]);
     FUN_002e6e14(*param_1);
-    temp_v3 = FUN_00307c56(param_1);
+    temp_v3 = vectorCountxB8_00307c56(param_1);
     *param_1 = temp_v2;
     param_1[2] = temp_v2 + temp_v4 * 0xb8;
     param_1[1] = temp_v3 * 0xb8 + temp_v2;

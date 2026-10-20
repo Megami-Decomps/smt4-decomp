@@ -1,36 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00121cc4(void);
-int FUN_002e75fa(void);
-int FUN_002eb5f4(void);
+void FUN_00121cc4(void *object);
+void FUN_002e75fa(void *object);
+void *FUN_002eb5f4(void);
+void *FUN_002e760a(u32 size);
 
-/* Supplied declaration required: FUN_00121cc4. */
-/* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002eb5f4. */
-
-
+/* If FUN_002eb5f4 yields an object, runs FUN_002e75fa on it; otherwise allocates a 0x3C4-byte object and constructs it with FUN_00121cc4. */
 void FUN_002f5940(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002eb5f4();
-  if (temp_v0 != 0) {
-    FUN_002eb5f4();
-    FUN_002e75fa();
-  }
-  else {
-    temp_v0 = FUN_002e760a(0x3c4);
-    if (temp_v0 != 0) {
-      FUN_00121cc4();
-      return;
+    void *object;
+
+    object = FUN_002eb5f4();
+    if (object != NULL) {
+        FUN_002e75fa(FUN_002eb5f4());
+    } else {
+        object = FUN_002e760a(0x3C4);
+        if (object != NULL) {
+            FUN_00121cc4(object);
+            return;
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

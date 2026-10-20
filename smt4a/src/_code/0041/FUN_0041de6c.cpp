@@ -55,16 +55,16 @@ extern int FUN_002a6464(void);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e6134. */
 /* Supplied declaration required: FUN_002f0384. */
-extern int FUN_00334158(void);
+extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0034aac8. */
 extern int FUN_0035d734(void);
 /* Supplied declaration required: FUN_003720a0. */
-extern int FUN_0038b348(void);
+extern int byteTripleGetV1(void);
 /* Supplied declaration required: FUN_0038b5fc. */
 /* Supplied declaration required: FUN_003a76a8. */
-extern int FUN_003b70d0(void);
+extern int byteArr5Get4(void);
 /* Supplied declaration required: FUN_003c1490. */
 /* Supplied declaration required: FUN_003fd63c. */
 /* Supplied declaration required: FUN_00408184. */
@@ -127,9 +127,9 @@ void FUN_0041de6c(int param_1)
     FUN_003c1490(*(int *)(param_1 + 0x2f8) + 1,*(unsigned char *)(temp_v0 + 2));
     return;
   }
-  temp_v0 = FUN_0038b348();
+  temp_v0 = byteTripleGetV1();
   if ((temp_v0 != 0) && (*(char *)(param_1 + 0xf) == '\0')) {
-    temp_v0 = FUN_003b70d0();
+    temp_v0 = byteArr5Get4();
     if (temp_v0 != 0) {
       FUN_00275f44(*(unsigned int *)(param_1 + 0x40),2);
       temp_v1 = FUN_00261458();
@@ -173,7 +173,7 @@ void FUN_0041de6c(int param_1)
     FUN_003a76a8(1);
     sysPlaySe(0xa0);
   }
-  if ((*(char *)(param_1 + 0x5c) != '\0') && (temp_v0 = FUN_00334158(), temp_v0 != 0)) {
+  if ((*(char *)(param_1 + 0x5c) != '\0') && (temp_v0 = objBStateAllowsAction(), temp_v0 != 0)) {
     *(unsigned char *)(param_1 + 0x5c) = 0;
     FUN_002f0384(1);
     *(unsigned char *)(param_1 + 0x68) = 1;
@@ -203,13 +203,13 @@ void FUN_0041de6c(int param_1)
     return;
   }
   temp_v0 = FUN_002a6464();
-  if (((temp_v0 != 0) && (temp_v0 = FUN_0038b348(), temp_v0 != 0)) && (*(char *)(param_1 + 0x5c) == '\0'))
+  if (((temp_v0 != 0) && (temp_v0 = byteTripleGetV1(), temp_v0 != 0)) && (*(char *)(param_1 + 0x5c) == '\0'))
   {
     DAT_00588e15 = 1;
     *(unsigned char *)(param_1 + 0x12) = 0;
     *(unsigned char *)(param_1 + 0xe) = 0;
     *(unsigned char *)(param_1 + 0xf) = 0;
-    temp_v0 = FUN_003b70d0();
+    temp_v0 = byteArr5Get4();
     if (temp_v0 == 0) {
       *(unsigned int *)(param_1 + 0x2f8) = DAT_00588e28;
     }

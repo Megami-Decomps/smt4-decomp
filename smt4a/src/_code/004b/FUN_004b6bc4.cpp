@@ -12,12 +12,12 @@ int FUN_0046eb24(int, int);
 int FUN_00470080(int, int, int);
 int FUN_004b75d0(...);
 int FUN_004b9ff4(...);
-int FUN_004ba83c(int, int);
+int menu4CScrollToKind(int, int);
 int FUN_004baa7c(int, int, int);
-int FUN_004bad28(...);
+int menu4CReset(...);
 int FUN_004bb064(int);
-int FUN_004bb140(void);
-int FUN_004bb158(unsigned char *, unsigned int);
+int dataTable33Type0Count(void);
+int dataTable33GroupCount(unsigned char *, unsigned int);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -43,15 +43,15 @@ extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00470080. */
 /* Supplied declaration required: FUN_004b75d0. */
 /* Supplied declaration required: FUN_004b9ff4. */
-extern int FUN_004ba790(int);
-/* Supplied declaration required: FUN_004ba83c. */
+extern int menu4CGetCurrentEntry(int);
+/* Supplied declaration required: menu4CScrollToKind. */
 /* Supplied declaration required: FUN_004baa7c. */
-/* Supplied declaration required: FUN_004bad28. */
+/* Supplied declaration required: menu4CReset. */
 /* Supplied declaration required: FUN_004bb064. */
-extern int FUN_004bb0bc(unsigned char *, unsigned int);
-extern int FUN_004bb0f8(unsigned char *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004bb140. */
-/* Supplied declaration required: FUN_004bb158. */
+extern int dataTable33Type0GetEntry(unsigned char *, unsigned int);
+extern int dataTable33GetEntryByGroup(unsigned char *, unsigned int, unsigned int);
+/* Supplied declaration required: dataTable33Type0Count. */
+/* Supplied declaration required: dataTable33GroupCount. */
 
 
 void FUN_004b6bc4(int param_1,int param_2,int param_3)
@@ -73,9 +73,9 @@ void FUN_004b6bc4(int param_1,int param_2,int param_3)
   unsigned char temp_v9 [32];
   unsigned char temp_v10 [20];
   
-  temp_v0 = FUN_004bb0bc(temp_v10,0);
+  temp_v0 = dataTable33Type0GetEntry(temp_v10,0);
   puVar2 = temp_v10;
-  FUN_004bb140();
+  dataTable33Type0Count();
   temp_v1 = 0;
   *(unsigned int *)(param_1 + 0x1118) = 0;
   if (0 < (int)puVar2) {
@@ -94,9 +94,9 @@ void FUN_004b6bc4(int param_1,int param_2,int param_3)
   else {
     *(int *)(param_1 + 0x1120) = (int)*(char *)(*(int *)(param_1 + 0x1118) + 1);
   }
-  temp_v0 = FUN_004bb0f8(temp_v10,*(unsigned int *)(param_1 + 0x1120),0);
+  temp_v0 = dataTable33GetEntryByGroup(temp_v10,*(unsigned int *)(param_1 + 0x1120),0);
   puVar2 = temp_v10;
-  FUN_004bb158(puVar2,*(unsigned int *)(param_1 + 0x1120));
+  dataTable33GroupCount(puVar2,*(unsigned int *)(param_1 + 0x1120));
   sysMemClear(acStack_168,0x100);
   temp_v1 = 0;
   if (temp_v1 < (int)puVar2) {
@@ -165,9 +165,9 @@ LAB_004b6ea0:
     temp_v0 = (int)*(short *)(param_1 + 0x40);
   }
   if (temp_v0 != -1) {
-    FUN_004ba83c(param_1 + 0x9c,temp_v0);
+    menu4CScrollToKind(param_1 + 0x9c,temp_v0);
   }
-  temp_v0 = FUN_004ba790(param_1 + 0x9c);
+  temp_v0 = menu4CGetCurrentEntry(param_1 + 0x9c);
   temp_v1 = (int)*(short *)(temp_v0 + 0x22);
   temp_v0 = (int)*(short *)(temp_v0 + 0x24);
   *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x1000;
@@ -188,7 +188,7 @@ LAB_004b6ea0:
   *(unsigned int *)(param_1 + 0x88) = 0;
   *(unsigned int *)(param_1 + 0x8c) = 1;
   FUN_004b75d0(param_1);
-  FUN_004bad28(param_1 + 0x9c);
+  menu4CReset(param_1 + 0x9c);
   return;
 }
 

@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int FUN_002e9b20(int **, unsigned int **);
+extern int wordRefsDiffer_002e9b20(int **, unsigned int **);
 
 
 void FUN_002e9e1e(fn_002e9e1e_arg0 *param_1)
@@ -32,7 +32,7 @@ void FUN_002e9e1e(fn_002e9e1e_arg0 *param_1)
   
   temp_v2 = (unsigned int *)param_1->field_0x10;
   piVar2 = (int *)*temp_v2;
-  while (temp_v1 = piVar2, temp_v0 = FUN_002e9b20(&temp_v1,&temp_v2), temp_v0 != 0) {
+  while (temp_v1 = piVar2, temp_v0 = wordRefsDiffer_002e9b20(&temp_v1,&temp_v2), temp_v0 != 0) {
     piVar2 = (int *)param_1->field_0x10;
     if (temp_v1 != param_1->field_0x10) {
       piVar2 = (int *)*temp_v1;

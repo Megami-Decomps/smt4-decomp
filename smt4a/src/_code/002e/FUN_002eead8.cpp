@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e755c(unsigned int, unsigned int, int);
+void FUN_002e755c(u32 dest, u32 source, s32 size);
 
-/* Supplied declaration required: FUN_002e755c. */
-
-
-void FUN_002eead8(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Calls FUN_002e755c with `count` 16-bit characters (2 * count bytes). */
+void FUN_002eead8(u32 dest, u32 source, s32 count)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e755c(param_1,param_2,param_3 << 1);
-  return;
+    FUN_002e755c(dest, source, count << 1);
 }
 
 } /* extern "C" */

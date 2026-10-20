@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_005e2074; /* 0x5e2074 */
+extern u8 DAT_005e2074[];
 
-
-unsigned char * FUN_00239288(void)
-
+/* Returns the address of the table at 0x5E2074. */
+u8 *FUN_00239288(void)
 {
-  return &DAT_005e2074;
+    return DAT_005e2074;
 }
 
 } /* extern "C" */

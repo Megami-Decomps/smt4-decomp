@@ -55,13 +55,13 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c1c0c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_001137fc(int param_1)
@@ -192,7 +192,7 @@ void FUN_001137fc(int param_1)
     *(unsigned char *)(temp_v3 + 0x1264) = 0;
   }
   temp_v3 = g_titleScene;
-  temp_v0 = FUN_002c5da8(6,7,0);
+  temp_v0 = packNibblesAndByte(6,7,0);
   piVar5 = (int *)(temp_v3 + 0x12ac);
   temp_v1 = *piVar5;
   temp_v2 = piVar5[temp_v1 + 2];
@@ -219,7 +219,7 @@ void FUN_001137fc(int param_1)
   FUN_002c1b64(g_titleScene);
   FUN_002ba1e0(temp_v4 | 0xffffff00);
   temp_v3 = g_titleScene;
-  temp_v0 = FUN_002c5da8(6,1,0);
+  temp_v0 = packNibblesAndByte(6,1,0);
   piVar5 = (int *)(temp_v3 + 0x12ac);
   temp_v1 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = temp_v0;
@@ -232,7 +232,7 @@ void FUN_001137fc(int param_1)
   *(unsigned int *)(temp_v3 + 0x38) = 2;
   FUN_002c1b64(g_titleScene,temp_v3);
   FUN_002ba1e0(temp_v4);
-  if (((DAT_00476638 & 1) == 0) && (temp_v3 = FUN_002bfefc(&DAT_00476638), temp_v3 != 0)) {
+  if (((DAT_00476638 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476638), temp_v3 != 0)) {
     DAT_004efd9c = temp_v7;
     DAT_004efda0 = temp_v6;
     DAT_004efda4 = temp_v6;

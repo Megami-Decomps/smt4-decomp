@@ -7,7 +7,7 @@ extern "C" {
 int asdMemoryAllocTracked(...);
 int FUN_00178b04(...);
 int FUN_00291038(...);
-int FUN_0041a080(...);
+int itemTableClear(...);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00291038. */
-/* Supplied declaration required: FUN_0041a080. */
+/* Supplied declaration required: itemTableClear. */
 
 
 void FUN_0041a0fc(int param_1,unsigned int param_2)
@@ -40,7 +40,7 @@ void FUN_0041a0fc(int param_1,unsigned int param_2)
   unsigned char temp_v5;
   
   *(unsigned int *)(param_1 + 0x10) = param_2;
-  FUN_0041a080(param_1 + 0x1c);
+  itemTableClear(param_1 + 0x1c);
   piVar8 = (int *)(param_1 + 0x1c);
   temp_v3 = *(int *)(param_1 + 4);
   *(unsigned int *)(param_1 + 0x1c) = 0;

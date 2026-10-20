@@ -25,7 +25,7 @@ typedef struct {
 extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00192718. */
 /* Supplied declaration required: FUN_002f0384. */
-extern int FUN_00334158(void);
+extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0038b5fc. */
 /* Supplied declaration required: FUN_003df7c4. */
@@ -73,7 +73,7 @@ void FUN_00498de0(int param_1)
     *(unsigned int *)(param_1 + 0x16034) = temp_v5;
   }
   else if (*(char *)(param_1 + 0x22) != '\0') {
-    temp_v1 = FUN_00334158();
+    temp_v1 = objBStateAllowsAction();
     if (temp_v1 != 0) {
       FUN_002f0384(1);
       *(unsigned char *)(param_1 + 0x23) = 1;

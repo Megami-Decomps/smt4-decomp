@@ -9,7 +9,7 @@ int jyoucyuGetTableEntry(void);
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-extern char *FUN_004731a4(void);
+extern char *gameBlockGetArea27E98(void);
 
 
 unsigned int FUN_003a440c(void)
@@ -20,7 +20,7 @@ unsigned int FUN_003a440c(void)
   char *pcVar2;
   
   jyoucyuGetTableEntry();
-  pcVar2 = (char *)FUN_004731a4();
+  pcVar2 = (char *)gameBlockGetArea27E98();
   temp_v0 = *pcVar2;
   if ((temp_v0 == '\x01' || temp_v0 == '\x02') || temp_v0 == '\x03') {
     *(unsigned char *)(g_aocMain + 0xc0) = 1;

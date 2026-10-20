@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e95c4(unsigned int, unsigned int);
+void FUN_002e95c4(void *dest, u32 value);
 
-/* Supplied declaration required: FUN_002e95c4. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 value;
+} Holder;
 
-
-unsigned int FUN_003056e4(unsigned int param_1,int param_2)
-
+/* Calls FUN_002e95c4(dest, the word at 4 of `source`) and returns `dest`. */
+void *FUN_003056e4(void *dest, Holder *source)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e95c4(param_1,*(unsigned int *)(param_2 + 4));
-  return param_1;
+    FUN_002e95c4(dest, source->value);
+    return dest;
 }
 
 } /* extern "C" */

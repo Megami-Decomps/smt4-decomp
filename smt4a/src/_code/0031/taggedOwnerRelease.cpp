@@ -1,0 +1,23 @@
+#include "shard/Shard0031.h"
+
+extern "C" {
+
+extern void vcallSlot12IfValid(Object *object);
+extern void FUN_00195fc8(void);
+
+/* Releases the tagged object (bit 0 set: FUN_00195fc8 runs first) and clears the pointer. */
+u32 taggedOwnerRelease(TaggedOwner *owner)
+{
+    u32 tagged = owner->tagged;
+
+    if ((tagged & ~1u) != 0) {
+        if ((tagged & 1) != 0) {
+            FUN_00195fc8();
+        }
+        vcallSlot12IfValid((Object *)(owner->tagged & ~1u));
+        owner->tagged = 0;
+    }
+    return 0;
+}
+
+} /* extern "C" */

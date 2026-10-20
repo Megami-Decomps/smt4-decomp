@@ -1,50 +1,49 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a0cc8(int);
-int FUN_002b8838(int);
+int FUN_002a0cc8(int arg);
+int FUN_002b8838(int arg);
+extern int FUN_00296f4c(u32 a, int b);
 
-extern int DAT_0043dd68; /* 0x43dd68 */
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x42C];
+    /* 0x42C */ u32 unk42C;
+    /* 0x430 */ u8 active;
+    /* 0x431 */ u8 unk431[3];
+    /* 0x434 */ int unk434;
+    /* 0x438 */ u8 unk438[0x40];
+    /* 0x478 */ int unk478;
+} Obj;
 
-extern int FUN_00296f4c(unsigned int, int);
-/* Supplied declaration required: FUN_002a0cc8. */
-/* Supplied declaration required: FUN_002b8838. */
+extern Obj *DAT_0043dd68;
 
-
-unsigned int FUN_002a0c08(int param_1)
-
+u32 FUN_002a0c08(int value)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0043dd68;
-  if (DAT_0043dd68 != 0) {
-    if (*(char *)(DAT_0043dd68 + 0x430) != '\0') {
-      *(int *)(DAT_0043dd68 + 0x478) = param_1;
-    }
-    else {
-      temp_v1 = FUN_00296f4c(*(unsigned int *)(DAT_0043dd68 + 0x42c),param_1);
-      if (temp_v1 != 0) {
-        if (((!(param_1 == 7 || param_1 == 8)) && (!(param_1 == 9 || param_1 == 10))) &&
-           (!(param_1 == 0xb || param_1 == 0xd))) {
-          if (param_1 == 0xc) {
-            FUN_002a0cc8(1);
-          }
+    Obj *obj = DAT_0043dd68;
+
+    if (DAT_0043dd68 != NULL) {
+        if (DAT_0043dd68->active != 0) {
+            DAT_0043dd68->unk478 = value;
+        } else {
+            if (FUN_00296f4c(DAT_0043dd68->unk42C, value) != 0) {
+                if (((!(value == 7 || value == 8)) && (!(value == 9 || value == 10))) &&
+                    (!(value == 0xb || value == 0xd))) {
+                    if (value == 0xc) {
+                        FUN_002a0cc8(1);
+                    }
+                } else {
+                    FUN_002a0cc8(1);
+                    FUN_002b8838(0x9e);
+                }
+                obj->unk478 = 0xffffffff;
+                obj->unk434 = value;
+                obj->active = 1;
+                return 1;
+            }
         }
-        else {
-          FUN_002a0cc8(1);
-          FUN_002b8838(0x9e);
-        }
-        *(unsigned int *)(temp_v0 + 0x478) = 0xffffffff;
-        *(int *)(temp_v0 + 0x434) = param_1;
-        *(unsigned char *)(temp_v0 + 0x430) = 1;
-        return 1;
-      }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

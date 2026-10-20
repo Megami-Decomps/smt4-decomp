@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_002f4e86(int *param_1)
-
+/* Returns 1 when the referenced word is not negative, 0 when it is. */
+s32 FUN_002f4e86(s32 *valueRef)
 {
-  return (*param_1 >> 0x1f) + 1;
+    return (*valueRef >> 0x1F) + 1;
 }
 
 } /* extern "C" */

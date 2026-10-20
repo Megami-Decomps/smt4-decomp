@@ -25,7 +25,7 @@ extern unsigned int DAT_006426c0; /* 0x6426c0 */
 extern unsigned int DAT_006426cc; /* 0x6426cc */
 
 /* Supplied declaration required: FUN_00430e58. */
-extern int FUN_00430f2c(int, unsigned int);
+extern int handlerRefForward(int, unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -87,7 +87,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
           FUN_00430e58(param_1[0x156]);
           DAT_005b448f = '\0';
         }
-        temp_v0 = FUN_00430f2c(temp_v0,4);
+        temp_v0 = handlerRefForward(temp_v0,4);
         param_1[0x156] = temp_v0;
         if (temp_v0 != 0) {
           DAT_005b448f = '\x01';
@@ -123,7 +123,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
           FUN_00430e58(param_1[0xea]);
           DAT_005b448e = '\0';
         }
-        temp_v0 = FUN_00430f2c(temp_v0,4);
+        temp_v0 = handlerRefForward(temp_v0,4);
         param_1[0xea] = temp_v0;
         if (temp_v0 != 0) {
           DAT_005b448e = '\x01';

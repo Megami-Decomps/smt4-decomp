@@ -1,28 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00381ac0_arg0 fn_00381ac0_arg0;
-struct fn_00381ac0_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    undefined1 field_0x8; /* +0x8 */
-    undefined1 field_0x9; /* +0x9 */
-};
+extern u32 FUN_002907a8(void);
 
-extern unsigned int FUN_002907a8(void);
+typedef struct Obj {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 timestamp;
+    /* 0x8 */ u8 unk8;
+    /* 0x9 */ u8 unk9;
+} Obj;
 
-
-void FUN_00381ac0(fn_00381ac0_arg0 *param_1)
-
+void FUN_00381ac0(Obj *obj)
 {
-  unsigned int temp_v0;
-  
-  param_1->field_0x9 = 0;
-  param_1->field_0x8 = 0;
-  temp_v0 = FUN_002907a8();
-  param_1->field_0x4 = temp_v0;
-  return;
+    obj->unk9 = 0;
+    obj->unk8 = 0;
+    obj->timestamp = FUN_002907a8();
 }
 
 } /* extern "C" */

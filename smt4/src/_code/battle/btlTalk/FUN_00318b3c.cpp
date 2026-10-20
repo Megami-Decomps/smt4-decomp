@@ -11,7 +11,7 @@ extern int g_btlTalk; /* 0x439b58 */
 
 /* Supplied declaration required: scrSetResult. */
 extern int FUN_002c09d0(void);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern int dataTableGetCount(void);
 extern int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_002c424c. */
@@ -66,7 +66,7 @@ unsigned int FUN_00318b3c(void)
   if (temp_v2 == 0) {
     temp_v2 = 1;
   }
-  temp_v1 = FUN_002c09f4((temp_v2 - 1U) & 0xffff);
+  temp_v1 = randNextInRange((temp_v2 - 1U) & 0xffff);
   *(unsigned int *)(g_btlTalk + aiStack_130[temp_v1] * 4 + 0x34) = 0xffffffff;
   scrSetResult();
   return 1;

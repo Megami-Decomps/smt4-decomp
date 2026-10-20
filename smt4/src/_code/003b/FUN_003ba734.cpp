@@ -1,19 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bd808(int);
+int FUN_002bd808(int block);
 
-/* Supplied declaration required: FUN_002bd808. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u32 flags;
+} Obj;
 
-
-void FUN_003ba734(int param_1)
-
+/* Runs FUN_002bd808 on the block at +0x42 and sets flag 0x10. */
+void FUN_003ba734(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002bd808(param_1 + 0x42);
-  *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x10;
-  return;
+    FUN_002bd808((int)obj + 0x42);
+    obj->flags = obj->flags | 0x10;
 }
 
 } /* extern "C" */

@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: FUN_002deb84. */
 /* Supplied declaration required: FUN_003c1060. */
-extern unsigned int FUN_00496674(void);
+extern unsigned int selector16038Pick(void);
 
 
 void FUN_003888f8(void)
@@ -38,7 +38,7 @@ void FUN_003888f8(void)
     FUN_003c1060();
   }
   shopGetResult();
-  temp_v2 = FUN_00496674();
+  temp_v2 = selector16038Pick();
   FUN_002c76c0(0);
   temp_v3 = FUN_002deb84();
   FUN_0021bdac(temp_v0 + 0x194,0,temp_v3,0x10,0,temp_v2);

@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/SaveWork.h"
 
 extern "C" {
 
-extern int FUN_002c2950(void);
+extern SaveWork *FUN_002c2950(void);
 
-
-unsigned char FUN_00276060(int param_1)
-
+u8 FUN_00276060(int index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002c2950();
-  return *(unsigned char *)(temp_v0 + param_1 + 0xbd8);
+    SaveWork *work = FUN_002c2950();
+
+    return work->unkBD8[index];
 }
 
 } /* extern "C" */

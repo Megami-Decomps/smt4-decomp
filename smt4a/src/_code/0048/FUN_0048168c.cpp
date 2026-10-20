@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "shard/Shard0048.h"
 
 extern "C" {
 
+typedef struct TbcrBlock {
+    /* 0x00 */ s32 magic;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 unk08;
+} TbcrBlock;
 
-int FUN_0048168c(int *param_1)
-
+/* The word at +8 of a "TBCR" block, or 0 when it is not one. */
+s32 FUN_0048168c(TbcrBlock *block)
 {
-  int temp_v0;
-  
-  if ((param_1 != (int *)0x0) && (*param_1 == 0x52434254)) {
-    temp_v0 = param_1[2];
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    s32 value;
+
+    if (block != NULL && block->magic == 0x52434254) {
+        value = block->unk08;
+    } else {
+        value = 0;
+    }
+    return value;
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001aea28(...);
 int FUN_00357b70(...);
 int FUN_003659f4(void);
-int FUN_00368bd8(void);
+int sub68OwnerStart2(void);
 int FUN_00378964(void);
 int FUN_00378a1c(void);
 int FUN_003d2150(...);
@@ -130,7 +130,7 @@ extern int FUN_00364484(int);
 /* Supplied declaration required: FUN_00364530. */
 /* Supplied declaration required: FUN_003659f4. */
 /* Supplied declaration required: FUN_003689d0. */
-/* Supplied declaration required: FUN_00368bd8. */
+/* Supplied declaration required: sub68OwnerStart2. */
 extern int FUN_0036d54c(void);
 /* Supplied declaration required: FUN_00378964. */
 /* Supplied declaration required: FUN_00378a1c. */
@@ -639,7 +639,7 @@ LAB_0024a684:
                 temp_v4 = *(int *)(temp_v8 + 0xf8);
               }
               if (temp_v6 != 0 && temp_v4 != -1) {
-                FUN_00368bd8();
+                sub68OwnerStart2();
                 *(unsigned int *)(temp_v8 + 0xf8) = 0xffffffff;
                 *(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0) =
                      *(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0) - 1;

@@ -1,76 +1,79 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0013dd78(unsigned int);
-int FUN_001836b0(unsigned int);
-int asdMemFree(...);
-int FUN_00222104(void);
-int FUN_00222434(void);
-int FUN_002b2f08(unsigned int);
-int FUN_002ce8d8(void);
+void resourceDestroy(void *resource);
+void resourceListDestroy(void *list);
+void FUN_00222104(void *ref);
+void FUN_00222434(void *shared);
+void FUN_002b2f08(void *object);
+void FUN_002ce8d8(void);
+void asdMemFree(void *memory);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 count;
+} Owner;
 
-/* Supplied declaration required: FUN_0013dd78. */
-/* Supplied declaration required: FUN_001836b0. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00222104. */
-/* Supplied declaration required: FUN_00222434. */
-/* Supplied declaration required: FUN_002b2f08. */
-/* Supplied declaration required: FUN_002ce8d8. */
+typedef struct Collection {
+    /* 0x00 */ u32 count;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u16 unk0C;
+    /* 0x0E */ u8 flags;
+    /* 0x0F */ u8 unk0F[0x25];
+    /* 0x34 */ void **resources;
+    /* 0x38 */ void *resourceBuffer;
+    /* 0x3C */ void **lists;
+    /* 0x40 */ void *listBuffer;
+    /* 0x44 */ void *ref;
+    /* 0x48 */ void *shared;
+    /* 0x4C */ Owner *owner;
+    /* 0x50 */ void *extra;
+} Collection;
 
-
-void FUN_002b40ec(unsigned int *param_1)
-
+/* Destroys the collection: its resources and lists (counted by the owner when it has one, otherwise by `count`) with their buffers, the reference and shared block, the owner's buffer when bit 0 of `flags` is set, the extra object, and the collection itself. */
+void FUN_002b40ec(Collection *collection)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (param_1[0xe] != 0) {
-    temp_v0 = 0;
-    if (param_1[0x13] != 0) {
-      temp_v1 = *(unsigned int *)(param_1[0x13] + 8);
+    u32 i;
+    u32 count;
+
+    if (collection->resourceBuffer != NULL) {
+        i = 0;
+        if (collection->owner != NULL) {
+            count = collection->owner->count;
+        } else {
+            count = collection->count;
+        }
+        for (i = 0; i < count; i = i + 1) {
+            resourceDestroy(collection->resources[i]);
+        }
+        asdMemFree(collection->resourceBuffer);
     }
-    else {
-      temp_v1 = *param_1;
+    if (collection->listBuffer != NULL) {
+        i = 0;
+        if (collection->owner != NULL) {
+            count = collection->owner->count;
+        } else {
+            count = collection->count;
+        }
+        for (i = 0; i < count; i = i + 1) {
+            resourceListDestroy(collection->lists[i]);
+        }
+        asdMemFree(collection->listBuffer);
     }
-    for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
-      FUN_0013dd78(*(unsigned int *)(param_1[0xd] + temp_v0 * 4));
+    if (collection->ref != NULL) {
+        FUN_00222104(collection->ref);
     }
-    asdMemFree(param_1[0xe]);
-  }
-  if (param_1[0x10] != 0) {
-    temp_v0 = 0;
-    if (param_1[0x13] != 0) {
-      temp_v1 = *(unsigned int *)(param_1[0x13] + 8);
+    if (collection->shared != NULL) {
+        FUN_00222434(collection->shared);
     }
-    else {
-      temp_v1 = *param_1;
+    if ((collection->flags & 1) != 0) {
+        FUN_002b2f08(collection->owner);
     }
-    for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
-      FUN_001836b0(*(unsigned int *)(param_1[0xf] + temp_v0 * 4));
+    if (collection->extra != NULL) {
+        FUN_002ce8d8();
     }
-    asdMemFree(param_1[0x10]);
-  }
-  if (param_1[0x11] != 0) {
-    FUN_00222104();
-  }
-  if (param_1[0x12] != 0) {
-    FUN_00222434();
-  }
-  if ((*(unsigned char *)((int)param_1 + 0xe) & 1) != 0) {
-    FUN_002b2f08(param_1[0x13]);
-  }
-  if (param_1[0x14] != 0) {
-    FUN_002ce8d8();
-  }
-  asdMemFree(param_1);
-  return;
+    asdMemFree(collection);
 }
 
 } /* extern "C" */

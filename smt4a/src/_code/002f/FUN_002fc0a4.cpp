@@ -1,25 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x3F8];
+    /* 0x3F8 */ s32 state;
+} Holder;
 
-unsigned int FUN_002fc0a4(int param_1)
-
+/* Returns 0 when the object exists and its state is neither 0 nor 1; otherwise 1. */
+u32 FUN_002fc0a4(Holder *object)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = 0;
-  if (param_1 != 0) {
-    temp_v0 = *(int *)(param_1 + 0x3f8);
-  }
-  if ((param_1 != 0 && temp_v0 != 1) && (temp_v0 != 0)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    s32 state;
+    u32 result;
+
+    state = 0;
+    if (object != NULL) {
+        state = object->state;
+    }
+    if ((object != NULL && state != 1) && (state != 0)) {
+        result = 0;
+    } else {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

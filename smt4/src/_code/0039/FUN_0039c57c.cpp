@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002314d0(void);
+int dataTable2bSub1GetCount(void);
 int MapNaviTable_GetCategoryCount(void);
 
-extern int FUN_00231494(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002314d0. */
+extern int dataTable2bSub1GetRecord(unsigned int *, unsigned int);
+/* Supplied declaration required: dataTable2bSub1GetCount. */
 /* Supplied declaration required: MapNaviTable_GetCategoryCount. */
 extern int MapNaviTable_GetCategoryRecord(unsigned int *, unsigned int);
 extern int NaviMain_GetPosX(void);
@@ -34,8 +34,8 @@ void FUN_0039c57c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v1 = NaviMain_GetPosX();
   temp_v2 = NaviMain_GetPosY(param_1 + 0x162);
   puVar4 = (unsigned int *)&uStack_28;
-  FUN_002314d0();
-  temp_v3 = FUN_00231494((unsigned int *)&uStack_28,0);
+  dataTable2bSub1GetCount();
+  temp_v3 = dataTable2bSub1GetRecord((unsigned int *)&uStack_28,0);
   temp_v4 = 0;
   if (temp_v4 < (int)puVar4) {
     do {
@@ -72,8 +72,8 @@ void FUN_0039c57c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         }
         temp_v0 = *(char *)(temp_v3 + 4);
         puVar4 = (unsigned int *)&uStack_28;
-        FUN_002314d0();
-        temp_v3 = FUN_00231494((unsigned int *)&uStack_28,0);
+        dataTable2bSub1GetCount();
+        temp_v3 = dataTable2bSub1GetRecord((unsigned int *)&uStack_28,0);
         temp_v2 = 0;
         if ((int)puVar4 < 1) {
           return;

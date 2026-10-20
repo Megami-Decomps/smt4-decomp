@@ -1,15 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ int state;
+} Obj;
 
-unsigned char FUN_0034c930(int param_1)
-
+u8 FUN_0034c930(Obj *obj)
 {
-  if (*(int *)(param_1 + 0x2c) == 1) {
-    return 0;
-  }
-  return 1;
+    if (obj->state == 1) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

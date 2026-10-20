@@ -10,18 +10,18 @@ int sysPlaySe(int);
 int FUN_00184528(int, int);
 int FUN_00224880(unsigned int);
 int FUN_00275f44(unsigned int, unsigned int);
-int FUN_0031a218(unsigned int, int);
-int FUN_00342348(int);
-int FUN_003491e8(void);
-int FUN_0037c8b4(unsigned int, int);
+int panelSetMode3(unsigned int, int);
+int screenShowMessage(int);
+int obj04Finish(void);
+int panelSetTarget(unsigned int, int);
 int FUN_004935b0(int, unsigned int, unsigned int);
 int FUN_004963f8(int);
 int FUN_004cf8dc(int, int);
-int FUN_004d0310(int);
-int FUN_004d044c(void);
-int FUN_004d06e4(...);
+int sub10OwnerStart(int);
+int sendEvent100020E(void);
+int releaseEntriesA(...);
 int FUN_004d0738(int);
-int FUN_004d097c(...);
+int releaseEntriesB(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -41,22 +41,22 @@ extern unsigned int FUN_001654e4(int);
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_00275f44. */
-/* Supplied declaration required: FUN_0031a218. */
-/* Supplied declaration required: FUN_00342348. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: panelSetMode3. */
+/* Supplied declaration required: screenShowMessage. */
+/* Supplied declaration required: obj04Finish. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
-extern int FUN_0037c894(void);
-/* Supplied declaration required: FUN_0037c8b4. */
+extern int panelStateIs0(void);
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_004935b0. */
 /* Supplied declaration required: FUN_004963f8. */
 /* Supplied declaration required: FUN_004cf8dc. */
 extern int FUN_004cfe4c(int);
-/* Supplied declaration required: FUN_004d0310. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sub10OwnerStart. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d0584(void);
-/* Supplied declaration required: FUN_004d06e4. */
+/* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: FUN_004d0738. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_00498ac0(int param_1)
@@ -89,8 +89,8 @@ void FUN_00498ac0(int param_1)
     if ((temp_v1 >= 10) &&
        ((temp_v1 = FUN_004d0584(), temp_v1 != 0 ||
         (temp_v1 = FUN_00224880(*(unsigned int *)(param_1 + 0x18c)), temp_v1 == 2)))) {
-      FUN_004d044c();
-      FUN_003491e8();
+      sendEvent100020E();
+      obj04Finish();
       temp_v2 = 2;
       puVar4 = (unsigned int *)(param_1 + 8);
       *puVar4 = temp_v2;
@@ -119,7 +119,7 @@ void FUN_00498ac0(int param_1)
     FUN_004935b0(param_1 + 0x3a4,temp_v0,temp_v2);
     FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
     if (*(char *)(param_1 + 0x476) != '\0') {
-      FUN_0037c8b4(*(unsigned int *)(param_1 + 0x16000),0);
+      panelSetTarget(*(unsigned int *)(param_1 + 0x16000),0);
       temp_v2 = 4;
       *(unsigned int *)(param_1 + 8) = temp_v2;
       return;
@@ -130,27 +130,27 @@ void FUN_00498ac0(int param_1)
     temp_v1 = param_1 + 0x9f88;
     FUN_004d0738(param_1 + 0xb08);
     (**(romwright_code **)(**(int **)(param_1 + 0xb3c) + 0xc))(*(int **)(param_1 + 0xb3c),temp_v1);
-    FUN_004d0310(temp_v1);
+    sub10OwnerStart(temp_v1);
     FUN_004cf8dc(param_1 + 0x3cc,2);
     FUN_004cf8dc(param_1 + 0x3cc,0xc);
     temp_v1 = FUN_004cfe4c(temp_v1);
-    FUN_00342348(*(unsigned short *)(param_1 + temp_v1 * 6 + 0x9ffe));
+    screenShowMessage(*(unsigned short *)(param_1 + temp_v1 * 6 + 0x9ffe));
     temp_v1 = FUN_004d0584();
     if (temp_v1 != 0) {
-      FUN_004d044c();
-      FUN_003491e8();
+      sendEvent100020E();
+      obj04Finish();
       *(unsigned int *)(param_1 + 8) = 5;
       *(unsigned int *)(param_1 + 0xc) = 0;
-      FUN_0031a218(*(unsigned int *)(param_1 + 0x16000),0);
+      panelSetMode3(*(unsigned int *)(param_1 + 0x16000),0);
       return;
     }
     break;
   case 5:
     temp_v1 = FUN_0026272c();
-    if ((temp_v1 != 0) && (temp_v1 = FUN_0037c894(), temp_v1 == 1)) {
+    if ((temp_v1 != 0) && (temp_v1 = panelStateIs0(), temp_v1 == 1)) {
       FUN_004963f8(param_1);
-      FUN_004d097c(*(unsigned int *)(param_1 + 0xb3c));
-      FUN_004d06e4(param_1 + 0xb08);
+      releaseEntriesB(*(unsigned int *)(param_1 + 0xb3c));
+      releaseEntriesA(param_1 + 0xb08);
       temp_v1 = 0;
       if (temp_v1 < *(short *)(param_1 + 0x16030)) {
         do {

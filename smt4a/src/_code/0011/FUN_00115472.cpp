@@ -1,16 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00115472` (_code @ 0x115472, 0x12 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_00115472(int param_1,int param_2,int param_3)
-
+/* Adds the value (offset 0x10) of `dx` to the field at 8 of `self` and that of `dy` to the field at 0xC. */
+void FUN_00115472(u32 self, u32 dx, u32 dy)
 {
-  *(int *)(param_1 + 8) = *(int *)(param_2 + 0x10) + *(int *)(param_1 + 8);
-  *(int *)(param_1 + 0xc) = *(int *)(param_3 + 0x10) + *(int *)(param_1 + 0xc);
-  return;
+    *(s32 *)(self + 8) = *(s32 *)(dx + 0x10) + *(s32 *)(self + 8);
+    *(s32 *)(self + 0xc) = *(s32 *)(dy + 0x10) + *(s32 *)(self + 0xc);
 }
 
 } /* extern "C" */

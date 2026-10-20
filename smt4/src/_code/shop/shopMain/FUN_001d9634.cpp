@@ -44,7 +44,7 @@ extern int FUN_00343af0(void);
 /* Supplied declaration required: FUN_003a14ac. */
 /* Supplied declaration required: FUN_003a3914. */
 /* Supplied declaration required: FUN_003a5e30. */
-extern int FUN_003a630c(void);
+extern int storyFlagRangeAnySet(void);
 /* Supplied declaration required: FUN_003a63c8. */
 /* Supplied declaration required: FUN_003a63f8. */
 
@@ -161,7 +161,7 @@ unsigned int FUN_001d9634(void)
     }
   }
   else {
-    temp_v2 = FUN_003a630c();
+    temp_v2 = storyFlagRangeAnySet();
     if ((((temp_v2 != 0) && (temp_v2 = FUN_00343af0(), temp_v2 == 0)) &&
         (temp_v2 = *(int *)(temp_v3 + 8), temp_v2 != 6)) &&
        (((!(temp_v2 == 7 || temp_v2 == 9) && (!(temp_v2 == 10 || temp_v2 == 0xb))) &&

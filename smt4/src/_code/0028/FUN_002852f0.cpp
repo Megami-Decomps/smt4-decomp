@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c09f4(int);
+int randNextInRange(int);
 
 extern unsigned char DAT_004bce8c; /* 0x4bce8c */
 extern unsigned char DAT_004bce8d; /* 0x4bce8d */
@@ -12,7 +12,7 @@ extern unsigned int DAT_004bd0d0; /* 0x4bd0d0 */
 extern unsigned int DAT_004bd0d8; /* 0x4bd0d8 */
 extern unsigned char DAT_004bd0dc; /* 0x4bd0dc */
 
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 extern int FUN_002c2950(void);
 
 
@@ -66,29 +66,29 @@ void FUN_002852f0(int param_1)
       temp_v3 = temp_v3 + 1;
     } while ((int)temp_v3 < (int)*(char *)(temp_v1 + 0xdd1));
   }
-  temp_v3 = FUN_002c09f4(100);
+  temp_v3 = randNextInRange(100);
   if (temp_v3 >= 0x32) {
-    temp_v5 = FUN_002c09f4(*(char *)(temp_v1 + 0xdd0) - 8);
+    temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd0) - 8);
     *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 8 + 0xb4) = 1;
-    temp_v5 = FUN_002c09f4(*(char *)(temp_v1 + 0xdd0) - 8);
+    temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd0) - 8);
     *(unsigned char *)
      (temp_v1 + (*(char *)(temp_v1 + 0xdd1) - 2) * 0x78 + ((temp_v5 + 4U) & 0xfffefffe) * 8 + 0x3c) = 1;
-    temp_v5 = FUN_002c09f4(*(char *)(temp_v1 + 0xdd1) - 4);
+    temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd1) - 4);
     *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 0x78 + 0x44) = 1;
     temp_v0 = *(char *)(temp_v1 + 0xdd0);
-    temp_v5 = FUN_002c09f4(*(char *)(temp_v1 + 0xdd1) - 4);
+    temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd1) - 4);
     *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 0x78 + (temp_v0 - 2) * 8 + 0x3c) = 1;
     return;
   }
-  temp_v5 = FUN_002c09f4(*(char *)(temp_v1 + 0xdd0) - 4);
+  temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd0) - 4);
   *(unsigned char *)(temp_v1 + ((temp_v5 + 2U) & 0xfffefffe) * 8 + 0xb4) = 1;
-  temp_v5 = FUN_002c09f4(*(char *)(temp_v1 + 0xdd0) - 4);
+  temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd0) - 4);
   *(unsigned char *)
    (temp_v1 + (*(char *)(temp_v1 + 0xdd1) - 2) * 0x78 + ((temp_v5 + 2U) & 0xfffefffe) * 8 + 0x3c) = 1;
-  temp_v5 = FUN_002c09f4(*(char *)(temp_v1 + 0xdd1) - 8);
+  temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd1) - 8);
   *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 0x78 + 0x44) = 1;
   temp_v0 = *(char *)(temp_v1 + 0xdd0);
-  temp_v5 = FUN_002c09f4(*(char *)(temp_v1 + 0xdd1) - 8);
+  temp_v5 = randNextInRange(*(char *)(temp_v1 + 0xdd1) - 8);
   *(unsigned char *)(temp_v1 + ((temp_v5 + 4U) & 0xfffefffe) * 0x78 + (temp_v0 - 2) * 8 + 0x3c) = 1;
   return;
 }

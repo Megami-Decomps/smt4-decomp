@@ -26,7 +26,7 @@ extern unsigned char DAT_00647778; /* 0x647778 */
 /* Supplied declaration required: FUN_001743b8. */
 /* Supplied declaration required: FUN_0018c87c. */
 /* Supplied declaration required: FUN_001b6668. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
@@ -64,7 +64,7 @@ void FUN_00173818(int param_1)
     } while (piVar6 != (int *)(param_1 + 4));
   }
   if (*(unsigned int *)(param_1 + 0xc) >= 2) {
-    if (((DAT_005c1d2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c1d2c), temp_v0 != 0)) {
+    if (((DAT_005c1d2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c1d2c), temp_v0 != 0)) {
       FUN_002f5020(&DAT_00647778,&LAB_00197f28,0xc,0x80);
     }
     while (*(int *)(param_1 + 0xc) != 0) {

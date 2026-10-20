@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f4370(int, int, int);
+int emptyStub_002f4370(int, int, int);
 int FUN_002f5020(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -18,10 +18,10 @@ extern unsigned char LAB_00417a10; /* 0x417a10 */
 extern unsigned char LAB_0045b824; /* 0x45b824 */
 extern int FUN_0045bbdc(...); /* 0x45bbdc */
 
-/* Supplied declaration required: FUN_002f4370. */
+/* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
 extern int FUN_0045c0ac(int);
-extern int FUN_0045c11c(void);
+extern int installVtbl55BDE0(void);
 extern int FUN_0045c310(int);
 extern int FUN_0045e798(int);
 extern int nw_snd_Sound3DListener_Sound3DListener_sub_object(int);
@@ -33,7 +33,7 @@ void FUN_005115a0(void)
 /* irregular: 5 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_0045c11c();
+  temp_v0 = installVtbl55BDE0();
   temp_v0 = FUN_0045e798(temp_v0 + 0x194);
   temp_v0 = FUN_0045c310(temp_v0 + 0x118);
   temp_v0 = temp_v0 + 0x278;
@@ -51,7 +51,7 @@ void FUN_005115a0(void)
   *(unsigned int *)(temp_v0 + 0xf8) = 0;
   *(unsigned int *)(temp_v0 + 0xfc) = 0;
   *(unsigned int *)(temp_v0 + 0x100) = 0xffffffff;
-  FUN_002f4370(temp_v0 - 0x1210,0x3f2cb0,0x100000);
+  emptyStub_002f4370(temp_v0 - 0x1210,0x3f2cb0,0x100000);
   return;
 }
 

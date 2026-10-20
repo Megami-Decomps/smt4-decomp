@@ -11,7 +11,7 @@ int FUN_0042f79c(void);
 int FUN_00430e58(int *);
 int asdCecMessageIdInit(unsigned char [8]);
 int FUN_00501928(...);
-int FUN_00501f28(int, unsigned char [96]);
+int copy0x70Bytes(int, unsigned char [96]);
 int FUN_00501fa4(unsigned char [8], int *);
 int nn_cec_CTR_Message_GetExHeader(int, int, unsigned char [4], int *);
 int nn_cec_CTR_Message_GetMessageId(int *, int, unsigned char [8]);
@@ -43,11 +43,11 @@ extern unsigned int DAT_006426c0; /* 0x6426c0 */
 /* Supplied declaration required: FUN_0030fc80. */
 /* Supplied declaration required: FUN_0042f79c. */
 /* Supplied declaration required: FUN_00430e58. */
-extern unsigned int FUN_00430ef0(unsigned int *, unsigned int *);
+extern unsigned int releaseOrCopyHandle2(unsigned int *, unsigned int *);
 /* Supplied declaration required: asdCecMessageIdInit. */
-extern int *FUN_00430f2c(unsigned int, unsigned int);
+extern int *handlerRefForward(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00501928. */
-/* Supplied declaration required: FUN_00501f28. */
+/* Supplied declaration required: copy0x70Bytes. */
 /* Supplied declaration required: FUN_00501fa4. */
 extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
 extern unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(unsigned int);
@@ -139,7 +139,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
     return (int *)0xc8e1086b;
   }
   nn_cec_CTR_Message_GetMessageId(&temp_v9,param_2,temp_v12);
-  FUN_00501f28(param_2,temp_v10);
+  copy0x70Bytes(param_2,temp_v10);
   temp_v0 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v12);
   if (temp_v0) {
     FUN_0030fc80(&temp_v21);
@@ -248,7 +248,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   else if (!temp_v8) {
     temp_v15 = 1;
   }
-  temp_v20 = (int *)FUN_00430f2c(*(unsigned int *)(param_2 + 4),4);
+  temp_v20 = (int *)handlerRefForward(*(unsigned int *)(param_2 + 4),4);
   if (temp_v20 == (int *)0x0) {
     nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
     return (int *)0xc8610bf3;
@@ -331,7 +331,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   }
   temp_v0 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v12);
   if (temp_v0) {
-    temp_v4 = FUN_00430ef0((unsigned int *)&temp_v9,(unsigned int *)&temp_v13);
+    temp_v4 = releaseOrCopyHandle2((unsigned int *)&temp_v9,(unsigned int *)&temp_v13);
     FUN_001a9110(temp_v12,temp_v4);
     FUN_001a9110(temp_v25,temp_v12);
   }

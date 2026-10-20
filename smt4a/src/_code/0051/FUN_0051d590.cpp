@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_001b6668(int, int *);
-int FUN_00462980(int *);
+int callerARelease3C(int *);
 int nw_ut_internal_LinkListImpl_insert(int, int, int *);
 
 /* Supplied declaration required: FUN_001b6668. */
 extern int FUN_00462964(int *);
-/* Supplied declaration required: FUN_00462980. */
+/* Supplied declaration required: callerARelease3C. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
 
@@ -28,7 +28,7 @@ void FUN_0051d590(int param_1)
       piVar3 = (int *)*piVar2;
       temp_v0 = FUN_00462964(piVar2 + -0x11);
       if (temp_v0 == 0) {
-        FUN_00462980(piVar2 + -0x11);
+        callerARelease3C(piVar2 + -0x11);
         FUN_001b6668(param_1 + 0x20,piVar2);
         nw_ut_internal_LinkListImpl_insert(param_1 + 0x14,param_1 + 0x18,piVar2);
       }

@@ -1,26 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001afdc4(void);
+void FUN_001afdc4(u32 handle);
 
-/* Supplied declaration required: FUN_001afdc4. */
+typedef struct Handles {
+    /* 0x00 */ u32 handle[2];
+} Handles;
 
-
-int FUN_001757d0(int param_1)
-
+/* Releases the (up to two) non-zero handles and returns the object. */
+Handles *FUN_001757d0(Handles *object)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    if (*(int *)(param_1 + temp_v0 * 4) != 0) {
-      FUN_001afdc4();
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 2);
-  return param_1;
+    s32 i;
+
+    i = 0;
+    do {
+        if (object->handle[i] != 0) {
+            FUN_001afdc4(object->handle[i]);
+        }
+        i = i + 1;
+    } while (i < 2);
+    return object;
 }
 
 } /* extern "C" */

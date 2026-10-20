@@ -19,7 +19,7 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
-extern int FUN_004ffb58(int);
+extern int slots4FGetActiveValue(int);
 
 
 void FUN_0027461c(void)
@@ -85,7 +85,7 @@ void FUN_0027461c(void)
         if (*(char *)(temp_v4 + 0x7c) != '\0') {
           FUN_003fd76c(temp_v2,temp_v4 + 0x68);
           FUN_003fdb18(temp_v2);
-          temp_v1 = FUN_004ffb58(temp_v2);
+          temp_v1 = slots4FGetActiveValue(temp_v2);
           if (temp_v1 != *(int *)(temp_v4 + 0x78)) {
             FUN_003fe86c(temp_v2,*(int *)(temp_v4 + 0x78),2);
           }

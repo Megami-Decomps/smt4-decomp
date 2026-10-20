@@ -32,7 +32,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: FUN_00102e7c. */
 /* Supplied declaration required: FUN_002e61e8. */
-extern int FUN_00512858(unsigned int, unsigned int);
+extern int returnMinusOne2(unsigned int, unsigned int);
 
 
 long long FUN_002e63a8(unsigned int param_1,char *param_2,fn_002e63a8_arg2 *param_3)
@@ -79,7 +79,7 @@ long long FUN_002e63a8(unsigned int param_1,char *param_2,fn_002e63a8_arg2 *para
   if (*param_2 == 't') {
     temp_v2 = temp_v2 | 0x10;
   }
-  temp_v1 = FUN_00512858(param_1,temp_v2);
+  temp_v1 = returnMinusOne2(param_1,temp_v2);
   if (temp_v1 != -1) {
     param_3->field_0x10 = 0;
     param_3->field_0x4 = 0;

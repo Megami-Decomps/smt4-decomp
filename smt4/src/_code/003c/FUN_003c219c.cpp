@@ -15,7 +15,7 @@ typedef struct {
     unsigned short sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned int FUN_002c09f4(short);
+extern unsigned int randNextInRange(short);
 /* Supplied declaration required: FUN_003eb068. */
 
 
@@ -64,7 +64,7 @@ unsigned int FUN_003c219c(int param_1,unsigned char *param_2)
   temp_v10 = temp_v2;
   temp_v11 = temp_v3;
   temp_v12 = temp_v4;
-  temp_v5 = FUN_002c09f4(((unsigned short)param_2[3] +
+  temp_v5 = randNextInRange(((unsigned short)param_2[3] +
                         (unsigned short)*param_2 + (unsigned short)param_2[1] + (unsigned short)param_2[2] +
                        (unsigned short)param_2[4]) - 1);
   temp_v6 = (unsigned int)*param_2;

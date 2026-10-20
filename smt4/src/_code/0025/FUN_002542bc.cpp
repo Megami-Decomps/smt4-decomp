@@ -1,15 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0044de98;
+typedef struct Table {
+    /* 0x00 */ u8 unk00[0xD8];
+    /* 0xD8 */ u32 values[1];
+} Table;
 
+extern struct {
+    u8 unk00[0x20];
+    Table *table;
+} DAT_0044de98;
 
-unsigned int FUN_002542bc(int param_1)
-
+u32 FUN_002542bc(int index)
 {
-  int base = *(int *)((unsigned char *)&DAT_0044de98 + 0x20);
-  return *(unsigned int *)(base + param_1 * 4 + 0xd8);
+    Table *table = DAT_0044de98.table;
+
+    return table->values[index];
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002c7e3c(void);
 int FUN_003343f0(int);
-int FUN_0050d794(int, unsigned int);
+int fillTwoWordsWithByte(int, unsigned int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -23,9 +23,9 @@ extern int slotRecordFindById(unsigned short);
 extern int FUN_002857b8(void);
 /* Supplied declaration required: FUN_002c7e3c. */
 /* Supplied declaration required: FUN_003343f0. */
-extern int FUN_003dfd5c(void);
-extern int FUN_004bd21c(void);
-/* Supplied declaration required: FUN_0050d794. */
+extern int countUnlockedSlots(void);
+extern int getUnlockedSlotCount(void);
+/* Supplied declaration required: fillTwoWordsWithByte. */
 
 
 void FUN_0039c488(void)
@@ -59,13 +59,13 @@ void FUN_0039c488(void)
   *(unsigned int *)(temp_v0 + 0x24e0) = 0;
   *(unsigned int *)(temp_v0 + 0x24e4) = 0;
   *(unsigned int *)(temp_v0 + 0x24e8) = 0;
-  FUN_0050d794(temp_v0 + 0x24f4,0xffffffff);
+  fillTwoWordsWithByte(temp_v0 + 0x24f4,0xffffffff);
   *(unsigned char *)(temp_v0 + 0x24f0) = 0;
   *(unsigned int *)(temp_v0 + 0x24fc) = 0;
   FUN_002c7e3c();
   if (*(short *)(temp_v0 + 0x598) < 1) {
     temp_v1 = FUN_001801a4();
-    temp_v2 = FUN_003dfd5c();
+    temp_v2 = countUnlockedSlots();
     *(int *)(temp_v0 + 0x24ec) = temp_v2;
     if (0 < temp_v2) {
       temp_v3 = 0;
@@ -85,7 +85,7 @@ void FUN_0039c488(void)
   else {
     temp_v1 = slotRecordFindById(*(unsigned short *)(temp_v0 + 0x598));
     *(int *)(temp_v0 + 0x24fc) = temp_v1;
-    temp_v2 = FUN_004bd21c();
+    temp_v2 = getUnlockedSlotCount();
     *(int *)(temp_v0 + 0x24ec) = temp_v2;
     if (0 < temp_v2) {
       temp_v3 = 0;

@@ -33,7 +33,7 @@ extern int FUN_00163fd4(unsigned int);
 extern int FUN_001656a0(unsigned int);
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_0030250c. */
-extern int FUN_00314bd8(void);
+extern int sub68OwnerCall1(void);
 /* Supplied declaration required: FUN_0033abb4. */
 extern int FUN_004d0554(void);
 
@@ -120,7 +120,7 @@ void FUN_00352568(void)
     temp_v1 = FUN_00163fd4(7);
     temp_v4 = temp_v1 != 0;
   }
-  if (((DAT_005f161d != '\0') && (DAT_005f1a5e != '\0')) && (temp_v1 = FUN_00314bd8(), temp_v1 != 0)) {
+  if (((DAT_005f161d != '\0') && (DAT_005f1a5e != '\0')) && (temp_v1 = sub68OwnerCall1(), temp_v1 != 0)) {
     temp_v4 = 0;
     temp_v5 = temp_v4;
   }

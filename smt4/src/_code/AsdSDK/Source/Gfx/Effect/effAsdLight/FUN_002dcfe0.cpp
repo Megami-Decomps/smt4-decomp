@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002abb24(unsigned int, unsigned int);
+int sceneTraverserVisit(unsigned int, unsigned int);
 int memAlloc(int, int, int, int, int, int);
 int memClear(void);
 int FUN_002cb80c(void);
@@ -20,7 +20,7 @@ extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int DAT_00464b84; /* 0x464b84 */
 
 extern unsigned int FUN_0024c3f8(int);
-/* Supplied declaration required: FUN_002abb24. */
+/* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002cb80c. */
@@ -64,7 +64,7 @@ unsigned int * FUN_002dcfe0(int param_1)
       FUN_002e113c();
       puVar1[0x43] = (unsigned int)puVar3;
     }
-    FUN_002abb24(DAT_00464b7c,DAT_00464b84);
+    sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
   }
   return puVar1;
 }

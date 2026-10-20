@@ -9,8 +9,8 @@ int FUN_004ad228(...);
 int FUN_004d8f4c(...);
 int FUN_004d8ffc(...);
 int FUN_0050d0ac(...);
-int FUN_0050d138(...);
-int FUN_005210a4(...);
+int vtblCopyAssign(...);
+int listNodeUnlinkOrFree(...);
 int FUN_00521c8c(...);
 int FUN_00522e18(...);
 
@@ -65,9 +65,9 @@ extern int *****FUN_004d8f18(int *****);
 extern romwright_code ***FUN_004d91b0(romwright_code *****);
 extern romwright_code ***FUN_004d9234(romwright_code *****);
 /* Supplied declaration required: FUN_0050d0ac. */
-/* Supplied declaration required: FUN_0050d138. */
+/* Supplied declaration required: vtblCopyAssign. */
 extern int FUN_0050d178(unsigned int *, unsigned int, romwright_code ***);
-/* Supplied declaration required: FUN_005210a4. */
+/* Supplied declaration required: listNodeUnlinkOrFree. */
 /* Supplied declaration required: FUN_00521c8c. */
 /* Supplied declaration required: FUN_00522e18. */
 
@@ -375,7 +375,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           if (temp_v0 != 0) {
             return temp_v0;
           }
-          FUN_0050d138(temp_v10,temp_v13,pppcVar22);
+          vtblCopyAssign(temp_v10,temp_v13,pppcVar22);
           temp_v6 = (romwright_code ****)*puVar19;
           temp_v18 = (romwright_code *****)pppcVar22[5];
           temp_v25 = temp_v13;
@@ -390,8 +390,8 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           temp_v24 = temp_v6;
           temp_v26 = (int *****)temp_v22;
           FUN_00522e18(&temp_v30,param_1 + 0x507);
-          FUN_005210a4(&temp_v6);
-          FUN_005210a4(&temp_v19);
+          listNodeUnlinkOrFree(&temp_v6);
+          listNodeUnlinkOrFree(&temp_v19);
           pppppcVar17 = &temp_v24;
         }
         else {
@@ -489,7 +489,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           if (temp_v0 != 0) {
             return temp_v0;
           }
-          FUN_0050d138(temp_v10,temp_v13,pppcVar22);
+          vtblCopyAssign(temp_v10,temp_v13,pppcVar22);
           temp_v6 = (romwright_code ****)*puVar19;
           temp_v18 = (romwright_code *****)pppcVar22[5];
           temp_v7 = temp_v13;
@@ -505,11 +505,11 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
           temp_v26 = (int *****)temp_v22;
           temp_v27 = temp_v8;
           FUN_00522e18(&temp_v30,param_1 + 0x507);
-          FUN_005210a4(&temp_v19);
-          FUN_005210a4(&temp_v24);
+          listNodeUnlinkOrFree(&temp_v19);
+          listNodeUnlinkOrFree(&temp_v24);
           pppppcVar17 = &temp_v6;
         }
-        FUN_005210a4(pppppcVar17);
+        listNodeUnlinkOrFree(pppppcVar17);
       }
       else {
         puVar7 = param_1 + 0x50f;

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00212510(unsigned char [64], unsigned char [64]);
 int FUN_00226cb0(unsigned char [64], int *, int);
-int FUN_0028122c(unsigned char [64], unsigned char [64], unsigned char [76]);
+int matrix43Multiply(unsigned char [64], unsigned char [64], unsigned char [76]);
 int FUN_002a1fb4(int, unsigned char [64], int);
 int FUN_002a2048(unsigned char [64], int *, int);
 int FUN_002b4c30(unsigned char [76], int);
@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00212510. */
 /* Supplied declaration required: FUN_00226cb0. */
-/* Supplied declaration required: FUN_0028122c. */
+/* Supplied declaration required: matrix43Multiply. */
 /* Supplied declaration required: FUN_002a1fb4. */
 /* Supplied declaration required: FUN_002a2048. */
 /* Supplied declaration required: FUN_002b4c30. */
@@ -50,7 +50,7 @@ void FUN_00381758(int param_1,unsigned int *param_2,int param_3,unsigned int *pa
   }
   if (param_3 != 0) {
     FUN_002b4c30(temp_v5,param_3);
-    FUN_0028122c(temp_v4,temp_v3,temp_v5);
+    matrix43Multiply(temp_v4,temp_v3,temp_v5);
   }
   else {
     FUN_00212510(temp_v4,temp_v3);

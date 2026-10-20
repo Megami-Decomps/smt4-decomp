@@ -1,34 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00281720(unsigned int, int);
-int FUN_002844e4(void);
+void FUN_00281720(u32 handle, s32 flag);
+void FUN_002844e4(void);
 
-extern int DAT_0057f118; /* 0x57f118 */
+typedef struct Screen {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u32 handle;
+    /* 0x008 */ u8 unk008[0xE0];
+    /* 0x0E8 */ u32 unk0E8;
+    /* 0x0EC */ u32 unk0EC;
+    /* 0x0F0 */ u8 unk0F0[8];
+    /* 0x0F8 */ u32 unk0F8;
+    /* 0x0FC */ u8 unk0FC[0x13];
+    /* 0x10F */ u8 unk10F;
+    /* 0x110 */ u8 unk110[4];
+    /* 0x114 */ u8 unk114;
+    /* 0x115 */ u8 unk115[0x37];
+    /* 0x14C */ u32 unk14C;
+} Screen;
+extern Screen *DAT_0057f118;
 
-/* Supplied declaration required: FUN_00281720. */
-/* Supplied declaration required: FUN_002844e4. */
-
-
+/* Resets the screen at 0x57F118 (if there is one): runs FUN_002844e4 and FUN_00281720 and restores its fields to their initial values. */
 void FUN_002816d0(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = DAT_0057f118;
-  if (DAT_0057f118 != 0) {
-    FUN_002844e4();
-    *(unsigned char *)(temp_v0 + 0x114) = 0;
-    FUN_00281720(*(unsigned int *)(temp_v0 + 4),0);
-    *(unsigned char *)(temp_v0 + 0x10f) = 1;
-    *(unsigned int *)(temp_v0 + 0xe8) = 0xffffffff;
-    *(unsigned int *)(temp_v0 + 0xf8) = 1;
-    *(unsigned int *)(temp_v0 + 0xec) = 0xffffffff;
-    *(unsigned int *)(temp_v0 + 0x14c) = 0;
-  }
-  return;
+    Screen *screen;
+
+    screen = DAT_0057f118;
+    if (DAT_0057f118 != NULL) {
+        FUN_002844e4();
+        screen->unk114 = 0;
+        FUN_00281720(screen->handle, 0);
+        screen->unk10F = 1;
+        screen->unk0E8 = 0xFFFFFFFF;
+        screen->unk0F8 = 1;
+        screen->unk0EC = 0xFFFFFFFF;
+        screen->unk14C = 0;
+    }
 }
 
 } /* extern "C" */

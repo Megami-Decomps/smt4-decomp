@@ -1,22 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct File;
+typedef struct FileVtbl {
+    /* 0x0 */ void *unk0[2];
+    /* 0x8 */ u32 (*getSize)(struct File *file, s64 *size);
+} FileVtbl;
 
-unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize(long long *param_1,int *param_2)
+typedef struct File {
+    /* 0x0 */ FileVtbl *vtbl;
+} File;
 
+/* Gets the file's size through its virtual getSize, or returns the nn::Result 0xE0E046BC for NULL arguments. */
+u32 nn_fs_CTR_MPCore_detail_UserFileSystem_TryGetFileSize(s64 *size, File *file)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (param_1 != (long long *)0x0 && param_2 != (int *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x002a858c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    temp_v0 = (**(romwright_code **)(*param_2 + 8))(param_2,param_1);
-    return temp_v0;
-  }
-  return 0xe0e046bc;
+    u32 result;
+
+    if (size != NULL && file != NULL) {
+        result = file->vtbl->getSize(file, size);
+        return result;
+    }
+    return 0xe0e046bc;
 }
 
 } /* extern "C" */

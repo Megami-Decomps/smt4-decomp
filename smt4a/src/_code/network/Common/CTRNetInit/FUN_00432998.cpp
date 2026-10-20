@@ -23,7 +23,7 @@ extern int DAT_00588118; /* 0x588118 */
 /* Supplied declaration required: FUN_002e3140. */
 extern unsigned int FUN_0042640c(unsigned int *);
 extern unsigned int FUN_0043d3d8(unsigned int, unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_0043d604(unsigned int, unsigned int);
+extern unsigned int entry3F94Address(unsigned int, unsigned int);
 
 
 unsigned int FUN_00432998(unsigned int *param_1)
@@ -41,7 +41,7 @@ unsigned int FUN_00432998(unsigned int *param_1)
   temp_v0 = 0x100;
   memAlloc(0x100,0x100,0,0x40000);
   DAT_00588114 = temp_v0;
-  temp_v0 = FUN_0043d604(0x10000,4);
+  temp_v0 = entry3F94Address(0x10000,4);
   temp_v1 = FUN_0043d3d8(DAT_00588114,temp_v0,0x10000,4);
   *param_1 = temp_v1;
   if ((int)temp_v1 < 0) {

@@ -1,28 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct FileInfo {
+    /* 0x00 */ u16 kind;           /* 0x220C: internal file, 0x220D: external file */
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ s32 offset;
+} FileInfo;
 
-int nw_snd_internal_SoundArchiveFile_FileInfo_GetExternalFileInfo(unsigned short *param_1)
-
+/* Returns the external file info (at `offset` from the header) when the kind is 0x220D, otherwise 0. */
+u8 *nw_snd_internal_SoundArchiveFile_FileInfo_GetExternalFileInfo(FileInfo *info)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v1 = (unsigned int)*param_1;
-  temp_v2 = temp_v1 == 0;
-  if (!temp_v2) {
-    temp_v1 = temp_v1 - 0x220c;
-    temp_v2 = temp_v1 == 0;
-  }
-  if ((!temp_v2) && (temp_v1 == 1)) {
-    temp_v0 = (int)param_1 + *(int *)(param_1 + 2);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u8 *external;
+    u32 kind;
+    u8 isZero;
+
+    kind = info->kind;
+    isZero = kind == 0;
+    if (!isZero) {
+        kind = kind - 0x220C;
+        isZero = kind == 0;
+    }
+    if ((!isZero) && (kind == 1)) {
+        external = (u8 *)info + info->offset;
+    } else {
+        external = NULL;
+    }
+    return external;
 }
 
 } /* extern "C" */

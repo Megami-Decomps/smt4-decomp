@@ -8,7 +8,7 @@ int FUN_00436c10(int *, int *, int);
 int FUN_00436d04(int *, int);
 int FUN_004387bc(...);
 int FUN_004387f0(...);
-int FUN_00515384(int *, int *, int);
+int variantSetByteA(int *, int *, int);
 int FUN_005153cc(void);
 int FUN_005155bc(int *);
 int rt_memcpy(int, unsigned int, int);
@@ -25,7 +25,7 @@ extern int rt_memcmp(int, unsigned int, int);
 /* Supplied declaration required: FUN_00436d04. */
 /* Supplied declaration required: FUN_004387bc. */
 /* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: FUN_00515384. */
+/* Supplied declaration required: variantSetByteA. */
 /* Supplied declaration required: FUN_005153cc. */
 /* Supplied declaration required: FUN_005155bc. */
 /* Supplied declaration required: rt_memcpy. */
@@ -97,7 +97,7 @@ unsigned int FUN_00437644(int *param_1,int *param_2)
         *piVar6 = (int)piVar5;
         *(int **)(*piVar5 + 4) = piVar5;
         temp_v5 = temp_v4;
-        FUN_00515384(piVar5 + 2,&temp_v5,*(unsigned char *)((int)piVar7 + 0xe));
+        variantSetByteA(piVar5 + 2,&temp_v5,*(unsigned char *)((int)piVar7 + 0xe));
       }
       FUN_004387bc(*param_1,temp_v2,temp_v0);
       piVar5 = (int *)piVar7[1];

@@ -5,11 +5,11 @@
 extern "C" {
 
 int CONCAT44(unsigned int, double);
-int FUN_00231494(...);
-int FUN_002314d0(void);
+int dataTable2bSub1GetRecord(...);
+int dataTable2bSub1GetCount(void);
 int uiGetEntrySize(...);
 int FUN_002c09d0(...);
-int FUN_0039fca8(void);
+int dataTable2bSub3GetCount(void);
 int MapNaviTable_GetCategoryCount(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -43,16 +43,16 @@ extern unsigned char LAB_00103001; /* 0x103001 */
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00231494. */
-/* Supplied declaration required: FUN_002314d0. */
+/* Supplied declaration required: dataTable2bSub1GetRecord. */
+/* Supplied declaration required: dataTable2bSub1GetCount. */
 extern unsigned int *FUN_00248248(int);
 extern int FUN_002482a8(void);
 /* Supplied declaration required: uiGetEntrySize. */
 extern unsigned short FUN_00276348(unsigned int);
 /* Supplied declaration required: FUN_002c09d0. */
 extern unsigned short FUN_003218e0(unsigned int);
-extern short *FUN_0039fc34(unsigned char *, int);
-/* Supplied declaration required: FUN_0039fca8. */
+extern short *dataTable2bSub3GetRecord(unsigned char *, int);
+/* Supplied declaration required: dataTable2bSub3GetCount. */
 /* Supplied declaration required: MapNaviTable_GetCategoryCount. */
 extern short *MapNaviTable_GetCategoryRecord(unsigned char *, int);
 
@@ -124,10 +124,10 @@ void FUN_0039d69c(int param_1,unsigned int param_2)
   do {
     temp_v11 = 0;
     puVar8 = temp_v34;
-    FUN_002314d0();
+    dataTable2bSub1GetCount();
     if (0 < (int)puVar8) {
       do {
-        pcVar17 = (char *)FUN_00231494(temp_v34,temp_v11);
+        pcVar17 = (char *)dataTable2bSub1GetRecord(temp_v34,temp_v11);
         if ((int)*pcVar17 == temp_v44) {
           if (temp_v13 != 0) {
             if (temp_v13 != 1) {
@@ -202,7 +202,7 @@ LAB_0039d774:
         }
         temp_v11 = temp_v11 + 1;
         puVar8 = temp_v34;
-        FUN_002314d0();
+        dataTable2bSub1GetCount();
       } while (temp_v11 < (int)puVar8);
     }
     temp_v13 = temp_v13 + 1;
@@ -226,17 +226,17 @@ LAB_0039d774:
         temp_v13 = 0;
         puVar8 = temp_v34;
         temp_v35 = 1;
-        FUN_002314d0();
+        dataTable2bSub1GetCount();
         if (0 < (int)puVar8) {
           do {
-            pcVar17 = (char *)FUN_00231494(temp_v34,temp_v13);
+            pcVar17 = (char *)dataTable2bSub1GetRecord(temp_v34,temp_v13);
             if ((*(short *)(pcVar17 + 8) == 0) && (pcVar17[1] == *(char *)((int)puVar9 + 0xb))) {
               temp_v35 = (int)pcVar17[3];
               break;
             }
             temp_v13 = temp_v13 + 1;
             puVar8 = temp_v34;
-            FUN_002314d0();
+            dataTable2bSub1GetCount();
           } while (temp_v13 < (int)puVar8);
         }
         temp_v13 = param_1 + *(char *)((int)puVar9 + 9) * 8;
@@ -329,17 +329,17 @@ LAB_0039d774:
         temp_v13 = 0;
         puVar8 = temp_v34;
         temp_v35 = 1;
-        FUN_002314d0();
+        dataTable2bSub1GetCount();
         if (0 < (int)puVar8) {
           do {
-            pcVar17 = (char *)FUN_00231494(temp_v34,temp_v13);
+            pcVar17 = (char *)dataTable2bSub1GetRecord(temp_v34,temp_v13);
             if ((*(short *)(pcVar17 + 8) == 0) && (pcVar17[1] == *(char *)((int)puVar9 + 0xb))) {
               temp_v35 = (int)pcVar17[3];
               break;
             }
             temp_v13 = temp_v13 + 1;
             puVar8 = temp_v34;
-            FUN_002314d0();
+            dataTable2bSub1GetCount();
           } while (temp_v13 < (int)puVar8);
         }
         temp_v13 = param_1 + *(char *)((int)puVar9 + 9) * 8;
@@ -460,10 +460,10 @@ LAB_0039d774:
         }
         temp_v11 = 0;
         puVar8 = temp_v34;
-        FUN_002314d0();
+        dataTable2bSub1GetCount();
         if (0 < (int)puVar8) {
           do {
-            pcVar17 = (char *)FUN_00231494(temp_v34,temp_v11);
+            pcVar17 = (char *)dataTable2bSub1GetRecord(temp_v34,temp_v11);
             temp_v6 = (unsigned short)*(unsigned char *)(psVar10 + 2);
             temp_v15 = temp_v6 == (unsigned char)pcVar17[1];
             if (temp_v15) {
@@ -472,7 +472,7 @@ LAB_0039d774:
             if (temp_v15 && temp_v6 == 0) break;
             temp_v11 = temp_v11 + 1;
             puVar8 = temp_v34;
-            FUN_002314d0();
+            dataTable2bSub1GetCount();
           } while (temp_v11 < (int)puVar8);
         }
         temp_v4 = *(short *)(pcVar17 + 0x10);
@@ -529,11 +529,11 @@ LAB_0039e364:
   }
   temp_v13 = 0;
   puVar8 = temp_v34;
-  FUN_0039fca8();
+  dataTable2bSub3GetCount();
   temp_v14 = temp_v10;
   if (0 < (int)puVar8) {
     do {
-      psVar10 = (short *)FUN_0039fc34(temp_v34,temp_v13);
+      psVar10 = (short *)dataTable2bSub3GetRecord(temp_v34,temp_v13);
       temp_v14 = temp_v10;
       if ((int)*psVar10 == 0xffffffff) break;
       if ((int)*psVar10 == temp_v44) {
@@ -554,10 +554,10 @@ LAB_0039e364:
         }
         temp_v11 = 0;
         puVar8 = temp_v34;
-        FUN_002314d0();
+        dataTable2bSub1GetCount();
         if (0 < (int)puVar8) {
           do {
-            temp_v8 = FUN_00231494(temp_v34,temp_v11);
+            temp_v8 = dataTable2bSub1GetRecord(temp_v34,temp_v11);
             temp_v15 = (char)psVar10[1] == *(char *)(temp_v8 + 1);
             if (temp_v15) {
               temp_v8 = (unsigned int)*(unsigned short *)(temp_v8 + 8);
@@ -565,7 +565,7 @@ LAB_0039e364:
             if (temp_v15 && temp_v8 == 0) break;
             temp_v11 = temp_v11 + 1;
             puVar8 = temp_v34;
-            FUN_002314d0();
+            dataTable2bSub1GetCount();
           } while (temp_v11 < (int)puVar8);
         }
         if (temp_v10 < 0x400) {
@@ -593,7 +593,7 @@ LAB_0039e364:
       }
       temp_v13 = temp_v13 + 1;
       puVar8 = temp_v34;
-      FUN_0039fca8();
+      dataTable2bSub3GetCount();
       temp_v10 = temp_v14;
     } while (temp_v13 < (int)puVar8);
   }

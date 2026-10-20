@@ -1,30 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int scrGetArg(unsigned int);
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(unsigned int);
-extern int __aeabi_idivmod(unsigned int, unsigned int);
+extern u32 scrGetArg(u32 index);
+extern int jobIsValid(u32 job);
 
+typedef struct JobWork {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ int value;
+    /* 0x14 */ u8 unk14[0x4C];
+    /* 0x60 */ int result;
+} JobWork;
 
-unsigned int FUN_0030a408(void)
+extern JobWork *jobGetWork(u32 job);
 
+u32 FUN_0030a408(void)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = jobIsValid(temp_v0);
-  if (temp_v2 != 0) {
-    temp_v2 = jobGetWork(temp_v0);
-    temp_v3 = __aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x10),temp_v1);
-    *(int *)(temp_v2 + 0x60) = -temp_v3;
-  }
-  return 1;
+    u32 job = scrGetArg(0);
+    u32 divisor = scrGetArg(1);
+    JobWork *work;
+
+    if (jobIsValid(job) != 0) {
+        work = jobGetWork(job);
+        work->result = -(work->value / (int)divisor);
+    }
+    return 1;
 }
 
 } /* extern "C" */

@@ -29,13 +29,13 @@ extern int DAT_00571508; /* 0x571508 */
 extern int DAT_00573808; /* 0x573808 */
 extern int g_btlEvent; /* 0x573898 */
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_002626e0(void);
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004c67d0. */
 /* Supplied declaration required: FUN_004d7a70. */
 /* Supplied declaration required: FUN_004d7fe4. */
-extern int FUN_004d84e8(int);
+extern int isEntryUsable(int);
 extern int FUN_004f2708(int, int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004f9450. */
 /* Supplied declaration required: FUN_004fb670. */
@@ -77,7 +77,7 @@ void FUN_004dce1c(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   temp_v5 = 0;
   FUN_004fd508(0,param_2,0xf,param_2[9]);
   FUN_004c67d0();
-  temp_v1 = FUN_001633a0(99);
+  temp_v1 = lcgRandomRange(99);
   temp_v0 = *(char *)(*param_1 + 0x45ba) + '\x01';
   *(char *)(*param_1 + 0x45ba) = temp_v0;
   if (temp_v0 == -1) {
@@ -116,7 +116,7 @@ LAB_004dd034:
   }
   FUN_00408184(4,1);
   *(unsigned int *)(*param_1 + 0xa8) = 4;
-  temp_v5 = FUN_004d84e8(g_btlEvent);
+  temp_v5 = isEntryUsable(g_btlEvent);
   if (temp_v5 != 0) {
     return;
   }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c09f4(...);
+int randNextInRange(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -20,7 +20,7 @@ extern int DAT_0043dc24; /* 0x43dc24 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 
 
 unsigned int FUN_001a0a1c(void)
@@ -111,14 +111,14 @@ unsigned int FUN_001a0a1c(void)
     if (!(unsigned char)((temp_v0 >> 5) & 1) || (unsigned char)(temp_v0 >> 6)) {
       *(float *)(temp_v5 + 0x18) = temp_v11;
       *(float *)(temp_v5 + 0x20) = -*(float *)(temp_v5 + 0x20);
-      temp_v3 = FUN_002c09f4(0x14);
+      temp_v3 = randNextInRange(0x14);
       temp_v8 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(temp_v7 >> 0x16) & 3);
       *(float *)(temp_v5 + 0x28) = temp_v8 * (float)temp_v12;
     }
     if (*(int *)(temp_v5 + 0x18) >= 0x43988000) {
       *(unsigned int *)(temp_v5 + 0x18) = temp_v10;
       *(float *)(temp_v5 + 0x20) = -*(float *)(temp_v5 + 0x20);
-      temp_v3 = FUN_002c09f4(0x14);
+      temp_v3 = randNextInRange(0x14);
       temp_v8 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(temp_v7 >> 0x16) & 3);
       *(float *)(temp_v5 + 0x28) = temp_v8 * (float)temp_v12;
     }
@@ -128,14 +128,14 @@ unsigned int FUN_001a0a1c(void)
     if (!(unsigned char)((temp_v0 >> 5) & 1) || (unsigned char)(temp_v0 >> 6)) {
       *(float *)(temp_v5 + 0x1c) = temp_v11;
       *(float *)(temp_v5 + 0x24) = -*(float *)(temp_v5 + 0x24);
-      temp_v3 = FUN_002c09f4(0x14);
+      temp_v3 = randNextInRange(0x14);
       temp_v8 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
       *(float *)(temp_v5 + 0x28) = temp_v8 * (float)temp_v12;
     }
     if (*(int *)(temp_v5 + 0x1c) >= 0x43610000) {
       *(int *)(temp_v5 + 0x1c) = (int)((unsigned long long)temp_v12 >> 0x20);
       *(float *)(temp_v5 + 0x24) = -*(float *)(temp_v5 + 0x24);
-      temp_v3 = FUN_002c09f4(0x14);
+      temp_v3 = randNextInRange(0x14);
       temp_v8 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
       *(float *)(temp_v5 + 0x28) = temp_v8 * (float)temp_v12;
     }
@@ -157,16 +157,16 @@ unsigned int FUN_001a0a1c(void)
       temp_v10 = VectorSignedToFloat((int)*(short *)(temp_v6 + 0x8c),(unsigned char)(temp_v4 >> 0x16) & 3);
       *(unsigned int *)(temp_v6 + 0x7c) = temp_v10;
       *(float *)(temp_v6 + 0x80) = -*(float *)(temp_v6 + 0x80);
-      temp_v5 = FUN_002c09f4(0x14);
+      temp_v5 = randNextInRange(0x14);
       *(unsigned short *)(temp_v6 + 0x8c) = 0;
       *(unsigned short *)(temp_v6 + 0x8e) = 0xf0;
       temp_v8 = (float)VectorUnsignedToFloat(temp_v5 + 0x14,(unsigned char)(temp_v4 >> 0x16) & 3);
       *(float *)(temp_v6 + 0x84) = temp_v8 * (float)temp_v12;
-      temp_v5 = FUN_002c09f4(2);
+      temp_v5 = randNextInRange(2);
       if (temp_v5 == 0) {
-        temp_v2 = FUN_002c09f4(0x1e);
+        temp_v2 = randNextInRange(0x1e);
         *(short *)(temp_v6 + 0x8c) = *(short *)(temp_v6 + 0x8c) - temp_v2;
-        temp_v2 = FUN_002c09f4(0x1e);
+        temp_v2 = randNextInRange(0x1e);
         *(short *)(temp_v6 + 0x8e) = temp_v2 + *(short *)(temp_v6 + 0x8e);
       }
     }
@@ -178,16 +178,16 @@ unsigned int FUN_001a0a1c(void)
       temp_v10 = VectorSignedToFloat((int)*(short *)(temp_v6 + 0x8e),(unsigned char)(in_fpscr >> 0x16) & 3);
       *(unsigned int *)(temp_v6 + 0x7c) = temp_v10;
       *(float *)(temp_v6 + 0x80) = -*(float *)(temp_v6 + 0x80);
-      temp_v5 = FUN_002c09f4(0x14);
+      temp_v5 = randNextInRange(0x14);
       *(unsigned short *)(temp_v6 + 0x8c) = 0;
       *(unsigned short *)(temp_v6 + 0x8e) = 0xf0;
       temp_v8 = (float)VectorUnsignedToFloat(temp_v5 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
       *(float *)(temp_v6 + 0x84) = temp_v8 * (float)temp_v12;
-      temp_v5 = FUN_002c09f4(2);
+      temp_v5 = randNextInRange(2);
       if (temp_v5 == 0) {
-        temp_v2 = FUN_002c09f4(0x1e);
+        temp_v2 = randNextInRange(0x1e);
         *(short *)(temp_v6 + 0x8c) = *(short *)(temp_v6 + 0x8c) - temp_v2;
-        temp_v2 = FUN_002c09f4(0x1e);
+        temp_v2 = randNextInRange(0x1e);
         *(short *)(temp_v6 + 0x8e) = temp_v2 + *(short *)(temp_v6 + 0x8e);
       }
     }

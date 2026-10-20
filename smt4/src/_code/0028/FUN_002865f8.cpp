@@ -1,14 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0044de98; /* 0x44de98 */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0xC0];
+    /* 0xC0 */ u32 unkC0;
+} Obj;
 
+extern struct {
+    u8 unk00[0x20];
+    Obj *obj;
+} DAT_0044de98;
 
-unsigned int FUN_002865f8(void)
-
+u32 FUN_002865f8(void)
 {
-  return *(unsigned int *)((*(int *)((unsigned char *)&DAT_0044de98 + 0x20)) + 0xc0);
+    return DAT_0044de98.obj->unkC0;
 }
 
 } /* extern "C" */

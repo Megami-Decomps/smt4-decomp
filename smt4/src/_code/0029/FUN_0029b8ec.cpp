@@ -1,44 +1,57 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0029b8ec_arg0 fn_0029b8ec_arg0;
-struct fn_0029b8ec_arg0 {
-    unsigned char pad_0x0[0x8];
-    void *field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0xc];
-    void *field_0x18; /* +0x18 */
-    unsigned char pad_0x1c[0x4c];
-    void *field_0x68; /* +0x68 */
-    unsigned char pad_0x6c[0x4c];
-    void *field_0xb8; /* +0xb8 */
-};
+typedef struct Inner {
+    /* 0x000 */ u8 unk000[0x1F6];
+    /* 0x1F6 */ u8 unk1F6;
+} Inner;
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ Inner *inner;
+} Holder;
 
-void FUN_0029b8ec(fn_0029b8ec_arg0 *param_1)
+typedef struct Part {
+    /* 0x0 */ u32 flags;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ Holder *holder;
+} Part;
 
+typedef struct Group {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Part *partA;
+    /* 0x0C */ u8 unk0C[0xC];
+    /* 0x18 */ Part *partB;
+    /* 0x1C */ u8 unk1C[0x4C];
+    /* 0x68 */ Part *partC;
+    /* 0x6C */ u8 unk6C[0x4C];
+    /* 0xB8 */ Part *partD;
+} Group;
+
+/* Sets flag 2 on each part and clears its holder's inner flag. */
+void FUN_0029b8ec(Group *group)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)param_1->field_0x8;
-  *puVar1 = *puVar1 | 2;
-  *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-  puVar1 = (unsigned int *)param_1->field_0x18;
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = *puVar1 | 2;
-    *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-  }
-  puVar1 = (unsigned int *)param_1->field_0x68;
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = *puVar1 | 2;
-    *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-  }
-  puVar1 = (unsigned int *)param_1->field_0xb8;
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = *puVar1 | 2;
-    *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-  }
-  return;
+    Part *part;
+
+    part = group->partA;
+    part->flags = part->flags | 2;
+    part->holder->inner->unk1F6 = 0;
+    part = group->partB;
+    if (part != NULL) {
+        part->flags = part->flags | 2;
+        part->holder->inner->unk1F6 = 0;
+    }
+    part = group->partC;
+    if (part != NULL) {
+        part->flags = part->flags | 2;
+        part->holder->inner->unk1F6 = 0;
+    }
+    part = group->partD;
+    if (part != NULL) {
+        part->flags = part->flags | 2;
+        part->holder->inner->unk1F6 = 0;
+    }
 }
 
 } /* extern "C" */

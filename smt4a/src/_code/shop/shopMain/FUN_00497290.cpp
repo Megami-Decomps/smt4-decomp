@@ -17,9 +17,9 @@ int FUN_0049706c(int);
 int FUN_00498994(int);
 int FUN_00498de0(...);
 int FUN_0049af90(int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
-int FUN_004d0458(void);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
+int sendEvent1000210(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -36,7 +36,7 @@ extern unsigned int DAT_00588f74; /* 0x588f74 */
 extern int FUN_0018719c(unsigned int);
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002f0384. */
-extern int FUN_00334158(void);
+extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_0037e0b8. */
 /* Supplied declaration required: FUN_0038b57c. */
 /* Supplied declaration required: FUN_003fd7b4. */
@@ -49,9 +49,9 @@ extern int FUN_0040ab8c(void);
 /* Supplied declaration required: FUN_00498994. */
 /* Supplied declaration required: FUN_00498de0. */
 /* Supplied declaration required: FUN_0049af90. */
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
-/* Supplied declaration required: FUN_004d0458. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
+/* Supplied declaration required: sendEvent1000210. */
 extern int FUN_004d0464(void);
 extern int FUN_004d0494(void);
 extern int FUN_004d04f4(void);
@@ -66,7 +66,7 @@ void FUN_00497290(int param_1)
   unsigned int temp_v1;
   
   if (*(int *)(param_1 + 0xb40) != 7) {
-    temp_v0 = FUN_00334158();
+    temp_v0 = objBStateAllowsAction();
     if (temp_v0 == 0) {
       return;
     }
@@ -125,7 +125,7 @@ void FUN_00497290(int param_1)
       else {
         *(unsigned int *)(param_1 + 0xb40) = temp_v1;
       }
-      FUN_004d0458();
+      sendEvent1000210();
       FUN_004964e0(param_1,1);
       if (*(int *)(param_1 + 0xb40) != 3) {
         if (*(int *)(param_1 + 0xb40) == 5) {
@@ -164,7 +164,7 @@ void FUN_00497290(int param_1)
     else {
       *(unsigned int *)(param_1 + 0xb40) = temp_v1;
     }
-    FUN_004d0458();
+    sendEvent1000210();
     FUN_004964e0(param_1,1);
     if (*(int *)(param_1 + 0xb40) != 3) {
       if (*(int *)(param_1 + 0xb40) != 5) {
@@ -191,7 +191,7 @@ void FUN_00497290(int param_1)
       FUN_0038b57c(2);
     }
     FUN_00184528(param_1 + 0x3cc,1);
-    FUN_004d0434();
+    sendEvent100020F();
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
     *(unsigned int *)(param_1 + 4) = 0x13;
     *(unsigned int *)(param_1 + 8) = 0;
@@ -203,7 +203,7 @@ void FUN_00497290(int param_1)
   else {
     temp_v0 = FUN_004d04f4();
     if (temp_v0 != 0) {
-      FUN_004d044c();
+      sendEvent100020E();
       FUN_0049706c(param_1);
     }
   }

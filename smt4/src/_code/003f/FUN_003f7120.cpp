@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Value {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ u8 payload;
+} Value;
 
-void FUN_003f7120(unsigned int *param_1,unsigned int *param_2,unsigned char param_3)
-
+void FUN_003f7120(Value *value, Value *source, u8 payload)
 {
-  *(unsigned char *)(param_1 + 1) = 4;
-  *(unsigned char *)((int)param_1 + 6) = param_3;
-  *param_1 = *param_2;
-  return;
+    value->kind = 4;
+    value->payload = payload;
+    value->id = source->id;
 }
 
 } /* extern "C" */

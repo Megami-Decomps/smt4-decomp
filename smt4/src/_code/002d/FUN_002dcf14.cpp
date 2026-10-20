@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b9024(void);
 
-extern int FUN_00288118(unsigned short);
+extern int dataTableGetEntry0102Value(unsigned short);
 /* Supplied declaration required: FUN_002b9024. */
 
 
@@ -25,8 +25,8 @@ int FUN_002dcf14(unsigned short *param_1,unsigned short *param_2)
   FUN_002b9024();
   puVar2 = (unsigned short *)(unsigned int)*param_2;
   FUN_002b9024();
-  temp_v0 = FUN_00288118(*puVar1);
-  temp_v1 = FUN_00288118(*puVar2);
+  temp_v0 = dataTableGetEntry0102Value(*puVar1);
+  temp_v1 = dataTableGetEntry0102Value(*puVar2);
   temp_v1 = temp_v1 - temp_v0;
   if (temp_v1 == 0) {
     puVar5 = (unsigned short *)(unsigned int)*param_1;

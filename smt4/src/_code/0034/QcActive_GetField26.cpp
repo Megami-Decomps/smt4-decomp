@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002bbb5c(void);
+extern u8 *FUN_002bbb5c(void);
 
-
-unsigned short QcActive_GetField26(void)
-
+u16 QcActive_GetField26(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002bbb5c();
-  return *(unsigned short *)(temp_v0 + 0x1a);
+    u8 *block = FUN_002bbb5c();
+
+    return *(u16 *)(block + 0x1a);
 }
 
 } /* extern "C" */

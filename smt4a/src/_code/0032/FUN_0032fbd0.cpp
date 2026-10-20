@@ -59,7 +59,7 @@ extern unsigned short FUN_0017760c(short *);
 /* Supplied declaration required: FUN_00239234. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_004bcd90. */
-extern unsigned int FUN_004bd21c(short *);
+extern unsigned int getUnlockedSlotCount(short *);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -185,7 +185,7 @@ unsigned int FUN_0032fbd0(short *param_1)
     if ((int)param_1[6] + (unsigned int)(unsigned short)param_1[0x5a] != (int)temp_v31) {
       temp_v6 = 0;
     }
-    temp_v4 = FUN_004bd21c(param_1);
+    temp_v4 = getUnlockedSlotCount(param_1);
     temp_v3 = 0;
     if (temp_v3 < (int)temp_v4) {
       do {

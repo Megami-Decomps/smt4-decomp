@@ -1,35 +1,28 @@
-#include "romwright_types.h"
+#include "shard/Shard0050.h"
 
 extern "C" {
 
-int FUN_001a9110(int, unsigned int);
+extern s32 nn_cec_CTR_MessageBox_GetMessHeader(u32 box, s32 index, u32 flags);
+extern u32 releaseOrCopyHandle(u8 *buffer, s32 source);
+extern void FUN_001a9110(u32 *dest, u32 src);
 
-/* Supplied declaration required: FUN_001a9110. */
-extern unsigned int FUN_00430ec8(unsigned char *, int);
-extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
-
-
-unsigned int
-nn_cec_CTR_MessageBox_GetMessageId(unsigned int param_1,int param_2,int param_3,unsigned int param_4)
-
+u32 nn_cec_CTR_MessageBox_GetMessageId(u32 box, u32 *out, s32 index, u32 flags)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [8];
-  
-  temp_v0 = nn_cec_CTR_MessageBox_GetMessHeader(param_1,param_3,param_4);
-  if (temp_v0 == 0 || temp_v0 == -0x20) {
-    temp_v1 = 0xc8810bef;
-  }
-  else {
-    if (param_2 != 0) {
-      temp_v1 = FUN_00430ec8(temp_v2,temp_v0 + 0x20);
-      FUN_001a9110(param_2,temp_v1);
+    s32 header;
+    u32 id;
+    u8 buffer[8];
+
+    header = nn_cec_CTR_MessageBox_GetMessHeader(box, index, flags);
+    if (header == 0 || header == -0x20) {
+        id = 0xC8810BEF;
+    } else {
+        if (out != 0) {
+            id = releaseOrCopyHandle(buffer, header + 0x20);
+            FUN_001a9110(out, id);
+        }
+        id = 0;
     }
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    return id;
 }
 
 } /* extern "C" */

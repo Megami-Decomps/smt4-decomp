@@ -574,3 +574,156 @@
 002c5f60 __aeabi_idivmod inferred ARM run-time ABI helper: armcc calls it by this name for % and / [runtime]
 002c6a20 __aeabi_uidivmod inferred ARM run-time ABI helper: armcc calls it by this name for % and / [runtime]
 002be61c libc_sprintf inferred the C library's sprintf: named apart, because armcc marks calls to a function named sprintf with printf-feature relocations retail has not
+00110978 sndSystemFinalize inferred shuts down the nw sound system (calls the *_Finalize/Destroy chain, clears the initialized flag)
+002495d4 effPartsSetData inferred frees the old block, allocates a copy of the data and memcpys it in
+00356194 nn_fs_OpenLinkFile inferred calls nn_fs_ipc_File_OpenLinkFile with a handle slot
+0021a37c effParticleRebuildHandles inferred frees and recreates the type-5 handle array of an EffParticleParam (first created, rest cloned)
+0025c9dc effBlockSetBlobB inferred replaces blob B of an EffBlock with a heap copy of the given bytes
+0024fb58 effBlockClone inferred creates a block like src with a cloned data object (handler table slot 5)
+0024fc18 effBlockCreateFromBlock inferred creates a block like src with a data object made by the handler table slot 0
+0028c6b8 effBlockCloneDeep inferred clones a block with heap copies of both blobs
+003ad6ac calcPercentClamped inferred value*100/total as a byte, at most 100 and at least 1 for a positive value
+002e318c gameGlobalsFlagIsClear inferred byte +0xb4 of the area at +0x1e00 of the globals block is zero
+00259594 gameDataBlockTestFlag inferred tests a mask against flag byte 0x24b27 of the game data block
+002dca6c recordCompareByKey inferred comparator: difference of the +0x32 halfwords of the two entries' records
+002fcabc cecProcessGetObject inferred passes the CEC process's object on, or 0 without a process
+002cfd90 scrCommGetUnitValue inferred script command: result = halfword +0x46 of the unit the argument names
+002abb24 sceneTraverserVisit inferred begins a scene traversal and lets the visitor visit it, then continues in the next function
+002b2b5c sndObjectForwardField8 inferred passes the object's field at +8 to the next function (tail call)
+003adc3c stateBlockCall inferred passes the state block at +0x2460 of the global object on, or returns 1 without an object
+0036ead8 relativePtrForward inferred turns the relative pointer at +8 into an address and passes it on
+002e7bb8 effParticleParamRebuildHandles3c inferred frees the type-6 handle array of an effParticle parameter block and rebuilds it (first handle from arg, rest cloned)
+002e7ca4 effParticleParamCopy inferred copies the type-specific part of an effParticle parameter block (switch on type)
+001e2010 aocJobStop inferred stops the AOC job and clears flag bits 4-6 of g_aocMain
+002bfefc __cxa_guard_acquire inferred static-local guard acquire: returns 1 and sets the guard only when it was clear (callers test (guard&1) first)
+002c6644 __aeabi_errno_addr inferred returns the int location the errno setter writes to
+002a43ae __set_errno inferred stores its argument through __aeabi_errno_addr()
+002b64a0 libc_strcat inferred hand-written copy loop: finds the end of dst, copies src including the NUL, returns dst
+0034c0b0 _ZN9Obj42099012addUvOffsetsEv inferred vtable 0x420990 slot 2: adds the quad offsets to eight vertex UVs
+0034c594 _ZN9Obj42099010setUvRectsEv inferred vtable 0x420990 slot 4: sets eight vertex UVs from two rectangles
+0037e624 _ZN2nw3snd8internal6driver15WaveSoundPlayer5StartEv inferred WaveSoundPlayer vtable 0x421d7c slot 4: registers the node with the sound thread, mirror of Stop
+0037e5bc _ZN2nw3snd8internal6driver15WaveSoundPlayer4StopEv evidence existing nw SDK name: virtual Stop of WaveSoundPlayer (vtable 0x421d7c slot 5)
+0037fa44 _ZN2nw3snd8internal6driver25MmlSequenceTrackAllocator10AllocTrackEPv evidence existing nw SDK name: AllocTrack, vtable 0x421ec4 slot 2
+003e7bfc _ZN2nw3snd8internal6driver9MmlParser17NoteOnCommandProcEPNS2_13SequenceTrackEiiii evidence existing nw SDK name: NoteOnCommandProc, vtable 0x421ef4 slot 3
+00317058 _ZN9Obj464cb010post0f0105Ev inferred vtable 0x464cb0 slot 1: posts this and message 0xf0105 to the command queue
+0031059c _ZN9Obj464cb010post0f0103Ev inferred vtable 0x464cb0 slot 7: posts this and message 0xf0103 to the command queue
+00321870 _ZN9Obj4727b814releaseEntriesEv inferred vtable 0x4727b8 slot 2: releases every entry of the object's table, then frees the table
+0036f168 _ZN9Obj4734b87vfunc00Ev inferred vtable 0x4734b8 slot 0: returns 0
+0036fc04 _ZN9Obj44e8a87vfunc0cEv inferred vtable 0x44e8a8 slot 3: empty hook
+0036f82c _ZN9Obj4723007vfunc04Ev inferred vtable 0x472300 slot 1: empty hook
+0036f930 _ZN9Obj4723007vfunc0cEv inferred vtable 0x472300 slot 3: empty hook
+003a030c _ZN9Obj4223ac7vfunc08EP14Obj4223acParam inferred vtable 0x4223ac slot 2: loads three table-0x2b entries into the object by type
+002b90e6 refIsNullOrZero inferred returns 1 for a NULL or zero-valued reference (twin of smt4a FUN_00100824)
+002c2318 resourceDestroy inferred releases data via the handler table, frees both buffers and the resource (twin of smt4a FUN_0013dd78)
+002bfab0 surfaceCopy inferred copies a surface buffer using the destination geometry (twin of smt4a FUN_00155024)
+002c5da8 packNibblesAndByte inferred packs two nibbles and a byte into one word (twin of smt4a FUN_00169294)
+002bf0f4 registerBlockRequestGroups inferred ORs register bits for each requested group (twin of smt4a FUN_0017e050)
+002c2264 resourceListDestroy inferred frees a node list and the resources it owns (twin of smt4a FUN_001836b0)
+002ae794 dataTableGetEntry0e inferred entry of data table 0x0E (0x10 bytes) (twin of smt4a FUN_00184aa8)
+00131968 destroyObj0055c6e4 inferred destructor storing the vtable at 0x0055c6e4 (twin of smt4a FUN_0019241c)
+00150f9c lcgRandomHigh16 inferred LCG step 0x19660D/0x3C6EF35F; returns the high 16 bits (twin of smt4a FUN_001b1ed8)
+001a0fb4 dataTableLookupValue0103 inferred value mapped by data table (1,3) (twin of smt4a FUN_00228024)
+00259938 matrix43Multiply inferred affine 4x3 matrix product (twin of smt4a FUN_0028122c)
+0010095c isAsciiDigit inferred character - 0x30 < 10 (twin of smt4a FUN_002e363c)
+00288118 dataTableGetEntry0102Value inferred value of entry of data table (1,2) (twin of smt4a FUN_002e5220)
+00100d0c wideSinkPutChar inferred appends a u16 to a bounded cursor buffer
+00103c84 appletCloseApplication inferred calls nn_applet_CTR_detail_CloseApplication with the stored handle
+00103cd0 appletReplySleepQueryAllow inferred replies 1 to the applet sleep query then signals an event
+00103e60 randSetSeed inferred stores its argument into g_randState
+001041d8 appletGetBusyFlag inferred reads DAT_00465228 which FUN_00103c9c clears after a successful FUN_002c3dfc
+001051f0 appletProcessHomeButton inferred calls nn_applet_CTR_IsExpectedToProcessHomeButton and tries the applet critical section
+00105494 gfxSetupResGraphicsFile inferred stores the graphics file pointer and sets it up with the default allocator
+0010fab0 nnosInitAddressSpaceOnce inferred guarded one-time call of nnosAddressSpaceManagerInitialize
+0010faf0 nnosInitAddressSpaceApplication inferred initializes an address space at 0x0e000000 size 0x02000000
+0010fb04 nnosInitAddressSpaceHeap inferred initializes an address space at 0x10000000 size 0x04000000
+002c09f4 randNextInRange inferred LCG 0x41c64e6d/0x3039 scaled to 0..limit
+00107210 dataTable02Sub3GetRecord inferred wraps dataTableGet(0x2, 3) with record lookup
+002117a8 dataTable15Sub0GetCount inferred wraps dataTableGet(0x15, 0) with count
+002177a4 dataTable16Sub2GetRecord inferred wraps dataTableGet(0x16, 2) with record lookup
+00229f00 dataTable05Sub4GetCount inferred wraps dataTableGet(0x5, 4) with count
+00229f18 dataTable05Sub0GetEntries inferred wraps dataTableGet(0x5, 0) with entries
+0022ea38 dataTable17Sub0GetRecord inferred wraps dataTableGet(0x17, 0) with record lookup
+002308fc dataTable17Sub1GetCount inferred wraps dataTableGet(0x17, 1) with count
+00230914 dataTable17Sub1GetRecord inferred wraps dataTableGet(0x17, 1) with record lookup
+00231494 dataTable2bSub1GetRecord inferred wraps dataTableGet(0x2b, 1) with record lookup
+002314d0 dataTable2bSub1GetCount inferred wraps dataTableGet(0x2b, 1) with count
+00235378 dataTable27Sub0GetRecord inferred wraps dataTableGet(0x27, 0) with record lookup
+002355c0 dataTable26GroupGetRecord inferred wraps dataTableGet(0x26, group * 2 + 1) with record lookup
+0023c68c dataTable11Sub2GetRecord inferred wraps dataTableGet(0x11, 2) with record lookup
+0024f4d0 dataTable2fSub0GetCount inferred wraps dataTableGet(0x2f, 0) with count
+0024f594 dataTable2eSub2GetRecord inferred wraps dataTableGet(0x2e, 2) with record lookup
+0024f5d4 dataTable2eSub2GetCount inferred wraps dataTableGet(0x2e, 2) with count
+00250d18 dataTable09Sub3GetRecord inferred wraps dataTableGet(0x9, 3) with record lookup
+0025318c dataTable2eSub1GetCount inferred wraps dataTableGet(0x2e, 1) with count
+002531a4 dataTable2eSub0GetCount inferred wraps dataTableGet(0x2e, 0) with count
+0025cbc0 dataTable16Sub2GetRecordS64 inferred wraps dataTableGet(0x16, 2) with record lookup
+002627cc dataTable24Sub0GetRecord inferred wraps dataTableGet(0x24, 0) with record lookup
+002760fc dataTable2fSub0GetRecord inferred wraps dataTableGet(0x2f, 0) with record lookup
+002878a8 dataTable2fSub1GetRecord inferred wraps dataTableGet(0x2f, 1) with record lookup
+00288634 dataTable24Sub0GetRecordS90 inferred wraps dataTableGet(0x24, 0) with record lookup
+00288674 dataTable24Sub0GetRecordS90X inferred wraps dataTableGet(0x24, 0) with record lookup
+00291e28 dataTable2cSub0GetCount inferred wraps dataTableGet(0x2c, 0) with count
+0029e974 dataTable06Sub1GetRecord inferred wraps dataTableGet(0x6, 1) with record lookup
+002d4ef4 dataTable2eSub1GetRecord inferred wraps dataTableGet(0x2e, 1) with record lookup
+002d4f2c dataTable2eSub0GetRecord inferred wraps dataTableGet(0x2e, 0) with record lookup
+002d4f64 dataTable2cSub0GetRecord inferred wraps dataTableGet(0x2c, 0) with record lookup
+002fb42c dataTable2cSub3GetRecord inferred wraps dataTableGet(0x2c, 3) with record lookup
+002fb468 dataTable2cSub1GetRecord inferred wraps dataTableGet(0x2c, 1) with record lookup
+003106c0 dataTable15Sub0GetEntries inferred wraps dataTableGet(0x15, 0) with entries
+00316e44 dataTable2cSub2GetRecord inferred wraps dataTableGet(0x2c, 2) with record lookup
+00316e7c dataTable2fSub2GetRecord inferred wraps dataTableGet(0x2f, 2) with record lookup
+0031d51c dataTable2cSub3GetCount inferred wraps dataTableGet(0x2c, 3) with count
+0031d534 dataTable2cSub1GetCount inferred wraps dataTableGet(0x2c, 1) with count
+00323f5c dataTable05Sub9GetCount inferred wraps dataTableGet(0x5, 9) with count
+00324528 dataTable2fSub1GetCount inferred wraps dataTableGet(0x2f, 1) with count
+00326e7c dataTable2fSub2GetCount inferred wraps dataTableGet(0x2f, 2) with count
+0033b748 dataTable14Sub1GetRecord inferred wraps dataTableGet(0x14, 1) with record lookup
+0033c164 dataTable14Sub0GetRecord inferred wraps dataTableGet(0x14, 0) with record lookup
+00385ab4 dataTable28Sub1GetRecord inferred wraps dataTableGet(0x28, 1) with record lookup
+00385b04 dataTable27Sub0GetCount inferred wraps dataTableGet(0x27, 0) with count
+00385b24 dataTable28Sub0GetRecord inferred wraps dataTableGet(0x28, 0) with record lookup
+0039fc34 dataTable2bSub3GetRecord inferred wraps dataTableGet(0x2b, 3) with record lookup
+0039fca8 dataTable2bSub3GetCount inferred wraps dataTableGet(0x2b, 3) with count
+003bba2c dataTable33Sub0GetRecord inferred wraps dataTableGet(0x33, 0) with record lookup
+003bba68 dataTable33GroupGetRecord inferred wraps dataTableGet(0x33, group + 1) with record lookup
+003bbab0 dataTable33Sub0GetCount inferred wraps dataTableGet(0x33, 0) with count
+003bbac8 dataTable33GroupGetCount inferred wraps dataTableGet(0x33, group + 1) with count
+003bc670 dataTable03Sub0GetCount inferred wraps dataTableGet(0x3, 0) with count
+003ea2cc dataTable26GroupGetRecordS2 inferred wraps dataTableGet(0x26, group << 1) with record lookup
+002a0ce8 sys43e188GetState inferred gets field state of the sys43e188 block
+002f61e8 sys43e188GetStateB inferred gets field state of the sys43e188 block
+003bc96c bitsetTestBit inferred bit test in the byte array at +0x4C
+0029ebac flagWordTestBit inferred tests bit n of the u16 at +0x44
+003be64c categoryMaskFromId inferred returns 0x3E0/1000/1<<id
+003bb5e8 entryListReset inferred sets count at +0x52C to 0
+003bb5f4 entryListAppend inferred appends non-zero entry at +0x530
+003e6148 offsetRefResolve4 inferred base + *(base+4)
+003e6854 offsetRefResolve1C inferred base + *(base+0x1c)
+003e6948 offsetRefResolve10 inferred base + *(base+0x10)
+003e828c offsetRefResolveC inferred base + *(base+0xc)
+003e8614 offsetRefResolveCAlt inferred base + *(base+0xc)
+003e8620 offsetRefAddAtBase4 inferred *(base+4) + offset
+003e6e9c cstmHeaderIsValid inferred checks the "CSTM" magic and size range
+003a630c storyFlagRangeAnySet inferred scans flags 0x3B7..0x79E
+003d6ffc vec3CopyFromOffsetC inferred copies words 3..5 to 0..2
+003d9f54 memClearTwo200 inferred clears two 200-byte blocks
+003eb054 words3Clear inferred zeroes three words
+003c9f28 bufferArrayFree inferred frees up to 0x38 buffers
+003c2e44 recordResetIndex inferred sets +0x14 to 0xffff and clears kind bytes
+003af2a4 spriteTablesLoadedEnough inferred counts loaded sprites in tables 0x14/0x15 against 9
+003ad334 spriteTable22AllLoaded inferred checks both entries of table 0x22
+003acb28 spriteTable22Acquire inferred loads table 0x22 on first reference
+003af160 spriteTables14And15Load inferred loads sprite tables 8, 0x14, 0x15
+003bb760 spriteTable2aLoad inferred loads sprite table 0x2a
+003bb9b8 spriteTable2aFree inferred frees sprite table 0x2a
+003bb350 spriteTable2aIsLoaded inferred tests entry 0 of table 0x2a
+003bbb04 cecInboxReadMessages inferred reads inbox messages into 0x4C-byte slots
+003c83b4 questGetCurrentRecordValue6 inferred reads u16 at +6 of the current record
+003c85c8 questGetCurrentRecordValue8 inferred reads u16 at +8 of the current record
+003c8850 questGetCurrentRecordHalf4 inferred reads u16 at +4 >> 1 of the current record
+003f7044 expHeapDestroyA inferred destructor storing the base vtable, finalizing ExpHeapBase
+003f70f8 expHeapDestroyB inferred destructor storing the base vtable, finalizing ExpHeapBase
+003f64dc criticalSectionReadValue38 inferred reads +0x38 under critical section DAT_004d4674
+003f5848 allocatorFreeBlock inferred frees block words 3 and 0 and the block through the allocator at DAT_0044e918+4
+003e0e24 argsValidate inferred returns error code for null args/count > 0x10
+003e0b7c recordCopy70 inferred copies a 0x70-byte record

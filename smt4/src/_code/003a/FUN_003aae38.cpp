@@ -15,7 +15,7 @@ extern int FUN_0023360c(int);
 /* Supplied declaration required: FUN_00295c04. */
 /* Supplied declaration required: FUN_0029be5c. */
 extern int FUN_0029c3ec(void);
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 
 
 void FUN_003aae38(int param_1)
@@ -24,7 +24,7 @@ void FUN_003aae38(int param_1)
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002a0ce8();
+  temp_v0 = sys43e188GetState();
   if ((temp_v0 != 0) && (temp_v0 = FUN_0029c3ec(), temp_v0 == 1)) {
     FUN_0023553c(0);
     temp_v0 = FUN_0023360c(param_1 + 0x20);

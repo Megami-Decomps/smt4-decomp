@@ -1,31 +1,27 @@
-#include "romwright_types.h"
+#include "shard/Shard004C.h"
 
 extern "C" {
 
-typedef struct fn_004cfb00_arg0 fn_004cfb00_arg0;
-struct fn_004cfb00_arg0 {
-    undefined1 field_0x0; /* +0x0 */
-    unsigned char pad_0x1[0x3];
-    undefined4 field_0x4; /* +0x4 */
-    undefined1 field_0x8; /* +0x8 */
-    undefined1 field_0x9; /* +0x9 */
-    undefined1 field_0xa; /* +0xa */
-    undefined1 field_0xb; /* +0xb */
-    undefined1 field_0xc; /* +0xc */
-};
+typedef struct Flags4C {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 unk08;
+    /* 0x09 */ u8 unk09;
+    /* 0x0A */ u8 unk0A;
+    /* 0x0B */ u8 unk0B;
+    /* 0x0C */ u8 mode;
+} Flags4C;
 
-
-void NaviMain_ResetFlags(fn_004cfb00_arg0 *param_1,unsigned char param_2)
-
+void NaviMain_ResetFlags(Flags4C *obj, u8 mode)
 {
-  param_1->field_0xc = param_2;
-  param_1->field_0x4 = 0;
-  param_1->field_0x8 = 0;
-  param_1->field_0x9 = 0;
-  param_1->field_0xa = 0;
-  param_1->field_0xb = 0;
-  param_1->field_0x0 = 0;
-  return;
+    obj->mode = mode;
+    obj->unk04 = 0;
+    obj->unk08 = 0;
+    obj->unk09 = 0;
+    obj->unk0A = 0;
+    obj->unk0B = 0;
+    obj->unk00 = 0;
 }
 
 } /* extern "C" */

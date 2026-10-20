@@ -1,29 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001145a0` (_code @ 0x1145a0, 0x22 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00114aa0(void);
-int FUN_002ed250(unsigned int *);
+extern u8 DAT_005596a4; /* vtable */
 
-extern unsigned char DAT_005596a4; /* 0x5596a4 */
+typedef struct Handler {
+    void *vtbl;      /* 0x00 */
+    u8 unk04[0x1c];
+    u8 unk20[8];
+    u8 active;       /* 0x28 */
+} Handler;
 
-/* Supplied declaration required: FUN_00114aa0. */
-/* Supplied declaration required: FUN_002ed250. */
+extern void FUN_00114aa0(void);
+extern void FUN_002ed250(Handler *self);
 
-
-void FUN_001145a0(unsigned int *param_1)
-
+/* Destructor: stops the handler if it is still active, then runs the base destructor. */
+void FUN_001145a0(Handler *self)
 {
-/* irregular: 2 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_005596a4;
-  if (*(char *)(param_1 + 10) != '\0') {
-    FUN_00114aa0();
-    *(unsigned char *)(param_1 + 10) = 0;
-  }
-  FUN_002ed250(param_1);
-  return;
+    self->vtbl = &DAT_005596a4;
+    if (self->active != 0) {
+        FUN_00114aa0();
+        self->active = 0;
+    }
+    FUN_002ed250(self);
 }
 
 } /* extern "C" */

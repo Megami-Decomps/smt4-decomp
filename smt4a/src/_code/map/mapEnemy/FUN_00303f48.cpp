@@ -20,7 +20,7 @@ int FUN_003a3070(void);
 int FUN_003a30e8(void);
 int FUN_003a315c(void);
 int FUN_003c3154(void);
-int FUN_003c4d34(void);
+int dataTable2FType0Count(void);
 int FUN_004bc420(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -99,14 +99,14 @@ extern char *FUN_003a3038(void);
 /* Supplied declaration required: FUN_003a3070. */
 /* Supplied declaration required: FUN_003a30e8. */
 /* Supplied declaration required: FUN_003a315c. */
-extern char *FUN_003a31d4(int);
-extern int *FUN_003a338c(int);
+extern char *dataTable29Type6GetEntry(int);
+extern int *dataTable2FType0GetEntry(int);
 extern int FUN_003c3074(void);
 extern int FUN_003c30ac(void);
 extern int FUN_003c30e4(void);
 extern int FUN_003c311c(void);
 /* Supplied declaration required: FUN_003c3154. */
-/* Supplied declaration required: FUN_003c4d34. */
+/* Supplied declaration required: dataTable2FType0Count. */
 extern int FUN_003cb88c(int, unsigned int);
 /* Supplied declaration required: moriModelContentCopyBody. */
 extern unsigned int FUN_0040ac08(void);
@@ -297,10 +297,10 @@ void FUN_00303f48(void)
     temp_v1 = FUN_00376f94();
     if (temp_v1 != 0) {
       temp_v2 = 0;
-      FUN_003c4d34();
+      dataTable2FType0Count();
       if (0 < temp_v1) {
         do {
-          piVar5 = (int *)FUN_003a338c(temp_v2);
+          piVar5 = (int *)dataTable2FType0GetEntry(temp_v2);
           if (*piVar5 == -1) break;
           temp_v1 = FUN_00376f94();
           if (temp_v1 == (short)piVar5[2]) {
@@ -309,7 +309,7 @@ void FUN_00303f48(void)
             break;
           }
           temp_v2 = temp_v2 + 1;
-          FUN_003c4d34();
+          dataTable2FType0Count();
         } while (temp_v2 < temp_v1);
       }
     }
@@ -399,7 +399,7 @@ LAB_003044d0:
     FUN_003c3154();
     if ((temp_v17 != (char *)0x0) && (temp_v0 = 0, 0 < (int)pcVar14)) {
       do {
-        pcVar7 = (char *)FUN_003a31d4(temp_v0);
+        pcVar7 = (char *)dataTable29Type6GetEntry(temp_v0);
         if ((*pcVar7 != -1) &&
            (((int)*pcVar7 == *(int *)(temp_v6 + 0xc) && ((int)pcVar7[1] == *(int *)(temp_v6 + 0x10))))
            ) {

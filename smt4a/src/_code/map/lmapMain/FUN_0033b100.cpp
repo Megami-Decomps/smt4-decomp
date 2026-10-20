@@ -17,7 +17,7 @@ int FUN_00384830(void);
 int FUN_003856f8(int);
 int FUN_00385798(int);
 int FUN_003d4ed8(unsigned int);
-int FUN_00409d8c(int, int);
+int countersAddSaturating(int, int);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
 
@@ -63,7 +63,7 @@ extern int FUN_0036d984(int, unsigned int *, unsigned int);
 extern int FUN_003d21dc(void);
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int FUN_003e46f4(unsigned int);
-/* Supplied declaration required: FUN_00409d8c. */
+/* Supplied declaration required: countersAddSaturating. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -190,7 +190,7 @@ unsigned int FUN_0033b100(int param_1)
         if (*(char *)(param_1 + 0x50) == '\0') {
           if (((*(int *)(param_1 + 0x17c) != 0) && (10 >= *(int *)(param_1 + 0x17c))) &&
              ((int)(unsigned int)*(unsigned short *)(temp_v4 + 0x62) > (int)*(short *)(param_1 + 0x174))) {
-            FUN_00409d8c(0x18,1);
+            countersAddSaturating(0x18,1);
             DAT_005f17c9 = '\x01';
           }
           else {

@@ -1,19 +1,14 @@
-#include "romwright_types.h"
+#include "shard/DriverVoice.h"
 
 extern "C" {
 
-
-void nw_snd_internal_driver_Voice_SetLpfFreq(int param_1)
-
+/* Sets the low-pass filter frequency and marks it dirty, if it changed. */
+void nw_snd_internal_driver_Voice_SetLpfFreq(DriverVoice *voice, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  if (*(float *)(param_1 + 0x38) != in_s0) {
-    *(float *)(param_1 + 0x38) = in_s0;
-    *(unsigned short *)(param_1 + 0x20) = *(unsigned short *)(param_1 + 0x20) | 0x10;
-  }
-  return;
+    if (voice->lpfFreq != value) {
+        voice->lpfFreq = value;
+        voice->dirtyFlags = voice->dirtyFlags | 0x10;
+    }
 }
 
 } /* extern "C" */

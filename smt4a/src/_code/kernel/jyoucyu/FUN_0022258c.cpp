@@ -29,7 +29,7 @@ int FUN_0039c304(void);
 int FUN_003c5c88(void);
 int FUN_003f8898(void);
 int FUN_003f8940(void);
-int FUN_004ac06c(void);
+int resetFlagGroupsCD(void);
 
 extern signed char g_jyoucyu; /* 0x57ffb8 */
 extern signed char DAT_0057ffb9; /* 0x57ffb9 */
@@ -61,7 +61,7 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: FUN_003c5c88. */
 /* Supplied declaration required: FUN_003f8898. */
 /* Supplied declaration required: FUN_003f8940. */
-/* Supplied declaration required: FUN_004ac06c. */
+/* Supplied declaration required: resetFlagGroupsCD. */
 
 
 void FUN_0022258c(unsigned int param_1)
@@ -85,7 +85,7 @@ void FUN_0022258c(unsigned int param_1)
           FUN_0023b410();
           FUN_0031f4fc();
           FUN_002856f8();
-          FUN_004ac06c();
+          resetFlagGroupsCD();
           FUN_003c5c88();
           DAT_0057ffba = 1;
         }

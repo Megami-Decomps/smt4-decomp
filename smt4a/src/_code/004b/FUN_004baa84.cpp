@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00284dc4(unsigned short);
+extern int dataTableHasMatchingEntry35(unsigned short);
 
 
 void FUN_004baa84(int param_1,int param_2,int param_3)
@@ -56,7 +56,7 @@ void FUN_004baa84(int param_1,int param_2,int param_3)
     temp_v1 = 0x1b5f;
     break;
   case 5:
-    temp_v0 = FUN_00284dc4(*(unsigned short *)(param_2 + 0x56));
+    temp_v0 = dataTableHasMatchingEntry35(*(unsigned short *)(param_2 + 0x56));
     if (temp_v0 != 0) {
       temp_v1 = 0x1bc6;
     }
@@ -65,7 +65,7 @@ void FUN_004baa84(int param_1,int param_2,int param_3)
     temp_v1 = 0x1b5c;
     break;
   case 9:
-    temp_v0 = FUN_00284dc4(*(unsigned short *)(param_2 + 0x54));
+    temp_v0 = dataTableHasMatchingEntry35(*(unsigned short *)(param_2 + 0x54));
     if (temp_v0 != 0) {
       temp_v1 = 0x1bc6;
     }

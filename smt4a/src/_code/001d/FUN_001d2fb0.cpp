@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_dspsndState; /* 0x6433d0 */
+void nn_snd_CTR_Dspsnd_SetChannelSyncCount(u8 *state, u8 channel, s16 count);
+extern u8 g_dspsndState[];
 
-extern unsigned char nn_snd_CTR_Dspsnd_SetChannelSyncCount(unsigned int, unsigned char, short);
+typedef struct Channel {
+    /* 0x00 */ u32 index;
+    /* 0x04 */ s16 syncCount;
+    /* 0x06 */ u8 unk06[0x66];
+    /* 0x6C */ u16 flags;           /* bit 15: sync count pending */
+} Channel;
 
-
-void FUN_001d2fb0(unsigned int *param_1)
-
+/* Sends the channel's pending sync count to the DSP and clears the pending bit. */
+void FUN_001d2fb0(Channel *channel)
 {
-  if ((*(unsigned short *)(param_1 + 0x1b) & 0x8000) != 0) {
-    nn_snd_CTR_Dspsnd_SetChannelSyncCount((unsigned int)&g_dspsndState,(unsigned char)*param_1,*(short *)(param_1 + 1));
-    *(unsigned short *)(param_1 + 0x1b) = *(unsigned short *)(param_1 + 0x1b) & 0x7fff;
-  }
-  return;
+    if ((channel->flags & 0x8000) != 0) {
+        nn_snd_CTR_Dspsnd_SetChannelSyncCount(g_dspsndState, (u8)channel->index, channel->syncCount);
+        channel->flags = channel->flags & 0x7FFF;
+    }
 }
 
 } /* extern "C" */

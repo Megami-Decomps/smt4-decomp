@@ -1,20 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001bd438(unsigned char *, unsigned int);
+void FUN_001bd438(u8 *object, u32 value);
+extern u8 DAT_00647660[];
 
-extern unsigned char DAT_00647660; /* 0x647660 */
-
-/* Supplied declaration required: FUN_001bd438. */
-
-
-void FUN_001c6df4(unsigned int param_1)
-
+/* Forwards `value` to FUN_001bd438 with the object at 0x647660. */
+void FUN_001c6df4(u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001bd438(&DAT_00647660,param_1);
-  return;
+    FUN_001bd438(DAT_00647660, value);
 }
 
 } /* extern "C" */

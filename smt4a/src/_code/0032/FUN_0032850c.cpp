@@ -10,7 +10,7 @@ int FUN_00203a6c(int);
 int FUN_00226578(int, int);
 int FUN_00358f38(int);
 int FUN_00359370(int, int);
-int FUN_0037d400(void);
+int jobRefStopAndFree(void);
 int FUN_003ae864(unsigned int);
 int FUN_003d8f20(unsigned int);
 
@@ -30,7 +30,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00226578. */
 /* Supplied declaration required: FUN_00358f38. */
 /* Supplied declaration required: FUN_00359370. */
-/* Supplied declaration required: FUN_0037d400. */
+/* Supplied declaration required: jobRefStopAndFree. */
 /* Supplied declaration required: FUN_003ae864. */
 /* Supplied declaration required: FUN_003d8f20. */
 
@@ -46,7 +46,7 @@ void FUN_0032850c(void)
   temp_v0 = DAT_00571508;
   if (DAT_00571508 != 0) {
     *(unsigned int *)(DAT_0056fcc0 + 0xc) = 0;
-    FUN_0037d400();
+    jobRefStopAndFree();
     FUN_003d8f20(*(unsigned int *)(temp_v0 + 0x40));
     *(unsigned int *)(temp_v0 + 0x40) = 0;
     FUN_00203a6c(0);

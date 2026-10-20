@@ -24,7 +24,7 @@ extern unsigned char DAT_0057f27c; /* 0x57f27c */
 extern unsigned int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002a4964. */
 extern int FUN_00318ddc(void);
-extern unsigned int FUN_0032cfb0(unsigned int);
+extern unsigned int screenGetEntry(unsigned int);
 extern int FUN_0032cfc8(void);
 /* Supplied declaration required: FUN_00387ac4. */
 
@@ -77,8 +77,8 @@ void FUN_0023b27c(void)
     temp_v5 = FUN_00318ddc();
     *(char *)(temp_v0 + 0x7f5) = (char)temp_v5;
     if (temp_v5 == 0) {
-      temp_v2 = FUN_0032cfb0(0);
-      temp_v3 = FUN_0032cfb0(1);
+      temp_v2 = screenGetEntry(0);
+      temp_v3 = screenGetEntry(1);
       FUN_00100388(temp_v0 + 0x7f6,&LAB_0023b3b0,temp_v2,temp_v3);
     }
     FUN_00387ac4(0);

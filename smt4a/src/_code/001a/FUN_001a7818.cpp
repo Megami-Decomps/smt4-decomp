@@ -1,20 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Provider Provider;
+typedef struct ProviderVtbl {
+    /* 0x00 */ void *unk00[5];
+    /* 0x14 */ u32 *(*getBlock)(Provider *provider);
+} ProviderVtbl;
+struct Provider {
+    /* 0x00 */ const ProviderVtbl *vtbl;
+};
 
-unsigned int * FUN_001a7818(int param_1)
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x258];
+    /* 0x258 */ Provider *provider;
+} Owner;
 
+/* Returns the address five words into the provider's block, treating a block without bit 30 set as missing (NULL + 20). */
+u32 *FUN_001a7818(Owner *owner)
 {
-  unsigned int *puVar1;
-  
-  int *piVar2 = *(int **)(param_1 + 600);
-  puVar1 = (unsigned int *)(**(romwright_code **)(*piVar2 + 0x14))(piVar2);
-  if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x40000000) == 0)) {
-    puVar1 = (unsigned int *)0x0;
-  }
-  return puVar1 + 5;
+    u32 *block;
+    Provider *provider = owner->provider;
+
+    block = provider->vtbl->getBlock(provider);
+    if ((block != NULL) && ((*block & 0x40000000) == 0)) {
+        block = NULL;
+    }
+    return block + 5;
 }
 
 } /* extern "C" */

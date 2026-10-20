@@ -16,7 +16,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_001b5b40(void);
+extern int entryIsAllowed(void);
 extern int FUN_001b5b8c(void);
 /* Supplied declaration required: FUN_001c2278. */
 extern unsigned int FUN_001c2484(void);
@@ -111,7 +111,7 @@ LAB_001b20f8:
           }
         }
         else {
-          temp_v4 = FUN_001b5b40();
+          temp_v4 = entryIsAllowed();
           if (temp_v4 == 0) {
             *(int *)(temp_v6 + 0x290) = 0;
             *(unsigned char *)(temp_v6 + 0x294) = 0;

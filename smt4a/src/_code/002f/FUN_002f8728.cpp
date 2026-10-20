@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00310272(unsigned int *, int);
+int listInitEmpty2(unsigned int *, int);
 
-/* Supplied declaration required: FUN_00310272. */
+/* Supplied declaration required: listInitEmpty2. */
 
 
 unsigned int * FUN_002f8728(unsigned int *param_1)
@@ -19,7 +19,7 @@ unsigned int * FUN_002f8728(unsigned int *param_1)
   param_1[3] = 0;
   param_1[4] = 0;
   param_1[5] = 0;
-  FUN_00310272(param_1,1);
+  listInitEmpty2(param_1,1);
   return param_1;
 }
 

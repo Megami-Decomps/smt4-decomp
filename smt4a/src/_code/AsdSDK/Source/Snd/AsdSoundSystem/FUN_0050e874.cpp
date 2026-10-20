@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00169294(...);
+int packNibblesAndByte(...);
 int FUN_002f5020(int, unsigned char *, int, int);
 
 extern unsigned char LAB_00192824; /* 0x192824 */
@@ -14,7 +14,7 @@ extern unsigned int DAT_00630994; /* 0x630994 */
 extern unsigned int DAT_00630998; /* 0x630998 */
 extern unsigned int DAT_0063099c; /* 0x63099c */
 
-/* Supplied declaration required: FUN_00169294. */
+/* Supplied declaration required: packNibblesAndByte. */
 /* Supplied declaration required: FUN_002f5020. */
 
 
@@ -30,11 +30,11 @@ void FUN_0050e874(void)
   *(unsigned int *)(in_r12 + 0x24) = in_s0;
   *(unsigned int *)(in_r12 + 0x28) = in_s0;
   FUN_002f5020(in_r12 + 0x2c,&LAB_00192824,0x10,4);
-  DAT_0063098c = FUN_00169294(6,7,0);
-  DAT_00630990 = FUN_00169294(6,1,0);
-  DAT_00630994 = FUN_00169294(6,1,2);
-  DAT_00630998 = FUN_00169294(5,0,1);
-  DAT_0063099c = FUN_00169294(0,2);
+  DAT_0063098c = packNibblesAndByte(6,7,0);
+  DAT_00630990 = packNibblesAndByte(6,1,0);
+  DAT_00630994 = packNibblesAndByte(6,1,2);
+  DAT_00630998 = packNibblesAndByte(5,0,1);
+  DAT_0063099c = packNibblesAndByte(0,2);
   return;
 }
 

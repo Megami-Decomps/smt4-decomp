@@ -9,8 +9,8 @@ int FUN_001cbd00(unsigned int, int);
 int FUN_001d239c(unsigned int);
 int FUN_0045f9fc(...);
 int FUN_0045fab0(void);
-int FUN_0045fb28(void);
-int FUN_00465c8c(int, int, int *);
+int word8HolderSetFromTable(void);
+int sinkOwnerForward(int, int, int *);
 int FUN_004663e4(...);
 int FUN_00466500(...);
 int VectorSignedToFloat(unsigned int, int);
@@ -39,8 +39,8 @@ extern int FUN_00461f64(...); /* 0x461f64 */
 /* Supplied declaration required: FUN_001d239c. */
 /* Supplied declaration required: FUN_0045f9fc. */
 /* Supplied declaration required: FUN_0045fab0. */
-/* Supplied declaration required: FUN_0045fb28. */
-/* Supplied declaration required: FUN_00465c8c. */
+/* Supplied declaration required: word8HolderSetFromTable. */
+/* Supplied declaration required: sinkOwnerForward. */
 /* Supplied declaration required: FUN_004663e4. */
 /* Supplied declaration required: FUN_00466500. */
 extern char __aeabi_idivmod(int);
@@ -117,7 +117,7 @@ void FUN_0046205c(int param_1,int param_2,int param_3,unsigned int param_4,int p
   temp_v13 = param_2;
   temp_v14 = temp_v5;
   temp_v19 = param_1;
-  FUN_00465c8c(temp_v7,*(unsigned char *)(param_1 + 0x83),&temp_v12);
+  sinkOwnerForward(temp_v7,*(unsigned char *)(param_1 + 0x83),&temp_v12);
   if (temp_v7 == 0) {
     return;
   }
@@ -138,7 +138,7 @@ void FUN_0046205c(int param_1,int param_2,int param_3,unsigned int param_4,int p
   *(int *)(param_1 + 0x130) = temp_v7;
 LAB_004621e4:
   if (*(unsigned char *)(param_1 + 0xf8) < 0x80) {
-    FUN_0045fb28();
+    word8HolderSetFromTable();
   }
   if (*(unsigned char *)(param_1 + 0xf9) < 0x80) {
     FUN_0045fab0();

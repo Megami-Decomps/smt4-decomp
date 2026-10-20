@@ -10,7 +10,7 @@ int FUN_002a7b74(void);
 int FUN_003857b4(int);
 int FUN_003d2d34(unsigned int, int, int);
 int FUN_003d2d6c(int);
-int FUN_003e5b9c(int);
+int linkHolderClearFlag(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003d2d6c. */
-/* Supplied declaration required: FUN_003e5b9c. */
+/* Supplied declaration required: linkHolderClearFlag. */
 extern unsigned int FUN_004dad8c(unsigned int);
 
 
@@ -66,7 +66,7 @@ void FUN_0039c744(void)
   temp_v0 = lmapSceneGetScript();
   if (temp_v0 != 0) {
     FUN_003857b4(1);
-    FUN_003e5b9c(temp_v0);
+    linkHolderClearFlag(temp_v0);
     return;
   }
   return;

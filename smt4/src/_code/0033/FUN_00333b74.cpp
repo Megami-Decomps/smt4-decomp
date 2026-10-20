@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00295f28(...);
 int FUN_002b63c0(void);
-int FUN_002c09f4(int);
+int randNextInRange(int);
 int dataTableGetCount(unsigned int);
 
 typedef struct fn_00333b74_arg1 fn_00333b74_arg1;
@@ -26,7 +26,7 @@ extern unsigned char *FUN_00240cd4(fn_00333b74_arg1 *);
 /* Supplied declaration required: FUN_00295f28. */
 extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b63c0. */
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -112,12 +112,12 @@ LAB_00333c78:
         if (*(short *)((int)puVar6 + 0x4e) != 0) {
           temp_v9 = temp_v9 + *(short *)((int)puVar6 + 0x4e);
         }
-        temp_v4 = FUN_002c09f4(5);
+        temp_v4 = randNextInRange(5);
         temp_v4 = temp_v4 + 3;
         temp_v7 = 0;
         if (temp_v4 != 0) {
           do {
-            temp_v5 = FUN_002c09f4(temp_v9 - 1);
+            temp_v5 = randNextInRange(temp_v9 - 1);
             temp_v6 = 0;
             do {
               temp_v8 = (unsigned int)*(unsigned short *)((int)puVar6 + temp_v6 * 4 + 0x32);

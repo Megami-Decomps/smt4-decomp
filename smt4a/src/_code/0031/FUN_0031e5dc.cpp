@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int FUN_002f0c18(int);
 int FUN_0034aae4(void);
 int FUN_003a7c3c(int);
-int FUN_00418130(int);
+int partyEntrySetBit0AndFlag80(int);
 
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: sysPlaySe. */
@@ -16,9 +16,9 @@ extern unsigned short scrGetArg(void);
 extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_002f0c18. */
 /* Supplied declaration required: FUN_0034aae4. */
-extern int FUN_003a7c1c(void);
+extern int stateHolder4IsZero2(void);
 /* Supplied declaration required: FUN_003a7c3c. */
-/* Supplied declaration required: FUN_00418130. */
+/* Supplied declaration required: partyEntrySetBit0AndFlag80. */
 
 
 unsigned char FUN_0031e5dc(void)
@@ -31,7 +31,7 @@ unsigned char FUN_0031e5dc(void)
   temp_v0 = scrGetArg();
   temp_v1 = FUN_002deb84();
   if (temp_v1 == 0) {
-    FUN_00418130(temp_v0);
+    partyEntrySetBit0AndFlag80(temp_v0);
     temp_v1 = FUN_00162ea4();
     if (temp_v1 != 0) {
       return 1;
@@ -39,7 +39,7 @@ unsigned char FUN_0031e5dc(void)
     FUN_002f0c18(0);
     FUN_003a7c3c(temp_v0);
   }
-  temp_v1 = FUN_003a7c1c();
+  temp_v1 = stateHolder4IsZero2();
   if (temp_v1 != 0) {
     FUN_0034aae4();
     sysPlaySe(0x92);

@@ -1,36 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0028322c_arg0 fn_0028322c_arg0;
-int FUN_00285834(fn_0028322c_arg0 *);
-struct fn_0028322c_arg0 {
-    unsigned char pad_0x0[0x2];
-    byte field_0x2; /* +0x2 */
-    unsigned char pad_0x3[0xd];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x13];
-    void *field_0x24; /* +0x24 */
-    void *field_0x28; /* +0x28 */
-    void *field_0x2c; /* +0x2c */
-    void *field_0x30; /* +0x30 */
-};
+typedef struct Node {
+    /* 0x000 */ u8 unk000[2];
+    /* 0x002 */ u8 flag;
+    /* 0x003 */ u8 unk003[0x21];
+    /* 0x024 */ void *unk24;
+    /* 0x028 */ void *unk28;
+    /* 0x02C */ void *unk2C;
+    /* 0x030 */ void *unk30;
+    /* 0x034 */ u8 unk034[0x1F4];
+    /* 0x228 */ u32 *owner;
+    /* 0x22C */ u8 unk22C[0xC];
+    /* 0x238 */ struct Node *children[0x32];
+    /* 0x300 */ u8 unk300[0x84];
+    /* 0x384 */ u32 *owner2;
+} Node;
 
-/* Supplied declaration required: FUN_00285834. */
+void FUN_00285834(Node *node);
 
+void FUN_0028322c(Node *node);
 
-void FUN_0028322c(fn_0028322c_arg0 *param_1)
-
+/* Clears the owner slot of `node` (if it has one) and releases it. */
+void FUN_0028322c(Node *node)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1 == (fn_0028322c_arg0 *)0x0) {
-    return;
-  }
-  if (*(unsigned int **)&param_1[0x11].field_0x10 != (unsigned int *)0x0) {
-    **(unsigned int **)&param_1[0x11].field_0x10 = 0;
-  }
-  FUN_00285834(param_1);
-  return;
+    if (node == NULL) {
+        return;
+    }
+    if (node->owner2 != NULL) {
+        *node->owner2 = 0;
+    }
+    FUN_00285834(node);
 }
 
 } /* extern "C" */

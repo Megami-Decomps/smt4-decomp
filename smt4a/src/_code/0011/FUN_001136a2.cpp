@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_002ec70c(int);
-extern int FUN_002ec890(int);
+extern int destroyObj0055ae64(int);
 extern int FUN_002f31cc(int);
 
 
@@ -14,7 +14,7 @@ int FUN_001136a2(int param_1)
 {
   int temp_v0;
   
-  temp_v0 = FUN_002ec890(param_1 + 0x2e4);
+  temp_v0 = destroyObj0055ae64(param_1 + 0x2e4);
   temp_v0 = FUN_002ec70c(temp_v0 - 0xb0);
   temp_v0 = FUN_002f31cc(temp_v0 - 0x230);
   return temp_v0 - 4;

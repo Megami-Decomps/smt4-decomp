@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e93da(void);
+void FUN_002e93da(void *object);
 
-/* Supplied declaration required: FUN_002e93da. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 value;
+} Holder;
 
-
-unsigned char FUN_002eabdc(int param_1)
-
+/* Resets the object (FUN_002e93da) and returns the byte at 8. */
+u8 FUN_002eabdc(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e93da();
-  return *(unsigned char *)(param_1 + 8);
+    FUN_002e93da(object);
+    return object->value;
 }
 
 } /* extern "C" */

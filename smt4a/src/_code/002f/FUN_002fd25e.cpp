@@ -1,40 +1,39 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0031008a(void);
+void handleWatcherPoll(void);
+u8 FUN_00306d18(s32 handle, s32 owner, u32 a, u32 b);
 
-typedef struct fn_002fd25e_arg0 fn_002fd25e_arg0;
-struct fn_002fd25e_arg0 {
-    unsigned char pad_0x0[0x4];
-    char field_0x4; /* +0x4 */
-    undefined1 field_0x5; /* +0x5 */
-    unsigned char pad_0x6[0x6];
-    int field_0xc; /* +0xc */
-};
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0xB0];
+    /* 0xB0 */ s32 handle;
+} Owner;
 
-extern unsigned char FUN_00306d18(int, int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0031008a. */
+typedef struct Watcher {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 enabled;
+    /* 0x05 */ u8 registered;
+    /* 0x06 */ u8 unk06[6];
+    /* 0x0C */ Owner *owner;
+} Watcher;
 
-
-void FUN_002fd25e(fn_002fd25e_arg0 *param_1,int param_2)
-
+/* Enables or disables the watcher: enabling registers it with its owner (when the owner has a handle); disabling runs handleWatcherPoll. */
+void FUN_002fd25e(Watcher *watcher, s32 enable)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  
-  param_1->field_0x4 = (char)param_2;
-  if (param_2 != 0) {
-    temp_v1 = *(int *)(param_1->field_0xc + 0xb0);
-    if (temp_v1 != 0) {
-      temp_v0 = FUN_00306d18(temp_v1,param_1->field_0xc,1,0);
-      param_1->field_0x5 = temp_v0;
+    u8 result;
+    s32 handle;
+
+    watcher->enabled = (u8)enable;
+    if (enable != 0) {
+        handle = watcher->owner->handle;
+        if (handle != 0) {
+            result = FUN_00306d18(handle, (s32)watcher->owner, 1, 0);
+            watcher->registered = result;
+        }
+        return;
     }
-    return;
-  }
-  FUN_0031008a();
-  return;
+    handleWatcherPoll();
 }
 
 } /* extern "C" */

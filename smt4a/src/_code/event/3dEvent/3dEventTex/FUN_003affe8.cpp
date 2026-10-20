@@ -19,7 +19,7 @@ typedef struct {
 
 extern int FUN_00289d8c(...); /* 0x289d8c */
 extern int FUN_00289f10(...); /* 0x289f10 */
-extern int FUN_0034dab0(...); /* 0x34dab0 */
+extern int jobWorkDestroy34(...); /* 0x34dab0 */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -101,7 +101,7 @@ char * FUN_003affe8(unsigned int param_1)
   *(unsigned char *)((int)puVar1 + 0x16) = 1;
   *(unsigned char *)((int)puVar1 + 0x15) = 0;
   pcVar5 = "EVE_BtlTex";
-  asdProcessCreateSimple("EVE_BtlTex",4,0,0,FUN_00289d8c,FUN_0034dab0,puVar1);
+  asdProcessCreateSimple("EVE_BtlTex",4,0,0,FUN_00289d8c,jobWorkDestroy34,puVar1);
   taskCreateDraw("EVE_BtlTexDraw",0x71,0,0,FUN_00289f10,0,puVar1,pcVar5);
   return pcVar5;
 }

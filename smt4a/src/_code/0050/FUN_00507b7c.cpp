@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_005090d4(unsigned int);
+int soundInfoUserParamIfAny(unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_005090d4. */
+/* Supplied declaration required: soundInfoUserParamIfAny. */
 
 
 void FUN_00507b7c(int param_1,unsigned int param_2)
@@ -25,7 +25,7 @@ void FUN_00507b7c(int param_1,unsigned int param_2)
   int *piVar3;
   
   temp_v0 = *(unsigned int *)(param_1 + 4);
-  FUN_005090d4(temp_v0);
+  soundInfoUserParamIfAny(temp_v0);
   piVar3 = *(int **)(param_1 + 8);
   temp_v2 = temp_v1;
   if (piVar3 != (int *)0x0) {

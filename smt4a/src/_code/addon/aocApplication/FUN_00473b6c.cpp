@@ -1,64 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00473b6c` (_code @ 0x473b6c, 0xb4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: address CSE differs: retail keeps &app->buffer (+0x5b4) in r5 and addresses the decoder field directly; the built code keeps &app->decoder in r5 */
+/* Recreates the application's 128 KiB work buffer and the decoder object that runs on it. */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int asdOperatorNew(void);
-int asdMemoryAlloc(int, int, int, int);
-int FUN_00195fc8(void);
-int asdMemFree(void);
-int FUN_002e3328(void);
-int FUN_002e6dd4(void);
-int FUN_004285cc(void);
+struct AocApplication {
+    /* 0x000 */ u8 unk000[0x80];
+    /* 0x080 */ u32 source;
+    /* 0x084 */ u8 unk084[0x52c];
+    /* 0x5b0 */ void *decoder;
+    /* 0x5b4 */ void *buffer;
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+void *FUN_004285cc(void *decoder);
+void FUN_002e3328(void *decoder);
+void asdMemFree(void *ptr);
+void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
+void FUN_002e6dd4(void *buffer, u32 size);
+void *asdOperatorNew(u32 size);
+void *FUN_00426e94(void *mem, u32 source, void *buffer, u32 size);
+void FUN_00195fc8(void);
 
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_00195fc8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_002e6dd4. */
-extern unsigned int FUN_00426e94(void);
-/* Supplied declaration required: FUN_004285cc. */
-
-
-void FUN_00473b6c(int param_1)
-
+void FUN_00473b6c(AocApplication *app)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if (*(int *)(param_1 + 0x5b0) != 0) {
-    FUN_004285cc();
-    FUN_002e3328();
-    *(unsigned int *)(param_1 + 0x5b0) = 0;
-  }
-  if (*(int *)(param_1 + 0x5b4) != 0) {
-    asdMemFree();
-    *(int *)(param_1 + 0x5b4) = 0;
-  }
-  temp_v0 = 0x10000;
-  asdMemoryAlloc(0x10000,0x100,0,0x20000);
-  *(unsigned int *)(param_1 + 0x5b4) = temp_v0;
-  FUN_002e6dd4();
-  if (*(int *)(param_1 + 0x5b4) != 0) {
-    temp_v1 = 0x10;
-    asdOperatorNew();
-    temp_v0 = 0;
-    if (temp_v1 != 0) {
-      temp_v0 = FUN_00426e94();
+    if (app->decoder != NULL) {
+        FUN_002e3328(FUN_004285cc(app->decoder));
+        app->decoder = NULL;
     }
-    *(unsigned int *)(param_1 + 0x5b0) = temp_v0;
-    return;
-  }
-  FUN_00195fc8();
-  return;
+    if (app->buffer != NULL) {
+        asdMemFree(app->buffer);
+        app->buffer = NULL;
+    }
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\aocApplication.cpp", 391);
+    app->buffer = asdMemoryAlloc(0x10000, 0x100, 0, 0x20000, 1);
+    FUN_002e6dd4(app->buffer, 0x20000);
+    if (app->buffer != NULL) {
+        void *mem = asdOperatorNew(16);
+
+        if (mem != NULL) {
+            mem = FUN_00426e94(mem, app->source, app->buffer, 0x20000);
+        }
+        app->decoder = mem;
+    } else {
+        FUN_00195fc8();
+    }
 }
 
-} /* extern "C" */
+}

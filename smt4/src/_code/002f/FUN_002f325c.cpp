@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0025c870(void);
-int FUN_0028c6b8(void);
+int effBlockCloneDeep(void);
 int asdMemFree(void);
 
 typedef struct fn_002f325c_arg0 fn_002f325c_arg0;
@@ -32,7 +32,7 @@ struct fn_002f325c_arg1 {
 };
 
 /* Supplied declaration required: FUN_0025c870. */
-/* Supplied declaration required: FUN_0028c6b8. */
+/* Supplied declaration required: effBlockCloneDeep. */
 /* Supplied declaration required: asdMemFree. */
 extern void *asdLoadFileSync(fn_002f325c_arg1 *, unsigned int *, unsigned int, unsigned int);
 
@@ -49,7 +49,7 @@ void FUN_002f325c(fn_002f325c_arg0 *param_1,fn_002f325c_arg1 *param_2,unsigned i
   uStack_18 = param_4;
   pvVar1 = (void *)asdLoadFileSync(param_2,(unsigned int *)&uStack_18,1,0x80);
   pvVar2 = pvVar1;
-  FUN_0028c6b8();
+  effBlockCloneDeep();
   asdMemFree();
   FUN_0025c870();
   *(unsigned int *)((int)pvVar1 + 0xac) = 0;

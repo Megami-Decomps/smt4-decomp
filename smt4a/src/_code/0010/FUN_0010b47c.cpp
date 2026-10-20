@@ -8,7 +8,7 @@ int FUN_0013462c(int, unsigned int *, unsigned int *[5]);
 int FUN_002e6e34(unsigned char [12], int);
 int FUN_002e6e5c(unsigned char [12]);
 int FUN_002e9318(unsigned char [16]);
-int FUN_002ea0e4(unsigned char [16]);
+int constructObj0055affc(unsigned char [16]);
 int FUN_002f42be(unsigned char [16], unsigned char *, unsigned int);
 int onlineObjectThreadRootStart(unsigned int *, int);
 
@@ -26,7 +26,7 @@ extern unsigned int *FUN_001104e8(int, unsigned char *);
 /* Supplied declaration required: FUN_002e6e5c. */
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002f42be. */
 /* Supplied declaration required: onlineObjectThreadRootStart. */
 
@@ -51,7 +51,7 @@ unsigned int FUN_0010b47c(int param_1,unsigned int param_2)
   else {
     *(unsigned char *)(param_1 + 0x34) = 0;
     for (temp_v2 = 0; temp_v2 < param_2; temp_v2 = temp_v2 + 1) {
-      FUN_002ea0e4(temp_v5);
+      constructObj0055affc(temp_v5);
       FUN_002f42be(temp_v5,&LAB_0010b52c,temp_v2 + 1);
       temp_v1 = FUN_002e760a(0x34);
       puVar3 = (unsigned int *)0x0;

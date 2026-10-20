@@ -1,26 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
+struct Target;
+typedef struct TargetVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ u32 (*query)(u32 handle);
+    /* 0x8 */ void (*apply)(u32 handle, u32 value);
+} TargetVtbl;
 
+typedef struct Obj {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 handle;
+    /* 0x8 */ TargetVtbl *vtbl;
+} Obj;
 
-void FUN_00342214(int param_1,unsigned int param_2,unsigned int *param_3)
-
+/* Stores query(handle) into *out, then calls apply(handle, value). */
+void FUN_00342214(Obj *obj, u32 value, u32 *out)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = (**(romwright_code **)(*(int *)(param_1 + 8) + 4))(*(unsigned int *)(param_1 + 4));
-  *param_3 = temp_v0;
-                    /* WARNING: Could not recover jumptable at 0x0034224c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(*(int *)(param_1 + 8) + 8))(*(unsigned int *)(param_1 + 4),param_2);
-  return;
+    u32 result = obj->vtbl->query(obj->handle);
+
+    *out = result;
+    obj->vtbl->apply(obj->handle, value);
 }
 
 } /* extern "C" */

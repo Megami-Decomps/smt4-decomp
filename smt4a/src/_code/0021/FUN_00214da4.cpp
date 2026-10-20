@@ -1,24 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001846d0(int, int);
+void FUN_001846d0(u8 *member, s32 flag);
 
-extern int DAT_0057f578; /* 0x57f578 */
+typedef struct Object {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 state;
+    /* 0x0C */ u8 unk0C[0x28];
+    /* 0x34 */ u8 member34[1];
+} Object;
+extern Object *DAT_0057f578;
 
-/* Supplied declaration required: FUN_001846d0. */
-
-
+/* Sets the object's state to 3 and resets its member at 0x34. */
 void FUN_00214da4(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = DAT_0057f578;
-  *(unsigned int *)(DAT_0057f578 + 8) = 3;
-  FUN_001846d0(temp_v0 + 0x34,1);
-  return;
+    Object *object;
+
+    object = DAT_0057f578;
+    DAT_0057f578->state = 3;
+    FUN_001846d0(object->member34, 1);
 }
 
 } /* extern "C" */

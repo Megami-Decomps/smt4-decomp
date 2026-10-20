@@ -1,17 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e5684` (_code @ 0x2e5684, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Constructs the object: runs the (removed) base constructor, then sets its vtable. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0064c010; /* 0x64c010 */
+struct Obj002e5684 {
+    /* 0x00 */ const void *vtable;
+};
 
+extern const u8 DAT_0064c010[];
+__weak Obj002e5684 *FUN_002e5684_baseCtor(Obj002e5684 *obj);
 
-void FUN_002e5684(unsigned int *param_1)
-
+Obj002e5684 *FUN_002e5684(Obj002e5684 *obj)
 {
-  *param_1 = (unsigned int)&DAT_0064c010;
-  return;
+    obj = FUN_002e5684_baseCtor(obj);
+    obj->vtable = DAT_0064c010;
+    return obj;
 }
 
-} /* extern "C" */
+}

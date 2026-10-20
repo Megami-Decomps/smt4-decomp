@@ -23,7 +23,7 @@ extern unsigned char LAB_00345924; /* 0x345924 */
 extern unsigned char LAB_00345934; /* 0x345934 */
 extern unsigned char LAB_0034596c; /* 0x34596c */
 extern unsigned char LAB_00345980; /* 0x345980 */
-extern int FUN_0036dfa8(...); /* 0x36dfa8 */
+extern int ref208Destroy(...); /* 0x36dfa8 */
 extern int FUN_0036dff4(...); /* 0x36dff4 */
 extern unsigned int *DAT_0057f20c; /* 0x57f20c */
 extern unsigned int *DAT_0057f210; /* 0x57f210 */
@@ -65,7 +65,7 @@ void FUN_003457b8(void)
   FUN_0014384c(0x22);
   FUN_0014afd0(0x22,0);
   puVar3 = &LAB_0034596c;
-  taskCreateDraw(&LAB_0034596c,4,8,0,FUN_0031a5e4,FUN_0036dfa8,puVar1,*DAT_0057f20c);
+  taskCreateDraw(&LAB_0034596c,4,8,0,FUN_0031a5e4,ref208Destroy,puVar1,*DAT_0057f20c);
   *puVar1 = (unsigned int)puVar3;
   taskCreateDraw(&LAB_00345980,0xeb,8,0,FUN_0036dff4,0,puVar1,puVar3);
   return;

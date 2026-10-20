@@ -11,7 +11,7 @@ void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
 void FUN_0017cff0(u32 cmdList);
 void FUN_0017df1c(void);
 void FUN_0017cdb4(void);
-void FUN_0016117c(void);
+void asdModelResetCommandBuffer(void);
 void FUN_0017db14(u32 cmdList, void *copy, u32 copySize);
 
 /* Ends a command list. If another list is still open it becomes the active one again;
@@ -35,7 +35,7 @@ void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32
         FUN_0017df1c();
         outer->state = ASD_GX_CMDLIST_ACTIVE;
     } else {
-        FUN_0016117c();
+        asdModelResetCommandBuffer();
         FUN_0017cff0(list->boundList);
         if (restoreCopy != 0 && list->entries[0].copy != NULL) {
             FUN_0017d920(0x207, &bound);

@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard003A.h"
 
 extern "C" {
 
-extern int DAT_00588fe8; /* 0x588fe8 */
+extern StateHolder518 *DAT_00588fe8;
 
-
-unsigned int FUN_003a7b74(void)
-
+u32 FUN_003a7b74(void)
 {
-  return *(unsigned int *)(DAT_00588fe8 + 0x654);
+    return DAT_00588fe8->unk654;
 }
 
 } /* extern "C" */

@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0030fb34(unsigned int, unsigned int, int);
+void FUN_0030fb34(u32 a, u32 b, s32 size);
 
-/* Supplied declaration required: FUN_0030fb34. */
-
-
-void FUN_002fde8c(unsigned int param_1,unsigned int param_2,int param_3)
-
+/* Calls FUN_0030fb34 with `count` 8-byte units (count * 8 bytes). */
+void FUN_002fde8c(u32 a, u32 b, s32 count)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0030fb34(param_1,param_2,param_3 << 3);
-  return;
+    FUN_0030fb34(a, b, count << 3);
 }
 
 } /* extern "C" */

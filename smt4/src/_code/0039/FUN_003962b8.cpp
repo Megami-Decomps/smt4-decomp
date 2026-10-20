@@ -1,40 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00152bec(void);
-int asdMdlManagerDestroy(unsigned int);
-int FUN_002b2368(unsigned int *);
+int asdMdlManagerDestroy(u32 model);
+int FUN_002b2368(void *object);
+extern u8 DAT_0042231c;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+struct Object;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(struct Object *object);
+} ObjectVtbl;
 
-extern unsigned char DAT_0042231c; /* 0x42231c */
+typedef struct Object {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Object;
 
-/* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002b2368. */
+typedef struct Obj {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ u8 unk04[0x64];
+    /* 0x68 */ Object *child;
+    /* 0x6C */ u32 model;
+} Obj;
 
-
-void FUN_003962b8(unsigned int *param_1)
-
+/* Destructor: releases the child object and the model, then the object. */
+void FUN_003962b8(Obj *obj)
 {
-/* irregular: 3 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_0042231c;
-  if ((int *)param_1[0x1a] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x1a] + 4))((int *)param_1[0x1a]);
-    param_1[0x1a] = 0;
-  }
-  if (param_1[0x1b] != 0) {
-    FUN_00152bec();
-    asdMdlManagerDestroy(param_1[0x1b]);
-    param_1[0x1b] = 0;
-  }
-  FUN_002b2368(param_1);
-  return;
+    obj->vtbl = &DAT_0042231c;
+    if (obj->child != NULL) {
+        obj->child->vtbl->destroy(obj->child);
+        obj->child = NULL;
+    }
+    if (obj->model != 0) {
+        FUN_00152bec();
+        asdMdlManagerDestroy(obj->model);
+        obj->model = 0;
+    }
+    FUN_002b2368(obj);
 }
 
 } /* extern "C" */

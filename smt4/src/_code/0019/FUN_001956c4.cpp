@@ -84,7 +84,7 @@ extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int FUN_002c09d0(unsigned int);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_002c5c04(unsigned char *);
@@ -699,14 +699,14 @@ joined_r0x0019627c:
     do {
       temp_v6 = temp_v1 + temp_v11 * 4;
       *(unsigned int *)(temp_v6 + 0x988) = 0x78;
-      temp_v5 = FUN_002c09f4(1);
+      temp_v5 = randNextInRange(1);
       if (temp_v5 == 0) {
         *(unsigned int *)(temp_v6 + 0x9a4) = 0xffffffff;
       }
       else {
         *(unsigned int *)(temp_v6 + 0x9a4) = 1;
       }
-      temp_v5 = FUN_002c09f4(0x14);
+      temp_v5 = randNextInRange(0x14);
       temp_v11 = temp_v11 + 1;
       temp_v13 = (float)VectorUnsignedToFloat(temp_v5 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
       *(int *)(temp_v6 + 0x9c0) = (int)(temp_v13 * (float)temp_v14);
@@ -727,7 +727,7 @@ joined_r0x0019627c:
         if (temp_v9 <= temp_v8) {
           *(int *)(temp_v10 + 0x988) = temp_v8;
           *(int *)(temp_v10 + 0x9a4) = -temp_v6;
-          temp_v6 = FUN_002c09f4(0x14);
+          temp_v6 = randNextInRange(0x14);
           temp_v13 = (float)VectorUnsignedToFloat(temp_v6 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(int *)(temp_v10 + 0x9c0) = (int)(temp_v13 * (float)temp_v14);
         }
@@ -737,7 +737,7 @@ joined_r0x0019627c:
         if (temp_v8 <= temp_v9) {
           *(int *)(temp_v10 + 0x988) = temp_v8;
           *(int *)(temp_v10 + 0x9a4) = -temp_v6;
-          temp_v6 = FUN_002c09f4(0x14);
+          temp_v6 = randNextInRange(0x14);
           temp_v13 = (float)VectorUnsignedToFloat(temp_v6 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(int *)(temp_v10 + 0x9c0) = (int)(temp_v13 * (float)temp_v14);
         }

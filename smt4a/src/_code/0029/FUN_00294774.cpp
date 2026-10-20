@@ -42,7 +42,7 @@ struct fn_00294774_arg0_p8c {
     undefined4 field_0xac; /* +0xac */
 };
 
-extern int DAT_00580c8c; /* 0x580c8c */
+extern int g_eplSlots; /* 0x580c8c */
 
 /* Supplied declaration required: FUN_001b4eb8. */
 
@@ -56,7 +56,7 @@ void FUN_00294774(fn_00294774_arg0 *param_1)
   unsigned int in_s1;
   unsigned int in_s2;
   
-  temp_v0 = DAT_00580c8c + (int)param_1 * 100;
+  temp_v0 = g_eplSlots + (int)param_1 * 100;
   if (*(int *)(temp_v0 + 0x68) != 0) {
     *(unsigned int *)(temp_v0 + 0x54) = in_s0;
     *(unsigned int *)(temp_v0 + 0x58) = in_s1;

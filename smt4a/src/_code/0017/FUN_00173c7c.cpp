@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0018fe70(unsigned int, int);
 int FUN_001912cc(unsigned int, unsigned int);
-int FUN_001914b8(...);
+int constructObj0055c19c(...);
 int FUN_00191518(...);
 int FUN_001915bc(int, unsigned int, unsigned int);
 int nw_snd_internal_driver_StreamBufferPool_Finalize(...);
@@ -17,7 +17,7 @@ extern unsigned int FUN_00175678(void);
 /* Supplied declaration required: FUN_0018fe70. */
 extern unsigned int FUN_001911a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001912cc. */
-/* Supplied declaration required: FUN_001914b8. */
+/* Supplied declaration required: constructObj0055c19c. */
 /* Supplied declaration required: FUN_00191518. */
 /* Supplied declaration required: FUN_001915bc. */
 extern unsigned int FUN_001b1f04(void);
@@ -75,7 +75,7 @@ void FUN_00173c7c(int param_1)
     temp_v5 = *(unsigned int *)(param_1 + 0x50) / 0x88;
     if (temp_v5 != 0) {
       do {
-        FUN_001914b8(temp_v6,temp_v7);
+        constructObj0055c19c(temp_v6,temp_v7);
         temp_v8 = temp_v8 + 1;
         temp_v6 = temp_v6 + 0x88;
         temp_v7 = temp_v3;
@@ -107,7 +107,7 @@ void FUN_00173c7c(int param_1)
     temp_v5 = (unsigned int)((unsigned long long)temp_v0 >> 0x26);
     if (temp_v5 != 0) {
       do {
-        FUN_001914b8(temp_v7,temp_v1);
+        constructObj0055c19c(temp_v7,temp_v1);
         temp_v8 = temp_v8 + 1;
         temp_v7 = temp_v7 + 0x4c;
         temp_v1 = temp_v4;

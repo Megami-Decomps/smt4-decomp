@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_001ad9b4(void);
 int FUN_004bb6d8(unsigned int, int);
-int FUN_0050d6e4(...);
-int FUN_0050d71c(int);
+int clearThreeWords(...);
+int clearTwoWords(int);
 
 extern int FUN_001ab940(void);
 /* Supplied declaration required: FUN_001ad9b4. */
@@ -15,8 +15,8 @@ extern int FUN_001ada74(unsigned int);
 extern int FUN_001bd100(unsigned int);
 extern int FUN_001bd118(unsigned int);
 /* Supplied declaration required: FUN_004bb6d8. */
-/* Supplied declaration required: FUN_0050d6e4. */
-/* Supplied declaration required: FUN_0050d71c. */
+/* Supplied declaration required: clearThreeWords. */
+/* Supplied declaration required: clearTwoWords. */
 
 
 unsigned int FUN_00417e08(unsigned int param_1)
@@ -68,7 +68,7 @@ unsigned int FUN_00417e08(unsigned int param_1)
             if (*(short *)(temp_v5 + temp_v4 * 0xc + 0x8e4) == 0) {
               temp_v5 = temp_v5 + temp_v4 * 0xc;
               *(unsigned short *)(temp_v5 + 0x8e4) = temp_v2;
-              FUN_0050d71c(temp_v5 + 0x8e8);
+              clearTwoWords(temp_v5 + 0x8e8);
               return 1;
             }
             temp_v4 = temp_v4 + 1;
@@ -80,7 +80,7 @@ unsigned int FUN_00417e08(unsigned int param_1)
         do {
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v5 + temp_v4 * 0xc + 0x914);
           if (((temp_v8 != 0) && (FUN_001ad9b4(), temp_v8 != 0)) && (*(char *)(temp_v8 + 6) == '\x06')) {
-            FUN_0050d6e4();
+            clearThreeWords();
           }
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < 0x14);
@@ -92,7 +92,7 @@ unsigned int FUN_00417e08(unsigned int param_1)
           do {
             if (*(short *)(temp_v5 + temp_v4 * 0xc + 0x914) == 0) {
               temp_v5 = temp_v5 + temp_v4 * 0xc;
-              FUN_0050d6e4(temp_v5 + 0x914);
+              clearThreeWords(temp_v5 + 0x914);
               *(unsigned short *)(temp_v5 + 0x914) = temp_v2;
               break;
             }

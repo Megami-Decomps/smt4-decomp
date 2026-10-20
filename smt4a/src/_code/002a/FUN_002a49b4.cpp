@@ -1,22 +1,18 @@
-#include "romwright_types.h"
+#include "shard/Block57f248.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f248; /* 0x57f248 */
-
-
+/* Resets the record at 0x57F248 (if there is one): id 0xFFFF, mode 0, counter 0. */
 void FUN_002a49b4(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f248 + 0x4));
-  if ((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) != 0) {
-    *(unsigned short *)(temp_v0 + 0x64e) = 0xffff;
-    *(unsigned char *)(temp_v0 + 8) = 0;
-    *(unsigned short *)(temp_v0 + 0x650) = 0;
-  }
-  return;
+    Record57f248 *record;
+
+    record = DAT_0057f248.record;
+    if (DAT_0057f248.record != NULL) {
+        record->unk64E = 0xFFFF;
+        record->unk008 = 0;
+        record->unk650 = 0;
+    }
 }
 
 } /* extern "C" */

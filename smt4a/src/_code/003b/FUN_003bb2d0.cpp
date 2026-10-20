@@ -1,18 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard003B.h"
 
 extern "C" {
 
-int FUN_00352388(void);
+extern void FUN_00352388(void);
 
-/* Supplied declaration required: FUN_00352388. */
-
-
-unsigned int FUN_003bb2d0(void)
-
+/* Script command: runs FUN_00352388. */
+u32 FUN_003bb2d0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00352388();
-  return 1;
+    FUN_00352388();
+    return 1;
 }
 
 } /* extern "C" */

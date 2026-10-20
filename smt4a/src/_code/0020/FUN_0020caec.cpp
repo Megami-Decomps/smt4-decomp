@@ -1,36 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001835b4(int, int, int, unsigned int, unsigned int, unsigned int);
+void FUN_001835b4(s32 a, s32 b, s32 c, u32 d, u32 e, u32 f);
+s32 slotRecordFindById(u32 id);
+s32 FUN_002a4b28(u32 id);
+s32 bitsAt60Test(s32 record, u32 flag);
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-/* Supplied declaration required: FUN_001835b4. */
-extern int slotRecordFindById(unsigned int);
-extern int FUN_002a4b28(unsigned int);
-extern int FUN_004bd340(int, unsigned int);
-
-
-void FUN_0020caec(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Reports the event for `id`: kind 0x5B if its slot record exists but lacks flag 10, otherwise kind 0x5A if FUN_002a4b28 accepts the id. */
+void FUN_0020caec(u32 id, u32 a, u32 b, u32 c)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = slotRecordFindById(param_1);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_004bd340(temp_v0,10), temp_v0 == 0)) {
-    FUN_001835b4(2,0x1a,0x5b,param_2,param_3,param_4);
-    return;
-  }
-  temp_v0 = FUN_002a4b28(param_1);
-  if (temp_v0 != 0) {
-    FUN_001835b4(2,0x1a,0x5a,param_2,param_3,param_4);
-  }
-  return;
+    s32 record;
+
+    record = slotRecordFindById(id);
+    if ((record != 0) && (record = bitsAt60Test(record, 10), record == 0)) {
+        FUN_001835b4(2, 0x1A, 0x5B, a, b, c);
+        return;
+    }
+    record = FUN_002a4b28(id);
+    if (record != 0) {
+        FUN_001835b4(2, 0x1A, 0x5A, a, b, c);
+    }
 }
 
 } /* extern "C" */

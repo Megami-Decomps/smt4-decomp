@@ -22,7 +22,7 @@ extern unsigned char DAT_004e3c58; /* 0x4e3c58 */
 
 extern unsigned int FUN_0011c6c0(void);
 /* Supplied declaration required: FUN_00128650. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: nn_hid_CTR_PadReader_PadReader_sub_object. */
 
@@ -34,7 +34,7 @@ void FUN_0010a23c(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  if (((DAT_004650b8 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_004650b8), temp_v0 != 0)) {
+  if (((DAT_004650b8 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_004650b8), temp_v0 != 0)) {
     temp_v1 = FUN_0011c6c0();
     nn_hid_CTR_PadReader_PadReader_sub_object(&DAT_004e3be8,temp_v1);
   }

@@ -1,39 +1,48 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0044e098; /* 0x44e098 */
-extern unsigned int DAT_004c53c4; /* 0x4c53c4 */
-extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
+extern int jyoucyuGetTableEntry(u32 index);
 
-extern int jyoucyuGetTableEntry(unsigned int);
+typedef struct Slot {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 flags;
+} Slot;
 
+extern struct {
+    u8 unk00;
+    u8 unk01[3];
+    s32 which;
+} DAT_0044e098;
+extern Slot DAT_004c53c4;
+extern Slot DAT_004c53e4;
 
-void FUN_001a8040(unsigned int param_1)
-
+void FUN_001a8040(u32 value)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    puVar2 = (unsigned int *)0x0;
-    if ((*(int *)((unsigned char *)&DAT_0044e098 + 0x4)) == 0) {
-      puVar2 = &DAT_004c53c4;
+    Slot *slot;
+
+    if (jyoucyuGetTableEntry(1) == 0) {
+        slot = NULL;
+        if (DAT_0044e098.which == 0) {
+            slot = &DAT_004c53c4;
+        } else if (DAT_0044e098.which == 1) {
+            slot = &DAT_004c53e4;
+        }
+        if ((slot->flags & 2) != 0) {
+            slot->unk04 = 0;
+            slot->unk10 = 0;
+            slot->unk08 = value;
+            slot->unk14 = 0;
+            slot->unk18 = 0;
+            slot->flags = 0x13;
+        }
     }
-    else if ((*(int *)((unsigned char *)&DAT_0044e098 + 0x4)) == 1) {
-      puVar2 = &DAT_004c53e4;
-    }
-    if ((puVar2[7] & 2) != 0) {
-      puVar2[1] = 0;
-      puVar2[4] = 0;
-      puVar2[2] = param_1;
-      puVar2[5] = 0;
-      puVar2[6] = 0;
-      puVar2[7] = 0x13;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

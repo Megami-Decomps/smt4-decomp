@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_001f9334(int);
-int FUN_0024f4d0(void);
+int dataTable2fSub0GetCount(void);
 int FUN_0024f520(void);
 int FUN_002533f4(int, int, int);
 int FUN_00287aec(void);
 int FUN_002a0428(unsigned int, int);
 int FUN_002b06c4(void);
 int FUN_002c09d0(...);
-int FUN_002c09f4(int);
+int randNextInRange(int);
 int FUN_0030f5e0(void);
 int SBORROW4(...);
 int VectorSignedToFloat(int, int);
@@ -67,13 +67,13 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001f9334. */
-/* Supplied declaration required: FUN_0024f4d0. */
+/* Supplied declaration required: dataTable2fSub0GetCount. */
 extern int FUN_0024f4e8(void);
 /* Supplied declaration required: FUN_0024f520. */
 /* Supplied declaration required: FUN_002533f4. */
 extern int FUN_00256550(unsigned int);
 extern int FUN_0025c05c(void);
-extern int *FUN_002760fc(int);
+extern int *dataTable2fSub0GetRecord(int);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 extern int FUN_00285574(void);
 /* Supplied declaration required: FUN_00287aec. */
@@ -81,7 +81,7 @@ extern int FUN_00285574(void);
 /* Supplied declaration required: FUN_002b06c4. */
 extern int FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002c09d0. */
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 extern int FUN_002c2950(void);
 extern char *FUN_002ced4c(void);
 extern int FUN_002ef868(void);
@@ -170,10 +170,10 @@ void FUN_0021bea0(void)
     temp_v1 = FUN_00285574();
     if (temp_v1 != 0) {
       temp_v2 = 0;
-      FUN_0024f4d0();
+      dataTable2fSub0GetCount();
       if (0 < temp_v1) {
         do {
-          piVar4 = (int *)FUN_002760fc(temp_v2);
+          piVar4 = (int *)dataTable2fSub0GetRecord(temp_v2);
           if (*piVar4 == -1) break;
           temp_v1 = FUN_00285574();
           if (temp_v1 == (short)piVar4[2]) {
@@ -182,7 +182,7 @@ void FUN_0021bea0(void)
             break;
           }
           temp_v2 = temp_v2 + 1;
-          FUN_0024f4d0();
+          dataTable2fSub0GetCount();
         } while (temp_v2 < temp_v1);
       }
     }
@@ -240,7 +240,7 @@ LAB_0021c1e4:
         *(char *)(temp_v2 + 0x34) = '\x01';
         *(unsigned int *)(temp_v2 + 0x58) = temp_v9;
         *(unsigned int *)(temp_v2 + 0x5c) = temp_v10;
-        temp_v8 = FUN_002c09f4(0x168);
+        temp_v8 = randNextInRange(0x168);
         temp_v8 = VectorUnsignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
         *(unsigned int *)(temp_v2 + 0x60) = temp_v8;
         *(unsigned int *)(temp_v2 + 100) = 1;
@@ -269,18 +269,18 @@ LAB_0021c1e4:
         } while (temp_v1 == 0);
         *(unsigned int *)(temp_v2 + 0xb8) = 2;
         *(unsigned int *)(temp_v2 + 0xbc) = 0;
-        temp_v1 = FUN_002c09f4(100);
+        temp_v1 = randNextInRange(100);
         *(int *)(temp_v2 + 0xc0) = temp_v1 + 0x1e;
         *(unsigned int *)(temp_v2 + 0xc4) = 0;
         *(unsigned int *)(temp_v2 + 0x1a0) = 0;
         *(unsigned char *)(temp_v2 + 0x170) = 0;
         *(unsigned char *)(temp_v2 + 0x171) = 0;
         if (*(char *)(temp_v5 + 0x3048) != '\0') {
-          temp_v1 = FUN_002c09f4(0x78);
+          temp_v1 = randNextInRange(0x78);
           temp_v1 = temp_v1 + 0x3c;
         }
         else {
-          temp_v1 = FUN_002c09f4(0x96);
+          temp_v1 = randNextInRange(0x96);
           temp_v1 = temp_v1 + 1;
         }
         *(int *)(temp_v2 + 0xd8) = temp_v1;
@@ -301,7 +301,7 @@ LAB_0021c1e4:
               (((*(int *)(temp_v5 + 0x3038) < DAT_0049fae0 - 5 &&
                 (*(char *)(temp_v5 + 0x3048) == '\0')) &&
                ((int)romwright_fabs_4(*(float *)(g_lmapScene + 0x20) - *(float *)(temp_v2 + 0x58)) < 0x41f00000)))
-              ) && (temp_v1 = FUN_002c09f4(100), temp_v1 < DAT_0049fb7c)) {
+              ) && (temp_v1 = randNextInRange(100), temp_v1 < DAT_0049fb7c)) {
             temp_v1 = temp_v5 + *(int *)(temp_v2 + 0x1a8) * 8;
             if (*(char *)(temp_v1 + 0x3051) != '\0') {
               temp_v8 = asdMdlManagerClone(*(unsigned int *)(temp_v1 + 0x304c),0);

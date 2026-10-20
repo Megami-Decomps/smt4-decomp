@@ -1,23 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e542c` (_code @ 0x3e542c, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_004ff920(void);
+typedef struct Source {
+    u8 unk00[4];
+    void *data; /* 0x04 */
+} Source;
 
-/* Supplied declaration required: FUN_004ff920. */
+typedef struct Holder {
+    u8 unk00[8];
+    Source *source; /* 0x08 */
+} Holder;
 
+extern f32 FUN_004ff920(void *data);
 
-void FUN_003e542c(int param_1)
-
+/* The value read from the holder's source data, 0.0 while it has none. */
+f32 FUN_003e542c(Holder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(*(int *)(param_1 + 8) + 4) != 0) {
-    FUN_004ff920();
-    return;
-  }
-  return;
+    void *data = holder->source->data;
+
+    if (data == NULL) {
+        return 0.0f;
+    }
+    return FUN_004ff920(data);
 }
 
 } /* extern "C" */

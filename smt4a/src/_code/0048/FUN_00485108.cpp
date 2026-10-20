@@ -18,7 +18,7 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 
 
@@ -37,7 +37,7 @@ void FUN_00485108(int param_1,unsigned int param_2,unsigned int param_3)
   FUN_001835b4(2,0x23,0x150,param_2,param_3,0x24);
   efctSetSpeed();
   temp_v2 = g_renderCtx;
-  temp_v0 = FUN_00169294(6,1,0);
+  temp_v0 = packNibblesAndByte(6,1,0);
   piVar3 = (int *)(temp_v2 + 0x12b8);
   temp_v1 = piVar3[*piVar3 + 2];
   piVar3[*piVar3 + 2] = temp_v0;
@@ -51,7 +51,7 @@ void FUN_00485108(int param_1,unsigned int param_2,unsigned int param_3)
     temp_v0 = g_renderCtx;
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 4);
-  temp_v2 = FUN_00169294(6,7,0);
+  temp_v2 = packNibblesAndByte(6,7,0);
   piVar3 = (int *)(temp_v0 + 0x12b8);
   temp_v1 = piVar3[*piVar3 + 2];
   piVar3[*piVar3 + 2] = temp_v2;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0029cde0(...);
-int FUN_0029e974(...);
+int dataTable06Sub1GetRecord(...);
 int FUN_0029eaa4(...);
 int FUN_002b7bca(...);
 int FUN_002b9024(...);
@@ -17,7 +17,7 @@ extern int *DAT_0043dd68; /* 0x43dd68 */
 
 extern int FUN_001a15f4(int);
 /* Supplied declaration required: FUN_0029cde0. */
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 extern unsigned long long FUN_0029e9cc(unsigned short);
 extern unsigned long long FUN_0029ea68(unsigned short);
 /* Supplied declaration required: FUN_0029eaa4. */
@@ -89,7 +89,7 @@ void FUN_002a019c(void)
   temp_v4 = 0;
   do {
     temp_v3 = temp_v4;
-    FUN_0029e974();
+    dataTable06Sub1GetRecord();
     if (((temp_v3 != 0) && ((*(unsigned char *)(temp_v3 + 3) & 0x20) != 0)) &&
        ((*(char *)(temp_v0 + 0x31) < 0 ||
         (*(unsigned int *)(*(char *)(temp_v0 + 0x31) * 4 + 0x4032e8) == (unsigned int)*(unsigned char *)(temp_v3 + 2))))) {

@@ -1,42 +1,41 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0037a4fc_arg0 fn_0037a4fc_arg0;
-struct fn_0037a4fc_arg0 {
-    unsigned char pad_0x0[0x34];
-    void *field_0x34; /* +0x34 */
-    unsigned char pad_0x38[0x18];
-    byte field_0x50; /* +0x50 */
-    byte field_0x51; /* +0x51 */
-};
+extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 file);
 
-extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
+typedef struct FileOwner {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 file;   /* file handle; bit 0 marks a pending operation */
+} FileOwner;
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ FileOwner *fileOwner;
+    /* 0x38 */ u8 unk38[0x18];
+    /* 0x50 */ u8 open;
+    /* 0x51 */ u8 enabled;
+} Obj;
 
-void FUN_0037a4fc(fn_0037a4fc_arg0 *param_1)
-
+void FUN_0037a4fc(Obj *obj)
 {
-  unsigned char temp_v0;
-  unsigned int temp_v1;
-  void *pvVar3;
-  unsigned char temp_v2;
-  
-  temp_v2 = param_1->field_0x51 != 0;
-  temp_v0 = 0;
-  if (temp_v2) {
-    temp_v0 = param_1->field_0x50;
-  }
-  if (temp_v2 && temp_v0 != 0) {
-    pvVar3 = param_1->field_0x34;
-    temp_v1 = *(unsigned int *)((int)pvVar3 + 4);
-    if ((temp_v1 & 0xfffffffe) != 0) {
-      nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(temp_v1 & 0xfffffffe);
-      *(unsigned int *)((int)pvVar3 + 4) = 0;
+    u8 enabled = obj->enabled != 0;
+    u8 open = 0;
+    FileOwner *owner;
+    u32 file;
+
+    if (enabled) {
+        open = obj->open;
     }
-    param_1->field_0x50 = 0;
-  }
-  return;
+    if (enabled && open != 0) {
+        owner = obj->fileOwner;
+        file = owner->file;
+        if ((file & 0xfffffffe) != 0) {
+            nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(file & 0xfffffffe);
+            owner->file = 0;
+        }
+        obj->open = 0;
+    }
 }
 
 } /* extern "C" */

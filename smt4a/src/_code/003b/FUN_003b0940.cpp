@@ -12,7 +12,7 @@ int FUN_002a7b74(void);
 int FUN_0035dd74(void);
 int FUN_003857b4(int);
 int FUN_003d2d34(unsigned int, int, int);
-int FUN_003e5b9c(int);
+int linkHolderClearFlag(int);
 int FUN_004db450(unsigned int, unsigned int *);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -35,7 +35,7 @@ extern int FUN_0026140c(void);
 extern int lmapSceneGetScript(void);
 /* Supplied declaration required: FUN_003857b4. */
 /* Supplied declaration required: FUN_003d2d34. */
-/* Supplied declaration required: FUN_003e5b9c. */
+/* Supplied declaration required: linkHolderClearFlag. */
 extern unsigned int FUN_004dad8c(unsigned int);
 /* Supplied declaration required: FUN_004db450. */
 
@@ -94,7 +94,7 @@ void FUN_003b0940(void)
   temp_v0 = lmapSceneGetScript();
   if (temp_v0 != 0) {
     FUN_003857b4(1);
-    FUN_003e5b9c(temp_v0);
+    linkHolderClearFlag(temp_v0);
     return;
   }
   return;

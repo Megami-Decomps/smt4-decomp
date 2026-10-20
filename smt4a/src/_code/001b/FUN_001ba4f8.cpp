@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct BitSet {
+    /* 0x00 */ u8 unk00[0x68];
+    /* 0x68 */ u8 bits[1];
+} BitSet;
 
-unsigned char FUN_001ba4f8(int param_1,unsigned int param_2)
-
+/* Returns whether bit `index` is set. */
+u8 FUN_001ba4f8(BitSet *set, u32 index)
 {
-  return ((unsigned int)*(unsigned char *)(param_1 + (param_2 >> 3) + 0x68) & (1 << (param_2 & 7))) != 0;
+    return ((u32)set->bits[index >> 3] & (1 << (index & 7))) != 0;
 }
 
 } /* extern "C" */

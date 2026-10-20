@@ -14,8 +14,8 @@ int FUN_004a849c(int, unsigned char [24]);
 int FUN_004a8584(unsigned char [24], int, int);
 int FUN_004cfeb0(int, int, int, int, int, int);
 int FUN_004d05c4(int, int, int, int);
-int FUN_004d06e4(void);
-int FUN_004d097c(unsigned int);
+int releaseEntriesA(void);
+int releaseEntriesB(unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
@@ -38,8 +38,8 @@ extern unsigned char FUN_004a8454(int, unsigned int);
 /* Supplied declaration required: FUN_004a8584. */
 /* Supplied declaration required: FUN_004cfeb0. */
 /* Supplied declaration required: FUN_004d05c4. */
-/* Supplied declaration required: FUN_004d06e4. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesA. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_004a4848(int param_1)
@@ -56,8 +56,8 @@ void FUN_004a4848(int param_1)
   unsigned char temp_v5 [24];
   unsigned char temp_v6;
   
-  FUN_004d097c(*(unsigned int *)(param_1 + 0x84c));
-  FUN_004d06e4();
+  releaseEntriesB(*(unsigned int *)(param_1 + 0x84c));
+  releaseEntriesA();
   FUN_004a83f8();
   if (*(char *)(param_1 + 0x860) == '\0') {
     temp_v4 = 0;

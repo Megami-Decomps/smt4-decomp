@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct FlagHolder {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u32 flags;
+} FlagHolder;
 
-void FUN_0014bf2c(int param_1,unsigned int param_2)
-
+/* Sets the given bits in `flags`. */
+void FUN_0014bf2c(FlagHolder *object, u32 bits)
 {
-  *(unsigned int *)(param_1 + 0x34) = param_2 | *(unsigned int *)(param_1 + 0x34);
-  return;
+    object->flags = bits | object->flags;
 }
 
 } /* extern "C" */

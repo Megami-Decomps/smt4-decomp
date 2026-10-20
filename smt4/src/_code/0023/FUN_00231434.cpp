@@ -1,38 +1,39 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00231434_arg0 fn_00231434_arg0;
-struct fn_00231434_arg0 {
-    unsigned char pad_0x0[0x8];
-    short field_0x8; /* +0x8 */
-    short field_0xa; /* +0xa */
-    void *field_0xc; /* +0xc */
-};
+extern u8 *FUN_002bf4f8(void);
 
-extern int FUN_002bf4f8(void);
+typedef struct Range {
+    /* 0x0 */ s16 first;
+    /* 0x2 */ s16 second;
+} Range;
 
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 defaultFirst;
+    /* 0x06 */ u16 defaultSecond;
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+    /* 0x0C */ Range *range;
+} Entry;
 
-void FUN_00231434(fn_00231434_arg0 *param_1,unsigned int param_2,int *param_3,int *param_4,
-                 unsigned int *param_5,unsigned int *param_6)
-
+/* Reads the current entry's position and range (its own range, or the defaults with bit 15 masked off). */
+void FUN_00231434(void *unused, u32 unused2, int *x, int *y, u32 *first, u32 *second)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002bf4f8();
-  *param_3 = (int)*(short *)(temp_v0 + 8);
-  *param_4 = (int)*(short *)(temp_v0 + 10);
-  if (*(short **)(temp_v0 + 0xc) != (short *)0x0) {
-    *param_5 = (int)**(short **)(temp_v0 + 0xc);
-    temp_v1 = (unsigned int)*(short *)(*(int *)(temp_v0 + 0xc) + 2);
-  }
-  else {
-    *param_5 = *(unsigned short *)(temp_v0 + 4) & 0xffff7fff;
-    temp_v1 = *(unsigned short *)(temp_v0 + 6) & 0xffff7fff;
-  }
-  *param_6 = temp_v1;
-  return;
+    Entry *entry = (Entry *)FUN_002bf4f8();
+    u32 value;
+
+    *x = entry->x;
+    *y = entry->y;
+    if (entry->range != NULL) {
+        *first = entry->range->first;
+        value = entry->range->second;
+    } else {
+        *first = entry->defaultFirst & 0xffff7fff;
+        value = entry->defaultSecond & 0xffff7fff;
+    }
+    *second = value;
 }
 
 } /* extern "C" */

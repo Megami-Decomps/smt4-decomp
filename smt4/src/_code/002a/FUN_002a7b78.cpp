@@ -1,29 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c4040(unsigned int *);
+int FUN_002c4040(u32 *event);
+extern u8 DAT_00421d18;
+extern void nn_os_LightEvent_Initialize(u32 *event, u8 autoClear);
 
-extern unsigned char DAT_00421d18; /* 0x421d18 */
+typedef struct Obj {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 event[1];
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 unk15[3];
+    /* 0x18 */ u32 unk18;
+} Obj;
 
-/* Supplied declaration required: FUN_002c4040. */
-extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
-
-
-unsigned int * FUN_002a7b78(unsigned int *param_1)
-
+/* Constructor: installs the vtable, clears the fields and initializes the light event. */
+Obj *FUN_002a7b78(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_00421d18;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  nn_os_LightEvent_Initialize((unsigned int)(param_1 + 3),1);
-  *(unsigned char *)(param_1 + 5) = 0;
-  param_1[6] = 0;
-  FUN_002c4040(param_1 + 3);
-  return param_1;
+    obj->vtbl = &DAT_00421d18;
+    obj->unk04 = 0;
+    obj->unk08 = 0;
+    obj->event[0] = 0;
+    obj->unk10 = 0;
+    nn_os_LightEvent_Initialize(obj->event, 1);
+    obj->unk14 = 0;
+    obj->unk18 = 0;
+    FUN_002c4040(obj->event);
+    return obj;
 }
 
 } /* extern "C" */

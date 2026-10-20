@@ -9,7 +9,7 @@ int FUN_001ba3d4(...);
 int FUN_00275f44(...);
 int FUN_003180c4(...);
 int FUN_00359974(...);
-int FUN_0037b578(unsigned int, int);
+int screenStartOrClear(unsigned int, int);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
 int FUN_00480e30(unsigned int, int);
@@ -32,10 +32,10 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
-extern int FUN_00331194(void);
+extern int panelIsMissingOrFlagClear(void);
 extern int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
 /* Supplied declaration required: FUN_00480e30. */
@@ -77,7 +77,7 @@ void FUN_003e618c(int param_1)
         FUN_00359974(0x18,temp_v3,0xffffffff,0);
         FUN_00359974(0x19,temp_v4,0xffffffff,0);
         FUN_00359974(0x1a,temp_v5,0xffffffff,0);
-        FUN_0037b578(*(unsigned int *)(param_1 + 0x10),0x15);
+        screenStartOrClear(*(unsigned int *)(param_1 + 0x10),0x15);
         FUN_00480e30(temp_v6 >> 0x10,1);
         *(unsigned int *)(param_1 + 8) = 99;
         return;
@@ -113,7 +113,7 @@ void FUN_003e618c(int param_1)
       return;
     }
     if (((temp_v0 == 1) && (temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x18)), temp_v0 == 2)) &&
-       (temp_v0 = FUN_00331194(), temp_v0 != 0)) {
+       (temp_v0 = panelIsMissingOrFlagClear(), temp_v0 != 0)) {
       temp_v0 = FUN_002a4b74();
       if (temp_v0 == 0) {
         *(unsigned int *)(param_1 + 8) = 2;

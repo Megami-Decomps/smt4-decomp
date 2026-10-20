@@ -8,7 +8,7 @@ int FUN_00235368(...);
 int FUN_002592b8(...);
 int FUN_002ae038(...);
 int FUN_002ae9ec(...);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 int FUN_002b75ec(...);
 int FUN_002ba12c(unsigned int);
 int FUN_002bcf4c(void);
@@ -17,7 +17,7 @@ int FUN_002bed3c(void);
 int FUN_002beda4(...);
 int FUN_002bf380(...);
 int FUN_002bf538(void);
-int FUN_003ea2cc(unsigned int *, int, int);
+int dataTable26GroupGetRecordS2(unsigned int *, int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -43,12 +43,12 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00235368. */
-extern int FUN_002355c0(unsigned int *, unsigned char, unsigned int);
+extern int dataTable26GroupGetRecord(unsigned int *, unsigned char, unsigned int);
 /* Supplied declaration required: FUN_002592b8. */
 extern int FUN_00287704(unsigned char);
 /* Supplied declaration required: FUN_002ae038. */
 /* Supplied declaration required: FUN_002ae9ec. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bcf4c. */
@@ -59,7 +59,7 @@ extern unsigned int FUN_002bed98(unsigned int *);
 /* Supplied declaration required: FUN_002beda4. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf538. */
-/* Supplied declaration required: FUN_003ea2cc. */
+/* Supplied declaration required: dataTable26GroupGetRecordS2. */
 
 
 void FUN_0038368c(unsigned int *param_1)
@@ -101,8 +101,8 @@ void FUN_0038368c(unsigned int *param_1)
   
   if ((*param_1 & 0x10) != 0) {
     temp_v0 = FUN_00287704((char)param_1[6]);
-    FUN_003ea2cc(param_1 + 8,(char)param_1[6],0);
-    temp_v26 = FUN_002355c0(param_1 + 8,(char)param_1[6],0);
+    dataTable26GroupGetRecordS2(param_1 + 8,(char)param_1[6],0);
+    temp_v26 = dataTable26GroupGetRecord(param_1 + 8,(char)param_1[6],0);
     temp_v6 = param_1[0x167] + 1;
     temp_v0 = temp_v0 + (unsigned int)*(unsigned char *)(temp_v0 + 10) * 0x50;
     temp_v1 = (int)(((long long)(int)temp_v6 * -0x77777777 + ((unsigned long long)temp_v6 << 0x20)) >> 0x20);
@@ -284,22 +284,22 @@ void FUN_0038368c(unsigned int *param_1)
           temp_v6 = (unsigned int)*(unsigned short *)(temp_v26 + temp_v17 * 0x20 + 0x16);
           if (temp_v6 != 0) {
             FUN_002bcf4c();
-            FUN_002b64a0(temp_v21,temp_v6);
+            libc_strcat(temp_v21,temp_v6);
           }
           else {
-            FUN_002b64a0(temp_v21);
+            libc_strcat(temp_v21);
           }
         }
         else {
           temp_v5 = FUN_002bd1fc();
-          FUN_002b64a0(temp_v21,temp_v5);
+          libc_strcat(temp_v21,temp_v5);
           if ((int)param_1[0x167] < 0xf) {
             temp_v8 = temp_v4;
           }
         }
       }
       else {
-        FUN_002b64a0(temp_v21,&LAB_00383ef4);
+        libc_strcat(temp_v21,&LAB_00383ef4);
       }
       if (temp_v15 == 10) {
         temp_v1 = temp_v16;

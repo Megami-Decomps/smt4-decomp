@@ -1,19 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002a0d0c(void);
+extern u8 *FUN_002a0d0c(void);
 
-
-void FUN_002d786c(unsigned int param_1)
-
+/* Sets bit `bit` of the bitset at +0x51. */
+void FUN_002d786c(u32 bit)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002a0d0c();
-  temp_v0 = temp_v0 + (param_1 >> 3);
-  *(unsigned char *)(temp_v0 + 0x51) = *(unsigned char *)(temp_v0 + 0x51) | (unsigned char)(1 << (param_1 & 7));
-  return;
+    u8 *bitset = FUN_002a0d0c();
+
+    bitset = bitset + (bit >> 3);
+    bitset[0x51] = bitset[0x51] | (u8)(1 << (bit & 7));
 }
 
 } /* extern "C" */

@@ -24,7 +24,7 @@ extern unsigned char LAB_0010a2dc; /* 0x10a2dc */
 
 /* Supplied declaration required: FUN_002e97b4. */
 /* Supplied declaration required: FUN_002f32ac. */
-extern unsigned int *FUN_002f32d4(int, unsigned int);
+extern unsigned int *arrayElementAddress_002f32d4(int, unsigned int);
 /* Supplied declaration required: FUN_002f32dc. */
 /* Supplied declaration required: FUN_002f32f8. */
 /* Supplied declaration required: FUN_002f3338. */
@@ -58,9 +58,9 @@ unsigned int FUN_0010a20c(int param_1,unsigned int param_2,int param_3,unsigned 
       temp_v5[0] = 0;
       FUN_002e97b4(temp_v1,temp_v5,0x100);
       temp_v4 = temp_v6 + 0x114;
-      puVar1 = (unsigned int *)FUN_002f32d4(temp_v4,2);
+      puVar1 = (unsigned int *)arrayElementAddress_002f32d4(temp_v4,2);
       FUN_002f32dc(*puVar1);
-      puVar1 = (unsigned int *)FUN_002f32d4(temp_v4,2);
+      puVar1 = (unsigned int *)arrayElementAddress_002f32d4(temp_v4,2);
       temp_v0 = FUN_002f32f8(*puVar1,&LAB_0010a2bc);
       temp_v0 = FUN_002f32f8(temp_v0,temp_v5);
       temp_v0 = FUN_002f32f8(temp_v0,&LAB_0010a2dc);
@@ -68,9 +68,9 @@ unsigned int FUN_0010a20c(int param_1,unsigned int param_2,int param_3,unsigned 
       temp_v2 = (unsigned short)((param_4 & 0xff) << 8) | ((unsigned short)(param_4 >> 8) & 0xff);
       temp_v5[0] = 0;
       FUN_002e97b4(temp_v1,temp_v5,0x100);
-      puVar1 = (unsigned int *)FUN_002f32d4(temp_v4,3);
+      puVar1 = (unsigned int *)arrayElementAddress_002f32d4(temp_v4,3);
       FUN_002f32dc(*puVar1);
-      puVar1 = (unsigned int *)FUN_002f32d4(temp_v4,3);
+      puVar1 = (unsigned int *)arrayElementAddress_002f32d4(temp_v4,3);
       temp_v0 = FUN_002f32f8(*puVar1,&LAB_0010a2bc);
       temp_v0 = FUN_002f32f8(temp_v0,temp_v5);
       temp_v0 = FUN_002f32f8(temp_v0,&LAB_0010a2dc);

@@ -1,29 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00360110(int, unsigned int);
+int FUN_00360110(int sdkVoice, u32 priority);
 
-/* Supplied declaration required: FUN_00360110. */
+typedef struct Voice {
+    /* 0x00 */ int sdkVoices[2];
+    /* 0x08 */ int count;
+    /* 0x0C */ u8 unk0C[8];
+    /* 0x14 */ u8 unk14;
+    /* 0x15 */ u8 unk15;
+    /* 0x16 */ u8 unk16;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ u16 dirtyFlags;
+    /* 0x22 */ u8 unk22[0x1E];
+    /* 0x40 */ int priority;
+} Voice;
 
-
-void nw_snd_internal_driver_Voice_UpdateVoicesPriority(int param_1)
-
+void nw_snd_internal_driver_Voice_UpdateVoicesPriority(Voice *voice)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if ((*(int *)(param_1 + 0x40) != 1) && (temp_v1 = 0, 0 < *(int *)(param_1 + 8))) {
-    do {
-      temp_v0 = *(int *)(param_1 + temp_v1 * 4);
-      if (temp_v0 != 0) {
-        FUN_00360110(temp_v0,*(unsigned int *)(param_1 + 0x40));
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(int *)(param_1 + 8));
-  }
-  return;
+    int sdkVoice;
+    int i;
+
+    if ((voice->priority != 1) && (i = 0, 0 < voice->count)) {
+        do {
+            sdkVoice = voice->sdkVoices[i];
+            if (sdkVoice != 0) {
+                FUN_00360110(sdkVoice, voice->priority);
+            }
+            i = i + 1;
+        } while (i < voice->count);
+    }
 }
 
 } /* extern "C" */

@@ -1,29 +1,41 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0023f3bc(unsigned int, int, unsigned int);
+int FUN_0023f3bc(u32 a, int b, u32 c);
 
-/* Supplied declaration required: FUN_0023f3bc. */
+typedef struct Inner {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u32 unk8;
+} Inner;
 
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Inner *inner;
+    /* 0x0C */ u8 unk0C[0x44];
+} Slot;
 
-void FUN_00293db0(int param_1,unsigned int param_2)
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Inner *main;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ Slot slots[3];
+} Obj;
 
+void FUN_00293db0(Obj *obj, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  FUN_0023f3bc(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0,param_2);
-  temp_v1 = 0;
-  do {
-    temp_v0 = *(int *)(param_1 + temp_v1 * 0x50 + 0x18);
-    if (temp_v0 != 0) {
-      FUN_0023f3bc(*(unsigned int *)(temp_v0 + 8),0,param_2);
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  return;
+    Inner *inner;
+    int i;
+
+    FUN_0023f3bc(obj->main->unk8, 0, value);
+    i = 0;
+    do {
+        inner = obj->slots[i].inner;
+        if (inner != NULL) {
+            FUN_0023f3bc(inner->unk8, 0, value);
+        }
+        i = i + 1;
+    } while (i < 3);
 }
 
 } /* extern "C" */

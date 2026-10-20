@@ -1,18 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7232(unsigned int);
+void FUN_002e7232(u32 value);
 
-/* Supplied declaration required: FUN_002e7232. */
-
-
-unsigned int * FUN_002f8264(unsigned int *param_1)
-
+/* Frees the word `*slot` refers to and returns the slot. */
+u32 *FUN_002f8264(u32 *slot)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e7232(*param_1);
-  return param_1;
+    FUN_002e7232(*slot);
+    return slot;
 }
 
 } /* extern "C" */

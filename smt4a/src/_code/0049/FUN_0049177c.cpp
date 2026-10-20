@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00162e8c(void);
-int FUN_0049359c(int, float *);
+int words2Copy(int, float *);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 
@@ -32,13 +32,13 @@ extern int DAT_005f1c5c; /* 0x5f1c5c */
 extern int FUN_0018719c(void);
 extern int FUN_00376fcc(int);
 extern int FUN_00384d34(int);
-extern int FUN_003ade20(int);
+extern int gameOwnedBitTest2(int);
 extern int FUN_004083a8(unsigned char, unsigned char);
-extern float *FUN_00492b84(int);
+extern float *sub68OwnerGetBlock60(int);
 extern int FUN_00492bc0(void);
 extern float *lmapSceneGetObj(int);
 extern int FUN_00492c5c(int);
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 
 
 void FUN_0049177c(int param_1)
@@ -73,13 +73,13 @@ void FUN_0049177c(int param_1)
   pfVar5 = (float *)lmapSceneGetObj(temp_v2);
   temp_v14 = *pfVar5;
   temp_v11 = pfVar5[2];
-  pfVar5 = (float *)FUN_00492b84(temp_v2);
+  pfVar5 = (float *)sub68OwnerGetBlock60(temp_v2);
   temp_v15 = 0.0f;
   temp_v18 = 0;
   temp_v12 = *pfVar5;
   temp_v13 = pfVar5[1];
   temp_v9 = temp_v15;
-  FUN_0049359c(param_1 + 0x4d0,&temp_v16);
+  words2Copy(param_1 + 0x4d0,&temp_v16);
   if (DAT_005f1a5e != '\0') {
     temp_v3 = FUN_00492c5c(temp_v2);
     temp_v14 = (float)VectorSignedToFloat(*(unsigned int *)(param_1 + 0x20638),
@@ -131,7 +131,7 @@ joined_r0x00491998:
         }
       }
       else {
-        temp_v5 = FUN_003ade20((int)*(short *)(temp_v4 + 0x17ba));
+        temp_v5 = gameOwnedBitTest2((int)*(short *)(temp_v4 + 0x17ba));
         if ((temp_v5 != 0) || (DAT_005f1c5c != 0)) {
           *(unsigned short *)(temp_v4 + 0x17c0) = 1;
         }

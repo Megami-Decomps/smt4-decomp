@@ -47,7 +47,7 @@ extern int *FUN_00232a6c(int, unsigned int);
 /* Supplied declaration required: FUN_0024f520. */
 /* Supplied declaration required: FUN_002533f4. */
 extern int FUN_002c09d0(unsigned int);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 void FUN_00396b08(int param_1,int param_2)
@@ -150,13 +150,13 @@ LAB_00396b7c:
       if (temp_v5 == 0) {
         return;
       }
-      temp_v1 = FUN_002c09f4((temp_v5 - 1) & 0xffff);
+      temp_v1 = randNextInRange((temp_v5 - 1) & 0xffff);
       puVar4 = (unsigned short *)(unaff_r11 + temp_v1 * 2);
       temp_v5 = (unsigned int)*puVar4;
     }
   }
   else {
-    temp_v1 = FUN_002c09f4((temp_v6 - 1) & 0xffff);
+    temp_v1 = randNextInRange((temp_v6 - 1) & 0xffff);
     puVar4 = temp_v22 + temp_v1;
     temp_v5 = (unsigned int)*puVar4;
   }

@@ -1,14 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_005c6000; /* 0x5c6000 */
+typedef struct Entry {
+    /* 0x000 */ u8 data[0x148];
+} Entry;
+extern Entry DAT_005c6000[];
 
-
-unsigned char * FUN_002a398c(int param_1)
-
+/* Returns the address of entry `index` (0x148 bytes each) of the table at 0x5C6000. */
+Entry *FUN_002a398c(s32 index)
 {
-  return &DAT_005c6000 + param_1 * 0x148;
+    return &DAT_005c6000[index];
 }
 
 } /* extern "C" */

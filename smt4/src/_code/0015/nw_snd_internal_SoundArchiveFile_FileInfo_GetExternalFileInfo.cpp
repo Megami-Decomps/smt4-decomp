@@ -1,28 +1,18 @@
-#include "romwright_types.h"
+#include "shard/SoundArchiveFileInfo.h"
 
 extern "C" {
 
-
-int nw_snd_internal_SoundArchiveFile_FileInfo_GetExternalFileInfo(unsigned short *param_1)
-
+/* Returns the external file info block of an external file info, or 0. */
+s32 nw_snd_internal_SoundArchiveFile_FileInfo_GetExternalFileInfo(FileInfo *info)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v1 = (unsigned int)*param_1;
-  temp_v2 = temp_v1 == 0;
-  if (!temp_v2) {
-    temp_v1 = temp_v1 - 0x220c;
-    temp_v2 = temp_v1 == 0;
-  }
-  if ((!temp_v2) && (temp_v1 == 1)) {
-    temp_v0 = (int)param_1 + *(int *)(param_1 + 2);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    s32 result;
+
+    if (FileInfo_GetFileLocationType(info) == 1) {
+        result = (s32)info + info->offset;
+    } else {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

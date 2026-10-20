@@ -1,22 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_snd_internal_driver_Voice_AppendWaveBuffer(int, int, unsigned int, unsigned int);
+int nw_snd_internal_driver_Voice_AppendWaveBuffer(void *voice, int index, u32 buffer, u32 flag);
 
-/* Supplied declaration required: nw_snd_internal_driver_Voice_AppendWaveBuffer. */
+typedef struct StreamChannel {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ void *voice;
+} StreamChannel;
 
-
-void nw_snd_internal_driver_StreamChannel_AppendWaveBuffer
-               (int param_1,unsigned int param_2,unsigned int param_3)
-
+void nw_snd_internal_driver_StreamChannel_AppendWaveBuffer(StreamChannel *channel, u32 buffer, u32 flag)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x30) != 0) {
-    nw_snd_internal_driver_Voice_AppendWaveBuffer(*(int *)(param_1 + 0x30),0,param_2,param_3);
-    return;
-  }
-  return;
+    if (channel->voice != NULL) {
+        nw_snd_internal_driver_Voice_AppendWaveBuffer(channel->voice, 0, buffer, flag);
+    }
 }
 
 } /* extern "C" */

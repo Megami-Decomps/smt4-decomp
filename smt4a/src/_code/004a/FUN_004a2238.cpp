@@ -9,7 +9,7 @@ int FUN_00184528(int *, int);
 int FUN_00275bc8(int, int);
 int FUN_0032d0c8(...);
 int FUN_0035ad50(int, unsigned char [300]);
-int FUN_0037c8b4(unsigned int, int);
+int panelSetTarget(unsigned int, int);
 int FUN_0037c8e4(int, int);
 int FUN_003baa3c(int);
 int FUN_004a3b48(...);
@@ -31,7 +31,7 @@ extern unsigned int slotRecordFindById(unsigned short);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_0035ad50. */
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_003baa3c. */
 /* Supplied declaration required: FUN_004a3b48. */
@@ -74,7 +74,7 @@ void FUN_004a2238(int *param_1)
       FUN_0037c8e4(1,0);
       temp_v1 = FUN_002a4b28(temp_v0);
       if (temp_v1 != 0) {
-        FUN_0037c8b4(-temp_v3,0);
+        panelSetTarget(-temp_v3,0);
       }
       else {
         FUN_003baa3c(1);

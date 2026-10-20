@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_0033a988(void);
-int FUN_00407360(unsigned int, unsigned int);
-int FUN_00407424(unsigned int, int);
+int linkSlotSetFlag1C(unsigned int, unsigned int);
+int linkSlotSetFlag20(unsigned int, int);
 int FUN_0040792c(void);
 int FUN_00407eb0(unsigned int, int, int);
 int FUN_004b8ba0(int);
 int FUN_004b9ff4(int, int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -25,18 +25,18 @@ extern unsigned char DAT_005f16fc; /* 0x5f16fc */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_0033a988. */
-/* Supplied declaration required: FUN_00407360. */
-/* Supplied declaration required: FUN_00407424. */
+/* Supplied declaration required: linkSlotSetFlag1C. */
+/* Supplied declaration required: linkSlotSetFlag20. */
 /* Supplied declaration required: FUN_0040792c. */
 /* Supplied declaration required: FUN_00407eb0. */
 /* Supplied declaration required: FUN_004b8ba0. */
 /* Supplied declaration required: FUN_004b9ff4. */
-extern int FUN_004ba660(int);
-extern int FUN_004ba790(int);
+extern int menu4CGetEntry(int);
+extern int menu4CGetCurrentEntry(int);
 extern int FUN_004babd8(int);
 extern unsigned short FUN_004cfe4c(int);
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d0524(void);
 extern int FUN_004d0554(void);
 
@@ -59,28 +59,28 @@ void FUN_004b7694(int param_1)
   float temp_v10;
   unsigned int temp_v11;
   
-  temp_v2 = FUN_004ba790(param_1 + 0x9c);
+  temp_v2 = menu4CGetCurrentEntry(param_1 + 0x9c);
   temp_v3 = FUN_004babd8(param_1 + 0x9c);
   if ((*(char *)(param_1 + 0x1214) != '\0') &&
      (*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) {
     if ((!(*(short *)(temp_v2 + 0x28) == 0 || *(short *)(temp_v2 + 0x28) == 6)) ||
        (*(char *)(*(int *)(param_1 + 0x1218) + 0x14) != '\0')) {
-      FUN_00407424(*(unsigned int *)(param_1 + 0x1218),0);
+      linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),0);
       temp_v4 = *(unsigned int *)(param_1 + 0x1218);
       temp_v7 = 1;
     }
     else {
-      FUN_00407424(*(unsigned int *)(param_1 + 0x1218),1);
+      linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),1);
       temp_v4 = *(unsigned int *)(param_1 + 0x1218);
       temp_v7 = 0;
     }
-    FUN_00407360(temp_v4,temp_v7);
+    linkSlotSetFlag1C(temp_v4,temp_v7);
   }
-  temp_v5 = FUN_004ba790(param_1 + 0x9c);
+  temp_v5 = menu4CGetCurrentEntry(param_1 + 0x9c);
   if ((temp_v5 != temp_v2) || ((*(unsigned int *)(param_1 + 0x20) & 0x40000000) != 0)) {
-    temp_v5 = FUN_004ba790(param_1 + 0x9c);
+    temp_v5 = menu4CGetCurrentEntry(param_1 + 0x9c);
     temp_v0 = *(short *)(temp_v5 + 0x22);
-    temp_v5 = FUN_004ba790(param_1 + 0x9c);
+    temp_v5 = menu4CGetCurrentEntry(param_1 + 0x9c);
     temp_v5 = (int)*(short *)(temp_v5 + 0x24);
     temp_v9 = (float)VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x1000;
@@ -103,7 +103,7 @@ void FUN_004b7694(int param_1)
     temp_v1 = FUN_004cfe4c(param_1 + 0x9c);
     *(unsigned short *)(param_1 + 0x4c) = temp_v1;
     if (*(char *)(param_1 + 0x1214) != '\0') {
-      temp_v5 = FUN_004ba660(param_1 + 0x9c);
+      temp_v5 = menu4CGetEntry(param_1 + 0x9c);
       temp_v8 = (int)*(short *)(temp_v5 + 0x28);
       if (((*(short *)(param_1 + 0x3c) != 4 && *(short *)(param_1 + 0x3c) != 3) ||
           (temp_v8 != 0 && temp_v8 != 6)) ||
@@ -118,7 +118,7 @@ void FUN_004b7694(int param_1)
   temp_v6 = *(unsigned int *)(param_1 + 0x20);
   if (temp_v3 != 0) {
     if ((temp_v6 & 0x40000000) == 0) {
-      FUN_004d044c();
+      sendEvent100020E();
     }
   }
   else if ((temp_v6 & 0x40000000) == 0) {
@@ -143,7 +143,7 @@ void FUN_004b7694(int param_1)
       return;
     }
     FUN_004b8ba0(param_1);
-    FUN_004d0434();
+    sendEvent100020F();
     return;
   }
   *(unsigned int *)(param_1 + 0x20) = (*(unsigned int *)(param_1 + 0x20) & 0xbfffffff) | 0x2000;

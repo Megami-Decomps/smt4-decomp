@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned int FUN_002177a4(unsigned int);
+extern unsigned int dataTable16Sub2GetRecord(unsigned int);
 extern unsigned int FUN_0028d24c(void);
 extern unsigned int FUN_0028d2e8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029212c. */
@@ -79,7 +79,7 @@ void FUN_00292f4c(int param_1)
           temp_v1 = padIsButtonDown(temp_v0 + 0x2e);
           if (temp_v1 != 0) {
             if (temp_v4 == temp_v3) {
-              temp_v2 = FUN_002177a4(temp_v6[temp_v0] & 0xff);
+              temp_v2 = dataTable16Sub2GetRecord(temp_v6[temp_v0] & 0xff);
               FUN_0029ee6c(temp_v2,0x323232ff);
               return;
             }

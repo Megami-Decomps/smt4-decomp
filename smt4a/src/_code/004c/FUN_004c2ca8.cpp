@@ -56,7 +56,7 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_0017760c. */
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
@@ -65,7 +65,7 @@ extern int FUN_001633a0(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004bd098. */
-extern int FUN_004bd340(unsigned int, unsigned int);
+extern int bitsAt60Test(unsigned int, unsigned int);
 extern unsigned int FUN_004c2aec(unsigned int, unsigned int, int);
 /* Supplied declaration required: FUN_004c4178. */
 /* Supplied declaration required: FUN_004c58e0. */
@@ -227,7 +227,7 @@ LAB_004c329c:
         if (puVar6 != (unsigned int *)0x0) goto LAB_004c329c;
 LAB_004c3314:
         temp_v5 = FUN_001ab854(param_6 - 0x6d);
-        temp_v4 = FUN_004bd340(temp_v5,3);
+        temp_v4 = bitsAt60Test(temp_v5,3);
         temp_v10 = temp_v4 != 0;
         temp_v4 = 0;
         if (temp_v10) {
@@ -296,7 +296,7 @@ LAB_004c3334:
     }
     else {
       temp_v5 = FUN_001ab854(param_6 - 0x6d);
-      temp_v4 = FUN_004bd340(temp_v5,3);
+      temp_v4 = bitsAt60Test(temp_v5,3);
       temp_v10 = temp_v4 != 0;
       temp_v4 = 0;
       if (temp_v10) {
@@ -354,19 +354,19 @@ LAB_004c2f70:
          (((puVar4[0x116a] & DAT_005714f8) == 0 && (puVar4[0x116b] & DAT_005714fc) == 0 &&
           ((puVar4[0x43] & 0x20000000) == 0)))))) {
     if ((int)temp_v7 >= 0x3d) {
-      temp_v4 = FUN_001633a0(0xf);
+      temp_v4 = lcgRandomRange(0xf);
       temp_v7 = temp_v7 + temp_v4;
     }
     else if ((int)temp_v7 >= 0x29) {
-      temp_v4 = FUN_001633a0(10);
+      temp_v4 = lcgRandomRange(10);
       temp_v7 = temp_v7 + temp_v4;
     }
     else if ((int)temp_v7 >= 0x15) {
-      temp_v4 = FUN_001633a0(5);
+      temp_v4 = lcgRandomRange(5);
       temp_v7 = temp_v7 + temp_v4;
     }
     else {
-      temp_v4 = FUN_001633a0(3);
+      temp_v4 = lcgRandomRange(3);
       temp_v7 = temp_v7 + temp_v4;
     }
   }

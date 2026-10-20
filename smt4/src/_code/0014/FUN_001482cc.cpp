@@ -1,25 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_002bb308(void);
 int FUN_002bb378(void);
+extern u32 FUN_00150030(u32 a, u32 b);
 
-extern unsigned int FUN_00150030(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002bb308. */
-/* Supplied declaration required: FUN_002bb378. */
-
-
-unsigned int FUN_001482cc(unsigned int param_1,unsigned int param_2)
-
+/* Runs FUN_00150030 between FUN_002bb378 and FUN_002bb308 (lock/unlock). */
+u32 FUN_001482cc(u32 a, u32 b)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  FUN_002bb378();
-  temp_v0 = FUN_00150030(param_1,param_2);
-  FUN_002bb308();
-  return temp_v0;
+    u32 result;
+
+    FUN_002bb378();
+    result = FUN_00150030(a, b);
+    FUN_002bb308();
+    return result;
 }
 
 } /* extern "C" */

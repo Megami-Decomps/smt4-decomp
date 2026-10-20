@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Buffer {
+    /* 0x00 */ u8 unk00[0x80];
+    /* 0x80 */ s32 capacity;
+    /* 0x84 */ s32 used;
+} Buffer;
 
-int FUN_00160050(int param_1)
-
+/* Returns the free space left: capacity minus used, or 0 when used has reached capacity. */
+s32 FUN_00160050(Buffer *buffer)
 {
-  int temp_v0;
-  
-  if (*(int *)(param_1 + 0x84) >= *(int *)(param_1 + 0x80)) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = *(int *)(param_1 + 0x80) - *(int *)(param_1 + 0x84);
-  }
-  return temp_v0;
+    s32 free;
+
+    if (buffer->used >= buffer->capacity) {
+        free = 0;
+    } else {
+        free = buffer->capacity - buffer->used;
+    }
+    return free;
 }
 
 } /* extern "C" */

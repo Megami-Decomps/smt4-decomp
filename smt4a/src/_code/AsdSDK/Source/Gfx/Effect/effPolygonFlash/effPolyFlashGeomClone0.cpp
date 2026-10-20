@@ -1,7 +1,10 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 63 vs built 62 rows, 82 diff lines. */
+/* NON_MATCHING: register allocation only: retail keeps srcBlock in r4 and params in r6 (one ldm of the two fields) and the block in r5; the built code swaps them */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+
+extern const char DAT_00544ba8[]; /* __FILE__ of effPolygonFlash.cpp */
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00271d28(PolyGeom *src);
@@ -9,10 +12,14 @@ PolyGeom *FUN_00271d28(PolyGeom *src);
 /* Clones a polygon effect's geometry block and gives each segment alternating texture coordinates. */
 PolyGeomBlock *effPolyFlashGeomClone0(PolyCloneSrc *src)
 {
-    PolyGeomBlock *srcBlock = src->block;
     PolyParams *params = src->params;
-    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, params->segments * 0x28 + 0x10, 0x10, 1);
+    PolyGeomBlock *srcBlock = src->block;
+    s32 dataSize = params->segments * 0x28;
+    PolyGeomBlock *block;
     PolyGeom *geom;
+
+    asdDebugTrace(DAT_00544ba8, 2094);
+    block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, dataSize + 0x10, 0x10, 1);
 
     block->data = block->payload;
     block->self = block;

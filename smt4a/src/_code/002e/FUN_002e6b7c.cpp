@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern unsigned int *FUN_002e3cf8(void);
+extern unsigned int *__aeabi_errno_addr(void);
 extern long long FUN_002e49c4(int, int, unsigned int, unsigned int);
 extern int FUN_002e49dc(char, int);
 
@@ -84,7 +84,7 @@ unsigned long long FUN_002e6b7c(char *param_1,unsigned int *param_2,int param_3)
     *param_2 = (unsigned int)param_1;
   }
   if (temp_v1) {
-    puVar6 = (unsigned int *)FUN_002e3cf8();
+    puVar6 = (unsigned int *)__aeabi_errno_addr();
     *puVar6 = 2;
     temp_v7 = 0xffffffff;
     temp_v5 = temp_v7;

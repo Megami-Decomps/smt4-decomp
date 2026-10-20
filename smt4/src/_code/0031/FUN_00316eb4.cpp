@@ -1,40 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00270028(int);
-int FUN_002b8e84(int);
+int FUN_00270028(int a);
+int FUN_002b8e84(int id);
 int FUN_0031eae4(void);
-
-/* Supplied declaration required: FUN_00270028. */
 extern int FUN_002893d8(void);
-/* Supplied declaration required: FUN_002b8e84. */
-/* Supplied declaration required: FUN_0031eae4. */
 
-
-unsigned char FUN_00316eb4(void)
-
+u8 FUN_00316eb4(void)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002893d8();
-  if (temp_v0 == 0) {
-    FUN_0031eae4();
-    FUN_00270028(3);
-    return 0;
-  }
-  temp_v0 = FUN_002893d8();
-  if (temp_v0 == 1) {
-    FUN_002b8e84(0x1000184);
-    FUN_00270028(1);
-    return 0;
-  }
-  temp_v0 = FUN_002893d8();
-  if (temp_v0 < 3) {
-    return 0;
-  }
-  return 1;
+    if (FUN_002893d8() == 0) {
+        FUN_0031eae4();
+        FUN_00270028(3);
+        return 0;
+    }
+    if (FUN_002893d8() == 1) {
+        FUN_002b8e84(0x1000184);
+        FUN_00270028(1);
+        return 0;
+    }
+    if (FUN_002893d8() < 3) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

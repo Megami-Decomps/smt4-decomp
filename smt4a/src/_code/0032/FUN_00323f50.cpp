@@ -17,8 +17,8 @@ int FUN_001bced4(...);
 int FUN_002371b0(...);
 int FUN_00291644(...);
 int FUN_0032c808(...);
-int FUN_0039ede0(...);
-int FUN_003b24f0(...);
+int quadSourceCopyOut(...);
+int quadHolderCopyOut(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX44TransposeAsm(...);
@@ -124,8 +124,8 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: FUN_00291644. */
 /* Supplied declaration required: FUN_0032c808. */
-/* Supplied declaration required: FUN_0039ede0. */
-/* Supplied declaration required: FUN_003b24f0. */
+/* Supplied declaration required: quadSourceCopyOut. */
+/* Supplied declaration required: quadHolderCopyOut. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
 
@@ -208,7 +208,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
   pfVar4 = param_1->field_0x4c;
   pfVar3 = (float *)pfVar4->field_0x18;
   DAT_006472e8 = temp_v4;
-  FUN_003b24f0(pfVar4,&temp_v20);
+  quadHolderCopyOut(pfVar4,&temp_v20);
   FUN_001bced4(temp_v30);
   temp_v31 = 0;
   temp_v32 = 0;
@@ -231,8 +231,8 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
   if (param_1->field_0xc == 7) {
     temp_v17 = 255.0f;
     if ((pfVar4->field_0xc & 1) != 0) {
-      FUN_0039ede0(pfVar4,&temp_v46);
-      FUN_003b24f0(pfVar4,&temp_v20);
+      quadSourceCopyOut(pfVar4,&temp_v46);
+      quadHolderCopyOut(pfVar4,&temp_v20);
       pfVar7 = &temp_v46;
       DAT_006472dc = temp_v46;
       DAT_006472e0 = fStack_7c;

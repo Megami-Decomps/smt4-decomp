@@ -1,36 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0014c494_arg0 fn_0014c494_arg0;
-struct fn_0014c494_arg0 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    byte field_0xc; /* +0xc */
-};
+typedef struct SlotTable {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 *count;   /* number of slots */
+    /* 0x8 */ u32 *slots;
+    /* 0xC */ u8 enabled;
+} SlotTable;
 
-
-unsigned int FUN_0014c494(fn_0014c494_arg0 *param_1,unsigned int param_2,unsigned int param_3)
-
+/* Stores `value` in slot `index` and returns the previous contents (0 when the table is disabled or the index is out of range). */
+u32 FUN_0014c494(SlotTable *table, u32 index, u32 value)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v2 = param_1->field_0xc != 0;
-  temp_v1 = 0;
-  if (temp_v2) {
-    temp_v1 = param_1->field_0x8;
-  }
-  if ((temp_v2 && temp_v1 != 0) && (param_2 < *(unsigned int *)param_1->field_0x4)) {
-    temp_v0 = *(unsigned int *)(temp_v1 + param_2 * 4);
-    *(unsigned int *)(temp_v1 + param_2 * 4) = param_3;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 old;
+    u8 enabled = table->enabled != 0;
+    u32 *slots = NULL;
+
+    if (enabled) {
+        slots = table->slots;
+    }
+    if (enabled && slots != NULL && index < *table->count) {
+        old = slots[index];
+        slots[index] = value;
+    } else {
+        old = 0;
+    }
+    return old;
 }
 
 } /* extern "C" */

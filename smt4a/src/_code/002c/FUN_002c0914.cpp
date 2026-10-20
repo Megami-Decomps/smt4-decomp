@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0026140c(void);
+typedef struct BitTable {
+    /* 0x00 */ u8 unk00[0x55];
+    /* 0x55 */ u8 bits[1];
+} BitTable;
 
+BitTable *FUN_0026140c(void);
 
-unsigned char FUN_002c0914(unsigned int param_1)
-
+/* Returns 0 when bit `index` of the bit set at 0x55 is set, 1 when it is clear. */
+u8 FUN_002c0914(u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0026140c();
-  if (((unsigned int)*(unsigned char *)(temp_v0 + (param_1 >> 3) + 0x55) & (1 << (param_1 & 7))) != 0) {
-    return 0;
-  }
-  return 1;
+    BitTable *table;
+
+    table = FUN_0026140c();
+    if (((u32)table->bits[index >> 3] & (1 << (index & 7))) != 0) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

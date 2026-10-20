@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(unsigned short [18], int, int, unsigned char *);
-int FUN_001633a0(...);
+int lcgRandomRange(...);
 int FUN_001aba54(void);
 int FUN_004e9168(int *, unsigned int, int, unsigned int *, int *);
 int FUN_004ea634(int *, int, unsigned int);
@@ -44,7 +44,7 @@ extern unsigned int DAT_00571178; /* 0x571178 */
 extern unsigned int DAT_0057117c; /* 0x57117c */
 
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_001633a0. */
+/* Supplied declaration required: lcgRandomRange. */
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_004e9168. */
 /* Supplied declaration required: FUN_004ea634. */
@@ -203,7 +203,7 @@ LAB_004e8e58:
   } while (temp_v6 < 8);
   if (temp_v10 != 0 || temp_v5 != 0) {
     if (temp_v5 != 0) {
-      if ((temp_v10 == 0) || (temp_v1 = FUN_001633a0(99), temp_v1 >= 0x1e)) {
+      if ((temp_v10 == 0) || (temp_v1 = lcgRandomRange(99), temp_v1 >= 0x1e)) {
         temp_v2 = 0;
         temp_v13[3] = 0x57;
         temp_v13[0] = 0x520051;
@@ -315,14 +315,14 @@ LAB_004e8e58:
             temp_v1 = temp_v1 + 1;
           } while ((int)temp_v1 < (int)temp_v5);
         }
-        temp_v2 = FUN_001633a0((temp_v5 - 1) & 0xffff);
+        temp_v2 = lcgRandomRange((temp_v5 - 1) & 0xffff);
         return (unsigned int)temp_v9[temp_v2];
       }
     }
     else if (temp_v10 == 0) {
       return temp_v14;
     }
-    temp_v2 = FUN_001633a0((temp_v10 - 1) & 0xffff);
+    temp_v2 = lcgRandomRange((temp_v10 - 1) & 0xffff);
     temp_v14 = (unsigned int)temp_v9[temp_v2 + 8];
   }
   return temp_v14;

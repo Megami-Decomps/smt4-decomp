@@ -1,23 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9538(int, unsigned int);
+void FUN_002e9538(void *dest, u32 value);
 
-/* Supplied declaration required: FUN_002e9538. */
-extern int FUN_002e995c(void);
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u8 flag;
+} Object;
 
+Object *FUN_002e995c(void);
 
-int FUN_002ea948(unsigned int param_1,unsigned int param_2,unsigned char param_3)
-
+/* Creates an object with FUN_002e995c, fills it from `value` and stores `flag` at 0x20; returns it. */
+Object *FUN_002ea948(u32 unused, u32 value, u8 flag)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002e995c();
-  FUN_002e9538(temp_v0,param_2);
-  *(unsigned char *)(temp_v0 + 0x20) = param_3;
-  return temp_v0;
+    Object *object;
+
+    object = FUN_002e995c();
+    FUN_002e9538(object, value);
+    object->flag = flag;
+    return object;
 }
 
 } /* extern "C" */

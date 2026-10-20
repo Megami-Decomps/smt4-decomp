@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Shard003F.h"
 
 extern "C" {
 
-
-unsigned char FUN_003f0f2c(int param_1)
-
+u8 FUN_003f0f2c(BtlStateB *state)
 {
-  return *(int *)(param_1 + 0x2294) != 0;
+    return state->unk2294 != 0;
 }
 
 } /* extern "C" */

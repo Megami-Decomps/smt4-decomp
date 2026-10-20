@@ -47,14 +47,14 @@ extern unsigned int DAT_005714fc; /* 0x5714fc */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001ab854. */
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 extern int FUN_004bd098(unsigned int, int);
-extern int FUN_004bd340(unsigned int, unsigned int);
+extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004c4178. */
 extern int FUN_004c8754(unsigned short);
 
@@ -162,19 +162,19 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
        (((DAT_005714f8 & puVar2[0x116a]) == 0 && (puVar2[0x116b] & DAT_005714fc) == 0 &&
         ((puVar2[0x43] & 0x20000000) == 0)))) {
       if ((int)temp_v6 >= 0x3d) {
-        temp_v3 = FUN_001633a0(0xf);
+        temp_v3 = lcgRandomRange(0xf);
         temp_v6 = temp_v6 + temp_v3;
       }
       else if ((int)temp_v6 >= 0x29) {
-        temp_v3 = FUN_001633a0(10);
+        temp_v3 = lcgRandomRange(10);
         temp_v6 = temp_v6 + temp_v3;
       }
       else if ((int)temp_v6 >= 0x15) {
-        temp_v3 = FUN_001633a0(5);
+        temp_v3 = lcgRandomRange(5);
         temp_v6 = temp_v6 + temp_v3;
       }
       else {
-        temp_v3 = FUN_001633a0(3);
+        temp_v3 = lcgRandomRange(3);
         temp_v6 = temp_v6 + temp_v3;
       }
     }
@@ -224,7 +224,7 @@ unsigned int FUN_004c34e0(int param_1,unsigned int param_2,unsigned int param_3,
   }
   else {
     temp_v5 = FUN_001ab854(param_6 - 0x6d);
-    temp_v3 = FUN_004bd340(temp_v5,3);
+    temp_v3 = bitsAt60Test(temp_v5,3);
     temp_v7 = temp_v3 != 0;
     temp_v3 = 0;
     if (temp_v7) {

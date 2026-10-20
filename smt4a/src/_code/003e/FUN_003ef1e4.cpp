@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001633a0(int);
+int lcgRandomRange(int);
 int FUN_00184310(void);
 int FUN_0019cac4(void);
 int SBORROW4(int, int);
@@ -37,7 +37,7 @@ extern unsigned int DAT_00573b74; /* 0x573b74 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_001633a0. */
+/* Supplied declaration required: lcgRandomRange. */
 extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_0019cac4. */
@@ -107,7 +107,7 @@ void FUN_003ef1e4(int param_1,int param_2)
     return;
   }
   if (param_2 != 0) {
-    temp_v9 = FUN_001633a0(99);
+    temp_v9 = lcgRandomRange(99);
     if (temp_v9 < 0x5a) {
       return;
     }
@@ -122,7 +122,7 @@ void FUN_003ef1e4(int param_1,int param_2)
     if (temp_v0 == '\x02') {
       *(unsigned int *)(param_1 + 0x45a4) = temp_v7 | temp_v11 | temp_v4;
       *puVar11 = temp_v10 | temp_v3 | temp_v5;
-      temp_v5 = FUN_001633a0(100);
+      temp_v5 = lcgRandomRange(100);
       if (*(unsigned short *)(param_1 + 0x152) <= temp_v5) {
         return;
       }
@@ -242,7 +242,7 @@ void FUN_003ef1e4(int param_1,int param_2)
     }
   }
 LAB_003ef5b0:
-  temp_v6 = FUN_001633a0(100);
+  temp_v6 = lcgRandomRange(100);
   if (temp_v6 <= temp_v9) {
     return;
   }

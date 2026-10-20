@@ -1,30 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002d2efc(char *);
+int FUN_002d2efc(u8 *entry);
 
-extern int DAT_00447a60; /* 0x447a60 */
+typedef struct Work {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u8 entries[0x10][0x3C];
+} Work;
 
-/* Supplied declaration required: FUN_002d2efc. */
-
+extern Work *DAT_00447a60;
 
 void FUN_0027b27c(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    int base = DAT_00447a60;
-    char *p = (char *)(base + temp_v0 * 0x3c + 0x24);
-    if (*p != '\0') {
-      FUN_002d2efc(p);
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x10);
-  return;
+    int i = 0;
+    u8 *entry;
+
+    do {
+        Work *work = DAT_00447a60;
+
+        entry = work->entries[i];
+        if (*entry != 0) {
+            FUN_002d2efc(entry);
+        }
+        i = i + 1;
+    } while (i < 0x10);
 }
 
 } /* extern "C" */

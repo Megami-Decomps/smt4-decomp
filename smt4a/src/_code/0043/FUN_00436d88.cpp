@@ -9,7 +9,7 @@ int FUN_00436d04(unsigned int *, unsigned char *);
 int FUN_004387bc(...);
 int FUN_004387f0(...);
 int FUN_005022c4(int *, unsigned char **);
-int FUN_0051539c(int *, int *, unsigned int);
+int variantSetWordA(int *, int *, unsigned int);
 int FUN_005153cc(void);
 int FUN_005155bc(int *);
 
@@ -30,7 +30,7 @@ extern int FUN_00438204(unsigned char **, int *);
 /* Supplied declaration required: FUN_004387bc. */
 /* Supplied declaration required: FUN_004387f0. */
 /* Supplied declaration required: FUN_005022c4. */
-/* Supplied declaration required: FUN_0051539c. */
+/* Supplied declaration required: variantSetWordA. */
 /* Supplied declaration required: FUN_005153cc. */
 /* Supplied declaration required: FUN_005155bc. */
 
@@ -214,7 +214,7 @@ joined_r0x00436da8:
   *piVar11 = (int)piVar13;
   *(int **)(*piVar13 + 4) = piVar13;
   temp_v8 = temp_v7;
-  FUN_0051539c(piVar13 + 2,&temp_v8,*param_1);
+  variantSetWordA(piVar13 + 2,&temp_v8,*param_1);
   piVar11 = piVar13 + 4;
   if (piVar13[6] != 0) {
     piVar3 = (int *)piVar13[5];

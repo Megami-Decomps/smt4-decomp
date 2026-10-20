@@ -1,22 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9318(int);
+void FUN_002e9318(u8 *member);
+u8 *FUN_002eda5a(u8 *member);
 
-/* Supplied declaration required: FUN_002e9318. */
-extern int FUN_002eda5a(int);
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 member08[1];
+} Holder;
 
-
-void FUN_002eda4a(int param_1)
-
+/* Destroys the member at 8, then the member FUN_002eda5a hands back (8 bytes earlier). */
+void FUN_002eda4a(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002eda5a(param_1 + 8);
-  FUN_002e9318(temp_v0 - 8);
-  return;
+    u8 *member;
+
+    member = FUN_002eda5a(object->member08);
+    FUN_002e9318(member - 8);
 }
 
 } /* extern "C" */

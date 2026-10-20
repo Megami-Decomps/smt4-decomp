@@ -1,20 +1,22 @@
-#include "romwright_types.h"
+#include "shard/Shard0051.h"
 
 extern "C" {
 
-extern unsigned char DAT_0062d6f8; /* 0x62d6f8 */
+typedef struct Obj38 {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 unk38;
+} Obj38;
 
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
+extern u8 DAT_0062d6f8;
+extern void nn_os_CriticalSection_Enter(u8 *section);
+extern void nn_os_CriticalSection_Leave(u8 *section);
 
-
-unsigned int FUN_00513b50(int param_1,unsigned int *param_2)
-
+u32 FUN_00513b50(Obj38 *obj, u32 *out)
 {
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_0062d6f8);
-  *param_2 = *(unsigned int *)(param_1 + 0x38);
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_0062d6f8);
-  return 1;
+    nn_os_CriticalSection_Enter(&DAT_0062d6f8);
+    *out = obj->unk38;
+    nn_os_CriticalSection_Leave(&DAT_0062d6f8);
+    return 1;
 }
 
 } /* extern "C" */

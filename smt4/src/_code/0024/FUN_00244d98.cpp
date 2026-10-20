@@ -1,21 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c2968(unsigned int, unsigned int);
+int FUN_002c2968(u32 a, u32 b);
 
-extern unsigned int DAT_00464b7c; /* 0x464b7c */
-extern unsigned int DAT_00464b84; /* 0x464b84 */
+extern u32 DAT_00464b7c[];
+extern u32 DAT_00464b84[];
 
-/* Supplied declaration required: FUN_002c2968. */
-
-
-void FUN_00244d98(int param_1)
-
+void FUN_00244d98(int index)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002c2968((&DAT_00464b7c)[param_1],(&DAT_00464b84)[param_1]);
-  return;
+    FUN_002c2968(DAT_00464b7c[index], DAT_00464b84[index]);
 }
 
 } /* extern "C" */

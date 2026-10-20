@@ -19,8 +19,8 @@ typedef struct {
 extern unsigned char LAB_00122799; /* 0x122799 */
 extern unsigned char DAT_0055b300; /* 0x55b300 */
 
-extern unsigned int *FUN_0010390c(void);
-extern unsigned int FUN_00105ccc(int, int);
+extern unsigned int *initVtable00558510(void);
+extern unsigned int constructObj00558838(int, int);
 /* Supplied declaration required: FUN_0010a0c4. */
 /* Supplied declaration required: FUN_0010d128. */
 extern int FUN_002e760a(unsigned int);
@@ -45,7 +45,7 @@ int FUN_00122a68(void)
   unsigned char temp_v5 [8];
   unsigned int temp_v6 [3];
   
-  puVar1 = (unsigned int *)FUN_0010390c();
+  puVar1 = (unsigned int *)initVtable00558510();
   *puVar1 = (unsigned int)&DAT_0055b300;
   puVar1[0x46] = 0;
   puVar1[0x47] = 0;
@@ -75,7 +75,7 @@ int FUN_00122a68(void)
   temp_v2 = FUN_002e760a(8);
   temp_v1 = 0;
   if (temp_v2 != 0) {
-    temp_v1 = FUN_00105ccc(temp_v2,temp_v3);
+    temp_v1 = constructObj00558838(temp_v2,temp_v3);
   }
   *(unsigned int *)(temp_v0 - 0x20) = temp_v1;
   return temp_v3;

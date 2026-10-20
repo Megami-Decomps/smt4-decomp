@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
-extern int FUN_002c09f4(short);
+extern int randNextInRange(short);
 
 
 unsigned int FUN_002f76d0(void)
@@ -44,7 +44,7 @@ unsigned int FUN_002f76d0(void)
   }
   temp_v0 = 0xffffffff;
   if (temp_v2 != 0) {
-    temp_v1 = FUN_002c09f4(temp_v2 - 1);
+    temp_v1 = randNextInRange(temp_v2 - 1);
     temp_v0 = temp_v3[temp_v1];
   }
   scrSetResult(temp_v0);

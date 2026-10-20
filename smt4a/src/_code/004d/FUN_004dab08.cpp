@@ -37,7 +37,7 @@ struct fn_004dab08_arg0 {
 extern int slotRecordFindById(unsigned short);
 extern int FUN_001ab854(void);
 extern int FUN_002a4b28(unsigned short);
-extern unsigned int FUN_002c277c(void);
+extern unsigned int computeCountLimit(void);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -104,7 +104,7 @@ unsigned short FUN_004dab08(fn_004dab08_arg0 *param_1,unsigned int param_2,unsig
     }
   }
 LAB_004dac50:
-  if ((((param_1->field_0x1b5 == 0) || (temp_v0 = FUN_002c277c(), (unsigned short)param_4[3] <= temp_v0)) &&
+  if ((((param_1->field_0x1b5 == 0) || (temp_v0 = computeCountLimit(), (unsigned short)param_4[3] <= temp_v0)) &&
       ((param_1->field_0x1b4 == 0 || (temp_v1 = FUN_002a4b28(*param_4), temp_v1 == 0)))) &&
      ((param_1->field_0x1b5 == 0 || (temp_v1 = slotRecordFindById(*param_4), temp_v1 == 0)))) {
     temp_v2 = param_2;

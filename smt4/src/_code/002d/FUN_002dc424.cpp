@@ -1,23 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_3_stack;
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x389C];
+    /* 0x389C */ u8 flags[8];
+    /* 0x38A4 */ u32 values[5];
+    /* 0x38B8 */ u32 targets[5];
+} Obj;
 
-
-void FUN_002dc424(int param_1,int param_2,unsigned int param_3)
-
+void FUN_002dc424(Obj *obj, int index, u32 target)
 {
-  int temp_v0;
-  
-  temp_v0 = param_1 + param_2 * 4;
-  *(unsigned char *)(param_1 + param_2 + 0x389c) = 1;
-  *(unsigned int *)(temp_v0 + 0x38a4) = 0;
-  *(unsigned int *)(temp_v0 + 0x38b8) = param_3;
-  return;
+    obj->flags[index] = 1;
+    obj->values[index] = 0;
+    obj->targets[index] = target;
 }
 
 } /* extern "C" */

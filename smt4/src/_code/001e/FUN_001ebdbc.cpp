@@ -1,26 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0019ff9c(unsigned int, int);
-
-/* Supplied declaration required: FUN_0019ff9c. */
+int FUN_0019ff9c(u32 a, void *b);
 extern int FUN_001ed80c(void);
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u8 unk0C[0x1C];
+    /* 0x28 */ u8 unk28[1];
+} Obj;
 
-unsigned int FUN_001ebdbc(int *param_1)
+typedef struct Owner {
+    /* 0x0 */ Obj *obj;
+} Owner;
 
+u32 FUN_001ebdbc(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *param_1;
-  temp_v0 = FUN_001ed80c();
-  if (temp_v0 == 0) {
-    FUN_0019ff9c(*(unsigned int *)(temp_v1 + 8),temp_v1 + 0x28);
-  }
-  return 0;
+    Obj *obj = owner->obj;
+
+    if (FUN_001ed80c() == 0) {
+        FUN_0019ff9c(obj->unk08, obj->unk28);
+    }
+    return 0;
 }
 
 } /* extern "C" */

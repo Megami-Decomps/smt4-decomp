@@ -12,7 +12,7 @@ extern signed char DAT_005f1c60; /* 0x5f1c60 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern int FUN_00162e8c(void);
-extern float *FUN_00492b84(int);
+extern float *sub68OwnerGetBlock60(int);
 
 
 void FUN_0048d67c(int param_1)
@@ -39,7 +39,7 @@ void FUN_0048d67c(int param_1)
   float temp_v13;
   
   temp_v1 = FUN_00162e8c();
-  pfVar3 = (float *)FUN_00492b84(param_1 + 0x4cc);
+  pfVar3 = (float *)sub68OwnerGetBlock60(param_1 + 0x4cc);
   piVar7 = (int *)(param_1 + 0x204f8);
   piVar6 = (int *)(param_1 + 0x204fc);
   if (*(char *)(temp_v1 + 0xd8e) != '\f') {

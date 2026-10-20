@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int strAssign(unsigned int, unsigned int, int, unsigned int);
+void strAssign(u32 dest, u32 source, s32 length, u32 flags);
 
-/* Supplied declaration required: strAssign. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 string;
+} Holder;
 
-
-void FUN_002e7690(int param_1,unsigned int param_2,int param_3)
-
+/* Assigns `count` 16-bit characters (2 * count bytes) of `source` to the held string. */
+void FUN_002e7690(Holder *object, u32 source, s32 count)
 {
-/* irregular: 1 native warning(s); review required */
-  strAssign(*(unsigned int *)(param_1 + 8),param_2,param_3 << 1,0xffffffff);
-  return;
+    strAssign(object->string, source, count << 1, 0xFFFFFFFF);
 }
 
 } /* extern "C" */

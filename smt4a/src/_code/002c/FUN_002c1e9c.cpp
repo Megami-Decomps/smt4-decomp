@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0016a0f0(int);
+int dataTableValueOrZero(int);
 int dataTableGet(...);
 int dataTableGetEntries(void);
 
-/* Supplied declaration required: FUN_0016a0f0. */
+/* Supplied declaration required: dataTableValueOrZero. */
 /* Supplied declaration required: dataTableGet. */
 extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
@@ -27,7 +27,7 @@ void FUN_002c1e9c(void)
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  FUN_0016a0f0(0x19);
+  dataTableValueOrZero(0x19);
   temp_v0 = FUN_0048168c();
   temp_v1 = dataTableGet(0x19,0);
   temp_v2 = dataTableGetEntries();

@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
-
-
-int NaviMain_GetCursorPos(void)
-
+u8 *NaviMain_GetCursorPos(void)
 {
-  return DAT_0044cdf0 + 0x38;
+    return DAT_0044cdf0->cursorPos;
 }
 
 } /* extern "C" */

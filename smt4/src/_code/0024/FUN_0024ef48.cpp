@@ -1,34 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a72c0(int);
-int asdMdlManagerDestroy(void);
+int FUN_002a72c0(int arg);
+int asdMdlManagerDestroy(u32 handle);
 
-/* Supplied declaration required: FUN_002a72c0. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 handles[3];
+} Obj;
 
-
-void FUN_0024ef48(int param_1)
-
+void FUN_0024ef48(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  if (*(int *)(param_1 + 0x10) != 0) {
-    FUN_002a72c0(0);
-  }
-  temp_v0 = 0;
-  do {
-    temp_v1 = param_1 + temp_v0 * 4;
-    if (*(int *)(temp_v1 + 0x10) != 0) {
-      asdMdlManagerDestroy();
-      *(unsigned int *)(temp_v1 + 0x10) = 0;
+    int i;
+
+    if (obj->handles[0] != 0) {
+        FUN_002a72c0(0);
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 3);
-  return;
+    i = 0;
+    do {
+        if (obj->handles[i] != 0) {
+            asdMdlManagerDestroy(obj->handles[i]);
+            obj->handles[i] = 0;
+        }
+        i++;
+    } while (i < 3);
 }
 
 } /* extern "C" */

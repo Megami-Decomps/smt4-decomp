@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e9318(int *);
 int FUN_002e95c4(unsigned int, unsigned int);
-int FUN_002ea0e4(int *);
+int constructObj0055affc(int *);
 int FUN_002fbc1a(int, int *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e95c4. */
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002fbc1a. */
 
 
@@ -29,7 +29,7 @@ unsigned int FUN_0030093c(int param_1,unsigned int param_2,unsigned int param_3,
   
   uStack_18 = param_3;
   temp_v0 = param_4;
-  FUN_002ea0e4(&uStack_18);
+  constructObj0055affc(&uStack_18);
   FUN_002fbc1a(param_1,&uStack_18);
   if (param_1 != 0) {
     FUN_002e95c4(param_2,temp_v0);

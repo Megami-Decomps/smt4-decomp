@@ -1,22 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0044dc20; /* 0x44dc20 */
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x352C];
+    /* 0x352C */ s32 unk352C;
+} Obj;
 
+extern Obj *DAT_0044dc20;
 
-unsigned int FUN_002b8660(void)
-
+u32 FUN_002b8660(void)
 {
-  unsigned int temp_v0;
-  
-  if ((DAT_0044dc20 == 0) || (*(int *)(DAT_0044dc20 + 0x352c) == 0x14)) {
-    temp_v0 = 1;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 result;
+
+    if ((DAT_0044dc20 == NULL) || (DAT_0044dc20->unk352C == 0x14)) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

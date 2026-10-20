@@ -17,7 +17,7 @@ int bustupCutAnimRequestStopSlots(void);
 int FUN_0031f208(...);
 int FUN_0031f27c(unsigned int, int);
 int scrSetResult(int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_0035d8a4(void);
 
 /* stack frame of param_2: 6 slot(s), 24 byte(s) */
@@ -51,7 +51,7 @@ extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
 /* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0035d8a4. */
 
 
@@ -150,7 +150,7 @@ LAB_0036dd68:
     scrSetResult(0);
     FUN_002686b8();
     FUN_0035d8a4();
-    FUN_003491e8();
+    obj04Finish();
     temp_v5 = 1;
   }
   else {
@@ -158,7 +158,7 @@ LAB_0036dd68:
       FUN_002686b8(0);
       FUN_0035d8a4();
       scrSetResult(temp_v0 - 0x4d);
-      FUN_003491e8();
+      obj04Finish();
       return 1;
     }
     temp_v5 = 0;

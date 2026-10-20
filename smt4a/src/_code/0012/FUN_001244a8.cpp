@@ -14,7 +14,7 @@ extern int DAT_00594948; /* 0x594948 */
 
 extern int FUN_00111800(int);
 extern unsigned int FUN_002e7908(int *, unsigned int *);
-extern int FUN_002ea42c(int, unsigned int);
+extern int wordRefsEqual_002ea42c(int, unsigned int);
 
 
 int FUN_001244a8(int param_1,unsigned int param_2,unsigned int param_3)
@@ -33,7 +33,7 @@ int FUN_001244a8(int param_1,unsigned int param_2,unsigned int param_3)
   uStack_1c = param_2;
   uStack_18 = param_3;
   temp_v0 = FUN_002e7908(&iStack_20,(unsigned int *)&temp_v3);
-  temp_v1 = FUN_002ea42c(param_1 + 0x130,temp_v0);
+  temp_v1 = wordRefsEqual_002ea42c(param_1 + 0x130,temp_v0);
   if (temp_v1 != 0) {
     temp_v1 = *(int *)(param_1 + 0x13c);
     if (temp_v1 == 0) {

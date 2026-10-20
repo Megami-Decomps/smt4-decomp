@@ -1,22 +1,40 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Sink;
+typedef struct SinkVtbl {
+    /* 0x0 */ void *unk0[3];
+    /* 0xC */ void (*push)(struct Sink *sink, u32 value);
+} SinkVtbl;
 
-void FUN_003682d0(int param_1,int param_2)
+typedef struct Sink {
+    /* 0x0 */ SinkVtbl *vtbl;
+} Sink;
 
+typedef struct Target {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ Sink *sink;
+} Target;
+
+typedef struct Source {
+    /* 0x000 */ u8 unk000[0x164];
+    /* 0x164 */ u32 *begin;
+    /* 0x168 */ u32 *end;
+} Source;
+
+/* Pushes every value of the source's list into the target's sink. */
+void FUN_003682d0(Target *target, Source *source)
 {
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  if (*(int *)(param_1 + 8) != 0) {
-    puVar2 = *(unsigned int **)(param_2 + 0x168);
-    for (puVar1 = *(unsigned int **)(param_2 + 0x164); puVar1 != puVar2; puVar1 = puVar1 + 1) {
-      (**(romwright_code **)(**(int **)(param_1 + 8) + 0xc))(*(int **)(param_1 + 8),*puVar1);
+    u32 *value;
+    u32 *end;
+
+    if (target->sink != NULL) {
+        end = source->end;
+        for (value = source->begin; value != end; value = value + 1) {
+            target->sink->vtbl->push(target->sink, *value);
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00188b60(unsigned int *);
-int FUN_002f4370(unsigned char **, int, int);
+int emptyStub_002f4370(unsigned char **, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern unsigned int DAT_006462b4; /* 0x6462b4 */
 extern unsigned int DAT_006462b8; /* 0x6462b8 */
 
 /* Supplied declaration required: FUN_00188b60. */
-/* Supplied declaration required: FUN_002f4370. */
+/* Supplied declaration required: emptyStub_002f4370. */
 
 
 void FUN_005117f8(void)
@@ -33,7 +33,7 @@ void FUN_005117f8(void)
   DAT_006462b0 = 0;
   DAT_006462b4 = 0;
   DAT_006462b8 = 0;
-  FUN_002f4370(&DAT_006462a0,0x43a20c,0x100000);
+  emptyStub_002f4370(&DAT_006462a0,0x43a20c,0x100000);
   return;
 }
 

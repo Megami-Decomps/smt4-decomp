@@ -1,22 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f290; /* 0x57f290 */
+typedef struct Record {
+    /* 0x000 */ u8 unk000[0x434];
+    /* 0x434 */ u32 request;
+} Record;
+extern Record *DAT_0057f290;
 
-
-unsigned int FUN_002ab790(void)
-
+/* Returns the request word of the record at 0x57F290, or -1 when there is none. */
+u32 FUN_002ab790(void)
 {
-  unsigned int temp_v0;
-  
-  if (DAT_0057f290 != 0) {
-    temp_v0 = *(unsigned int *)(DAT_0057f290 + 0x434);
-  }
-  else {
-    temp_v0 = 0xffffffff;
-  }
-  return temp_v0;
+    u32 request;
+
+    if (DAT_0057f290 != NULL) {
+        request = DAT_0057f290->request;
+    } else {
+        request = 0xFFFFFFFF;
+    }
+    return request;
 }
 
 } /* extern "C" */

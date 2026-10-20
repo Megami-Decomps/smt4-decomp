@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002c09bc(void);
+extern u8 *FUN_002c09bc(void);
 
-
-unsigned char FUN_0034904c(void)
-
+u8 FUN_0034904c(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002c09bc();
-  return (unsigned int)(*(int *)(temp_v0 + 0x1f458) - *(int *)(temp_v0 + 0x1f85c)) >= 900;
+    u8 *block = FUN_002c09bc();
+
+    return (u32)(*(int *)(block + 0x1f458) - *(int *)(block + 0x1f85c)) >= 900;
 }
 
 } /* extern "C" */

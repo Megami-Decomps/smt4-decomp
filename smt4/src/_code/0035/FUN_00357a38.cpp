@@ -11,7 +11,7 @@ int FUN_002ad8b4(...);
 int FUN_002c567c(int **);
 int FUN_003588fc(void);
 int FUN_003e0578(...);
-int FUN_003e0b7c(int, unsigned char [96]);
+int recordCopy70(int, unsigned char [96]);
 int FUN_003e0bbc(unsigned char [8], int *);
 int nn_cec_CTR_Message_GetExHeader(int, int, unsigned char [4], int *);
 int nn_cec_CTR_Message_GetMessageId(int *, int, unsigned char [8]);
@@ -47,7 +47,7 @@ extern int *FUN_002399bc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c567c. */
 /* Supplied declaration required: FUN_003588fc. */
 /* Supplied declaration required: FUN_003e0578. */
-/* Supplied declaration required: FUN_003e0b7c. */
+/* Supplied declaration required: recordCopy70. */
 /* Supplied declaration required: FUN_003e0bbc. */
 extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
 extern unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(unsigned int);
@@ -139,7 +139,7 @@ int * FUN_00357a38(int *param_1,int param_2,int param_3,unsigned int param_4,int
     return (int *)0xc8e1086b;
   }
   nn_cec_CTR_Message_GetMessageId(&temp_v9,param_2,temp_v12);
-  FUN_003e0b7c(param_2,temp_v10);
+  recordCopy70(param_2,temp_v10);
   temp_v0 = nn_cec_CTR_MessageId_IsEmpty((unsigned int)temp_v12);
   if (temp_v0) {
     FUN_002c567c(&temp_v21);

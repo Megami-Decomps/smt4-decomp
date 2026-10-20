@@ -1,25 +1,26 @@
-#include "romwright_types.h"
+#include "shard/SndChannel.h"
 
 extern "C" {
 
-int nw_snd_internal_driver_Voice_Pause(unsigned int, unsigned int);
+int nw_snd_internal_driver_Voice_Pause(void *voice, u32 pause);
 
-/* Supplied declaration required: nw_snd_internal_driver_Voice_Pause. */
+typedef struct SequenceTrack {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u8 mute;
+    /* 0x49 */ u8 unk49[0x7B];
+    /* 0xC4 */ SndChannel *channels;
+} SequenceTrack;
 
-
-void nw_snd_internal_driver_SequenceTrack_PauseAllChannel(int param_1,bool param_2)
-
+void nw_snd_internal_driver_SequenceTrack_PauseAllChannel(SequenceTrack *track, bool pause)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  for (temp_v0 = *(int *)(param_1 + 0xc4); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
-    if ((*(char *)(temp_v0 + 0xc6) != '\0') && ((*(char *)(temp_v0 + 0xc5) != '\0') != param_2)) {
-      *(char *)(temp_v0 + 0xc5) = param_2;
-      nw_snd_internal_driver_Voice_Pause(*(unsigned int *)(temp_v0 + 0x134),param_2);
+    SndChannel *channel;
+
+    for (channel = track->channels; channel != NULL; channel = channel->next) {
+        if ((channel->unk0C6 != 0) && ((channel->unk0C5 != 0) != pause)) {
+            channel->unk0C5 = pause;
+            nw_snd_internal_driver_Voice_Pause(channel->voice, pause);
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

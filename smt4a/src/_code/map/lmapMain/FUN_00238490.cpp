@@ -11,7 +11,7 @@ int FUN_0019e3d0(...);
 int FUN_001a1c28(...);
 int FUN_0021252c(...);
 int FUN_00215a24(...);
-int FUN_0043b9f0(...);
+int matrixSetTranslation(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX33CopyAsm(...);
 int nn_math_ARMv6_MTX34CopyAsm(...);
@@ -101,7 +101,7 @@ extern float DAT_0064c07c; /* 0x64c07c */
 extern float DAT_0064c080; /* 0x64c080 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int FUN_0018aeb8(void);
@@ -112,8 +112,8 @@ extern int FUN_00199f84(unsigned char *, int);
 /* Supplied declaration required: FUN_001a1c28. */
 /* Supplied declaration required: FUN_0021252c. */
 /* Supplied declaration required: FUN_00215a24. */
-extern int FUN_002eba64(unsigned int *);
-/* Supplied declaration required: FUN_0043b9f0. */
+extern int __cxa_guard_acquire(unsigned int *);
+/* Supplied declaration required: matrixSetTranslation. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
@@ -218,7 +218,7 @@ void FUN_00238490(int param_1)
     if (temp_v11 != 1) {
       if (temp_v11 != 2) {
         if (temp_v11 == 3) {
-          temp_v1 = FUN_00169294(5,0,1);
+          temp_v1 = packNibblesAndByte(5,0,1);
           piVar8 = (int *)(temp_v2 + 0x12b8);
           temp_v3 = piVar8[*piVar8 + 2];
           piVar8[*piVar8 + 2] = temp_v1;
@@ -229,7 +229,7 @@ void FUN_00238490(int param_1)
         }
       }
       else {
-        temp_v1 = FUN_00169294(6,1,2);
+        temp_v1 = packNibblesAndByte(6,1,2);
         piVar8 = (int *)(temp_v2 + 0x12b8);
         temp_v3 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v1;
@@ -240,7 +240,7 @@ void FUN_00238490(int param_1)
       }
     }
     else {
-      temp_v1 = FUN_00169294(6,1,0);
+      temp_v1 = packNibblesAndByte(6,1,0);
       piVar8 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar8[*piVar8 + 2];
       piVar8[*piVar8 + 2] = temp_v1;
@@ -251,7 +251,7 @@ void FUN_00238490(int param_1)
     }
   }
   else {
-    temp_v1 = FUN_00169294(6,7,0);
+    temp_v1 = packNibblesAndByte(6,7,0);
     piVar8 = (int *)(temp_v2 + 0x12b8);
     temp_v3 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = temp_v1;
@@ -278,7 +278,7 @@ void FUN_00238490(int param_1)
   if ((*(unsigned char *)(param_1 + 0x130) & 0x20) != 0) {
     temp_v2 = FUN_00199f84(temp_v66,*(int *)(g_renderCtx + 0x6fc) + 0x38);
     if (temp_v2 == 0) {
-      if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = FUN_002eba64(&DAT_005c4c2c), temp_v2 != 0)) {
+      if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v2 != 0)) {
         DAT_0064c054 = temp_v15;
         DAT_0064c058 = temp_v16;
         DAT_0064c05c = temp_v16;
@@ -303,7 +303,7 @@ void FUN_00238490(int param_1)
     temp_v21 = -9.0f;
     temp_v19 = temp_v16;
     temp_v20 = temp_v16;
-    FUN_0043b9f0(temp_v67,&temp_v19);
+    matrixSetTranslation(temp_v67,&temp_v19);
     FUN_0019a0fc(&temp_v25,&temp_v25,temp_v67);
   }
   pfVar4 = *(float **)(*(int *)(param_1 + 0x354) + 4);
@@ -311,19 +311,19 @@ void FUN_00238490(int param_1)
     temp_v18 = *pfVar4 * 0.03125f;
     temp_v19 = pfVar4[1] * -0.03125f;
     temp_v20 = temp_v16;
-    FUN_0043b9f0(&temp_v59,&temp_v18);
+    matrixSetTranslation(&temp_v59,&temp_v18);
     FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v24 = *(unsigned int *)(param_1 + 0x120);
   uStack_1e8 = *(unsigned int *)(param_1 + 0x124);
   uStack_1e4 = *(unsigned int *)(param_1 + 0x128);
-  FUN_0043b9f0(temp_v65,&temp_v24);
+  matrixSetTranslation(temp_v65,&temp_v24);
   FUN_0019a0fc(&temp_v25,&temp_v25,temp_v65);
   if (*(char *)(param_1 + 0x380) == '\x01') {
     temp_v18 = *(float *)(param_1 + 0x358);
     temp_v19 = *(float *)(param_1 + 0x35c);
     temp_v20 = *(float *)(param_1 + 0x360);
-    FUN_0043b9f0(&temp_v59,&temp_v18);
+    matrixSetTranslation(&temp_v59,&temp_v18);
     FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
@@ -349,7 +349,7 @@ void FUN_00238490(int param_1)
   }
   else if (*(char *)(param_1 + 0x380) != '\0') {
     temp_v2 = *(int *)(g_renderCtx + 0x6fc);
-    if (((DAT_005c4c28 & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c28), temp_v1 != 0)) {
+    if (((DAT_005c4c28 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c28), temp_v1 != 0)) {
       DAT_0064c030 = temp_v15;
       DAT_0064c034 = temp_v16;
       DAT_0064c038 = temp_v16;
@@ -421,7 +421,7 @@ void FUN_00238490(int param_1)
       temp_v18 = temp_v18 * temp_v17;
       temp_v19 = temp_v19 * temp_v17;
       temp_v20 = temp_v16;
-      FUN_0043b9f0(&temp_v59,&temp_v18);
+      matrixSetTranslation(&temp_v59,&temp_v18);
       FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
       temp_v11 = temp_v9;
     }
@@ -438,7 +438,7 @@ void FUN_00238490(int param_1)
     temp_v18 = temp_v19 * temp_v12 * -0.1f;
     temp_v19 = temp_v19 * temp_v14 * -0.1f;
     temp_v20 = temp_v16;
-    FUN_0043b9f0(&temp_v59,&temp_v18);
+    matrixSetTranslation(&temp_v59,&temp_v18);
     FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v49[0] = *(float *)(param_1 + 500) * *(float *)(param_1 + 0x1f8);
@@ -470,7 +470,7 @@ void FUN_00238490(int param_1)
     temp_v18 = temp_v18 * temp_v17;
     temp_v19 = temp_v19 * temp_v17;
     temp_v20 = temp_v16;
-    FUN_0043b9f0(&temp_v59,&temp_v18);
+    matrixSetTranslation(&temp_v59,&temp_v18);
     FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v38 = *(float *)(param_1 + 0x388);

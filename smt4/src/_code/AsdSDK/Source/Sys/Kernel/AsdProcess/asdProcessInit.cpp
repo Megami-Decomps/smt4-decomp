@@ -1,7 +1,8 @@
-/* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the group table allocation. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00409bc8[];
 extern AsdProcessState g_asdProcess;
 extern u8 g_asdProcessGroupEnabled[0x200]; /* group enable flags */
 
@@ -13,6 +14,7 @@ void asdProcessInit(s32 groupCount)
 {
     FUN_002c424c(g_asdProcessGroupEnabled, 0x200, 1);
     g_asdProcess.groupCount = groupCount;
+    asdDebugTrace(DAT_00409bc8, 1719);
     g_asdProcess.groups = (AsdProcGroup *)asdMemAlloc(0x100, 0x100, 0, groupCount * sizeof(AsdProcGroup), 1);
     g_asdProcess.nextId = 1;
 }

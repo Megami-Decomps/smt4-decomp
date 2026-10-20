@@ -16,7 +16,7 @@ int FUN_002c76d8(int);
 int FUN_0031a400(void);
 int FUN_0031ed60(int, int);
 int FUN_00333574(int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_0035d7bc(int);
 int FUN_003b61ec(void);
 
@@ -43,7 +43,7 @@ extern int FUN_002e0b5c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_0031ed60. */
 /* Supplied declaration required: FUN_00333574. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0035d7bc. */
 extern int FUN_0035d83c(int);
 /* Supplied declaration required: FUN_003b61ec. */
@@ -141,7 +141,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
       FUN_001386e8(1);
       FUN_00137ea0(1);
       FUN_00138cf8(1);
-      FUN_003491e8();
+      obj04Finish();
       DAT_0057f6cb = 0;
       FUN_00275f44(DAT_005e2110,2);
       temp_v1 = 7;
@@ -150,7 +150,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
       FUN_001386e8(1);
       FUN_00137ea0(1);
       FUN_00138cf8(1);
-      FUN_003491e8();
+      obj04Finish();
       DAT_0057f6cb = 0;
       FUN_00275f44(DAT_005e2110,5);
       temp_v1 = 9;

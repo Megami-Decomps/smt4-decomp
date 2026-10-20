@@ -1,41 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00293edc_arg0 fn_00293edc_arg0;
-struct fn_00293edc_arg0 {
-    unsigned char pad_0x0[0x4];
-    int field_0x4; /* +0x4 */
-    unsigned char pad_0x8[0x8];
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4c];
-    int field_0x60; /* +0x60 */
-    unsigned char pad_0x64[0x4c];
-    int field_0xb0; /* +0xb0 */
-};
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ int unk04;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ int unk10;
+    /* 0x14 */ u8 unk14[0x4C];
+    /* 0x60 */ int unk60;
+    /* 0x64 */ u8 unk64[0x4C];
+    /* 0xB0 */ int unkB0;
+} Obj;
 
-
-unsigned int FUN_00293edc(fn_00293edc_arg0 *param_1)
-
+/* 1 when none of the four slots (0x04, 0x10, 0x60, 0xB0) is set. */
+u32 FUN_00293edc(Obj *obj)
 {
-  int temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v0 = param_1->field_0x4;
-  temp_v1 = temp_v0 == 0;
-  if (temp_v1) {
-    temp_v0 = param_1->field_0x10;
-  }
-  if (temp_v1 && temp_v0 == 0) {
-    temp_v1 = param_1->field_0x60 == 0;
-    if (temp_v1) {
-      param_1 = (fn_00293edc_arg0 *)param_1->field_0xb0;
+    int value = obj->unk04;
+    u8 empty = value == 0;
+
+    if (empty) {
+        value = obj->unk10;
     }
-    if (temp_v1 && param_1 == (fn_00293edc_arg0 *)0x0) {
-      return 1;
+    if (empty && value == 0) {
+        empty = obj->unk60 == 0;
+        if (empty) {
+            value = obj->unkB0;
+        }
+        if (empty && value == 0) {
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

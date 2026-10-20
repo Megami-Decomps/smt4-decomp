@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_003e5b1c(unsigned int);
+int linkHolderSetFlag(unsigned int);
 int FUN_004ffb30(unsigned int);
 
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int *g_mapTrap; /* 0x587f0c */
 
-/* Supplied declaration required: FUN_003e5b1c. */
+/* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: FUN_004ffb30. */
 
 
@@ -73,7 +73,7 @@ unsigned int FUN_002242a0(void)
       else {
         FUN_004ffb30(*(unsigned int *)(g_mapTrap[0xd] + 4));
         if (in_s0 >= 0x43070000) {
-          FUN_003e5b1c(*(unsigned int *)(g_lmapScene + 0x1a8));
+          linkHolderSetFlag(*(unsigned int *)(g_lmapScene + 0x1a8));
         }
       }
     }

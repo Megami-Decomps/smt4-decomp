@@ -1,7 +1,9 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 66 vs built 61 rows, 64 diff lines. */
+/* NON_MATCHING: register allocation only: retail keeps the shared block size (12) and the constant 1 in r8/r9 across the allocation and saves one more register */
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00410204[]; /* __FILE__ */
 
 EffMiscObject *effMiscCreate(u32 kind, void *params);
 void *FUN_0024c3f8(EffMiscDesc *desc);
@@ -32,6 +34,7 @@ EffMiscObject *effMiscCreateFromDesc(EffMiscDesc *desc)
         return obj;
     }
     type = desc->resourceType;
+    asdDebugTrace(DAT_00410204, 450);
     shared = (EffMiscShared *)memAlloc(0x10000, 0x100, 0, 0xc, 0x10, 1);
     FUN_002c3944(shared, 0xc);
     shared->type = type;

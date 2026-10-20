@@ -10,7 +10,7 @@ int FUN_003f21ec(void);
 int FUN_003f24e0(unsigned int *, int);
 int FUN_003f2aac(unsigned int *, int, int);
 int FUN_003fd63c(...);
-int FUN_00409d8c(int, int);
+int countersAddSaturating(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -37,7 +37,7 @@ extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_003f24e0. */
 /* Supplied declaration required: FUN_003f2aac. */
 /* Supplied declaration required: FUN_003fd63c. */
-/* Supplied declaration required: FUN_00409d8c. */
+/* Supplied declaration required: countersAddSaturating. */
 extern unsigned int FUN_004c53fc(unsigned int);
 extern int btlUnitGet(unsigned int);
 
@@ -161,7 +161,7 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
     if ((puVar3[0x9d] & 0x10) == 0) {
       return;
     }
-    FUN_00409d8c(8,1);
+    countersAddSaturating(8,1);
     return;
   }
   *(unsigned short *)(puVar3 + 0x9d) = (unsigned short)puVar3[0x9d] & ~param_3;

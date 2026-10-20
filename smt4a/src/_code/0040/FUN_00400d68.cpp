@@ -1,21 +1,24 @@
-#include "romwright_types.h"
+#include "shard/Shard0040.h"
 
 extern "C" {
 
-int FUN_003fdae8(unsigned int);
+typedef struct LinkTarget4 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 value;
+} LinkTarget4;
 
-/* Supplied declaration required: FUN_003fdae8. */
+typedef struct LinkAt1C {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ LinkTarget4 *link;
+} LinkAt1C;
 
+extern s32 FUN_003fdae8(u32 value);
 
-void FUN_00400d68(int param_1)
-
+void FUN_00400d68(LinkAt1C *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x1c) != 0) {
-    FUN_003fdae8(*(unsigned int *)(*(int *)(param_1 + 0x1c) + 4));
-    return;
-  }
-  return;
+    if (obj->link != NULL) {
+        FUN_003fdae8(obj->link->value);
+    }
 }
 
 } /* extern "C" */

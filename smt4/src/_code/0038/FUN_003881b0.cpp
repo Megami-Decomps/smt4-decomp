@@ -51,7 +51,7 @@ extern int FUN_002a6d50(unsigned int, unsigned int, unsigned int);
 extern unsigned int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
@@ -107,7 +107,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
         temp_v10 = 0.0f;
         temp_v7 = 1.0f;
         temp_v4 = 0;
-        if (((DAT_00476638 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476638), temp_v0 != 0)) {
+        if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
           DAT_004efd9c = temp_v7;
           DAT_004efda0 = temp_v10;
           DAT_004efda4 = temp_v10;
@@ -126,7 +126,7 @@ void FUN_003881b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
           DAT_004efdd8 = temp_v7;
         }
         mtx44Copy(temp_v11,&DAT_004efd9c);
-        if (((DAT_00476638 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476638), temp_v0 != 0)) {
+        if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
           DAT_004efd9c = temp_v7;
           DAT_004efda0 = temp_v10;
           DAT_004efda4 = temp_v10;

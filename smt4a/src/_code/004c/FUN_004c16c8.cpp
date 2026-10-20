@@ -18,7 +18,7 @@ int FUN_003f0e20(...);
 int FUN_003f21ec(void);
 int FUN_004bd098(...);
 int FUN_004c0f74(...);
-int FUN_004c39b0(void);
+int source4CCopyHalves(void);
 int FUN_004c3ac0(...);
 int FUN_004c60c0(unsigned int, unsigned int);
 int FUN_004c8340(unsigned int, unsigned int, unsigned int, unsigned int *);
@@ -111,7 +111,7 @@ extern unsigned int uRam005714dc; /* 0x5714dc */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
@@ -129,7 +129,7 @@ extern unsigned int FUN_0034ef58(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004bd098. */
 extern unsigned int FUN_004bf9a0(unsigned int);
 /* Supplied declaration required: FUN_004c0f74. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: FUN_004c3ac0. */
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
@@ -746,7 +746,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
             temp_v48[7] = 0;
             temp_v48[8] = 0;
             temp_v48[9] = 0;
-            FUN_004c39b0();
+            source4CCopyHalves();
             temp_v20 = 0;
             temp_v33 = 0;
             do {
@@ -819,7 +819,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
           }
           if (temp_v44[temp_v19] == 1) {
             if (temp_v37[temp_v19] != 6 && temp_v37[temp_v19] != 7) {
-              temp_v11 = FUN_001633a0(99);
+              temp_v11 = lcgRandomRange(99);
               if ((int)(unsigned int)*(unsigned char *)((int)temp_v47 + 0x1bb) <= temp_v11) {
                 temp_v18 = -1.0f;
                 temp_v20 = -1;
@@ -845,14 +845,14 @@ LAB_004c270c:
           if (!((*puVar5 & DAT_00571498) != 0 || (puVar4[0x1169] & DAT_0057149c) != 0)) {
             if ((temp_v44[temp_v19 + 0xe] & 0xffff) != 0) {
               if (temp_v51 != 0) {
-                temp_v11 = FUN_001633a0(99);
+                temp_v11 = lcgRandomRange(99);
                 if (((int)(unsigned int)*(unsigned char *)((int)temp_v47 + 0x1bb) <= temp_v11) ||
-                   (temp_v11 = FUN_001633a0(99), (int)(temp_v18 * 100.0f) / 100 + temp_v20 < temp_v11)) {
+                   (temp_v11 = lcgRandomRange(99), (int)(temp_v18 * 100.0f) / 100 + temp_v20 < temp_v11)) {
                   temp_v3 = temp_v3 & ~(1 << (temp_v44[temp_v19] & 0xff));
                 }
               }
               else {
-                temp_v11 = FUN_001633a0(99);
+                temp_v11 = lcgRandomRange(99);
                 if ((int)(temp_v18 * 100.0f) / 100 + temp_v20 < temp_v11) {
                   temp_v3 = temp_v3 & ~(1 << (temp_v44[temp_v19] & 0xff));
                 }

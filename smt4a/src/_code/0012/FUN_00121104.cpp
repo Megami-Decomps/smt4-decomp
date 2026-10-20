@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0031023c(unsigned int *, int *, unsigned int, unsigned int);
-int FUN_00310272(unsigned int *, int);
+int listInitEmpty2(unsigned int *, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0031023c. */
-/* Supplied declaration required: FUN_00310272. */
+/* Supplied declaration required: listInitEmpty2. */
 
 
 unsigned int * FUN_00121104(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -29,7 +29,7 @@ unsigned int * FUN_00121104(unsigned int *param_1,int param_2,unsigned int param
   param_1[4] = 0;
   param_1[5] = 0;
   temp_v0 = param_4;
-  FUN_00310272(param_1,0);
+  listInitEmpty2(param_1,0);
   temp_v0 = *(unsigned int *)param_1[4];
   FUN_0031023c(param_1,&temp_v0,**(unsigned int **)(param_2 + 0x10),*(unsigned int *)(param_2 + 0x10));
   return param_1;

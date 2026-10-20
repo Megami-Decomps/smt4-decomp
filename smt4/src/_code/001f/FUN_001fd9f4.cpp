@@ -39,7 +39,7 @@ extern int DAT_0049fca0; /* 0x49fca0 */
 /* Supplied declaration required: FUN_002c1b64. */
 extern unsigned int FUN_002c1c0c(unsigned int, unsigned int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e0460. */
 /* Supplied declaration required: FUN_002f3904. */
 /* Supplied declaration required: FUN_002f484c. */
@@ -186,7 +186,7 @@ unsigned int FUN_001fd9f4(void)
     temp_v2 = FUN_002c1c0c(0xe,2);
     FUN_002c1b64(g_titleScene,temp_v2);
     temp_v1 = g_titleScene;
-    temp_v3 = FUN_002c5da8(6,7,0);
+    temp_v3 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12ac);
     temp_v0 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v3;

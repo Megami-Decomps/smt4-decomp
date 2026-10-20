@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00184310(void);
 int FUN_001b4a90(int, int, unsigned int);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
-int FUN_0032ff20(int, unsigned char [304]);
+int unitRecordBuild(int, unsigned char [304]);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,8 +20,8 @@ extern int DAT_0057f290; /* 0x57f290 */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_0032ff20. */
-extern unsigned int FUN_004bd21c(unsigned char *);
+/* Supplied declaration required: unitRecordBuild. */
+extern unsigned int getUnlockedSlotCount(unsigned char *);
 
 
 void FUN_003b739c(unsigned short *param_1)
@@ -34,8 +34,8 @@ void FUN_003b739c(unsigned short *param_1)
   
   temp_v0 = DAT_0057f290;
   FUN_00184310();
-  FUN_0032ff20(*param_1,temp_v2);
-  temp_v1 = FUN_004bd21c(temp_v2);
+  unitRecordBuild(*param_1,temp_v2);
+  temp_v1 = getUnlockedSlotCount(temp_v2);
   *(unsigned int *)(temp_v0 + 0x8e7c) = 0;
   FUN_00203b40(temp_v0 + 0x8db0,temp_v1,8,1,1,1);
   *(unsigned char *)(temp_v0 + 0x8e8a) = 1;

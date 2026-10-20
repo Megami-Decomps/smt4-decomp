@@ -10,7 +10,7 @@ int FUN_002e342c(...);
 int FUN_002f0384(int);
 int FUN_0033440c(int);
 int FUN_0033449c(int);
-int FUN_0034aa94(int, int);
+int objBSetWordByIndex(int, int);
 int FUN_0034aac8(int);
 int FUN_003720a0(unsigned int, int);
 int FUN_003fd7b4(unsigned int);
@@ -28,7 +28,7 @@ extern int FUN_0014af84(void);
 /* Supplied declaration required: FUN_002f0384. */
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_0034aa94. */
+/* Supplied declaration required: objBSetWordByIndex. */
 /* Supplied declaration required: FUN_0034aac8. */
 /* Supplied declaration required: FUN_003720a0. */
 /* Supplied declaration required: FUN_003fd7b4. */
@@ -84,9 +84,9 @@ void FUN_0041eb94(int param_1)
     FUN_002f0384(0);
   }
   *(unsigned char *)(param_1 + 0x68) = !temp_v2;
-  FUN_0034aa94(1,*(unsigned short *)(*(int *)(param_1 + 0x54) + 8));
-  FUN_0034aa94(2,*(unsigned short *)(*(int *)(param_1 + 0x54) + 10));
-  FUN_0034aa94(0,*(unsigned short *)(*(int *)(param_1 + 0x54) + 6));
+  objBSetWordByIndex(1,*(unsigned short *)(*(int *)(param_1 + 0x54) + 8));
+  objBSetWordByIndex(2,*(unsigned short *)(*(int *)(param_1 + 0x54) + 10));
+  objBSetWordByIndex(0,*(unsigned short *)(*(int *)(param_1 + 0x54) + 6));
   return;
 }
 

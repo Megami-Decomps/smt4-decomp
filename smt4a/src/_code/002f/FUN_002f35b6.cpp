@@ -1,22 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00307eb0(int, int);
+s32 FUN_00307eb0(u8 *a, u8 *b);
 
-
-unsigned int FUN_002f35b6(unsigned int param_1,int param_2,int param_3)
-
+/* Returns 1 unless `b` is ordered before `c` by FUN_00307eb0 on the first key and, on a tie, on the 0x20-byte second key. */
+u32 FUN_002f35b6(u32 unused, u8 *b, u8 *c)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00307eb0(param_2,param_3);
-  if ((temp_v0 == 0) &&
-     ((temp_v0 = FUN_00307eb0(param_3,param_2), temp_v0 != 0 ||
-      (temp_v0 = FUN_00307eb0(param_2 + 0x20,param_3 + 0x20), temp_v0 == 0)))) {
-    return 0;
-  }
-  return 1;
+    s32 result;
+
+    result = FUN_00307eb0(b, c);
+    if ((result == 0) &&
+        ((result = FUN_00307eb0(c, b), result != 0 || (result = FUN_00307eb0(b + 0x20, c + 0x20), result == 0)))) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,37 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010a5f0` (_code @ 0x10a5f0, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the size multiply is scheduled before the count store and needs its own register (retail reuses r4). */
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int FUN_00100238(int, unsigned char *, unsigned int, unsigned int, unsigned int);
-int asdMemoryAlloc(int, int, int, int, int);
+/* The font system's table of glyph sets. */
+typedef struct AsdFontTable {
+    void *items; /* 0x00 */
+    s32 count;   /* 0x04 */
+} AsdFontTable;
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
+extern AsdFontTable DAT_00464a70;
 
-extern unsigned char LAB_0010a644; /* 0x10a644 */
-extern unsigned int DAT_00464a70; /* 0x464a70 */
-extern int DAT_00464a74; /* 0x464a74 */
+extern void FUN_00100238(int kind, const char *name);
+extern void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
-/* Supplied declaration required: FUN_00100238. */
-/* Supplied declaration required: asdMemoryAlloc. */
-
-
-void FUN_0010a5f0(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Selects the Shift-JIS encoding and allocates a table of `count` 0x2c-byte entries. */
+void FUN_0010a5f0(s32 count)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  FUN_00100238(2,&LAB_0010a644,param_3,param_4,param_4);
-  temp_v0 = 0x100;
-  DAT_00464a74 = param_1;
-  asdMemoryAlloc(0x100,0x100,0,param_1 * 0x2c,1);
-  DAT_00464a70 = temp_v0;
-  return;
+    u32 size;
+
+    FUN_00100238(2, "SJIS");
+    DAT_00464a70.count = count;
+    size = count * 0x2c;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Font\\AsdFont.cpp", 617);
+    DAT_00464a70.items = asdMemoryAlloc(0x100, 0x100, 0, size, 1);
 }
 
 } /* extern "C" */

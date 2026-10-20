@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00508738(void);
 int FUN_00508758(void);
 int FUN_005087bc(void);
-int FUN_0050883c(void);
+int getSectionAt10_883c(void);
 
 typedef struct fn_005093a0_arg2 fn_005093a0_arg2;
 struct fn_005093a0_arg2 {
@@ -21,8 +21,8 @@ extern unsigned int *FUN_00508628(void);
 /* Supplied declaration required: FUN_00508738. */
 /* Supplied declaration required: FUN_00508758. */
 /* Supplied declaration required: FUN_005087bc. */
-/* Supplied declaration required: FUN_0050883c. */
-extern unsigned int FUN_00508848(int);
+/* Supplied declaration required: getSectionAt10_883c. */
+extern unsigned int getSectionAt10_8848(int);
 extern int nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo(unsigned int);
 extern int nw_snd_internal_SoundArchiveFile_SoundInfo_GetSoundType(void);
 
@@ -49,7 +49,7 @@ unsigned int FUN_005093a0(int param_1,unsigned int param_2,fn_005093a0_arg2 *par
     }
     else {
       if (*(unsigned int *)(param_1 + 8) >= 0x2030100) {
-        FUN_0050883c();
+        getSectionAt10_883c();
         puVar4 = (unsigned int *)FUN_00508628();
         if (puVar4 == (unsigned int *)0x0) {
           return 0;
@@ -63,7 +63,7 @@ unsigned int FUN_005093a0(int param_1,unsigned int param_2,fn_005093a0_arg2 *par
         temp_v3 = puVar4[2];
       }
       else {
-        temp_v3 = FUN_00508848(temp_v0);
+        temp_v3 = getSectionAt10_8848(temp_v0);
         temp_v4 = temp_v3;
         FUN_005087bc();
         param_3->field_0x0 = (char)temp_v4;

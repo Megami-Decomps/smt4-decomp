@@ -10,7 +10,7 @@ typedef int romwright_code(...);
 /* Supplied declaration required: asdOperatorNew. */
 extern int *FUN_004a4588(void);
 extern int *FUN_004a6880(void);
-extern int *FUN_004a68cc(void);
+extern int *constructFlagged4A(void);
 
 
 unsigned int FUN_002981e0(unsigned int param_1,int *param_2)
@@ -78,7 +78,7 @@ unsigned int FUN_002981e0(unsigned int param_1,int *param_2)
         asdOperatorNew();
         piVar2 = (int *)0x0;
         if (temp_v1 != 0) {
-          piVar2 = (int *)FUN_004a68cc();
+          piVar2 = (int *)constructFlagged4A();
         }
       }
     }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001008a2(...);
+int libc_strcat(...);
 int FUN_001bcfb4(unsigned char [68], int, unsigned int, int, int *, int);
 int FUN_002e342c(unsigned char [68], int);
 
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-/* Supplied declaration required: FUN_001008a2. */
+/* Supplied declaration required: libc_strcat. */
 extern int *FUN_001861c4(void);
 /* Supplied declaration required: FUN_001bcfb4. */
 extern int wstrlen(unsigned int);
@@ -40,16 +40,16 @@ int * FUN_003a4958(void)
   FUN_002e342c(temp_v3,*piVar2 + 0xc);
   pcVar3 = *(char **)(temp_v2 + 8);
   if (*pcVar3 != '-') {
-    FUN_001008a2(temp_v3);
+    libc_strcat(temp_v3);
   }
   else {
-    FUN_001008a2(temp_v3,*(unsigned int *)(piVar2[pcVar3[1] * -8 + 0x181] + 8));
+    libc_strcat(temp_v3,*(unsigned int *)(piVar2[pcVar3[1] * -8 + 0x181] + 8));
   }
   if (*(char *)(piVar2[1] + 0xd) != '\0') {
-    FUN_001008a2(temp_v3,0x1ad0e8);
+    libc_strcat(temp_v3,0x1ad0e8);
   }
   else {
-    FUN_001008a2(temp_v3,0x1ad0f0);
+    libc_strcat(temp_v3,0x1ad0f0);
   }
   temp_v2 = wstrlen(*(unsigned int *)(temp_v2 + 8));
   if (temp_v2 == 0) {

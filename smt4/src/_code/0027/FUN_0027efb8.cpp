@@ -14,7 +14,7 @@ extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 extern int FUN_002a8778(void);
 /* Supplied declaration required: FUN_002b63ac. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 void FUN_0027efb8(unsigned int param_1,unsigned int param_2,int param_3)
@@ -40,7 +40,7 @@ void FUN_0027efb8(unsigned int param_1,unsigned int param_2,int param_3)
        (temp_v2 = FUN_002b63ac(), (*(unsigned short *)(temp_v2 + 0x72) & 2) == 0)) &&
       (temp_v2 = FUN_002b63ac(), (*(unsigned short *)(temp_v2 + 0x72) & 0x400) == 0)) &&
      ((temp_v2 = FUN_002b63ac(), (*(unsigned short *)(temp_v2 + 0x72) & temp_v0) == 0 &&
-      (temp_v2 = FUN_002c09f4(99), temp_v2 < param_3)))) {
+      (temp_v2 = randNextInRange(99), temp_v2 < param_3)))) {
     if (param_2 != 5) {
       temp_v2 = FUN_002b63ac();
       *(unsigned short *)(temp_v2 + 0x72) = *(unsigned short *)(temp_v2 + 0x72) | (unsigned short)temp_v0;
@@ -76,7 +76,7 @@ void FUN_0027efb8(unsigned int param_1,unsigned int param_2,int param_3)
         temp_v1 = *(unsigned short *)(temp_v3 + 0x44);
         if ((((temp_v1 & 2) == 0 && (temp_v1 & 0x400) == 0) &&
             ((temp_v1 & 4) == 0 && (temp_v1 & temp_v0) == 0)) &&
-           (temp_v5 = FUN_002c09f4(99), temp_v5 < param_3)) {
+           (temp_v5 = randNextInRange(99), temp_v5 < param_3)) {
           if (param_2 != 5) {
             *(unsigned short *)(temp_v3 + 0x44) = *(unsigned short *)(temp_v3 + 0x44) | (unsigned short)temp_v0;
           }

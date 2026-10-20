@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100824(int *);
+int refIsNullOrZero(int *);
 int FUN_001883b0(int, unsigned short [264], unsigned int);
 int FUN_002e3c44(unsigned short *, int, int, int *);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00100824. */
+/* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: FUN_002e3c44. */
@@ -34,7 +34,7 @@ void FUN_00158900(int param_1,int param_2,unsigned int param_3)
   puVar3 = temp_v1;
   temp_v2 = 0;
   temp_v3 = 0;
-  FUN_00100824(&temp_v2);
+  refIsNullOrZero(&temp_v2);
   while ((temp_v0 = FUN_00100836(param_2,0x105,(unsigned int *)&temp_v2), temp_v0 != 0 &&
          (puVar2 = puVar3, FUN_002e3c44(puVar3,param_2,temp_v0,&temp_v2), puVar2 != (unsigned short *)0x0
          ))) {

@@ -9,9 +9,9 @@ int FUN_003343f0(int);
 int FUN_00341f88(void);
 int FUN_0035deb0(void);
 int FUN_004a1958(int);
-int FUN_004a1d54(int);
+int screen4AEnter(int);
 int FUN_004a37a0(int, int);
-int FUN_004d00a4(int, int, int);
+int setListWindow(int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -29,10 +29,10 @@ extern int FUN_0031d174(int);
 /* Supplied declaration required: FUN_00341f88. */
 /* Supplied declaration required: FUN_0035deb0. */
 /* Supplied declaration required: FUN_004a1958. */
-/* Supplied declaration required: FUN_004a1d54. */
+/* Supplied declaration required: screen4AEnter. */
 /* Supplied declaration required: FUN_004a37a0. */
 extern int FUN_004cfe4c(int);
-/* Supplied declaration required: FUN_004d00a4. */
+/* Supplied declaration required: setListWindow. */
 
 
 void FUN_004a38bc(int param_1)
@@ -58,13 +58,13 @@ void FUN_004a38bc(int param_1)
       else if ((temp_v1 != 0) && (*(int *)(param_1 + 0x28) <= temp_v1 + temp_v0)) {
         temp_v1 = temp_v1 - 1;
       }
-      FUN_004d00a4(param_1 + 0x20,temp_v0,temp_v1);
+      setListWindow(param_1 + 0x20,temp_v0,temp_v1);
     }
     FUN_00341f88();
     sysPlaySe();
     FUN_003343f0(0);
     if (*(short *)(param_1 + 0x864) < 1) {
-      FUN_004a1d54(param_1);
+      screen4AEnter(param_1);
       FUN_0035deb0();
       return;
     }

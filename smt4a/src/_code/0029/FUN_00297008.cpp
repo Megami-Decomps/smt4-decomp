@@ -1,17 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_003564ec(void);
+typedef struct Record {
+    /* 0x00 */ u8 unk00[10];
+    /* 0x0A */ s16 value;
+} Record;
 
+Record *dataTable4CGetEntry(void);
 
-unsigned char FUN_00297008(void)
-
+/* Returns whether the halfword at 0xA of the record dataTable4CGetEntry returns is 0. */
+u8 FUN_00297008(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_003564ec();
-  return *(short *)(temp_v0 + 10) == 0;
+    Record *record;
+
+    record = dataTable4CGetEntry();
+    return record->value == 0;
 }
 
 } /* extern "C" */

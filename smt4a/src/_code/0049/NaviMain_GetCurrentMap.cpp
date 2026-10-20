@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0049.h"
 
 extern "C" {
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern Sub68Owner *DAT_00587f28;
 
-
-unsigned int NaviMain_GetCurrentMap(void)
-
+u32 NaviMain_GetCurrentMap(void)
 {
-  return *(unsigned int *)(DAT_00587f28 + 0x28);
+    return DAT_00587f28->unk28;
 }
 
 } /* extern "C" */

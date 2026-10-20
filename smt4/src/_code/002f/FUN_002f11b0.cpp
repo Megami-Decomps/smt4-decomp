@@ -1,22 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
+int scrSetResult(int result);
 
-/* Supplied declaration required: scrSetResult. */
+typedef struct Scene {
+    /* 0x0000 */ u8 unk0000[0x3040];
+    /* 0x3040 */ u8 unk3040;
+} Scene;
 
-
-unsigned int FUN_002f11b0(int *param_1)
-
+u32 FUN_002f11b0(Scene **owner)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(*param_1 + 0x3040) != '\r') {
-    scrSetResult(0);
-    return 0;
-  }
-  scrSetResult(1);
-  return 1;
+    if ((*owner)->unk3040 != '\r') {
+        scrSetResult(0);
+        return 0;
+    }
+    scrSetResult(1);
+    return 1;
 }
 
 } /* extern "C" */

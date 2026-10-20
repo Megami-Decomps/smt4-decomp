@@ -8,7 +8,7 @@ int FUN_001346ee(int *, unsigned int, int, int *);
 int sysMemClear(int, int);
 int FUN_002e7168(...);
 int FUN_002f3340(...);
-int FUN_002f33ac(int *);
+int vectorCount4_002f33ac(int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned char DAT_00559d20; /* 0x559d20 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_0010cfe8(int);
+extern int constructObj0055908c(int);
 extern int FUN_00117804(unsigned int *);
 extern int FUN_0012d57c(unsigned int *);
 extern unsigned int FUN_00132c28(unsigned int *, unsigned int);
@@ -33,12 +33,12 @@ extern unsigned int FUN_00132c28(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002e7168. */
 extern int FUN_002e760a(unsigned int);
 extern int FUN_002e995c(int);
-extern int FUN_002ea0e4(int);
+extern int constructObj0055affc(int);
 extern unsigned int FUN_002ea2e8(void);
-extern unsigned int *FUN_002f32d4(int *, int);
+extern unsigned int *arrayElementAddress_002f32d4(int *, int);
 /* Supplied declaration required: FUN_002f3340. */
 extern int FUN_002f3378(int);
-/* Supplied declaration required: FUN_002f33ac. */
+/* Supplied declaration required: vectorCount4_002f33ac. */
 
 
 unsigned long long
@@ -86,7 +86,7 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   *(unsigned int *)temp_v1 = temp_v1;
   *(int *)(*(int *)(temp_v0 + 0x30) + 4) = *(int *)(temp_v0 + 0x30);
   temp_v0 = FUN_002f3378(temp_v0 + 0x38);
-  temp_v0 = FUN_0010cfe8(temp_v0 + 0x24);
+  temp_v0 = constructObj0055908c(temp_v0 + 0x24);
   *(unsigned char *)(temp_v0 + 8) = 1;
   *(unsigned char *)(temp_v0 + 9) = 0;
   *(unsigned char *)(temp_v0 + 10) = 0;
@@ -98,19 +98,19 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   *(unsigned int *)(temp_v0 + 0x1c) = 0;
   temp_v0 = FUN_002e995c(temp_v0 + 0x20);
-  temp_v0 = FUN_002ea0e4(temp_v0 + 0x20);
+  temp_v0 = constructObj0055affc(temp_v0 + 0x20);
   *(int *)(temp_v0 - 0x88) = temp_v0 - 0x140;
   piVar10 = (int *)(temp_v0 - 0x2c);
   temp_v5 = 0;
   temp_v6 = piVar10;
-  temp_v2 = FUN_002f33ac(piVar10);
+  temp_v2 = vectorCount4_002f33ac(piVar10);
   if (temp_v2 < 4) {
     temp_v1 = *(unsigned int *)(temp_v0 - 0x28);
-    temp_v3 = FUN_002f33ac(piVar10);
+    temp_v3 = vectorCount4_002f33ac(piVar10);
     FUN_001346ee(piVar10,temp_v1,4 - temp_v3,&temp_v5);
   }
   else {
-    temp_v2 = FUN_002f33ac(piVar10);
+    temp_v2 = vectorCount4_002f33ac(piVar10);
     if (temp_v2 >= 5) {
       puVar7 = *(unsigned int **)(temp_v0 - 0x28);
       puVar8 = (unsigned int *)*piVar10 + 4;
@@ -137,7 +137,7 @@ FUN_0010a3a0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
     else {
       temp_v1 = 0;
     }
-    puVar2 = (unsigned int *)FUN_002f32d4(temp_v6,temp_v3);
+    puVar2 = (unsigned int *)arrayElementAddress_002f32d4(temp_v6,temp_v3);
     temp_v3 = temp_v3 + 1;
     *puVar2 = temp_v1;
   } while (temp_v3 < 4);

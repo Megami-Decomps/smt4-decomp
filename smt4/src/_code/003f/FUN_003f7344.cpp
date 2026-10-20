@@ -21,7 +21,7 @@ extern unsigned int DAT_004efd90; /* 0x4efd90 */
 extern unsigned int DAT_004efd94; /* 0x4efd94 */
 extern unsigned int DAT_004efd98; /* 0x4efd98 */
 
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
 
@@ -103,7 +103,7 @@ unsigned char FUN_003f7344(int *param_1,unsigned int param_2)
       do {
         temp_v1 = param_1[1] + temp_v2 * 0x40;
         if (temp_v1 != 0) {
-          if (((DAT_00476634 & 1) == 0) && (temp_v3 = FUN_002bfefc(&DAT_00476634), temp_v3 != 0)) {
+          if (((DAT_00476634 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476634), temp_v3 != 0)) {
             DAT_004efd6c = temp_v8;
             DAT_004efd70 = temp_v7;
             DAT_004efd74 = temp_v7;

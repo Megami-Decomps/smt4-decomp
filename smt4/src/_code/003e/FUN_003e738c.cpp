@@ -40,7 +40,7 @@ extern signed char DAT_00473534; /* 0x473534 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_00150f9c(void);
+extern int lcgRandomHigh16(void);
 extern int FUN_001584f8(int, unsigned int);
 /* Supplied declaration required: FUN_0015c4fc. */
 /* Supplied declaration required: FUN_0023578c. */
@@ -135,7 +135,7 @@ void FUN_003e738c(fn_003e738c_arg0 *param_1,int param_2,unsigned int param_3,uns
         if (temp_v9) {
           param_5 = (unsigned int)(short)-param_5;
         }
-        temp_v8 = FUN_00150f9c();
+        temp_v8 = lcgRandomHigh16();
         temp_v3 = (unsigned short)(temp_v8 * (param_5 + 1) >> 0x10);
         if (temp_v9) {
           temp_v3 = -temp_v3;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00246854(void);
-int FUN_0024fc18(void);
+int effBlockCreateFromBlock(void);
 int FUN_002501e0(...);
 int FUN_00250200(void);
 int FUN_002629a8(...);
@@ -108,7 +108,7 @@ extern unsigned int FUN_0021a468(int);
 /* Supplied declaration required: FUN_0024dd48. */
 /* Supplied declaration required: FUN_0024dd80. */
 extern unsigned char *FUN_0024dd90(void);
-/* Supplied declaration required: FUN_0024fc18. */
+/* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: FUN_002501e0. */
 /* Supplied declaration required: FUN_00250200. */
 /* Supplied declaration required: FUN_002629a8. */
@@ -579,7 +579,7 @@ LAB_002fd78c:
       }
       temp_v3 = FUN_002468e0(DAT_0044ea94,temp_v11);
       temp_v4 = *(int *)(temp_v3 + 0x90);
-      FUN_0024fc18();
+      effBlockCreateFromBlock();
       DAT_0044eaa0 = temp_v4;
       rt_memcpy_w(&DAT_004d8ca0,temp_v3,0x80);
     }

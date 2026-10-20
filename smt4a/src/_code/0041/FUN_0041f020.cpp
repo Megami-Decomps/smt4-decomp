@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_001641c4(void);
-int FUN_0050d778(int, unsigned int);
+int fillThreeWordsWithByte(int, unsigned int);
 
 /* Supplied declaration required: FUN_001641c4. */
 extern unsigned short FUN_001643b4(unsigned int, int);
-/* Supplied declaration required: FUN_0050d778. */
+/* Supplied declaration required: fillThreeWordsWithByte. */
 
 
 void FUN_0041f020(int param_1)
@@ -29,7 +29,7 @@ void FUN_0041f020(int param_1)
   }
   temp_v2 = 0;
   *(unsigned int *)(param_1 + 0x448) = 0;
-  FUN_0050d778(param_1 + 0x43c,0xffffffff);
+  fillThreeWordsWithByte(param_1 + 0x43c,0xffffffff);
   *(unsigned char *)(param_1 + 0x44c) = 0;
   *(unsigned char *)(param_1 + 0x44d) = 0;
   *(unsigned char *)(param_1 + 0x44e) = 0;

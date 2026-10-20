@@ -23,9 +23,9 @@ extern unsigned int DAT_0064c078; /* 0x64c078 */
 extern unsigned int DAT_0064c07c; /* 0x64c07c */
 extern unsigned int DAT_0064c080; /* 0x64c080 */
 
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002f5020. */
-extern int FUN_00442c5c(unsigned int *);
+extern int setMinus1ReturnPtr(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
 
@@ -48,7 +48,7 @@ int FUN_00406e6c(unsigned int *param_1)
   param_1[6] = 0;
   param_1[7] = 0;
   temp_v2 = 0;
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c2c), temp_v0 != 0)) {
+  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
     DAT_0064c054 = temp_v3;
     DAT_0064c058 = temp_v2;
     DAT_0064c05c = temp_v2;
@@ -67,7 +67,7 @@ int FUN_00406e6c(unsigned int *param_1)
   param_1[0x15] = 0;
   *(unsigned char *)(param_1 + 0x16) = 0;
   *(unsigned char *)((int)param_1 + 0x59) = 0;
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c2c), temp_v0 != 0)) {
+  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
     DAT_0064c054 = temp_v3;
     DAT_0064c058 = temp_v2;
     DAT_0064c05c = temp_v2;
@@ -82,7 +82,7 @@ int FUN_00406e6c(unsigned int *param_1)
     DAT_0064c080 = temp_v2;
   }
   nn_math_ARMv6_MTX34CopyAsm(param_1 + 0x17,&DAT_0064c054);
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c2c), temp_v0 != 0)) {
+  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
     DAT_0064c054 = temp_v3;
     DAT_0064c058 = temp_v2;
     DAT_0064c05c = temp_v2;
@@ -106,7 +106,7 @@ int FUN_00406e6c(unsigned int *param_1)
   param_1[0x36] = temp_v3;
   param_1[0x37] = 0;
   param_1[0x38] = 0;
-  temp_v0 = FUN_00442c5c(param_1 + 0x39);
+  temp_v0 = setMinus1ReturnPtr(param_1 + 0x39);
   *(unsigned int *)(temp_v0 + 4) = 0;
   *(unsigned int *)(temp_v0 + 8) = 0;
   *(unsigned short *)(temp_v0 + 0xc) = 4;

@@ -18,20 +18,20 @@ typedef struct {
     u32 flags;          /* 0x754 */
 } GlobalBlock;
 
-int FUN_00131968(...);
+int destroyObj0055c6e4(...);
 int FUN_002b486c(Owner *owner);
 int FUN_002b4b88(void *handle, int (*callback)(...));
 
 extern GlobalBlock *g_aocMain;
 
-/* Tears the owner down: clears its counters, releases its handle with FUN_00131968, then clears flag 0x10000 in the global block. */
+/* Tears the owner down: clears its counters, releases its handle with destroyObj0055c6e4, then clears flag 0x10000 in the global block. */
 void FUN_002ba9ac(Owner *owner)
 {
     owner->unk310 = 0;
     owner->unk314 = 0;
     owner->unk350 = 0;
     if (owner->handle != NULL) {
-        FUN_002b4b88(owner->handle, FUN_00131968);
+        FUN_002b4b88(owner->handle, destroyObj0055c6e4);
         owner->handle = NULL;
     }
     FUN_002b486c(owner);

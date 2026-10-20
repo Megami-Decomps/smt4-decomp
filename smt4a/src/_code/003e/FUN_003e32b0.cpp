@@ -11,7 +11,7 @@ int FUN_00275f44(...);
 int FUN_003180c4(int, unsigned int);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
-int FUN_0050d778(int, unsigned int);
+int fillThreeWordsWithByte(int, unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 6 byte(s) */
 typedef struct {
@@ -37,11 +37,11 @@ extern int FUN_00239234(unsigned short, unsigned char *);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
-extern int FUN_00331194(void);
+extern int panelIsMissingOrFlagClear(void);
 extern int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
-/* Supplied declaration required: FUN_0050d778. */
+/* Supplied declaration required: fillThreeWordsWithByte. */
 
 
 void FUN_003e32b0(int param_1)
@@ -80,7 +80,7 @@ void FUN_003e32b0(int param_1)
     }
     else {
       temp_v1 = FUN_00224880(*(unsigned int *)(param_1 + 0x18));
-      if ((temp_v1 == 2) && (temp_v1 = FUN_00331194(), temp_v1 != 0)) {
+      if ((temp_v1 == 2) && (temp_v1 = panelIsMissingOrFlagClear(), temp_v1 != 0)) {
         temp_v1 = FUN_002a4b74();
         if (!(temp_v1 == -1 || temp_v1 == 3)) {
           temp_v1 = *(int *)(param_1 + temp_v1 * 4 + 0x8c);
@@ -111,7 +111,7 @@ void FUN_003e32b0(int param_1)
     return;
   }
   temp_v6 = 0;
-  FUN_0050d778(param_1 + 0x8c,0xffffffff);
+  fillThreeWordsWithByte(param_1 + 0x8c,0xffffffff);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 0x24;

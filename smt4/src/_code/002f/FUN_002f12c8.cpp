@@ -1,25 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(unsigned int);
+int scrSetResult(u32 result);
+extern u8 *btlGetMainState(void);
+extern int scrGetArg(u32 index);
 
-/* Supplied declaration required: scrSetResult. */
-extern int btlGetMainState(void);
-extern int scrGetArg(unsigned int);
-
-
-unsigned int FUN_002f12c8(void)
-
+u32 FUN_002f12c8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = scrGetArg(0);
-  scrSetResult(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0x22a8));
-  return 1;
+    u8 *btl = btlGetMainState();
+    int index = scrGetArg(0);
+
+    scrSetResult(*(u32 *)(btl + index * 4 + 0x22a8));
+    return 1;
 }
 
 } /* extern "C" */

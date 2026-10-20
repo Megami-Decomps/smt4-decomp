@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e32a4(int, unsigned char *, unsigned char *);
 int FUN_002e6e14(void);
 int FUN_00307770(int, int, int, int *);
-int FUN_003077a4(int *);
+int vectorCount8_003077a4(int *);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -22,12 +22,12 @@ extern unsigned char LAB_00134f40; /* 0x134f40 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e32a4. */
-extern int *FUN_002e4e86(unsigned int *, unsigned int *);
+extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307770. */
-extern unsigned int FUN_00307792(unsigned int, int *);
-/* Supplied declaration required: FUN_003077a4. */
+extern unsigned int vectorGrowCapacity_00307792(unsigned int, int *);
+/* Supplied declaration required: vectorCount8_003077a4. */
 
 
 unsigned long long FUN_00134ebc(int *param_1,unsigned int param_2)
@@ -51,16 +51,16 @@ unsigned long long FUN_00134ebc(int *param_1,unsigned int param_2)
     FUN_002e32a4(8,&LAB_00134f40,&LAB_00134f40);
   }
   if ((unsigned int)((param_1[2] - *param_1) >> 3) < temp_v5) {
-    temp_v0 = FUN_003077a4(param_1);
-    temp_v4 = FUN_00307792(temp_v0,param_1);
-    piVar2 = (int *)FUN_002e4e86(&temp_v5,(unsigned int *)&temp_v4);
+    temp_v0 = vectorCount8_003077a4(param_1);
+    temp_v4 = vectorGrowCapacity_00307792(temp_v0,param_1);
+    piVar2 = (int *)wordRefMax(&temp_v5,(unsigned int *)&temp_v4);
     temp_v1 = *piVar2;
     temp_v2 = rt_malloc();
     FUN_00307770(*param_1,param_1[1],temp_v2,param_1);
     for (temp_v3 = *param_1; temp_v3 != param_1[1]; temp_v3 = temp_v3 + 8) {
     }
     FUN_002e6e14();
-    temp_v3 = FUN_003077a4(param_1);
+    temp_v3 = vectorCount8_003077a4(param_1);
     *param_1 = temp_v2;
     param_1[2] = temp_v2 + temp_v1 * 8;
     param_1[1] = temp_v3 * 8 + temp_v2;

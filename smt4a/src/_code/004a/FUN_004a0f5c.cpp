@@ -16,7 +16,7 @@ extern int FUN_001801a4(void);
 extern int FUN_001ab888(void);
 extern int FUN_001b347c(void);
 /* Supplied declaration required: FUN_002b5c88. */
-extern unsigned int FUN_002e5220(unsigned short);
+extern unsigned int dataTableGetEntry0102Value(unsigned short);
 /* Supplied declaration required: FUN_003df57c. */
 extern int FUN_004a0404(void);
 /* Supplied declaration required: FUN_004bcbb4. */
@@ -98,8 +98,8 @@ LAB_004a1070:
           if (*(short *)(temp_v1 + 0x2c) == *(short *)(temp_v8 + 0x2c)) {
             if (*(unsigned short *)(temp_v1 + 100) >= *(unsigned short *)(temp_v8 + 100)) {
               if (*(unsigned short *)(temp_v1 + 100) == *(unsigned short *)(temp_v8 + 100)) {
-                temp_v4 = FUN_002e5220(*(unsigned short *)(temp_v1 + 0x62));
-                temp_v5 = FUN_002e5220(*(unsigned short *)(temp_v8 + 0x62));
+                temp_v4 = dataTableGetEntry0102Value(*(unsigned short *)(temp_v1 + 0x62));
+                temp_v5 = dataTableGetEntry0102Value(*(unsigned short *)(temp_v8 + 0x62));
                 if (temp_v5 < temp_v4) {
                   temp_v1 = temp_v8;
                 }
@@ -154,8 +154,8 @@ LAB_004a11b0:
           if (*(short *)(temp_v1 + 0x2c) == *(short *)(temp_v8 + 0x2c)) {
             if (*(unsigned short *)(temp_v1 + 100) >= *(unsigned short *)(temp_v8 + 100)) {
               if (*(unsigned short *)(temp_v1 + 100) == *(unsigned short *)(temp_v8 + 100)) {
-                temp_v4 = FUN_002e5220(*(unsigned short *)(temp_v1 + 0x62));
-                temp_v5 = FUN_002e5220(*(unsigned short *)(temp_v8 + 0x62));
+                temp_v4 = dataTableGetEntry0102Value(*(unsigned short *)(temp_v1 + 0x62));
+                temp_v5 = dataTableGetEntry0102Value(*(unsigned short *)(temp_v8 + 0x62));
                 if (temp_v5 < temp_v4) {
                   temp_v1 = temp_v8;
                 }

@@ -10,7 +10,7 @@ int FUN_0030ea58(int, unsigned char *);
 int FUN_00318100(void);
 int FUN_0048168c(void);
 
-extern unsigned int FUN_0016a0f0(unsigned int);
+extern unsigned int dataTableValueOrZero(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001a6f60. */
 /* Supplied declaration required: FUN_002bf384. */
@@ -40,7 +40,7 @@ int FUN_00335660(int param_1,int param_2,int param_3)
       if (pbVar4 != (unsigned char *)0x0) {
         temp_v5 = (unsigned int)*pbVar4;
         temp_v3 = (unsigned int)pbVar4[1];
-        temp_v1 = FUN_0016a0f0(7);
+        temp_v1 = dataTableValueOrZero(7);
         temp_v2 = FUN_00318100();
         if (temp_v2 <= temp_v5) {
           temp_v5 = 0;
@@ -63,7 +63,7 @@ int FUN_00335660(int param_1,int param_2,int param_3)
     temp_v4 = temp_v4 + 1;
     pbVar4 = pbVar4 + 0x22;
   } while (temp_v4 < 0x20f);
-  temp_v1 = FUN_0016a0f0(7);
+  temp_v1 = dataTableValueOrZero(7);
   FUN_00318100();
   FUN_002bf384(temp_v1,0);
   FUN_0048168c();

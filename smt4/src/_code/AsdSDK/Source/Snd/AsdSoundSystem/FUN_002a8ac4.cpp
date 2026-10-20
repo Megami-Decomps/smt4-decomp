@@ -50,7 +50,7 @@ extern float DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002b90f8. */
 /* Supplied declaration required: FUN_002ba12c. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int FUN_002c15ac(unsigned int);
 extern unsigned int FUN_002c15d4(unsigned int);
 /* Supplied declaration required: FUN_002c1ac8. */
@@ -91,7 +91,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   unsigned char temp_v22 [148];
   
   temp_v19 = 0.0f;
-  if (((DAT_00476628 & 1) == 0) && (temp_v3 = FUN_002bfefc(&DAT_00476628), temp_v3 != 0)) {
+  if (((DAT_00476628 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_00476628), temp_v3 != 0)) {
     g_asdSoundListener = temp_v19;
     DAT_004efd30 = temp_v19;
     DAT_004efd34 = temp_v19;

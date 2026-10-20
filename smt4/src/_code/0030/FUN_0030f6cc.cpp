@@ -1,26 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030f6cc` (_code @ 0x30f6cc, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the constant arguments are loaded r1 then r0 instead of r0 then r1. */
+#include "common.h"
 
 extern "C" {
 
-int dataTableGet(int, int);
+typedef struct AocSystem {
+    u8 unk000[0x40c];
+    s32 extraCount; /* 0x40c */
+} AocSystem;
 
-extern int g_aocSystem; /* 0x433158 */
+extern AocSystem *g_aocSystem;
 
-extern int dataTableGetCount(void);
-/* Supplied declaration required: dataTableGet. */
+extern void *dataTableGet(int table, int index);
+extern s32 dataTableGetCount(void *table);
 
-
-int FUN_0030f6cc(void)
-
+/* Entry count of data table 0x23's section 5, plus the add-on content's extra entries. */
+s32 FUN_0030f6cc(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  dataTableGet(0x23,5);
-  temp_v0 = dataTableGetCount();
-  return temp_v0 + *(int *)(g_aocSystem + 0x40c);
+    return dataTableGetCount(dataTableGet(0x23, 5)) + g_aocSystem->extraCount;
 }
 
 } /* extern "C" */

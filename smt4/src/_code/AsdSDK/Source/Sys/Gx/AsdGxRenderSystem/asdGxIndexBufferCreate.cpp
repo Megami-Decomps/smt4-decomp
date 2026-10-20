@@ -1,8 +1,10 @@
-/* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the buffer allocation. */
+/* NON_MATCHING: register allocation only: retail keeps `kind` in r6 and the preset pointer in r5 (saving r3-r7) where the build reuses r0-r2 */
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00409a68[];
 extern AsdGxPresets g_asdGxPresets;
 
 AsdGxTexture *asdTextureCreate(s32 unk);
@@ -16,7 +18,7 @@ AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
     AsdGxTexture *tex = asdTextureCreate(0);
     AsdGxPreset *preset = NULL;
 
-    if (kind < 2) {
+    if (kind == 0 || kind == 1) {
         tex->width = 0x200;
         preset = &g_asdGxPresets.small;
         tex->height = 0x200;
@@ -39,6 +41,7 @@ AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
     } else {
         tex->byteSize = tex->byteSize * 2;
     }
+    asdDebugTrace(DAT_00409a68, 2950);
     tex->pixels = asdMemoryAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, tex->byteSize, 1);
     tex->handle = FUN_002bc11c();
     return tex;

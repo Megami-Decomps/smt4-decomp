@@ -7,15 +7,15 @@ extern "C" {
 int FUN_00100388(...);
 int FUN_0020401c(...);
 int FUN_004072b0(...);
-int FUN_00407360(...);
-int FUN_00407424(...);
+int linkSlotSetFlag1C(...);
+int linkSlotSetFlag20(...);
 int FUN_0040792c(...);
 int FUN_00407ab0(...);
 int FUN_00407eb0(...);
 int FUN_004080bc(...);
 int FUN_004b96a0(...);
-int FUN_004bb170(...);
-int FUN_004bb184(...);
+int dataTable33Entries(...);
+int dataTable33TypeCount(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -30,16 +30,16 @@ extern int FUN_0018206c(unsigned int, unsigned int);
 extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_0020401c. */
 /* Supplied declaration required: FUN_004072b0. */
-/* Supplied declaration required: FUN_00407360. */
-/* Supplied declaration required: FUN_00407424. */
+/* Supplied declaration required: linkSlotSetFlag1C. */
+/* Supplied declaration required: linkSlotSetFlag20. */
 /* Supplied declaration required: FUN_0040792c. */
 /* Supplied declaration required: FUN_00407ab0. */
 /* Supplied declaration required: FUN_00407eb0. */
 /* Supplied declaration required: FUN_004080bc. */
 /* Supplied declaration required: FUN_004b96a0. */
-extern int FUN_004ba790(int);
-/* Supplied declaration required: FUN_004bb170. */
-/* Supplied declaration required: FUN_004bb184. */
+extern int menu4CGetCurrentEntry(int);
+/* Supplied declaration required: dataTable33Entries. */
+/* Supplied declaration required: dataTable33TypeCount. */
 
 
 void FUN_004b8598(int param_1)
@@ -81,16 +81,16 @@ void FUN_004b8598(int param_1)
         else {
           FUN_00407ab0(*(unsigned int *)(param_1 + 0x1218),temp_v5,0);
         }
-        temp_v0 = FUN_004ba790(param_1 + 0x9c);
+        temp_v0 = menu4CGetCurrentEntry(param_1 + 0x9c);
         FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),0,0xffffffff);
         FUN_00407eb0(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v0 + 0x28),1);
         if (-1 < *(int *)(*(int *)(param_1 + 0x1118) + 0x60)) {
           puVar6 = temp_v7;
-          FUN_004bb170();
+          dataTable33Entries();
           if (puVar6 != (unsigned char *)0x0) {
             temp_v3 = 0;
             puVar2 = temp_v7;
-            FUN_004bb184(puVar2,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
+            dataTable33TypeCount(puVar2,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
             if (0 < (int)puVar2) {
               do {
                 FUN_00100388(temp_v5,&LAB_004b87d8,"mikado/",puVar6);
@@ -98,7 +98,7 @@ void FUN_004b8598(int param_1)
                 puVar6 = puVar6 + 0x20;
                 temp_v3 = temp_v3 + 1;
                 puVar2 = temp_v7;
-                FUN_004bb184(puVar2,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
+                dataTable33TypeCount(puVar2,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
               } while (temp_v3 < (int)puVar2);
             }
             FUN_0040792c(*(unsigned int *)(param_1 + 0x1218),(int)*(char *)(temp_v0 + 0x2b));
@@ -106,16 +106,16 @@ void FUN_004b8598(int param_1)
         }
         if ((!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) ||
            (!(*(short *)(temp_v0 + 0x28) == 0 || *(short *)(temp_v0 + 0x28) == 6))) {
-          FUN_00407424(*(unsigned int *)(param_1 + 0x1218),0);
+          linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),0);
           temp_v1 = *(unsigned int *)(param_1 + 0x1218);
           temp_v2 = 1;
         }
         else {
-          FUN_00407424(*(unsigned int *)(param_1 + 0x1218),1);
+          linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),1);
           temp_v1 = *(unsigned int *)(param_1 + 0x1218);
           temp_v2 = 0;
         }
-        FUN_00407360(temp_v1,temp_v2);
+        linkSlotSetFlag1C(temp_v1,temp_v2);
       }
       if (*(int *)(param_1 + 0x116c) != 1) {
         FUN_0020401c(*(int *)(param_1 + 0x1118) + 2);

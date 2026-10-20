@@ -8,7 +8,7 @@ int FUN_00272e0c(...);
 int FUN_00292200(void);
 int FUN_002bd910(void);
 int FUN_002d1f40(...);
-int FUN_003522f8(...);
+int byte76Set(...);
 int FUN_00352ff8(void);
 int FUN_00353200(void);
 
@@ -135,11 +135,11 @@ extern int FUN_002d7c88(unsigned int);
 /* Supplied declaration required: FUN_00303a5c. */
 /* Supplied declaration required: FUN_00303e88. */
 extern int FUN_003303fc(void);
-extern int FUN_00338dec(void);
+extern int byte76Get(void);
 /* Supplied declaration required: FUN_0033abb4. */
 extern int FUN_0033b100(char *);
 extern int FUN_0033be00(char *);
-/* Supplied declaration required: FUN_003522f8. */
+/* Supplied declaration required: byte76Set. */
 /* Supplied declaration required: FUN_00352bc4. */
 /* Supplied declaration required: FUN_00352ff8. */
 /* Supplied declaration required: FUN_00353200. */
@@ -3184,9 +3184,9 @@ joined_r0x002d4cd0:
           *(unsigned int *)(temp_v10 + 0xbc) = 0;
         }
         else {
-          temp_v3 = FUN_00338dec();
+          temp_v3 = byte76Get();
           if (temp_v3 != 0) {
-            FUN_003522f8(0);
+            byte76Set(0);
             *(unsigned int *)(temp_v10 + 100) = 5;
             *(unsigned int *)(temp_v10 + 0x68) = 0xffffffff;
           }

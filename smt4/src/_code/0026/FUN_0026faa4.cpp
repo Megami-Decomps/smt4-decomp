@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0028975c(...);
-int FUN_002c09f4(int);
+int randNextInRange(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0028975c. */
 extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 extern char *FUN_002c2950(void);
 
 
@@ -33,15 +33,15 @@ void FUN_0026faa4(void)
   temp_v3 = '\0';
   temp_v1 = 0;
   do {
-    FUN_002c09f4(0xff);
+    randNextInRange(0xff);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x80);
   if (*pcVar1 == '\x01') {
     temp_v2 = pcVar1[1];
     temp_v3 = pcVar1[2];
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\x0e' || temp_v3 != '\x01') goto LAB_0026fb0c;
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
 LAB_0026fb74:
     if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x573), temp_v1 != 0)) {
       FUN_0028975c(0x572,0,1);
@@ -49,9 +49,9 @@ LAB_0026fb74:
     else {
       FUN_0028975c(0x572,1);
     }
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\x05' || temp_v3 != '\x06') goto LAB_0026fbe0;
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
 LAB_0026fc4c:
     if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x577), temp_v1 != 0)) {
       FUN_0028975c(0x576,0,1);
@@ -59,9 +59,9 @@ LAB_0026fc4c:
     else {
       FUN_0028975c(0x576,1);
     }
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\b' || temp_v3 != '\x01') goto LAB_0026fcb8;
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
     if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x57b), temp_v1 != 0)) {
       FUN_0028975c(0x57a,0,1);
     }
@@ -70,7 +70,7 @@ LAB_0026fc4c:
     }
   }
   else {
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
 LAB_0026fb0c:
     if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x571), temp_v1 != 0)) {
       FUN_0028975c(0x570,0,1);
@@ -78,9 +78,9 @@ LAB_0026fb0c:
     else {
       FUN_0028975c(0x570,1);
     }
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\x03' || temp_v3 != '\b') goto LAB_0026fb74;
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
 LAB_0026fbe0:
     if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x575), temp_v1 != 0)) {
       FUN_0028975c(0x574,0,1);
@@ -88,9 +88,9 @@ LAB_0026fbe0:
     else {
       FUN_0028975c(0x574,1);
     }
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
     if (temp_v2 != '\a' || temp_v3 != '\x01') goto LAB_0026fc4c;
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
 LAB_0026fcb8:
     if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x579), temp_v1 != 0)) {
       FUN_0028975c(0x578,0,1);
@@ -98,7 +98,7 @@ LAB_0026fcb8:
     else {
       FUN_0028975c(0x578,1);
     }
-    temp_v1 = FUN_002c09f4(0xff);
+    temp_v1 = randNextInRange(0xff);
     if (!(temp_v2 == '\f' && temp_v3 == '\x01')) {
       if ((temp_v1 != 0) || (temp_v1 = FUN_002c09d0(0x57b), temp_v1 != 0)) {
         FUN_0028975c(0x57a,0,1);
@@ -108,7 +108,7 @@ LAB_0026fcb8:
       }
     }
   }
-  temp_v1 = FUN_002c09f4(0xff);
+  temp_v1 = randNextInRange(0xff);
   temp_v0 = FUN_002c09d0(0x648);
   if (temp_v0 == 0) {
     temp_v1 = 0xff;

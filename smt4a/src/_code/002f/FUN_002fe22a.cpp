@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps `a` in r5 and the converted `b` in r4 (swapped here) */
+/* Matches with -Ospace (requested): the container code was built for size. */
 /* Returns whether FUN_002e92e4 accepts the converted forms of `a` and `b`. */
 #include "common.h"
 

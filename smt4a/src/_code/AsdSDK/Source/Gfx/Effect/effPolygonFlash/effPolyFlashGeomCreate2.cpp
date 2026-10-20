@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 48 vs built 29 rows, 40 diff lines. */
+/* NON_MATCHING: only temp registers differ after the allocation (retail uses r1/r2 swapped and copies the geometry result through r1). */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -11,7 +12,11 @@ extern u8 DAT_005c1f28;
 PolyGeomBlock *effPolyFlashGeomCreate2(PolyParams *params)
 {
     u32 segments = params->segments;
-    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, segments * 0x18 + 0x10, 0x10, 1);
+    u32 size = segments * 0x18;
+    PolyGeomBlock *block;
+
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonFlash.cpp", 151);
+    block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, size + 0x10, 0x10, 1);
 
     block->data = block->payload;
     block->self = block;

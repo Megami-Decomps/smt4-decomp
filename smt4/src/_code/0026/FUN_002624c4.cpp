@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029e974(void);
+int dataTable06Sub1GetRecord(void);
 int FUN_0029eaa4(int, unsigned int);
 int FUN_002b7bca(int, unsigned int, int, unsigned char *);
 int FUN_002b9024(void);
@@ -13,7 +13,7 @@ int FUN_003c9754(int, unsigned int, unsigned int, unsigned int);
 
 extern unsigned char LAB_002c6f08; /* 0x2c6f08 */
 
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_0029eaa4. */
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: FUN_002b9024. */
@@ -69,7 +69,7 @@ int FUN_002624c4(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
       do {
         temp_v1 = param_1 + temp_v4 * 2;
         temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x146);
-        if ((temp_v3 != 0) && (FUN_0029e974(), (*(unsigned char *)(temp_v3 + 3) & 0x20) == 0)) {
+        if ((temp_v3 != 0) && (dataTable06Sub1GetRecord(), (*(unsigned char *)(temp_v3 + 3) & 0x20) == 0)) {
           *(unsigned short *)(temp_v1 + 0x146) = 0;
         }
         temp_v4 = temp_v4 + 1;
@@ -93,7 +93,7 @@ int FUN_002624c4(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
         do {
           temp_v2 = (unsigned int)*(unsigned short *)(param_1 + temp_v4 * 2 + 0x146);
           if (temp_v2 == 0) break;
-          FUN_0029e974();
+          dataTable06Sub1GetRecord();
           temp_v4 = temp_v4 + 1;
           temp_v1 = temp_v1 + (*(unsigned char *)(temp_v2 + 3) & 0x1f) * 5;
         } while (temp_v4 < 0x18);

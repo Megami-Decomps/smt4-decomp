@@ -8,7 +8,7 @@ int FUN_00183318(int);
 int FUN_0019de98(int, unsigned int);
 int FUN_00334518(void);
 int FUN_0034aae4(...);
-int FUN_0037c8b4(int, int);
+int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
 int FUN_003a7630(int);
 int FUN_003c5fc4(int);
@@ -45,9 +45,9 @@ extern unsigned char FUN_0031f90c(void);
 /* Supplied declaration required: FUN_00334518. */
 extern unsigned char FUN_00334530(void);
 /* Supplied declaration required: FUN_0034aae4. */
-extern unsigned int FUN_00368390(void);
+extern unsigned int clearFlags310To31F(void);
 extern unsigned short FUN_00372140(void);
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 extern unsigned short FUN_0039c628(void);
 /* Supplied declaration required: FUN_003a7630. */
@@ -82,7 +82,7 @@ void FUN_00468e98(fn_00468e98_arg0 *param_1)
     if (param_1->field_0xa64 != 0) {
       temp_v4 = FUN_00162e8c();
       *(unsigned short *)(temp_v4 + 0x22) = 0;
-      temp_v5 = FUN_00368390();
+      temp_v5 = clearFlags310To31F();
       if (temp_v3 == 0) {
         temp_v5 = (unsigned int)param_1->field_0xa66;
         *(unsigned short *)(temp_v4 + 0x1e) = param_1->field_0xa66;
@@ -108,7 +108,7 @@ void FUN_00468e98(fn_00468e98_arg0 *param_1)
     if (*(char *)(param_1 + 1) != '\0') {
       FUN_0037c8e4(1,0);
       temp_v3 = FUN_00467df8();
-      FUN_0037c8b4(-temp_v3,0);
+      panelSetTarget(-temp_v3,0);
       FUN_003c5fc4(1);
       *(unsigned char *)(param_1 + 1) = 0;
     }

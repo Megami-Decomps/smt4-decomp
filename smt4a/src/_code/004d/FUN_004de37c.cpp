@@ -35,7 +35,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001aba54. */
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e94. */
 /* Supplied declaration required: FUN_004a92b8. */
@@ -137,7 +137,7 @@ LAB_004de6b4:
           }
           else {
             *(unsigned char *)(param_2 + 0xe) = 1;
-            temp_v4 = FUN_003e0044(1);
+            temp_v4 = playerHasFlagBit(1);
             if (temp_v4 != 0) {
               FUN_003e8bb0(temp_v10,*param_1,param_2[8]);
               if (temp_v11 == 3) {

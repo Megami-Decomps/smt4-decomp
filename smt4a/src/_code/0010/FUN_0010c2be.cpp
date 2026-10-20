@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002e7516(unsigned int, unsigned char [4]);
 int FUN_002e7526(int, unsigned char [4]);
-int FUN_002eb5e8(unsigned char [8], int);
+int constructObj00559344(unsigned char [8], int);
 int FUN_002f07b8(...);
 int FUN_002f5d1e(void);
 int FUN_002f5f98(...);
@@ -24,7 +24,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002e7516. */
 /* Supplied declaration required: FUN_002e7526. */
-/* Supplied declaration required: FUN_002eb5e8. */
+/* Supplied declaration required: constructObj00559344. */
 extern int FUN_002f035c(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002f07b8. */
 /* Supplied declaration required: FUN_002f5d1e. */
@@ -104,7 +104,7 @@ void FUN_0010c2be(unsigned int param_1,int param_2)
       } while (temp_v2 < 0x10);
     }
     if ((*(unsigned short *)(param_2 + 0x3c) & 0xf) == 1) {
-      FUN_002eb5e8(temp_v10,0);
+      constructObj00559344(temp_v10,0);
       FUN_002f07b8(temp_v9,param_2);
       temp_v1 = FUN_002f035c(temp_v9,temp_v10);
       if (temp_v1 == 0) {

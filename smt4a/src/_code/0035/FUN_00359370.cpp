@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001767a4(unsigned int, unsigned int);
 int FUN_0018e9d8(unsigned int);
-int FUN_003594f8(unsigned int);
+int settings5BClearFlags(unsigned int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern unsigned int DAT_005b3cc4; /* 0x5b3cc4 */
 
 /* Supplied declaration required: FUN_001767a4. */
 /* Supplied declaration required: FUN_0018e9d8. */
-/* Supplied declaration required: FUN_003594f8. */
+/* Supplied declaration required: settings5BClearFlags. */
 extern int asdModelGetSlotArray0(int);
 
 
@@ -97,11 +97,11 @@ void FUN_00359370(int param_1,int param_2)
   }
   if (param_2 == 0) {
     temp_v2 = 1;
-    FUN_003594f8(temp_v2);
+    settings5BClearFlags(temp_v2);
   }
   else if (param_2 == 1) {
     temp_v2 = 2;
-    FUN_003594f8(temp_v2);
+    settings5BClearFlags(temp_v2);
   }
   temp_v1 = *(int *)((&DAT_005b3cb8)[param_2] + 4);
   if (param_2 == 0) {

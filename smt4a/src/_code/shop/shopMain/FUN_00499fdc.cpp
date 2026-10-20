@@ -8,19 +8,19 @@ int FUN_001641c4(void);
 int FUN_00184528(int, int);
 int FUN_0019de98(int, unsigned int);
 int FUN_00224880(unsigned int);
-int FUN_003491e8(void);
-int FUN_0037c8b4(int);
+int obj04Finish(void);
+int panelSetTarget(int);
 int FUN_0038b010(int);
 int FUN_003a76a8(int);
 int FUN_00496a0c(int, int);
 int FUN_0049706c(int);
 int FUN_00498494(int, int);
 int FUN_00498994(int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
-int FUN_004d0458(void);
-int FUN_004d06e4(int);
-int FUN_004d097c(unsigned int);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
+int sendEvent1000210(void);
+int releaseEntriesA(int);
+int releaseEntriesB(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -33,8 +33,8 @@ typedef struct {
 extern int FUN_001ba3d0(unsigned short);
 /* Supplied declaration required: FUN_00224880. */
 extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_003491e8. */
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: obj04Finish. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0038b010. */
 /* Supplied declaration required: FUN_003a76a8. */
 extern int FUN_0047fe44(unsigned short);
@@ -45,16 +45,16 @@ extern int FUN_00498408(int, unsigned short);
 /* Supplied declaration required: FUN_00498494. */
 /* Supplied declaration required: FUN_00498994. */
 extern int FUN_004cfe4c(int);
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
-/* Supplied declaration required: FUN_004d0458. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
+/* Supplied declaration required: sendEvent1000210. */
 extern int FUN_004d0464(void);
 extern int FUN_004d0494(void);
 extern int FUN_004d04f4(void);
 extern int FUN_004d0554(void);
 extern int FUN_004d0584(void);
-/* Supplied declaration required: FUN_004d06e4. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesA. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_00499fdc(int param_1)
@@ -80,7 +80,7 @@ void FUN_00499fdc(int param_1)
   else {
     FUN_003a76a8(0);
     FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
-    FUN_0037c8b4(0);
+    panelSetTarget(0);
     temp_v1 = FUN_004954e8(param_1);
     FUN_00498994(param_1);
     if ((0 < *(int *)(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb68)) &&
@@ -94,7 +94,7 @@ void FUN_00499fdc(int param_1)
         (((temp_v2 = FUN_00498408(param_1,temp_v0), temp_v2 == 0 ||
           (temp_v2 = FUN_001ba3d0(temp_v0), temp_v2 >= 2)) && (temp_v2 = FUN_0047fe44(temp_v0), temp_v2 == 0))))
        && (temp_v1 != 0)) {
-      FUN_004d044c();
+      sendEvent100020E();
       FUN_00498494(param_1,0xd);
       return;
     }
@@ -102,30 +102,30 @@ void FUN_00499fdc(int param_1)
     if ((temp_v1 != 0) || (temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v1 == 6)) {
       *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f78);
       FUN_00496a0c(param_1,1);
-      FUN_004d0458();
+      sendEvent1000210();
       return;
     }
     temp_v1 = FUN_004d0494();
     if ((temp_v1 != 0) || (temp_v1 = FUN_00284140((int)*(short *)(param_1 + 0x1602e)), temp_v1 == 6)) {
       *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f7c);
       FUN_00496a0c(param_1,1);
-      FUN_004d0458();
+      sendEvent1000210();
       return;
     }
     temp_v1 = FUN_004d0554();
     if (temp_v1 != 0) {
       FUN_0038b010(0);
-      FUN_004d0434();
+      sendEvent100020F();
       FUN_00184528(param_1 + 0x3cc,1);
-      FUN_003491e8();
+      obj04Finish();
       if (*(char *)(param_1 + 0x18) == '\x01') {
         *(unsigned int *)(param_1 + 0x16040) = 1;
       }
       else {
         *(unsigned int *)(param_1 + 0x16040) = 2;
       }
-      FUN_004d097c(*(unsigned int *)(param_1 + 0xb3c));
-      FUN_004d06e4(param_1 + 0xb08);
+      releaseEntriesB(*(unsigned int *)(param_1 + 0xb3c));
+      releaseEntriesA(param_1 + 0xb08);
       temp_v1 = 0;
       if (temp_v1 < *(short *)(param_1 + 0x16030)) {
         do {
@@ -138,13 +138,13 @@ void FUN_00499fdc(int param_1)
     else {
       temp_v1 = FUN_004d04f4();
       if (temp_v1 != 0) {
-        FUN_004d044c();
+        sendEvent100020E();
         FUN_0049706c(param_1);
         return;
       }
       temp_v1 = FUN_004d0584();
       if (temp_v1 != 0) {
-        FUN_004d0434();
+        sendEvent100020F();
         return;
       }
     }

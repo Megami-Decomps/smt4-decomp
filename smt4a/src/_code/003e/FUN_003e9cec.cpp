@@ -9,7 +9,7 @@ int sysMemClear(...);
 int FUN_002e6dd4(...);
 int FUN_004bd274(...);
 int FUN_004bd294(...);
-int FUN_0050d71c(...);
+int clearTwoWords(...);
 
 typedef struct fn_003e9cec_arg2 fn_003e9cec_arg2;
 struct fn_003e9cec_arg2 {
@@ -41,7 +41,7 @@ extern unsigned int FUN_0017760c(fn_003e9cec_arg2 *);
 extern unsigned short FUN_004bca20(fn_003e9cec_arg2 *);
 /* Supplied declaration required: FUN_004bd274. */
 /* Supplied declaration required: FUN_004bd294. */
-/* Supplied declaration required: FUN_0050d71c. */
+/* Supplied declaration required: clearTwoWords. */
 
 
 void FUN_003e9cec(unsigned int param_1,unsigned char *param_2,fn_003e9cec_arg2 *param_3,int param_4)
@@ -106,9 +106,9 @@ void FUN_003e9cec(unsigned int param_1,unsigned char *param_2,fn_003e9cec_arg2 *
   *(unsigned short *)(param_2 + 0x114) = 0;
   *(unsigned short *)(param_2 + 0x116) = param_3->field_0x64;
   *(unsigned int *)(param_2 + 0x228) = 0;
-  FUN_0050d71c(param_2 + 0x1be);
-  FUN_0050d71c(param_2 + 0x1c6);
-  FUN_0050d71c(param_2 + 0x1ce);
+  clearTwoWords(param_2 + 0x1be);
+  clearTwoWords(param_2 + 0x1c6);
+  clearTwoWords(param_2 + 0x1ce);
   FUN_002e6dd4(param_2 + 0x1d6,0x50);
   temp_v8 = 0;
   do {

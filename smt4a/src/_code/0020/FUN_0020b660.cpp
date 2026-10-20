@@ -1,61 +1,44 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184c00(int, int, int);
-int FUN_002c2160(int);
-int FUN_0033e164(void);
+void FUN_00184c00(u8 *member, s32 a, s32 b);
+void FUN_002c2160(s32 mode);
+s32 FUN_0033e164(void);
+s32 FUN_0038b568(void);
 
-typedef struct fn_0020b660_arg0 fn_0020b660_arg0;
-struct fn_0020b660_arg0 {
-    unsigned char pad_0x0[0x20];
-    undefined4 field_0x20; /* +0x20 */
-    unsigned char pad_0x24[0x34];
-    undefined4 field_0x58; /* +0x58 */
-    undefined2 field_0x5c; /* +0x5c */
-    undefined2 field_0x5e; /* +0x5e */
-    undefined1 field_0x60; /* +0x60 */
-    unsigned char pad_0x61[0x26];
-    undefined1 field_0x87; /* +0x87 */
-    unsigned char pad_0x88[0x2];
-    undefined1 field_0x8a; /* +0x8a */
-};
+typedef struct Game {
+    /* 0x0000 */ u8 unk0000[0x14];
+    /* 0x0014 */ u32 unk14;
+    /* 0x0018 */ u8 unk18[4];
+    /* 0x001C */ s32 state;
+    /* 0x0020 */ u32 unk20;
+    /* 0x0024 */ u8 unk24[4];
+    /* 0x0028 */ s32 previousState;
+    /* 0x002C */ u8 unk2C[0x1608];
+    /* 0x1634 */ u8 member1634[1];
+} Game;
+extern Game *DAT_0057f108;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int DAT_0057f108; /* 0x57f108 */
-
-/* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_002c2160. */
-/* Supplied declaration required: FUN_0033e164. */
-extern int FUN_0038b568(void);
-
-
-void FUN_0020b660(fn_0020b660_arg0 *param_1)
-
+/* Switches the game to `newState`, remembering the previous one; state 0x33 runs its set-up, and state 0x55 falls back to 0x56 when FUN_0038b568 reports 0. */
+void FUN_0020b660(s32 newState)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0057f108;
-  *(unsigned int *)(DAT_0057f108 + 0x28) = *(unsigned int *)(DAT_0057f108 + 0x1c);
-  *(fn_0020b660_arg0 **)(temp_v0 + 0x1c) = param_1;
-  *(unsigned int *)(temp_v0 + 0x20) = 0;
-  *(unsigned int *)(temp_v0 + 0x14) = 0;
-  if (param_1 == (fn_0020b660_arg0 *)0x33) {
-    FUN_0033e164();
-    FUN_002c2160(2);
-    FUN_00184c00(temp_v0 + 0x1634,7,0);
-    return;
-  }
-  if ((param_1 == (fn_0020b660_arg0 *)0x55) && (temp_v1 = FUN_0038b568(), temp_v1 == 0)) {
-    *(unsigned int *)(temp_v0 + 0x1c) = 0x56;
-  }
-  return;
+    Game *game;
+
+    game = DAT_0057f108;
+    DAT_0057f108->previousState = DAT_0057f108->state;
+    game->state = newState;
+    game->unk20 = 0;
+    game->unk14 = 0;
+    if (newState == 0x33) {
+        FUN_0033e164();
+        FUN_002c2160(2);
+        FUN_00184c00(game->member1634, 7, 0);
+        return;
+    }
+    if ((newState == 0x55) && (FUN_0038b568() == 0)) {
+        game->state = 0x56;
+    }
 }
 
 } /* extern "C" */

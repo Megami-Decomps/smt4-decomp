@@ -1,16 +1,18 @@
-#include "romwright_types.h"
+#include "shard/Shard0045.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct LightObj {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ VIface *allocator;
+    /* 0x008 */ u8 unk008[0x140];
+    /* 0x148 */ u32 original;
+} LightObj;
 
-void nw_gfx_Light_DestroyOriginalValue(int param_1)
-
+void nw_gfx_Light_DestroyOriginalValue(LightObj *light)
 {
-  (**(romwright_code **)(**(int **)(param_1 + 4) + 0xc))
-            (*(int **)(param_1 + 4),*(unsigned int *)(param_1 + 0x148));
-  *(unsigned int *)(param_1 + 0x148) = 0;
-  return;
+    light->allocator->vtbl->slot3(light->allocator, light->original);
+    light->original = 0;
 }
 
 } /* extern "C" */

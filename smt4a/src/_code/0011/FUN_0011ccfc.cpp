@@ -38,7 +38,7 @@ extern unsigned int DAT_00594a44; /* 0x594a44 */
 extern int FUN_002e760a(unsigned int);
 extern unsigned int FUN_002e7614(int, unsigned int);
 extern unsigned int *FUN_002f8574(fn_0011ccfc_arg0 *, unsigned int);
-extern unsigned int FUN_00311092(unsigned int);
+extern unsigned int objectNew40(unsigned int);
 /* Supplied declaration required: FUN_003110a4. */
 
 
@@ -64,11 +64,11 @@ FUN_0011ccfc(fn_0011ccfc_arg0 *param_1,unsigned int param_2,unsigned int param_3
   puVar1[0x23] = param_5;
   puVar1[0x25] = param_8;
   temp_v2 = puVar1[-0x69];
-  temp_v0 = FUN_00311092(puVar1[-99]);
+  temp_v0 = objectNew40(puVar1[-99]);
   puVar1[-0x12] = temp_v2;
   puVar1[-0x13] = temp_v0;
   temp_v2 = puVar1[-0x69];
-  temp_v0 = FUN_00311092(puVar1[-99]);
+  temp_v0 = objectNew40(puVar1[-99]);
   puVar1[0x12] = temp_v2;
   puVar1[0x11] = temp_v0;
   temp_v1 = FUN_002e760a(0x20);

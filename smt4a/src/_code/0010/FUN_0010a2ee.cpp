@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_002ee7e8(unsigned int);
-extern unsigned int *FUN_002f32d4(int, unsigned int);
+extern unsigned int *arrayElementAddress_002f32d4(int, unsigned int);
 
 
 void FUN_0010a2ee(int param_1)
@@ -17,16 +17,16 @@ void FUN_0010a2ee(int param_1)
   int temp_v2;
   
   temp_v1 = param_1 + 0x114;
-  puVar3 = (unsigned int *)FUN_002f32d4(temp_v1,0);
+  puVar3 = (unsigned int *)arrayElementAddress_002f32d4(temp_v1,0);
   temp_v2 = FUN_002ee7e8(*puVar3);
   if (temp_v2 != 0) {
-    puVar3 = (unsigned int *)FUN_002f32d4(temp_v1,1);
+    puVar3 = (unsigned int *)arrayElementAddress_002f32d4(temp_v1,1);
     temp_v2 = FUN_002ee7e8(*puVar3);
     if (temp_v2 != 0) {
-      puVar3 = (unsigned int *)FUN_002f32d4(temp_v1,2);
+      puVar3 = (unsigned int *)arrayElementAddress_002f32d4(temp_v1,2);
       temp_v2 = FUN_002ee7e8(*puVar3);
       if (temp_v2 != 0) {
-        puVar3 = (unsigned int *)FUN_002f32d4(temp_v1,3);
+        puVar3 = (unsigned int *)arrayElementAddress_002f32d4(temp_v1,3);
         temp_v1 = FUN_002ee7e8(*puVar3);
         if (temp_v1 != 0) {
           temp_v0 = 1;

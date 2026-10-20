@@ -1,19 +1,16 @@
-#include "romwright_types.h"
+#include "shard/PadState.h"
 
 extern "C" {
 
-extern int FUN_002b63ac(void);
+extern PadState *FUN_002b63ac(void);
 
-
-void FUN_00334018(unsigned int param_1)
-
+/* Sets bit `bit` of the pad's halfword at +0x72. */
+void FUN_00334018(u32 bit)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002b63ac();
-  unsigned short v = *(unsigned short *)(temp_v0 + 0x72);
-  *(unsigned short *)(temp_v0 + 0x72) = v | (unsigned short)(1 << (param_1 & 0xff));
-  return;
+    PadState *pad = FUN_002b63ac();
+    u16 value = pad->unk72;
+
+    pad->unk72 = value | (u16)(1 << (bit & 0xff));
 }
 
 } /* extern "C" */

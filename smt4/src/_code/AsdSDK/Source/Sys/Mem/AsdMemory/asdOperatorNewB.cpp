@@ -1,5 +1,5 @@
-/* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the allocation. */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -7,6 +7,7 @@ void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFron
 /* operator new: `size` bytes from the main heap. */
 void *asdOperatorNewB(u32 size)
 {
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\Mem\\AsdMemory.cpp", 189);
     return asdMemoryAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, size, 1);
 }
 

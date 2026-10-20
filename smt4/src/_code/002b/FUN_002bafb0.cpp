@@ -12,7 +12,7 @@ extern unsigned int *DAT_004e9e34; /* 0x4e9e34 */
 extern unsigned char DAT_004e9e38; /* 0x4e9e38 */
 extern unsigned int DAT_004e9e3c; /* 0x4e9e3c */
 
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 unsigned int * FUN_002bafb0(void)
@@ -20,7 +20,7 @@ unsigned int * FUN_002bafb0(void)
 {
   int temp_v0;
   
-  if (((DAT_0047233c & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_0047233c), temp_v0 != 0)) {
+  if (((DAT_0047233c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_0047233c), temp_v0 != 0)) {
     DAT_004e9e28 = 0;
     DAT_004e9e2c = 0;
     DAT_004e9e30 = (unsigned int *)&DAT_004e9e30;

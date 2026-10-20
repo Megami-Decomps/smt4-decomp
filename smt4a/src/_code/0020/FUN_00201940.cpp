@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s32 count;
+} Holder;
 
-void FUN_00201940(int param_1)
-
+/* Increments the word at 0x1C. */
+void FUN_00201940(Holder *object)
 {
-  *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-  return;
+    object->count = object->count + 1;
 }
 
 } /* extern "C" */

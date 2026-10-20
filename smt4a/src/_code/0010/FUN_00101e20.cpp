@@ -1,12 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct IntArray {
+    /* 0x00 */ s32 *data;
+} IntArray;
 
-int FUN_00101e20(int *param_1,int param_2)
-
+/* Returns the address of element `index`. */
+s32 *FUN_00101e20(IntArray *array, s32 index)
 {
-  return *param_1 + param_2 * 4;
+    return array->data + index;
 }
 
 } /* extern "C" */

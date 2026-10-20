@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Block {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 size;
+} Block;
 
-int FUN_00129010(int param_1)
-
+/* Address just past the block's 8-byte header and `size` payload bytes. */
+s32 FUN_00129010(Block *block)
 {
-  return param_1 + 8 + *(int *)(param_1 + 0x18);
+    return (s32)block + 8 + block->size;
 }
 
 } /* extern "C" */

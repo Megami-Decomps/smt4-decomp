@@ -52,7 +52,7 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 void FUN_004ff4e0(int param_1,float *param_2,int param_3,int param_4,unsigned int param_5)
@@ -152,7 +152,7 @@ void FUN_004ff4e0(int param_1,float *param_2,int param_3,int param_4,unsigned in
   pfStack_30 = param_2;
   iStack_2c = param_3;
   temp_v33 = param_4;
-  if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c30), temp_v0 != 0)) {
+  if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c30), temp_v0 != 0)) {
     DAT_0064c088 = 0;
     DAT_0064c08c = 0;
     DAT_0064c090 = 0;

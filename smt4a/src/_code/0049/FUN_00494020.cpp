@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0018719c(...);
 
 /* Supplied declaration required: FUN_0018719c. */
-extern int FUN_00418584(short);
+extern int partyEntryFlagsBit3(short);
 
 
 unsigned int FUN_00494020(int param_1)
@@ -37,7 +37,7 @@ unsigned int FUN_00494020(int param_1)
       if (temp_v0 == 0) {
         return 1;
       }
-      temp_v1 = FUN_00418584(temp_v0);
+      temp_v1 = partyEntryFlagsBit3(temp_v0);
       if (temp_v1 != 0) {
         return 2;
       }
@@ -52,7 +52,7 @@ unsigned int FUN_00494020(int param_1)
   if (temp_v0 == 0) {
     return 2;
   }
-  temp_v1 = FUN_00418584(temp_v0);
+  temp_v1 = partyEntryFlagsBit3(temp_v0);
   if (temp_v1 != 0) {
     return 2;
   }

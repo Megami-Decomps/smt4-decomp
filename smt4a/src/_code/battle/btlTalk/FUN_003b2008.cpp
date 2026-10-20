@@ -16,7 +16,7 @@ extern int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_001b4a90. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
-extern unsigned int FUN_004c97b4(int);
+extern unsigned int ptrAt8Reset(int);
 
 
 unsigned int FUN_003b2008(void)
@@ -39,7 +39,7 @@ unsigned int FUN_003b2008(void)
   
   piVar10 = aiStack_428;
   temp_v0 = scrGetArg(0);
-  temp_v1 = FUN_004c97b4(g_btlTalk);
+  temp_v1 = ptrAt8Reset(g_btlTalk);
   temp_v2 = dataTableGetCount();
   temp_v3 = dataTableGetEntries(temp_v1);
   FUN_001b4a90(aiStack_428,0x200,0xffffffff);

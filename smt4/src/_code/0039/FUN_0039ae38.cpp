@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002314d0(void);
+int dataTable2bSub1GetCount(void);
 int MapNaviTable_GetCategoryCount(void);
 
-extern int FUN_00231494(int *, unsigned int);
-/* Supplied declaration required: FUN_002314d0. */
+extern int dataTable2bSub1GetRecord(int *, unsigned int);
+/* Supplied declaration required: dataTable2bSub1GetCount. */
 /* Supplied declaration required: MapNaviTable_GetCategoryCount. */
 extern int MapNaviTable_GetCategoryRecord(int *, unsigned int);
 
@@ -61,8 +61,8 @@ void FUN_0039ae38(int param_1,int param_2,int param_3,int param_4,int param_5,un
 LAB_0039aec4:
   temp_v0 = *(char *)(temp_v1 + 4);
   piVar2 = &iStack_28;
-  FUN_002314d0();
-  temp_v3 = FUN_00231494(&iStack_28,0);
+  dataTable2bSub1GetCount();
+  temp_v3 = dataTable2bSub1GetRecord(&iStack_28,0);
   temp_v2 = 0;
   if (temp_v2 < (int)piVar2) {
     do {

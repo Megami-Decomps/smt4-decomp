@@ -7,10 +7,10 @@ extern "C" {
 int jobStop(unsigned int, int);
 int FUN_00280328(unsigned int, int, int);
 int FUN_002ea508(unsigned int, unsigned char *);
-int FUN_00317464(...);
+int asdListBoxSetIntItem(...);
 int FUN_00317508(unsigned int, int);
 int asdListBoxAddItems(void);
-int FUN_0032c450(...);
+int asdListBoxSetToggleItem(...);
 int FUN_003592dc(unsigned int);
 
 typedef struct fn_004d4ba4_arg1 fn_004d4ba4_arg1;
@@ -70,10 +70,10 @@ extern unsigned char LAB_004d4f38; /* 0x4d4f38 */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
-/* Supplied declaration required: FUN_00317464. */
+/* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: FUN_00317508. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0032c450. */
+/* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: FUN_003592dc. */
 
 
@@ -95,33 +95,33 @@ void FUN_004d4ba4(int param_1,fn_004d4ba4_arg1 *param_2)
   asdListBoxAddItems();
   FUN_00317508(*(unsigned int *)(param_1 + 0x10),1);
   FUN_002ea508(*(unsigned int *)(param_1 + 0x10),&LAB_004d4f38);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),1);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),2);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),3,*(unsigned int *)&param_2->field_0x23b0,0,9,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),4,*(unsigned int *)&param_2->field_0x23b4,0,2,0);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),5);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),6);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),7);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),8,*(unsigned int *)&param_2->field_0x23c4,0,999,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),9,*(unsigned int *)&param_2->field_0x23c8,0,4,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),10,*(unsigned int *)&param_2->field_0x23cc,0,0x3f,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),0xb,*(unsigned int *)&param_2->field_0x23d0,0,2,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),0xc,*(unsigned int *)&param_2->field_0x23d4,0,8,0);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0xd);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0xe);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),0xf,*(unsigned int *)&param_2->field_0x23e0,0,2,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),0x10,*(unsigned int *)&param_2->field_0x23e4,0,2,0);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0x11);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),0x12,*(unsigned int *)&param_2->field_0x23ec,0,3,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),0x13,*(unsigned int *)&param_2->field_0x23f0,0,2,0);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0x14);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0x15);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0x16);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0x17);
-  FUN_0032c450(*(unsigned int *)(param_1 + 0x10),0x18);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),0x19,*(unsigned int *)&param_2[1].field_0x8,0,9,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),0x1a,*(unsigned int *)&param_2[1].field_0xc,0,2,0);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),1);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),2);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),3,*(unsigned int *)&param_2->field_0x23b0,0,9,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),4,*(unsigned int *)&param_2->field_0x23b4,0,2,0);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),5);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),6);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),7);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,*(unsigned int *)&param_2->field_0x23c4,0,999,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),9,*(unsigned int *)&param_2->field_0x23c8,0,4,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),10,*(unsigned int *)&param_2->field_0x23cc,0,0x3f,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xb,*(unsigned int *)&param_2->field_0x23d0,0,2,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xc,*(unsigned int *)&param_2->field_0x23d4,0,8,0);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0xd);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0xe);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xf,*(unsigned int *)&param_2->field_0x23e0,0,2,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x10,*(unsigned int *)&param_2->field_0x23e4,0,2,0);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x11);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x12,*(unsigned int *)&param_2->field_0x23ec,0,3,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x13,*(unsigned int *)&param_2->field_0x23f0,0,2,0);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x14);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x15);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x16);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x17);
+  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x18);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x19,*(unsigned int *)&param_2[1].field_0x8,0,9,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1a,*(unsigned int *)&param_2[1].field_0xc,0,2,0);
   return;
 }
 

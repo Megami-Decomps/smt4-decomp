@@ -19,7 +19,7 @@ extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
-extern int FUN_004ffb58(int);
+extern int slots4FGetActiveValue(int);
 
 
 void FUN_0033def0(char *param_1)
@@ -61,7 +61,7 @@ void FUN_0033def0(char *param_1)
   }
   FUN_003fd76c(temp_v2,param_1 + 0xc);
   FUN_003fdb18(temp_v2);
-  temp_v1 = FUN_004ffb58(temp_v2);
+  temp_v1 = slots4FGetActiveValue(temp_v2);
   if (temp_v1 == *(int *)(param_1 + 0x1c)) {
     return;
   }

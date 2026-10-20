@@ -1,15 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Triple {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 a;
+    /* 0x3C */ u32 b;
+    /* 0x40 */ u32 c;
+} Triple;
 
-void FUN_001913e4(int param_1)
-
+/* Clears the three words at 0x38, 0x3C and 0x40. */
+void FUN_001913e4(Triple *object)
 {
-  *(unsigned int *)(param_1 + 0x38) = 0;
-  *(unsigned int *)(param_1 + 0x3c) = 0;
-  *(unsigned int *)(param_1 + 0x40) = 0;
-  return;
+    object->a = 0;
+    object->b = 0;
+    object->c = 0;
 }
 
 } /* extern "C" */

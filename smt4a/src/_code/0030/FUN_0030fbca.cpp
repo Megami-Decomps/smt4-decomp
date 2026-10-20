@@ -1,17 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_0030fbca(unsigned char *param_1,int param_2)
-
+/* Sets or clears bit 7 of the byte `*flags`. */
+void FUN_0030fbca(u8 *flags, s32 enable)
 {
-  if (param_2 != 0) {
-    *param_1 = *param_1 | 0x80;
-    return;
-  }
-  *param_1 = *param_1 & 0x7f;
-  return;
+    if (enable != 0) {
+        *flags = *flags | 0x80;
+        return;
+    }
+    *flags = *flags & 0x7F;
 }
 
 } /* extern "C" */

@@ -13,7 +13,7 @@ extern int FUN_001b347c(void);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_0035dd74. */
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 void FUN_004db07c(unsigned int param_1,int param_2,unsigned int *param_3)
@@ -49,7 +49,7 @@ void FUN_004db07c(unsigned int param_1,int param_2,unsigned int *param_3)
           do {
             if (-1 < *(char *)(temp_v0 + temp_v3 + 0x1c88)) {
               temp_v1 = FUN_001ab854();
-              temp_v2 = FUN_004bd340(temp_v1,10);
+              temp_v2 = bitsAt60Test(temp_v1,10);
               if ((temp_v2 == 0) && (*(short *)(temp_v1 + 0x62) == *(short *)(temp_v5 + 2))) {
                 *(unsigned short *)((int)param_3 + temp_v4 * 2) = 1;
                 goto LAB_004db170;

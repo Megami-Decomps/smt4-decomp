@@ -19,7 +19,7 @@ extern unsigned char DAT_0057f588; /* 0x57f588 */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184b80. */
 extern unsigned int *FUN_001ab888(void);
-extern unsigned int FUN_00348cd8(void);
+extern unsigned int gameDataBlocks2GetWord4(void);
 
 
 unsigned int FUN_0037c8e4(unsigned char param_1,int param_2)
@@ -34,7 +34,7 @@ unsigned int FUN_0037c8e4(unsigned char param_1,int param_2)
   *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x8e) = 1;
   *(unsigned char *)(temp_v0 + 0x8d) = 1;
   if (param_2 != 0) {
-    temp_v1 = FUN_00348cd8();
+    temp_v1 = gameDataBlocks2GetWord4();
     *(unsigned int *)(temp_v0 + 0x7c) = temp_v1;
     *(unsigned int *)(temp_v0 + 0x88) = temp_v1;
   }

@@ -11,7 +11,7 @@ extern int FUN_001ab854(int);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_001b4a90. */
 extern int FUN_004bd0d8(int);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 extern int FUN_004bd730(void);
 
 
@@ -49,8 +49,8 @@ unsigned int FUN_003ff888(void)
           temp_v1 = FUN_001ab854((int)acStack_30[temp_v0]);
           if ((((temp_v1 != 0) && (temp_v2 = FUN_004bd730(), temp_v2 != 0)) &&
               (temp_v2 = FUN_004bd0d8(temp_v1), temp_v2 == 0)) &&
-             ((temp_v2 = FUN_004bd340(temp_v1,1), temp_v2 == 0 &&
-              (temp_v1 = FUN_004bd340(temp_v1,10), temp_v1 == 0)))) {
+             ((temp_v2 = bitsAt60Test(temp_v1,1), temp_v2 == 0 &&
+              (temp_v1 = bitsAt60Test(temp_v1,10), temp_v1 == 0)))) {
             return 1;
           }
           temp_v0 = temp_v0 + 1;

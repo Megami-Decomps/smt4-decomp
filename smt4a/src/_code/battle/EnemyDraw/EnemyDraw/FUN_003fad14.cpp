@@ -83,12 +83,12 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int, int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001aff14. */
 /* Supplied declaration required: FUN_0020cb74. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -184,7 +184,7 @@ LAB_003fade8:
                 if (temp_v0 != '\x01') {
                   if (temp_v0 != '\x02') {
                     if (temp_v0 == '\x03') {
-                      temp_v1 = FUN_00169294(5,0,1,temp_v1);
+                      temp_v1 = packNibblesAndByte(5,0,1,temp_v1);
                       piVar6 = (int *)(temp_v2 + 0x12b8);
                       temp_v3 = piVar6[*piVar6 + 2];
                       piVar6[*piVar6 + 2] = temp_v1;
@@ -195,7 +195,7 @@ LAB_003fade8:
                     }
                   }
                   else {
-                    temp_v1 = FUN_00169294(6,1,2,temp_v1);
+                    temp_v1 = packNibblesAndByte(6,1,2,temp_v1);
                     piVar6 = (int *)(temp_v2 + 0x12b8);
                     temp_v3 = piVar6[*piVar6 + 2];
                     piVar6[*piVar6 + 2] = temp_v1;
@@ -206,7 +206,7 @@ LAB_003fade8:
                   }
                 }
                 else {
-                  temp_v1 = FUN_00169294(6,1,0,temp_v1);
+                  temp_v1 = packNibblesAndByte(6,1,0,temp_v1);
                   piVar6 = (int *)(temp_v2 + 0x12b8);
                   temp_v3 = piVar6[*piVar6 + 2];
                   piVar6[*piVar6 + 2] = temp_v1;
@@ -217,7 +217,7 @@ LAB_003fade8:
                 }
               }
               else {
-                temp_v1 = FUN_00169294(6,7,0,temp_v1);
+                temp_v1 = packNibblesAndByte(6,7,0,temp_v1);
                 piVar6 = (int *)(temp_v2 + 0x12b8);
                 temp_v3 = piVar6[*piVar6 + 2];
                 piVar6[*piVar6 + 2] = temp_v1;
@@ -238,7 +238,7 @@ LAB_003fade8:
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v18 = temp_v4;
                 if (temp_v36 != 0) {
-                  if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = FUN_002eba64(&DAT_005c4c2c), temp_v2 != 0)
+                  if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v2 != 0)
                      ) {
                     DAT_0064c058 = (unsigned int)temp_v15;
                     DAT_0064c054 = (unsigned int)temp_v13;

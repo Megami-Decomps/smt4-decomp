@@ -25,7 +25,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014bef4. */
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int FUN_0018719c(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -123,7 +123,7 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
         temp_v7 = temp_v7 + temp_v8;
         if (temp_v7 != 0) {
           *param_4 = temp_v7;
-          temp_v20 = FUN_0015688c();
+          temp_v20 = saveSlotFindSelected();
           if (temp_v20 != 0) {
             temp_v21 = (unsigned char *)asStack_1e0;
             temp_v6 = dataTableGet(0x42,0);

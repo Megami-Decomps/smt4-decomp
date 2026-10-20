@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct IndexHolder {
+    /* 0x000 */ u8 unk000[0x108];
+    /* 0x108 */ s32 index;
+} IndexHolder;
 
-unsigned int FUN_0010da40(int param_1)
-
+/* Returns 1 when the index is in 1..299. */
+u32 FUN_0010da40(IndexHolder *object)
 {
-  if (*(int *)(param_1 + 0x108) - 1U < 299) {
-    return 1;
-  }
-  return 0;
+    if ((u32)(object->index - 1) < 299) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

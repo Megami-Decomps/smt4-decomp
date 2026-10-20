@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0030bf64(...);
-int FUN_0030bf96(...);
+int rbTreeRotateRight_0030bf64(...);
+int rbTreeRotateLeft_0030bf96(...);
 
 typedef struct fn_0030be2a_arg1 fn_0030be2a_arg1;
 struct fn_0030be2a_arg1 {
@@ -27,8 +27,8 @@ typedef struct {
 extern int FUN_002ef00c(char *, int);
 extern char *FUN_00300690(fn_0030be2a_arg1 *);
 extern int FUN_0030bf3a(unsigned char *, int, int);
-/* Supplied declaration required: FUN_0030bf64. */
-/* Supplied declaration required: FUN_0030bf96. */
+/* Supplied declaration required: rbTreeRotateRight_0030bf64. */
+/* Supplied declaration required: rbTreeRotateLeft_0030bf96. */
 
 
 void FUN_0030be2a(unsigned int *param_1,fn_0030be2a_arg1 *param_2,int param_3,int param_4,int param_5)
@@ -84,12 +84,12 @@ void FUN_0030be2a(unsigned int *param_1,fn_0030be2a_arg1 *param_2,int param_3,in
       pcVar5 = *(char **)(*(int *)(pcVar4 + 4) + 0xc);
       if ((pcVar5 == (char *)0x0) || (*pcVar5 != '\0')) {
         if (*(char **)(pcVar4 + 0xc) == pcVar6) {
-          FUN_0030bf96(param_2,pcVar4);
+          rbTreeRotateLeft_0030bf96(param_2,pcVar4);
           pcVar6 = pcVar4;
         }
         **(unsigned char **)(pcVar6 + 4) = 1;
         **(unsigned char **)(*(int *)(pcVar6 + 4) + 4) = 0;
-        FUN_0030bf64(param_2,*(unsigned int *)(*(int *)(pcVar6 + 4) + 4));
+        rbTreeRotateRight_0030bf64(param_2,*(unsigned int *)(*(int *)(pcVar6 + 4) + 4));
       }
       else {
         *pcVar4 = '\x01';
@@ -106,12 +106,12 @@ void FUN_0030be2a(unsigned int *param_1,fn_0030be2a_arg1 *param_2,int param_3,in
       continue;
     }
     if (*(char **)(pcVar4 + 8) == pcVar6) {
-      FUN_0030bf64(param_2,pcVar4);
+      rbTreeRotateRight_0030bf64(param_2,pcVar4);
       pcVar6 = pcVar4;
     }
     **(unsigned char **)(pcVar6 + 4) = 1;
     **(unsigned char **)(*(int *)(pcVar6 + 4) + 4) = 0;
-    FUN_0030bf96(param_2,*(unsigned int *)(*(int *)(pcVar6 + 4) + 4));
+    rbTreeRotateLeft_0030bf96(param_2,*(unsigned int *)(*(int *)(pcVar6 + 4) + 4));
   } while( 1 );
 }
 

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00348d64(void);
+extern int gameDataBlockGetArea2D68(void);
 
 
 unsigned char FUN_003e4510(unsigned int param_1)
@@ -15,10 +15,10 @@ unsigned char FUN_003e4510(unsigned int param_1)
   unsigned char temp_v1;
   
   if (param_1 == 0x81 || param_1 == 0x80) {
-    temp_v0 = FUN_00348d64();
+    temp_v0 = gameDataBlockGetArea2D68();
     temp_v1 = ((unsigned int)*(unsigned char *)(temp_v0 + (param_1 >> 3)) & (1 << (param_1 & 7))) != 0;
     if (temp_v1) {
-      temp_v0 = FUN_00348d64();
+      temp_v0 = gameDataBlockGetArea2D68();
       pbVar2 = (unsigned char *)(temp_v0 + ((int)(param_1 + ((unsigned int)((int)param_1 >> 0x1f) >> 0x1d)) >> 3));
       *pbVar2 = *pbVar2 & ~(unsigned char)(1 << (((int)param_1 % 8) & 0xffU));
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0017fa3c(...);
-int FUN_002b90e6(...);
+int refIsNullOrZero(...);
 int FUN_002bb5a4(...);
 int FUN_002bd540(...);
 int asdTextureCreate(...);
@@ -51,7 +51,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 extern int FUN_002ae8e4(unsigned int, void *, unsigned int, unsigned int);
 extern int FUN_002ae98c(unsigned int, void *, unsigned int, unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002b90e6. */
+/* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002bd540. */
 /* Supplied declaration required: asdTextureCreate. */
@@ -157,7 +157,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
         puVar4 = temp_v7;
         temp_v10 = 0;
         temp_v11 = 0;
-        FUN_002b90e6(&temp_v10);
+        refIsNullOrZero(&temp_v10);
         puVar9 = temp_v5;
         while ((temp_v0 = FUN_002b90c8(puVar10,0x105,(unsigned int *)&temp_v10), temp_v0 != 0 &&
                (puVar3 = puVar9, FUN_002c618c(puVar9,puVar10,temp_v0,&temp_v10),

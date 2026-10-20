@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b90e6(...);
+int refIsNullOrZero(...);
 int FUN_002bb150(...);
 int FUN_002bb5a4(...);
 int asdMemoryAllocAligned(...);
@@ -37,7 +37,7 @@ extern unsigned int DAT_00465124; /* 0x465124 */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 extern int FUN_002b90c8(int *, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_002b90e6. */
+/* Supplied declaration required: refIsNullOrZero. */
 /* Supplied declaration required: FUN_002bb150. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
@@ -152,7 +152,7 @@ void asdFileThreadMain(void)
           temp_v7 = 0;
           uStack_38 = 1;
           piVar7 = piVar8 + 0xb;
-          FUN_002b90e6(&temp_v6);
+          refIsNullOrZero(&temp_v6);
           piVar2 = &temp_v2;
           while ((temp_v1 = FUN_002b90c8(piVar7,0x105,(unsigned int *)&temp_v6), temp_v1 != 0 &&
                  (puVar4 = (unsigned short *)piVar2, FUN_002c618c(piVar2,piVar7,temp_v1,&temp_v6),

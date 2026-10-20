@@ -18,7 +18,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0012e570. */
-extern int FUN_002ed902(int *, unsigned int *);
+extern int wordRefsEqual_002ed902(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030b108. */
 /* Supplied declaration required: FUN_0030b190. */
 
@@ -43,10 +43,10 @@ void FUN_002eda80(unsigned int *param_1,int param_2,int *param_3,int *param_4)
   iStack_20 = param_2;
   piStack_1c = param_3;
   temp_v5 = param_4;
-  temp_v0 = FUN_002ed902(param_3,(unsigned int *)&temp_v1);
+  temp_v0 = wordRefsEqual_002ed902(param_3,(unsigned int *)&temp_v1);
   if (temp_v0 != 0) {
     temp_v2 = *(unsigned int *)(param_2 + 0x10);
-    temp_v0 = FUN_002ed902(temp_v5,(unsigned int *)&temp_v2);
+    temp_v0 = wordRefsEqual_002ed902(temp_v5,(unsigned int *)&temp_v2);
     if ((temp_v0 != 0) && (*(int *)(param_2 + 0x14) != 0)) {
       FUN_0030b108(param_2,*(unsigned int *)(*(int *)(param_2 + 0x10) + 4));
       *(int *)(*(int *)(param_2 + 0x10) + 8) = *(int *)(param_2 + 0x10);

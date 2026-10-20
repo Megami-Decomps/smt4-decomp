@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0010acde(unsigned int, unsigned int, int);
 int FUN_0010aef6(int, unsigned int);
 int FUN_002eb164(unsigned char [8], int);
-int FUN_002eb5e8(...);
-int FUN_002eee88(...);
+int constructObj00559344(...);
+int arrayElementAddress_002eee88(...);
 int FUN_002eefc4(...);
 int FUN_002ef8f8(...);
 int FUN_002efcb8(...);
@@ -32,8 +32,8 @@ typedef struct {
 /* Supplied declaration required: FUN_0010acde. */
 /* Supplied declaration required: FUN_0010aef6. */
 /* Supplied declaration required: FUN_002eb164. */
-/* Supplied declaration required: FUN_002eb5e8. */
-/* Supplied declaration required: FUN_002eee88. */
+/* Supplied declaration required: constructObj00559344. */
+/* Supplied declaration required: arrayElementAddress_002eee88. */
 /* Supplied declaration required: FUN_002eefc4. */
 extern unsigned int FUN_002ef00c(unsigned char *, unsigned int);
 extern int FUN_002ef01c(unsigned int);
@@ -82,7 +82,7 @@ void FUN_002f07c2(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v16 = param_4;
   temp_v1 = FUN_002ef00c(temp_v7,param_3);
   temp_v2 = param_1 + 0x9c;
-  piVar4 = (int *)FUN_002eee88(temp_v2,temp_v16);
+  piVar4 = (int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
   temp_v3 = *piVar4;
   FUN_0010aef6(temp_v3,temp_v1);
   if ((temp_v3 != 0) && (temp_v4 = FUN_002efcb8(param_1,temp_v3), temp_v4 != 0)) {
@@ -93,17 +93,17 @@ void FUN_002f07c2(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     }
     FUN_002efcf2(temp_v9,temp_v3);
     temp_v1 = FUN_002ef00c(temp_v8,param_3);
-    puVar7 = (unsigned int *)FUN_002eee88(temp_v2,temp_v16);
+    puVar7 = (unsigned int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
     FUN_0010acde(*puVar7,temp_v1,param_1 + 0x340);
-    puVar7 = (unsigned int *)FUN_002eee88(temp_v2,temp_v16);
+    puVar7 = (unsigned int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
     FUN_002efcfc(&temp_v6,*puVar7);
     temp_v11 = temp_v6;
-    piVar4 = (int *)FUN_002eee88(temp_v2,temp_v16);
+    piVar4 = (int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
     temp_v3 = *piVar4;
     FUN_002efd12(temp_v3,&temp_v11);
-    temp_v1 = FUN_002eb5e8(temp_v8,2);
+    temp_v1 = constructObj00559344(temp_v8,2);
     temp_v1 = FUN_002efd2c(param_3,temp_v1);
-    FUN_002eb5e8(temp_v10,temp_v1);
+    constructObj00559344(temp_v10,temp_v1);
     temp_v4 = 0;
     do {
       if (temp_v3 == 0) break;
@@ -121,11 +121,11 @@ void FUN_002f07c2(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       }
       FUN_002efd60(&temp_v6);
       temp_v12 = temp_v6;
-      piVar4 = (int *)FUN_002eee88(temp_v2,temp_v16);
+      piVar4 = (int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
       temp_v3 = *piVar4;
       FUN_002efd12(temp_v3,&temp_v12);
     } while (temp_v4 < 2);
-    puVar7 = (unsigned int *)FUN_002eee88(temp_v2,temp_v16);
+    puVar7 = (unsigned int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
     FUN_002efdb4(*puVar7);
     FUN_002eefc4(param_1,temp_v16);
   }

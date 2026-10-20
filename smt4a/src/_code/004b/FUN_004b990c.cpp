@@ -13,15 +13,15 @@ int FUN_002a49e4(...);
 int FUN_002e5924(...);
 int FUN_0035c6ac(void);
 int FUN_004072b0(...);
-int FUN_00407360(...);
-int FUN_00407424(...);
+int linkSlotSetFlag1C(...);
+int linkSlotSetFlag20(...);
 int FUN_0040792c(...);
 int FUN_00407978(void);
 int FUN_00407ab0(...);
 int FUN_00407eb0(...);
 int FUN_004080bc(...);
-int FUN_004bb170(void);
-int FUN_004bb184(...);
+int dataTable33Entries(void);
+int dataTable33TypeCount(...);
 
 int asdMemFree(void);
 int FUN_0019f548(unsigned int);
@@ -36,12 +36,12 @@ int FUN_002c2160(int);
 int FUN_002c3398(int);
 int FUN_002e3328(int);
 int FUN_002e342c(unsigned char *, unsigned int);
-int FUN_0033099c(void);
-int FUN_003491e8(void);
-int FUN_00357ad8(void);
+int objectE0ResetFlags1040(void);
+int obj04Finish(void);
+int sub68OwnerCall4(void);
 int FUN_0035b1c0(void);
 int FUN_00363c58(int);
-int FUN_00368390(void);
+int clearFlags310To31F(void);
 int FUN_003b5064(void);
 int FUN_003b61ec(void);
 int FUN_003c91e8(void);
@@ -49,10 +49,10 @@ int FUN_003d54f8(int, int);
 int FUN_004b6bc4(int, int, unsigned int);
 int FUN_004b75d0(void);
 int FUN_004b7d88(int);
-int FUN_004ba66c(int);
-int FUN_004ba83c(int, int);
-int FUN_004bad28(int);
-int FUN_004bb020(int);
+int menu4CClearFlag84(int);
+int menu4CScrollToKind(int, int);
+int menu4CReset(int);
+int menu4CStartBlock74(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -96,20 +96,20 @@ extern int FUN_002802c8(void);
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e5924. */
-/* Supplied declaration required: FUN_0033099c. */
-/* Supplied declaration required: FUN_003491e8. */
-/* Supplied declaration required: FUN_00357ad8. */
+/* Supplied declaration required: objectE0ResetFlags1040. */
+/* Supplied declaration required: obj04Finish. */
+/* Supplied declaration required: sub68OwnerCall4. */
 /* Supplied declaration required: FUN_0035b1c0. */
 /* Supplied declaration required: FUN_0035c6ac. */
 /* Supplied declaration required: FUN_00363c58. */
-/* Supplied declaration required: FUN_00368390. */
+/* Supplied declaration required: clearFlags310To31F. */
 /* Supplied declaration required: FUN_003b5064. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_003c91e8. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_004072b0. */
-/* Supplied declaration required: FUN_00407360. */
-/* Supplied declaration required: FUN_00407424. */
+/* Supplied declaration required: linkSlotSetFlag1C. */
+/* Supplied declaration required: linkSlotSetFlag20. */
 /* Supplied declaration required: FUN_0040792c. */
 /* Supplied declaration required: FUN_00407978. */
 /* Supplied declaration required: FUN_00407ab0. */
@@ -118,14 +118,14 @@ extern int FUN_002802c8(void);
 /* Supplied declaration required: FUN_004b6bc4. */
 /* Supplied declaration required: FUN_004b75d0. */
 /* Supplied declaration required: FUN_004b7d88. */
-/* Supplied declaration required: FUN_004ba66c. */
+/* Supplied declaration required: menu4CClearFlag84. */
 extern int FUN_004ba698(int);
-extern int FUN_004ba790(int);
-/* Supplied declaration required: FUN_004ba83c. */
-/* Supplied declaration required: FUN_004bad28. */
-/* Supplied declaration required: FUN_004bb020. */
-/* Supplied declaration required: FUN_004bb170. */
-/* Supplied declaration required: FUN_004bb184. */
+extern int menu4CGetCurrentEntry(int);
+/* Supplied declaration required: menu4CScrollToKind. */
+/* Supplied declaration required: menu4CReset. */
+/* Supplied declaration required: menu4CStartBlock74. */
+/* Supplied declaration required: dataTable33Entries. */
+/* Supplied declaration required: dataTable33TypeCount. */
 extern unsigned short FUN_004cfe4c(int);
 
 
@@ -155,11 +155,11 @@ void FUN_004b990c(int param_1)
   case 0:
     FUN_00284f90(0);
     FUN_00261a14(0);
-    FUN_0033099c();
+    objectE0ResetFlags1040();
     FUN_002c2160(1);
     if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
       *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
-      FUN_003491e8();
+      obj04Finish();
     }
     *(unsigned char *)(param_1 + 0x1168) = 0;
     temp_v6 = *(int *)(param_1 + 0x2c) + 1;
@@ -194,7 +194,7 @@ void FUN_004b990c(int param_1)
     if (temp_v6 < 10) {
       return;
     }
-    FUN_004ba66c(param_1 + 0x9c);
+    menu4CClearFlag84(param_1 + 0x9c);
     FUN_002c3398(0);
     *(unsigned char *)(param_1 + 0xa88) = 1;
     *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
@@ -231,8 +231,8 @@ void FUN_004b990c(int param_1)
       }
       temp_v6 = FUN_00162e8c();
       *(unsigned short *)(temp_v6 + 0x22) = 0;
-      FUN_00368390();
-      FUN_00357ad8();
+      clearFlags310To31F();
+      sub68OwnerCall4();
       if (pcVar4[2] != '\0') {
         DAT_005f17a8 = 1;
       }
@@ -276,17 +276,17 @@ void FUN_004b990c(int param_1)
   case 5:
     temp_v6 = campGetState();
     if (*(char *)(temp_v6 + 4) != '\0') {
-      temp_v6 = FUN_004ba790(param_1 + 0x9c);
+      temp_v6 = menu4CGetCurrentEntry(param_1 + 0x9c);
       temp_v0 = *(unsigned char *)(temp_v6 + 0x20);
       FUN_004b6bc4(param_1,(int)*(short *)(param_1 + 0x3c),*(unsigned int *)(param_1 + 0x1120));
-      FUN_004ba83c(param_1 + 0x9c,temp_v0);
+      menu4CScrollToKind(param_1 + 0x9c,temp_v0);
       temp_v2 = FUN_004cfe4c(param_1 + 0x9c);
       *(unsigned short *)(param_1 + 0x4c) = temp_v2;
     }
     FUN_002c2160(0);
     FUN_003b61ec();
-    FUN_004bb020(param_1 + 0x9c);
-    FUN_004bad28(param_1 + 0x9c);
+    menu4CStartBlock74(param_1 + 0x9c);
+    menu4CReset(param_1 + 0x9c);
     *(unsigned char *)(param_1 + 0xa88) = 0;
     FUN_004b7d88(param_1);
     temp_v6 = campGetState();
@@ -320,16 +320,16 @@ void FUN_004b990c(int param_1)
       else {
         FUN_00407ab0(*(unsigned int *)(param_1 + 0x1218),temp_v9,0);
       }
-      temp_v6 = FUN_004ba790(param_1 + 0x9c);
+      temp_v6 = menu4CGetCurrentEntry(param_1 + 0x9c);
       FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),0,0xffffffff);
       FUN_00407eb0(*(unsigned int *)(param_1 + 0x1218),(int)*(short *)(temp_v6 + 0x28),1);
       if (-1 < *(int *)(*(int *)(param_1 + 0x1118) + 0x60)) {
         puVar12 = temp_v11;
-        FUN_004bb170();
+        dataTable33Entries();
         if (puVar12 != (unsigned char *)0x0) {
           temp_v4 = 0;
           puVar7 = temp_v11;
-          FUN_004bb184(puVar7,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
+          dataTable33TypeCount(puVar7,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
           if (0 < (int)puVar7) {
             do {
               FUN_00100388(temp_v9,&LAB_004b9fe4,"mikado/",puVar12);
@@ -337,7 +337,7 @@ void FUN_004b990c(int param_1)
               puVar12 = puVar12 + 0x20;
               temp_v4 = temp_v4 + 1;
               puVar7 = temp_v11;
-              FUN_004bb184(puVar7,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
+              dataTable33TypeCount(puVar7,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
             } while (temp_v4 < (int)puVar7);
           }
           FUN_0040792c(*(unsigned int *)(param_1 + 0x1218),(int)*(char *)(temp_v6 + 0x2b));
@@ -345,16 +345,16 @@ void FUN_004b990c(int param_1)
       }
       if ((!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) ||
          (!(*(short *)(temp_v6 + 0x28) == 0 || *(short *)(temp_v6 + 0x28) == 6))) {
-        FUN_00407424(*(unsigned int *)(param_1 + 0x1218),0);
+        linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),0);
         temp_v5 = *(unsigned int *)(param_1 + 0x1218);
         temp_v7 = 1;
       }
       else {
-        FUN_00407424(*(unsigned int *)(param_1 + 0x1218),1);
+        linkSlotSetFlag20(*(unsigned int *)(param_1 + 0x1218),1);
         temp_v5 = *(unsigned int *)(param_1 + 0x1218);
         temp_v7 = 0;
       }
-      FUN_00407360(temp_v5,temp_v7);
+      linkSlotSetFlag1C(temp_v5,temp_v7);
     }
     if (*(char *)(param_1 + 0x1168) == '\0') {
       FUN_001f4e20(0);

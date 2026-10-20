@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_0019be8c(int param_1)
-
+/* Returns whether `value` is in 0xF801..0xF88F. */
+u8 FUN_0019be8c(s32 value)
 {
-  return param_1 - 0xf801U < 0x8f;
+    return value - 0xF801U < 0x8F;
 }
 
 } /* extern "C" */

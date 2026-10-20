@@ -1,32 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00107100(unsigned int, unsigned char [256], int);
-int FUN_00107110(unsigned int, unsigned char [256], int);
-int FUN_0010715a(unsigned int, unsigned char [256], int);
-int FUN_0010716a(unsigned int, unsigned char [256], int);
-int FUN_00107190(unsigned int, unsigned char [256], int);
+void FUN_00107100(u32 object, u8 *buffer, s32 size);
+void FUN_00107110(u32 object, u8 *buffer, s32 size);
+void FUN_0010715a(u32 object, u8 *buffer, s32 size);
+void FUN_0010716a(u32 object, u8 *buffer, s32 size);
+void FUN_00107190(u32 object, u8 *buffer, s32 size);
 
-/* Supplied declaration required: FUN_00107100. */
-/* Supplied declaration required: FUN_00107110. */
-/* Supplied declaration required: FUN_0010715a. */
-/* Supplied declaration required: FUN_0010716a. */
-/* Supplied declaration required: FUN_00107190. */
-
-
-void FUN_00107120(unsigned int param_1)
-
+/* Runs the five per-word handlers over the object using one shared scratch buffer. */
+void FUN_00107120(u32 object)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned char temp_v0 [256];
-  
-  FUN_0010716a(param_1,temp_v0,0x80);
-  FUN_00107100(param_1,temp_v0,0x80);
-  FUN_00107110(param_1,temp_v0,0x80);
-  FUN_0010715a(param_1,temp_v0,0x80);
-  FUN_00107190(param_1,temp_v0,0x80);
-  return;
+    u8 buffer[256];
+
+    FUN_0010716a(object, buffer, 0x80);
+    FUN_00107100(object, buffer, 0x80);
+    FUN_00107110(object, buffer, 0x80);
+    FUN_0010715a(object, buffer, 0x80);
+    FUN_00107190(object, buffer, 0x80);
 }
 
 } /* extern "C" */

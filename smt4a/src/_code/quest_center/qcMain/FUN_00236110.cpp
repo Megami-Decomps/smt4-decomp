@@ -68,7 +68,7 @@ extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: FUN_0046a34c. */
 /* Supplied declaration required: FUN_0046adec. */
 /* Supplied declaration required: FUN_0046b9c0. */
-extern int FUN_004d03b4(unsigned int *);
+extern int flagsDESet(unsigned int *);
 
 
 unsigned int FUN_00236110(void)
@@ -128,7 +128,7 @@ unsigned int FUN_00236110(void)
     temp_v2 = 0;
     if (puVar2 != (unsigned int *)0x0) {
       *puVar2 = 0;
-      temp_v2 = FUN_004d03b4(puVar2 + 0xd6);
+      temp_v2 = flagsDESet(puVar2 + 0xd6);
       temp_v2 = temp_v2 - 0x358;
     }
     *(int *)(temp_v0 + 0x1c) = temp_v2;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001801e4(unsigned char *, int);
-int FUN_001836b0(unsigned int);
+int resourceListDestroy(unsigned int);
 int asdMemFree(...);
 int FUN_001ab878(int);
 int nw_gfx_res_ResGraphicsFile_Cleanup(int *);
@@ -23,7 +23,7 @@ extern unsigned char DAT_00636ebc; /* 0x636ebc */
 extern unsigned char DAT_00636ec8; /* 0x636ec8 */
 
 /* Supplied declaration required: FUN_001801e4. */
-/* Supplied declaration required: FUN_001836b0. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001ab878. */
 extern int FUN_0037a86c(unsigned char *, unsigned int *);
@@ -48,7 +48,7 @@ void FUN_002804d0(unsigned int *param_1,int param_2,unsigned int param_3,int par
   if (0 < (int)param_1[0x26]) {
     do {
       temp_v0 = param_1[0x27] + unaff_r5 * 0xc;
-      FUN_001836b0(*(unsigned int *)(temp_v0 + 8));
+      resourceListDestroy(*(unsigned int *)(temp_v0 + 8));
       *(unsigned int *)(temp_v0 + 8) = 0;
       unaff_r5 = unaff_r5 + 1;
     } while (unaff_r5 < (int)param_1[0x26]);
@@ -65,7 +65,7 @@ void FUN_002804d0(unsigned int *param_1,int param_2,unsigned int param_3,int par
   if (0 < (int)*puVar4) {
     do {
       temp_v0 = param_1[0x29] + unaff_r5 * 0xc;
-      FUN_001836b0(*(unsigned int *)(temp_v0 + 8));
+      resourceListDestroy(*(unsigned int *)(temp_v0 + 8));
       *(unsigned int *)(temp_v0 + 8) = 0;
       unaff_r5 = unaff_r5 + 1;
     } while (unaff_r5 < (int)*puVar4);

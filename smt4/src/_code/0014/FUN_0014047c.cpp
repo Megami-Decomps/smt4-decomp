@@ -1,36 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014047c` (_code @ 0x14047c, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tail-calls the removed hook (pop {..., lr}; b hook -> nop); armcc compiles a call to a __weak function as bl + pop pc */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00140f3c(int);
+typedef struct FileReader {
+    /* 0x000 */ u8 unk000[0x110];
+    /* 0x110 */ u32 handle;     /* file handle; bit 0 is a flag */
+    /* 0x114 */ u8 unk114[0x18];
+    /* 0x12C */ u8 stream[0x54]; /* sub-object closed by FUN_00140f3c */
+    /* 0x180 */ u8 opened;
+} FileReader;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+void FUN_00140f3c(void *stream);
+/* A debug hook armlink removed; retail calls it as a tail call (the epilogue's pop lr, then b). */
+__weak void FUN_0014047c_hook(void *object);
+void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
-/* Supplied declaration required: FUN_00140f3c. */
-extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
-
-
-void FUN_0014047c(int param_1)
-
+/* Closes the file and its stream if they are open. */
+void FUN_0014047c(FileReader *reader)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0x180) != '\0') {
-    if ((*(unsigned int *)(param_1 + 0x110) & 0xfffffffe) != 0) {
-      nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(*(unsigned int *)(param_1 + 0x110) & 0xfffffffe);
-      *(unsigned int *)(param_1 + 0x110) = 0;
+    if (reader->opened) {
+        if (reader->handle & ~1) {
+            nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(reader->handle & ~1);
+            reader->handle = 0;
+        }
+        FUN_00140f3c(reader->stream);
+        reader->opened = 0;
     }
-    FUN_00140f3c(param_1 + 300);
-    *(unsigned char *)(param_1 + 0x180) = 0;
-  }
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned char *)(param_1 + 8) = 0x2f;
-  *(unsigned char *)(param_1 + 9) = 0;
-  return;
+    FUN_0014047c_hook(reader);
 }
 
 } /* extern "C" */

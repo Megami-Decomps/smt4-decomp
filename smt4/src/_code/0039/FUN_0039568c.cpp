@@ -16,7 +16,7 @@ extern signed char DAT_0049fc64; /* 0x49fc64 */
 
 /* Supplied declaration required: FUN_001e296c. */
 /* Supplied declaration required: FUN_00287aec. */
-extern unsigned int FUN_002c09f4(unsigned int);
+extern unsigned int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_0039560c. */
 
 
@@ -43,7 +43,7 @@ void FUN_0039568c(int param_1)
       temp_v1 = *(unsigned int *)(temp_v0 + 0x58);
       temp_v2 = (int)(((long long)(int)temp_v1 * -0x77777777 + ((unsigned long long)temp_v1 << 0x20)) >> 0x20);
       if ((temp_v1 + ((temp_v2 >> 3) - (temp_v2 >> 0x1f)) * -0xf == 0) &&
-         (temp_v1 = FUN_002c09f4(100), temp_v1 < 0x1e)) {
+         (temp_v1 = randNextInRange(100), temp_v1 < 0x1e)) {
         temp_v3 = *(float *)(temp_v0 + 0x28);
         FUN_00287aec();
         if (temp_v3 < DAT_0049fb70) {

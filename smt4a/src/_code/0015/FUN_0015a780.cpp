@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_006416b4; /* 0x6416b4 */
+extern u8 DAT_006416b4[];
 
-
-unsigned char * FUN_0015a780(void)
-
+/* Returns the address of the object at 0x006416b4. */
+u8 *FUN_0015a780(void)
 {
-  return &DAT_006416b4;
+    return DAT_006416b4;
 }
 
 } /* extern "C" */

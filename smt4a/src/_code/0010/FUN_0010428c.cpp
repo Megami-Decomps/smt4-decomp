@@ -32,7 +32,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea43c. */
 /* Supplied declaration required: FUN_002ea458. */
-extern int FUN_002ea4ac(int *, unsigned int *);
+extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
 extern int FUN_002ea4bc(void);
 /* Supplied declaration required: FUN_002ea4d2. */
 /* Supplied declaration required: FUN_004423fc. */
@@ -63,7 +63,7 @@ void FUN_0010428c(int param_1)
     return;
   }
   temp_v2 = 0xc8a0c7f0;
-  temp_v0 = FUN_002ea4ac(temp_v4,(unsigned int *)&temp_v2);
+  temp_v0 = wordRefsEqual_002ea4ac(temp_v4,(unsigned int *)&temp_v2);
   if (temp_v0 != 0) {
     temp_v0 = FUN_002e9af4();
     FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0xe0));

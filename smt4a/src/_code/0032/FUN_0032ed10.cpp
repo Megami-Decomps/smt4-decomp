@@ -14,9 +14,9 @@ extern int dataTableGetCount(void);
 extern int dataTableGetEntries(void);
 extern unsigned int FUN_003dfd44(void);
 extern unsigned int FUN_003dfe88(void);
-extern unsigned int FUN_0040816c(unsigned int);
+extern unsigned int countersGetB(unsigned int);
 /* Supplied declaration required: FUN_00409d00. */
-extern unsigned int FUN_00409dbc(void);
+extern unsigned int countersGetA(void);
 
 
 void FUN_0032ed10(void)
@@ -57,7 +57,7 @@ void FUN_0032ed10(void)
           temp_v2 = *(unsigned short *)(temp_v6 + 0x22);
           if (temp_v2 == 0) goto LAB_0032eeb4;
           if (temp_v2 < 0x40) {
-            temp_v8 = FUN_00409dbc();
+            temp_v8 = countersGetA();
             if (temp_v8 < *(unsigned int *)(temp_v6 + 0x24)) goto LAB_0032eefc;
             goto LAB_0032eeb4;
           }
@@ -65,51 +65,51 @@ void FUN_0032ed10(void)
           switch(temp_v2 & 0xff) {
           case 0x40:
             temp_v9 = 0x27;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x41:
             temp_v9 = 9;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x42:
             temp_v9 = 10;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x43:
             temp_v9 = 4;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x44:
             temp_v9 = 5;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x45:
             temp_v9 = 0x22;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x46:
             temp_v9 = 0x1e;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x47:
             temp_v9 = 0xb;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x48:
             temp_v9 = 3;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x49:
             temp_v9 = 0x16;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x4a:
             temp_v9 = 0x19;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x4b:
             temp_v9 = 0x12;
-            temp_v8 = FUN_0040816c(temp_v9);
+            temp_v8 = countersGetB(temp_v9);
             break;
           case 0x4c:
             temp_v8 = FUN_003dfe88();

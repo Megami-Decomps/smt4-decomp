@@ -23,7 +23,7 @@ extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_002bd420. */
 extern int FUN_002c09bc(void);
-extern int FUN_002fcabc(void);
+extern int cecProcessGetObject(void);
 
 
 unsigned int * FUN_002bd2b4(int param_1,int param_2,unsigned char param_3,unsigned int param_4)
@@ -67,7 +67,7 @@ unsigned int * FUN_002bd2b4(int param_1,int param_2,unsigned char param_3,unsign
   *(unsigned int *)(param_1 + 0x2c) = 0;
   temp_v0 = FUN_002228d4();
   *(unsigned char *)(param_1 + 0x20) = temp_v0;
-  temp_v2 = FUN_002fcabc();
+  temp_v2 = cecProcessGetObject();
   if (temp_v2 != 1) {
     if (temp_v2 == 2) {
       temp_v3 = 4;

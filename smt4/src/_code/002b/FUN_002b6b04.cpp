@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043e128; /* 0x43e128 */
+typedef struct Obj {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ s32 state;
+} Obj;
 
+extern Obj *DAT_0043e128;
 
-unsigned char FUN_002b6b04(void)
-
+u8 FUN_002b6b04(void)
 {
-  return *(int *)(DAT_0043e128 + 8) != 0;
+    return DAT_0043e128->state != 0;
 }
 
 } /* extern "C" */

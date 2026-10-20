@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 value;
+} Holder;
 
-void FUN_001527d8(int param_1,unsigned int param_2)
-
+/* Stores `value` with its low byte cleared in the word at 0x38. */
+void FUN_001527d8(Holder *object, u32 value)
 {
-  *(unsigned int *)(param_1 + 0x38) = param_2 & 0xffffff00;
-  return;
+    object->value = value & 0xFFFFFF00;
 }
 
 } /* extern "C" */

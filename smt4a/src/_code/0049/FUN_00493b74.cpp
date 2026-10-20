@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004d0440(void);
+int sendEvent100020D(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,13 +13,13 @@ typedef struct {
 
 extern int FUN_001802d4(int);
 extern int FUN_00284140(int);
-extern int FUN_004cfd2c(unsigned int);
-extern int FUN_004cfd5c(unsigned int);
-extern int FUN_004cfd8c(unsigned int);
-extern int FUN_004cfdbc(unsigned int);
-extern int FUN_004cfdec(unsigned int);
-extern int FUN_004cfe1c(unsigned int);
-/* Supplied declaration required: FUN_004d0440. */
+extern int getMaskType5(unsigned int);
+extern int getMaskB5(unsigned int);
+extern int getMaskType6(unsigned int);
+extern int getMaskType4(unsigned int);
+extern int getMaskType3(unsigned int);
+extern int getMaskB6(unsigned int);
+/* Supplied declaration required: sendEvent100020D. */
 
 
 void FUN_00493b74(int *param_1)
@@ -70,29 +70,29 @@ void FUN_00493b74(int *param_1)
       temp_v0 = temp_v0 - 1;
     }
     else {
-      temp_v0 = FUN_004cfd5c(0);
+      temp_v0 = getMaskB5(0);
       if ((temp_v0 != 0) && (*param_1 == param_1[1])) {
         temp_v0 = param_1[2];
       }
       else {
-        temp_v0 = FUN_004cfe1c(0);
+        temp_v0 = getMaskB6(0);
         if ((temp_v0 != 0) && (*param_1 == param_1[2])) {
           temp_v0 = param_1[1];
         }
         else {
-          temp_v0 = FUN_004cfdec(0);
+          temp_v0 = getMaskType3(0);
           if (temp_v0 != 0) {
             *param_1 = *param_1 + 10;
           }
-          temp_v0 = FUN_004cfdbc(0);
+          temp_v0 = getMaskType4(0);
           if (temp_v0 != 0) {
             *param_1 = *param_1 - 10;
           }
-          temp_v0 = FUN_004cfd2c(0);
+          temp_v0 = getMaskType5(0);
           if (temp_v0 != 0) {
             *param_1 = *param_1 + 1;
           }
-          temp_v1 = FUN_004cfd8c(0);
+          temp_v1 = getMaskType6(0);
           temp_v0 = *param_1;
           if (temp_v1 == 0) goto LAB_00493d04;
           temp_v0 = temp_v0 - 1;
@@ -111,7 +111,7 @@ LAB_00493d04:
   }
   *param_1 = temp_v0;
   if (temp_v0 != temp_v3) {
-    FUN_004d0440();
+    sendEvent100020D();
     return;
   }
   return;

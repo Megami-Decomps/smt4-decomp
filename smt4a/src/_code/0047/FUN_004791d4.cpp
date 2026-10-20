@@ -29,14 +29,14 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_0014384c. */
 /* Supplied declaration required: FUN_0014afd0. */
-extern unsigned int FUN_0016a0f0(unsigned int);
+extern unsigned int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_0016ccb4. */
 /* Supplied declaration required: FUN_001b57a8. */
 extern unsigned int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_00441f48(void);
+extern int appletIsRegistered406(void);
 /* Supplied declaration required: FUN_00441f54. */
 /* Supplied declaration required: FUN_004788dc. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -59,7 +59,7 @@ void FUN_004791d4(int param_1)
   unsigned char temp_v7 [4];
   unsigned int temp_v8 [3];
   
-  temp_v0 = FUN_00441f48();
+  temp_v0 = appletIsRegistered406();
   if (temp_v0 != 0) {
     FUN_00441f54();
   }
@@ -92,7 +92,7 @@ void FUN_004791d4(int param_1)
   pcVar5 = "addon/aoc_scr.bf";
   FUN_0013c174("addon/aoc_scr.bf",temp_v7,0);
   *(char **)(param_1 + 0x350) = pcVar5;
-  temp_v1 = FUN_0016a0f0(0x40);
+  temp_v1 = dataTableValueOrZero(0x40);
   *(unsigned int *)(param_1 + 0x354) = temp_v1;
   temp_v0 = *(int *)(param_1 + 0x350);
   FUN_00275bc8(temp_v0,temp_v1);

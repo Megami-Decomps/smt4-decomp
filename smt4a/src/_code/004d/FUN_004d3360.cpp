@@ -23,7 +23,7 @@ extern unsigned int DAT_005716d4; /* 0x5716d4 */
 extern int DAT_0057f58c; /* 0x57f58c */
 
 /* Supplied declaration required: FUN_00165088. */
-extern unsigned int *FUN_00317450(unsigned int);
+extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 extern int FUN_003216d0(void);
 /* Supplied declaration required: FUN_003216ec. */
 extern int FUN_0032c430(unsigned int, unsigned int);
@@ -84,7 +84,7 @@ void FUN_004d3360(int param_1,int param_2)
     }
     return;
   case 2:
-    puVar2 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_2 + 0x2364) = *puVar2;
     return;
   case 3:

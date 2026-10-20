@@ -10,8 +10,8 @@ extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(int);
 extern int FUN_003df390(int);
-extern int FUN_00418584(void);
-extern int FUN_004185ec(int);
+extern int partyEntryFlagsBit3(void);
+extern int partyEntryFlagsBit1(int);
 
 
 unsigned int FUN_003ded68(int param_1)
@@ -20,9 +20,9 @@ unsigned int FUN_003ded68(int param_1)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00418584();
+  temp_v0 = partyEntryFlagsBit3();
   if (((temp_v0 == 0) &&
-      (((temp_v0 = FUN_004185ec(param_1), temp_v0 == 0 || (temp_v0 = FUN_001ada74(param_1), temp_v0 == 0))
+      (((temp_v0 = partyEntryFlagsBit1(param_1), temp_v0 == 0 || (temp_v0 = FUN_001ada74(param_1), temp_v0 == 0))
        && (temp_v0 = FUN_003df390(param_1), temp_v0 != 0)))) && (FUN_001ad9b4(), param_1 != 0)) {
     temp_v0 = FUN_001801a4();
     if ((*(short *)(param_1 + 0x120) != 0) &&

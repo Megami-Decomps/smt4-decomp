@@ -7,8 +7,8 @@ extern "C" {
 int qsort(...);
 int FUN_002a6894(...);
 int FUN_004bcd90(...);
-int FUN_004bd30c(...);
-int FUN_004bd3ec(...);
+int dispatchIfFound(...);
+int bitsAt60Set(...);
 int FUN_004bd6b0(...);
 int FUN_004d0d70(...);
 int rt_memcpy_w(...);
@@ -26,10 +26,10 @@ extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_002a6894. */
 extern int FUN_004bca68(int);
 /* Supplied declaration required: FUN_004bcd90. */
-extern unsigned int FUN_004bd21c(int);
-/* Supplied declaration required: FUN_004bd30c. */
-extern int FUN_004bd340(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_004bd3ec. */
+extern unsigned int getUnlockedSlotCount(int);
+/* Supplied declaration required: dispatchIfFound. */
+extern int bitsAt60Test(unsigned char *, unsigned int);
+/* Supplied declaration required: bitsAt60Set. */
 /* Supplied declaration required: FUN_004bd6b0. */
 /* Supplied declaration required: FUN_004d0d70. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -66,7 +66,7 @@ unsigned int FUN_003f33b0(int param_1,unsigned int param_2,int param_3)
     temp_v6 = 2;
   }
   FUN_004d0d70(*(unsigned char *)(param_1 + 0x66));
-  FUN_004bd30c(temp_v8,param_2,0);
+  dispatchIfFound(temp_v8,param_2,0);
   temp_v3 = FUN_001ab854(temp_v8);
   if (-1 < temp_v6) {
     *(unsigned char *)(temp_v1 + temp_v6 + 0x1ca0) = *(unsigned char *)(temp_v3 + 0x66);
@@ -79,9 +79,9 @@ unsigned int FUN_003f33b0(int param_1,unsigned int param_2,int param_3)
     *(unsigned char *)(temp_v5 + 0x69) = temp_v9[temp_v1 + 1] | *(unsigned char *)(temp_v5 + 0x69);
     temp_v1 = temp_v6;
   } while (temp_v6 < 0x40);
-  temp_v1 = FUN_004bd340(temp_v7,2);
+  temp_v1 = bitsAt60Test(temp_v7,2);
   if (temp_v1 != 0) {
-    FUN_004bd3ec(temp_v3,2);
+    bitsAt60Set(temp_v3,2);
   }
   FUN_002a6894(temp_v3);
   temp_v5 = 0;
@@ -104,7 +104,7 @@ unsigned int FUN_003f33b0(int param_1,unsigned int param_2,int param_3)
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
   qsort(param_3,8,2,FUN_002c2bf4);
-  temp_v2 = FUN_004bd21c(temp_v3);
+  temp_v2 = getUnlockedSlotCount(temp_v3);
   if (0 < 8 - temp_v1) {
     *(unsigned short *)(param_3 + temp_v1 * 2) = 0;
   }

@@ -1,33 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002aa568(int, unsigned int);
+int FUN_002aa568(u8 *name, u32 key);
 
-extern int DAT_00433278; /* 0x433278 */
-extern unsigned char DAT_00478000;
+extern int DAT_00433278;
+extern u8 DAT_00478000[][0x148];
 
-/* Supplied declaration required: FUN_002aa568. */
-
-
-unsigned int FUN_0024a808(unsigned int param_1)
-
+/* Index of the first entry whose name (at +1) matches `key`, or 0xFF. */
+u32 FUN_0024a808(u32 key)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  if ((int)temp_v1 < DAT_00433278) {
-    do {
-      temp_v0 = FUN_002aa568((int)(&DAT_00478000 + (temp_v1 & 0xff) * 0x148 + 1),param_1);
-      if (temp_v0 == 0) {
-        return temp_v1 & 0xff;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while ((int)temp_v1 < DAT_00433278);
-  }
-  return 0xff;
+    u32 i = 0;
+
+    if ((int)i < DAT_00433278) {
+        do {
+            if (FUN_002aa568(&DAT_00478000[i & 0xff][1], key) == 0) {
+                return i & 0xff;
+            }
+            i++;
+        } while ((int)i < DAT_00433278);
+    }
+    return 0xff;
 }
 
 } /* extern "C" */

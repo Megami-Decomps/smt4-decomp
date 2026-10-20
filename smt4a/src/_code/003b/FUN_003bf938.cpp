@@ -11,7 +11,7 @@ int FUN_004bd410(void);
 
 extern unsigned char DAT_0057f588; /* 0x57f588 */
 
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001846d0. */
 extern int FUN_00187168(int);
 extern int FUN_002deb84(void);
@@ -67,7 +67,7 @@ unsigned int FUN_003bf938(void)
         else {
           FUN_003e48dc(temp_v7 & 0xffff);
           *(unsigned int *)(temp_v3 + 0xac) = 0;
-          temp_v3 = FUN_0015688c();
+          temp_v3 = saveSlotFindSelected();
           if (*(unsigned short *)(temp_v3 + 300) == temp_v7) {
             temp_v6 = 0;
             do {

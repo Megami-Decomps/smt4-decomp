@@ -1,40 +1,52 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00297684(unsigned int);
+int FUN_00297684(u32 value);
 int statusCameraApply(void);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_00297684. */
-/* Supplied declaration required: statusCameraApply. */
+struct StatusContext;
+typedef int (*StateHandler)(struct StatusContext *context);
 
+typedef struct StatusCamera {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u32 unk1C;
+} StatusCamera;
 
-unsigned int FUN_0018b210(int *param_1)
+typedef struct StatusContext {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ StateHandler handlers[0x26];
+    /* 0x0A0 */ StatusCamera camera;
+    /* 0x0C0 */ u8 unk0C0[0xC64];
+    /* 0xD24 */ s32 prevState;
+    /* 0xD28 */ s32 state;
+    /* 0xD2C */ s32 nextState;
+} StatusContext;
 
+typedef struct StatusOwner {
+    /* 0x0 */ StatusContext *context;
+} StatusOwner;
+
+/* Runs the current state's handler; when it returns 2, switches to the queued state. Then applies the camera outside the idle/special states. */
+u32 FUN_0018b210(StatusOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  romwright_code *pcVar2;
-  int temp_v1;
-  int pb;
-  
-  temp_v1 = *param_1;
-  pcVar2 = *(romwright_code **)(temp_v1 + *(int *)(temp_v1 + 0xd28) * 4 + 8);
-  if ((pcVar2 != (romwright_code *)0x0) && (temp_v0 = (*pcVar2)(temp_v1), temp_v0 == 2)) {
-    if (*(int *)(temp_v1 + 0xd2c) != -1) {
-      *(unsigned int *)(temp_v1 + 0xd24) = *(unsigned int *)(temp_v1 + 0xd28);
-      *(int *)(temp_v1 + 0xd28) = *(int *)(temp_v1 + 0xd2c);
-      *(unsigned int *)(temp_v1 + 0xd2c) = 0xffffffff;
+    StatusContext *context = owner->context;
+    StateHandler handler = context->handlers[context->state];
+    StatusCamera *camera;
+
+    if (handler != NULL && handler(context) == 2) {
+        if (context->nextState != -1) {
+            context->prevState = context->state;
+            context->state = context->nextState;
+            context->nextState = -1;
+        }
     }
-  }
-  pb = temp_v1 + 0xa0;
-  temp_v0 = *(int *)(temp_v1 + 0xd28);
-  if ((0 < temp_v0) && (temp_v0 != 0xd && temp_v0 != 0xf)) {
-    statusCameraApply();
-    FUN_00297684(*(unsigned int *)(pb + 0x1c));
-  }
-  return 0;
+    camera = &context->camera;
+    if (context->state > 0 && (context->state != 0xd && context->state != 0xf)) {
+        statusCameraApply();
+        FUN_00297684(camera->unk1C);
+    }
+    return 0;
 }
 
 } /* extern "C" */

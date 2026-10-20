@@ -16,14 +16,14 @@ int FUN_0031f27c(...);
 int FUN_003343f0(...);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int FUN_0035deb0(void);
-int FUN_0037c8b4(unsigned int, int);
+int panelSetTarget(unsigned int, int);
 int FUN_003baa3c(int);
 int FUN_003c5fc4(...);
-int FUN_004a1d54(...);
+int screen4AEnter(...);
 int FUN_004a34a0(int, int);
 int FUN_004a8750(unsigned int, int, int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
 int FUN_004d0680(int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -49,15 +49,15 @@ extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_0035deb0. */
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_003baa3c. */
 /* Supplied declaration required: FUN_003c5fc4. */
-/* Supplied declaration required: FUN_004a1d54. */
+/* Supplied declaration required: screen4AEnter. */
 /* Supplied declaration required: FUN_004a34a0. */
 /* Supplied declaration required: FUN_004a8750. */
 extern int FUN_004cfe4c(int);
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d04f4(void);
 extern int FUN_004d0524(void);
 extern int FUN_004d0554(void);
@@ -89,7 +89,7 @@ void FUN_004a41d8(int param_1)
   FUN_004a8750(temp_v2,*(unsigned char *)(param_1 + 0x861),0);
   temp_v1 = FUN_002a4b28(temp_v0);
   if (temp_v1 != 0) {
-    FUN_0037c8b4(-temp_v2,0);
+    panelSetTarget(-temp_v2,0);
   }
   else {
     FUN_003baa3c(1);
@@ -133,7 +133,7 @@ void FUN_004a41d8(int param_1)
     else {
       if (*pcVar8 == '\x06') {
         *pcVar8 = '\0';
-        FUN_004d0434();
+        sendEvent100020F();
         return;
       }
       temp_v5 = 0;
@@ -160,7 +160,7 @@ void FUN_004a41d8(int param_1)
     }
     FUN_003c5fc4(1);
     FUN_003343f0(1);
-    FUN_004d044c();
+    sendEvent100020E();
     return;
   }
   if (temp_v1 == 0) {
@@ -176,7 +176,7 @@ void FUN_004a41d8(int param_1)
       *(unsigned int *)(param_1 + 0x14) = 7;
       *(unsigned int *)(param_1 + 0x18) = 0;
       FUN_0019de98(0,0xf4f4f4ff);
-      FUN_004d044c();
+      sendEvent100020E();
       return;
     }
     if (temp_v3 == 0) {
@@ -184,10 +184,10 @@ void FUN_004a41d8(int param_1)
     }
     *(unsigned int *)(param_1 + 0x14) = 10;
     *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_004d044c();
+    sendEvent100020E();
     return;
   }
-  FUN_004a1d54(param_1);
+  screen4AEnter(param_1);
   FUN_0035deb0();
   return;
 }

@@ -1,28 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011d0dc` (_code @ 0x11d0dc, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Vec6 {
+    f32 v[6];
+} Vec6;
 
-void FUN_0011d0dc(int param_1)
+typedef struct Owner0011d0dc {
+    u8 unk00[0x4a0];
+    Vec6 vec;                      /* 0x4A0 */
+} Owner0011d0dc;
 
+void FUN_0011d0e4(Vec6 *out, f32 a, f32 b, f32 c, f32 d, f32 e, f32 f);
+
+/* Passes the vector at the object's +0x4A0 and its float arguments on to FUN_0011d0e4, the function that follows it. */
+void FUN_0011d0dc(Owner0011d0dc *owner, f32 a, f32 b, f32 c, f32 d, f32 e, f32 f)
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3, in_s4, in_s5; 6 native warning(s); review required */
-  unsigned int in_s0;
-  unsigned int in_s1;
-  unsigned int in_s2;
-  unsigned int in_s3;
-  unsigned int in_s4;
-  unsigned int in_s5;
-  
-  *(unsigned int *)(param_1 + 0x4a0) = in_s0;
-  *(unsigned int *)(param_1 + 0x4a4) = in_s1;
-  *(unsigned int *)(param_1 + 0x4a8) = in_s2;
-  *(unsigned int *)(param_1 + 0x4ac) = in_s3;
-  *(unsigned int *)(param_1 + 0x4b0) = in_s4;
-  *(unsigned int *)(param_1 + 0x4b4) = in_s5;
-  return;
+    FUN_0011d0e4(&owner->vec, a, b, c, d, e, f);
 }
 
 } /* extern "C" */

@@ -1,18 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c38fc(int);
+int FUN_002c38fc(void *obj);
 
-/* Supplied declaration required: FUN_002c38fc. */
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x1C4];
+    /* 0x1C4 */ u8 unk1C4[1];
+} Obj;
 
-
-void FUN_00130eec(int param_1)
-
+void FUN_00130eec(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002c38fc(param_1 + 0x1c4);
-  return;
+    FUN_002c38fc(obj->unk1C4);
 }
 
 } /* extern "C" */

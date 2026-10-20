@@ -1,30 +1,23 @@
-#include "romwright_types.h"
+#include "shard/GameOptions.h"
 
 extern "C" {
 
-int FUN_0028975c(int, int, int);
-
-/* Supplied declaration required: FUN_0028975c. */
-extern int gameGetOptions(void);
-
+int FUN_0028975c(int a, int b, int c);
+extern GameOptions *gameGetOptions(void);
 
 void FUN_00256124(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = gameGetOptions();
-  if ((*(unsigned short *)(temp_v0 + 0x608) & 1) != 0) {
-    if (*(unsigned short *)(temp_v0 + 0x46) == 0x2a3) {
-      FUN_0028975c(0x262,0,1);
+    GameOptions *options = gameGetOptions();
+
+    if ((options->flags & 1) != 0) {
+        if (options->unk46 == 0x2a3) {
+            FUN_0028975c(0x262, 0, 1);
+        }
+        if (options->unk46 == 0x2a5) {
+            FUN_0028975c(0x263, 0, 1);
+        }
+        options->unk46 = 0;
     }
-    if (*(unsigned short *)(temp_v0 + 0x46) == 0x2a5) {
-      FUN_0028975c(0x263,0,1);
-    }
-    *(unsigned short *)(temp_v0 + 0x46) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

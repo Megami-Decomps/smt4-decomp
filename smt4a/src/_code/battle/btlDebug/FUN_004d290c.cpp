@@ -59,7 +59,7 @@ extern unsigned int DAT_0057177c; /* 0x57177c */
 extern unsigned int DAT_0057a6e8; /* 0x57a6e8 */
 
 /* Supplied declaration required: FUN_001ab888. */
-extern unsigned int *FUN_00317450(unsigned int, unsigned int);
+extern unsigned int *asdListBoxGetIntValuePtr(unsigned int, unsigned int);
 extern int FUN_0032c430(unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
 
@@ -129,7 +129,7 @@ void FUN_004d290c(int param_1,int param_2)
     }
     break;
   case 4:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     *(unsigned int *)(param_2 + 0x4d5c) = *puVar4;
     return;
   case 5:
@@ -222,13 +222,13 @@ void FUN_004d290c(int param_1,int param_2)
     temp_v3 = *(unsigned int *)(param_2 + 0x45ac) & ~DAT_0057168c;
     break;
   case 0xc:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     temp_v0 = *puVar4;
     puVar4 = (unsigned int *)(param_2 + 0x4cd4);
     *puVar4 = temp_v0;
     return;
   case 0xd:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     temp_v0 = *puVar4;
     puVar4 = (unsigned int *)FUN_001ab888();
     *puVar4 = temp_v0;
@@ -375,7 +375,7 @@ void FUN_004d290c(int param_1,int param_2)
     temp_v3 = temp_v3 | temp_v4;
     break;
   case 0x19:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     *(unsigned int *)(param_2 + 0x302c) = *puVar4;
     return;
   case 0x1a:
@@ -391,11 +391,11 @@ void FUN_004d290c(int param_1,int param_2)
     temp_v3 = temp_v3 | temp_v4;
     break;
   case 0x1b:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     *(unsigned int *)(param_2 + 0x3034) = *puVar4;
     return;
   case 0x1c:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     DAT_0057a6e8 = *puVar4;
     return;
   case 0x1d:
@@ -411,7 +411,7 @@ void FUN_004d290c(int param_1,int param_2)
     temp_v3 = temp_v3 & ~temp_v4;
     break;
   case 0x1e:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     temp_v0 = *puVar4;
     temp_v1 = FUN_001ab888();
     *(short *)(temp_v1 + 0x2c4e) = (short)temp_v0;
@@ -429,7 +429,7 @@ void FUN_004d290c(int param_1,int param_2)
     temp_v3 = *(unsigned int *)(param_2 + 0x45ac) & ~DAT_0057177c;
     break;
   case 0x20:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
     temp_v0 = *puVar4;
     puVar4 = (unsigned int *)(param_2 + 0x4d6c);
     *puVar4 = temp_v0;

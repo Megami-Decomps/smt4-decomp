@@ -20,7 +20,7 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
-extern int FUN_00331194(void);
+extern int panelIsMissingOrFlagClear(void);
 extern int FUN_00357bc8(unsigned int, char *);
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
@@ -42,7 +42,7 @@ void FUN_003e65a4(int param_1)
         if (temp_v0 != 2) {
           return;
         }
-        temp_v0 = FUN_00331194();
+        temp_v0 = panelIsMissingOrFlagClear();
         if (temp_v0 == 0) {
           return;
         }

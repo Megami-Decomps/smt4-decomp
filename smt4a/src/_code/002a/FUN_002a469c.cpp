@@ -1,15 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s16 value;
+} Record;
 
+typedef struct Table {
+    /* 0x00000 */ u8 unk00000[0x27E88];
+    /* 0x27E88 */ Record record;
+} Table;
 
-int FUN_002a469c(void)
+typedef struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Table *table;
+} GameDataBlocksView;
+extern GameDataBlocksView g_gameDataBlocks;
 
+/* Returns the halfword at 0xC of the record at 0x27E88 of the game-data table. */
+s32 FUN_002a469c(void)
 {
-  int p = *(int *)((unsigned char *)&g_gameDataBlocks + 0x4) + 0x27e88;
-  return (int)*(short *)(p + 0xc);
+    Record *record = &g_gameDataBlocks.table->record;
+    return record->value;
 }
 
 } /* extern "C" */

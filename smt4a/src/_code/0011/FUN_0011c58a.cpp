@@ -20,7 +20,7 @@ extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002ecf70. */
-extern int FUN_003112cc(unsigned int *, unsigned int *);
+extern int iterEqual(unsigned int *, unsigned int *);
 
 
 unsigned int FUN_0011c58a(int param_1,unsigned int param_2)
@@ -40,7 +40,7 @@ unsigned int FUN_0011c58a(int param_1,unsigned int param_2)
   FUN_002e6e34(temp_v1,temp_v0 + 0x58);
   FUN_002ecf70(&temp_v3,param_1 + 0x60,&uStack_10);
   temp_v2 = *(unsigned int *)(param_1 + 0x70);
-  temp_v0 = FUN_003112cc((unsigned int *)&temp_v3,(unsigned int *)&temp_v2);
+  temp_v0 = iterEqual((unsigned int *)&temp_v3,(unsigned int *)&temp_v2);
   if (temp_v0 == 0) {
     temp_v2 = temp_v3;
     FUN_0013232a(param_1 + 0x60,&temp_v2);

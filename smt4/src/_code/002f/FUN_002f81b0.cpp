@@ -1,20 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Source {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ struct Inner *inner;
+} Source;
 
-void FUN_002f81b0(int param_1,unsigned int *param_2)
+typedef struct Inner {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+} Inner;
 
+typedef struct Dest {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ Inner *inner;
+} Dest;
+
+void FUN_002f81b0(Source *source, Dest *dest)
 {
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 4);
-  param_2[2] = temp_v0;
-  if (temp_v0 != 0) {
-    *param_2 = *(unsigned int *)(temp_v0 + 0x14);
-    param_2[1] = *(unsigned int *)(temp_v0 + 0x18);
-  }
-  return;
+    Inner *inner = source->inner;
+
+    dest->inner = inner;
+    if (inner != NULL) {
+        dest->unk0 = inner->unk14;
+        dest->unk4 = inner->unk18;
+    }
 }
 
 } /* extern "C" */

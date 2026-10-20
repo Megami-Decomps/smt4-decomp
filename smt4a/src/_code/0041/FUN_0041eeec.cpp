@@ -27,7 +27,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_001aea28. */
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_002f0384. */
-extern int FUN_00334158(void);
+extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_0041de6c. */
 /* Supplied declaration required: FUN_0041f020. */
 
@@ -40,7 +40,7 @@ void FUN_0041eeec(int param_1)
   char temp_v1;
   int temp_v2;
   
-  temp_v2 = FUN_00334158();
+  temp_v2 = objBStateAllowsAction();
   if ((temp_v2 != 0) && (*(char *)(*(int *)(param_1 + 0x2f8) + param_1 + 0x2ec) != '\0')) {
     FUN_002f0384(1);
     *(unsigned char *)(param_1 + 0x68) = 1;

@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_0019df10(int param_1)
-
+/* Reads the word pointed to by the pointer stored just before `obj`. */
+u32 FUN_0019df10(u32 **obj)
 {
-  return **(unsigned int **)(param_1 - 4);
+    return *obj[-1];
 }
 
 } /* extern "C" */

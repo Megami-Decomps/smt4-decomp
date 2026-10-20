@@ -1,20 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_004219c4; /* 0x4219c4 */
+extern u8 DAT_004219c4;
+extern const void **FUN_0037b4b0(u32 a, u32 b);
 
-extern unsigned int *FUN_0037b4b0(unsigned int, unsigned int);
-
-
-void FUN_003771e0(unsigned int param_1)
-
+void FUN_003771e0(u32 a)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_0037b4b0(param_1,0);
-  *puVar1 = (unsigned int)&DAT_004219c4;
-  return;
+    const void **object = FUN_0037b4b0(a, 0);
+
+    *object = &DAT_004219c4;
 }
 
 } /* extern "C" */

@@ -8,7 +8,7 @@ int FUN_002e9538(int, unsigned char [36]);
 int FUN_002e995c(unsigned char [40]);
 int FUN_002eb588(...);
 int FUN_002f8264(int *);
-int FUN_002f8272(...);
+int _ZN9Obj55927c7vfunc10EP12Obj55927cArg(...);
 int FUN_002f84b0(int);
 int FUN_00514cb0(int, int *, unsigned char [8]);
 
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e995c. */
 /* Supplied declaration required: FUN_002eb588. */
 /* Supplied declaration required: FUN_002f8264. */
-/* Supplied declaration required: FUN_002f8272. */
+/* Supplied declaration required: _ZN9Obj55927c7vfunc10EP12Obj55927cArg. */
 /* Supplied declaration required: FUN_002f84b0. */
 extern int FUN_002f84c4(int, unsigned char *);
 /* Supplied declaration required: FUN_00514cb0. */
@@ -51,11 +51,11 @@ unsigned int FUN_002f2ed4(int param_1,unsigned int *param_2,int param_3)
     if (temp_v0 == 0) break;
     FUN_002eb588(temp_v7);
     FUN_002eb588(temp_v9);
-    FUN_002f8272(&temp_v4,temp_v2,temp_v9);
+    _ZN9Obj55927c7vfunc10EP12Obj55927cArg(&temp_v4,temp_v2,temp_v9);
     FUN_00514cb0(temp_v3,&temp_v4,temp_v7);
     FUN_002f8264(&temp_v4);
     FUN_002eb588(temp_v7);
-    FUN_002f8272(&temp_v4,temp_v2,temp_v7);
+    _ZN9Obj55927c7vfunc10EP12Obj55927cArg(&temp_v4,temp_v2,temp_v7);
     FUN_002f84b0(param_1 + 0xc);
     FUN_002f8264(&temp_v4);
   }
@@ -64,7 +64,7 @@ unsigned int FUN_002f2ed4(int param_1,unsigned int *param_2,int param_3)
   temp_v1 = 0;
   if (temp_v2 != 0) {
     FUN_002eb588(temp_v7);
-    FUN_002f8272(&temp_v4,temp_v3,temp_v7);
+    _ZN9Obj55927c7vfunc10EP12Obj55927cArg(&temp_v4,temp_v3,temp_v7);
     if (param_2 != (unsigned int *)0x0) {
       *param_2 = temp_v4;
     }

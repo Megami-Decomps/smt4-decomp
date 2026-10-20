@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_005b40b4; /* 0x5b40b4 */
-
-
-unsigned int FUN_00280bc0(void)
-
+/* Returns the word at 0x10 of the global block at 0x5B40B4. */
+u32 FUN_00280bc0(void)
 {
-  return (*(unsigned int *)((unsigned char *)&DAT_005b40b4 + 0x10));
+    return DAT_005b40b4.unk10;
 }
 
 } /* extern "C" */

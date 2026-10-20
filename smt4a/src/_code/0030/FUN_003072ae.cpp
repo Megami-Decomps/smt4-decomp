@@ -9,7 +9,7 @@ int FUN_00133304(unsigned int, unsigned int);
 int FUN_002f79dc(unsigned int);
 int FUN_002f7b60(unsigned int, unsigned char [24]);
 int FUN_002f7b80(unsigned char [24]);
-int FUN_0030d348(unsigned char [24]);
+int initVtable00559504(unsigned char [24]);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int FUN_002ed28c(int, unsigned int *);
 /* Supplied declaration required: FUN_002f79dc. */
 /* Supplied declaration required: FUN_002f7b60. */
 /* Supplied declaration required: FUN_002f7b80. */
-/* Supplied declaration required: FUN_0030d348. */
+/* Supplied declaration required: initVtable00559504. */
 
 
 void FUN_003072ae(int param_1,unsigned int param_2)
@@ -46,7 +46,7 @@ void FUN_003072ae(int param_1,unsigned int param_2)
       if (*(char *)(param_1 + 4) != '\0') {
         return;
       }
-      FUN_0030d348(temp_v2);
+      initVtable00559504(temp_v2);
       FUN_0011786c(param_1,temp_v2);
       if (*(char *)(param_1 + 4) != '\0') break;
       FUN_002f7b60(param_2,temp_v2);

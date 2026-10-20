@@ -1,12 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Range {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 begin;
+    /* 0x10 */ s32 end;
+} Range;
 
-int FUN_002fde84(int param_1)
-
+/* Returns end - begin. */
+s32 FUN_002fde84(Range *range)
 {
-  return *(int *)(param_1 + 0x10) - *(int *)(param_1 + 0xc);
+    return range->end - range->begin;
 }
 
 } /* extern "C" */

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0024f5d4(void);
+int dataTable2eSub2GetCount(void);
 int FUN_002c58c8(int, unsigned int);
 int FUN_0039d69c(int, int);
 int MapNaviTable_GetCategoryCount(void);
 
-extern int FUN_0024f594(int);
-/* Supplied declaration required: FUN_0024f5d4. */
+extern int dataTable2eSub2GetRecord(int);
+/* Supplied declaration required: dataTable2eSub2GetCount. */
 extern int FUN_002ae898(unsigned int);
 extern int FUN_002c1c0c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c58c8. */
@@ -39,17 +39,17 @@ void FUN_0023150c(int param_1,int param_2,unsigned int param_3,unsigned int para
     *(unsigned int *)(param_1 + 0xb7c) = 0;
   }
   temp_v3 = 0;
-  FUN_0024f5d4();
+  dataTable2eSub2GetCount();
   if (0 < temp_v2) {
     do {
-      temp_v2 = FUN_0024f594(temp_v3);
+      temp_v2 = dataTable2eSub2GetRecord(temp_v3);
       if (*(short *)(temp_v2 + 0x20) == -1) break;
       if (*(short *)(temp_v2 + 0x20) == param_2) {
         *(int *)(param_1 + 0xb7c) = *(short *)(temp_v2 + 0x2a) + 1;
         break;
       }
       temp_v3 = temp_v3 + 1;
-      FUN_0024f5d4();
+      dataTable2eSub2GetCount();
     } while (temp_v3 < temp_v2);
   }
   FUN_002c58c8(0x33,*(unsigned int *)(param_1 + 0xb7c));

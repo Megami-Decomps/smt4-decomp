@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_00183f58(...);
-int FUN_00357a90(void);
+int sub68OwnerCall3(void);
 int FUN_00379be8(void);
 int FUN_003b61ec(void);
 int FUN_003c5848(void);
@@ -23,8 +23,8 @@ extern signed char DAT_005f1891; /* 0x5f1891 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 extern int FUN_0018719c(unsigned int);
-extern int FUN_00314c18(void);
-/* Supplied declaration required: FUN_00357a90. */
+extern int sub68OwnerCall2(void);
+/* Supplied declaration required: sub68OwnerCall3. */
 /* Supplied declaration required: FUN_00379be8. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_003c5848. */
@@ -61,12 +61,12 @@ void FUN_003a2278(int param_1)
     if ((temp_v0 != 0) && (temp_v0 = FUN_0018719c(0x10), temp_v0 == 0)) {
       FUN_003b61ec();
     }
-    FUN_00357a90();
+    sub68OwnerCall3();
     return;
   }
-  temp_v0 = FUN_00314c18();
+  temp_v0 = sub68OwnerCall2();
   if (temp_v0 != 0) {
-    FUN_00357a90();
+    sub68OwnerCall3();
   }
   else {
     temp_v0 = g_gameState;

@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
-extern int jobGetWork(void);
+extern JobWorkC *jobGetWork(u32 job);
 
-
-unsigned char FUN_0031bc88(void)
-
+u8 FUN_0031bc88(u32 job)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  return *(int *)(temp_v0 + 0xc) == 0;
+    return jobGetWork(job)->unk0C == 0;
 }
 
 } /* extern "C" */

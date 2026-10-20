@@ -22,7 +22,7 @@ extern unsigned int DAT_004efd94; /* 0x4efd94 */
 extern unsigned int DAT_004efd98; /* 0x4efd98 */
 
 /* Supplied declaration required: FUN_002a1828. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 void FUN_00153f44(int param_1,int param_2)
@@ -41,7 +41,7 @@ void FUN_00153f44(int param_1,int param_2)
     puVar1 = g_commandBufferCursor;
   }
   else {
-    if (((DAT_00476634 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476634), temp_v0 != 0)) {
+    if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
       DAT_004efd6c = 0x3f800000;
       DAT_004efd70 = 0;
       DAT_004efd74 = 0;

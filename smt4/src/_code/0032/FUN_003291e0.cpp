@@ -72,7 +72,7 @@ extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: FUN_0029f5d8. */
 /* Supplied declaration required: FUN_0029f848. */
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 /* Supplied declaration required: FUN_002ae584. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: FUN_002b8838. */
@@ -355,7 +355,7 @@ unsigned int FUN_003291e0(int *param_1)
     return 0;
   case 4:
     temp_v6 = FUN_0019e0c0(*(unsigned int *)(temp_v7 + 0x530));
-    if ((temp_v6 == 2) && (temp_v6 = FUN_002a0ce8(), temp_v6 != 0)) {
+    if ((temp_v6 == 2) && (temp_v6 = sys43e188GetState(), temp_v6 != 0)) {
       temp_v6 = FUN_002973d8();
       if (temp_v6 != 0) {
         FUN_00248738(temp_v7,3);

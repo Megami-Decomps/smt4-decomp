@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int FUN_00478a70(...); /* 0x478a70 */
+extern int cycleWorkStep(...); /* 0x478a70 */
 extern int FUN_00478ac4(...); /* 0x478ac4 */
 extern unsigned char LAB_0047bd64; /* 0x47bd64 */
 extern unsigned char LAB_0047bd80; /* 0x47bd80 */
@@ -33,7 +33,7 @@ void FUN_0047bcdc(unsigned int *param_1,unsigned int param_2)
   if ((*param_1 & 0x100) == 0) {
     *param_1 = *param_1 | 0x100;
     puVar1 = &LAB_0047bd64;
-    asdProcessCreateSimple(&LAB_0047bd64,4,0,0,FUN_00478a70,0,param_1);
+    asdProcessCreateSimple(&LAB_0047bd64,4,0,0,cycleWorkStep,0,param_1);
     param_1[0x5e5] = (unsigned int)puVar1;
     taskCreateDraw(&LAB_0047bd80,0xec,1,0,FUN_00478ac4,0,param_1,puVar1);
   }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00275f44(undefined4);
-int FUN_0031a218(int, int);
+int panelSetMode3(int, int);
 int FUN_00388758(int);
 int FUN_004a0ef8(int);
 
@@ -27,7 +27,7 @@ struct fn_004ce300_arg0 {
 extern int *FUN_001ab888(void);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
-/* Supplied declaration required: FUN_0031a218. */
+/* Supplied declaration required: panelSetMode3. */
 extern int FUN_0034919c(void);
 extern int FUN_00357bc8(unsigned int, char *);
 /* Supplied declaration required: FUN_00388758. */
@@ -55,7 +55,7 @@ void FUN_004ce300(fn_004ce300_arg0 *param_1)
     param_1->field_0x598 = 10;
     return;
   }
-  FUN_0031a218(-temp_v0,0);
+  panelSetMode3(-temp_v0,0);
   temp_v0 = FUN_00357bc8(param_1->field_0x10,"fountian_healing");
   if (-1 < temp_v0) {
     FUN_00275f44(param_1->field_0x18);

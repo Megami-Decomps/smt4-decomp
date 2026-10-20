@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ s32 offset;
+} Holder;
 
-int FUN_001a8d28(int param_1)
-
+/* Returns the address `offset` bytes (the value stored at 0x3C) past the object. */
+u8 *FUN_001a8d28(Holder *object)
 {
-  return param_1 + *(int *)(param_1 + 0x3c);
+    return (u8 *)object + object->offset;
 }
 
 } /* extern "C" */

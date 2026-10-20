@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_003b99bc(void);
+int dataTable23Count(void);
 
-extern int *FUN_0038599c(int);
-/* Supplied declaration required: FUN_003b99bc. */
+extern int *dataTable23GetEntry(int);
+/* Supplied declaration required: dataTable23Count. */
 
 
 int FUN_00377028(int *param_1)
@@ -20,10 +20,10 @@ int FUN_00377028(int *param_1)
   int temp_v0;
   
   piVar1 = param_1;
-  FUN_003b99bc();
+  dataTable23Count();
   if ((param_1 != (int *)0x0) && (temp_v0 = 1, (int)piVar1 >= 2)) {
     do {
-      piVar2 = (int *)FUN_0038599c(temp_v0);
+      piVar2 = (int *)dataTable23GetEntry(temp_v0);
       piVar3 = (int *)*piVar2;
       if (piVar3 != param_1) {
         piVar2 = (int *)piVar2[1];

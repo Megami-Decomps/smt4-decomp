@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0017fd20(unsigned int *, int);
 int FUN_002e3140(void);
 int FUN_00426204(void);
-int FUN_004262b4(void);
+int resetFlag5891A4And6530(void);
 int FUN_004262e4(unsigned int *);
 int software_interrupt(int);
 
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: FUN_00426204. */
 extern int FUN_00426264(unsigned char *, unsigned int *);
-/* Supplied declaration required: FUN_004262b4. */
+/* Supplied declaration required: resetFlag5891A4And6530. */
 /* Supplied declaration required: FUN_004262e4. */
 extern int FUN_0042632c(unsigned char *);
 
@@ -50,7 +50,7 @@ unsigned int FUN_0047d904(unsigned int *param_1,int *param_2,unsigned int *param
       return 0;
     }
     *(unsigned char *)(param_1 + 1) = 0;
-    FUN_004262b4();
+    resetFlag5891A4And6530();
     *param_2 = temp_v1;
     if (-1 < temp_v1) {
       return 1;

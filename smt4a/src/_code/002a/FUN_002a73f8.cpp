@@ -1,16 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a73f8` (_code @ 0x2a73f8, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns the signed byte at +0x2012 of the object the global points to. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+struct Obj002a73f8 {
+    /* 0x0000 */ u8 unk0000[0x2012];
+    /* 0x2012 */ s8 value;
+};
 
+struct Global002a73f8 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Obj002a73f8 *obj;
+};
 
-int FUN_002a73f8(void)
+extern Global002a73f8 DAT_00588fd0;
 
+s32 FUN_002a73f8(void)
 {
-  return (int)*(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2012);
+    return DAT_00588fd0.obj->value;
 }
 
-} /* extern "C" */
+}

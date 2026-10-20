@@ -1,13 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct ListBoxView {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ int refreshCount;
+} ListBoxView;
 
-void asdListBoxViewRefresh(int param_1)
-
+void asdListBoxViewRefresh(ListBoxView *view)
 {
-  *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-  return;
+    view->refreshCount = view->refreshCount + 1;
 }
 
 } /* extern "C" */

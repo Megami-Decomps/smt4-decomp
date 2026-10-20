@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002f74e8(int, int, unsigned char *, int, unsigned int);
+int emptyStub_002f74e8(int, int, unsigned char *, int, unsigned int);
 
 extern unsigned char DAT_00559f04; /* 0x559f04 */
 extern unsigned char DAT_0055a058; /* 0x55a058 */
 extern unsigned char DAT_0055a110; /* 0x55a110 */
 
 extern unsigned int *FUN_0011b724(void);
-/* Supplied declaration required: FUN_002f74e8. */
+/* Supplied declaration required: emptyStub_002f74e8. */
 
 
 unsigned int * FUN_0012bc90(void)
@@ -31,7 +31,7 @@ unsigned int * FUN_0012bc90(void)
   puVar1[0x1a] = 0xa7;
   puVar1[0x1c] = 0x4000;
   puVar1[0x1d] = 0x8000;
-  FUN_002f74e8(0,0x400010f,&DAT_0055a110,0x10,in_r3);
+  emptyStub_002f74e8(0,0x400010f,&DAT_0055a110,0x10,in_r3);
   return puVar1;
 }
 

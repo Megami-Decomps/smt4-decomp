@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014ed4c(void);
 int FUN_00151b98(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 int FUN_002bf694(...);
 int memClear(unsigned char [128], int);
 
@@ -25,7 +25,7 @@ extern unsigned int g_aocDisplay; /* 0x433130 */
 /* Supplied declaration required: FUN_00151b98. */
 extern int FUN_002a6e7c(unsigned int, int, unsigned int, unsigned char *);
 extern int FUN_002a6f48(unsigned int);
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 extern int *asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf694. */
 extern int FUN_002c30c4(unsigned int);
@@ -66,16 +66,16 @@ int * FUN_002a5ee4(unsigned int param_1,unsigned int param_2,unsigned int param_
   FUN_002bf694(temp_v4,*piVar2 + 0xc);
   pcVar5 = *(char **)(temp_v3 + 8);
   if (*pcVar5 != '-') {
-    FUN_002b64a0(temp_v4);
+    libc_strcat(temp_v4);
   }
   else {
-    FUN_002b64a0(temp_v4,*(unsigned int *)(piVar2[pcVar5[1] * -8 + 0x181] + 8));
+    libc_strcat(temp_v4,*(unsigned int *)(piVar2[pcVar5[1] * -8 + 0x181] + 8));
   }
   if (*(char *)(piVar2[1] + 0xd) != '\0') {
-    FUN_002b64a0(temp_v4,&LAB_002a609c);
+    libc_strcat(temp_v4,&LAB_002a609c);
   }
   else {
-    FUN_002b64a0(temp_v4,&LAB_002a60a4);
+    libc_strcat(temp_v4,&LAB_002a60a4);
   }
   temp_v3 = FUN_002c30c4(*(unsigned int *)(temp_v3 + 8));
   if (temp_v3 == 0) {

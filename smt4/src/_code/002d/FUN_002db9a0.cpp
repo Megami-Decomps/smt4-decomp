@@ -1,33 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00294f64(void);
-int asdMemFree(int);
+int asdMemFree(int ptr);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct JobWork {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ int unk34;
+} JobWork;
 
-/* Supplied declaration required: FUN_00294f64. */
-extern int jobGetWork(void);
-/* Supplied declaration required: asdMemFree. */
-
+extern JobWork *jobGetWork(void);
 
 void FUN_002db9a0(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  if (*(int *)(temp_v0 + 0x34) != 0) {
-    FUN_00294f64();
-    *(unsigned int *)(temp_v0 + 0x34) = 0;
-  }
-  asdMemFree(temp_v0);
-  return;
+    JobWork *work = jobGetWork();
+
+    if (work->unk34 != 0) {
+        FUN_00294f64();
+        work->unk34 = 0;
+    }
+    asdMemFree((int)work);
 }
 
 } /* extern "C" */

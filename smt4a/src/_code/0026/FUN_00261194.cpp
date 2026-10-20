@@ -1,30 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int FUN_003bb088(unsigned int);
+void FUN_003bb088(u32 job);
+s32 jobIsValid(u32 job);
+s32 jobStop(u32 job, s32 flag);
+u32 scrGetArg(...);
 
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(void);
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: FUN_003bb088. */
-
-
-unsigned int FUN_00261194(void)
-
+/* Script command: stops the job whose id is the script argument, if it is valid; always returns 1. */
+u32 FUN_00261194(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = jobIsValid();
-  if (temp_v1 != 0) {
-    FUN_003bb088(temp_v0);
-    jobStop(temp_v0,0);
-  }
-  return 1;
+    u32 job;
+    s32 valid;
+
+    job = scrGetArg();
+    valid = jobIsValid(job);
+    if (valid != 0) {
+        FUN_003bb088(job);
+        jobStop(job, 0);
+    }
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,15 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Sys465690.h"
 
 extern "C" {
 
-extern unsigned char DAT_00465690; /* 0x465690 */
-
-
 void FUN_0011d3cc(void)
-
 {
-  DAT_00465690 = 1;
-  return;
+    DAT_00465690.unk00 = 1;
 }
 
 } /* extern "C" */

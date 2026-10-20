@@ -1,39 +1,46 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMdlManagerDestroy(int);
-int asdMemFree(int);
+int asdMdlManagerDestroy(int handle);
+int asdMemFree(int ptr);
 
-/* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: asdMemFree. */
+typedef struct Part {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ int model;
+    /* 0x0C */ int buffer;
+    /* 0x10 */ u8 unk10[0x40];
+} Part;
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ int model;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ Part parts[3];
+} Obj;
 
-void FUN_00288728(int param_1)
-
+/* Releases the model and buffer of each of the three parts, then the object's own model. */
+void FUN_00288728(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = param_1 + temp_v1 * 0x50 + 0x10;
-    if (*(int *)(temp_v0 + 8) != 0) {
-      asdMdlManagerDestroy(*(int *)(temp_v0 + 8));
-      *(unsigned int *)(temp_v0 + 8) = 0;
+    int i = 0;
+    Part *part;
+
+    do {
+        part = &obj->parts[i];
+        if (part->model != 0) {
+            asdMdlManagerDestroy(part->model);
+            part->model = 0;
+        }
+        if (part->buffer != 0) {
+            asdMemFree(part->buffer);
+            part->buffer = 0;
+        }
+        i = i + 1;
+    } while (i < 3);
+    if (obj->model != 0) {
+        asdMdlManagerDestroy(obj->model);
+        obj->model = 0;
     }
-    if (*(int *)(temp_v0 + 0xc) != 0) {
-      asdMemFree(*(int *)(temp_v0 + 0xc));
-      *(unsigned int *)(temp_v0 + 0xc) = 0;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  if (*(int *)(param_1 + 8) != 0) {
-    asdMdlManagerDestroy(*(int *)(param_1 + 8));
-    *(unsigned int *)(param_1 + 8) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0043c2d4(unsigned char [68], unsigned int, unsigned int, unsigned int);
 int rt_memcpy(unsigned int, unsigned char [68], int);
 
-extern unsigned int FUN_00431140(unsigned int);
-extern unsigned int FUN_004311a8(unsigned int);
+extern unsigned int lookupTable5B47D0(unsigned int);
+extern unsigned int lookupTable5B47A0(unsigned int);
 /* Supplied declaration required: FUN_0043c2d4. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -22,8 +22,8 @@ void FUN_00426eb8(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned int temp_v2;
   unsigned char temp_v3 [68];
   
-  temp_v0 = FUN_004311a8(param_4);
-  temp_v1 = FUN_00431140(param_3);
+  temp_v0 = lookupTable5B47A0(param_4);
+  temp_v1 = lookupTable5B47D0(param_3);
   switch(param_2) {
   case 0:
     temp_v2 = 0x426f60;

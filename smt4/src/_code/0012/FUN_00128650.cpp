@@ -1,50 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00128650` (_code @ 0x128650, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00128650_arg0 fn_00128650_arg0;
-struct fn_00128650_arg0 {
-    unsigned char pad_0x0[0xc];
-    short field_0xc; /* +0xc */
-    short field_0xe; /* +0xe */
-    unsigned char pad_0x10[0x2];
-    undefined2 field_0x12; /* +0x12 */
-    undefined2 field_0x14; /* +0x14 */
-    undefined2 field_0x16; /* +0x16 */
-    byte field_0x18; /* +0x18 */
-};
+typedef struct SizeRecord {
+    u8 unk00[0xe];
+} SizeRecord;
 
+typedef struct SizeOwner00128650 {
+    u8 unk00[0xc];
+    SizeRecord record;             /* 0x0C */
+} SizeOwner00128650;
 
-void FUN_00128650(fn_00128650_arg0 *param_1,int param_2,int param_3)
+void FUN_00128658(SizeRecord *record, int width, int height);
 
+/* Passes the record at the object's +0xC on to FUN_00128658, the function that follows it. */
+void FUN_00128650(SizeOwner00128650 *owner, int width, int height)
 {
-  unsigned short temp_v0;
-  
-  if (param_3 >= 0x92) {
-    param_3 = 0x91;
-  }
-  temp_v0 = (unsigned short)param_3;
-  if (param_1->field_0x18 == 0) {
-    if (param_2 < 0x28) {
-      param_2 = 0x28;
-    }
-    param_1->field_0xc = (short)param_2;
-    param_1->field_0x12 = temp_v0;
-    return;
-  }
-  if (param_1->field_0x18 != 1) {
-    param_1->field_0x16 = temp_v0;
-  }
-  else {
-    if (param_2 < 0x24) {
-      param_2 = 0x24;
-    }
-    param_1->field_0xe = (short)param_2;
-    param_1->field_0x14 = temp_v0;
-  }
-  return;
+    FUN_00128658(&owner->record, width, height);
 }
 
 } /* extern "C" */

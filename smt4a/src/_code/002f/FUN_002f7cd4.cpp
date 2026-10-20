@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00163aa4(...);
 int FUN_00184758(int, int, int);
 int FUN_00184c00(int, int, int);
-int FUN_0050d794(int, unsigned int);
+int fillTwoWordsWithByte(int, unsigned int);
 
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
-/* Supplied declaration required: FUN_0050d794. */
+/* Supplied declaration required: fillTwoWordsWithByte. */
 
 
 void FUN_002f7cd4(int param_1)
@@ -53,7 +53,7 @@ void FUN_002f7cd4(int param_1)
     }
     if (*(char *)(param_1 + 0x486) != '\0') {
       *(unsigned char *)(param_1 + 0x2578) = 1;
-      FUN_0050d794(param_1 + 0x24f4,0xffffffff);
+      fillTwoWordsWithByte(param_1 + 0x24f4,0xffffffff);
       *(unsigned int *)(param_1 + 0x2564) = 1;
       *(unsigned int *)(param_1 + 0x2568) = 0;
       return;

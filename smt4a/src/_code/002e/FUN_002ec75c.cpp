@@ -1,23 +1,27 @@
-#include "romwright_types.h"
+#include "shard/VObject.h"
 
 extern "C" {
 
-extern unsigned char DAT_0055ae64; /* 0x55ae64 */
+extern const u8 DAT_0055ae64[];  /* vtable */
+VObject *FUN_002e9f80(void);
+u8 *FUN_002ed912(u8 *member);
 
-extern unsigned int *FUN_002e9f80(void);
-extern int FUN_002ed912(unsigned int *);
+typedef struct Object55ae64 {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u8 member0C[1];
+} Object55ae64;
 
-
-int FUN_002ec75c(void)
-
+/* Creates the object through FUN_002e9f80, sets its vtable and initialises the member at 0xC; returns the address FUN_002ed912 yields minus 0xC. */
+u8 *FUN_002ec75c(void)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = (unsigned int *)FUN_002e9f80();
-  *puVar1 = (unsigned int)&DAT_0055ae64;
-  temp_v0 = FUN_002ed912(puVar1 + 3);
-  return temp_v0 - 0xc;
+    Object55ae64 *object;
+    u8 *member;
+
+    object = (Object55ae64 *)FUN_002e9f80();
+    object->vtbl = DAT_0055ae64;
+    member = FUN_002ed912(object->member0C);
+    return member - 0xC;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int qsort(...);
-int FUN_00342348(...);
+int screenShowMessage(...);
 int FUN_00493e14(...);
 int FUN_004964e0(...);
 int FUN_004cfeb0(...);
@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
 
 /* Supplied declaration required: qsort. */
-/* Supplied declaration required: FUN_00342348. */
+/* Supplied declaration required: screenShowMessage. */
 extern int FUN_00481100(unsigned int);
 /* Supplied declaration required: FUN_00493e14. */
 /* Supplied declaration required: FUN_004964e0. */
@@ -209,7 +209,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
   FUN_004964e0(param_1,param_2);
   temp_v0 = *(int *)(param_1 + 0xb40);
   temp_v1 = FUN_004cfe4c(param_1 + temp_v0 * 0x74 + 0xb60);
-  FUN_00342348(*(unsigned short *)(param_1 + temp_v0 * 0x1002 + 0xf74 + temp_v1 * 4));
+  screenShowMessage(*(unsigned short *)(param_1 + temp_v0 * 0x1002 + 0xf74 + temp_v1 * 4));
   return;
 }
 

@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned long long FUN_0012444e(unsigned long long *param_1)
-
+/* Returns the 64-bit value `*valueRef`. */
+u64 FUN_0012444e(u64 *valueRef)
 {
-  return *param_1;
+    return *valueRef;
 }
 
 } /* extern "C" */

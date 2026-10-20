@@ -23,7 +23,7 @@ int FUN_003180c4(int, unsigned int [32]);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int FUN_0037c88c(void);
 int FUN_004185c4(...);
-int FUN_0046a0f0(void);
+int idOwnerGetRecordHalf(void);
 int QuestCenter_GetActiveEntry(void);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -53,14 +53,14 @@ extern int FUN_002deb84(void);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
-extern int FUN_00331194(void);
+extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_0036db68. */
 /* Supplied declaration required: FUN_0037c88c. */
-extern int FUN_0037d6c4(void);
+extern int obj04StateIs4(void);
 /* Supplied declaration required: FUN_004185c4. */
-/* Supplied declaration required: FUN_0046a0f0. */
-extern int FUN_004bd340(unsigned int, unsigned int);
+/* Supplied declaration required: idOwnerGetRecordHalf. */
+extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
 
 
@@ -112,7 +112,7 @@ unsigned int FUN_002c4b48(void)
   temp_v11 = '\0';
   temp_v14 = 0;
   QuestCenter_GetActiveEntry();
-  temp_v4 = FUN_0046a0f0() & 0xffff;
+  temp_v4 = idOwnerGetRecordHalf() & 0xffff;
   FUN_001ad9b4();
   temp_v3 = FUN_00275bb0(3);
   if (temp_v3 < 4) {
@@ -134,10 +134,10 @@ unsigned int FUN_002c4b48(void)
             if ((-1 < *(char *)(temp_v6 + temp_v10 + 0x1c88)) &&
                (temp_v7 = FUN_001ab854(), *(short *)(temp_v7 + 0x62) == *(short *)(temp_v9 + 0x102))) {
               temp_v8 = FUN_001ab854((int)*(char *)(temp_v6 + temp_v10 + 0x1c88));
-              temp_v9 = FUN_004bd340(temp_v8,2);
+              temp_v9 = bitsAt60Test(temp_v8,2);
               temp_v11 = temp_v9 != 0;
               temp_v8 = FUN_001ab854((int)*(char *)(temp_v6 + temp_v10 + 0x1c88));
-              temp_v9 = FUN_004bd340(temp_v8,10);
+              temp_v9 = bitsAt60Test(temp_v8,10);
               if (temp_v9 != 0) {
                 temp_v11 = '\x02';
               }
@@ -194,7 +194,7 @@ unsigned int FUN_002c4b48(void)
             if (*(char *)(temp_v4 + 6) == '\0') {
               temp_v3 = FUN_00162e8c();
               QuestCenter_GetActiveEntry();
-              temp_v2 = FUN_0046a0f0();
+              temp_v2 = idOwnerGetRecordHalf();
               FUN_004185c4(temp_v2,0);
               *(unsigned short *)(temp_v3 + 0x1096) = 0;
               *(unsigned short *)(temp_v3 + 0x1094) = 0;
@@ -206,7 +206,7 @@ unsigned int FUN_002c4b48(void)
           temp_v3 = 100;
         }
         else {
-          temp_v3 = FUN_00331194();
+          temp_v3 = panelIsMissingOrFlagClear();
           if (temp_v3 == 0) {
             return 0;
           }
@@ -306,7 +306,7 @@ LAB_002c4ea8:
 LAB_002c4f24:
         FUN_00275fe4(0,2);
         FUN_00275fe4(1,0);
-        temp_v9 = FUN_0037d6c4();
+        temp_v9 = obj04StateIs4();
         if (temp_v9 == 0) {
           return 0;
         }
@@ -346,7 +346,7 @@ LAB_002c4f24:
     FUN_00275fe4(0,5);
     FUN_00275fe4(1,0);
   }
-  temp_v9 = FUN_0037d6c4();
+  temp_v9 = obj04StateIs4();
   if (temp_v9 == 0) {
     return 0;
   }

@@ -1,20 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00310f64(void);
+void FUN_00310f64(void);
 
-/* Supplied declaration required: FUN_00310f64. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 first;
+    /* 0x14 */ u32 second;
+} Holder;
 
-
-void FUN_0030c846(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+/* Stores the two values at 0x10 and 0x14, then runs FUN_00310f64. */
+void FUN_0030c846(Holder *object, u32 unused, u32 first, u32 second)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(param_1 + 0x14) = param_4;
-  *(unsigned int *)(param_1 + 0x10) = param_3;
-  FUN_00310f64();
-  return;
+    object->second = second;
+    object->first = first;
+    FUN_00310f64();
 }
 
 } /* extern "C" */

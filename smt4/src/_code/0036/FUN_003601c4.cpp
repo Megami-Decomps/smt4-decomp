@@ -1,20 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003601c4` (_code @ 0x3601c4, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+struct Body;
 
-void FUN_003601c4(int param_1,unsigned char param_2)
+typedef struct Voice003601c4 {
+    u8 unk00[5];
+    u8 value;                      /* 0x05 */
+    u8 unk06[0x62];
+    struct Body *body;             /* 0x68 */
+} Voice003601c4;
 
+void FUN_003601d0(struct Body *body, u8 value);
+
+/* Stores the value on the voice, then passes it to FUN_003601d0 (the function that follows it) for the voice's body. */
+void FUN_003601c4(Voice003601c4 *voice, u8 value)
 {
-  int temp_v0;
-  
-  *(unsigned char *)(param_1 + 5) = param_2;
-  temp_v0 = *(int *)(param_1 + 0x68);
-  *(unsigned char *)(temp_v0 + 0xe) = param_2;
-  *(unsigned short *)(temp_v0 + 0x6c) = *(unsigned short *)(temp_v0 + 0x6c) | 0x20;
-  return;
+    voice->value = value;
+    FUN_003601d0(voice->body, value);
 }
 
 } /* extern "C" */

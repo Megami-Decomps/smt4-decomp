@@ -1,25 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ec728(int);
-int FUN_002ecb04(unsigned int, unsigned int);
-int FUN_002ecb32(int);
+void FUN_002ec728(u8 *member);
+void FUN_002ecb04(u32 node, u32 arg);
+void FUN_002ecb32(void *object);
 
-/* Supplied declaration required: FUN_002ec728. */
-/* Supplied declaration required: FUN_002ecb04. */
-/* Supplied declaration required: FUN_002ecb32. */
+typedef struct TreeObject {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 *first;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ u32 *second;
+    /* 0x14 */ u8 unk14[0x0C];
+    /* 0x20 */ u8 member20[1];
+} TreeObject;
 
-
-void FUN_00105d2c(int param_1,unsigned int param_2)
-
+/* Tears the object down: the embedded member, then the two values its pointers refer to, then the object itself. */
+void FUN_00105d2c(TreeObject *object, u32 arg)
 {
-/* irregular: 3 native warning(s); review required */
-  FUN_002ec728(param_1 + 0x20);
-  FUN_002ecb04(**(unsigned int **)(param_1 + 4),param_2);
-  FUN_002ecb04(**(unsigned int **)(param_1 + 0x10),param_2);
-  FUN_002ecb32(param_1);
-  return;
+    FUN_002ec728(object->member20);
+    FUN_002ecb04(*object->first, arg);
+    FUN_002ecb04(*object->second, arg);
+    FUN_002ecb32(object);
 }
 
 } /* extern "C" */

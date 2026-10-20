@@ -29,7 +29,7 @@ int FUN_00185e84(...);
 int FUN_001ab854(...);
 int FUN_002ccdb4(...);
 int FUN_003e46f4(...);
-int FUN_003ef9b8(...);
+int halfTableGet(...);
 int FUN_0040082c(void);
 int VectorSignedToFloat(...);
 
@@ -117,13 +117,13 @@ extern int FUN_00348ed0(unsigned int);
 /* Supplied declaration required: FUN_003b67e8. */
 /* Supplied declaration required: FUN_003c0d90. */
 extern unsigned int FUN_003df57c(int, unsigned int);
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e46f4. */
-/* Supplied declaration required: FUN_003ef9b8. */
+/* Supplied declaration required: halfTableGet. */
 /* Supplied declaration required: FUN_0040082c. */
 extern unsigned int FUN_004bcbb4(int, int);
 /* Supplied declaration required: FUN_004bd098. */
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 void FUN_0028d270(int param_1)
@@ -221,10 +221,10 @@ void FUN_0028d270(int param_1)
     else {
       temp_v18 = btlMainGetUnk14();
     }
-    temp_v28 = FUN_004bd340(temp_v18,4);
+    temp_v28 = bitsAt60Test(temp_v18,4);
   }
   else {
-    temp_v28 = FUN_003e0044(4);
+    temp_v28 = playerHasFlagBit(4);
   }
   temp_v11 = 0;
   temp_v27 = (int *)(param_1 + 0x4ba4);
@@ -392,7 +392,7 @@ void FUN_0028d270(int param_1)
             if (!((*(unsigned int *)(temp_v4 + 0x45a8) & DAT_00573bf0) == 0 &&
                  (*(unsigned int *)(temp_v4 + 0x45ac) & DAT_00573bf4) == 0)) {
               temp_v6 = btlGetMainState();
-              temp_v0 = FUN_003ef9b8(temp_v6,temp_v19 + temp_v11);
+              temp_v0 = halfTableGet(temp_v6,temp_v19 + temp_v11);
               temp_v15 = (int)temp_v0;
             }
             else {
@@ -537,7 +537,7 @@ void FUN_0028d270(int param_1)
               else {
                 temp_v4 = btlMainGetUnk14();
               }
-              temp_v9 = FUN_004bd340(temp_v4,4);
+              temp_v9 = bitsAt60Test(temp_v4,4);
               goto LAB_0028d9e0;
             }
             temp_v13 = 0;
@@ -548,7 +548,7 @@ void FUN_0028d270(int param_1)
             }
           }
           else {
-            temp_v9 = FUN_003e0044(4);
+            temp_v9 = playerHasFlagBit(4);
 LAB_0028d9e0:
             temp_v13 = 0;
             if (temp_v9 != 0) {
@@ -837,7 +837,7 @@ LAB_0028d9e0:
       if (!((*(unsigned int *)(temp_v3 + 0x45a8) & DAT_00573bf0) == 0 &&
            (*(unsigned int *)(temp_v3 + 0x45ac) & DAT_00573bf4) == 0)) {
         temp_v6 = btlGetMainState();
-        temp_v0 = FUN_003ef9b8(temp_v6,temp_v10);
+        temp_v0 = halfTableGet(temp_v6,temp_v10);
       }
       else {
         btlGetMainState();

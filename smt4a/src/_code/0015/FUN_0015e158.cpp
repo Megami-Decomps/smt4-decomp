@@ -1,34 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001737b8(...);
+void FUN_001737b8(void *object, u32 value);
 
-typedef struct fn_0015e158_arg0 fn_0015e158_arg0;
-struct fn_0015e158_arg0 {
-    unsigned char pad_0x0[0x60];
-    undefined4 field_0x60; /* +0x60 */
-    undefined4 field_0x64; /* +0x64 */
-    unsigned char pad_0x68[0x1d];
-    byte field_0x85; /* +0x85 */
-    undefined1 field_0x86; /* +0x86 */
-};
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x60];
+    /* 0x60 */ u32 second;
+    /* 0x64 */ u32 first;
+    /* 0x68 */ u8 unk68[0x1D];
+    /* 0x85 */ u8 started;
+    /* 0x86 */ u8 flag;
+} Holder;
 
-/* Supplied declaration required: FUN_001737b8. */
-
-
-void FUN_0015e158(fn_0015e158_arg0 *param_1,unsigned int param_2,unsigned int param_3)
-
+/* Starts the object once: runs FUN_001737b8 on `first` and records both values. */
+void FUN_0015e158(Holder *object, u32 first, u32 second)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1->field_0x85 == 0) {
-    FUN_001737b8(param_1,param_2);
-    param_1->field_0x85 = 1;
-    param_1->field_0x60 = param_3;
-    param_1->field_0x86 = 0;
-    param_1->field_0x64 = param_2;
-  }
-  return;
+    if (object->started == 0) {
+        FUN_001737b8(object, first);
+        object->started = 1;
+        object->second = second;
+        object->flag = 0;
+        object->first = first;
+    }
 }
 
 } /* extern "C" */

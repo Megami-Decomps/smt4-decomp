@@ -1,7 +1,10 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 40 vs built 33 rows, 42 diff lines. */
+/* NON_MATCHING: register allocation only: retail keeps params in r4 and the size/block in r5, the built code swaps them */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+
+extern const char DAT_00410604[]; /* __FILE__ of effPolygonWind.cpp */
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00219fc4(PolyGeom *src);
@@ -11,9 +14,14 @@ void FUN_003269d4(PolyWindBlock *block, PolyWindParams *params);
 PolyWindBlock *effPolyWindGeomClone0(PolyObject *obj)
 {
     PolyWindBlock *srcBlock = (PolyWindBlock *)obj->state;
+    s32 size;
     PolyWindParams *params = (PolyWindParams *)obj->work;
-    PolyWindBlock *block = (PolyWindBlock *)memAlloc(0x10000, 0x100, 0, params->segments * 0x2c + 0xc, 0x10, 1);
+    PolyWindBlock *block;
     u32 sides;
+
+    size = params->segments * 0x2c + 0xc;
+    asdDebugTrace(DAT_00410604, 1041);
+    block = (PolyWindBlock *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
 
     block->data = block->payload;
     block->self = block;

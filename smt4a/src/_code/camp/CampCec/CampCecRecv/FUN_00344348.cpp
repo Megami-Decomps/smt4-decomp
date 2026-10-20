@@ -50,9 +50,9 @@ extern unsigned char LAB_0035a3f0; /* 0x35a3f0 */
 extern int FUN_0035a7c4(...); /* 0x35a7c4 */
 extern int FUN_0035a840(...); /* 0x35a840 */
 extern unsigned char LAB_0036d12c; /* 0x36d12c */
-extern int FUN_0037bdfc(...); /* 0x37bdfc */
+extern int jobScene360WaitStep(...); /* 0x37bdfc */
 extern int FUN_003a5200(...); /* 0x3a5200 */
-extern int FUN_003a60a8(...); /* 0x3a60a8 */
+extern int dataSceneWaitStep(...); /* 0x3a60a8 */
 extern int FUN_003a611c(...); /* 0x3a611c */
 extern unsigned char LAB_00514a64; /* 0x514a64 */
 extern unsigned char LAB_00514b14; /* 0x514b14 */
@@ -78,7 +78,7 @@ extern unsigned int FUN_002a2cf0(void);
 /* Supplied declaration required: campCecDrawListCreate. */
 /* Supplied declaration required: runWinOpenState. */
 /* Supplied declaration required: FUN_004310c0. */
-extern int FUN_004bd340(unsigned char *, unsigned int);
+extern int bitsAt60Test(unsigned char *, unsigned int);
 /* Supplied declaration required: nn_cfg_CTR_IsRestrictP2pCec. */
 
 
@@ -120,12 +120,12 @@ void FUN_00344348(unsigned char param_1)
   puVar1[0xed] = 0xffffffff;
   puVar1[3] = (unsigned int)FUN_0035a840;
   puVar1[4] = (unsigned int)FUN_003a5200;
-  puVar1[5] = (unsigned int)FUN_0037bdfc;
+  puVar1[5] = (unsigned int)jobScene360WaitStep;
   puVar1[6] = (unsigned int)&LAB_0032e4a4;
   puVar1[7] = (unsigned int)FUN_003193a8;
   puVar1[8] = (unsigned int)&LAB_0035a3f0;
   puVar1[9] = (unsigned int)FUN_0035a7c4;
-  puVar1[10] = (unsigned int)FUN_003a60a8;
+  puVar1[10] = (unsigned int)dataSceneWaitStep;
   puVar1[0xb] = (unsigned int)FUN_003a611c;
   puVar3 = &LAB_0036d12c;
   puVar1[0xd] = (unsigned int)&LAB_0036d12c;
@@ -153,12 +153,12 @@ void FUN_00344348(unsigned char param_1)
         puVar1[0xf8] = temp_v0;
       }
       else if (puVar3 != (unsigned char *)0x0) {
-        temp_v2 = FUN_004bd340(puVar3,1);
+        temp_v2 = bitsAt60Test(puVar3,1);
         if (temp_v2 != 0) {
           puVar1[0xf8] = 3;
         }
         else {
-          temp_v2 = FUN_004bd340(puVar3,10);
+          temp_v2 = bitsAt60Test(puVar3,10);
           if (temp_v2 != 0) {
             puVar1[0xf8] = 4;
           }

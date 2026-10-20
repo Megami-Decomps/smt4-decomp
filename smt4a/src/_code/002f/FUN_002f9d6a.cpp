@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int FUN_002f2dec(int *, unsigned int *);
+extern int wordRefsDiffer_002f2dec(int *, unsigned int *);
 
 
 void FUN_002f9d6a(int *param_1,fn_002f9d6a_arg1 *param_2,int *param_3,unsigned int param_4)
@@ -34,13 +34,13 @@ void FUN_002f9d6a(int *param_1,fn_002f9d6a_arg1 *param_2,int *param_3,unsigned i
   *param_1 = *(int *)(*param_3 + 0x1c);
   temp_v1 = 0;
   uStack_18 = param_4;
-  temp_v0 = FUN_002f2dec(&temp_v2,(unsigned int *)&temp_v1);
+  temp_v0 = wordRefsDiffer_002f2dec(&temp_v2,(unsigned int *)&temp_v1);
   if (temp_v0 != 0) {
     *(int *)(temp_v2 + 0x1c) = *param_1;
   }
   *(unsigned int *)(*param_3 + 0x20) = 0;
   temp_v1 = 0;
-  temp_v0 = FUN_002f2dec(param_1,(unsigned int *)&temp_v1);
+  temp_v0 = wordRefsDiffer_002f2dec(param_1,(unsigned int *)&temp_v1);
   if (temp_v0 != 0) {
     *(int *)(*param_1 + 0x20) = temp_v2;
   }

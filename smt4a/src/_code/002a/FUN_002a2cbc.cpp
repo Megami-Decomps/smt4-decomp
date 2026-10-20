@@ -1,26 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned short *FUN_002613f0(int);
+typedef struct Entry {
+    /* 0x00 */ u16 a;
+    /* 0x02 */ u16 b;
+    /* 0x04 */ u16 c;
+    /* 0x06 */ u16 d;
+} Entry;
 
+Entry *FUN_002613f0(s32 index);
 
+/* Clears the 0x18 four-halfword entries. */
 void FUN_002a2cbc(void)
-
 {
-  unsigned short *puVar1;
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    puVar1 = (unsigned short *)FUN_002613f0(temp_v0);
-    *puVar1 = 0;
-    puVar1[1] = 0;
-    temp_v0 = temp_v0 + 1;
-    puVar1[2] = 0;
-    puVar1[3] = 0;
-  } while (temp_v0 < 0x18);
-  return;
+    Entry *entry;
+    s32 i;
+
+    i = 0;
+    do {
+        entry = FUN_002613f0(i);
+        entry->a = 0;
+        entry->b = 0;
+        i = i + 1;
+        entry->c = 0;
+        entry->d = 0;
+    } while (i < 0x18);
 }
 
 } /* extern "C" */

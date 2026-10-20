@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard0037.h"
 
 extern "C" {
 
-extern unsigned char DAT_005e2194; /* 0x5e2194 */
+extern u32 DAT_005e2194[];
 
-
-void FUN_0037d038(unsigned int param_1,unsigned int param_2)
-
+void FUN_0037d038(u32 index, u32 value)
 {
-  if (param_1 < 0x20) {
-    *(unsigned int *)(&DAT_005e2194 + param_1 * 4) = param_2;
-  }
-  return;
+    if (index < 0x20) {
+        DAT_005e2194[index] = value;
+    }
 }
 
 } /* extern "C" */

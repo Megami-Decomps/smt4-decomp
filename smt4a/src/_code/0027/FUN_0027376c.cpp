@@ -16,13 +16,13 @@ typedef struct RequestTable {
     /* 0x0C */ Request requests[1];
 } RequestTable;
 
-extern RequestTable *DAT_00580c8c;
+extern RequestTable *g_eplSlots;
 
 extern void FUN_0019c8c0(u32 handle);
 
 void FUN_0027376c(s32 index)
 {
-    Request *request = &DAT_00580c8c->requests[index];
+    Request *request = &g_eplSlots->requests[index];
 
     if (request->handle != 0) {
         request->pending = 1;

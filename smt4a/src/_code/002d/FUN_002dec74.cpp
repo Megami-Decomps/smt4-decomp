@@ -1,40 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int FUN_00203d04(int);
+void FUN_00203d04(s32 flag);
+s32 jobStop(u32 job, s32 flag);
+s32 jobIsValid(u32 job);
+s32 FUN_002619e0(void);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct Task {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u32 job;
+} Task;
+Task *jobGetWork(void);
 
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_00203d04. */
-extern int FUN_002619e0(void);
-
-
+/* Stops the task's job if it is valid, first running FUN_00203d04(1) when FUN_002619e0 allows it. */
 void FUN_002dec74(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = jobGetWork();
-  temp_v1 = jobIsValid(*(unsigned int *)(temp_v0 + 0x44));
-  if (temp_v1 == 0) {
-    return;
-  }
-  temp_v1 = FUN_002619e0();
-  if (temp_v1 != 0) {
-    FUN_00203d04(1);
-  }
-  jobStop(*(unsigned int *)(temp_v0 + 0x44),0);
-  return;
+    Task *task;
+    s32 result;
+
+    task = jobGetWork();
+    result = jobIsValid(task->job);
+    if (result == 0) {
+        return;
+    }
+    result = FUN_002619e0();
+    if (result != 0) {
+        FUN_00203d04(1);
+    }
+    jobStop(task->job, 0);
 }
 
 } /* extern "C" */

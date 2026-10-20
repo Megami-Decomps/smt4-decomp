@@ -29,7 +29,7 @@ int FUN_00317e78(void);
 int FUN_00324a20(void);
 int FUN_0033c618(void);
 int FUN_0033f784(void);
-int FUN_003af160(unsigned int);
+int spriteTables14And15Load(unsigned int);
 
 extern unsigned int DAT_00439ca8; /* 0x439ca8 */
 extern unsigned char DAT_00446db4; /* 0x446db4 */
@@ -59,7 +59,7 @@ extern unsigned char DAT_00446db4; /* 0x446db4 */
 /* Supplied declaration required: FUN_00324a20. */
 /* Supplied declaration required: FUN_0033c618. */
 /* Supplied declaration required: FUN_0033f784. */
-/* Supplied declaration required: FUN_003af160. */
+/* Supplied declaration required: spriteTables14And15Load. */
 
 
 unsigned int FUN_001c0404(int *param_1)
@@ -94,7 +94,7 @@ unsigned int FUN_001c0404(int *param_1)
         FUN_001ad98c();
         FUN_00223b84();
         FUN_001ddb40();
-        FUN_003af160(DAT_00439ca8);
+        spriteTables14And15Load(DAT_00439ca8);
         FUN_00317e78();
         *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
         return 0;

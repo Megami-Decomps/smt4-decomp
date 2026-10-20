@@ -1,24 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f574; /* 0x57f574 */
+typedef struct Scene {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 state;
+} Scene;
+extern Scene *DAT_0057f574;
 
-
-unsigned int FUN_002619e0(void)
-
+/* Returns 1 when the scene state is 1, 2, 3 or 4. */
+u32 FUN_002619e0(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(DAT_0057f574 + 8);
-  if ((temp_v0 == 3 || temp_v0 == 4) || (temp_v0 == 1 || temp_v0 == 2)) {
-    temp_v1 = 1;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    s32 state;
+    u32 result;
+
+    state = DAT_0057f574->state;
+    if ((state == 3 || state == 4) || (state == 1 || state == 2)) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

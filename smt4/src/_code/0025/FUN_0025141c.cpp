@@ -91,7 +91,7 @@ extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0033c1bc. */
 
 
@@ -166,7 +166,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       FUN_002bf288(2,0x19,0x3e,param_2,param_3,0x65);
     }
     temp_v3 = g_titleScene;
-    temp_v4 = FUN_002c5da8(6,1,0);
+    temp_v4 = packNibblesAndByte(6,1,0);
     piVar8 = (int *)(temp_v3 + 0x12ac);
     temp_v6 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = temp_v4;
@@ -176,7 +176,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
     }
     FUN_002bf288(2,0x19,0x3d,param_2,param_3,0x6a);
     temp_v3 = g_titleScene;
-    temp_v4 = FUN_002c5da8(6,7,0);
+    temp_v4 = packNibblesAndByte(6,7,0);
     piVar8 = (int *)(temp_v3 + 0x12ac);
     temp_v6 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = temp_v4;
@@ -254,7 +254,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         FUN_0033c1bc(param_1,param_2,param_3);
         temp_v7 = g_titleScene;
         if (param_1->field_0x48 != 0) {
-          temp_v8 = FUN_002c5da8(6,1,0);
+          temp_v8 = packNibblesAndByte(6,1,0);
           piVar8 = (int *)(temp_v7 + 0x12ac);
           temp_v9 = piVar8[*piVar8 + 2];
           piVar8[*piVar8 + 2] = temp_v8;
@@ -267,7 +267,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
           FUN_002bf288(2,0x19,0x7d1,param_2,param_3,0x79);
           FUN_002bed3c();
           temp_v7 = g_titleScene;
-          temp_v8 = FUN_002c5da8(6,7,0);
+          temp_v8 = packNibblesAndByte(6,7,0);
           piVar8 = (int *)(temp_v7 + 0x12ac);
           temp_v9 = piVar8[*piVar8 + 2];
           piVar8[*piVar8 + 2] = temp_v8;
@@ -327,7 +327,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       FUN_0033c1bc(param_1,param_2,param_3);
       temp_v7 = g_titleScene;
       if (param_1->field_0x48 != 0) {
-        temp_v8 = FUN_002c5da8(6,1,0);
+        temp_v8 = packNibblesAndByte(6,1,0);
         piVar8 = (int *)(temp_v7 + 0x12ac);
         temp_v9 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v8;
@@ -340,7 +340,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         FUN_002bf288(2,0x19,2000,param_2,param_3,0x79);
         FUN_002bed3c();
         temp_v7 = g_titleScene;
-        temp_v8 = FUN_002c5da8(6,7,0);
+        temp_v8 = packNibblesAndByte(6,7,0);
         piVar8 = (int *)(temp_v7 + 0x12ac);
         temp_v9 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v8;

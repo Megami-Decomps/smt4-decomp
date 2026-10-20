@@ -12,8 +12,8 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_003ff160. */
-extern int FUN_003ff17c(void);
-extern int FUN_003ff190(short);
+extern int flagsBGetBit0(void);
+extern int flagsBGetBit1(short);
 
 
 unsigned int FUN_003b6f00(void)
@@ -41,9 +41,9 @@ unsigned int FUN_003b6f00(void)
       }
       psVar6 = (short *)(temp_v0 + temp_v4 * 0x34);
       if (*psVar6 != 0) {
-        temp_v3 = FUN_003ff17c();
+        temp_v3 = flagsBGetBit0();
         if (temp_v3 != 0) {
-          temp_v3 = FUN_003ff190(*psVar6);
+          temp_v3 = flagsBGetBit1(*psVar6);
           if (temp_v3 != 0) {
             temp_v1 = 1;
           }

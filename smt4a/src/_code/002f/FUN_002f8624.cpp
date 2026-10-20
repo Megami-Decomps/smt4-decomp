@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0031160c(int *);
-int FUN_003116c8(int *, unsigned short *);
+int keyValueCopyConstruct(int *, unsigned short *);
 
 /* stack frame of param_3: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0031160c. */
-/* Supplied declaration required: FUN_003116c8. */
+/* Supplied declaration required: keyValueCopyConstruct. */
 
 
 void FUN_002f8624(unsigned int *param_1,int param_2,unsigned short *param_3)
@@ -44,7 +44,7 @@ void FUN_002f8624(unsigned int *param_1,int param_2,unsigned short *param_3)
     temp_v1 = *piVar4;
     if ((puVar1 != *(unsigned short **)(param_2 + 0xc)) && (puVar1 == puVar2)) {
       *(unsigned short **)(param_2 + 8) = puVar1 + 4;
-      FUN_003116c8(piVar4,puVar1);
+      keyValueCopyConstruct(piVar4,puVar1);
     }
     else {
       FUN_0031160c(piVar4);

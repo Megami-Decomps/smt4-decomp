@@ -1,28 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002629a0(unsigned int, int);
+int FUN_002629a0(u32 value, int a);
 int scrGetArg(...);
 
-/* Supplied declaration required: FUN_002629a0. */
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_001dd114(void)
-
+/* Script command: argument 1 is clamped to be non-negative. */
+u32 FUN_001dd114(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = scrGetArg(1);
-  if (temp_v1 < 0) {
-    temp_v1 = 0;
-  }
-  FUN_002629a0(temp_v0,temp_v1);
-  return 1;
+    u32 value = scrGetArg();
+    int a = scrGetArg(1);
+
+    if (a < 0) {
+        a = 0;
+    }
+    FUN_002629a0(value, a);
+    return 1;
 }
 
 } /* extern "C" */

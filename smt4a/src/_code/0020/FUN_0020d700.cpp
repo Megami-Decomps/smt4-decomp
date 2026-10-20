@@ -23,7 +23,7 @@ extern int DAT_0057f108; /* 0x57f108 */
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002e26ac. */
 extern int FUN_002e26c4(unsigned int);
-extern int FUN_003a62c0(unsigned int);
+extern int dataTable15GetEntry(unsigned int);
 extern int FUN_003e46f4(void);
 
 
@@ -62,7 +62,7 @@ void FUN_0020d700(void)
   temp_v7 = 0;
   if (temp_v7 < temp_v4) {
     do {
-      temp_v5 = FUN_003a62c0(temp_v7);
+      temp_v5 = dataTable15GetEntry(temp_v7);
       if ((((temp_v5 != 0) && ((unsigned int)*(unsigned char *)(temp_v5 + 1) == (int)*(char *)(temp_v2 + 0xa4))) &&
           ((*(short *)(temp_v5 + 0x56) == 0 || (temp_v6 = FUN_0018719c(), temp_v6 != 0)))) &&
          (((((*(short *)(temp_v5 + 0x58) == 0 || (temp_v6 = FUN_003e46f4(), temp_v6 != 0)) &&

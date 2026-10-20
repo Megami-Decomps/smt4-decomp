@@ -1,41 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00296fec` (_code @ 0x296fec, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail pairs the stores to +4/+8 into one stm before the child check and writes +0x0C with write-back so the +0x238 store uses it as base; built orders the stores differently. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00259294(int);
-int FUN_0026b584(int);
+typedef struct Child296fec Child296fec;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct ChildVtbl296fec {
+    void *unk00;
+    void (*destroy)(Child296fec *self);  /* 0x04 */
+} ChildVtbl296fec;
 
-extern unsigned char DAT_0043e188; /* 0x43e188 */
+struct Child296fec {
+    ChildVtbl296fec *vtbl;
+};
 
-/* Supplied declaration required: FUN_00259294. */
-/* Supplied declaration required: FUN_0026b584. */
+typedef struct Obj296fec {
+    /* 0x000 */ u32 unk00;
+    /* 0x004 */ u32 unk04;
+    /* 0x008 */ u32 unk08;
+    /* 0x00C */ u32 unk0c;
+    /* 0x010 */ u8 unk10[0x1f8];
+    /* 0x208 */ Child296fec *child;
+    /* 0x20C */ u8 unk20c[0x2c];
+    /* 0x238 */ u32 unk238;
+} Obj296fec;
 
+void FUN_0026b584(int a);
+void FUN_00259294(int a);
+void FUN_00297050(int a);
 
-void FUN_00296fec(unsigned int *param_1)
-
+/* Resets the object: drops its child, clears the counters and re-initialises the two subsystems. */
+void FUN_00296fec(Obj296fec *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  param_1[1] = 0;
-  param_1[2] = 0;
-  if ((int *)param_1[0x82] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-    param_1[0x82] = 0;
-  }
-  *param_1 = 0;
-  param_1[3] = 0;
-  param_1[0x8e] = 0x32;
-  FUN_0026b584(4);
-  FUN_00259294(4);
-  DAT_0043e188 = 0;
-  return;
+    obj->unk04 = 0;
+    obj->unk08 = 0;
+    if (obj->child != NULL) {
+        obj->child->vtbl->destroy(obj->child);
+        obj->child = NULL;
+    }
+    obj->unk00 = 0;
+    obj->unk0c = 0;
+    obj->unk238 = 50;
+    FUN_0026b584(4);
+    FUN_00259294(4);
+    FUN_00297050(0);
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int FUN_002ea446(int, int);
 int FUN_002ec75c(int *);
 int FUN_002ec774(int, unsigned int, int, int *);
 int FUN_002ec864(int, int *);
-int FUN_002ec890(int *);
+int destroyObj0055ae64(int *);
 int FUN_002ec8a8(int, unsigned char [16]);
 int FUN_002ec8f8(void);
 int FUN_002ec934(int *, int, unsigned int);
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002ec75c. */
 /* Supplied declaration required: FUN_002ec774. */
 /* Supplied declaration required: FUN_002ec864. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ec8a8. */
 /* Supplied declaration required: FUN_002ec8f8. */
 /* Supplied declaration required: FUN_002ec934. */
@@ -57,10 +57,10 @@ void FUN_00105910(int param_1)
     FUN_002ec774(temp_v0,*(unsigned int *)(param_1 + 0x68),param_1 + 0x70,&temp_v5);
     if (temp_v0 != 0) {
       FUN_002ec864(param_1,&temp_v5);
-      FUN_002ec890(&temp_v5);
+      destroyObj0055ae64(&temp_v5);
       return;
     }
-    FUN_002ec890(&temp_v5);
+    destroyObj0055ae64(&temp_v5);
   }
   temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x40) + 0x1c))();
   FUN_002e7614(temp_v2,temp_v1);
@@ -85,7 +85,7 @@ void FUN_00105910(int param_1)
       FUN_002ec964(*(int *)(param_1 + 0x90),*(unsigned int *)(param_1 + 0x68),param_1 + 0x70,&temp_v5
                   );
     }
-    FUN_002ec890(&temp_v5);
+    destroyObj0055ae64(&temp_v5);
   }
   else {
     FUN_002ea446(param_1,0);

@@ -15,7 +15,7 @@ int FUN_002a482c(unsigned int *);
 int FUN_0031d174(unsigned int *);
 int FUN_00344cd0(...);
 int FUN_00479b6c(unsigned int *, int, int, int);
-int FUN_004d0a8c(unsigned int *, unsigned int, unsigned int);
+int size40Set(unsigned int *, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
@@ -46,7 +46,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00344cd0. */
 /* Supplied declaration required: FUN_00479b6c. */
 extern int FUN_004cfe4c(unsigned int *);
-/* Supplied declaration required: FUN_004d0a8c. */
+/* Supplied declaration required: size40Set. */
 
 
 void FUN_0047a484(unsigned int *param_1)
@@ -92,7 +92,7 @@ void FUN_0047a484(unsigned int *param_1)
     FUN_001835b4(2,0x2f,0x51,0,0,0x81);
     temp_v2 = FUN_0031d174(param_1 + 0x90);
     temp_v3 = FUN_002a482c(param_1 + 0x90);
-    FUN_004d0a8c(param_1 + 0xba,temp_v3,temp_v2);
+    size40Set(param_1 + 0xba,temp_v3,temp_v2);
     temp_v1 = (int)(short)param_1[0xd0];
     temp_v0 = (int)(short)param_1[0xcf];
     temp_v4 = (int)*(short *)((int)param_1 + 0x33e);

@@ -23,7 +23,7 @@ int FUN_003c323c(void);
 int FUN_003ca5a4(void);
 int FUN_00483834(int);
 int FUN_004839b4(int);
-int FUN_00483abc(int, int, unsigned int);
+int stateSetterSetFromBase(int, int, unsigned int);
 int FUN_00483acc(int);
 int FUN_004bc95c(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
@@ -60,7 +60,7 @@ extern char *FUN_003798f0(void);
 /* Supplied declaration required: FUN_003ca5a4. */
 /* Supplied declaration required: FUN_00483834. */
 /* Supplied declaration required: FUN_004839b4. */
-/* Supplied declaration required: FUN_00483abc. */
+/* Supplied declaration required: stateSetterSetFromBase. */
 /* Supplied declaration required: FUN_00483acc. */
 /* Supplied declaration required: FUN_004bc95c. */
 
@@ -110,7 +110,7 @@ void FUN_00338bf0(unsigned int param_1,unsigned int param_2)
   FUN_0039933c();
   FUN_00378000();
   FUN_00483acc(temp_v1 + 0xf4);
-  FUN_00483abc(temp_v1 + 0xf4,*(int *)(temp_v1 + 0x40) - 100,*(unsigned int *)(temp_v1 + 0x48));
+  stateSetterSetFromBase(temp_v1 + 0xf4,*(int *)(temp_v1 + 0x40) - 100,*(unsigned int *)(temp_v1 + 0x48));
   FUN_004839b4(temp_v1 + 0xf4);
   FUN_004bc95c(*(unsigned int *)(temp_v1 + 0x40),param_1);
   FUN_0036a434(temp_v1);

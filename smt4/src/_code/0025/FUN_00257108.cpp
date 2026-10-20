@@ -1,36 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c0894(unsigned int);
-int asdMemFree(unsigned int);
+int FUN_002c0894(u32 item);
+int asdMemFree(u32 ptr);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 count;
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ u32 *items;
+    /* 0x18 */ u8 unk18[4];
+    /* 0x1C */ s32 refCount;
+    /* 0x20 */ u8 unk20[4];
+    /* 0x24 */ u32 buffer;
+} Obj;
 
-/* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_00257108(int param_1)
-
+/* Drops a reference; the last one releases the items and the buffer. */
+void FUN_00257108(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x1c) - 1;
-  *(int *)(param_1 + 0x1c) = temp_v0;
-  if (temp_v0 == 0) {
-    for (temp_v1 = 0; temp_v1 < *(unsigned int *)(param_1 + 4); temp_v1++) {
-      FUN_002c0894(*(unsigned int *)(*(int *)(param_1 + 0x14) + temp_v1 * 4));
+    s32 refs = obj->refCount - 1;
+    u32 i;
+
+    obj->refCount = refs;
+    if (refs == 0) {
+        for (i = 0; i < obj->count; i++) {
+            FUN_002c0894(obj->items[i]);
+        }
+        asdMemFree(obj->buffer);
     }
-    asdMemFree(*(unsigned int *)(param_1 + 0x24));
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

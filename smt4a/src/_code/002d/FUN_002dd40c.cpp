@@ -81,7 +81,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -169,7 +169,7 @@ void FUN_002dd40c(void)
     *(unsigned char *)(temp_v1 + 0x1270) = 0;
   }
   temp_v1 = g_renderCtx;
-  temp_v0 = FUN_00169294(6,1,0);
+  temp_v0 = packNibblesAndByte(6,1,0);
   piVar8 = (int *)(temp_v1 + 0x12b8);
   temp_v2 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = temp_v0;
@@ -379,7 +379,7 @@ void FUN_002dd40c(void)
     } while (temp_v5 < 4);
   }
   temp_v5 = g_renderCtx;
-  temp_v1 = FUN_00169294(6,7,0);
+  temp_v1 = packNibblesAndByte(6,7,0);
   piVar8 = (int *)(temp_v5 + 0x12b8);
   temp_v0 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = temp_v1;

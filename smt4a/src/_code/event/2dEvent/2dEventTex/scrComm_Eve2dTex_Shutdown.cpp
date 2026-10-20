@@ -6,14 +6,14 @@ extern "C" {
 
 int jobStop(unsigned int, int);
 int FUN_00281178(unsigned int);
-int FUN_0037d024(unsigned int, int);
+int jobSetWork31(unsigned int, int);
 
 extern unsigned int *g_eventTex; /* 0x57f3b0 */
 
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00281178. */
-/* Supplied declaration required: FUN_0037d024. */
+/* Supplied declaration required: jobSetWork31. */
 
 
 unsigned int scrComm_Eve2dTex_Shutdown(void)
@@ -28,7 +28,7 @@ unsigned int scrComm_Eve2dTex_Shutdown(void)
     do {
       temp_v1 = jobIsValid(*(unsigned int *)(temp_v0 * 4 + 0x5e1f3c));
       if (temp_v1 != 0) {
-        FUN_0037d024(*(unsigned int *)(temp_v0 * 4 + 0x5e1f3c),0);
+        jobSetWork31(*(unsigned int *)(temp_v0 * 4 + 0x5e1f3c),0);
         FUN_00281178(*(unsigned int *)(temp_v0 * 4 + 0x5e1f3c));
       }
       *(unsigned int *)(temp_v0 * 4 + 0x5e1f3c) = 0;

@@ -46,7 +46,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -93,7 +93,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
   FUN_002ba12c(g_titleScene);
   temp_v15 = g_titleScene;
   temp_v14 = romwright_piece_4_4(in_s2,(int)temp_v13);
-  temp_v1 = FUN_002c5da8(6,1,0);
+  temp_v1 = packNibblesAndByte(6,1,0);
   piVar8 = (int *)(temp_v15 + 0x12ac);
   temp_v7 = *piVar8;
   temp_v2 = piVar8[temp_v7 + 2];

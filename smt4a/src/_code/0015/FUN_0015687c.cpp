@@ -1,17 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_001801a4(void);
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x4C];
+    /* 0x4C */ u8 member4C[1];
+} Object;
 
+Object *FUN_001801a4(void);
 
-int FUN_0015687c(void)
-
+/* Returns the address of the member at 0x4C of the object FUN_001801a4 returns. */
+u8 *FUN_0015687c(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_001801a4();
-  return temp_v0 + 0x4c;
+    return FUN_001801a4()->member4C;
 }
 
 } /* extern "C" */

@@ -10,7 +10,7 @@ int FUN_00301dc2(int);
 int FUN_00301e56(...);
 int FUN_003079e8(int, int, int, int *);
 int vecCount28(int *);
-int FUN_00307a18(...);
+int vectorCountx1C_00307a18(...);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern int rt_malloc(void);
 /* Supplied declaration required: FUN_00301e56. */
 /* Supplied declaration required: FUN_003079e8. */
 /* Supplied declaration required: vecCount28. */
-/* Supplied declaration required: FUN_00307a18. */
+/* Supplied declaration required: vectorCountx1C_00307a18. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -42,7 +42,7 @@ void FUN_00133f1c(int *param_1,int param_2,unsigned int param_3)
   int temp_v5;
   int temp_v6;
   
-  temp_v0 = FUN_00307a18();
+  temp_v0 = vectorCountx1C_00307a18();
   temp_v1 = vecCount28(param_1);
   if (temp_v1 < temp_v0) {
     temp_v4 = param_1[1];
@@ -75,7 +75,7 @@ void FUN_00133f1c(int *param_1,int param_2,unsigned int param_3)
       FUN_00301dc2(temp_v5);
     }
     temp_v5 = *param_1;
-    FUN_00307a18(param_1);
+    vectorCountx1C_00307a18(param_1);
     FUN_002e6e14(temp_v5);
     *param_1 = temp_v3;
     param_1[2] = temp_v0 * 0x1c + temp_v3;

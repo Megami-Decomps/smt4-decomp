@@ -16,7 +16,7 @@ int FUN_00365920(...);
 int FUN_003deea4(...);
 int FUN_003df43c(...);
 int FUN_00417b70(...);
-int FUN_00418584(...);
+int partyEntryFlagsBit3(...);
 int FUN_004185c4(...);
 int FUN_00480e30(int, int);
 
@@ -55,7 +55,7 @@ extern int FUN_002c2758(unsigned short);
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_00365898. */
 /* Supplied declaration required: FUN_00365920. */
-extern int FUN_003a33c8(int);
+extern int dataTable2FType1GetEntry(int);
 extern int FUN_003de830(unsigned int);
 extern int FUN_003de92c(unsigned short);
 extern int FUN_003dedf0(unsigned int);
@@ -64,11 +64,11 @@ extern int FUN_003df004(unsigned int, int, unsigned int *);
 extern int FUN_003df390(unsigned int);
 /* Supplied declaration required: FUN_003df43c. */
 /* Supplied declaration required: FUN_00417b70. */
-extern int FUN_0041815c(unsigned int);
-/* Supplied declaration required: FUN_00418584. */
+extern int partyEntryBitsBit5(unsigned int);
+/* Supplied declaration required: partyEntryFlagsBit3. */
 /* Supplied declaration required: FUN_004185c4. */
-extern int FUN_004185ec(unsigned int);
-extern int FUN_004186c0(unsigned int);
+extern int partyEntryFlagsBit1(unsigned int);
+extern int partyEntryBitsBit1(unsigned int);
 /* Supplied declaration required: FUN_00480e30. */
 
 
@@ -109,7 +109,7 @@ int FUN_00235438(void)
   FUN_002e6dd0(temp_v15,600);
   temp_v16 = 0;
   if (DAT_005f16d8 != '\0') {
-    temp_v2 = FUN_003a33c8((int)*(short *)(temp_v2 + 0x2a));
+    temp_v2 = dataTable2FType1GetEntry((int)*(short *)(temp_v2 + 0x2a));
     DAT_005f16dc = (int)*(short *)(temp_v2 + 0x12);
     FUN_00480e30(DAT_005f16dc,1);
     DAT_005f16d8 = 0;
@@ -122,10 +122,10 @@ int FUN_00235438(void)
     temp_v2 = FUN_003df390(temp_v10);
     if (temp_v2 != 0) {
       temp_v2 = FUN_001bd100(temp_v10);
-      if ((temp_v2 == 0) && (temp_v2 = FUN_00418584(temp_v10), temp_v2 != 0)) {
+      if ((temp_v2 == 0) && (temp_v2 = partyEntryFlagsBit3(temp_v10), temp_v2 != 0)) {
         temp_v20 = temp_v20 + 1;
       }
-      temp_v2 = FUN_004185ec(temp_v10);
+      temp_v2 = partyEntryFlagsBit1(temp_v10);
       if (temp_v2 == 0) goto LAB_002358f0;
       temp_v2 = FUN_001bd118(temp_v10);
       if (temp_v2 != 10) {
@@ -139,7 +139,7 @@ int FUN_00235438(void)
             temp_v24 = 0;
             temp_v18 = 0;
             if (temp_v17 == 5 || temp_v17 == 6) goto LAB_002359c4;
-            temp_v3 = FUN_004186c0(temp_v10);
+            temp_v3 = partyEntryBitsBit1(temp_v10);
             if (temp_v3 != 0) {
               temp_v3 = FUN_003de830(temp_v10);
               if (temp_v3 != 0) {
@@ -232,7 +232,7 @@ int FUN_00235438(void)
           temp_v23 = 0;
           temp_v24 = 0;
           temp_v18 = 0;
-          temp_v2 = FUN_004186c0(temp_v10);
+          temp_v2 = partyEntryBitsBit1(temp_v10);
           if (temp_v2 != 0) {
             temp_v9 = 0;
             temp_v2 = 0;
@@ -339,12 +339,12 @@ LAB_002358f0:
         }
       }
       else if (temp_v17 != 1) {
-        temp_v7 = FUN_00418584(temp_v10);
+        temp_v7 = partyEntryFlagsBit3(temp_v10);
         temp_v11 = FUN_001ada74(temp_v10);
         if ((temp_v11 & ~temp_v7) == 0) goto LAB_002358f0;
         FUN_003deea4(temp_v10);
         temp_v17 = 5;
-        temp_v2 = FUN_0041815c(temp_v10);
+        temp_v2 = partyEntryBitsBit5(temp_v10);
         if (temp_v2 != 0) {
           temp_v17 = 6;
         }

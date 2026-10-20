@@ -20,7 +20,7 @@ extern char *FUN_0016780c(unsigned int, int, int *);
 extern int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002a1f60. */
-extern int FUN_0040a75c(int);
+extern int tableByteGet1(int);
 extern unsigned char *FUN_00471678(unsigned int, int, int);
 
 
@@ -40,7 +40,7 @@ void FUN_00403a34(int param_1,int param_2)
   unsigned char *temp_v5;
   int iStack_28;
   
-  temp_v0 = FUN_0040a75c(param_2);
+  temp_v0 = tableByteGet1(param_2);
   puVar8 = (unsigned int *)&DAT_0052d13c;
   temp_v0 = temp_v0 + 1;
   piVar6 = (int *)(param_1 + 0x684);

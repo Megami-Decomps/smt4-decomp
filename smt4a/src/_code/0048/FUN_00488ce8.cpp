@@ -15,9 +15,9 @@ int FUN_003d2150(...);
 int FUN_00489480(int);
 int FUN_0048981c(void);
 int FUN_0048d248(...);
-int FUN_0049277c(int, int, int *, unsigned int **);
+int rectRecRead(int, int, int *, unsigned int **);
 int FUN_00492ab4(...);
-int FUN_00492b84(...);
+int sub68OwnerGetBlock60(...);
 int FUN_00492bc0(...);
 int FUN_00492c18(...);
 int FUN_004d03c8(float **, unsigned int **);
@@ -85,9 +85,9 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: FUN_00489480. */
 /* Supplied declaration required: FUN_0048981c. */
 /* Supplied declaration required: FUN_0048d248. */
-/* Supplied declaration required: FUN_0049277c. */
+/* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: FUN_00492ab4. */
-/* Supplied declaration required: FUN_00492b84. */
+/* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: FUN_00492bc0. */
 /* Supplied declaration required: FUN_00492c18. */
 extern int FUN_00492c5c(int);
@@ -204,7 +204,7 @@ unsigned int FUN_00488ce8(int param_1)
   else {
     temp_v9 = (unsigned int *)&uStack_48;
     temp_v8 = &temp_v13;
-    FUN_0049277c(0x13,0xfa4,&temp_v11,&temp_v12);
+    rectRecRead(0x13,0xfa4,&temp_v11,&temp_v12);
     FUN_004d040c(temp_v11,temp_v12,temp_v13,uStack_48);
     if ((temp_v11 != 0) && (DAT_005f1614 == 0)) {
       FUN_004d03c8(&temp_v8,&temp_v9);
@@ -212,7 +212,7 @@ unsigned int FUN_00488ce8(int param_1)
       *(unsigned int *)(param_1 + 0x2c) = temp_v3;
       temp_v3 = VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
       *(unsigned int *)(param_1 + 0x30) = temp_v3;
-      puVar10 = (unsigned int *)FUN_00492b84(temp_v14);
+      puVar10 = (unsigned int *)sub68OwnerGetBlock60(temp_v14);
       temp_v3 = puVar10[1];
       *(unsigned int *)(param_1 + 0x34) = *puVar10;
       *(unsigned int *)(param_1 + 0x38) = temp_v3;
@@ -239,7 +239,7 @@ unsigned int FUN_00488ce8(int param_1)
     else {
       *(float *)(param_1 + 0x3c) = romwright_u2f((unsigned int)(in_s0)) * DAT_00587f10;
       *(float *)(param_1 + 0x40) = *(float *)(param_1 + 0x40) * temp_v5;
-      pfVar4 = (float *)FUN_00492b84(temp_v14);
+      pfVar4 = (float *)sub68OwnerGetBlock60(temp_v14);
       temp_v8 = (float *)romwright_f2u((float)((*pfVar4 + *(float *)(param_1 + 0x3c))));
       in_s0 = (unsigned int *)romwright_f2u((float)((pfVar4[1] + *(float *)(param_1 + 0x40))));
       temp_v9 = in_s0;
@@ -249,7 +249,7 @@ unsigned int FUN_00488ce8(int param_1)
   if ((DAT_005f161d != '\0') && ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0)) {
     FUN_00317af8(&temp_v10,temp_v15,0);
     FUN_00492ab4(temp_v14);
-    pfVar4 = (float *)FUN_00492b84(temp_v14);
+    pfVar4 = (float *)sub68OwnerGetBlock60(temp_v14);
     temp_v10 = -(temp_v10 * 13.0f);
     temp_v15[0] = -(temp_v15[0] * 13.0f);
     temp_v12 = (unsigned int *)romwright_f2u((float)((temp_v10 / romwright_u2f((unsigned int)(in_s0)) + *pfVar4)));
@@ -267,7 +267,7 @@ unsigned int FUN_00488ce8(int param_1)
         temp_v0 = FUN_00492bc0(temp_v14);
         if (temp_v1 == temp_v0) {
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
-          FUN_00492b84(temp_v14);
+          sub68OwnerGetBlock60(temp_v14);
           temp_v16 = temp_v7;
           temp_v17 = temp_v7;
           FUN_00492c18(temp_v14,&temp_v16);
@@ -279,7 +279,7 @@ unsigned int FUN_00488ce8(int param_1)
       }
       else {
         *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
-        FUN_00492b84(temp_v14);
+        sub68OwnerGetBlock60(temp_v14);
         temp_v16 = temp_v7;
         temp_v17 = temp_v7;
         FUN_00492c18(temp_v14,&temp_v16);
@@ -298,7 +298,7 @@ unsigned int FUN_00488ce8(int param_1)
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
           temp_v3 = FUN_00492c84(temp_v14);
           FUN_0048d248(param_1,temp_v3);
-          FUN_00492b84(temp_v14);
+          sub68OwnerGetBlock60(temp_v14);
           temp_v16 = temp_v7;
           temp_v17 = temp_v7;
           FUN_00492c18(temp_v14,&temp_v16);
@@ -374,7 +374,7 @@ unsigned int FUN_00488ce8(int param_1)
               temp_v1 = FUN_00492c5c(temp_v14);
               temp_v0 = FUN_00492bc0(temp_v14);
               if (temp_v1 == temp_v0) {
-                FUN_00492b84(temp_v14);
+                sub68OwnerGetBlock60(temp_v14);
                 temp_v16 = temp_v7;
                 temp_v17 = temp_v7;
                 FUN_00492c18(temp_v14,&temp_v16);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003defe0(void);
-int FUN_004185a4(unsigned int);
+int partyEntrySetBitsBit4(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 extern int FUN_002f7730(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003defe0. */
-/* Supplied declaration required: FUN_004185a4. */
+/* Supplied declaration required: partyEntrySetBitsBit4. */
 
 
 void FUN_002ae320(void)
@@ -47,7 +47,7 @@ void FUN_002ae320(void)
   temp_v1 = temp_v4;
   FUN_003defe0();
   if ((temp_v1 != 0) && (temp_v2 = FUN_002f7730(*(unsigned int *)(temp_v2 + 0x910),temp_v4), temp_v2 == 3)) {
-    FUN_004185a4(temp_v4);
+    partyEntrySetBitsBit4(temp_v4);
     return;
   }
   return;

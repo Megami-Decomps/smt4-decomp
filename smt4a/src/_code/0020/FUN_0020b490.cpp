@@ -34,7 +34,7 @@ extern unsigned int *FUN_001ab888(void);
 /* Supplied declaration required: FUN_002c7ce8. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
-extern unsigned int FUN_0031cfb4(void);
+extern unsigned int gameDataBlocksGetWord(void);
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_00371f18. */
@@ -120,7 +120,7 @@ LAB_0020b584:
       FUN_002c8538(0);
       FUN_0033449c(0);
       FUN_00333f6c();
-      temp_v0 = FUN_0031cfb4();
+      temp_v0 = gameDataBlocksGetWord();
       if ((temp_v0 != 0) && (puVar2 = (unsigned int *)FUN_001ab888(), temp_v0 <= *puVar2)) {
         *(unsigned int *)(param_1 + 0x4364) = 0x16;
         sysPlaySe(0x92);

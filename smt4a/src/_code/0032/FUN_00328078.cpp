@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00398438(void);
+int dataTable2CType0Count(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,9 +18,9 @@ typedef struct {
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern char *FUN_0033f868(int);
-/* Supplied declaration required: FUN_00398438. */
-extern unsigned int FUN_003ae498(int);
+extern char *dataTable2CGetEntry(int);
+/* Supplied declaration required: dataTable2CType0Count. */
+extern unsigned int dataTable2CType2GetEntry(int);
 
 
 unsigned int FUN_00328078(int param_1)
@@ -45,10 +45,10 @@ unsigned int FUN_00328078(int param_1)
   temp_v5 = 0;
   temp_v8 = romwright_piece_4_4(in_s1,in_s0);
   temp_v3 = param_1;
-  FUN_00398438();
+  dataTable2CType0Count();
   if (0 < temp_v3) {
     do {
-      pcVar5 = (char *)FUN_0033f868(temp_v5);
+      pcVar5 = (char *)dataTable2CGetEntry(temp_v5);
       if (*pcVar5 == -1) {
         return 0;
       }
@@ -76,7 +76,7 @@ unsigned int FUN_00328078(int param_1)
               temp_v0 = temp_v0 | ((unsigned int)(temp_v6 < temp_v9) << 0x1f);
               in_fpscr = temp_v0 | ((unsigned int)((temp_v6 != temp_v6) || (temp_v9 != temp_v9)) << 0x1c);
               if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
-                temp_v4 = FUN_003ae498((int)*(short *)(pcVar5 + 0x12));
+                temp_v4 = dataTable2CType2GetEntry((int)*(short *)(pcVar5 + 0x12));
                 return temp_v4;
               }
             }
@@ -84,7 +84,7 @@ unsigned int FUN_00328078(int param_1)
         }
       }
       temp_v5 = temp_v5 + 1;
-      FUN_00398438();
+      dataTable2CType0Count();
     } while (temp_v5 < (int)pcVar5);
   }
   return 0;

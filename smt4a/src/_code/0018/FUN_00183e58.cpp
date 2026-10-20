@@ -1,61 +1,51 @@
-#include "romwright_types.h"
+#include "shard/Block57f0c4.h"
 
 extern "C" {
 
-int FUN_001846d0(int, int);
-int FUN_0019d36c(void);
+void FUN_001846d0(Unit *unit, s32 flag);
+void FUN_0019d36c(void);
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
-
-/* Supplied declaration required: FUN_001846d0. */
-/* Supplied declaration required: FUN_0019d36c. */
-
-
+/* Tears down the six units: resets each, releases the entries their kinds hold (one for kinds 7, 9, 0x13, 0x14 and 0x15, two for kind 8, and one more for any non-zero kind), then releases the remaining `count` entries and moves the record to state 3. */
 void FUN_00183e58(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  int temp_v3;
-  
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
-  temp_v2 = 0;
-  piVar4 = (int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5d0);
-  do {
-    FUN_001846d0(temp_v1 + temp_v2 * 0x8c + 0x34,1);
-    temp_v0 = *(char *)(temp_v1 + temp_v2 * 4 + 0x5ac);
-    if (temp_v0 != '\0') {
-      if ((temp_v0 == '\a' || temp_v0 == '\t') ||
-         ((temp_v0 == '\x13' || temp_v0 == '\x14') || temp_v0 == '\x15')) {
-        FUN_0019d36c();
-        *piVar4 = *(int *)(temp_v1 + 0x5d0) - 1;
-      }
-      if (*(char *)(temp_v1 + temp_v2 * 4 + 0x5ac) == '\b') {
-        FUN_0019d36c();
-        *piVar4 = *(int *)(temp_v1 + 0x5d0) - 1;
-        FUN_0019d36c();
-        *piVar4 = *piVar4 - 1;
-      }
-      FUN_0019d36c();
-      *piVar4 = *(int *)(temp_v1 + 0x5d0) - 1;
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 6);
-  if (0 < *(int *)(temp_v1 + 0x5d0)) {
-    temp_v2 = 0;
+    Record57f0c4 *record;
+    s32 i;
+    u8 kind;
+    s32 *count;
+
+    record = DAT_0057f0c4.record;
+    i = 0;
+    count = &record->count;
     do {
-      FUN_0019d36c();
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < *(int *)(temp_v1 + 0x5d0));
-    *(unsigned int *)(temp_v1 + 0x5d0) = 0;
-  }
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0xc) = 0;
-  *(unsigned int *)(temp_v1 + 0x10) = 3;
-  return;
+        FUN_001846d0(&record->units[i], 1);
+        kind = record->kinds[i].kind;
+        if (kind != 0) {
+            if ((kind == 7 || kind == 9) || ((kind == 0x13 || kind == 0x14) || kind == 0x15)) {
+                FUN_0019d36c();
+                *count = record->count - 1;
+            }
+            if (record->kinds[i].kind == 8) {
+                FUN_0019d36c();
+                *count = record->count - 1;
+                FUN_0019d36c();
+                *count = *count - 1;
+            }
+            FUN_0019d36c();
+            *count = record->count - 1;
+        }
+        i = i + 1;
+    } while (i < 6);
+    if (0 < record->count) {
+        i = 0;
+        do {
+            FUN_0019d36c();
+            i = i + 1;
+        } while (i < record->count);
+        record->count = 0;
+    }
+    record = DAT_0057f0c4.record;
+    DAT_0057f0c4.record->unk00C = 0;
+    record->unk010 = 3;
 }
 
 } /* extern "C" */

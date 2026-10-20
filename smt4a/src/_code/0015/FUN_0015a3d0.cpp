@@ -1,27 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_0015a2d8(void);
-extern int FUN_0018b65c(void);
+u32 FUN_0015a2d8(void);
+s32 FUN_0018b65c(void);
 
-
-unsigned int FUN_0015a3d0(void)
-
+/* Returns 1 when FUN_0018b65c is nonzero and both bit 29 and bit 28 of the flags word are set. */
+u32 FUN_0015a3d0(void)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_0015a2d8();
-  temp_v1 = FUN_0018b65c();
-  if ((temp_v1 == 0 || (temp_v0 & 0x20000000) == 0) || ((temp_v0 & 0x10000000) == 0)) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v2 = 1;
-  }
-  return temp_v2;
+    u32 flags;
+    s32 enabled;
+    u32 result;
+
+    flags = FUN_0015a2d8();
+    enabled = FUN_0018b65c();
+    if ((enabled == 0 || (flags & 0x20000000) == 0) || ((flags & 0x10000000) == 0)) {
+        result = 0;
+    } else {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

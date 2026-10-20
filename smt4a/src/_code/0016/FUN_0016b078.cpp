@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001942a8(...);
 
-int FUN_0018793c(...);
+int flagBitsMergeRange(...);
 int FUN_00192840(...);
 int FUN_001933b4(...);
 int FUN_00193840(...);
@@ -57,7 +57,7 @@ extern unsigned int DAT_0064c078; /* 0x64c078 */
 extern unsigned int DAT_0064c07c; /* 0x64c07c */
 extern unsigned int DAT_0064c080; /* 0x64c080 */
 
-/* Supplied declaration required: FUN_0018793c. */
+/* Supplied declaration required: flagBitsMergeRange. */
 /* Supplied declaration required: FUN_00192840. */
 extern unsigned short FUN_001932e0(int *, int *, unsigned short *, int);
 /* Supplied declaration required: FUN_001933b4. */
@@ -70,7 +70,7 @@ extern unsigned short FUN_001932e0(int *, int *, unsigned short *, int);
 /* Supplied declaration required: FUN_001a063c. */
 /* Supplied declaration required: FUN_001a4794. */
 /* Supplied declaration required: FUN_001a47d8. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
@@ -180,7 +180,7 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
         *piVar11 = (int)(puVar7 + 0x22);
       }
       else {
-        if (((DAT_005c4c2c & 1) == 0) && (temp_v4 = FUN_002eba64(&DAT_005c4c2c), temp_v4 != 0)) {
+        if (((DAT_005c4c2c & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v4 != 0)) {
           DAT_0064c054 = temp_v11;
           DAT_0064c058 = temp_v10;
           DAT_0064c05c = temp_v10;
@@ -226,7 +226,7 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
     if ((param_1->field_0xb0 != (unsigned int *)0x0) &&
        (*(int *)*piVar13 == **(int **)param_1->field_0xb0)) {
       pvVar4 = param_1->field_0xac;
-      FUN_0018793c(pvVar4,puVar12);
+      flagBitsMergeRange(pvVar4,puVar12);
       FUN_001a063c(piVar11,piVar13[4],piVar13[5] << 2);
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa0),*(int *)(puVar12 + 0xa2) << 2);
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa4),*(int *)(puVar12 + 0xa6) << 2);
@@ -314,7 +314,7 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
     if ((param_1->field_0xb0 != (unsigned int *)0x0) &&
        (*(int *)*piVar13 == **(int **)param_1->field_0xb0)) {
       pvVar4 = param_1->field_0xac;
-      FUN_0018793c(pvVar4,puVar12);
+      flagBitsMergeRange(pvVar4,puVar12);
       FUN_001a063c(piVar11,piVar13[4],piVar13[5] << 2);
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa0),*(int *)(puVar12 + 0xa2) << 2);
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa4),*(int *)(puVar12 + 0xa6) << 2);

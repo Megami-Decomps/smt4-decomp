@@ -1,36 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00110790(int, unsigned int, int);
-int FUN_002eea94(int, int);
+void FUN_00110790(s32 source, u32 dest, s32 length);
+void FUN_002eea94(void *string, s32 size);
 
-typedef struct fn_002f7b9c_arg1 fn_002f7b9c_arg1;
-struct fn_002f7b9c_arg1 {
-    unsigned char pad_0x0[0xc];
-    int field_0xc; /* +0xc */
-    int field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4];
-    int field_0x18; /* +0x18 */
-};
+typedef struct DataRange {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 base;
+    /* 0x10 */ s32 length;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ s32 offset;
+} DataRange;
 
-/* Supplied declaration required: FUN_00110790. */
-extern int FUN_002ea0e4(void);
-/* Supplied declaration required: FUN_002eea94. */
+typedef struct String {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 data;
+} String;
 
+String *constructObj0055affc(void);
 
-void FUN_002f7b9c(unsigned int param_1,fn_002f7b9c_arg1 *param_2)
-
+/* Builds a string with room for `length` 16-bit characters plus a terminator and copies the range's data into it. */
+void FUN_002f7b9c(u32 unused, DataRange *range)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_002ea0e4();
-  FUN_002eea94(temp_v0,param_2->field_0x10 * 2 + 1);
-  temp_v1 = *(unsigned int *)(temp_v0 + 4);
-  FUN_00110790(param_2->field_0xc + param_2->field_0x18,temp_v1,param_2->field_0x10);
-  return;
+    String *string;
+    u32 data;
+
+    string = constructObj0055affc();
+    FUN_002eea94(string, range->length * 2 + 1);
+    data = string->data;
+    FUN_00110790(range->base + range->offset, data, range->length);
 }
 
 } /* extern "C" */

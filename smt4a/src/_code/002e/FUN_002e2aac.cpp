@@ -1,51 +1,40 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(unsigned int *);
-int FUN_002309dc(void);
-int FUN_002e26a4(void);
-int FUN_00330b74(void);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
-int FUN_0037dab0(void);
-int FUN_003a76b8(void);
-int FUN_003b6dc4(void);
+void FUN_002309dc(void);
+void FUN_002e26a4(void);
+void FUN_00330b74(void);
+void FUN_0035b304(void);
+void FUN_0037b450(void);
+void FUN_0037dab0(void);
+void FUN_003a76b8(void);
+void FUN_003b6dc4(void);
+void asdMemFree(void *memory);
+s32 jobStop(u32 job, s32 flag);
 
-extern unsigned int *DAT_0057f108; /* 0x57f108 */
+typedef struct Game {
+    /* 0x00 */ u32 job;
+} Game;
+extern Game *DAT_0057f108;
 
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002309dc. */
-/* Supplied declaration required: FUN_002e26a4. */
-/* Supplied declaration required: FUN_00330b74. */
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
-/* Supplied declaration required: FUN_0037dab0. */
-/* Supplied declaration required: FUN_003a76b8. */
-/* Supplied declaration required: FUN_003b6dc4. */
-
-
+/* Shuts the game screen down: runs the clean-up calls, stops its job, frees it and clears the global. */
 void FUN_002e2aac(void)
-
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = DAT_0057f108;
-  FUN_003b6dc4();
-  FUN_003a76b8();
-  FUN_00330b74();
-  FUN_002309dc();
-  FUN_0037dab0();
-  FUN_0035b304();
-  FUN_0037b450();
-  FUN_002e26a4();
-  jobStop(*puVar1,0);
-  asdMemFree(puVar1);
-  DAT_0057f108 = (unsigned int *)0x0;
-  return;
+    Game *game;
+
+    game = DAT_0057f108;
+    FUN_003b6dc4();
+    FUN_003a76b8();
+    FUN_00330b74();
+    FUN_002309dc();
+    FUN_0037dab0();
+    FUN_0035b304();
+    FUN_0037b450();
+    FUN_002e26a4();
+    jobStop(game->job, 0);
+    asdMemFree(game);
+    DAT_0057f108 = NULL;
 }
 
 } /* extern "C" */

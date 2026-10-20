@@ -14,7 +14,7 @@ int FUN_002a4878(...);
 int FUN_002adce8(...);
 int FUN_002cb278(...);
 int FUN_002f78a0(...);
-int FUN_002f7bc4(...);
+int menuItemPlaySe(...);
 int FUN_0031d1b4(...);
 int FUN_0037c8e4(...);
 int FUN_0037e0b8(...);
@@ -26,7 +26,7 @@ int FUN_00228b04(...);
 int FUN_0028b088(...);
 int FUN_0031f208(...);
 int FUN_0031f27c(...);
-int FUN_00343cdc(void);
+int stateAtF4Apply(void);
 int FUN_003450d4(...);
 int FUN_0035a074(...);
 int FUN_0036cf98(...);
@@ -42,10 +42,10 @@ int FUN_002a7324(int);
 int FUN_002c85b0(...);
 int FUN_002f0384(...);
 int FUN_00320940(...);
-int FUN_00334158(void);
+int objBStateAllowsAction(void);
 int FUN_003343d8(...);
 int FUN_0033449c(...);
-int FUN_0034aa94(...);
+int objBSetWordByIndex(...);
 int FUN_003720a0(...);
 int FUN_00372100(...);
 int FUN_003fd7b4(...);
@@ -103,17 +103,17 @@ extern int FUN_002c2c4c(int);
 /* Supplied declaration required: FUN_002cb278. */
 /* Supplied declaration required: FUN_002f0384. */
 /* Supplied declaration required: FUN_002f78a0. */
-/* Supplied declaration required: FUN_002f7bc4. */
+/* Supplied declaration required: menuItemPlaySe. */
 /* Supplied declaration required: FUN_0031d1b4. */
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
 /* Supplied declaration required: FUN_00320940. */
-/* Supplied declaration required: FUN_00334158. */
+/* Supplied declaration required: objBStateAllowsAction. */
 /* Supplied declaration required: FUN_003343d8. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_00343cdc. */
+/* Supplied declaration required: stateAtF4Apply. */
 /* Supplied declaration required: FUN_003450d4. */
-/* Supplied declaration required: FUN_0034aa94. */
+/* Supplied declaration required: objBSetWordByIndex. */
 /* Supplied declaration required: FUN_0035a074. */
 extern int FUN_0036cf78(void);
 /* Supplied declaration required: FUN_0036cf98. */
@@ -137,7 +137,7 @@ extern int FUN_0040ab8c(unsigned int);
 extern unsigned int FUN_0040ac08(void);
 /* Supplied declaration required: FUN_0040ace8. */
 /* Supplied declaration required: FUN_0045b538. */
-extern int FUN_0047fb50(short);
+extern int unitMatchesAlignment(short);
 
 
 /* WARNING: Removing unreachable block (ram,0x001feb8c) */
@@ -235,28 +235,28 @@ void FUN_001fdde8(int param_1)
       if (param_1 != 0x16) {
         if (param_1 != 0x17) {
           if (param_1 != 0x18) {
-            FUN_0034aa94(0,psVar4[3]);
-            FUN_0034aa94(1,psVar4[4]);
+            objBSetWordByIndex(0,psVar4[3]);
+            objBSetWordByIndex(1,psVar4[4]);
             temp_v7 = psVar4[5];
           }
           else {
-            FUN_0034aa94(0,psVar4[3]);
-            FUN_0034aa94(1,psVar4[4]);
+            objBSetWordByIndex(0,psVar4[3]);
+            objBSetWordByIndex(1,psVar4[4]);
           }
           temp_v3 = 2;
         }
         else {
-          FUN_0034aa94(0,psVar4[3]);
-          FUN_0034aa94(2,psVar4[5]);
+          objBSetWordByIndex(0,psVar4[3]);
+          objBSetWordByIndex(2,psVar4[5]);
           temp_v3 = 1;
         }
       }
       else {
-        FUN_0034aa94(1,psVar4[4]);
-        FUN_0034aa94(2,psVar4[5]);
+        objBSetWordByIndex(1,psVar4[4]);
+        objBSetWordByIndex(2,psVar4[5]);
         temp_v3 = 0;
       }
-      FUN_0034aa94(temp_v3,temp_v7);
+      objBSetWordByIndex(temp_v3,temp_v7);
       temp_v9 = 0x20;
       FUN_00178b04(0x20,&LAB_001fe2e8,0x1e47);
       temp_v3 = 0;
@@ -282,7 +282,7 @@ void FUN_001fdde8(int param_1)
       FUN_003fe86c(temp_v3,0,2);
       FUN_003fd7b4(temp_v3);
     }
-    temp_v9 = FUN_00334158();
+    temp_v9 = objBStateAllowsAction();
     if (temp_v9 == 0) {
       return;
     }
@@ -319,14 +319,14 @@ void FUN_001fdde8(int param_1)
         else {
           FUN_002f0384(0);
           *(unsigned char *)(temp_v5 + 0x3c) = 1;
-          temp_v4 = FUN_00334158();
+          temp_v4 = objBStateAllowsAction();
         }
       }
       else if (temp_v10 != 0) {
         temp_v4 = FUN_0036cf78();
       }
       else {
-        temp_v4 = FUN_00334158();
+        temp_v4 = objBStateAllowsAction();
       }
     }
     else {
@@ -356,7 +356,7 @@ void FUN_001fdde8(int param_1)
         }
       }
       else {
-        temp_v12 = FUN_00334158();
+        temp_v12 = objBStateAllowsAction();
         if ((temp_v12 & ~temp_v10) != 0) {
           FUN_002f0384(1);
         }
@@ -365,7 +365,7 @@ void FUN_001fdde8(int param_1)
         temp_v4 = FUN_0036cf78();
       }
       else {
-        temp_v4 = FUN_00334158();
+        temp_v4 = objBStateAllowsAction();
       }
     }
     if (temp_v4 == 0) {
@@ -402,7 +402,7 @@ void FUN_001fdde8(int param_1)
       temp_v5 = FUN_002a4860(temp_v13);
       temp_v13 = FUN_002a4894(temp_v13);
       psVar13 = (short *)(temp_v9 + (temp_v13 + temp_v5) * 2);
-      temp_v5 = FUN_0047fb50(*psVar13);
+      temp_v5 = unitMatchesAlignment(*psVar13);
       if (temp_v5 == 0) {
         FUN_001641b4(0x100020f);
         return;
@@ -446,7 +446,7 @@ void FUN_001fdde8(int param_1)
         puVar8 = (unsigned int *)FUN_001801a4();
         temp_v3 = FUN_002bf520();
         FUN_0035a074(temp_v3,*puVar8,puVar8[1],puVar8[2],romwright_piece_2_2(temp_v2,*(unsigned short *)(puVar8 + 3)));
-        FUN_00343cdc();
+        stateAtF4Apply();
       }
       else {
         FUN_003720a0(psVar4,0);
@@ -629,7 +629,7 @@ void FUN_001fdde8(int param_1)
     }
     FUN_002adce8(temp_v13,0);
     *(unsigned int *)(temp_v5 + 0x20) = 2;
-    FUN_002f7bc4(param_1);
+    menuItemPlaySe(param_1);
     temp_v3 = 0x1000210;
     FUN_001641b4(temp_v3);
     return;
@@ -641,7 +641,7 @@ void FUN_001fdde8(int param_1)
       FUN_002adce8(temp_v13,0);
       return;
     }
-    temp_v9 = FUN_00334158();
+    temp_v9 = objBStateAllowsAction();
     if (temp_v9 != 0) {
       FUN_003343d8(0xffffffff);
       FUN_0033449c(0);
@@ -672,7 +672,7 @@ LAB_001fea60:
   FUN_0028b088();
   FUN_002adce8(temp_v13,0);
   *(unsigned int *)(temp_v5 + 0x20) = 2;
-  FUN_002f7bc4(param_1);
+  menuItemPlaySe(param_1);
   temp_v3 = 0x1000210;
   FUN_001641b4(temp_v3);
   return;

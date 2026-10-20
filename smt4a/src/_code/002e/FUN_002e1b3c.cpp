@@ -1,19 +1,16 @@
-#include "romwright_types.h"
+#include "shard/Block57f0c4.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+s32 FUN_00275f44(u32 handle, u32 request);
 
-extern int FUN_00275f44(unsigned int, unsigned int);
-
-
-unsigned char FUN_002e1b3c(unsigned int param_1)
-
+/* Returns whether FUN_00275f44 accepts `request` for the record's handle at 0x680. */
+u8 FUN_002e1b3c(u32 request)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00275f44(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x680),param_1);
-  return temp_v0 != 0;
+    s32 accepted;
+
+    accepted = FUN_00275f44(DAT_0057f0c4.record->unk680, request);
+    return accepted != 0;
 }
 
 } /* extern "C" */

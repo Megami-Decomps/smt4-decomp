@@ -13,8 +13,8 @@ int FUN_0032d0c8(...);
 int FUN_003343f0(int);
 int FUN_0035ad50(int, unsigned char [304]);
 int FUN_0035deb0(void);
-int FUN_004a1d54(int);
-int FUN_004d044c(void);
+int screen4AEnter(int);
+int sendEvent100020E(void);
 int FUN_004d0680(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -36,9 +36,9 @@ extern int FUN_002f036c(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_0035deb0. */
-/* Supplied declaration required: FUN_004a1d54. */
+/* Supplied declaration required: screen4AEnter. */
 extern int FUN_004cfe4c(int);
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d04f4(void);
 extern int FUN_004d0524(void);
 extern int FUN_004d0554(void);
@@ -93,11 +93,11 @@ void FUN_004a16bc(int param_1)
     FUN_003343f0(1);
     *(unsigned int *)(param_1 + 0x14) = 8;
     *(unsigned int *)(param_1 + 0x18) = 0;
-    FUN_004d044c();
+    sendEvent100020E();
   }
   else {
     if (temp_v2 != 0) {
-      FUN_004a1d54(param_1);
+      screen4AEnter(param_1);
       FUN_0035deb0();
       return;
     }
@@ -108,7 +108,7 @@ void FUN_004a16bc(int param_1)
       if ('\x01' < temp_v1) {
         *(unsigned char *)(param_1 + 0x861) = 0;
       }
-      FUN_004d044c();
+      sendEvent100020E();
       *(unsigned char *)(param_1 + 0x863) = 1;
       if (*(char *)(param_1 + 0x861) == '\x01') {
         temp_v5 = 0x4e;
@@ -134,7 +134,7 @@ void FUN_004a16bc(int param_1)
       *(unsigned int *)(param_1 + 0x14) = 9;
       *(unsigned int *)(param_1 + 0x18) = 0;
       FUN_00275f44(*(unsigned int *)(param_1 + 0x85c),8);
-      FUN_004d044c();
+      sendEvent100020E();
       return;
     }
   }

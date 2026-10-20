@@ -1,38 +1,49 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int FUN_0040afcc(unsigned int);
+void FUN_0040afcc(u32 owner);
+s32 jobStop(u32 job, s32 flag);
+s32 jobIsValid(u32 job);
+extern u32 DAT_0056fcc0;
 
-typedef int romwright_code(...);
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern unsigned char DAT_0057aa00; /* 0x57aa00 */
+typedef struct Task {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ u32 job;
+} Task;
+Task *jobGetWork(void);
 
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_0040afcc. */
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*destroy)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
+typedef struct Global57aa00 {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Object *object;
+} Global57aa00;
+extern Global57aa00 DAT_0057aa00;
 
+/* Stops the task's job if it is valid, runs FUN_0040afcc and destroys the global object at 0x57AA08. */
 void FUN_002df6f0(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = jobGetWork();
-  temp_v1 = jobIsValid(*(unsigned int *)(temp_v0 + 0x58));
-  if (temp_v1 != 0) {
-    jobStop(*(unsigned int *)(temp_v0 + 0x58),0);
-  }
-  FUN_0040afcc(DAT_0056fcc0);
-  if ((*(int * *)((unsigned char *)&DAT_0057aa00 + 0x8)) != (int *)0x0) {
-    (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_0057aa00 + 0x8)) + 4))((*(int * *)((unsigned char *)&DAT_0057aa00 + 0x8)));
-    (*(int * *)((unsigned char *)&DAT_0057aa00 + 0x8)) = (int *)0x0;
-  }
-  return;
+    Task *task;
+    s32 valid;
+
+    task = jobGetWork();
+    valid = jobIsValid(task->job);
+    if (valid != 0) {
+        jobStop(task->job, 0);
+    }
+    FUN_0040afcc(DAT_0056fcc0);
+    if (DAT_0057aa00.object != NULL) {
+        DAT_0057aa00.object->vtbl->destroy(DAT_0057aa00.object);
+        DAT_0057aa00.object = NULL;
+    }
 }
 
 } /* extern "C" */

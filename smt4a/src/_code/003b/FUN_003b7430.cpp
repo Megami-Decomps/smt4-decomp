@@ -10,9 +10,9 @@ int FUN_004bcd90(short *);
 extern int FUN_001801a4(void);
 extern short *FUN_001ab854(void);
 /* Supplied declaration required: FUN_003df7c4. */
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
-extern int FUN_004bd340(short *, unsigned int);
+extern int bitsAt60Test(short *, unsigned int);
 
 
 unsigned char FUN_003b7430(int param_1,int param_2,int param_3)
@@ -30,14 +30,14 @@ unsigned char FUN_003b7430(int param_1,int param_2,int param_3)
   psVar4 = (short *)0x0;
   if (param_1 < 0) {
     temp_v3 = FUN_001801a4();
-    temp_v1 = FUN_003e0044(1);
+    temp_v1 = playerHasFlagBit(1);
   }
   else {
     psVar4 = (short *)FUN_001ab854();
     if (psVar4 == (short *)0x0) {
       return 1;
     }
-    temp_v1 = FUN_004bd340(psVar4,1);
+    temp_v1 = bitsAt60Test(psVar4,1);
   }
   if (temp_v1 != 0) {
     return 1;

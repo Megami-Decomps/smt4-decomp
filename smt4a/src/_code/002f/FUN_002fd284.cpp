@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ea0e4(...);
+int constructObj0055affc(...);
 
 extern unsigned char DAT_00559ed4; /* 0x559ed4 */
 
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 
 
 int FUN_002fd284(unsigned int *param_1)
@@ -19,8 +19,8 @@ int FUN_002fd284(unsigned int *param_1)
   
   *param_1 = (unsigned int)&DAT_00559ed4;
   *(unsigned char *)(param_1 + 1) = 0;
-  temp_v0 = FUN_002ea0e4(param_1 + 2);
-  temp_v0 = FUN_002ea0e4(temp_v0 + 8);
+  temp_v0 = constructObj0055affc(param_1 + 2);
+  temp_v0 = constructObj0055affc(temp_v0 + 8);
   return temp_v0 - 0x10;
 }
 

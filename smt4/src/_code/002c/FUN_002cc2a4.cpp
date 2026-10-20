@@ -1,15 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043da28[]; /* 0x43da28 */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x40];
+} Entry;
 
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x4D0];
+    /* 0x4D0 */ Entry entries[1];
+} Obj;
 
-int FUN_002cc2a4(int param_1)
+extern struct {
+    u8 unk0[4];
+    Obj *obj;
+} DAT_0043da28;
 
+/* Address of the 0x40-byte entry `index` at +0x4D0 of the object. */
+int FUN_002cc2a4(int index)
 {
-  int base = DAT_0043da28[1];
-  return base + param_1 * 0x40 + 0x4d0;
+    Obj *obj = DAT_0043da28.obj;
+
+    return (int)&obj->entries[index];
 }
 
 } /* extern "C" */

@@ -22,7 +22,7 @@ extern unsigned int FUN_002e6e34(unsigned char *, int);
 /* Supplied declaration required: FUN_002f1468. */
 /* Supplied declaration required: FUN_002f3e6a. */
 /* Supplied declaration required: FUN_002fb208. */
-extern unsigned int *FUN_0030cd14(int *, unsigned int *);
+extern unsigned int *wordRefsEqual_0030cd14(int *, unsigned int *);
 
 
 unsigned int * FUN_00129316(int param_1)
@@ -45,7 +45,7 @@ unsigned int * FUN_00129316(int param_1)
   temp_v4 = temp_v0;
   FUN_002f3e6a(&temp_v3,puVar4,&temp_v4);
   temp_v5 = *(unsigned int *)(param_1 + 0x50);
-  puVar2 = (unsigned int *)FUN_0030cd14(&temp_v3,(unsigned int *)&temp_v5);
+  puVar2 = (unsigned int *)wordRefsEqual_0030cd14(&temp_v3,(unsigned int *)&temp_v5);
   if (puVar2 != (unsigned int *)0x0) {
     FUN_002fb208();
     puVar3 = puVar4;

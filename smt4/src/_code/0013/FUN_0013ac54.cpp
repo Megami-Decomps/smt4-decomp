@@ -1,19 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_dspsndState; /* 0x4e6f64 */
+extern u8 g_dspsndState;
+extern u8 nn_snd_CTR_Dspsnd_SetIsHeadsetConnected(u8 *state, u8 connected);
 
-extern unsigned char nn_snd_CTR_Dspsnd_SetIsHeadsetConnected(unsigned int, unsigned char);
-
-
-unsigned char FUN_0013ac54(unsigned int param_1,unsigned char param_2)
-
+u8 FUN_0013ac54(u32 unused, u8 connected)
 {
-  unsigned char temp_v0;
-  
-  temp_v0 = nn_snd_CTR_Dspsnd_SetIsHeadsetConnected((unsigned int)&g_dspsndState,param_2);
-  return temp_v0;
+    return nn_snd_CTR_Dspsnd_SetIsHeadsetConnected(&g_dspsndState, connected);
 }
 
 } /* extern "C" */

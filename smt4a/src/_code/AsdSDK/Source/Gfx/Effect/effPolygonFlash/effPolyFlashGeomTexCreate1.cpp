@@ -1,7 +1,9 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 86 vs built 81 rows, 80 diff lines. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+
+extern const char DAT_00544ba8[];
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
@@ -14,23 +16,29 @@ extern u8 DAT_005c1f82;
 PolyGeomBlock *effPolyFlashGeomTexCreate1(PolyParams *params, void *texture)
 {
     PolyGeom *geom;
-    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, params->segments * 0x18 + 0x10, 0x10, 1);
+    PolyGeomBlock *block;
+    u32 segments;
+    u32 payloadSize = params->segments * 0x18;
+
+    asdDebugTrace(DAT_00544ba8, 1641);
+    block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, payloadSize + 0x10, 0x10, 1);
 
     block->data = block->payload;
     block->self = block;
     geom = FUN_002b3b58(params->segments & 0xffff, 2, 4, &DAT_005c1f82, 76);
     block->geom = geom;
-    if (texture != NULL) {
-        FUN_00381830(geom, texture);
-    } else {
+    if (texture == NULL) {
         geom->unk04 = FUN_0037a834(19);
         FUN_00212500(geom->unk04);
+    } else {
+        FUN_00381830(geom, texture);
     }
-    if (params->segments != 0) {
+    segments = params->segments;
+    if (segments != 0) {
         PolyQuadUV *uv = block->geom->buf->uv;
         u32 i;
 
-        for (i = 0; i < params->segments; i++) {
+        for (i = 0; i < segments; i++) {
             if (i & 1) {
                 uv->u0 = 0.5f; uv->v0 = 0;
                 uv->u1 = 0;    uv->v1 = 0;

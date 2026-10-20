@@ -9,7 +9,7 @@ int SBORROW4(int, int);
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int randRange(unsigned int);
 extern int btlGetMainState(void);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 
@@ -37,7 +37,7 @@ unsigned int FUN_003bef90(void)
       do {
         if (-1 < *(char *)(temp_v1 + temp_v6 + 0x90f0)) {
           temp_v2 = FUN_002a8740();
-          temp_v3 = FUN_0029ebac(temp_v2,10);
+          temp_v3 = flagWordTestBit(temp_v2,10);
           if (temp_v3 != 0) {
             temp_v0 = *(unsigned char *)(temp_v2 + 0x600);
             if (temp_v0 < 2) {

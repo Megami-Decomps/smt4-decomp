@@ -1,26 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct BtlUnit {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unk004[0x284];
+} BtlUnit;
 
-unsigned int * FUN_003366f8(int param_1)
+typedef struct BtlMain {
+    /* 0x0000 */ u8 unk0000[0x1FC0];
+    /* 0x1FC0 */ BtlUnit *units;
+} BtlMain;
 
+/* First active, present, visible unit among units 4-0x35, or NULL. */
+BtlUnit *FUN_003366f8(BtlMain *btl)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = 4;
-  while( 1 ) {
-    puVar1 = (unsigned int *)(*(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288);
-    temp_v1 = *puVar1;
-    if ((((temp_v1 & 1) != 0) && ((temp_v1 & 0x40) == 0)) && ((temp_v1 & 0x10) != 0)) break;
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 0x36) {
-      return (unsigned int *)0x0;
+    int i = 4;
+    BtlUnit *unit;
+    u32 flags;
+
+    while (1) {
+        unit = btl->units + i;
+        flags = unit->flags;
+        if ((((flags & 1) != 0) && ((flags & 0x40) == 0)) && ((flags & 0x10) != 0)) {
+            break;
+        }
+        i = i + 1;
+        if (i >= 0x36) {
+            return NULL;
+        }
     }
-  }
-  return puVar1;
+    return unit;
 }
 
 } /* extern "C" */

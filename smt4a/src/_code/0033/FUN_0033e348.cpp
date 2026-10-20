@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00162e8c(void);
 int FUN_001aea28(unsigned int);
-int FUN_00398388(void);
-int FUN_003983a0(void);
+int dataTable2EType1Count(void);
+int dataTable2EType0Count(void);
 int FUN_0040ace8(unsigned int, int);
 
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
@@ -24,10 +24,10 @@ extern short *DAT_005f1c6c; /* 0x5f1c6c */
 /* Supplied declaration required: FUN_00162e8c. */
 extern unsigned short *FUN_001801a4(void);
 /* Supplied declaration required: FUN_001aea28. */
-extern short *FUN_0033f7c0(int);
-extern short *FUN_0033f7f8(int);
-/* Supplied declaration required: FUN_00398388. */
-/* Supplied declaration required: FUN_003983a0. */
+extern short *dataTable2EType1GetEntry(int);
+extern short *dataTable2EType0GetEntry(int);
+/* Supplied declaration required: dataTable2EType1Count. */
+/* Supplied declaration required: dataTable2EType0Count. */
 /* Supplied declaration required: FUN_0040ace8. */
 
 
@@ -104,10 +104,10 @@ unsigned int FUN_0033e348(void)
     return 0;
   }
   temp_v2 = 0;
-  FUN_00398388();
+  dataTable2EType1Count();
   if (0 < (int)psVar2) {
     do {
-      psVar2 = (short *)FUN_0033f7c0(temp_v2);
+      psVar2 = (short *)dataTable2EType1GetEntry(temp_v2);
       if ((int)*psVar2 == (unsigned int)puVar1[4]) {
         if (DAT_005f1c6c == (short *)0xffffffff) {
           psVar2 = (short *)(int)psVar2[1];
@@ -119,14 +119,14 @@ unsigned int FUN_0033e348(void)
         break;
       }
       temp_v2 = temp_v2 + 1;
-      FUN_00398388();
+      dataTable2EType1Count();
     } while (temp_v2 < (int)psVar2);
   }
   temp_v2 = 0;
-  FUN_003983a0();
+  dataTable2EType0Count();
   if (0 < (int)psVar2) {
     do {
-      psVar2 = (short *)FUN_0033f7f8(temp_v2);
+      psVar2 = (short *)dataTable2EType0GetEntry(temp_v2);
       temp_v0 = (unsigned int)*psVar2;
       if (temp_v0 == *puVar1) {
         temp_v2 = DAT_005f1c68;
@@ -141,7 +141,7 @@ unsigned int FUN_0033e348(void)
         return 0;
       }
       temp_v2 = temp_v2 + 1;
-      FUN_003983a0();
+      dataTable2EType0Count();
     } while (temp_v2 < (int)temp_v0);
   }
   return 1;

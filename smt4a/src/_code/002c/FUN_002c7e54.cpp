@@ -1,14 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+typedef struct Game {
+    /* 0x0000 */ u8 unk0000[0x1390];
+    /* 0x1390 */ u8 member1390[0xC87];
+    /* 0x2017 */ u8 unk2017;
+    /* 0x2018 */ u8 unk2018;
+} Game;
 
+typedef struct Global588fd0 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Game *game;
+} Global588fd0;
+extern Global588fd0 DAT_00588fd0;
 
-unsigned char FUN_002c7e54(void)
-
+/* Returns the byte at 0x2018 of the game record. */
+u8 FUN_002c7e54(void)
 {
-  return *(unsigned char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2018);
+    return DAT_00588fd0.game->unk2018;
 }
 
 } /* extern "C" */

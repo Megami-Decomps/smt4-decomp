@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x98];
+    /* 0x98 */ u8 flag;
+} Holder;
 
-void FUN_001742d8(int param_1)
-
+/* Sets the byte at 0x98. */
+void FUN_001742d8(Holder *object)
 {
-  *(unsigned char *)(param_1 + 0x98) = 1;
-  return;
+    object->flag = 1;
 }
 
 } /* extern "C" */

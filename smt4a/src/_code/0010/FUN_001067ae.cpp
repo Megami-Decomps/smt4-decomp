@@ -9,7 +9,7 @@ int FUN_002e7614(int, int);
 int FUN_002e7658(unsigned char [16]);
 int FUN_002ece58(int, int);
 int FUN_002ed258(unsigned char [16], unsigned int);
-int FUN_002ed294(int, int);
+int ringSetLimit(int, int);
 int FUN_002ed84a(...);
 
 /* stack frame of param_2: 2 slot(s), 5 byte(s) */
@@ -25,7 +25,7 @@ extern int FUN_002e760a(unsigned int);
 extern unsigned int FUN_002e76b6(void);
 /* Supplied declaration required: FUN_002ece58. */
 /* Supplied declaration required: FUN_002ed258. */
-/* Supplied declaration required: FUN_002ed294. */
+/* Supplied declaration required: ringSetLimit. */
 /* Supplied declaration required: FUN_002ed84a. */
 extern int FUN_002ed882(unsigned char *, int);
 
@@ -64,7 +64,7 @@ unsigned int FUN_001067ae(unsigned int param_1,int param_2)
       FUN_002ece58(temp_v6,temp_v0);
     }
     else {
-      FUN_002ed294(temp_v0,0);
+      ringSetLimit(temp_v0,0);
     }
   }
   else {

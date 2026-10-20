@@ -9,7 +9,7 @@ int addressBlockAllocate(unsigned int *, int);
 int FUN_0010f898(int);
 int FUN_0010f97c(void);
 int FUN_0010f9d0(int);
-int FUN_0010fab0(int, unsigned int);
+int nnosInitAddressSpaceOnce(int, unsigned int);
 int FUN_0010fae4(void);
 int FUN_002c38fc(...);
 int FUN_002c3918(unsigned int *, unsigned int, unsigned int, int);
@@ -61,7 +61,7 @@ extern unsigned int DAT_004e40fc; /* 0x4e40fc */
 extern int FUN_0010f96c(void);
 /* Supplied declaration required: FUN_0010f97c. */
 /* Supplied declaration required: FUN_0010f9d0. */
-/* Supplied declaration required: FUN_0010fab0. */
+/* Supplied declaration required: nnosInitAddressSpaceOnce. */
 /* Supplied declaration required: FUN_0010fae4. */
 /* Supplied declaration required: FUN_002c38fc. */
 /* Supplied declaration required: FUN_002c3918. */
@@ -85,7 +85,7 @@ void FUN_00104f50(void)
   FUN_0010f898((temp_v0 - temp_v2) - 0x2f00000);
   FUN_0010f9d0(0x2f00000);
   temp_v1 = FUN_0010f820();
-  FUN_0010fab0(0x8000000,temp_v1);
+  nnosInitAddressSpaceOnce(0x8000000,temp_v1);
   FUN_0010fae4();
   nn_init_InitializeAllocator(0x100000);
   DAT_004e40f4 = 0;

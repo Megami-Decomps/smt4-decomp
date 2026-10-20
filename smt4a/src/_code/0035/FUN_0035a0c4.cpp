@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003e5478(unsigned int, unsigned int);
-int FUN_003e5504(unsigned int, int *);
+int linkHolderRunAll(unsigned int, int *);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_003e5478. */
-/* Supplied declaration required: FUN_003e5504. */
+/* Supplied declaration required: linkHolderRunAll. */
 
 
 void FUN_0035a0c4(unsigned int *param_1,unsigned int param_2)
@@ -80,7 +80,7 @@ void FUN_0035a0c4(unsigned int *param_1,unsigned int param_2)
     temp_v2 = *param_1;
     uStack_14 = param_1[1];
     uStack_10 = param_1[2];
-    FUN_003e5504(param_1[7],&temp_v2);
+    linkHolderRunAll(param_1[7],&temp_v2);
     return;
   default:
     temp_v1 = 0;
@@ -89,7 +89,7 @@ void FUN_0035a0c4(unsigned int *param_1,unsigned int param_2)
     temp_v2 = *param_1;
     uStack_14 = param_1[1];
     uStack_10 = param_1[2];
-    FUN_003e5504(param_1[7],&temp_v2);
+    linkHolderRunAll(param_1[7],&temp_v2);
     return;
   }
   param_1[0xc] = temp_v0;
@@ -97,7 +97,7 @@ void FUN_0035a0c4(unsigned int *param_1,unsigned int param_2)
   temp_v2 = *param_1;
   uStack_14 = param_1[1];
   uStack_10 = param_1[2];
-  FUN_003e5504(param_1[7],&temp_v2);
+  linkHolderRunAll(param_1[7],&temp_v2);
   return;
 }
 

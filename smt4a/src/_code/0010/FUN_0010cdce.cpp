@@ -15,7 +15,7 @@ int FUN_002f1448(int **, int *);
 int FUN_002f1486(int **);
 int FUN_002f6c70(int, unsigned char [8]);
 int FUN_002f6c82(int, int *);
-int FUN_002f6d7c(unsigned char [8], int *, int);
+int wordMoveOut_002f6d7c(unsigned char [8], int *, int);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -38,8 +38,8 @@ extern unsigned int FUN_002ea714(void);
 /* Supplied declaration required: FUN_002f1486. */
 /* Supplied declaration required: FUN_002f6c70. */
 /* Supplied declaration required: FUN_002f6c82. */
-extern int FUN_002f6d4c(int *, unsigned int *);
-/* Supplied declaration required: FUN_002f6d7c. */
+extern int wordRefsDiffer_002f6d4c(int *, unsigned int *);
+/* Supplied declaration required: wordMoveOut_002f6d7c. */
 
 
 void FUN_0010cdce(int param_1)
@@ -62,7 +62,7 @@ void FUN_0010cdce(int param_1)
   temp_v2 = *(int *)(*(int *)(param_1 + 0x30) + 8);
   while( 1 ) {
     temp_v7 = *(unsigned int *)(param_1 + 0x30);
-    temp_v1 = FUN_002f6d4c(&temp_v2,(unsigned int *)&temp_v7);
+    temp_v1 = wordRefsDiffer_002f6d4c(&temp_v2,(unsigned int *)&temp_v7);
     if (temp_v1 == 0) break;
     temp_v1 = *(int *)(*(int *)(temp_v2 + 0x18) + 0x118);
     FUN_0012430a();
@@ -72,7 +72,7 @@ void FUN_0010cdce(int param_1)
       if (temp_v1 == 0) break;
     }
     temp_v3 = *(unsigned int *)(temp_v2 + 0x18);
-    FUN_002f6d7c(temp_v8,&temp_v2,0);
+    wordMoveOut_002f6d7c(temp_v8,&temp_v2,0);
     FUN_002f6c70(param_1 + 0x20,temp_v8);
     FUN_002f6c82(param_1 + 4,&temp_v3);
     FUN_002f1448(&temp_v4,&temp_v3);

@@ -1,34 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2968` (_code @ 0x2c2968, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 
-int FUN_001200d8(unsigned int);
-int FUN_002abb5c(unsigned int);
-int nw_gfx_SceneTraverser_Begin(unsigned int, unsigned int);
+/* Table of virtual methods: slot 4 (+0x10) takes the object and a handle. */
+typedef struct VisitorVtbl {
+    void *slots[4]; /* 0x00 */
+    void (*visit)(struct Visitor *self, void *handle); /* 0x10 */
+} VisitorVtbl;
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Visitor {
+    VisitorVtbl *vtbl; /* 0x00 */
+} Visitor;
 
-/* Supplied declaration required: FUN_001200d8. */
-/* Supplied declaration required: FUN_002abb5c. */
-/* Supplied declaration required: nw_gfx_SceneTraverser_Begin. */
+/* Pair of scene handles drawn one after the other. */
+typedef struct ScenePass {
+    u32 unk00;     /* 0x00 */
+    void *sceneB;  /* 0x04 */
+    void *sceneA;  /* 0x08 */
+    u32 unkC;      /* 0x0c */
+    void *handle;  /* 0x10 */
+} ScenePass;
 
+extern void FUN_001200d8(void *handle);
+extern void FUN_002abb5c(void *handle);
+extern int nw_gfx_SceneTraverser_Begin(void *sceneA, void *sceneB);
 
-void FUN_002c2968(int param_1,int *param_2)
-
+void FUN_002c2968(ScenePass *pass, Visitor *visitor)
 {
-/* irregular: 3 native warning(s); review required */
-  (**(romwright_code **)(*param_2 + 0x10))(param_2,*(unsigned int *)(param_1 + 0x10));
-  FUN_001200d8(*(unsigned int *)(param_1 + 0x10));
-  nw_gfx_SceneTraverser_Begin(*(unsigned int *)(param_1 + 8),*(unsigned int *)(param_1 + 4));
-  (**(romwright_code **)(*param_2 + 0x10))(param_2,*(unsigned int *)(param_1 + 8));
-  FUN_002abb5c(*(unsigned int *)(param_1 + 8));
-  return;
+    asdDebugHookPtr(pass->handle);
+    visitor->vtbl->visit(visitor, pass->handle);
+    FUN_001200d8(pass->handle);
+    nw_gfx_SceneTraverser_Begin(pass->sceneA, pass->sceneB);
+    visitor->vtbl->visit(visitor, pass->sceneA);
+    FUN_002abb5c(pass->sceneA);
 }
 
 } /* extern "C" */

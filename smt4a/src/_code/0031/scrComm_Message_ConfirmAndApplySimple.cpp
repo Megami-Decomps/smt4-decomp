@@ -11,7 +11,7 @@ int FUN_00275fe4(...);
 int FUN_003dea6c(unsigned int, int, int);
 int FUN_00418070(unsigned int, int);
 int FUN_00418714(unsigned int);
-int FUN_004da2f8(void);
+int optionsClearFlag1(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: FUN_001695a0. */
-extern int FUN_0016a0f0(unsigned int);
+extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00237898. */
 /* Supplied declaration required: FUN_00275bb0. */
 /* Supplied declaration required: FUN_00275fe4. */
@@ -29,7 +29,7 @@ extern int FUN_002deb84(void);
 extern int FUN_004186a4(void);
 extern unsigned int FUN_004186e0(void);
 /* Supplied declaration required: FUN_00418714. */
-/* Supplied declaration required: FUN_004da2f8. */
+/* Supplied declaration required: optionsClearFlag1. */
 
 
 unsigned int scrComm_Message_ConfirmAndApplySimple(void)
@@ -50,7 +50,7 @@ unsigned int scrComm_Message_ConfirmAndApplySimple(void)
     FUN_00275fe4(0,0);
     FUN_00275fe4(1,0);
   }
-  temp_v1 = FUN_0016a0f0(0x1e);
+  temp_v1 = dataTableValueOrZero(0x1e);
   temp_v0 = FUN_00275bb0(0);
   if (temp_v0 == 0) {
     temp_v2 = FUN_004186e0();
@@ -64,7 +64,7 @@ unsigned int scrComm_Message_ConfirmAndApplySimple(void)
       FUN_00275fe4(1,0);
       FUN_00418070(temp_v2,0);
       FUN_00418714(temp_v2);
-      FUN_004da2f8();
+      optionsClearFlag1();
       return 1;
     }
   }

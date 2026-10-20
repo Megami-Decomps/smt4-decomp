@@ -1,15 +1,11 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_005891d8; /* 0x5891d8 */
-
-
-void FUN_0015a308(unsigned int param_1)
-
+/* Stores `value` in the word at 0x18 of the global at 0x5891D8. */
+void FUN_0015a308(u32 value)
 {
-  (*(unsigned int *)((unsigned char *)&DAT_005891d8 + 0x18)) = param_1;
-  return;
+    DAT_005891d8.unk18 = value;
 }
 
 } /* extern "C" */

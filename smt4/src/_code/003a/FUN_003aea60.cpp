@@ -1,22 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00225220(int);
+extern int FUN_00225220(int block);
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ int target;
+} Obj;
 
-int FUN_003aea60(int param_1)
-
+int FUN_003aea60(Obj *obj)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)(param_1 + 0x20);
-  temp_v0 = FUN_00225220(temp_v1 + 8);
-  if (temp_v0 != 0) {
-    *(unsigned int *)(temp_v1 + 0x7e38) = 0;
-  }
-  return temp_v0;
+    int target = obj->target;
+    int result = FUN_00225220(target + 8);
+
+    if (result != 0) {
+        *(u32 *)(target + 0x7e38) = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

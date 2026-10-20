@@ -19,14 +19,14 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00164034. */
 extern unsigned int FUN_00168854(unsigned int);
-extern int FUN_00169294(unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned char);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int FUN_00184df8(unsigned int);
 extern int FUN_00387580(unsigned int);
 extern int FUN_003a48dc(unsigned int, unsigned int, unsigned int);
 extern int FUN_003b5e48(unsigned char);
-extern int FUN_003b5e80(unsigned int);
+extern int packThreeFields(unsigned int);
 
 
 void FUN_004097b4(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -87,7 +87,7 @@ void FUN_004097b4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     (**(romwright_code **)(param_1 + 0x12b4))();
     *(unsigned char *)(param_1 + 0x12b0) = 0;
   }
-  temp_v2 = FUN_00169294(1,0);
+  temp_v2 = packNibblesAndByte(1,0);
   piVar9 = (int *)(param_1 + 0x12b8);
   temp_v3 = *piVar9;
   temp_v4 = piVar9[temp_v3 + 2];
@@ -107,7 +107,7 @@ void FUN_004097b4(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     (**(romwright_code **)(param_1 + 0x1234))();
     *(unsigned char *)(param_1 + 0x1230) = 0;
   }
-  temp_v2 = FUN_003b5e80(temp_v5);
+  temp_v2 = packThreeFields(temp_v5);
   piVar12 = (int *)(param_1 + 0x1238);
   temp_v3 = *piVar12;
   temp_v4 = piVar12[temp_v3 + 2];

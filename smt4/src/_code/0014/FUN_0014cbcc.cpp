@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a43bc(int, unsigned int, int);
 int FUN_002a4584(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
-int FUN_002b64a0(...);
+int libc_strcat(...);
 int asdTextureCreate(void);
 int FUN_002bf694(...);
 int asdMemFree(int);
@@ -24,7 +24,7 @@ extern int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: FUN_002a43bc. */
 /* Supplied declaration required: FUN_002a4584. */
-/* Supplied declaration required: FUN_002b64a0. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_002bf694. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
@@ -49,16 +49,16 @@ unsigned int FUN_0014cbcc(unsigned int param_1,int *param_2,unsigned int param_3
   FUN_002bf694(temp_v5,*param_2 + 0xc);
   pcVar3 = *(char **)(temp_v2 + 8);
   if (*pcVar3 != '-') {
-    FUN_002b64a0(temp_v5);
+    libc_strcat(temp_v5);
   }
   else {
-    FUN_002b64a0(temp_v5,*(unsigned int *)(param_2[pcVar3[1] * -8 + 0x181] + 8));
+    libc_strcat(temp_v5,*(unsigned int *)(param_2[pcVar3[1] * -8 + 0x181] + 8));
   }
   if (*(char *)(param_2[1] + 0xd) != '\0') {
-    FUN_002b64a0(temp_v5,&LAB_0014ce10);
+    libc_strcat(temp_v5,&LAB_0014ce10);
   }
   else {
-    FUN_002b64a0(temp_v5,&LAB_0014ce18);
+    libc_strcat(temp_v5,&LAB_0014ce18);
   }
   temp_v2 = FUN_002c30c4(*(unsigned int *)(temp_v2 + 8));
   if (temp_v2 == 0) {

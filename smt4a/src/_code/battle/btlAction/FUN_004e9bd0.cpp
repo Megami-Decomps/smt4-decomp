@@ -22,7 +22,7 @@ extern unsigned char g_btlAction; /* 0x571138 */
 
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002626e0(void);
-extern int FUN_003e9b28(int);
+extern int valueAtF0IsReady(int);
 /* Supplied declaration required: FUN_004bfcfc. */
 extern unsigned short FUN_004c3a10(unsigned char);
 /* Supplied declaration required: FUN_004c4604. */
@@ -99,7 +99,7 @@ LAB_004e9c3c:
                 }
                 if (((temp_v4 != 0x493 && temp_v3 != 0x94) && (temp_v4 != 0x495 && temp_v4 != 0x496)) &&
                    ((temp_v3 = FUN_002626e0(), temp_v3 == 0 ||
-                    (temp_v3 = FUN_003e9b28(*temp_v9), temp_v3 != 0)))) goto LAB_004e9e34;
+                    (temp_v3 = valueAtF0IsReady(*temp_v9), temp_v3 != 0)))) goto LAB_004e9e34;
               }
             }
             *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 2;

@@ -8,9 +8,9 @@ int FUN_001ad9b4(void);
 
 extern int FUN_0019f18c(int);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_00418584(int);
-extern int FUN_004185ec(int);
-extern int FUN_00418858(int);
+extern int partyEntryFlagsBit3(int);
+extern int partyEntryFlagsBit1(int);
+extern int partyEntryGetByte1(int);
 
 
 int FUN_002f7730(int param_1,int param_2)
@@ -33,8 +33,8 @@ int FUN_002f7730(int param_1,int param_2)
   if ((temp_v2 != 0) && (*(char *)(temp_v1 + 6) == '\0')) {
     temp_v0 = 1;
   }
-  temp_v2 = FUN_004185ec(param_2);
-  temp_v3 = FUN_00418584(param_2);
+  temp_v2 = partyEntryFlagsBit1(param_2);
+  temp_v3 = partyEntryFlagsBit3(param_2);
   temp_v5 = -1;
   temp_v6 = 0;
   do {
@@ -63,7 +63,7 @@ int FUN_002f7730(int param_1,int param_2)
           temp_v5 = temp_v5 + 1;
         }
       }
-      temp_v4 = FUN_00418858(param_2);
+      temp_v4 = partyEntryGetByte1(param_2);
     } while ((temp_v4 < 1) || (temp_v3 == 0 && (temp_v2 == 0 && !temp_v0)));
   } while( 1 );
 }

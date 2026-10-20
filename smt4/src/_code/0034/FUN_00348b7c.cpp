@@ -1,53 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00348b7c_arg0 fn_00348b7c_arg0;
-struct fn_00348b7c_arg0 {
-    unsigned char pad_0x0[0x842];
-    ushort field_0x842; /* +0x842 */
-    unsigned char pad_0x844[0x4e];
-    ushort field_0x892; /* +0x892 */
-    unsigned char pad_0x894[0x1a];
-    ushort field_0x8ae; /* +0x8ae */
-    unsigned char pad_0x8b0[0x1a];
-    ushort field_0x8ca; /* +0x8ca */
-};
+extern int FUN_00287894(void *id);
+extern int FUN_00298f88(void *id);
+extern u8 *FUN_002adc88(void);
 
-extern int FUN_00287894(fn_00348b7c_arg0 *);
-extern int FUN_00298f88(fn_00348b7c_arg0 *);
-extern int FUN_002adc88(void);
-
-
-int FUN_00348b7c(fn_00348b7c_arg0 *param_1)
-
+/* Finds the address of the slot (0xE bytes each from +0x842, four slots, then +0x87A) in the table whose id matches. */
+int FUN_00348b7c(void *id)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_002adc88();
-  temp_v1 = FUN_00298f88(param_1);
-  if (temp_v1 != 0) {
-    if ((fn_00348b7c_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x842) == param_1) {
-      return temp_v0 + 0x842;
+    u8 *table = FUN_002adc88();
+
+    if (FUN_00298f88(id) != 0) {
+        if ((void *)(u32)*(u16 *)(table + 0x842) == id) {
+            return (int)(table + 0x842);
+        }
+        if ((void *)(u32)*(u16 *)(table + 0x850) == id) {
+            return (int)(table + 0x850);
+        }
+        if ((void *)(u32)*(u16 *)(table + 0x85e) == id) {
+            return (int)(table + 0x85e);
+        }
+        if ((void *)(u32)*(u16 *)(table + 0x86c) == id) {
+            return (int)(table + 0x86c);
+        }
+    } else {
+        if (FUN_00287894(id) == 1) {
+            return (int)(table + 0x87a);
+        }
     }
-    if ((fn_00348b7c_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x850) == param_1) {
-      return temp_v0 + 0x850;
-    }
-    if ((fn_00348b7c_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x85e) == param_1) {
-      return temp_v0 + 0x85e;
-    }
-    if ((fn_00348b7c_arg0 *)(unsigned int)*(unsigned short *)(temp_v0 + 0x86c) == param_1) {
-      return temp_v0 + 0x86c;
-    }
-  }
-  else {
-    temp_v1 = FUN_00287894(param_1);
-    if (temp_v1 == 1) {
-      return temp_v0 + 0x87a;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

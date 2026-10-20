@@ -1,32 +1,44 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0019c8c0(unsigned int);
+typedef struct Item {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 flags;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ u32 handle;
+} Item;
 
-/* Supplied declaration required: FUN_0019c8c0. */
+typedef struct ItemList {
+    /* 0x00 */ s32 count;
+    /* 0x04 */ Item **items;
+} ItemList;
 
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ ItemList list;
+} Owner;
 
-void FUN_001882fc(int param_1)
+void FUN_0019c8c0(u32 handle);
 
+/* Releases the handle of every item in the list that has bit 1 set. */
+void FUN_001882fc(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  
-  piVar3 = (int *)(param_1 + 0x1c);
-  temp_v1 = 0;
-  if (temp_v1 < *piVar3) {
-    do {
-      temp_v0 = *(int *)(piVar3[1] + temp_v1 * 4);
-      if ((*(unsigned int *)(temp_v0 + 4) & 2) != 0) {
-        FUN_0019c8c0(*(unsigned int *)(temp_v0 + 0xc));
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *piVar3);
-  }
-  return;
+    Item *item;
+    ItemList *list;
+    s32 i;
+
+    list = &owner->list;
+    i = 0;
+    if (i < list->count) {
+        do {
+            item = list->items[i];
+            if ((item->flags & 2) != 0) {
+                FUN_0019c8c0(item->handle);
+            }
+            i = i + 1;
+        } while (i < list->count);
+    }
 }
 
 } /* extern "C" */

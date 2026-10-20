@@ -30,7 +30,7 @@ extern int DAT_00618488; /* 0x618488 */
 extern unsigned int FUN_004249c4(unsigned char *, int);
 extern unsigned int FUN_00424c0c(unsigned char *, int);
 extern int FUN_00424c2c(unsigned char *, unsigned int);
-extern unsigned int FUN_004250d0(unsigned char *, unsigned int);
+extern unsigned int table46COwnerGet(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_004250dc. */
 /* Supplied declaration required: FUN_004251e8. */
 /* Supplied declaration required: FUN_0043128c. */
@@ -53,7 +53,7 @@ void FUN_00229108(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   FUN_004251e8(&DAT_00617f40,param_3);
   FUN_004250dc(&DAT_00617f40,0);
-  temp_v2 = FUN_004250d0(&DAT_00617f40,0);
+  temp_v2 = table46COwnerGet(&DAT_00617f40,0);
   temp_v3 = FUN_00424c2c(&DAT_00617f40,temp_v2);
   puVar5 = &DAT_00617e70;
   FUN_00423670(&DAT_00617e70,&DAT_00617e64,temp_v3,0);

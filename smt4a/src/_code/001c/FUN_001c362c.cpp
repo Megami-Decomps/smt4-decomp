@@ -10,7 +10,7 @@ extern unsigned int DAT_0064776c; /* 0x64776c */
 extern unsigned int *DAT_00647770; /* 0x647770 */
 extern unsigned int *DAT_00647774; /* 0x647774 */
 
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 void FUN_001c362c(unsigned int param_1,int param_2,int param_3)
@@ -20,13 +20,13 @@ void FUN_001c362c(unsigned int param_1,int param_2,int param_3)
   int temp_v0;
   unsigned int *puVar3;
   
-  if (((DAT_005c1d20 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c1d20), temp_v0 != 0)) {
+  if (((DAT_005c1d20 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c1d20), temp_v0 != 0)) {
     DAT_00647770 = (unsigned int *)&DAT_00647770;
     DAT_00647774 = (unsigned int *)&DAT_00647770;
     DAT_0064776c = 0;
   }
   puVar1 = DAT_00647770;
-  if (((DAT_005c1d20 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c1d20), temp_v0 != 0)) {
+  if (((DAT_005c1d20 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c1d20), temp_v0 != 0)) {
     DAT_00647770 = (unsigned int *)&DAT_00647770;
     DAT_00647774 = (unsigned int *)&DAT_00647770;
     DAT_0064776c = 0;
@@ -35,7 +35,7 @@ void FUN_001c362c(unsigned int param_1,int param_2,int param_3)
     puVar3 = (unsigned int *)*puVar1;
     (**(romwright_code **)(puVar1[-1] + 8))(puVar1 + -1,param_2,param_2 + param_3);
     puVar1 = puVar3;
-    if (((DAT_005c1d20 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c1d20), temp_v0 != 0)) {
+    if (((DAT_005c1d20 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c1d20), temp_v0 != 0)) {
       DAT_00647770 = (unsigned int *)&DAT_00647770;
       DAT_00647774 = (unsigned int *)&DAT_00647770;
       DAT_0064776c = 0;

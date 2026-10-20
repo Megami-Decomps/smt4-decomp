@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019df1c(unsigned int);
-int FUN_002abb24(unsigned int, unsigned int);
+int sceneTraverserVisit(unsigned int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern int DAT_004dad80; /* 0x4dad80 */
 
 /* Supplied declaration required: FUN_0019df1c. */
 extern unsigned int *asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002abb24. */
+/* Supplied declaration required: sceneTraverserVisit. */
 
 
 /* WARNING: Removing unreachable block (ram,0x001db9e8) */
@@ -49,7 +49,7 @@ void FUN_002a0400(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v0 = puVar1[2];
   if (DAT_00464b8c != 0) {
     FUN_0019df1c(temp_v0);
-    FUN_002abb24(DAT_00464b7c,DAT_00464b84);
+    sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
     DAT_004dad80 = DAT_004dad80 + 1;
     *(unsigned int *)(temp_v0 + 0xc) = 1;
     *(unsigned int *)(temp_v0 + 0x10) = 1;

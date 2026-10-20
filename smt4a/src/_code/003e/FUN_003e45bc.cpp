@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00186f58(void);
 int FUN_002f0bd8(void);
-int FUN_003e43c8(void);
+int updateUnlockedEntryCount(void);
 int FUN_003fd63c(...);
 
 /* Supplied declaration required: FUN_00186f58. */
 /* Supplied declaration required: FUN_002f0bd8. */
-extern int FUN_00348d64(void);
+extern int gameDataBlockGetArea2D68(void);
 extern int FUN_003e4230(unsigned int);
-/* Supplied declaration required: FUN_003e43c8. */
+/* Supplied declaration required: updateUnlockedEntryCount. */
 /* Supplied declaration required: FUN_003fd63c. */
 
 
@@ -28,8 +28,8 @@ unsigned int FUN_003e45bc(unsigned int param_1,int param_2,int param_3)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_00348d64();
-  temp_v2 = FUN_00348d64();
+  temp_v1 = gameDataBlockGetArea2D68();
+  temp_v2 = gameDataBlockGetArea2D68();
   if ((((unsigned int)*(unsigned char *)(temp_v2 + (param_1 >> 3)) & (1 << (param_1 & 7))) == 0) &&
      ((param_2 != 0 || (temp_v2 = FUN_003e4230(param_1), temp_v2 == 0)))) {
     if (param_3 == 0) {
@@ -37,7 +37,7 @@ unsigned int FUN_003e45bc(unsigned int param_1,int param_2,int param_3)
       temp_v0 = (unsigned char)(1 << (((int)param_1 % 8) & 0xffU));
       *pbVar4 = *pbVar4 | temp_v0;
       pbVar4[0x12] = temp_v0 | pbVar4[0x12];
-      FUN_003e43c8();
+      updateUnlockedEntryCount();
       FUN_00186f58();
       FUN_002f0bd8();
       temp_v3 = param_1;

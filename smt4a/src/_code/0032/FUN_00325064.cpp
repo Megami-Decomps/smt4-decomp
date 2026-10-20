@@ -5,7 +5,7 @@ extern "C" {
 int FUN_00162e8c(void);
 
 /* Supplied declaration required: FUN_00162e8c. */
-extern int FUN_001861ec(unsigned char);
+extern int dataTableGetEntry49(unsigned char);
 
 
 unsigned char FUN_00325064(void)
@@ -21,7 +21,7 @@ unsigned char FUN_00325064(void)
     if (puVar2 != (unsigned char *)0x0) {
       puVar2 = puVar2 + 0x1590;
     }
-    temp_v0 = FUN_001861ec(*puVar2);
+    temp_v0 = dataTableGetEntry49(*puVar2);
     if (temp_v0 != 0) {
       return *(short *)(temp_v0 + 6) != 0;
     }

@@ -18,7 +18,7 @@ typedef struct {
 extern int FUN_00123728(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-extern int FUN_002ee774(unsigned int **, unsigned int *);
+extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_0030fe74. */
 
 
@@ -38,7 +38,7 @@ unsigned int FUN_00121a1e(int param_1,unsigned int param_2)
   do {
     temp_v2 = (unsigned int *)*temp_v2;
     temp_v3 = *(unsigned int *)(param_1 + 0x98);
-    temp_v0 = FUN_002ee774(&temp_v2,(unsigned int *)&temp_v3);
+    temp_v0 = wordRefsDiffer_002ee774(&temp_v2,(unsigned int *)&temp_v3);
     if (temp_v0 == 0) {
       FUN_002e6e5c(temp_v1);
       return 0;

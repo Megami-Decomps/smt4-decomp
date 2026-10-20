@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100ce6(unsigned int, int *, int *, int);
-int FUN_00100d0c(int, int *);
+int wideSinkPutChar(int, int *);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00100ce6. */
-/* Supplied declaration required: FUN_00100d0c. */
+/* Supplied declaration required: wideSinkPutChar. */
 
 
 unsigned int FUN_00100b88(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ unsigned int FUN_00100b88(int param_1,unsigned int param_2,unsigned int param_3,
   FUN_00100ce6(param_3,&temp_v0,&uStack_4,0x100d0d);
   if (param_2 != 0) {
     temp_v1 = temp_v1 + 2;
-    FUN_00100d0c(0,&temp_v0);
+    wideSinkPutChar(0,&temp_v0);
   }
   if (param_2 <= param_3) {
     param_3 = 0xffffffff;

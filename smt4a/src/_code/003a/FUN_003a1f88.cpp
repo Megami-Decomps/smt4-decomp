@@ -5,20 +5,20 @@
 extern "C" {
 
 int FUN_002b4078(void);
-int FUN_0030015c(int, unsigned int *);
+int effParticleRebuildHandles(int, unsigned int *);
 int FUN_00350ff0(int, unsigned int *);
 int FUN_0035105c(int, int, unsigned int);
-int FUN_00363240(int, unsigned int *);
+int effParticleParamRebuildHandles3c(int, unsigned int *);
 int FUN_00390548(int, unsigned int *);
 int FUN_00390570(int, unsigned int *);
 int FUN_003a1acc(int, unsigned int *);
 int FUN_003b9138(int, unsigned int);
 
 /* Supplied declaration required: FUN_002b4078. */
-/* Supplied declaration required: FUN_0030015c. */
+/* Supplied declaration required: effParticleRebuildHandles. */
 /* Supplied declaration required: FUN_00350ff0. */
 /* Supplied declaration required: FUN_0035105c. */
-/* Supplied declaration required: FUN_00363240. */
+/* Supplied declaration required: effParticleParamRebuildHandles3c. */
 /* Supplied declaration required: FUN_00390548. */
 /* Supplied declaration required: FUN_00390570. */
 /* Supplied declaration required: FUN_003a1acc. */
@@ -51,10 +51,10 @@ void FUN_003a1f88(int *param_1,unsigned int param_2,unsigned int *param_3)
     FUN_003b9138(param_1[0xb],*param_3);
     break;
   case 5:
-    FUN_0030015c(param_1[0xb],param_3);
+    effParticleRebuildHandles(param_1[0xb],param_3);
     break;
   case 6:
-    FUN_00363240(param_1[0xb],param_3);
+    effParticleParamRebuildHandles3c(param_1[0xb],param_3);
     break;
   case 7:
     FUN_0035105c(param_1[0xb],*param_1,param_2);

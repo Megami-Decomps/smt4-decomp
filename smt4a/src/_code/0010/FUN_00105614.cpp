@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7674(unsigned int, unsigned int, int);
+void FUN_002e7674(void *dest, const void *src, s32 size);
 
-/* Supplied declaration required: FUN_002e7674. */
-
-
-void FUN_00105614(unsigned int param_1,unsigned int param_2)
-
+/* Copies 8 bytes from `src` to `dest`. */
+void FUN_00105614(void *dest, const void *src)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e7674(param_1,param_2,8);
-  return;
+    FUN_002e7674(dest, src, 8);
 }
 
 } /* extern "C" */

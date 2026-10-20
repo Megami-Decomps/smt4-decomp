@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int streamWriterPatchSizePrefix(void);
+void streamWriterPatchSizePrefix(void);
 
-/* Supplied declaration required: streamWriterPatchSizePrefix. */
+typedef struct Writer {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 result;
+} Writer;
 
-
-unsigned int FUN_002ee9ce(int param_1)
-
+/* Patches the writer's size prefix and returns the word at 8. */
+u32 FUN_002ee9ce(Writer *writer)
 {
-/* irregular: 1 native warning(s); review required */
-  streamWriterPatchSizePrefix();
-  return *(unsigned int *)(param_1 + 8);
+    streamWriterPatchSizePrefix();
+    return writer->result;
 }
 
 } /* extern "C" */

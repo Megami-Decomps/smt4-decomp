@@ -21,7 +21,7 @@ typedef struct {
 extern int FUN_002ef00c(unsigned char *, unsigned char *);
 extern int FUN_002f1334(unsigned char *, int);
 /* Supplied declaration required: FUN_00300304. */
-extern int FUN_0030060c(unsigned char *, unsigned int *);
+extern int wordRefsEqual_0030060c(unsigned char *, unsigned int *);
 
 
 void FUN_00114b86(int param_1,unsigned int param_2)
@@ -43,7 +43,7 @@ void FUN_00114b86(int param_1,unsigned int param_2)
     FUN_002eb164(temp_v3,param_2);
     FUN_00300304(temp_v6,param_1 + 4,temp_v3);
     temp_v5 = *(unsigned int *)(param_1 + 0x14);
-    temp_v0 = FUN_0030060c(temp_v6,(unsigned int *)&temp_v5);
+    temp_v0 = wordRefsEqual_0030060c(temp_v6,(unsigned int *)&temp_v5);
     if (temp_v0 != 0) {
       FUN_002e75fa(param_2);
       FUN_002eb164(temp_v4,param_2);

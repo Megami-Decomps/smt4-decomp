@@ -9,7 +9,7 @@ int FUN_00191330(void);
 int FUN_00191548(void);
 int FUN_001a611c(int, int *);
 int FUN_001afc10(int *);
-int FUN_001b1ed8(void);
+int lcgRandomHigh16(void);
 int FUN_001b1f80(void);
 int FUN_001b207c(unsigned char *);
 int FUN_001c2484(void);
@@ -31,7 +31,7 @@ extern unsigned char DAT_00646b38; /* 0x646b38 */
 /* Supplied declaration required: FUN_00191548. */
 /* Supplied declaration required: FUN_001a611c. */
 /* Supplied declaration required: FUN_001afc10. */
-/* Supplied declaration required: FUN_001b1ed8. */
+/* Supplied declaration required: lcgRandomHigh16. */
 /* Supplied declaration required: FUN_001b1f80. */
 /* Supplied declaration required: FUN_001b207c. */
 /* Supplied declaration required: FUN_001c2484. */
@@ -98,7 +98,7 @@ void nw_snd_internal_driver_SoundThread_SoundThreadFunc(int param_1)
   }
   FUN_00191548();
   FUN_001b1f80();
-  FUN_001b1ed8();
+  lcgRandomHigh16();
   FUN_001c2484();
   nw_snd_internal_driver_VoiceManager_UpdateAllVoices();
   piVar3 = *(int **)(param_1 + 0x1d4);

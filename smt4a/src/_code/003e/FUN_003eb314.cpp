@@ -8,7 +8,7 @@ int FUN_00184310(void);
 int FUN_001f4da0(void);
 int sysMemClear(unsigned char *, int);
 int FUN_002e6dd4(unsigned char *, int);
-int FUN_0050d71c(unsigned char *);
+int clearTwoWords(unsigned char *);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -24,7 +24,7 @@ extern unsigned int FUN_00261424(void);
 extern int FUN_002626e0(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd4. */
-/* Supplied declaration required: FUN_0050d71c. */
+/* Supplied declaration required: clearTwoWords. */
 
 
 void FUN_003eb314(int param_1,unsigned char *param_2,unsigned short *param_3)
@@ -107,9 +107,9 @@ void FUN_003eb314(int param_1,unsigned char *param_2,unsigned short *param_3)
   *(unsigned short *)(param_2 + 0x114) = 0;
   *(unsigned short *)(param_2 + 0x116) = param_3[1] & 0x7fff;
   *(unsigned int *)(param_2 + 0x228) = 0;
-  FUN_0050d71c(param_2 + 0x1be);
-  FUN_0050d71c(param_2 + 0x1c6);
-  FUN_0050d71c(param_2 + 0x1ce);
+  clearTwoWords(param_2 + 0x1be);
+  clearTwoWords(param_2 + 0x1c6);
+  clearTwoWords(param_2 + 0x1ce);
   FUN_002e6dd4(param_2 + 0x1d6,0x50);
   temp_v5 = 0x15;
   temp_v3 = 0;

@@ -1,37 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00379450(void);
 
-typedef struct fn_003802f0_arg0 fn_003802f0_arg0;
-struct fn_003802f0_arg0 {
-    unsigned char pad_0x0[0x190];
-    undefined4 field_0x190; /* +0x190 */
-    unsigned char pad_0x194[0x2bc];
-    undefined4 field_0x450; /* +0x450 */
-    undefined4 field_0x454; /* +0x454 */
-    unsigned char pad_0x458[0x4];
-    undefined1 field_0x45c; /* +0x45c */
-    undefined1 field_0x45d; /* +0x45d */
-    undefined1 field_0x45e; /* +0x45e */
-};
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x190];
+    /* 0x190 */ u32 unk190;
+    /* 0x194 */ u8 unk194[0x2BC];
+    /* 0x450 */ u32 unk450;
+    /* 0x454 */ u32 unk454;
+    /* 0x458 */ u8 unk458[4];
+    /* 0x45C */ u8 unk45C;
+    /* 0x45D */ u8 unk45D;
+    /* 0x45E */ u8 unk45E;
+} Obj;
 
-/* Supplied declaration required: FUN_00379450. */
-
-
-void FUN_003802f0(fn_003802f0_arg0 *param_1)
-
+void FUN_003802f0(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00379450();
-  param_1->field_0x190 = 0;
-  param_1->field_0x45c = 0;
-  param_1->field_0x45d = 1;
-  param_1->field_0x45e = 0;
-  param_1->field_0x450 = 0;
-  param_1->field_0x454 = 0;
-  return;
+    FUN_00379450();
+    obj->unk190 = 0;
+    obj->unk45C = 0;
+    obj->unk45D = 1;
+    obj->unk45E = 0;
+    obj->unk450 = 0;
+    obj->unk454 = 0;
 }
 
 } /* extern "C" */

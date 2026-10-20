@@ -12,7 +12,7 @@ int asdOperatorNew(void);
 int FUN_00178b04(...);
 int FUN_003478dc(unsigned int, char *);
 int FUN_003afd30(void);
-int FUN_003d37bc(unsigned int, unsigned int *, int);
+int pairSourceGet(unsigned int, unsigned int *, int);
 int FUN_003d8f24(unsigned int);
 int FUN_003fd924(...);
 int FUN_0040619c(...);
@@ -51,7 +51,7 @@ extern unsigned int FUN_002e4c2c(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: FUN_003afd30. */
 extern int FUN_003c5d8c(void);
-/* Supplied declaration required: FUN_003d37bc. */
+/* Supplied declaration required: pairSourceGet. */
 /* Supplied declaration required: FUN_003d8f24. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
@@ -108,7 +108,7 @@ void FUN_004f65d4(int param_1)
     }
     else {
       FUN_003d8f24(*(unsigned int *)(param_1 + 0x33cc));
-      FUN_003d37bc(*(unsigned int *)(param_1 + 0x33cc),(unsigned int *)(param_1 + 0x33d4),
+      pairSourceGet(*(unsigned int *)(param_1 + 0x33cc),(unsigned int *)(param_1 + 0x33d4),
                    param_1 + 0x33d8);
     }
     if (*(int *)(param_1 + 0x33c0) != 0) {
@@ -127,7 +127,7 @@ void FUN_004f65d4(int param_1)
     }
     else {
       FUN_003d8f24(*(unsigned int *)(param_1 + 0x33d0));
-      FUN_003d37bc(*(unsigned int *)(param_1 + 0x33d0),(unsigned int *)(param_1 + 0x33dc),
+      pairSourceGet(*(unsigned int *)(param_1 + 0x33d0),(unsigned int *)(param_1 + 0x33dc),
                    param_1 + 0x33e0);
     }
     temp_v4 = g_btlStageModel;

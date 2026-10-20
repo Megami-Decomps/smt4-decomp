@@ -21,9 +21,9 @@ extern unsigned char DAT_0062e610; /* 0x62e610 */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern int FUN_002e9300(unsigned int *);
-extern int FUN_002ea0e4(int);
+extern int constructObj0055affc(int);
 /* Supplied declaration required: FUN_002eb588. */
-extern int FUN_002f2968(unsigned int *, unsigned char *);
+extern int wordRefsDiffer_002f2968(unsigned int *, unsigned char *);
 
 
 int FUN_002f1858(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
@@ -43,8 +43,8 @@ int FUN_002f1858(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   param_1[0xf] = 0;
   *param_1 = (unsigned int)&DAT_00558bd8;
   temp_v0 = FUN_002e9300(param_1 + 0x12);
-  temp_v0 = FUN_002ea0e4(temp_v0 + 0x18);
-  temp_v1 = FUN_002ea0e4(temp_v0 + 8);
+  temp_v0 = constructObj0055affc(temp_v0 + 0x18);
+  temp_v1 = constructObj0055affc(temp_v0 + 8);
   temp_v3 = temp_v1 - 0x68;
   FUN_002eb588(temp_v5);
   FUN_00109724(temp_v3,temp_v5);
@@ -54,7 +54,7 @@ int FUN_002f1858(unsigned int *param_1,unsigned int param_2,unsigned int param_3
   *(unsigned int *)(temp_v1 - 0x10) = 0;
   *(unsigned int *)(temp_v1 - 0xc) = 0;
   FUN_002e6e34(temp_v4,&DAT_0062e610);
-  temp_v2 = FUN_002f2968((unsigned int *)&DAT_0062e600,&DAT_0062e608);
+  temp_v2 = wordRefsDiffer_002f2968((unsigned int *)&DAT_0062e600,&DAT_0062e608);
   temp_v0 = temp_v3;
   if (temp_v2 != 0) {
     *(int *)(DAT_0062e604 + 4) = temp_v3;

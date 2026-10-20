@@ -1,18 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Target Target;
+typedef struct TargetVtbl {
+    /* 0x00 */ void *unk00[5];
+    /* 0x14 */ void (*run)(Target *target);
+} TargetVtbl;
+struct Target {
+    /* 0x00 */ const TargetVtbl *vtbl;
+};
 
-unsigned int FUN_002a60cc(int *param_1)
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Target *target;
+} Holder;
 
+/* Runs the target of the holder `*ref` and returns 0; returns 0 (NULL) when there is no holder. */
+Holder *FUN_002a60cc(Holder **ref)
 {
-  int base = *param_1;
-  if (base == 0) {
-    return base;
-  }
-  (**(romwright_code **)(**(int **)(base + 8) + 0x14))(*(int *)(base + 8));
-  return 0;
+    Holder *holder = *ref;
+
+    if (holder == NULL) {
+        return holder;
+    }
+    holder->target->vtbl->run(holder->target);
+    return NULL;
 }
 
 } /* extern "C" */

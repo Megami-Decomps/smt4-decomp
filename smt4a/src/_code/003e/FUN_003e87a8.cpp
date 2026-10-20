@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_003eb760(...);
 int FUN_004ca63c(...);
-int FUN_004d9e20(...);
+int optionsApplyOverride(...);
 int FUN_004d9ebc(...);
 int FUN_004d9fc4(...);
-int FUN_004d9fe4(...);
+int optionsResetIfNoFlag(...);
 int FUN_004da144(...);
-int FUN_004da2d0(...);
+int optionsSetFlag1(...);
 
 typedef struct fn_003e87a8_arg0 fn_003e87a8_arg0;
 struct fn_003e87a8_arg0 {
@@ -35,12 +35,12 @@ extern int FUN_001ab888(void);
 extern int FUN_001b34b8(void);
 /* Supplied declaration required: FUN_003eb760. */
 /* Supplied declaration required: FUN_004ca63c. */
-/* Supplied declaration required: FUN_004d9e20. */
+/* Supplied declaration required: optionsApplyOverride. */
 /* Supplied declaration required: FUN_004d9ebc. */
 /* Supplied declaration required: FUN_004d9fc4. */
-/* Supplied declaration required: FUN_004d9fe4. */
+/* Supplied declaration required: optionsResetIfNoFlag. */
 /* Supplied declaration required: FUN_004da144. */
-/* Supplied declaration required: FUN_004da2d0. */
+/* Supplied declaration required: optionsSetFlag1. */
 
 
 void FUN_003e87a8(fn_003e87a8_arg0 *param_1)
@@ -62,14 +62,14 @@ void FUN_003e87a8(fn_003e87a8_arg0 *param_1)
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {
           FUN_004d9fc4();
-          FUN_004da2d0();
+          optionsSetFlag1();
         }
       }
       else {
-        FUN_004d9fe4();
-        FUN_004da2d0();
+        optionsResetIfNoFlag();
+        optionsSetFlag1();
       }
-      FUN_004d9e20(param_1->field_0x3028);
+      optionsApplyOverride(param_1->field_0x3028);
     }
     else {
       if (temp_v0 == 0) {

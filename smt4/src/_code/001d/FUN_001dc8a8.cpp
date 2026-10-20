@@ -1,21 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0018c0d8(void);
-int scrSetResult(void);
+u16 FUN_0018c0d8(void);
+int scrSetResult(u32 result);
 
-/* Supplied declaration required: FUN_0018c0d8. */
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_001dc8a8(void)
-
+u32 FUN_001dc8a8(void)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_0018c0d8();
-  scrSetResult();
-  return 1;
+    scrSetResult(FUN_0018c0d8());
+    return 1;
 }
 
 } /* extern "C" */

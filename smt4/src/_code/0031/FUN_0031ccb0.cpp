@@ -1,33 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(unsigned int);
-
-/* Supplied declaration required: scrSetResult. */
+int scrSetResult(u32 result);
 extern int FUN_002973ec(void);
 
-
-unsigned int FUN_0031ccb0(void)
-
+u32 FUN_0031ccb0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0xffffffff;
-  temp_v0 = FUN_002973ec();
-  if (temp_v0 == 0) {
-    temp_v1 = 0;
-  }
-  else if (temp_v0 == 1) {
-    temp_v1 = 1;
-  }
-  else if (temp_v0 == 2) {
-    temp_v1 = 2;
-  }
-  scrSetResult(temp_v1);
-  return 1;
+    u32 result = 0xffffffff;
+    int value = FUN_002973ec();
+
+    if (value == 0) {
+        result = 0;
+    } else if (value == 1) {
+        result = 1;
+    } else if (value == 2) {
+        result = 2;
+    }
+    scrSetResult(result);
+    return 1;
 }
 
 } /* extern "C" */

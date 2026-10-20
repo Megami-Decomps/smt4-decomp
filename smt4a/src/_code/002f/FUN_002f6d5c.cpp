@@ -1,15 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_002f6d5c(unsigned int param_1,unsigned int *param_2,unsigned int *param_3)
-
+/* Returns 1 when the word `*a` is below `*b` (the first argument is unused). */
+u32 FUN_002f6d5c(u32 unused, u32 *a, u32 *b)
 {
-  if (*param_2 < *param_3) {
-    return 1;
-  }
-  return 0;
+    if (*a < *b) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

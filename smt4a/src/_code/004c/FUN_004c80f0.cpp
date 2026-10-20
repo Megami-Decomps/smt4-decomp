@@ -8,7 +8,7 @@ int FUN_001568f8(int, int);
 int FUN_003f0e20(int, int);
 
 extern int btlGetMainState(void);
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_0017760c(void);
 extern int FUN_001ab854(int);
@@ -63,7 +63,7 @@ void FUN_004c80f0(int param_1,int param_2,int param_3)
           if (*(int *)(temp_v2 + 0x400) == 0) {
             return;
           }
-          temp_v3 = FUN_0015688c();
+          temp_v3 = saveSlotFindSelected();
           if (temp_v3 == 0) {
             return;
           }

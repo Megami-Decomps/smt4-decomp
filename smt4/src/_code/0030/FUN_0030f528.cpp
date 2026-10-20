@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0024f4d0(void);
+int dataTable2fSub0GetCount(void);
 
-/* Supplied declaration required: FUN_0024f4d0. */
-extern int *FUN_002760fc(int);
+/* Supplied declaration required: dataTable2fSub0GetCount. */
+extern int *dataTable2fSub0GetRecord(int);
 extern int FUN_002c09d0(void);
 
 
@@ -22,10 +22,10 @@ int FUN_0030f528(int param_1)
   
   temp_v2 = 0;
   temp_v0 = param_1;
-  FUN_0024f4d0();
+  dataTable2fSub0GetCount();
   if (0 < temp_v0) {
     do {
-      piVar1 = (int *)FUN_002760fc(temp_v2);
+      piVar1 = (int *)dataTable2fSub0GetRecord(temp_v2);
       temp_v0 = *piVar1;
       if (temp_v0 == -1) {
         return -1;
@@ -45,7 +45,7 @@ int FUN_0030f528(int param_1)
         }
       }
       temp_v2 = temp_v2 + 1;
-      FUN_0024f4d0();
+      dataTable2fSub0GetCount();
     } while (temp_v2 < temp_v0);
   }
   return -1;

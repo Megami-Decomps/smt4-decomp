@@ -109,7 +109,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002b3ed8. */
 /* Supplied declaration required: FUN_002f8794. */
 /* Supplied declaration required: FUN_00300124. */
-extern int FUN_00399c60(void);
+extern int displayIsStereoActive(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -359,7 +359,7 @@ LAB_003c01a8:
       *(unsigned int *)(temp_v10 + 0x1c) = 0xff008080;
       *(unsigned int *)(temp_v10 + 4) = 7;
       FUN_00300124(temp_v10,1);
-      temp_v10 = FUN_00399c60();
+      temp_v10 = displayIsStereoActive();
     }
     else {
       temp_v10 = 0x10000;
@@ -403,7 +403,7 @@ LAB_003c01a8:
       *(unsigned int *)(temp_v10 + 0x1c) = 0xff808080;
       *(unsigned int *)(temp_v10 + 4) = 7;
       FUN_00300124(temp_v10,1);
-      temp_v10 = FUN_00399c60();
+      temp_v10 = displayIsStereoActive();
     }
     if (temp_v10 != 0) {
       temp_v11 = 0x10000;

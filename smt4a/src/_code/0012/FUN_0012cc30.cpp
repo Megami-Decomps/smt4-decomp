@@ -33,7 +33,7 @@ extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned ch
 /* Supplied declaration required: FUN_002f7cb0. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0030c720. */
-extern unsigned short FUN_0030c774(int);
+extern unsigned short vectorCount4_0030c774(int);
 /* Supplied declaration required: FUN_0030c78c. */
 
 
@@ -57,7 +57,7 @@ void FUN_0012cc30(int param_1)
     FUN_0030c78c(temp_v4);
     temp_v5 = *(unsigned int *)(param_1 + 0x130);
     temp_v6 = *(unsigned int *)(param_1 + 0x134);
-    temp_v7 = FUN_0030c774(param_1 + 0x3e0);
+    temp_v7 = vectorCount4_0030c774(param_1 + 0x3e0);
     temp_v3[0] = *(unsigned int *)(param_1 + 0x3f8);
     temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 0x70) + 0x50))
                       (*(int **)(param_1 + 0x70),param_1 + 0x80,temp_v4,param_1 + 0x110);

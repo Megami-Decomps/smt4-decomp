@@ -46,7 +46,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00283f30. */
 extern short FUN_0028d310(void);
 extern int FUN_00295d08(unsigned int);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 extern int FUN_002b63ac(void);
@@ -202,9 +202,9 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
           if ((romwright_subpiece_4_1_0(temp_v2 >> 0x1d,0)) && (temp_v9 = temp_v10, (int)temp_v10 >= 0x42c80001)) {
             temp_v9 = temp_v17;
           }
-          temp_v7 = FUN_0029ebac(temp_v4,1);
-          if (((temp_v7 == 0) && (temp_v7 = FUN_0029ebac(temp_v4,10), temp_v7 == 0)) &&
-             (temp_v7 = FUN_0029ebac(temp_v4,2), temp_v7 == 0)) {
+          temp_v7 = flagWordTestBit(temp_v4,1);
+          if (((temp_v7 == 0) && (temp_v7 = flagWordTestBit(temp_v4,10), temp_v7 == 0)) &&
+             (temp_v7 = flagWordTestBit(temp_v4,2), temp_v7 == 0)) {
             temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v4 + 0xe),
                                                 (unsigned char)(temp_v2 >> 0x16) & 3);
             temp_v7 = (int)(short)((short)(int)(temp_v10 * temp_v11 * (float)temp_v18) +

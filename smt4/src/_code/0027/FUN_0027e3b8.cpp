@@ -1,18 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_0027e3b8(int *param_1)
-
+u32 FUN_0027e3b8(int *obj)
 {
-  if (*param_1 == 0) {
-    return 0;
-  }
-  if (*param_1 == 10 && param_1[10] < 1) {
-    return 0;
-  }
-  return 1;
+    if (*obj == 0) {
+        return 0;
+    }
+    if (*obj == 10 && obj[10] < 1) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

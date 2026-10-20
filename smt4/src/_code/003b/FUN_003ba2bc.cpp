@@ -19,7 +19,7 @@ extern int FUN_00287758(void);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002bd808. */
 /* Supplied declaration required: FUN_003b82c4. */
-extern int FUN_003bb350(int);
+extern int spriteTable2aIsLoaded(int);
 extern int FUN_003bbaa8(int);
 
 
@@ -33,7 +33,7 @@ void FUN_003ba2bc(int param_1,unsigned int param_2,int param_3)
   
   temp_v0 = FUN_003bbaa8(param_1 + 0xd58);
   if ((temp_v0 != 0) && (temp_v0 = FUN_00287758(), temp_v0 != 0)) {
-    temp_v1 = FUN_003bb350(param_1 + 0x9c);
+    temp_v1 = spriteTable2aIsLoaded(param_1 + 0x9c);
     temp_v0 = 0;
     if (temp_v1 != 0) {
       temp_v0 = *(int *)(param_1 + 0xd7c);

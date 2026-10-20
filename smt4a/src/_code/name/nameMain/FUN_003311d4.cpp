@@ -28,7 +28,7 @@ extern unsigned int FUN_00261828(void);
 /* Supplied declaration required: FUN_00275748. */
 /* Supplied declaration required: FUN_002c76c0. */
 /* Supplied declaration required: FUN_003180c4. */
-extern unsigned int FUN_003fd528(void);
+extern unsigned int gameBlockGetArea221AA(void);
 /* Supplied declaration required: FUN_003fd540. */
 
 
@@ -69,7 +69,7 @@ unsigned int FUN_003311d4(void)
   }
   if (temp_v2 != 1) {
     if (temp_v2 == 2) {
-      temp_v1 = FUN_003fd528();
+      temp_v1 = gameBlockGetArea221AA();
       FUN_003180c4(0x33,temp_v1);
     }
   }

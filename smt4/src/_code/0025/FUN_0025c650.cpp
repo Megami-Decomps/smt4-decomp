@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0025c9dc(unsigned int, unsigned int, unsigned int, int);
+int effBlockSetBlobB(unsigned int, unsigned int, unsigned int, int);
 int asdMemFree(void);
 
 /* Supplied declaration required: FUN_0025c650. */
-/* Supplied declaration required: FUN_0025c9dc. */
+/* Supplied declaration required: effBlockSetBlobB. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -45,7 +45,7 @@ LAB_0025c654:
         *(unsigned int *)(temp_v3 + 0x28) = 0;
       }
       temp_v3 = *(int *)(temp_v1 + 0x90);
-      FUN_0025c9dc(*(unsigned int *)(param_2 + 0x90),*(unsigned int *)(temp_v3 + 0x20),
+      effBlockSetBlobB(*(unsigned int *)(param_2 + 0x90),*(unsigned int *)(temp_v3 + 0x20),
                    *(unsigned int *)(temp_v3 + 0x24),*(unsigned short *)(temp_v3 + 0x1c));
     }
     temp_v2 = 0;

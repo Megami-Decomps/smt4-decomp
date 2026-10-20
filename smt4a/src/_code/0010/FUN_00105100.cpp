@@ -18,7 +18,7 @@ int FUN_002eaa50(void);
 int FUN_002eabe8(unsigned int *);
 int FUN_002eb46c(unsigned int *, int);
 int FUN_002eb638(int);
-int FUN_002eb67c(int);
+int constructObj0055a284(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -44,13 +44,13 @@ extern int FUN_002e9f64(int);
 /* Supplied declaration required: FUN_002ea4bc. */
 extern unsigned int FUN_002ea714(void);
 /* Supplied declaration required: FUN_002ea734. */
-extern int FUN_002ea764(int *, unsigned int *);
+extern int wordRefsDiffer_002ea764(int *, unsigned int *);
 /* Supplied declaration required: FUN_002eaa50. */
 /* Supplied declaration required: FUN_002eabe8. */
 /* Supplied declaration required: FUN_002eb46c. */
 extern int FUN_002eb624(unsigned int *);
 /* Supplied declaration required: FUN_002eb638. */
-/* Supplied declaration required: FUN_002eb67c. */
+/* Supplied declaration required: constructObj0055a284. */
 
 
 void FUN_00105100(unsigned int *param_1)
@@ -82,7 +82,7 @@ void FUN_00105100(unsigned int *param_1)
   temp_v5 = *(int *)(param_1[0x19] + 8);
   while( 1 ) {
     temp_v3 = param_1[0x19];
-    temp_v1 = FUN_002ea764(&temp_v5,(unsigned int *)&temp_v3);
+    temp_v1 = wordRefsDiffer_002ea764(&temp_v5,(unsigned int *)&temp_v3);
     if (temp_v1 == 0) break;
     if (*(int **)(temp_v5 + 0x34) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(temp_v5 + 0x34) + 4))();
@@ -118,7 +118,7 @@ void FUN_00105100(unsigned int *param_1)
   }
   temp_v2 = temp_v2 - 0x5c;
   FUN_0010cf68(temp_v2);
-  FUN_002eb67c(temp_v2 - 0x14);
+  constructObj0055a284(temp_v2 - 0x14);
   return;
 }
 

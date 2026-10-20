@@ -28,7 +28,7 @@ extern int FUN_00357ea0(...); /* 0x357ea0 */
 extern unsigned char LAB_00363b98; /* 0x363b98 */
 extern unsigned char LAB_00363bb4; /* 0x363bb4 */
 extern unsigned char LAB_00363bcc; /* 0x363bcc */
-extern int FUN_00379d18(...); /* 0x379d18 */
+extern int payloadWorkRelease(...); /* 0x379d18 */
 extern int btlTargetSelectDestroy(...); /* 0x399238 */
 extern unsigned char LAB_0041895c; /* 0x41895c */
 extern unsigned char DAT_0052aa0c; /* 0x52aa0c */
@@ -89,8 +89,8 @@ void FUN_00363990(unsigned int *param_1)
   puVar7 = &LAB_00363b98;
   taskCreateDraw(&LAB_00363b98,4,0,0,FUN_00357ea0,btlTargetSelectDestroy,puVar1,*param_1);
   param_1[0xf] = (unsigned int)puVar7;
-  taskCreateDraw(&LAB_00363bb4,0x7e,0,0,FUN_00379d18,0,puVar1,puVar7);
-  taskCreateDraw(&LAB_00363bcc,0xda,0,0,FUN_00379d18,0,puVar1,param_1[0xf]);
+  taskCreateDraw(&LAB_00363bb4,0x7e,0,0,payloadWorkRelease,0,puVar1,puVar7);
+  taskCreateDraw(&LAB_00363bcc,0xda,0,0,payloadWorkRelease,0,puVar1,param_1[0xf]);
   Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 3);
   FUN_001505ac(puVar1 + 3,0,0,0,0,0,0,&DAT_0052aa0c,0x10,0,0);
   FUN_0014e188(puVar1 + 0xb,0xc,0x71,puVar1 + 3,1);

@@ -14,8 +14,8 @@ int FUN_001ab888(void);
 int FUN_001b4a90(...);
 int sysMemClear(...);
 int FUN_00480e30(...);
-int FUN_004bd30c(...);
-int FUN_004bd400(...);
+int dispatchIfFound(...);
+int bitsAt60Clear(...);
 int rt_memcpy(...);
 int rt_memcpy_w(...);
 
@@ -34,7 +34,7 @@ extern int DAT_0057393c; /* 0x57393c */
 
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: asdMemoryAlloc. */
-extern unsigned int FUN_00187010(unsigned short);
+extern unsigned int saveSlotFindById(unsigned short);
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
@@ -47,9 +47,9 @@ extern unsigned int FUN_001bce18(void);
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00480e30. */
 extern unsigned char FUN_004bca20(void);
-/* Supplied declaration required: FUN_004bd30c. */
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd400. */
+/* Supplied declaration required: dispatchIfFound. */
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -108,14 +108,14 @@ void FUN_003ebec8(int param_1)
   *(unsigned char *)(temp_v5 + 0x1ca3) = 8;
   if (DAT_00573934 != 0) {
     if (temp_v10) {
-      temp_v5 = FUN_004bd340(DAT_00573934,1);
+      temp_v5 = bitsAt60Test(DAT_00573934,1);
       if (temp_v5 != 0) {
-        FUN_004bd400(DAT_00573934,2);
+        bitsAt60Clear(DAT_00573934,2);
         *(unsigned short *)(DAT_00573934 + 0x2a) = 1;
       }
     }
     else {
-      FUN_004bd30c(0,(int)*psVar11);
+      dispatchIfFound(0,(int)*psVar11);
       temp_v3 = FUN_001ab854(0);
       rt_memcpy_w(DAT_00573934,temp_v3,300);
     }
@@ -125,7 +125,7 @@ void FUN_003ebec8(int param_1)
     asdMemoryAlloc(0x10000,0x100,0,300,0);
     temp_v10 = 0;
     DAT_00573934 = temp_v5;
-    FUN_004bd30c(0,(int)*psVar11);
+    dispatchIfFound(0,(int)*psVar11);
     temp_v3 = FUN_001ab854(0);
     rt_memcpy_w(DAT_00573934,temp_v3,300);
   }
@@ -140,11 +140,11 @@ void FUN_003ebec8(int param_1)
     do {
       temp_v9 = (int)psVar11[temp_v5];
       if (temp_v9 == 0) break;
-      FUN_004bd30c(temp_v5 - 1,temp_v9,0);
+      dispatchIfFound(temp_v5 - 1,temp_v9,0);
       temp_v9 = FUN_001ab854(temp_v5 - 1);
       if ((temp_v9 != 0) && (*(short *)(temp_v9 + 0x62) == 0x2a1)) {
         temp_v2 = FUN_0036fcd0(7,0);
-        temp_v3 = FUN_00187010(temp_v2);
+        temp_v3 = saveSlotFindById(temp_v2);
         temp_v1 = *(unsigned char *)(temp_v9 + 0x66);
         temp_v9 = FUN_001ab888();
         rt_memcpy_w((temp_v9 + temp_v5 * 300) - 0xc4,temp_v3,300);
@@ -191,8 +191,8 @@ void FUN_003ebec8(int param_1)
         if (temp_v5 != 0) {
           temp_v0 = *(short *)(temp_v5 + 0x62);
         }
-        if ((temp_v5 != 0 && temp_v0 != 0) && (temp_v6 = FUN_004bd340(temp_v5,1), temp_v6 != 0)) {
-          FUN_004bd400(temp_v5,2);
+        if ((temp_v5 != 0 && temp_v0 != 0) && (temp_v6 = bitsAt60Test(temp_v5,1), temp_v6 != 0)) {
+          bitsAt60Clear(temp_v5,2);
           *(unsigned short *)(temp_v5 + 0x2a) = 1;
         }
         temp_v9 = temp_v9 + 1;

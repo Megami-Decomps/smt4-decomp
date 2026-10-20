@@ -1,23 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9300(unsigned int, unsigned char [256]);
-int FUN_002e97b4(unsigned int, unsigned char [256], int);
+void FUN_002e9300(u32 dest, u8 *buffer);
+void FUN_002e97b4(u32 source, u8 *buffer, s32 size);
 
-/* Supplied declaration required: FUN_002e9300. */
-/* Supplied declaration required: FUN_002e97b4. */
-
-
-void FUN_002fd768(unsigned int param_1,unsigned int param_2)
-
+/* Fills a 256-byte buffer from `source` (size 0x80) and hands it to FUN_002e9300 with `dest`. */
+void FUN_002fd768(u32 dest, u32 source)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned char temp_v0 [256];
-  
-  FUN_002e97b4(param_2,temp_v0,0x80);
-  FUN_002e9300(param_1,temp_v0);
-  return;
+    u8 buffer[256];
+
+    FUN_002e97b4(source, buffer, 0x80);
+    FUN_002e9300(dest, buffer);
 }
 
 } /* extern "C" */

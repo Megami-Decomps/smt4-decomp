@@ -10,7 +10,7 @@ int FUN_002b5cb4(void);
 int FUN_002d7c88(unsigned int);
 int FUN_00357b18(char *, int, int, int, int, int, int);
 int FUN_00364444(...);
-int FUN_00368b8c(...);
+int sub68OwnerStart1(...);
 int FUN_00379958(void);
 int moriModelContentCopyBody(void);
 int FUN_0040ace8(unsigned int, unsigned int);
@@ -42,7 +42,7 @@ extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_002d7c88. */
 /* Supplied declaration required: FUN_00357b18. */
 /* Supplied declaration required: FUN_00364444. */
-/* Supplied declaration required: FUN_00368b8c. */
+/* Supplied declaration required: sub68OwnerStart1. */
 /* Supplied declaration required: FUN_00379958. */
 extern int FUN_003b99d4(void);
 extern int FUN_003ded68(unsigned short);
@@ -101,7 +101,7 @@ unsigned int FUN_002b67a0(int param_1)
               temp_v2 = FUN_0018719c();
               temp_v5 = temp_v2 != 0;
               if (temp_v5) {
-                FUN_00368b8c();
+                sub68OwnerStart1();
               }
             }
             if (!temp_v5) {
@@ -225,7 +225,7 @@ LAB_002b6ad4:
             }
           }
           else {
-            FUN_00368b8c(pcVar7);
+            sub68OwnerStart1(pcVar7);
           }
         }
         else {
@@ -233,7 +233,7 @@ LAB_002b6ad4:
           if (((temp_v2 != 0) ||
               ((*(short *)(pcVar4 + 0x14) != 0 && (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) ||
              ((*(short *)(pcVar4 + 0x16) != 0 && (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) {
-            FUN_00368b8c(pcVar7);
+            sub68OwnerStart1(pcVar7);
           }
         }
       }

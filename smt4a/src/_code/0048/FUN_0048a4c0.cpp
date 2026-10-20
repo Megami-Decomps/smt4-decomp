@@ -8,7 +8,7 @@ int FUN_00184528(int, int);
 int FUN_00184758(int, int, int);
 int FUN_00184c00(int, int, int);
 int FUN_0048bdec(int);
-int FUN_00492b84(int);
+int sub68OwnerGetBlock60(int);
 int lmapSceneGetObj(void);
 int FUN_00492c18(int, int *);
 
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_00184c00. */
 /* Supplied declaration required: FUN_0048bdec. */
-/* Supplied declaration required: FUN_00492b84. */
+/* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: lmapSceneGetObj. */
 /* Supplied declaration required: FUN_00492c18. */
 
@@ -55,7 +55,7 @@ void FUN_0048a4c0(int param_1)
     *(unsigned char *)(param_1 + 0x5e) = 0;
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x1008;
     lmapSceneGetObj();
-    FUN_00492b84(param_1 + 0x4cc);
+    sub68OwnerGetBlock60(param_1 + 0x4cc);
     temp_v2 = 0;
     temp_v3 = 0;
     FUN_00492c18(param_1 + 0x4cc,&temp_v2);

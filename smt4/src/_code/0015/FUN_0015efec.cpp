@@ -1,21 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0015f1ac(int);
+int FUN_0015f1ac(void *channel);
 
-/* Supplied declaration required: FUN_0015f1ac. */
+typedef struct Channel {
+    /* 0x00 */ u8 unk00[0xD];
+    /* 0x0D */ u8 state;
+} Channel;
 
-
-void FUN_0015efec(int param_1)
-
+void FUN_0015efec(Channel *channel)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0xd) == '\0') {
-    FUN_0015f1ac(param_1);
-    return;
-  }
-  return;
+    if (channel->state == 0) {
+        FUN_0015f1ac(channel);
+    }
 }
 
 } /* extern "C" */

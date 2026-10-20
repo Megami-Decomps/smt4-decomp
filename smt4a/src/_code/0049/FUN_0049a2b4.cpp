@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_004938d0(...); /* 0x4938d0 */
-extern int FUN_0049391c(...); /* 0x49391c */
+extern int halfDifference(...); /* 0x49391c */
 extern int FUN_0049393c(...); /* 0x49393c */
 extern int FUN_00493d88(...); /* 0x493d88 */
 extern int FUN_00493e94(...); /* 0x493e94 */
@@ -130,7 +130,7 @@ void FUN_0049a2b4(int param_1)
       if (temp_v0 == 0xc) {
         temp_v0 = FUN_002a6c24();
         if (temp_v0 == 0) {
-          FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,FUN_0049391c);
+          FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,halfDifference);
           return;
         }
         FUN_00312830(temp_v4,*(unsigned short *)(temp_v2 + 0x1f74),4,&LAB_0049cf3c);

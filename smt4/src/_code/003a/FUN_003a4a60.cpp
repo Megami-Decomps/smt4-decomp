@@ -95,7 +95,7 @@ extern int FUN_0029c3ec(void);
 /* Supplied declaration required: FUN_0029e620. */
 extern int FUN_0029e924(unsigned int *);
 /* Supplied declaration required: FUN_0029ede8. */
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 extern unsigned int FUN_002ae3c0(unsigned short);
 extern unsigned short *FUN_002b63ac(void);
 /* Supplied declaration required: FUN_002b8838. */
@@ -298,7 +298,7 @@ void FUN_003a4a60(unsigned int *param_1)
     }
     break;
   case 4:
-    temp_v5 = FUN_002a0ce8();
+    temp_v5 = sys43e188GetState();
     if (temp_v5 == 0) break;
     temp_v6 = 5;
     param_1[2] = temp_v6;

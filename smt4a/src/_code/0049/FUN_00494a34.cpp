@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int FUN_0019de98(int, int);
 int FUN_00224880(unsigned int);
 int FUN_00275f44(unsigned int, unsigned int);
-int FUN_0037c8b4(int);
+int panelSetTarget(int);
 int FUN_0037c8e4(int, int);
 int FUN_0049a5b4(unsigned int *);
 int FUN_0049a9a8(void);
@@ -30,7 +30,7 @@ extern int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_00224880. */
 /* Supplied declaration required: FUN_00275f44. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 extern int FUN_00481100(unsigned int);
 /* Supplied declaration required: FUN_0049a5b4. */
@@ -75,7 +75,7 @@ void FUN_00494a34(unsigned int *param_1)
       param_1[2] = 3;
     }
     FUN_0037c8e4(1,0);
-    FUN_0037c8b4(0);
+    panelSetTarget(0);
     do {
       temp_v1 = FUN_00481100(temp_v3);
       if (temp_v1 != 0) goto LAB_00494cb0;
@@ -151,7 +151,7 @@ LAB_00494bb0:
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 0x79f);
     FUN_0037c8e4(1,0);
-    FUN_0037c8b4(0);
+    panelSetTarget(0);
   }
   param_1[4] = param_1[1];
   param_1[1] = 5;

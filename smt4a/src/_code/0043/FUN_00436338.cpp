@@ -7,7 +7,7 @@ extern "C" {
 int FUN_004352b0(int *, int *);
 int FUN_00435318(int *, int);
 int FUN_00437e98(void);
-int FUN_00515568(int, int [2], int);
+int variantSetWordB(int, int [2], int);
 int FUN_00515618(int *, int);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -20,7 +20,7 @@ typedef struct {
 /* Supplied declaration required: FUN_004352b0. */
 /* Supplied declaration required: FUN_00435318. */
 /* Supplied declaration required: FUN_00437e98. */
-/* Supplied declaration required: FUN_00515568. */
+/* Supplied declaration required: variantSetWordB. */
 /* Supplied declaration required: FUN_00515618. */
 
 
@@ -37,7 +37,7 @@ int * FUN_00436338(int *param_1,int *param_2,int *param_3)
   FUN_004352b0(&temp_v2,param_1);
   if ((temp_v2 != 0) && (FUN_00515618(&temp_v3,*param_3 + 8), temp_v3 != 0)) {
     temp_v1[0] = temp_v2;
-    FUN_00515568(temp_v3 + 8,temp_v1,param_1[5]);
+    variantSetWordB(temp_v3 + 8,temp_v1,param_1[5]);
     *param_1 = *(int *)(*param_1 + 4);
     piVar2 = param_1;
     FUN_00435318(param_1,temp_v3 + 0x10);

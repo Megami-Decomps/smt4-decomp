@@ -1,46 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0015c000(unsigned int, unsigned int);
-int FUN_0015c054(unsigned int, unsigned int, int);
-int FUN_0015c4fc(int, unsigned int, unsigned int);
-int FUN_002a2164(unsigned int, int);
-int nw_snd_internal_driver_SequenceTrack_Open(int);
+int FUN_0015c000(void *a, u32 b);
+int FUN_0015c054(void *a, u32 b, int c);
+int FUN_0015c4fc(void *track, u32 a, u32 b);
+int FUN_002a2164(u32 a, void *b);
+int nw_snd_internal_driver_SequenceTrack_Open(void *track);
+extern u32 FUN_002a2174(void);
 
-/* Supplied declaration required: FUN_0015c000. */
-/* Supplied declaration required: FUN_0015c054. */
-/* Supplied declaration required: FUN_0015c4fc. */
-/* Supplied declaration required: FUN_002a2164. */
-extern unsigned int FUN_002a2174(void);
-/* Supplied declaration required: nw_snd_internal_driver_SequenceTrack_Open. */
+typedef struct SequencePlayer {
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ u8 opened;
+    /* 0x00D */ u8 unk00D[0x37];
+    /* 0x044 */ u8 unk044[1];
+    /* 0x045 */ u8 unk045[0x47];
+    /* 0x08C */ void *track;
+    /* 0x090 */ u8 unk090[0x60];
+    /* 0x0F0 */ u8 unk0F0[4][0x10];
+    /* 0x130 */ u8 unk130[4][0xC];
+} SequencePlayer;
 
-
-void FUN_00158988(int param_1,unsigned int param_2,int param_3,int param_4,int param_5,
-                 unsigned int param_6)
-
+void FUN_00158988(SequencePlayer *player, u32 a, u32 *values, u32 *params, s8 *flags, u32 b)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = *(int *)(param_1 + 0x8c);
-  if (temp_v1 != 0) {
-    FUN_0015c4fc(temp_v1,param_2,param_6);
-    nw_snd_internal_driver_SequenceTrack_Open(temp_v1);
-    temp_v2 = 0;
-    do {
-      FUN_0015c000(param_1 + temp_v2 * 0xc + 0x130,*(unsigned int *)(param_3 + temp_v2 * 4));
-      FUN_0015c054(param_1 + temp_v2 * 0x10 + 0xf0,*(unsigned int *)(param_4 + temp_v2 * 4),
-                   (int)*(signed char *)(param_5 + temp_v2));
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 4);
-    temp_v0 = FUN_002a2174();
-    FUN_002a2164(temp_v0,param_1 + 0x44);
-    *(unsigned char *)(param_1 + 0xc) = 1;
-  }
-  return;
+    void *track = player->track;
+    u32 i;
+
+    if (track != NULL) {
+        FUN_0015c4fc(track, a, b);
+        nw_snd_internal_driver_SequenceTrack_Open(track);
+        i = 0;
+        do {
+            FUN_0015c000(player->unk130[i], values[i]);
+            FUN_0015c054(player->unk0F0[i], params[i], flags[i]);
+            i++;
+        } while (i < 4);
+        FUN_002a2164(FUN_002a2174(), player->unk044);
+        player->opened = 1;
+    }
 }
 
 } /* extern "C" */

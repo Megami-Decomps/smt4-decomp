@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e3328(void);
-int FUN_003e6bd8(void);
+int bufProcRelease(void);
 int FUN_004aa380(unsigned int);
 int FUN_004ddd10(...);
 int FUN_004de37c(int *, unsigned int *, int, unsigned int);
@@ -51,9 +51,9 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002e3328. */
 extern int FUN_003e69ac(unsigned int);
-/* Supplied declaration required: FUN_003e6bd8. */
+/* Supplied declaration required: bufProcRelease. */
 extern int FUN_003e7adc(int);
-extern int FUN_0040de1c(unsigned int, unsigned int *);
+extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_004aa380. */
 extern int FUN_004aa768(unsigned int, int);
 extern int FUN_004aaf80(unsigned int);
@@ -61,7 +61,7 @@ extern int FUN_004ab784(unsigned int);
 extern int FUN_004abac8(unsigned int);
 extern int FUN_004abe14(unsigned int);
 extern int FUN_004c8a9c(void);
-extern int FUN_004d84e8(unsigned int);
+extern int isEntryUsable(unsigned int);
 extern int *FUN_004dc72c(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004ddd10. */
 /* Supplied declaration required: FUN_004de37c. */
@@ -147,7 +147,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     *(unsigned char *)(temp_v4 + 9) = 10;
     break;
   case 10:
-    temp_v6 = FUN_0040de1c(DAT_005712f0,puVar9);
+    temp_v6 = chainCountIdUnflagged(DAT_005712f0,puVar9);
     if (0 < temp_v6) {
       return (int *)0x0;
     }
@@ -202,7 +202,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004e6018(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 0x11:
-    temp_v4 = FUN_0040de1c(DAT_005712f0,puVar9);
+    temp_v4 = chainCountIdUnflagged(DAT_005712f0,puVar9);
     if (0 < temp_v4) {
       return (int *)0x0;
     }
@@ -214,7 +214,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
          (temp_v6 = FUN_003e7adc(temp_v6), temp_v6 == 0)) && ((*puVar9 & 0x200000) != 0)) &&
        (temp_v1 = *(short *)(*(int *)(temp_v4 + 0x2c) + 0x1be),
        (temp_v1 == 9 || temp_v1 == 10) || temp_v1 == 0xd)) {
-      temp_v6 = FUN_0040de1c(DAT_005712f0,puVar9);
+      temp_v6 = chainCountIdUnflagged(DAT_005712f0,puVar9);
       if (temp_v6 != 0) {
         return (int *)0x0;
       }
@@ -238,14 +238,14 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
       return (int *)0x0;
     }
     if (*(int *)(*param_1 + 0x4e54) != 0) {
-      FUN_003e6bd8();
+      bufProcRelease();
       FUN_002e3328();
       *(unsigned int *)(*param_1 + 0x4e54) = 0;
     }
     FUN_004eb740(param_1,puVar9);
     break;
   case 0x1a:
-    temp_v4 = FUN_004d84e8(g_btlEvent);
+    temp_v4 = isEntryUsable(g_btlEvent);
     if (temp_v4 != 0) {
       return (int *)0x0;
     }
@@ -266,7 +266,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004e05d4(param_1,puVar9,temp_v6,param_4);
     return param_1;
   case 0x21:
-    temp_v4 = FUN_0040de1c(DAT_005712f0,puVar9);
+    temp_v4 = chainCountIdUnflagged(DAT_005712f0,puVar9);
     if (0 < temp_v4) {
       return (int *)0x0;
     }
@@ -311,7 +311,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0x23:
-    temp_v4 = FUN_0040de1c(DAT_005712f0,puVar9);
+    temp_v4 = chainCountIdUnflagged(DAT_005712f0,puVar9);
     if (0 < temp_v4) {
       return (int *)0x0;
     }
@@ -321,7 +321,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     FUN_004eb740(param_1,puVar9);
     break;
   case 0x24:
-    temp_v6 = FUN_004d84e8(g_btlEvent);
+    temp_v6 = isEntryUsable(g_btlEvent);
     if (temp_v6 != 0) {
       return (int *)0x0;
     }

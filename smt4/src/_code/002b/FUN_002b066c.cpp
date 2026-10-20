@@ -1,32 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002a8740(int);
-extern int FUN_002a8764(void);
+extern u8 *FUN_002a8740(int index);
+extern s8 *FUN_002a8764(void);
 extern int FUN_002a8778(void);
 
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 id;
+} Unit;
 
-int FUN_002b066c(unsigned int param_1)
-
+/* Finds the party member whose unit id is `id`, or 0. */
+int FUN_002b066c(u32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  temp_v0 = FUN_002a8778();
-  if (0 < temp_v0) {
-    do {
-      temp_v0 = FUN_002a8764();
-      temp_v0 = FUN_002a8740((int)*(signed char *)(temp_v0 + temp_v1 + 0x90f0));
-      if (*(unsigned short *)(temp_v0 + 0x46) == param_1) {
-        return temp_v0;
-      }
-      temp_v1 = temp_v1 + 1;
-      temp_v0 = FUN_002a8778();
-    } while (temp_v1 < temp_v0);
-  }
-  return 0;
+    int i = 0;
+    int count;
+    int slot;
+    Unit *unit;
+
+    count = FUN_002a8778();
+    if (0 < count) {
+        do {
+            slot = FUN_002a8764()[i + 0x90f0];
+            unit = (Unit *)FUN_002a8740(slot);
+            if (unit->id == id) {
+                return (int)unit;
+            }
+            i = i + 1;
+            count = FUN_002a8778();
+        } while (i < count);
+    }
+    return 0;
 }
 
 } /* extern "C" */

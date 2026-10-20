@@ -30,7 +30,7 @@ typedef struct {
 } Owner;
 
 int FUN_0042337c(u8 *gate);
-int FUN_0042348c(u8 *gate);
+int counterPairRemaining(u8 *gate);
 int FUN_00425448(Owner *owner);
 
 /* Runs the owner's gate logic, then lets each active channel's device finish its pending steps. */
@@ -39,7 +39,7 @@ void FUN_00424b54(Owner *owner)
     int count;
     int channel;
 
-    if (FUN_0042348c(owner->gate) != 0) {
+    if (counterPairRemaining(owner->gate) != 0) {
         if (FUN_0042337c(owner->gate) == 0) {
             owner->state = 7;
         }

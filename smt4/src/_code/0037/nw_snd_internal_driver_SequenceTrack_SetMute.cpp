@@ -1,55 +1,51 @@
-#include "romwright_types.h"
+#include "shard/SndChannel.h"
 
 extern "C" {
 
 int FUN_0023592c(void);
-int nw_snd_internal_driver_Channel_FreeChannel(int);
-int nw_snd_internal_driver_Channel_Release(int);
-int nw_snd_internal_driver_Channel_Stop(int);
+int nw_snd_internal_driver_Channel_FreeChannel(SndChannel *channel);
+int nw_snd_internal_driver_Channel_Release(SndChannel *channel);
+int nw_snd_internal_driver_Channel_Stop(SndChannel *channel);
 
-/* Supplied declaration required: FUN_0023592c. */
-/* Supplied declaration required: nw_snd_internal_driver_Channel_FreeChannel. */
-/* Supplied declaration required: nw_snd_internal_driver_Channel_Release. */
-/* Supplied declaration required: nw_snd_internal_driver_Channel_Stop. */
+typedef struct SequenceTrack {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u8 mute;
+    /* 0x49 */ u8 unk49[0x7B];
+    /* 0xC4 */ SndChannel *channels;
+} SequenceTrack;
 
-
-void nw_snd_internal_driver_SequenceTrack_SetMute(int param_1,int param_2)
-
+/* Mute modes: 0 unmuted, 1 muted, 2 release all channels then mute, 3 free and stop all channels then mute. */
+void nw_snd_internal_driver_SequenceTrack_SetMute(SequenceTrack *track, int mode)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_2 == 0) {
-    *(unsigned char *)(param_1 + 0x48) = 0;
-  }
-  else if (param_2 == 1) {
-    *(unsigned char *)(param_1 + 0x48) = 1;
-  }
-  else {
-    if (param_2 != 2) {
-      if (param_2 != 3) {
-        return;
-      }
-      for (temp_v0 = *(int *)(param_1 + 0xc4); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
-        nw_snd_internal_driver_Channel_FreeChannel(temp_v0);
-        nw_snd_internal_driver_Channel_Stop(temp_v0);
-      }
-    }
-    else {
-      FUN_0023592c();
-      for (temp_v0 = *(int *)(param_1 + 0xc4); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
-        if (*(char *)(temp_v0 + 0xc6) != '\0') {
-          nw_snd_internal_driver_Channel_Release(temp_v0);
+    SndChannel *channel;
+
+    if (mode == 0) {
+        track->mute = 0;
+    } else if (mode == 1) {
+        track->mute = 1;
+    } else {
+        if (mode != 2) {
+            if (mode != 3) {
+                return;
+            }
+            for (channel = track->channels; channel != NULL; channel = channel->next) {
+                nw_snd_internal_driver_Channel_FreeChannel(channel);
+                nw_snd_internal_driver_Channel_Stop(channel);
+            }
+        } else {
+            FUN_0023592c();
+            for (channel = track->channels; channel != NULL; channel = channel->next) {
+                if (channel->unk0C6 != 0) {
+                    nw_snd_internal_driver_Channel_Release(channel);
+                }
+            }
+            for (channel = track->channels; channel != NULL; channel = channel->next) {
+                nw_snd_internal_driver_Channel_FreeChannel(channel);
+            }
         }
-      }
-      for (temp_v0 = *(int *)(param_1 + 0xc4); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
-        nw_snd_internal_driver_Channel_FreeChannel(temp_v0);
-      }
+        track->channels = NULL;
+        track->mute = 1;
     }
-    *(unsigned int *)(param_1 + 0xc4) = 0;
-    *(unsigned char *)(param_1 + 0x48) = 1;
-  }
-  return;
 }
 
 } /* extern "C" */

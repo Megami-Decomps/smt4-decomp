@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Triple {
+    /* 0x00 */ u32 a;
+    /* 0x04 */ u32 b;
+    /* 0x08 */ u32 c;
+} Triple;
 
-void FUN_002e9afe(unsigned int *param_1,unsigned int *param_2)
-
+/* Copies the three words. */
+void FUN_002e9afe(Triple *dest, const Triple *source)
 {
-  *param_1 = *param_2;
-  param_1[1] = param_2[1];
-  param_1[2] = param_2[2];
-  return;
+    dest->a = source->a;
+    dest->b = source->b;
+    dest->c = source->c;
 }
 
 } /* extern "C" */

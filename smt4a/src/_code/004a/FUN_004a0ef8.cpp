@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00408184(int, int);
-int FUN_00409cd8(int);
+int countersRaiseA(int);
 
 extern int *FUN_001ab888(void);
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_00409cd8. */
+/* Supplied declaration required: countersRaiseA. */
 
 
 int FUN_004a0ef8(int param_1)
@@ -34,7 +34,7 @@ int FUN_004a0ef8(int param_1)
     temp_v0 = 999999999;
   }
   *piVar1 = temp_v0;
-  FUN_00409cd8(0x19);
+  countersRaiseA(0x19);
   return *piVar1;
 }
 

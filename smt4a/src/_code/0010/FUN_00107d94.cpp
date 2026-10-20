@@ -11,9 +11,9 @@ int FUN_00108ea8(...);
 int FUN_00114b86(...);
 int FUN_002eab08(...);
 int FUN_002eb16e(int *, int);
-int FUN_002eb5e8(unsigned char [12], int);
+int constructObj00559344(unsigned char [12], int);
 int FUN_002eb60c(...);
-int FUN_002ec890(int **);
+int destroyObj0055ae64(int **);
 int FUN_002ec934(int **, unsigned char [8], unsigned int);
 int FUN_002ef268(int *, unsigned int);
 int FUN_002efa58(int **, int *, int);
@@ -61,16 +61,16 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 extern int FUN_002eac34(unsigned char);
 extern int FUN_002eafbe(int);
 /* Supplied declaration required: FUN_002eb16e. */
-/* Supplied declaration required: FUN_002eb5e8. */
+/* Supplied declaration required: constructObj00559344. */
 /* Supplied declaration required: FUN_002eb60c. */
 extern int FUN_002eb6ae(int, unsigned int);
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ec934. */
 extern int FUN_002eed8c(int);
 extern int FUN_002ef01c(int);
 /* Supplied declaration required: FUN_002ef268. */
 extern int FUN_002efa1c(int *);
-extern unsigned int *FUN_002efa50(int *, unsigned char);
+extern unsigned int *arrayElementAddress_002efa50(int *, unsigned char);
 /* Supplied declaration required: FUN_002efa58. */
 /* Supplied declaration required: FUN_002efb6c. */
 extern int FUN_002f035c(unsigned char *, unsigned char *);
@@ -204,7 +204,7 @@ void FUN_00107d94(int *param_1,int param_2)
         *(unsigned char *)(param_1 + 0x52) = *(unsigned char *)(temp_v19 + 5);
         temp_v7 = (int *)0x0;
         if (*(char *)(temp_v18 + 4) != '\0') {
-          FUN_002eb5e8(temp_v30,0);
+          constructObj00559344(temp_v30,0);
           temp_v7 = (int *)0x1;
           FUN_002f07b8(temp_v29,param_2);
           temp_v5 = FUN_002f035c(temp_v29,temp_v30);
@@ -240,7 +240,7 @@ void FUN_00107d94(int *param_1,int param_2)
               FUN_00105d54(param_1 + 0x80,&temp_v7,*(unsigned char *)((int)param_1 + 0x149),
                            (char)param_1[0x52]);
             }
-            FUN_002ec890(&temp_v7);
+            destroyObj0055ae64(&temp_v7);
           }
         }
       }
@@ -270,7 +270,7 @@ void FUN_00107d94(int *param_1,int param_2)
     param_1[0xc9] = param_1[0xc9] + 1;
     temp_v5 = FUN_002eed8c(param_2);
     temp_v8[10] = temp_v5 + temp_v8[10];
-    puVar9 = (unsigned int *)FUN_002efa50(temp_v15,*(unsigned char *)(temp_v16 + 4));
+    puVar9 = (unsigned int *)arrayElementAddress_002efa50(temp_v15,*(unsigned char *)(temp_v16 + 4));
     FUN_00114b86(*puVar9,param_2);
   }
   temp_v9 = param_1 + 0x70;

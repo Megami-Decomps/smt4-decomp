@@ -1,36 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_00291414_arg0 fn_00291414_arg0;
-int FUN_002916ac(fn_00291414_arg0 *);
-struct fn_00291414_arg0 {
-    unsigned char pad_0x0[0x2];
-    byte field_0x2; /* +0x2 */
-    unsigned char pad_0x3[0xd];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x13];
-    void *field_0x24; /* +0x24 */
-    void *field_0x28; /* +0x28 */
-    void *field_0x2c; /* +0x2c */
-    void *field_0x30; /* +0x30 */
-};
+int FUN_002916ac(void *item);
 
-/* Supplied declaration required: FUN_002916ac. */
+typedef struct Item {
+    /* 0x000 */ u8 unk000[0x384];
+    /* 0x384 */ u32 *unk384;
+} Item;
 
-
-void FUN_00291414(fn_00291414_arg0 *param_1)
-
+void FUN_00291414(Item *item)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1 == (fn_00291414_arg0 *)0x0) {
-    return;
-  }
-  if (*(unsigned int **)&param_1[0x11].field_0x10 != (unsigned int *)0x0) {
-    **(unsigned int **)&param_1[0x11].field_0x10 = 0;
-  }
-  FUN_002916ac(param_1);
-  return;
+    if (item == NULL) {
+        return;
+    }
+    if (item->unk384 != NULL) {
+        *item->unk384 = 0;
+    }
+    FUN_002916ac(item);
 }
 
 } /* extern "C" */

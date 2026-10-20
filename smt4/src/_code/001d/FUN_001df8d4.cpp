@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0026a69c(void);
 int FUN_00283e48(void);
-int FUN_0029e974(void);
+int dataTable06Sub1GetRecord(void);
 int FUN_002ae164(void);
 int VectorUnsignedToFloat(int, int);
 
@@ -24,7 +24,7 @@ typedef struct {
 extern int FUN_0026a604(void);
 /* Supplied declaration required: FUN_0026a69c. */
 /* Supplied declaration required: FUN_00283e48. */
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002ae164. */
 
 
@@ -59,10 +59,10 @@ unsigned int FUN_001df8d4(int param_1)
       temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 4) + temp_v7 * 2);
       if ((temp_v1 != 0) && (FUN_0026a69c(), temp_v1 != 6)) {
         temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 4) + temp_v7 * 2);
-        FUN_0029e974();
+        dataTable06Sub1GetRecord();
         temp_v5 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 4) + temp_v7 * 2);
         temp_v1 = temp_v5;
-        FUN_0029e974();
+        dataTable06Sub1GetRecord();
         temp_v10 = (float)VectorUnsignedToFloat
                                   (*(unsigned char *)(temp_v1 + 3) & 0x1f,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v10 = temp_v10 + temp_v10 * temp_v13;
@@ -94,7 +94,7 @@ unsigned int FUN_001df8d4(int param_1)
               temp_v10 = temp_v10 - temp_v12;
             }
             temp_v5 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x1c) + temp_v6 * 2);
-            FUN_0029e974();
+            dataTable06Sub1GetRecord();
             temp_v6 = temp_v6 + 1;
             if (*(char *)(temp_v1 + 2) == *(char *)(temp_v5 + 2)) {
               temp_v10 = temp_v10 - temp_v12;

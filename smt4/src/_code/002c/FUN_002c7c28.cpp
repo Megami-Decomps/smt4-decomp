@@ -10,7 +10,7 @@ int effEmitterCreateSmall(void);
 int FUN_00268fc4(void);
 int FUN_002691d8(unsigned int, int, int *);
 int FUN_00269334(void);
-int FUN_002e7ca4(int, unsigned int);
+int effParticleParamCopy(int, unsigned int);
 
 /* Supplied declaration required: effEmitterCreate. */
 /* Supplied declaration required: FUN_0024f8a4. */
@@ -18,7 +18,7 @@ int FUN_002e7ca4(int, unsigned int);
 /* Supplied declaration required: FUN_00268fc4. */
 /* Supplied declaration required: FUN_002691d8. */
 /* Supplied declaration required: FUN_00269334. */
-/* Supplied declaration required: FUN_002e7ca4. */
+/* Supplied declaration required: effParticleParamCopy. */
 
 
 int * FUN_002c7c28(int param_1)
@@ -51,7 +51,7 @@ int * FUN_002c7c28(int param_1)
     FUN_00268fc4();
     *(int *)(piVar1[0xb] + 0x50) = temp_v0;
   }
-  FUN_002e7ca4(piVar1[0xb],*(unsigned int *)(param_1 + 0x2c));
+  effParticleParamCopy(piVar1[0xb],*(unsigned int *)(param_1 + 0x2c));
   *(unsigned short *)(piVar1[0xb] + 0xc) = *(unsigned short *)(*(int *)(param_1 + 0x2c) + 0xc);
   return piVar1;
 }

@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00398388(void);
-int FUN_003983a0(void);
+int dataTable2EType1Count(void);
+int dataTable2EType0Count(void);
 int FUN_003fd784(int);
 int FUN_0040ace8(unsigned int, int);
 
@@ -27,10 +27,10 @@ extern int DAT_005f1c68; /* 0x5f1c68 */
 extern int DAT_005f1c6c; /* 0x5f1c6c */
 
 extern unsigned short *FUN_001801a4(void);
-extern short *FUN_0033f7c0(int);
-extern short *FUN_0033f7f8(int);
-/* Supplied declaration required: FUN_00398388. */
-/* Supplied declaration required: FUN_003983a0. */
+extern short *dataTable2EType1GetEntry(int);
+extern short *dataTable2EType0GetEntry(int);
+/* Supplied declaration required: dataTable2EType1Count. */
+/* Supplied declaration required: dataTable2EType0Count. */
 /* Supplied declaration required: FUN_003fd784. */
 /* Supplied declaration required: FUN_0040ace8. */
 
@@ -48,10 +48,10 @@ void FUN_002d8ef8(void)
   puVar1 = (unsigned short *)FUN_001801a4();
   temp_v0 = 0;
   puVar2 = puVar1;
-  FUN_003983a0();
+  dataTable2EType0Count();
   if (0 < (int)puVar2) {
     do {
-      psVar3 = (short *)FUN_0033f7f8(temp_v0);
+      psVar3 = (short *)dataTable2EType0GetEntry(temp_v0);
       if ((int)*psVar3 == (unsigned int)*puVar1) {
         DAT_005f1848 = DAT_005f1c68;
         if (DAT_005f1c68 == -1) {
@@ -60,7 +60,7 @@ void FUN_002d8ef8(void)
         break;
       }
       temp_v0 = temp_v0 + 1;
-      FUN_003983a0();
+      dataTable2EType0Count();
     } while (temp_v0 < (int)psVar3);
   }
   temp_v0 = DAT_005f1c68;
@@ -124,11 +124,11 @@ void FUN_002d8ef8(void)
   *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
   temp_v0 = FUN_003fd784(temp_v0);
   temp_v1 = 0;
-  FUN_00398388();
+  dataTable2EType1Count();
   if (0 < temp_v0) {
-    while (psVar3 = (short *)FUN_0033f7c0(temp_v1), (int)*psVar3 != (unsigned int)puVar1[4]) {
+    while (psVar3 = (short *)dataTable2EType1GetEntry(temp_v1), (int)*psVar3 != (unsigned int)puVar1[4]) {
       temp_v1 = temp_v1 + 1;
-      FUN_00398388();
+      dataTable2EType1Count();
       if ((int)psVar3 <= temp_v1) {
         return;
       }

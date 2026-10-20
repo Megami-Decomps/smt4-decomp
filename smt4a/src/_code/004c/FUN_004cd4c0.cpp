@@ -15,7 +15,7 @@ int FUN_0031f0f4(...);
 int FUN_003da99c(...);
 int FUN_003daaf8(...);
 int FUN_004bcd90(...);
-int FUN_004bd3ec(...);
+int bitsAt60Set(...);
 int FUN_004cd340(...);
 int SBORROW4(...);
 
@@ -82,8 +82,8 @@ extern int FUN_0031cfd0(unsigned short);
 extern int FUN_003e46f4(unsigned int);
 extern int FUN_003e4de4(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
-extern int FUN_004bd340(fn_004cd4c0_arg0 *, unsigned int);
-/* Supplied declaration required: FUN_004bd3ec. */
+extern int bitsAt60Test(fn_004cd4c0_arg0 *, unsigned int);
+/* Supplied declaration required: bitsAt60Set. */
 /* Supplied declaration required: FUN_004cd340. */
 
 
@@ -312,10 +312,10 @@ void FUN_004cd4c0(fn_004cd4c0_arg0 *param_1,int param_2)
   temp_v4 = FUN_0017760c(param_1);
   param_1->field_0x2a = (temp_v4 - (short)temp_v18) + param_1->field_0x2a;
   param_1->field_0x2c = (param_1->field_0x10 - temp_v5) + param_1->field_0x2c;
-  temp_v8 = FUN_004bd340(param_1,2);
+  temp_v8 = bitsAt60Test(param_1,2);
   param_1->field_0x60 = 0;
   if (temp_v8 != 0) {
-    FUN_004bd3ec(param_1,2);
+    bitsAt60Set(param_1,2);
   }
   temp_v8 = FUN_003e46f4(0x83);
   if (temp_v8 != 0) {

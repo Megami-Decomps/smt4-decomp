@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002eb67c(unsigned int *);
+int constructObj0055a284(unsigned int *);
 
 typedef int romwright_code(...);
 extern unsigned char DAT_00558960; /* 0x558960 */
 
-/* Supplied declaration required: FUN_002eb67c. */
+/* Supplied declaration required: constructObj0055a284. */
 
 
 void FUN_00106e00(unsigned int *param_1)
@@ -23,7 +23,7 @@ void FUN_00106e00(unsigned int *param_1)
   if ((int *)param_1[6] != (int *)0x0) {
     (**(romwright_code **)(*(int *)param_1[6] + 4))();
   }
-  FUN_002eb67c(param_1);
+  constructObj0055a284(param_1);
   return;
 }
 

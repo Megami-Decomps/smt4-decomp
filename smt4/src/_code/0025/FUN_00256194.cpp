@@ -1,29 +1,22 @@
-#include "romwright_types.h"
+#include "shard/GameOptions.h"
 
 extern "C" {
 
-int memClear(int, int);
-
-extern int gameGetOptions(void);
-/* Supplied declaration required: memClear. */
-
+int memClear(void *ptr, int size);
+extern GameOptions *gameGetOptions(void);
 
 void FUN_00256194(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = gameGetOptions();
-  if ((*(unsigned short *)(temp_v0 + 0x608) & 1) == 0) {
-    if (*(unsigned short *)(temp_v0 + 0x46) == 0x4b1) {
-      memClear(temp_v0,0x604);
+    GameOptions *options = gameGetOptions();
+
+    if ((options->flags & 1) == 0) {
+        if (options->unk46 == 0x4b1) {
+            memClear(options, 0x604);
+        }
+        options->unk60A = 0;
+        options->unk60C = 0;
+        options->unk60E = 0;
     }
-    *(unsigned short *)(temp_v0 + 0x60a) = 0;
-    *(unsigned short *)(temp_v0 + 0x60c) = 0;
-    *(unsigned short *)(temp_v0 + 0x60e) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

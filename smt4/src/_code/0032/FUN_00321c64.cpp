@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0025c9dc(unsigned int, unsigned int [2], int);
+int effBlockSetBlobB(unsigned int, unsigned int [2], int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 extern unsigned char DAT_00400002; /* 0x400002 */
 extern unsigned char DAT_0044ea80; /* 0x44ea80 */
 
-/* Supplied declaration required: FUN_0025c9dc. */
+/* Supplied declaration required: effBlockSetBlobB. */
 
 
 unsigned char * FUN_00321c64(void)
@@ -24,7 +24,7 @@ unsigned char * FUN_00321c64(void)
   unsigned int temp_v0 [2];
   
   temp_v0[0] = 0;
-  FUN_0025c9dc((*(unsigned int *)((unsigned char *)&DAT_0044ea80 + 0x1c)),temp_v0,4);
+  effBlockSetBlobB((*(unsigned int *)((unsigned char *)&DAT_0044ea80 + 0x1c)),temp_v0,4);
   return &DAT_00400002;
 }
 

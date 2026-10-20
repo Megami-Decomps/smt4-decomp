@@ -1,34 +1,21 @@
-#include "romwright_types.h"
+#include "shard/Shard003A.h"
 
 extern "C" {
 
-int FUN_00153630(unsigned int, unsigned int, int, int, int);
-int scrGetArg(int);
+extern u32 scrGetArg(s32 index);
+extern u32 *jobGetWork(u32 job);
+extern void FUN_00153630(u32 a, u32 b, s32 c, s32 d, s32 e);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00153630. */
-extern unsigned int *jobGetWork(void);
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_003a6efc(void)
-
+/* Script command: FUN_00153630 on the first word of job `argument 0`'s work with argument 1. */
+u32 FUN_003a6efc(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  scrGetArg(0);
-  puVar1 = (unsigned int *)jobGetWork();
-  temp_v1 = *puVar1;
-  temp_v0 = scrGetArg(1);
-  FUN_00153630(temp_v1,temp_v0,1,1,1);
-  return 1;
+    u32 job = scrGetArg(0);
+    u32 *work = jobGetWork(job);
+    u32 first = *work;
+    u32 value = scrGetArg(1);
+
+    FUN_00153630(first, value, 1, 1, 1);
+    return 1;
 }
 
 } /* extern "C" */

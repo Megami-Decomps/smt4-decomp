@@ -24,8 +24,8 @@ extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_002e6490. */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_003ff160. */
-extern int FUN_003ff17c(unsigned short);
-extern unsigned long long FUN_003ff190(unsigned short);
+extern int flagsBGetBit0(unsigned short);
+extern unsigned long long flagsBGetBit1(unsigned short);
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -61,12 +61,12 @@ void FUN_003f5bd8(int param_1,int param_2)
     puVar8 = (unsigned short *)(temp_v1 + temp_v6 * 0x34);
     temp_v0 = *puVar8;
     if (temp_v0 != 0) {
-      temp_v2 = FUN_003ff17c(temp_v0);
+      temp_v2 = flagsBGetBit0(temp_v0);
       if (temp_v2 == 0) {
         if ((puVar8[0x19] != 0) && (temp_v2 = FUN_0018719c(), temp_v2 == 0)) goto LAB_003f5d78;
         FUN_003ff160(temp_v0);
       }
-      temp_v8 = FUN_003ff190(temp_v0);
+      temp_v8 = flagsBGetBit1(temp_v0);
       temp_v2 = (int)((unsigned long long)temp_v8 >> 0x20);
       if ((int)temp_v8 != 0) {
         *(unsigned char *)(param_1 + 0x40) = 1;

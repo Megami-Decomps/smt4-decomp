@@ -1,14 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u16 first;
+    /* 0x1A */ u16 second;
+} Holder;
 
-void FUN_00184c40(int param_1,unsigned short param_2,unsigned short param_3)
-
+/* Stores the two halfwords at 0x18 and 0x1A. */
+void FUN_00184c40(Holder *object, u16 first, u16 second)
 {
-  *(unsigned short *)(param_1 + 0x18) = param_2;
-  *(unsigned short *)(param_1 + 0x1a) = param_3;
-  return;
+    object->first = first;
+    object->second = second;
 }
 
 } /* extern "C" */

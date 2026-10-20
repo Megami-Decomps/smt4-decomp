@@ -44,7 +44,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002e08b0. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: FUN_003fd690. */
-extern int FUN_003fd708(unsigned short);
+extern int flagsAtGetBit1(unsigned short);
 /* Supplied declaration required: FUN_0049d140. */
 /* Supplied declaration required: FUN_0049de10. */
 
@@ -93,7 +93,7 @@ void FUN_0049df84(int param_1)
       FUN_00203b40(param_1 + 0x124,*(unsigned int *)(param_1 + 0x94),9,1,1,1);
       FUN_002e08b0(param_1 + 0x124,0);
       *(unsigned int *)(param_1 + 0x188) = 0;
-      temp_v2 = FUN_003fd708(**(unsigned short **)(param_1 + 0x84));
+      temp_v2 = flagsAtGetBit1(**(unsigned short **)(param_1 + 0x84));
       if (temp_v2 != 0) {
         FUN_003fd690(**(unsigned short **)(param_1 + 0x84),0);
       }

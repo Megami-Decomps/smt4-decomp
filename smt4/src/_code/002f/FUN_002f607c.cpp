@@ -9,7 +9,7 @@ int scrSetResult(int);
 /* Supplied declaration required: scrSetResult. */
 extern int gameGetOptions(void);
 extern int FUN_002b6b38(void);
-extern int FUN_002c09f4(int);
+extern int randNextInRange(int);
 
 
 unsigned int FUN_002f607c(void)
@@ -35,7 +35,7 @@ unsigned int FUN_002f607c(void)
     if (*(short *)(temp_v0 + 0x60e) != 0) {
       temp_v2 = temp_v2 + 1;
     }
-    temp_v2 = FUN_002c09f4(temp_v2);
+    temp_v2 = randNextInRange(temp_v2);
     temp_v1 = *(short *)(temp_v0 + 0x60a);
     if (temp_v1 != 0) {
       if (temp_v2 == 0) {

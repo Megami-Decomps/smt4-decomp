@@ -1,32 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0025930c(unsigned int, unsigned int);
-int FUN_0027d8b4(unsigned int);
+int FUN_0025930c(u32 a, u32 b);
+int FUN_0027d8b4(u32 a);
 int FUN_002eb674(void);
+extern u32 scrGetArg(u32 index);
 
-/* Supplied declaration required: FUN_0025930c. */
-/* Supplied declaration required: FUN_0027d8b4. */
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_002eb674. */
-
-
-unsigned int FUN_002ef284(void)
-
+u32 FUN_002ef284(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = scrGetArg(2);
-  FUN_0025930c(temp_v1,temp_v2);
-  FUN_0027d8b4(temp_v0);
-  FUN_002eb674();
-  return 1;
+    u32 a = scrGetArg(0);
+    u32 b = scrGetArg(1);
+    u32 c = scrGetArg(2);
+
+    FUN_0025930c(b, c);
+    FUN_0027d8b4(a);
+    FUN_002eb674();
+    return 1;
 }
 
 } /* extern "C" */

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0016a0f0(int);
+int dataTableValueOrZero(int);
 int FUN_00275fe4(...);
 int FUN_00418070(unsigned int, int);
 int FUN_00418714(unsigned int);
-int FUN_004da2f8(void);
+int optionsClearFlag1(void);
 
-/* Supplied declaration required: FUN_0016a0f0. */
+/* Supplied declaration required: dataTableValueOrZero. */
 extern int FUN_00275bb0(unsigned int);
 /* Supplied declaration required: FUN_00275fe4. */
 extern int FUN_002deb84(void);
@@ -18,7 +18,7 @@ extern int FUN_002deb84(void);
 extern int FUN_004186a4(void);
 extern unsigned int FUN_004186e0(unsigned int);
 /* Supplied declaration required: FUN_00418714. */
-/* Supplied declaration required: FUN_004da2f8. */
+/* Supplied declaration required: optionsClearFlag1. */
 
 
 unsigned int FUN_0038b28c(void)
@@ -37,13 +37,13 @@ unsigned int FUN_0038b28c(void)
     FUN_00275fe4(0);
     FUN_00275fe4(1,0);
   }
-  FUN_0016a0f0(0x1e);
+  dataTableValueOrZero(0x1e);
   temp_v0 = FUN_00275bb0(0);
   if (temp_v0 == 0) {
     temp_v1 = FUN_004186e0(0);
     FUN_00418070(temp_v1,0);
     FUN_00418714(temp_v1);
-    FUN_004da2f8();
+    optionsClearFlag1();
     return 1;
   }
   return 0;

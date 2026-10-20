@@ -1,60 +1,63 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_0033e8a8(...);
 int FUN_0033f22c(...);
-
-typedef struct fn_00294fe0_arg0 fn_00294fe0_arg0;
-struct fn_00294fe0_arg0 {
-    unsigned char pad_0x0[0x8];
-    void *field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    void *field_0x10; /* +0x10 */
-    void *field_0x14; /* +0x14 */
-    unsigned char pad_0x18[0x25];
-    byte field_0x3d; /* +0x3d */
-};
-
 extern int FUN_0023e378(void);
-extern int asdTMTexTableCallFileB(void *, unsigned int);
-/* Supplied declaration required: FUN_0033e8a8. */
-extern int FUN_0033f178(fn_00294fe0_arg0 *);
-/* Supplied declaration required: FUN_0033f22c. */
+extern int asdTMTexTableCallFileB(void *file, u32 id);
 
+typedef struct Header {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u16 count;
+} Header;
 
-unsigned int FUN_00294fe0(fn_00294fe0_arg0 *param_1)
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 unk1C;
+} Entry;
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ void *file;
+    /* 0x0C */ u32 id;
+    /* 0x10 */ Header *header;
+    /* 0x14 */ Entry *entries;
+    /* 0x18 */ u8 unk18[0x25];
+    /* 0x3D */ u8 loaded;
+} Obj;
+
+extern int FUN_0033f178(Obj *obj);
+
+u32 FUN_00294fe0(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  void *pvVar3;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = asdTMTexTableCallFileB(param_1->field_0x8,param_1->field_0xc);
-  temp_v1 = FUN_0023e378();
-  if (temp_v1 == 0) {
-    return 0;
-  }
-  if (param_1->field_0x3d == 0) {
-    temp_v1 = FUN_0033f178(param_1);
-    if (temp_v1 != 0) {
-      FUN_0033f22c(param_1);
+    int resource;
+    Entry *entry;
+    u32 id;
+    u32 value;
+    int count;
+
+    resource = asdTMTexTableCallFileB(obj->file, obj->id);
+    if (FUN_0023e378() == 0) {
+        return 0;
     }
-    temp_v3 = *(unsigned int *)(temp_v0 + 8);
-    temp_v2 = param_1->field_0xc;
-    param_1->field_0x3d = 1;
-    int cnt = *(unsigned short *)((int)param_1->field_0x10 + 4);
-    if (cnt > 0) {
-      pvVar3 = param_1->field_0x14;
-      *(unsigned int *)((int)pvVar3 + 0x18) = temp_v3;
-      *(unsigned int *)((int)pvVar3 + 0x1c) = temp_v2;
+    if (obj->loaded == 0) {
+        if (FUN_0033f178(obj) != 0) {
+            FUN_0033f22c(obj);
+        }
+        value = *(u32 *)(resource + 8);
+        id = obj->id;
+        obj->loaded = 1;
+        count = obj->header->count;
+        if (count > 0) {
+            entry = obj->entries;
+            entry->unk18 = value;
+            entry->unk1C = id;
+        }
+        FUN_0033e8a8(obj);
     }
-    FUN_0033e8a8(param_1);
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_malloc(void);
+void rt_malloc(void);
 
-/* Supplied declaration required: rt_malloc. */
-
-
+/* Forwards to rt_malloc. */
 void FUN_002e760a(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  rt_malloc();
-  return;
+    rt_malloc();
 }
 
 } /* extern "C" */

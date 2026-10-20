@@ -1,26 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_00306e84(unsigned int *, unsigned int);
+typedef struct Node {
+    /* 0x00 */ struct Node *next;
+    /* 0x04 */ struct Node *prev;
+} Node;
 
+typedef struct List {
+    /* 0x00 */ u32 unk00[4];
+    /* 0x10 */ Node *head;
+    /* 0x14 */ u32 unk14;
+} List;
 
-unsigned int * FUN_00121144(unsigned int *param_1)
+Node *FUN_00306e84(List *list, u32 count);
 
+/* Constructor: zeroes the list and allocates its sentinel node, which points at itself both ways. */
+List *FUN_00121144(List *list)
 {
-  unsigned int temp_v0;
-  
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  temp_v0 = FUN_00306e84(param_1,1);
-  param_1[4] = temp_v0;
-  *(unsigned int *)temp_v0 = temp_v0;
-  *(unsigned int *)(param_1[4] + 4) = param_1[4];
-  return param_1;
+    list->unk00[0] = 0;
+    list->unk00[1] = 0;
+    list->unk00[2] = 0;
+    list->unk00[3] = 0;
+    list->head = NULL;
+    list->unk14 = 0;
+    list->head = FUN_00306e84(list, 1);
+    list->head->next = list->head;
+    list->head->prev = list->head;
+    return list;
 }
 
 } /* extern "C" */

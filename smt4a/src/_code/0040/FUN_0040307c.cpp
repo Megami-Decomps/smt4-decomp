@@ -33,8 +33,8 @@ extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_00344cd0. */
 /* Supplied declaration required: FUN_00404050. */
 /* Supplied declaration required: FUN_00404f40. */
-extern unsigned int FUN_0040a7cc(unsigned int);
-extern unsigned int FUN_0040a7f8(void);
+extern unsigned int tableFlagBit2(unsigned int);
+extern unsigned int tableFlagBit1(void);
 
 
 void FUN_0040307c(int param_1)
@@ -74,8 +74,8 @@ void FUN_0040307c(int param_1)
   do {
     if (*(int *)(param_1 + 0x660) <= temp_v8) break;
     temp_v2 = (unsigned int)*(unsigned short *)(param_1 + (*(int *)(param_1 + 0xf8) + temp_v8) * 2 + 0x408);
-    temp_v3 = FUN_0040a7f8();
-    temp_v4 = FUN_0040a7cc(temp_v2);
+    temp_v3 = tableFlagBit1();
+    temp_v4 = tableFlagBit2(temp_v2);
     if (*(int *)(param_1 + 0xf4) == temp_v8) {
       temp_v5 = FUN_001834a4(0x32,temp_v8 + 0x72);
       temp_v12 = 0x9fe7ffff;

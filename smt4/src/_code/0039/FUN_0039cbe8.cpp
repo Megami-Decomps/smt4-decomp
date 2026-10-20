@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002314d0(void);
+int dataTable2bSub1GetCount(void);
 
 /* stack frame of param_2: 16 slot(s), 64 byte(s) */
 typedef struct {
@@ -28,8 +28,8 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-extern char *FUN_00231494(unsigned char *, int);
-/* Supplied declaration required: FUN_002314d0. */
+extern char *dataTable2bSub1GetRecord(unsigned char *, int);
+/* Supplied declaration required: dataTable2bSub1GetCount. */
 extern int FUN_0024c2ec(char, char);
 extern int FUN_002c09d0(void);
 
@@ -86,10 +86,10 @@ void FUN_0039cbe8(int param_1,int param_2)
   temp_v6[0x1e] = 0;
   temp_v6[0x1f] = 0;
   puVar3 = temp_v7;
-  FUN_002314d0();
+  dataTable2bSub1GetCount();
   if (0 < (int)puVar3) {
     do {
-      pcVar4 = (char *)FUN_00231494(temp_v7,temp_v4);
+      pcVar4 = (char *)dataTable2bSub1GetRecord(temp_v7,temp_v4);
       if ((*pcVar4 == param_2) &&
          ((temp_v1 = 0, (*(int *)((unsigned char *)&g_gameState + 0x3e0)) != 0 ||
           ((((*(short *)(pcVar4 + 4) == 0 || (temp_v2 = FUN_002c09d0(), temp_v2 != 0)) &&
@@ -119,7 +119,7 @@ void FUN_0039cbe8(int param_1,int param_2)
       }
       temp_v4 = temp_v4 + 1;
       puVar3 = temp_v7;
-      FUN_002314d0();
+      dataTable2bSub1GetCount();
     } while (temp_v4 < (int)puVar3);
     temp_v4 = 0;
     if (temp_v4 < temp_v5 - 1) {

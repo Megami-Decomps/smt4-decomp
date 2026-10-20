@@ -17,10 +17,10 @@ int FUN_004a4848(int);
 int FUN_004cf880(int);
 int FUN_004d03d8(int, int, int, int);
 int FUN_004d0420(int, int, int, int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
-int FUN_004d06e4(int);
-int FUN_004d097c(unsigned int);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
+int releaseEntriesA(int);
+int releaseEntriesB(unsigned int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -47,12 +47,12 @@ extern int FUN_0035db94(void);
 extern int FUN_004cfe4c(int);
 /* Supplied declaration required: FUN_004d03d8. */
 /* Supplied declaration required: FUN_004d0420. */
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d04f4(void);
 extern int FUN_004d0554(void);
-/* Supplied declaration required: FUN_004d06e4. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesA. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_004a580c(int param_1)
@@ -138,8 +138,8 @@ void FUN_004a580c(int param_1)
     }
     *(unsigned short *)(param_1 + 0xa872) = temp_v4;
     FUN_00184528(param_1 + 0xdc,temp_v4);
-    FUN_004d097c(*(unsigned int *)(param_1 + 0x84c));
-    FUN_004d06e4(param_1 + 0x818);
+    releaseEntriesB(*(unsigned int *)(param_1 + 0x84c));
+    releaseEntriesA(param_1 + 0x818);
     return;
   }
   if (temp_v2 == 0) {
@@ -157,7 +157,7 @@ void FUN_004a580c(int param_1)
     *(unsigned int *)(param_1 + 0x14) = 3;
     *(unsigned int *)(param_1 + 0x18) = 0;
     FUN_0019de98(0,0xf4f4f4ff);
-    FUN_004d044c();
+    sendEvent100020E();
     return;
   }
   FUN_0022e774();
@@ -169,7 +169,7 @@ void FUN_004a580c(int param_1)
   FUN_003343f0(1);
   *(unsigned int *)(param_1 + 0x14) = 6;
   *(unsigned int *)(param_1 + 0x18) = 0;
-  FUN_004d0434();
+  sendEvent100020F();
   return;
 }
 

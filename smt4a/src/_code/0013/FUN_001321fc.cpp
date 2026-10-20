@@ -1,12 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Vector8 {
+    /* 0x00 */ u8 *begin;
+    /* 0x04 */ u8 *unk04;
+    /* 0x08 */ u8 *end;
+} Vector8;
 
-int FUN_001321fc(int *param_1)
-
+/* Returns the number of 8-byte elements in the vector. */
+s32 FUN_001321fc(Vector8 *vector)
 {
-  return (param_1[2] - *param_1) >> 3;
+    return (vector->end - vector->begin) >> 3;
 }
 
 } /* extern "C" */

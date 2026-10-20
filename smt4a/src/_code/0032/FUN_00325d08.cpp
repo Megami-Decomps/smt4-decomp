@@ -110,7 +110,7 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int FUN_003e46f4(unsigned int);
 /* Supplied declaration required: FUN_003e54b8. */
-extern int FUN_003e56f0(unsigned int);
+extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004a01c8. */
@@ -270,11 +270,11 @@ LAB_00326f78:
 LAB_00326fcc:
         if ((((0xbf000000 < temp_v22) || ((int)temp_v22 >= 0x3f000001)) || (0xbf000000 < temp_v23[0])
             ) || (((int)temp_v23[0] >= 0x3f000001 ||
-                  (temp_v3 = FUN_003e56f0(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v3 != 0)))) {
+                  (temp_v3 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v3 != 0)))) {
           temp_v3 = g_lmapScene;
           *(float *)(g_lmapScene + 0x68) = temp_v13;
           *(float *)(temp_v3 + 0x58) = temp_v13;
-          temp_v3 = FUN_003e56f0(*(unsigned int *)(temp_v3 + 0x1a8));
+          temp_v3 = linkHolderCheckFirst(*(unsigned int *)(temp_v3 + 0x1a8));
           if (temp_v3 != 0) {
             *(unsigned short *)(g_lmapScene + 0x19a) = 1;
           }
@@ -660,7 +660,7 @@ LAB_00326a10:
       goto LAB_003270a0;
     }
     if (DAT_005f17c4 != 0) goto LAB_003270a0;
-    temp_v0 = FUN_003e56f0(*(unsigned int *)(g_lmapScene + 0x1a8));
+    temp_v0 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
     temp_v3 = g_lmapScene;
     if (temp_v0 != 0) {
       DAT_005f17ac = '\0';

@@ -1,27 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_5_stack;
+typedef struct Record {
+    /* 0x00 */ u32 a;
+    /* 0x04 */ u32 b;
+    /* 0x08 */ u32 c;
+    /* 0x0C */ u32 d;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u8 unk1C[0x10];
+    /* 0x2C */ u16 half2C;
+    /* 0x2E */ u16 half2E;
+} Record;
 
-
-void FUN_001ab8e0(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+/* Initialises the record from four values: the three words at 0x10..0x18 cleared and both halfwords set to 1. */
+void FUN_001ab8e0(Record *record, u32 a, u32 b, u32 c, u32 d)
 {
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  *(unsigned short *)(param_1 + 0xb) = 1;
-  *(unsigned short *)((int)param_1 + 0x2e) = 1;
-  *param_1 = param_2;
-  param_1[1] = param_3;
-  param_1[2] = param_4;
-  param_1[3] = param_5;
-  return;
+    record->unk10 = 0;
+    record->unk14 = 0;
+    record->unk18 = 0;
+    record->half2C = 1;
+    record->half2E = 1;
+    record->a = a;
+    record->b = b;
+    record->c = c;
+    record->d = d;
 }
 
 } /* extern "C" */

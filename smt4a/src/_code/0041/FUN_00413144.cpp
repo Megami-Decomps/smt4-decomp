@@ -78,7 +78,7 @@ extern unsigned int FUN_002bf520(void);
 extern unsigned int FUN_002e9300(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9598. */
-extern int FUN_002ea0e4(unsigned char *);
+extern int constructObj0055affc(unsigned char *);
 extern unsigned int FUN_002ea100(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002f4cac. */
 /* Supplied declaration required: FUN_002f4cd6. */
@@ -141,7 +141,7 @@ void FUN_00413144(int param_1)
   
   temp_v3 = &DAT_0055aadc;
   temp_v4 = 0;
-  temp_v0 = FUN_002ea0e4(temp_v7);
+  temp_v0 = constructObj0055affc(temp_v7);
   temp_v11 = 0;
   temp_v12 = 0;
   temp_v13 = 0;

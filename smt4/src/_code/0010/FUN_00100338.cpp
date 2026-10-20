@@ -1,22 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100338` (_code @ 0x100338, 0x16 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Dispatches to the object's handler hook if it has one (a weak call armlink removed), else to FUN_00100366; returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00100366(void);
+struct Obj00100338 {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ void *handler;
+};
 
-/* Supplied declaration required: FUN_00100366. */
+void FUN_00100366(Obj00100338 *obj, u32 a, u32 b);
+__weak void FUN_00100338_hook(Obj00100338 *obj, u32 a, u32 b);
 
-
-unsigned int FUN_00100338(int param_1)
-
+u32 FUN_00100338(Obj00100338 *obj, u32 a, u32 b)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x14) == 0) {
-    FUN_00100366();
-  }
-  return 1;
+    if (obj->handler != NULL) {
+        FUN_00100338_hook(obj, a, b);
+    } else {
+        FUN_00100366(obj, a, b);
+    }
+    return 1;
 }
 
-} /* extern "C" */
+}

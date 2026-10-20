@@ -1,29 +1,16 @@
-#include "romwright_types.h"
+#include "shard/PlayScene.h"
 
 extern "C" {
 
-int FUN_00298140(int, int, int);
-int timerStart(int, int, int);
+int FUN_00298140(PlayScene *scene, int a, int b);
+int timerStart(void *timer, int a, int b);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_00298140. */
-/* Supplied declaration required: timerStart. */
-
-
-void FUN_00218b9c(int param_1)
-
+void FUN_00218b9c(PlayScene *scene)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x3048) != 0) {
-    FUN_00298140(param_1,0x27,1);
-    timerStart(param_1 + 0x12b8,9,0);
-    return;
-  }
-  return;
+    if (scene->state != 0) {
+        FUN_00298140(scene, 0x27, 1);
+        timerStart(scene->timer, 9, 0);
+    }
 }
 
 } /* extern "C" */

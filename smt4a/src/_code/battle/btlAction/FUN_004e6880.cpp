@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
-extern int FUN_001633a0(short);
+extern int lcgRandomRange(short);
 extern short FUN_004e9ae8(int *, int *, int, unsigned int);
 extern int btlUnitGet(int *);
 
@@ -65,7 +65,7 @@ void FUN_004e6880(int *param_1,unsigned int param_2)
     temp_v4 = temp_v4 + 1;
     if (temp_v4 >= 0x6d) {
       temp_v1 = FUN_004e9ae8(param_1,aiStack_1d8,temp_v3,1);
-      temp_v3 = FUN_001633a0(temp_v1 - 1);
+      temp_v3 = lcgRandomRange(temp_v1 - 1);
       temp_v4 = btlUnitGet(param_1);
       *(unsigned char *)(aiStack_1d8[temp_v3] + temp_v4 + 0x38) = 1;
       return;

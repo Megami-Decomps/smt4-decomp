@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00101598(int, int);
-int FUN_001015aa(int);
+int __set_errno(int);
 int FUN_001d2978(int, int, int [7]);
 int SUB84(double, int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SUB84 (SUBPIECE). */
 /* Supplied declaration required: FUN_00101598. */
-/* Supplied declaration required: FUN_001015aa. */
+/* Supplied declaration required: __set_errno. */
 /* Supplied declaration required: FUN_001d2978. */
 
 
@@ -43,7 +43,7 @@ void FUN_002e5550(float *param_1,double *param_2)
     temp_v0 = (float)temp_v1;
   }
   else {
-    FUN_001015aa(2);
+    __set_errno(2);
     if (temp_v2 <= temp_v1) {
       temp_v0 = INFINITY;
     }

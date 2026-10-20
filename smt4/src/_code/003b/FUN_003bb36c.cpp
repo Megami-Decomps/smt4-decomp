@@ -1,46 +1,47 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ae898(int, int);
+int FUN_002ae898(int table, int index);
+extern int FUN_002a60b4(u32 table, int index);
 
-extern int FUN_002a60b4(unsigned int, int);
-/* Supplied declaration required: FUN_002ae898. */
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0xC78];
+    /* 0xC78 */ u8 loaded[0x40];
+} Obj;
 
-
-unsigned int FUN_003bb36c(int param_1)
-
+/* Frees the loaded sprites of table 0x2A; returns 1 when no pair of flag bytes (from +0xC78) is set. */
+u32 FUN_003bb36c(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v2 = 0;
-  do {
-    if ((*(char *)(param_1 + temp_v2 + 0xc78) != '\0') &&
-       (temp_v0 = FUN_002a60b4(0x2a,temp_v2), temp_v0 != 0)) {
-      FUN_002ae898(0x2a,temp_v2);
-      *(unsigned char *)(param_1 + temp_v2 + 0xc78) = 0;
+    int i = 0;
+    u8 *pair;
+    u32 second;
+    u8 firstClear;
+
+    do {
+        if ((obj->loaded[i] != 0) && (FUN_002a60b4(0x2a, i) != 0)) {
+            FUN_002ae898(0x2a, i);
+            obj->loaded[i] = 0;
+        }
+        i = i + 1;
+    } while (i < 0x40);
+    i = 0;
+    while (1) {
+        pair = (u8 *)obj + i + 0xc00;
+        second = (u32)pair;
+        firstClear = pair[0x78] == 0;
+        if (firstClear) {
+            second = pair[0x79];
+        }
+        if (!firstClear || second != 0) {
+            break;
+        }
+        i = i + 2;
+        if (i >= 0x40) {
+            return 1;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x40);
-  temp_v2 = 0;
-  while( 1 ) {
-    temp_v0 = param_1 + temp_v2;
-    temp_v1 = temp_v0 + 0xc00;
-    temp_v3 = *(char *)(temp_v1 + 0x78) == '\0';
-    if (temp_v3) {
-      temp_v1 = (unsigned int)*(unsigned char *)(temp_v1 + 0x79);
-    }
-    if (!temp_v3 || temp_v1 != 0) break;
-    temp_v2 = temp_v2 + 2;
-    if (temp_v2 >= 0x40) {
-      return 1;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

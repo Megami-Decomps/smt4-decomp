@@ -1,25 +1,16 @@
-#include "romwright_types.h"
+#include "shard/GameGlobals.h"
 
 extern "C" {
 
-int FUN_0024d94c(int, unsigned int);
+int FUN_0024d94c(u16 *block, u32 value);
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
-
-/* Supplied declaration required: FUN_0024d94c. */
-
-
-void FUN_0029a0e8(unsigned int param_1)
-
+void FUN_0029a0e8(u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)((unsigned char *)&g_gameGlobals + 0x4);
-  FUN_0024d94c(temp_v0 + 0x1300,param_1);
-  *(unsigned char *)(temp_v0 + 0x1e66) = 0;
-  *(unsigned char *)(temp_v0 + 0x1eb8) = 1;
-  return;
+    GameData *data = g_gameGlobals.data;
+
+    FUN_0024d94c(&data->unk1300, value);
+    data->unk1E66 = 0;
+    data->unk1EB8 = 1;
 }
 
 } /* extern "C" */

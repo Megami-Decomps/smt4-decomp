@@ -5,7 +5,7 @@
 extern "C" {
 
 int ARM_common_memcpy4_9(int *, char *);
-int FUN_004f5e1c(unsigned int, int *, unsigned int, int);
+int obj4FQueryPair(unsigned int, int *, unsigned int, int);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned int DAT_00573808; /* 0x573808 */
 
 /* Supplied declaration required: ARM_common_memcpy4_9. */
-/* Supplied declaration required: FUN_004f5e1c. */
+/* Supplied declaration required: obj4FQueryPair. */
 
 
 void FUN_002980e4(int param_1,unsigned int param_2)
@@ -57,7 +57,7 @@ void FUN_002980e4(int param_1,unsigned int param_2)
   if (param_1 != 0) {
     ARM_common_memcpy4_9(&temp_v0,pcVar1);
   }
-  FUN_004f5e1c(DAT_00573808,&temp_v0,param_2,0);
+  obj4FQueryPair(DAT_00573808,&temp_v0,param_2,0);
   return;
 }
 

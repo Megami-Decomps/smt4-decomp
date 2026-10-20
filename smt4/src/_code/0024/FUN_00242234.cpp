@@ -7,7 +7,7 @@ extern "C" {
 int taskRunWithObject(unsigned int, unsigned char [252]);
 int FUN_002427f8(unsigned int, unsigned int);
 int FUN_002430c8(unsigned int, unsigned int, unsigned char [252]);
-int FUN_0025c9dc(unsigned int, unsigned char [4], int);
+int effBlockSetBlobB(unsigned int, unsigned char [4], int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern unsigned int DAT_0044eaa4; /* 0x44eaa4 */
 /* Supplied declaration required: taskRunWithObject. */
 /* Supplied declaration required: FUN_002427f8. */
 /* Supplied declaration required: FUN_002430c8. */
-/* Supplied declaration required: FUN_0025c9dc. */
+/* Supplied declaration required: effBlockSetBlobB. */
 
 
 unsigned char * FUN_00242234(unsigned int param_1,unsigned int param_2)
@@ -47,7 +47,7 @@ unsigned char * FUN_00242234(unsigned int param_1,unsigned int param_2)
       taskRunWithObject(DAT_0044ea9c,temp_v0);
     }
     else {
-      FUN_0025c9dc(DAT_0044ea9c,temp_v3,4);
+      effBlockSetBlobB(DAT_0044ea9c,temp_v3,4);
     }
     puVar1 = &DAT_00400002;
   }

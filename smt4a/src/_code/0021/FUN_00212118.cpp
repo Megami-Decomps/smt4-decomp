@@ -1,36 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003de188(int, int);
-int FUN_00487110(int);
-int FUN_0048a378(int);
-int FUN_004cf978(int, int);
+void FUN_003de188(s32 a, s32 b);
+void stateSetterSetState1(u8 *member);
+void FUN_0048a378(u8 *member);
+void FUN_004cf978(u8 *member, s32 value);
 
-extern int DAT_00587f28; /* 0x587f28 */
+typedef struct Scene {
+    /* 0x00000 */ u8 unk00000[0x0A];
+    /* 0x0000A */ u8 closing;
+    /* 0x0000B */ u8 unk0000B[0x5D];
+    /* 0x00068 */ u8 member68[0x20654];
+    /* 0x206BC */ u8 member206BC[1];
+} Scene;
+extern Scene *DAT_00587f28;
 
-/* Supplied declaration required: FUN_003de188. */
-/* Supplied declaration required: FUN_00487110. */
-/* Supplied declaration required: FUN_0048a378. */
-/* Supplied declaration required: FUN_004cf978. */
-
-
+/* Begins closing the scene: runs FUN_003de188(1, 0), shuts down the scene's members (if it exists) and sets `closing`. */
 void FUN_00212118(void)
-
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_003de188(1,0);
-  temp_v0 = DAT_00587f28;
-  if (DAT_00587f28 != 0) {
-    FUN_004cf978(DAT_00587f28 + 0x206bc,8);
-    FUN_00487110(temp_v0 + 0x68);
-    FUN_0048a378(temp_v0 + 0x68);
-  }
-  temp_v0 = DAT_00587f28;
-  *(unsigned char *)(temp_v0 + 10) = 1;
-  return;
+    Scene *scene;
+
+    FUN_003de188(1, 0);
+    scene = DAT_00587f28;
+    if (DAT_00587f28 != NULL) {
+        FUN_004cf978(DAT_00587f28->member206BC, 8);
+        stateSetterSetState1(scene->member68);
+        FUN_0048a378(scene->member68);
+    }
+    scene = DAT_00587f28;
+    scene->closing = 1;
 }
 
 } /* extern "C" */

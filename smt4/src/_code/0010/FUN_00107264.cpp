@@ -18,7 +18,7 @@ extern int FUN_0010f498(void);
 extern int FUN_0010f4d4(char);
 extern unsigned short *FUN_00111a5c(char, char, short);
 extern int FUN_002c09d0(unsigned int);
-extern unsigned int FUN_002c09f4(unsigned int);
+extern unsigned int randNextInRange(unsigned int);
 extern unsigned short *FUN_002c0a2c(char, char, short);
 extern int FUN_002c0a84(void);
 /* Supplied declaration required: FUN_002c0c5c. */
@@ -87,7 +87,7 @@ void FUN_00107264(int param_1)
           temp_v13 = 0;
         }
         else if (temp_v8 < 1000) {
-          temp_v8 = FUN_002c09f4(99);
+          temp_v8 = randNextInRange(99);
           if ((temp_v8 < puVar8[temp_v7 * 3 + 3]) && (temp_v3 = puVar8[temp_v7 * 3 + 2], temp_v3 != 0)) {
             temp_v13 = temp_v3;
           }
@@ -109,7 +109,7 @@ void FUN_00107264(int param_1)
                 temp_v6 = temp_v6 - 1;
               } while (temp_v6 != 0);
             }
-            temp_v8 = FUN_002c09f4(99);
+            temp_v8 = randNextInRange(99);
             if (temp_v8 < temp_v12) {
               temp_v13 = puVar8[temp_v7 * 3 + 2];
               *(unsigned char *)(puVar7 + 1) = (unsigned char)temp_v0 | (unsigned char)puVar7[1];

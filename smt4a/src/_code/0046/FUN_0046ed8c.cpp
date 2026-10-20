@@ -54,7 +54,7 @@ extern unsigned int FUN_001861c4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a1c28. */
 /* Supplied declaration required: FUN_001ab8e0. */
 extern int FUN_001b2ca4(unsigned int, unsigned int, unsigned int);
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int *param_4)
@@ -107,7 +107,7 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
         temp_v10 = 0.0f;
         temp_v7 = 1.0f;
         temp_v4 = 0;
-        if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c30), temp_v0 != 0)) {
+        if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c30), temp_v0 != 0)) {
           DAT_0064c084 = temp_v7;
           DAT_0064c088 = temp_v10;
           DAT_0064c08c = temp_v10;
@@ -126,7 +126,7 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
           DAT_0064c0c0 = temp_v7;
         }
         mtx44Copy(temp_v11,&DAT_0064c084);
-        if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c30), temp_v0 != 0)) {
+        if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c30), temp_v0 != 0)) {
           DAT_0064c084 = temp_v7;
           DAT_0064c088 = temp_v10;
           DAT_0064c08c = temp_v10;

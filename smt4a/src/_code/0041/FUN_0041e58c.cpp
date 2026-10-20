@@ -5,11 +5,11 @@
 extern "C" {
 
 int dataTableGet(int);
-int FUN_0041c44c(void);
+int pair10Clear(void);
 
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0041c44c. */
+/* Supplied declaration required: pair10Clear. */
 
 
 void FUN_0041e58c(int param_1)
@@ -24,7 +24,7 @@ void FUN_0041e58c(int param_1)
   int temp_v4;
   unsigned int temp_v5;
   
-  FUN_0041c44c();
+  pair10Clear();
   temp_v5 = 0;
   if (*(char *)(param_1 + 5) == '\0') {
     *(unsigned int *)(param_1 + 0x630) = 1;

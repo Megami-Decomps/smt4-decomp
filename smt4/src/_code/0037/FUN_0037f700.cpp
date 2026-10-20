@@ -1,48 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a215c(unsigned int, int);
-int FUN_002c4038(int);
-int FUN_0037b140(unsigned int);
-int FUN_0037bd18(unsigned int);
-int nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(int);
+int FUN_002a215c(u32 a, int b);
+int FUN_002c4038(int obj);
+int FUN_0037b140(int slot);
+int FUN_0037bd18(int slot);
+int nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(int player);
+extern u32 FUN_002a2174(void);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_002a215c. */
-extern unsigned int FUN_002a2174(void);
-/* Supplied declaration required: FUN_002c4038. */
-/* Supplied declaration required: FUN_0037b140. */
-/* Supplied declaration required: FUN_0037bd18. */
-/* Supplied declaration required: nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer. */
-
-
-void FUN_0037f700(int param_1)
-
+void FUN_0037f700(int player)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  *(unsigned char *)(param_1 + 0xf) = 1;
-  nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(param_1);
-  if (*(char *)(param_1 + 0xc) != '\0') {
-    temp_v0 = FUN_002a2174();
-    FUN_002a215c(temp_v0,param_1 + 0x44);
-    *(unsigned char *)(param_1 + 0xc) = 0;
-  }
-  temp_v1 = 0;
-  do {
-    FUN_0037b140(param_1 + temp_v1 * 0xc + 0x130);
-    FUN_0037bd18(param_1 + temp_v1 * 0x10 + 0xf0);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  FUN_002c4038(param_1);
-  return;
+    u32 a;
+    u32 i;
+
+    *(u8 *)(player + 0xf) = 1;
+    nw_snd_internal_driver_SequenceSoundPlayer_FinishPlayer(player);
+    if (*(char *)(player + 0xc) != 0) {
+        a = FUN_002a2174();
+        FUN_002a215c(a, player + 0x44);
+        *(u8 *)(player + 0xc) = 0;
+    }
+    i = 0;
+    do {
+        FUN_0037b140(player + i * 0xc + 0x130);
+        FUN_0037bd18(player + i * 0x10 + 0xf0);
+        i = i + 1;
+    } while (i < 4);
+    FUN_002c4038(player);
 }
 
 } /* extern "C" */

@@ -11,7 +11,7 @@ int FUN_0019ea5c(unsigned int);
 int FUN_002e3328(int);
 int FUN_003d2d6c(int);
 int FUN_003d54f8(...);
-int FUN_0040a548(void);
+int setFlag10(void);
 int FUN_00499338(void);
 int FUN_00499c84(void);
 int FUN_0049c3c0(void);
@@ -38,8 +38,8 @@ extern int lmapMainGetUnk74(void);
 extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: FUN_003d2d6c. */
 /* Supplied declaration required: FUN_003d54f8. */
-extern int FUN_0040a4b4(void);
-/* Supplied declaration required: FUN_0040a548. */
+extern int isFlag10Set(void);
+/* Supplied declaration required: setFlag10. */
 /* Supplied declaration required: FUN_00499338. */
 /* Supplied declaration required: FUN_00499c84. */
 /* Supplied declaration required: FUN_0049c3c0. */
@@ -172,8 +172,8 @@ unsigned int FUN_0027dda4(void)
   }
   else {
     temp_v3 = FUN_0049ca48();
-    if ((temp_v3 != 0) && (temp_v3 = FUN_0040a4b4(), temp_v3 == 0)) {
-      FUN_0040a548();
+    if ((temp_v3 != 0) && (temp_v3 = isFlag10Set(), temp_v3 == 0)) {
+      setFlag10();
     }
     FUN_0049cf9c(temp_v8);
     temp_v3 = 0x1605c;

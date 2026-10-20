@@ -1,16 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct MasterManager {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 auxCallback[2];
+    /* 0x1C */ u32 auxCallbackData[2];
+} MasterManager;
 
-void nn_snd_CTR_MasterManager_GetAuxCallback
-               (int param_1,int param_2,unsigned int *param_3,unsigned int *param_4)
-
+/* Reads the aux bus callback and its user data for bus `bus`. */
+void nn_snd_CTR_MasterManager_GetAuxCallback(MasterManager *manager, s32 bus, u32 *callback, u32 *userData)
 {
-  param_1 = param_1 + param_2 * 4;
-  *param_3 = *(unsigned int *)(param_1 + 0x14);
-  *param_4 = *(unsigned int *)(param_1 + 0x1c);
-  return;
+    *callback = manager->auxCallback[bus];
+    *userData = manager->auxCallbackData[bus];
 }
 
 } /* extern "C" */

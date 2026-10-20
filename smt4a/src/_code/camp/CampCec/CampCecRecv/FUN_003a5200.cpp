@@ -20,20 +20,20 @@ int FUN_002bf520(void);
 int FUN_002e342c(...);
 int FUN_002e59f8(void);
 int FUN_003180c4(...);
-int FUN_00319e38(void);
+int cecProcessCall1(void);
 int FUN_0031cf00(...);
 int FUN_0032e25c(...);
-int FUN_0032e30c(void);
+int playerSummaryFill(void);
 int FUN_00330b7c(void);
 int FUN_00333474(...);
 int FUN_00359974(...);
-int FUN_0035a9e4(void);
+int dataTable4ACount(void);
 int FUN_0036d41c(void);
 int FUN_0037a6bc(...);
 int FUN_0037be64(void);
-int FUN_0037d478(void);
-int FUN_003af934(void);
-int FUN_003b6110(void);
+int gameDataBlocksGetWord27E90(void);
+int dataTable4AType2Count(void);
+int dataTable4AType1Count(void);
 int SBORROW4(...);
 int __aeabi_idivmod(...);
 
@@ -49,9 +49,9 @@ int FUN_002c76d8(...);
 int dataStoreGetValue50(void);
 int FUN_0031d5e8(int);
 int dataStoreGetProgress(void);
-int FUN_0035b068(void);
+int cecProcessCall3(void);
 int dataStoreShutdown(void);
-int FUN_00388024(...);
+int maskToCode(...);
 int FUN_003881e0(int);
 int rt_memcpy_w(int, unsigned int, int);
 
@@ -99,15 +99,15 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002e59f8. */
 extern int FUN_003166c0(void);
 /* Supplied declaration required: FUN_003180c4. */
-extern short *FUN_00319acc(int);
-/* Supplied declaration required: FUN_00319e38. */
+extern short *dataTable4AGetEntry(int);
+/* Supplied declaration required: cecProcessCall1. */
 /* Supplied declaration required: dataStoreGetValue50. */
 extern int FUN_0031cee0(void);
 /* Supplied declaration required: FUN_0031cf00. */
 /* Supplied declaration required: FUN_0031d5e8. */
 /* Supplied declaration required: FUN_0032e25c. */
-/* Supplied declaration required: FUN_0032e30c. */
-extern int FUN_00330014(int);
+/* Supplied declaration required: playerSummaryFill. */
+extern int cecProcessGetEntry(int);
 extern int FUN_0033004c(void);
 /* Supplied declaration required: dataStoreGetProgress. */
 /* Supplied declaration required: FUN_00330b7c. */
@@ -116,24 +116,24 @@ extern int FUN_003316b4(int);
 extern int FUN_00345388(unsigned int);
 extern int dataStoreIsReady(void);
 /* Supplied declaration required: FUN_00359974. */
-extern int FUN_0035a978(int);
-/* Supplied declaration required: FUN_0035a9e4. */
-/* Supplied declaration required: FUN_0035b068. */
+extern int playerSummaryIsIncomplete(int);
+/* Supplied declaration required: dataTable4ACount. */
+/* Supplied declaration required: cecProcessCall3. */
 /* Supplied declaration required: dataStoreShutdown. */
 /* Supplied declaration required: FUN_0036d41c. */
 /* Supplied declaration required: FUN_0037a6bc. */
 /* Supplied declaration required: FUN_0037be64. */
-/* Supplied declaration required: FUN_0037d478. */
-/* Supplied declaration required: FUN_00388024. */
-extern short *FUN_003881b0(int);
+/* Supplied declaration required: gameDataBlocksGetWord27E90. */
+/* Supplied declaration required: maskToCode. */
+extern short *dataTable4AGetEntry8(int);
 /* Supplied declaration required: FUN_003881e0. */
 /* Supplied declaration required: FUN_00388758. */
-extern short *FUN_0039a530(short *);
+extern short *dataTable4AType1GetEntry8(short *);
 /* Supplied declaration required: FUN_0039a638. */
 extern int dataStoreIsFinished(void);
 extern int dataStoreIsIdle(void);
-/* Supplied declaration required: FUN_003af934. */
-/* Supplied declaration required: FUN_003b6110. */
+/* Supplied declaration required: dataTable4AType2Count. */
+/* Supplied declaration required: dataTable4AType1Count. */
 extern int FUN_004d0bf0(unsigned short);
 /* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -260,7 +260,7 @@ joined_r0x003a52e4:
       if (temp_v8 == 0) {
         FUN_003881e0(1);
       }
-      temp_v9 = FUN_00388024(*(unsigned int *)(param_1 + 0x3dc));
+      temp_v9 = maskToCode(*(unsigned int *)(param_1 + 0x3dc));
       *(unsigned int *)(param_1 + 0x3b0) = temp_v9;
       FUN_0019ea64(0);
       return temp_v18;
@@ -269,7 +269,7 @@ joined_r0x003a52e4:
   case 8:
     if (*(char *)(param_1 + 0x7d5) != '\x01') {
       if ((*(char *)(param_1 + 0x3e4) != '\0') && (temp_v8 = FUN_00345388(0x20), temp_v8 != 0)) {
-        FUN_0035b068();
+        cecProcessCall3();
         temp_v9 = 9;
         *(unsigned int *)(param_1 + 0xa0) = temp_v9;
         break;
@@ -285,7 +285,7 @@ joined_r0x003a52e4:
         FUN_001386e8(2);
         FUN_00137ea0(2);
         *(unsigned int *)(param_1 + 0x3dc) = *(unsigned int *)(param_1 + 0x3dc) | 0x20;
-        temp_v9 = FUN_00388024();
+        temp_v9 = maskToCode();
         *(unsigned int *)(param_1 + 0x3b0) = temp_v9;
         return temp_v18;
       }
@@ -298,7 +298,7 @@ joined_r0x003a52e4:
     temp_v8 = dataStoreGetValue50();
     *(int *)(param_1 + 0x9c) = temp_v8;
     if (temp_v8 < 1) {
-      temp_v9 = FUN_00388024(*(unsigned int *)(param_1 + 0x3dc));
+      temp_v9 = maskToCode(*(unsigned int *)(param_1 + 0x3dc));
       *(unsigned int *)(param_1 + 0x3b0) = temp_v9;
       return temp_v18;
     }
@@ -328,7 +328,7 @@ joined_r0x003a52e4:
     temp_v8 = FUN_0033004c();
     if (temp_v8 != 0) {
       FUN_0036d41c();
-      FUN_00319e38();
+      cecProcessCall1();
       FUN_001386e8(2);
       FUN_00137ea0(2);
       temp_v9 = 0xb;
@@ -337,7 +337,7 @@ joined_r0x003a52e4:
     }
     return temp_v18;
   case 0xb:
-    temp_v9 = FUN_0037d478();
+    temp_v9 = gameDataBlocksGetWord27E90();
     *(unsigned int *)(param_1 + 0x3d8) = temp_v9;
     temp_v11 = 0;
     temp_v8 = 0;
@@ -349,19 +349,19 @@ joined_r0x003a52e4:
           temp_v3 = param_1 + temp_v8 * 100 + 0x3ec;
         }
         else {
-          temp_v3 = FUN_00330014(temp_v8);
+          temp_v3 = cecProcessGetEntry(temp_v8);
         }
         if (*(short *)(temp_v3 + 0x60) == 0) {
           FUN_0032e25c(temp_v3,0);
         }
-        temp_v12 = FUN_0035a978(temp_v3);
+        temp_v12 = playerSummaryIsIncomplete(temp_v3);
         if (temp_v12 == 0) {
           temp_v11 = temp_v11 + 1;
           *(unsigned short *)(temp_v3 + 0x34) = *(unsigned short *)(temp_v3 + 0x60);
           FUN_00333474(temp_v3);
           FUN_002a17d4(temp_v3);
           FUN_0037a6bc(1);
-          temp_v3 = FUN_0037d478();
+          temp_v3 = gameDataBlocksGetWord27E90();
           if ((temp_v3 % 100 == 0) && (0 < temp_v3)) {
             FUN_0037be64();
             FUN_00330b7c();
@@ -408,7 +408,7 @@ joined_r0x003a52e4:
       return 3;
     }
     FUN_002bf520();
-    FUN_0032e30c();
+    playerSummaryFill();
     temp_v8 = FUN_0018719c(0x551);
     if (temp_v8 == 0) {
       temp_v11 = 0x20;
@@ -421,7 +421,7 @@ joined_r0x003a52e4:
           temp_v3 = param_1 + temp_v8 * 100 + 0x3ec;
         }
         else {
-          temp_v3 = FUN_00330014(temp_v8);
+          temp_v3 = cecProcessGetEntry(temp_v8);
         }
         if ((temp_v3 != 0) && ((*(unsigned char *)(temp_v3 + 0x20) & 4) != 0)) {
           FUN_002e342c(temp_v15,temp_v3 + 0xe);
@@ -437,32 +437,32 @@ joined_r0x003a52e4:
     if (temp_v8 != 0) {
       temp_v8 = FUN_0031cee0();
       if (temp_v8 == 0) {
-        temp_v8 = FUN_0037d478();
+        temp_v8 = gameDataBlocksGetWord27E90();
         psVar5 = (short *)0x0;
         *(unsigned int *)(param_1 + 0x3cc) = 0;
         temp_v8 = temp_v8 - *(int *)(param_1 + 0x3d8);
         *(unsigned int *)(param_1 + 0x3d0) = 0;
         if (0 < temp_v8) {
-          FUN_003b6110();
+          dataTable4AType1Count();
           psVar7 = psVar5;
 joined_r0x003a5980:
           psVar7 = (short *)((int)psVar7 - 1);
           if ((int)psVar7 >= 0) {
-            psVar5 = (short *)FUN_0039a530(psVar7);
+            psVar5 = (short *)dataTable4AType1GetEntry8(psVar7);
             if ((psVar5 == (short *)0x0) || (temp_v8 < *psVar5)) goto joined_r0x003a5980;
             *(int *)(param_1 + 0x3d0) = (int)psVar5[1];
             psVar5 = (short *)(int)psVar5[2];
             *(short **)(param_1 + 0x3cc) = psVar5;
           }
-          FUN_003af934();
+          dataTable4AType2Count();
           temp_v13 = *(int *)(param_1 + 0x3d8) + 1;
-          temp_v4 = FUN_0037d478();
+          temp_v4 = gameDataBlocksGetWord27E90();
           if (temp_v13 <= temp_v4) {
             do {
               temp_v8 = 0;
               if (temp_v8 < (int)psVar5) {
                 do {
-                  psVar7 = (short *)FUN_003881b0(temp_v8);
+                  psVar7 = (short *)dataTable4AGetEntry8(temp_v8);
                   if ((psVar7 != (short *)0x0) &&
                      (__aeabi_idivmod(temp_v13,(int)*psVar7), temp_v10 == 0)) {
                     temp_v11 = FUN_00184964((int)psVar7[2],(int)psVar7[3]);
@@ -479,7 +479,7 @@ joined_r0x003a5980:
                 } while (temp_v8 < (int)psVar5);
               }
               temp_v13 = temp_v13 + 1;
-              temp_v4 = FUN_0037d478();
+              temp_v4 = gameDataBlocksGetWord27E90();
             } while (temp_v13 <= temp_v4);
           }
           temp_v8 = *(int *)(param_1 + 0x3cc);
@@ -505,7 +505,7 @@ joined_r0x003a5980:
           temp_v4 = 0;
           puVar15 = (unsigned short *)(*(int *)(g_campCecRecv + 0x34c) + temp_v4 * 0xc);
           while( 1 ) {
-            temp_v13 = FUN_0037d478();
+            temp_v13 = gameDataBlocksGetWord27E90();
             if ((((unsigned int)(int)(short)puVar15[1] <= temp_v13) &&
                 ((int)(short)*puVar15 != (unsigned int)*(unsigned short *)(param_1 + 0x14e))) &&
                (temp_v11 = FUN_004d0bf0(*puVar15), temp_v11 == 0)) {
@@ -545,13 +545,13 @@ joined_r0x003a5980:
       }
       temp_v8 = FUN_0031cee0();
       if (temp_v8 == 0) {
-        temp_v8 = FUN_0037d478();
+        temp_v8 = gameDataBlocksGetWord27E90();
         temp_v11 = temp_v8 - *(int *)(param_1 + 0x3d8);
-        FUN_0035a9e4();
+        dataTable4ACount();
         do {
           temp_v8 = temp_v8 - 1;
           if (temp_v8 < 0) goto LAB_003a5cfc;
-          psVar5 = (short *)FUN_00319acc(temp_v8);
+          psVar5 = (short *)dataTable4AGetEntry(temp_v8);
         } while ((psVar5 == (short *)0x0) || (temp_v11 < *psVar5));
         temp_v2 = psVar5[1];
         temp_v8 = 0;
@@ -597,7 +597,7 @@ LAB_003a5cfc:
       *(unsigned int *)(param_1 + 0x3a0) = 0;
       *(unsigned int *)(param_1 + 0x3a4) = 0;
       *(unsigned int *)(param_1 + 0x3c0) = 0;
-      temp_v8 = FUN_0037d478();
+      temp_v8 = gameDataBlocksGetWord27E90();
       temp_v15[2] = temp_v8 - *(unsigned int *)(param_1 + 0x3d8);
       if (0 < (int)temp_v15[2]) {
         temp_v16 = (unsigned int)(0 < *(int *)(param_1 + 0x3cc));
@@ -690,7 +690,7 @@ LAB_003a5cfc:
       *(unsigned int *)(param_1 + 0xa0) = temp_v9;
       break;
     }
-    temp_v9 = FUN_00388024();
+    temp_v9 = maskToCode();
     *(unsigned int *)(param_1 + 0x3b0) = temp_v9;
     return 3;
   case 0xe:
@@ -702,7 +702,7 @@ LAB_003a5cfc:
       FUN_00275bc8();
       *(int *)(param_1 + 0x364) = temp_v8;
       *(unsigned int *)(temp_v8 + 0x108) = 2;
-      temp_v9 = FUN_00388024(*(unsigned int *)(param_1 + 0x3dc));
+      temp_v9 = maskToCode(*(unsigned int *)(param_1 + 0x3dc));
       *(unsigned int *)(param_1 + 0x3b0) = temp_v9;
       break;
     }

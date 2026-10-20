@@ -1,24 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7232(int);
-int FUN_002f2faa(int);
+void FUN_002f2faa(u8 *member);
+void FUN_002e7232(void *buffer);
 
-/* Supplied declaration required: FUN_002e7232. */
-/* Supplied declaration required: FUN_002f2faa. */
+typedef struct BufferOwner {
+    /* 0x00 */ u8 unk00[0x78];
+    /* 0x78 */ u8 member78[1];
+} BufferOwner;
 
-
-unsigned int FUN_00109f28(int param_1,int param_2)
-
+/* Destroys the member at 0x78 and frees `buffer`; returns 1, or 0 when there is no buffer. */
+u32 FUN_00109f28(BufferOwner *owner, void *buffer)
 {
-/* irregular: 2 native warning(s); review required */
-  if (param_2 != 0) {
-    FUN_002f2faa(param_1 + 0x78);
-    FUN_002e7232(param_2);
-    return 1;
-  }
-  return 0;
+    if (buffer != NULL) {
+        FUN_002f2faa(owner->member78);
+        FUN_002e7232(buffer);
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

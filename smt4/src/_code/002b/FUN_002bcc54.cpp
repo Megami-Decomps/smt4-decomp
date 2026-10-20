@@ -1,20 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00128f00(unsigned char *);
+int FUN_00128f00(u8 *manager);
 
-extern unsigned char DAT_004e6f14; /* 0x4e6f14 */
-
-/* Supplied declaration required: FUN_00128f00. */
-
+extern u8 DAT_004e6f14;
 
 void FUN_002bcc54(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00128f00(&DAT_004e6f14);
-  return;
+    FUN_00128f00(&DAT_004e6f14);
 }
 
 } /* extern "C" */

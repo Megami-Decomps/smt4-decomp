@@ -66,7 +66,7 @@ extern unsigned int FUN_0015687c(void);
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -79,11 +79,11 @@ extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4894. */
 extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_0032fea0. */
-extern int FUN_003dfd5c(void);
+extern int countUnlockedSlots(void);
 extern int FUN_003dfed4(unsigned short, int);
 /* Supplied declaration required: FUN_004b4e00. */
 /* Supplied declaration required: FUN_004bcbb4. */
-extern int FUN_004bd21c(int);
+extern int getUnlockedSlotCount(int);
 
 
 void FUN_004b1a00(int param_1,int param_2,int param_3)
@@ -217,7 +217,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
   temp_v10 = 2;
 LAB_004b1d78:
   FUN_00162790(temp_v10,temp_v2,&LAB_004b1de8,temp_v8);
-  temp_v18 = FUN_003dfd5c();
+  temp_v18 = countUnlockedSlots();
   temp_v1 = 0;
   temp_v31 = temp_v21 | temp_v23;
   temp_v27 = (unsigned int *)(param_1 + 0x7854);
@@ -306,7 +306,7 @@ LAB_004b1d78:
         }
         if ((temp_v31 != 0) && (*(short *)(param_1 + temp_v1 * 0x8c + 0x93c) != 0)) {
           temp_v3 = g_renderCtx;
-          temp_v6 = FUN_00169294(6,1,0);
+          temp_v6 = packNibblesAndByte(6,1,0);
           piVar7 = (int *)(temp_v3 + 0x12b8);
           temp_v7 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v6;
@@ -319,7 +319,7 @@ LAB_004b1d78:
                        ,0x97);
           efctSetSpeed();
           temp_v3 = g_renderCtx;
-          temp_v8 = FUN_00169294(6,7,0);
+          temp_v8 = packNibblesAndByte(6,7,0);
           piVar7 = (int *)(temp_v3 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v8;
@@ -392,7 +392,7 @@ LAB_004b1d78:
       FUN_00162790(2,temp_v10,temp_v12,(int)*(short *)(temp_v3 + 8));
     }
   }
-  temp_v18 = FUN_004bd21c(temp_v13);
+  temp_v18 = getUnlockedSlotCount(temp_v13);
   temp_v1 = 0;
   do {
     if (((temp_v19 == 0) || (temp_v3 = FUN_002a4894(temp_v26), temp_v3 != temp_v1)) || (temp_v15 != 0)) {
@@ -461,7 +461,7 @@ LAB_004b1d78:
         }
         if ((temp_v23 != 0) && (*(short *)(param_1 + temp_v1 * 0x8c + 0xd9c) != 0)) {
           temp_v8 = g_renderCtx;
-          temp_v5 = FUN_00169294(6,1,0);
+          temp_v5 = packNibblesAndByte(6,1,0);
           piVar7 = (int *)(temp_v8 + 0x12b8);
           temp_v4 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v5;
@@ -474,7 +474,7 @@ LAB_004b1d78:
                        *(short *)(temp_v3 + 10) + param_3,0xab);
           efctSetSpeed();
           temp_v3 = g_renderCtx;
-          temp_v8 = FUN_00169294(6,7,0);
+          temp_v8 = packNibblesAndByte(6,7,0);
           piVar7 = (int *)(temp_v3 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v8;

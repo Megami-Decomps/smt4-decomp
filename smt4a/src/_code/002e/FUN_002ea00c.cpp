@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e6e14(...);
 int FUN_002e6e34(int *, int);
 int FUN_002e6e5c(int *);
-int FUN_002e9b0c(unsigned int *);
+int _ZN9Obj55859c12freeResourceEv(unsigned int *);
 int FUN_002e9e1e(int *);
 int FUN_002e9f00(unsigned int *, int);
 int FUN_002ea0b8(unsigned int *);
@@ -19,7 +19,7 @@ extern unsigned char DAT_005585a4; /* 0x5585a4 */
 extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
-/* Supplied declaration required: FUN_002e9b0c. */
+/* Supplied declaration required: _ZN9Obj55859c12freeResourceEv. */
 /* Supplied declaration required: FUN_002e9e1e. */
 /* Supplied declaration required: FUN_002e9f00. */
 /* Supplied declaration required: FUN_002ea0b8. */
@@ -49,7 +49,7 @@ void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_
       FUN_002e9f00(param_1,4);
     }
     if (param_1[0x11] != 0) {
-      FUN_002e9b0c(param_1);
+      _ZN9Obj55859c12freeResourceEv(param_1);
     }
     FUN_002e6e5c(&uStack_20);
   }

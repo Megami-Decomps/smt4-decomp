@@ -8,7 +8,7 @@ int asdMemoryGetDefaultAllocator(void);
 int FUN_0018d9f0(int *, unsigned int, int);
 int FUN_001aa528(...);
 int FUN_001b0758(int, int);
-int FUN_001b0e10(...);
+int nw_gfx_SceneBuilder_CreateObject(...);
 int nw_gfx_SceneNode_IsCircularReference(...);
 int rt_memcpy(short *, int, int);
 
@@ -59,7 +59,7 @@ extern unsigned char DAT_00636d20; /* 0x636d20 */
 /* Supplied declaration required: FUN_001aa528. */
 extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b0758. */
-/* Supplied declaration required: FUN_001b0e10. */
+/* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 extern short wstrlen(int);
 extern int asdModelGetSlotArray2(fn_003168b8_arg1 *);
 extern int asdModelGetSlotArray1(fn_003168b8_arg1 *);
@@ -164,7 +164,7 @@ void FUN_003168b8(int *param_1,fn_003168b8_arg1 *param_2)
       temp_v25 = romwright_piece_3_1((((unsigned int)(temp_v25) >> 8) & 0xffffffU),1);
       piVar20 = &temp_v16;
       temp_v16 = temp_v9;
-      FUN_001b0e10(piVar20,temp_v3,temp_v4);
+      nw_gfx_SceneBuilder_CreateObject(piVar20,temp_v3,temp_v4);
       if (piVar20 != (int *)0x0) {
         piVar9 = (int *)(**(romwright_code **)(*piVar20 + 8))(piVar20);
         do {
@@ -394,7 +394,7 @@ LAB_00316d2c:
       temp_v24 = 0;
       temp_v25 = romwright_piece_3_1((((unsigned int)(temp_v25) >> 8) & 0xffffffU),1);
       temp_v16 = temp_v9;
-      FUN_001b0e10(piVar21,temp_v3,temp_v4);
+      nw_gfx_SceneBuilder_CreateObject(piVar21,temp_v3,temp_v4);
       if (piVar21 != (int *)0x0) {
         piVar20 = (int *)(**(romwright_code **)(*piVar21 + 8))(piVar21);
         do {
@@ -566,7 +566,7 @@ LAB_00317150:;
       piVar20 = &temp_v18;
       temp_v26 = (short *)romwright_piece_3_1((((unsigned int)(temp_v26) >> 8) & 0xffffffU),1);
       temp_v18 = temp_v6;
-      FUN_001b0e10(piVar20,temp_v4,temp_v3);
+      nw_gfx_SceneBuilder_CreateObject(piVar20,temp_v4,temp_v3);
       if (piVar20 != (int *)0x0) {
         piVar9 = (int *)(**(romwright_code **)(*piVar20 + 8))(piVar20);
         do {

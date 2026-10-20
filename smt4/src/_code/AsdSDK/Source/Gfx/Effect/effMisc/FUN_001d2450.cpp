@@ -9,7 +9,7 @@ int FUN_002691d8(unsigned int, unsigned int, int);
 int FUN_00269334(void);
 int memAlloc(int, int, int, int, int, int);
 int FUN_002c3944(void);
-int FUN_002e7ca4(unsigned int *, int);
+int effParticleParamCopy(unsigned int *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00269334. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c3944. */
-/* Supplied declaration required: FUN_002e7ca4. */
+/* Supplied declaration required: effParticleParamCopy. */
 
 
 unsigned int * FUN_001d2450(int param_1)
@@ -61,7 +61,7 @@ unsigned int * FUN_001d2450(int param_1)
       FUN_00268fc4();
       puVar1[0x14] = temp_v2;
     }
-    FUN_002e7ca4(puVar1,param_1);
+    effParticleParamCopy(puVar1,param_1);
   }
   return puVar1;
 }

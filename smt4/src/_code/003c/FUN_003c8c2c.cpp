@@ -5,14 +5,14 @@
 extern "C" {
 
 int FUN_00229e94(unsigned int *, int);
-int FUN_00229f00(void);
+int dataTable05Sub4GetCount(void);
 int FUN_0029f7d4(void);
 int FUN_002b9024(void);
 int FUN_0030abc8(unsigned int, int);
 int FUN_0031ed94(unsigned int, int);
 
 /* Supplied declaration required: FUN_00229e94. */
-/* Supplied declaration required: FUN_00229f00. */
+/* Supplied declaration required: dataTable05Sub4GetCount. */
 /* Supplied declaration required: FUN_0029f7d4. */
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_0030abc8. */
@@ -43,7 +43,7 @@ unsigned char FUN_003c8c2c(unsigned int param_1,unsigned short *param_2,unsigned
     return 0;
   }
   psVar9 = (short *)0x0;
-  FUN_00229f00();
+  dataTable05Sub4GetCount();
   if (temp_v1 != 0) {
     do {
       psVar4 = psVar9;
@@ -75,7 +75,7 @@ unsigned char FUN_003c8c2c(unsigned int param_1,unsigned short *param_2,unsigned
       }
       psVar4 = (short *)((int)psVar9 + 1);
       psVar9 = (short *)((unsigned int)psVar4 & 0xffff);
-      FUN_00229f00();
+      dataTable05Sub4GetCount();
     } while (psVar9 < psVar4);
   }
   temp_v1 = (unsigned int)(unsigned char)param_2[1];

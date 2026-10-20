@@ -20,9 +20,9 @@ typedef struct {
 } param_7_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_002355c0(int, unsigned char, unsigned int);
+extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
 extern int FUN_002c09d0(void);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int QcActive_GetField20(void);
@@ -74,7 +74,7 @@ QcUtility_BuildTabList
   asdMemoryAlloc(0x100,0x100,0,temp_v3 << 3,1);
   temp_v11 = 0;
   temp_v7 = 0;
-  temp_v4 = FUN_002355c0(param_3,*param_1,0);
+  temp_v4 = dataTable26GroupGetRecord(param_3,*param_1,0);
   temp_v8 = 0;
   if (temp_v8 < temp_v3) {
     do {
@@ -159,9 +159,9 @@ LAB_003817d8:
         }
       }
       else if ((((!temp_v2) && (param_6 <= temp_v4)) && (temp_v4 <= param_7)) &&
-              ((temp_v4 == param_7 || ((temp_v3 != 0 && (temp_v8 = FUN_002c09f4(99), temp_v8 < temp_v3))))))
+              ((temp_v4 == param_7 || ((temp_v3 != 0 && (temp_v8 = randNextInRange(99), temp_v8 < temp_v3))))))
       goto LAB_003817d8;
-      temp_v8 = FUN_002c09f4(temp_v11 & 0xffff);
+      temp_v8 = randNextInRange(temp_v11 & 0xffff);
       temp_v9 = 0;
       if (temp_v9 < temp_v7) {
         do {

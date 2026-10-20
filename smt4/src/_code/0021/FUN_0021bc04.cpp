@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024f5d4(void);
+int dataTable2eSub2GetCount(void);
 int FUN_0028975c(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern int FUN_0024f594(int);
-/* Supplied declaration required: FUN_0024f5d4. */
+extern int dataTable2eSub2GetRecord(int);
+/* Supplied declaration required: dataTable2eSub2GetCount. */
 /* Supplied declaration required: FUN_0028975c. */
 extern int FUN_002ba764(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_002c09d0(void);
@@ -34,10 +34,10 @@ void FUN_0021bc04(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   temp_v4 = 0;
   temp_v0 = param_1;
-  FUN_0024f5d4();
+  dataTable2eSub2GetCount();
   if (0 < temp_v0) {
     while( 1 ) {
-      temp_v0 = FUN_0024f594(temp_v4);
+      temp_v0 = dataTable2eSub2GetRecord(temp_v4);
       temp_v1 = (int)*(short *)(temp_v0 + 0x20);
       if (temp_v1 == -1) break;
       if (temp_v1 == param_1) {
@@ -47,7 +47,7 @@ void FUN_0021bc04(int param_1,unsigned int param_2,unsigned int param_3,unsigned
         break;
       }
       temp_v4 = temp_v4 + 1;
-      FUN_0024f5d4();
+      dataTable2eSub2GetCount();
       if (temp_v1 <= temp_v4) break;
     }
   }

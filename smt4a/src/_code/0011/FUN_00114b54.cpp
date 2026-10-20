@@ -13,7 +13,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00300304. */
-extern int FUN_00300366(int *, unsigned int *);
+extern int wordRefsDiffer_00300366(int *, unsigned int *);
 
 
 unsigned int FUN_00114b54(int param_1,unsigned int param_2,int param_3,unsigned int param_4)
@@ -30,7 +30,7 @@ unsigned int FUN_00114b54(int param_1,unsigned int param_2,int param_3,unsigned 
   temp_v3 = param_4;
   FUN_00300304(&temp_v2,param_1 + 4);
   temp_v3 = *(unsigned int *)(param_1 + 0x14);
-  temp_v0 = FUN_00300366(&temp_v2,(unsigned int *)&temp_v3);
+  temp_v0 = wordRefsDiffer_00300366(&temp_v2,(unsigned int *)&temp_v3);
   if (temp_v0 != 0) {
     temp_v1 = *(unsigned int *)(temp_v2 + 0x18);
     *(short *)(param_1 + 0x24) = *(short *)(param_1 + 0x24) + 1;

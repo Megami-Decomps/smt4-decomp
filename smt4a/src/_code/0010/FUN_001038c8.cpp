@@ -1,27 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e791c(unsigned int, unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int);
+void FUN_002e791c(u32 a, u32 b, s32 c, u32 d, u32 e, u32 f, u32 g, u32 h, s32 i, s32 j);
 
-/* stack frame of param_7: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_7_stack;
-
-/* Supplied declaration required: FUN_002e791c. */
-
-
-void FUN_001038c8(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,unsigned int param_7)
-
+/* Forwards its seven arguments to FUN_002e791c with zeros in the third, ninth and tenth slots. */
+void FUN_001038c8(u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e791c(param_1,param_2,0,param_3,param_4,param_5,param_6,param_7,0,0);
-  return;
+    FUN_002e791c(a, b, 0, c, d, e, f, g, 0, 0);
 }
 
 } /* extern "C" */

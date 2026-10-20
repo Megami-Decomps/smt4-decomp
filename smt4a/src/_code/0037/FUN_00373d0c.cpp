@@ -1,28 +1,24 @@
-#include "romwright_types.h"
+#include "shard/Shard0037.h"
 
 extern "C" {
 
-extern int btlGetMainState(void);
-extern int scrGetArg(void);
+extern s32 scrGetArg(s32 index);
+extern BtlStateB *btlGetMainState(void);
 
-
-unsigned int FUN_00373d0c(void)
-
+/* Script command: sets the battle's +0x4CE0 to 0 when argument 0 is 0, else -1. */
+u32 FUN_00373d0c(s32 argIndex)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlGetMainState();
-  if (temp_v0 == 0) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v2 = 0xffffffff;
-  }
-  *(unsigned int *)(temp_v1 + 0x4ce0) = temp_v2;
-  return 1;
+    s32 value = scrGetArg(argIndex);
+    BtlStateB *state = btlGetMainState();
+    u32 result;
+
+    if (value == 0) {
+        result = 0;
+    } else {
+        result = -1;
+    }
+    state->unk4CE0 = result;
+    return 1;
 }
 
 } /* extern "C" */

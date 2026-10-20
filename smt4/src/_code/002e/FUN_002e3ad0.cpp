@@ -1,28 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0029c43c(unsigned int, int);
-
-extern unsigned int DAT_00434228; /* 0x434228 */
-
+int FUN_0029c43c(u32 value, int flag);
+extern u32 DAT_00434228;
 extern int FUN_002485b8(void);
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: FUN_0029c43c. */
+extern u32 scrGetArg(void);
 
-
-unsigned int FUN_002e3ad0(void)
-
+u32 FUN_002e3ad0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  DAT_00434228 = scrGetArg();
-  temp_v0 = FUN_002485b8();
-  if (temp_v0 != 0) {
-    FUN_0029c43c(DAT_00434228,0);
-  }
-  return 1;
+    DAT_00434228 = scrGetArg();
+    if (FUN_002485b8() != 0) {
+        FUN_0029c43c(DAT_00434228, 0);
+    }
+    return 1;
 }
 
 } /* extern "C" */

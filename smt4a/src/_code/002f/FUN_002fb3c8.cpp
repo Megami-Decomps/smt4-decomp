@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_memcpy(int, unsigned int, int);
+void rt_memcpy(u8 *dest, u32 source, s32 size);
 
-/* Supplied declaration required: rt_memcpy. */
+typedef struct Holder {
+    /* 0x0000 */ u8 unk0000[0x3DA0];
+    /* 0x3DA0 */ u8 buffer[1];
+} Holder;
 
-
-void FUN_002fb3c8(int param_1,unsigned int param_2,int param_3)
-
+/* Copies `count` 16-bit characters (2 * count bytes) into the buffer at 0x3DA0. */
+void FUN_002fb3c8(Holder *object, u32 source, s32 count)
 {
-/* irregular: 1 native warning(s); review required */
-  rt_memcpy(param_1 + 0x3da0,param_2,param_3 << 1);
-  return;
+    rt_memcpy(object->buffer, source, count << 1);
 }
 
 } /* extern "C" */

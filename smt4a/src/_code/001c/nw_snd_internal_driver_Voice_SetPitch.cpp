@@ -1,19 +1,14 @@
-#include "romwright_types.h"
+#include "shard/DriverVoice.h"
 
 extern "C" {
 
-
-void nw_snd_internal_driver_Voice_SetPitch(int param_1)
-
+/* Sets the pitch and marks it dirty, if it changed. */
+void nw_snd_internal_driver_Voice_SetPitch(DriverVoice *voice, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  if (*(float *)(param_1 + 0x28) != in_s0) {
-    *(float *)(param_1 + 0x28) = in_s0;
-    *(unsigned short *)(param_1 + 0x20) = *(unsigned short *)(param_1 + 0x20) | 4;
-  }
-  return;
+    if (voice->pitch != value) {
+        voice->pitch = value;
+        voice->dirtyFlags = voice->dirtyFlags | 4;
+    }
 }
 
 } /* extern "C" */

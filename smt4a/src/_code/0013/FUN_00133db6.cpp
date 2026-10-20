@@ -21,7 +21,7 @@ typedef struct {
 extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00307a28. */
-extern int FUN_00307a4a(unsigned int, int *);
+extern int vectorGrowCapacity_00307a4a(unsigned int, int *);
 /* Supplied declaration required: vectorSize24A. */
 /* Supplied declaration required: vecCount24b. */
 /* Supplied declaration required: FUN_0030c884. */
@@ -58,7 +58,7 @@ void FUN_00133db6(int *param_1,int param_2,unsigned int param_3)
   }
   else {
     temp_v2 = vectorSize24A(param_1);
-    temp_v4 = FUN_00307a4a(temp_v2,param_1);
+    temp_v4 = vectorGrowCapacity_00307a4a(temp_v2,param_1);
     temp_v5 = rt_malloc();
     FUN_00307a28(*param_1,param_2,temp_v5,param_1);
     temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x18);

@@ -1,56 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0011e41a_arg0 fn_0011e41a_arg0;
-typedef struct fn_0011e41a_arg1 fn_0011e41a_arg1;
-struct fn_0011e41a_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined1 field_0x4; /* +0x4 */
-    undefined1 field_0x5; /* +0x5 */
-    undefined1 field_0x6; /* +0x6 */
-    undefined1 field_0x7; /* +0x7 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined1 field_0x18; /* +0x18 */
-    unsigned char pad_0x19[0x1];
-    undefined2 field_0x1a; /* +0x1a */
-};
-struct fn_0011e41a_arg1 {
-    unsigned char pad_0x0[0x4];
-    byte field_0x4; /* +0x4 */
-    byte field_0x5; /* +0x5 */
-    byte field_0x6; /* +0x6 */
-    byte field_0x7; /* +0x7 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    byte field_0x18; /* +0x18 */
-    unsigned char pad_0x19[0x1];
-    ushort field_0x1a; /* +0x1a */
-};
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 byte04;
+    /* 0x05 */ u8 byte05;
+    /* 0x06 */ u8 byte06;
+    /* 0x07 */ u8 byte07;
+    /* 0x08 */ u64 value08;
+    /* 0x10 */ u32 word10;
+    /* 0x14 */ u32 word14;
+    /* 0x18 */ u8 byte18;
+    /* 0x19 */ u8 unk19;
+    /* 0x1A */ u16 half1A;
+} Record;
 
-
-void FUN_0011e41a(fn_0011e41a_arg0 *param_1,fn_0011e41a_arg1 *param_2)
-
+/* Copies every field of `source` into `dest`. */
+void FUN_0011e41a(Record *dest, const Record *source)
 {
-  unsigned int temp_v0;
-  
-  param_1->field_0x4 = param_2->field_0x4;
-  param_1->field_0x5 = param_2->field_0x5;
-  param_1->field_0x6 = param_2->field_0x6;
-  param_1->field_0x7 = param_2->field_0x7;
-  temp_v0 = param_2->field_0x8;
-  param_1->field_0xc = param_2->field_0xc;
-  param_1->field_0x8 = temp_v0;
-  param_1->field_0x10 = param_2->field_0x10;
-  param_1->field_0x14 = param_2->field_0x14;
-  param_1->field_0x18 = param_2->field_0x18;
-  param_1->field_0x1a = param_2->field_0x1a;
-  return;
+    dest->byte04 = source->byte04;
+    dest->byte05 = source->byte05;
+    dest->byte06 = source->byte06;
+    dest->byte07 = source->byte07;
+    dest->value08 = source->value08;
+    dest->word10 = source->word10;
+    dest->word14 = source->word14;
+    dest->byte18 = source->byte18;
+    dest->half1A = source->half1A;
 }
 
 } /* extern "C" */

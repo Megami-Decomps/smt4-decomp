@@ -1,24 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00119ee6` (_code @ 0x119ee6, 0x2a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9598(int, int);
+typedef struct Obj119ee6 {
+    /* 0x00 */ u8 unk00[5];
+    /* 0x05 */ u8 flag;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u8 sub[8];            /* copied by FUN_002e9598 */
+    /* 0x10 */ u32 value;
+    /* 0x14 */ u8 mode;
+    /* 0x15 */ u8 unk15[3];
+    /* 0x18 */ u32 extra;
+} Obj119ee6;
 
-/* Supplied declaration required: FUN_002e9598. */
+__weak void FUN_00119ee6_hook(void);
+int FUN_002e9598(void *dst, const void *src);
 
-
-int FUN_00119ee6(int param_1,int param_2)
-
+/* Copy assignment: copies the fields of `src` into `self` and returns `self`. */
+Obj119ee6 *FUN_00119ee6(Obj119ee6 *self, const Obj119ee6 *src)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned char *)(param_1 + 5) = *(unsigned char *)(param_2 + 5);
-  FUN_002e9598(param_1 + 8,param_2 + 8);
-  *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_2 + 0x10);
-  *(unsigned char *)(param_1 + 0x14) = *(unsigned char *)(param_2 + 0x14);
-  *(unsigned int *)(param_1 + 0x18) = *(unsigned int *)(param_2 + 0x18);
-  return param_1;
+    FUN_00119ee6_hook();
+    self->flag = src->flag;
+    FUN_002e9598(self->sub, src->sub);
+    self->value = src->value;
+    self->mode = src->mode;
+    self->extra = src->extra;
+    return self;
 }
 
 } /* extern "C" */

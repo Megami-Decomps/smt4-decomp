@@ -1,15 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fac; /* 0x588fac */
+extern u8 DAT_00588fac;
 
-
-void FUN_0013c874(unsigned char param_1)
-
+/* Stores `value` in the global at 0x00588fac. */
+void FUN_0013c874(u8 value)
 {
-  DAT_00588fac = param_1;
-  return;
+    DAT_00588fac = value;
 }
 
 } /* extern "C" */

@@ -1,19 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002fb1ea(unsigned int);
+void FUN_002fb1ea(u32 value);
 
-/* Supplied declaration required: FUN_002fb1ea. */
+typedef struct ValueSink {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 *source;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u32 value;
+} ValueSink;
 
-
-void FUN_00110448(int param_1,unsigned int param_2)
-
+/* Stores `value`, then passes FUN_002fb1ea the word `source` points at. */
+void FUN_00110448(ValueSink *sink, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(param_1 + 0x14) = param_2;
-  FUN_002fb1ea(**(unsigned int **)(param_1 + 0xc));
-  return;
+    sink->value = value;
+    FUN_002fb1ea(*sink->source);
 }
 
 } /* extern "C" */

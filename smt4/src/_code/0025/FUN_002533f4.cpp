@@ -22,7 +22,7 @@ extern int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_0022ac3c. */
 /* Supplied declaration required: FUN_002b06c4. */
 /* Supplied declaration required: FUN_002ba764. */
-extern int FUN_002c09f4(short);
+extern int randNextInRange(short);
 /* Supplied declaration required: FUN_002c0a9c. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -88,7 +88,7 @@ unsigned short FUN_002533f4(unsigned int param_1,unsigned int param_2,int param_
 LAB_00253568:
     temp_v1 = temp_v1 + 1;
     if (temp_v1 >= 0xf) {
-      temp_v1 = FUN_002c09f4(temp_v7 - 1);
+      temp_v1 = randNextInRange(temp_v7 - 1);
       temp_v5 = 0;
       while ((psVar6 = (short *)(temp_v6 + temp_v5 * 4), *psVar6 == 0 ||
              (temp_v1 = temp_v1 - (unsigned int)(unsigned short)psVar6[1], -1 < temp_v1))) {

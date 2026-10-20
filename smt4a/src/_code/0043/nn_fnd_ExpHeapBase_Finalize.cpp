@@ -1,21 +1,20 @@
-#include "romwright_types.h"
+#include "shard/Shard0043.h"
 
 extern "C" {
 
-int FUN_00431e8c(int);
+typedef struct ExpHeapBase {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 block;
+} ExpHeapBase;
 
-/* Supplied declaration required: FUN_00431e8c. */
+extern void FUN_00431e8c(u32 *block);
 
-
-void nn_fnd_ExpHeapBase_Finalize(int param_1)
-
+void nn_fnd_ExpHeapBase_Finalize(ExpHeapBase *heap)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x18) != 0) {
-    FUN_00431e8c(param_1 + 0x18);
-    *(unsigned int *)(param_1 + 0x18) = 0;
-  }
-  return;
+    if (heap->block != 0) {
+        FUN_00431e8c(&heap->block);
+        heap->block = 0;
+    }
 }
 
 } /* extern "C" */

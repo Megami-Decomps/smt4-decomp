@@ -1,27 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdTMTexTableLoadTmx(int, int);
-int FUN_0014afd0(int, int);
+void asdTMTexTableLoadTmx(s32 table, s32 flag);
+void FUN_0014afd0(s32 table, s32 index);
 
-/* Supplied declaration required: asdTMTexTableLoadTmx. */
-/* Supplied declaration required: FUN_0014afd0. */
-
-
+/* Loads texture table 0x1B and runs FUN_0014afd0 on each of its 0x12 entries. */
 void FUN_00281a0c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  asdTMTexTableLoadTmx(0x1b,0);
-  temp_v0 = 0;
-  do {
-    FUN_0014afd0(0x1b,temp_v0);
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x12);
-  return;
+    s32 i;
+
+    asdTMTexTableLoadTmx(0x1B, 0);
+    i = 0;
+    do {
+        FUN_0014afd0(0x1B, i);
+        i = i + 1;
+    } while (i < 0x12);
 }
 
 } /* extern "C" */

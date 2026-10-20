@@ -10,7 +10,7 @@ int FUN_004bd274(unsigned int, unsigned int);
 int FUN_004bd294(unsigned int, unsigned int);
 int FUN_004da024(void);
 int FUN_004da0b4(void);
-int FUN_0050d71c(unsigned char *);
+int clearTwoWords(unsigned char *);
 
 typedef struct fn_003eb760_arg0 fn_003eb760_arg0;
 struct fn_003eb760_arg0 {
@@ -35,7 +35,7 @@ extern int FUN_00177654(void);
 /* Supplied declaration required: FUN_004bd294. */
 /* Supplied declaration required: FUN_004da024. */
 /* Supplied declaration required: FUN_004da0b4. */
-/* Supplied declaration required: FUN_0050d71c. */
+/* Supplied declaration required: clearTwoWords. */
 
 
 void FUN_003eb760(fn_003eb760_arg0 *param_1,unsigned char *param_2,unsigned int param_3)
@@ -157,9 +157,9 @@ void FUN_003eb760(fn_003eb760_arg0 *param_1,unsigned char *param_2,unsigned int 
   *(unsigned short *)(param_2 + 0x112) = 0;
   *(unsigned short *)(param_2 + 0x114) = 0;
   *(unsigned int *)(param_2 + 0x228) = 0;
-  FUN_0050d71c(param_2 + 0x1be);
-  FUN_0050d71c(param_2 + 0x1c6);
-  FUN_0050d71c(param_2 + 0x1ce);
+  clearTwoWords(param_2 + 0x1be);
+  clearTwoWords(param_2 + 0x1c6);
+  clearTwoWords(param_2 + 0x1ce);
   FUN_002e6dd4(param_2 + 0x1d6,0x50);
   return;
 }

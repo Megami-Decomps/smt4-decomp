@@ -1,37 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int padIsButtonDown(unsigned int);
+extern int padIsButtonDown(u32 button);
 
-
+/* Counts the held buttons 0x78-0x7A on top of 4 (5 when 0x77 is held), capped at 8. */
 int FUN_0029aafc(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 4;
-  temp_v0 = padIsButtonDown(0x77);
-  if (temp_v0 != 0) {
-    temp_v1 = 5;
-  }
-  temp_v0 = padIsButtonDown(0x78);
-  if (temp_v0 != 0) {
-    temp_v1 = temp_v1 + 1;
-  }
-  temp_v0 = padIsButtonDown(0x79);
-  if (temp_v0 != 0) {
-    temp_v1 = temp_v1 + 1;
-  }
-  temp_v0 = padIsButtonDown(0x7a);
-  if (temp_v0 != 0) {
-    temp_v1 = temp_v1 + 1;
-  }
-  if (temp_v1 > 8) {
-    temp_v1 = 8;
-  }
-  return temp_v1;
+    int count = 4;
+
+    if (padIsButtonDown(0x77) != 0) {
+        count = 5;
+    }
+    if (padIsButtonDown(0x78) != 0) {
+        count = count + 1;
+    }
+    if (padIsButtonDown(0x79) != 0) {
+        count = count + 1;
+    }
+    if (padIsButtonDown(0x7a) != 0) {
+        count = count + 1;
+    }
+    if (count > 8) {
+        count = 8;
+    }
+    return count;
 }
 
 } /* extern "C" */

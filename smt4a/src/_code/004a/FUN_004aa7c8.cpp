@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00184748(int);
-int FUN_00321310(int);
+int menu32PlayCursorSeAndSelect(int);
 int FUN_00321500(int);
 int FUN_0039ebcc(void);
 int FUN_003f89e8(unsigned int);
@@ -18,9 +18,9 @@ typedef struct {
 extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_00184748. */
-/* Supplied declaration required: FUN_00321310. */
+/* Supplied declaration required: menu32PlayCursorSeAndSelect. */
 /* Supplied declaration required: FUN_00321500. */
-extern int FUN_0038e704(int);
+extern int menu32ModeIsNot6(int);
 /* Supplied declaration required: FUN_0039ebcc. */
 /* Supplied declaration required: FUN_003f89e8. */
 
@@ -37,10 +37,10 @@ void FUN_004aa7c8(void)
   piVar3 = (int *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x74a0);
   if (*piVar3 == 0xd) {
     FUN_003f89e8(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x7488));
-    FUN_00321310(temp_v0 + 0x28c4);
+    menu32PlayCursorSeAndSelect(temp_v0 + 0x28c4);
     *piVar3 = 0xb;
     temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
-    temp_v1 = FUN_0038e704((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
+    temp_v1 = menu32ModeIsNot6((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
     if (temp_v1 != 0) {
       temp_v1 = temp_v0 + 0x24bc;
       FUN_0039ebcc();

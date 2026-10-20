@@ -1,12 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x530];
+    /* 0x530 */ u32 entries[1];
+} Obj;
 
-unsigned int FUN_0022b238(int param_1,int param_2)
-
+u32 FUN_0022b238(Obj *obj, s32 index)
 {
-  return *(unsigned int *)(param_1 + param_2 * 4 + 0x530);
+    return obj->entries[index];
 }
 
 } /* extern "C" */

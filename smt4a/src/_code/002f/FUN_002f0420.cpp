@@ -41,10 +41,10 @@ extern int FUN_002c7ca0(void);
 /* Supplied declaration required: FUN_00333de0. */
 /* Supplied declaration required: FUN_0035da20. */
 /* Supplied declaration required: FUN_0035da74. */
-extern unsigned char FUN_003dfd5c(void);
+extern unsigned char countUnlockedSlots(void);
 extern int FUN_003e4d68(unsigned int);
 extern char FUN_004bcaa8(short, short, short *, unsigned int *, unsigned int);
-extern unsigned char FUN_004bd21c(unsigned int);
+extern unsigned char getUnlockedSlotCount(unsigned int);
 
 
 void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
@@ -78,13 +78,13 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
     psVar13 = (short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x19d0);
   }
   if (*(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390) < 0) {
-    temp_v3 = FUN_003dfd5c();
+    temp_v3 = countUnlockedSlots();
   }
   else if (0 < *(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1390)) {
     temp_v4 = *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2017);
     if (temp_v4 != '\x04') {
       if ((temp_v4 != '\a' && temp_v4 != '\x10') && temp_v4 != '\x11') {
-        temp_v3 = FUN_004bd21c(0);
+        temp_v3 = getUnlockedSlotCount(0);
       }
     }
     else {

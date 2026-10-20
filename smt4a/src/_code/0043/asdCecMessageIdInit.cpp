@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "shard/Shard0043.h"
 
 extern "C" {
 
-int FUN_0050d71c(void);
+extern void clearTwoWords(u32 id);
 
-/* Supplied declaration required: FUN_0050d71c. */
-
-
-unsigned int asdCecMessageIdInit(unsigned int param_1)
-
+u32 asdCecMessageIdInit(u32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0050d71c();
-  return param_1;
+    clearTwoWords(id);
+    return id;
 }
 
 } /* extern "C" */

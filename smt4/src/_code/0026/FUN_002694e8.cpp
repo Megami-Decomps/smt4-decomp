@@ -1,16 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002694e8` (_code @ 0x2694e8, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Slot {
+    u8 unk00[0x14];
+    s32 value; /* 0x14 */
+} Slot;
 
-void FUN_002694e8(int param_1,int *param_2)
+extern void FUN_002694f8(s32 value);
 
+/* Forwards to the function that follows it in the binary. */
+void FUN_002694e8(Slot *slot, s32 value)
 {
-  *(int **)(param_1 + 0x14) = param_2;
-  *param_2 = *param_2 + 1;
-  return;
+    slot->value = value;
+    FUN_002694f8(value);
 }
 
 } /* extern "C" */

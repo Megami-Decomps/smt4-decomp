@@ -1,18 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 size;
+} Source;
 
-unsigned int FUN_003014c6(int param_1,unsigned int *param_2)
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Source *source;
+} Holder;
 
+/* Clears `*out` (if given) and returns 1 when the source holds at least 10 bytes. */
+u32 FUN_003014c6(Holder *object, u32 *out)
 {
-  if (param_2 != (unsigned int *)0x0) {
-    *param_2 = 0;
-  }
-  if (*(unsigned int *)(*(int *)(param_1 + 8) + 0x10) < 10) {
-    return 0;
-  }
-  return 1;
+    if (out != NULL) {
+        *out = 0;
+    }
+    if (object->source->size < 10) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

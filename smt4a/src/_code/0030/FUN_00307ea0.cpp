@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct BitIterator {
+    /* 0x00 */ s32 word;
+    /* 0x04 */ s32 bit;
+} BitIterator;
 
-int FUN_00307ea0(int *param_1,int param_2,int param_3)
-
+/* Returns the distance in bits between iterator `a` and the position (`word`, `bit`): 32 bits per 4-byte word. */
+s32 FUN_00307ea0(BitIterator *a, s32 word, s32 bit)
 {
-  return (((*param_1 - param_2) >> 2) * 0x20 + param_1[1]) - param_3;
+    return (((a->word - word) >> 2) * 0x20 + a->bit) - bit;
 }
 
 } /* extern "C" */

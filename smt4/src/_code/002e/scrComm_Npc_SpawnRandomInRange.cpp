@@ -48,7 +48,7 @@ extern int jobIsValid(void);
 /* Supplied declaration required: FUN_002bf694. */
 /* Supplied declaration required: FUN_002bff38. */
 extern int jobGetWork(unsigned int);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -98,7 +98,7 @@ unsigned int scrComm_Npc_SpawnRandomInRange(void)
     if (temp_v6 < 1) {
       return 1;
     }
-    temp_v1 = FUN_002c09f4((temp_v6 - 1U) & 0xffff);
+    temp_v1 = randNextInRange((temp_v6 - 1U) & 0xffff);
     temp_v5 = temp_v7[temp_v1];
     temp_v2 = FUN_0029c1fc();
     FUN_0029c1c8(temp_v2,temp_v5 & 0xffff,0);

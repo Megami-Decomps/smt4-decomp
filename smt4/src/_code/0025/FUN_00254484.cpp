@@ -1,20 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_00254484(int *param_1)
-
+/* The payload at +8 of a block tagged 'TBCR' (0x52434254), else 0. */
+int FUN_00254484(int *block)
 {
-  int temp_v0;
-  
-  if ((param_1 != (int *)0x0) && (*param_1 == 0x52434254)) {
-    temp_v0 = param_1[2];
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    int payload;
+
+    if ((block != NULL) && (*block == 0x52434254)) {
+        payload = block[2];
+    } else {
+        payload = 0;
+    }
+    return payload;
 }
 
 } /* extern "C" */

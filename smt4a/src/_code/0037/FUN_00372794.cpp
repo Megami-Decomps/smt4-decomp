@@ -9,9 +9,9 @@ int FUN_001aba54(void);
 extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_001aba54. */
 extern int btlMainGetUnk14(void);
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 extern int FUN_004bd098(int, int);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 unsigned int FUN_00372794(int param_1,int param_2,int param_3)
@@ -33,10 +33,10 @@ unsigned int FUN_00372794(int param_1,int param_2,int param_3)
     else {
       param_3 = btlMainGetUnk14();
     }
-    temp_v1 = FUN_004bd340(param_3,4);
+    temp_v1 = bitsAt60Test(param_3,4);
   }
   else {
-    temp_v1 = FUN_003e0044(4);
+    temp_v1 = playerHasFlagBit(4);
   }
   temp_v2 = 0;
   if (temp_v1 != 0) {

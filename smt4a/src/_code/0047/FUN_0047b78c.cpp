@@ -15,7 +15,7 @@ int FUN_00429f38(...);
 int FUN_00474734(...);
 int FUN_00476e58(...);
 int FUN_00477d10(...);
-int FUN_0047b1e4(...);
+int jobFlagsWorkStop(...);
 int FUN_0047bc90(...);
 int FUN_0047bcdc(...);
 int FUN_0047daf4(...);
@@ -54,10 +54,10 @@ extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: FUN_0047b1e4. */
+/* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: FUN_0047bcdc. */
-extern int FUN_0047dae0(unsigned int *);
+extern int isEmptyString(unsigned int *);
 /* Supplied declaration required: FUN_0047daf4. */
 
 
@@ -124,17 +124,17 @@ void FUN_0047b78c(unsigned int *param_1)
           uStack_58 = uStack_44;
           uStack_54 = uStack_40;
           uStack_50 = uStack_3c;
-          temp_v1 = FUN_0047dae0(&temp_v3);
+          temp_v1 = isEmptyString(&temp_v3);
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x100;
             FUN_00477d10(param_1,1);
             param_1[2] = 2;
-            FUN_0047b1e4(param_1);
+            jobFlagsWorkStop(param_1);
             return;
           }
           temp_v1 = FUN_001d10ac(&temp_v3);
           if (temp_v1 != 0) {
-            FUN_0047b1e4(param_1);
+            jobFlagsWorkStop(param_1);
             if ((temp_v3 & 0xff) == 0x66) {
               temp_v5 = temp_v3;
               uStack_34 = uStack_5c;

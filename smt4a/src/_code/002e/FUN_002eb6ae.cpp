@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u16 flags;
+} Holder;
 
-unsigned char FUN_002eb6ae(int param_1,unsigned short param_2)
-
+/* Returns whether any of the given bits is set in the halfword at 0x3C. */
+u8 FUN_002eb6ae(Holder *object, u16 bits)
 {
-  return (*(unsigned short *)(param_1 + 0x3c) & param_2) != 0;
+    return (object->flags & bits) != 0;
 }
 
 } /* extern "C" */

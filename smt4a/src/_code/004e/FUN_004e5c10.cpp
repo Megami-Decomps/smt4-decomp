@@ -33,7 +33,7 @@ extern unsigned int DAT_00571170; /* 0x571170 */
 extern unsigned int DAT_00571174; /* 0x571174 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004c9160. */
@@ -63,7 +63,7 @@ void FUN_004e5c10(int *param_1,unsigned int *param_2)
   short temp_v7;
   char temp_v8;
   
-  temp_v1 = FUN_001633a0(99);
+  temp_v1 = lcgRandomRange(99);
   FUN_004e8454(param_1);
   if ((temp_v1 >= 10) || (piVar3 = param_1, FUN_004e933c(param_1,param_2), piVar3 == (int *)0x0)) {
     if (temp_v1 < 0x28) {

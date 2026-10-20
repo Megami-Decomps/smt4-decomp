@@ -1,19 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e2b50(int, int);
+void FUN_002e2b50(void *object, s32 code);
 
-/* Supplied declaration required: FUN_002e2b50. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 count;
+} Holder;
 
-
-unsigned int FUN_002127e8(int param_1)
-
+/* Calls FUN_002e2b50 with code 3, counts the call and returns 1. */
+u32 FUN_002127e8(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e2b50(param_1,3);
-  *(int *)(param_1 + 0x18) = *(int *)(param_1 + 0x18) + 1;
-  return 1;
+    FUN_002e2b50(object, 3);
+    object->count = object->count + 1;
+    return 1;
 }
 
 } /* extern "C" */

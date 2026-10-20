@@ -14,11 +14,11 @@ int FUN_002a5e7c(int);
 int FUN_002a7288(void);
 int FUN_002c8538(...);
 int FUN_003180c4(int, unsigned int);
-int FUN_0031a218(int, int);
+int panelSetMode3(int, int);
 int FUN_00333dc8(...);
 int FUN_003343f0(...);
 int FUN_00359974(int, unsigned int, unsigned int, int);
-int FUN_0037c8b4(int, int);
+int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
 int FUN_00388758(...);
 int FUN_003c1060(void);
@@ -26,7 +26,7 @@ int FUN_003c3e14(void);
 int FUN_003c5fc4(...);
 int FUN_004a0ef8(int);
 int FUN_004bcd90(int);
-int FUN_004bd30c(unsigned int, int, int);
+int dispatchIfFound(unsigned int, int, int);
 int FUN_004bd6b0(int, int, int);
 int FUN_004cd4b8(int, int);
 
@@ -74,13 +74,13 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002a7288. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0031a218. */
+/* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_003343f0. */
 extern int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
-extern int FUN_0037c894(void);
-/* Supplied declaration required: FUN_0037c8b4. */
+extern int panelStateIs0(void);
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_00388758. */
 /* Supplied declaration required: FUN_003c1060. */
@@ -88,8 +88,8 @@ extern int FUN_0037c894(void);
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: FUN_004a0ef8. */
 /* Supplied declaration required: FUN_004bcd90. */
-extern int FUN_004bd21c(unsigned int);
-/* Supplied declaration required: FUN_004bd30c. */
+extern int getUnlockedSlotCount(unsigned int);
+/* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: FUN_004bd6b0. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);
 /* Supplied declaration required: FUN_004cd4b8. */
@@ -121,7 +121,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
   
   temp_v0 = param_1->field_0x8;
   if (temp_v0 == 4) {
-    temp_v0 = FUN_0037c894();
+    temp_v0 = panelStateIs0();
     if (temp_v0 != 1) {
       return;
     }
@@ -138,7 +138,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     temp_v4 = FUN_004d0cd4();
     uStack_3e = (unsigned short)((unsigned int)temp_v3 >> 0x10);
     temp_v0 = FUN_002a4b28();
-    FUN_004bd30c(temp_v4,uStack_3e,0);
+    dispatchIfFound(temp_v4,uStack_3e,0);
     temp_v1 = slotRecordFindById(uStack_3e);
     FUN_004cd4b8(temp_v1,(int)(short)((short)temp_v7 - *(short *)(temp_v1 + 100)));
     *(unsigned short *)(temp_v1 + 4) = (*(unsigned short *)((unsigned char *)&temp_v7 + 2));
@@ -154,7 +154,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
       FUN_004bd6b0(temp_v1,0,temp_v6);
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 8);
-    temp_v2 = FUN_004bd21c(0);
+    temp_v2 = getUnlockedSlotCount(0);
     temp_v6 = 0;
     do {
       if (temp_v2 <= temp_v6) break;
@@ -197,7 +197,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
           if (temp_v0 != 0) {
             puVar2 = (unsigned int *)FUN_001ab888();
             if (temp_v5 <= *puVar2) {
-              FUN_0031a218(-*(int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),0)
+              panelSetMode3(-*(int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),0)
               ;
               temp_v0 = 4;
               param_1->field_0x8 = temp_v0;
@@ -226,7 +226,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
       return;
     }
     FUN_0037c8e4(1,0);
-    FUN_0037c8b4(-*(int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),0);
+    panelSetTarget(-*(int *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x24),0);
     temp_v5 = (unsigned int)*(unsigned short *)((int)param_1 + *(int *)&param_1[5].field_0x14 * 0x24 + 0x22);
     FUN_00180118(temp_v5);
     FUN_003180c4(0,temp_v5);

@@ -1,27 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int QcUtility_BuildTabList(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+int QcUtility_BuildTabList(int list, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f);
 
-/* stack frame of param_6: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_6_stack;
+typedef struct Obj {
+    /* 0x0 */ u8 unk0[9];
+    /* 0x9 */ u8 tabMask;
+} Obj;
 
-/* Supplied declaration required: QcUtility_BuildTabList. */
-
-
-int FUN_00381490(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5,
-                 unsigned int param_6)
-
+int FUN_00381490(Obj *obj, u32 tab, u32 b, u32 c, u32 d, u32 e)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  temp_v0 = QcUtility_BuildTabList(param_1,param_2,param_3,0xffffffff,param_4,param_5,param_6);
-  *(unsigned char *)(param_1 + 9) = (unsigned char)((1 << (param_2 & 0xff)) | *(unsigned char *)(param_1 + 9));
-  return temp_v0;
+    int result = QcUtility_BuildTabList((int)obj, tab, b, 0xffffffff, c, d, e);
+
+    obj->tabMask = (u8)((1 << (tab & 0xff)) | obj->tabMask);
+    return result;
 }
 
 } /* extern "C" */

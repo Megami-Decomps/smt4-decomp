@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00291e28(void);
+int dataTable2cSub0GetCount(void);
 
-/* Supplied declaration required: FUN_00291e28. */
+/* Supplied declaration required: dataTable2cSub0GetCount. */
 extern int FUN_002d2a00(int);
 extern unsigned int FUN_002d2a58(int, unsigned int);
-extern char *FUN_002d4f64(int);
+extern char *dataTable2cSub0GetRecord(int);
 
 
 void FUN_001fc314(unsigned int param_1)
@@ -23,10 +23,10 @@ void FUN_001fc314(unsigned int param_1)
   
   temp_v2 = 0;
   temp_v0 = param_1;
-  FUN_00291e28();
+  dataTable2cSub0GetCount();
   if (0 < (int)temp_v0) {
     do {
-      pcVar1 = (char *)FUN_002d4f64(temp_v2);
+      pcVar1 = (char *)dataTable2cSub0GetRecord(temp_v2);
       temp_v0 = (unsigned int)*pcVar1;
       if (temp_v0 == 0xffffffff) {
         return;
@@ -39,7 +39,7 @@ void FUN_001fc314(unsigned int param_1)
         }
       }
       temp_v2 = temp_v2 + 1;
-      FUN_00291e28();
+      dataTable2cSub0GetCount();
     } while (temp_v2 < (int)temp_v0);
   }
   return;

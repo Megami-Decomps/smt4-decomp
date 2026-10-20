@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: the two globals' pointers are held in r5/r4 instead of r4/r5 */
+/* Matches with -O2 (requested): built at a lower optimisation level than the game code. */
 /* Calls FUN_001aea28 for the linked child of each of the two entries, if present. */
 #include "common.h"
 

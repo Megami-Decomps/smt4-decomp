@@ -20,11 +20,11 @@ typedef struct {
 extern int FUN_0018719c(short);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0039b984. */
-extern unsigned int FUN_0040a75c(unsigned int);
+extern unsigned int tableByteGet1(unsigned int);
 /* Supplied declaration required: FUN_0040a76c. */
 /* Supplied declaration required: FUN_0040a790. */
 /* Supplied declaration required: FUN_0040a7b4. */
-extern int FUN_0040a7e4(unsigned int);
+extern int tableFlagBit0(unsigned int);
 /* Supplied declaration required: FUN_0040a844. */
 /* Supplied declaration required: FUN_0040a864. */
 
@@ -52,13 +52,13 @@ void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int para
     if ((psVar1 != (short *)0x0) && (temp_v4 = temp_v4 + 1, *psVar1 != 0)) {
       temp_v0 = FUN_0018719c(psVar1[0x2d]);
       if (!(psVar1[0x2d] == 0 || temp_v0 == 0)) {
-        temp_v0 = FUN_0040a7e4(temp_v3);
+        temp_v0 = tableFlagBit0(temp_v3);
         if (temp_v0 != 0) {
           FUN_0040a7b4(temp_v3);
         }
       }
       else {
-        temp_v0 = FUN_0040a7e4(temp_v3);
+        temp_v0 = tableFlagBit0(temp_v3);
         if (temp_v0 == 0) {
           temp_v0 = FUN_0018719c(psVar1[0x2e]);
           if ((psVar1[0x2e] != 0) && (temp_v0 == 0)) goto LAB_00403d24;
@@ -74,7 +74,7 @@ void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int para
             FUN_0040a844(temp_v3,1);
           }
         }
-        temp_v1 = FUN_0040a75c(temp_v3);
+        temp_v1 = tableByteGet1(temp_v3);
         temp_v5 = temp_v1;
         if (temp_v1 < 5) {
           temp_v2 = 0;

@@ -8,7 +8,7 @@ int FUN_00141b24(void);
 int FUN_00146dc8(void);
 int FUN_00146e30(void);
 int FUN_00147120(void);
-int FUN_00147b84(void);
+int sndSystemFinalize(void);
 int FUN_00150784(void);
 int FUN_00152bf8(int);
 int asdMemFree(void);
@@ -39,7 +39,7 @@ extern signed char DAT_0063f4fd; /* 0x63f4fd */
 /* Supplied declaration required: FUN_00146dc8. */
 /* Supplied declaration required: FUN_00146e30. */
 /* Supplied declaration required: FUN_00147120. */
-/* Supplied declaration required: FUN_00147b84. */
+/* Supplied declaration required: sndSystemFinalize. */
 /* Supplied declaration required: FUN_00150784. */
 /* Supplied declaration required: FUN_00152bf8. */
 /* Supplied declaration required: asdMemFree. */
@@ -104,7 +104,7 @@ void FUN_00139518(void)
   if (DAT_0063e6b4 != 0) {
     asdMemFree();
   }
-  FUN_00147b84();
+  sndSystemFinalize();
   FUN_00147120();
   FUN_00146dc8();
   FUN_00146e30();

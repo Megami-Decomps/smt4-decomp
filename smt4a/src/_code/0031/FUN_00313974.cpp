@@ -56,7 +56,7 @@ extern int FUN_00162e8c(void);
 extern int FUN_00262614(int);
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_003534b0. */
-extern short *FUN_003564ec(fn_00313974_arg0 *);
+extern short *dataTable4CGetEntry(fn_00313974_arg0 *);
 extern int FUN_00376f94(void);
 
 
@@ -78,7 +78,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
   
   temp_v2 = FUN_00162e8c();
   temp_v3 = FUN_00376f94();
-  psVar5 = (short *)FUN_003564ec(param_1);
+  psVar5 = (short *)dataTable4CGetEntry(param_1);
   if (temp_v3 < 100) {
     return;
   }

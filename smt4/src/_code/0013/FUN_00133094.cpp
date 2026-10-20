@@ -1,13 +1,10 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_00133094(unsigned int *param_1)
-
+void FUN_00133094(u32 *obj)
 {
-  *param_1 = 1;
-  return;
+    *obj = 1;
 }
 
 } /* extern "C" */

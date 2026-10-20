@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00229c94(...);
-int FUN_00229f18(void);
+int dataTable05Sub0GetEntries(void);
 int FUN_002b9024(void);
 int FUN_003c9a04(unsigned short *, int, unsigned int, int);
 
@@ -18,13 +18,13 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00229c94. */
-/* Supplied declaration required: FUN_00229f18. */
+/* Supplied declaration required: dataTable05Sub0GetEntries. */
 extern int FUN_0029ea68(unsigned int);
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
 extern int FUN_002b066c(unsigned int);
 /* Supplied declaration required: FUN_002b9024. */
-extern unsigned int FUN_002c09f4(unsigned int);
+extern unsigned int randNextInRange(unsigned int);
 extern int FUN_00311be4(void);
 /* Supplied declaration required: FUN_003c9a04. */
 extern int FUN_003c9b94(unsigned short *, unsigned short *, unsigned short *, unsigned int *);
@@ -51,7 +51,7 @@ unsigned int FUN_003c92b8(unsigned short *param_1,unsigned short *param_2,unsign
   unsigned char temp_v8;
   
   temp_v0 = 0;
-  FUN_00229f18();
+  dataTable05Sub0GetEntries();
   temp_v1 = FUN_003c9b94(param_1,param_2,param_3,param_4);
   if (temp_v1 == 0) {
     return 0;
@@ -60,7 +60,7 @@ unsigned int FUN_003c92b8(unsigned short *param_1,unsigned short *param_2,unsign
   FUN_002b9024();
   temp_v1 = FUN_00311be4();
   temp_v7 = temp_v1 + (unsigned int)*(unsigned char *)((int)puVar5 + 3);
-  temp_v2 = FUN_002c09f4(99);
+  temp_v2 = randNextInRange(99);
   if (temp_v2 < 5) {
     temp_v1 = FUN_002b066c(0x218);
     if (temp_v1 == 0) {
@@ -94,7 +94,7 @@ unsigned int FUN_003c92b8(unsigned short *param_1,unsigned short *param_2,unsign
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x4b1);
-  temp_v3 = FUN_002c09f4(99);
+  temp_v3 = randNextInRange(99);
   temp_v2 = temp_v7;
   if (temp_v3 < temp_v6) {
     do {

@@ -21,7 +21,7 @@ extern int FUN_001801a4(void);
 extern int FUN_001ada74(unsigned short);
 extern fn_004bb510_arg0 *FUN_001ba3d4(unsigned int);
 extern int FUN_003df390(unsigned short);
-extern int FUN_00418584(unsigned short);
+extern int partyEntryFlagsBit3(unsigned short);
 extern unsigned int *FUN_004bb80c(void);
 
 
@@ -36,7 +36,7 @@ unsigned int FUN_004bb510(fn_004bb510_arg0 *param_1)
   unsigned char temp_v2;
   
   puVar1 = (unsigned int *)FUN_004bb80c();
-  temp_v0 = FUN_00418584((short)puVar1[3]);
+  temp_v0 = partyEntryFlagsBit3((short)puVar1[3]);
   if ((temp_v0 == 0) && (temp_v0 = FUN_001ada74((short)puVar1[3]), temp_v0 == 0)) {
     if ((short)puVar1[3] == 0x8d) {
       pfVar3 = (fn_004bb510_arg0 *)FUN_001ba3d4(0x3a);

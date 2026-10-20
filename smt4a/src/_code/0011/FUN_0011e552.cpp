@@ -41,7 +41,7 @@ typedef struct {
 extern int FUN_002e9af4(void);
 /* Supplied declaration required: FUN_002e9ec8. */
 /* Supplied declaration required: FUN_002e9f00. */
-extern int *FUN_002ed2a2(unsigned int *, unsigned int *);
+extern int *wordRefMin(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_002fc046. */
 /* Supplied declaration required: FUN_00310d0a. */
 /* Supplied declaration required: FUN_00310d38. */
@@ -76,7 +76,7 @@ void FUN_0011e552(fn_0011e552_arg0 *param_1,unsigned int param_2,unsigned int pa
   }
   if (param_1->field_0x44 != 0) {
     temp_v3 = param_1->field_0x3c - param_1->field_0x38;
-    piVar2 = (int *)FUN_002ed2a2(&temp_v3,&temp_v5);
+    piVar2 = (int *)wordRefMin(&temp_v3,&temp_v5);
     temp_v1 = *piVar2;
     FUN_00310d38(param_1->field_0x38,param_1->field_0x38 + temp_v1,temp_v4);
     FUN_00310d0a(&param_1->field_0x38,param_1->field_0x38,param_1->field_0x38 + temp_v1);
@@ -93,7 +93,7 @@ void FUN_0011e552(fn_0011e552_arg0 *param_1,unsigned int param_2,unsigned int pa
     temp_v1 = FUN_002fc046();
     if (temp_v1 == 0) {
       temp_v3 = param_1->field_0x30 - param_1->field_0x2c;
-      piVar2 = (int *)FUN_002ed2a2(&temp_v3,&temp_v5);
+      piVar2 = (int *)wordRefMin(&temp_v3,&temp_v5);
       temp_v0 = *piVar2;
       FUN_00310d38(param_1->field_0x2c,param_1->field_0x2c + temp_v0,temp_v4);
       FUN_00310d0a(&param_1->field_0x2c,param_1->field_0x2c,param_1->field_0x2c + temp_v0);

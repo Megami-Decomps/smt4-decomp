@@ -136,7 +136,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 extern int FUN_00269a58(void);
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002f81b0. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
@@ -370,7 +370,7 @@ void FUN_001f735c(int param_1)
   temp_v50 = temp_v45;
   temp_v51 = temp_v7;
   temp_v52 = temp_v49;
-  if (((DAT_00476638 & 1) == 0) && (temp_v1 = FUN_002bfefc(&DAT_00476638), temp_v1 != 0)) {
+  if (((DAT_00476638 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_00476638), temp_v1 != 0)) {
     DAT_004efd9c = (unsigned int)temp_v19;
     DAT_004efda0 = temp_v7;
     DAT_004efda4 = temp_v7;

@@ -1,37 +1,27 @@
-#include "romwright_types.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
 
-int FUN_00291730(unsigned int *);
-int asdMemFree(unsigned int *);
+int FUN_00291730(u32 *block);
+int asdMemFree(void *ptr);
+extern int jobFind(u32 job);
 
-extern unsigned int *DAT_0044cdf0; /* 0x44cdf0 */
-
-/* Supplied declaration required: FUN_00291730. */
-extern int jobFind(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-
-
-unsigned int NaviMain_CheckClose(void)
-
+/* Returns 1 while the navi job is running (or no close was requested); otherwise frees the state and returns 0. */
+u32 NaviMain_CheckClose(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = DAT_0044cdf0;
-  if (DAT_0044cdf0 != (unsigned int *)0x0) {
-    temp_v0 = jobFind(*DAT_0044cdf0);
-    if ((temp_v0 != 0) || (*(char *)(puVar1 + 2) == '\0')) {
-      return 1;
+    NaviMain *navi = DAT_0044cdf0;
+
+    if (DAT_0044cdf0 != NULL) {
+        if ((jobFind(DAT_0044cdf0->job) != 0) || (navi->closeRequested == 0)) {
+            return 1;
+        }
+        if (DAT_0044cdf0 != NULL) {
+            FUN_00291730(DAT_0044cdf0->unk00040);
+            asdMemFree(DAT_0044cdf0);
+            DAT_0044cdf0 = NULL;
+        }
     }
-    if (DAT_0044cdf0 != (unsigned int *)0x0) {
-      FUN_00291730(DAT_0044cdf0 + 0x10);
-      asdMemFree(DAT_0044cdf0);
-      DAT_0044cdf0 = (unsigned int *)0x0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

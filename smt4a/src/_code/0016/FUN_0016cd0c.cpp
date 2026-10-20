@@ -1,13 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_0016cd0c(unsigned int *param_1)
-
+/* Clears the referenced word. */
+void FUN_0016cd0c(u32 *valueRef)
 {
-  *param_1 = 0;
-  return;
+    *valueRef = 0;
 }
 
 } /* extern "C" */

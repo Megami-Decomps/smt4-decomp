@@ -1,37 +1,38 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
-int FUN_00184c00(int, int, int);
+void FUN_00184758(u8 *member, s32 a, s32 b);
+void FUN_00184c00(u8 *member, s32 a, s32 b);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct Scene {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 state;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ s32 timer;
+    /* 0x14 */ u8 unk14[0x0C];
+    /* 0x20 */ s32 mode;
+    /* 0x24 */ u8 unk24[0x30];
+    /* 0x54 */ u8 member54[0x8C];
+    /* 0xE0 */ u8 memberE0[1];
+} Scene;
+extern Scene *DAT_0057f574;
 
-extern int DAT_0057f574; /* 0x57f574 */
-
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_00184c00. */
-
-
-typedef struct S { int p0; int p4; int state; int pc; int timer; int p14; int p18; int p1c; int mode; } S;
+/* If the scene is running, moves it to state 5 with a 30-frame timer and restarts its members (the second one too in mode 2). */
 void FUN_00203d04(void)
-
 {
-  S *temp_v0 = *(S **)&DAT_0057f574;
-  if (temp_v0->state != 0) {
-    temp_v0->state = 5;
-    temp_v0->timer = 0x1e;
-    FUN_00184758((int)temp_v0 + 0x54,1,0);
-    FUN_00184c00((int)temp_v0 + 0x54,1,0);
-    if (temp_v0->mode == 2) {
-      FUN_00184758((int)temp_v0 + 0xe0,4,0);
-      return;
+    Scene *scene = DAT_0057f574;
+
+    if (scene->state != 0) {
+        scene->state = 5;
+        scene->timer = 0x1E;
+        FUN_00184758(scene->member54, 1, 0);
+        FUN_00184c00(scene->member54, 1, 0);
+        if (scene->mode == 2) {
+            FUN_00184758(scene->memberE0, 4, 0);
+            return;
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -1,32 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7888(int, unsigned int);
-int FUN_002eea94(int, int);
+void FUN_002e7888(u32 dest, u32 source);
+void FUN_002eea94(void *string, s32 size);
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_5_stack;
+typedef struct String {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 data;
+} String;
 
-/* Supplied declaration required: FUN_002e7888. */
-extern int FUN_002ea0e4(void);
-/* Supplied declaration required: FUN_002eea94. */
+String *constructObj0055affc(void);
 
-
-void FUN_0030f234(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4,int param_5)
-
+/* Builds a string with room for `a + b` 16-bit characters plus a terminator: `first` is copied to its start and `second` after the first `a` characters. */
+void FUN_0030f234(u32 unused, u32 first, s32 a, u32 second, s32 b)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002ea0e4();
-  FUN_002eea94(temp_v0,param_3 + param_5 + 1);
-  temp_v0 = *(int *)(temp_v0 + 4);
-  FUN_002e7888(temp_v0,param_2);
-  FUN_002e7888(param_3 * 2 + temp_v0,param_4);
-  return;
+    String *string;
+    u32 data;
+
+    string = constructObj0055affc();
+    FUN_002eea94(string, a + b + 1);
+    data = string->data;
+    FUN_002e7888(data, first);
+    FUN_002e7888(a * 2 + data, second);
 }
 
 } /* extern "C" */

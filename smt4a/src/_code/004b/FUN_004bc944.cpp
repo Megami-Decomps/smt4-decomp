@@ -1,17 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard004B.h"
 
 extern "C" {
 
-extern int FUN_00152978(void);
+typedef struct ByteAt3 {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 unk03;
+} ByteAt3;
 
+extern ByteAt3 *FUN_00152978(void);
 
-unsigned int FUN_004bc944(void)
-
+u32 FUN_004bc944(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00152978();
-  return (*(unsigned char *)(temp_v0 + 3) & 0x40) >> 6;
+    return (FUN_00152978()->unk03 & 0x40) >> 6;
 }
 
 } /* extern "C" */

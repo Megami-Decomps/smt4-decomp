@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_0016a0f0(int);
+int dataTableValueOrZero(int);
 int FUN_001ad9b4(...);
 int FUN_00275bb0(int);
 int FUN_00275fe4(...);
@@ -20,10 +20,10 @@ int btlTalkBustUpSetUnk2F4(int);
 int FUN_003deea4(int);
 int FUN_003fd63c(...);
 int FUN_00417a60(int);
-int FUN_004da2f8(void);
+int optionsClearFlag1(void);
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0016a0f0. */
+/* Supplied declaration required: dataTableValueOrZero. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
 extern unsigned int scrGetArg(unsigned int);
@@ -46,7 +46,7 @@ extern unsigned int FUN_00375848(void);
 /* Supplied declaration required: FUN_00417a60. */
 extern int FUN_004186a4(void);
 extern unsigned int FUN_004186e0(void);
-/* Supplied declaration required: FUN_004da2f8. */
+/* Supplied declaration required: optionsClearFlag1. */
 
 
 unsigned int FUN_0037dbc8(void)
@@ -64,7 +64,7 @@ unsigned int FUN_0037dbc8(void)
   temp_v1 = scrGetArg(0);
   temp_v2 = FUN_002deb84();
   if (temp_v2 != 0) {
-    FUN_0016a0f0(0x1e);
+    dataTableValueOrZero(0x1e);
     FUN_001ad9b4(temp_v1);
     temp_v2 = FUN_00275bb0(0);
     if (temp_v2 != 0) {
@@ -88,7 +88,7 @@ unsigned int FUN_0037dbc8(void)
         }
         temp_v2 = FUN_004186a4();
         if ((temp_v2 != 0) && (temp_v4 = FUN_004186e0(), temp_v4 == temp_v1)) {
-          FUN_004da2f8();
+          optionsClearFlag1();
         }
       }
       FUN_00417a60(temp_v1);

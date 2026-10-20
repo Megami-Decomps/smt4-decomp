@@ -8,7 +8,7 @@ int FUN_0010d3a4(void);
 int FUN_002e6e34(int *, unsigned char *);
 int FUN_002e6e5c(int *);
 int FUN_002e75fa(void);
-int FUN_002f74e8(int, int);
+int emptyStub_002f74e8(int, int);
 
 extern int DAT_005949dc; /* 0x5949dc */
 extern unsigned int DAT_00594abc; /* 0x594abc */
@@ -20,7 +20,7 @@ extern unsigned int FUN_00113e60(void);
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e75fa. */
 extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002f74e8. */
+/* Supplied declaration required: emptyStub_002f74e8. */
 
 
 void FUN_0010d300(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -37,7 +37,7 @@ void FUN_0010d300(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_14 = param_3;
   uStack_10 = param_4;
   FUN_002e6e34(&uStack_18,&DAT_00630344);
-  FUN_002f74e8(0,0x400012b);
+  emptyStub_002f74e8(0,0x400012b);
   if (DAT_005949dc != 0) {
     FUN_002e75fa();
     temp_v0 = DAT_005949dc;

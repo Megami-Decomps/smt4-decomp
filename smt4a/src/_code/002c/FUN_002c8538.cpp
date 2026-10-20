@@ -1,15 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+typedef struct Game {
+    /* 0x0000 */ u8 unk0000[0x2012];
+    /* 0x2012 */ u8 value;
+} Game;
 
+typedef struct Global588fd0 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Game *game;
+} Global588fd0;
+extern Global588fd0 DAT_00588fd0;
 
-void FUN_002c8538(unsigned char param_1)
-
+/* Stores `value` in the byte at 0x2012 of the game record. */
+void FUN_002c8538(u8 value)
 {
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2012) = param_1;
-  return;
+    DAT_00588fd0.game->value = value;
 }
 
 } /* extern "C" */

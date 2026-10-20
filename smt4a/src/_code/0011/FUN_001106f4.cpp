@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned char DAT_005593a0; /* 0x5593a0 */
 
-extern int FUN_002fb3b6(int *, unsigned int *);
+extern int wordRefsDiffer_002fb3b6(int *, unsigned int *);
 /* Supplied declaration required: FUN_002fb444. */
 /* Supplied declaration required: FUN_002fb474. */
 
@@ -33,7 +33,7 @@ unsigned int * FUN_001106f4(unsigned int *param_1)
   temp_v1 = *(int *)(param_1[5] + 8);
   while( 1 ) {
     temp_v2 = param_1[5];
-    temp_v0 = FUN_002fb3b6(&temp_v1,(unsigned int *)&temp_v2);
+    temp_v0 = wordRefsDiffer_002fb3b6(&temp_v1,(unsigned int *)&temp_v2);
     if (temp_v0 == 0) break;
     if (*(int **)(temp_v1 + 0x14) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(temp_v1 + 0x14) + 4))();
@@ -43,7 +43,7 @@ unsigned int * FUN_001106f4(unsigned int *param_1)
   temp_v1 = *(int *)(param_1[0xc] + 8);
   while( 1 ) {
     temp_v2 = param_1[0xc];
-    temp_v0 = FUN_002fb3b6(&temp_v1,(unsigned int *)&temp_v2);
+    temp_v0 = wordRefsDiffer_002fb3b6(&temp_v1,(unsigned int *)&temp_v2);
     if (temp_v0 == 0) break;
     if (*(int **)(temp_v1 + 0x14) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(temp_v1 + 0x14) + 4))();

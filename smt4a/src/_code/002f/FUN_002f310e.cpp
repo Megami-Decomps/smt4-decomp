@@ -1,22 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f310e` (_code @ 0x2f310e, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Matches with -O2 (requested): built at a lower optimisation level than the game code. */
+#include "common.h"
 
 extern "C" {
 
-int rt_memcpy_w(int, int, int);
+typedef struct Buffers {
+    u8 unk000[0x28];
+    u8 source[0x100]; /* 0x028 */
+    u8 copy[0x100];   /* 0x128 */
+    u8 flagA;         /* 0x228 */
+    u8 flagB;         /* 0x229 */
+} Buffers;
 
-/* Supplied declaration required: rt_memcpy_w. */
+extern void rt_memcpy_w(void *dst, const void *src, u32 size);
 
-
-void FUN_002f310e(int param_1)
-
+/* Clears both flags and refreshes the copy of the buffer. */
+void FUN_002f310e(Buffers *buffers)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned char *)(param_1 + 0x228) = 0;
-  *(unsigned char *)(param_1 + 0x229) = 0;
-  rt_memcpy_w(param_1 + 0x128,param_1 + 0x28,0x100);
-  return;
+    buffers->flagA = 0;
+    buffers->flagB = 0;
+    rt_memcpy_w(buffers->copy, buffers->source, sizeof(buffers->copy));
 }
 
 } /* extern "C" */

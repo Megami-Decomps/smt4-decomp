@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002fc046(int);
+s32 FUN_002fc046(u8 *member);
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 member0C;
+} Holder;
 
-unsigned int FUN_002ec674(int param_1)
-
+/* Returns the word at 0xC, or 0 when FUN_002fc046 reports that member as invalid. */
+u32 FUN_002ec674(Holder *object)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002fc046(param_1 + 0xc);
-  if (temp_v0 != 0) {
-    return 0;
-  }
-  return *(unsigned int *)(param_1 + 0xc);
+    s32 invalid;
+
+    invalid = FUN_002fc046((u8 *)object + 0xC);
+    if (invalid != 0) {
+        return 0;
+    }
+    return object->member0C;
 }
 
 } /* extern "C" */

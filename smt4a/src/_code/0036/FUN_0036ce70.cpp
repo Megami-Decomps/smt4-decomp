@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e1c94(int, int, unsigned int);
 
 /* Supplied declaration required: FUN_002e1c94. */
-extern int FUN_00344c6c(void);
+extern int overlayIsNotBusy(void);
 
 
 unsigned int FUN_0036ce70(int param_1)
@@ -58,7 +58,7 @@ unsigned int FUN_0036ce70(int param_1)
   if (temp_v5) {
     temp_v1 = 1;
   }
-  temp_v2 = FUN_00344c6c();
+  temp_v2 = overlayIsNotBusy();
   if (temp_v2 != 0 && temp_v1) {
     if (temp_v0 == '\0') {
       *(unsigned char *)(param_1 + 0x112) = 0;

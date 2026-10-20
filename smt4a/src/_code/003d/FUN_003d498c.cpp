@@ -38,7 +38,7 @@ extern int FUN_003de464(int, unsigned int);
 extern int FUN_003de748(int);
 /* Supplied declaration required: FUN_003dea6c. */
 /* Supplied declaration required: FUN_003defe0. */
-extern int FUN_00418858(int);
+extern int partyEntryGetByte1(int);
 extern unsigned char *FUN_0046c0f8(unsigned int, int);
 
 
@@ -74,7 +74,7 @@ void FUN_003d498c(int param_1,unsigned int param_2)
     temp_v4 = 0;
     temp_v3 = (unsigned char *)puVar3;
     FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x91c),3,0xffffffff,0);
-    temp_v1 = FUN_00418858(param_1);
+    temp_v1 = partyEntryGetByte1(param_1);
     if (0 < temp_v1) {
       temp_v3 = *(unsigned char **)(temp_v0 + 0x92c);
       temp_v2 = 3;

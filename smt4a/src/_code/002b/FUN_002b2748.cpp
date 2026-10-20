@@ -1,48 +1,42 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00321a98(unsigned int *, unsigned int *);
+void FUN_00321a98(u32 *a, u32 *b);
+u32 FUN_001ab854(void);
+s32 FUN_003df57c(u32 id, u32 flag);
+s32 FUN_004bcbb4(u32 owner, u32 id);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+typedef struct Ref {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ s32 kind;
+} Ref;
 
-extern unsigned int FUN_001ab854(void);
-/* Supplied declaration required: FUN_00321a98. */
-extern int FUN_003df57c(unsigned int, unsigned int);
-extern int FUN_004bcbb4(unsigned int, unsigned int);
-
-
-void FUN_002b2748(unsigned int *param_1,unsigned int *param_2)
-
+/* Resolves both references (negative kind through FUN_003df57c, otherwise through FUN_004bcbb4) and calls FUN_00321a98 when they resolve to the same value. */
+void FUN_002b2748(Ref *a, Ref *b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  if ((int)param_1[1] < 0) {
-    temp_v0 = FUN_003df57c(*param_1,1);
-  }
-  else {
-    temp_v2 = FUN_001ab854();
-    temp_v0 = FUN_004bcbb4(temp_v2,*param_1);
-  }
-  if ((int)param_2[1] < 0) {
-    temp_v1 = FUN_003df57c(*param_2,1);
-  }
-  else {
-    temp_v2 = FUN_001ab854();
-    temp_v1 = FUN_004bcbb4(temp_v2,*param_2);
-  }
-  int diff = temp_v1 - temp_v0;
-  if (diff == 0) {
-    FUN_00321a98(param_1,param_2);
-    return;
-  }
-  return;
+    s32 first;
+    s32 second;
+    u32 owner;
+    s32 diff;
+
+    if (a->kind < 0) {
+        first = FUN_003df57c(a->id, 1);
+    } else {
+        owner = FUN_001ab854();
+        first = FUN_004bcbb4(owner, a->id);
+    }
+    if (b->kind < 0) {
+        second = FUN_003df57c(b->id, 1);
+    } else {
+        owner = FUN_001ab854();
+        second = FUN_004bcbb4(owner, b->id);
+    }
+    diff = second - first;
+    if (diff == 0) {
+        FUN_00321a98((u32 *)a, (u32 *)b);
+        return;
+    }
 }
 
 } /* extern "C" */

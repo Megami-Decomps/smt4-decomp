@@ -1,17 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Shard0046.h"
 
 extern "C" {
 
-
-void nw_snd_internal_driver_Voice_SetPanCurve(int param_1,unsigned int param_2)
-
+void nw_snd_internal_driver_Voice_SetPanCurve(VoiceCtl *voice, u32 curve)
 {
-  if (*(unsigned char *)(param_1 + 0x2d) != param_2) {
-    *(char *)(param_1 + 0x2d) = (char)param_2;
-    unsigned int t = *(unsigned short *)(param_1 + 0x20);
-    *(unsigned short *)(param_1 + 0x20) = t | 8;
-  }
-  return;
+    if (voice->panCurve != curve) {
+        u32 flags = voice->flags;
+
+        voice->panCurve = curve;
+        voice->flags = flags | 8;
+    }
 }
 
 } /* extern "C" */

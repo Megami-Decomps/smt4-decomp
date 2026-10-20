@@ -1,37 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002613f0(int);
+typedef struct Entry {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u16 a;
+    /* 0x04 */ u16 b;
+    /* 0x06 */ u16 c;
+} Entry;
 
-/* Supplied declaration required: FUN_002613f0. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 id;
+} Holder;
 
+Entry *FUN_002613f0(s32 index);
 
-unsigned short FUN_0025e684(int param_1)
-
+/* Finds the entry (of 0x18) with the object's id: returns 0 when its three values are all 0 and 1 otherwise; 0 when there is no object or no match. */
+u16 FUN_0025e684(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *psVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  if (param_1 != 0) {
-    temp_v1 = 0;
-    do {
-      psVar1 = (unsigned short *)FUN_002613f0(temp_v1);
-      if (*psVar1 == *(unsigned short *)(param_1 + 0x62)) {
-        temp_v0 = FUN_002613f0(temp_v1);
-        if (((*(short *)(temp_v0 + 2) == 0) &&
-            (temp_v0 = FUN_002613f0(temp_v1), *(short *)(temp_v0 + 4) == 0)) &&
-           (temp_v1 = FUN_002613f0(temp_v1), *(short *)(temp_v1 + 6) == 0)) {
-          return 0;
-        }
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x18);
-  }
-  return 0;
+    Entry *entry;
+    s32 i;
+
+    if (object != NULL) {
+        i = 0;
+        do {
+            entry = FUN_002613f0(i);
+            if (entry->id == object->id) {
+                entry = FUN_002613f0(i);
+                if (((entry->a == 0) && (entry = FUN_002613f0(i), entry->b == 0)) &&
+                    (entry = FUN_002613f0(i), entry->c == 0)) {
+                    return 0;
+                }
+                return 1;
+            }
+            i = i + 1;
+        } while (i < 0x18);
+    }
+    return 0;
 }
 
 } /* extern "C" */

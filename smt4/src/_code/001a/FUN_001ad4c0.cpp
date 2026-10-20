@@ -1,19 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 mode;
+    /* 0x24 */ u8 unk24[0x14];
+    /* 0x38 */ u32 flags;
+} Obj;
 
-unsigned int FUN_001ad4c0(int param_1)
-
+u32 FUN_001ad4c0(Obj *obj)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = *(unsigned int *)(param_1 + 0x38) & 0x7f;
-  if ((temp_v0 == 0xe || temp_v0 == 1) &&
-     (*(char *)(param_1 + 0x23) == '\x03' || *(char *)(param_1 + 0x23) == '\a')) {
-    return 1;
-  }
-  return 0;
+    u32 kind = obj->flags & 0x7f;
+
+    if ((kind == 0xe || kind == 1) && (obj->mode == 3 || obj->mode == 7)) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

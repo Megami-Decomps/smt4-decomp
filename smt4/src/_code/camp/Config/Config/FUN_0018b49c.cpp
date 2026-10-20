@@ -39,7 +39,7 @@ extern int FUN_002c09d0(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_0018b49c(int param_1,int param_2)
@@ -73,7 +73,7 @@ void FUN_0018b49c(int param_1,int param_2)
   temp_v5 = g_titleScene;
   temp_v13 = *(short *)(temp_v3 + 8) + param_1;
   temp_v11 = *(short *)(temp_v3 + 10) + param_2;
-  temp_v4 = FUN_002c5da8(6,1,0);
+  temp_v4 = packNibblesAndByte(6,1,0);
   piVar11 = (int *)(temp_v5 + 0x12ac);
   temp_v8 = piVar11[*piVar11 + 2];
   piVar11[*piVar11 + 2] = temp_v4;
@@ -83,7 +83,7 @@ void FUN_0018b49c(int param_1,int param_2)
   }
   FUN_002bf288(2,0x2f,0xc,temp_v13,temp_v11,0xb);
   temp_v5 = g_titleScene;
-  temp_v4 = FUN_002c5da8(6,7,0);
+  temp_v4 = packNibblesAndByte(6,7,0);
   piVar11 = (int *)(temp_v5 + 0x12ac);
   temp_v8 = piVar11[*piVar11 + 2];
   piVar11[*piVar11 + 2] = temp_v4;

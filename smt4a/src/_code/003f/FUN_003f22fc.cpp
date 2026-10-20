@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0050d71c(int);
+int clearTwoWords(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned int DAT_00573994; /* 0x573994 */
 extern unsigned int DAT_005739a0; /* 0x5739a0 */
 extern unsigned int DAT_005739a4; /* 0x5739a4 */
 
-/* Supplied declaration required: FUN_0050d71c. */
+/* Supplied declaration required: clearTwoWords. */
 
 
 void FUN_003f22fc(int param_1,int param_2)
@@ -43,11 +43,11 @@ void FUN_003f22fc(int param_1,int param_2)
          (temp_v0 = temp_v0 * 0x408 + 0x164 + *(int *)(param_1 + 0x1ffc), temp_v0 != 0)) {
         if (param_2 != 0) {
           if ((param_2 != 1) || ((temp_v1 & DAT_00573994) != 0 || (temp_v2 & DAT_00573990) != 0)) {
-            FUN_0050d71c(temp_v0 + 0x1be);
+            clearTwoWords(temp_v0 + 0x1be);
           }
         }
         else if ((temp_v1 & DAT_00573994) == 0 && (temp_v2 & DAT_00573990) == 0) {
-          FUN_0050d71c(temp_v0 + 0x1be);
+          clearTwoWords(temp_v0 + 0x1be);
         }
       }
     }

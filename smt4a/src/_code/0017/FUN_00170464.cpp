@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_005891d8; /* 0x5891d8 */
-
-
-unsigned char FUN_00170464(void)
-
+/* Returns the byte at 0xA of the global at 0x5891D8. */
+u8 FUN_00170464(void)
 {
-  return (*(unsigned char *)((unsigned char *)&DAT_005891d8 + 0xa));
+    return DAT_005891d8.unk0A;
 }
 
 } /* extern "C" */

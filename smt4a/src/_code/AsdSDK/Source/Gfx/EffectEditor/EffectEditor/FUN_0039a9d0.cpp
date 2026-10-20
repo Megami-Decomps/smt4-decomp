@@ -85,7 +85,7 @@ extern unsigned int FUN_002b41c4(void);
 /* Supplied declaration required: FUN_002b41e4. */
 /* Supplied declaration required: FUN_002e342c. */
 extern int FUN_00323c54(unsigned int, unsigned int);
-extern unsigned int FUN_003385e4(unsigned int);
+extern unsigned int nodeChainCount(unsigned int);
 /* Supplied declaration required: FUN_00350a8c. */
 /* Supplied declaration required: FUN_00399768. */
 /* Supplied declaration required: FUN_003ba614. */
@@ -227,7 +227,7 @@ LAB_0039ab4c:
     FUN_00350a8c();
     DAT_0059dc18 = piVar3[1];
     DAT_0059dbf8 = temp_v2;
-    temp_v1 = FUN_003385e4(DAT_0059dbf4);
+    temp_v1 = nodeChainCount(DAT_0059dbf4);
     if (temp_v1 >= 0x16) {
       DAT_0059dbec = temp_v1 - 0x15;
       DAT_0059e9b4 = 0x14;

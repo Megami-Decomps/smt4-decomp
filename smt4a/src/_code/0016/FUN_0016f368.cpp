@@ -1,20 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0016f33c(unsigned char *);
+void FUN_0016f33c(u8 *object);
+extern u8 DAT_00643380[];
 
-extern unsigned char DAT_00643380; /* 0x643380 */
-
-/* Supplied declaration required: FUN_0016f33c. */
-
-
+/* Calls FUN_0016f33c on the object at 0x643380. */
 void FUN_0016f368(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0016f33c(&DAT_00643380);
-  return;
+    FUN_0016f33c(DAT_00643380);
 }
 
 } /* extern "C" */

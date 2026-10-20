@@ -32,7 +32,7 @@ extern unsigned char LAB_00438e04; /* 0x438e04 */
 /* Supplied declaration required: FUN_002e9768. */
 /* Supplied declaration required: FUN_00438e28. */
 /* Supplied declaration required: FUN_00439394. */
-extern unsigned int *FUN_00502328(unsigned int *, unsigned int *, unsigned int, unsigned int);
+extern unsigned int *validateSetupArgs(unsigned int *, unsigned int *, unsigned int, unsigned int);
 
 
 unsigned int * FUN_00438c34(unsigned int *param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4,
@@ -62,7 +62,7 @@ unsigned int * FUN_00438c34(unsigned int *param_1,unsigned int *param_2,unsigned
   puStack_30 = param_2;
   uStack_2c = param_3;
   temp_v11 = param_4;
-  puVar1 = (unsigned int *)FUN_00502328(param_1,param_2,param_4,param_5);
+  puVar1 = (unsigned int *)validateSetupArgs(param_1,param_2,param_4,param_5);
   if ((int)puVar1 < 0) {
     return puVar1;
   }

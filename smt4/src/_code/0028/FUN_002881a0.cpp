@@ -1,14 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
+typedef struct GameData {
+    /* 0x0000 */ u8 unk0000[0x1E67];
+    /* 0x1E67 */ u8 unk1E67;
+} GameData;
 
+extern struct {
+    u8 unk00[4];
+    GameData *data;
+} g_gameGlobals;
 
-unsigned char FUN_002881a0(void)
-
+u8 FUN_002881a0(void)
 {
-  return *(unsigned char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e67);
+    return g_gameGlobals.data->unk1E67;
 }
 
 } /* extern "C" */

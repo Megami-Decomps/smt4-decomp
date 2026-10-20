@@ -1,39 +1,20 @@
-#include "romwright_types.h"
+#include "shard/SndChannel.h"
 
 extern "C" {
 
-int nw_snd_internal_driver_Voice_SetPriority(int, int);
+int nw_snd_internal_driver_Voice_SetPriority(void *voice, int priority);
 
-typedef struct fn_0037fe6c_arg0 fn_0037fe6c_arg0;
-struct fn_0037fe6c_arg0 {
-    unsigned char pad_0x0[0x90];
-    byte field_0x90; /* +0x90 */
-    unsigned char pad_0x91[0x34];
-    undefined1 field_0xc5; /* +0xc5 */
-    unsigned char pad_0xc6[0x3];
-    byte field_0xc9; /* +0xc9 */
-    byte field_0xca; /* +0xca */
-    unsigned char pad_0xcb[0x69];
-    int field_0x134; /* +0x134 */
-};
-
-/* Supplied declaration required: nw_snd_internal_driver_Voice_SetPriority. */
-
-
-void nw_snd_internal_driver_Channel_NoteOff(fn_0037fe6c_arg0 *param_1)
-
+void nw_snd_internal_driver_Channel_NoteOff(SndChannel *channel)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1->field_0xca == 0) {
-    if (param_1->field_0x90 != 4) {
-      if ((param_1->field_0x134 != 0) && (param_1->field_0xc9 == 0)) {
-        nw_snd_internal_driver_Voice_SetPriority(param_1->field_0x134,1);
-      }
-      param_1->field_0x90 = 4;
+    if (channel->unk0CA == 0) {
+        if (channel->state != 4) {
+            if ((channel->voice != NULL) && (channel->unk0C9 == 0)) {
+                nw_snd_internal_driver_Voice_SetPriority(channel->voice, 1);
+            }
+            channel->state = 4;
+        }
+        channel->unk0C5 = 0;
     }
-    param_1->field_0xc5 = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

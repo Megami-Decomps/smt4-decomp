@@ -21,10 +21,10 @@ extern int DAT_0044dc20; /* 0x44dc20 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_00250d18(unsigned char, int);
+extern int dataTable09Sub3GetRecord(unsigned char, int);
 /* Supplied declaration required: FUN_00283e48. */
 extern int FUN_00295d08(unsigned int);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002a8764(void);
 extern int FUN_002b63ac(void);
@@ -94,7 +94,7 @@ void FUN_00223360(int *param_1)
   } while (temp_v13 < 6);
   temp_v13 = param_1[1];
   temp_v9 = *param_1;
-  temp_v12 = FUN_00250d18(*(unsigned char *)(temp_v4 + 0x76),temp_v13);
+  temp_v12 = dataTable09Sub3GetRecord(*(unsigned char *)(temp_v4 + 0x76),temp_v13);
   temp_v12 = (temp_v9 * temp_v12) / 100;
   if ((temp_v12 < 1) && (temp_v9 != 0)) {
     temp_v12 = 1;
@@ -110,9 +110,9 @@ void FUN_00223360(int *param_1)
   do {
     if (-1 < *(char *)(temp_v3 + temp_v12 + 0x90f0)) {
       temp_v4 = FUN_002a8740();
-      temp_v5 = FUN_0029ebac(temp_v4,1);
-      if (((temp_v5 == 0) && (temp_v5 = FUN_0029ebac(temp_v4,10), temp_v5 == 0)) &&
-         (temp_v5 = FUN_0029ebac(temp_v4,2), temp_v5 == 0)) {
+      temp_v5 = flagWordTestBit(temp_v4,1);
+      if (((temp_v5 == 0) && (temp_v5 = flagWordTestBit(temp_v4,10), temp_v5 == 0)) &&
+         (temp_v5 = flagWordTestBit(temp_v4,2), temp_v5 == 0)) {
         temp_v0 = *(char *)(temp_v3 + temp_v12 + 0x90f0);
         temp_v8 = 0;
         if (*(char *)(temp_v3 + 0x9108) != temp_v0) {
@@ -147,7 +147,7 @@ void FUN_00223360(int *param_1)
           temp_v10 = temp_v10 + 1;
         } while (temp_v10 < 8);
         temp_v6 = (unsigned int)(temp_v9 * (int)(temp_v16 * (float)((unsigned long long)temp_v18 >> 0x20))) / 100;
-        temp_v5 = FUN_00250d18(*(unsigned char *)(temp_v5 + 0x48),temp_v13);
+        temp_v5 = dataTable09Sub3GetRecord(*(unsigned char *)(temp_v5 + 0x48),temp_v13);
         temp_v7 = (temp_v6 * temp_v5) / 100;
         if ((temp_v7 == 0) && (temp_v6 != 0)) {
           temp_v7 = 1;

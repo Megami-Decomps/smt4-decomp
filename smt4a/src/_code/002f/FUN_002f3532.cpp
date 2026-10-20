@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int FUN_0030c2d6(int *, unsigned int *);
+extern int wordRefsEqual_0030c2d6(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f06c. */
 
 
@@ -42,7 +42,7 @@ void FUN_002f3532(int *param_1,int param_2,unsigned int param_3)
   }
   temp_v4[0] = *(unsigned int *)(param_2 + 0x10);
   temp_v3 = temp_v2;
-  temp_v0 = FUN_0030c2d6(&temp_v3,temp_v4);
+  temp_v0 = wordRefsEqual_0030c2d6(&temp_v3,temp_v4);
   if ((temp_v0 != 0) || (temp_v0 = FUN_0030f06c(param_2 + 0x19,param_3,temp_v3 + 0x10), temp_v0 != 0)) {
     temp_v3 = *(int *)(param_2 + 0x10);
   }

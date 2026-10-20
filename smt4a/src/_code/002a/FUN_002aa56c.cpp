@@ -45,7 +45,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 extern int FUN_001654d8(int);
 extern int FUN_001654e4(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -59,7 +59,7 @@ extern unsigned int FUN_00180114(unsigned short);
 extern int FUN_0022e9b8(void);
 extern int FUN_00284140(unsigned int);
 extern int FUN_002a4b28(unsigned short);
-extern unsigned int FUN_002c277c(void);
+extern unsigned int computeCountLimit(void);
 
 
 void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5)
@@ -114,7 +114,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(2,0xffffffff,temp_v9);
-  temp_v3 = FUN_002c277c();
+  temp_v3 = computeCountLimit();
   if (temp_v3 >= 999) {
     temp_v2 = FUN_001834a4(0x1a,0x279);
     FUN_00100388(temp_v9,&LAB_002aaa54);
@@ -123,18 +123,18 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     FUN_00162790(2,0xffff57ff,temp_v9);
   }
   else {
-    temp_v3 = FUN_002c277c();
+    temp_v3 = computeCountLimit();
     if (temp_v3 >= 100) {
       FUN_001835b4(2,0x1a,0x4a,param_1,param_2,0xc9);
       temp_v2 = FUN_001834a4(0x1a,0x253);
-      temp_v6 = FUN_002c277c();
+      temp_v6 = computeCountLimit();
       FUN_00180310(0,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,1,3,0xc9,
                    &LAB_002aaa64,temp_v6);
     }
     else {
       FUN_001835b4(2,0x1a,0x4a,param_1,param_2,0xc9);
       temp_v2 = FUN_001834a4(0x1a,0x4c);
-      temp_v6 = FUN_002c277c();
+      temp_v6 = computeCountLimit();
       FUN_00180310(0,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,1,2,0xc9,
                    &LAB_002aaa64,temp_v6);
     }
@@ -376,7 +376,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     temp_v1 = FUN_001834a4(0x1a,0x81);
   }
   temp_v2 = g_renderCtx;
-  temp_v5 = FUN_00169294(6,1,0);
+  temp_v5 = packNibblesAndByte(6,1,0);
   piVar12 = (int *)(temp_v2 + 0x12b8);
   temp_v7 = piVar12[*piVar12 + 2];
   piVar12[*piVar12 + 2] = temp_v5;
@@ -391,7 +391,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0xdd);
   efctSetSpeed();
   temp_v1 = g_renderCtx;
-  temp_v2 = FUN_00169294(6,7,0);
+  temp_v2 = packNibblesAndByte(6,7,0);
   piVar12 = (int *)(temp_v1 + 0x12b8);
   temp_v4 = piVar12[*piVar12 + 2];
   piVar12[*piVar12 + 2] = temp_v2;

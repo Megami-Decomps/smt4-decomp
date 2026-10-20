@@ -1,19 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0062d88c; /* 0x62d88c */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u32 value;
+} Entry;
 
-extern int FUN_00301454(unsigned char *);
+Entry *FUN_00301454(u8 *table);
+extern u8 DAT_0062d88c[];
 
-
-unsigned int FUN_001153a0(void)
-
+/* Returns the field at 0x34 of the structure FUN_00301454 returns for the global at 0x62D88C. */
+u32 FUN_001153a0(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00301454(&DAT_0062d88c);
-  return *(unsigned int *)(temp_v0 + 0x34);
+    Entry *entry = FUN_00301454(DAT_0062d88c);
+    return entry->value;
 }
 
 } /* extern "C" */

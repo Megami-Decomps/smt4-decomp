@@ -5,7 +5,7 @@ extern "C" {
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 void FUN_002c2358(void);
-void FUN_0040132c(BtlStage *stage);
+void objectOwner3Release(BtlStage *stage);
 s32 jobIsValid(u32 job);
 BtlStageOwnerA *jobGetWork(u32 job);
 
@@ -22,7 +22,7 @@ void btlStageDestroy(u32 job)
             g_btlStage.stage->context = NULL;
         }
         FUN_002c2358();
-        FUN_0040132c(stage);
+        objectOwner3Release(stage);
         stage->state = 0;
         asdMemFree(g_btlStage.stage);
         g_btlStage.stage = NULL;

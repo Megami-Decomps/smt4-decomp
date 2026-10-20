@@ -83,7 +83,7 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: mtx44Copy. */
 extern unsigned int FUN_001a1e28(void);
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 
@@ -173,7 +173,7 @@ LAB_001a49b8:
         if (temp_v1 != '\x01') {
           if (temp_v1 != '\x02') {
             if ((DAT_005c4c30 & 1) == 0) {
-              temp_v3 = FUN_002eba64(&DAT_005c4c30);
+              temp_v3 = __cxa_guard_acquire(&DAT_005c4c30);
               if (temp_v3 != 0) {
                 DAT_0064c084 = temp_v13;
                 DAT_0064c088 = temp_v12;

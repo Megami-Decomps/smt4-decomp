@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_002e1208(...);
-int FUN_004938b8(void);
+int dataTable2BType1Count(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -29,8 +29,8 @@ extern int FUN_0018719c(void);
 extern unsigned int *FUN_00379890(int);
 extern unsigned short FUN_003ae4d0(unsigned int);
 extern int FUN_003b56bc(void);
-extern char *FUN_00493834(unsigned char *, int);
-/* Supplied declaration required: FUN_004938b8. */
+extern char *dataTable2BType1GetEntry(unsigned char *, int);
+/* Supplied declaration required: dataTable2BType1Count. */
 
 
 void FUN_0049105c(int param_1,unsigned int param_2)
@@ -92,13 +92,13 @@ void FUN_0049105c(int param_1,unsigned int param_2)
   }
   temp_v19 = 0;
   puVar3 = temp_v21;
-  FUN_004938b8();
+  dataTable2BType1Count();
   temp_v14 = 0.5f;
   temp_v15 = 512.0f;
   temp_v17 = 0x44200000;
   if (0 < (int)puVar3) {
     do {
-      unaff_r4 = (char *)FUN_00493834(temp_v21,temp_v19);
+      unaff_r4 = (char *)dataTable2BType1GetEntry(temp_v21,temp_v19);
       if ((((int)*unaff_r4 == param_2) &&
           ((*(short *)(unaff_r4 + 4) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 != 0)))) &&
          ((*(short *)(unaff_r4 + 6) == 0 || (temp_v2 = FUN_0018719c(), temp_v2 == 0)))) {
@@ -193,7 +193,7 @@ void FUN_0049105c(int param_1,unsigned int param_2)
       }
       temp_v19 = temp_v19 + 1;
       puVar3 = temp_v21;
-      FUN_004938b8();
+      dataTable2BType1Count();
     } while (temp_v19 < (int)puVar3);
   }
   FUN_002e1208(0xb,0x1bc0,&temp_v18,&temp_v20);

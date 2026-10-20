@@ -13,7 +13,7 @@ typedef struct {
 
 extern int FUN_002e3c36(unsigned int, unsigned int);
 extern int FUN_002e3cb8(short *, unsigned char, int);
-extern unsigned int *FUN_002e3cf8(void);
+extern unsigned int *__aeabi_errno_addr(void);
 
 
 int FUN_002e3c44(short *param_1,unsigned char *param_2,int param_3,int param_4)
@@ -69,7 +69,7 @@ int FUN_002e3c44(short *param_1,unsigned char *param_2,int param_3,int param_4)
       return temp_v3;
     }
   }
-  puVar3 = (unsigned int *)FUN_002e3cf8();
+  puVar3 = (unsigned int *)__aeabi_errno_addr();
   *puVar3 = 4;
   return -1;
 }

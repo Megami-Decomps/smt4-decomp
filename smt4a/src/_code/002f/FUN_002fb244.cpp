@@ -1,19 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010032e(void);
+void FUN_0010032e(void);
 
-/* Supplied declaration required: FUN_0010032e. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 flag;
+} Holder;
 
-
-void FUN_002fb244(int param_1)
-
+/* Runs FUN_0010032e and sets the byte at 4. */
+void FUN_002fb244(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0010032e();
-  *(unsigned char *)(param_1 + 4) = 1;
-  return;
+    FUN_0010032e();
+    object->flag = 1;
 }
 
 } /* extern "C" */

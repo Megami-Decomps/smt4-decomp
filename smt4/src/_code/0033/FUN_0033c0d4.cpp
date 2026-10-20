@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029e974(void);
+int dataTable06Sub1GetRecord(void);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0029e974. */
-extern int FUN_002c09f4(unsigned int);
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
+extern int randNextInRange(unsigned int);
 
 
 int FUN_0033c0d4(int param_1)
@@ -37,7 +37,7 @@ int FUN_0033c0d4(int param_1)
   temp_v3[7] = '\0';
   do {
     temp_v0 = (unsigned int)*(unsigned short *)(param_1 + temp_v1 * 2);
-    if ((temp_v0 != 0) && (FUN_0029e974(), (*(unsigned char *)(temp_v0 + 3) & 0x40) != 0)) {
+    if ((temp_v0 != 0) && (dataTable06Sub1GetRecord(), (*(unsigned char *)(temp_v0 + 3) & 0x40) != 0)) {
       temp_v3[temp_v2] = (char)temp_v1;
       temp_v2 = temp_v2 + 1;
     }
@@ -50,7 +50,7 @@ int FUN_0033c0d4(int param_1)
     temp_v1 = (int)temp_v3[0];
   }
   else {
-    temp_v1 = FUN_002c09f4((temp_v2 - 1) & 0xffff);
+    temp_v1 = randNextInRange((temp_v2 - 1) & 0xffff);
     temp_v1 = (int)temp_v3[temp_v1];
   }
   return temp_v1;

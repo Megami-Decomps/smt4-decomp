@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-
-
-unsigned int FUN_0010f96c(void)
-
+/* Reads word 16 of the 3DS shared-memory page at 0x1ff80000 (the kernel configuration area). */
+u32 FUN_0010f96c(void)
 {
-  return ((unsigned int *)0x1ff80000)[16];
+    return ((u32 *)0x1ff80000)[16];
 }
 
 } /* extern "C" */

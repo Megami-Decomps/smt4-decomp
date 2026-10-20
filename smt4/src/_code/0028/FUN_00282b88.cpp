@@ -1,34 +1,25 @@
-#include "romwright_types.h"
+#include "shard/Sys44de28.h"
 
 extern "C" {
 
-int asdMemFree(void);
+int asdMemFree(void *ptr);
+extern int jobFind(u32 job);
 
-extern unsigned char DAT_0044de28; /* 0x44de28 */
-
-extern int jobFind(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-
-
-unsigned int FUN_00282b88(void)
-
+/* Returns 1 while the worker's job is running (or no stop was requested); otherwise frees the worker and returns 0. */
+u32 FUN_00282b88(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0044de28 + 0x4));
-  if ((*(unsigned int * *)((unsigned char *)&DAT_0044de28 + 0x4)) != (unsigned int *)0x0) {
-    temp_v0 = jobFind(*(*(unsigned int * *)((unsigned char *)&DAT_0044de28 + 0x4)));
-    if ((temp_v0 != 0) || (*(char *)(puVar1 + 1) == '\0')) {
-      return 1;
+    Worker *worker = DAT_0044de28.worker;
+
+    if (DAT_0044de28.worker != NULL) {
+        if ((jobFind(DAT_0044de28.worker->job) != 0) || (worker->stopRequested == 0)) {
+            return 1;
+        }
+        if (DAT_0044de28.worker != NULL) {
+            asdMemFree(DAT_0044de28.worker);
+            DAT_0044de28.worker = NULL;
+        }
     }
-    if ((*(unsigned int * *)((unsigned char *)&DAT_0044de28 + 0x4)) != (unsigned int *)0x0) {
-      asdMemFree();
-      (*(unsigned int * *)((unsigned char *)&DAT_0044de28 + 0x4)) = (unsigned int *)0x0;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

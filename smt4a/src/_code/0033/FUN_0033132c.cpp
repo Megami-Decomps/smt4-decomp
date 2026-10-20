@@ -1,32 +1,22 @@
-#include "romwright_types.h"
+#include "shard/Shard0033.h"
 
 extern "C" {
 
-int FUN_003e4d68(unsigned int);
+extern void *FUN_003e4d68(u32 index);
+extern u32 FUN_00187168(void *entry);
 
-extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_003e4d68. */
-
-
-int FUN_0033132c(void)
-
+/* Counts how many of the 12 slots FUN_00187168 reports as non-zero. */
+s32 FUN_0033132c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  temp_v1 = 0;
-  do {
-    FUN_003e4d68(temp_v1 & 0xffff);
-    temp_v0 = FUN_00187168();
-    if (temp_v0 != 0) {
-      temp_v2 = temp_v2 + 1;
+    s32 count = 0;
+    u32 i;
+
+    for (i = 0; (s32)i < 0xC; i++) {
+        if (FUN_00187168(FUN_003e4d68(i & 0xFFFF)) != 0) {
+            count++;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while ((int)temp_v1 < 0xc);
-  return temp_v2;
+    return count;
 }
 
 } /* extern "C" */

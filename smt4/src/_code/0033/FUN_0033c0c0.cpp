@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b9024(unsigned int);
+int FUN_002b9024(u32 id);
 
-/* Supplied declaration required: FUN_002b9024. */
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 id;
+} Source;
 
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x2A];
+    /* 0x2A */ u16 unk2A;
+} Record;
 
-unsigned short FUN_0033c0c0(int param_1)
-
+u16 FUN_0033c0c0(Source *source)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002b9024(*(unsigned short *)(param_1 + 0x46));
-  return *(unsigned short *)(temp_v0 + 0x2a);
+    Record *record = (Record *)FUN_002b9024(source->id);
+
+    return record->unk2A;
 }
 
 } /* extern "C" */

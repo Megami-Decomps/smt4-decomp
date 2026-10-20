@@ -1,18 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_00589184; /* 0x589184 */
+extern u32 DAT_00589184;
 
-
-unsigned int FUN_0017cdb4(void)
-
+/* Returns the word at 0x589184 and clears it. */
+u32 FUN_0017cdb4(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = DAT_00589184;
-  DAT_00589184 = 0;
-  return temp_v0;
+    u32 value;
+
+    value = DAT_00589184;
+    DAT_00589184 = 0;
+    return value;
 }
 
 } /* extern "C" */

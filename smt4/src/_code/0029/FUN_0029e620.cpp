@@ -1,21 +1,16 @@
-#include "romwright_types.h"
+#include "shard/Sys43e188.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043e188; /* 0x43e188 */
-
-
-unsigned int FUN_0029e620(unsigned int param_1,unsigned char param_2)
-
+u32 FUN_0029e620(u32 value, u8 flag)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x8));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x81) = param_2;
-  *(unsigned int *)(temp_v0 + 0x70) = param_1;
-  *(unsigned int *)(temp_v0 + 0x74) = param_1;
-  *(unsigned char *)(temp_v0 + 0x80) = 1;
-  return 1;
+    Target43e188 *target = DAT_0043e188.target;
+
+    target->unk81 = flag;
+    target->unk70 = value;
+    target->unk74 = value;
+    target->unk80 = 1;
+    return 1;
 }
 
 } /* extern "C" */

@@ -19,7 +19,7 @@ extern unsigned char LAB_001d9294; /* 0x1d9294 */
 extern unsigned char LAB_0021eee8; /* 0x21eee8 */
 extern unsigned int *g_mapEnemy; /* 0x447600 */
 
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 
@@ -87,7 +87,7 @@ void MapEnemy_Register(unsigned int param_1)
     *(unsigned char *)((int)puVar1 + temp_v1 * 0x180 + 0xb2) = 0;
     puVar1[temp_v1 * 0x60 + 0x2e] = 0;
     puVar1[temp_v1 * 0x60 + 0x2f] = 0;
-    temp_v0 = FUN_002c09f4(100);
+    temp_v0 = randNextInRange(100);
     puVar1[temp_v1 * 0x60 + 0x30] = temp_v0 + 0x1e;
     puVar1[temp_v1 * 0x60 + 0x31] = 0;
     puVar1[temp_v1 * 0x60 + 0x68] = 0;

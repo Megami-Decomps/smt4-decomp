@@ -1,31 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001d1a34(int, unsigned int);
+void FUN_001d1a34(u32 voice, u32 value);
 
-/* Supplied declaration required: FUN_001d1a34. */
+typedef struct Group {
+    /* 0x00 */ u32 voices[2];
+    /* 0x08 */ s32 count;
+    /* 0x0C */ u8 unk0C[0x17];
+    /* 0x23 */ u8 value;
+} Group;
 
-
-void FUN_001cbd00(int param_1,unsigned int param_2)
-
+/* Calls FUN_001d1a34 with `value` for each of the group's voices that exists, then stores `value` at 0x23. */
+void FUN_001cbd00(Group *group, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  if (temp_v1 < *(int *)(param_1 + 8)) {
-    do {
-      temp_v0 = *(int *)(param_1 + temp_v1 * 4);
-      if (temp_v0 != 0) {
-        FUN_001d1a34(temp_v0,param_2);
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(int *)(param_1 + 8));
-  }
-  *(char *)(param_1 + 0x23) = (char)param_2;
-  return;
+    s32 i;
+
+    i = 0;
+    if (i < group->count) {
+        do {
+            if (group->voices[i] != 0) {
+                FUN_001d1a34(group->voices[i], value);
+            }
+            i = i + 1;
+        } while (i < group->count);
+    }
+    group->value = (u8)value;
 }
 
 } /* extern "C" */

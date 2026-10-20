@@ -9,7 +9,7 @@ int FUN_001b57a8(unsigned int *, int);
 int FUN_001d25ec(unsigned int *);
 int FUN_00429178(int *, int, int, int *);
 int FUN_005000c4(int *, unsigned char [4]);
-int FUN_005001f8(unsigned char [4], unsigned int, unsigned int);
+int table30GetEntryB(unsigned char [4], unsigned int, unsigned int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern unsigned int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001d25ec. */
 /* Supplied declaration required: FUN_00429178. */
 /* Supplied declaration required: FUN_005000c4. */
-/* Supplied declaration required: FUN_005001f8. */
+/* Supplied declaration required: table30GetEntryB. */
 
 
 unsigned char * FUN_0047484c(unsigned char *param_1,int param_2)
@@ -73,7 +73,7 @@ unsigned char * FUN_0047484c(unsigned char *param_1,int param_2)
   puVar2[1] = temp_v2;
   temp_v1 = g_aocMain;
   FUN_00161a10();
-  FUN_005001f8(temp_v3,*(unsigned int *)(temp_v1 + 0x5a8),*(unsigned int *)(param_2 + 0x14));
+  table30GetEntryB(temp_v3,*(unsigned int *)(temp_v1 + 0x5a8),*(unsigned int *)(param_2 + 0x14));
   FUN_005000c4(&temp_v7,temp_v3);
   temp_v5 = temp_v7;
   uStack_5c = uStack_38;

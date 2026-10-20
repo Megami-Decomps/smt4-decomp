@@ -1,20 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int g_cecProcess; /* 0x43de68 */
+typedef struct Slot {
+    /* 0x00 */ u8 unk00[0x4C];
+} Slot;
 
+typedef struct CecProcess {
+    /* 0x00 */ u8 unk00[0x80];
+    /* 0x80 */ Slot slots[0xC];
+} CecProcess;
 
-int FUN_002cd648(unsigned int param_1)
+extern CecProcess *g_cecProcess; /* 0x43de68 */
 
+/* Address of slot `index` (0-11, 0x4C bytes each) of the CEC process, or 0. */
+int FUN_002cd648(u32 index)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if ((param_1 < 0xc) && (g_cecProcess != 0)) {
-    temp_v0 = g_cecProcess + param_1 * 0x4c + 0x80;
-  }
-  return temp_v0;
+    int slot = 0;
+
+    if ((index < 0xc) && (g_cecProcess != NULL)) {
+        slot = (int)&g_cecProcess->slots[index];
+    }
+    return slot;
 }
 
 } /* extern "C" */

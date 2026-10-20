@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002bfab0(unsigned int, unsigned int);
+int surfaceCopy(unsigned int, unsigned int);
 int FUN_002bfadc(int, int);
 int FUN_002c39a4(unsigned int);
 
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_002bfab0. */
+/* Supplied declaration required: surfaceCopy. */
 /* Supplied declaration required: FUN_002bfadc. */
 extern int FUN_002bff10(unsigned int);
 extern int jobGetWork(void);
@@ -60,7 +60,7 @@ unsigned int FUN_0010854c(void)
       piVar5 = (int *)(unaff_r7 + 1000);
       piVar6 = (int *)(unaff_r8 + 0x3e4);
       do {
-        FUN_002bfab0(*(unsigned int *)(temp_v1 + 0xfdc),*(unsigned int *)(temp_v1 + 0xfe4));
+        surfaceCopy(*(unsigned int *)(temp_v1 + 0xfdc),*(unsigned int *)(temp_v1 + 0xfe4));
         *(int *)(*piVar6 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
         *(int *)(*piVar6 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;
         while( 1 ) {
@@ -72,12 +72,12 @@ unsigned int FUN_0010854c(void)
           }
           if (temp_v2 == 0) break;
           if (temp_v2 != 1) {
-            FUN_002bfab0(*(unsigned int *)(temp_v1 + 0xfe8),*(unsigned int *)(temp_v1 + 0xfe8));
+            surfaceCopy(*(unsigned int *)(temp_v1 + 0xfe8),*(unsigned int *)(temp_v1 + 0xfe8));
             *(int *)(*piVar5 + 0x14) = *(int *)(*piVar5 + 0x14) >> 1;
             *(int *)(*piVar5 + 0x18) = *(int *)(*piVar5 + 0x18) >> 1;
           }
           else {
-            FUN_002bfab0(*(unsigned int *)(temp_v1 + 0xfe4),*(unsigned int *)(temp_v1 + 0xfe8));
+            surfaceCopy(*(unsigned int *)(temp_v1 + 0xfe4),*(unsigned int *)(temp_v1 + 0xfe8));
             *(int *)(*piVar5 + 0x14) = *(int *)(*piVar6 + 0x14) >> 1;
             *(int *)(*piVar5 + 0x18) = *(int *)(*piVar6 + 0x18) >> 1;
           }
@@ -89,7 +89,7 @@ unsigned int FUN_0010854c(void)
     temp_v2 = 0;
     if (temp_v2 < temp_v3) {
       do {
-        FUN_002bfab0(*(unsigned int *)(temp_v1 + 0xfdc),*(unsigned int *)(temp_v1 + 0xfdc));
+        surfaceCopy(*(unsigned int *)(temp_v1 + 0xfdc),*(unsigned int *)(temp_v1 + 0xfdc));
         temp_v2 = temp_v2 + 1;
         *(int *)(*piVar7 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
         *(int *)(*piVar7 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;

@@ -1,46 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bee58(int, int);
-int memClear(int, int);
-int rt_memcpy(int, int, int);
+int FUN_002bee58(void *block, int arg);
+int memClear(void *ptr, int size);
+int rt_memcpy(void *dst, u8 *src, int size);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ u8 unk10;
+    /* 0x11 */ u8 unk11[0x23];
+    /* 0x34 */ u8 block[0x8C];
+    /* 0xC0 */ u8 text[0x80];
+} Obj;
 
-extern int DAT_0043e140; /* 0x43e140 */
+extern Obj *DAT_0043e140;
 
-/* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_0026374c(int param_1)
-
+/* Starts a text entry: stores the UTF-16 string `text` (up to 0x80 bytes, ending at the first zero halfword) in the object. */
+void FUN_0026374c(u8 *text)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0043e140;
-  *(unsigned int *)(DAT_0043e140 + 8) = 1;
-  *(unsigned char *)(temp_v0 + 0x10) = 1;
-  FUN_002bee58(temp_v0 + 0x34,0);
-  memClear(temp_v0 + 0xc0,0x80);
-  temp_v1 = 0;
-  do {
-    if (*(char *)(param_1 + temp_v1) == '\0') break;
-    if (*(char *)(param_1 + temp_v1 + 1) == '\0') {
-      temp_v1 = temp_v1 + 1;
-      break;
-    }
-    temp_v1 = temp_v1 + 2;
-  } while (temp_v1 < 0x80);
-  rt_memcpy(temp_v0 + 0xc0,param_1,temp_v1);
-  return;
+    Obj *obj = DAT_0043e140;
+    int length;
+
+    obj->unk08 = 1;
+    obj->unk10 = 1;
+    FUN_002bee58(obj->block, 0);
+    memClear(obj->text, 0x80);
+    length = 0;
+    do {
+        if (text[length] == 0) break;
+        if (text[length + 1] == 0) {
+            length = length + 1;
+            break;
+        }
+        length = length + 2;
+    } while (length < 0x80);
+    rt_memcpy(obj->text, text, length);
 }
 
 } /* extern "C" */

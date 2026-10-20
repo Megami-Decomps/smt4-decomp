@@ -1,18 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int nw_snd_internal_BankFile_VelocityRegion_GetRegionParameter(int param_1)
-
+int nw_snd_internal_BankFile_VelocityRegion_GetRegionParameter(int region)
 {
-  if (*(int *)(param_1 + 4) != 0x21f) {
-    param_1 = 0;
-  }
-  else {
-    param_1 = param_1 + 8;
-  }
-  return param_1;
+    if (*(int *)(region + 4) != 0x21f) {
+        region = 0;
+    } else {
+        region = region + 8;
+    }
+    return region;
 }
 
 } /* extern "C" */

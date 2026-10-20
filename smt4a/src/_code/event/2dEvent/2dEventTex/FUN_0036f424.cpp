@@ -10,7 +10,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int FUN_00165058(...);
 int sysMemClear(...);
-int FUN_0037d024(...);
+int jobSetWork31(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ extern unsigned int *g_eventTex; /* 0x57f3b0 */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00165058. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0037d024. */
+/* Supplied declaration required: jobSetWork31. */
 
 
 unsigned int FUN_0036f424(void)
@@ -68,7 +68,7 @@ unsigned int FUN_0036f424(void)
 LAB_0036f4fc:
   temp_v1 = jobIsValid(*(unsigned int *)(temp_v6 * 4 + 0x5e1f3c));
   if (temp_v1 != 0) {
-    FUN_0037d024(*(unsigned int *)(temp_v6 * 4 + 0x5e1f3c),1);
+    jobSetWork31(*(unsigned int *)(temp_v6 * 4 + 0x5e1f3c),1);
     FUN_0014bdb4(*g_eventTex,*(unsigned int *)(temp_v6 * 4 + 0x5e1f3c));
     puVar2 = g_eventTex;
     temp_v5 = *(unsigned int *)(temp_v6 * 4 + 0x5e1f3c);

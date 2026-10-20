@@ -1,15 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_0017f9f4(unsigned int *param_1,unsigned int *param_2,unsigned int *param_3)
-
+u32 FUN_0017f9f4(u32 *a, u32 *b, u32 *c)
 {
-  *param_1 = 1;
-  *param_2 = 1;
-  *param_3 = 0;
-  return 0;
+    *a = 1;
+    *b = 1;
+    *c = 0;
+    return 0;
 }
 
 } /* extern "C" */

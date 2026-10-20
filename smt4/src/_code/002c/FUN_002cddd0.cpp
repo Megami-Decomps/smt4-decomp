@@ -1,47 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00269dc8(void);
-int FUN_0028dc68(int);
+int FUN_0028dc68(int a);
 int FUN_0028dc98(...);
 int FUN_00296934(void);
-int FUN_002b8838(int);
-int FUN_002fec80(int);
-
-/* Supplied declaration required: FUN_00269dc8. */
+int FUN_002b8838(int a);
+int FUN_002fec80(int a);
 extern int FUN_002893d8(void);
-/* Supplied declaration required: FUN_0028dc68. */
-/* Supplied declaration required: FUN_0028dc98. */
-/* Supplied declaration required: FUN_00296934. */
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: FUN_002b8838. */
+extern u32 scrGetArg(void);
 extern int FUN_002fec60(void);
-/* Supplied declaration required: FUN_002fec80. */
 
-
-unsigned char FUN_002cddd0(void)
-
+u8 FUN_002cddd0(void)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = FUN_002893d8();
-  if (temp_v1 == 0) {
-    FUN_0028dc98(1);
-    FUN_00269dc8();
-    FUN_002fec80(temp_v0);
-  }
-  temp_v1 = FUN_002fec60();
-  if (temp_v1 != 0) {
-    FUN_00296934();
-    FUN_002b8838(0x90);
-    FUN_0028dc98(0xffffffff);
-    FUN_0028dc68(0);
-  }
-  return temp_v1 != 0;
+    u16 arg;
+    int done;
+
+    arg = scrGetArg();
+    if (FUN_002893d8() == 0) {
+        FUN_0028dc98(1);
+        FUN_00269dc8();
+        FUN_002fec80(arg);
+    }
+    done = FUN_002fec60();
+    if (done != 0) {
+        FUN_00296934();
+        FUN_002b8838(0x90);
+        FUN_0028dc98(0xffffffff);
+        FUN_0028dc68(0);
+    }
+    return done != 0;
 }
 
 } /* extern "C" */

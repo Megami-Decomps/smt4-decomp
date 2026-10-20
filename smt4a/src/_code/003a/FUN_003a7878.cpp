@@ -1,18 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard003A.h"
 
 extern "C" {
 
-int FUN_004d9fe4(void);
+extern void optionsResetIfNoFlag(void);
 
-/* Supplied declaration required: FUN_004d9fe4. */
-
-
-unsigned int FUN_003a7878(void)
-
+/* Script command: runs optionsResetIfNoFlag. */
+u32 FUN_003a7878(void)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_004d9fe4();
-  return 1;
+    optionsResetIfNoFlag();
+    return 1;
 }
 
 } /* extern "C" */

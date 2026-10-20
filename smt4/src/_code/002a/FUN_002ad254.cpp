@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Sys471a70.h"
 
 extern "C" {
 
-extern signed char DAT_00471a70; /* 0x471a70 */
-
-
-int FUN_002ad254(void)
-
+s32 FUN_002ad254(void)
 {
-  return (int)DAT_00471a70;
+    return DAT_00471a70.unk00;
 }
 
 } /* extern "C" */

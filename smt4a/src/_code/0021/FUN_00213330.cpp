@@ -99,7 +99,7 @@ static float romwright_fabs_4(float value)
 extern unsigned int FUN_0028324c(unsigned int, float, unsigned int);
 /* Supplied declaration required: FUN_00283328. */
 /* Supplied declaration required: FUN_00285834. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_0034a16c. */
 /* Supplied declaration required: FUN_0035cc80. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -246,7 +246,7 @@ void FUN_00213330(float *param_1)
         temp_v30 = (float)((unsigned long long)temp_v27 >> 0x20);
         temp_v29 = temp_v22;
         temp_v31 = temp_v22;
-        if (((DAT_005c4c2c & 1) == 0) && (temp_v5 = FUN_002eba64(&DAT_005c4c2c), temp_v5 != 0)) {
+        if (((DAT_005c4c2c & 1) == 0) && (temp_v5 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v5 != 0)) {
           DAT_0064c054 = (unsigned int)((unsigned long long)temp_v27 >> 0x20);
           DAT_0064c058 = temp_v22;
           DAT_0064c05c = temp_v22;

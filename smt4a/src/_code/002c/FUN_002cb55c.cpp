@@ -32,7 +32,7 @@ extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: FUN_003dfad4. */
-extern int FUN_003dfd5c(void);
+extern int countUnlockedSlots(void);
 /* Supplied declaration required: FUN_00480a00. */
 extern int FUN_004ccbf0(unsigned short);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -98,7 +98,7 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
   *(unsigned int *)(param_1 + 0x23) = *(unsigned int *)(param_2 + 2);
   *(unsigned int *)(param_1 + 0x25) = *(unsigned int *)(param_2 + 4);
   param_1[0x27] = param_2[6];
-  temp_v4 = FUN_003dfd5c();
+  temp_v4 = countUnlockedSlots();
   rt_memcpy_w(param_1 + 0x28,param_2 + 0x1a,temp_v4 << 1);
   temp_v5 = FUN_0015687c();
   FUN_002e342c(param_1 + 0x2d2,temp_v5);

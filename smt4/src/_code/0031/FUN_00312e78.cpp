@@ -10,7 +10,7 @@ extern unsigned int FUN_002451ac(unsigned int, unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned short *dataTableGetEntries(void);
 
@@ -48,7 +48,7 @@ unsigned int FUN_00312e78(void)
       puVar3 = puVar3 + 2;
     } while (temp_v2 != 0);
   }
-  temp_v3 = FUN_002c09f4((temp_v3 - 1U) & 0xffff);
+  temp_v3 = randNextInRange((temp_v3 - 1U) & 0xffff);
   scrSetResult(temp_v4[temp_v3]);
   return 1;
 }

@@ -11,7 +11,7 @@ int FUN_0018d9f0(...);
 int FUN_001aa528(...);
 int FUN_001acca0(void);
 int FUN_001b0758(...);
-int FUN_001b0e10(int *, unsigned int, unsigned int);
+int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 int FUN_001b4288(int *, int);
 int FUN_001b431c(int *, int);
 int FUN_001b451c(int *, int);
@@ -63,7 +63,7 @@ extern int FUN_0019a37c(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001acca0. */
 extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b0758. */
-/* Supplied declaration required: FUN_001b0e10. */
+/* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: FUN_001b4288. */
 /* Supplied declaration required: FUN_001b431c. */
 /* Supplied declaration required: FUN_001b451c. */
@@ -206,7 +206,7 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
         temp_v23 = 0;
         temp_v25 = 0;
         temp_v17 = temp_v6;
-        FUN_001b0e10(piVar15,temp_v1,temp_v3);
+        nw_gfx_SceneBuilder_CreateObject(piVar15,temp_v1,temp_v3);
         if (piVar15 != (int *)0x0) {
           piVar8 = (int *)(**(romwright_code **)(*piVar15 + 8))(piVar15);
           do {

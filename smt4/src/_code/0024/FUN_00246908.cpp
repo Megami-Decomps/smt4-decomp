@@ -1,19 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Node {
+    /* 0x00 */ u8 unk00[0xAC];
+    /* 0xAC */ struct Node *next;
+} Node;
 
-int FUN_00246908(int param_1)
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x8C];
+    /* 0x8C */ Node *head;
+} Owner;
 
+/* Number of nodes in the owner's list. */
+int FUN_00246908(Owner *owner)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  for (temp_v1 = *(int *)(param_1 + 0x8c); temp_v1 != 0; temp_v1 = *(int *)(temp_v1 + 0xac)) {
-    temp_v0 = temp_v0 + 1;
-  }
-  return temp_v0;
+    int count = 0;
+    Node *node;
+
+    for (node = owner->head; node != NULL; node = node->next) {
+        count++;
+    }
+    return count;
 }
 
 } /* extern "C" */

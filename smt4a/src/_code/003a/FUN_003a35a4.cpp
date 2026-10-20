@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0048d248(int, int);
-int FUN_004915d4(int, int, int, int);
+int pair20638Set(int, int, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,10 +15,10 @@ typedef struct {
 extern int DAT_00587f28; /* 0x587f28 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-extern int FUN_001861ec(unsigned char);
-extern unsigned char *FUN_00398048(unsigned int);
+extern int dataTableGetEntry49(unsigned char);
+extern unsigned char *gameFlagsGetWord1590Ptr(unsigned int);
 /* Supplied declaration required: FUN_0048d248. */
-/* Supplied declaration required: FUN_004915d4. */
+/* Supplied declaration required: pair20638Set. */
 
 
 void FUN_003a35a4(void)
@@ -31,18 +31,18 @@ void FUN_003a35a4(void)
   unsigned char *puVar4;
   int temp_v3;
   
-  puVar4 = (unsigned char *)FUN_00398048(0);
+  puVar4 = (unsigned char *)gameFlagsGetWord1590Ptr(0);
   if (puVar4 == (unsigned char *)0x0) {
     return;
   }
-  temp_v3 = FUN_001861ec(*puVar4);
+  temp_v3 = dataTableGetEntry49(*puVar4);
   temp_v2 = DAT_00587f28;
   temp_v0 = *(short *)(temp_v3 + 0x30);
   temp_v1 = *(short *)(temp_v3 + 0x32);
   *(int *)(DAT_00587f28 + 0x30) = (int)*(short *)(temp_v3 + 0x2e);
   *(int *)(temp_v2 + 0x34) = (int)temp_v0;
   *(int *)(temp_v2 + 0x38) = (int)temp_v1;
-  FUN_004915d4(temp_v2 + 0x68,(int)*(short *)(temp_v3 + 0x32),(int)*(short *)(temp_v3 + 0x34),
+  pair20638Set(temp_v2 + 0x68,(int)*(short *)(temp_v3 + 0x32),(int)*(short *)(temp_v3 + 0x34),
                (int)*(short *)(temp_v3 + 0x36));
   temp_v0 = *(short *)(temp_v3 + 0x2e);
   if (*(int *)(temp_v2 + 0x28) != (int)temp_v0) {

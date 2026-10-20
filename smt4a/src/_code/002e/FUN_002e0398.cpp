@@ -11,8 +11,8 @@ int FUN_0020214c(void);
 int FUN_0024b0c0(unsigned int, int);
 int FUN_00275bc8(int, unsigned char *);
 int FUN_00275f44(unsigned int, int, unsigned int);
-int FUN_0046be60(unsigned char *, unsigned int, int);
-int FUN_0046bed0(unsigned char *, unsigned int, int);
+int aocDrawText8(unsigned char *, unsigned int, int);
+int aocDrawText7(unsigned char *, unsigned int, int);
 
 extern unsigned char LAB_002e0510; /* 0x2e0510 */
 extern unsigned char LAB_002e0528; /* 0x2e0528 */
@@ -29,8 +29,8 @@ extern signed char DAT_005f1c72; /* 0x5f1c72 */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_00357bc8(unsigned int, int);
-/* Supplied declaration required: FUN_0046be60. */
-/* Supplied declaration required: FUN_0046bed0. */
+/* Supplied declaration required: aocDrawText8. */
+/* Supplied declaration required: aocDrawText7. */
 extern int FUN_0046e08c(unsigned char *, unsigned int, unsigned int);
 
 
@@ -56,10 +56,10 @@ unsigned int FUN_002e0398(void)
   temp_v1 = FUN_0046e08c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
   if (temp_v1 != 0) {
     puVar3 = g_aocSystem;
-    FUN_0046bed0(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
+    aocDrawText7(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
     *(unsigned char **)(temp_v0 + 0x90) = puVar3;
     puVar3 = g_aocSystem;
-    FUN_0046be60(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
+    aocDrawText8(g_aocSystem,*(unsigned int *)(temp_v0 + 0x68),0);
     *(unsigned char **)(temp_v0 + 0x94) = puVar3;
     if (*(int *)(temp_v0 + 0x90) != 0) {
       if (puVar3 != (unsigned char *)0x0) goto LAB_002e0474;

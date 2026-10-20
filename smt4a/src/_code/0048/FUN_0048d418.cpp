@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004938b8(void);
+int dataTable2BType1Count(void);
 
 /* stack frame of param_2: 16 slot(s), 64 byte(s) */
 typedef struct {
@@ -31,8 +31,8 @@ extern int DAT_005f1c5c; /* 0x5f1c5c */
 
 extern int FUN_0018719c(void);
 extern int FUN_004083a8(char, char);
-extern char *FUN_00493834(unsigned char *, int);
-/* Supplied declaration required: FUN_004938b8. */
+extern char *dataTable2BType1GetEntry(unsigned char *, int);
+/* Supplied declaration required: dataTable2BType1Count. */
 
 
 void FUN_0048d418(int param_1,int param_2)
@@ -88,10 +88,10 @@ void FUN_0048d418(int param_1,int param_2)
   temp_v7[0x1e] = 0;
   temp_v7[0x1f] = 0;
   puVar4 = temp_v8;
-  FUN_004938b8();
+  dataTable2BType1Count();
   if (0 < (int)puVar4) {
     do {
-      pcVar5 = (char *)FUN_00493834(temp_v8,temp_v5);
+      pcVar5 = (char *)dataTable2BType1GetEntry(temp_v8,temp_v5);
       if ((*pcVar5 == param_2) &&
          (((temp_v2 = 0, param_2 != 0x17 ||
            ((((DAT_005f1600 != 1 && DAT_005f1600 != 2 && (DAT_005f1600 != 3 && DAT_005f1600 != 6))
@@ -126,7 +126,7 @@ void FUN_0048d418(int param_1,int param_2)
       }
       temp_v5 = temp_v5 + 1;
       puVar4 = temp_v8;
-      FUN_004938b8();
+      dataTable2BType1Count();
     } while (temp_v5 < (int)puVar4);
     temp_v5 = 0;
     if (temp_v5 < temp_v6 - 1) {

@@ -10,7 +10,7 @@ int FUN_0049339c(int, unsigned int, int, int, unsigned int);
 int FUN_0049368c(int, int, int, int, unsigned int, int);
 int FUN_00494574(int, unsigned int);
 int FUN_00494d68(int, int, int, int);
-int FUN_004d0a8c(unsigned int, unsigned int, unsigned int);
+int size40Set(unsigned int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00494d68. */
 extern int FUN_004cfe4c(int);
 extern int FUN_004d0040(int);
-/* Supplied declaration required: FUN_004d0a8c. */
+/* Supplied declaration required: size40Set. */
 
 
 void FUN_00497874(int param_1,unsigned int param_2)
@@ -109,7 +109,7 @@ void FUN_00497874(int param_1,unsigned int param_2)
   }
   temp_v4 = FUN_0031d174(temp_v10);
   temp_v5 = FUN_002a482c(temp_v10);
-  FUN_004d0a8c(*(unsigned int *)(param_1 + 0xb3c),temp_v5,temp_v4);
+  size40Set(*(unsigned int *)(param_1 + 0xb3c),temp_v5,temp_v4);
                     /* WARNING: Could not recover jumptable at 0x00497a60. Too many branches */
                     /* WARNING: Treating indirect jump as call */
   (**(romwright_code **)(**(int **)(param_1 + 0xb3c) + 0x10))(*(int **)(param_1 + 0xb3c),temp_v9);

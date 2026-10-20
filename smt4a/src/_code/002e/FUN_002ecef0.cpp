@@ -8,8 +8,8 @@ int FUN_0010d300(void);
 int FUN_00120d60(void);
 int FUN_002e75fa(void);
 int FUN_002ea4bc(void);
-int FUN_003104fc(unsigned char *);
-int FUN_00310506(unsigned char *);
+int lockedLeave(unsigned char *);
+int lockedEnter(unsigned char *);
 
 extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
@@ -18,8 +18,8 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 /* Supplied declaration required: FUN_002e75fa. */
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002ea4bc. */
-/* Supplied declaration required: FUN_003104fc. */
-/* Supplied declaration required: FUN_00310506. */
+/* Supplied declaration required: lockedLeave. */
+/* Supplied declaration required: lockedEnter. */
 
 
 void FUN_002ecef0(void)
@@ -28,7 +28,7 @@ void FUN_002ecef0(void)
 /* irregular: 6 native warning(s); review required */
   int temp_v0;
   
-  FUN_00310506(&DAT_0062e6a0);
+  lockedEnter(&DAT_0062e6a0);
   FUN_0010d300();
   temp_v0 = FUN_002ea4bc();
   if (temp_v0 != 0) {
@@ -41,7 +41,7 @@ void FUN_002ecef0(void)
       FUN_00120d60();
     }
   }
-  FUN_003104fc(&DAT_0062e6a0);
+  lockedLeave(&DAT_0062e6a0);
   return;
 }
 

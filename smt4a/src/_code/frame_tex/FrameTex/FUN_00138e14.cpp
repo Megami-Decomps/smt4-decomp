@@ -55,7 +55,7 @@ extern int FUN_0013d030(...); /* 0x13d030 */
 extern int FUN_0013d0f0(...); /* 0x13d0f0 */
 extern int FUN_0013d2dc(...); /* 0x13d2dc */
 extern int FUN_0013db18(...); /* 0x13db18 */
-extern int FUN_0013dbb4(...); /* 0x13dbb4 */
+extern int jobRenderOnce(...); /* 0x13dbb4 */
 extern int FUN_0013dc70(...); /* 0x13dc70 */
 extern int FUN_0013dd18(...); /* 0x13dd18 */
 extern int FUN_0013e7c4(...); /* 0x13e7c4 */
@@ -138,7 +138,7 @@ void FUN_00138e14(void)
   taskCreateDraw(&LAB_00139270,0x6e,0,0,FUN_0013c764,0,DAT_0057f65c,*puVar2);
   taskCreateDraw(&LAB_0013927c,0xd0,0,0,FUN_0013c7dc,0,DAT_0057f65c,*puVar2);
   taskCreateDraw(&LAB_00139288,0x7b,0,0,FUN_0013db18,0,DAT_0057f65c,*puVar2);
-  taskCreateDraw(&LAB_00139294,0xd7,0,0,FUN_0013dbb4,0,DAT_0057f65c,*puVar2);
+  taskCreateDraw(&LAB_00139294,0xd7,0,0,jobRenderOnce,0,DAT_0057f65c,*puVar2);
   taskCreateDraw(&LAB_001392a0,0x65,0,0,FUN_0013d0f0,0,DAT_0057f65c,*puVar2);
   taskCreateDraw(&LAB_001392ac,0xcc,0,0,FUN_0013d2dc,0,DAT_0057f65c,*puVar2);
   taskCreateDraw(&LAB_001392b8,0x7a,0,0,FUN_0013ee80,0,DAT_0057f65c,*puVar2);

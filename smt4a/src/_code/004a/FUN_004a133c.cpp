@@ -20,7 +20,7 @@ extern int FUN_004a2ee0(...); /* 0x4a2ee0 */
 extern int FUN_004a2f8c(...); /* 0x4a2f8c */
 extern int FUN_004a3154(...); /* 0x4a3154 */
 extern int FUN_004a35e4(...); /* 0x4a35e4 */
-extern int FUN_004a374c(...); /* 0x4a374c */
+extern int screen4AFinish(...); /* 0x4a374c */
 extern int FUN_004a38bc(...); /* 0x4a38bc */
 extern int FUN_004a39bc(...); /* 0x4a39bc */
 extern int FUN_004a40f4(...); /* 0x4a40f4 */
@@ -59,7 +59,7 @@ void FUN_004a133c(int param_1)
   *(unsigned int *)(param_1 + 0xa89c) = 0;
   *(romwright_code **)(param_1 + 0xa8a0) = FUN_004a18ec;
   *(unsigned int *)(param_1 + 0xa8a4) = 0;
-  *(romwright_code **)(param_1 + 0xa8a8) = FUN_004a374c;
+  *(romwright_code **)(param_1 + 0xa8a8) = screen4AFinish;
   *(unsigned int *)(param_1 + 0xa8ac) = 0;
   *(romwright_code **)(param_1 + 0xa8b0) = FUN_004a40f4;
   *(unsigned int *)(param_1 + 0xa8b4) = 0;

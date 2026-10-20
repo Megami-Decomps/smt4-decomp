@@ -1,41 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int FUN_00168980(void);
-int asdMemFree(unsigned int *);
-int FUN_0035b304(void);
-int FUN_0037b450(void);
-int FUN_0049274c(unsigned int *);
-int FUN_00493154(void);
+void FUN_00168980(void);
+void FUN_0035b304(void);
+void FUN_0037b450(void);
+void texOwner1480Free(u32 *member);
+void FUN_00493154(void);
+void asdMemFree(void *memory);
+s32 jobStop(u32 job, s32 flag);
 
-extern unsigned int *DAT_00587f28; /* 0x587f28 */
+typedef struct Scene {
+    /* 0x00 */ u32 job;
+    /* 0x04 */ u8 unk04[0x64];
+    /* 0x68 */ u32 member68[1];
+} Scene;
+extern Scene *DAT_00587f28;
 
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_00168980. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0035b304. */
-/* Supplied declaration required: FUN_0037b450. */
-/* Supplied declaration required: FUN_0049274c. */
-/* Supplied declaration required: FUN_00493154. */
-
-
+/* Shuts the scene down: runs the four clean-up calls, then stops its job, destroys its member and frees it. */
 void FUN_00212170(void)
-
 {
-/* irregular: 7 native warning(s); review required */
-  FUN_00168980();
-  FUN_00493154();
-  FUN_0035b304();
-  FUN_0037b450();
-  if (DAT_00587f28 != (unsigned int *)0x0) {
-    jobStop(*DAT_00587f28,0);
-    FUN_0049274c(DAT_00587f28 + 0x1a);
-    asdMemFree(DAT_00587f28);
-    DAT_00587f28 = (unsigned int *)0x0;
-  }
-  return;
+    FUN_00168980();
+    FUN_00493154();
+    FUN_0035b304();
+    FUN_0037b450();
+    if (DAT_00587f28 != NULL) {
+        jobStop(DAT_00587f28->job, 0);
+        texOwner1480Free(DAT_00587f28->member68);
+        asdMemFree(DAT_00587f28);
+        DAT_00587f28 = NULL;
+    }
 }
 
 } /* extern "C" */

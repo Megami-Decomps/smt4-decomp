@@ -1,16 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b4e64` (_code @ 0x2b4e64, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct ObjFUN_002b4e64 {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s32 id;
+    /* 0x38 */ u8 sub[4];
+} ObjFUN_002b4e64;
 
-void FUN_002b4e64(int param_1)
+/* A debug hook armlink removed (the jump to it became a nop). */
+__declspec(noreturn) __weak void FUN_002b4e64_hook(void *sub);
 
+void FUN_002b4e64(ObjFUN_002b4e64 *obj)
 {
-  *(unsigned int *)(param_1 + 0x34) = 0xffffffff;
-  *(unsigned int *)(param_1 + 0x54) = 0xffffffff;
-  return;
+    obj->id = -1;
+    FUN_002b4e64_hook(obj->sub);
 }
 
 } /* extern "C" */

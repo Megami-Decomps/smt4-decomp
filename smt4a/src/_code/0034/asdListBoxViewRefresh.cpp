@@ -1,13 +1,11 @@
-#include "romwright_types.h"
+#include "shard/Shard0034.h"
 
 extern "C" {
 
-
-void asdListBoxViewRefresh(int param_1)
-
+/* Advances the view's cursor. */
+void asdListBoxViewRefresh(ViewCursor *view)
 {
-  *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-  return;
+    view->cursor++;
 }
 
 } /* extern "C" */

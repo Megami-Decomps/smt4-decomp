@@ -1,17 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_004e8568; /* 0x4e8568 */
+extern u8 DAT_004e8568;
+extern void nn_snd_CTR_VoiceManager_FreeVoice(u8 *manager, u32 voice);
 
-extern void nn_snd_CTR_VoiceManager_FreeVoice(unsigned int, unsigned int);
-
-
-void FUN_002bd430(unsigned int param_1)
-
+void FUN_002bd430(u32 voice)
 {
-  nn_snd_CTR_VoiceManager_FreeVoice((unsigned int)&DAT_004e8568,param_1);
-  return;
+    nn_snd_CTR_VoiceManager_FreeVoice(&DAT_004e8568, voice);
 }
 
 } /* extern "C" */

@@ -7,7 +7,7 @@ extern "C" {
 int qsort(unsigned short [10], int, int, unsigned char *);
 int FUN_001aba54(void);
 int FUN_004a9308(...);
-int FUN_004c39b0(unsigned int, unsigned short [10]);
+int source4CCopyHalves(unsigned int, unsigned short [10]);
 int FUN_004c9160(int, unsigned int, int, int);
 int btlUnitSetParam(int *, int, int, int);
 int FUN_004eb838(int *, unsigned int *);
@@ -33,10 +33,10 @@ extern unsigned int DAT_00571264; /* 0x571264 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: qsort. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: FUN_004a9308. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: btlUnitSetParam. */
 /* Supplied declaration required: FUN_004eb838. */
@@ -54,7 +54,7 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
   unsigned char temp_v5;
   unsigned short temp_v6 [10];
   
-  temp_v2 = FUN_001633a0(1);
+  temp_v2 = lcgRandomRange(1);
   temp_v4 = 0;
   temp_v0 = (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0;
   temp_v1 = (*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0;
@@ -73,7 +73,7 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
     temp_v6[7] = 0;
     temp_v6[8] = 0;
     temp_v6[9] = 0;
-    FUN_004c39b0(param_2[8],temp_v6);
+    source4CCopyHalves(param_2[8],temp_v6);
     temp_v2 = 0;
     do {
       temp_v3 = (unsigned int)temp_v6[temp_v2];
@@ -93,7 +93,7 @@ unsigned int FUN_004e6018(int *param_1,unsigned int *param_2)
       qsort(temp_v6,9,2,&LAB_003de0ac);
       FUN_004c9160(10,param_2[8],0,1);
       qsort(temp_v6,temp_v4,2,&LAB_003d4e98);
-      temp_v2 = FUN_001633a0((temp_v4 - 1U) & 0xffff);
+      temp_v2 = lcgRandomRange((temp_v4 - 1U) & 0xffff);
       *(unsigned short *)(param_2[10] + 0x1be) = 2;
       *(unsigned short *)(param_2[10] + 0x1c0) = temp_v6[temp_v2];
       *param_2 = *param_2 | 0x8000;

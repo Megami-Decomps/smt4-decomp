@@ -1,22 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0044e190; /* 0x44e190 */
+extern int *DAT_0044e190;
 
-
+/* Saves the current mode (word 0x100) into word 0x101 and switches to mode 6. */
 void FUN_0030aacc(void)
-
 {
-  int *piVar1;
-  int temp_v1;
-  
-  piVar1 = (int *)DAT_0044e190;
-  if (piVar1 != 0) {
-    piVar1[0x101] = piVar1[0x100];
-    piVar1[0x100] = 6;
-  }
-  return;
+    int *block = DAT_0044e190;
+
+    if (block != NULL) {
+        block[0x101] = block[0x100];
+        block[0x100] = 6;
+    }
 }
 
 } /* extern "C" */

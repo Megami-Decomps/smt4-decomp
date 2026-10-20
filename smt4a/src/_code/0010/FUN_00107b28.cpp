@@ -26,12 +26,12 @@ extern int FUN_002e760a(unsigned int);
 extern int FUN_002eb7d0(unsigned int, unsigned int);
 extern int *FUN_002ed258(int, int *);
 /* Supplied declaration required: FUN_002eea5c. */
-extern int *FUN_002efa50(int, unsigned int);
+extern int *arrayElementAddress_002efa50(int, unsigned int);
 extern int *FUN_002eff58(int, unsigned int);
 extern int FUN_002eff84(void);
 extern int *FUN_002eff90(int, unsigned int);
 /* Supplied declaration required: FUN_002effdc. */
-extern int FUN_002f000c(int *, unsigned int *);
+extern int wordRefsDiffer_002f000c(int *, unsigned int *);
 extern int FUN_002f00f0(int, unsigned int);
 /* Supplied declaration required: FUN_002f012e. */
 
@@ -57,13 +57,13 @@ void FUN_00107b28(int param_1)
   int temp_v11;
   
   temp_v11 = param_1;
-  piVar4 = (int *)FUN_002efa50(param_1 + 0x90,0);
+  piVar4 = (int *)arrayElementAddress_002efa50(param_1 + 0x90,0);
   temp_v3 = *piVar4;
   temp_v7 = *(int *)(*(int *)(temp_v3 + 0x14) + 8);
   temp_v6 = (*(unsigned short *)(temp_v3 + 0x24) - 1) & 0xffff;
   while( 1 ) {
     temp_v8[0] = *(unsigned int *)(temp_v3 + 0x14);
-    temp_v4 = FUN_002f000c(&temp_v7,temp_v8);
+    temp_v4 = wordRefsDiffer_002f000c(&temp_v7,temp_v8);
     if ((temp_v4 == 0) || (temp_v1 = *(unsigned short *)(temp_v7 + 0x14), (unsigned int)temp_v1 != temp_v6 + 1)) break;
     FUN_002effdc(&temp_v7);
     temp_v6 = (unsigned int)temp_v1;
@@ -109,7 +109,7 @@ void FUN_00107b28(int param_1)
   piVar7 = piVar4;
   while( 1 ) {
     temp_v8[0] = *(unsigned int *)(temp_v3 + 0x14);
-    temp_v5 = FUN_002f000c(&temp_v7,temp_v8);
+    temp_v5 = wordRefsDiffer_002f000c(&temp_v7,temp_v8);
     if ((temp_v5 == 0) || (temp_v5 = FUN_002f00f0(piVar7[2],2), temp_v5 == 0)) break;
     temp_v10[0] = *(unsigned short *)(temp_v7 + 0x14);
     FUN_002eea5c(piVar7,temp_v10);

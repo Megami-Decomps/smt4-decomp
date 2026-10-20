@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_00175c30(unsigned int param_1,int param_2)
-
+/* Returns the byte offset of element `index` in an array of 0x60-byte elements. */
+s32 FUN_00175c30(u32 unused, s32 index)
 {
-  return param_2 * 0x60;
+    return index * 0x60;
 }
 
 } /* extern "C" */

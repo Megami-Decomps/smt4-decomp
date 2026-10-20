@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001861ec(int);
+int dataTableGetEntry49(int);
 int FUN_0018719c(...);
 int FUN_00314bf8(int);
 int FUN_00314c38(int, int, int, int, int, int);
@@ -26,12 +26,12 @@ extern unsigned char DAT_005f1a60; /* 0x5f1a60 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_00162e8c(void);
-/* Supplied declaration required: FUN_001861ec. */
+/* Supplied declaration required: dataTableGetEntry49. */
 /* Supplied declaration required: FUN_0018719c. */
 /* Supplied declaration required: FUN_00314bf8. */
 /* Supplied declaration required: FUN_00314c38. */
 /* Supplied declaration required: FUN_003ae61c. */
-extern int FUN_003bf840(int);
+extern int dataTable49GetEntry(int);
 /* Supplied declaration required: FUN_003bf87c. */
 /* Supplied declaration required: FUN_003cb930. */
 extern int FUN_003de16c(void);
@@ -61,7 +61,7 @@ void FUN_00384e0c(int param_1)
   temp_v4 = 0;
   if (temp_v4 < temp_v3) {
     do {
-      temp_v1 = FUN_003bf840(temp_v4);
+      temp_v1 = dataTable49GetEntry(temp_v4);
       temp_v2 = FUN_0018719c(*(unsigned int *)(temp_v1 + 8));
       if ((temp_v2 != 0) && (temp_v2 = FUN_0018719c(*(unsigned int *)(temp_v1 + 0xc)), temp_v2 == 0)) {
         FUN_003fd63c(*(unsigned int *)(temp_v1 + 0xc),1);
@@ -84,7 +84,7 @@ void FUN_00384e0c(int param_1)
   *(unsigned int *)(temp_v3 + 0x15b0) = 0;
   if (0 < param_1) {
     do {
-      psVar5 = (short *)FUN_001861ec(temp_v4);
+      psVar5 = (short *)dataTableGetEntry49(temp_v4);
       if (((*psVar5 != 0) && ((psVar5[1] == 0 || (temp_v3 = FUN_0018719c(), temp_v3 != 0)))) &&
          ((psVar5[2] == 0 || (temp_v3 = FUN_0018719c(), temp_v3 == 0)))) {
         if (temp_v5 == 0) {
@@ -98,7 +98,7 @@ void FUN_00384e0c(int param_1)
             *piVar6 = *piVar6 + 1;
           }
         }
-        temp_v3 = FUN_001861ec(temp_v4);
+        temp_v3 = dataTableGetEntry49(temp_v4);
         FUN_00314c38(*(unsigned char *)(temp_v3 + 0x44),*(unsigned char *)(temp_v3 + 0x45),
                      *(unsigned char *)(temp_v3 + 0x46),*(unsigned char *)(temp_v3 + 0x47),
                      *(unsigned char *)(temp_v3 + 0x48),*(unsigned char *)(temp_v3 + 0x49));
@@ -135,7 +135,7 @@ void FUN_00384e0c(int param_1)
   if (temp_v3 != 0) {
     puVar8 = (unsigned char *)(temp_v3 + 0x1590);
   }
-  temp_v3 = FUN_001861ec(*puVar8);
+  temp_v3 = dataTableGetEntry49(*puVar8);
   FUN_00314bf8((int)*(short *)(temp_v3 + 0x2e));
   return;
 }

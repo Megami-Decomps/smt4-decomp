@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct FileInfo {
+    /* 0x00 */ u16 kind;           /* 0x220C: internal file, 0x220D: external file */
+} FileInfo;
 
-unsigned int nw_snd_internal_SoundArchiveFile_FileInfo_GetFileLocationType(unsigned short *param_1)
-
+/* Returns 0 for an internal file (kind 0x220C), 1 for an external file (0x220D) and 2 for anything else. */
+u32 nw_snd_internal_SoundArchiveFile_FileInfo_GetFileLocationType(FileInfo *info)
 {
-  unsigned int temp_v0;
-  
-  if (*param_1 != 0) {
-    temp_v0 = *param_1 - 0x220c;
-    if (temp_v0 == 0 || temp_v0 == 1) {
-      return temp_v0;
+    u32 type;
+
+    if (info->kind != 0) {
+        type = info->kind - 0x220C;
+        if (type == 0 || type == 1) {
+            return type;
+        }
     }
-  }
-  return 2;
+    return 2;
 }
 
 } /* extern "C" */

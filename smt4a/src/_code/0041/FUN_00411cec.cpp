@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001633a0(...);
+int lcgRandomRange(...);
 int FUN_001b4a90(int [5], int, unsigned int);
 int FUN_004fdb18(int, int, int, int, int);
 
@@ -20,7 +20,7 @@ extern unsigned int DAT_00573c60; /* 0x573c60 */
 extern unsigned int DAT_00573c64; /* 0x573c64 */
 
 extern int btlGetMainState(void);
-/* Supplied declaration required: FUN_001633a0. */
+/* Supplied declaration required: lcgRandomRange. */
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_004fdb18. */
 
@@ -64,7 +64,7 @@ void FUN_00411cec(void)
         temp_v1 = aiStack_38[temp_v3];
         if (-1 < temp_v1) {
           temp_v4 = *piVar7;
-          temp_v2 = FUN_001633a0(99);
+          temp_v2 = lcgRandomRange(99);
           if (temp_v2 < 0x3d) {
             FUN_004fdb18(0,0,*(int *)(temp_v0 + 0x1ed4) +
                              *(short *)(temp_v4 + temp_v1 * 0x408 + 8) * 0x1d0,0x10,0);
@@ -77,7 +77,7 @@ void FUN_00411cec(void)
         return;
       }
     }
-    temp_v3 = FUN_001633a0((temp_v5 - 1U) & 0xffff);
+    temp_v3 = lcgRandomRange((temp_v5 - 1U) & 0xffff);
     FUN_004fdb18(0,0,*(int *)(temp_v0 + 0x1ed4) +
                      *(short *)(*piVar7 + aiStack_38[temp_v3] * 0x408 + 8) * 0x1d0,0x10,0);
   }

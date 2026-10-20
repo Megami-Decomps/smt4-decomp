@@ -25,7 +25,7 @@ int FUN_002e2680(int);
 int FUN_00330a80(...);
 int FUN_00359974(int, unsigned int);
 int FUN_0035a0bc(...);
-int FUN_0037b578(...);
+int screenStartOrClear(...);
 int FUN_0037b5e0(...);
 int FUN_0039bb48(...);
 int FUN_003a4980(...);
@@ -57,14 +57,14 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e2114. */
 /* Supplied declaration required: FUN_002e2184. */
 /* Supplied declaration required: FUN_002e2680. */
-extern int FUN_003192e0(void);
+extern int overlayGetStatusScene(void);
 extern int FUN_0032cfc8(void);
-extern unsigned int FUN_0032e478(void);
+extern unsigned int overlayGetBuffer1(void);
 /* Supplied declaration required: FUN_00330a80. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_0035a0bc. */
 /* Supplied declaration required: FUN_0036c7a8. */
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_0037b5e0. */
 /* Supplied declaration required: FUN_0037b7d8. */
 extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
@@ -77,7 +77,7 @@ extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003e54b8. */
 /* Supplied declaration required: FUN_003e5810. */
-extern int FUN_003e5ae8(unsigned int);
+extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: FUN_003e5c68. */
 
 
@@ -161,11 +161,11 @@ unsigned int FUN_0025d6a0(void)
         temp_v5 = *(int *)(temp_v1 + 8);
         FUN_002e2114();
         if (temp_v5 != 0) {
-          temp_v5 = FUN_003192e0();
+          temp_v5 = overlayGetStatusScene();
           FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),0);
-          temp_v5 = FUN_003192e0();
+          temp_v5 = overlayGetStatusScene();
           FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),1);
-          temp_v5 = FUN_003192e0();
+          temp_v5 = overlayGetStatusScene();
           FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),2);
           FUN_002e2184(*(unsigned int *)(temp_v1 + 8),temp_v17);
           FUN_002e207c(*(unsigned int *)(temp_v1 + 8));
@@ -200,8 +200,8 @@ unsigned int FUN_0025d6a0(void)
           temp_v1 = FUN_0032cfc8();
           if (temp_v1 == 0) {
             FUN_00359974(0,*(unsigned int *)(temp_v0 + 0x120));
-            temp_v2 = FUN_0032e478();
-            FUN_0037b578(temp_v2,0xe);
+            temp_v2 = overlayGetBuffer1();
+            screenStartOrClear(temp_v2,0xe);
           }
           if ((*(int *)(temp_v0 + 0x124) == *(int *)(temp_v0 + 0x114)) &&
              (*(char *)(temp_v0 + 0xec) != '\0')) {
@@ -677,11 +677,11 @@ LAB_0025e324:
           temp_v5 = *(int *)(temp_v1 + 8);
           FUN_002e2114();
           if (temp_v5 != 0) {
-            temp_v5 = FUN_003192e0();
+            temp_v5 = overlayGetStatusScene();
             FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),0);
-            temp_v5 = FUN_003192e0();
+            temp_v5 = overlayGetStatusScene();
             FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),1);
-            temp_v5 = FUN_003192e0();
+            temp_v5 = overlayGetStatusScene();
             FUN_003e5810(*(unsigned int *)(temp_v5 + 0x1c),2);
             FUN_002e2184(*(unsigned int *)(temp_v1 + 8),temp_v17);
             FUN_002e207c(*(unsigned int *)(temp_v1 + 8));
@@ -739,7 +739,7 @@ LAB_0025e5ec:
     FUN_0039a3b4(*(int *)(temp_v0 + 0x110),*(unsigned char *)(*(int *)(temp_v0 + 0xc) + 0x22));
   }
 LAB_0025e63c:
-  temp_v5 = FUN_003e5ae8(*(unsigned int *)(*(int *)(temp_v0 + 8) + 0x1c));
+  temp_v5 = fourPtrsAllNull(*(unsigned int *)(*(int *)(temp_v0 + 8) + 0x1c));
   temp_v1 = 0;
   if (temp_v5 != 0) {
     temp_v1 = *(int *)(temp_v0 + 8);

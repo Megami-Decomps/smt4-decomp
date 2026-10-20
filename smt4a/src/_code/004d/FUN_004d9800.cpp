@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00103f54(unsigned int, unsigned int *, int, int);
 int FUN_00103f74(unsigned int, int);
 int FUN_001229f4(unsigned char [12], unsigned int, unsigned int, unsigned int);
-int FUN_0012433e(unsigned char [12], int *);
+int wordRefEqual(unsigned char [12], int *);
 int FUN_002e760a(int);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned char DAT_0055cae4; /* 0x55cae4 */
 /* Supplied declaration required: FUN_00103f54. */
 /* Supplied declaration required: FUN_00103f74. */
 /* Supplied declaration required: FUN_001229f4. */
-/* Supplied declaration required: FUN_0012433e. */
+/* Supplied declaration required: wordRefEqual. */
 /* Supplied declaration required: FUN_002e760a. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
 
@@ -71,25 +71,25 @@ void FUN_004d9800(int param_1)
   temp_v4 = 0;
   FUN_001229f4(temp_v6,*(unsigned int *)(param_1 + 0x14),temp_v1,*(unsigned int *)(param_1 + 0x18));
   temp_v8 = 0x10001;
-  temp_v0 = FUN_0012433e(temp_v6,&temp_v8);
+  temp_v0 = wordRefEqual(temp_v6,&temp_v8);
   if (temp_v0 == 0) {
     temp_v2 = 0x8001000b;
-    temp_v0 = FUN_0012433e(temp_v6,&temp_v2);
+    temp_v0 = wordRefEqual(temp_v6,&temp_v2);
     if (temp_v0 == 0) {
       temp_v3 = 0x8001000a;
-      temp_v0 = FUN_0012433e(temp_v6,&temp_v3);
+      temp_v0 = wordRefEqual(temp_v6,&temp_v3);
       if (temp_v0 == 0) {
         temp_v4 = 0x80010004;
-        temp_v0 = FUN_0012433e(temp_v6,&temp_v4);
+        temp_v0 = wordRefEqual(temp_v6,&temp_v4);
         if (temp_v0 == 0) {
           temp_v5 = 0x80650000;
-          temp_v0 = FUN_0012433e(temp_v6,&temp_v5);
+          temp_v0 = wordRefEqual(temp_v6,&temp_v5);
           if (temp_v0 == 0) {
             temp_v7 = 0x80650002;
-            temp_v0 = FUN_0012433e(temp_v6,&temp_v7);
+            temp_v0 = wordRefEqual(temp_v6,&temp_v7);
             if (temp_v0 == 0) {
               temp_v9 = 0x80650009;
-              FUN_0012433e(temp_v6,&temp_v9);
+              wordRefEqual(temp_v6,&temp_v9);
             }
           }
         }

@@ -1,25 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int asdMdlManagerDestroy(void);
 
-/* Supplied declaration required: asdMdlManagerDestroy. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x98];
+    /* 0x98 */ int modelA;
+    /* 0x9C */ int modelB;
+} Obj;
 
-
-void FUN_00396f04(int param_1)
-
+void FUN_00396f04(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x98) != 0) {
-    asdMdlManagerDestroy();
-    *(unsigned int *)(param_1 + 0x98) = 0;
-  }
-  if (*(int *)(param_1 + 0x9c) != 0) {
-    asdMdlManagerDestroy();
-    *(unsigned int *)(param_1 + 0x9c) = 0;
-  }
-  return;
+    if (obj->modelA != 0) {
+        asdMdlManagerDestroy();
+        obj->modelA = 0;
+    }
+    if (obj->modelB != 0) {
+        asdMdlManagerDestroy();
+        obj->modelB = 0;
+    }
 }
 
 } /* extern "C" */

@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_00155a8c(void)
-
+u32 FUN_00155a8c(void)
 {
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

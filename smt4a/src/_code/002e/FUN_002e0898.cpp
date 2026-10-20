@@ -1,19 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int jobGetWork(void);
+typedef struct Task {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ u32 first;
+    /* 0x5C */ u32 second;
+} Task;
+Task *jobGetWork(void);
 
-
-void FUN_002e0898(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Stores the two values in the job's work area at 0x58 and 0x5C. */
+void FUN_002e0898(u32 unused, u32 first, u32 second)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  *(unsigned int *)(temp_v0 + 0x58) = param_2;
-  *(unsigned int *)(temp_v0 + 0x5c) = param_3;
-  return;
+    Task *task;
+
+    task = jobGetWork();
+    task->first = first;
+    task->second = second;
 }
 
 } /* extern "C" */

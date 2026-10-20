@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 43 vs built 39 rows, 53 diff lines. */
 #include "AsdSDK/Source/Gfx/Effect/AsdEffectTexture.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -22,6 +22,7 @@ EffectTexture *asdEffectTextureCreate(EffectTextureFile *file)
     tex->unk1c = file->unk18;
     tex->unk20 = file->unk14;
     tex->size = file->size;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\AsdEffectTexture.cpp", 51);
     tex->pixels = (u8 *)asdMemoryAllocAligned(0x10000, 0x100, 0, tex->size, 0x80, 1);
     FUN_00167bc8(file->pixels, tex->pixels, tex->size);
     FUN_0019a840(tex);

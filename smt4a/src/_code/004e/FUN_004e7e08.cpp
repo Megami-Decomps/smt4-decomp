@@ -39,7 +39,7 @@ extern int DAT_00573808; /* 0x573808 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 extern int FUN_003e8430(int);
-extern int FUN_0040de1c(unsigned int, fn_004e7e08_arg1 *);
+extern int chainCountIdUnflagged(unsigned int, fn_004e7e08_arg1 *);
 /* Supplied declaration required: FUN_004aa3d4. */
 extern int FUN_004c3a98(int, unsigned int);
 extern int FUN_004c52ec(unsigned int);
@@ -95,7 +95,7 @@ unsigned int FUN_004e7e08(int *param_1,fn_004e7e08_arg1 *param_2)
       if (temp_v0 != 3) {
         return 0;
       }
-      temp_v0 = FUN_0040de1c(DAT_005712f0,param_2);
+      temp_v0 = chainCountIdUnflagged(DAT_005712f0,param_2);
       if (0 < temp_v0) {
         return 0;
       }

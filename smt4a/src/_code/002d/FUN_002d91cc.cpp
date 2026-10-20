@@ -13,8 +13,8 @@ int FUN_00303460(...);
 int FUN_00313648(int);
 int FUN_00314c38(int, int, int, int, int, int);
 int FUN_00352bc4(void);
-int FUN_003e5b1c(unsigned int);
-int FUN_003e5b9c(unsigned int);
+int linkHolderSetFlag(unsigned int);
+int linkHolderClearFlag(unsigned int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -40,9 +40,9 @@ extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00314c38. */
 /* Supplied declaration required: FUN_00352bc4. */
-extern int FUN_003e56f0(unsigned int);
-/* Supplied declaration required: FUN_003e5b1c. */
-/* Supplied declaration required: FUN_003e5b9c. */
+extern int linkHolderCheckFirst(unsigned int);
+/* Supplied declaration required: linkHolderSetFlag. */
+/* Supplied declaration required: linkHolderClearFlag. */
 
 
 void FUN_002d91cc(void)
@@ -142,7 +142,7 @@ void FUN_002d91cc(void)
           *(unsigned int *)(temp_v0 + 0x28) = 0xc4230000;
           *(unsigned int *)(temp_v0 + 0x2c) = 0x445f4000;
           *(unsigned int *)(temp_v0 + 0x30) = 0x45051000;
-          FUN_003e5b1c(*(unsigned int *)(temp_v0 + 0x1a8));
+          linkHolderSetFlag(*(unsigned int *)(temp_v0 + 0x1a8));
           FUN_0025ef68(g_lmapScene + 0x28,g_lmapScene + 0x34,0);
           temp_v0 = g_lmapScene;
           puVar6 = (unsigned int *)(g_lmapScene + 0x38);
@@ -172,7 +172,7 @@ void FUN_002d91cc(void)
     if (temp_v1 >= 0x15) {
       *(unsigned int *)(temp_v0 + 4) = 3;
       *(unsigned int *)(temp_v0 + 8) = 0;
-      FUN_003e5b9c(*(unsigned int *)(temp_v0 + 0x1a8));
+      linkHolderClearFlag(*(unsigned int *)(temp_v0 + 0x1a8));
       temp_v0 = g_lmapScene;
       *(unsigned int *)(g_lmapScene + 0x1c) = 0xc4618000;
       *(unsigned int *)(temp_v0 + 0x24) = 0x450b5000;
@@ -245,7 +245,7 @@ void FUN_002d91cc(void)
     *(int *)(temp_v0 + 4) = *(int *)(temp_v0 + 4) + 1;
     return;
   case 6:
-    temp_v1 = FUN_003e56f0(*(unsigned int *)(g_lmapScene + 0x1a8));
+    temp_v1 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
     temp_v0 = g_lmapScene;
     if (temp_v1 != 0) {
       *(unsigned int *)(g_lmapScene + 0x54) = 0x24;
@@ -257,7 +257,7 @@ void FUN_002d91cc(void)
     }
     break;
   case 7:
-    temp_v0 = FUN_003e56f0(*(unsigned int *)(g_lmapScene + 0x1a8));
+    temp_v0 = linkHolderCheckFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
     if (temp_v0 != 0) {
       *(unsigned char *)(g_lmapScene + 0x6c) = 0;
       DAT_005f1a4e = 0;

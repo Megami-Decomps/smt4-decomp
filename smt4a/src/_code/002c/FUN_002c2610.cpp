@@ -1,20 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f65c; /* 0x57f65c */
+typedef struct Record {
+    /* 0x000 */ u8 unk000[0xFAD];
+    /* 0xFAD */ u8 unkFAD;
+    /* 0xFAE */ u8 unkFAE;
+    /* 0xFAF */ u8 unkFAF[0x4DD];
+    /* 0x148C */ u8 flag;
+} Record;
+extern Record *DAT_0057f65c;
 
-
+/* Sets the flag at 0x148C and clears the bytes at 0xFAE and 0xFAD of the record at 0x57F65C. */
 void FUN_002c2610(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = DAT_0057f65c;
-  *(unsigned char *)(DAT_0057f65c + 0x148c) = 1;
-  *(unsigned char *)(temp_v0 + 0xfae) = 0;
-  *(unsigned char *)(temp_v0 + 0xfad) = 0;
-  return;
+    Record *record;
+
+    record = DAT_0057f65c;
+    DAT_0057f65c->flag = 1;
+    record->unkFAE = 0;
+    record->unkFAD = 0;
 }
 
 } /* extern "C" */

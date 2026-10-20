@@ -7,7 +7,7 @@ extern "C" {
 int jobStop(...);
 int FUN_00280328(...);
 int FUN_002ea508(...);
-int FUN_00317464(...);
+int asdListBoxSetIntItem(...);
 int FUN_00317508(...);
 int asdListBoxAddItems(...);
 int FUN_00340edc(...);
@@ -48,7 +48,7 @@ extern unsigned int DAT_00573bdc; /* 0x573bdc */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
-/* Supplied declaration required: FUN_00317464. */
+/* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: FUN_00317508. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_00340edc. */
@@ -73,11 +73,11 @@ void FUN_004d37d4(fn_004d37d4_arg0 *param_1,int param_2)
   asdListBoxAddItems();
   FUN_00317508(*(unsigned int *)&param_1->field_0x10,1);
   FUN_002ea508(*(unsigned int *)&param_1->field_0x10,"btl Panel Menu");
-  FUN_00317464(*(unsigned int *)&param_1->field_0x10,0,DAT_00573bd8,0,0xff,0);
-  FUN_00317464(*(unsigned int *)&param_1->field_0x10,1,DAT_00573bd9,0,0xff,0);
-  FUN_00317464(*(unsigned int *)&param_1->field_0x10,2,DAT_00573bda,0,0xff,0);
-  FUN_00317464(*(unsigned int *)&param_1->field_0x10,3,DAT_00573bdb,0,0xff,0);
-  FUN_00317464(*(unsigned int *)&param_1->field_0x10,4,DAT_00573bdc,0,0x78,0);
+  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,0,DAT_00573bd8,0,0xff,0);
+  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,1,DAT_00573bd9,0,0xff,0);
+  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,2,DAT_00573bda,0,0xff,0);
+  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,3,DAT_00573bdb,0,0xff,0);
+  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,4,DAT_00573bdc,0,0x78,0);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,5,0,1);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,6,0,1);
   return;

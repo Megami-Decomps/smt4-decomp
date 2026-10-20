@@ -1,24 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00303208(int, int);
+void FUN_00303208(void *object, s32 arg);
+void *FUN_002e760a(u32 size);
 
-extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_00303208. */
-
-
+/* Allocates a 0x44-byte object and constructs it with FUN_00303208(object, 0) if the allocation succeeded. */
 void FUN_0012426e(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002e760a(0x44);
-  if (temp_v0 != 0) {
-    FUN_00303208(temp_v0,0);
-  }
-  return;
+    void *object = FUN_002e760a(0x44);
+
+    if (object != NULL) {
+        FUN_00303208(object, 0);
+    }
 }
 
 } /* extern "C" */

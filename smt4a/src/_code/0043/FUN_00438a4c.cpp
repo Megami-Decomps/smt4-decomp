@@ -10,7 +10,7 @@ int FUN_00436b2c(int, unsigned int [5], int);
 int FUN_00437828(int, unsigned int [5], int, int *);
 int FUN_0043879c(unsigned int [5], unsigned int);
 int FUN_004387f0(unsigned int *, int);
-int FUN_00438930(unsigned int [5]);
+int words3Clear2(unsigned int [5]);
 
 /* stack frame of param_6: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -26,14 +26,14 @@ extern int FUN_00433b58(unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_00433e08. */
 extern int FUN_00434ce0(void);
 /* Supplied declaration required: FUN_00434e88. */
-extern int FUN_004351a8(void);
+extern int words2Clear(void);
 /* Supplied declaration required: FUN_00436b2c. */
 extern int FUN_00436be8(void);
 /* Supplied declaration required: FUN_00437828. */
 extern int FUN_00437a84(void);
 /* Supplied declaration required: FUN_0043879c. */
 /* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: FUN_00438930. */
+/* Supplied declaration required: words3Clear2. */
 
 
 unsigned int *
@@ -59,7 +59,7 @@ FUN_00438a4c(int param_1,int param_2,unsigned int param_3,unsigned int param_4,i
   iStack_30 = param_2;
   uStack_2c = param_3;
   temp_v8 = param_4;
-  FUN_00438930(temp_v6);
+  words3Clear2(temp_v6);
   FUN_0043879c(temp_v6,*(unsigned int *)(param_1 + 0x20));
   puVar1 = temp_v6;
   FUN_004387f0(puVar1,2);
@@ -71,7 +71,7 @@ FUN_00438a4c(int param_1,int param_2,unsigned int param_3,unsigned int param_4,i
   FUN_004387f0(puVar1,1);
   temp_v1 = 0;
   if (puVar1 != (unsigned int *)0x0) {
-    temp_v1 = FUN_004351a8();
+    temp_v1 = words2Clear();
   }
   puVar1 = temp_v6;
   FUN_004387f0(puVar1,2);

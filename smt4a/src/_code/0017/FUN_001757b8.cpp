@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u8 *pointer;
+} Holder;
 
-void FUN_001757b8(int param_1,int param_2)
-
+/* Stores the address 8 bytes past `base` at 0x3C. */
+void FUN_001757b8(Holder *object, u8 *base)
 {
-  *(int *)(param_1 + 0x3c) = param_2 + 8;
-  return;
+    object->pointer = base + 8;
 }
 
 } /* extern "C" */

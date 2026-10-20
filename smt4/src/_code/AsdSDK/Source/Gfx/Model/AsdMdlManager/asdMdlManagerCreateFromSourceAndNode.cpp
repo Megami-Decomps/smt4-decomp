@@ -18,8 +18,8 @@ AsdMdlObject *asdMdlManagerCreateFromSourceAndNode(void *source, u32 arg, u32 pa
 {
     AsdMdlObject *obj = asdMdlObjectNew();
 
-    obj->node->unk08 = param;
-    obj->node->unk04 = FUN_002b2988(source, arg);
+    obj->node->param = param;
+    obj->node->data = FUN_002b2988(source, arg);
     FUN_003289a0(obj->node, param, other->node);
     FUN_002a9244(obj->node);
     FUN_002b2770(obj);

@@ -9,7 +9,7 @@ int FUN_0043865c(int *, unsigned char **, int *);
 int FUN_004386a4(unsigned char **, int *, int);
 int FUN_004387bc(...);
 int FUN_004387f0(int *, int);
-int FUN_0051553c(...);
+int variantSetPlain(...);
 int FUN_00515598(void);
 int FUN_005155bc(int *);
 int FUN_00515618(unsigned char **, int *);
@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: FUN_004386a4. */
 /* Supplied declaration required: FUN_004387bc. */
 /* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: FUN_0051553c. */
+/* Supplied declaration required: variantSetPlain. */
 /* Supplied declaration required: FUN_00515598. */
 /* Supplied declaration required: FUN_005155bc. */
 /* Supplied declaration required: FUN_00515618. */
@@ -116,7 +116,7 @@ unsigned int FUN_00436504(int *param_1,int *param_2,int *param_3,int *param_4)
         *piVar5 = (int)piVar2;
         *(int **)(*piVar2 + 4) = piVar2;
         temp_v5 = temp_v6;
-        FUN_0051553c(piVar2 + 2,&temp_v5);
+        variantSetPlain(piVar2 + 2,&temp_v5);
         temp_v5 = *param_4;
         FUN_0043865c(&temp_v8,&temp_v2,&temp_v5);
         temp_v0 = *(int *)(temp_v8 + 0xc);
@@ -153,7 +153,7 @@ unsigned int FUN_00436504(int *param_1,int *param_2,int *param_3,int *param_4)
       return 2;
     }
     temp_v2 = (unsigned char *)*param_4;
-    FUN_0051553c(temp_v3 + 8,&temp_v2);
+    variantSetPlain(temp_v3 + 8,&temp_v2);
     *temp_v9 = *param_4;
   }
   *param_1 = *(int *)(*param_1 + 4);

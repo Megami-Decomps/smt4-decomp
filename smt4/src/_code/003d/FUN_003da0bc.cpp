@@ -1,20 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Object;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(struct Object *object);
+} ObjectVtbl;
 
-void FUN_003da0bc(int param_1)
+typedef struct Object {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Object;
 
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x1CF8];
+    /* 0x1CF8 */ Object *child;
+} Obj;
+
+void FUN_003da0bc(Obj *obj)
 {
-  int *piVar1;
-  
-  piVar1 = *(int **)(param_1 + 0x1cf8);
-  if (piVar1 != (int *)0x0) {
-    (**(romwright_code **)(*piVar1 + 4))(piVar1);
-    *(int *)(param_1 + 0x1cf8) = 0;
-  }
-  return;
+    Object *child = obj->child;
+
+    if (child != NULL) {
+        child->vtbl->destroy(child);
+        obj->child = NULL;
+    }
 }
 
 } /* extern "C" */

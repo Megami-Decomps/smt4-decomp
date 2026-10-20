@@ -1,26 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303334` (_code @ 0x303334, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00310212(unsigned int *, int);
+typedef struct Table {
+    u32 words[6]; /* 0x00 */
+} Table;
 
-/* Supplied declaration required: FUN_00310212. */
+extern void listInitEmpty(Table *table, int mode);
 
-
-unsigned int * FUN_00303334(unsigned int *param_1)
-
+/* Clears the table, then runs the initializer in mode 1. */
+Table *FUN_00303334(Table *table)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  FUN_00310212(param_1,1);
-  return param_1;
+    int i;
+    for (i = 0; i < 6; i++) {
+        table->words[i] = 0;
+    }
+    listInitEmpty(table, 1);
+    return table;
 }
 
 } /* extern "C" */

@@ -40,9 +40,9 @@ int FUN_00371e54(...);
 int FUN_00371ef4(void);
 int FUN_0039c448(void);
 int FUN_003a62e8(...);
-int FUN_003d2204(...);
+int roundObjFinish(...);
 int FUN_004bcd90(...);
-int FUN_004bd21c(...);
+int getUnlockedSlotCount(...);
 int FUN_004bd6b0(...);
 
 int FUN_00100388(...);
@@ -62,7 +62,7 @@ int FUN_003180c4(...);
 int FUN_00333dc8(...);
 int FUN_00334214(...);
 int FUN_003343f0(...);
-int FUN_00334434(...);
+int objBInitBlock19D0(...);
 int FUN_0033449c(...);
 int FUN_003720a0(...);
 int FUN_00372100(...);
@@ -77,7 +77,7 @@ int FUN_00203d04(...);
 int FUN_0021b968(...);
 int FUN_00224880(...);
 int FUN_002818a0(...);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_0035ac58(...);
 int FUN_0037c6ac(...);
 int FUN_00388758(...);
@@ -86,7 +86,7 @@ int FUN_003f2fb0(...);
 int FUN_003f3048(...);
 int FUN_00480e30(...);
 int FUN_004a0ef8(...);
-int FUN_004bd340(...);
+int bitsAt60Test(...);
 int FUN_004cd0c8(...);
 int FUN_004cd4b8(...);
 
@@ -100,7 +100,7 @@ int FUN_0023c384(...);
 int mapDepartAdvanceState(void);
 int FUN_002e5c2c(...);
 int sysMemClear(...);
-int FUN_0031a218(...);
+int panelSetMode3(...);
 int FUN_00340a94(...);
 int FUN_00387240(...);
 int FUN_003d2150(...);
@@ -114,7 +114,7 @@ int FUN_004cd238(...);
 int rt_memcpy_w(...);
 
 int FUN_001517b4(...);
-int FUN_0015688c(void);
+int saveSlotFindSelected(void);
 int FUN_00163aa4(...);
 int FUN_001801a4(void);
 int FUN_001834a4(...);
@@ -126,7 +126,7 @@ int FUN_0020b490(...);
 int FUN_00240674(...);
 int FUN_0034aae4(void);
 int FUN_00358e94(...);
-int FUN_0037c8b4(unsigned int, int);
+int panelSetTarget(unsigned int, int);
 int FUN_0037c8e4(int, int);
 int FUN_003982f4(void);
 int lmapMainCallIfActive2(void);
@@ -176,7 +176,7 @@ extern int DAT_00588c44; /* 0x588c44 */
 /* Supplied declaration required: qsort. */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
-/* Supplied declaration required: FUN_0015688c. */
+/* Supplied declaration required: saveSlotFindSelected. */
 /* Supplied declaration required: FUN_0015f490. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_001641b4. */
@@ -246,16 +246,16 @@ extern int FUN_002effbc(void);
 /* Supplied declaration required: FUN_002f5064. */
 extern long long FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0031a218. */
+/* Supplied declaration required: panelSetMode3. */
 extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00334434. */
+/* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: FUN_00340a94. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0034a968. */
 /* Supplied declaration required: FUN_0034aae4. */
 /* Supplied declaration required: FUN_00358e94. */
@@ -264,18 +264,18 @@ extern int FUN_0035988c(unsigned int);
 /* Supplied declaration required: FUN_0035ac58. */
 extern int FUN_0035fd00(unsigned short);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-extern int FUN_00371dec(void);
-extern int FUN_00371e18(void);
+extern int stateHolderCountMinus1(void);
+extern int stateHolderStateIsNot4(void);
 extern int FUN_00371e38(void);
 /* Supplied declaration required: FUN_00371e54. */
 /* Supplied declaration required: FUN_00371ef4. */
 /* Supplied declaration required: FUN_003720a0. */
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0037c6ac. */
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 extern unsigned int FUN_0037d9fc(unsigned short);
-extern int FUN_0037de4c(void);
+extern int stateHolderStateIs8Or10(void);
 extern int FUN_0037df64(void);
 /* Supplied declaration required: FUN_0037dfb0. */
 /* Supplied declaration required: FUN_0037e078. */
@@ -288,8 +288,8 @@ extern int FUN_0037df64(void);
 extern int FUN_0038b568(void);
 /* Supplied declaration required: FUN_003982f4. */
 /* Supplied declaration required: FUN_0039c388. */
-extern int FUN_0039c3d0(void);
-extern int FUN_0039c3f0(void);
+extern int stateHolderStateIs0x12(void);
+extern int stateHolderStateIs0xD(void);
 /* Supplied declaration required: FUN_0039c410. */
 /* Supplied declaration required: FUN_0039c448. */
 /* Supplied declaration required: lmapMainCallIfActive2. */
@@ -300,10 +300,10 @@ extern int FUN_003c16b8(void);
 /* Supplied declaration required: FUN_003c16e0. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d2158. */
-/* Supplied declaration required: FUN_003d2204. */
+/* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003d2d6c. */
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_003e40b8. */
 /* Supplied declaration required: FUN_003e4940. */
 extern int FUN_003e4cb4(unsigned int);
@@ -321,8 +321,8 @@ extern int FUN_004b6b1c(int);
 /* Supplied declaration required: FUN_004bb904. */
 extern int FUN_004bca68(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
-/* Supplied declaration required: FUN_004bd21c. */
-/* Supplied declaration required: FUN_004bd340. */
+/* Supplied declaration required: getUnlockedSlotCount. */
+/* Supplied declaration required: bitsAt60Test. */
 /* Supplied declaration required: FUN_004bd6b0. */
 /* Supplied declaration required: FUN_004cc6d4. */
 extern int FUN_004cc8d8(unsigned short, unsigned short);
@@ -511,7 +511,7 @@ unsigned int FUN_00204098(void)
     FUN_00240674(temp_v6);
     FUN_0020b490(temp_v6,2);
     FUN_0037c8e4(1,0);
-    FUN_0037c8b4(*(unsigned int *)(temp_v6 + 0x4428),1);
+    panelSetTarget(*(unsigned int *)(temp_v6 + 0x4428),1);
     temp_v16 = 0;
     temp_v7 = 0;
 LAB_0020448c:
@@ -565,7 +565,7 @@ LAB_0020448c:
       do {
         temp_v16 = temp_v16 + 1;
         if (temp_v16 >= 4) {
-          FUN_0015688c();
+          saveSlotFindSelected();
           temp_v7 = FUN_003e4940();
           if (temp_v7 != 0) {
             temp_v7 = 999999;
@@ -677,7 +677,7 @@ LAB_00204688:
         } while (temp_v16 < 7);
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 5);
-      FUN_0031a218(*(unsigned int *)(temp_v6 + 0x4428),1);
+      panelSetMode3(*(unsigned int *)(temp_v6 + 0x4428),1);
       FUN_0020b490(temp_v6,4);
     }
     break;
@@ -956,8 +956,8 @@ LAB_0020524c:
           temp_v27 = *(int *)(temp_v7 + 0x30) + *(int *)(temp_v6 + 0x7870);
           *(int *)(temp_v7 + 0x30) = temp_v27;
           temp_v13 = FUN_004ccc7c(*(unsigned short *)(temp_v7 + 0x62),temp_v7 + 0x30);
-          temp_v16 = FUN_003e0044(1);
-          if ((temp_v16 != 0) || (temp_v16 = FUN_003e0044(10), temp_v16 != 0)) {
+          temp_v16 = playerHasFlagBit(1);
+          if ((temp_v16 != 0) || (temp_v16 = playerHasFlagBit(10), temp_v16 != 0)) {
             temp_v13 = 0;
             *(int *)(temp_v7 + 0x30) = temp_v27;
           }
@@ -1021,8 +1021,8 @@ LAB_0020524c:
               *(int *)(temp_v8 + 0x30) = temp_v9;
               temp_v44 = FUN_004cc9dc(*(unsigned short *)(temp_v8 + 0x62),*(unsigned short *)(temp_v8 + 100),
                                       temp_v8 + 0x30);
-              temp_v10 = FUN_004bd340(temp_v8,1);
-              if ((temp_v10 != 0) || (temp_v10 = FUN_004bd340(temp_v8,10), temp_v10 != 0)) {
+              temp_v10 = bitsAt60Test(temp_v8,1);
+              if ((temp_v10 != 0) || (temp_v10 = bitsAt60Test(temp_v8,10), temp_v10 != 0)) {
                 temp_v44 = 0;
                 *(int *)(temp_v8 + 0x30) = temp_v9;
                 goto LAB_00205528;
@@ -1078,7 +1078,7 @@ LAB_00205528:
                 if ((temp_v16 != 0) && (temp_v16 = FUN_002818a0(temp_v8), temp_v16 != 0)) {
                   FUN_0021b968(temp_v6,temp_v7,*(unsigned short *)(temp_v8 + 0x62),(unsigned int)temp_v45 ^ 1);
                 }
-                temp_v37 = FUN_004bd340(temp_v27 + 0x4580,2);
+                temp_v37 = bitsAt60Test(temp_v27 + 0x4580,2);
                 temp_v15 = (unsigned short)((unsigned long long)temp_v37 >> 0x20);
                 temp_v32 = (int)temp_v37 != 0;
                 if (temp_v32) {
@@ -1254,7 +1254,7 @@ LAB_00205528:
       FUN_001517b4(0,1);
       if (temp_v7 == 0) break;
     }
-    FUN_003491e8();
+    obj04Finish();
     FUN_0020b490(temp_v6,7);
     break;
   case 7:
@@ -1354,7 +1354,7 @@ LAB_00205528:
           FUN_0033449c(1);
           FUN_00334214(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
           temp_v11 = FUN_001ab854(temp_v7);
-          FUN_00334434(temp_v11,0);
+          objBInitBlock19D0(temp_v11,0);
           FUN_002a7324(1);
           FUN_0020b490(temp_v6,0xc);
         }
@@ -1525,7 +1525,7 @@ LAB_00206230:
       }
       if (0 < temp_v8) {
         temp_v16 = 0;
-        temp_v13 = FUN_004bd21c(temp_v7);
+        temp_v13 = getUnlockedSlotCount(temp_v7);
         if (0 < (int)(temp_v13 - 1)) {
           psVar12 = (short *)(temp_v7 + 0x32);
           if (((temp_v13 & 1) == 0) && (psVar12 = (short *)(temp_v7 + 0x34), *psVar12 == 0)) {
@@ -1600,7 +1600,7 @@ joined_r0x002075ac:
             }
             else {
               FUN_002a7288();
-              FUN_003d2204(temp_v6);
+              roundObjFinish(temp_v6);
             }
           }
           else {
@@ -1643,10 +1643,10 @@ joined_r0x002075ac:
       break;
     case 3:
       FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
-      temp_v27 = FUN_00371e18();
+      temp_v27 = stateHolderStateIsNot4();
       if (temp_v27 != 0) {
         temp_v27 = 0;
-        temp_v13 = FUN_004bd21c(temp_v7);
+        temp_v13 = getUnlockedSlotCount(temp_v7);
         if (0 < (int)temp_v13) {
           do {
             if (*(short *)(temp_v7 + temp_v27 * 2 + 0x34) == 0) {
@@ -1744,7 +1744,7 @@ joined_r0x002075ac:
         FUN_001517b4(0,1);
         if (temp_v27 == 0) break;
       }
-      FUN_003491e8();
+      obj04Finish();
       FUN_0019de98(0,0xf4f4f4ff);
       FUN_003a62e8(temp_v7);
       if (*(char *)(temp_v16 + 0x4579) != '\0') {
@@ -1761,7 +1761,7 @@ joined_r0x002075ac:
       }
       else {
         FUN_002a7288();
-        temp_v7 = FUN_003d2204(temp_v6);
+        temp_v7 = roundObjFinish(temp_v6);
         if (temp_v7 != 0) {
           *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
         }
@@ -1774,7 +1774,7 @@ joined_r0x002075ac:
         FUN_0033449c(1);
         FUN_00334214(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
         temp_v11 = FUN_001ab854((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
-        FUN_00334434(temp_v11,0);
+        objBInitBlock19D0(temp_v11,0);
         FUN_002a7324(1);
         FUN_0020b490(temp_v6,0xc);
       }
@@ -1802,11 +1802,11 @@ joined_r0x002075ac:
       *(int *)(temp_v6 + 0x436c) = temp_v7;
       break;
     case 3:
-      temp_v16 = FUN_0039c3f0();
+      temp_v16 = stateHolderStateIs0xD();
       if (temp_v16 != 0) {
         temp_v9 = 0;
         temp_v8 = 0;
-        temp_v16 = FUN_004bd21c(temp_v13);
+        temp_v16 = getUnlockedSlotCount(temp_v13);
         temp_v27 = FUN_003a7b74();
         if (temp_v27 < temp_v16) {
           FUN_004bd6b0(temp_v13,*(unsigned short *)(temp_v7 + 0x4564));
@@ -1894,11 +1894,11 @@ joined_r0x002075ac:
             break;
           }
           FUN_002a7288();
-          temp_v7 = FUN_003d2204(temp_v6);
+          temp_v7 = roundObjFinish(temp_v6);
         }
         else {
           FUN_002a7288();
-          temp_v7 = FUN_003d2204(temp_v6);
+          temp_v7 = roundObjFinish(temp_v6);
         }
         if (temp_v7 != 0) {
           temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
@@ -1912,7 +1912,7 @@ joined_r0x002075ac:
         FUN_0033449c(1);
         FUN_00334214(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
         temp_v11 = FUN_001ab854((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
-        FUN_00334434(temp_v11,0);
+        objBInitBlock19D0(temp_v11,0);
         FUN_002a7324(1);
         FUN_003a62e8(temp_v13);
         FUN_0020b490(temp_v6,0xc);
@@ -1920,9 +1920,9 @@ joined_r0x002075ac:
       break;
     case 6:
       FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
-      temp_v7 = FUN_0037de4c();
+      temp_v7 = stateHolderStateIs8Or10();
       if (temp_v7 != 0) {
-        FUN_003491e8();
+        obj04Finish();
         sysPlaySe(0x9c);
         temp_v7 = 7;
         *(int *)(temp_v6 + 0x436c) = temp_v7;
@@ -1932,7 +1932,7 @@ joined_r0x002075ac:
       temp_v7 = FUN_0026272c();
       if (temp_v7 != 0) {
         temp_v7 = FUN_003a7b74();
-        temp_v16 = FUN_00371dec();
+        temp_v16 = stateHolderCountMinus1();
         if (temp_v7 == temp_v16) {
           temp_v11 = 10;
         }
@@ -2018,7 +2018,7 @@ joined_r0x002075ac:
             }
             else {
               FUN_00333dc8(1);
-              FUN_003491e8();
+              obj04Finish();
               sysPlaySe(0x9c);
               FUN_00275f44(*(unsigned int *)(temp_v6 + 0x43a0),7);
               temp_v11 = FUN_003d2150(0x100020e);
@@ -2031,7 +2031,7 @@ joined_r0x002075ac:
             FUN_001517b4(10,1);
             if (temp_v7 != 0) {
               FUN_00333dc8(1);
-              FUN_003491e8();
+              obj04Finish();
               sysPlaySe(0x9c);
               FUN_00275f44(*(unsigned int *)(temp_v6 + 0x43a0),8);
               temp_v11 = FUN_003d2150(0x100020f);
@@ -2069,7 +2069,7 @@ joined_r0x002073c8:
         }
         break;
       case 6:
-        temp_v16 = FUN_0039c3d0();
+        temp_v16 = stateHolderStateIs0x12();
         if (temp_v16 != 0) {
           FUN_00333dc8(0);
           *(short *)(temp_v7 + *(int *)(temp_v6 + 0x75c8) * 2 + 0x34) =
@@ -2101,7 +2101,7 @@ joined_r0x002073c8:
           }
           else {
             temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
-            if ((temp_v7 == 2) && (temp_v7 = FUN_0039c3d0(), temp_v7 != 0)) {
+            if ((temp_v7 == 2) && (temp_v7 = stateHolderStateIs0x12(), temp_v7 != 0)) {
               FUN_00333dc8(0);
               temp_v7 = 100;
               *(int *)(temp_v6 + 0x436c) = temp_v7;
@@ -2175,7 +2175,7 @@ joined_r0x002073c8:
     if (temp_v16 != 1) {
       if ((temp_v16 == 2) && (temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac)), temp_v7 == 2)) {
         FUN_002a7288();
-        FUN_003d2204(temp_v6);
+        roundObjFinish(temp_v6);
       }
     }
     else {
@@ -2308,7 +2308,7 @@ joined_r0x002073c8:
           FUN_0033449c(1);
           FUN_00334214(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
           temp_v11 = FUN_001ab854((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
-          FUN_00334434(temp_v11,0);
+          objBInitBlock19D0(temp_v11,0);
           FUN_002a7324(1);
           FUN_0020b490(temp_v6,0xc);
         }
@@ -2548,7 +2548,7 @@ LAB_00207d0c:
     case 10:
       FUN_00333dc8(0);
       FUN_002a7288();
-      FUN_003d2204(temp_v6);
+      roundObjFinish(temp_v6);
     }
     break;
   case 0x15:
@@ -2575,7 +2575,7 @@ LAB_00207d0c:
       break;
     case 3:
       FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
-      temp_v16 = FUN_00371e18();
+      temp_v16 = stateHolderStateIsNot4();
       if (temp_v16 != 0) {
         temp_v16 = 0;
         temp_v27 = 0;
@@ -2728,10 +2728,10 @@ LAB_00207d0c:
         FUN_001517b4(0,1);
         if (temp_v7 == 0) break;
       }
-      FUN_003491e8();
+      obj04Finish();
       FUN_0019de98(0,0xf4f4f4ff);
       FUN_002a7288();
-      temp_v7 = FUN_003d2204(temp_v6);
+      temp_v7 = roundObjFinish(temp_v6);
       if (temp_v7 != 0) {
         *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
       }

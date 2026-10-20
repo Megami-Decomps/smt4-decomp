@@ -20,11 +20,11 @@ int FUN_00275f44(...);
 int FUN_002a7288(void);
 int FUN_00333dc8(...);
 int FUN_00336de4(int, int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_0037dfb0(int, int);
 int FUN_003fd63c(int, int);
-int FUN_00409d8c(int, int);
+int countersAddSaturating(int, int);
 int FUN_004bcd90(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -54,18 +54,18 @@ extern int FUN_002effbc(void);
 extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_00336de4. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 extern int FUN_0035988c(unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 extern int FUN_00371e38(void);
 extern int FUN_0037df64(void);
 /* Supplied declaration required: FUN_0037dfb0. */
-extern int FUN_0039c3d0(void);
+extern int stateHolderStateIs0x12(void);
 /* Supplied declaration required: FUN_0039c410. */
 extern int FUN_003c16b8(void);
 extern unsigned int FUN_003d2150(unsigned int);
 /* Supplied declaration required: FUN_003fd63c. */
-/* Supplied declaration required: FUN_00409d8c. */
+/* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: FUN_004bd6b0. */
 
@@ -168,7 +168,7 @@ LAB_004cbdc8:
       if (temp_v0 != 2) {
         return;
       }
-      temp_v0 = FUN_0039c3d0();
+      temp_v0 = stateHolderStateIs0x12();
       if (temp_v0 == 0) {
         return;
       }
@@ -187,7 +187,7 @@ LAB_004cbdc8:
         return;
       }
       FUN_0023acdc((int)*(short *)(temp_v0 + 4));
-      FUN_00409d8c(6,1);
+      countersAddSaturating(6,1);
       break;
     case 1:
       temp_v3 = FUN_0026c3a0();
@@ -220,7 +220,7 @@ LAB_004cbdc8:
         FUN_001517b4();
         if (temp_v0 != 0) {
           FUN_00333dc8(1);
-          FUN_003491e8();
+          obj04Finish();
           sysPlaySe(0x9c);
           FUN_00275f44(*(unsigned int *)(param_1 + 0x14),8);
           temp_v2 = FUN_003d2150(0x100020f);
@@ -236,7 +236,7 @@ LAB_004cbdc8:
         return;
       }
       FUN_00333dc8(1);
-      FUN_003491e8();
+      obj04Finish();
       sysPlaySe(0x9c);
       FUN_00275f44(*(unsigned int *)(param_1 + 0x14),7);
       temp_v2 = FUN_003d2150(0x100020e);
@@ -267,7 +267,7 @@ LAB_004cbdc8:
       FUN_00169ddc(0x100021a);
       break;
     case 6:
-      temp_v3 = FUN_0039c3d0();
+      temp_v3 = stateHolderStateIs0x12();
       if (temp_v3 != 0) {
         FUN_00333dc8(0);
         FUN_004bd6b0(temp_v1,*(unsigned short *)(temp_v0 + 4),temp_v4);

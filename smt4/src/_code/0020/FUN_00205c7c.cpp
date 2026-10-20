@@ -9,7 +9,7 @@ int scrGetArg(...);
 
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 unsigned int FUN_00205c7c(void)
@@ -23,7 +23,7 @@ unsigned int FUN_00205c7c(void)
   temp_v0 = scrGetArg();
   temp_v1 = scrGetArg(1);
   if (temp_v0 < (int)temp_v1) {
-    temp_v2 = FUN_002c09f4(temp_v1 & 0xffff);
+    temp_v2 = randNextInRange(temp_v1 & 0xffff);
     scrSetResult(temp_v2 < temp_v0);
     return 1;
   }

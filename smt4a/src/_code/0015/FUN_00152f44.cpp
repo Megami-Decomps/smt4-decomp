@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_0061978c; /* 0x61978c */
-
-
-unsigned char FUN_00152f44(void)
-
+/* Returns the byte at 0x1E4 of the global at 0x61978C. */
+u8 FUN_00152f44(void)
 {
-  return (*(unsigned char *)((unsigned char *)&DAT_0061978c + 0x1e4));
+    return DAT_0061978c.unk1E4;
 }
 
 } /* extern "C" */

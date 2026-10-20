@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Sys43dc20.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043dc20; /* 0x43dc20 */
-
-
-unsigned char FUN_002ed5bc(void)
-
+u8 FUN_002ed5bc(void)
 {
-  return *(int *)((*(int *)((unsigned char *)&DAT_0043dc20 + 0x8)) + 4) == 7;
+    return DAT_0043dc20.obj->state == 7;
 }
 
 } /* extern "C" */

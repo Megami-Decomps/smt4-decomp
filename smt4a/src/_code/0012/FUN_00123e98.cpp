@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00113598(unsigned int, int, int);
+void FUN_00113598(u32 a, u8 *member, s32 b);
 
-/* Supplied declaration required: FUN_00113598. */
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x2E4];
+    /* 0x2E4 */ u8 member2E4[1];
+} Holder;
 
-
-void FUN_00123e98(unsigned int param_1,int param_2,int param_3)
-
+/* Calls FUN_00113598 with the member at 0x2E4 of `object`. */
+void FUN_00123e98(u32 a, Holder *object, s32 b)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00113598(param_1,param_2 + 0x2e4,param_3);
-  return;
+    FUN_00113598(a, object->member2E4, b);
 }
 
 } /* extern "C" */

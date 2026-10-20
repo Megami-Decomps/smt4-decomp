@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/PadState.h"
 
 extern "C" {
 
-extern int FUN_002b63ac(void);
-
+extern PadState *FUN_002b63ac(void);
 
 int FUN_00334038(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002b63ac();
-  return (int)*(short *)(temp_v0 + 0x1c);
+    PadState *pad = FUN_002b63ac();
+
+    return pad->unk1C;
 }
 
 } /* extern "C" */

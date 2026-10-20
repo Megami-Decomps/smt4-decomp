@@ -23,13 +23,13 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_3_stack;
 
-extern int FUN_00132132(int *, int *);
+extern int wordRefsDiffer_00132132(int *, int *);
 /* Supplied declaration required: FUN_002e9300. */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e934e. */
 /* Supplied declaration required: FUN_002e93da. */
 /* Supplied declaration required: FUN_002e9498. */
-extern int FUN_002e97f2(int *, unsigned int *);
+extern int wordRefsEqual_002e97f2(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f0cc. */
 /* Supplied declaration required: FUN_0030f12c. */
 
@@ -72,7 +72,7 @@ unsigned int FUN_0030f138(int param_1,unsigned int param_2,unsigned int param_3)
   }
   temp_v8 = temp_v5[0];
   temp_v9[0] = *(unsigned int *)(param_1 + 0x1c);
-  temp_v0 = FUN_002e97f2(&temp_v8,temp_v9);
+  temp_v0 = wordRefsEqual_002e97f2(&temp_v8,temp_v9);
   if ((temp_v0 != 0) ||
      (temp_v1 = FUN_0030f12c(temp_v4,temp_v3,temp_v8 + 0x10), temp_v0 = temp_v8, temp_v1 != 0)) {
     temp_v0 = *(int *)(param_1 + 0x1c);
@@ -86,7 +86,7 @@ unsigned int FUN_0030f138(int param_1,unsigned int param_2,unsigned int param_3)
     FUN_0030f0cc(&temp_v7,param_1 + 0x28,temp_v2);
     FUN_002e9318(temp_v5);
     temp_v8 = *(int *)(param_1 + 0x38);
-    temp_v0 = FUN_00132132(&temp_v7,&temp_v8);
+    temp_v0 = wordRefsDiffer_00132132(&temp_v7,&temp_v8);
     if (temp_v0 != 0) {
       param_3 = *(unsigned int *)(temp_v7 + 0x1c);
       FUN_002e934e(param_3,0,10);

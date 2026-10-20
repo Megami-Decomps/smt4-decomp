@@ -1,21 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int jobFind(unsigned int);
+extern int jobFind(u32 job);
 
+typedef struct Worker {
+    /* 0x0 */ u32 job;
+    /* 0x4 */ u8 unk4[5];
+    /* 0x9 */ u8 stopRequested;
+} Worker;
 
-unsigned int FUN_001f5ec0(unsigned int *param_1)
-
+/* 1 when the worker exists and its job is still alive (or it was never asked to stop). */
+u32 FUN_001f5ec0(Worker **owner)
 {
-  int temp_v0;
-  
-  param_1 = (unsigned int *)*param_1;
-  if ((param_1 != (unsigned int *)0x0) &&
-     ((temp_v0 = jobFind(*param_1), temp_v0 != 0 || (*(char *)((int)param_1 + 9) == '\0')))) {
-    return 1;
-  }
-  return 0;
+    Worker *worker = *owner;
+
+    if (worker != NULL && (jobFind(worker->job) != 0 || worker->stopRequested == 0)) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

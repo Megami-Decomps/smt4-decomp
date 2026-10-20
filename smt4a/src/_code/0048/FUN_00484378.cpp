@@ -27,7 +27,7 @@ extern int FUN_0026272c(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: logFormatBuffer. */
-extern int FUN_0039a550(unsigned int *, int);
+extern int convertToBufferAndStore(unsigned int *, int);
 /* Supplied declaration required: FUN_00484264. */
 /* Supplied declaration required: FUN_004853fc. */
 
@@ -91,7 +91,7 @@ LAB_00484524:
         temp_v1 = temp_v1 + 1;
         if (temp_v1 >= 9) {
           logFormatBuffer(&uStack_30,param_1 + 0x56e,1);
-          temp_v1 = FUN_0039a550((unsigned int *)&uStack_30,param_1 + 0x56e);
+          temp_v1 = convertToBufferAndStore((unsigned int *)&uStack_30,param_1 + 0x56e);
           if ((*piVar3 == 0) && (temp_v1 < 6)) {
             FUN_00183e58();
             FUN_004853fc(param_1,7);

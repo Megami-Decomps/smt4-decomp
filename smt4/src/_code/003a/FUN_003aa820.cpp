@@ -1,26 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_003a8cc8(void);
+extern u8 DAT_00422400;
+extern u32 *FUN_0022cb58(void);
 
-extern unsigned char DAT_00422400; /* 0x422400 */
+typedef struct Obj {
+    /* 0x000 */ const void *vtbl;
+    /* 0x004 */ u8 unk004[0x5A0];
+    /* 0x5A4 */ u8 unk5A4;
+} Obj;
 
-extern unsigned int *FUN_0022cb58(void);
-/* Supplied declaration required: FUN_003a8cc8. */
-
-
-unsigned int * FUN_003aa820(void)
-
+Obj *FUN_003aa820(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_0022cb58();
-  *puVar1 = (unsigned int)&DAT_00422400;
-  FUN_003a8cc8();
-  *(unsigned char *)(puVar1 + 0x169) = 0;
-  return puVar1;
+    Obj *obj = (Obj *)FUN_0022cb58();
+
+    obj->vtbl = &DAT_00422400;
+    FUN_003a8cc8();
+    *(u8 *)((u32 *)obj + 0x169) = 0;
+    return obj;
 }
 
 } /* extern "C" */

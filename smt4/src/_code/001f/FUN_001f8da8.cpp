@@ -26,7 +26,7 @@ extern int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_00256810. */
 extern int FUN_0025b6e8(int);
 /* Supplied declaration required: FUN_00295a18. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -101,7 +101,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
       temp_v18 = 0x32;
     }
     else {
-      temp_v2 = FUN_002c09f4((temp_v12 - temp_v3) & 0xffff);
+      temp_v2 = randNextInRange((temp_v12 - temp_v3) & 0xffff);
       temp_v18 = __aeabi_idivmod(temp_v2 * 100,temp_v12 - temp_v3);
       temp_v12 = temp_v3 + temp_v2;
     }
@@ -118,7 +118,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
           temp_v3 = (unsigned int)*(unsigned char *)(temp_v10 + 0xb);
         }
         if ((temp_v6 != 0 && temp_v3 != 0) && (temp_v3 = (unsigned int)*(unsigned char *)(temp_v10 + 10), temp_v3 == 0)) {
-          temp_v7 = FUN_002c09f4(99);
+          temp_v7 = randNextInRange(99);
           temp_v3 = (temp_v7 + 1U) & 0xffff;
           if (temp_v3 <= *(unsigned char *)(temp_v10 + 0xb)) {
             temp_v3 = FUN_00295a18(temp_v6,1);
@@ -189,7 +189,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
       if ((short)temp_v2 != 0) {
         if (temp_v5 < (int)temp_v12) {
           do {
-            temp_v10 = FUN_002c09f4(((int)(short)temp_v2 - 1U) & 0xffff);
+            temp_v10 = randNextInRange(((int)(short)temp_v2 - 1U) & 0xffff);
             temp_v7 = (int)asStack_200[temp_v10];
             temp_v10 = FUN_0025b6e8(temp_v7);
             if (temp_v10 == 0) {

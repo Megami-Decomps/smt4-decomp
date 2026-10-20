@@ -1,23 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_3_stack;
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x4A0C];
+    /* 0x4A0C */ u32 arrA[2];
+    /* 0x4A14 */ u32 arrB[2];
+    /* 0x4A1C */ u32 arrC[2];
+    /* 0x4A24 */ u32 state[2];
+    /* 0x4A2C */ u32 arrD[2];
+    /* 0x4A34 */ u32 arrE[2];
+} Obj;
 
-
-void FUN_00245228(int param_1,int param_2,unsigned int param_3)
-
+/* Resets slot `slot` to the idle state with `value` in arrE. */
+void FUN_00245228(Obj *obj, int slot, u32 value)
 {
-  param_1 = param_1 + param_2 * 4;
-  *(unsigned int *)(param_1 + 0x4a24) = 0;
-  *(unsigned int *)(param_1 + 0x4a2c) = 0;
-  *(unsigned int *)(param_1 + 0x4a34) = param_3;
-  *(unsigned int *)(param_1 + 0x4a14) = *(unsigned int *)(param_1 + 0x4a0c);
-  *(unsigned int *)(param_1 + 0x4a1c) = 0;
-  return;
+    obj->state[slot] = 0;
+    obj->arrD[slot] = 0;
+    obj->arrE[slot] = value;
+    obj->arrB[slot] = obj->arrA[slot];
+    obj->arrC[slot] = 0;
 }
 
 } /* extern "C" */

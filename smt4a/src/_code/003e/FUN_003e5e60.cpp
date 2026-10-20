@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015f858(unsigned int, int);
 int FUN_00275f44(unsigned int);
 int FUN_003180c4(int, unsigned int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
 
@@ -21,8 +21,8 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
-extern int FUN_00331194(void);
-/* Supplied declaration required: FUN_003491e8. */
+extern int panelIsMissingOrFlagClear(void);
+/* Supplied declaration required: obj04Finish. */
 extern int FUN_00357bc8(unsigned int, char *);
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
@@ -39,7 +39,7 @@ void FUN_003e5e60(int param_1)
   if (*(int *)(param_1 + 8) != 0) {
     if (((*(int *)(param_1 + 8) == 1) &&
         (temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x18)), temp_v0 == 2)) &&
-       (temp_v0 = FUN_00331194(), temp_v0 != 0)) {
+       (temp_v0 = panelIsMissingOrFlagClear(), temp_v0 != 0)) {
       temp_v0 = FUN_002a4b74();
       if (temp_v0 != -1) {
         if (temp_v0 != 3) {
@@ -63,7 +63,7 @@ void FUN_003e5e60(int param_1)
         *(unsigned int *)(param_1 + 0xc) = temp_v2;
       }
       FUN_003c3e14();
-      FUN_003491e8();
+      obj04Finish();
       return;
     }
   }

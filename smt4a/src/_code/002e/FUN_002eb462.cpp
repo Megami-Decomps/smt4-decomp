@@ -1,13 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_002eb462(unsigned char *param_1,char param_2,unsigned char param_3)
-
+/* Packs a nibble pair into a byte: `high` in bits 4-7 and `low` in bits 0-3. */
+void FUN_002eb462(u8 *dest, s8 high, u8 low)
 {
-  *param_1 = (param_2 << 4) | param_3;
-  return;
+    *dest = (high << 4) | low;
 }
 
 } /* extern "C" */

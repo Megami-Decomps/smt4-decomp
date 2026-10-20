@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
-int FUN_0037b578(unsigned int, unsigned int);
+int screenStartOrClear(unsigned int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_002ebce4(void);
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 
 
 void FUN_003f5268(int param_1,unsigned int param_2,unsigned int param_3)
@@ -63,7 +63,7 @@ void FUN_003f5268(int param_1,unsigned int param_2,unsigned int param_3)
   if (temp_v1 == 0) {
     return;
   }
-  FUN_0037b578(*(unsigned int *)(param_1 + 0x2c),temp_v2);
+  screenStartOrClear(*(unsigned int *)(param_1 + 0x2c),temp_v2);
   return;
 }
 

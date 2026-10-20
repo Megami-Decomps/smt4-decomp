@@ -1,25 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00293ba8(void);
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
+typedef struct GameData {
+    /* 0x0000 */ u8 unk0000[0x12E4];
+    /* 0x12E4 */ u32 unk12E4;
+    /* 0x12E8 */ u8 unk12E8[0xB7B];
+    /* 0x1E63 */ u8 unk1E63;
+} GameData;
 
-/* Supplied declaration required: FUN_00293ba8. */
-
+extern struct {
+    u8 unk00[4];
+    GameData *data;
+} g_gameGlobals;
 
 void FUN_0026d670(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) = 0;
-  FUN_00293ba8();
-  *(unsigned char *)(temp_v0 + 0x1e63) = 0;
-  return;
+    GameData *data = g_gameGlobals.data;
+
+    g_gameGlobals.data->unk12E4 = 0;
+    FUN_00293ba8();
+    data->unk1E63 = 0;
 }
 
 } /* extern "C" */

@@ -18,8 +18,8 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int FUN_00307cf0(unsigned int **, unsigned int **);
-extern int FUN_00307d28(unsigned int **, unsigned int **);
+extern int wordRefsDiffer_00307cf0(unsigned int **, unsigned int **);
+extern int wordRefsDiffer_00307d28(unsigned int **, unsigned int **);
 /* Supplied declaration required: FUN_003101ae. */
 /* Supplied declaration required: FUN_003101dc. */
 
@@ -42,8 +42,8 @@ int FUN_0030ceb8(int param_1,int param_2)
     temp_v3 = (unsigned int *)*temp_v5;
     temp_v6 = *(unsigned int **)(param_2 + 0x10);
     temp_v4 = (unsigned int *)*temp_v6;
-    while ((temp_v0 = FUN_00307d28(&temp_v3,&temp_v5), temp_v0 != 0 &&
-           (temp_v0 = FUN_00307cf0(&temp_v4,&temp_v6), temp_v0 != 0))) {
+    while ((temp_v0 = wordRefsDiffer_00307d28(&temp_v3,&temp_v5), temp_v0 != 0 &&
+           (temp_v0 = wordRefsDiffer_00307cf0(&temp_v4,&temp_v6), temp_v0 != 0))) {
       temp_v3[3] = temp_v4[3];
       temp_v3[4] = temp_v4[4];
       temp_v3[5] = temp_v4[5];

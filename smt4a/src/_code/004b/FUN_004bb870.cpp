@@ -1,17 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard004B.h"
 
 extern "C" {
 
-extern int FUN_004bb80c(void);
+typedef struct HalfAt10 {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u16 unk10;
+} HalfAt10;
 
+extern HalfAt10 *FUN_004bb80c(void);
 
-unsigned short FUN_004bb870(void)
-
+u16 FUN_004bb870(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_004bb80c();
-  return *(unsigned short *)(temp_v0 + 0x10);
+    return FUN_004bb80c()->unk10;
 }
 
 } /* extern "C" */

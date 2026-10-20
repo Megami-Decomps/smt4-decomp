@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_004509fc(int *);
+int handlerTableDispatch1(int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_004509fc. */
+/* Supplied declaration required: handlerTableDispatch1. */
 
 
 void nw_gfx_res_ResLight_Cleanup(unsigned int *param_1)
@@ -38,7 +38,7 @@ void nw_gfx_res_ResLight_Cleanup(unsigned int *param_1)
       temp_v4 = 0;
     }
     if (temp_v4 != 0) {
-      FUN_004509fc(&temp_v4);
+      handlerTableDispatch1(&temp_v4);
     }
     temp_v0 = puVar4[0x47];
     if (temp_v0 != 0) {
@@ -54,7 +54,7 @@ void nw_gfx_res_ResLight_Cleanup(unsigned int *param_1)
       }
       if (temp_v3 != 0) {
         temp_v4 = temp_v3;
-        FUN_004509fc(&temp_v4);
+        handlerTableDispatch1(&temp_v4);
       }
     }
   }

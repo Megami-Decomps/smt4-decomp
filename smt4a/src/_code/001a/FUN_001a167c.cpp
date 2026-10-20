@@ -1,21 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0018a3d0(unsigned char *);
+u8 FUN_0018a3d0(u8 *state, u8 connected);
+extern u8 DAT_00647708[];
 
-extern unsigned char DAT_00647708; /* 0x647708 */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ u8 headsetConnected;
+} Holder;
 
-/* Supplied declaration required: FUN_0018a3d0. */
-
-
-void FUN_001a167c(int param_1,unsigned char param_2)
-
+/* Stores the headset flag and forwards it to FUN_0018a3d0 together with the state at 0x647708. */
+void FUN_001a167c(Holder *object, u8 connected)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned char *)(param_1 + 0x26) = param_2;
-  FUN_0018a3d0(&DAT_00647708);
-  return;
+    object->headsetConnected = connected;
+    FUN_0018a3d0(DAT_00647708, connected);
 }
 
 } /* extern "C" */

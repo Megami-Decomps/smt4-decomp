@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001aea28(unsigned int);
-int FUN_00353d68(void);
+int clearByte(void);
 
 typedef int romwright_code(...);
 extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
@@ -13,8 +13,8 @@ extern int DAT_00581280; /* 0x581280 */
 
 /* Supplied declaration required: FUN_001aea28. */
 extern int FUN_00295e54(int, int, unsigned int);
-/* Supplied declaration required: FUN_00353d68. */
-extern int FUN_003addd8(int, int);
+/* Supplied declaration required: clearByte. */
+extern int flagPairCondition(int, int);
 
 
 unsigned int FUN_0033e1d4(void)
@@ -63,7 +63,7 @@ unsigned int FUN_0033e1d4(void)
           *(unsigned int *)(temp_v2 + 0x40) = 0;
         }
         if (*(int *)(temp_v2 + 0x3c) != 0) {
-          FUN_00353d68();
+          clearByte();
           *(unsigned int *)(temp_v2 + 0x3c) = 0;
         }
         *(char *)(temp_v2 + 0xc) = '\0';
@@ -77,7 +77,7 @@ unsigned int FUN_0033e1d4(void)
     do {
       temp_v4 = DAT_00581280 + temp_v2 * 0x3c;
       if (((*(char *)(temp_v4 + 0xc) != '\0') &&
-          (temp_v1 = FUN_003addd8((int)*(short *)(temp_v4 + 0x34),(int)*(short *)(temp_v4 + 0x36)),
+          (temp_v1 = flagPairCondition((int)*(short *)(temp_v4 + 0x34),(int)*(short *)(temp_v4 + 0x36)),
           temp_v1 == 0)) && (*(int *)(temp_v4 + 0x40) != 0)) {
         if (*(int *)(*(int *)(DAT_00581280 + temp_v2 * 0x3c + 0x40) + 4) != 0) {
           FUN_001aea28(DAT_0056fcc0);

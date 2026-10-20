@@ -1,37 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0022a478(char *, unsigned int);
-int FUN_00298d64(char *, unsigned int);
-int FUN_002992bc(char *, unsigned int);
-int FUN_0029d620(char *, unsigned int);
+int FUN_0022a478(void *panel, u32 a);
+int FUN_00298d64(void *panel, u32 a);
+int FUN_002992bc(void *panel, u32 a);
+int FUN_0029d620(void *panel, u32 a);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
+typedef struct Panel {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 unk01[0xF];
+    /* 0x10 */ u8 body[1];
+} Panel;
 
-/* Supplied declaration required: FUN_0022a478. */
-/* Supplied declaration required: FUN_00298d64. */
-/* Supplied declaration required: FUN_002992bc. */
-/* Supplied declaration required: FUN_0029d620. */
-
-
-void FUN_0022e4a4(char *param_1,unsigned int param_2,unsigned int param_3)
-
+/* Applies the scroll position (first, count) to the panel's body according to its kind (0 or 1). */
+void FUN_0022e4a4(Panel *panel, u32 first, u32 count)
 {
-/* irregular: 4 native warning(s); review required */
-  if (*param_1 == '\0') {
-    FUN_00298d64(param_1 + 0x10,param_2);
-    FUN_0029d620(param_1 + 0x10,param_3);
-  }
-  if (*param_1 == '\x01') {
-    FUN_0022a478(param_1 + 0x10,param_2);
-    FUN_002992bc(param_1 + 0x10,param_3);
-    return;
-  }
-  return;
+    if (panel->kind == 0) {
+        FUN_00298d64(panel->body, first);
+        FUN_0029d620(panel->body, count);
+    }
+    if (panel->kind == 1) {
+        FUN_0022a478(panel->body, first);
+        FUN_002992bc(panel->body, count);
+        return;
+    }
 }
 
 } /* extern "C" */

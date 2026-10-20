@@ -32,12 +32,12 @@ extern unsigned int g_btlEvent; /* 0x573898 */
 
 /* Supplied declaration required: FUN_003e1114. */
 /* Supplied declaration required: FUN_003e2470. */
-extern int FUN_003e9b28(fn_003e11ac_arg1 *);
+extern int valueAtF0IsReady(fn_003e11ac_arg1 *);
 extern int FUN_003f0f40(fn_003e11ac_arg1 *);
 /* Supplied declaration required: FUN_003f1334. */
 extern int FUN_003f86c8(unsigned int);
 /* Supplied declaration required: FUN_003f881c. */
-extern int FUN_004d84e8(unsigned int);
+extern int isEntryUsable(unsigned int);
 
 
 unsigned int * FUN_003e11ac(unsigned int *param_1,fn_003e11ac_arg1 *param_2)
@@ -46,12 +46,12 @@ unsigned int * FUN_003e11ac(unsigned int *param_1,fn_003e11ac_arg1 *param_2)
 /* irregular: 4 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_004d84e8(g_btlEvent);
+  temp_v0 = isEntryUsable(g_btlEvent);
   if (temp_v0 != 0) {
     return (unsigned int *)0x0;
   }
   if (*(int *)&param_2->field_0x12c < 1) {
-    temp_v0 = FUN_003e9b28(param_2);
+    temp_v0 = valueAtF0IsReady(param_2);
     if (temp_v0 != 0) {
       *param_1 = 4;
       param_1[4] = 0;

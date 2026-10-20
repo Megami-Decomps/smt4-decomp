@@ -1,4 +1,4 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
@@ -6,90 +6,59 @@ int FUN_0026933c(...);
 int FUN_002e7278(...);
 int FUN_003024d0(...);
 
-typedef struct fn_00313824_arg0 fn_00313824_arg0;
-typedef struct fn_00313824_arg0_p9c fn_00313824_arg0_p9c;
-typedef struct fn_00313824_arg0_pa0 fn_00313824_arg0_pa0;
-struct fn_00313824_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    ushort field_0xc; /* +0xc */
-    unsigned char pad_0xe[0x2];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x7];
-    unsigned char field_0x18; /* +0x18 */
-    unsigned char pad_0x19[0x13];
-    float field_0x2c; /* +0x2c */
-    ushort field_0x30; /* +0x30 */
-    unsigned char pad_0x32[0x22];
-    undefined4 field_0x54; /* +0x54 */
-    unsigned char pad_0x58[0x44];
-    fn_00313824_arg0_p9c *field_0x9c; /* +0x9c */
-    fn_00313824_arg0_pa0 *field_0xa0; /* +0xa0 */
-};
-struct fn_00313824_arg0_p9c {
-    unsigned char pad_0x0[0x8];
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    unsigned char pad_0x14[0x4];
-    undefined4 field_0x18; /* +0x18 */
-};
-struct fn_00313824_arg0_pa0 {
-    undefined4 field_0x0; /* +0x0 */
-    undefined4 field_0x4; /* +0x4 */
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    float field_0x10; /* +0x10 */
-    float field_0x14; /* +0x14 */
-    char field_0x18; /* +0x18 */
-};
+typedef struct Item {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ int unk10;
+    /* 0x14 */ u8 unk14[0x14];
+} Item;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ int count;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ int unk10;
+    /* 0x14 */ u8 unk14[4];
+    /* 0x18 */ Item *items;
+} Owner;
 
-/* Supplied declaration required: FUN_0026933c. */
-/* Supplied declaration required: FUN_002e7278. */
-/* Supplied declaration required: FUN_003024d0. */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x1C];
+} Record;
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u16 type;
+    /* 0x0E */ u8 unk0E[0x8E];
+    /* 0x9C */ Owner *owner;
+    /* 0xA0 */ Record *records;
+} Obj;
 
-void FUN_00313824(fn_00313824_arg0 *param_1)
-
+void FUN_00313824(Obj *obj)
 {
-/* irregular: 4 native warning(s); review required */
-  fn_00313824_arg0_p9c *pfVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  fn_00313824_arg0_pa0 *pfVar4;
-  int temp_v3;
-  
-  FUN_0026933c(param_1->field_0x9c);
-  pfVar1 = param_1->field_0x9c;
-  temp_v3 = pfVar1->field_0x8;
-  temp_v1 = temp_v0;
-  if (temp_v3 != 0) {
-    temp_v1 = pfVar1->field_0x10;
-  }
-  if (temp_v3 != 0 && temp_v1 != 0) {
-    temp_v1 = pfVar1->field_0x18;
-    pfVar4 = param_1->field_0xa0;
-    if ((param_1->field_0xc == 3) && (temp_v2 = 0, 0 < temp_v3)) {
-      int *q = (int *)temp_v1;
-      do {
-        if (q[4] == 0) {
-          FUN_003024d0(param_1,pfVar4);
+    Owner *owner;
+    int count;
+    Record *record;
+    Item *item;
+    int i;
+
+    FUN_0026933c(obj->owner);
+    owner = obj->owner;
+    count = owner->count;
+    if (count != 0 && owner->unk10 != 0) {
+        item = owner->items;
+        record = obj->records;
+        if ((obj->type == 3) && (i = 0, 0 < count)) {
+            do {
+                if (item->unk10 == 0) {
+                    FUN_003024d0(obj, record);
+                }
+                i = i + 1;
+                item = item + 1;
+                record = record + 1;
+            } while (i < count);
         }
-        temp_v2 = temp_v2 + 1;
-        q = q + 10;
-        pfVar4 = pfVar4 + 1;
-      } while (temp_v2 < temp_v3);
     }
-  }
-  FUN_002e7278(param_1);
-  return;
+    FUN_002e7278(obj);
 }
 
 } /* extern "C" */

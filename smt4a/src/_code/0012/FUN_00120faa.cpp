@@ -1,22 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9538(int, unsigned int);
+void FUN_002e9538(u8 *member, u32 value);
+u32 FUN_002ea93c(u32 value);
 
-/* Supplied declaration required: FUN_002e9538. */
-extern unsigned int FUN_002ea93c(unsigned int);
+typedef struct MemberHolder {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 member10[1];
+} MemberHolder;
 
-
-void FUN_00120faa(int param_1,unsigned int param_2)
-
+/* Converts `value` with FUN_002ea93c and passes it to FUN_002e9538 together with the member at 0x10. */
+void FUN_00120faa(MemberHolder *object, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_002ea93c(param_2);
-  FUN_002e9538(param_1 + 0x10,temp_v0);
-  return;
+    u32 converted = FUN_002ea93c(value);
+    FUN_002e9538(object->member10, converted);
 }
 
 } /* extern "C" */

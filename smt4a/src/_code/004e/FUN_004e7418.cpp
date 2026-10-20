@@ -21,7 +21,7 @@ extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_004ab734. */
-extern int FUN_004d84e8(unsigned int);
+extern int isEntryUsable(unsigned int);
 /* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004fbd98. */
 /* Supplied declaration required: FUN_004fde5c. */
@@ -34,7 +34,7 @@ unsigned int FUN_004e7418(int *param_1,int param_2)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_004d84e8(g_btlEvent);
+  temp_v0 = isEntryUsable(g_btlEvent);
   if (temp_v0 != 0) {
     temp_v1 = 0;
   }

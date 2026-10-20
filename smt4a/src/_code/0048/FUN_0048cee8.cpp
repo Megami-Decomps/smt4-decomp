@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_0014afd0(int, int);
-int FUN_0038594c(void);
+int dataTable2ECount(void);
 int FUN_0048e46c(int, int);
 int MapNaviTable_GetCategoryCount(void);
 
 /* Supplied declaration required: FUN_0014afd0. */
 extern int FUN_00153f64(unsigned int, int);
 extern int FUN_0019a7f4(unsigned int);
-extern int FUN_00327638(int);
-/* Supplied declaration required: FUN_0038594c. */
+extern int dataTable2EGetEntry(int);
+/* Supplied declaration required: dataTable2ECount. */
 /* Supplied declaration required: FUN_0048e46c. */
 /* Supplied declaration required: MapNaviTable_GetCategoryCount. */
 extern short *MapNaviTable_GetCategoryRecord(unsigned int *, int);
@@ -41,17 +41,17 @@ void FUN_0048cee8(int param_1,int param_2,unsigned int param_3,unsigned int para
     *piVar8 = 0;
   }
   temp_v3 = 0;
-  FUN_0038594c();
+  dataTable2ECount();
   if (0 < temp_v2) {
     do {
-      temp_v2 = FUN_00327638(temp_v3);
+      temp_v2 = dataTable2EGetEntry(temp_v3);
       if (*(short *)(temp_v2 + 0x20) == -1) break;
       if (*(short *)(temp_v2 + 0x20) == param_2) {
         *piVar8 = *(short *)(temp_v2 + 0x2a) + 1;
         break;
       }
       temp_v3 = temp_v3 + 1;
-      FUN_0038594c();
+      dataTable2ECount();
     } while (temp_v3 < temp_v2);
   }
   FUN_0014afd0(0x28,*piVar8);

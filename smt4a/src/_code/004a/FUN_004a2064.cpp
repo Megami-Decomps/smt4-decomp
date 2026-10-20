@@ -11,7 +11,7 @@ int FUN_004a1db4(int);
 int FUN_004a3b48(int);
 int FUN_004a41d8(int);
 int FUN_004a6c50(int, int);
-int FUN_004a6ce4(int);
+int words4At20Clear(int);
 int FUN_004cf880(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -29,7 +29,7 @@ extern int FUN_002a4b28(short);
 /* Supplied declaration required: FUN_004a3b48. */
 /* Supplied declaration required: FUN_004a41d8. */
 /* Supplied declaration required: FUN_004a6c50. */
-/* Supplied declaration required: FUN_004a6ce4. */
+/* Supplied declaration required: words4At20Clear. */
 /* Supplied declaration required: FUN_004cf880. */
 extern int FUN_004cfe4c(int);
 extern int FUN_004d0040(int);
@@ -96,7 +96,7 @@ void FUN_004a2064(int param_1)
     FUN_004a1db4(param_1);
   }
   FUN_004a3b48(param_1);
-  FUN_004a6ce4(param_1 + 0x96);
+  words4At20Clear(param_1 + 0x96);
   temp_v3 = FUN_004d0040(param_1 + 0x20);
   temp_v6 = 0;
   if (temp_v6 < temp_v3) {

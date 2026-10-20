@@ -13,7 +13,7 @@ typedef struct {
 
 extern int FUN_001ab940(void);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_00418584(int);
+extern int partyEntryFlagsBit3(int);
 
 
 void FUN_003df43c(int param_1)
@@ -29,7 +29,7 @@ void FUN_003df43c(int param_1)
   if (temp_v1 != 0) {
     temp_v0 = *(short *)(temp_v1 + 0xde);
   }
-  if ((temp_v1 != 0 && temp_v0 != 0) && (temp_v1 = FUN_00418584(param_1), temp_v1 != 0)) {
+  if ((temp_v1 != 0 && temp_v0 != 0) && (temp_v1 = partyEntryFlagsBit3(param_1), temp_v1 != 0)) {
     temp_v1 = FUN_001ab940();
     temp_v1 = temp_v1 + param_1 * 4;
     *(unsigned char *)(temp_v1 + 0x2a2) = *(unsigned char *)(temp_v1 + 0x2a2) | 8;

@@ -1,21 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003f5848(unsigned int);
+int allocatorFreeBlock(u32 decoder);
+extern u8 DAT_00420a88;
 
-extern unsigned char DAT_00420a88; /* 0x420a88 */
+typedef struct Wrapper {
+    /* 0x0 */ const void *vtbl;
+    /* 0x4 */ u32 decoder;
+} Wrapper;
 
-/* Supplied declaration required: FUN_003f5848. */
-
-
-unsigned int * FUN_00351b70(unsigned int *param_1)
-
+/* Destructor-style: installs the vtable and releases the decoder. */
+Wrapper *FUN_00351b70(Wrapper *wrapper)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_00420a88;
-  FUN_003f5848(param_1[1]);
-  return param_1;
+    wrapper->vtbl = &DAT_00420a88;
+    allocatorFreeBlock(wrapper->decoder);
+    return wrapper;
 }
 
 } /* extern "C" */

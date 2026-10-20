@@ -1,20 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b5be8(unsigned char *, unsigned int);
+void FUN_001b5be8(u8 *manager, u32 value);
+extern u8 DAT_00643380[];
 
-extern unsigned char DAT_00643380; /* 0x643380 */
-
-/* Supplied declaration required: FUN_001b5be8. */
-
-
-void FUN_001af958(unsigned int param_1)
-
+/* Forwards `value` to FUN_001b5be8 with the master manager at 0x643380. */
+void FUN_001af958(u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001b5be8(&DAT_00643380,param_1);
-  return;
+    FUN_001b5be8(DAT_00643380, value);
 }
 
 } /* extern "C" */

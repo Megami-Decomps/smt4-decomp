@@ -8,8 +8,8 @@ int CONCAT44(double, unsigned int);
 int FUN_002e1208(...);
 int FUN_00356470(void);
 int FUN_003c3048(...);
-int FUN_00493888(void);
-int FUN_004938b8(void);
+int dataTable2BType3Count(void);
+int dataTable2BType1Count(void);
 int MapNaviTable_GetAreaCount(void);
 int MapNaviTable_GetCategoryCount(void);
 int SUB42(double, int);
@@ -80,10 +80,10 @@ extern unsigned short FUN_003c302c(unsigned int);
 /* Supplied declaration required: FUN_003c3048. */
 extern unsigned int FUN_003cd5f4(unsigned int);
 extern short FUN_0048b1bc(int, int);
-extern short *FUN_004937c4(unsigned char *, int);
-extern char *FUN_00493834(unsigned char *, int);
-/* Supplied declaration required: FUN_00493888. */
-/* Supplied declaration required: FUN_004938b8. */
+extern short *dataTable2BType3GetEntry(unsigned char *, int);
+extern char *dataTable2BType1GetEntry(unsigned char *, int);
+/* Supplied declaration required: dataTable2BType3Count. */
+/* Supplied declaration required: dataTable2BType1Count. */
 /* Supplied declaration required: MapNaviTable_GetAreaCount. */
 extern int MapNaviTable_GetAreaRecord(unsigned char *, unsigned int);
 /* Supplied declaration required: MapNaviTable_GetCategoryCount. */
@@ -235,10 +235,10 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
           temp_v4 = 1;
           temp_v7 = 0;
           puVar11 = temp_v55;
-          FUN_004938b8();
+          dataTable2BType1Count();
           if (0 < (int)puVar11) {
             do {
-              pcVar20 = (char *)FUN_00493834(temp_v55,temp_v7);
+              pcVar20 = (char *)dataTable2BType1GetEntry(temp_v55,temp_v7);
               if ((*(short *)(pcVar20 + 8) == 0) &&
                  ((unsigned int)(unsigned char)pcVar20[1] == *(unsigned int *)(psVar9 + 0x10))) {
                 temp_v4 = (short)pcVar20[3];
@@ -246,7 +246,7 @@ void FUN_0048e46c(int param_1,unsigned int param_2)
               }
               temp_v7 = temp_v7 + 1;
               puVar11 = temp_v55;
-              FUN_004938b8();
+              dataTable2BType1Count();
             } while (temp_v7 < (int)puVar11);
           }
           temp_v15 = psVar9[4];
@@ -464,10 +464,10 @@ LAB_0048ed6c:
   do {
     temp_v9 = 0;
     puVar11 = temp_v55;
-    FUN_004938b8();
+    dataTable2BType1Count();
     if (0 < (int)puVar11) {
       do {
-        pcVar20 = (char *)FUN_00493834(temp_v55,temp_v9);
+        pcVar20 = (char *)dataTable2BType1GetEntry(temp_v55,temp_v9);
         if ((int)*pcVar20 == temp_v64) {
           if (temp_v7 != 0) {
             if (temp_v7 != 1) {
@@ -635,7 +635,7 @@ LAB_0048eeec:
 LAB_0048f224:
         temp_v9 = temp_v9 + 1;
         puVar11 = temp_v55;
-        FUN_004938b8();
+        dataTable2BType1Count();
       } while (temp_v9 < (int)puVar11);
     }
     temp_v7 = temp_v7 + 1;
@@ -655,17 +655,17 @@ LAB_0048f224:
         temp_v7 = 0;
         puVar11 = temp_v55;
         temp_v58 = 1;
-        FUN_004938b8();
+        dataTable2BType1Count();
         if (0 < (int)puVar11) {
           do {
-            pcVar20 = (char *)FUN_00493834(temp_v55,temp_v7);
+            pcVar20 = (char *)dataTable2BType1GetEntry(temp_v55,temp_v7);
             if ((*(short *)(pcVar20 + 8) == 0) && (pcVar20[1] == *(char *)((int)puVar12 + 0xb))) {
               temp_v58 = (int)pcVar20[3];
               break;
             }
             temp_v7 = temp_v7 + 1;
             puVar11 = temp_v55;
-            FUN_004938b8();
+            dataTable2BType1Count();
           } while (temp_v7 < (int)puVar11);
         }
         temp_v3 = *(short *)((int)puVar12 + 0x16);
@@ -761,17 +761,17 @@ LAB_0048f224:
         temp_v7 = 0;
         puVar11 = temp_v55;
         temp_v58 = 1;
-        FUN_004938b8();
+        dataTable2BType1Count();
         if (0 < (int)puVar11) {
           do {
-            pcVar20 = (char *)FUN_00493834(temp_v55,temp_v7);
+            pcVar20 = (char *)dataTable2BType1GetEntry(temp_v55,temp_v7);
             if ((*(short *)(pcVar20 + 8) == 0) && (pcVar20[1] == *(char *)((int)puVar12 + 0xb))) {
               temp_v58 = (int)pcVar20[3];
               break;
             }
             temp_v7 = temp_v7 + 1;
             puVar11 = temp_v55;
-            FUN_004938b8();
+            dataTable2BType1Count();
           } while (temp_v7 < (int)puVar11);
         }
         temp_v7 = param_1 + *(char *)((int)puVar12 + 9) * 8;
@@ -904,11 +904,11 @@ LAB_0048f224:
               }
               temp_v7 = 0;
               puVar11 = temp_v55;
-              FUN_004938b8();
+              dataTable2BType1Count();
               temp_v17 = (unsigned int)temp_v31;
               if (0 < (int)puVar11) {
                 do {
-                  pcVar20 = (char *)FUN_00493834(temp_v55,temp_v7);
+                  pcVar20 = (char *)dataTable2BType1GetEntry(temp_v55,temp_v7);
                   temp_v17 = (unsigned int)temp_v31;
                   temp_v16 = (char)psVar22[2] == pcVar20[1];
                   pcVar13 = pcVar20;
@@ -918,7 +918,7 @@ LAB_0048f224:
                   if (temp_v16 && pcVar13 == (char *)0x0) break;
                   temp_v7 = temp_v7 + 1;
                   puVar11 = temp_v55;
-                  FUN_004938b8();
+                  dataTable2BType1Count();
                   temp_v17 = (unsigned int)temp_v31;
                 } while (temp_v7 < (int)puVar11);
               }
@@ -1048,10 +1048,10 @@ LAB_0048fec8:
         }
         temp_v13 = 0;
         puVar11 = temp_v55;
-        FUN_00493888();
+        dataTable2BType3Count();
         if (0 < (int)puVar11) {
           do {
-            psVar22 = (short *)FUN_004937c4(temp_v55,temp_v13);
+            psVar22 = (short *)dataTable2BType3GetEntry(temp_v55,temp_v13);
             if ((int)*psVar22 == 0xffffffff) break;
             if (((int)*psVar22 == temp_v64) &&
                (temp_v51[temp_v41] == (unsigned int)*(unsigned char *)(psVar22 + 1))) {
@@ -1073,11 +1073,11 @@ LAB_0048fec8:
               }
               temp_v7 = 0;
               puVar11 = temp_v55;
-              FUN_004938b8();
+              dataTable2BType1Count();
               temp_v17 = (unsigned int)((unsigned long long)temp_v32 >> 0x20);
               if (0 < (int)puVar11) {
                 do {
-                  pcVar20 = (char *)FUN_00493834(temp_v55,temp_v7);
+                  pcVar20 = (char *)dataTable2BType1GetEntry(temp_v55,temp_v7);
                   temp_v17 = (unsigned int)((unsigned long long)temp_v32 >> 0x20);
                   temp_v6 = (unsigned short)*(unsigned char *)(psVar22 + 1);
                   temp_v16 = temp_v6 == (unsigned char)pcVar20[1];
@@ -1087,7 +1087,7 @@ LAB_0048fec8:
                   if (temp_v16 && temp_v6 == 0) break;
                   temp_v7 = temp_v7 + 1;
                   puVar11 = temp_v55;
-                  FUN_004938b8();
+                  dataTable2BType1Count();
                   temp_v17 = (unsigned int)((unsigned long long)temp_v32 >> 0x20);
                 } while (temp_v7 < (int)puVar11);
               }
@@ -1118,7 +1118,7 @@ LAB_0048fec8:
             }
             temp_v13 = temp_v13 + 1;
             puVar11 = temp_v55;
-            FUN_00493888();
+            dataTable2BType3Count();
           } while (temp_v13 < (int)puVar11);
         }
         temp_v41 = temp_v41 + 1;

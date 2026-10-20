@@ -1,19 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct Provider;
+typedef struct ProviderVtbl {
+    /* 0x00 */ void *unk00[5];
+    /* 0x14 */ u32 *(*getEntry)(struct Provider *provider);
+} ProviderVtbl;
 
-unsigned int * FUN_002a86a4(int param_1)
+typedef struct Provider {
+    /* 0x0 */ ProviderVtbl *vtbl;
+} Provider;
 
+typedef struct Owner {
+    /* 0x000 */ u8 unk000[0x258];
+    /* 0x258 */ Provider *provider;
+} Owner;
+
+/* Returns the payload (entry + 8) of the provider's entry when its flag 0x20000000 is set. */
+u32 *FUN_002a86a4(Owner *owner)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(**(int **)(param_1 + 600) + 0x14))(*(int *)(param_1 + 600));
-  if ((puVar1 != (unsigned int *)0x0) && ((*puVar1 & 0x20000000) == 0)) {
-    puVar1 = (unsigned int *)0x0;
-  }
-  return puVar1 + 2;
+    u32 *entry = owner->provider->vtbl->getEntry(owner->provider);
+
+    if (entry != NULL && (*entry & 0x20000000) == 0) {
+        entry = NULL;
+    }
+    return entry + 2;
 }
 
 } /* extern "C" */

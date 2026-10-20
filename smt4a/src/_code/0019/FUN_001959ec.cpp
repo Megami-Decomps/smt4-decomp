@@ -1,24 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_005b4428; /* 0x5b4428 */
+typedef struct Table {
+    /* 0x000 */ u8 unk000[0x828];
+    /* 0x828 */ u32 *entries[0x20];
+} Table;
+extern Table *DAT_005b4428;
 
-
-unsigned int FUN_001959ec(unsigned int param_1)
-
+/* Returns the first word of entry `index` (0..0x1F) of the table, or 0 when the index is out of range or the entry is empty. */
+u32 FUN_001959ec(u32 index)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if ((param_1 < 0x20) &&
-     (puVar1 = *(unsigned int **)(DAT_005b4428 + param_1 * 4 + 0x828), puVar1 != (unsigned int *)0x0)) {
-    temp_v0 = *puVar1;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 *entry;
+    u32 value;
+
+    if ((index < 0x20) && (entry = DAT_005b4428->entries[index], entry != NULL)) {
+        value = *entry;
+    } else {
+        value = 0;
+    }
+    return value;
 }
 
 } /* extern "C" */

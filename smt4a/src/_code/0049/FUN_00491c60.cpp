@@ -14,12 +14,12 @@ extern unsigned int DAT_005f1600; /* 0x5f1600 */
 extern int DAT_005f1c5c; /* 0x5f1c5c */
 
 extern int FUN_0018719c(void);
-extern int FUN_00284dc4(unsigned int);
+extern int dataTableHasMatchingEntry35(unsigned int);
 extern int FUN_002e707c(void);
 extern unsigned long long FUN_00376fcc(int);
 extern int FUN_0037700c(void);
 extern int FUN_00384d34(int);
-extern int FUN_003ade20(int);
+extern int gameOwnedBitTest2(int);
 extern int FUN_003bf5a8(int);
 extern int FUN_004083a8(unsigned char);
 
@@ -68,7 +68,7 @@ void FUN_00491c60(int param_1)
                   temp_v6 = 1;
                 }
                 if ((((*(int *)(temp_v1 + 0x17d8) == 0) || (temp_v2 = FUN_002e707c(), temp_v2 != 0)) ||
-                    (temp_v2 = FUN_00284dc4(*(unsigned int *)(temp_v1 + 0x17d8)), temp_v2 != 0)) && (!temp_v6)
+                    (temp_v2 = dataTableHasMatchingEntry35(*(unsigned int *)(temp_v1 + 0x17d8)), temp_v2 != 0)) && (!temp_v6)
                    ) {
                   *(unsigned short *)(temp_v1 + 0x17c0) = 1;
                 }
@@ -123,7 +123,7 @@ void FUN_00491c60(int param_1)
             }
           }
           else {
-            temp_v2 = FUN_003ade20((int)*(short *)(temp_v1 + 0x17ba));
+            temp_v2 = gameOwnedBitTest2((int)*(short *)(temp_v1 + 0x17ba));
 joined_r0x00491d8c:
             if (temp_v2 == 0) {
               *(unsigned short *)(temp_v1 + 0x17c0) = 0;
@@ -225,7 +225,7 @@ LAB_00491eb4:
           }
         }
         else {
-          temp_v2 = FUN_003ade20((int)*(short *)(temp_v5 + 0x7bc2));
+          temp_v2 = gameOwnedBitTest2((int)*(short *)(temp_v5 + 0x7bc2));
           if (temp_v2 != 0) goto LAB_00491f8c;
         }
 LAB_00491fbc:

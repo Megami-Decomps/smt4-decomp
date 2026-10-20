@@ -17,7 +17,7 @@ int FUN_00184c00(...);
 int FUN_002b132c(...);
 int FUN_002f9418(void);
 int FUN_0031db84(...);
-int FUN_00321310(...);
+int menu32PlayCursorSeAndSelect(...);
 int FUN_00321338(...);
 int FUN_00321500(...);
 int FUN_00333f6c(void);
@@ -27,7 +27,7 @@ int FUN_0035b304(void);
 int FUN_0037dab0(void);
 int FUN_0038b3f8(...);
 int FUN_003a7a88(...);
-int FUN_003eaa6c(...);
+int pairQueueAppend(...);
 int FUN_003f89e8(...);
 int FUN_0047f66c(...);
 int FUN_004a9588(...);
@@ -63,9 +63,9 @@ int FUN_002cdd18(int);
 int sysMemClear(unsigned int *, int);
 int FUN_00336da0(int);
 int FUN_0034efe0(void);
-int FUN_0034f018(int);
-int FUN_0035fb28(...);
-int FUN_0037418c(int);
+int owner2DCInitSub(int);
+int menu32State387CIs7(...);
+int menu32EnterState27(int);
 int FUN_003f89c0(unsigned int);
 int FUN_003f97a4(unsigned int);
 int FUN_003f9970(unsigned int, unsigned int *, int);
@@ -138,16 +138,16 @@ extern int FUN_00284e94(void);
 extern int FUN_002fc0a4(int);
 /* Supplied declaration required: FUN_00318c3c. */
 /* Supplied declaration required: FUN_0031db84. */
-/* Supplied declaration required: FUN_00321310. */
+/* Supplied declaration required: menu32PlayCursorSeAndSelect. */
 /* Supplied declaration required: FUN_00321338. */
-extern int FUN_0032135c(int);
+extern int menu32ModeIsNot2(int);
 /* Supplied declaration required: FUN_00321500. */
 extern unsigned int FUN_00331368(void);
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_003343f0. */
-extern int FUN_00336ad0(int);
+extern int menu32State387CIs6(int);
 /* Supplied declaration required: FUN_00336aec. */
-extern int FUN_00336d84(int);
+extern int menu32ModeIsNot4(int);
 /* Supplied declaration required: FUN_00336da0. */
 /* Supplied declaration required: FUN_00336de4. */
 extern int FUN_003493ac(void);
@@ -155,27 +155,27 @@ extern unsigned int FUN_003493c4(void);
 /* Supplied declaration required: FUN_003493dc. */
 extern int FUN_0034ed68(int);
 /* Supplied declaration required: FUN_0034efe0. */
-/* Supplied declaration required: FUN_0034f018. */
+/* Supplied declaration required: owner2DCInitSub. */
 /* Supplied declaration required: FUN_0035b304. */
 /* Supplied declaration required: FUN_0035d0e4. */
-extern int FUN_0035f9fc(void);
+extern int menu32State387CIs2(void);
 extern int FUN_0035fa18(int, int, int);
-/* Supplied declaration required: FUN_0035fb28. */
+/* Supplied declaration required: menu32State387CIs7. */
 /* Supplied declaration required: FUN_0035fc4c. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_0037418c. */
-extern int FUN_00375688(void);
+/* Supplied declaration required: menu32EnterState27. */
+extern int menu32State387CNotIn22To25(void);
 /* Supplied declaration required: FUN_0037dab0. */
-extern int FUN_00381198(int);
+extern int menu32ModeIsNot5(int);
 /* Supplied declaration required: FUN_0038b3f8. */
-extern int FUN_0038e704(int);
+extern int menu32ModeIsNot6(int);
 /* Supplied declaration required: FUN_0039ebcc. */
 /* Supplied declaration required: FUN_003a7a88. */
 extern int btlTalkBustUpIsUnk2F8(unsigned int);
 /* Supplied declaration required: FUN_003b2178. */
-extern int FUN_003c2d78(int);
+extern int menu32IsMissingOrState6(int);
 extern int FUN_003e8430(void);
-/* Supplied declaration required: FUN_003eaa6c. */
+/* Supplied declaration required: pairQueueAppend. */
 /* Supplied declaration required: FUN_003f89c0. */
 /* Supplied declaration required: FUN_003f89e8. */
 /* Supplied declaration required: FUN_003f97a4. */
@@ -330,7 +330,7 @@ unsigned int FUN_002248f8(void)
     }
     break;
   case 3:
-    temp_v4 = FUN_003c2d78(temp_v0 + 0x24bc);
+    temp_v4 = menu32IsMissingOrState6(temp_v0 + 0x24bc);
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 0x74a0) = 4;
     }
@@ -371,7 +371,7 @@ unsigned int FUN_002248f8(void)
     *piVar9 = temp_v4;
     break;
   case 7:
-    temp_v4 = FUN_0032135c(temp_v0 + 8);
+    temp_v4 = menu32ModeIsNot2(temp_v0 + 8);
     if (temp_v4 == 0) break;
     temp_v4 = FUN_00270bfc(temp_v0 + 0x28c4);
     if (temp_v4 != 0) {
@@ -379,7 +379,7 @@ unsigned int FUN_002248f8(void)
     }
     break;
   case 8:
-    temp_v4 = FUN_00336d84(temp_v0 + 8);
+    temp_v4 = menu32ModeIsNot4(temp_v0 + 8);
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 0x74a0) = 2;
       FUN_002b24dc(temp_v0 + 0x24bc);
@@ -390,7 +390,7 @@ unsigned int FUN_002248f8(void)
     break;
   case 0xb:
     temp_v10 = temp_v0 + 0x28c4;
-    temp_v9 = FUN_0035f9fc();
+    temp_v9 = menu32State387CIs2();
     if (temp_v9 != 0) {
       sysMemClear(&temp_v16,0x180);
       temp_v10 = temp_v0;
@@ -399,46 +399,46 @@ unsigned int FUN_002248f8(void)
       FUN_003f89c0(*(unsigned int *)(temp_v0 + 0x7488));
       *(unsigned int *)(temp_v0 + 0x74a0) = 0xd;
       temp_v10 = DAT_0057a9c8;
-      temp_v9 = FUN_00381198(DAT_0057a9c8 + 8);
+      temp_v9 = menu32ModeIsNot5(DAT_0057a9c8 + 8);
       if (temp_v9 != 0) {
         temp_v9 = temp_v10 + 0x24bc;
         FUN_00280030();
         if (temp_v9 != 0) {
           FUN_00336da0(temp_v10 + 8);
-          FUN_0034f018(temp_v10 + 0x24bc);
+          owner2DCInitSub(temp_v10 + 0x24bc);
         }
       }
     }
     else {
-      temp_v9 = FUN_00336ad0(temp_v10);
+      temp_v9 = menu32State387CIs6(temp_v10);
       if (temp_v9 != 0) {
         FUN_002c7e6c();
         FUN_002c85b0(4);
         *(unsigned int *)(temp_v0 + 0x74a0) = 0xe;
         temp_v10 = DAT_0057a9c8;
-        temp_v9 = FUN_00381198(DAT_0057a9c8 + 8);
+        temp_v9 = menu32ModeIsNot5(DAT_0057a9c8 + 8);
         if (temp_v9 != 0) {
           temp_v9 = temp_v10 + 0x24bc;
           FUN_00280030();
           if (temp_v9 != 0) {
             FUN_00336da0(temp_v10 + 8);
-            FUN_0034f018(temp_v10 + 0x24bc);
+            owner2DCInitSub(temp_v10 + 0x24bc);
           }
         }
       }
       else {
-        temp_v9 = FUN_0035fb28(temp_v10);
+        temp_v9 = menu32State387CIs7(temp_v10);
         if (temp_v9 != 0) {
           *(unsigned int *)(temp_v0 + 0x74a0) = 0xc;
-          FUN_0037418c(temp_v10);
+          menu32EnterState27(temp_v10);
           temp_v10 = DAT_0057a9c8;
-          temp_v9 = FUN_00381198(DAT_0057a9c8 + 8);
+          temp_v9 = menu32ModeIsNot5(DAT_0057a9c8 + 8);
           if (temp_v9 != 0) {
             temp_v9 = temp_v10 + 0x24bc;
             FUN_00280030();
             if (temp_v9 != 0) {
               FUN_00336da0(temp_v10 + 8);
-              FUN_0034f018(temp_v10 + 0x24bc);
+              owner2DCInitSub(temp_v10 + 0x24bc);
             }
           }
         }
@@ -474,7 +474,7 @@ unsigned int FUN_002248f8(void)
       temp_v17 = temp_v17 & 0xffff0000;
       temp_v16 = temp_v16 & 0xffff0000;
       FUN_002ccde8(temp_v0 + 0x28c4,&temp_v17,&temp_v16);
-      temp_v4 = FUN_0035fb28(temp_v0 + 0x28c4);
+      temp_v4 = menu32State387CIs7(temp_v0 + 0x28c4);
       if (temp_v4 != 0) {
         FUN_003493dc(1);
         FUN_002c39dc(0xe,0,0xffffffff);
@@ -543,7 +543,7 @@ unsigned int FUN_002248f8(void)
     temp_v10 = 1;
     FUN_001517b4();
     temp_v4 = DAT_0057a9c8;
-    if ((temp_v10 != 0) && (temp_v10 = FUN_0038e704(DAT_0057a9c8 + 8), temp_v10 != 0)) {
+    if ((temp_v10 != 0) && (temp_v10 = menu32ModeIsNot6(DAT_0057a9c8 + 8), temp_v10 != 0)) {
       temp_v4 = temp_v4 + 0x24bc;
       FUN_0039ebcc();
       if (temp_v4 == 0) goto LAB_00225054;
@@ -555,10 +555,10 @@ LAB_00225054:
       if (temp_v4 == 0) break;
     }
     FUN_003f89e8(*(unsigned int *)(temp_v0 + 0x7488));
-    FUN_00321310(temp_v0 + 0x28c4);
+    menu32PlayCursorSeAndSelect(temp_v0 + 0x28c4);
     *(unsigned int *)(temp_v0 + 0x74a0) = 0xb;
     temp_v4 = DAT_0057a9c8;
-    temp_v10 = FUN_0038e704(DAT_0057a9c8 + 8);
+    temp_v10 = menu32ModeIsNot6(DAT_0057a9c8 + 8);
     if (temp_v10 != 0) {
       temp_v10 = temp_v4 + 0x24bc;
       FUN_0039ebcc();
@@ -592,7 +592,7 @@ LAB_00225054:
   case 0x10:
     if (*(char *)(temp_v0 + 0x74b0) != '\0') {
       temp_v10 = temp_v0 + 0x28c4;
-      temp_v4 = FUN_00375688();
+      temp_v4 = menu32State387CNotIn22To25();
       if (temp_v4 != 0) {
         FUN_002b132c(temp_v10,temp_v0 + 0x7490,temp_v0 + 0x7498);
         if (temp_v10 != 0) {
@@ -619,17 +619,17 @@ LAB_00225054:
           if (temp_v10 == 0xb) {
             temp_v7 = FUN_003493c4();
             temp_v6 = FUN_00331368();
-            FUN_003eaa6c(temp_v4,temp_v6,temp_v7);
+            pairQueueAppend(temp_v4,temp_v6,temp_v7);
           }
         }
         FUN_0037dab0();
         *(unsigned int *)(temp_v0 + 0x74a0) = 0xb;
-        temp_v4 = FUN_0035fb28();
+        temp_v4 = menu32State387CIs7();
         if (temp_v4 != 0) {
           FUN_00321338(temp_v0 + 0x28c4);
         }
         temp_v4 = DAT_0057a9c8;
-        temp_v10 = FUN_0038e704(DAT_0057a9c8 + 8);
+        temp_v10 = menu32ModeIsNot6(DAT_0057a9c8 + 8);
         if (temp_v10 != 0) {
           temp_v10 = temp_v4 + 0x24bc;
           FUN_0039ebcc();

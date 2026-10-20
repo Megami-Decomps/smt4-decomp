@@ -1,20 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Scene43dcf0.h"
 
 extern "C" {
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
-
-
 int FUN_0031c274(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (DAT_0043dcf0 != 0) {
-    temp_v0 = (int)*(short *)(DAT_0043dcf0 + 0x3c);
-  }
-  return temp_v0;
+    int value = 0;
+
+    if (DAT_0043dcf0 != NULL) {
+        value = (int)*(s16 *)((u8 *)DAT_0043dcf0 + 0x3c);
+    }
+    return value;
 }
 
 } /* extern "C" */

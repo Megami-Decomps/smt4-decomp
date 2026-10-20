@@ -26,7 +26,7 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_00296ee0. */
 /* Supplied declaration required: FUN_00296f4c. */
 extern int FUN_002973d8(void);
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 /* Supplied declaration required: FUN_002af5c0. */
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_00309fcc(unsigned int *, int);
@@ -113,7 +113,7 @@ LAB_00397cf4:
     }
   }
   else {
-    temp_v1 = FUN_002a0ce8();
+    temp_v1 = sys43e188GetState();
     if (temp_v1 != 0) {
       FUN_002327e0(param_1,&uStack_30);
       FUN_00295660(0x32,&uStack_30);

@@ -17,7 +17,7 @@ extern int FUN_002b2ad4(...); /* 0x2b2ad4 */
 extern int FUN_002ce0d8(...); /* 0x2ce0d8 */
 extern int FUN_002ce15c(...); /* 0x2ce15c */
 extern int FUN_00321c18(...); /* 0x321c18 */
-extern int FUN_0034f40c(...); /* 0x34f40c */
+extern int flagRecCompare(...); /* 0x34f40c */
 extern int FUN_0035fdb0(...); /* 0x35fdb0 */
 extern int FUN_0035fe34(...); /* 0x35fe34 */
 extern int DAT_00588fe8; /* 0x588fe8 */
@@ -69,7 +69,7 @@ void FUN_003d4104(void)
     FUN_00312830(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_002b2ad4);
     return;
   }
-  FUN_00312830(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_0034f40c);
+  FUN_00312830(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,flagRecCompare);
   return;
 }
 

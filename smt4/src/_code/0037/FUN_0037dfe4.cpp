@@ -1,37 +1,38 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0023592c(unsigned int *);
-int nw_snd_internal_driver_Channel_FreeChannel(int);
-int nw_snd_internal_driver_Channel_Release(int);
+int FUN_0023592c(void *track);
+int nw_snd_internal_driver_Channel_FreeChannel(int channel);
+int nw_snd_internal_driver_Channel_Release(int channel);
+extern u8 DAT_00421d54;
 
-extern unsigned char DAT_00421d54; /* 0x421d54 */
+typedef struct Track {
+    /* 0x000 */ const void *vtbl;
+    /* 0x004 */ u8 unk004;
+    /* 0x005 */ u8 opened;
+    /* 0x006 */ u8 unk006[0xBE];
+    /* 0x0C4 */ int channels;
+} Track;
 
-/* Supplied declaration required: FUN_0023592c. */
-/* Supplied declaration required: nw_snd_internal_driver_Channel_FreeChannel. */
-/* Supplied declaration required: nw_snd_internal_driver_Channel_Release. */
-
-
-unsigned int * FUN_0037dfe4(unsigned int *param_1)
-
+/* Destructor of a sequence track: releases and frees its channel list. */
+Track *FUN_0037dfe4(Track *track)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_00421d54;
-  FUN_0023592c(param_1);
-  for (temp_v0 = param_1[0x31]; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
-    if (*(char *)(temp_v0 + 0xc6) != '\0') {
-      nw_snd_internal_driver_Channel_Release(temp_v0);
+    int channel;
+
+    track->vtbl = &DAT_00421d54;
+    FUN_0023592c(track);
+    for (channel = track->channels; channel != 0; channel = *(int *)(channel + 0x138)) {
+        if (*(char *)(channel + 0xc6) != 0) {
+            nw_snd_internal_driver_Channel_Release(channel);
+        }
     }
-  }
-  for (temp_v0 = param_1[0x31]; temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
-    nw_snd_internal_driver_Channel_FreeChannel(temp_v0);
-  }
-  param_1[0x31] = 0;
-  *(unsigned char *)((int)param_1 + 5) = 0;
-  return param_1;
+    for (channel = track->channels; channel != 0; channel = *(int *)(channel + 0x138)) {
+        nw_snd_internal_driver_Channel_FreeChannel(channel);
+    }
+    track->channels = 0;
+    track->opened = 0;
+    return track;
 }
 
 } /* extern "C" */

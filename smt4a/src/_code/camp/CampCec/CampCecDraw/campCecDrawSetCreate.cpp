@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail evaluates a (file, line) pair for the allocation (debug-allocation macro arguments) before the call and discards it; nothing uses the pair */
 /* Creates the set of sprite handles of the cec screens. */
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
 #include "camp/CampCec/CampCecDraw.h"
 
 extern "C" {
@@ -10,6 +11,7 @@ extern u32 spriteHandleCreate(u32 type);
 
 CampCecDrawSetA *campCecDrawSetCreate(void)
 {
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\CampCec\\CampCecDraw.cpp", 62);
     CampCecDrawSetA *set = (CampCecDrawSetA *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x18, 1);
 
     set->handle[0] = spriteHandleCreate(0);

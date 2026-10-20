@@ -30,7 +30,7 @@ extern unsigned char DAT_0055c0fc; /* 0x55c0fc */
 
 /* Supplied declaration required: FUN_00188b60. */
 extern unsigned int *FUN_0045bcec(void);
-extern int FUN_00461804(unsigned int *);
+extern int words38Clear(unsigned int *);
 
 
 int FUN_00460e9c(fn_00460e9c_arg0 *param_1,unsigned char param_2)
@@ -60,7 +60,7 @@ int FUN_00460e9c(fn_00460e9c_arg0 *param_1,unsigned char param_2)
   pcVar4[2] = 'U';
   pcVar4[3] = '\0';
   puVar2[0x4d] = 0xe7e3ffff;
-  temp_v0 = FUN_00461804(puVar2 + 0x4f);
+  temp_v0 = words38Clear(puVar2 + 0x4f);
   *(unsigned int *)(temp_v0 + 0x44) = 0;
   *(unsigned int *)(temp_v0 + 0x48) = 0;
   *(unsigned int *)(temp_v0 + 0x50) = 0xffffffff;

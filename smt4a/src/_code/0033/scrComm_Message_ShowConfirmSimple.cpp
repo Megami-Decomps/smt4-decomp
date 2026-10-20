@@ -1,36 +1,22 @@
-#include "romwright_types.h"
+#include "shard/Shard0033.h"
 
 extern "C" {
 
-int FUN_001695a0(void);
-int FUN_00237898(unsigned int, unsigned int, unsigned int, int, int);
+extern u32 scrGetArg(s32 index);
+extern u32 dataTableValueOrZero(u32 id);
+extern u32 FUN_002deb84(void);
+extern void FUN_001695a0(void);
+extern void FUN_00237898(u32 a, u32 b, u32 c, s32 d, s32 e);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: FUN_001695a0. */
-extern unsigned int FUN_0016a0f0(unsigned int);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00237898. */
-extern unsigned int FUN_002deb84(void);
-
-
+/* Script command: shows a simple confirm message. */
 void scrComm_Message_ShowConfirmSimple(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = FUN_0016a0f0(0x1e);
-  temp_v2 = FUN_002deb84();
-  FUN_001695a0();
-  FUN_00237898(temp_v1,temp_v0,temp_v2,6,0);
-  return;
+    u32 message = scrGetArg(0);
+    u32 window = dataTableValueOrZero(0x1E);
+    u32 flag = FUN_002deb84();
+
+    FUN_001695a0();
+    FUN_00237898(window, message, flag, 6, 0);
 }
 
 } /* extern "C" */

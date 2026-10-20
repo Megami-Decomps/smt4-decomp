@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0045b66c(int);
-int FUN_0045bb30(int *);
+int ownerRef20Clear(int *);
 int nw_snd_SoundHandle_DetachSound(int *);
 int nw_snd_SoundHandle_detail_AttachSoundAsTempHandle(int *, int *);
 
@@ -15,7 +15,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0045b66c. */
-/* Supplied declaration required: FUN_0045bb30. */
+/* Supplied declaration required: ownerRef20Clear. */
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
 /* Supplied declaration required: nw_snd_SoundHandle_detail_AttachSoundAsTempHandle. */
 
@@ -43,7 +43,7 @@ void FUN_0045bb44(int param_1,unsigned int param_2,unsigned int param_3,unsigned
           piVar3 = (int *)*piVar3;
           temp_v2 = 0;
           nw_snd_SoundHandle_detail_AttachSoundAsTempHandle(&temp_v2,piVar2);
-          FUN_0045bb30(&temp_v2);
+          ownerRef20Clear(&temp_v2);
           nw_snd_SoundHandle_DetachSound(&temp_v2);
         } while (piVar3 != (int *)(temp_v0 + 0xc));
       }

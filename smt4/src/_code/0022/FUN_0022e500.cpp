@@ -1,17 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
+typedef struct GameData {
+    /* 0x0000 */ u8 unk0000[0x1E65];
+    /* 0x1E65 */ u8 unk1E65;
+} GameData;
 
+extern struct {
+    u8 unk00[4];
+    GameData *data;
+} g_gameGlobals;
 
-void FUN_0022e500(unsigned char param_1)
-
+void FUN_0022e500(u8 value)
 {
-  if ((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e65) = param_1;
-  }
-  return;
+    if (g_gameGlobals.data != NULL) {
+        g_gameGlobals.data->unk1E65 = value;
+    }
 }
 
 } /* extern "C" */

@@ -61,7 +61,7 @@ extern int FUN_00248a9c(void);
 extern int FUN_0024ea50(unsigned short);
 /* Supplied declaration required: FUN_00254600. */
 /* Supplied declaration required: FUN_00259294. */
-extern int FUN_00259594(unsigned int);
+extern int gameDataBlockTestFlag(unsigned int);
 extern int FUN_002597e0(void);
 /* Supplied declaration required: FUN_0025981c. */
 /* Supplied declaration required: FUN_00262f68. */
@@ -77,7 +77,7 @@ extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_00297468. */
 /* Supplied declaration required: FUN_0029cc44. */
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b8838. */
@@ -132,14 +132,14 @@ unsigned int FUN_002ec588(int param_1)
   temp_v2 = param_1 + 0xd00;
   switch(temp_v8) {
   case 0:
-    if ((*(char *)(param_1 + 0xd60) == '\0') || (temp_v8 = FUN_00259594(0x20), temp_v8 == 0)) {
+    if ((*(char *)(param_1 + 0xd60) == '\0') || (temp_v8 = gameDataBlockTestFlag(0x20), temp_v8 == 0)) {
       temp_v11 = 0;
       temp_v8 = FUN_002a8764();
       temp_v2 = 0;
       do {
         if (-1 < *(char *)(temp_v8 + temp_v2 + 0x90f0)) {
           temp_v9 = FUN_002a8740();
-          temp_v3 = FUN_0029ebac(temp_v9,2);
+          temp_v3 = flagWordTestBit(temp_v9,2);
           if (temp_v3 != 0) {
             temp_v9 = FUN_002a8740((int)*(char *)(temp_v8 + temp_v2 + 0x90f0));
             FUN_00262f68(temp_v9,4);

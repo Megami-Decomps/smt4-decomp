@@ -1,28 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrGetArg(...);
-int FUN_003768dc(void);
-int FUN_003847ac(unsigned int, unsigned int);
+void FUN_003768dc(void);
+void FUN_003847ac(u32 a, u32 b);
+u32 scrGetArg(...);
 
-/* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_003768dc. */
-/* Supplied declaration required: FUN_003847ac. */
-
-
-unsigned int FUN_002a3de8(void)
-
+/* Script command: passes script argument 0 and the (unindexed) first script argument to FUN_003847ac, runs FUN_003768dc and returns 3. */
+u32 FUN_002a3de8(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = scrGetArg(0);
-  FUN_003847ac(temp_v1,temp_v0);
-  FUN_003768dc();
-  return 3;
+    u32 first;
+    u32 second;
+
+    first = scrGetArg();
+    second = scrGetArg(0);
+    FUN_003847ac(second, first);
+    FUN_003768dc();
+    return 3;
 }
 
 } /* extern "C" */

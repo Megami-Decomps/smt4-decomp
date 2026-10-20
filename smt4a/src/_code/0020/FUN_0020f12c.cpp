@@ -9,10 +9,10 @@ int FUN_00311880(...);
 int CONCAT44(...);
 int FUN_002c0dbc(...);
 int FUN_002de124(...);
-int FUN_00398438(void);
+int dataTable2CType0Count(void);
 int FUN_003a3070(void);
 int FUN_003a315c(void);
-int FUN_003b998c(void);
+int dataTable2CType3Count(void);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -108,13 +108,13 @@ extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_002de124. */
 /* Supplied declaration required: FUN_00311880. */
 extern unsigned int *FUN_0033aaac(int);
-extern char *FUN_0033f868(int);
-extern char *FUN_003858d4(int);
-/* Supplied declaration required: FUN_00398438. */
+extern char *dataTable2CGetEntry(int);
+extern char *dataTable2CType3GetEntry(int);
+/* Supplied declaration required: dataTable2CType0Count. */
 /* Supplied declaration required: FUN_003a3070. */
 /* Supplied declaration required: FUN_003a315c. */
-extern unsigned int FUN_003ae498(int);
-/* Supplied declaration required: FUN_003b998c. */
+extern unsigned int dataTable2CType2GetEntry(int);
+/* Supplied declaration required: dataTable2CType3Count. */
 extern int FUN_003c30ac(void);
 extern int FUN_003c311c(void);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -251,13 +251,13 @@ void FUN_0020f12c(unsigned int *param_1,unsigned int *param_2)
   DAT_005f1838 = 0;
   DAT_005f183c = 0;
   DAT_005f1840 = 0;
-  FUN_00398438();
+  dataTable2CType0Count();
   temp_v31 = 0.7111111f;
   temp_v29 = 0.0f;
   temp_v30 = 0x40a0000047800000;
   if (0 < (int)puVar4) {
     do {
-      pcVar5 = (char *)FUN_0033f868(temp_v6);
+      pcVar5 = (char *)dataTable2CGetEntry(temp_v6);
       puVar4 = (unsigned int *)(int)*pcVar5;
       if (puVar4 == (unsigned int *)0xffffffff) break;
       temp_v0 = pcVar5[2];
@@ -529,7 +529,7 @@ void FUN_0020f12c(unsigned int *param_1,unsigned int *param_2)
         temp_v13 = VectorSignedToFloat((int)*(short *)(pcVar5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v17 = VectorSignedToFloat((int)*(short *)(pcVar5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v33 = VectorSignedToFloat((int)*(short *)(pcVar5 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v9 = FUN_003ae498((int)*(short *)(pcVar5 + 0x12));
+        temp_v9 = dataTable2CType2GetEntry((int)*(short *)(pcVar5 + 0x12));
         temp_v4 = (int)DAT_00613174 * 0x20;
         *(unsigned int *)(temp_v4 + 0x611874) = temp_v12;
         *(float *)(temp_v4 + 0x611878) = temp_v29;
@@ -543,14 +543,14 @@ void FUN_0020f12c(unsigned int *param_1,unsigned int *param_2)
         DAT_00613174 = puVar4;
       }
       temp_v6 = temp_v6 + 1;
-      FUN_00398438();
+      dataTable2CType0Count();
     } while (temp_v6 < (int)puVar4);
   }
   temp_v6 = 0;
-  FUN_003b998c();
+  dataTable2CType3Count();
   if (0 < (int)puVar4) {
     do {
-      pcVar5 = (char *)FUN_003858d4(temp_v6);
+      pcVar5 = (char *)dataTable2CType3GetEntry(temp_v6);
       puVar4 = (unsigned int *)(int)*pcVar5;
       if (puVar4 == (unsigned int *)0xffffffff) break;
       if (pcVar5[2] != '\0') {
@@ -785,7 +785,7 @@ void FUN_0020f12c(unsigned int *param_1,unsigned int *param_2)
         }
       }
       temp_v6 = temp_v6 + 1;
-      FUN_003b998c();
+      dataTable2CType3Count();
     } while (temp_v6 < (int)puVar4);
   }
   if (((*(char *)(temp_v2 + 0xe14) != '\0') &&

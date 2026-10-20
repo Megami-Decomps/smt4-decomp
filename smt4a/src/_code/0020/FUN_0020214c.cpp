@@ -1,25 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0015325c(int, int, unsigned int, int, int, int);
+void FUN_0015325c(s32 a, s32 b, u32 c, s32 d, s32 e, s32 mode);
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0015325c. */
-
-
-void FUN_0020214c(unsigned int param_1)
-
+/* Calls FUN_0015325c with mode 4 and the single argument `c`. */
+void FUN_0020214c(u32 c)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_0015325c(0,0,param_1,0,0,4);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    FUN_0015325c(0, 0, c, 0, 0, 4);
 }
 
 } /* extern "C" */

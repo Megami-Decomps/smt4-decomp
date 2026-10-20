@@ -13,9 +13,9 @@ int FUN_00203b40(unsigned int *, int, int, int, int, int);
 int FUN_00270104(void);
 int FUN_002cb438(unsigned int *, unsigned int, unsigned int);
 int FUN_00341f88(void);
-int FUN_0034edc8(void);
+int menu32Advance(void);
 int FUN_003756c8(int);
-int FUN_0050d794(unsigned int *, unsigned int);
+int fillTwoWordsWithByte(unsigned int *, unsigned int);
 
 typedef struct fn_004aa2e0_arg0 fn_004aa2e0_arg0;
 struct fn_004aa2e0_arg0 {
@@ -62,11 +62,11 @@ extern int FUN_002a4878(unsigned int *);
 /* Supplied declaration required: FUN_002cb438. */
 extern unsigned int FUN_002cc9e0(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00341f88. */
-/* Supplied declaration required: FUN_0034edc8. */
+/* Supplied declaration required: menu32Advance. */
 /* Supplied declaration required: FUN_003756c8. */
 extern int FUN_003e8430(void);
 extern unsigned short FUN_003ea1cc(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0050d794. */
+/* Supplied declaration required: fillTwoWordsWithByte. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0020b1c8) */
@@ -160,7 +160,7 @@ void FUN_004aa2e0(fn_004aa2e0_arg0 *param_1,int param_2)
   
   puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10));
   puVar5 = (*(unsigned int * *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x1d3f;
-  FUN_0050d794(puVar5,0xffffffff);
+  fillTwoWordsWithByte(puVar5,0xffffffff);
   temp_v0 = FUN_003ea1cc(*puVar1,0);
   *(unsigned short *)(puVar1 + 0x1d3f) = temp_v0;
   temp_v0 = FUN_003ea1cc(*puVar1,1);
@@ -172,7 +172,7 @@ void FUN_004aa2e0(fn_004aa2e0_arg0 *param_1,int param_2)
   FUN_001a9104(puVar1 + 0xa31,puVar5);
   puVar5 = puVar1 + 0xa31;
   if (param_2 != 0) {
-    FUN_0034edc8();
+    menu32Advance();
     return;
   }
   *(unsigned char *)((int)puVar1 + 0x6177) = 1;

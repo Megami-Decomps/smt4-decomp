@@ -29,9 +29,9 @@ extern int FUN_0014af84(void);
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: FUN_002c76d8. */
 extern int FUN_0035d734(void);
-extern int FUN_0038b320(void);
+extern int byteTripleGetV0(void);
 /* Supplied declaration required: FUN_003a76a8. */
-extern int FUN_003b70c0(void);
+extern int byteArr5Get3(void);
 /* Supplied declaration required: FUN_003c12d8. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -47,7 +47,7 @@ void FUN_0041dcc0(int param_1)
   if (*(char *)(param_1 + 0xf) != '\0') {
     temp_v0 = FUN_0035d734();
     if ((temp_v0 == 0) && (temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x40)), temp_v0 == 2)) {
-      temp_v0 = FUN_003b70c0();
+      temp_v0 = byteArr5Get3();
       if (temp_v0 != 0) {
         DAT_00588e14 = 1;
       }
@@ -67,7 +67,7 @@ void FUN_0041dcc0(int param_1)
     else {
       FUN_00224880(*(unsigned int *)(param_1 + 0x40));
     }
-    temp_v0 = FUN_0038b320();
+    temp_v0 = byteTripleGetV0();
     if (temp_v0 != 0) {
       if (*(int *)(param_1 + 0x450) < 0x1f) {
         FUN_002c76d8();
@@ -76,7 +76,7 @@ void FUN_0041dcc0(int param_1)
         FUN_001386e8(1);
       }
     }
-    temp_v0 = FUN_0038b320();
+    temp_v0 = byteTripleGetV0();
     temp_v2 = temp_v0 != 0;
     temp_v0 = 0;
     temp_v1 = 0;
@@ -88,7 +88,7 @@ void FUN_0041dcc0(int param_1)
       FUN_003a76a8(1);
       sysPlaySe(0xa0);
       *(unsigned char *)(param_1 + 0xf) = 1;
-      temp_v0 = FUN_003b70c0();
+      temp_v0 = byteArr5Get3();
       if (temp_v0 != 0) {
         FUN_001386e8(1);
         temp_v0 = FUN_0014af84();

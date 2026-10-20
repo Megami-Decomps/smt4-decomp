@@ -1,15 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00646e54; /* 0x646e54 */
+extern u16 DAT_00646e54[];
 
-
-void FUN_001c3168(int param_1,unsigned short param_2)
-
+/* Stores `value` in 16-bit entry `index` of the table at 0x646E54. */
+void FUN_001c3168(s32 index, u16 value)
 {
-  *(unsigned short *)(&DAT_00646e54 + param_1 * 2) = param_2;
-  return;
+    DAT_00646e54[index] = value;
 }
 
 } /* extern "C" */

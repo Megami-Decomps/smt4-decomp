@@ -1,37 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00148d68(int, int, int);
+typedef struct Entry {
+    /* 0x00 */ u8 first;
+    /* 0x01 */ u8 second;
+} Entry;
 
-/* Supplied declaration required: FUN_00148d68. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
+void FUN_00148d68(s32 first, s32 second, s32 flag);
+u32 dataTableGet(u32 table, u32 index);
+s32 dataTableGetCount(u32 table);
+Entry *dataTableGetEntries(void);
 
-
+/* Walks the entries of data table (2, 3) and calls FUN_00148d68(first, second, 0) for each. */
 void FUN_0013bae0(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char *puVar4;
-  int temp_v3;
-  
-  temp_v0 = dataTableGet(2,3);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  temp_v3 = 0;
-  if (temp_v3 < temp_v2) {
-    do {
-      puVar4 = (unsigned char *)(temp_v1 + temp_v3 * 2);
-      FUN_00148d68(*puVar4,puVar4[1],0);
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v2);
-  }
-  return;
+    u32 table;
+    Entry *entries;
+    s32 count;
+    s32 i;
+
+    table = dataTableGet(2, 3);
+    entries = dataTableGetEntries();
+    count = dataTableGetCount(table);
+    for (i = 0; i < count; i++) {
+        FUN_00148d68(entries[i].first, entries[i].second, 0);
+    }
 }
 
 } /* extern "C" */

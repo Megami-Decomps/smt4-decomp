@@ -25,7 +25,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_0018719c(unsigned int);
@@ -161,7 +161,7 @@ LAB_0026e9d8:
   VectorUnsignedToFloat(temp_v5,(unsigned char)(temp_v7 >> 0x16) & 3);
   efctSetSpeed();
   temp_v1 = g_renderCtx;
-  temp_v3 = FUN_00169294(6,1,0);
+  temp_v3 = packNibblesAndByte(6,1,0);
   piVar6 = (int *)(temp_v1 + 0x12b8);
   temp_v4 = piVar6[*piVar6 + 2];
   piVar6[*piVar6 + 2] = temp_v3;
@@ -172,7 +172,7 @@ LAB_0026e9d8:
   FUN_001835b4(2,0x14,0x5d6,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,param_4
               );
   temp_v1 = g_renderCtx;
-  temp_v2 = FUN_00169294(6,7,0);
+  temp_v2 = packNibblesAndByte(6,7,0);
   piVar6 = (int *)(temp_v1 + 0x12b8);
   temp_v3 = piVar6[*piVar6 + 2];
   piVar6[*piVar6 + 2] = temp_v2;

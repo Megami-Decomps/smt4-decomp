@@ -51,7 +51,7 @@ extern unsigned int FUN_0019acdc(short, unsigned int);
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_002adba8. */
 /* Supplied declaration required: FUN_002e6dd0. */
-extern int FUN_0032ece8(unsigned char);
+extern int dataTable4AGetEntry2C(unsigned char);
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_0038b3f8. */
@@ -82,7 +82,7 @@ void FUN_003a498c(unsigned int *param_1,short *param_2,int param_3)
   
   FUN_001654f8(param_2 + 7,&temp_v12,0);
   FUN_0023723c(param_1[1],3,0xffffffff,0,0,&temp_v12);
-  temp_v2 = FUN_0032ece8(*(unsigned char *)((int)param_2 + 0x23));
+  temp_v2 = dataTable4AGetEntry2C(*(unsigned char *)((int)param_2 + 0x23));
   if ((*(unsigned char *)(param_2 + 0x10) & 2) != 0) {
     rt_memcpy_w(&temp_v12,&LAB_003a4d30,0x13);
   }

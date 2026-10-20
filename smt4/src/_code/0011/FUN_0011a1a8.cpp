@@ -1,12 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+extern u32 DAT_00464c88[];
 
-unsigned int FUN_0011a1a8(int param_1)
-
+/* Reads entry `index` of the word table at 0x464c88. */
+u32 FUN_0011a1a8(s32 index)
 {
-  return *(unsigned int *)(param_1 * 4 + 0x464c88);
+    return DAT_00464c88[index];
 }
 
 } /* extern "C" */

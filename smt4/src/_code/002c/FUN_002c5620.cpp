@@ -1,20 +1,12 @@
-#include "romwright_types.h"
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
 
-int FUN_0010fb68(unsigned int);
-
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
-
-/* Supplied declaration required: FUN_0010fb68. */
-
+int FUN_0010fb68(u16 *counter);
 
 void FUN_002c5620(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0010fb68((*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0xc)));
-  return;
+    FUN_0010fb68(g_gameDataBlocks.unk0C);
 }
 
 } /* extern "C" */

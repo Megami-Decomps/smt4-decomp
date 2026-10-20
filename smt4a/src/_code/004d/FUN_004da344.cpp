@@ -16,7 +16,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
-extern unsigned int FUN_002c277c(void);
+extern unsigned int computeCountLimit(void);
 extern int FUN_004da980(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004daf18. */
 extern int FUN_004db65c(int, unsigned int, unsigned int, unsigned char *);
@@ -71,7 +71,7 @@ joined_r0x004da498:
   }
   temp_v2 = (temp_v8 & 0x1ffff) >> 2;
   FUN_00184310();
-  if ((temp_v2 != 0) && (temp_v3 = FUN_002c277c(), temp_v3 < *(unsigned short *)(temp_v2 + 6))) {
+  if ((temp_v2 != 0) && (temp_v3 = computeCountLimit(), temp_v3 < *(unsigned short *)(temp_v2 + 6))) {
     if (param_5 != (unsigned char *)0x0) {
       temp_v3 = 2;
     }

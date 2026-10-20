@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00109f4e(unsigned char [24]);
-int FUN_002ec890(unsigned char [24]);
+int destroyObj0055ae64(unsigned char [24]);
 int FUN_002ecb04(unsigned int *, unsigned char [24]);
 
 extern unsigned char DAT_00558c08; /* 0x558c08 */
@@ -14,7 +14,7 @@ extern unsigned char DAT_00558c08; /* 0x558c08 */
 extern unsigned int *FUN_0011468c(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002e7168(int, unsigned int);
 extern int FUN_002e760a(unsigned int);
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ecb04. */
 
 
@@ -38,7 +38,7 @@ unsigned int * FUN_002ecd54(unsigned int param_1)
   puVar1[0x8b] = temp_v1;
   FUN_00109f4e(temp_v2);
   FUN_002ecb04(puVar1,temp_v2);
-  FUN_002ec890(temp_v2);
+  destroyObj0055ae64(temp_v2);
   return puVar1;
 }
 

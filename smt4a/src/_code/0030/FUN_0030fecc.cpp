@@ -1,31 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0030fecc_arg0 fn_0030fecc_arg0;
-struct fn_0030fecc_arg0 {
-    unsigned char pad_0x0[0x28];
-    undefined4 field_0x28; /* +0x28 */
-    undefined4 field_0x2c; /* +0x2c */
-    unsigned char pad_0x30[0x4];
-    undefined4 field_0x34; /* +0x34 */
-    unsigned char pad_0x38[0x1];
-    undefined1 field_0x39; /* +0x39 */
-    undefined1 field_0x3a; /* +0x3a */
-    undefined1 field_0x3b; /* +0x3b */
-};
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u32 a;
+    /* 0x2C */ u32 b;
+    /* 0x30 */ u8 unk30[4];
+    /* 0x34 */ u32 c;
+    /* 0x38 */ u8 unk38;
+    /* 0x39 */ u8 flagA;
+    /* 0x3A */ u8 flagB;
+    /* 0x3B */ u8 flagC;
+} Holder;
 
-
-void FUN_0030fecc(fn_0030fecc_arg0 *param_1)
-
+/* Clears the three flags and the three words. */
+void FUN_0030fecc(Holder *object)
 {
-  param_1->field_0x3a = 0;
-  param_1->field_0x3b = 0;
-  param_1->field_0x39 = 0;
-  param_1->field_0x28 = 0;
-  param_1->field_0x2c = 0;
-  param_1->field_0x34 = 0;
-  return;
+    object->flagB = 0;
+    object->flagC = 0;
+    object->flagA = 0;
+    object->a = 0;
+    object->b = 0;
+    object->c = 0;
 }
 
 } /* extern "C" */

@@ -1,35 +1,28 @@
-#include "romwright_types.h"
+#include "shard/GameOptions.h"
 
 extern "C" {
 
-int FUN_0028975c(int, int, int);
-
-/* Supplied declaration required: FUN_0028975c. */
-extern int gameGetOptions(void);
-
+int FUN_0028975c(int a, int b, int c);
+extern GameOptions *gameGetOptions(void);
 
 void FUN_002900d0(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = gameGetOptions();
-  if (((*(unsigned short *)(temp_v0 + 0x608) & 1) != 0) &&
-     (temp_v1 = gameGetOptions(), (*(unsigned short *)(temp_v1 + 0x608) & 1) != 0)) {
-    if (*(unsigned short *)(temp_v1 + 0x46) == 0x2a3) {
-      FUN_0028975c(0x262,0,1);
+    GameOptions *options = gameGetOptions();
+    GameOptions *again;
+
+    if (((options->flags & 1) != 0) &&
+        (again = gameGetOptions(), (again->flags & 1) != 0)) {
+        if (again->unk46 == 0x2a3) {
+            FUN_0028975c(0x262, 0, 1);
+        }
+        if (again->unk46 == 0x2a5) {
+            FUN_0028975c(0x263, 0, 1);
+        }
+        again->unk46 = 0;
     }
-    if (*(unsigned short *)(temp_v1 + 0x46) == 0x2a5) {
-      FUN_0028975c(0x263,0,1);
-    }
-    *(unsigned short *)(temp_v1 + 0x46) = 0;
-  }
-  *(unsigned short *)(temp_v0 + 0x608) = *(unsigned short *)(temp_v0 + 0x608) & 0xfffe;
-  *(unsigned short *)(temp_v0 + 0x46) = 0;
-  *(unsigned short *)(temp_v0 + 0x604) = 0;
-  return;
+    options->flags = options->flags & 0xfffe;
+    options->unk46 = 0;
+    options->unk604 = 0;
 }
 
 } /* extern "C" */

@@ -52,7 +52,7 @@ int FUN_004aa2e0(...);
 int FUN_004cae0c(...);
 int FUN_004cb2a4(...);
 int FUN_004f1c5c(...);
-int FUN_004f282c(...);
+int words10CopyHighToLow(...);
 int FUN_004f9450(void);
 int FUN_004fb43c(...);
 int FUN_004fd204(...);
@@ -81,7 +81,7 @@ int aocHandleButtons(int, int);
 int FUN_003fce8c(...);
 int FUN_004d7a70(...);
 int FUN_004d7fe4(...);
-int FUN_004d84e8(...);
+int isEntryUsable(...);
 int FUN_004f1a54(...);
 int FUN_0050dda4(void);
 int rt_memcpy_w(...);
@@ -175,7 +175,7 @@ extern unsigned int *FUN_003e1390(unsigned int *, int);
 /* Supplied declaration required: FUN_003e21c8. */
 /* Supplied declaration required: FUN_003e2840. */
 /* Supplied declaration required: FUN_003e8b78. */
-extern int FUN_003e9b28(int);
+extern int valueAtF0IsReady(int);
 /* Supplied declaration required: FUN_003e9b74. */
 /* Supplied declaration required: FUN_003e9cd0. */
 /* Supplied declaration required: FUN_003eaa9c. */
@@ -214,9 +214,9 @@ extern int FUN_003f86c8(unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(int, unsigned int);
 /* Supplied declaration required: FUN_003fce8c. */
-extern int FUN_003fcf5c(int);
+extern int nkdwLoaderParse(int);
 extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
-extern int FUN_0040de1c(unsigned int, unsigned int *);
+extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int FUN_0046ebf0(unsigned int);
 /* Supplied declaration required: FUN_00470634. */
 extern int FUN_004706a8(unsigned int, unsigned short);
@@ -229,12 +229,12 @@ extern int FUN_004a96d4(unsigned int);
 /* Supplied declaration required: FUN_004cb2a4. */
 /* Supplied declaration required: FUN_004d7a70. */
 /* Supplied declaration required: FUN_004d7fe4. */
-/* Supplied declaration required: FUN_004d84e8. */
+/* Supplied declaration required: isEntryUsable. */
 /* Supplied declaration required: FUN_004f1a54. */
 /* Supplied declaration required: FUN_004f1c5c. */
 extern int FUN_004f2294(int);
 extern int FUN_004f2708(int, int, unsigned int);
-/* Supplied declaration required: FUN_004f282c. */
+/* Supplied declaration required: words10CopyHighToLow. */
 /* Supplied declaration required: FUN_004f2abc. */
 /* Supplied declaration required: FUN_004f3ee0. */
 /* Supplied declaration required: FUN_004f41b0. */
@@ -347,7 +347,7 @@ unsigned int * FUN_002ba964(void)
   puVar27 = g_btlEncount;
   switch(*g_btlEncount) {
   case 0:
-    temp_v21 = FUN_004d84e8(g_btlEvent);
+    temp_v21 = isEntryUsable(g_btlEvent);
     if (temp_v21 != 0) {
       return (unsigned int *)0x0;
     }
@@ -374,7 +374,7 @@ unsigned int * FUN_002ba964(void)
     goto FUN_003e11ac;
   case 1:
 FUN_003e11ac:
-    temp_v21 = FUN_004d84e8(g_btlEvent);
+    temp_v21 = isEntryUsable(g_btlEvent);
     if (temp_v21 != 0) {
       return (unsigned int *)0x0;
     }
@@ -391,7 +391,7 @@ FUN_003e11ac:
       puVar26[3] = 0;
       goto FUN_003e2470;
     }
-    temp_v21 = FUN_003e9b28(temp_v15);
+    temp_v21 = valueAtF0IsReady(temp_v15);
     if (temp_v21 != 0) {
       *puVar26 = 4;
       puVar26[4] = 0;
@@ -425,7 +425,7 @@ FUN_003e2470:
       return (unsigned int *)0x0;
     }
     FUN_003ebec8(temp_v15);
-    temp_v21 = FUN_003e9b28(temp_v15);
+    temp_v21 = valueAtF0IsReady(temp_v15);
     if (temp_v21 != 0) {
       *puVar26 = 4;
       puVar26[4] = 0;
@@ -522,7 +522,7 @@ code_r0x003e12a8:
         temp_v25 = temp_v15 + temp_v21 * 8;
         temp_v19 = FUN_003ec620(temp_v15,*(unsigned int *)(temp_v25 + 0x2020));
         if ((*(unsigned int *)(temp_v25 + 0x201c) & 1) == 0) {
-          temp_v20 = FUN_003fcf5c(temp_v19);
+          temp_v20 = nkdwLoaderParse(temp_v19);
           if (temp_v20 == 0) {
             temp_v9 = 0;
           }
@@ -871,7 +871,7 @@ LAB_003e0a8c:
     }
     FUN_003f0c78(temp_v15);
     FUN_003f0b80(temp_v15);
-    FUN_004f282c(DAT_00571508);
+    words10CopyHighToLow(DAT_00571508);
     temp_v21 = FUN_003e0f94(puVar26,temp_v15);
     if ((temp_v21 == 1 || temp_v21 == 2) || temp_v21 == 5) {
       temp_v21 = 4;
@@ -1077,7 +1077,7 @@ FUN_003e1b80:
         if (temp_v21 != 1) {
           puVar36 = (unsigned int *)(temp_v15 + 0x45a0);
           if (temp_v21 != 2) {
-            temp_v21 = FUN_0040de1c(DAT_005712f0,puVar26);
+            temp_v21 = chainCountIdUnflagged(DAT_005712f0,puVar26);
             if (0 < temp_v21) {
               return (unsigned int *)0x0;
             }
@@ -1287,7 +1287,7 @@ FUN_003e2a88:
 FUN_003e2504:
       puVar36 = (unsigned int *)(temp_v15 + 0x45a0);
       if (puVar26[4] != 0) {
-        temp_v21 = FUN_004d84e8();
+        temp_v21 = isEntryUsable();
         if (temp_v21 == 0) {
           if ((*(unsigned int *)(temp_v15 + 0x45a4) & DAT_0057385c) == 0 && (*puVar36 & DAT_00573858) == 0) {
             FUN_003ed6e8(temp_v15);
@@ -1342,7 +1342,7 @@ FUN_003e2504:
     }
 code_r0x003e0cd4:
     if ((((*(char *)(temp_v15 + 0x45bb) == '\0') ||
-         (temp_v21 = FUN_0040de1c(DAT_005712f0,puVar26), temp_v21 < 1)) &&
+         (temp_v21 = chainCountIdUnflagged(DAT_005712f0,puVar26), temp_v21 < 1)) &&
         (temp_v21 = FUN_004f6384(DAT_00573808), temp_v21 != 0)) &&
        (((*(unsigned int *)(temp_v15 + 0x45a0) & DAT_00573860) == 0 &&
          (*(unsigned int *)(temp_v15 + 0x45a4) & DAT_00573864) == 0 ||
@@ -1406,7 +1406,7 @@ code_r0x003e0cd4:
       puVar26[4] = 0;
       *puVar26 = 0x1a;
       puVar26[3] = 0;
-      temp_v21 = FUN_0040de1c(DAT_005712f0,puVar26);
+      temp_v21 = chainCountIdUnflagged(DAT_005712f0,puVar26);
       if (((temp_v21 < 1) && (temp_v21 = FUN_004f6384(DAT_00573808), temp_v21 != 0)) &&
          ((temp_v21 = DAT_00571508, FUN_00229ffc(), temp_v21 != 0 &&
           ((*(unsigned int *)(DAT_00571508 + 0x64c) & 0x80000) == 0)))) {
@@ -1437,7 +1437,7 @@ code_r0x003e0cd4:
   case 0x19:
     goto code_r0x003e0cd4;
   case 0x1a:
-    temp_v21 = FUN_0040de1c(DAT_005712f0,g_btlEncount);
+    temp_v21 = chainCountIdUnflagged(DAT_005712f0,g_btlEncount);
     if ((((temp_v21 < 1) && (temp_v21 = FUN_004f6384(DAT_00573808), temp_v21 != 0)) &&
         (temp_v21 = DAT_00571508, FUN_00229ffc(), temp_v21 != 0)) &&
        ((*(unsigned int *)(DAT_00571508 + 0x64c) & 0x80000) == 0)) {
@@ -1606,7 +1606,7 @@ FUN_003e1454:
     FUN_003f0d50(temp_v15);
     FUN_003edb9c(temp_v15);
     FUN_003f0b28(temp_v15);
-    FUN_004f282c(DAT_00571508);
+    words10CopyHighToLow(DAT_00571508);
     temp_v21 = FUN_003e0f94(puVar26,temp_v15);
     puVar36 = (unsigned int *)(temp_v15 + 0x45a0);
     if ((temp_v21 == 1) || (temp_v21 == 2 || temp_v21 == 5)) {

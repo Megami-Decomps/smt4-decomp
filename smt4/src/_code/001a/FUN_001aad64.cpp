@@ -109,10 +109,10 @@ extern int FUN_002a81a8(unsigned char *, int);
 /* Supplied declaration required: FUN_002b2144. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
@@ -218,7 +218,7 @@ void FUN_001aad64(int param_1)
     if (temp_v11 != 1) {
       if (temp_v11 != 2) {
         if (temp_v11 == 3) {
-          temp_v1 = FUN_002c5da8(5,0,1);
+          temp_v1 = packNibblesAndByte(5,0,1);
           piVar8 = (int *)(temp_v2 + 0x12ac);
           temp_v3 = piVar8[*piVar8 + 2];
           piVar8[*piVar8 + 2] = temp_v1;
@@ -229,7 +229,7 @@ void FUN_001aad64(int param_1)
         }
       }
       else {
-        temp_v1 = FUN_002c5da8(6,1,2);
+        temp_v1 = packNibblesAndByte(6,1,2);
         piVar8 = (int *)(temp_v2 + 0x12ac);
         temp_v3 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v1;
@@ -240,7 +240,7 @@ void FUN_001aad64(int param_1)
       }
     }
     else {
-      temp_v1 = FUN_002c5da8(6,1,0);
+      temp_v1 = packNibblesAndByte(6,1,0);
       piVar8 = (int *)(temp_v2 + 0x12ac);
       temp_v3 = piVar8[*piVar8 + 2];
       piVar8[*piVar8 + 2] = temp_v1;
@@ -251,7 +251,7 @@ void FUN_001aad64(int param_1)
     }
   }
   else {
-    temp_v1 = FUN_002c5da8(6,7,0);
+    temp_v1 = packNibblesAndByte(6,7,0);
     piVar8 = (int *)(temp_v2 + 0x12ac);
     temp_v3 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = temp_v1;
@@ -278,7 +278,7 @@ void FUN_001aad64(int param_1)
   if ((*(unsigned char *)(param_1 + 0x130) & 0x20) != 0) {
     temp_v2 = FUN_002a81a8(temp_v66,*(int *)(g_titleScene + 0x6f8) + 0x38);
     if (temp_v2 == 0) {
-      if (((DAT_00476634 & 1) == 0) && (temp_v2 = FUN_002bfefc(&DAT_00476634), temp_v2 != 0)) {
+      if (((DAT_00476634 & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_00476634), temp_v2 != 0)) {
         DAT_004efd6c = temp_v15;
         DAT_004efd70 = temp_v16;
         DAT_004efd74 = temp_v16;
@@ -349,7 +349,7 @@ void FUN_001aad64(int param_1)
   }
   else if (*(char *)(param_1 + 0x380) != '\0') {
     temp_v2 = *(int *)(g_titleScene + 0x6f8);
-    if (((DAT_00476630 & 1) == 0) && (temp_v1 = FUN_002bfefc(&DAT_00476630), temp_v1 != 0)) {
+    if (((DAT_00476630 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_00476630), temp_v1 != 0)) {
       DAT_004efd48 = temp_v15;
       DAT_004efd4c = temp_v16;
       DAT_004efd50 = temp_v16;

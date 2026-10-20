@@ -1,15 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_002e9a92(int param_1)
-
+/* Returns 1 when `value` is 2, 3 or 4. */
+u32 FUN_002e9a92(s32 value)
 {
-  if (((param_1 != 2) && (param_1 != 3)) && (param_1 != 4)) {
-    return 0;
-  }
-  return 1;
+    if (((value != 2) && (value != 3)) && (value != 4)) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

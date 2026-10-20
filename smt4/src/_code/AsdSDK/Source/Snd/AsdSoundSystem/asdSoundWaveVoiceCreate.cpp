@@ -1,8 +1,10 @@
-/* NON_MATCHING: the retail build has stripped debug calls (file/line setup + nop) before both allocations. */
+/* NON_MATCHING: register allocation differs (retail keeps the lock in r6, the data pointer in r7 and the unk8c/unk90 pair in r8/r9 for strd). */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+extern const char DAT_00409724[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp": __FILE__ */
 extern u8 DAT_004e315c; /* nn::os::CriticalSection guarding the sound layer */
 
 void nn_os_CriticalSection_Enter(void *lock);
@@ -25,9 +27,11 @@ void FUN_001290cc(u32 voice, void *data, void *waveBuffer0, void *waveBuffer1, s
 AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
 {
     AsdSndWaveVoice *sound;
+    void *lock = &DAT_004e315c;
     s32 i;
 
-    nn_os_CriticalSection_Enter(&DAT_004e315c);
+    nn_os_CriticalSection_Enter(lock);
+    asdDebugTrace(DAT_00409724, 6423);
     sound = (AsdSndWaveVoice *)asdMemAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(AsdSndWaveVoice), 1);
     sound->unk7c = -1;
     sound->unk8c = unk8c;
@@ -36,11 +40,12 @@ AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
     FUN_00129020(data);
     sound->headerSize = FUN_00129034(data, 0) - data;
     sound->sampleBytes = size - sound->headerSize;
+    asdDebugTrace(DAT_00409724, 6441);
     sound->data = asdMemoryAllocAligned(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, size, 0x20, 1);
     FUN_002bd420(data, sound->data, size);
     sound->voice = FUN_002bd29c(0x7fff, 0);
-    sound->mix[0] = 0.70710677f;
-    sound->mix[1] = 0.70710677f;
+    sound->mix[0] = 0.7071f;
+    sound->mix[1] = 0.7071f;
     nn_snd_CTR_Voice_SetMixParam(sound->voice, sound->mix);
     FUN_00147370(sound->voice, 1.0f);
     nn_snd_CTR_Voice_SetPitch(sound->voice, 1.0f);
@@ -48,7 +53,7 @@ AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
         nn_snd_CTR_InitializeWaveBuffer(sound->waveBuffers[i]);
     }
     FUN_001290cc(sound->voice, sound->data, sound->waveBuffers[0], sound->waveBuffers[1], 0);
-    nn_os_CriticalSection_Leave(&DAT_004e315c);
+    nn_os_CriticalSection_Leave(lock);
     return sound;
 }
 

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e6dd4(int, int);
-int FUN_0050d71c(int);
+int clearTwoWords(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern unsigned int DAT_005739a0; /* 0x5739a0 */
 extern unsigned int DAT_005739a4; /* 0x5739a4 */
 
 /* Supplied declaration required: FUN_002e6dd4. */
-/* Supplied declaration required: FUN_0050d71c. */
+/* Supplied declaration required: clearTwoWords. */
 
 
 void FUN_003eafa0(int param_1,int param_2)
@@ -48,14 +48,14 @@ void FUN_003eafa0(int param_1,int param_2)
         if (param_2 != 0) {
           if ((param_2 != 1) || ((temp_v1 & DAT_00573990) != 0 || (temp_v2 & DAT_00573994) != 0)) {
             *(unsigned int *)(temp_v0 + 0x228) = 0;
-            FUN_0050d71c(temp_v0 + 0x1be);
+            clearTwoWords(temp_v0 + 0x1be);
             FUN_002e6dd4(temp_v0 + 0x1d6,0x50);
           }
         }
         else if (((DAT_00573990 & temp_v1) == 0 && (DAT_00573994 & temp_v2) == 0) &&
                 ((temp_v1 & DAT_00573998) == 0 && (temp_v2 & DAT_0057399c) == 0)) {
           *(unsigned int *)(temp_v0 + 0x228) = 0;
-          FUN_0050d71c(temp_v0 + 0x1be);
+          clearTwoWords(temp_v0 + 0x1be);
           FUN_002e6dd4(temp_v0 + 0x1d6,0x50);
         }
       }

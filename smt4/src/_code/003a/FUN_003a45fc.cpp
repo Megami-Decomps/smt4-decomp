@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00230434(int, int);
 int FUN_002304ec(int, int, unsigned int, int, int);
-int FUN_002308fc(void);
+int dataTable17Sub1GetCount(void);
 int FUN_00233730(int, unsigned int, int, int, int);
 int FUN_003a6424(unsigned char *, int);
 int FUN_003a6478(unsigned char *, int);
@@ -28,8 +28,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00230434. */
 /* Supplied declaration required: FUN_002304ec. */
-/* Supplied declaration required: FUN_002308fc. */
-extern int FUN_00230914(unsigned int *, unsigned int);
+/* Supplied declaration required: dataTable17Sub1GetCount. */
+extern int dataTable17Sub1GetRecord(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00233730. */
 extern unsigned int FUN_002ae3c0(short);
 extern unsigned long long FUN_002c0a2c(unsigned char, unsigned int, unsigned int);
@@ -81,10 +81,10 @@ unsigned int FUN_003a45fc(int param_1)
   } while (temp_v3 < 9);
   temp_v0 = *(unsigned char *)(param_1 + 0x14);
   temp_v9 = *(int *)(param_1 + 0x18);
-  temp_v3 = FUN_00230914(temp_v13,0);
+  temp_v3 = dataTable17Sub1GetRecord(temp_v13,0);
   temp_v7 = 0;
   puVar5 = temp_v13;
-  FUN_002308fc();
+  dataTable17Sub1GetCount();
   temp_v8 = -1;
   if (0 < (int)puVar5) {
     do {
@@ -97,7 +97,7 @@ unsigned int FUN_003a45fc(int param_1)
       if (temp_v11 && temp_v4 == temp_v9) break;
       temp_v7 = temp_v7 + 1;
       puVar5 = temp_v13;
-      FUN_002308fc();
+      dataTable17Sub1GetCount();
       temp_v8 = -1;
     } while (temp_v7 < (int)puVar5);
   }

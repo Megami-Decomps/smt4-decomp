@@ -14,8 +14,8 @@ int FUN_0031d1b4(int, int);
 int FUN_00484be0(int);
 int FUN_00485060(...);
 int FUN_004853fc(int, int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -34,8 +34,8 @@ extern int FUN_0048408c(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00485060. */
 /* Supplied declaration required: FUN_004853fc. */
 extern int FUN_00485b14(int);
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d0524(void);
 extern int FUN_004d0554(void);
 extern int FUN_004d0584(void);
@@ -81,7 +81,7 @@ void FUN_00483d34(int param_1)
       if (*(char *)(param_1 + 0x22) < '\a') {
         *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
       }
-      FUN_004d044c();
+      sendEvent100020E();
       temp_v3 = 1;
     }
     if (!temp_v3 && temp_v6 == 0) {
@@ -93,11 +93,11 @@ void FUN_00483d34(int param_1)
         if (*(char *)(param_1 + 0x22) < '\a') {
           *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
         }
-        FUN_004d044c();
+        sendEvent100020E();
       }
       else {
         *(unsigned char *)(param_1 + 0x562) = 1;
-        FUN_004d0434();
+        sendEvent100020F();
       }
     }
     if (temp_v5 != 6) {
@@ -146,7 +146,7 @@ void FUN_00483d34(int param_1)
       } while (temp_v7 != 0);
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 7);
-    FUN_004d0434();
+    sendEvent100020F();
     return;
   }
   if (*(char *)(param_1 + 0x260) == '\0') {

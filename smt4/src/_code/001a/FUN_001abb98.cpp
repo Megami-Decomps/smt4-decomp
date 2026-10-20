@@ -12,7 +12,7 @@ int FUN_002852f0(int);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(unsigned int, int);
 int FUN_002be624(unsigned char [64], unsigned char *, int);
-int FUN_002c09f4(...);
+int randNextInRange(...);
 int FUN_002c2950(void);
 int FUN_002ce4e4(void);
 int FUN_002e0274(...);
@@ -75,7 +75,7 @@ extern int FUN_00285574(void);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002be624. */
 extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: FUN_002c2950. */
 /* Supplied declaration required: FUN_002ce4e4. */
 /* Supplied declaration required: FUN_002e0274. */
@@ -129,7 +129,7 @@ void FUN_001abb98(void)
   
   puVar8 = (unsigned int *)FUN_002c2950();
   temp_v23[7] = 1;
-  temp_v6 = FUN_002c09f4(4);
+  temp_v6 = randNextInRange(4);
   temp_v23[6] = 0;
   temp_v23[2] = (temp_v6 + 1U) & 0xff;
   temp_v23[3] = 0;
@@ -213,9 +213,9 @@ void FUN_001abb98(void)
       }
       *(unsigned char *)((int)puVar8 + 0x791) = 0xff;
       do {
-        temp_v6 = FUN_002c09f4(0x17);
+        temp_v6 = randNextInRange(0x17);
         if ((unsigned int)*(unsigned char *)(temp_v6 * 4 + 0x447ec0) == temp_v23[2]) {
-          temp_v6 = FUN_002c09f4();
+          temp_v6 = randNextInRange();
         }
         DAT_004bd0d4 = *(unsigned char *)(temp_v6 * 4 + 0x447ec0);
         temp_v6 = temp_v6 * 4;
@@ -278,7 +278,7 @@ void FUN_001abb98(void)
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 4);
         if (1 < temp_v15) {
-          temp_v10 = FUN_002c09f4(99);
+          temp_v10 = randNextInRange(99);
           if (temp_v10 < 0x3c) {
             temp_v23[6] = 1;
           }
@@ -404,7 +404,7 @@ LAB_001abfec:
           }
           if (DAT_004bd0d0 == 0) break;
           temp_v6 = FUN_002c2950();
-          temp_v7 = FUN_002c09f4((DAT_004bd0d0 - 1U) & 0xffff);
+          temp_v7 = randNextInRange((DAT_004bd0d0 - 1U) & 0xffff);
           temp_v8 = 0;
           temp_v13 = DAT_004bd0d0 - 1;
           temp_v15 = 0;
@@ -505,7 +505,7 @@ LAB_001ac248:;
           } while (temp_v7 < DAT_004bd0d8 - 1);
         }
         if (DAT_004bd0d8 / 2 >= 2) {
-          temp_v7 = FUN_002c09f4((DAT_004bd0d8 / 2 - 1U) & 0xffff);
+          temp_v7 = randNextInRange((DAT_004bd0d8 / 2 - 1U) & 0xffff);
           temp_v7 = (DAT_004bd0d8 - temp_v7) - 1;
           if (*(int *)(temp_v7 * 0xc + 0x4bcf94) < 5) {
             temp_v7 = DAT_004bd0d8 - 1;
@@ -526,7 +526,7 @@ LAB_001ac248:;
         puVar23 = puVar6;
       }
       if (2 < DAT_004bd0d8) {
-        temp_v6 = FUN_002c09f4((DAT_004bd0d8 - 3U) & 0xffff);
+        temp_v6 = randNextInRange((DAT_004bd0d8 - 3U) & 0xffff);
         temp_v14 = 0;
         temp_v13 = 0;
         if (0 < DAT_004bd0d8) {
@@ -548,17 +548,17 @@ LAB_001ac248:;
                     *(char *)(temp_v15 + 0xdd7) = (char)(int)(&DAT_004bcf90)[temp_v13 * 3];
                     temp_v6 = FUN_002c09d0(0x648);
                     if (temp_v6 != 0) {
-                      temp_v5 = FUN_002c09f4(4);
+                      temp_v5 = randNextInRange(4);
                       *(short *)(temp_v15 + 0xdb0) = temp_v5 + 0x1c2;
                     }
                     else {
                       temp_v6 = FUN_002c09d0(0x6d2);
                       if (temp_v6 != 0) {
-                        temp_v5 = FUN_002c09f4(3);
+                        temp_v5 = randNextInRange(3);
                         *(short *)(temp_v15 + 0xdb0) = temp_v5 + 0x1c2;
                       }
                       else {
-                        temp_v5 = FUN_002c09f4(2);
+                        temp_v5 = randNextInRange(2);
                         *(short *)(temp_v15 + 0xdb0) = temp_v5 + 0x1c2;
                       }
                     }
@@ -792,7 +792,7 @@ LAB_001aca98:
                     temp_v1 = *(char *)(temp_v14 + 0x3f);
                   }
                   if (((temp_v16 && temp_v1 != '\x01') && (*(char *)(temp_v14 + 0x3c) == '\x02')) &&
-                     (temp_v10 = FUN_002c09f4(100), temp_v10 < 0x28)) {
+                     (temp_v10 = randNextInRange(100), temp_v10 < 0x28)) {
                     temp_v19 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v20 = (float)VectorSignedToFloat(temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);
                     temp_v14 = DAT_004bd0cc * 8;
@@ -849,7 +849,7 @@ LAB_001acd64:
                   temp_v1 = *(char *)(temp_v14 + 0x3f);
                 }
                 if (((temp_v16 && temp_v1 != '\x01') && (*(char *)(temp_v14 + 0x3c) == '\x02')) &&
-                   (temp_v10 = FUN_002c09f4(100), temp_v10 < 0x28)) {
+                   (temp_v10 = randNextInRange(100), temp_v10 < 0x28)) {
                   temp_v19 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v20 = (float)VectorSignedToFloat(temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v14 = DAT_004bd0cc * 8;

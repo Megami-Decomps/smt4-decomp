@@ -16,12 +16,12 @@ extern int FUN_00468574(...); /* 0x468574 */
 extern int FUN_004688c8(...); /* 0x4688c8 */
 extern int FUN_00468e98(...); /* 0x468e98 */
 extern int FUN_00468fec(...); /* 0x468fec */
-extern int FUN_004693d4(...); /* 0x4693d4 */
+extern int jobStateObjWaitDone(...); /* 0x4693d4 */
 extern int FUN_00469400(...); /* 0x469400 */
 extern int FUN_00469d38(...); /* 0x469d38 */
 extern int FUN_00469e1c(...); /* 0x469e1c */
 extern int FUN_00469eb0(...); /* 0x469eb0 */
-extern int FUN_0046a0b8(...); /* 0x46a0b8 */
+extern int jobStateObjWaitDone2(...); /* 0x46a0b8 */
 extern int FUN_0046aab4(...); /* 0x46aab4 */
 extern int FUN_0046ac00(...); /* 0x46ac00 */
 extern int FUN_0046af60(...); /* 0x46af60 */
@@ -72,9 +72,9 @@ void FUN_0046ba10(int param_1)
   *(unsigned int *)(param_1 + 0x314) = 0;
   *(romwright_code **)(param_1 + 0x318) = FUN_00469d38;
   *(unsigned int *)(param_1 + 0x31c) = 0;
-  *(romwright_code **)(param_1 + 800) = FUN_004693d4;
+  *(romwright_code **)(param_1 + 800) = jobStateObjWaitDone;
   *(unsigned int *)(param_1 + 0x324) = 0;
-  *(romwright_code **)(param_1 + 0x328) = FUN_0046a0b8;
+  *(romwright_code **)(param_1 + 0x328) = jobStateObjWaitDone2;
   *(unsigned int *)(param_1 + 0x32c) = 0;
   *(romwright_code **)(param_1 + 0x330) = FUN_00469e1c;
   *(unsigned int *)(param_1 + 0x334) = 0;

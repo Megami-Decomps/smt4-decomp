@@ -39,7 +39,7 @@ int FUN_002a03d8(...);
 int FUN_002a0428(...);
 int FUN_002a043c(...);
 int asdMdlManagerDestroy(...);
-int FUN_002b2b5c(void);
+int sndObjectForwardField8(void);
 int FUN_002b8838(...);
 int FUN_002b8ee0(int, int);
 int FUN_002bf810(...);
@@ -106,7 +106,7 @@ extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_002a043c. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002b2b5c. */
+/* Supplied declaration required: sndObjectForwardField8. */
 /* Supplied declaration required: FUN_002b8838. */
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
@@ -318,7 +318,7 @@ unsigned int FUN_00329b70(void)
       }
       break;
     }
-    FUN_002b2b5c();
+    sndObjectForwardField8();
     temp_v10 = 9;
     FUN_002c1658(9,1);
     temp_v7 = 0x28e;

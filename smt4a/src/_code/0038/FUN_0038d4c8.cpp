@@ -11,7 +11,7 @@ extern int DAT_00573808; /* 0x573808 */
 
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_004f61b0. */
-extern int FUN_004f6aa0(int);
+extern int obj33C8IsEnabled(int);
 
 
 unsigned int FUN_0038d4c8(void)
@@ -25,7 +25,7 @@ unsigned int FUN_0038d4c8(void)
   temp_v0 = scrGetArg();
   temp_v1 = scrGetArg(1);
   if ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x4000) != 0) {
-    temp_v2 = FUN_004f6aa0(DAT_00573808);
+    temp_v2 = obj33C8IsEnabled(DAT_00573808);
     if (temp_v2 != 0) {
       return 1;
     }

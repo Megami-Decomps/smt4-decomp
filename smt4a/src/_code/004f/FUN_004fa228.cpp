@@ -39,7 +39,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SUB42 (SUBPIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00420dd8(unsigned int);
+extern int state2CIs4(unsigned int);
 /* Supplied declaration required: FUN_00420dec. */
 /* Supplied declaration required: FUN_00420f08. */
 /* Supplied declaration required: FUN_004f5238. */
@@ -60,7 +60,7 @@ void FUN_004fa228(fn_004fa228_arg0 *param_1)
   float in_s0;
   float temp_v3;
   
-  temp_v1 = FUN_00420dd8(param_1->field_0x33c0);
+  temp_v1 = state2CIs4(param_1->field_0x33c0);
   if (temp_v1 != 0) {
     FUN_00420dec(param_1->field_0x33c0);
     temp_v3 = (float)(int)in_s0;
@@ -95,7 +95,7 @@ void FUN_004fa228(fn_004fa228_arg0 *param_1)
     FUN_00420dec(param_1->field_0x33c0);
     param_1->field_0x33b6 = (short)(int)temp_v3;
   }
-  temp_v1 = FUN_00420dd8(param_1->field_0x33c0);
+  temp_v1 = state2CIs4(param_1->field_0x33c0);
   if ((temp_v1 == 0) || ((param_1->field_0x339c & 0x1000) != 0)) {
     FUN_00420f08(param_1->field_0x33c0);
     param_1->field_0x33b4 = 0xc;

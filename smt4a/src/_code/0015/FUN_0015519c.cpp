@@ -57,7 +57,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00167860. */
 /* Supplied declaration required: FUN_00168470. */
 /* Supplied declaration required: FUN_001689e8. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c560. */
 extern int FUN_001834a4(unsigned int, unsigned int);
@@ -201,7 +201,7 @@ unsigned int FUN_0015519c(void)
     }
     temp_v3 = g_renderCtx;
     if ((*(char *)(temp_v0 + 0x2b1) != '\0') && (*(int *)(temp_v0 + 0x2b4) >= 0)) {
-      temp_v4 = FUN_00169294(6,1,0);
+      temp_v4 = packNibblesAndByte(6,1,0);
       piVar7 = (int *)(temp_v3 + 0x12b8);
       temp_v5 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v4;
@@ -211,7 +211,7 @@ unsigned int FUN_0015519c(void)
       }
       FUN_00164b5c(2,8,0x19,0,0,0x65);
       temp_v3 = g_renderCtx;
-      temp_v4 = FUN_00169294(6,7,0);
+      temp_v4 = packNibblesAndByte(6,7,0);
       piVar7 = (int *)(temp_v3 + 0x12b8);
       temp_v5 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v4;
@@ -224,7 +224,7 @@ unsigned int FUN_0015519c(void)
       temp_v3 = 0;
     }
     else {
-      temp_v4 = FUN_00169294(6,1,0);
+      temp_v4 = packNibblesAndByte(6,1,0);
       piVar7 = (int *)(temp_v3 + 0x12b8);
       temp_v5 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v4;
@@ -234,7 +234,7 @@ unsigned int FUN_0015519c(void)
       }
       FUN_00164b5c(2,8,3,0,temp_v6,0x65);
       temp_v3 = g_renderCtx;
-      temp_v4 = FUN_00169294(6,7,0);
+      temp_v4 = packNibblesAndByte(6,7,0);
       piVar7 = (int *)(temp_v3 + 0x12b8);
       temp_v5 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v4;

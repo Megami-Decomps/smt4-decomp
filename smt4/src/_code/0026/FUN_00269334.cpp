@@ -1,18 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(unsigned int);
+int asdMemFree(u32 ptr);
 
-/* Supplied declaration required: asdMemFree. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u32 buffer;
+} Obj;
 
-
-void FUN_00269334(int param_1)
-
+void FUN_00269334(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  asdMemFree(*(unsigned int *)(param_1 + 0x28));
-  return;
+    asdMemFree(obj->buffer);
 }
 
 } /* extern "C" */

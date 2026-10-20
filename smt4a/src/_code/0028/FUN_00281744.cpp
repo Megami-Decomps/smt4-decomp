@@ -7,14 +7,14 @@ extern "C" {
 int sysPlaySe(int);
 int FUN_0031d890(void);
 int FUN_0034280c(int);
-int FUN_0037b708(void);
+int stateAtF4Destroy(void);
 
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_002bf508(void);
 extern int FUN_002e2014(void);
 /* Supplied declaration required: FUN_0031d890. */
 /* Supplied declaration required: FUN_0034280c. */
-/* Supplied declaration required: FUN_0037b708. */
+/* Supplied declaration required: stateAtF4Destroy. */
 
 
 unsigned int FUN_00281744(int param_1)
@@ -29,7 +29,7 @@ unsigned int FUN_00281744(int param_1)
   if (temp_v0 != 0) {
     temp_v0 = FUN_002e2014();
     if (temp_v0 != 0) {
-      FUN_0037b708();
+      stateAtF4Destroy();
       sysPlaySe(0x10d);
       *(unsigned int *)(param_1 + 0x144) = 1;
       *(unsigned int *)(param_1 + 0x14c) = 0;

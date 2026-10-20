@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0034a290(void);
 int FUN_003f0e20(int, unsigned int);
-int FUN_004c39b0(void);
+int source4CCopyHalves(void);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -21,10 +21,10 @@ extern unsigned int DAT_00571490; /* 0x571490 */
 extern unsigned int DAT_00571494; /* 0x571494 */
 
 extern int btlGetMainState(void);
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 
 
 int FUN_004c5da4(unsigned int param_1,int param_2)
@@ -63,7 +63,7 @@ int FUN_004c5da4(unsigned int param_1,int param_2)
       temp_v5[7] = 0;
       temp_v5[8] = 0;
       temp_v5[9] = 0;
-      FUN_004c39b0();
+      source4CCopyHalves();
       temp_v1 = 0;
       do {
         temp_v2 = (unsigned int)temp_v5[temp_v1];
@@ -78,7 +78,7 @@ int FUN_004c5da4(unsigned int param_1,int param_2)
             unaff_r6 = (int)*(short *)(temp_v2 + 0x36);
           }
           if (((temp_v4 && temp_v0 != 0) && unaff_r6 != 0) &&
-             ((param_2 == 0 || (temp_v3 = FUN_001633a0(99), temp_v3 < unaff_r6)))) {
+             ((param_2 == 0 || (temp_v3 = lcgRandomRange(99), temp_v3 < unaff_r6)))) {
             return (int)*(short *)(temp_v2 + 0x34);
           }
         }

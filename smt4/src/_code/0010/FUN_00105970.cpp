@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002c2264(void);
-int FUN_002c2318(void);
+int resourceListDestroy(void);
+int resourceDestroy(void);
 
 extern unsigned char DAT_004d92f0; /* 0x4d92f0 */
 
-/* Supplied declaration required: FUN_002c2264. */
-/* Supplied declaration required: FUN_002c2318. */
+/* Supplied declaration required: resourceListDestroy. */
+/* Supplied declaration required: resourceDestroy. */
 
 
 void FUN_00105970(void)
@@ -30,7 +30,7 @@ void FUN_00105970(void)
         *piVar3 = *piVar3 - 1;
       }
       else {
-        FUN_002c2318();
+        resourceDestroy();
         *(unsigned int *)(temp_v0 + 0x4d92f4) = 0;
       }
     }
@@ -41,7 +41,7 @@ void FUN_00105970(void)
     temp_v0 = temp_v1 * 8;
     if (*(int *)(temp_v0 + 0x4d94f4) != 0) {
       if (*piVar3 < 1) {
-        FUN_002c2264();
+        resourceListDestroy();
         *(unsigned int *)(temp_v0 + 0x4d94f4) = 0;
       }
       else {

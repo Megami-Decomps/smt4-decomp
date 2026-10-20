@@ -23,9 +23,9 @@ typedef struct {
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a1f60. */
 /* Supplied declaration required: FUN_002e08b0. */
-extern int FUN_003ff190(unsigned short);
+extern int flagsBGetBit1(unsigned short);
 /* Supplied declaration required: FUN_003ff1d4. */
-extern int FUN_003ff1f4(unsigned short);
+extern int flagsBGetBit2(unsigned short);
 /* Supplied declaration required: FUN_003ff20c. */
 
 
@@ -52,12 +52,12 @@ void FUN_003f6abc(int param_1)
   FUN_00203b40(param_1 + 0xbc,*(int *)(param_1 + 0x128) + temp_v3,7,1,0,1);
   FUN_002e08b0(param_1 + 0xbc,0);
   *(unsigned int *)(param_1 + 0x124) = 0;
-  temp_v3 = FUN_003ff1f4(temp_v0);
+  temp_v3 = flagsBGetBit2(temp_v0);
   if (temp_v3 == 0) {
     FUN_003ff20c(temp_v0,1);
   }
   *(unsigned int *)(param_1 + 0x3c) = 0;
-  temp_v3 = FUN_003ff190(temp_v0);
+  temp_v3 = flagsBGetBit1(temp_v0);
   if (temp_v3 != 0) {
     FUN_003ff1d4(temp_v0,0);
     temp_v4 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x5e0) + 0x30);

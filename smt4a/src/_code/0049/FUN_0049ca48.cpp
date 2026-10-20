@@ -1,33 +1,28 @@
-#include "romwright_types.h"
+#include "shard/Shard0049.h"
 
 extern "C" {
 
-extern int FUN_00481104(unsigned int);
+extern s32 FUN_00481104(u32 index);
 
-
-unsigned int FUN_0049ca48(void)
-
+/* True when FUN_00481104 holds for any index in 0x3B7..0x79E. */
+u32 FUN_0049ca48(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0x3b7;
-  do {
-    temp_v0 = FUN_00481104(temp_v1);
-    if (temp_v0 != 0) {
-      return 1;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 <= 0x47e);
-  temp_v1 = 0x47f;
-  do {
-    temp_v0 = FUN_00481104(temp_v1);
-    if (temp_v0 != 0) {
-      return 1;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 <= 0x79e);
-  return 0;
+    u32 index = 0x3B7;
+
+    do {
+        if (FUN_00481104(index) != 0) {
+            return 1;
+        }
+        index = index + 1;
+    } while (index <= 0x47E);
+    index = 0x47F;
+    do {
+        if (FUN_00481104(index) != 0) {
+            return 1;
+        }
+        index = index + 1;
+    } while (index <= 0x79E);
+    return 0;
 }
 
 } /* extern "C" */

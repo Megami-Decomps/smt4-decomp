@@ -27,7 +27,7 @@ extern unsigned int DAT_0064c118; /* 0x64c118 */
 
 extern unsigned int FUN_001a1e28(void);
 /* Supplied declaration required: FUN_001d3d38. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_gfx_WorldMatrixUpdater_CalculateWorldBasic. */
 
@@ -63,7 +63,7 @@ void FUN_00447318(int *param_1,unsigned int param_2,unsigned int param_3)
     }
     else {
       temp_v8 = 0x3f800000;
-      if (((DAT_005c4c38 & 1) == 0) && (temp_v4 = FUN_002eba64(&DAT_005c4c38), temp_v4 != 0)) {
+      if (((DAT_005c4c38 & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_005c4c38), temp_v4 != 0)) {
         temp_v5 = FUN_001a1e28();
         nn_math_ARMv6_MTX34CopyAsm(&DAT_0064c0dc,temp_v5);
         DAT_0064c118 = 0x7e1;
@@ -72,7 +72,7 @@ void FUN_00447318(int *param_1,unsigned int param_2,unsigned int param_3)
         DAT_0064c114 = temp_v8;
       }
       puVar3 = &DAT_0064c0dc;
-      if (((DAT_005c4c38 & 1) == 0) && (temp_v4 = FUN_002eba64(&DAT_005c4c38), temp_v4 != 0)) {
+      if (((DAT_005c4c38 & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_005c4c38), temp_v4 != 0)) {
         temp_v5 = FUN_001a1e28();
         nn_math_ARMv6_MTX34CopyAsm(&DAT_0064c0dc,temp_v5);
         DAT_0064c118 = 0x7e1;

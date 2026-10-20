@@ -21,7 +21,7 @@ extern unsigned int *DAT_00588e2c; /* 0x588e2c */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdOperatorNew. */
-extern int *FUN_00408770(void);
+extern int *vtblHolderInit557bbc(void);
 
 
 void FUN_0020e5f0(void)
@@ -50,7 +50,7 @@ void FUN_0020e5f0(void)
   asdOperatorNew();
   piVar4 = (int *)0x0;
   if (temp_v0 != 0) {
-    piVar4 = (int *)FUN_00408770();
+    piVar4 = (int *)vtblHolderInit557bbc();
   }
   puVar1[2] = (unsigned int)piVar4;
   (**(romwright_code **)(*piVar4 + 8))();

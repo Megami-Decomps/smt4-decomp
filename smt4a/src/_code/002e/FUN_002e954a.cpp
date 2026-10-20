@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0012ee8c. */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9520. */
-extern unsigned int FUN_002ea0e4(unsigned char *);
+extern unsigned int constructObj0055affc(unsigned char *);
 /* Supplied declaration required: FUN_0030af1c. */
 
 
@@ -32,7 +32,7 @@ int FUN_002e954a(unsigned int param_1,unsigned int param_2)
   unsigned char temp_v3 [16];
   unsigned char temp_v4 [8];
   
-  temp_v2 = FUN_002ea0e4(temp_v4);
+  temp_v2 = constructObj0055affc(temp_v4);
   temp_v0 = FUN_002e9520(temp_v3,param_2);
   temp_v0 = FUN_002e9520(temp_v0 + 8,temp_v2);
   FUN_0012ee8c(temp_v1,param_1,temp_v0 - 8);

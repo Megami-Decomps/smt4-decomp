@@ -23,7 +23,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001546e8(unsigned int);
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0019e3d0. */
@@ -93,7 +93,7 @@ void FUN_001509fc(void)
   if (temp_v2 != 0) {
     if (temp_v2 != 1) {
       if (temp_v2 == 2) {
-        temp_v2 = FUN_00169294(6,1,2);
+        temp_v2 = packNibblesAndByte(6,1,2);
         piVar8 = (int *)(temp_v1 + 0x12b8);
         temp_v4 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v2;
@@ -104,7 +104,7 @@ void FUN_001509fc(void)
       }
     }
     else {
-      temp_v2 = FUN_00169294(6,1,0);
+      temp_v2 = packNibblesAndByte(6,1,0);
       piVar8 = (int *)(temp_v1 + 0x12b8);
       temp_v4 = piVar8[*piVar8 + 2];
       piVar8[*piVar8 + 2] = temp_v2;
@@ -115,7 +115,7 @@ void FUN_001509fc(void)
     }
   }
   else {
-    temp_v2 = FUN_00169294(6,7,0);
+    temp_v2 = packNibblesAndByte(6,7,0);
     piVar8 = (int *)(temp_v1 + 0x12b8);
     temp_v4 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = temp_v2;
@@ -129,7 +129,7 @@ void FUN_001509fc(void)
   FUN_0019e3d0(temp_v6,temp_v6,temp_v6,temp_v6,0,0,0,temp_v9);
   temp_v0 = g_renderCtx;
   if (*(int *)(temp_v3 + 0xfe0) != 0) {
-    temp_v3 = FUN_00169294(6,7,0);
+    temp_v3 = packNibblesAndByte(6,7,0);
     piVar8 = (int *)(temp_v0 + 0x12b8);
     temp_v1 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = temp_v3;

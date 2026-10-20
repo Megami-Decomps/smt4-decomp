@@ -1,34 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ad130` (_code @ 0x2ad130, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003d8f24(void);
+typedef struct EventTex {
+    u8 unk00[0x90];
+    f32 scaleX; /* 0x90 */
+    f32 scaleY; /* 0x94 */
+} EventTex;
 
-extern int g_eventTex; /* 0x57f3b0 */
+extern EventTex *g_eventTex;
 
-extern int FUN_00203a5c(void);
-extern float *FUN_00208bfc(int);
-/* Supplied declaration required: FUN_003d8f24. */
+extern void *FUN_00203a5c(void);
+extern void FUN_003d8f24(void);
+extern f32 *FUN_00208bfc(void *entry);
 
-
-unsigned int FUN_002ad130(void)
-
+/* Script command: applies the current entry's 2D offset (times 30) to the event texture; returns 0. */
+u32 FUN_002ad130(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  float *pfVar2;
-  
-  temp_v0 = FUN_00203a5c();
-  if (temp_v0 != 0) {
-    FUN_003d8f24();
-    pfVar2 = (float *)FUN_00208bfc(temp_v0);
-    temp_v0 = g_eventTex;
-    *(float *)(g_eventTex + 0x90) = *pfVar2 * 30.0f;
-    *(float *)(temp_v0 + 0x94) = pfVar2[1] * 30.0f;
-  }
-  return 0;
+    void *entry = FUN_00203a5c();
+
+    if (entry != NULL) {
+        f32 *offset;
+
+        FUN_003d8f24();
+        offset = FUN_00208bfc(entry);
+        g_eventTex->scaleX = offset[0] * 30.0f;
+        g_eventTex->scaleY = offset[1] * 30.0f;
+    }
+    return 0;
 }
 
 } /* extern "C" */

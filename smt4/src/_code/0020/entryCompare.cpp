@@ -9,7 +9,7 @@ typedef struct {
 } Record;
 
 Record *FUN_002a8740(int index);
-int FUN_00288118(u16 key);
+int dataTableGetEntry0102Value(u16 key);
 
 /* Compares two record indices: a negative index sorts as "none" (none vs none = 0, valid after none = 1 / before = -1). */
 int entryCompare(u32 unused, int *first, int *second)
@@ -24,8 +24,8 @@ int entryCompare(u32 unused, int *first, int *second)
         if (*first >= 0) {
             Record *secondRecord = FUN_002a8740(*second);
             Record *firstRecord = FUN_002a8740(*first);
-            int secondOrder = FUN_00288118(secondRecord->key);
-            int firstOrder = FUN_00288118(firstRecord->key);
+            int secondOrder = dataTableGetEntry0102Value(secondRecord->key);
+            int firstOrder = dataTableGetEntry0102Value(firstRecord->key);
 
             return firstOrder - secondOrder;
         }

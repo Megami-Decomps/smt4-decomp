@@ -77,11 +77,11 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
 
@@ -139,7 +139,7 @@ unsigned int FUN_0011a434(void)
     temp_v8 = *(unsigned int *)(temp_v0 + 0x60);
     temp_v7 = 0x3f800000;
     temp_v6 = 0;
-    if (((DAT_00476638 & 1) == 0) && (temp_v2 = FUN_002bfefc(&DAT_00476638), temp_v2 != 0)) {
+    if (((DAT_00476638 & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_00476638), temp_v2 != 0)) {
       DAT_004efd9c = temp_v7;
       DAT_004efda0 = temp_v6;
       DAT_004efda4 = temp_v6;
@@ -158,7 +158,7 @@ unsigned int FUN_0011a434(void)
       DAT_004efdd8 = temp_v7;
     }
     mtx44Copy(temp_v24,&DAT_004efd9c);
-    if (((DAT_00476638 & 1) == 0) && (temp_v2 = FUN_002bfefc(&DAT_00476638), temp_v2 != 0)) {
+    if (((DAT_00476638 & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_00476638), temp_v2 != 0)) {
       DAT_004efd9c = temp_v7;
       DAT_004efda0 = temp_v6;
       DAT_004efda4 = temp_v6;
@@ -246,7 +246,7 @@ unsigned int FUN_0011a434(void)
       FUN_002bf538();
     }
     temp_v1 = g_titleScene;
-    temp_v3 = FUN_002c5da8(6,1,0);
+    temp_v3 = packNibblesAndByte(6,1,0);
     piVar6 = (int *)(temp_v1 + 0x12ac);
     temp_v4 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v3;
@@ -256,7 +256,7 @@ unsigned int FUN_0011a434(void)
     }
     FUN_002bf380(2,0xe,3,0,0,0x65);
     temp_v1 = g_titleScene;
-    temp_v3 = FUN_002c5da8(6,7,0);
+    temp_v3 = packNibblesAndByte(6,7,0);
     piVar6 = (int *)(temp_v1 + 0x12ac);
     temp_v4 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v3;

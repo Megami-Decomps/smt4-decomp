@@ -1,22 +1,19 @@
-#include "romwright_types.h"
+#include "shard/PlayScene.h"
 
 extern "C" {
 
-
-unsigned int FUN_002f25c4(int param_1)
-
+/* 0 for states 0x22-0x25, otherwise 1. */
+u32 FUN_002f25c4(PlayScene *scene)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x3048);
-  if ((temp_v0 == 0x22 || temp_v0 == 0x23) || (temp_v0 == 0x24 || temp_v0 == 0x25)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    int state = scene->state;
+    u32 result;
+
+    if ((state == 0x22 || state == 0x23) || (state == 0x24 || state == 0x25)) {
+        result = 0;
+    } else {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

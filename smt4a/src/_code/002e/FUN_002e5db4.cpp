@@ -1,24 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0015688c(void);
+typedef struct Candidate {
+    /* 0x000 */ u8 unk000[300];
+    /* 0x12C */ s16 id;
+} Candidate;
 
+Candidate *saveSlotFindSelected(void);
 
-unsigned int FUN_002e5db4(void)
-
+/* Returns 1 when the candidate exists and has id 0xAF. */
+u32 FUN_002e5db4(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = FUN_0015688c();
-  if ((temp_v0 == 0) || (*(short *)(temp_v0 + 300) != 0xaf)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    Candidate *candidate;
+    u32 result;
+
+    candidate = saveSlotFindSelected();
+    if ((candidate == NULL) || (candidate->id != 0xAF)) {
+        result = 0;
+    } else {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

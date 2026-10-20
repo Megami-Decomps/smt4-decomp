@@ -86,7 +86,7 @@ extern int FUN_002bed98(int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int aocGetEntryData(short);
 
 
@@ -292,7 +292,7 @@ void FUN_00197e34(void)
 LAB_00198684:
       FUN_002bf538();
       temp_v11 = g_titleScene;
-      temp_v8 = FUN_002c5da8(6,1,0);
+      temp_v8 = packNibblesAndByte(6,1,0);
       piVar16 = (int *)(temp_v11 + 0x12ac);
       temp_v9 = piVar16[*piVar16 + 2];
       piVar16[*piVar16 + 2] = temp_v8;
@@ -302,7 +302,7 @@ LAB_00198684:
       }
       FUN_002bf288(2,0x29,0x60,temp_v6,temp_v13,0x68);
       temp_v11 = g_titleScene;
-      temp_v8 = FUN_002c5da8(6,7,0);
+      temp_v8 = packNibblesAndByte(6,7,0);
       piVar16 = (int *)(temp_v11 + 0x12ac);
       temp_v9 = piVar16[*piVar16 + 2];
       piVar16[*piVar16 + 2] = temp_v8;

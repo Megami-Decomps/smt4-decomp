@@ -1,20 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001024ac` (_code @ 0x1024ac, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int halt_baddata(void);
+void FUN_001024b0(void);
 
-
-/* WARNING: Control flow encountered bad instruction data */
-
+/* Forwards to FUN_001024b0, the function that follows it. */
 void FUN_001024ac(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Bad instruction - Truncating control flow here */
-  halt_baddata();
+    FUN_001024b0();
 }
 
 } /* extern "C" */

@@ -39,7 +39,7 @@ extern int FUN_0019e0c0(int);
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_00297060. */
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b8838. */
@@ -73,7 +73,7 @@ unsigned int FUN_002ece60(fn_002ece60_arg0 *param_1)
         do {
           if (-1 < *(char *)(temp_v0 + temp_v3 + 0x90f0)) {
             temp_v1 = FUN_002a8740();
-            temp_v2 = FUN_0029ebac(temp_v1,2);
+            temp_v2 = flagWordTestBit(temp_v1,2);
             if (temp_v2 != 0) {
               temp_v1 = FUN_002a8740((int)*(char *)(temp_v0 + temp_v3 + 0x90f0));
               FUN_00262f68(temp_v1,4);

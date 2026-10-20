@@ -5,10 +5,10 @@
 extern "C" {
 
 int scrGetArg(...);
-int FUN_00409d8c(int, unsigned int);
+int countersAddSaturating(int, unsigned int);
 
 /* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_00409d8c. */
+/* Supplied declaration required: countersAddSaturating. */
 
 
 unsigned int FUN_003bcfb4(void)
@@ -20,7 +20,7 @@ unsigned int FUN_003bcfb4(void)
   
   temp_v0 = scrGetArg();
   temp_v1 = scrGetArg(1);
-  FUN_00409d8c(temp_v0,temp_v1);
+  countersAddSaturating(temp_v0,temp_v1);
   return 1;
 }
 

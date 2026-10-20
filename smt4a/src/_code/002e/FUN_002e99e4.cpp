@@ -1,20 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e93da(int);
+void FUN_002e93da(void *object);
 
-/* Supplied declaration required: FUN_002e93da. */
+typedef struct Optional {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u8 value;
+    /* 0x09 */ u8 unk09[0x5C];
+    /* 0x65 */ u8 valid;
+} Optional;
 
-
-void FUN_002e99e4(int param_1,unsigned char param_2)
-
+/* Resets the optional, stores `value` and clears `valid`. */
+void FUN_002e99e4(Optional *object, u8 value)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e93da(param_1);
-  *(unsigned char *)(param_1 + 8) = param_2;
-  *(unsigned char *)(param_1 + 0x65) = 0;
-  return;
+    FUN_002e93da(object);
+    object->value = value;
+    object->valid = 0;
 }
 
 } /* extern "C" */

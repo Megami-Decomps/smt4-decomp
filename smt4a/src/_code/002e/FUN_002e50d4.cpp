@@ -1,14 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct Table {
+    /* 0x00000 */ u8 unk00000[0x21E18];
+    /* 0x21E18 */ u32 value;
+} Table;
 
+typedef struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Table *table;
+} GameDataBlocksView;
+extern GameDataBlocksView g_gameDataBlocks;
 
-unsigned int FUN_002e50d4(void)
-
+/* Returns the word at 0x21E18 of the game-data table. */
+u32 FUN_002e50d4(void)
 {
-  return *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x21e18);
+    return g_gameDataBlocks.table->value;
 }
 
 } /* extern "C" */

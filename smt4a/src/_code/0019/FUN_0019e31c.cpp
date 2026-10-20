@@ -1,14 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0059dbc0; /* 0x59dbc0 */
+typedef struct Inner {
+    /* 0x00 */ u8 unk00[0x84];
+    /* 0x84 */ u32 value;
+} Inner;
 
+typedef struct Global59dbc0 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Inner *inner;
+} Global59dbc0;
+extern Global59dbc0 DAT_0059dbc0;
 
-unsigned int FUN_0019e31c(void)
-
+/* Returns the word at 0x84 of the inner object of the global at 0x59DBC0. */
+u32 FUN_0019e31c(void)
 {
-  return *(unsigned int *)((*(int *)((unsigned char *)&DAT_0059dbc0 + 0x4)) + 0x84);
+    return DAT_0059dbc0.inner->value;
 }
 
 } /* extern "C" */

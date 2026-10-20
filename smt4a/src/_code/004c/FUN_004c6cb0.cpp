@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0034a290(void);
 int FUN_003f0e20(int, unsigned int);
-int FUN_004c39b0(void);
+int source4CCopyHalves(void);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -18,11 +18,11 @@ typedef struct {
 } param_2_stack;
 
 extern int btlGetMainState(void);
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_0034a290. */
 extern int FUN_003ec77c(int);
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 
 
 int FUN_004c6cb0(unsigned int param_1,int param_2)
@@ -64,7 +64,7 @@ int FUN_004c6cb0(unsigned int param_1,int param_2)
   temp_v7[7] = 0;
   temp_v7[8] = 0;
   temp_v7[9] = 0;
-  FUN_004c39b0();
+  source4CCopyHalves();
   temp_v6 = 1;
   temp_v5 = 0;
   do {
@@ -86,7 +86,7 @@ int FUN_004c6cb0(unsigned int param_1,int param_2)
       if (((temp_v2 != 0 && temp_v0 != 0) && (temp_v3 = FUN_003ec77c(temp_v1), temp_v3 == 0)) &&
          ((temp_v0 = *(short *)(temp_v2 + 0x3a), temp_v0 != 0 &&
           ((param_2 == 0 ||
-           (temp_v3 = FUN_001633a0(99), temp_v4 = temp_v0 * temp_v6, temp_v4 - temp_v3 != 0 && temp_v3 <= temp_v4)))
+           (temp_v3 = lcgRandomRange(99), temp_v4 = temp_v0 * temp_v6, temp_v4 - temp_v3 != 0 && temp_v3 <= temp_v4)))
           ))) {
         return (int)*(short *)(temp_v2 + 0x38);
       }

@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned int DAT_00571190; /* 0x571190 */
 extern unsigned int DAT_00571194; /* 0x571194 */
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_004c5f90. */
 /* Supplied declaration required: FUN_004e5b5c. */
 /* Supplied declaration required: FUN_004e6ed8. */
@@ -36,7 +36,7 @@ void FUN_004dffe4(int *param_1)
   int temp_v4;
   int temp_v5;
   
-  temp_v1 = FUN_001633a0(99);
+  temp_v1 = lcgRandomRange(99);
   temp_v5 = 0;
   temp_v4 = 0;
   do {
@@ -44,7 +44,7 @@ void FUN_004dffe4(int *param_1)
     if ((puVar5[1] & DAT_00571194) != 0 || (DAT_00571190 & *puVar5) != 0) {
       temp_v2 = (int)*(short *)(*(int *)(*param_1 + 0x1ffc) + temp_v4 * 0x408 + 8);
       FUN_004c5f90();
-      if ((temp_v2 >= 1) && (temp_v3 = FUN_001633a0(99), temp_v3 > temp_v2)) {
+      if ((temp_v2 >= 1) && (temp_v3 = lcgRandomRange(99), temp_v3 > temp_v2)) {
         puVar5 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v4 * 0x408);
         temp_v0 = ~DAT_00571194;
         *puVar5 = *puVar5 & ~DAT_00571190;

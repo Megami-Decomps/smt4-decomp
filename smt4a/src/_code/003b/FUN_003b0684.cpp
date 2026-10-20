@@ -17,7 +17,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00235dc4. */
 extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002deb84(void);
-extern int FUN_0046b178(void);
+extern int stateAt4IsAbove2(void);
 extern int QuestCenter_GetActiveEntry(void);
 
 
@@ -43,7 +43,7 @@ unsigned int FUN_003b0684(void)
     FUN_00235dc4(&temp_v3,0xc);
   }
   temp_v0 = QuestCenter_GetActiveEntry();
-  if ((temp_v0 == 0) || (temp_v0 = FUN_0046b178(), temp_v0 == 0)) {
+  if ((temp_v0 == 0) || (temp_v0 = stateAt4IsAbove2(), temp_v0 == 0)) {
     temp_v1 = 0;
   }
   else {

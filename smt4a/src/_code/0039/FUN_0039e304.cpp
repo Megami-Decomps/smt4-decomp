@@ -1,27 +1,20 @@
-#include "romwright_types.h"
+#include "shard/Shard0039.h"
 
 extern "C" {
 
-int FUN_004a0ef8(unsigned int);
+extern u32 DAT_005710e0;
+extern s32 panelStateIs0(void);
+extern void FUN_004a0ef8(u32 value);
 
-extern unsigned int DAT_005710e0; /* 0x5710e0 */
-
-extern int FUN_0037c894(void);
-/* Supplied declaration required: FUN_004a0ef8. */
-
-
-int FUN_0039e304(void)
-
+s32 FUN_0039e304(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0037c894();
-  if (temp_v0 == 1) {
-    FUN_004a0ef8(DAT_005710e0);
-    DAT_005710e0 = 0;
-  }
-  return temp_v0;
+    s32 result = panelStateIs0();
+
+    if (result == 1) {
+        FUN_004a0ef8(DAT_005710e0);
+        DAT_005710e0 = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

@@ -12,9 +12,9 @@ int FUN_00482428(int, int *);
 int FUN_004824fc(int, int);
 int FUN_00482610(void);
 int FUN_0048269c(int, int *);
-int FUN_0048285c(int);
+int stateSetterSetFlag8(int);
 int FUN_0048286c(int);
-int FUN_004828a4(int, char *, int, int, unsigned int, int, int);
+int params95Set(int, char *, int, int, unsigned int, int, int);
 int FUN_00482a5c(void);
 int VectorSignedToFloat(int, int);
 
@@ -65,9 +65,9 @@ extern int FUN_003ded68(unsigned short);
 /* Supplied declaration required: FUN_004824fc. */
 /* Supplied declaration required: FUN_00482610. */
 /* Supplied declaration required: FUN_0048269c. */
-/* Supplied declaration required: FUN_0048285c. */
+/* Supplied declaration required: stateSetterSetFlag8. */
 /* Supplied declaration required: FUN_0048286c. */
-/* Supplied declaration required: FUN_004828a4. */
+/* Supplied declaration required: params95Set. */
 /* Supplied declaration required: FUN_00482a5c. */
 
 
@@ -149,14 +149,14 @@ void FUN_00482fe8(fn_00482fe8_arg0 *param_1)
           if ((int)romwright_sqrt_4(temp_v3 * temp_v3 + temp_v5 * temp_v5 + temp_v4 * temp_v4) < 0x43480000) {
             FUN_0048286c(temp_v1);
           }
-          FUN_0048285c(temp_v1);
+          stateSetterSetFlag8(temp_v1);
           FUN_004824fc(temp_v1,param_1[7].field_0x10);
           FUN_00482414(temp_v1,&temp_v10);
           FUN_00482428(temp_v1,&temp_v13);
           FUN_0048269c(temp_v1,&temp_v7);
           *(int *)(temp_v1 + 0x20) = (int)*(short *)(pcVar2 + 0x10);
           *(unsigned int *)(temp_v1 + 100) = 0;
-          FUN_004828a4(temp_v1,pcVar5,(int)*(short *)(pcVar2 + 0x18),(int)*(short *)(pcVar2 + 0x1a),
+          params95Set(temp_v1,pcVar5,(int)*(short *)(pcVar2 + 0x18),(int)*(short *)(pcVar2 + 0x1a),
                        *(unsigned int *)(pcVar2 + 0x1c),(int)*(short *)(pcVar2 + 0x20),
                        (int)*(short *)(pcVar2 + 0x22));
         }

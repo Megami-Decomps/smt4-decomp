@@ -1,49 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0011eec4_arg0 fn_0011eec4_arg0;
-typedef struct fn_0011eec4_arg1 fn_0011eec4_arg1;
-struct fn_0011eec4_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined1 field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined2 field_0x18; /* +0x18 */
-    unsigned char pad_0x1a[0x2];
-    undefined4 field_0x1c; /* +0x1c */
-};
-struct fn_0011eec4_arg1 {
-    unsigned char pad_0x0[0x4];
-    byte field_0x4; /* +0x4 */
-    unsigned char pad_0x5[0x3];
-    undefined4 field_0x8; /* +0x8 */
-    undefined4 field_0xc; /* +0xc */
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    ushort field_0x18; /* +0x18 */
-    unsigned char pad_0x1a[0x2];
-    undefined4 field_0x1c; /* +0x1c */
-};
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u64 value08;
+    /* 0x10 */ u32 word10;
+    /* 0x14 */ u32 word14;
+    /* 0x18 */ u16 half18;
+    /* 0x1A */ u8 unk1A[2];
+    /* 0x1C */ u32 word1C;
+} Record;
 
-
-void FUN_0011eec4(fn_0011eec4_arg0 *param_1,fn_0011eec4_arg1 *param_2)
-
+/* Copies every field of `source` into `dest`. */
+void FUN_0011eec4(Record *dest, const Record *source)
 {
-  unsigned int temp_v0;
-  
-  param_1->field_0x4 = param_2->field_0x4;
-  temp_v0 = param_2->field_0x8;
-  param_1->field_0xc = param_2->field_0xc;
-  param_1->field_0x8 = temp_v0;
-  param_1->field_0x10 = param_2->field_0x10;
-  param_1->field_0x14 = param_2->field_0x14;
-  param_1->field_0x18 = param_2->field_0x18;
-  param_1->field_0x1c = param_2->field_0x1c;
-  return;
+    dest->kind = source->kind;
+    dest->value08 = source->value08;
+    dest->word10 = source->word10;
+    dest->word14 = source->word14;
+    dest->half18 = source->half18;
+    dest->word1C = source->word1C;
 }
 
 } /* extern "C" */

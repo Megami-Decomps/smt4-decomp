@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002ec728(int);
-int FUN_002ec890(...);
+int destroyObj0055ae64(...);
 int FUN_002ecb04(...);
 int FUN_002ecbdc(...);
 
 extern int FUN_002ec674(unsigned char *);
 /* Supplied declaration required: FUN_002ec728. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ecb04. */
 /* Supplied declaration required: FUN_002ecbdc. */
 
@@ -37,8 +37,8 @@ void FUN_00105d54(int param_1,int param_2,char param_3,char param_4)
   FUN_002ecb04(**(unsigned int **)(param_1 + 4),temp_v1);
   FUN_002ecb04(**(unsigned int **)(param_1 + 0x10),temp_v2);
   *(unsigned char *)(param_1 + 0x68) = 1;
-  FUN_002ec890(temp_v2);
-  FUN_002ec890(temp_v1);
+  destroyObj0055ae64(temp_v2);
+  destroyObj0055ae64(temp_v1);
   return;
 }
 

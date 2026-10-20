@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s32 value;
+} Holder;
 
-void FUN_001aa324(int param_1)
-
+/* Sets the word at 0x1C to -1. */
+void FUN_001aa324(Holder *object)
 {
-  *(unsigned int *)(param_1 + 0x1c) = 0xffffffff;
-  return;
+    object->value = 0xFFFFFFFF;
 }
 
 } /* extern "C" */

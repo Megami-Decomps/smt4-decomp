@@ -1,27 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_snd_CTR_Voice_EnableMonoFilter` (_code @ 0x1c7c10, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+struct VoiceBody;
 
-void nn_snd_CTR_Voice_EnableMonoFilter(int param_1,unsigned char param_2)
+typedef struct Voice {
+    u8 unk00[7];
+    u8 filterFlags;                /* 0x07: bit 0 = mono filter */
+    u8 unk08[0x60];
+    struct VoiceBody *body;        /* 0x68 */
+} Voice;
 
+void FUN_001c7c30(struct VoiceBody *body, u8 enable);
+
+/* Updates the voice's mono-filter flag, then passes the flags to FUN_001c7c30 (the function that follows it) for the voice's body. */
+void nn_snd_CTR_Voice_EnableMonoFilter(Voice *voice, u8 enable)
 {
-  int temp_v0;
-  unsigned char temp_v1;
-  
-  if (param_2) {
-    temp_v1 = *(unsigned char *)(param_1 + 7) | 1;
-  }
-  else {
-    temp_v1 = *(unsigned char *)(param_1 + 7) & 0xfe;
-  }
-  *(unsigned char *)(param_1 + 7) = temp_v1;
-  temp_v0 = *(int *)(param_1 + 0x68);
-  *(unsigned char *)(temp_v0 + 0xf) = temp_v1;
-  *(unsigned short *)(temp_v0 + 0x6c) = *(unsigned short *)(temp_v0 + 0x6c) | 4;
-  return;
+    if (enable) {
+        voice->filterFlags |= 1;
+    } else {
+        voice->filterFlags &= ~1;
+    }
+    FUN_001c7c30(voice->body, voice->filterFlags);
 }
 
 } /* extern "C" */

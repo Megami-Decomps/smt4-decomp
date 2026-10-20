@@ -33,7 +33,7 @@ int FUN_004aa854(...);
 int FUN_004bcb54(void);
 int FUN_004c8b10(void);
 int FUN_004f5e6c(...);
-int FUN_004f6184(void);
+int state339CFinish(void);
 int FUN_004fbeac(...);
 int FUN_004fed5c(...);
 
@@ -58,15 +58,15 @@ int FUN_004c8e30(...);
 int FUN_004d7a70(...);
 int FUN_004d7fe4(...);
 int FUN_004d88fc(...);
-int FUN_004d8d14(...);
-int FUN_004d8f04(...);
+int state4DStop(...);
+int state4DStart(...);
 int FUN_004f8f08(...);
 int FUN_004fb670(...);
 int FUN_004fdb18(...);
 int FUN_004feecc(...);
 int VectorSignedToFloat(...);
 
-int FUN_0015688c(void);
+int saveSlotFindSelected(void);
 int FUN_001695a0(void);
 int FUN_0021c118(...);
 int FUN_0023244c(...);
@@ -91,7 +91,7 @@ int FUN_003ec580(int, int);
 int FUN_003ecfb4(...);
 int FUN_003ef1e4(int, int);
 int FUN_003f1d74(int);
-int FUN_00409d8c(...);
+int countersAddSaturating(...);
 int FUN_004a8edc(...);
 int FUN_004c621c(void);
 int FUN_004c6298(void);
@@ -167,9 +167,9 @@ extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0015688c. */
+/* Supplied declaration required: saveSlotFindSelected. */
 /* Supplied declaration required: jobStop. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
@@ -241,7 +241,7 @@ extern int FUN_003e46f4(unsigned int);
 /* Supplied declaration required: FUN_003f26d4. */
 /* Supplied declaration required: FUN_003f29c0. */
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_00409d8c. */
+/* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_0041817c. */
 /* Supplied declaration required: FUN_004a8edc. */
 /* Supplied declaration required: FUN_004aa2e0. */
@@ -256,13 +256,13 @@ extern int FUN_003e46f4(unsigned int);
 /* Supplied declaration required: FUN_004ca63c. */
 /* Supplied declaration required: FUN_004d7a70. */
 /* Supplied declaration required: FUN_004d7fe4. */
-extern int FUN_004d84e8(int);
+extern int isEntryUsable(int);
 /* Supplied declaration required: FUN_004d88fc. */
-/* Supplied declaration required: FUN_004d8d14. */
-/* Supplied declaration required: FUN_004d8f04. */
+/* Supplied declaration required: state4DStop. */
+/* Supplied declaration required: state4DStart. */
 extern unsigned int *btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004f5e6c. */
-/* Supplied declaration required: FUN_004f6184. */
+/* Supplied declaration required: state339CFinish. */
 /* Supplied declaration required: FUN_004f8f08. */
 /* Supplied declaration required: FUN_004fb670. */
 /* Supplied declaration required: FUN_004fbeac. */
@@ -368,12 +368,12 @@ void FUN_002ba998(unsigned int param_1)
       }
       temp_v9 = (temp_v9 + 1) & 0xffff;
     } while (temp_v9 < 3);
-    temp_v6 = FUN_0015688c();
+    temp_v6 = saveSlotFindSelected();
     if (temp_v6 != 0) {
       FUN_003ecfb4(temp_v7,temp_v23,temp_v6,0);
       FUN_004ca63c(temp_v7,temp_v23,2,0x36,0);
     }
-    temp_v6 = FUN_0015688c();
+    temp_v6 = saveSlotFindSelected();
     if (temp_v6 != 0) {
       temp_v11 = FUN_0019acdc(*(unsigned short *)(temp_v6 + 300),0);
       switch(temp_v11) {
@@ -381,30 +381,30 @@ void FUN_002ba998(unsigned int param_1)
         break;
       case 1:
         temp_v11 = 0x10;
-        FUN_00409d8c(temp_v11,1);
+        countersAddSaturating(temp_v11,1);
         break;
       case 2:
         temp_v11 = 0x11;
-        FUN_00409d8c(temp_v11,1);
+        countersAddSaturating(temp_v11,1);
         break;
       case 3:
         temp_v11 = 0x12;
-        FUN_00409d8c(temp_v11,1);
+        countersAddSaturating(temp_v11,1);
         break;
       case 4:
         temp_v11 = 0x14;
-        FUN_00409d8c(temp_v11,1);
+        countersAddSaturating(temp_v11,1);
         break;
       case 5:
         temp_v11 = 0x13;
-        FUN_00409d8c(temp_v11,1);
+        countersAddSaturating(temp_v11,1);
         break;
       case 6:
         temp_v11 = 0x15;
-        FUN_00409d8c(temp_v11,1);
+        countersAddSaturating(temp_v11,1);
         break;
       case 7:
-        FUN_00409d8c(0x16,1);
+        countersAddSaturating(0x16,1);
         break;
       }
     }
@@ -478,9 +478,9 @@ void FUN_002ba998(unsigned int param_1)
   case 3:
     *(unsigned int *)(temp_v7 + 0x178) = 0xffffffff;
     *(unsigned int *)(temp_v7 + 0x17c) = 0xffffffff;
-    FUN_004d8d14(g_btlStageModel,temp_v7);
+    state4DStop(g_btlStageModel,temp_v7);
     FUN_004d88fc(g_btlStageModel,temp_v7);
-    FUN_004d8f04(g_btlStageModel);
+    state4DStart(g_btlStageModel);
     break;
   case 4:
     *(unsigned char *)(temp_v7 + 0x45b8) = 0;
@@ -502,7 +502,7 @@ void FUN_002ba998(unsigned int param_1)
         (DAT_00573a20 & *(unsigned int *)(temp_v7 + 0x45a0)) != 0) {
       return;
     }
-    temp_v6 = FUN_001633a0(99);
+    temp_v6 = lcgRandomRange(99);
     temp_v15 = FUN_003e46f4(0x88);
     if (temp_v15 != 0) {
       temp_v5 = *(short *)(temp_v7 + 0x2000);
@@ -670,7 +670,7 @@ LAB_002bb21c:
     FUN_00385c44(temp_v7);
     break;
   case 0xb:
-    temp_v6 = FUN_004d84e8(g_btlEvent);
+    temp_v6 = isEntryUsable(g_btlEvent);
     if (temp_v6 != 0) {
       return;
     }
@@ -797,7 +797,7 @@ LAB_002bb21c:
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 0x6d);
-      FUN_00409d8c(0xf,1);
+      countersAddSaturating(0xf,1);
     }
     break;
   case 0x10:
@@ -812,7 +812,7 @@ LAB_002bb21c:
     FUN_004f8f08(DAT_00573808);
     temp_v6 = temp_v7;
     FUN_003eaf20();
-    temp_v11 = FUN_0015688c();
+    temp_v11 = saveSlotFindSelected();
     FUN_003ecfb4(temp_v7,temp_v6 + 0x164,temp_v11,0);
     *(unsigned int *)(temp_v6 + 0x400) = temp_v11;
     break;
@@ -822,7 +822,7 @@ LAB_002bb21c:
     *(unsigned int *)(temp_v7 + 0x45a4) = temp_v9;
     FUN_003e49e8();
     if (DAT_00573808 != 0) {
-      FUN_004f6184();
+      state339CFinish();
     }
     *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xffffbfff;
     FUN_004f8f08(DAT_00573808);
@@ -850,7 +850,7 @@ LAB_002bb21c:
         return;
       }
     }
-    temp_v7 = FUN_004d84e8(g_btlEvent);
+    temp_v7 = isEntryUsable(g_btlEvent);
     if (temp_v7 != 0) {
       return;
     }
@@ -867,9 +867,9 @@ LAB_002bb21c:
     break;
   case 0x15:
     FUN_004fbeac(0,0,0,0x3a,0);
-    FUN_0015688c();
+    saveSlotFindSelected();
     FUN_004bcb54();
-    temp_v6 = FUN_0015688c();
+    temp_v6 = saveSlotFindSelected();
     if (temp_v6 != 0) {
       FUN_003ecfb4(temp_v7,temp_v23,temp_v6,0);
       FUN_004ca63c(temp_v7,temp_v23,2,0x36,0);
@@ -972,7 +972,7 @@ LAB_002bbdec:
         *(unsigned int *)(temp_v7 + 0x45a4) = *(unsigned int *)(temp_v7 + 0x45a4) & temp_v10;
         FUN_003e49e8();
         if (DAT_00573808 != 0) {
-          FUN_004f6184();
+          state339CFinish();
         }
         *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xffffbfff;
         FUN_004f8f08(DAT_00573808);
@@ -1017,7 +1017,7 @@ LAB_002bbdec:
     case 8:
       break;
     default:
-      temp_v7 = FUN_004d84e8(g_btlEvent);
+      temp_v7 = isEntryUsable(g_btlEvent);
       if ((temp_v7 == 0) &&
          (temp_v7 = g_btlEvent, FUN_004d7a70(g_btlEvent,8,0xffffffff,0), temp_v7 != 0)) {
         FUN_004d7fe4(g_btlEvent);

@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(void);
 int FUN_0034a290(void);
 int FUN_003f0e20(...);
-int FUN_004c39b0(int, short [14]);
+int source4CCopyHalves(int, short [14]);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned int DAT_0057142c; /* 0x57142c */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 
 
 void FUN_004c3bc0(unsigned int param_1,unsigned int param_2)
@@ -52,7 +52,7 @@ void FUN_004c3bc0(unsigned int param_1,unsigned int param_2)
         temp_v1[7] = 0;
         temp_v1[8] = 0;
         temp_v1[9] = 0;
-        FUN_004c39b0(temp_v0,temp_v1);
+        source4CCopyHalves(temp_v0,temp_v1);
         temp_v0 = 0;
         do {
           if (temp_v1[temp_v0] != 0) {

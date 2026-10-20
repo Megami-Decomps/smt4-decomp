@@ -16,10 +16,10 @@ int FUN_00194fb0(int, int *);
 int FUN_002f5020(...);
 int FUN_0045db6c(...);
 int FUN_0045f410(...);
-int FUN_0045f46c(...);
+int obj50Set(...);
 int FUN_0045f67c(...);
 int FUN_0045f724(...);
-int FUN_0045f780(...);
+int vslot9ObjRefresh(...);
 int UnsignedDoesSaturate(...);
 int UnsignedSaturate(...);
 int VectorSignedToFloat(...);
@@ -88,10 +88,10 @@ extern unsigned long long FUN_0045b904(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0045db6c. */
 /* Supplied declaration required: FUN_0045e228. */
 /* Supplied declaration required: FUN_0045f410. */
-/* Supplied declaration required: FUN_0045f46c. */
+/* Supplied declaration required: obj50Set. */
 /* Supplied declaration required: FUN_0045f67c. */
 /* Supplied declaration required: FUN_0045f724. */
-/* Supplied declaration required: FUN_0045f780. */
+/* Supplied declaration required: vslot9ObjRefresh. */
 extern int FUN_004611ec(int, int *);
 extern unsigned long long FUN_004612bc(int, unsigned int);
 extern int FUN_00507bc4(unsigned int, int *, int **);
@@ -458,7 +458,7 @@ LAB_0045d4ac:
         piVar11 = temp_v18;
       } while (piVar4 == (int *)0x0);
       (**(romwright_code **)(*piVar4 + 0xc))(piVar4);
-      FUN_0045f46c(piVar4,temp_v56,temp_v47);
+      obj50Set(piVar4,temp_v56,temp_v47);
       piVar12 = *(int **)(param_1 + 0x78);
       if (piVar12 != (int *)(param_1 + 0x78)) {
         do {
@@ -533,7 +533,7 @@ LAB_0045d328:
         piVar11 = temp_v14;
       } while (piVar4 == (int *)0x0);
       (**(romwright_code **)(*piVar4 + 0xc))(piVar4);
-      FUN_0045f46c(piVar4,temp_v53,temp_v44);
+      obj50Set(piVar4,temp_v53,temp_v44);
       piVar12 = *(int **)(param_1 + 0xc4);
       if (piVar12 != (int *)(param_1 + 0xc4)) {
         do {
@@ -609,7 +609,7 @@ LAB_0045d0e4:
       piVar11 = temp_v9;
     } while (piVar4 == (int *)0x0);
     (**(romwright_code **)(*piVar4 + 0xc))(piVar4);
-    FUN_0045f46c(piVar4,temp_v56,temp_v54);
+    obj50Set(piVar4,temp_v56,temp_v54);
     piVar12 = *(int **)(param_1 + 0x2c);
     if (piVar12 != (int *)(param_1 + 0x2c)) {
       do {
@@ -747,7 +747,7 @@ LAB_0045da60:
                 piVar4[5] = param_5;
               }
               if (param_6 != 0) {
-                FUN_0045f780(piVar4,temp_v50);
+                vslot9ObjRefresh(piVar4,temp_v50);
               }
               nw_snd_SoundHandle_detail_AttachSound(temp_v63,piVar4);
               return 0;

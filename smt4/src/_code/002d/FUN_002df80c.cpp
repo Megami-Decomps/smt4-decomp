@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002c2950(void);
+extern u8 *FUN_002c2950(void);
 
-
-unsigned char FUN_002df80c(int param_1)
-
+u8 FUN_002df80c(int index)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002c2950();
-  return *(unsigned char *)(temp_v0 + param_1 + 0xc18);
+    u8 *work = FUN_002c2950();
+
+    return work[index + 0xc18];
 }
 
 } /* extern "C" */

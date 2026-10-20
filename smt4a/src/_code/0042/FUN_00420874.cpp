@@ -23,8 +23,8 @@ extern unsigned int FUN_001654e4(int);
 /* Supplied declaration required: FUN_00224880. */
 extern unsigned int FUN_00261458(void);
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_0038b320(void);
-extern int FUN_003b70c0(void);
+extern int byteTripleGetV0(void);
+extern int byteArr5Get3(void);
 /* Supplied declaration required: FUN_003c12d8. */
 /* Supplied declaration required: FUN_0041e3a0. */
 /* Supplied declaration required: FUN_00420a2c. */
@@ -121,17 +121,17 @@ void FUN_00420874(int param_1)
     FUN_00224880(*(unsigned int *)(param_1 + 0x40));
   }
   FUN_00420a2c(param_1);
-  temp_v1 = FUN_0038b320();
+  temp_v1 = byteTripleGetV0();
   if (temp_v1 == 0) {
     return;
   }
   temp_v4 = *(unsigned int *)(param_1 + 0x2f4);
   if (temp_v4 < 5) {
-    temp_v1 = FUN_0038b320();
+    temp_v1 = byteTripleGetV0();
     if (temp_v1 == 0) {
       return;
     }
-    temp_v1 = FUN_003b70c0();
+    temp_v1 = byteArr5Get3();
     if (temp_v1 != 0) {
       temp_v2 = FUN_00261458();
       rt_memcpy_w(param_1 + temp_v4 * 0x80 + 0x6c,temp_v2,0x80);

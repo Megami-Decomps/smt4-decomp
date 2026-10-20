@@ -31,7 +31,7 @@ int FUN_00169ddc(...);
 int dataTableGet(...);
 int FUN_002c2160(...);
 int FUN_002e4b9c(void);
-int FUN_0033099c(void);
+int objectE0ResetFlags1040(void);
 int FUN_0035b304(void);
 int FUN_0037a2e4(void);
 int FUN_0039c244(void);
@@ -124,7 +124,7 @@ extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_002f4374. */
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_00324c94. */
-/* Supplied declaration required: FUN_0033099c. */
+/* Supplied declaration required: objectE0ResetFlags1040. */
 extern int FUN_003309e0(void);
 extern int FUN_00341940(unsigned int);
 /* Supplied declaration required: FUN_00342010. */
@@ -730,7 +730,7 @@ LAB_0029fb00:
           *(unsigned char *)((int)puVar5 + 0x3f) = 0;
           *(unsigned char *)((int)puVar5 + 0x5a) = 1;
           puVar5[0x17] = 2;
-          FUN_0033099c();
+          objectE0ResetFlags1040();
           FUN_002c2160(1);
           puVar5[0x1f] = 0;
           puVar5[0x1e] = 0xd;
@@ -746,7 +746,7 @@ LAB_0029fb00:
           *(unsigned char *)((int)puVar5 + 0x3f) = 0;
           *(unsigned char *)((int)puVar5 + 0x5a) = 1;
           puVar5[0x17] = 2;
-          FUN_0033099c();
+          objectE0ResetFlags1040();
           FUN_002c2160(1);
           temp_v5 = FUN_0046c458(g_aocSystem,0x558);
           if (temp_v5 != 0) {
@@ -776,7 +776,7 @@ LAB_0029fb00:
           *(unsigned char *)((int)puVar5 + 0x3f) = 0;
           *(unsigned char *)((int)puVar5 + 0x5a) = 1;
           puVar5[0x17] = 2;
-          FUN_0033099c();
+          objectE0ResetFlags1040();
           FUN_002c2160(1);
           puVar5[0x1f] = 0;
           puVar5[0x1e] = 0xf;

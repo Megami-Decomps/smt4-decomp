@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001029f4(unsigned int, int, int);
 int FUN_00195fc8(void);
-int FUN_00427d34(unsigned char *);
+int recordTableAppend(unsigned char *);
 int FUN_00427d6c(int);
 int FUN_00427e10(void);
 int FUN_00428334(int, unsigned char **, unsigned int);
@@ -43,7 +43,7 @@ extern unsigned char DAT_00642b80; /* 0x642b80 */
 /* Supplied declaration required: FUN_001029f4. */
 /* Supplied declaration required: FUN_00195fc8. */
 extern int FUN_0019a37c(unsigned int, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00427d34. */
+/* Supplied declaration required: recordTableAppend. */
 /* Supplied declaration required: FUN_00427d6c. */
 /* Supplied declaration required: FUN_00427e10. */
 /* Supplied declaration required: FUN_00428334. */
@@ -96,12 +96,12 @@ void FUN_004275f0(int param_1,int param_2,unsigned int param_3,int *param_4)
     temp_v6 = *(unsigned int *)(param_1 + 8);
     temp_v8 = *(unsigned int *)(param_1 + 0xc);
     FUN_00427e10();
-    FUN_00427d34(&LAB_004278c8);
-    FUN_00427d34(&LAB_004278d0);
-    FUN_00427d34(&LAB_004278d8);
-    FUN_00427d34(&LAB_004278e4);
-    FUN_00427d34(&LAB_004278f4);
-    FUN_00427d34(&LAB_00427904);
+    recordTableAppend(&LAB_004278c8);
+    recordTableAppend(&LAB_004278d0);
+    recordTableAppend(&LAB_004278d8);
+    recordTableAppend(&LAB_004278e4);
+    recordTableAppend(&LAB_004278f4);
+    recordTableAppend(&LAB_00427904);
     FUN_00427d6c((char)param_4[10]);
     piVar4 = (int *)param_4[6];
     piVar2 = (int *)*param_4;

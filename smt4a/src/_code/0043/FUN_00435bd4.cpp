@@ -10,7 +10,7 @@ int FUN_0043865c(int [3], unsigned char **, int *);
 int FUN_004386a4(unsigned char **, int *, int);
 int FUN_004387bc(...);
 int FUN_004387f0(int *, int);
-int FUN_0051553c(...);
+int variantSetPlain(...);
 int FUN_00515598(void);
 int FUN_00515618(...);
 
@@ -35,7 +35,7 @@ typedef struct {
 /* Supplied declaration required: FUN_004386a4. */
 /* Supplied declaration required: FUN_004387bc. */
 /* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: FUN_0051553c. */
+/* Supplied declaration required: variantSetPlain. */
 /* Supplied declaration required: FUN_00515598. */
 /* Supplied declaration required: FUN_00515618. */
 
@@ -125,7 +125,7 @@ unsigned int FUN_00435bd4(int *param_1,unsigned int *param_2,int *param_3,int *p
       *piVar5 = (int)piVar2;
       *(int **)(*piVar2 + 4) = piVar2;
       temp_v5 = temp_v7;
-      FUN_0051553c(piVar2 + 2,&temp_v5);
+      variantSetPlain(piVar2 + 2,&temp_v5);
       temp_v6 = *param_4;
       FUN_0043865c(temp_v11,&temp_v2,&temp_v6);
       temp_v1 = *(int *)(temp_v11[0] + 0xc);
@@ -156,7 +156,7 @@ unsigned int FUN_00435bd4(int *param_1,unsigned int *param_2,int *param_3,int *p
         *piVar5 = (int)piVar2;
         *(int **)(*piVar2 + 4) = piVar2;
         temp_v8 = temp_v9;
-        FUN_0051553c(piVar2 + 2,&temp_v8);
+        variantSetPlain(piVar2 + 2,&temp_v8);
       }
       if (temp_v4 != 0) {
         puVar4 = temp_v3;
@@ -180,7 +180,7 @@ unsigned int FUN_00435bd4(int *param_1,unsigned int *param_2,int *param_3,int *p
       return 2;
     }
     temp_v2 = temp_v9;
-    FUN_0051553c(temp_v3 + 8,&temp_v2);
+    variantSetPlain(temp_v3 + 8,&temp_v2);
   }
   if ((*(unsigned short *)(*param_1 + 10) < 2) && (*(short *)(*param_1 + 0xc) != 0)) {
     FUN_00515618(&temp_v3,*param_4 + 8);
@@ -188,7 +188,7 @@ unsigned int FUN_00435bd4(int *param_1,unsigned int *param_2,int *param_3,int *p
       return 2;
     }
     temp_v2 = temp_v9;
-    FUN_0051553c(temp_v3 + 8,&temp_v2);
+    variantSetPlain(temp_v3 + 8,&temp_v2);
   }
   *temp_v12 = (unsigned int)temp_v9;
   *param_1 = *(int *)(*param_1 + 4);

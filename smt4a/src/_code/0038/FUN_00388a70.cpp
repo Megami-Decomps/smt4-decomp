@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00338408(void);
-int FUN_003a1a70(void);
+int nodeListFree(void);
+int handleHolderFree(void);
 
 extern int DAT_0059dc1c; /* 0x59dc1c */
 extern int DAT_0059dc20; /* 0x59dc20 */
 
-/* Supplied declaration required: FUN_00338408. */
-/* Supplied declaration required: FUN_003a1a70. */
+/* Supplied declaration required: nodeListFree. */
+/* Supplied declaration required: handleHolderFree. */
 
 
 void FUN_00388a70(void)
@@ -19,11 +19,11 @@ void FUN_00388a70(void)
 {
 /* irregular: 2 native warning(s); review required */
   if (DAT_0059dc20 != 0) {
-    FUN_003a1a70();
+    handleHolderFree();
     DAT_0059dc20 = 0;
   }
   if (DAT_0059dc1c != 0) {
-    FUN_00338408();
+    nodeListFree();
     DAT_0059dc1c = 0;
   }
   return;

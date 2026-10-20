@@ -31,7 +31,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_0045b30c; /* 0x45b30c */
-extern int FUN_0045b510(...); /* 0x45b510 */
+extern int setFourMinus1(...); /* 0x45b510 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
@@ -155,7 +155,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
         *puVar12 = 0;
         temp_v4 = FUN_0042c4cc(puVar12 + 4);
         temp_v4 = temp_v4 + 0x1b0;
-        FUN_002f5020(temp_v4,FUN_0045b510,0x10,8);
+        FUN_002f5020(temp_v4,setFourMinus1,0x10,8);
         temp_v5 = 0;
         *(unsigned int **)(temp_v4 + 0x80) = puVar13;
         do {

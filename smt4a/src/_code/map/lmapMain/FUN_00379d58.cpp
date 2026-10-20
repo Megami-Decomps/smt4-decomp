@@ -49,7 +49,7 @@ extern unsigned int DAT_0064c050; /* 0x64c050 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_003c323c. */
 extern int FUN_003fdadc(void);
 /* Supplied declaration required: FUN_0040619c. */
@@ -134,7 +134,7 @@ void FUN_00379d58(void)
       temp_v13 = 0xc63e0000c671e000;
       temp_v14 = 0x456bf000c65ac000;
       do {
-        if (((DAT_005c4c28 & 1) == 0) && (temp_v3 = FUN_002eba64(&DAT_005c4c28), temp_v3 != 0)) {
+        if (((DAT_005c4c28 & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_005c4c28), temp_v3 != 0)) {
           DAT_0064c030 = (unsigned int)temp_v15;
           DAT_0064c034 = temp_v10;
           DAT_0064c038 = temp_v10;

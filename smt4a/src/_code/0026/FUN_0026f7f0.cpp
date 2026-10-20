@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int sysMemClear(unsigned int *, int);
 int FUN_003d0bc0(int);
-int FUN_003df6a4(unsigned short *, int);
+int playerGetWords(unsigned short *, int);
 
 /* stack frame of void: 5 slot(s), 14 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003d0bc0. */
-/* Supplied declaration required: FUN_003df6a4. */
+/* Supplied declaration required: playerGetWords. */
 
 
 void FUN_0026f7f0(void)
@@ -51,7 +51,7 @@ void FUN_0026f7f0(void)
   temp_v1 = DAT_0057f108;
   temp_v2 = FUN_001ab888();
   sysMemClear((unsigned int *)(temp_v1 + 0x1b70),0x640);
-  FUN_003df6a4(&temp_v10,0);
+  playerGetWords(&temp_v10,0);
   temp_v3 = (unsigned int)temp_v10;
   if (temp_v3 != 0) {
     *(unsigned int *)(temp_v1 + 0x1b70) = temp_v3;

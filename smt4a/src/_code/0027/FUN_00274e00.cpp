@@ -1,36 +1,45 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001aea28(unsigned int, int);
+void FUN_001aea28(u32 owner, s32 handle);
 
-extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
-extern int DAT_00581280; /* 0x581280 */
+typedef struct Object {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s32 handle;
+} Object;
 
-/* Supplied declaration required: FUN_001aea28. */
+typedef struct Slot {
+    /* 0x00 */ Object *object;
+    /* 0x04 */ u8 unk04[0x38];
+} Slot;                         /* 0x3C */
 
+typedef struct SlotTable {
+    /* 0x00 */ u8 unk00[0x40];
+    /* 0x40 */ Slot slots[0x40];
+} SlotTable;
+extern u32 DAT_0056fcc0;
+extern SlotTable *DAT_00581280;
 
+/* Calls FUN_001aea28 for the handle of each of the 0x40 slot objects that has one, from the last slot to the first. */
 void FUN_00274e00(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0x3f;
-  do {
-    temp_v0 = *(int *)(DAT_00581280 + temp_v2 * 0x3c + 0x40);
-    temp_v1 = DAT_00581280;
-    if (temp_v0 != 0) {
-      temp_v1 = *(int *)(temp_v0 + 4);
-    }
-    if (temp_v0 != 0 && temp_v1 != 0) {
-      FUN_001aea28(DAT_0056fcc0,temp_v1);
-    }
-    temp_v2 = temp_v2 - 1;
-  } while (temp_v2 >= 0);
-  return;
+    Object *object;
+    s32 handle;
+    s32 i;
+
+    i = 0x3F;
+    do {
+        object = DAT_00581280->slots[i].object;
+        handle = (s32)DAT_00581280;
+        if (object != NULL) {
+            handle = object->handle;
+        }
+        if (object != NULL && handle != 0) {
+            FUN_001aea28(DAT_0056fcc0, handle);
+        }
+        i = i - 1;
+    } while (i >= 0);
 }
 
 } /* extern "C" */

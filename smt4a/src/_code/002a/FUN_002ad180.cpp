@@ -15,7 +15,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int jobIsValid(unsigned int);
 extern int jobGetWork(void);
 extern int FUN_00165058(unsigned int);
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
@@ -58,7 +58,7 @@ unsigned int FUN_002ad180(void)
     *(unsigned char *)(temp_v4 + 0x1290) = 0;
   }
   temp_v4 = g_renderCtx;
-  temp_v1 = FUN_00169294(6,7,0);
+  temp_v1 = packNibblesAndByte(6,7,0);
   piVar5 = (int *)(temp_v4 + 0x12b8);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

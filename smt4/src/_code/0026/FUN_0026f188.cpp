@@ -1,40 +1,22 @@
-#include "romwright_types.h"
+#include "shard/Obj43da28.h"
 
 extern "C" {
 
-int FUN_00296ae8(unsigned int, int, unsigned int, int, int, int, unsigned int);
+int FUN_00296ae8(u32 a, int b, u32 c, int d, int e, int f, u32 g);
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned char DAT_0043da28; /* 0x43da28 */
-
-/* Supplied declaration required: FUN_00296ae8. */
-
-
-void FUN_0026f188(int param_1,unsigned int param_2)
-
+void FUN_0026f188(int mode, u32 arg)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0043da28 + 0x4));
-  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x55c) = 1;
-  *(unsigned char *)(temp_v0 + 0x4cb) = 1;
-  if (param_1 != 0) {
-    FUN_00296ae8(*(unsigned int *)(temp_v0 + 0x558),3,0xffffffff,0,3,param_1,param_2);
-                    /* WARNING: Treating indirect jump as return */
-    return;
-  }
-  *(unsigned char *)(temp_v0 + 0x4cb) = 0;
-  *(unsigned char *)(temp_v0 + 0x55c) = 0;
-  *(unsigned int *)(temp_v0 + 0x558) = 0;
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    Obj43da28 *obj = DAT_0043da28.obj;
+
+    DAT_0043da28.obj->unk55C = 1;
+    obj->unk4CB = 1;
+    if (mode != 0) {
+        FUN_00296ae8(obj->unk558, 3, 0xffffffff, 0, 3, mode, arg);
+        return;
+    }
+    obj->unk4CB = 0;
+    obj->unk55C = 0;
+    obj->unk558 = 0;
 }
 
 } /* extern "C" */

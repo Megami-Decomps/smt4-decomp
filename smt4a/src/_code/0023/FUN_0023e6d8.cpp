@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002efc44(...);
 int FUN_0034a290(...);
-int FUN_003df6a4(...);
+int playerGetWords(...);
 int FUN_004c6c8c(...);
 int VectorUnsignedToFloat(...);
 
@@ -41,7 +41,7 @@ extern unsigned int FUN_0019f240(unsigned short);
 extern int FUN_001ab854(void);
 /* Supplied declaration required: FUN_002efc44. */
 /* Supplied declaration required: FUN_0034a290. */
-/* Supplied declaration required: FUN_003df6a4. */
+/* Supplied declaration required: playerGetWords. */
 /* Supplied declaration required: FUN_004c6c8c. */
 extern int FUN_004c6eb8(int, fn_0023e6d8_arg0 *, unsigned int);
 
@@ -89,7 +89,7 @@ int FUN_0023e6d8(fn_0023e6d8_arg0 *param_1,int param_2,int param_3)
     if (param_3 < 0) {
       temp_v2 = FUN_001801a4();
       temp_v1 = *(short *)(temp_v2 + 0x24);
-      FUN_003df6a4(&temp_v7,1);
+      playerGetWords(&temp_v7,1);
       temp_v3 = FUN_0019f240(param_1->field_0x20);
       pfVar7 = param_1;
       FUN_002efc44(param_1,temp_v3,2);

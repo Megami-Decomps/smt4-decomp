@@ -14,7 +14,7 @@ int FUN_00215bd0(void);
 int FUN_002804b0(...);
 int FUN_002c8538(int);
 int FUN_004be990(...);
-int FUN_0050d778(int, int);
+int fillThreeWordsWithByte(int, int);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -34,7 +34,7 @@ extern unsigned char DAT_0057f25c; /* 0x57f25c */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001505ac. */
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
 extern int FUN_00187068(int);
@@ -46,7 +46,7 @@ extern unsigned char FUN_002857b8(void);
 /* Supplied declaration required: FUN_002c8538. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_004be990. */
-/* Supplied declaration required: FUN_0050d778. */
+/* Supplied declaration required: fillThreeWordsWithByte. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -64,10 +64,10 @@ void FUN_004bd794(int param_1,unsigned char param_2)
   
   *(unsigned int *)(param_1 + 0x334) = 0;
   *(unsigned char *)(param_1 + 4) = param_2;
-  FUN_0050d778(param_1 + 0x338,1);
+  fillThreeWordsWithByte(param_1 + 0x338,1);
   temp_v5 = 0;
   temp_v6 = 0;
-  temp_v0 = FUN_0015688c();
+  temp_v0 = saveSlotFindSelected();
   if (temp_v0 != 0) {
     temp_v6 = *(short *)(temp_v0 + 300);
   }

@@ -1,33 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00129a0c` (_code @ 0x129a0c, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Destroys the object: sets its vtable, runs the base teardown, then destroys the members at +0x20
+ * and +0x0c (each destructor returns its argument) and the base subobject. Returns the object. */
+#include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
-int FUN_00129960(unsigned int *);
-int FUN_0030cba8(...);
-int FUN_0030ccc0(unsigned char *, unsigned int *);
+struct Obj00129a0c {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0c */ u8 member0c[0x14];
+    /* 0x20 */ u8 member20[4];
+};
 
-extern unsigned char DAT_0055998c; /* 0x55998c */
-extern unsigned char DAT_00594b24; /* 0x594b24 */
+extern const u8 DAT_0055998c[];
+extern u8 DAT_00594b24[];
 
-/* Supplied declaration required: FUN_00129960. */
-/* Supplied declaration required: FUN_0030cba8. */
-/* Supplied declaration required: FUN_0030ccc0. */
+void FUN_0030ccc0(u8 *table, Obj00129a0c *obj);
+void FUN_00129960(Obj00129a0c *obj);
+u8 *FUN_0030cba8(u8 *member);
+__weak Obj00129a0c *FUN_00129a0c_baseDtor(Obj00129a0c *obj);
 
-
-int FUN_00129a0c(unsigned int *param_1)
-
+Obj00129a0c *FUN_00129a0c(Obj00129a0c *obj)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_0055998c;
-  FUN_0030ccc0(&DAT_00594b24,param_1);
-  FUN_00129960(param_1);
-  temp_v0 = FUN_0030cba8(param_1 + 8);
-  temp_v0 = FUN_0030cba8(temp_v0 - 0x14);
-  return temp_v0 - 0xc;
+    u8 *member;
+
+    obj->vtable = DAT_0055998c;
+    FUN_0030ccc0(DAT_00594b24, obj);
+    FUN_00129960(obj);
+    member = FUN_0030cba8(obj->member20);
+    member = FUN_0030cba8(member - (offsetof(Obj00129a0c, member20) - offsetof(Obj00129a0c, member0c)));
+    return FUN_00129a0c_baseDtor((Obj00129a0c *)(member - offsetof(Obj00129a0c, member0c)));
 }
 
-} /* extern "C" */
+}

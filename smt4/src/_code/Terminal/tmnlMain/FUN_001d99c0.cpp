@@ -33,7 +33,7 @@ int asdMdlManagerDestroy(...);
 int FUN_002a7890(void);
 int FUN_002bf810(...);
 int FUN_002bff50(void);
-int FUN_002c2264(void);
+int resourceListDestroy(void);
 int asdMemFree(void);
 int jobStop(...);
 int asdSequenceRequest(...);
@@ -211,7 +211,7 @@ extern int FUN_002c09d0(unsigned int);
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c2264. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
@@ -851,7 +851,7 @@ LAB_001da638:
             temp_v6 = 0;
             do {
               if (puVar7[temp_v6 * 3 + 0x15a] != 0) {
-                FUN_002c2264();
+                resourceListDestroy();
                 puVar7[temp_v6 * 3 + 0x15a] = 0;
               }
               if (puVar7[temp_v6 * 3 + 0x159] != 0) {

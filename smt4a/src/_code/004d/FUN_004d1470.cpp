@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0032c430(unsigned int);
 int FUN_003e83b4(...);
-int FUN_004bd3ec(int, unsigned int);
-int FUN_004bd400(...);
+int bitsAt60Set(int, unsigned int);
+int bitsAt60Clear(...);
 int FUN_004fcffc(...);
 int FUN_004fdb18(...);
 
@@ -24,13 +24,13 @@ extern unsigned int DAT_0057161c; /* 0x57161c */
 extern int FUN_00163fd4(unsigned int, unsigned int);
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
-extern unsigned int *FUN_00317450(unsigned int);
+extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 /* Supplied declaration required: FUN_0032c430. */
 extern unsigned int FUN_003874fc(unsigned int);
 /* Supplied declaration required: FUN_003e83b4. */
 extern int FUN_004bd0d8(void);
-/* Supplied declaration required: FUN_004bd3ec. */
-/* Supplied declaration required: FUN_004bd400. */
+/* Supplied declaration required: bitsAt60Set. */
+/* Supplied declaration required: bitsAt60Clear. */
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fcffc. */
 /* Supplied declaration required: FUN_004fdb18. */
@@ -57,7 +57,7 @@ void FUN_004d1470(int param_1,int param_2)
   temp_v8 = 0;
   switch(temp_v3) {
   case 0:
-    puVar5 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar5 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(param_1 + 0x1c) = *puVar5;
     return;
   case 1:
@@ -224,7 +224,7 @@ void FUN_004d1470(int param_1,int param_2)
             temp_v7 = 0;
             do {
               if ((*(unsigned int *)(param_1 + 0x18) & (1 << (temp_v7 & 0xff))) != 0) {
-                FUN_004bd3ec(temp_v8,temp_v7);
+                bitsAt60Set(temp_v8,temp_v7);
               }
               temp_v7 = temp_v7 + 1;
             } while ((int)temp_v7 < 0xe);
@@ -298,7 +298,7 @@ void FUN_004d1470(int param_1,int param_2)
             temp_v8 = FUN_001ab888();
             if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x1c88)) && (temp_v8 = FUN_001ab854(), temp_v8 != 0)
                 ) && (temp_v5 = FUN_004bd0d8(), temp_v5 == 0)) {
-              FUN_004bd400(temp_v8,*(unsigned int *)(param_1 + 0x18) & 0xffff);
+              bitsAt60Clear(temp_v8,*(unsigned int *)(param_1 + 0x18) & 0xffff);
             }
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < (int)(unsigned int)temp_v1);

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002bfab0(unsigned int, unsigned int);
+int surfaceCopy(unsigned int, unsigned int);
 int FUN_002bfadc(int, unsigned int);
 int FUN_002c39a4(unsigned int);
 
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_002bfab0. */
+/* Supplied declaration required: surfaceCopy. */
 /* Supplied declaration required: FUN_002bfadc. */
 extern int FUN_002bff10(unsigned int);
 extern int jobGetWork(void);
@@ -46,7 +46,7 @@ unsigned int FUN_0010a450(void)
         temp_v0 = 0;
         FUN_002bfadc(0,*(unsigned int *)(temp_v1 + 8));
         *(unsigned char *)(temp_v1 + 0xf62) = temp_v0;
-        FUN_002bfab0(*(unsigned int *)(temp_v1 + 8),*(unsigned int *)(temp_v1 + 8));
+        surfaceCopy(*(unsigned int *)(temp_v1 + 8),*(unsigned int *)(temp_v1 + 8));
         *(int *)(*(int *)(temp_v1 + 8) + 0x14) = *(int *)(*(int *)(temp_v1 + 8) + 0x14) >> 1;
         *(int *)(*(int *)(temp_v1 + 8) + 0x18) = *(int *)(*(int *)(temp_v1 + 8) + 0x18) >> 1;
         *(unsigned char *)(temp_v1 + 0xf64) = 1;

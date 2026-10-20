@@ -14,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002ee9c0. */
 /* Supplied declaration required: FUN_002fbb68. */
-extern unsigned int FUN_002ff8c6(int *);
+extern unsigned int vectorCount4_002ff8c6(int *);
 
 
 void FUN_00307254(unsigned int param_1,int *param_2,unsigned int param_3,unsigned int param_4)
@@ -26,7 +26,7 @@ void FUN_00307254(unsigned int param_1,int *param_2,unsigned int param_3,unsigne
   int temp_v2;
   
   temp_v2 = param_4;
-  temp_v2 = FUN_002ff8c6(param_2);
+  temp_v2 = vectorCount4_002ff8c6(param_2);
   FUN_002ee9c0(param_1,&temp_v2);
   temp_v1 = param_2[1];
   for (temp_v0 = *param_2; temp_v0 != temp_v1; temp_v0 = temp_v0 + 4) {

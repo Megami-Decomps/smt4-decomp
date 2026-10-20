@@ -10,8 +10,8 @@ int FUN_002fe590(void);
 int FUN_00388aac(int);
 int FUN_00390274(void);
 int FUN_00399768(int, int);
-int FUN_003a1a9c(int, float *);
-int FUN_003a1ab4(void);
+int floatPairAddA(int, float *);
+int floatPairAddB(void);
 int FUN_003ba614(int, int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -47,8 +47,8 @@ extern int FUN_001656a0(unsigned int);
 /* Supplied declaration required: FUN_00388aac. */
 /* Supplied declaration required: FUN_00390274. */
 /* Supplied declaration required: FUN_00399768. */
-/* Supplied declaration required: FUN_003a1a9c. */
-/* Supplied declaration required: FUN_003a1ab4. */
+/* Supplied declaration required: floatPairAddA. */
+/* Supplied declaration required: floatPairAddB. */
 /* Supplied declaration required: FUN_003ba614. */
 
 
@@ -79,8 +79,8 @@ unsigned int FUN_00282f00(void)
     }
     temp_v4 = temp_v4 * 128.0f;
     temp_v3 = temp_v3 * 128.0f;
-    FUN_003a1a9c(0,pfVar3);
-    FUN_003a1ab4();
+    floatPairAddA(0,pfVar3);
+    floatPairAddB();
     FUN_002fe590();
     DAT_0059dc0c = 0;
     FUN_00390274();

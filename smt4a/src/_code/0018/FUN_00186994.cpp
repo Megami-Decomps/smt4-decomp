@@ -1,22 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0019e04c(unsigned int, int);
+typedef struct Node {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 value;
+    /* 0x0C */ u8 unk0C[0x0C];
+    /* 0x18 */ struct Node *next;
+} Node;
 
-/* Supplied declaration required: FUN_0019e04c. */
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ Node *first;
+} Owner;
 
+void FUN_0019e04c(u32 value, Owner *owner);
 
-void FUN_00186994(int param_1)
-
+/* Calls FUN_0019e04c with each node's value and the owner. */
+void FUN_00186994(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  for (temp_v0 = *(int *)(param_1 + 0xc); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x18)) {
-    FUN_0019e04c(*(unsigned int *)(temp_v0 + 8),param_1);
-  }
-  return;
+    Node *node;
+
+    for (node = owner->first; node != NULL; node = node->next) {
+        FUN_0019e04c(node->value, owner);
+    }
 }
 
 } /* extern "C" */

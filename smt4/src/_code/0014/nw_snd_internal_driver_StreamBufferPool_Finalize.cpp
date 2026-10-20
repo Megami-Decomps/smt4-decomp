@@ -1,16 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct StreamBufferPool {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u32 unk8;
+    /* 0xC */ u32 unkC;
+} StreamBufferPool;
 
-void nw_snd_internal_driver_StreamBufferPool_Finalize(unsigned int *param_1)
-
+void nw_snd_internal_driver_StreamBufferPool_Finalize(StreamBufferPool *pool)
 {
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  return;
+    pool->unk0 = 0;
+    pool->unk4 = 0;
+    pool->unk8 = 0;
+    pool->unkC = 0;
 }
 
 } /* extern "C" */

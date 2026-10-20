@@ -42,7 +42,7 @@ int FUN_002cf780(void);
 int FUN_002e24c8(void);
 int FUN_003aacd0(void);
 int FUN_003aca0c(void);
-int FUN_003acb28(void);
+int spriteTable22Acquire(void);
 int FUN_003acf1c(int);
 int FUN_003ad0e0(void);
 
@@ -97,7 +97,7 @@ extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002e333c. */
 /* Supplied declaration required: FUN_003aacd0. */
 /* Supplied declaration required: FUN_003aca0c. */
-/* Supplied declaration required: FUN_003acb28. */
+/* Supplied declaration required: spriteTable22Acquire. */
 /* Supplied declaration required: FUN_003acf1c. */
 /* Supplied declaration required: FUN_003ad0e0. */
 
@@ -152,7 +152,7 @@ void FUN_001d0754(int *param_1)
     FUN_0026a598();
     timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
-    FUN_003acb28();
+    spriteTable22Acquire();
     FUN_003ad0e0();
     temp_v1 = FUN_0029efc0(temp_v2 + 0x240);
     temp_v4 = FUN_0029efa8(temp_v2 + 0x240);

@@ -6,7 +6,7 @@ extern "C" {
 
 extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 void FUN_004c621c(void)
@@ -23,7 +23,7 @@ void FUN_004c621c(void)
     do {
       if (-1 < *(char *)(temp_v0 + temp_v3 + 0x1c88)) {
         temp_v1 = FUN_001ab854();
-        temp_v2 = FUN_004bd340(temp_v1,10);
+        temp_v2 = bitsAt60Test(temp_v1,10);
         if (temp_v2 == 0) {
           *(unsigned char *)(temp_v1 + 0x12a) = 0;
         }

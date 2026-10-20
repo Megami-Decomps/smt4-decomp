@@ -20,7 +20,7 @@ extern unsigned int DAT_0064c114; /* 0x64c114 */
 extern unsigned int DAT_0064c118; /* 0x64c118 */
 
 extern unsigned int FUN_001a1e28(void);
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
 
@@ -38,7 +38,7 @@ unsigned char * FUN_00507244(int param_1)
     puVar1 = (unsigned char *)(**(romwright_code **)(**(int **)(param_1 + 0xc) + 0x18))();
     return puVar1;
   }
-  if (((DAT_005c4c38 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c38), temp_v0 != 0)) {
+  if (((DAT_005c4c38 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c38), temp_v0 != 0)) {
     temp_v1 = FUN_001a1e28();
     nn_math_ARMv6_MTX34CopyAsm(&DAT_0064c0dc,temp_v1);
     DAT_0064c10c = 0x3f800000;

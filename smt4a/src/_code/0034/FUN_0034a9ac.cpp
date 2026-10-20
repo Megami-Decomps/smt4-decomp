@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0034.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+extern ObjBRef DAT_00588fd0;
 
-
-int FUN_0034a9ac(void)
-
+s32 FUN_0034a9ac(void)
 {
-  return (int)*(short *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x138c);
+    return DAT_00588fd0.instance->unk138C;
 }
 
 } /* extern "C" */

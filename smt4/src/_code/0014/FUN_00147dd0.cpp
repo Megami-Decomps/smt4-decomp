@@ -1,14 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00471a70; /* 0x471a70 */
+extern struct {
+    u8 unk00[2];
+    s8 unk02;
+} DAT_00471a70;
 
-
-int FUN_00147dd0(void)
-
+s32 FUN_00147dd0(void)
 {
-  return (int)(*(signed char *)((unsigned char *)&DAT_00471a70 + 0x2));
+    return DAT_00471a70.unk02;
 }
 
 } /* extern "C" */

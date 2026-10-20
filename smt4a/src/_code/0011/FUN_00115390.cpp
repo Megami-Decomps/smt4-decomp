@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct CountHolder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s16 count;
+} CountHolder;
 
-unsigned int FUN_00115390(int param_1)
-
+/* Returns 1 when `count` is zero. */
+u32 FUN_00115390(CountHolder *object)
 {
-  if (*(short *)(param_1 + 4) != 0) {
-    return 0;
-  }
-  return 1;
+    if (object->count != 0) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

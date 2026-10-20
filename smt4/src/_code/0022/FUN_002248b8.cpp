@@ -13,7 +13,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int FUN_002865c0(unsigned int);
 extern int jobGetWork(void);
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 unsigned int FUN_002248b8(void)
@@ -52,7 +52,7 @@ unsigned int FUN_002248b8(void)
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
     temp_v0 = g_titleScene;
-    temp_v2 = FUN_002c5da8(6,1,0);
+    temp_v2 = packNibblesAndByte(6,1,0);
     piVar6 = (int *)(temp_v0 + 0x12ac);
     temp_v3 = *piVar6;
     temp_v4 = piVar6[temp_v3 + 2];

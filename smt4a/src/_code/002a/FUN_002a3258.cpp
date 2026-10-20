@@ -1,19 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int g_menuState; /* 0x57f56c */
+typedef struct MenuState {
+    /* 0x000 */ u8 unk000[0x14];
+    /* 0x014 */ u32 mode;
+    /* 0x018 */ u16 argument;
+    /* 0x01A */ u8 unk01A[0x297];
+    /* 0x2B1 */ u8 confirmed;
+} MenuState;
+extern MenuState *g_menuState;
 
-
+/* Resets the menu to mode 0 and clears `confirmed`. */
 void FUN_002a3258(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = g_menuState;
-  *(unsigned int *)(g_menuState + 0x14) = 0;
-  *(unsigned char *)(temp_v0 + 0x2b1) = 0;
-  return;
+    MenuState *menu;
+
+    menu = g_menuState;
+    g_menuState->mode = 0;
+    menu->confirmed = 0;
 }
 
 } /* extern "C" */

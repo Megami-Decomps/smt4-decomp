@@ -76,12 +76,12 @@ extern int FUN_00162880(void);
 /* Supplied declaration required: asdMemoryAlloc. */
 extern int lmapMainIsRunning(void);
 extern int FUN_00167e54(void);
-extern float FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0017fc94. */
 /* Supplied declaration required: FUN_001aff14. */
 /* Supplied declaration required: FUN_001d3d6c. */
-extern unsigned int FUN_00228024(unsigned int);
-extern int FUN_002eba64(unsigned int *);
+extern unsigned int dataTableLookupValue0103(unsigned int);
+extern int __cxa_guard_acquire(unsigned int *);
 extern int mapMainIsBusy(void);
 extern int QuestCenterMode_IsBusy(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -160,7 +160,7 @@ void FUN_003fc294(int param_1,int param_2)
       temp_v20 = 0x4248000000000000;
     }
     else {
-      temp_v4 = FUN_00228024((*(int *)(param_1 + 0xc) + 1U) & 0xffff);
+      temp_v4 = dataTableLookupValue0103((*(int *)(param_1 + 0xc) + 1U) & 0xffff);
       temp_v8 = VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v20 = (unsigned long long)temp_v8 << 0x20;
     }
@@ -295,7 +295,7 @@ void FUN_003fc294(int param_1,int param_2)
                                     ((unsigned int)*(unsigned char *)((int)pfVar13 + 0x23),
                                      (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v19 = CONCAT44(temp_v12,temp_v14 / temp_v44 + temp_v15 * (float)temp_v21);
-          if (((DAT_005c4c2c & 1) == 0) && (temp_v3 = FUN_002eba64(&DAT_005c4c2c), temp_v3 != 0)) {
+          if (((DAT_005c4c2c & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v3 != 0)) {
             DAT_0064c054 = (unsigned int)temp_v23;
             DAT_0064c058 = (unsigned int)(temp_v21 >> 0x20);
             DAT_0064c05c = DAT_0064c058;
@@ -410,22 +410,22 @@ void FUN_003fc294(int param_1,int param_2)
             if (temp_v1 != '\x01') {
               if (temp_v1 != '\x02') {
                 if (temp_v1 == '\x03') {
-                  temp_v12 = (float)FUN_00169294(5,0,1);
+                  temp_v12 = (float)packNibblesAndByte(5,0,1);
                   pfVar14[0x15] = temp_v12;
                 }
               }
               else {
-                temp_v12 = (float)FUN_00169294(6,1,2);
+                temp_v12 = (float)packNibblesAndByte(6,1,2);
                 pfVar14[0x15] = temp_v12;
               }
             }
             else {
-              temp_v12 = (float)FUN_00169294(6,1,0);
+              temp_v12 = (float)packNibblesAndByte(6,1,0);
               pfVar14[0x15] = temp_v12;
             }
           }
           else {
-            temp_v12 = (float)FUN_00169294(6,7,0);
+            temp_v12 = (float)packNibblesAndByte(6,7,0);
             pfVar14[0x15] = temp_v12;
           }
           temp_v8 = temp_v8 + 1;

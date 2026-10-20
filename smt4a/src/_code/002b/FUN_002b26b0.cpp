@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int FUN_003ff17c(unsigned int);
-extern int FUN_003ff190(unsigned int);
+extern int flagsBGetBit0(unsigned int);
+extern int flagsBGetBit1(unsigned int);
 
 
 int FUN_002b26b0(unsigned short *param_1,unsigned short *param_2)
@@ -17,8 +17,8 @@ int FUN_002b26b0(unsigned short *param_1,unsigned short *param_2)
   
   temp_v1 = param_1[1] & 0xff;
   temp_v2 = param_2[1] & 0xff;
-  if ((param_1[1] >> 8 == 10) && (temp_v0 = FUN_003ff17c(temp_v1), temp_v0 != 0)) {
-    temp_v0 = FUN_003ff190(temp_v1);
+  if ((param_1[1] >> 8 == 10) && (temp_v0 = flagsBGetBit0(temp_v1), temp_v0 != 0)) {
+    temp_v0 = flagsBGetBit1(temp_v1);
     if (temp_v0 == 0) {
       temp_v1 = 0xffffff9d;
     }
@@ -26,8 +26,8 @@ int FUN_002b26b0(unsigned short *param_1,unsigned short *param_2)
       temp_v1 = 99;
     }
   }
-  if ((param_2[1] >> 8 == 10) && (temp_v0 = FUN_003ff17c(temp_v2), temp_v0 != 0)) {
-    temp_v0 = FUN_003ff190(temp_v2);
+  if ((param_2[1] >> 8 == 10) && (temp_v0 = flagsBGetBit0(temp_v2), temp_v0 != 0)) {
+    temp_v0 = flagsBGetBit1(temp_v2);
     if (temp_v0 == 0) {
       temp_v2 = 0xffffff9d;
     }

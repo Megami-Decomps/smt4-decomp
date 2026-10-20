@@ -1,13 +1,12 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_001532e8(int param_1,int param_2,int param_3)
-
+/* Clears byte `b` of row `a` (rows are 2 bytes wide) and reports success. */
+u32 FUN_001532e8(u8 *table, s32 a, s32 b)
 {
-  *(unsigned char *)(param_1 + param_2 * 2 + param_3) = 0;
-  return 1;
+    (table + a * 2)[b] = 0;
+    return 1;
 }
 
 } /* extern "C" */

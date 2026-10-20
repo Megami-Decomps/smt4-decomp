@@ -1,25 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_memcpy(int, short *, int);
+int rt_memcpy(void *dst, s16 *src, int size);
 
-/* Supplied declaration required: rt_memcpy. */
+typedef struct OutputCapture {
+    /* 0x0 */ u8 *buffer;
+    /* 0x4 */ s32 capacity;   /* in stereo frames of 4 bytes */
+    /* 0x8 */ u8 unk8[4];
+    /* 0xC */ s32 position;
+} OutputCapture;
 
-
-void nn_snd_CTR_OutputCapture_Write(int *param_1,short *param_2,int param_3)
-
+/* Appends `count` frames to the ring buffer, wrapping the write position at capacity. */
+void nn_snd_CTR_OutputCapture_Write(OutputCapture *capture, s16 *frames, s32 count)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  rt_memcpy(*param_1 + param_1[3] * 4,param_2,param_3 << 2);
-  temp_v0 = param_1[3];
-  param_1[3] = temp_v0 + param_3;
-  if (temp_v0 + param_3 >= param_1[1]) {
-    param_1[3] = 0;
-  }
-  return;
+    s32 position;
+
+    rt_memcpy(capture->buffer + capture->position * 4, frames, count << 2);
+    position = capture->position;
+    capture->position = position + count;
+    if (position + count >= capture->capacity) {
+        capture->position = 0;
+    }
 }
 
 } /* extern "C" */

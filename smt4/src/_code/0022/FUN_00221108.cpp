@@ -11,7 +11,7 @@ extern int FUN_0024ea50(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_0029bcf0(unsigned int);
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 
 
@@ -35,13 +35,13 @@ unsigned int FUN_00221108(void)
     else {
       temp_v2 = FUN_0029bcf0(temp_v0 & 0xffff);
       temp_v3 = FUN_002a8740();
-      temp_v1 = FUN_0029ebac(temp_v3,10);
+      temp_v1 = flagWordTestBit(temp_v3,10);
       if (temp_v1 == 0) {
         temp_v3 = FUN_002a8740(temp_v2);
-        temp_v1 = FUN_0029ebac(temp_v3,1);
+        temp_v1 = flagWordTestBit(temp_v3,1);
         if (temp_v1 == 0) {
           temp_v2 = FUN_002a8740(temp_v2);
-          temp_v1 = FUN_0029ebac(temp_v2,2);
+          temp_v1 = flagWordTestBit(temp_v2,2);
           if (temp_v1 == 0) {
             scrSetResult(temp_v4);
             return 1;

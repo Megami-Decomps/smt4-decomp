@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Fixed {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 value;
+} Fixed;
 
-int FUN_001654e4(int param_1)
-
+/* Returns the word at 0x10 as an integer (its fixed-point value shifted down by 12 bits). */
+s32 FUN_001654e4(Fixed *object)
 {
-  return *(int *)(param_1 + 0x10) >> 0xc;
+    return object->value >> 12;
 }
 
 } /* extern "C" */

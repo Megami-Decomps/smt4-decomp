@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00275bc8(int, unsigned int);
 int FUN_00359974(int, unsigned int, unsigned int, int);
-int FUN_0037b578(unsigned int, int);
+int screenStartOrClear(unsigned int, int);
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int dataTableGetCount(unsigned int);
@@ -14,7 +14,7 @@ extern int dataTableGetEntries(void);
 extern unsigned int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 extern int FUN_003f86c8(unsigned int);
 
 
@@ -87,7 +87,7 @@ void FUN_003e600c(int param_1)
     FUN_00359974(0x18,temp_v1,0xffffffff,0);
     FUN_00359974(0x19,temp_v4,0xffffffff,0);
     FUN_00359974(0x1a,temp_v5,0xffffffff,0);
-    FUN_0037b578(*(unsigned int *)(param_1 + 0x10),0x15);
+    screenStartOrClear(*(unsigned int *)(param_1 + 0x10),0x15);
     *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(param_1 + 4);
     *(unsigned int *)(param_1 + 4) = 3;
     *(unsigned int *)(param_1 + 8) = 0;

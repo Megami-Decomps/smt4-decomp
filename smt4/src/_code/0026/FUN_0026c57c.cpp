@@ -8,7 +8,7 @@ int FUN_00210194(int);
 int FUN_0029bb14(void);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_002a0428(void);
-int FUN_002b2b5c(unsigned int);
+int sndObjectForwardField8(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int DAT_0043dd68; /* 0x43dd68 */
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002b2b5c. */
+/* Supplied declaration required: sndObjectForwardField8. */
 
 
 void FUN_0026c57c(void)
@@ -35,7 +35,7 @@ void FUN_0026c57c(void)
   int *piVar4;
   
   temp_v0 = DAT_0043dd68;
-  FUN_002b2b5c(*(unsigned int *)(DAT_0043dd68 + 0x95c8));
+  sndObjectForwardField8(*(unsigned int *)(DAT_0043dd68 + 0x95c8));
   piVar4 = (int *)(temp_v0 + 0x95cc);
   if (*piVar4 == 0) {
     puVar2 = &LAB_0026c61c;

@@ -55,7 +55,7 @@ extern int FUN_002009a8(unsigned int);
 /* Supplied declaration required: FUN_0049a8b8. */
 /* Supplied declaration required: FUN_0049a9a8. */
 /* Supplied declaration required: FUN_004cf7cc. */
-extern int FUN_004d03b4(int);
+extern int flagsDESet(int);
 extern unsigned int *FUN_004d0b3c(void);
 
 
@@ -76,10 +76,10 @@ unsigned int * FUN_0049c3c0(unsigned int *param_1,unsigned int param_2,int param
   temp_v1 = FUN_00493764(temp_v1 + 0x14);
   *(unsigned char **)(temp_v1 + 0x750) = &DAT_0055ca10;
   temp_v1 = temp_v1 + 0x7a8;
-  FUN_002f5020(temp_v1,FUN_004d03b4,0x74,9);
+  FUN_002f5020(temp_v1,flagsDESet,0x74,9);
   temp_v1 = temp_v1 + 0x414;
   FUN_002f5020(temp_v1,&LAB_00493e80,0x1002,9);
-  temp_v1 = FUN_004d03b4(temp_v1 + 0x9014);
+  temp_v1 = flagsDESet(temp_v1 + 0x9014);
   puVar7 = (unsigned int *)(temp_v1 - 0x9f88);
   FUN_0049a8b8(puVar7);
   *(unsigned int *)(temp_v1 - 0x9f74) = param_2;

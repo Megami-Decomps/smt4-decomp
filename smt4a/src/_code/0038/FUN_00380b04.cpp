@@ -5,8 +5,8 @@
 extern "C" {
 
 int scrGetArg(int);
-int FUN_004bd3ec(unsigned int, unsigned int);
-int FUN_004bd400(unsigned int, int);
+int bitsAt60Set(unsigned int, unsigned int);
+int bitsAt60Clear(unsigned int, int);
 int FUN_004fb43c(int, unsigned int, int, int, int, int, int);
 int FUN_004fcffc(int, unsigned int, int, int);
 int FUN_004fdb18(int, unsigned int, int, int, int);
@@ -23,9 +23,9 @@ extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int btlGetMainState(void);
 extern unsigned int FUN_001ab854(int);
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_004bd340(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004bd3ec. */
-/* Supplied declaration required: FUN_004bd400. */
+extern int bitsAt60Test(unsigned int, unsigned int);
+/* Supplied declaration required: bitsAt60Set. */
+/* Supplied declaration required: bitsAt60Clear. */
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fcffc. */
@@ -59,12 +59,12 @@ unsigned int FUN_00380b04(void)
   else {
     temp_v5 = FUN_001ab854(temp_v0 - 0x6d);
     if (temp_v2 == 0) {
-      FUN_004bd400(temp_v5,(1 << (temp_v1 & 0xff)) & 0xffff);
+      bitsAt60Clear(temp_v5,(1 << (temp_v1 & 0xff)) & 0xffff);
       return 1;
     }
-    FUN_004bd3ec(temp_v5,temp_v1 & 0xffff);
-    if (((temp_v1 & 0xffff) != 4) && (temp_v0 = FUN_004bd340(temp_v5,4), temp_v0 != 0)) {
-      FUN_004bd400(temp_v5,0x10);
+    bitsAt60Set(temp_v5,temp_v1 & 0xffff);
+    if (((temp_v1 & 0xffff) != 4) && (temp_v0 = bitsAt60Test(temp_v5,4), temp_v0 != 0)) {
+      bitsAt60Clear(temp_v5,0x10);
     }
   }
   FUN_004fb43c(0,temp_v3,0x100025f,0,0,0,0);

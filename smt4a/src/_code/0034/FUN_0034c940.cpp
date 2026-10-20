@@ -11,9 +11,9 @@ int FUN_002c8550(int);
 int FUN_002f3bc4(int, int, int);
 int FUN_0031f718(int, int);
 int FUN_003343c0(int);
-int FUN_00334434(int, int);
+int objBInitBlock19D0(int, int);
 int FUN_0033449c(int);
-int FUN_0037c8b4(int, int);
+int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
 int FUN_0037e1b0(int);
 
@@ -31,10 +31,10 @@ extern int DAT_0057f290; /* 0x57f290 */
 /* Supplied declaration required: FUN_002f3bc4. */
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: FUN_003343c0. */
-/* Supplied declaration required: FUN_00334434. */
+/* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 extern unsigned int FUN_0034a9ac(void);
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_0037e1b0. */
 
@@ -67,7 +67,7 @@ void FUN_0034c940(int param_1)
   *(unsigned int *)(temp_v0 + 0x13bc) = temp_v1 | 1;
   FUN_0033449c(1);
   FUN_0031f718((int)*(short *)(temp_v0 + 0x66fe),0);
-  FUN_00334434(temp_v0 + 0x669c,0);
+  objBInitBlock19D0(temp_v0 + 0x669c,0);
   FUN_003343c0(0);
   FUN_002c8550(9);
   FUN_0037e1b0(0);
@@ -75,7 +75,7 @@ void FUN_0034c940(int param_1)
   FUN_002a7324(temp_v1 != *(unsigned short *)(temp_v0 + 0x66fe));
   if (0 < *(int *)(temp_v0 + 0x418)) {
     FUN_0037c8e4(1,0);
-    FUN_0037c8b4(-*(int *)(temp_v0 + 0x418),0);
+    panelSetTarget(-*(int *)(temp_v0 + 0x418),0);
   }
   FUN_0019de98(0,0xf4f4f4ff);
   FUN_002c8550(8);

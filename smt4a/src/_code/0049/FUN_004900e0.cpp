@@ -23,10 +23,10 @@ extern unsigned int DAT_005f1604; /* 0x5f1604 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern int FUN_00162e8c(void);
-extern int FUN_00284dc4(unsigned int);
+extern int dataTableHasMatchingEntry35(unsigned int);
 extern int FUN_002e707c(void);
 extern int FUN_004083a8(unsigned char, unsigned char);
-extern unsigned long long *FUN_00492b84(int);
+extern unsigned long long *sub68OwnerGetBlock60(int);
 
 
 void FUN_004900e0(int param_1)
@@ -53,7 +53,7 @@ void FUN_004900e0(int param_1)
   unsigned long long temp_v14;
   
   temp_v1 = FUN_00162e8c();
-  puVar3 = (unsigned long long *)FUN_00492b84(param_1 + 0x4cc);
+  puVar3 = (unsigned long long *)sub68OwnerGetBlock60(param_1 + 0x4cc);
   temp_v12 = *puVar3;
   temp_v14 = 0x4320000042f00000;
   temp_v5 = 0;
@@ -86,7 +86,7 @@ void FUN_004900e0(int param_1)
               *(unsigned char *)(temp_v2 + 0x50) = 0;
             }
             else {
-              temp_v3 = FUN_00284dc4(*(unsigned int *)(temp_v2 + 0x4c));
+              temp_v3 = dataTableHasMatchingEntry35(*(unsigned int *)(temp_v2 + 0x4c));
               *(unsigned short *)(temp_v2 + 0x34) = (unsigned short)(temp_v3 != 0);
               *(unsigned char *)(temp_v2 + 0x50) = temp_v3 != 0;
             }
@@ -147,7 +147,7 @@ void FUN_004900e0(int param_1)
               *(unsigned char *)(temp_v2 + 0x50) = 0;
             }
             else {
-              temp_v3 = FUN_00284dc4(*(unsigned int *)(temp_v2 + 0x4c));
+              temp_v3 = dataTableHasMatchingEntry35(*(unsigned int *)(temp_v2 + 0x4c));
               *(unsigned short *)(temp_v2 + 0x34) = (unsigned short)(temp_v3 != 0);
               *(unsigned char *)(temp_v2 + 0x50) = temp_v3 != 0;
             }

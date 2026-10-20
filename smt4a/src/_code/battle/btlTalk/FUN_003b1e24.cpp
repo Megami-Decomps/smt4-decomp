@@ -13,7 +13,7 @@ extern unsigned int g_btlTalk; /* 0x57a7b8 */
 extern int dataTableGetEntries(unsigned int);
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
-extern unsigned int FUN_004c97b4(unsigned int);
+extern unsigned int ptrAt8Reset(unsigned int);
 
 
 unsigned int FUN_003b1e24(void)
@@ -32,7 +32,7 @@ unsigned int FUN_003b1e24(void)
   temp_v1 = scrGetArg(1);
   temp_v2 = scrGetArg(2);
   temp_v5 = 0xffffffff;
-  temp_v3 = FUN_004c97b4(g_btlTalk);
+  temp_v3 = ptrAt8Reset(g_btlTalk);
   dataTableGetCount();
   temp_v4 = dataTableGetEntries(temp_v3);
   if (temp_v1 != 0) {

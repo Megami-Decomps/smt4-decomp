@@ -29,7 +29,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bf538. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 unsigned char FUN_001ad4f8(int *param_1)
@@ -60,7 +60,7 @@ unsigned char FUN_001ad4f8(int *param_1)
     FUN_002bf538();
     FUN_002bf288(2,DAT_0043df40,temp_v3,0,0,0xfa);
     temp_v3 = g_titleScene;
-    temp_v0 = FUN_002c5da8(6,1,0);
+    temp_v0 = packNibblesAndByte(6,1,0);
     piVar4 = (int *)(temp_v3 + 0x12ac);
     temp_v1 = *piVar4;
     temp_v2 = piVar4[temp_v1 + 2];

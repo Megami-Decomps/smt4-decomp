@@ -11,7 +11,7 @@ typedef struct {
 } GameBlock;
 
 GameBlock *FUN_0014af84(void);
-int FUN_00187010(u16 id);
+int saveSlotFindById(u16 id);
 int FUN_00187168(int value);
 int FUN_0019e52c(u16 id);
 int FUN_002e6dd0(u16 *slots, int size);
@@ -30,7 +30,7 @@ u32 FUN_003a36b4(void)
         u16 id = block->slots[i];
 
         if (id != 0) {
-            int ownerId = FUN_00187010(id);
+            int ownerId = saveSlotFindById(id);
             int usable = FUN_0019e52c(id);
 
             if (usable != 0 && (ownerId == 0 || FUN_00187168(ownerId) == 0)) {

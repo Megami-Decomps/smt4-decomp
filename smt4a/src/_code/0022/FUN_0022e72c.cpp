@@ -1,14 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+typedef struct Game {
+    /* 0x0000 */ u8 unk0000[0x1368];
+    /* 0x1368 */ s32 state;
+} Game;
 
+typedef struct Global588fd0 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Game *game;
+} Global588fd0;
+extern Global588fd0 DAT_00588fd0;
 
-unsigned char FUN_0022e72c(void)
-
+/* Returns whether the game state is 0. */
+u8 FUN_0022e72c(void)
 {
-  return *(int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x1368) == 0;
+    return DAT_00588fd0.game->state == 0;
 }
 
 } /* extern "C" */

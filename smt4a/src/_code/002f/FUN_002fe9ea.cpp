@@ -1,13 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Node {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ struct Node *next;
+} Node;
 
-void FUN_002fe9ea(int *param_1)
+typedef struct Iterator {
+    /* 0x00 */ Node *node;
+} Iterator;
 
+/* Advances the iterator to the next node (the link at 4). */
+void FUN_002fe9ea(Iterator *iterator)
 {
-  *param_1 = *(int *)(*param_1 + 4);
-  return;
+    iterator->node = iterator->node->next;
 }
 
 } /* extern "C" */

@@ -1,25 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
+extern int FUN_0029e9cc(u16 value);
 
-extern int FUN_0029e9cc(unsigned short);
+typedef struct GameData {
+    /* 0x0000 */ u8 unk0000[0x1300];
+    /* 0x1300 */ u16 unk1300;
+    /* 0x1302 */ u8 unk1302[0x596];
+    /* 0x1898 */ u32 unk1898;
+    /* 0x189C */ u8 unk189C[0x5CA];
+    /* 0x1E66 */ u8 unk1E66;
+} GameData;
 
+extern struct {
+    u8 unk00[4];
+    GameData *data;
+} g_gameGlobals;
 
-void FUN_0026dafc(unsigned int param_1)
-
+void FUN_0026dafc(u32 value)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  if ((((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66) != '\r')) &&
-     ((*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66) != '\x06' ||
-      (temp_v1 = FUN_0029e9cc(*(unsigned short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1300)), temp_v1 != 0)))) {
-    *(unsigned int *)(temp_v0 + 0x1898) = param_1;
-  }
-  return;
+    GameData *data = g_gameGlobals.data;
+
+    if (((g_gameGlobals.data != NULL) && (g_gameGlobals.data->unk1E66 != 13)) &&
+        ((g_gameGlobals.data->unk1E66 != 6 || (FUN_0029e9cc(g_gameGlobals.data->unk1300) != 0)))) {
+        data->unk1898 = value;
+    }
 }
 
 } /* extern "C" */

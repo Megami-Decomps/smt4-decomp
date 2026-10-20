@@ -32,7 +32,7 @@ extern unsigned int *DAT_00571508; /* 0x571508 */
 extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 
 extern int btlGetMainState(void);
-extern unsigned int FUN_0015688c(void);
+extern unsigned int saveSlotFindSelected(void);
 extern int FUN_00187168(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002804b0. */
@@ -139,7 +139,7 @@ void FUN_00410f84(unsigned int *param_1)
     temp_v1 = btlGetMainState();
     temp_v0 = temp_v1;
     FUN_003eaf20();
-    temp_v2 = FUN_0015688c();
+    temp_v2 = saveSlotFindSelected();
     FUN_003ecfb4(temp_v1,temp_v0 + 0x164,temp_v2,0);
     temp_v5 = 0;
     *(unsigned int *)(temp_v0 + 0x400) = temp_v2;

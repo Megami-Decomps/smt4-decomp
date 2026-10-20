@@ -49,8 +49,8 @@ extern int FUN_0036ce70(...); /* 0x36ce70 */
 extern int FUN_00387bb8(...); /* 0x387bb8 */
 extern int FUN_00387d38(...); /* 0x387d38 */
 extern int FUN_003aef48(...); /* 0x3aef48 */
-extern int FUN_003bfc90(...); /* 0x3bfc90 */
-extern int FUN_003cc670(...); /* 0x3cc670 */
+extern int stepObjStart(...); /* 0x3bfc90 */
+extern int stepObjBStart(...); /* 0x3cc670 */
 extern unsigned int *DAT_0057f118; /* 0x57f118 */
 
 extern int FUN_0014af84(void);
@@ -70,11 +70,11 @@ extern unsigned int FUN_002bf520(void);
 extern unsigned int FUN_002e264c(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6dd0. */
-extern unsigned int FUN_003192e0(void);
+extern unsigned int overlayGetStatusScene(void);
 /* Supplied declaration required: FUN_0039a3b4. */
 /* Supplied declaration required: FUN_003a4980. */
 /* Supplied declaration required: campCecDrawPageCreate. */
-extern int FUN_004bd340(unsigned int, unsigned int);
+extern int bitsAt60Test(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -146,8 +146,8 @@ void FUN_0034280c(unsigned char param_1)
   puVar3[0x1d] = (unsigned int)FUN_0036ce70;
   puVar3[0x21] = (unsigned int)&LAB_00318e7c;
   puVar3[0x1e] = (unsigned int)FUN_003aef48;
-  puVar3[0x1f] = (unsigned int)FUN_003bfc90;
-  puVar3[0x20] = (unsigned int)FUN_003cc670;
+  puVar3[0x1f] = (unsigned int)stepObjStart;
+  puVar3[0x20] = (unsigned int)stepObjBStart;
   puVar3[0x23] = 5;
   puVar3[0x24] = 6;
   puVar3[0x25] = 0x17;
@@ -172,7 +172,7 @@ void FUN_0034280c(unsigned char param_1)
   puVar3[0x37] = 2;
   puVar3[0x38] = 3;
   puVar3[0x39] = 4;
-  temp_v3 = FUN_003192e0();
+  temp_v3 = overlayGetStatusScene();
   puVar3[1] = temp_v3;
   temp_v3 = FUN_002bf520();
   puVar3[2] = temp_v3;
@@ -217,10 +217,10 @@ void FUN_0034280c(unsigned char param_1)
   do {
     if (-1 < *(char *)(temp_v2 + temp_v6 + 0x1c88)) {
       temp_v3 = FUN_001ab854();
-      temp_v5 = FUN_004bd340(temp_v3,10);
+      temp_v5 = bitsAt60Test(temp_v3,10);
       if (temp_v5 == 0) {
         temp_v3 = FUN_001ab854((int)*(char *)(temp_v2 + temp_v6 + 0x1c88));
-        temp_v5 = FUN_004bd340(temp_v3,1);
+        temp_v5 = bitsAt60Test(temp_v3,1);
         if (temp_v5 == 0) {
           puVar3[0x41] = puVar3[0x41] + 1;
         }

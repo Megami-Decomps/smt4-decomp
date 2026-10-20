@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_002a1520(unsigned char *param_1)
-
+u8 FUN_002a1520(u8 *value)
 {
-  return *param_1 >= 100;
+    return *value >= 100;
 }
 
 } /* extern "C" */

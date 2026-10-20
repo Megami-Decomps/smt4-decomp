@@ -21,7 +21,7 @@ struct fn_0011997c_arg0 {
 extern unsigned char LAB_00119a8c; /* 0x119a8c */
 extern unsigned char DAT_0055a1e4; /* 0x55a1e4 */
 
-extern int FUN_0011076c(int);
+extern int initVtable005593b0(int);
 extern int wstrlen(int);
 /* Supplied declaration required: FUN_002e342c. */
 extern int strInit(int);
@@ -67,7 +67,7 @@ int FUN_0011997c(fn_0011997c_arg0 *param_1,unsigned int param_2,unsigned int par
   temp_v0 = strInit(temp_v0 + 0xc);
   *(unsigned int *)(temp_v0 + 0x20) = param_3;
   temp_v0 = FUN_002ea974(temp_v0 + 0x24);
-  temp_v0 = FUN_0011076c(temp_v0 + 0x6c);
+  temp_v0 = initVtable005593b0(temp_v0 + 0x6c);
   *(unsigned int *)(temp_v0 + 0xf8) = param_4;
   *(unsigned int *)(temp_v0 + 0xfc) = param_10;
   *(unsigned int *)(temp_v0 + 0x104) = 0;

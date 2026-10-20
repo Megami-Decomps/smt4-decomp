@@ -37,7 +37,7 @@ extern unsigned int DAT_00573cd4; /* 0x573cd4 */
 extern int btlGetMainState(void);
 extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_001628c0. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
 extern unsigned int dataTableGetCount(unsigned int);
@@ -277,7 +277,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
               temp_v1 = temp_v1 + 1;
             } while (temp_v1 < temp_v5);
           }
-          temp_v1 = FUN_001633a0((temp_v14 - 1U) & 0xffff);
+          temp_v1 = lcgRandomRange((temp_v14 - 1U) & 0xffff);
           temp_v2 = *(unsigned int *)(*(int *)(temp_v12 + *(int *)(temp_v13 + temp_v1 * 4) * 4) + 8);
           if (((temp_v2 & 0xfff) != 0) && ((temp_v2 & 0xffffff) >> 0xc != 0)) {
             temp_v2 = (temp_v2 << 0x14) | (((temp_v2 & 0xffffff) >> 0xc) << 8) | ((temp_v2 >> 0x14) & 0xf0);

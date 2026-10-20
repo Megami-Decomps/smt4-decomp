@@ -1,22 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002f32f8(unsigned int, unsigned int);
+void FUN_002f32f8(u32 object, u32 value);
+u32 FUN_002fbb86(u32 value);
 
-/* Supplied declaration required: FUN_002f32f8. */
-extern unsigned int FUN_002fbb86(unsigned int);
-
-
-void FUN_00123306(unsigned int param_1,unsigned int param_2)
-
+/* Converts `value` with FUN_002fbb86 and passes it to FUN_002f32f8. */
+void FUN_00123306(u32 object, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_002fbb86(param_2);
-  FUN_002f32f8(param_1,temp_v0);
-  return;
+    FUN_002f32f8(object, FUN_002fbb86(value));
 }
 
 } /* extern "C" */

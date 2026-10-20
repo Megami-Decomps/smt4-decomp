@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x754];
+    /* 0x754 */ u32 flags;
+} Holder;
 
-unsigned int FUN_001d109c(int param_1)
-
+/* Returns bit 16 of `flags` (0 or 1). */
+u32 FUN_001d109c(Holder *object)
 {
-  return (*(unsigned int *)(param_1 + 0x754) & 0x10000) >> 0x10;
+    return (object->flags & 0x10000) >> 0x10;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a438c(void);
-int FUN_002a43ae(int);
+int __set_errno(int);
 int FUN_003eb2c8(unsigned int [4]);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -23,7 +23,7 @@ static float romwright_fabs_4(float value)
 #endif
 extern int ARM_fpclassifyf(float);
 /* Supplied declaration required: FUN_002a438c. */
-/* Supplied declaration required: FUN_002a43ae. */
+/* Supplied declaration required: __set_errno. */
 /* Supplied declaration required: FUN_003eb2c8. */
 
 
@@ -75,7 +75,7 @@ void FUN_002881bc(void)
     return;
   }
   if ((int)in_s0 * 2 == 0xff000000) {
-    FUN_002a43ae(1);
+    __set_errno(1);
                     /* WARNING: Treating indirect jump as return */
     return;
   }

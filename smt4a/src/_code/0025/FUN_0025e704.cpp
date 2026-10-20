@@ -26,7 +26,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00185dd4. */
@@ -120,7 +120,7 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
         return;
       }
       if (param_11 != 0) {
-        temp_v2 = FUN_00169294(6,1,0);
+        temp_v2 = packNibblesAndByte(6,1,0);
         piVar6 = (int *)(temp_v5 + 0x12b8);
         temp_v7 = piVar6[*piVar6 + 2];
         piVar6[*piVar6 + 2] = temp_v2;
@@ -139,7 +139,7 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       temp_v1 = g_renderCtx;
-      temp_v0 = FUN_00169294(6,7,0);
+      temp_v0 = packNibblesAndByte(6,7,0);
       piVar6 = (int *)(temp_v1 + 0x12b8);
       temp_v5 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v0;
@@ -173,7 +173,7 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
         return;
       }
       if (param_11 != 0) {
-        temp_v4 = FUN_00169294(6,1,0);
+        temp_v4 = packNibblesAndByte(6,1,0);
         piVar6 = (int *)(temp_v2 + 0x12b8);
         temp_v3 = piVar6[*piVar6 + 2];
         piVar6[*piVar6 + 2] = temp_v4;
@@ -192,7 +192,7 @@ void FUN_0025e704(int param_1,int param_2,int param_3,int param_4,unsigned int p
                      (int)*(short *)(*(int *)(temp_v0 + 0xc) + 2),temp_v10);
       }
       temp_v1 = g_renderCtx;
-      temp_v0 = FUN_00169294(6,7,0);
+      temp_v0 = packNibblesAndByte(6,7,0);
       piVar6 = (int *)(temp_v1 + 0x12b8);
       temp_v5 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v0;

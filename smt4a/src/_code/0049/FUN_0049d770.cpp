@@ -8,7 +8,7 @@ int qsort(...);
 int FUN_001643b4(...);
 int FUN_00202400(...);
 int FUN_00203b40(...);
-int FUN_003fd6b0(...);
+int flagsAtSetBits01(...);
 int FUN_0049d140(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -30,8 +30,8 @@ extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00202400. */
 /* Supplied declaration required: FUN_00203b40. */
 extern int FUN_00341940(unsigned int);
-/* Supplied declaration required: FUN_003fd6b0. */
-extern int FUN_003fd6c8(void);
+/* Supplied declaration required: flagsAtSetBits01. */
+extern int flagsAtGetBit0(void);
 /* Supplied declaration required: FUN_0049d140. */
 
 
@@ -73,11 +73,11 @@ void FUN_0049d770(int param_1)
         temp_v4 = (unsigned int)*puVar7;
       }
       if (puVar7 != (unsigned short *)0x0 && temp_v4 != 0) {
-        temp_v1 = FUN_003fd6c8();
+        temp_v1 = flagsAtGetBit0();
         if (temp_v1 == 0) {
           temp_v1 = FUN_0018719c(puVar7[1]);
           if (temp_v1 != 0) {
-            FUN_003fd6b0(*puVar7);
+            flagsAtSetBits01(*puVar7);
             temp_v1 = temp_v6 * 2;
             temp_v6 = temp_v6 + 1;
             *(short *)(param_1 + temp_v1 + 0x18) = (short)temp_v5;

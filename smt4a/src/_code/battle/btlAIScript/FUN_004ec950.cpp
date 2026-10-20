@@ -34,7 +34,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 extern int jobIsValid(unsigned int);
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_003e6878(unsigned int);
+extern int stateAtCIs4(unsigned int);
 extern int FUN_003e8430(int);
 extern int FUN_003e84fc(int);
 /* Supplied declaration required: FUN_003e8bb0. */
@@ -74,7 +74,7 @@ unsigned int FUN_004ec950(int *param_1,int param_2)
   
   temp_v2 = FUN_003e8430(*param_1);
   if ((((temp_v2 != 0) || (temp_v2 = FUN_004c87e0(), temp_v2 == 0)) &&
-      (temp_v2 = FUN_003e6878(g_btlAiScript), temp_v2 != 0)) &&
+      (temp_v2 = stateAtCIs4(g_btlAiScript), temp_v2 != 0)) &&
      (temp_v2 = jobIsValid(*(unsigned int *)(*param_1 + 0x80)), temp_v2 == 0)) {
     temp_v3 = *(unsigned int *)(*param_1 + 0x45a0);
     temp_v5 = *(unsigned int *)(*param_1 + 0x45a4);

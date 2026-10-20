@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_001008a2(...);
+int libc_strcat(...);
 int FUN_001654f8(unsigned char [64], unsigned char [136], int);
 int sysPlaySe(...);
 int FUN_001695a0(void);
@@ -22,7 +22,7 @@ int FUN_003423cc(int);
 int FUN_0035d058(unsigned int, unsigned int);
 int FUN_003c1060(void);
 int FUN_003fe86c(...);
-int FUN_00468878(unsigned int *, unsigned char *);
+int pickObjStart(unsigned int *, unsigned char *);
 int FUN_0046a278(unsigned int *, unsigned int);
 int FUN_004ff920(...);
 
@@ -36,7 +36,7 @@ extern unsigned char LAB_0046b8f0; /* 0x46b8f0 */
 extern unsigned char LAB_0046b910; /* 0x46b910 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_001008a2. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_001654f8. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
@@ -58,9 +58,9 @@ extern unsigned int FUN_00357bc8(unsigned int, int);
 /* Supplied declaration required: FUN_0035d058. */
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_00468878. */
+/* Supplied declaration required: pickObjStart. */
 /* Supplied declaration required: FUN_0046a278. */
-extern int FUN_0046bbd8(int, unsigned int);
+extern int dataTable27GetEntry(int, unsigned int);
 /* Supplied declaration required: FUN_004ff920. */
 extern int FUN_004ffba8(int);
 
@@ -104,11 +104,11 @@ void FUN_0046b18c(unsigned int *param_1)
     temp_v2 = 0;
     if (0 < (int)param_1[0x2ae]) {
       do {
-        temp_v3 = FUN_0046bbd8((int)param_1 + 0x19,0);
+        temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
         FUN_002e342c(temp_v7,temp_v3 + param_1[temp_v2 * 2 + 0x29c] * 0x88);
         FUN_001654f8(temp_v7,temp_v9,0);
-        FUN_001008a2(puVar2,temp_v9);
-        FUN_001008a2(puVar2,"<br>");
+        libc_strcat(puVar2,temp_v9);
+        libc_strcat(puVar2,"<br>");
         param_1[param_1[0x2b4] + 0x2b0] = temp_v2;
         temp_v1 = param_1[0x2b4] + 1;
         param_1[0x2b4] = temp_v1;
@@ -118,7 +118,7 @@ void FUN_0046b18c(unsigned int *param_1)
       if (0 < (int)param_1[0x2b4]) {
         if (param_1[0x2b4] != 1) {
           FUN_003423cc(0xa2);
-          FUN_00468878(param_1,&LAB_0046b4e0);
+          pickObjStart(param_1,&LAB_0046b4e0);
           FUN_003c1060();
           if ((char)param_1[6] != '\0') {
             return;
@@ -204,7 +204,7 @@ void FUN_0046b18c(unsigned int *param_1)
     }
     break;
   case 2:
-    temp_v3 = FUN_0046bbd8((int)param_1 + 0x19,0);
+    temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
     FUN_00100388(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
     FUN_00100388(temp_v8,&LAB_0046b910,temp_v0);
@@ -277,7 +277,7 @@ void FUN_0046b18c(unsigned int *param_1)
     *(unsigned int *)(temp_v3 + 0x1fc) = 0x3f800000;
     FUN_003fe86c(temp_v3,0);
     sysPlaySe(0xa4);
-    temp_v3 = FUN_0046bbd8((int)param_1 + 0x19,0);
+    temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
     FUN_00100388(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
     FUN_00100388(temp_v8,&LAB_0046b910,temp_v0);
@@ -307,7 +307,7 @@ LAB_0046b85c:
     FUN_00275bc8(temp_v2,param_1[0xa8]);
     param_1[0xa9] = temp_v2;
     *(unsigned int *)(temp_v2 + 0x108) = 2;
-    temp_v3 = FUN_0046bbd8((int)param_1 + 0x19,0);
+    temp_v3 = dataTable27GetEntry((int)param_1 + 0x19,0);
     temp_v4 = *(int *)param_1[0x2b6];
     jyoucyuGetTableEntry(0);
     temp_v5 = FUN_00357bc8(param_1[0xa7],temp_v3 + temp_v4 * 0x88 + 0x6c);

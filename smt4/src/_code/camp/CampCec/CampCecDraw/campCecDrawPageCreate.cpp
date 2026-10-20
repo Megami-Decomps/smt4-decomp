@@ -1,6 +1,6 @@
-/* NON_MATCHING: retail evaluates a (file, line) pair for the allocation (debug-allocation macro arguments) before the call and discards it; nothing uses the pair */
 /* Creates the draw page set: sprite handles for the tabs, items and frame parts. */
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
 #include "camp/CampCec/CampCecDraw.h"
 
 extern "C" {
@@ -10,8 +10,11 @@ extern u32 asdTextCreate(u32 type);
 
 CampCecDrawPage *campCecDrawPageCreate(void)
 {
-    CampCecDrawPage *page = (CampCecDrawPage *)asdMemAlloc(0x100, 0x100, 0, 0x98, 1);
+    CampCecDrawPage *page;
     int i;
+
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\CampCec\\CampCecDraw.cpp", 616);
+    page = (CampCecDrawPage *)asdMemAlloc(0x100, 0x100, 0, 0x98, 1);
 
     for (i = 0; i < 7; i++) {
         page->tab[i] = asdTextCreate(0);

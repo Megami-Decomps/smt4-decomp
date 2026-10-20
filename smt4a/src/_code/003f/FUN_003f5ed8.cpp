@@ -36,7 +36,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: FUN_003f5268. */
 /* Supplied declaration required: FUN_003f6abc. */
-extern int FUN_003ff190(unsigned int);
+extern int flagsBGetBit1(unsigned int);
 /* Supplied declaration required: FUN_003ff1d4. */
 
 
@@ -103,7 +103,7 @@ void FUN_003f5ed8(int param_1)
       FUN_00184c00(param_1 + 0x1f8,0);
       FUN_00184758(param_1 + 0x540,2,0);
       FUN_00184c00(param_1 + 0x540,1,0);
-      temp_v0 = FUN_003ff190(*(unsigned int *)(param_1 + 0x54));
+      temp_v0 = flagsBGetBit1(*(unsigned int *)(param_1 + 0x54));
       if (temp_v0 != 0) {
         FUN_003ff1d4(*(unsigned int *)(param_1 + 0x54),0);
       }

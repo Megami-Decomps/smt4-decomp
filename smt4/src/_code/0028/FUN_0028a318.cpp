@@ -1,30 +1,25 @@
-#include "romwright_types.h"
+#include "shard/Scene43dcf0.h"
 
 extern "C" {
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
+extern u32 FUN_00295618(void);
 
-extern unsigned int FUN_00295618(void);
-
-
-unsigned int FUN_0028a318(void)
-
+u32 FUN_0028a318(void)
 {
-  char temp_v0;
-  unsigned int temp_v1;
-  
-  if (DAT_0043dcf0 != 0) {
-    if (*(int *)(DAT_0043dcf0 + 0x1c) != 0x17) {
-      return 0;
+    u8 state;
+    u32 result;
+
+    if (DAT_0043dcf0 != NULL) {
+        if (DAT_0043dcf0->unk1C != 0x17) {
+            return 0;
+        }
+        state = DAT_0043dcf0->state;
+        if ((state != 1 && state != 6) && ((state != 7 && state != 13) && state != 12)) {
+            result = FUN_00295618();
+            return result;
+        }
     }
-    temp_v0 = *(char *)(DAT_0043dcf0 + 0x66c);
-    if ((temp_v0 != '\x01' && temp_v0 != '\x06') && ((temp_v0 != '\a' && temp_v0 != '\r') && temp_v0 != '\f'))
-    {
-      temp_v1 = FUN_00295618();
-      return temp_v1;
-    }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

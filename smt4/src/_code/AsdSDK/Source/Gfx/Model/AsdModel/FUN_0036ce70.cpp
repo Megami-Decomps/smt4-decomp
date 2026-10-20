@@ -55,7 +55,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_003757cc. */
 /* Supplied declaration required: nnnstdMemCpy. */
 /* Supplied declaration required: nw_gfx_internal_FastWordCopyAsm_6. */
@@ -122,7 +122,7 @@ void FUN_0036ce70(unsigned int param_1,int param_2,int param_3)
   if ((temp_v11 == 0) || (temp_v24 != temp_v11)) {
     DAT_0047208e = (~*(unsigned int *)(temp_v9 + 0x104) & 1) == 0;
     DAT_004720fc = *(float *)(temp_v9 + 0x10c);
-    if (((DAT_0047663c & 1) == 0) && (temp_v6 = FUN_002bfefc(&DAT_0047663c), temp_v6 != 0)) {
+    if (((DAT_0047663c & 1) == 0) && (temp_v6 = __cxa_guard_acquire(&DAT_0047663c), temp_v6 != 0)) {
       DAT_004efde0 = 0x1006d;
       DAT_004efde8 = 0x8017004d;
     }

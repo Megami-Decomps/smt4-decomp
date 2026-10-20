@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0031011e(int, int);
+void FUN_0031011e(void *object, s32 offset);
 
-/* Supplied declaration required: FUN_0031011e. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 base;
+} Holder;
 
-
-void FUN_002fa010(int param_1,int param_2)
-
+/* Calls FUN_0031011e(object, base + `offset`). */
+void FUN_002fa010(Holder *object, s32 offset)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0031011e(param_1,*(int *)(param_1 + 0x18) + param_2);
-  return;
+    FUN_0031011e(object, object->base + offset);
 }
 
 } /* extern "C" */

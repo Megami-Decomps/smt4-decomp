@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Source {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u32 unk8;
+    /* 0xC */ u32 unkC;
+} Source;
 
-void FUN_0039fc20(int param_1,unsigned int *param_2)
-
+void FUN_0039fc20(Source *source, u32 *out)
 {
-  *param_2 = *(unsigned int *)(param_1 + 8);
-  param_2[1] = *(unsigned int *)(param_1 + 0xc);
-  return;
+    out[0] = source->unk8;
+    out[1] = source->unkC;
 }
 
 } /* extern "C" */

@@ -1,35 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0034291c(unsigned int);
-int FUN_00349214(unsigned int);
+int FUN_0034291c(u32 value);
+int FUN_00349214(u32 value);
 
-extern unsigned int *jobGetWork(void);
-/* Supplied declaration required: FUN_0034291c. */
-/* Supplied declaration required: FUN_00349214. */
+typedef struct JobWork {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u8 mode;
+} JobWork;
 
+extern JobWork *jobGetWork(void);
 
-unsigned int FUN_002f4aec(void)
-
+u32 FUN_002f4aec(void)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  unsigned int *puVar2;
-  
-  puVar2 = (unsigned int *)jobGetWork();
-  temp_v0 = *(char *)(puVar2 + 2);
-  if (temp_v0 != '\0') {
-    if (temp_v0 != '\x01') {
-      if (temp_v0 == '\x02') {
-        FUN_00349214(puVar2[1]);
-      }
+    JobWork *work = jobGetWork();
+    u8 mode = work->mode;
+
+    if (mode != 0) {
+        if (mode != 1) {
+            if (mode == 2) {
+                FUN_00349214(work->unk4);
+            }
+        } else {
+            FUN_0034291c(work->unk0);
+        }
     }
-    else {
-      FUN_0034291c(*puVar2);
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

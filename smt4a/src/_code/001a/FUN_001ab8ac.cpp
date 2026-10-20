@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_001ab8ac(int *param_1)
-
+/* Returns whether the referenced word is 5. */
+u8 FUN_001ab8ac(s32 *valueRef)
 {
-  return *param_1 == 5;
+    return *valueRef == 5;
 }
 
 } /* extern "C" */

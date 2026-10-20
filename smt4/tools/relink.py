@@ -142,12 +142,16 @@ def data_references(path):
 R_ARM_ABS32 = 2
 
 
-def code_difference(built, retail, resolve):
+def code_difference(built, retail, resolve, length=None):
     """Why the compiled object `built` would not put the retail object's bytes in the
     image, or None. Relocated words are compared by what they resolve to (`resolve`:
     symbol name -> address, Thumb bit included, or None), so `DAT_x` and `s_..._x`, or a
-    pool word one object writes as a constant and the other relocates, are the same."""
+    pool word one object writes as a constant and the other relocates, are the same.
+    `length` compares only the first bytes of `built` (its tail is checked elsewhere)."""
     (built_text, built_relocations), (retail_text, retail_relocations) = text_section(built), text_section(retail)
+    if length is not None:
+        built_text = built_text[:length]
+        built_relocations = [r for r in built_relocations if r[0] < length]
     if len(built_text) != len(retail_text):
         return "size"
 
@@ -173,6 +177,17 @@ def code_difference(built, retail, resolve):
     for offset in relocated:
         a[offset:offset + 4] = b[offset:offset + 4] = b"\0\0\0\0"
     return "bytes" if a != b else None
+
+
+def trailing_literal(built, address, retail_size, size, code, base, next_start):
+    """True when the compiled object's bytes past the retail function (`retail_size` .. `size`)
+    are literal data that the image already holds right after the function, short of the next
+    function: armcc places a string literal after the pool, retail's symbol stops before it."""
+    text, relocations = text_section(built)
+    if address + size > next_start or any(offset + 4 > retail_size for offset, _kind, _name in relocations):
+        return False
+    start = address - base
+    return bytes(text[retail_size:size]) == bytes(code[start + retail_size:start + size])
 
 
 def place_data(built, retail, resolve, code, base, window):
@@ -366,6 +381,13 @@ def main():
         match = address_name.search(name)
         return int(match[1], 16) if match else None
 
+    starts = sorted(functions)
+
+    def next_function(address):
+        """Where the next function after `address` starts (the end of .text past the last one)."""
+        at = bisect.bisect_right(starts, address)
+        return starts[at] if at < len(starts) else segments["rodata"][0]
+
     for unit in units:
         address = int(unit["address"], 16)
         if "target" not in unit or address in misread:
@@ -394,7 +416,11 @@ def main():
             if own and any(a < start + length and start < a + n for start, length in own[0].values() for a, n, _o, _s in data_placed):
                 own = None  # another function's constants already sit there
             here = resolve if own is None else (lambda name, symbols=own[1]: symbols[name] if name in symbols else resolve(name))
-            difference = None if (data and own is None) or size != retail_size else code_difference(ROOT / unit["object"], ROOT / target, here)
+            # A string literal armcc put after the function's pool (`asdDebugTrace("file", line)`):
+            # retail's function ends at the pool, but the same bytes follow it in the image.
+            tail = size > retail_size and trailing_literal(ROOT / unit["object"], address, retail_size, size, code, base, next_function(address))
+            difference = (None if (data and own is None) or (size != retail_size and not tail)
+                          else code_difference(ROOT / unit["object"], ROOT / target, here, retail_size if tail else None))
             if data and own is None:
                 # Its own variables, or constants nothing ties to a retail address: the code
                 # goes in as retail bytes.
@@ -411,7 +437,7 @@ def main():
                 rewritten.append(unit["function"])
                 if not args.full:
                     continue
-            elif size == retail_size:
+            elif size == retail_size or tail:
                 target = unit["object"]
                 function = unit["function"]
                 swapped += 1
@@ -529,8 +555,10 @@ def main():
     )
     prepared = time.time()
     elf = OUT / f"{project['name']}.elf"
+    # --no-warn-mismatch: retail mixes units built for different CPUs (--cpu=5TE next to MPCore), as
+    # armlink allows; their .ARM.attributes describe the objects and never change the bytes.
     done = subprocess.run([ld, "-T", str(script.relative_to(ROOT).as_posix()), "-o", str(elf), "-Map", str(OUT / "link.map"),
-                           "--use-blx", "--no-warn-rwx-segments", "-nostdlib"],
+                           "--use-blx", "--no-warn-rwx-segments", "--no-warn-mismatch", "-nostdlib"],
                           cwd=ROOT, capture_output=True, text=True)
     linked = time.time()
     if done.returncode != 0:

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002eac26(...);
+int byteRefMin(...);
 int FUN_002eac34(int);
 
 /* stack frame of param_3: 5 slot(s), 11 byte(s) */
@@ -21,7 +21,7 @@ extern unsigned char DAT_00630334; /* 0x630334 */
 
 extern unsigned int FUN_002eabfc(void);
 extern unsigned int FUN_002eac18(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_002eac26. */
+/* Supplied declaration required: byteRefMin. */
 /* Supplied declaration required: FUN_002eac34. */
 extern unsigned int FUN_002eac54(unsigned int, unsigned int);
 
@@ -57,7 +57,7 @@ void FUN_00104a0c(int param_1,int param_2,int param_3)
     temp_v3 = FUN_002eac18(&DAT_00630334,temp_v3);
     temp_v9 = param_2 + 0x80;
     temp_v6[0] = (unsigned char)*(unsigned int *)(param_2 + 0x8c);
-    pbVar5 = (unsigned char *)FUN_002eac26(temp_v6,temp_v3);
+    pbVar5 = (unsigned char *)byteRefMin(temp_v6,temp_v3);
     temp_v4 = (unsigned int)*pbVar5 | (((*(unsigned int *)(temp_v9 + 0xc) >> 8) & DAT_00594ab8) << 8);
     temp_v1 = *(char *)(param_1 + 4);
     if (((temp_v1 != '\n') && (temp_v1 != '\x02')) ||
@@ -69,7 +69,7 @@ void FUN_00104a0c(int param_1,int param_2,int param_3)
   temp_v5 = FUN_002eac34(*(unsigned char *)(param_1 + 4));
   temp_v8[0] = *(unsigned char *)(temp_v5 + 0xa0);
   temp_v7[0] = *(unsigned char *)(param_2 + 0x67);
-  puVar8 = (unsigned char *)FUN_002eac26(temp_v7,temp_v8);
+  puVar8 = (unsigned char *)byteRefMin(temp_v7,temp_v8);
   *(unsigned char *)(param_3 + 0x67) = *puVar8;
   return;
 }

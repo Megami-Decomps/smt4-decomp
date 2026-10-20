@@ -46,7 +46,7 @@ extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_0032c810. */
-extern int FUN_0040970c(unsigned int);
+extern int block5B8OwnerGetBlock(unsigned int);
 
 
 void FUN_0032c5ec(float *param_1,unsigned int param_2,int param_3)
@@ -95,7 +95,7 @@ void FUN_0032c5ec(float *param_1,unsigned int param_2,int param_3)
   temp_v4 = 0.0f;
   temp_v0 = FUN_00152f54();
   if (param_3 == 0) {
-    param_3 = FUN_0040970c(g_renderCtx);
+    param_3 = block5B8OwnerGetBlock(g_renderCtx);
   }
   FUN_00167bc8(param_3,&temp_v10,0x40);
   temp_v13 = *param_1;

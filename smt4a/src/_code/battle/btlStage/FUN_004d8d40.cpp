@@ -9,7 +9,7 @@ int FUN_002c23cc(int);
 int FUN_00400d80(void);
 int FUN_00401198(int);
 int FUN_0040128c(int);
-int FUN_0040132c(int);
+int objectOwner3Release(int);
 int FUN_00401390(int);
 int FUN_004013f0(int);
 int FUN_004d896c(int, unsigned int, unsigned int);
@@ -24,7 +24,7 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 /* Supplied declaration required: FUN_00400d80. */
 /* Supplied declaration required: FUN_00401198. */
 /* Supplied declaration required: FUN_0040128c. */
-/* Supplied declaration required: FUN_0040132c. */
+/* Supplied declaration required: objectOwner3Release. */
 /* Supplied declaration required: FUN_00401390. */
 /* Supplied declaration required: FUN_004013f0. */
 extern int FUN_00401440(int);
@@ -72,7 +72,7 @@ unsigned int FUN_004d8d40(int param_1,int param_2)
       *(unsigned int *)(param_1 + 0xc0) = 0;
     }
     FUN_002c2358();
-    FUN_0040132c(param_1);
+    objectOwner3Release(param_1);
     *(unsigned int *)(param_1 + 0xa0) = 0;
     break;
   case 4:

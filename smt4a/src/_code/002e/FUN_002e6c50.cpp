@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_002e6c50(void)
-
+/* Returns -1. */
+u32 FUN_002e6c50(void)
 {
-  return 0xffffffff;
+    return 0xFFFFFFFF;
 }
 
 } /* extern "C" */

@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_001d10ac(unsigned char *param_1)
-
+/* Returns whether the referenced byte is at least 100. */
+u8 FUN_001d10ac(u8 *valueRef)
 {
-  return *param_1 >= 100;
+    return *valueRef >= 100;
 }
 
 } /* extern "C" */

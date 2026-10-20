@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_002a7324(int);
 int FUN_002f01e0(int *, int);
-int FUN_0032ff20(int, unsigned char [4]);
+int unitRecordBuild(int, unsigned char [4]);
 int FUN_00334214(unsigned char [4], int, int);
-int FUN_00334434(unsigned char [300], int, int);
+int objBInitBlock19D0(unsigned char [300], int, int);
 int FUN_0033449c(int);
 int FUN_0035da74(short [10], int);
 int FUN_004bcd90(unsigned char [4]);
@@ -51,13 +51,13 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002a7324. */
 /* Supplied declaration required: FUN_002f01e0. */
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_00334214. */
-/* Supplied declaration required: FUN_00334434. */
+/* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0035da74. */
 /* Supplied declaration required: FUN_004bcd90. */
-extern int FUN_004bd21c(unsigned int);
+extern int getUnlockedSlotCount(unsigned int);
 /* Supplied declaration required: FUN_004bd6b0. */
 extern int FUN_004cc8d8(unsigned short, short);
 /* Supplied declaration required: FUN_004cd4b8. */
@@ -101,7 +101,7 @@ void FUN_003e3a20(int param_1,fn_003e3a20_arg1 *param_2)
   unsigned int temp_v17;
   short temp_v18 [10];
   
-  FUN_0032ff20(param_2->field_0x2,temp_v4);
+  unitRecordBuild(param_2->field_0x2,temp_v4);
   temp_v15 = temp_v11;
   uStack_64 = uStack_288;
   uStack_60 = uStack_284;
@@ -134,7 +134,7 @@ void FUN_003e3a20(int param_1,fn_003e3a20_arg1 *param_2)
   uStack_40 = *(unsigned int *)(temp_v1 + 0x38);
   uStack_3c = *(unsigned int *)(temp_v1 + 0x3c);
   temp_v17 = *(unsigned int *)(temp_v1 + 0x40);
-  temp_v1 = FUN_004bd21c(0);
+  temp_v1 = getUnlockedSlotCount(0);
   temp_v3 = 0;
   temp_v2 = 0;
   do {
@@ -157,7 +157,7 @@ void FUN_003e3a20(int param_1,fn_003e3a20_arg1 *param_2)
   *(int *)(param_1 + 0xa8) = temp_v1;
   FUN_0033449c(1);
   FUN_00334214(temp_v4,0,0);
-  FUN_00334434(temp_v14,1,0);
+  objBInitBlock19D0(temp_v14,1,0);
   FUN_002a7324(1);
   FUN_002f01e0(&temp_v15,8);
   FUN_0035da74(temp_v18,8);

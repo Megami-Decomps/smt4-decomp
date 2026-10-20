@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0035.h"
 
 extern "C" {
 
-extern int DAT_0057f2c4; /* 0x57f2c4 */
+extern PairLog *DAT_0057f2c4;
 
-
-void FUN_0035dd60(unsigned char param_1)
-
+void FUN_0035dd60(u8 value)
 {
-  *(unsigned char *)(DAT_0057f2c4 + 0x20) = param_1;
-  return;
+    DAT_0057f2c4->unk20 = value;
 }
 
 } /* extern "C" */

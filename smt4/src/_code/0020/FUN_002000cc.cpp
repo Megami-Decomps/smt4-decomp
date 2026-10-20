@@ -27,7 +27,7 @@ extern int campCecEditGetFlag125(void);
 /* Supplied declaration required: FUN_00254600. */
 /* Supplied declaration required: FUN_0025461c. */
 /* Supplied declaration required: FUN_0025463c. */
-extern int FUN_00259594(unsigned int);
+extern int gameDataBlockTestFlag(unsigned int);
 extern int FUN_002595bc(void);
 /* Supplied declaration required: FUN_002595e0. */
 /* Supplied declaration required: FUN_00259784. */
@@ -38,7 +38,7 @@ extern int FUN_002595bc(void);
 /* Supplied declaration required: FUN_00296f4c. */
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b8838. */
@@ -152,7 +152,7 @@ unsigned int FUN_002000cc(int *param_1,int param_2)
           do {
             if (-1 < *(char *)(temp_v3 + temp_v5 + 0x90f0)) {
               temp_v1 = FUN_002a8740();
-              temp_v2 = FUN_0029ebac(temp_v1,2);
+              temp_v2 = flagWordTestBit(temp_v1,2);
               if (temp_v2 != 0) {
                 temp_v1 = FUN_002a8740((int)*(char *)(temp_v3 + temp_v5 + 0x90f0));
                 FUN_00262f68(temp_v1,4);
@@ -217,7 +217,7 @@ unsigned int FUN_002000cc(int *param_1,int param_2)
             do {
               if (-1 < *(char *)(temp_v3 + temp_v5 + 0x90f0)) {
                 temp_v1 = FUN_002a8740();
-                temp_v2 = FUN_0029ebac(temp_v1,2);
+                temp_v2 = flagWordTestBit(temp_v1,2);
                 if (temp_v2 != 0) {
                   temp_v1 = FUN_002a8740((int)*(char *)(temp_v3 + temp_v5 + 0x90f0));
                   FUN_00262f68(temp_v1,4);
@@ -233,7 +233,7 @@ unsigned int FUN_002000cc(int *param_1,int param_2)
               }
             } while( 1 );
           }
-          temp_v3 = FUN_00259594(0x20);
+          temp_v3 = gameDataBlockTestFlag(0x20);
           if (temp_v3 != 0) {
             temp_v3 = 5;
           }
@@ -252,7 +252,7 @@ unsigned int FUN_002000cc(int *param_1,int param_2)
       if (temp_v3 == 1) {
         FUN_002b8838(0x3c);
         temp_v3 = FUN_002595bc();
-        if ((temp_v3 != 0) && (temp_v3 = FUN_00259594(0x20), temp_v3 != 0)) {
+        if ((temp_v3 != 0) && (temp_v3 = gameDataBlockTestFlag(0x20), temp_v3 != 0)) {
           *(unsigned int *)(temp_v4 + 0x38) = 9;
           temp_v0 = (*(unsigned char *)(temp_v4 + 0x3c) & 0xfe) | 2;
           *(unsigned char *)(temp_v4 + 0x3c) = temp_v0;

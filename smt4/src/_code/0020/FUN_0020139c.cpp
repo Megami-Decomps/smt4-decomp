@@ -1,44 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152bec(void);
-
-/* Supplied declaration required: FUN_00152bec. */
+int FUN_00152bec(u32 handle);
 extern int FUN_002893d8(void);
-extern unsigned int scrGetArg(void);
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(unsigned int);
+extern u32 scrGetArg(void);
+extern int jobIsValid(u32 job);
 
+typedef struct JobWork {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 state;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u8 unk10[8];
+    /* 0x18 */ u32 handle;
+} JobWork;
 
-unsigned int FUN_0020139c(void)
+extern JobWork *jobGetWork(u32 job);
 
+u32 FUN_0020139c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = FUN_002893d8();
-  if (temp_v1 != 0) {
-    temp_v1 = jobIsValid(temp_v0);
-    if (temp_v1 == 0) {
-      return 1;
+    u32 job = scrGetArg();
+    JobWork *work;
+
+    if (FUN_002893d8() != 0) {
+        if (jobIsValid(job) == 0) {
+            return 1;
+        }
+    } else {
+        if (jobIsValid(job) == 0) {
+            return 1;
+        }
+        work = jobGetWork(job);
+        if (work->handle != 0) {
+            FUN_00152bec(work->handle);
+        }
+        work->unk0C = 0;
+        work->state = 3;
     }
-  }
-  else {
-    temp_v1 = jobIsValid(temp_v0);
-    if (temp_v1 == 0) {
-      return 1;
-    }
-    temp_v1 = jobGetWork(temp_v0);
-    if (*(int *)(temp_v1 + 0x18) != 0) {
-      FUN_00152bec();
-    }
-    *(unsigned int *)(temp_v1 + 0xc) = 0;
-    *(unsigned int *)(temp_v1 + 8) = 3;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

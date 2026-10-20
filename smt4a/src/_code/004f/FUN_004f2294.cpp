@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Shard004F.h"
 
 extern "C" {
 
-
-unsigned char FUN_004f2294(int param_1)
-
+u8 FUN_004f2294(Obj4F *obj)
 {
-  return *(int *)(param_1 + 0x65c) != 0;
+    return obj->unk65C != 0;
 }
 
 } /* extern "C" */

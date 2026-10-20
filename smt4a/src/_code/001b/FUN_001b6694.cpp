@@ -1,24 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b6694` (_code @ 0x1b6694, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the third argument is copied (mov r2, r1) before the adds in retail; here it is computed directly. */
+#include "common.h"
 
 extern "C" {
 
+extern void nw_ut_internal_LinkListImpl_insert(void *list, void *position, void *node);
 
-int * FUN_001b6694(int param_1,int param_2)
-
+/* Forwards to the function that follows it in the binary. */
+void FUN_001b6694(void *manager, void *node)
 {
-  int *piVar1;
-  unsigned int *puVar2;
-  
-  piVar1 = (int *)(param_2 + 4);
-  puVar2 = *(unsigned int **)(param_1 + 0x1e4);
-  *piVar1 = param_1 + 0x1e0;
-  *(unsigned int **)(param_2 + 8) = puVar2;
-  *(int **)(param_1 + 0x1e4) = piVar1;
-  *puVar2 = (unsigned int)piVar1;
-  *(int *)(param_1 + 0x1dc) = *(int *)(param_1 + 0x1dc) + 1;
-  return piVar1;
+    u8 *list = (u8 *)manager + 476;
+
+    nw_ut_internal_LinkListImpl_insert(list, list + 4, (u8 *)node + 4);
 }
 
 } /* extern "C" */

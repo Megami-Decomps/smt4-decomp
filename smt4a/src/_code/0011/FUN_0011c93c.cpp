@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the Thumb literal-pool alignment pad differs in fdiff (retail lists it as code `movs r0, r0`, the build as data `.short 0x0000`); the bytes are the same. */
 /* Destructor: restores the vtable and tears down the nested sub-objects (the embedded one at 0x2c first) back to the outer object, returning this. */
 #include "common.h"
 
@@ -14,7 +13,7 @@ extern u8 DAT_0055a8f0;
 
 u8 *FUN_002e9318(u8 *self);
 u8 *FUN_002eda5a(u8 *self);
-u8 *FUN_00307368(u8 *self);
+u8 *vectorTeardown_00307368(u8 *self);
 
 NestedObject *FUN_0011c93c(NestedObject *self)
 {
@@ -22,8 +21,8 @@ NestedObject *FUN_0011c93c(NestedObject *self)
 
     self->vtbl = &DAT_0055a8f0;
     part = FUN_002eda5a(self->inner);
-    part = FUN_00307368(part - 0xc);
-    part = FUN_00307368(part - 0xc);
+    part = vectorTeardown_00307368(part - 0xc);
+    part = vectorTeardown_00307368(part - 0xc);
     part = FUN_002e9318(part - 8);
     return (NestedObject *)(part - 0xc);
 }

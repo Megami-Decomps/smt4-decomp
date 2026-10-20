@@ -1,27 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_snd_CTR_VoiceManager_Initialize` (_code @ 0x188b40, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Clears the voice manager's header fields and initializes the object that follows them (a tail call). */
+#include "common.h"
 
 extern "C" {
 
-int FUN_001af264(void);
+struct VoiceManager {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0c */ u16 unk0c;
+    /* 0x0e */ u8 unk0e;
+    /* 0x0f */ u8 unk0f;
+    /* 0x10 */ u8 voices[1];
+};
 
-/* Supplied declaration required: FUN_001af264. */
+void FUN_00188b60(void *voices);
 
-
-void nn_snd_CTR_VoiceManager_Initialize(unsigned int *param_1)
-
+void nn_snd_CTR_VoiceManager_Initialize(VoiceManager *manager)
 {
-/* irregular: 1 native warning(s); review required */
-  param_1[1] = 0;
-  param_1[2] = 0;
-  *param_1 = 0;
-  *(unsigned short *)(param_1 + 3) = 0;
-  *(unsigned char *)((int)param_1 + 0xe) = 0;
-  FUN_001af264();
-  param_1[5] = 0;
-  param_1[6] = 0;
-  return;
+    manager->unk04 = 0;
+    manager->unk08 = 0;
+    manager->unk00 = 0;
+    manager->unk0c = 0;
+    manager->unk0e = 0;
+    FUN_00188b60(manager->voices);
 }
 
-} /* extern "C" */
+}

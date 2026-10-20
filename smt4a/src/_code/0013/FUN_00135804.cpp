@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002e6e14(int);
-int FUN_002ff8c6(int *);
+int vectorCount4_002ff8c6(int *);
 int FUN_002ff8ce(int, int, int, int *);
 int FUN_0030758e(int, int, int);
-int FUN_003075ca(int *);
+int vectorCount4_003075ca(int *);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,14 +17,14 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int *FUN_002e4e86(unsigned int *, unsigned int *);
+extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
-extern unsigned int FUN_002ff8b4(unsigned int, int *);
-/* Supplied declaration required: FUN_002ff8c6. */
+extern unsigned int vectorGrowCapacity_002ff8b4(unsigned int, int *);
+/* Supplied declaration required: vectorCount4_002ff8c6. */
 /* Supplied declaration required: FUN_002ff8ce. */
 /* Supplied declaration required: FUN_0030758e. */
-/* Supplied declaration required: FUN_003075ca. */
+/* Supplied declaration required: vectorCount4_003075ca. */
 
 
 int * FUN_00135804(int *param_1,int *param_2)
@@ -43,34 +43,34 @@ int * FUN_00135804(int *param_1,int *param_2)
   unsigned int temp_v8 [2];
   
   if (param_2 != param_1) {
-    temp_v0 = FUN_002ff8c6(param_2);
-    temp_v1 = FUN_003075ca(param_1);
+    temp_v0 = vectorCount4_002ff8c6(param_2);
+    temp_v1 = vectorCount4_003075ca(param_1);
     if (temp_v1 < temp_v0) {
-      temp_v2 = FUN_002ff8c6(param_1);
-      temp_v8[0] = FUN_002ff8b4(temp_v2,param_1);
-      temp_v7 = FUN_002ff8c6(param_2);
-      piVar4 = (int *)FUN_002e4e86((unsigned int *)&temp_v7,temp_v8);
+      temp_v2 = vectorCount4_002ff8c6(param_1);
+      temp_v8[0] = vectorGrowCapacity_002ff8b4(temp_v2,param_1);
+      temp_v7 = vectorCount4_002ff8c6(param_2);
+      piVar4 = (int *)wordRefMax((unsigned int *)&temp_v7,temp_v8);
       temp_v3 = *piVar4;
       temp_v4 = rt_malloc();
       FUN_002ff8ce(*param_2,param_2[1],temp_v4,param_1);
       temp_v6 = *param_1;
       for (temp_v5 = temp_v6; temp_v5 != param_1[1]; temp_v5 = temp_v5 + 4) {
       }
-      FUN_003075ca(param_1);
+      vectorCount4_003075ca(param_1);
       FUN_002e6e14(temp_v6);
       *param_1 = temp_v4;
-      temp_v5 = FUN_002ff8c6(param_2);
+      temp_v5 = vectorCount4_002ff8c6(param_2);
       param_1[1] = temp_v5 * 4 + *param_1;
       temp_v5 = *param_1 + temp_v3 * 4;
     }
     else {
-      temp_v0 = FUN_002ff8c6(param_1);
-      temp_v1 = FUN_002ff8c6(param_2);
+      temp_v0 = vectorCount4_002ff8c6(param_1);
+      temp_v1 = vectorCount4_002ff8c6(param_2);
       if (temp_v0 < temp_v1) {
-        temp_v5 = FUN_002ff8c6(param_1);
+        temp_v5 = vectorCount4_002ff8c6(param_1);
         temp_v5 = temp_v5 * 4;
         FUN_0030758e(*param_2,*param_2 + temp_v5,*param_1);
-        temp_v3 = FUN_002ff8c6(param_2);
+        temp_v3 = vectorCount4_002ff8c6(param_2);
         param_1[1] = temp_v3 * 4 + *param_1;
         FUN_002ff8ce(*param_2 + temp_v5,param_2[1],*param_1 + temp_v5,param_1);
         return param_1;
@@ -78,7 +78,7 @@ int * FUN_00135804(int *param_1,int *param_2)
       temp_v5 = FUN_0030758e(*param_2,param_2[1],*param_1);
       for (; temp_v5 != param_1[1]; temp_v5 = temp_v5 + 4) {
       }
-      temp_v5 = FUN_002ff8c6(param_2);
+      temp_v5 = vectorCount4_002ff8c6(param_2);
       temp_v5 = temp_v5 * 4 + *param_1;
       param_1[1] = temp_v5;
     }

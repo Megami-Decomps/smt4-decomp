@@ -20,7 +20,7 @@ extern unsigned int DAT_005738bc; /* 0x5738bc */
 
 extern int btlGetMainState(void);
 extern int FUN_00357bc8(int, unsigned char *);
-extern int FUN_004c6e10(int);
+extern int isOutsideRange4To53(int);
 
 
 unsigned int FUN_004d7a70(int *param_1,unsigned int param_2,int param_3,int param_4)
@@ -51,7 +51,7 @@ unsigned int FUN_004d7a70(int *param_1,unsigned int param_2,int param_3,int para
         if (*pbVar5 == param_2) {
           if (((!(param_2 != 3 && param_2 != 4)) || (!(param_2 != 7 && param_2 != 5))) &&
              (param_3 >= 0)) {
-            temp_v1 = FUN_004c6e10(param_3);
+            temp_v1 = isOutsideRange4To53(param_3);
             puVar3 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + param_3 * 0x408);
             switch(pbVar5[1]) {
             case 1:

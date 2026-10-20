@@ -1,18 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x58];
+    /* 0x58 */ u32 first;
+    /* 0x5C */ u8 unk5C[0xC];
+    /* 0x68 */ u32 second;
+    /* 0x6C */ u8 unk6C[0xC];
+    /* 0x78 */ u32 third;
+} Source;
 
-void FUN_001844f8(int param_1,unsigned int param_2,unsigned int *param_3)
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x2C];
+    /* 0x2C */ Source *source;
+} Holder;
 
+/* Copies the three words at 0x58, 0x68 and 0x78 of the object's source into `out`. */
+void FUN_001844f8(Holder *object, u32 unused, u32 *out)
 {
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x2c);
-  *param_3 = *(unsigned int *)(temp_v0 + 0x58);
-  param_3[1] = *(unsigned int *)(temp_v0 + 0x68);
-  param_3[2] = *(unsigned int *)(temp_v0 + 0x78);
-  return;
+    Source *source;
+
+    source = object->source;
+    out[0] = source->first;
+    out[1] = source->second;
+    out[2] = source->third;
 }
 
 } /* extern "C" */

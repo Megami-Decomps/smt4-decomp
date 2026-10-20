@@ -1,26 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00257c2c(int, int, unsigned int, int);
-int FUN_002bd540(int);
+int FUN_00257c2c(void *block, u32 a, u32 b, int c);
+int FUN_002bd540(void *block);
 
-/* Supplied declaration required: FUN_00257c2c. */
-/* Supplied declaration required: FUN_002bd540. */
+typedef struct Block {
+    /* 0x00 */ u8 unk00[0xC];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u8 unk10[0x28];
+    /* 0x38 */ u32 unk38;
+    /* 0x3C */ u32 unk3C;
+    /* 0x40 */ u32 unk40;
+} Block;
 
+typedef struct Request {
+    /* 0x00 */ Block *block;
+    /* 0x04 */ u8 unk04[0x40];
+    /* 0x44 */ u32 unk44;
+    /* 0x48 */ u8 ready;
+} Request;
 
-void FUN_001f4b3c(unsigned int param_1,int *param_2,unsigned int param_3)
-
+void FUN_001f4b3c(u32 unused, Request *request, u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_00257c2c(*param_2,param_2[0x11],param_3,0x10000);
-  *(unsigned int *)(*param_2 + 0xc) = 0x2000000;
-  *(unsigned int *)(*param_2 + 0x3c) = 1;
-  *(unsigned int *)(*param_2 + 0x40) = 1;
-  *(unsigned int *)(*param_2 + 0x38) = 0;
-  FUN_002bd540(*param_2);
-  *(unsigned char *)(param_2 + 0x12) = 1;
-  return;
+    FUN_00257c2c(request->block, request->unk44, arg, 0x10000);
+    request->block->unk0C = 0x2000000;
+    request->block->unk3C = 1;
+    request->block->unk40 = 1;
+    request->block->unk38 = 0;
+    FUN_002bd540(request->block);
+    request->ready = 1;
 }
 
 } /* extern "C" */

@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x10C];
+    /* 0x10C */ u16 values[1];
+} Holder;
 
-void FUN_001c1eec(int param_1,int param_2,unsigned short param_3)
-
+/* Stores `value` in 16-bit entry `index` of the table at 0x10C. */
+void FUN_001c1eec(Holder *object, s32 index, u16 value)
 {
-  *(unsigned short *)(param_1 + param_2 * 2 + 0x10c) = param_3;
-  return;
+    object->values[index] = value;
 }
 
 } /* extern "C" */

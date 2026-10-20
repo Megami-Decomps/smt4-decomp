@@ -1,76 +1,76 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_002570a8(void);
 int FUN_00257108(void);
 int FUN_0025715c(void);
-int FUN_00269334(unsigned int);
-int FUN_002c2264(unsigned int);
-int FUN_002c2318(unsigned int);
-int asdMemFree(...);
+int FUN_00269334(u32 value);
+int resourceListDestroy(u32 value);
+int resourceDestroy(u32 value);
+int asdMemFree(u32 ptr);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Parent {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ u32 count;
+} Parent;
 
-/* Supplied declaration required: FUN_002570a8. */
-/* Supplied declaration required: FUN_00257108. */
-/* Supplied declaration required: FUN_0025715c. */
-/* Supplied declaration required: FUN_00269334. */
-/* Supplied declaration required: FUN_002c2264. */
-/* Supplied declaration required: FUN_002c2318. */
-/* Supplied declaration required: asdMemFree. */
+typedef struct Resources {
+    /* 0x00 */ u32 count;
+    /* 0x04 */ u8 unk04[0xA];
+    /* 0x0E */ u8 flags;
+    /* 0x0F */ u8 unk0F[0x25];
+    /* 0x34 */ u32 listA;
+    /* 0x38 */ u32 bufferA;
+    /* 0x3C */ u32 listB;
+    /* 0x40 */ u32 bufferB;
+    /* 0x44 */ u32 unk44;
+    /* 0x48 */ u32 unk48;
+    /* 0x4C */ Parent *parent;
+    /* 0x50 */ u32 unk50;
+} Resources;
 
-
-void FUN_001f71b4(unsigned int *param_1)
-
+/* Releases everything the resource group owns, then the group itself. */
+void FUN_001f71b4(Resources *res)
 {
-/* irregular: 7 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (param_1[0xe] != 0) {
-    temp_v0 = 0;
-    if (param_1[0x13] != 0) {
-      temp_v1 = *(unsigned int *)(param_1[0x13] + 8);
+    u32 i;
+    u32 count;
+
+    if (res->bufferA != 0) {
+        if (res->parent != NULL) {
+            count = res->parent->count;
+        } else {
+            count = res->count;
+        }
+        for (i = 0; i < count; i++) {
+            resourceDestroy(((u32 *)res->listA)[i]);
+        }
+        asdMemFree(res->bufferA);
     }
-    else {
-      temp_v1 = *param_1;
+    if (res->bufferB != 0) {
+        if (res->parent != NULL) {
+            count = res->parent->count;
+        } else {
+            count = res->count;
+        }
+        for (i = 0; i < count; i++) {
+            resourceListDestroy(((u32 *)res->listB)[i]);
+        }
+        asdMemFree(res->bufferB);
     }
-    for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
-      FUN_002c2318(*(unsigned int *)(param_1[0xd] + temp_v0 * 4));
+    if (res->unk44 != 0) {
+        FUN_0025715c();
     }
-    asdMemFree(param_1[0xe]);
-  }
-  if (param_1[0x10] != 0) {
-    temp_v0 = 0;
-    if (param_1[0x13] != 0) {
-      temp_v1 = *(unsigned int *)(param_1[0x13] + 8);
+    if (res->unk48 != 0) {
+        FUN_00257108();
     }
-    else {
-      temp_v1 = *param_1;
+    if ((res->flags & 1) != 0) {
+        FUN_00269334((u32)res->parent);
     }
-    for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0 = temp_v0 + 1) {
-      FUN_002c2264(*(unsigned int *)(param_1[0xf] + temp_v0 * 4));
+    if (res->unk50 != 0) {
+        FUN_002570a8();
     }
-    asdMemFree(param_1[0x10]);
-  }
-  if (param_1[0x11] != 0) {
-    FUN_0025715c();
-  }
-  if (param_1[0x12] != 0) {
-    FUN_00257108();
-  }
-  if ((*(unsigned char *)((int)param_1 + 0xe) & 1) != 0) {
-    FUN_00269334(param_1[0x13]);
-  }
-  if (param_1[0x14] != 0) {
-    FUN_002570a8();
-  }
-  asdMemFree(param_1);
-  return;
+    asdMemFree((u32)res);
 }
 
 } /* extern "C" */

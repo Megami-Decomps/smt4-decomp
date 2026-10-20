@@ -1,70 +1,68 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037dab0` (_code @ 0x37dab0, 0xe8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdMemFree(...);
-int scrScriptProcessDestroy(void);
-int FUN_002e3328(...);
-int FUN_00333f6c(void);
-int FUN_004dc6fc(void);
+/* A script-driven object (0x1080+ bytes); fields are named for how the destructor uses them. */
+typedef struct Obj37dab0 {
+    /* 0x0000 */ u32 job;
+    /* 0x0004 */ u8 unk04[8];
+    /* 0x000C */ void *buffer;
+    /* 0x0010 */ void *buffer2;
+    /* 0x0014 */ void *scriptProcess;
+    /* 0x0018 */ u8 unk18[0x2a];
+    /* 0x0042 */ u8 flag;
+    /* 0x0043 */ u8 unk43[0x9cd];
+    /* 0x0A10 */ void *resourceA[4];
+    /* 0x0A20 */ void *resourceB[24];
+    /* 0x0A80 */ u8 unkA80[0x5fc];
+    /* 0x107C */ void *resourceC;
+} Obj37dab0;
 
-extern unsigned int *DAT_0057f268; /* 0x57f268 */
+extern Obj37dab0 *DAT_0057f268;
 
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-extern int FUN_0026140c(void);
-/* Supplied declaration required: FUN_002e3328. */
-/* Supplied declaration required: FUN_00333f6c. */
-/* Supplied declaration required: FUN_004dc6fc. */
+__weak void *FUN_0037dab0_hook(void *p);
+u8 *FUN_0026140c(void);
+void scrScriptProcessDestroy(void);
+void asdMemFree(void *p);
+void FUN_002e3328(void *p);
+void *ptrTable44FreeAll(void *p);
+void FUN_00333f6c(void);
+void jobStop(u32 job, int arg);
 
-
+/* Destroys the object: frees its buffers and resources, stops its job and clears the global. */
 void FUN_0037dab0(void)
-
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = DAT_0057f268;
-  temp_v0 = FUN_0026140c();
-  *(unsigned char *)(temp_v0 + 0x44) = *(unsigned char *)((int)puVar1 + 0x42);
-  if (puVar1[5] != 0) {
-    scrScriptProcessDestroy();
-  }
-  if (puVar1[4] != 0) {
-    asdMemFree();
-  }
-  if (puVar1[3] != 0) {
-    asdMemFree();
-  }
-  temp_v0 = 0;
-  do {
-    if (puVar1[temp_v0 + 0x284] != 0) {
-      FUN_002e3328(puVar1[temp_v0 + 0x284]);
+    Obj37dab0 *obj = DAT_0057f268;
+    int i;
+
+    FUN_0026140c()[0x44] = obj->flag;
+    if (obj->scriptProcess != NULL) {
+        scrScriptProcessDestroy();
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 4);
-  temp_v0 = 0;
-  do {
-    if (puVar1[temp_v0 + 0x288] != 0) {
-      FUN_002e3328(puVar1[temp_v0 + 0x288]);
+    if (obj->buffer2 != NULL) {
+        asdMemFree(obj->buffer2);
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x18);
-  if (puVar1[0x41f] != 0) {
-    FUN_004dc6fc();
-    FUN_002e3328();
-  }
-  puVar1[0x41f] = 0;
-  FUN_00333f6c();
-  jobStop(*puVar1,0);
-  asdMemFree(puVar1);
-  DAT_0057f268 = (unsigned int *)0x0;
-  return;
+    if (obj->buffer != NULL) {
+        asdMemFree(obj->buffer);
+    }
+    for (i = 0; i < 4; i++) {
+        if (obj->resourceA[i] != NULL) {
+            FUN_002e3328(FUN_0037dab0_hook(obj->resourceA[i]));
+        }
+    }
+    for (i = 0; i < 24; i++) {
+        if (obj->resourceB[i] != NULL) {
+            FUN_002e3328(FUN_0037dab0_hook(obj->resourceB[i]));
+        }
+    }
+    if (obj->resourceC != NULL) {
+        FUN_002e3328(ptrTable44FreeAll(obj->resourceC));
+    }
+    obj->resourceC = NULL;
+    FUN_00333f6c();
+    jobStop(obj->job, 0);
+    asdMemFree(obj);
+    DAT_0057f268 = NULL;
 }
 
 } /* extern "C" */

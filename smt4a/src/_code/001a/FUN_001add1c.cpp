@@ -1,35 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001add1c` (_code @ 0x1add1c, 0x8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(int);
+/* A debug hook armlink removed (the jump to it became a nop). */
+__declspec(noreturn) __weak void FUN_001add1c_hook(int code);
 
-extern int iRam005e2488; /* 0x5e2488 */
-extern signed char cRam005e2490; /* 0x5e2490 */
-
-/* Supplied declaration required: asdMemFree. */
-
-
-unsigned int FUN_001add1c(void)
-
+void FUN_001add1c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (iRam005e2488 == 0) {
-    temp_v0 = 1;
-  }
-  else {
-    if (cRam005e2490 == '\0') {
-      asdMemFree(iRam005e2488);
-      iRam005e2488 = 0;
-      return 1;
-    }
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    FUN_001add1c_hook(39);
 }
 
 } /* extern "C" */

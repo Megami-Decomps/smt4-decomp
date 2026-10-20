@@ -1,73 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00317e78` (_code @ 0x317e78, 0x194 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the section handle and entries pointer land in r4/r5 the other way round in every repetition. */
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
-int FUN_0027f3dc(...);
-int FUN_002b7bca(unsigned int, unsigned int, int, unsigned char *);
+typedef void (*RecordCallback)(void);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+extern RecordCallback LAB_001e16bc, LAB_001f65ac, LAB_002d0520, LAB_002d06dc, LAB_002dca98, LAB_002e4b08, LAB_002e4b20, LAB_00300b8c;
 
-extern unsigned char LAB_001e16bc; /* 0x1e16bc */
-extern unsigned char LAB_001f65ac; /* 0x1f65ac */
-extern unsigned char LAB_002d0520; /* 0x2d0520 */
-extern unsigned char LAB_002d06dc; /* 0x2d06dc */
-extern unsigned char LAB_002dca98; /* 0x2dca98 */
-extern unsigned char LAB_002e4b08; /* 0x2e4b08 */
-extern unsigned char LAB_002e4b20; /* 0x2e4b20 */
-extern unsigned char LAB_00300b8c; /* 0x300b8c */
+extern void FUN_002b7bca(void *entries, u32 count, int stride, void *callback);
+extern int *FUN_002b47f4(int table);
+extern void FUN_0027f3dc(void *entries, u32 count, int stride, void *callback);
 
-/* Supplied declaration required: FUN_0027f3dc. */
-extern int *FUN_002b47f4(unsigned int);
-/* Supplied declaration required: FUN_002b7bca. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
+/* Hands one data table section's entries to the registry along with their stride and callback. */
+static __inline void registerSection(int table, int section, int stride, void *callback)
+{
+    void *data = dataTableGet(table, section);
+    void *entries = dataTableGetEntries(data);
 
+    FUN_002b7bca(entries, dataTableGetCount(data), stride, callback);
+}
 
 void FUN_00317e78(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int *piVar3;
-  
-  temp_v0 = dataTableGet(5,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  FUN_002b7bca(temp_v1,temp_v0,4,&LAB_002d0520);
-  temp_v0 = dataTableGet(5,2);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  FUN_002b7bca(temp_v1,temp_v0,4,&LAB_00300b8c);
-  temp_v0 = dataTableGet(5,3);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  FUN_002b7bca(temp_v1,temp_v0,4,&LAB_002d06dc);
-  temp_v0 = dataTableGet(5,4);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  FUN_002b7bca(temp_v1,temp_v0,0x1c,&LAB_001f65ac);
-  temp_v0 = dataTableGet(5,7);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  FUN_002b7bca(temp_v1,temp_v0,4,&LAB_002e4b08);
-  temp_v0 = dataTableGet(5,8);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  FUN_002b7bca(temp_v1,temp_v0,0x14,&LAB_002e4b20);
-  temp_v0 = dataTableGet(6,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v0 = dataTableGetCount(temp_v0);
-  FUN_002b7bca(temp_v1,temp_v0,4,&LAB_002dca98);
-  piVar3 = (int *)FUN_002b47f4(0x1f);
-  FUN_0027f3dc(piVar3 + 1,(*piVar3 - 4U) >> 3,8,&LAB_001e16bc);
-  return;
+    int *block;
+
+    registerSection(5, 1, 4, &LAB_002d0520);
+    registerSection(5, 2, 4, &LAB_00300b8c);
+    registerSection(5, 3, 4, &LAB_002d06dc);
+    registerSection(5, 4, 0x1c, &LAB_001f65ac);
+    registerSection(5, 7, 4, &LAB_002e4b08);
+    registerSection(5, 8, 0x14, &LAB_002e4b20);
+    registerSection(6, 1, 4, &LAB_002dca98);
+    block = FUN_002b47f4(0x1f);
+    FUN_0027f3dc(block + 1, (*block - 4U) >> 3, 8, &LAB_001e16bc);
 }
 
 } /* extern "C" */

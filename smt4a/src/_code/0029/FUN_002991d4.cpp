@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0019a7f4(...);
 int FUN_001add24(...);
-int FUN_0031a218(...);
+int panelSetMode3(...);
 int FUN_00324bc8(...);
-int FUN_0037c8b4(...);
+int panelSetTarget(...);
 int FUN_004a0ef8(...);
 
 int FUN_001628c0(...);
@@ -29,7 +29,7 @@ int FUN_00364530(...);
 int FUN_003689d0(void);
 int FUN_00377158(...);
 int FUN_00388758(...);
-int FUN_003af9ac(void);
+int scrCommResetPanel(void);
 int FUN_003d2158(...);
 int FUN_00408184(...);
 int FUN_004808c0(...);
@@ -151,7 +151,7 @@ extern int FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00312d88. */
 /* Supplied declaration required: FUN_00312db0. */
 /* Supplied declaration required: FUN_00313648. */
-/* Supplied declaration required: FUN_0031a218. */
+/* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_0033ab1c. */
 /* Supplied declaration required: FUN_0034913c. */
@@ -164,15 +164,15 @@ extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00377158. */
 /* Supplied declaration required: FUN_003774e8. */
 /* Supplied declaration required: FUN_003799d0. */
-extern int FUN_0037c894(void);
-/* Supplied declaration required: FUN_0037c8b4. */
+extern int panelStateIs0(void);
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_00388758. */
 /* Supplied declaration required: FUN_00398258. */
 extern int FUN_00399378(unsigned short);
-extern unsigned short *FUN_003993d0(int);
+extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: FUN_003a6b10. */
-/* Supplied declaration required: FUN_003af9ac. */
+/* Supplied declaration required: scrCommResetPanel. */
 /* Supplied declaration required: FUN_003ca244. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d2158. */
@@ -701,7 +701,7 @@ LAB_0029a094:
         }
         if ((*(unsigned int *)(temp_v4 + 0xc) < 2) || (*(char *)(temp_v4 + 0x4c8) == '\x01')) {
           FUN_00388758(1);
-          FUN_003af9ac();
+          scrCommResetPanel();
         }
         *(unsigned char *)(temp_v4 + 0xac) = 0;
         FUN_00303504(0xffffffff);
@@ -841,7 +841,7 @@ LAB_0029a094:
       case 0:
         temp_v11 = *(int *)(temp_v4 + 0xb4);
         FUN_003689d0();
-        puVar6 = (unsigned short *)FUN_003993d0((int)*(short *)(temp_v11 + 0x14));
+        puVar6 = (unsigned short *)dataTable20GetEntry((int)*(short *)(temp_v11 + 0x14));
         temp_v11 = FUN_00399378(*puVar6);
         FUN_00359974(0x18,(int)*(char *)(temp_v11 + 7),0xffffffff,0);
         FUN_00184758(temp_v4 + 0x148,0);
@@ -974,7 +974,7 @@ LAB_002993c0:
         (temp_v11 = *(int *)(temp_v4 + 0x54) + 1, *(int *)(temp_v4 + 0x54) = temp_v11, temp_v11 >= 6)) &&
        (*(char *)(temp_v4 + 0x60) == '\0')) {
       *(unsigned char *)(temp_v4 + 0x60) = 1;
-      FUN_0037c8b4(*(unsigned int *)(temp_v4 + 0x44),1);
+      panelSetTarget(*(unsigned int *)(temp_v4 + 0x44),1);
     }
     if (((*(char *)(temp_v4 + 0x70) != '\0') &&
         (temp_v11 = *(int *)(temp_v4 + 0x74) + 1, *(int *)(temp_v4 + 0x74) = temp_v11, temp_v11 >= 7)) &&
@@ -988,12 +988,12 @@ LAB_002993c0:
     if ((temp_v11 == 0) && (temp_v11 = FUN_004d0554(), temp_v11 == 0)) {
       return 0;
     }
-    FUN_0031a218(*(unsigned int *)(temp_v4 + 0x44),0);
+    panelSetMode3(*(unsigned int *)(temp_v4 + 0x44),0);
     temp_v12 = 0xf;
     *(unsigned int *)(temp_v4 + 0x48) = temp_v12;
     break;
   case 0xf:
-    temp_v11 = FUN_0037c894();
+    temp_v11 = panelStateIs0();
     if (temp_v11 == 1) {
       FUN_00388758(1);
       FUN_004a0ef8(*(unsigned int *)(temp_v4 + 0x44));

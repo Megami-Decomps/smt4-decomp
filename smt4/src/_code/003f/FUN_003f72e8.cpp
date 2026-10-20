@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef __packed struct Value {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05;
+    /* 0x06 */ u16 payload;
+} Value;
 
-void FUN_003f72e8(unsigned int *param_1,unsigned int *param_2,unsigned short param_3)
-
+void FUN_003f72e8(Value *value, Value *source, u16 payload)
 {
-  *(unsigned char *)(param_1 + 1) = 2;
-  *(unsigned short *)((int)param_1 + 6) = param_3;
-  *param_1 = *param_2;
-  return;
+    value->kind = 2;
+    value->payload = payload;
+    value->id = source->id;
 }
 
 } /* extern "C" */

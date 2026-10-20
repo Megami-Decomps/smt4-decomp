@@ -7,7 +7,7 @@ extern "C" {
 int dataTableGetCount(unsigned int);
 int FUN_0019de98(int, unsigned int);
 int FUN_0032d0c8(...);
-int FUN_0032ff20(unsigned int, unsigned char [304]);
+int unitRecordBuild(unsigned int, unsigned char [304]);
 int FUN_003aeb18(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -26,7 +26,7 @@ extern int btlMainGetUnk14(void);
 extern unsigned int FUN_002cab18(void);
 extern int FUN_002cad18(void);
 /* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003aeb18. */
 
 
@@ -158,7 +158,7 @@ void FUN_0023f900(void)
   else {
     puVar7 = (unsigned char *)slotRecordFindById(temp_v2 & 0xffff);
     if (puVar7 == (unsigned char *)0x0) {
-      FUN_0032ff20(temp_v2 & 0xffff,temp_v7);
+      unitRecordBuild(temp_v2 & 0xffff,temp_v7);
       puVar7 = temp_v7;
     }
     if (*(int *)(temp_v5 + 0x1218) == 1) {

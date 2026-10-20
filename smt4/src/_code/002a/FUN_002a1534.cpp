@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x754];
+    /* 0x754 */ u32 flags;
+} Obj;
 
-unsigned int FUN_002a1534(int param_1)
-
+/* Flag bit 16 of the flags word. */
+u32 FUN_002a1534(Obj *obj)
 {
-  return (*(unsigned int *)(param_1 + 0x754) & 0x10000) >> 0x10;
+    return (obj->flags & 0x10000) >> 0x10;
 }
 
 } /* extern "C" */

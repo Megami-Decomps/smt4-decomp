@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0030f89a(int *);
 
-extern int FUN_00132162(int *, unsigned int);
+extern int wordRefsEqual_00132162(int *, unsigned int);
 /* Supplied declaration required: FUN_0030f89a. */
 
 
@@ -16,7 +16,7 @@ void FUN_0030f490(int *param_1,int *param_2,unsigned int param_3,int *param_4)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  while ((temp_v0 = FUN_00132162(param_2,param_3), temp_v0 == 0 && (*param_2 != *param_4))) {
+  while ((temp_v0 = wordRefsEqual_00132162(param_2,param_3), temp_v0 == 0 && (*param_2 != *param_4))) {
     FUN_0030f89a(param_2);
   }
   *param_1 = *param_2;

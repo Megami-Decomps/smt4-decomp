@@ -12,7 +12,7 @@ int FUN_002686b8(void);
 int FUN_002c76c0(int);
 int FUN_0031f208(int);
 int FUN_0031f27c(unsigned int, int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_0035d8a4(void);
 int rt_memcpy_w(unsigned int [19], unsigned char *, int);
 
@@ -44,7 +44,7 @@ extern int FUN_0023b258(void);
 extern unsigned int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_0031f208. */
 /* Supplied declaration required: FUN_0031f27c. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0035d8a4. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -131,7 +131,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
       (*(unsigned int *)((unsigned char *)&g_gameState + 0x504)) = 0;
       FUN_002686b8();
       FUN_0035d8a4();
-      FUN_003491e8();
+      obj04Finish();
       temp_v2 = 0xffffffff;
     }
     else {
@@ -142,7 +142,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
       (*(unsigned int *)((unsigned char *)&g_gameState + 0x504)) = 0;
       FUN_002686b8();
       FUN_0035d8a4();
-      FUN_003491e8();
+      obj04Finish();
       if (temp_v3 == 0x55) {
         temp_v2 = 1;
       }

@@ -9,12 +9,12 @@ int FUN_00183bb0(void);
 int FUN_00184e64(...);
 int FUN_0031d174(...);
 int FUN_00493518(...);
-int FUN_0049359c(int, float [2]);
+int words2Copy(int, float [2]);
 int FUN_004935c8(int, int, int);
-int FUN_0049364c(int, float [5]);
+int pairAt8Get(int, float [5]);
 int FUN_004a2a30(...);
 int FUN_004a3238(...);
-int FUN_004a77c0(int, double);
+int owner4ASetSizeAndCall(int, double);
 int FUN_004a7950(int, int, double);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -32,12 +32,12 @@ extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
 extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_0031d174. */
 /* Supplied declaration required: FUN_00493518. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: FUN_004935c8. */
-/* Supplied declaration required: FUN_0049364c. */
+/* Supplied declaration required: pairAt8Get. */
 /* Supplied declaration required: FUN_004a2a30. */
 /* Supplied declaration required: FUN_004a3238. */
-/* Supplied declaration required: FUN_004a77c0. */
+/* Supplied declaration required: owner4ASetSizeAndCall. */
 /* Supplied declaration required: FUN_004a7950. */
 extern int FUN_004cfe4c(int);
 extern int FUN_004d0040(int);
@@ -60,8 +60,8 @@ void FUN_004a24a8(int param_1)
   float temp_v9 [2];
   float temp_v10 [5];
   
-  FUN_0049359c(param_1 + 200,temp_v9);
-  FUN_0049364c(param_1 + 200,temp_v10);
+  words2Copy(param_1 + 200,temp_v9);
+  pairAt8Get(param_1 + 200,temp_v10);
   if (((int)(temp_v9[0] + temp_v10[0]) < 0x43a00000) &&
      ((unsigned int)(temp_v9[0] + temp_v10[0]) < 0xc3a00000)) {
     temp_v8 = *(float *)(param_1 + 0x850);
@@ -177,7 +177,7 @@ void FUN_004a24a8(int param_1)
         FUN_004a2a30(param_1,temp_v4,1,(int)temp_v0);
       }
       efctSetSpeed();
-      FUN_004a77c0(param_1,temp_v8);
+      owner4ASetSizeAndCall(param_1,temp_v8);
       efctSetSpeed();
       return;
     }

@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ee784(int, unsigned int);
+void FUN_002ee784(void *holder, u32 data);
 
-/* Supplied declaration required: FUN_002ee784. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 data;
+} Holder;
 
-
-void FUN_002ee80e(int param_1)
-
+/* Calls FUN_002ee784 with the holder and its pointer at 4. */
+void FUN_002ee80e(Holder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002ee784(param_1,*(unsigned int *)(param_1 + 4));
-  return;
+    FUN_002ee784(holder, holder->data);
 }
 
 } /* extern "C" */

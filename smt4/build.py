@@ -117,10 +117,27 @@ def command(compiler, unit, source, obj):
     )
 
 
-def link_weak_calls(obj):
-    """Do what armlink did to the retail code: an ARM BL/B to a weak function nothing defines (the
-    release build left the debug hooks out) becomes MOV r0, r0, and its relocation goes. armcc itself
-    never emits MOV r0, r0, so every one in the retail code is such a call. Returns how many."""
+_SYMBOL_ADDRESSES = None
+
+
+def symbol_addresses():
+    """config/symbols.txt as {name: address} (Thumb bit clear)."""
+    global _SYMBOL_ADDRESSES
+    if _SYMBOL_ADDRESSES is None:
+        import re
+        text = (ROOT / "config" / "symbols.txt").read_text(encoding="utf-8")
+        _SYMBOL_ADDRESSES = {m[1]: int(m[2], 16) & ~1 for m in re.finditer(r"^(\S+) = (?:\S+:)?0x([0-9a-fA-F]+);", text, re.M)}
+    return _SYMBOL_ADDRESSES
+
+
+def link_weak_calls(obj, unit=None):
+    """Do what armlink did to the retail code, which per-function objects never went through:
+    - a call to a weak function nothing defines (the release build left the debug hooks out)
+      becomes MOV r0, r0 in ARM code and two MOV r8, r8 in Thumb;
+    - with `unit` (for its address), a branch to the very next instruction, a tail call into the
+      function placed right after this one, becomes the same NOP (armlink's --branchnop default).
+    armcc itself never emits these NOPs, so every one in the retail code is such a call. The
+    relocation goes too. Returns how many."""
     import struct
     data = bytearray(Path(obj).read_bytes())
     shoff, = struct.unpack_from("<I", data, 0x20)
@@ -137,8 +154,17 @@ def link_weak_calls(obj):
         for at in range(rel[4], rel[4] + rel[5], 8):
             offset, info = struct.unpack_from("<II", data, at)
             _name, _value, _size, sym_info, _other, shndx = struct.unpack_from("<IIIBBH", data, symtab[4] + (info >> 8) * 16)
-            if (info & 0xFF) in (28, 29) and shndx == 0 and sym_info >> 4 == 2:  # R_ARM_CALL/JUMP24, undefined, weak
-                struct.pack_into("<I", data, headers[text][4] + offset, 0xE1A00000)
+            kind = info & 0xFF
+            name_at = headers[symtab[6]][4] + _name
+            symbol = bytes(data[name_at:data.index(b"\0", name_at)]).decode()
+            weak_call = kind in (28, 29, 10, 30) and shndx == 0 and sym_info >> 4 == 2
+            next_call = (unit is not None and kind in (28, 29, 10, 30)
+                         and symbol_addresses().get(symbol) == int(unit["address"], 16) + offset + 4)
+            if weak_call or next_call:  # BL/B (ARM, Thumb) to an absent weak symbol or the next instruction
+                if kind in (28, 29):
+                    struct.pack_into("<I", data, headers[text][4] + offset, 0xE1A00000)
+                else:
+                    struct.pack_into("<HH", data, headers[text][4] + offset, 0x46C0, 0x46C0)
                 patched += 1
             else:
                 kept.append(bytes(data[at:at + 8]))
@@ -158,7 +184,7 @@ def compile_unit(compiler, unit, newest_header, force):
     obj.parent.mkdir(parents=True, exist_ok=True)
     done = subprocess.run(command(compiler, unit, source, obj), capture_output=True, text=True, cwd=ROOT)
     if done.returncode == 0:
-        link_weak_calls(obj)
+        link_weak_calls(obj, unit)
         return unit, "ok", ""
     if obj.exists():
         obj.unlink()

@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002f4cd6(unsigned int, unsigned int);
+void FUN_002f4cd6(u32 object, u32 value);
 
-/* Supplied declaration required: FUN_002f4cd6. */
-
-
-void FUN_0012201a(unsigned int param_1,unsigned int *param_2)
-
+/* Calls FUN_002f4cd6 with `object` and the word `*valueRef`. */
+void FUN_0012201a(u32 object, u32 *valueRef)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002f4cd6(param_1,*param_2);
-  return;
+    FUN_002f4cd6(object, *valueRef);
 }
 
 } /* extern "C" */

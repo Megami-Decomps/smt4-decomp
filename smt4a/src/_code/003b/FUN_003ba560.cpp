@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015d434(unsigned int);
 int FUN_0018e9d8(unsigned int, unsigned int);
 int FUN_0032c518(unsigned int, int);
-int FUN_0032c5ac(int);
+int settings5BAddFlags(int);
 int nw_gfx_SceneTraverser_Begin(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
@@ -23,7 +23,7 @@ extern unsigned int DAT_005b3c88; /* 0x5b3c88 */
 /* Supplied declaration required: FUN_0015d434. */
 /* Supplied declaration required: FUN_0018e9d8. */
 /* Supplied declaration required: FUN_0032c518. */
-/* Supplied declaration required: FUN_0032c5ac. */
+/* Supplied declaration required: settings5BAddFlags. */
 extern unsigned int asdModelGetSlotArray0(int);
 /* Supplied declaration required: nw_gfx_SceneTraverser_Begin. */
 
@@ -47,7 +47,7 @@ void FUN_003ba560(int param_1,int param_2,unsigned int param_3,unsigned int para
       return;
     }
     FUN_0018e9d8(temp_v0,*(unsigned int *)(param_1 + 0xc));
-    FUN_0032c5ac(2);
+    settings5BAddFlags(2);
     temp_v1 = *(int *)(param_1 + 4);
     if (temp_v1 != 0) {
       *(unsigned char *)(temp_v1 + 0x58) = 1;
@@ -57,7 +57,7 @@ void FUN_003ba560(int param_1,int param_2,unsigned int param_3,unsigned int para
   }
   else {
     FUN_0018e9d8(temp_v0,*(unsigned int *)(param_1 + 0xc));
-    FUN_0032c5ac(1);
+    settings5BAddFlags(1);
     temp_v1 = *(int *)(param_1 + 4);
     if (temp_v1 != 0) {
       *(unsigned char *)(temp_v1 + 0x58) = 1;

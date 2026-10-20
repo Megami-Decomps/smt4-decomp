@@ -25,7 +25,7 @@ extern unsigned char DAT_00538914; /* 0x538914 */
 /* Supplied declaration required: FUN_002e9300. */
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9520. */
-extern int FUN_0030f0ac(int *, unsigned int *);
+extern int wordRefsDiffer_0030f0ac(int *, unsigned int *);
 /* Supplied declaration required: FUN_0030f0bc. */
 
 
@@ -50,7 +50,7 @@ unsigned long long FUN_002fe400(unsigned int param_1,int param_2,int param_3,uns
   temp_v2 = temp_v1;
   FUN_002e9318(&uStack_20);
   temp_v3 = *(unsigned int *)(param_2 + 0x38);
-  temp_v1 = FUN_0030f0ac(&temp_v2,(unsigned int *)&temp_v3);
+  temp_v1 = wordRefsDiffer_0030f0ac(&temp_v2,(unsigned int *)&temp_v3);
   if (temp_v1 != 0) {
     FUN_002e9520(param_1,temp_v2 + 0x18);
     return romwright_piece_4_4(iStack_1c,uStack_20);

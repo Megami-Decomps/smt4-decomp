@@ -1,13 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s32 refCount;
+} Obj;
 
-void FUN_00256fdc(int param_1)
-
+void FUN_00256fdc(Obj *obj)
 {
-  *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + 1;
-  return;
+    obj->refCount = obj->refCount + 1;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002abb24(unsigned int, unsigned int);
+int sceneTraverserVisit(unsigned int, unsigned int);
 int FUN_002abbe8(unsigned int, unsigned int);
 int nw_gfx_SceneNode_AttachChild(unsigned int, unsigned int);
 
@@ -19,7 +19,7 @@ extern unsigned int DAT_00464b84; /* 0x464b84 */
 extern unsigned int DAT_00464b88; /* 0x464b88 */
 extern unsigned int DAT_00464ba4; /* 0x464ba4 */
 
-/* Supplied declaration required: FUN_002abb24. */
+/* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_002abbe8. */
 /* Supplied declaration required: nw_gfx_SceneNode_AttachChild. */
 
@@ -45,7 +45,7 @@ LAB_002e11ac:
       if (*param_1 != 1 && temp_v0 != 1) {
         return;
       }
-      FUN_002abb24(DAT_00464b80,DAT_00464b88);
+      sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
       return;
     }
   }
@@ -54,11 +54,11 @@ LAB_002e11ac:
 LAB_002e11a0:
     if (*param_1 != 0) goto LAB_002e11ac;
   }
-  FUN_002abb24(DAT_00464b7c,DAT_00464b84);
+  sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
   if (*param_1 != 1 && temp_v0 != 1) {
     return;
   }
-  FUN_002abb24(DAT_00464b80,DAT_00464b88);
+  sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
   return;
 }
 

@@ -72,7 +72,7 @@ extern unsigned int DAT_00630754; /* 0x630754 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00167618. */
 /* Supplied declaration required: efctSetSpeed. */
-extern float FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0018291c. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -85,7 +85,7 @@ extern float FUN_00169294(unsigned int, unsigned int, unsigned int);
 extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_00318054. */
-extern unsigned int FUN_0032cdb8(void);
+extern unsigned int flagsAt6CGet(void);
 extern int asdSoundGetOption0(void);
 /* Supplied declaration required: FUN_0032cef8. */
 extern int asdSoundGetOption3(void);
@@ -187,7 +187,7 @@ int FUN_0047ce24(unsigned int param_1,int param_2,unsigned int *param_3)
     temp_v19[temp_v4 * 4 + 3] = temp_v13;
     temp_v4 = temp_v6;
   } while (temp_v6 < 4);
-  temp_v21 = FUN_0032cdb8();
+  temp_v21 = flagsAt6CGet();
   if (temp_v8 != 0) {
     temp_v11 = 0.0f;
     if (((((*(unsigned short *)(temp_v8 + 0xc) & 2) != 0) && ((*param_3 & 8) == 0)) ||
@@ -212,10 +212,10 @@ LAB_0047cf80:
       temp_v9 = temp_v4 != 0;
       if (temp_v9) {
         temp_v20 = 0;
-        temp_v19[0x20] = (float)FUN_00169294(6,7,0);
-        temp_v19[0x21] = (float)FUN_00169294(6,1,0);
-        temp_v19[0x22] = (float)FUN_00169294(6,1,2);
-        temp_v19[0x23] = (float)FUN_00169294(5,0,1);
+        temp_v19[0x20] = (float)packNibblesAndByte(6,7,0);
+        temp_v19[0x21] = (float)packNibblesAndByte(6,1,0);
+        temp_v19[0x22] = (float)packNibblesAndByte(6,1,2);
+        temp_v19[0x23] = (float)packNibblesAndByte(5,0,1);
         FUN_0032cef8(*(unsigned int *)((int)temp_v19 + (*(unsigned short *)(temp_v8 + 0xc) >> 4 & 0xfc) + 0x80)
                     );
       }

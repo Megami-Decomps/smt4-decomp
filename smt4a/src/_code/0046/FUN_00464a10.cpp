@@ -10,7 +10,7 @@ typedef struct Object {
     /* 0x94 */ u8 bufferB[0xB00];
 } Object;
 
-int FUN_001914b8(void *member);
+int constructObj0055c19c(void *member);
 typedef struct BufRef {
     u8 *ptr;
 } BufRef;
@@ -30,7 +30,7 @@ int FUN_00464a10(Object *self)
     second.ptr = self->bufferB;
     FUN_001915c4(first, second, 0xb00);
     FUN_002e5700(self->bufferB, (u8 *)0x1914b4, 0x58, 0x20);
-    return FUN_001914b8(self->member) - 100;
+    return constructObj0055c19c(self->member) - 100;
 }
 
 } /* extern "C" */

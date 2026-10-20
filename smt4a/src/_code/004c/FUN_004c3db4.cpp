@@ -23,7 +23,7 @@ extern unsigned int DAT_0057144c; /* 0x57144c */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern int btlGetMainState(void);
 extern unsigned int FUN_0014bef4(unsigned int);
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_0019cac4. */
 /* Supplied declaration required: FUN_00261424. */
@@ -31,7 +31,7 @@ extern int FUN_002626e0(void);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: FUN_002e6490. */
 extern int FUN_003e8244(int, unsigned int);
-extern int FUN_003e9b28(int);
+extern int valueAtF0IsReady(int);
 extern int FUN_003eaea0(int, int);
 extern unsigned int FUN_003eaf04(int);
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -95,7 +95,7 @@ void FUN_004c3db4(unsigned int *param_1)
       temp_v6 = temp_v8;
     }
     *(unsigned int *)(temp_v1 + 0x1e8) = temp_v6;
-    temp_v10 = FUN_003e9b28(temp_v1);
+    temp_v10 = valueAtF0IsReady(temp_v1);
     if (temp_v10 != 0) {
       temp_v10 = FUN_00261424();
       temp_v10 = temp_v10 + 1;
@@ -182,7 +182,7 @@ void FUN_004c3db4(unsigned int *param_1)
         temp_v1 = temp_v2 + temp_v10 * 6;
         if (((*(unsigned short *)(temp_v1 + 0x60) != 0) &&
             ((*(short *)(temp_v1 + 100) == 0 || (temp_v5 = FUN_0018719c(), temp_v5 != 0)))) &&
-           ((temp_v5 = FUN_001633a0(99), temp_v5 < (int)((unsigned int)*(unsigned short *)(temp_v1 + 0x62) + temp_v3) ||
+           ((temp_v5 = lcgRandomRange(99), temp_v5 < (int)((unsigned int)*(unsigned short *)(temp_v1 + 0x62) + temp_v3) ||
             ((*param_1 & DAT_00571448) != 0 || (param_1[1] & DAT_0057144c) != 0)))) {
           temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 0x60);
           temp_v1 = 0;

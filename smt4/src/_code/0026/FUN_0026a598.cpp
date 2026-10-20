@@ -1,35 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int timerStart(int, int, int);
+int timerStart(void *timer, int a, int b);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
+typedef struct Scene {
+    /* 0x000 */ u8 unk000[0x648];
+    /* 0x648 */ u8 timerA[0x230];
+    /* 0x878 */ u8 timerB[0x8C];
+    /* 0x904 */ u8 timers[8][0x8C];
+} Scene;
 
-extern int DAT_0043da90; /* 0x43da90 */
-
-/* Supplied declaration required: timerStart. */
-
+extern Scene *DAT_0043da90;
 
 void FUN_0026a598(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0043da90;
-  timerStart(DAT_0043da90 + 0x648,3,0);
-  temp_v1 = 0;
-  do {
-    timerStart(temp_v0 + temp_v1 * 0x8c + 0x904,3,0);
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 8);
-  timerStart(temp_v0 + 0x878,3,0);
-  return;
+    Scene *scene = DAT_0043da90;
+    int i;
+
+    timerStart(DAT_0043da90->timerA, 3, 0);
+    i = 0;
+    do {
+        timerStart(scene->timers[i], 3, 0);
+        i++;
+    } while (i < 8);
+    timerStart(scene->timerB, 3, 0);
 }
 
 } /* extern "C" */

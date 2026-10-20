@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
@@ -26,6 +27,7 @@ s32 asdCecInit(void)
         g_asdCec.cec = NULL;
     }
 
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Net\\Cec\\AsdCec.cpp", 164);
     cec = (AsdCec *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AsdCec), 1);
     g_asdCec.cec = cec;
     g_asdCec.unk00 = 0;

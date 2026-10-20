@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002eb588(int *);
-int FUN_002edb7c(int *, int *, int);
+int wordMoveOut_002edb7c(int *, int *, int);
 int FUN_002edb8c(unsigned char [8], int, int *);
 int FUN_002ede22(int *);
 
@@ -21,9 +21,9 @@ typedef struct {
 
 extern int FUN_001239b2(int, unsigned int);
 /* Supplied declaration required: FUN_002eb588. */
-/* Supplied declaration required: FUN_002edb7c. */
+/* Supplied declaration required: wordMoveOut_002edb7c. */
 /* Supplied declaration required: FUN_002edb8c. */
-extern int FUN_002ede12(int *, unsigned int *);
+extern int wordRefsDiffer_002ede12(int *, unsigned int *);
 /* Supplied declaration required: FUN_002ede22. */
 
 
@@ -49,11 +49,11 @@ void FUN_002eb924(int param_1)
     temp_v2 = *(int *)(*(int *)(param_1 + 0x14) + 8);
     while( 1 ) {
       temp_v3 = *(unsigned int *)(param_1 + 0x14);
-      temp_v0 = FUN_002ede12(&temp_v2,(unsigned int *)&temp_v3);
+      temp_v0 = wordRefsDiffer_002ede12(&temp_v2,(unsigned int *)&temp_v3);
       if (temp_v0 == 0) break;
       temp_v0 = FUN_001239b2(temp_v2 + 0x30,temp_v1);
       if (temp_v0 != 0) {
-        FUN_002edb7c(&temp_v6,&temp_v2,0);
+        wordMoveOut_002edb7c(&temp_v6,&temp_v2,0);
         temp_v7 = temp_v6;
         FUN_002edb8c(temp_v8,param_1 + 4,&temp_v7);
       }

@@ -1,17 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0018719c(unsigned int);
+s32 FUN_0018719c(u32 flag);
 
-
-unsigned char FUN_002e2b38(void)
-
+/* Returns whether flag 0x4D0 is set. */
+u8 FUN_002e2b38(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0018719c(0x4d0);
-  return temp_v0 != 0;
+    s32 flag;
+
+    flag = FUN_0018719c(0x4D0);
+    return flag != 0;
 }
 
 } /* extern "C" */

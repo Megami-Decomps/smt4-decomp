@@ -19,8 +19,8 @@ typedef struct {
 extern int FUN_004931e0(void);
 /* Supplied declaration required: FUN_004b7128. */
 /* Supplied declaration required: FUN_004b7d88. */
-extern unsigned long long FUN_004ba67c(int);
-extern int FUN_004bb138(int);
+extern unsigned long long isFlag1F0Set(int);
+extern int loadDataTable33(int);
 
 
 void FUN_004b91fc(int param_1)
@@ -32,9 +32,9 @@ void FUN_004b91fc(int param_1)
   unsigned char temp_v2;
   unsigned long long temp_v3;
   
-  temp_v0 = FUN_004bb138(param_1 + 0x1114);
+  temp_v0 = loadDataTable33(param_1 + 0x1114);
   if (((temp_v0 != 0) && (temp_v0 = FUN_004931e0(), temp_v0 != 0)) &&
-     (temp_v3 = FUN_004ba67c(param_1 + 0x9c), temp_v0 = (int)((unsigned long long)temp_v3 >> 0x20), (int)temp_v3 != 0
+     (temp_v3 = isFlag1F0Set(param_1 + 0x9c), temp_v0 = (int)((unsigned long long)temp_v3 >> 0x20), (int)temp_v3 != 0
      )) {
     temp_v1 = *(int *)(param_1 + 0x1138);
     if (temp_v1 != 0) {

@@ -1,28 +1,42 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002e7328(int, unsigned int);
-extern int FUN_002e76b6(unsigned int);
+typedef struct Source {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 size;
+} Source;
 
+typedef struct Stream {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 error;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ Source *source;
+    /* 0x0C */ u32 position;
+} Stream;
 
-unsigned int FUN_002e75c2(int param_1,unsigned int *param_2)
+u32 FUN_002e7328(Stream *stream, u32 count);
+s32 FUN_002e76b6(Source *source);
 
+/* Reads a 32-bit word (assembled from a 3-byte part and a final byte) at the read position into `*out` and advances; stores 0 and returns 0 when it does not fit. */
+u32 FUN_002e75c2(Stream *stream, u32 *out)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = FUN_002e7328(param_1,4);
-  if (temp_v0 != 0) {
-    temp_v0 = FUN_002e76b6(*(unsigned int *)(param_1 + 8));
-      int off = *(int *)(param_1 + 0xc);
-    puVar2 = (unsigned int *)(temp_v0 + off);
-    *param_2 = (*puVar2 & 0xffffff) | ((unsigned int)*(unsigned char *)((int)puVar2 + 3) << 0x18);
-    *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 4;
-    return 1;
-  }
-  *param_2 = 0;
-  return 0;
+    s32 result;
+    s32 base;
+    s32 offset;
+    u32 *word;
+
+    result = FUN_002e7328(stream, 4);
+    if (result != 0) {
+        base = FUN_002e76b6(stream->source);
+        offset = stream->position;
+        word = (u32 *)(base + offset);
+        *out = (*word & 0xFFFFFF) | ((u32)*(u8 *)((s32)word + 3) << 0x18);
+        stream->position = stream->position + 4;
+        return 1;
+    }
+    *out = 0;
+    return 0;
 }
 
 } /* extern "C" */

@@ -11,7 +11,7 @@ int FUN_0027da30(int, int);
 int FUN_002c29d8(int, int, int);
 int FUN_00339e38(int);
 int FUN_0033a01c(int);
-int FUN_003d6ffc(unsigned int);
+int vec3CopyFromOffsetC(unsigned int);
 int rt_memcpy_w(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -34,7 +34,7 @@ extern int FUN_002896bc(void);
 extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: FUN_00339e38. */
 /* Supplied declaration required: FUN_0033a01c. */
-/* Supplied declaration required: FUN_003d6ffc. */
+/* Supplied declaration required: vec3CopyFromOffsetC. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -81,7 +81,7 @@ void FUN_0023fffc(unsigned int *param_1,int param_2)
     }
     FUN_0033a01c(param_2);
     FUN_00339e38(param_2);
-    FUN_003d6ffc(g_btlMain);
+    vec3CopyFromOffsetC(g_btlMain);
     if ((*(char *)(param_2 + 0x44b7) == '\0') &&
        (((*(unsigned int *)(param_2 + 0xe0) & 0x2000000) != 0 || ((*puVar9 & 2) != 0)))) {
       temp_v4 = 4;

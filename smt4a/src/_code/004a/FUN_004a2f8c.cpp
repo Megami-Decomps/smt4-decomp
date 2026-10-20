@@ -10,7 +10,7 @@ int FUN_003343f0(int);
 int FUN_00341f88(void);
 int FUN_0035deb0(void);
 int FUN_004a1958(int);
-int FUN_004a1d54(int);
+int screen4AEnter(int);
 int rt_memcpy_w(unsigned char [24], unsigned short *, int);
 
 /* stack frame of param_1: 18 slot(s), 43 byte(s) */
@@ -44,7 +44,7 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_00341f88. */
 /* Supplied declaration required: FUN_0035deb0. */
 /* Supplied declaration required: FUN_004a1958. */
-/* Supplied declaration required: FUN_004a1d54. */
+/* Supplied declaration required: screen4AEnter. */
 extern unsigned short *FUN_004a86dc(unsigned short);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -124,7 +124,7 @@ void FUN_004a2f8c(int param_1)
     sysPlaySe();
     FUN_003343f0(0);
     if (*(short *)(param_1 + 0x864) < 1) {
-      FUN_004a1d54(param_1);
+      screen4AEnter(param_1);
       FUN_0035deb0();
       return;
     }

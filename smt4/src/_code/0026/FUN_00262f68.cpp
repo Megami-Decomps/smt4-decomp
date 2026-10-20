@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u16 flags;
+} Obj;
 
-void FUN_00262f68(int param_1,unsigned short param_2)
-
+/* Clears the given bits of the flags halfword. */
+void FUN_00262f68(Obj *obj, u16 mask)
 {
-  *(unsigned short *)(param_1 + 0x44) = *(unsigned short *)(param_1 + 0x44) & ~param_2;
-  return;
+    obj->flags = obj->flags & ~mask;
 }
 
 } /* extern "C" */

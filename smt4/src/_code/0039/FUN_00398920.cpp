@@ -1,19 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00296ee0(unsigned char *, int);
+int FUN_00296ee0(u8 *obj, int state);
 
-/* Supplied declaration required: FUN_00296ee0. */
-
-
-void FUN_00398920(unsigned char *param_1)
-
+void FUN_00398920(u8 *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00296ee0(param_1,9);
-  *param_1 = 1;
-  return;
+    FUN_00296ee0(obj, 9);
+    *obj = 1;
 }
 
 } /* extern "C" */

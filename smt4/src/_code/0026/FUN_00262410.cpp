@@ -1,18 +1,15 @@
-#include "romwright_types.h"
+#include "shard/PadState.h"
 
 extern "C" {
 
-extern int FUN_002b63ac(void);
+extern PadState *FUN_002b63ac(void);
 
-
-void FUN_00262410(unsigned short param_1)
-
+/* Clears the given bits of the pad's halfword at +0x72. */
+void FUN_00262410(u16 mask)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002b63ac();
-  *(unsigned short *)(temp_v0 + 0x72) = *(unsigned short *)(temp_v0 + 0x72) & ~param_1;
-  return;
+    PadState *pad = FUN_002b63ac();
+
+    pad->unk72 = pad->unk72 & ~mask;
 }
 
 } /* extern "C" */

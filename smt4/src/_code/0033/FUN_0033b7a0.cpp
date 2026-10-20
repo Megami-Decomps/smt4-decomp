@@ -9,7 +9,7 @@ int FUN_002b9024(void);
 extern int FUN_00245768(unsigned short);
 extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_002b9024. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 unsigned int FUN_0033b7a0(int param_1,int param_2,int param_3)
@@ -32,7 +32,7 @@ unsigned int FUN_0033b7a0(int param_1,int param_2,int param_3)
   temp_v1 = 0;
   if (temp_v1 < param_2) {
     do {
-      temp_v2 = FUN_002c09f4(99);
+      temp_v2 = randNextInRange(99);
       if (param_3 != 0) {
         temp_v2 = -1;
       }

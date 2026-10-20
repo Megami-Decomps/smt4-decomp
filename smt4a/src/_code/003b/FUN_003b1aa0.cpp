@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0031f0d8(int);
+int gameDataBlocksSetWord(int);
 int scrSetResult(int);
 
-/* Supplied declaration required: FUN_0031f0d8. */
+/* Supplied declaration required: gameDataBlocksSetWord. */
 /* Supplied declaration required: scrSetResult. */
 
 
@@ -15,7 +15,7 @@ unsigned int FUN_003b1aa0(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_0031f0d8(0);
+  gameDataBlocksSetWord(0);
   scrSetResult(0);
   return 1;
 }

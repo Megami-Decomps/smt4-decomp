@@ -10,7 +10,7 @@ extern int FUN_001ab888(void);
 extern int FUN_001ba514(unsigned short);
 extern unsigned short scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_004d0eac(void);
+extern int isPartySlotBit1Clear(void);
 
 
 unsigned int FUN_0031a0ec(void)
@@ -24,7 +24,7 @@ unsigned int FUN_0031a0ec(void)
   
   temp_v0 = scrGetArg(0);
   temp_v1 = FUN_001ba514(temp_v0);
-  if ((temp_v1 < 0) || (temp_v2 = FUN_004d0eac(), temp_v2 == 0)) {
+  if ((temp_v1 < 0) || (temp_v2 = isPartySlotBit1Clear(), temp_v2 == 0)) {
     scrSetResult(0);
     return 1;
   }

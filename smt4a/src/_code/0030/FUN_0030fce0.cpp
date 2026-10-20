@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030d03c(int);
+int vectorTeardown_0030d03c(int);
 
-/* Supplied declaration required: FUN_0030d03c. */
+/* Supplied declaration required: vectorTeardown_0030d03c. */
 
 
 void FUN_0030fce0(unsigned int param_1,int param_2,int param_3)
@@ -14,7 +14,7 @@ void FUN_0030fce0(unsigned int param_1,int param_2,int param_3)
 {
 /* irregular: 1 native warning(s); review required */
   for (; param_2 != param_3; param_2 = param_2 + 0xc) {
-    FUN_0030d03c(param_2);
+    vectorTeardown_0030d03c(param_2);
   }
   return;
 }

@@ -1,31 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002b2344(unsigned int);
-int FUN_002c0894(void);
-int asdMemFree(int);
+int FUN_002b2344(u32 value);
+int FUN_002c0894(u32 value);
+int asdMemFree(void *ptr);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u8 unk1C[0x98];
+    /* 0xB4 */ u32 unkB4;
+} Obj;
 
-/* Supplied declaration required: FUN_002b2344. */
-/* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_00207470(int param_1)
-
+void FUN_00207470(Obj *obj)
 {
-/* irregular: 3 native warning(s); review required */
-  if (*(int *)(param_1 + 0xb4) != 0) {
-    FUN_002c0894();
-  }
-  FUN_002b2344(*(unsigned int *)(param_1 + 0x18));
-  asdMemFree(param_1);
-  return;
+    if (obj->unkB4 != 0) {
+        FUN_002c0894(obj->unkB4);
+    }
+    FUN_002b2344(obj->unk18);
+    asdMemFree(obj);
 }
 
 } /* extern "C" */

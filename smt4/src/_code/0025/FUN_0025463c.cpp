@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0043daa8; /* 0x43daa8 */
+typedef struct Scene {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u8 sub[1];
+} Scene;
 
+extern Scene *DAT_0043daa8;
 
-int FUN_0025463c(void)
-
+u8 *FUN_0025463c(void)
 {
-  return DAT_0043daa8 + 0x48;
+    return DAT_0043daa8->sub;
 }
 
 } /* extern "C" */

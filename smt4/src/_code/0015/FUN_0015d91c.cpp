@@ -1,29 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern romwright_code *DAT_0044e8e0; /* 0x44e8e0 */
+extern void (*DAT_0044e8e0[2])(u32 *message);
 
-
-void FUN_0015d91c(unsigned int *param_1)
-
+/* Dispatches a message by its type word: 0x80000000 to handler 0, 0x40000000 to handler 1. */
+void FUN_0015d91c(u32 **messagePtr)
 {
-/* irregular: 4 native warning(s); review required */
-  int *p = (int *)*param_1;
-  if (*p == -0x80000000) {
-                    /* WARNING: Could not recover jumptable at 0x0015d944. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*DAT_0044e8e0)(p);
-    return;
-  }
-  if (*p == 0x40000000) {
-                    /* WARNING: Could not recover jumptable at 0x0015d93c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*(*(romwright_code * *)((unsigned char *)&DAT_0044e8e0 + 0x4)))(p);
-    return;
-  }
-  return;
+    u32 *message = *messagePtr;
+
+    if (*message == 0x80000000) {
+        DAT_0044e8e0[0](message);
+        return;
+    }
+    if (*message == 0x40000000) {
+        DAT_0044e8e0[1](message);
+        return;
+    }
 }
 
 } /* extern "C" */

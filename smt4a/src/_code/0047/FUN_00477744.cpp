@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001641b4(int);
-int FUN_00472514(int);
+int flagObjAdvance(int);
 int FUN_0047306c(int, int, int, int);
 int FUN_0047314c(int);
 int FUN_00477d10(...);
@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001641b4. */
-/* Supplied declaration required: FUN_00472514. */
+/* Supplied declaration required: flagObjAdvance. */
 /* Supplied declaration required: FUN_0047306c. */
 /* Supplied declaration required: FUN_0047314c. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -58,7 +58,7 @@ void FUN_00477744(int param_1)
     if (temp_v1 != 0) {
       FUN_001641b4(0x100020e);
       FUN_00477d10(param_1,0xffffffff,0);
-      FUN_00472514(temp_v2);
+      flagObjAdvance(temp_v2);
       temp_v0 = 2;
       *(unsigned int *)(param_1 + 8) = temp_v0;
       return;
@@ -72,7 +72,7 @@ void FUN_00477744(int param_1)
         (**(romwright_code **)(**(int **)(param_1 + 0x208) + 4))();
         *(unsigned int *)(param_1 + 0x208) = 0;
       }
-      FUN_00472514(temp_v2);
+      flagObjAdvance(temp_v2);
       return;
     }
   }

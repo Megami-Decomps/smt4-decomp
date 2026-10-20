@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0045.h"
 
 extern "C" {
 
-extern int FUN_004611d0(int);
+extern s32 vtblHandleInit55C11C(s32 address);
 
-
-int FUN_0045c350(int param_1)
-
+s32 FUN_0045c350(s32 base)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_004611d0(param_1 + 0xc);
-  return temp_v0 - 0xc;
+    return vtblHandleInit55C11C(base + 0xC) - 0xC;
 }
 
 } /* extern "C" */

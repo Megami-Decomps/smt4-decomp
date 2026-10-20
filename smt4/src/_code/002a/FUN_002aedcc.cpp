@@ -1,22 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043dcb0; /* 0x43dcb0 */
+typedef struct Counters {
+    /* 0x000 */ u8 unk000[8];
+    /* 0x008 */ u8 unk008;
+    /* 0x009 */ u8 unk009[0x645];
+    /* 0x64E */ s16 unk64E;
+    /* 0x650 */ s16 unk650;
+} Counters;
 
+extern struct {
+    u8 unk0[4];
+    Counters *counters;
+} DAT_0043dcb0;
 
-unsigned int FUN_002aedcc(int param_1)
-
+u32 FUN_002aedcc(int id)
 {
-  int temp_v0;
-  
-  if (((*(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x64e) == param_1) &&
-      (*(char *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 8) == '\x01' || *(char *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 8) == '\x02')) &&
-     ((temp_v0 = (int)*(short *)((*(int *)((unsigned char *)&DAT_0043dcb0 + 0x4)) + 0x650), temp_v0 < 1 ||
-      ((temp_v0 >= 0xf && (((temp_v0 - 0xfU) & 3) == 0)))))) {
-    return 1;
-  }
-  return 0;
+    int value;
+
+    if (((DAT_0043dcb0.counters->unk64E == id) &&
+         (DAT_0043dcb0.counters->unk008 == 1 || DAT_0043dcb0.counters->unk008 == 2)) &&
+        ((value = DAT_0043dcb0.counters->unk650, value < 1 ||
+          ((value >= 0xf && (((value - 0xfU) & 3) == 0)))))) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0015688c(void);
+int saveSlotFindSelected(void);
 int FUN_00187168(void);
 int FUN_001b4a90(unsigned int *, int, unsigned int);
 int FUN_00284fdc(void);
@@ -18,7 +18,7 @@ int FUN_003e4e4c(void);
 int FUN_003e4f04(void);
 int FUN_003e5354(int);
 int FUN_00480e30(int);
-int FUN_004bd30c(int, int, int);
+int dispatchIfFound(int, int, int);
 
 typedef struct fn_003f1d74_arg0 fn_003f1d74_arg0;
 struct fn_003f1d74_arg0 {
@@ -51,7 +51,7 @@ extern unsigned int DAT_00573a50; /* 0x573a50 */
 extern unsigned int DAT_00573a54; /* 0x573a54 */
 
 extern unsigned int FUN_0015687c(void);
-/* Supplied declaration required: FUN_0015688c. */
+/* Supplied declaration required: saveSlotFindSelected. */
 extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00187168. */
 extern int dataTableGetCount(unsigned int);
@@ -73,7 +73,7 @@ extern unsigned int FUN_001bce18(void);
 /* Supplied declaration required: FUN_003e5354. */
 /* Supplied declaration required: FUN_00480e30. */
 extern unsigned char FUN_004bca20(void);
-/* Supplied declaration required: FUN_004bd30c. */
+/* Supplied declaration required: dispatchIfFound. */
 
 
 void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
@@ -158,7 +158,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
       *pbVar11 = 8;
       do {
         if (puVar10[temp_v3 + 0x1f] != 0) {
-          FUN_004bd30c(temp_v3,puVar10[temp_v3 + 0x1f],0);
+          dispatchIfFound(temp_v3,puVar10[temp_v3 + 0x1f],0);
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < (int)(unsigned int)*pbVar11);
@@ -227,7 +227,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 7);
       if (0 < temp_v4) {
-        FUN_0015688c();
+        saveSlotFindSelected();
         FUN_00187168();
       }
       FUN_003e49e8();

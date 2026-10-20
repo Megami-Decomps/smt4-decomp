@@ -19,7 +19,7 @@ int FUN_00492b98(...);
 int FUN_00492bc0(...);
 int FUN_00492c34(int);
 int FUN_00492c70(int);
-int FUN_0049359c(int, float *);
+int words2Copy(int, float *);
 int FUN_0049368c(...);
 int VectorSignedToFloat(...);
 
@@ -58,7 +58,7 @@ extern unsigned long long FUN_00162858(void);
 /* Supplied declaration required: FUN_001849bc. */
 extern unsigned long long FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_002bf1a4. */
-extern int FUN_003847e8(int);
+extern int gameFlagsClassify(int);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_00487d6c. */
 /* Supplied declaration required: FUN_0048a5e4. */
@@ -67,14 +67,14 @@ extern int FUN_0048b1bc(int);
 /* Supplied declaration required: FUN_00490a10. */
 /* Supplied declaration required: FUN_0049177c. */
 /* Supplied declaration required: FUN_00492adc. */
-extern unsigned long long *FUN_00492b84(int);
+extern unsigned long long *sub68OwnerGetBlock60(int);
 /* Supplied declaration required: FUN_00492b98. */
 /* Supplied declaration required: FUN_00492bc0. */
 extern float *lmapSceneGetObj(int);
 /* Supplied declaration required: FUN_00492c34. */
 extern int FUN_00492c5c(int);
 /* Supplied declaration required: FUN_00492c70. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: FUN_0049368c. */
 extern int NaviMain_GetCurrentMap(int);
 
@@ -143,9 +143,9 @@ void FUN_00487470(int param_1)
   pfVar3 = (float *)lmapSceneGetObj(temp_v37);
   temp_v18 = *pfVar3;
   temp_v20 = pfVar3[2];
-  puVar4 = (unsigned long long *)FUN_00492b84(temp_v37);
+  puVar4 = (unsigned long long *)sub68OwnerGetBlock60(temp_v37);
   temp_v25 = *puVar4;
-  FUN_0049359c(temp_v42 + 0x4d0,&temp_v35);
+  words2Copy(temp_v42 + 0x4d0,&temp_v35);
   temp_v40 = &DAT_005f19fc;
   DAT_00587f20 = 0xb;
   temp_v38 = 0;
@@ -177,7 +177,7 @@ void FUN_00487470(int param_1)
   if ((*(unsigned int *)(temp_v42 + 0x10) & 2) != 0) {
     return;
   }
-  temp_v2 = FUN_003847e8(temp_v31);
+  temp_v2 = gameFlagsClassify(temp_v31);
   if ((temp_v2 == 2) || (temp_v2 == 3)) {
     temp_v38 = 1;
   }

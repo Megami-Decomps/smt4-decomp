@@ -1,44 +1,44 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a03d8(int, int);
-
-typedef struct fn_0038e2f8_arg0 fn_0038e2f8_arg0;
-struct fn_0038e2f8_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 */
-    int field_0x8; /* +0x8 */
-    unsigned char pad_0xc[0x1fc];
-    void *field_0x208; /* +0x208 */
-};
-
-typedef int romwright_code(...);
+int FUN_002a03d8(int a, int b);
 extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_002a03d8. */
 
+struct Object;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(struct Object *object);
+} ObjectVtbl;
 
-void FUN_0038e2f8(fn_0038e2f8_arg0 *param_1)
+typedef struct Object {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Object;
 
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u32 unk004;
+    /* 0x008 */ int state;
+    /* 0x00C */ u8 unk00C[0x1FC];
+    /* 0x208 */ Object *object;
+} Obj;
+
+void FUN_0038e2f8(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_1->field_0x8 != 0) {
-    if ((param_1->field_0x8 == 1) && (temp_v0 = FUN_002896bc(), temp_v0 != 0)) {
-      param_1->field_0x4 = 2;
-      param_1->field_0x8 = 0;
-      if (param_1->field_0x208 != (int *)0x0) {
-        (**(romwright_code **)(*(int *)param_1->field_0x208 + 4))(param_1->field_0x208);
-        param_1->field_0x208 = (void *)0x0;
-      }
+    if (obj->state != 0) {
+        if ((obj->state == 1) && (FUN_002896bc() != 0)) {
+            obj->unk004 = 2;
+            obj->state = 0;
+            if (obj->object != NULL) {
+                obj->object->vtbl->destroy(obj->object);
+                obj->object = NULL;
+            }
+        }
+        return;
     }
-    return;
-  }
-  FUN_002a03d8(0,10);
-  FUN_002a03d8(1,10);
-  param_1->field_0x8 = 1;
-  return;
+    FUN_002a03d8(0, 10);
+    FUN_002a03d8(1, 10);
+    obj->state = 1;
 }
 
 } /* extern "C" */

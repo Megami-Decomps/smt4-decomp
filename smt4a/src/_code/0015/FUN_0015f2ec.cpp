@@ -10,7 +10,7 @@ int FUN_001764f4(unsigned int);
 
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_0016780c. */
-extern unsigned int FUN_0016a0f0(unsigned int);
+extern unsigned int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00176480. */
 /* Supplied declaration required: FUN_001764f4. */
 
@@ -30,7 +30,7 @@ unsigned int FUN_0015f2ec(void)
     if (((temp_v1 & 8) == 0) || ((temp_v1 & 2) != 0)) {
       if (((temp_v1 & 4) != 0) && ((temp_v1 & 2) == 0)) {
         temp_v3 = *(unsigned int *)(temp_v0 + 0xd54);
-        temp_v2 = FUN_0016a0f0(0x41);
+        temp_v2 = dataTableValueOrZero(0x41);
         FUN_0016780c(temp_v2,temp_v3,0);
         FUN_00176480();
         *(unsigned int *)(temp_v0 + 0x754) = *(unsigned int *)(temp_v0 + 0x754) & 0xfffffff8;

@@ -1,19 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00146a84(int);
+int FUN_00146a84(void *block);
 
-/* Supplied declaration required: FUN_00146a84. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u8 block[0x3C];
+    /* 0x54 */ int count;
+} Obj;
 
-
-void FUN_002b3194(int param_1)
-
+void FUN_002b3194(Obj *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00146a84(param_1 + 0x18);
-  *(int *)(param_1 + 0x54) = *(int *)(param_1 + 0x54) - 1;
-  return;
+    FUN_00146a84(obj->block);
+    obj->count = obj->count - 1;
 }
 
 } /* extern "C" */

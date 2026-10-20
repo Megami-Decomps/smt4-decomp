@@ -48,7 +48,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00162808. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -57,7 +57,7 @@ extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00473754. */
 /* Supplied declaration required: FUN_00473910. */
-extern int FUN_00473d40(int, int);
+extern int countOwnerIsValidIndex(int, int);
 extern int FUN_004cfb24(unsigned char *, unsigned int);
 
 
@@ -95,7 +95,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
   temp_v5 = g_aocMain;
   temp_v9 = (int)*(short *)(temp_v3 + 8);
   temp_v8 = (int)*(short *)(temp_v3 + 10);
-  temp_v3 = FUN_00473d40(g_aocMain,param_3);
+  temp_v3 = countOwnerIsValidIndex(g_aocMain,param_3);
   if (temp_v3 != 0) {
     temp_v3 = *(int *)(temp_v5 + 0x678) + param_3 * 0x9c8;
     sysMemClear(temp_v11,0x100);
@@ -206,7 +206,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
     if (temp_v15 != 0) {
       FUN_00164b5c(2,0x2f,0xd,temp_v9,temp_v8,0x81);
       temp_v5 = g_renderCtx;
-      temp_v4 = FUN_00169294(6,1,0);
+      temp_v4 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v5 + 0x12b8);
       temp_v6 = *piVar11;
       temp_v7 = piVar11[temp_v6 + 2];

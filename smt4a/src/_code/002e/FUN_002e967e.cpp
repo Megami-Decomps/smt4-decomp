@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0012ef68(int *, int, unsigned int [2]);
-int FUN_002e97f2(...);
+int wordRefsEqual_002e97f2(...);
 int FUN_002e98a4(unsigned int *);
 int FUN_0030acaa(int, unsigned int);
 
@@ -19,8 +19,8 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0012ef68. */
-/* Supplied declaration required: FUN_002e97f2. */
-extern int FUN_002e9842(unsigned int *, unsigned int);
+/* Supplied declaration required: wordRefsEqual_002e97f2. */
+extern int wordRefsDiffer_002e9842(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002e98a4. */
 /* Supplied declaration required: FUN_0030acaa. */
 
@@ -46,10 +46,10 @@ void FUN_002e967e(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
   iStack_20 = param_2;
   puStack_1c = param_3;
   temp_v6 = param_4;
-  temp_v0 = FUN_002e97f2(param_3,&temp_v2);
+  temp_v0 = wordRefsEqual_002e97f2(param_3,&temp_v2);
   if (temp_v0 != 0) {
     temp_v3 = *(unsigned int *)(param_2 + 0x10);
-    temp_v0 = FUN_002e97f2(temp_v6,&temp_v3);
+    temp_v0 = wordRefsEqual_002e97f2(temp_v6,&temp_v3);
     if ((temp_v0 != 0) && (*(int *)(param_2 + 0x14) != 0)) {
       FUN_0030acaa(param_2,*(unsigned int *)(*(int *)(param_2 + 0x10) + 4));
       *(int *)(*(int *)(param_2 + 0x10) + 8) = *(int *)(param_2 + 0x10);
@@ -60,7 +60,7 @@ void FUN_002e967e(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
       return;
     }
   }
-  while (temp_v0 = FUN_002e9842(param_3,temp_v6), temp_v0 != 0) {
+  while (temp_v0 = wordRefsDiffer_002e9842(param_3,temp_v6), temp_v0 != 0) {
     temp_v1 = *param_3;
     FUN_002e98a4(param_3);
     temp_v5[0] = temp_v1;

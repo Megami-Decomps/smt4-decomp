@@ -5,7 +5,7 @@
 extern "C" {
 
 int uiFadeOpen(...);
-int FUN_002c09f4(...);
+int randNextInRange(...);
 int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -37,7 +37,7 @@ extern unsigned int *DAT_0043dc24; /* 0x43dc24 */
 #endif
 /* Supplied declaration required: uiFadeOpen. */
 extern int FUN_002c09d0(unsigned int);
-/* Supplied declaration required: FUN_002c09f4. */
+/* Supplied declaration required: randNextInRange. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -85,19 +85,19 @@ void FUN_002898e4(void)
     temp_v9 = 0.0f;
     temp_v5 = 0;
     do {
-      temp_v2 = FUN_002c09f4(0x131);
+      temp_v2 = randNextInRange(0x131);
       temp_v2 = VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       puVar3[temp_v5 * 5 + 6] = temp_v2;
-      temp_v2 = FUN_002c09f4(0xe1);
+      temp_v2 = randNextInRange(0xe1);
       temp_v2 = VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       puVar3[temp_v5 * 5 + 7] = temp_v2;
-      temp_v3 = FUN_002c09f4(0x13);
+      temp_v3 = randNextInRange(0x13);
       temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 1,(unsigned char)(in_fpscr >> 0x16) & 3);
       puVar3[temp_v5 * 5 + 8] = temp_v8 + temp_v6 * temp_v7;
-      temp_v3 = FUN_002c09f4(0x13);
+      temp_v3 = randNextInRange(0x13);
       temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 1,(unsigned char)(in_fpscr >> 0x16) & 3);
       puVar3[temp_v5 * 5 + 9] = temp_v8 + temp_v6 * temp_v7;
-      temp_v3 = FUN_002c09f4(0x14);
+      temp_v3 = randNextInRange(0x14);
       temp_v4 = temp_v5 + 1;
       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)((float)puVar3[temp_v5 * 5 + 8] == temp_v9) << 0x1e);
       temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(temp_v0 >> 0x16) & 3);
@@ -114,23 +114,23 @@ void FUN_002898e4(void)
     temp_v11 = 0x4120000042cc0000;
     temp_v5 = 0;
     do {
-      temp_v2 = FUN_002c09f4(0xf0);
+      temp_v2 = randNextInRange(0xf0);
       temp_v2 = VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       puVar3[temp_v5 * 5 + 0x1f] = temp_v2;
-      temp_v3 = FUN_002c09f4(0x13);
+      temp_v3 = randNextInRange(0x13);
       temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 1,(unsigned char)(in_fpscr >> 0x16) & 3);
       puVar3[temp_v5 * 5 + 0x20] = temp_v8 + temp_v6 * temp_v7;
-      temp_v3 = FUN_002c09f4(0x14);
+      temp_v3 = randNextInRange(0x14);
       puVar3[temp_v5 * 5 + 0x22] = (int)temp_v11;
       *(unsigned short *)(puVar3 + temp_v5 * 5 + 0x23) = 0;
       *(unsigned short *)((int)puVar3 + temp_v5 * 0x14 + 0x8e) = 0xf0;
       temp_v6 = (float)VectorUnsignedToFloat(temp_v3 + 0x14,(unsigned char)(in_fpscr >> 0x16) & 3);
       *(float *)&puVar3[temp_v5 * 5 + 0x21] = temp_v6 * temp_v7;
-      temp_v3 = FUN_002c09f4(2);
+      temp_v3 = randNextInRange(2);
       if (temp_v3 == 0) {
-        temp_v1 = FUN_002c09f4(0x1e);
+        temp_v1 = randNextInRange(0x1e);
         *(short *)(puVar3 + temp_v5 * 5 + 0x23) = *(short *)(puVar3 + temp_v5 * 5 + 0x23) - temp_v1;
-        temp_v1 = FUN_002c09f4(0x1e);
+        temp_v1 = randNextInRange(0x1e);
         *(short *)((int)puVar3 + temp_v5 * 0x14 + 0x8e) =
              temp_v1 + *(short *)((int)puVar3 + temp_v5 * 0x14 + 0x8e);
       }

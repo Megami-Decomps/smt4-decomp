@@ -10,7 +10,7 @@ int FUN_002f8728(unsigned char [28]);
 int FUN_002f8760(unsigned char [28]);
 int FUN_002fbac6(unsigned char [28], unsigned int *);
 int FUN_002fbb38(int, unsigned char [28]);
-int FUN_002fd684(unsigned int **, int *);
+int wordRefsDiffer_002fd684(unsigned int **, int *);
 
 /* stack frame of param_2: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -28,10 +28,10 @@ extern int FUN_002ee96a(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002f8728. */
 /* Supplied declaration required: FUN_002f8760. */
 /* Supplied declaration required: FUN_002fbac6. */
-extern unsigned int FUN_002fbada(unsigned int **, unsigned int *);
+extern unsigned int wordRefsDiffer_002fbada(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_002fbb38. */
 extern int FUN_002fd454(unsigned int *);
-/* Supplied declaration required: FUN_002fd684. */
+/* Supplied declaration required: wordRefsDiffer_002fd684. */
 
 
 void FUN_00123f1e(int param_1,int param_2)
@@ -58,14 +58,14 @@ void FUN_00123f1e(int param_1,int param_2)
   temp_v3 = 0;
   while( 1 ) {
     temp_v4 = *(unsigned int *)(param_2 + 0x18);
-    temp_v1 = FUN_002fd684(&temp_v6,&temp_v4);
+    temp_v1 = wordRefsDiffer_002fd684(&temp_v6,&temp_v4);
     if ((temp_v1 & ~temp_v2) == 0) break;
     temp_v0 = FUN_002fd454(temp_v6 + 2);
     if (temp_v0 != 0) {
       temp_v8 = (unsigned int *)**(unsigned int **)(temp_v11 + 0x10);
       while( 1 ) {
         temp_v12[0] = *(unsigned int *)(temp_v11 + 0x10);
-        temp_v1 = FUN_002fbada(&temp_v8,temp_v12);
+        temp_v1 = wordRefsDiffer_002fbada(&temp_v8,temp_v12);
         if ((temp_v1 & ~temp_v2) == 0) break;
         FUN_002ee938(temp_v10,temp_v6 + 2);
         FUN_002ee938(temp_v9,temp_v8 + 2);
@@ -87,7 +87,7 @@ void FUN_00123f1e(int param_1,int param_2)
       temp_v6 = (unsigned int *)**(unsigned int **)(param_2 + 0x18);
       while( 1 ) {
         temp_v5 = *(unsigned int *)(param_2 + 0x18);
-        temp_v3 = FUN_002fd684(&temp_v6,&temp_v5);
+        temp_v3 = wordRefsDiffer_002fd684(&temp_v6,&temp_v5);
         if (temp_v3 == 0) break;
         temp_v3 = FUN_002fd454(temp_v6 + 2);
         if (temp_v3 == 0) {
@@ -99,7 +99,7 @@ void FUN_00123f1e(int param_1,int param_2)
     temp_v6 = (unsigned int *)**(unsigned int **)(param_2 + 0x18);
     while( 1 ) {
       temp_v4 = *(unsigned int *)(param_2 + 0x18);
-      temp_v3 = FUN_002fd684(&temp_v6,&temp_v4);
+      temp_v3 = wordRefsDiffer_002fd684(&temp_v6,&temp_v4);
       if (temp_v3 == 0) break;
       temp_v3 = FUN_002fd454(temp_v6 + 2);
       if (temp_v3 != 0) {

@@ -1,33 +1,39 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
+void nn_snd_CTR_Voice_SetState(u32 voice, s32 state);
 
+typedef struct Voice {
+    /* 0x00 */ u32 channels[2];
+    /* 0x08 */ s32 channelCount;
+    /* 0x0C */ u8 unk0C[9];
+    /* 0x15 */ u8 started;
+    /* 0x16 */ u8 playing;
+    /* 0x17 */ u8 paused;
+    /* 0x18 */ u8 pending;
+} Voice;
 
-void nw_snd_internal_driver_Voice_Stop(int param_1)
-
+/* Stops the voice: puts each of its channels into state 1 if it was playing, then clears the playing, paused, pending and started flags. */
+void nw_snd_internal_driver_Voice_Stop(Voice *voice)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  if (*(char *)(param_1 + 0x16) != '\0') {
-    temp_v1 = 0;
-    if (temp_v1 < *(int *)(param_1 + 8)) {
-      do {
-        temp_v0 = *(int *)(param_1 + temp_v1 * 4);
-        if (temp_v0 != 0) {
-          nn_snd_CTR_Voice_SetState(temp_v0,1);
+    s32 i;
+
+    if (voice->playing != 0) {
+        i = 0;
+        if (i < voice->channelCount) {
+            do {
+                if (voice->channels[i] != 0) {
+                    nn_snd_CTR_Voice_SetState(voice->channels[i], 1);
+                }
+                i = i + 1;
+            } while (i < voice->channelCount);
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < *(int *)(param_1 + 8));
+        voice->playing = 0;
     }
-    *(unsigned char *)(param_1 + 0x16) = 0;
-  }
-  *(unsigned char *)(param_1 + 0x18) = 0;
-  *(unsigned char *)(param_1 + 0x17) = 0;
-  *(unsigned char *)(param_1 + 0x15) = 0;
-  return;
+    voice->pending = 0;
+    voice->paused = 0;
+    voice->started = 0;
 }
 
 } /* extern "C" */

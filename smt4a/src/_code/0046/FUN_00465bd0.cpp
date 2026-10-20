@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char DAT_00646e54; /* 0x646e54 */
 
-extern unsigned int FUN_00461e8c(int, unsigned int);
+extern unsigned int halfArrayOwnerGet(int, unsigned int);
 
 
 void FUN_00465bd0(int param_1,unsigned int param_2,int param_3)
@@ -29,7 +29,7 @@ void FUN_00465bd0(int param_1,unsigned int param_2,int param_3)
   if (*(int *)(param_1 + 0x88) != 0) {
     temp_v0 = param_1 + 0xd0;
     temp_v1 = &DAT_00646e54;
-    temp_v2 = FUN_00461e8c(param_3,0);
+    temp_v2 = halfArrayOwnerGet(param_3,0);
     temp_v3 = *(unsigned char *)(param_3 + 0x24);
     (**(romwright_code **)(param_1 + 0x88))(param_2,&temp_v0,*(unsigned int *)(param_1 + 0x8c));
     *(unsigned char *)(param_3 + 0x24) = temp_v3;

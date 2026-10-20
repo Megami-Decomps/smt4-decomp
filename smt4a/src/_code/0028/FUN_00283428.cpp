@@ -1,57 +1,50 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0028322c(...);
-int FUN_00285834(...);
+typedef struct Node {
+    /* 0x000 */ u8 unk000[2];
+    /* 0x002 */ u8 flag;
+    /* 0x003 */ u8 unk003[0x21];
+    /* 0x024 */ void *unk24;
+    /* 0x028 */ void *unk28;
+    /* 0x02C */ void *unk2C;
+    /* 0x030 */ void *unk30;
+    /* 0x034 */ u8 unk034[0x1F4];
+    /* 0x228 */ u32 *owner;
+    /* 0x22C */ u8 unk22C[0xC];
+    /* 0x238 */ struct Node *children[0x32];
+    /* 0x300 */ u8 unk300[0x84];
+    /* 0x384 */ u32 *owner2;
+} Node;
 
-typedef struct fn_00283428_arg0 fn_00283428_arg0;
-struct fn_00283428_arg0 {
-    unsigned char pad_0x0[0x2];
-    byte field_0x2; /* +0x2 */
-    unsigned char pad_0x3[0x1d];
-    unsigned char field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0x3];
-    void *field_0x24; /* +0x24 */
-    void *field_0x28; /* +0x28 */
-    void *field_0x2c; /* +0x2c */
-    void *field_0x30; /* +0x30 */
-};
+void FUN_00285834(Node *node);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+void FUN_0028322c(Node *node);
 
-/* Supplied declaration required: FUN_0028322c. */
-/* Supplied declaration required: FUN_00285834. */
-
-
-void FUN_00283428(fn_00283428_arg0 *param_1)
-
+/* Releases the node's 0x32 children, clears its four pointers and its owner slot, then releases the node. */
+void FUN_00283428(Node *node)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 != (fn_00283428_arg0 *)0x0) {
-    do {
-      FUN_0028322c((&param_1[10].field_0x30)[temp_v0]);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x32);
-    puVar1 = *(unsigned int **)&param_1[10].field_0x20;
-    param_1->field_0x24 = (void *)0x0;
-    param_1->field_0x28 = (void *)0x0;
-    param_1->field_0x2c = (void *)0x0;
-    param_1->field_0x30 = (void *)0x0;
-    if (puVar1 != (unsigned int *)0x0) {
-      *puVar1 = 0;
+    u32 *owner;
+    s32 i;
+
+    i = 0;
+    if (node != NULL) {
+        do {
+            FUN_0028322c(node->children[i]);
+            i = i + 1;
+        } while (i < 0x32);
+        owner = node->owner;
+        node->unk24 = NULL;
+        node->unk28 = NULL;
+        node->unk2C = NULL;
+        node->unk30 = NULL;
+        if (owner != NULL) {
+            *owner = 0;
+        }
+        FUN_00285834(node);
+        return;
     }
-    FUN_00285834(param_1);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

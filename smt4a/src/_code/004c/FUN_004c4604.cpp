@@ -60,7 +60,7 @@ extern unsigned int DAT_00571504; /* 0x571504 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_0028cb6c(void);
@@ -540,7 +540,7 @@ LAB_004c4810:
           if (((puVar4[0x9d] & 0x10) != 0) && ((puVar5[0x9d] & 0x10) == 0)) {
             temp_v21 = 100.0f;
           }
-          temp_v4 = FUN_001633a0(99);
+          temp_v4 = lcgRandomRange(99);
           if ((int)temp_v21 < temp_v4) {
             return 5;
           }

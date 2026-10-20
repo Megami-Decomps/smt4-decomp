@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/Block57f248.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f248; /* 0x57f248 */
-
-
-int FUN_002c2c98(void)
-
+/* Returns the low 16 bits of the word at 0x670 of the record at 0x57F248 as a signed value. */
+s32 FUN_002c2c98(void)
 {
-  return (int)(short)*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x670);
+    return (s16)DAT_0057f248.record->unk670;
 }
 
 } /* extern "C" */

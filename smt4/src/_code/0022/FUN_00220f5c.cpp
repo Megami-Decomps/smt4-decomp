@@ -1,44 +1,42 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int statusCameraDestroy(void);
-int lmapSceneSetUnk134(int);
-int FUN_002a72c0(int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: statusCameraDestroy. */
-/* Supplied declaration required: lmapSceneSetUnk134. */
+int lmapSceneSetUnk134(int value);
+int FUN_002a72c0(int arg);
 extern int lmapSceneGetScript(void);
-/* Supplied declaration required: FUN_002a72c0. */
 
+struct Script;
+typedef struct ScriptVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(struct Script *script);
+} ScriptVtbl;
 
-void FUN_00220f5c(int param_1)
+typedef struct Script {
+    /* 0x0 */ ScriptVtbl *vtbl;
+} Script;
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ Script *script;
+    /* 0x20 */ u8 unk20[0xC];
+    /* 0x2C */ u8 unk2C;
+} Obj;
+
+void FUN_00220f5c(Obj *obj)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  statusCameraDestroy();
-  temp_v0 = lmapSceneGetScript();
-  if (temp_v0 != 0) {
-    lmapSceneSetUnk134(1);
-  }
-  if (*(char *)(param_1 + 0x2c) != '\0') {
-    FUN_002a72c0(0);
-  }
-  if (*(int **)(param_1 + 0x1c) == (int *)0x0) {
-    return;
-  }
-                    /* WARNING: Could not recover jumptable at 0x00220fa0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(**(int **)(param_1 + 0x1c) + 4))(*(int **)(param_1 + 0x1c));
-  return;
+    statusCameraDestroy();
+    if (lmapSceneGetScript() != 0) {
+        lmapSceneSetUnk134(1);
+    }
+    if (obj->unk2C != 0) {
+        FUN_002a72c0(0);
+    }
+    if (obj->script == NULL) {
+        return;
+    }
+    obj->script->vtbl->destroy(obj->script);
 }
 
 } /* extern "C" */

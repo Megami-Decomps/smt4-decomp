@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_003bbb04(unsigned int, unsigned int, unsigned int, int);
+int cecInboxReadMessages(unsigned int, unsigned int, unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_003bbb04. */
+/* Supplied declaration required: cecInboxReadMessages. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -27,7 +27,7 @@ void FUN_001dc684(int param_1)
     temp_v1 = param_1 + 0x420;
     nn_os_CriticalSection_Enter(temp_v1);
     if (*(unsigned int *)(param_1 + 0x78) - *(int *)(param_1 + 0x7c) < 0xc) {
-      FUN_003bbb04(*(unsigned int *)(param_1 + 4),
+      cecInboxReadMessages(*(unsigned int *)(param_1 + 4),
                    param_1 + (*(unsigned int *)(param_1 + 0x78) % 0xc) * 0x4c + 0x80,
                    *(unsigned int *)(param_1 + 0x6c),1);
       *(int *)(param_1 + 0x78) = *(int *)(param_1 + 0x78) + 1;

@@ -1,24 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00310010(unsigned char *, unsigned int);
+void slotSetGet(u8 *object, u32 value);
+u32 FUN_00310024(u8 *object);
+extern u8 DAT_0062e6d0[];
 
-extern unsigned char DAT_0062e6d0; /* 0x62e6d0 */
-
-/* Supplied declaration required: FUN_00310010. */
-extern unsigned int FUN_00310024(unsigned char *);
-
-
-void FUN_002eac34(int param_1)
-
+/* Runs slotSetGet on element `index` (0x1C0 bytes each) of the table at 0x62E6D0 with FUN_00310024's result for it. */
+void FUN_002eac34(s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_00310024(&DAT_0062e6d0 + param_1 * 0x1c0);
-  FUN_00310010(&DAT_0062e6d0 + param_1 * 0x1c0,temp_v0);
-  return;
+    u32 value;
+
+    value = FUN_00310024(DAT_0062e6d0 + index * 0x1C0);
+    slotSetGet(DAT_0062e6d0 + index * 0x1C0, value);
 }
 
 } /* extern "C" */

@@ -48,8 +48,8 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_001d25ec. */
 /* Supplied declaration required: FUN_00426eb8. */
 /* Supplied declaration required: FUN_00426fe4. */
-extern unsigned int FUN_00427348(int);
-extern unsigned int FUN_00427354(int);
+extern unsigned int halfPair48LowByteA(int);
+extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_004275c8. */
 /* Supplied declaration required: FUN_0042792c. */
 /* Supplied declaration required: FUN_00427c38. */
@@ -116,8 +116,8 @@ int * FUN_00475700(int param_1)
     piVar6 = temp_v14;
     FUN_00427c38(piVar6,temp_v7,0x400);
     temp_v17 = 1;
-    temp_v2 = FUN_00427354(temp_v0 + 0x28);
-    temp_v3 = FUN_00427348(temp_v0 + 0x28);
+    temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
+    temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
     FUN_00426eb8(&temp_v12,0,temp_v3,temp_v2);
     *(unsigned int *)(temp_v0 + 0x368) = temp_v12;
     *(unsigned int *)(temp_v0 + 0x36c) = uStack_9c;
@@ -135,8 +135,8 @@ int * FUN_00475700(int param_1)
     *(unsigned int *)(temp_v0 + 0x39c) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x3a0) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x3a4) = uStack_64;
-    temp_v2 = FUN_00427354(temp_v0 + 0x28);
-    temp_v3 = FUN_00427348(temp_v0 + 0x28);
+    temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
+    temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
     FUN_00426eb8(&temp_v12,2,temp_v3,temp_v2);
     *(unsigned int *)(temp_v0 + 0x3a8) = temp_v12;
     *(unsigned int *)(temp_v0 + 0x3ac) = uStack_9c;
@@ -154,8 +154,8 @@ int * FUN_00475700(int param_1)
     *(unsigned int *)(temp_v0 + 0x3dc) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x3e0) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x3e4) = uStack_64;
-    temp_v2 = FUN_00427354(temp_v0 + 0x28);
-    temp_v3 = FUN_00427348(temp_v0 + 0x28);
+    temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
+    temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
     FUN_00426eb8(&temp_v12,3,temp_v3,temp_v2);
     *(unsigned int *)(temp_v0 + 1000) = temp_v12;
     *(unsigned int *)(temp_v0 + 0x3ec) = uStack_9c;
@@ -173,8 +173,8 @@ int * FUN_00475700(int param_1)
     *(unsigned int *)(temp_v0 + 0x41c) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x420) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x424) = uStack_64;
-    temp_v2 = FUN_00427354(temp_v0 + 0x28);
-    temp_v3 = FUN_00427348(temp_v0 + 0x28);
+    temp_v2 = halfPair48LowByteB(temp_v0 + 0x28);
+    temp_v3 = halfPair48LowByteA(temp_v0 + 0x28);
     FUN_00426eb8(&temp_v12,5,temp_v3,temp_v2);
     *(unsigned int *)(temp_v0 + 0x428) = temp_v12;
     *(unsigned int *)(temp_v0 + 0x42c) = uStack_9c;

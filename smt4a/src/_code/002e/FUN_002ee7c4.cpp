@@ -1,23 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ee7f2(unsigned int, unsigned char *);
+void FUN_002ee7f2(u32 cursor, u8 *table);
+extern u8 DAT_0053a778[];
 
-extern unsigned char DAT_0053a778; /* 0x53a778 */
+typedef struct Writer {
+    /* 0x000 */ u8 unk000[0x0C];
+    /* 0x00C */ u32 cursor;
+    /* 0x010 */ u8 unk010[0x201];
+    /* 0x211 */ u8 enabled;
+} Writer;
 
-/* Supplied declaration required: FUN_002ee7f2. */
-
-
-void FUN_002ee7c4(int param_1)
-
+/* When enabled, writes the table at 0x53A778 at the cursor and advances it by 4. */
+void FUN_002ee7c4(Writer *writer)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0x211) != '\0') {
-    FUN_002ee7f2(*(unsigned int *)(param_1 + 0xc),&DAT_0053a778);
-    *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 4;
-  }
-  return;
+    if (writer->enabled != 0) {
+        FUN_002ee7f2(writer->cursor, DAT_0053a778);
+        writer->cursor = writer->cursor + 4;
+    }
 }
 
 } /* extern "C" */

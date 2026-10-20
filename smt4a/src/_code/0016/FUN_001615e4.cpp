@@ -1,17 +1,13 @@
-#include "romwright_types.h"
+#include "shard/Block61a470.h"
 
 extern "C" {
 
-extern unsigned char DAT_0061a470; /* 0x61a470 */
-
-
-void FUN_001615e4(unsigned int param_1)
-
+/* Stores `value` in the word at 0x38 of the pool, if there is one. */
+void FUN_001615e4(u32 value)
 {
-  if ((*(int *)((unsigned char *)&DAT_0061a470 + 0x9c)) != 0) {
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0061a470 + 0x9c)) + 0x38) = param_1;
-  }
-  return;
+    if (DAT_0061a470.pool != NULL) {
+        DAT_0061a470.pool->unk38 = value;
+    }
 }
 
 } /* extern "C" */

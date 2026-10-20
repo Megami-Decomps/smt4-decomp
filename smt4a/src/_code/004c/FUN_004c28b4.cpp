@@ -9,7 +9,7 @@ int FUN_0034a290(void);
 int FUN_003e8bb0(unsigned char [22], unsigned int, unsigned int *);
 int FUN_003f0e20(unsigned int *, unsigned int);
 int FUN_004bd098(unsigned int, int);
-int FUN_004c39b0(void);
+int source4CCopyHalves(void);
 
 /* stack frame of param_1: 7 slot(s), 23 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern unsigned int DAT_0057140c; /* 0x57140c */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004bd098. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 
 
 void FUN_004c28b4(unsigned int param_1)
@@ -57,7 +57,7 @@ void FUN_004c28b4(unsigned int param_1)
   temp_v2[7] = 0;
   temp_v2[8] = 0;
   temp_v2[9] = 0;
-  FUN_004c39b0();
+  source4CCopyHalves();
   temp_v1 = 0;
   do {
     if (temp_v2[temp_v1] != 0) {

@@ -41,7 +41,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 /* Supplied declaration required: FUN_0017fc94. */
 /* Supplied declaration required: FUN_001ab810. */
 /* Supplied declaration required: FUN_001aff14. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe9b4. */
@@ -88,7 +88,7 @@ void FUN_0041bb2c(int param_1)
   temp_v7 = -*(float *)(param_1 + 0xc);
   temp_v8 = -*(float *)(param_1 + 0x10);
   temp_v9 = -*(float *)(param_1 + 0x14);
-  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c2c), temp_v0 != 0)) {
+  if (((DAT_005c4c2c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v0 != 0)) {
     DAT_0064c054 = 0x3f800000;
     DAT_0064c068 = 0x3f800000;
     DAT_0064c07c = 0x3f800000;

@@ -1,39 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int asdMemFree(...);
-int FUN_002c56dc(int);
-int FUN_002c5728(int);
-int FUN_002c5758(int);
+int FUN_002c56dc(int a);
+int FUN_002c5728(int a);
+int FUN_002c5758(int a);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct JobWork {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ int buffer;
+} JobWork;
 
-extern int jobGetWork(unsigned int);
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c56dc. */
-/* Supplied declaration required: FUN_002c5728. */
-/* Supplied declaration required: FUN_002c5758. */
+extern JobWork *jobGetWork(u32 job);
 
-
-void FUN_00324b74(unsigned int param_1)
-
+void FUN_00324b74(u32 job)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_002c5758(1);
-  FUN_002c5728(1);
-  FUN_002c56dc(1);
-  temp_v0 = jobGetWork(param_1);
-  if (*(int *)(temp_v0 + 8) != 0) {
-    asdMemFree();
-  }
-  asdMemFree(temp_v0);
-  return;
+    JobWork *work;
+
+    FUN_002c5758(1);
+    FUN_002c5728(1);
+    FUN_002c56dc(1);
+    work = jobGetWork(job);
+    if (work->buffer != 0) {
+        asdMemFree(work->buffer);
+    }
+    asdMemFree(work);
 }
 
 } /* extern "C" */

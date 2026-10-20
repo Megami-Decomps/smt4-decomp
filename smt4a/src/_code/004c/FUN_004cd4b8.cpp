@@ -15,7 +15,7 @@ int FUN_0031f0f4(int, int);
 int FUN_003da99c(int, int *);
 int FUN_003daaf8(int, int *);
 int FUN_004bcd90(int);
-int FUN_004bd3ec(int, int);
+int bitsAt60Set(int, int);
 int FUN_004cd340(int, int *, int);
 int SBORROW4(int, int);
 
@@ -46,8 +46,8 @@ extern int FUN_0031cfd0(unsigned short);
 extern int FUN_003e46f4(unsigned int);
 extern int FUN_003e4de4(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd3ec. */
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Set. */
 /* Supplied declaration required: FUN_004cd340. */
 
 
@@ -278,10 +278,10 @@ void FUN_004cd4b8(int param_1,int param_2)
   temp_v4 = FUN_0017760c(param_1);
   *(short *)(param_1 + 0x2a) = (temp_v4 - (short)uStack_5c) + *(short *)(param_1 + 0x2a);
   *(short *)(param_1 + 0x2c) = (*(short *)(param_1 + 0x10) - temp_v2) + *(short *)(param_1 + 0x2c);
-  temp_v8 = FUN_004bd340(param_1,2);
+  temp_v8 = bitsAt60Test(param_1,2);
   *(unsigned short *)(param_1 + 0x60) = 0;
   if (temp_v8 != 0) {
-    FUN_004bd3ec(param_1,2);
+    bitsAt60Set(param_1,2);
   }
   temp_v8 = FUN_003e46f4(0x83);
   if (temp_v8 != 0) {

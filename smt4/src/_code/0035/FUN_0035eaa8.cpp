@@ -1,15 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Triple {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u32 unk8;
+} Triple;
 
-void FUN_0035eaa8(unsigned int *param_1)
-
+void FUN_0035eaa8(Triple *triple)
 {
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  return;
+    triple->unk0 = 0;
+    triple->unk4 = 0;
+    triple->unk8 = 0;
 }
 
 } /* extern "C" */

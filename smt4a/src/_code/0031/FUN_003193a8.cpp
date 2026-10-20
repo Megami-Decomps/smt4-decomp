@@ -13,7 +13,7 @@ int FUN_00319aec(...);
 int FUN_00334214(...);
 int FUN_003343c0(...);
 int FUN_003343f0(...);
-int FUN_00334434(void);
+int objBInitBlock19D0(void);
 int FUN_0033449c(...);
 int FUN_0038b3f8(...);
 int FUN_0038b548(...);
@@ -76,7 +76,7 @@ extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_00334214. */
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00334434. */
+/* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_00336de4. */
 extern int FUN_00349af0(void);
@@ -86,7 +86,7 @@ extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0035fc4c. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_00371c3c. */
-extern int FUN_00388024(void);
+extern int maskToCode(void);
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_0038b548. */
 /* Supplied declaration required: FUN_003a7a88. */
@@ -326,7 +326,7 @@ unsigned int FUN_003193a8(int param_1)
     FUN_0033449c(1);
     FUN_00334214(param_1 + 0x218,0,0);
     FUN_0031cf00();
-    FUN_00334434();
+    objBInitBlock19D0();
     FUN_003343c0(0);
     FUN_002a7324(1);
     FUN_0038b548(0);
@@ -375,7 +375,7 @@ unsigned int FUN_003193a8(int param_1)
     temp_v6 = FUN_0026c3a0();
     if (temp_v6 != 0) {
       *(unsigned int *)(param_1 + 0x3dc) = *(unsigned int *)(param_1 + 0x3dc) & 0xfffffffb;
-      temp_v6 = FUN_00388024();
+      temp_v6 = maskToCode();
       if (temp_v6 == 9) {
         *(unsigned int *)(param_1 + 0x3bc) = 10;
       }

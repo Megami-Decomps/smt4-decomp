@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0011d590(unsigned char [8]);
-int FUN_001204d4(unsigned char [8]);
+int destroyObj0055ad6c(unsigned char [8]);
 int FUN_00135a7c(unsigned char [12], int);
 int FUN_002e9af4(void);
 int FUN_002e9ec8(int, unsigned int);
@@ -27,7 +27,7 @@ extern unsigned char LAB_0012c838; /* 0x12c838 */
 extern unsigned char LAB_0012ca1d; /* 0x12ca1d */
 
 /* Supplied declaration required: FUN_0011d590. */
-/* Supplied declaration required: FUN_001204d4. */
+/* Supplied declaration required: destroyObj0055ad6c. */
 extern int FUN_00132206(unsigned char *);
 /* Supplied declaration required: FUN_00135a7c. */
 extern int FUN_002e760a(unsigned int);
@@ -90,7 +90,7 @@ void FUN_0012c74c(int param_1)
         FUN_0030c720(param_1,temp_v1);
       }
     }
-    FUN_001204d4(temp_v3);
+    destroyObj0055ad6c(temp_v3);
   }
   else {
     temp_v6 = 0x80010004;

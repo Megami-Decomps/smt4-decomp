@@ -9,7 +9,7 @@ int FUN_00488ce8(...);
 int FUN_00489480(...);
 int FUN_0048981c(...);
 int FUN_00492c18(...);
-int FUN_004d03ec(...);
+int setFullScreenRect(...);
 int VectorSignedToFloat(...);
 
 typedef struct fn_00485d1c_arg0 fn_00485d1c_arg0;
@@ -42,7 +42,7 @@ extern signed char DAT_005f1a5c; /* 0x5f1a5c */
 /* Supplied declaration required: FUN_0048981c. */
 extern int FUN_0048e40c(fn_00485d1c_arg0 *);
 /* Supplied declaration required: FUN_00492c18. */
-/* Supplied declaration required: FUN_004d03ec. */
+/* Supplied declaration required: setFullScreenRect. */
 
 
 int FUN_00485d1c(fn_00485d1c_arg0 *param_1)
@@ -67,7 +67,7 @@ int FUN_00485d1c(fn_00485d1c_arg0 *param_1)
       if ((param_1->field_0x10 & 0x10) != 0) {
         temp_v0 = param_1->field_0x18 + 1;
         param_1->field_0x18 = temp_v0;
-        FUN_004d03ec();
+        setFullScreenRect();
         if (((temp_v0 != 0) && (DAT_005f1614 == '\0')) || (temp_v0 = param_1->field_0x18, temp_v0 >= 0x10)
            ) {
           param_1->field_0x10 = param_1->field_0x10 & 0xffffffef;

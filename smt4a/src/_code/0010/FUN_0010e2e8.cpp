@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010e720(unsigned int);
+void FUN_0010e720(u32 value);
 
-/* Supplied declaration required: FUN_0010e720. */
+typedef struct ValueHolder {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u32 value;
+} ValueHolder;
 
-
-void FUN_0010e2e8(int param_1)
-
+/* Passes the value at 0x3C to FUN_0010e720. */
+void FUN_0010e2e8(ValueHolder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0010e720(*(unsigned int *)(param_1 + 0x3c));
-  return;
+    FUN_0010e720(object->value);
 }
 
 } /* extern "C" */

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00275b10(int);
-int FUN_004f2518(int);
+int flags64CSetTarget(int);
 
 /* Supplied declaration required: FUN_00275b10. */
-/* Supplied declaration required: FUN_004f2518. */
+/* Supplied declaration required: flags64CSetTarget. */
 
 
 unsigned int FUN_00320f2c(int *param_1)
@@ -21,7 +21,7 @@ unsigned int FUN_00320f2c(int *param_1)
   if (temp_v0 != 0) {
     FUN_00275b10(0);
     FUN_00275b10(1);
-    FUN_004f2518(temp_v0);
+    flags64CSetTarget(temp_v0);
   }
   return 1;
 }

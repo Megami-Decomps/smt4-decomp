@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/GameGlobals.h"
 
 extern "C" {
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
-
-
-void FUN_00317e58(unsigned int param_1)
-
+void FUN_00317e58(u32 value)
 {
-  if ((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) != 0) {
-    *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1898) = param_1;
-  }
-  return;
+    if (g_gameGlobals.data != NULL) {
+        g_gameGlobals.data->unk1898 = value;
+    }
 }
 
 } /* extern "C" */

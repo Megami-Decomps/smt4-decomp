@@ -18,7 +18,7 @@ int asdTMTexTableFreeEntry(int);
 int FUN_00333f6c(void);
 int FUN_0033440c(unsigned int);
 int FUN_003a76a8(int);
-int FUN_0050d778(int, unsigned int);
+int fillThreeWordsWithByte(int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -42,7 +42,7 @@ extern unsigned int DAT_0056fcc0; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_003a76a8. */
-/* Supplied declaration required: FUN_0050d778. */
+/* Supplied declaration required: fillThreeWordsWithByte. */
 
 
 void FUN_00420b70(int param_1)
@@ -95,7 +95,7 @@ void FUN_00420b70(int param_1)
     FUN_001641c4();
   }
   *(unsigned int *)(param_1 + 0x448) = 0;
-  FUN_0050d778(param_1 + 0x43c,0xffffffff);
+  fillThreeWordsWithByte(param_1 + 0x43c,0xffffffff);
   *(unsigned char *)(param_1 + 0x44c) = 0;
   *(unsigned char *)(param_1 + 0x44d) = 0;
   *(unsigned char *)(param_1 + 0x44e) = 0;

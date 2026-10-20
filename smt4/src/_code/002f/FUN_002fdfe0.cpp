@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int jobGetWork(void);
+typedef struct JobWork {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 unk38;
+} JobWork;
 
+extern JobWork *jobGetWork(void);
 
-void FUN_002fdfe0(unsigned int param_1,unsigned int param_2)
-
+void FUN_002fdfe0(u32 unused, u32 value)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  *(unsigned int *)(temp_v0 + 0x38) = param_2;
-  return;
+    JobWork *work = jobGetWork();
+
+    work->unk38 = value;
 }
 
 } /* extern "C" */

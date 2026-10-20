@@ -1,23 +1,20 @@
-#include "romwright_types.h"
+#include "shard/Obj43da28.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043da28;
-
-
-unsigned char FUN_002f5b74(unsigned int param_1)
-
+/* Byte at +0x494 of the 4-byte slot `index` (0-5) of the object, or 0. */
+u8 FUN_002f5b74(u32 index)
 {
-  unsigned char temp_v0;
-  
-  if (((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) != 0) && (param_1 < 6)) {
-    int *e = (int *)(*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + param_1;
-    temp_v0 = *((unsigned char *)e + 0x494);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u8 value;
+    u32 *slot;
+
+    if ((DAT_0043da28.obj != NULL) && (index < 6)) {
+        slot = (u32 *)DAT_0043da28.obj + index;
+        value = ((u8 *)slot)[0x494];
+    } else {
+        value = 0;
+    }
+    return value;
 }
 
 } /* extern "C" */

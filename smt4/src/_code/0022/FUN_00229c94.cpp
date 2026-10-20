@@ -29,7 +29,7 @@ extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b9024. */
 extern int FUN_002c09d0(void);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern unsigned short *dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -142,7 +142,7 @@ LAB_00229e38:
         if (temp_v5 < 2) {
           return 0;
         }
-        temp_v2 = FUN_002c09f4((temp_v5 - 1) & 0xffff);
+        temp_v2 = randNextInRange((temp_v5 - 1) & 0xffff);
         temp_v8 = (unsigned int)*(unsigned short *)((int)&temp_v8 + temp_v2 * 2);
       }
       return temp_v8;

@@ -10,7 +10,7 @@ int FUN_003fd63c(unsigned int, int);
 
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_003a249c. */
-extern short *FUN_003bf840(int);
+extern short *dataTable49GetEntry(int);
 /* Supplied declaration required: FUN_003cb930. */
 /* Supplied declaration required: FUN_003fd63c. */
 
@@ -29,7 +29,7 @@ unsigned int FUN_003b961c(int param_1,int param_2)
   temp_v2 = 0;
   if (temp_v2 < temp_v0) {
     do {
-      psVar2 = (short *)FUN_003bf840(temp_v2);
+      psVar2 = (short *)dataTable49GetEntry(temp_v2);
       if (psVar2[1] != -1) {
         if (((*psVar2 == param_1) && (psVar2[1] == param_2)) &&
            ((temp_v1 = FUN_0018719c(*(unsigned int *)(psVar2 + 2)), temp_v1 != 0 &&

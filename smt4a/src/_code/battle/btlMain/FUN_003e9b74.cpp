@@ -50,7 +50,7 @@ extern unsigned char LAB_003e9cb4; /* 0x3e9cb4 */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004d881c. */
-extern unsigned int FUN_004d88c0(void);
+extern unsigned int clearWord(void);
 
 
 void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
@@ -84,7 +84,7 @@ void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
     temp_v1 = 0;
   }
   else {
-    temp_v1 = FUN_004d88c0();
+    temp_v1 = clearWord();
   }
   param_1->field_0x22bc = temp_v1;
   temp_v3 = 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00513f84(unsigned int, unsigned int);
-int FUN_00513ff0(unsigned int, int *);
+int readInnerWord6(unsigned int, int *);
 int FUN_00514018(unsigned int, unsigned int, unsigned int *);
 int FUN_00514088(unsigned int, unsigned int, unsigned int *, int [3], int [3]);
 int FUN_00514284(unsigned int, unsigned int);
@@ -28,7 +28,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_00513f84. */
-/* Supplied declaration required: FUN_00513ff0. */
+/* Supplied declaration required: readInnerWord6. */
 /* Supplied declaration required: FUN_00514018. */
 /* Supplied declaration required: FUN_00514088. */
 /* Supplied declaration required: FUN_00514284. */
@@ -55,7 +55,7 @@ void FUN_004245b4(int param_1)
   int *temp_v11;
   int temp_v12 [3];
   
-  FUN_00513ff0(**(unsigned int **)(param_1 + 0x18),&temp_v9);
+  readInnerWord6(**(unsigned int **)(param_1 + 0x18),&temp_v9);
   temp_v8[0] = 0;
   temp_v8[1] = 0;
   if (temp_v9 != 0) {

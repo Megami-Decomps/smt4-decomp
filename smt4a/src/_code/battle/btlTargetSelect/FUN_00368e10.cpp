@@ -57,7 +57,7 @@ extern unsigned char FUN_0026264c(fn_00368e10_arg1 *);
 extern int FUN_002626e0(void);
 /* Supplied declaration required: FUN_002a1850. */
 extern int FUN_002a4b28(fn_00368e10_arg1 *);
-extern unsigned int FUN_00340c10(unsigned int);
+extern unsigned int obj80Select(unsigned int);
 
 
 void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int param_3,
@@ -177,7 +177,7 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   *(unsigned int *)(temp_v4 + 0x5c) = *param_1;
   *(unsigned int *)(temp_v4 + 0x60) = param_1[1];
   *(unsigned int *)(temp_v4 + 100) = param_1[2];
-  temp_v1 = FUN_00340c10(0);
+  temp_v1 = obj80Select(0);
   FUN_002a1850(&temp_v6,0,temp_v1,temp_v4 + 0x5c);
   temp_v1 = 0xd2;
   *(unsigned int *)(temp_v4 + 0x68) = temp_v6;

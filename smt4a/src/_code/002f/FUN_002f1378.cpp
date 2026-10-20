@@ -5,7 +5,7 @@
 extern "C" {
 
 extern int FUN_002eb530(int);
-extern int FUN_002eb5e8(unsigned int *, unsigned int);
+extern int constructObj00559344(unsigned int *, unsigned int);
 extern int FUN_00300690(void);
 
 
@@ -33,7 +33,7 @@ int FUN_002f1378(int param_1,unsigned char param_2,unsigned int param_3,unsigned
   *(int *)(*(int *)(param_1 + 0x14) + 8) = *(int *)(param_1 + 0x14);
   *(int *)(*(int *)(param_1 + 0x14) + 0xc) = *(int *)(param_1 + 0x14);
   temp_v0 = FUN_002eb530(param_1 + 0x20);
-  temp_v1 = FUN_002eb5e8((unsigned int *)&uStack_18,1);
+  temp_v1 = constructObj00559344((unsigned int *)&uStack_18,1);
   *(unsigned short *)(temp_v0 + 4) = *(unsigned short *)(temp_v1 + 4);
   return temp_v0 - 0x20;
 }

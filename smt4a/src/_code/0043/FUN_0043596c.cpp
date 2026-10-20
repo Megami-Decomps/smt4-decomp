@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004351b8(int *, int **, int [2]);
 int FUN_004387f0(int *, int);
-int FUN_0051553c(int *, int *[2]);
+int variantSetPlain(int *, int *[2]);
 int FUN_00515598(void);
 
 typedef int romwright_code(...);
@@ -25,7 +25,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_004351b8. */
 /* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: FUN_0051553c. */
+/* Supplied declaration required: variantSetPlain. */
 /* Supplied declaration required: FUN_00515598. */
 
 
@@ -96,7 +96,7 @@ int * FUN_0043596c(int *param_1,int *param_2,int *param_3,romwright_code *param_
       *piVar5 = (int)piVar2;
       *(int **)(*piVar2 + 4) = piVar2;
       temp_v4[0] = piVar3;
-      FUN_0051553c(piVar2 + 2,temp_v4);
+      variantSetPlain(piVar2 + 2,temp_v4);
       while (*(char *)(*param_1 + 8) == '\x01') {
         *param_1 = *(int *)(*param_1 + 4);
         temp_v5[0] = (int *)*param_3;
@@ -160,7 +160,7 @@ int * FUN_0043596c(int *param_1,int *param_2,int *param_3,romwright_code *param_
           return (int *)0x2;
         }
         temp_v5[0] = piVar3;
-        FUN_0051553c(piVar2 + 2,temp_v5);
+        variantSetPlain(piVar2 + 2,temp_v5);
       }
       *temp_v11 = (int)piVar3;
     }

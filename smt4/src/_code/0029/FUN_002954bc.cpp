@@ -1,26 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_002954bc_arg0 fn_002954bc_arg0;
-struct fn_002954bc_arg0 {
-    unsigned char pad_0x0[0xe];
-    ushort field_0xe; /* +0xe */
-    ushort field_0x10; /* +0x10 */
-    unsigned char pad_0x12[0x18];
-    undefined2 field_0x2a; /* +0x2a */
-    undefined2 field_0x2c; /* +0x2c */
-};
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0xE];
+    /* 0x0E */ u16 unk0E;
+    /* 0x10 */ u16 unk10;
+    /* 0x12 */ u8 unk12[0x18];
+    /* 0x2A */ u16 unk2A;
+    /* 0x2C */ u16 unk2C;
+} Obj;
 
-
-unsigned char FUN_002954bc(fn_002954bc_arg0 *param_1)
-
+u8 FUN_002954bc(Obj *obj)
 {
-  if (param_1 != (fn_002954bc_arg0 *)0x0) {
-    param_1->field_0x2a = param_1->field_0xe;
-    param_1->field_0x2c = param_1->field_0x10;
-  }
-  return param_1 != (fn_002954bc_arg0 *)0x0;
+    if (obj != NULL) {
+        obj->unk2A = obj->unk0E;
+        obj->unk2C = obj->unk10;
+    }
+    return obj != NULL;
 }
 
 } /* extern "C" */

@@ -1,7 +1,10 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 41 vs built 36 rows, 34 diff lines. */
+/* NON_MATCHING: retail stores the zero components as integer words (str of 0; w is written 0 then 1.0f); the build stores them as float zeros (vstr/vstm) */
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
+
+extern const char DAT_005449b4[];
 
 void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, s32 size);
@@ -10,7 +13,10 @@ void rt_memcpy_w(void *dst, const void *src, s32 size);
 /* Creates a light effect object as a copy of `src`'s parameters. */
 EffAsdLight *effAsdLightCopy(EffAsdLight *src)
 {
-    EffAsdLight *light = (EffAsdLight *)memAlloc(0x10000, 0x100, 0, 288, 0x10, 1);
+    EffAsdLight *light;
+
+    asdDebugTrace(DAT_005449b4, 55);
+    light = (EffAsdLight *)memAlloc(0x10000, 0x100, 0, 288, 0x10, 1);
 
     sysMemClear(light, 288);
     light->rotation0.x = 0;

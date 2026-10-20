@@ -23,7 +23,7 @@ extern unsigned char g_flagBlock; /* 0x594958 */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002fe9ea. */
-extern int FUN_002fe9f2(int *, int *);
+extern int wordRefsDiffer_002fe9f2(int *, int *);
 /* Supplied declaration required: FUN_002fea02. */
 
 
@@ -47,14 +47,14 @@ void FUN_00113de4(int param_1,int param_2)
     FUN_002e6e34(temp_v3,param_1 + 0x18);
     temp_v2 = *(int *)(param_1 + 8);
     piVar2 = (int *)(param_1 + 0x10);
-    while (temp_v0 = FUN_002fe9f2(&temp_v2,piVar2), temp_v0 != 0) {
+    while (temp_v0 = wordRefsDiffer_002fe9f2(&temp_v2,piVar2), temp_v0 != 0) {
       temp_v4[0] = temp_v2;
       temp_v0 = *piVar2;
       while ((temp_v4[0] != temp_v0 && (temp_v4[0] != temp_v6))) {
         FUN_002fe9ea(temp_v4);
       }
       temp_v2 = temp_v4[0];
-      temp_v0 = FUN_002fe9f2(&temp_v2,piVar2);
+      temp_v0 = wordRefsDiffer_002fe9f2(&temp_v2,piVar2);
       if (temp_v0 != 0) {
         temp_v1 = temp_v2;
         FUN_002fea02(&temp_v5,param_1 + 4,&temp_v1);

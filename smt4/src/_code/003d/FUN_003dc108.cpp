@@ -1,18 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_00324bb8(unsigned int, unsigned int, unsigned char, unsigned int);
+extern u32 FUN_00324bb8(u32 a, u32 b, u8 flag, u32 c);
 
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x1CFC];
+    /* 0x1CFC */ u32 result;
+} Obj;
 
-void FUN_003dc108(int param_1,unsigned int param_2,unsigned int param_3,int param_4,unsigned int param_5)
-
+void FUN_003dc108(Obj *obj, u32 b, u32 a, int flag, u32 c)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_00324bb8(param_3,param_2,param_4 != 0,param_5);
-  *(unsigned int *)(param_1 + 0x1cfc) = temp_v0;
-  return;
+    obj->result = FUN_00324bb8(a, b, flag != 0, c);
 }
 
 } /* extern "C" */

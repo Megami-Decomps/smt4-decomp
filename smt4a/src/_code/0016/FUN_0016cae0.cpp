@@ -1,35 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00182540(unsigned int);
+typedef struct Item {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 handle;
+} Item;
 
-/* Supplied declaration required: FUN_00182540. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s32 countA;
+    /* 0x18 */ Item **itemsA;
+    /* 0x1C */ s32 countB;
+    /* 0x20 */ Item **itemsB;
+} Holder;
 
+void FUN_00182540(u32 handle);
 
-void FUN_0016cae0(int param_1)
-
+/* Releases the handle of every item in both lists. */
+void FUN_0016cae0(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  int unaff_r5;
-  int temp_v0;
-  
-  if (*(int *)(param_1 + 0x14) != 0) {
-    unaff_r5 = 0;
-  }
-  if (0 < *(int *)(param_1 + 0x14)) {
-    do {
-      FUN_00182540(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0x18) + unaff_r5 * 4) + 0xc));
-      unaff_r5 = unaff_r5 + 1;
-    } while (unaff_r5 < *(int *)(param_1 + 0x14));
-  }
-  if ((*(int *)(param_1 + 0x1c) != 0) && (temp_v0 = 0, 0 < *(int *)(param_1 + 0x1c))) {
-    do {
-      FUN_00182540(*(unsigned int *)(*(int *)(*(int *)(param_1 + 0x20) + temp_v0 * 4) + 0xc));
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(param_1 + 0x1c));
-  }
-  return;
+    s32 i;
+
+    if (object->countA != 0) {
+        for (i = 0; i < object->countA; i++) {
+            FUN_00182540(object->itemsA[i]->handle);
+        }
+    }
+    if (object->countB != 0) {
+        for (i = 0; i < object->countB; i++) {
+            FUN_00182540(object->itemsB[i]->handle);
+        }
+    }
 }
 
 } /* extern "C" */

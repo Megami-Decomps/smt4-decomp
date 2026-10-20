@@ -417,7 +417,7 @@ extern unsigned int campGetState(void);
 /* Supplied declaration required: FUN_00275dec. */
 /* Supplied declaration required: FUN_00275f00. */
 extern int FUN_00276060(unsigned int);
-extern int FUN_002760fc(int);
+extern int dataTable2fSub0GetRecord(int);
 /* Supplied declaration required: FUN_00276218. */
 /* Supplied declaration required: FUN_00276238. */
 extern int FUN_00276264(void);
@@ -513,7 +513,7 @@ extern int FUN_002b8694(void);
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c09bc(void);
 extern int FUN_002c09d0(unsigned int);
-extern unsigned int FUN_002c09f4(unsigned int);
+extern unsigned int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
@@ -2321,7 +2321,7 @@ LAB_001d6bd0:
       }
     }
     else {
-      temp_v6 = FUN_002760fc((int)*(short *)(temp_v4 + 0x2a));
+      temp_v6 = dataTable2fSub0GetRecord((int)*(short *)(temp_v4 + 0x2a));
       temp_v6 = (int)*(short *)(temp_v6 + 8);
       FUN_0027d5ac(temp_v6);
     }
@@ -3403,7 +3403,7 @@ joined_r0x001d8c24:
         }
         else {
           temp_v15 = romwright_piece_2_2((short)puVar7[0x11],(unsigned short)temp_v15);
-          temp_v8 = FUN_002c09f4(100);
+          temp_v8 = randNextInRange(100);
           if (temp_v8 < 0x4b) {
             temp_v18 = (unsigned int)romwright_piece_3_1((((unsigned int)(temp_v18) >> 8) & 0xffffffU),3);
           }

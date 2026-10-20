@@ -1,18 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard003C.h"
 
 extern "C" {
 
-int FUN_003c4d64(void);
+extern void sub68OwnerCall10(void);
 
-/* Supplied declaration required: FUN_003c4d64. */
-
-
-unsigned int FUN_003c1050(void)
-
+/* Script command: runs sub68OwnerCall10. */
+u32 FUN_003c1050(void)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_003c4d64();
-  return 1;
+    sub68OwnerCall10();
+    return 1;
 }
 
 } /* extern "C" */

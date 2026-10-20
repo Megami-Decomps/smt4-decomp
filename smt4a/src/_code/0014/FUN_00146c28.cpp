@@ -1,18 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00158e6c(int);
+void FUN_00158e6c(u8 *object);
+extern u8 DAT_00643100[];
 
-/* Supplied declaration required: FUN_00158e6c. */
-
-
+/* Calls FUN_00158e6c on the object at 0x643100. */
 void FUN_00146c28(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00158e6c(0x643100);
-  return;
+    FUN_00158e6c(DAT_00643100);
 }
 
 } /* extern "C" */

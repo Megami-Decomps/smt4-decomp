@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
 
-extern int DAT_0044cdf0; /* 0x44cdf0 */
-
-
-unsigned int NaviMain_GetCurrentMap(void)
-
+u32 NaviMain_GetCurrentMap(void)
 {
-  return *(unsigned int *)(DAT_0044cdf0 + 0x28);
+    return DAT_0044cdf0->currentMap;
 }
 
 } /* extern "C" */

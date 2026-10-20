@@ -33,7 +33,7 @@ extern unsigned char LAB_0021dea0; /* 0x21dea0 */
 /* Supplied declaration required: FUN_0024f24c. */
 /* Supplied declaration required: FUN_0025663c. */
 extern int FUN_002c09d0(void);
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern int FUN_002c2950(void);
 extern int FUN_00323538(void);
 
@@ -85,7 +85,7 @@ void FUN_0021dbc0(int param_1,int param_2,int param_3)
           if (*(short *)(pcVar2 + 0x10) != 0) {
             temp_v2 = FUN_002c09d0();
             if (temp_v2 != 0) {
-              temp_v2 = FUN_002c09f4(99);
+              temp_v2 = randNextInRange(99);
               if (temp_v2 <= pcVar2[0x13]) {
 LAB_0021dce0:
                 VectorSignedToFloat((int)*(short *)(pcVar2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -103,7 +103,7 @@ LAB_0021dce0:
               }
             }
             else {
-              temp_v2 = FUN_002c09f4(99);
+              temp_v2 = randNextInRange(99);
               if (temp_v2 <= pcVar2[0x12]) {
                 temp_v4 = *(unsigned short *)(pcVar2 + 0x10);
                 goto LAB_0021dce0;
@@ -111,7 +111,7 @@ LAB_0021dce0:
             }
           }
           else {
-            temp_v2 = FUN_002c09f4(99);
+            temp_v2 = randNextInRange(99);
             if (temp_v2 <= pcVar2[0x13]) goto LAB_0021dce0;
           }
         }

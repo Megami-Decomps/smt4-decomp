@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_001ad9b4(void);
-int FUN_0041860c(int);
+int partyEntryBitsBit3(int);
 
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_00418584(int);
-/* Supplied declaration required: FUN_0041860c. */
+extern int partyEntryFlagsBit3(int);
+/* Supplied declaration required: partyEntryBitsBit3. */
 
 
 void FUN_003dedf0(int param_1)
@@ -25,9 +25,9 @@ void FUN_003dedf0(int param_1)
   if (temp_v1 != 0) {
     temp_v0 = *(short *)(temp_v1 + 0xde);
   }
-  if (((temp_v1 != 0 && temp_v0 != 0) && (temp_v1 = FUN_00418584(param_1), temp_v1 != 0)) &&
+  if (((temp_v1 != 0 && temp_v0 != 0) && (temp_v1 = partyEntryFlagsBit3(param_1), temp_v1 != 0)) &&
      (temp_v1 = param_1, FUN_001ad9b4(), temp_v1 != 0)) {
-    FUN_0041860c(param_1);
+    partyEntryBitsBit3(param_1);
   }
   return;
 }

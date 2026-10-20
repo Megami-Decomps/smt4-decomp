@@ -1,19 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00167ce8` (_code @ 0x167ce8, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int jobGetWork(void);
+typedef struct JobWorkValue {
+    /* 0x00 */ u8 unk00[0xb8];
+    /* 0xB8 */ s8 value;
+} JobWorkValue;
 
+extern JobWorkValue *jobGetWork(void);
 
-int FUN_00167ce8(void)
-
+/* Returns the signed byte at +0xB8 of the current job's work area. */
+s8 FUN_00167ce8(void)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  return (int)*(char *)(temp_v0 + 0xb8);
+    return jobGetWork()->value;
 }
 
 } /* extern "C" */

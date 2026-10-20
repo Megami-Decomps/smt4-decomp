@@ -1,7 +1,7 @@
 #include "common.h"
 
 /* The object whose vtable is at 0x558be0 (named after it until its real name is known). Its
- * destructor (FUN_002f3084) calls stop() first, then destroys three members and its base. */
+ * destructor (destroyObj00558be8) calls stop() first, then destroys three members and its base. */
 class Child {
 public:
     virtual void unk00();

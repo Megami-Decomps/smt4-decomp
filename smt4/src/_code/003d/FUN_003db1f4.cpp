@@ -1,32 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002adee0(unsigned int);
+extern int FUN_002adee0(u32 handle);
 
-
-unsigned int FUN_003db1f4(int param_1,int param_2)
+/* 1 when every pending entry (flag 2) of the 0x32 slots at +400 has finished; marks them with flag 4. */
+u32 FUN_003db1f4(int base, int mode)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int *p;
-  
-  if (param_2 != 0 && param_2 != 0x16) {
-    temp_v2 = 0;
-    do {
-      temp_v0 = param_1 + temp_v2 * 0x28;
-      p = (unsigned int *)(temp_v0 + 400);
-      if ((p[9] & 2) != 0) {
-        temp_v1 = FUN_002adee0(*p);
-        if (temp_v1 == 0) {
-          return 0;
-        }
-        p[9] = p[9] | 4;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x32);
-  }
-  return 1;
+    int i;
+    u32 *entry;
+
+    if (mode != 0 && mode != 0x16) {
+        i = 0;
+        do {
+            entry = (u32 *)(base + i * 0x28 + 400);
+            if ((entry[9] & 2) != 0) {
+                if (FUN_002adee0(*entry) == 0) {
+                    return 0;
+                }
+                entry[9] = entry[9] | 4;
+            }
+            i = i + 1;
+        } while (i < 0x32);
+    }
+    return 1;
 }
+
 } /* extern "C" */

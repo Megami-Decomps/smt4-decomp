@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard0036.h"
 
 extern "C" {
 
-extern int DAT_0057f118; /* 0x57f118 */
+extern StateAtF4 *DAT_0057f118;
 
-
-void FUN_0036cf98(unsigned char param_1)
-
+void FUN_0036cf98(u8 value)
 {
-  if (DAT_0057f118 != 0) {
-    *(unsigned char *)(DAT_0057f118 + 0x189) = param_1;
-  }
-  return;
+    if (DAT_0057f118 != NULL) {
+        DAT_0057f118->unk189 = value;
+    }
 }
 
 } /* extern "C" */

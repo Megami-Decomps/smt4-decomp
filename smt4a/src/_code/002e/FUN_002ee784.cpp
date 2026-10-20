@@ -1,20 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e98d4(int);
+void FUN_002e98d4(s32 value);
 
-/* Supplied declaration required: FUN_002e98d4. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 inlineData[1];
+} Holder;
 
-
-void FUN_002ee784(int param_1,int param_2)
-
+/* Releases `data` through FUN_002e98d4 unless it is the holder's inline storage at 0x10. */
+void FUN_002ee784(Holder *holder, s32 data)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_2 != param_1 + 0x10) {
-    FUN_002e98d4(param_2);
-  }
-  return;
+    if (data != (s32)holder + 0x10) {
+        FUN_002e98d4(data);
+    }
 }
 
 } /* extern "C" */

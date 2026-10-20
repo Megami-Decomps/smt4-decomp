@@ -1,20 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00123860(unsigned int, unsigned char [260]);
+void FUN_00123860(u32 value, u8 *buffer);
 
-/* Supplied declaration required: FUN_00123860. */
-
-
-void FUN_002f3524(unsigned int param_1)
-
+/* Calls FUN_00123860 with a 260-byte scratch buffer. */
+void FUN_002f3524(u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0 [260];
-  
-  FUN_00123860(param_1,temp_v0);
-  return;
+    u8 buffer[260];
+
+    FUN_00123860(value, buffer);
 }
 
 } /* extern "C" */

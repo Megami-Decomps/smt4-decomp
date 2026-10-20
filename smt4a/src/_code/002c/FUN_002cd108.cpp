@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x38B7];
+    /* 0x38B7 */ u8 value;
+} Holder;
 
-void FUN_002cd108(int param_1,unsigned char param_2)
-
+/* Stores `value` in the u8 at 0x38B7. */
+void FUN_002cd108(Holder *object, u8 value)
 {
-  *(unsigned char *)(param_1 + 0x38b7) = param_2;
-  return;
+    object->value = value;
 }
 
 } /* extern "C" */

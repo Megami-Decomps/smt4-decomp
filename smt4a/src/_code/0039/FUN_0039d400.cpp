@@ -1,25 +1,16 @@
-#include "romwright_types.h"
+#include "shard/Shard0039.h"
 
 extern "C" {
 
-int btlGetMainState(void);
-int scrSetResult(int);
+extern void *btlGetMainState(void);
+extern s32 FUN_003ec7b0(void *state);
+extern void scrSetResult(s32 value);
 
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: scrSetResult. */
-extern int FUN_003ec7b0(void);
-
-
-unsigned int FUN_0039d400(void)
-
+/* Script command: result is whether FUN_003ec7b0 accepts the battle state. */
+u32 FUN_0039d400(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  btlGetMainState();
-  temp_v0 = FUN_003ec7b0();
-  scrSetResult(temp_v0 != 0);
-  return 1;
+    scrSetResult(FUN_003ec7b0(btlGetMainState()) != 0);
+    return 1;
 }
 
 } /* extern "C" */

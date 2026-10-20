@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002fd0f4(unsigned int);
+void FUN_002fd0f4(u32 value);
 
-/* Supplied declaration required: FUN_002fd0f4. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x1C8];
+    /* 0x1C8 */ u32 value;
+} Holder;
 
-
-void FUN_00122d28(int param_1)
-
+/* Passes the word at 0x1C8 to FUN_002fd0f4. */
+void FUN_00122d28(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002fd0f4(*(unsigned int *)(param_1 + 0x1c8));
-  return;
+    FUN_002fd0f4(object->value);
 }
 
 } /* extern "C" */

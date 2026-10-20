@@ -20,7 +20,7 @@ int FUN_0026beb4(int, unsigned int *, int, unsigned int, int);
 int memClear(unsigned int *, int);
 int FUN_003c0484(...);
 int FUN_003cf884(int *, unsigned int *, unsigned int);
-int FUN_003d9f54(unsigned int);
+int memClearTwo200(unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -53,7 +53,7 @@ extern int FUN_00293230(int);
 extern int FUN_003af0fc(int);
 /* Supplied declaration required: FUN_003c0484. */
 /* Supplied declaration required: FUN_003cf884. */
-/* Supplied declaration required: FUN_003d9f54. */
+/* Supplied declaration required: memClearTwo200. */
 
 
 unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
@@ -102,7 +102,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
     *puVar10 = temp_v5 & 0x1fffffff;
     puVar10[1] = 0;
   } while (temp_v7 < 0x6d);
-  FUN_003d9f54(DAT_00435d18);
+  memClearTwo200(DAT_00435d18);
   *(unsigned short *)(param_2[10] + 0x14c) = 0;
   *(unsigned short *)(param_2[10] + 0x14e) = 0;
   *(unsigned int *)(param_2[8] + 0xc0) = 0;

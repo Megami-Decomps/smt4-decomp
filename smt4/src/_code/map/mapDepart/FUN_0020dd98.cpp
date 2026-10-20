@@ -84,7 +84,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002ba1e0. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: mapIfDrawBackground. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -169,7 +169,7 @@ void FUN_0020dd98(void)
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
   temp_v1 = g_titleScene;
-  temp_v0 = FUN_002c5da8(6,1,0);
+  temp_v0 = packNibblesAndByte(6,1,0);
   piVar8 = (int *)(temp_v1 + 0x12ac);
   temp_v2 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = temp_v0;
@@ -379,7 +379,7 @@ void FUN_0020dd98(void)
     } while (temp_v5 < 4);
   }
   temp_v5 = g_titleScene;
-  temp_v1 = FUN_002c5da8(6,7,0);
+  temp_v1 = packNibblesAndByte(6,7,0);
   piVar8 = (int *)(temp_v5 + 0x12ac);
   temp_v0 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = temp_v1;

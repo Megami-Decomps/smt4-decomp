@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002ff3c8(void **);
-int FUN_00309776(...);
-int FUN_003097a8(...);
+int rbTreeRotateRight_00309776(...);
+int rbTreeRotateLeft_003097a8(...);
 
 typedef struct fn_002ff0ea_arg1 fn_002ff0ea_arg1;
 struct fn_002ff0ea_arg1 {
@@ -24,10 +24,10 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int FUN_002ff370(void **, void **);
+extern int wordRefsEqual_002ff370(void **, void **);
 /* Supplied declaration required: FUN_002ff3c8. */
-/* Supplied declaration required: FUN_00309776. */
-/* Supplied declaration required: FUN_003097a8. */
+/* Supplied declaration required: rbTreeRotateRight_00309776. */
+/* Supplied declaration required: rbTreeRotateLeft_003097a8. */
 
 
 void FUN_002ff0ea(unsigned int *param_1,fn_002ff0ea_arg1 *param_2,unsigned int *param_3)
@@ -52,7 +52,7 @@ void FUN_002ff0ea(unsigned int *param_1,fn_002ff0ea_arg1 *param_2,unsigned int *
   temp_v4 = param_1;
   pfStack_1c = param_2;
   puStack_18 = param_3;
-  temp_v1 = FUN_002ff370(&temp_v2,&temp_v3);
+  temp_v1 = wordRefsEqual_002ff370(&temp_v2,&temp_v3);
   if (temp_v1 != 0) {
     temp_v2 = param_2->field_0x10;
     *temp_v4 = (unsigned int)temp_v2;
@@ -195,7 +195,7 @@ LAB_002ff170:
         if (*pcVar6 == '\0') {
           *pcVar6 = '\x01';
           **(unsigned char **)(pcVar5 + 4) = 0;
-          FUN_00309776(param_2,*(unsigned int *)(pcVar5 + 4));
+          rbTreeRotateRight_00309776(param_2,*(unsigned int *)(pcVar5 + 4));
           pcVar3 = *(char **)(pcVar5 + 4);
           pcVar6 = *(char **)(pcVar3 + 8);
           if (pcVar6 == (char *)0x0) {
@@ -212,7 +212,7 @@ LAB_002ff170:
               *pcVar3 = '\x01';
             }
             *pcVar6 = '\0';
-            FUN_003097a8(param_2);
+            rbTreeRotateLeft_003097a8(param_2);
             pcVar6 = *(char **)(*(int *)(pcVar5 + 4) + 8);
             if (pcVar6 == (char *)0x0) {
               *pcVar5 = '\x01';
@@ -224,7 +224,7 @@ LAB_002ff170:
           if (*(unsigned char **)(pcVar6 + 8) != (unsigned char *)0x0) {
             **(unsigned char **)(pcVar6 + 8) = 1;
           }
-          FUN_00309776(param_2,*(unsigned int *)(pcVar5 + 4));
+          rbTreeRotateRight_00309776(param_2,*(unsigned int *)(pcVar5 + 4));
           *pcVar5 = '\x01';
           break;
         }
@@ -237,7 +237,7 @@ LAB_002ff170:
         if (*pcVar6 == '\0') {
           *pcVar6 = '\x01';
           **(unsigned char **)(pcVar5 + 4) = 0;
-          FUN_003097a8(param_2,*(unsigned int *)(pcVar5 + 4));
+          rbTreeRotateLeft_003097a8(param_2,*(unsigned int *)(pcVar5 + 4));
           pcVar3 = *(char **)(pcVar5 + 4);
           pcVar6 = *(char **)(pcVar3 + 0xc);
           if (pcVar6 == (char *)0x0) {
@@ -254,7 +254,7 @@ LAB_002ff170:
               *pcVar3 = '\x01';
             }
             *pcVar6 = '\0';
-            FUN_00309776(param_2);
+            rbTreeRotateRight_00309776(param_2);
             pcVar6 = *(char **)(*(int *)(pcVar5 + 4) + 0xc);
             if (pcVar6 == (char *)0x0) {
               *pcVar5 = '\x01';
@@ -266,7 +266,7 @@ LAB_002ff170:
           if (*(unsigned char **)(pcVar6 + 0xc) != (unsigned char *)0x0) {
             **(unsigned char **)(pcVar6 + 0xc) = 1;
           }
-          FUN_003097a8(param_2,*(unsigned int *)(pcVar5 + 4));
+          rbTreeRotateLeft_003097a8(param_2,*(unsigned int *)(pcVar5 + 4));
           *pcVar5 = '\x01';
           break;
         }

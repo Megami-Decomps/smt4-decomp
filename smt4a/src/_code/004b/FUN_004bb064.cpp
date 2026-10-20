@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bb064` (_code @ 0x4bb064, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 
-int FUN_004cfeb0(int, int, unsigned int, int, int, int);
-int FUN_004d05c4(int, int, int, int);
+typedef struct Widget {
+    u8 unk00[0x0d];
+    u8 shown;     /* 0x0d */
+    u8 unk0e[0x66];
+    u8 sub[0x10]; /* 0x74 */
+    u8 subOn;     /* 0x84 */
+    u8 unk85[0x763];
+    int param;    /* 0x7e8 */
+} Widget;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+extern int FUN_004cfeb0(Widget *w, int a, int param, int b, int c, int d);
+extern int FUN_004d05c4(void *sub, int a, int b, int c);
 
-/* Supplied declaration required: FUN_004cfeb0. */
-/* Supplied declaration required: FUN_004d05c4. */
-
-
-void FUN_004bb064(int param_1)
-
+void FUN_004bb064(Widget *w)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_004cfeb0(param_1,10,*(unsigned int *)(param_1 + 0x7e8),0,1,1);
-  *(unsigned char *)(param_1 + 0xd) = 1;
-  FUN_004d05c4(param_1 + 0x74,0x1f,5,10);
-  *(unsigned char *)(param_1 + 0x84) = 1;
-  return;
+    FUN_004cfeb0(w, 10, w->param, 0, 1, 1);
+    asdDebugHookPtrInt(w, 1);
+    w->shown = 1;
+    FUN_004d05c4(w->sub, 0x1f, 5, 10);
+    w->subOn = 1;
 }
 
 } /* extern "C" */

@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0036.h"
 
 extern "C" {
 
-extern unsigned char DAT_0059dbc0; /* 0x59dbc0 */
+extern Obj80Ref DAT_0059dbc0;
 
-
-void FUN_0036b824(unsigned int param_1)
-
+void FUN_0036b824(u32 value)
 {
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0059dbc0 + 0x4)) + 0x80) = param_1;
-  return;
+    DAT_0059dbc0.instance->unk80 = value;
 }
 
 } /* extern "C" */

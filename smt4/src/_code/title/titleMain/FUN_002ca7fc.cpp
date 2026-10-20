@@ -36,7 +36,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 unsigned int FUN_002ca7fc(void)
@@ -61,7 +61,7 @@ unsigned int FUN_002ca7fc(void)
   if (*(char *)(g_titleMain + 0x10) == '\0') {
     FUN_002c39a4(g_titleScene);
     temp_v2 = g_titleScene;
-    temp_v1 = FUN_002c5da8(6,1,0);
+    temp_v1 = packNibblesAndByte(6,1,0);
     piVar7 = (int *)(temp_v2 + 0x12ac);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00100388(unsigned char [128], unsigned int, unsigned int);
 int FUN_0019de98(...);
-int FUN_003599e8(int, int, int);
+int screenSetColor670(int, int, int);
 int requestSubmitScrLookup(unsigned int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_003599e8. */
+/* Supplied declaration required: screenSetColor670. */
 /* Supplied declaration required: requestSubmitScrLookup. */
 
 
@@ -60,7 +60,7 @@ void FUN_002cb438(int param_1,int param_2,int param_3)
   if (param_2 == 9) {
     FUN_00100388(temp_v1,temp_v0,*(unsigned int *)(param_1 + 0x38a0));
     FUN_0019de98(temp_v1,0xf4f4f4ff);
-    FUN_003599e8(0x48c722ff,1,0x12);
+    screenSetColor670(0x48c722ff,1,0x12);
     return;
   }
   FUN_0019de98();

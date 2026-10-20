@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002e6e14(void);
-int FUN_002f33ac(...);
-int FUN_00307860(unsigned int, int *);
+int vectorCount4_002f33ac(...);
+int vectorGrowCapacity_00307860(unsigned int, int *);
 int FUN_00307872(...);
 int FUN_00307888(...);
 
@@ -19,8 +19,8 @@ typedef struct {
 
 extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
-/* Supplied declaration required: FUN_002f33ac. */
-/* Supplied declaration required: FUN_00307860. */
+/* Supplied declaration required: vectorCount4_002f33ac. */
+/* Supplied declaration required: vectorGrowCapacity_00307860. */
 /* Supplied declaration required: FUN_00307872. */
 /* Supplied declaration required: FUN_00307888. */
 
@@ -40,7 +40,7 @@ void FUN_001346ee(int *param_1,unsigned int *param_2,int param_3,unsigned int *p
   unsigned int *puVar9;
   
   if (param_3 != 0) {
-    temp_v0 = FUN_002f33ac();
+    temp_v0 = vectorCount4_002f33ac();
     if ((unsigned int)((param_1[2] - *param_1) >> 2) >= (unsigned int)(temp_v0 + param_3)) {
       puVar8 = (unsigned int *)param_1[1];
       puVar2 = param_2 + param_3;
@@ -66,23 +66,23 @@ void FUN_001346ee(int *param_1,unsigned int *param_2,int param_3,unsigned int *p
       }
     }
     else {
-      temp_v0 = FUN_002f33ac(param_1);
-      temp_v1 = FUN_002f33ac(param_1);
-      temp_v2 = FUN_00307860(temp_v1,param_1);
+      temp_v0 = vectorCount4_002f33ac(param_1);
+      temp_v1 = vectorCount4_002f33ac(param_1);
+      temp_v2 = vectorGrowCapacity_00307860(temp_v1,param_1);
       if (temp_v2 < (unsigned int)(temp_v0 + param_3)) {
-        temp_v0 = FUN_002f33ac(param_1);
+        temp_v0 = vectorCount4_002f33ac(param_1);
         temp_v0 = temp_v0 + param_3;
       }
       else {
-        temp_v1 = FUN_002f33ac(param_1);
-        temp_v0 = FUN_00307860(temp_v1,param_1);
+        temp_v1 = vectorCount4_002f33ac(param_1);
+        temp_v0 = vectorGrowCapacity_00307860(temp_v1,param_1);
       }
       temp_v3 = rt_malloc();
       FUN_00307888(*param_1,param_2,temp_v3,param_1);
       FUN_00307872((((int)param_2 - *param_1) & 0xfffffffcU) + temp_v3,param_3,param_4,param_1);
       FUN_00307888(param_2,param_1[1],((((int)param_2 - *param_1) >> 2) + param_3) * 4 + temp_v3,
                    param_1);
-      temp_v4 = FUN_002f33ac(param_1);
+      temp_v4 = vectorCount4_002f33ac(param_1);
       for (temp_v5 = *param_1; temp_v5 != param_1[1]; temp_v5 = temp_v5 + 4) {
       }
       FUN_002e6e14();

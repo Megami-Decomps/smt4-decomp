@@ -1,18 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043da28;
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x496];
+    /* 0x496 */ struct { u16 value; u16 pad; } entries[6];
+} Obj;
 
+extern struct {
+    u8 unk0[4];
+    Obj *obj;
+} DAT_0043da28;
 
-unsigned short FUN_002d6624(unsigned int param_1)
-
+u16 FUN_002d6624(u32 index)
 {
-  int base = *(int *)((unsigned char *)&DAT_0043da28 + 0x4);
-  if ((base != 0) && (param_1 < 6)) {
-    return *(unsigned short *)(base + 0x400 + param_1 * 4 + 0x96);
-  }
-  return 0;
+    Obj *obj = DAT_0043da28.obj;
+
+    if ((obj != NULL) && (index < 6)) {
+        return obj->entries[index].value;
+    }
+    return 0;
 }
 
 } /* extern "C" */

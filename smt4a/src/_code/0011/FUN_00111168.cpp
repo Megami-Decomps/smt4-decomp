@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e7908. */
-extern int *FUN_002ed2a2(unsigned int *, unsigned char *);
+extern int *wordRefMin(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_002fc056. */
 /* Supplied declaration required: FUN_002fc088. */
 
@@ -63,7 +63,7 @@ void FUN_00111168(int *param_1,int param_2,unsigned int param_3,int *param_4)
       return;
     }
     temp_v5 = *(unsigned int *)(*(int *)(param_2 + 0x109c) + 0x18);
-    piVar1 = (int *)FUN_002ed2a2((unsigned int *)&temp_v5,&uStack00000000);
+    piVar1 = (int *)wordRefMin((unsigned int *)&temp_v5,&uStack00000000);
     temp_v1 = *piVar1;
     *param_4 = temp_v1;
     if (temp_v1 != 0) {

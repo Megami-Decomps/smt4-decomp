@@ -1,15 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Sys43e0b8.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043e0b8; /* 0x43e0b8 */
-
-
-void FUN_002897d0(unsigned char param_1)
-
+void FUN_002897d0(u8 value)
 {
-  (*(unsigned char *)((unsigned char *)&DAT_0043e0b8 + 0x2)) = param_1;
-  return;
+    DAT_0043e0b8.unk02 = value;
 }
 
 } /* extern "C" */

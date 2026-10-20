@@ -7,7 +7,7 @@ extern "C" {
 int jobStop(unsigned int, int);
 int FUN_00280328(unsigned int, int, int);
 int FUN_002ea508(unsigned int, unsigned char *);
-int FUN_00317464(...);
+int asdListBoxSetIntItem(...);
 int FUN_00317508(unsigned int, int);
 int asdListBoxAddItems(void);
 int FUN_00340edc(...);
@@ -26,7 +26,7 @@ extern unsigned int DAT_00571140; /* 0x571140 */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
-/* Supplied declaration required: FUN_00317464. */
+/* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: FUN_00317508. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_00340edc. */
@@ -62,8 +62,8 @@ void FUN_004d352c(int param_1,int param_2)
     FUN_00340edc(*(unsigned int *)(param_1 + 0x10),5,0,100);
     FUN_00340edc(*(unsigned int *)(param_1 + 0x10),6,0xfffffffd,3);
     temp_v2 = FUN_004d8688(*(unsigned int *)(temp_v0 + 0x1bc));
-    FUN_00317464(*(unsigned int *)(param_1 + 0x10),0,*(unsigned int *)(temp_v0 + 0x1c0),0,temp_v2 - 1,0);
-    FUN_00317464(*(unsigned int *)(param_1 + 0x10),1,0,0,0x2a,0);
+    asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0,*(unsigned int *)(temp_v0 + 0x1c0),0,temp_v2 - 1,0);
+    asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),1,0,0,0x2a,0);
   }
   else {
     FUN_00340edc(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);
@@ -71,12 +71,12 @@ void FUN_004d352c(int param_1,int param_2)
     FUN_00340edc(*(unsigned int *)(param_1 + 0x10),4,0xfffffc19,999);
     FUN_00340edc(*(unsigned int *)(param_1 + 0x10),5,0,100);
     FUN_00340edc(*(unsigned int *)(param_1 + 0x10),6,0xfffffff6,10);
-    FUN_00317464(*(unsigned int *)(param_1 + 0x10),0,0,0,0x20,0);
-    FUN_00317464(*(unsigned int *)(param_1 + 0x10),1,0,0,0x2a,0);
+    asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0,0,0,0x20,0);
+    asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),1,0,0,0x2a,0);
   }
   FUN_00340edc(*(unsigned int *)(param_1 + 0x10),7,0,100);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),8,DAT_00571140,0,0xff,0);
-  FUN_00317464(*(unsigned int *)(param_1 + 0x10),9,0,0,1,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,DAT_00571140,0,0xff,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),9,0,0,1,0);
   return;
 }
 

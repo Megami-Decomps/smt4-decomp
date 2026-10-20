@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003d37bc(int, float *, float [2]);
+int pairSourceGet(int, float *, float [2]);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_003d37bc. */
+/* Supplied declaration required: pairSourceGet. */
 
 
 int FUN_00421b7c(int param_1,int param_2)
@@ -32,7 +32,7 @@ int FUN_00421b7c(int param_1,int param_2)
   *(unsigned int *)(param_1 + 0xc) = temp_v0;
   *(unsigned int *)(param_1 + 0x10) = temp_v1;
   if (*(int *)(temp_v2 + 0x48) == 1) {
-    FUN_003d37bc(temp_v2 + 0x114,&temp_v3,temp_v4);
+    pairSourceGet(temp_v2 + 0x114,&temp_v3,temp_v4);
     *(float *)(param_1 + 8) = *(float *)(param_1 + 8) + temp_v3;
     *(float *)(param_1 + 0xc) = *(float *)(param_1 + 0xc) + temp_v4[0];
   }

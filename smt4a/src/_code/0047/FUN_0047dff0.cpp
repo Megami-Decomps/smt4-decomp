@@ -10,7 +10,7 @@ int FUN_00275f44(...);
 int FUN_002804b0(...);
 int FUN_003a36b4(void);
 int FUN_00418070(unsigned int, int);
-int FUN_004da2f8(void);
+int optionsClearFlag1(void);
 
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_00224880(unsigned int);
@@ -19,10 +19,10 @@ extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_003a36b4. */
 /* Supplied declaration required: FUN_00418070. */
-extern int FUN_004185ec(void);
+extern int partyEntryFlagsBit1(void);
 extern unsigned int FUN_004186e0(void);
-extern int FUN_00473244(void);
-/* Supplied declaration required: FUN_004da2f8. */
+extern int gameBlockByte27E98Is1To3(void);
+/* Supplied declaration required: optionsClearFlag1. */
 
 
 unsigned int FUN_0047dff0(unsigned int *param_1)
@@ -63,13 +63,13 @@ unsigned int FUN_0047dff0(unsigned int *param_1)
       return 0;
     }
     temp_v0 = FUN_004186e0();
-    temp_v1 = FUN_004185ec();
+    temp_v1 = partyEntryFlagsBit1();
     if (temp_v1 != 0) {
       FUN_00418070(temp_v0,0);
     }
-    FUN_004da2f8();
+    optionsClearFlag1();
     FUN_003a36b4();
-    temp_v1 = FUN_00473244();
+    temp_v1 = gameBlockByte27E98Is1To3();
     if (temp_v1 == 0) {
       *param_1 = 4;
       break;

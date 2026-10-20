@@ -12,8 +12,8 @@ extern int FUN_00224880(unsigned int);
 extern int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_002f01e0. */
 /* Supplied declaration required: FUN_003343f0. */
-extern unsigned char FUN_003dfd5c(void);
-extern unsigned char FUN_004bd21c(int);
+extern unsigned char countUnlockedSlots(void);
+extern unsigned char getUnlockedSlotCount(int);
 
 
 void FUN_00335510(int param_1)
@@ -51,7 +51,7 @@ void FUN_00335510(int param_1)
           }
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < 8);
-        temp_v1 = FUN_003dfd5c();
+        temp_v1 = countUnlockedSlots();
         FUN_002f01e0(temp_v3 + 0x34,temp_v1);
       }
       else {
@@ -72,7 +72,7 @@ void FUN_00335510(int param_1)
           }
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 8);
-        temp_v1 = FUN_004bd21c(temp_v4);
+        temp_v1 = getUnlockedSlotCount(temp_v4);
         FUN_002f01e0(temp_v4 + 0x34,temp_v1);
       }
       if (*(char *)(param_1 + 0x2580) != '\0') {

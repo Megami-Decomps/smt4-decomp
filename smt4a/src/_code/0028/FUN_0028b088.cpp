@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a4860(...);
-int FUN_00342348(int);
+int screenShowMessage(int);
 int FUN_00359b6c(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ extern int DAT_0057f108; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_00342348. */
+/* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: FUN_00359b6c. */
 
 
@@ -34,14 +34,14 @@ void FUN_0028b088(int param_1)
     temp_v1 = DAT_0057f108 + 0x444;
     temp_v2 = FUN_002a4860();
     temp_v1 = FUN_002a4894(temp_v1);
-    FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2e9c));
+    screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2e9c));
     return;
   }
   if (param_1 < 0x18) {
     if (param_1 == 0xe) {
       temp_v1 = FUN_002a4860(DAT_0057f108 + 0x188);
       temp_v2 = FUN_002a4894(temp_v0 + 0x188);
-      FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2a78));
+      screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2a78));
       return;
     }
     if (param_1 < 0xf) {
@@ -58,13 +58,13 @@ void FUN_0028b088(int param_1)
           if (param_1 == 0xb) {
             temp_v1 = FUN_002a4860(DAT_0057f108 + 0xc0);
             temp_v2 = FUN_002a4894(temp_v0 + 0xc0);
-            FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x21b0));
+            screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x21b0));
             return;
           }
           if (param_1 == 0xd) {
             temp_v1 = FUN_002a4860(DAT_0057f108 + 0x124);
             temp_v2 = FUN_002a4894(temp_v0 + 0x124);
-            FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x22a8));
+            screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x22a8));
             return;
           }
         }
@@ -74,25 +74,25 @@ void FUN_0028b088(int param_1)
       if (param_1 == 0x13) {
         temp_v1 = FUN_002a4860(DAT_0057f108 + 0x2b4);
         temp_v2 = FUN_002a4894(temp_v0 + 0x2b4);
-        FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2b68));
+        screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2b68));
         return;
       }
       if (param_1 == 0x14) {
         temp_v1 = FUN_002a4860(DAT_0057f108 + 0x318);
         temp_v2 = FUN_002a4894(temp_v0 + 0x318);
-        FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2c58));
+        screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2c58));
         return;
       }
       if (param_1 == 0x15) {
         temp_v1 = FUN_002a4860(DAT_0057f108 + 0x37c);
         temp_v2 = FUN_002a4894(temp_v0 + 0x37c);
-        FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2d48));
+        screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2d48));
         return;
       }
       if (param_1 == 0x16) {
         temp_v1 = FUN_002a4860(DAT_0057f108 + 0x3e0);
         temp_v2 = FUN_002a4894(temp_v0 + 0x3e0);
-        FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2dac));
+        screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2dac));
         return;
       }
     }
@@ -101,7 +101,7 @@ void FUN_0028b088(int param_1)
   if (param_1 == 0x4a) {
     temp_v1 = FUN_002a4860(DAT_0057f108 + 0x37c);
     temp_v2 = FUN_002a4894(temp_v0 + 0x37c);
-    FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2d48));
+    screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2d48));
     return;
   }
   if (param_1 < 0x4b) {
@@ -113,18 +113,18 @@ void FUN_0028b088(int param_1)
           }
           temp_v1 = FUN_002a4860(DAT_0057f108 + 0x318);
           temp_v2 = FUN_002a4894(temp_v0 + 0x318);
-          FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2c58));
+          screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2c58));
           return;
         }
         temp_v1 = FUN_002a4860(DAT_0057f108 + 0x2b4);
         temp_v2 = FUN_002a4894(temp_v0 + 0x2b4);
-        FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2b68));
+        screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2b68));
         return;
       }
       temp_v1 = DAT_0057f108 + 0x50c;
       temp_v2 = FUN_002a4860();
       temp_v1 = FUN_002a4894(temp_v1);
-      FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x307c));
+      screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x307c));
       return;
     }
   }
@@ -132,14 +132,14 @@ void FUN_0028b088(int param_1)
     if (param_1 == 0x4b) {
       temp_v1 = FUN_002a4860(DAT_0057f108 + 0x3e0);
       temp_v2 = FUN_002a4894(temp_v0 + 0x3e0);
-      FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2dac));
+      screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v2 + temp_v1) * 2 + 0x2dac));
       return;
     }
     if (param_1 == 0x4c) {
       temp_v1 = DAT_0057f108 + 0x444;
       temp_v2 = FUN_002a4860();
       temp_v1 = FUN_002a4894(temp_v1);
-      FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2e9c));
+      screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2e9c));
       return;
     }
     if (param_1 != 0x4d) {
@@ -149,14 +149,14 @@ void FUN_0028b088(int param_1)
       temp_v1 = DAT_0057f108 + 0x50c;
       temp_v2 = FUN_002a4860();
       temp_v1 = FUN_002a4894(temp_v1);
-      FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x307c));
+      screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x307c));
       return;
     }
   }
   temp_v1 = DAT_0057f108 + 0x4a8;
   temp_v2 = FUN_002a4860();
   temp_v1 = FUN_002a4894(temp_v1);
-  FUN_00342348(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2f8c));
+  screenShowMessage(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v2) * 2 + 0x2f8c));
   return;
 }
 

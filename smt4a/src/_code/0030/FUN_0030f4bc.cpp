@@ -27,7 +27,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e7228. */
 /* Supplied declaration required: FUN_002e75fa. */
-extern int FUN_0030f88a(int *, int);
+extern int wordRefsDiffer_0030f88a(int *, int);
 /* Supplied declaration required: FUN_0030f89a. */
 /* Supplied declaration required: FUN_0030f8a2. */
 
@@ -54,7 +54,7 @@ void FUN_0030f4bc(int param_1,unsigned int param_2)
   puVar3 = &DAT_0062e558;
   iStack_1c = param_1;
   temp_v7 = param_2;
-  while (temp_v1 = FUN_0030f88a(&temp_v2,temp_v6), temp_v0 = temp_v2, temp_v1 != 0) {
+  while (temp_v1 = wordRefsDiffer_0030f88a(&temp_v2,temp_v6), temp_v0 = temp_v2, temp_v1 != 0) {
     FUN_002e75fa(temp_v2);
     FUN_002e7228(temp_v0);
     if (*(char *)(temp_v0 + 0x39) != '\0') {

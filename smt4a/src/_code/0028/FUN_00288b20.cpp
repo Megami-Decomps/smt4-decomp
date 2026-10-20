@@ -13,7 +13,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00185e84(...);
 int FUN_001aba54(void);
-int FUN_0032ff20(...);
+int unitRecordBuild(...);
 int FUN_0035ad50(...);
 int FUN_00389d9c(...);
 int FUN_004bd6b0(...);
@@ -55,7 +55,7 @@ extern int FUN_002a4894(void);
 extern unsigned int FUN_002a6a24(int);
 extern int FUN_002c2c68(int);
 extern int FUN_002c7e3c(void);
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_00389d9c. */
 extern unsigned int FUN_003df57c(int, unsigned int);
@@ -193,7 +193,7 @@ LAB_00288c34:
         rt_memcpy_w(temp_v11,temp_v3,300);
       }
       else {
-        FUN_0032ff20(*(unsigned short *)(temp_v0 + 0x598),temp_v11);
+        unitRecordBuild(*(unsigned short *)(temp_v0 + 0x598),temp_v11);
       }
     }
     else {

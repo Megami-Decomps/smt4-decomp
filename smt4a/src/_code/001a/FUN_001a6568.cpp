@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001008a2(...);
+int libc_strcat(...);
 int FUN_001ad150(void);
 int FUN_001b3008(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
 int FUN_002e342c(...);
@@ -21,7 +21,7 @@ extern unsigned char LAB_001a6728; /* 0x1a6728 */
 extern unsigned char LAB_001b32a4; /* 0x1b32a4 */
 extern unsigned int g_aocDisplay; /* 0x57027c */
 
-/* Supplied declaration required: FUN_001008a2. */
+/* Supplied declaration required: libc_strcat. */
 extern int *FUN_001861c4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad150. */
 extern int FUN_001b2bd8(unsigned int, int, unsigned int, unsigned char *);
@@ -66,16 +66,16 @@ int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_
   FUN_002e342c(temp_v4,*piVar2 + 0xc);
   pcVar5 = *(char **)(temp_v3 + 8);
   if (*pcVar5 != '-') {
-    FUN_001008a2(temp_v4);
+    libc_strcat(temp_v4);
   }
   else {
-    FUN_001008a2(temp_v4,*(unsigned int *)(piVar2[pcVar5[1] * -8 + 0x181] + 8));
+    libc_strcat(temp_v4,*(unsigned int *)(piVar2[pcVar5[1] * -8 + 0x181] + 8));
   }
   if (*(char *)(piVar2[1] + 0xd) != '\0') {
-    FUN_001008a2(temp_v4,&LAB_001a6720);
+    libc_strcat(temp_v4,&LAB_001a6720);
   }
   else {
-    FUN_001008a2(temp_v4,&LAB_001a6728);
+    libc_strcat(temp_v4,&LAB_001a6728);
   }
   temp_v3 = wstrlen(*(unsigned int *)(temp_v3 + 8));
   if (temp_v3 == 0) {

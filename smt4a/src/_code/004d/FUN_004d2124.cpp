@@ -7,10 +7,10 @@ extern "C" {
 int jobStop(...);
 int FUN_00280328(...);
 int FUN_002ea508(...);
-int FUN_00317464(...);
+int asdListBoxSetIntItem(...);
 int FUN_00317508(...);
 int asdListBoxAddItems(...);
-int FUN_0032c450(...);
+int asdListBoxSetToggleItem(...);
 int FUN_003592dc(...);
 
 typedef struct fn_004d2124_arg0 fn_004d2124_arg0;
@@ -50,10 +50,10 @@ extern unsigned int DAT_005716d4; /* 0x5716d4 */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00280328. */
 /* Supplied declaration required: FUN_002ea508. */
-/* Supplied declaration required: FUN_00317464. */
+/* Supplied declaration required: asdListBoxSetIntItem. */
 /* Supplied declaration required: FUN_00317508. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0032c450. */
+/* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: FUN_003592dc. */
 
 
@@ -77,15 +77,15 @@ void FUN_004d2124(fn_004d2124_arg0 *param_1,int param_2)
   FUN_00317508(*(unsigned int *)&param_1->field_0x10,1);
   FUN_002ea508(*(unsigned int *)&param_1->field_0x10,"btl Talk Menu");
   puVar3 = (unsigned int *)(param_2 + 0x45a8);
-  FUN_0032c450(*(unsigned int *)&param_1->field_0x10,0,
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0,
                (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571694) != 0 || (DAT_00571690 & *puVar3) != 0);
-  FUN_0032c450(*(unsigned int *)&param_1->field_0x10,1,
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,1,
                (DAT_0057169c & *(unsigned int *)(param_2 + 0x45ac)) != 0 || (*puVar3 & DAT_00571698) != 0);
-  FUN_00317464(*(unsigned int *)&param_1->field_0x10,2,*(unsigned int *)(param_2 + 0x2364),0,600,0);
-  FUN_0032c450(*(unsigned int *)&param_1->field_0x10,3,
+  asdListBoxSetIntItem(*(unsigned int *)&param_1->field_0x10,2,*(unsigned int *)(param_2 + 0x2364),0,600,0);
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,3,
                (*(unsigned int *)(param_2 + 0x45a4) & DAT_005716c4) != 0 ||
                (*(unsigned int *)(param_2 + 0x45a0) & DAT_005716c0) != 0);
-  FUN_0032c450(*(unsigned int *)&param_1->field_0x10,4,
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,4,
                (DAT_005716d0 & *puVar3) != 0 || (DAT_005716d4 & *(unsigned int *)(param_2 + 0x45ac)) != 0);
   return;
 }

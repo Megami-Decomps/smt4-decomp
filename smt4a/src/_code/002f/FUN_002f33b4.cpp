@@ -29,7 +29,7 @@ extern unsigned char DAT_00558c30; /* 0x558c30 */
 /* Supplied declaration required: FUN_002e6e14. */
 extern int FUN_002e9318(unsigned int *);
 extern int FUN_002eb624(int);
-extern int *FUN_002f32d4(unsigned int *, int);
+extern int *arrayElementAddress_002f32d4(unsigned int *, int);
 /* Supplied declaration required: FUN_002f3474. */
 extern int FUN_002f3490(int);
 
@@ -53,7 +53,7 @@ unsigned long long FUN_002f33b4(unsigned int *param_1,unsigned int param_2,int p
   temp_v3 = param_3;
   uStack_18 = param_4;
   do {
-    piVar1 = (int *)FUN_002f32d4(param_1 + 0x45,temp_v1);
+    piVar1 = (int *)arrayElementAddress_002f32d4(param_1 + 0x45,temp_v1);
     if ((int *)*piVar1 != (int *)0x0) {
       (**(romwright_code **)(*(int *)*piVar1 + 4))();
     }

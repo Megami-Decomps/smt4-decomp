@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 
 
 unsigned char FUN_0047f78c(void)
@@ -12,7 +12,7 @@ unsigned char FUN_0047f78c(void)
 {
   int temp_v0;
   
-  temp_v0 = FUN_001633a0(99);
+  temp_v0 = lcgRandomRange(99);
   return temp_v0 < 10;
 }
 

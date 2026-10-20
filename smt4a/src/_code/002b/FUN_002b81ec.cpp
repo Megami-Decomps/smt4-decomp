@@ -104,7 +104,7 @@ extern int FUN_002e5db4(void);
 extern unsigned int FUN_003d4ed8(unsigned int);
 extern int FUN_003e46f4(unsigned int);
 /* Supplied declaration required: FUN_003e542c. */
-extern int FUN_003e56f0(unsigned int);
+extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_003e5708. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_00408184. */
@@ -652,7 +652,7 @@ void FUN_002b81ec(void)
                     if (temp_v2 != 2) {
                       if (temp_v2 != 3) {
                         if (temp_v2 == 4) {
-                          temp_v2 = FUN_003e56f0(*(unsigned int *)(temp_v5 + 0x1a8));
+                          temp_v2 = linkHolderCheckFirst(*(unsigned int *)(temp_v5 + 0x1a8));
                           temp_v5 = g_lmapScene;
                           g_lmapScene = temp_v5;
                           if (temp_v2 != 0) {
@@ -678,7 +678,7 @@ void FUN_002b81ec(void)
                       }
                     }
                     else {
-                      temp_v2 = FUN_003e56f0(*(unsigned int *)(temp_v5 + 0x1a8));
+                      temp_v2 = linkHolderCheckFirst(*(unsigned int *)(temp_v5 + 0x1a8));
                       temp_v5 = g_lmapScene;
                       if (temp_v2 != 0) {
                         *(unsigned int *)(g_lmapScene + 0x54) = 0x27;
@@ -689,7 +689,7 @@ void FUN_002b81ec(void)
                     }
                   }
                   else {
-                    temp_v2 = FUN_003e56f0(*(unsigned int *)(temp_v5 + 0x1a8));
+                    temp_v2 = linkHolderCheckFirst(*(unsigned int *)(temp_v5 + 0x1a8));
                     temp_v5 = g_lmapScene;
                     if (temp_v2 != 0) {
                       *(unsigned int *)(g_lmapScene + 0x54) = 0x26;
@@ -719,7 +719,7 @@ void FUN_002b81ec(void)
                 if (temp_v2 != 1) {
                   if (temp_v2 != 2) {
                     if (temp_v2 == 3) {
-                      temp_v2 = FUN_003e56f0(*(unsigned int *)(temp_v5 + 0x1a8));
+                      temp_v2 = linkHolderCheckFirst(*(unsigned int *)(temp_v5 + 0x1a8));
                       temp_v5 = g_lmapScene;
                       g_lmapScene = temp_v5;
                       if (temp_v2 != 0) {
@@ -745,7 +745,7 @@ void FUN_002b81ec(void)
                   }
                 }
                 else {
-                  temp_v2 = FUN_003e56f0(*(unsigned int *)(temp_v5 + 0x1a8));
+                  temp_v2 = linkHolderCheckFirst(*(unsigned int *)(temp_v5 + 0x1a8));
                   temp_v5 = g_lmapScene;
                   if (temp_v2 != 0) {
                     *(unsigned int *)(g_lmapScene + 0x54) = 0x27;
@@ -771,7 +771,7 @@ void FUN_002b81ec(void)
           }
           else if (*(int *)(temp_v5 + 0x278) != 0) {
             if (*(int *)(temp_v5 + 0x278) == 1) {
-              temp_v2 = FUN_003e56f0(*(unsigned int *)(temp_v5 + 0x1a8));
+              temp_v2 = linkHolderCheckFirst(*(unsigned int *)(temp_v5 + 0x1a8));
               temp_v5 = g_lmapScene;
               g_lmapScene = temp_v5;
               if (temp_v2 != 0) {

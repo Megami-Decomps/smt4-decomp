@@ -31,7 +31,7 @@ extern int FUN_002fdd80(...); /* 0x2fdd80 */
 extern int FUN_002fdec8(...); /* 0x2fdec8 */
 extern int FUN_00321a98(...); /* 0x321a98 */
 extern int FUN_00321b8c(...); /* 0x321b8c */
-extern int FUN_0034f028(...); /* 0x34f028 */
+extern int kindRefTieBreak(...); /* 0x34f028 */
 extern int FUN_0034f4f0(...); /* 0x34f4f0 */
 extern int FUN_0034f558(...); /* 0x34f558 */
 extern int FUN_0034f678(...); /* 0x34f678 */
@@ -117,7 +117,7 @@ void FUN_003d0bc0(int param_1)
         if ((*pbVar5 & 0x7f) == 0xd) {
           if ((char)*pbVar5 < '\0') {
             temp_v2 = FUN_002c2c68(temp_v3);
-            qsort(temp_v1,temp_v2,8,FUN_0034f028);
+            qsort(temp_v1,temp_v2,8,kindRefTieBreak);
           }
           else {
             temp_v2 = FUN_002c2c68(temp_v3);

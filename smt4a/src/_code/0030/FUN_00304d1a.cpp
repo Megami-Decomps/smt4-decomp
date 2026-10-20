@@ -8,7 +8,7 @@ int FUN_001344c4(int, int, int *);
 int FUN_001345a0(int, unsigned int);
 int FUN_00303698(unsigned int, int *);
 int FUN_0030d02e(int, int);
-int FUN_0030d03c(int *);
+int vectorTeardown_0030d03c(int *);
 int FUN_0030d052(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 extern int FUN_002ed28c(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00303698. */
 /* Supplied declaration required: FUN_0030d02e. */
-/* Supplied declaration required: FUN_0030d03c. */
+/* Supplied declaration required: vectorTeardown_0030d03c. */
 /* Supplied declaration required: FUN_0030d052. */
 
 
@@ -61,7 +61,7 @@ unsigned long long FUN_00304d1a(unsigned int param_1,int param_2,unsigned int pa
       FUN_00303698(param_1,&temp_v3);
       if (*(char *)(param_1 + 4) != '\0') {
         FUN_0030d052();
-        FUN_0030d03c(&temp_v3);
+        vectorTeardown_0030d03c(&temp_v3);
         break;
       }
       temp_v0 = *(int *)(param_2 + 4);
@@ -72,7 +72,7 @@ unsigned long long FUN_00304d1a(unsigned int param_1,int param_2,unsigned int pa
       else {
         FUN_001344c4(param_2,temp_v0,&temp_v3);
       }
-      FUN_0030d03c(&temp_v3);
+      vectorTeardown_0030d03c(&temp_v3);
     }
   }
   return romwright_piece_4_4(temp_v3,temp_v2);

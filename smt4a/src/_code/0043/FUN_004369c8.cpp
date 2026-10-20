@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004352b0(int *, int *);
 int FUN_00437e98(void);
-int FUN_00515568(int, int *, int);
+int variantSetWordB(int, int *, int);
 int FUN_00515618(int *, int);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_004352b0. */
 /* Supplied declaration required: FUN_00437e98. */
 extern int FUN_004386c4(int, unsigned char);
-/* Supplied declaration required: FUN_00515568. */
+/* Supplied declaration required: variantSetWordB. */
 /* Supplied declaration required: FUN_00515618. */
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_004369c8(int *param_1,int *param_2,int *param_3)
     FUN_00515618(&temp_v3,*param_3 + 8);
     if (temp_v3 != 0) {
       temp_v1 = temp_v2;
-      FUN_00515568(temp_v3 + 8,&temp_v1,param_1[5]);
+      variantSetWordB(temp_v3 + 8,&temp_v1,param_1[5]);
       temp_v0 = FUN_004386c4(temp_v3 + 0x10,*(unsigned char *)(*param_1 + 10));
       if (temp_v0 != 0) {
         temp_v0 = temp_v3 + 0x10;

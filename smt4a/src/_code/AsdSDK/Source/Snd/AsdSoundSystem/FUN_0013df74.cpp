@@ -80,7 +80,7 @@ extern int FUN_0015fe30(unsigned char *);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: FUN_002e342c. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern int rt_memcmp(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: nw_snd_Sound3DManager_GetRequiredMemSize. */
 /* Supplied declaration required: nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize. */
@@ -182,7 +182,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
     do {
       FUN_0015e158(temp_v3 * 0x88 + 0x63ea78,&DAT_0063e37c,&DAT_0063ea3c);
       if ((DAT_0063f4c4 != '\0') && (temp_v3 < 0x10)) {
-        if (((DAT_005c4c20 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c20), temp_v0 != 0)) {
+        if (((DAT_005c4c20 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c20), temp_v0 != 0)) {
           g_asdSoundListener = (unsigned int)temp_v4;
           DAT_0064c018 = g_asdSoundListener;
           DAT_0064c01c = g_asdSoundListener;

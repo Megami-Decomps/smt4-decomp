@@ -44,7 +44,7 @@ extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0036fcd0. */
 /* Supplied declaration required: FUN_003e52bc. */
 /* Supplied declaration required: FUN_003fd63c. */
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: FUN_004bd354. */
 
 
@@ -242,7 +242,7 @@ LAB_0037c2b0:
         goto LAB_0037c3fc;
         temp_v9 = temp_v9 + 1;
       } while (temp_v9 < 10);
-      temp_v9 = FUN_004bd340(temp_v8,1);
+      temp_v9 = bitsAt60Test(temp_v8,1);
       if (temp_v9 == 0) {
         temp_v9 = FUN_0017760c(temp_v8);
         temp_v1 = ((short)temp_v9 - *(short *)(temp_v8 + 0xe)) + *(short *)(temp_v8 + 0x2a);

@@ -29,7 +29,7 @@ extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
-extern int FUN_003fcf5c(unsigned int);
+extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
 /* Supplied declaration required: FUN_004ff364. */
 
@@ -58,7 +58,7 @@ unsigned int FUN_00289d8c(fn_00289d8c_arg0 *param_1)
         temp_v2 = 0;
       }
       else {
-        temp_v1 = FUN_003fcf5c(*(unsigned int *)(temp_v0 + 0x34));
+        temp_v1 = nkdwLoaderParse(*(unsigned int *)(temp_v0 + 0x34));
         if (temp_v1 == 0) {
           return 0;
         }

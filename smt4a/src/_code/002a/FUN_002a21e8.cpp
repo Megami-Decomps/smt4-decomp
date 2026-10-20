@@ -1,19 +1,16 @@
-#include "romwright_types.h"
+#include "shard/Block57f0c4.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+s32 FUN_00224880(u32 handle);
 
-extern int FUN_00224880(unsigned int);
-
-
-unsigned char FUN_002a21e8(void)
-
+/* Returns whether FUN_00224880 reports 2 for the record's handle at 0x680. */
+u8 FUN_002a21e8(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00224880(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x680));
-  return temp_v0 == 2;
+    s32 state;
+
+    state = FUN_00224880(DAT_0057f0c4.record->unk680);
+    return state == 2;
 }
 
 } /* extern "C" */

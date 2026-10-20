@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern signed char DAT_00580200; /* 0x580200 */
+extern s8 DAT_00580200;
 
-
-int FUN_001381cc(void)
-
+/* Returns the signed byte at 0x580200. */
+s32 FUN_001381cc(void)
 {
-  return (int)DAT_00580200;
+    return DAT_00580200;
 }
 
 } /* extern "C" */

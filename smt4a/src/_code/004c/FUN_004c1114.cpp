@@ -34,7 +34,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00100388. */
 extern int btlGetMainState(void);
-extern unsigned int FUN_001633a0(unsigned int);
+extern unsigned int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
 extern int FUN_004c52ec(int);
 
@@ -155,7 +155,7 @@ unsigned int FUN_004c1114(unsigned int param_1,int param_2)
         if ((int)temp_v7 == 0) {
           return 0;
         }
-        temp_v2 = FUN_001633a0(99);
+        temp_v2 = lcgRandomRange(99);
         temp_v6 = (float)VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
         if (temp_v5 <= temp_v6) {
           return 0;

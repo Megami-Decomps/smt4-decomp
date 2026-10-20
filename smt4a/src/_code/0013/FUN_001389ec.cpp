@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_005b4000; /* 0x5b4000 */
-
-
-unsigned char FUN_001389ec(int param_1)
-
+/* Stores `value` in the word at 0x10 of the global block at 0x5B4000 unless it is 0; returns whether it was stored. */
+u8 FUN_001389ec(s32 value)
 {
-  if (param_1 != 0) {
-    (*(int *)((unsigned char *)&DAT_005b4000 + 0x10)) = param_1;
-  }
-  return param_1 != 0;
+    if (value != 0) {
+        DAT_005b4000.unk10 = value;
+    }
+    return value != 0;
 }
 
 } /* extern "C" */

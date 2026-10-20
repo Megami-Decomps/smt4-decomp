@@ -9,7 +9,7 @@ int FUN_002e75fa(int);
 int FUN_002e9aa8(int, unsigned int);
 
 typedef int romwright_code(...);
-extern int FUN_00103eda(unsigned int, unsigned int);
+extern int stateTransitionIsValid(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e7232. */
 /* Supplied declaration required: FUN_002e75fa. */
 extern int FUN_002e9a92(unsigned char);
@@ -24,7 +24,7 @@ unsigned int FUN_00103e8e(int param_1,unsigned int param_2)
   
   temp_v0 = FUN_002e9a92(*(unsigned char *)(param_1 + 0x10));
   if (temp_v0 == 0) {
-    if ((*(char *)(param_1 + 0x10) != '\x01') || (temp_v0 = FUN_00103eda(1,param_2), temp_v0 == 0)) {
+    if ((*(char *)(param_1 + 0x10) != '\x01') || (temp_v0 = stateTransitionIsValid(1,param_2), temp_v0 == 0)) {
       return 0;
     }
     FUN_002e75fa(param_1);

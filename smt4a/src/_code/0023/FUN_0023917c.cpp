@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*destroy)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
-void FUN_0023917c(int *param_1)
-
+/* Destroys the object, if there is one. */
+void FUN_0023917c(Object *object)
 {
-/* irregular: 2 native warning(s); review required */
-  if (param_1 != (int *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x0023918c. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(*param_1 + 4))(param_1);
-    return;
-  }
-  return;
+    if (object != NULL) {
+        object->vtbl->destroy(object);
+        return;
+    }
 }
 
 } /* extern "C" */

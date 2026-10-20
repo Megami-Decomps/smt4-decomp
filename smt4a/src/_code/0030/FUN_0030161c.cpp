@@ -1,30 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00115aec(int);
-int FUN_00124034(void);
-int FUN_0030eeb0(int);
+void widthToBucketSize(s32 value);
+s32 FUN_00124034(void);
+s32 FUN_0030eeb0(s32 value);
 
-/* Supplied declaration required: FUN_00115aec. */
-/* Supplied declaration required: FUN_00124034. */
-/* Supplied declaration required: FUN_0030eeb0. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 value;
+} Holder;
 
-
-void FUN_0030161c(int param_1)
-
+/* Passes FUN_00124034's result through FUN_0030eeb0 and, when the word at 0x18 is set, on to widthToBucketSize. */
+void FUN_0030161c(Holder *object)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_00124034();
-  if (*(int *)(param_1 + 0x18) != 0) {
-    temp_v0 = FUN_0030eeb0(temp_v0);
-    FUN_00115aec(temp_v0);
-    return;
-  }
-  FUN_0030eeb0(temp_v0);
-  return;
+    s32 result;
+
+    result = FUN_00124034();
+    if (object->value != 0) {
+        result = FUN_0030eeb0(result);
+        widthToBucketSize(result);
+        return;
+    }
+    FUN_0030eeb0(result);
 }
 
 } /* extern "C" */

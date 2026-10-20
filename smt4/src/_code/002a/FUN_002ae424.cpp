@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_002ae424(int param_1)
-
+/* Whether `code` is in 0xF801-0xF88F. */
+u8 FUN_002ae424(int code)
 {
-  return param_1 - 0xf801U < 0x8f;
+    return code - 0xf801U < 0x8f;
 }
 
 } /* extern "C" */

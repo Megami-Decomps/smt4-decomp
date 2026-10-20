@@ -16,11 +16,11 @@ typedef struct {
 
 extern unsigned char DAT_0055a808; /* 0x55a808 */
 
-extern int *FUN_002e4e86(int *, unsigned int *);
+extern int *wordRefMax(int *, unsigned int *);
 /* Supplied declaration required: FUN_002fd2a4. */
 /* Supplied declaration required: FUN_00311458. */
-extern int FUN_00311470(int *, int, unsigned int);
-extern unsigned int FUN_0031147e(unsigned int, int *);
+extern int allocElements184(int *, int, unsigned int);
+extern unsigned int bufGrowCapacity3(unsigned int, int *);
 extern unsigned int FUN_00311490(unsigned char *);
 
 
@@ -47,10 +47,10 @@ unsigned int * FUN_0011c03c(unsigned int *param_1)
   param_1[4] = 0;
   param_1[5] = 0;
   temp_v4 = 0;
-  temp_v5 = FUN_0031147e(0,piVar4);
-  piVar2 = (int *)FUN_002e4e86(&temp_v4,(unsigned int *)&temp_v5);
+  temp_v5 = bufGrowCapacity3(0,piVar4);
+  piVar2 = (int *)wordRefMax(&temp_v4,(unsigned int *)&temp_v5);
   temp_v3 = *piVar2;
-  temp_v1 = FUN_00311470(piVar4,temp_v3,0);
+  temp_v1 = allocElements184(piVar4,temp_v3,0);
   *piVar4 = temp_v1;
   temp_v6 = temp_v0;
   for (temp_v2 = temp_v4; temp_v2 != 0; temp_v2 = temp_v2 - 1) {

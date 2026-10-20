@@ -11,7 +11,7 @@ typedef int romwright_code(...);
 /* Supplied declaration required: FUN_00150f24. */
 extern int FUN_0037b160(unsigned char);
 /* Supplied declaration required: FUN_0037bcb4. */
-extern int FUN_003e6e9c(unsigned char *, unsigned char *);
+extern int cstmHeaderIsValid(unsigned char *, unsigned char *);
 extern int nw_snd_internal_StreamSoundFileReader_ReadStreamSoundInfo(unsigned int *, unsigned char *);
 extern int nw_snd_internal_StreamSoundFile_FileHeader_GetInfoBlockOffset(unsigned char *);
 extern int nw_snd_internal_StreamSoundFile_FileHeader_GetInfoBlockSize(unsigned char *);
@@ -35,7 +35,7 @@ unsigned int FUN_0037bab8(unsigned int *param_1,unsigned int param_2,unsigned in
   temp_v0 = (**(romwright_code **)(*(int *)*param_1 + 0x24))((int *)*param_1,temp_v6,0x40);
   if (temp_v0 == 0x40) {
     FUN_00150f24(temp_v7);
-    temp_v0 = FUN_003e6e9c(temp_v7,temp_v6);
+    temp_v0 = cstmHeaderIsValid(temp_v7,temp_v6);
     if (temp_v0 != 0) {
       temp_v0 = nw_snd_internal_StreamSoundFile_FileHeader_GetInfoBlockOffset(temp_v6);
       temp_v1 = nw_snd_internal_StreamSoundFile_FileHeader_GetInfoBlockSize(temp_v6);

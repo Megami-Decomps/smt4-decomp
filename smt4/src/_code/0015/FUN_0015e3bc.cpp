@@ -1,16 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015e3bc` (_code @ 0x15e3bc, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+struct VoiceBody;
 
-void FUN_0015e3bc(int param_1,short param_2)
+typedef struct Voice {
+    u8 unk00[0x68];
+    struct VoiceBody *body;        /* 0x68 */
+} Voice;
 
+void FUN_0015e3c4(struct VoiceBody *body, u32 set);
+
+/* Passes the voice's body on to FUN_0015e3c4, the function that follows it. */
+void FUN_0015e3bc(Voice *voice, u32 set)
 {
-  *(unsigned short *)(*(int *)(param_1 + 0x68) + 0x1e) =
-       (*(unsigned short *)(*(int *)(param_1 + 0x68) + 0x1e) & 0xffef) | (param_2 << 4);
-  return;
+    FUN_0015e3c4(voice->body, set);
 }
 
 } /* extern "C" */

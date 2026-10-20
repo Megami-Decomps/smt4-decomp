@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_004af308(void);
-int FUN_004d90dc(int);
+int treeClear(int);
 int FUN_00520b3c(unsigned char [4], unsigned int *, int *, int *);
 int FUN_00521c8c(unsigned int *, int, unsigned int);
 
@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_004af308. */
-/* Supplied declaration required: FUN_004d90dc. */
+/* Supplied declaration required: treeClear. */
 /* Supplied declaration required: FUN_00520b3c. */
 /* Supplied declaration required: FUN_00521c8c. */
 
@@ -35,8 +35,8 @@ int FUN_004afd38(int param_1)
   unsigned char temp_v3 [4];
   
   FUN_004af308();
-  FUN_004d90dc(param_1 + 0x1498);
-  FUN_004d90dc(param_1 + 0x144c);
+  treeClear(param_1 + 0x1498);
+  treeClear(param_1 + 0x144c);
   FUN_00521c8c((unsigned int *)(param_1 + 0x143c),0,*(unsigned int *)(param_1 + 0x1448));
   piVar1 = *(int **)(param_1 + 0x143c);
   (**(romwright_code **)(*piVar1 + 4))(piVar1,*(unsigned int *)(param_1 + 0x1440));

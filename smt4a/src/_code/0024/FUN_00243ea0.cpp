@@ -1,32 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00292268(void);
+void FUN_00292268(void);
+s32 FUN_0018719c(u32 id);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
+typedef struct Global5f0c7c {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 mode;
+} Global5f0c7c;
+extern Global5f0c7c DAT_005f0c7c;
 
-extern unsigned char DAT_005f0c7c; /* 0x5f0c7c */
-
-extern int FUN_0018719c(unsigned int);
-/* Supplied declaration required: FUN_00292268. */
-
-
+/* Runs FUN_00292268 when FUN_0018719c(0x4D0) holds and the mode word is 1. */
 void FUN_00243ea0(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0018719c(0x4d0);
-  if (((temp_v0 != 0) && ((*(int *)((unsigned char *)&DAT_005f0c7c + 0x8)) != 0)) && ((*(int *)((unsigned char *)&DAT_005f0c7c + 0x8)) == 1)) {
-    FUN_00292268();
-    return;
-  }
-  return;
+    s32 flag;
+
+    flag = FUN_0018719c(0x4D0);
+    if (((flag != 0) && (DAT_005f0c7c.mode != 0)) && (DAT_005f0c7c.mode == 1)) {
+        FUN_00292268();
+        return;
+    }
 }
 
 } /* extern "C" */

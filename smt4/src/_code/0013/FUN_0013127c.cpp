@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_0013127c(unsigned int param_1,int param_2)
-
+/* Byte size of `count` entries of 0x60 bytes. */
+s32 FUN_0013127c(u32 unused, s32 count)
 {
-  return param_2 * 0x60;
+    return count * 0x60;
 }
 
 } /* extern "C" */

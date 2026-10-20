@@ -56,7 +56,7 @@ extern unsigned int rt_malloc(void);
 extern int FUN_002e9520(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002ea100. */
 /* Supplied declaration required: FUN_002ed8a0. */
-extern int FUN_002ed902(unsigned int *, int *);
+extern int wordRefsEqual_002ed902(unsigned int *, int *);
 extern int FUN_002ed912(unsigned char *);
 /* Supplied declaration required: FUN_002ed91c. */
 /* Supplied declaration required: FUN_002ed96e. */
@@ -98,7 +98,7 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
       temp_v4 = *(int *)(DAT_005949dc + 0x138);
       temp_v0 = FUN_002ea100(&temp_v6,*(unsigned int *)(temp_v14 + (int)piVar4 * 4));
       FUN_002ed8a0(temp_v8,DAT_005949dc + 0x128,temp_v0);
-      temp_v1 = FUN_002ed902(temp_v8,&temp_v4);
+      temp_v1 = wordRefsEqual_002ed902(temp_v8,&temp_v4);
       FUN_002e9318(&temp_v6);
       if (temp_v1 != 0) goto LAB_001069c6;
     }

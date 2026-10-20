@@ -1,18 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Element {
+    /* 0x00 */ u8 data[0x30];
+} Element;
 
-void FUN_0016bb3c(int *param_1)
+typedef struct Vector {
+    /* 0x00 */ Element *begin;
+    /* 0x04 */ Element *end;
+} Vector;
 
+/* Pulls the end back by the vector's size in elements. */
+void FUN_0016bb3c(Vector *vector)
 {
-  int temp_v0;
-  
-  temp_v0 = param_1[1];
-  if (*param_1 != temp_v0) {
-    param_1[1] = temp_v0 + ((temp_v0 - *param_1) / 0x30) * -0x30;
-  }
-  return;
+    Element *end;
+
+    end = vector->end;
+    if (vector->begin != end) {
+        vector->end = end - (end - vector->begin);
+    }
 }
 
 } /* extern "C" */

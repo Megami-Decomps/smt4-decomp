@@ -34,7 +34,7 @@ extern float DAT_0064c028; /* 0x64c028 */
 extern float DAT_0064c02c; /* 0x64c02c */
 
 /* Supplied declaration required: FUN_001b63b0. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nw_gfx_RenderContext_TransformToViewCoordinate. */
 /* Supplied declaration required: nw_gfx_internal_NWCopyVec4Reverse. */
 
@@ -141,7 +141,7 @@ void FUN_001c9760(int param_1,int param_2,int param_3)
       DAT_005b40e0 = DAT_005b40e0 + 6;
       return;
     }
-    if (((DAT_005c4c24 & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c24), temp_v1 != 0)) {
+    if (((DAT_005c4c24 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c24), temp_v1 != 0)) {
       DAT_0064c020 = temp_v4;
       DAT_0064c024 = temp_v4;
       DAT_0064c028 = temp_v4;

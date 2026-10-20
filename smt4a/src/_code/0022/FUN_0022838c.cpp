@@ -12,10 +12,10 @@ int sysMemClear(int, int);
 int FUN_002e6dd4(int, int);
 int FUN_003339ec(void);
 int FUN_0034c8e8(void);
-int FUN_003fd56c(void);
+int partyFlagRange(void);
 int FUN_003fd6dc(void);
 int FUN_003ff1a8(void);
-int FUN_0040a810(void);
+int tableClearFlags300(void);
 int FUN_004bb880(void);
 int FUN_004cd960(void);
 int rt_memcpy_w(unsigned short *, unsigned short *, int);
@@ -31,10 +31,10 @@ extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 /* Supplied declaration required: FUN_002e6dd4. */
 /* Supplied declaration required: FUN_003339ec. */
 /* Supplied declaration required: FUN_0034c8e8. */
-/* Supplied declaration required: FUN_003fd56c. */
+/* Supplied declaration required: partyFlagRange. */
 /* Supplied declaration required: FUN_003fd6dc. */
 /* Supplied declaration required: FUN_003ff1a8. */
-/* Supplied declaration required: FUN_0040a810. */
+/* Supplied declaration required: tableClearFlags300. */
 /* Supplied declaration required: FUN_004bb880. */
 /* Supplied declaration required: FUN_004cd960. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -325,7 +325,7 @@ void FUN_0022838c(void)
   *(unsigned int *)(temp_v4 + 0x550c) = 0;
   *(unsigned int *)(temp_v4 + 0x5510) = 0;
   *(unsigned int *)(temp_v4 + 0x5514) = 0;
-  FUN_003fd56c();
+  partyFlagRange();
   FUN_002e6340();
   FUN_004bb880();
   FUN_004cd960();
@@ -343,7 +343,7 @@ void FUN_0022838c(void)
   *(unsigned int *)(temp_v4 + 0x28058) = 0;
   *(unsigned int *)(temp_v4 + 0x2805c) = 0;
   FUN_003ff1a8();
-  FUN_0040a810();
+  tableClearFlags300();
   FUN_003fd6dc();
   *(unsigned char *)(DAT_0057f69c + 0x27ec6) = 6;
   return;

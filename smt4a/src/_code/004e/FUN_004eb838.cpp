@@ -10,7 +10,7 @@ extern int g_btlScriptUnit; /* 0x57113c */
 extern int g_btlEvent; /* 0x573898 */
 
 /* Supplied declaration required: FUN_004d7a70. */
-extern int FUN_004d84e8(int);
+extern int isEntryUsable(int);
 
 
 void FUN_004eb838(int *param_1,int param_2)
@@ -20,7 +20,7 @@ void FUN_004eb838(int *param_1,int param_2)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_004d84e8(g_btlEvent);
+  temp_v0 = isEntryUsable(g_btlEvent);
   if (temp_v0 == 0) {
     temp_v1 = (int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
     temp_v0 = g_btlEvent;

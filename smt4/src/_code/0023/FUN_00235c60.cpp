@@ -1,15 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00421d18; /* 0x421d18 */
+extern u8 DAT_00421d18;
 
-
-void FUN_00235c60(unsigned int *param_1)
-
+/* Installs the vtable at DAT_00421d18. */
+void FUN_00235c60(const void **obj)
 {
-  *param_1 = (unsigned int)&DAT_00421d18;
-  return;
+    *obj = &DAT_00421d18;
 }
 
 } /* extern "C" */

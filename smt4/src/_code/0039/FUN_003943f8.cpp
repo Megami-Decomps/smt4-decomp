@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_003943f8(char *param_1)
-
+u8 FUN_003943f8(char *tag)
 {
-  return *param_1 == 'h';
+    return *tag == 'h';
 }
 
 } /* extern "C" */

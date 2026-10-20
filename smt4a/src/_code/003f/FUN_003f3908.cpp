@@ -1,20 +1,19 @@
-#include "romwright_types.h"
+#include "shard/Shard003F.h"
 
 extern "C" {
 
-int FUN_00184310(unsigned int);
+typedef struct Rec32 {
+    /* 0x00 */ u8 unk00[0x32];
+    /* 0x32 */ u16 unk32;
+} Rec32;
 
-/* Supplied declaration required: FUN_00184310. */
+extern Rec32 *FUN_00184310(u16 id);
 
-
-unsigned short FUN_003f3908(int param_1)
-
+u16 FUN_003f3908(Lookup62 *unit)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_00184310((unsigned int)*(unsigned short *)(param_1 + 0x62));
-  return *(unsigned short *)(temp_v0 + 0x32);
+    Rec32 *rec = FUN_00184310(unit->id);
+
+    return rec->unk32;
 }
 
 } /* extern "C" */

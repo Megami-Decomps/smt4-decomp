@@ -1,24 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00311490` (_code @ 0x311490, 0x12 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Thumb register choice and store order only: retail loads the vtable first (r1) and stores it last */
+/* Constructs the object and returns it. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00559514; /* 0x559514 */
+struct ObjFUN_00311490 {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0c */ u32 unk0c;
+};
 
-extern unsigned int *FUN_00117b3c(void);
+extern const u8 DAT_00559514[];
+ObjFUN_00311490 *FUN_00117b3c(ObjFUN_00311490 *obj);
 
-
-void FUN_00311490(void)
-
+ObjFUN_00311490 *FUN_00311490(ObjFUN_00311490 *obj)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_00117b3c();
-  puVar1[2] = 0;
-  puVar1[3] = 0;
-  *puVar1 = (unsigned int)&DAT_00559514;
-  return;
+    obj = FUN_00117b3c(obj);
+    obj->vtable = DAT_00559514;
+    obj->unk08 = 0;
+    obj->unk0c = 0;
+    return obj;
 }
 
-} /* extern "C" */
+}

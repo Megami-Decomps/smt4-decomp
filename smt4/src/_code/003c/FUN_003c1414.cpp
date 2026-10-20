@@ -20,7 +20,7 @@ struct fn_003c1414_arg0 {
     undefined4 field_0xdc; /* +0xdc */
 };
 
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 void FUN_003c1414(fn_003c1414_arg0 *param_1,int param_2)
@@ -49,7 +49,7 @@ void FUN_003c1414(fn_003c1414_arg0 *param_1,int param_2)
   else {
     param_1->field_0xa4 = in_s0;
   }
-  temp_v0 = FUN_002c09f4(1);
+  temp_v0 = randNextInRange(1);
   if (temp_v0 == 0) {
     temp_v1 = 0x3f800000;
   }

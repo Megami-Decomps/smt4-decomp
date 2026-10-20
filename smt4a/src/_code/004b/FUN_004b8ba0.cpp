@@ -8,7 +8,7 @@ int FUN_00100388(...);
 int FUN_00275f44(unsigned int, unsigned int);
 int FUN_004080bc(unsigned int, int, unsigned int);
 int FUN_004b6bc4(int, int, int);
-int FUN_004ba83c(int, int);
+int menu4CScrollToKind(int, int);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -29,8 +29,8 @@ extern int FUN_00224880(unsigned int);
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004080bc. */
 /* Supplied declaration required: FUN_004b6bc4. */
-extern int FUN_004ba660(int, int);
-/* Supplied declaration required: FUN_004ba83c. */
+extern int menu4CGetEntry(int, int);
+/* Supplied declaration required: menu4CScrollToKind. */
 
 
 void FUN_004b8ba0(int param_1)
@@ -52,7 +52,7 @@ void FUN_004b8ba0(int param_1)
   temp_v6 = 0;
   if (temp_v6 < temp_v1) {
     do {
-      temp_v2 = FUN_004ba660(param_1 + 0x9c,temp_v6);
+      temp_v2 = menu4CGetEntry(param_1 + 0x9c,temp_v6);
       if (*(short *)(temp_v2 + 0x54) == 3) {
         if (*(char *)(temp_v2 + 0x2c) != '0') {
           temp_v3 = *(unsigned int *)(param_1 + 0x114c);
@@ -97,7 +97,7 @@ LAB_004b8c94:
   temp_v6 = 0;
   if (temp_v6 < temp_v1) {
     do {
-      temp_v2 = FUN_004ba660(param_1 + 0x9c,temp_v6);
+      temp_v2 = menu4CGetEntry(param_1 + 0x9c,temp_v6);
       if ((*(short *)(temp_v2 + 0x54) == 2) && (*(char *)(temp_v2 + 0x2c) != '0')) {
         temp_v3 = *(unsigned int *)(param_1 + 0x114c);
         temp_v4 = *(unsigned int *)(param_1 + 0x1144);
@@ -140,7 +140,7 @@ LAB_004b8c94:
     FUN_004080bc(*(unsigned int *)(param_1 + 0x1218),0,0xffffffff);
     return;
   }
-  FUN_004ba83c(param_1 + 0x9c,0xff);
+  menu4CScrollToKind(param_1 + 0x9c,0xff);
   *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x40000000;
   *(unsigned char *)(param_1 + 0xa8a) = 1;
   return;

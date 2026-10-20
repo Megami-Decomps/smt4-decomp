@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00325140(void);
+int flagsSetIfUnset3(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern int DAT_00587f28; /* 0x587f28 */
 
-/* Supplied declaration required: FUN_00325140. */
+/* Supplied declaration required: flagsSetIfUnset3. */
 extern int FUN_0048e40c(int);
 
 
@@ -26,7 +26,7 @@ void FUN_00314c38(void)
   int temp_v1;
   
   temp_v0 = DAT_00587f28;
-  FUN_00325140();
+  flagsSetIfUnset3();
   if ((temp_v0 != 0) && (temp_v1 = FUN_0048e40c(temp_v0 + 0x68), temp_v1 != 0)) {
     *(unsigned char *)(temp_v0 + 0x7bf8) = 1;
     return;

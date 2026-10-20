@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-extern int jobGetWork(void);
-
-
-unsigned int FUN_00169590(void)
-
+/* Returns the word at 0x3C of the job work area. */
+u32 FUN_00169590(void)
 {
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  return *(unsigned int *)(temp_v0 + 0x3c);
+    JobWork *work = jobGetWork();
+    return work->unk003C;
 }
 
 } /* extern "C" */

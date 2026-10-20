@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0041.h"
 
 extern "C" {
 
-extern int FUN_001ab940(void);
+extern PartyBlockB *FUN_001ab940(void);
 
-
-unsigned short FUN_004186e0(void)
-
+u16 FUN_004186e0(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_001ab940();
-  return *(unsigned short *)(temp_v0 + 0x8e0);
+    return FUN_001ab940()->unk8E0;
 }
 
 } /* extern "C" */

@@ -1,24 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Resource.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char g_handlerTable;
-
-void FUN_002914bc(int param_1)
-
+/* Runs the handler's callback at 0x28 (if its type has one) on the resource data. */
+void FUN_002914bc(Resource *resource)
 {
-/* irregular: 2 native warning(s); review required */
-  romwright_code *UNRECOVERED_JUMPTABLE;
-  
-  UNRECOVERED_JUMPTABLE = *(romwright_code **)(&g_handlerTable + (unsigned int)*(unsigned short *)(param_1 + 4) * 0x44 + 0x28);
-  if (UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x002914dc. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE)(*(unsigned int *)(param_1 + 8));
-    return;
-  }
-  return;
+    void (*callback)(void *data);
+
+    callback = g_handlerTable[resource->type].callback28;
+    if (callback != NULL) {
+        callback(resource->data);
+        return;
+    }
 }
 
 } /* extern "C" */

@@ -1,21 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0011080c(unsigned int);
+void FUN_0011080c(u32 value);
 
-/* Supplied declaration required: FUN_0011080c. */
-
-
-void FUN_0010ed92(unsigned int *param_1,int param_2,int param_3,int param_4)
-
+/* Calls FUN_0011080c on `*valueRef`; when `terminate` is set, NUL-terminates the 16-bit string buffer at its `length`-th character. */
+void FUN_0010ed92(u32 *valueRef, u16 *buffer, s32 length, s32 terminate)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0011080c(*param_1);
-  if (param_4 != 0) {
-    *(unsigned short *)((param_3 * 2 + param_2) - 2) = 0;
-  }
-  return;
+    FUN_0011080c(*valueRef);
+    if (terminate != 0) {
+        buffer[length - 1] = 0;
+    }
 }
 
 } /* extern "C" */

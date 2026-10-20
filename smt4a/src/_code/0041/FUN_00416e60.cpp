@@ -35,7 +35,7 @@ extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_00275bc8. */
 extern int FUN_003df4a4(unsigned short);
 extern int FUN_003df6f4(void);
-extern unsigned long long FUN_003dfd5c(void);
+extern unsigned long long countUnlockedSlots(void);
 extern int FUN_003f86c8(unsigned int);
 /* Supplied declaration required: FUN_00416d30. */
 
@@ -109,7 +109,7 @@ LAB_00416f38:
     if (temp_v0 != 0) {
       temp_v0 = FUN_001801a4();
       temp_v6 = 0;
-      temp_v8 = FUN_003dfd5c();
+      temp_v8 = countUnlockedSlots();
       temp_v3 = (unsigned int)((unsigned long long)temp_v8 >> 0x20);
       temp_v4 = (int)temp_v8;
       if (0 < temp_v4) {
@@ -135,7 +135,7 @@ LAB_00416f38:
       }
       temp_v0 = FUN_001801a4();
       temp_v6 = 0;
-      temp_v8 = FUN_003dfd5c();
+      temp_v8 = countUnlockedSlots();
       temp_v3 = (unsigned int)((unsigned long long)temp_v8 >> 0x20);
       temp_v4 = (int)temp_v8;
       if (0 < temp_v4) {

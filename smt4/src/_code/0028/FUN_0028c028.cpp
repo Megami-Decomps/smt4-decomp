@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "shard/PlayScene.h"
 
 extern "C" {
 
-
-unsigned char FUN_0028c028(int param_1)
-
+u8 FUN_0028c028(PlayScene *scene)
 {
-  return *(int *)(param_1 + 0x3048) == 7;
+    return scene->state == 7;
 }
 
 } /* extern "C" */

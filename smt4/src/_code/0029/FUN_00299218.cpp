@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002117a8(void);
+int dataTable15Sub0GetCount(void);
 
-/* Supplied declaration required: FUN_002117a8. */
+/* Supplied declaration required: dataTable15Sub0GetCount. */
 extern int padIsButtonDown(void);
 extern int FUN_002c09d0(void);
-extern unsigned char *FUN_003106c0(unsigned int);
+extern unsigned char *dataTable15Sub0GetEntries(unsigned int);
 
 
 unsigned char FUN_00299218(unsigned int param_1,int param_2)
@@ -24,11 +24,11 @@ unsigned char FUN_00299218(unsigned int param_1,int param_2)
   
   temp_v3 = 0;
   temp_v0 = param_1;
-  FUN_002117a8();
+  dataTable15Sub0GetCount();
   temp_v2 = 0;
   if (temp_v2 < temp_v0) {
     do {
-      puVar2 = (unsigned char *)FUN_003106c0(temp_v2);
+      puVar2 = (unsigned char *)dataTable15Sub0GetEntries(temp_v2);
       if ((((puVar2 != (unsigned char *)0x0) && ((unsigned char)puVar2[1] == param_1)) &&
           ((*(short *)(puVar2 + 0x56) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
          ((*(short *)(puVar2 + 0x58) == 0 || (temp_v1 = padIsButtonDown(), temp_v1 != 0)))) {

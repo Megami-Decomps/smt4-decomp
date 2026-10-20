@@ -34,7 +34,7 @@ extern unsigned int FUN_002ea714(void);
 /* Supplied declaration required: FUN_002f6c70. */
 /* Supplied declaration required: FUN_002f6c82. */
 /* Supplied declaration required: FUN_002f6d1c. */
-extern int FUN_002f6d4c(int *, unsigned char *);
+extern int wordRefsDiffer_002f6d4c(int *, unsigned char *);
 
 
 unsigned int FUN_002efe80(int param_1,int param_2)
@@ -98,7 +98,7 @@ unsigned int FUN_002efe80(int param_1,int param_2)
   temp_v5 = temp_v4;
   temp_v9 = temp_v4;
   while( 1 ) {
-    temp_v3 = FUN_002f6d4c(&temp_v5,temp_v10);
+    temp_v3 = wordRefsDiffer_002f6d4c(&temp_v5,temp_v10);
     if (temp_v3 == 0) {
       FUN_002e6e5c(temp_v11);
       return 0;

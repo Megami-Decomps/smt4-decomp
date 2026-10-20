@@ -1,23 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
+struct Object;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void (*destroy)(struct Object *object);
+} ObjectVtbl;
 
+typedef struct Object {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Object;
 
-void FUN_0034f994(unsigned int param_1,int *param_2,unsigned int *param_3)
+struct Owner;
+typedef struct OwnerVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*release)(struct Owner *owner, Object *object);
+} OwnerVtbl;
 
+typedef struct Owner {
+    /* 0x0 */ OwnerVtbl *vtbl;
+} Owner;
+
+/* Destroys the object, then has the owner release it. */
+void FUN_0034f994(u32 unused, Owner *owner, Object *object)
 {
-/* irregular: 2 native warning(s); review required */
-  (**(romwright_code **)*param_3)(param_3);
-                    /* WARNING: Could not recover jumptable at 0x0034f9c4. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(*param_2 + 4))(param_2,param_3);
-  return;
+    object->vtbl->destroy(object);
+    owner->vtbl->release(owner, object);
 }
 
 } /* extern "C" */

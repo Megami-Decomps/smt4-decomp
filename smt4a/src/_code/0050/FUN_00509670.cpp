@@ -7,9 +7,9 @@ extern "C" {
 int FUN_001cbd84(int, int, unsigned int);
 int FUN_001cbd94(int);
 int FUN_001d0b34(void);
-int FUN_00461e58(int);
-int FUN_00461e8c(int, unsigned int);
-int FUN_00461f10(int, unsigned int);
+int voiceOwnerClear(int);
+int halfArrayOwnerGet(int, unsigned int);
+int voiceOwnerRefresh(int, unsigned int);
 int FUN_00462374(int, unsigned int);
 int FUN_00465ba0(int);
 int FUN_00465bd0(...);
@@ -40,14 +40,14 @@ extern signed char DAT_005c1d24; /* 0x5c1d24 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_001b1ed8(void);
+extern int lcgRandomHigh16(void);
 extern int FUN_001c3078(int, unsigned int);
 /* Supplied declaration required: FUN_001cbd84. */
 /* Supplied declaration required: FUN_001cbd94. */
 /* Supplied declaration required: FUN_001d0b34. */
-/* Supplied declaration required: FUN_00461e58. */
-/* Supplied declaration required: FUN_00461e8c. */
-/* Supplied declaration required: FUN_00461f10. */
+/* Supplied declaration required: voiceOwnerClear. */
+/* Supplied declaration required: halfArrayOwnerGet. */
+/* Supplied declaration required: voiceOwnerRefresh. */
 /* Supplied declaration required: FUN_00462374. */
 /* Supplied declaration required: FUN_00465ba0. */
 /* Supplied declaration required: FUN_00465bd0. */
@@ -141,7 +141,7 @@ void FUN_00509670(fn_00509670_arg0 *param_1,int param_2,unsigned int param_3,uns
           if ((int)param_4 >= 0x30) {
             return;
           }
-          FUN_00461e8c(param_2,param_4 - 0x20);
+          halfArrayOwnerGet(param_2,param_4 - 0x20);
           return;
         }
         FUN_00465ba0(temp_v10);
@@ -332,8 +332,8 @@ void FUN_00509670(fn_00509670_arg0 *param_1,int param_2,unsigned int param_3,uns
       if (param_4 == 0) {
         return;
       }
-      FUN_00461f10(param_2,0xffffffff);
-      FUN_00461e58(param_2);
+      voiceOwnerRefresh(param_2,0xffffffff);
+      voiceOwnerClear(param_2);
       return;
     }
     switch(param_3) {
@@ -402,8 +402,8 @@ LAB_005099a4:
       return;
     case 200:
       *(unsigned char *)(param_2 + 0x26) = param_4 != 0;
-      FUN_00461f10(param_2,0xffffffff);
-      FUN_00461e58(param_2);
+      voiceOwnerRefresh(param_2,0xffffffff);
+      voiceOwnerClear(param_2);
       return;
     case 0xc9:
       *(unsigned char *)(param_2 + 0x81) = 1;
@@ -444,7 +444,7 @@ LAB_00509a60:
       if ((int)param_4 >= 0x30) {
         return;
       }
-      puVar11 = (unsigned short *)FUN_00461e8c(param_2,param_4 - 0x20);
+      puVar11 = (unsigned short *)halfArrayOwnerGet(param_2,param_4 - 0x20);
     }
     if (puVar11 == (unsigned short *)0x0) {
       return;
@@ -593,7 +593,7 @@ LAB_00509a60:
     if (temp_v11) {
       param_5 = (unsigned int)(short)-temp_v4;
     }
-    temp_v5 = FUN_001b1ed8();
+    temp_v5 = lcgRandomHigh16();
     temp_v4 = (unsigned short)(temp_v5 * (param_5 + 1) >> 0x10);
     if (temp_v11) {
       temp_v4 = -temp_v4;

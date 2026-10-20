@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0011b3d4(void);
+void destroyObj0055a4e0(void);
 
-/* Supplied declaration required: FUN_0011b3d4. */
-
-
+/* Forwards to destroyObj0055a4e0. */
 void FUN_00114614(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0011b3d4();
-  return;
+    destroyObj0055a4e0();
 }
 
 } /* extern "C" */

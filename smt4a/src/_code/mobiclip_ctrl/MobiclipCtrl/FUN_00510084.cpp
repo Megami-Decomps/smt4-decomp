@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f4370(...);
+int emptyStub_002f4370(...);
 int FUN_00423a3c(...);
 int FUN_00425e74(...);
 
@@ -135,7 +135,7 @@ extern unsigned int DAT_0061850c; /* 0x61850c */
 extern unsigned int DAT_00618510; /* 0x618510 */
 extern unsigned int DAT_00618514; /* 0x618514 */
 
-/* Supplied declaration required: FUN_002f4370. */
+/* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_00423a3c. */
 /* Supplied declaration required: FUN_00425e74. */
 
@@ -242,7 +242,7 @@ void FUN_00510084(void)
   DAT_00618500.s1[1] = -0x7f;
   DAT_00618500.s1[2] = 'U';
   DAT_00618500.s1[3] = '\0';
-  FUN_002f4370(&DAT_00618500.whole,FUN_001585e4,0x100000);
+  emptyStub_002f4370(&DAT_00618500.whole,FUN_001585e4,0x100000);
   return;
 }
 

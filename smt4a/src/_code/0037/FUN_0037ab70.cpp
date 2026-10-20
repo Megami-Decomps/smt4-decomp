@@ -9,8 +9,8 @@ int FUN_002beec4(void);
 int FUN_002e0a6c(unsigned char **, int, unsigned int, unsigned int);
 int FUN_002e0c48(...);
 int FUN_002e0fac(void);
-int FUN_00317c60(unsigned char **);
-int FUN_003417ec(...);
+int taggedOwnerRelease(unsigned char **);
+int taggedOwnerRelease2(...);
 
 /* stack frame of param_4: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -34,9 +34,9 @@ extern unsigned char *FUN_002e09b4(unsigned char **, unsigned int, unsigned int)
 /* Supplied declaration required: FUN_002e0a6c. */
 /* Supplied declaration required: FUN_002e0c48. */
 /* Supplied declaration required: FUN_002e0fac. */
-/* Supplied declaration required: FUN_00317c60. */
+/* Supplied declaration required: taggedOwnerRelease. */
 extern unsigned char *FUN_0032cab4(unsigned char **);
-/* Supplied declaration required: FUN_003417ec. */
+/* Supplied declaration required: taggedOwnerRelease2. */
 
 
 unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -109,7 +109,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
             }
           }
           else {
-            FUN_003417ec();
+            taggedOwnerRelease2();
           }
         }
         else {
@@ -117,7 +117,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
         }
       }
       else {
-        FUN_00317c60(&temp_v0);
+        taggedOwnerRelease(&temp_v0);
       }
     }
     else {
@@ -129,7 +129,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
             }
           }
           else {
-            puVar4 = (unsigned char *)FUN_003417ec(&temp_v0);
+            puVar4 = (unsigned char *)taggedOwnerRelease2(&temp_v0);
           }
         }
         else {
@@ -137,7 +137,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
         }
       }
       else {
-        puVar4 = (unsigned char *)FUN_00317c60(&temp_v0);
+        puVar4 = (unsigned char *)taggedOwnerRelease(&temp_v0);
       }
       if (-1 < (int)puVar4) {
         FUN_00188374(&temp_v0,0);

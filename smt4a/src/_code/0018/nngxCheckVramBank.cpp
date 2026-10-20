@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_005c0aa0; /* 0x5c0aa0 */
-
-
-int nngxCheckVramBank(void)
-
+/* Returns the signed byte at 0x1 of the global at 0x5C0AA0. */
+s32 nngxCheckVramBank(void)
 {
-  return (int)(*(signed char *)((unsigned char *)&DAT_005c0aa0 + 0x1));
+    return DAT_005c0aa0.unk01;
 }
 
 } /* extern "C" */

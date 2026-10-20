@@ -1,7 +1,9 @@
+/* NON_MATCHING: retail stores the work pointer at +4 of the global block at 0x44de28 and takes the first callback's address pc-relative (a function of this unit); the other callbacks are unnamed code in other units. */
 /* NON_MATCHING: the task callbacks are local code labels (LAB_*) that are not decompiled, so their addresses are built differently */
 /* Opens the save/load screen: allocates its work area and creates its task. */
 #include "common.h"
 #include "saveLoadUI/saveLoadUI.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -17,7 +19,10 @@ extern SaveLoadUIWork *g_saveLoadUI;
 
 void saveLoadUIOpen(void)
 {
-    SaveLoadUIWork *ui = (SaveLoadUIWork *)asdMemAlloc(0x10000, 0x100, 0, 0x388, 1);
+    SaveLoadUIWork *ui;
+
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\saveLoadUI\\saveLoadUI.cpp", 2814);
+    ui = (SaveLoadUIWork *)asdMemAlloc(0x10000, 0x100, 0, 0x388, 1);
 
     g_saveLoadUI = ui;
     ui->unk04 = 0;

@@ -6,9 +6,9 @@ extern "C" {
 
 extern unsigned char DAT_005590d8; /* 0x5590d8 */
 
-extern int FUN_00104728(int, unsigned int);
+extern int constructObj00558620(int, unsigned int);
 extern int FUN_002f7414(unsigned int *);
-extern unsigned char FUN_002f742c(void);
+extern unsigned char _ZN9Obj5590d07vfunc08Ev(void);
 
 
 int FUN_002e7168(unsigned int *param_1,unsigned int param_2)
@@ -19,9 +19,9 @@ int FUN_002e7168(unsigned int *param_1,unsigned int param_2)
   
   *param_1 = (unsigned int)&DAT_005590d8;
   temp_v1 = FUN_002f7414(param_1 + 1);
-  temp_v1 = FUN_00104728(temp_v1 + 0x10,param_2);
+  temp_v1 = constructObj00558620(temp_v1 + 0x10,param_2);
   *(unsigned int *)(temp_v1 + 0x14) = param_2;
-  temp_v0 = FUN_002f742c();
+  temp_v0 = _ZN9Obj5590d07vfunc08Ev();
   *(unsigned char *)(temp_v1 + 0x18) = temp_v0;
   return temp_v1 - 0x14;
 }

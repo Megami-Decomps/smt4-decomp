@@ -1,21 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard004F.h"
 
 extern "C" {
 
-int FUN_002804b0(unsigned int, int, int);
+extern void FUN_002804b0(u32 value, u32 *slot, s32 flag);
 
-/* Supplied declaration required: FUN_002804b0. */
-
-
-void FUN_004f2abc(int param_1,unsigned int param_2)
-
+void FUN_004f2abc(Obj4F *obj, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 0x65c) == 0) {
-    FUN_002804b0(param_2,param_1 + 0x65c,1);
-    return;
-  }
-  return;
+    if (obj->unk65C == 0) {
+        FUN_002804b0(value, &obj->unk65C, 1);
+    }
 }
 
 } /* extern "C" */

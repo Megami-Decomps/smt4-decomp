@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00187010(unsigned int);
+int saveSlotFindById(unsigned int);
 int FUN_0047f7c0(int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 extern int DAT_00573cd8; /* 0x573cd8 */
 extern int DAT_00573cdc; /* 0x573cdc */
 
-/* Supplied declaration required: FUN_00187010. */
+/* Supplied declaration required: saveSlotFindById. */
 extern int FUN_00187168(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -36,7 +36,7 @@ void FUN_0047f8ac(unsigned int param_1,short *param_2)
   int temp_v5;
   short *psVar7;
   
-  FUN_00187010(param_1 & 0xffff);
+  saveSlotFindById(param_1 & 0xffff);
   temp_v1 = FUN_00187168();
   if (((temp_v1 != 0) && (temp_v1 = FUN_0019acdc(param_1,1), temp_v1 == 4)) && (DAT_00573cd8 != 0)) {
     temp_v2 = dataTableGet(10,4);
@@ -58,7 +58,7 @@ void FUN_0047f8ac(unsigned int param_1,short *param_2)
       } while (temp_v4 < temp_v3);
     }
   }
-  FUN_00187010(param_1 & 0xffff);
+  saveSlotFindById(param_1 & 0xffff);
   temp_v5 = FUN_00187168();
   temp_v1 = 0;
   if (temp_v5 != 0) {

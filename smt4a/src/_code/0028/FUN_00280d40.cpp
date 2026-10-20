@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018cfe4(unsigned int, unsigned int);
+int sceneTraverserVisit(unsigned int, unsigned int);
 int FUN_0018e9d8(unsigned int, int);
 int FUN_0034103c(unsigned int);
 
@@ -33,7 +33,7 @@ extern unsigned char DAT_00636e04; /* 0x636e04 */
 extern unsigned char DAT_00636e05; /* 0x636e05 */
 extern int DAT_00636e18; /* 0x636e18 */
 
-/* Supplied declaration required: FUN_0018cfe4. */
+/* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_0018e9d8. */
 /* Supplied declaration required: FUN_0034103c. */
 
@@ -155,24 +155,24 @@ void FUN_00280d40(fn_00280d40_arg0 *param_1)
     (&DAT_00636e04)[temp_v3 * 0x18] = 0;
     (&DAT_00636e05)[temp_v3 * 0x18] = 0;
     FUN_0018e9d8((&DAT_005b3c88)[temp_v3],(&DAT_005b3c98)[temp_v3]);
-    FUN_0018cfe4((&g_effAsdLightHandle)[temp_v3],(&DAT_005b3c88)[temp_v3]);
+    sceneTraverserVisit((&g_effAsdLightHandle)[temp_v3],(&DAT_005b3c88)[temp_v3]);
   }
   if (param_1->field_0x14 != (void *)0x0) {
     if (*(int *)((int)param_1->field_0x14 + 8) == 0) {
-      FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
+      sceneTraverserVisit(g_effAsdLightHandle,DAT_005b3c88);
       DAT_00636e00 = DAT_00636e00 - 1;
     }
     else {
-      FUN_0018cfe4(DAT_005b3c84,DAT_005b3c8c);
+      sceneTraverserVisit(DAT_005b3c84,DAT_005b3c8c);
       DAT_00636e18 = DAT_00636e18 - 1;
     }
   }
   else if (param_1->field_0xc < 3) {
-    FUN_0018cfe4(g_effAsdLightHandle,DAT_005b3c88);
+    sceneTraverserVisit(g_effAsdLightHandle,DAT_005b3c88);
     DAT_00636e00 = DAT_00636e00 - 1;
   }
   else {
-    FUN_0018cfe4(DAT_005b3c84,DAT_005b3c8c);
+    sceneTraverserVisit(DAT_005b3c84,DAT_005b3c8c);
     DAT_00636e18 = DAT_00636e18 - 1;
   }
   pvVar8 = param_1->field_0x14;

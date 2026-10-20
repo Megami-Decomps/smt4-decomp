@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_001582c0(int *param_1)
-
+/* Returns whether the referenced word is nonzero. */
+u8 FUN_001582c0(s32 *valueRef)
 {
-  return *param_1 != 0;
+    return *valueRef != 0;
 }
 
 } /* extern "C" */

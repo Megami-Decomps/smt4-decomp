@@ -1,13 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Shard0045.h"
 
 extern "C" {
 
-
-void FUN_0045f818(int param_1)
-
+void FUN_0045f818(Word8Holder *obj)
 {
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  return;
+    obj->unk18 = 0;
 }
 
 } /* extern "C" */

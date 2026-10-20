@@ -13,7 +13,7 @@ extern unsigned short *FUN_002c7e24(void);
 extern int FUN_002c7e3c(void);
 extern int FUN_002c7e54(void);
 extern int FUN_00334044(void);
-extern int FUN_003c1644(void);
+extern int fieldStateAllowsAction(void);
 
 
 unsigned int FUN_003b70e0(int param_1)
@@ -108,20 +108,20 @@ unsigned int FUN_003b70e0(int param_1)
           }
           temp_v0 = FUN_00334044();
           if (temp_v0 == 2) {
-            temp_v2 = FUN_003c1644();
+            temp_v2 = fieldStateAllowsAction();
             if (temp_v2 == 0) {
               return 0x2a;
             }
             return 0xfb;
           }
           if (-1 < *(short *)(temp_v2 + 0x598)) {
-            temp_v2 = FUN_003c1644();
+            temp_v2 = fieldStateAllowsAction();
             if (temp_v2 == 0) {
               return 0x29;
             }
             return 0xfa;
           }
-          temp_v2 = FUN_003c1644();
+          temp_v2 = fieldStateAllowsAction();
           if (temp_v2 == 0) {
             return 0x1f;
           }

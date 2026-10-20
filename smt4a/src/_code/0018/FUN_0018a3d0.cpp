@@ -1,19 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_dspsndState; /* 0x6433d0 */
+u8 nn_snd_CTR_Dspsnd_SetIsHeadsetConnected(u8 *state, u8 connected);
+extern u8 g_dspsndState[];
 
-extern unsigned char nn_snd_CTR_Dspsnd_SetIsHeadsetConnected(unsigned int, unsigned char);
-
-
-unsigned char FUN_0018a3d0(unsigned int param_1,unsigned char param_2)
-
+/* Tells the DSP sound state whether a headset is connected; returns its result. */
+u8 FUN_0018a3d0(u32 unused, u8 connected)
 {
-  unsigned char temp_v0;
-  
-  temp_v0 = nn_snd_CTR_Dspsnd_SetIsHeadsetConnected((unsigned int)&g_dspsndState,param_2);
-  return temp_v0;
+    u8 result;
+
+    result = nn_snd_CTR_Dspsnd_SetIsHeadsetConnected(g_dspsndState, connected);
+    return result;
 }
 
 } /* extern "C" */

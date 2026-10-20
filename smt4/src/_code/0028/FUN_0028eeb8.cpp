@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0023ddbc(unsigned int, int);
-int FUN_003eb054(int);
+int words3Clear(int);
 
 /* Supplied declaration required: FUN_0023ddbc. */
 extern int FUN_00287894(unsigned int);
 extern int FUN_00298f88(unsigned int);
 extern int FUN_002adc88(void);
-/* Supplied declaration required: FUN_003eb054. */
+/* Supplied declaration required: words3Clear. */
 
 
 unsigned int FUN_0028eeb8(unsigned int param_1)
@@ -57,7 +57,7 @@ unsigned int FUN_0028eeb8(unsigned int param_1)
             if (*(short *)(temp_v4 + temp_v3 * 0xe + 0x842) == 0) {
               temp_v4 = temp_v4 + temp_v3 * 0xe;
               *(short *)(temp_v4 + 0x842) = (short)param_1;
-              FUN_003eb054(temp_v4 + 0x844);
+              words3Clear(temp_v4 + 0x844);
               return 1;
             }
             temp_v3 = temp_v3 + 1;

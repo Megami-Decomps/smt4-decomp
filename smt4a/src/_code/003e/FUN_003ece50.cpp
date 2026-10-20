@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard003E.h"
 
 extern "C" {
 
-extern int FUN_004d87e4(unsigned int);
+extern s32 FUN_004d87e4(u32 value);
 
-
-unsigned char FUN_003ece50(int param_1)
-
+u8 FUN_003ece50(BtlStateB *state)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_004d87e4(*(unsigned int *)(param_1 + 0x22bc));
-  return temp_v0 != 0;
+    return FUN_004d87e4(state->unk22BC) != 0;
 }
 
 } /* extern "C" */

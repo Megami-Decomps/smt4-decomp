@@ -16,7 +16,7 @@ extern int g_btlEvent; /* 0x573898 */
 
 extern int FUN_003eb1cc(int);
 /* Supplied declaration required: FUN_004d7a70. */
-extern int FUN_004d84e8(int);
+extern int isEntryUsable(int);
 
 
 unsigned int FUN_004ea0c0(int *param_1,unsigned int *param_2)
@@ -43,7 +43,7 @@ unsigned int FUN_004ea0c0(int *param_1,unsigned int *param_2)
       return 0;
     }
   }
-  temp_v0 = FUN_004d84e8(g_btlEvent);
+  temp_v0 = isEntryUsable(g_btlEvent);
   if (((temp_v0 == 0) && (temp_v0 = FUN_003eb1cc(*param_1), temp_v0 == 0)) &&
      ((temp_v0 = g_btlEvent, FUN_004d7a70(g_btlEvent,4,(int)*(short *)(param_2[8] + 0x6e),0),
       temp_v0 != 0 ||

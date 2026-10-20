@@ -1,38 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_0015e198_arg0 fn_0015e198_arg0;
-struct fn_0015e198_arg0 {
-    unsigned char pad_0x0[0x6c];
-    float field_0x6c; /* +0x6c */
-    float field_0x70; /* +0x70 */
-    float field_0x74; /* +0x74 */
-    float field_0x78; /* +0x78 */
-    float field_0x7c; /* +0x7c */
-    float field_0x80; /* +0x80 */
-    byte field_0x84; /* +0x84 */
-};
+typedef struct Vec3 {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 y;
+    /* 0x08 */ f32 z;
+} Vec3;
 
+typedef struct Tracker {
+    /* 0x00 */ u8 unk00[0x6C];
+    /* 0x6C */ Vec3 position;
+    /* 0x78 */ Vec3 delta;
+    /* 0x84 */ u8 reset;
+} Tracker;
 
-void FUN_0015e198(fn_0015e198_arg0 *param_1,float *param_2)
-
+/* Moves the tracker to `position`: unless a reset is pending, `delta` becomes the movement since the last position; then the reset flag is cleared. */
+void FUN_0015e198(Tracker *tracker, Vec3 *position)
 {
-  float temp_v0;
-  float temp_v1;
-  
-  if (param_1->field_0x84 == 0) {
-    param_1->field_0x78 = *param_2 - param_1->field_0x6c;
-    param_1->field_0x7c = param_2[1] - param_1->field_0x70;
-    param_1->field_0x80 = param_2[2] - param_1->field_0x74;
-  }
-  temp_v0 = *param_2;
-  temp_v1 = param_2[1];
-  param_1->field_0x74 = param_2[2];
-  param_1->field_0x6c = temp_v0;
-  param_1->field_0x70 = temp_v1;
-  param_1->field_0x84 = 0;
-  return;
+    if (tracker->reset == 0) {
+        tracker->delta.x = position->x - tracker->position.x;
+        tracker->delta.y = position->y - tracker->position.y;
+        tracker->delta.z = position->z - tracker->position.z;
+    }
+    tracker->position = *position;
+    tracker->reset = 0;
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f4370(int, int, int);
+int emptyStub_002f4370(int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_0016df14(unsigned int *);
-/* Supplied declaration required: FUN_002f4370. */
+/* Supplied declaration required: emptyStub_002f4370. */
 
 
 void FUN_00511854(unsigned int *param_1,unsigned int param_2)
@@ -34,7 +34,7 @@ void FUN_00511854(unsigned int *param_1,unsigned int param_2)
   *(unsigned char *)(temp_v0 + 0x128f2) = 0xff;
   *(unsigned char *)(temp_v0 + 0x128f3) = 0xff;
   *(unsigned int *)(temp_v0 + 0x128f4) = 0;
-  FUN_002f4370(temp_v0 - 8,0x422180,0x100000);
+  emptyStub_002f4370(temp_v0 - 8,0x422180,0x100000);
   return;
 }
 

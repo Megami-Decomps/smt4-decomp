@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 
 
 void FUN_003957e0(int param_1)
@@ -14,7 +14,7 @@ void FUN_003957e0(int param_1)
   int temp_v1;
   
   temp_v0 = *(int *)(param_1 + 0xc);
-  temp_v1 = FUN_002c09f4(300);
+  temp_v1 = randNextInRange(300);
   *(int *)(temp_v0 + 0x58) = temp_v1 + 0x96;
   *(unsigned int *)(param_1 + 0x1c) = 0;
   return;

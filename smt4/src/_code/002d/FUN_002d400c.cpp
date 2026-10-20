@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00152bec(unsigned int);
-int FUN_0025318c(void);
-int FUN_002531a4(void);
+int dataTable2eSub1GetCount(void);
+int dataTable2eSub0GetCount(void);
 int FUN_002a0428(unsigned int, int);
 int asdMdlManagerDestroy(unsigned int);
 
@@ -25,14 +25,14 @@ extern int DAT_0049fd08; /* 0x49fd08 */
 extern short *DAT_0049fd0c; /* 0x49fd0c */
 
 /* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: FUN_0025318c. */
-/* Supplied declaration required: FUN_002531a4. */
+/* Supplied declaration required: dataTable2eSub1GetCount. */
+/* Supplied declaration required: dataTable2eSub0GetCount. */
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern unsigned short *FUN_002b63ac(void);
-extern short *FUN_002d4ef4(int);
-extern short *FUN_002d4f2c(int);
+extern short *dataTable2eSub1GetRecord(int);
+extern short *dataTable2eSub0GetRecord(int);
 
 
 unsigned int FUN_002d400c(void)
@@ -103,10 +103,10 @@ unsigned int FUN_002d400c(void)
   }
   temp_v1 = 0;
   psVar2 = g_lmapScene;
-  FUN_0025318c();
+  dataTable2eSub1GetCount();
   if (0 < (int)psVar2) {
     do {
-      psVar2 = (short *)FUN_002d4ef4(temp_v1);
+      psVar2 = (short *)dataTable2eSub1GetRecord(temp_v1);
       if ((int)*psVar2 == (unsigned int)puVar1[4]) {
         if (DAT_0049fd0c == (short *)0xffffffff) {
           psVar2 = (short *)(int)psVar2[1];
@@ -118,14 +118,14 @@ unsigned int FUN_002d400c(void)
         break;
       }
       temp_v1 = temp_v1 + 1;
-      FUN_0025318c();
+      dataTable2eSub1GetCount();
     } while (temp_v1 < (int)psVar2);
   }
   temp_v1 = 0;
-  FUN_002531a4();
+  dataTable2eSub0GetCount();
   if (0 < (int)psVar2) {
     do {
-      psVar2 = (short *)FUN_002d4f2c(temp_v1);
+      psVar2 = (short *)dataTable2eSub0GetRecord(temp_v1);
       if ((int)*psVar2 == (unsigned int)*puVar1) {
         temp_v1 = DAT_0049fd08;
         if (DAT_0049fd08 == -1) {
@@ -139,7 +139,7 @@ unsigned int FUN_002d400c(void)
         return 0;
       }
       temp_v1 = temp_v1 + 1;
-      FUN_002531a4();
+      dataTable2eSub0GetCount();
     } while (temp_v1 < (int)psVar2);
   }
   return 1;

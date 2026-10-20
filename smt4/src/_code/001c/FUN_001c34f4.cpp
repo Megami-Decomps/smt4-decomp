@@ -1,27 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int jobStop(unsigned int, int);
+int jobStop(u32 job, int mode);
+extern u32 scrGetArg(...);
+extern int jobIsValid(u32 job);
 
-extern unsigned int scrGetArg(void);
-extern int jobIsValid(void);
-/* Supplied declaration required: jobStop. */
-
-
-unsigned int FUN_001c34f4(void)
-
+u32 FUN_001c34f4(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = jobIsValid();
-  if (temp_v1 != 0) {
-    jobStop(temp_v0,0);
-  }
-  return 1;
+    u32 job = scrGetArg();
+    int valid = jobIsValid(job);
+
+    if (valid != 0) {
+        jobStop(job, 0);
+    }
+    return 1;
 }
 
 } /* extern "C" */

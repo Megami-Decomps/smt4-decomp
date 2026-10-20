@@ -45,9 +45,9 @@ extern int FUN_002893d8(void);
 /* Supplied declaration required: FUN_00295660. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029cc3c. */
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029ede8. */
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 /* Supplied declaration required: FUN_002a8740. */
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002b63c0. */
@@ -58,7 +58,7 @@ extern int FUN_002a8764(void);
 extern int FUN_002c2950(void);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: bannerShow. */
-extern int FUN_002f61e8(void);
+extern int sys43e188GetStateB(void);
 /* Supplied declaration required: FUN_00383674. */
 /* Supplied declaration required: QuestCenter_GetActiveEntry. */
 
@@ -133,10 +133,10 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
             if ((-1 < *(char *)(temp_v6 + temp_v10 + 0x90f0)) &&
                (temp_v7 = FUN_002a8740(), *(short *)(temp_v7 + 0x46) == *(short *)(temp_v9 + 0x16e))) {
               temp_v8 = FUN_002a8740((int)*(char *)(temp_v6 + temp_v10 + 0x90f0));
-              temp_v9 = FUN_0029ebac(temp_v8,2);
+              temp_v9 = flagWordTestBit(temp_v8,2);
               temp_v11 = temp_v9 != 0;
               temp_v8 = FUN_002a8740((int)*(char *)(temp_v6 + temp_v10 + 0x90f0));
-              temp_v9 = FUN_0029ebac(temp_v8,10);
+              temp_v9 = flagWordTestBit(temp_v8,10);
               if (temp_v9 != 0) {
                 temp_v11 = '\x02';
               }
@@ -166,7 +166,7 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
   }
   temp_v9 = FUN_002542bc(0);
   if (temp_v9 == 5) {
-    temp_v3 = FUN_002a0ce8();
+    temp_v3 = sys43e188GetState();
     if (temp_v3 == 0) {
       return 0;
     }
@@ -294,7 +294,7 @@ LAB_00201e54:
 LAB_00201ed0:
         FUN_002542d4(0,2);
         FUN_002542d4(1,0);
-        temp_v9 = FUN_002f61e8();
+        temp_v9 = sys43e188GetStateB();
         if (temp_v9 == 0) {
           return 0;
         }
@@ -334,7 +334,7 @@ LAB_00201ed0:
     FUN_002542d4(0,5);
     FUN_002542d4(1,0);
   }
-  temp_v9 = FUN_002f61e8();
+  temp_v9 = sys43e188GetStateB();
   if (temp_v9 == 0) {
     return 0;
   }

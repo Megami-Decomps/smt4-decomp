@@ -1,42 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int padIsButtonDown(unsigned int);
+extern int padIsButtonDown(u32 button);
 
-
+/* Counts the held buttons 0x13-0x17, starting from 3 when button 0x12 is held (2 otherwise). */
 int FUN_0026aa78(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 2;
-  temp_v0 = padIsButtonDown(0x12);
-  if (temp_v0 != 0) {
-    temp_v1 = 3;
-  }
-  temp_v0 = padIsButtonDown(0x13);
-  if (temp_v0 != 0) {
-    temp_v1 = temp_v1 + 1;
-  }
-  temp_v0 = padIsButtonDown(0x14);
-  if (temp_v0 != 0) {
-    temp_v1 = temp_v1 + 1;
-  }
-  temp_v0 = padIsButtonDown(0x15);
-  if (temp_v0 != 0) {
-    temp_v1 = temp_v1 + 1;
-  }
-  temp_v0 = padIsButtonDown(0x16);
-  if (temp_v0 != 0) {
-    temp_v1 = temp_v1 + 1;
-  }
-  temp_v0 = padIsButtonDown(0x17);
-  if (temp_v0 != 0) {
-    temp_v1 = temp_v1 + 1;
-  }
-  return temp_v1;
+    int count = 2;
+
+    if (padIsButtonDown(0x12) != 0) {
+        count = 3;
+    }
+    if (padIsButtonDown(0x13) != 0) {
+        count = count + 1;
+    }
+    if (padIsButtonDown(0x14) != 0) {
+        count = count + 1;
+    }
+    if (padIsButtonDown(0x15) != 0) {
+        count = count + 1;
+    }
+    if (padIsButtonDown(0x16) != 0) {
+        count = count + 1;
+    }
+    if (padIsButtonDown(0x17) != 0) {
+        count = count + 1;
+    }
+    return count;
 }
 
 } /* extern "C" */

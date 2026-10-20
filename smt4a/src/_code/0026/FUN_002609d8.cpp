@@ -85,7 +85,7 @@ extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168770. */
 /* Supplied declaration required: FUN_00168e00. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c560. */
 extern int FUN_0018206c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
@@ -221,7 +221,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
                        *(int *)(temp_v2 + 0x10) + param_2 + (int)*(float *)(temp_v2 + 0x1c) + temp_v3);
           efctSetSpeed();
           temp_v9 = g_renderCtx;
-          temp_v10 = FUN_00169294(6,1,0);
+          temp_v10 = packNibblesAndByte(6,1,0);
           piVar7 = (int *)(temp_v9 + 0x12b8);
           temp_v11 = *piVar7;
           temp_v5 = piVar7[temp_v11 + 2];

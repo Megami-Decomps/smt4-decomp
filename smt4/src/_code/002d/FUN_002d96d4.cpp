@@ -108,7 +108,7 @@ extern int FUN_002beda4(unsigned int *);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: FUN_002bf538. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
@@ -479,7 +479,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           }
           temp_v7 = FUN_002bf4f8(0x24,temp_v13 + 0xe3);
           temp_v10 = g_titleScene;
-          temp_v8 = FUN_002c5da8(6,1,0);
+          temp_v8 = packNibblesAndByte(6,1,0);
           piVar19 = (int *)(temp_v10 + 0x12ac);
           temp_v12 = piVar19[*piVar19 + 2];
           piVar19[*piVar19 + 2] = temp_v8;
@@ -490,7 +490,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           FUN_002bf288(2,0x24,0xd2,(int)&param_1->field_0x0 + (int)*(short *)(temp_v7 + 8),
                        *(short *)(temp_v7 + 10) + param_2,0x65);
           temp_v10 = g_titleScene;
-          temp_v8 = FUN_002c5da8(6,7,0);
+          temp_v8 = packNibblesAndByte(6,7,0);
           piVar19 = (int *)(temp_v10 + 0x12ac);
           temp_v12 = piVar19[*piVar19 + 2];
           piVar19[*piVar19 + 2] = temp_v8;
@@ -604,7 +604,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         temp_v4 = FUN_0029e908(temp_v22);
         temp_v13 = FUN_002bf4f8(0x24,temp_v4 + 0xe3);
         temp_v4 = g_titleScene;
-        temp_v10 = FUN_002c5da8(6,1,0);
+        temp_v10 = packNibblesAndByte(6,1,0);
         piVar19 = (int *)(temp_v4 + 0x12ac);
         temp_v7 = piVar19[*piVar19 + 2];
         piVar19[*piVar19 + 2] = temp_v10;
@@ -615,7 +615,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         FUN_002bf380(2,0x24,0xd,(int)&param_1->field_0x0 + (int)*(short *)(temp_v13 + 8),
                      *(short *)(temp_v13 + 10) + param_2,0x79);
         temp_v4 = g_titleScene;
-        temp_v13 = FUN_002c5da8(6,7,0);
+        temp_v13 = packNibblesAndByte(6,7,0);
         piVar19 = (int *)(temp_v4 + 0x12ac);
         temp_v10 = piVar19[*piVar19 + 2];
         piVar19[*piVar19 + 2] = temp_v13;

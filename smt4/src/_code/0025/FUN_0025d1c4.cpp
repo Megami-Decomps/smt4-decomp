@@ -66,7 +66,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0023dcb8(void);
 /* Supplied declaration required: FUN_00244ee0. */
-extern unsigned int FUN_0025cbc0(unsigned int);
+extern unsigned int dataTable16Sub2GetRecordS64(unsigned int);
 /* Supplied declaration required: FUN_0025cc04. */
 /* Supplied declaration required: FUN_0025cc34. */
 extern int FUN_0025cc54(void);
@@ -204,7 +204,7 @@ void FUN_0025d1c4(int param_1)
                 temp_v10 = btlGetMainState();
                 if ((*(unsigned int *)(temp_v10 + 0x44a8) & 0x1000) != 0) {
                   temp_v21 = 1;
-                  temp_v13 = FUN_0025cbc0((temp_v8 + temp_v16) & 0xff);
+                  temp_v13 = dataTable16Sub2GetRecordS64((temp_v8 + temp_v16) & 0xff);
                   FUN_002be624(temp_v19,&LAB_0025dca4,temp_v13);
                 }
                 else {
@@ -216,7 +216,7 @@ void FUN_0025d1c4(int param_1)
                     if (temp_v11 != 0) {
                       if (temp_v14 == temp_v10) {
                         temp_v21 = 1;
-                        temp_v13 = FUN_0025cbc0(temp_v15 & 0xff);
+                        temp_v13 = dataTable16Sub2GetRecordS64(temp_v15 & 0xff);
                         FUN_002be624(temp_v19,&LAB_0025dca4,temp_v13);
                         break;
                       }
@@ -538,7 +538,7 @@ void FUN_0025d1c4(int param_1)
               if (temp_v4 != 0) {
                 if (temp_v18 == temp_v15) {
                   temp_v21 = 1;
-                  temp_v13 = FUN_0025cbc0(temp_v17 & 0xff);
+                  temp_v13 = dataTable16Sub2GetRecordS64(temp_v17 & 0xff);
                   FUN_002be624(temp_v19,&LAB_0025ea00,temp_v13);
                   break;
                 }
@@ -549,7 +549,7 @@ void FUN_0025d1c4(int param_1)
           }
           else {
             temp_v21 = 1;
-            temp_v13 = FUN_0025cbc0(temp_v15 & 0xff);
+            temp_v13 = dataTable16Sub2GetRecordS64(temp_v15 & 0xff);
             FUN_002be624(temp_v19,&LAB_0025ea00,temp_v13);
           }
           temp_v4 = FUN_002bf4f8(0x15,0xa8);

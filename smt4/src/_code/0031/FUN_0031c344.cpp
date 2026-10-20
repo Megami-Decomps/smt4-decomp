@@ -10,7 +10,7 @@ int FUN_0029c6b0(int);
 extern int FUN_00295d08(unsigned int);
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002b63ac(void);
 
@@ -35,7 +35,7 @@ unsigned char FUN_0031c344(int param_1,int param_2,int param_3)
     if (temp_v1 == 0) {
       return 1;
     }
-    temp_v0 = FUN_0029ebac(temp_v1,1);
+    temp_v0 = flagWordTestBit(temp_v1,1);
   }
   if (temp_v0 != 0) {
     return 1;

@@ -43,7 +43,7 @@ extern int DAT_005f1bdc; /* 0x5f1bdc */
 /* Supplied declaration required: FUN_00178b04. */
 extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_001cd3ec. */
-extern int FUN_002ddd8c(int);
+extern int mapTableGetValue(int);
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
@@ -220,7 +220,7 @@ LAB_002d0a48:
         return 0;
       }
       if (*(int *)(g_mapDepartWork + 0x10) == 0) {
-        temp_v1 = FUN_002ddd8c((int)*(short *)(g_mapDepartWork + 6));
+        temp_v1 = mapTableGetValue((int)*(short *)(g_mapDepartWork + 6));
         temp_v2 = g_mapDepartWork;
         *(int *)(g_mapDepartWork + 0x1c) = temp_v1;
         if (temp_v1 < 1) {

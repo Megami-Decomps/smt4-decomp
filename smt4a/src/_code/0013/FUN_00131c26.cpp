@@ -18,7 +18,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0030805e. */
 /* Supplied declaration required: FUN_00308566. */
-extern int FUN_003112cc(char **, char **);
+extern int iterEqual(char **, char **);
 
 
 void FUN_00131c26(unsigned int *param_1,int param_2,unsigned int param_3)
@@ -53,7 +53,7 @@ void FUN_00131c26(unsigned int *param_1,int param_2,unsigned int param_3)
     temp_v4 = temp_v5;
     if (temp_v1 != 0) {
       temp_v6 = *(char **)(*(int *)(param_2 + 0x10) + 8);
-      temp_v1 = FUN_003112cc(&temp_v4,&temp_v6);
+      temp_v1 = iterEqual(&temp_v4,&temp_v6);
       if (temp_v1 != 0) {
         FUN_0030805e(&temp_v7,param_2,0,temp_v5,param_3);
         temp_v0 = 1;

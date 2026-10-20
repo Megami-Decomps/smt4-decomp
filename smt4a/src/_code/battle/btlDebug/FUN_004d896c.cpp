@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00340c10(int);
+int obj80Select(int);
 int FUN_0035c708(int, unsigned int, int, unsigned int);
 int FUN_00401178(int, int, int, int, int, int, int);
 int FUN_0045b334(int, int);
@@ -20,7 +20,7 @@ extern unsigned char DAT_0057aa00; /* 0x57aa00 */
 extern unsigned char DAT_0057aa01; /* 0x57aa01 */
 extern unsigned char DAT_0057aa02; /* 0x57aa02 */
 
-/* Supplied declaration required: FUN_00340c10. */
+/* Supplied declaration required: obj80Select. */
 /* Supplied declaration required: FUN_0035c708. */
 /* Supplied declaration required: FUN_00401178. */
 /* Supplied declaration required: FUN_0045b334. */
@@ -59,7 +59,7 @@ void FUN_004d896c(int param_1,int param_2,int param_3)
                *(unsigned char *)(temp_v5 + temp_v7 * 0x2c + 7),(int)*(short *)(temp_v5 + temp_v7 * 0x2c + 8),
                (int)*(short *)(temp_v5 + temp_v7 * 0x2c + 10));
   if (0 < *(int *)(*(int *)(param_1 + 0xc0) + temp_v7 * 0x2c + 0x18)) {
-    FUN_00340c10(0);
+    obj80Select(0);
     FUN_0045b334(*(int *)(DAT_0056fcc0 + 4) + 0xcc,0x18);
   }
   temp_v5 = *(int *)(param_1 + 0xc0);

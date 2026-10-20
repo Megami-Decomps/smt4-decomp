@@ -1,23 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nn_snd_CTR_MasterManagerImpl_AuxUserCallback(unsigned char *);
+void nn_snd_CTR_MasterManagerImpl_AuxUserCallback(u8 *manager);
+extern u8 DAT_00647708[];
 
-extern unsigned char DAT_00647708; /* 0x647708 */
-
-/* Supplied declaration required: nn_snd_CTR_MasterManagerImpl_AuxUserCallback. */
-
-
-void FUN_001cd448(char *param_1)
-
+/* Runs the aux user callback of the master manager at 0x647708 when the flag byte is set. */
+void FUN_001cd448(u8 *flag)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != '\0') {
-    nn_snd_CTR_MasterManagerImpl_AuxUserCallback(&DAT_00647708);
-    return;
-  }
-  return;
+    if (*flag != 0) {
+        nn_snd_CTR_MasterManagerImpl_AuxUserCallback(DAT_00647708);
+        return;
+    }
 }
 
 } /* extern "C" */

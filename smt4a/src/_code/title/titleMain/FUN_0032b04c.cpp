@@ -10,7 +10,7 @@ int FUN_001add24(int);
 int FUN_002c2160(int);
 int asdTMTexTableFreeEntry(int);
 int FUN_0037b450(void);
-int FUN_003a43ec(void);
+int freeTexTable24(void);
 
 extern unsigned char g_titleMain; /* 0x58916c */
 
@@ -21,7 +21,7 @@ extern unsigned char g_titleMain; /* 0x58916c */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_0037b450. */
 extern int FUN_00399e04(void);
-/* Supplied declaration required: FUN_003a43ec. */
+/* Supplied declaration required: freeTexTable24. */
 
 
 void FUN_0032b04c(void)
@@ -32,7 +32,7 @@ void FUN_0032b04c(void)
   
   *(unsigned char *)((*(int *)((unsigned char *)&g_titleMain + 0x4)) + 4) = 1;
   FUN_001add24(0x3a);
-  FUN_003a43ec();
+  freeTexTable24();
   temp_v0 = 0;
   do {
     FUN_0019a7f4(0x2a,temp_v0);

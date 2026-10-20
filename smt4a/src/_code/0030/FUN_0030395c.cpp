@@ -10,7 +10,7 @@ int FUN_002e9520(int, unsigned int);
 extern int rt_malloc(int);
 /* Supplied declaration required: FUN_002e9318. */
 /* Supplied declaration required: FUN_002e9520. */
-extern unsigned int FUN_002ea0e4(unsigned char *);
+extern unsigned int constructObj0055affc(unsigned char *);
 
 
 int * FUN_0030395c(int *param_1,unsigned int param_2)
@@ -23,7 +23,7 @@ int * FUN_0030395c(int *param_1,unsigned int param_2)
   unsigned int temp_v3;
   unsigned char temp_v4 [12];
   
-  temp_v0 = FUN_002ea0e4(temp_v4);
+  temp_v0 = constructObj0055affc(temp_v4);
   temp_v3 = 0x20;
   if (param_2 >= 0x20) {
     temp_v3 = param_2;

@@ -1,17 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0023a5dc(int);
+extern int FUN_0023a5dc(void *block);
 
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x158];
+    /* 0x158 */ u8 block[1];
+} Obj;
 
-unsigned char FUN_00350e18(int param_1)
-
+u8 FUN_00350e18(Obj *obj)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0023a5dc(param_1 + 0x158);
-  return temp_v0 != 0;
+    return FUN_0023a5dc(obj->block) != 0;
 }
 
 } /* extern "C" */

@@ -1,25 +1,22 @@
-#include "romwright_types.h"
+#include "shard/PlayScene.h"
 
 extern "C" {
 
-
-unsigned int FUN_002062e8(int param_1)
-
+/* 1 for the states in which the scene accepts input. */
+u32 FUN_002062e8(PlayScene *scene)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 0x3048);
-  if ((((temp_v0 == 0 || temp_v0 == 0x12) || (temp_v0 == 0x13 || temp_v0 == 0x14)) ||
-      (temp_v0 == 0x15 || temp_v0 == 0x16)) ||
-     (((temp_v0 == 0x17 || temp_v0 == 0x19 || (temp_v0 == 0x1a || temp_v0 == 0x1b)) ||
-      (temp_v0 == 6 || temp_v0 == 0x28)))) {
-    temp_v1 = 1;
-  }
-  else {
-    temp_v1 = 0;
-  }
-  return temp_v1;
+    s32 state = scene->state;
+    u32 result;
+
+    if ((((state == 0 || state == 0x12) || (state == 0x13 || state == 0x14)) ||
+         (state == 0x15 || state == 0x16)) ||
+        (((state == 0x17 || state == 0x19 || (state == 0x1a || state == 0x1b)) ||
+          (state == 6 || state == 0x28)))) {
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
 }
 
 } /* extern "C" */

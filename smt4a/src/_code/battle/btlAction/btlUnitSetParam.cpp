@@ -41,7 +41,7 @@ extern unsigned int DAT_00571190; /* 0x571190 */
 extern int DAT_00571194; /* 0x571194 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_001633a0(short);
+extern int lcgRandomRange(short);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004dffe4. */
@@ -251,7 +251,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
     temp_v1 = FUN_004e9ae8(temp_v14,temp_v13 + 1,temp_v3,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v14);
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -274,7 +274,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
     temp_v1 = FUN_004e9ae8(temp_v14,puVar7,temp_v3,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v14);
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -296,7 +296,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
     temp_v1 = FUN_004e9ae8(temp_v14,temp_v13 + 1,temp_v3,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v14);
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -316,7 +316,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v3 != 0);
     temp_v1 = FUN_004e9ae8(temp_v16,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v16);
     temp_v8 = temp_v13[temp_v3 + 1];
     *(unsigned char *)(temp_v8 + temp_v5 + 0x38) = 1;
@@ -337,7 +337,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v3 != 0);
     temp_v1 = FUN_004e9ae8(temp_v16,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(temp_v16);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -359,7 +359,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v3,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -385,7 +385,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v3,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)((temp_v13 + 1)[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -412,7 +412,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v4 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -430,7 +430,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -448,7 +448,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -466,7 +466,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -484,7 +484,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -502,7 +502,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -520,7 +520,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -538,7 +538,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -556,7 +556,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -579,7 +579,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
     temp_v1 = FUN_004e9ae8(param_1,puVar7,temp_v3,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -602,7 +602,7 @@ joined_r0x004deccc:
       psVar9 = psVar9 + 0x204;
     } while (temp_v5 != 0);
     temp_v1 = FUN_004e9ae8(param_1,puVar7,temp_v3,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -628,7 +628,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -647,7 +647,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -667,7 +667,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v15,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -685,7 +685,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -705,7 +705,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,puVar7,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(puVar7[temp_v3] + temp_v5 + 0x38) = 1;
     break;
@@ -723,7 +723,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -741,7 +741,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -759,7 +759,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -777,7 +777,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v5,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
@@ -797,7 +797,7 @@ joined_r0x004deccc:
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v1 = FUN_004e9ae8(param_1,temp_v13 + 1,temp_v15,1);
-    temp_v3 = FUN_001633a0(temp_v1 - 1);
+    temp_v3 = lcgRandomRange(temp_v1 - 1);
     temp_v5 = btlUnitGet(param_1);
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;

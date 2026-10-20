@@ -1,32 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0026efec(int);
+extern void *FUN_0026efec(int index);
 
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ s16 unk48;
+} Entry;
 
-unsigned int FUN_00293988(int param_1)
+typedef struct Scene {
+    /* 0x0000 */ u8 unk0000[0x2F34];
+    /* 0x2F34 */ int unk2F34;
+    /* 0x2F38 */ u8 unk2F38[0x1570];
+    /* 0x44A8 */ u32 flags;
+} Scene;
 
+/* 1 unless the scene is neither flagged (0x40) nor in state 1-4 and has no active entries. */
+u32 FUN_00293988(Scene *scene)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (((*(unsigned int *)(param_1 + 0x44a8) & 0x40) == 0) && (*(int *)(param_1 + 0x2f34) - 1U > 3U)) {
-    temp_v2 = 0;
-    temp_v1 = temp_v2;
-    do {
-      temp_v0 = FUN_0026efec(temp_v1);
-      temp_v1 = temp_v1 + 1;
-      if (*(short *)(temp_v0 + 0x48) != 0) {
-        temp_v2 = temp_v2 + 1;
-      }
-    } while (temp_v1 < 0xc);
-    if (temp_v2 < 1) {
-      return 0;
+    Entry *entry;
+    int active;
+    int i;
+
+    if (((scene->flags & 0x40) == 0) && (scene->unk2F34 - 1U > 3U)) {
+        active = 0;
+        i = active;
+        do {
+            entry = (Entry *)FUN_0026efec(i);
+            i = i + 1;
+            if (entry->unk48 != 0) {
+                active = active + 1;
+            }
+        } while (i < 0xc);
+        if (active < 1) {
+            return 0;
+        }
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

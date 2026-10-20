@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00107b28. */
 extern unsigned long long FUN_002efa1c(void);
 extern int FUN_002efa34(int, unsigned int, unsigned int, unsigned int);
-extern int *FUN_002efa50(int, unsigned int);
+extern int *arrayElementAddress_002efa50(int, unsigned int);
 /* Supplied declaration required: FUN_002efa58. */
 extern int FUN_002efa80(int *);
 /* Supplied declaration required: FUN_002efb6c. */
@@ -54,7 +54,7 @@ unsigned long long FUN_002eab2a(int param_1,unsigned int param_2,int param_3,uns
       FUN_0010788a(param_1);
     }
     else {
-      piVar2 = (int *)FUN_002efa50(param_1 + 0x90,0);
+      piVar2 = (int *)arrayElementAddress_002efa50(param_1 + 0x90,0);
       if (*piVar2 != 0) {
         FUN_002efa58(&temp_v4,param_1 + 0x164,0);
         temp_v2 = temp_v4;

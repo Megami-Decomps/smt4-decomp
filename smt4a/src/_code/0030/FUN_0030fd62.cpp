@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_malloc(int);
+void rt_malloc(s32 size);
 
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_0030fd62(unsigned int param_1,int param_2)
-
+/* Allocates `count` 0x28-byte elements. */
+void FUN_0030fd62(u32 unused, s32 count)
 {
-/* irregular: 1 native warning(s); review required */
-  rt_malloc(param_2 * 0x28);
-  return;
+    rt_malloc(count * 0x28);
 }
 
 } /* extern "C" */

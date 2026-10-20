@@ -1,15 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f574; /* 0x57f574 */
+typedef struct Scene {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u8 value;
+} Scene;
+extern Scene *DAT_0057f574;
 
-
-void FUN_00261a14(unsigned char param_1)
-
+/* Stores `value` in the byte at 0x30 of the scene. */
+void FUN_00261a14(u8 value)
 {
-  *(unsigned char *)(DAT_0057f574 + 0x30) = param_1;
-  return;
+    DAT_0057f574->value = value;
 }
 
 } /* extern "C" */

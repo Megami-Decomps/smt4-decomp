@@ -24,7 +24,7 @@ extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002fb344. */
-extern int FUN_002fb3b6(unsigned char *, unsigned int *);
+extern int wordRefsDiffer_002fb3b6(unsigned char *, unsigned int *);
 
 
 unsigned int FUN_00110654(int param_1,int *param_2)
@@ -52,7 +52,7 @@ unsigned int FUN_00110654(int param_1,int *param_2)
   temp_v5[0] = (unsigned short)param_2[8];
   FUN_002fb344(temp_v7,param_1,temp_v5);
   temp_v6 = *(unsigned int *)(param_1 + 0x10);
-  temp_v0 = FUN_002fb3b6(temp_v7,(unsigned int *)&temp_v6);
+  temp_v0 = wordRefsDiffer_002fb3b6(temp_v7,(unsigned int *)&temp_v6);
   if (temp_v0 != 0) {
     if (param_2 != (int *)0x0) {
       (**(romwright_code **)(*param_2 + 4))(param_2);

@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0042.h"
 
 extern "C" {
 
-extern int DAT_00589390; /* 0x589390 */
+extern s32 DAT_00589390;
 
-
-unsigned char FUN_00429d80(void)
-
+u8 FUN_00429d80(void)
 {
-  return DAT_00589390 != 0;
+    return DAT_00589390 != 0;
 }
 
 } /* extern "C" */

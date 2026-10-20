@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f574; /* 0x57f574 */
+typedef struct Navi {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 state;
+    /* 0x0C */ u32 posX;
+    /* 0x10 */ u32 posY;
+} Navi;
+extern Navi *DAT_0057f574;
 
-
-void FUN_002c2d5c(unsigned int param_1)
-
+/* Stores `timer` at 0x10 of the navigator. */
+void FUN_002c2d5c(u32 timer)
 {
-  *(unsigned int *)(DAT_0057f574 + 0x10) = param_1;
-  return;
+    DAT_0057f574->posY = timer;
 }
 
 } /* extern "C" */

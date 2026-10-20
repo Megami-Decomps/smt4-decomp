@@ -1,20 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f27c; /* 0x57f27c */
+typedef struct Record {
+    /* 0x000 */ u8 unk000[0x744];
+    /* 0x744 */ s32 state;
+} Record;
 
+typedef struct Global57f27c {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Record *record;
+} Global57f27c;
+extern Global57f27c DAT_0057f27c;
 
-unsigned char FUN_0023b258(void)
-
+/* Returns whether there is no record or its state is 4. */
+u8 FUN_0023b258(void)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&DAT_0057f27c + 0x4)) != 0) {
-    temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_0057f27c + 0x4)) + 0x744);
-  }
-  return (*(int *)((unsigned char *)&DAT_0057f27c + 0x4)) == 0 || temp_v0 == 4;
+    s32 state;
+
+    state = 0;
+    if (DAT_0057f27c.record != NULL) {
+        state = DAT_0057f27c.record->state;
+    }
+    return DAT_0057f27c.record == NULL || state == 4;
 }
 
 } /* extern "C" */

@@ -25,7 +25,7 @@ extern int FUN_002f7730(int, unsigned int);
 /* Supplied declaration required: FUN_003d498c. */
 /* Supplied declaration required: FUN_003dc530. */
 /* Supplied declaration required: FUN_003defe0. */
-extern int FUN_004186f4(unsigned int);
+extern int partyEntryBitsBit4(unsigned int);
 
 
 void FUN_00334560(void)
@@ -50,7 +50,7 @@ void FUN_00334560(void)
   FUN_003d498c(temp_v6,1);
   *(unsigned short *)(temp_v5 + 0xcce) = temp_v0;
   temp_v1 = DAT_0057f28c;
-  temp_v2 = FUN_004186f4(temp_v6);
+  temp_v2 = partyEntryBitsBit4(temp_v6);
   if ((temp_v2 == 0) && (temp_v3 = temp_v6, FUN_003defe0(), temp_v3 != 0)) {
     temp_v2 = 0;
     if (temp_v2 < *(int *)(temp_v1 + 0x918)) {

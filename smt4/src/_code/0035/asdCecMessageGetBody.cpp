@@ -1,16 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Message {
+    /* 0x000 */ u8 unk000[0x134];
+    /* 0x134 */ u32 body;
+    /* 0x138 */ u32 bodySize;
+} Message;
 
-unsigned int asdCecMessageGetBody(int param_1,unsigned int *param_2,unsigned int *param_3)
-
+/* Returns the body pointer in *body and, when requested, its size in *size (also the return value). */
+u32 asdCecMessageGetBody(Message *message, u32 *size, u32 *body)
 {
-  *param_3 = *(unsigned int *)(param_1 + 0x134);
-  if (param_2 != (unsigned int *)0x0) {
-    *param_2 = *(unsigned int *)(param_1 + 0x138);
-  }
-  return *(unsigned int *)(param_1 + 0x138);
+    *body = message->body;
+    if (size != NULL) {
+        *size = message->bodySize;
+    }
+    return message->bodySize;
 }
 
 } /* extern "C" */

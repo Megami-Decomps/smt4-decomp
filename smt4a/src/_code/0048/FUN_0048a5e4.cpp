@@ -20,7 +20,7 @@ int FUN_004927dc(...);
 int lmapSceneGetObj(unsigned char *);
 int FUN_00492c5c(...);
 int FUN_0049325c(...);
-int FUN_0049359c(int, float *);
+int words2Copy(int, float *);
 int FUN_0049368c(...);
 int NaviMain_GetCurrentMap(...);
 int VectorSignedToFloat(...);
@@ -52,7 +52,7 @@ extern int FUN_00162e8c(void);
 extern unsigned int FUN_001654e4(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_00169240(unsigned int);
-extern unsigned int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c69c. */
 /* Supplied declaration required: FUN_0016c6f0. */
@@ -62,7 +62,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_00325064(void);
 /* Supplied declaration required: FUN_00328078. */
 extern unsigned int FUN_003577dc(int);
-extern int FUN_003847e8(void);
+extern int gameFlagsClassify(void);
 /* Supplied declaration required: FUN_003849cc. */
 /* Supplied declaration required: FUN_00384cf4. */
 /* Supplied declaration required: FUN_0048816c. */
@@ -73,7 +73,7 @@ extern unsigned int FUN_00492c34(unsigned char *);
 /* Supplied declaration required: FUN_00492c5c. */
 extern unsigned int FUN_00492c70(unsigned char *);
 /* Supplied declaration required: FUN_0049325c. */
-/* Supplied declaration required: FUN_0049359c. */
+/* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: FUN_0049368c. */
 extern unsigned int FUN_004cfb24(int, unsigned int);
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
@@ -123,7 +123,7 @@ void FUN_0048a5e4(int param_1)
     temp_v2 = FUN_00492c70(temp_v19);
   }
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000000) != 0) {
-    FUN_0049359c(param_1 + 0x4d0,&temp_v15);
+    words2Copy(param_1 + 0x4d0,&temp_v15);
   }
   efctSetSpeed();
   FUN_00183bb0();
@@ -197,7 +197,7 @@ void FUN_0048a5e4(int param_1)
       FUN_00162790(2,0xffffffff,temp_v9);
     }
   }
-  temp_v2 = FUN_00169294(6,1,0);
+  temp_v2 = packNibblesAndByte(6,1,0);
   FUN_0016c6f0(g_renderCtx,6,temp_v2);
   FUN_0049368c(param_1 + 0x4d0,4000,0,0,DAT_00587f20,1);
   FUN_0049368c(param_1 + 0x4d0,0xfa1,0,0,DAT_00587f20,1);
@@ -220,7 +220,7 @@ void FUN_0048a5e4(int param_1)
   }
   if (*(char *)(param_1 + 0xc) != '\0') {
     NaviMain_GetCurrentMap(temp_v19);
-    temp_v9 = FUN_003847e8();
+    temp_v9 = gameFlagsClassify();
     if (temp_v9 != 2 && temp_v9 != 3) {
       temp_v19 = (unsigned char *)(param_1 + 0x20630);
       temp_v18 = temp_v1 + 0xd00;
@@ -334,7 +334,7 @@ LAB_0048ae60:
   }
   else {
     NaviMain_GetCurrentMap(temp_v19);
-    temp_v9 = FUN_003847e8();
+    temp_v9 = gameFlagsClassify();
     if (temp_v9 == 2 || temp_v9 == 3) {
       FUN_0016c69c(g_renderCtx,3);
       return;

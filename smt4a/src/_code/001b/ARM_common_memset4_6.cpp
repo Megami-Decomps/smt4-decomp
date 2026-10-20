@@ -1,18 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Bytes6 {
+    /* 0x00 */ u32 word;
+    /* 0x04 */ u16 half;
+} Bytes6;
 
-void ARM_common_memset4_6(unsigned int *param_1,unsigned int param_2)
-
+/* Fills 6 bytes with the low byte of `value`. */
+void ARM_common_memset4_6(Bytes6 *dest, u32 value)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = (param_2 & 0xff) | ((param_2 & 0xff) << 8);
-  temp_v0 = temp_v0 | (temp_v0 << 0x10);
-  *param_1 = temp_v0;
-  *(short *)(param_1 + 1) = (short)temp_v0;
-  return;
+    u32 fill;
+
+    fill = (value & 0xFF) | ((value & 0xFF) << 8);
+    fill = fill | (fill << 0x10);
+    dest->word = fill;
+    dest->half = (u16)fill;
 }
 
 } /* extern "C" */

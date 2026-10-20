@@ -1,17 +1,13 @@
-#include "romwright_types.h"
+#include "shard/Sys43e0b8.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043e0b8; /* 0x43e0b8 */
-
-
-void FUN_0028dc98(int param_1)
-
+/* Stores `mode` when it is in -1..1. */
+void FUN_0028dc98(int mode)
 {
-  if (param_1 + 1U < 3) {
-    (*(int *)((unsigned char *)&DAT_0043e0b8 + 0x4)) = param_1;
-  }
-  return;
+    if (mode + 1U < 3) {
+        DAT_0043e0b8.unk04 = mode;
+    }
 }
 
 } /* extern "C" */

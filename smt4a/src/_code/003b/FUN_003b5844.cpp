@@ -21,7 +21,7 @@ extern unsigned char DAT_0057f588; /* 0x57f588 */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_00184758. */
-extern int FUN_00187010(unsigned int);
+extern int saveSlotFindById(unsigned int);
 extern unsigned int scrGetArg(unsigned int);
 extern int FUN_002deb84(void);
 extern int FUN_00370ecc(unsigned int);
@@ -73,7 +73,7 @@ unsigned int FUN_003b5844(void)
       *(unsigned int *)(temp_v3 + 0xd8) = 0;
       *(unsigned int *)(temp_v0 + 0x9c) = 0;
     }
-    temp_v3 = FUN_00187010(temp_v1 & 0xffff);
+    temp_v3 = saveSlotFindById(temp_v1 & 0xffff);
     if (temp_v3 == 0) {
       FUN_004bd410(temp_v1 & 0xffff);
       FUN_003e48dc(temp_v1 & 0xffff);

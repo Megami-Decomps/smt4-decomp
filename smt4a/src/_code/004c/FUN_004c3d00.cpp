@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0034a290(void);
-int FUN_004c39b0(int, unsigned short [12]);
+int source4CCopyHalves(int, unsigned short [12]);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0034a290. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 
 
 int FUN_004c3d00(int param_1)
@@ -41,7 +41,7 @@ int FUN_004c3d00(int param_1)
     temp_v3[7] = 0;
     temp_v3[8] = 0;
     temp_v3[9] = 0;
-    FUN_004c39b0(param_1,temp_v3);
+    source4CCopyHalves(param_1,temp_v3);
     temp_v1 = 0;
     do {
       temp_v0 = (unsigned int)temp_v3[temp_v1];

@@ -1,24 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00135ac4` (_code @ 0x135ac4, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Matches with -Ospace (requested): the container code was built for size. */
+#include "common.h"
 
 extern "C" {
 
-int rt_memcpy_w(int, int, int);
+extern void rt_memcpy_w(void *dst, const void *src, u32 size);
 
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-int FUN_00135ac4(int param_1,int param_2,int param_3)
-
+/* std::copy_backward for 32-byte elements: copies [first, last) so that the copy ends at `destEnd`; returns the start of the copy. */
+u8 *FUN_00135ac4(u8 *first, u8 *last, u8 *destEnd)
 {
-/* irregular: 1 native warning(s); review required */
-  while (param_1 != param_2) {
-    param_2 = param_2 - 0x20;
-    param_3 = param_3 - 0x20;
-    rt_memcpy_w(param_3,param_2,0x20);
-  }
-  return param_3;
+    while (first != last) {
+        last -= 0x20;
+        destEnd -= 0x20;
+        rt_memcpy_w(destEnd, last, 0x20);
+    }
+    return destEnd;
 }
 
 } /* extern "C" */

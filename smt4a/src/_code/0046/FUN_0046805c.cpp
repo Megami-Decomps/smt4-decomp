@@ -12,8 +12,8 @@ int FUN_003a7630(int);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
 int FUN_003fd63c(int, int);
-int FUN_00468878(unsigned int *, unsigned char *);
-int FUN_0046bc3c(int, int);
+int pickObjStart(unsigned int *, unsigned char *);
+int dataTable28Type0GetEntry(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -35,8 +35,8 @@ extern int FUN_0031d62c(void);
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
 /* Supplied declaration required: FUN_003fd63c. */
-/* Supplied declaration required: FUN_00468878. */
-/* Supplied declaration required: FUN_0046bc3c. */
+/* Supplied declaration required: pickObjStart. */
+/* Supplied declaration required: dataTable28Type0GetEntry. */
 
 
 void FUN_0046805c(unsigned int *param_1)
@@ -74,7 +74,7 @@ void FUN_0046805c(unsigned int *param_1)
   if (!(temp_v6 || temp_v0 == '\0')) {
     FUN_003c3e14();
     FUN_0019ea64(1);
-    FUN_00468878(param_1,&LAB_004681f4);
+    pickObjStart(param_1,&LAB_004681f4);
     *(unsigned char *)((int)param_1 + 0x1b) = 1;
     param_1[1] = 0xe;
     param_1[2] = 0;
@@ -83,17 +83,17 @@ void FUN_0046805c(unsigned int *param_1)
     if (((temp_v4 != 0) && (temp_v5 == 0)) && ((char)param_1[6] != '\0')) {
       FUN_003c3e14();
       FUN_0019ea64(1);
-      FUN_00468878(param_1,&LAB_00468208);
+      pickObjStart(param_1,&LAB_00468208);
       *(unsigned char *)((int)param_1 + 0x1b) = 1;
       param_1[1] = 0xe;
       param_1[2] = 0;
       return;
     }
-    FUN_0046bc3c((int)param_1 + 0x19,(int)(char)param_1[4]);
+    dataTable28Type0GetEntry((int)param_1 + 0x19,(int)(char)param_1[4]);
     FUN_0020401c();
     if ((char)param_1[6] != '\0') {
       FUN_003c1060();
-      FUN_00468878(param_1,&LAB_00468218);
+      pickObjStart(param_1,&LAB_00468218);
       param_1[1] = 6;
       param_1[2] = 0;
       return;

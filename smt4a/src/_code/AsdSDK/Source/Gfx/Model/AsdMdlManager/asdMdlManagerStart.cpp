@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 61 vs built 38 rows, 60 diff lines. */
+/* NON_MATCHING: the worker entry function lives right after this one in retail, so retail takes its address pc-relative (`add r0, pc, #112`); built code loads it through the literal pool */
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -19,7 +20,10 @@ extern u32 g_asdMdlList2;
  * with a 4-byte state block, freeing the block again if the worker could not be created. */
 void asdMdlManagerStart(u32 arg)
 {
-    u32 *state = (u32 *)asdMemoryAllocTracked(0x100, 0x100, 0, 4, 1);
+    u32 *state;
+
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdMdlManager.cpp", 880);
+    state = (u32 *)asdMemoryAllocTracked(0x100, 0x100, 0, 4, 1);
 
     if (state != NULL) {
         *state = 0;

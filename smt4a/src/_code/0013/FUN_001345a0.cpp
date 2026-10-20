@@ -23,12 +23,12 @@ extern unsigned char LAB_00134628; /* 0x134628 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e32a4. */
-extern int *FUN_002e4e86(unsigned int *, unsigned int *);
+extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_00301bd4. */
 /* Supplied declaration required: FUN_003078bc. */
-extern unsigned int FUN_003078de(unsigned int, int *);
+extern unsigned int vectorGrowCapacity_003078de(unsigned int, int *);
 /* Supplied declaration required: FUN_0030fce0. */
 extern unsigned int __aeabi_idivmod(int, unsigned int);
 
@@ -57,8 +57,8 @@ unsigned long long FUN_001345a0(int *param_1,unsigned int param_2)
   temp_v0 = __aeabi_idivmod(param_1[2] - *param_1,0xc);
   if (temp_v0 < temp_v6) {
     temp_v1 = FUN_00301bd4(param_1);
-    temp_v5 = FUN_003078de(temp_v1,param_1);
-    piVar3 = (int *)FUN_002e4e86(&temp_v6,(unsigned int *)&temp_v5);
+    temp_v5 = vectorGrowCapacity_003078de(temp_v1,param_1);
+    piVar3 = (int *)wordRefMax(&temp_v6,(unsigned int *)&temp_v5);
     temp_v2 = *piVar3;
     temp_v3 = rt_malloc();
     FUN_003078bc(*param_1,param_1[1],temp_v3,param_1);

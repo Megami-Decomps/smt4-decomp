@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024f5d4(void);
+int dataTable2eSub2GetCount(void);
 int FUN_0025b670(void);
 int FUN_0027ee24(void);
 
@@ -18,11 +18,11 @@ extern int g_gameState; /* 0x49f91c */
 extern int FUN_001fc314(int);
 extern int FUN_002481b0(void);
 extern int FUN_00248dfc(void);
-extern int FUN_0024f594(int);
-/* Supplied declaration required: FUN_0024f5d4. */
+extern int dataTable2eSub2GetRecord(int);
+/* Supplied declaration required: dataTable2eSub2GetCount. */
 /* Supplied declaration required: FUN_0025b670. */
 /* Supplied declaration required: FUN_0027ee24. */
-extern int FUN_002c09f4(unsigned int);
+extern int randNextInRange(unsigned int);
 extern int FUN_002c2950(void);
 
 
@@ -44,10 +44,10 @@ void FUN_002f3694(void)
   temp_v0 = FUN_002c2950();
   temp_v7 = 0;
   temp_v1 = temp_v0;
-  FUN_0024f5d4();
+  dataTable2eSub2GetCount();
   if (0 < temp_v1) {
     do {
-      temp_v1 = FUN_0024f594(temp_v7);
+      temp_v1 = dataTable2eSub2GetRecord(temp_v7);
       temp_v4 = (int)*(short *)(temp_v1 + 0x20);
       if (temp_v4 == -1) {
         return;
@@ -97,7 +97,7 @@ void FUN_002f3694(void)
                 temp_v3 = 0;
               }
               else {
-                temp_v3 = FUN_002c09f4((temp_v5 - 1U) & 0xffff);
+                temp_v3 = randNextInRange((temp_v5 - 1U) & 0xffff);
               }
               temp_v6 = 0;
               pcVar6 = (char *)0x0;
@@ -127,7 +127,7 @@ void FUN_002f3694(void)
         temp_v1 = FUN_001fc314(temp_v4);
       }
       temp_v7 = temp_v7 + 1;
-      FUN_0024f5d4();
+      dataTable2eSub2GetCount();
     } while (temp_v7 < temp_v1);
   }
   return;

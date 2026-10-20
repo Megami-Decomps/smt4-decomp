@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001385f8(void);
 int FUN_002ae5e0(void);
-int FUN_002ae794(...);
+int dataTableGetEntry0e(...);
 int FUN_002b827c(unsigned int);
 int FUN_002b8454(unsigned int, unsigned int);
 
@@ -20,7 +20,7 @@ extern unsigned int DAT_0043da38; /* 0x43da38 */
 
 /* Supplied declaration required: FUN_001385f8. */
 /* Supplied declaration required: FUN_002ae5e0. */
-/* Supplied declaration required: FUN_002ae794. */
+/* Supplied declaration required: dataTableGetEntry0e. */
 /* Supplied declaration required: FUN_002b827c. */
 /* Supplied declaration required: FUN_002b8454. */
 
@@ -54,8 +54,8 @@ void FUN_002b8838(unsigned int param_1)
     }
     DAT_0043da38 = -1;
     FUN_002b827c(param_1);
-    temp_v1 = FUN_002ae794(*(unsigned char *)(temp_v0 + 0x4c9));
-    temp_v2 = FUN_002ae794(param_1);
+    temp_v1 = dataTableGetEntry0e(*(unsigned char *)(temp_v0 + 0x4c9));
+    temp_v2 = dataTableGetEntry0e(param_1);
     if (temp_v1 != 0 && temp_v2 != 0) {
       *(unsigned char *)(temp_v0 + 0x4ca) = *(unsigned char *)(temp_v0 + 0x4c9);
       *puVar6 = (char)param_1;

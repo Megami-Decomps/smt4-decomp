@@ -7,7 +7,7 @@ extern "C" {
 extern float *DAT_00571508; /* 0x571508 */
 
 extern int FUN_0032c430(unsigned int);
-extern float *FUN_00340ec8(unsigned int);
+extern float *asdListBoxGetFloatValuePtr(unsigned int);
 
 
 void FUN_004d542c(int param_1,unsigned int param_2,unsigned int param_3)
@@ -33,23 +33,23 @@ void FUN_004d542c(int param_1,unsigned int param_2,unsigned int param_3)
     }
     break;
   case 1:
-    pfVar1 = (float *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     *DAT_00571508 = *pfVar1 - temp_v1;
     return;
   case 2:
-    pfVar1 = (float *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     DAT_00571508[1] = *pfVar1 - temp_v3;
     return;
   case 3:
-    pfVar1 = (float *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     DAT_00571508[2] = *pfVar1 - temp_v2;
     return;
   case 4:
-    pfVar1 = (float *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     DAT_00571508[4] = *pfVar1 * 256.0f * 0.0027777778f - DAT_00571508[0x16d];
     return;
   case 5:
-    pfVar1 = (float *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    pfVar1 = (float *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     DAT_00571508[3] = *pfVar1 - DAT_00571508[0x170];
     return;
   case 6:

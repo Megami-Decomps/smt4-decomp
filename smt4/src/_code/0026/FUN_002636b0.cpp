@@ -1,24 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002bee58(int, int);
+int FUN_002bee58(void *block, int arg);
 
-extern int DAT_0043e140; /* 0x43e140 */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ u8 unk10;
+    /* 0x11 */ u8 unk11[0x23];
+    /* 0x34 */ u8 block[0x8C];
+    /* 0xC0 */ u8 text[0x80];
+} Obj;
 
-/* Supplied declaration required: FUN_002bee58. */
-
+extern Obj *DAT_0043e140;
 
 void FUN_002636b0(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = DAT_0043e140;
-  *(unsigned int *)(DAT_0043e140 + 8) = 3;
-  FUN_002bee58(temp_v0 + 0x34,1);
-  return;
+    Obj *obj = DAT_0043e140;
+
+    DAT_0043e140->unk08 = 3;
+    FUN_002bee58(obj->block, 1);
 }
 
 } /* extern "C" */

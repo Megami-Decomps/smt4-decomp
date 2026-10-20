@@ -1,37 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0016e758(void);
-int FUN_00189938(void);
+typedef struct Global5891b0 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ s8 active;
+} Global5891b0;
+extern Global5891b0 DAT_005891b0;
 
-extern unsigned char DAT_005891b0; /* 0x5891b0 */
+void FUN_0016e758(void);
+void FUN_00189938(void);
+s32 FUN_001c6e20(void);
 
-/* Supplied declaration required: FUN_0016e758. */
-/* Supplied declaration required: FUN_00189938. */
-extern int FUN_001c6e20(void);
-
-
-void FUN_00170e6c(int param_1)
-
+/* Toggles the active state: with `deactivate` set, runs FUN_00189938 and clears `active` if it was set; otherwise, if FUN_001c6e20 allows it, runs FUN_0016e758 and sets `active`. */
+void FUN_00170e6c(s32 deactivate)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_1 != 0) {
-    if ((*(signed char *)((unsigned char *)&DAT_005891b0 + 0x4)) != '\0') {
-      FUN_00189938();
-      (*(signed char *)((unsigned char *)&DAT_005891b0 + 0x4)) = '\0';
+    if (deactivate != 0) {
+        if (DAT_005891b0.active != 0) {
+            FUN_00189938();
+            DAT_005891b0.active = 0;
+        }
+    } else {
+        if (FUN_001c6e20() != 0) {
+            FUN_0016e758();
+            DAT_005891b0.active = 1;
+        }
     }
-  }
-  else {
-    temp_v0 = FUN_001c6e20();
-    if (temp_v0 != 0) {
-      FUN_0016e758();
-      (*(signed char *)((unsigned char *)&DAT_005891b0 + 0x4)) = '\x01';
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

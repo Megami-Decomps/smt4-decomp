@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00322984(void);
 int FUN_003380a0(unsigned int, int);
 int FUN_003626bc(unsigned int, unsigned char [16], unsigned char [24]);
-int FUN_0039ede0(int, unsigned char [24]);
-int FUN_003b24f0(int, unsigned char [16]);
+int quadSourceCopyOut(int, unsigned char [24]);
+int quadHolderCopyOut(int, unsigned char [16]);
 
 /* Supplied declaration required: FUN_00322984. */
 /* Supplied declaration required: FUN_003380a0. */
 /* Supplied declaration required: FUN_003626bc. */
-/* Supplied declaration required: FUN_0039ede0. */
-/* Supplied declaration required: FUN_003b24f0. */
+/* Supplied declaration required: quadSourceCopyOut. */
+/* Supplied declaration required: quadHolderCopyOut. */
 
 
 void FUN_0030163c(int *param_1)
@@ -32,8 +32,8 @@ void FUN_0030163c(int *param_1)
     temp_v2 = param_1[10];
     temp_v3 = *(int *)(temp_v0 + 0x20);
     if ((*(unsigned int *)(temp_v0 + 0xc) & 1) != 0) {
-      FUN_0039ede0(temp_v0,temp_v5);
-      FUN_003b24f0(param_1[0xc],temp_v4);
+      quadSourceCopyOut(temp_v0,temp_v5);
+      quadHolderCopyOut(param_1[0xc],temp_v4);
       FUN_003626bc(*(unsigned int *)(temp_v2 + 0x10),temp_v4,temp_v5);
       FUN_003626bc(*(unsigned int *)(temp_v2 + 0x14),temp_v4,temp_v5);
     }

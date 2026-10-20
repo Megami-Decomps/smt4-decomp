@@ -17,13 +17,13 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int *FUN_002e4e86(unsigned int *, unsigned int *);
+extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: vectorSize12A. */
 /* Supplied declaration required: FUN_00307900. */
 /* Supplied declaration required: FUN_0030791e. */
-extern unsigned int FUN_00307962(unsigned int, int *);
+extern unsigned int vectorGrowCapacity_00307962(unsigned int, int *);
 /* Supplied declaration required: FUN_00307974. */
 
 
@@ -47,9 +47,9 @@ int * FUN_001343c8(int *param_1,int *param_2)
     temp_v1 = FUN_00307974(param_1);
     if (temp_v1 < temp_v0) {
       temp_v2 = vectorSize12A(param_1);
-      temp_v8[0] = FUN_00307962(temp_v2,param_1);
+      temp_v8[0] = vectorGrowCapacity_00307962(temp_v2,param_1);
       temp_v7 = vectorSize12A(param_2);
-      piVar4 = (int *)FUN_002e4e86((unsigned int *)&temp_v7,temp_v8);
+      piVar4 = (int *)wordRefMax((unsigned int *)&temp_v7,temp_v8);
       temp_v3 = *piVar4;
       temp_v4 = rt_malloc();
       FUN_0030791e(*param_2,param_2[1],temp_v4,param_1);

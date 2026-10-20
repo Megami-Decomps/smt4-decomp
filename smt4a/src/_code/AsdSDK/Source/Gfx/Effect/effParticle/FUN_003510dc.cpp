@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0013dd78(unsigned int);
+int resourceDestroy(unsigned int);
 int memAlloc(...);
 int FUN_001800b8(...);
-int FUN_001836b0(...);
+int resourceListDestroy(...);
 int asdMemFree(...);
 int FUN_001abbc4(void);
 int FUN_00212500(...);
@@ -44,10 +44,10 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0013dd78. */
+/* Supplied declaration required: resourceDestroy. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: FUN_001836b0. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_00212500. */
@@ -152,7 +152,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
         temp_v3 = 0;
         if (temp_v3 < temp_v0) {
           do {
-            FUN_0013dd78(*(unsigned int *)(puVar3[0xd] + temp_v3 * 4));
+            resourceDestroy(*(unsigned int *)(puVar3[0xd] + temp_v3 * 4));
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);
         }
@@ -190,7 +190,7 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
         temp_v3 = 0;
         if (temp_v3 < temp_v0) {
           do {
-            FUN_001836b0(*(unsigned int *)(puVar3[0xf] + temp_v3 * 4));
+            resourceListDestroy(*(unsigned int *)(puVar3[0xf] + temp_v3 * 4));
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);
         }

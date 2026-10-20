@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0031a218(...);
+int panelSetMode3(...);
 int FUN_0037c8e4(...);
 int FUN_00388758(...);
 int FUN_003e5354(...);
@@ -70,7 +70,7 @@ int FUN_004cb8a0(void);
 int FUN_004cbab0(...);
 int FUN_004f1ad0(...);
 int FUN_004f1cdc(...);
-int FUN_004f2518(...);
+int flags64CSetTarget(...);
 int FUN_004f26cc(...);
 int FUN_004f41b0(...);
 int FUN_004fb4fc(...);
@@ -83,7 +83,7 @@ int asdMemFree(void);
 int wstrlen(short *);
 int FUN_003e7840(unsigned int, int);
 int FUN_003f0e20(...);
-int FUN_003f2230(...);
+int btlResetSlot(...);
 int FUN_003f2280(...);
 int FUN_0040cd6c(int *, short *);
 int FUN_0040d97c(...);
@@ -176,11 +176,11 @@ extern int FUN_0018719c(unsigned int);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: wstrlen. */
-/* Supplied declaration required: FUN_0031a218. */
+/* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_00341f88. */
 extern int FUN_0034919c(void);
-extern int FUN_003491b8(void);
-extern int FUN_0037c894(void);
+extern int panelIsActiveState2(void);
+extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_00388758. */
 extern unsigned int FUN_003d214c(unsigned int);
@@ -194,13 +194,13 @@ extern int FUN_003e7b2c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e7fa4. */
 extern unsigned int FUN_003e82d4(int);
 /* Supplied declaration required: FUN_003e8430. */
-extern int FUN_003e84cc(unsigned int, unsigned int);
+extern int btlSlotStateIsNot456(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e9cd0. */
 extern int FUN_003ec77c(int);
 extern int FUN_003ec7b0(int);
 /* Supplied declaration required: FUN_003edfd4. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_003f2230. */
+/* Supplied declaration required: btlResetSlot. */
 /* Supplied declaration required: FUN_003f2280. */
 /* Supplied declaration required: FUN_003f2498. */
 extern int FUN_003face4(void);
@@ -246,7 +246,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004cb348. */
 /* Supplied declaration required: FUN_004cb8a0. */
 /* Supplied declaration required: FUN_004cbab0. */
-extern int FUN_004d8530(unsigned int);
+extern int holderObjectCall(unsigned int);
 /* Supplied declaration required: FUN_004d86c0. */
 extern int FUN_004d86e4(unsigned int);
 /* Supplied declaration required: FUN_004d888c. */
@@ -254,7 +254,7 @@ extern int FUN_004d86e4(unsigned int);
 /* Supplied declaration required: btlUnitGet. */
 /* Supplied declaration required: FUN_004f1ad0. */
 /* Supplied declaration required: FUN_004f1cdc. */
-/* Supplied declaration required: FUN_004f2518. */
+/* Supplied declaration required: flags64CSetTarget. */
 /* Supplied declaration required: FUN_004f26cc. */
 extern int FUN_004f2708(int, int, unsigned int);
 extern int FUN_004f283c(int);
@@ -600,13 +600,13 @@ LAB_0040deb4:
       break;
     }
     if (temp_v4 == 1) {
-      temp_v3 = FUN_003e84cc(temp_v8,0);
+      temp_v3 = btlSlotStateIsNot456(temp_v8,0);
       if (temp_v3 == 0) {
         temp_v4 = 1;
         psVar2[1] = temp_v4;
         break;
       }
-      FUN_003f2230(temp_v8,0);
+      btlResetSlot(temp_v8,0);
       temp_v4 = 2;
       psVar2[0x12] = temp_v4;
       temp_v4 = 1;
@@ -645,7 +645,7 @@ LAB_0040e864:
         }
       }
       else {
-        temp_v3 = FUN_003e84cc(temp_v8,1);
+        temp_v3 = btlSlotStateIsNot456(temp_v8,1);
         if (temp_v3 == 0) {
           temp_v4 = 1;
           psVar2[1] = temp_v4;
@@ -660,7 +660,7 @@ LAB_0040e864:
         psVar2[1] = temp_v4;
         break;
       }
-      FUN_003f2230(temp_v8,1);
+      btlResetSlot(temp_v8,1);
       temp_v10 = 3;
     }
     else {
@@ -867,7 +867,7 @@ joined_r0x0040ec14:
         }
         FUN_004a9a38(DAT_0057a9c8,temp_v3);
         if (psVar2[0x12] != 0) {
-          FUN_004f2518(DAT_00571508);
+          flags64CSetTarget(DAT_00571508);
         }
       }
     }
@@ -1299,7 +1299,7 @@ LAB_0040fb78:
           psVar2[1] = temp_v4;
           break;
         }
-        temp_v3 = FUN_0037c894();
+        temp_v3 = panelStateIs0();
         if (temp_v3 != 1) {
           temp_v4 = 1;
           psVar2[1] = temp_v4;
@@ -1311,13 +1311,13 @@ LAB_0040fb78:
         psVar2[1] = temp_v4;
         break;
       }
-      temp_v3 = FUN_003491b8();
+      temp_v3 = panelIsActiveState2();
       if (temp_v3 == 0) {
         temp_v4 = 1;
         psVar2[1] = temp_v4;
         break;
       }
-      FUN_0031a218(*(unsigned int *)(psVar2 + 0x14),0);
+      panelSetMode3(*(unsigned int *)(psVar2 + 0x14),0);
     }
     else {
       temp_v3 = FUN_0034919c();
@@ -1478,7 +1478,7 @@ LAB_0040fb78:
        (temp_v9 = temp_v3 + temp_v6, *(char *)(temp_v9 + 0x2340) != '\0')) {
       if (*(int *)(psVar2 + 0x16) != 0) {
         temp_v3 = temp_v3 + temp_v6 * 4;
-        temp_v6 = FUN_004d8530(*(unsigned int *)(temp_v3 + 0x22bc));
+        temp_v6 = holderObjectCall(*(unsigned int *)(temp_v3 + 0x22bc));
         if (temp_v6 == 0) {
           temp_v4 = 1;
           psVar2[1] = temp_v4;

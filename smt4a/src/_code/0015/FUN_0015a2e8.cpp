@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_005891d8; /* 0x5891d8 */
-
-
-unsigned char FUN_0015a2e8(void)
-
+/* Returns whether the low three bits of the word at 0x18 of the global at 0x5891D8 equal 6. */
+u8 FUN_0015a2e8(void)
 {
-  return ((*(unsigned int *)((unsigned char *)&DAT_005891d8 + 0x18)) & 7) == 6;
+    return (DAT_005891d8.unk18 & 7) == 6;
 }
 
 } /* extern "C" */

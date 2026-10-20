@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e74bc(unsigned int);
+void FUN_002e74bc(u32 source);
 
-/* Supplied declaration required: FUN_002e74bc. */
+typedef struct Stream {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 error;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 source;
+    /* 0x0C */ u32 position;
+} Stream;
 
-
-void FUN_002ed838(int param_1)
-
+/* Resets the stream's source (FUN_002e74bc), clears `error` and rewinds. */
+void FUN_002ed838(Stream *stream)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e74bc(*(unsigned int *)(param_1 + 8));
-  *(unsigned char *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 0xc) = 0;
-  return;
+    FUN_002e74bc(stream->source);
+    stream->error = 0;
+    stream->position = 0;
 }
 
 } /* extern "C" */

@@ -13,7 +13,7 @@ int FUN_001b57a8(unsigned int [5], int);
 int aocClearDisplayFlag(unsigned int);
 int FUN_0047314c(unsigned int *);
 int FUN_00477d10(unsigned int *, unsigned int, int);
-int FUN_0047b1e4(unsigned int *);
+int jobFlagsWorkStop(unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -35,7 +35,7 @@ extern int FUN_001af210(int);
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: FUN_0047314c. */
 /* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: FUN_0047b1e4. */
+/* Supplied declaration required: jobFlagsWorkStop. */
 
 
 void FUN_0047c36c(unsigned int *param_1)
@@ -78,7 +78,7 @@ void FUN_0047c36c(unsigned int *param_1)
   *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
   FUN_00477d10(param_1,0xffffffff,0);
   FUN_0047314c(param_1 + 0x46c);
-  FUN_0047b1e4(param_1);
+  jobFlagsWorkStop(param_1);
   temp_v0 = jobIsValid(param_1[0x5e8]);
   if (temp_v0 != 0) {
     if (param_1[0x5eb] != 0xffffffff) {

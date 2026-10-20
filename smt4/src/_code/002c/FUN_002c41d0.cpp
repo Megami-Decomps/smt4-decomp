@@ -1,20 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Sys4650a0.h"
 
 extern "C" {
 
-extern unsigned char DAT_004650a0; /* 0x4650a0 */
-
-
-void FUN_002c41d0(int param_1)
-
+/* Sets or clears flag bit 0. */
+void FUN_002c41d0(int set)
 {
-  if (param_1 != 0) {
-    (*(unsigned int *)((unsigned char *)&DAT_004650a0 + 0x8)) = (*(unsigned int *)((unsigned char *)&DAT_004650a0 + 0x8)) | 1;
-  }
-  else {
-    (*(unsigned int *)((unsigned char *)&DAT_004650a0 + 0x8)) = (*(unsigned int *)((unsigned char *)&DAT_004650a0 + 0x8)) & 0xfffffffe;
-  }
-  return;
+    if (set != 0) {
+        DAT_004650a0.unk08 = DAT_004650a0.unk08 | 1;
+    } else {
+        DAT_004650a0.unk08 = DAT_004650a0.unk08 & 0xfffffffe;
+    }
 }
 
 } /* extern "C" */

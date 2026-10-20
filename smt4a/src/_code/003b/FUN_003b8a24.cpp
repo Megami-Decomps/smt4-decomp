@@ -16,7 +16,7 @@ extern unsigned int DAT_00570d94; /* 0x570d94 */
 extern int btlGetMainState(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_004d8530(unsigned int);
+extern int holderObjectCall(unsigned int);
 
 
 unsigned int FUN_003b8a24(void)
@@ -48,7 +48,7 @@ unsigned int FUN_003b8a24(void)
       return 0;
     }
   }
-  temp_v1 = FUN_004d8530(*(unsigned int *)(*(int *)(temp_v1 + 0x1ed4) + temp_v4 * 0x1d0 + 0x1bc));
+  temp_v1 = holderObjectCall(*(unsigned int *)(*(int *)(temp_v1 + 0x1ed4) + temp_v4 * 0x1d0 + 0x1bc));
   if (temp_v1 != 0) {
     return 1;
   }

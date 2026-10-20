@@ -1,18 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00310d0a(unsigned int *, unsigned int, unsigned int);
+void FUN_00310d0a(u32 *vector, u32 begin, u32 end);
 
-/* Supplied declaration required: FUN_00310d0a. */
-
-
-void FUN_002f7824(unsigned int *param_1)
-
+/* Calls FUN_00310d0a(vector, begin, end) with the vector's first two words. */
+void FUN_002f7824(u32 *vector)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00310d0a(param_1,*param_1,param_1[1]);
-  return;
+    FUN_00310d0a(vector, vector[0], vector[1]);
 }
 
 } /* extern "C" */

@@ -48,7 +48,7 @@ extern int FUN_001801a4(void);
 /* Supplied declaration required: FUN_001aba54. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e8bb0. */
-extern int FUN_004c6e10(int);
+extern int isOutsideRange4To53(int);
 /* Supplied declaration required: FUN_004c8340. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004e0114. */
@@ -84,7 +84,7 @@ unsigned int FUN_004e933c(int *param_1,int param_2)
   temp_v1 = 0x100;
   asdMemoryAllocTracked(0x100,0x100,0,0x368,1);
   temp_v7 = temp_v1;
-  temp_v1 = FUN_004c6e10((int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e));
+  temp_v1 = isOutsideRange4To53((int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e));
   if (temp_v1 != 0) {
     temp_v5 = 4;
     temp_v1 = 0x32;

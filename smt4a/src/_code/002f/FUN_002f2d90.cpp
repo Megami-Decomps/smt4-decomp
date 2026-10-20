@@ -1,15 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0062d830; /* 0x62d830 */
+extern s32 DAT_0062d830[];
 
-
-void FUN_002f2d90(int param_1)
-
+/* Increments entry `index` of the counter table at 0x62D830. */
+void FUN_002f2d90(s32 index)
 {
-  *(int *)(&DAT_0062d830 + param_1 * 4) = *(int *)(&DAT_0062d830 + param_1 * 4) + 1;
-  return;
+    DAT_0062d830[index] = DAT_0062d830[index] + 1;
 }
 
 } /* extern "C" */

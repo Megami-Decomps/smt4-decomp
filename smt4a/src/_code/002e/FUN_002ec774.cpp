@@ -24,8 +24,8 @@ typedef struct {
 /* Supplied declaration required: FUN_002ec728. */
 /* Supplied declaration required: FUN_002f44ec. */
 extern int FUN_002fd078(int, unsigned int);
-extern int FUN_0030fbec(unsigned int **, int *);
-extern int FUN_0030fbfc(int *, unsigned int *);
+extern int wordRefsEqual_0030fbec(unsigned int **, int *);
+extern int wordRefsEqual_0030fbfc(int *, unsigned int *);
 
 
 unsigned int FUN_002ec774(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -68,7 +68,7 @@ unsigned int FUN_002ec774(int param_1,unsigned int param_2,unsigned int param_3,
     }
   }
   temp_v7 = *(unsigned int *)(param_1 + 0x14);
-  temp_v0 = FUN_0030fbfc(&temp_v6,(unsigned int *)&temp_v7);
+  temp_v0 = wordRefsEqual_0030fbfc(&temp_v6,(unsigned int *)&temp_v7);
   if ((temp_v0 != 0) ||
      (temp_v1 = FUN_002f44ec(temp_v4,temp_v3,temp_v6 + 0x10), temp_v0 = temp_v6, temp_v1 != 0)) {
     temp_v0 = *(int *)(param_1 + 0x14);
@@ -90,7 +90,7 @@ unsigned int FUN_002ec774(int param_1,unsigned int param_2,unsigned int param_3,
     }
     temp_v6 = *(int *)(param_1 + 0x30);
     temp_v3 = puVar6;
-    temp_v0 = FUN_0030fbec(&temp_v3,&temp_v6);
+    temp_v0 = wordRefsEqual_0030fbec(&temp_v3,&temp_v6);
     if ((temp_v0 != 0) ||
        (temp_v0 = FUN_002f44ec(temp_v4,&uStack_20,temp_v3 + 4), puVar4 = temp_v3, temp_v0 != 0)) {
       puVar4 = *(unsigned int **)(param_1 + 0x30);

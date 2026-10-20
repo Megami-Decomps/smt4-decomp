@@ -207,13 +207,13 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: FUN_0029e874. */
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: FUN_002a03a0. */
 /* Supplied declaration required: FUN_002a0cc8. */
-extern int FUN_002a0ce8(void);
+extern int sys43e188GetState(void);
 /* Supplied declaration required: FUN_002a8740. */
 /* Supplied declaration required: FUN_002a8764. */
 /* Supplied declaration required: FUN_002aa278. */
@@ -847,9 +847,9 @@ LAB_0018d058:
               *(int *)(temp_v17 + 0x30) = temp_v5;
               temp_v6 = FUN_003c1c44(*(unsigned short *)(temp_v17 + 0x46),*(unsigned char *)(temp_v17 + 0x48),
                                    temp_v17 + 0x30);
-              temp_v7 = FUN_0029ebac(temp_v17,1);
-              if (((temp_v7 != 0) || (temp_v7 = FUN_0029ebac(temp_v17,2), temp_v7 != 0)) ||
-                 (temp_v7 = FUN_0029ebac(temp_v17,10), temp_v7 != 0)) {
+              temp_v7 = flagWordTestBit(temp_v17,1);
+              if (((temp_v7 != 0) || (temp_v7 = flagWordTestBit(temp_v17,2), temp_v7 != 0)) ||
+                 (temp_v7 = flagWordTestBit(temp_v17,10), temp_v7 != 0)) {
                 temp_v6 = 0;
                 *(int *)(temp_v17 + 0x30) = temp_v5;
               }
@@ -1523,7 +1523,7 @@ joined_r0x0018edf0:
       }
       break;
     case 4:
-      temp_v18 = FUN_002a0ce8();
+      temp_v18 = sys43e188GetState();
       if (temp_v18 != 0) {
         if (*(char *)(temp_v2 + 0xd640) != '\0') {
           FUN_0029bed8(*(unsigned short *)(temp_v4 + 0x46));
@@ -1582,7 +1582,7 @@ joined_r0x0018edf0:
       }
       break;
     case 7:
-      temp_v4 = FUN_002a0ce8();
+      temp_v4 = sys43e188GetState();
       if (temp_v4 != 0) {
         temp_v4 = FUN_00295408();
         temp_v8 = FUN_002efe2c();
@@ -1708,7 +1708,7 @@ joined_r0x0018edf0:
         }
         break;
       case 4:
-        temp_v8 = FUN_002a0ce8();
+        temp_v8 = sys43e188GetState();
         if (temp_v8 != 0) {
           FUN_0029c424(1);
           FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x3574),10);
@@ -1767,7 +1767,7 @@ joined_r0x0018edf0:
           }
         }
         else {
-          temp_v8 = FUN_002a0ce8();
+          temp_v8 = sys43e188GetState();
           if (temp_v8 != 0) {
             FUN_0029c424(1);
             FUN_00296f4c(*(unsigned int *)(temp_v2 + 0x3574),0xb);
@@ -1889,7 +1889,7 @@ joined_r0x0018edf0:
           *(unsigned char *)(temp_v2 + 0xd55d) = 0;
         }
       }
-      temp_v4 = FUN_002a0ce8();
+      temp_v4 = sys43e188GetState();
       if (temp_v4 != 0) {
         if (*(char *)(temp_v2 + 0xd55d) != '\0') {
           FUN_00295d28(*(unsigned int *)(temp_v2 + 0xd558));
@@ -1910,7 +1910,7 @@ joined_r0x0018edf0:
       }
       break;
     case 4:
-      temp_v4 = FUN_002a0ce8();
+      temp_v4 = sys43e188GetState();
       if (temp_v4 != 0) {
         temp_v4 = *(int *)(temp_v2 + 0xcf78) + 1;
         *(int *)(temp_v2 + 0xcf78) = temp_v4;

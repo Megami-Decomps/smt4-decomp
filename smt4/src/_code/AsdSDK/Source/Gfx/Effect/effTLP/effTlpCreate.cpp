@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 92 vs built 90 rows, 107 diff lines. */
+/* NON_MATCHING: the allocation size is computed as (count*16 + count*4 + 40) before the trace in retail (shifts/adds, count kept in r8), and the loop registers differ */
 #include "AsdSDK/Source/Gfx/Effect/effTLP.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -13,12 +14,14 @@ void *FUN_0028c814(void);
 TlpObject *effTlpCreate(TlpFile *file)
 {
     u32 count = file->count;
-    TlpObject *tlp = (TlpObject *)memAlloc(0x10000, 0x100, 0, count * 0x14 + 0x28, 0x10, 1);
+    TlpObject *tlp;
     TlpEntry *src;
     u8 *block;
     u32 i;
     u32 total;
 
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effTLP.cpp", 54);
+    tlp = (TlpObject *)memAlloc(0x10000, 0x100, 0, count * 0x14 + 0x28, 0x10, 1);
     tlp->refCount = 0;
     tlp->unk20 = -1;
     tlp->self = tlp;

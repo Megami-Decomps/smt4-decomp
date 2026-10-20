@@ -1,24 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0030fbc0(unsigned int, unsigned int);
+void FUN_0030fbc0(u32 dest, u32 value);
+s32 FUN_002e789a(void *object);
 
-extern int FUN_002e789a(int);
-/* Supplied declaration required: FUN_0030fbc0. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u32 value;
+} Holder;
 
-
-unsigned char FUN_00303d1e(unsigned int param_1,int param_2)
-
+/* When FUN_002e789a accepts `holder`, passes `dest` and the word at 0x44 to FUN_0030fbc0; returns whether it was accepted. */
+u8 FUN_00303d1e(u32 dest, Holder *holder)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002e789a(param_2);
-  if (temp_v0 != 0) {
-    FUN_0030fbc0(param_1,*(unsigned int *)(param_2 + 0x44));
-  }
-  return temp_v0 != 0;
+    s32 accepted;
+
+    accepted = FUN_002e789a(holder);
+    if (accepted != 0) {
+        FUN_0030fbc0(dest, holder->value);
+    }
+    return accepted != 0;
 }
 
 } /* extern "C" */

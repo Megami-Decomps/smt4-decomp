@@ -49,7 +49,7 @@ extern int FUN_00153588(short);
 extern unsigned int FUN_00156850(unsigned short, unsigned int);
 extern unsigned int FUN_00156868(void);
 extern unsigned int FUN_0015687c(void);
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_0016432c. */
 /* Supplied declaration required: FUN_001654f0. */
@@ -305,7 +305,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         FUN_0014f2a8(param_3,param_5,temp_v9,param_6);
         break;
       case 0xf87e:
-        temp_v7 = FUN_0015688c();
+        temp_v7 = saveSlotFindSelected();
         if (temp_v7 == 0) {
           temp_v9[0] = 0;
         }

@@ -1,25 +1,21 @@
-#include "romwright_types.h"
+#include "shard/Shard003D.h"
 
 extern "C" {
 
-extern int FUN_0014af84(void);
+extern GameBlock2830C *FUN_0014af84(void);
 
-
-void FUN_003dfdf0(int param_1)
-
+/* Adds `delta` to the halfword at +0x2830C, clamped to 0..999. */
+void FUN_003dfdf0(s32 delta)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0014af84();
-  param_1 = *(short *)(temp_v0 + 0x2830c) + param_1;
-  if (param_1 >= 1000) {
-    param_1 = 999;
-  }
-  else if (param_1 < 0) {
-    param_1 = 0;
-  }
-  *(short *)(temp_v0 + 0x2830c) = (short)param_1;
-  return;
+    GameBlock2830C *block = FUN_0014af84();
+
+    delta = block->unk2830C + delta;
+    if (delta >= 1000) {
+        delta = 999;
+    } else if (delta < 0) {
+        delta = 0;
+    }
+    block->unk2830C = delta;
 }
 
 } /* extern "C" */

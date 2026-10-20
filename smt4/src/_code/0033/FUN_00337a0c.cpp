@@ -1,15 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Entry {
+    /* 0x0 */ u32 b;
+    /* 0x4 */ u32 a;
+} Entry;
 
-void FUN_00337a0c(int param_1,unsigned int param_2,unsigned int param_3)
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x1F0];
+    /* 0x1F0 */ Entry entries[0x20];
+    /* 0x2F0 */ u8 unk2F0[0x100];
+    /* 0x3F0 */ int count;
+} Obj;
 
+/* Appends the (b, a) pair to the entry list. */
+void FUN_00337a0c(Obj *obj, u32 a, u32 b)
 {
-  *(unsigned int *)(param_1 + *(int *)(param_1 + 0x3f0) * 8 + 0x1f0) = param_3;
-  *(unsigned int *)(param_1 + *(int *)(param_1 + 0x3f0) * 8 + 500) = param_2;
-  *(int *)(param_1 + 0x3f0) = *(int *)(param_1 + 0x3f0) + 1;
-  return;
+    obj->entries[obj->count].b = b;
+    obj->entries[obj->count].a = a;
+    obj->count = obj->count + 1;
 }
 
 } /* extern "C" */

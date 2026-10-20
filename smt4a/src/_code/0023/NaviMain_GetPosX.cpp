@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f574; /* 0x57f574 */
+typedef struct Navi {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 posX;
+} Navi;
+extern Navi *DAT_0057f574;
 
-
-unsigned int NaviMain_GetPosX(void)
-
+/* Returns the navigator's X position. */
+u32 NaviMain_GetPosX(void)
 {
-  return *(unsigned int *)(DAT_0057f574 + 0xc);
+    return DAT_0057f574->posX;
 }
 
 } /* extern "C" */

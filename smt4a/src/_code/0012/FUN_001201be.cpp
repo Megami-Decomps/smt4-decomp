@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001145d8(int, int);
+void *FUN_001145d8(void *dest, const void *source);
 
-/* Supplied declaration required: FUN_001145d8. */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kindA;
+    /* 0x05 */ u8 kindB;
+    /* 0x06 */ u8 unk06[2];
+    /* 0x08 */ u8 part[1];
+} Record;
 
-
-int FUN_001201be(int param_1,int param_2)
-
+/* Assignment: copies the two bytes and the sub-part (through FUN_001145d8) from `source` and returns `dest`. */
+Record *FUN_001201be(Record *dest, const Record *source)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned char *)(param_1 + 4) = *(unsigned char *)(param_2 + 4);
-  *(unsigned char *)(param_1 + 5) = *(unsigned char *)(param_2 + 5);
-  FUN_001145d8(param_1 + 8,param_2 + 8);
-  return param_1;
+    dest->kindA = source->kindA;
+    dest->kindB = source->kindB;
+    FUN_001145d8(dest->part, source->part);
+    return dest;
 }
 
 } /* extern "C" */

@@ -15,7 +15,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001010f2. */
-extern unsigned int *FUN_002c6644(void);
+extern unsigned int *__aeabi_errno_addr(void);
 extern int *FUN_002c6a50(void);
 
 
@@ -56,12 +56,12 @@ void FUN_00100dc4(unsigned char *param_1,unsigned int *param_2,unsigned int para
     temp_v2 = -(unsigned int)(pbVar6 != (unsigned char *)0x0) - temp_v1;
     if ((int)(-(unsigned int)(pbVar6 != (unsigned char *)0x0) - temp_v2) < 0 !=
         (SBORROW4(0,temp_v2) != SBORROW4(-temp_v2,(unsigned int)(pbVar6 != (unsigned char *)0x0)))) {
-      puVar3 = (unsigned int *)FUN_002c6644();
+      puVar3 = (unsigned int *)__aeabi_errno_addr();
       *puVar3 = 2;
     }
   }
   else if (temp_v1 < 0) {
-    puVar3 = (unsigned int *)FUN_002c6644();
+    puVar3 = (unsigned int *)__aeabi_errno_addr();
     *puVar3 = 2;
   }
   return;

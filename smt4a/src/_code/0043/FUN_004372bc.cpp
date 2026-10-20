@@ -8,7 +8,7 @@ int FUN_00436c10(int *, unsigned int *, unsigned char *);
 int FUN_00436d04(unsigned int *, unsigned char *);
 int FUN_004387bc(...);
 int FUN_004387f0(...);
-int FUN_005153b4(int *, int *, int);
+int variantSetHalfA(int *, int *, int);
 int FUN_005153cc(void);
 int FUN_005155bc(int *);
 
@@ -25,7 +25,7 @@ typedef struct {
 extern int FUN_00437bc0(int *, short);
 /* Supplied declaration required: FUN_004387bc. */
 /* Supplied declaration required: FUN_004387f0. */
-/* Supplied declaration required: FUN_005153b4. */
+/* Supplied declaration required: variantSetHalfA. */
 /* Supplied declaration required: FUN_005153cc. */
 /* Supplied declaration required: FUN_005155bc. */
 extern int FUN_005228c8(int *, short);
@@ -144,7 +144,7 @@ unsigned int FUN_004372bc(unsigned int *param_1,int *param_2)
     *piVar10 = (int)piVar8;
     *(int **)(*piVar8 + 4) = piVar8;
     temp_v6 = temp_v5;
-    FUN_005153b4(piVar8 + 2,&temp_v6,temp_v0);
+    variantSetHalfA(piVar8 + 2,&temp_v6,temp_v0);
     piVar8 = (int *)piVar2[1];
     *(int **)(*piVar2 + 4) = piVar8;
     *(int *)piVar2[1] = *piVar2;

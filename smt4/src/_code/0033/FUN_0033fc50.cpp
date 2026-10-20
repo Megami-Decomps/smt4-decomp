@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002c424c(char [28], int, unsigned int);
 
 extern int FUN_00295d7c(int);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(int);
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_002c424c. */
@@ -46,9 +46,9 @@ unsigned int FUN_0033fc50(void)
         temp_v1 = FUN_002a8740((int)acStack_30[temp_v0]);
         if ((((temp_v1 != 0) && (temp_v2 = FUN_003bc9b8(), temp_v2 != 0)) &&
             (temp_v2 = FUN_00295d7c(temp_v1), temp_v2 == 0)) &&
-           (((temp_v2 = FUN_0029ebac(temp_v1,1), temp_v2 == 0 &&
-             (temp_v2 = FUN_0029ebac(temp_v1,10), temp_v2 == 0)) &&
-            (temp_v1 = FUN_0029ebac(temp_v1,2), temp_v1 == 0)))) {
+           (((temp_v2 = flagWordTestBit(temp_v1,1), temp_v2 == 0 &&
+             (temp_v2 = flagWordTestBit(temp_v1,10), temp_v2 == 0)) &&
+            (temp_v1 = flagWordTestBit(temp_v1,2), temp_v1 == 0)))) {
           return 1;
         }
         temp_v0 = temp_v0 + 1;

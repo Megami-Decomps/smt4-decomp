@@ -3,11 +3,11 @@
 
 extern "C" {
 
-extern u8 *FUN_0037d494(void);
+extern u8 *gameDataBlocksGetHalf280C4(void);
 
 void FUN_0040a7b4(void)
 {
-    *FUN_0037d494() &= ~1;
+    *gameDataBlocksGetHalf280C4() &= ~1;
 }
 
 }

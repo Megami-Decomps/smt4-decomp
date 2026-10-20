@@ -16,7 +16,7 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 /* Supplied declaration required: scrSetResult. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
-extern unsigned int FUN_0029ebac(unsigned int, unsigned int);
+extern unsigned int flagWordTestBit(unsigned int, unsigned int);
 extern unsigned int FUN_002a8740(int);
 
 
@@ -43,7 +43,7 @@ unsigned int FUN_002f7cc4(void)
   }
   else {
     temp_v3 = FUN_002a8740(temp_v0 - 0x6d);
-    temp_v1 = FUN_0029ebac(temp_v3,temp_v1 & 0xffff);
+    temp_v1 = flagWordTestBit(temp_v3,temp_v1 & 0xffff);
   }
   scrSetResult(temp_v1 != 0);
   return 1;

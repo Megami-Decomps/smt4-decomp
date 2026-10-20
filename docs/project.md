@@ -18,6 +18,7 @@ tools/assign_tus.py   places functions in source files from assert paths and fil
 tools/shared.py       pairs the functions both games share and compares their progress
 tools/fdiff.py        compiles one function and diffs its disassembly and relocations against retail
 tools/names.py        names a function or global in every file at once and records the evidence
+tools/units.py        splits a unit the analysis merged from two functions (symbols, project, objdiff, source)
 tools/progress_site.py  renders both games' proven progress as a static site (build/site/)
 ```
 
@@ -74,6 +75,14 @@ retail `.code` and the result is byte-identical; relink lists every function it 
 and why. Six functions per game that objdiff scores 100% stay retail bytes:
 `nw_gfx_internal_NWCopyVec4Reverse`, `NWCopyMtx24Reverse` and their copies load with `vldmia r1!`, a
 writeback armcc emits only when the pointer is used afterwards, so they were hand-written assembly.
+
+The compiled objects never went through armlink, so `build.py` repeats what armlink did to retail
+after each compile: a branch to an undefined `__weak` function or to the very next instruction
+becomes a NOP (`mov r0, r0`; `mov r8, r8` twice in Thumb). Retail target objects, in turn, hold calls
+in the compiler's form (`bl` with a relocation; the linker chose `blx`), and mark a string literal
+that code addresses pc-relatively as data. relink links with `--no-warn-mismatch` because retail mixes
+units built for different CPUs (`--cpu=5TE` runtime code next to MPCore code), and accepts a compiled
+function longer than retail's when the extra bytes are a literal the image holds right after it.
 
 ## Progress site
 

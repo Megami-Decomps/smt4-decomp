@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00244c70(...);
-int FUN_00357af8(void);
+int sub68OwnerCall5(void);
 int FUN_00357b70(int, int, int, int, int, int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -30,7 +30,7 @@ extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 
 
 /* Supplied declaration required: FUN_00244c70. */
 extern int FUN_0033aa6c(int);
-/* Supplied declaration required: FUN_00357af8. */
+/* Supplied declaration required: sub68OwnerCall5. */
 /* Supplied declaration required: FUN_00357b70. */
 extern int FUN_00364484(int);
 
@@ -45,7 +45,7 @@ void FUN_002ddea0(void)
   int temp_v3;
   int temp_v4;
   
-  FUN_00357af8();
+  sub68OwnerCall5();
   temp_v4 = 0;
   do {
     temp_v3 = (*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v4 * 0x58;

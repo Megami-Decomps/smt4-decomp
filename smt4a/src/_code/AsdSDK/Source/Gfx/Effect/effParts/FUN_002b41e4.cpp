@@ -1,74 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b41e4` (_code @ 0x2b41e4, 0x9c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
-int memAlloc(int, int, int, int, int, int);
-int asdMemFree(void);
-int rt_memcpy(void);
+extern const char DAT_0053d0f8[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
-typedef struct fn_002b41e4_arg0 fn_002b41e4_arg0;
-typedef struct fn_002b41e4_arg1 fn_002b41e4_arg1;
-struct fn_002b41e4_arg0 {
-    unsigned char pad_0x0[0xc];
-    undefined2 field_0xc; /* +0xc */
-    unsigned char pad_0xe[0x2];
-    undefined4 field_0x10; /* +0x10 */
-    int field_0x14; /* +0x14 */
-    int field_0x18; /* +0x18 */
-};
-struct fn_002b41e4_arg1 {
-    unsigned char pad_0x0[0x1];
-    byte field_0x1; /* +0x1 */
-    byte field_0x2; /* +0x2 */
-    unsigned char pad_0x3[0x9];
-    unsigned char field_0xc; /* +0xc */
-    unsigned char pad_0xd[0x2];
-    byte field_0xf; /* +0xf */
-    byte field_0x10; /* +0x10 */
-    byte field_0x11; /* +0x11 */
-};
+void *memAlloc(int heap, int alignClass, int unk08, int size, int align, int fromFront);
+void asdMemFree(void *block);
+void *rt_memcpy(void *dst, const void *src, u32 size);
 
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
+/* A heap copy of some data, as held by an effect part. */
+typedef struct PartData {
+    u8 unk00[0xc];
+    u16 id;       /* 0x0c */
+    u8 unk0e[2];
+    void *data;   /* 0x10 */
+    s32 size;     /* 0x14 */
+    void *block;  /* 0x18: owned heap block */
+} PartData;
 
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-void FUN_002b41e4(fn_002b41e4_arg0 *param_1,fn_002b41e4_arg1 *param_2,int param_3,unsigned short param_4
-                 )
-
+/* Replaces the part's data with a copy of `size` bytes from `src`; an empty source leaves it cleared. */
+void FUN_002b41e4(PartData *part, const void *src, s32 size, u16 id)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_1->field_0x18 != 0) {
-    asdMemFree();
-    param_1->field_0x10 = 0;
-    param_1->field_0x14 = 0;
-    param_1->field_0x18 = 0;
-  }
-  temp_v0 = 0;
-  if (param_2 != (fn_002b41e4_arg1 *)0x0) {
-    temp_v0 = param_3;
-  }
-  if ((param_2 != (fn_002b41e4_arg1 *)0x0 && param_3 != 0) && -1 < temp_v0) {
-    temp_v0 = 0x10000;
-    memAlloc(0x10000,0x100,0,param_3,0x10,1);
-    param_1->field_0xc = param_4;
-    param_1->field_0x18 = temp_v0;
-    param_1->field_0x10 = temp_v0;
-    param_1->field_0x14 = param_3;
-    rt_memcpy();
-    return;
-  }
-  return;
+    if (part->block != NULL) {
+        asdMemFree(part->block);
+        part->data = NULL;
+        part->size = 0;
+        part->block = NULL;
+    }
+    if (src != NULL && size > 0) {
+        void *block;
+
+        asdDebugTrace(DAT_0053d0f8, 1060);
+        block = memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
+        part->id = id;
+        part->block = block;
+        part->data = block;
+        part->size = size;
+        rt_memcpy(block, src, size);
+    }
 }
 
 } /* extern "C" */

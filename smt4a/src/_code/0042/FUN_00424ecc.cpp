@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00513ff0(unsigned int, int *);
+int readInnerWord6(unsigned int, int *);
 int FUN_00514018(unsigned int, unsigned int, int *);
 int FUN_00514284(unsigned int, unsigned int);
 int rt_memcpy(int, unsigned int *);
@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00513ff0. */
+/* Supplied declaration required: readInnerWord6. */
 /* Supplied declaration required: FUN_00514018. */
 extern char FUN_00514088(unsigned int, unsigned int, unsigned int **, unsigned int *, unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_00514284. */
@@ -45,7 +45,7 @@ void FUN_00424ecc(int param_1)
   unsigned char temp_v11 [8];
   unsigned char temp_v12 [4];
   
-  FUN_00513ff0(**(unsigned int **)(param_1 + 0x18),&temp_v9);
+  readInnerWord6(**(unsigned int **)(param_1 + 0x18),&temp_v9);
   if (temp_v9 == 0) {
     return;
   }

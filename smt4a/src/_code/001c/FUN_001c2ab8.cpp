@@ -32,7 +32,7 @@ extern int FUN_001c2484(void);
 /* Supplied declaration required: FUN_001cc1d0. */
 extern int FUN_001cc570(int, int);
 /* Supplied declaration required: FUN_001cd1e8. */
-extern int FUN_001cd210(unsigned char *, unsigned int *, unsigned int);
+extern int slotTableFillResult(unsigned char *, unsigned int *, unsigned int);
 extern unsigned int __aeabi_uidivmod(unsigned int);
 extern unsigned int *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetChannelInfoTable(unsigned int);
 /* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Free. */
@@ -60,7 +60,7 @@ void FUN_001c2ab8(int param_1,unsigned char *param_2)
     *(unsigned int *)(param_1 + 0x10c) = *(unsigned int *)(param_2 + 0x10);
     FUN_001cb9dc(temp_v7);
     FUN_001cb954(temp_v7,*(unsigned int *)(param_1 + 0x10c));
-    temp_v0 = FUN_001cd210(temp_v7,(unsigned int *)&temp_v4,0);
+    temp_v0 = slotTableFillResult(temp_v7,(unsigned int *)&temp_v4,0);
     if (temp_v0 != 0) {
       *(unsigned int *)(param_1 + 0x210) = temp_v4;
       *(unsigned int *)(param_1 + 0x214) = temp_v5;

@@ -14,7 +14,7 @@ int FUN_00224880(int);
 int FUN_00275bc8(void);
 int FUN_00275f44(...);
 int FUN_0031ed60(char *, int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_0035d7bc(char *);
 
 extern signed char DAT_0057f6c9; /* 0x57f6c9 */
@@ -35,7 +35,7 @@ extern int DAT_005e2110; /* 0x5e2110 */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_00275f44. */
 /* Supplied declaration required: FUN_0031ed60. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_0035d7bc. */
 extern int FUN_0035d83c(char *);
 
@@ -82,7 +82,7 @@ unsigned int FUN_00229c9c(unsigned int param_1,int param_2)
     FUN_00275f44(DAT_005e2110);
     pcVar2[0x5c] = '\x01';
     pcVar2[0x54] = '\0';
-    FUN_003491e8();
+    obj04Finish();
     return 0;
   }
   switch(*(unsigned int *)(pcVar2 + 0xc)) {

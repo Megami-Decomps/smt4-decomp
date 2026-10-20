@@ -1,42 +1,39 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001800b8(unsigned int);
-int asdMemFree(...);
+void FUN_001800b8(u32 handle);
+void asdMemFree(void *memory);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Shared {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 count;
+    /* 0x10 */ s32 refCount;
+    /* 0x14 */ u32 *handles;
+    /* 0x18 */ void *buffer;
+} Shared;
 
-/* Supplied declaration required: FUN_001800b8. */
-/* Supplied declaration required: asdMemFree. */
-
-
-void FUN_00222104(int *param_1)
-
+/* Drops one reference to the shared block `*ref`: on the last one releases its handles and buffer; then frees the reference itself. */
+void FUN_00222104(Shared **ref)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = *param_1;
-  temp_v0 = *(int *)(temp_v1 + 0x10) - 1;
-  *(int *)(temp_v1 + 0x10) = temp_v0;
-  if (temp_v0 == 0) {
-    temp_v2 = 0;
-    if (temp_v2 < *(int *)(temp_v1 + 0xc)) {
-      do {
-        FUN_001800b8(*(unsigned int *)(*(int *)(temp_v1 + 0x14) + temp_v2 * 4));
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < *(int *)(temp_v1 + 0xc));
+    s32 remaining;
+    Shared *shared;
+    s32 i;
+
+    shared = *ref;
+    remaining = shared->refCount - 1;
+    shared->refCount = remaining;
+    if (remaining == 0) {
+        i = 0;
+        if (i < shared->count) {
+            do {
+                FUN_001800b8(shared->handles[i]);
+                i = i + 1;
+            } while (i < shared->count);
+        }
+        asdMemFree(shared->buffer);
     }
-    asdMemFree(*(unsigned int *)(temp_v1 + 0x18));
-  }
-  asdMemFree(param_1);
-  return;
+    asdMemFree(ref);
 }
 
 } /* extern "C" */

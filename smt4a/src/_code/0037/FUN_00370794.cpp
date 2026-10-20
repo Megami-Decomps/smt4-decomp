@@ -1,14 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0037.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
+extern PanelRef DAT_0057f588;
 
-
-unsigned int FUN_00370794(void)
-
+u32 FUN_00370794(void)
 {
-  return *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x20);
+    return DAT_0057f588.panel->unk20;
 }
 
 } /* extern "C" */

@@ -74,10 +74,10 @@ extern int FUN_003de75c(unsigned int);
 extern int FUN_003dee58(unsigned int);
 /* Supplied declaration required: FUN_003defe0. */
 /* Supplied declaration required: FUN_00417d08. */
-extern int FUN_00418584(unsigned int);
+extern int partyEntryFlagsBit3(unsigned int);
 extern int FUN_004186a4(void);
 extern unsigned int FUN_004186e0(void);
-extern int FUN_004186f4(unsigned int);
+extern int partyEntryBitsBit4(unsigned int);
 
 
 void FUN_0023eaf8(void)
@@ -153,7 +153,7 @@ void FUN_0023eaf8(void)
         FUN_003d474c();
         FUN_0023ff10();
         temp_v8 = DAT_0057f28c;
-        temp_v3 = FUN_004186f4(temp_v10);
+        temp_v3 = partyEntryBitsBit4(temp_v10);
         if ((temp_v3 == 0) && (temp_v6 = temp_v10, FUN_003defe0(), temp_v6 != 0)) {
           temp_v3 = 0;
           if (temp_v3 < *(int *)(temp_v8 + 0x918)) {
@@ -206,7 +206,7 @@ void FUN_0023eaf8(void)
         FUN_003d474c();
         FUN_0023ff10();
         temp_v8 = DAT_0057f28c;
-        temp_v3 = FUN_004186f4(temp_v10);
+        temp_v3 = partyEntryBitsBit4(temp_v10);
         if ((temp_v3 == 0) && (temp_v6 = temp_v10, FUN_003defe0(), temp_v6 != 0)) {
           temp_v3 = 0;
           if (temp_v3 < *(int *)(temp_v8 + 0x918)) {
@@ -337,7 +337,7 @@ LAB_0023f080:
                   if ((temp_v0 == '\x06' || temp_v0 == '\t') || temp_v0 == '\v') {
                     temp_v8 = FUN_003de75c(temp_v10);
                     if (temp_v8 != 0) {
-                      temp_v8 = FUN_00418584(temp_v10);
+                      temp_v8 = partyEntryFlagsBit3(temp_v10);
                       temp_v0 = '\0';
                       if (temp_v8 != 0) {
                         temp_v0 = *(char *)(temp_v6 + 6);

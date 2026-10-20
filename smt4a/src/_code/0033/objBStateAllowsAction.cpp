@@ -1,0 +1,19 @@
+#include "shard/Shard0033.h"
+
+extern "C" {
+
+extern ObjBRef DAT_00588fd0;
+extern s32 fourPtrsAllNull(u32 value);
+
+/* True when the object's state is 5, 6, 7 or 9 and fourPtrsAllNull accepts its +0x2034 value. */
+u32 objBStateAllowsAction(void)
+{
+    s32 state = DAT_00588fd0.instance->state;
+
+    if ((state == 5 || state == 6 || state == 7 || state == 9) && fourPtrsAllNull(DAT_00588fd0.instance->unk2034) != 0) {
+        return 1;
+    }
+    return 0;
+}
+
+} /* extern "C" */

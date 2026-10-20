@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int DAT_0057f290; /* 0x57f290 */
+typedef struct Record {
+    /* 0x000 */ u8 unk000[0x430];
+    /* 0x430 */ u8 busy;
+} Record;
+extern Record *DAT_0057f290;
 
-
-unsigned char FUN_0023c068(void)
-
+/* Returns whether there is no record or it is not busy. */
+u8 FUN_0023c068(void)
 {
-  char temp_v0;
-  
-  temp_v0 = '\0';
-  if (DAT_0057f290 != 0) {
-    temp_v0 = *(char *)(DAT_0057f290 + 0x430);
-  }
-  return DAT_0057f290 == 0 || temp_v0 == '\0';
+    u8 busy;
+
+    busy = 0;
+    if (DAT_0057f290 != NULL) {
+        busy = DAT_0057f290->busy;
+    }
+    return DAT_0057f290 == NULL || busy == 0;
 }
 
 } /* extern "C" */

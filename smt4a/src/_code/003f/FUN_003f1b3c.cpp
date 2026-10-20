@@ -20,7 +20,7 @@ extern unsigned int DAT_00573a50; /* 0x573a50 */
 extern unsigned int DAT_00573a54; /* 0x573a54 */
 
 /* Supplied declaration required: qsort. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int);
 extern int FUN_0018719c(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
@@ -28,7 +28,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e6490. */
-extern unsigned int FUN_0047f2d8(unsigned int);
+extern unsigned int repackWord(unsigned int);
 
 
 void FUN_003f1b3c(int param_1,int param_2,int param_3,unsigned int *param_4,unsigned int *param_5)
@@ -115,10 +115,10 @@ void FUN_003f1b3c(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
           temp_v8 = temp_v8 + 1;
         } while (temp_v8 < temp_v10);
         if (temp_v7 != 0) {
-          temp_v10 = FUN_001633a0((temp_v7 - 1U) & 0xffff);
+          temp_v10 = lcgRandomRange((temp_v7 - 1U) & 0xffff);
           temp_v10 = *(int *)(temp_v2 + temp_v10 * 4);
           *param_4 = *(unsigned int *)(temp_v10 + 4);
-          temp_v1 = FUN_0047f2d8(*(unsigned int *)(temp_v10 + 8));
+          temp_v1 = repackWord(*(unsigned int *)(temp_v10 + 8));
           *param_5 = temp_v1;
         }
       }

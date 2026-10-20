@@ -1,30 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int dataTableGetCount(unsigned int);
-int dataTableGetEntries(void);
+void dataTableGetCount(u32 table);
+void dataTableGetEntries(void);
+u32 dataTableGet(u32 table, u32 arg);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-/* Supplied declaration required: dataTableGetCount. */
-/* Supplied declaration required: dataTableGetEntries. */
-
-
+/* Looks up data table (0x37, 0), fetches its entries and counts them (results unused). */
 void FUN_002ebda8(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = dataTableGet(0x37,0);
-  dataTableGetEntries();
-  dataTableGetCount(temp_v0);
-  return;
+    u32 table;
+
+    table = dataTableGet(0x37, 0);
+    dataTableGetEntries();
+    dataTableGetCount(table);
 }
 
 } /* extern "C" */

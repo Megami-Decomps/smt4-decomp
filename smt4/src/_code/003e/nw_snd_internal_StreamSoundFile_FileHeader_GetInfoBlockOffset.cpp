@@ -1,40 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_003e66d0_arg0 fn_003e66d0_arg0;
-struct fn_003e66d0_arg0 {
-    unsigned char pad_0x0[0x14];
-    ushort field_0x14; /* +0x14 */
-    unsigned char pad_0x16[0xa];
-    unsigned char field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0xb];
-    unsigned char field_0x2c; /* +0x2c */
-    unsigned char pad_0x2d[0x7];
-    ushort field_0x34; /* +0x34 */
-    unsigned char pad_0x36[0x2a];
-    ushort field_0x60; /* +0x60 */
-};
+typedef struct Header {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u16 infoRef;
+    /* 0x16 */ u8 unk16[0xA];
+    /* 0x20 */ u8 sizedRef[1];
+    /* 0x21 */ u8 unk21[0xB];
+    /* 0x2C */ u8 dataRef[1];
+} Header;
 
-
-unsigned int nw_snd_internal_StreamSoundFile_FileHeader_GetInfoBlockOffset(fn_003e66d0_arg0 *param_1)
-
+/* Finds the info block reference (id 0x4000) among the three header references. */
+u32 nw_snd_internal_StreamSoundFile_FileHeader_GetInfoBlockOffset(Header *header)
 {
-  unsigned short *puVar1;
-  
-  if (param_1->field_0x14 == 0x4000) {
-    puVar1 = &param_1->field_0x14;
-  }
-  else if (*(short *)&param_1->field_0x20 == 0x4000) {
-    puVar1 = (unsigned short *)&param_1->field_0x20;
-  }
-  else if (*(short *)&param_1->field_0x2c == 0x4000) {
-    puVar1 = (unsigned short *)&param_1->field_0x2c;
-  }
-  else {
-    puVar1 = (unsigned short *)0x0;
-  }
-  return *(unsigned int *)(puVar1 + 2);
+    u16 *ref;
+
+    if (header->infoRef == 0x4000) {
+        ref = &header->infoRef;
+    } else if (*(s16 *)header->sizedRef == 0x4000) {
+        ref = (u16 *)header->sizedRef;
+    } else if (*(s16 *)header->dataRef == 0x4000) {
+        ref = (u16 *)header->dataRef;
+    } else {
+        ref = NULL;
+    }
+    return *(u32 *)(ref + 2);
 }
 
 } /* extern "C" */

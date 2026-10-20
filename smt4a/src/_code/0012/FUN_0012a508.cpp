@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e9318(int **);
 int FUN_002e9ec8(int, unsigned int);
 int FUN_002e9f00(int, int, int);
-int FUN_002ea0e4(int **);
+int constructObj0055affc(int **);
 int FUN_002f6be2(int **, int *);
 int FUN_002f6bf0(int);
 int FUN_00302428(int, int *, int);
@@ -30,7 +30,7 @@ extern unsigned char LAB_0012a588; /* 0x12a588 */
 extern int FUN_002e9af4(void);
 /* Supplied declaration required: FUN_002e9ec8. */
 /* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: FUN_002ea0e4. */
+/* Supplied declaration required: constructObj0055affc. */
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: FUN_002f6bf0. */
 /* Supplied declaration required: FUN_00302428. */
@@ -53,7 +53,7 @@ unsigned long long FUN_0012a508(int param_1,int *param_2,int param_3,unsigned in
   temp_v0 = FUN_002e9af4();
   FUN_002e9ec8(temp_v0,*(unsigned int *)(param_1 + 0x6c));
   if (temp_v0 != 0) {
-    FUN_002ea0e4(&piStack_1c);
+    constructObj0055affc(&piStack_1c);
     temp_v0 = (**(romwright_code **)(*param_2 + 0x4c))(param_2,&LAB_0012a588,&piStack_1c);
     if (temp_v0 != 0) {
       temp_v3 = 0;

@@ -8,7 +8,7 @@ int sysPlaySe(...);
 int FUN_00224880(unsigned int);
 int FUN_00275f44(unsigned int, int);
 int FUN_00333dc8(int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_0037e078(void);
 int FUN_0039c388(void);
 int FUN_0039c448(void);
@@ -21,13 +21,13 @@ extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: FUN_003491e8. */
-extern int FUN_00371dec(void);
-extern int FUN_0037de4c(void);
+/* Supplied declaration required: obj04Finish. */
+extern int stateHolderCountMinus1(void);
+extern int stateHolderStateIs8Or10(void);
 /* Supplied declaration required: FUN_0037e078. */
 /* Supplied declaration required: FUN_0039c388. */
-extern unsigned short FUN_0039c3b0(void);
-extern int FUN_0039c3f0(void);
+extern unsigned short stateHolderGetCurrentEntry(void);
+extern int stateHolderStateIs0xD(void);
 /* Supplied declaration required: FUN_0039c448. */
 /* Supplied declaration required: FUN_003a7b74. */
 extern int FUN_003b071c(void);
@@ -54,7 +54,7 @@ unsigned int FUN_00417234(int param_1)
     *(unsigned int *)(param_1 + 0xc) = 2;
   case 2:
     FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
-    temp_v3 = FUN_0037de4c();
+    temp_v3 = stateHolderStateIs8Or10();
     if (temp_v3 != 0) {
       *(unsigned int *)(param_1 + 0xc) = 3;
     }
@@ -65,7 +65,7 @@ unsigned int FUN_00417234(int param_1)
       }
       *(unsigned int *)(param_1 + 0xc) = 7;
     }
-    FUN_003491e8();
+    obj04Finish();
     sysPlaySe(0x9c);
     return 0;
   case 3:
@@ -74,7 +74,7 @@ unsigned int FUN_00417234(int param_1)
       return 0;
     }
     temp_v3 = FUN_003a7b74();
-    temp_v1 = FUN_00371dec();
+    temp_v1 = stateHolderCountMinus1();
     if (temp_v3 == temp_v1) {
       *(unsigned int *)(param_1 + 0xc) = 7;
       *(unsigned int *)(param_1 + 0x3c) = 0xffffffff;
@@ -82,7 +82,7 @@ unsigned int FUN_00417234(int param_1)
     }
     temp_v2 = FUN_003a7b74();
     *(unsigned int *)(param_1 + 0x3c) = temp_v2;
-    temp_v0 = FUN_0039c3b0();
+    temp_v0 = stateHolderGetCurrentEntry();
     *(unsigned short *)(param_1 + 0x3a) = temp_v0;
     FUN_00275f44(*(unsigned int *)(param_1 + 0x1c),0x11);
     *(unsigned int *)(param_1 + 0xc) = 4;
@@ -100,7 +100,7 @@ unsigned int FUN_00417234(int param_1)
     }
     break;
   case 5:
-    temp_v3 = FUN_0039c3f0();
+    temp_v3 = stateHolderStateIs0xD();
     if (temp_v3 == 0) {
       return 0;
     }

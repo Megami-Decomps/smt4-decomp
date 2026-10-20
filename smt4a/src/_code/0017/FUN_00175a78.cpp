@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_00175a78(unsigned int param_1,int param_2)
-
+/* Returns the byte offset of voice (index + 1) in an array of 0x1B8-byte voices. */
+s32 FUN_00175a78(u32 unused, s32 index)
 {
-  return (param_2 + 1) * 0x1b8;
+    return (index + 1) * 0x1B8;
 }
 
 } /* extern "C" */

@@ -14,8 +14,8 @@ typedef struct {
 extern int g_btlStageModel; /* 0x57a4f8 */
 
 extern int FUN_001656a0(unsigned int);
-extern unsigned int *FUN_00317450(unsigned int);
-extern unsigned int *FUN_00340ec8(unsigned int);
+extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
+extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int);
 extern unsigned int FUN_003874fc(unsigned int);
 /* Supplied declaration required: FUN_00401578. */
 
@@ -34,79 +34,79 @@ void FUN_004d463c(int param_1)
   puVar4 = (unsigned int *)(g_btlStageModel + 0xb0);
   switch(temp_v0) {
   case 0:
-    puVar2 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    puVar2 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     *puVar4 = *puVar2;
     return;
   case 1:
-    puVar4 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(temp_v1 + 0xb4) = *puVar4;
     return;
   case 2:
-    puVar4 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(temp_v1 + 0xb8) = *puVar4;
     return;
   case 3:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x58) = *puVar4;
     return;
   case 4:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x5c) = *puVar4;
     return;
   case 5:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x60) = *puVar4;
     return;
   case 6:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 100) = *puVar4;
     return;
   case 7:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x68) = *puVar4;
     return;
   case 8:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x6c) = *puVar4;
     return;
   case 9:
-    puVar4 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x70) = *puVar4;
     return;
   case 0xb:
-    puVar4 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x74) = *puVar4;
     return;
   case 0xc:
-    puVar4 = (unsigned int *)FUN_00340ec8(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x78) = *puVar4;
     return;
   case 0xd:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x7c) = *puVar4;
     return;
   case 0xe:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x80) = *puVar4;
     return;
   case 0xf:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x84) = *puVar4;
     return;
   case 0x10:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x88) = *puVar4;
     return;
   case 0x11:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x8c) = *puVar4;
     return;
   case 0x12:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     *(unsigned int *)(g_btlStageModel + 0x90) = *puVar4;
     return;
   case 0x13:
-    puVar4 = (unsigned int *)FUN_00317450(*(unsigned int *)(param_1 + 0x10));
+    puVar4 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10));
     temp_v0 = *puVar4;
     temp_v1 = FUN_001656a0(9);
     if (temp_v1 != 0) {

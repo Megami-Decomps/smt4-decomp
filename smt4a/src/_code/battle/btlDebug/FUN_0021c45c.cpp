@@ -79,7 +79,7 @@ extern unsigned short FUN_003e53ec(void);
 /* Supplied declaration required: FUN_003eb200. */
 extern int FUN_0047fbb4(unsigned int);
 extern int FUN_00481104(unsigned int);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -295,7 +295,7 @@ void FUN_0021c45c(int param_1,int param_2)
   temp_v1 = 1;
   do {
     if (((*(short *)(param_1 + temp_v1 * 2 + 0x4210) < 0) || (temp_v5 = FUN_001ab854(), temp_v5 == 0)) ||
-       (temp_v5 = FUN_004bd340(temp_v5,1), temp_v5 != 0)) {
+       (temp_v5 = bitsAt60Test(temp_v5,1), temp_v5 != 0)) {
       *(unsigned char *)(param_1 + temp_v1 + 0x41ed) = 1;
     }
     temp_v4 = (unsigned int)temp_v8;

@@ -16,7 +16,7 @@ int FUN_002bd06c(...);
 int FUN_002bf694(...);
 int FUN_002c424c(...);
 int FUN_002d91b8(int);
-int FUN_00323f5c(void);
+int dataTable05Sub9GetCount(void);
 int FUN_003c8b10(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -42,7 +42,7 @@ extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002c424c. */
 extern int FUN_002cdaa4(unsigned short);
 /* Supplied declaration required: FUN_002d91b8. */
-/* Supplied declaration required: FUN_00323f5c. */
+/* Supplied declaration required: dataTable05Sub9GetCount. */
 /* Supplied declaration required: FUN_003c8b10. */
 
 
@@ -220,7 +220,7 @@ unsigned int FUN_003116c8(void)
   *(unsigned char *)(piVar3 + 0x2571) = 0;
   temp_v3 = FUN_002c424c(piVar12,0x50,0xffffffff);
   temp_v9 = 0;
-  FUN_00323f5c();
+  dataTable05Sub9GetCount();
   if (temp_v3 != 0) {
     unaff_r11 = 0x45a;
   }

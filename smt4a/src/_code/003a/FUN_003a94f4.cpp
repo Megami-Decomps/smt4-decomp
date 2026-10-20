@@ -1,32 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a94f4` (_code @ 0x3a94f4, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Script command: result = byte +0x39 of the entry for the argument (0 if there is none). Returns 1. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184310(void);
-int scrSetResult(int);
+struct Entry003a94f4 {
+    /* 0x00 */ u8 unk00[0x39];
+    /* 0x39 */ u8 value;
+};
 
-/* Supplied declaration required: FUN_00184310. */
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
+u32 scrGetArg(u32 index);
+void scrSetResult(u32 value);
+Entry003a94f4 *FUN_00184310(u32 id);
 
-
-unsigned int FUN_003a94f4(void)
-
+u32 FUN_003a94f4(u32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = 0;
-  FUN_00184310();
-  if (temp_v0 != 0) {
-    temp_v1 = *(unsigned char *)(temp_v0 + 0x39);
-  }
-  scrSetResult(temp_v1);
-  return 1;
+    u16 id = scrGetArg(index);
+    u32 result = 0;
+    Entry003a94f4 *entry = FUN_00184310(id);
+
+    if (entry != NULL) {
+        result = entry->value;
+    }
+    scrSetResult(result);
+    return 1;
 }
 
-} /* extern "C" */
+}

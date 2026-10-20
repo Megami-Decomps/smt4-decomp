@@ -1,23 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_002c09d0(...);
 
-/* Supplied declaration required: FUN_002c09d0. */
-
-
-unsigned int FUN_00316d64(int param_1,int param_2)
-
+/* 1 when flag `a` is unset or set, and flag `b` is unset or clear... (each flag checked only when nonzero). */
+u32 FUN_00316d64(int a, int b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (((param_1 == 0) || (temp_v0 = FUN_002c09d0(), temp_v0 != 0)) &&
-     ((param_2 == 0 || (temp_v0 = FUN_002c09d0(param_2), temp_v0 == 0)))) {
-    return 1;
-  }
-  return 0;
+    if (((a == 0) || (FUN_002c09d0() != 0)) &&
+        ((b == 0) || (FUN_002c09d0(b) == 0))) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

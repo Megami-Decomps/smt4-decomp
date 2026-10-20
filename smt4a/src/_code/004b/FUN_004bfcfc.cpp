@@ -10,10 +10,10 @@ int FUN_001aba54(...);
 int sysMemClear(...);
 int FUN_0034a290(...);
 int FUN_003e8bb0(...);
-int FUN_003e9f50(...);
+int counterIncrementSaturating(...);
 int FUN_003f0e20(...);
 int FUN_004bf9a0(...);
-int FUN_004c39b0(...);
+int source4CCopyHalves(...);
 int FUN_004c60c0(...);
 int FUN_004c8340(...);
 int VectorSignedToFloat(...);
@@ -70,17 +70,17 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: btlGetMainState. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_003e8bb0. */
-/* Supplied declaration required: FUN_003e9f50. */
+/* Supplied declaration required: counterIncrementSaturating. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004bf9a0. */
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004c60c0. */
 /* Supplied declaration required: FUN_004c8340. */
@@ -235,7 +235,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
     temp_v20 = 0;
     temp_v21 = 0;
     temp_v22 = 0;
-    FUN_004c39b0(puVar4,temp_v19);
+    source4CCopyHalves(puVar4,temp_v19);
     temp_v5 = 0;
     do {
       if (*(short *)((int)temp_v19 + temp_v5 * 2) != 0) {
@@ -243,7 +243,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
       }
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 9);
-    FUN_003e9f50(temp_v29,puVar4 + 0x59,temp_v8);
+    counterIncrementSaturating(temp_v29,puVar4 + 0x59,temp_v8);
     return 2;
   }
   if (param_1 != 0) {
@@ -251,7 +251,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
     if (temp_v0 >= 2) {
       if (temp_v0 != 2) {
         if (((temp_v0 == 8) &&
-            (temp_v5 = FUN_001633a0(99), temp_v5 < (int)(unsigned int)*(unsigned char *)((int)puVar4 + 799))) &&
+            (temp_v5 = lcgRandomRange(99), temp_v5 < (int)(unsigned int)*(unsigned char *)((int)puVar4 + 799))) &&
            (((1 << *(signed char *)(param_1 + 0x4c)) & 0xffffU & (unsigned int)(unsigned short)puVar4[0x9d]) != 0)) {
           return 5;
         }
@@ -385,7 +385,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
               temp_v34 = 0;
               temp_v35 = 0;
               temp_v36 = 0;
-              FUN_004c39b0(puVar4,&temp_v32);
+              source4CCopyHalves(puVar4,&temp_v32);
               temp_v10 = 0;
               do {
                 if (*(short *)((int)&temp_v32 + temp_v10 * 2) != 0) {
@@ -393,7 +393,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
                 }
                 temp_v10 = temp_v10 + 1;
               } while (temp_v10 < 9);
-              FUN_003e9f50(temp_v29,puVar4 + 0x59,temp_v19[temp_v6]);
+              counterIncrementSaturating(temp_v29,puVar4 + 0x59,temp_v19[temp_v6]);
               temp_v40 = 1;
             }
             temp_v6 = temp_v6 + 1;
@@ -477,7 +477,7 @@ FUN_004bfcfc(int param_1,unsigned int param_2,fn_004bfcfc_arg2 *param_3,unsigned
           temp_v20 = 0;
           temp_v21 = 0;
           temp_v22 = 0;
-          FUN_004c39b0(temp_v6,temp_v19);
+          source4CCopyHalves(temp_v6,temp_v19);
           temp_v10 = 0;
           temp_v6 = 0;
           do {
@@ -512,7 +512,7 @@ LAB_004c070c:
             temp_v5 = -1;
           }
         }
-        temp_v6 = FUN_001633a0(99);
+        temp_v6 = lcgRandomRange(99);
         temp_v8 = temp_v41;
         if (temp_v6 <= temp_v5) {
           return 1;

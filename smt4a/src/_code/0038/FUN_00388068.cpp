@@ -21,7 +21,7 @@ extern int slotRecordFindById(void);
 /* Supplied declaration required: FUN_003e52bc. */
 /* Supplied declaration required: FUN_003fd63c. */
 extern int FUN_0046c458(unsigned int, unsigned int);
-extern int FUN_004bd340(int, unsigned int);
+extern int bitsAt60Test(int, unsigned int);
 
 
 void FUN_00388068(void)
@@ -42,7 +42,7 @@ void FUN_00388068(void)
     temp_v4 = 0;
     do {
       if ((((*(unsigned int *)(temp_v1 + temp_v4 * 4 + 0x28310) & 0xffff) != 0) &&
-          (temp_v2 = slotRecordFindById(), temp_v2 != 0)) && (temp_v3 = FUN_004bd340(temp_v2,1), temp_v3 == 0)) {
+          (temp_v2 = slotRecordFindById(), temp_v2 != 0)) && (temp_v3 = bitsAt60Test(temp_v2,1), temp_v3 == 0)) {
         temp_v3 = FUN_0017760c(temp_v2);
         temp_v0 = ((short)temp_v3 - *(short *)(temp_v2 + 0xe)) + *(short *)(temp_v2 + 0x2a);
         if (temp_v0 <= temp_v3) {

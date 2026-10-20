@@ -11,12 +11,12 @@ int FUN_00275f44(...);
 int FUN_002bf520(void);
 int FUN_002c0b5c(void);
 int FUN_002f4014(void);
-int FUN_00319e58(void);
+int cecProcessCall2(void);
 int FUN_0031f0a8(int, int);
-int FUN_0032e30c(void);
+int playerSummaryFill(void);
 int FUN_0034280c(int);
-int FUN_0035b084(void);
-int FUN_0037b708(void);
+int cecProcessCall4(void);
+int stateAtF4Destroy(void);
 int FUN_003fd63c(int, int);
 
 /* Supplied declaration required: sysPlaySe. */
@@ -30,14 +30,14 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002c0b5c. */
 extern int FUN_002e2014(void);
 /* Supplied declaration required: FUN_002f4014. */
-/* Supplied declaration required: FUN_00319e58. */
+/* Supplied declaration required: cecProcessCall2. */
 /* Supplied declaration required: FUN_0031f0a8. */
-/* Supplied declaration required: FUN_0032e30c. */
+/* Supplied declaration required: playerSummaryFill. */
 /* Supplied declaration required: FUN_0034280c. */
 extern int FUN_00345388(unsigned int);
 extern int FUN_0035b044(void);
-/* Supplied declaration required: FUN_0035b084. */
-/* Supplied declaration required: FUN_0037b708. */
+/* Supplied declaration required: cecProcessCall4. */
+/* Supplied declaration required: stateAtF4Destroy. */
 /* Supplied declaration required: FUN_003fd63c. */
 
 
@@ -59,7 +59,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
         if (temp_v1 == 0) {
           return 0;
         }
-        FUN_0037b708();
+        stateAtF4Destroy();
         *(unsigned char *)(temp_v3 + 0x40) = 1;
         return 0;
       }
@@ -69,9 +69,9 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
           temp_v1 = *(int *)(temp_v3 + 0x38);
           if (temp_v1 != 0) {
             if (temp_v1 == 6 || temp_v1 == 8) {
-              FUN_00319e58();
+              cecProcessCall2();
               FUN_002bf520();
-              FUN_0032e30c();
+              playerSummaryFill();
               FUN_002bf520();
               FUN_002c0b5c();
               FUN_002bf520();
@@ -106,7 +106,7 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
                 }
                 return 0;
               }
-              FUN_0035b084();
+              cecProcessCall4();
               FUN_00275f44(*(unsigned int *)(temp_v3 + 4),9);
               FUN_001ab888();
               *(unsigned char *)(temp_v3 + 0x3f) = 1;
@@ -125,9 +125,9 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
               if (!temp_v4) {
                 if (temp_v1 != 0x81) {
                   if (temp_v1 != 0x11) {
-                    FUN_00319e58();
+                    cecProcessCall2();
                     FUN_002bf520();
-                    FUN_0032e30c();
+                    playerSummaryFill();
                     FUN_002bf520();
                     temp_v1 = FUN_002c0b5c();
                     if (temp_v1 == 5) {
@@ -141,11 +141,11 @@ unsigned int FUN_002c04a0(int *param_1,int param_2)
                       temp_v1 = 6;
                       goto LAB_002c0648;
                     }
-                    FUN_0035b084();
+                    cecProcessCall4();
                   }
                   else {
                     *(unsigned int *)(temp_v3 + 0x38) = 4;
-                    FUN_0035b084();
+                    cecProcessCall4();
                   }
                   if ((*(char *)(temp_v3 + 0x3f) != '\0') &&
                      (temp_v1 = FUN_00224880(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {

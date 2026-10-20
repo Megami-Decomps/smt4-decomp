@@ -1,27 +1,19 @@
-#include "romwright_types.h"
+#include "shard/Scene43dcf0.h"
 
 extern "C" {
 
-int FUN_00293348(int, int);
+int FUN_00293348(int a, int b);
 
-extern int DAT_0043dcf0; /* 0x43dcf0 */
-
-/* Supplied declaration required: FUN_00293348. */
-
-
-void FUN_003111e8(int param_1)
-
+void FUN_003111e8(int flag)
 {
-/* irregular: 1 native warning(s); review required */
-  if (DAT_0043dcf0 == 0) {
-    return;
-  }
-  if (param_1 != 0) {
-    FUN_00293348(8,1);
-    return;
-  }
-  FUN_00293348(0x16,1);
-  return;
+    if (DAT_0043dcf0 == NULL) {
+        return;
+    }
+    if (flag != 0) {
+        FUN_00293348(8, 1);
+        return;
+    }
+    FUN_00293348(0x16, 1);
 }
 
 } /* extern "C" */

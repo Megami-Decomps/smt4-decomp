@@ -11,7 +11,7 @@ int FUN_0019de98(...);
 int FUN_002bf4f4(void);
 int FUN_002c8550(int);
 int FUN_0032d0c8(...);
-int FUN_0032ff20(unsigned int, unsigned char [304]);
+int unitRecordBuild(unsigned int, unsigned char [304]);
 int FUN_00333dc8(...);
 int FUN_003343f0(...);
 int FUN_00359b6c(int);
@@ -33,7 +33,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002c8550. */
 extern int FUN_0032cfc8(void);
 /* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_00359b6c. */
@@ -76,7 +76,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x6832);
     if (*(char *)(temp_v0 + 0x6830) == '\0') {
       temp_v4 = temp_v0 + temp_v3 * 8;
-      FUN_0032ff20((*(unsigned int *)(temp_v4 + 0x13bc) & 0x1ffff) >> 2,temp_v6);
+      unitRecordBuild((*(unsigned int *)(temp_v4 + 0x13bc) & 0x1ffff) >> 2,temp_v6);
       FUN_0032d0c8(0,1,(*(unsigned int *)(temp_v4 + 0x13bc) & 0x1ffff) >> 2,temp_v6);
     }
     if (*(char *)(temp_v0 + 0x6830) == '\x01') {

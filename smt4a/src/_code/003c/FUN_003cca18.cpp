@@ -10,7 +10,7 @@ int FUN_0019de98(int, unsigned int);
 int FUN_0020b908(int, int);
 int FUN_00228b04(int, int);
 int FUN_002a4860(...);
-int FUN_0032ff20(unsigned int, int *);
+int unitRecordBuild(unsigned int, int *);
 int FUN_003450d4(int, int, int, unsigned int);
 int FUN_00359b6c(...);
 
@@ -29,7 +29,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: FUN_00359b6c. */
 
@@ -86,7 +86,7 @@ unsigned int FUN_003cca18(int param_1,unsigned int param_2,unsigned int *param_3
         temp_v2 = (unsigned int)*(unsigned short *)(param_1 + (temp_v0 + temp_v1) * 2 + 0x6832);
         *param_3 = temp_v2;
       }
-      FUN_0032ff20((*(unsigned int *)(param_1 + temp_v2 * 8 + 0x13bc) & 0x1ffff) >> 2,&temp_v3);
+      unitRecordBuild((*(unsigned int *)(param_1 + temp_v2 * 8 + 0x13bc) & 0x1ffff) >> 2,&temp_v3);
       FUN_0020b908(0x10,0);
       FUN_001641b4(0x100020e);
     }

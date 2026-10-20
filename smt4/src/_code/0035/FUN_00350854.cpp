@@ -1,37 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0023a5dc(int);
-int FUN_0034ee98(int);
+int FUN_0023a5dc(void *block);
+int FUN_0034ee98(void *block);
+extern u32 FUN_0034ee48(void *block);
 
-/* Supplied declaration required: FUN_0023a5dc. */
-extern unsigned int FUN_0034ee48(int);
-/* Supplied declaration required: FUN_0034ee98. */
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ u32 state;
+    /* 0x010 */ u8 unk010[0x148];
+    /* 0x158 */ u8 block[1];
+} Obj;
 
-
-unsigned int FUN_00350854(int param_1)
-
+u32 FUN_00350854(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_0034ee98(param_1 + 0x158);
-  if (temp_v0 == 0) {
-    *(unsigned int *)(param_1 + 0xc) = 7;
-    return 0;
-  }
-  temp_v0 = FUN_0023a5dc(param_1 + 0x158);
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_0023a5dc(param_1 + 0x158);
-    temp_v2 = FUN_0034ee48(param_1 + 0x158);
-    if (temp_v1 <= temp_v2) {
-      return 1;
+    u32 current;
+    u32 limit;
+
+    if (FUN_0034ee98(obj->block) == 0) {
+        obj->state = 7;
+        return 0;
     }
-  }
-  return 0;
+    if (FUN_0023a5dc(obj->block) != 0) {
+        current = FUN_0023a5dc(obj->block);
+        limit = FUN_0034ee48(obj->block);
+        if (current <= limit) {
+            return 1;
+        }
+    }
+    return 0;
 }
 
 } /* extern "C" */

@@ -6,15 +6,15 @@ extern "C" {
 
 int FUN_001acf98(int);
 int FUN_004cfe4c(...);
-int FUN_004d0310(int);
+int sub10OwnerStart(int);
 int FUN_004d0738(int, int);
 
 /* Supplied declaration required: FUN_001acf98. */
 /* Supplied declaration required: FUN_004cfe4c. */
 extern int FUN_004d0058(int, unsigned int);
-/* Supplied declaration required: FUN_004d0310. */
+/* Supplied declaration required: sub10OwnerStart. */
 extern int FUN_004d0584(void);
-extern unsigned int FUN_004d066c(int);
+extern unsigned int selectOwnerGetSelected(int);
 /* Supplied declaration required: FUN_004d0738. */
 
 
@@ -32,7 +32,7 @@ unsigned int FUN_004babd8(int param_1)
   temp_v0 = FUN_004cfe4c();
   if (*(char *)(param_1 + 0x9ee) == '\0') {
     FUN_004d0738(param_1 + 0x74,param_1);
-    FUN_004d0310(param_1);
+    sub10OwnerStart(param_1);
   }
   temp_v1 = FUN_004cfe4c(param_1);
   if (temp_v1 != temp_v0) {
@@ -72,7 +72,7 @@ unsigned int FUN_004babd8(int param_1)
   }
   if (*(char *)(param_1 + 0x9ee) == '\0') {
     if (*(char *)(param_1 + 0x86) != '\0') {
-      temp_v3 = FUN_004d066c(param_1 + 0x74);
+      temp_v3 = selectOwnerGetSelected(param_1 + 0x74);
       temp_v0 = FUN_004d0058(param_1,temp_v3);
       if (temp_v0 != 0) {
         temp_v4 = 1;

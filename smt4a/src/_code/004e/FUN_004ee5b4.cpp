@@ -22,8 +22,8 @@ int FUN_004e638c(...);
 int FUN_004e69e8(int *, unsigned int *, int);
 int FUN_004f5f90(unsigned int);
 int FUN_004f6e68(unsigned int);
-int FUN_004f7590(...);
-int FUN_004f7ca4(unsigned int);
+int obj4FSlots28Reset(...);
+int runFourUpdates(unsigned int);
 int FUN_004f7fbc(unsigned int);
 int FUN_004fbeac(int, int, int, int, int);
 
@@ -60,9 +60,9 @@ extern int FUN_004ab594(unsigned int);
 /* Supplied declaration required: FUN_004e69e8. */
 /* Supplied declaration required: FUN_004f5f90. */
 /* Supplied declaration required: FUN_004f6e68. */
-/* Supplied declaration required: FUN_004f7590. */
+/* Supplied declaration required: obj4FSlots28Reset. */
 extern int FUN_004f7aa4(unsigned int, unsigned char);
-/* Supplied declaration required: FUN_004f7ca4. */
+/* Supplied declaration required: runFourUpdates. */
 /* Supplied declaration required: FUN_004f7fbc. */
 /* Supplied declaration required: FUN_004fbeac. */
 
@@ -130,7 +130,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     FUN_004f5f90(DAT_00573808);
   }
   FUN_004e5650(param_1,param_2);
-  FUN_004f7ca4(DAT_00573808);
+  runFourUpdates(DAT_00573808);
   temp_v3 = *param_1;
   FUN_003eebf4(temp_v3,1);
   temp_v3 = FUN_004f7aa4(DAT_00573808,-1 < temp_v3);
@@ -141,7 +141,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     FUN_004e638c(param_1,param_2,0xffff,0);
   }
   FUN_004e1f58(param_1,param_2,0);
-  FUN_004f7590(DAT_00573808);
+  obj4FSlots28Reset(DAT_00573808);
   *(unsigned int *)(DAT_00571508 + 0x64c) = (*(unsigned int *)(DAT_00571508 + 0x64c) & 0xfeffffff) | 0x4000;
   switch(*(unsigned short *)(param_2[10] + 0x1be)) {
   case 1:

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001641c4(void);
 int FUN_00184528(int, int);
 int FUN_00388758(int);
-int FUN_004d097c(unsigned int);
+int releaseEntriesB(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00184528. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_00388758. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_004d0680(int param_1)
@@ -40,7 +40,7 @@ void FUN_004d0680(int param_1)
   if (*(char *)(param_1 + 0x860) == '\0') {
     FUN_00388758(1);
   }
-  FUN_004d097c(*(unsigned int *)(param_1 + 0x84c));
+  releaseEntriesB(*(unsigned int *)(param_1 + 0x84c));
   temp_v0 = 0;
   if (temp_v0 < *(short *)(param_1 + 0x848)) {
     do {

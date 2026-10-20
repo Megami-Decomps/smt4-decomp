@@ -28,7 +28,7 @@ struct fn_002b945c_arg0 {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned short FUN_0014bef4(unsigned int);
 extern int FUN_00162e8c(void);
-extern int FUN_003564ec(fn_002b945c_arg0 *);
+extern int dataTable4CGetEntry(fn_002b945c_arg0 *);
 
 
 void FUN_002b945c(fn_002b945c_arg0 *param_1)
@@ -43,7 +43,7 @@ void FUN_002b945c(fn_002b945c_arg0 *param_1)
   unsigned int temp_v4;
   
   temp_v2 = FUN_00162e8c();
-  temp_v3 = FUN_003564ec(param_1);
+  temp_v3 = dataTable4CGetEntry(param_1);
   *(unsigned char *)(temp_v2 + 0x7c6) = 1;
   *(char *)(temp_v2 + 0x3a) = (char)*(unsigned short *)(temp_v3 + 4);
   temp_v4 = VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);

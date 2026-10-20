@@ -9,8 +9,8 @@ int asdMemFree(...);
 int FUN_0019a7f4(int);
 int FUN_001b2d54(unsigned int, int, unsigned int);
 int FUN_00419e38(void);
-int FUN_00471940(void);
-int FUN_00471e60(unsigned int, undefined4);
+int aocClearFlagD_C(void);
+int aocClearFlagD_10(unsigned int, undefined4);
 
 typedef struct fn_003fcfe8_arg0 fn_003fcfe8_arg0;
 struct fn_003fcfe8_arg0 {
@@ -41,8 +41,8 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_0019a7f4. */
 /* Supplied declaration required: FUN_001b2d54. */
 /* Supplied declaration required: FUN_00419e38. */
-/* Supplied declaration required: FUN_00471940. */
-/* Supplied declaration required: FUN_00471e60. */
+/* Supplied declaration required: aocClearFlagD_C. */
+/* Supplied declaration required: aocClearFlagD_10. */
 
 
 void FUN_003fcfe8(fn_003fcfe8_arg0 *param_1)
@@ -71,10 +71,10 @@ void FUN_003fcfe8(fn_003fcfe8_arg0 *param_1)
   }
   if (param_1->field_0x28 != 0) {
     if (param_1->field_0x8 != 6) {
-      FUN_00471940();
+      aocClearFlagD_C();
     }
     else {
-      FUN_00471e60(g_aocSystem,param_1->field_0x4);
+      aocClearFlagD_10(g_aocSystem,param_1->field_0x4);
     }
     asdMemFree(param_1->field_0x28);
     param_1->field_0x10 = (void *)0x0;

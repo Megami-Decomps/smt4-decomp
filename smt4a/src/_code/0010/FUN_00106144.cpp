@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0011e7da(unsigned int);
+void FUN_0011e7da(u32 handle);
 
-/* Supplied declaration required: FUN_0011e7da. */
+typedef struct HandleHolder {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u32 handle;
+} HandleHolder;
 
-
-void FUN_00106144(int param_1)
-
+/* Passes the object's handle to FUN_0011e7da. */
+void FUN_00106144(HandleHolder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0011e7da(*(unsigned int *)(param_1 + 0x24));
-  return;
+    FUN_0011e7da(object->handle);
 }
 
 } /* extern "C" */

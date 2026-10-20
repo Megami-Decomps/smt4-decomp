@@ -1,24 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int gameGetOptions(void);
+typedef struct Options {
+    /* 0x000 */ u8 unk000[0x62];
+    /* 0x062 */ s16 first;
+    /* 0x064 */ u8 unk064[0xC8];
+    /* 0x12C */ s16 second;
+} Options;
 
+Options *gameGetOptions(void);
 
-unsigned int FUN_00177654(void)
-
+/* Returns 1 when both option values are nonzero. */
+u32 FUN_00177654(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = gameGetOptions();
-  if ((*(short *)(temp_v0 + 0x62) == 0) || (*(short *)(temp_v0 + 300) == 0)) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    Options *options;
+    u32 result;
+
+    options = gameGetOptions();
+    if (options->first == 0 || options->second == 0) {
+        result = 0;
+    } else {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

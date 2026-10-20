@@ -17,7 +17,7 @@ int FUN_00184758(...);
 int FUN_0021af2c(void);
 int statusCameraApply(void);
 int FUN_003a7a88(...);
-int FUN_003e5504(...);
+int linkHolderRunAll(...);
 int FUN_003e5558(...);
 int FUN_003e5858(...);
 int FUN_003e5c68(...);
@@ -39,8 +39,8 @@ int FUN_00371c3c(int, int);
 int FUN_003857b4(...);
 int FUN_0038b3f8(...);
 int FUN_003e40d0(...);
-int FUN_003e549c(...);
-int FUN_003e5b9c(...);
+int linkHolderApplyFirst(...);
+int linkHolderClearFlag(...);
 int FUN_003fce08(...);
 int FUN_0040a244(void);
 int FUN_0040b0f8(...);
@@ -100,7 +100,7 @@ extern int FUN_002effbc(void);
 extern unsigned int FUN_002f72dc(int);
 /* Supplied declaration required: FUN_0031416c. */
 /* Supplied declaration required: FUN_00316580. */
-extern int FUN_0031f664(void);
+extern int objStateNotEnding(void);
 extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_00340a94. */
 /* Supplied declaration required: FUN_00371c3c. */
@@ -111,17 +111,17 @@ extern int FUN_0037df48(void);
 extern int FUN_0039c1f4(void);
 /* Supplied declaration required: FUN_003a7a88. */
 /* Supplied declaration required: FUN_003e40d0. */
-/* Supplied declaration required: FUN_003e549c. */
-/* Supplied declaration required: FUN_003e5504. */
+/* Supplied declaration required: linkHolderApplyFirst. */
+/* Supplied declaration required: linkHolderRunAll. */
 /* Supplied declaration required: FUN_003e5558. */
 /* Supplied declaration required: FUN_003e5858. */
-extern int FUN_003e5ae8(unsigned int);
-/* Supplied declaration required: FUN_003e5b9c. */
+extern int fourPtrsAllNull(unsigned int);
+/* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003e5c68. */
 extern unsigned int FUN_003e5d10(void);
 /* Supplied declaration required: aocHandleButtons. */
 /* Supplied declaration required: FUN_003fce08. */
-extern int FUN_003fcf5c(unsigned int);
+extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
 /* Supplied declaration required: FUN_0040a244. */
 /* Supplied declaration required: FUN_0040ae70. */
@@ -220,7 +220,7 @@ unsigned int FUN_00208c08(void)
     } while (temp_v3 < 0x23);
     if (temp_v11) {
       if (*(char *)(temp_v2 + 0x2030) != '\0') {
-        temp_v3 = FUN_003fcf5c(*(unsigned int *)(temp_v2 + 0x2028));
+        temp_v3 = nkdwLoaderParse(*(unsigned int *)(temp_v2 + 0x2028));
         if (temp_v3 == 0) break;
         *(unsigned char *)(temp_v2 + 0x2030) = 0;
       }
@@ -317,7 +317,7 @@ unsigned int FUN_00208c08(void)
       *(unsigned short *)(temp_v2 + 0x138e) = 0xffff;
       if (temp_v3 != 0) {
         FUN_003857b4(0);
-        FUN_003e5b9c(*(unsigned int *)(temp_v2 + 0x2034));
+        linkHolderClearFlag(*(unsigned int *)(temp_v2 + 0x2034));
         DAT_00588fd2 = 0;
       }
       else {
@@ -345,7 +345,7 @@ unsigned int FUN_00208c08(void)
         }
       }
       *(unsigned int *)(temp_v2 + 5000) = 0;
-      FUN_003e549c(*(unsigned int *)(temp_v2 + 0x2034),0);
+      linkHolderApplyFirst(*(unsigned int *)(temp_v2 + 0x2034),0);
       if (*(unsigned int *)(temp_v2 + 0x205c) != 0) {
         FUN_0040b27c(*(unsigned int *)(temp_v2 + 0x2034),0,*(unsigned int *)(temp_v2 + 0x205c) & 0xffff,7);
       }
@@ -369,7 +369,7 @@ unsigned int FUN_00208c08(void)
     FUN_0020b6d4(temp_v4);
     break;
   case 6:
-    temp_v3 = FUN_003fcf5c(*(unsigned int *)(temp_v2 + 0x2028));
+    temp_v3 = nkdwLoaderParse(*(unsigned int *)(temp_v2 + 0x2028));
     if (temp_v3 != 0) {
       *(unsigned char *)(temp_v2 + 0x2030) = 0;
       *(unsigned char *)(temp_v2 + 0x2031) = 1;
@@ -414,14 +414,14 @@ unsigned int FUN_00208c08(void)
         }
       }
       FUN_003e5858(*(unsigned int *)(temp_v2 + 0x2034));
-      temp_v3 = FUN_003e5ae8(*(unsigned int *)(temp_v2 + 0x2034));
+      temp_v3 = fourPtrsAllNull(*(unsigned int *)(temp_v2 + 0x2034));
       if (temp_v3 != 0) {
         temp_v4 = FUN_001654d8(temp_v2 + 0x418);
         temp_v12 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v15[1] = *(float *)(temp_v2 + 0x203c);
         temp_v15[2] = *(float *)(temp_v2 + 0x2040);
         temp_v15[0] = *(float *)(temp_v2 + 0x2038) + temp_v12 * 0.025f;
-        FUN_003e5504(*(unsigned int *)(temp_v2 + 0x2034),temp_v15);
+        linkHolderRunAll(*(unsigned int *)(temp_v2 + 0x2034),temp_v15);
         FUN_003e5558(*(unsigned int *)(temp_v2 + 0x2034));
         FUN_003e5c68(*(unsigned int *)(temp_v2 + 0x2034),temp_v2 + 0x2044);
 LAB_002093e4:
@@ -552,7 +552,7 @@ LAB_002097e0:
             temp_v15[1] = *(float *)(temp_v2 + 0x203c);
             temp_v15[2] = *(float *)(temp_v2 + 0x2040);
             temp_v15[0] = *(float *)(temp_v2 + 0x2038) + temp_v12 * 0.025f;
-            FUN_003e5504(*(unsigned int *)(temp_v2 + 0x2034),temp_v15);
+            linkHolderRunAll(*(unsigned int *)(temp_v2 + 0x2034),temp_v15);
           }
         }
       }
@@ -565,7 +565,7 @@ LAB_002097e0:
       temp_v12 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v15[2] = *(float *)(temp_v2 + 0x2040);
       temp_v15[0] = *(float *)(temp_v2 + 0x2038) + temp_v12 * 0.025f;
-      FUN_003e5504(*(unsigned int *)(temp_v2 + 0x2034),temp_v15);
+      linkHolderRunAll(*(unsigned int *)(temp_v2 + 0x2034),temp_v15);
     }
     if ((*(char *)(temp_v2 + 0x2015) == '\0') && (temp_v3 = FUN_0023b258(), temp_v3 != 0)) {
       temp_v7 = FUN_0037df48();
@@ -615,7 +615,7 @@ LAB_00209b8c:
             if (temp_v3 >= 3) {
               *(unsigned int *)(temp_v2 + 5000) = 0;
             }
-            FUN_003e549c(*(unsigned int *)(temp_v2 + 0x2034),temp_v15[*(int *)(temp_v2 + 5000)]);
+            linkHolderApplyFirst(*(unsigned int *)(temp_v2 + 0x2034),temp_v15[*(int *)(temp_v2 + 5000)]);
           }
         }
         else {
@@ -623,7 +623,7 @@ LAB_00209b8c:
                  (*(char *)(DAT_00588fd4 + 0x2011) != '\0')) && (temp_v7 = FUN_00334044(), temp_v7 >= 2))
                && ((temp_v7 = FUN_002c7ca0(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)))) &&
               (temp_v3 = FUN_002c7cb4(), temp_v3 != 0)) &&
-             (((temp_v3 = FUN_002effbc(), temp_v3 != 0 && (temp_v3 = FUN_0031f664(), temp_v3 != 0)) &&
+             (((temp_v3 = FUN_002effbc(), temp_v3 != 0 && (temp_v3 = objStateNotEnding(), temp_v3 != 0)) &&
               (temp_v3 = FUN_0039c1f4(), temp_v3 == 0)))) {
             temp_v3 = 8;
             FUN_001517b4(8,0);
@@ -652,7 +652,7 @@ LAB_00209b8c:
           if (((temp_v11 && temp_v8 != 0) && (temp_v7 = FUN_00334044(), temp_v7 >= 2)) &&
              (((temp_v7 = FUN_002c7ca0(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)) &&
               ((((temp_v3 = FUN_002c7cb4(), temp_v3 != 0 && (temp_v3 = FUN_002effbc(), temp_v3 != 0)) &&
-                (temp_v3 = FUN_0031f664(), temp_v3 != 0)) && (temp_v3 = FUN_0039c1f4(), temp_v3 == 0)))))) {
+                (temp_v3 = objStateNotEnding(), temp_v3 != 0)) && (temp_v3 = FUN_0039c1f4(), temp_v3 == 0)))))) {
             temp_v3 = 7;
             FUN_001517b4(7,0);
             if (temp_v3 != 0) {
@@ -677,7 +677,7 @@ LAB_00209b8c:
           if ((((temp_v11 && temp_v8 != 0) && (temp_v7 = FUN_00334044(), temp_v7 >= 2)) &&
               ((temp_v7 = FUN_002c7ca0(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)))) &&
              ((((temp_v3 = FUN_002c7cb4(), temp_v3 != 0 && (temp_v3 = FUN_002effbc(), temp_v3 != 0)) &&
-               (temp_v3 = FUN_0031f664(), temp_v3 != 0)) &&
+               (temp_v3 = objStateNotEnding(), temp_v3 != 0)) &&
               ((temp_v3 = FUN_0039c1f4(), temp_v3 == 0 && (*(int *)(temp_v2 + 0x1374) != 0)))))) {
             temp_v3 = 1;
             FUN_001517b4();

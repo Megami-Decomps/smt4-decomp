@@ -17,7 +17,7 @@ int FUN_00275f44(...);
 int FUN_0039c2a4(...);
 int FUN_003d54f8(int, int);
 int FUN_003fd63c(...);
-int FUN_0050d72c(...);
+int clearTwoWordsAndByte(...);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -55,7 +55,7 @@ extern int FUN_0037de28(void);
 /* Supplied declaration required: FUN_0039c2a4. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003fd63c. */
-/* Supplied declaration required: FUN_0050d72c. */
+/* Supplied declaration required: clearTwoWordsAndByte. */
 
 
 unsigned int FUN_00241058(void)
@@ -201,7 +201,7 @@ unsigned int FUN_00241058(void)
   case 8:
     temp_v5 = FUN_00224880(*(unsigned int *)(temp_v0 + 0x90));
     if (temp_v5 == 2) {
-      FUN_0050d72c(temp_v0 + 0x10);
+      clearTwoWordsAndByte(temp_v0 + 0x10);
       temp_v5 = FUN_002a4b74();
       if (temp_v5 != 0) {
         if (temp_v5 == 1) {

@@ -1,14 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Pair {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 first;
+    /* 0x08 */ u32 second;
+} Pair;
 
-void FUN_00175f48(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Stores the two values at 4 and 8. */
+void FUN_00175f48(Pair *object, u32 first, u32 second)
 {
-  *(unsigned int *)(param_1 + 4) = param_2;
-  *(unsigned int *)(param_1 + 8) = param_3;
-  return;
+    object->first = first;
+    object->second = second;
 }
 
 } /* extern "C" */

@@ -1,0 +1,18 @@
+#include "shard/Shard0038.h"
+
+extern "C" {
+
+typedef struct ByteTriple {
+    /* 0x00 */ s8 v0;
+    /* 0x01 */ s8 v1;
+    /* 0x02 */ s8 v2;
+} ByteTriple;
+
+extern ByteTriple DAT_0057f6bc;
+
+s32 byteTripleGetV2(void)
+{
+    return DAT_0057f6bc.v2;
+}
+
+} /* extern "C" */

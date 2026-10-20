@@ -1,57 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdListBoxMarkDirty(...);
+typedef struct ListBoxItem {
+    /* 0x000 */ u8 unk000[4];
+    /* 0x004 */ u8 mode;
+    /* 0x005 */ u8 unk005;
+    /* 0x006 */ u8 unk006[0x202];
+    /* 0x208 */ u32 unk208;
+    /* 0x20C */ u8 unk20C[4];
+    /* 0x210 */ u32 unk210;
+    /* 0x214 */ u32 unk214;
+} ListBoxItem;
 
-typedef struct fn_0022a3a8_arg0 fn_0022a3a8_arg0;
-struct fn_0022a3a8_arg0 {
-    void *field_0x0; /* +0x0 */
-    undefined1 field_0x4; /* +0x4 */
-    undefined1 field_0x5; /* +0x5 */
-    unsigned char pad_0x6[0x4a];
-    undefined4 field_0x50; /* +0x50 */
-    undefined4 field_0x54; /* +0x54 */
-    undefined4 field_0x58; /* +0x58 */
-    undefined4 field_0x5c; /* +0x5c */
-    unsigned char pad_0x60[0x8];
-    undefined4 field_0x68; /* +0x68 */
-    undefined4 field_0x6c; /* +0x6c */
-    unsigned char pad_0x70[0xc];
-    undefined4 field_0x7c; /* +0x7c */
-    undefined4 field_0x80; /* +0x80 */
-    unsigned char pad_0x84[0x18c];
-    undefined4 field_0x210; /* +0x210 */
-    undefined4 field_0x214; /* +0x214 */
-};
+extern ListBoxItem *asdListBoxFindItem(void *listBox, u32 id);
 
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_6_stack;
+int asdListBoxMarkDirty(void *listBox);
 
-extern int asdListBoxFindItem(void);
-/* Supplied declaration required: asdListBoxMarkDirty. */
-
-
-void FUN_0022a3a8(fn_0022a3a8_arg0 *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4
-                 ,unsigned int param_5,unsigned char param_6)
-
+void FUN_0022a3a8(void *listBox, u32 id, u32 a, u32 b, u32 c, u8 d)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = asdListBoxFindItem();
-  if (temp_v0 != 0) {
-    *(unsigned int *)(temp_v0 + 0x208) = param_3;
-    *(unsigned char *)(temp_v0 + 4) = 3;
-    *(unsigned int *)(temp_v0 + 0x210) = param_4;
-    *(unsigned int *)(temp_v0 + 0x214) = param_5;
-    *(unsigned char *)(temp_v0 + 5) = param_6;
-    asdListBoxMarkDirty(param_1);
-    return;
-  }
-  return;
+    ListBoxItem *item = asdListBoxFindItem(listBox, id);
+
+    if (item != NULL) {
+        item->unk208 = a;
+        item->mode = 3;
+        item->unk210 = b;
+        item->unk214 = c;
+        item->unk005 = d;
+        asdListBoxMarkDirty(listBox);
+    }
 }
 
 } /* extern "C" */

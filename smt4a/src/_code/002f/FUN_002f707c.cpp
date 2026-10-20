@@ -9,7 +9,7 @@ int sysPlaySe(int);
 int FUN_0020b718(int, int);
 int FUN_002a7324(int);
 int FUN_0031f718(int, int);
-int FUN_0032ff20(int, unsigned char [300]);
+int unitRecordBuild(int, unsigned char [300]);
 int FUN_0033449c(int);
 int FUN_0037e1b0(int);
 
@@ -26,7 +26,7 @@ extern int DAT_0057f268; /* 0x57f268 */
 extern int FUN_00275f44(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a7324. */
 /* Supplied declaration required: FUN_0031f718. */
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0037e1b0. */
 
@@ -71,7 +71,7 @@ void FUN_002f707c(unsigned int param_1,unsigned int param_2,int param_3)
     FUN_0020b718(0xd,1);
     sysPlaySe(0xa0);
     if (param_3 != 0) {
-      FUN_0032ff20(param_3,temp_v4);
+      unitRecordBuild(param_3,temp_v4);
       FUN_0037e1b0(0);
       FUN_0031f718((int)(short)param_3,0);
       FUN_0033449c(0);

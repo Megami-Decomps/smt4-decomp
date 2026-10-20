@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned char FUN_0019f18c(unsigned int param_1)
-
+/* Returns whether `value` is at least 0x15E. */
+u8 FUN_0019f18c(u32 value)
 {
-  return param_1 >= 0x15e;
+    return value >= 0x15E;
 }
 
 } /* extern "C" */

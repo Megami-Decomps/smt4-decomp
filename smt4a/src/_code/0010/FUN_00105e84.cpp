@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e7526(...);
 int FUN_002eb164(...);
 int FUN_002ec674(...);
-int FUN_002ec890(...);
+int destroyObj0055ae64(...);
 int FUN_002ecb04(...);
 int FUN_002ecdec(...);
 int rt_memcpy(...);
@@ -43,7 +43,7 @@ extern int FUN_002eac34(unsigned char);
 /* Supplied declaration required: FUN_002eb164. */
 extern int FUN_002eb6ae(fn_00105e84_arg1 *, unsigned int);
 /* Supplied declaration required: FUN_002ec674. */
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ecb04. */
 /* Supplied declaration required: FUN_002ecdec. */
 /* Supplied declaration required: rt_memcpy. */
@@ -101,7 +101,7 @@ void FUN_00105e84(int param_1,fn_00105e84_arg1 *param_2)
         FUN_002ecb04(*(unsigned int *)(param_1 + 0x1c),temp_v8);
         (**(romwright_code **)(**(int **)(param_1 + 0x1c) + 0x14))
                   (*(int **)(param_1 + 0x1c),param_2->field_0xd8);
-        FUN_002ec890(temp_v8);
+        destroyObj0055ae64(temp_v8);
       }
     }
   }

@@ -9,7 +9,7 @@ int FUN_002e5924(int);
 int FUN_003e0bb8(unsigned int *, int);
 int FUN_003f0b80(int);
 int FUN_003f0c78(int);
-int FUN_004f282c(unsigned int);
+int words10CopyHighToLow(unsigned int);
 int FUN_004fb43c(int, int, int, int, int, int, int);
 int rt_memcpy_w(...);
 
@@ -34,7 +34,7 @@ extern int FUN_003e0f94(unsigned int *, int);
 /* Supplied declaration required: FUN_003f0b80. */
 /* Supplied declaration required: FUN_003f0c78. */
 extern int FUN_003f10c8(int, unsigned short);
-/* Supplied declaration required: FUN_004f282c. */
+/* Supplied declaration required: words10CopyHighToLow. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -85,7 +85,7 @@ void FUN_003e21c8(unsigned int *param_1,int param_2)
   }
   FUN_003f0c78(param_2);
   FUN_003f0b80(param_2);
-  FUN_004f282c(DAT_00571508);
+  words10CopyHighToLow(DAT_00571508);
   temp_v4 = FUN_003e0f94(param_1,param_2);
   if ((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 5) {
     temp_v4 = 4;

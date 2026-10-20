@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a438c(void);
-int FUN_002a43ae(int);
+int __set_errno(int);
 int VectorSignedToFloat(...);
 
 extern unsigned char DAT_00417f24; /* 0x417f24 */
@@ -25,7 +25,7 @@ static float romwright_fabs_4(float value)
 extern unsigned int ARM_fpclassifyf(float);
 extern unsigned int FUN_0015d0c8(float);
 /* Supplied declaration required: FUN_002a438c. */
-/* Supplied declaration required: FUN_002a43ae. */
+/* Supplied declaration required: __set_errno. */
 
 
 float FUN_002b99b8(void)
@@ -153,7 +153,7 @@ LAB_002b9b04:
               return in_s1;
             }
             if ((temp_v4 != 0) && (temp_v4 == 1)) {
-              temp_v2 = (float)FUN_002a43ae(2);
+              temp_v2 = (float)__set_errno(2);
               return temp_v2;
             }
           }
@@ -161,7 +161,7 @@ LAB_002b9b04:
         else if (((unsigned int)in_s1 & 0x80000000) == 0) {
           return in_s1;
         }
-        temp_v2 = (float)FUN_002a43ae(2);
+        temp_v2 = (float)__set_errno(2);
         return temp_v2;
       }
       if (((unsigned int)in_s1 & 0x80000000) == 0) {
@@ -182,13 +182,13 @@ LAB_002b9a18:
     in_s0 = romwright_fabs_4(in_s0);
     temp_v5 = (unsigned int)romwright_fabs_4(in_s1) >> 0x17;
     if (temp_v5 < 0x7f) {
-      temp_v2 = (float)FUN_002a43ae(1);
+      temp_v2 = (float)__set_errno(1);
       return temp_v2;
     }
     if (temp_v5 < 0x97) {
       temp_v5 = 1 << ((0x96 - temp_v5) & 0xff);
       if (((temp_v5 - 1) & (unsigned int)in_s1) != 0) {
-        temp_v2 = (float)FUN_002a43ae(1);
+        temp_v2 = (float)__set_errno(1);
         return temp_v2;
       }
       if (((unsigned int)in_s1 & temp_v5) != 0) {
@@ -272,7 +272,7 @@ LAB_002b9ce8:
                        (temp_v11 * (temp_v11 * 1.35512055e-05f + 0.0009384123f) + 0.0433217f) * temp_v11 +
                       *(float *)(&DAT_00417f24 + temp_v3 * 4)) * temp_v2;
     if (romwright_fabs_4(temp_v9) == INFINITY) {
-      FUN_002a43ae(2);
+      __set_errno(2);
       return (float)(((unsigned int)temp_v16 & 0x80000000) | (unsigned int)romwright_fabs_4(temp_v13 * temp_v13));
     }
     if (romwright_fabs_4(temp_v9) != 0.0f) {
@@ -284,10 +284,10 @@ LAB_002b9ce8:
     }
   }
   else if (0.0f <= temp_v9) {
-    FUN_002a43ae(2);
+    __set_errno(2);
     return (float)(((unsigned int)temp_v16 & 0x80000000) | (unsigned int)romwright_fabs_4(temp_v13 * temp_v13));
   }
-  FUN_002a43ae(2);
+  __set_errno(2);
   FUN_002a438c();
   return (float)(((unsigned int)temp_v16 & 0x80000000) | (unsigned int)romwright_fabs_4(temp_v2));
 }

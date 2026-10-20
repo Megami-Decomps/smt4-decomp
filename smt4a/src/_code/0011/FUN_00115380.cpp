@@ -1,19 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0062d88c; /* 0x62d88c */
+u8 *FUN_00301454(u8 *table);
+extern u8 DAT_0062d88c[];
 
-extern int FUN_00301454(unsigned char *);
-
-
-int FUN_00115380(void)
-
+/* Returns the address 4 bytes into the structure FUN_00301454 returns for the global at 0x62D88C. */
+u8 *FUN_00115380(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_00301454(&DAT_0062d88c);
-  return temp_v0 + 4;
+    u8 *object = FUN_00301454(DAT_0062d88c);
+    return object + 4;
 }
 
 } /* extern "C" */

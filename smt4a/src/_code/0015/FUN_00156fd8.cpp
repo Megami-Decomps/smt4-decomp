@@ -1,21 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern char s__9___9_9_9_9_5___6_7_005b3d1c[49]; /* 0x5b3d1c */
+extern u32 DAT_005b3d1c[];
 
+typedef struct Entry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 index;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u32 value;
+} Entry;
 
-void FUN_00156fd8(unsigned int *param_1,int param_2)
-
+/* Initialises an entry for table slot `index`: everything cleared except the index and the word looked up in the table at 0x5B3D1C. */
+void FUN_00156fd8(Entry *entry, s32 index)
 {
-  *(char *)(param_1 + 1) = (char)param_2;
-  *param_1 = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[7] = *(unsigned int *)(s__9___9_9_9_9_5___6_7_005b3d1c + param_2 * 4);
-  return;
+    entry->index = (u8)index;
+    entry->unk00 = 0;
+    entry->unk08 = 0;
+    entry->unk0C = 0;
+    entry->unk10 = 0;
+    entry->unk14 = 0;
+    entry->value = DAT_005b3d1c[index];
 }
 
 } /* extern "C" */

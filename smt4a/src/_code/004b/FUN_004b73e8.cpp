@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001f4908(int, int, int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_00407450(unsigned int);
 int FUN_00471d00(void);
 int FUN_004b75d0(int);
@@ -22,13 +22,13 @@ extern short DAT_005f17a8; /* 0x5f17a8 */
 extern short DAT_005f17aa; /* 0x5f17aa */
 
 /* Supplied declaration required: FUN_001f4908. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_00407450. */
 /* Supplied declaration required: FUN_00471d00. */
 /* Supplied declaration required: FUN_004b75d0. */
 /* Supplied declaration required: FUN_004b7694. */
 /* Supplied declaration required: FUN_004b9ff4. */
-extern unsigned int FUN_004ba790(int);
+extern unsigned int menu4CGetCurrentEntry(int);
 
 
 void FUN_004b73e8(int param_1)
@@ -86,11 +86,11 @@ void FUN_004b73e8(int param_1)
       else if ((temp_v1 & 0x2000) != 0) {
         if ((temp_v1 & 0x40) != 0) {
           *(unsigned int *)(param_1 + 0x20) = temp_v1 & 0xffffffbf;
-          FUN_003491e8();
+          obj04Finish();
         }
         *(unsigned int *)(param_1 + 0x28) = 6;
         *(unsigned int *)(param_1 + 0x2c) = 0;
-        temp_v2 = FUN_004ba790(param_1 + 0x9c);
+        temp_v2 = menu4CGetCurrentEntry(param_1 + 0x9c);
         *(unsigned int *)(param_1 + 0x111c) = temp_v2;
         *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffdfff;
       }

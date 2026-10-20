@@ -1,25 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ec890(unsigned char [24]);
+void destroyObj0055ae64(u8 *object);
+u32 FUN_002ec934(u8 *object);
+u32 FUN_002f7ac4(u32 a, u32 b);
 
-/* Supplied declaration required: FUN_002ec890. */
-extern unsigned int FUN_002ec934(unsigned char *);
-extern unsigned int FUN_002f7ac4(unsigned int, unsigned int);
-
-
-unsigned int FUN_002f6c32(unsigned int param_1)
-
+/* Builds a temporary 24-byte object, passes its value and `a` to FUN_002f7ac4 and destroys it; returns FUN_002f7ac4's result. */
+u32 FUN_002f6c32(u32 a)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1 [24];
-  
-  temp_v0 = FUN_002ec934(temp_v1);
-  temp_v0 = FUN_002f7ac4(param_1,temp_v0);
-  FUN_002ec890(temp_v1);
-  return temp_v0;
+    u32 value;
+    u8 object[24];
+
+    value = FUN_002ec934(object);
+    value = FUN_002f7ac4(a, value);
+    destroyObj0055ae64(object);
+    return value;
 }
 
 } /* extern "C" */

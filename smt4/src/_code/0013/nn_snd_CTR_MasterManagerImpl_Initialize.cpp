@@ -1,21 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c38fc(char *);
+int FUN_002c38fc(void *obj);
 
-/* Supplied declaration required: FUN_002c38fc. */
+typedef struct MasterManagerImpl {
+    /* 0x00 */ u8 initialized;
+    /* 0x01 */ u8 unk01[0x33];
+    /* 0x34 */ u8 unk34[1];
+} MasterManagerImpl;
 
-
-void nn_snd_CTR_MasterManagerImpl_Initialize(char *param_1)
-
+void nn_snd_CTR_MasterManagerImpl_Initialize(MasterManagerImpl *manager)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 == '\0') {
-    FUN_002c38fc(param_1 + 0x34);
-    *param_1 = '\x01';
-  }
-  return;
+    if (manager->initialized == 0) {
+        FUN_002c38fc(manager->unk34);
+        manager->initialized = 1;
+    }
 }
 
 } /* extern "C" */

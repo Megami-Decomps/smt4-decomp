@@ -1,32 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00208a34(int, unsigned int);
-int scrGetArg(int);
+void FUN_00208a34(s32 a, u32 b);
+s32 scrGetArg(s32 index);
+s32 FUN_0023a5d8(void);
+s32 FUN_002deb84(void);
 
-/* Supplied declaration required: FUN_00208a34. */
-/* Supplied declaration required: scrGetArg. */
-extern int FUN_0023a5d8(void);
-extern int FUN_002deb84(void);
-
-
-unsigned char FUN_0025ff00(void)
-
+/* Script command: when FUN_002deb84 reports 0, forwards script arguments 0 (as a short) and 1 to FUN_00208a34; returns whether FUN_0023a5d8 holds. */
+u8 FUN_0025ff00(void)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = FUN_002deb84();
-  if (temp_v1 == 0) {
-    temp_v0 = scrGetArg(0);
-    temp_v2 = scrGetArg(1);
-    FUN_00208a34((int)temp_v0,temp_v2);
-  }
-  temp_v1 = FUN_0023a5d8();
-  return temp_v1 != 0;
+    s16 first;
+    s32 result;
+    u32 second;
+
+    result = FUN_002deb84();
+    if (result == 0) {
+        first = scrGetArg(0);
+        second = scrGetArg(1);
+        FUN_00208a34(first, second);
+    }
+    result = FUN_0023a5d8();
+    return result != 0;
 }
 
 } /* extern "C" */

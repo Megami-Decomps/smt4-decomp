@@ -18,7 +18,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_0010cab4. */
-extern int FUN_003113e4(int);
+extern int listHolderOwnerBack(int);
 
 
 void FUN_0011c4f2(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -41,7 +41,7 @@ void FUN_0011c4f2(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v3 = param_4;
   (**(romwright_code **)(*piVar1 + 8))();
   temp_v1[0] = 0;
-  temp_v0 = FUN_003113e4(param_1);
+  temp_v0 = listHolderOwnerBack(param_1);
   FUN_0010cab4(param_2,*(unsigned int *)(temp_v0 + 0x10),temp_v2,temp_v3,param_5,temp_v1,param_6);
   (**(romwright_code **)(*piVar1 + 0xc))(piVar1);
   return;

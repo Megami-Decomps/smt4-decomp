@@ -1,16 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0044de98;
+extern struct {
+    u8 unk00[0x20];
+    u32 *words;
+} DAT_0044de98;
 
-
-void FUN_002542d4(int param_1,unsigned int param_2)
-
+/* Stores `value` in word 0x36 + index of the block at +0x20. */
+void FUN_002542d4(int index, u32 value)
 {
-  unsigned int *q = *(unsigned int **)((unsigned char *)&DAT_0044de98 + 0x20);
-  q[param_1 + 0x36] = param_2;
-  return;
+    u32 *words = DAT_0044de98.words;
+
+    words[index + 0x36] = value;
 }
 
 } /* extern "C" */

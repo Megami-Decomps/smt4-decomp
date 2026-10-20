@@ -26,7 +26,7 @@ extern unsigned int DAT_004d4314; /* 0x4d4314 */
 extern unsigned int DAT_004d4318; /* 0x4d4318 */
 extern unsigned int DAT_004d43d0; /* 0x4d43d0 */
 
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c38fc. */
 extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 extern unsigned int nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(void);
@@ -42,7 +42,7 @@ unsigned int FUN_001392fc(void)
   unsigned int temp_v1;
   
   nn_os_CriticalSection_Enter((unsigned int)&DAT_004d43d0);
-  if (((DAT_0044e65c & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_0044e65c), temp_v0 != 0)) {
+  if (((DAT_0044e65c & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_0044e65c), temp_v0 != 0)) {
     DAT_004d42e4 = 0;
     DAT_004d42e8 = 0;
     DAT_004d42ec = 0;

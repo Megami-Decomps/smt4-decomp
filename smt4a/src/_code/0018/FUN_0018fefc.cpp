@@ -16,7 +16,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_001a6350. */
-extern int FUN_001a64bc(unsigned int, unsigned int *);
+extern int constructObj0055c3b8(unsigned int, unsigned int *);
 extern unsigned int FUN_001b1f04(void);
 extern unsigned int *FUN_001b95dc(void);
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
@@ -49,7 +49,7 @@ unsigned int FUN_0018fefc(int param_1,int param_2,unsigned int *param_3,int para
             temp_v2 = 0;
           }
           else {
-            temp_v2 = FUN_001a64bc(temp_v4,(unsigned int *)(param_1 + 0x6c));
+            temp_v2 = constructObj0055c3b8(temp_v4,(unsigned int *)(param_1 + 0x6c));
           }
           nw_ut_internal_LinkListImpl_insert(param_1 + 0x80,param_1 + 0x84,temp_v2 + 0xf8);
           temp_v5 = temp_v5 + 1;

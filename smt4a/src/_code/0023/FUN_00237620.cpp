@@ -1,25 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f110; /* 0x57f110 */
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0xF4];
+    /* 0xF4 */ u32 handle;
+} Object;
 
-extern int FUN_00224880(unsigned int);
+typedef struct Global57f110 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Object *object;
+} Global57f110;
+extern Global57f110 DAT_0057f110;
 
+s32 FUN_00224880(u32 handle);
 
-unsigned char FUN_00237620(void)
-
+/* Returns 1 when the held object exists and FUN_00224880 does not report 2 for its handle. */
+u8 FUN_00237620(void)
 {
-  int temp_v0;
-  
-  if ((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) != 0) {
-    temp_v0 = FUN_00224880(*(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0xf4));
-    if (temp_v0 == 2) {
-      return 0;
+    s32 state;
+
+    if (DAT_0057f110.object != NULL) {
+        state = FUN_00224880(DAT_0057f110.object->handle);
+        if (state == 2) {
+            return 0;
+        }
+        return 1;
     }
-    return 1;
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

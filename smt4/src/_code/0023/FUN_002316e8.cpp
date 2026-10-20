@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002314d0(void);
+int dataTable2bSub1GetCount(void);
 int uiGetEntrySize(int, int, int *, int *);
 int VectorSignedToFloat(int, int);
 
@@ -16,8 +16,8 @@ typedef struct {
 } param_2_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern char *FUN_00231494(unsigned char *, int);
-/* Supplied declaration required: FUN_002314d0. */
+extern char *dataTable2bSub1GetRecord(unsigned char *, int);
+/* Supplied declaration required: dataTable2bSub1GetCount. */
 /* Supplied declaration required: uiGetEntrySize. */
 extern int FUN_002c09d0(void);
 
@@ -71,13 +71,13 @@ void FUN_002316e8(int param_1,int param_2)
     temp_v11 = 0x47147000c6c73800;
   }
   temp_v3 = 0;
-  FUN_002314d0();
+  dataTable2bSub1GetCount();
   if (0 < (int)puVar2) {
     temp_v13 = 0x439e80003f000000;
     temp_v14 = 0x43c80000;
     temp_v2 = temp_v4;
     do {
-      pcVar3 = (char *)FUN_00231494(temp_v15,temp_v3);
+      pcVar3 = (char *)dataTable2bSub1GetRecord(temp_v15,temp_v3);
       temp_v4 = temp_v2;
       if (((*pcVar3 == param_2) &&
           ((*(short *)(pcVar3 + 4) == 0 || (temp_v1 = FUN_002c09d0(), temp_v1 != 0)))) &&
@@ -133,7 +133,7 @@ void FUN_002316e8(int param_1,int param_2)
       }
       temp_v3 = temp_v3 + 1;
       puVar2 = temp_v15;
-      FUN_002314d0();
+      dataTable2bSub1GetCount();
       temp_v2 = temp_v4;
     } while (temp_v3 < (int)puVar2);
   }

@@ -21,7 +21,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int FUN_00434668(int *, int **);
+extern int halfSourceNext(int *, int **);
 /* Supplied declaration required: FUN_004387f0. */
 
 
@@ -83,7 +83,7 @@ int FUN_00433e08(int *param_1,fn_00433e08_arg1 *param_2,int param_3,int *param_4
         temp_v2 = (*pcVar6)();
       }
       else {
-        temp_v2 = FUN_00434668(param_1,&temp_v5);
+        temp_v2 = halfSourceNext(param_1,&temp_v5);
       }
       if (temp_v2 != 0) {
         return temp_v2;

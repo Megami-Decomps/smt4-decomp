@@ -1,37 +1,39 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00184758(int, int, int);
-int FUN_003f5220(unsigned int, unsigned int);
+void FUN_00184758(u8 *member, s32 a, s32 b);
+void FUN_003f5220(u32 handle, u32 value);
 
-extern int DAT_0057f268; /* 0x57f268 */
+typedef struct Screen {
+    /* 0x000 */ u8 unk000[0x2C];
+    /* 0x02C */ u32 toggle;
+    /* 0x030 */ u8 unk030[0x150];
+    /* 0x180 */ u8 member180[0x890];
+    /* 0xA10 */ u32 handlesA[4];
+    /* 0xA20 */ u32 handlesB[0x18];
+} Screen;
+extern Screen *DAT_0057f268;
 
-/* Supplied declaration required: FUN_00184758. */
-/* Supplied declaration required: FUN_003f5220. */
-
-
+/* Toggles the screen's flag, restarts its member at 0x180 and passes the new flag to each of the 4 + 24 handles. */
 void FUN_0026e848(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0057f268;
-  *(unsigned int *)(DAT_0057f268 + 0x2c) = *(unsigned int *)(DAT_0057f268 + 0x2c) ^ 1;
-  FUN_00184758(temp_v0 + 0x180,5,0);
-  temp_v1 = 0;
-  do {
-    FUN_003f5220(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa10),*(unsigned int *)(temp_v0 + 0x2c));
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 4);
-  temp_v1 = 0;
-  do {
-    FUN_003f5220(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0xa20),*(unsigned int *)(temp_v0 + 0x2c));
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x18);
-  return;
+    Screen *screen;
+    s32 i;
+
+    screen = DAT_0057f268;
+    DAT_0057f268->toggle = DAT_0057f268->toggle ^ 1;
+    FUN_00184758(screen->member180, 5, 0);
+    i = 0;
+    do {
+        FUN_003f5220(screen->handlesA[i], screen->toggle);
+        i = i + 1;
+    } while (i < 4);
+    i = 0;
+    do {
+        FUN_003f5220(screen->handlesB[i], screen->toggle);
+        i = i + 1;
+    } while (i < 0x18);
 }
 
 } /* extern "C" */

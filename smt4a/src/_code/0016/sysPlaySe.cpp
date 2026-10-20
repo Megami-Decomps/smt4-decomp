@@ -9,7 +9,7 @@ int FUN_00183318(int);
 int FUN_00183c0c(void);
 int FUN_00183e58(void);
 int FUN_00183f58(...);
-int FUN_00184aa8(...);
+int dataTableGetEntry0e(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned int DAT_0057f0d4; /* 0x57f0d4 */
 /* Supplied declaration required: FUN_00183c0c. */
 /* Supplied declaration required: FUN_00183e58. */
 /* Supplied declaration required: FUN_00183f58. */
-/* Supplied declaration required: FUN_00184aa8. */
+/* Supplied declaration required: dataTableGetEntry0e. */
 
 
 void sysPlaySe(unsigned int param_1)
@@ -58,8 +58,8 @@ void sysPlaySe(unsigned int param_1)
       } while (temp_v2 < 6);
     }
     DAT_0057f0d4 = -1;
-    temp_v2 = FUN_00184aa8((unsigned int)*(unsigned short *)(DAT_0057f0c8 + 0x5e6));
-    temp_v3 = FUN_00184aa8(param_1);
+    temp_v2 = dataTableGetEntry0e((unsigned int)*(unsigned short *)(DAT_0057f0c8 + 0x5e6));
+    temp_v3 = dataTableGetEntry0e(param_1);
     if (temp_v2 != 0 && temp_v3 != 0) {
       if ((*(char *)(temp_v2 + 0xc) == '\0') && (*(char *)(temp_v3 + 0xc) != '\0')) {
         FUN_00183318(1);
@@ -68,8 +68,8 @@ void sysPlaySe(unsigned int param_1)
         FUN_00183e58();
       }
     }
-    temp_v2 = FUN_00184aa8(*(unsigned short *)(temp_v1 + 0x5e6));
-    temp_v3 = FUN_00184aa8(param_1);
+    temp_v2 = dataTableGetEntry0e(*(unsigned short *)(temp_v1 + 0x5e6));
+    temp_v3 = dataTableGetEntry0e(param_1);
     if (temp_v2 != 0 && temp_v3 != 0) {
       *(unsigned short *)(temp_v1 + 0x5e8) = *(unsigned short *)(temp_v1 + 0x5e6);
       *(short *)(temp_v1 + 0x5e6) = (short)param_1;

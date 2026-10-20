@@ -1,15 +1,11 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned char DAT_005891d8; /* 0x5891d8 */
-
-
+/* Sets the byte at 0x2 of the global at 0x5891D8 to 0. */
 void FUN_0018ba00(void)
-
 {
-  (*(unsigned char *)((unsigned char *)&DAT_005891d8 + 0x2)) = 0;
-  return;
+    DAT_005891d8.unk02 = 0;
 }
 
 } /* extern "C" */

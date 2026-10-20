@@ -1,31 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int resourceLookupWithFallback(unsigned int, int);
+s32 resourceLookupWithFallback(u32 handle, s32 key);
+s32 FUN_004bb308(u32 handle);
 
-extern int g_cecProcess; /* 0x57f390 */
+typedef struct CecProcess {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 handle;
+} CecProcess;
+extern CecProcess *g_cecProcess;
 
-/* Supplied declaration required: resourceLookupWithFallback. */
-extern int FUN_004bb308(unsigned int);
-
-
-unsigned int FUN_002c0b10(int param_1)
-
+/* Looks `key` up through the CEC process's handle when there is a process, a key and a valid handle; returns whether it did. */
+u32 FUN_002c0b10(s32 key)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_cecProcess;
-  temp_v2 = 0;
-  if ((g_cecProcess != 0 && param_1 != 0) &&
-     (temp_v1 = FUN_004bb308(*(unsigned int *)(g_cecProcess + 4)), temp_v1 != 0)) {
-    resourceLookupWithFallback(*(unsigned int *)(temp_v0 + 4),param_1);
-    temp_v2 = 1;
-  }
-  return temp_v2;
+    CecProcess *process;
+    s32 valid;
+    u32 done;
+
+    process = g_cecProcess;
+    done = 0;
+    if ((g_cecProcess != NULL && key != 0) && (valid = FUN_004bb308(g_cecProcess->handle), valid != 0)) {
+        resourceLookupWithFallback(process->handle, key);
+        done = 1;
+    }
+    return done;
 }
 
 } /* extern "C" */

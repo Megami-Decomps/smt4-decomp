@@ -6,7 +6,7 @@ extern "C" {
 
 int qsort(...);
 int FUN_001aba54(void);
-int FUN_004c39b0(unsigned int, unsigned short [10]);
+int source4CCopyHalves(unsigned int, unsigned short [10]);
 int FUN_004e6fb0(...);
 int FUN_004e9bd0(...);
 int FUN_004ea200(...);
@@ -36,9 +36,9 @@ extern unsigned int DAT_00571194; /* 0x571194 */
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002626e0(void);
 extern int FUN_003df57c(unsigned short, unsigned int);
-extern int FUN_003e9b28(int);
+extern int valueAtF0IsReady(int);
 extern int FUN_004bcbb4(unsigned int, unsigned short);
-/* Supplied declaration required: FUN_004c39b0. */
+/* Supplied declaration required: source4CCopyHalves. */
 /* Supplied declaration required: FUN_004e6fb0. */
 /* Supplied declaration required: FUN_004e9bd0. */
 /* Supplied declaration required: FUN_004ea200. */
@@ -86,7 +86,7 @@ void FUN_004e8668(int *param_1,int param_2)
     temp_v5[7] = 0;
     temp_v5[8] = 0;
     temp_v5[9] = 0;
-    FUN_004c39b0(*(unsigned int *)(param_2 + 0x20),temp_v5);
+    source4CCopyHalves(*(unsigned int *)(param_2 + 0x20),temp_v5);
     if (!((**(unsigned int **)(param_2 + 0x20) & DAT_00571150) == 0 &&
          ((*(unsigned int **)(param_2 + 0x20))[1] & DAT_00571154) == 0)) {
       qsort(temp_v5,9,2,FUN_002fe144);
@@ -184,7 +184,7 @@ LAB_004e89c4:
             if ((((-1 < *(int *)(*param_1 + 0xec)) && ((*(unsigned int *)(*param_1 + 0x110) & 0x80) != 0))
                 || (temp_v0 == 0x493 || temp_v0 == 0x494)) ||
                ((temp_v0 == 0x495 || temp_v0 == 0x496 ||
-                ((temp_v2 = FUN_002626e0(), temp_v2 != 0 && (temp_v2 = FUN_003e9b28(*param_1), temp_v2 == 0)
+                ((temp_v2 = FUN_002626e0(), temp_v2 != 0 && (temp_v2 = valueAtF0IsReady(*param_1), temp_v2 == 0)
                  ))))) {
               *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 6;
               *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1c0) = 0;

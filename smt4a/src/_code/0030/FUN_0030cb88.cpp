@@ -1,14 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030cb88` (_code @ 0x30cb88, 0x8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 
-
+/* Release-build stub: a tail call to a debug hook that was never linked. */
 void FUN_0030cb88(void)
-
 {
-  return;
+    asdDebugHookVoid();
 }
 
 } /* extern "C" */

@@ -20,11 +20,11 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_001654d8. */
 /* Supplied declaration required: FUN_001654e4. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
@@ -62,7 +62,7 @@ void FUN_0037e8a4(int param_1)
   FUN_001879d0(g_renderCtx);
   FUN_001835b4(2,0x14,0xbe1,temp_v2 + (int)temp_v10,temp_v3,0xc4);
   temp_v2 = param_1 + 0xf18;
-  if ((*(char *)(param_1 + 0xfa2) != '\0') && (temp_v7 = FUN_0015688c(), temp_v7 != 0)) {
+  if ((*(char *)(param_1 + 0xfa2) != '\0') && (temp_v7 = saveSlotFindSelected(), temp_v7 != 0)) {
     temp_v7 = FUN_001654d8(temp_v2);
     temp_v4 = FUN_001654e4(temp_v2);
     temp_v5 = FUN_001834a4(0x14,0xbd9);
@@ -71,7 +71,7 @@ void FUN_0037e8a4(int param_1)
     temp_v2 = g_renderCtx;
     temp_v0 = *(short *)(temp_v5 + 8);
     temp_v1 = *(short *)(temp_v5 + 10);
-    temp_v5 = FUN_00169294(6,1,0);
+    temp_v5 = packNibblesAndByte(6,1,0);
     piVar9 = (int *)(temp_v2 + 0x12b8);
     temp_v6 = piVar9[*piVar9 + 2];
     piVar9[*piVar9 + 2] = temp_v5;
@@ -97,7 +97,7 @@ void FUN_0037e8a4(int param_1)
     } while (temp_v2 < 3);
     efctSetSpeed();
     temp_v2 = g_renderCtx;
-    temp_v7 = FUN_00169294(6,7,0);
+    temp_v7 = packNibblesAndByte(6,7,0);
     piVar9 = (int *)(temp_v2 + 0x12b8);
     temp_v4 = piVar9[*piVar9 + 2];
     piVar9[*piVar9 + 2] = temp_v7;

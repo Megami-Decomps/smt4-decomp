@@ -1,30 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Shard003D.h"
 
 extern "C" {
 
-int FUN_0036be10(unsigned int, int);
+extern s32 jyoucyuGetTableEntry(u32 index);
+extern void FUN_0036be10(u32 a, u32 b);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_0036be10. */
-
-
-void FUN_003d5000(unsigned int param_1)
-
+void FUN_003d5000(u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    FUN_0036be10(param_1,0);
-    return;
-  }
-  return;
+    if (jyoucyuGetTableEntry(1) == 0) {
+        FUN_0036be10(value, 0);
+    }
 }
 
 } /* extern "C" */

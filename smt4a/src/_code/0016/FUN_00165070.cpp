@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/Block57f248.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f248; /* 0x57f248 */
-
-
-int FUN_00165070(void)
-
+/* Returns the halfword at 0x64E of the record at 0x57F248. */
+s32 FUN_00165070(void)
 {
-  return (int)*(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64e);
+    return DAT_0057f248.record->unk64E;
 }
 
 } /* extern "C" */

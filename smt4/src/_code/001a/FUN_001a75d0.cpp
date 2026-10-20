@@ -20,8 +20,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0028850c. */
-extern unsigned int FUN_00288634(unsigned int);
-extern unsigned int FUN_00288674(unsigned int);
+extern unsigned int dataTable24Sub0GetRecordS90(unsigned int);
+extern unsigned int dataTable24Sub0GetRecordS90X(unsigned int);
 extern int FUN_0029ebc0(void);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -43,7 +43,7 @@ void FUN_001a75d0(unsigned int param_1,unsigned int param_2,int param_3,int para
   unsigned char temp_v5 [64];
   unsigned int temp_v6;
   
-  temp_v6 = FUN_00288674(param_2);
+  temp_v6 = dataTable24Sub0GetRecordS90X(param_2);
   temp_v0 = FUN_0029ebc0();
   if (param_5 != 0) {
     FUN_002bf380(2,0x24,0x12,param_3,param_4,0x65);
@@ -71,7 +71,7 @@ void FUN_001a75d0(unsigned int param_1,unsigned int param_2,int param_3,int para
     temp_v3 = 0xff;
     temp_v4 = 0xffffffff;
   }
-  temp_v1 = FUN_00288634(param_2);
+  temp_v1 = dataTable24Sub0GetRecordS90(param_2);
   temp_v2 = FUN_002bf4f8(0x24,0xa4);
   VectorSignedToFloat(*(short *)(temp_v2 + 10) + param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v2 + 8) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);

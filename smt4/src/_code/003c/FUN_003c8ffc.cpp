@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00229f18(void);
+int dataTable05Sub0GetEntries(void);
 int FUN_002b9024(void);
 int FUN_0030abc8(unsigned char *, int);
 int FUN_003c9948(unsigned int, int, unsigned int);
 
-/* Supplied declaration required: FUN_00229f18. */
+/* Supplied declaration required: dataTable05Sub0GetEntries. */
 /* Supplied declaration required: FUN_002b9024. */
 /* Supplied declaration required: FUN_0030abc8. */
 /* Supplied declaration required: FUN_003c9948. */
@@ -32,7 +32,7 @@ unsigned int FUN_003c8ffc(unsigned int param_1,unsigned short *param_2,unsigned 
   pbVar3 = (unsigned char *)(unsigned int)(unsigned char)puVar1[1];
   FUN_0030abc8(pbVar3,(char)puVar2[1]);
   pbVar4 = pbVar3;
-  FUN_00229f18();
+  dataTable05Sub0GetEntries();
   if (*puVar1 != *puVar2 && pbVar3 != (unsigned char *)0x0) {
     temp_v0 = (unsigned int)*(unsigned char *)((int)puVar1 + 3) + (unsigned int)*(unsigned char *)((int)puVar2 + 3);
     if ((temp_v0 & 0x80000001) != 0) {

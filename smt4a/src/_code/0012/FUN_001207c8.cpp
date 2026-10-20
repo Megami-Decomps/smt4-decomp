@@ -8,7 +8,7 @@ int FUN_0011e36a(int, int);
 int FUN_002fbb60(int, unsigned int);
 int FUN_002fbb68(int, int *);
 int FUN_002fbb70(int, int);
-int FUN_00310d4a(int, int);
+int stringSetValue1(int, int);
 
 /* stack frame of param_2: 4 slot(s), 10 byte(s) */
 typedef struct {
@@ -19,11 +19,11 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0011e36a. */
-extern unsigned int FUN_002eac26(unsigned char *, unsigned char *);
+extern unsigned int byteRefMin(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002fbb60. */
 /* Supplied declaration required: FUN_002fbb68. */
 /* Supplied declaration required: FUN_002fbb70. */
-/* Supplied declaration required: FUN_00310d4a. */
+/* Supplied declaration required: stringSetValue1. */
 
 
 void FUN_001207c8(int param_1,int param_2)
@@ -44,13 +44,13 @@ void FUN_001207c8(int param_1,int param_2)
   if (temp_v0 == '\0') {
     temp_v7[0] = 0;
     temp_v6[0] = *(unsigned char *)(param_2 + 4);
-    temp_v1 = FUN_002eac26(temp_v6,temp_v7);
+    temp_v1 = byteRefMin(temp_v6,temp_v7);
     FUN_002fbb60(param_1,temp_v1);
     temp_v3 = *(int *)(*(int *)(param_1 + 8) + 0x10);
     temp_v4 = 0;
     FUN_002fbb68(param_1,&temp_v4);
   }
-  FUN_00310d4a(param_1,param_2 + 5);
+  stringSetValue1(param_1,param_2 + 5);
   FUN_0011e36a(param_1,param_2 + 8);
   if (temp_v0 == '\0') {
     temp_v2 = *(int *)(*(int *)(param_1 + 8) + 0x10);

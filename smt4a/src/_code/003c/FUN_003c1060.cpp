@@ -1,17 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard003C.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f588; /* 0x57f588 */
-
+extern PanelRef DAT_0057f588;
 
 void FUN_003c1060(void)
-
 {
-  if ((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x30) = 1;
-  }
-  return;
+    if (DAT_0057f588.panel != NULL) {
+        DAT_0057f588.panel->unk30 = 1;
+    }
 }
 
 } /* extern "C" */

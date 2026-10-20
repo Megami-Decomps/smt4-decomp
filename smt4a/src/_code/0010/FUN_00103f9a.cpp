@@ -1,16 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct PendingHolder {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u32 pending;
+} PendingHolder;
 
-unsigned int FUN_00103f9a(int param_1)
-
+/* Returns `pending` and clears it. */
+u32 FUN_00103f9a(PendingHolder *holder)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = *(unsigned int *)(param_1 + 0x24);
-  *(unsigned int *)(param_1 + 0x24) = 0;
-  return temp_v0;
+    u32 value = holder->pending;
+    holder->pending = 0;
+    return value;
 }
 
 } /* extern "C" */

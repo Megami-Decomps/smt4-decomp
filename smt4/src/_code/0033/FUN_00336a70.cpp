@@ -1,13 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x22A4];
+    /* 0x22A4 */ int total;
+} Obj;
 
-void FUN_00336a70(int param_1,int param_2)
-
+void FUN_00336a70(Obj *obj, int amount)
 {
-  *(int *)(param_1 + 0x22a4) = param_2 + *(int *)(param_1 + 0x22a4);
-  return;
+    obj->total = amount + obj->total;
 }
 
 } /* extern "C" */

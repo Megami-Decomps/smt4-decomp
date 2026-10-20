@@ -1,22 +1,18 @@
-#include "romwright_types.h"
+#include "shard/Sys44e190.h"
 
 extern "C" {
 
-extern int DAT_0044e190; /* 0x44e190 */
-
-extern int FUN_0029ee54(int);
-
+extern int FUN_0029ee54(u8 *block);
 
 int FUN_002efe2c(void)
-
 {
-  int temp_v0;
-  
-  if (DAT_0044e190 == 0) {
-    return 0;
-  }
-  temp_v0 = FUN_0029ee54(DAT_0044e190 + 0x4d4);
-  return temp_v0 - 1;
+    int count;
+
+    if (DAT_0044e190 == NULL) {
+        return 0;
+    }
+    count = FUN_0029ee54(DAT_0044e190->unk4D4);
+    return count - 1;
 }
 
 } /* extern "C" */

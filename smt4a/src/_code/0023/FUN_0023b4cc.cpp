@@ -40,7 +40,7 @@ extern unsigned int FUN_00156850(unsigned short, unsigned int);
 extern int FUN_001654d8(void);
 extern int FUN_001654e4(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
@@ -162,7 +162,7 @@ unsigned int FUN_0023b4cc(void)
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
   temp_v2 = g_renderCtx;
-  temp_v4 = FUN_00169294(6,7,0);
+  temp_v4 = packNibblesAndByte(6,7,0);
   piVar8 = (int *)(temp_v2 + 0x12b8);
   temp_v1 = piVar8[*piVar8 + 2];
   piVar8[*piVar8 + 2] = temp_v4;

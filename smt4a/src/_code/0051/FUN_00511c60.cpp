@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00188b60(unsigned int *);
-int FUN_002f4370(unsigned char **, int, int);
+int emptyStub_002f4370(unsigned char **, int, int);
 int FUN_002f5020(unsigned char *, unsigned char *, int, int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -52,7 +52,7 @@ extern unsigned int DAT_0062d400; /* 0x62d400 */
 extern unsigned char DAT_0062d410; /* 0x62d410 */
 
 /* Supplied declaration required: FUN_00188b60. */
-/* Supplied declaration required: FUN_002f4370. */
+/* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
 extern void nn_fnd_UnitHeapBase_Initialize(unsigned int, unsigned int, unsigned int, unsigned int, int, unsigned int);
 
@@ -101,7 +101,7 @@ void FUN_00511c60(void)
   DAT_0062d3c4 = &DAT_00558438;
   nn_fnd_UnitHeapBase_Initialize((unsigned int)&DAT_0062d3c4,8,0x56d8c0,0x80,4,0);
   FUN_00188b60(&DAT_0062d3f4);
-  FUN_002f4370(&DAT_0062d3c4,0x1aa330,0x100000);
+  emptyStub_002f4370(&DAT_0062d3c4,0x1aa330,0x100000);
   return;
 }
 

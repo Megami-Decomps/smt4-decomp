@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00229f00(void);
+int dataTable05Sub4GetCount(void);
 int FUN_0029cde0(unsigned int *, int, int);
 int FUN_0029f7d4(void);
 int FUN_002b9024(void);
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00229f00. */
+/* Supplied declaration required: dataTable05Sub4GetCount. */
 extern int FUN_00288154(unsigned short, unsigned char *);
 /* Supplied declaration required: FUN_0029cde0. */
 extern int FUN_0029ea68(unsigned short);
@@ -68,7 +68,7 @@ unsigned int FUN_0029fa0c(unsigned int param_1,int param_2)
   temp_v2 = FUN_002a8764();
   temp_v8 = 0;
   temp_v3 = temp_v2;
-  FUN_00229f00();
+  dataTable05Sub4GetCount();
   if (temp_v3 != 0) {
     do {
       temp_v5 = temp_v8;
@@ -136,7 +136,7 @@ LAB_0029fb98:
 LAB_0029fbe8:
       temp_v5 = temp_v8 + 1;
       temp_v8 = temp_v5;
-      FUN_00229f00();
+      dataTable05Sub4GetCount();
     } while (temp_v8 < temp_v5);
   }
   return temp_v15;

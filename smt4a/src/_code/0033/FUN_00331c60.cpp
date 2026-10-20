@@ -26,12 +26,12 @@ extern unsigned char DAT_00588c40; /* 0x588c40 */
 extern int FUN_001ab888(void);
 extern int FUN_0022fd80(int, int);
 /* Supplied declaration required: FUN_0034a290. */
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 extern int FUN_003e4940(void);
 extern int FUN_003e4cb4(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
-extern int FUN_004bd340(int, unsigned int);
-extern int FUN_004ccd5c(unsigned short, int);
+extern int bitsAt60Test(int, unsigned int);
+extern int dataTable9Type3GetClamped(unsigned short, int);
 
 
 void FUN_00331c60(int *param_1)
@@ -60,8 +60,8 @@ void FUN_00331c60(int *param_1)
   FUN_001801a4();
   temp_v8 = *param_1;
   temp_v9 = param_1[1];
-  temp_v2 = FUN_003e0044(1);
-  if ((temp_v2 == 0) && (temp_v2 = FUN_003e0044(10), temp_v2 == 0)) {
+  temp_v2 = playerHasFlagBit(1);
+  if ((temp_v2 == 0) && (temp_v2 = playerHasFlagBit(10), temp_v2 == 0)) {
     temp_v2 = FUN_0022fd80(temp_v8,temp_v9);
     *(int *)(temp_v0 + 0x7870) = temp_v2 + *(int *)(temp_v0 + 0x7870);
   }
@@ -71,9 +71,9 @@ void FUN_00331c60(int *param_1)
   do {
     if (-1 < *(char *)(temp_v1 + temp_v2 + 0x1c88)) {
       temp_v3 = FUN_001ab854();
-      temp_v4 = FUN_004bd340(temp_v3,1);
-      if (((temp_v4 == 0) && (temp_v4 = FUN_004bd340(temp_v3,10), temp_v4 == 0)) &&
-         (temp_v4 = FUN_004bd340(temp_v3,2), temp_v4 == 0)) {
+      temp_v4 = bitsAt60Test(temp_v3,1);
+      if (((temp_v4 == 0) && (temp_v4 = bitsAt60Test(temp_v3,10), temp_v4 == 0)) &&
+         (temp_v4 = bitsAt60Test(temp_v3,2), temp_v4 == 0)) {
         temp_v4 = FUN_001ab854((int)*(char *)(temp_v1 + temp_v2 + 0x1c88));
         temp_v7 = 0;
         temp_v11 = temp_v12;
@@ -93,7 +93,7 @@ void FUN_00331c60(int *param_1)
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 8);
         temp_v5 = (unsigned int)(temp_v8 * (int)(temp_v11 * (float)((unsigned long long)temp_v13 >> 0x20))) / 100;
-        temp_v4 = FUN_004ccd5c(*(unsigned short *)(temp_v4 + 100),temp_v9);
+        temp_v4 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v4 + 100),temp_v9);
         temp_v6 = (temp_v5 * temp_v4) / 100;
         if ((temp_v6 == 0) && (temp_v5 != 0)) {
           temp_v6 = 1;
@@ -115,7 +115,7 @@ void FUN_00331c60(int *param_1)
     temp_v1 = FUN_003e4940();
     if (temp_v1 != 0) {
       temp_v1 = FUN_003e4cb4(temp_v6);
-      temp_v2 = FUN_004ccd5c(*(unsigned short *)(temp_v6 + 100),temp_v9);
+      temp_v2 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v6 + 100),temp_v9);
       temp_v6 = (unsigned int)(temp_v8 * temp_v2) / 100;
       if ((temp_v6 == 0) && (temp_v8 != 0)) {
         temp_v6 = 1;

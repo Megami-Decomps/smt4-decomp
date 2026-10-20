@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x120];
+    /* 0x120 */ u16 value;
+} Holder;
 
-unsigned short FUN_001244fc(int param_1)
-
+/* Returns the 16-bit value at 0x120. */
+u16 FUN_001244fc(Holder *object)
 {
-  return *(unsigned short *)(param_1 + 0x120);
+    return object->value;
 }
 
 } /* extern "C" */

@@ -13,7 +13,7 @@ int FUN_001a1c28(...);
 int FUN_0021252c(...);
 int FUN_00215a24(int, int);
 int FUN_00409718(int);
-int FUN_0043b9f0(...);
+int matrixSetTranslation(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [48], float *);
 int nn_math_ARMv6_MTX34InvTransposeAsm(unsigned char [68], unsigned char [48]);
@@ -64,7 +64,7 @@ extern float DAT_0064c07c; /* 0x64c07c */
 extern float DAT_0064c080; /* 0x64c080 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: camSetMatrixA. */
 extern unsigned int FUN_0018aeb8(void);
@@ -74,9 +74,9 @@ extern unsigned int FUN_0018aeb8(void);
 /* Supplied declaration required: FUN_001a1c28. */
 /* Supplied declaration required: FUN_0021252c. */
 /* Supplied declaration required: FUN_00215a24. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_00409718. */
-/* Supplied declaration required: FUN_0043b9f0. */
+/* Supplied declaration required: matrixSetTranslation. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34ToMTX33Asm. */
@@ -143,7 +143,7 @@ void FUN_00237dd0(int param_1)
     if (temp_v9 != 1) {
       if (temp_v9 != 2) {
         if (temp_v9 == 3) {
-          temp_v8 = FUN_00169294(5,0,1);
+          temp_v8 = packNibblesAndByte(5,0,1);
           piVar6 = (int *)(temp_v3 + 0x12b8);
           temp_v1 = piVar6[*piVar6 + 2];
           piVar6[*piVar6 + 2] = temp_v8;
@@ -154,7 +154,7 @@ void FUN_00237dd0(int param_1)
         }
       }
       else {
-        temp_v8 = FUN_00169294(6,1,2);
+        temp_v8 = packNibblesAndByte(6,1,2);
         piVar6 = (int *)(temp_v3 + 0x12b8);
         temp_v1 = piVar6[*piVar6 + 2];
         piVar6[*piVar6 + 2] = temp_v8;
@@ -165,7 +165,7 @@ void FUN_00237dd0(int param_1)
       }
     }
     else {
-      temp_v8 = FUN_00169294(6,1,0);
+      temp_v8 = packNibblesAndByte(6,1,0);
       piVar6 = (int *)(temp_v3 + 0x12b8);
       temp_v1 = piVar6[*piVar6 + 2];
       piVar6[*piVar6 + 2] = temp_v8;
@@ -176,7 +176,7 @@ void FUN_00237dd0(int param_1)
     }
   }
   else {
-    temp_v8 = FUN_00169294(6,7,0);
+    temp_v8 = packNibblesAndByte(6,7,0);
     piVar6 = (int *)(temp_v3 + 0x12b8);
     temp_v1 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v8;
@@ -191,19 +191,19 @@ void FUN_00237dd0(int param_1)
     temp_v14 = *pfVar2 * 0.03125f;
     temp_v15 = pfVar2[1] * 0.03125f;
     temp_v16 = 0.0f;
-    FUN_0043b9f0(temp_v30,&temp_v14);
+    matrixSetTranslation(temp_v30,&temp_v14);
     FUN_0019a0fc(temp_v18,temp_v18,temp_v30);
   }
   temp_v32 = *(unsigned int *)(param_1 + 0x120);
   temp_v34 = *(unsigned int *)(param_1 + 0x128);
   temp_v33 = -*(float *)(param_1 + 0x124);
-  FUN_0043b9f0(temp_v29,&temp_v32);
+  matrixSetTranslation(temp_v29,&temp_v32);
   FUN_0019a0fc(temp_v18,temp_v18,temp_v29);
   if (*(char *)(param_1 + 0x380) == '\x01') {
     temp_v14 = *(float *)(param_1 + 0x358);
     temp_v15 = *(float *)(param_1 + 0x35c);
     temp_v16 = *(float *)(param_1 + 0x360);
-    FUN_0043b9f0(temp_v30,&temp_v14);
+    matrixSetTranslation(temp_v30,&temp_v14);
     FUN_0019a0fc(temp_v18,temp_v18,temp_v30);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
@@ -229,7 +229,7 @@ void FUN_00237dd0(int param_1)
     temp_v9 = temp_v4;
   }
   else if (*(char *)(param_1 + 0x380) != '\0') {
-    if (((DAT_005c4c2c & 1) == 0) && (temp_v3 = FUN_002eba64(&DAT_005c4c2c), temp_v3 != 0)) {
+    if (((DAT_005c4c2c & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v3 != 0)) {
       DAT_0064c054 = temp_v10;
       DAT_0064c058 = temp_v11;
       DAT_0064c05c = temp_v11;
@@ -303,7 +303,7 @@ void FUN_00237dd0(int param_1)
       temp_v14 = temp_v14 * temp_v12;
       temp_v15 = temp_v15 * temp_v13;
       temp_v16 = temp_v11;
-      FUN_0043b9f0(temp_v30,&temp_v14);
+      matrixSetTranslation(temp_v30,&temp_v14);
       FUN_0019a0fc(temp_v18,temp_v18,temp_v30);
       temp_v9 = temp_v6;
     }
@@ -319,7 +319,7 @@ void FUN_00237dd0(int param_1)
     temp_v14 = temp_v14 * temp_v13;
     temp_v15 = temp_v15 * temp_v12;
     temp_v16 = temp_v11;
-    FUN_0043b9f0(temp_v30,&temp_v14);
+    matrixSetTranslation(temp_v30,&temp_v14);
     FUN_0019a0fc(temp_v18,temp_v18,temp_v30);
   }
   temp_v19[0] = *(float *)(param_1 + 500) * *(float *)(param_1 + 0x1f8);
@@ -351,7 +351,7 @@ void FUN_00237dd0(int param_1)
     temp_v14 = temp_v14 * temp_v12;
     temp_v15 = temp_v15 * temp_v13;
     temp_v16 = temp_v11;
-    FUN_0043b9f0(temp_v30,&temp_v14);
+    matrixSetTranslation(temp_v30,&temp_v14);
     FUN_0019a0fc(temp_v18,temp_v18,temp_v30);
   }
   camSetMatrixA(g_renderCtx,temp_v18);

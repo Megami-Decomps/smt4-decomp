@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00288118(unsigned short);
+extern int dataTableGetEntry0102Value(unsigned short);
 extern int FUN_002a8740(int);
 
 
@@ -24,8 +24,8 @@ int FUN_001a81ac(unsigned int param_1,int *param_2,int *param_3)
     if (-1 < *param_2) {
       temp_v0 = FUN_002a8740(*param_3);
       temp_v1 = FUN_002a8740(*param_2);
-      temp_v0 = FUN_00288118(*(unsigned short *)(temp_v0 + 0x46));
-      temp_v1 = FUN_00288118(*(unsigned short *)(temp_v1 + 0x46));
+      temp_v0 = dataTableGetEntry0102Value(*(unsigned short *)(temp_v0 + 0x46));
+      temp_v1 = dataTableGetEntry0102Value(*(unsigned short *)(temp_v1 + 0x46));
       return temp_v0 - temp_v1;
     }
     temp_v0 = -1;

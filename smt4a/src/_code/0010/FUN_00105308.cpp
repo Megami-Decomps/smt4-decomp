@@ -1,24 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ea43c(int);
-int FUN_002ea446(int);
+void FUN_002ea43c(void *object);
+void FUN_002ea446(void *object);
 
-/* Supplied declaration required: FUN_002ea43c. */
-/* Supplied declaration required: FUN_002ea446. */
+typedef struct CountedObject {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ s32 count;
+} CountedObject;
 
-
-void FUN_00105308(int param_1)
-
+/* Runs FUN_002ea446 when `count` is positive and FUN_002ea43c when it is not. */
+void FUN_00105308(CountedObject *object)
 {
-/* irregular: 2 native warning(s); review required */
-  if (0 < *(int *)(param_1 + 0x3c)) {
-    FUN_002ea446(param_1);
-    return;
-  }
-  FUN_002ea43c(param_1);
-  return;
+    if (object->count > 0) {
+        FUN_002ea446(object);
+        return;
+    }
+    FUN_002ea43c(object);
 }
 
 } /* extern "C" */

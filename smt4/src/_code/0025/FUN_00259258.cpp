@@ -1,17 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043e188; /* 0x43e188 */
+typedef struct Target {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u8 unk30;
+} Target;
 
+extern struct {
+    u8 unk00[8];
+    Target *target;
+} DAT_0043e188;
 
 void FUN_00259258(void)
-
 {
-  if ((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) != 0) {
-    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x8)) + 0x30) = 1;
-  }
-  return;
+    if (DAT_0043e188.target != NULL) {
+        DAT_0043e188.target->unk30 = 1;
+    }
 }
 
 } /* extern "C" */

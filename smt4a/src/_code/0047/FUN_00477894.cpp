@@ -8,15 +8,15 @@ int FUN_001b3f7c(unsigned int *, unsigned int *);
 int FUN_00474734(unsigned int *, int);
 int FUN_00476e58(unsigned int *, int, int);
 int FUN_00477d10(...);
-int FUN_0047b1e4(...);
+int jobFlagsWorkStop(...);
 int FUN_0047bc90(unsigned int *, unsigned int *);
 int FUN_0047bcdc(unsigned int *, int);
 int FUN_0047daf4(unsigned int *);
 int FUN_004cfeb0(unsigned int *, int, int, int, int, int);
 int FUN_004d05c4(...);
-int FUN_004d06e4(unsigned int *);
+int releaseEntriesA(unsigned int *);
 int FUN_004d091c(...);
-int FUN_004d097c(unsigned int *);
+int releaseEntriesB(unsigned int *);
 int FUN_004d09b8(...);
 int FUN_004d0a98(...);
 
@@ -39,17 +39,17 @@ extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: FUN_0047b1e4. */
+/* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: FUN_0047bcdc. */
-extern int FUN_0047dae0(unsigned int *);
+extern int isEmptyString(unsigned int *);
 /* Supplied declaration required: FUN_0047daf4. */
 /* Supplied declaration required: FUN_004cfeb0. */
 extern unsigned int FUN_004d0040(unsigned int *);
 /* Supplied declaration required: FUN_004d05c4. */
-/* Supplied declaration required: FUN_004d06e4. */
+/* Supplied declaration required: releaseEntriesA. */
 /* Supplied declaration required: FUN_004d091c. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesB. */
 /* Supplied declaration required: FUN_004d09b8. */
 /* Supplied declaration required: FUN_004d0a98. */
 
@@ -108,14 +108,14 @@ void FUN_00477894(unsigned int *param_1)
         uStack_50 = uStack_3c;
         uStack_4c = uStack_38;
         uStack_48 = uStack_34;
-        temp_v1 = FUN_0047dae0(&temp_v4);
+        temp_v1 = isEmptyString(&temp_v4);
         if (temp_v1 != 0) {
           param_1[2] = 3;
         }
         else {
           temp_v1 = FUN_001d10ac(&temp_v4);
           if (temp_v1 != 0) {
-            FUN_0047b1e4(param_1);
+            jobFlagsWorkStop(param_1);
             if ((temp_v4 & 0xff) == 0x66) {
               temp_v6 = temp_v4;
               uStack_2c = uStack_54;
@@ -142,8 +142,8 @@ void FUN_00477894(unsigned int *param_1)
     else {
       temp_v1 = FUN_002e19f8();
       if (temp_v1 != 0) {
-        FUN_004d097c(param_1 + 0xba);
-        FUN_004d06e4(param_1 + 0xad);
+        releaseEntriesB(param_1 + 0xba);
+        releaseEntriesA(param_1 + 0xad);
         FUN_0047bcdc(param_1,0);
         puVar4 = param_1 + 0x83;
         FUN_00474734(puVar4,0);
@@ -165,9 +165,9 @@ void FUN_00477894(unsigned int *param_1)
     uStack_50 = uStack_3c;
     uStack_4c = uStack_38;
     uStack_48 = uStack_34;
-    temp_v2 = FUN_0047dae0(&temp_v4);
+    temp_v2 = isEmptyString(&temp_v4);
     if (temp_v2 != 0) {
-      FUN_0047b1e4(param_1);
+      jobFlagsWorkStop(param_1);
       if (*(int *)(temp_v1 + 0x67c) != 0) {
         FUN_004cfeb0(param_1 + 0x90,3,*(int *)(temp_v1 + 0x67c),0,1,1);
         puVar4 = param_1 + 0xba;
@@ -210,7 +210,7 @@ void FUN_00477894(unsigned int *param_1)
     }
     temp_v1 = FUN_001d10ac(&temp_v4);
     if (temp_v1 != 0) {
-      FUN_0047b1e4(param_1);
+      jobFlagsWorkStop(param_1);
 LAB_00477a3c:
       param_1[2] = 9999;
       param_1[0x84] = temp_v4;

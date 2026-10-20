@@ -102,7 +102,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_0044b92c. */
 /* Supplied declaration required: FUN_0044bd1c. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -282,7 +282,7 @@ LAB_005063fc:
       temp_v26 = *(float *)(temp_v55 + 0x3c);
       temp_v11 = (~(unsigned int)temp_v26 & 0x40000000) == 0;
       *(unsigned int *)(temp_v55 + 0x3c) = (unsigned int)temp_v26 | 0x4000001c;
-      if (((DAT_005c4c2c & 1) == 0) && (temp_v4 = FUN_002eba64(&DAT_005c4c2c), temp_v4 != 0)) {
+      if (((DAT_005c4c2c & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v4 != 0)) {
         DAT_0064c054 = temp_v19;
         DAT_0064c058 = temp_v21;
         DAT_0064c05c = temp_v21;
@@ -436,7 +436,7 @@ LAB_0050674c:
             }
             temp_v54 = (unsigned int)((~*(unsigned int *)(temp_v55 + 0x3c) & 0x40000000) == 0);
             *(unsigned int *)(temp_v55 + 0x3c) = *(unsigned int *)(temp_v55 + 0x3c) | 0x4000001c;
-            if (((DAT_005c4c2c & 1) == 0) && (temp_v4 = FUN_002eba64(&DAT_005c4c2c), temp_v4 != 0)) {
+            if (((DAT_005c4c2c & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v4 != 0)) {
               DAT_0064c054 = temp_v8;
               DAT_0064c058 = temp_v21;
               DAT_0064c05c = temp_v21;

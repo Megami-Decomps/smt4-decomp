@@ -1,26 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0019a840(int);
-int FUN_002267b0(int, int, unsigned int, int);
+void FUN_0019a840(void *object);
+void FUN_002267b0(void *object, u32 a, u32 b, s32 c);
 
-/* Supplied declaration required: FUN_0019a840. */
-/* Supplied declaration required: FUN_002267b0. */
+typedef struct Object {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 unk0C;
+    /* 0x10 */ u8 unk10[0x28];
+    /* 0x38 */ u32 unk38;
+    /* 0x3C */ u32 unk3C;
+    /* 0x40 */ u32 unk40;
+} Object;
 
+typedef struct Holder {
+    /* 0x00 */ Object *object;
+    /* 0x04 */ u8 unk04[0x40];
+    /* 0x44 */ u32 arg;
+    /* 0x48 */ u8 ready;
+} Holder;
 
-void FUN_002adc94(unsigned int param_1,int *param_2,unsigned int param_3)
-
+/* Sets the held object up with FUN_002267b0(object, arg, `value`, 0x10000), fixes its fields and marks the holder ready. */
+void FUN_002adc94(u32 unused, Holder *holder, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_002267b0(*param_2,param_2[0x11],param_3,0x10000);
-  *(unsigned int *)(*param_2 + 0xc) = 0x2000000;
-  *(unsigned int *)(*param_2 + 0x3c) = 1;
-  *(unsigned int *)(*param_2 + 0x40) = 1;
-  *(unsigned int *)(*param_2 + 0x38) = 0;
-  FUN_0019a840(*param_2);
-  *(unsigned char *)(param_2 + 0x12) = 1;
-  return;
+    FUN_002267b0(holder->object, holder->arg, value, 0x10000);
+    holder->object->unk0C = 0x2000000;
+    holder->object->unk3C = 1;
+    holder->object->unk40 = 1;
+    holder->object->unk38 = 0;
+    FUN_0019a840(holder->object);
+    holder->ready = 1;
 }
 
 } /* extern "C" */

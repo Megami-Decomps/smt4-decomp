@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/GameGlobals.h"
 
 extern "C" {
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
-
-
-int FUN_0029acb0(void)
-
+u16 *FUN_0029acb0(void)
 {
-  return (*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1300;
+    return &g_gameGlobals.data->unk1300;
 }
 
 } /* extern "C" */

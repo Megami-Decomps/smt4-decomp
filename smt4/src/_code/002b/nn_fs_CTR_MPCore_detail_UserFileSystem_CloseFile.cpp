@@ -1,20 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+struct File;
+typedef struct FileVtbl {
+    /* 0x00 */ void *unk00[11];
+    /* 0x2C */ void (*close)(struct File *file);
+} FileVtbl;
 
-void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(int *param_1)
+typedef struct File {
+    /* 0x0 */ FileVtbl *vtbl;
+} File;
 
+void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(File *file)
 {
-/* irregular: 2 native warning(s); review required */
-  if (param_1 != (int *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x002b90c0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(*param_1 + 0x2c))(param_1);
-    return;
-  }
-  return;
+    if (file != NULL) {
+        file->vtbl->close(file);
+        return;
+    }
 }
 
 } /* extern "C" */

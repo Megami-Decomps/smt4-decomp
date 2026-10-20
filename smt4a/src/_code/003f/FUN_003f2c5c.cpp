@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001a0d08(int *);
-int FUN_0042ce1c(int);
+int registerObj8Holder(int);
 int FUN_00439020(unsigned int *);
 int software_interrupt(int);
 
@@ -13,7 +13,7 @@ extern unsigned char DAT_0055b378; /* 0x55b378 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001a0d08. */
-/* Supplied declaration required: FUN_0042ce1c. */
+/* Supplied declaration required: registerObj8Holder. */
 /* Supplied declaration required: FUN_00439020. */
 
 
@@ -31,7 +31,7 @@ int FUN_003f2c5c(int param_1)
   }
   *(unsigned char **)(param_1 + 8) = &DAT_0055b378;
   FUN_00439020((unsigned int *)(param_1 + 8));
-  FUN_0042ce1c(param_1 + 0xc);
+  registerObj8Holder(param_1 + 0xc);
   return param_1;
 }
 

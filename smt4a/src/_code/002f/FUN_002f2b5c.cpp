@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0010526e(int, int *);
 int FUN_002e75fa(int);
 int FUN_002eab08(int *);
-int FUN_002eb690(...);
+int wordRefsDiffer_002eb690(...);
 int FUN_002eb6a0(int, int *, int *);
 
 /* stack frame of param_3: 7 slot(s), 28 byte(s) */
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0010526e. */
 /* Supplied declaration required: FUN_002e75fa. */
 /* Supplied declaration required: FUN_002eab08. */
-/* Supplied declaration required: FUN_002eb690. */
+/* Supplied declaration required: wordRefsDiffer_002eb690. */
 /* Supplied declaration required: FUN_002eb6a0. */
 extern int FUN_002eb6ae(int, unsigned int);
 
@@ -49,10 +49,10 @@ void FUN_002f2b5c(int param_1,int param_2,int param_3)
     iStack_20 = param_1;
     temp_v6 = param_2;
     temp_v7 = param_3;
-    temp_v0 = FUN_002eb690(param_1 + 8,temp_v3);
+    temp_v0 = wordRefsDiffer_002eb690(param_1 + 8,temp_v3);
     if (temp_v0 != 0) {
       FUN_002e75fa(temp_v6);
-      temp_v0 = FUN_002eb690(param_1 + 8,param_1 + 0x10);
+      temp_v0 = wordRefsDiffer_002eb690(param_1 + 8,param_1 + 0x10);
       piVar2 = (int *)(param_1 + 0xc);
       if (temp_v0 != 0) {
         FUN_002eb6a0(param_1 + 4,piVar2,&temp_v6);

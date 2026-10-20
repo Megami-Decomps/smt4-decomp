@@ -1,41 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00296ee0(int, int);
-int FUN_002b8838(int);
+int FUN_00296ee0(void *obj, int state);
+int FUN_002b8838(int id);
+extern int FUN_0019e0c0(u32 value);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x20];
+    /* 0x020 */ s8 unk020;
+    /* 0x021 */ u8 unk021[8];
+    /* 0x029 */ u8 unk029;
+    /* 0x02A */ u8 unk02A[0x62A];
+    /* 0x654 */ u32 unk654;
+} Obj;
 
-extern int FUN_0019e0c0(unsigned int);
-/* Supplied declaration required: FUN_00296ee0. */
-/* Supplied declaration required: FUN_002b8838. */
-
-
-void FUN_00397514(int param_1)
-
+void FUN_00397514(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0x654));
-  if (temp_v0 != 2) {
-    return;
-  }
-  FUN_00296ee0(param_1,2);
-  if (*(char *)(param_1 + 0x29) != '\0') {
-    FUN_002b8838(0x97);
-    return;
-  }
-  if ((*(signed char *)(param_1 + 0x20) != '\x02') && (*(signed char *)(param_1 + 0x20) != '\x06')) {
-    FUN_002b8838(0x95);
-    return;
-  }
-  FUN_002b8838(0x96);
-  return;
+    if (FUN_0019e0c0(obj->unk654) != 2) {
+        return;
+    }
+    FUN_00296ee0(obj, 2);
+    if (obj->unk029 != 0) {
+        FUN_002b8838(0x97);
+        return;
+    }
+    if ((obj->unk020 != 2) && (obj->unk020 != 6)) {
+        FUN_002b8838(0x95);
+        return;
+    }
+    FUN_002b8838(0x96);
 }
 
 } /* extern "C" */

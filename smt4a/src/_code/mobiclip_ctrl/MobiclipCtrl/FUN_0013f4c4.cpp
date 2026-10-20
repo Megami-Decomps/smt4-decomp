@@ -9,7 +9,7 @@ int FUN_0015842c(unsigned char *);
 int FUN_0015a244(void);
 int FUN_0016182c(int, int);
 int FUN_0017cdb4(void);
-int FUN_0017e050(int);
+int registerBlockRequestGroups(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern int DAT_00618100; /* 0x618100 */
 /* Supplied declaration required: FUN_0015a244. */
 /* Supplied declaration required: FUN_0016182c. */
 /* Supplied declaration required: FUN_0017cdb4. */
-/* Supplied declaration required: FUN_0017e050. */
+/* Supplied declaration required: registerBlockRequestGroups. */
 
 
 void FUN_0013f4c4(int param_1)
@@ -32,7 +32,7 @@ void FUN_0013f4c4(int param_1)
 {
 /* irregular: 6 native warning(s); review required */
   if (param_1 != 2) {
-    FUN_0017e050(0x3fff);
+    registerBlockRequestGroups(0x3fff);
     FUN_0016182c(0x3fff,1);
     FUN_0017cdb4();
   }

@@ -1,21 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001d3490(int);
+void FUN_001d3490(void *channel);
 
-/* Supplied declaration required: FUN_001d3490. */
+typedef struct Channel {
+    /* 0x00 */ u8 unk00[0x0D];
+    /* 0x0D */ u8 mode;
+} Channel;
 
-
-void FUN_001d3154(int param_1)
-
+/* Runs FUN_001d3490 on the channel while its mode is 0. */
+void FUN_001d3154(Channel *channel)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(char *)(param_1 + 0xd) == '\0') {
-    FUN_001d3490(param_1);
-    return;
-  }
-  return;
+    if (channel->mode == 0) {
+        FUN_001d3490(channel);
+        return;
+    }
 }
 
 } /* extern "C" */

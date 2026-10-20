@@ -16,7 +16,7 @@ extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002804b0. */
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_0035bcdc(int);
+extern int findRecordByKey(int);
 
 
 unsigned int FUN_004f741c(int param_1)
@@ -45,7 +45,7 @@ unsigned int FUN_004f741c(int param_1)
     FUN_002e342c(temp_v3,temp_v4);
     temp_v0 = FUN_00100d60(temp_v3,0x2f);
     FUN_002e342c(temp_v1 + 0x2e28,temp_v0 + 1);
-    temp_v0 = FUN_0035bcdc(temp_v1 + 0x2e28);
+    temp_v0 = findRecordByKey(temp_v1 + 0x2e28);
     if (temp_v0 == 0xff) {
       FUN_002804b0(temp_v3,temp_v1 + 0x2e24,1);
       *(unsigned char *)(temp_v1 + 0x2ea8) = *(unsigned char *)(temp_v1 + 0x2ea8) | 1;

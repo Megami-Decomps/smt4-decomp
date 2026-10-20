@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_00300124. */
-extern int FUN_00399c60(void);
+extern int displayIsStereoActive(void);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -52,7 +52,7 @@ void FUN_002b3ed8(unsigned int *param_1,unsigned int *param_2,unsigned int param
   *(unsigned int *)(temp_v0 + 0x28) = param_3;
   *(unsigned int *)(temp_v0 + 0x2c) = param_4;
   FUN_00300124(temp_v0,1);
-  temp_v0 = FUN_00399c60();
+  temp_v0 = displayIsStereoActive();
   if (temp_v0 != 0) {
     temp_v1 = 0x10000;
     memAlloc(0x10000,0x100,0,0x68,0x10,1);

@@ -21,7 +21,7 @@ extern unsigned char LAB_00498ab4; /* 0x498ab4 */
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003c5fc4. */
-extern unsigned int FUN_0049cfcc(unsigned int *, int);
+extern unsigned int dataTable17Type0GetEntry(unsigned int *, int);
 
 
 void FUN_004989f0(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -45,7 +45,7 @@ void FUN_004989f0(int param_1,int param_2,unsigned int param_3,unsigned int para
       else {
         temp_v0 = *(int *)(temp_v0 + 0x1600c) + 4;
       }
-      temp_v1 = FUN_0049cfcc((unsigned int *)&uStack_20,temp_v0);
+      temp_v1 = dataTable17Type0GetEntry((unsigned int *)&uStack_20,temp_v0);
       FUN_001654f8(temp_v1,0);
       FUN_00100388(param_1 + 0x194,&LAB_00498ab4,param_1 + 0x194,temp_v1);
       temp_v2 = temp_v2 + 1;

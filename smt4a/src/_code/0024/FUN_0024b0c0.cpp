@@ -1,20 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Entry {
+    /* 0x00 */ u8 data[0x20];
+} Entry;
 
-int FUN_0024b0c0(int param_1,int param_2)
+typedef struct Header {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 count;
+} Header;
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0xB0];
+    /* 0xB0 */ Header *header;
+    /* 0xB4 */ Entry *entries;
+} Holder;
+
+/* Returns entry `index` (0x20 bytes each), or NULL when the index is out of range. */
+Entry *FUN_0024b0c0(Holder *holder, s32 index)
 {
-  int temp_v0;
-  
-  if ((param_2 >= 0) && (*(int *)(*(int *)(param_1 + 0xb0) + 8) > param_2)) {
-    temp_v0 = *(int *)(param_1 + 0xb4) + param_2 * 0x20;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    Entry *entry;
+
+    if ((index >= 0) && (holder->header->count > index)) {
+        entry = holder->entries + index;
+    } else {
+        entry = NULL;
+    }
+    return entry;
 }
 
 } /* extern "C" */

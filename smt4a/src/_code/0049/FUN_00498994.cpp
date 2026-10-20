@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019de98(int, int);
-int FUN_00342348(int);
+int screenShowMessage(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_00342348. */
+/* Supplied declaration required: screenShowMessage. */
 extern int FUN_004cfe4c(int);
 
 
@@ -28,7 +28,7 @@ void FUN_00498994(int param_1)
   temp_v0 = param_1 + temp_v1 * 0x74;
   if (0 < *(int *)(temp_v0 + 0xb68)) {
     temp_v0 = FUN_004cfe4c(temp_v0 + 0xb60);
-    FUN_00342348(*(unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xf74 + temp_v0 * 4));
+    screenShowMessage(*(unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xf74 + temp_v0 * 4));
     return;
   }
   FUN_0019de98(0,0x323232ff);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00155024(unsigned int, int);
+int surfaceCopy(unsigned int, int);
 int FUN_0016c4b8(int, int);
 int FUN_0019e3d0(int, int, int, int, int, int, int, double);
 int FUN_001a9698(void);
@@ -23,8 +23,8 @@ extern int DAT_0057f65c; /* 0x57f65c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00155024. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: surfaceCopy. */
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0019e3d0. */
@@ -56,7 +56,7 @@ void FUN_00150d38(int param_1)
     *(unsigned int *)(*(int *)(temp_v2 + 0x1038) + 0x18) = 0x200;
     *(unsigned int *)(*piVar7 + 0x14) = *(unsigned int *)(*(int *)(temp_v2 + 0x1038) + 0x14);
     *(unsigned int *)(*piVar7 + 0x18) = *(unsigned int *)(*(int *)(temp_v2 + 0x1038) + 0x18);
-    FUN_00155024(*(unsigned int *)(temp_v2 + 0x1038),*piVar7);
+    surfaceCopy(*(unsigned int *)(temp_v2 + 0x1038),*piVar7);
     *(int *)(*piVar7 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
     *(int *)(*piVar7 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;
   }
@@ -65,7 +65,7 @@ void FUN_00150d38(int param_1)
     *(unsigned int *)(*(int *)(temp_v2 + 0x103c) + 0x18) = 0x200;
     *(unsigned int *)(*piVar7 + 0x14) = *(unsigned int *)(*(int *)(temp_v2 + 0x103c) + 0x14);
     *(unsigned int *)(*piVar7 + 0x18) = *(unsigned int *)(*(int *)(temp_v2 + 0x103c) + 0x18);
-    FUN_00155024(*(unsigned int *)(temp_v2 + 0x103c),*piVar7);
+    surfaceCopy(*(unsigned int *)(temp_v2 + 0x103c),*piVar7);
     *(int *)(*piVar7 + 0x14) = *(int *)(*piVar7 + 0x14) >> 1;
     *(int *)(*piVar7 + 0x18) = *(int *)(*piVar7 + 0x18) >> 1;
   }
@@ -101,7 +101,7 @@ void FUN_00150d38(int param_1)
   if (temp_v0 != 0) {
     if (temp_v0 != 1) {
       if (temp_v0 == 2) {
-        temp_v0 = FUN_00169294(6,1,2);
+        temp_v0 = packNibblesAndByte(6,1,2);
         piVar7 = (int *)(temp_v5 + 0x12b8);
         temp_v3 = piVar7[*piVar7 + 2];
         piVar7[*piVar7 + 2] = temp_v0;
@@ -112,7 +112,7 @@ void FUN_00150d38(int param_1)
       }
     }
     else {
-      temp_v0 = FUN_00169294(6,1,0);
+      temp_v0 = packNibblesAndByte(6,1,0);
       piVar7 = (int *)(temp_v5 + 0x12b8);
       temp_v3 = piVar7[*piVar7 + 2];
       piVar7[*piVar7 + 2] = temp_v0;
@@ -123,7 +123,7 @@ void FUN_00150d38(int param_1)
     }
   }
   else {
-    temp_v0 = FUN_00169294(6,7,0);
+    temp_v0 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v5 + 0x12b8);
     temp_v3 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v0;
@@ -137,7 +137,7 @@ void FUN_00150d38(int param_1)
   FUN_0019e3d0(temp_v1,temp_v1,temp_v1,temp_v1,0,0,0,temp_v9);
   temp_v6 = g_renderCtx;
   if (*(int *)(temp_v2 + 0x1030) != 0) {
-    temp_v2 = FUN_00169294(6,7,0);
+    temp_v2 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v6 + 0x12b8);
     temp_v5 = piVar7[*piVar7 + 2];
     piVar7[*piVar7 + 2] = temp_v2;

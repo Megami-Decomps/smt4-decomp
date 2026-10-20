@@ -13,7 +13,7 @@ int VectorFloatToUnsigned(double, int);
 int asdSequenceRequest(...);
 int jobStop(...);
 int FUN_001695a0(void);
-int FUN_001836b0(void);
+int resourceListDestroy(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_0019e2dc(void);
@@ -30,7 +30,7 @@ int FUN_0035b304(void);
 int FUN_0037b450(void);
 int FUN_003a2278(...);
 int FUN_003d2150(...);
-int FUN_003e5b9c(...);
+int linkHolderClearFlag(...);
 int FUN_003e5c00(void);
 int FUN_00408184(...);
 
@@ -47,15 +47,15 @@ int FUN_0026edbc(...);
 int FUN_002844e4(void);
 int FUN_002bf4f4(...);
 int FUN_0031f27c(...);
-int FUN_00333be0(...);
+int obj7ECSetPair(...);
 int FUN_0035d8a4(void);
 int FUN_003d2158(...);
 int FUN_003d2d6c(...);
 int FUN_003d54f8(...);
 int FUN_003e542c(...);
-int FUN_003e549c(...);
+int linkHolderApplyFirst(...);
 int FUN_003e54b8(...);
-int FUN_003e5b1c(...);
+int linkHolderSetFlag(...);
 
 int FUN_00100388(...);
 int FUN_0013c884(...);
@@ -180,7 +180,7 @@ extern int FUN_00164af0(unsigned int);
 /* Supplied declaration required: FUN_00168980. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_001836b0. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: FUN_0018719c. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019c0e0. */
@@ -224,7 +224,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_00324c48. */
 /* Supplied declaration required: FUN_003339bc. */
-/* Supplied declaration required: FUN_00333be0. */
+/* Supplied declaration required: obj7ECSetPair. */
 /* Supplied declaration required: FUN_00342010. */
 /* Supplied declaration required: FUN_0035b304. */
 /* Supplied declaration required: FUN_0035d8a4. */
@@ -237,17 +237,17 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003d2d6c. */
 /* Supplied declaration required: FUN_003d54f8. */
-extern int FUN_003e5414(unsigned int);
+extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e542c. */
 /* Supplied declaration required: FUN_003e5478. */
-/* Supplied declaration required: FUN_003e549c. */
+/* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: FUN_003e54b8. */
-extern int FUN_003e56f0(unsigned int);
+extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: FUN_003e5728. */
 /* Supplied declaration required: FUN_003e5858. */
-extern int FUN_003e5ae8(unsigned int);
-/* Supplied declaration required: FUN_003e5b1c. */
-/* Supplied declaration required: FUN_003e5b9c. */
+extern int fourPtrsAllNull(unsigned int);
+/* Supplied declaration required: linkHolderSetFlag. */
+/* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003e5c00. */
 extern unsigned int *FUN_003e5d10(void);
 /* Supplied declaration required: FUN_003f9c0c. */
@@ -540,7 +540,7 @@ unsigned int FUN_0027e0d8(void)
     }
     break;
   case 2:
-    temp_v7 = FUN_003e5ae8(puVar3[0xf]);
+    temp_v7 = fourPtrsAllNull(puVar3[0xf]);
     if (temp_v7 == 0) break;
     FUN_003e5478(puVar3[0xf],0);
     FUN_003e5728(puVar3[0xf]);
@@ -602,7 +602,7 @@ unsigned int FUN_0027e0d8(void)
         ;
         sysPlaySe(0xa8);
         FUN_0031f27c(0xffffffff,2);
-        FUN_00333be0(puVar3[6],puVar3[7]);
+        obj7ECSetPair(puVar3[6],puVar3[7]);
         FUN_0021b6ec(puVar3);
         FUN_0023b27c();
         puVar3[4] = 4;
@@ -682,16 +682,16 @@ LAB_0027edcc:
         }
       }
     }
-    temp_v7 = FUN_003e5414(puVar3[0xf]);
+    temp_v7 = linkHolderCallFirst(puVar3[0xf]);
     if ((temp_v7 != 0x13) || (FUN_003e542c(puVar3[0xf]), in_s0 < 0x41a00000)) break;
     FUN_003e54b8(puVar3[0xf]);
     temp_v4 = puVar3[0xf];
     FUN_003e5728(temp_v4);
     break;
   case 5:
-    temp_v7 = FUN_003e56f0(puVar3[0xf]);
+    temp_v7 = linkHolderCheckFirst(puVar3[0xf]);
     if (temp_v7 != 0) {
-      FUN_003e549c(puVar3[0xf],0);
+      linkHolderApplyFirst(puVar3[0xf],0);
     }
     temp_v7 = 6;
     FUN_001517b4(6,2);
@@ -717,7 +717,7 @@ LAB_0027edcc:
             if (temp_v7 != 0xb4) {
               if (temp_v7 != 0x13f) {
                 if (temp_v7 == 0x144) {
-                  FUN_003e5b1c(puVar3[0xf]);
+                  linkHolderSetFlag(puVar3[0xf]);
                   break;
                 }
                 if (temp_v7 != 0x17f) break;
@@ -776,7 +776,7 @@ LAB_0027edcc:
     FUN_002686b8();
     FUN_0035d8a4();
     FUN_002bf4f4(0);
-    FUN_003e5b1c(puVar3[0xf]);
+    linkHolderSetFlag(puVar3[0xf]);
     *(unsigned char *)(puVar3 + 0x160) = 0;
     *(unsigned char *)(puVar3 + 0x163) = 0;
     temp_v7 = puVar3[3];
@@ -916,8 +916,8 @@ LAB_0027edcc:
     puVar3[4] = 5;
     puVar3[5] = 0;
     if (*(char *)(puVar3 + 0x15a) != '\0') {
-      FUN_003e5b9c(puVar3[0xf]);
-      FUN_003e549c(puVar3[0xf],0x13);
+      linkHolderClearFlag(puVar3[0xf]);
+      linkHolderApplyFirst(puVar3[0xf],0x13);
       *(unsigned char *)(puVar3 + 0x15a) = 0;
     }
     FUN_0022677c(0,0xff);
@@ -939,8 +939,8 @@ LAB_0027edcc:
     puVar3[4] = 5;
     puVar3[5] = 0;
     if (*(char *)(puVar3 + 0x15a) != '\0') {
-      FUN_003e5b9c(puVar3[0xf]);
-      FUN_003e549c(puVar3[0xf],0x13);
+      linkHolderClearFlag(puVar3[0xf]);
+      linkHolderApplyFirst(puVar3[0xf],0x13);
       *(unsigned char *)(puVar3 + 0x15a) = 0;
     }
     FUN_0022677c(0,0xff);
@@ -1048,7 +1048,7 @@ LAB_0027edcc:
       temp_v7 = 0;
       do {
         if (puVar8[temp_v7 * 3 + 0x15f] != 0) {
-          FUN_001836b0();
+          resourceListDestroy();
           puVar8[temp_v7 * 3 + 0x15f] = 0;
         }
         if (puVar8[temp_v7 * 3 + 0x15e] != 0) {
@@ -1131,7 +1131,7 @@ LAB_0027edcc:
       FUN_00275f44(puVar3[10],*(unsigned int *)((unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c + 0x56fd6c));
       sysPlaySe(0xa8);
       FUN_0031f27c(0xffffffff,2);
-      FUN_00333be0(puVar3[6],puVar3[7]);
+      obj7ECSetPair(puVar3[6],puVar3[7]);
       FUN_0021b6ec(puVar3);
       FUN_0023b27c();
       puVar3[4] = 4;
@@ -1172,12 +1172,12 @@ LAB_0027edcc:
       FUN_0019c8c0(puVar3[0x168]);
     }
     if (puVar3[0x15b] == 0x55) {
-      FUN_003e5b9c(puVar3[0xf]);
+      linkHolderClearFlag(puVar3[0xf]);
       FUN_003e5478(puVar3[0xf],0x1a);
       FUN_003e5728(puVar3[0xf]);
     }
-    if (((int)puVar3[0x15b] >= 0x88) && (temp_v7 = FUN_003e56f0(puVar3[0xf]), temp_v7 != 0)) {
-      FUN_003e549c(puVar3[0xf],0);
+    if (((int)puVar3[0x15b] >= 0x88) && (temp_v7 = linkHolderCheckFirst(puVar3[0xf]), temp_v7 != 0)) {
+      linkHolderApplyFirst(puVar3[0xf],0);
       FUN_004d9c54(puVar3,2);
       *(unsigned char *)(puVar3 + 0x15a) = 0;
     }

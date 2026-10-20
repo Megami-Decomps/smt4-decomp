@@ -10,7 +10,7 @@ int FUN_002f9f12(void);
 extern unsigned char DAT_0055aaa0; /* 0x55aaa0 */
 
 extern int FUN_002ea00c(int);
-extern int FUN_002ec890(int);
+extern int destroyObj0055ae64(int);
 extern int strDestroy(unsigned int *);
 /* Supplied declaration required: FUN_002ecac4. */
 /* Supplied declaration required: FUN_002f9f12. */
@@ -29,7 +29,7 @@ void FUN_0011e178(unsigned int *param_1)
   }
   temp_v0 = strDestroy(param_1 + 0x5e);
   temp_v0 = FUN_002fb028(temp_v0 - 0x78);
-  temp_v0 = FUN_002ec890(temp_v0 - 0x28);
+  temp_v0 = destroyObj0055ae64(temp_v0 - 0x28);
   temp_v0 = FUN_002ea00c(temp_v0 - 0x60);
   FUN_002ecac4(temp_v0 - 0x78);
   return;

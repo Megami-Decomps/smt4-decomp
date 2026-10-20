@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7378(int, int);
+void FUN_002e7378(void *stream, s32 position);
 
-/* Supplied declaration required: FUN_002e7378. */
+typedef struct Stream {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ s32 position;
+} Stream;
 
-
-void FUN_002ed280(int param_1,int param_2)
-
+/* Moves the read position forward by `offset`. */
+void FUN_002ed280(Stream *stream, s32 offset)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002e7378(param_1,*(int *)(param_1 + 0xc) + param_2);
-  return;
+    FUN_002e7378(stream, stream->position + offset);
 }
 
 } /* extern "C" */

@@ -1,17 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Interface {
+    void (**vtable)(struct Interface *self);
+} Interface;
 
-void FUN_001200d8(int param_1)
+typedef struct Owner {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ Interface *object;
+} Owner;
 
+/* Calls virtual method 4 of the owned object. */
+void FUN_001200d8(Owner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-                    /* WARNING: Could not recover jumptable at 0x001200e4. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-  (**(romwright_code **)(**(int **)(param_1 + 8) + 0x10))(*(int **)(param_1 + 8));
-  return;
+    owner->object->vtable[4](owner->object);
 }
 
 } /* extern "C" */

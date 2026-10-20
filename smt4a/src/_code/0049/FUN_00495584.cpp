@@ -23,7 +23,7 @@ extern unsigned int FUN_001654e4(unsigned int *);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: lmapSceneGetScript. */
 /* Supplied declaration required: FUN_003e5858. */
-extern int FUN_003e5ae8(void);
+extern int fourPtrsAllNull(void);
 /* Supplied declaration required: FUN_004935b0. */
 
 
@@ -74,7 +74,7 @@ void FUN_00495584(unsigned int *param_1)
     param_1[2] = 2;
   }
   lmapSceneGetScript();
-  temp_v0 = FUN_003e5ae8();
+  temp_v0 = fourPtrsAllNull();
   if (temp_v0 == 0) {
     return;
   }

@@ -86,9 +86,9 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: FUN_00191830. */
 /* Supplied declaration required: FUN_002929d8. */
 /* Supplied declaration required: FUN_002ba1e0. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int, int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -184,7 +184,7 @@ LAB_0033d500:
                 if (temp_v0 != '\x01') {
                   if (temp_v0 != '\x02') {
                     if (temp_v0 == '\x03') {
-                      temp_v1 = FUN_002c5da8(5,0,1,temp_v1);
+                      temp_v1 = packNibblesAndByte(5,0,1,temp_v1);
                       piVar6 = (int *)(temp_v2 + 0x12ac);
                       temp_v3 = piVar6[*piVar6 + 2];
                       piVar6[*piVar6 + 2] = temp_v1;
@@ -195,7 +195,7 @@ LAB_0033d500:
                     }
                   }
                   else {
-                    temp_v1 = FUN_002c5da8(6,1,2,temp_v1);
+                    temp_v1 = packNibblesAndByte(6,1,2,temp_v1);
                     piVar6 = (int *)(temp_v2 + 0x12ac);
                     temp_v3 = piVar6[*piVar6 + 2];
                     piVar6[*piVar6 + 2] = temp_v1;
@@ -206,7 +206,7 @@ LAB_0033d500:
                   }
                 }
                 else {
-                  temp_v1 = FUN_002c5da8(6,1,0,temp_v1);
+                  temp_v1 = packNibblesAndByte(6,1,0,temp_v1);
                   piVar6 = (int *)(temp_v2 + 0x12ac);
                   temp_v3 = piVar6[*piVar6 + 2];
                   piVar6[*piVar6 + 2] = temp_v1;
@@ -217,7 +217,7 @@ LAB_0033d500:
                 }
               }
               else {
-                temp_v1 = FUN_002c5da8(6,7,0,temp_v1);
+                temp_v1 = packNibblesAndByte(6,7,0,temp_v1);
                 piVar6 = (int *)(temp_v2 + 0x12ac);
                 temp_v3 = piVar6[*piVar6 + 2];
                 piVar6[*piVar6 + 2] = temp_v1;
@@ -238,7 +238,7 @@ LAB_0033d500:
                                            (unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v18 = temp_v4;
                 if (temp_v36 != 0) {
-                  if (((DAT_00476634 & 1) == 0) && (temp_v2 = FUN_002bfefc(&DAT_00476634), temp_v2 != 0)
+                  if (((DAT_00476634 & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_00476634), temp_v2 != 0)
                      ) {
                     DAT_004efd70 = (unsigned int)temp_v15;
                     DAT_004efd6c = (unsigned int)temp_v13;

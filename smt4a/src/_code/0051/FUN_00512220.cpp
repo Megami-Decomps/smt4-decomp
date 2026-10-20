@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f4370(unsigned int *, int, int);
+int emptyStub_002f4370(unsigned int *, int, int);
 int FUN_002f5020(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ extern unsigned char DAT_005b4458; /* 0x5b4458 */
 extern unsigned int DAT_005b445c; /* 0x5b445c */
 extern unsigned int DAT_005b4460; /* 0x5b4460 */
 
-/* Supplied declaration required: FUN_002f4370. */
+/* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
 
 
@@ -30,7 +30,7 @@ void FUN_00512220(void)
   DAT_005b4458 = 1;
   DAT_005b445c = 0;
   DAT_005b4460 = 0;
-  FUN_002f4370(&DAT_005b445c,0x42cd08,0x100000);
+  emptyStub_002f4370(&DAT_005b445c,0x42cd08,0x100000);
   return;
 }
 

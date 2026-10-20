@@ -1,20 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001af264(void);
+void FUN_001af264(void *object);
 
-/* Supplied declaration required: FUN_001af264. */
+typedef struct Pair {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 first;
+    /* 0x08 */ u32 second;
+} Pair;
 
-
-void FUN_00188b60(int param_1)
-
+/* Runs FUN_001af264 on the object, then clears the two words at 4 and 8. */
+void FUN_00188b60(Pair *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001af264();
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 8) = 0;
-  return;
+    FUN_001af264(object);
+    object->first = 0;
+    object->second = 0;
 }
 
 } /* extern "C" */

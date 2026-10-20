@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fb4; /* 0x588fb4 */
+extern u8 DAT_00588fb4;
 
-
-unsigned char FUN_00145868(void)
-
+/* Returns the byte at 0x588FB4. */
+u8 FUN_00145868(void)
 {
-  return DAT_00588fb4;
+    return DAT_00588fb4;
 }
 
 } /* extern "C" */

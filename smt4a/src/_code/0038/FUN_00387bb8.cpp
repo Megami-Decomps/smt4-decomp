@@ -10,10 +10,10 @@ int FUN_002e264c(int);
 int FUN_002e2680(int);
 int FUN_002e6dd0(int, int);
 int FUN_002f4014(int);
-int FUN_00319e58(void);
+int cecProcessCall2(void);
 int FUN_0031d890(void);
 int FUN_0032e25c(int, int);
-int FUN_0032e30c(int);
+int playerSummaryFill(int);
 int FUN_003a4980(unsigned int, int, unsigned int);
 
 typedef struct fn_00387bb8_arg0 fn_00387bb8_arg0;
@@ -49,10 +49,10 @@ extern int FUN_002c334c(void);
 /* Supplied declaration required: FUN_002e2680. */
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_002f4014. */
-/* Supplied declaration required: FUN_00319e58. */
+/* Supplied declaration required: cecProcessCall2. */
 /* Supplied declaration required: FUN_0031d890. */
 /* Supplied declaration required: FUN_0032e25c. */
-/* Supplied declaration required: FUN_0032e30c. */
+/* Supplied declaration required: playerSummaryFill. */
 extern int FUN_00345388(unsigned int);
 /* Supplied declaration required: FUN_003a4980. */
 
@@ -67,13 +67,13 @@ unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
   temp_v1 = 0;
   if (param_1->field_0x110 != 0) {
     param_1->field_0x110 = 0;
-    FUN_0032e30c(param_1->field_0x8);
+    playerSummaryFill(param_1->field_0x8);
     if (param_1->field_0x108 == 0) {
       FUN_0032e25c(param_1->field_0x8,0);
     }
     temp_v0 = FUN_002a2cf0();
     if ((temp_v0 != 0) && (temp_v0 = FUN_00345388(0x20), temp_v0 != 0)) {
-      FUN_00319e58();
+      cecProcessCall2();
       FUN_002c0b5c(param_1->field_0x8);
     }
     if (param_1->field_0x108 == 0) {

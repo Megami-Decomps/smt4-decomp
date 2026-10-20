@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Obj43da28.h"
 
 extern "C" {
 
-extern unsigned char DAT_0043da28; /* 0x43da28 */
-
-
-unsigned char FUN_001eb82c(void)
-
+u8 FUN_001eb82c(void)
 {
-  return *(int *)((*(int *)((unsigned char *)&DAT_0043da28 + 0x4)) + 0x10) == 2;
+    return DAT_0043da28.obj->state == 2;
 }
 
 } /* extern "C" */

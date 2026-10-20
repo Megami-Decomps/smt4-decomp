@@ -12,8 +12,8 @@ int FUN_00427ac4(unsigned int *, unsigned int);
 int FUN_00428308(unsigned int *, int);
 int FUN_004287ec(unsigned int, unsigned int, unsigned int, int);
 int FUN_00428878(void);
-int FUN_0043bfdc(unsigned char *);
-int FUN_0043c2a8(unsigned char *);
+int initBlockE30(unsigned char *);
+int clearBlock10808(unsigned char *);
 
 /* stack frame of param_7: 9 slot(s), 34 byte(s) */
 typedef struct {
@@ -56,8 +56,8 @@ extern unsigned int *FUN_00427e28(unsigned char *, unsigned char *, unsigned int
 extern unsigned int *FUN_00428730(unsigned int, unsigned int *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004287ec. */
 /* Supplied declaration required: FUN_00428878. */
-/* Supplied declaration required: FUN_0043bfdc. */
-/* Supplied declaration required: FUN_0043c2a8. */
+/* Supplied declaration required: initBlockE30. */
+/* Supplied declaration required: clearBlock10808. */
 
 
 void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *param_3,unsigned int *param_4,unsigned int param_5,
@@ -133,7 +133,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
   puVar5 = param_6;
   FUN_00427ac4(param_6,param_7);
   if (-1 < (int)puVar5) {
-    FUN_0043bfdc(&DAT_0061b000);
+    initBlockE30(&DAT_0061b000);
     switch((char)param_4[1]) {
     case 0:
       temp_v6 = 0x8c;
@@ -168,7 +168,7 @@ void FUN_00428a58(unsigned int *param_1,unsigned int *param_2,unsigned int *para
     DAT_0061b014 = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
     DAT_0061b010 = (unsigned int)temp_v9;
     DAT_0061b018 = 1;
-    FUN_0043c2a8(&DAT_0061c000);
+    clearBlock10808(&DAT_0061c000);
     temp_v5 = 0;
     temp_v6 = 0;
     if (temp_v6 < param_7) {

@@ -7,14 +7,14 @@ extern "C" {
 int FUN_002f0384(...);
 int FUN_0038b57c(...);
 int FUN_004964e0(...);
-int FUN_004d0458(void);
+int sendEvent1000210(void);
 
 int FUN_001641c4(void);
 int FUN_00184528(int, int);
 int FUN_0019de98(...);
 int FUN_00224880(unsigned int);
 int FUN_00275f44(unsigned int, unsigned int);
-int FUN_0037c8b4(int);
+int panelSetTarget(int);
 int FUN_0037e0b8(...);
 int FUN_0038b010(int);
 int FUN_003fd7b4(unsigned int);
@@ -27,10 +27,10 @@ int FUN_00498994(int);
 int FUN_004989f0(...);
 int FUN_00498de0(...);
 int FUN_0049af90(int);
-int FUN_004d0434(void);
-int FUN_004d044c(void);
-int FUN_004d06e4(int);
-int FUN_004d097c(unsigned int);
+int sendEvent100020F(void);
+int sendEvent100020E(void);
+int releaseEntriesA(int);
+int releaseEntriesB(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -48,9 +48,9 @@ extern int FUN_0018719c(unsigned int);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002f0384. */
-extern int FUN_00334158(void);
+extern int objBStateAllowsAction(void);
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_0037c8b4. */
+/* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037e0b8. */
 /* Supplied declaration required: FUN_0038b010. */
 /* Supplied declaration required: FUN_0038b57c. */
@@ -69,16 +69,16 @@ extern int FUN_0040ab8c(void);
 extern unsigned int FUN_0049cad0(unsigned short *);
 extern int FUN_0049cbac(unsigned short, unsigned int);
 extern int FUN_004cfe4c(int);
-/* Supplied declaration required: FUN_004d0434. */
-/* Supplied declaration required: FUN_004d044c. */
-/* Supplied declaration required: FUN_004d0458. */
+/* Supplied declaration required: sendEvent100020F. */
+/* Supplied declaration required: sendEvent100020E. */
+/* Supplied declaration required: sendEvent1000210. */
 extern int FUN_004d0464(void);
 extern int FUN_004d0494(void);
 extern int FUN_004d04f4(void);
 extern int FUN_004d0554(void);
 extern int FUN_004d0584(void);
-/* Supplied declaration required: FUN_004d06e4. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesA. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_0049bd20(int param_1)
@@ -93,8 +93,8 @@ void FUN_0049bd20(int param_1)
   int *piVar6;
   unsigned short *puVar7;
   
-  FUN_0037c8b4(0);
-  temp_v1 = FUN_00334158();
+  panelSetTarget(0);
+  temp_v1 = objBStateAllowsAction();
   if (temp_v1 == 0) {
     FUN_004954e8(param_1);
     return;
@@ -141,7 +141,7 @@ void FUN_0049bd20(int param_1)
   else {
 LAB_0049be70:
     if (temp_v1 != 0) {
-      FUN_004d044c();
+      sendEvent100020E();
       FUN_00498494(param_1,0xb);
       FUN_00498de0(param_1);
       return;
@@ -159,10 +159,10 @@ LAB_0049be70:
       if (!(temp_v1 == 0 || temp_v0 == '\0')) {
         FUN_0038b010(0);
         FUN_00184528(param_1 + 0x3cc,1);
-        FUN_004d0434();
+        sendEvent100020F();
         FUN_0049af90(param_1);
-        FUN_004d097c(*(unsigned int *)(param_1 + 0xb3c));
-        FUN_004d06e4(param_1 + 0xb08);
+        releaseEntriesB(*(unsigned int *)(param_1 + 0xb3c));
+        releaseEntriesA(param_1 + 0xb08);
         temp_v1 = 0;
         if (temp_v1 < *(short *)(param_1 + 0x16030)) {
           do {
@@ -230,7 +230,7 @@ LAB_0049be70:
       else {
         temp_v1 = FUN_004d04f4();
         if (temp_v1 != 0) {
-          FUN_004d044c();
+          sendEvent100020E();
           FUN_0049706c(param_1);
         }
       }
@@ -298,7 +298,7 @@ LAB_0049be70:
       return;
     }
     *piVar6 = *(int *)(*(int *)(param_1 + 0xb40) * 8 + 0x588ef4);
-    FUN_004d0458();
+    sendEvent1000210();
     FUN_004964e0(param_1,1);
     if (*piVar6 == 3) {
       temp_v2 = 1;
@@ -380,7 +380,7 @@ LAB_0049be70:
       return;
     }
     *piVar6 = *(int *)(*(int *)(param_1 + 0xb40) * 8 + 0x588ef0);
-    FUN_004d0458();
+    sendEvent1000210();
     FUN_004964e0(param_1,1);
     if (*piVar6 != 3) {
       if (*piVar6 != 5) {

@@ -35,7 +35,7 @@ int dataTableGetEntries(void);
 int dataTableGet(...);
 int jobStop(...);
 int FUN_003bbf3c(void);
-int FUN_003bc670(void);
+int dataTable03Sub0GetCount(void);
 int FUN_003c3360(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -102,7 +102,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGet. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_003bbf3c. */
-/* Supplied declaration required: FUN_003bc670. */
+/* Supplied declaration required: dataTable03Sub0GetCount. */
 /* Supplied declaration required: FUN_003c3360. */
 /* Supplied declaration required: FUN_003c33c8. */
 /* Supplied declaration required: FUN_003c39fc. */
@@ -159,7 +159,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
       puVar7 = (unsigned int *)FUN_0022a464(param_1[4]);
       temp_v5 = *puVar7;
       if (DAT_00434388 != '\0') {
-        FUN_003bc670();
+        dataTable03Sub0GetCount();
         FUN_0022a3a8(param_1[4],0,temp_v5,0,(int)puVar7 - 1,0);
         *(unsigned int *)(param_2 + 0xc0) = 0xffffffff;
         *(unsigned int *)(param_2 + 0xc4) = temp_v5;

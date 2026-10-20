@@ -1,37 +1,52 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002a8740(void);
-extern int FUN_002a8764(void);
-extern int FUN_002b63ac(void);
+extern void *FUN_002a8740(void);
+extern u8 *FUN_002a8764(void);
+extern void *FUN_002b63ac(void);
 
+typedef struct Pad {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s16 unk1C;
+} Pad;
 
-unsigned int FUN_00288ddc(int param_1,unsigned int param_2)
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0xE];
+    /* 0x0E */ s16 unk0E;
+    /* 0x10 */ u8 unk10[0x36];
+    /* 0x46 */ u16 id;
+} Unit;
 
+typedef struct Party {
+    /* 0x0000 */ u8 unk0000[0x90F0];
+    /* 0x90F0 */ s8 slots[0x18];
+} Party;
+
+int FUN_00288ddc(int limit, u32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if ((int)param_2 < 0) {
-    temp_v0 = FUN_002b63ac();
-    if (*(short *)(temp_v0 + 0x1c) < param_1) {
-      return 1;
+    Pad *pad;
+    Party *party;
+    Unit *unit;
+    int i;
+
+    if ((int)id < 0) {
+        pad = (Pad *)FUN_002b63ac();
+        if (pad->unk1C < limit) {
+            return 1;
+        }
+    } else {
+        party = (Party *)FUN_002a8764();
+        i = 0;
+        do {
+            if ((((party->slots[i] >= 0) && (unit = (Unit *)FUN_002a8740(), unit != NULL)) &&
+                 (unit->id == id)) && (unit->unk0E < limit)) {
+                return 1;
+            }
+            i = i + 1;
+        } while (i < 0x18);
     }
-  }
-  else {
-    temp_v0 = FUN_002a8764();
-    temp_v2 = 0;
-    do {
-      if ((((*(signed char *)(temp_v0 + temp_v2 + 0x90f0) >= 0) && (temp_v1 = FUN_002a8740(), temp_v1 != 0)) &&
-          (*(unsigned short *)(temp_v1 + 0x46) == param_2)) && (*(short *)(temp_v1 + 0xe) < param_1)) {
-        return 1;
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x18);
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

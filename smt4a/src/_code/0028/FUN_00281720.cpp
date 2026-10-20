@@ -1,27 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003e5b1c(void);
-int FUN_003e5b9c(void);
+void linkHolderSetFlag(void);
+void linkHolderClearFlag(void);
 
-/* Supplied declaration required: FUN_003e5b1c. */
-/* Supplied declaration required: FUN_003e5b9c. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s32 value;
+} Holder;
 
-
-void FUN_00281720(int param_1,int param_2)
-
+/* Runs linkHolderClearFlag (when `flag` is set) or linkHolderSetFlag; does nothing when the word at 0x1C is 0. */
+void FUN_00281720(Holder *object, s32 flag)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x1c) == 0) {
-    return;
-  }
-  if (param_2 != 0) {
-    FUN_003e5b9c();
-    return;
-  }
-  FUN_003e5b1c();
-  return;
+    if (object->value == 0) {
+        return;
+    }
+    if (flag != 0) {
+        linkHolderClearFlag();
+        return;
+    }
+    linkHolderSetFlag();
 }
 
 } /* extern "C" */

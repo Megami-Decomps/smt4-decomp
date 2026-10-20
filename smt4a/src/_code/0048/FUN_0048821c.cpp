@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014afd0(int, int);
 int FUN_0019a7f4(...);
-int FUN_0038594c(void);
+int dataTable2ECount(void);
 int FUN_0048e46c(int, int);
 int FUN_0049105c(int, int);
 int MapNaviTable_GetCategoryCount(void);
@@ -19,8 +19,8 @@ typedef struct {
 /* Supplied declaration required: FUN_0014afd0. */
 extern int FUN_00153f64(unsigned int, int);
 /* Supplied declaration required: FUN_0019a7f4. */
-extern int FUN_00327638(int);
-/* Supplied declaration required: FUN_0038594c. */
+extern int dataTable2EGetEntry(int);
+/* Supplied declaration required: dataTable2ECount. */
 /* Supplied declaration required: FUN_0048e46c. */
 /* Supplied declaration required: FUN_0049105c. */
 extern unsigned int FUN_004931c4(void);
@@ -79,17 +79,17 @@ void FUN_0048821c(int param_1,int param_2)
     *piVar9 = 0;
   }
   temp_v4 = 0;
-  FUN_0038594c();
+  dataTable2ECount();
   if (0 < temp_v3) {
     do {
-      temp_v3 = FUN_00327638(temp_v4);
+      temp_v3 = dataTable2EGetEntry(temp_v4);
       if (*(short *)(temp_v3 + 0x20) == -1) break;
       if (*(short *)(temp_v3 + 0x20) == param_2) {
         *piVar9 = *(short *)(temp_v3 + 0x2a) + 1;
         break;
       }
       temp_v4 = temp_v4 + 1;
-      FUN_0038594c();
+      dataTable2ECount();
     } while (temp_v4 < temp_v3);
   }
   FUN_0014afd0(0x28,*piVar9);

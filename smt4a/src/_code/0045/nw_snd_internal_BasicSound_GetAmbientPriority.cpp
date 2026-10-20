@@ -1,23 +1,31 @@
-#include "romwright_types.h"
+#include "shard/Shard0045.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct VAmbient VAmbient;
 
-void nw_snd_internal_BasicSound_GetAmbientPriority(int *param_1,unsigned int param_2)
+typedef struct VAmbientVtbl {
+    /* 0x00 */ void *unk00[3];
+    /* 0x0C */ void (*slot3)(VAmbient *self, u32 arg, u32 priority);
+} VAmbientVtbl;
 
+struct VAmbient {
+    /* 0x00 */ const VAmbientVtbl *vtbl;
+};
+
+typedef struct AmbientSource {
+    /* 0x00 */ VAmbient *target;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ u32 arg;
+} AmbientSource;
+
+void nw_snd_internal_BasicSound_GetAmbientPriority(AmbientSource *source, u32 priority)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  
-  piVar1 = (int *)*param_1;
-  if (piVar1 != (int *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x0045f7d0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)(*piVar1 + 0xc))(piVar1,param_1[3],param_2);
-    return;
-  }
-  return;
+    VAmbient *target = source->target;
+
+    if (target != NULL) {
+        target->vtbl->slot3(target, source->arg, priority);
+    }
 }
 
 } /* extern "C" */

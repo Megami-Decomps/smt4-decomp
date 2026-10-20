@@ -8,11 +8,11 @@ int FUN_001641b4(int);
 int FUN_00169548(int);
 int FUN_00224880(unsigned int);
 int FUN_00275f44(unsigned int, unsigned int);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_00474734(unsigned int *, int);
 int FUN_00476e58(unsigned int *, int, int);
 int FUN_00477d10(...);
-int FUN_0047b1e4(unsigned int *);
+int jobFlagsWorkStop(unsigned int *);
 int FUN_0047bcdc(unsigned int *, int);
 int FUN_0047daf4(unsigned int *);
 
@@ -35,15 +35,15 @@ extern int FUN_0026272c(void);
 /* Supplied declaration required: FUN_00275f44. */
 extern int FUN_002e19f8(void);
 extern int FUN_002e1a18(unsigned int);
-extern int FUN_00331194(void);
-/* Supplied declaration required: FUN_003491e8. */
+extern int panelIsMissingOrFlagClear(void);
+/* Supplied declaration required: obj04Finish. */
 extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
 /* Supplied declaration required: FUN_00477d10. */
-/* Supplied declaration required: FUN_0047b1e4. */
+/* Supplied declaration required: jobFlagsWorkStop. */
 /* Supplied declaration required: FUN_0047bcdc. */
-extern int FUN_0047dae0(unsigned int *);
+extern int isEmptyString(unsigned int *);
 /* Supplied declaration required: FUN_0047daf4. */
 extern int FUN_004cfe4c(unsigned int *);
 
@@ -91,17 +91,17 @@ void FUN_00478edc(unsigned int *param_1)
           uStack_30 = uStack_1c;
           uStack_2c = uStack_18;
           uStack_28 = uStack_14;
-          temp_v1 = FUN_0047dae0(&temp_v4);
+          temp_v1 = isEmptyString(&temp_v4);
           if (temp_v1 != 0) {
-            FUN_0047b1e4(param_1);
-            FUN_003491e8();
+            jobFlagsWorkStop(param_1);
+            obj04Finish();
             param_1[2] = 3;
           }
           else {
             temp_v1 = FUN_001d10ac(&temp_v4);
             if (temp_v1 != 0) {
-              FUN_0047b1e4(param_1);
-              FUN_003491e8();
+              jobFlagsWorkStop(param_1);
+              obj04Finish();
               param_1[2] = 9999;
               param_1[0x84] = temp_v4;
               param_1[0x85] = uStack_34;
@@ -136,7 +136,7 @@ void FUN_00478edc(unsigned int *param_1)
       }
       else {
         temp_v1 = FUN_0026272c();
-        if ((temp_v1 != 0) && (temp_v1 = FUN_00331194(), temp_v1 != 0)) {
+        if ((temp_v1 != 0) && (temp_v1 = panelIsMissingOrFlagClear(), temp_v1 != 0)) {
           param_1[1] = 10;
           param_1[2] = 0;
           if ((int *)param_1[0x82] != (int *)0x0) {
@@ -152,7 +152,7 @@ void FUN_00478edc(unsigned int *param_1)
       temp_v1 = FUN_002e1a18(0x10);
       if (temp_v1 != 0) {
         FUN_001641b4(0x100020e);
-        FUN_003491e8();
+        obj04Finish();
         temp_v0 = 5;
         param_1[2] = temp_v0;
         return;

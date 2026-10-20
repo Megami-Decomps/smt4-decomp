@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ u32 flags;
+} Obj;
 
-void FUN_002c49f8(int param_1,unsigned int param_2)
-
+/* Sets the given flag bits. */
+void FUN_002c49f8(Obj *obj, u32 mask)
 {
-  *(unsigned int *)(param_1 + 0x34) = param_2 | *(unsigned int *)(param_1 + 0x34);
-  return;
+    obj->flags = mask | obj->flags;
 }
 
 } /* extern "C" */

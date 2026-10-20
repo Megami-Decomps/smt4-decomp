@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_003116d6(unsigned int, int, int);
+int word3CopyConstruct(unsigned int, int, int);
 
-/* Supplied declaration required: FUN_003116d6. */
+/* Supplied declaration required: word3CopyConstruct. */
 
 
 int FUN_00307ad6(int param_1,int param_2,int param_3,unsigned int param_4)
@@ -14,7 +14,7 @@ int FUN_00307ad6(int param_1,int param_2,int param_3,unsigned int param_4)
 {
 /* irregular: 1 native warning(s); review required */
   for (; param_1 != param_2; param_1 = param_1 + 0xc) {
-    FUN_003116d6(param_4,param_3,param_1);
+    word3CopyConstruct(param_4,param_3,param_1);
     param_3 = param_3 + 0xc;
   }
   return param_3;

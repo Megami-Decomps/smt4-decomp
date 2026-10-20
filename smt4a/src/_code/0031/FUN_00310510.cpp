@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-extern int FUN_003105a0(int *, unsigned int *);
+extern int iterNotEqual(int *, unsigned int *);
 
 
 void FUN_00310510(int *param_1,fn_00310510_arg1 *param_2,int *param_3,unsigned int param_4)
@@ -34,13 +34,13 @@ void FUN_00310510(int *param_1,fn_00310510_arg1 *param_2,int *param_3,unsigned i
   *param_1 = *(int *)(*param_3 + 0x14);
   temp_v1 = 0;
   uStack_18 = param_4;
-  temp_v0 = FUN_003105a0(&temp_v2,(unsigned int *)&temp_v1);
+  temp_v0 = iterNotEqual(&temp_v2,(unsigned int *)&temp_v1);
   if (temp_v0 != 0) {
     *(int *)(temp_v2 + 0x14) = *param_1;
   }
   *(unsigned int *)(*param_3 + 0x18) = 0;
   temp_v1 = 0;
-  temp_v0 = FUN_003105a0(param_1,(unsigned int *)&temp_v1);
+  temp_v0 = iterNotEqual(param_1,(unsigned int *)&temp_v1);
   if (temp_v0 != 0) {
     *(int *)(*param_1 + 0x18) = temp_v2;
   }

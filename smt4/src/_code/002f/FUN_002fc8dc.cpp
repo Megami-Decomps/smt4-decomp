@@ -19,7 +19,7 @@ struct fn_002fc8dc_arg0 {
 };
 
 /* Supplied declaration required: FUN_002579bc. */
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a8740. */
 extern int FUN_002a8764(void);
 /* Supplied declaration required: FUN_0031c274. */
@@ -48,10 +48,10 @@ int FUN_002fc8dc(fn_002fc8dc_arg0 *param_1)
       if ((-1 < *(char *)(temp_v2 + 0x9108)) &&
          (temp_v3 = FUN_002a8740(), (unsigned int)*(unsigned short *)(temp_v3 + 0x46) == (int)param_1->field_0x120)) {
         temp_v4 = FUN_002a8740((int)*(char *)(temp_v2 + 0x9108));
-        temp_v3 = FUN_0029ebac(temp_v4,10);
+        temp_v3 = flagWordTestBit(temp_v4,10);
         if (temp_v3 == 0) {
           temp_v4 = FUN_002a8740((int)*(char *)(temp_v2 + 0x9108));
-          temp_v2 = FUN_0029ebac(temp_v4,1);
+          temp_v2 = flagWordTestBit(temp_v4,1);
           if (temp_v2 == 0) {
             temp_v1 = 5;
             param_1->field_0x104 = temp_v1;
@@ -74,7 +74,7 @@ int FUN_002fc8dc(fn_002fc8dc_arg0 *param_1)
       if ((-1 < *(char *)(temp_v2 + 0x90f0)) &&
          (temp_v3 = FUN_002a8740(), (unsigned int)*(unsigned short *)(temp_v3 + 0x46) == (int)param_1->field_0x120)) {
         temp_v4 = FUN_002a8740((int)*(char *)(temp_v2 + 0x90f0));
-        temp_v3 = FUN_0029ebac(temp_v4,10);
+        temp_v3 = flagWordTestBit(temp_v4,10);
         if (temp_v3 != 0) {
           param_1->field_0x104 = 2;
           temp_v5 = 2;
@@ -82,7 +82,7 @@ int FUN_002fc8dc(fn_002fc8dc_arg0 *param_1)
           return temp_v5;
         }
         temp_v4 = FUN_002a8740((int)*(char *)(temp_v2 + 0x90f0));
-        temp_v2 = FUN_0029ebac(temp_v4,1);
+        temp_v2 = flagWordTestBit(temp_v4,1);
         if (temp_v2 != 0) {
           param_1->field_0x104 = 2;
           temp_v5 = 2;

@@ -1,24 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int *DAT_0057f568; /* 0x57f568 */
+typedef struct Job {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u8 started;
+} Job;
 
-extern int jobFind(unsigned int);
+s32 jobFind(u32 id);
+extern Job *DAT_0057f568;
 
-
-unsigned int FUN_002b4cb0(void)
-
+/* Returns 1 when the job record at 0x57F568 exists and its job is found or it has not started. */
+u32 FUN_002b4cb0(void)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = DAT_0057f568;
-  if ((DAT_0057f568 != (unsigned int *)0x0) &&
-     ((temp_v0 = jobFind(*DAT_0057f568), temp_v0 != 0 || (*(char *)(puVar1 + 1) == '\0')))) {
-    return 1;
-  }
-  return 0;
+    Job *job;
+    s32 found;
+
+    job = DAT_0057f568;
+    if ((DAT_0057f568 != NULL) && ((found = jobFind(DAT_0057f568->id), found != 0 || (job->started == 0)))) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

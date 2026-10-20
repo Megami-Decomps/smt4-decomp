@@ -25,7 +25,7 @@ typedef struct {
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0018408c. */
-extern int FUN_002c9018(unsigned int);
+extern int dataTableGetEntry24Member(unsigned int);
 
 
 void FUN_0022f9c8(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6)
@@ -61,7 +61,7 @@ void FUN_0022f9c8(int param_1,int param_2,int param_3,int param_4,int param_5,in
     FUN_001835b4(2,0x1a,0x9c,param_3,param_4,0x6f);
   }
   efctSetSpeed();
-  temp_v0 = FUN_002c9018(*(unsigned int *)(param_1 + param_2 * 4 + 0x927c));
+  temp_v0 = dataTableGetEntry24Member(*(unsigned int *)(param_1 + param_2 * 4 + 0x927c));
   temp_v1 = FUN_001834a4(0x1a,0xa4);
   temp_v2 = temp_v0;
   FUN_0018408c(temp_v0,2);

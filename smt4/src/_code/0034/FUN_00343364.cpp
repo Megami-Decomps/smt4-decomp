@@ -24,7 +24,7 @@ extern unsigned int FUN_002c15ac(unsigned int);
 extern unsigned int FUN_002c15d4(unsigned int);
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5d80(unsigned int, unsigned char);
-extern int FUN_002c5da8(unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int);
 extern int FUN_00310578(unsigned int, unsigned int, unsigned int);
 extern int FUN_0031b854(unsigned int);
 
@@ -87,7 +87,7 @@ void FUN_00343364(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     (**(romwright_code **)(param_1 + 0x12a8))();
     *(unsigned char *)(param_1 + 0x12a4) = 0;
   }
-  temp_v2 = FUN_002c5da8(1,0);
+  temp_v2 = packNibblesAndByte(1,0);
   piVar9 = (int *)(param_1 + 0x12ac);
   temp_v3 = *piVar9;
   temp_v4 = piVar9[temp_v3 + 2];

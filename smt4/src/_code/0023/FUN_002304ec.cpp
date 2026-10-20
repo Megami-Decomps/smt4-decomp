@@ -1,30 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_5: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_5_stack;
+typedef struct Cell {
+    /* 0x0 */ u16 x;
+    /* 0x2 */ u16 bits;   /* bit 0: flag, bit 1: second flag, bits 2-9: value */
+} Cell;
 
+typedef struct CellList {
+    /* 0x0000 */ Cell cells[0x400];
+    /* 0x1000 */ u16 count;
+} CellList;
 
-void FUN_002304ec(int param_1,unsigned short param_2,unsigned short param_3,short param_4,short param_5)
-
+void FUN_002304ec(CellList *list, u16 x, u16 flag, s16 second, s16 value)
 {
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned short *puVar3;
-  
-  puVar3 = (unsigned short *)(param_1 + 0x1000);
-  *(unsigned short *)(param_1 + (unsigned int)*puVar3 * 4) = param_2;
-  temp_v1 = param_1 + (unsigned int)*puVar3 * 4;
-  param_3 = param_3 | (*(unsigned short *)(temp_v1 + 2) & 0xfffe);
-  *(unsigned short *)(temp_v1 + 2) = param_3;
-  temp_v0 = (param_3 & 0xfffd) | (param_4 << 1);
-  *(unsigned short *)(param_1 + (unsigned int)*puVar3 * 4 + 2) = temp_v0;
-  *(unsigned short *)(param_1 + (unsigned int)*puVar3 * 4 + 2) = (temp_v0 & 0xfc03) | (param_5 << 2);
-  *puVar3 = *puVar3 + 1;
-  return;
+    u16 bits;
+    Cell *cell;
+    u16 *count = &list->count;
+
+    list->cells[*count].x = x;
+    cell = &list->cells[*count];
+    flag = flag | (cell->bits & 0xfffe);
+    cell->bits = flag;
+    bits = (flag & 0xfffd) | (second << 1);
+    list->cells[*count].bits = bits;
+    list->cells[*count].bits = (bits & 0xfc03) | (value << 2);
+    *count = *count + 1;
 }
 
 } /* extern "C" */

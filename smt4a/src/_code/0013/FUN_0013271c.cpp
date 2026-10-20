@@ -6,7 +6,7 @@ extern "C" {
 
 int rt_malloc(...);
 
-extern int FUN_0012d3ca(unsigned int, int *, unsigned int, unsigned int, unsigned int);
+extern int vectorGrowCapacity_0012d3ca(unsigned int, int *, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: rt_malloc. */
 
 
@@ -27,7 +27,7 @@ void FUN_0013271c(int *param_1,int param_2,unsigned int param_3,unsigned int par
     else {
       temp_v0 = 0;
     }
-    temp_v2 = FUN_0012d3ca(temp_v0,param_1,param_3,param_4,param_4);
+    temp_v2 = vectorGrowCapacity_0012d3ca(temp_v0,param_1,param_3,param_4,param_4);
   }
   piVar2 = (int *)rt_malloc(0xc);
   temp_v1 = rt_malloc();

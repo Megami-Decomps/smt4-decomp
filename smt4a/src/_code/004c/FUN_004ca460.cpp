@@ -8,7 +8,7 @@ int FUN_0019cac4(void);
 int FUN_003e9cec(int, unsigned char [684], int, int);
 int FUN_003eb314(int, unsigned char [684]);
 int FUN_004a9c24(unsigned int, int, int, int);
-int FUN_004bd400(int, int);
+int bitsAt60Clear(int, int);
 int FUN_004ca63c(int, unsigned char [684], int, int, int);
 int FUN_004fb43c(int, int, int, int, int, int, int);
 
@@ -31,8 +31,8 @@ extern int FUN_003e83b4(int, int, unsigned int);
 /* Supplied declaration required: FUN_003e9cec. */
 /* Supplied declaration required: FUN_003eb314. */
 /* Supplied declaration required: FUN_004a9c24. */
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd400. */
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: FUN_004ca63c. */
 /* Supplied declaration required: FUN_004fb43c. */
 
@@ -71,11 +71,11 @@ void FUN_004ca460(int param_1,int param_2,int param_3,int param_4)
     temp_v3 = FUN_001ab888();
     param_2 = temp_v3 + param_2;
     temp_v4 = FUN_001ab854((int)*(char *)(param_2 + 0x1c88));
-    temp_v5 = FUN_004bd340(temp_v4,1);
+    temp_v5 = bitsAt60Test(temp_v4,1);
     if (temp_v5 != 0) {
       temp_v0 = FUN_0017760c(temp_v4);
       *(unsigned short *)(temp_v4 + 0x2a) = temp_v0;
-      FUN_004bd400(temp_v4,2);
+      bitsAt60Clear(temp_v4,2);
     }
     FUN_003e9cec(temp_v1,temp_v7,temp_v4,0);
     if (-1 < *(char *)(param_2 + 0x1c88)) {

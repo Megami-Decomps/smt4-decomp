@@ -1,19 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018b600` (_code @ 0x18b600, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_00643080; /* 0x643080 */
+void FUN_0018b604(void);
 
-extern void nn_os_CriticalSection_Enter(unsigned int);
-
-
+/* Forwards to FUN_0018b604, the function that follows it. */
 void FUN_0018b600(void)
-
 {
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_00643080);
-  return;
+    FUN_0018b604();
 }
 
 } /* extern "C" */

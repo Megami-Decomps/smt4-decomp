@@ -1,29 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_driver_StreamBufferPool_Initialize` (_code @ 0x1311c0, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation of the last three stores only: retail keeps the block count in r1 and zero in r0 (stores in order +0x14, +0x08, +0x10) */
+/* Sets up the pool over `buffer` (`size` bytes, split into blocks of `blockSize`); the number of blocks is rounded down to a multiple of 32. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int __aeabi_uidivmod(unsigned int, int);
+struct StreamBufferPool {
+    /* 0x00 */ void *buffer;
+    /* 0x04 */ u32 size;
+    /* 0x08 */ u32 blockCount;
+    /* 0x0c */ u32 blockSize;
+    /* 0x10 */ u32 unk10;
+    /* 0x14 */ u32 unk14;
+};
 
-
-void nw_snd_internal_driver_StreamBufferPool_Initialize
-               (unsigned int *param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+void nw_snd_internal_driver_StreamBufferPool_Initialize(StreamBufferPool *pool, void *buffer, u32 size, u32 blockSize)
 {
-  unsigned int temp_v0;
-  
-  if (param_4 == 0) {
-    return;
-  }
-  param_1[1] = param_3;
-  param_1[3] = param_4;
-  *param_1 = param_2;
-  temp_v0 = __aeabi_uidivmod(param_3,param_4);
-  param_1[5] = 0;
-  param_1[2] = temp_v0 & 0xffffffe0;
-  param_1[4] = 0;
-  return;
+    u32 blockCount;
+
+    if (blockSize == 0) {
+        return;
+    }
+    pool->size = size;
+    pool->blockSize = blockSize;
+    pool->buffer = buffer;
+    blockCount = (size / blockSize) & ~31;
+    pool->unk14 = 0;
+    pool->blockCount = blockCount;
+    pool->unk10 = 0;
 }
 
-} /* extern "C" */
+}

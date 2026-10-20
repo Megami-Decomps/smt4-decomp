@@ -1,19 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001af4dc(int);
+void FUN_001af4dc(u8 *member);
 
-/* Supplied declaration required: FUN_001af4dc. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ u8 member18[0x3C];
+    /* 0x54 */ s32 count;
+} Holder;
 
-
-void FUN_001a1244(int param_1)
-
+/* Runs FUN_001af4dc on the member at 0x18 and decrements `count`. */
+void FUN_001a1244(Holder *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001af4dc(param_1 + 0x18);
-  *(int *)(param_1 + 0x54) = *(int *)(param_1 + 0x54) - 1;
-  return;
+    FUN_001af4dc(object->member18);
+    object->count = object->count - 1;
 }
 
 } /* extern "C" */

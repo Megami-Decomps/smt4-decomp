@@ -1,13 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_003840e4(unsigned int *param_1)
-
+/* Sets flag bit 0. */
+void FUN_003840e4(u32 *flags)
 {
-  *param_1 = *param_1 | 1;
-  return;
+    *flags = *flags | 1;
 }
 
 } /* extern "C" */

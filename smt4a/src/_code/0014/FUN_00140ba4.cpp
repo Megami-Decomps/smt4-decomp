@@ -60,7 +60,7 @@ static float romwright_sqrt_4(float value)
 extern unsigned int FUN_0015959c(void);
 /* Supplied declaration required: FUN_0015976c. */
 /* Supplied declaration required: FUN_001d1438. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern void nn_hid_CTR_AccelerometerReader_ConvertToAcceleration(unsigned int, unsigned int, int, unsigned int);
 extern unsigned char nn_hid_CTR_AccelerometerReader_ReadLatest(unsigned int, unsigned int);
 
@@ -85,7 +85,7 @@ unsigned int FUN_00140ba4(void)
   
   FUN_0013c1fc();
   FUN_0013d33c();
-  if (((DAT_005c1478 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c1478), temp_v0 != 0)) {
+  if (((DAT_005c1478 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c1478), temp_v0 != 0)) {
     temp_v1 = FUN_0015959c();
     FUN_0015976c(&DAT_00647448,temp_v1);
   }

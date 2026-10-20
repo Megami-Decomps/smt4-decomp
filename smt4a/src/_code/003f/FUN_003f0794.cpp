@@ -13,7 +13,7 @@ int FUN_003ce360(void);
 int FUN_003f86f8(int);
 int FUN_00470e64(unsigned int);
 int FUN_0047ec9c(void);
-int FUN_0047f778(void);
+int callJyoucyuGetTableEntry1B(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -41,7 +41,7 @@ extern char *DAT_0057396c; /* 0x57396c */
 /* Supplied declaration required: FUN_003f86f8. */
 /* Supplied declaration required: FUN_00470e64. */
 /* Supplied declaration required: FUN_0047ec9c. */
-/* Supplied declaration required: FUN_0047f778. */
+/* Supplied declaration required: callJyoucyuGetTableEntry1B. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -61,7 +61,7 @@ void FUN_003f0794(int param_1)
     temp_v1 = (unsigned int)temp_v0;
     switch(temp_v1) {
     case 0:
-      FUN_0047f778();
+      callJyoucyuGetTableEntry1B();
       FUN_003f86f8(7);
       FUN_003f86f8(0x3e);
       FUN_003f86f8(0x3b);

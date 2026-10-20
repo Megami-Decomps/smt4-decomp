@@ -7,8 +7,8 @@ extern "C" {
 int asdMemFree(unsigned int);
 int scrScriptProcessDestroy(unsigned int);
 int FUN_002852f0(int);
-int FUN_0035d88c(int);
-int FUN_0037de3c(int);
+int byteTableASetValue(int);
+int byteTableASetValue3(int);
 int FUN_003d54f8(int, int);
 int FUN_003fd63c(int, int);
 
@@ -19,10 +19,10 @@ extern int FUN_00162ea4(void);
 extern int FUN_00224880(unsigned int);
 /* Supplied declaration required: FUN_002852f0. */
 extern int FUN_002e07f4(void);
-extern int FUN_0031d270(void);
-/* Supplied declaration required: FUN_0035d88c. */
-extern int FUN_0036fe58(void);
-/* Supplied declaration required: FUN_0037de3c. */
+extern int getByteTableAValue(void);
+/* Supplied declaration required: byteTableASetValue. */
+extern int byteTableAGetValue3(void);
+/* Supplied declaration required: byteTableASetValue3. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_003fd63c. */
 
@@ -44,19 +44,19 @@ unsigned int FUN_002bd004(int *param_1)
   else {
     temp_v0 = FUN_0013def0(0);
     if (((temp_v0 != 3) || (temp_v0 = FUN_0013def0(1), temp_v0 != 3)) &&
-       (temp_v0 = FUN_0031d270(), temp_v0 != 0)) {
-      FUN_0035d88c(0);
+       (temp_v0 = getByteTableAValue(), temp_v0 != 0)) {
+      byteTableASetValue(0);
     }
-    temp_v0 = FUN_0036fe58();
+    temp_v0 = byteTableAGetValue3();
     if (temp_v0 != 0) {
-      FUN_0037de3c(0);
-      FUN_0035d88c(0);
+      byteTableASetValue3(0);
+      byteTableASetValue(0);
     }
-    temp_v0 = FUN_0031d270();
+    temp_v0 = getByteTableAValue();
     if ((temp_v0 != 0) && (temp_v0 = FUN_00162ea4(), temp_v0 == 0)) {
       FUN_003d54f8(0,5);
       FUN_003d54f8(1,5);
-      FUN_0035d88c(0);
+      byteTableASetValue(0);
       *(unsigned int *)(temp_v1 + 0xcc) = 2;
       return 0;
     }

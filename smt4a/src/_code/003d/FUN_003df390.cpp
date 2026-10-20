@@ -20,7 +20,7 @@ struct fn_003df390_arg0 {
 
 extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_00418584(void);
+extern int partyEntryFlagsBit3(void);
 
 
 void FUN_003df390(fn_003df390_arg0 *param_1)
@@ -32,9 +32,9 @@ void FUN_003df390(fn_003df390_arg0 *param_1)
   FUN_001ad9b4();
   if ((((param_1 != (fn_003df390_arg0 *)0x0) &&
        ((param_1->field_0x122 == 0 || (temp_v0 = FUN_0018719c(), temp_v0 != 0)))) &&
-      ((param_1->field_0x126 == 0 || (temp_v0 = FUN_00418584(), temp_v0 != 0)))) &&
-     (((param_1->field_0x128 == 0 || (temp_v0 = FUN_00418584(), temp_v0 != 0)) &&
-      ((param_1->field_0x12a == 0 || (temp_v0 = FUN_00418584(), temp_v0 != 0)))))) {
+      ((param_1->field_0x126 == 0 || (temp_v0 = partyEntryFlagsBit3(), temp_v0 != 0)))) &&
+     (((param_1->field_0x128 == 0 || (temp_v0 = partyEntryFlagsBit3(), temp_v0 != 0)) &&
+      ((param_1->field_0x12a == 0 || (temp_v0 = partyEntryFlagsBit3(), temp_v0 != 0)))))) {
     FUN_001ad9b4();
   }
   return;

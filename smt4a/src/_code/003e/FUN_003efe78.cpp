@@ -16,9 +16,9 @@ extern unsigned int DAT_0057397c; /* 0x57397c */
 extern unsigned int DAT_005739a0; /* 0x5739a0 */
 extern unsigned int DAT_005739a4; /* 0x5739a4 */
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_003f2aec. */
-extern int FUN_004cb638(unsigned short);
+extern int hasAnyOf3DC2(unsigned short);
 
 
 void FUN_003efe78(int param_1)
@@ -47,7 +47,7 @@ void FUN_003efe78(int param_1)
     puVar7 = (unsigned int *)(*piVar10 + temp_v6 * 0x408);
     if (((((DAT_00573978 & *puVar7) != 0 || (DAT_0057397c & puVar7[1]) != 0) &&
          ((puVar7[1] & DAT_005739a4) == 0 && (*puVar7 & DAT_005739a0) == 0)) &&
-        ((short)puVar7[0xcd] != 0)) && (temp_v5 = FUN_004cb638((short)puVar7[0x9d]), temp_v5 == 0)) {
+        ((short)puVar7[0xcd] != 0)) && (temp_v5 = hasAnyOf3DC2((short)puVar7[0x9d]), temp_v5 == 0)) {
       *(unsigned short *)(param_1 + temp_v7 * 2 + 0x3006) =
            *(unsigned short *)(*piVar10 + temp_v6 * 0x408 + 0x6e);
       temp_v7 = temp_v7 + 1;
@@ -61,7 +61,7 @@ void FUN_003efe78(int param_1)
   }
   else {
     *(unsigned short *)(param_1 + 0x301e) = 0;
-    temp_v6 = FUN_001633a0((temp_v7 - 1U) & 0xffff);
+    temp_v6 = lcgRandomRange((temp_v7 - 1U) & 0xffff);
     temp_v7 = 0;
     temp_v0 = *(short *)(param_1 + temp_v6 * 2 + 0x3006);
     temp_v6 = 0;

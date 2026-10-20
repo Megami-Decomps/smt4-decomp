@@ -9,11 +9,11 @@ int FUN_00158314(unsigned int *);
 int FUN_0015836c(unsigned char *);
 int FUN_0015842c(unsigned char *);
 int FUN_00423c0c(unsigned int *);
-int FUN_00423c44(unsigned int *);
+int playHandleStart(unsigned int *);
 int FUN_00424018(unsigned char *);
 int FUN_004241e0(unsigned char *);
 int FUN_00424268(void);
-int FUN_0042442c(void);
+int block158OwnerCheck(void);
 int FUN_00424938(unsigned char *);
 int FUN_004252b0(void);
 int FUN_00425448(unsigned char *);
@@ -39,16 +39,16 @@ extern int DAT_00617f4c; /* 0x617f4c */
 /* Supplied declaration required: FUN_0015842c. */
 extern int FUN_0031f03c(void);
 /* Supplied declaration required: FUN_00423c0c. */
-/* Supplied declaration required: FUN_00423c44. */
+/* Supplied declaration required: playHandleStart. */
 extern int FUN_00423c7c(unsigned int *);
 /* Supplied declaration required: FUN_00424018. */
 /* Supplied declaration required: FUN_004241e0. */
 /* Supplied declaration required: FUN_00424268. */
-/* Supplied declaration required: FUN_0042442c. */
+/* Supplied declaration required: block158OwnerCheck. */
 /* Supplied declaration required: FUN_00424938. */
-extern int FUN_00424e6c(unsigned char *);
+extern int block158OwnerReady(unsigned char *);
 /* Supplied declaration required: FUN_004252b0. */
-extern int FUN_00425430(unsigned char *);
+extern int block158OwnerHasRemaining(unsigned char *);
 /* Supplied declaration required: FUN_00425448. */
 /* Supplied declaration required: FUN_00425610. */
 /* Supplied declaration required: FUN_00425aa0. */
@@ -81,7 +81,7 @@ unsigned char FUN_003d3594(void)
       FUN_0015842c(&DAT_00617f40);
       FUN_00158314(&DAT_00617f18);
     }
-    temp_v0 = FUN_00425430(&DAT_00617f40);
+    temp_v0 = block158OwnerHasRemaining(&DAT_00617f40);
     if (temp_v0 == 0) {
       puVar2 = &DAT_00617f40;
       FUN_00425610();
@@ -94,11 +94,11 @@ unsigned char FUN_003d3594(void)
       else {
         FUN_004252b0();
         if (puVar3 != (unsigned char *)0x0) {
-          FUN_0042442c();
+          block158OwnerCheck();
         }
       }
     }
-    temp_v0 = FUN_00424e6c(&DAT_00617f40);
+    temp_v0 = block158OwnerReady(&DAT_00617f40);
     if (temp_v0 != 0) {
       puVar2 = &DAT_00617f40;
       FUN_00425610();
@@ -113,7 +113,7 @@ unsigned char FUN_003d3594(void)
       else if (-1 < temp_v2) {
         temp_v4 = 1;
         FUN_00425448(&DAT_00617f40);
-        FUN_00423c44(&DAT_00617f18);
+        playHandleStart(&DAT_00617f18);
       }
     }
     if (DAT_00588020 != '\0') {

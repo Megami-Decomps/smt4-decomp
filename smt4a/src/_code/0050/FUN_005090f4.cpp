@@ -1,19 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005090f4` (_code @ 0x5090f4, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int *FUN_005085f4(unsigned int);
+struct ObjFUN_005090fc;
 
+typedef struct Wrapper005090f4 {
+    /* 0x00 */ u8 unk00[0x4];
+    /* 0x04 */ ObjFUN_005090fc *obj;
+} Wrapper005090f4;
 
-unsigned int FUN_005090f4(int param_1)
+u32 FUN_005090fc(ObjFUN_005090fc *obj);
 
+/* Passes the wrapper's obj on to FUN_005090fc, the function that follows it. */
+u32 FUN_005090f4(Wrapper005090f4 *wrapper)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_005085f4(*(unsigned int *)(*(int *)(param_1 + 4) + 0x3c));
-  return *puVar1;
+    return FUN_005090fc(wrapper->obj);
 }
 
 } /* extern "C" */

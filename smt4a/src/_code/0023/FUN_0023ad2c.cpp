@@ -1,19 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x23];
+    /* 0x23 */ u8 phase;
+    /* 0x24 */ u8 unk24[0x18];
+    /* 0x3C */ u32 flags;
+} Holder;
 
-unsigned int FUN_0023ad2c(int param_1)
-
+/* Returns 1 when the low 7 bits of `flags` are 0x18 or 1 and the phase is 3 or 7. */
+u32 FUN_0023ad2c(Holder *object)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = *(unsigned int *)(param_1 + 0x3c) & 0x7f;
-  if ((temp_v0 == 0x18 || temp_v0 == 1) &&
-     (*(char *)(param_1 + 0x23) == '\x03' || *(char *)(param_1 + 0x23) == '\a')) {
-    return 1;
-  }
-  return 0;
+    u32 kind;
+
+    kind = object->flags & 0x7F;
+    if ((kind == 0x18 || kind == 1) && (object->phase == 3 || object->phase == 7)) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

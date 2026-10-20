@@ -1,25 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
+extern u8 *btlGetMainState(void);
+extern u32 scrGetArg(u32 index);
 
-
-unsigned int FUN_002f1064(void)
-
+u32 FUN_002f1064(void)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  if (temp_v0 < 0x10) {
-    temp_v2 = btlGetMainState();
-    *(unsigned int *)(temp_v2 + temp_v0 * 4 + 0x497c) = temp_v1;
-  }
-  return 1;
+    u32 index = scrGetArg(0);
+    u32 value = scrGetArg(1);
+    u8 *btl;
+
+    if (index < 0x10) {
+        btl = btlGetMainState();
+        *(u32 *)(btl + index * 4 + 0x497c) = value;
+    }
+    return 1;
 }
 
 } /* extern "C" */

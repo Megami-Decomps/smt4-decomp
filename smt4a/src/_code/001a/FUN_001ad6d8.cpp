@@ -1,21 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0059dbc0; /* 0x59dbc0 */
+typedef struct Inner {
+    /* 0x000 */ u8 unk000[0x80];
+    /* 0x080 */ u8 *first;
+    /* 0x084 */ u8 *second;
+    /* 0x088 */ u8 areaA[0x50C];
+    /* 0x594 */ u8 areaB[1];
+} Inner;
 
+typedef struct Global59dbc0 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Inner *inner;
+} Global59dbc0;
+extern Global59dbc0 DAT_0059dbc0;
 
+/* Points the inner object's two pointers at its areas at 0x88 and 0x594. */
 void FUN_001ad6d8(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_0059dbc0 + 0x4));
-  temp_v1 = (*(int *)((unsigned char *)&DAT_0059dbc0 + 0x4)) + 0x594;
-  *(int *)((*(int *)((unsigned char *)&DAT_0059dbc0 + 0x4)) + 0x80) = (*(int *)((unsigned char *)&DAT_0059dbc0 + 0x4)) + 0x88;
-  *(int *)(temp_v0 + 0x84) = temp_v1;
-  return;
+    Inner *inner;
+    u8 *areaB;
+
+    inner = DAT_0059dbc0.inner;
+    areaB = DAT_0059dbc0.inner->areaB;
+    DAT_0059dbc0.inner->first = DAT_0059dbc0.inner->areaA;
+    inner->second = areaB;
 }
 
 } /* extern "C" */

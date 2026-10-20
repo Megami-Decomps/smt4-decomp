@@ -12,7 +12,7 @@ typedef int romwright_code(...);
 extern unsigned char DAT_0055a7b0; /* 0x55a7b0 */
 
 /* Supplied declaration required: FUN_0011bbb6. */
-extern int FUN_00122770(int);
+extern int destroyObj0055b2f0(int);
 /* Supplied declaration required: FUN_002e6e14. */
 /* Supplied declaration required: FUN_002f5966. */
 extern int FUN_002f9ef8(int);
@@ -42,7 +42,7 @@ int FUN_0011be64(unsigned int *param_1)
     (**(romwright_code **)(*(int *)param_1[0x46] + 4))(param_1[0x46]);
   }
   temp_v1 = FUN_002f5966(param_1 + 0x3a);
-  temp_v1 = FUN_00122770(temp_v1 - 0x40);
+  temp_v1 = destroyObj0055b2f0(temp_v1 - 0x40);
   temp_v1 = FUN_002f5966(temp_v1 - 0x38);
   q = (int *)(FUN_002f9ef8(temp_v1 - 0xc) - 0x24);
   for (temp_v0 = *q; temp_v0 != q[1]; temp_v0 = temp_v0 + 0xc) {

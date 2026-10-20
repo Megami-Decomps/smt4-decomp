@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00131c98(int, unsigned int, int);
 int FUN_0013231c(int, unsigned int, int, int);
 int FUN_001325c4(int, unsigned int, unsigned int, int);
-int FUN_002abb24(unsigned int, int);
+int sceneTraverserVisit(unsigned int, int);
 int FUN_002b74cc(int *, int *, int *, int *);
 int FUN_002c3a14(unsigned int);
 int nw_gfx_RenderContext_ResetState_2B7478(unsigned int);
@@ -36,7 +36,7 @@ extern signed char DAT_004dadac; /* 0x4dadac */
 /* Supplied declaration required: FUN_00131c98. */
 /* Supplied declaration required: FUN_0013231c. */
 /* Supplied declaration required: FUN_001325c4. */
-/* Supplied declaration required: FUN_002abb24. */
+/* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_002b74cc. */
 /* Supplied declaration required: FUN_002c3a14. */
 /* Supplied declaration required: nw_gfx_RenderContext_ResetState_2B7478. */
@@ -77,14 +77,14 @@ void FUN_001183d8(void)
       if (piVar2 != piVar3) {
         *(unsigned int *)(temp_v1 + 0xc) = 0;
       }
-      FUN_002abb24(DAT_00464b80,DAT_00464b88);
+      sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
     }
     if (DAT_004dadac == '\0') {
       FUN_00131c98(DAT_00464bb8,DAT_00464b80,1);
     }
     if ((DAT_004dad9c != '\0') && (DAT_004dad9d == '\0')) {
       nw_gfx_SceneNode_AttachChild(DAT_00464b88,DAT_00464b90);
-      FUN_002abb24(DAT_00464b80,DAT_00464b88);
+      sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
     }
     FUN_0013231c(DAT_00464bb8,DAT_00464b1c,2,0);
     nw_gfx_RenderContext_ResetState_2B7478(temp_v2);

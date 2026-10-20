@@ -1,32 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e995c(unsigned char [32]);
-int FUN_002fd394(int, unsigned int, unsigned char [32]);
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00[10];
+    /* 0x28 */ Object *(*getTarget)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ s32 base;
+};
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e995c. */
-extern int *FUN_002ea704(void);
-extern unsigned int FUN_002ea93c(unsigned int);
-/* Supplied declaration required: FUN_002fd394. */
+void FUN_002e995c(u8 *buffer);
+u32 FUN_002ea93c(u32 value);
+Object *FUN_002ea704(void);
+void FUN_002fd394(s32 address, u32 value, u8 *buffer);
 
-
-void FUN_00111910(unsigned int param_1,unsigned int param_2)
-
+/* Builds a 32-byte buffer, converts `value` with FUN_002ea93c, and hands both to FUN_002fd394 together with the address 0x80 bytes into the current target object's data. */
+void FUN_00111910(u32 unused, u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  unsigned char temp_v2 [32];
-  
-  FUN_002e995c(temp_v2);
-  temp_v0 = FUN_002ea93c(param_2);
-  piVar2 = (int *)FUN_002ea704();
-  temp_v1 = (**(romwright_code **)(*piVar2 + 0x28))(piVar2);
-  FUN_002fd394(*(int *)(temp_v1 + 0xc) + 0x80,temp_v0,temp_v2);
-  return;
+    u8 buffer[32];
+    u32 converted;
+    Object *object;
+    Object *target;
+
+    FUN_002e995c(buffer);
+    converted = FUN_002ea93c(value);
+    object = FUN_002ea704();
+    target = object->vtbl->getTarget(object);
+    FUN_002fd394(target->base + 0x80, converted, buffer);
 }
 
 } /* extern "C" */

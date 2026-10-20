@@ -58,7 +58,7 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c69c. */
 /* Supplied declaration required: FUN_0016c6f0. */
 /* Supplied declaration required: FUN_002b5cb4. */
-extern int FUN_003847e8(unsigned int);
+extern int gameFlagsClassify(unsigned int);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_00486d0c. */
 /* Supplied declaration required: FUN_00487d6c. */
@@ -73,7 +73,7 @@ extern int FUN_0048b1bc(int);
 /* Supplied declaration required: FUN_004915f0. */
 /* Supplied declaration required: FUN_00491c60. */
 /* Supplied declaration required: FUN_00492adc. */
-extern unsigned long long *FUN_00492b84(int);
+extern unsigned long long *sub68OwnerGetBlock60(int);
 /* Supplied declaration required: FUN_00492b98. */
 extern int FUN_00492bc0(int);
 /* Supplied declaration required: lmapSceneGetObj. */
@@ -151,7 +151,7 @@ void FUN_00486444(int param_1)
     return;
   }
   if ((DAT_005f1604 != 0xb6) && (DAT_005f1604 != 0xb7 && DAT_005f1604 != 0xb8)) {
-    temp_v6 = FUN_003847e8(temp_v5);
+    temp_v6 = gameFlagsClassify(temp_v5);
     if (temp_v6 == 2 || temp_v6 == 3) {
       DAT_00587f20 = 0xf1;
       FUN_0048a5e4(param_1);
@@ -253,7 +253,7 @@ LAB_004866c8:
   temp_v4 = FUN_00492bc0(temp_v3);
   temp_v6 = NaviMain_GetCurrentMap(temp_v3);
   if ((temp_v4 == temp_v6) && ((int)*(char *)(param_1 + 100) == *(int *)(param_1 + 0x20510))) {
-    puVar9 = (unsigned long long *)FUN_00492b84(temp_v3);
+    puVar9 = (unsigned long long *)sub68OwnerGetBlock60(temp_v3);
     temp_v13 = *puVar9;
     temp_v5 = FUN_001692ac(1,0);
     FUN_0016c6f0(g_renderCtx,3,temp_v5);

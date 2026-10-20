@@ -30,7 +30,7 @@ extern unsigned int DAT_0057a9c8; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_001aba54. */
 extern int FUN_00333758(void);
 extern int FUN_003e7adc(int);
-extern int FUN_0040de1c(unsigned int, unsigned int);
+extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004a92d0. */
 /* Supplied declaration required: FUN_004a96b8. */
 /* Supplied declaration required: FUN_004a9c40. */
@@ -54,7 +54,7 @@ unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
   
   if ((*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571250) != 0 ||
       (DAT_00571254 & *(unsigned int *)(*param_1 + 0x45a4)) != 0) {
-    temp_v1 = FUN_0040de1c(DAT_005712f0,0);
+    temp_v1 = chainCountIdUnflagged(DAT_005712f0,0);
     if (0 < temp_v1) {
       return 0;
     }

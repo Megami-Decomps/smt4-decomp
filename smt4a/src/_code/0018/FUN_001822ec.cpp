@@ -1,22 +1,19 @@
-#include "romwright_types.h"
+#include "shard/Block57f248.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f248; /* 0x57f248 */
-
-
-unsigned int FUN_001822ec(int param_1)
-
+/* Returns 1 when the record's id equals `id`, its mode is 1 or 2, and its counter is below 1 or at 0xF plus a multiple of 4. */
+u32 FUN_001822ec(s32 id)
 {
-  int temp_v0;
-  
-  if (((*(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64e) == param_1) &&
-      (*(char *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 8) == '\x01' || *(char *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 8) == '\x02')) &&
-     ((temp_v0 = (int)*(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x650), temp_v0 < 1 ||
-      ((temp_v0 >= 0xf && (((temp_v0 - 0xfU) & 3) == 0)))))) {
-    return 1;
-  }
-  return 0;
+    s32 counter;
+
+    if (((DAT_0057f248.record->unk64E == id) &&
+         (DAT_0057f248.record->unk008 == 1 || DAT_0057f248.record->unk008 == 2)) &&
+        ((counter = DAT_0057f248.record->unk650, counter < 1) ||
+         ((counter >= 0xF && (((counter - 0xFU) & 3) == 0))))) {
+        return 1;
+    }
+    return 0;
 }
 
 } /* extern "C" */

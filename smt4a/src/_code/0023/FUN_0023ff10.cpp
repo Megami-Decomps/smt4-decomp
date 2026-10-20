@@ -21,7 +21,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
-extern int FUN_00418584(unsigned int);
+extern int partyEntryFlagsBit3(unsigned int);
 extern unsigned int FUN_004186e0(void);
 
 
@@ -121,7 +121,7 @@ void FUN_0023ff10(void)
   else {
     if ((temp_v5 != 0) &&
        (temp_v0 = *(char *)(temp_v5 + 6), (temp_v0 == '\x06' || temp_v0 == '\t') || temp_v0 == '\v')) {
-      temp_v4 = FUN_00418584(temp_v8);
+      temp_v4 = partyEntryFlagsBit3(temp_v8);
       temp_v0 = '\0';
       if (temp_v4 != 0) {
         temp_v0 = *(char *)(temp_v5 + 6);

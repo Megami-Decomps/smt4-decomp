@@ -1,17 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002ea4bc(void);
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 value;
+} Entry;
 
+Entry *FUN_002ea4bc(void);
 
-unsigned int FUN_002e9af4(void)
-
+/* Returns the word at 0x10 of the entry FUN_002ea4bc returns. */
+u32 FUN_002e9af4(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002ea4bc();
-  return *(unsigned int *)(temp_v0 + 0x10);
+    Entry *entry = FUN_002ea4bc();
+    return entry->value;
 }
 
 } /* extern "C" */

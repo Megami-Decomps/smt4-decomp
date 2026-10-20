@@ -34,7 +34,7 @@ extern int FUN_001ad4c0(int);
 /* Supplied declaration required: FUN_00269bf0. */
 extern int btlGetMainState(void);
 extern int FUN_00295d08(unsigned int);
-extern int FUN_0029ebac(int, unsigned int);
+extern int flagWordTestBit(int, unsigned int);
 extern int FUN_002a8740(void);
 extern int FUN_002b63ac(void);
 extern unsigned int FUN_0032b278(int, unsigned short);
@@ -65,11 +65,11 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
     if (temp_v5 == 0) {
       return 1;
     }
-    temp_v6 = FUN_0029ebac(temp_v5,10);
+    temp_v6 = flagWordTestBit(temp_v5,10);
     if (temp_v6 != 0) {
       return 1;
     }
-    temp_v6 = FUN_0029ebac(temp_v5,2);
+    temp_v6 = flagWordTestBit(temp_v5,2);
     if (temp_v6 != 0) {
       return 1;
     }
@@ -137,13 +137,13 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
       }
     }
     else {
-      temp_v4 = FUN_0029ebac(temp_v5,1);
+      temp_v4 = flagWordTestBit(temp_v5,1);
       if (temp_v4 == 0) {
         return 1;
       }
       if (param_4 == 0) {
         FUN_00262f68(temp_v5,2);
-        temp_v4 = FUN_0029ebac(temp_v5,3);
+        temp_v4 = flagWordTestBit(temp_v5,3);
         if (temp_v4 != 0) {
           temp_v1 = *(short *)(temp_v5 + 0x2a) + 1;
         }
@@ -161,7 +161,7 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
       if (param_5 == (int *)0x0) {
         return 0;
       }
-      temp_v4 = FUN_0029ebac(temp_v5,3);
+      temp_v4 = flagWordTestBit(temp_v5,3);
       if (temp_v4 == 0) {
         FUN_00262260(param_3,(int)temp_v0,param_1);
         *param_5 = param_3;
@@ -172,7 +172,7 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
     return 0;
   }
   if (temp_v4 == 0) {
-    temp_v4 = FUN_0029ebac(temp_v5,1);
+    temp_v4 = flagWordTestBit(temp_v5,1);
     if (temp_v4 != 0) {
       return 1;
     }
@@ -185,7 +185,7 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
     }
     FUN_00262260(param_3,(int)temp_v0,param_1);
     if (param_3 != 0) {
-      temp_v4 = FUN_0029ebac(temp_v5,3);
+      temp_v4 = flagWordTestBit(temp_v5,3);
       temp_v1 = *(short *)(temp_v5 + 0x2a);
       if (temp_v4 != 0) {
         param_3 = 1;

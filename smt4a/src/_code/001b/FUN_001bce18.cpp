@@ -1,14 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct Table {
+    /* 0x00000 */ u8 unk00000[0x2DBC];
+    /* 0x02DBC */ u8 member2DBC[1];
+} Table;
 
+typedef struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Table *table;
+} GameDataBlocksView;
+extern GameDataBlocksView g_gameDataBlocks;
 
-int FUN_001bce18(void)
-
+/* Returns the address of the member at 0x2DBC of the game-data table. */
+u8 *FUN_001bce18(void)
 {
-  return (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x2dbc;
+    return g_gameDataBlocks.table->member2DBC;
 }
 
 } /* extern "C" */

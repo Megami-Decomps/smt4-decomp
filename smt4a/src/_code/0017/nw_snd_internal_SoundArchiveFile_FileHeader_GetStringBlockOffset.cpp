@@ -1,41 +1,34 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_001785b8_arg0 fn_001785b8_arg0;
-struct fn_001785b8_arg0 {
-    unsigned char pad_0x0[0x14];
-    ushort field_0x14; /* +0x14 */
-    unsigned char pad_0x16[0xa];
-    unsigned char field_0x20; /* +0x20 */
-    unsigned char pad_0x21[0xb];
-    unsigned char field_0x2c; /* +0x2c */
-    unsigned char pad_0x2d[0x7];
-    ushort field_0x34; /* +0x34 */
-    unsigned char pad_0x36[0x2a];
-    ushort field_0x60; /* +0x60 */
-};
+typedef struct Section {
+    /* 0x00 */ u16 kind;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u32 offset;
+    /* 0x08 */ u32 size;
+} Section;
 
+typedef struct FileHeader {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ Section sections[3];
+} FileHeader;
 
-unsigned int
-nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockOffset(fn_001785b8_arg0 *param_1)
-
+/* Returns the offset of the string block: the section of kind 0x2000 among the header's three sections. */
+u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockOffset(FileHeader *header)
 {
-  unsigned short *puVar1;
-  
-  if (param_1->field_0x14 == 0x2000) {
-    puVar1 = &param_1->field_0x14;
-  }
-  else if (*(short *)&param_1->field_0x20 == 0x2000) {
-    puVar1 = (unsigned short *)&param_1->field_0x20;
-  }
-  else if (*(short *)&param_1->field_0x2c == 0x2000) {
-    puVar1 = (unsigned short *)&param_1->field_0x2c;
-  }
-  else {
-    puVar1 = (unsigned short *)0x0;
-  }
-  return *(unsigned int *)(puVar1 + 2);
+    Section *section;
+
+    if (header->sections[0].kind == 0x2000) {
+        section = &header->sections[0];
+    } else if (header->sections[1].kind == 0x2000) {
+        section = &header->sections[1];
+    } else if (header->sections[2].kind == 0x2000) {
+        section = &header->sections[2];
+    } else {
+        section = NULL;
+    }
+    return section->offset;
 }
 
 } /* extern "C" */

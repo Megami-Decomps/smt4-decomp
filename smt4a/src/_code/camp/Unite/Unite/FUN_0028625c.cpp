@@ -17,19 +17,19 @@ int slotRecordFindById(...);
 int FUN_001bcd48(...);
 int FUN_00239234(int, unsigned short [14]);
 int sysMemClear(int *, int);
-int FUN_004da900(int, int);
-int FUN_004da914(int, int);
-int FUN_004daaf4(...);
+int recSet148(int, int);
+int recSet150(int, int);
+int recSet16E(...);
 int FUN_004dafd0(int);
-int FUN_004db034(int, int);
+int recSet14C(int, int);
 int FUN_004db048(...);
-int FUN_004db288(...);
-int FUN_004db29c(...);
+int recSet174(...);
+int rec16ASet(...);
 int FUN_004db65c(...);
 int FUN_004dbc64(...);
-int FUN_004dbde8(...);
+int recSet17B(...);
 int FUN_004dbef8(...);
-int FUN_004dbf54(...);
+int wordAt1B0Clear(...);
 int SBORROW4(...);
 
 /* stack frame of param_1: 22 slot(s), 86 byte(s) */
@@ -91,24 +91,24 @@ extern int FUN_001b347c(void);
 extern int FUN_0026140c(void);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_002a7324. */
-extern int FUN_002c277c(void);
+extern int computeCountLimit(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031f718. */
 /* Supplied declaration required: FUN_003fd63c. */
-extern int FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004da900. */
-/* Supplied declaration required: FUN_004da914. */
-/* Supplied declaration required: FUN_004daaf4. */
+extern int bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: recSet148. */
+/* Supplied declaration required: recSet150. */
+/* Supplied declaration required: recSet16E. */
 /* Supplied declaration required: FUN_004dafd0. */
-/* Supplied declaration required: FUN_004db034. */
+/* Supplied declaration required: recSet14C. */
 /* Supplied declaration required: FUN_004db048. */
-/* Supplied declaration required: FUN_004db288. */
-/* Supplied declaration required: FUN_004db29c. */
+/* Supplied declaration required: recSet174. */
+/* Supplied declaration required: rec16ASet. */
 /* Supplied declaration required: FUN_004db65c. */
 /* Supplied declaration required: FUN_004dbc64. */
-/* Supplied declaration required: FUN_004dbde8. */
+/* Supplied declaration required: recSet17B. */
 /* Supplied declaration required: FUN_004dbef8. */
-/* Supplied declaration required: FUN_004dbf54. */
+/* Supplied declaration required: wordAt1B0Clear. */
 
 
 void FUN_0028625c(int *param_1)
@@ -185,16 +185,16 @@ void FUN_0028625c(int *param_1)
         if (!temp_v15) {
           temp_v2 = -1;
         }
-        FUN_004daaf4(*param_1,temp_v15,temp_v2,0xffffffff);
+        recSet16E(*param_1,temp_v15,temp_v2,0xffffffff);
         temp_v2 = (int)temp_v25[1];
         temp_v15 = -1 < temp_v2;
         if (!temp_v15) {
           temp_v2 = -1;
         }
-        FUN_004db288(*param_1,temp_v15,temp_v2,0xffffffff);
-        FUN_004db034(*param_1,0 < temp_v25[4]);
-        FUN_004da914(*param_1,'\0' < *(char *)((int)temp_v25 + 0x23));
-        FUN_004da900(*param_1,temp_v25[5] != 0);
+        recSet174(*param_1,temp_v15,temp_v2,0xffffffff);
+        recSet14C(*param_1,0 < temp_v25[4]);
+        recSet150(*param_1,'\0' < *(char *)((int)temp_v25 + 0x23));
+        recSet148(*param_1,temp_v25[5] != 0);
         temp_v2 = (int)*(char *)((int)temp_v25 + 0x15);
         if (temp_v2 >= 0) {
           temp_v3 = *param_1;
@@ -204,7 +204,7 @@ void FUN_0028625c(int *param_1)
           temp_v12 = 0;
           temp_v3 = *param_1;
         }
-        FUN_004dbde8(temp_v3,temp_v2 >= 0,temp_v12);
+        recSet17B(temp_v3,temp_v2 >= 0,temp_v12);
         *(unsigned char *)(*param_1 + 0x17a) = (char)temp_v25[10] < '\x01';
         *(unsigned char *)(*param_1 + 0x1b4) = (*(unsigned char *)(temp_v25 + 0xb) & 1) != 0;
         *(unsigned char *)(*param_1 + 0x1b5) = '\0' < *(char *)((int)temp_v25 + 0x17);
@@ -217,7 +217,7 @@ void FUN_0028625c(int *param_1)
           puVar15 = (unsigned int *)0x0;
           temp_v2 = *param_1;
         }
-        FUN_004db29c(temp_v2,temp_v25[7] >= 0,puVar15);
+        rec16ASet(temp_v2,temp_v25[7] >= 0,puVar15);
         if (temp_v25[6] != 0) {
           temp_v21 = 0;
           temp_v22 = 0;
@@ -236,14 +236,14 @@ void FUN_0028625c(int *param_1)
       if (param_1[0x100] == 2) {
         *(unsigned char *)(*param_1 + 0x1b5) = 1;
         *(unsigned char *)(*param_1 + 0x17a) = 1;
-        FUN_004daaf4(*param_1,0,0xffffffff);
-        FUN_004db288(*param_1,0,0xffffffff);
-        FUN_004db034(*param_1,0);
-        FUN_004da914(*param_1,0);
-        FUN_004da900(*param_1,0);
-        FUN_004dbde8(*param_1,0);
+        recSet16E(*param_1,0,0xffffffff);
+        recSet174(*param_1,0,0xffffffff);
+        recSet14C(*param_1,0);
+        recSet150(*param_1,0);
+        recSet148(*param_1,0);
+        recSet17B(*param_1,0);
         *(unsigned char *)(*param_1 + 0x1b4) = 0;
-        FUN_004db29c(*param_1,0);
+        rec16ASet(*param_1,0);
         FUN_004db048(*param_1,0,0);
         param_1[0x171] = 2000;
       }
@@ -258,7 +258,7 @@ void FUN_0028625c(int *param_1)
       }
       if (!(temp_v15 || temp_v2 == 2)) {
         if (*temp_v25 >= 0) {
-          temp_v2 = FUN_002c277c();
+          temp_v2 = computeCountLimit();
           if (temp_v31[0x29] < temp_v2) {
             temp_v2 = temp_v31[0x29];
           }
@@ -271,19 +271,19 @@ void FUN_0028625c(int *param_1)
             temp_v2 = 0xb;
           }
           temp_v4 = FUN_001ab854((int)*temp_v25);
-          temp_v5 = FUN_004bd340(temp_v4,10);
+          temp_v5 = bitsAt60Test(temp_v4,10);
           temp_v1 = 0;
           if (temp_v5 == 0) {
             do {
               if ((unsigned int)param_1[0x171] <= (unsigned int)param_1[0x172]) break;
               temp_v5 = FUN_002a4b28(temp_v1);
               if (temp_v5 != 0) {
-                FUN_004dbf54(*param_1);
+                wordAt1B0Clear(*param_1);
                 FUN_004dbef8(*param_1,0,temp_v4 + 0x34);
                 param_1[param_1[0x172] * 2 + 0x4ee] =
                      (param_1[param_1[0x172] * 2 + 0x4ee] & 0x3fffffffU) | 0x40000000;
                 temp_v5 = slotRecordFindById(temp_v1);
-                if ((temp_v5 == 0) || (temp_v6 = FUN_004bd340(temp_v5,10), temp_v6 != 0)) {
+                if ((temp_v5 == 0) || (temp_v6 = bitsAt60Test(temp_v5,10), temp_v6 != 0)) {
                   FUN_00239234(temp_v1,temp_v26);
                   if ('\0' < *(char *)((int)temp_v25 + 0x17)) {
                     temp_v12 = (unsigned int)temp_v26[0];
@@ -334,7 +334,7 @@ LAB_00286938:
           temp_v3 = *piVar9;
           temp_v16 = temp_v12;
           FUN_004dbc64(temp_v3,temp_v12);
-          temp_v4 = FUN_002c277c();
+          temp_v4 = computeCountLimit();
           temp_v17 = piVar9[0x2429];
           if (temp_v4 <= temp_v17) {
             temp_v17 = temp_v4;
@@ -368,8 +368,8 @@ LAB_00286938:
                 do {
                   if (((unsigned int)piVar9[0x171] <= (unsigned int)piVar9[0x172]) || ((char)piVar9[0x2424] == '\0')
                      ) break;
-                  FUN_004dbf54(*piVar9);
-                  if ((temp_v4 == 0) || (temp_v6 = FUN_004bd340(temp_v4,10), temp_v6 != 0)) {
+                  wordAt1B0Clear(*piVar9);
+                  if ((temp_v4 == 0) || (temp_v6 = bitsAt60Test(temp_v4,10), temp_v6 != 0)) {
                     temp_v6 = FUN_0014af84();
                     temp_v6 = temp_v6 + temp_v38 * 0x10;
                     if (*(char *)(temp_v2 + 0x37) < '\x01') {
@@ -396,7 +396,7 @@ LAB_00286b9c:
                     piVar8[0x4ee] = temp_v12;
                     temp_v12 = (unsigned int)*(unsigned short *)(temp_v16 + temp_v5 * 2);
                     temp_v22 = slotRecordFindById(temp_v12);
-                    if ((temp_v22 == 0) || (temp_v6 = FUN_004bd340(temp_v22,10), temp_v6 != 0)) {
+                    if ((temp_v22 == 0) || (temp_v6 = bitsAt60Test(temp_v22,10), temp_v6 != 0)) {
                       temp_v6 = FUN_0014af84();
                       temp_v6 = temp_v6 + temp_v12 * 0x50;
                       if ('\0' < *(char *)(temp_v2 + 0x37)) {
@@ -458,9 +458,9 @@ LAB_00286c80:
                 temp_v5 = FUN_001ab888();
                 temp_v5 = FUN_001ab854((int)*(char *)(temp_v5 + temp_v4 + 0x1c88));
                 if (temp_v2 == 0 || temp_v5 == 0) break;
-                temp_v6 = FUN_004bd340(temp_v2,10);
-                if ((temp_v6 == 0) && (temp_v6 = FUN_004bd340(temp_v5,10), temp_v6 == 0)) {
-                  FUN_004dbf54(*param_1);
+                temp_v6 = bitsAt60Test(temp_v2,10);
+                if ((temp_v6 == 0) && (temp_v6 = bitsAt60Test(temp_v5,10), temp_v6 == 0)) {
+                  wordAt1B0Clear(*param_1);
                   FUN_004dbef8(*param_1,0,temp_v2 + 0x34);
                   FUN_004dbef8(*param_1,1,temp_v5 + 0x34);
                   temp_v6 = param_1[0x172];

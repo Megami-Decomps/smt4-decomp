@@ -12,7 +12,7 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_001008c8(short *, unsigned char, int);
-extern unsigned int *FUN_002c6644(void);
+extern unsigned int *__aeabi_errno_addr(void);
 extern int FUN_002c66f2(unsigned int, unsigned int);
 
 
@@ -69,7 +69,7 @@ int FUN_002c618c(short *param_1,unsigned char *param_2,int param_3,int param_4)
       return temp_v3;
     }
   }
-  puVar3 = (unsigned int *)FUN_002c6644();
+  puVar3 = (unsigned int *)__aeabi_errno_addr();
   *puVar3 = 4;
   return -1;
 }

@@ -1,19 +1,15 @@
-#include "romwright_types.h"
+#include "shard/ScriptStep.h"
 
 extern "C" {
 
-int FUN_002a0d4c(int, int);
+int FUN_002a0d4c(ScriptStep *script, int command);
 
-/* Supplied declaration required: FUN_002a0d4c. */
-
-
-unsigned int FUN_0018b478(int param_1)
-
+/* Script command: runs sub-command 10 and advances to the next step. */
+s32 FUN_0018b478(ScriptStep *script)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002a0d4c(param_1,10);
-  *(int *)(param_1 + 0x18) = *(int *)(param_1 + 0x18) + 1;
-  return 1;
+    FUN_002a0d4c(script, 10);
+    script->step = script->step + 1;
+    return 1;
 }
 
 } /* extern "C" */

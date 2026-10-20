@@ -1,19 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Timeline {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ f32 time;
+    /* 0x3C */ u8 unk3C[0xC];
+    /* 0x48 */ f32 end;
+} Timeline;
 
-unsigned int FUN_00263720(int param_1)
+typedef struct Effect {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ Timeline *timeline;
+} Effect;
 
+/* 1 when there is no timeline or it has reached its end. */
+u32 FUN_00263720(Effect *effect)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(param_1 + 4);
-  if ((temp_v0 == 0) || (temp_v1 = 0, *(float *)(temp_v0 + 0x38) >= *(float *)(temp_v0 + 0x48))) {
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    Timeline *timeline = effect->timeline;
+    u32 done;
+
+    if ((timeline == NULL) || (done = 0, timeline->time >= timeline->end)) {
+        done = 1;
+    }
+    return done;
 }
 
 } /* extern "C" */

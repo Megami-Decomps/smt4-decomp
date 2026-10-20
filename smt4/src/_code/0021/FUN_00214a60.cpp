@@ -89,7 +89,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTableGet. */
 extern int FUN_002c30c4(unsigned char *);
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -389,7 +389,7 @@ unsigned int FUN_00214a60(void)
        (*(char *)(temp_v29 + 0x54) != '\0')) {
       temp_v17 = FUN_002bf4f8(0x36,DAT_0044de30 + 0x51);
       temp_v4 = g_titleScene;
-      temp_v6 = FUN_002c5da8(6,1,0);
+      temp_v6 = packNibblesAndByte(6,1,0);
       piVar14 = (int *)(temp_v4 + 0x12ac);
       temp_v5 = *piVar14;
       temp_v9 = piVar14[temp_v5 + 2];

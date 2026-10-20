@@ -7,7 +7,7 @@ extern "C" {
 int asdGxCommandListFlip(void);
 int asdGxCommandListBindBack(void);
 int FUN_00144f1c(int, unsigned int);
-int FUN_0016117c(void);
+int asdModelResetCommandBuffer(void);
 int FUN_00161a10(void);
 int FUN_0017cdb0(void);
 int FUN_0017cfe8(unsigned char *, int);
@@ -27,7 +27,7 @@ extern int DAT_0063ff7c; /* 0x63ff7c */
 /* Supplied declaration required: asdGxCommandListFlip. */
 /* Supplied declaration required: asdGxCommandListBindBack. */
 /* Supplied declaration required: FUN_00144f1c. */
-/* Supplied declaration required: FUN_0016117c. */
+/* Supplied declaration required: asdModelResetCommandBuffer. */
 /* Supplied declaration required: FUN_00161a10. */
 /* Supplied declaration required: FUN_0017cdb0. */
 /* Supplied declaration required: FUN_0017cfe8. */
@@ -48,7 +48,7 @@ void FUN_0013a078(unsigned int param_1)
   FUN_0017dd80();
   FUN_0017cfe8(&DAT_0063fec4,(*(int *)((unsigned char *)&DAT_0063fd88 + 0x150)) == 0);
   FUN_00161a10();
-  FUN_0016117c();
+  asdModelResetCommandBuffer();
   asdGxCommandListBindBack();
   temp_v0 = FUN_00188c94();
   temp_v1 = FUN_00188ca4();

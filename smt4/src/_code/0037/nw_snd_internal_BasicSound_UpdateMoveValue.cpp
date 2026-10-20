@@ -1,28 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef struct fn_003798c0_arg0 fn_003798c0_arg0;
-struct fn_003798c0_arg0 {
-    unsigned char pad_0x0[0x6c];
-    int field_0x6c; /* +0x6c */
-    int field_0x70; /* +0x70 */
-    unsigned char pad_0x74[0x34];
-    int field_0xa8; /* +0xa8 */
-    int field_0xac; /* +0xac */
-};
+typedef struct Sound {
+    /* 0x00 */ u8 unk00[0x6C];
+    /* 0x6C */ int volumeFrames;
+    /* 0x70 */ int volumeFrame;
+    /* 0x74 */ u8 unk74[0x34];
+    /* 0xA8 */ int panFrames;
+    /* 0xAC */ int panFrame;
+} Sound;
 
-
-void nw_snd_internal_BasicSound_UpdateMoveValue(fn_003798c0_arg0 *param_1)
-
+/* Advances the volume and pan interpolation counters. */
+void nw_snd_internal_BasicSound_UpdateMoveValue(Sound *sound)
 {
-  if (param_1->field_0x70 < param_1->field_0x6c) {
-    param_1->field_0x70 = param_1->field_0x70 + 1;
-  }
-  if (param_1->field_0xac < param_1->field_0xa8) {
-    param_1->field_0xac = param_1->field_0xac + 1;
-  }
-  return;
+    if (sound->volumeFrame < sound->volumeFrames) {
+        sound->volumeFrame = sound->volumeFrame + 1;
+    }
+    if (sound->panFrame < sound->panFrames) {
+        sound->panFrame = sound->panFrame + 1;
+    }
 }
 
 } /* extern "C" */

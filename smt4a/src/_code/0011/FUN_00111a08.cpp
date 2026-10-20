@@ -20,7 +20,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea3d0. */
 extern int FUN_002eb5f4(void);
 extern int FUN_002ee978(int);
-extern int FUN_002fd432(int *, unsigned int *);
+extern int wordRefsEqual_002fd432(int *, unsigned int *);
 extern int FUN_002fd444(int);
 extern int FUN_002fd454(int);
 
@@ -44,7 +44,7 @@ void FUN_00111a08(int param_1)
   if (temp_v0 != 0) {
     temp_v4 = *(unsigned int *)(param_1 + 0x1a0);
     piVar2 = (int *)(param_1 + 0x1ac);
-    temp_v0 = FUN_002fd432(piVar2,(unsigned int *)&temp_v4);
+    temp_v0 = wordRefsEqual_002fd432(piVar2,(unsigned int *)&temp_v4);
     if (temp_v0 != 0) {
       puVar6 = (unsigned char *)0x112049;
     }

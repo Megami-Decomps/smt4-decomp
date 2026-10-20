@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002ea658(int *);
+int initVtable00558630(int *);
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern unsigned int FUN_001113ec(unsigned int *, int, unsigned int);
-/* Supplied declaration required: FUN_002ea658. */
+/* Supplied declaration required: initVtable00558630. */
 
 
 unsigned long long FUN_00310f64(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -26,7 +26,7 @@ unsigned long long FUN_00310f64(int param_1,unsigned int param_2,unsigned int pa
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  FUN_002ea658(&uStack_18);
+  initVtable00558630(&uStack_18);
   temp_v0 = FUN_001113ec((unsigned int *)&uStack_18,param_1,0x158);
   *(unsigned int *)(param_1 + 0x158) = temp_v0;
   return romwright_piece_4_4(uStack_18,&uStack_18);

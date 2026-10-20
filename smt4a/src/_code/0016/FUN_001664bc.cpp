@@ -1,22 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001960fc(int);
+typedef struct Block5b3fe4 {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ s32 count;
+} Block5b3fe4;
+extern Block5b3fe4 DAT_005b3fe4;
 
-extern unsigned int DAT_005b3fe4; /* 0x5b3fe4 */
+void asdModelAdvanceCommandCursor(s32 size);
 
-/* Supplied declaration required: FUN_001960fc. */
-
-
+/* Releases the block (count words) through asdModelAdvanceCommandCursor and clears both fields. */
 void FUN_001664bc(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001960fc((*(int *)((unsigned char *)&DAT_005b3fe4 + 0x4)) << 2);
-  DAT_005b3fe4 = 0;
-  (*(int *)((unsigned char *)&DAT_005b3fe4 + 0x4)) = 0;
-  return;
+    asdModelAdvanceCommandCursor(DAT_005b3fe4.count << 2);
+    DAT_005b3fe4.unk00 = 0;
+    DAT_005b3fe4.count = 0;
 }
 
 } /* extern "C" */

@@ -1,25 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int rt_malloc(int);
+s32 rt_malloc(s32 size);
 
-typedef int romwright_code(...);
-extern unsigned char g_flagBlock; /* 0x594958 */
+typedef struct FlagBlockView {
+    /* 0x00 */ u8 unk00[0x6C];
+    /* 0x6C */ void (*allocHook)(s32 size);
+} FlagBlockView;
+extern FlagBlockView g_flagBlock;
 
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_001149f0(int param_1)
-
+/* Runs the installed allocation hook for `size`, or rt_malloc when there is none. */
+void FUN_001149f0(s32 size)
 {
-/* irregular: 1 native warning(s); review required */
-  if ((*(romwright_code * *)((unsigned char *)&g_flagBlock + 0x6c)) != (romwright_code *)0x0) {
-    (*(*(romwright_code * *)((unsigned char *)&g_flagBlock + 0x6c)))(param_1);
-    return;
-  }
-  rt_malloc(param_1);
-  return;
+    if (g_flagBlock.allocHook != NULL) {
+        g_flagBlock.allocHook(size);
+        return;
+    }
+    rt_malloc(size);
 }
 
 } /* extern "C" */

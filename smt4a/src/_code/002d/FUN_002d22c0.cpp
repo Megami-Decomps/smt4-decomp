@@ -8,7 +8,7 @@ int FUN_00303460(int);
 int FUN_00313648(int);
 int FUN_00363c3c(void);
 int bannerShow(void);
-int FUN_003b61b0(void);
+int scrCommArmPanel3(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern int lmapSceneGetUnk0(void);
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00363c3c. */
 /* Supplied declaration required: bannerShow. */
-/* Supplied declaration required: FUN_003b61b0. */
+/* Supplied declaration required: scrCommArmPanel3. */
 
 
 void FUN_002d22c0(char param_1)
@@ -38,7 +38,7 @@ void FUN_002d22c0(char param_1)
   if (DAT_005f1a5c == '\0') {
     if (DAT_005f161d != '\0') {
       DAT_005f161d = param_1;
-      FUN_003b61b0();
+      scrCommArmPanel3();
       FUN_00363c3c();
       FUN_00313648(1);
       FUN_00303460(0);

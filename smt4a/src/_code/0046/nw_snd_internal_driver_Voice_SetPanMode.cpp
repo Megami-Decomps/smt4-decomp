@@ -1,16 +1,13 @@
-#include "romwright_types.h"
+#include "shard/Shard0046.h"
 
 extern "C" {
 
-
-void nw_snd_internal_driver_Voice_SetPanMode(int param_1,unsigned char param_2)
-
+void nw_snd_internal_driver_Voice_SetPanMode(VoiceCtl *voice, u8 mode)
 {
-  if (*(unsigned char *)(param_1 + 0x2c) != param_2) {
-    *(char *)(param_1 + 0x2c) = param_2;
-    *(unsigned short *)(param_1 + 0x20) = *(unsigned short *)(param_1 + 0x20) | 8;
-  }
-  return;
+    if (voice->panMode != mode) {
+        voice->panMode = mode;
+        voice->flags = voice->flags | 8;
+    }
 }
 
 } /* extern "C" */

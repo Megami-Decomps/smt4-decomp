@@ -1,41 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002a780c(unsigned int);
+int FUN_002a780c(u32 value);
 int FUN_002b8cc8(void);
-int asdMemFree(unsigned int *);
-int FUN_002c424c(unsigned int *, int, unsigned int);
-int jobStop(unsigned int, int);
+int asdMemFree(u32 *ptr);
+int FUN_002c424c(u32 *dst, int size, u32 value);
+int jobStop(u32 job, int mode);
 
-extern unsigned int *DAT_0044e190; /* 0x44e190 */
-
-/* Supplied declaration required: FUN_002a780c. */
-/* Supplied declaration required: FUN_002b8cc8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c424c. */
-/* Supplied declaration required: jobStop. */
-
+extern u32 *DAT_0044e190;
 
 void FUN_002f6590(void)
-
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = DAT_0044e190;
-  temp_v0 = 0;
-  for (temp_v0 = 0; temp_v0 < (int)(unsigned int)*(unsigned char *)(puVar1 + 0x120); temp_v0++) {
-    FUN_002b8cc8();
-  }
-  *(unsigned char *)(puVar1 + 0x120) = 0;
-  FUN_002c424c(puVar1 + 0x10b,0x29,0xffffffff);
-  FUN_002a780c(puVar1[0x8a8]);
-  jobStop(*puVar1,0);
-  asdMemFree(puVar1);
-  DAT_0044e190 = (unsigned int *)0x0;
-  return;
+    u32 *block = DAT_0044e190;
+    int i;
+
+    for (i = 0; i < (int)(u32)*(u8 *)(block + 0x120); i++) {
+        FUN_002b8cc8();
+    }
+    *(u8 *)(block + 0x120) = 0;
+    FUN_002c424c(block + 0x10b, 0x29, 0xffffffff);
+    FUN_002a780c(block[0x8a8]);
+    jobStop(*block, 0);
+    asdMemFree(block);
+    DAT_0044e190 = NULL;
 }
 
 } /* extern "C" */

@@ -14,7 +14,7 @@ int FUN_002a3258(void);
 int FUN_002c13b0(int);
 int FUN_002c13d4(int, int);
 int FUN_002e4308(int, unsigned int, int);
-int FUN_00330414(int);
+int menuStateSetMode4(int);
 int FUN_00388424(int, int);
 int FUN_003b67d4(unsigned int);
 int FUN_003b67e8(void);
@@ -49,13 +49,13 @@ extern int FUN_002a4894(unsigned int *);
 /* Supplied declaration required: FUN_002c13b0. */
 /* Supplied declaration required: FUN_002c13d4. */
 /* Supplied declaration required: FUN_002e4308. */
-/* Supplied declaration required: FUN_00330414. */
+/* Supplied declaration required: menuStateSetMode4. */
 /* Supplied declaration required: FUN_00388424. */
 /* Supplied declaration required: FUN_003b67d4. */
 /* Supplied declaration required: FUN_003b67e8. */
 /* Supplied declaration required: FUN_003c0d90. */
 /* Supplied declaration required: menuStateStartSelect. */
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 extern int FUN_003e8430(unsigned int);
 extern int FUN_003f2448(unsigned int);
 extern int btlUnitGet(unsigned int);
@@ -118,14 +118,14 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
       FUN_003b67d4(param_5);
       temp_v5 = (short)param_5;
     }
-    FUN_00330414((int)temp_v5);
+    menuStateSetMode4((int)temp_v5);
     break;
   case 2:
   case 3:
     temp_v2 = FUN_0014bd84(*(unsigned short *)(puVar2 + 0x3014));
     FUN_00100388(temp_v7,&LAB_004aa71c,temp_v2);
     if (param_4 != 0) {
-      temp_v4 = FUN_003e0044(4);
+      temp_v4 = playerHasFlagBit(4);
       temp_v6 = temp_v4 != 0;
       temp_v2 = 1;
     }

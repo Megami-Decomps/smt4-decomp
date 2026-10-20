@@ -15,7 +15,7 @@ int FUN_001cbd94(int);
 int FUN_001cc644(int *);
 int FUN_001cc6c0(unsigned int, int *);
 int FUN_001d1f5c(void);
-int FUN_0045fb88(void);
+int word8HolderCopy0CTo14(void);
 int FUN_004659c8(...);
 int FUN_00466140(int *);
 int VectorSignedToFloat(int, int);
@@ -62,7 +62,7 @@ extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cc6c0. */
 /* Supplied declaration required: FUN_001d1f5c. */
 extern int FUN_0045b9a0(unsigned int);
-/* Supplied declaration required: FUN_0045fb88. */
+/* Supplied declaration required: word8HolderCopy0CTo14. */
 /* Supplied declaration required: FUN_004659c8. */
 /* Supplied declaration required: FUN_00466140. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -168,7 +168,7 @@ void FUN_00465cc4(int *param_1)
     if (temp_v2 == 0) {
       return;
     }
-    FUN_0045fb88();
+    word8HolderCopy0CTo14();
   }
   temp_v0 = *(char *)(temp_v5 + 0x14);
   if (temp_v0 == '\0') {

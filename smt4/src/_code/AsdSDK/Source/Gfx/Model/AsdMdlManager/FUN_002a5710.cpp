@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a4e98(void);
 int FUN_002bd420(int, unsigned int [2], int);
-int FUN_002c2264(unsigned int);
+int resourceListDestroy(unsigned int);
 int asdMemFree(void);
 int asdMemAlloc(int, int, int, unsigned int);
 int SBORROW4(int, int);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002bd420. */
 extern int rt_memcmp(int, char *, unsigned int);
-/* Supplied declaration required: FUN_002c2264. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemAlloc. */
 
@@ -124,7 +124,7 @@ void FUN_002a5710(unsigned int *param_1,unsigned int *param_2)
       if (0 < (int)param_1[0x28]) {
         do {
           temp_v4 = param_1[0x29] + (int)piVar10 * 0xc;
-          FUN_002c2264(*(unsigned int *)(temp_v4 + 8));
+          resourceListDestroy(*(unsigned int *)(temp_v4 + 8));
           *(unsigned int *)(temp_v4 + 8) = 0;
           piVar10 = (int *)((int)piVar10 + 1);
         } while ((int)piVar10 < (int)param_1[0x28]);

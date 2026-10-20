@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_004e7b7c. */
 
 
@@ -25,7 +25,7 @@ int FUN_004de7a0(int param_1,int param_2,int param_3,int param_4)
   short *psVar4;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_001633a0(99);
+  temp_v0 = lcgRandomRange(99);
   temp_v1 = 0;
   if (param_4 >= 3) {
     if (temp_v0 >= 0x1e) {

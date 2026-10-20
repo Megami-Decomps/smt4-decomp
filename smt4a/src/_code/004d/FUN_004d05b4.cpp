@@ -1,17 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard004D.h"
 
 extern "C" {
 
-extern unsigned int *FUN_001ab888(void);
+extern u8 *FUN_001ab888(void);
 
-
-unsigned int FUN_004d05b4(void)
-
+u32 FUN_004d05b4(void)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_001ab888();
-  return *puVar1;
+    return *(u32 *)FUN_001ab888();
 }
 
 } /* extern "C" */

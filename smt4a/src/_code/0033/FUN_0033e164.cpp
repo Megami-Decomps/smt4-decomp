@@ -28,11 +28,11 @@ int FUN_003026d8(...);
 int FUN_003128d8(...);
 int FUN_0033982c(...);
 int FUN_0033a374(...);
-int FUN_003e5b1c(...);
-int FUN_003e5b9c(...);
+int linkHolderSetFlag(...);
+int linkHolderClearFlag(...);
 int FUN_003fd924(...);
 int FUN_003fe86c(...);
-int FUN_0041a080(...);
+int itemTableClear(...);
 int FUN_0045adc0(...);
 int FUN_0049fc88(...);
 int func_0x002b7f18(...);
@@ -72,7 +72,7 @@ int FUN_003024a0(...);
 int FUN_00312db0(...);
 int mapTrapGetUnk38(...);
 int FUN_003d2158(...);
-int FUN_003e549c(...);
+int linkHolderApplyFirst(...);
 int FUN_003fd63c(...);
 
 int mapIfSetMode1(...);
@@ -410,15 +410,15 @@ extern unsigned int asdModelGetStatic38(void);
 extern unsigned int FUN_003e0034(void);
 /* Supplied declaration required: FUN_003e0090. */
 /* Supplied declaration required: FUN_003e46f4. */
-extern int FUN_003e5414(int);
+extern int linkHolderCallFirst(int);
 /* Supplied declaration required: FUN_003e542c. */
-/* Supplied declaration required: FUN_003e549c. */
+/* Supplied declaration required: linkHolderApplyFirst. */
 /* Supplied declaration required: FUN_003e54b8. */
-extern int FUN_003e56f0(int);
+extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: FUN_003e5708. */
 /* Supplied declaration required: FUN_003e5728. */
-/* Supplied declaration required: FUN_003e5b1c. */
-/* Supplied declaration required: FUN_003e5b9c. */
+/* Supplied declaration required: linkHolderSetFlag. */
+/* Supplied declaration required: linkHolderClearFlag. */
 /* Supplied declaration required: FUN_003fd63c. */
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fd7c0. */
@@ -426,7 +426,7 @@ extern int FUN_003e56f0(int);
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_0041a080. */
+/* Supplied declaration required: itemTableClear. */
 /* Supplied declaration required: FUN_0045adc0. */
 /* Supplied declaration required: FUN_00480fc0. */
 /* Supplied declaration required: FUN_0049fc88. */
@@ -438,7 +438,7 @@ extern int FUN_004a0e38(unsigned int, unsigned int);
 extern int FUN_004d04f4(void);
 extern int FUN_004d0554(void);
 extern int FUN_004d0584(void);
-extern unsigned int FUN_004ffb58(void);
+extern unsigned int slots4FGetActiveValue(void);
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: func_0x002b7f18. */
 /* Supplied declaration required: func_0x002d871c. */
@@ -1105,7 +1105,7 @@ LAB_002b82a8:
                   if (temp_v5 != 2) {
                     if (temp_v5 != 3) {
                       if (temp_v5 == 4) {
-                        temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+                        temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
                         piVar19 = g_lmapScene;
                         g_lmapScene = piVar19;
                         if (temp_v5 != 0) {
@@ -1131,7 +1131,7 @@ LAB_002b82a8:
                     }
                   }
                   else {
-                    temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+                    temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
                     piVar19 = g_lmapScene;
                     if (temp_v5 != 0) {
                       g_lmapScene[0x15] = 0x27;
@@ -1142,7 +1142,7 @@ LAB_002b82a8:
                   }
                 }
                 else {
-                  temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+                  temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
                   piVar19 = g_lmapScene;
                   if (temp_v5 != 0) {
                     g_lmapScene[0x15] = 0x26;
@@ -1172,7 +1172,7 @@ LAB_002b82a8:
               if (temp_v5 != 1) {
                 if (temp_v5 != 2) {
                   if (temp_v5 == 3) {
-                    temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+                    temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
                     piVar19 = g_lmapScene;
                     g_lmapScene = piVar19;
                     if (temp_v5 != 0) {
@@ -1198,7 +1198,7 @@ LAB_002b82a8:
                 }
               }
               else {
-                temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+                temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
                 piVar19 = g_lmapScene;
                 if (temp_v5 != 0) {
                   g_lmapScene[0x15] = 0x27;
@@ -1224,7 +1224,7 @@ LAB_002b82a8:
         }
         else if (piVar19[0x9e] != 0) {
           if (piVar19[0x9e] == 1) {
-            temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+            temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
             piVar19 = g_lmapScene;
             g_lmapScene = piVar19;
             if (temp_v5 != 0) {
@@ -1403,12 +1403,12 @@ LAB_00326f78:
 LAB_00326fcc:
           if ((((0xbf000000 < uStack_64) || ((int)uStack_64 >= 0x3f000001)) ||
               (0xbf000000 < uStack_60)) ||
-             (((int)uStack_60 >= 0x3f000001 || (temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]), temp_v5 != 0)
+             (((int)uStack_60 >= 0x3f000001 || (temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v5 != 0)
               ))) {
             piVar19 = g_lmapScene;
             g_lmapScene[0x1a] = (int)temp_v20;
             piVar19[0x16] = (int)temp_v20;
-            temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+            temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
             if (temp_v5 != 0) {
               *(unsigned short *)((int)g_lmapScene + 0x19a) = 1;
             }
@@ -1792,7 +1792,7 @@ LAB_00326a10:
         goto LAB_003270a0;
       }
       if (DAT_005f17c4 != 0) goto LAB_003270a0;
-      temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]);
+      temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]);
       piVar19 = g_lmapScene;
       if (temp_v5 != 0) {
         DAT_005f17ac = '\0';
@@ -4433,7 +4433,7 @@ LAB_0033eae8:
               piVar19[7] = piVar19[10];
               piVar19[8] = piVar19[0xb];
               piVar19[9] = piVar19[0xc];
-              FUN_003e549c(piVar19[0x6a],piVar19[0x15]);
+              linkHolderApplyFirst(piVar19[0x6a],piVar19[0x15]);
               piVar19 = g_lmapScene;
               temp_v7 = 0;
               g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -5006,8 +5006,8 @@ LAB_002dad8c:
           if (g_lmapScene[2] == 7) {
             FUN_002d1f40(4,0x32,0);
           }
-          temp_v5 = FUN_003e5414(g_lmapScene[0x6a]);
-          if ((temp_v5 == 0x23) && (temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]), temp_v5 != 0)) {
+          temp_v5 = linkHolderCallFirst(g_lmapScene[0x6a]);
+          if ((temp_v5 == 0x23) && (temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v5 != 0)) {
             FUN_00303460(0x17);
             piVar19 = g_lmapScene;
             g_lmapScene[0x15] = 0x24;
@@ -5037,8 +5037,8 @@ LAB_002dad8c:
                     g_lmapScene[0x15] = 0x11;
                     piVar19[0x16] = temp_v5;
                   }
-                  temp_v5 = FUN_003e5414(g_lmapScene[0x6a]);
-                  if ((temp_v5 == 0x11) && (temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]), temp_v5 != 0)) {
+                  temp_v5 = linkHolderCallFirst(g_lmapScene[0x6a]);
+                  if ((temp_v5 == 0x11) && (temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v5 != 0)) {
                     FUN_003e5728(g_lmapScene[0x6a]);
                     piVar19 = g_lmapScene;
                     g_lmapScene[1] = 3;
@@ -5159,7 +5159,7 @@ LAB_002dad8c:
       }
     }
     else {
-      temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]);
+      temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]);
       if ((temp_v5 != 0) && (temp_v5 = FUN_002e07f4(), temp_v5 != 0)) {
         temp_v5 = (int)DAT_005f19d0;
         if (temp_v5 != 0) {
@@ -5826,7 +5826,7 @@ code_r0x00313648:
       g_lmapScene[2] = g_lmapScene[2] + 1;
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+      temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
       if (temp_v5 == 0) {
         return;
       }
@@ -5913,7 +5913,7 @@ code_r0x00313648:
             piVar19[10] = -0x3bdd0000;
             piVar19[0xb] = 0x445f4000;
             piVar19[0xc] = 0x45051000;
-            FUN_003e5b1c(piVar19[0x6a]);
+            linkHolderSetFlag(piVar19[0x6a]);
             FUN_0025ef68(g_lmapScene + 10,g_lmapScene + 0xd,0);
             piVar19 = g_lmapScene;
             piVar11 = g_lmapScene + 0xe;
@@ -5945,7 +5945,7 @@ code_r0x00313648:
       }
       piVar19[1] = 3;
       piVar19[2] = 0;
-      FUN_003e5b9c(piVar19[0x6a]);
+      linkHolderClearFlag(piVar19[0x6a]);
       piVar19 = g_lmapScene;
       g_lmapScene[7] = -0x3b9e8000;
       piVar19[9] = 0x450b5000;
@@ -6021,7 +6021,7 @@ code_r0x00313648:
       piVar19[1] = piVar19[1] + 1;
       return;
     case 6:
-      temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]);
+      temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]);
       piVar19 = g_lmapScene;
       if (temp_v5 == 0) {
         return;
@@ -6036,7 +6036,7 @@ code_r0x00313648:
       in_d10 = CONCAT44(fStack_1c,fStack_20);
       break;
     case 7:
-      temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]);
+      temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]);
       if (temp_v5 == 0) {
         return;
       }
@@ -6141,7 +6141,7 @@ code_r0x00313648:
       }
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      temp_v6 = FUN_004ffb58();
+      temp_v6 = slots4FGetActiveValue();
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
       FUN_003fd924();
@@ -6161,7 +6161,7 @@ code_r0x00313648:
       temp_v5 = *(int *)(temp_v5 + 0x25c);
       if (temp_v5 != 0) {
         *(unsigned int *)(temp_v5 + 0x10) = temp_v6;
-        FUN_0041a080(temp_v5 + 0x1c);
+        itemTableClear(temp_v5 + 0x1c);
         piVar19 = (int *)(temp_v5 + 0x1c);
         temp_v13 = *(int *)(temp_v5 + 4);
         *(unsigned int *)(temp_v5 + 0x1c) = 0;
@@ -6227,7 +6227,7 @@ code_r0x00313648:
       g_lmapScene[2] = g_lmapScene[2] + 1;
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+      temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
       if ((temp_v5 != 0) && (FUN_003e5728(g_lmapScene[0x6a]), g_lmapScene[2] >= 5))
       goto code_r0x00313648;
     }
@@ -6354,7 +6354,7 @@ code_r0x00313648:
     fStack_3c = temp_v20;
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]);
+    temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]);
     if (temp_v5 == 0) {
       return;
     }
@@ -7993,7 +7993,7 @@ joined_r0x00397538:
         fStack_1c = temp_v37;
         if (temp_v5 == 2) {
           g_lmapScene[2] = g_lmapScene[2] + 1;
-          temp_v5 = FUN_003e56f0(piVar19[0x6a]);
+          temp_v5 = linkHolderCheckFirst(piVar19[0x6a]);
           if (temp_v5 != 0) {
             g_lmapScene[0x16] = 0x40a00000;
             FUN_00313648(1);
@@ -8012,8 +8012,8 @@ joined_r0x00397538:
         if (g_lmapScene[2] == 7) {
           FUN_002d1f40(4,0x32,0);
         }
-        temp_v5 = FUN_003e5414(g_lmapScene[0x6a]);
-        if ((temp_v5 == 0x23) && (temp_v5 = FUN_003e56f0(g_lmapScene[0x6a]), temp_v5 != 0)) {
+        temp_v5 = linkHolderCallFirst(g_lmapScene[0x6a]);
+        if ((temp_v5 == 0x23) && (temp_v5 = linkHolderCheckFirst(g_lmapScene[0x6a]), temp_v5 != 0)) {
           FUN_00303460(0x17);
           piVar19 = g_lmapScene;
           g_lmapScene[0x15] = 0x24;
@@ -8155,7 +8155,7 @@ LAB_00328050:
     piVar11[9] = (int)((float)piVar11[9] + ((float)piVar11[0xc] - (float)piVar11[9]) * 0.33333334f);
     piVar19 = g_lmapScene;
     if ((piVar11[1] == 0) &&
-       (temp_v5 = FUN_003e56f0(piVar11[0x6a]), piVar19 = g_lmapScene, temp_v5 != 0)) {
+       (temp_v5 = linkHolderCheckFirst(piVar11[0x6a]), piVar19 = g_lmapScene, temp_v5 != 0)) {
       *(unsigned char *)(g_lmapScene + 0x1b) = 0;
       piVar19[0x15] = 0;
       piVar19[0x16] = 0x40a00000;

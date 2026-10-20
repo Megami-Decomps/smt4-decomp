@@ -1,25 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e7232(int);
+typedef struct Stream Stream;
+typedef struct StreamVtbl {
+    /* 0x00 */ void *unk00[5];
+    /* 0x14 */ u32 (*process)(Stream *stream, void *buffer, s32 size);
+} StreamVtbl;
+struct Stream {
+    /* 0x00 */ const StreamVtbl *vtbl;
+};
+void FUN_002e7232(void *buffer);
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e7232. */
-
-
-unsigned int FUN_00109ec4(int *param_1,int param_2,int param_3)
-
+/* Runs the stream's `process` method on `buffer`, frees the buffer, and returns the method's result (0 when there is no buffer). */
+u32 FUN_00109ec4(Stream *stream, void *buffer, s32 size)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (param_2 != 0) {
-    temp_v0 = (**(romwright_code **)(*param_1 + 0x14))(param_1,param_2,param_3);
-    FUN_002e7232(param_2);
-    return temp_v0;
-  }
-  return 0;
+    u32 result;
+
+    if (buffer != NULL) {
+        result = stream->vtbl->process(stream, buffer, size);
+        FUN_002e7232(buffer);
+        return result;
+    }
+    return 0;
 }
 
 } /* extern "C" */

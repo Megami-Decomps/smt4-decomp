@@ -59,7 +59,7 @@ extern int FUN_002bf4f8(unsigned int, unsigned int);
 extern int FUN_002c09d0(unsigned int);
 extern int FUN_002c2950(void);
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
-extern unsigned int FUN_002c5da8(unsigned int, unsigned int, unsigned int);
+extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002e039c(int);
 /* Supplied declaration required: FUN_0039f63c. */
 /* Supplied declaration required: FUN_0039fb38. */
@@ -142,7 +142,7 @@ void FUN_00231dec(int param_1)
     VectorSignedToFloat((int)(temp_v13 + temp_v17),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(2,0xffffffff,temp_v9);
   }
-  temp_v3 = FUN_002c5da8(6,1,0);
+  temp_v3 = packNibblesAndByte(6,1,0);
   FUN_002bee04(g_titleScene,6,temp_v3);
   FUN_00231bcc(param_1 + 0x164,4000,0,0,DAT_0044cdd8,1);
   FUN_00231bcc(param_1 + 0x164,0xfa1,0,0,DAT_0044cdd8,1);

@@ -23,7 +23,7 @@ extern unsigned char DAT_0062e59c; /* 0x62e59c */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 extern int FUN_002e9318(unsigned int *);
-extern int FUN_002fa114(unsigned int **);
+extern int wordRefsDiffer_002fa114(unsigned int **);
 /* Supplied declaration required: FUN_002fa124. */
 
 
@@ -42,7 +42,7 @@ int FUN_002fedf4(unsigned int *param_1)
   for (temp_v4[0] = DAT_0062e58c; (temp_v4[0] != DAT_0062e594 && (temp_v4[0] != param_1));
       temp_v4[0] = (unsigned int *)temp_v4[0][1]) {
   }
-  temp_v0 = FUN_002fa114(temp_v4);
+  temp_v0 = wordRefsDiffer_002fa114(temp_v4);
   if (temp_v0 != 0) {
     temp_v1 = temp_v4[0];
     FUN_002fa124(temp_v2,&DAT_0062e588,&temp_v1);

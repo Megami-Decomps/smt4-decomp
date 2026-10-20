@@ -13,7 +13,7 @@ struct fn_001330e8_arg1 {
     int field_0x14; /* +0x14 */
 };
 
-extern int FUN_001321c2(int *, unsigned int);
+extern int wordRefsDiffer_001321c2(int *, unsigned int);
 
 
 void FUN_001330e8(int *param_1,fn_001330e8_arg1 *param_2,int *param_3,unsigned int param_4)
@@ -24,7 +24,7 @@ void FUN_001330e8(int *param_1,fn_001330e8_arg1 *param_2,int *param_3,unsigned i
   int *piVar3;
   
   while( 1 ) {
-    temp_v0 = FUN_001321c2(param_3,param_4);
+    temp_v0 = wordRefsDiffer_001321c2(param_3,param_4);
     piVar2 = (int *)*param_3;
     if (temp_v0 == 0) break;
     piVar3 = (int *)param_2->field_0x10;

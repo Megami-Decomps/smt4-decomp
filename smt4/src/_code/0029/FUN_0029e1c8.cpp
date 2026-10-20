@@ -1,20 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_useCounter; /* 0x43dd20 */
+typedef struct Counter {
+    /* 0x000 */ u8 unk000[0x744];
+    /* 0x744 */ int state;
+} Counter;
 
+extern struct {
+    u8 unk0[4];
+    Counter *counter;
+} g_useCounter; /* 0x43dd20 */
 
-unsigned char FUN_0029e1c8(void)
-
+u8 FUN_0029e1c8(void)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if ((*(int *)((unsigned char *)&g_useCounter + 0x4)) != 0) {
-    temp_v0 = *(int *)((*(int *)((unsigned char *)&g_useCounter + 0x4)) + 0x744);
-  }
-  return (*(int *)((unsigned char *)&g_useCounter + 0x4)) == 0 || temp_v0 == 4;
+    int state = 0;
+
+    if (g_useCounter.counter != NULL) {
+        state = g_useCounter.counter->state;
+    }
+    return g_useCounter.counter == NULL || state == 4;
 }
 
 } /* extern "C" */

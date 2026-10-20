@@ -15,12 +15,12 @@ int FUN_001835b4(...);
 int FUN_00184310(void);
 int FUN_00185e84(...);
 int FUN_0020caec(...);
-int FUN_0032ff20(...);
+int unitRecordBuild(...);
 int FUN_00344cd0(...);
 int FUN_0037c988(...);
 int FUN_003afa60(...);
 int FUN_004bcaa8(...);
-int FUN_004bd21c(...);
+int getUnlockedSlotCount(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_7: 15 slot(s), 60 byte(s) */
@@ -63,13 +63,13 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_00185e84. */
 /* Supplied declaration required: FUN_0020caec. */
 extern int FUN_0022e9b8(void);
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_00344cd0. */
 extern int FUN_00348ed0(int);
 /* Supplied declaration required: FUN_0037c988. */
 /* Supplied declaration required: FUN_003afa60. */
 /* Supplied declaration required: FUN_004bcaa8. */
-/* Supplied declaration required: FUN_004bd21c. */
+/* Supplied declaration required: getUnlockedSlotCount. */
 
 
 void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsigned int param_5,
@@ -182,8 +182,8 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     FUN_0018152c((int)*psVar3,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0x8d,
                  0);
     FUN_0020caec(*psVar3,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0x92);
-    FUN_0032ff20(*psVar3,temp_v6);
-    FUN_004bd21c(temp_v6);
+    unitRecordBuild(*psVar3,temp_v6);
+    getUnlockedSlotCount(temp_v6);
     FUN_0037c988(temp_v0,temp_v6,param_5,temp_v9,temp_v5,param_1,param_2);
     temp_v8[2] = 0;
     temp_v8[3] = 0;

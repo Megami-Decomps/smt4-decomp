@@ -1,18 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x90];
+    /* 0x90 */ u32 flags;
+} Obj;
 
-unsigned int FUN_002c1850(int param_1)
-
+/* Flag bit 1 of the object's flags (0 for a NULL object). */
+u32 FUN_002c1850(Obj *obj)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 != 0) {
-    temp_v0 = (*(unsigned int *)(param_1 + 0x90) & 2) >> 1;
-  }
-  return temp_v0;
+    u32 flag = 0;
+
+    if (obj != NULL) {
+        flag = (obj->flags & 2) >> 1;
+    }
+    return flag;
 }
 
 } /* extern "C" */

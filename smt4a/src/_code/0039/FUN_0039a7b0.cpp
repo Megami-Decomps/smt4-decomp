@@ -15,7 +15,7 @@ extern int onesRoomIsRunning(void);
 extern int shopPollShutdown(void);
 extern int titleMainIsRunning(void);
 extern int FUN_002ef9f0(void);
-extern int FUN_00314c18(void);
+extern int sub68OwnerCall2(void);
 extern int QuestCenterMode_IsBusy(void);
 
 
@@ -67,7 +67,7 @@ joined_r0x0039a964:
         if (temp_v1 == 0) {
           temp_v1 = FUN_00162858();
           if (temp_v1 != 0) goto LAB_0039a970;
-          temp_v1 = FUN_00314c18();
+          temp_v1 = sub68OwnerCall2();
           if (((((temp_v1 == 0) || (temp_v1 = FUN_00162858(), temp_v1 != 0)) ||
                (temp_v1 = namePollShutdown(), temp_v1 != 0)) &&
               ((temp_v1 = titleMainIsRunning(), temp_v1 == 0 && (temp_v1 = FUN_00284d94(), temp_v1 == 0)))) &&

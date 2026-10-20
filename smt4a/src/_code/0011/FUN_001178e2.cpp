@@ -1,20 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9598(int, int);
+void FUN_002e9598(u8 *dest, const u8 *source);
 
-/* Supplied declaration required: FUN_002e9598. */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u8 partA[8];
+    /* 0x10 */ u8 partB[1];
+} Record;
 
-
-int FUN_001178e2(int param_1,int param_2)
-
+/* Assignment: copies `kind` and the two parts (through FUN_002e9598) from `source` and returns `dest`. */
+Record *FUN_001178e2(Record *dest, const Record *source)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned char *)(param_1 + 4) = *(unsigned char *)(param_2 + 4);
-  FUN_002e9598(param_1 + 8,param_2 + 8);
-  FUN_002e9598(param_1 + 0x10,param_2 + 0x10);
-  return param_1;
+    dest->kind = source->kind;
+    FUN_002e9598(dest->partA, source->partA);
+    FUN_002e9598(dest->partB, source->partB);
+    return dest;
 }
 
 } /* extern "C" */

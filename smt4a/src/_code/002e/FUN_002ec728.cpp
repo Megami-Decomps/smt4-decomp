@@ -1,20 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003105b0(int, int);
+void FUN_003105b0(u8 *dest, const u8 *source);
 
-/* Supplied declaration required: FUN_003105b0. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u8 member0C[1];
+} Holder;
 
-
-int FUN_002ec728(int param_1,int param_2)
-
+/* Assignment of the member at 0xC; returns `dest`. */
+Holder *FUN_002ec728(Holder *dest, const Holder *source)
 {
-/* irregular: 1 native warning(s); review required */
-  int a = param_1 + 0xc;
-  int b = param_2 + 0xc;
-  FUN_003105b0(a,b);
-  return param_1;
+    u8 *a = dest->member0C;
+    const u8 *b = source->member0C;
+
+    FUN_003105b0(a, (u8 *)b);
+    return dest;
 }
 
 } /* extern "C" */

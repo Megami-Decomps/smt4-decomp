@@ -1,20 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Node {
+    /* 0x0 */ struct Node *next;
+} Node;
 
-unsigned int FUN_002b4f40(int param_1,unsigned int *param_2)
+typedef struct Queue {
+    /* 0x000 */ u8 unk000[0x16C];
+    /* 0x16C */ Node *head;
+    /* 0x170 */ Node *tail;
+    /* 0x174 */ u32 unk174;
+} Queue;
 
+/* Appends `node` to the queue; returns the queue's unk174 field. */
+u32 FUN_002b4f40(Queue *queue, Node *node)
 {
-  if (*(unsigned int **)(param_1 + 0x170) == (unsigned int *)0x0) {
-    *(unsigned int **)(param_1 + 0x16c) = param_2;
-  }
-  else {
-    **(unsigned int **)(param_1 + 0x170) = (unsigned int)param_2;
-  }
-  *(unsigned int **)(param_1 + 0x170) = param_2;
-  *param_2 = 0;
-  return *(unsigned int *)(param_1 + 0x174);
+    if (queue->tail == NULL) {
+        queue->head = node;
+    } else {
+        queue->tail->next = node;
+    }
+    queue->tail = node;
+    node->next = NULL;
+    return queue->unk174;
 }
 
 } /* extern "C" */

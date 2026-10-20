@@ -55,10 +55,10 @@ extern int FUN_002f2c38(int, int);
 /* Supplied declaration required: FUN_002f2da0. */
 /* Supplied declaration required: FUN_002f2dd8. */
 /* Supplied declaration required: FUN_002f2de4. */
-extern int FUN_002f2dec(int *, int);
+extern int wordRefsDiffer_002f2dec(int *, int);
 /* Supplied declaration required: FUN_00310510. */
 /* Supplied declaration required: FUN_00310578. */
-extern int FUN_003105a0(int *, unsigned int *);
+extern int iterNotEqual(int *, unsigned int *);
 
 
 unsigned int FUN_00120960(int param_1,int param_2,unsigned int param_3,unsigned int param_4,int param_5)
@@ -113,7 +113,7 @@ unsigned int FUN_00120960(int param_1,int param_2,unsigned int param_3,unsigned 
   do {
     while( 1 ) {
       while( 1 ) {
-        temp_v1 = FUN_002f2dec(&temp_v13,temp_v17);
+        temp_v1 = wordRefsDiffer_002f2dec(&temp_v13,temp_v17);
         temp_v2 = temp_v13;
         if ((temp_v1 == 0) || (DAT_00594986 <= temp_v9)) goto LAB_00120aa8;
         temp_v19 = temp_v13 + 0x120;
@@ -135,7 +135,7 @@ unsigned int FUN_00120960(int param_1,int param_2,unsigned int param_3,unsigned 
     }
     if (temp_v23 < (unsigned int)(*(int *)(temp_v20 + 0x34) + temp_v3)) {
 LAB_00120aa8:
-      while (temp_v2 = FUN_002f2dec(&temp_v13,temp_v17), temp_v0 = temp_v9, temp_v2 != 0) {
+      while (temp_v2 = wordRefsDiffer_002f2dec(&temp_v13,temp_v17), temp_v0 = temp_v9, temp_v2 != 0) {
         temp_v16 = *(int *)(temp_v13 + 0x114);
         temp_v15 = *(unsigned int *)(temp_v13 + 0x110);
         temp_v2 = FUN_002efd4a((unsigned int *)&temp_v15,temp_v22);
@@ -161,7 +161,7 @@ LAB_00120aa8:
       }
       temp_v3 = FUN_002eb5f4();
       temp_v16 = temp_v6;
-      while (temp_v2 = FUN_003105a0(&temp_v16,temp_v14), temp_v4 = temp_v16, temp_v2 != 0) {
+      while (temp_v2 = iterNotEqual(&temp_v16,temp_v14), temp_v4 = temp_v16, temp_v2 != 0) {
         FUN_002ed838(piVar5);
         (**(romwright_code **)(*(int *)(temp_v3 + 0xd4) + 0x20))((int *)(temp_v3 + 0xd4),temp_v4,piVar5);
         if (*(char *)(temp_v4 + 0x138) == '\0') {
@@ -184,7 +184,7 @@ LAB_00120aa8:
       FUN_00310578(&temp_v5);
       return temp_v0;
     }
-    temp_v1 = FUN_003105a0(temp_v18,temp_v14);
+    temp_v1 = iterNotEqual(temp_v18,temp_v14);
     if (temp_v1 != 0) {
       *(int *)(temp_v2 + 0x14) = temp_v6;
       *(int *)(temp_v6 + 0x18) = temp_v2;

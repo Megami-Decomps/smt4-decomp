@@ -19,7 +19,7 @@ int FUN_00426eb8(...);
 int FUN_0042718c(...);
 int FUN_00473c5c(...);
 int FUN_004749a0(...);
-int FUN_005001a4(unsigned char [56], unsigned int, unsigned int);
+int table30GetEntry(unsigned char [56], unsigned int, unsigned int);
 int FUN_00500520(...);
 int FUN_005006a8(...);
 int archiveFindEntryValue(...);
@@ -77,11 +77,11 @@ extern int FUN_001d25ec(int);
 /* Supplied declaration required: FUN_0037a728. */
 /* Supplied declaration required: FUN_00426eb8. */
 /* Supplied declaration required: FUN_0042718c. */
-extern unsigned int FUN_00427348(int);
-extern unsigned int FUN_00427354(int);
+extern unsigned int halfPair48LowByteA(int);
+extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00473c5c. */
 /* Supplied declaration required: FUN_004749a0. */
-/* Supplied declaration required: FUN_005001a4. */
+/* Supplied declaration required: table30GetEntry. */
 extern int FUN_00500514(unsigned char *);
 /* Supplied declaration required: FUN_00500520. */
 /* Supplied declaration required: FUN_005006a8. */
@@ -249,7 +249,7 @@ int FUN_004760bc(int param_1)
   if (*(int *)(temp_v5 + 0x68c) != 0) {
     temp_v38 = temp_v5 + 0x4a8;
     do {
-      FUN_005001a4(temp_v42,*(unsigned int *)(temp_v5 + 0x5b0),temp_v35);
+      table30GetEntry(temp_v42,*(unsigned int *)(temp_v5 + 0x5b0),temp_v35);
       temp_v12 = *(int *)(temp_v5 + 0x688) + temp_v22 * 0x9c8;
       temp_v39 = temp_v12 + 0x900;
       *(short *)(temp_v12 + 0x9aa) = (short)temp_v35;
@@ -259,8 +259,8 @@ int FUN_004760bc(int param_1)
       if ((temp_v6 != 0) && (FUN_001029f4(temp_v6,0,10), temp_v6 == 1)) {
         *(unsigned char *)(temp_v12 + 0x9b0) = 1;
       }
-      temp_v3 = FUN_00427354(temp_v5 + 0x28);
-      temp_v4 = FUN_00427348(temp_v5 + 0x28);
+      temp_v3 = halfPair48LowByteB(temp_v5 + 0x28);
+      temp_v4 = halfPair48LowByteA(temp_v5 + 0x28);
       FUN_00426eb8(&temp_v33,0,temp_v4,temp_v3);
       temp_v23 = temp_v33;
       uStack_1bf4 = uStack_1ab4;
@@ -287,8 +287,8 @@ int FUN_004760bc(int param_1)
       if (temp_v11 < 0) {
         return temp_v11;
       }
-      temp_v3 = FUN_00427354(temp_v5 + 0x28);
-      temp_v4 = FUN_00427348(temp_v5 + 0x28);
+      temp_v3 = halfPair48LowByteB(temp_v5 + 0x28);
+      temp_v4 = halfPair48LowByteA(temp_v5 + 0x28);
       FUN_00426eb8(&temp_v31,2,temp_v4,temp_v3);
       temp_v25 = temp_v31;
       uStack_1bb4 = uStack_1af4;
@@ -316,8 +316,8 @@ int FUN_004760bc(int param_1)
         return temp_v11;
       }
       sysMemClear(temp_v41,0x800);
-      temp_v3 = FUN_00427354(temp_v5 + 0x28);
-      temp_v4 = FUN_00427348(temp_v5 + 0x28);
+      temp_v3 = halfPair48LowByteB(temp_v5 + 0x28);
+      temp_v4 = halfPair48LowByteA(temp_v5 + 0x28);
       FUN_00426eb8(&temp_v27,3,temp_v4,temp_v3);
       temp_v23 = temp_v27;
       uStack_1bf4 = uStack_1b74;
@@ -397,8 +397,8 @@ int FUN_004760bc(int param_1)
       *(unsigned char *)(temp_v6 + 0x182) = 0xff;
       *(unsigned char *)(temp_v6 + 0x183) = 0;
       *(unsigned char *)(temp_v6 + 0x180) = 0xff;
-      temp_v3 = FUN_00427354(temp_v5 + 0x28);
-      temp_v4 = FUN_00427348(temp_v5 + 0x28);
+      temp_v3 = halfPair48LowByteB(temp_v5 + 0x28);
+      temp_v4 = halfPair48LowByteA(temp_v5 + 0x28);
       FUN_00426eb8(&temp_v23,5,temp_v4,temp_v3);
       temp_v29 = temp_v23;
       uStack_1b34 = uStack_1bf4;

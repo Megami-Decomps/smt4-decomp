@@ -1,40 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int dataTableGetCount(...);
-int dataTableGet(int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: dataTableGet. */
+int dataTableGet(int id, int index);
 
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x26];
+    /* 0x26 */ u16 subTable;
+} Entry;
 
-void FUN_003a6424(unsigned int param_1,unsigned int param_2)
-
+/* Looks up record `index` (0x68-byte records) of data table 0x17/1 and queries its sub table. */
+void FUN_003a6424(u32 unused, u32 index)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(0x17,1);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_2 >= temp_v2) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = temp_v1 + param_2 * 0x68;
-  }
-  dataTableGet(0x17,*(unsigned short *)(temp_v1 + 0x26) + 2);
-  dataTableGetCount();
-  return;
+    u32 table = dataTableGet(0x17, 1);
+    Entry *entries = (Entry *)dataTableGetEntries();
+    u32 count = dataTableGetCount(table);
+
+    if (index >= count) {
+        entries = NULL;
+    } else {
+        entries = (Entry *)((u8 *)entries + index * 0x68);
+    }
+    dataTableGet(0x17, entries->subTable + 2);
+    dataTableGetCount();
 }
 
 } /* extern "C" */

@@ -15,7 +15,7 @@ int FUN_002e342c(...);
 int sysMemClear(...);
 int FUN_002ea508(...);
 int FUN_00317508(...);
-int FUN_0037a854(void);
+int jobSetWork7C(void);
 int FUN_003874fc(unsigned int);
 int FUN_004f43f0(unsigned int *, int);
 int FUN_004f452c(unsigned int *, int);
@@ -45,10 +45,10 @@ extern unsigned int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002ea508. */
-extern unsigned int FUN_00317450(unsigned int, unsigned int);
+extern unsigned int asdListBoxGetIntValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00317508. */
-extern unsigned int FUN_00340ec8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0037a854. */
+extern unsigned int asdListBoxGetFloatValuePtr(unsigned int, unsigned int);
+/* Supplied declaration required: jobSetWork7C. */
 /* Supplied declaration required: FUN_003874fc. */
 extern unsigned int FUN_003efa38(int);
 /* Supplied declaration required: FUN_004f43f0. */
@@ -116,7 +116,7 @@ unsigned int FUN_002984d4(void)
     temp_v7[0] = 4;
     asdListBoxCreate(temp_v2,0xf0,0x10,0x20);
     puVar8[3] = temp_v2;
-    FUN_0037a854();
+    jobSetWork7C();
     FUN_002e0898(puVar8[3],0xc);
     FUN_002ea508(puVar8[3],0x52821c);
     asdListBoxAddItem(puVar8[3],0x528214);
@@ -213,7 +213,7 @@ code_r0x004f4c54:
     temp_v7[0] = 4;
     asdListBoxCreate(temp_v2,0xf0,0x10,0x20);
     puVar8[3] = temp_v2;
-    FUN_0037a854();
+    jobSetWork7C();
     FUN_002e0898(puVar8[3],0xc);
     FUN_002ea508(puVar8[3],"MODE");
     asdListBoxAddItem(puVar8[3],"슌쪕튕垏");
@@ -241,11 +241,11 @@ code_r0x004f4c54:
       temp_v4 = *(int *)(temp_v1 + 0x1ed4) + *(short *)(puVar8 + 4) * 0x1d0;
       FUN_001568f8(temp_v1);
       temp_v1 = func_0x003f11ac(temp_v1,(int)*(short *)(puVar8 + 4));
-      puVar8 = (unsigned int *)FUN_00340ec8(temp_v2,1);
+      puVar8 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,1);
       *(unsigned int *)(temp_v4 + 0xc) = *puVar8;
-      puVar8 = (unsigned int *)FUN_00340ec8(temp_v2,2);
+      puVar8 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,2);
       *(unsigned int *)(temp_v4 + 0x10) = *puVar8;
-      puVar8 = (unsigned int *)FUN_00340ec8(temp_v2,3);
+      puVar8 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,3);
       *(unsigned int *)(temp_v4 + 0x14) = *puVar8;
       if (temp_v1 == 0) {
         return 0;
@@ -268,7 +268,7 @@ code_r0x004f4c54:
         if (temp_v0 != 2) {
           return 0;
         }
-        puVar8 = (unsigned int *)FUN_00317450(temp_v2,0);
+        puVar8 = (unsigned int *)asdListBoxGetIntValuePtr(temp_v2,0);
         DAT_00571508[0xd] = *puVar8;
         return 0;
       }
@@ -280,11 +280,11 @@ code_r0x004f4c54:
         puVar8 = (unsigned int *)(temp_v1 + 0x1eec);
         puVar4 = DAT_00571508 + 10;
       }
-      puVar7 = (unsigned int *)FUN_00340ec8(temp_v2,0);
+      puVar7 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,0);
       *puVar4 = *puVar7;
-      puVar7 = (unsigned int *)FUN_00340ec8(temp_v2,1);
+      puVar7 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,1);
       puVar4[1] = *puVar7;
-      puVar7 = (unsigned int *)FUN_00340ec8(temp_v2,2);
+      puVar7 = (unsigned int *)asdListBoxGetFloatValuePtr(temp_v2,2);
       puVar4[2] = *puVar7;
       temp_v2 = puVar4[1];
       temp_v6 = puVar4[2];
@@ -306,7 +306,7 @@ code_r0x004f4d58:
     temp_v7[0] = 4;
     asdListBoxCreate(temp_v2,0xf0,0x10,0x20);
     puVar8[3] = temp_v2;
-    FUN_0037a854();
+    jobSetWork7C();
     FUN_002e0898(puVar8[3],0xc);
     FUN_002ea508(puVar8[3],"CAMERA");
     asdListBoxAddItem(puVar8[3],0x52815c);

@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00307cb0. */
 /* Supplied declaration required: FUN_0030c5d8. */
 extern int FUN_0030c60c(int *, int, int);
-extern int FUN_0030c61a(unsigned int, int *);
+extern int vectorGrowCapacity_0030c61a(unsigned int, int *);
 /* Supplied declaration required: FUN_0030fdf0. */
 extern int __aeabi_idivmod(int, unsigned int);
 
@@ -58,7 +58,7 @@ void FUN_00133222(int *param_1,int param_2,unsigned int param_3)
   }
   else {
     temp_v2 = vecCount24(param_1);
-    temp_v4 = FUN_0030c61a(temp_v2,param_1);
+    temp_v4 = vectorGrowCapacity_0030c61a(temp_v2,param_1);
     temp_v5 = FUN_0030c60c(param_1,temp_v4,*param_1);
     FUN_00307c74(*param_1,param_2,temp_v5,param_1);
     temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x18);

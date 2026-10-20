@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002f4370(unsigned char *, int, int);
+int emptyStub_002f4370(unsigned char *, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern unsigned int DAT_006449e0; /* 0x6449e0 */
 extern unsigned int DAT_006449e4; /* 0x6449e4 */
 extern unsigned int DAT_006449e8; /* 0x6449e8 */
 
-/* Supplied declaration required: FUN_002f4370. */
+/* Supplied declaration required: emptyStub_002f4370. */
 extern unsigned int nn_snd_CTR_VoiceImpl_VoiceImpl_sub_object(int, int);
 extern int nn_snd_CTR_Voice_Voice_sub_object(int, int);
 
@@ -56,7 +56,7 @@ void FUN_00511b34(void)
     temp_v4 = temp_v4 + 0x7c;
     *(unsigned int *)(*piVar6 + 0x68) = temp_v1;
   } while (temp_v2 < 0x18);
-  FUN_002f4370(&DAT_006449d0,0x439cc0,0x100000);
+  emptyStub_002f4370(&DAT_006449d0,0x439cc0,0x100000);
   return;
 }
 

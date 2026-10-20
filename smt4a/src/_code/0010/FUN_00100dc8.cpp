@@ -1,29 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00100dc8` (_code @ 0x100dc8, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e4064(void);
+/* The shared singleton instance; `refCount` counts the handles pointing at it. */
+typedef struct Instance {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1C */ s32 refCount;
+} Instance;
 
-extern int DAT_005c4c00; /* 0x5c4c00 */
+extern Instance *DAT_005c4c00;
+void FUN_002e4064(void);               /* creates the singleton */
 
-/* Supplied declaration required: FUN_002e4064. */
-
-
-int * FUN_00100dc8(int *param_1)
-
+/* Points `handle` at the singleton (creating it first when needed) and takes a reference. */
+Instance **FUN_00100dc8(Instance **handle)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  if (DAT_005c4c00 == 0) {
-    FUN_002e4064();
-  }
-  temp_v0 = DAT_005c4c00;
-  *param_1 = DAT_005c4c00;
-  *(int *)(temp_v0 + 0x1c) = *(int *)(temp_v0 + 0x1c) + 1;
-  return param_1;
+    Instance *instance;
+
+    if (DAT_005c4c00 == NULL) {
+        FUN_002e4064();
+    }
+    instance = DAT_005c4c00;
+    *handle = DAT_005c4c00;
+    instance->refCount = instance->refCount + 1;
+    return handle;
 }
 
 } /* extern "C" */

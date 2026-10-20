@@ -1,15 +1,11 @@
-#include "romwright_types.h"
+#include "shard/Sys464af0.h"
 
 extern "C" {
 
-extern unsigned char DAT_00464af0; /* 0x464af0 */
-
-
-void FUN_00153050(unsigned int param_1)
-
+/* Clears the bits of `mask` in the system flags word. */
+void FUN_00153050(u32 mask)
 {
-  (*(unsigned int *)((unsigned char *)&DAT_00464af0 + 0x8)) = (*(unsigned int *)((unsigned char *)&DAT_00464af0 + 0x8)) & ~param_1;
-  return;
+    DAT_00464af0.unk08 = DAT_00464af0.unk08 & ~mask;
 }
 
 } /* extern "C" */

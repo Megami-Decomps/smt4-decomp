@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100388(unsigned char [68], unsigned char *, unsigned int, unsigned int, unsigned int);
 int FUN_0013c174(unsigned char [68], int *, int);
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_0032cb48(int);
+int settings5BSetValue(int);
 int FUN_003f9c0c(void);
 int FUN_003f9e80(void);
 
@@ -24,8 +24,8 @@ extern int DAT_005806a4; /* 0x5806a4 */
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: FUN_00178b04. */
-extern int FUN_0032c1ac(void);
-/* Supplied declaration required: FUN_0032cb48. */
+extern int settings5BGetValue(void);
+/* Supplied declaration required: settings5BSetValue. */
 /* Supplied declaration required: FUN_003f9c0c. */
 /* Supplied declaration required: FUN_003f9e80. */
 
@@ -71,9 +71,9 @@ void FUN_0035243c(unsigned int param_1,unsigned int param_2)
   }
   *(int *)(DAT_005806a4 + 700) = temp_v0;
   FUN_003f9c0c();
-  temp_v0 = FUN_0032c1ac();
+  temp_v0 = settings5BGetValue();
   if (temp_v0 != 0) {
-    FUN_0032cb48(0);
+    settings5BSetValue(0);
   }
   return;
 }

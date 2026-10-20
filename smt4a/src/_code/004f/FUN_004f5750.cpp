@@ -17,7 +17,7 @@ typedef struct {
 } param_9_stack;
 
 /* Supplied declaration required: FUN_00260030. */
-extern int FUN_0031b934(int);
+extern int entryIsValid(int);
 /* Supplied declaration required: FUN_0031ba34. */
 /* Supplied declaration required: FUN_00320b44. */
 /* Supplied declaration required: FUN_0047ed10. */
@@ -82,7 +82,7 @@ LAB_004f5804:
       } while (temp_v0 < 0x32);
     }
     else {
-      if (((*(unsigned int *)(param_1 + 0x339c) & 4) == 0) && (temp_v1 = FUN_0031b934(param_2), temp_v1 != 0)) {
+      if (((*(unsigned int *)(param_1 + 0x339c) & 4) == 0) && (temp_v1 = entryIsValid(param_2), temp_v1 != 0)) {
         FUN_00260030(param_2);
         *(unsigned int *)(param_1 + 0x339c) = *(unsigned int *)(param_1 + 0x339c) | 4;
       }

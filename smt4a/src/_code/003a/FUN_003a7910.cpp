@@ -1,21 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Shard003A.h"
 
 extern "C" {
 
-int scrSetResult(void);
-int FUN_004186e0(void);
+extern s32 FUN_004186e0(void);
+extern void scrSetResult(s32 value);
 
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_004186e0. */
-
-
-unsigned int FUN_003a7910(void)
-
+/* Script command: result is FUN_004186e0(). */
+u32 FUN_003a7910(void)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_004186e0();
-  scrSetResult();
-  return 1;
+    scrSetResult(FUN_004186e0());
+    return 1;
 }
 
 } /* extern "C" */

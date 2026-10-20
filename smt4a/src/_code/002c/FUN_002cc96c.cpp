@@ -1,43 +1,38 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0022e774(void);
-int FUN_00270104(int);
-int FUN_002cb438(int, unsigned int, unsigned int);
-int FUN_003343f0(int);
-int FUN_0038e4cc(int, int);
+void FUN_0022e774(void);
+void FUN_00270104(void *object);
+void FUN_002cb438(void *object, u32 a, u32 b);
+void FUN_003343f0(s32 value);
+void FUN_0038e4cc(void *object, s32 value);
+u32 FUN_002cc9e0(void *object, u32 value);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Object {
+    /* 0x0000 */ u8 unk0000[0x3880];
+    /* 0x3880 */ s32 state;
+    /* 0x3884 */ u8 unk3884[0xC];
+    /* 0x3890 */ u32 unk3890;
+    /* 0x3894 */ u8 unk3894[0x1244];
+    /* 0x4AD8 */ u32 unk4AD8;
+} Object;
 
-/* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: FUN_00270104. */
-/* Supplied declaration required: FUN_002cb438. */
-extern unsigned int FUN_002cc9e0(int, unsigned int);
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_0038e4cc. */
-
-
-void FUN_002cc96c(int param_1)
-
+/* Resets the object after FUN_0038e4cc: sets the word at 0x4AD8 to 4 and then, for states 8..0xD, runs FUN_00270104; otherwise FUN_002cb438 with FUN_002cc9e0's result. */
+void FUN_002cc96c(Object *object)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  FUN_0038e4cc(param_1,0);
-  FUN_0022e774();
-  *(unsigned int *)(param_1 + 0x4ad8) = 4;
-  FUN_003343f0(0);
-  if (*(int *)(param_1 + 0x3880) - 8U <= 5U) {
-    FUN_00270104(param_1);
-    return;
-  }
-  temp_v0 = FUN_002cc9e0(param_1,0);
-  FUN_002cb438(param_1,temp_v0,*(unsigned int *)(param_1 + 0x3890));
-  return;
+    u32 value;
+
+    FUN_0038e4cc(object, 0);
+    FUN_0022e774();
+    object->unk4AD8 = 4;
+    FUN_003343f0(0);
+    if (object->state - 8U <= 5U) {
+        FUN_00270104(object);
+        return;
+    }
+    value = FUN_002cc9e0(object, 0);
+    FUN_002cb438(object, value, object->unk3890);
 }
 
 } /* extern "C" */

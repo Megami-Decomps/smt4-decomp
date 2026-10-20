@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bb9d4` (_code @ 0x3bb9d4, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 
-int FUN_00233670(int, int, int, int);
-int FUN_00233730(int, int, unsigned int, int, int, int);
+typedef struct Panel {
+    /* 0x00 */ u8 unk00[0xd];
+    /* 0x0D */ u8 shown;
+    /* 0x0E */ u8 unk0e[0x66];
+    /* 0x74 */ u8 button[0x10];  /* sub-object set up by FUN_00233670 */
+    /* 0x84 */ u8 buttonShown;
+    /* 0x85 */ u8 unk85[0x4a7];
+    /* 0x52C */ u32 unk52c;
+} Panel;
 
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
+int FUN_00233670(void *button, int a, int b, int c);
+int FUN_00233730(Panel *panel, int a, u32 b, int c, int d, int e);
 
-/* Supplied declaration required: FUN_00233670. */
-/* Supplied declaration required: FUN_00233730. */
-
-
-void FUN_003bb9d4(int param_1)
-
+void FUN_003bb9d4(Panel *panel)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_00233730(param_1,10,*(unsigned int *)(param_1 + 0x52c),0,1,1);
-  *(unsigned char *)(param_1 + 0xd) = 1;
-  FUN_00233670(param_1 + 0x74,0x2a,5,10);
-  *(unsigned char *)(param_1 + 0x84) = 1;
-  return;
+    FUN_00233730(panel, 10, panel->unk52c, 0, 1, 1);
+    asdDebugHookPtrInt(panel, 1);
+    panel->shown = 1;
+    FUN_00233670(panel->button, 0x2a, 5, 10);
+    panel->buttonShown = 1;
 }
 
 } /* extern "C" */

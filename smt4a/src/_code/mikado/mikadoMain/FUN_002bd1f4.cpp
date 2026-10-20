@@ -8,9 +8,9 @@ int asdOperatorNew(void);
 int FUN_0019e290(void);
 int FUN_002e3328(int);
 int FUN_004b6fc4(void);
-int FUN_004b9680(unsigned int, unsigned short [2]);
+int menu4CSetValue42(unsigned int, unsigned short [2]);
 int FUN_004ba890(unsigned int);
-int FUN_004bb1a8(...);
+int clearThreeHalfwords(...);
 
 /* stack frame of void: 2 slot(s), 4 byte(s) */
 typedef struct {
@@ -27,10 +27,10 @@ extern unsigned int DAT_0058801c; /* 0x58801c */
 /* Supplied declaration required: FUN_0019e290. */
 /* Supplied declaration required: FUN_002e3328. */
 /* Supplied declaration required: FUN_004b6fc4. */
-/* Supplied declaration required: FUN_004b9680. */
+/* Supplied declaration required: menu4CSetValue42. */
 /* Supplied declaration required: FUN_004ba890. */
-/* Supplied declaration required: FUN_004bb1a8. */
-extern int FUN_004d03b4(int);
+/* Supplied declaration required: clearThreeHalfwords. */
+extern int flagsDESet(int);
 extern int FUN_004d08d0(int);
 
 
@@ -82,18 +82,18 @@ unsigned int FUN_002bd1f4(void)
       *puVar3 = 0;
       puVar3[0x10] = 0;
       *(unsigned int *)(puVar3 + 0x20) = 0;
-      temp_v2 = FUN_004bb1a8(puVar3 + 0x3c);
-      temp_v2 = FUN_004bb1a8(temp_v2 + 6);
-      temp_v2 = FUN_004d03b4(temp_v2 + 0x5a);
+      temp_v2 = clearThreeHalfwords(puVar3 + 0x3c);
+      temp_v2 = clearThreeHalfwords(temp_v2 + 6);
+      temp_v2 = flagsDESet(temp_v2 + 0x5a);
       *(unsigned char **)(temp_v2 + 0x74) = &DAT_0055ca10;
       temp_v2 = temp_v2 - 0x9c;
     }
     *(int *)(temp_v1 + 8) = temp_v2;
     FUN_004b6fc4();
-    FUN_004bb1a8(temp_v3);
+    clearThreeHalfwords(temp_v3);
     temp_v3[0] = (unsigned short)DAT_00588018;
     temp_v4 = (unsigned short)DAT_0058801c;
-    FUN_004b9680(*(unsigned int *)(temp_v1 + 8),temp_v3);
+    menu4CSetValue42(*(unsigned int *)(temp_v1 + 8),temp_v3);
     *(unsigned char *)(temp_v1 + 5) = 1;
   }
   return 0;

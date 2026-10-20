@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0025318c(void);
-int FUN_002531a4(void);
+int dataTable2eSub1GetCount(void);
+int dataTable2eSub0GetCount(void);
 int FUN_002a0428(unsigned int, int);
 
 extern int g_lmapScene; /* 0x447e88 */
@@ -26,13 +26,13 @@ extern unsigned int DAT_0049fbe0; /* 0x49fbe0 */
 extern int DAT_0049fd08; /* 0x49fd08 */
 extern int DAT_0049fd0c; /* 0x49fd0c */
 
-/* Supplied declaration required: FUN_0025318c. */
-/* Supplied declaration required: FUN_002531a4. */
+/* Supplied declaration required: dataTable2eSub1GetCount. */
+/* Supplied declaration required: dataTable2eSub0GetCount. */
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
 extern unsigned short *FUN_002b63ac(void);
-extern short *FUN_002d4ef4(int);
-extern short *FUN_002d4f2c(int);
+extern short *dataTable2eSub1GetRecord(int);
+extern short *dataTable2eSub0GetRecord(int);
 
 
 void FUN_0020db10(void)
@@ -50,10 +50,10 @@ void FUN_0020db10(void)
   puVar1 = (unsigned short *)FUN_002b63ac();
   temp_v1 = 0;
   puVar2 = puVar1;
-  FUN_002531a4();
+  dataTable2eSub0GetCount();
   if (0 < (int)puVar2) {
     do {
-      psVar3 = (short *)FUN_002d4f2c(temp_v1);
+      psVar3 = (short *)dataTable2eSub0GetRecord(temp_v1);
       if ((int)*psVar3 == (unsigned int)*puVar1) {
         DAT_0049fb34 = DAT_0049fd08;
         if (DAT_0049fd08 == -1) {
@@ -62,7 +62,7 @@ void FUN_0020db10(void)
         break;
       }
       temp_v1 = temp_v1 + 1;
-      FUN_002531a4();
+      dataTable2eSub0GetCount();
     } while (temp_v1 < (int)psVar3);
   }
   temp_v1 = DAT_0049fd08;
@@ -112,11 +112,11 @@ void FUN_0020db10(void)
   *puVar5 = *puVar5 | 2;
   temp_v1 = *(int *)(puVar5[2] + 0x2c);
   *(unsigned char *)(temp_v1 + 0x1f6) = 0;
-  FUN_0025318c();
+  dataTable2eSub1GetCount();
   if (0 < temp_v1) {
-    while (psVar3 = (short *)FUN_002d4ef4(temp_v2), (int)*psVar3 != (unsigned int)puVar1[4]) {
+    while (psVar3 = (short *)dataTable2eSub1GetRecord(temp_v2), (int)*psVar3 != (unsigned int)puVar1[4]) {
       temp_v2 = temp_v2 + 1;
-      FUN_0025318c();
+      dataTable2eSub1GetCount();
       if ((int)psVar3 <= temp_v2) {
         return;
       }

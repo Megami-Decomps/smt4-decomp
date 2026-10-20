@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001ac2d4(unsigned int);
 int FUN_0029570c(void);
 int FUN_0032c5c4(unsigned int, int, char *);
-int FUN_00341060(unsigned int);
+int faderSetValue(unsigned int);
 int FUN_0036bb1c(unsigned int, int);
 
 extern int DAT_00581270; /* 0x581270 */
@@ -16,7 +16,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_001ac2d4. */
 /* Supplied declaration required: FUN_0029570c. */
 /* Supplied declaration required: FUN_0032c5c4. */
-/* Supplied declaration required: FUN_00341060. */
+/* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_0036bb1c. */
 
 
@@ -47,7 +47,7 @@ void FUN_002d8cec(void)
         if ((*puVar1 & 2) == 0) {
           *puVar1 = *puVar1 | 2;
           *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-          FUN_00341060(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8));
+          faderSetValue(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8));
         }
         pcVar5[1] = '\x01';
       }
@@ -59,14 +59,14 @@ void FUN_002d8cec(void)
             *puVar1 = temp_v1 & 0xfffffffd;
             *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
             temp_v0 = *(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8);
-            FUN_00341060(temp_v0);
+            faderSetValue(temp_v0);
           }
         }
         else if ((temp_v1 & 2) == 0) {
           *puVar1 = temp_v1 | 2;
           *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
           temp_v0 = *(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8);
-          FUN_00341060(temp_v0);
+          faderSetValue(temp_v0);
         }
         FUN_0032c5c4(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8),0,pcVar5 + 4);
         FUN_0036bb1c(*(unsigned int *)(*(int *)(pcVar5 + 0x20) + 8),0);

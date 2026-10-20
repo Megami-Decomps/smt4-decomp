@@ -107,7 +107,7 @@ static float romwright_sqrt_4(float value)
 extern int FUN_00152f54(void);
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001a6fbc. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_00399290. */
 /* Supplied declaration required: FUN_003b5c54. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
@@ -390,7 +390,7 @@ void FUN_003699e4(int param_1)
       temp_v62 = temp_v12;
       temp_v63 = temp_v12;
       temp_v64 = temp_v12;
-      if (((DAT_005c4c28 & 1) == 0) && (temp_v1 = FUN_002eba64(&DAT_005c4c28), temp_v1 != 0)) {
+      if (((DAT_005c4c28 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_005c4c28), temp_v1 != 0)) {
         DAT_0064c030 = temp_v16;
         DAT_0064c034 = temp_v19;
         DAT_0064c038 = temp_v19;

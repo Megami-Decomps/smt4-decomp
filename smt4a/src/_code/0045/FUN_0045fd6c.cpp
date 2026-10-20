@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0045f6d8(void);
+int counters3Advance(void);
 
 typedef struct fn_0045fd6c_arg0 fn_0045fd6c_arg0;
 struct fn_0045fd6c_arg0 {
@@ -24,7 +24,7 @@ struct fn_0045fd6c_arg0 {
     int field_0x3084; /* +0x3084 */
 };
 
-/* Supplied declaration required: FUN_0045f6d8. */
+/* Supplied declaration required: counters3Advance. */
 
 
 void FUN_0045fd6c(fn_0045fd6c_arg0 *param_1)
@@ -33,7 +33,7 @@ void FUN_0045fd6c(fn_0045fd6c_arg0 *param_1)
 /* irregular: 1 native warning(s); review required */
   unsigned short temp_v0;
   
-  FUN_0045f6d8();
+  counters3Advance();
   temp_v0 = *(unsigned short *)&param_1[1].field_0x204;
   if (((temp_v0 & 1) != 0) && (param_1->field_0x3054 < param_1->field_0x3050)) {
     param_1->field_0x3054 = param_1->field_0x3054 + 1;

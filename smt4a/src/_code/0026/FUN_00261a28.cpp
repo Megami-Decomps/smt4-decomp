@@ -19,7 +19,7 @@ int FUN_002f4374(void);
 int FUN_0031f0a8(...);
 int FUN_00363c58(int);
 int FUN_003df7c4(...);
-int FUN_003dff50(void);
+int playerSyncPair2AOnce(void);
 int FUN_003e45bc(...);
 int FUN_003e48dc(...);
 int FUN_003fd5bc(...);
@@ -29,8 +29,8 @@ int FUN_00480fc0(...);
 int FUN_0048111c(...);
 int FUN_004bcb54(...);
 int FUN_004bcd90(...);
-int FUN_004bd30c(...);
-int FUN_004bd3ec(...);
+int dispatchIfFound(...);
+int bitsAt60Set(...);
 int rt_memcpy_w(...);
 
 /* stack frame of param_1: 35 slot(s), 140 byte(s) */
@@ -93,7 +93,7 @@ extern int FUN_002a4654(void);
 /* Supplied declaration required: FUN_0031f0a8. */
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: FUN_003df7c4. */
-/* Supplied declaration required: FUN_003dff50. */
+/* Supplied declaration required: playerSyncPair2AOnce. */
 /* Supplied declaration required: FUN_003e45bc. */
 extern int FUN_003e46f4(unsigned int);
 /* Supplied declaration required: FUN_003e48dc. */
@@ -106,9 +106,9 @@ extern int FUN_00481104(unsigned int);
 /* Supplied declaration required: FUN_0048111c. */
 /* Supplied declaration required: FUN_004bcb54. */
 /* Supplied declaration required: FUN_004bcd90. */
-/* Supplied declaration required: FUN_004bd30c. */
-extern unsigned long long FUN_004bd340(int, unsigned int);
-/* Supplied declaration required: FUN_004bd3ec. */
+/* Supplied declaration required: dispatchIfFound. */
+extern unsigned long long bitsAt60Test(int, unsigned int);
+/* Supplied declaration required: bitsAt60Set. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -533,7 +533,7 @@ void FUN_00261a28(int param_1)
         *(unsigned int *)(temp_v0 + 0x4c) = *(unsigned int *)(temp_v1 + 0x4c);
         *(unsigned int *)(temp_v0 + 0x50) = temp_v9;
         FUN_003df7c4(0);
-        FUN_003dff50();
+        playerSyncPair2AOnce();
         temp_v27 = 1;
         break;
       case 1:
@@ -564,24 +564,24 @@ void FUN_00261a28(int param_1)
         do {
           temp_v3 = temp_v1 + temp_v2 * 300;
           temp_v4 = temp_v3 + 0x6c;
-          temp_v16 = FUN_004bd340(temp_v4,2);
+          temp_v16 = bitsAt60Test(temp_v4,2);
           temp_v5 = (unsigned int)((unsigned long long)temp_v16 >> 0x20);
           temp_v8 = (int)temp_v16 != 0;
           if (temp_v8) {
             temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 0xce);
           }
           if (temp_v8 && temp_v5 != 0) {
-            FUN_004bd30c(0);
+            dispatchIfFound(0);
             temp_v3 = FUN_001ab854(0);
             rt_memcpy_w(temp_v3,temp_v4,300);
             *(unsigned char *)(temp_v3 + 0x66) = 0;
             *(unsigned char *)(temp_v3 + 0x67) = 0;
             *(unsigned char *)(temp_v3 + 0x12a) = 0;
             *(unsigned short *)(temp_v3 + 0x60) = 0;
-            FUN_004bd3ec(temp_v3,2);
+            bitsAt60Set(temp_v3,2);
             FUN_004bcd90(temp_v3);
             FUN_004bcb54(temp_v3);
-            FUN_004bd3ec(temp_v3,2);
+            bitsAt60Set(temp_v3,2);
             FUN_0031f0a8(0x20,1);
             if (temp_v7 != 0) {
               FUN_003fd63c(0x551,1);

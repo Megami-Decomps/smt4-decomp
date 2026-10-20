@@ -1,23 +1,21 @@
-#include "romwright_types.h"
+#include "shard/Dspsnd.h"
 
 extern "C" {
 
-extern int FUN_001c6e20(void);
+s32 FUN_001c6e20(void);
 
-
-unsigned char nn_snd_CTR_Dspsnd_ResetChannelNextBuffer(int param_1,unsigned char param_2)
-
+/* Flags `channel` of the current bank to reset its next buffer; returns whether the DSP is available. */
+u8 nn_snd_CTR_Dspsnd_ResetChannelNextBuffer(DspsndState *state, u8 channel)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = FUN_001c6e20();
-  if (temp_v0 != 0) {
-    puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + (unsigned int)param_2 * 4 +
-                       0x10b0);
-    *puVar2 = *puVar2 | 0x10;
-  }
-  return temp_v0 != 0;
+    s32 result;
+    DspChannelCommand *command;
+
+    result = FUN_001c6e20();
+    if (result != 0) {
+        command = state->channels[state->bank & 1][channel];
+        command->flags = command->flags | 0x10;
+    }
+    return result != 0;
 }
 
 } /* extern "C" */

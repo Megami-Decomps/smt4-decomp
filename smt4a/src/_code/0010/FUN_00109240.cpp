@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001077d6(...);
-int FUN_002e4e86(...);
+int wordRefMax(...);
 int FUN_002eac34(int);
 int FUN_002eb108(int, int, int, int);
 int FUN_002eb588(unsigned char [12]);
@@ -71,7 +71,7 @@ extern int FUN_00105696(int);
 extern int FUN_00105f86(int);
 /* Supplied declaration required: FUN_001077d6. */
 extern int FUN_0012094c(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_002e4e86. */
+/* Supplied declaration required: wordRefMax. */
 extern unsigned int *rt_malloc(int);
 extern int FUN_002e760a(unsigned int);
 /* Supplied declaration required: FUN_002eac34. */
@@ -80,17 +80,17 @@ extern unsigned int FUN_002eac54(unsigned int, unsigned int);
 extern int FUN_002eb530(int);
 /* Supplied declaration required: FUN_002eb588. */
 /* Supplied declaration required: FUN_002eb5c0. */
-extern int FUN_002eb5e8(unsigned char *, unsigned int);
+extern int constructObj00559344(unsigned char *, unsigned int);
 extern int FUN_002eb5f4(void);
-extern int *FUN_002eee88(int, unsigned int);
+extern int *arrayElementAddress_002eee88(int, unsigned int);
 extern int FUN_002ef01c(unsigned int);
-extern unsigned int *FUN_002efa50(int, unsigned int);
+extern unsigned int *arrayElementAddress_002efa50(int, unsigned int);
 extern unsigned int FUN_002f1378(void);
 /* Supplied declaration required: FUN_002f13c2. */
-extern unsigned int *FUN_002f14a0(int, unsigned int);
+extern unsigned int *arrayElementAddress_002f14a0(int, unsigned int);
 extern unsigned int *FUN_002f1744(fn_00109240_arg0 *, unsigned int);
-extern unsigned int FUN_002f1774(unsigned int, int *);
-extern int FUN_002f1786(unsigned int, int *);
+extern unsigned int vectorGrowCapacity_002f1774(unsigned int, int *);
+extern int vectorGrowCapacity_002f1786(unsigned int, int *);
 /* Supplied declaration required: FUN_002f1798. */
 /* Supplied declaration required: FUN_002f17e4. */
 extern int FUN_002f182e(int *, unsigned int);
@@ -145,8 +145,8 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar4[0x25] = 0;
   puVar4[0x26] = 0;
   temp_v16[0] = 1;
-  temp_v12 = FUN_002f1774(0,piVar12);
-  piVar5 = (int *)FUN_002e4e86(temp_v16,&temp_v12);
+  temp_v12 = vectorGrowCapacity_002f1774(0,piVar12);
+  piVar5 = (int *)wordRefMax(temp_v16,&temp_v12);
   temp_v3 = *piVar5;
   puVar7 = (unsigned int *)rt_malloc(temp_v3 * 4);
   *piVar12 = (int)puVar7;
@@ -163,8 +163,8 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   puVar4[0x28] = 0;
   puVar4[0x29] = 0;
   temp_v15 = 1;
-  temp_v16[0] = FUN_002f1786(0,piVar12);
-  piVar5 = (int *)FUN_002e4e86(&temp_v15,temp_v16);
+  temp_v16[0] = vectorGrowCapacity_002f1786(0,piVar12);
+  piVar5 = (int *)wordRefMax(&temp_v15,temp_v16);
   temp_v3 = *piVar5;
   puVar7 = (unsigned int *)rt_malloc(temp_v3 * 4);
   *piVar12 = (int)puVar7;
@@ -232,7 +232,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   else {
     temp_v5 = 0;
   }
-  puVar4 = (unsigned int *)FUN_002efa50(temp_v4 - 0x2b0,0);
+  puVar4 = (unsigned int *)arrayElementAddress_002efa50(temp_v4 - 0x2b0,0);
   *puVar4 = temp_v5;
   temp_v3 = FUN_002e760a(0x74);
   if (temp_v3 != 0) {
@@ -244,13 +244,13 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   else {
     temp_v3 = 0;
   }
-  piVar5 = (int *)FUN_002eee88(temp_v4 - 0x2a4,0);
+  piVar5 = (int *)arrayElementAddress_002eee88(temp_v4 - 0x2a4,0);
   *piVar5 = temp_v3;
-  temp_v3 = FUN_002eb5e8(temp_v14,0);
+  temp_v3 = constructObj00559344(temp_v14,0);
   temp_v1 = *(unsigned short *)(temp_v3 + 4);
   *(unsigned short *)(temp_v4 - 0x254) = temp_v1;
   *(unsigned short *)(temp_v4 - 0x24c) = temp_v1;
-  temp_v3 = FUN_002eb5e8(temp_v14,0);
+  temp_v3 = constructObj00559344(temp_v14,0);
   *(unsigned short *)(temp_v4 - 0x240) = *(unsigned short *)(temp_v3 + 4);
   *(unsigned int *)(temp_v4 - 0x248) = temp_v19;
   *(unsigned int *)(temp_v4 - 0x298) = 0;
@@ -285,7 +285,7 @@ int FUN_00109240(fn_00109240_arg0 *param_1,unsigned int param_2,unsigned int par
   *(unsigned char *)(temp_v3 + 0x24) = param_5;
   *(unsigned int *)(*(int *)(temp_v4 - 0x294) + 0x8c) = *(unsigned int *)(temp_v4 - 0x1f0);
   *(char *)(*(int *)(temp_v4 - 0x294) + 0x67) = (char)*(unsigned short *)(temp_v13 + 4);
-  puVar4 = (unsigned int *)FUN_002f14a0(temp_v4 - 0x210,0);
+  puVar4 = (unsigned int *)arrayElementAddress_002f14a0(temp_v4 - 0x210,0);
   *puVar4 = 0;
   **(unsigned char **)(temp_v4 - 0x204) = 1;
   temp_v3 = FUN_002f1950(&DAT_00630324);

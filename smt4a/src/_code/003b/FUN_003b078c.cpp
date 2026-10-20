@@ -22,7 +22,7 @@ extern unsigned char LAB_00360390; /* 0x360390 */
 extern unsigned char LAB_0038e798; /* 0x38e798 */
 
 /* Supplied declaration required: qsort. */
-extern int *FUN_0016a0f0(unsigned int);
+extern int *dataTableValueOrZero(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
@@ -65,7 +65,7 @@ void FUN_003b078c(void)
   temp_v1 = dataTableGetEntries();
   temp_v0 = dataTableGetCount(temp_v0);
   qsort(temp_v1,temp_v0,4,&LAB_0034f3a4);
-  piVar3 = (int *)FUN_0016a0f0(0x1f);
+  piVar3 = (int *)dataTableValueOrZero(0x1f);
   FUN_00312830(piVar3 + 1,(*piVar3 - 4U) >> 3,8,&LAB_0029092c);
   return;
 }

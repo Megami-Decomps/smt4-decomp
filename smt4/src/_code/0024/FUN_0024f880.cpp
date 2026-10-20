@@ -1,25 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Vec4 {
+    /* 0x0 */ u32 x;
+    /* 0x4 */ u32 y;
+    /* 0x8 */ u32 z;
+    /* 0xC */ u32 w;
+} Vec4;
 
-void FUN_0024f880(int param_1,unsigned int *param_2)
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u8 *block;
+} Obj;
 
+/* Copies the 4-word vector at +0x0 of the object's block into *out. */
+void FUN_0024f880(Obj *obj, Vec4 *out)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  puVar1 = *(unsigned int **)(param_1 + 0x20);
-  temp_v0 = puVar1[1];
-  temp_v1 = puVar1[2];
-  temp_v2 = puVar1[3];
-  *param_2 = *puVar1;
-  param_2[1] = temp_v0;
-  param_2[2] = temp_v1;
-  param_2[3] = temp_v2;
-  return;
+    Vec4 *src = (Vec4 *)(obj->block + 0x0);
+    u32 y = src->y;
+    u32 z = src->z;
+    u32 w = src->w;
+
+    out->x = src->x;
+    out->y = y;
+    out->z = z;
+    out->w = w;
 }
 
 } /* extern "C" */

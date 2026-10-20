@@ -1,23 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ede60` (_code @ 0x2ede60, 0x12 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Constructs the object: sets its vtable and runs the base constructor; returns it. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e9538(unsigned int *);
+struct ObjFUN_002ede60 {
+    /* 0x00 */ const void *vtable;
+};
 
-extern unsigned char DAT_005585d0; /* 0x5585d0 */
+extern const u8 DAT_005585d0[];
+void FUN_002e9538(ObjFUN_002ede60 *obj);
 
-/* Supplied declaration required: FUN_002e9538. */
-
-
-unsigned int * FUN_002ede60(unsigned int *param_1)
-
+ObjFUN_002ede60 *FUN_002ede60(ObjFUN_002ede60 *obj)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_005585d0;
-  FUN_002e9538(param_1);
-  return param_1;
+    obj->vtable = DAT_005585d0;
+    FUN_002e9538(obj);
+    return obj;
 }
 
-} /* extern "C" */
+}

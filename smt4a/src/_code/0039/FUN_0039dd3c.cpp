@@ -1,22 +1,15 @@
-#include "romwright_types.h"
+#include "shard/Shard0039.h"
 
 extern "C" {
 
-int scrSetResult(int);
+extern BtlStateB *btlGetMainState(void);
+extern void scrSetResult(s32 value);
 
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0039dd3c(void)
-
+/* Script command: result is the battle state's halfword at +0x2356. */
+u32 FUN_0039dd3c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = btlGetMainState();
-  scrSetResult((int)*(short *)(temp_v0 + 0x2356));
-  return 1;
+    scrSetResult(btlGetMainState()->unk2356);
+    return 1;
 }
 
 } /* extern "C" */

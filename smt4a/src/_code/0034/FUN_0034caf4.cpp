@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Shard0034.h"
 
 extern "C" {
 
-
-unsigned int FUN_0034caf4(int *param_1)
-
+u32 FUN_0034caf4(Holder48Ref *ref)
 {
-  return *(unsigned int *)(*param_1 + 0x48);
+    return ref->holder->unk48;
 }
 
 } /* extern "C" */

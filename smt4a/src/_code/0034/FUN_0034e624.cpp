@@ -1,21 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard0034.h"
 
 extern "C" {
 
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
+extern u32 scrGetArg(s32 index);
+extern BtlStateB *btlGetMainState(void);
 
-
-unsigned int FUN_0034e624(void)
-
+/* Script command: stores argument 0 in the battle state at +0x4CE8. */
+u32 FUN_0034e624(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = scrGetArg(0);
-  *(unsigned int *)(temp_v0 + 0x4ce8) = temp_v1;
-  return 1;
+    BtlStateB *state = btlGetMainState();
+
+    state->unk4CE8 = scrGetArg(0);
+    return 1;
 }
 
 } /* extern "C" */

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00152bec(u32 arg);
+void FUN_00152bec(AsdMdlObject *model);
 void FUN_00263588(u32 arg);
 void FUN_00275be8(s32 arg);
 void FUN_002917b8(void);
@@ -10,7 +10,7 @@ void FUN_0029c2cc(u32 arg, s32 flag);
 void FUN_002a46d8(s32 arg);
 void FUN_002a4d14(void);
 void FUN_002a72c0(s32 arg);
-void asdMdlManagerDestroy(u32 arg);
+void asdMdlManagerDestroy(AsdMdlObject *model);
 void asdMemFree(void *block);
 void FUN_00310098(void);
 
@@ -26,12 +26,12 @@ void titleMainDestroy(void)
     title->freeOnEnd = 1;
     FUN_002a46d8(0x3A);
     FUN_00310098();
-    FUN_00152bec(title->unk8C);
-    asdMdlManagerDestroy(title->unk8C);
-    title->unk8C = 0;
-    FUN_00152bec(title->unk90);
-    asdMdlManagerDestroy(title->unk90);
-    title->unk90 = 0;
+    FUN_00152bec(title->modelA);
+    asdMdlManagerDestroy(title->modelA);
+    title->modelA = NULL;
+    FUN_00152bec(title->modelB);
+    asdMdlManagerDestroy(title->modelB);
+    title->modelB = NULL;
     if (title->unk85 != 0) {
         FUN_002a72c0(0);
         FUN_0029c2cc(title->unk88, 0);

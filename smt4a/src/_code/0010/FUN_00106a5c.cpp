@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00100824(int *);
+int refIsNullOrZero(int *);
 int FUN_001028b8(unsigned char [64], int, unsigned char *, unsigned int);
 int FUN_00103750(int *);
 int FUN_001585e4(...);
@@ -58,11 +58,11 @@ typedef char romwright_storage_s__V_V_V_0058954c_13_1_s1_width_check[(sizeof(((u
 extern union romwright_storage_s__V_V_V_0058954c_13_1 s__V_V_V_0058954c; /* 0x58954c */
 extern int DAT_005949dc; /* 0x5949dc */
 
-/* Supplied declaration required: FUN_00100824. */
+/* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_001028b8. */
 /* Supplied declaration required: FUN_00103750. */
-extern int FUN_00132112(unsigned int **, unsigned int **);
+extern int wordRefsDiffer_00132112(unsigned int **, unsigned int **);
 /* Supplied declaration required: FUN_001585e4. */
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: FUN_002e3c44. */
@@ -76,7 +76,7 @@ extern int FUN_00132112(unsigned int **, unsigned int **);
 extern int FUN_002eda5a(unsigned char *);
 /* Supplied declaration required: FUN_002eda74. */
 /* Supplied declaration required: FUN_002edb54. */
-extern int FUN_00429f6c(char *, unsigned int *, int, int);
+extern int fileHolderTryRead(char *, unsigned int *, int, int);
 extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
 
 
@@ -135,7 +135,7 @@ unsigned int FUN_00106a5c(int param_1,int param_2,int param_3,unsigned int param
       FUN_002ed8a0(&temp_v5,DAT_005949dc + 0x128,temp_v0);
       FUN_002e9318(&temp_v17);
       temp_v12 = *(unsigned int **)(DAT_005949dc + 0x138);
-      temp_v1 = FUN_00132112(&temp_v5,&temp_v12);
+      temp_v1 = wordRefsDiffer_00132112(&temp_v5,&temp_v12);
       if (temp_v1 == 0) goto LAB_00106ab8;
       FUN_002eda74(temp_v4 * 0xc + temp_v26,temp_v5 + 6);
     }
@@ -159,7 +159,7 @@ LAB_00106ab8:
       puVar8 = temp_v24;
       puVar11 = temp_v19;
       temp_v18 = 0;
-      FUN_00100824(&temp_v17);
+      refIsNullOrZero(&temp_v17);
       while ((temp_v1 = FUN_00100836(puVar8,0x105,(unsigned int *)&temp_v17), temp_v1 != 0 &&
              (puVar4 = puVar11, FUN_002e3c44(puVar11,puVar8,temp_v1,&temp_v17),
              puVar4 != (unsigned short *)0x0))) {
@@ -193,7 +193,7 @@ LAB_00106ab8:
       }
       piVar9 = (int *)(temp_v4 * 0xc + temp_v26);
       FUN_002edb54(piVar9,temp_v15,0);
-      temp_v1 = FUN_00429f6c(temp_v6,(unsigned int *)&temp_v13,*piVar9,piVar9[1] - *piVar9);
+      temp_v1 = fileHolderTryRead(temp_v6,(unsigned int *)&temp_v13,*piVar9,piVar9[1] - *piVar9);
       FUN_00103750(&temp_v7);
       if (temp_v1 < 0) {
         pcVar7 = "Could not read shared content. 32bit nn::Result value is %x";

@@ -1,30 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ebdd8(unsigned int, int);
+int FUN_002ebdd8(u32 value, int arg);
+extern int jyoucyuGetTableEntry(u32 index);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int jyoucyuGetTableEntry(unsigned int);
-/* Supplied declaration required: FUN_002ebdd8. */
-
-
-void FUN_002877d4(unsigned int param_1)
-
+void FUN_002877d4(u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    FUN_002ebdd8(param_1,0);
-    return;
-  }
-  return;
+    if (jyoucyuGetTableEntry(1) == 0) {
+        FUN_002ebdd8(value, 0);
+    }
 }
 
 } /* extern "C" */

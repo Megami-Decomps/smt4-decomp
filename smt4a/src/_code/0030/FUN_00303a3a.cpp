@@ -1,18 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00133cbc(void);
+void FUN_00133cbc(void);
 
-/* Supplied declaration required: FUN_00133cbc. */
-
-
-unsigned int FUN_00303a3a(unsigned int param_1)
-
+/* Runs FUN_00133cbc and returns `object`. */
+void *FUN_00303a3a(void *object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00133cbc();
-  return param_1;
+    FUN_00133cbc();
+    return object;
 }
 
 } /* extern "C" */

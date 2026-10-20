@@ -41,7 +41,7 @@ extern unsigned int FUN_003ec620(int, unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003fce8c. */
-extern int FUN_003fcf5c(unsigned int);
+extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: FUN_004cb90c. */
@@ -84,7 +84,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
       if (temp_v5 == 1) {
         temp_v4 = FUN_003ec620(param_1,*(unsigned int *)(param_1 + 0x2020));
         if ((*(unsigned int *)(param_1 + 0x201c) & 1) == 0) {
-          temp_v6 = FUN_003fcf5c(temp_v4);
+          temp_v6 = nkdwLoaderParse(temp_v4);
           temp_v10 = '\0';
           if (temp_v6 == 0) {
             return 0;

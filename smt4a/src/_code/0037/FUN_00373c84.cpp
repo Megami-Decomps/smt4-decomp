@@ -24,8 +24,8 @@ ActiveObject *btlGetMainState(void);
 u32 scrGetArg(u32 index);
 s32 FUN_002deb84(void);
 void FUN_004d88fc(StateMachine *machine, ActiveObject *object);
-void FUN_004d8d14(StateMachine *machine, ActiveObject *object);
-void FUN_004d8f04(StateMachine *machine);
+void state4DStop(StateMachine *machine, ActiveObject *object);
+void state4DStart(StateMachine *machine);
 
 u8 FUN_00373c84(void)
 {
@@ -34,11 +34,11 @@ u8 FUN_00373c84(void)
     u32 second = scrGetArg(1);
 
     if (FUN_002deb84() == 0) {
-        FUN_004d8d14(g_btlStageModel, object);
+        state4DStop(g_btlStageModel, object);
         object->ids.first = first;
         object->ids.second = second;
         FUN_004d88fc(g_btlStageModel, object);
-        FUN_004d8f04(g_btlStageModel);
+        state4DStart(g_btlStageModel);
         return 0;
     }
     return g_btlStageModel->state == 4;

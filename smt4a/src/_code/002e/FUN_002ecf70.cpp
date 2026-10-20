@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_00308566. */
-extern int FUN_003112cc(int *, unsigned int *);
+extern int iterEqual(int *, unsigned int *);
 
 
 void FUN_002ecf70(int *param_1,int param_2,unsigned int param_3)
@@ -42,7 +42,7 @@ void FUN_002ecf70(int *param_1,int param_2,unsigned int param_3)
   }
   temp_v4[0] = *(unsigned int *)(param_2 + 0x10);
   temp_v3 = temp_v2;
-  temp_v0 = FUN_003112cc(&temp_v3,temp_v4);
+  temp_v0 = iterEqual(&temp_v3,temp_v4);
   if ((temp_v0 != 0) || (temp_v0 = FUN_00308566(param_2 + 0x19,param_3,temp_v3 + 0x10), temp_v0 != 0)) {
     temp_v3 = *(int *)(param_2 + 0x10);
   }

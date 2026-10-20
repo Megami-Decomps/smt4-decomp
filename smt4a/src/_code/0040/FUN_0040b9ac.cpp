@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001008a2(...);
+int libc_strcat(...);
 int FUN_003e573c(unsigned int, int, char [4], unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -17,7 +17,7 @@ extern unsigned char LAB_0040ba24; /* 0x40ba24 */
 extern unsigned char LAB_0040ba30; /* 0x40ba30 */
 extern char s__V_V_V_______________00588628[1915]; /* 0x588628 */
 
-/* Supplied declaration required: FUN_001008a2. */
+/* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_003e573c. */
 
 
@@ -64,9 +64,9 @@ void FUN_0040b9ac(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   uStack_1c = 0;
   uStack_18 = 0;
   uStack_14 = 0;
-  FUN_001008a2(temp_v0,&LAB_0040ba24);
-  FUN_001008a2(temp_v0,*(unsigned int *)(s__V_V_V_______________00588628 + param_2 * 4));
-  FUN_001008a2(temp_v0,&LAB_0040ba30);
+  libc_strcat(temp_v0,&LAB_0040ba24);
+  libc_strcat(temp_v0,*(unsigned int *)(s__V_V_V_______________00588628 + param_2 * 4));
+  libc_strcat(temp_v0,&LAB_0040ba30);
   FUN_003e573c(param_1,param_2,temp_v0,param_4);
   return;
 }

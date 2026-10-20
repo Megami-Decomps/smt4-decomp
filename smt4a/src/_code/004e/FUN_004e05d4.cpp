@@ -63,7 +63,7 @@ extern unsigned int DAT_005712c4; /* 0x5712c4 */
 extern unsigned int DAT_005712f0; /* 0x5712f0 */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 extern int FUN_002619e0(void);
 /* Supplied declaration required: FUN_002a49e4. */
@@ -76,7 +76,7 @@ extern int FUN_003eda88(int);
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f1b3c. */
-extern int FUN_0040de1c(unsigned int);
+extern int chainCountIdUnflagged(unsigned int);
 /* Supplied declaration required: FUN_0047f4cc. */
 /* Supplied declaration required: FUN_004aa878. */
 extern int FUN_004c3a98(int, unsigned int);
@@ -115,7 +115,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
   int temp_v11;
   unsigned int *temp_v12;
   
-  temp_v2 = FUN_0040de1c(DAT_005712f0);
+  temp_v2 = chainCountIdUnflagged(DAT_005712f0);
   if (0 < temp_v2) {
     return 0;
   }
@@ -400,7 +400,7 @@ LAB_004e0ac0:
               temp_v2 = (int)(*(int *)(param_2[10] + 0xf8) +
                            ((unsigned int)(*(int *)(param_2[10] + 0xf8) >> 0x1f) >> 0x1d)) >> 3;
               if (temp_v2 >= 101) {
-                temp_v2 = FUN_001633a0(0xf);
+                temp_v2 = lcgRandomRange(0xf);
                 temp_v2 = temp_v2 + 100;
               }
               piVar8 = param_1;

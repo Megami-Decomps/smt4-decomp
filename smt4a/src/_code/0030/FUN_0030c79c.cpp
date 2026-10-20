@@ -1,17 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_0030ffe0(unsigned int, unsigned int);
+u32 FUN_0030ffe0(u32 a, u32 b);
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 value;
+} Holder;
 
-unsigned int FUN_0030c79c(int param_1,int param_2)
-
+/* Returns the negation of FUN_0030ffe0 on the words at 4 of both objects. */
+u32 FUN_0030c79c(Holder *a, Holder *b)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_0030ffe0(*(unsigned int *)(param_1 + 4),*(unsigned int *)(param_2 + 4));
-  return temp_v0 ^ 1;
+    u32 result;
+
+    result = FUN_0030ffe0(a->value, b->value);
+    return result ^ 1;
 }
 
 } /* extern "C" */

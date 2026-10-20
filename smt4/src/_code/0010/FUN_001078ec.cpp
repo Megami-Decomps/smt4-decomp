@@ -1,31 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002c0894(unsigned int);
-int asdMemFree(int);
+typedef struct JobWork {
+    /* 0x0000 */ u8 unk0000[4];
+    /* 0x0004 */ u32 unk0004;
+    /* 0x0008 */ u32 unk0008;
+    /* 0x000C */ u8 unk000C[0xF14];
+    /* 0x0F20 */ u32 unk0F20;
+    /* 0x0F24 */ u32 unk0F24;
+} JobWork;
 
-extern unsigned int DAT_0043e278; /* 0x43e278 */
+JobWork *jobGetWork(void);
+int FUN_002c0894(u32 resource);
+int asdMemFree(void *ptr);
 
-/* Supplied declaration required: FUN_002c0894. */
-extern int jobGetWork(void);
-/* Supplied declaration required: asdMemFree. */
+extern u32 DAT_0043e278;
 
-
+/* Releases the four resources held by the job's work area, then the work area itself. */
 void FUN_001078ec(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  FUN_002c0894(*(unsigned int *)(temp_v0 + 4));
-  FUN_002c0894(*(unsigned int *)(temp_v0 + 8));
-  FUN_002c0894(*(unsigned int *)(temp_v0 + 0xf20));
-  FUN_002c0894(*(unsigned int *)(temp_v0 + 0xf24));
-  asdMemFree(temp_v0);
-  DAT_0043e278 = 0;
-  return;
+    JobWork *work = jobGetWork();
+
+    FUN_002c0894(work->unk0004);
+    FUN_002c0894(work->unk0008);
+    FUN_002c0894(work->unk0F20);
+    FUN_002c0894(work->unk0F24);
+    asdMemFree(work);
+    DAT_0043e278 = 0;
 }
 
 } /* extern "C" */

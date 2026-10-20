@@ -1,23 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035f9cc` (_code @ 0x35f9cc, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the flag word address is computed with two adds from the state in retail, and its load/or/store are scheduled differently */
+/* Script command: sets the bit the script argument names of the battle state's flag word. Returns 1. */
+#include "common.h"
 
 extern "C" {
 
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(void);
+struct BattleMain0035f9cc {
+    /* 0x0000 */ u8 unk0000[0x4cc8];
+    /* 0x4cc8 */ u32 flags;
+};
 
+u32 scrGetArg(u32 index);
+BattleMain0035f9cc *btlGetMainState(void);
 
-unsigned int FUN_0035f9cc(void)
-
+u32 FUN_0035f9cc(u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlGetMainState();
-  *(unsigned int *)(temp_v1 + 0x4cc8) = *(unsigned int *)(temp_v1 + 0x4cc8) | (1 << (temp_v0 & 0xff));
-  return 1;
+    u32 bit = scrGetArg(index);
+    u32 *flags = &btlGetMainState()->flags;
+
+    *flags |= 1 << bit;
+    return 1;
 }
 
-} /* extern "C" */
+}

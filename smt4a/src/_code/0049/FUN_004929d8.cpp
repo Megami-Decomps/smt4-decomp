@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0038594c(void);
+int dataTable2ECount(void);
 
 #ifndef ROMWRIGHT_STORAGE_s__Vd_____00587f2c_18_2_DEFINED
 #define ROMWRIGHT_STORAGE_s__Vd_____00587f2c_18_2_DEFINED
@@ -24,8 +24,8 @@ typedef char romwright_storage_s__Vd_____00587f2c_18_2_s2_width_check[(sizeof(((
 #endif
 extern union romwright_storage_s__Vd_____00587f2c_18_2 s__Vd_____00587f2c; /* 0x587f2c */
 
-extern char *FUN_00327638(int);
-/* Supplied declaration required: FUN_0038594c. */
+extern char *dataTable2EGetEntry(int);
+/* Supplied declaration required: dataTable2ECount. */
 
 
 char * FUN_004929d8(int param_1,int param_2)
@@ -49,10 +49,10 @@ char * FUN_004929d8(int param_1,int param_2)
   }
   else {
     temp_v0 = 0;
-    FUN_0038594c();
+    dataTable2ECount();
     if (0 < param_1) {
       do {
-        pcVar2 = (char *)FUN_00327638(temp_v0);
+        pcVar2 = (char *)dataTable2EGetEntry(temp_v0);
         if (*(short *)(pcVar2 + 0x20) == -1) {
           return (char *)(*(unsigned int *)&s__Vd_____00587f2c.u1[0]);
         }
@@ -60,7 +60,7 @@ char * FUN_004929d8(int param_1,int param_2)
           return pcVar2;
         }
         temp_v0 = temp_v0 + 1;
-        FUN_0038594c();
+        dataTable2ECount();
       } while (temp_v0 < (int)pcVar2);
     }
   }

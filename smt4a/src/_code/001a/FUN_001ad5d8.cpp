@@ -1,18 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_001ad5d8(int param_1)
-
+/* Returns the address 0x14 bytes into the object, or 0 when there is none. */
+u8 *FUN_001ad5d8(u8 *object)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 != 0) {
-    temp_v0 = param_1 + 0x14;
-  }
-  return temp_v0;
+    u8 *member;
+
+    member = NULL;
+    if (object != NULL) {
+        member = object + 0x14;
+    }
+    return member;
 }
 
 } /* extern "C" */

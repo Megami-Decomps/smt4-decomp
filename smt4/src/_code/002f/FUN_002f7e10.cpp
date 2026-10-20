@@ -28,7 +28,7 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int btlUnitGet(unsigned int);
 extern int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_0029ebac(unsigned int, unsigned int);
+extern int flagWordTestBit(unsigned int, unsigned int);
 extern unsigned int FUN_002a8740(int);
 
 
@@ -63,7 +63,7 @@ unsigned int FUN_002f7e10(void)
       return 1;
     }
     FUN_0026e61c(temp_v5,temp_v1 & 0xffff);
-    if (((temp_v1 & 0xffff) != 4) && (temp_v0 = FUN_0029ebac(temp_v5,4), temp_v0 != 0)) {
+    if (((temp_v1 & 0xffff) != 4) && (temp_v0 = flagWordTestBit(temp_v5,4), temp_v0 != 0)) {
       FUN_00262f68(temp_v5,0x10);
     }
   }

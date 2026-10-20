@@ -1,14 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Sys471b48.h"
 
 extern "C" {
 
-extern unsigned char DAT_00471b48; /* 0x471b48 */
-
-
-unsigned int FUN_002c3984(void)
-
+u32 FUN_002c3984(void)
 {
-  return (*(unsigned int *)((unsigned char *)&DAT_00471b48 + 0x4));
+    return DAT_00471b48.unk04;
 }
 
 } /* extern "C" */

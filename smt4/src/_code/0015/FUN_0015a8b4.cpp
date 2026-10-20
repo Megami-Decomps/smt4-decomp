@@ -34,7 +34,7 @@ extern float DAT_004efd40; /* 0x4efd40 */
 extern float DAT_004efd44; /* 0x4efd44 */
 
 /* Supplied declaration required: FUN_002b7064. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nw_gfx_RenderContext_TransformToViewCoordinate. */
 /* Supplied declaration required: nw_gfx_internal_NWCopyVec4Reverse. */
 
@@ -141,7 +141,7 @@ void FUN_0015a8b4(int param_1,int param_2,int param_3)
       g_commandBufferCursor = g_commandBufferCursor + 6;
       return;
     }
-    if (((DAT_0047662c & 1) == 0) && (temp_v1 = FUN_002bfefc(&DAT_0047662c), temp_v1 != 0)) {
+    if (((DAT_0047662c & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_0047662c), temp_v1 != 0)) {
       DAT_004efd38 = temp_v4;
       DAT_004efd3c = temp_v4;
       DAT_004efd40 = temp_v4;

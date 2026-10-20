@@ -1,16 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d1a50` (_code @ 0x1d1a50, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+struct Obj001d1a50;
 
-void FUN_001d1a50(int param_1,short param_2)
+typedef struct Wrapper001d1a50 {
+    /* 0x00 */ u8 unk00[0x68];
+    /* 0x68 */ Obj001d1a50 *obj;
+} Wrapper001d1a50;
 
+void FUN_001d1a58(Obj001d1a50 *obj, u32 set);
+
+/* Passes the wrapper's obj on to FUN_001d1a58, the function that follows it. */
+void FUN_001d1a50(Wrapper001d1a50 *wrapper, u32 set)
 {
-  *(unsigned short *)(*(int *)(param_1 + 0x68) + 0x1e) =
-       (*(unsigned short *)(*(int *)(param_1 + 0x68) + 0x1e) & 0xffbf) | (param_2 << 6);
-  return;
+    FUN_001d1a58(wrapper->obj, set);
 }
 
 } /* extern "C" */

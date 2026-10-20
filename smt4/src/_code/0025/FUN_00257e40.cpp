@@ -1,23 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00253d60(unsigned short [20], unsigned int);
+int FUN_00253d60(u16 *dst, u32 src);
+extern u32 FUN_002b63ac(void);
 
-/* Supplied declaration required: FUN_00253d60. */
-extern unsigned int FUN_002b63ac(void);
-
-
-unsigned short FUN_00257e40(int param_1)
-
+u16 FUN_00257e40(int index)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned short temp_v1 [20];
-  
-  temp_v0 = FUN_002b63ac();
-  FUN_00253d60(temp_v1,temp_v0);
-  return temp_v1[param_1] >> 10;
+    u32 source = FUN_002b63ac();
+    u16 values[20];
+
+    FUN_00253d60(values, source);
+    return values[index] >> 10;
 }
 
 } /* extern "C" */

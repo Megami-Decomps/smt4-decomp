@@ -33,7 +33,7 @@ extern float DAT_0064c0c0; /* 0x64c0c0 */
 
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 
 
 float * FUN_00457160(float *param_1,int param_2)
@@ -57,7 +57,7 @@ float * FUN_00457160(float *param_1,int param_2)
   if (param_2 != 0) {
     if (param_2 != 1) {
       if (param_2 != 2) {
-        if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = FUN_002eba64(&DAT_005c4c30), temp_v0 != 0)) {
+        if (((DAT_005c4c30 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c30), temp_v0 != 0)) {
           DAT_0064c084 = temp_v2;
           DAT_0064c088 = temp_v1;
           DAT_0064c08c = temp_v1;

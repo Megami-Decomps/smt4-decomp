@@ -31,7 +31,7 @@ extern unsigned int DAT_004efdd4; /* 0x4efdd4 */
 extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: memAlloc. */
 extern int FUN_002d58b4(unsigned int, unsigned int);
 
@@ -66,7 +66,7 @@ int * FUN_001f6998(unsigned int param_1,unsigned int param_2,int param_3)
   }
   piVar1 = (int *)0x10000;
   memAlloc(0x10000,0x100,0,temp_v2 * param_1 + 200,0x10,1);
-  if (((DAT_00476638 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476638), temp_v0 != 0)) {
+  if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
     DAT_004efd9c = 0x3f800000;
     DAT_004efda0 = 0;
     DAT_004efda4 = 0;

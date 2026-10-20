@@ -8,8 +8,8 @@ int FUN_002e9e60(...);
 
 /* Supplied declaration required: FUN_002e9e60. */
 extern int FUN_002eeb24(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_002eeb88(unsigned int);
-extern unsigned int *FUN_002eeb90(int *, unsigned int);
+extern unsigned int vectorCount4_002eeb88(unsigned int);
+extern unsigned int *arrayElementAddress_002eeb90(int *, unsigned int);
 
 
 unsigned int FUN_00107058(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -24,7 +24,7 @@ unsigned int FUN_00107058(int param_1,unsigned int param_2,unsigned int param_3,
   unsigned int temp_v4;
   
   temp_v4 = param_4;
-  temp_v0 = FUN_002eeb88(*(unsigned int *)(param_1 + 0x44));
+  temp_v0 = vectorCount4_002eeb88(*(unsigned int *)(param_1 + 0x44));
   if (param_4 < temp_v0) {
     if (*(int *)(**(int **)(param_1 + 0x44) + param_4 * 4) == 0) {
       temp_v3 = 0xe0000008;
@@ -33,7 +33,7 @@ unsigned int FUN_00107058(int param_1,unsigned int param_2,unsigned int param_3,
                    ,temp_v2,temp_v3,0,temp_v4);
       return 0;
     }
-    puVar2 = (unsigned int *)FUN_002eeb90(*(int **)(param_1 + 0x44),param_4);
+    puVar2 = (unsigned int *)arrayElementAddress_002eeb90(*(int **)(param_1 + 0x44),param_4);
     temp_v1 = FUN_002eeb24(*puVar2,param_2,param_3);
     if (temp_v1 != 0) {
       return 1;

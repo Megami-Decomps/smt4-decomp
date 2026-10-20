@@ -1,24 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundGroupInfo(unsigned int);
+u32 *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundGroupInfo(u32 body);
 
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u32 infoBlock;
+} Owner;
 
-unsigned char FUN_001a8e90(int param_1,unsigned int param_2,unsigned int *param_3)
-
+/* Copies the sound group info into `out`: its first two words and the address its fourth word points to (relative to the info); returns whether the info exists. */
+u8 FUN_001a8e90(Owner *owner, u32 unused, u32 *out)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)
-           nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundGroupInfo
-                     (*(unsigned int *)(param_1 + 0x3c));
-  if (puVar1 != (unsigned int *)0x0) {
-    *param_3 = *puVar1;
-    param_3[1] = puVar1[1];
-    param_3[2] = (int)puVar1 + puVar1[3];
-  }
-  return puVar1 != (unsigned int *)0x0;
+    u32 *info;
+
+    info = nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundGroupInfo(owner->infoBlock);
+    if (info != NULL) {
+        out[0] = info[0];
+        out[1] = info[1];
+        out[2] = (s32)info + info[3];
+    }
+    return info != NULL;
 }
 
 } /* extern "C" */

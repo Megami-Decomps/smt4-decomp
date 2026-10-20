@@ -12,9 +12,9 @@ int scrScriptProcessDestroy(void);
 int FUN_00237210(unsigned int);
 int asdTMTexTableFreeEntry(int);
 int FUN_0047314c(unsigned int *);
-int FUN_0047b1e4(unsigned int *);
-int FUN_004d06e4(unsigned int *);
-int FUN_004d097c(unsigned int *);
+int jobFlagsWorkStop(unsigned int *);
+int releaseEntriesA(unsigned int *);
+int releaseEntriesB(unsigned int *);
 
 typedef int romwright_code(...);
 extern int g_aocMain; /* 0x570260 */
@@ -29,9 +29,9 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00237210. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_0047314c. */
-/* Supplied declaration required: FUN_0047b1e4. */
-/* Supplied declaration required: FUN_004d06e4. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: jobFlagsWorkStop. */
+/* Supplied declaration required: releaseEntriesA. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_00478778(unsigned int *param_1)
@@ -46,10 +46,10 @@ void FUN_00478778(unsigned int *param_1)
   *(unsigned char *)(temp_v0 + 0xb81) = 1;
   *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
   *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
-  FUN_004d097c(param_1 + 0xba);
-  FUN_004d06e4(param_1 + 0xad);
+  releaseEntriesB(param_1 + 0xba);
+  releaseEntriesA(param_1 + 0xad);
   FUN_0047314c(param_1 + 0x46c);
-  FUN_0047b1e4(param_1);
+  jobFlagsWorkStop(param_1);
   temp_v0 = jobIsValid(param_1[0x5e8]);
   if (temp_v0 != 0) {
     if (param_1[0x5eb] != 0xffffffff) {

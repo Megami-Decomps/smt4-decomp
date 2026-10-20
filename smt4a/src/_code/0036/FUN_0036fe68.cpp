@@ -21,13 +21,13 @@ int FUN_002c2610(void);
 int FUN_002c3398(int);
 int FUN_002efc0c(int);
 int FUN_0031416c(int, int, int, int, int, int, int, int, int, int, int, int);
-int FUN_0033099c(void);
+int objectE0ResetFlags1040(void);
 int FUN_0033a988(void);
-int FUN_00357a90(void);
+int sub68OwnerCall3(void);
 int FUN_003794bc(unsigned int);
 int FUN_00379be8(void);
 int FUN_0037a078(void);
-int FUN_003e5b9c(unsigned int);
+int linkHolderClearFlag(unsigned int);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -71,14 +71,14 @@ extern int FUN_00162858(void);
 extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: FUN_002efc0c. */
 /* Supplied declaration required: FUN_0031416c. */
-/* Supplied declaration required: FUN_0033099c. */
+/* Supplied declaration required: objectE0ResetFlags1040. */
 /* Supplied declaration required: FUN_0033a988. */
-/* Supplied declaration required: FUN_00357a90. */
+/* Supplied declaration required: sub68OwnerCall3. */
 /* Supplied declaration required: FUN_003794bc. */
 /* Supplied declaration required: FUN_00379be8. */
 /* Supplied declaration required: FUN_0037a078. */
 extern int FUN_003b582c(void);
-/* Supplied declaration required: FUN_003e5b9c. */
+/* Supplied declaration required: linkHolderClearFlag. */
 
 
 unsigned int FUN_0036fe68(void)
@@ -130,7 +130,7 @@ unsigned int FUN_0036fe68(void)
     if (DAT_005806b8 == 10) {
       DAT_005f185c = 1;
       FUN_002c2610();
-      FUN_0033099c();
+      objectE0ResetFlags1040();
       FUN_002c2160(1);
       FUN_00379be8();
     }
@@ -170,7 +170,7 @@ unsigned int FUN_0036fe68(void)
       DAT_005f185c = 0;
       FUN_002c23cc(1);
       DAT_005f161f = 0;
-      FUN_00357a90();
+      sub68OwnerCall3();
       FUN_002b9520();
       FUN_003794bc(DAT_005f1600);
       FUN_00297c3c();
@@ -179,7 +179,7 @@ unsigned int FUN_0036fe68(void)
       FUN_00234b30();
       *(unsigned char *)(g_mapDepartWork + 10) = 1;
       FUN_002235f4();
-      FUN_003e5b9c(*(unsigned int *)(g_lmapScene + 0x1a8));
+      linkHolderClearFlag(*(unsigned int *)(g_lmapScene + 0x1a8));
       FUN_00296530();
       FUN_0023a52c();
       DAT_005806b5 = 1;

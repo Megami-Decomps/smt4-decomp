@@ -17,13 +17,13 @@ int FUN_003d4c68(int);
 int FUN_00426fe4(unsigned int *, unsigned int *, unsigned int *);
 int FUN_004275c8(unsigned int *);
 int FUN_00473910(...);
-int FUN_00473d40(...);
+int countOwnerIsValidIndex(...);
 int FUN_00477d10(...);
 int FUN_004cfe4c(...);
-int FUN_004d0310(unsigned int *);
+int sub10OwnerStart(unsigned int *);
 int FUN_004d032c(unsigned int *, int);
-int FUN_004d0440(void);
-int FUN_004d0720(unsigned int *);
+int sendEvent100020D(void);
+int selectOwnerReset(unsigned int *);
 int FUN_004d0af0(unsigned int *, unsigned int *);
 
 typedef int romwright_code(...);
@@ -66,16 +66,16 @@ extern unsigned int FUN_00357bc8(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00426fe4. */
 /* Supplied declaration required: FUN_004275c8. */
 /* Supplied declaration required: FUN_00473910. */
-/* Supplied declaration required: FUN_00473d40. */
+/* Supplied declaration required: countOwnerIsValidIndex. */
 /* Supplied declaration required: FUN_00477d10. */
 extern int FUN_0047d7f0(int);
 /* Supplied declaration required: FUN_004cfe4c. */
 extern int FUN_004d0058(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_004d0310. */
+/* Supplied declaration required: sub10OwnerStart. */
 /* Supplied declaration required: FUN_004d032c. */
-/* Supplied declaration required: FUN_004d0440. */
-extern unsigned int FUN_004d066c(unsigned int *);
-/* Supplied declaration required: FUN_004d0720. */
+/* Supplied declaration required: sendEvent100020D. */
+extern unsigned int selectOwnerGetSelected(unsigned int *);
+/* Supplied declaration required: selectOwnerReset. */
 /* Supplied declaration required: FUN_004d0af0. */
 
 
@@ -123,7 +123,7 @@ void FUN_00479358(unsigned int *param_1)
       param_1[1099] = 0;
       temp_v2 = FUN_004cfe4c(param_1 + 0x90);
       puVar1 = g_aocMain;
-      temp_v4 = FUN_00473d40(g_aocMain,temp_v2);
+      temp_v4 = countOwnerIsValidIndex(g_aocMain,temp_v2);
       if ((temp_v4 != 0) && (temp_v2 = puVar1[0x19e] + temp_v2 * 0x9c8, temp_v2 != 0)) {
         if (*(char *)(temp_v2 + 0x9b3) != '\0') {
           puVar1 = g_aocMain;
@@ -149,7 +149,7 @@ void FUN_00479358(unsigned int *param_1)
     break;
   case 1:
     temp_v11 = FUN_004cfe4c(param_1 + 0x90);
-    FUN_004d0310(param_1 + 0x90);
+    sub10OwnerStart(param_1 + 0x90);
     temp_v8 = param_1 + 0x90;
     temp_v3 = param_1[0xae];
     puVar3 = param_1 + 0xad;
@@ -162,7 +162,7 @@ void FUN_00479358(unsigned int *param_1)
       temp_v3 = param_1[0xb0];
     }
     if ((temp_v5 && temp_v6) && temp_v3 != 0xffffffff) {
-      FUN_004d0720(puVar3);
+      selectOwnerReset(puVar3);
       temp_v2 = FUN_0031d174(temp_v8);
       temp_v4 = 0;
       if (temp_v4 < (int)param_1[0xb0]) {
@@ -174,7 +174,7 @@ void FUN_00479358(unsigned int *param_1)
               *(unsigned char *)((int)param_1 + 0x2e6) = 1;
               FUN_004d032c(temp_v8,temp_v4);
               if ((char)param_1[0xb1] != '\0' && temp_v4 != temp_v2) {
-                FUN_004d0440();
+                sendEvent100020D();
               }
               break;
             }
@@ -197,7 +197,7 @@ void FUN_00479358(unsigned int *param_1)
             if (temp_v5) {
               FUN_004d032c(temp_v8,temp_v4);
               if ((char)param_1[0xb1] != '\0' && temp_v4 != temp_v2) {
-                FUN_004d0440();
+                sendEvent100020D();
               }
               break;
             }
@@ -211,7 +211,7 @@ void FUN_00479358(unsigned int *param_1)
     if (temp_v2 != temp_v11) {
       temp_v2 = FUN_004cfe4c(param_1 + 0x90);
       puVar3 = g_aocMain;
-      temp_v4 = FUN_00473d40(g_aocMain,temp_v2);
+      temp_v4 = countOwnerIsValidIndex(g_aocMain,temp_v2);
       if ((temp_v4 != 0) && (temp_v2 = puVar3[0x19e] + temp_v2 * 0x9c8, temp_v2 != 0)) {
         if (*(char *)(temp_v2 + 0x9b3) != '\0') {
           puVar3 = g_aocMain;
@@ -230,11 +230,11 @@ void FUN_00479358(unsigned int *param_1)
       FUN_00477d10(param_1,2,0);
     }
     if (*(char *)((int)param_1 + 0x2c6) != '\0') {
-      temp_v1 = FUN_004d066c(param_1 + 0xad);
+      temp_v1 = selectOwnerGetSelected(param_1 + 0xad);
       temp_v2 = FUN_004d0058(param_1 + 0x90,temp_v1);
       if (temp_v2 != 0) {
         temp_v1 = FUN_004cfe4c(param_1 + 0x90);
-        temp_v2 = FUN_00473d40(puVar1,temp_v1);
+        temp_v2 = countOwnerIsValidIndex(puVar1,temp_v1);
         if (temp_v2 != 0) {
           temp_v2 = FUN_004cfe4c(param_1 + 0x90);
           if (*(char *)(puVar1[0x19e] + temp_v2 * 0x9c8 + 0x9b3) != '\0') {

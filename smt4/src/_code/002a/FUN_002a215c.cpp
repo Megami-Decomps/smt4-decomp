@@ -1,18 +1,12 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_ut_internal_LinkListImpl_erase_2B743C(unsigned int, int);
+int nw_ut_internal_LinkListImpl_erase_2B743C(u32 list, int node);
 
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_erase_2B743C. */
-
-
-void FUN_002a215c(unsigned int param_1,int param_2)
-
+void FUN_002a215c(u32 list, int object)
 {
-/* irregular: 1 native warning(s); review required */
-  nw_ut_internal_LinkListImpl_erase_2B743C(param_1,param_2 + 4);
-  return;
+    nw_ut_internal_LinkListImpl_erase_2B743C(list, object + 4);
 }
 
 } /* extern "C" */

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010095c(...);
+int isAsciiDigit(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_0010095c. */
+/* Supplied declaration required: isAsciiDigit. */
 extern int FUN_0010123c(unsigned int *, unsigned int);
 
 
@@ -61,13 +61,13 @@ LAB_00100436:
       param_1[6] = 0;
       do {
         if (temp_v0 != 0x2a) {
-          temp_v1 = FUN_0010095c(temp_v0);
+          temp_v1 = isAsciiDigit(temp_v0);
           if (temp_v1 != 0) {
             temp_v5 = param_1 + temp_v4;
             temp_v5[6] = temp_v0 - 0x30;
             while( 1 ) {
               temp_v0 = (*(romwright_code *)param_1[3])(param_1);
-              temp_v1 = FUN_0010095c();
+              temp_v1 = isAsciiDigit();
               if (temp_v1 == 0) break;
               temp_v5[6] = (temp_v5[6] * 10 + temp_v0) - 0x30;
             }

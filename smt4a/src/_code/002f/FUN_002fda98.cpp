@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ s32 *ref;
+} Holder;
 
-int FUN_002fda98(int param_1)
-
+/* Returns the word `ref` points at plus 8. */
+s32 FUN_002fda98(Holder *object)
 {
-  return **(int **)(param_1 + 0x10) + 8;
+    return *object->ref + 8;
 }
 
 } /* extern "C" */

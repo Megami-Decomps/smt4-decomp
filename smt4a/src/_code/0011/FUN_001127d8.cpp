@@ -1,18 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002f8236(void);
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 value;
+} Entry;
 
+Entry *FUN_002f8236(void);
 
+/* Clears the value field of the entry FUN_002f8236 returns. */
 void FUN_001127d8(void)
-
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002f8236();
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  return;
+    Entry *entry = FUN_002f8236();
+    entry->value = 0;
 }
 
 } /* extern "C" */

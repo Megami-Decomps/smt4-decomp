@@ -77,7 +77,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001bc768. */
 /* Supplied declaration required: FUN_001bc7ec. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_00457160. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -321,7 +321,7 @@ void FUN_00457d80(int param_1,int param_2,int param_3)
             }
             temp_v38 = temp_v17;
             temp_v6 = (float)temp_v10 / (temp_v6 - temp_v9);
-            if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = FUN_002eba64(&DAT_005c4c2c), temp_v2 != 0)) {
+            if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v2 != 0)) {
               DAT_0064c054 = (unsigned int)temp_v10;
               DAT_0064c058 = (unsigned int)temp_v8;
               DAT_0064c05c = DAT_0064c058;
@@ -339,7 +339,7 @@ void FUN_00457d80(int param_1,int param_2,int param_3)
           else {
             temp_v38 = temp_v17;
             temp_v6 = (float)temp_v10 / (temp_v6 - temp_v9);
-            if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = FUN_002eba64(&DAT_005c4c2c), temp_v2 != 0)) {
+            if (((DAT_005c4c2c & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&DAT_005c4c2c), temp_v2 != 0)) {
               DAT_0064c054 = (unsigned int)temp_v10;
               DAT_0064c058 = (unsigned int)temp_v8;
               DAT_0064c05c = DAT_0064c058;

@@ -1,41 +1,43 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00183318(int);
-int FUN_00183e58(void);
-int FUN_00184aa8(...);
+typedef struct Record {
+    /* 0x000 */ u8 unk000[0x5E6];
+    /* 0x5E6 */ u16 id;
+} Record;
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct Global57f0c4 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Record *record;
+} Global57f0c4;
+extern Global57f0c4 DAT_0057f0c4;
 
-extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u8 flag;
+} Entry;
 
-/* Supplied declaration required: FUN_00183318. */
-/* Supplied declaration required: FUN_00183e58. */
-/* Supplied declaration required: FUN_00184aa8. */
+void FUN_00183318(s32 value);
+void FUN_00183e58(void);
+Entry *dataTableGetEntry0e(u32 id);
 
-
-void FUN_00168980(unsigned int param_1)
-
+/* Compares the entries for the record's id and for `id`: when the first has its flag clear and the second set, runs FUN_00183318(1); otherwise FUN_00183e58. Does nothing if either entry is missing. */
+void FUN_00168980(u32 id)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00184aa8(*(unsigned short *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5e6));
-  temp_v1 = FUN_00184aa8(param_1);
-  if (temp_v0 == 0 || temp_v1 == 0) {
-    return;
-  }
-  if ((*(char *)(temp_v0 + 0xc) == '\0') && (*(char *)(temp_v1 + 0xc) != '\0')) {
-    FUN_00183318(1);
-    return;
-  }
-  FUN_00183e58();
-  return;
+    Entry *current;
+    Entry *other;
+
+    current = dataTableGetEntry0e(DAT_0057f0c4.record->id);
+    other = dataTableGetEntry0e(id);
+    if (current == NULL || other == NULL) {
+        return;
+    }
+    if (current->flag == 0 && other->flag != 0) {
+        FUN_00183318(1);
+        return;
+    }
+    FUN_00183e58();
 }
 
 } /* extern "C" */

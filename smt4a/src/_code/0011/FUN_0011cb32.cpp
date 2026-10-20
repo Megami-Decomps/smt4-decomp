@@ -22,8 +22,8 @@ extern unsigned int FUN_002e76b6(unsigned int);
 /* Supplied declaration required: FUN_002e995c. */
 /* Supplied declaration required: FUN_002f2e3c. */
 /* Supplied declaration required: FUN_003111ae. */
-extern int FUN_003111ea(unsigned int);
-extern unsigned int FUN_003111fa(unsigned int);
+extern int stateObjIsFinished(unsigned int);
+extern unsigned int rangeObjRemaining(unsigned int);
 
 
 unsigned int FUN_0011cb32(int param_1,int param_2)
@@ -48,11 +48,11 @@ unsigned int FUN_0011cb32(int param_1,int param_2)
     *(unsigned int *)(*(int *)(param_1 + 0x18c) + 0x38) = *(unsigned int *)(param_1 + 0x1d4);
     temp_v3 = temp_v6 != 0;
     temp_v0 = *(unsigned int *)(param_1 + 0x18c);
-    temp_v5 = FUN_003111fa(*(unsigned int *)(param_1 + 0x1d4));
+    temp_v5 = rangeObjRemaining(*(unsigned int *)(param_1 + 0x1d4));
     temp_v1 = FUN_002e76b6(*(unsigned int *)(param_1 + 0x1d4));
     temp_v2 = param_1;
     FUN_002f2e3c(param_1,temp_v1,temp_v5,temp_v4,temp_v0,temp_v3);
-    if ((temp_v2 == 0) && (temp_v2 = FUN_003111ea(*(unsigned int *)(param_1 + 0x18c)), temp_v2 != 0)) {
+    if ((temp_v2 == 0) && (temp_v2 = stateObjIsFinished(*(unsigned int *)(param_1 + 0x18c)), temp_v2 != 0)) {
       *(unsigned int *)(*(int *)(param_1 + 0x1d4) + 0x10) =
            *(unsigned int *)(*(int *)(param_1 + 0x18c) + 8);
       FUN_003111ae(param_1,*(unsigned int *)(param_1 + 0x1d4),temp_v4);

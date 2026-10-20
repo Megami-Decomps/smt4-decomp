@@ -12,7 +12,7 @@ int FUN_003f1138(void);
 int FUN_0041a7dc(int);
 int FUN_004c3d00(unsigned int *);
 int FUN_004c571c(int, int, unsigned int *, int);
-int FUN_0050d71c(int);
+int clearTwoWords(int);
 int rt_memcpy_w(unsigned int *, int, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -37,7 +37,7 @@ extern unsigned int DAT_0057aa8c; /* 0x57aa8c */
 extern unsigned int DAT_0057aa90; /* 0x57aa90 */
 extern unsigned int DAT_0057aa94; /* 0x57aa94 */
 
-extern unsigned int FUN_0015688c(void);
+extern unsigned int saveSlotFindSelected(void);
 extern unsigned int FUN_001801a4(void);
 /* Supplied declaration required: FUN_0019cac4. */
 extern unsigned int FUN_001ab854(void);
@@ -50,7 +50,7 @@ extern unsigned int *FUN_003e83b4(unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_0041a7dc. */
 /* Supplied declaration required: FUN_004c3d00. */
 /* Supplied declaration required: FUN_004c571c. */
-/* Supplied declaration required: FUN_0050d71c. */
+/* Supplied declaration required: clearTwoWords. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -68,8 +68,8 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
   
   puVar3 = (unsigned int *)0x0;
   *(unsigned int *)(param_2 + 0x228) = 0;
-  FUN_0050d71c(param_2 + 0x1be);
-  FUN_0050d71c(param_2 + 0x1c6);
+  clearTwoWords(param_2 + 0x1be);
+  clearTwoWords(param_2 + 0x1c6);
   FUN_002e6dd4(param_2 + 0x1d6,0x50);
   if (param_3 != 0) {
     if (param_3 != 1) {
@@ -82,7 +82,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
         temp_v1 = DAT_0057aa54 | DAT_0057aa34;
         *puVar3 = DAT_0057aa50 | DAT_0057aa30;
         puVar3[1] = temp_v1;
-        temp_v1 = FUN_0015688c();
+        temp_v1 = saveSlotFindSelected();
         puVar3[0x100] = temp_v1;
         param_1[0x135a] = temp_v1;
         if ((puVar3[0x100] != 0) && ((*(unsigned short *)(puVar3[0x100] + 0x60) & 2) == 0)) {

@@ -1,29 +1,36 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(int);
+void asdMemFree(void *memory);
 
-typedef int romwright_code(...);
-extern int g_cecProcess; /* 0x57f390 */
+typedef struct Object Object;
+typedef struct ObjectVtbl {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ void (*destroy)(Object *object);
+} ObjectVtbl;
+struct Object {
+    /* 0x00 */ const ObjectVtbl *vtbl;
+};
 
-/* Supplied declaration required: asdMemFree. */
+typedef struct CecProcess {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Object *object;
+} CecProcess;
+extern CecProcess *g_cecProcess;
 
-
+/* Destroys the CEC process: its object (if any), then the process itself. */
 void FUN_00237680(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_cecProcess;
-  if (*(int **)(g_cecProcess + 4) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(g_cecProcess + 4) + 4))(*(int **)(g_cecProcess + 4));
-  }
-  *(unsigned int *)(temp_v0 + 4) = 0;
-  asdMemFree(temp_v0);
-  g_cecProcess = 0;
-  return;
+    CecProcess *process;
+
+    process = g_cecProcess;
+    if (g_cecProcess->object != NULL) {
+        g_cecProcess->object->vtbl->destroy(g_cecProcess->object);
+    }
+    process->object = NULL;
+    asdMemFree(process);
+    g_cecProcess = NULL;
 }
 
 } /* extern "C" */

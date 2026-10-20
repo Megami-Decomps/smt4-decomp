@@ -47,7 +47,7 @@ extern int FUN_001ab854(void);
 extern int FUN_001ab888(void);
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003f1b3c. */
-extern int FUN_0040de1c(unsigned int);
+extern int chainCountIdUnflagged(unsigned int);
 /* Supplied declaration required: FUN_0047f7ac. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004c9d04. */
@@ -74,7 +74,7 @@ unsigned int FUN_004e0314(int *param_1,fn_004e0314_arg1 *param_2)
   int temp_v8;
   int temp_v9;
   
-  temp_v1 = FUN_0040de1c(DAT_005712f0);
+  temp_v1 = chainCountIdUnflagged(DAT_005712f0);
   if (0 < temp_v1) {
     return 0;
   }

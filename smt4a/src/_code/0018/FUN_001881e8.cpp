@@ -34,7 +34,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_0019b738. */
 /* Supplied declaration required: FUN_0019c0e0. */
-extern int FUN_0019f29c(unsigned int, unsigned char *, unsigned int *);
+extern int lookupNameEntry(unsigned int, unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_0019f30c. */
 /* Supplied declaration required: FUN_001ac8ec. */
 /* Supplied declaration required: FUN_001acb48. */
@@ -74,7 +74,7 @@ void FUN_001881e8(int param_1,int *param_2)
       temp_v2 = *(unsigned int *)(temp_v1 + 0xc);
       FUN_0019b738(temp_v19,0x20);
       FUN_00100388(temp_v19,"h_eff%02d",*(unsigned int *)(temp_v1 + 8));
-      temp_v1 = FUN_0019f29c(temp_v3,temp_v19,(unsigned int *)&temp_v4);
+      temp_v1 = lookupNameEntry(temp_v3,temp_v19,(unsigned int *)&temp_v4);
       if (temp_v1 != 0) {
         temp_v11 = temp_v4;
         temp_v12 = temp_v5;

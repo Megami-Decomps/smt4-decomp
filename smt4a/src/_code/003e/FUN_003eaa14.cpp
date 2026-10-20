@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp420; /* 0x420: local_420 */
 } param_1_stack;
 
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_003ecfb4. */
 /* Supplied declaration required: FUN_004ca63c. */
 
@@ -24,7 +24,7 @@ void FUN_003eaa14(unsigned int param_1)
   int temp_v0;
   unsigned char temp_v1 [680];
   
-  temp_v0 = FUN_0015688c();
+  temp_v0 = saveSlotFindSelected();
   if (temp_v0 != 0) {
     FUN_003ecfb4(param_1,temp_v1,temp_v0,0);
     FUN_004ca63c(param_1,temp_v1,2,0x36,0);

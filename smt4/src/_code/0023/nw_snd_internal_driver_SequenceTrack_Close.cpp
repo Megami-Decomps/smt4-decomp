@@ -1,34 +1,33 @@
-#include "romwright_types.h"
+#include "shard/SndChannel.h"
 
 extern "C" {
 
-int FUN_0023592c(void);
-int nw_snd_internal_driver_Channel_FreeChannel(int);
-int nw_snd_internal_driver_Channel_Release(int);
+int FUN_0023592c(void *track);
+int nw_snd_internal_driver_Channel_FreeChannel(SndChannel *channel);
+int nw_snd_internal_driver_Channel_Release(SndChannel *channel);
 
-/* Supplied declaration required: FUN_0023592c. */
-/* Supplied declaration required: nw_snd_internal_driver_Channel_FreeChannel. */
-/* Supplied declaration required: nw_snd_internal_driver_Channel_Release. */
+typedef struct SequenceTrack {
+    /* 0x00 */ u8 unk00[5];
+    /* 0x05 */ u8 opened;
+    /* 0x06 */ u8 unk06[0xBE];
+    /* 0xC4 */ SndChannel *channels;
+} SequenceTrack;
 
-
-void nw_snd_internal_driver_SequenceTrack_Close(int param_1)
-
+void nw_snd_internal_driver_SequenceTrack_Close(SequenceTrack *track)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_0023592c();
-  for (temp_v0 = *(int *)(param_1 + 0xc4); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
-    if (*(char *)(temp_v0 + 0xc6) != '\0') {
-      nw_snd_internal_driver_Channel_Release(temp_v0);
+    SndChannel *channel;
+
+    FUN_0023592c(track);
+    for (channel = track->channels; channel != NULL; channel = channel->next) {
+        if (channel->unk0C6 != 0) {
+            nw_snd_internal_driver_Channel_Release(channel);
+        }
     }
-  }
-  for (temp_v0 = *(int *)(param_1 + 0xc4); temp_v0 != 0; temp_v0 = *(int *)(temp_v0 + 0x138)) {
-    nw_snd_internal_driver_Channel_FreeChannel(temp_v0);
-  }
-  *(unsigned int *)(param_1 + 0xc4) = 0;
-  *(unsigned char *)(param_1 + 5) = 0;
-  return;
+    for (channel = track->channels; channel != NULL; channel = channel->next) {
+        nw_snd_internal_driver_Channel_FreeChannel(channel);
+    }
+    track->channels = NULL;
+    track->opened = 0;
 }
 
 } /* extern "C" */

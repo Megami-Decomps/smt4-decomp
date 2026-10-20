@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029e974(void);
+int dataTable06Sub1GetRecord(void);
 int FUN_002b46f8(int, int, unsigned int, int, unsigned char *);
 int FUN_002b9024(void);
 
@@ -15,7 +15,7 @@ typedef struct {
 
 extern unsigned char LAB_002c6f08; /* 0x2c6f08 */
 
-/* Supplied declaration required: FUN_0029e974. */
+/* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002b46f8. */
 /* Supplied declaration required: FUN_002b9024. */
 
@@ -54,7 +54,7 @@ unsigned int FUN_003c9754(int param_1,unsigned int param_2,unsigned int param_3,
         if (temp_v7 == 0) {
           return 0;
         }
-        FUN_0029e974();
+        dataTable06Sub1GetRecord();
         temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x144);
         if (*(unsigned char *)(temp_v7 + 2) == temp_v6) break;
         temp_v2 = temp_v2 + 1;

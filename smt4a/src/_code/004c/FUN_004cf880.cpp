@@ -9,7 +9,7 @@ int FUN_00181948(int);
 int FUN_00182348(int);
 int FUN_00184758(int, int, int);
 int FUN_004cf8dc(int, int);
-int FUN_004d0310(int);
+int sub10OwnerStart(int);
 int FUN_004d0738(int, int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -28,7 +28,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00182348. */
 /* Supplied declaration required: FUN_00184758. */
 /* Supplied declaration required: FUN_004cf8dc. */
-/* Supplied declaration required: FUN_004d0310. */
+/* Supplied declaration required: sub10OwnerStart. */
 /* Supplied declaration required: FUN_004d0738. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -56,7 +56,7 @@ int FUN_004cf880(int param_1)
   
   FUN_004d0738(param_1 + 0x818,param_1 + 0x20);
   (**(romwright_code **)(**(int **)(param_1 + 0x84c) + 0xc))(*(int **)(param_1 + 0x84c),param_1 + 0x20);
-  FUN_004d0310(param_1 + 0x20);
+  sub10OwnerStart(param_1 + 0x20);
   FUN_004cf8dc(param_1 + 0xdc,2);
   FUN_004cf8dc(param_1 + 0xdc,3);
   temp_v3 = param_1 + 0x78c;

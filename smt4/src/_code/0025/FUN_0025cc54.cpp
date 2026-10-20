@@ -1,30 +1,21 @@
-#include "romwright_types.h"
+#include "shard/PadState.h"
 
 extern "C" {
 
-extern unsigned int FUN_002b63ac(void);
-extern int FUN_002c09d0(unsigned int);
+extern PadState *FUN_002b63ac(void);
+extern int FUN_002c09d0(u32 id);
 
-
-unsigned int FUN_0025cc54(void)
-
+u32 FUN_0025cc54(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = FUN_002c09d0(0x410);
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_002b63ac();
-    temp_v2 = *(short *)(temp_v1 + 2) != 0;
-    if (temp_v2) {
-      temp_v1 = (unsigned int)*(unsigned short *)(temp_v1 + 4);
+    PadState *pad;
+
+    if (FUN_002c09d0(0x410) != 0) {
+        pad = FUN_002b63ac();
+        if (pad->unk02 != 0 && pad->unk04 != 0) {
+            return 1;
+        }
     }
-    if (temp_v2 && temp_v1 != 0) {
-      return 1;
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

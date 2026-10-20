@@ -37,7 +37,7 @@ int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int FUN_002d666c(...);
-int FUN_003eb054(unsigned char *);
+int words3Clear(unsigned char *);
 int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -104,7 +104,7 @@ extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002d666c. */
-/* Supplied declaration required: FUN_003eb054. */
+/* Supplied declaration required: words3Clear. */
 /* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
 
 
@@ -134,7 +134,7 @@ void FUN_0028a420(void)
   }
   puVar1 = DAT_0043da90;
   memClear();
-  FUN_003eb054(&g_campState);
+  words3Clear(&g_campState);
   FUN_002898e4();
   puVar2 = &LAB_0028a7d8;
   asdProcessCreateSimple(&LAB_0028a7d8,2,0,0,&LAB_0032c8d4,0,0);

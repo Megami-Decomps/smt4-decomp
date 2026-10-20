@@ -1,22 +1,37 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_0023e378(unsigned int);
+extern int FUN_0023e378(u32 target);
 
+typedef struct Resource {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ u32 mode;
+    /* 0x3C */ u32 unk3C;
+    /* 0x40 */ u32 unk40;
+} Resource;
 
-unsigned char FUN_00347ac4(int param_1)
+typedef struct Target {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ Resource *resource;
+} Target;
 
+typedef struct Obj {
+    /* 0x0 */ u8 unk0[8];
+    /* 0x8 */ Target *target;
+} Obj;
+
+/* If the target is ready, switches its resource to mode 3. */
+u8 FUN_00347ac4(Obj *obj)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_0023e378(*(unsigned int *)(param_1 + 8));
-  if (temp_v0 != 0) {
-    *(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x3c) = 1;
-    *(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x40) = 1;
-    *(unsigned int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x38) = 3;
-  }
-  return temp_v0 != 0;
+    int ready = FUN_0023e378((u32)obj->target);
+
+    if (ready != 0) {
+        obj->target->resource->unk3C = 1;
+        obj->target->resource->unk40 = 1;
+        obj->target->resource->mode = 3;
+    }
+    return ready != 0;
 }
 
 } /* extern "C" */

@@ -1,29 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00152bec(void);
-int asdMdlManagerDestroy(int);
+int asdMdlManagerDestroy(int handle);
 
-extern int DAT_0043dd68; /* 0x43dd68 */
+typedef struct Obj {
+    /* 0x0000 */ u8 unk0000[0x95CC];
+    /* 0x95CC */ int model;
+} Obj;
 
-/* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
-
+extern Obj *DAT_0043dd68;
 
 void FUN_002e333c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  
-  piVar1 = (int *)(DAT_0043dd68 + 0x95cc);
-  if (*piVar1 != 0) {
-    FUN_00152bec();
-    asdMdlManagerDestroy(*piVar1);
-    *piVar1 = 0;
-  }
-  return;
+    int *model = &DAT_0043dd68->model;
+
+    if (*model != 0) {
+        FUN_00152bec();
+        asdMdlManagerDestroy(*model);
+        *model = 0;
+    }
 }
 
 } /* extern "C" */

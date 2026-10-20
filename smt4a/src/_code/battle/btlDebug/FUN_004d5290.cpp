@@ -9,7 +9,7 @@ int FUN_00280328(...);
 int FUN_002ea508(...);
 int FUN_00317508(...);
 int asdListBoxAddItems(...);
-int FUN_0032c450(...);
+int asdListBoxSetToggleItem(...);
 int FUN_00340edc(...);
 int FUN_003592dc(...);
 
@@ -44,7 +44,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_002ea508. */
 /* Supplied declaration required: FUN_00317508. */
 /* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: FUN_0032c450. */
+/* Supplied declaration required: asdListBoxSetToggleItem. */
 /* Supplied declaration required: FUN_00340edc. */
 /* Supplied declaration required: FUN_003592dc. */
 
@@ -67,14 +67,14 @@ void FUN_004d5290(fn_004d5290_arg0 *param_1,int param_2)
   asdListBoxAddItems();
   FUN_00317508(*(unsigned int *)&param_1->field_0x10,1);
   FUN_002ea508(*(unsigned int *)&param_1->field_0x10,"Camera Ctrl");
-  FUN_0032c450(*(unsigned int *)&param_1->field_0x10,0,
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,0,
                (*(unsigned int *)(DAT_00571508 + 0x64c) & 0x10000000) >> 0x1c);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,1,0xfffffc19,999);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,2,0xfffffc19,999);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,3,0xfffffc19,999);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,4,0,0x168);
   FUN_00340edc(*(unsigned int *)&param_1->field_0x10,5,0xffffffa6,0x5a);
-  FUN_0032c450(*(unsigned int *)&param_1->field_0x10,6,
+  asdListBoxSetToggleItem(*(unsigned int *)&param_1->field_0x10,6,
                (*(unsigned int *)(DAT_00571508 + 0x64c) & 0x20000000) >> 0x1d);
   return;
 }

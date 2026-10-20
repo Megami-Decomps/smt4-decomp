@@ -1,23 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f5928` (_code @ 0x2f5928, 0x12 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Thumb register choice and store order only: retail loads the vtable first (r1) and stores it last */
+/* Constructs the object and returns it. */
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00559bf8; /* 0x559bf8 */
+struct ObjFUN_002f5928 {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ u8 unk04[0x28];
+    /* 0x2c */ u8 unk2c;
+};
 
-extern unsigned int *FUN_002e7168(void);
+extern const u8 DAT_00559bf8[];
+ObjFUN_002f5928 *FUN_002e7168(ObjFUN_002f5928 *obj);
 
-
-void FUN_002f5928(void)
-
+ObjFUN_002f5928 *FUN_002f5928(ObjFUN_002f5928 *obj)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)FUN_002e7168();
-  *puVar1 = (unsigned int)&DAT_00559bf8;
-  *(unsigned char *)(puVar1 + 0xb) = 2;
-  return;
+    obj = FUN_002e7168(obj);
+    obj->unk2c = 2;
+    obj->vtable = DAT_00559bf8;
+    return obj;
 }
 
-} /* extern "C" */
+}

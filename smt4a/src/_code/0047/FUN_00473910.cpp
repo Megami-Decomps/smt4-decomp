@@ -1,30 +1,17 @@
-#include "romwright_types.h"
+#include "shard/Shard0047.h"
 
 extern "C" {
 
-int FUN_0016780c(unsigned int, int, int);
+extern u32 dataTableValueOrZero(u32 index);
+extern void FUN_0016780c(u32 handle, s32 id, u32 *out);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0016780c. */
-extern unsigned int FUN_0016a0f0(unsigned int);
-
-
-void FUN_00473910(unsigned int param_1,int param_2)
-
+void FUN_00473910(u32 unused, s32 id)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_0016a0f0(0x40);
-  if (param_2 != -1) {
-    FUN_0016780c(temp_v0,param_2,0);
-    return;
-  }
-  return;
+    u32 handle = dataTableValueOrZero(0x40);
+
+    if (id != -1) {
+        FUN_0016780c(handle, id, 0);
+    }
 }
 
 } /* extern "C" */

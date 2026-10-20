@@ -1,23 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d86e4` (_code @ 0x4d86e4, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_004ff9b4(unsigned int);
+typedef struct Resource {
+    u8 unk00[4];
+    u32 handle; /* 0x04 */
+} Resource;
 
-/* Supplied declaration required: FUN_004ff9b4. */
+typedef struct ResourceRef {
+    Resource *resource; /* 0x00 */
+} ResourceRef;
 
+extern s32 FUN_004ff9b4(u32 handle);
 
-void FUN_004d86e4(int *param_1)
-
+/* Forwards the referenced resource's handle; an empty reference counts as success (1). */
+s32 FUN_004d86e4(ResourceRef *ref)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*param_1 != 0) {
-    FUN_004ff9b4(*(unsigned int *)(*param_1 + 4));
-    return;
-  }
-  return;
+    if (ref->resource == NULL) {
+        return 1;
+    }
+    return FUN_004ff9b4(ref->resource->handle);
 }
 
 } /* extern "C" */

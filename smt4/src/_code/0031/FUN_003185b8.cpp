@@ -1,24 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int scrSetResult(int);
-int FUN_002b06c4(unsigned short);
+int scrSetResult(int result);
+int FUN_002b06c4(u32 id);
+extern u32 scrGetArg(void);
 
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: FUN_002b06c4. */
+typedef struct Record {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ u16 flags;
+} Record;
 
-
-unsigned int FUN_003185b8(void)
-
+/* Script command: result is a bit field of the record's flags halfword (masked to 0x3f, shifted right by 5). */
+u32 FUN_003185b8(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002b06c4(scrGetArg());
-  scrSetResult((*(unsigned short *)(temp_v0 + 0x16) & 0x3f) >> 5);
-  return 1;
+    Record *record = (Record *)FUN_002b06c4((u16)scrGetArg());
+
+    scrSetResult((record->flags & 0x3f) >> 5);
+    return 1;
 }
 
 } /* extern "C" */

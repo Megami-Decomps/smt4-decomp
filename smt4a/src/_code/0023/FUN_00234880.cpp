@@ -17,7 +17,7 @@ extern int g_gameState; /* 0x5f15fc */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0014bef4(unsigned int);
 /* Supplied declaration required: FUN_00152f44. */
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 extern int FUN_0017760c(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018719c. */
@@ -55,7 +55,7 @@ void FUN_00234880(void)
   unsigned long long temp_v14;
   
   FUN_00152f44();
-  if ((*g_popupState == 0) && (temp_v2 = FUN_0015688c(), temp_v2 != 0)) {
+  if ((*g_popupState == 0) && (temp_v2 = saveSlotFindSelected(), temp_v2 != 0)) {
     temp_v1 = 0;
     temp_v3 = FUN_0018719c(0x1a2);
     if (((temp_v3 != 0) && (temp_v3 = FUN_0014bef4(99), temp_v3 + 1 < 0x33)) &&

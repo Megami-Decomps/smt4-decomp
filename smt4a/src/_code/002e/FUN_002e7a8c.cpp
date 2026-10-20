@@ -56,7 +56,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_001654d8. */
 /* Supplied declaration required: FUN_001654e4. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -74,7 +74,7 @@ extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ace4c. */
-extern int FUN_003f3d44(unsigned int);
+extern int valueIs1(unsigned int);
 /* Supplied declaration required: FUN_003f3fe4. */
 /* Supplied declaration required: FUN_003f4cc0. */
 
@@ -154,7 +154,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
     efctSetSpeed();
     temp_v4 = 0;
     do {
-      temp_v7 = FUN_003f3d44(*(unsigned int *)(temp_v2 + 0xa10));
+      temp_v7 = valueIs1(*(unsigned int *)(temp_v2 + 0xa10));
       if (temp_v7 != 0) {
         temp_v6 = 0;
         temp_v5 = temp_v6;
@@ -180,7 +180,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
         } while (temp_v4 < (int)(unsigned int)*(unsigned char *)(temp_v3 + 0x1ca3));
       }
     }
-    temp_v3 = FUN_003f3d44(*(unsigned int *)(temp_v2 + 0xa10));
+    temp_v3 = valueIs1(*(unsigned int *)(temp_v2 + 0xa10));
     if (temp_v3 == 0) {
       temp_v3 = *(int *)(temp_v2 + 0x1c);
       if (temp_v3 != 8) {
@@ -332,7 +332,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
     temp_v13 = (unsigned long long)temp_v10 << 0x20;
     efctSetSpeed();
     temp_v3 = g_renderCtx;
-    temp_v4 = FUN_00169294(6,1,0);
+    temp_v4 = packNibblesAndByte(6,1,0);
     piVar11 = (int *)(temp_v3 + 0x12b8);
     temp_v7 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v4;
@@ -357,7 +357,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
       temp_v4 = g_renderCtx;
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 4);
-    temp_v3 = FUN_00169294(6,7,0);
+    temp_v3 = packNibblesAndByte(6,7,0);
     piVar11 = (int *)(temp_v4 + 0x12b8);
     temp_v7 = piVar11[*piVar11 + 2];
     piVar11[*piVar11 + 2] = temp_v3;
@@ -481,7 +481,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
       temp_v14 = temp_v15 & 0xffffffff00000000;
       efctSetSpeed();
       temp_v8 = g_renderCtx;
-      temp_v11 = FUN_00169294(6,1,0);
+      temp_v11 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v9 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v11;
@@ -503,7 +503,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
         FUN_003f4cc0(*(unsigned int *)(temp_v2 + temp_v7 * 4 + 0xa20),0,aiStack_154[temp_v7],
                      temp_v20[temp_v7]);
       }
-      temp_v7 = FUN_00169294(6,7,0);
+      temp_v7 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v8 + 0x12b8);
       temp_v11 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v7;
@@ -626,7 +626,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
       }
     }
     efctSetSpeed();
-    temp_v7 = FUN_003f3d44(*(unsigned int *)(temp_v2 + 0xa10));
+    temp_v7 = valueIs1(*(unsigned int *)(temp_v2 + 0xa10));
     if (temp_v7 == 0) {
       temp_v7 = *(int *)(temp_v2 + 0x1c);
       if (temp_v7 != 8) {
@@ -786,7 +786,7 @@ LAB_002e90ec:
     FUN_0014e314(temp_v5,temp_v5);
     temp_v3 = g_renderCtx;
     if (*(int *)(temp_v2 + 0x18) >= 9) {
-      temp_v4 = FUN_00169294(6,1,0);
+      temp_v4 = packNibblesAndByte(6,1,0);
       piVar11 = (int *)(temp_v3 + 0x12b8);
       temp_v7 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v4;
@@ -797,7 +797,7 @@ LAB_002e90ec:
       FUN_0025c848(temp_v2 + 0x554);
       FUN_0025c848(temp_v2 + 0x5e0);
       temp_v2 = g_renderCtx;
-      temp_v3 = FUN_00169294(6,7,0);
+      temp_v3 = packNibblesAndByte(6,7,0);
       piVar11 = (int *)(temp_v2 + 0x12b8);
       temp_v4 = piVar11[*piVar11 + 2];
       piVar11[*piVar11 + 2] = temp_v3;

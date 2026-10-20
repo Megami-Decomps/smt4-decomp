@@ -88,7 +88,7 @@ extern int FUN_002e14e4(unsigned int);
 /* Supplied declaration required: FUN_0033a780. */
 /* Supplied declaration required: FUN_003ae8ec. */
 /* Supplied declaration required: FUN_003af1c4. */
-extern int FUN_003c8850(void);
+extern int questGetCurrentRecordHalf4(void);
 /* Supplied declaration required: FUN_003ca32c. */
 /* Supplied declaration required: FUN_003ca4b0. */
 /* Supplied declaration required: FUN_003ca6c4. */
@@ -262,7 +262,7 @@ LAB_003d243c:
       temp_v1 = 0;
     }
     FUN_0026beb4(temp_v1,puVar8,0,0,1);
-    temp_v2 = FUN_003c8850();
+    temp_v2 = questGetCurrentRecordHalf4();
     piVar2 = (int *)0x0;
     if (temp_v2 != 0) {
       piVar2 = (int *)FUN_003ddcf4(0,puVar8,temp_v2,0xffffffff);

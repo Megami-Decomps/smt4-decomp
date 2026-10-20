@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_004509fc(int *);
+int handlerTableDispatch1(int *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_004509fc. */
+/* Supplied declaration required: handlerTableDispatch1. */
 
 
 void FUN_00451f34(int *param_1)
@@ -40,7 +40,7 @@ void FUN_00451f34(int *param_1)
       temp_v3 = 0;
     }
     if (temp_v3 != 0) {
-      FUN_004509fc(&temp_v3);
+      handlerTableDispatch1(&temp_v3);
     }
   }
   temp_v0 = *(int *)(*param_1 + 4);
@@ -59,7 +59,7 @@ void FUN_00451f34(int *param_1)
       temp_v3 = 0;
     }
     if (temp_v3 != 0) {
-      FUN_004509fc(&temp_v3);
+      handlerTableDispatch1(&temp_v3);
     }
   }
   temp_v0 = *(int *)(*param_1 + 8);
@@ -78,7 +78,7 @@ void FUN_00451f34(int *param_1)
       temp_v3 = 0;
     }
     if (temp_v3 != 0) {
-      FUN_004509fc(&temp_v3);
+      handlerTableDispatch1(&temp_v3);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0xc);
@@ -97,7 +97,7 @@ void FUN_00451f34(int *param_1)
       temp_v3 = 0;
     }
     if (temp_v3 != 0) {
-      FUN_004509fc(&temp_v3);
+      handlerTableDispatch1(&temp_v3);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0x10);
@@ -116,7 +116,7 @@ void FUN_00451f34(int *param_1)
       temp_v3 = 0;
     }
     if (temp_v3 != 0) {
-      FUN_004509fc(&temp_v3);
+      handlerTableDispatch1(&temp_v3);
     }
   }
   temp_v0 = *(int *)(*param_1 + 0x14);
@@ -133,7 +133,7 @@ void FUN_00451f34(int *param_1)
     }
     if (temp_v2 != 0) {
       temp_v3 = temp_v2;
-      FUN_004509fc(&temp_v3);
+      handlerTableDispatch1(&temp_v3);
     }
   }
   return;

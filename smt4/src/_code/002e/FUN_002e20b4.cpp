@@ -1,24 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 extern int jobIsValid(void);
-extern int jobGetWork(int);
+extern void *jobGetWork(int slot);
 extern int eventTexGetCurrentOrInvalid(void);
 
+typedef struct JobWork {
+    /* 0x00 */ u8 unk00[0x94];
+    /* 0x94 */ u8 unk94;
+} JobWork;
 
 void FUN_002e20b4(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = eventTexGetCurrentOrInvalid();
-  if ((temp_v0 != -1) && (temp_v1 = jobIsValid(), temp_v1 != 0)) {
-    temp_v0 = jobGetWork(temp_v0);
-    *(unsigned char *)(temp_v0 + 0x94) = 0;
-  }
-  return;
+    int slot = eventTexGetCurrentOrInvalid();
+    JobWork *work;
+
+    if ((slot != -1) && (jobIsValid() != 0)) {
+        work = (JobWork *)jobGetWork(slot);
+        work->unk94 = 0;
+    }
 }
 
 } /* extern "C" */

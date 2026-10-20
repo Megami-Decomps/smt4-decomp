@@ -23,7 +23,7 @@ extern int rt_malloc(void);
 /* Supplied declaration required: FUN_00301bd4. */
 /* Supplied declaration required: FUN_00303a3a. */
 /* Supplied declaration required: FUN_003078bc. */
-extern int FUN_003078de(unsigned int, int *);
+extern int vectorGrowCapacity_003078de(unsigned int, int *);
 /* Supplied declaration required: vectorCapacity12. */
 /* Supplied declaration required: FUN_0030d02e. */
 /* Supplied declaration required: FUN_0030fce0. */
@@ -58,7 +58,7 @@ void FUN_001344c4(int *param_1,int param_2,unsigned int param_3)
   }
   else {
     temp_v2 = FUN_00301bd4(param_1);
-    temp_v4 = FUN_003078de(temp_v2,param_1);
+    temp_v4 = vectorGrowCapacity_003078de(temp_v2,param_1);
     temp_v5 = rt_malloc();
     FUN_003078bc(*param_1,param_2,temp_v5,param_1);
     temp_v3 = __aeabi_idivmod(param_2 - *param_1,0xc);

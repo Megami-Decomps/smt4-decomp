@@ -9,7 +9,7 @@ int FUN_001d1038(...);
 int FUN_001d10c0(void);
 int FUN_001d1108(void);
 
-int FUN_00100824(int *);
+int refIsNullOrZero(int *);
 int FUN_001642e4(int, int, unsigned int, unsigned int);
 int jyoucyuGetTableEntry(...);
 int FUN_001883b0(unsigned int *, int *, unsigned int);
@@ -58,7 +58,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00100824. */
+/* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_001642e4. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -233,7 +233,7 @@ void FUN_001cc6d0(int param_1,int param_2)
           temp_v24 = &temp_v10;
           temp_v25 = 0;
           temp_v26 = 0;
-          FUN_00100824(&temp_v25);
+          refIsNullOrZero(&temp_v25);
           while ((temp_v2 = FUN_00100836(temp_v3,0x105,(unsigned int *)&temp_v25), temp_v2 != 0 &&
                  (puVar7 = puVar3, FUN_002e3c44(puVar3,temp_v3,temp_v2,&temp_v25),
                  puVar7 != (unsigned int *)0x0))) {

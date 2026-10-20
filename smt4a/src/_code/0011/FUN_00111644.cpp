@@ -1,14 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Range {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u32 first;
+    /* 0x4C */ u32 second;
+} Range;
 
-void FUN_00111644(int param_1,unsigned int param_2,unsigned int *param_3)
-
+/* Sets the two words at 0x48 and 0x4C (the second from `*secondRef`). */
+void FUN_00111644(Range *range, u32 first, u32 *secondRef)
 {
-  *(unsigned int *)(param_1 + 0x48) = param_2;
-  *(unsigned int *)(param_1 + 0x4c) = *param_3;
-  return;
+    range->first = first;
+    range->second = *secondRef;
 }
 
 } /* extern "C" */

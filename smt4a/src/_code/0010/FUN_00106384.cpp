@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ed310(unsigned int);
-int FUN_002ed338(...);
+int constructObj00559334(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002ed310. */
-/* Supplied declaration required: FUN_002ed338. */
+/* Supplied declaration required: constructObj00559334. */
 extern int FUN_002ed344(unsigned char *, unsigned char *);
 
 
@@ -33,12 +33,12 @@ unsigned int FUN_00106384(unsigned int param_1,int param_2)
     return 1;
   }
   FUN_002ed310(param_1);
-  FUN_002ed338(temp_v2,param_1);
-  FUN_002ed338(temp_v4,*(unsigned int *)(param_2 + 0xb8));
-  FUN_002ed338(temp_v5,temp_v3 - 0x96);
+  constructObj00559334(temp_v2,param_1);
+  constructObj00559334(temp_v4,*(unsigned int *)(param_2 + 0xb8));
+  constructObj00559334(temp_v5,temp_v3 - 0x96);
   temp_v1 = FUN_002ed344(temp_v5,temp_v4);
   if (temp_v1 != 0) {
-    FUN_002ed338(temp_v6,temp_v3 + 0x96);
+    constructObj00559334(temp_v6,temp_v3 + 0x96);
     temp_v1 = FUN_002ed344(temp_v4,temp_v6);
     if (temp_v1 != 0) {
       temp_v0 = 1;

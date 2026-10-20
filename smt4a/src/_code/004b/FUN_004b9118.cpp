@@ -19,7 +19,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_001d1438. */
 /* Supplied declaration required: FUN_00324c48. */
-extern char *FUN_004731a4(void);
+extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
 
 
@@ -32,7 +32,7 @@ void FUN_004b9118(int param_1)
   unsigned int temp_v1;
   unsigned short temp_v2 [6];
   
-  pcVar2 = (char *)FUN_004731a4();
+  pcVar2 = (char *)gameBlockGetArea27E98();
   temp_v0 = *pcVar2;
   if (temp_v0 != '\x01') {
     if (temp_v0 == '\x02') {

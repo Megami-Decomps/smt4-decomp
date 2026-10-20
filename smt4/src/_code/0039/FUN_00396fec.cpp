@@ -1,45 +1,41 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_002328c0(...);
 int FUN_00232920(...);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Node {
+    /* 0x00 */ struct Node *left;
+    /* 0x04 */ struct Node *right;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ u8 depth;
+} Node;
 
-/* Supplied declaration required: FUN_002328c0. */
-/* Supplied declaration required: FUN_00232920. */
+typedef struct Tree {
+    /* 0x0 */ Node *root;
+} Tree;
 
-
-void FUN_00396fec(int *param_1)
-
+void FUN_00396fec(Tree *tree)
 {
-/* irregular: 2 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  unsigned char temp_v1;
-  
-  piVar1 = (int *)*param_1;
-  int q = *piVar1;
-  temp_v0 = *(unsigned char *)(piVar1 + 3) - 1;
-  if (((int)*(unsigned char *)(q + 0xc) >= temp_v0) &&
-     ((int)*(unsigned char *)(piVar1[1] + 0xc) >= temp_v0)) {
-    return;
-  }
-  temp_v1 = (unsigned char)temp_v0;
-  *(unsigned char *)(piVar1 + 3) = temp_v1;
-  if (*(unsigned char *)(*(int *)(*param_1 + 4) + 0xc) > temp_v1) {
-    *(unsigned char *)(*(int *)(*param_1 + 4) + 0xc) = temp_v1;
-  }
-  FUN_00232920(param_1);
-  FUN_00232920(*param_1 + 4);
-  FUN_00232920(*(int *)(*param_1 + 4) + 4);
-  FUN_002328c0(param_1);
-  FUN_002328c0(*param_1 + 4);
-  return;
+    Node *node = tree->root;
+    Node *left = node->left;
+    int depth = node->depth - 1;
+    u8 newDepth;
+
+    if (((int)left->depth >= depth) && ((int)node->right->depth >= depth)) {
+        return;
+    }
+    newDepth = (u8)depth;
+    node->depth = newDepth;
+    if (tree->root->right->depth > newDepth) {
+        tree->root->right->depth = newDepth;
+    }
+    FUN_00232920(tree);
+    FUN_00232920((u8 *)tree->root + 4);
+    FUN_00232920((u8 *)tree->root->right + 4);
+    FUN_002328c0(tree);
+    FUN_002328c0((u8 *)tree->root + 4);
 }
 
 } /* extern "C" */

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_005210a4(unsigned char *);
+int listNodeUnlinkOrFree(unsigned char *);
 
-/* Supplied declaration required: FUN_005210a4. */
+/* Supplied declaration required: listNodeUnlinkOrFree. */
 
 
 void FUN_005204d4(int *param_1,int param_2,int *param_3)
@@ -427,7 +427,7 @@ LAB_005209b4:
     } while( 1 );
   }
   *(unsigned int *)(pbVar11 + 0xc) = *(unsigned int *)(param_2 + 8);
-  FUN_005210a4(pbVar11 + 0x14);
+  listNodeUnlinkOrFree(pbVar11 + 0x14);
   *(unsigned char **)(param_2 + 8) = pbVar11;
   *(int *)(param_2 + 0x18) = *(int *)(param_2 + 0x18) - 1;
   *param_1 = temp_v4;

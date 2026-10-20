@@ -1,18 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00150618(void);
+void FUN_00150618(void);
 
-/* Supplied declaration required: FUN_00150618. */
-
-
-unsigned int FUN_00141270(void)
-
+/* Calls FUN_00150618 and returns 0. */
+u32 FUN_00141270(void)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00150618();
-  return 0;
+    FUN_00150618();
+    return 0;
 }
 
 } /* extern "C" */

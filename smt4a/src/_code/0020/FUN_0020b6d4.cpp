@@ -1,28 +1,38 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+s32 FUN_002adc20(void);
 
-extern int FUN_002adc20(void);
+typedef struct Game {
+    /* 0x0000 */ u8 unk0000[0x10];
+    /* 0x0010 */ u32 unk10;
+    /* 0x0014 */ u8 unk14[0x1354];
+    /* 0x1368 */ s32 state;
+    /* 0x136C */ u8 unk136C[4];
+    /* 0x1370 */ s32 previousState;
+} Game;
 
+typedef struct Global588fd0 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Game *game;
+} Global588fd0;
+extern Global588fd0 DAT_00588fd0;
 
-void FUN_0020b6d4(int param_1)
-
+/* Switches the game to `newState`, remembering the previous one; state 4 falls back to 0xB when FUN_002adc20 reports 0. */
+void FUN_0020b6d4(s32 newState)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x10) = 0;
-  temp_v2 = *(unsigned int *)(temp_v0 + 0x1368);
-  *(int *)(temp_v0 + 0x1368) = param_1;
-  *(unsigned int *)(temp_v0 + 0x1370) = temp_v2;
-  if ((param_1 == 4) && (temp_v1 = FUN_002adc20(), temp_v1 == 0)) {
-    *(unsigned int *)(temp_v0 + 0x1368) = 0xb;
-  }
-  return;
+    Game *game;
+    s32 previous;
+
+    game = DAT_00588fd0.game;
+    DAT_00588fd0.game->unk10 = 0;
+    previous = game->state;
+    game->state = newState;
+    game->previousState = previous;
+    if ((newState == 4) && (FUN_002adc20() == 0)) {
+        game->state = 0xB;
+    }
 }
 
 } /* extern "C" */

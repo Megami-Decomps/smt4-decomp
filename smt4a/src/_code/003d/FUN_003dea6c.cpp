@@ -19,7 +19,7 @@ int FUN_00359974(...);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_00282bf4. */
-extern short *FUN_00284fa4(int);
+extern short *dataTableGetEntry37(int);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002ebda8. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -94,7 +94,7 @@ void FUN_003dea6c(int param_1,int param_2,int param_3)
         temp_v1 = 0;
         if (0 < (int)temp_v0) {
           do {
-            psVar2 = (short *)FUN_00284fa4(temp_v1);
+            psVar2 = (short *)dataTableGetEntry37(temp_v1);
             if (*psVar2 == *(short *)(temp_v3 + 0x102)) {
               if (psVar2 != (short *)0x0) {
                 FUN_003180c4(temp_v2 + 0x29,psVar2 + 1);

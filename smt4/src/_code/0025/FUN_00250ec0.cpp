@@ -25,7 +25,7 @@ extern int FUN_002ae3c4(unsigned short);
 /* Supplied declaration required: FUN_002b63c0. */
 extern int FUN_002b6b38(void);
 extern int FUN_00348b7c(int);
-extern int FUN_003bc96c(unsigned int, unsigned short);
+extern int bitsetTestBit(unsigned int, unsigned short);
 
 
 void FUN_00250ec0(int param_1)
@@ -74,7 +74,7 @@ void FUN_00250ec0(int param_1)
                   temp_v5 = temp_v3 + temp_v8 * 8;
                   temp_v1 = *(short *)(temp_v5 + 0x16c);
                   if (((temp_v1 != 0) && (temp_v1 == 5)) &&
-                     (temp_v5 = FUN_003bc96c(temp_v4,*(unsigned short *)(temp_v5 + 0x16e)), temp_v5 == 0))
+                     (temp_v5 = bitsetTestBit(temp_v4,*(unsigned short *)(temp_v5 + 0x16e)), temp_v5 == 0))
                   break;
                   temp_v8 = temp_v8 + 1;
                   if (temp_v8 >= 6) {

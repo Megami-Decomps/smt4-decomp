@@ -1,27 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0012a1fc` (_code @ 0x12a1fc, 0x1e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Sets the object's vtable, registers it (FUN_0030ccc0), runs the base setup and returns it. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_0012a190(unsigned int *);
-int FUN_0030ccc0(unsigned char *, unsigned int *);
+struct Obj0012a1fc {
+    /* 0x00 */ const void *vtable;
+};
 
-extern unsigned char DAT_00559b18; /* 0x559b18 */
-extern unsigned char DAT_00594b24; /* 0x594b24 */
+extern const u8 DAT_00559b18[];
+extern u8 DAT_00594b24[];
 
-/* Supplied declaration required: FUN_0012a190. */
-/* Supplied declaration required: FUN_0030ccc0. */
+void FUN_0030ccc0(u8 *table, Obj0012a1fc *obj);
+void FUN_0012a190(Obj0012a1fc *obj);
+__weak Obj0012a1fc *FUN_0012a1fc_baseInit(Obj0012a1fc *obj);
 
-
-unsigned int * FUN_0012a1fc(unsigned int *param_1)
-
+Obj0012a1fc *FUN_0012a1fc(Obj0012a1fc *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_00559b18;
-  FUN_0030ccc0(&DAT_00594b24,param_1);
-  FUN_0012a190(param_1);
-  return param_1;
+    obj->vtable = DAT_00559b18;
+    FUN_0030ccc0(DAT_00594b24, obj);
+    FUN_0012a190(obj);
+    return FUN_0012a1fc_baseInit(obj);
 }
 
-} /* extern "C" */
+}

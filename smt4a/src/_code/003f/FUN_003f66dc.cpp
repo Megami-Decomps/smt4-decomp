@@ -27,13 +27,13 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00344cd0. */
 /* Supplied declaration required: FUN_003f6424. */
 /* Supplied declaration required: FUN_003f7164. */
-extern unsigned long long FUN_003ff190(unsigned short);
+extern unsigned long long flagsBGetBit1(unsigned short);
 
 
 void FUN_003f66dc(int param_1,int param_2,int param_3)
@@ -82,7 +82,7 @@ void FUN_003f66dc(int param_1,int param_2,int param_3)
         temp_v2 = *(short *)(temp_v6 + 8) + param_2;
         efctSetSpeed();
         temp_v6 = g_renderCtx;
-        temp_v4 = FUN_00169294(6,1,0);
+        temp_v4 = packNibblesAndByte(6,1,0);
         piVar8 = (int *)(temp_v6 + 0x12b8);
         temp_v7 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v4;
@@ -97,7 +97,7 @@ void FUN_003f66dc(int param_1,int param_2,int param_3)
         } while (temp_v6 < 4);
         efctSetSpeed();
         temp_v6 = g_renderCtx;
-        temp_v2 = FUN_00169294(6,7,0);
+        temp_v2 = packNibblesAndByte(6,7,0);
         piVar8 = (int *)(temp_v6 + 0x12b8);
         temp_v4 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v2;
@@ -111,7 +111,7 @@ void FUN_003f66dc(int param_1,int param_2,int param_3)
         temp_v2 = *(short *)(temp_v6 + 8) + param_2;
         FUN_003f7164(param_1,puVar9,temp_v10,temp_v3,param_2,param_3,0x8d);
         temp_v13 = 0x87;
-        temp_v12 = FUN_003ff190(*puVar9);
+        temp_v12 = flagsBGetBit1(*puVar9);
         temp_v6 = (int)((unsigned long long)temp_v12 >> 0x20);
         if ((int)temp_v12 != 0) {
           temp_v6 = FUN_001834a4(0x31,temp_v13);
@@ -132,7 +132,7 @@ void FUN_003f66dc(int param_1,int param_2,int param_3)
         temp_v4 = *(short *)(temp_v6 + 10) + param_3;
         FUN_003f6424(param_1,puVar9,temp_v3,temp_v2,temp_v4,0x8d);
         temp_v13 = 0x87;
-        temp_v12 = FUN_003ff190(*puVar9);
+        temp_v12 = flagsBGetBit1(*puVar9);
         temp_v6 = (int)((unsigned long long)temp_v12 >> 0x20);
         if ((int)temp_v12 != 0) {
           temp_v6 = FUN_001834a4(0x31,temp_v13);

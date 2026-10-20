@@ -101,7 +101,7 @@ extern unsigned int FUN_00291234(unsigned int, float, unsigned int);
 /* Supplied declaration required: FUN_00291414. */
 /* Supplied declaration required: FUN_00291620. */
 /* Supplied declaration required: FUN_002916ac. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
@@ -246,7 +246,7 @@ void FUN_00193440(float *param_1)
         temp_v30 = (float)((unsigned long long)temp_v27 >> 0x20);
         temp_v29 = temp_v22;
         temp_v31 = temp_v22;
-        if (((DAT_00476634 & 1) == 0) && (temp_v5 = FUN_002bfefc(&DAT_00476634), temp_v5 != 0)) {
+        if (((DAT_00476634 & 1) == 0) && (temp_v5 = __cxa_guard_acquire(&DAT_00476634), temp_v5 != 0)) {
           DAT_004efd6c = (unsigned int)((unsigned long long)temp_v27 >> 0x20);
           DAT_004efd70 = temp_v22;
           DAT_004efd74 = temp_v22;

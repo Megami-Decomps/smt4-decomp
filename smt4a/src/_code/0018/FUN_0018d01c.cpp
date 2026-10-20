@@ -1,13 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 value;
+} Holder;
 
-void FUN_0018d01c(int param_1)
-
+/* Clears the word at 0x8. */
+void FUN_0018d01c(Holder *object)
 {
-  *(unsigned int *)(param_1 + 8) = 0;
-  return;
+    object->value = 0;
 }
 
 } /* extern "C" */

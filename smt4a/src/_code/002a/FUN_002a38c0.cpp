@@ -1,30 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a38c0` (_code @ 0x2a38c0, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e6e26(void);
-int FUN_0030f69c(unsigned int, unsigned int, int);
+void FUN_0030f69c(u32 handle, u32 a, s32 b);
+u32 FUN_002e6e26(void);
+s32 jobGetWork(void);
 
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002e6e26. */
-/* Supplied declaration required: FUN_0030f69c. */
-
-
-unsigned int FUN_002a38c0(void)
-
+/* When there is a job work area and FUN_002e6e26 yields a handle, calls FUN_0030f69c(handle, -1, 0); always returns 0. */
+u32 FUN_002a38c0(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = jobGetWork();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002e6e26(), temp_v0 != 0)) {
-    temp_v1 = FUN_002e6e26();
-    FUN_0030f69c(temp_v1,0xffffffff,0);
-  }
-  return 0;
+    s32 result;
+    u32 handle;
+
+    result = jobGetWork();
+    if ((result != 0) && (result = FUN_002e6e26(), result != 0)) {
+        handle = FUN_002e6e26();
+        FUN_0030f69c(handle, 0xFFFFFFFF, 0);
+    }
+    return 0;
 }
 
 } /* extern "C" */

@@ -1,13 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_00212500(int *param_1)
-
+/* Increments the referenced word. */
+void FUN_00212500(s32 *counter)
 {
-  *param_1 = *param_1 + 1;
-  return;
+    *counter = *counter + 1;
 }
 
 } /* extern "C" */

@@ -1,25 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011ffc0` (_code @ 0x11ffc0, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the vtable address is loaded after `mov r1, #0` instead of before it. */
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0042126c; /* 0x42126c */
+extern u8 DAT_0042126c;
 
+typedef struct Allocator Allocator;
 
-void FUN_0011ffc0(unsigned int param_1,int *param_2)
+typedef struct AllocatorVtbl {
+    void *slots[2];                                            /* 0x00 */
+    void *(*alloc)(Allocator *self, u32 size, u32 align);      /* 0x08 */
+} AllocatorVtbl;
 
+struct Allocator {
+    AllocatorVtbl *vtbl; /* 0x00 */
+};
+
+typedef struct AllocBound {
+    void *vtbl;           /* 0x00 */
+    Allocator *allocator; /* 0x04 */
+    u32 unk08;            /* 0x08 */
+} AllocBound;
+
+/* Allocates an object of 12 bytes from `allocator` and, if that worked, initializes it. */
+void FUN_0011ffc0(u32 unused, Allocator *allocator)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,0xc,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    puVar1[2] = 0;
-    *puVar1 = (unsigned int)&DAT_0042126c;
-    puVar1[1] = (unsigned int)param_2;
-  }
-  return;
+    AllocBound *obj = (AllocBound *)allocator->vtbl->alloc(allocator, 12, 4);
+
+    if (obj != NULL) {
+    obj->vtbl = &DAT_0042126c;
+    obj->allocator = allocator;
+    obj->unk08 = 0;
+    }
 }
 
 } /* extern "C" */

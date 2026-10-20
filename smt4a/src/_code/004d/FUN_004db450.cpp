@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00184310(void);
 int FUN_0032fea0(unsigned int *, int, int);
 int FUN_0035dd74(void);
-int FUN_0038b7d8(void);
+int dataTable5Count(void);
 
 /* stack frame of param_2: 9 slot(s), 34 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern int FUN_00239234(unsigned short, unsigned char *);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_0035dd74. */
-/* Supplied declaration required: FUN_0038b7d8. */
+/* Supplied declaration required: dataTable5Count. */
 
 
 unsigned int FUN_004db450(unsigned int param_1,int param_2)
@@ -68,7 +68,7 @@ unsigned int FUN_004db450(unsigned int param_1,int param_2)
   temp_v2 = FUN_001ab888();
   temp_v8 = 0;
   temp_v3 = temp_v2;
-  FUN_0038b7d8();
+  dataTable5Count();
   if (temp_v3 != 0) {
     do {
       temp_v5 = temp_v8;
@@ -136,7 +136,7 @@ LAB_004db5dc:
 LAB_004db62c:
       temp_v5 = temp_v8 + 1;
       temp_v8 = temp_v5;
-      FUN_0038b7d8();
+      dataTable5Count();
     } while (temp_v8 < temp_v5);
   }
   return temp_v17;

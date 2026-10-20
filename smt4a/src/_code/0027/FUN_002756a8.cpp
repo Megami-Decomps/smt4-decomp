@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003e5b9c(unsigned int);
+int linkHolderClearFlag(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ extern int g_mapMain; /* 0x581274 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f1ac8; /* 0x5f1ac8 */
 
-/* Supplied declaration required: FUN_003e5b9c. */
+/* Supplied declaration required: linkHolderClearFlag. */
 
 
 void FUN_002756a8(int *param_1)
@@ -23,7 +23,7 @@ void FUN_002756a8(int *param_1)
 {
 /* irregular: 1 native warning(s); review required */
   *(unsigned int *)(*param_1 + 100) = 3;
-  FUN_003e5b9c(*(unsigned int *)(g_lmapScene + 0x1a8));
+  linkHolderClearFlag(*(unsigned int *)(g_lmapScene + 0x1a8));
   if (g_mapMain != 0) {
     DAT_005f1ac8 = 1;
   }

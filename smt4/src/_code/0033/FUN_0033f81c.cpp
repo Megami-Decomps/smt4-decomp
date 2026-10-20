@@ -1,35 +1,26 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002adc88(void);
-int FUN_002c3944(unsigned int, int);
+int FUN_002c3944(u32 block, int size);
+extern u8 *FUN_002adc88(void);
 
-/* Supplied declaration required: FUN_002adc88. */
-/* Supplied declaration required: FUN_002c3944. */
-
-
+/* Clears the 0x888-byte table and sets flag 0x20 on entries 0x15E-0x18F (4-byte entries at +0x200). */
 void FUN_0033f81c(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  unsigned short temp_v2;
-  
-  temp_v0 = FUN_002adc88();
-  FUN_002c3944(temp_v0,0x888);
-  temp_v2 = 0x15e;
-  do {
-    temp_v1 = FUN_002adc88();
-    pbVar3 = (unsigned char *)(temp_v1 + temp_v2 * 4 + 0x200);
-    if (pbVar3 != (unsigned char *)0x0) {
-      *pbVar3 = *pbVar3 | 0x20;
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 400);
-  return;
+    u32 table = (u32)FUN_002adc88();
+    u8 *entry;
+    u16 index;
+
+    FUN_002c3944(table, 0x888);
+    index = 0x15e;
+    do {
+        entry = FUN_002adc88() + index * 4 + 0x200;
+        if (entry != NULL) {
+            *entry = *entry | 0x20;
+        }
+        index = index + 1;
+    } while (index < 400);
 }
 
 } /* extern "C" */

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0032ff20(int, unsigned char [300]);
+int unitRecordBuild(int, unsigned char [300]);
 int FUN_0035ad50(int, unsigned char [300]);
 int FUN_004bcd90(int);
 
 extern unsigned char *slotRecordFindById(short);
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_004bcd90. */
 
@@ -52,7 +52,7 @@ void FUN_004da5c4(unsigned int param_1,unsigned char *param_2,int param_3)
       if (temp_v0 != '\x01') {
         if (temp_v0 != '\x03') {
           if (temp_v0 == '\x02') {
-            FUN_0032ff20(temp_v1,temp_v6);
+            unitRecordBuild(temp_v1,temp_v6);
             puVar3 = temp_v6;
           }
         }

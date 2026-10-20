@@ -14,7 +14,7 @@ int VectorUnsignedToFloat(unsigned int, int);
 extern int padIsButtonDown(unsigned int);
 /* Supplied declaration required: FUN_002b06c4. */
 /* Supplied declaration required: FUN_002b9024. */
-extern int FUN_003bc96c(int, int);
+extern int bitsetTestBit(int, int);
 
 
 unsigned int FUN_0029c0c0(unsigned int param_1,int param_2)
@@ -50,7 +50,7 @@ unsigned int FUN_0029c0c0(unsigned int param_1,int param_2)
   } while (temp_v2 != 0);
   temp_v3 = 0;
   do {
-    temp_v1 = FUN_003bc96c(param_2,temp_v3);
+    temp_v1 = bitsetTestBit(param_2,temp_v3);
     if (temp_v1 != 0) {
       temp_v8 = (unsigned long long)(unsigned int)((float)temp_v8 + temp_v6);
     }

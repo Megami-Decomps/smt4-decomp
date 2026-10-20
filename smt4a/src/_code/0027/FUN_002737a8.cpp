@@ -65,7 +65,7 @@ extern int FUN_004ff970(unsigned int);
 /* Supplied declaration required: FUN_004ff98c. */
 extern int FUN_004ff9b4(unsigned int);
 extern int FUN_004ffa14(int);
-extern int FUN_004ffb58(int);
+extern int slots4FGetActiveValue(int);
 extern int FUN_004ffba8(int);
 
 
@@ -360,7 +360,7 @@ LAB_00273ee8:
 joined_r0x00273f44:
               if (temp_v2 != 0) {
                 if (((short)piVar1[temp_v4 * 0xf + 0x29] != 2) &&
-                   (temp_v2 = FUN_004ffb58(temp_v1), temp_v2 != 2)) {
+                   (temp_v2 = slots4FGetActiveValue(temp_v1), temp_v2 != 2)) {
                   *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
                   FUN_003fd924(temp_v1,2,2);
                   in_s0 = (int)temp_v9;
@@ -372,7 +372,7 @@ joined_r0x00273f44:
               temp_v2 = FUN_0018719c(0x37f);
               if (temp_v2 != 0) {
                 if (((short)piVar1[temp_v4 * 0xf + 0x29] != 2) &&
-                   (temp_v2 = FUN_004ffb58(temp_v1), temp_v2 != 2)) {
+                   (temp_v2 = slots4FGetActiveValue(temp_v1), temp_v2 != 2)) {
                   *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
                   FUN_003fd924(temp_v1,2,2);
                   in_s0 = (int)temp_v9;
@@ -414,7 +414,7 @@ joined_r0x00273f44:
               if (temp_v2 == 0) goto LAB_0027412c;
             }
             if (((short)piVar1[temp_v4 * 0xf + 0x29] != 2) &&
-               (temp_v2 = FUN_004ffb58(temp_v1), temp_v2 != 2)) {
+               (temp_v2 = slots4FGetActiveValue(temp_v1), temp_v2 != 2)) {
               *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
               FUN_003fd924(temp_v1,2,2);
               in_s0 = (int)temp_v9;
@@ -505,7 +505,7 @@ LAB_00274348:
             FUN_003fd76c(temp_v1,piVar1 + temp_v4 * 0xf + 0x25);
             in_s0 = (int)temp_v9;
             FUN_003fdb18(temp_v1);
-            temp_v2 = FUN_004ffb58(temp_v1);
+            temp_v2 = slots4FGetActiveValue(temp_v1);
             if (temp_v2 != (short)piVar1[temp_v4 * 0xf + 0x29]) {
               in_s0 = (int)temp_v9;
               FUN_003fd924(temp_v1,(int)(short)piVar1[temp_v4 * 0xf + 0x29],2);

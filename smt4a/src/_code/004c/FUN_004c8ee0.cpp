@@ -24,7 +24,7 @@ extern unsigned int DAT_00573918; /* 0x573918 */
 extern unsigned int DAT_0057391c; /* 0x57391c */
 
 extern int btlGetMainState(void);
-extern int FUN_003e0044(unsigned int);
+extern int playerHasFlagBit(unsigned int);
 extern int FUN_004c3a98(int, unsigned int);
 /* Supplied declaration required: FUN_004c8e30. */
 /* Supplied declaration required: FUN_004c9160. */
@@ -76,7 +76,7 @@ unsigned int FUN_004c8ee0(unsigned int *param_1,unsigned int param_2,unsigned in
     return temp_v2;
   }
   if (((param_1[1] & DAT_005738fc) != 0 || (*param_1 & DAT_005738f8) != 0) &&
-     (temp_v0 = FUN_003e0044(1), temp_v0 != 0)) {
+     (temp_v0 = playerHasFlagBit(1), temp_v0 != 0)) {
     temp_v2 = 0x15;
     FUN_004c8e30(0x15,0,param_3);
     return temp_v2;

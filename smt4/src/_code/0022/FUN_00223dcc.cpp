@@ -22,7 +22,7 @@ int asdMemFree(...);
 int jobStop(...);
 int FUN_002c526c(void);
 int mapMainCallIfFlag(...);
-int FUN_003c9f28(void);
+int bufferArrayFree(void);
 int software_interrupt(int);
 
 /* stack frame of void: 9 slot(s), 36 byte(s) */
@@ -62,7 +62,7 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: mapMainCallIfFlag. */
-/* Supplied declaration required: FUN_003c9f28. */
+/* Supplied declaration required: bufferArrayFree. */
 extern void nn_os_Thread_FinalizeImpl(unsigned int);
 
 
@@ -143,7 +143,7 @@ void FUN_00223dcc(void)
     asdMemFree(piVar1[0x10a]);
     asdMemFree(piVar1[0x109]);
     if (*piVar1 != 0) {
-      FUN_003c9f28();
+      bufferArrayFree();
       FUN_002b2368();
     }
     *piVar1 = 0;

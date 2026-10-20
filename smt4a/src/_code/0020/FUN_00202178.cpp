@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0053d838; /* 0x53d838 */
+extern u8 DAT_0053d838[];
 
-
-unsigned char FUN_00202178(int param_1)
-
+/* Returns byte `index` of the table at 0x53D838. */
+u8 FUN_00202178(s32 index)
 {
-  return (&DAT_0053d838)[param_1];
+    return DAT_0053d838[index];
 }
 
 } /* extern "C" */

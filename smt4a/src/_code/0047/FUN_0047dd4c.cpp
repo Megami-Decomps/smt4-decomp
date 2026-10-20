@@ -32,7 +32,7 @@ extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: FUN_00324bc8. */
 /* Supplied declaration required: FUN_003b5050. */
 /* Supplied declaration required: FUN_003d54f8. */
-extern char *FUN_004731a4(void);
+extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
 
 
@@ -50,7 +50,7 @@ void FUN_0047dd4c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   puVar5 = &temp_v4;
   temp_v4 = param_4;
-  pcVar2 = (char *)FUN_004731a4();
+  pcVar2 = (char *)gameBlockGetArea27E98();
   temp_v0 = *pcVar2;
   if (temp_v0 != '\x01') {
     if (temp_v0 != '\x02') {

@@ -1,16 +1,13 @@
-#include "romwright_types.h"
+#include "shard/SndChannel.h"
 
 extern "C" {
 
-
-void nw_snd_internal_driver_Channel_FreeChannel(int param_1)
-
+void nw_snd_internal_driver_Channel_FreeChannel(SndChannel *channel)
 {
-  if (param_1 != 0) {
-    *(unsigned int *)(param_1 + 300) = 0;
-    *(unsigned int *)(param_1 + 0x130) = 0;
-  }
-  return;
+    if (channel != NULL) {
+        channel->callback = NULL;
+        channel->callbackData = 0;
+    }
 }
 
 } /* extern "C" */

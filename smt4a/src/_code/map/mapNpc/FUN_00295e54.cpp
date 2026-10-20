@@ -40,7 +40,7 @@ extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_00353cd4. */
 /* Supplied declaration required: FUN_0037976c. */
 /* Supplied declaration required: FUN_00385964. */
-extern int FUN_003addd8(int, int);
+extern int flagPairCondition(int, int);
 extern int FUN_003b564c(void);
 /* Supplied declaration required: FUN_003fd784. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -150,7 +150,7 @@ LAB_00296008:
             temp_v3 = (int)*(char *)((int)psVar5 + 0x37);
           }
           if (((!temp_v10 || temp_v3 == 0x13) || (temp_v3 == 0x17 || temp_v3 == 0x18)) &&
-             (temp_v3 = FUN_003addd8((int)psVar5[2],(int)psVar5[3]), temp_v3 != 0)) {
+             (temp_v3 = flagPairCondition((int)psVar5[2],(int)psVar5[3]), temp_v3 != 0)) {
             if (param_3 == 0) {
               DAT_00581280[1] = (int)psVar11;
               break;

@@ -1,24 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00172088` (_code @ 0x172088, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc predicates the two stores (ldrne/stmne); retail branches over them (beq) */
+/* Allocates an 8-byte object from `allocator` and gives it its vtable and the allocator; returns it (NULL if the allocation failed). */
+#include "common.h"
+
+class AllocatorFUN_00172088 {
+public:
+    virtual void v0();
+    virtual void v1();
+    virtual void *alloc(u32 size, u32 align);
+};
+
+struct ObjFUN_00172088 {
+    /* 0x00 */ const void *vtable;
+    /* 0x04 */ AllocatorFUN_00172088 *allocator;
+};
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0055b798; /* 0x55b798 */
+extern const u8 DAT_0055b798[];
 
-
-void FUN_00172088(unsigned int param_1,int *param_2)
-
+ObjFUN_00172088 *FUN_00172088(void *unused, AllocatorFUN_00172088 *allocator)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)(*param_2 + 8))(param_2,8,4);
-  if (puVar1 != (unsigned int *)0x0) {
-    *puVar1 = (unsigned int)&DAT_0055b798;
-    puVar1[1] = (unsigned int)param_2;
-  }
-  return;
+    ObjFUN_00172088 *obj = (ObjFUN_00172088 *)allocator->alloc(8, 4);
+
+    if (obj != NULL) {
+        obj->vtable = DAT_0055b798;
+        obj->allocator = allocator;
+    }
+    return obj;
 }
 
-} /* extern "C" */
+}

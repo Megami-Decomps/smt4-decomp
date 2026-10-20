@@ -1,23 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002e0dac(unsigned int);
+int FUN_002e0dac(u32 object);
 
-extern int g_cecProcess; /* 0x43de68 */
+typedef struct CecProcess {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 object;
+} CecProcess;
 
-/* Supplied declaration required: FUN_002e0dac. */
-
+extern CecProcess *g_cecProcess; /* 0x43de68 */
 
 void FUN_00220ffc(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  if (g_cecProcess != 0) {
-    FUN_002e0dac(*(unsigned int *)(g_cecProcess + 4));
-    return;
-  }
-  return;
+    if (g_cecProcess != NULL) {
+        FUN_002e0dac(g_cecProcess->object);
+    }
 }
 
 } /* extern "C" */

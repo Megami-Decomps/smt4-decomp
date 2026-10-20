@@ -33,7 +33,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea41e. */
 extern int FUN_002ea6fc(int);
 /* Supplied declaration required: FUN_002eb5f4. */
-extern int FUN_002ee774(unsigned int **, unsigned int *);
+extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 extern unsigned int FUN_002ee978(int);
 /* Supplied declaration required: FUN_002f8aa8. */
 extern int FUN_002fd454(unsigned int *);
@@ -84,7 +84,7 @@ LAB_0011f72a:
     while( 1 ) {
       temp_v4 = (unsigned int *)*temp_v4;
       temp_v7 = *(unsigned int *)(temp_v1 + 0x98);
-      temp_v2 = FUN_002ee774(&temp_v4,(unsigned int *)&temp_v7);
+      temp_v2 = wordRefsDiffer_002ee774(&temp_v4,(unsigned int *)&temp_v7);
       if (temp_v2 == 0) break;
       temp_v2 = FUN_002fd454(temp_v4 + 2);
       if (temp_v2 == 0) {

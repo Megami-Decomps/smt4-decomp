@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ u8 mode;
+} Holder;
 
-unsigned char FUN_00169168(int param_1)
-
+/* Returns whether `mode` is 2. */
+u8 FUN_00169168(Holder *object)
 {
-  return *(char *)(param_1 + 0x44) == '\x02';
+    return object->mode == 2;
 }
 
 } /* extern "C" */

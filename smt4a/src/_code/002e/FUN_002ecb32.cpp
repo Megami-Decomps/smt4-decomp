@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ec890(...);
+int destroyObj0055ae64(...);
 int FUN_002ecb04(...);
 int FUN_002ecbdc(...);
 
@@ -15,10 +15,10 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_002ec674(unsigned char *);
-/* Supplied declaration required: FUN_002ec890. */
+/* Supplied declaration required: destroyObj0055ae64. */
 /* Supplied declaration required: FUN_002ecb04. */
 /* Supplied declaration required: FUN_002ecbdc. */
-extern unsigned int FUN_002eccc4(int);
+extern unsigned int vectorCount4_002eccc4(int);
 
 
 void FUN_002ecb32(int param_1)
@@ -33,11 +33,11 @@ void FUN_002ecb32(int param_1)
   int temp_v5;
   unsigned char temp_v6 [24];
   
-  temp_v0 = FUN_002eccc4(param_1 + 4);
+  temp_v0 = vectorCount4_002eccc4(param_1 + 4);
   if (temp_v0 >= 2) {
     FUN_002ecbdc(temp_v3,**(int **)(param_1 + 4) + 8);
     FUN_002ecbdc(temp_v6,**(int **)(param_1 + 0x10) + 8);
-    for (temp_v0 = 1; temp_v2 = FUN_002eccc4(param_1 + 4), temp_v0 < temp_v2; temp_v0 = temp_v0 + 1) {
+    for (temp_v0 = 1; temp_v2 = vectorCount4_002eccc4(param_1 + 4), temp_v0 < temp_v2; temp_v0 = temp_v0 + 1) {
       for (temp_v2 = 0; temp_v2 < (unsigned int)(temp_v5 - temp_v4) >> 1; temp_v2 = temp_v2 + 1) {
         temp_v1 = FUN_002ec674(temp_v3);
         *(char *)(temp_v1 + temp_v2) =
@@ -51,8 +51,8 @@ void FUN_002ecb32(int param_1)
       FUN_002ecb04(*(unsigned int *)(*(int *)(param_1 + 4) + temp_v0 * 4),temp_v3);
       FUN_002ecb04(*(unsigned int *)(*(int *)(param_1 + 0x10) + temp_v0 * 4),temp_v6);
     }
-    FUN_002ec890(temp_v6);
-    FUN_002ec890(temp_v3);
+    destroyObj0055ae64(temp_v6);
+    destroyObj0055ae64(temp_v3);
   }
   return;
 }

@@ -9,8 +9,8 @@ int FUN_001af214(void);
 int FUN_001b6660(unsigned int, int);
 int FUN_001cc644(int);
 int FUN_0045b96c(void);
-int FUN_00460a5c(unsigned int);
-int FUN_004617e0(unsigned int);
+int wordsFlag8Reset(unsigned int);
+int wordsFlagReset(unsigned int);
 int nw_ut_internal_LinkListImpl_insert(int, int, int);
 
 /* Supplied declaration required: FUN_001a08d0. */
@@ -19,8 +19,8 @@ int nw_ut_internal_LinkListImpl_insert(int, int, int);
 extern unsigned int FUN_001c35d8(void);
 /* Supplied declaration required: FUN_001cc644. */
 /* Supplied declaration required: FUN_0045b96c. */
-/* Supplied declaration required: FUN_00460a5c. */
-/* Supplied declaration required: FUN_004617e0. */
+/* Supplied declaration required: wordsFlag8Reset. */
+/* Supplied declaration required: wordsFlagReset. */
 /* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
 
 
@@ -43,8 +43,8 @@ void FUN_0046605c(int param_1)
   }
   temp_v2 = 0;
   do {
-    FUN_00460a5c(param_1 + temp_v2 * 0xc + 0x134);
-    FUN_004617e0(param_1 + temp_v2 * 0x10 + 0xf4);
+    wordsFlag8Reset(param_1 + temp_v2 * 0xc + 0x134);
+    wordsFlagReset(param_1 + temp_v2 * 0x10 + 0xf4);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 4);
   if (*(char *)(param_1 + 0x165) != '\0') {

@@ -1,28 +1,31 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char DAT_00589284; /* 0x589284 */
-extern unsigned char DAT_0061a684; /* 0x61a684 */
+typedef void (*Hook)(void);
 
+typedef struct Global589284 {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s8 pending;
+} Global589284;
+extern Global589284 DAT_00589284;
+extern Hook DAT_0061a684[8];
 
+/* Runs the eight registered hooks that are set, then clears `pending`; does nothing unless it is set. */
 void FUN_0016e6b8(void)
-
 {
-  int temp_v0;
-  
-  if ((*(signed char *)((unsigned char *)&DAT_00589284 + 0x2)) != '\0') {
-    temp_v0 = 0;
-    do {
-      if (*(romwright_code **)(&DAT_0061a684 + temp_v0 * 4) != (romwright_code *)0x0) {
-        (**(romwright_code **)(&DAT_0061a684 + temp_v0 * 4))();
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 8);
-    (*(signed char *)((unsigned char *)&DAT_00589284 + 0x2)) = '\0';
-  }
-  return;
+    s32 i;
+
+    if (DAT_00589284.pending != 0) {
+        i = 0;
+        do {
+            if (DAT_0061a684[i] != NULL) {
+                DAT_0061a684[i]();
+            }
+            i = i + 1;
+        } while (i < 8);
+        DAT_00589284.pending = 0;
+    }
 }
 
 } /* extern "C" */

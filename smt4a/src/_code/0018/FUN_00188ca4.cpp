@@ -1,14 +1,11 @@
-#include "romwright_types.h"
+#include "shard/GlobalBlocks.h"
 
 extern "C" {
 
-extern unsigned int DAT_005c0ac8; /* 0x5c0ac8 */
-
-
-unsigned int FUN_00188ca4(void)
-
+/* Returns the first word of the global at 0x5C0AC8. */
+u32 FUN_00188ca4(void)
 {
-  return DAT_005c0ac8;
+    return DAT_005c0ac8.unk00;
 }
 
 } /* extern "C" */

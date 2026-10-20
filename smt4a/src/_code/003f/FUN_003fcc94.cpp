@@ -7,8 +7,8 @@ extern "C" {
 int asdMemFree(...);
 int FUN_003fc1b0(...);
 int FUN_003fcd20(...);
-int FUN_00471940(...);
-int FUN_00471e60(...);
+int aocClearFlagD_C(...);
+int aocClearFlagD_10(...);
 
 typedef struct fn_003fcc94_arg0 fn_003fcc94_arg0;
 struct fn_003fcc94_arg0 {
@@ -37,8 +37,8 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_003fc1b0. */
 /* Supplied declaration required: FUN_003fcd20. */
-/* Supplied declaration required: FUN_00471940. */
-/* Supplied declaration required: FUN_00471e60. */
+/* Supplied declaration required: aocClearFlagD_C. */
+/* Supplied declaration required: aocClearFlagD_10. */
 
 
 void FUN_003fcc94(fn_003fcc94_arg0 *param_1)
@@ -58,11 +58,11 @@ void FUN_003fcc94(fn_003fcc94_arg0 *param_1)
     *(unsigned char *)((int)param_1 + 0x3d) = 0;
   }
   if (param_1->field_0x8 != 6) {
-    FUN_00471940();
+    aocClearFlagD_C();
     FUN_003fcd20(param_1,-param_1->field_0x4);
     return;
   }
-  FUN_00471e60(g_aocSystem,param_1->field_0x4);
+  aocClearFlagD_10(g_aocSystem,param_1->field_0x4);
   FUN_003fc1b0(param_1,param_1->field_0x4);
   return;
 }

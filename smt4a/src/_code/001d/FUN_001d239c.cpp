@@ -1,36 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int nw_snd_internal_driver_Voice_SetPriority(int, int);
+void nw_snd_internal_driver_Voice_SetPriority(s32 driverVoice, s32 priority);
 
-typedef struct fn_001d239c_arg0 fn_001d239c_arg0;
-struct fn_001d239c_arg0 {
-    unsigned char pad_0x0[0x98];
-    byte field_0x98; /* +0x98 */
-    unsigned char pad_0x99[0x9f];
-    undefined1 field_0x138; /* +0x138 */
-    unsigned char pad_0x139[0x3];
-    byte field_0x13c; /* +0x13c */
-    unsigned char pad_0x13d[0x6b];
-    int field_0x1a8; /* +0x1a8 */
-};
+typedef struct Voice {
+    /* 0x000 */ u8 unk000[0x98];
+    /* 0x098 */ u8 state;
+    /* 0x099 */ u8 unk099[0x9F];
+    /* 0x138 */ u8 active;
+    /* 0x139 */ u8 unk139[3];
+    /* 0x13C */ u8 locked;
+    /* 0x13D */ u8 unk13D[0x6B];
+    /* 0x1A8 */ s32 driverVoice;
+} Voice;
 
-/* Supplied declaration required: nw_snd_internal_driver_Voice_SetPriority. */
-
-
-void FUN_001d239c(fn_001d239c_arg0 *param_1)
-
+/* Moves the voice to state 4 (lowering its driver voice's priority to 1 first when it has one and is not locked) and clears `active`. */
+void FUN_001d239c(Voice *voice)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1->field_0x98 != 4) {
-    if ((param_1->field_0x1a8 != 0) && (param_1->field_0x13c == 0)) {
-      nw_snd_internal_driver_Voice_SetPriority(param_1->field_0x1a8,1);
+    if (voice->state != 4) {
+        if ((voice->driverVoice != 0) && (voice->locked == 0)) {
+            nw_snd_internal_driver_Voice_SetPriority(voice->driverVoice, 1);
+        }
+        voice->state = 4;
     }
-    param_1->field_0x98 = 4;
-  }
-  param_1->field_0x138 = 0;
-  return;
+    voice->active = 0;
 }
 
 } /* extern "C" */

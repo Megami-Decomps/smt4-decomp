@@ -1,26 +1,14 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
-
+int asdTMTexTableFreeEntry(int table);
+int FUN_002ae898(int table, int index);
 
 void FUN_00310098(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_002ae898(0x2f,0);
-  asdTMTexTableFreeEntry(0x2f);
-  return;
+    FUN_002ae898(0x2f, 0);
+    asdTMTexTableFreeEntry(0x2f);
 }
 
 } /* extern "C" */

@@ -1,36 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int asdMemFree(int);
-int FUN_00222104(void);
-int FUN_00222434(void);
-int FUN_002ce8d8(unsigned int);
+void FUN_00222104(void *ref);
+void FUN_00222434(void *shared);
+void FUN_002ce8d8(u32 handle);
+void asdMemFree(void *memory);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0xC8];
+    /* 0xC8 */ u32 handle;
+    /* 0xCC */ void *shared;
+    /* 0xD0 */ void *ref;
+} Holder;
 
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00222104. */
-/* Supplied declaration required: FUN_00222434. */
-/* Supplied declaration required: FUN_002ce8d8. */
-
-
-void FUN_00300e28(int param_1)
-
+/* Releases the shared block and reference (when set) and the handle, then frees the object. */
+void FUN_00300e28(Holder *object)
 {
-/* irregular: 4 native warning(s); review required */
-  if (*(int *)(param_1 + 0xcc) != 0) {
-    FUN_00222434();
-  }
-  if (*(int *)(param_1 + 0xd0) != 0) {
-    FUN_00222104();
-  }
-  FUN_002ce8d8(*(unsigned int *)(param_1 + 200));
-  asdMemFree(param_1);
-  return;
+    if (object->shared != NULL) {
+        FUN_00222434(object->shared);
+    }
+    if (object->ref != NULL) {
+        FUN_00222104(object->ref);
+    }
+    FUN_002ce8d8(object->handle);
+    asdMemFree(object);
 }
 
 } /* extern "C" */

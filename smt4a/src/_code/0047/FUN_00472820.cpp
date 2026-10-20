@@ -39,7 +39,7 @@ extern unsigned int *jobGetWork(void);
 extern int FUN_001654d8(void);
 extern int FUN_001654e4(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c410. */
 /* Supplied declaration required: FUN_0016c560. */
@@ -95,7 +95,7 @@ unsigned int FUN_00472820(void)
     FUN_001835b4(2,8,0x106,0,0,6);
     efctSetSpeed();
     temp_v2 = g_renderCtx;
-    temp_v1 = FUN_00169294(6,1,0);
+    temp_v1 = packNibblesAndByte(6,1,0);
     piVar12 = (int *)(temp_v2 + 0x12b8);
     temp_v6 = piVar12[*piVar12 + 2];
     piVar12[*piVar12 + 2] = temp_v1;
@@ -106,7 +106,7 @@ unsigned int FUN_00472820(void)
     VectorSignedToFloat(temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001634b4(puVar2 + 0x156);
     temp_v2 = g_renderCtx;
-    temp_v1 = FUN_00169294(6,7,0);
+    temp_v1 = packNibblesAndByte(6,7,0);
     piVar12 = (int *)(temp_v2 + 0x12b8);
     temp_v6 = piVar12[*piVar12 + 2];
     piVar12[*piVar12 + 2] = temp_v1;

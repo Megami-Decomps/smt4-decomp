@@ -1,7 +1,11 @@
 /* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the process allocation. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
+#include "AsdSDK/AsdDebug.h"
+
 extern "C" {
+extern const char DAT_00409bc8[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Sys\Kernel\AsdProcess.cpp": __FILE__ */
+
 extern AsdProcessState g_asdProcess;
 
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
@@ -20,6 +24,7 @@ u32 asdProcessCreate(const s8 *name, s32 group, u16 startDelay, u16 endDelay, As
     s32 i;
     u32 id;
 
+    asdDebugTrace(DAT_00409bc8, 1040);
     proc = (AsdProcess *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdProcess), 1);
     if (proc == NULL) {
         return 0;

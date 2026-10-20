@@ -7,16 +7,16 @@ extern "C" {
 int FUN_001641c4(void);
 int FUN_00498ff0(unsigned int *);
 int FUN_004d05c4(unsigned int *, int, unsigned int, unsigned int);
-int FUN_004d06e4(void);
-int FUN_004d097c(unsigned int);
+int releaseEntriesA(void);
+int releaseEntriesB(unsigned int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001641c4. */
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00498ff0. */
 /* Supplied declaration required: FUN_004d05c4. */
-/* Supplied declaration required: FUN_004d06e4. */
-/* Supplied declaration required: FUN_004d097c. */
+/* Supplied declaration required: releaseEntriesA. */
+/* Supplied declaration required: releaseEntriesB. */
 
 
 void FUN_004964e0(unsigned int *param_1,int param_2)
@@ -29,8 +29,8 @@ void FUN_004964e0(unsigned int *param_1,int param_2)
   unsigned int temp_v3;
   int temp_v4;
   
-  FUN_004d097c(param_1[0x2cf]);
-  FUN_004d06e4();
+  releaseEntriesB(param_1[0x2cf]);
+  releaseEntriesA();
   temp_v4 = 0;
   if (temp_v4 < (short)param_1[0x580c]) {
     do {

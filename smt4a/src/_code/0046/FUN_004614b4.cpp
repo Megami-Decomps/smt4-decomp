@@ -7,7 +7,7 @@ extern "C" {
 extern unsigned char DAT_0055c160; /* 0x55c160 */
 extern unsigned char DAT_0055c180; /* 0x55c180 */
 
-extern int FUN_004611d0(unsigned int *);
+extern int vtblHandleInit55C11C(unsigned int *);
 
 
 int FUN_004614b4(unsigned int *param_1)
@@ -22,7 +22,7 @@ int FUN_004614b4(unsigned int *param_1)
     *(unsigned char *)((int)param_1 + 0x261) = 1;
     param_1[4] = 0;
   }
-  temp_v0 = FUN_004611d0(param_1 + 3);
+  temp_v0 = vtblHandleInit55C11C(param_1 + 3);
   return temp_v0 - 0xc;
 }
 

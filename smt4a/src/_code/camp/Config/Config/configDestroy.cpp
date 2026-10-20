@@ -11,7 +11,7 @@ int scrScriptProcessDestroy(u32 resource);
 int FUN_001641c4(void);
 int FUN_001add24(int id);
 int asdTMTexTableFreeEntry(int type);
-int FUN_003491e8(void);
+int obj04Finish(void);
 
 extern ConfigWorkA *g_config;
 
@@ -33,7 +33,7 @@ void configDestroy(void)
         for (i = 0; i < config->count; i++) {
             FUN_001641c4();
         }
-        FUN_003491e8();
+        obj04Finish();
         if (config->resource != 0) {
             scrScriptProcessDestroy(config->resource);
             config->resource = 0;

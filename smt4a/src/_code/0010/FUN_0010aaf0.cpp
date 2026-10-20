@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0010ab0c(unsigned int, int, int);
+void FUN_0010ab0c(u32 dest, void *entry, s32 value);
 
-/* Supplied declaration required: FUN_0010ab0c. */
+typedef struct Entry {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 value;
+} Entry;
 
-
-void FUN_0010aaf0(unsigned int param_1,int param_2)
-
+/* Calls FUN_0010ab0c with the entry and its 16-bit value at 0x20. */
+void FUN_0010aaf0(u32 dest, Entry *entry)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0010ab0c(param_1,param_2,*(unsigned short *)(param_2 + 0x20));
-  return;
+    FUN_0010ab0c(dest, entry, entry->value);
 }
 
 } /* extern "C" */

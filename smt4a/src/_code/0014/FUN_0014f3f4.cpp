@@ -73,7 +73,7 @@ extern int FUN_001671e0(void);
 extern int FUN_0016887c(unsigned int);
 extern int FUN_001688c4(unsigned int);
 extern int FUN_00169240(unsigned int);
-extern unsigned int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0016c69c. */
@@ -314,7 +314,7 @@ char FUN_0014f3f4(void)
                 temp_v21 = 0x13;
                 temp_v20 = 0;
                 FUN_001835b4(2,8,0x116,temp_v6);
-                temp_v7 = FUN_00169294(6,1,0);
+                temp_v7 = packNibblesAndByte(6,1,0);
                 FUN_0016c6f0(g_renderCtx,6,temp_v7);
                 efctSetSpeed();
                 temp_v21 = 0x15;
@@ -359,7 +359,7 @@ char FUN_0014f3f4(void)
         temp_v20 = 0;
         temp_v21 = 0x1a;
         FUN_001835b4(2,8,0x182,temp_v6);
-        temp_v7 = FUN_00169294(6,1,0);
+        temp_v7 = packNibblesAndByte(6,1,0);
         FUN_0016c6f0(g_renderCtx,6,temp_v7);
         efctSetSpeed();
         temp_v20 = 0;

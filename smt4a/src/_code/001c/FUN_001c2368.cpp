@@ -1,42 +1,49 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001b6694(unsigned int, int);
+void FUN_001b6694(u32 queue, u8 *member);
+u32 FUN_001b1f04(void);
 
-extern unsigned int FUN_001b1f04(void);
-/* Supplied declaration required: FUN_001b6694. */
+typedef struct Source3 {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u8 second;
+    /* 0x05 */ u8 unk05[3];
+    /* 0x08 */ u32 third;
+} Source3;
 
+typedef struct Params6 {
+    /* 0x00 */ f32 values[6];
+} Params6;
 
-void FUN_001c2368(int param_1,unsigned int *param_2,unsigned int *param_3)
+typedef struct Voice {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u8 member50[0x1C];
+    /* 0x6C */ u32 first;
+    /* 0x70 */ u8 second;
+    /* 0x71 */ u8 unk71[3];
+    /* 0x74 */ u32 third;
+    /* 0x78 */ u8 unk78[0x28];
+    /* 0xA0 */ u8 configured;
+    /* 0xA1 */ u8 unkA1;
+    /* 0xA2 */ u8 queued;
+    /* 0xA3 */ u8 unkA3[9];
+    /* 0xAC */ Params6 params;
+} Voice;
 
+/* Configures the voice from two parameter blocks (3 words and 6 floats), marks it configured and queues it. */
+void FUN_001c2368(Voice *voice, Source3 *a, Params6 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  *(unsigned int *)(param_1 + 0x6c) = *param_2;
-  *(unsigned char *)(param_1 + 0x70) = *(unsigned char *)(param_2 + 1);
-  *(unsigned int *)(param_1 + 0x74) = param_2[2];
-  temp_v0 = param_3[1];
-  temp_v1 = param_3[2];
-  temp_v2 = param_3[3];
-  temp_v3 = param_3[4];
-  temp_v4 = param_3[5];
-  *(unsigned int *)(param_1 + 0xac) = *param_3;
-  *(unsigned int *)(param_1 + 0xb0) = temp_v0;
-  *(unsigned int *)(param_1 + 0xb4) = temp_v1;
-  *(unsigned int *)(param_1 + 0xb8) = temp_v2;
-  *(unsigned int *)(param_1 + 0xbc) = temp_v3;
-  *(unsigned int *)(param_1 + 0xc0) = temp_v4;
-  *(unsigned char *)(param_1 + 0xa0) = 1;
-  temp_v0 = FUN_001b1f04();
-  FUN_001b6694(temp_v0,param_1 + 0x50);
-  *(unsigned char *)(param_1 + 0xa2) = 1;
-  return;
+    u32 queue;
+
+    voice->first = a->first;
+    voice->second = a->second;
+    voice->third = a->third;
+    voice->params = *b;
+    voice->configured = 1;
+    queue = FUN_001b1f04();
+    FUN_001b6694(queue, voice->member50);
+    voice->queued = 1;
 }
 
 } /* extern "C" */

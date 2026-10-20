@@ -11,7 +11,7 @@ int FUN_00237418(void);
 int FUN_00270b00(void);
 int FUN_00270c58(int);
 int FUN_002e342c(...);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_003d2d6c(int);
 int FUN_003d54f8(int, int);
 int FUN_004b7a08(int);
@@ -39,13 +39,13 @@ extern int FUN_001bd118(void);
 /* Supplied declaration required: FUN_00270b00. */
 /* Supplied declaration required: FUN_00270c58. */
 /* Supplied declaration required: FUN_002e342c. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_003d2d6c. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern int FUN_004186e0(void);
 /* Supplied declaration required: FUN_004b7a08. */
-extern unsigned int FUN_004ba790(int);
-extern int FUN_004ba7a8(int);
+extern unsigned int menu4CGetCurrentEntry(int);
+extern int menu4CReleaseSlots(int);
 
 
 void FUN_004b82a0(int param_1)
@@ -61,7 +61,7 @@ void FUN_004b82a0(int param_1)
   unsigned int temp_v5 [9];
   
   puVar5 = temp_v5;
-  temp_v0 = FUN_004ba7a8(param_1 + 0x9c);
+  temp_v0 = menu4CReleaseSlots(param_1 + 0x9c);
   if (temp_v0 == 0) {
     return;
   }
@@ -144,7 +144,7 @@ void FUN_004b82a0(int param_1)
       if (temp_v0 != 0) {
         temp_v3 = FUN_001bd118();
         if (temp_v3 == 6) {
-          temp_v2 = FUN_004ba790(param_1 + 0x9c);
+          temp_v2 = menu4CGetCurrentEntry(param_1 + 0x9c);
           *(unsigned int *)(param_1 + 0x111c) = temp_v2;
           FUN_004b7a08(param_1);
           FUN_001ad9b4();
@@ -153,7 +153,7 @@ void FUN_004b82a0(int param_1)
       }
       if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
         *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
-        FUN_003491e8();
+        obj04Finish();
       }
       *(unsigned char *)(param_1 + 0x24) = 1;
       *(unsigned int *)(param_1 + 0x28) = 0x12;
@@ -176,7 +176,7 @@ void FUN_004b82a0(int param_1)
 LAB_004b8550:
   if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
     *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
-    FUN_003491e8();
+    obj04Finish();
   }
   *(unsigned char *)(param_1 + 0x24) = 1;
   *(unsigned int *)(param_1 + 0x28) = 0x12;

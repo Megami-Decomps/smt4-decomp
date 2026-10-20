@@ -1,111 +1,104 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_001aa030(void);
-int FUN_00220f5c(unsigned int *);
+int FUN_00220f5c(void *obj);
 int FUN_002523f0(void);
-int FUN_00290f48(int);
-int FUN_0029c3b0(int);
-int FUN_002a46d8(int);
-int scrScriptProcessDestroy(void);
-int asdTMTexTableFreeEntry(int);
-int FUN_002ae898(int, int);
-int asdMemFree(...);
-int jobStop(unsigned int, int);
+int FUN_00290f48(int id);
+int FUN_0029c3b0(int id);
+int FUN_002a46d8(int id);
+int scrScriptProcessDestroy(u32 process);
+int asdTMTexTableFreeEntry(int table);
+int FUN_002ae898(int table, int index);
+int asdMemFree(u32 ptr);
+int jobStop(u32 job, int mode);
 int runWinDestroy(void);
+extern int FUN_0026efec(int index);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
+typedef struct Scene {
+    /* 0x000 */ u32 job;
+    /* 0x004 */ u8 unk004[0x9C];
+    /* 0x0A0 */ u8 sub[0xC4C];
+    /* 0xCEC */ u32 bufferA;
+    /* 0xCF0 */ u32 bufferB;
+    /* 0xCF4 */ u32 bufferC;
+    /* 0xCF8 */ u32 bufferD;
+    /* 0xCFC */ u32 bufferE;
+    /* 0xD00 */ u32 bufferF;
+    /* 0xD04 */ u32 scriptA;
+    /* 0xD08 */ u32 scriptB;
+    /* 0xD0C */ u8 unkD0C[0x50];
+    /* 0xD5C */ u32 shuttingDown;
+} Scene;
 
-extern unsigned int *DAT_0043daa8; /* 0x43daa8 */
-
-/* Supplied declaration required: FUN_001aa030. */
-/* Supplied declaration required: FUN_00220f5c. */
-/* Supplied declaration required: FUN_002523f0. */
-extern int FUN_0026efec(int);
-/* Supplied declaration required: FUN_00290f48. */
-/* Supplied declaration required: FUN_0029c3b0. */
-/* Supplied declaration required: FUN_002a46d8. */
-/* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_002ae898. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: runWinDestroy. */
-
+extern Scene *DAT_0043daa8;
 
 void FUN_0024182c(void)
-
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  puVar1 = DAT_0043daa8;
-  if (DAT_0043daa8[0x357] != 0) {
-    if (DAT_0043daa8[0x33d] != 0) {
-      asdMemFree();
+    Scene *scene = DAT_0043daa8;
+    int entry;
+    int i;
+
+    if (DAT_0043daa8->shuttingDown != 0) {
+        if (DAT_0043daa8->bufferC != 0) {
+            asdMemFree(scene->bufferC);
+        }
+        if (scene->bufferD != 0) {
+            asdMemFree(scene->bufferD);
+        }
+        if (scene->scriptA != 0) {
+            scrScriptProcessDestroy(scene->scriptA);
+        }
+        jobStop(scene->job, 0);
+        asdMemFree((u32)scene);
+        DAT_0043daa8 = NULL;
+        return;
     }
-    if (puVar1[0x33e] != 0) {
-      asdMemFree();
+    i = 0;
+    do {
+        entry = FUN_0026efec(i);
+        i++;
+        if ((*(u8 *)(entry + 0x20) & 0x10) != 0) {
+            *(u8 *)(entry + 0x20) = *(u8 *)(entry + 0x20) & ~0x10U;
+        }
+    } while (i < 0xc);
+    FUN_001aa030();
+    FUN_002a46d8(0x25);
+    FUN_002523f0();
+    if (scene->bufferA != 0) {
+        asdMemFree(scene->bufferA);
     }
-    if (puVar1[0x341] != 0) {
-      scrScriptProcessDestroy();
+    if (scene->bufferB != 0) {
+        asdMemFree(scene->bufferB);
     }
-    jobStop(*puVar1,0);
-    asdMemFree(puVar1);
-    DAT_0043daa8 = (unsigned int *)0x0;
-    return;
-  }
-  temp_v1 = 0;
-  do {
-    temp_v0 = FUN_0026efec(temp_v1);
-    temp_v1 = temp_v1 + 1;
-    if ((*(unsigned char *)(temp_v0 + 0x20) & 0x10) != 0) {
-      *(unsigned char *)(temp_v0 + 0x20) = *(unsigned char *)(temp_v0 + 0x20) & ~0x10U;
+    if (scene->bufferC != 0) {
+        asdMemFree(scene->bufferC);
     }
-  } while (temp_v1 < 0xc);
-  FUN_001aa030();
-  FUN_002a46d8(0x25);
-  FUN_002523f0();
-  if (puVar1[0x33b] != 0) {
-    asdMemFree();
-  }
-  if (puVar1[0x33c] != 0) {
-    asdMemFree();
-  }
-  if (puVar1[0x33d] != 0) {
-    asdMemFree();
-  }
-  if (puVar1[0x33e] != 0) {
-    asdMemFree();
-  }
-  if (puVar1[0x33f] != 0) {
-    asdMemFree();
-  }
-  if (puVar1[0x340] != 0) {
-    asdMemFree();
-  }
-  if (puVar1[0x341] != 0) {
-    scrScriptProcessDestroy();
-  }
-  if (puVar1[0x342] != 0) {
-    scrScriptProcessDestroy();
-  }
-  FUN_002ae898(0x39,0);
-  asdTMTexTableFreeEntry(0x39);
-  runWinDestroy();
-  FUN_00220f5c(DAT_0043daa8 + 0x28);
-  jobStop(*puVar1,0);
-  asdMemFree(puVar1);
-  DAT_0043daa8 = (unsigned int *)0x0;
-  FUN_0029c3b0(0xf);
-  FUN_00290f48(0x2d);
-  return;
+    if (scene->bufferD != 0) {
+        asdMemFree(scene->bufferD);
+    }
+    if (scene->bufferE != 0) {
+        asdMemFree(scene->bufferE);
+    }
+    if (scene->bufferF != 0) {
+        asdMemFree(scene->bufferF);
+    }
+    if (scene->scriptA != 0) {
+        scrScriptProcessDestroy(scene->scriptA);
+    }
+    if (scene->scriptB != 0) {
+        scrScriptProcessDestroy(scene->scriptB);
+    }
+    FUN_002ae898(0x39, 0);
+    asdTMTexTableFreeEntry(0x39);
+    runWinDestroy();
+    FUN_00220f5c(DAT_0043daa8->sub);
+    jobStop(scene->job, 0);
+    asdMemFree((u32)scene);
+    DAT_0043daa8 = NULL;
+    FUN_0029c3b0(0xf);
+    FUN_00290f48(0x2d);
 }
 
 } /* extern "C" */

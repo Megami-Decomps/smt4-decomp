@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00188374(unsigned char **, int);
 int FUN_002e0c48(void);
 int FUN_002e0fac(void);
-int FUN_00317c60(unsigned char **);
-int FUN_003417ec(void);
+int taggedOwnerRelease(unsigned char **);
+int taggedOwnerRelease2(void);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -29,9 +29,9 @@ extern int FUN_002befc0(void);
 extern int FUN_002e09b4(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e0c48. */
 /* Supplied declaration required: FUN_002e0fac. */
-/* Supplied declaration required: FUN_00317c60. */
+/* Supplied declaration required: taggedOwnerRelease. */
 extern int FUN_0032cab4(unsigned char **);
-/* Supplied declaration required: FUN_003417ec. */
+/* Supplied declaration required: taggedOwnerRelease2. */
 
 
 unsigned int FUN_003416a0(int param_1,unsigned int param_2)
@@ -85,7 +85,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
         }
       }
       else {
-        FUN_003417ec();
+        taggedOwnerRelease2();
       }
     }
     else {
@@ -93,7 +93,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
     }
   }
   else {
-    FUN_00317c60(&temp_v1);
+    taggedOwnerRelease(&temp_v1);
   }
   FUN_00188374(&temp_v1,0);
   return 1;

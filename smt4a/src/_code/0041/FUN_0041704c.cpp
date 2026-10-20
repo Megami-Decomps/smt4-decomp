@@ -25,7 +25,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: sysPlaySe. */
-extern unsigned int FUN_00187010(unsigned int);
+extern unsigned int saveSlotFindById(unsigned int);
 /* Supplied declaration required: FUN_00215bd0. */
 extern int FUN_00224880(unsigned int);
 extern int FUN_0023b3d0(void);
@@ -74,7 +74,7 @@ LAB_004170bc:
       FUN_0035da20(temp_v2,8);
     }
     else {
-      temp_v1 = FUN_00187010(*(unsigned int *)(param_1 + 0x34) & 0xffff);
+      temp_v1 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
       FUN_002c85b0(0xc);
       FUN_0037e0d0(temp_v1,0);
       FUN_002a7324(1);

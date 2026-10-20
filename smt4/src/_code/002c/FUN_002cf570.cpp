@@ -1,19 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_useCounter; /* 0x43dd20 */
+typedef struct Obj {
+    /* 0x000 */ u8 unk000[0x7EC];
+    /* 0x7EC */ u32 unk7EC;
+    /* 0x7F0 */ u32 unk7F0;
+} Obj;
 
+extern struct {
+    u8 unk0[4];
+    Obj *obj;
+} g_useCounter; /* 0x43dd20 */
 
-void FUN_002cf570(unsigned int param_1,unsigned int param_2)
-
+void FUN_002cf570(u32 a, u32 b)
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_useCounter + 0x4));
-  *(unsigned int *)((*(int *)((unsigned char *)&g_useCounter + 0x4)) + 0x7ec) = param_1;
-  *(unsigned int *)(temp_v0 + 0x7f0) = param_2;
-  return;
+    Obj *obj = g_useCounter.obj;
+
+    g_useCounter.obj->unk7EC = a;
+    obj->unk7F0 = b;
 }
 
 } /* extern "C" */

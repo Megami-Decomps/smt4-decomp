@@ -76,7 +76,7 @@ extern unsigned int DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 extern int FUN_002bf684(unsigned char *);
 /* Supplied declaration required: FUN_002bf694. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 extern int rt_memcmp(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: nw_snd_Sound3DActor_Initialize. */
@@ -180,7 +180,7 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
     do {
       nw_snd_Sound3DActor_Initialize(temp_v3 * 0x84 + 0x4e2728,&DAT_004e20ec,&DAT_004e26ec);
       if ((DAT_004e3134 != '\0') && (temp_v3 < 0x10)) {
-        if (((DAT_00476628 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476628), temp_v0 != 0)) {
+        if (((DAT_00476628 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476628), temp_v0 != 0)) {
           g_asdSoundListener = (unsigned int)temp_v4;
           DAT_004efd30 = g_asdSoundListener;
           DAT_004efd34 = g_asdSoundListener;

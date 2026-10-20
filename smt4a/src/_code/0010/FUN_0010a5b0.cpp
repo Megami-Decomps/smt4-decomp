@@ -90,11 +90,11 @@ extern int FUN_002eb83c(void);
 extern unsigned int FUN_002f34c8(int);
 /* Supplied declaration required: FUN_002f3524. */
 /* Supplied declaration required: FUN_002f3532. */
-extern int FUN_002f3594(unsigned char *, unsigned int *);
+extern int wordRefsDiffer_002f3594(unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_002f35a4. */
 extern int FUN_002f35b6(int, unsigned char *, unsigned char *);
-extern int FUN_002f35ec(unsigned char **, unsigned int *);
-extern int FUN_002f35fc(unsigned char **, unsigned int *);
+extern int wordRefsEqual_002f35ec(unsigned char **, unsigned int *);
+extern int wordRefsDiffer_002f35fc(unsigned char **, unsigned int *);
 extern int FUN_002f360c(unsigned char *, unsigned char *);
 /* Supplied declaration required: FUN_002f3624. */
 
@@ -214,11 +214,11 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
       if (DAT_00594a68 != 0) {
         temp_v34 = *(unsigned int *)(param_1 + 0x34);
         FUN_002f3532(temp_v40,param_1 + 0x24,temp_v20);
-        temp_v4 = FUN_002f3594(temp_v40,(unsigned int *)&temp_v34);
+        temp_v4 = wordRefsDiffer_002f3594(temp_v40,(unsigned int *)&temp_v34);
         if (temp_v4 == 0) {
           temp_v35 = *(unsigned int *)(param_1 + 0x34);
           FUN_002f3532(temp_v42,param_1 + 0x24,temp_v14);
-          temp_v4 = FUN_002f3594(temp_v42,(unsigned int *)&temp_v35);
+          temp_v4 = wordRefsDiffer_002f3594(temp_v42,(unsigned int *)&temp_v35);
           if (temp_v4 == 0) {
             FUN_002e6e34(temp_v39,param_1 + 0x4c);
             FUN_002eb588(&temp_v24);
@@ -239,14 +239,14 @@ unsigned int FUN_0010a5b0(int param_1,unsigned int param_2,unsigned int param_3,
             }
             temp_v26 = temp_v31;
             temp_v32 = *(unsigned int *)(param_1 + 0x18);
-            temp_v4 = FUN_002f35ec(&temp_v26,(unsigned int *)&temp_v32);
+            temp_v4 = wordRefsEqual_002f35ec(&temp_v26,(unsigned int *)&temp_v32);
             if ((temp_v4 != 0) ||
                (temp_v4 = FUN_002f35b6(temp_v30,temp_v29,temp_v26 + 0x10), temp_v28 = temp_v26,
                temp_v4 != 0)) {
               temp_v28 = *(unsigned char **)(param_1 + 0x18);
             }
             temp_v33 = *(unsigned int *)(param_1 + 0x18);
-            temp_v4 = FUN_002f35fc(&temp_v28,(unsigned int *)&temp_v33);
+            temp_v4 = wordRefsDiffer_002f35fc(&temp_v28,(unsigned int *)&temp_v33);
             puVar8 = temp_v28;
             if (temp_v4 == 0) {
               if ((DAT_00594a70 != 0) && (temp_v6 = FUN_0010a53c(param_1,0), temp_v6 >= DAT_00594a70)) {

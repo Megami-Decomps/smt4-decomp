@@ -149,7 +149,7 @@ extern int FUN_0029e1c8(void);
 /* Supplied declaration required: FUN_0029e908. */
 extern int FUN_0029e958(int);
 /* Supplied declaration required: FUN_0029eb5c. */
-extern int FUN_0029ebac(unsigned int *, unsigned int);
+extern int flagWordTestBit(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
@@ -1879,7 +1879,7 @@ LAB_0019d3e4:
           if (*piVar14 >= 0x2a) {
             *(unsigned char *)(temp_v17 + 0x5925) = 0;
             *piVar14 = 0;
-            temp_v8 = FUN_0029ebac(temp_v31,4);
+            temp_v8 = flagWordTestBit(temp_v31,4);
             if (temp_v8 != 0) {
               *(unsigned char *)(temp_v17 + 0x5978) = 1;
               *(unsigned short *)(temp_v7 + 0x595a) = 0;

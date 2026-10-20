@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Shard003B.h"
 
 extern "C" {
 
-
-int FUN_003bcf20(int param_1)
-
+s32 FUN_003bcf20(Menu32 *menu)
 {
-  return (int)*(short *)(param_1 + 0x4b1e);
+    return menu->unk4B1E;
 }
 
 } /* extern "C" */

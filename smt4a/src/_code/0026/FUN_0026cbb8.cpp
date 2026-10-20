@@ -15,16 +15,16 @@ int FUN_002685cc(void);
 int FUN_002a49e4(...);
 int FUN_00336de4(...);
 int FUN_003450d4(...);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_00359b6c(...);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_0037b578(...);
+int screenStartOrClear(...);
 int whisperEffectStart(...);
-int FUN_003d2204(...);
+int roundObjFinish(...);
 int FUN_003d2d34(...);
 int FUN_003d2d6c(...);
 int FUN_003df4ec(...);
-int FUN_003dfd5c(void);
+int countUnlockedSlots(void);
 int FUN_003e0174(...);
 int FUN_003e40b8(...);
 int SBORROW4(...);
@@ -120,23 +120,23 @@ extern int FUN_0032169c(void);
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int FUN_00348ed0(unsigned int);
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_00359b6c. */
 extern int FUN_0035fd00(unsigned short);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: whisperEffectFinish. */
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: whisperEffectStart. */
-/* Supplied declaration required: FUN_003d2204. */
+/* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003d2d6c. */
 /* Supplied declaration required: FUN_003df4a4. */
 /* Supplied declaration required: FUN_003df4ec. */
-/* Supplied declaration required: FUN_003dfd5c. */
+/* Supplied declaration required: countUnlockedSlots. */
 /* Supplied declaration required: FUN_003e0174. */
 /* Supplied declaration required: FUN_003e40b8. */
 /* Supplied declaration required: FUN_004bca68. */
-extern int FUN_004bd21c(int);
+extern int getUnlockedSlotCount(int);
 
 
 void FUN_0026cbb8(int param_1)
@@ -699,7 +699,7 @@ LAB_0026e1e4:
       }
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < 8);
-    temp_v8 = FUN_003dfd5c();
+    temp_v8 = countUnlockedSlots();
     FUN_00203b40(temp_v30,temp_v8,temp_v8,1,1,1);
     FUN_00203b40(temp_v26,temp_v28 + 1,9,1,1,1);
     temp_v9 = FUN_002a4894(temp_v26);
@@ -772,7 +772,7 @@ LAB_0026e044:
       if (0 < (int)*puVar27) {
         temp_v24 = (short *)(param_1 + 0x76c2);
         do {
-          temp_v7 = FUN_003dfd5c();
+          temp_v7 = countUnlockedSlots();
           temp_v5 = param_1 + temp_v26 * 2;
           temp_v9 = FUN_003df4a4(*(unsigned short *)(temp_v5 + 0x76c4));
           if (temp_v9 == 0) {
@@ -879,7 +879,7 @@ LAB_0026e66c:
         FUN_0020b490(param_1,0x11);
       }
       else {
-        FUN_003d2204(param_1);
+        roundObjFinish(param_1);
       }
       if (*(int *)(param_1 + 0x4364) != 0x17) {
         FUN_003d2d6c(0);
@@ -921,7 +921,7 @@ LAB_0026e66c:
       temp_v6 = FUN_002a4894(temp_v26);
       temp_v9 = FUN_002c2c68(temp_v26);
       if (temp_v9 - 1 <= temp_v6) {
-        FUN_0037b578(*(unsigned int *)(param_1 + 0x43a4),700);
+        screenStartOrClear(*(unsigned int *)(param_1 + 0x43a4),700);
         return;
       }
       temp_v6 = FUN_002a4894(temp_v26);
@@ -954,7 +954,7 @@ LAB_0026e66c:
     temp_v9 = FUN_002c2c68(temp_v26);
     if (temp_v9 - 1 <= temp_v28) {
       FUN_001641b4(0x100020e);
-      FUN_003491e8();
+      obj04Finish();
       sysPlaySe(0x9c);
       temp_v8 = *(unsigned int *)(param_1 + 0x436c);
       *(unsigned int *)(param_1 + 0x436c) = 99;
@@ -1015,7 +1015,7 @@ LAB_0026d5fc:
     else {
       *(unsigned short *)(param_1 + *puVar27 * 2 + 0x76c4) = *(unsigned short *)(temp_v9 + 0x34);
       *puVar27 = *puVar27 + 1;
-      temp_v14 = FUN_003dfd5c();
+      temp_v14 = countUnlockedSlots();
       temp_v22 = 0;
       temp_v6 = -1;
       temp_v20 = 0;
@@ -1112,7 +1112,7 @@ LAB_0026d4c4:
           temp_v9 = 0;
         }
         temp_v6 = temp_v9;
-        temp_v14 = FUN_004bd21c(temp_v5);
+        temp_v14 = getUnlockedSlotCount(temp_v5);
         if (temp_v9 < temp_v14) {
           puVar24 = (unsigned int *)(temp_v29 + 0x7854);
           temp_v11 = temp_v29 + 0x76c4;
@@ -1218,7 +1218,7 @@ LAB_0026d4c4:
         qsort(temp_v29,8,2,&LAB_00321c94);
         *(short *)(temp_v9 + 0x76a4) = temp_v4;
         *(unsigned short *)(temp_v9 + 0x76b4) = 0;
-        temp_v14 = FUN_003dfd5c();
+        temp_v14 = countUnlockedSlots();
         if (temp_v34 != 0) {
           temp_v20 = 0;
           if (0 < temp_v14) {
@@ -1246,7 +1246,7 @@ LAB_0026da60:
         temp_v20 = 0;
         *(unsigned short *)(temp_v9 + 0x76a4) = *(unsigned short *)(param_1 + temp_v7 * 2 + 0x76c2);
         *(unsigned short *)(temp_v9 + 0x76b4) = 0;
-        temp_v14 = FUN_003dfd5c();
+        temp_v14 = countUnlockedSlots();
         if (0 < temp_v14) {
           do {
             if (*(short *)(temp_v6 + temp_v20 * 2 + 0x34) == *(short *)(temp_v9 + 0x76a4)) {
@@ -1255,7 +1255,7 @@ LAB_0026da60:
               break;
             }
             temp_v20 = temp_v20 + 1;
-            temp_v14 = FUN_003dfd5c();
+            temp_v14 = countUnlockedSlots();
           } while (temp_v20 < temp_v14);
         }
       }

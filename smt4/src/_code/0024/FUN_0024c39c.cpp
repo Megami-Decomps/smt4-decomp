@@ -1,24 +1,29 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern unsigned char g_handlerTable;
+typedef struct HandlerEntry {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ void (*handler)(u32 arg);
+    /* 0x2C */ u8 unk2C[0x18];
+} HandlerEntry;
 
-void FUN_0024c39c(int param_1)
+typedef struct Request {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u16 index;
+    /* 0x6 */ u8 unk6[2];
+    /* 0x8 */ u32 arg;
+} Request;
 
+extern HandlerEntry g_handlerTable[];
+
+void FUN_0024c39c(Request *request)
 {
-/* irregular: 2 native warning(s); review required */
-  romwright_code *UNRECOVERED_JUMPTABLE;
-  
-  UNRECOVERED_JUMPTABLE = *(romwright_code **)(&g_handlerTable + (unsigned int)*(unsigned short *)(param_1 + 4) * 0x44 + 0x28);
-  if (UNRECOVERED_JUMPTABLE != (romwright_code *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x0024c3bc. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (*UNRECOVERED_JUMPTABLE)(*(unsigned int *)(param_1 + 8));
-    return;
-  }
-  return;
+    void (*handler)(u32 arg) = g_handlerTable[request->index].handler;
+
+    if (handler != NULL) {
+        handler(request->arg);
+    }
 }
 
 } /* extern "C" */

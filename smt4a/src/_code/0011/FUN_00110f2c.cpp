@@ -38,7 +38,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
 /* Supplied declaration required: FUN_002e9afe. */
-extern int FUN_002ea4ac(int *, unsigned int *);
+extern int wordRefsEqual_002ea4ac(int *, unsigned int *);
 /* Supplied declaration required: FUN_002edb54. */
 /* Supplied declaration required: FUN_002f7824. */
 /* Supplied declaration required: FUN_002f8b88. */
@@ -136,7 +136,7 @@ LAB_00111002:
   if ((temp_v2 & ~temp_v6) != 0) {
     if (temp_v11 < 0) {
       temp_v14 = 0xd840a02b;
-      temp_v1 = FUN_002ea4ac(&temp_v11,(unsigned int *)&temp_v14);
+      temp_v1 = wordRefsEqual_002ea4ac(&temp_v11,(unsigned int *)&temp_v14);
       if (temp_v1 == 0) goto LAB_00111096;
     }
     temp_v7 = 0;
@@ -158,7 +158,7 @@ LAB_00111096:
     if ((temp_v11 < 0) && (temp_v11 != -0x27bf5fd5)) {
       if (*(char *)(param_1 + 0x108d) == '\0') {
         temp_v3 = 0xd8a0a03c;
-        temp_v1 = FUN_002ea4ac(&temp_v11,(unsigned int *)&temp_v3);
+        temp_v1 = wordRefsEqual_002ea4ac(&temp_v11,(unsigned int *)&temp_v3);
         if (temp_v1 != 0) {
           temp_v5 = 0;
           FUN_005023d0(temp_v4,&temp_v5);

@@ -7,8 +7,8 @@ extern "C" {
 int FUN_0020401c(int);
 int FUN_00275bc8(void *, unsigned int);
 int FUN_003d54f8(int, int);
-int FUN_0049cf5c(...);
-int FUN_0049d030(void);
+int dataTable17Type1GetEntry(...);
+int dataTable17Count(void);
 
 typedef struct fn_0049569c_arg0 fn_0049569c_arg0;
 struct fn_0049569c_arg0 {
@@ -34,8 +34,8 @@ extern int FUN_0018719c(unsigned short);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern int FUN_004962e4(void);
-/* Supplied declaration required: FUN_0049cf5c. */
-/* Supplied declaration required: FUN_0049d030. */
+/* Supplied declaration required: dataTable17Type1GetEntry. */
+/* Supplied declaration required: dataTable17Count. */
 
 
 void FUN_0049569c(fn_0049569c_arg0 *param_1)
@@ -69,9 +69,9 @@ void FUN_0049569c(fn_0049569c_arg0 *param_1)
     FUN_003d54f8(1,10);
     temp_v0 = param_1->field_0x18;
     temp_v5 = param_1->field_0x1c;
-    temp_v2 = FUN_0049cf5c(temp_v7,0);
+    temp_v2 = dataTable17Type1GetEntry(temp_v7,0);
     temp_v4 = 0;
-    FUN_0049d030();
+    dataTable17Count();
     temp_v1 = -1;
     if (0 < (int)puVar5) {
       do {
@@ -84,11 +84,11 @@ void FUN_0049569c(fn_0049569c_arg0 *param_1)
         if (temp_v6 && temp_v3 == temp_v5) break;
         temp_v4 = temp_v4 + 1;
         puVar5 = temp_v7;
-        FUN_0049d030();
+        dataTable17Count();
         temp_v1 = -1;
       } while (temp_v4 < (int)puVar5);
     }
-    temp_v2 = FUN_0049cf5c(temp_v8,temp_v1);
+    temp_v2 = dataTable17Type1GetEntry(temp_v8,temp_v1);
     temp_v1 = FUN_0018719c(*(unsigned short *)(temp_v2 + 0x6a));
     if (temp_v1 != 0) {
       temp_v2 = temp_v2 + 0x6c;

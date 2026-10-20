@@ -1,64 +1,71 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001dcf78(unsigned int);
-int FUN_001dcfd0(unsigned int);
-int FUN_00211c90(unsigned int);
-int FUN_00291414(unsigned int);
+int FUN_001dcf78(u32 item);
+int FUN_001dcfd0(u32 item);
+int FUN_00211c90(u32 item);
+int FUN_00291414(u32 item);
 
-/* Supplied declaration required: FUN_001dcf78. */
-/* Supplied declaration required: FUN_001dcfd0. */
-/* Supplied declaration required: FUN_00211c90. */
-/* Supplied declaration required: FUN_00291414. */
+typedef struct Collection {
+    /* 0x00 */ u32 *unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 unk08[4];
+    /* 0x0C */ s32 countA;
+    /* 0x10 */ s32 countB;
+    /* 0x14 */ s32 countD;
+    /* 0x18 */ s32 countC;
+    /* 0x1C */ u32 unk1C;
+    /* 0x20 */ u8 unk20[0x30];
+    /* 0x50 */ u32 itemsA[0x10];
+    /* 0x90 */ u32 itemsB[0x10];
+    /* 0xD0 */ u32 itemsD[0x10];
+    /* 0x110 */ u32 itemsC[0x10];
+} Collection;
 
-
-void FUN_00221c70(unsigned int *param_1)
-
+/* Releases every item of the four lists and resets the collection. */
+void FUN_00221c70(Collection *collection)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 != (unsigned int *)0x0) {
-    if (0 < (int)param_1[3]) {
-      do {
-        FUN_00291414(param_1[temp_v0 + 0x14]);
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)param_1[3]);
+    s32 i = 0;
+
+    if (collection != NULL) {
+        if (0 < collection->countA) {
+            do {
+                FUN_00291414(collection->itemsA[i]);
+                i++;
+            } while (i < collection->countA);
+        }
+        i = 0;
+        if (i < collection->countB) {
+            do {
+                FUN_00211c90(collection->itemsB[i]);
+                i++;
+            } while (i < collection->countB);
+        }
+        i = 0;
+        if (i < collection->countC) {
+            do {
+                FUN_001dcfd0(collection->itemsC[i]);
+                i++;
+            } while (i < collection->countC);
+        }
+        i = 0;
+        if (i < collection->countD) {
+            do {
+                FUN_001dcf78(collection->itemsD[i]);
+                i++;
+            } while (i < collection->countD);
+        }
+        collection->countA = 0;
+        collection->countB = 0;
+        collection->countC = 0;
+        collection->countD = 0;
+        collection->unk1C = 0;
+        collection->unk04 = 0;
+        if (collection->unk00 != NULL) {
+            *collection->unk00 = 0;
+        }
     }
-    temp_v0 = 0;
-    if (temp_v0 < (int)param_1[4]) {
-      do {
-        FUN_00211c90(param_1[temp_v0 + 0x24]);
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)param_1[4]);
-    }
-    temp_v0 = 0;
-    if (temp_v0 < (int)param_1[6]) {
-      do {
-        FUN_001dcfd0(param_1[temp_v0 + 0x44]);
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)param_1[6]);
-    }
-    temp_v0 = 0;
-    if (temp_v0 < (int)param_1[5]) {
-      do {
-        FUN_001dcf78(param_1[temp_v0 + 0x34]);
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)param_1[5]);
-    }
-    param_1[3] = 0;
-    param_1[4] = 0;
-    param_1[6] = 0;
-    param_1[5] = 0;
-    param_1[7] = 0;
-    param_1[1] = 0;
-    if ((unsigned int *)*param_1 != (unsigned int *)0x0) {
-      *(unsigned int *)*param_1 = 0;
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

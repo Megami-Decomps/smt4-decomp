@@ -1,36 +1,52 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
+typedef struct Target {
+    /* 0x00 */ u8 unk00[0x11];
+    /* 0x11 */ u8 state;
+} Target;
 
-void FUN_001b9624(int *param_1)
+typedef struct Watcher Watcher;
+typedef void (*WatcherCallback)(Watcher *watcher, s32 reason, u32 userData);
+struct Watcher {
+    /* 0x00 */ s32 owner;
+    /* 0x04 */ u8 unk04[8];
+    /* 0x0C */ WatcherCallback callback;
+    /* 0x10 */ u32 userData;
+    /* 0x14 */ u8 active;
+    /* 0x15 */ u8 started;
+    /* 0x16 */ u8 pending;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u8 unk18[4];
+    /* 0x1C */ Target *target;
+};
 
+/* If the watcher is active and pending, and its owner's target is not in state 1 or 2, notifies the callback (reason 0) and clears `pending` and `started`. */
+void FUN_001b9624(Watcher *watcher)
 {
-  char temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v2 = *(char *)(param_1 + 5) != '\0';
-  temp_v0 = '\0';
-  if (temp_v2) {
-    temp_v0 = *(char *)((int)param_1 + 0x16);
-  }
-  if (temp_v2 && temp_v0 != '\0') {
-    temp_v1 = 0;
-    if (*param_1 != 0) {
-      temp_v1 = param_1[7];
+    u8 pending;
+    u8 active;
+    Target *target;
+
+    active = watcher->active != 0;
+    pending = 0;
+    if (active) {
+        pending = watcher->pending;
     }
-    if ((*param_1 != 0 && temp_v1 != 0) &&
-       (*(char *)(temp_v1 + 0x11) != '\x01' && *(char *)(temp_v1 + 0x11) != '\x02')) {
-      if ((romwright_code *)param_1[3] != (romwright_code *)0x0) {
-        (*(romwright_code *)param_1[3])(param_1,0,param_1[4]);
-      }
-      *(unsigned char *)((int)param_1 + 0x16) = 0;
-      *(unsigned char *)((int)param_1 + 0x15) = 0;
+    if (active && pending != 0) {
+        target = NULL;
+        if (watcher->owner != 0) {
+            target = watcher->target;
+        }
+        if ((watcher->owner != 0 && target != NULL) && (target->state != 1 && target->state != 2)) {
+            if (watcher->callback != NULL) {
+                watcher->callback(watcher, 0, watcher->userData);
+            }
+            watcher->pending = 0;
+            watcher->started = 0;
+        }
     }
-  }
-  return;
 }
 
 } /* extern "C" */

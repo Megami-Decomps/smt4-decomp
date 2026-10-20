@@ -1,17 +1,24 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_0057f110; /* 0x57f110 */
+typedef struct Object {
+    /* 0x000 */ u8 unk000[0x14C];
+    /* 0x14C */ u32 value;
+} Object;
 
+typedef struct Global57f110 {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Object *object;
+} Global57f110;
+extern Global57f110 DAT_0057f110;
 
-void FUN_002e2404(unsigned int param_1)
-
+/* Stores `value` in the word at 0x14C of the held object, if there is one. */
+void FUN_002e2404(u32 value)
 {
-  if ((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) != 0) {
-    *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0x14c) = param_1;
-  }
-  return;
+    if (DAT_0057f110.object != NULL) {
+        DAT_0057f110.object->value = value;
+    }
 }
 
 } /* extern "C" */

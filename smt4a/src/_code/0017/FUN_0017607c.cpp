@@ -1,23 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Record {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[0x30];
+} Record;                       /* 0x32 */
 
-int FUN_0017607c(int param_1,unsigned int param_2)
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x37C];
+    /* 0x37C */ s32 count;
+    /* 0x380 */ Record *records;
+} Holder;
 
+/* Returns the record with the given id, or NULL. */
+Record *FUN_0017607c(Holder *object, u32 id)
 {
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (temp_v0 < *(int *)(param_1 + 0x37c)) {
-    do {
-      if (*(unsigned short *)(*(int *)(param_1 + 0x380) + temp_v0 * 0x32) == param_2) {
-        return *(int *)(param_1 + 0x380) + temp_v0 * 0x32;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(int *)(param_1 + 0x37c));
-  }
-  return 0;
+    s32 i;
+
+    i = 0;
+    if (i < object->count) {
+        do {
+            if (object->records[i].id == id) {
+                return &object->records[i];
+            }
+            i = i + 1;
+        } while (i < object->count);
+    }
+    return NULL;
 }
 
 } /* extern "C" */

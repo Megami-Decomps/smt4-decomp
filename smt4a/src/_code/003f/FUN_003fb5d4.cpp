@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00100388(...);
-int FUN_00100824(...);
+int refIsNullOrZero(...);
 int FUN_0013c174(...);
 int FUN_001883b0(...);
 int vcallSlot12IfValid(...);
@@ -48,7 +48,7 @@ extern unsigned char LAB_003fb978; /* 0x3fb978 */
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: FUN_00100388. */
-/* Supplied declaration required: FUN_00100824. */
+/* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_0013c174. */
 extern int FUN_0014afd0(void *, unsigned int);
@@ -159,7 +159,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
         puVar4 = temp_v6;
         temp_v9 = 0;
         temp_v10 = 0;
-        FUN_00100824(&temp_v9);
+        refIsNullOrZero(&temp_v9);
         puVar8 = temp_v4;
         while ((temp_v0 = FUN_00100836(puVar9,0x105,(unsigned int *)&temp_v9), temp_v0 != 0 &&
                (puVar3 = puVar8, FUN_002e3c44(puVar8,puVar9,temp_v0,&temp_v9),

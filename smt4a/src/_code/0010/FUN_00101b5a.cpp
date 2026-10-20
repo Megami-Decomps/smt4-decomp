@@ -31,7 +31,7 @@ typedef struct {
 extern unsigned char *FUN_001024a8(unsigned int, unsigned int, unsigned int *, int *);
 extern unsigned char *FUN_001024ac(unsigned int, unsigned int, unsigned int *, int *);
 extern int FUN_002e2ec0(void);
-extern int FUN_002e363c(unsigned int);
+extern int isAsciiDigit(unsigned int);
 /* Supplied declaration required: FUN_002e5550. */
 
 
@@ -195,7 +195,7 @@ LAB_00101da6:
       temp_v3 = temp_v2 | 0x80;
     }
     else {
-      temp_v0 = FUN_002e363c(temp_v10);
+      temp_v0 = isAsciiDigit(temp_v10);
       if (temp_v0 == 0) {
         if ((0 < temp_v4) &&
            (((temp_v10 == 0x65 || (temp_v10 == 0x45)) && ((int)(temp_v2 << 0x16) < 0)))) {
@@ -228,7 +228,7 @@ LAB_00101da6:
           *temp_v11 = temp_v1;
           temp_v5 = temp_v11 + 1;
           temp_v11 = temp_v5;
-          while ((0 < temp_v0 && (temp_v4 = FUN_002e363c(temp_v10), temp_v4 != 0))) {
+          while ((0 < temp_v0 && (temp_v4 = isAsciiDigit(temp_v10), temp_v4 != 0))) {
             temp_v0 = temp_v0 - 1;
             if ((unsigned int)temp_v11 < temp_v17) {
               *temp_v11 = (char)(temp_v10 - 0x30);

@@ -25,7 +25,7 @@ int FUN_0021c354(int);
 int FUN_00224880(...);
 int FUN_00275bc8(void);
 int FUN_00275f44(...);
-int FUN_003491e8(void);
+int obj04Finish(void);
 int FUN_0035b304(void);
 int FUN_0037b450(void);
 int FUN_003c3e14(void);
@@ -82,9 +82,9 @@ extern int FUN_002121c4(unsigned int);
 extern int FUN_002a4b60(void);
 extern int FUN_002a4b74(void);
 extern int FUN_0031d62c(void);
-extern int FUN_00331194(void);
+extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: FUN_003423cc. */
-/* Supplied declaration required: FUN_003491e8. */
+/* Supplied declaration required: obj04Finish. */
 extern unsigned int FUN_00357bc8(unsigned int, int);
 /* Supplied declaration required: FUN_0035b304. */
 /* Supplied declaration required: FUN_0037b450. */
@@ -270,9 +270,9 @@ LAB_002146c0:
     }
     FUN_00224880(puVar2[0x14]);
     FUN_00224880(puVar2[0x15]);
-    temp_v7 = FUN_00331194();
+    temp_v7 = panelIsMissingOrFlagClear();
     if (temp_v7 == 0) break;
-    FUN_003491e8();
+    obj04Finish();
     temp_v7 = FUN_002a4b74();
     if (-1 < temp_v7) {
       temp_v7 = FUN_002a4b74();

@@ -1,19 +1,23 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00128eac(int);
-extern int FUN_002f8520(int);
+u8 *destroyObj00558ac4(u8 *member);
+u8 *FUN_002f8520(u8 *member);
 
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ u8 member30[1];
+} Holder;
 
-int FUN_002f30fc(int param_1)
-
+/* Destroys the member at 0x30 and then the base part FUN_002f8520 hands back; returns the address 8 past that. */
+u8 *FUN_002f30fc(Holder *object)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002f8520(param_1 + 0x30);
-  temp_v0 = FUN_00128eac(temp_v0 - 0x28);
-  return temp_v0 - 8;
+    u8 *member;
+
+    member = FUN_002f8520(object->member30);
+    member = destroyObj00558ac4(member - 0x28);
+    return member - 8;
 }
 
 } /* extern "C" */

@@ -9,9 +9,9 @@ int FUN_001a9110(...);
 int FUN_001ac2d4(...);
 int FUN_00280c5c(...);
 int FUN_0032c5c4(...);
-int FUN_00341060(...);
+int faderSetValue(...);
 int FUN_0036bb1c(...);
-int FUN_003b99a4(void);
+int dataTable2CType1Count(void);
 int VectorSignedToFloat(...);
 
 extern unsigned char LAB_00378dc4; /* 0x378dc4 */
@@ -26,10 +26,10 @@ extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00280c5c. */
 /* Supplied declaration required: FUN_0032c5c4. */
-/* Supplied declaration required: FUN_00341060. */
+/* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_0036bb1c. */
-extern char *FUN_00385910(int);
-/* Supplied declaration required: FUN_003b99a4. */
+extern char *dataTable2CType1GetEntry(int);
+/* Supplied declaration required: dataTable2CType1Count. */
 
 
 unsigned int FUN_00378a90(void)
@@ -78,7 +78,7 @@ unsigned int FUN_00378a90(void)
           FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
           FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),piVar3[temp_v2 * 0xb + 0x44a])
           ;
-          FUN_00341060(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8));
+          faderSetValue(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8));
           puVar2 = (unsigned int *)piVar3[temp_v2 * 0xb + 0x44d];
           *puVar2 = *puVar2 | 2;
           *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;
@@ -124,7 +124,7 @@ unsigned int FUN_00378a90(void)
           FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
           FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),piVar3[temp_v1 * 0xb + 0x44a])
           ;
-          FUN_00341060(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8));
+          faderSetValue(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8));
           puVar2 = (unsigned int *)piVar3[temp_v1 * 0xb + 0x44d];
           temp_v1 = temp_v1 + 1;
           *puVar2 = *puVar2 | 2;
@@ -176,7 +176,7 @@ unsigned int FUN_00378a90(void)
                     );
         FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
         FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),piVar3[temp_v1 * 0xb + 0x4ad]);
-        FUN_00341060(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8));
+        faderSetValue(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8));
         puVar2 = (unsigned int *)piVar3[temp_v1 * 0xb + 0x4b0];
         temp_v1 = temp_v1 + 1;
         *puVar2 = *puVar2 | 2;
@@ -190,10 +190,10 @@ unsigned int FUN_00378a90(void)
       if (temp_v1 == 0x1e) {
         temp_v1 = 0;
         DAT_00581270[1] = 0;
-        FUN_003b99a4();
+        dataTable2CType1Count();
         if (0 < (int)piVar3) {
           do {
-            pcVar4 = (char *)FUN_00385910(temp_v1);
+            pcVar4 = (char *)dataTable2CType1GetEntry(temp_v1);
             piVar3 = DAT_00581270;
             if (*pcVar4 == -1) break;
             if (((int)*pcVar4 == (int)(short)DAT_00581270[3]) &&
@@ -229,7 +229,7 @@ LAB_00379048:
               DAT_00581270[1] = DAT_00581270[1] + 1;
             }
             temp_v1 = temp_v1 + 1;
-            FUN_003b99a4();
+            dataTable2CType1Count();
           } while (temp_v1 < (int)piVar3);
         }
         *DAT_00581270 = 99;
@@ -258,7 +258,7 @@ LAB_00379048:
       FUN_0032c5c4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
       FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
       FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);
-      FUN_00341060(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8));
+      faderSetValue(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8));
       puVar2 = (unsigned int *)piVar3[temp_v2 * 0xb + 0x4b0];
       *puVar2 = *puVar2 | 2;
       *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 0;

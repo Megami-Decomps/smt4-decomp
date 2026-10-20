@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail loads a file name string and a line number (876) into r0/r1 before the allocation call (the call itself is a nop in the retail image). */
 #include "battle/btlAction.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -11,6 +11,7 @@ extern BtlActionGlobals g_btlAction;
 void btlActionAllocData(void)
 {
     if (g_btlAction.data == NULL) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlAction.cpp", 15239);
         g_btlAction.data = asdMemoryAllocTracked(0x100, 0x100, 0, 0xDBF4, 1);
     }
 }

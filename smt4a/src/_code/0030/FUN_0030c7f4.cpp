@@ -1,17 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int FUN_0012433e(void);
+u32 wordRefEqual(void);
 
-
-unsigned int FUN_0030c7f4(void)
-
+/* Returns the negation of wordRefEqual's result. */
+u32 FUN_0030c7f4(void)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = FUN_0012433e();
-  return temp_v0 ^ 1;
+    u32 result;
+
+    result = wordRefEqual();
+    return result ^ 1;
 }
 
 } /* extern "C" */

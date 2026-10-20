@@ -3,6 +3,7 @@
 #define TITLE_TITLEMAIN_H
 
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 /* The title screen's block, kept by a module global. */
 typedef struct TitleMain {
@@ -12,8 +13,8 @@ typedef struct TitleMain {
     /* 0x85 */ u8 unk85;
     /* 0x86 */ u8 unk86[2];
     /* 0x88 */ u32 unk88;
-    /* 0x8C */ u32 unk8C;
-    /* 0x90 */ u32 unk90;
+    /* 0x8C */ AsdMdlObject *modelA;   /* destroyed with the title screen */
+    /* 0x90 */ AsdMdlObject *modelB;   /* destroyed with the title screen */
 } TitleMain;
 
 /* Apocalypse keeps another word in front of the title screen's pointer. */

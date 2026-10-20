@@ -42,7 +42,7 @@ extern unsigned int FUN_002b41c4(unsigned int);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e71ac. */
 extern int FUN_00300778(unsigned int, int);
-extern unsigned int FUN_003385e4(unsigned int);
+extern unsigned int nodeChainCount(unsigned int);
 /* Supplied declaration required: FUN_00350a8c. */
 /* Supplied declaration required: FUN_00351590. */
 extern unsigned int *FUN_00376628(unsigned int, unsigned int);
@@ -115,7 +115,7 @@ unsigned int FUN_003c597c(void)
 LAB_003c5af0:
       DAT_0059dbf8 = temp_v1;
       *(unsigned char **)(DAT_0059dc18 + 0x34) = &DAT_0059e9a8;
-      temp_v2 = FUN_003385e4(DAT_0059dbf4);
+      temp_v2 = nodeChainCount(DAT_0059dbf4);
       if (temp_v2 >= 0x16) {
         DAT_0059dbec = temp_v2 - 0x15;
         DAT_0059e9b4 = 0x14;

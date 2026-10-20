@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_001cc644(int);
 int FUN_001d0b34(void);
-int FUN_00461e58(int);
-int FUN_00461f10(int, int);
+int voiceOwnerClear(int);
+int voiceOwnerRefresh(int, int);
 int FUN_00461fe0(int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -23,8 +23,8 @@ extern int DAT_005c0f84; /* 0x5c0f84 */
 /* Supplied declaration required: FUN_001cc644. */
 /* Supplied declaration required: FUN_001d0b34. */
 extern int FUN_00461d28(int, unsigned int);
-/* Supplied declaration required: FUN_00461e58. */
-/* Supplied declaration required: FUN_00461f10. */
+/* Supplied declaration required: voiceOwnerClear. */
+/* Supplied declaration required: voiceOwnerRefresh. */
 /* Supplied declaration required: FUN_00461fe0. */
 
 
@@ -48,8 +48,8 @@ void FUN_00466140(int param_1)
   temp_v4 = 0;
   do {
     if ((temp_v4 < 0x10) && (temp_v5 = *(int *)(param_1 + temp_v4 * 4 + 0x90), temp_v5 != 0)) {
-      FUN_00461f10(temp_v5,0x7f);
-      FUN_00461e58(temp_v5);
+      voiceOwnerRefresh(temp_v5,0x7f);
+      voiceOwnerClear(temp_v5);
     }
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 0x10);

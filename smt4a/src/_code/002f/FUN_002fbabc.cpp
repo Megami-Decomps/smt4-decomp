@@ -1,12 +1,20 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Entry {
+    /* 0x00 */ u8 data[0x18];
+} Entry;
 
-int FUN_002fbabc(int param_1,int param_2)
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Entry *entries;
+} Holder;
 
+/* Returns element `index` (0x18 bytes each) of the entry array. */
+Entry *FUN_002fbabc(Holder *object, s32 index)
 {
-  return *(int *)(param_1 + 4) + param_2 * 0x18;
+    return object->entries + index;
 }
 
 } /* extern "C" */

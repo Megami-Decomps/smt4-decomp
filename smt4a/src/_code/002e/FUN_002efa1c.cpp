@@ -1,15 +1,21 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Holder {
+    /* 0x000 */ u8 unk000[0x14C];
+    /* 0x14C */ u8 enabled;
+    /* 0x14D */ u8 unk14D[0x0B];
+    /* 0x158 */ s32 flags;
+} Holder;
 
-unsigned int FUN_002efa1c(int param_1)
-
+/* Returns 1 when the object is enabled and bit 25 of `flags` is set. */
+u32 FUN_002efa1c(Holder *object)
 {
-  if ((*(char *)(param_1 + 0x14c) == '\0') || (*(int *)(param_1 + 0x158) << 7 >= 0)) {
-    return 0;
-  }
-  return 1;
+    if ((object->enabled == 0) || (object->flags << 7 >= 0)) {
+        return 0;
+    }
+    return 1;
 }
 
 } /* extern "C" */

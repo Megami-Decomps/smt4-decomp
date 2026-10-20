@@ -1,13 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-void FUN_0030fe6c(int *param_1,int *param_2,int param_3)
-
+/* Stores `*base + offset` in `*dest`. */
+void FUN_0030fe6c(s32 *dest, s32 *base, s32 offset)
 {
-  *param_1 = *param_2 + param_3;
-  return;
+    *dest = *base + offset;
 }
 
 } /* extern "C" */

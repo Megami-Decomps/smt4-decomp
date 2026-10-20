@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_4_stack;
 
-extern int FUN_002fbada(unsigned int **, unsigned int *);
+extern int wordRefsDiffer_002fbada(unsigned int **, unsigned int *);
 /* Supplied declaration required: FUN_00307dc2. */
 
 
@@ -29,7 +29,7 @@ void FUN_0031023c(unsigned int param_1,unsigned int *param_2,unsigned int *param
   
   temp_v2 = param_3;
   temp_v3 = param_4;
-  while (temp_v0 = FUN_002fbada(&temp_v2,(unsigned int *)&temp_v3), temp_v0 != 0) {
+  while (temp_v0 = wordRefsDiffer_002fbada(&temp_v2,(unsigned int *)&temp_v3), temp_v0 != 0) {
     temp_v1[0] = *param_2;
     FUN_00307dc2(temp_v4,param_1,temp_v1,temp_v2 + 2);
     temp_v2 = (unsigned int *)*temp_v2;

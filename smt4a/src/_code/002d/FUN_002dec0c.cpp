@@ -1,32 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0047c5a8(void);
+void FUN_0047c5a8(void);
 
-/* Supplied declaration required: FUN_0047c5a8. */
+typedef struct Target {
+    /* 0x00 */ u8 unk00[0x1A];
+    /* 0x1A */ u8 mode;
+    /* 0x1B */ u8 unk1B;
+    /* 0x1C */ s32 handle;
+} Target;
 
-
-unsigned int FUN_002dec0c(int *param_1)
-
+/* When the target `*ref` is in mode 1, 2 or 3 and has a handle, runs FUN_0047c5a8; always returns 0. */
+u32 FUN_002dec0c(Target **ref)
 {
-/* irregular: 1 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = *param_1;
-  temp_v0 = *(char *)(temp_v1 + 0x1a);
-  if ((temp_v0 == '\x01' || temp_v0 == '\x02') || temp_v0 == '\x03') {
-    temp_v2 = 0;
-    if (temp_v1 != 0) {
-      temp_v2 = *(int *)(temp_v1 + 0x1c);
+    u8 mode;
+    Target *target;
+    s32 handle;
+
+    target = *ref;
+    mode = target->mode;
+    if ((mode == 1 || mode == 2) || mode == 3) {
+        handle = 0;
+        if (target != NULL) {
+            handle = target->handle;
+        }
+        if (target != NULL && handle != 0) {
+            FUN_0047c5a8();
+        }
     }
-    if (temp_v1 != 0 && temp_v2 != 0) {
-      FUN_0047c5a8();
-    }
-  }
-  return 0;
+    return 0;
 }
 
 } /* extern "C" */

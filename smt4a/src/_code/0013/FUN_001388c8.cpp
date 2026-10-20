@@ -1,14 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+typedef struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s8 flag;
+} GameDataBlocksView;
+extern GameDataBlocksView g_gameDataBlocks;
 
-
-int FUN_001388c8(void)
-
+/* Returns the signed byte at 0x2 of the game-data block table. */
+s32 FUN_001388c8(void)
 {
-  return (int)(*(signed char *)((unsigned char *)&g_gameDataBlocks + 0x2));
+    return g_gameDataBlocks.flag;
 }
 
 } /* extern "C" */

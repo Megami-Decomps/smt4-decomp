@@ -49,7 +49,7 @@ extern int DAT_0043daa8; /* 0x43daa8 */
 
 /* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: FUN_002005a0. */
-extern int FUN_00259594(unsigned int);
+extern int gameDataBlockTestFlag(unsigned int);
 extern int FUN_002595bc(void);
 /* Supplied declaration required: FUN_00259784. */
 /* Supplied declaration required: FUN_002597c0. */
@@ -114,7 +114,7 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
       }
       temp_v1 = FUN_002595bc();
       param_1->field_0xd60 = (char)temp_v1;
-      if ((temp_v1 != 0) && (temp_v1 = FUN_00259594(0x20), temp_v1 != 0)) {
+      if ((temp_v1 != 0) && (temp_v1 = gameDataBlockTestFlag(0x20), temp_v1 != 0)) {
         FUN_002005a0(&temp_v3);
         temp_v1 = rt_memcmp(temp_v5,DAT_0043daa8 + 0x80,0x14);
         if (temp_v1 != 0) {

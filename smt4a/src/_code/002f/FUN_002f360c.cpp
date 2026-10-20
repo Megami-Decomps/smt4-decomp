@@ -1,21 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_002ede60(...);
+u8 *FUN_002ede60(u8 *dest, u8 *source);
 
-/* Supplied declaration required: FUN_002ede60. */
-
-
-int FUN_002f360c(unsigned int param_1,int param_2)
-
+/* Assigns the 0x20-byte members of `b` into those of the object FUN_002ede60 returns for the first two arguments; returns the object. */
+u8 *FUN_002f360c(u8 *a, u8 *b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_002ede60();
-  temp_v0 = FUN_002ede60(temp_v0 + 0x20,param_2 + 0x20);
-  return temp_v0 - 0x20;
+    u8 *target;
+
+    target = FUN_002ede60(a, b);
+    target = FUN_002ede60(target + 0x20, b + 0x20);
+    return target - 0x20;
 }
 
 } /* extern "C" */

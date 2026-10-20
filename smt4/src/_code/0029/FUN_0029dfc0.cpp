@@ -1,23 +1,17 @@
-#include "romwright_types.h"
+#include "shard/GameGlobals.h"
 
 extern "C" {
 
-extern unsigned char g_gameGlobals; /* 0x44e140 */
-
-
-void FUN_0029dfc0(int param_1)
-
+void FUN_0029dfc0(int value)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
-  *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e60) = (char)param_1;
-  if (((param_1 == 0) && (*(char *)(temp_v0 + 0x1e67) != '\t')) &&
-     (temp_v1 = *(int *)(temp_v0 + 0x12dc), (temp_v1 == 4 || temp_v1 == 5) || temp_v1 == 6)) {
-    *(unsigned int *)(temp_v0 + 0x12e0) = 0;
-  }
-  return;
+    GameData *data = g_gameGlobals.data;
+    int state;
+
+    data->unk1E60 = (s8)value;
+    if (((value == 0) && (data->unk1E67 != 9)) &&
+        (state = data->unk12DC, (state == 4 || state == 5) || state == 6)) {
+        data->unk12E0 = 0;
+    }
 }
 
 } /* extern "C" */

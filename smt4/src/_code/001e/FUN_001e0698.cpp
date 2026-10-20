@@ -1,5 +1,3 @@
-/* NON_MATCHING: only the literal-pool word differs: retail holds the resolved address 0x32c6c8 of the callback label, this build a relocation against LAB_0032c6c8
- * (writing the address as an integer constant makes the compiler hoist it into a register across both calls). */
 #include "common.h"
 
 extern "C" {

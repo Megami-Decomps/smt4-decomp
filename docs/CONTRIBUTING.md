@@ -31,17 +31,30 @@ Every match must be one a programmer could have written for a reason.
   walk an array or struct, and small `static __inline` accessors in headers.
 - A near miss stays as it is with a `/* NON_MATCHING: ... */` comment saying what still differs.
   Don't keep a fake match to raise the count.
-- `blx` against `bl` on a call is not a difference: the linker picks it (`fdiff` already ignores it).
+- `blx` against `bl` on a call is not a difference: the linker picks it. Retail target objects hold
+  calls in the compiler's form (`bl` with a call relocation).
 - **Compiler flags need evidence.** A unit can override the flags with a `cflags` list in
-  `config/project.json` when the retail code shows a different build: a constant division that calls
-  `__aeabi_idivmod`/`__aeabi_uidivmod` instead of multiplying is `-Ospace` (the STL and SDK containers
-  were built that way). Write the C as `/` and `%` and set the flag; never call the helper by hand.
-- **A `mov r0, r0` in retail ARM code is a removed call.** armcc never emits it; armlink writes it
-  over a call to a `__weak` function the release build didn't link: the engine's debug hook, called
-  with `__FILE__` and `__LINE__` (retail still loads the file string into r0 and the line into r1).
-  Write the call: `asdDebugTrace(DAT_00409c64, 172);` with `include/AsdSDK/AsdDebug.h`, where the
-  string is the retail `__FILE__` global and the number the line. `build.py` (and `fdiff`) turn calls
-  to undefined weak functions into `mov r0, r0` after compiling, as armlink did.
+  `config/project.json` when the retail code shows a different build:
+  - a constant division that calls `__aeabi_idivmod`/`__aeabi_uidivmod` instead of multiplying is
+    `-Ospace` (the STL and SDK containers were built that way). Write `/` and `%` and set the flag;
+    never call the helper by hand;
+  - `--cpu=5TE` (Thumb register moves written `movs rd, rm` where MPCore armcc writes `mov`: runtime
+    and library code), `-O2`: only when the function is IDENTICAL with the flag and not without it.
+- **Linker NOPs are calls.** armcc never emits `mov r0, r0` (ARM) or `mov r8, r8` twice (Thumb);
+  armlink writes them over a branch it removed. `build.py` and `fdiff` do the same after compiling,
+  so write the call:
+  - **a call to a `__weak` function the release build didn't link**: mostly the engine's debug hook,
+    called with `__FILE__` and `__LINE__` (retail still loads the file name into r0, the line into
+    r1). Write `asdDebugTrace(DAT_00409c64, 172);` with `include/AsdSDK/AsdDebug.h` when retail
+    loads the string from a global, or `asdDebugTrace("c:\\SMT4\\...\\File.cpp", 172);` when it
+    addresses it pc-relatively (armcc put the literal after the pool; `fdiff` and `relink.py` compare
+    those bytes with the image). A weak function declared `__declspec(noreturn)` is reached with
+    a plain `b`, so its NOP has no `pop` around it;
+  - **a branch to the very next instruction** (armlink's `--branchnop`): a tail call into the
+    function placed right after. Write the call as the last statement.
+- **A function that starts with a NOP before its `push`** is two functions the analysis merged: a
+  stub forwarding to the next one, and that function. Split the unit with
+  `python -B tools/units.py split ROWS` (`<game> <function> <hex offset>` per row) and write both.
 
 ## Readability standard
 

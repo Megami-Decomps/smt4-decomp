@@ -21,7 +21,7 @@ int FUN_00185e84(...);
 int FUN_001aba54(void);
 int FUN_0022fb78(int, int);
 int FUN_002c7e24(void);
-int FUN_0032ff20(int, unsigned char [300]);
+int unitRecordBuild(int, unsigned char [300]);
 int FUN_0035ad50(int, unsigned char [300]);
 int FUN_00389d9c(...);
 int FUN_003b615c(int);
@@ -69,7 +69,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int FUN_001654d8(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -87,16 +87,16 @@ extern int FUN_002c2c68(int);
 /* Supplied declaration required: FUN_002c7e24. */
 extern int FUN_002c7e3c(void);
 extern int FUN_002c7e54(void);
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 extern int FUN_00348ed0(int);
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_00389d9c. */
 /* Supplied declaration required: FUN_003b615c. */
 extern unsigned int FUN_003df57c(unsigned short, unsigned int);
-extern int FUN_003dfd5c(void);
+extern int countUnlockedSlots(void);
 /* Supplied declaration required: FUN_004bca68. */
 /* Supplied declaration required: FUN_004bcbb4. */
-extern int FUN_004bd21c(unsigned char *);
+extern int getUnlockedSlotCount(unsigned char *);
 /* Supplied declaration required: FUN_004bd6b0. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -185,20 +185,20 @@ void FUN_001fc720(int param_1,int param_2)
           rt_memcpy_w(temp_v19,puVar15,300);
         }
         else {
-          FUN_0032ff20(*(unsigned short *)(temp_v25 + 0x98),temp_v19);
+          unitRecordBuild(*(unsigned short *)(temp_v25 + 0x98),temp_v19);
         }
       }
       else {
         FUN_0035ad50(*(unsigned short *)(temp_v25 + 0x98),temp_v19);
       }
       if (*(short *)(temp_v25 + 0x98) < 0) {
-        temp_v3 = FUN_003dfd5c();
+        temp_v3 = countUnlockedSlots();
       }
       else if (temp_v22 != 4) {
         if (puVar15 == (unsigned char *)0x0) {
           puVar15 = temp_v19;
         }
-        temp_v3 = FUN_004bd21c(puVar15);
+        temp_v3 = getUnlockedSlotCount(puVar15);
       }
       else {
         FUN_003b615c(*(unsigned short *)(temp_v25 + 0x98));
@@ -211,7 +211,7 @@ void FUN_001fc720(int param_1,int param_2)
     }
   }
   else {
-    temp_v3 = FUN_003dfd5c();
+    temp_v3 = countUnlockedSlots();
   }
   temp_v28 = temp_v2 + 0x2500;
   temp_v26 = temp_v2 + 0x600;
@@ -670,7 +670,7 @@ LAB_001fd57c:
   temp_v12 = g_renderCtx;
   temp_v3 = *(int *)(temp_v2 + 0x518);
   if ((temp_v3 == 4 || temp_v3 == 0xc) || temp_v3 == 0x11) {
-    temp_v3 = FUN_00169294(6,1,0);
+    temp_v3 = packNibblesAndByte(6,1,0);
     piVar17 = (int *)(temp_v12 + 0x12b8);
     temp_v11 = piVar17[*piVar17 + 2];
     piVar17[*piVar17 + 2] = temp_v3;
@@ -680,7 +680,7 @@ LAB_001fd57c:
     }
     FUN_0025c848(temp_v2 + 0x370);
     temp_v2 = g_renderCtx;
-    temp_v12 = FUN_00169294(6,7,0);
+    temp_v12 = packNibblesAndByte(6,7,0);
     piVar17 = (int *)(temp_v2 + 0x12b8);
     temp_v3 = piVar17[*piVar17 + 2];
     piVar17[*piVar17 + 2] = temp_v12;

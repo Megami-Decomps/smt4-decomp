@@ -13,8 +13,8 @@ int FUN_002c7e6c(...);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
 int FUN_00342010(...);
-int FUN_0038b6bc(...);
-int FUN_003b7314(...);
+int objBMarkAndInit20D4(...);
+int stateHolderMarkAndInit2588(...);
 int FUN_003f881c(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -37,8 +37,8 @@ extern unsigned short FUN_00167f08(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: FUN_00342010. */
-/* Supplied declaration required: FUN_0038b6bc. */
-/* Supplied declaration required: FUN_003b7314. */
+/* Supplied declaration required: objBMarkAndInit20D4. */
+/* Supplied declaration required: stateHolderMarkAndInit2588. */
 /* Supplied declaration required: FUN_003f881c. */
 
 
@@ -81,8 +81,8 @@ void FUN_0036b6cc(unsigned short param_1)
   FUN_002c85b0(0);
   FUN_002c7ce8(0);
   FUN_002c8538(0);
-  FUN_0038b6bc();
-  FUN_003b7314();
+  objBMarkAndInit20D4();
+  stateHolderMarkAndInit2588();
   FUN_00342010();
   sysPlaySe(0xf4);
   FUN_0019de98(0,0xf4f4f4ff);

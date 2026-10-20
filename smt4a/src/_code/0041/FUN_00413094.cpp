@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int FUN_0045b830(...); /* 0x45b830 */
+extern int soundHandleDetachReturn(...); /* 0x45b830 */
 extern unsigned char DAT_0055c3f4; /* 0x55c3f4 */
 
 extern unsigned int FUN_00175678(void);
@@ -37,7 +37,7 @@ int FUN_00413094(unsigned int *param_1)
   int temp_v2;
   unsigned int *puVar4;
   
-  FUN_002e5700(param_1 + 8,FUN_0045b830,4);
+  FUN_002e5700(param_1 + 8,soundHandleDetachReturn,4);
   puVar4 = param_1 + 1;
   *param_1 = (unsigned int)&DAT_0055c3f4;
   nn_os_CriticalSection_Enter((unsigned int)puVar4);

@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "shard/Shard0049.h"
 
 extern "C" {
 
-extern int DAT_00587f28; /* 0x587f28 */
+extern Sub68Owner *DAT_00587f28;
 
-
-void FUN_00492aa0(unsigned int param_1,unsigned int param_2)
-
+void FUN_00492aa0(u32 unused, u32 value)
 {
-  *(unsigned int *)(DAT_00587f28 + 0x28) = param_2;
-  return;
+    DAT_00587f28->unk28 = value;
 }
 
 } /* extern "C" */

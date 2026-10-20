@@ -20,7 +20,7 @@ typedef struct {
 
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_001695a0. */
-extern int FUN_0016a0f0(unsigned int);
+extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_001ab854. */
 extern int FUN_001ab888(void);
@@ -61,7 +61,7 @@ int FUN_00348850(int param_1)
     FUN_00275fe4(1,0);
     FUN_00275fe4(2,0);
   }
-  temp_v0 = FUN_0016a0f0(0x1e);
+  temp_v0 = dataTableValueOrZero(0x1e);
   temp_v6 = FUN_00275bb0(0);
   if (temp_v6 != 0) {
     if (temp_v6 != 1) {

@@ -1,40 +1,30 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00295ba4(int);
-int jobStop(unsigned int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00295ba4. */
+int FUN_00295ba4(int arg);
+int jobStop(u32 job, int mode);
 extern int FUN_00295bd0(void);
-extern int jobIsValid(unsigned int);
-extern int jobGetWork(void);
-/* Supplied declaration required: jobStop. */
+extern int jobIsValid(u32 job);
 
+typedef struct JobWork {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u32 job;
+} JobWork;
+
+extern JobWork *jobGetWork(void);
 
 void FUN_0020ed98(void)
-
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = jobGetWork();
-  temp_v1 = jobIsValid(*(unsigned int *)(temp_v0 + 0x24));
-  if (temp_v1 == 0) {
-    return;
-  }
-  temp_v1 = FUN_00295bd0();
-  if (temp_v1 != 0) {
-    FUN_00295ba4(1);
-  }
-  jobStop(*(unsigned int *)(temp_v0 + 0x24),0);
-  return;
+    JobWork *work = jobGetWork();
+
+    if (jobIsValid(work->job) == 0) {
+        return;
+    }
+    if (FUN_00295bd0() != 0) {
+        FUN_00295ba4(1);
+    }
+    jobStop(work->job, 0);
 }
 
 } /* extern "C" */

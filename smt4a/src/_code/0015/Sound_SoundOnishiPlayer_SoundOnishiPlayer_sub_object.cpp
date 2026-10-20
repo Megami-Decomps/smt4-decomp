@@ -1,20 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Words8 {
+    /* 0x00 */ u32 words[8];
+} Words8;
 
-void Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned int *param_1)
-
+/* Constructor: clears the eight words. */
+void Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(Words8 *object)
 {
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  return;
+    object->words[0] = 0;
+    object->words[1] = 0;
+    object->words[2] = 0;
+    object->words[3] = 0;
+    object->words[4] = 0;
+    object->words[5] = 0;
+    object->words[6] = 0;
+    object->words[7] = 0;
 }
 
 } /* extern "C" */

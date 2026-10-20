@@ -12,7 +12,7 @@ extern unsigned char DAT_0055c6b0; /* 0x55c6b0 */
 
 /* Supplied declaration required: FUN_0047c65c. */
 /* Supplied declaration required: FUN_0047daf4. */
-extern int FUN_004d03b4(int);
+extern int flagsDESet(int);
 extern unsigned int *FUN_004d0b3c(int);
 
 
@@ -26,7 +26,7 @@ unsigned int * FUN_0047c8b8(unsigned int *param_1)
   *param_1 = 0;
   temp_v0 = FUN_0047daf4(param_1 + 0x84);
   temp_v0 = FUN_0047daf4(temp_v0 + 0x14);
-  temp_v0 = FUN_004d03b4(temp_v0 + 0x1c);
+  temp_v0 = flagsDESet(temp_v0 + 0x1c);
   *(unsigned char **)(temp_v0 + 0x74) = &DAT_0055c6a4;
   puVar2 = (unsigned int *)FUN_004d0b3c(temp_v0 + 0xa8);
   *puVar2 = (unsigned int)&DAT_0055c6b0;

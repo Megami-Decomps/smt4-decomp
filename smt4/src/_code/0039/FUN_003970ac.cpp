@@ -1,29 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+struct Tree;
+typedef struct TreeVtbl {
+    /* 0x0 */ void (*destroyNode)(struct Tree *tree, struct Node *node);
+} TreeVtbl;
 
-/* Supplied declaration required: FUN_003970ac. */
+typedef struct Node {
+    /* 0x0 */ struct Node *left;
+    /* 0x4 */ struct Node *right;
+} Node;
 
+typedef struct Tree {
+    /* 0x0 */ TreeVtbl *vtbl;
+    /* 0x4 */ Node *root;
+    /* 0x8 */ Node sentinel;
+} Tree;
 
-void FUN_003970ac(unsigned int *param_1,unsigned int *param_2)
-
+/* Destroys the subtree below `node` (children first). */
+void FUN_003970ac(Tree *tree, Node *node)
 {
-/* irregular: 3 native warning(s); review required */
-  if (param_2 != param_1 + 2) {
-    FUN_003970ac(param_1,(unsigned int *)*param_2);
-    FUN_003970ac(param_1,(unsigned int *)param_2[1]);
-                    /* WARNING: Could not recover jumptable at 0x003970f0. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    (**(romwright_code **)*param_1)(param_1,param_2);
-    return;
-  }
-  return;
+    if (node != &tree->sentinel) {
+        FUN_003970ac(tree, node->left);
+        FUN_003970ac(tree, node->right);
+        tree->vtbl->destroyNode(tree, node);
+        return;
+    }
 }
 
 } /* extern "C" */

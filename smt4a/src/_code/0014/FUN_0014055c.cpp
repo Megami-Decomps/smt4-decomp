@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00154edc(int, unsigned int);
-int FUN_00155024(unsigned int, unsigned int);
+int surfaceCopy(unsigned int, unsigned int);
 int FUN_00157558(unsigned int);
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00154edc. */
-/* Supplied declaration required: FUN_00155024. */
+/* Supplied declaration required: surfaceCopy. */
 /* Supplied declaration required: FUN_00157558. */
 extern int jobGetWork(void);
 
@@ -32,7 +32,7 @@ unsigned char FUN_0014055c(void)
     temp_v0 = 0;
     FUN_00154edc(0,*(unsigned int *)(temp_v1 + 4));
     *(unsigned char *)(temp_v1 + 0x1416) = temp_v0;
-    FUN_00155024(*(unsigned int *)(temp_v1 + 4),*(unsigned int *)(temp_v1 + 4));
+    surfaceCopy(*(unsigned int *)(temp_v1 + 4),*(unsigned int *)(temp_v1 + 4));
     *(int *)(*(int *)(temp_v1 + 4) + 0x14) = *(int *)(*(int *)(temp_v1 + 4) + 0x14) >> 1;
     *(int *)(*(int *)(temp_v1 + 4) + 0x18) = *(int *)(*(int *)(temp_v1 + 4) + 0x18) >> 1;
     *(unsigned char *)(temp_v1 + 0x1417) = 1;

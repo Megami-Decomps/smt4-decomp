@@ -1,21 +1,21 @@
-#include "romwright_types.h"
+#include "shard/DriverVoice.h"
 
 extern "C" {
 
-int nw_snd_internal_driver_Voice_AppendWaveBuffer(int, int, unsigned int, unsigned int);
+void nw_snd_internal_driver_Voice_AppendWaveBuffer(DriverVoice *voice, s32 channel, u32 buffer, s32 flag);
 
-/* Supplied declaration required: nw_snd_internal_driver_Voice_AppendWaveBuffer. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ DriverVoice *voice;
+} Holder;
 
-
-void FUN_001d22f4(int param_1,unsigned int param_2,unsigned int param_3)
-
+/* Appends the wave buffer to the held voice's channel 0, if there is a voice. */
+void FUN_001d22f4(Holder *object, u32 buffer, u32 flag)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 4) != 0) {
-    nw_snd_internal_driver_Voice_AppendWaveBuffer(*(int *)(param_1 + 4),0,param_2,param_3);
-    return;
-  }
-  return;
+    if (object->voice != NULL) {
+        nw_snd_internal_driver_Voice_AppendWaveBuffer(object->voice, 0, buffer, flag);
+        return;
+    }
 }
 
 } /* extern "C" */

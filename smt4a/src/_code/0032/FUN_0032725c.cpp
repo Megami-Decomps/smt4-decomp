@@ -19,7 +19,7 @@ extern unsigned char LAB_00327380; /* 0x327380 */
 
 /* Supplied declaration required: FUN_00100388. */
 /* Supplied declaration required: FUN_00261424. */
-extern short *FUN_003564ec(unsigned int);
+extern short *dataTable4CGetEntry(unsigned int);
 
 
 void FUN_0032725c(unsigned int param_1,unsigned int param_2,int param_3)
@@ -80,7 +80,7 @@ void FUN_0032725c(unsigned int param_1,unsigned int param_2,int param_3)
   acStack_1c[1] = '\x14';
   acStack_1c[2] = 'V';
   acStack_1c[3] = '\0';
-  psVar1 = (short *)FUN_003564ec(param_1);
+  psVar1 = (short *)dataTable4CGetEntry(param_1);
   if (param_3 == -1) {
     temp_v0 = FUN_00261424();
     if (temp_v0 != 0) {

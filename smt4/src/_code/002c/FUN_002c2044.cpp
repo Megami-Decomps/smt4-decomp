@@ -42,7 +42,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 
 /* Supplied declaration required: FUN_0011cfb4. */
 /* Supplied declaration required: mtx44Copy. */
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
@@ -59,7 +59,7 @@ void FUN_002c2044(unsigned char *param_1,int param_2)
   param_1[1] = 0;
   temp_v1 = 0;
   temp_v2 = 0x3f800000;
-  if (((DAT_00476634 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476634), temp_v0 != 0)) {
+  if (((DAT_00476634 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476634), temp_v0 != 0)) {
     DAT_004efd6c = temp_v2;
     DAT_004efd70 = temp_v1;
     DAT_004efd74 = temp_v1;
@@ -74,7 +74,7 @@ void FUN_002c2044(unsigned char *param_1,int param_2)
     DAT_004efd98 = temp_v1;
   }
   nn_math_ARMv6_MTX34CopyAsm(param_1 + 0x38,&DAT_004efd6c);
-  if (((DAT_00476638 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476638), temp_v0 != 0)) {
+  if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
     DAT_004efd9c = temp_v2;
     DAT_004efda0 = temp_v1;
     DAT_004efda4 = temp_v1;
@@ -93,7 +93,7 @@ void FUN_002c2044(unsigned char *param_1,int param_2)
     DAT_004efdd8 = temp_v2;
   }
   mtx44Copy(param_1 + 0xa8,&DAT_004efd9c);
-  if (((DAT_00476638 & 1) == 0) && (temp_v0 = FUN_002bfefc(&DAT_00476638), temp_v0 != 0)) {
+  if (((DAT_00476638 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476638), temp_v0 != 0)) {
     DAT_004efd9c = temp_v2;
     DAT_004efda0 = temp_v1;
     DAT_004efda4 = temp_v1;

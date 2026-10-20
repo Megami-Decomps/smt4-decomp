@@ -1,32 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_003d385c(unsigned int);
+void FUN_003d385c(u32 handle);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct VX2Decoder {
+    /* 0x00 */ u32 handle;
+    /* 0x04 */ u32 *items;
+    /* 0x08 */ u32 count;
+} VX2Decoder;
 
-/* Supplied declaration required: FUN_003d385c. */
-
-
-void VX2DecoderRelease(unsigned int *param_1)
-
+/* Releases the decoder's handle, then each of its items and the item array. */
+void VX2DecoderRelease(VX2Decoder *decoder)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  FUN_003d385c(*param_1);
-  if (param_1[1] != 0) {
-    for (temp_v0 = 0; temp_v0 < param_1[2]; temp_v0++) {
-      FUN_003d385c(*(unsigned int *)(param_1[1] + temp_v0 * 4));
+    u32 i;
+
+    FUN_003d385c(decoder->handle);
+    if (decoder->items != NULL) {
+        for (i = 0; i < decoder->count; i++) {
+            FUN_003d385c(decoder->items[i]);
+        }
+        FUN_003d385c((u32)decoder->items);
+        return;
     }
-    FUN_003d385c(param_1[1]);
-    return;
-  }
-  return;
 }
 
 } /* extern "C" */

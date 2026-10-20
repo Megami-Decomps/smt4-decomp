@@ -16,7 +16,7 @@ int FUN_00149a88(...);
 int FUN_00149ae0(unsigned char *, unsigned char *);
 int FUN_0014a82c(...);
 int FUN_0014a844(...);
-int FUN_00161044(...);
+int asdGfxSetMode(...);
 int FUN_00161074(unsigned int);
 int FUN_0017cfe8(...);
 
@@ -98,7 +98,7 @@ extern unsigned char DAT_0063ff89; /* 0x63ff89 */
 /* Supplied declaration required: FUN_00149ae0. */
 /* Supplied declaration required: FUN_0014a82c. */
 /* Supplied declaration required: FUN_0014a844. */
-/* Supplied declaration required: FUN_00161044. */
+/* Supplied declaration required: asdGfxSetMode. */
 /* Supplied declaration required: FUN_00161074. */
 /* Supplied declaration required: FUN_0017cfe8. */
 
@@ -160,7 +160,7 @@ void FUN_00139c90(unsigned int *param_1)
   DAT_0063fda4 = 400;
   temp_v7 = temp_v4;
   DAT_0063fd8c = temp_v4;
-  FUN_00161044();
+  asdGfxSetMode();
   FUN_00149950(DAT_0063fd8c,&DAT_0063fd90);
   temp_v2 = 0;
   if (temp_v2 < DAT_0063fd8c) {
@@ -179,7 +179,7 @@ void FUN_00139c90(unsigned int *param_1)
   DAT_0063fdf8 = 0xf0;
   DAT_0063fdfc = 0x140;
   DAT_0063fde0 = temp_v5[0];
-  FUN_00161044(temp_v5[0]);
+  asdGfxSetMode(temp_v5[0]);
   FUN_00149950(DAT_0063fde4,&DAT_0063fde8);
   temp_v2 = 0;
   if (temp_v2 < DAT_0063fde4) {
@@ -198,7 +198,7 @@ void FUN_00139c90(unsigned int *param_1)
   DAT_0063fdcc = 0xf0;
   DAT_0063fdd0 = 400;
   DAT_0063fdb4 = temp_v6;
-  FUN_00161044(temp_v6);
+  asdGfxSetMode(temp_v6);
   FUN_00149950(DAT_0063fdb8,&DAT_0063fdbc);
   temp_v2 = 0;
   if (temp_v2 < DAT_0063fdb8) {

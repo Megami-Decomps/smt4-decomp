@@ -1,21 +1,14 @@
-#include "romwright_types.h"
+#include "shard/Shard0033.h"
 
 extern "C" {
 
-int FUN_00285834(unsigned int);
-
-extern unsigned int DAT_00570ab4; /* 0x570ab4 */
-
-/* Supplied declaration required: FUN_00285834. */
-
+extern u32 DAT_00570ab4;
+extern void FUN_00285834(u32 handle);
 
 void FUN_003307dc(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00285834(DAT_00570ab4);
-  DAT_00570ab4 = 0;
-  return;
+    FUN_00285834(DAT_00570ab4);
+    DAT_00570ab4 = 0;
 }
 
 } /* extern "C" */

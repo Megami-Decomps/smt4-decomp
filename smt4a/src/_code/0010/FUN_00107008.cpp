@@ -1,24 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_001070b4(void);
-int onlineInstantiationContextClearSlot(int);
+void FUN_001070b4(void *object, u32 a, u32 b, s32 flag);
+void onlineInstantiationContextClearSlot(u8 *slot);
 
-/* Supplied declaration required: FUN_001070b4. */
-/* Supplied declaration required: onlineInstantiationContextClearSlot. */
-
-
-void FUN_00107008(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+/* With `flag` set forwards to FUN_001070b4, otherwise clears the slot at +4. */
+void FUN_00107008(u8 *object, u32 a, u32 b, s32 flag)
 {
-/* irregular: 2 native warning(s); review required */
-  if (param_4 != 0) {
-    FUN_001070b4();
-    return;
-  }
-  onlineInstantiationContextClearSlot(param_1 + 4);
-  return;
+    if (flag != 0) {
+        FUN_001070b4(object, a, b, flag);
+        return;
+    }
+    onlineInstantiationContextClearSlot(object + 4);
 }
 
 } /* extern "C" */

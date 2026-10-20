@@ -1,20 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00146cd0(unsigned int);
+typedef struct GameDataBlocksView {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 counter;
+} GameDataBlocksView;
+extern GameDataBlocksView g_gameDataBlocks;
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+void FUN_00146cd0(u32 value);
 
-/* Supplied declaration required: FUN_00146cd0. */
-
-
+/* Passes the word at 0xC of the game-data block table to FUN_00146cd0. */
 void FUN_00137848(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00146cd0((*(unsigned int *)((unsigned char *)&g_gameDataBlocks + 0xc)));
-  return;
+    FUN_00146cd0(g_gameDataBlocks.counter);
 }
 
 } /* extern "C" */

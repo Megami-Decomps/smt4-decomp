@@ -81,7 +81,7 @@ extern int FUN_003303fc(void);
 /* Supplied declaration required: FUN_003fd76c. */
 /* Supplied declaration required: FUN_003fdb18. */
 /* Supplied declaration required: FUN_003fe86c. */
-extern int FUN_004ffb58(int);
+extern int slots4FGetActiveValue(int);
 
 
 void FUN_00292268(void)
@@ -369,7 +369,7 @@ LAB_002929b0:
   temp_v4 = *(int *)(DAT_005f0c88 + 4);
   FUN_003fd76c(temp_v4,&DAT_005f0c94);
   FUN_003fdb18(temp_v4);
-  temp_v2 = FUN_004ffb58(temp_v4);
+  temp_v2 = slots4FGetActiveValue(temp_v4);
   temp_v1 = temp_v2;
   if (temp_v2 == DAT_005f0ca4) {
     temp_v1 = DAT_005f0cb0;

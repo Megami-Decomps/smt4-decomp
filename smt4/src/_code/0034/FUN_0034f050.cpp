@@ -1,19 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int mwmofilterDeblockerRelease(unsigned int);
+int mwmofilterDeblockerRelease(u32 deblocker);
 
-/* Supplied declaration required: mwmofilterDeblockerRelease. */
-
-
-void FUN_0034f050(unsigned int *param_1)
-
+void FUN_0034f050(u32 *deblocker)
 {
-/* irregular: 1 native warning(s); review required */
-  mwmofilterDeblockerRelease(*param_1);
-  *param_1 = 0;
-  return;
+    mwmofilterDeblockerRelease(*deblocker);
+    *deblocker = 0;
 }
 
 } /* extern "C" */

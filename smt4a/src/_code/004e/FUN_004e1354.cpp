@@ -24,8 +24,8 @@ extern unsigned int DAT_005712f0; /* 0x5712f0 */
 extern unsigned int DAT_00573808; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 
-extern int FUN_0040de1c(unsigned int, unsigned int *);
-extern int FUN_004d84e8(unsigned int);
+extern int chainCountIdUnflagged(unsigned int, unsigned int *);
+extern int isEntryUsable(unsigned int);
 /* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004e753c. */
 /* Supplied declaration required: FUN_004e81bc. */
@@ -45,7 +45,7 @@ unsigned int FUN_004e1354(int *param_1,unsigned int *param_2)
   if ((((*(unsigned int *)(temp_v0 + 0x45a4) & DAT_00571264) == 0 &&
         (*(unsigned int *)(temp_v0 + 0x45a0) & DAT_00571260) == 0) &&
       ((*(unsigned int *)(temp_v0 + 0x10c) & 0x40000) != 0)) && ((*param_2 & 0x2000) == 0)) {
-    temp_v0 = FUN_0040de1c(DAT_005712f0,param_2);
+    temp_v0 = chainCountIdUnflagged(DAT_005712f0,param_2);
     if (temp_v0 == 0) {
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
       FUN_004f8f08(DAT_00573808);
@@ -64,7 +64,7 @@ unsigned int FUN_004e1354(int *param_1,unsigned int *param_2)
       FUN_004fbeac(0,param_2,0,2,0);
     }
     param_2[0x15b] = param_2[0x15b] + 1;
-    temp_v0 = FUN_0040de1c(DAT_005712f0,param_2);
+    temp_v0 = chainCountIdUnflagged(DAT_005712f0,param_2);
     if (0 < temp_v0) {
       return 0;
     }
@@ -78,13 +78,13 @@ unsigned int FUN_004e1354(int *param_1,unsigned int *param_2)
       return 0;
     }
   }
-  temp_v0 = FUN_004d84e8(g_btlEvent);
+  temp_v0 = isEntryUsable(g_btlEvent);
   if (temp_v0 == 0) {
     FUN_004e81bc(param_1,param_2,1);
     piVar2 = param_1;
     FUN_004e753c(param_1,param_2,1);
     param_2[0x15b] = param_2[0x15b] + 1;
-    temp_v0 = FUN_0040de1c(DAT_005712f0,param_2);
+    temp_v0 = chainCountIdUnflagged(DAT_005712f0,param_2);
     if ((temp_v0 < 1) && (piVar2 != (int *)0x0)) {
       param_2[0x48c] = 0x1e;
       FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x11,0x11);

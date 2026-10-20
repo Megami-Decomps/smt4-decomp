@@ -26,8 +26,8 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_002419c4. */
 /* Supplied declaration required: FUN_002980e4. */
-extern int FUN_0040de1c(unsigned int, unsigned int);
-extern int FUN_004d84e8(unsigned int);
+extern int chainCountIdUnflagged(unsigned int, unsigned int);
+extern int isEntryUsable(unsigned int);
 /* Supplied declaration required: btlUnitGet. */
 /* Supplied declaration required: FUN_004f5a78. */
 /* Supplied declaration required: FUN_004fb6f4. */
@@ -45,7 +45,7 @@ unsigned char FUN_0039e008(void)
   
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
-  temp_v2 = FUN_004d84e8(g_btlEvent);
+  temp_v2 = isEntryUsable(g_btlEvent);
   if ((temp_v2 != 0) && (temp_v2 = DAT_00573808, FUN_004f5a78(), temp_v2 == 0)) {
     return 0;
   }
@@ -65,7 +65,7 @@ unsigned char FUN_0039e008(void)
   else if (temp_v1 != 0) {
     temp_v2 = btlUnitGet(g_btlScriptUnit);
     if (*(int *)(temp_v2 + 0x1250) != 0) {
-      temp_v1 = FUN_0040de1c(DAT_005712f0,0);
+      temp_v1 = chainCountIdUnflagged(DAT_005712f0,0);
       if (temp_v1 < 1) {
         *(unsigned int *)(temp_v2 + 0x1250) = 0;
       }

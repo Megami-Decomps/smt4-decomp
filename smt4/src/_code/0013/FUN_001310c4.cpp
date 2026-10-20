@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-int FUN_001310c4(unsigned int param_1,int param_2)
-
+/* Byte size of the `index`+1 entries of 0x144 bytes. */
+s32 FUN_001310c4(u32 unused, s32 index)
 {
-  return (param_2 + 1) * 0x144;
+    return (index + 1) * 0x144;
 }
 
 } /* extern "C" */

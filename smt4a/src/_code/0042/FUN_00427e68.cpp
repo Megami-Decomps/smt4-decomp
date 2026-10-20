@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00195fc8(void);
-int FUN_0043bfdc(unsigned char *);
-int FUN_0043c2a8(unsigned char *);
+int initBlockE30(unsigned char *);
+int clearBlock10808(unsigned char *);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,8 +25,8 @@ extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: FUN_00195fc8. */
 extern unsigned long long FUN_00302420(int, unsigned int, unsigned int);
 extern int FUN_004287ac(unsigned int, int *, unsigned int);
-/* Supplied declaration required: FUN_0043bfdc. */
-/* Supplied declaration required: FUN_0043c2a8. */
+/* Supplied declaration required: initBlockE30. */
+/* Supplied declaration required: clearBlock10808. */
 
 
 int FUN_00427e68(unsigned int param_1,unsigned int param_2,unsigned int param_3,int param_4)
@@ -50,7 +50,7 @@ int FUN_00427e68(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     temp_v2 = temp_v8 + 0x14;
     temp_v5 = *(unsigned int *)(temp_v8 + 0xc);
     temp_v6 = *(unsigned int *)(temp_v8 + 0x10);
-    FUN_0043bfdc(&DAT_0061b000);
+    initBlockE30(&DAT_0061b000);
     switch(temp_v6 & 0xff) {
     case 0:
       temp_v3 = 0x8c;
@@ -84,7 +84,7 @@ int FUN_00427e68(unsigned int param_1,unsigned int param_2,unsigned int param_3,
     DAT_0061b014 = (unsigned int)((unsigned long long)temp_v7 >> 0x20);
     DAT_0061b010 = (unsigned int)temp_v7;
     DAT_0061b018 = param_2;
-    FUN_0043c2a8(&DAT_0061c000);
+    clearBlock10808(&DAT_0061c000);
     temp_v2 = 0;
   }
   return temp_v2;

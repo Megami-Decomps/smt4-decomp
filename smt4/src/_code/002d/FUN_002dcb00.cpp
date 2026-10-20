@@ -1,32 +1,35 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_00288118(unsigned short);
+extern int dataTableGetEntry0102Value(u16 id);
 
+typedef struct Entry {
+    /* 0x0 */ u16 id;
+    /* 0x2 */ u16 valid;
+} Entry;
 
-unsigned int FUN_002dcb00(unsigned short *param_1,unsigned short *param_2)
-
+/* Orders invalid entries after valid ones; valid ones by the value dataTableGetEntry0102Value gives their id (descending). */
+u32 FUN_002dcb00(Entry *a, Entry *b)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (param_1[1] == 0) {
-    if (param_2[1] == 0) {
-      return 0;
+    u32 result;
+    int valueA;
+    int valueB;
+
+    if (a->valid == 0) {
+        if (b->valid == 0) {
+            return 0;
+        }
+        return 1;
     }
-    return 1;
-  }
-  if (param_2[1] == 0) {
-    temp_v0 = 0xffffffff;
-  }
-  else {
-    temp_v1 = FUN_00288118(*param_1);
-    temp_v2 = FUN_00288118(*param_2);
-    temp_v0 = temp_v2 - temp_v1;
-  }
-  return temp_v0;
+    if (b->valid == 0) {
+        result = 0xffffffff;
+    } else {
+        valueA = dataTableGetEntry0102Value(a->id);
+        valueB = dataTableGetEntry0102Value(b->id);
+        result = valueB - valueA;
+    }
+    return result;
 }
 
 } /* extern "C" */

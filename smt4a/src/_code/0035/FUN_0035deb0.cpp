@@ -15,7 +15,7 @@ int FUN_0040a918(unsigned int, unsigned int);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(unsigned int, int);
 int FUN_0040ace8(unsigned int, int);
-int FUN_0041a080(int);
+int itemTableClear(int);
 int FUN_0045adc0(int, int, unsigned int);
 int FUN_004ff920(unsigned int);
 
@@ -39,7 +39,7 @@ extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_0040aad4. */
 extern unsigned int FUN_0040ac08(void);
 /* Supplied declaration required: FUN_0040ace8. */
-/* Supplied declaration required: FUN_0041a080. */
+/* Supplied declaration required: itemTableClear. */
 /* Supplied declaration required: FUN_0045adc0. */
 /* Supplied declaration required: FUN_004ff920. */
 
@@ -116,7 +116,7 @@ void FUN_0035deb0(void)
     return;
   }
   *(unsigned int *)(temp_v3 + 0x10) = 0;
-  FUN_0041a080(temp_v3 + 0x1c);
+  itemTableClear(temp_v3 + 0x1c);
   piVar10 = (int *)(temp_v3 + 0x1c);
   temp_v4 = *(int *)(temp_v3 + 4);
   *(unsigned int *)(temp_v3 + 0x1c) = 0;

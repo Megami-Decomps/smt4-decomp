@@ -1,12 +1,11 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-
-unsigned int FUN_002fd38c(unsigned int *param_1)
-
+/* Returns bits 16-23 of the referenced word. */
+u32 FUN_002fd38c(u32 *valueRef)
 {
-  return (*param_1 & 0xffffff) >> 0x10;
+    return (*valueRef & 0xFFFFFF) >> 0x10;
 }
 
 } /* extern "C" */

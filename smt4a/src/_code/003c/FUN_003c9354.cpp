@@ -22,10 +22,10 @@ int FUN_002a4964(int, int);
 int FUN_002a7b74(void);
 int FUN_0031d1d8(int, int);
 int FUN_0032fea0(...);
-int FUN_0032ff20(...);
+int unitRecordBuild(...);
 int FUN_003450d4(int, unsigned int, int, int);
 int FUN_00359b6c(...);
-int FUN_0037b578(unsigned int, int);
+int screenStartOrClear(unsigned int, int);
 int FUN_003b0558(void);
 
 /* stack frame of param_3: 10 slot(s), 35 byte(s) */
@@ -62,14 +62,14 @@ extern unsigned int *FUN_002c2c68(int);
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_0031d1d8. */
 /* Supplied declaration required: FUN_0032fea0. */
-/* Supplied declaration required: FUN_0032ff20. */
+/* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int FUN_00348ed0(int);
 /* Supplied declaration required: FUN_00359b6c. */
-/* Supplied declaration required: FUN_0037b578. */
+/* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_0037e1b0. */
 /* Supplied declaration required: FUN_003b0558. */
-extern int FUN_004bd21c(unsigned int *);
+extern int getUnlockedSlotCount(unsigned int *);
 
 
 unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3)
@@ -147,7 +147,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
               FUN_0031d1d8(temp_v14,1);
             }
             if ((temp_v4 >= *piVar11) || (*(char *)(param_1 + 0x8eac) != '\0')) {
-              FUN_0037b578(*(unsigned int *)(param_1 + 0x424),0x1a);
+              screenStartOrClear(*(unsigned int *)(param_1 + 0x424),0x1a);
             }
             else {
               FUN_00359b6c(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
@@ -163,7 +163,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       }
     }
     if ((temp_v4 >= *piVar11) || (*(char *)(param_1 + 0x8eac) != '\0')) {
-      FUN_0037b578(*(unsigned int *)(param_1 + 0x424),0x1a);
+      screenStartOrClear(*(unsigned int *)(param_1 + 0x424),0x1a);
     }
     else {
       FUN_00359b6c(*(unsigned short *)(param_1 + temp_v4 * 2 + 0x8b70));
@@ -272,8 +272,8 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
             temp_v7 = (unsigned int)*(unsigned short *)(param_1 + (temp_v8 + temp_v6) * 2 + 0x6832);
             *param_3 = temp_v7;
           }
-          FUN_0032ff20((*(unsigned int *)(param_1 + temp_v7 * 8 + 0x13bc) & 0x1ffff) >> 2,&temp_v10);
-          temp_v6 = FUN_004bd21c((unsigned int *)&temp_v10);
+          unitRecordBuild((*(unsigned int *)(param_1 + temp_v7 * 8 + 0x13bc) & 0x1ffff) >> 2,&temp_v10);
+          temp_v6 = getUnlockedSlotCount((unsigned int *)&temp_v10);
           temp_v8 = 0;
           if (temp_v8 < temp_v6) {
             do {

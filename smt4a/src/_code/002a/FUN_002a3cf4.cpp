@@ -1,34 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00301830(void);
-int FUN_00303a48(void);
+void FUN_00301830(void);
+void FUN_00303a48(void);
+s32 lmapMainIsRunning(void);
+s32 FUN_002b4cb0(void);
+s32 mapMainIsBusy(void);
 
-extern int lmapMainIsRunning(void);
-extern int FUN_002b4cb0(void);
-/* Supplied declaration required: FUN_00301830. */
-/* Supplied declaration required: FUN_00303a48. */
-extern int mapMainIsBusy(void);
-
-
-unsigned int FUN_002a3cf4(void)
-
+/* Map step: runs FUN_00303a48 while the map is busy or the local map is running, otherwise FUN_00301830 when FUN_002b4cb0 allows it; always returns 1. */
+u32 FUN_002a3cf4(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = mapMainIsBusy();
-  if ((temp_v0 != 0) || (temp_v0 = lmapMainIsRunning(), temp_v0 != 0)) {
-    FUN_00303a48();
-  }
-  else {
-    temp_v0 = FUN_002b4cb0();
-    if (temp_v0 != 0) {
-      FUN_00301830();
+    s32 result;
+
+    result = mapMainIsBusy();
+    if ((result != 0) || (result = lmapMainIsRunning(), result != 0)) {
+        FUN_00303a48();
+    } else {
+        result = FUN_002b4cb0();
+        if (result != 0) {
+            FUN_00301830();
+        }
     }
-  }
-  return 1;
+    return 1;
 }
 
 } /* extern "C" */

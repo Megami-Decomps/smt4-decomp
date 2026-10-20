@@ -8,7 +8,7 @@ int FUN_002427f8(...);
 int FUN_00247200(unsigned int *);
 int FUN_00247240(unsigned int *);
 int FUN_0025c650(unsigned int, int, int);
-int FUN_0025c9dc(unsigned int, int *, int);
+int effBlockSetBlobB(unsigned int, int *, int);
 int FUN_002be624(unsigned char [104], unsigned char *, unsigned int);
 int FUN_002de30c(unsigned int *, unsigned char [104], int, unsigned int, int);
 int FUN_002f82ac(unsigned int *);
@@ -35,7 +35,7 @@ extern int FUN_002468e0(unsigned int, int);
 /* Supplied declaration required: FUN_00247200. */
 /* Supplied declaration required: FUN_00247240. */
 /* Supplied declaration required: FUN_0025c650. */
-/* Supplied declaration required: FUN_0025c9dc. */
+/* Supplied declaration required: effBlockSetBlobB. */
 /* Supplied declaration required: FUN_002be624. */
 /* Supplied declaration required: FUN_002de30c. */
 /* Supplied declaration required: FUN_002f82ac. */
@@ -103,7 +103,7 @@ unsigned char * FUN_00242080(unsigned int param_1)
     }
     else {
       FUN_002427f8(DAT_0044ea94,DAT_0044eaa4);
-      FUN_0025c9dc(DAT_0044ea9c,&temp_v6,4);
+      effBlockSetBlobB(DAT_0044ea9c,&temp_v6,4);
     }
     puVar4 = &DAT_00400002;
   }

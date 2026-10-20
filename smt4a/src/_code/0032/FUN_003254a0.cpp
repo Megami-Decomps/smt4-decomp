@@ -55,7 +55,7 @@ extern int FUN_002b809c(void);
 extern int FUN_00377028(unsigned int);
 extern int FUN_00384ca8(int);
 /* Supplied declaration required: FUN_003d4ed8. */
-extern int FUN_003e5414(unsigned int);
+extern int linkHolderCallFirst(unsigned int);
 extern int FUN_004bc944(int, int);
 
 
@@ -81,9 +81,9 @@ void FUN_003254a0(void)
     if (temp_v4 == 0) {
       temp_v9 = g_gameState >= 100;
       if (!temp_v9) {
-        temp_v4 = FUN_003e5414(*(unsigned int *)(g_lmapScene + 0x1a8));
+        temp_v4 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if ((temp_v4 == 0) ||
-           (temp_v4 = FUN_003e5414(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v4 == 1)) {
+           (temp_v4 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8)), temp_v4 == 1)) {
           temp_v9 = 1;
         }
         if (((g_gameState < 100) && (g_gameState == DAT_005f1860)) &&

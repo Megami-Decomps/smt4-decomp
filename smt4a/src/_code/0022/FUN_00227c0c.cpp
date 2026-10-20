@@ -1,37 +1,32 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00333784(unsigned int, unsigned int);
-int FUN_00371b74(void);
+void FUN_00333784(u32 a, u32 b);
+void FUN_00371b74(void);
+u32 scrGetArg(u32 index);
+s32 FUN_00268690(void);
+s32 FUN_002deb84(void);
 
-extern unsigned int scrGetArg(unsigned int);
-extern int FUN_00268690(void);
-extern int FUN_002deb84(void);
-/* Supplied declaration required: FUN_00333784. */
-/* Supplied declaration required: FUN_00371b74. */
-
-
-unsigned char FUN_00227c0c(void)
-
+/* Script command: when FUN_002deb84 reports 0, forwards script arguments 0 and 1 to FUN_00333784 and returns 0; otherwise runs FUN_00371b74 if FUN_00268690 allows it and returns whether it did. */
+u8 FUN_00227c0c(void)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_002deb84();
-  if (temp_v0 != 0) {
-    temp_v0 = FUN_00268690();
-    if (temp_v0 != 0) {
-      FUN_00371b74();
+    s32 result;
+    u32 arg0;
+    u32 arg1;
+
+    result = FUN_002deb84();
+    if (result != 0) {
+        result = FUN_00268690();
+        if (result != 0) {
+            FUN_00371b74();
+        }
+        return result != 0;
     }
-    return temp_v0 != 0;
-  }
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  FUN_00333784(temp_v1,temp_v2);
-  return 0;
+    arg0 = scrGetArg(0);
+    arg1 = scrGetArg(1);
+    FUN_00333784(arg0, arg1);
+    return 0;
 }
 
 } /* extern "C" */

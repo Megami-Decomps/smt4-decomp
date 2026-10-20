@@ -1,29 +1,28 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00152bec(void);
+int FUN_00152bec(u32 handle);
 
-extern int DAT_00447e70; /* 0x447e70 */
+typedef struct MapEntry {
+    /* 0x00 */ u8 unk00[0x3C];
+    /* 0x3C */ u32 handle;
+    /* 0x40 */ u8 unk40[8];
+} MapEntry;
 
-/* Supplied declaration required: FUN_00152bec. */
+extern MapEntry *DAT_00447e70;
 
-
+/* Updates every active handle of the 24 entries. */
 void FUN_001d3694(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    int off = temp_v0 * 0x48;
-    if (*(int *)(DAT_00447e70 + off + 0x3c) != 0) {
-      FUN_00152bec();
-    }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x18);
-  return;
+    s32 i = 0;
+
+    do {
+        if (DAT_00447e70[i].handle != 0) {
+            FUN_00152bec(DAT_00447e70[i].handle);
+        }
+        i++;
+    } while (i < 0x18);
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001641b4(int);
-int FUN_00472514(int);
+int flagObjAdvance(int);
 int FUN_0047306c(int, int, int);
 int FUN_0047314c(int);
 int FUN_00477d10(...);
@@ -14,7 +14,7 @@ int FUN_0047daf4(unsigned char [20]);
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_001641b4. */
 extern int FUN_002e1a18(unsigned int);
-/* Supplied declaration required: FUN_00472514. */
+/* Supplied declaration required: flagObjAdvance. */
 /* Supplied declaration required: FUN_0047306c. */
 /* Supplied declaration required: FUN_0047314c. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -53,7 +53,7 @@ void FUN_00478dc4(int param_1)
   }
   else if ((*(char *)(param_1 + 0x167a) != '\0') && (temp_v1 = FUN_002e1a18(0x10), temp_v1 != 0)) {
     FUN_001641b4(0x100020e);
-    FUN_00472514(temp_v2);
+    flagObjAdvance(temp_v2);
     FUN_00477d10(param_1,0xffffffff,0);
     temp_v0 = 2;
     *(unsigned int *)(param_1 + 8) = temp_v0;

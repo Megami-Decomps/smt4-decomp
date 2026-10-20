@@ -7,7 +7,7 @@ extern "C" {
 int FUN_003e48dc(unsigned int);
 int FUN_003e4e4c(int);
 
-extern int FUN_0015688c(void);
+extern int saveSlotFindSelected(void);
 extern int FUN_00187168(int);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_003e48dc. */
@@ -26,7 +26,7 @@ unsigned int FUN_00357d2c(void)
   unsigned int temp_v4;
   
   temp_v1 = scrGetArg(0);
-  temp_v2 = FUN_0015688c();
+  temp_v2 = saveSlotFindSelected();
   if ((temp_v2 != 0) && (*(unsigned short *)(temp_v2 + 300) == temp_v1)) {
     temp_v4 = 0;
     do {

@@ -14,7 +14,7 @@ typedef struct Actor Actor;
 
 int FUN_003e1114(PhaseState *phase, Actor *actor);
 int FUN_003ebec8(Actor *actor);
-int FUN_003e9b28(Actor *actor);
+int valueAtF0IsReady(Actor *actor);
 int FUN_003f0f40(Actor *actor);
 int FUN_003f1334(Actor *actor);
 int FUN_003f86c8(u32 id);
@@ -34,7 +34,7 @@ void FUN_003e2470(PhaseState *phase, Actor *actor)
         return;
     }
     FUN_003ebec8(actor);
-    if (FUN_003e9b28(actor) != 0) {
+    if (valueAtF0IsReady(actor) != 0) {
         phase->state = 4;
         phase->counter10 = 0;
         phase->counter0c = 0;

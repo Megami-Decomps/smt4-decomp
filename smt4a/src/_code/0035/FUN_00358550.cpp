@@ -9,7 +9,7 @@ int FUN_002b74cc(void);
 typedef int romwright_code(...);
 extern int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b74cc. */
 extern int FUN_00387580(unsigned int);
@@ -48,7 +48,7 @@ unsigned int FUN_00358550(void)
     *(unsigned char *)(temp_v0 + 0x1270) = 0;
   }
   temp_v0 = g_renderCtx;
-  temp_v1 = FUN_00169294(6,1,0);
+  temp_v1 = packNibblesAndByte(6,1,0);
   piVar5 = (int *)(temp_v0 + 0x12b8);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

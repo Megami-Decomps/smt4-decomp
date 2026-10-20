@@ -7,7 +7,7 @@ extern "C" {
 int strAssign(unsigned char [32], int *, int, unsigned int);
 int FUN_002e7614(...);
 int FUN_002e9318(unsigned char [8]);
-int FUN_002ea658(unsigned char [16]);
+int initVtable00558630(unsigned char [16]);
 int FUN_002eb588(int *);
 int strDestroy(...);
 int FUN_002f6be2(unsigned char [8], int *);
@@ -30,7 +30,7 @@ extern unsigned char LAB_002fbdc8; /* 0x2fbdc8 */
 /* Supplied declaration required: strAssign. */
 /* Supplied declaration required: FUN_002e7614. */
 /* Supplied declaration required: FUN_002e9318. */
-/* Supplied declaration required: FUN_002ea658. */
+/* Supplied declaration required: initVtable00558630. */
 /* Supplied declaration required: FUN_002eb588. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002f6be2. */
@@ -59,7 +59,7 @@ int FUN_002fbd38(int param_1)
     temp_v6 = temp_v4;
     temp_v5 = temp_v3;
     FUN_002e7614(temp_v0,8);
-    FUN_002ea658(temp_v8);
+    initVtable00558630(temp_v8);
     FUN_002e7614(temp_v1,0x10);
     strAssign(temp_v0,&temp_v5,8,0xffffffff);
     FUN_002f6bfc(temp_v8,temp_v0,temp_v1);

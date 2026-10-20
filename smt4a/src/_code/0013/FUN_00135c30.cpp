@@ -389,7 +389,7 @@ extern int FUN_0013bdb8(unsigned int);
 /* Supplied declaration required: FUN_0015a75c. */
 /* Supplied declaration required: FUN_00161a10. */
 /* Supplied declaration required: FUN_001642e4. */
-extern unsigned int FUN_00169294(unsigned int, unsigned int, unsigned int);
+extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 extern unsigned long long FUN_00170390(unsigned int);
 /* Supplied declaration required: FUN_001703b0. */
@@ -494,7 +494,7 @@ void FUN_00135c30(void)
   FUN_0013a324();
   temp_v2 = g_renderCtx;
   *(unsigned int *)(g_renderCtx + 0x1378) = 0;
-  temp_v3 = FUN_00169294(6,7,0);
+  temp_v3 = packNibblesAndByte(6,7,0);
   *(unsigned int *)(temp_v2 + 0x1390) = temp_v3;
   temp_v2 = g_renderCtx;
   temp_v3 = FUN_001692ac(5,1);

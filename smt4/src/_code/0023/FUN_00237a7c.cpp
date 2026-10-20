@@ -1,15 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Request {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 state;
+    /* 0x05 */ u8 unk05[0xB];
+    /* 0x10 */ u32 unk10;
+} Request;
 
-void FUN_00237a7c(unsigned int *param_1,unsigned int *param_2,unsigned int param_3)
-
+void FUN_00237a7c(Request *request, u32 *source, u32 value)
 {
-  *(unsigned char *)(param_1 + 1) = 3;
-  param_1[4] = param_3;
-  *param_1 = *param_2;
-  return;
+    request->state = 3;
+    request->unk10 = value;
+    request->unk00 = *source;
 }
 
 } /* extern "C" */

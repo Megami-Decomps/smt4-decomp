@@ -27,7 +27,7 @@ int FUN_004186e0(void);
 int FUN_0047dd18(...);
 int FUN_00480e30(int, unsigned int);
 int FUN_004d9de0(void);
-int FUN_004da2f8(void);
+int optionsClearFlag1(void);
 int SBORROW4(...);
 
 int FUN_00163aa4(...);
@@ -92,11 +92,11 @@ extern int FUN_00335384(int);
 extern int FUN_004186a4(void);
 /* Supplied declaration required: FUN_004186e0. */
 extern unsigned char FUN_00418714(unsigned short);
-extern int FUN_00473244(void);
+extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: FUN_0047dd18. */
 /* Supplied declaration required: FUN_00480e30. */
 /* Supplied declaration required: FUN_004d9de0. */
-/* Supplied declaration required: FUN_004da2f8. */
+/* Supplied declaration required: optionsClearFlag1. */
 
 
 unsigned int FUN_00215cb8(void)
@@ -367,7 +367,7 @@ unsigned int FUN_00215cb8(void)
     }
     temp_v9 = FUN_004186e0();
     FUN_001ad9b4();
-    if ((*(char *)(temp_v9 + 6) != '\t') || (temp_v9 = FUN_00473244(), temp_v9 == 0)) {
+    if ((*(char *)(temp_v9 + 6) != '\t') || (temp_v9 = gameBlockByte27E98Is1To3(), temp_v9 == 0)) {
       temp_v3 = FUN_004186e0();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
       temp_v7 = FUN_004186e0();
@@ -402,7 +402,7 @@ unsigned int FUN_00215cb8(void)
     }
     temp_v9 = FUN_004186e0();
     FUN_001ad9b4();
-    if ((*(char *)(temp_v9 + 6) != '\t') || (temp_v9 = FUN_00473244(), temp_v9 == 0)) {
+    if ((*(char *)(temp_v9 + 6) != '\t') || (temp_v9 = gameBlockByte27E98Is1To3(), temp_v9 == 0)) {
       temp_v3 = FUN_004186e0();
       *(unsigned short *)(temp_v1 + 0xccc) = temp_v3;
       temp_v7 = FUN_004186e0();
@@ -697,7 +697,7 @@ joined_r0x002167bc:
       if (temp_v5 == 0x2b) {
         FUN_00418070(*(unsigned short *)(temp_v1 + 0xcca),0);
         FUN_004d9de0();
-        FUN_004da2f8();
+        optionsClearFlag1();
         if (*(char *)(temp_v1 + 0x90c) != '\0') {
           temp_v9 = temp_v1 + 0x948;
           temp_v5 = temp_v1 + 0xa10;

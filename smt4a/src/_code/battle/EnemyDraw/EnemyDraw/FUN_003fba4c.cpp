@@ -113,7 +113,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_001b4a20. */
 /* Supplied declaration required: FUN_001d3de0. */
 /* Supplied declaration required: FUN_002371b0. */
-extern int FUN_002eba64(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_00317c3c. */
 /* Supplied declaration required: FUN_0032c808. */
 
@@ -285,7 +285,7 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
     temp_v44 = 0;
     temp_v45 = 0;
     temp_v17 = 0x3f800000;
-    if (((DAT_005c4c30 & 1) == 0) && (temp_v4 = FUN_002eba64(&DAT_005c4c30), temp_v4 != 0)) {
+    if (((DAT_005c4c30 & 1) == 0) && (temp_v4 = __cxa_guard_acquire(&DAT_005c4c30), temp_v4 != 0)) {
       DAT_0064c084 = (unsigned int)temp_v17;
       DAT_0064c088 = temp_v7;
       DAT_0064c08c = temp_v7;

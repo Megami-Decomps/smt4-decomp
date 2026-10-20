@@ -8,7 +8,7 @@ int FUN_00161a10(void);
 int FUN_001b57a8(unsigned int *, int);
 int FUN_001d25ec(unsigned int *);
 int FUN_004289cc(int *, int, int, int *, int);
-int FUN_005001a4(unsigned char [4], unsigned int, unsigned int);
+int table30GetEntry(unsigned char [4], unsigned int, unsigned int);
 int FUN_0050081c(int *, unsigned char [4]);
 
 /* stack frame of param_2: 6 slot(s), 24 byte(s) */
@@ -28,7 +28,7 @@ extern int g_aocMain; /* 0x570260 */
 extern unsigned int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001d25ec. */
 /* Supplied declaration required: FUN_004289cc. */
-/* Supplied declaration required: FUN_005001a4. */
+/* Supplied declaration required: table30GetEntry. */
 /* Supplied declaration required: FUN_0050081c. */
 
 
@@ -74,7 +74,7 @@ unsigned char * FUN_00475d48(unsigned char *param_1,int param_2)
   puVar2[1] = temp_v2;
   temp_v1 = g_aocMain;
   FUN_00161a10();
-  FUN_005001a4(temp_v3,*(unsigned int *)(temp_v1 + 0x5b0),*(unsigned int *)(param_2 + 0x14));
+  table30GetEntry(temp_v3,*(unsigned int *)(temp_v1 + 0x5b0),*(unsigned int *)(param_2 + 0x14));
   FUN_0050081c(&temp_v7,temp_v3);
   temp_v5 = temp_v7;
   uStack_5c = uStack_38;

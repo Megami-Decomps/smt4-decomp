@@ -13,12 +13,12 @@ int FUN_001f4908(int, int, int);
 int FUN_00284168(int, int, int, int);
 int asdTMTexTableFreeEntry(...);
 int FUN_0037ed38(void);
-int FUN_003c58a8(int);
+int ref208SetPair1C(int);
 int FUN_003cbb0c(void);
 int FUN_003d2d34(int, int, int);
 int FUN_003d2d6c(...);
 int FUN_003d54f8(int, int);
-int FUN_0050d708(unsigned int *);
+int clearWordHalfByte(unsigned int *);
 
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
@@ -34,12 +34,12 @@ extern int FUN_002009a8(unsigned int);
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int FUN_00341940(unsigned int);
 /* Supplied declaration required: FUN_0037ed38. */
-/* Supplied declaration required: FUN_003c58a8. */
+/* Supplied declaration required: ref208SetPair1C. */
 /* Supplied declaration required: FUN_003cbb0c. */
 /* Supplied declaration required: FUN_003d2d34. */
 /* Supplied declaration required: FUN_003d2d6c. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_0050d708. */
+/* Supplied declaration required: clearWordHalfByte. */
 
 
 unsigned int FUN_003e71a8(unsigned int *param_1)
@@ -66,7 +66,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     param_1[0xe] = 0x3fc00000;
     param_1[0xf] = 300;
     param_1[10] = 0x42700000;
-    FUN_0050d708(param_1 + 0x11);
+    clearWordHalfByte(param_1 + 0x11);
     *(unsigned char *)((int)param_1 + 0x4b) = 0;
     temp_v0 = FUN_00341940(0x22);
     if (temp_v0 == 0) {
@@ -84,7 +84,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 7);
     FUN_0037ed38();
-    FUN_003c58a8(1);
+    ref208SetPair1C(1);
     temp_v2 = 0;
     param_1[0x10] = 0;
     FUN_00284168(0,0,0x140,0xf0);
@@ -169,7 +169,7 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     FUN_001f4908(1,0x2d,0xff);
   }
   if ((param_1[8] == 3) && (temp_v0 = FUN_0013def0(0), temp_v0 == 3)) {
-    FUN_003c58a8(0);
+    ref208SetPair1C(0);
     FUN_003cbb0c();
     temp_v0 = 1;
     do {

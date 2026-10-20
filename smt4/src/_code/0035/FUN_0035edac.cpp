@@ -32,7 +32,7 @@ extern unsigned char LAB_0035ef7c; /* 0x35ef7c */
 /* Supplied declaration required: FUN_002c52f8. */
 /* Supplied declaration required: FUN_0035efa0. */
 /* Supplied declaration required: FUN_0035f50c. */
-extern unsigned int FUN_003e0e24(unsigned int *, unsigned int *, unsigned int, unsigned int);
+extern unsigned int argsValidate(unsigned int *, unsigned int *, unsigned int, unsigned int);
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 
 
@@ -63,7 +63,7 @@ unsigned int * FUN_0035edac(unsigned int *param_1,unsigned int *param_2,unsigned
   puStack_30 = param_2;
   uStack_2c = param_3;
   temp_v11 = param_4;
-  puVar1 = (unsigned int *)FUN_003e0e24(param_1,param_2,param_4,param_5);
+  puVar1 = (unsigned int *)argsValidate(param_1,param_2,param_4,param_5);
   if ((int)puVar1 < 0) {
     return puVar1;
   }

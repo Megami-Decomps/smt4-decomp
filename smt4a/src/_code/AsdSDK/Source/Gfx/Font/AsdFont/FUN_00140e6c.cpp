@@ -23,7 +23,7 @@ extern int DAT_005b3bc0; /* 0x5b3bc0 */
 extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 
 /* Supplied declaration required: FUN_0015ef04. */
-extern int FUN_0015f0dc(void);
+extern int initVtable0055c618(void);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001800b8. */
@@ -86,7 +86,7 @@ unsigned int FUN_00140e6c(unsigned int *param_1,int param_2)
     FUN_00178b04(0x18,&LAB_00141200,0x219);
     temp_v4 = 0;
     if (temp_v3 != 0) {
-      temp_v4 = FUN_0015f0dc();
+      temp_v4 = initVtable0055c618();
     }
     piVar11[2] = temp_v4;
     FUN_0015ef04();

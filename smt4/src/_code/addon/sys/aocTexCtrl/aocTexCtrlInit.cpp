@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail loads a file name string and a line number (876) into r0/r1 before the allocation call (the call itself is a nop in the retail image). */
 #include "addon/sys/aocTexCtrl.h"
+
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -12,6 +13,7 @@ void aocTexCtrlInit(AocTexCtrl *ctrl)
     AocTexState *state;
 
     if (ctrl->state == NULL) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\addon\\sys\\aocTexCtrl.cpp", 876);
         state = (AocTexState *)asdMemAlloc(0x100, 0x100, 0, 0x18, 1);
         ctrl->state = state;
         state->unk00 = 0;

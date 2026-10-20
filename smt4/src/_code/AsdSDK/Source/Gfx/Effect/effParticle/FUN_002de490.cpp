@@ -8,8 +8,8 @@ int FUN_00248f70(void);
 int FUN_002491b4(void);
 int FUN_002493a4(...);
 int effTlpCreate(void);
-int FUN_0024fb58(void);
-int FUN_0024fc18(void);
+int effBlockClone(void);
+int effBlockCreateFromBlock(void);
 int FUN_00257108(void);
 int FUN_0025715c(void);
 int FUN_002691d8(unsigned int, unsigned int, unsigned int);
@@ -18,8 +18,8 @@ int FUN_002694f8(...);
 int asdEffectTextureCreate(void);
 int FUN_002a4e98(void);
 int FUN_002c0894(...);
-int FUN_002c2264(...);
-int FUN_002c2318(unsigned int);
+int resourceListDestroy(...);
+int resourceDestroy(unsigned int);
 int memAlloc(...);
 int FUN_002c3944(void);
 int asdMemFree(...);
@@ -51,8 +51,8 @@ typedef struct {
 extern int FUN_0024c3c8(unsigned int);
 extern unsigned int *FUN_0024c3d8(fn_002de490_arg0 *);
 extern unsigned int FUN_0024c3f8(void);
-/* Supplied declaration required: FUN_0024fb58. */
-/* Supplied declaration required: FUN_0024fc18. */
+/* Supplied declaration required: effBlockClone. */
+/* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: FUN_00257108. */
 /* Supplied declaration required: FUN_0025715c. */
 /* Supplied declaration required: FUN_002691d8. */
@@ -62,8 +62,8 @@ extern int FUN_0028c814(unsigned int *);
 /* Supplied declaration required: asdEffectTextureCreate. */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002c0894. */
-/* Supplied declaration required: FUN_002c2264. */
-/* Supplied declaration required: FUN_002c2318. */
+/* Supplied declaration required: resourceListDestroy. */
+/* Supplied declaration required: resourceDestroy. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: FUN_002c3944. */
 /* Supplied declaration required: asdMemFree. */
@@ -152,7 +152,7 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
         temp_v3 = 0;
         if (temp_v3 < temp_v0) {
           do {
-            FUN_002c2318(*(unsigned int *)(puVar3[0xd] + temp_v3 * 4));
+            resourceDestroy(*(unsigned int *)(puVar3[0xd] + temp_v3 * 4));
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);
         }
@@ -165,13 +165,13 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
         memAlloc(0x10000,0x100,0,temp_v0 << 2,0x10,1);
         puVar3[0xe] = temp_v3;
         puVar3[0xd] = temp_v3;
-        FUN_0024fc18();
+        effBlockCreateFromBlock();
         temp_v3 = 1;
         *(unsigned int **)puVar3[0xd] = puVar4;
         if (temp_v0 >= 2) {
           do {
             temp_v2 = *(unsigned int *)puVar3[0xd];
-            FUN_0024fb58();
+            effBlockClone();
             *(unsigned int *)(puVar3[0xd] + temp_v3 * 4) = temp_v2;
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);
@@ -190,7 +190,7 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
         temp_v3 = 0;
         if (temp_v3 < temp_v0) {
           do {
-            FUN_002c2264(*(unsigned int *)(puVar3[0xf] + temp_v3 * 4));
+            resourceListDestroy(*(unsigned int *)(puVar3[0xf] + temp_v3 * 4));
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < temp_v0);
         }

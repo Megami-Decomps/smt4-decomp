@@ -1,31 +1,27 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int resourceLookupWithFallback(unsigned int, int);
+int resourceLookupWithFallback(u32 object, int id);
+extern int FUN_003bbca0(u32 object);
 
-extern int g_cecProcess; /* 0x43de68 */
+typedef struct CecProcess {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ u32 object;
+} CecProcess;
 
-/* Supplied declaration required: resourceLookupWithFallback. */
-extern int FUN_003bbca0(unsigned int);
+extern CecProcess *g_cecProcess; /* 0x43de68 */
 
-
-unsigned int FUN_002005a0(int param_1)
-
+u32 FUN_002005a0(int id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_cecProcess;
-  temp_v2 = 0;
-  if ((g_cecProcess != 0 && param_1 != 0) &&
-     (temp_v1 = FUN_003bbca0(*(unsigned int *)(g_cecProcess + 4)), temp_v1 != 0)) {
-    resourceLookupWithFallback(*(unsigned int *)(temp_v0 + 4),param_1);
-    temp_v2 = 1;
-  }
-  return temp_v2;
+    CecProcess *process = g_cecProcess;
+    u32 found = 0;
+
+    if ((g_cecProcess != NULL && id != 0) && FUN_003bbca0(g_cecProcess->object) != 0) {
+        resourceLookupWithFallback(process->object, id);
+        found = 1;
+    }
+    return found;
 }
 
 } /* extern "C" */

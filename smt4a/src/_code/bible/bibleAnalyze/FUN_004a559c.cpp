@@ -9,7 +9,7 @@ int FUN_00162758(...);
 int FUN_0049339c(int, int, int, int, int);
 int FUN_0049368c(...);
 int FUN_004a6144(...);
-int FUN_004a77c0(...);
+int owner4ASetSizeAndCall(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -42,7 +42,7 @@ extern unsigned int FUN_004929d8(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0049339c. */
 /* Supplied declaration required: FUN_0049368c. */
 /* Supplied declaration required: FUN_004a6144. */
-/* Supplied declaration required: FUN_004a77c0. */
+/* Supplied declaration required: owner4ASetSizeAndCall. */
 extern int FUN_004cfb24(unsigned char *, unsigned int);
 
 
@@ -109,7 +109,7 @@ void FUN_004a559c(int param_1)
     temp_v6 = FUN_0031d174(param_1 + 0x20);
     FUN_004a6144(param_1,temp_v6 + 1,1,(int)temp_v0);
   }
-  FUN_004a77c0(param_1,temp_v4 + 1);
+  owner4ASetSizeAndCall(param_1,temp_v4 + 1);
   return;
 }
 

@@ -34,8 +34,8 @@ int eventCommandStop(void);
 int FUN_003bb45c(void);
 int FUN_003d2d6c(int);
 int FUN_003fd63c(...);
-int FUN_0046be60(int, unsigned int, int);
-int FUN_0046bed0(int, unsigned int, int);
+int aocDrawText8(int, unsigned int, int);
+int aocDrawText7(int, unsigned int, int);
 
 extern unsigned char LAB_00299154; /* 0x299154 */
 extern unsigned char LAB_0029916c; /* 0x29916c */
@@ -71,7 +71,7 @@ extern int FUN_002a4b60(void);
 /* Supplied declaration required: FUN_002e6dd0. */
 /* Supplied declaration required: FUN_0031a400. */
 /* Supplied declaration required: FUN_00342010. */
-extern int FUN_003483bc(void);
+extern int flagBrowserStep(void);
 /* Supplied declaration required: FUN_0035b304. */
 /* Supplied declaration required: FUN_0035bea0. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
@@ -81,8 +81,8 @@ extern int FUN_003483bc(void);
 /* Supplied declaration required: FUN_003bb45c. */
 /* Supplied declaration required: FUN_003d2d6c. */
 /* Supplied declaration required: FUN_003fd63c. */
-/* Supplied declaration required: FUN_0046be60. */
-/* Supplied declaration required: FUN_0046bed0. */
+/* Supplied declaration required: aocDrawText8. */
+/* Supplied declaration required: aocDrawText7. */
 extern int FUN_0046e08c(int, unsigned int, unsigned int);
 
 
@@ -190,7 +190,7 @@ unsigned int FUN_00298978(void)
   }
   if (temp_v1 >= 3) {
     if (temp_v1 == 0x58) {
-      temp_v1 = FUN_003483bc();
+      temp_v1 = flagBrowserStep();
       if (temp_v1 == 0) {
         return 0;
       }
@@ -225,10 +225,10 @@ unsigned int FUN_00298978(void)
     temp_v1 = FUN_0046e08c(g_aocSystem,puVar2[5],0);
     if (temp_v1 != 0) {
       temp_v1 = g_aocSystem;
-      FUN_0046bed0(g_aocSystem,puVar2[5],0);
+      aocDrawText7(g_aocSystem,puVar2[5],0);
       puVar2[0xb] = temp_v1;
       temp_v1 = g_aocSystem;
-      FUN_0046be60(g_aocSystem,puVar2[5],0);
+      aocDrawText8(g_aocSystem,puVar2[5],0);
       puVar2[0xd] = temp_v1;
       if (puVar2[0xb] == 0 || temp_v1 == 0) {
         puVar2[2] = 1;

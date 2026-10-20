@@ -1,14 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Pair {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 first;
+    /* 0x08 */ u32 second;
+} Pair;
 
-void FUN_00184b80(int param_1,unsigned int param_2)
-
+/* Sets the first word to `first` and the second to -1. */
+void FUN_00184b80(Pair *object, u32 first)
 {
-  *(unsigned int *)(param_1 + 4) = param_2;
-  *(unsigned int *)(param_1 + 8) = 0xffffffff;
-  return;
+    object->first = first;
+    object->second = 0xFFFFFFFF;
 }
 
 } /* extern "C" */

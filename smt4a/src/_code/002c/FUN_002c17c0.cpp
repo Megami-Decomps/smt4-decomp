@@ -1,17 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern char s_normal_00570ab8[7]; /* 0x570ab8 */
+typedef struct Entry {
+    /* 0x00 */ u8 data[0x30];
+} Entry;
+extern Entry DAT_00570ab8[];
 
-
-char * FUN_002c17c0(int param_1)
-
+/* Returns entry `index` (0x30 bytes each) of the table at 0x570AB8; indices of 0xE and above fall back to entry 0. */
+Entry *FUN_002c17c0(s32 index)
 {
-  if (param_1 >= 0xe) {
-    param_1 = 0;
-  }
-  return s_normal_00570ab8 + param_1 * 0x30;
+    if (index >= 0xE) {
+        index = 0;
+    }
+    return &DAT_00570ab8[index];
 }
 
 } /* extern "C" */

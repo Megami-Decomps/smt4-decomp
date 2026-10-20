@@ -1,13 +1,10 @@
-#include "romwright_types.h"
+#include "shard/Shard003E.h"
 
 extern "C" {
 
-
-void FUN_003e8794(int param_1,int param_2)
-
+void FUN_003e8794(BtlStateB *state, s32 delta)
 {
-  *(int *)(param_1 + 0x23a0) = param_2 + *(int *)(param_1 + 0x23a0);
-  return;
+    state->unk23A0 = delta + state->unk23A0;
 }
 
 } /* extern "C" */

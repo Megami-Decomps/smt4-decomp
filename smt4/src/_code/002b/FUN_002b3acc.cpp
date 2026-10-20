@@ -46,7 +46,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: FUN_0013e238. */
 /* Supplied declaration required: FUN_0013e900. */
 extern int *FUN_002b52b4(int, int *, int, char *);
-extern int FUN_002bfefc(unsigned int *);
+extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 
@@ -224,7 +224,7 @@ int * FUN_002b3acc(char *param_1,int param_2,int param_3,int *param_4)
     temp_v7 = 0x3f800000;
     piVar9[0x62] = *(int *)(param_1 + 0x10);
     temp_v8 = 0;
-    if (((DAT_00476634 & 1) == 0) && (temp_v1 = FUN_002bfefc(&DAT_00476634), temp_v1 != 0)) {
+    if (((DAT_00476634 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_00476634), temp_v1 != 0)) {
       DAT_004efd6c = temp_v7;
       DAT_004efd70 = temp_v8;
       DAT_004efd74 = temp_v8;
@@ -239,7 +239,7 @@ int * FUN_002b3acc(char *param_1,int param_2,int param_3,int *param_4)
       DAT_004efd98 = temp_v8;
     }
     nn_math_ARMv6_MTX34CopyAsm(piVar9 + 99,&DAT_004efd6c);
-    if (((DAT_00476634 & 1) == 0) && (temp_v1 = FUN_002bfefc(&DAT_00476634), temp_v1 != 0)) {
+    if (((DAT_00476634 & 1) == 0) && (temp_v1 = __cxa_guard_acquire(&DAT_00476634), temp_v1 != 0)) {
       DAT_004efd6c = temp_v7;
       DAT_004efd70 = temp_v8;
       DAT_004efd74 = temp_v8;

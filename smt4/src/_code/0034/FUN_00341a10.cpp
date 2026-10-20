@@ -1,24 +1,22 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00152bec(void);
-int asdMdlManagerDestroy(unsigned int);
+int asdMdlManagerDestroy(u32 model);
 
-/* Supplied declaration required: FUN_00152bec. */
-/* Supplied declaration required: asdMdlManagerDestroy. */
+typedef struct Obj {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ u32 model;
+} Obj;
 
-
-void FUN_00341a10(int param_1)
-
+void FUN_00341a10(Obj *obj)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x28) != 0) {
-    FUN_00152bec();
-    asdMdlManagerDestroy(*(unsigned int *)(param_1 + 0x28));
-    *(unsigned int *)(param_1 + 0x28) = 0;
-  }
-  return;
+    if (obj->model != 0) {
+        FUN_00152bec();
+        asdMdlManagerDestroy(obj->model);
+        obj->model = 0;
+    }
 }
 
 } /* extern "C" */

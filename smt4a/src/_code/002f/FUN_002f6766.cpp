@@ -1,28 +1,33 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0030ee42(int);
+typedef struct Cell {
+    /* 0x00 */ u8 unk00[0x0C];
+    /* 0x0C */ u32 value;
+} Cell;
 
-extern int FUN_0030ee2c(void);
-extern int FUN_0030ee34(void);
-/* Supplied declaration required: FUN_0030ee42. */
+void FUN_0030ee42(u8 *member);
+s32 FUN_0030ee34(void);
+Cell *FUN_0030ee2c(void);
 
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 member04[1];
+} Owner;
 
-unsigned int FUN_002f6766(int param_1)
-
+/* Returns field 0xC of the cell FUN_0030ee2c yields for the member at 4, or 0 when FUN_0030ee34 reports it empty. */
+u32 FUN_002f6766(Owner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  FUN_0030ee42(param_1 + 4);
-  temp_v0 = FUN_0030ee34();
-  if (temp_v0 != 0) {
-    return 0;
-  }
-  FUN_0030ee42(param_1 + 4);
-  temp_v0 = FUN_0030ee2c();
-  return *(unsigned int *)(temp_v0 + 0xc);
+    Cell *cell;
+
+    FUN_0030ee42(owner->member04);
+    if (FUN_0030ee34() != 0) {
+        return 0;
+    }
+    FUN_0030ee42(owner->member04);
+    cell = FUN_0030ee2c();
+    return cell->value;
 }
 
 } /* extern "C" */

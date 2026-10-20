@@ -1,24 +1,20 @@
-#include "romwright_types.h"
+#include "shard/Dspsnd.h"
 
 extern "C" {
 
 extern int FUN_002bb274(void);
 
-
-unsigned char nn_snd_CTR_Dspsnd_SetChannelIirFilterType(int param_1,int param_2,unsigned short param_3)
-
+u8 nn_snd_CTR_Dspsnd_SetChannelIirFilterType(DspsndState *state, s32 channel, u16 type)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  
-  temp_v0 = FUN_002bb274();
-  if (temp_v0 != 0) {
-    puVar2 = *(unsigned int **)(param_1 + (*(unsigned short *)(param_1 + 0x131a) & 1) * 0x60 + param_2 * 4 + 0x10b0)
-    ;
-    *(unsigned short *)((int)puVar2 + 0x3a) = param_3;
-    *puVar2 = *puVar2 | 0x400000;
-  }
-  return temp_v0 != 0;
+    int ok = FUN_002bb274();
+
+    if (ok != 0) {
+        DspChannelCommand *params = state->channels[state->bank & 1][channel];
+
+        params->iirFilterType = type;
+        params->flags |= 0x400000;
+    }
+    return ok != 0;
 }
 
 } /* extern "C" */

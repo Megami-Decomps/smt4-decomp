@@ -1,51 +1,56 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0023d02c(unsigned int);
-int FUN_002b2368(unsigned int *);
-int asdMemFree(unsigned int);
-int FUN_002c6a10(unsigned int);
+int FUN_0023d02c(u32 texture);
+int FUN_002b2368(void *object);
+int asdMemFree(u32 ptr);
+int FUN_002c6a10(u32 ptr);
+extern u8 DAT_00420840;
 
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+typedef struct ObjectVtbl {
+    /* 0x0 */ void *unk0;
+    /* 0x4 */ void (*destroy)(void *object);
+} ObjectVtbl;
 
-extern unsigned char g_filter4PolyBaseVtable; /* 0x420798 */
-extern unsigned char DAT_00420840; /* 0x420840 */
+typedef struct Child {
+    /* 0x0 */ ObjectVtbl *vtbl;
+} Child;
 
-/* Supplied declaration required: FUN_0023d02c. */
-/* Supplied declaration required: FUN_002b2368. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c6a10. */
+typedef struct Filter4Poly {
+    /* 0x00 */ const void *vtbl;
+    /* 0x04 */ u32 buffer;
+    /* 0x08 */ u32 texture;
+    /* 0x0C */ u8 unk0C[8];
+    /* 0x14 */ Child *child;
+    /* 0x18 */ u8 unk18[0x4C];
+    /* 0x64 */ u32 extra;
+} Filter4Poly;
 
+extern u8 g_filter4PolyBaseVtable; /* 0x420798 */
 
-void FUN_003486ec(unsigned int *param_1)
-
+/* Destructor of the derived type: releases `extra`, then runs the base destructor body. */
+void FUN_003486ec(Filter4Poly *filter)
 {
-/* irregular: 4 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_00420840;
-  if (param_1[0x19] != 0) {
-    FUN_002c6a10(param_1[0x19]);
-    param_1[0x19] = 0;
-  }
-  *param_1 = (unsigned int)&g_filter4PolyBaseVtable;
-  if (param_1[2] != 0) {
-    FUN_0023d02c(param_1[2]);
-    param_1[2] = 0;
-  }
-  if (param_1[1] != 0) {
-    asdMemFree(param_1[1]);
-    param_1[1] = 0;
-  }
-  if ((int *)param_1[5] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[5] + 4))(param_1[5]);
-    param_1[5] = 0;
-  }
-  FUN_002b2368(param_1);
-  return;
+    filter->vtbl = &DAT_00420840;
+    if (filter->extra != 0) {
+        FUN_002c6a10(filter->extra);
+        filter->extra = 0;
+    }
+    filter->vtbl = &g_filter4PolyBaseVtable;
+    if (filter->texture != 0) {
+        FUN_0023d02c(filter->texture);
+        filter->texture = 0;
+    }
+    if (filter->buffer != 0) {
+        asdMemFree(filter->buffer);
+        filter->buffer = 0;
+    }
+    if (filter->child != NULL) {
+        filter->child->vtbl->destroy(filter->child);
+        filter->child = NULL;
+    }
+    FUN_002b2368(filter);
 }
 
 } /* extern "C" */

@@ -1,22 +1,15 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
 int FUN_00230f44(...);
 
-/* Supplied declaration required: FUN_00230f44. */
-
-
-int FUN_0039fd24(unsigned int param_1,unsigned int param_2)
-
+int FUN_0039fd24(u32 a, u32 b)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_00230f44();
-  temp_v1 = FUN_00230f44(param_2);
-  return temp_v1 - temp_v0;
+    int valueA = FUN_00230f44();
+    int valueB = FUN_00230f44(b);
+
+    return valueB - valueA;
 }
 
 } /* extern "C" */

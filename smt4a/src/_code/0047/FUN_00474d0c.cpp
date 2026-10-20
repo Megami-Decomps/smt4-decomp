@@ -11,7 +11,7 @@ int FUN_0019a46c(...);
 int FUN_001a1564(int, int, int);
 int FUN_002e342c(...);
 int FUN_002e3494(...);
-int FUN_002e56ec(int, unsigned char *);
+int deletingDtor_002e56ec(int, unsigned char *);
 int sysMemClear(...);
 int FUN_002e783c(...);
 int FUN_002f5020(unsigned int *, unsigned char *, int, int);
@@ -22,13 +22,13 @@ int FUN_0042718c(...);
 int FUN_00428060(...);
 int FUN_00473c5c(...);
 int FUN_004749a0(...);
-int FUN_00474aec(...);
+int holderOwnerFree(...);
 int FUN_004ffd58(...);
 int FUN_004ffee0(...);
 int FUN_004fff5c(...);
 int FUN_004fffc0(...);
 int FUN_00500054(...);
-int FUN_005001f8(unsigned char [64], unsigned int, unsigned int);
+int table30GetEntryB(unsigned char [64], unsigned int, unsigned int);
 int nn_fnd_DateTime_DateTime_sub_object(...);
 
 /* stack frame of param_1: 35 slot(s), 140 byte(s) */
@@ -84,7 +84,7 @@ extern unsigned char FUN_001a747c(int);
 extern int FUN_001d25ec(int);
 /* Supplied declaration required: FUN_002e342c. */
 /* Supplied declaration required: FUN_002e3494. */
-/* Supplied declaration required: FUN_002e56ec. */
+/* Supplied declaration required: deletingDtor_002e56ec. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002e783c. */
 /* Supplied declaration required: FUN_002f5020. */
@@ -92,12 +92,12 @@ extern int FUN_001d25ec(int);
 /* Supplied declaration required: FUN_0037a728. */
 /* Supplied declaration required: FUN_00426eb8. */
 /* Supplied declaration required: FUN_0042718c. */
-extern unsigned int FUN_00427348(int);
-extern unsigned int FUN_00427354(int);
+extern unsigned int halfPair48LowByteA(int);
+extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00428060. */
 /* Supplied declaration required: FUN_00473c5c. */
 /* Supplied declaration required: FUN_004749a0. */
-/* Supplied declaration required: FUN_00474aec. */
+/* Supplied declaration required: holderOwnerFree. */
 extern int FUN_004ffd38(unsigned char *);
 extern int FUN_004ffd4c(unsigned char *);
 /* Supplied declaration required: FUN_004ffd58. */
@@ -105,7 +105,7 @@ extern int FUN_004ffd4c(unsigned char *);
 /* Supplied declaration required: FUN_004fff5c. */
 /* Supplied declaration required: FUN_004fffc0. */
 /* Supplied declaration required: FUN_00500054. */
-/* Supplied declaration required: FUN_005001f8. */
+/* Supplied declaration required: table30GetEntryB. */
 /* Supplied declaration required: nn_fnd_DateTime_DateTime_sub_object. */
 extern int nn_fnd_DateTime_GetDay(unsigned int);
 extern int nn_fnd_DateTime_GetMonth(unsigned int);
@@ -252,7 +252,7 @@ int FUN_00474d0c(int param_1)
   puVar13 = (unsigned int *)(g_aocMain + 0x678);
   temp_v51 = param_1;
   if (*(int *)(g_aocMain + 0x678) != 0) {
-    FUN_002e56ec(*(int *)(g_aocMain + 0x678),&LAB_0047d8e8);
+    deletingDtor_002e56ec(*(int *)(g_aocMain + 0x678),&LAB_0047d8e8);
     *puVar13 = 0;
   }
   temp_v9 = *(int *)(temp_v8 + 0x67c) + 1;
@@ -274,7 +274,7 @@ int FUN_00474d0c(int param_1)
     temp_v38 = temp_v8 + 0x528;
     temp_v42 = temp_v8 + 0x4e8;
     do {
-      FUN_005001f8(temp_v50,*(unsigned int *)(temp_v8 + 0x5a8),temp_v41);
+      table30GetEntryB(temp_v50,*(unsigned int *)(temp_v8 + 0x5a8),temp_v41);
       temp_v17 = temp_v50;
       FUN_004ffd58(&temp_v14,temp_v50);
       temp_v47 = temp_v14;
@@ -292,8 +292,8 @@ int FUN_00474d0c(int param_1)
         if ((temp_v9 != 0) && (FUN_001029f4(temp_v9,0,10), temp_v9 == 1)) {
           *(unsigned char *)(temp_v4 + 0x9b0) = 1;
         }
-        temp_v6 = FUN_00427354(temp_v8 + 0x28);
-        temp_v7 = FUN_00427348(temp_v8 + 0x28);
+        temp_v6 = halfPair48LowByteB(temp_v8 + 0x28);
+        temp_v7 = halfPair48LowByteA(temp_v8 + 0x28);
         FUN_00426eb8(&temp_v35,0,temp_v7,temp_v6);
         temp_v19 = temp_v35;
         uStack_1c0c = uStack_1af4;
@@ -320,8 +320,8 @@ int FUN_00474d0c(int param_1)
         if (temp_v5 < 0) {
           return temp_v5;
         }
-        temp_v6 = FUN_00427354(temp_v8 + 0x28);
-        temp_v7 = FUN_00427348(temp_v8 + 0x28);
+        temp_v6 = halfPair48LowByteB(temp_v8 + 0x28);
+        temp_v7 = halfPair48LowByteA(temp_v8 + 0x28);
         FUN_00426eb8(&temp_v33,2,temp_v7,temp_v6);
         temp_v31 = temp_v33;
         uStack_1b74 = uStack_1b34;
@@ -349,8 +349,8 @@ int FUN_00474d0c(int param_1)
           return temp_v5;
         }
         sysMemClear(temp_v49,0x800);
-        temp_v6 = FUN_00427354(temp_v8 + 0x28);
-        temp_v7 = FUN_00427348(temp_v8 + 0x28);
+        temp_v6 = halfPair48LowByteB(temp_v8 + 0x28);
+        temp_v7 = halfPair48LowByteA(temp_v8 + 0x28);
         FUN_00426eb8(&temp_v28,3,temp_v7,temp_v6);
         temp_v24 = temp_v28;
         uStack_1bf4 = uStack_1bb4;
@@ -430,8 +430,8 @@ int FUN_00474d0c(int param_1)
         *(unsigned char *)(temp_v9 + 0x182) = 0xff;
         *(unsigned char *)(temp_v9 + 0x183) = 0;
         *(unsigned char *)(temp_v9 + 0x180) = 0xff;
-        temp_v6 = FUN_00427354(temp_v8 + 0x28);
-        temp_v7 = FUN_00427348(temp_v8 + 0x28);
+        temp_v6 = halfPair48LowByteB(temp_v8 + 0x28);
+        temp_v7 = halfPair48LowByteA(temp_v8 + 0x28);
         FUN_00426eb8(&temp_v27,5,temp_v7,temp_v6);
         temp_v19 = temp_v27;
         uStack_1c0c = uStack_1bcc;
@@ -586,7 +586,7 @@ int FUN_00474d0c(int param_1)
             (temp_v9 = FUN_004fff5c(temp_v17,temp_v38), temp_v9 != 0)) &&
            (FUN_001029f4(temp_v9,0,10), temp_v9 == 1)) {
           temp_v18 = temp_v18 - 1;
-          FUN_00474aec(temp_v27);
+          holderOwnerFree(temp_v27);
           sysMemClear(temp_v4,0x80);
           sysMemClear(temp_v4 + 0x80,0x100);
           sysMemClear(temp_v4 + 0x180,0x800);

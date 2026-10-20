@@ -1,12 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct Table {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ u32 *items;
+} Table;
 
-unsigned int FUN_00290df4(int *param_1,int param_2)
-
+/* Returns item `index` of the table `(*ref)->items`. */
+u32 FUN_00290df4(Table **ref, s32 index)
 {
-  return *(unsigned int *)(*(int *)(*param_1 + 0x14) + param_2 * 4);
+    return (*ref)->items[index];
 }
 
 } /* extern "C" */

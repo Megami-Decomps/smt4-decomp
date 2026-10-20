@@ -1,26 +1,25 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int vcallSlot12IfValid(unsigned int);
-int FUN_00195fc8(void);
+s32 vcallSlot12IfValid(u32 object);
+void FUN_00195fc8(void);
 
-/* Supplied declaration required: vcallSlot12IfValid. */
-/* Supplied declaration required: FUN_00195fc8. */
+typedef struct Holder {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 tagged;      /* object pointer, bit 0 set when FUN_00195fc8 must run first */
+} Holder;
 
-
-void FUN_0019059c(int param_1)
-
+/* Releases the held object: runs FUN_00195fc8 first when the tag bit is set, calls its slot-12 method and clears the field. */
+void FUN_0019059c(Holder *holder)
 {
-/* irregular: 2 native warning(s); review required */
-  if ((*(unsigned int *)(param_1 + 4) & 0xfffffffe) != 0) {
-    if ((*(unsigned int *)(param_1 + 4) & 1) != 0) {
-      FUN_00195fc8();
+    if ((holder->tagged & 0xFFFFFFFE) != 0) {
+        if ((holder->tagged & 1) != 0) {
+            FUN_00195fc8();
+        }
+        vcallSlot12IfValid(holder->tagged & 0xFFFFFFFE);
+        holder->tagged = 0;
     }
-    vcallSlot12IfValid(*(unsigned int *)(param_1 + 4) & 0xfffffffe);
-    *(unsigned int *)(param_1 + 4) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

@@ -1,14 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned int DAT_005b40b4; /* 0x5b40b4 */
+extern u32 DAT_005b40b4;
 
-
-unsigned int FUN_0014374c(void)
-
+/* Returns the first word of the global block at 0x5B40B4. */
+u32 FUN_0014374c(void)
 {
-  return DAT_005b40b4;
+    return DAT_005b40b4;
 }
 
 } /* extern "C" */

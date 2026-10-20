@@ -1,20 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001623d0` (_code @ 0x1623d0, 0x4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int software_interrupt(int);
+__declspec(noreturn) __weak void FUN_001623d0_hook(void);
 
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_001623d0(unsigned int param_1)
-
+/* Calls the engine's (removed) noreturn hook; armlink turned the tail branch into a nop. */
+void FUN_001623d0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  software_interrupt(0x28);
-  return param_1;
+    FUN_001623d0_hook();
 }
 
 } /* extern "C" */

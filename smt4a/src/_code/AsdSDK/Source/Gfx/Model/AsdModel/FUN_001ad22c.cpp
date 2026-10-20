@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemoryAllocTracked(int, int, int, int);
-int FUN_001836b0(unsigned int);
+int resourceListDestroy(unsigned int);
 int asdMemFree(void);
 int FUN_001abbc4(void);
 int FUN_002e59f8(int, unsigned int [2], int);
@@ -33,7 +33,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001836b0. */
+/* Supplied declaration required: resourceListDestroy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: FUN_002e59f8. */
@@ -70,7 +70,7 @@ void FUN_001ad22c(fn_001ad22c_arg0 *param_1,int param_2)
   if (0 < param_1->field_0xa0) {
     do {
       temp_v3 = param_1->field_0xa4 + unaff_r4 * 0xc;
-      FUN_001836b0(*(unsigned int *)(temp_v3 + 8));
+      resourceListDestroy(*(unsigned int *)(temp_v3 + 8));
       *(unsigned int *)(temp_v3 + 8) = 0;
       unaff_r4 = unaff_r4 + 1;
     } while (unaff_r4 < param_1->field_0xa0);

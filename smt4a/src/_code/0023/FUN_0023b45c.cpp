@@ -1,23 +1,38 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern unsigned char DAT_00588fd0; /* 0x588fd0 */
+typedef struct Game {
+    /* 0x0000 */ u8 unk0000[0x1368];
+    /* 0x1368 */ s32 state;
+    /* 0x136C */ u32 unk136C;
+    /* 0x1370 */ u8 unk1370[0xC9C];
+    /* 0x200C */ u8 unk200C[5];
+    /* 0x2011 */ u8 flag;
+    /* 0x2012 */ u8 unk2012[6];
+    /* 0x2018 */ u8 mode;
+} Game;
 
+typedef struct Global588fd0 {
+    /* 0x00 */ u8 unk00;
+    /* 0x01 */ s8 depth;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ Game *game;
+} Global588fd0;
+extern Global588fd0 DAT_00588fd0;
 
-void FUN_0023b45c(int param_1)
-
+/* Stores the flag; when it is cleared outside mode 10 and the game state is 5, 6 or 7, also clears the word at 0x136C. */
+void FUN_0023b45c(s32 flag)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = (*(int *)((unsigned char *)&DAT_00588fd0 + 0x4));
-  *(char *)((*(int *)((unsigned char *)&DAT_00588fd0 + 0x4)) + 0x2011) = (char)param_1;
-  if (((param_1 == 0) && (*(char *)(temp_v0 + 0x2018) != '\n')) &&
-     (temp_v1 = *(int *)(temp_v0 + 0x1368), (temp_v1 == 5 || temp_v1 == 6) || temp_v1 == 7)) {
-    *(unsigned int *)(temp_v0 + 0x136c) = 0;
-  }
-  return;
+    Game *game;
+    s32 state;
+
+    game = DAT_00588fd0.game;
+    DAT_00588fd0.game->flag = (u8)flag;
+    if (((flag == 0) && (game->mode != 10)) &&
+        (state = game->state, (state == 5 || state == 6) || state == 7)) {
+        game->unk136C = 0;
+    }
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00154ca4(unsigned int *, int);
-int FUN_00161044(int);
+int asdGfxSetMode(int);
 int FUN_00161074(unsigned int);
 int FUN_00161694(int);
 int FUN_0017d294(void);
@@ -24,7 +24,7 @@ extern unsigned char DAT_0063fde8; /* 0x63fde8 */
 extern int DAT_0063fdf4; /* 0x63fdf4 */
 
 /* Supplied declaration required: FUN_00154ca4. */
-/* Supplied declaration required: FUN_00161044. */
+/* Supplied declaration required: asdGfxSetMode. */
 /* Supplied declaration required: FUN_00161074. */
 /* Supplied declaration required: FUN_00161694. */
 /* Supplied declaration required: FUN_0017d294. */
@@ -47,7 +47,7 @@ void FUN_00144f1c(int param_1,int param_2)
     temp_v0 = DAT_0063fd8c - 1;
   }
   temp_v4 = *(unsigned int *)(&DAT_0063fd90 + temp_v0 * 4);
-  FUN_00161044(0x400);
+  asdGfxSetMode(0x400);
   FUN_00161074(temp_v4);
   temp_v0 = DAT_0063fdc8 - 1;
   if (temp_v0 < 0) {
@@ -60,14 +60,14 @@ void FUN_00144f1c(int param_1,int param_2)
     puVar1 = &DAT_0063fd88;
   }
   temp_v4 = (puVar1 + temp_v0)[2];
-  FUN_00161044(0x410);
+  asdGfxSetMode(0x410);
   FUN_00161074(temp_v4);
   temp_v0 = DAT_0063fdf4 - 1;
   if (temp_v0 < 0) {
     temp_v0 = DAT_0063fde4 - 1;
   }
   temp_v4 = *(unsigned int *)(&DAT_0063fde8 + temp_v0 * 4);
-  FUN_00161044(0x401);
+  asdGfxSetMode(0x401);
   FUN_00161074(temp_v4);
   if (param_1 != 0) {
     FUN_0017d294();

@@ -1,45 +1,40 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00310284(void);
+void FUN_00310284(void);
+u32 FUN_002eb5f4(void);
+u8 FUN_00306d18(s32 handle, void *owner, u32 a, u32 b);
 
-typedef struct fn_00120f5c_arg0 fn_00120f5c_arg0;
-struct fn_00120f5c_arg0 {
-    unsigned char pad_0x0[0x4];
-    void *field_0x4; /* +0x4 */
-    char field_0x8; /* +0x8 */
-    undefined1 field_0x9; /* +0x9 */
-    unsigned char pad_0xa[0x2];
-    undefined4 field_0xc; /* +0xc */
-};
+typedef struct Owner {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s32 handle;
+} Owner;
 
-extern unsigned int FUN_002eb5f4(void);
-extern unsigned char FUN_00306d18(int, void *, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00310284. */
+typedef struct Watcher {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ Owner *owner;
+    /* 0x08 */ s8 enabled;
+    /* 0x09 */ u8 registered;
+    /* 0x0A */ u8 unk0A[2];
+    /* 0x0C */ u32 stamp;
+} Watcher;
 
-
-void FUN_00120f5c(fn_00120f5c_arg0 *param_1,int param_2)
-
+/* Enables or disables the watcher: enabling registers it with its owner (when the owner has a handle) and records FUN_002eb5f4's stamp; disabling calls FUN_00310284. */
+void FUN_00120f5c(Watcher *watcher, s32 enable)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  param_1->field_0x8 = (char)param_2;
-  if (param_2 != 0) {
-    temp_v1 = *(int *)((int)param_1->field_0x4 + 8);
-    if (temp_v1 != 0) {
-      temp_v0 = FUN_00306d18(temp_v1,param_1->field_0x4,0xf,0);
-      param_1->field_0x9 = temp_v0;
+    s32 handle;
+
+    watcher->enabled = (s8)enable;
+    if (enable != 0) {
+        handle = watcher->owner->handle;
+        if (handle != 0) {
+            watcher->registered = FUN_00306d18(handle, watcher->owner, 0xF, 0);
+        }
+        watcher->stamp = FUN_002eb5f4();
+        return;
     }
-    temp_v2 = FUN_002eb5f4();
-    param_1->field_0xc = temp_v2;
-    return;
-  }
-  FUN_00310284();
-  return;
+    FUN_00310284();
 }
 
 } /* extern "C" */

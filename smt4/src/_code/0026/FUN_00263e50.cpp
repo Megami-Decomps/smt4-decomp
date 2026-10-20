@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002abb24(unsigned int, unsigned int);
+int sceneTraverserVisit(unsigned int, unsigned int);
 int FUN_002b2368(int);
 int FUN_002b74cc(unsigned int **, unsigned int **, unsigned int **);
 int asdMemFree(...);
@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int DAT_00464b84; /* 0x464b84 */
 
-/* Supplied declaration required: FUN_002abb24. */
+/* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_002b2368. */
 /* Supplied declaration required: FUN_002b74cc. */
 /* Supplied declaration required: asdMemFree. */
@@ -132,7 +132,7 @@ void FUN_00263e50(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
   FUN_002b2368(param_1[8]);
   asdMemFree(param_1[9]);
   asdMemFree(param_1);
-  FUN_002abb24(DAT_00464b7c,DAT_00464b84);
+  sceneTraverserVisit(DAT_00464b7c,DAT_00464b84);
   return;
 }
 

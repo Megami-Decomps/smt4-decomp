@@ -13,7 +13,7 @@ int FUN_0035fc4c(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_0038b3f8(...);
 int FUN_003d2d6c(...);
-int FUN_0040223c(...);
+int workOwnerRelease(...);
 int FUN_0040a244(...);
 
 int FUN_001517b4(...);
@@ -118,7 +118,7 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_003f9c3c. */
 /* Supplied declaration required: FUN_003f9e80. */
 /* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_0040223c. */
+/* Supplied declaration required: workOwnerRelease. */
 /* Supplied declaration required: FUN_0040a244. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
@@ -666,7 +666,7 @@ LAB_003cf9bc:
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < (int)(unsigned int)*(unsigned short *)(temp_v2 + 0x1e));
       }
-      FUN_0040223c(temp_v2 + 0x38);
+      workOwnerRelease(temp_v2 + 0x38);
       FUN_0040a244(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
       FUN_0035fc4c();

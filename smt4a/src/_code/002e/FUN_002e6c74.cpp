@@ -26,8 +26,8 @@ typedef struct {
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: FUN_002e6c60. */
-extern int FUN_00512860(unsigned int, unsigned int);
-extern unsigned int FUN_00512868(unsigned int, unsigned int, int, unsigned int, unsigned int, int, fn_002e6c74_arg2 *);
+extern int returnMinusOne3(unsigned int, unsigned int);
+extern unsigned int returnMinusOne4(unsigned int, unsigned int, int, unsigned int, unsigned int, int, fn_002e6c74_arg2 *);
 
 
 unsigned long long FUN_002e6c74(unsigned int param_1,int param_2,fn_002e6c74_arg2 *param_3)
@@ -45,7 +45,7 @@ unsigned long long FUN_002e6c74(unsigned int param_1,int param_2,fn_002e6c74_arg
   temp_v3 = param_2;
   pfVar5 = param_3;
   if ((temp_v1 & 0x20010) != 0) {
-    temp_v0 = FUN_00512860(temp_v2,param_3->field_0x18);
+    temp_v0 = returnMinusOne3(temp_v2,param_3->field_0x18);
     if (-1 >= temp_v0) {
       FUN_002e6c60(param_3);
       temp_v2 = 0xffffffff;
@@ -54,7 +54,7 @@ unsigned long long FUN_002e6c74(unsigned int param_1,int param_2,fn_002e6c74_arg
     temp_v1 = temp_v1 & 0xfffdffef;
     param_3->field_0xc = temp_v1;
   }
-  temp_v1 = FUN_00512868(temp_v2,param_1,param_2,temp_v1,param_1,temp_v3,pfVar5);
+  temp_v1 = returnMinusOne4(temp_v2,param_1,param_2,temp_v1,param_1,temp_v3,pfVar5);
   param_3->field_0x18 = param_3->field_0x18 + (param_2 - (temp_v1 & 0x7fffffff));
   temp_v2 = 0;
   if (temp_v1 != 0) {

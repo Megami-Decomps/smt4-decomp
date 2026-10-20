@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0040a60c(...);
 int FUN_00493e14(...);
-int FUN_0049d030(void);
+int dataTable17Count(void);
 int FUN_0049d048(unsigned char *, int);
 int FUN_0049d09c(unsigned char *, int);
 int FUN_004cfeb0(int, unsigned int, int, int);
@@ -24,8 +24,8 @@ extern unsigned long long FUN_00192718(short);
 /* Supplied declaration required: FUN_0040a60c. */
 /* Supplied declaration required: FUN_00493e14. */
 extern unsigned long long FUN_00494020(void);
-extern int FUN_0049cf5c(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_0049d030. */
+extern int dataTable17Type1GetEntry(unsigned int *, unsigned int);
+/* Supplied declaration required: dataTable17Count. */
 /* Supplied declaration required: FUN_0049d048. */
 /* Supplied declaration required: FUN_0049d09c. */
 /* Supplied declaration required: FUN_004cfeb0. */
@@ -69,9 +69,9 @@ void FUN_0049a9a8(int param_1)
   } while (temp_v2 < 9);
   temp_v0 = *(unsigned char *)(param_1 + 0x18);
   temp_v10 = *(int *)(param_1 + 0x1c);
-  temp_v2 = FUN_0049cf5c(&temp_v14,0);
+  temp_v2 = dataTable17Type1GetEntry(&temp_v14,0);
   temp_v8 = 0;
-  FUN_0049d030();
+  dataTable17Count();
   temp_v9 = -1;
   if (0 < (int)puVar4) {
     do {
@@ -84,7 +84,7 @@ void FUN_0049a9a8(int param_1)
       if (temp_v12 && temp_v3 == temp_v10) break;
       temp_v8 = temp_v8 + 1;
       puVar4 = &temp_v14;
-      FUN_0049d030();
+      dataTable17Count();
       temp_v9 = -1;
     } while (temp_v8 < (int)puVar4);
   }

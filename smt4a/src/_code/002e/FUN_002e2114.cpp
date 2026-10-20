@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003857b4(int);
-int FUN_003e5504(unsigned int, int *);
+int linkHolderRunAll(unsigned int, int *);
 int FUN_003e5558(unsigned int);
 int FUN_003e5858(void);
 
@@ -15,10 +15,10 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_003857b4. */
-/* Supplied declaration required: FUN_003e5504. */
+/* Supplied declaration required: linkHolderRunAll. */
 /* Supplied declaration required: FUN_003e5558. */
 /* Supplied declaration required: FUN_003e5858. */
-extern int FUN_003e5ae8(unsigned int);
+extern int fourPtrsAllNull(unsigned int);
 
 
 unsigned int FUN_002e2114(unsigned int *param_1)
@@ -34,12 +34,12 @@ unsigned int FUN_002e2114(unsigned int *param_1)
   temp_v1 = 0;
   if (param_1[7] != 0) {
     FUN_003e5858();
-    temp_v0 = FUN_003e5ae8(param_1[7]);
+    temp_v0 = fourPtrsAllNull(param_1[7]);
     if (temp_v0 != 0) {
       temp_v2 = *param_1;
       uStack_14 = param_1[1];
       uStack_10 = param_1[2];
-      FUN_003e5504(param_1[7],&temp_v2);
+      linkHolderRunAll(param_1[7],&temp_v2);
       FUN_003e5558(param_1[7]);
       FUN_003857b4(0);
       temp_v1 = 1;

@@ -18,7 +18,7 @@ int uniteCameraDestroy(void);
 int FUN_0038b3f8(int, int);
 int FUN_003a2ecc(int);
 int FUN_00408184(int, int);
-int FUN_004dc6fc(void);
+int ptrTable44FreeAll(void);
 int software_interrupt(int);
 
 typedef int romwright_code(...);
@@ -46,7 +46,7 @@ extern int FUN_002e50d4(void);
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_003a2ecc. */
 /* Supplied declaration required: FUN_00408184. */
-/* Supplied declaration required: FUN_004dc6fc. */
+/* Supplied declaration required: ptrTable44FreeAll. */
 
 
 void FUN_0031fb04(void)
@@ -113,7 +113,7 @@ void FUN_0031fb04(void)
   asdMemFree(piVar1[0x10a]);
   asdMemFree(piVar1[0x109]);
   if (*piVar1 != 0) {
-    FUN_004dc6fc();
+    ptrTable44FreeAll();
     FUN_002e3328();
   }
   *piVar1 = 0;

@@ -33,7 +33,7 @@ extern unsigned char DAT_005f0c54; /* 0x5f0c54 */
 
 extern int FUN_0018719c(void);
 /* Supplied declaration required: FUN_001aea28. */
-extern char *FUN_0033f830(int);
+extern char *dataTable2DGetEntry(int);
 /* Supplied declaration required: FUN_00398420. */
 /* Supplied declaration required: FUN_003b5c54. */
 /* Supplied declaration required: FUN_0040619c. */
@@ -77,7 +77,7 @@ void FUN_003ca5a4(int param_1)
   FUN_00398420();
   if (0 < param_1) {
     do {
-      pcVar1 = (char *)FUN_0033f830(temp_v2);
+      pcVar1 = (char *)dataTable2DGetEntry(temp_v2);
       temp_v0 = (int)*pcVar1;
       if (temp_v0 != -1) {
         if (*(short *)(pcVar1 + 4) != 0) {

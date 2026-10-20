@@ -20,7 +20,7 @@ extern unsigned int FUN_00194fd8(unsigned int);
 /* Supplied declaration required: FUN_001a5974. */
 /* Supplied declaration required: FUN_001a59c0. */
 extern int FUN_001a59f4(unsigned int);
-extern int FUN_001a5aac(void);
+extern int constructObj0055bee4(void);
 extern int nw_snd_internal_PlayerHeap_Create(int, unsigned int, int);
 
 
@@ -86,7 +86,7 @@ unsigned int FUN_001900f0(int param_1,unsigned int param_2,unsigned int *param_3
                 }
                 *param_3 = temp_v6;
                 if (temp_v3 != 0) {
-                  unaff_r9 = FUN_001a5aac();
+                  unaff_r9 = constructObj0055bee4();
                 }
                 temp_v3 = (*param_3 + 0x1f) & 0xffffffe0;
                 temp_v6 = (temp_v3 + temp_v4 + 0x1f) & 0xffffffe0;

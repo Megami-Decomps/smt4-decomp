@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_003d9164(void);
-int FUN_004f7590(...);
+int obj4FSlots28Reset(...);
 
 int FUN_00178b04(...);
 int FUN_001f4e20(...);
 int FUN_002a49e4(...);
 int FUN_002c2d5c(...);
-int FUN_003eda04(...);
+int halfRecClear(...);
 int FUN_003f20f0(void);
 int FUN_003f2638(...);
 int FUN_004ac0bc(...);
@@ -25,7 +25,7 @@ int FUN_004e7168(...);
 int FUN_004ecd7c(...);
 int FUN_004ecee8(...);
 int FUN_004f612c(...);
-int FUN_004f65a4(...);
+int objRef1F50Release(...);
 int FUN_004f84ec(...);
 int FUN_004f8f08(void);
 int FUN_004f8fa0(...);
@@ -154,7 +154,7 @@ extern int g_btlEvent; /* 0x573898 */
 extern int DAT_0057a9c8; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_001633a0(unsigned int);
+extern int lcgRandomRange(unsigned int);
 extern int FUN_00167f08(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
@@ -177,12 +177,12 @@ extern int FUN_0034919c(void);
 /* Supplied declaration required: FUN_003d9164. */
 extern unsigned int FUN_003df57c(unsigned int, unsigned int);
 extern short FUN_003e4a00(void);
-extern unsigned int FUN_003e6bc4(void);
+extern unsigned int words3Clear(void);
 extern int FUN_003e8430(int);
 /* Supplied declaration required: FUN_003e8bb0. */
 extern int FUN_003ec668(int, int, int);
 extern int FUN_003eca48(int, unsigned short);
-/* Supplied declaration required: FUN_003eda04. */
+/* Supplied declaration required: halfRecClear. */
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003efb18. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -209,7 +209,7 @@ extern int FUN_004c6b5c(int, int);
 extern int FUN_004c87e0(void);
 /* Supplied declaration required: FUN_004d7a70. */
 /* Supplied declaration required: FUN_004d7fe4. */
-extern int FUN_004d84e8(int);
+extern int isEntryUsable(int);
 /* Supplied declaration required: FUN_004dcc5c. */
 /* Supplied declaration required: FUN_004dce1c. */
 /* Supplied declaration required: FUN_004dd0c4. */
@@ -235,8 +235,8 @@ extern int FUN_004f5a40(int);
 extern int FUN_004f5d2c(int);
 /* Supplied declaration required: FUN_004f612c. */
 extern int FUN_004f6478(int);
-/* Supplied declaration required: FUN_004f65a4. */
-/* Supplied declaration required: FUN_004f7590. */
+/* Supplied declaration required: objRef1F50Release. */
+/* Supplied declaration required: obj4FSlots28Reset. */
 extern int FUN_004f80e4(int);
 /* Supplied declaration required: FUN_004f84ec. */
 /* Supplied declaration required: FUN_004f8f08. */
@@ -803,7 +803,7 @@ code_r0x004ef594:
             temp_v2 = (short)(int)piVar16;
           }
           else {
-            temp_v13 = FUN_001633a0((temp_v14 - 1U) & 0xffff);
+            temp_v13 = lcgRandomRange((temp_v14 - 1U) & 0xffff);
             temp_v2 = *(short *)(&uStack_288 + temp_v13);
             *(short *)((int)&uStack_288 + temp_v13 * 4 + 2) =
                  *(short *)((int)&uStack_288 + temp_v13 * 4 + 2) + 1;
@@ -1354,7 +1354,7 @@ code_r0x004f054c:
     *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 0x1c0) =
          *(unsigned short *)(*(int *)(temp_v20 + 0x2c) + 0x1d0);
     btlUnitSetParam(param_1,2,0,1);
-    FUN_003eda04(*param_1,*(unsigned int *)(temp_v20 + 0x2c));
+    halfRecClear(*param_1,*(unsigned int *)(temp_v20 + 0x2c));
     temp_v3 = *param_1;
     FUN_003f20f0();
     if (temp_v3 == 0) {
@@ -1399,12 +1399,12 @@ code_r0x004f054c:
     FUN_00178b04(0xc,"c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlAction.cpp",0x258f);
     temp_v4 = 0;
     if (temp_v3 != 0) {
-      temp_v4 = FUN_003e6bc4();
+      temp_v4 = words3Clear();
     }
     *(unsigned int *)(*param_1 + 0x4e54) = temp_v4;
     return;
   case 0x1a:
-    temp_v3 = FUN_004d84e8(g_btlEvent);
+    temp_v3 = isEntryUsable(g_btlEvent);
     if (temp_v3 == 0) {
       temp_v3 = (int)*(short *)(*(int *)(temp_v20 + 0x24) + 0x6e);
       if (*(short *)(*(int *)(temp_v20 + 0x2c) + 0x1be) != 0xb) {
@@ -1438,7 +1438,7 @@ code_r0x004f054c:
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
-    temp_v3 = FUN_004d84e8(g_btlEvent);
+    temp_v3 = isEntryUsable(g_btlEvent);
     if (temp_v3 == 0) {
       FUN_004d7fe4(g_btlEvent);
       return;
@@ -1462,12 +1462,12 @@ code_r0x004f054c:
         ((*(unsigned int **)(temp_v20 + 0x24))[1] & DAT_0057116c) == 0) {
       FUN_004ac0bc(DAT_0057a9c8);
     }
-    FUN_004f65a4(DAT_00573808);
+    objRef1F50Release(DAT_00573808);
     FUN_004f612c(DAT_00573808);
     *(unsigned int *)(DAT_00573808 + 0x339c) = *(unsigned int *)(DAT_00573808 + 0x339c) & 0xffff7fff;
     FUN_004f8f08();
     FUN_004f8fa0(DAT_00573808);
-    FUN_004f7590(DAT_00573808);
+    obj4FSlots28Reset(DAT_00573808);
     *(unsigned int *)(DAT_00571508 + 0x64c) = *(unsigned int *)(DAT_00571508 + 0x64c) & 0xffffbfff;
     FUN_003d9164();
     return;
