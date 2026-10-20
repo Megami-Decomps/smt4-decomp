@@ -21,7 +21,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char DAT_004e3b1c; /* 0x4e3b1c */
-extern int DAT_004e3b30; /* 0x4e3b30 */
+extern unsigned char DAT_004e39e0; /* 0x4e39e0 */
 extern int DAT_004e3bd4; /* 0x4e3bd4 */
 
 /* Supplied declaration required: FUN_0010a52c. */
@@ -46,19 +46,19 @@ void FUN_001058a4(unsigned int param_1)
   unsigned int temp_v1;
   
   FUN_002bdb44();
-  FUN_002bef68(&DAT_004e3b1c,DAT_004e3b30 == 0);
+  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&DAT_004e39e0 + 0x150)) == 0);
   FUN_00123934();
   FUN_002c2428();
   FUN_0010af10();
   temp_v0 = FUN_002c3984();
   temp_v1 = FUN_002c3994();
   FUN_002c2424(temp_v1,temp_v0);
-  FUN_002bef68(&DAT_004e3b1c,DAT_004e3b30);
+  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&DAT_004e39e0 + 0x150)));
   FUN_002bf0d8();
   nngxRunCmdlist();
-  DAT_004e3b30 = 1 - DAT_004e3b30;
+  (*(int *)((unsigned char *)&DAT_004e39e0 + 0x150)) = 1 - (*(int *)((unsigned char *)&DAT_004e39e0 + 0x150));
   FUN_0010a52c();
-  FUN_002bef68(&DAT_004e3b1c,DAT_004e3b30);
+  FUN_002bef68(&DAT_004e3b1c,(*(int *)((unsigned char *)&DAT_004e39e0 + 0x150)));
   if (DAT_004e3bd4 == 0) {
     FUN_0010ec90(0,param_1);
     return;

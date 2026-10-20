@@ -8,7 +8,7 @@ int FUN_002958f8(int, int);
 int FUN_002ae7e8(int);
 int FUN_002ae898(int, int);
 
-extern signed char DAT_0043d9e1; /* 0x43d9e1 */
+extern unsigned char DAT_0043d9e0; /* 0x43d9e0 */
 extern int DAT_0043d9e4; /* 0x43d9e4 */
 
 /* Supplied declaration required: FUN_002958f8. */
@@ -22,8 +22,8 @@ void FUN_003aceb4(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  DAT_0043d9e1 = DAT_0043d9e1 - '\x01';
-  if (DAT_0043d9e1 < '\x01') {
+  (*(signed char *)((unsigned char *)&DAT_0043d9e0 + 0x1)) = (*(signed char *)((unsigned char *)&DAT_0043d9e0 + 0x1)) - '\x01';
+  if ((*(signed char *)((unsigned char *)&DAT_0043d9e0 + 0x1)) < '\x01') {
     if (-1 < *(short *)(DAT_0043d9e4 + 8)) {
       FUN_002958f8((int)*(short *)(DAT_0043d9e4 + 8),1);
     }
@@ -33,7 +33,7 @@ void FUN_003aceb4(void)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 2);
     FUN_002ae7e8(0x22);
-    DAT_0043d9e1 = '\0';
+    (*(signed char *)((unsigned char *)&DAT_0043d9e0 + 0x1)) = '\0';
   }
   return;
 }

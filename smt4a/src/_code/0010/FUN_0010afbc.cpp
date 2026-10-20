@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-extern int DAT_00630540; /* 0x630540 */
+extern unsigned char DAT_00630530; /* 0x630530 */
 
 extern int FUN_002ea6fc(unsigned char *, unsigned char *);
 
@@ -67,7 +67,7 @@ FUN_0010afbc(fn_0010afbc_arg0 *param_1,unsigned int param_2,unsigned int param_3
     return 0;
   }
   temp_v2 = &param_1->field_0x26;
-  if (DAT_00630540 != 0) {
+  if ((*(int *)((unsigned char *)&DAT_00630530 + 0x10)) != 0) {
     if ((int)(param_4 * 0x40000000) < 0) {
       temp_v0 = (**(romwright_code **)(*(int *)param_1->field_0x20 + 0xc))
                         (param_1->field_0x20,temp_v4,temp_v2,0,2,0);

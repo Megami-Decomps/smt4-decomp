@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern signed char DAT_0049fb6d; /* 0x49fb6d */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 /* Supplied declaration required: FUN_00231240. */
 /* Supplied declaration required: FUN_00233240. */
@@ -58,7 +58,7 @@ void FUN_0039c348(fn_0039c348_arg0 *param_1)
   }
   else {
     FUN_00233240(&param_1[0x12].field_0x10,1);
-    if (DAT_0049fb6d == '\0') {
+    if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x251)) == '\0') {
       FUN_002b827c(0x1b);
     }
     param_1->field_0x10 = param_1->field_0x10 | 0x1000000;

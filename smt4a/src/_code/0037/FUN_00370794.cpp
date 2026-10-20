@@ -1,16 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00370794` (_code @ 0x370794, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-extern int DAT_0057f590; /* 0x57f590 */
+extern unsigned char DAT_0057f588; /* 0x57f588 */
 
 
 unsigned int FUN_00370794(void)
 
 {
-  return *(unsigned int *)(DAT_0057f590 + 0x20);
+  return *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x20);
 }
 
 } /* extern "C" */

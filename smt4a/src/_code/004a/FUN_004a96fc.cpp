@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_5_stack;
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_00336aec. */
 
@@ -21,7 +21,7 @@ void FUN_004a96fc(unsigned int param_1,unsigned int param_2,unsigned int param_3
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_00336aec(DAT_0057a9c8 + 0x28c4,param_3,param_2,param_4,param_5,0);
+  FUN_00336aec((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x28c4,param_3,param_2,param_4,param_5,0);
   return;
 }
 

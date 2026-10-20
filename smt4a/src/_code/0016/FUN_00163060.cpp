@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_5_stack;
 
-extern int *DAT_005b402c; /* 0x5b402c */
+extern unsigned char DAT_005b4028; /* 0x5b4028 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001630d4. */
@@ -35,7 +35,7 @@ int FUN_00163060(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     FUN_002e6dd4();
   }
   software_interrupt(0x14);
-  if (*DAT_005b402c < 0) {
+  if (*(*(int * *)((unsigned char *)&DAT_005b4028 + 0x4)) < 0) {
     FUN_002e3140();
   }
   return param_1;

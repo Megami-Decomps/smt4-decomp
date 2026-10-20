@@ -8,7 +8,7 @@ int FUN_001919a4(void);
 int FUN_0019a5a0(unsigned int *);
 int FUN_002e3328(unsigned int);
 
-extern unsigned int *DAT_00588c30; /* 0x588c30 */
+extern unsigned char DAT_00588c2c; /* 0x588c2c */
 
 extern int FUN_00184e20(unsigned int);
 /* Supplied declaration required: FUN_001919a4. */
@@ -24,22 +24,22 @@ unsigned int QuestCenterMode_IsBusy(void)
   unsigned int *puVar2;
   int temp_v0;
   
-  puVar1 = DAT_00588c30;
-  if (DAT_00588c30 != (unsigned int *)0x0) {
-    temp_v0 = FUN_00184e20(*DAT_00588c30);
-    puVar2 = DAT_00588c30;
+  puVar1 = (*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4));
+  if ((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) != (unsigned int *)0x0) {
+    temp_v0 = FUN_00184e20(*(*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)));
+    puVar2 = (*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4));
     if ((temp_v0 != 0) || (*(char *)(puVar1 + 6) == '\0')) {
       return 1;
     }
-    if (DAT_00588c30 != (unsigned int *)0x0) {
-      *(unsigned char *)(DAT_00588c30 + 6) = 1;
+    if ((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) != (unsigned int *)0x0) {
+      *(unsigned char *)((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) + 6) = 1;
       if (puVar2[7] != 0) {
         FUN_001919a4();
         FUN_002e3328(puVar2[7]);
         puVar2[7] = 0;
       }
-      FUN_0019a5a0(DAT_00588c30);
-      DAT_00588c30 = (unsigned int *)0x0;
+      FUN_0019a5a0((*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)));
+      (*(unsigned int * *)((unsigned char *)&DAT_00588c2c + 0x4)) = (unsigned int *)0x0;
     }
   }
   return 0;

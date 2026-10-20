@@ -23,7 +23,7 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_00106e41; /* 0x106e41 */
-extern int *DAT_00594b20; /* 0x594b20 */
+extern unsigned char DAT_00594ad8; /* 0x594ad8 */
 
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: FUN_002e6e5c. */
@@ -82,7 +82,7 @@ unsigned int FUN_00115560(int param_1,unsigned int param_2)
   } while (temp_v0 < 8);
   FUN_002e6e5c(temp_v8);
   if ((temp_v5 != 0) &&
-     (temp_v2 = (**(romwright_code **)(*DAT_00594b20 + 0x10))(DAT_00594b20,temp_v6,temp_v5,temp_v13),
+     (temp_v2 = (**(romwright_code **)(*(*(int * *)((unsigned char *)&DAT_00594ad8 + 0x48)) + 0x10))((*(int * *)((unsigned char *)&DAT_00594ad8 + 0x48)),temp_v6,temp_v5,temp_v13),
      temp_v2 != 0)) {
     FUN_002e6e34(temp_v12,param_1 + 4);
     for (temp_v0 = 0; temp_v0 < temp_v5; temp_v0 = temp_v0 + 1) {

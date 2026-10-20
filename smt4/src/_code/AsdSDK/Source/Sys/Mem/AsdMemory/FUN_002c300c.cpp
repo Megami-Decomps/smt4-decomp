@@ -1,16 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c300c` (_code @ 0x2c300c, 0xc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
-extern unsigned int DAT_00465178; /* 0x465178 */
+extern unsigned char DAT_00465170; /* 0x465170 */
 
 
 unsigned int FUN_002c300c(void)
 
 {
-  return DAT_00465178;
+  return (*(unsigned int *)((unsigned char *)&DAT_00465170 + 0x8));
 }
 
 } /* extern "C" */

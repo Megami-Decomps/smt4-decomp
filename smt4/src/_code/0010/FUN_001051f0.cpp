@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002c0d08(void);
 
-extern signed char DAT_00465199; /* 0x465199 */
+extern unsigned char DAT_00465198; /* 0x465198 */
 extern unsigned int DAT_004651a4; /* 0x4651a4 */
 extern unsigned int DAT_004e4138; /* 0x4e4138 */
 
@@ -26,7 +26,7 @@ unsigned int FUN_001051f0(void)
   temp_v1 = 0;
   temp_v0 = nn_applet_CTR_IsExpectedToProcessHomeButton();
   if (temp_v0) {
-    if (DAT_00465199 != '\0') {
+    if ((*(signed char *)((unsigned char *)&DAT_00465198 + 0x1)) != '\0') {
       nn_os_LightEvent_ClearSignal((unsigned int)&DAT_004651a4);
       temp_v0 = nn_os_CriticalSection_TryEnter((unsigned int)&DAT_004e4138);
       if (temp_v0) {

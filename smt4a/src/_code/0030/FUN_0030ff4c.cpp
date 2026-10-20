@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int DAT_00594a78; /* 0x594a78 */
+extern unsigned char DAT_00594a58; /* 0x594a58 */
 extern int *DAT_00594a7c; /* 0x594a7c */
 
 
@@ -14,7 +14,7 @@ void FUN_0030ff4c(int *param_1)
 {
   if (param_1 != (int *)0x0) {
     (**(romwright_code **)(*param_1 + 4))();
-    DAT_00594a78 = DAT_00594a78 - 1;
+    (*(int *)((unsigned char *)&DAT_00594a58 + 0x20)) = (*(int *)((unsigned char *)&DAT_00594a58 + 0x20)) - 1;
     if (DAT_00594a7c != (int *)0x0) {
       (**(romwright_code **)(*DAT_00594a7c + 0xc))();
     }

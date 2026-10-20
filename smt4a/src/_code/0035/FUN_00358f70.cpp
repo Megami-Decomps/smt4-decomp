@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned int *DAT_005b3f98; /* 0x5b3f98 */
+extern unsigned char DAT_005b3f94; /* 0x5b3f94 */
 
 /* Supplied declaration required: FUN_0042e67c. */
 /* Supplied declaration required: FUN_0042e868. */
@@ -26,11 +26,11 @@ void FUN_00358f70(void)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_005b3f98[6];
-  FUN_0042e67c(temp_v0,*DAT_005b3f98,DAT_005b3f98[1]);
+  temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6];
+  FUN_0042e67c(temp_v0,*(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)),(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[1]);
   if (-1 < temp_v0) {
-    FUN_0042f318(DAT_005b3f98[6],0);
-    FUN_0042e868(DAT_005b3f98[6]);
+    FUN_0042f318((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6],0);
+    FUN_0042e868((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6]);
     return;
   }
   return;

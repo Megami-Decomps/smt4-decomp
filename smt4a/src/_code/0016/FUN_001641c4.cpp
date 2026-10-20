@@ -4,14 +4,14 @@
 
 extern "C" {
 
-extern int DAT_0057f24c; /* 0x57f24c */
+extern unsigned char DAT_0057f248; /* 0x57f248 */
 
 
 void FUN_001641c4(void)
 
 {
-  if (*(short *)(DAT_0057f24c + 0x64a) >= 11) {
-    *(short *)(DAT_0057f24c + 0x64a) = *(short *)(DAT_0057f24c + 0x64a) - 1;
+  if (*(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64a) >= 11) {
+    *(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64a) = *(short *)((*(int *)((unsigned char *)&DAT_0057f248 + 0x4)) + 0x64a) - 1;
   }
   return;
 }

@@ -9,7 +9,7 @@ typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_4_stack;
 
-extern int DAT_005b3f98; /* 0x5b3f98 */
+extern unsigned char DAT_005b3f94; /* 0x5b3f94 */
 
 
 void FUN_0036b9a8(int param_1,int param_2,int param_3,int param_4)
@@ -17,16 +17,16 @@ void FUN_0036b9a8(int param_1,int param_2,int param_3,int param_4)
 {
   int temp_v0;
   
-  temp_v0 = DAT_005b3f98;
-  if (DAT_005b3f98 != 0) {
+  temp_v0 = (*(int *)((unsigned char *)&DAT_005b3f94 + 0x4));
+  if ((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) != 0) {
     if (param_1 == 0) {
-      *(unsigned char *)(DAT_005b3f98 + 8) = 2;
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 8) = 2;
     }
     else if (param_1 == 1) {
-      *(unsigned char *)(DAT_005b3f98 + 8) = 1;
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 8) = 1;
     }
     else if (param_1 == 2) {
-      *(unsigned char *)(DAT_005b3f98 + 8) = 3;
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 8) = 3;
     }
     if (param_2 == 0) {
       *(unsigned char *)(temp_v0 + 9) = 1;

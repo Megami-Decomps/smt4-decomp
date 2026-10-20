@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_00464d54; /* 0x464d54 */
+extern unsigned char DAT_00464d48; /* 0x464d48 */
 
 
 void FUN_001183bc(int param_1,unsigned int param_2,unsigned int param_3)
@@ -14,7 +14,7 @@ void FUN_001183bc(int param_1,unsigned int param_2,unsigned int param_3)
   unsigned int in_s0;
   
   *(unsigned int *)(param_1 + 0x50) = param_2;
-  DAT_00464d54 = param_3 & 0xffffff00;
+  (*(unsigned int *)((unsigned char *)&DAT_00464d48 + 0xc)) = param_3 & 0xffffff00;
   *(unsigned int *)(param_1 + 0x58) = in_s0;
   return;
 }

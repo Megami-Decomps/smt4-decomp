@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern signed char DAT_005f161d; /* 0x5f161d */
+extern unsigned char DAT_005f15fc; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_00482f20. */
 /* Supplied declaration required: FUN_004834b0. */
@@ -24,7 +24,7 @@ void FUN_00483834(unsigned int *param_1)
 /* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   
-  if ((DAT_005f161d == '\0') && ((*param_1 & 1) == 0)) {
+  if (((*(signed char *)((unsigned char *)&DAT_005f15fc + 0x21)) == '\0') && ((*param_1 & 1) == 0)) {
     if ((*param_1 & 2) == 0) {
       temp_v0 = param_1[3];
       param_1[3] = temp_v0 + 1;

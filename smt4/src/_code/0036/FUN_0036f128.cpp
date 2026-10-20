@@ -6,7 +6,6 @@ extern "C" {
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_0044e8f0; /* 0x44e8f0 */
-extern romwright_code *DAT_0044e8f4; /* 0x44e8f4 */
 
 
 void FUN_0036f128(int *param_1)
@@ -26,7 +25,7 @@ void FUN_0036f128(int *param_1)
     if (temp_v0 == 0x40000000) {
                     /* WARNING: Could not recover jumptable at 0x0036f154. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-      (*DAT_0044e8f4)();
+      (*(*(romwright_code * *)((unsigned char *)&DAT_0044e8f0 + 0x4)))();
       return;
     }
   }

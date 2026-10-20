@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern unsigned int DAT_0057392c; /* 0x57392c */
+extern unsigned char DAT_00573920; /* 0x573920 */
 extern int DAT_00573934; /* 0x573934 */
 
 extern int FUN_004bd340(int, unsigned int);
@@ -18,16 +18,16 @@ unsigned int FUN_003ecd94(int param_1)
   int temp_v2;
   unsigned int temp_v3;
   
-  if ((*(int *)(param_1 + 300) != 0) && (DAT_0057392c != 0)) {
+  if ((*(int *)(param_1 + 300) != 0) && ((*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc)) != 0)) {
     if ((DAT_00573934 != 0) && (temp_v0 = FUN_004bd340(DAT_00573934,1), temp_v0 == 0)) {
       return 1;
     }
     temp_v0 = 0;
-    if (*(char *)(DAT_0057392c + 0x1ca3) != '\0') {
+    if (*(char *)((*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc)) + 0x1ca3) != '\0') {
       do {
-        temp_v1 = DAT_0057392c + temp_v0 * 300;
+        temp_v1 = (*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc)) + temp_v0 * 300;
         temp_v2 = temp_v1 + 0x68;
-        temp_v3 = DAT_0057392c;
+        temp_v3 = (*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc));
         if (temp_v2 != 0) {
           temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0xca);
         }
@@ -35,7 +35,7 @@ unsigned int FUN_003ecd94(int param_1)
           return 1;
         }
         temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < (int)(unsigned int)*(unsigned char *)(DAT_0057392c + 0x1ca3));
+      } while (temp_v0 < (int)(unsigned int)*(unsigned char *)((*(unsigned int *)((unsigned char *)&DAT_00573920 + 0xc)) + 0x1ca3));
     }
   }
   return 0;

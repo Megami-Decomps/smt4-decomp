@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp198; /* 0x198: local_198 */
 } param_5_stack;
 
-extern unsigned int *DAT_005b3f98; /* 0x5b3f98 */
+extern unsigned char DAT_005b3f94; /* 0x5b3f94 */
 
 extern int FUN_002e783c(unsigned int);
 /* Supplied declaration required: FUN_0042d5b4. */
@@ -40,19 +40,19 @@ unsigned int FUN_00316750(unsigned int param_1,unsigned int param_2,unsigned int
   unsigned char temp_v3 [360];
   
   nn_cec_CTR_Message_Message_sub_object(temp_v3);
-  temp_v0 = DAT_005b3f98[6];
-  FUN_0042e67c(temp_v0,*DAT_005b3f98,DAT_005b3f98[1]);
+  temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6];
+  FUN_0042e67c(temp_v0,*(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)),(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[1]);
   if (-1 < (int)temp_v0) {
     nn_cec_CTR_Message_NewMessage
-              (temp_v3,*DAT_005b3f98,0,*(unsigned char *)(DAT_005b3f98 + 2),
-               *(unsigned char *)((int)DAT_005b3f98 + 9),*(unsigned char *)((int)DAT_005b3f98 + 10),
-               *(unsigned char *)((int)DAT_005b3f98 + 0xb));
+              (temp_v3,*(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)),0,*(unsigned char *)((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 2),
+               *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 9),*(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 10),
+               *(unsigned char *)((int)(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4)) + 0xb));
     nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,2,param_3,param_2);
     temp_v1 = FUN_002e783c(param_1);
     nn_cec_CTR_Message_SetExHeader((unsigned int)temp_v3,4,temp_v1 << 1,param_1);
     nn_cec_CTR_Message_SetMessageBody((unsigned int)temp_v3,param_4,param_5);
-    temp_v0 = DAT_005b3f98[6];
-    FUN_0042dd98(temp_v0,temp_v3,1,DAT_005b3f98[3]);
+    temp_v0 = (*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6];
+    FUN_0042dd98(temp_v0,temp_v3,1,(*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[3]);
     temp_v2 = temp_v0 & 0x80000000;
     if ((int)temp_v2 < 0) {
       temp_v2 = 0xe0a1086c;
@@ -68,7 +68,7 @@ unsigned int FUN_00316750(unsigned int param_1,unsigned int param_2,unsigned int
         }
       }
     }
-    FUN_0042e868(DAT_005b3f98[6],temp_v2);
+    FUN_0042e868((*(unsigned int * *)((unsigned char *)&DAT_005b3f94 + 0x4))[6],temp_v2);
     FUN_0042d5b4(0);
   }
   return temp_v0;

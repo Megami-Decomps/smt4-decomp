@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003491e8` (_code @ 0x3491e8, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -7,7 +5,6 @@ extern "C" {
 int FUN_00165088(int, int);
 
 extern unsigned char DAT_0057f588; /* 0x57f588 */
-extern int DAT_0057f58c; /* 0x57f58c */
 
 /* Supplied declaration required: FUN_00165088. */
 
@@ -19,13 +16,13 @@ void FUN_003491e8(void)
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = DAT_0057f58c;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x4));
   puVar2 = &DAT_0057f588;
-  if (DAT_0057f58c != 0) {
-    puVar2 = (unsigned char *)(unsigned int)*(unsigned char *)(DAT_0057f58c + 8);
+  if ((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) != 0) {
+    puVar2 = (unsigned char *)(unsigned int)*(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 8);
   }
-  if (DAT_0057f58c != 0 && puVar2 != (unsigned char *)0x0) {
-    *(unsigned char *)(DAT_0057f58c + 0x35) = 1;
+  if ((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) != 0 && puVar2 != (unsigned char *)0x0) {
+    *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x4)) + 0x35) = 1;
     *(unsigned char *)(temp_v0 + 0x19c4) = 1;
     FUN_00165088(temp_v0,*(unsigned char *)(temp_v0 + 9));
     *(unsigned char *)(temp_v0 + 8) = 3;

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b661c` (_code @ 0x1b661c, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -31,7 +29,7 @@ struct fn_001b661c_arg1 {
     undefined1 field_0x41; /* +0x41 */
 };
 
-extern unsigned int DAT_005c4bb8; /* 0x5c4bb8 */
+extern unsigned char DAT_005c4bb4; /* 0x5c4bb4 */
 
 /* Supplied declaration required: FUN_001b4a90. */
 /* Supplied declaration required: FUN_002e6dd4. */
@@ -46,7 +44,7 @@ void FUN_001b661c(int param_1,fn_001b661c_arg1 *param_2,unsigned int param_3)
     return;
   }
   if ((*(unsigned int *)(param_1 + 0x24) & 2) != 0) {
-    FUN_001b4a90(param_2,param_3,DAT_005c4bb8);
+    FUN_001b4a90(param_2,param_3,(*(unsigned int *)((unsigned char *)&DAT_005c4bb4 + 0x4)));
     return;
   }
   return;

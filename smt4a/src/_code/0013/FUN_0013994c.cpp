@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015a568(void);
 int FUN_001a0990(unsigned int *);
 
-extern signed char DAT_005b408d; /* 0x5b408d */
+extern unsigned char DAT_005b408c; /* 0x5b408c */
 extern unsigned int DAT_005b4098; /* 0x5b4098 */
 extern unsigned int DAT_00640550; /* 0x640550 */
 
@@ -27,7 +27,7 @@ unsigned int FUN_0013994c(void)
   temp_v1 = 0;
   temp_v0 = nn_applet_CTR_IsExpectedToProcessHomeButton();
   if (temp_v0) {
-    if (DAT_005b408d != '\0') {
+    if ((*(signed char *)((unsigned char *)&DAT_005b408c + 0x1)) != '\0') {
       FUN_001a0990(&DAT_005b4098);
       temp_v0 = nn_os_CriticalSection_TryEnter((unsigned int)&DAT_00640550);
       if (temp_v0) {

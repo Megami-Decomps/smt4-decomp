@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aa854` (_code @ 0x4aa854, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -33,7 +31,7 @@ struct fn_004aa854_arg0 {
     undefined4 field_0x8788; /* +0x8788 */
 };
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_0039eaa8. */
 
@@ -44,8 +42,8 @@ void FUN_004aa854(fn_004aa854_arg0 *param_1,unsigned int param_2)
 /* irregular: 1 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0057a9c8;
-  *(unsigned int *)(DAT_0057a9c8 + 0x12fcc) = param_2;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
+  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 0x12fcc) = param_2;
   FUN_0039eaa8(temp_v0 + 0x28c4);
   return;
 }

@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_0044e654; /* 0x44e654 */
+extern unsigned char DAT_0044e650; /* 0x44e650 */
 
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -23,8 +23,8 @@ void FUN_0035658c(int *param_1)
   int temp_v1;
   
   (**(romwright_code **)(*param_1 + 0x34))(param_1);
-  temp_v0 = DAT_0044e654;
-  temp_v1 = DAT_0044e654 + 0x30;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0044e650 + 0x4));
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0044e650 + 0x4)) + 0x30;
   nn_os_CriticalSection_Enter(temp_v1);
   *param_1 = *(int *)(temp_v0 + 0x24);
   *(int **)(temp_v0 + 0x24) = param_1;

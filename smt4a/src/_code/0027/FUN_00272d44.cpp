@@ -8,7 +8,6 @@ int FUN_00352e04(int, int);
 int FUN_004a00f4(int);
 
 extern int DAT_005f15fc; /* 0x5f15fc */
-extern int DAT_005f1600; /* 0x5f1600 */
 
 extern int FUN_0014bef4(unsigned int);
 extern int FUN_0015fa74(int, int);
@@ -27,28 +26,28 @@ int FUN_00272d44(void)
   int temp_v2;
   float in_s0;
   
-  temp_v0 = DAT_005f1600;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_005f15fc + 0x4));
   if (DAT_005f15fc != 0x1c) {
     if (DAT_005f15fc == 0x1d) {
-      temp_v0 = DAT_005f1600 + 0x14;
+      temp_v0 = (*(int *)((unsigned char *)&DAT_005f15fc + 0x4)) + 0x14;
     }
     else if (DAT_005f15fc == 0x1e) {
-      temp_v0 = DAT_005f1600 + 0x28;
+      temp_v0 = (*(int *)((unsigned char *)&DAT_005f15fc + 0x4)) + 0x28;
     }
     else {
       if (DAT_005f15fc != 0x1f) {
         return 0;
       }
-      temp_v0 = DAT_005f1600 + 0x3c;
+      temp_v0 = (*(int *)((unsigned char *)&DAT_005f15fc + 0x4)) + 0x3c;
     }
   }
   if (temp_v0 != 0) {
     temp_v1 = FUN_00352c60();
     if (temp_v1 == 0) {
-      temp_v2 = FUN_004bbc34(DAT_005f15fc,DAT_005f1600);
+      temp_v2 = FUN_004bbc34(DAT_005f15fc,(*(int *)((unsigned char *)&DAT_005f15fc + 0x4)));
       temp_v1 = 0;
       if (temp_v2 != 0) {
-        temp_v1 = FUN_0015fa74(DAT_005f15fc,DAT_005f1600);
+        temp_v1 = FUN_0015fa74(DAT_005f15fc,(*(int *)((unsigned char *)&DAT_005f15fc + 0x4)));
         FUN_004a00f4(2);
         if ((int)(unsigned int)*(unsigned short *)(temp_v1 + 8) <= (int)in_s0) {
           return 0;

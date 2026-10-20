@@ -8,7 +8,6 @@ int FUN_002c52f8(void);
 int software_interrupt(int);
 
 extern signed char DAT_00465710; /* 0x465710 */
-extern int DAT_00465714; /* 0x465714 */
 extern int DAT_00472a50; /* 0x472a50 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -19,10 +18,10 @@ void FUN_001467a4(void)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (0 < DAT_00465714) {
-    DAT_00465714 = DAT_00465714 - 1;
+  if (0 < (*(int *)((unsigned char *)&DAT_00465710 + 0x4))) {
+    (*(int *)((unsigned char *)&DAT_00465710 + 0x4)) = (*(int *)((unsigned char *)&DAT_00465710 + 0x4)) - 1;
   }
-  if (DAT_00465714 == 0) {
+  if ((*(int *)((unsigned char *)&DAT_00465710 + 0x4)) == 0) {
     if (DAT_00465710 != '\0') {
       DAT_00465710 = 0;
       if (DAT_00472a50 != 0) {

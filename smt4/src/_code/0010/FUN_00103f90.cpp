@@ -10,7 +10,6 @@ typedef struct {
 } void_stack;
 
 extern int DAT_004e3cf4; /* 0x4e3cf4 */
-extern int DAT_004e3cf8; /* 0x4e3cf8 */
 
 
 void FUN_00103f90(void)
@@ -21,10 +20,10 @@ void FUN_00103f90(void)
   int temp_v2;
   int temp_v3;
   
-  temp_v1 = DAT_004e3cf8;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_004e3cf4 + 0x4));
   temp_v0 = DAT_004e3cf4;
   temp_v3 = 0;
-  if (0 < DAT_004e3cf8) {
+  if (0 < (*(int *)((unsigned char *)&DAT_004e3cf4 + 0x4))) {
     do {
       for (temp_v2 = *(int *)(temp_v0 + temp_v3 * 8); temp_v2 != 0; temp_v2 = *(int *)(temp_v2 + 0x4c)) {
         if ((*(unsigned int *)(temp_v2 + 0x1c) & 0x80000) != 0) {

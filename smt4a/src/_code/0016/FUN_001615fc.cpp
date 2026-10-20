@@ -4,18 +4,18 @@
 
 extern "C" {
 
-extern int DAT_0061a50c; /* 0x61a50c */
+extern unsigned char DAT_0061a470; /* 0x61a470 */
 
 
 void FUN_001615fc(int param_1,int param_2)
 
 {
-  if (DAT_0061a50c != 0) {
+  if ((*(int *)((unsigned char *)&DAT_0061a470 + 0x9c)) != 0) {
     if (param_1 == 0x200) {
-      *(int *)(DAT_0061a50c + 0x2c) = param_2;
+      *(int *)((*(int *)((unsigned char *)&DAT_0061a470 + 0x9c)) + 0x2c) = param_2;
     }
     else if (param_1 == 0x20f) {
-      *(unsigned char *)(DAT_0061a50c + 0x3d) = param_2 != 0;
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_0061a470 + 0x9c)) + 0x3d) = param_2 != 0;
     }
   }
   return;

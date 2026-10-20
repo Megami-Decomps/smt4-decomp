@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_00439ca8; /* 0x439ca8 */
+extern unsigned char DAT_00439c88; /* 0x439c88 */
 
 /* Supplied declaration required: FUN_002251d4. */
 /* Supplied declaration required: FUN_0028be40. */
@@ -33,14 +33,14 @@ void FUN_003ae868(void)
   int temp_v1;
   int *piVar3;
   
-  temp_v0 = DAT_00439ca8;
-  piVar3 = (int *)(DAT_00439ca8 + 0x7e38);
+  temp_v0 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
+  piVar3 = (int *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x7e38);
   if (*piVar3 == 9) {
-    FUN_0033c6f8(*(unsigned int *)(DAT_00439ca8 + 0x7e20));
+    FUN_0033c6f8(*(unsigned int *)((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 0x7e20));
     FUN_002251d4(temp_v0 + 0x2460);
     *piVar3 = 7;
-    temp_v0 = DAT_00439ca8;
-    temp_v1 = FUN_0028bebc(DAT_00439ca8 + 8);
+    temp_v0 = (*(int *)((unsigned char *)&DAT_00439c88 + 0x20));
+    temp_v1 = FUN_0028bebc((*(int *)((unsigned char *)&DAT_00439c88 + 0x20)) + 8);
     if (temp_v1 != 0) {
       temp_v1 = temp_v0 + 0x2200;
       FUN_0028be84();

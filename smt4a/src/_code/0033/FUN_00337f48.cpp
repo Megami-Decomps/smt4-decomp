@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_0059dbf0; /* 0x59dbf0 */
+extern unsigned char DAT_0059dbe0; /* 0x59dbe0 */
 extern int DAT_0059dc00; /* 0x59dc00 */
 
 /* Supplied declaration required: FUN_00399768. */
@@ -23,9 +23,9 @@ void FUN_00337f48(unsigned int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (DAT_0059dbf0 != 0) {
-    FUN_003ba614(DAT_0059dbf0,3);
-    DAT_0059dbf0 = 0;
+  if ((*(int *)((unsigned char *)&DAT_0059dbe0 + 0x10)) != 0) {
+    FUN_003ba614((*(int *)((unsigned char *)&DAT_0059dbe0 + 0x10)),3);
+    (*(int *)((unsigned char *)&DAT_0059dbe0 + 0x10)) = 0;
   }
   if (DAT_0059dc00 != 0) {
     FUN_00399768(DAT_0059dc00,3);

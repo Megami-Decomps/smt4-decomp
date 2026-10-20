@@ -46,7 +46,6 @@ extern unsigned int DAT_00636e74; /* 0x636e74 */
 extern unsigned int DAT_00636e80; /* 0x636e80 */
 extern unsigned int DAT_00636e8c; /* 0x636e8c */
 extern unsigned int DAT_00636e9c; /* 0x636e9c */
-extern unsigned int DAT_00636ea8; /* 0x636ea8 */
 extern unsigned int DAT_00636eac; /* 0x636eac */
 
 /* Supplied declaration required: FUN_00143ae8. */
@@ -73,7 +72,7 @@ void FUN_0013a1e4(fn_0013a1e4_arg0 *param_1)
   unsigned int temp_v10;
   unsigned int uStack_18;
   
-  DAT_00636ea8 = 1;
+  (*(unsigned int *)((unsigned char *)&DAT_00636e30 + 0x78)) = 1;
   DAT_00636eac = 0x280;
   temp_v6 = 0;
   temp_v7 = 0;

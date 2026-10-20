@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_004c63b4; /* 0x4c63b4 */
+extern unsigned char DAT_004c6290; /* 0x4c6290 */
 
 
 void FUN_002c2860(int param_1,unsigned int param_2,int param_3)
@@ -18,10 +18,10 @@ void FUN_002c2860(int param_1,unsigned int param_2,int param_3)
     temp_v0 = param_3 == 0;
   }
   if (temp_v0) {
-    DAT_004c63b4 = param_1 - 0x400;
+    (*(int *)((unsigned char *)&DAT_004c6290 + 0x124)) = param_1 - 0x400;
   }
   else if (param_3 == 0xf) {
-    DAT_004c63b4 = 2;
+    (*(int *)((unsigned char *)&DAT_004c6290 + 0x124)) = 2;
   }
   return;
 }

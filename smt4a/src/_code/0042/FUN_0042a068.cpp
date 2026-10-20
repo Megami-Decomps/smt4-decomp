@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_6_stack;
 
-extern unsigned int DAT_005893a8; /* 0x5893a8 */
+extern unsigned char DAT_00589398; /* 0x589398 */
 
 /* Supplied declaration required: FUN_0016cdc0. */
 extern unsigned int nn_fs_ipc_FileSystem_CreateExtSaveData(unsigned int, int, unsigned long long, unsigned int, unsigned int, unsigned int, unsigned int);
@@ -29,7 +29,7 @@ unsigned int FUN_0042a068(unsigned int param_1,unsigned int param_2,unsigned int
   unsigned int temp_v2 [2];
   
   FUN_0016cdc0(temp_v1,1,param_1,param_2);
-  temp_v2[0] = DAT_005893a8;
+  temp_v2[0] = (*(unsigned int *)((unsigned char *)&DAT_00589398 + 0x10));
   temp_v0 = nn_fs_ipc_FileSystem_CreateExtSaveData
                     ((unsigned int)temp_v2,(int)temp_v1,0xffffffffffffffff,param_5,param_6,param_3,param_4);
   if ((((temp_v0 & 0x3fc00) == 0x4400) && ((temp_v0 & 0x3ff) >= 0xdc)) && ((temp_v0 & 0x3ff) < 0xe6)) {

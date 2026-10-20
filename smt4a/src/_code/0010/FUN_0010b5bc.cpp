@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int DAT_00599378; /* 0x599378 */
+extern unsigned char DAT_0059935c; /* 0x59935c */
 
 /* Supplied declaration required: FUN_002e9318. */
 extern int FUN_002ee96a(unsigned char *, unsigned int);
@@ -34,10 +34,10 @@ unsigned int FUN_0010b5bc(unsigned int param_1,unsigned int param_2)
   unsigned int *temp_v4;
   unsigned char temp_v5 [4];
   
-  temp_v1 = *(unsigned int **)(DAT_00599378 + 0x10);
+  temp_v1 = *(unsigned int **)((*(int *)((unsigned char *)&DAT_0059935c + 0x1c)) + 0x10);
   do {
     temp_v1 = (unsigned int *)*temp_v1;
-    temp_v3 = *(unsigned int *)(DAT_00599378 + 0x10);
+    temp_v3 = *(unsigned int *)((*(int *)((unsigned char *)&DAT_0059935c + 0x1c)) + 0x10);
     temp_v0 = FUN_002f4d8c(&temp_v1,(unsigned int *)&temp_v3);
     if (temp_v0 == 0) {
       return 0;
@@ -50,7 +50,7 @@ unsigned int FUN_0010b5bc(unsigned int param_1,unsigned int param_2)
     (**(romwright_code **)(*(int *)temp_v1[2] + 4))();
   }
   temp_v4 = temp_v1;
-  FUN_002f4d64(temp_v5,DAT_00599378,&temp_v4);
+  FUN_002f4d64(temp_v5,(*(int *)((unsigned char *)&DAT_0059935c + 0x1c)),&temp_v4);
   return 1;
 }
 

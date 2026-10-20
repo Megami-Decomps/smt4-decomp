@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern romwright_code *DAT_0044e97c; /* 0x44e97c */
+extern unsigned char DAT_0044e978; /* 0x44e978 */
 
 /* Supplied declaration required: VX2DecoderRelease. */
 
@@ -21,13 +21,13 @@ void mwmomobiclipDecoderRelease(int param_1)
 
 {
 /* irregular: 3 native warning(s); review required */
-  if (DAT_0044e97c != (romwright_code *)0x0 && param_1 != 0) {
+  if ((*(romwright_code * *)((unsigned char *)&DAT_0044e978 + 0x4)) != (romwright_code *)0x0 && param_1 != 0) {
     VX2DecoderRelease();
-    (*DAT_0044e97c)(*(unsigned int *)(param_1 + 0x2c));
-    (*DAT_0044e97c)(*(unsigned int *)(param_1 + 0x28));
+    (*(*(romwright_code * *)((unsigned char *)&DAT_0044e978 + 0x4)))(*(unsigned int *)(param_1 + 0x2c));
+    (*(*(romwright_code * *)((unsigned char *)&DAT_0044e978 + 0x4)))(*(unsigned int *)(param_1 + 0x28));
                     /* WARNING: Could not recover jumptable at 0x003f6624. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*DAT_0044e97c)(param_1);
+    (*(*(romwright_code * *)((unsigned char *)&DAT_0044e978 + 0x4)))(param_1);
     return;
   }
   return;

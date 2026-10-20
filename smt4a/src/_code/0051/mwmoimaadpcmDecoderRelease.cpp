@@ -10,20 +10,20 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern romwright_code *DAT_00589524; /* 0x589524 */
+extern unsigned char DAT_00589520; /* 0x589520 */
 
 
 void mwmoimaadpcmDecoderRelease(int param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (DAT_00589524 != (romwright_code *)0x0 && param_1 != 0) {
+  if ((*(romwright_code * *)((unsigned char *)&DAT_00589520 + 0x4)) != (romwright_code *)0x0 && param_1 != 0) {
     if (*(int *)(param_1 + 0x10) != 0) {
-      (*DAT_00589524)();
+      (*(*(romwright_code * *)((unsigned char *)&DAT_00589520 + 0x4)))();
     }
                     /* WARNING: Could not recover jumptable at 0x005137e4. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-    (*DAT_00589524)(param_1);
+    (*(*(romwright_code * *)((unsigned char *)&DAT_00589520 + 0x4)))(param_1);
     return;
   }
   return;

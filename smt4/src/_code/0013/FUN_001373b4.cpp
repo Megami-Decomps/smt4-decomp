@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001373b4` (_code @ 0x1373b4, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -13,7 +11,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_5_stack;
 
-extern unsigned int DAT_004c632c; /* 0x4c632c */
+extern unsigned char DAT_004c6290; /* 0x4c6290 */
 
 /* Supplied declaration required: FUN_00143160. */
 
@@ -23,7 +21,7 @@ void FUN_001373b4(unsigned int param_1,unsigned int param_2,unsigned int param_3
 
 {
 /* irregular: 2 native warning(s); review required */
-  FUN_00143160(DAT_004c632c,param_1,param_2,param_3,param_4,param_5);
+  FUN_00143160((*(unsigned int *)((unsigned char *)&DAT_004c6290 + 0x9c)),param_1,param_2,param_3,param_4,param_5);
                     /* WARNING: Treating indirect jump as return */
   return;
 }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e3d04(void);
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_005949a4; /* 0x5949a4 */
+extern unsigned char DAT_00594958; /* 0x594958 */
 
 /* Supplied declaration required: FUN_002e3d04. */
 
@@ -16,8 +16,8 @@ void FUN_0010726c(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if (DAT_005949a4 != (romwright_code *)0x0) {
-    (*DAT_005949a4)();
+  if ((*(romwright_code * *)((unsigned char *)&DAT_00594958 + 0x4c)) != (romwright_code *)0x0) {
+    (*(*(romwright_code * *)((unsigned char *)&DAT_00594958 + 0x4c)))();
     return;
   }
   FUN_002e3d04();

@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern signed char DAT_0049f9c8; /* 0x49f9c8 */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 extern int FUN_002878a8(int);
 extern int FUN_002c2950(void);
@@ -26,7 +26,7 @@ void FUN_0027d5c0(void)
   int temp_v1;
   
   temp_v0 = FUN_002c2950();
-  if (DAT_0049f9c8 == '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0xac)) == '\0') {
     return;
   }
   temp_v1 = (int)*(short *)(temp_v0 + 0x2a);

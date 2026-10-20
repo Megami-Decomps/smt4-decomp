@@ -10,25 +10,25 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern romwright_code *DAT_0058950c; /* 0x58950c */
+extern unsigned char DAT_00589508; /* 0x589508 */
 
 
 void FUN_00512ebc(int *param_1)
 
 {
 /* irregular: 2 native warning(s); review required */
-  if (DAT_0058950c == (romwright_code *)0x0 || param_1 == (int *)0x0) {
+  if ((*(romwright_code * *)((unsigned char *)&DAT_00589508 + 0x4)) == (romwright_code *)0x0 || param_1 == (int *)0x0) {
     return;
   }
   if (param_1[3] != 0) {
-    (*DAT_0058950c)();
+    (*(*(romwright_code * *)((unsigned char *)&DAT_00589508 + 0x4)))();
   }
   if (*param_1 != 0) {
-    (*DAT_0058950c)();
+    (*(*(romwright_code * *)((unsigned char *)&DAT_00589508 + 0x4)))();
   }
                     /* WARNING: Could not recover jumptable at 0x00512f00. Too many branches */
                     /* WARNING: Treating indirect jump as call */
-  (*DAT_0058950c)(param_1);
+  (*(*(romwright_code * *)((unsigned char *)&DAT_00589508 + 0x4)))(param_1);
   return;
 }
 

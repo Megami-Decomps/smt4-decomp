@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002c4c2c(int);
 int FUN_002c58c8(int, int);
 
-extern signed char DAT_0044e141; /* 0x44e141 */
+extern unsigned char DAT_0044e140; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_002c4c2c. */
 /* Supplied declaration required: FUN_002c58c8. */
@@ -19,7 +19,7 @@ void FUN_001ad98c(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  if (DAT_0044e141 < '\x01') {
+  if ((*(signed char *)((unsigned char *)&DAT_0044e140 + 0x1)) < '\x01') {
     FUN_002c4c2c(0x1a);
     temp_v0 = 0;
     do {
@@ -27,7 +27,7 @@ void FUN_001ad98c(void)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 3);
   }
-  DAT_0044e141 = DAT_0044e141 + '\x01';
+  (*(signed char *)((unsigned char *)&DAT_0044e140 + 0x1)) = (*(signed char *)((unsigned char *)&DAT_0044e140 + 0x1)) + '\x01';
   return;
 }
 

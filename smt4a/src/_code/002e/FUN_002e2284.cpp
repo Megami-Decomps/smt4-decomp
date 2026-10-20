@@ -24,7 +24,7 @@ struct fn_002e2284_arg0 {
     undefined4 field_0x144; /* +0x144 */
 };
 
-extern int DAT_0057f114; /* 0x57f114 */
+extern unsigned char DAT_0057f110; /* 0x57f110 */
 
 /* Supplied declaration required: FUN_001681cc. */
 extern int FUN_0018206c(unsigned int, unsigned int);
@@ -53,11 +53,11 @@ unsigned int FUN_002e2284(fn_002e2284_arg0 *param_1)
   temp_v0 = FUN_00341940(0x2e);
   if ((((temp_v0 != 0) && (temp_v0 = FUN_0018206c(0x2e,0), temp_v0 != 0)) &&
       (temp_v0 = FUN_003f86c8(0x4a), temp_v0 != 0)) && (temp_v0 = FUN_002009a8(0x1000049), temp_v0 == 1)) {
-    temp_v0 = DAT_0057f114 + 0xb0;
+    temp_v0 = (*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0xb0;
     FUN_002e2114();
     if (temp_v0 != 0) {
-      FUN_0035a204(DAT_0057f114 + 0xb0);
-      FUN_00281720(DAT_0057f114 + 0xb0,0);
+      FUN_0035a204((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0xb0);
+      FUN_00281720((*(int *)((unsigned char *)&DAT_0057f110 + 0x4)) + 0xb0,0);
       pvVar2 = param_1->field_0xe4;
       FUN_00275bc8(pvVar2,*(unsigned int *)&param_1->field_0xe8);
       param_1->field_0xf4 = (int)pvVar2;

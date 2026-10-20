@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_3_stack;
 
-extern int DAT_0043e18c; /* 0x43e18c */
+extern unsigned char DAT_0043e188; /* 0x43e188 */
 
 /* Supplied declaration required: FUN_0028dcf4. */
 /* Supplied declaration required: FUN_0028e6d0. */
@@ -25,8 +25,8 @@ void FUN_001ed64c(unsigned int param_1,unsigned int param_2,unsigned int param_3
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0043e18c;
-  *(unsigned char *)(DAT_0043e18c + 0x2c) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0043e188 + 0x4));
+  *(unsigned char *)((*(int *)((unsigned char *)&DAT_0043e188 + 0x4)) + 0x2c) = 0;
   FUN_0028dcf4(temp_v0,param_1);
   FUN_0028e6d0(temp_v0,param_2,param_3,param_1,0,2,0);
   return;

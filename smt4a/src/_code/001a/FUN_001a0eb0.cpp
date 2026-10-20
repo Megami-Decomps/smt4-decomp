@@ -13,7 +13,6 @@ typedef struct {
 } param_1_stack;
 
 extern signed char DAT_005b4790; /* 0x5b4790 */
-extern int DAT_005b4798; /* 0x5b4798 */
 extern int DAT_005b479c; /* 0x5b479c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
@@ -31,10 +30,10 @@ void FUN_001a0eb0(unsigned int param_1)
   
   temp_v0 = FUN_001a0e10(param_1);
   nn_os_CriticalSection_Enter(temp_v0);
-  if (0 < DAT_005b4798) {
-    DAT_005b4798 = DAT_005b4798 - 1;
+  if (0 < (*(int *)((unsigned char *)&DAT_005b4790 + 0x8))) {
+    (*(int *)((unsigned char *)&DAT_005b4790 + 0x8)) = (*(int *)((unsigned char *)&DAT_005b4790 + 0x8)) - 1;
   }
-  if ((DAT_005b4798 == 0) && (DAT_005b4790 != '\0')) {
+  if (((*(int *)((unsigned char *)&DAT_005b4790 + 0x8)) == 0) && (DAT_005b4790 != '\0')) {
     DAT_005b4790 = '\0';
     if (DAT_005b479c != 0) {
       software_interrupt(0x23);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002c43b4(unsigned int, int);
 
 extern int DAT_0043dc24; /* 0x43dc24 */
-extern unsigned int *DAT_0043dc28; /* 0x43dc28 */
+extern unsigned char DAT_0043dc20; /* 0x43dc20 */
 
 extern int FUN_002bf244(unsigned int);
 /* Supplied declaration required: FUN_002c43b4. */
@@ -21,8 +21,8 @@ void FUN_0025a0e0(void)
   int temp_v1;
   
   temp_v0 = DAT_0043dc24;
-  if ((DAT_0043dc28 != (unsigned int *)0x0) && (temp_v1 = FUN_002bf244(*DAT_0043dc28), temp_v1 != 0)) {
-    FUN_002c43b4(*DAT_0043dc28,0);
+  if (((*(unsigned int * *)((unsigned char *)&DAT_0043dc20 + 0x8)) != (unsigned int *)0x0) && (temp_v1 = FUN_002bf244(*(*(unsigned int * *)((unsigned char *)&DAT_0043dc20 + 0x8))), temp_v1 != 0)) {
+    FUN_002c43b4(*(*(unsigned int * *)((unsigned char *)&DAT_0043dc20 + 0x8)),0);
   }
   *(unsigned int *)(temp_v0 + 0xc) = 0;
   *(unsigned int *)(temp_v0 + 8) = 3;

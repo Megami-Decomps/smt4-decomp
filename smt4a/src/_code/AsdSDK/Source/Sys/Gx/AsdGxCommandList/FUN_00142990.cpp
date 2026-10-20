@@ -4,7 +4,6 @@
 
 extern "C" {
 
-extern unsigned int DAT_005b3fec; /* 0x5b3fec */
 extern unsigned int DAT_005b3ff8; /* 0x5b3ff8 */
 extern unsigned int DAT_005b3ffc; /* 0x5b3ffc */
 
@@ -12,7 +11,7 @@ extern unsigned int DAT_005b3ffc; /* 0x5b3ffc */
 void FUN_00142990(unsigned int *param_1)
 
 {
-  DAT_005b3fec = 0;
+  (*(unsigned int *)((unsigned char *)&DAT_005b3ff8 - 0xc)) = 0;
   DAT_005b3ff8 = *param_1;
   DAT_005b3ffc = param_1[1];
   return;

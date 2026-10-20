@@ -20,7 +20,7 @@ struct fn_00120e24_arg0 {
     int field_0x20; /* +0x20 */
 };
 
-extern unsigned int DAT_0044e90c; /* 0x44e90c */
+extern unsigned char DAT_0044e908; /* 0x44e908 */
 
 extern int FUN_001310c4(unsigned int, unsigned int);
 extern int FUN_0013127c(unsigned int, unsigned int);
@@ -43,9 +43,9 @@ int FUN_00120e24(fn_00120e24_arg0 *param_1)
   temp_v4 = param_1->field_0x18;
   temp_v5 = param_1->field_0x14;
   temp_v1 = FUN_002baf30();
-  temp_v2 = FUN_0013127c(temp_v1,DAT_0044e90c);
+  temp_v2 = FUN_0013127c(temp_v1,(*(unsigned int *)((unsigned char *)&DAT_0044e908 + 0x4)));
   temp_v1 = FUN_002bafb0();
-  temp_v3 = FUN_001310c4(temp_v1,DAT_0044e90c);
+  temp_v3 = FUN_001310c4(temp_v1,(*(unsigned int *)((unsigned char *)&DAT_0044e908 + 0x4)));
   temp_v0 = temp_v3 + temp_v2 + temp_v0 + temp_v4 + temp_v5;
   if (param_1->field_0x1c == 1) {
     temp_v0 = temp_v0 + param_1->field_0x8;

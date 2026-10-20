@@ -21,7 +21,6 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int DAT_0044d158; /* 0x44d158 */
-extern int DAT_0044d15c; /* 0x44d15c */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_002b2368. */
@@ -60,13 +59,13 @@ void FUN_003516c0(int param_1)
       software_interrupt(0x23);
       *(unsigned int *)(param_1 + 0x28) = 0;
     }
-    FUN_002c3f5c(DAT_0044d15c);
-    temp_v0 = DAT_0044d15c;
-    if (DAT_0044d15c != 0) {
+    FUN_002c3f5c((*(int *)((unsigned char *)&DAT_0044d158 + 0x4)));
+    temp_v0 = (*(int *)((unsigned char *)&DAT_0044d158 + 0x4));
+    if ((*(int *)((unsigned char *)&DAT_0044d158 + 0x4)) != 0) {
       FUN_002c3f5c();
       FUN_002b2368(temp_v0);
     }
-    DAT_0044d15c = 0;
+    (*(int *)((unsigned char *)&DAT_0044d158 + 0x4)) = 0;
     FUN_002c415c(DAT_0044d158);
     DAT_0044d158 = 0;
     *(unsigned int *)(param_1 + 8) = 0xffffffff;

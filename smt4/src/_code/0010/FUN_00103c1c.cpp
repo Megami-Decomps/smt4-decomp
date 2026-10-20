@@ -10,7 +10,7 @@ int FUN_002c35b0(int);
 int FUN_002c39a4(int);
 int FUN_002c3a14(int);
 
-extern signed char DAT_00446db1; /* 0x446db1 */
+extern unsigned char DAT_00446db0; /* 0x446db0 */
 extern int DAT_0044ea00; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002bdb44. */
@@ -28,7 +28,7 @@ unsigned int FUN_00103c1c(void)
   int temp_v0;
   
   temp_v0 = FUN_002c5210();
-  if ((temp_v0 == 1) && (DAT_00446db1 != '\0')) {
+  if ((temp_v0 == 1) && ((*(signed char *)((unsigned char *)&DAT_00446db0 + 0x1)) != '\0')) {
     FUN_002c35b0(1);
     *(unsigned int *)(DAT_0044ea00 + 0x528) = 1;
     FUN_002bdb44();

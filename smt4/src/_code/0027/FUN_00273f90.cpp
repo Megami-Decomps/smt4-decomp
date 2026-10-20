@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00202254(void);
 
 extern signed char DAT_0049f942; /* 0x49f942 */
-extern signed char DAT_004bd0dc; /* 0x4bd0dc */
+extern unsigned char DAT_004bce8c; /* 0x4bce8c */
 
 /* Supplied declaration required: FUN_00202254. */
 
@@ -16,7 +16,7 @@ void FUN_00273f90(void)
 
 {
 /* irregular: 1 native warning(s); review required */
-  if ((DAT_004bd0dc != '\0') && (DAT_0049f942 != '\0')) {
+  if (((*(signed char *)((unsigned char *)&DAT_004bce8c + 0x250)) != '\0') && (DAT_0049f942 != '\0')) {
     FUN_00202254();
     return;
   }

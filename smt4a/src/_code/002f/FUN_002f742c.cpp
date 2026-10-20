@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern signed char DAT_0059495b; /* 0x59495b */
+extern unsigned char DAT_00594958; /* 0x594958 */
 
 
 unsigned int FUN_002f742c(int param_1)
 
 {
-  if ((DAT_0059495b == '\0') && (*(int *)(param_1 + 0x28) != 0x40000000)) {
+  if (((*(signed char *)((unsigned char *)&DAT_00594958 + 0x3)) == '\0') && (*(int *)(param_1 + 0x28) != 0x40000000)) {
     return 1;
   }
   return 0;

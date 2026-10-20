@@ -13,7 +13,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern signed char DAT_00439ce0; /* 0x439ce0 */
 extern signed char DAT_00439ce1; /* 0x439ce1 */
 extern signed char DAT_00439ce2; /* 0x439ce2 */
 extern int DAT_00439cf8; /* 0x439cf8 */
@@ -73,7 +72,7 @@ void FUN_003c7cf0(int param_1,int param_2,int param_3)
   temp_v2 = (long long)(int)temp_v4 * -0x7f7f7f7f + ((unsigned long long)temp_v4 << 0x20);
   temp_v3 = (long long)(int)((unsigned int)temp_v0 * 0x24) * -0x7f7f7f7f +
           ((unsigned long long)((unsigned int)temp_v0 * 0x24) << 0x20);
-  DAT_00439ce0 = (char)(int)(temp_v1 >> 0x27) - (char)(temp_v1 >> 0x3f);
+  (*(signed char *)((unsigned char *)&DAT_00439cf8 - 0x18)) = (char)(int)(temp_v1 >> 0x27) - (char)(temp_v1 >> 0x3f);
   DAT_00439ce1 = (char)(int)(temp_v2 >> 0x27) - (char)(temp_v2 >> 0x3f);
   DAT_00439ce2 = (char)(int)(temp_v3 >> 0x27) - (char)(temp_v3 >> 0x3f);
   DAT_00439cf8 = ((temp_v8 >> 7) - (temp_v8 >> 0x1f)) * 0x1000000 +

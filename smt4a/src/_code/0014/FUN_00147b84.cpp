@@ -22,7 +22,7 @@ int nw_snd_internal_driver_SoundThread_Destroy(void);
 int nw_snd_internal_driver_SoundThread_Finalize(void);
 int nw_snd_internal_driver_VoiceManager_Finalize(void);
 
-extern signed char DAT_0059dba5; /* 0x59dba5 */
+extern unsigned char DAT_0059dba4; /* 0x59dba4 */
 extern unsigned char DAT_0059dba6; /* 0x59dba6 */
 extern unsigned int DAT_0059dbac; /* 0x59dbac */
 extern unsigned char DAT_00646b38; /* 0x646b38 */
@@ -52,7 +52,7 @@ void FUN_00147b84(void)
 /* irregular: 17 native warning(s); review required */
   unsigned int temp_v0;
   
-  if (DAT_0059dba5 != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_0059dba4 + 0x1)) != '\0') {
     temp_v0 = FUN_001b1998();
     FUN_00174ae0(temp_v0);
     FUN_0019065c();
@@ -75,7 +75,7 @@ void FUN_00147b84(void)
     FUN_00191330();
     FUN_0015eb74();
     DAT_0059dba6 = 0;
-    DAT_0059dba5 = '\0';
+    (*(signed char *)((unsigned char *)&DAT_0059dba4 + 0x1)) = '\0';
   }
   return;
 }

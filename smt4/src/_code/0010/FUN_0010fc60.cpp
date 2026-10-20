@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern signed char DAT_0044e459; /* 0x44e459 */
+extern unsigned char DAT_0044e458; /* 0x44e458 */
 extern unsigned int DAT_0044e460; /* 0x44e460 */
 
 extern unsigned int nn_dsp_CTR_DSP_UnloadComponent(unsigned int);
@@ -16,9 +16,9 @@ unsigned int FUN_0010fc60(void)
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  if (DAT_0044e459 != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_0044e458 + 0x1)) != '\0') {
     temp_v0 = nn_dsp_CTR_DSP_UnloadComponent(DAT_0044e460);
-    DAT_0044e459 = '\0';
+    (*(signed char *)((unsigned char *)&DAT_0044e458 + 0x1)) = '\0';
   }
   return temp_v0;
 }

@@ -1,5 +1,3 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004abba8` (_code @ 0x4abba8, 0x3c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -40,7 +38,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern int DAT_0057a9c8; /* 0x57a9c8 */
+extern unsigned char DAT_0057a9b8; /* 0x57a9b8 */
 
 /* Supplied declaration required: FUN_002b24dc. */
 /* Supplied declaration required: FUN_002fb4b8. */
@@ -53,8 +51,8 @@ void FUN_004abba8(fn_004abba8_arg0 *param_1,unsigned int param_2)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0057a9c8;
-  FUN_002fb4b8(DAT_0057a9c8 + 8);
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10));
+  FUN_002fb4b8((*(int *)((unsigned char *)&DAT_0057a9b8 + 0x10)) + 8);
   FUN_002b24dc(temp_v0 + 0x24bc);
   FUN_0034ee5c(temp_v0 + 0x28c4,param_2,0);
   return;

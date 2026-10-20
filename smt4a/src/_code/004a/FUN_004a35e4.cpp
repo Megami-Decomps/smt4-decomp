@@ -11,7 +11,7 @@ int FUN_004a1958(int);
 int FUN_004a3e04(int);
 int FUN_004cf8dc(int, int);
 
-extern int DAT_0057f0b8; /* 0x57f0b8 */
+extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
 
 extern unsigned int FUN_001654d8(int);
 extern unsigned int FUN_001654e4(int);
@@ -54,8 +54,8 @@ void FUN_004a35e4(int param_1)
     if ((temp_v2 != 0) && (*(int *)(param_1 + 0x18) == 2)) {
       *(unsigned char *)(param_1 + 0xa876) = *(char *)(param_1 + 0xa876) == '\0';
       FUN_004a1958(param_1);
-      DAT_0057f0b8 = FUN_002a482c(param_1 + 0x20);
-      DAT_0057f0b8 = DAT_0057f0b8 + 1;
+      (*(int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = FUN_002a482c(param_1 + 0x20);
+      (*(int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = (*(int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) + 1;
       FUN_004a3e04(param_1);
       FUN_0032cfe0(param_1);
       *(unsigned short *)(param_1 + 0xa874) = 8;

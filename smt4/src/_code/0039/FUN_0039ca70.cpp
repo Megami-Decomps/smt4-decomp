@@ -17,7 +17,7 @@ struct fn_0039ca70_arg0 {
     uint field_0x10; /* +0x10 */
 };
 
-extern signed char DAT_0049fb6d; /* 0x49fb6d */
+extern unsigned char DAT_0049f91c; /* 0x49f91c */
 
 extern int FUN_00231184(void);
 /* Supplied declaration required: FUN_0025a0e0. */
@@ -50,8 +50,8 @@ void FUN_0039ca70(fn_0039ca70_arg0 *param_1)
     param_1->field_0x4 = 2;
   }
   else {
-    if (DAT_0049fb6d != '\0') {
-      DAT_0049fb6d = '\0';
+    if ((*(signed char *)((unsigned char *)&DAT_0049f91c + 0x251)) != '\0') {
+      (*(signed char *)((unsigned char *)&DAT_0049f91c + 0x251)) = '\0';
       temp_v0 = FUN_002c09d0(0x16);
       if (temp_v0 != 0) {
         FUN_0025a0e0();

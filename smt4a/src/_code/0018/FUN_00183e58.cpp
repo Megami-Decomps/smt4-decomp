@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001846d0(int, int);
 int FUN_0019d36c(void);
 
-extern int DAT_0057f0c8; /* 0x57f0c8 */
+extern unsigned char DAT_0057f0c4; /* 0x57f0c4 */
 
 /* Supplied declaration required: FUN_001846d0. */
 /* Supplied declaration required: FUN_0019d36c. */
@@ -23,9 +23,9 @@ void FUN_00183e58(void)
   int *piVar4;
   int temp_v3;
   
-  temp_v1 = DAT_0057f0c8;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
   temp_v2 = 0;
-  piVar4 = (int *)(DAT_0057f0c8 + 0x5d0);
+  piVar4 = (int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0x5d0);
   do {
     FUN_001846d0(temp_v1 + temp_v2 * 0x8c + 0x34,1);
     temp_v3 = temp_v1 + temp_v2 * 4;
@@ -55,8 +55,8 @@ void FUN_00183e58(void)
     } while (temp_v2 < *(int *)(temp_v1 + 0x5d0));
     *(unsigned int *)(temp_v1 + 0x5d0) = 0;
   }
-  temp_v1 = DAT_0057f0c8;
-  *(unsigned int *)(DAT_0057f0c8 + 0xc) = 0;
+  temp_v1 = (*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4));
+  *(unsigned int *)((*(int *)((unsigned char *)&DAT_0057f0c4 + 0x4)) + 0xc) = 0;
   *(unsigned int *)(temp_v1 + 0x10) = 3;
   return;
 }

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int DAT_0057f590; /* 0x57f590 */
+extern unsigned char DAT_0057f588; /* 0x57f588 */
 
 /* Supplied declaration required: FUN_00165088. */
 /* Supplied declaration required: FUN_00166f80. */
@@ -24,15 +24,15 @@ void FUN_0034913c(void)
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = DAT_0057f590;
-  if (*(char *)(DAT_0057f590 + 8) != '\0') {
-    if (*(char *)(DAT_0057f590 + 0x6d) != '\0') {
-      *(unsigned char *)(DAT_0057f590 + 8) = 0;
+  temp_v0 = (*(int *)((unsigned char *)&DAT_0057f588 + 0x8));
+  if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 8) != '\0') {
+    if (*(char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 0x6d) != '\0') {
+      *(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 8) = 0;
       FUN_00166f80(*(unsigned int *)(temp_v0 + 4));
       return;
     }
-    if (DAT_0057f590 != 0) {
-      FUN_00165088(DAT_0057f590,*(unsigned char *)(DAT_0057f590 + 9));
+    if ((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) != 0) {
+      FUN_00165088((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)),*(unsigned char *)((*(int *)((unsigned char *)&DAT_0057f588 + 0x8)) + 9));
       *(unsigned char *)(temp_v0 + 8) = 3;
       *(unsigned char *)(temp_v0 + 0x35) = 0;
     }

@@ -13,7 +13,6 @@ typedef struct {
 } void_stack;
 
 extern unsigned char DAT_005b4484; /* 0x5b4484 */
-extern signed char DAT_005b4485; /* 0x5b4485 */
 
 /* Supplied declaration required: FUN_0018c090. */
 /* Supplied declaration required: FUN_0018c108. */
@@ -25,7 +24,7 @@ void FUN_0018c014(void)
 /* irregular: 2 native warning(s); review required */
   unsigned int temp_v0;
   
-  if (DAT_005b4485 != '\0') {
+  if ((*(signed char *)((unsigned char *)&DAT_005b4484 + 0x1)) != '\0') {
     temp_v0 = (unsigned int)DAT_005b4484;
     FUN_0018c108();
     if (temp_v0 == 0xc9405001) {

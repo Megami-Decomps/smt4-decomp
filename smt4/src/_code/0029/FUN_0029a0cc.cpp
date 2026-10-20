@@ -58,7 +58,7 @@ struct fn_0029a0cc_arg0 {
     undefined4 field_0x598; /* +0x598 */
 };
 
-extern int DAT_0044e144; /* 0x44e144 */
+extern unsigned char DAT_0044e140; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_0024d94c. */
 
@@ -67,7 +67,7 @@ void FUN_0029a0cc(fn_0029a0cc_arg0 *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_0024d94c(DAT_0044e144 + 0x18b0,param_1);
+  FUN_0024d94c((*(int *)((unsigned char *)&DAT_0044e140 + 0x4)) + 0x18b0,param_1);
   return;
 }
 

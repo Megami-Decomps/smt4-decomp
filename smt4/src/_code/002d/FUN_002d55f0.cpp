@@ -1,12 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d55f0` (_code @ 0x2d55f0, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_002ad8b4(unsigned int, unsigned int);
 
-extern int DAT_00464fac; /* 0x464fac */
+extern unsigned char DAT_00464fa8; /* 0x464fa8 */
 
 /* Supplied declaration required: FUN_002ad8b4. */
 
@@ -15,7 +13,7 @@ void FUN_002d55f0(unsigned int param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  FUN_002ad8b4(param_1,*(unsigned int *)(DAT_00464fac + 0xc));
+  FUN_002ad8b4(param_1,*(unsigned int *)((*(int *)((unsigned char *)&DAT_00464fa8 + 0x4)) + 0xc));
   return;
 }
 

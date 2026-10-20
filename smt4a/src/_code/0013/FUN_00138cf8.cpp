@@ -5,14 +5,14 @@
 extern "C" {
 
 extern unsigned char DAT_0057f69a; /* 0x57f69a */
-extern unsigned int DAT_0057f6b4; /* 0x57f6b4 */
+extern unsigned char DAT_0057f698; /* 0x57f698 */
 
 
 void FUN_00138cf8(unsigned int param_1)
 
 {
-  DAT_0057f6b4 = DAT_0057f6b4 & ~param_1;
-  DAT_0057f69a = DAT_0057f6b4 == 0;
+  (*(unsigned int *)((unsigned char *)&DAT_0057f698 + 0x1c)) = (*(unsigned int *)((unsigned char *)&DAT_0057f698 + 0x1c)) & ~param_1;
+  DAT_0057f69a = (*(unsigned int *)((unsigned char *)&DAT_0057f698 + 0x1c)) == 0;
   return;
 }
 
