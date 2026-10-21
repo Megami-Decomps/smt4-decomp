@@ -62,11 +62,11 @@ extern int DAT_0049fd88; /* 0x49fd88 */
 extern short DAT_0049fddc; /* 0x49fddc */
 extern short DAT_0049fdde; /* 0x49fdde */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001f8da8. */
 /* Supplied declaration required: FUN_0021dea8. */
 /* Supplied declaration required: FUN_0025b670. */
-extern int FUN_0025b6e8(unsigned int);
+extern int unlockFlagTest(unsigned int);
 /* Supplied declaration required: FUN_00273358. */
 /* Supplied declaration required: navigationResetTimer. */
 extern int inputIsQuestMenuPressed(void);
@@ -91,7 +91,7 @@ extern int FUN_002c1c0c(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002c58c8. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: FUN_002dfe08. */
 /* Supplied declaration required: FUN_002f364c. */
 
@@ -171,7 +171,7 @@ unsigned int FUN_001e553c(void)
     break;
   case 4:
     if (*(int *)(g_mapDepart + 0x1c) != 0) {
-      temp_v4 = FUN_0019e0c0(*(unsigned int *)(g_mapDepart + 0x60));
+      temp_v4 = scrRunOpcodesStub(*(unsigned int *)(g_mapDepart + 0x60));
       if (temp_v4 == 2) {
         if (*(int *)(temp_v2 + 100) != 0) {
           gameFlagSetValue(*(int *)(temp_v2 + 100),1);
@@ -191,9 +191,9 @@ unsigned int FUN_001e553c(void)
     }
     else {
       buttonHelpSetPresetDefault();
-      temp_v3 = FUN_002c5c04(&LAB_001e5990);
+      temp_v3 = asdLoadFileSyncDefault(&LAB_001e5990);
       *(unsigned int *)(temp_v2 + 0x58) = temp_v3;
-      temp_v3 = FUN_002c5c04(&LAB_001e59a4);
+      temp_v3 = asdLoadFileSyncDefault(&LAB_001e59a4);
       *(unsigned int *)(temp_v2 + 0x5c) = temp_v3;
       temp_v4 = *(int *)(temp_v2 + 0x58);
       FUN_00297060(temp_v4,temp_v3);
@@ -215,7 +215,7 @@ unsigned int FUN_001e553c(void)
     if (temp_v4 == 1) {
       if (*(int *)(temp_v2 + 0xc) != 0) {
         DAT_0049fd38 = *(unsigned int *)(temp_v2 + 0x14);
-        temp_v4 = FUN_0025b6e8(*(unsigned int *)(temp_v2 + 0x14));
+        temp_v4 = unlockFlagTest(*(unsigned int *)(temp_v2 + 0x14));
         DAT_0049fd78 = temp_v4 == 0;
         DAT_0049fd88 = 1;
       }
@@ -386,9 +386,9 @@ LAB_001e5a1c:
     break;
   case 7:
     buttonHelpSetPresetDefault();
-    temp_v3 = FUN_002c5c04(&LAB_001e5d3c);
+    temp_v3 = asdLoadFileSyncDefault(&LAB_001e5d3c);
     *(unsigned int *)(temp_v2 + 0x58) = temp_v3;
-    temp_v3 = FUN_002c5c04(&LAB_001e5d54);
+    temp_v3 = asdLoadFileSyncDefault(&LAB_001e5d54);
     *(unsigned int *)(temp_v2 + 0x5c) = temp_v3;
     temp_v4 = *(int *)(temp_v2 + 0x58);
     FUN_00297060(temp_v4,temp_v3);
@@ -401,7 +401,7 @@ LAB_001e5a1c:
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
     break;
   case 8:
-    temp_v4 = FUN_0019e0c0(*(unsigned int *)(g_mapDepart + 0x60));
+    temp_v4 = scrRunOpcodesStub(*(unsigned int *)(g_mapDepart + 0x60));
     if (temp_v4 != 2) {
       return 0;
     }
@@ -420,9 +420,9 @@ LAB_001e5a1c:
       FUN_00273358(1);
     }
     buttonHelpSetPresetDefault();
-    temp_v3 = FUN_002c5c04(&LAB_001e5d3c);
+    temp_v3 = asdLoadFileSyncDefault(&LAB_001e5d3c);
     *(unsigned int *)(temp_v2 + 0x58) = temp_v3;
-    temp_v3 = FUN_002c5c04(&LAB_001e5d54);
+    temp_v3 = asdLoadFileSyncDefault(&LAB_001e5d54);
     *(unsigned int *)(temp_v2 + 0x5c) = temp_v3;
     temp_v4 = *(int *)(temp_v2 + 0x58);
     FUN_00297060(temp_v4,temp_v3);
@@ -440,7 +440,7 @@ LAB_001e5a1c:
     *(unsigned int *)(temp_v2 + 0x1c) = 0;
     break;
   case 10:
-    temp_v4 = FUN_0019e0c0(*(unsigned int *)(g_mapDepart + 0x60));
+    temp_v4 = scrRunOpcodesStub(*(unsigned int *)(g_mapDepart + 0x60));
     if (temp_v4 == 2) {
       scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x60));
       asdMemFree(*(unsigned int *)(temp_v2 + 0x58));

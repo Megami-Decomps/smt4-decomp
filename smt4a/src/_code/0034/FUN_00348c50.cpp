@@ -1,44 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00348c50` (_code @ 0x348c50, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: process callback entry 0x348cd0 has no function symbol; its original eight-byte body returns zero. */
+#include "common.h"
+
+struct FreeCameraWork {
+    u32 process;
+    u32 mode;
+    u8 flag8;
+    u8 flag9;
+    u8 unk0a[2];
+    f32 value;
+    u32* output;
+};
 
 extern "C" {
+extern FreeCameraWork* g_freeCamera;
+extern const u8 LAB_00348cd0[];
+void* asdOperatorNew(u32 size);
+u32 asdProcessCreateSimple(const char* name, s32 priority, u32 option, u32 argument,
+                           const void* callback, u32 first, u32 second);
 
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int asdOperatorNew(void);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-extern unsigned char LAB_00348cbc; /* 0x348cbc */
-extern unsigned char LAB_00348cd0; /* 0x348cd0 */
-extern unsigned int *DAT_00589144; /* 0x589144 */
-
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: asdOperatorNew. */
-
-
-void FUN_00348c50(unsigned int param_1)
-
+void FUN_00348c50(u32 mode)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char *puVar2;
-  
-  puVar1 = (unsigned int *)0x14;
-  asdOperatorNew();
-  puVar2 = &LAB_00348cbc;
-  DAT_00589144 = puVar1;
-  asdProcessCreateSimple(&LAB_00348cbc,4,0,0,&LAB_00348cd0,0,0);
-  *puVar1 = (unsigned int)puVar2;
-  puVar1[1] = param_1;
-  *(unsigned char *)(puVar1 + 2) = 0;
-  *(unsigned char *)((int)puVar1 + 9) = 0;
-  puVar1[3] = 0;
-  return;
+    FreeCameraWork* work = static_cast<FreeCameraWork*>(asdOperatorNew(sizeof(FreeCameraWork)));
+    g_freeCamera = work;
+    work->process = asdProcessCreateSimple("FreeCamera PROC", 4, 0, 0, LAB_00348cd0, 0, 0);
+    work->mode = mode;
+    work->flag8 = 0;
+    work->flag9 = 0;
+    work->value = 0.0f;
 }
-
-} /* extern "C" */
+}

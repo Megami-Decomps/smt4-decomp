@@ -9,8 +9,8 @@ int asdMemFree(...);
 int asdTMTexTableReleaseNode(unsigned int, unsigned int);
 int asdTMTexTableFreeEntry(unsigned int);
 
-extern unsigned int *DAT_0057f47c; /* 0x57f47c */
-extern unsigned int DAT_0057f480; /* 0x57f480 */
+extern unsigned int *g_smokeFadeState; /* 0x57f47c */
+extern unsigned int g_smokeFadeImages; /* 0x57f480 */
 extern unsigned int DAT_0057f484; /* 0x57f484 */
 
 /* Supplied declaration required: jobStop. */
@@ -29,14 +29,14 @@ void FUN_00371b74(void)
   int temp_v0;
   int temp_v1;
   
-  puVar1 = DAT_0057f47c;
-  asdMemFree(DAT_0057f47c[2]);
+  puVar1 = g_smokeFadeState;
+  asdMemFree(g_smokeFadeState[2]);
   temp_v1 = 0;
   do {
     if (*(char *)(temp_v1 * 0xc + 0x57f488) != '\0') {
-      temp_v0 = asdTMTexTableNodeIsLoaded((&DAT_0057f480)[temp_v1 * 3],(&DAT_0057f484)[temp_v1 * 3]);
+      temp_v0 = asdTMTexTableNodeIsLoaded((&g_smokeFadeImages)[temp_v1 * 3],(&DAT_0057f484)[temp_v1 * 3]);
       if (temp_v0 != 0) {
-        asdTMTexTableReleaseNode((&DAT_0057f480)[temp_v1 * 3],(&DAT_0057f484)[temp_v1 * 3]);
+        asdTMTexTableReleaseNode((&g_smokeFadeImages)[temp_v1 * 3],(&DAT_0057f484)[temp_v1 * 3]);
       }
       *(unsigned char *)(temp_v1 * 0xc + 0x57f488) = 0;
     }
@@ -45,9 +45,9 @@ void FUN_00371b74(void)
   temp_v1 = 0;
   do {
     if (*(char *)(temp_v1 * 0xc + 0x57f489) != '\0') {
-      temp_v0 = textureGetIndexedResource((&DAT_0057f480)[temp_v1 * 3]);
+      temp_v0 = textureGetIndexedResource((&g_smokeFadeImages)[temp_v1 * 3]);
       if (temp_v0 != 0) {
-        asdTMTexTableFreeEntry((&DAT_0057f480)[temp_v1 * 3]);
+        asdTMTexTableFreeEntry((&g_smokeFadeImages)[temp_v1 * 3]);
       }
       *(unsigned char *)(temp_v1 * 0xc + 0x57f489) = 0;
     }
@@ -55,7 +55,7 @@ void FUN_00371b74(void)
   } while (temp_v1 < 2);
   jobStop(*puVar1,0);
   asdMemFree(puVar1);
-  DAT_0057f47c = (unsigned int *)0x0;
+  g_smokeFadeState = (unsigned int *)0x0;
   return;
 }
 

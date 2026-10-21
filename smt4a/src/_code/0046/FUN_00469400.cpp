@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(int *, unsigned char *, int, unsigned int);
 int qsort(int, unsigned int, int, unsigned char *);
 int gameFlagIsSet(...);
-int FUN_003fe388(...);
+int resourceObjectSetNamedFlag(...);
 int dataTable27Count(void);
 int rt_memcpy(int *, int);
 
@@ -47,7 +47,7 @@ extern unsigned char LAB_00469d00; /* 0x469d00 */
 extern unsigned int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 extern int FUN_003f86c0(int);
-/* Supplied declaration required: FUN_003fe388. */
+/* Supplied declaration required: resourceObjectSetNamedFlag. */
 extern int dataTable27GetEntry(int, unsigned int);
 /* Supplied declaration required: dataTable27Count. */
 extern int dataTable28IsLoaded(int);
@@ -208,9 +208,9 @@ LAB_00469530:
 LAB_00469668:
         textFormatBuffer(&temp_v14,&LAB_00469948,temp_v5 + 1,temp_v9);
         temp_v6 = param_1 + temp_v5 * 4;
-        FUN_003fe388(*(unsigned int *)(*(int *)(temp_v6 + 0xa10) + 4),&temp_v14,0);
+        resourceObjectSetNamedFlag(*(unsigned int *)(*(int *)(temp_v6 + 0xa10) + 4),&temp_v14,0);
         textFormatBuffer(&temp_v14,&LAB_00469960,temp_v5 + 1,temp_v9);
-        FUN_003fe388(*(unsigned int *)(*(int *)(temp_v6 + 0xa34) + 4),&temp_v14,0);
+        resourceObjectSetNamedFlag(*(unsigned int *)(*(int *)(temp_v6 + 0xa34) + 4),&temp_v14,0);
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < *(int *)(param_1 + 0xabc));
     }
@@ -266,11 +266,11 @@ LAB_00469668:
 LAB_004697f0:
       if (!temp_v4) {
         temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa28) + 4);
-        FUN_003fe388(temp_v12,&LAB_00469984,0);
-        FUN_003fe388(temp_v12,&LAB_0046999c,0);
+        resourceObjectSetNamedFlag(temp_v12,&LAB_00469984,0);
+        resourceObjectSetNamedFlag(temp_v12,&LAB_0046999c,0);
         temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa4c) + 4);
-        FUN_003fe388(temp_v12,&LAB_004699b4,0);
-        FUN_003fe388(temp_v12,&LAB_004699d0,0);
+        resourceObjectSetNamedFlag(temp_v12,&LAB_004699b4,0);
+        resourceObjectSetNamedFlag(temp_v12,&LAB_004699d0,0);
       }
     }
     else {
@@ -280,44 +280,44 @@ LAB_00469818:
       temp_v5 = gameFlagIsSet(0x491);
       if (temp_v5 != 0) {
         temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa28) + 4);
-        FUN_003fe388(temp_v12,&LAB_00469984,0);
-        FUN_003fe388(temp_v12,&LAB_0046999c,0);
+        resourceObjectSetNamedFlag(temp_v12,&LAB_00469984,0);
+        resourceObjectSetNamedFlag(temp_v12,&LAB_0046999c,0);
         temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa4c) + 4);
-        FUN_003fe388(temp_v12,&LAB_004699b4,0);
-        FUN_003fe388(temp_v12,&LAB_004699d0,0);
+        resourceObjectSetNamedFlag(temp_v12,&LAB_004699b4,0);
+        resourceObjectSetNamedFlag(temp_v12,&LAB_004699d0,0);
       }
     }
     if (temp_v2) {
       temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa20) + 4);
-      FUN_003fe388(temp_v12,&LAB_004699ec,0);
-      FUN_003fe388(temp_v12,&LAB_00469a04,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_004699ec,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469a04,0);
       temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa44) + 4);
-      FUN_003fe388(temp_v12,&LAB_00469a1c,0);
-      FUN_003fe388(temp_v12,&LAB_00469a38,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469a1c,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469a38,0);
     }
     else {
       temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa2c) + 4);
-      FUN_003fe388(temp_v12,&LAB_00469c4c,0);
-      FUN_003fe388(temp_v12,&LAB_00469c64,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469c4c,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469c64,0);
       temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa50) + 4);
-      FUN_003fe388(temp_v12,&LAB_00469c7c,0);
-      FUN_003fe388(temp_v12,&LAB_00469c98,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469c7c,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469c98,0);
     }
     if (temp_v13) {
       temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa1c) + 4);
-      FUN_003fe388(temp_v12,&LAB_00469a54,0);
-      FUN_003fe388(temp_v12,&LAB_00469a6c,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469a54,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469a6c,0);
       temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa40) + 4);
-      FUN_003fe388(temp_v12,&LAB_00469a84,0);
-      FUN_003fe388(temp_v12,&LAB_00469aa0,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469a84,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469aa0,0);
     }
     else {
       temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa30) + 4);
-      FUN_003fe388(temp_v12,&LAB_00469cb4,0);
-      FUN_003fe388(temp_v12,&LAB_00469ccc,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469cb4,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469ccc,0);
       temp_v12 = *(unsigned int *)(*(int *)(param_1 + 0xa54) + 4);
-      FUN_003fe388(temp_v12,&LAB_00469ce4,0);
-      FUN_003fe388(temp_v12,&LAB_00469d00,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469ce4,0);
+      resourceObjectSetNamedFlag(temp_v12,&LAB_00469d00,0);
     }
   }
   *(unsigned int *)(param_1 + 4) = 2;

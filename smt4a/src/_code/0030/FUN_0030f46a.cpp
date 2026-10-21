@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_0030f4bc. */
 extern int FUN_0030f78c(void);
 
@@ -28,7 +28,7 @@ void FUN_0030f46a(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   temp_v2 = param_3;
   temp_v3 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   if ((temp_v0 != 0) && (temp_v1 = FUN_0030f78c(), temp_v1 == 0)) {
     temp_v3 = 0;
     temp_v2 = 0;

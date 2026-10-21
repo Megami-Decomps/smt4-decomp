@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00308eac` (_code @ 0x308eac, 0x10a bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ChunkPool.h"
+
+struct WordTreeNode;
 
 extern "C" {
 
@@ -14,7 +17,7 @@ typedef struct {
 } param_5_stack;
 
 extern int lessU32(int, unsigned int *, int);
-extern char *FUN_002f49cc(int);
+extern WordTreeNode* nodePoolAcquireWordTreeNode(ChunkPool*);
 /* Supplied declaration required: rbTreeRotateRight_00308fd6. */
 /* Supplied declaration required: rbTreeRotateLeft_00309008. */
 
@@ -29,7 +32,7 @@ void FUN_00308eac(unsigned int *param_1,int param_2,int param_3,int param_4,unsi
   char *pcVar4;
   char *pcVar5;
   
-  pcVar1 = (char *)FUN_002f49cc(param_2);
+  pcVar1 = (char *)nodePoolAcquireWordTreeNode((ChunkPool*)param_2);
   if (pcVar1 + 0x10 != (char *)0x0) {
     *(unsigned int *)(pcVar1 + 0x10) = *param_5;
     *(unsigned int *)(pcVar1 + 0x14) = param_5[1];

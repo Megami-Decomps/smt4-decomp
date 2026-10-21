@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001ddafc(int, int);
+int gameDataSlotSetFlag(int, int);
 int FUN_0020341c(int, int);
-int FUN_00288154(int, unsigned char [2]);
+int gameRecordCopy(int, unsigned char [2]);
 int FUN_0029bde4(unsigned short *);
 int FUN_0029c6b0(unsigned short *);
 int devilGetRecord(void);
@@ -40,9 +40,9 @@ typedef struct {
     unsigned short sp50; /* 0x50: local_50 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001ddafc. */
+/* Supplied declaration required: gameDataSlotSetFlag. */
 /* Supplied declaration required: FUN_0020341c. */
-/* Supplied declaration required: FUN_00288154. */
+/* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: FUN_0029bde4. */
 /* Supplied declaration required: FUN_0029c6b0. */
 extern int gameGetSlotTable(void);
@@ -96,7 +96,7 @@ void FUN_001a7dbc(unsigned short *param_1,unsigned char param_2,unsigned short p
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x18);
     FUN_0020341c(param_3,1);
-    FUN_001ddafc(param_3,1);
+    gameDataSlotSetFlag(param_3,1);
   }
   temp_v3 = (unsigned int)param_3;
   devilGetRecord();
@@ -111,7 +111,7 @@ void FUN_001a7dbc(unsigned short *param_1,unsigned char param_2,unsigned short p
       }
       goto LAB_001a7e60;
     }
-    FUN_00288154(param_3,temp_v4);
+    gameRecordCopy(param_3,temp_v4);
     *(unsigned char *)(param_1 + 0x24) = temp_v4[0];
     *param_1 = temp_v16;
     param_1[1] = temp_v17;

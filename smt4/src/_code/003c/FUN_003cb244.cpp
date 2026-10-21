@@ -1,14 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cb244` (_code @ 0x3cb244, 0x198 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleQueue.h"
 
 extern "C" {
 
-int FUN_0023ce90(int);
 
 extern unsigned char g_btlAction; /* 0x434278 */
 
-/* Supplied declaration required: FUN_0023ce90. */
 
 
 unsigned int FUN_003cb244(int *param_1,int param_2)
@@ -18,7 +17,7 @@ unsigned int FUN_003cb244(int *param_1,int param_2)
   int temp_v0;
   int temp_v1;
   
-  FUN_0023ce90(*param_1);
+  btlPruneInvalidQueuedEntries((BtlMainState*)*param_1);
   *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1d;
   if (*(int *)(param_2 + 0x28) != 0) {
     *(unsigned short *)(*param_1 + 0x2f20) = *(unsigned short *)(param_2 + 0x2c);

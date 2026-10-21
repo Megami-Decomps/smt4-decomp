@@ -8,7 +8,7 @@ int FUN_00235554(...);
 int buttonHelpResetSlots(void);
 int FUN_00287704(...);
 int FUN_00296284(...);
-int FUN_0029c3c0(int, int, int);
+int slotSetRequest(int, int, int);
 int uiSpriteSetImageKeyframe(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
@@ -32,24 +32,24 @@ extern unsigned char LAB_00385a90; /* 0x385a90 */
 extern unsigned char LAB_00385a9c; /* 0x385a9c */
 extern char s_e021_01_0044daf0[8]; /* 0x44daf0 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_00235414(unsigned char);
 /* Supplied declaration required: FUN_00235554. */
 /* Supplied declaration required: buttonHelpResetSlots. */
 extern int FUN_0026b564(void);
 extern int FUN_0027ee9c(void);
-extern int FUN_00282b28(void);
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287704. */
 extern unsigned int FUN_002950e8(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00296284. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int gameFlagIsSet(void);
-extern int FUN_003818c8(unsigned int, unsigned char);
+extern int slotGroupFindFree(unsigned int, unsigned char);
 extern int FUN_00381ae0(int);
 /* Supplied declaration required: FUN_00382878. */
 
@@ -77,8 +77,8 @@ void FUN_00385448(unsigned int *param_1)
          ((*(short *)(temp_v4 + 0x44db04) == 0 || (temp_v0 = gameFlagIsSet(), temp_v0 == 0)))) {
         *param_1 = *param_1 | 0x20000;
         param_1[5] = (unsigned int)(s_e021_01_0044daf0 + temp_v4);
-        FUN_0029c3c0(0,10,0xff);
-        FUN_0029c3c0(1,10,0xff);
+        slotSetRequest(0,10,0xff);
+        slotSetRequest(1,10,0xff);
         buttonHelpResetSlots();
         param_1[2] = 6;
         return;
@@ -106,7 +106,7 @@ void FUN_00385448(unsigned int *param_1)
     param_1[2] = temp_v5;
     return;
   case 1:
-    temp_v4 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
+    temp_v4 = scrRunOpcodesStub(*(unsigned int *)param_1[0x171]);
     if (temp_v4 != 2) {
       return;
     }
@@ -144,7 +144,7 @@ void FUN_00385448(unsigned int *param_1)
         if (temp_v4 == 0) {
           temp_v4 = FUN_00287704((char)param_1[6]);
           temp_v3 = FUN_00287704((char)param_1[6]);
-          temp_v4 = FUN_003818c8(temp_v3,*(unsigned char *)(temp_v4 + 10));
+          temp_v4 = slotGroupFindFree(temp_v3,*(unsigned char *)(temp_v4 + 10));
           if ((temp_v4 == 0) && ((char)param_1[0x355] == '\0')) {
             eventQueueAddUnique(0x1000121);
             *(unsigned char *)(param_1 + 0x355) = 1;
@@ -168,7 +168,7 @@ void FUN_00385448(unsigned int *param_1)
           }
           temp_v4 = FUN_00287704((char)param_1[6]);
           temp_v3 = FUN_00287704((char)param_1[6]);
-          temp_v4 = FUN_003818c8(temp_v3,*(unsigned char *)(temp_v4 + 10));
+          temp_v4 = slotGroupFindFree(temp_v3,*(unsigned char *)(temp_v4 + 10));
           if (temp_v4 == -1) {
             if ((char)param_1[6] != '\0') {
               FUN_00235554(param_1,&LAB_00385a6c);
@@ -207,7 +207,7 @@ void FUN_00385448(unsigned int *param_1)
     param_1[2] = temp_v5;
     return;
   case 5:
-    temp_v4 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
+    temp_v4 = scrRunOpcodesStub(*(unsigned int *)param_1[0x171]);
     if (temp_v4 == 2) {
       param_1[1] = 5;
       param_1[2] = 0;
@@ -216,7 +216,7 @@ void FUN_00385448(unsigned int *param_1)
     }
     break;
   case 6:
-    temp_v4 = FUN_00282b28();
+    temp_v4 = screenFadeIsBusy();
     if ((temp_v4 == 0) && (temp_v4 = FUN_0026b564(), temp_v4 != 0)) {
       param_1[1] = 0x10;
       param_1[2] = 0;
@@ -225,7 +225,7 @@ void FUN_00385448(unsigned int *param_1)
     }
     break;
   case 7:
-    temp_v4 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
+    temp_v4 = scrRunOpcodesStub(*(unsigned int *)param_1[0x171]);
     if (temp_v4 != 2) {
       return;
     }

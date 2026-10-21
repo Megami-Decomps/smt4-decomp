@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0010788a. */
 /* Supplied declaration required: FUN_00107b28. */
 extern unsigned long long FUN_002efa1c(void);
-extern int FUN_002efa34(int, unsigned int, unsigned int, unsigned int);
+extern int maskSourceHasAnyBit(int, unsigned int, unsigned int, unsigned int);
 extern int *arrayElementAddress_002efa50(int, unsigned int);
 /* Supplied declaration required: FUN_002efa58. */
 extern int bitFieldTest(int *);
@@ -49,7 +49,7 @@ unsigned long long FUN_002eab2a(int param_1,unsigned int param_2,int param_3,uns
   temp_v5 = param_4;
   temp_v1 = FUN_002efa1c();
   if ((int)temp_v1 != 0) {
-    temp_v0 = FUN_002efa34(param_1,(int)((unsigned long long)temp_v1 >> 0x20),0x4000000,0);
+    temp_v0 = maskSourceHasAnyBit(param_1,(int)((unsigned long long)temp_v1 >> 0x20),0x4000000,0);
     if (temp_v0 != 0) {
       FUN_0010788a(param_1);
     }

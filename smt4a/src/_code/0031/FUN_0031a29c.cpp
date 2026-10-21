@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int FUN_002c76c0(int);
+int scrCommMessageSetMode(int);
 int scrGetCommandFrame(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -20,7 +20,7 @@ extern int DAT_0057f590; /* 0x57f590 */
 /* Supplied declaration required: FUN_0021bdac. */
 extern unsigned int scrGetArg(unsigned int);
 extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: FUN_002c76c0. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: scrGetCommandFrame. */
 
 
@@ -34,7 +34,7 @@ void FUN_0031a29c(void)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  FUN_002c76c0(0);
+  scrCommMessageSetMode(0);
   temp_v1 = scrGetCommandFrame();
   temp_v0 = DAT_0057f590;
   if (temp_v1 == 0) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049a8b8` (_code @ 0x49a8b8, 0xec bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct EquipmentMenu;
 
 extern "C" {
 
@@ -16,9 +17,9 @@ extern int _ZN9Obj53604411enterState3Ev(...); /* 0x497250 */
 extern int FUN_00497290(...); /* 0x497290 */
 extern int FUN_00498594(...); /* 0x498594 */
 extern int FUN_00498ac0(...); /* 0x498ac0 */
-extern int FUN_00499390(...); /* 0x499390 */
+extern int shopUpdateCharonRequestTransition(...); /* 0x499390 */
 extern int FUN_004995b0(...); /* 0x4995b0 */
-extern int FUN_00499e00(...); /* 0x499e00 */
+extern void itemMenuHandleSelectionInput(EquipmentMenu *);
 extern int FUN_00499fdc(...); /* 0x499fdc */
 extern int FUN_0049a2b4(...); /* 0x49a2b4 */
 extern int FUN_0049b00c(...); /* 0x49b00c */
@@ -60,7 +61,7 @@ void FUN_0049a8b8(int param_1)
   *(unsigned int *)(param_1 + 0x58) = 0;
   *(romwright_code **)(param_1 + 0x5c) = FUN_0049bd20;
   *(unsigned int *)(param_1 + 0x60) = 0;
-  *(romwright_code **)(param_1 + 100) = FUN_00499e00;
+  *(romwright_code **)(param_1 + 100) = (romwright_code *)itemMenuHandleSelectionInput;
   *(unsigned int *)(param_1 + 0x68) = 0;
   *(romwright_code **)(param_1 + 0x6c) = FUN_00499fdc;
   *(unsigned int *)(param_1 + 0x70) = 0;
@@ -72,7 +73,7 @@ void FUN_0049a8b8(int param_1)
   *(unsigned int *)(param_1 + 0x88) = 0;
   *(romwright_code **)(param_1 + 0x8c) = FUN_0049b00c;
   *(unsigned int *)(param_1 + 0x90) = 0;
-  *(romwright_code **)(param_1 + 0x94) = FUN_00499390;
+  *(romwright_code **)(param_1 + 0x94) = shopUpdateCharonRequestTransition;
   *(unsigned int *)(param_1 + 0x98) = 0;
   *(unsigned int *)(param_1 + 0xc4) = 0x497044;
   *(unsigned int *)(param_1 + 200) = 0;

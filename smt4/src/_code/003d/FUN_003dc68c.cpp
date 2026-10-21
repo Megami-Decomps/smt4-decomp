@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002276f8(int);
-int FUN_00297468(unsigned char [128], int, int);
+int asdLoadFileAsyncSimple(unsigned char [128], int, int);
 int libc_strcmp(...);
 int textFormatBuffer(...);
 int libc_strcpy(...);
@@ -33,9 +33,9 @@ extern unsigned int DAT_00435d10; /* 0x435d10 */
 
 /* Supplied declaration required: FUN_002276f8. */
 extern unsigned int FUN_00246644(unsigned int, unsigned int, unsigned int);
-extern int FUN_0024a808(int);
+extern int keyedRecordFindByName(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: libc_strcmp. */
 extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
@@ -108,9 +108,9 @@ unsigned int FUN_003dc68c(int param_1)
               temp_v0 = param_1 + temp_v3 * 0x8c;
               temp_v4 = FUN_002522e0(temp_v5,0x2f);
               libc_strcpy(temp_v0 + 0x2398,temp_v4 + 1);
-              temp_v4 = FUN_0024a808(temp_v0 + 0x2398);
+              temp_v4 = keyedRecordFindByName(temp_v0 + 0x2398);
               if (temp_v4 == 0xff) {
-                FUN_00297468(temp_v5,temp_v0 + 0x2394,0);
+                asdLoadFileAsyncSimple(temp_v5,temp_v0 + 0x2394,0);
                 *(unsigned char *)(temp_v0 + 0x2418) = *(unsigned char *)(temp_v0 + 0x2418) | 1;
               }
             }

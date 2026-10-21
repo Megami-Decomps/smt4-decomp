@@ -27,7 +27,7 @@ struct Owner {
     /* 0x590 */ Child *child;
 };
 
-void FUN_003aabd8(u8 *list);
+void indexedSlotsClear(u8 *list);
 s32 jobStop(u32 job, s32 arg);
 
 /* Releases the child, clears the list, runs the owner's stop handler and stops its job. */
@@ -39,7 +39,7 @@ void FUN_003a7254(Owner *owner)
         child->vtable->release(child);
         owner->child = NULL;
     }
-    FUN_003aabd8(owner->list);
+    indexedSlotsClear(owner->list);
     owner->vtable->stop(owner);
     jobStop(owner->job, 0);
 }

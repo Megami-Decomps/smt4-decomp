@@ -6,12 +6,12 @@ extern "C" {
 
 int textFormatBuffer(...);
 int libc_strncmp(...);
-int FUN_002804b0(unsigned char [128], int, int);
+int asdLoadFileAsyncSimple(unsigned char [128], int, int);
 int wstrlen(...);
 int libc_strcpy(...);
 int sysMemClear(...);
 int libc_strcmp(...);
-int FUN_004f612c(int);
+int btlCameraFinishTransition(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,13 +28,13 @@ extern unsigned int DAT_00573804; /* 0x573804 */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: libc_strncmp. */
 extern unsigned int FUN_002282c8(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: libc_strcmp. */
 extern int findRecordByKey(int);
-/* Supplied declaration required: FUN_004f612c. */
+/* Supplied declaration required: btlCameraFinishTransition. */
 
 
 unsigned int FUN_004f716c(int param_1)
@@ -77,7 +77,7 @@ unsigned int FUN_004f716c(int param_1)
                 piVar4 = temp_v6;
                 libc_strcmp(piVar4,temp_v3);
                 if (piVar4 == (int *)0x0) {
-                  FUN_004f612c(param_1);
+                  btlCameraFinishTransition(param_1);
                   temp_v1 = FUN_002282c8(temp_v2 & 0xff,7,0);
                   *(unsigned int *)(param_1 + 0x33a8) = temp_v1;
                   *(char *)(param_1 + 0x33ac) = (char)temp_v2;
@@ -112,7 +112,7 @@ unsigned int FUN_004f716c(int param_1)
               libc_strcpy(temp_v0 + 0x1f64,temp_v3 + 1);
               temp_v3 = findRecordByKey(temp_v0 + 0x1f64);
               if (temp_v3 == 0xff) {
-                FUN_002804b0(temp_v5,temp_v0 + 0x1f60,1);
+                asdLoadFileAsyncSimple(temp_v5,temp_v0 + 0x1f60,1);
                 *(unsigned char *)(temp_v0 + 0x1fe4) = *(unsigned char *)(temp_v0 + 0x1fe4) | 1;
               }
             }

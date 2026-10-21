@@ -8,7 +8,7 @@ int FUN_002505c0(...);
 int FUN_00250680(...);
 int FUN_00250720(void);
 int FUN_002551ac(int, unsigned int, int, int, int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
-int FUN_0026e61c(...);
+int objectFlagSetBit(...);
 int btlMainFindEntryByListedId(int, int);
 int btlGetMainState(void);
 int FUN_003ddbcc(...);
@@ -41,7 +41,7 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 /* Supplied declaration required: FUN_00250680. */
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_002551ac. */
-/* Supplied declaration required: FUN_0026e61c. */
+/* Supplied declaration required: objectFlagSetBit. */
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
@@ -77,7 +77,7 @@ unsigned int FUN_002177e8(void)
   else {
     temp_v0 = gameGetUnitRecord(temp_v0 - 0x6d);
     *(unsigned short *)(temp_v0 + 0x2a) = 0;
-    FUN_0026e61c(temp_v0,1);
+    objectFlagSetBit(temp_v0,1);
     FUN_003ddc70(0,temp_v1,0xf);
   }
   FUN_002505c0(0,temp_v1,0x1000178,0,0,0,0);

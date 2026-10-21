@@ -4,7 +4,10 @@
 #include "common.h"
 
 struct ResourceHandles {
-    /* 0x00 */ void *primary;
+    /* 0x00 */ union {
+        void *primary;
+        u8 operationActive;
+    };
     /* 0x04 */ void *secondary;
 };
 

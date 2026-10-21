@@ -12,7 +12,7 @@ typedef struct EventCommandState {
 extern EventCommandState *g_eventCommand;
 s32 scrGetCommandFrame(void);
 s32 scrGetArg(u32 index);
-void FUN_00259324(u32 color, s32 frames, s32 a, f32 scale);
+void eventSetUnderMessageFade(u32 color, s32 frames, s32 a, f32 scale);
 
 /* Script command: on the first frame starts a 10-frame fade (to 0xff or 0xffffffff by argument 0); finishes once the state's two counters match. */
 u8 FUN_001ed55c(void)
@@ -20,7 +20,7 @@ u8 FUN_001ed55c(void)
     if (scrGetCommandFrame() == 0) {
         u32 color = scrGetArg(0) == 0 ? 0xff : 0xffffffff;
 
-        FUN_00259324(color, 10, 0, 1.0f);
+        eventSetUnderMessageFade(color, 10, 0, 1.0f);
         return 0;
     }
     return g_eventCommand->current == g_eventCommand->target;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match5_TextureAttachment.h"
 
 extern "C" {
 
@@ -20,8 +21,8 @@ extern EffObject *FUN_002b4078(u32 owner);
 extern int FUN_0035105c(EffObject *effect, u32 owner, u32 kind);
 extern int effTlpReplace(EffObject *effect, u32 *params);
 extern int objResourceReplace(EffObject *effect, u32 *params);
-extern int FUN_00390570(EffObject *effect, u32 *params);
-extern int FUN_003a1acc(EffObject *effect, u32 *params);
+extern void FUN_00390570(TextureAttachment *effect, const void *image);
+extern int textureAttachmentSetEffectImage(EffObject *effect, u32 *params);
 extern int FUN_003b9138(EffObject *effect, u32 value);
 extern int effParticleRebuildHandles(EffObject *effect, u32 *params);
 extern int effParticleParamRebuildHandles3c(EffObject *effect, u32 *params);
@@ -36,7 +37,7 @@ void effHolderSetParams(EffHolder *holder, u32 kind, u32 *params)
     switch (kind) {
     case 1:
         FUN_0035105c(holder->effect, holder->owner, kind);
-        FUN_00390570(holder->effect, params);
+        FUN_00390570(reinterpret_cast<TextureAttachment *>(holder->effect), params);
         break;
     case 2:
         FUN_0035105c(holder->effect, holder->owner, kind);
@@ -58,7 +59,7 @@ void effHolderSetParams(EffHolder *holder, u32 kind, u32 *params)
         break;
     case 9:
         FUN_0035105c(holder->effect, holder->owner, kind);
-        FUN_003a1acc(holder->effect, params);
+        textureAttachmentSetEffectImage(holder->effect, params);
         break;
     }
     holder->effect->kind = kind;

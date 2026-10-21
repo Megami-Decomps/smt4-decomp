@@ -10,7 +10,7 @@ int FUN_004102d8(int, int, int, unsigned int);
 extern unsigned char LAB_004fdde4; /* 0x4fdde4 */
 extern unsigned char LAB_004fddec; /* 0x4fddec */
 extern int g_btlActionReflect; /* 0x5712f0 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_004102d8. */
@@ -25,7 +25,7 @@ int FUN_004fdcd8(short param_1,unsigned int param_2,unsigned short param_3,int p
   int temp_v0;
   unsigned char *puVar2;
   
-  temp_v0 = FUN_004f5710(DAT_00573808,param_8);
+  temp_v0 = FUN_004f5710(g_btlAux,param_8);
   if (temp_v0 != 0) {
     temp_v0 = g_btlActionReflect;
     FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002bed3c(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
-int FUN_003a9440(...);
+int scrollMenuDrawVisibleEntries(...);
 int FUN_003a9648(...);
 
 typedef struct fn_003a8884_arg0 fn_003a8884_arg0;
@@ -36,7 +36,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_003a9440. */
+/* Supplied declaration required: scrollMenuDrawVisibleEntries. */
 /* Supplied declaration required: FUN_003a9648. */
 
 
@@ -52,7 +52,7 @@ void FUN_003a8884(fn_003a8884_arg0 *param_1)
     }
     else {
       *(unsigned int *)&param_1->field_0x594 = 0x1f;
-      FUN_003a9440(param_1);
+      scrollMenuDrawVisibleEntries(param_1);
     }
     FUN_002c198c(g_titleScene);
     FUN_002c18e4(g_titleScene);

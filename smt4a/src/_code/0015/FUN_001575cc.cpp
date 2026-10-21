@@ -7,7 +7,7 @@ extern "C" {
 int modelCmdAppendPacked(int, int, int, int);
 int FUN_00158b2c(...);
 int FUN_00158b88(unsigned char [24]);
-int FUN_00158bf8(unsigned char [24]);
+int gfxCombinerStateInitialize(unsigned char [24]);
 int FUN_0015fcec(unsigned char [24], unsigned char *);
 int FUN_00169d8c(...);
 int FUN_0016c744(unsigned int);
@@ -26,16 +26,16 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_001546e8(unsigned int);
+extern int stateValuesGetBySelector(unsigned int);
 /* Supplied declaration required: modelCmdAppendPacked. */
 /* Supplied declaration required: FUN_00158b2c. */
 /* Supplied declaration required: FUN_00158b88. */
-/* Supplied declaration required: FUN_00158bf8. */
+/* Supplied declaration required: gfxCombinerStateInitialize. */
 /* Supplied declaration required: FUN_0015fcec. */
 /* Supplied declaration required: FUN_00169d8c. */
 extern int FUN_00169db4(unsigned int);
 /* Supplied declaration required: FUN_0016c744. */
-extern int FUN_001869c4(unsigned int);
+extern int asdGxPresetsGetEnable(unsigned int);
 /* Supplied declaration required: FUN_00187a84. */
 /* Supplied declaration required: FUN_00187d90. */
 /* Supplied declaration required: FUN_0018a9bc. */
@@ -209,7 +209,7 @@ LAB_0015783c:
   *(unsigned int *)(param_1 + 0x118c) = *(unsigned int *)(param_1 + 0x5ec);
   *(unsigned int *)(param_1 + 0x1190) = *(unsigned int *)(param_1 + 0x5f0);
   *(unsigned int *)(param_1 + 0x1194) = *(unsigned int *)(param_1 + 0x5f4);
-  FUN_00158bf8(temp_v12);
+  gfxCombinerStateInitialize(temp_v12);
   FUN_00158b88(temp_v12);
   FUN_00158b2c(temp_v13);
   FUN_00158b2c(temp_v14);
@@ -241,9 +241,9 @@ LAB_0015783c:
   temp_v5 = temp_v5 - 1;
   temp_v6 = FUN_00169db4(temp_v7);
   temp_v4 = temp_v6 - 1;
-  temp_v6 = FUN_001869c4(temp_v7);
+  temp_v6 = asdGxPresetsGetEnable(temp_v7);
   if ((temp_v6 != 0x500) && (temp_v6 == 0x501)) {
-    temp_v6 = FUN_001546e8(temp_v7);
+    temp_v6 = stateValuesGetBySelector(temp_v7);
     if (temp_v6 != 0) {
       temp_v3 = temp_v3 << 1;
     }

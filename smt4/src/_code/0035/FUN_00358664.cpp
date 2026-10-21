@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern unsigned int DAT_004e62a8; /* 0x4e62a8 */
+extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x4e62a8 */
 
 extern unsigned int nn_cec_CTR_MessageBox_ReadOutBoxIndex(unsigned int);
 extern unsigned int nn_cec_CTR_MessageBox_WriteBoxInfo(unsigned int, int, unsigned int, unsigned int *);
@@ -26,7 +26,7 @@ int FUN_00358664(int *param_1,int param_2)
   int temp_v1;
   unsigned int temp_v2 [2];
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62a8);
+  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxCriticalSection);
   temp_v1 = param_1[1];
   if (temp_v1 != 0) {
     temp_v2[0] = 0;
@@ -48,10 +48,10 @@ int FUN_00358664(int *param_1,int param_2)
         }
       }
     }
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62a8);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return temp_v1;
   }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62a8);
+  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
   return -0x377ef416;
 }
 

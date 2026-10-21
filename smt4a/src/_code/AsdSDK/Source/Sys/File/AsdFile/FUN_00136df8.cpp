@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0014287c(void);
 int FUN_00146720(void);
-int FUN_001467e0(int, int, int);
+int resourceCallDefaultOptions(int, int, int);
 int FUN_00146808(void);
 int FUN_0014685c(int, int, unsigned int, unsigned int);
 int FUN_0014a930(int *, int, int);
@@ -27,7 +27,7 @@ extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
 
 /* Supplied declaration required: FUN_0014287c. */
 /* Supplied declaration required: FUN_00146720. */
-/* Supplied declaration required: FUN_001467e0. */
+/* Supplied declaration required: resourceCallDefaultOptions. */
 /* Supplied declaration required: FUN_00146808. */
 /* Supplied declaration required: FUN_0014685c. */
 /* Supplied declaration required: FUN_0014a930. */
@@ -53,7 +53,7 @@ void FUN_00136df8(void)
   temp_v2 = in_r3;
   FUN_00146720();
   temp_v0 = 0x10;
-  FUN_001467e0(0x10,0x10,1);
+  resourceCallDefaultOptions(0x10,0x10,1);
   temp_v1 = 0x100;
   temp_v2 = 1;
   asdMemoryAlloc(0x100,0x100,0,temp_v0);

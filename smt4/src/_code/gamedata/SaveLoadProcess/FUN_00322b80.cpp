@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001ec9d0(...);
 int gameDataFlagsSet(...);
-int FUN_00259294(...);
+int gameDataFlagsSetBits(...);
 int gameDataBlocksAddFlags(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -25,7 +25,7 @@ extern int FUN_003112ec(...); /* 0x3112ec */
 extern unsigned char LAB_00322cf0; /* 0x322cf0 */
 extern unsigned char LAB_00322cfc; /* 0x322cfc */
 extern unsigned char LAB_00322d08; /* 0x322d08 */
-extern int FUN_00324b74(...); /* 0x324b74 */
+extern int jobTeardownFlagsAndWork(...); /* 0x324b74 */
 extern unsigned char g_byteSettings; /* 0x43e2f0 */
 extern unsigned char DAT_0043e2f1; /* 0x43e2f1 */
 extern unsigned char DAT_0043e2f2; /* 0x43e2f2 */
@@ -36,7 +36,7 @@ extern unsigned int DAT_0043e2f8; /* 0x43e2f8 */
 
 /* Supplied declaration required: FUN_001ec9d0. */
 /* Supplied declaration required: gameDataFlagsSet. */
-/* Supplied declaration required: FUN_00259294. */
+/* Supplied declaration required: gameDataFlagsSetBits. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemAlloc. */
@@ -56,7 +56,7 @@ unsigned int FUN_00322b80(void)
   puVar2 = (unsigned int *)0x100;
   asdMemAlloc(0x100,0x100,0,0x18,1);
   gameDataBlocksAddFlags(1);
-  FUN_00259294(1);
+  gameDataFlagsSetBits(1);
   gameDataFlagsSet(1);
   puVar2[2] = 0;
   temp_v1 = gameDataBlocksGetSaveData();
@@ -73,7 +73,7 @@ unsigned int FUN_00322b80(void)
   DAT_0043e2f1 = 0;
   DAT_0043e2f2 = 0;
   puVar4 = &LAB_00322cf0;
-  asdProcessCreateSimple(&LAB_00322cf0,2,0,0,FUN_002ef8e4,FUN_00324b74,puVar2);
+  asdProcessCreateSimple(&LAB_00322cf0,2,0,0,FUN_002ef8e4,jobTeardownFlagsAndWork,puVar2);
   *puVar2 = (unsigned int)puVar4;
   FUN_001ec9d0();
   taskCreateDraw(&LAB_00322cfc,0x81,0,0,FUN_003112ec,0,0,*puVar2);

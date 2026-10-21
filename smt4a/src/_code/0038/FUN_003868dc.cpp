@@ -9,7 +9,7 @@ int FUN_001bc124(void);
 int FUN_0025ef68(int, int, int);
 int FUN_00294c28(void);
 int FUN_00295108(int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002b80b8(void);
 int FUN_00317af8(float *, unsigned int [12], int);
 int FUN_00325998(int, int);
@@ -52,7 +52,7 @@ extern int padButtonIsPressed(unsigned int);
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00294c28. */
 /* Supplied declaration required: FUN_00295108. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b80b8. */
 /* Supplied declaration required: FUN_00317af8. */
 /* Supplied declaration required: FUN_00325998. */
@@ -236,7 +236,7 @@ void FUN_003868dc(int param_1)
       temp_v2 = FUN_004a0e38(2,5);
       if ((temp_v2 != 0) && (!temp_v5)) {
         temp_v8 = temp_v7;
-        FUN_002b5cb4();
+        distSpatial();
         temp_v12 = *(float *)(g_lmapScene + 0x160) - temp_v7;
         *(float *)(g_lmapScene + 0x160) = temp_v12;
         temp_v7 = temp_v8;
@@ -252,7 +252,7 @@ void FUN_003868dc(int param_1)
       temp_v8 = temp_v7;
       if (temp_v2 != 0) {
         if ((!temp_v5) && (temp_v2 = gameDataFlagTestBit(0x85), temp_v8 = temp_v7, temp_v2 == 0)) {
-          FUN_002b5cb4();
+          distSpatial();
           temp_v2 = g_lmapScene;
           temp_v7 = *(float *)(g_lmapScene + 0x15c) - temp_v7;
           *(float *)(g_lmapScene + 0x15c) = temp_v7;
@@ -267,7 +267,7 @@ void FUN_003868dc(int param_1)
       }
       else {
         if (temp_v10 < *(float *)(g_lmapScene + 0x15c)) {
-          FUN_002b5cb4();
+          distSpatial();
           *(float *)(g_lmapScene + 0x15c) = *(float *)(g_lmapScene + 0x15c) - temp_v7;
         }
         temp_v7 = *(float *)(g_lmapScene + 0x15c);
@@ -276,7 +276,7 @@ void FUN_003868dc(int param_1)
         }
         *(float *)(g_lmapScene + 0x15c) = temp_v7;
       }
-      FUN_002b5cb4();
+      distSpatial();
       temp_v8 = temp_v8 * 0.5f;
       temp_v7 = *(float *)(temp_v0 + 0xde8) + temp_v8;
       *(float *)(temp_v0 + 0xde8) = temp_v7;

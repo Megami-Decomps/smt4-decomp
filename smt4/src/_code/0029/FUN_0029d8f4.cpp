@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0024d7d0(int, unsigned int);
+int btlBuildUnitSnapshot(int, unsigned int);
 
 extern int DAT_0044e144; /* 0x44e144 */
 
-/* Supplied declaration required: FUN_0024d7d0. */
+/* Supplied declaration required: btlBuildUnitSnapshot. */
 
 
 void FUN_0029d8f4(unsigned int param_1,int param_2,unsigned char param_3)
@@ -19,7 +19,7 @@ void FUN_0029d8f4(unsigned int param_1,int param_2,unsigned char param_3)
   unsigned char temp_v1;
   
   temp_v0 = DAT_0044e144;
-  FUN_0024d7d0(DAT_0044e144 + 0x1300,param_1);
+  btlBuildUnitSnapshot(DAT_0044e144 + 0x1300,param_1);
   if (param_2 == 0) {
     temp_v1 = 2;
   }

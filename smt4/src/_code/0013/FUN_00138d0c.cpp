@@ -43,7 +43,7 @@ extern unsigned int DAT_004efd90; /* 0x4efd90 */
 extern unsigned int DAT_004efd94; /* 0x4efd94 */
 extern unsigned int DAT_004efd98; /* 0x4efd98 */
 
-extern int FUN_00145310(int, unsigned int, unsigned int);
+extern int resourceGetRelativeElement(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0014ce2c. */
 /* Supplied declaration required: FUN_0014dcd8. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -137,7 +137,7 @@ unsigned char FUN_00138d0c(float *param_1,int param_2,unsigned int param_3,unsig
   temp_v16 = temp_v6;
   temp_v17 = temp_v6;
   temp_v18 = temp_v6;
-  temp_v0 = FUN_00145310(param_2,param_3,param_4);
+  temp_v0 = resourceGetRelativeElement(param_2,param_3,param_4);
   temp_v1 = *(int *)(temp_v0 + 0x1c);
   if (temp_v1 != 0) {
     temp_v3 = temp_v1 + temp_v0 + 0x1c;

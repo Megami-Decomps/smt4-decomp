@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a4908(...);
 int FUN_002ab92c(...);
 int FUN_00364e28(...);
-int FUN_003e2dd0(...);
+int grRenderTargetClear(...);
 int nw_gfx_RenderContext_ResetState_2B7478(...);
 
 typedef struct fn_0034bb54_arg1 fn_0034bb54_arg1;
@@ -44,7 +44,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_002a4908. */
 /* Supplied declaration required: FUN_002ab92c. */
 /* Supplied declaration required: FUN_00364e28. */
-/* Supplied declaration required: FUN_003e2dd0. */
+/* Supplied declaration required: grRenderTargetClear. */
 /* Supplied declaration required: nw_gfx_RenderContext_ResetState_2B7478. */
 
 
@@ -66,7 +66,7 @@ void FUN_0034bb54(int param_1,fn_0034bb54_arg1 *param_2)
   temp_v4 = 0x3f800000;
   temp_v5 = 0x3f800000;
   temp_v6 = 0x3f800000;
-  FUN_003e2dd0(param_2,0x4000,&temp_v3);
+  grRenderTargetClear(param_2,0x4000,&temp_v3);
   temp_v0 = *(int *)(param_2->field_0xac + *(int *)(param_1 + 8) * 4);
   param_2->field_0xb8 = *(int *)(param_1 + 8);
   if (param_2->field_0xa4 != temp_v0) {

@@ -16,7 +16,7 @@ struct Obj464cb0TitleScene {
 };
 
 extern "C" {
-void FUN_002b703c(void);
+void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
 void FUN_00248ae8(s32 arg);
 extern Obj464cb0TitleScene *g_titleScene;
@@ -29,7 +29,7 @@ void Obj464cb0::post0f0107()
 {
     Obj464cb0Menu *menu;
 
-    FUN_002b703c();
+    cursorResetFromParam();
     menu = &g_titleScene->menu;
     DAT_004729e0[DAT_004729e4] = (menu->words[menu->selection] & 0xfffff0ff) | (u32)this;
     DAT_004729e0[DAT_004729e4 + 1] = 0xf0107;

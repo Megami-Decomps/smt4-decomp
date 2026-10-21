@@ -6,12 +6,12 @@ extern "C" {
 
 int recordClampCurrentCount(...);
 int FUN_002505c0(int, int, int, int, int, int, int);
-int FUN_00262f68(...);
+int objectFlagsClear(...);
 int rt_memclr(...);
 int __aeabi_memset4(...);
 int memClear(...);
 int FUN_003369e0(int, unsigned int, int);
-int FUN_00336a70(int);
+int objectTotalAdd(int);
 int FUN_00337a34(int);
 int FUN_003390dc(int, int, int);
 int FUN_00394b0c(void);
@@ -32,7 +32,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: recordClampCurrentCount. */
 /* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_00262f68. */
+/* Supplied declaration required: objectFlagsClear. */
 extern int btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
 extern int gameGetSlotTable(void);
@@ -40,7 +40,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_003369e0. */
-/* Supplied declaration required: FUN_00336a70. */
+/* Supplied declaration required: objectTotalAdd. */
 /* Supplied declaration required: FUN_00337a34. */
 /* Supplied declaration required: FUN_003390dc. */
 /* Supplied declaration required: FUN_00394b0c. */
@@ -125,7 +125,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
       }
       if (param_3 != 0 && temp_v2 != 0) {
         if (0 < (int)puVar6[0x9d]) {
-          FUN_00336a70(temp_v1);
+          objectTotalAdd(temp_v1);
         }
         temp_v2 = puVar6[0x9c];
         do {
@@ -198,13 +198,13 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
       else if (puVar6[0x9f] != 0) {
         temp_v5 = flagWordTestBit(puVar6[0x9f],10);
         if (temp_v5 != 0) {
-          FUN_00262f68(puVar6[0x9f],0x10);
-          FUN_00262f68(puVar6[0x9f],0x20);
-          FUN_00262f68(puVar6[0x9f],0x40);
-          FUN_00262f68(puVar6[0x9f],0x80);
-          FUN_00262f68(puVar6[0x9f],0x100);
-          FUN_00262f68(puVar6[0x9f],0x200);
-          FUN_00262f68(puVar6[0x9f],8);
+          objectFlagsClear(puVar6[0x9f],0x10);
+          objectFlagsClear(puVar6[0x9f],0x20);
+          objectFlagsClear(puVar6[0x9f],0x40);
+          objectFlagsClear(puVar6[0x9f],0x80);
+          objectFlagsClear(puVar6[0x9f],0x100);
+          objectFlagsClear(puVar6[0x9f],0x200);
+          objectFlagsClear(puVar6[0x9f],8);
         }
         if ((*(unsigned short *)((int)puVar6 + 0x1c6) & 0x400) != 0) {
           *(unsigned short *)((int)puVar6 + 0x1c6) = *(unsigned short *)((int)puVar6 + 0x1c6) & 0xfc07;

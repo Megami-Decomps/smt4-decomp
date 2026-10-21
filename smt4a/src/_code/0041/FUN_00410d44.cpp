@@ -8,7 +8,7 @@ int FUN_003d54f8(int, int);
 int FUN_003e503c(void);
 int FUN_003f1b3c(int, unsigned int, int, int *);
 int FUN_0047f4cc(unsigned int);
-int FUN_004feef8(int, int, int, int);
+void btlReflectCreateKind43(int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_004fef70(int, int, int, int);
 int rt_memcpy_w(unsigned int **, unsigned char *, int);
 
@@ -30,7 +30,7 @@ extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_003f1b3c. */
 /* Supplied declaration required: FUN_0047f4cc. */
-/* Supplied declaration required: FUN_004feef8. */
+/* Supplied declaration required: btlReflectCreateKind43. */
 /* Supplied declaration required: FUN_004fef70. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -117,8 +117,7 @@ void FUN_00410d44(int param_1)
         } while (temp_v4 < 7);
         FUN_0047f4cc(temp_v12[0]);
         FUN_004fef70(0,0,temp_v1,temp_v11);
-        temp_v10 = (unsigned int *)0x1;
-        FUN_004feef8(0,0x1e,0,temp_v1);
+        btlReflectCreateKind43(0,0x1e,0,temp_v1,1);
         temp_v0 = *(int *)(param_1 + 0x10) + 1;
         *(int *)(param_1 + 0x10) = temp_v0;
         return;

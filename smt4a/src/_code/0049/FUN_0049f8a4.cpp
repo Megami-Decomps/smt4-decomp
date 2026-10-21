@@ -21,7 +21,7 @@ extern int gameGetOptions(void);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int gameSlotTableFindFree(void);
-extern int FUN_001b34b8(void);
+extern int gameOptionsClassifyMode(void);
 extern int FUN_001bd118(void);
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004186e0. */
@@ -147,9 +147,9 @@ LAB_0049f9a4:
       }
     }
   }
-  temp_v2 = FUN_001b34b8();
+  temp_v2 = gameOptionsClassifyMode();
   if ((temp_v2 == 2) &&
-     ((((temp_v2 = FUN_001b34b8(), temp_v2 == 0 || (temp_v2 == 1)) || (temp_v2 != 2)) ||
+     ((((temp_v2 = gameOptionsClassifyMode(), temp_v2 == 0 || (temp_v2 == 1)) || (temp_v2 != 2)) ||
       ((temp_v2 = gameGetOptions(), (*(unsigned short *)(temp_v2 + 0x60) & 2) == 0 &&
        (*(short *)(temp_v2 + 0x2a) != 0)))))) {
     temp_v3 = gameGetOptions();

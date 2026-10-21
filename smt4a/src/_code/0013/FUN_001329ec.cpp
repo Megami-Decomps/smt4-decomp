@@ -1,33 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001329ec` (_code @ 0x1329ec, 0x42 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads the node link and assigns the saved iterator registers differently. */
+#include "common.h"
 
-extern "C" {
+struct ListValue;
+struct ListValueVtable {
+    void (*destroy)(ListValue* value);
+};
 
-typedef int romwright_code(...);
+struct ListValue {
+    ListValueVtable* vtable; // 0x00
+};
 
-void FUN_001329ec(int *param_1,int param_2,int *param_3)
+struct ListNode {
+    ListNode* next;         // 0x00
+    ListNode* previous;     // 0x04
+    ListValue value;        // 0x08
+};
 
+struct Collection {
+    u32 unk00;              // 0x00
+    ListNode* freeNodes;    // 0x04
+    u8 unk08[8];            // 0x08
+    ListNode* end;          // 0x10
+    u32 count;             // 0x14
+};
+
+// Erase an element, destroy its value, and recycle the node.
+extern "C" void FUN_001329ec(ListNode** result, Collection* collection, ListNode** current)
 {
-  unsigned int *puVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  piVar2 = (int *)*param_3;
-  if (piVar2 == *(int **)(param_2 + 0x10)) {
-    *param_1 = (int)*(int **)(param_2 + 0x10);
-    return;
-  }
-  temp_v0 = *piVar2;
-  *(int *)piVar2[1] = *piVar2;
-  *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) - 1;
-  (*(romwright_code *)**(unsigned int **)(*param_3 + 8))();
-  puVar1 = (unsigned int *)*param_3;
-  *puVar1 = *(unsigned int *)(param_2 + 4);
-  *(unsigned int **)(param_2 + 4) = puVar1;
-  *param_1 = temp_v0;
-  return;
-}
+    ListNode* node = *current;
+    if (node == collection->end) {
+        *result = collection->end;
+        return;
+    }
 
-} /* extern "C" */
+    ListNode* next = node->next;
+    node->previous->next = node->next;
+    (*current)->next->previous = (*current)->previous;
+    --collection->count;
+    ListValue* value = &(*current)->value;
+    value->vtable->destroy(value);
+    node = *current;
+    node->next = collection->freeNodes;
+    collection->freeNodes = node;
+    *result = next;
+}

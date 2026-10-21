@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001386e8(int);
+int gameDataBlocksReleaseHold(int);
 int gameDataBlocksGetSaveData(void);
 int sysPlaySe(...);
 int wordPairCopy(unsigned int, unsigned int);
@@ -21,8 +21,8 @@ int FUN_0033449c(...);
 int FUN_0034aac8(...);
 int gameGlobalsQueueValues(...);
 int FUN_0038b5fc(...);
-int FUN_003a76a8(...);
-int FUN_003c1490(int, int);
+int messageMainSetFlag(...);
+unsigned int saveLoadStartSave(int, unsigned char);
 int gameFlagSetValue(int, int);
 int FUN_00408184(int, int);
 int rt_memcpy_w(...);
@@ -37,12 +37,12 @@ extern signed char DAT_00588e16; /* 0x588e16 */
 extern signed char DAT_00588e17; /* 0x588e17 */
 extern unsigned int DAT_00588e28; /* 0x588e28 */
 
-/* Supplied declaration required: FUN_001386e8. */
+/* Supplied declaration required: gameDataBlocksReleaseHold. */
 /* Supplied declaration required: gameDataBlocksGetSaveData. */
 /* Supplied declaration required: sysPlaySe. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: wordPairCopy. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern unsigned int configGetSettings(void);
 /* Supplied declaration required: FUN_002299b0. */
 /* Supplied declaration required: FUN_0023b45c. */
@@ -63,9 +63,9 @@ extern int saveLoadThreadHasResult(void);
 /* Supplied declaration required: gameGlobalsQueueValues. */
 extern int byteTripleGetV1(void);
 /* Supplied declaration required: FUN_0038b5fc. */
-/* Supplied declaration required: FUN_003a76a8. */
+/* Supplied declaration required: messageMainSetFlag. */
 extern int byteArr5Get4(void);
-/* Supplied declaration required: FUN_003c1490. */
+/* Supplied declaration required: saveLoadStartSave. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -86,13 +86,13 @@ void FUN_0041de6c(int param_1)
     if (temp_v0 != 0) {
       return;
     }
-    temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x40));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x40));
     if (temp_v0 != 2) {
       return;
     }
     temp_v0 = FUN_002a4b74();
     if (temp_v0 != 0) {
-      FUN_001386e8(1);
+      gameDataBlocksReleaseHold(1);
       *(unsigned char *)(param_1 + 0xe) = 0;
       *(unsigned char *)(param_1 + 0x12) = 0;
       *(unsigned char *)(param_1 + 0xf) = 0;
@@ -100,7 +100,7 @@ void FUN_0041de6c(int param_1)
       return;
     }
     messageStateEndMode2();
-    FUN_003a76a8(0);
+    messageMainSetFlag(0);
     *(unsigned char *)(param_1 + 0xe) = 1;
     temp_v1 = gameDataBlocksGetTable();
     rt_memcpy_w(temp_v1,*(unsigned int *)(param_1 + 0x1c),0x80);
@@ -124,7 +124,7 @@ void FUN_0041de6c(int param_1)
     FUN_002c9104();
     FUN_00408184(0x20,1);
     temp_v0 = gameDataBlocksGetSaveData();
-    FUN_003c1490(*(int *)(param_1 + 0x2f8) + 1,*(unsigned char *)(temp_v0 + 2));
+    saveLoadStartSave(*(int *)(param_1 + 0x2f8) + 1,*(unsigned char *)(temp_v0 + 2));
     return;
   }
   temp_v0 = byteTripleGetV1();
@@ -170,7 +170,7 @@ void FUN_0041de6c(int param_1)
     }
     *(unsigned char *)(param_1 + 0xf) = 1;
     *(unsigned char *)(param_1 + 0x5c) = 1;
-    FUN_003a76a8(1);
+    messageMainSetFlag(1);
     sysPlaySe(0xa0);
   }
   if ((*(char *)(param_1 + 0x5c) != '\0') && (temp_v0 = objBStateAllowsAction(), temp_v0 != 0)) {
@@ -187,19 +187,19 @@ void FUN_0041de6c(int param_1)
     return;
   }
   if (*(int *)(param_1 + 0x2f8) < 1) {
-    temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x40));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x40));
     if (temp_v0 != 2) {
       return;
     }
     if (*(int *)(param_1 + 0x2f8) >= 1) {
       if ((*(char *)(param_1 + 0x13) != '\0') &&
-         (temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x40)), temp_v0 != 2)) {
+         (temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x40)), temp_v0 != 2)) {
         return;
       }
     }
   }
   else if ((*(char *)(param_1 + 0x13) != '\0') &&
-          (temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x40)), temp_v0 != 2)) {
+          (temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x40)), temp_v0 != 2)) {
     return;
   }
   temp_v0 = FUN_002a6464();

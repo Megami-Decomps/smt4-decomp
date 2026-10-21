@@ -10,7 +10,7 @@ typedef struct {
 } void_stack;
 
 extern int randBetween(int, unsigned int);
-extern unsigned int FUN_002c3124(unsigned int, int, unsigned int);
+extern unsigned int fileLoadSync(unsigned int, int, unsigned int);
 
 
 unsigned int FUN_0033c618(void)
@@ -49,7 +49,7 @@ unsigned int FUN_0033c618(void)
   do {
     temp_v2 = (unsigned int)temp_v6[temp_v4] * 0x10;
     if ((*(int *)(temp_v2 + 0x493830) == 0) && (*(char *)(temp_v2 + 0x493838) != '\0')) {
-      temp_v3 = FUN_002c3124(*(unsigned int *)(temp_v2 + 0x49382c),temp_v2 + 0x493834,0);
+      temp_v3 = fileLoadSync(*(unsigned int *)(temp_v2 + 0x49382c),temp_v2 + 0x493834,0);
       *(unsigned int *)(temp_v2 + 0x493830) = temp_v3;
     }
     temp_v4 = temp_v4 + 1;

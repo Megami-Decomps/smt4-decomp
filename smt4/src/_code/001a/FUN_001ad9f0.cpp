@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00186a48(void);
 int uiFadeDraw(int);
 int FUN_00197e34(void);
-int FUN_0029acc4(...);
+void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int FUN_002b93c8(...);
 int FUN_002ba12c(...);
 int FUN_002be5a4(...);
@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_00186a48. */
 /* Supplied declaration required: uiFadeDraw. */
 /* Supplied declaration required: FUN_00197e34. */
-/* Supplied declaration required: FUN_0029acc4. */
+/* Supplied declaration required: drawSkillCategoryLabel. */
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
@@ -135,7 +135,7 @@ unsigned int FUN_001ad9f0(void)
     FUN_002bf288(2,0x29,0x59,temp_v4,temp_v1,0x97);
     FUN_002bf288(2,0x29,0x51,temp_v4,temp_v1,0xa1);
     temp_v2 = FUN_002bf4f8(0x29,0x54);
-    FUN_0029acc4(temp_v0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,0xa6);
+    drawSkillCategoryLabel(temp_v0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,0xa6);
     temp_v2 = FUN_002bf4f8(0x29,0x55);
     temp_v3 = FUN_002bcddc(temp_v0,0);
     textFormatBuffer(temp_v8,&LAB_001add58,temp_v3);

@@ -4,7 +4,7 @@
 
 extern "C" {
 void *FUN_001858ec(int heap, int alignClass, int unk08, u32 size, u32 align, int fromFront, const char *tag);
-void FUN_0019dfe4(void *buffer, const void *callback, void *worker);
+void asdMemorySetReleaseCallback(void *buffer, const void *callback, void *worker);
 extern u8 LAB_0019eab0;
 
 /* The file worker's thread state; only its flag word is used here. */
@@ -34,7 +34,7 @@ void *asdFileAllocBuffer(AsdFileWorker *worker, AsdFileRequest *request)
         break;
     }
     if ((worker->flags & 1) != 0) {
-        FUN_0019dfe4(buffer, &LAB_0019eab0, worker);
+        asdMemorySetReleaseCallback(buffer, &LAB_0019eab0, worker);
     }
     return buffer;
 }

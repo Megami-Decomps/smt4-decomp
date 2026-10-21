@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_002a8a58(...);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int cameraSetViewMatrix(...);
 int FUN_002ba12c(...);
@@ -46,13 +46,13 @@ extern float DAT_004efd34; /* 0x4efd34 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_002a8a58. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002ba12c. */
 extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int FUN_002c15ac(unsigned int);
-extern unsigned int FUN_002c15d4(unsigned int);
+extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_002c1ac8. */
 /* Supplied declaration required: FUN_002c1b64. */
 
@@ -236,7 +236,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
     temp_v15 = temp_v18;
     temp_v4 = FUN_002c15ac(*(unsigned int *)(g_titleScene + 0x528));
     temp_v12 = (float)VectorUnsignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = FUN_002c15d4(*(unsigned int *)(g_titleScene + 0x528));
+    temp_v4 = asdGxPresetsGetByKind(*(unsigned int *)(g_titleScene + 0x528));
     temp_v7 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v17 < temp_v12) << 0x1f) |
             ((unsigned int)(temp_v17 == temp_v12) << 0x1e);
     temp_v8 = temp_v7 | ((unsigned int)((temp_v17 != temp_v17) || (temp_v12 != temp_v12)) << 0x1c);
@@ -335,7 +335,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
     }
     if (!romwright_subpiece_4_1_0(temp_v7 >> 0x1e,0)) {
       FUN_002b70cc();
-      FUN_002b7064();
+      phaseCosInterpolate();
     }
   }
   FUN_002c1ac8(puVar13,puVar14,puVar11,puVar12);

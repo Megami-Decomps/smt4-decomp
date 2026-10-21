@@ -9,7 +9,7 @@ typedef void (Scene3a::*Scene3aFunc)(void);
 
 #define SCENE3A_SLOTS 2
 
-/* Per-slot data FUN_0023360c searches (0x74 bytes). */
+/* Per-slot data flaggedValueHolderGetTotal searches (0x74 bytes). */
 typedef struct Scene3aSlotInfo {
     u8 unk00[0x74];
 } Scene3aSlotInfo;
@@ -37,7 +37,14 @@ enum {
 struct Scene3a {
     /* 0x00000 */ u8 unk00[4];
     /* 0x00004 */ s32 phase;                  /* index of the update callback to run */
-    /* 0x00008 */ u8 unk08[0x18];
+    union {
+        /* 0x00008 */ u8 unk08[0x18];
+        struct {
+            u8 unk08BeforePreview[0x16];
+            /* 0x0001E */ u8 requested;
+            /* 0x0001F */ u8 ready;
+        } preview;
+    };
     /* 0x00020 */ struct {
         Scene3aFunc func;                     /* member function pointer, 8 bytes */
     } updateFuncs[0x100];                     /* one per phase (count unknown) */
@@ -49,8 +56,16 @@ struct Scene3a {
     /* 0x00c94 */ Scene3aList lists[SCENE3A_SLOTS];
     /* 0x02c98 */ u8 unk2c98[0x1308c];
     /* 0x15d24 */ s32 state;                  /* SCENE3A_STATE_* */
-    /* 0x15d28 */ u8 unk15d28[0x20];
+    union {
+        /* 0x15d28 */ u8 unk15d28[0x20];
+        struct {
+            /* 0x15d28 */ u32 item;
+            u8 unk15d2c[0x1c];
+        } equipmentPreview;
+    };
     /* 0x15d48 */ void *modelManager;         /* destroyed when the scene stops */
+    /* 0x15d4c */ u8 unk15d4c[8];
+    /* 0x15d54 */ u32 selectedItem;
 };
 
 #endif

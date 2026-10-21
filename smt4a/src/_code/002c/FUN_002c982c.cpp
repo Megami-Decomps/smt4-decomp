@@ -7,7 +7,7 @@ extern "C" {
 int markerKindGetColor(int);
 int FUN_0024101c(int, short *);
 int FUN_002a7324(int);
-int FUN_00334214(unsigned char [42], int, int, int);
+int statusDisplayBindUnitRecord(unsigned char [42], int, int, int);
 int FUN_0036d318(...);
 int FUN_0037e09c(int);
 int FUN_003b076c(void);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0024101c. */
 /* Supplied declaration required: FUN_002a7324. */
 extern short *FUN_002c7e24(void);
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_0036d318. */
 /* Supplied declaration required: FUN_0037e09c. */
 /* Supplied declaration required: FUN_003b076c. */
@@ -74,7 +74,7 @@ void FUN_002c982c(int param_1)
                     temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
                     temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
                     temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
-                    FUN_00334214(temp_v5,1,0,temp_v0 + 0x4871);
+                    statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
                     FUN_0037e09c(1);
                     FUN_002a7324(1);
                   }
@@ -100,7 +100,7 @@ LAB_002c998c:
             temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
             temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
             temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
-            FUN_00334214(temp_v5,1,0,temp_v0 + 0x4871);
+            statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
             FUN_0037e09c(1);
             FUN_002a7324(1);
           }
@@ -112,7 +112,7 @@ LAB_002c998c:
           temp_v6 = *(unsigned short *)(temp_v0 + 0x485a);
           temp_v7 = *(unsigned short *)(temp_v0 + 0x485c);
           temp_v8 = *(unsigned short *)(temp_v0 + 0x485e);
-          FUN_00334214(temp_v5,1,0,temp_v0 + 0x4871);
+          statusDisplayBindUnitRecord(temp_v5,1,0,temp_v0 + 0x4871);
           FUN_002a7324(1);
         }
       }

@@ -8,7 +8,7 @@ int textFormatBuffer(...);
 int FUN_0013c884(...);
 int asdProcessCreateSimple(...);
 int asdMemoryAllocTracked(...);
-int FUN_001f474c(...);
+int asdEnvResetModelBank(...);
 int FUN_001ffba8(...);
 int sysMemClear(...);
 
@@ -27,7 +27,7 @@ extern int modelWorkDestroy(...); /* 0x38a184 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001f474c. */
+/* Supplied declaration required: asdEnvResetModelBank. */
 extern unsigned int asdMdlManagerCreateSecondList(romwright_code **, unsigned int);
 /* Supplied declaration required: FUN_001ffba8. */
 /* Supplied declaration required: sysMemClear. */
@@ -59,7 +59,7 @@ void FUN_003a6dec(unsigned int param_1,unsigned int param_2)
   }
   else {
     textFormatBuffer(&temp_v2,"battle/battle_map/e%03d_%02d.bcenv",puVar1[4],puVar1[5]);
-    FUN_001f474c(&temp_v2,0);
+    asdEnvResetModelBank(&temp_v2,0);
     *(unsigned char *)(puVar1 + 7) = 1;
     textFormatBuffer(&temp_v2,"battle/battle_map/b%03d_%02d.bam",puVar1[4],puVar1[5]);
     temp_v1 = asdMdlManagerCreateSecondList(&temp_v2,0x38);

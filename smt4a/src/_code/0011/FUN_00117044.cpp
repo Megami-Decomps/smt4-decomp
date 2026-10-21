@@ -10,8 +10,8 @@ int strDestroy(unsigned char [32]);
 int sharedRefHolderDestroy2(unsigned char [8]);
 int FUN_002fde5c(unsigned char [8]);
 int FUN_00302fec(...);
-int FUN_00303018(...);
-int FUN_00303028(unsigned char [8], int *);
+int streamWriterWriteWord(...);
+int streamWriteWordCopy(unsigned char [8], int *);
 
 /* stack frame of param_4: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -29,8 +29,8 @@ extern unsigned int FUN_002eb5c0(unsigned int);
 /* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002fde5c. */
 /* Supplied declaration required: FUN_00302fec. */
-/* Supplied declaration required: FUN_00303018. */
-/* Supplied declaration required: FUN_00303028. */
+/* Supplied declaration required: streamWriterWriteWord. */
+/* Supplied declaration required: streamWriteWordCopy. */
 
 
 void FUN_00117044(unsigned int param_1,int param_2,int param_3,unsigned int *param_4)
@@ -60,16 +60,16 @@ void FUN_00117044(unsigned int param_1,int param_2,int param_3,unsigned int *par
   *param_4 = temp_v0;
   FUN_002fde5c(temp_v2);
   temp_v6 = *(unsigned int *)(param_2 + 0x1c);
-  FUN_00303018(temp_v2,&temp_v6);
+  streamWriterWriteWord(temp_v2,&temp_v6);
   if (temp_v1 != 0) {
     temp_v7 = *(unsigned int *)(temp_v1 + 0x10);
-    FUN_00303018(temp_v2,&temp_v7);
+    streamWriterWriteWord(temp_v2,&temp_v7);
   }
   else {
     temp_v5 = 0;
-    FUN_00303028(temp_v2,&temp_v5);
+    streamWriteWordCopy(temp_v2,&temp_v5);
   }
-  FUN_00303018(temp_v2,param_4);
+  streamWriterWriteWord(temp_v2,param_4);
   strInit(temp_v4);
   FUN_00113612(*(unsigned int *)(param_2 + 0x14),temp_v3,temp_v4,param_3 + 0x34);
   FUN_00302fec(temp_v8,temp_v4);

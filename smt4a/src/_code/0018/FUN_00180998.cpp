@@ -7,7 +7,7 @@ int CONCAT44(double, double);
 int FUN_001879d0(unsigned int);
 int FUN_0019aee4(...);
 int FUN_0019be8c(...);
-int FUN_0019dc70(void);
+int sentinelLookupGetValue(void);
 int FUN_0019f764(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -64,7 +64,7 @@ extern unsigned int DAT_0063af94; /* 0x63af94 */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0019aee4. */
 /* Supplied declaration required: FUN_0019be8c. */
-/* Supplied declaration required: FUN_0019dc70. */
+/* Supplied declaration required: sentinelLookupGetValue. */
 extern unsigned int FUN_0019e120(unsigned short);
 extern unsigned int FUN_0019ea4c(unsigned short);
 extern unsigned int FUN_0019eaa0(unsigned short);
@@ -279,7 +279,7 @@ LAB_00180bc0:
                   }
                 }
                 else {
-                  FUN_0019dc70();
+                  sentinelLookupGetValue();
                   temp_v9 = temp_v9 + temp_v17;
                 }
               }
@@ -314,7 +314,7 @@ LAB_00180bc0:
               temp_v22 = (unsigned long long)(unsigned int)((float)param_1[6] + temp_v21 + temp_v14);
             }
             else {
-              FUN_0019dc70();
+              sentinelLookupGetValue();
               temp_v9 = temp_v9 + temp_v17;
             }
           }
@@ -340,7 +340,7 @@ LAB_00180bc0:
         else {
           switch(temp_v17) {
           default:
-            FUN_0019dc70();
+            sentinelLookupGetValue();
             temp_v9 = temp_v9 + temp_v17;
             break;
           case 0xf817:

@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_00352518; /* 0x352518 */
 extern unsigned char LAB_00352538; /* 0x352538 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_0013c174. */
@@ -40,11 +40,11 @@ void FUN_0035243c(unsigned int param_1,unsigned int param_2)
   int uStack_5c;
   unsigned char temp_v2 [68];
   
-  if (*(int **)(DAT_005806a4 + 700) != (int *)0x0) {
-    (**(romwright_code **)(**(int **)(DAT_005806a4 + 700) + 4))();
-    temp_v0 = DAT_005806a4;
-    puVar2 = (unsigned int *)(DAT_005806a4 + 0x2c0);
-    *(unsigned int *)(DAT_005806a4 + 700) = 0;
+  if (*(int **)(g_lmapView + 700) != (int *)0x0) {
+    (**(romwright_code **)(**(int **)(g_lmapView + 700) + 4))();
+    temp_v0 = g_lmapView;
+    puVar2 = (unsigned int *)(g_lmapView + 0x2c0);
+    *(unsigned int *)(g_lmapView + 700) = 0;
     temp_v1 = *puVar2;
     *(unsigned int *)(temp_v0 + 0x38) = temp_v1;
     *(unsigned int *)(temp_v0 + 0x3c) = *(unsigned int *)(temp_v0 + 0x2c4);
@@ -69,7 +69,7 @@ void FUN_0035243c(unsigned int param_1,unsigned int param_2)
   if (temp_v0 != 0) {
     FUN_003f9e80();
   }
-  *(int *)(DAT_005806a4 + 700) = temp_v0;
+  *(int *)(g_lmapView + 700) = temp_v0;
   controllerApplyAtUnitScale();
   temp_v0 = settings5BGetValue();
   if (temp_v0 != 0) {

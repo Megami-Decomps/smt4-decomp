@@ -69,7 +69,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_0014afd0. */
-extern int FUN_00162880(void);
+extern int engineCleanupIsDone(void);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
 extern unsigned long long jobGetWork(void);
@@ -78,13 +78,13 @@ extern unsigned long long asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00191e00. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_00203d74(void);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
 extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
-extern int FUN_004ff364(int, unsigned int);
+extern int asdAnimGetTrackLastFrame(int, unsigned int);
 
 
 unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
@@ -125,7 +125,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
         *(unsigned int *)(temp_v1 + 0x4c) = temp_v10;
         return 0;
       }
-      temp_v2 = FUN_001a6508(g_aocSystem,*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44),
+      temp_v2 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44),
                            1);
       if (temp_v2 != 0) {
         FUN_00191e00(g_aocSystem,*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44),
@@ -191,7 +191,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
   if (temp_v2 != 0 && temp_v4 != 0) {
     temp_v11 = *(float *)(temp_v1 + 0x5c) + 2.0f;
     *(float *)(temp_v1 + 0x5c) = temp_v11;
-    temp_v2 = FUN_004ff364(temp_v2,0);
+    temp_v2 = asdAnimGetTrackLastFrame(temp_v2,0);
     if (temp_v11 <= *(float *)(temp_v1 + 0x5c)) {
       *(float *)(temp_v1 + 0x5c) = *(float *)(temp_v1 + 0x5c) - temp_v11;
     }
@@ -302,7 +302,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
     }
     temp_v2 = FUN_00162ea4();
     if (temp_v2 != 0) {
-      temp_v2 = FUN_00162880();
+      temp_v2 = engineCleanupIsDone();
       if (temp_v2 == 0) {
         *(unsigned int *)(temp_v1 + 0x24) = temp_v10;
         *(float *)(temp_v1 + 0x28) = temp_v9;

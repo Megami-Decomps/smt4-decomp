@@ -1,31 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00228930` (_code @ 0x228930, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler adds an alignment register to the call frame and allocates the scan index/base in different registers. */
+#include "shard/W6_W6Match4_UnitPairs.h"
 
 extern "C" {
-
-extern int btlUnitGet(void);
-
-
-void FUN_00228930(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+// Fill the first unused pair in the selected battle unit's pair table.
+void FUN_00228930(void *contextHandle, s32 first, s32 second)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = btlUnitGet();
-  temp_v1 = 0;
-  while ((temp_v2 = temp_v0 + temp_v1 * 8, -1 < *(int *)(temp_v2 + 0x5a8) || (*(int *)(temp_v2 + 0x5ac) != 0))
-        ) {
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x85) {
-      return;
+    UnitPairTable *unit = btlUnitGet(contextHandle);
+    for (s32 index = 0; index < 133; ++index) {
+        if (unit->pairs[index][0] < 0 && unit->pairs[index][1] == 0) {
+            unit->pairs[index][0] = first;
+            unit->pairs[index][1] = second;
+            return;
+        }
     }
-  }
-  *(unsigned int *)(temp_v0 + temp_v1 * 8 + 0x5a8) = param_2;
-  *(unsigned int *)(temp_v2 + 0x5ac) = param_3;
-  return;
 }
-
-} /* extern "C" */
+}

@@ -17,7 +17,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
-extern int FUN_00167e54(void);
+extern int aocJobIsValid(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -57,7 +57,7 @@ unsigned int FUN_00321544(void)
       temp_v5 = 0.27f;
       FUN_001879d0(g_renderCtx);
       temp_v1 = (int)temp_v5;
-      temp_v2 = FUN_00167e54();
+      temp_v2 = aocJobIsValid();
       if ((temp_v2 != 0) || (temp_v2 = btlMainIsSecondJobValid(), temp_v2 != 0)) {
         temp_v5 = 0.26f;
         FUN_001879d0(g_renderCtx);

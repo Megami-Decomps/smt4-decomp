@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_002c76c0(int arg);
+void scrCommMessageSetMode(int arg);
 int scrGetCommandFrame(void);
 u32 FUN_002ba85c(void);
 u32 scrGetArg(int index);
@@ -12,7 +12,7 @@ void FUN_0021bdac(u32 a, u32 b, u32 frame, u8 state, int wait, int flags);
 /* Show a script message for a quest state, locking the message window first when no command frame is active. */
 void FUN_0039a6a4(u8 state)
 {
-    FUN_002c76c0(0);
+    scrCommMessageSetMode(0);
     if (scrGetCommandFrame() == 0) {
         Target43e188 *target = g_messageMain.target;
         if (target != NULL) {

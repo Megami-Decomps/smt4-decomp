@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f5390` (_code @ 0x2f5390, 0x234 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ extern unsigned char DAT_00420b78; /* 0x420b78 */
 extern unsigned char *FUN_001ff93c(unsigned char **);
 /* Supplied declaration required: FUN_001ff9f4. */
 extern unsigned char *FUN_001ffaf0(void);
-extern unsigned char **FUN_001ffb70(void);
 /* Supplied declaration required: FUN_002102ec. */
 /* Supplied declaration required: fileOwnerCloseA. */
 /* Supplied declaration required: fileOwnerCloseB. */
@@ -89,7 +89,7 @@ unsigned int FUN_002f5390(int param_1,unsigned int param_2,unsigned int param_3,
       if (param_1 != 1) {
         ppuVar2 = (unsigned char **)puVar4;
         if ((param_1 != 2) && (param_1 == 3)) {
-          ppuVar2 = (unsigned char **)FUN_001ffb70();
+          ppuVar2 = (unsigned char **)FUN_001ffb70((PositionedStream *)&temp_v0,0,(void *)param_3,param_4);
         }
       }
       else {

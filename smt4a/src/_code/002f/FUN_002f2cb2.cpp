@@ -8,7 +8,7 @@ int sharedRefRelease(int);
 int sharedRefAddRef(int);
 int onlineTimeGetNow(unsigned char [8]);
 int FUN_002f2da0(...);
-int FUN_002f2dd8(int);
+int objectCountIncrement(int);
 int listIteratorNext2(int *);
 
 typedef int romwright_code(...);
@@ -30,7 +30,7 @@ typedef struct {
 /* Supplied declaration required: onlineTimeGetNow. */
 /* Supplied declaration required: FUN_002f2da0. */
 extern int FUN_002f2dc2(unsigned int *, unsigned char *);
-/* Supplied declaration required: FUN_002f2dd8. */
+/* Supplied declaration required: objectCountIncrement. */
 /* Supplied declaration required: listIteratorNext2. */
 extern int wordRefsDiffer_002f2dec(int *, int *);
 
@@ -101,7 +101,7 @@ void FUN_002f2cb2(int *param_1,int param_2,unsigned int param_3)
     }
     *(unsigned char *)(temp_v1 + 0x138) = 2;
     *(unsigned char *)(temp_v1 + 0x130) = 1;
-    FUN_002f2dd8(temp_v1);
+    objectCountIncrement(temp_v1);
     sharedRefAddRef(temp_v1);
     temp_v5[0] = temp_v8;
     FUN_002f2da0(&temp_v9,param_2,temp_v5);

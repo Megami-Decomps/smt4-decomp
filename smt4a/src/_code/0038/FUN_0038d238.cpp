@@ -1,31 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038d238` (_code @ 0x38d238, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses separate field bases and retains the target instead of retail's paired load/reload sequence. */
+#include "shard/Shard0034.h"
 
 extern "C" {
+BtlStateB *btlGetMainState(void);
 
-extern int btlGetMainState(void);
-
-
-unsigned int FUN_0038d238(void)
-
+// Bring the current value within one of the target, in steps of two.
+u32 FUN_0038d238(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = btlGetMainState();
-  temp_v1 = *(int *)(temp_v0 + 0x4e58);
-  temp_v2 = *(int *)(temp_v0 + 0x4e5c);
-  if (temp_v1 != temp_v2) {
-    temp_v2 = temp_v2 - ((temp_v2 - temp_v1) & 0xfffffffeU);
-    *(int *)(temp_v0 + 0x4e5c) = temp_v2;
-  }
-  temp_v1 = *(int *)(temp_v0 + 0x4e58);
-  if (temp_v1 != temp_v2) {
-    *(unsigned int *)(temp_v0 + 0x4e5c) = temp_v2 - ((temp_v2 - temp_v1) & 0xfffffffeU);
-  }
-  return 1;
+    BtlStateB *battle = btlGetMainState();
+    s32 target = battle->unk4E58;
+    s32 current = battle->unk4E5C;
+    if (target != current) {
+        current -= (current - target) & ~1u;
+        battle->unk4E5C = current;
+    }
+    target = battle->unk4E58;
+    if (target != current)
+        battle->unk4E5C = current - ((current - target) & ~1u);
+    return 1;
 }
-
-} /* extern "C" */
+}

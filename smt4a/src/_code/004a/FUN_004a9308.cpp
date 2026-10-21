@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184748(int);
+int uiSpriteSetKeyframeThree(int);
 int FUN_00231cdc(int, unsigned int, unsigned int, unsigned int);
 int FUN_002cc96c(int);
 int FUN_00321500(int);
@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned char g_btlUi; /* 0x57a9b8 */
 
-/* Supplied declaration required: FUN_00184748. */
+/* Supplied declaration required: uiSpriteSetKeyframeThree. */
 /* Supplied declaration required: FUN_00231cdc. */
 /* Supplied declaration required: FUN_002cc96c. */
 /* Supplied declaration required: FUN_00321500. */
@@ -65,7 +65,7 @@ void FUN_004a9308(unsigned int param_1,unsigned int param_2,unsigned int param_3
       FUN_0039ebcc();
       if (temp_v1 != 0) {
         FUN_00321500(temp_v0 + 8);
-        FUN_00184748(temp_v0 + 0x24bc);
+        uiSpriteSetKeyframeThree(temp_v0 + 0x24bc);
       }
     }
     FUN_002cc96c(temp_v0 + 0x28c4);

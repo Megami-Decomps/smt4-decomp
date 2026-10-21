@@ -40,14 +40,14 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_0020a2fc(void);
+extern int uniteStateIsDone(void);
 extern int idListAnyValid(unsigned int);
-extern int FUN_0023c068(void);
+extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0026e8b8. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4878. */
-extern int FUN_002ab790(void);
-extern unsigned int FUN_002c2c4c(int);
+extern int uniteRequestGet(void);
+extern unsigned int widgetSubCallIfVisible(int);
 extern unsigned int FUN_002e26c4(unsigned int);
 extern int region9100IsClear(void);
 /* Supplied declaration required: FUN_0032ef5c. */
@@ -88,14 +88,14 @@ void FUN_00217f14(void)
   temp_v20 = 0;
   temp_v16 = 0;
   temp_v17[0] = 0;
-  temp_v1 = FUN_0020a2fc();
+  temp_v1 = uniteStateIsDone();
   if (((((temp_v1 == 0) && (temp_v1 = gameFlagIsSet(0x418), temp_v1 == 0)) ||
-       ((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 &&
+       ((temp_v1 = uniteStateIsDone(), temp_v1 == 0 &&
         ((temp_v1 = gameFlagIsSet(0x453), temp_v1 != 0 && (temp_v1 = gameFlagIsSet(0x425), temp_v1 == 0))))))
-      || ((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 && (temp_v1 = region9100IsClear(), temp_v1 == 0)))) ||
+      || ((temp_v1 = uniteStateIsDone(), temp_v1 == 0 && (temp_v1 = region9100IsClear(), temp_v1 == 0)))) ||
      ((temp_v1 = uniteIsPhase26Active(), temp_v1 != 0 ||
-      ((((temp_v1 = FUN_0020a2fc(), temp_v1 == 0 && (temp_v1 = gameFlagIsSet(0x459), temp_v1 == 0)) &&
-        (temp_v1 = FUN_002ab790(), temp_v1 == 0x19)) && (temp_v1 = FUN_0023c068(), temp_v1 == 0)))))) {
+      ((((temp_v1 = uniteStateIsDone(), temp_v1 == 0 && (temp_v1 = gameFlagIsSet(0x459), temp_v1 == 0)) &&
+        (temp_v1 = uniteRequestGet(), temp_v1 == 0x19)) && (temp_v1 = uniteNotBusy(), temp_v1 == 0)))))) {
     temp_v20 = 1;
   }
   temp_v2 = vec2GetXInt();
@@ -109,7 +109,7 @@ void FUN_00217f14(void)
     FUN_001835b4(2,0x14,0,temp_v2,temp_v3,0xc9);
     FUN_001835b4(2,0x14,1,temp_v2,temp_v3,0xc9);
     efctSetSpeed();
-    temp_v4 = FUN_002c2c4c(temp_v0 + 0x40);
+    temp_v4 = widgetSubCallIfVisible(temp_v0 + 0x40);
     temp_v10 = 0;
     if (0 < (int)temp_v4) {
       temp_v21 = (int)(8 - temp_v4) / 2 + 4;

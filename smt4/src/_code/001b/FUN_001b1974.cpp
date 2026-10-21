@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int questEntryCheck(void);
+int appCheckPurchaseRequirements(void);
 int FUN_002ae584(void);
 
-/* Supplied declaration required: questEntryCheck. */
+/* Supplied declaration required: appCheckPurchaseRequirements. */
 /* Supplied declaration required: FUN_002ae584. */
 
 
@@ -25,9 +25,9 @@ void FUN_001b1974(int *param_1,int *param_2)
   temp_v1 = *param_2;
   FUN_002ae584();
   temp_v2 = *param_1;
-  questEntryCheck();
+  appCheckPurchaseRequirements();
   temp_v3 = *param_2;
-  questEntryCheck();
+  appCheckPurchaseRequirements();
   if (temp_v2 != 2) {
     if (temp_v3 == 2) {
       return;

@@ -20,7 +20,7 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_0023fc38. */
 extern int FUN_002a7410(void);
 /* Supplied declaration required: FUN_002c7e24. */
-extern unsigned int FUN_002cab18(void);
+extern unsigned int partyPanelGetSelectedDemonId(void);
 extern unsigned int FUN_002cad18(void);
 
 
@@ -43,7 +43,7 @@ void FUN_0034cda0(void)
     FUN_002c7e24();
     temp_v2 = ifTouchGetButtonHelpValue();
     temp_v3 = FUN_002cad18();
-    temp_v4 = FUN_002cab18();
+    temp_v4 = partyPanelGetSelectedDemonId();
     if (((temp_v2 == 0x1c) || (temp_v2 == 0x1e || temp_v2 == 0xba)) ||
        ((temp_v2 == 0xc1 || temp_v2 == 0xce) || temp_v2 == 0x28)) {
       temp_v5 = temp_v4;

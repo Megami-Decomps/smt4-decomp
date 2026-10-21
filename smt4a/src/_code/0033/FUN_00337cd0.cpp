@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00221d14(...);
+int renderCtxSetPackedColor(...);
 int FUN_0034f8b4(int, int, int);
 int FUN_0038136c(int, int, int, int);
 int SUB41(double, int);
@@ -21,7 +21,7 @@ extern float DAT_006472f8; /* 0x6472f8 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
-/* Supplied declaration required: FUN_00221d14. */
+/* Supplied declaration required: renderCtxSetPackedColor. */
 /* Supplied declaration required: FUN_0034f8b4. */
 /* Supplied declaration required: FUN_0038136c. */
 
@@ -60,12 +60,12 @@ void FUN_00337cd0(int param_1)
   else {
     temp_v0 = temp_v1;
     FUN_0038136c(temp_v1,temp_v1 + 0x24,temp_v2,temp_v3);
-    FUN_00221d14(*(unsigned int *)(param_1 + 0x10));
+    renderCtxSetPackedColor(*(unsigned int *)(param_1 + 0x10));
     DAT_006472ec = DAT_006472dc;
     DAT_006472f0 = DAT_006472e0;
     DAT_006472f4 = DAT_006472e4;
     DAT_006472f8 = DAT_006472e8;
-    FUN_00221d14(temp_v0);
+    renderCtxSetPackedColor(temp_v0);
     DAT_006472dc = DAT_006472dc * DAT_006472ec;
     DAT_006472e0 = DAT_006472e0 * DAT_006472f0;
     DAT_006472e4 = DAT_006472e4 * DAT_006472f4;

@@ -20,7 +20,7 @@ extern unsigned char DAT_0062e6a0; /* 0x62e6a0 */
 
 /* Supplied declaration required: FUN_0010d2c4. */
 /* Supplied declaration required: FUN_00122ed4. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e6fb0. */
@@ -40,7 +40,7 @@ void FUN_00120e80(unsigned int *param_1)
   unsigned char temp_v2 [12];
   
   *param_1 = (unsigned int)&DAT_0055aefc;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v2,temp_v0 + 0x58);
   FUN_002f9f4e(*(unsigned int *)(param_1[5] + 0x44));
   _ZN9Obj55b28cD1Ev(temp_v2);

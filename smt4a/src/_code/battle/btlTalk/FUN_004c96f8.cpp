@@ -6,11 +6,11 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdMemFree(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 
 
 unsigned int FUN_004c96f8(int param_1,int param_2)
@@ -35,7 +35,7 @@ unsigned int FUN_004c96f8(int param_1,int param_2)
     }
     *(int *)(param_1 + 0x148) = param_2;
     textFormatBuffer(temp_v0,"battle/talk/TalkTone%s.mbm",*(unsigned int *)(param_2 * 4 + 0x57a7d8));
-    FUN_002804b0(temp_v0,param_1 + 0x14,1);
+    asdLoadFileAsyncSimple(temp_v0,param_1 + 0x14,1);
     *(unsigned char *)(param_1 + 0x145) = 1;
     *(unsigned int *)(param_1 + 0x18) = 3;
     return 0;

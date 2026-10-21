@@ -8,7 +8,7 @@ int FUN_00255e38(...);
 int FUN_002560a4(...);
 int FUN_00256124(...);
 int FUN_00256194(...);
-int FUN_0028ee90(...);
+int gameOptionsEnableAndReset(...);
 int FUN_00337cfc(...);
 int FUN_003c8428(...);
 int FUN_003c86bc(...);
@@ -32,9 +32,9 @@ typedef struct {
 /* Supplied declaration required: FUN_002560a4. */
 /* Supplied declaration required: FUN_00256124. */
 /* Supplied declaration required: FUN_00256194. */
-/* Supplied declaration required: FUN_0028ee90. */
+/* Supplied declaration required: gameOptionsEnableAndReset. */
 extern int gameGetSlotTable(void);
-extern int FUN_002b6b38(void);
+extern int gameGetOptionProgressStatus(void);
 /* Supplied declaration required: FUN_00337cfc. */
 /* Supplied declaration required: FUN_003c8428. */
 /* Supplied declaration required: FUN_003c86bc. */
@@ -54,17 +54,17 @@ void FUN_00336a84(fn_00336a84_arg0 *param_1)
     FUN_003c8428((int)param_1->field_0x11c);
   }
   else {
-    temp_v0 = FUN_002b6b38();
+    temp_v0 = gameGetOptionProgressStatus();
     if ((int)param_1->field_0x2f28 >= 1) {
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {
           FUN_00256124();
-          FUN_0028ee90();
+          gameOptionsEnableAndReset();
         }
       }
       else {
         FUN_00256194();
-        FUN_0028ee90();
+        gameOptionsEnableAndReset();
       }
       FUN_002560a4(param_1->field_0x2f28);
     }

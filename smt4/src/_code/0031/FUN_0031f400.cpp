@@ -36,7 +36,7 @@ typedef struct {
 
 GameState *btlGetMainState(void);
 Entity *btlMainFindEntryByListedId(GameState *state, int index);
-int FUN_0024ea50(u16 type);
+int partyHasStoredDemon(u16 type);
 int scrSetResult(int id);
 int randNextInRange(u32 range);
 int memClear(Entity **buffer, int size);
@@ -59,7 +59,7 @@ u32 FUN_0031f400(void)
         u32 flags = entity->flags;
 
         if ((flags & 1) != 0 && (flags & 0x40) == 0 && (flags & 0x10) != 0 && entity->group != player->group
-            && entity->level <= player->level && FUN_0024ea50(entity->type) == 0 && entity->detail != NULL
+            && entity->level <= player->level && partyHasStoredDemon(entity->type) == 0 && entity->detail != NULL
             && (entity->detail->flags & 0x200) != 0 && player->type != entity->type) {
             candidates[count] = entity;
             count++;

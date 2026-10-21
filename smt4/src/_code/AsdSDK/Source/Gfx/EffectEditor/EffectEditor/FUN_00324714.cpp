@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00246854(void);
 int effPartsSetData(unsigned int, unsigned int, unsigned int, int);
 int effBlockCreateFromBlock(void);
-int FUN_00250200(void);
+int effectEditorApplyHandlerState(void);
 int FUN_0025c650(unsigned int, unsigned int *);
 int FUN_002629a8(int, int);
 int rt_memcpy_w144(unsigned int *, int);
 int libc_strcpy(unsigned int *, unsigned int);
-int FUN_002de944(unsigned int, unsigned int);
+int nodeListFindByKey(unsigned int, unsigned int);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
 int rt_memcpy_w(unsigned char *, unsigned int *, int);
 
@@ -41,12 +41,12 @@ extern unsigned int effEditorNodeListCount(unsigned int);
 /* Supplied declaration required: effPartsSetData. */
 extern unsigned int resourceResolveHeaderPointer(unsigned int);
 /* Supplied declaration required: effBlockCreateFromBlock. */
-/* Supplied declaration required: FUN_00250200. */
+/* Supplied declaration required: effectEditorApplyHandlerState. */
 /* Supplied declaration required: FUN_0025c650. */
 /* Supplied declaration required: FUN_002629a8. */
 /* Supplied declaration required: rt_memcpy_w144. */
 /* Supplied declaration required: libc_strcpy. */
-/* Supplied declaration required: FUN_002de944. */
+/* Supplied declaration required: nodeListFindByKey. */
 extern unsigned int *FUN_002f3208(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -70,7 +70,7 @@ unsigned int FUN_00324714(void)
   DAT_0044eaa4 = puVar2;
   rt_memcpy_w144(puVar2,temp_v0);
   if ((*(unsigned int *)(temp_v0 + 0x98) & 2) != 0) {
-    FUN_002de944(DAT_0044ea94,*(unsigned int *)(temp_v0 + 0x94));
+    nodeListFindByKey(DAT_0044ea94,*(unsigned int *)(temp_v0 + 0x94));
   }
   FUN_0025c650(DAT_0044ea94,puVar2);
   rt_memcpy_w(&DAT_004d8b40,puVar2,0x90);
@@ -88,7 +88,7 @@ unsigned int FUN_00324714(void)
   }
   temp_v1 = DAT_0044ea9c;
   effBlockCreateFromBlock();
-  FUN_00250200();
+  effectEditorApplyHandlerState();
   temp_v2 = 0;
   do {
     puVar5 = *(unsigned int **)(temp_v2 * 4 + 0x44f4d4);

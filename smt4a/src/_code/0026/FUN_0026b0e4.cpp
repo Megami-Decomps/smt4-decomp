@@ -1,18 +1,18 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026b0e4` (_code @ 0x26b0e4, 0x10ac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
 int FUN_00164168(...);
-int FUN_00289418(...);
+void FUN_00289418(int x, int y, float alpha);
 
 int textFormatBuffer(...);
 int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001834a4(...);
@@ -57,7 +57,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -69,7 +68,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001fc720. */
 /* Supplied declaration required: FUN_0022fb78. */
 extern int FUN_0026264c(unsigned short);
-/* Supplied declaration required: FUN_00289418. */
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
@@ -123,6 +121,10 @@ unsigned int FUN_0026b0e4(void)
   temp_v11 = g_statusDown;
   temp_v0 = vec2GetXInt(g_statusDown + 0x28);
   temp_v1 = vec2GetYInt(temp_v11 + 0x28);
+  float bannerAlpha = *(float *)(temp_v11 + 0x48);
+  if (bannerAlpha < 0.0f) {
+    bannerAlpha = 0.0f;
+  }
   temp_v4 = g_statusDown;
   temp_v2 = *(int *)(temp_v11 + 0x518);
   in_fpscr = in_fpscr & 0xfffffff;
@@ -234,7 +236,7 @@ LAB_0026b298:
         temp_v18 = temp_v9;
       }
       temp_v10 = FUN_001834a4(0x12,0x464);
-      FUN_001689e8((short)(int)puVar16,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
+      uiDrawItemCategoryIcon((short)(int)puVar16,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
                    (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v1,0xb5,0);
       if (temp_v9 != 0) {
         temp_v10 = FUN_001834a4(0x12,0x465);
@@ -321,7 +323,7 @@ LAB_0026b644:
       }
     }
     temp_v11 = FUN_001834a4(0x12,0x475);
-    FUN_001689e8((int)(short)(int)temp_v17,
+    uiDrawItemCategoryIcon((int)(short)(int)temp_v17,
                  (int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v1,0xc9,0);
     break;
@@ -535,7 +537,7 @@ LAB_0026b644:
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < 3);
     efctSetSpeed();
-    FUN_00289418(temp_v0,temp_v1);
+    FUN_00289418(temp_v0,temp_v1,bannerAlpha);
   }
   return 0;
 }

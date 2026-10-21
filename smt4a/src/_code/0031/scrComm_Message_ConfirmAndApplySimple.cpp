@@ -10,7 +10,7 @@ int scrWorkGetValue(int);
 int scrWorkSetValue(...);
 int FUN_003dea6c(unsigned int, int, int);
 int FUN_00418070(unsigned int, int);
-int FUN_00418714(unsigned int);
+int partyEntryIsAvailable(unsigned int);
 int optionsClearFlag1(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -28,7 +28,7 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_00418070. */
 extern int FUN_004186a4(void);
 extern unsigned int FUN_004186e0(void);
-/* Supplied declaration required: FUN_00418714. */
+/* Supplied declaration required: partyEntryIsAvailable. */
 /* Supplied declaration required: optionsClearFlag1. */
 
 
@@ -63,7 +63,7 @@ unsigned int scrComm_Message_ConfirmAndApplySimple(void)
     if (temp_v1 == 1) {
       scrWorkSetValue(1,0);
       FUN_00418070(temp_v2,0);
-      FUN_00418714(temp_v2);
+      partyEntryIsAvailable(temp_v2);
       optionsClearFlag1();
       return 1;
     }

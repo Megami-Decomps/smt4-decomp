@@ -7,7 +7,7 @@ extern "C" {
 int ifTouchGetButtonHelpValue(void);
 int sysPlaySe(void);
 int FUN_00183f58(int, int, int, int);
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int panelSetTarget(unsigned int, int);
 int FUN_0037c8e4(int, int);
 int messageSetActiveMode(int);
@@ -25,19 +25,19 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
+extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
 
 extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: ifTouchGetButtonHelpValue. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183f58. */
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern int useCounterIsFinished(void);
 extern int FUN_002a482c(int);
 extern int FUN_002a4b28(unsigned short);
-extern int FUN_002c7ca0(void);
-extern int FUN_002f036c(void);
+extern int statusDownGetFlag(void);
+extern int gameGetMode(void);
 extern int FUN_0031d174(int);
 extern int FUN_0035db94(void);
 /* Supplied declaration required: panelSetTarget. */
@@ -48,7 +48,7 @@ extern int statusDownGetMode(void);
 /* Supplied declaration required: FUN_004a3b48. */
 /* Supplied declaration required: FUN_004a8750. */
 /* Supplied declaration required: FUN_004cf8dc. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_004d0100. */
 /* Supplied declaration required: FUN_004d01f8. */
 /* Supplied declaration required: sendEvent100020D. */
@@ -79,8 +79,8 @@ void FUN_004a1db4(int param_1)
   temp_v4 = vec2GetYInt(temp_v3);
   temp_v5 = vec2GetXInt(temp_v3);
   pointConvertToFloat(param_1 + 200,temp_v5,temp_v4);
-  temp_v3 = FUN_002f036c();
-  if ((temp_v3 != 0) && (temp_v3 = FUN_002c7ca0(), temp_v3 == 0)) {
+  temp_v3 = gameGetMode();
+  if ((temp_v3 != 0) && (temp_v3 = statusDownGetFlag(), temp_v3 == 0)) {
     *(unsigned int *)(param_1 + 0x14) = 0xc;
     *(unsigned int *)(param_1 + 0x18) = 0;
     temp_v3 = FUN_0035db94();
@@ -91,11 +91,11 @@ void FUN_004a1db4(int param_1)
       temp_v2 = 10;
     }
     *(unsigned short *)(param_1 + 0xa874) = temp_v2;
-    FUN_00184528(param_1 + 0xdc,temp_v2);
+    uiSpriteBankApplyPreset(param_1 + 0xdc,temp_v2);
     if (*(char *)(param_1 + 0x860) != '\0') {
       return;
     }
-    temp_v3 = FUN_004cfe4c(param_1 + 0x20);
+    temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v0 = *(unsigned short *)(param_1 + temp_v3 * 0x20 + 0x868);
     temp_v8 = (unsigned int)temp_v0;
     FUN_004a8750(temp_v8,*(unsigned char *)(param_1 + 0x861),0);
@@ -108,7 +108,7 @@ void FUN_004a1db4(int param_1)
     messageSetActiveMode(1);
     return;
   }
-  temp_v3 = FUN_002f036c();
+  temp_v3 = gameGetMode();
   if (temp_v3 != 0) {
     return;
   }
@@ -138,7 +138,7 @@ void FUN_004a1db4(int param_1)
         }
         sendEvent100020E();
         *(unsigned char *)(param_1 + 0x863) = 1;
-        (*(unsigned int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = 0xffffffff;
+        (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
         FUN_004a3b48(param_1);
         ifTouchGetButtonHelpValue();
         sysPlaySe();

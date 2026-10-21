@@ -8,7 +8,7 @@ int buttonHelpTexturesUnref(void);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_00291998(void);
-int FUN_00295ba4(int);
+int infoWinStartTimer(int);
 int scrScriptProcessDestroy(void);
 int asdTMTexTableFreeEntry(int);
 int FUN_002b827c(int);
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
 /* Supplied declaration required: FUN_00291998. */
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
@@ -70,7 +70,7 @@ void FUN_003b980c(int param_1)
   FUN_00291998();
   temp_v0 = dialogIsActive();
   if (temp_v0 != 0) {
-    FUN_00295ba4(0);
+    infoWinStartTimer(0);
   }
   FUN_002b827c(3);
   buttonHelpRelease();

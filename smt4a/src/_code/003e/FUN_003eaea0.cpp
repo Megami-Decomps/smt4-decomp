@@ -1,36 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003eaea0` (_code @ 0x3eaea0, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "gamedata/DataTable.h"
 
-extern "C" {
+struct SignedTablePair {
+    s16 key;   // 0x00
+    s16 value; // 0x02
+};
 
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern int dataTableGetCount(unsigned int);
-extern short *dataTableGetEntries(void);
-
-
-int FUN_003eaea0(unsigned int param_1,int param_2)
-
+// Find the signed value for a key in section0x4d/1; the first ABI parameter is unused.
+extern "C" s32 FUN_003eaea0(u32, s32 key)
 {
-  unsigned int temp_v0;
-  short *psVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = dataTableGet(0x4d,1);
-  psVar2 = (short *)dataTableGetEntries();
-  temp_v1 = dataTableGetCount(temp_v0);
-  temp_v2 = 0;
-  if (temp_v2 < temp_v1) {
-    do {
-      if (*psVar2 == param_2) {
-        return (int)psVar2[1];
-      }
-      temp_v2 = temp_v2 + 1;
-      psVar2 = psVar2 + 2;
-    } while (temp_v2 < temp_v1);
-  }
-  return 0;
+    void* section = dataTableGet(0x4d, 1);
+    SignedTablePair* entry = (SignedTablePair*)dataTableGetEntries(section);
+    s32 count = (s32)dataTableGetCount(section);
+    s32 result = 0;
+    for (s32 i = 0; i < count; ++i, ++entry) {
+        if (entry->key == key) {
+            result = entry->value;
+            break;
+        }
+    }
+    return result;
 }
-
-} /* extern "C" */

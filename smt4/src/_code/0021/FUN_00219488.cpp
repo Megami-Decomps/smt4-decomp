@@ -1,40 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00219488` (_code @ 0x219488, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_SecondarySort.h"
 
 extern "C" {
+s32 FUN_001f62ec(const u16 *, const u16 *);
 
-int FUN_001f62ec(unsigned short *, unsigned short *);
-int dataTable1bOr1cGetRecord(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_001f62ec. */
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-
-
-void FUN_00219488(unsigned short *param_1,unsigned short *param_2)
-
+// Compare secondary-table sort keys, then use the base ID comparator to break ties.
+s32 FUN_00219488(const u16 *firstId, const u16 *secondId)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable1bOr1cGetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable1bOr1cGetRecord();
-  if (temp_v0 == 0) {
-    temp_v1 = 0;
-  }
-  if ((temp_v0 != 0 && temp_v1 != 0) && (*(int *)(temp_v0 + 0x150) == *(int *)(temp_v1 + 0x150))) {
-    FUN_001f62ec(param_1,param_2);
-    return;
-  }
-  return;
+    SecondarySortRecord *first = dataTable1bOr1cGetRecord(*firstId);
+    SecondarySortRecord *second = dataTable1bOr1cGetRecord(*secondId);
+    if (first == NULL)
+        return 0;
+    if (second == NULL)
+        return 0;
+    s32 order = first->sortKey - second->sortKey;
+    if (order != 0)
+        return order;
+    return FUN_001f62ec(firstId, secondId);
 }
-
-} /* extern "C" */
+}

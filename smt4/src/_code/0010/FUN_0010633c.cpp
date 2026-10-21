@@ -22,7 +22,7 @@ extern int FUN_0010c5b0(int, unsigned int);
 extern int FUN_0010d2d4(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0010ddcc. */
 extern unsigned int FUN_0010df80(int);
-extern unsigned int FUN_0010f134(void);
+extern unsigned int soundVolumeSettingGet(void);
 extern unsigned long long rt_memcmp(void);
 extern int jyoucyuGetTableEntry(unsigned int);
 
@@ -160,7 +160,7 @@ void FUN_0010633c(void)
                     temp_v7 = temp_v2 == 0x10000a4;
                   }
                   if (!temp_v7) {
-                    temp_v1 = FUN_0010f134();
+                    temp_v1 = soundVolumeSettingGet();
                   }
                 }
               }

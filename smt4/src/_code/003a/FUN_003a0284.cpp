@@ -6,7 +6,7 @@ extern "C" {
 
 int gameFlagIsSet(...);
 
-extern int FUN_00298e20(short);
+extern int questIsCompleted(short);
 /* Supplied declaration required: gameFlagIsSet. */
 
 
@@ -37,7 +37,7 @@ unsigned int FUN_003a0284(int param_1)
       if (temp_v0 == 0) {
         return 1;
       }
-      temp_v1 = FUN_00298e20(temp_v0);
+      temp_v1 = questIsCompleted(temp_v0);
       if (temp_v1 != 0) {
         return 2;
       }
@@ -52,7 +52,7 @@ unsigned int FUN_003a0284(int param_1)
   if (temp_v0 == 0) {
     return 2;
   }
-  temp_v1 = FUN_00298e20(temp_v0);
+  temp_v1 = questIsCompleted(temp_v0);
   if (temp_v1 != 0) {
     return 2;
   }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001127e4` (_code @ 0x1127e4, 0xac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
@@ -12,7 +13,7 @@ int _ZN9Obj558b24D1Ev(unsigned char [28]);
 int FUN_002f8728(unsigned char [24]);
 int FUN_002fa434(unsigned char [28], unsigned int);
 int FUN_002fbac6(unsigned char [24], int);
-int FUN_002fd180(unsigned char [24]);
+ListOwner *FUN_002fd180(ListOwner *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -33,7 +34,6 @@ extern unsigned int FUN_002ea704(void);
 /* Supplied declaration required: FUN_002f8728. */
 /* Supplied declaration required: FUN_002fa434. */
 /* Supplied declaration required: FUN_002fbac6. */
-/* Supplied declaration required: FUN_002fd180. */
 extern int FUN_002fd624(int);
 
 
@@ -67,7 +67,7 @@ unsigned char * FUN_001127e4(int param_1)
     FUN_002f8728(temp_v6);
     FUN_002fbac6(temp_v6,param_1 + 0x1f8);
     (**(romwright_code **)(**(int **)(param_1 + 500) + 0x14))(*(int **)(param_1 + 500),temp_v6,temp_v0);
-    FUN_002fd180(temp_v6);
+    FUN_002fd180((ListOwner *)temp_v6);
   }
   temp_v1 = FUN_002ea3c0(temp_v8,&LAB_00112a0d,0,&LAB_00112894);
   FUN_002ea3d0(param_1,temp_v1);

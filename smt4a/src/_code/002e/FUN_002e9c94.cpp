@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e26(...);
+int onlineContextGetInstance(...);
 int FUN_002e9d28(...);
 int FUN_002e9d6c(...);
 int FUN_002e9d98(...);
@@ -17,7 +17,7 @@ typedef struct {
     unsigned short sp4C; /* 0x4c: local_4c */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_002e6e26. */
+/* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: FUN_002e9d28. */
 /* Supplied declaration required: FUN_002e9d6c. */
 /* Supplied declaration required: FUN_002e9d98. */
@@ -43,7 +43,7 @@ FUN_002e9c94(int param_1,unsigned int param_2,int param_3,romwright_code *param_
     temp_v1 = 0;
   }
   else {
-    FUN_002e6e26();
+    onlineContextGetInstance();
     temp_v0 = FUN_0030f84e();
     if (temp_v0 != 0) {
       FUN_002e9e60("D:/home/jenkins/workspace/Manual-Pack/5129d543/OnlineCore/src/Core/Scheduler.cpp"

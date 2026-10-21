@@ -3,7 +3,7 @@
 extern "C" {
 
 s32 resourceLookupWithFallback(u32 handle, s32 key);
-s32 FUN_004bb308(u32 handle);
+s32 asdCecOutboxHasMessage(u32 handle);
 
 typedef struct CecProcess {
     /* 0x00 */ u8 unk00[4];
@@ -20,7 +20,7 @@ u32 FUN_002c0b10(s32 key)
 
     process = g_cecProcess;
     done = 0;
-    if ((g_cecProcess != NULL && key != 0) && (valid = FUN_004bb308(g_cecProcess->handle), valid != 0)) {
+    if ((g_cecProcess != NULL && key != 0) && (valid = asdCecOutboxHasMessage(g_cecProcess->handle), valid != 0)) {
         resourceLookupWithFallback(process->handle, key);
         done = 1;
     }

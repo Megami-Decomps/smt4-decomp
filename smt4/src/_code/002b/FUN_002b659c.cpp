@@ -7,7 +7,7 @@ extern "C" {
 typedef int romwright_code(...);
 extern int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_00138c44(unsigned int);
+extern int asdGxPresetsGetEnable(unsigned int);
 extern int FUN_002ae1e8(unsigned int);
 extern int FUN_002ae210(void);
 extern int FUN_002bff10(unsigned int);
@@ -30,7 +30,7 @@ unsigned int FUN_002b659c(int param_1,int param_2,int param_3,int param_4)
   temp_v1 = temp_v1 - 1;
   temp_v2 = FUN_002ae1e8(temp_v0);
   temp_v5 = temp_v2 - 1;
-  temp_v2 = FUN_00138c44(temp_v0);
+  temp_v2 = asdGxPresetsGetEnable(temp_v0);
   if ((temp_v2 != 0x500) && (temp_v2 == 0x501)) {
     temp_v2 = FUN_002bff10(temp_v0);
     if (temp_v2 != 0) {

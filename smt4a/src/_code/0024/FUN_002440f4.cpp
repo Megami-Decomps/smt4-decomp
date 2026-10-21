@@ -28,7 +28,7 @@ extern const char DAT_005314ec[];
 
 s32 gameFlagIsSet(u32 flag);
 ResourceObject* FUN_00178b04(u32 size, const char* sourceFile, u32 sourceLine);
-ResourceObject* FUN_0040ac08(ResourceObject* storage);
+ResourceObject* modelListInit(ResourceObject* storage);
 void FUN_001cd3ec(ResourceObject* object, const char* name);
 
 void FUN_002440f4(void)
@@ -36,42 +36,42 @@ void FUN_002440f4(void)
     if (gameFlagIsSet(0x4D0)) {
         ResourceObject* object = FUN_00178b04(0x20, DAT_00531448, 0x233);
         if (object) {
-            object = FUN_0040ac08(object);
+            object = modelListInit(object);
         }
         g_battleViewState.first = object;
         FUN_001cd3ec(object, DAT_00531478);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x236);
         if (object) {
-            object = FUN_0040ac08(object);
+            object = modelListInit(object);
         }
         g_battleViewState.second = object;
         FUN_001cd3ec(object, DAT_0053148c);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x239);
         if (object) {
-            object = FUN_0040ac08(object);
+            object = modelListInit(object);
         }
         g_battleViewState.third = object;
         FUN_001cd3ec(object, DAT_005314a4);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x23C);
         if (object) {
-            object = FUN_0040ac08(object);
+            object = modelListInit(object);
         }
         g_battleViewState.fourth = object;
         FUN_001cd3ec(object, DAT_005314bc);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x23F);
         if (object) {
-            object = FUN_0040ac08(object);
+            object = modelListInit(object);
         }
         g_battleViewState.fifth = object;
         FUN_001cd3ec(object, DAT_005314d4);
 
         object = FUN_00178b04(0x20, DAT_00531448, 0x242);
         if (object) {
-            object = FUN_0040ac08(object);
+            object = modelListInit(object);
         }
         g_battleViewState.sixth = object;
         FUN_001cd3ec(object, DAT_005314ec);

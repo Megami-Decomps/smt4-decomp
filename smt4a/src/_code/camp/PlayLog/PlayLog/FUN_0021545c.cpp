@@ -35,7 +35,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 extern int FUN_002e50d4(void);
 /* Supplied declaration required: FUN_003450d4. */
 extern int countersGetB(unsigned int);
@@ -81,7 +81,7 @@ void FUN_0021545c(void)
     break;
   case 1:
     temp_v6 = 0;
-    temp_v7 = FUN_002c2c68(g_playLog + 0x2dc);
+    temp_v7 = objectApplyIfUnblocked(g_playLog + 0x2dc);
     if (0 < temp_v7) {
       do {
         temp_v8 = (unsigned int)*(short *)(temp_v0 + temp_v6 * 2 + 0x424);
@@ -99,7 +99,7 @@ void FUN_0021545c(void)
                *(unsigned int *)(temp_v0 + (unsigned int)*(unsigned char *)(temp_v0 + 0x489) * 0x130 + temp_v6 * 4 + 0x490);
         }
         temp_v6 = temp_v6 + 1;
-        temp_v7 = FUN_002c2c68(temp_v0 + 0x2dc);
+        temp_v7 = objectApplyIfUnblocked(temp_v0 + 0x2dc);
       } while (temp_v6 < temp_v7);
     }
     temp_v9[0] = 0;
@@ -157,14 +157,14 @@ void FUN_0021545c(void)
         }
         break;
       }
-      temp_v6 = FUN_002c2c68(temp_v0 + 0x2dc);
+      temp_v6 = objectApplyIfUnblocked(temp_v0 + 0x2dc);
       if (temp_v6 >= 6) {
         temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);
         while ((temp_v6 == temp_v7 &&
                ((temp_v6 = FUN_002a4860(temp_v0 + 0x2dc), temp_v6 != 0 ||
                 (temp_v6 = FUN_002a4894(temp_v0 + 0x2dc), temp_v6 != 0))))) {
           temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);
-          temp_v4 = FUN_002c2c68(temp_v0 + 0x2dc);
+          temp_v4 = objectApplyIfUnblocked(temp_v0 + 0x2dc);
           if ((temp_v6 == temp_v4 - 5) && (temp_v6 = FUN_002a4894(temp_v0 + 0x2dc), temp_v6 == 4)) break;
           FUN_00228b04(temp_v0 + 0x2dc,0);
           temp_v6 = FUN_002a4860(temp_v0 + 0x2dc);

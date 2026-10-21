@@ -36,7 +36,7 @@ extern unsigned char LAB_003910b8; /* 0x3910b8 */
 extern unsigned char LAB_003928a4; /* 0x3928a4 */
 extern int g_aocMain; /* 0x432fc8 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: jobStopAndClearFlags. */
@@ -194,7 +194,7 @@ void FUN_003923b0(unsigned int *param_1)
         }
       }
       else {
-        temp_v1 = FUN_0019e0c0(param_1[0xd6]);
+        temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
         if (temp_v1 == 2) {
           temp_v1 = FUN_002973d8();
           if (temp_v1 != 0) {

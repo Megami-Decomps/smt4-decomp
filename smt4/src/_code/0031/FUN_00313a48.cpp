@@ -5,10 +5,10 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_00246c8c(unsigned int);
+int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(void);
 int FUN_0024b830(...);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int SUB41(double, int);
 int VectorFloatToUnsigned(double, int);
@@ -99,11 +99,11 @@ extern float DAT_004ea948; /* 0x4ea948 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 extern unsigned int FUN_00246c28(void);
-/* Supplied declaration required: FUN_00246c8c. */
+/* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -178,12 +178,12 @@ void FUN_00313a48(fn_00313a48_arg0 *param_1)
       pfVar21 = *(float **)(*(int *)(temp_v13 + 8) + 0x30);
       puVar22 = *(unsigned int **)(*(int *)(temp_v13 + 8) + 0x38);
       *(unsigned int *)(temp_v13 + 0x54) = *(unsigned int *)(temp_v13 + 0x54) | 0x21;
-      FUN_00246c8c(pfVar26->field_0x58 & 0xffffff);
+      asdSetNormalizedColorRgba(pfVar26->field_0x58 & 0xffffff);
       temp_v11 = DAT_004ea928;
       temp_v9 = DAT_004ea924;
       temp_v7 = DAT_004ea920;
       temp_v5 = DAT_004ea91c;
-      FUN_00246c8c(pfVar26->field_0x5c & 0xffffff);
+      asdSetNormalizedColorRgba(pfVar26->field_0x5c & 0xffffff);
       temp_v12 = DAT_004ea928;
       temp_v10 = DAT_004ea924;
       temp_v8 = DAT_004ea920;
@@ -262,7 +262,7 @@ void FUN_00313a48(fn_00313a48_arg0 *param_1)
                 temp_v24 = DAT_004ea924;
                 temp_v25 = DAT_004ea92c;
                 temp_v36 = DAT_004ea930;
-                FUN_002b7064();
+                phaseCosInterpolate();
                 FUN_002b70cc();
                 DAT_004ea92c = temp_v31 * temp_v23;
                 DAT_00472554 = temp_v22 * temp_v35;

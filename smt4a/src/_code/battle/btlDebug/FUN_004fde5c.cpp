@@ -41,7 +41,7 @@ typedef struct {
 
 extern int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int DAT_00573c18; /* 0x573c18 */
 extern unsigned int DAT_00573c1c; /* 0x573c1c */
@@ -52,7 +52,7 @@ extern unsigned int DAT_00573c3c; /* 0x573c3c */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_003ef9e0(unsigned int, int);
+extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: FUN_003f0254. */
 /* Supplied declaration required: FUN_003f06b4. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -117,7 +117,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
   temp_v2 = param_4 * 0xc;
   puVar4 = puVar2;
   FUN_003f0e20(puVar2,(int)param_3->field_0x6a);
-  temp_v7 = DAT_00573808;
+  temp_v7 = g_btlAux;
   if (temp_v1 != 0 && puVar4 != (unsigned int *)0x0) {
     temp_v11 = (*puVar4 & DAT_00573c18) != 0 || (puVar4[1] & DAT_00573c1c) != 0;
     temp_v10 = 0;
@@ -126,7 +126,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
     }
     if (temp_v11 && temp_v10 != 0) {
       param_4 = 0xf;
-      *(fn_004fde5c_arg2 **)(DAT_00573808 + 0x33bc) = param_3;
+      *(fn_004fde5c_arg2 **)(g_btlAux + 0x33bc) = param_3;
       *(unsigned int *)(temp_v7 + 0x339c) = *(unsigned int *)(temp_v7 + 0x339c) | 0x8000;
       temp_v7 = g_btlActionReflect;
       FUN_004102d8(g_btlActionReflect,(int)(short)((short)param_3->field_0x64 + temp_v0 + 2),0,param_2);
@@ -142,10 +142,10 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
     if (param_4 != 0) {
       param_4 = 0;
     }
-    *(unsigned int *)(DAT_00573808 + 0x339c) = *(unsigned int *)(DAT_00573808 + 0x339c) | 0x8000;
+    *(unsigned int *)(g_btlAux + 0x339c) = *(unsigned int *)(g_btlAux + 0x339c) | 0x8000;
   }
   else if (param_4 == 0) {
-    *(unsigned int *)(DAT_00573808 + 0x339c) = *(unsigned int *)(DAT_00573808 + 0x339c) | 0x8000;
+    *(unsigned int *)(g_btlAux + 0x339c) = *(unsigned int *)(g_btlAux + 0x339c) | 0x8000;
   }
   switch(param_4) {
   case 0:
@@ -256,7 +256,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
                   temp_v3 = btlGetMainState();
                   FUN_001568f8(temp_v3,(int)*(short *)(temp_v7 + 0x6a));
                   temp_v4 = btlGetMainState();
-                  temp_v5 = FUN_003ef9e0(temp_v4,temp_v7);
+                  temp_v5 = idSetFindSubjectIndex(temp_v4,temp_v7);
                   if (temp_v5 < 0) {
                     temp_v5 = 0;
                   }

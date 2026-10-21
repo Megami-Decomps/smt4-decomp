@@ -1,35 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f0b80` (_code @ 0x3f0b80, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed vector stores let the compiler retain g_btlCamera; retail reloads its global pointer after both vector assignments, with different address scheduling. */
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
+
+struct BattleCameraTransform {
+    u8 unk00[0x1c]; // 0x00
+    BattleVector3 first; // 0x1c
+    BattleVector3 second; // 0x28
+    u32 value;            // 0x34
+};
+struct BattleCameraSnapshot {
+    u8 unk0000[0x1ee0]; // 0x0000
+    BattleVector3 first;  // 0x1ee0
+    BattleVector3 second; // 0x1eec
+    u32 value;             // 0x1ef8
+};
 
 extern "C" {
+extern BattleCameraTransform* g_btlCamera;
 
-extern int g_btlCamera; /* 0x571508 */
-
-
-void FUN_003f0b80(int param_1)
-
+// Restores the battle camera's saved pair of vectors and accompanying value.
+void FUN_003f0b80(const BattleCameraSnapshot* snapshot)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_btlCamera;
-  if (g_btlCamera != 0) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x1ee4);
-    temp_v2 = *(unsigned int *)(param_1 + 0x1ee8);
-    *(unsigned int *)(g_btlCamera + 0x1c) = *(unsigned int *)(param_1 + 0x1ee0);
-    *(unsigned int *)(temp_v0 + 0x20) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x24) = temp_v2;
-    temp_v0 = g_btlCamera;
-    temp_v1 = *(unsigned int *)(param_1 + 0x1ef0);
-    temp_v2 = *(unsigned int *)(param_1 + 0x1ef4);
-    *(unsigned int *)(g_btlCamera + 0x28) = *(unsigned int *)(param_1 + 0x1eec);
-    *(unsigned int *)(temp_v0 + 0x2c) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x30) = temp_v2;
-    *(unsigned int *)(g_btlCamera + 0x34) = *(unsigned int *)(param_1 + 0x1ef8);
-  }
-  return;
+    if (g_btlCamera != NULL) {
+        g_btlCamera->first = snapshot->first;
+        g_btlCamera->second = snapshot->second;
+        g_btlCamera->value = snapshot->value;
+    }
 }
-
-} /* extern "C" */
+}

@@ -29,7 +29,7 @@ extern int FUN_002a482c(int);
 /* Supplied declaration required: pairAt8Get. */
 /* Supplied declaration required: FUN_004a5ea0. */
 /* Supplied declaration required: owner4ASetSizeAndCall. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 extern int rangeGetMinimumLimit(int);
 
 
@@ -82,7 +82,7 @@ void FUN_004a5344(int param_1)
         } while (temp_v5 < temp_v2);
       }
       if ((0 < *(int *)(param_1 + 0x28)) && (*(int *)(param_1 + 0x14) == 2)) {
-        temp_v1 = FUN_004cfe4c(param_1 + 0x20);
+        temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
         temp_v0 = *(short *)(param_1 + 0x864 + temp_v1 * 0x20 + 4);
         temp_v4 = FUN_0031d174(param_1 + 0x20);
         FUN_004a5ea0(param_1,temp_v4,1,(int)temp_v0);

@@ -14,7 +14,7 @@ extern int g_partyPanel; /* 0x57f268 */
 extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_003344b4. */
-extern int FUN_0038b568(void);
+extern int aocDataBlockHasEntries(void);
 /* Supplied declaration required: obj48Arm. */
 /* Supplied declaration required: pair40Set. */
 
@@ -34,7 +34,7 @@ void FUN_0020b718(int param_1,int param_2)
   *(int *)(temp_v0 + 0x1c) = param_1;
   *(unsigned int *)(temp_v0 + 0x18) = 0;
   if (param_1 == 0x1b) {
-    temp_v1 = FUN_0038b568();
+    temp_v1 = aocDataBlockHasEntries();
     if (temp_v1 == 0) {
       *(unsigned int *)(temp_v0 + 0x1c) = 0x1c;
       return;

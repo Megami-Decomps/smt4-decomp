@@ -9,7 +9,7 @@ int FUN_0045e228(...);
 int nw_snd_SoundHandle_detail_AttachSound(...);
 
 int FUN_0015fe40(int, int *);
-int FUN_001742e4(...);
+int asdSoundObjectStop(...);
 int FUN_001756d0(...);
 int FUN_0018c87c(...);
 int nw_snd_SoundArchive_GetSoundType(int, int *);
@@ -74,7 +74,7 @@ extern unsigned char DAT_00548f40; /* 0x548f40 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int nw_snd_SoundArchive_IsAvailable(void);
 /* Supplied declaration required: FUN_0015fe40. */
-/* Supplied declaration required: FUN_001742e4. */
+/* Supplied declaration required: asdSoundObjectStop. */
 /* Supplied declaration required: FUN_001756d0. */
 extern unsigned long long FUN_00178400(unsigned int, int *, unsigned char *);
 /* Supplied declaration required: FUN_0018c87c. */
@@ -444,7 +444,7 @@ LAB_0045d4ac:
             piVar11 = (int *)UnsignedSaturate(temp_v4,7);
             UnsignedDoesSaturate(temp_v4,7);
             if ((int)piVar11 <= temp_v2) {
-              FUN_001742e4(temp_v3 - 0xf8,0);
+              asdSoundObjectStop(temp_v3 - 0xf8,0);
               piVar11 = temp_v21;
               goto LAB_0045d4ac;
             }
@@ -519,7 +519,7 @@ LAB_0045d328:
             piVar11 = (int *)UnsignedSaturate(temp_v4,7);
             UnsignedDoesSaturate(temp_v4,7);
             if ((int)piVar11 <= temp_v2) {
-              FUN_001742e4(temp_v3 - 0xf8,0);
+              asdSoundObjectStop(temp_v3 - 0xf8,0);
               piVar11 = temp_v17;
               goto LAB_0045d328;
             }
@@ -595,7 +595,7 @@ LAB_0045d0e4:
           piVar11 = (int *)UnsignedSaturate(temp_v4,7);
           UnsignedDoesSaturate(temp_v4,7);
           if ((int)piVar11 <= temp_v2) {
-            FUN_001742e4(temp_v3 - 0xf8,0);
+            asdSoundObjectStop(temp_v3 - 0xf8,0);
             piVar11 = temp_v12;
             goto LAB_0045d0e4;
           }

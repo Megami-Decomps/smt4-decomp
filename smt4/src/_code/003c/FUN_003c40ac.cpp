@@ -8,7 +8,7 @@ extern unsigned int DAT_00439ad4; /* 0x439ad4 */
 
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int);
-extern unsigned int FUN_0025628c(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 extern unsigned int *gameGetSlotTable(void);
 
 
@@ -20,7 +20,7 @@ void FUN_003c40ac(int param_1,int param_2)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_0025628c(*(unsigned int *)(param_1 + 0x10));
+  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   switch(temp_v0) {
   case 0:
     temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);

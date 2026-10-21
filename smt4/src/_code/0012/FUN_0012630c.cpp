@@ -27,7 +27,7 @@ extern u32 g_aocSystem;
 AocJob *jobGetWork(void);
 u16 *FUN_002aecd8(void *table, u32 index);
 s32 FUN_002c1d5c(void);
-s32 FUN_002ae98c(u32 system, TrackId track, s32 arg);
+s32 aocRunByName(u32 system, TrackId track, s32 arg);
 int FUN_002ae8e4(u32 system, TrackId track, s32 arg);
 int FUN_002c58c8(TrackId track);
 
@@ -65,7 +65,7 @@ void FUN_0012630c(void *unused, u32 index, s32 queue)
     }
     job->muted = 0;
     job->volume = 1.0f;
-    if (FUN_002ae98c(g_aocSystem, job->current, 1) != 0) {
+    if (aocRunByName(g_aocSystem, job->current, 1) != 0) {
         FUN_002ae8e4(g_aocSystem, job->current, 0x10000);
         return;
     }

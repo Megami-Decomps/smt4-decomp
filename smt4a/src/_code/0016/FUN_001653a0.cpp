@@ -31,13 +31,13 @@ typedef struct RenderGlobals {
     /* 0x08 */ Renderer *renderer;
 } RenderGlobals;
 
-extern RenderGlobals DAT_005b4028;
+extern RenderGlobals g_allocationAddressRanges;
 
 /* Queues one vertex into the batch (flushing a full batch to the renderer), or, without a batch or
  * batch callback, draws it immediately with its coordinates truncated to integers. */
 void FUN_001653a0(VertexBatch *batch, s32 color, f32 x, f32 y, f32 z, f32 w)
 {
-    if (DAT_005b4028.renderer->drawBatch != NULL && batch != NULL) {
+    if (g_allocationAddressRanges.renderer->drawBatch != NULL && batch != NULL) {
         batch->vertices[batch->count].x = x;
         batch->vertices[batch->count].y = y;
         batch->vertices[batch->count].z = z;
@@ -45,12 +45,12 @@ void FUN_001653a0(VertexBatch *batch, s32 color, f32 x, f32 y, f32 z, f32 w)
         batch->vertices[batch->count].color = color;
         batch->count++;
         if (batch->count >= VERTEX_BATCH) {
-            DAT_005b4028.renderer->drawBatch(batch->vertices, VERTEX_BATCH);
+            g_allocationAddressRanges.renderer->drawBatch(batch->vertices, VERTEX_BATCH);
             batch->count = 0;
         }
         return;
     }
-    DAT_005b4028.renderer->drawPoint((s32)x, (s32)y, (s32)z, (s32)w, color);
+    g_allocationAddressRanges.renderer->drawPoint((s32)x, (s32)y, (s32)z, (s32)w, color);
 }
 
 } /* extern "C" */

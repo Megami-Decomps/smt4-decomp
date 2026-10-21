@@ -24,7 +24,7 @@ typedef struct HandlerList00280f98 {
     /* 0x75c */ HandlerRange00280f98 handlers;
 } HandlerList00280f98;
 
-void FUN_001742e4(void);
+void asdSoundObjectStop(void);
 
 extern HandlerList00280f98 g_asdSoundSystem; /* 0x63e1e8 */
 
@@ -39,7 +39,7 @@ void handlerFinishById(s32 id)
         do {
             if (handler->id == id) {
                 if (handler->job != 0) {
-                    FUN_001742e4();
+                    asdSoundObjectStop();
                 }
                 handler->done = 1;
                 handler->callback = 0;

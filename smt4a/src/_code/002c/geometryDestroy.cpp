@@ -1,56 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `geometryDestroy` (_code @ 0x2ce8d8, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match2_GeometryResources.h"
 
 extern "C" {
+void FUN_002ce8b0(void* special);
+void asdOperatorDelete(void* memory);
+void asdTextureRelease(AsdTexture* texture);
+void asdMemFree(void* memory);
 
-int asdTextureRelease(void);
-int asdMemFree(unsigned short *);
-int FUN_002ce8b0(void);
-int asdOperatorDelete(void);
-int bufferReleaseOwnedPair(unsigned int);
-int bufferDestroyOwnedPair(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: asdTextureRelease. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002ce8b0. */
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: bufferReleaseOwnedPair. */
-/* Supplied declaration required: bufferDestroyOwnedPair. */
-
-
-void geometryDestroy(unsigned short *param_1)
-
+// Release the geometry's special or paired buffers, its texture, and the geometry itself.
+void geometryDestroy(GeometryResources* geometry)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  
-  temp_v0 = (unsigned int)*param_1;
-  temp_v1 = (*param_1 & 0x200) == 0;
-  if (!temp_v1) {
-    temp_v0 = *(unsigned int *)(param_1 + 6);
-  }
-  if (!(temp_v1 || temp_v0 == 0)) {
-    FUN_002ce8b0();
-  }
-  else {
-    bufferReleaseOwnedPair(*(unsigned int *)(param_1 + 4));
-    if (*(int *)(param_1 + 4) != 0) {
-      bufferDestroyOwnedPair();
-      asdOperatorDelete();
+    if ((geometry->flags & 0x200) != 0 && geometry->special != NULL) {
+        FUN_002ce8b0(geometry->special);
+    } else {
+        bufferReleaseOwnedPair(geometry->buffers);
+        if (geometry->buffers != NULL) {
+            asdOperatorDelete(bufferDestroyOwnedPair(geometry->buffers));
+        }
     }
-  }
-  if (*(int *)(param_1 + 2) != 0) {
-    asdTextureRelease();
-  }
-  asdMemFree(param_1);
-  return;
+    if (geometry->texture != NULL) {
+        asdTextureRelease(geometry->texture);
+    }
+    asdMemFree(geometry);
 }
-
-} /* extern "C" */
+}

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00163aa4(int);
 int FUN_00168980(int);
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int msgWindowReset(void);
 int sub68OwnerDestroy(void);
 int pointConvertToFloat(int, unsigned int, unsigned int);
@@ -27,7 +27,7 @@ extern unsigned char DAT_005f1a5f; /* 0x5f1a5f */
 extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00168980. */
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: msgWindowReset. */
 extern int FUN_002e19f8(void);
 /* Supplied declaration required: sub68OwnerDestroy. */
@@ -45,7 +45,7 @@ void FUN_0048c1c0(int param_1)
   
   temp_v0 = *(int *)(param_1 + 8);
   if (temp_v0 == 0) {
-    FUN_00184528(param_1 + 0x4e4,1);
+    uiSpriteBankApplyPreset(param_1 + 0x4e4,1);
     if (DAT_005f1891 == '\0') {
       FUN_00168980(0x1b);
     }

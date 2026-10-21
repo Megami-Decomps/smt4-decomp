@@ -8,7 +8,7 @@ int asdOperatorNew(void);
 
 extern int g_aocSystem; /* 0x433158 */
 
-extern int FUN_00110e7c(void);
+extern int largeWorkStateInitialize(void);
 /* Supplied declaration required: asdOperatorNew. */
 
 
@@ -25,7 +25,7 @@ void FUN_0010707c(void)
     asdOperatorNew();
     temp_v1 = 0;
     if (temp_v0 != 0) {
-      temp_v1 = FUN_00110e7c();
+      temp_v1 = largeWorkStateInitialize();
     }
   }
   g_aocSystem = temp_v1;

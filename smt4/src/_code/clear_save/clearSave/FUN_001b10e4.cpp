@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0017f724(...);
+int uiAdjustIntegerFromRepeat(...);
 int FUN_001c36d8(...);
 int FUN_00285c9c(void);
 int FUN_00287728(...);
 int gameFlagSetValue(...);
 int scrScriptProcessStartEntry(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int FUN_0029ee6c(...);
 int FUN_002a03d8(int, int);
 int buttonHelpSetPreset(...);
@@ -26,11 +26,11 @@ typedef struct {
 
 extern unsigned int *g_clearSave; /* 0x43de80 */
 
-/* Supplied declaration required: FUN_0017f724. */
-extern int FUN_0019e0c0(unsigned int);
+/* Supplied declaration required: uiAdjustIntegerFromRepeat. */
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001c36d8. */
 extern int FUN_00215a24(void);
-extern int FUN_00282b28(void);
+extern int screenFadeIsBusy(void);
 extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: FUN_00285c9c. */
 /* Supplied declaration required: FUN_00287728. */
@@ -39,7 +39,7 @@ extern int FUN_002896bc(void);
 extern unsigned int FUN_00290e9c(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a03d8. */
 extern int gameGetSlotTable(void);
@@ -72,8 +72,8 @@ unsigned int FUN_001b10e4(void)
   switch(*(unsigned int *)(temp_v0 + 0xc)) {
   case 0:
     *(unsigned int *)(temp_v0 + 0xc) = 1;
-    FUN_0029c3c0(0,0,0xff);
-    FUN_0029c3c0(1,0,0xff);
+    slotSetRequest(0,0,0xff);
+    slotSetRequest(1,0,0xff);
     break;
   case 1:
     *(unsigned int *)(temp_v0 + 0xc) = 2;
@@ -89,7 +89,7 @@ unsigned int FUN_001b10e4(void)
     }
     break;
   case 3:
-    temp_v5 = FUN_0017f724(temp_v0 + 0x1c,0,8,1,0,1);
+    temp_v5 = uiAdjustIntegerFromRepeat(temp_v0 + 0x1c,0,8,1,0,1);
     if (temp_v5 == 0) {
       temp_v5 = padIsButtonPressed(0);
       if (temp_v5 == 0) {
@@ -107,8 +107,8 @@ unsigned int FUN_001b10e4(void)
       temp_v5 = *(int *)(temp_v0 + 0x1c);
       if (temp_v5 == 7) {
         *(unsigned int *)(temp_v0 + 0xc) = 4;
-        FUN_0029c3c0(0,10,0xff);
-        FUN_0029c3c0(1,10,0xff);
+        slotSetRequest(0,10,0xff);
+        slotSetRequest(1,10,0xff);
         return 0;
       }
       if (temp_v5 != 8) {
@@ -160,15 +160,15 @@ unsigned int FUN_001b10e4(void)
     FUN_0029ee6c(temp_v0,0x323232ff);
     break;
   case 6:
-    temp_v5 = FUN_0019e0c0(*(unsigned int *)(temp_v0 + 0x8c));
+    temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x8c));
     if (temp_v5 != 2) {
       return 0;
     }
     temp_v5 = FUN_002973d8();
     if (temp_v5 == 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 0xb;
-      FUN_0029c3c0(0,10,0xff);
-      FUN_0029c3c0(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
       return 0;
     }
     if (temp_v5 != 1) {
@@ -178,7 +178,7 @@ unsigned int FUN_001b10e4(void)
     *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
     break;
   case 7:
-    temp_v5 = FUN_0017f724(temp_v0 + 0x20,0,*(int *)(temp_v0 + 0x84) - 1,1,1,1);
+    temp_v5 = uiAdjustIntegerFromRepeat(temp_v0 + 0x20,0,*(int *)(temp_v0 + 0x84) - 1,1,1,1);
     if (temp_v5 != 0) {
       return 0;
     }
@@ -197,7 +197,7 @@ unsigned int FUN_001b10e4(void)
     *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
     break;
   case 8:
-    temp_v5 = FUN_0019e0c0(*(unsigned int *)(temp_v0 + 0x8c));
+    temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x8c));
     if (temp_v5 == 2) {
       *(unsigned int *)(temp_v0 + 0x10) = 0;
       *(unsigned int *)(temp_v0 + 0x14) = 0;
@@ -251,20 +251,20 @@ unsigned int FUN_001b10e4(void)
       scrScriptProcessStartEntry(temp_v4,temp_v6);
       return 0;
     }
-    FUN_0029c3c0(0,0x14,0xff);
-    FUN_0029c3c0(1,0x14,0xff);
+    slotSetRequest(0,0x14,0xff);
+    slotSetRequest(1,0x14,0xff);
     temp_v4 = 0xb;
     *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
     break;
   case 10:
-    temp_v5 = FUN_0019e0c0(*(unsigned int *)(temp_v0 + 0x8c));
+    temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x8c));
     if (temp_v5 != 2) {
       return 0;
     }
     temp_v5 = FUN_002973d8();
     if (temp_v5 == 0) {
-      FUN_0029c3c0(0,0x14,0xff);
-      FUN_0029c3c0(1,0x14,0xff);
+      slotSetRequest(0,0x14,0xff);
+      slotSetRequest(1,0x14,0xff);
       temp_v4 = 0xb;
       *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
       break;
@@ -276,7 +276,7 @@ unsigned int FUN_001b10e4(void)
     *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
     break;
   case 0xb:
-    temp_v5 = FUN_00282b28();
+    temp_v5 = screenFadeIsBusy();
     if (temp_v5 == 0) {
       if (*(char *)(temp_v0 + 8) != '\0') {
         FUN_00287728(0);

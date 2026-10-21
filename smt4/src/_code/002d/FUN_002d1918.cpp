@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_001f71b4(void);
-int FUN_0024ad88(u32 obj);
+int bufferObjDestroy(u32 obj);
 int objectBufferFree(void);
 int asdMemFree(int ptr);
 
@@ -29,8 +29,8 @@ void FUN_002d1918(Obj *obj)
     }
     if (obj->sub != NULL) {
         sub = obj->sub;
-        FUN_0024ad88(sub->unk10);
-        FUN_0024ad88(sub->unk14);
+        bufferObjDestroy(sub->unk10);
+        bufferObjDestroy(sub->unk14);
         asdMemFree((int)sub);
     }
     if (obj->unk30 != 0) {

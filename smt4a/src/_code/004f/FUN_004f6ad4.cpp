@@ -5,12 +5,12 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_002804b0(unsigned char [128], int, int);
+int asdLoadFileAsyncSimple(unsigned char [128], int, int);
 int wstrlen(...);
 int libc_strcpy(...);
 int sysMemClear(...);
 int libc_strcmp(...);
-int FUN_004f612c(int);
+int btlCameraFinishTransition(int);
 
 extern unsigned char LAB_004f6d24; /* 0x4f6d24 */
 extern unsigned int g_btlEffect; /* 0x5737f0 */
@@ -21,13 +21,13 @@ extern unsigned int DAT_00573804; /* 0x573804 */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 extern int libc_strncmp(int, unsigned int, unsigned int);
 extern unsigned int FUN_002282c8(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: libc_strcmp. */
 extern int findRecordByKey(int);
-/* Supplied declaration required: FUN_004f612c. */
+/* Supplied declaration required: btlCameraFinishTransition. */
 
 
 unsigned int FUN_004f6ad4(int param_1)
@@ -70,7 +70,7 @@ unsigned int FUN_004f6ad4(int param_1)
                 puVar4 = temp_v6;
                 libc_strcmp(puVar4,temp_v4);
                 if (puVar4 == (unsigned char *)0x0) {
-                  FUN_004f612c(param_1);
+                  btlCameraFinishTransition(param_1);
                   temp_v1 = FUN_002282c8(temp_v2 & 0xff,7,0);
                   *(unsigned int *)(param_1 + 0x33a8) = temp_v1;
                   *(char *)(param_1 + 0x33ac) = (char)temp_v2;
@@ -92,7 +92,7 @@ unsigned int FUN_004f6ad4(int param_1)
               libc_strcpy(temp_v0 + 0x2194,temp_v4 + 1);
               temp_v4 = findRecordByKey(temp_v0 + 0x2194);
               if (temp_v4 == 0xff) {
-                FUN_002804b0(temp_v5,temp_v0 + 0x2190,1);
+                asdLoadFileAsyncSimple(temp_v5,temp_v0 + 0x2190,1);
                 *(unsigned char *)(temp_v0 + 0x2214) = *(unsigned char *)(temp_v0 + 0x2214) | 1;
               }
             }

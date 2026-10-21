@@ -41,7 +41,7 @@ extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: FUN_002f82ac. */
 /* Supplied declaration required: FUN_0030ed8c. */
 extern int FUN_00318cac(unsigned int *);
-extern int FUN_00323468(unsigned int *, unsigned char *);
+extern int formattedTextCopyLabel(unsigned int *, unsigned char *);
 
 
 unsigned char * FUN_00242080(unsigned int param_1)
@@ -64,7 +64,7 @@ unsigned char * FUN_00242080(unsigned int param_1)
   if (DAT_0044eabc != (unsigned int *)0x0) {
     FUN_002f82ac(DAT_0044eac0);
     temp_v5 = DAT_0044eac0[2];
-    temp_v4 = FUN_00323468(DAT_0044eac0,temp_v3);
+    temp_v4 = formattedTextCopyLabel(DAT_0044eac0,temp_v3);
     temp_v6 = FUN_00318cac(DAT_0044eac0);
     if (temp_v5 == 1) {
       FUN_00247240(DAT_0044eac0);

@@ -13,7 +13,7 @@ int onlineStringAssign(int, unsigned int);
 extern unsigned char LAB_0012104c; /* 0x12104c */
 
 /* Supplied declaration required: FUN_00106c88. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringDestroy. */
@@ -31,7 +31,7 @@ void FUN_00120fc0(int param_1)
   unsigned char temp_v2 [12];
   unsigned char temp_v3 [8];
   
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v2,temp_v0 + 0x58);
   FUN_00106c88(*(int *)(param_1 + 4) + 0x10);
   *(unsigned int *)(*(int *)(param_1 + 4) + 0x44) = 0xffffffff;

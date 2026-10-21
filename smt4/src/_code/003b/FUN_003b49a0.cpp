@@ -58,14 +58,14 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0029a17c. */
 extern unsigned int FUN_0029a924(unsigned short);
 extern int FUN_0029aafc(void);
-extern int FUN_0029c8f4(int);
+extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: FUN_0029cde0. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029efa8. */
 extern int gameGetUnitRecord(int);
-extern int FUN_002ae108(unsigned short);
+extern int playerGetSkillRank(unsigned short);
 /* Supplied declaration required: FUN_002b6c34. */
-extern unsigned int FUN_002bce00(unsigned short);
+extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -224,14 +224,14 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)((int)piVar5 + 10) + temp_v3,0x6a,
                        1,temp_v17);
           temp_v12 = FUN_002bf4f8(temp_v11,0xdf);
-          temp_v4 = FUN_002bce00(*(unsigned short *)(temp_v27 + 0x14));
+          temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v27 + 0x14));
           textFormatBuffer(temp_v10,&LAB_003b4cc8,temp_v4);
           VectorSignedToFloat((int)*(short *)((int)piVar5 + 10) + (int)*(short *)(temp_v12 + 10) +
                               temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)(short)piVar5[2] + temp_v1,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_002be5a4(2,temp_v2,temp_v10,(int)(short)piVar5[2]);
-          temp_v5 = FUN_002ae108(*(unsigned short *)(temp_v27 + 0x14));
+          temp_v5 = playerGetSkillRank(*(unsigned short *)(temp_v27 + 0x14));
           temp_v2 = FUN_00333ea8(*(unsigned short *)(temp_v27 + 0x14),temp_v5 + temp_v17);
           temp_v5 = FUN_002bf4f8(temp_v11,0xe3);
           FUN_002bdf94(1,(int)(short)piVar5[2] + (int)*(short *)(temp_v5 + 8) + temp_v1,
@@ -335,7 +335,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
         temp_v2 = 0x8400ff;
       }
       temp_v5 = FUN_002bf4f8(temp_v11,0xfe);
-      temp_v4 = FUN_002bce00(*(unsigned short *)(temp_v3 + 0xd114));
+      temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v3 + 0xd114));
       textFormatBuffer(temp_v10,&LAB_003b56f8,temp_v4);
       VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -347,7 +347,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
                    (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,0xc9,1,temp_v8
                   );
-      temp_v5 = FUN_002ae108(*(unsigned short *)(temp_v3 + 0xd114));
+      temp_v5 = playerGetSkillRank(*(unsigned short *)(temp_v3 + 0xd114));
       temp_v2 = FUN_00333ea8(*(unsigned short *)(temp_v3 + 0xd114),temp_v5 + temp_v8);
       temp_v3 = FUN_002bf4f8(temp_v11,0x102);
       FUN_002bdf94(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
@@ -364,7 +364,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       FUN_002be5a4(2,0xffffffff,temp_v10,(int)*(short *)(temp_v1 + 8));
     }
   }
-  temp_v15 = FUN_0029c8f4(temp_v14);
+  temp_v15 = flagCountUnlockedSlots(temp_v14);
   temp_v21 = param_1 + 0xd0b0;
   temp_v1 = 0;
   do {
@@ -410,7 +410,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
             temp_v2 = 0xff;
           }
           temp_v12 = FUN_002bf4f8(temp_v11,0xdf);
-          temp_v4 = FUN_002bce00(*(unsigned short *)(temp_v22 + 0x34));
+          temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v22 + 0x34));
           textFormatBuffer(temp_v10,&LAB_003b56f8,temp_v4);
           VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v12 + 10) + param_3
                               ,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -522,7 +522,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       temp_v2 = 0x5a5a5aff;
     }
     temp_v5 = FUN_002bf4f8(temp_v11,0xfe);
-    temp_v4 = FUN_002bce00(*(unsigned short *)(temp_v1 + 0x34));
+    temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v1 + 0x34));
     textFormatBuffer(temp_v10,&LAB_003b5f20,temp_v4);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

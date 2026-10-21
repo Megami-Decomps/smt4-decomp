@@ -9,7 +9,7 @@ void nn_os_CriticalSection_Leave(void *cs);
 void nw_snd_internal_FrameHeap_Clear(u32 *heap);
 void nw_snd_internal_FrameHeap_Destroy(u32 *heap);
 u32 *nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0(u32 *heap);
-u32 FUN_00175678(void);
+u32 objectCommandQueueGet(void);
 u32 FUN_001911a4(u32 arg0, u32 arg1);
 void FUN_001912cc(u32 arg0, u32 arg1);
 
@@ -33,7 +33,7 @@ static __inline void soundHeapObjDestroyHeap(SoundHeapObj *self)
     nn_os_CriticalSection_Enter(lock);
     if (self->heap != 0) {
         soundHeapObjClear(self);
-        u32 heapOwner = FUN_00175678();
+        u32 heapOwner = objectCommandQueueGet();
         FUN_001912cc(heapOwner, FUN_001911a4(heapOwner, 1));
         nw_snd_internal_FrameHeap_Destroy(&self->heap);
         nn_os_CriticalSection_Leave(lock);

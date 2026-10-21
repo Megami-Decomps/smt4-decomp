@@ -7,14 +7,14 @@ extern "C" {
 int FUN_002305fc(unsigned int *);
 int FUN_00233670(unsigned int *, int, unsigned int, unsigned int);
 int FUN_00233818(void);
-int FUN_00233854(unsigned int);
+int ifTouchRegionClearAll(unsigned int);
 int ifTouchRegionRemove(void);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: FUN_002305fc. */
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 /* Supplied declaration required: ifTouchRegionRemove. */
 
@@ -29,7 +29,7 @@ void FUN_002302d8(unsigned int *param_1,int param_2)
   unsigned int temp_v3;
   int temp_v4;
   
-  FUN_00233854(param_1[0x217]);
+  ifTouchRegionClearAll(param_1[0x217]);
   FUN_00233818();
   temp_v4 = 0;
   if (temp_v4 < (short)param_1[0x5754]) {

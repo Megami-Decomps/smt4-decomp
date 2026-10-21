@@ -7,7 +7,7 @@ extern "C" {
 int __aeabi_memset4(int, int, int);
 int sysMemClear(int, int);
 
-extern int DAT_005b4400; /* 0x5b4400 */
+extern int g_textureBindingState; /* 0x5b4400 */
 
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: sysMemClear. */
@@ -30,10 +30,10 @@ unsigned int FUN_00160944(int param_1)
   unsigned int temp_v10;
   unsigned int temp_v11;
   
-  DAT_005b4400 = param_1;
+  g_textureBindingState = param_1;
   sysMemClear(param_1,0x868);
-  temp_v0 = DAT_005b4400;
-  *(unsigned char *)(DAT_005b4400 + 0x18) = 0;
+  temp_v0 = g_textureBindingState;
+  *(unsigned char *)(g_textureBindingState + 0x18) = 0;
   *(unsigned char *)(temp_v0 + 0x19) = 0;
   *(unsigned int *)(temp_v0 + 0x10) = 4;
   *(unsigned int *)(temp_v0 + 0x14) = 4;
@@ -73,10 +73,10 @@ unsigned int FUN_00160944(int param_1)
   *(unsigned char *)(temp_v0 + 0x109) = 0;
   *(unsigned int *)(temp_v0 + 0x100) = 0;
   sysMemClear(temp_v0 + 0x74,0x80);
-  temp_v0 = DAT_005b4400;
+  temp_v0 = g_textureBindingState;
   temp_v1 = 0;
   temp_v2 = 0x10;
-  *(unsigned int *)(DAT_005b4400 + 0xf4) = 0;
+  *(unsigned int *)(g_textureBindingState + 0xf4) = 0;
   do {
     temp_v3 = temp_v0 + temp_v1 * 0x10;
     temp_v2 = temp_v2 - 1;

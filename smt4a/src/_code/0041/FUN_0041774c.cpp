@@ -19,7 +19,7 @@ int FUN_004bd6b0(unsigned int, int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: saveSlotFindById. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
@@ -90,7 +90,7 @@ unsigned int FUN_0041774c(int param_1)
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x13);
     *(unsigned int *)(param_1 + 0xc) = 3;
   case 3:
-    temp_v3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
     if (temp_v3 == 2) {
       temp_v3 = FUN_002a4b74();
       if (temp_v3 == 0) {
@@ -108,7 +108,7 @@ unsigned int FUN_0041774c(int param_1)
     }
     break;
   case 4:
-    temp_v3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
     if (temp_v3 == 2) {
       FUN_00333dc8(0);
       *(unsigned int *)(param_1 + 0xc) = 5;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ad2dc(int);
+int colorKeyTrackAdvanceRgb(int);
 int FUN_001dd974(void);
 int FUN_001dda40(void);
 int FUN_001ee200(void);
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001ad2dc. */
+/* Supplied declaration required: colorKeyTrackAdvanceRgb. */
 /* Supplied declaration required: FUN_001dd974. */
 /* Supplied declaration required: FUN_001dda40. */
 /* Supplied declaration required: FUN_001ee200. */
@@ -48,7 +48,7 @@ void FUN_00193f38(int param_1,unsigned int param_2)
       *(unsigned int *)(param_1 + 0x210) = 0;
       *(unsigned int *)(param_1 + 0x214) = 0;
       *(unsigned int *)(param_1 + 0x218) = 0;
-      FUN_001ad2dc(param_1);
+      colorKeyTrackAdvanceRgb(param_1);
     }
     else {
       FUN_00291008(param_1 + 0x1e4);

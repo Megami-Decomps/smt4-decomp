@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c450c` (_code @ 0x2c450c, 0x384 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "shard/W6_W6Match7_FontResource.h"
 
 extern "C" {
 
-int FUN_00121c60(void);
-int asdTextureSetImage(void);
-int asdTextureCreate(void);
+AsdTexture* asdTextureCreate(s32 shared);
 int asdTextureRelease(unsigned int);
 int asdOperatorNew(void);
 int asdMemFree(...);
@@ -21,10 +21,7 @@ typedef struct {
 extern int DAT_00464a70; /* 0x464a70 */
 extern unsigned int *DAT_00464a74; /* 0x464a74 */
 
-/* Supplied declaration required: FUN_00121c60. */
 extern int FUN_00121e38(void);
-/* Supplied declaration required: asdTextureSetImage. */
-/* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemFree. */
@@ -88,7 +85,9 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
       temp_v4 = FUN_00121e38();
     }
     piVar11[2] = temp_v4;
-    FUN_00121c60();
+    temp_v4 = nw_font_ResFontSetResource(
+        reinterpret_cast<NwResFontBase*>(piVar11[2]),
+        reinterpret_cast<NwFontFileHeader*>(*piVar11));
     if (temp_v4 != 0) {
       temp_v4 = *piVar11;
       piVar9 = (int *)0x0;
@@ -182,8 +181,7 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
       temp_v7 = 0;
       if (temp_v7 < (unsigned int)piVar11[4]) {
         do {
-          temp_v5 = 0;
-          asdTextureCreate();
+          temp_v5 = (int)asdTextureCreate(0);
           *(int *)(piVar11[3] + temp_v7 * 4) = temp_v5;
           temp_v6 = *(int *)(temp_v3 + 0x14);
           temp_v1 = *(unsigned short *)(temp_v3 + 0x10);
@@ -201,7 +199,7 @@ unsigned int FUN_002c450c(unsigned int *param_1,int param_2)
           *(int *)(temp_v5 + 0x20) = temp_v9;
           *(int *)(temp_v5 + 0x24) = temp_v6 + temp_v4;
           *(unsigned int *)(temp_v5 + 0x28) = temp_v10;
-          asdTextureSetImage();
+          asdTextureSetImage((AsdTexture*)temp_v5);
           temp_v7 = temp_v7 + 1;
           temp_v4 = temp_v4 + *(int *)(temp_v3 + 4);
         } while (temp_v7 < (unsigned int)piVar11[4]);

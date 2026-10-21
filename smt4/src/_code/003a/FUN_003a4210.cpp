@@ -40,7 +40,7 @@ extern int FUN_0028fb3c(unsigned int);
 /* Supplied declaration required: FUN_002b7bca. */
 extern unsigned short *FUN_002c0a2c(unsigned char, unsigned int);
 /* Supplied declaration required: memClear. */
-extern unsigned int FUN_003a61b4(unsigned int, unsigned int, unsigned int);
+extern unsigned int resolveWeightedItemChoice(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 void FUN_003a4210(int param_1)
@@ -86,7 +86,7 @@ void FUN_003a4210(int param_1)
       if (temp_v7 < temp_v3) {
         do {
           aocRecordLookup83(temp_v8);
-          temp_v4 = FUN_003a61b4(temp_v8,0xffff,0xffff);
+          temp_v4 = resolveWeightedItemChoice(temp_v8,0xffff,0xffff,1);
           if (temp_v4 != 0) {
             temp_v1 = temp_v8;
             temp_v2 = (unsigned short)temp_v4;

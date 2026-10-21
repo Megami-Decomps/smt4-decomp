@@ -38,7 +38,7 @@ extern unsigned int FUN_0017760c(fn_003e9cec_arg2 *);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
-extern unsigned short FUN_004bca20(fn_003e9cec_arg2 *);
+extern unsigned short partySlotFindIndex(fn_003e9cec_arg2 *);
 /* Supplied declaration required: randomGetLowerTenBits. */
 /* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: clearTwoWords. */
@@ -65,7 +65,7 @@ void FUN_003e9cec(unsigned int param_1,unsigned char *param_2,fn_003e9cec_arg2 *
     *(unsigned short *)(param_2 + 8) = 0xffff;
   }
   else {
-    temp_v3 = FUN_004bca20(param_3);
+    temp_v3 = partySlotFindIndex(param_3);
     *(unsigned short *)(param_2 + 8) = temp_v3;
   }
   temp_v4 = (unsigned int)param_3->field_0x62;

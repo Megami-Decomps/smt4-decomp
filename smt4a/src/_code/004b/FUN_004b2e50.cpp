@@ -46,7 +46,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0035ae58. */
-extern int FUN_003e4940(void);
+extern int actorIsActive(void);
 extern int FUN_003e4cb4(void);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_004b3a4c. */
@@ -119,7 +119,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
   do {
     acStack_58[temp_v9] = '\0';
     FUN_003e503c(temp_v9 & 0xffff);
-    temp_v1 = FUN_003e4940();
+    temp_v1 = actorIsActive();
     if (temp_v1 != 0) {
       acStack_58[temp_v9] = '\x01';
     }

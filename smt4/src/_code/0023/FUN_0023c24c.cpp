@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0023ea20(int, int);
-int FUN_002d582c(int);
+int modelSetAnimationChannels(int, int);
+void FUN_002d582c(int, float);
 
-/* Supplied declaration required: FUN_0023ea20. */
+/* Supplied declaration required: modelSetAnimationChannels. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_002d582c. */
 
@@ -35,8 +35,8 @@ void FUN_0023c24c(int param_1,int param_2,int param_3)
         temp_v1 = *(int *)(temp_v0 + 0x198);
       }
       if (temp_v4 && temp_v1 == param_3) {
-        FUN_0023ea20(*piVar6,0);
-        FUN_002d582c(*piVar6);
+        modelSetAnimationChannels(*piVar6,0);
+        FUN_002d582c(*piVar6, 1.0f);
         puVar2 = (unsigned int *)*piVar6;
         *puVar2 = *puVar2 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar2[2] + 0x2c) + 0x1f6) = 1;

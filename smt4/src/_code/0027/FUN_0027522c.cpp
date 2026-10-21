@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
 int FUN_0029bb14(unsigned int);
-int FUN_002a5710(unsigned int);
+int modelSelectPrimaryMotion(unsigned int);
 
 extern int g_mapObj; /* 0x447e70 */
 extern unsigned char g_gameState; /* 0x49f91c */
@@ -15,7 +15,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_0029bb14. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 
 
 void FUN_0027522c(void)
@@ -50,7 +50,7 @@ void FUN_0027522c(void)
             FUN_0028c618(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8),0);
           }
           if (*(int *)(*(int *)(*(int *)(temp_v2 + 0x3c) + 8) + 0x38) != *(int *)(temp_v2 + 0x34)) {
-            FUN_002a5710(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8));
+            modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8));
             FUN_0029bb14(*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 8));
           }
           *(unsigned char *)(temp_v2 + 0x15) = 0;

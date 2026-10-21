@@ -10,13 +10,13 @@ typedef struct Work {
     /* 0x0A */ u16 unk0A;
 } Work;
 
-extern Work *DAT_0044cd88;
+extern Work *g_mapStateSlots;
 
 void FUN_0027cc48(u16 a, u16 b)
 {
-    Work *work = DAT_0044cd88;
+    Work *work = g_mapStateSlots;
 
-    DAT_0044cd88->unk08 = 0;
+    g_mapStateSlots->unk08 = 0;
     work->unk0A = 0;
     work->unk04 = a;
     work->unk06 = b;

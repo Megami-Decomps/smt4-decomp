@@ -9,8 +9,8 @@ int FUN_00184310(void);
 int dataTable00FindById(void);
 int FUN_004a5b20(int);
 int FUN_004a6610(int, int);
-int FUN_004a83f8(void);
-int FUN_004a849c(int, unsigned char [24]);
+int slotPoolResetTrackedState(void);
+int inventoryListAppend(int, unsigned char [24]);
 int FUN_004a8584(unsigned char [24], int, int);
 int FUN_004cfeb0(int, int, int, int, int, int);
 int FUN_004d05c4(int, int, int, int);
@@ -32,9 +32,9 @@ typedef struct {
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_004a5b20. */
 /* Supplied declaration required: FUN_004a6610. */
-/* Supplied declaration required: FUN_004a83f8. */
+/* Supplied declaration required: slotPoolResetTrackedState. */
 extern unsigned char gaugePercent(int, unsigned int);
-/* Supplied declaration required: FUN_004a849c. */
+/* Supplied declaration required: inventoryListAppend. */
 /* Supplied declaration required: FUN_004a8584. */
 /* Supplied declaration required: FUN_004cfeb0. */
 /* Supplied declaration required: FUN_004d05c4. */
@@ -58,7 +58,7 @@ void FUN_004a4848(int param_1)
   
   releaseEntriesB(*(unsigned int *)(param_1 + 0x84c));
   releaseEntriesA();
-  FUN_004a83f8();
+  slotPoolResetTrackedState();
   if (*(char *)(param_1 + 0x860) == '\0') {
     temp_v4 = 0;
     temp_v3 = 1;
@@ -73,7 +73,7 @@ void FUN_004a4848(int param_1)
         if (temp_v2 != 0) {
           FUN_004a8584(temp_v5,*puVar3,0);
           temp_v6 = 1;
-          FUN_004a849c(param_1 + 0x864,temp_v5);
+          inventoryListAppend(param_1 + 0x864,temp_v5);
         }
       }
       temp_v3 = temp_v3 + 1;

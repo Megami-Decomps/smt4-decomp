@@ -1,25 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027d9e8` (_code @ 0x27d9e8, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct IdSlotEntry {
+    u32 unk00; // 0x00
+    s32 id;    // 0x04
+};
+struct IdSlots {
+    u8 unk0000[0x2134]; // 0x0000
+    IdSlotEntry* entries[42]; // 0x2134
+};
 
-
-unsigned int FUN_0027d9e8(int param_1,int param_2)
-
+// Finds a populated slot whose entry has the requested ID.
+extern "C" IdSlotEntry* FUN_0027d9e8(const IdSlots* slots, s32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0;
-  while ((temp_v1 = *(int *)(param_1 + temp_v0 * 4 + 0x2134), temp_v1 == 0 ||
-         (*(int *)(temp_v1 + 4) != param_2))) {
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 0x2a) {
-      return 0;
+    for (s32 i = 0; i < 42; ++i) {
+        if (slots->entries[i] != NULL && slots->entries[i]->id == id) {
+            return slots->entries[i];
+        }
     }
-  }
-  return *(unsigned int *)(param_1 + temp_v0 * 4 + 0x2134);
+    return NULL;
 }
-
-} /* extern "C" */

@@ -29,9 +29,9 @@ extern Registry *g_aocMain;
 
 int sysPlaySe(int arg);
 int dialogOpen(int arg0, int arg1);
-int FUN_0020401c(u8 *name);
+int placeWinStartText(u8 *name);
 int FUN_00215978(int arg);
-int FUN_00284f90(int arg);
+int placeWinSetValue(int arg);
 int FUN_002a49e4(u32 owner, int kind);
 int scriptHolderReset(void *queue);
 int scriptHolderFree3(void *queue);
@@ -56,8 +56,8 @@ void FUN_004b8a28(Menu *menu)
         menu->phase = 0;
         menu->state = 5;
         menu->busy = 0;
-        FUN_0020401c(menu->entry->name);
-        FUN_00284f90(1);
+        placeWinStartText(menu->entry->name);
+        placeWinSetValue(1);
     }
 }
 

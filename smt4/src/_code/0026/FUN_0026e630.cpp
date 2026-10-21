@@ -1,29 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026e630` (_code @ 0x26e630, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed save stores let the compiler retain the block pointer; retail reloads the global block pointer before its final clamp store, with different register allocation. */
+#include "shard/GameDataBlocks.h"
 
-extern "C" {
+struct CounterSaveData {
+    u8 unk0000[0x986c]; // 0x0000
+    s32 total;           // 0x986c
+    u32 current;         // 0x9870
+};
 
-extern unsigned char g_gameDataBlocks; /* 0x43e2a8 */
-
-
-void FUN_0026e630(int param_1)
-
+// Accumulates the total and caps the spendable counter at 9999.
+extern "C" void FUN_0026e630(s32 amount)
 {
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  puVar2 = (unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x9870);
-  *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x986c) = *(int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x986c) + param_1;
-  temp_v0 = *puVar2 + param_1;
-  *puVar2 = temp_v0;
-  temp_v1 = 9999;
-  if (temp_v0 < 10000) {
-    temp_v1 = temp_v0;
-  }
-  *(unsigned int *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x9870) = temp_v1;
-  return;
+    CounterSaveData* save = reinterpret_cast<CounterSaveData*>(g_gameDataBlocks.unk04);
+    save->total += amount;
+    u32 value = save->current + amount;
+    save->current = value;
+    if (value > 9999) {
+        value = 9999;
+    }
+    reinterpret_cast<CounterSaveData*>(g_gameDataBlocks.unk04)->current = value;
 }
-
-} /* extern "C" */

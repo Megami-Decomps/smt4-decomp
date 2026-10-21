@@ -5,7 +5,7 @@
 extern "C" {
 
 int effectSpawnDefaultArguments(unsigned int);
-int FUN_00296ae8(unsigned int, int, unsigned int, int, int, int, unsigned int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, int, unsigned int);
 int timerStart(...);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 extern int g_infoWin; /* 0x43e128 */
 
 /* Supplied declaration required: effectSpawnDefaultArguments. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int fileSectionGetData(int, unsigned int, unsigned int);
 /* Supplied declaration required: timerStart. */
 extern int vec2GetXInt(int);
@@ -40,7 +40,7 @@ void FUN_00212120(unsigned int param_1)
     *(unsigned char *)(g_infoWin + 0x21) = 0;
     if (temp_v1 != 0) {
       *(unsigned char *)(temp_v0 + 0x21) = 1;
-      FUN_00296ae8(*(unsigned int *)(temp_v0 + 0x1b8),3,0xffffffff,0,3,temp_v1,param_1);
+      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x1b8),3,0xffffffff,0,3,temp_v1,param_1);
       effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x1b8));
       if ((int)in_s0 >= 0x441d8001) {
         *(unsigned char *)(temp_v0 + 0x22) = 1;

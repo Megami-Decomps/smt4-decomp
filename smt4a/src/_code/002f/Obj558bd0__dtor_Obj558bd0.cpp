@@ -1,57 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj558bd0D1Ev` (_code @ 0x2f28bc, 0x4a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: registry/lock class identities and owned-string destructor names are not yet recovered. */
+#include "shard/W6_W6Match2_OnlineString.h"
+#include "shard/W6_W6Match2_OnlineScopedGuard.h"
+
+struct OnlineRegistry;
+class Obj558bd0;
 
 extern "C" {
-
-int FUN_0012ce48(unsigned char *, unsigned int **);
-int FUN_002e6e34(unsigned int **, unsigned char *);
-int _ZN9Obj55b28cD1Ev(unsigned int **);
-int onlineStringDestroy(...);
-int FUN_004322f4(unsigned int *);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_4_stack;
-
-extern unsigned char DAT_00558bd8; /* 0x558bd8 */
-extern unsigned char DAT_0062e5fc; /* 0x62e5fc */
-extern unsigned char DAT_0062e610; /* 0x62e610 */
-
-/* Supplied declaration required: FUN_0012ce48. */
-/* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: onlineStringDestroy. */
-/* Supplied declaration required: FUN_004322f4. */
-
-
-int _ZN9Obj558bd0D1Ev(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int *param_4)
-
-{
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puStack_18;
-  unsigned int uStack_14;
-  unsigned int uStack_10;
-  unsigned int *temp_v1;
-  
-  *param_1 = (unsigned int)&DAT_00558bd8;
-  puStack_18 = param_1;
-  uStack_14 = param_2;
-  uStack_10 = param_3;
-  temp_v1 = param_4;
-  FUN_002e6e34(&puStack_18,&DAT_0062e610);
-  temp_v1 = param_1;
-  FUN_0012ce48(&DAT_0062e5fc,&temp_v1);
-  if (*(char *)(param_1 + 0x14) != '\0') {
-    FUN_004322f4(param_1);
-  }
-  _ZN9Obj55b28cD1Ev(&puStack_18);
-  temp_v0 = onlineStringDestroy(param_1 + 0x1a);
-  temp_v0 = onlineStringDestroy(temp_v0 - 8);
-  temp_v0 = onlineStringDestroy(temp_v0 - 0x18);
-  return temp_v0 - 0x48;
+void FUN_0012ce48(OnlineRegistry* registry, Obj558bd0** object);
+void FUN_004322f4(Obj558bd0* object);
+extern OnlineRegistry DAT_0062e5fc;
+extern OnlineMutex DAT_0062e610;
 }
 
-} /* extern "C" */
+class Obj558bd0 {
+public:
+    virtual ~Obj558bd0();
+
+private:
+    u8 unk04[0x44];       // 0x04
+    OnlineStringValue first; // 0x48
+    u8 active;            // 0x50
+    u8 unk51[0x0f];       // 0x51
+    OnlineStringValue second; // 0x60
+    OnlineStringValue third; // 0x68
+};
+
+// Unregister under the shared lock, finish active work, then destroy the owned strings.
+Obj558bd0::~Obj558bd0()
+{
+    OnlineScopedGuard guard(&DAT_0062e610);
+    Obj558bd0* object = this;
+    FUN_0012ce48(&DAT_0062e5fc, &object);
+    if (active != 0) {
+        FUN_004322f4(this);
+    }
+}

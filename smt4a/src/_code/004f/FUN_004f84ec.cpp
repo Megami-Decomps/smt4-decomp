@@ -6,14 +6,14 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdMemFree(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int libc_strcpy(...);
 int sysMemClear(...);
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int findRecordByKey(int);
@@ -42,7 +42,7 @@ unsigned int FUN_004f84ec(int param_1)
   libc_strcpy(param_1 + 0x305c,temp_v0 + 1);
   temp_v0 = findRecordByKey(param_1 + 0x305c);
   if (temp_v0 == 0xff) {
-    FUN_002804b0(temp_v1,param_1 + 0x3058,1);
+    asdLoadFileAsyncSimple(temp_v1,param_1 + 0x3058,1);
     *(unsigned char *)(param_1 + 0x30dc) = *(unsigned char *)(param_1 + 0x30dc) | 1;
   }
   return 1;

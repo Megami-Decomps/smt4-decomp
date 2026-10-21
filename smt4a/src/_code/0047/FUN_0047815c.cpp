@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00102b6c(int, int, int);
+int multibyteToUtf16(int, int, int);
 int FUN_00473e98(int, int, unsigned char *, int, int, int, int);
 int FUN_00477d10(int, unsigned int, int);
 int FUN_0047bcdc(int, int);
@@ -20,7 +20,7 @@ typedef struct {
 extern unsigned char LAB_004782d0; /* 0x4782d0 */
 extern int g_aocMain; /* 0x570260 */
 
-/* Supplied declaration required: FUN_00102b6c. */
+/* Supplied declaration required: multibyteToUtf16. */
 /* Supplied declaration required: FUN_00473e98. */
 /* Supplied declaration required: FUN_00477d10. */
 /* Supplied declaration required: FUN_0047bcdc. */
@@ -62,7 +62,7 @@ void FUN_0047815c(int param_1)
         *(unsigned int *)(param_1 + 0xc) = 3;
         return;
       }
-      FUN_00102b6c(g_aocMain + 0x6d4,g_aocMain + 0x694,0x40);
+      multibyteToUtf16(g_aocMain + 0x6d4,g_aocMain + 0x694,0x40);
       *(unsigned int *)(param_1 + 4) = 0xe;
       *(unsigned int *)(param_1 + 8) = 0;
       if (*(int **)(param_1 + 0x208) != (int *)0x0) {

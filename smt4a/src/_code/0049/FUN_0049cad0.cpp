@@ -9,8 +9,8 @@ int FUN_00192608(void);
 
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-extern unsigned int FUN_0019271c(unsigned int);
-extern int FUN_00213b5c(void);
+extern unsigned int aocEntryGetKind(unsigned int);
+extern int gameDataBlocksGetTableFlag(void);
 
 
 int FUN_0049cad0(unsigned short *param_1)
@@ -25,7 +25,7 @@ int FUN_0049cad0(unsigned short *param_1)
   
   temp_v4 = (unsigned int)*param_1;
   temp_v3 = 0;
-  temp_v0 = FUN_0019271c(temp_v4);
+  temp_v0 = aocEntryGetKind(temp_v4);
   switch(temp_v0) {
   case 1:
   case 0xc:
@@ -59,7 +59,7 @@ int FUN_0049cad0(unsigned short *param_1)
   if ((param_1[1] & 2) != 0) {
     temp_v3 = (int)(((param_1[1] & 0x3ff) >> 2) * temp_v3) / 100;
   }
-  temp_v2 = FUN_00213b5c();
+  temp_v2 = gameDataBlocksGetTableFlag();
   if (temp_v2 == 4) {
     temp_v3 = temp_v3 * 3;
   }

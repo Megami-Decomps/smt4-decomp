@@ -19,7 +19,7 @@ typedef void ErrorCallback001230b8(s32 a, s32 b, s32 c);
 void memClear(Block001230b8 *block, s32 size);
 s32 FUN_00137c14(void);
 
-extern ErrorCallback001230b8 *DAT_0044e334; /* 0x44e334 */
+extern ErrorCallback001230b8 *g_gfxReleaseCallback; /* 0x44e334 */
 extern Holder001230b8 DAT_004655f0;         /* 0x4655f0 */
 
 /* Clears the block, opens its handle and publishes it (0); on failure reports through the error callback and returns -1. */
@@ -35,8 +35,8 @@ s32 blockOpen(Block001230b8 *block)
         DAT_004655f0.ready = 1;
         return 0;
     }
-    if (DAT_0044e334 != NULL) {
-        DAT_0044e334(0x10000, 0x100, 0);
+    if (g_gfxReleaseCallback != NULL) {
+        g_gfxReleaseCallback(0x10000, 0x100, 0);
     }
     DAT_004655f0.block = NULL;
     return -1;

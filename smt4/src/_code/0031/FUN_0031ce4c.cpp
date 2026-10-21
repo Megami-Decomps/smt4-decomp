@@ -29,7 +29,7 @@ extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern int g_asdLightCount; /* 0x4dad80 */
 
-extern int FUN_00252394(unsigned int);
+extern int asdLightSelectActive(unsigned int);
 /* Supplied declaration required: sceneTraverserVisit. */
 /* Supplied declaration required: FUN_002b3acc. */
 extern unsigned int asdMemoryGetAllocatorA(void);
@@ -72,7 +72,7 @@ void FUN_0031ce4c(int param_1)
     return;
   }
   temp_v14 = *(int *)(*(int *)(*(int *)(param_1 + 0x54) + 8) + 0x2c);
-  temp_v15 = FUN_00252394(1);
+  temp_v15 = asdLightSelectActive(1);
   piVar11 = *(int **)(param_1 + 0xa0);
   temp_v4 = 0;
   if (*(int *)(*(int *)(param_1 + 0x9c) + 8) != 0) {

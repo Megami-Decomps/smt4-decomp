@@ -1,27 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003efb18` (_code @ 0x3efb18, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global-mask base and low-word registers are exchanged (retail r2/r3, compiled r3/r2). */
+#include "common.h"
+
+struct PartnerFlagState {
+    /* 0x0000 */ u8 unk0000[0x45a0];
+    /* 0x45A0 */ u64 flags;
+};
+
+struct PartnerFlagMask {
+    /* 0x000 */ u8 unk000[0x190];
+    /* 0x190 */ u64 flags;
+};
+
+struct PartnerAttackState {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 state;
+};
 
 extern "C" {
+extern PartnerFlagMask g_btlMain;
+extern PartnerAttackState* g_btlPartnerAttack;
 
-extern unsigned int DAT_00573ab0; /* 0x573ab0 */
-extern unsigned int DAT_00573ab4; /* 0x573ab4 */
-extern int g_btlPartnerAttack; /* 0x573c50 */
-
-
-unsigned int FUN_003efb18(int param_1)
-
+// Permit the partner action only when a masked battle flag is set and state is 2.
+u32 FUN_003efb18(const PartnerFlagState* state)
 {
-  unsigned int temp_v0;
-  
-  if (((*(unsigned int *)(param_1 + 0x45a0) & DAT_00573ab0) == 0 &&
-       (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573ab4) == 0) || (*(int *)(g_btlPartnerAttack + 0x18) != 2)) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    if ((state->flags & g_btlMain.flags) == 0 || g_btlPartnerAttack->state != 2)
+        return 0;
+    return 1;
 }
-
-} /* extern "C" */
+}

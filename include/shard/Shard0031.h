@@ -3,6 +3,7 @@
 #define SHARD_SHARD0031_H
 
 #include "common.h"
+#include "shard/W6_W6Match3_ChunkPool.h"
 
 /* Doubly linked list node; the list keeps a sentinel node whose `prev` is the last element. */
 typedef struct ListNode {
@@ -67,7 +68,10 @@ typedef struct Locked {
 
 /* Container with a linked list header at +0x10. */
 typedef struct ListOwner {
-    /* 0x00 */ u8 unk00[0x10];
+    union {
+        /* 0x00 */ u8 unk00[0x10];
+        /* 0x00 */ ChunkPool pool;
+    };
     /* 0x10 */ List list;
 } ListOwner;
 

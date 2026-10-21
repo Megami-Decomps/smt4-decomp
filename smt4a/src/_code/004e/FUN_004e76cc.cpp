@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e76cc` (_code @ 0x4e76cc, 0x4a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
 
 int FUN_004c579c(...);
-int FUN_004c63f0(void);
-int FUN_004e0114(...);
+int btlSelectActionTier(void);
 int FUN_004e5f2c(...);
 int FUN_004e62b4(...);
 int FUN_004fb43c(...);
@@ -46,8 +46,7 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 extern int gameFlagIsSet(unsigned int);
 extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_004c579c. */
-/* Supplied declaration required: FUN_004c63f0. */
-/* Supplied declaration required: FUN_004e0114. */
+/* Supplied declaration required: btlSelectActionTier. */
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: FUN_004e62b4. */
 extern int FUN_004e83ac(int *, unsigned int *, int);
@@ -100,7 +99,7 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
   }
   *(unsigned int *)(param_2[8] + 0x158) = 0;
   temp_v1 = (int)*(short *)(param_2[9] + 0x6a);
-  FUN_004c63f0();
+  btlSelectActionTier();
   temp_v0 = temp_v1;
   if (0 < temp_v1) {
     temp_v0 = param_3;
@@ -143,16 +142,16 @@ unsigned char FUN_004e76cc(int *param_1,unsigned int *param_2,int param_3)
   if (temp_v6 != 0) {
     temp_v2 = param_2[9];
     if ((*(unsigned int *)(temp_v2 + 0x50) & 0x400) != 0) {
-      FUN_004e0114(param_1,param_2,(int)*(short *)(temp_v2 + 0x6a),10,0x3c,0x3c);
+      btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(temp_v2 + 0x6a),10,0x3c,0x3c);
       FUN_004e62b4(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0x46,0);
     }
     else {
-      FUN_004e0114(param_1,param_2,(int)*(short *)(temp_v2 + 0x6a),10,0x1e,0x1e);
+        btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(temp_v2 + 0x6a),10,0x1e,0x1e);
       FUN_004e62b4(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0x28,0);
     }
   }
   else {
-    FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),10,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),10,0x1e,0x1e);
   }
   return temp_v6;
 }

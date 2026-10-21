@@ -40,7 +40,7 @@ extern unsigned int DAT_005712bc; /* 0x5712bc */
 extern unsigned int DAT_005712c0; /* 0x5712c0 */
 extern unsigned int DAT_005712c4; /* 0x5712c4 */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: dataTable04FindById. */
@@ -88,10 +88,10 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
     }
     param_2[2] = 1;
   case 1:
-    temp_v2 = DAT_00573808;
+    temp_v2 = g_btlAux;
     FUN_004f95cc();
     if (temp_v2 != 0) {
-      FUN_004f64f4(DAT_00573808);
+      FUN_004f64f4(g_btlAux);
       temp_v4 = 2;
       param_2[2] = temp_v4;
     }
@@ -114,13 +114,13 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
     temp_v3 = *(unsigned int *)(*param_1 + 0x45a4);
     if (((DAT_00571210 & temp_v4) == 0 && (DAT_00571214 & temp_v3) == 0) ||
        ((temp_v4 & DAT_005712c0) != 0 || (temp_v3 & DAT_005712c4) != 0)) {
-      state339CSetMode10(DAT_00573808,param_2[0x165]);
+      state339CSetMode10(g_btlAux,param_2[0x165]);
     }
   case 3:
     param_2[2] = 4;
     break;
   case 4:
-    temp_v2 = FUN_004f90e0(DAT_00573808,param_2[0x165]);
+    temp_v2 = FUN_004f90e0(g_btlAux,param_2[0x165]);
     if (temp_v2 == 0) {
       return 0;
     }

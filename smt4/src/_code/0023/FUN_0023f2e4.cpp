@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMdlManagerMarkDestroy(void);
-int FUN_00297468(unsigned int, int, int);
+int asdLoadFileAsyncSimple(unsigned int, int, int);
 int libc_strcmp(int, unsigned int);
 int strncpy(int, unsigned int, int);
 
@@ -15,7 +15,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: libc_strcmp. */
 
 
@@ -47,7 +47,7 @@ void FUN_0023f2e4(int param_1,int param_2,unsigned int param_3,unsigned short pa
   }
   else {
     if ((*(int *)(param_1 + 4) == 0) && (*(int *)(param_1 + 8) != 0)) {
-      FUN_00297468(param_3,temp_v1 + 0x1c,1);
+      asdLoadFileAsyncSimple(param_3,temp_v1 + 0x1c,1);
       *(unsigned int *)(temp_v1 + 0x10) = 4;
       return;
     }

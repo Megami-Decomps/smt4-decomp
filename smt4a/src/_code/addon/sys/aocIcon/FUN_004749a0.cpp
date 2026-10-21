@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004749a0` (_code @ 0x4749a0, 0x10c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
 int asdTextureCreate(void);
-int asdTextureSetImage(unsigned int);
 int asdMemoryAllocAligned(int, int, int, int, int, int);
 int FUN_00281024(void);
 int rt_memclr(void);
@@ -18,7 +18,6 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: FUN_00281024. */
 /* Supplied declaration required: rt_memclr. */
@@ -55,7 +54,7 @@ void FUN_004749a0(int param_1,int param_2)
   *(unsigned int *)(*(int *)(param_1 + 8) + 0x20) = 0x8363;
   *(unsigned int *)(*(int *)(param_1 + 8) + 0x24) = *(unsigned int *)(param_1 + 4);
   *(unsigned int *)(*(int *)(param_1 + 8) + 0x28) = 0x2000;
-  asdTextureSetImage(*(unsigned int *)(param_1 + 8));
+  asdTextureSetImage(*(AsdTexture**)(param_1 + 8));
   return;
 }
 

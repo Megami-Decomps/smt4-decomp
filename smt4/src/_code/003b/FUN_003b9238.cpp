@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022b064(...);
 int FUN_002305e8(...);
-int FUN_0026374c(...);
+int placeWinStartText(...);
 int FUN_0027db24(...);
 int dialogOpen(...);
 int FUN_0027e7b4(...);
@@ -31,10 +31,10 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022b064. */
 /* Supplied declaration required: FUN_002305e8. */
-/* Supplied declaration required: FUN_0026374c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_0027db24. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
@@ -46,7 +46,7 @@ void FUN_003b9238(fn_003b9238_arg0 *param_1)
 /* irregular: 6 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_0019e0c0(param_1->field_0xd9c);
+  temp_v0 = scrRunOpcodesStub(param_1->field_0xd9c);
   if (temp_v0 == 2) {
     FUN_0022b064(param_1);
     FUN_0027db24(0);
@@ -56,7 +56,7 @@ void FUN_003b9238(fn_003b9238_arg0 *param_1)
     param_1->field_0x2c = 0;
     param_1->field_0x28 = 5;
     param_1->field_0x6cc = 0;
-    FUN_0026374c((int)param_1->field_0xd5c + 2);
+    placeWinStartText((int)param_1->field_0xd5c + 2);
     FUN_002305e8(1);
     return;
   }

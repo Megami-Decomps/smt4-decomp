@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003efae8` (_code @ 0x3efae8, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: initializer fragment starts at 0x3efadc, before this unit; omitted LDR r2, MVN r0 and MOV r1 supply the first STRD's destination and -1 values. */
 #include "romwright_types.h"
 
 extern "C" {

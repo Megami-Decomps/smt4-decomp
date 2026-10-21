@@ -9,9 +9,9 @@ int FUN_0029c4ac(int);
 int FUN_0029c4c8(int);
 int FUN_0029c4e4(int, int);
 int FUN_0029d684(int);
-int FUN_0029dd7c(int);
+int menuSetModeAndResetTransitions(int);
 int FUN_0029defc(int, int);
-int FUN_0029e620(int, int);
+int messageTargetSetValue(int, int);
 int FUN_0029e648(int, int);
 int FUN_0029e890(int);
 int FUN_0029ee6c(int, int);
@@ -30,9 +30,9 @@ extern int g_unite; /* 0x43dd68 */
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
 /* Supplied declaration required: FUN_0029d684. */
-/* Supplied declaration required: FUN_0029dd7c. */
+/* Supplied declaration required: menuSetModeAndResetTransitions. */
 /* Supplied declaration required: FUN_0029defc. */
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_0029e890. */
 /* Supplied declaration required: FUN_0029ee6c. */
@@ -75,16 +75,16 @@ void FUN_002dabac(int param_1,int *param_2)
   FUN_0029defc((int)*(short *)(temp_v2 + 0x66ba),0);
   FUN_0029c4e4(temp_v2 + 0x6674,0);
   FUN_0029c4ac(0);
-  FUN_0029dd7c(8);
+  menuSetModeAndResetTransitions(8);
   FUN_0029e890(0);
   temp_v0 = FUN_002d96a4();
   FUN_0029d684(temp_v0 != *(unsigned short *)(temp_v2 + 0x66ba));
   if (0 < *(int *)(temp_v2 + 0x418)) {
     FUN_0029e648(1,0);
-    FUN_0029e620(-*(int *)(temp_v2 + 0x418),0);
+    messageTargetSetValue(-*(int *)(temp_v2 + 0x418),0);
   }
   FUN_0029ee6c(0,0x323232ff);
-  FUN_0029dd7c(7);
+  menuSetModeAndResetTransitions(7);
   temp_v1 = g_unite;
   buttonHelpSetPreset(0x5d);
   if (*(char *)(temp_v1 + 0x9431) != '\0') {

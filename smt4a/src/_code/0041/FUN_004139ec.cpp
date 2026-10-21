@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004139ec` (_code @ 0x4139ec, 0xf8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_Obj55a5a8.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int FUN_00110b28(unsigned char [16], unsigned char **);
 int FUN_0011b63e(int, unsigned int, unsigned char [5], int);
 int operatorNew(int);
 int FUN_00432b10(unsigned char [5]);
-int _ZN9Obj55a5a8D1Ev(unsigned char [5]);
 
 /* stack frame of param_1: 7 slot(s), 17 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ typedef struct {
     unsigned char sp93; /* 0x93: local_93 */
 } param_1_stack;
 
-extern int FUN_0041460c(...); /* 0x41460c */
+extern int onlineStatusRemoveMatchingEntry(...); /* 0x41460c */
 extern unsigned char DAT_00558760; /* 0x558760 */
 extern unsigned char DAT_0055cacc; /* 0x55cacc */
 
@@ -34,7 +34,6 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: operatorNew. */
 extern unsigned int FUN_002fafd8(int, unsigned int);
 /* Supplied declaration required: FUN_00432b10. */
-/* Supplied declaration required: _ZN9Obj55a5a8D1Ev. */
 
 
 void FUN_004139ec(int param_1)
@@ -73,7 +72,7 @@ void FUN_004139ec(int param_1)
   puVar2 = (unsigned int *)operatorNew(0x14);
   if (puVar2 != (unsigned int *)0x0) {
     puVar2[1] = param_1;
-    puVar2[2] = (unsigned int)FUN_0041460c;
+    puVar2[2] = (unsigned int)onlineStatusRemoveMatchingEntry;
     puVar2[3] = 0;
     *puVar2 = (unsigned int)&DAT_0055cacc;
     puVar2[4] = temp_v1;
@@ -81,7 +80,7 @@ void FUN_004139ec(int param_1)
     FUN_00103f54(temp_v1,puVar2,0,1);
   }
   FUN_0011b63e(param_1 + 4,temp_v1,temp_v2,param_1 + 0xdc);
-  _ZN9Obj55a5a8D1Ev(temp_v2);
+  reinterpret_cast<Obj55a5a8*>(temp_v2)->Obj55a5a8::~Obj55a5a8();
   return;
 }
 

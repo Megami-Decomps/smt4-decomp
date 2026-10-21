@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00288538` (_code @ 0x288538, 0x5d4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_001689e8(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int jobGetScalarValue(void);
@@ -39,7 +39,6 @@ extern int g_camp; /* 0x57f108 */
 extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int gameFlagIsSet(unsigned int);
@@ -115,7 +114,7 @@ void FUN_00288538(int param_1)
       temp_v5 = *(short *)(temp_v0 + 10) + temp_v11;
       FUN_00164b5c(2,0x12,0xd,temp_v7,temp_v5,0xbf);
       temp_v0 = FUN_001834a4(0x12,0xa0);
-      FUN_001689e8((int)(short)temp_v3,*(short *)(temp_v0 + 8) + temp_v7,*(short *)(temp_v0 + 10) + temp_v5,
+      uiDrawItemCategoryIcon((int)(short)temp_v3,*(short *)(temp_v0 + 8) + temp_v7,*(short *)(temp_v0 + 10) + temp_v5,
                    0xc4,0);
       temp_v0 = FUN_001834a4(0x12,0xa1);
       if (temp_v4 >= 1) {
@@ -182,7 +181,7 @@ void FUN_00288538(int param_1)
       temp_v5 = *(short *)(temp_v3 + 10) + temp_v13;
       FUN_00164b5c(2,0x12,0xd,temp_v7,temp_v5,0xbf);
       temp_v3 = FUN_001834a4(0x12,0x464);
-      FUN_001689e8((int)(short)temp_v4,*(short *)(temp_v3 + 8) + temp_v7,*(short *)(temp_v3 + 10) + temp_v5,
+      uiDrawItemCategoryIcon((int)(short)temp_v4,*(short *)(temp_v3 + 8) + temp_v7,*(short *)(temp_v3 + 10) + temp_v5,
                    0xc4,0);
       temp_v4 = FUN_001834a4(0x12,0x465);
       if (temp_v2 >= 1) {

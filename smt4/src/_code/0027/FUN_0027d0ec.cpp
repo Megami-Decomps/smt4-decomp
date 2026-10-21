@@ -26,7 +26,7 @@ extern signed char DAT_0049fa61; /* 0x49fa61 */
 
 /* Supplied declaration required: FUN_001b49c0. */
 extern int FUN_001fb4d8(void);
-extern int FUN_00254e10(void);
+extern int gameMapBlockGetValue(void);
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: slotFindByPair. */
 /* Supplied declaration required: FUN_00275714. */
@@ -70,7 +70,7 @@ void FUN_0027d0ec(void)
     FUN_001b49c0(*(unsigned int *)(temp_v2 + 0x2c),*(unsigned int *)(temp_v2 + 0x30));
   }
   if (*(int *)(temp_v2 + 0x2c) != 0x18) {
-    temp_v0 = FUN_00254e10();
+    temp_v0 = gameMapBlockGetValue();
     if (temp_v0 == 1) {
       temp_v0 = *(int *)(temp_v2 + 0x2c);
       slotFindByPair(temp_v0,*(unsigned int *)(temp_v2 + 0x30));

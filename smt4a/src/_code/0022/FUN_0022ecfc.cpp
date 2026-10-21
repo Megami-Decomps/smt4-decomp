@@ -13,8 +13,8 @@ int FUN_001835b4(...);
 int FUN_0023dedc(...);
 int FUN_00344cd0(...);
 int FUN_0035ae58(...);
-int FUN_0037ce80(...);
-int FUN_003defe0(void);
+int partyDrawCategorySelectionIcon(...);
+unsigned int questHasSpecialDetailPage(unsigned int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -53,10 +53,9 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0035ae58. */
-/* Supplied declaration required: FUN_0037ce80. */
+/* Supplied declaration required: partyDrawCategorySelectionIcon. */
 extern int partyEntryGetBit5(unsigned int);
 extern int partyEntryGetBit6(unsigned int);
-/* Supplied declaration required: FUN_003defe0. */
 extern int partyEntryFlagsBit3(unsigned int);
 extern int partyEntryBitsBit4(unsigned int);
 
@@ -133,7 +132,7 @@ void FUN_0022ecfc(void)
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_00162790(2,temp_v6,temp_v16,(int)*(short *)(temp_v4 + 8));
           temp_v5 = FUN_001834a4(0x1e,0x9a);
-          FUN_0037ce80(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+          partyDrawCategorySelectionIcon(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f);
           temp_v5 = FUN_001834a4(0x1e,0x9d);
           temp_v8 = partyEntryGetBit5(temp_v11);
@@ -143,7 +142,7 @@ void FUN_0022ecfc(void)
           }
           else {
             temp_v8 = partyEntryBitsBit4(temp_v11);
-            if ((temp_v8 == 0) && (temp_v6 = temp_v11, FUN_003defe0(), temp_v6 != 0)) {
+            if ((temp_v8 == 0) && ((temp_v6 = questHasSpecialDetailPage(temp_v11)) != 0)) {
               FUN_00164b5c(2,0x1e,0x13,
                            (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                            (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x74);
@@ -255,7 +254,7 @@ void FUN_0022ecfc(void)
       FUN_001835b4(2,0x1e,0xaf,temp_v5,temp_v4,0xab);
     }
     temp_v12 = FUN_001834a4(0x1e,0xb1);
-    FUN_0037ce80(temp_v6,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
+    partyDrawCategorySelectionIcon(temp_v6,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
     temp_v12 = FUN_001834a4(0x1e,0xb4);
     temp_v4 = partyEntryGetBit5(temp_v6);
@@ -266,7 +265,7 @@ void FUN_0022ecfc(void)
     else {
       temp_v4 = partyEntryBitsBit4(temp_v6);
       temp_v11 = temp_v6;
-      if ((temp_v4 == 0) && (FUN_003defe0(), temp_v6 != 0)) {
+      if ((temp_v4 == 0) && ((temp_v6 = questHasSpecialDetailPage(temp_v11)) != 0)) {
         FUN_00164b5c(2,0x1e,0x13,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,
                      (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
       }

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030c9cc` (_code @ 0x30c9cc, 0x56 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: Obj55a328 constructor inlines Obj55aae4 construction; canonical class/member constructor naming is not recovered, and the draft mistakes a 16-byte temporary for four incoming arguments. */
 #include "romwright_types.h"
 
 extern "C" {

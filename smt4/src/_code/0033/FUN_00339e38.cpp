@@ -1,35 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00339e38` (_code @ 0x339e38, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler reuses the battle-state pointer; retail reloads it between vector/value copies. */
+#include "common.h"
 
-extern "C" {
+struct BattleViewVector {
+    f32 x, y, z;
+};
 
-extern int g_btlMain; /* 0x4342c8 */
+struct BattleViewSource {
+    u8 unk0000[0x1ea4]; // 0x0000
+    BattleViewVector first; // 0x1ea4
+    BattleViewVector second; // 0x1eb0
+    u32 value; // 0x1ebc
+};
 
+struct BattleViewTarget {
+    u8 unk00[0x0c]; // 0x00
+    BattleViewVector first; // 0x0c
+    BattleViewVector second; // 0x18
+    u32 value; // 0x24
+};
 
-void FUN_00339e38(int param_1)
+extern "C" BattleViewTarget* g_btlMain;
 
+// Copy the two view vectors and associated value into the current battle state.
+extern "C" void FUN_00339e38(const BattleViewSource* source)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = g_btlMain;
-  if (g_btlMain != 0) {
-    temp_v1 = *(unsigned int *)(param_1 + 0x1ea8);
-    temp_v2 = *(unsigned int *)(param_1 + 0x1eac);
-    *(unsigned int *)(g_btlMain + 0xc) = *(unsigned int *)(param_1 + 0x1ea4);
-    *(unsigned int *)(temp_v0 + 0x10) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x14) = temp_v2;
-    temp_v0 = g_btlMain;
-    temp_v1 = *(unsigned int *)(param_1 + 0x1eb4);
-    temp_v2 = *(unsigned int *)(param_1 + 0x1eb8);
-    *(unsigned int *)(g_btlMain + 0x18) = *(unsigned int *)(param_1 + 0x1eb0);
-    *(unsigned int *)(temp_v0 + 0x1c) = temp_v1;
-    *(unsigned int *)(temp_v0 + 0x20) = temp_v2;
-    *(unsigned int *)(g_btlMain + 0x24) = *(unsigned int *)(param_1 + 0x1ebc);
-  }
-  return;
+    if (g_btlMain != NULL) {
+        g_btlMain->first = source->first;
+        g_btlMain->second = source->second;
+        g_btlMain->value = source->value;
+    }
 }
-
-} /* extern "C" */

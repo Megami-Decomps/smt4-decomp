@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00289c98(int);
 int FUN_00290d5c(int, unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 int soundChannelStopAll(int);
-int FUN_0029c3c0(int, int, int);
-int FUN_002a87e8(void);
+int slotSetRequest(int, int, int);
+int ifTouchDecrementTimer(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -20,8 +20,8 @@ extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00289c98. */
 /* Supplied declaration required: FUN_00290d5c. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_0029c3c0. */
-/* Supplied declaration required: FUN_002a87e8. */
+/* Supplied declaration required: slotSetRequest. */
+/* Supplied declaration required: ifTouchDecrementTimer. */
 
 
 void FUN_00233890(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -45,8 +45,8 @@ void FUN_00233890(unsigned int *param_1,unsigned int param_2,unsigned int param_
     return;
   }
   soundChannelStopAll(0xf);
-  FUN_0029c3c0(0,10,0xff);
-  FUN_0029c3c0(1,10,0xff);
+  slotSetRequest(0,10,0xff);
+  slotSetRequest(1,10,0xff);
   param_1[2] = 1;
   FUN_00290d5c(0,0xffffffff,0,param_4,unaff_r4,unaff_r5,unaff_r6);
   if ((*param_1 & 0x100000) != 0) {
@@ -54,7 +54,7 @@ void FUN_00233890(unsigned int *param_1,unsigned int param_2,unsigned int param_
     FUN_00289c98(0);
     temp_v0 = 0;
     do {
-      FUN_002a87e8();
+      ifTouchDecrementTimer();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 6);
     return;

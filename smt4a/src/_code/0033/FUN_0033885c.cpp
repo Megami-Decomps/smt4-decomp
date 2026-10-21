@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019dc70(void);
+int sentinelLookupGetValue(void);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0019be8c(unsigned int);
-/* Supplied declaration required: FUN_0019dc70. */
+/* Supplied declaration required: sentinelLookupGetValue. */
 
 
 int FUN_0033885c(int *param_1,int param_2)
@@ -47,7 +47,7 @@ int FUN_0033885c(int *param_1,int param_2)
       }
       else {
 LAB_003388d8:
-        FUN_0019dc70();
+        sentinelLookupGetValue();
         temp_v2 = temp_v2 + temp_v3;
       }
       temp_v2 = temp_v2 + 1;

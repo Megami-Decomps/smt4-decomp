@@ -9,7 +9,7 @@ int FUN_0024bc98(unsigned char [136], int);
 int FUN_0024bda8(unsigned char [136], int);
 int FUN_002907c4(...);
 int FUN_00295660(int, unsigned char [136]);
-int FUN_00296ae8(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_0029d770(...);
 int FUN_0029da34(...);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
@@ -33,16 +33,16 @@ extern int DAT_0043da2c; /* 0x43da2c */
 extern unsigned int DAT_0043da30; /* 0x43da30 */
 
 /* Supplied declaration required: FUN_001f4568. */
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_0024bc98. */
 /* Supplied declaration required: FUN_0024bda8. */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029ede8. */
-extern unsigned int FUN_002b066c(unsigned short);
+extern unsigned int partyMemberFindById(unsigned short);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: textFormatBuffer. */
 
@@ -63,17 +63,17 @@ void FUN_0029d960(int param_1)
   unsigned int temp_v7 [2];
   unsigned char temp_v8 [136];
   
-  temp_v3 = FUN_0023360c(param_1 + 0x20);
+  temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v1 = *(unsigned short *)(param_1 + 0x5a8 + temp_v3 * 0x20 + 4);
   if (*(char *)(param_1 + 0x5a4) == '\0') {
     FUN_0029d770(temp_v1,temp_v6);
     FUN_0029da34(0,1,temp_v1,temp_v6);
     return;
   }
-  temp_v3 = FUN_0023360c(param_1 + 0x20);
+  temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v2 = *(unsigned short *)(param_1 + 0x5a8 + temp_v3 * 0x20 + 4);
   if (*(char *)(param_1 + 0x5a5) == '\x01') {
-    temp_v4 = FUN_002b066c(temp_v2);
+    temp_v4 = partyMemberFindById(temp_v2);
     temp_v3 = DAT_0043da2c;
     temp_v5 = (unsigned int)temp_v2;
     devilGetRecord();
@@ -124,7 +124,7 @@ void FUN_0029d960(int param_1)
       uStack_ac = DAT_0043da30;
       uStack_b0 = 3;
       temp_v7[0] = 1;
-      FUN_00296ae8(*(unsigned int *)(temp_v3 + 0x558),3,0xffffffff,0);
+      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v3 + 0x558),3,0xffffffff,0);
     }
     return;
   }

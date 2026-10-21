@@ -10,7 +10,7 @@ int FUN_002ea41e(int *);
 int vectorAt4(unsigned int *, unsigned int);
 int vectorAt24(int, unsigned int);
 int FUN_0030c720(int, unsigned int *);
-int FUN_0030c846(int, unsigned int, unsigned int, unsigned int);
+int holderSetPairAndFlush(int, unsigned int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -34,8 +34,8 @@ extern int FUN_002fd38c(unsigned int *);
 /* Supplied declaration required: vectorAt4. */
 /* Supplied declaration required: vectorAt24. */
 /* Supplied declaration required: FUN_0030c720. */
-extern int FUN_0030c7f4(unsigned int *, unsigned int *);
-/* Supplied declaration required: FUN_0030c846. */
+extern int wordRefNotEqual(unsigned int *, unsigned int *);
+/* Supplied declaration required: holderSetPairAndFlush. */
 
 
 void FUN_0012c83c(int param_1)
@@ -63,7 +63,7 @@ void FUN_0012c83c(int param_1)
 LAB_0012c894:
         temp_v1 = param_1 + 0x110;
         vectorAt24(temp_v1,*(unsigned int *)(param_1 + 0x3f4));
-        FUN_0030c846(param_1 + 0x280,temp_v2,*(unsigned int *)(temp_v1 + 8),
+        holderSetPairAndFlush(param_1 + 0x280,temp_v2,*(unsigned int *)(temp_v1 + 8),
                      *(unsigned int *)(temp_v1 + 0xc));
         temp_v6 = *(int **)(param_1 + 0x3ec);
         temp_v4 = *(unsigned int *)(param_1 + 0x290);
@@ -89,7 +89,7 @@ LAB_0012c894:
       temp_v1 = FUN_002fd38c((unsigned int *)&temp_v4);
       if (temp_v1 == 0x69) {
         temp_v7[0] = 0x80690001;
-        temp_v1 = FUN_0030c7f4((unsigned int *)&temp_v4,temp_v7);
+        temp_v1 = wordRefNotEqual((unsigned int *)&temp_v4,temp_v7);
         puVar3 = (unsigned int *)&temp_v4;
         if (temp_v1 != 0) {
           temp_v0 = 1;

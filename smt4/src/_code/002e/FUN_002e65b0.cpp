@@ -11,7 +11,7 @@ int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
 int FUN_002a2c7c(void);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -75,7 +75,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002a2c7c. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -224,7 +224,7 @@ void FUN_002e65b0(int param_1)
                      (float)((unsigned long long)temp_v19 >> 0x20) * temp_v11 *
                      (float)((unsigned long long)temp_v25 >> 0x20)) * temp_v11) * (float)temp_v25;
             temp_v11 = temp_v16;
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v14 = pfVar8[7];
             temp_v16 = temp_v16 * pfVar8[8];
             FUN_002b70cc();
@@ -279,7 +279,7 @@ void FUN_002e65b0(int param_1)
             temp_v11 = (float)temp_v25;
             pfVar8[0xc] = ((temp_v14 - pfVar10[0x3a]) + temp_v4 * pfVar10[0x3a]) * pfVar10[0x39];
             temp_v16 = pfVar8[10] * temp_v11;
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v17 = 0.0f;
             temp_v11 = pfVar8[10] * temp_v11;
             FUN_002b70cc();
@@ -369,7 +369,7 @@ void FUN_002e65b0(int param_1)
               pfVar8[7] = (pfVar8[7] + pfVar8[0xc] * temp_v14) -
                           (float)temp_v19 * temp_v14 * temp_v14 * (float)((unsigned long long)temp_v25 >> 0x20);
               temp_v4 = pfVar8[10] * temp_v11;
-              FUN_002b7064();
+              phaseCosInterpolate();
               temp_v16 = pfVar8[7];
               temp_v4 = temp_v4 * pfVar8[8];
               temp_v11 = pfVar8[10] * temp_v11;

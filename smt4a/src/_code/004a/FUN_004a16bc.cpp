@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a16bc` (_code @ 0x4a16bc, 0x22c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/Shard004A.h"
 
 extern "C" {
 
@@ -15,14 +16,14 @@ int FUN_0035ad50(int, unsigned char [304]);
 int FUN_0035deb0(void);
 int screen4AEnter(int);
 int sendEvent100020E(void);
-int FUN_004d0680(int);
+void FUN_004d0680(Screen4A*);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
+extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
 
 extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
 /* Supplied declaration required: sysPlaySe. */
@@ -30,20 +31,19 @@ extern unsigned int FUN_0014bf3c(unsigned int, unsigned int);
 extern unsigned int slotRecordFindById(unsigned short);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: libc_strcpy. */
-extern int FUN_002f036c(void);
+extern int gameGetMode(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_0035deb0. */
 /* Supplied declaration required: screen4AEnter. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: sendEvent100020E. */
 extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestConfirmPressed(void);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
-/* Supplied declaration required: FUN_004d0680. */
 
 
 void FUN_004a16bc(int param_1)
@@ -74,13 +74,13 @@ void FUN_004a16bc(int param_1)
       temp_v7 = (int)*(char *)(param_1 + 0x82a);
     }
   }
-  temp_v3 = FUN_002f036c();
+  temp_v3 = gameGetMode();
   if (temp_v3 != 0) {
-    FUN_004d0680(param_1);
+    FUN_004d0680(reinterpret_cast<Screen4A*>(param_1));
     return;
   }
   if (temp_v7 != 0) {
-    temp_v2 = FUN_004cfe4c(param_1 + 0x20);
+    temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
     temp_v4 = temp_v6;
     FUN_00180118(temp_v6);
@@ -102,7 +102,7 @@ void FUN_004a16bc(int param_1)
       return;
     }
     if (temp_v8 != 0) {
-      (*(unsigned int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = 0xffffffff;
+      (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
       temp_v1 = *(char *)(param_1 + 0x861) + '\x01';
       *(char *)(param_1 + 0x861) = temp_v1;
       if ('\x01' < temp_v1) {
@@ -117,7 +117,7 @@ void FUN_004a16bc(int param_1)
         temp_v5 = 0x4f;
       }
       sysPlaySe(temp_v5);
-      temp_v2 = FUN_004cfe4c(param_1 + 0x20);
+      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
       temp_v0 = *(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
       if (*(char *)(param_1 + 0x861) == '\x01') {
         temp_v5 = slotRecordFindById(temp_v0);
@@ -129,7 +129,7 @@ void FUN_004a16bc(int param_1)
       return;
     }
     if (temp_v9 != 0) {
-      (*(unsigned int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = 0xffffffff;
+      (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
       FUN_003343f0(1);
       *(unsigned int *)(param_1 + 0x14) = 9;
       *(unsigned int *)(param_1 + 0x18) = 0;

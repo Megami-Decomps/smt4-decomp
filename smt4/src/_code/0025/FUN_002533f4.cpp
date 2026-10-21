@@ -4,7 +4,9 @@
 
 extern "C" {
 
-int FUN_0022ac3c(int, unsigned int);
+struct AocSystem;
+struct Table02Sub2Entry;
+Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *, unsigned int);
 int dataTable00FindById(void);
 int gameDataGetTableEntry(...);
 int FUN_002c0a9c(unsigned int, unsigned int, int);
@@ -19,7 +21,6 @@ typedef struct {
 
 extern int g_aocSystem; /* 0x433158 */
 
-/* Supplied declaration required: FUN_0022ac3c. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: gameDataGetTableEntry. */
 extern int randNextInRange(short);
@@ -70,7 +71,7 @@ unsigned short FUN_002533f4(unsigned int param_1,unsigned int param_2,int param_
         temp_v3 = dataTableGetEntries();
         temp_v2 = dataTableGetCount(temp_v0);
         temp_v5 = temp_v3;
-        if ((temp_v4 < temp_v2) && (temp_v5 = g_aocSystem, FUN_0022ac3c(g_aocSystem,temp_v4), temp_v5 == 0))
+        if ((temp_v4 < temp_v2) && (temp_v5 = (int)aocFindSpriteTemplateByKey((AocSystem *)g_aocSystem,temp_v4), temp_v5 == 0))
         {
           temp_v5 = temp_v3 + temp_v4 * 0x1c;
         }

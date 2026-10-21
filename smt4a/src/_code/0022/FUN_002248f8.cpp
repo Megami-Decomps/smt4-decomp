@@ -12,9 +12,9 @@ int FUN_00318c3c(...);
 
 int randRange(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_00184748(...);
+int uiSpriteSetKeyframeThree(...);
 int uiSpriteSetImageKeyframe(...);
-int FUN_002b132c(...);
+int partySelectionExpandMask(...);
 int FUN_002f9418(void);
 int FUN_0031db84(...);
 int menu32PlayCursorSeAndSelect(...);
@@ -107,7 +107,7 @@ extern int padButtonRepeat(unsigned int);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: FUN_00184748. */
+/* Supplied declaration required: uiSpriteSetKeyframeThree. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: dataTable00FindById. */
@@ -123,7 +123,7 @@ extern int FUN_00270bfc(int);
 extern int FUN_00284e94(void);
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: FUN_00291e14. */
-/* Supplied declaration required: FUN_002b132c. */
+/* Supplied declaration required: partySelectionExpandMask. */
 /* Supplied declaration required: FUN_002b1838. */
 /* Supplied declaration required: FUN_002b24dc. */
 /* Supplied declaration required: FUN_002c39dc. */
@@ -564,7 +564,7 @@ LAB_00225054:
       FUN_0039ebcc();
       if (temp_v10 != 0) {
         FUN_00321500(temp_v4 + 8);
-        FUN_00184748(temp_v4 + 0x24bc);
+        uiSpriteSetKeyframeThree(temp_v4 + 0x24bc);
       }
     }
     eventQueueAddUniqueIfValid(0x100020f);
@@ -594,7 +594,7 @@ LAB_00225054:
       temp_v10 = temp_v0 + 0x28c4;
       temp_v4 = menu32State387CNotIn22To25();
       if (temp_v4 != 0) {
-        FUN_002b132c(temp_v10,temp_v0 + 0x7490,temp_v0 + 0x7498);
+        partySelectionExpandMask(temp_v10,temp_v0 + 0x7490,temp_v0 + 0x7498);
         if (temp_v10 != 0) {
           *(unsigned char *)(temp_v0 + 0x74b1) = 1;
         }
@@ -635,7 +635,7 @@ LAB_00225054:
           FUN_0039ebcc();
           if (temp_v10 != 0) {
             FUN_00321500(temp_v4 + 8);
-            FUN_00184748(temp_v4 + 0x24bc);
+            uiSpriteSetKeyframeThree(temp_v4 + 0x24bc);
           }
         }
       }

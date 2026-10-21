@@ -1,81 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `questRecordFindById` (_code @ 0x229f30, 0x148 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "addon/aocMain.h"
+#include "gamedata/DataTable.h"
+
+struct QuestRecord {
+    u16 id;           /* 0x00 */
+    u8 unk02[0x0e];
+};
 
 extern "C" {
+extern AocSystem *g_aocSystem;
 
-extern int g_aocSystem; /* 0x433158 */
-
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
-
-int questRecordFindById(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Prefer downloadable quest records, then search the base-game quest table.
+QuestRecord *questRecordFindById(u32 id)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned short *puVar6;
-  
-  temp_v2 = *(int *)(g_aocSystem + 0x398);
-  if (temp_v2 != 0) {
-    param_4 = *(unsigned int *)(g_aocSystem + 0x394);
-  }
-  if (temp_v2 != 0 && param_4 != 0) {
-    temp_v0 = param_4 & 1;
-    temp_v4 = 0;
-    if (temp_v4 < temp_v0) {
-      do {
-        if (*(unsigned short *)(temp_v2 + temp_v4 * 0x10) == param_1) {
-          return temp_v2 + temp_v4 * 0x10;
+    QuestRecord *records = g_aocSystem->quests;
+    if (records != NULL && g_aocSystem->questCount != 0) {
+        for (u32 index = 0; index < g_aocSystem->questCount; ++index) {
+            if (records[index].id == id) {
+                return &records[index];
+            }
         }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < temp_v0);
     }
-    for (; temp_v0 < param_4; temp_v0 = temp_v0 + 2) {
-      puVar6 = (unsigned short *)(temp_v2 + temp_v0 * 0x10);
-      if (*puVar6 == param_1) {
-        return temp_v2 + temp_v0 * 0x10;
-      }
-      if (puVar6[8] == param_1) {
-        temp_v2 = temp_v2 + temp_v0 * 0x10;
-        return temp_v2 + 0x10;
-      }
-    }
-  }
-  temp_v1 = dataTableGet(0x1c,2);
-  temp_v2 = dataTableGetEntries();
-  temp_v4 = dataTableGetCount(temp_v1);
-  temp_v0 = 0;
-  if (temp_v4 != 0) {
-    temp_v0 = temp_v4 & 1;
-    temp_v3 = 0;
-    if (temp_v0 != 0) {
-      do {
-        if (*(unsigned short *)(temp_v2 + temp_v3 * 0x10) == param_1) {
-          return temp_v2 + temp_v3 * 0x10;
+    void *table = dataTableGet(0x1c, 2);
+    records = static_cast<QuestRecord *>(dataTableGetEntries(table));
+    u32 count = dataTableGetCount(table);
+    for (s32 index = 0; index < count; ++index) {
+        if (records[index].id == id) {
+            return &records[index];
         }
-        temp_v3 = temp_v3 + 1;
-      } while (temp_v3 < (int)temp_v0);
     }
-  }
-  while( 1 ) {
-    if (temp_v4 <= temp_v0) {
-      return 0;
-    }
-    puVar6 = (unsigned short *)(temp_v2 + temp_v0 * 0x10);
-    if (*puVar6 == param_1) {
-      return temp_v2 + temp_v0 * 0x10;
-    }
-    if (puVar6[8] == param_1) break;
-    temp_v0 = temp_v0 + 2;
-  }
-  temp_v2 = temp_v2 + temp_v0 * 0x10;
-  return temp_v2 + 0x10;
+    return NULL;
 }
-
-} /* extern "C" */
+}

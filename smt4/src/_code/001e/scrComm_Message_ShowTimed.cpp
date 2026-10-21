@@ -1,40 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_Message_ShowTimed` (_code @ 0x1ecbc4, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves style14/option0 in extra saved registers across calls and uses strd; compiler materializes them at the final call and uses stm (O2 also differs). */
+#include "common.h"
 
 extern "C" {
+void scrCommMessageSetMode(s32 mode);
+u32 FUN_002865f8(void);
+u32 scrGetArg(u32 index);
+s32 scrGetCommandFrame(void);
+u32 FUN_002866b4(u32 owner, u32 message, s32 frame, s32 style, s32 option, u32 duration);
 
-int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, unsigned int);
-int FUN_0028dc98(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-extern unsigned int FUN_002865f8(void);
-/* Supplied declaration required: FUN_002866b4. */
-extern unsigned int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0028dc98. */
-extern unsigned int scrGetArg(unsigned int);
-
-
-void scrComm_Message_ShowTimed(void)
-
+// Show the requested message with its script duration at the current command frame.
+u32 scrComm_Message_ShowTimed(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  FUN_0028dc98(0);
-  temp_v0 = FUN_002865f8();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  temp_v3 = scrGetCommandFrame();
-  FUN_002866b4(temp_v0,temp_v1,temp_v3,0xe,0,temp_v2);
-  return;
+    scrCommMessageSetMode(0);
+    u32 owner = FUN_002865f8();
+    u32 message = scrGetArg(0);
+    u32 duration = scrGetArg(1);
+    s32 frame = scrGetCommandFrame();
+    return FUN_002866b4(owner, message, frame, 14, 0, duration);
 }
-
-} /* extern "C" */
+}

@@ -1,44 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039bbd4` (_code @ 0x39bbd4, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: alternate background-reset call block is merged before the tail call rather than placed after it. */
+#include "common.h"
+
+struct BackgroundResetState {
+    u8 unk000[0x251];
+    s8 pending; // 0x251
+};
 
 extern "C" {
+extern BackgroundResetState g_gameState;
+s32 gameFlagIsSet(u32 flag);
+void commonBgReset(void);
+void FUN_00289880(void);
+void FUN_00275f00(void);
 
-int commonBgReset(void);
-int FUN_00275f00(void);
-int FUN_00289880(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern unsigned char g_gameState; /* 0x49f91c */
-
-/* Supplied declaration required: commonBgReset. */
-/* Supplied declaration required: FUN_00275f00. */
-/* Supplied declaration required: FUN_00289880. */
-extern int gameFlagIsSet(unsigned int);
-
-
+// Consume a pending background reset, choosing the reset path by game flag 0x16.
 void FUN_0039bbd4(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  if ((*(signed char *)((unsigned char *)&g_gameState + 0x251)) != '\0') {
-    (*(signed char *)((unsigned char *)&g_gameState + 0x251)) = '\0';
-    temp_v0 = gameFlagIsSet(0x16);
-    if (temp_v0 != 0) {
-      commonBgReset();
+    if (g_gameState.pending != 0) {
+        g_gameState.pending = 0;
+        if (gameFlagIsSet(0x16) != 0) {
+            commonBgReset();
+        } else {
+            FUN_00289880();
+        }
     }
-    else {
-      FUN_00289880();
-    }
-  }
-  FUN_00275f00();
-  return;
+    FUN_00275f00();
 }
-
-} /* extern "C" */
+}

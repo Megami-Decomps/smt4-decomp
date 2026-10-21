@@ -1,23 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c53fc` (_code @ 0x4c53fc, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds the contiguous switch cases into a range test; retail uses a 12-entry jump table. */
+#include "common.h"
 
 extern "C" {
-
-
-unsigned int FUN_004c53fc(unsigned int param_1)
-
+// Categories seven through eleven use the special -3 result.
+s32 FUN_004c53fc(u32 category)
 {
-  switch(param_1) {
-  default:
-    return 0;
-  case 7:
-  case 8:
-  case 9:
-  case 10:
-  case 0xb:
-    return 0xfffffffd;
-  }
+    s32 result = 0;
+    switch (category) {
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+        result = -3;
+        break;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

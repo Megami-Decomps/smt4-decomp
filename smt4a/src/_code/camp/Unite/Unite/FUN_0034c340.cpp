@@ -12,7 +12,7 @@ int dataTable04FindById(void);
 int sysMemClear(unsigned char [88], int);
 int rt_aeabi_memclr(...);
 int FUN_0034a290(void);
-int FUN_003c3f1c(void);
+int findSkillMetadataById(void);
 int FUN_003cd9e8(...);
 
 /* stack frame of param_4: 18 slot(s), 69 byte(s) */
@@ -47,7 +47,7 @@ extern unsigned char LAB_0038e764; /* 0x38e764 */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0034a290. */
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: FUN_003cd9e8. */
 
 
@@ -102,7 +102,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
   if (temp_v11 < (int)param_2) {
     do {
       temp_v6 = (unsigned int)(unsigned short)param_1[temp_v11];
-      FUN_003c3f1c();
+      findSkillMetadataById();
       temp_v0 = *(unsigned char *)(temp_v6 + 2);
       temp_v11 = temp_v11 + 1;
       temp_v6 = *(unsigned char *)(temp_v6 + 3) & 0x1f;
@@ -130,7 +130,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
       } while (temp_v7 < 8);
       if ((short)puVar16[1] < 999) {
         temp_v6 = (unsigned int)*puVar17;
-        FUN_003c3f1c();
+        findSkillMetadataById();
         temp_v15 = *(unsigned char *)(temp_v6 + 3) & 0x1f;
         puVar16[1] = (short)temp_v15 + puVar16[1];
         temp_v10 = (unsigned int)*(unsigned char *)(temp_v6 + 2);

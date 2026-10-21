@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_0014e188(int, int, int, int, int);
 int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int uiSpriteSetImageKeyframe(int, int);
 int FUN_004cf7cc(int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -28,10 +28,10 @@ extern unsigned char DAT_00532924; /* 0x532924 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_004cf7cc. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_004ba1f4(int param_1)
@@ -69,7 +69,7 @@ void FUN_004ba1f4(int param_1)
   *(unsigned int *)(param_1 + 0x1028) = 0xffffffff;
   *(unsigned int *)(param_1 + 0x102c) = 0xffffffff;
   *(unsigned int *)(param_1 + 0x1030) = 0xffffffff;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x9f0);
+  paramsClearPacket(param_1 + 0x9f0);
   paramsInit(param_1 + 0x9f0,&DAT_00532900,0xc,&DAT_0053290c,0x18,0,0,0,0,&DAT_00532924,0x38);
   do {
     temp_v1 = param_1 + temp_v0 * 0x8c;
@@ -79,7 +79,7 @@ void FUN_004ba1f4(int param_1)
   } while (temp_v0 < 10);
   FUN_0014e188(param_1 + 0xf88,0x1f,0,param_1 + 0x9f0,0x15);
   FUN_004cf7cc(param_1 + 0xa8);
-  FUN_00184528(param_1 + 0xa8,0xc);
+  uiSpriteBankApplyPreset(param_1 + 0xa8,0xc);
   return;
 }
 

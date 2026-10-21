@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00241f2c(...);
-int FUN_00241f98(...);
-int questEntryCheck(void);
+int dataTable0BFindById(...);
+int appCheckPurchaseRequirements(void);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
 int fadeObjectResetIfActive(...);
@@ -41,8 +41,8 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00241f2c. */
-/* Supplied declaration required: FUN_00241f98. */
-/* Supplied declaration required: questEntryCheck. */
+/* Supplied declaration required: dataTable0BFindById. */
+/* Supplied declaration required: appCheckPurchaseRequirements. */
 /* Supplied declaration required: FUN_00290994. */
 extern int flagBitIsSet(unsigned int);
 extern unsigned int FUN_00295cec(void);
@@ -128,7 +128,7 @@ void FUN_0033149c(int param_1)
           FUN_002bf288(2,0x1d,0x58d,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,
                        0x6a);
           temp_v5 = temp_v10;
-          questEntryCheck();
+          appCheckPurchaseRequirements();
           if (temp_v5 != 0) {
             if (temp_v5 != 1) {
               if (temp_v5 == 2) {
@@ -160,7 +160,7 @@ void FUN_0033149c(int param_1)
           FUN_002bed3c();
         }
         temp_v4 = FUN_002bf4f8(0x1d,0x590);
-        FUN_00241f98(temp_v10);
+        dataTable0BFindById(temp_v10);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v0,
@@ -228,7 +228,7 @@ void FUN_0033149c(int param_1)
     }
     else {
       temp_v5 = temp_v10;
-      questEntryCheck();
+      appCheckPurchaseRequirements();
       if (temp_v5 != 0) {
         if (temp_v5 != 1) {
           if (temp_v5 == 2) {
@@ -260,7 +260,7 @@ void FUN_0033149c(int param_1)
       FUN_002bed3c();
     }
     temp_v9 = FUN_002bf4f8(0x1d,0x599);
-    FUN_00241f98(temp_v10);
+    dataTable0BFindById(temp_v10);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v9 + 10) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v0,

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00153f64(...);
+int asdTMTexTableGetHeaderValue(...);
 int FUN_00157558(int);
 int FUN_0016242c(...);
 int FUN_0016c4b8(...);
@@ -51,7 +51,7 @@ extern float DAT_0064c0bc; /* 0x64c0bc */
 extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00153f64. */
+/* Supplied declaration required: asdTMTexTableGetHeaderValue. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_0016242c. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -229,7 +229,7 @@ void FUN_0014b01c(int param_1)
     *(unsigned char *)(temp_v3 + 0x12d0) = 0;
   }
   temp_v4 = DAT_0057f668 | 0xffffff00;
-  temp_v3 = FUN_00153f64(3,2);
+  temp_v3 = asdTMTexTableGetHeaderValue(3,2);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
   FUN_0016c4b8(g_renderCtx,temp_v3);
   FUN_0019e3d0(temp_v4);
@@ -253,7 +253,7 @@ void FUN_0014b01c(int param_1)
   }
   mtx44Copy(temp_v8,&DAT_0064c084);
   camSetMatrixA(g_renderCtx,temp_v8);
-  temp_v3 = FUN_00153f64(3);
+  temp_v3 = asdTMTexTableGetHeaderValue(3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
   FUN_0016c4b8(g_renderCtx,temp_v3);
   temp_v4 = DAT_0057f670 | 0xffffff00;

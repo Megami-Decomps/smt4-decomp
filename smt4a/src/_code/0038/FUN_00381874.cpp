@@ -9,7 +9,7 @@ int FUN_001642e4(unsigned char *, int, int, int);
 int memAlloc(...);
 int asdTextureRelease(void);
 int asdMemFree(unsigned char *);
-int FUN_00221f20(void);
+int spriteGroupCreateFromFile(void);
 int handleBlockRefDrop(void);
 int FUN_002b3fd8(...);
 int FUN_002cf28c(...);
@@ -36,12 +36,12 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_00221f20. */
+/* Supplied declaration required: spriteGroupCreateFromFile. */
 /* Supplied declaration required: handleBlockRefDrop. */
 /* Supplied declaration required: FUN_002b3fd8. */
 /* Supplied declaration required: FUN_002cf28c. */
 /* Supplied declaration required: textureCreateFromImage. */
-extern unsigned int FUN_0037a834(unsigned int);
+extern unsigned int sysGetTableWord(unsigned int);
 
 
 unsigned long long FUN_00381874(unsigned int *param_1)
@@ -172,7 +172,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                           param_1[7] = 0;
                         }
                         else {
-                          temp_v0 = FUN_0037a834(piVar2[1] & 0xffff);
+                          temp_v0 = sysGetTableWord(piVar2[1] & 0xffff);
                           param_1[0xf] = temp_v0;
                           *(unsigned short *)(param_1 + 0x11) = 8;
                           param_1[7] = 1;
@@ -181,7 +181,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                       else {
                         temp_v4 = piVar2[2];
                         if (temp_v4 != 0) {
-                          FUN_00221f20();
+                          spriteGroupCreateFromFile();
                           param_1[0x10] = temp_v4;
                         }
                         else {
@@ -205,7 +205,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                             param_1[0x10] = 0;
                           }
                           puVar5 = puVar4;
-                          FUN_00221f20();
+                          spriteGroupCreateFromFile();
                           param_1[0x10] = (unsigned int)puVar5;
                           asdMemFree(puVar4);
                         }

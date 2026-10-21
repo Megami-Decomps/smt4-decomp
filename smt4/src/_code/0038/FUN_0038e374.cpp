@@ -28,7 +28,7 @@ extern unsigned int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_00234124. */
 /* Supplied declaration required: FUN_002341d4. */
 extern int strIsEmpty(unsigned int *);
-extern int FUN_002a12d8(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 extern int byteIsAtLeast100(unsigned int *);
 
 
@@ -83,7 +83,7 @@ void FUN_0038e374(int param_1)
       FUN_002341d4(&temp_v5,g_aocMain);
       temp_v4 = temp_v5;
       uStack_34 = uStack_2c;
-      temp_v0 = FUN_002a12d8((unsigned int *)&temp_v4);
+      temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v4);
       if (temp_v0 < 0) {
         *(unsigned int *)(param_1 + 8) = 9999;
         *(unsigned char *)(param_1 + 0x210) = 100;

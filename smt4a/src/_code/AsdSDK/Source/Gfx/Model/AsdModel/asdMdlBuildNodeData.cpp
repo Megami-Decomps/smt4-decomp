@@ -1,74 +1,94 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdMdlBuildNodeData` (_code @ 0x1847c4, 0x154 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: constructor stores are grouped, parser cold blocks and saved-register lifetimes differ, and literal order changes; candidate -O2. */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Util/AsdList.h"
+#include "shard/GlobalBlocks.h"
 
+struct ModelNodeData {
+    u32 references;
+    union {
+        u32 flags;
+        struct { u8 registered; u8 unk05[3]; } state;
+    };
+    void *model;
+    void *source;
+    void *dictionary;
+    void *argument;
+    u32 unk18;
+};
+struct ModelContainerHeader {
+    u8 magic[4];
+    u8 unk04[8];
+    u32 dictionaryOffset;
+    u32 modelOffset;
+    u32 signedModelOffset;
+};
+struct ModelSignatureHeader {
+    u8 magic[8];
+    u32 flags;
+};
+struct ModelDataCounterView {
+    u8 unk00[0x38];
+    u32 count;
+};
 extern "C" {
-
-int asdMemoryAlloc(int, int, int, int, int);
-int asdListAdd(unsigned char *, unsigned int *, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern int DAT_005b3c2c; /* 0x5b3c2c */
-extern unsigned char DAT_00636ebc; /* 0x636ebc */
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: asdListAdd. */
-extern int rt_memcmp(int, char *, unsigned int);
-
-
-unsigned int * asdMdlBuildNodeData(int param_1,unsigned int param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  puVar1 = (unsigned int *)0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x1c,1);
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  *puVar1 = 1;
-  *(unsigned char *)(puVar1 + 1) = 1;
-  temp_v2 = 0;
-  puVar1[3] = param_1;
-  temp_v0 = rt_memcmp(param_1,"ATBC",4);
-  if ((temp_v0 == 0) || (temp_v1 = rt_memcmp(param_1,"ABCH",4), temp_v0 = param_1, temp_v1 == 0)) {
-    temp_v0 = *(int *)(param_1 + 0x14);
-    if (temp_v0 == 0) {
-      temp_v0 = *(int *)(param_1 + 0x10);
-    }
-    temp_v0 = param_1 + temp_v0;
-    temp_v1 = rt_memcmp(temp_v0,"MDLSIGN",7);
-    if (temp_v1 == 0) {
-      temp_v2 = *(int *)(temp_v0 + 8);
-      temp_v0 = temp_v0 + 0x80;
-    }
-    else {
-      temp_v0 = 0;
-    }
-  }
-  puVar1[2] = temp_v0;
-  temp_v1 = 0;
-  temp_v0 = rt_memcmp(param_1,"ATBC",4);
-  if ((temp_v0 == 0) || (temp_v0 = rt_memcmp(param_1,"ABCH",4), temp_v0 == 0)) {
-    temp_v1 = *(int *)(param_1 + 0xc) + param_1;
-  }
-  puVar1[4] = temp_v1;
-  if (temp_v2 == 0) {
-    puVar1[5] = param_2;
-  }
-  asdListAdd(&DAT_00636ebc,puVar1,0);
-  DAT_005b3c2c = DAT_005b3c2c + 1;
-  return puVar1;
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
+s32 rt_memcmp(const void *left, const void *right, u32 size);
+void asdListAdd(AsdList *list, void *item, s32 index);
+extern const char g_asdModelContainerAtbcMagic[];
+extern const char g_asdModelContainerAbchMagic[];
+extern const char g_asdModelPayloadSignature[];
+extern AsdList DAT_00636ebc;
 }
 
-} /* extern "C" */
+static __inline void *modelPayload(void *source, u32 *flags)
+{
+    ModelContainerHeader *container = (ModelContainerHeader *)source;
+    if (rt_memcmp(source, g_asdModelContainerAtbcMagic, 4) == 0 ||
+        rt_memcmp(source, g_asdModelContainerAbchMagic, 4) == 0) {
+        u32 offset = container->signedModelOffset;
+        if (offset == 0) {
+            offset = container->modelOffset;
+        }
+        ModelSignatureHeader *signature = (ModelSignatureHeader *)((u8 *)source + offset);
+        if (rt_memcmp(signature, g_asdModelPayloadSignature, 7) == 0) {
+            *flags = signature->flags;
+            return (u8 *)signature + 0x80;
+        }
+        return NULL;
+    }
+    return source;
+}
+
+static __inline void *modelDictionary(void *source)
+{
+    if (rt_memcmp(source, g_asdModelContainerAtbcMagic, 4) == 0 ||
+        rt_memcmp(source, g_asdModelContainerAbchMagic, 4) == 0) {
+        return (u8 *)source + ((ModelContainerHeader *)source)->dictionaryOffset;
+    }
+    return NULL;
+}
+
+extern "C" void *asdMdlBuildNodeData(void *source, void *argument)
+{
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 0x7cc);
+    ModelNodeData *node = (ModelNodeData *)asdMemoryAlloc(
+        ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, sizeof(ModelNodeData), 1);
+    node->flags = 0;
+    node->model = NULL;
+    node->dictionary = NULL;
+    node->argument = NULL;
+    node->unk18 = 0;
+    node->references = 1;
+    node->state.registered = 1;
+    node->source = source;
+    u32 flags = 0;
+    node->model = modelPayload(source, &flags);
+    node->dictionary = modelDictionary(source);
+    if (flags == 0) {
+        node->argument = argument;
+    }
+    asdListAdd(&DAT_00636ebc, node, 0);
+    ++((ModelDataCounterView *)&g_gfxSettings)->count;
+    return node;
+}

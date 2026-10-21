@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00256224(void);
-int FUN_002bce00(unsigned int);
+int textDrawDefaultString(void);
+int aocIndexValueOrDefault(unsigned int);
 int FUN_003c2fe8(int *, unsigned int);
 int FUN_003c3238(int *, unsigned int);
 
@@ -13,9 +13,9 @@ extern unsigned int DAT_0043438c; /* 0x43438c */
 extern int *DAT_00434390; /* 0x434390 */
 
 extern unsigned int FUN_002561d8(int, int, unsigned int);
-/* Supplied declaration required: FUN_00256224. */
-extern int FUN_0025628c(int);
-/* Supplied declaration required: FUN_002bce00. */
+/* Supplied declaration required: textDrawDefaultString. */
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
+/* Supplied declaration required: aocIndexValueOrDefault. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_003c2fe8. */
 /* Supplied declaration required: FUN_003c3238. */
@@ -40,10 +40,10 @@ unsigned int FUN_001fc5c0(void)
           if (temp_v1 != 0xe) {
             return 0;
           }
-          temp_v1 = FUN_0025628c(DAT_00434390[4]);
+          temp_v1 = asdListBoxGetSelectedItemId(DAT_00434390[4]);
         }
         else {
-          temp_v1 = FUN_0025628c(DAT_00434390[4]);
+          temp_v1 = asdListBoxGetSelectedItemId(DAT_00434390[4]);
         }
         if (temp_v1 == 0) {
           temp_v2 = FUN_002561d8(temp_v0,piVar1[7],1);
@@ -51,10 +51,10 @@ unsigned int FUN_001fc5c0(void)
         }
       }
       else {
-        temp_v1 = FUN_0025628c(DAT_00434390[4]);
+        temp_v1 = asdListBoxGetSelectedItemId(DAT_00434390[4]);
         if (temp_v1 == 0xb) {
-          FUN_002bce00(*(unsigned int *)(temp_v0 + 0x49c8));
-          FUN_00256224();
+          aocIndexValueOrDefault(*(unsigned int *)(temp_v0 + 0x49c8));
+          textDrawDefaultString();
         }
       }
     }

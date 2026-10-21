@@ -22,7 +22,7 @@ extern int g_frameTex; /* 0x57f65c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_001546e8(unsigned int);
+extern int stateValuesGetBySelector(unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -49,7 +49,7 @@ void FUN_001509fc(void)
   
   temp_v3 = g_frameTex;
   temp_v9 = 400.0f;
-  temp_v0 = FUN_001546e8(0);
+  temp_v0 = stateValuesGetBySelector(0);
   temp_v1 = *(int *)(temp_v3 + 0xfa8);
   if (((temp_v0 == 0) && (temp_v1 >= 2)) && (temp_v1 = temp_v1 - 1, temp_v1 < 1)) {
     temp_v1 = 1;

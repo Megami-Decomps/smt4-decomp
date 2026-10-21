@@ -8,7 +8,7 @@ int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 
 extern int FUN_002973ec(void);
-extern unsigned int FUN_002ae3c4(unsigned int);
+extern unsigned int aocEntryGetKind(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 
@@ -23,7 +23,7 @@ int FUN_00230e04(unsigned short *param_1)
   unsigned int temp_v3;
   
   temp_v3 = (unsigned int)*param_1;
-  temp_v0 = FUN_002ae3c4(temp_v3);
+  temp_v0 = aocEntryGetKind(temp_v3);
   temp_v2 = 0;
   switch(temp_v0) {
   case 1:

@@ -9,12 +9,12 @@ typedef struct GameState {
 
 extern GameState g_gameState; /* 0x5f15fc */
 
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 
-/* Whether the feature is unlocked and FUN_00376f94 reports more than 100. */
+/* Whether the feature is unlocked and lmapGetSpawnIndex reports more than 100. */
 u8 FUN_003d21dc(void)
 {
-    int level = FUN_00376f94();
+    int level = lmapGetSpawnIndex();
 
     return g_gameState.unlocked != 0 && level > 100;
 }

@@ -25,7 +25,7 @@ int FUN_002b7490(void);
 int FUN_002d26a4(unsigned int);
 int FUN_002d8cec(void);
 int FUN_003254a0(void);
-int FUN_00352c14(void);
+int gameStateSelectKind(void);
 int FUN_00395904(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -58,7 +58,7 @@ extern unsigned char FUN_00246bd4(void);
 /* Supplied declaration required: FUN_002d8cec. */
 /* Supplied declaration required: FUN_003254a0. */
 extern unsigned int uiSelectionRefresh(void);
-/* Supplied declaration required: FUN_00352c14. */
+/* Supplied declaration required: gameStateSelectKind. */
 /* Supplied declaration required: FUN_00395904. */
 
 
@@ -95,7 +95,7 @@ void FUN_0037a078(void)
   FUN_002d8cec();
   FUN_0023a52c();
   FUN_003254a0();
-  FUN_00352c14();
+  gameStateSelectKind();
   FUN_00275558();
   return;
 }

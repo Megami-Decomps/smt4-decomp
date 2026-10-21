@@ -16,7 +16,7 @@ int FUN_001879d0(...);
 int uiFadeDraw(int);
 int FUN_00218640(void);
 int FUN_002f6048(int);
-int FUN_0037ce80(...);
+int partyDrawCategorySelectionIcon(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -50,7 +50,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: uiFadeDraw. */
 /* Supplied declaration required: FUN_00218640. */
 /* Supplied declaration required: FUN_002f6048. */
-/* Supplied declaration required: FUN_0037ce80. */
+/* Supplied declaration required: partyDrawCategorySelectionIcon. */
 
 
 unsigned int FUN_0023b4cc(void)
@@ -139,7 +139,7 @@ unsigned int FUN_0023b4cc(void)
     FUN_001835b4(2,0x1e,0x59,temp_v4,temp_v1,0x97);
     FUN_001835b4(2,0x1e,0x51,temp_v4,temp_v1,0xa1);
     temp_v2 = FUN_001834a4(0x1e,0x54);
-    FUN_0037ce80(temp_v0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,0xa6);
+    partyDrawCategorySelectionIcon(temp_v0,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,0xa6);
     temp_v2 = FUN_001834a4(0x1e,0x55);
     temp_v3 = FUN_00156850(temp_v0,0);
     textFormatBuffer(temp_v8,&LAB_0023b870,temp_v3);

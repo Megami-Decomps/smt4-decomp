@@ -10,7 +10,7 @@ int FUN_00202400(void);
 int FUN_002ae320(void);
 int FUN_003d498c(unsigned int, int);
 int uiQuestSpritesCreate(void);
-int FUN_003defe0(void);
+unsigned int questHasSpecialDetailPage(unsigned int);
 
 extern int g_uiQuest; /* 0x57f28c */
 
@@ -24,7 +24,6 @@ extern int FUN_002a4894(int);
 extern int FUN_002f7730(int, unsigned int);
 /* Supplied declaration required: FUN_003d498c. */
 /* Supplied declaration required: uiQuestSpritesCreate. */
-/* Supplied declaration required: FUN_003defe0. */
 extern int partyEntryBitsBit4(unsigned int);
 
 
@@ -51,7 +50,7 @@ void FUN_00334560(void)
   *(unsigned short *)(temp_v5 + 0xcce) = temp_v0;
   temp_v1 = g_uiQuest;
   temp_v2 = partyEntryBitsBit4(temp_v6);
-  if ((temp_v2 == 0) && (temp_v3 = temp_v6, FUN_003defe0(), temp_v3 != 0)) {
+  if ((temp_v2 == 0) && ((temp_v3 = questHasSpecialDetailPage(temp_v6)) != 0)) {
     temp_v2 = 0;
     if (temp_v2 < *(int *)(temp_v1 + 0x918)) {
       do {

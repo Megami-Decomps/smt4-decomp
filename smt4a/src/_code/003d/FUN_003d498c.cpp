@@ -9,10 +9,10 @@ int FUN_001654f8(int, int);
 int FUN_001ad9b4(void);
 int FUN_0020214c(void);
 int FUN_0023723c(unsigned int, int, unsigned int, int);
-int FUN_002a1f60(unsigned int, int, unsigned int, int);
-int FUN_003dc38c(int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
+void uiQuestRefreshDetailPages(int);
 int FUN_003dea6c(...);
-int FUN_003defe0(void);
+unsigned int questHasSpecialDetailPage(unsigned int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -32,12 +32,10 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0023723c. */
-/* Supplied declaration required: FUN_002a1f60. */
-/* Supplied declaration required: FUN_003dc38c. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int FUN_003de464(int, unsigned int);
 extern int itemDataGetCategory(int);
 /* Supplied declaration required: FUN_003dea6c. */
-/* Supplied declaration required: FUN_003defe0. */
 extern int partyEntryGetByte1(int);
 extern unsigned char *FUN_0046c0f8(unsigned int, int);
 
@@ -73,13 +71,13 @@ void FUN_003d498c(int param_1,unsigned int param_2)
     temp_v2 = 3;
     temp_v4 = 0;
     temp_v3 = (unsigned char *)puVar3;
-    FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x91c),3,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x91c),3,0xffffffff,0);
     temp_v1 = partyEntryGetByte1(param_1);
     if (0 < temp_v1) {
       temp_v3 = *(unsigned char **)(temp_v0 + 0x92c);
       temp_v2 = 3;
       temp_v4 = temp_v1;
-      FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x924),3,0xffffffff,0);
+      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x924),3,0xffffffff,0);
     }
     FUN_003dea6c(param_1,1,0);
     temp_v1 = FUN_003de464(param_1,param_2);
@@ -97,17 +95,16 @@ void FUN_003d498c(int param_1,unsigned int param_2)
       temp_v3 = *(unsigned char **)(temp_v0 + 0x930);
       temp_v2 = 3;
       temp_v4 = temp_v1;
-      FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x920),3,0xffffffff,0);
+      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x920),3,0xffffffff,0);
     }
-    temp_v1 = param_1;
-    FUN_003defe0();
+    temp_v1 = questHasSpecialDetailPage(param_1);
     if (temp_v1 != 0) {
       temp_v4 = itemDataGetCategory(param_1);
       temp_v3 = *(unsigned char **)(temp_v0 + 0x92c);
       temp_v2 = 3;
-      FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x928),3,0xffffffff,0);
+      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x928),3,0xffffffff,0);
     }
-    FUN_003dc38c(param_1);
+    uiQuestRefreshDetailPages(param_1);
     return;
   }
   return;

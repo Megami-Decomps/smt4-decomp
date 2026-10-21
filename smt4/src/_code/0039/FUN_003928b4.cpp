@@ -19,7 +19,7 @@ typedef struct {
 
 extern int g_aocMain; /* 0x432fc8 */
 
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: timeInitializeActiveState. */
@@ -98,7 +98,7 @@ void FUN_003928b4(int param_1)
       temp_v0 = param_1 + 0x20c;
       FUN_00233fcc(temp_v0,4);
       *(int *)(param_1 + 0x208) = temp_v0;
-      temp_v1 = FUN_0023360c(param_1 + 0x240);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x240);
       *(unsigned int *)(temp_v0 + 0x14) = (unsigned int)*(unsigned short *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9aa);
       *(unsigned int *)(param_1 + 8) = 3;
       return;

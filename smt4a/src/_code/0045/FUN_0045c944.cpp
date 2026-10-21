@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045c944` (_code @ 0x45c944, 0x258 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_WaveArchiveReader.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ extern unsigned char DAT_00548f3c; /* 0x548f3c */
 
 /* Supplied declaration required: FUN_0015fe40. */
 /* Supplied declaration required: FUN_001a5e84. */
-extern int FUN_001a8d40(unsigned int **, unsigned int);
 /* Supplied declaration required: FUN_004619b0. */
 /* Supplied declaration required: FUN_00466d2c. */
 /* Supplied declaration required: FUN_00466dac. */
@@ -104,7 +104,7 @@ FUN_0045c944(fn_0045c944_arg0 *param_1,int param_2,unsigned int *param_3,unsigne
       }
       if (!(temp_v1 == 0 || temp_v2 == 0)) {
         FUN_001a5e84(&puStack_70,temp_v2,0);
-        temp_v3 = FUN_001a8d40(&puStack_70,*param_4);
+        temp_v3 = (unsigned int)FUN_001a8d40((const WaveArchiveReader*)&puStack_70,*param_4);
         if (temp_v3 == 0) {
           temp_v1 = vcallSlot5(param_1->field_0x110,*temp_v11);
         }

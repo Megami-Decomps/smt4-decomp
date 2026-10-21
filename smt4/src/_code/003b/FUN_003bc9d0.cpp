@@ -10,7 +10,7 @@ int FUN_00298d50(...);
 int FUN_0029bb14(...);
 int asdMdlManagerCreateLoaded(...);
 int FUN_0029c2cc(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int FUN_002a0428(...);
 int modelSlotAttachChild(...);
 int FUN_002a09b4(...);
@@ -47,12 +47,12 @@ typedef struct {
 /* Supplied declaration required: gfxObjectDestroy. */
 extern int effTimelineIsDone(void *);
 extern void *FUN_00263c1c(char *);
-extern int FUN_00282b28(void);
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029c2cc. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a09b4. */
@@ -115,7 +115,7 @@ void FUN_003bc9d0(fn_003bc9d0_arg0 *param_1)
   }
   if (temp_v0 != 1) {
     temp_v0 = padIsButtonPressed(0);
-    if ((temp_v0 != 0) && (temp_v0 = FUN_00282b28(), temp_v0 == 0)) {
+    if ((temp_v0 != 0) && (temp_v0 = screenFadeIsBusy(), temp_v0 == 0)) {
       param_1->field_0x24 = 1;
     }
     return;
@@ -124,20 +124,20 @@ void FUN_003bc9d0(fn_003bc9d0_arg0 *param_1)
   if ((temp_v0 == 0) || (param_1->field_0x1 != 0)) {
     if (param_1->field_0x24 != 0) {
       if (param_1->field_0x1 == 0) {
-        FUN_0029c3c0(0,10,0xff);
-        FUN_0029c3c0(1,10,0xff);
+        slotSetRequest(0,10,0xff);
+        slotSetRequest(1,10,0xff);
       }
       param_1->field_0x1 = 1;
       param_1->field_0x24 = 0;
     }
   }
   else {
-    FUN_0029c3c0(0,10,0xff);
-    FUN_0029c3c0(1,10,0xff);
+    slotSetRequest(0,10,0xff);
+    slotSetRequest(1,10,0xff);
     param_1->field_0x1 = 1;
     param_1->field_0x24 = 0;
   }
-  temp_v0 = FUN_00282b28();
+  temp_v0 = screenFadeIsBusy();
   if (((temp_v0 == 0) && (param_1->field_0x1 != 0)) &&
      (temp_v0 = param_1->field_0x28 + 1, param_1->field_0x28 = temp_v0, temp_v0 >= 2)) {
     param_1->field_0x1 = 0;
@@ -154,7 +154,7 @@ void FUN_003bc9d0(fn_003bc9d0_arg0 *param_1)
     param_1->field_0x3 = 1;
   }
   temp_v0 = padIsButtonPressed(0);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_00282b28(), temp_v0 == 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = screenFadeIsBusy(), temp_v0 == 0)) {
     param_1->field_0x24 = 1;
   }
   return;

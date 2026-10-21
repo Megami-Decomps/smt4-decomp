@@ -31,7 +31,7 @@ extern int g_uiQuest; /* 0x43dd50 */
 extern int FUN_00298dc8(unsigned short);
 extern int idIsAtLeast350(unsigned int);
 extern int FUN_00298e00(unsigned int);
-extern int FUN_00298e20(unsigned int);
+extern int questIsCompleted(unsigned int);
 extern int FUN_00298e40(unsigned int, int, int *);
 extern int FUN_00298f88(unsigned int);
 extern int FUN_00298fa0(unsigned int, unsigned int);
@@ -98,7 +98,7 @@ void FUN_00189c24(void)
               do {
                 temp_v6 = FUN_00298e40(temp_v7,temp_v3,temp_v11);
                 if ((temp_v6 != 0) &&
-                   (((temp_v6 = FUN_00298e20(temp_v7), temp_v6 != 0 &&
+                   (((temp_v6 = questIsCompleted(temp_v7), temp_v6 != 0 &&
                      (temp_v6 = FUN_00298e00(temp_v7), temp_v6 == 0)) || (0 < temp_v11[0]))))
                 goto LAB_00189e6c;
                 temp_v3 = temp_v3 + 1;

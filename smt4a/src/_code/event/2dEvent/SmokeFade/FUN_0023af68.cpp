@@ -5,19 +5,19 @@
 extern "C" {
 
 int mathInterpolateTimed(...);
-int FUN_001f4908(int, int, unsigned int);
+int slotSetRequest(int, int, unsigned int);
 int FUN_003d54f8(...);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_0057f47c; /* 0x57f47c */
-extern unsigned int DAT_0057f480; /* 0x57f480 */
+extern int g_smokeFadeState; /* 0x57f47c */
+extern unsigned int g_smokeFadeImages; /* 0x57f480 */
 extern unsigned int DAT_0057f484; /* 0x57f484 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int FUN_00162ea4(void);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_00203d74(void);
 /* Supplied declaration required: FUN_003d54f8. */
 
@@ -36,11 +36,11 @@ unsigned int FUN_0023af68(void)
   float temp_v5;
   float temp_v6;
   
-  temp_v0 = DAT_0057f47c;
+  temp_v0 = g_smokeFadeState;
   temp_v3 = 0;
   temp_v2 = 0;
   do {
-    temp_v1 = asdTMTexTableNodeIsLoaded((&DAT_0057f480)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
+    temp_v1 = asdTMTexTableNodeIsLoaded((&g_smokeFadeImages)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
     if (temp_v1 != 0) {
       temp_v3 = temp_v3 + 1;
     }
@@ -58,7 +58,7 @@ unsigned int FUN_0023af68(void)
     temp_v3 = 0;
     temp_v2 = 0;
     do {
-      temp_v1 = asdTMTexTableNodeIsLoaded((&DAT_0057f480)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
+      temp_v1 = asdTMTexTableNodeIsLoaded((&g_smokeFadeImages)[temp_v2 * 3],(&DAT_0057f484)[temp_v2 * 3]);
       if (temp_v1 != 0) {
         temp_v3 = temp_v3 + 1;
       }
@@ -77,15 +77,15 @@ unsigned int FUN_0023af68(void)
     else {
       *(unsigned char *)(temp_v0 + 0x25) = 0;
     }
-    if ((*(char *)(DAT_0057f47c + 0x25) == '\0') &&
-       (piVar5 = (int *)0x0, *(int *)(DAT_0057f47c + 8) != 0)) {
-      piVar5 = (int *)(*(int *)(DAT_0057f47c + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
+    if ((*(char *)(g_smokeFadeState + 0x25) == '\0') &&
+       (piVar5 = (int *)0x0, *(int *)(g_smokeFadeState + 8) != 0)) {
+      piVar5 = (int *)(*(int *)(g_smokeFadeState + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
     }
     if (*(int *)(temp_v0 + 0x14) != 0) {
       *(float *)(temp_v0 + 0x20) = temp_v6;
       *(float *)(temp_v0 + 0x1c) = temp_v6;
       *(unsigned int *)(temp_v0 + 0xc) = 2;
-      FUN_001f4908(1,piVar5[2] + 1,0xffffffff);
+      slotSetRequest(1,piVar5[2] + 1,0xffffffff);
     }
     else {
       FUN_003d54f8(0);
@@ -97,9 +97,9 @@ unsigned int FUN_0023af68(void)
     *(unsigned char *)(temp_v0 + 0x24) = 1;
     return 0;
   case 1:
-    if ((*(char *)(DAT_0057f47c + 0x25) == '\0') &&
-       (piVar5 = (int *)0x0, *(int *)(DAT_0057f47c + 8) != 0)) {
-      piVar5 = (int *)(*(int *)(DAT_0057f47c + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
+    if ((*(char *)(g_smokeFadeState + 0x25) == '\0') &&
+       (piVar5 = (int *)0x0, *(int *)(g_smokeFadeState + 8) != 0)) {
+      piVar5 = (int *)(*(int *)(g_smokeFadeState + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
     }
     temp_v4 = temp_v5;
     mathInterpolateTimed(*piVar5,*(unsigned int *)(temp_v0 + 0x18));
@@ -115,9 +115,9 @@ unsigned int FUN_0023af68(void)
     }
     break;
   case 2:
-    if ((*(char *)(DAT_0057f47c + 0x25) == '\0') &&
-       (piVar5 = (int *)0x0, *(int *)(DAT_0057f47c + 8) != 0)) {
-      piVar5 = (int *)(*(int *)(DAT_0057f47c + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
+    if ((*(char *)(g_smokeFadeState + 0x25) == '\0') &&
+       (piVar5 = (int *)0x0, *(int *)(g_smokeFadeState + 8) != 0)) {
+      piVar5 = (int *)(*(int *)(g_smokeFadeState + 8) + *(int *)(temp_v0 + 0x10) * 0x10);
     }
     temp_v4 = temp_v6;
     mathInterpolateTimed(piVar5[2],*(unsigned int *)(temp_v0 + 0x18));
@@ -129,7 +129,7 @@ unsigned int FUN_0023af68(void)
     *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
     temp_v6 = (float)VectorSignedToFloat((piVar5[2] - piVar5[3]) - 1,(unsigned char)(in_fpscr >> 0x16) & 3);
     if (temp_v5 - temp_v5 / temp_v6 <= *(float *)(temp_v0 + 0x20)) {
-      FUN_001f4908(0,0,0xffffffff);
+      slotSetRequest(0,0,0xffffffff);
     }
     if (*(int *)(temp_v0 + 0x20) != 0x3f800000) {
       return 0;

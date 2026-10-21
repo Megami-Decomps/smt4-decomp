@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00257568(int *, int *);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int FUN_002ae164(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00257568. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 extern int gameGetUnitRecord(void);
 /* Supplied declaration required: FUN_002ae164. */
 extern int idIsAbove400(int);
@@ -32,7 +32,7 @@ void FUN_00219148(int *param_1,int *param_2)
   temp_v1 = idIsAbove400(*param_1);
   temp_v2 = *param_1;
   if (temp_v1 != 0) {
-    FUN_00283e48();
+    passiveSkillLookupRecord();
     temp_v3 = *(short *)(temp_v2 + 0x22);
   }
   else {
@@ -42,7 +42,7 @@ void FUN_00219148(int *param_1,int *param_2)
   temp_v1 = idIsAbove400(*param_2);
   temp_v2 = *param_2;
   if (temp_v1 != 0) {
-    FUN_00283e48();
+    passiveSkillLookupRecord();
     temp_v0 = *(short *)(temp_v2 + 0x22);
   }
   else {

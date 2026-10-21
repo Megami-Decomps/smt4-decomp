@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002f3b58(unsigned int, int, unsigned int);
-int FUN_00300b4c(void);
+int systemAcquireHandleList(void);
 int FUN_00303208(...);
 
 extern unsigned char DAT_00559e70; /* 0x559e70 */
@@ -14,7 +14,7 @@ extern int operatorNew(unsigned int);
 extern int FUN_002ecf28(void);
 /* Supplied declaration required: FUN_002f3b58. */
 extern unsigned int *FUN_00300ae8(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00300b4c. */
+/* Supplied declaration required: systemAcquireHandleList. */
 /* Supplied declaration required: FUN_00303208. */
 
 
@@ -30,7 +30,7 @@ int FUN_001174ec(unsigned int param_1)
   puVar1 = (unsigned int *)FUN_00300ae8(param_1,2);
   *puVar1 = (unsigned int)&DAT_00559e70;
   temp_v0 = FUN_00303208(puVar1 + 4,0);
-  FUN_00300b4c();
+  systemAcquireHandleList();
   *(unsigned short *)(temp_v0 + 0x20) = 0xb;
   temp_v1 = operatorNew(0x44);
   temp_v2 = 0;

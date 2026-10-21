@@ -1,23 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00287a78` (_code @ 0x287a78, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps zero in caller-clobbered s4 across the angle-difference call; this standalone unit preserves it in s16. Independent subtraction order also differs. */
+#include "common.h"
+
+struct Position {
+    f32 x, y, z;
+};
 
 extern "C" {
+f32 FUN_00281e34(f32 x, f32 z);
+f32 FUN_00287b0c(f32 current, f32 target);
 
-int FUN_00281e34(void);
-int FUN_00287b0c(void);
-
-/* Supplied declaration required: FUN_00281e34. */
-/* Supplied declaration required: FUN_00287b0c. */
-
-
-void FUN_00287a78(void)
-
+// Absolute heading error between the current facing and the X/Z direction to a point.
+f32 FUN_00287a78(Position from, f32 heading, Position to)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_00281e34();
-  FUN_00287b0c();
-  return;
+    f32 angle = FUN_00281e34(to.x - from.x, to.z - from.z) * 57.3248405456543f;
+    if (angle < 0.0f)
+        angle += 360.0f;
+    if (angle > 360.0f)
+        angle -= 360.0f;
+    f32 difference = FUN_00287b0c(heading, angle);
+    return difference < 0.0f ? -difference : difference;
 }
-
-} /* extern "C" */
+}

@@ -67,7 +67,7 @@ extern unsigned char DAT_0049fc10; /* 0x49fc10 */
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: asdLoadFileSync. */
 /* Supplied declaration required: FUN_002f58e0. */
 
@@ -85,8 +85,8 @@ void FUN_001a8748(void)
   asdTMTexTableLoadSprites(0x1c);
   FUN_002c58c8(0x1c,3);
   FUN_002c58c8(0x1c,4);
-  DAT_0049fba4 = FUN_002c5c04(&LAB_001a88dc);
-  DAT_0049fba8 = FUN_002c5c04(&LAB_001a88f8);
+  DAT_0049fba4 = asdLoadFileSyncDefault(&LAB_001a88dc);
+  DAT_0049fba8 = asdLoadFileSyncDefault(&LAB_001a88f8);
   DAT_0049fbac = asdLoadFileSync(&LAB_001a8910,&DAT_0049fbb0,1,0x10);
   DAT_0049fbb4 = asdLoadFileSync(&LAB_001a8924,&DAT_0049fbb8,1,0x10);
   DAT_0049fbbc = asdLoadFileSync(&LAB_001a893c,&DAT_0049fbc0,1,0x10);

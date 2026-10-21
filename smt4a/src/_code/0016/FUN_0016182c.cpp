@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00178bd4(int *);
 int FUN_00179178(unsigned int *, unsigned int);
-int FUN_0017cbdc(int *);
+int gfxRefreshDirtyTextureBindings(int *);
 int nngxGetError(void);
 int FUN_0017e8f4(void);
 int FUN_00195af0(unsigned int *);
@@ -17,11 +17,11 @@ typedef struct {
 } param_4_stack;
 
 extern int DAT_00589188; /* 0x589188 */
-extern unsigned int *DAT_005b4400; /* 0x5b4400 */
+extern unsigned int *g_textureBindingState; /* 0x5b4400 */
 
 /* Supplied declaration required: FUN_00178bd4. */
 /* Supplied declaration required: FUN_00179178. */
-/* Supplied declaration required: FUN_0017cbdc. */
+/* Supplied declaration required: gfxRefreshDirtyTextureBindings. */
 /* Supplied declaration required: nngxGetError. */
 /* Supplied declaration required: FUN_0017e8f4. */
 /* Supplied declaration required: FUN_00195af0. */
@@ -34,7 +34,7 @@ void FUN_0016182c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   unsigned int *puVar1;
   int temp_v0;
   
-  puVar1 = DAT_005b4400;
+  puVar1 = g_textureBindingState;
   temp_v0 = param_4;
   nngxGetError();
   param_1 = param_1 & ~puVar1[2];
@@ -42,7 +42,7 @@ void FUN_0016182c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     FUN_0017e8f4();
   }
   if (((param_1 & 0x80) != 0) && (temp_v0 = 0x1c00, (*puVar1 & 0x1c00) != 0)) {
-    FUN_0017cbdc(&temp_v0);
+    gfxRefreshDirtyTextureBindings(&temp_v0);
   }
   if (((param_1 & 0x100) != 0) && (temp_v0 = 1, (*puVar1 & 1) != 0)) {
     FUN_00178bd4(&temp_v0);

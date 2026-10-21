@@ -16,7 +16,7 @@ int FUN_002c7e24(void);
 int FUN_002c982c(...);
 int FUN_002f0420(...);
 int FUN_0032d0c8(...);
-int FUN_00334214(...);
+int statusDisplayBindUnitRecord(...);
 int FUN_003343f0(...);
 int FUN_0036d318(...);
 int FUN_00371edc(...);
@@ -57,7 +57,7 @@ extern int FUN_002a7410(void);
 extern int ifTouchGetActiveCounter(void);
 /* Supplied declaration required: FUN_002f0420. */
 /* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_003343f0. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0036d318. */
@@ -221,7 +221,7 @@ LAB_002f9458:
             temp_v12 = *(unsigned short *)(temp_v2 + 0x485a);
             temp_v13 = *(unsigned short *)(temp_v2 + 0x485c);
             temp_v18 = *(unsigned short *)(temp_v2 + 0x485e);
-            FUN_00334214(temp_v11,1,0,temp_v22 + 0x4871);
+            statusDisplayBindUnitRecord(temp_v11,1,0,temp_v22 + 0x4871);
             FUN_0037e09c(1);
             FUN_002a7324(1);
             *temp_v21 = 0;
@@ -352,7 +352,7 @@ LAB_002f9924:
         temp_v12 = *(unsigned short *)(param_1 + 0x485a);
         temp_v13 = *(unsigned short *)(param_1 + 0x485c);
         temp_v18 = *(unsigned short *)(param_1 + 0x485e);
-        FUN_00334214(temp_v11,1,0,param_1 + 0x4871);
+        statusDisplayBindUnitRecord(temp_v11,1,0,param_1 + 0x4871);
         FUN_002f0420(0);
         FUN_002a7324(1);
         *temp_v21 = 0;

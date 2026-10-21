@@ -33,7 +33,7 @@ extern unsigned char LAB_003e2014; /* 0x3e2014 */
 extern unsigned char LAB_003e2028; /* 0x3e2028 */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_00573858; /* 0x573858 */
 extern unsigned int DAT_0057385c; /* 0x57385c */
 extern unsigned int DAT_00573878; /* 0x573878 */
@@ -106,7 +106,7 @@ void FUN_003e1b80(unsigned int *param_1,int param_2,int param_3)
         return;
       }
       if ((param_1[3] & 2) != 0) {
-        temp_v0 = DAT_00573808;
+        temp_v0 = g_btlAux;
         FUN_004f6d34();
         if (temp_v0 == 0) {
           return;
@@ -206,10 +206,10 @@ LAB_003e1f28:
     } while (temp_v7 < 0x36);
     if (param_1[3] == 0) {
       if ((*(unsigned int *)(param_2 + 0x110) & 0x80) != 0) {
-        FUN_004f7b84(DAT_00573808,&LAB_003e2014);
+        FUN_004f7b84(g_btlAux,&LAB_003e2014);
       }
       else {
-        FUN_004f7b84(DAT_00573808,&LAB_003e2028);
+        FUN_004f7b84(g_btlAux,&LAB_003e2028);
       }
       *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
       param_1[3] = param_1[3] | 2;

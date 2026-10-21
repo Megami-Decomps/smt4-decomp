@@ -6,12 +6,12 @@ extern "C" {
 
 int VectorSignedToFloat(int, int);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 
 
 void FUN_002eed9c(void)
@@ -31,7 +31,7 @@ void FUN_002eed9c(void)
   temp_v1 = gameFlagsGetBlock();
   temp_v5 = 0;
   temp_v6 = temp_v5;
-  temp_v2 = FUN_00376f94();
+  temp_v2 = lmapGetSpawnIndex();
   temp_v0 = g_lmapScene;
   if (temp_v2 >= 100) {
     temp_v4 = (float)VectorSignedToFloat((int)*(char *)(temp_v1 + 0xe02),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -60,7 +60,7 @@ void FUN_002eed9c(void)
     }
     *(unsigned int *)(temp_v0 + 0x4c) = temp_v5;
     *(unsigned int *)(temp_v0 + 0x50) = temp_v5;
-    *(unsigned int *)(DAT_005806a4 + 0x18) = temp_v5;
+    *(unsigned int *)(g_lmapView + 0x18) = temp_v5;
   }
   return;
 }

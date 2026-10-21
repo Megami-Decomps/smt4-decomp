@@ -52,15 +52,15 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern int FUN_00293a04(int, unsigned int);
+extern int asdAnimGetTrackLastFrame(int, unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
-extern int FUN_0029505c(unsigned int);
+extern int nkdwHeaderParse(unsigned int);
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: FUN_002ae8e4. */
-extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int jobGetWork(void);
@@ -98,7 +98,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
         *(unsigned int *)(temp_v0 + 0x48) = temp_v7;
         return 0;
       }
-      temp_v1 = FUN_002ae98c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
+      temp_v1 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
                            1);
       if (temp_v1 != 0) {
         FUN_002ae8e4(g_aocSystem,*(unsigned int *)(temp_v0 + 0x3c),*(unsigned int *)(temp_v0 + 0x40),
@@ -115,7 +115,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
       return 0;
     }
     if (temp_v1 == 2) {
-      temp_v1 = FUN_0029505c(*(unsigned int *)(temp_v0 + 0x48));
+      temp_v1 = nkdwHeaderParse(*(unsigned int *)(temp_v0 + 0x48));
       if (temp_v1 == 0) {
         return 0;
       }
@@ -151,7 +151,7 @@ unsigned int FUN_001dfc64(fn_001dfc64_arg0 *param_1)
   if ((*(int *)(temp_v0 + 0x48) != 0) && (*(char *)(temp_v0 + 0x5c) != '\0')) {
     temp_v8 = *(float *)(temp_v0 + 0x58) + 2.0f;
     *(float *)(temp_v0 + 0x58) = temp_v8;
-    temp_v1 = FUN_00293a04(*(int *)(temp_v0 + 0x48),0);
+    temp_v1 = asdAnimGetTrackLastFrame(*(int *)(temp_v0 + 0x48),0);
     if (temp_v8 <= *(float *)(temp_v0 + 0x58)) {
       *(float *)(temp_v0 + 0x58) = *(float *)(temp_v0 + 0x58) - temp_v8;
     }

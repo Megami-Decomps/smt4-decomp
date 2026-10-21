@@ -11,7 +11,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
 int sysMemClear(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -39,7 +39,7 @@ extern unsigned int *DAT_0057f584; /* 0x57f584 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_00333318(void)
@@ -61,7 +61,7 @@ void FUN_00333318(void)
   *puVar1 = (unsigned int)pcVar2;
   taskCreateDraw("SearchWin DrawUpLeft",0x86,0,0,FUN_0023a5f8,0,0,pcVar2);
   taskCreateDraw("SearchWin DrawUpRight",0xe2,0,0,FUN_0023a5f8,0,0,*puVar1);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 6);
+  paramsClearPacket(puVar1 + 6);
   paramsInit(puVar1 + 6,&DAT_0052fcb4,0x24,&DAT_0052fcd8,0x24,0,0,0,0,&DAT_0052fcfc,0x70);
   FUN_0014e188(puVar1 + 0xe,8,0x87,puVar1 + 6,1);
   uiSpriteSelectAnim(puVar1 + 0xe,0);

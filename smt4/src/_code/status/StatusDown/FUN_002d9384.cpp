@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd81c(...);
+int positionStateSet(...);
 int FUN_002bd82c(...);
 int timerStart(...);
 int FUN_002bd954(...);
@@ -16,7 +16,7 @@ int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int drawParameterBlockClear(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -39,7 +39,7 @@ extern unsigned char DAT_00407c50; /* 0x407c50 */
 extern unsigned char DAT_00407c68; /* 0x407c68 */
 extern unsigned int *g_statusDown; /* 0x44e190 */
 
-/* Supplied declaration required: FUN_002bd81c. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: timerStart. */
@@ -52,7 +52,7 @@ extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_002d9384(void)
@@ -78,7 +78,7 @@ void FUN_002d9384(void)
   taskCreateDraw(&LAB_002d9664,0xe7,0,0,FUN_001cca14,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
   puVar1 = g_statusDown;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_statusDown + 2);
+  drawParameterBlockClear(g_statusDown + 2);
   paramsInit(puVar1 + 2,&DAT_00407bc0,0x48,&DAT_00407c08,0x48,&DAT_00407c50,0x18,0,0,&DAT_00407c68
                ,0x134);
   FUN_002bd954(puVar1 + 10,0x1a,1000,puVar1 + 2,1);
@@ -99,7 +99,7 @@ void FUN_002d9384(void)
   temp_v0 = asdTextCreate(0);
   puVar1[0x8a8] = temp_v0;
   FUN_002bd82c(temp_v0,0xff);
-  FUN_002bd81c(puVar1[0x8a8],0,0x646464ff);
+  positionStateSet(puVar1[0x8a8],0,0x646464ff);
   __aeabi_memset4(puVar1 + 0x10b,0x29,0xffffffff);
   *(unsigned char *)((int)puVar1 + 0x2392) = 1;
   return;

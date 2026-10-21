@@ -8,7 +8,7 @@ int textFormatBuffer(...);
 int asdOperatorNew(int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_0022677c(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int sysMemClear(void);
 int FUN_003fe86c(...);
 int linkSlotSetFlag1C(...);
@@ -17,10 +17,10 @@ int FUN_00407ab0(...);
 int FUN_00408184(...);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(int, int);
-int FUN_0040ac08(void);
-int FUN_0040ace8(...);
+int modelListInit(void);
+int handleRegistryRegisterObject(...);
 int FUN_0040ae70(unsigned int, int);
-int FUN_0040b0f8(unsigned int, unsigned char [148]);
+int resourceOwnerLoadNamed(unsigned int, unsigned char [148]);
 int FUN_0045b538(int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -40,12 +40,12 @@ extern unsigned char LAB_0046a840; /* 0x46a840 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_0015a21c(int);
+extern int floatPairClear(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
@@ -54,11 +54,11 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
-/* Supplied declaration required: FUN_0040ac08. */
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: modelListInit. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(unsigned int);
-/* Supplied declaration required: FUN_0040b0f8. */
+/* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: FUN_0045b538. */
 
 
@@ -132,7 +132,7 @@ LAB_0046a3b0:
       FUN_00178b04(0x20,&LAB_0046a714,0x245);
       temp_v1 = 0;
       if (temp_v0 != 0) {
-        temp_v1 = FUN_0040ac08();
+        temp_v1 = modelListInit();
       }
       temp_v0 = param_1 + temp_v4 * 4;
       piVar6 = (int *)(temp_v0 + 0xa10);
@@ -143,20 +143,20 @@ LAB_0046a3b0:
       temp_v1 = *(int *)(*piVar6 + 4);
       FUN_003fe86c(temp_v1,0);
       *(int *)(temp_v1 + 0x1fc) = (int)temp_v5;
-      FUN_0040ace8(g_handleRegistry,temp_v1);
+      handleRegistryRegisterObject(g_handleRegistry,temp_v1);
       textFormatBuffer(temp_v8,&LAB_0046a74c,
                    *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v4 + 1);
       temp_v1 = 0x20;
       FUN_00178b04(0x20,&LAB_0046a714,0x25a);
       temp_v2 = 0;
       if (temp_v1 != 0) {
-        temp_v2 = FUN_0040ac08();
+        temp_v2 = modelListInit();
       }
       *(unsigned int *)(temp_v0 + 0xa34) = temp_v2;
       FUN_0040aa6c();
       FUN_0040aad4(*(int *)(temp_v0 + 0xa34),0);
       temp_v1 = *(int *)(*(int *)(temp_v0 + 0xa34) + 4);
-      FUN_0040ace8(g_handleRegistry,temp_v1);
+      handleRegistryRegisterObject(g_handleRegistry,temp_v1);
       FUN_003fe86c(temp_v1,0,1);
       temp_v4 = temp_v4 + 1;
       *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 1;
@@ -170,7 +170,7 @@ LAB_0046a3b0:
     FUN_00178b04(0x20,&LAB_0046a714,0x27e);
     temp_v2 = 0;
     if (temp_v4 != 0) {
-      temp_v2 = FUN_0040ac08();
+      temp_v2 = modelListInit();
     }
     piVar6 = (int *)(param_1 + 0xce8);
     *(unsigned int *)(param_1 + 0xce8) = temp_v2;
@@ -178,12 +178,12 @@ LAB_0046a3b0:
     FUN_0040aad4(*piVar6,0);
     FUN_0045b538(*(int *)(*piVar6 + 0xc) + 0xc);
     temp_v2 = *(unsigned int *)(*piVar6 + 4);
-    FUN_0040ace8(g_handleRegistry,temp_v2);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v2);
     FUN_003fe86c(temp_v2,0,1);
     textFormatBuffer(temp_v8,&LAB_0046a774,
                  *(unsigned int *)(temp_v7 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4));
     temp_v2 = g_handleRegistry;
-    FUN_0040b0f8(g_handleRegistry,temp_v8);
+    resourceOwnerLoadNamed(g_handleRegistry,temp_v8);
     temp_v4 = FUN_0040af60(temp_v2);
     if (temp_v4 != 0) {
       FUN_0040ae70(temp_v2,1);
@@ -194,7 +194,7 @@ LAB_0046a3b0:
   temp_v4 = 0;
   if (temp_v1 != 0) {
     sysMemClear();
-    temp_v4 = FUN_0015a21c(temp_v1 + 0x4f0);
+    temp_v4 = floatPairClear(temp_v1 + 0x4f0);
     temp_v4 = temp_v4 - 0x4f0;
   }
   *(int *)(param_1 + 0xcdc) = temp_v4;
@@ -216,8 +216,8 @@ LAB_0046a3b0:
       textFormatBuffer(temp_v6,&LAB_0046a840,(int)*(char *)(param_1 + 0x10));
     }
   }
-  FUN_002804b0(temp_v7 + 0x10,param_1 + 0x290,0);
-  FUN_002804b0(temp_v6,param_1 + 0x294,0);
+  asdLoadFileAsyncSimple(temp_v7 + 0x10,param_1 + 0x290,0);
+  asdLoadFileAsyncSimple(temp_v6,param_1 + 0x294,0);
   FUN_0022677c(0,0xff);
   FUN_0022677c(1,0xff);
   FUN_00408184(0x1c,1);

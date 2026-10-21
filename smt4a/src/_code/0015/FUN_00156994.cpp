@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00156994` (_code @ 0x156994, 0x258 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" {
 
 int FUN_0016a130(int);
 int FUN_0016a220(int);
 int FUN_0017352c(...);
-int FUN_00178150(unsigned int, int, int);
 int FUN_001782c8(int, int, int);
 int FUN_0017efa4(int, int, int);
 int FUN_0017f87c(int, int, int, int);
@@ -26,7 +26,6 @@ typedef struct {
 /* Supplied declaration required: FUN_0016a130. */
 /* Supplied declaration required: FUN_0016a220. */
 /* Supplied declaration required: FUN_0017352c. */
-/* Supplied declaration required: FUN_00178150. */
 /* Supplied declaration required: FUN_001782c8. */
 /* Supplied declaration required: FUN_0017efa4. */
 /* Supplied declaration required: FUN_0017f87c. */
@@ -64,7 +63,9 @@ void FUN_00156994(int param_1,unsigned int param_2)
           } while (temp_v0 < *(unsigned int *)(temp_v2 + 0x10));
         }
         FUN_0017f87c(temp_v2,param_1 + 0x10c,param_1 + 0x98,temp_v1);
-        FUN_00178150(*(unsigned int *)(param_1 + 0x90),param_1 + 0x10c,param_1 + 0x98);
+        gfxMarkMaterialAnimationCapabilities(reinterpret_cast<const MaterialFlagAnimation*>(*(unsigned int*)(param_1 + 0x90)),
+                     reinterpret_cast<MaterialFlagStateArray*>(param_1 + 0x10c),
+                     reinterpret_cast<const MaterialFlagBindingArray*>(param_1 + 0x98));
         trackAdvance(param_1 + 0x84);
       }
       temp_v2 = *(int *)(param_1 + 0xc0);
@@ -85,7 +86,9 @@ void FUN_00156994(int param_1,unsigned int param_2)
           } while (temp_v0 < *(unsigned int *)(temp_v2 + 0x10));
         }
         FUN_0017f87c(temp_v2,param_1 + 0x10c,param_1 + 0x98,temp_v1);
-        FUN_00178150(*(unsigned int *)(param_1 + 0x90),param_1 + 0x10c,param_1 + 0x98);
+        gfxMarkMaterialAnimationCapabilities(reinterpret_cast<const MaterialFlagAnimation*>(*(unsigned int*)(param_1 + 0x90)),
+                     reinterpret_cast<MaterialFlagStateArray*>(param_1 + 0x10c),
+                     reinterpret_cast<const MaterialFlagBindingArray*>(param_1 + 0x98));
         trackAdvance(param_1 + 0x84);
       }
       temp_v2 = *(int *)(param_1 + 0xc0);

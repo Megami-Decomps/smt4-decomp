@@ -1,16 +1,17 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b95a4` (_code @ 0x3b95a4, 0x24c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
 
 extern "C" {
 
 int FUN_0022afb0(unsigned char *, unsigned int);
 int FUN_0022afc4(unsigned int, int, unsigned int);
-int FUN_0022b244(...);
+int modelSetVisible(...);
 int FUN_00234cd8(unsigned int, int, int);
-int FUN_00234f04(...);
+void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_00234f5c(...);
-int FUN_0026374c(...);
+int placeWinStartText(...);
 int FUN_002a0400(unsigned int, unsigned int, unsigned int);
 int textFormatBuffer(...);
 int FUN_003ba754(int);
@@ -26,17 +27,17 @@ extern unsigned char LAB_003b97fc; /* 0x3b97fc */
 
 /* Supplied declaration required: FUN_0022afb0. */
 /* Supplied declaration required: FUN_0022afc4. */
-/* Supplied declaration required: FUN_0022b244. */
+/* Supplied declaration required: modelSetVisible. */
 extern int FUN_0022b8c0(int);
 /* Supplied declaration required: FUN_00234cd8. */
-/* Supplied declaration required: FUN_00234f04. */
+/* Supplied declaration required: nodeOwnerSetEnabled. */
 /* Supplied declaration required: FUN_00234f5c. */
-/* Supplied declaration required: FUN_0026374c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_002a0400. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
-extern unsigned int FUN_002c3124(unsigned char *, int, unsigned int);
+extern unsigned int fileLoadSync(unsigned char *, int, unsigned int);
 /* Supplied declaration required: FUN_003ba754. */
 /* Supplied declaration required: dataTable33GetEntries. */
 
@@ -94,7 +95,7 @@ void FUN_003b95a4(int param_1)
             do {
               textFormatBuffer(temp_v5,&LAB_003b97fc,puVar6);
               temp_v4 = param_1 + temp_v0 * 4;
-              temp_v2 = FUN_002c3124(temp_v5,temp_v4 + 0xe88,1);
+              temp_v2 = fileLoadSync(temp_v5,temp_v4 + 0xe88,1);
               *(unsigned int *)(temp_v4 + 0xe60) = temp_v2;
               puVar6 = puVar6 + 0x20;
               temp_v0 = temp_v0 + 1;
@@ -109,19 +110,19 @@ void FUN_003b95a4(int param_1)
       }
       if ((!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) ||
          (!(*(short *)(temp_v1 + 0x28) == 0 || *(short *)(temp_v1 + 0x28) == 6))) {
-        FUN_0022b244(*(unsigned int *)(param_1 + 0xe5c),0);
+        modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),0);
         temp_v2 = *puVar8;
         temp_v3 = 1;
       }
       else {
-        FUN_0022b244(*(unsigned int *)(param_1 + 0xe5c),1);
+        modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),1);
         temp_v2 = *puVar8;
         temp_v3 = 0;
       }
-      FUN_00234f04(temp_v2,temp_v3);
+      nodeOwnerSetEnabled((NodeEnableOwner*)temp_v2,temp_v3);
     }
     if (*(int *)(param_1 + 0xdb0) != 1) {
-      FUN_0026374c(*(int *)(param_1 + 0xd5c) + 2);
+      placeWinStartText(*(int *)(param_1 + 0xd5c) + 2);
       return;
     }
   }

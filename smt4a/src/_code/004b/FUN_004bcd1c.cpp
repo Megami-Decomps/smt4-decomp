@@ -1,11 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bcd1c` (_code @ 0x4bcd1c, 0x74 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_StatGrowth.h"
 
 extern "C" {
 
 int FUN_0034cb50(short *, short *, int);
-int FUN_004cc6a4(int, short *, int *);
+struct ValuePair;
+void FUN_004cc6a4(s32 level, ValuePair *output, const StatGrowthParameters *parameters);
 int FUN_004ccb0c(int *, int);
 int VectorSignedToFloat(int, int);
 
@@ -19,7 +21,6 @@ extern int FUN_0018416c(short);
 /* Supplied declaration required: FUN_0034cb50. */
 extern short FUN_003da998(unsigned int, unsigned int *);
 extern short FUN_003daaf4(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_004cc6a4. */
 /* Supplied declaration required: FUN_004ccb0c. */
 
 
@@ -112,7 +113,8 @@ void FUN_004bcd1c(short *param_1,char param_2)
   uStack_40 = uStack_2c;
   uStack_3c = uStack_28;
   uStack_38 = uStack_24;
-  FUN_004cc6a4(param_1[0x32],param_1 + 7,&uStack_48);
+  FUN_004cc6a4(param_1[0x32],(ValuePair *)(param_1 + 7),
+                (const StatGrowthParameters *)&uStack_48);
   temp_v1 = FUN_003da998(1,(unsigned int *)&uStack_48);
   temp_v9 = *param_1;
   temp_v2 = FUN_003daaf4(1,(unsigned int *)&uStack_48);

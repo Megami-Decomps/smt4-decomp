@@ -1,17 +1,18 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003840f4` (_code @ 0x3840f4, 0x318 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
 
 extern "C" {
 
-int FUN_00234f04(unsigned int, int);
+void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_00234f5c(unsigned int, unsigned int, int);
 int FUN_00235250(void);
-int FUN_0023ea20(...);
+int modelSetAnimationChannels(...);
 int FUN_00282bfc(...);
 int FUN_00287528(int);
 int FUN_00287704(...);
-int FUN_00297468(unsigned char [64], int, int);
+int asdLoadFileAsyncSimple(unsigned char [64], int, int);
 int asdMdlManagerCreateLoaded(unsigned char *, int);
 int FUN_0029be5c(...);
 int FUN_002a0428(void);
@@ -19,7 +20,7 @@ int FUN_002a09b4(unsigned char [144], int);
 int textFormatBuffer(...);
 int asdOperatorNew(void);
 int memClear(void);
-int FUN_002d582c(...);
+void FUN_002d582c(unsigned int, float);
 int FUN_002e1230(unsigned int, int);
 int FUN_00381ac0(void);
 
@@ -36,15 +37,15 @@ extern unsigned char LAB_00384448; /* 0x384448 */
 extern unsigned char LAB_00384458; /* 0x384458 */
 extern unsigned char LAB_0038447c; /* 0x38447c */
 
-/* Supplied declaration required: FUN_00234f04. */
+/* Supplied declaration required: nodeOwnerSetEnabled. */
 /* Supplied declaration required: FUN_00234f5c. */
 /* Supplied declaration required: FUN_00235250. */
 extern int FUN_00235414(unsigned char);
-/* Supplied declaration required: FUN_0023ea20. */
+/* Supplied declaration required: modelSetAnimationChannels. */
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00287528. */
 /* Supplied declaration required: FUN_00287704. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -132,8 +133,8 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     puVar5 = (unsigned int *)(temp_v3 + 0xd10);
     *(unsigned char **)(temp_v3 + 0xd10) = puVar2;
     FUN_002a0428();
-    FUN_0023ea20(*puVar5,0);
-    FUN_002d582c(*puVar5);
+    modelSetAnimationChannels(*puVar5,0);
+    FUN_002d582c(*puVar5, 0.0f);
     FUN_002e1230(*puVar5,0);
     textFormatBuffer(temp_v8,&LAB_00384428,
                  *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),temp_v1 + 1);
@@ -142,8 +143,8 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
     piVar7 = (int *)(temp_v3 + 0xd28);
     *(unsigned char **)(temp_v3 + 0xd28) = puVar2;
     FUN_002a0428();
-    FUN_0023ea20(*piVar7,0);
-    FUN_002d582c(*piVar7);
+    modelSetAnimationChannels(*piVar7,0);
+    FUN_002d582c(*piVar7, 1.0f);
     FUN_002e1230(*puVar5,1);
     puVar3 = (unsigned int *)*piVar7;
     temp_v1 = temp_v1 + 1;
@@ -174,11 +175,11 @@ void FUN_003840f4(int param_1,char param_2,unsigned char param_3,unsigned char p
   FUN_00235250();
   FUN_00234f5c(*(unsigned int *)(param_1 + 0xfac),
                *(unsigned int *)(temp_v4 + (unsigned int)*(unsigned char *)(param_1 + 0x18) * 4),0);
-  FUN_00234f04(*(unsigned int *)(param_1 + 0xfac),0);
+  nodeOwnerSetEnabled((NodeEnableOwner*)*(unsigned int *)(param_1 + 0xfac),0);
   textFormatBuffer(temp_v6,&LAB_00384458,(int)*(char *)(param_1 + 0x10));
   textFormatBuffer(temp_v7,&LAB_0038447c,(int)*(char *)(param_1 + 0x10));
-  FUN_00297468(temp_v6,param_1 + 0x5ac,0);
-  FUN_00297468(temp_v7,param_1 + 0x5b0,0);
+  asdLoadFileAsyncSimple(temp_v6,param_1 + 0x5ac,0);
+  asdLoadFileAsyncSimple(temp_v7,param_1 + 0x5b0,0);
   if (*(char *)(param_1 + 0x18) != '\x02' && *(char *)(param_1 + 0x18) != '\x03') {
     FUN_00287704();
     temp_v3 = FUN_00381914();

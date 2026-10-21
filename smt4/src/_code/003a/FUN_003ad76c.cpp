@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_00199b9c(int, int);
 int FUN_001f50ac(int);
-int FUN_002069d8(int);
+int uiInitializeFourTimerSet(int);
 int uiSpriteSetImageKeyframe(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int asdOperatorNew(...);
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
+int drawParameterBlockClear(void);
 
 typedef struct fn_003ad76c_arg0 fn_003ad76c_arg0;
 struct fn_003ad76c_arg0 {
@@ -51,14 +51,14 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00199b9c. */
 /* Supplied declaration required: FUN_001f50ac. */
-/* Supplied declaration required: FUN_002069d8. */
+/* Supplied declaration required: uiInitializeFourTimerSet. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: paramsInit. */
 extern unsigned int FUN_0033d3e4(void);
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
@@ -79,7 +79,7 @@ void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
   *(unsigned char *)(temp_v0 + 0x7e9d) = 0;
   *(unsigned char *)(temp_v0 + 0x7e9e) = 0;
   FUN_001f50ac(temp_v0 + 8);
-  FUN_002069d8(temp_v0 + 0x2200);
+  uiInitializeFourTimerSet(temp_v0 + 0x2200);
   FUN_00199b9c(temp_v0 + 0x2460,param_2);
   temp_v1 = g_btlUiBlock;
   *(unsigned short *)(g_btlUiBlock + 0x5da6) = 0;
@@ -88,7 +88,7 @@ void FUN_003ad76c(fn_003ad76c_arg0 *param_1,int param_2)
   *(unsigned short *)(temp_v1 + 0x6fb2) = 0;
   *(unsigned short *)(temp_v1 + 0x75b6) = 0;
   temp_v1 = temp_v0 + 0x7ea0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
+  drawParameterBlockClear();
   paramsInit(temp_v1,&DAT_004019cc,0xfc,&DAT_00401ac8,0xe4,&DAT_00401bac,0xc0,0,0,&DAT_00401c6c,
                0x5b0);
   temp_v6 = 0;

@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 extern int g_mapIf; /* 0x58103c */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 void FUN_00378964(void)
@@ -32,7 +32,7 @@ void FUN_00378964(void)
          (temp_v1 == 0x1e || temp_v1 == 0x1f)) || ((temp_v1 == 0x30 || temp_v1 == 0x22) || temp_v1 == 0x23))))
     {
       temp_v1 = (int)temp_v4;
-      FUN_002b5cb4();
+      distSpatial();
       if (temp_v1 < 0x41200000) {
         *(unsigned int *)(temp_v3 + 0x1e0) = 0x14;
         return;

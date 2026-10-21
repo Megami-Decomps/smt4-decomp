@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002d22c0(int);
@@ -28,7 +28,7 @@ extern unsigned char DAT_005f1a5e; /* 0x5f1a5e */
 /* Supplied declaration required: FUN_00163aa4. */
 extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002d22c0. */
@@ -89,7 +89,7 @@ void FUN_0048bad0(int param_1)
   else {
     pointConvertToFloat(param_1 + 0x4d0,0xfffffec0);
     FUN_0048a378(param_1);
-    FUN_00184528(param_1 + 0x4e4,0);
+    uiSpriteBankApplyPreset(param_1 + 0x4e4,0);
     *(unsigned int *)(param_1 + 8) = 1;
     *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffffffd) | 0x1000000;
     *(unsigned int *)(param_1 + 0x14) = 0;

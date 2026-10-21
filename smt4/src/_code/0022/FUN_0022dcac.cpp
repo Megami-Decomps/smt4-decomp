@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00231bcc(int, int, int, int, unsigned int, int);
 int FUN_002bf4f0(int, int);
-int FUN_0039fbc8(int, int, int, int, unsigned int);
+int devilDrawIconRelative(int, int, int, int, unsigned int);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -15,9 +15,9 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_00231bcc. */
-extern int FUN_0024ea50(short);
+extern int partyHasStoredDemon(short);
 /* Supplied declaration required: FUN_002bf4f0. */
-/* Supplied declaration required: FUN_0039fbc8. */
+/* Supplied declaration required: devilDrawIconRelative. */
 
 
 void FUN_0022dcac(int param_1,int param_2,short param_3,int param_4,int param_5,unsigned int param_6)
@@ -42,9 +42,9 @@ void FUN_0022dcac(int param_1,int param_2,short param_3,int param_4,int param_5,
   else {
     temp_v1 = FUN_002bf4f0(param_1 + 200,0x487);
   }
-  FUN_0039fbc8(param_1 + 200,(int)param_3,*(short *)(temp_v1 + 8) + temp_v2,
+  devilDrawIconRelative(param_1 + 200,(int)param_3,*(short *)(temp_v1 + 8) + temp_v2,
                *(short *)(temp_v1 + 10) + temp_v0,param_6);
-  if ((param_2 != 0) && (temp_v1 = FUN_0024ea50(param_3), temp_v1 != 0)) {
+  if ((param_2 != 0) && (temp_v1 = partyHasStoredDemon(param_3), temp_v1 != 0)) {
     if (param_5 == 0) {
       FUN_00231bcc(param_1 + 200,0x486,temp_v2,temp_v0,param_6,1);
       return;

@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned int DAT_00570288; /* 0x570288 */
+extern unsigned int g_btlCandidateMasks; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
@@ -28,7 +28,7 @@ extern unsigned int FUN_00232388(void);
 /* Supplied declaration required: FUN_00301a08. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003eaf20. */
-extern int FUN_004c3a98(int, unsigned int);
+extern int btlFindEntryValue(int, unsigned int);
 
 
 unsigned int FUN_003c9d98(void)
@@ -55,9 +55,9 @@ unsigned int FUN_003c9d98(void)
       temp_v2 = *puVar5;
       temp_v3 = puVar5[1];
       if (((((DAT_005702a0 & temp_v2) == 0 && (DAT_005702a4 & temp_v3) == 0) &&
-           ((DAT_0057028c & temp_v3) != 0 || (DAT_00570288 & temp_v2) != 0)) &&
+           ((DAT_0057028c & temp_v3) != 0 || (g_btlCandidateMasks & temp_v2) != 0)) &&
           ((temp_v3 & DAT_005702b4) == 0 && (DAT_005702b0 & temp_v2) == 0)) &&
-         (temp_v1 = FUN_004c3a98((int)(short)puVar5[2],0x13), 0 < temp_v1)) {
+         (temp_v1 = btlFindEntryValue((int)(short)puVar5[2],0x13), 0 < temp_v1)) {
         scrSetResult(1);
         return 1;
       }
@@ -68,7 +68,7 @@ unsigned int FUN_003c9d98(void)
   if (*(char *)(temp_v4 + 0x4cd1) != '\0') {
     temp_v4 = btlGetMainState();
     FUN_003eaf20();
-    if ((temp_v4 != 0) && (temp_v4 = FUN_004c3a98((int)*(short *)(temp_v4 + 8),0x13), 0 < temp_v4)) {
+    if ((temp_v4 != 0) && (temp_v4 = btlFindEntryValue((int)*(short *)(temp_v4 + 8),0x13), 0 < temp_v4)) {
       scrSetResult(1);
       return 1;
     }

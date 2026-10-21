@@ -8,7 +8,7 @@ extern "C" {
 
 typedef void (*VoidFunc)(void);
 
-int FUN_002804b0(VoidFunc fn, void **out, int arg);
+int asdLoadFileAsyncSimple(VoidFunc fn, void **out, int arg);
 int sysPlaySe(int id);
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 void *asdMemoryAllocTracked(int heap, int align, int arg2, int size, int arg4);
@@ -36,8 +36,8 @@ void campCecSettingOpen(void)
     setting->task = asdProcessCreateSimple(LAB_0037c598, 3, 0, 0, LAB_002c049c, 0, 0);
     taskCreateDraw(LAB_0037c5b0, 0x86, 0, 0, LAB_002c0480, 0, 0, setting->task);
     taskCreateDraw(LAB_0037c5cc, 0xe2, 0, 0, LAB_002c0480, 0, 0, setting->task);
-    FUN_002804b0(LAB_0037c5e8, &setting->heapA, 0);
-    FUN_002804b0(LAB_0037c600, &setting->heapB, 0);
+    asdLoadFileAsyncSimple(LAB_0037c5e8, &setting->heapA, 0);
+    asdLoadFileAsyncSimple(LAB_0037c600, &setting->heapB, 0);
     setting->unk38 = 0;
     setting->unk3C = 2;
     setting->items[2] = 2;

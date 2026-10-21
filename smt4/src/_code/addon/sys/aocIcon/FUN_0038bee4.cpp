@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038bee4` (_code @ 0x38bee4, 0x10c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
 int FUN_001dba54(void);
-int asdTextureSetImage(int);
 int asdTextureCreate(void);
 int asdMemoryAllocAligned(int, int, int, int, int, int);
 int rt_memclr(void);
@@ -36,7 +36,6 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001dba54. */
-/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: rt_memclr. */
@@ -74,7 +73,7 @@ void FUN_0038bee4(fn_0038bee4_arg0 *param_1,int param_2)
   *(unsigned int *)(param_1->field_0x8 + 0x20) = 0x8363;
   *(unsigned int *)(param_1->field_0x8 + 0x24) = *(unsigned int *)&param_1->field_0x4;
   *(unsigned int *)(param_1->field_0x8 + 0x28) = 0x2000;
-  asdTextureSetImage(param_1->field_0x8);
+  asdTextureSetImage((AsdTexture*)param_1->field_0x8);
   return;
 }
 

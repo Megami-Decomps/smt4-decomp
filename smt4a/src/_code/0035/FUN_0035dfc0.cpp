@@ -7,7 +7,7 @@ extern "C" {
 int dataTable5Type9Count(void);
 
 extern int FUN_0026140c(void);
-extern unsigned short *FUN_003b7348(unsigned int);
+extern unsigned short *dataTableFindRecordWord(unsigned int);
 /* Supplied declaration required: dataTable5Type9Count. */
 
 
@@ -26,7 +26,7 @@ void FUN_0035dfc0(unsigned int param_1)
   dataTable5Type9Count();
   temp_v3 = 0;
   if (temp_v1 != 0) {
-    while ((puVar3 = (unsigned short *)FUN_003b7348(temp_v3 & 0xffff), puVar3 == (unsigned short *)0x0 ||
+    while ((puVar3 = (unsigned short *)dataTableFindRecordWord(temp_v3 & 0xffff), puVar3 == (unsigned short *)0x0 ||
            (*puVar3 != param_1))) {
       temp_v3 = temp_v3 + 1;
       if (temp_v1 <= temp_v3) {

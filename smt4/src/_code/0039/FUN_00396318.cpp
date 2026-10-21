@@ -1,37 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00396318` (_code @ 0x396318, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler replaces the 32-word loop with __aeabi_memclr4; retail retains a two-way-unrolled loop. Candidate lower optimization level. */
+#include "shard/W6_W6Match2_WordBank.h"
 
-extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-
-void FUN_00396318(unsigned int *param_1)
-
+// Clear the tracked words and status without changing the two reserved header words.
+extern "C" void FUN_00396318(WordBank* bank)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  *param_1 = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  param_1[5] = 0;
-  temp_v0 = 0;
-  *(unsigned short *)(param_1 + 0x28) = 0;
-  temp_v1 = 0;
-  do {
-    temp_v0 = temp_v0 + 2;
-    param_1[temp_v1 + 6] = 0;
-    param_1[temp_v1 + 7] = 0;
-    temp_v1 = temp_v1 + 2;
-  } while (temp_v0 < 0x20);
-  param_1[0x26] = 0;
-  param_1[0x27] = 0;
-  return;
+    bank->state = 0;
+    bank->unk0c = 0;
+    bank->unk10 = 0;
+    bank->unk14 = 0;
+    bank->flags = 0;
+    for (s32 index = 0; index < 32; ++index) {
+        bank->words[index] = 0;
+    }
+    bank->unk98 = 0;
+    bank->unk9c = 0;
 }
-
-} /* extern "C" */

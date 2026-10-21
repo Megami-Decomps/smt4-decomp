@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdFileWakeWorker(void);
-int FUN_0014a7e4(unsigned int);
+int asdGxSetTopScreenMode(unsigned int);
 int FUN_0014a878(int);
 int gxLcdClearForceBlack(void);
 
@@ -16,7 +16,7 @@ extern int DAT_0063ff54; /* 0x63ff54 */
 extern signed char DAT_0063ff58; /* 0x63ff58 */
 
 /* Supplied declaration required: asdFileWakeWorker. */
-/* Supplied declaration required: FUN_0014a7e4. */
+/* Supplied declaration required: asdGxSetTopScreenMode. */
 /* Supplied declaration required: FUN_0014a878. */
 /* Supplied declaration required: gxLcdClearForceBlack. */
 
@@ -59,7 +59,7 @@ void FUN_00139ab0(void)
       }
       temp_v1 = 0x702;
     }
-    FUN_0014a7e4(temp_v1);
+    asdGxSetTopScreenMode(temp_v1);
   }
   if (DAT_0063ff58 == '\0') {
     gxLcdClearForceBlack();

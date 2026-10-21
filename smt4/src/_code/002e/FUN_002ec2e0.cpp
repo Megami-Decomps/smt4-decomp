@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002598f0(...);
-int FUN_00296ae8(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_0029a17c(int, int, int, int, int);
 int FUN_002bd82c(...);
 int FUN_002bf288(...);
@@ -27,7 +27,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002598f0. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: FUN_002bd82c. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -74,7 +74,7 @@ void FUN_002ec2e0(unsigned int param_1,unsigned int param_2,int param_3,int para
   }
   temp_v2 = FUN_002bf4f8(0x39,0xe4);
   FUN_002bf288(2,0x39,0xe3,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0xd);
-  FUN_00296ae8(param_1,3,0xffffffff,0,3,param_2,param_3 + param_5 + param_4);
+  asdTextDrawDirectoryEntry(param_1,3,0xffffffff,0,3,param_2,param_3 + param_5 + param_4);
   FUN_002bd82c(param_1,0xffffffff);
   FUN_002598f0(param_1,(int)*(short *)(temp_v0 + 8) + (int)*(short *)(temp_v2 + 8),
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10),0x15);

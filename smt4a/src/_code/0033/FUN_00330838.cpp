@@ -5,7 +5,7 @@
 extern "C" {
 
 int scrGetArg(int);
-int FUN_0038a1d4(unsigned int, int, int);
+int eventSetUnderMessageFade(unsigned int, int, int);
 int SBORROW4(int, int);
 
 extern int g_eventCommand; /* 0x57f554 */
@@ -14,7 +14,7 @@ extern int g_eventCommand; /* 0x57f554 */
 extern int FUN_00203d74(void);
 /* Supplied declaration required: scrGetArg. */
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0038a1d4. */
+/* Supplied declaration required: eventSetUnderMessageFade. */
 
 
 unsigned char FUN_00330838(void)
@@ -39,7 +39,7 @@ unsigned char FUN_00330838(void)
     if ((temp_v3 && temp_v2 != 4) && temp_v0 < 0 == (temp_v3 && SBORROW4(temp_v2,4))) {
       temp_v2 = 4;
     }
-    FUN_0038a1d4(temp_v1,temp_v2,1);
+    eventSetUnderMessageFade(temp_v1,temp_v2,1);
     return 0;
   }
   return *(int *)(g_eventCommand + 0x10) == *(int *)(g_eventCommand + 0x14);

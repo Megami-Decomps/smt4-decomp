@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003939e4` (_code @ 0x3939e4, 0xa24 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_RotationY.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int randomAdvanceShiftRegister(void);
 int FUN_00514540(...);
 int FUN_005145f4(void);
 int FUN_005147dc(void);
-int FUN_00514904(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_uidivmod(void);
@@ -92,7 +92,6 @@ extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: FUN_005145f4. */
 /* Supplied declaration required: FUN_005147dc. */
-/* Supplied declaration required: FUN_00514904. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -217,7 +216,7 @@ void FUN_003939e4(int param_1)
                 }
                 temp_v23 = CONCAT44(temp_v13 / temp_v27,temp_v29[10]);
                 FUN_005147dc();
-                FUN_00514904();
+                matrixSetRotationY(temp_v29[3]);
                 FUN_005145f4();
                 temp_v25 = 40.743664f;
                 temp_v27 = temp_v8 * 40.743664f;

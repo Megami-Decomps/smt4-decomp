@@ -7,8 +7,8 @@ extern "C" {
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_002a49e4(unsigned int, unsigned int);
-int FUN_002c2cc4(int, int, int, int);
-int FUN_002c2d5c(int);
+int uiNavigatorStart(int, int, int, int);
+int infoWinSetTimer(int);
 int FUN_003f1b3c(int, unsigned int, int, unsigned int *);
 int FUN_0047f4cc(int);
 int FUN_004abe2c(unsigned int, int, int);
@@ -29,7 +29,7 @@ typedef struct {
 } param_1_stack;
 
 extern int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
@@ -44,8 +44,8 @@ extern int FUN_00187168(void);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002a49e4. */
-/* Supplied declaration required: FUN_002c2cc4. */
-/* Supplied declaration required: FUN_002c2d5c. */
+/* Supplied declaration required: uiNavigatorStart. */
+/* Supplied declaration required: infoWinSetTimer. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003f1b3c. */
 /* Supplied declaration required: FUN_0047f4cc. */
@@ -82,7 +82,7 @@ void FUN_004116a0(int param_1)
     asdMemFree();
     *(unsigned int *)(param_1 + 0x24) = 0;
   }
-  FUN_004f85c8(DAT_00573808,1);
+  FUN_004f85c8(g_btlAux,1);
   temp_v7 = 1;
   temp_v6 = (unsigned int *)0x0;
   FUN_004abe2c(g_btlUiBlock,1,0);
@@ -127,8 +127,8 @@ void FUN_004116a0(int param_1)
   FUN_0047f4cc(temp_v13);
   FUN_002a49e4(*(unsigned int *)(temp_v5 + 0x4d64),temp_v12 & 0xffff);
   temp_v6 = (unsigned int *)0x0;
-  FUN_002c2cc4(temp_v3,1,1,0);
-  FUN_002c2d5c(0x708);
+  uiNavigatorStart(temp_v3,1,1,0);
+  infoWinSetTimer(0x708);
   FUN_004fbdd4(0,0,5);
   temp_v0 = 4;
   do {

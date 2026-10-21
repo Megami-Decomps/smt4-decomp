@@ -16,7 +16,7 @@ extern int DAT_005f1c5c; /* 0x5f1c5c */
 extern int gameFlagIsSet(void);
 extern int dataTableHasMatchingEntry35(unsigned int);
 extern int FUN_002e707c(void);
-extern unsigned long long FUN_00376fcc(int);
+extern unsigned long long gameFlagsBitTest(int);
 extern int gameFlagsGetWorkState(void);
 extern int FUN_00384d34(int);
 extern int gameOwnedBitTest2(int);
@@ -105,7 +105,7 @@ void FUN_00491c60(int param_1)
               }
             }
             else {
-              temp_v8 = FUN_00376fcc((int)*(short *)(temp_v1 + 0x17ba));
+              temp_v8 = gameFlagsBitTest((int)*(short *)(temp_v1 + 0x17ba));
               if ((int)temp_v8 != 0) {
                 *(unsigned short *)(temp_v1 + 0x17c0) = 1;
               }
@@ -209,7 +209,7 @@ LAB_00491eb4:
             }
           }
           else {
-            temp_v8 = FUN_00376fcc((int)*(short *)(temp_v5 + 0x7bc2));
+            temp_v8 = gameFlagsBitTest((int)*(short *)(temp_v5 + 0x7bc2));
             if ((int)temp_v8 != 0) {
               *(unsigned short *)(temp_v5 + 0x7bc8) = 1;
             }

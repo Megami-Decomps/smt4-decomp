@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00135ac4(int, int, int);
+int recordArrayCopyBackward(int, int, int);
 int asdOperatorDeleteArray(int);
 int FUN_00307bf4(...);
 int vectorCount32_00307c16(int *);
@@ -19,7 +19,7 @@ typedef struct {
 } param_3_stack;
 
 extern int vectorGrowCapacity_0012d4a2(unsigned int, int *);
-/* Supplied declaration required: FUN_00135ac4. */
+/* Supplied declaration required: recordArrayCopyBackward. */
 extern int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_00307bf4. */
@@ -48,7 +48,7 @@ void FUN_00133508(int *param_1,int param_2,unsigned int param_3)
     temp_v7 = param_1[1];
     param_1[1] = temp_v7 + 0x20;
     FUN_0030ed3c(param_1,temp_v7);
-    FUN_00135ac4(param_2,temp_v7 - 0x20,temp_v7);
+    recordArrayCopyBackward(param_2,temp_v7 - 0x20,temp_v7);
     rt_memcpy_w(param_2,param_3,0x20);
   }
   else {

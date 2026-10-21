@@ -1,32 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027dbc8` (_code @ 0x27dbc8, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges the two flag tests into one mask and changes the outgoing stack-argument setup. */
+#include "common.h"
+
+struct BattleRequestState {
+    u8 unk0000[0x2230]; // 0x0000
+    u32 target;          // 0x2230
+    u8 unk2234[0x226c]; // 0x2234
+    u32 flags;           // 0x44a0
+};
 
 extern "C" {
+BattleRequestState* btlGetMainState();
+u32 FUN_0022a4ac(s32 first, s32 second, u32 request, u32 target, s32 mode, u32 value, s32 index);
 
-int FUN_0022a4ac(int, int, unsigned int, unsigned int, int, unsigned int, unsigned int);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0022a4ac. */
-extern int btlGetMainState(void);
-
-
-void FUN_0027dbc8(unsigned int param_1,unsigned int param_2)
-
+// Submit a request for the current target unless either battle guard flag is set.
+u32 FUN_0027dbc8(u32 request, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = btlGetMainState();
-  if ((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40) == 0 && (*(unsigned int *)(temp_v0 + 0x44a0) & 0x100) == 0) {
-    FUN_0022a4ac(0,0,param_1,*(unsigned int *)(temp_v0 + 0x2230),0,param_2,0xffffffff);
-  }
-  return;
+    BattleRequestState* state = btlGetMainState();
+    if ((state->flags & 0x40) == 0 && (state->flags & 0x100) == 0) {
+        return FUN_0022a4ac(0, 0, request, state->target, 0, value, -1);
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

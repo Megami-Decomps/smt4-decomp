@@ -1,26 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00243d30` (_code @ 0x243d30, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preloads default/2.5f into s0/s1 before the switch; direct returns load each literal in its case. */
+#include "common.h"
 
 extern "C" {
-
-
-void FUN_00243d30(unsigned int param_1)
-
+// Select the scale factor associated with a category.
+f32 FUN_00243d30(u32 category)
 {
-  switch(param_1) {
-  default:
-    return;
-  case 1:
-    return;
-  case 2:
-    return;
-  case 3:
-  case 4:
-    return;
-  case 5:
-    return;
-  }
+    switch (category) {
+    case 1:
+        return 1.8f;
+    case 2:
+        return 0.1f;
+    case 3:
+    case 4:
+        return 2.5f;
+    case 5:
+        return 1.4f;
+    }
+    return 1.0f;
 }
-
-} /* extern "C" */
+}

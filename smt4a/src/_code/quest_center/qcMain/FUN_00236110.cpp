@@ -5,12 +5,12 @@
 extern "C" {
 
 int asdSequenceRequest(...);
-int asdOperatorNew(void);
+void* asdOperatorNew(unsigned int size);
 int FUN_001919a4(void);
 int FUN_0021c118(int, int);
 int FUN_002bf464(void);
 int asdOperatorDelete(unsigned int);
-int FUN_00318d6c(void);
+int helpTexturesRelease(void);
 int campCommonBgAcquire(void);
 int mapPlaceSet(unsigned int, unsigned int, unsigned int);
 int campButtonHelpAcquire(void);
@@ -20,10 +20,10 @@ int FUN_003b61ec(void);
 int FUN_003d4c68(unsigned int);
 int bgmStopWithoutEntry(void);
 int FUN_003d54f8(...);
-int FUN_00467e64(void);
+void questCenterInitEntry(void* context);
 int FUN_0046a34c(unsigned int, int, unsigned int, int);
 int FUN_0046adec(unsigned int);
-int FUN_0046b9c0(void);
+int entryRequestSequence(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -45,7 +45,6 @@ extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
 extern int DAT_005f1b74; /* 0x5f1b74 */
 
 /* Supplied declaration required: asdSequenceRequest. */
-/* Supplied declaration required: asdOperatorNew. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001919a4. */
 extern int bgmGetStateById(unsigned int);
@@ -53,7 +52,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_002bf464. */
 extern int lmapMainGetUnk74(void);
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_00318d6c. */
+/* Supplied declaration required: helpTexturesRelease. */
 /* Supplied declaration required: campCommonBgAcquire. */
 extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: mapPlaceSet. */
@@ -64,10 +63,9 @@ extern int gameStateIsFlagSetAndLarge(void);
 /* Supplied declaration required: FUN_003d4c68. */
 /* Supplied declaration required: bgmStopWithoutEntry. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_00467e64. */
 /* Supplied declaration required: FUN_0046a34c. */
 /* Supplied declaration required: FUN_0046adec. */
-/* Supplied declaration required: FUN_0046b9c0. */
+/* Supplied declaration required: entryRequestSequence. */
 extern int flagsDESet(unsigned int *);
 
 
@@ -123,8 +121,7 @@ unsigned int FUN_00236110(void)
       campButtonHelpAcquire();
       FUN_003b61ec();
     }
-    puVar2 = (unsigned int *)0xe70;
-    asdOperatorNew();
+    puVar2 = static_cast<unsigned int*>(asdOperatorNew(0xe70));
     temp_v2 = 0;
     if (puVar2 != (unsigned int *)0x0) {
       *puVar2 = 0;
@@ -132,7 +129,7 @@ unsigned int FUN_00236110(void)
       temp_v2 = temp_v2 - 0x358;
     }
     *(int *)(temp_v0 + 0x1c) = temp_v2;
-    FUN_00467e64();
+    questCenterInitEntry(reinterpret_cast<void*>(temp_v2));
     FUN_0046a34c(*(unsigned int *)(temp_v0 + 0x1c),DAT_00588c34,DAT_00588c38,DAT_00588c3c);
     *(unsigned char *)(temp_v0 + 0x19) = 1;
     break;
@@ -153,7 +150,7 @@ unsigned int FUN_00236110(void)
     break;
   case 3:
     temp_v2 = *(int *)(DAT_00588c30 + 0x1c);
-    if ((((temp_v2 == 0) || (FUN_0046b9c0(), temp_v2 == 0)) && (temp_v2 = lmapMainGetUnk74(), temp_v2 != 0)) &&
+    if ((((temp_v2 == 0) || (entryRequestSequence(), temp_v2 == 0)) && (temp_v2 = lmapMainGetUnk74(), temp_v2 != 0)) &&
        (DAT_00588c3c == 0)) {
       temp_v2 = gameStateIsFlagSetAndLarge();
       if (temp_v2 != 0) {
@@ -193,7 +190,7 @@ unsigned int FUN_00236110(void)
     if (DAT_00588c3c == 0) {
       campCommonBgRelease();
       campButtonHelpRelease();
-      FUN_00318d6c();
+      helpTexturesRelease();
     }
     break;
   case 4:

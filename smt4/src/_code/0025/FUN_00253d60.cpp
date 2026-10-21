@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00283e48(void);
-int FUN_0029903c(int, int);
+int passiveSkillLookupRecord(void);
+int affinityShouldReplaceState(int, int);
 int FUN_00394edc(unsigned int, int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
@@ -17,8 +17,8 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00283e48. */
-/* Supplied declaration required: FUN_0029903c. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
+/* Supplied declaration required: affinityShouldReplaceState. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00394edc. */
 
@@ -69,7 +69,7 @@ void FUN_00253d60(int param_1,unsigned int param_2)
     temp_v2 = 0;
     do {
       temp_v3 = (unsigned int)*(unsigned short *)((int)&temp_v9 + temp_v2 * 2);
-      if (((temp_v3 != 0) && (FUN_00283e48(), temp_v3 != 0)) &&
+      if (((temp_v3 != 0) && (passiveSkillLookupRecord(), temp_v3 != 0)) &&
          (temp_v3 = *(unsigned int *)(temp_v3 + 0x38), (temp_v3 & 0x7ff) >> 6 == 5)) {
         if ((temp_v3 & 0xf0000) != 0) {
           if ((temp_v7 & 0xff) == (temp_v3 & 0xffff) >> 0xb) {
@@ -87,7 +87,7 @@ void FUN_00253d60(int param_1,unsigned int param_2)
             case 4:
               temp_v1 = 4;
             }
-            temp_v4 = FUN_0029903c(temp_v6,temp_v1);
+            temp_v4 = affinityShouldReplaceState(temp_v6,temp_v1);
             if (temp_v4 != 0) {
               temp_v6 = temp_v1;
             }
@@ -132,7 +132,7 @@ LAB_00253f2c:
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 8);
     puVar7 = (unsigned short *)(param_1 + temp_v7 * 2);
-    temp_v2 = FUN_0029903c(*puVar7 >> 10,temp_v6);
+    temp_v2 = affinityShouldReplaceState(*puVar7 >> 10,temp_v6);
     if (temp_v2 != 0) {
       *puVar7 = (temp_v6 << 10) | (*puVar7 & 0x3ff);
     }

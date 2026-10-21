@@ -7,7 +7,7 @@ extern "C" {
 int jobStop(unsigned int, int);
 int ifTouchRegionRemove(void);
 int asdMemFree(void);
-int FUN_002a49b4(void);
+int ifTouchResetRecord(void);
 int asdOperatorDelete(void);
 
 extern unsigned char DAT_0057f25c; /* 0x57f25c */
@@ -15,7 +15,7 @@ extern unsigned char DAT_0057f25c; /* 0x57f25c */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002a49b4. */
+/* Supplied declaration required: ifTouchResetRecord. */
 /* Supplied declaration required: asdOperatorDelete. */
 
 
@@ -47,7 +47,7 @@ void FUN_003492dc(void)
       } while (temp_v1 < temp_v0);
     }
     puVar1[0xc4] = 0;
-    FUN_002a49b4();
+    ifTouchResetRecord();
   }
   if (puVar1[0xc5] != 0) {
     asdMemFree();

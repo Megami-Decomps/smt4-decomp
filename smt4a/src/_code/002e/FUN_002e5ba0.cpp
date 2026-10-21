@@ -11,10 +11,10 @@ int scrScriptProcessDestroy(void);
 int asdTMTexLoadMainHeap(int, int);
 int FUN_00275bc8(int, unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int asdTMTexTableFreeEntry(int);
 int FUN_00342334(int);
-int FUN_004cf370(int);
+int btlGameOverRunEyeSequence(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,15 +28,15 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: FUN_00342334. */
 extern int campButtonHelpIsActive(void);
 extern int FUN_004cf140(int);
-/* Supplied declaration required: FUN_004cf370. */
+/* Supplied declaration required: btlGameOverRunEyeSequence. */
 
 
 int FUN_002e5ba0(int *param_1)
@@ -65,7 +65,7 @@ int FUN_002e5ba0(int *param_1)
   }
   if (temp_v0 != 1) {
     if (temp_v0 == 2) {
-      FUN_004cf370(temp_v3);
+      btlGameOverRunEyeSequence(temp_v3);
       return temp_v3;
     }
     if (temp_v0 != 3) {
@@ -75,8 +75,8 @@ int FUN_002e5ba0(int *param_1)
   }
   switch(*(unsigned int *)(temp_v3 + 0x10)) {
   case 0:
-    FUN_002804b0("battle/gameover/gameover.bf",temp_v3 + 0x18,0);
-    FUN_002804b0("battle/gameover/gameover.mbm",temp_v3 + 0x20,0);
+    asdLoadFileAsyncSimple("battle/gameover/gameover.bf",temp_v3 + 0x18,0);
+    asdLoadFileAsyncSimple("battle/gameover/gameover.mbm",temp_v3 + 0x20,0);
     asdTMTexTableLoadTmx(0x22,0);
     temp_v0 = 1;
     do {
@@ -118,14 +118,14 @@ int FUN_002e5ba0(int *param_1)
     }
     break;
   case 2:
-    temp_v0 = FUN_00224880(*(unsigned int *)(temp_v3 + 0x1c));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 0x1c));
     if (temp_v0 == 2) {
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v3 + 0x1c),3);
       *(unsigned int *)(temp_v3 + 0x10) = 3;
     }
     break;
   case 3:
-    temp_v0 = FUN_00224880(*(unsigned int *)(temp_v3 + 0x1c));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 0x1c));
     if (temp_v0 != 2) {
       return 0;
     }

@@ -34,10 +34,10 @@ s32 asdTMTexTableLoadTmx(u32 texId, s32 arg);
 s32 asdTMTexLoadMainHeap(u32 texId, u32 texSub);
 s32 FUN_00403a34(Entry *entry, u32 id);
 s32 FUN_00203b40(void *sprite, u32 resource, s32 a, s32 b, s32 c, s32 d);
-s32 FUN_002e08b0(void *sprite, s32 arg);
+s32 flagsSetOrClearBit(void *sprite, s32 arg);
 s32 tableFlagBit1(u16 id);
 s32 tableFlagBit2(u16 id);
-s32 FUN_0040a864(u16 id, s32 arg);
+s32 gameDataSetEnabledBit(u16 id, s32 arg);
 s32 FUN_0040a844(u16 id, s32 arg);
 
 /* Resets the entry and sets it up from its info record: loads the texture if it isn't loaded yet,
@@ -66,11 +66,11 @@ void FUN_00404974(Entry *entry)
     }
     FUN_00403a34(entry, entry->info->id);
     FUN_00203b40(entry->sprite, entry->resource, 8, 1, 0, 1);
-    FUN_002e08b0(entry->sprite, 0);
+    flagsSetOrClearBit(entry->sprite, 0);
     entry->unk108 = 0;
     entry->unk08c = 0;
     if (tableFlagBit1(entry->info->id) != 0 || tableFlagBit2(entry->info->id) != 0) {
-        FUN_0040a864(entry->info->id, 0);
+        gameDataSetEnabledBit(entry->info->id, 0);
         FUN_0040a844(entry->info->id, 0);
     }
 }

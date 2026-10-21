@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0026e324(...);
 
-int FUN_0026e420(...);
+unsigned int appTryPurchase(unsigned int, int, int);
 int saveGetMapFlag(...);
-int FUN_0026e61c(...);
+int objectFlagSetBit(...);
 int FUN_0026e630(...);
 int FUN_0026f824(int);
 int gameCopyPersistentSave(void);
@@ -63,9 +63,9 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int FUN_001ed60c(void);
 /* Supplied declaration required: FUN_0026e324. */
-/* Supplied declaration required: FUN_0026e420. */
+/* Supplied declaration required: appTryPurchase. */
 /* Supplied declaration required: saveGetMapFlag. */
-/* Supplied declaration required: FUN_0026e61c. */
+/* Supplied declaration required: objectFlagSetBit. */
 /* Supplied declaration required: FUN_0026e630. */
 /* Supplied declaration required: FUN_0026f824. */
 /* Supplied declaration required: gameCopyPersistentSave. */
@@ -403,7 +403,7 @@ void FUN_001c36d8(int param_1)
                         *(unsigned char *)(temp_v6 + 0x4b) = 0;
                         *(unsigned char *)(temp_v6 + 0x600) = 0;
                         *(unsigned short *)(temp_v6 + 0x44) = 0;
-                        FUN_0026e61c(temp_v6,2);
+                        objectFlagSetBit(temp_v6,2);
                         FUN_0029c6b0(temp_v6);
                         saveGetMapFlag(0x20,1);
                         if (temp_v1 != 0) {
@@ -431,7 +431,7 @@ void FUN_001c36d8(int param_1)
               temp_v5 = 0;
               do {
                 if (temp_v17[temp_v5] != '\0') {
-                  FUN_0026e420(temp_v5 + 0x77,1,0);
+                  appTryPurchase(temp_v5 + 0x77,1,0);
                 }
                 temp_v5 = temp_v5 + 1;
               } while (temp_v5 < 8);

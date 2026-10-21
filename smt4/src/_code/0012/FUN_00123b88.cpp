@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0044e334; /* 0x44e334 */
+extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
 
 
 void FUN_00123b88(unsigned int *param_1)
@@ -23,7 +23,7 @@ void FUN_00123b88(unsigned int *param_1)
     piVar3[1] = 0;
     return;
   }
-  pcVar4 = DAT_0044e334;
+  pcVar4 = g_gfxReleaseCallback;
   if (temp_v0 < 0x2010000) {
     if (temp_v0 != 0x1010000) {
       if (temp_v0 != 0x1020000 && temp_v0 != 0x1030000) {
@@ -31,11 +31,11 @@ void FUN_00123b88(unsigned int *param_1)
         piVar3[1] = 0;
         return;
       }
-      if (*piVar3 != 0 && DAT_0044e334 != (romwright_code *)0x0) {
-        (*DAT_0044e334)(piVar3[5],0x102,*param_1);
+      if (*piVar3 != 0 && g_gfxReleaseCallback != (romwright_code *)0x0) {
+        (*g_gfxReleaseCallback)(piVar3[5],0x102,*param_1);
       }
       if (piVar3[1] != 0) {
-        pcVar4 = DAT_0044e334;
+        pcVar4 = g_gfxReleaseCallback;
       }
       if (piVar3[1] == 0 || pcVar4 == (romwright_code *)0x0) {
         *piVar3 = 0;
@@ -43,7 +43,7 @@ void FUN_00123b88(unsigned int *param_1)
         return;
       }
     }
-    else if ((piVar3[1] == 0) || (DAT_0044e334 == (romwright_code *)0x0)) {
+    else if ((piVar3[1] == 0) || (g_gfxReleaseCallback == (romwright_code *)0x0)) {
       *piVar3 = 0;
       piVar3[1] = 0;
       return;
@@ -52,7 +52,7 @@ void FUN_00123b88(unsigned int *param_1)
     temp_v0 = 0x10000;
   }
   else {
-    if ((temp_v0 != 0x2020000 && temp_v0 != 0x2030000) || (*piVar3 == 0 || DAT_0044e334 == (romwright_code *)0x0))
+    if ((temp_v0 != 0x2020000 && temp_v0 != 0x2030000) || (*piVar3 == 0 || g_gfxReleaseCallback == (romwright_code *)0x0))
     {
       *piVar3 = 0;
       piVar3[1] = 0;

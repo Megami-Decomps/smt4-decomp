@@ -1,13 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fcd98` (_code @ 0x2fcd98, 0xfcc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W5_W5Match2_LinkedItems.h"
 
 extern "C" {
 
 int FUN_00246854(void);
 int effBlockCreateFromBlock(void);
 int eventDispatch(...);
-int FUN_00250200(void);
+int effectEditorApplyHandlerState(void);
 int FUN_002629a8(...);
 int FUN_00281bb0(...);
 int FUN_002a353c(...);
@@ -20,10 +21,10 @@ int FUN_002c79c4(...);
 int effPartCreate(void);
 int linkedFindItemByIndex(...);
 int effEditorNodeListCount(...);
-int FUN_0024dd00(...);
+int asdDebugLog(...);
 int effEditorNodeChainApply(...);
 int FUN_0024dd80(...);
-int FUN_002629f0(...);
+int registrationEntryInsert(...);
 int padIsButtonRepeat(...);
 int textFormatBuffer(...);
 int padIsButtonPressed(...);
@@ -104,15 +105,15 @@ extern unsigned int FUN_0021a468(int);
 /* Supplied declaration required: FUN_00246854. */
 /* Supplied declaration required: linkedFindItemByIndex. */
 /* Supplied declaration required: effEditorNodeListCount. */
-/* Supplied declaration required: FUN_0024dd00. */
+/* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0024dd80. */
 extern unsigned char *FUN_0024dd90(void);
 /* Supplied declaration required: effBlockCreateFromBlock. */
 /* Supplied declaration required: eventDispatch. */
-/* Supplied declaration required: FUN_00250200. */
+/* Supplied declaration required: effectEditorApplyHandlerState. */
 /* Supplied declaration required: FUN_002629a8. */
-/* Supplied declaration required: FUN_002629f0. */
+/* Supplied declaration required: registrationEntryInsert. */
 /* Supplied declaration required: FUN_00281bb0. */
 /* Supplied declaration required: FUN_002a353c. */
 /* Supplied declaration required: FUN_002a36fc. */
@@ -127,7 +128,7 @@ extern int FUN_002c15fc(unsigned int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002c79c4. */
-extern int FUN_002f310c(int);
+extern u32 effResourceListHasActiveData(LinkedItems* resources);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -508,11 +509,11 @@ LAB_002fd1c8:
   }
   if (DAT_0044ea89 != 1) {
     if (DAT_0044ea89 == 2) {
-      FUN_0024dd00(0x1c4,0x17,5,&LAB_002fd9c4);
+      asdDebugLog(0x1c4,0x17,5,&LAB_002fd9c4);
     }
   }
   else {
-    FUN_0024dd00(0x1c4,0x17,5,&LAB_002fd9bc);
+    asdDebugLog(0x1c4,0x17,5,&LAB_002fd9bc);
   }
   if (DAT_0044eab4 != &DAT_0044f858) {
     temp_v3 = padIsButtonPressed(10);
@@ -551,7 +552,7 @@ LAB_002fd1c8:
     }
     if (temp_v1 || temp_v14) {
       if (DAT_0044ea90 != 0) {
-        FUN_002629f0(DAT_0044ea90,3);
+        registrationEntryInsert(DAT_0044ea90,3);
         DAT_0044ea90 = 0;
         if (!temp_v14) goto LAB_002fd8ac;
       }
@@ -574,7 +575,7 @@ LAB_002fd78c:
     temp_v2 = effEditorNodeListCount(DAT_0044ea94);
     if (temp_v11 < temp_v2) {
       if (DAT_0044ea90 != 0) {
-        FUN_002629f0(DAT_0044ea90,3);
+        registrationEntryInsert(DAT_0044ea90,3);
         DAT_0044ea90 = 0;
       }
       temp_v3 = linkedFindItemByIndex(DAT_0044ea94,temp_v11);
@@ -587,12 +588,12 @@ LAB_002fd78c:
   }
 LAB_002fd8ac:
   if (g_effectEditor != '\0') {
-    FUN_0024dd00(0xaa,0,6,&LAB_002fd9d4);
+    asdDebugLog(0xaa,0,6,&LAB_002fd9d4);
   }
   if (DAT_0044ea90 != 0) {
     temp_v5 = *(unsigned int *)(DAT_0044ea90 + 0x84);
     temp_v6 = FUN_0021a468(DAT_0044ea90);
-    FUN_0024dd00(0xaa,0xc,6,&LAB_002fd9d8,temp_v6,temp_v5);
+    asdDebugLog(0xaa,0xc,6,&LAB_002fd9d8,temp_v6,temp_v5);
     if (DAT_0044ea89 != 0) {
       if (DAT_0044ea89 != 1) {
         temp_v0 = DAT_0044ea89;
@@ -621,11 +622,11 @@ LAB_002fd8ac:
       FUN_00281bb0(DAT_0044ea90);
     }
     FUN_002c79c4(DAT_0044ea90);
-    temp_v3 = FUN_002f310c(DAT_0044ea90);
+    temp_v3 = effResourceListHasActiveData(reinterpret_cast<LinkedItems*>(DAT_0044ea90));
     if (temp_v3 != 0) {
       DAT_0044eb00 = DAT_0044eb00 + 1;
       if (DAT_0044eb00 < 0x18) {
-        FUN_0024dd00(10,0xf0,0,&LAB_002fd9e8,temp_v6,temp_v5);
+        asdDebugLog(10,0xf0,0,&LAB_002fd9e8,temp_v6,temp_v5);
       }
       else if (DAT_0044eb00 >= 0x30) {
         DAT_0044eb00 = 0;
@@ -642,7 +643,7 @@ LAB_002fda48:
   }
   else {
     if (DAT_0044eaa0 == 0) goto LAB_002fda48;
-    FUN_00250200();
+    effectEditorApplyHandlerState();
     if (DAT_0044ea89 != 0) {
       if ((DAT_0044ea89 != 1) && (DAT_0044ea89 == 2)) {
         if (DAT_0044ea81 == 0) goto LAB_002fda40;
@@ -736,25 +737,25 @@ LAB_002fdb30:
       switch(*(unsigned short *)(puVar17[0x24] + 0x1c)) {
       case 0:
       case 4:
-        FUN_0024dd00(0xf0,0,0,&LAB_002fdd80,*puVar6);
+        asdDebugLog(0xf0,0,0,&LAB_002fdd80,*puVar6);
         break;
       case 1:
-        FUN_0024dd00(0xf0,0,0,&LAB_002fdd68,*puVar6);
+        asdDebugLog(0xf0,0,0,&LAB_002fdd68,*puVar6);
         break;
       case 2:
-        FUN_0024dd00(0xf0,0,0,&LAB_002fdd70,*puVar6);
+        asdDebugLog(0xf0,0,0,&LAB_002fdd70,*puVar6);
         break;
       case 3:
-        FUN_0024dd00(0xf0,0,0,&LAB_002fdd78,*puVar6);
+        asdDebugLog(0xf0,0,0,&LAB_002fdd78,*puVar6);
         break;
       case 5:
-        FUN_0024dd00(0xf0,0,0,&LAB_002fdd84,*puVar6);
+        asdDebugLog(0xf0,0,0,&LAB_002fdd84,*puVar6);
         break;
       case 6:
-        FUN_0024dd00(0xf0,0,0,&LAB_002fdd8c,*puVar6);
+        asdDebugLog(0xf0,0,0,&LAB_002fdd8c,*puVar6);
         break;
       case 7:
-        FUN_0024dd00(0xf0,0,0,&LAB_002fdd94,*puVar6);
+        asdDebugLog(0xf0,0,0,&LAB_002fdd94,*puVar6);
       }
     }
   }

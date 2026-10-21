@@ -2,12 +2,14 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct AnimationPairState;
+
 extern "C" {
 
 int FUN_00226a90(...);
 int FUN_00226bc0(...);
-int FUN_00226de8(...);
-int FUN_0034c86c(...);
+int actionSequenceUpdateLoopTransition(...);
+int animationSelectSecondPart(...);
 int FUN_003ddb50(...);
 int VectorUnsignedToFloat(...);
 
@@ -35,9 +37,9 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00226a90. */
 /* Supplied declaration required: FUN_00226bc0. */
-/* Supplied declaration required: FUN_00226de8. */
-/* Supplied declaration required: FUN_0034c86c. */
-extern int FUN_0034c9a0(unsigned int);
+/* Supplied declaration required: actionSequenceUpdateLoopTransition. */
+/* Supplied declaration required: animationSelectSecondPart. */
+extern bool FUN_0034c9a0(AnimationPairState* animation);
 /* Supplied declaration required: FUN_003ddb50. */
 
 
@@ -50,7 +52,7 @@ void FUN_00226fc0(fn_00226fc0_arg0 *param_1)
   unsigned int in_fpscr;
   float in_s0;
   
-  temp_v0 = FUN_0034c9a0(param_1->field_0x304c);
+  temp_v0 = FUN_0034c9a0(reinterpret_cast<AnimationPairState*>(param_1->field_0x304c));
   if (temp_v0 == 0) {
     FUN_00226bc0(param_1->field_0x304c);
     if ((int)*(short *)param_1->field_0x3050 == (int)in_s0) {
@@ -63,11 +65,11 @@ void FUN_00226fc0(fn_00226fc0_arg0 *param_1)
     }
     FUN_00226a90(param_1,(int)(short)(int)in_s0,1);
   }
-  temp_v0 = FUN_0034c9a0(param_1->field_0x304c);
+  temp_v0 = FUN_0034c9a0(reinterpret_cast<AnimationPairState*>(param_1->field_0x304c));
   if (temp_v0 != 0) {
-    FUN_0034c86c(param_1->field_0x304c);
+    animationSelectSecondPart(param_1->field_0x304c);
     param_1->field_0x3040 = 10;
-    FUN_00226de8(param_1);
+    actionSequenceUpdateLoopTransition(param_1);
     return;
   }
   return;

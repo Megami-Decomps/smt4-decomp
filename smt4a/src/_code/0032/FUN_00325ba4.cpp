@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, unsigned int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_003797e4(void);
 int VectorSignedToFloat(int, int);
 
@@ -27,7 +27,7 @@ extern int g_mapObj; /* 0x581284 */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_003797e4. */
 extern int dataTableGetRecordFortyFive(void);
 
@@ -83,7 +83,7 @@ void FUN_00325ba4(int param_1,int param_2,int param_3,unsigned int *param_4,unsi
             (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v5 <= temp_v3) << 0x1d),
             romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))))) {
           temp_v3 = (float)((unsigned long long)temp_v8 >> 0x20);
-          FUN_002b5cb4();
+          distSpatial();
           if ((int)temp_v3 < temp_v2) {
             *param_4 = temp_v4;
             *(float *)&param_4[1] = temp_v5;

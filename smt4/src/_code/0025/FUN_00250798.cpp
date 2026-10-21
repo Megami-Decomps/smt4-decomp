@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd81c(unsigned int, int, int);
+int positionStateSet(unsigned int, int, int);
 int FUN_002bd82c(unsigned int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -15,10 +15,10 @@ typedef struct {
 extern unsigned char LAB_00250844; /* 0x250844 */
 extern int g_uiQuest; /* 0x43dd50 */
 
-/* Supplied declaration required: FUN_002bd81c. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 
 
 void FUN_00250798(void)
@@ -29,20 +29,20 @@ void FUN_00250798(void)
   unsigned int temp_v1;
   
   temp_v0 = g_uiQuest;
-  temp_v1 = FUN_002c5c04(&LAB_00250844);
+  temp_v1 = asdLoadFileSyncDefault(&LAB_00250844);
   *(unsigned int *)(temp_v0 + 0x5e4) = temp_v1;
   temp_v1 = asdTextCreate(0);
   *(unsigned int *)(temp_v0 + 0x5d4) = temp_v1;
   FUN_002bd82c(temp_v1,0x320202ff);
-  FUN_002bd81c(*(unsigned int *)(temp_v0 + 0x5d4),0,0x646464ff);
+  positionStateSet(*(unsigned int *)(temp_v0 + 0x5d4),0,0x646464ff);
   temp_v1 = asdTextCreate(0);
   *(unsigned int *)(temp_v0 + 0x5d8) = temp_v1;
   FUN_002bd82c(temp_v1,0x323232ff);
-  FUN_002bd81c(*(unsigned int *)(temp_v0 + 0x5d8),0,0x646464ff);
+  positionStateSet(*(unsigned int *)(temp_v0 + 0x5d8),0,0x646464ff);
   temp_v1 = asdTextCreate(0);
   *(unsigned int *)(temp_v0 + 0x5dc) = temp_v1;
   FUN_002bd82c(temp_v1,0x320202ff);
-  FUN_002bd81c(*(unsigned int *)(temp_v0 + 0x5dc),0,0x646464ff);
+  positionStateSet(*(unsigned int *)(temp_v0 + 0x5dc),0,0x646464ff);
   return;
 }
 

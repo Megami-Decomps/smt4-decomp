@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a5d84(...);
 int FUN_004adbb4(void);
 int FUN_004adcec(unsigned int *);
-int FUN_004addb0(unsigned int *, int, unsigned int [3], unsigned int);
+int moviePacketReadHeader(unsigned int *, int, unsigned int [3], unsigned int);
 int FUN_004adf7c(unsigned int *, int, unsigned int [3], unsigned int);
 int FUN_004af3b4(unsigned int *, int, unsigned int [3], unsigned int);
 int FUN_00521c8c(unsigned int *, int, unsigned int);
@@ -31,7 +31,7 @@ typedef struct {
 extern int FUN_004adb08(unsigned int *);
 /* Supplied declaration required: FUN_004adbb4. */
 /* Supplied declaration required: FUN_004adcec. */
-/* Supplied declaration required: FUN_004addb0. */
+/* Supplied declaration required: moviePacketReadHeader. */
 /* Supplied declaration required: FUN_004adf7c. */
 extern int FUN_004af1c0(unsigned int *);
 /* Supplied declaration required: FUN_004af3b4. */
@@ -196,7 +196,7 @@ LAB_004ad898:
         }
       }
       puVar7 = param_1;
-      FUN_004addb0(param_1,temp_v6[0],temp_v8,temp_v4);
+      moviePacketReadHeader(param_1,temp_v6[0],temp_v8,temp_v4);
       if (*(char *)((int)param_1 + 0x148f) == '\0') {
         return (unsigned int *)0x0;
       }

@@ -16,7 +16,7 @@ extern int DAT_00581280; /* 0x581280 */
 
 /* Supplied declaration required: FUN_002947b8. */
 /* Supplied declaration required: FUN_002b563c. */
-extern int FUN_0036d578(unsigned int *);
+extern int mapResolveCircleOverlapXZ(unsigned int *);
 
 
 unsigned int FUN_002469d0(unsigned int *param_1)
@@ -36,10 +36,10 @@ unsigned int FUN_002469d0(unsigned int *param_1)
     temp_v0 = DAT_00581280 + temp_v1 * 0x3c;
     if (*(char *)(temp_v0 + 0xc) != '\0') {
       if (*(int *)(temp_v0 + 0x3c) != 0) {
-        temp_v0 = FUN_0036d578((unsigned int *)&temp_v3);
+        temp_v0 = mapResolveCircleOverlapXZ((unsigned int *)&temp_v3);
       }
       else {
-        temp_v0 = FUN_0036d578((unsigned int *)&temp_v3);
+        temp_v0 = mapResolveCircleOverlapXZ((unsigned int *)&temp_v3);
       }
       if (temp_v0 != 0) {
         temp_v2 = 1;

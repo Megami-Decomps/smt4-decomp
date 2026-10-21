@@ -9,7 +9,7 @@ extern int FUN_0031d174(int);
 extern int FUN_00498408(int, unsigned short);
 extern unsigned int FUN_0049cad0(unsigned short *);
 extern int btlRollClamped(unsigned short, unsigned int);
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 
 
 void FUN_00498494(int param_1,unsigned int param_2)
@@ -33,7 +33,7 @@ void FUN_00498494(int param_1,unsigned int param_2)
   else {
     temp_v0 = temp_v0 + 2;
   }
-  temp_v2 = FUN_004cfe4c(param_1 + temp_v1 * 0x74 + 0xb60);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + temp_v1 * 0x74 + 0xb60);
   puVar5 = (unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xf74 + temp_v2 * 4);
   if (*(int *)(param_1 + 0xb40) != 8) {
     temp_v3 = FUN_0049cad0(puVar5);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0027da30(int, int);
 int FUN_0027e6f4(int, int);
 int FUN_002881bc(void);
-int FUN_00293a04(unsigned int, int);
+int asdAnimGetTrackLastFrame(unsigned int, int);
 int dataTable00FindById(void);
 
 typedef struct fn_003c0ae0_arg1 fn_003c0ae0_arg1;
@@ -48,7 +48,7 @@ extern unsigned int FUN_0027d9e8(int, unsigned int);
 extern int FUN_0027dab0(int, fn_003c0ae0_arg1 *);
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_002881bc. */
-/* Supplied declaration required: FUN_00293a04. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned short randNextInRange(unsigned int);
 
@@ -152,7 +152,7 @@ LAB_003c0ba0:
     temp_v4 = param_1;
     FUN_0027da30(param_1,(int)param_2->field_0x62);
     temp_v5 = FUN_0027d9e8(param_1,*(unsigned int *)(temp_v4 + temp_v3 * 4 + 0xc));
-    FUN_00293a04(temp_v5,0);
+    asdAnimGetTrackLastFrame(temp_v5,0);
     temp_v1 = randNextInRange(((int)in_s0 - 1U) & 0xffff);
     param_2->field_0x5a = temp_v1;
   }

@@ -1,37 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010f764` (_code @ 0x10f764, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail unconditionally reloads the debug byte after updating it; compiled code forwards the stored true value and conditionally loads/compares the prior flag. */
+#include "common.h"
+
+struct CountdownState {
+    bool active;   // 0x00
+    bool debug;    // 0x01
+    u8 unk02[0x16]; // 0x02
+    s64 remaining; // 0x18
+};
 
 extern "C" {
+extern CountdownState g_titleContentFileSystem;
+u8 FUN_0011bde8(void);
+bool nn_cfg_CTR_IsDebugMode(void);
 
-int FUN_0011bde8(void);
-
-extern unsigned char DAT_0044e650; /* 0x44e650 */
-extern signed char DAT_0044e651; /* 0x44e651 */
-extern int DAT_0044e668; /* 0x44e668 */
-extern int DAT_0044e66c; /* 0x44e66c */
-
-/* Supplied declaration required: FUN_0011bde8. */
-extern unsigned char nn_cfg_CTR_IsDebugMode(void);
-
-
-void FUN_0010f764(int param_1)
-
+// Initializes the configured countdown, enabling it for a nonzero delay or debug mode.
+void FUN_0010f764(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char temp_v0;
-  
-  FUN_0011bde8();
-  DAT_0044e668 = param_1 * 10;
-  DAT_0044e66c = DAT_0044e668 >> 0x1f;
-  temp_v0 = nn_cfg_CTR_IsDebugMode();
-  if (temp_v0) {
-    DAT_0044e651 = '\x01';
-  }
-  if ((DAT_0044e651 != '\0') || (DAT_0044e66c != 0 || DAT_0044e668 != 0)) {
-    DAT_0044e650 = 1;
-  }
-  return;
+    s32 delay = FUN_0011bde8() * 10;
+    g_titleContentFileSystem.remaining = delay;
+    if (nn_cfg_CTR_IsDebugMode()) {
+        g_titleContentFileSystem.debug = 1;
+    }
+    if (g_titleContentFileSystem.debug != 0 || g_titleContentFileSystem.remaining != 0) {
+        g_titleContentFileSystem.active = 1;
+    }
 }
-
-} /* extern "C" */
+}

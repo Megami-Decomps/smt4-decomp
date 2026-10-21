@@ -12,8 +12,8 @@ int FUN_00512e84(...);
 int FUN_00513250(...);
 int mwmofilterDeblockerInitialize(...);
 int mwmoimaadpcmDecoderInitialize(...);
-int FUN_00513b94(...);
-int FUN_00514258(...);
+int mobiclipAllocatorInstall(...);
+int pairSlotSet(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -46,8 +46,8 @@ extern unsigned int DAT_00617e58; /* 0x617e58 */
 /* Supplied declaration required: FUN_00513250. */
 /* Supplied declaration required: mwmofilterDeblockerInitialize. */
 /* Supplied declaration required: mwmoimaadpcmDecoderInitialize. */
-/* Supplied declaration required: FUN_00513b94. */
-/* Supplied declaration required: FUN_00514258. */
+/* Supplied declaration required: mobiclipAllocatorInstall. */
+/* Supplied declaration required: pairSlotSet. */
 
 
 void FUN_001f4e7c(void)
@@ -78,11 +78,11 @@ void FUN_001f4e7c(void)
   heapOwnerCreate(&DAT_00617da8,temp_v0,0x90000,0);
   g_mobiclipCtrl = 0;
   mwmofilterDeblockerInitialize(mobiclipHeapAllocB,&LAB_00227f8c);
-  FUN_00513b94(mobiclipHeapAllocD,&LAB_00287770);
+  mobiclipAllocatorInstall(mobiclipHeapAllocD,&LAB_00287770);
   mwmoimaadpcmDecoderInitialize(mobiclipHeapAllocC,&LAB_0028120c);
   FUN_00512e84(mobiclipHeapAllocC,&LAB_0028120c);
   FUN_00513250(mobiclipHeapAllocC,&LAB_0028120c);
-  FUN_00514258(mobiclipHeapAllocA,&LAB_00203950);
+  pairSlotSet(mobiclipHeapAllocA,&LAB_00203950);
   FUN_00425f68();
   FUN_00422940(&DAT_00617e58,1,1,temp_v1);
   return;

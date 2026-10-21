@@ -6,7 +6,7 @@ extern "C" {
 
 int ptrListRemoveClearOwner(...);
 int FUN_00245f70(int);
-int FUN_002749c8(unsigned int);
+void FUN_002749c8(int id);
 int FUN_00274a30(void);
 int FUN_002941c8(...);
 int FUN_002d1f40(int, int, int);
@@ -17,7 +17,7 @@ int FUN_00398078(unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 
 int gameFlagsGetBlock(void);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002b5cd4(void);
 int FUN_002b63d0(void);
 int FUN_00313648(int);
@@ -26,7 +26,7 @@ int mathPositionHeadingDegrees(void);
 int FUN_00352e54(...);
 int FUN_00367fac(void);
 int FUN_00368374(int);
-int FUN_00377418(...);
+int gameFlagWordSetBit(...);
 int FUN_00384830(void);
 int naviMainFinishRequest(void);
 int FUN_003d4ed8(...);
@@ -75,10 +75,9 @@ extern unsigned int DAT_005f19fc; /* 0x5f19fc */
 /* Supplied declaration required: gameFlagsGetBlock. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_00245f70. */
-/* Supplied declaration required: FUN_002749c8. */
 /* Supplied declaration required: FUN_00274a30. */
 /* Supplied declaration required: FUN_002941c8. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_002b63d0. */
 /* Supplied declaration required: FUN_002d1f40. */
@@ -86,7 +85,7 @@ extern unsigned int DAT_005f19fc; /* 0x5f19fc */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00319f64. */
-extern int FUN_00325340(void);
+extern int mapHasFacingBreakableInReach(void);
 /* Supplied declaration required: FUN_0032714c. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int gameFlagsTestFirstBank(int);
@@ -94,15 +93,15 @@ extern int gameFlagsTestFirstBank(int);
 extern int FUN_00367f98(void);
 /* Supplied declaration required: FUN_00367fac. */
 /* Supplied declaration required: FUN_00368374. */
-extern int FUN_00376fcc(int);
-/* Supplied declaration required: FUN_00377418. */
+extern int gameFlagsBitTest(int);
+/* Supplied declaration required: gameFlagWordSetBit. */
 /* Supplied declaration required: FUN_00384830. */
 /* Supplied declaration required: FUN_00398078. */
 /* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
-extern int FUN_004813bc(unsigned int);
+extern int gamePackedFlagTest(unsigned int);
 
 
 unsigned int FUN_002332f4(void)
@@ -152,11 +151,11 @@ unsigned int FUN_002332f4(void)
       switch(*(unsigned int *)(temp_v5 + 0x60)) {
       case 1:
         temp_v4 = *(int *)(temp_v5 + 0x68);
-        FUN_002b5cb4();
+        distSpatial();
         if (((temp_v4 < 0x43fa0001) &&
             (temp_v4 = gameFlagsTestFirstBank((int)(short)*(unsigned int *)(temp_v5 + 0x80)), temp_v4 == 0)) &&
-           (temp_v4 = FUN_00376fcc((int)(short)*(unsigned int *)(temp_v5 + 0x80)), temp_v4 == 0)) {
-          FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
+           (temp_v4 = gameFlagsBitTest((int)(short)*(unsigned int *)(temp_v5 + 0x80)), temp_v4 == 0)) {
+          gameFlagWordSetBit((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
           naviMainFinishRequest();
         }
         temp_v16 = 0;
@@ -175,7 +174,7 @@ unsigned int FUN_002332f4(void)
             temp_v16 = 1;
           }
           temp_v4 = DAT_005f17b0;
-          FUN_002b5cb4();
+          distSpatial();
           if (((temp_v4 < 0x43960000) && (temp_v4 = DAT_005f17b0, FUN_00384830(), temp_v4 < 0x428c0000))
              && (temp_v16 != 0)) {
             *(unsigned int *)(temp_v5 + 0x78) = 1;
@@ -185,7 +184,7 @@ unsigned int FUN_002332f4(void)
               FUN_002b63d0();
             }
             FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
-            FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
+            gameFlagWordSetBit((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
             naviMainFinishRequest();
             countersAddSaturating(0x17,1);
             *(unsigned char *)(temp_v5 + 0x7c) = 1;
@@ -213,7 +212,7 @@ unsigned int FUN_002332f4(void)
             temp_v16 = 1;
           }
           temp_v9 = DAT_005f19d8;
-          FUN_002b5cb4();
+          distSpatial();
           temp_v11 = *(float *)(temp_v17 + 0x1528);
           temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11 < temp_v9) << 0x1f) |
                   ((unsigned int)(temp_v11 == temp_v9) << 0x1e);
@@ -250,12 +249,12 @@ unsigned int FUN_002332f4(void)
             temp_v12 = DAT_005f19d8;
             FUN_00384830();
             if (*(int *)(g_lmapScene + 0x1d0) == 10) {
-              temp_v4 = FUN_00325340();
+              temp_v4 = mapHasFacingBreakableInReach();
               if (temp_v4 != 0) {
                 temp_v9 = *(float *)(g_lmapScene + 0x1c);
-                FUN_002b5cb4();
+                distSpatial();
                 temp_v10 = DAT_005f19d8;
-                FUN_002b5cb4();
+                distSpatial();
                 temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 < temp_v10) << 0x1f) |
                         ((unsigned int)(temp_v9 == temp_v10) << 0x1e);
                 in_fpscr = temp_v3 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v10 != temp_v10)) << 0x1c);
@@ -296,13 +295,13 @@ unsigned int FUN_002332f4(void)
           if (*(char *)((int)temp_v25 + 0x53) != '\0') {
             mathPositionHeadingDegrees();
             temp_v4 = DAT_005f17b0;
-            FUN_002b5cb4();
+            distSpatial();
             if ((temp_v4 < 0x43960000) && (temp_v4 = DAT_005f17b0, FUN_00384830(), temp_v4 < 0x428c0000))
             {
               *(unsigned int *)(temp_v5 + 0x78) = 1;
               FUN_003d4ed8(0x10002a6);
               FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
-              FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
+              gameFlagWordSetBit((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
               naviMainFinishRequest();
               countersAddSaturating(0x17,1);
               *(unsigned char *)(temp_v5 + 0x7c) = 1;
@@ -400,7 +399,7 @@ LAB_00233a04:
           *(unsigned int *)(temp_v5 + 0x78) = 1;
           FUN_003d4ed8(0x10002a8);
           FUN_00352e54((int)(short)*(unsigned int *)(temp_v5 + 0x80),1);
-          FUN_00377418((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
+          gameFlagWordSetBit((int)(short)*(unsigned int *)(temp_v5 + 0x80),0);
           naviMainFinishRequest();
           countersAddSaturating(0x17,1);
           countersAddSaturating(0x18,1);
@@ -422,9 +421,9 @@ LAB_00233a04:
             }
             temp_v20 = *(unsigned int *)(temp_v5 + 0xa0);
             temp_v21 = *(unsigned int *)(temp_v5 + 0xa4);
-            temp_v4 = FUN_004813bc(*(unsigned int *)(temp_v5 + 0x98));
+            temp_v4 = gamePackedFlagTest(*(unsigned int *)(temp_v5 + 0x98));
             temp_v22 = (unsigned int)(temp_v4 == 0);
-            temp_v4 = FUN_004813bc(*(unsigned int *)(temp_v5 + 0x9c));
+            temp_v4 = gamePackedFlagTest(*(unsigned int *)(temp_v5 + 0x9c));
             if (temp_v4 != 0) {
               temp_v22 = 0;
             }

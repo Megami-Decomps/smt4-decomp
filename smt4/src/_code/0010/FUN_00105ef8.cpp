@@ -8,8 +8,8 @@ int FUN_0010e5a4(void);
 int FUN_0010e8e8(void);
 int FUN_0010edbc(void);
 int FUN_0011a324(int);
-int FUN_002c1d78(int);
-int FUN_002c1dd8(int);
+int asdSndEnsureCurrentSlotData(int);
+int asdSoundSelectSlotB(int);
 int memClear(unsigned char *, int);
 int jyoucyuGetTableEntry(int);
 
@@ -19,14 +19,14 @@ typedef struct {
 } void_stack;
 
 extern unsigned char g_soundVolumeSetting; /* 0x44e0b0 */
-extern unsigned char DAT_004c5404; /* 0x4c5404 */
+extern unsigned char g_eventQueueEntries; /* 0x4c5404 */
 
 /* Supplied declaration required: FUN_0010e5a4. */
 /* Supplied declaration required: FUN_0010e8e8. */
 /* Supplied declaration required: FUN_0010edbc. */
 /* Supplied declaration required: FUN_0011a324. */
-/* Supplied declaration required: FUN_002c1d78. */
-/* Supplied declaration required: FUN_002c1dd8. */
+/* Supplied declaration required: asdSndEnsureCurrentSlotData. */
+/* Supplied declaration required: asdSoundSelectSlotB. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 
@@ -39,17 +39,17 @@ void FUN_00105ef8(void)
   
   temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
-    FUN_002c1dd8(0);
-    FUN_002c1d78(0x6000000);
-    FUN_002c1dd8(1);
-    FUN_002c1d78(0x6000002);
-    FUN_002c1dd8(3);
-    FUN_002c1d78(0x6000001);
+    asdSoundSelectSlotB(0);
+    asdSndEnsureCurrentSlotData(0x6000000);
+    asdSoundSelectSlotB(1);
+    asdSndEnsureCurrentSlotData(0x6000002);
+    asdSoundSelectSlotB(3);
+    asdSndEnsureCurrentSlotData(0x6000001);
     FUN_0010e5a4();
     FUN_0010e8e8();
     FUN_0010edbc();
     FUN_0011a324((*(unsigned char *)((unsigned char *)&g_soundVolumeSetting + 0x1)));
-    memClear(&DAT_004c5404,0x80);
+    memClear(&g_eventQueueEntries,0x80);
     jyoucyuGetTableEntry(1);
     return;
   }

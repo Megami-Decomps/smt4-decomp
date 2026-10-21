@@ -23,7 +23,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: dataTable05Sub4GetCount. */
-extern int FUN_00288154(unsigned short, unsigned char *);
+extern int gameRecordCopy(unsigned short, unsigned char *);
 /* Supplied declaration required: FUN_0029cde0. */
 extern int FUN_0029ea68(unsigned short);
 /* Supplied declaration required: FUN_0029f7d4. */
@@ -80,10 +80,10 @@ unsigned int FUN_0029fa0c(unsigned int param_1,int param_2)
           temp_v0 = puVar4[0x1a];
           if ((temp_v0 & 1) != 0) {
             if ((temp_v0 & 0xfffe) != 0) {
-              temp_v3 = FUN_00288154(temp_v0 >> 1,temp_v16);
+              temp_v3 = gameRecordCopy(temp_v0 >> 1,temp_v16);
             }
             else {
-              temp_v3 = FUN_00288154(*puVar4,temp_v16);
+              temp_v3 = gameRecordCopy(*puVar4,temp_v16);
             }
             if ((temp_v3 == 0) || ((temp_v17 & 0xfc) == 0)) goto LAB_0029fbe8;
           }

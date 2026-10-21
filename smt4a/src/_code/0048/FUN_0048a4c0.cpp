@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_0048bdec(int);
@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0048bdec. */
@@ -59,8 +59,8 @@ void FUN_0048a4c0(int param_1)
     temp_v2 = 0;
     temp_v3 = 0;
     FUN_00492c18(param_1 + 0x4cc,&temp_v2);
-    FUN_00184528(param_1 + 0x4e4,0);
-    FUN_00184528(param_1 + 0x4e4,1);
+    uiSpriteBankApplyPreset(param_1 + 0x4e4,0);
+    uiSpriteBankApplyPreset(param_1 + 0x4e4,1);
     uiSpriteSetImageKeyframe(param_1 + 0xf88,1,0);
     uiSpriteSetKeyframe(param_1 + 0x1014,1,0);
     temp_v0 = 1;

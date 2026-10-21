@@ -5,9 +5,9 @@ extern "C" {
 
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00390164(u32 segments, u32 sides, u8 *table, int w, int tableSize);
-void FUN_00180070(PolyGeom *geom, void *texture);
+void asdTextureHolderLoad(PolyGeom *geom, void *texture);
 void refSlotAssign(PolyGeom *geom, u32 texture);
-u32 FUN_0037a834(int id);
+u32 sysGetTableWord(int id);
 void FUN_003c82d8(PolyWindBlock *block, PolyWindParams *params);
 
 extern u8 DAT_005c1ec8;
@@ -30,9 +30,9 @@ PolyWindBlock *effPolyWindGeomCreate1(PolyWindParams *params, void *texture)
     geom = FUN_00390164(params->segments, sides & 0xffff, &DAT_005c1ec8, 4, 0x4c);
     block->geom = geom;
     if (texture != NULL) {
-        FUN_00180070(geom, texture);
+        asdTextureHolderLoad(geom, texture);
     } else {
-        refSlotAssign(geom, FUN_0037a834(20));
+        refSlotAssign(geom, sysGetTableWord(20));
     }
     FUN_003c82d8(block, params);
     return block;

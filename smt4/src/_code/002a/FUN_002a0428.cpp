@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_001db998(u32 a, u32 b);
+int sceneNodeCollectionRegisterGroup(u32 a, u32 b);
 
 typedef struct Obj {
     /* 0x0 */ u32 flags;
@@ -13,7 +13,7 @@ typedef struct Obj {
 void FUN_002a0428(Obj *obj, u32 value)
 {
     obj->flags = obj->flags & 0xffdfffff;
-    FUN_001db998(obj->unk8, value);
+    sceneNodeCollectionRegisterGroup(obj->unk8, value);
 }
 
 } /* extern "C" */

@@ -9,7 +9,7 @@ int textFormatBuffer(unsigned char [100], unsigned char *, unsigned char *, unsi
 int libc_strcpy(unsigned char *, unsigned char [50]);
 int FUN_002e70e0(unsigned int *, unsigned char [50]);
 int FUN_002f2aa8(void);
-int FUN_002f2e88(unsigned int *, unsigned char [50]);
+int namedObjectFormatName(unsigned int *, unsigned char [50]);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern unsigned char DAT_004d8bd0; /* 0x4d8bd0 */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002e70e0. */
 /* Supplied declaration required: FUN_002f2aa8. */
-/* Supplied declaration required: FUN_002f2e88. */
+/* Supplied declaration required: namedObjectFormatName. */
 
 
 /* WARNING: Removing unreachable block (ram,0x002e7044) */
@@ -50,7 +50,7 @@ unsigned char * FUN_002e6fa8(void)
   if (DAT_0044eac8 != (unsigned int *)0x0) {
     FUN_002f2aa8();
     FUN_002e70e0(DAT_0044eac8,temp_v0);
-    FUN_002f2e88(DAT_0044eac8,temp_v1);
+    namedObjectFormatName(DAT_0044eac8,temp_v1);
     temp_v2 = DAT_0044eac8[2];
     if (temp_v2 == 1) {
       return puVar2;

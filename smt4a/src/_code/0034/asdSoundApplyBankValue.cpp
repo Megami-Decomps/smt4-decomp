@@ -12,7 +12,7 @@ struct SoundState {
     /* 0x324 */ SoundBank *bank;
 };
 extern SoundState g_asdSoundHandleState;
-void FUN_001742e4(void *sound, s32 value);
+void asdSoundObjectStop(void *sound, s32 value);
 
 s32 asdSoundApplyBankValue(u32 index, s32 value)
 {
@@ -21,7 +21,7 @@ s32 asdSoundApplyBankValue(u32 index, s32 value)
         return 0;
     }
     if (bank->sounds[index] != NULL) {
-        FUN_001742e4(bank->sounds[index], value);
+        asdSoundObjectStop(bank->sounds[index], value);
     }
     return 1;
 }

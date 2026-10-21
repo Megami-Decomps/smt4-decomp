@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00271064(void);
 
-extern int DAT_00447e58; /* 0x447e58 */
+extern int g_deferredMapModels; /* 0x447e58 */
 
 /* Supplied declaration required: FUN_00271064. */
 
@@ -18,13 +18,13 @@ void FUN_00271010(int param_1)
   int temp_v0;
   int temp_v1;
   
-  temp_v1 = DAT_00447e58;
-  *(unsigned char *)(DAT_00447e58 + 0xe3c) = 0;
+  temp_v1 = g_deferredMapModels;
+  *(unsigned char *)(g_deferredMapModels + 0xe3c) = 0;
   if (param_1 == 0) {
     temp_v1 = 0;
     do {
       temp_v0 = temp_v1 + 1;
-      temp_v1 = DAT_00447e58 + temp_v1 * 0x38;
+      temp_v1 = g_deferredMapModels + temp_v1 * 0x38;
       if (*(char *)(temp_v1 + 0xc) != '\0') {
         *(unsigned char *)(temp_v1 + 0xe) = 0;
       }

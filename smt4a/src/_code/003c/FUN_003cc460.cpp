@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_004c3db4(void);
 
-extern unsigned int DAT_00570d78; /* 0x570d78 */
+extern unsigned int g_battleMaskPresets; /* 0x570d78 */
 extern unsigned int DAT_00570d7c; /* 0x570d7c */
 extern unsigned int DAT_00570d80; /* 0x570d80 */
 extern unsigned int DAT_00570d84; /* 0x570d84 */
@@ -33,7 +33,7 @@ unsigned int FUN_003cc460(void)
     puVar2 = (unsigned int *)(*(int *)(temp_v0 + 0x1ffc) + temp_v3 * 0x408);
     temp_v1 = *puVar2;
     temp_v2 = puVar2[1];
-    if (((DAT_00570d78 & temp_v1) != 0 || (DAT_00570d7c & temp_v2) != 0) &&
+    if (((g_battleMaskPresets & temp_v1) != 0 || (DAT_00570d7c & temp_v2) != 0) &&
        ((DAT_00570d90 & temp_v1) == 0 && (DAT_00570d94 & temp_v2) == 0)) {
       if ((temp_v1 & DAT_00570d80) != 0 || (temp_v2 & DAT_00570d84) != 0) {
         FUN_004c3db4();

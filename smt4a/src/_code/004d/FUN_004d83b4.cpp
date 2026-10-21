@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_002804b0(unsigned char [128], unsigned int *, int);
+int asdLoadFileAsyncSimple(unsigned char [128], unsigned int *, int);
 int sysMemClear(unsigned char [128], int);
 int aocQueueType20(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
 int aocQueueType1f(unsigned int, unsigned int, unsigned int *, unsigned char [128]);
@@ -14,7 +14,7 @@ int FUN_004d7e20(unsigned int *, int);
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: aocQueueType20. */
 /* Supplied declaration required: aocQueueType1f. */
@@ -37,7 +37,7 @@ void FUN_004d83b4(unsigned int *param_1,int param_2)
     aocQueueType20(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 3,temp_v1);
   }
   else {
-    FUN_002804b0(temp_v1,param_1 + 3,0);
+    asdLoadFileAsyncSimple(temp_v1,param_1 + 3,0);
   }
   *param_1 = 4;
   if (param_1[3] != 0) {
@@ -49,7 +49,7 @@ void FUN_004d83b4(unsigned int *param_1,int param_2)
       aocQueueType1f(g_aocSystem,*(unsigned int *)(param_2 + 0xf0),param_1 + 4,temp_v2);
     }
     else {
-      FUN_002804b0(temp_v2,param_1 + 4,0);
+      asdLoadFileAsyncSimple(temp_v2,param_1 + 4,0);
     }
     *param_1 = 6;
     if (param_1[4] != 0) {

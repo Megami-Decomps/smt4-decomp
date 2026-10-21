@@ -14,7 +14,15 @@ typedef struct AsdListNode {
     /* 0x0c */ u32 unk0c;
     /* 0x10 */ void *func;
     /* 0x14 */ u32 unk14;
-    /* 0x18 */ u32 unk18;
+    /* 0x18 */ union {
+        u32 unk18;
+        struct AsdListNode* next;
+    };
 } AsdListNode;
+
+typedef struct AsdList {
+    /* 0x00 */ AsdListNode* first;
+    /* 0x04 */ u8 unk04[8];
+} AsdList;
 
 #endif

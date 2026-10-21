@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b2008` (_code @ 0x3b2008, 0x154 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/DataTable.h"
+struct PtrAt8;
 
 extern "C" {
 
@@ -11,12 +13,10 @@ extern int g_btlTalk; /* 0x57a7b8 */
 
 extern int randRange(unsigned int);
 extern int gameFlagIsSet(void);
-extern int dataTableGetCount(void);
-extern int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
-extern unsigned int ptrAt8Reset(int);
+extern void* btlTalkGetTableSection0(PtrAt8* object);
 
 
 unsigned int FUN_003b2008(void)
@@ -39,9 +39,9 @@ unsigned int FUN_003b2008(void)
   
   piVar10 = aiStack_428;
   temp_v0 = scrGetArg(0);
-  temp_v1 = ptrAt8Reset(g_btlTalk);
-  temp_v2 = dataTableGetCount();
-  temp_v3 = dataTableGetEntries(temp_v1);
+  temp_v1 = (u32)btlTalkGetTableSection0((PtrAt8*)g_btlTalk);
+  temp_v2 = (int)dataTableGetCount((void*)temp_v1);
+  temp_v3 = (int)dataTableGetEntries((void*)temp_v1);
   __aeabi_memset4(aiStack_428,0x200,0xffffffff);
   temp_v7 = 0;
   temp_v5 = 0;

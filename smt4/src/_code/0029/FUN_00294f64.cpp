@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0023ded4(void);
+int textureContentRelease(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_0023ded4. */
+/* Supplied declaration required: textureContentRelease. */
 
 
 void FUN_00294f64(int param_1)
@@ -28,7 +28,7 @@ void FUN_00294f64(int param_1)
         return;
       }
     }
-    FUN_0023ded4();
+    textureContentRelease();
     if (*(int **)(temp_v0 + 0x47e50c) != (int *)0x0) {
       (**(romwright_code **)(**(int **)(temp_v0 + 0x47e50c) + 4))();
     }

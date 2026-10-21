@@ -11,7 +11,7 @@ int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
 int FUN_002a2c7c(void);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(double, int);
 int VectorUnsignedToFloat(...);
@@ -82,7 +82,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002a2c7c. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -262,7 +262,7 @@ void FUN_0030c078(int param_1)
             temp_v13 = temp_v13 * (float)temp_v18;
             temp_v12 = (((float)temp_v17 - pfVar10[0x35]) + temp_v2 * pfVar10[0x35]) * pfVar10[0x34];
             temp_v2 = temp_v13;
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v11 = temp_v12 - (float)temp_v17;
             temp_v13 = temp_v13 * temp_v12;
             FUN_002b70cc();

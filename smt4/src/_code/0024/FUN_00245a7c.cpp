@@ -21,8 +21,8 @@ typedef struct {
 } param_2_stack;
 
 extern char randRange(unsigned int);
-extern int gameGetOptions(void);
-extern int FUN_002b6b38(void);
+extern int gameGetSupportUnitData(void);
+extern int gameGetOptionProgressStatus(void);
 /* Supplied declaration required: FUN_002bfc24. */
 extern unsigned int FUN_002bfdc4(void);
 extern int dataTableGetCount(void);
@@ -54,9 +54,9 @@ int FUN_00245a7c(int param_1,int param_2)
   temp_v3 = dataTableGetEntries();
   dataTableGet(0x3e,0);
   temp_v4 = dataTableGetCount();
-  temp_v5 = gameGetOptions();
+  temp_v5 = gameGetSupportUnitData();
   temp_v0 = *(unsigned short *)(temp_v5 + 0x604);
-  temp_v5 = FUN_002b6b38();
+  temp_v5 = gameGetOptionProgressStatus();
   if (temp_v5 != 2) {
     temp_v5 = 0;
     if (temp_v4 < 1) {
@@ -70,7 +70,7 @@ int FUN_00245a7c(int param_1,int param_2)
     }
   }
   else {
-    temp_v5 = gameGetOptions();
+    temp_v5 = gameGetSupportUnitData();
     temp_v0 = *(unsigned short *)(temp_v5 + 0x46);
     temp_v5 = 0;
     if (temp_v4 < 1) {

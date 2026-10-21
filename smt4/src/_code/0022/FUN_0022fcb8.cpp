@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002302d8. */
 /* Supplied declaration required: FUN_00230434. */
 /* Supplied declaration required: cellListAppend. */
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233730. */
 extern int FUN_0028e9d0(unsigned int);
 /* Supplied declaration required: FUN_0029212c. */
@@ -187,7 +187,7 @@ void FUN_0022fcb8(int param_1,unsigned int param_2)
   FUN_00230434(param_1 + 0xc20,0);
   FUN_002302d8(param_1,param_2);
   temp_v0 = *(int *)(param_1 + 0x860);
-  temp_v1 = FUN_0023360c(param_1 + temp_v0 * 0x74 + 0x880);
+  temp_v1 = flaggedValueHolderGetTotal(param_1 + temp_v0 * 0x74 + 0x880);
   FUN_0029212c(*(unsigned short *)(param_1 + temp_v0 * 0x1002 + 0xc94 + temp_v1 * 4));
   return;
 }

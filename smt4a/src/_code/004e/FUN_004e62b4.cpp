@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001568f8(int, int);
-int FUN_003e88d8(int, int);
+int btlIncrementSaturatingSlotCounter(int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004c3db4(unsigned int *);
 int FUN_004fbc30(unsigned int, int, int, int);
@@ -22,7 +22,7 @@ extern unsigned int DAT_0057117c; /* 0x57117c */
 
 /* Supplied declaration required: FUN_001568f8. */
 extern int btlScriptUnitHasFlags(int);
-/* Supplied declaration required: FUN_003e88d8. */
+/* Supplied declaration required: btlIncrementSaturatingSlotCounter. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c3db4. */
 /* Supplied declaration required: FUN_004fbc30. */
@@ -46,7 +46,7 @@ void FUN_004e62b4(int *param_1,int param_2,int param_3,unsigned int param_4,int 
         FUN_001568f8(temp_v0,param_3);
         if (temp_v0 != 0) {
           FUN_004c3db4(puVar1);
-          FUN_003e88d8(*param_1,(int)*(short *)(temp_v0 + 2));
+          btlIncrementSaturatingSlotCounter(*param_1,(int)*(short *)(temp_v0 + 2));
         }
       }
       temp_v0 = btlScriptUnitHasFlags(*param_1);

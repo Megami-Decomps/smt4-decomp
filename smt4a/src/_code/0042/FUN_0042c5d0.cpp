@@ -7,7 +7,7 @@ extern "C" {
 int sysMemClear(unsigned int *, int);
 
 extern unsigned int *FUN_00188a34(void);
-extern unsigned int FUN_001a04e0(unsigned int *, unsigned int);
+extern unsigned int asdGxAppendStateReset(unsigned int *, unsigned int);
 /* Supplied declaration required: sysMemClear. */
 extern unsigned int *FUN_0042c3c4(unsigned int *, unsigned int);
 extern unsigned int *FUN_0042cbd8(unsigned int, unsigned int);
@@ -46,7 +46,7 @@ unsigned int * FUN_0042c5d0(void)
   } while (temp_v2 != 0);
   puVar1[0x72] = 0;
   puVar1[0x73] = 0x100e0;
-  temp_v0 = FUN_001a04e0(puVar1 + 0x74,1);
+  temp_v0 = asdGxAppendStateReset(puVar1 + 0x74,1);
   puVar1 = (unsigned int *)FUN_0042cbd8(temp_v0,1);
   *puVar1 = 0;
   puVar1[1] = 0x10062;

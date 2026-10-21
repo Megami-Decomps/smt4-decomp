@@ -6,13 +6,13 @@ extern "C" {
 
 int uiSpriteSetKeyframe(...);
 int FUN_00317af8(float *, float [3], int);
-int FUN_00357a48(void);
+int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int FUN_003d2150(...);
 int FUN_0048816c(...);
 int FUN_0048d248(int, unsigned int);
 int rectRecRead(...);
-int FUN_00492ab4(...);
+int naviMainGetValue(...);
 int sub68OwnerGetBlock60(...);
 int FUN_00492bc0(...);
 int FUN_00492c18(...);
@@ -53,7 +53,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern float DAT_00587f10; /* 0x587f10 */
+extern float g_uiTextFontSettings; /* 0x587f10 */
 extern unsigned int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161d; /* 0x5f161d */
@@ -77,14 +77,14 @@ extern int padButtonIsPressed(unsigned int);
 extern int FUN_00167c0c(unsigned int *, unsigned int *);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00317af8. */
-/* Supplied declaration required: FUN_00357a48. */
+/* Supplied declaration required: naviRequestSelectedMap. */
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_0048816c. */
 /* Supplied declaration required: FUN_0048d248. */
 /* Supplied declaration required: rectRecRead. */
-/* Supplied declaration required: FUN_00492ab4. */
+/* Supplied declaration required: naviMainGetValue. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: FUN_00492bc0. */
 /* Supplied declaration required: FUN_00492c18. */
@@ -138,7 +138,7 @@ void FUN_0048c394(int param_1)
   puVar6 = (unsigned char *)(param_1 + 0x7b91);
   if (DAT_005f161d != '\0') {
     FUN_00317af8(&temp_v13,temp_v19,0);
-    FUN_00492ab4(temp_v11);
+    naviMainGetValue(temp_v11);
     pfVar2 = (float *)sub68OwnerGetBlock60(temp_v11);
     temp_v13 = -(temp_v13 * 13.0f);
     temp_v19[0] = -(temp_v19[0] * 13.0f);
@@ -164,7 +164,7 @@ void FUN_0048c394(int param_1)
           *puVar5 = 1;
           *puVar6 = 1;
         }
-        FUN_00357a48();
+        naviRequestSelectedMap();
       }
       else {
         sub68OwnerGetBlock60(temp_v11);
@@ -294,7 +294,7 @@ void FUN_0048c394(int param_1)
                   temp_v0 = FUN_00492bc0(temp_v11);
                   temp_v1 = NaviMain_GetCurrentMap(temp_v11);
                   if ((temp_v0 != temp_v1) && (DAT_005f1a5c == '\0')) {
-                    FUN_00357a48();
+                    naviRequestSelectedMap();
                     temp_v0 = 0;
                     do {
                       uiSpriteSetKeyframe(param_1 + temp_v0 * 0x8c + 0xc40,7,0);
@@ -384,7 +384,7 @@ LAB_0048c990:
       }
     }
     else {
-      FUN_00492ab4(temp_v11);
+      naviMainGetValue(temp_v11);
       temp_v4 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v8 = (unsigned int *****)
                  romwright_f2u((float)(((temp_v4 - *(float *)(param_1 + 0x2c)) / romwright_u2f((unsigned int)(in_s0)) + *(float *)(param_1 + 0x34))))
@@ -420,7 +420,7 @@ LAB_0048cc98:
       return;
     }
   }
-  temp_v4 = DAT_00587f10;
+  temp_v4 = g_uiTextFontSettings;
   if ((int)romwright_fabs_4(*(float *)(param_1 + 0x3c)) < 0x3f000001) {
     if ((int)romwright_fabs_4(*(float *)(param_1 + 0x40)) < 0x3f000001) {
       *(unsigned int *******)(param_1 + 0x3c) = ppppppuVar14;
@@ -428,10 +428,10 @@ LAB_0048cc98:
       return;
     }
   }
-  *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x3c) * DAT_00587f10;
+  *(float *)(param_1 + 0x3c) = *(float *)(param_1 + 0x3c) * g_uiTextFontSettings;
   temp_v4 = *(float *)(param_1 + 0x40) * temp_v4;
   *(float *)(param_1 + 0x40) = temp_v4;
-  FUN_00492ab4(temp_v11);
+  naviMainGetValue(temp_v11);
   pfVar2 = (float *)sub68OwnerGetBlock60(temp_v11);
   temp_v14 = (unsigned int ****)romwright_f2u((float)((*(float *)(param_1 + 0x3c) / temp_v4 + *pfVar2)));
   temp_v15 = (unsigned int *****)romwright_f2u((float)((*(float *)(param_1 + 0x40) / temp_v4 + pfVar2[1])));

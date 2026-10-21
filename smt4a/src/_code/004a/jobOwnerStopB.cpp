@@ -5,7 +5,7 @@ extern "C" {
 int jobStop(int job, int arg);
 int dataTableFree(int id);
 int texSetRelease(void);
-int FUN_004a6d5c(void *block);
+int indexedSlotsClear(void *block);
 }
 
 typedef struct HandleRegistry {
@@ -57,7 +57,7 @@ void jobOwnerStopB(JobOwner *owner)
         child->release();
         owner->child = NULL;
     }
-    FUN_004a6d5c(owner->block);
+    indexedSlotsClear(owner->block);
     g_handleRegistry->flags &= ~3;
     if (owner->state == 1) {
         texSetRelease();

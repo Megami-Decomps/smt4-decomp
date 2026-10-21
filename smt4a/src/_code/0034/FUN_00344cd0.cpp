@@ -7,8 +7,8 @@ extern "C" {
 int FUN_001835b4(...);
 int FUN_002a4844(unsigned int);
 int FUN_002a4860(...);
-int FUN_002c2c4c(...);
-int FUN_002c2c68(...);
+int widgetSubCallIfVisible(...);
+int objectApplyIfUnblocked(...);
 int uiSearchSecondary(...);
 int uiSearchPrimary(...);
 int FUN_0035ae58(...);
@@ -33,8 +33,8 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4844. */
 /* Supplied declaration required: FUN_002a4860. */
-/* Supplied declaration required: FUN_002c2c4c. */
-/* Supplied declaration required: FUN_002c2c68. */
+/* Supplied declaration required: widgetSubCallIfVisible. */
+/* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: uiSearchSecondary. */
 /* Supplied declaration required: uiSearchPrimary. */
 /* Supplied declaration required: FUN_0035ae58. */
@@ -85,13 +85,13 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
   temp_v2 = 0;
   temp_v8 = FUN_001834a4(param_4,param_6);
   if (param_16 != 0) {
-    temp_v4 = FUN_002c2c4c();
+    temp_v4 = widgetSubCallIfVisible();
     temp_v5 = uiSearchSecondary(param_1);
     if (temp_v5 >= temp_v4) {
       temp_v9 = (int)**(short **)(temp_v8 + 0xc);
     }
     else {
-      temp_v6 = FUN_002c2c4c(param_1);
+      temp_v6 = widgetSubCallIfVisible(param_1);
       temp_v11 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v10 = (float)VectorSignedToFloat((int)**(short **)(temp_v8 + 0xc),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -107,7 +107,7 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
       temp_v2 = (int)(temp_v11 * temp_v10);
       temp_v4 = FUN_002a4844(param_1);
       temp_v5 = uiSearchSecondary(param_1);
-      temp_v7 = FUN_002c2c4c(param_1);
+      temp_v7 = widgetSubCallIfVisible(param_1);
       if ((temp_v4 + temp_v5 == temp_v7) && (temp_v2 + temp_v9 < (int)**(short **)(temp_v8 + 0xc))) {
         temp_v2 = **(short **)(temp_v8 + 0xc) - temp_v9;
       }
@@ -125,13 +125,13 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
     temp_v4 = (int)*(short *)(*(int *)(temp_v8 + 0xc) + 2);
   }
   else {
-    temp_v4 = FUN_002c2c68(param_1);
+    temp_v4 = objectApplyIfUnblocked(param_1);
     temp_v5 = uiSearchPrimary(param_1);
     if (temp_v5 >= temp_v4) {
       temp_v4 = (int)*(short *)(*(int *)(temp_v8 + 0xc) + 2);
     }
     else {
-      temp_v6 = FUN_002c2c68(param_1);
+      temp_v6 = objectApplyIfUnblocked(param_1);
       temp_v11 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v10 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v8 + 0xc) + 2),
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -147,7 +147,7 @@ void FUN_00344cd0(unsigned int param_1,int param_2,int param_3,unsigned int para
       temp_v2 = (int)(temp_v11 * temp_v10);
       temp_v5 = FUN_002a4860(param_1);
       temp_v9 = uiSearchPrimary(param_1);
-      temp_v7 = FUN_002c2c68(param_1);
+      temp_v7 = objectApplyIfUnblocked(param_1);
       if ((temp_v5 + temp_v9 == temp_v7) &&
          (temp_v5 = (int)*(short *)(*(int *)(temp_v8 + 0xc) + 2), temp_v2 + temp_v4 < temp_v5)) {
         temp_v2 = temp_v5 - temp_v4;

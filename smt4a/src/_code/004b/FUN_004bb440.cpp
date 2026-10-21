@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bb440` (_code @ 0x4bb440, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: native C1/vtable names and MessageId constructor-return chaining need integration; vtable callback 0x4bb4dc has no named function unit. */
 #include "romwright_types.h"
 
 extern "C" {

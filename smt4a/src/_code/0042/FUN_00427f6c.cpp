@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int recordValidatePair(unsigned int, int, unsigned int);
 int FUN_00439664(void);
 int rt_memcpy(unsigned int, unsigned char [64], int);
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern int FUN_004283cc(unsigned int);
 /* Supplied declaration required: recordValidatePair. */
 /* Supplied declaration required: FUN_00439664. */
@@ -33,7 +33,7 @@ void FUN_00427f6c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   
   temp_v0 = FUN_004283cc(param_2);
   if (temp_v0 < 0) {
-    FUN_001b57a8(param_1,temp_v0);
+    resultPairInitialize(param_1,temp_v0);
     return;
   }
   puVar2 = temp_v2;
@@ -42,7 +42,7 @@ void FUN_00427f6c(unsigned int *param_1,unsigned int param_2,unsigned int param_
     rt_memcpy(param_3,temp_v2,0x20);
     puVar2 = (unsigned char *)0x0;
   }
-  FUN_001b57a8(&temp_v1,puVar2);
+  resultPairInitialize(&temp_v1,puVar2);
   recordValidatePair(param_2,temp_v1,uStack_54);
   *param_1 = temp_v1;
   param_1[1] = uStack_54;

@@ -20,9 +20,9 @@ extern "C" {
 extern u32 g_aocSystem;
 
 EntryWork *jobGetWork(void *job);
-u16 *FUN_0019e378(void *table, u32 index);
+u16 *dataTable19FindAddonWord(void *table, u32 index);
 s32 FUN_00162ea4(void);
-s32 FUN_001a6508(u32 system, u32 kind, u32 entryId, u32 flags);
+s32 aocRunByName(u32 system, u32 kind, u32 entryId, u32 flags);
 void FUN_00191e00(u32 system, u32 kind, u32 entryId, s32 flags);
 void FUN_0014afd0(u32 kind, u32 entryId);
 
@@ -39,7 +39,7 @@ void entryWorkSwitchTo(void *job, u32 index, s32 setPending)
         return;
     }
 
-    u16 *entry = FUN_0019e378(work->table, index);
+    u16 *entry = dataTable19FindAddonWord(work->table, index);
     if (work->current == *entry) {
         return;
     }
@@ -63,7 +63,7 @@ void entryWorkSwitchTo(void *job, u32 index, s32 setPending)
 
     work->mode = 0;
     work->blend = 1.0f;
-    if (FUN_001a6508(g_aocSystem, work->kind, work->current, 1) != 0) {
+    if (aocRunByName(g_aocSystem, work->kind, work->current, 1) != 0) {
         FUN_00191e00(g_aocSystem, work->kind, work->current, 0x10000);
     } else {
         FUN_0014afd0(work->kind, work->current);

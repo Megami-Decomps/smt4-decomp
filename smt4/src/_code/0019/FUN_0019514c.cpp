@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0029efd8(int, int);
-int FUN_0029f5d8(int, unsigned int, int, int, int, int, unsigned char [8], int, int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, unsigned char [8], int, int);
 int FUN_002b8ee0(int, int);
 int eventQueueAddUniqueIfValid(int);
 int timerStart(int, int, int);
@@ -25,7 +25,7 @@ extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_0029f5d8. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
@@ -113,7 +113,7 @@ void FUN_0019514c(int *param_1)
     temp_v4 = FUN_002bf4f8(0x30,0x1c);
     temp_v1 = FUN_0029efc0(temp_v5 + 0x2dc);
     temp_v6 = temp_v5 + 0x2dc;
-    FUN_0029f5d8(temp_v6,temp_v4,0,(int)*(short *)(temp_v5 + 0x34c),(int)*(short *)(temp_v5 + 0x348),
+    uiScrollHandleActionsOrTouch(temp_v6,temp_v4,0,(int)*(short *)(temp_v5 + 0x34c),(int)*(short *)(temp_v5 + 0x348),
                  (int)*(short *)(temp_v5 + 0x34a),temp_v8,0,0);
     if (temp_v6 != 0) {
       temp_v6 = FUN_0029efc0(temp_v5 + 0x2dc);

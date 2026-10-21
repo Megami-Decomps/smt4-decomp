@@ -7,9 +7,9 @@ extern "C" {
 int qcMainSetMode(int);
 int FUN_002637c8(void);
 int FUN_0028eeb8(unsigned int);
-int FUN_00297468(unsigned char *, unsigned int *, int);
+int asdLoadFileAsyncSimple(unsigned char *, unsigned int *, int);
 int asdTMTexTableLoadEntryAsync(int, int);
-int FUN_002a71fc(int);
+int messageStatesSetFirst(int);
 int dataTable1bOr1cGetRecord(void);
 int paramsInit(unsigned int *, int, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int memClear(unsigned int *, int);
@@ -18,7 +18,7 @@ int FUN_003852c8(void);
 int dataTable27Load(unsigned int *);
 int FUN_00385aec(unsigned int *);
 int FUN_00385af4(unsigned int *);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned int *);
+int drawParameterBlockClear(unsigned int *);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -38,10 +38,10 @@ extern unsigned char DAT_004057c0; /* 0x4057c0 */
 /* Supplied declaration required: qcMainSetMode. */
 /* Supplied declaration required: FUN_002637c8. */
 /* Supplied declaration required: FUN_0028eeb8. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int FUN_00298fa0(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
-/* Supplied declaration required: FUN_002a71fc. */
+/* Supplied declaration required: messageStatesSetFirst. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: paramsInit. */
@@ -51,7 +51,7 @@ extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: dataTable27Load. */
 /* Supplied declaration required: FUN_00385aec. */
 /* Supplied declaration required: FUN_00385af4. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_00381b8c(unsigned int *param_1)
@@ -77,9 +77,9 @@ void FUN_00381b8c(unsigned int *param_1)
   param_1[0x170] = 0;
   param_1[0x169] = 0;
   memClear(param_1 + 0x1b3,0x640);
-  FUN_00297468(&LAB_00381d28,param_1 + 0x168,0);
-  FUN_00297468(&LAB_00381d4c,param_1 + 0x169,0);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 9);
+  asdLoadFileAsyncSimple(&LAB_00381d28,param_1 + 0x168,0);
+  asdLoadFileAsyncSimple(&LAB_00381d4c,param_1 + 0x169,0);
+  drawParameterBlockClear(param_1 + 9);
   paramsInit(param_1 + 9,0,0,&DAT_004057a8,0x18,0,0,0,0,&DAT_004057c0,0xa8);
   dataTable27Load(param_1 + 8);
   FUN_00385aec(param_1 + 8);
@@ -102,7 +102,7 @@ void FUN_00381b8c(unsigned int *param_1)
     temp_v2 = temp_v3;
   } while (temp_v3 < 4);
   FUN_002637c8();
-  FUN_002a71fc(0);
+  messageStatesSetFirst(0);
   qcMainSetMode(0);
   temp_v2 = 0x15e;
   do {

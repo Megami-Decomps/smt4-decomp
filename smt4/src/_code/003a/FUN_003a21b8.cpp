@@ -1,13 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a21b8` (_code @ 0x3a21b8, 0x680 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match2_OffsetPosition2D.h"
 
 extern "C" {
 
 int FUN_00230aec(...);
-int FUN_00230d2c(...);
+void FUN_00230d2c(const OffsetPosition2D*, u32, s32, s32, s32, s32);
 int FUN_00230d84(int, int, int, int, int);
-int FUN_00231258(...);
+void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int FUN_002be56c(...);
 int textFormatBuffer(...);
@@ -44,7 +45,6 @@ extern int FUN_0022f1b8(short);
 extern unsigned int itemGetNameOrFallback(short, unsigned int);
 /* Supplied declaration required: FUN_00230d2c. */
 /* Supplied declaration required: FUN_00230d84. */
-/* Supplied declaration required: FUN_00231258. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned int FUN_00246570(unsigned int *);
 /* Supplied declaration required: FUN_002be56c. */
@@ -109,7 +109,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
         FUN_00231bcc(param_1 + 0x380,0x4b,temp_v9,temp_v3,temp_v2,1);
       }
       temp_v4 = FUN_002bf4f0(param_1 + 0x380,0x4e);
-      FUN_00231258(*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v3,
+      gxSetClippedBottomScreenScissor(*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v3,
                    (int)**(short **)(temp_v4 + 0xc),(int)(*(short **)(temp_v4 + 0xc))[1]);
       temp_v4 = FUN_002bf4f0(param_1 + 0x380,0x4d);
       temp_v5 = param_1 + 0x56c;
@@ -142,7 +142,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
     if (param_3 != 0) {
       FUN_00231bcc(param_1 + 0x380,0xe4,temp_v9,temp_v3,temp_v2,1);
     }
-    FUN_00230d2c(param_1 + 0x380,(int)temp_v10,temp_v5,temp_v4,temp_v2,0);
+    FUN_00230d2c((const OffsetPosition2D*)(param_1 + 0x380),(int)temp_v10,temp_v5,temp_v4,temp_v2,0);
     if (param_3 == 0) {
       temp_v12 = 2;
     }
@@ -198,7 +198,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
       if (param_3 != 0) {
         FUN_00231bcc(param_1 + 0x380,0xe5,temp_v9,temp_v3,temp_v2,1);
       }
-      FUN_00230d2c(param_1 + 0x380,(int)temp_v1,temp_v4,temp_v0 + temp_v3,temp_v2,0);
+      FUN_00230d2c((const OffsetPosition2D*)(param_1 + 0x380),(int)temp_v1,temp_v4,temp_v0 + temp_v3,temp_v2,0);
       temp_v7 = itemGetNameOrFallback(temp_v1,0);
       if (param_3 == 0) {
         temp_v8 = 0xd5;

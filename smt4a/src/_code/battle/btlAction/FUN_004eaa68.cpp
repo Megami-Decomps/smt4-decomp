@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004eaa68` (_code @ 0x4eaa68, 0x3c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
 
-int FUN_004e0114(...);
 int FUN_004fcde0(int, unsigned int *, unsigned int *);
 int FUN_004fcf0c(...);
 
@@ -26,7 +26,6 @@ extern unsigned int DAT_005711bc; /* 0x5711bc */
 
 extern int gameGetSlotTable(void);
 extern int gameSlotsCountValidIds(int);
-/* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004fcde0. */
 /* Supplied declaration required: FUN_004fcf0c. */
 
@@ -146,7 +145,7 @@ LAB_004eac84:
           (((*param_2 & 0x4000) == 0 &&
            (temp_v4 = gameGetSlotTable(),
            (int)*(char *)(temp_v4 + temp_v6 + 0x1c88) == (int)(short)temp_v12[0x5b])))))) {
-        FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
+        btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
         return 1;
       }
 LAB_004eadd0:
@@ -162,14 +161,14 @@ LAB_004eadd0:
         FUN_004fcf0c(temp_v11 * param_7 + param_6 + temp_v7,param_2,0,temp_v6,temp_v9,0);
         *param_2 = *param_2 | 0x2000000;
       }
-      FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
       return 1;
     }
   }
   else if (!temp_v1 && !temp_v2) goto LAB_004eadd0;
   FUN_004fcf0c(temp_v11 * param_7 + param_6 + temp_v7,param_2,temp_v1 || temp_v2,0,temp_v9,0);
   *param_2 = *param_2 | 0x2000000;
-  FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),param_6,0xf,0x14);
   return 1;
 }
 

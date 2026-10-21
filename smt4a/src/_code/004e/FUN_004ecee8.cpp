@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ecee8` (_code @ 0x4ecee8, 0x254 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_003f1b3c(...);
 int FUN_0047f4cc(...);
 int FUN_004a9308(unsigned int, int, int);
 int FUN_004c9160(...);
-int FUN_004e0114(...);
 int FUN_004fbeac(unsigned int, unsigned int *, int, int, int);
 int FUN_004fd508(...);
 
@@ -36,7 +36,6 @@ extern int FUN_003e7adc(int);
 /* Supplied declaration required: FUN_0047f4cc. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004c9160. */
-/* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: FUN_004fd508. */
 
@@ -96,8 +95,7 @@ void FUN_004ecee8(int *param_1,unsigned int *param_2)
         temp_v4 = 0;
       }
       FUN_004fd508(temp_v4,param_2,temp_v3,temp_v2,1);
-      temp_v5 = 5;
-      FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,5);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,5,5);
       return;
     }
     if (temp_v0 == 0x13) {
@@ -109,8 +107,7 @@ void FUN_004ecee8(int *param_1,unsigned int *param_2)
         FUN_003f1b3c(*param_1,temp_v4,8,temp_v6,&temp_v5);
         FUN_0047f4cc(temp_v5);
       }
-      temp_v5 = 5;
-      FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,5);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,5,5);
       return;
     }
     if (temp_v0 != 0x14) {
@@ -120,8 +117,7 @@ void FUN_004ecee8(int *param_1,unsigned int *param_2)
     temp_v4 = 0x2e;
   }
   FUN_004c9160(temp_v4,temp_v2,0,1);
-  temp_v5 = 5;
-  FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,5);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,5,5);
   return;
 }
 

@@ -1,54 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00122a10` (_code @ 0x122a10, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps success/error codes in separate stack slots and shares a different result-construction tail. */
+#include "common.h"
+
+struct OnlineConnection {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ u8 state;
+};
+
+struct OnlineRequestOwner {
+    /* 0x000 */ u8 unk000[0x78];
+    /* 0x078 */ u32 context;
+    /* 0x07C */ u8 unk07c[0xa0];
+    /* 0x11C */ OnlineConnection* connection;
+};
 
 extern "C" {
+s32 FUN_001038f2(OnlineRequestOwner* owner, u32 request, u32 context);
+void FUN_002e7908(void* result, const u32* code);
 
-int FUN_002e7908(unsigned int, int *);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_4_stack;
-
-extern int FUN_001038f2(int, int, unsigned int);
-/* Supplied declaration required: FUN_002e7908. */
-
-
-void FUN_00122a10(unsigned int param_1,int param_2,int param_3,int param_4)
-
+// Report invalid requests and connection state before submitting an online request.
+void FUN_00122a10(void* output, OnlineRequestOwner* owner, u32 request, u32)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  piVar2 = &temp_v2;
-  temp_v1 = param_3;
-  if (param_3 != 0) {
-    if ((*(int *)(param_2 + 0x11c) != 0) && (*(char *)(*(int *)(param_2 + 0x11c) + 0x22) != '\x05'))
-    {
-      temp_v2 = -0x7ffefffc;
+    u32 code;
+    if (request == 0) {
+        code = 0x8001000a;
+    } else if (owner->connection != NULL && owner->connection->state != 5) {
+        code = 0x80010004;
+    } else if (FUN_001038f2(owner, request, owner->context) != 0) {
+        code = 0x00010001;
+    } else {
+        code = 0x8001000d;
     }
-    else {
-      temp_v2 = param_4;
-      temp_v0 = FUN_001038f2(param_2,param_3,*(unsigned int *)(param_2 + 0x78));
-      if (temp_v0 != 0) {
-        temp_v1 = 0x10001;
-        piVar2 = &temp_v1;
-      }
-      else {
-        temp_v2 = -0x7ffefff3;
-      }
-    }
-  }
-  else {
-    temp_v2 = -0x7ffefff6;
-  }
-  FUN_002e7908(param_1,piVar2);
-  return;
+    FUN_002e7908(output, &code);
 }
-
-} /* extern "C" */
+}

@@ -8,8 +8,8 @@ int listBoxItemHasOwner(unsigned int, unsigned int);
 int FUN_00246d38(...);
 int FUN_00246e24(...);
 int FUN_002561d8(...);
-int FUN_00262f68(...);
-int FUN_0026e61c(...);
+int objectFlagsClear(...);
+int objectFlagSetBit(...);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -24,9 +24,9 @@ extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: FUN_00246e24. */
 /* Supplied declaration required: FUN_002561d8. */
-extern unsigned int FUN_0025628c(unsigned int);
-/* Supplied declaration required: FUN_00262f68. */
-/* Supplied declaration required: FUN_0026e61c. */
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
+/* Supplied declaration required: objectFlagsClear. */
+/* Supplied declaration required: objectFlagSetBit. */
 extern unsigned int btlUnitGet(unsigned int);
 extern int FUN_00295d7c(void);
 extern int gameGetUnitRecord(void);
@@ -51,7 +51,7 @@ void FUN_003c33c8(int param_1,int param_2)
   int temp_v8;
   unsigned char temp_v9;
   
-  temp_v3 = FUN_0025628c(*(unsigned int *)(param_1 + 0x10));
+  temp_v3 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   temp_v8 = 0;
   switch(temp_v3) {
   case 0:
@@ -193,7 +193,7 @@ void FUN_003c33c8(int param_1,int param_2)
             temp_v7 = 0;
             do {
               if ((*(unsigned int *)(param_1 + 0x18) & (1 << (temp_v7 & 0xff))) != 0) {
-                FUN_0026e61c(temp_v8,temp_v7);
+                objectFlagSetBit(temp_v8,temp_v7);
               }
               temp_v7 = temp_v7 + 1;
             } while ((int)temp_v7 < 0xb);
@@ -265,7 +265,7 @@ void FUN_003c33c8(int param_1,int param_2)
             temp_v8 = gameGetSlotTable();
             if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x90f0)) && (temp_v8 = gameGetUnitRecord(), temp_v8 != 0)
                 ) && (temp_v5 = FUN_00295d7c(), temp_v5 == 0)) {
-              FUN_00262f68(temp_v8,*(unsigned int *)(param_1 + 0x18) & 0xffff);
+              objectFlagsClear(temp_v8,*(unsigned int *)(param_1 + 0x18) & 0xffff);
             }
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < (int)(unsigned int)temp_v1);

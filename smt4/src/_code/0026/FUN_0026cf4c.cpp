@@ -16,7 +16,7 @@ int FUN_0026c214(void);
 int FUN_00282e70(void);
 int FUN_002907c4(...);
 int FUN_00295660(int, unsigned char [128]);
-int FUN_00296ae8(unsigned int, int, unsigned int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_0029acb0(void);
 int FUN_0029ede8(int, int, unsigned int, int);
 int FUN_0029ee6c(...);
@@ -50,17 +50,17 @@ extern unsigned int FUN_00282ccc(void);
 /* Supplied declaration required: FUN_00282e70. */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029acb0. */
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029dc74. */
 extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
-extern unsigned char *FUN_002b066c(unsigned int);
+extern unsigned char *partyMemberFindById(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern unsigned short *gameGetPlayerData(void);
-extern int FUN_002b898c(void);
+extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
@@ -98,7 +98,7 @@ void FUN_0026cf4c(void)
   if (temp_v6 == 0) {
     temp_v12 = 0;
     FUN_0029acb0();
-    temp_v6 = FUN_002b898c();
+    temp_v6 = buttonHelpGetStatus();
     temp_v7 = FUN_00282e70();
     temp_v8 = FUN_00282ccc();
     if (((temp_v6 == 0x1c) || (temp_v6 == 0x1e || temp_v6 == 0xb8)) || (temp_v6 == 0xbf || temp_v6 == 0xcc)) {
@@ -192,7 +192,7 @@ void FUN_0026cf4c(void)
           uStack_a4 = DAT_0043da30;
           uStack_a8 = 3;
           temp_v14[0] = 0;
-          FUN_00296ae8(*(unsigned int *)(temp_v5 + 0x558),3,0xffffffff,0);
+          asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v5 + 0x558),3,0xffffffff,0);
         }
         return;
       }
@@ -335,7 +335,7 @@ void FUN_0026cf4c(void)
         }
       }
       else {
-        puVar7 = (unsigned char *)FUN_002b066c(temp_v7 & 0xffff);
+        puVar7 = (unsigned char *)partyMemberFindById(temp_v7 & 0xffff);
         if (puVar7 == (unsigned char *)0x0) {
           FUN_0029dc74(temp_v7 & 0xffff,temp_v13);
           puVar7 = temp_v13;

@@ -1,13 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b6fc4` (_code @ 0x4b6fc4, 0x150 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail passes live-in r6 as asdOperatorNew's second argument without initializing r6; unit boundary/signature needs recovery. */
 #include "romwright_types.h"
+#include "shard/S2UiTexLoader.h"
 
 extern "C" {
 
 int asdTMTexTableLoadTmx(int, int);
 int asdOperatorNew(void);
 int FUN_0022677c(int, int);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002bf464(void);
 int campCommonBgAcquire(void);
 int FUN_0031e198(void);
@@ -15,7 +15,7 @@ int campButtonHelpAcquire(void);
 int FUN_003b61ec(void);
 int FUN_00407978(void);
 int FUN_004930e4(int);
-int FUN_004ba078(void);
+void mikadoInitUpdateHandlers(UiScreen*);
 int FUN_004ba1f4(int);
 int resetFlagGroup1F(int);
 int dataTable33Load(int);
@@ -26,10 +26,10 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
-extern int FUN_0015a21c(int);
+extern int floatPairClear(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_0022677c. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002bf464. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031e198. */
@@ -37,7 +37,6 @@ extern int FUN_0015a21c(int);
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: FUN_00407978. */
 /* Supplied declaration required: FUN_004930e4. */
-/* Supplied declaration required: FUN_004ba078. */
 /* Supplied declaration required: FUN_004ba1f4. */
 /* Supplied declaration required: resetFlagGroup1F. */
 /* Supplied declaration required: dataTable33Load. */
@@ -52,7 +51,7 @@ void FUN_004b6fc4(int param_1)
   
   *(unsigned char *)(param_1 + 0x24) = 0;
   *(unsigned int *)(param_1 + 0x20) = 0;
-  FUN_004ba078();
+  mikadoInitUpdateHandlers(reinterpret_cast<UiScreen*>(param_1));
   FUN_004ba1f4(param_1 + 0x9c);
   *(unsigned int *)(param_1 + 0x34) = 0xffffffff;
   asdTMTexTableLoadTmx(0x18,0);
@@ -63,10 +62,10 @@ void FUN_004b6fc4(int param_1)
   FUN_004930e4(0);
   dataTable33Load(param_1 + 0x1114);
   resetFlagGroup1F(param_1 + 0x9c);
-  FUN_002804b0("mikado/talk.bf",param_1 + 0x1138,0);
-  FUN_002804b0("mikado/talk.mbm",param_1 + 0x113c,0);
-  FUN_002804b0("mikado/check.bf",param_1 + 0x1144,0);
-  FUN_002804b0("mikado/check.mbm",param_1 + 0x1148,0);
+  asdLoadFileAsyncSimple("mikado/talk.bf",param_1 + 0x1138,0);
+  asdLoadFileAsyncSimple("mikado/talk.mbm",param_1 + 0x113c,0);
+  asdLoadFileAsyncSimple("mikado/check.bf",param_1 + 0x1144,0);
+  asdLoadFileAsyncSimple("mikado/check.mbm",param_1 + 0x1148,0);
   *(unsigned int *)(param_1 + 0x28) = 1;
   *(unsigned int *)(param_1 + 0x2c) = 0;
   *(unsigned int *)(param_1 + 0x1130) = 0;
@@ -91,7 +90,7 @@ void FUN_004b6fc4(int param_1)
   asdOperatorNew();
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0015a21c(temp_v0 + 0x4f0);
+    temp_v1 = floatPairClear(temp_v0 + 0x4f0);
     temp_v1 = temp_v1 - 0x4f0;
   }
   *(int *)(param_1 + 0x1218) = temp_v1;

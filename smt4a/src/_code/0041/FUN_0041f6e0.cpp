@@ -60,7 +60,7 @@ extern void sysMemClear(void *block, s32 size);
 extern void wordPairCopy(void *dest, void *src);
 extern s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 extern s32 FUN_0040ab8c(u32 request);
-extern void FUN_003c12d8(s32 step, s32 arg);
+extern void saveLoadProcessCreate(s32 step, s32 arg);
 extern void FUN_00275bc8(void);
 extern void FUN_002a7324(s32 arg);
 extern void FUN_0023b45c(s32 arg);
@@ -93,14 +93,14 @@ void FUN_0041f6e0(SaveLoadTask *task)
         }
         task->slotIndex = task->slotIndex + 1;
         if ((s32)task->slotIndex < 1) {
-            FUN_003c12d8(task->slotIndex + 1, 1);
+            saveLoadProcessCreate(task->slotIndex + 1, 1);
             return;
         }
         if (task->hasNextStage == 0) {
             task->state = 2;
             return;
         }
-        FUN_003c12d8(task->slotIndex + 1, 1);
+        saveLoadProcessCreate(task->slotIndex + 1, 1);
         task->state = task->state + 1;
         /* fall through */
     case 1:
@@ -122,7 +122,7 @@ void FUN_0041f6e0(SaveLoadTask *task)
         }
         task->slotIndex = task->slotIndex + 1;
         if ((s32)task->slotIndex < SLOT_COUNT) {
-            FUN_003c12d8(task->slotIndex + 1, 1);
+            saveLoadProcessCreate(task->slotIndex + 1, 1);
             return;
         }
         task->slotsDone = 1;

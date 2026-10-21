@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00293268(int);
+int partyPanelToggleRefresh(int);
 int FUN_002932d8(int);
 int FUN_002937e0(void);
 int FUN_002c1658(int, int);
@@ -12,7 +12,7 @@ int __aeabi_idivmod(unsigned int, unsigned int);
 
 extern int g_partyPanel; /* 0x43dcf0 */
 
-/* Supplied declaration required: FUN_00293268. */
+/* Supplied declaration required: partyPanelToggleRefresh. */
 /* Supplied declaration required: FUN_002932d8. */
 /* Supplied declaration required: FUN_002937e0. */
 extern int objectPartRunUnlessLocked(int);
@@ -79,7 +79,7 @@ LAB_0026cf00:
   if (temp_v3 == 0) {
     return 0;
   }
-  FUN_00293268(param_1);
+  partyPanelToggleRefresh(param_1);
   FUN_002937e0();
   return 1;
 }

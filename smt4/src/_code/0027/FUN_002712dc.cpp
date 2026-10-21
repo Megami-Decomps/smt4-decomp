@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002712dc` (_code @ 0x2712dc, 0x250 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ForwardEffect.h"
 
 extern "C" {
 
@@ -20,10 +21,10 @@ int FUN_0021df18(void);
 int mapDestroyOverlayModel(...);
 int FUN_0027efb8(...);
 int FUN_0027f164(...);
-int FUN_0027f414(void);
+float mathSnapHeading8(float angle);
 int FUN_0027f94c(...);
 int FUN_00282228(...);
-int FUN_00282318(void);
+int calcHeadingRoundedToCardinalDirection(void);
 int FUN_002c29d8(...);
 int FUN_002c86ec(void);
 int FUN_002d1e4c(void);
@@ -40,13 +41,13 @@ int mapIfReleaseSlot2(void);
 int FUN_00248114(void);
 int mapIfReleaseSlot3(void);
 int FUN_0027d7b0(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int FUN_002bf810(...);
-int FUN_002c8b80(...);
+int lmapFindNearestMatchingTargetPoint(...);
 
 int FUN_001b4478(void);
 int FUN_001fa760(void);
-int FUN_0024f034(...);
+int mapIfActivateRecord(...);
 int FUN_0025247c(...);
 int mapInterfaceSetStateTwo(void);
 int mapIfSetMode1(void);
@@ -54,12 +55,11 @@ int FUN_0027fae4(void);
 int FUN_0027fc14(...);
 int mathPositionHeadingDegrees(void);
 int buttonHelpSetPreset(...);
-int FUN_002d3e58(void);
+int mapPartDestroy(void);
 int mapIfReleaseSlot0(void);
 
 int FUN_001f9188(void);
 int FUN_0025bc80(void);
-int FUN_0025bdc4(...);
 int FUN_0027fca0(...);
 int FUN_00280988(void);
 int FUN_002879dc(...);
@@ -67,8 +67,8 @@ int mapEnemyAdvancePursuit(void);
 int rt_memcpy_w(...);
 
 int CONCAT44(...);
-int FUN_001e2670(void);
-int FUN_001e26e8(void);
+float mathSnapHeading16(float angle);
+float calcHeadingRoundedTo32Directions(float angle);
 int FUN_001e2be4(void);
 int FUN_002562e4(...);
 int FUN_00256370(...);
@@ -76,7 +76,7 @@ int FUN_0027f48c(...);
 int FUN_0027f848(void);
 int FUN_0027f958(...);
 int FUN_0027fa98(...);
-int FUN_00280364(void);
+int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int FUN_00281e34(void);
 int FUN_00282390(void);
@@ -114,7 +114,7 @@ extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int *DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e58; /* 0x447e58 */
+extern int g_deferredMapModels; /* 0x447e58 */
 extern int *g_lmapScene; /* 0x447e88 */
 extern int iRam00447e8c; /* 0x447e8c */
 extern float DAT_0049f8f8; /* 0x49f8f8 */
@@ -210,8 +210,6 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0019db68. */
 /* Supplied declaration required: FUN_001a9008. */
 /* Supplied declaration required: FUN_001b4478. */
-/* Supplied declaration required: FUN_001e2670. */
-/* Supplied declaration required: FUN_001e26e8. */
 /* Supplied declaration required: FUN_001e2be4. */
 /* Supplied declaration required: FUN_001f87d4. */
 /* Supplied declaration required: FUN_001f9188. */
@@ -228,7 +226,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00248114. */
 /* Supplied declaration required: mapDestroyOverlayModel. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
-/* Supplied declaration required: FUN_0024f034. */
+/* Supplied declaration required: mapIfActivateRecord. */
 /* Supplied declaration required: FUN_0025247c. */
 /* Supplied declaration required: FUN_002562e4. */
 /* Supplied declaration required: FUN_00256370. */
@@ -236,17 +234,15 @@ extern int inputIsQuestCancelPressed(void);
 extern unsigned int FUN_00256540(void);
 extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
-/* Supplied declaration required: FUN_0025bdc4. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapIfSetMode1. */
-extern int FUN_0027d748(void);
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027efb8. */
 /* Supplied declaration required: FUN_0027f164. */
-/* Supplied declaration required: FUN_0027f414. */
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f94c. */
@@ -255,13 +251,13 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fae4. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_0027fca0. */
-/* Supplied declaration required: FUN_00280364. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00281e34. */
-extern int FUN_002820a4(void);
+extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_00282228. */
-/* Supplied declaration required: FUN_00282318. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002879dc. */
@@ -272,7 +268,7 @@ extern int FUN_002896bc(void);
 /* Supplied declaration required: FUN_00291e40. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029be5c. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_002bf810. */
@@ -283,10 +279,10 @@ extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002c5be8. */
 extern unsigned int asdModelGetStatic38(void);
 /* Supplied declaration required: FUN_002c86ec. */
-/* Supplied declaration required: FUN_002c8b80. */
+/* Supplied declaration required: lmapFindNearestMatchingTargetPoint. */
 /* Supplied declaration required: FUN_002d1e4c. */
 /* Supplied declaration required: mapEnemyAdvancePursuit. */
-/* Supplied declaration required: FUN_002d3e58. */
+/* Supplied declaration required: mapPartDestroy. */
 /* Supplied declaration required: mapIfReleaseSlot0. */
 /* Supplied declaration required: entryOwnerSetPosition. */
 /* Supplied declaration required: FUN_003a66c4. */
@@ -488,7 +484,7 @@ void FUN_002712dc(void)
             FUN_0027fa98(3);
             FUN_0029be5c(0x14,1);
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
         }
@@ -595,10 +591,10 @@ void FUN_002712dc(void)
           temp_v19 = temp_v19 - 360.0f;
         }
         if (DAT_004474f4[0x31] != 3) {
-          FUN_001e26e8();
+          temp_v19 = calcHeadingRoundedTo32Directions(temp_v19);
         }
         else {
-          FUN_001e2670();
+          temp_v19 = mathSnapHeading16(temp_v19);
         }
         temp_v19 = -temp_v19;
         temp_v35 = (float)g_lmapScene[0x14];
@@ -771,7 +767,7 @@ void FUN_002712dc(void)
         FUN_0027fa98(0x1f);
         FUN_0029be5c(0x16,1);
       }
-      FUN_00280364();
+      mapSelectContainingRegions();
       if (((unsigned int)piVar22 & 0x800) != 0) {
         mapEnemyAdvancePursuit();
       }
@@ -810,7 +806,7 @@ void FUN_002712dc(void)
     }
     *(unsigned int *)(temp_v31 + 0xd94) = 0;
     FUN_002804ec(g_lmapScene + 10);
-    FUN_00280364();
+    mapSelectContainingRegions();
     return;
   case 2:
     fStack_28 = temp_v35;
@@ -880,13 +876,13 @@ void FUN_002712dc(void)
                 if (g_lmapScene[2] == 5) {
                   FUN_0027fca0(0xffffffff);
                   FUN_0025bc80();
-                  FUN_0025bdc4();
+                  effectSpawnAheadOfScene(30.0f,20.0f);
                 }
                 temp_v13 = g_lmapScene[2];
 joined_r0x002c9850:
                 if (temp_v13 == 6) {
                   FUN_0025bc80();
-                  FUN_0025bdc4();
+                  effectSpawnAheadOfScene(-130.0f,20.0f);
                 }
                 goto LAB_002c9910;
               }
@@ -894,7 +890,7 @@ joined_r0x002c9850:
                 if (g_lmapScene[2] == 5) {
                   FUN_0027fca0(0xffffffff);
                   FUN_0025bc80();
-                  FUN_0025bdc4();
+                  effectSpawnAheadOfScene(30.0f,20.0f);
                 }
                 temp_v13 = g_lmapScene[2];
                 goto joined_r0x002c9850;
@@ -903,7 +899,7 @@ joined_r0x002c9850:
                 if (g_lmapScene[2] == 5) {
                   FUN_0027fca0(0xffffffff);
                   FUN_0025bc80();
-                  FUN_0025bdc4();
+                  effectSpawnAheadOfScene(-130.0f,20.0f);
                 }
                 temp_v13 = g_lmapScene[2];
                 goto joined_r0x002c980c;
@@ -913,12 +909,12 @@ joined_r0x002c9850:
               if (g_lmapScene[2] == 5) {
                 FUN_0027fca0(0xffffffff);
                 FUN_0025bc80();
-                FUN_0025bdc4();
+                effectSpawnAheadOfScene(-130.0f,20.0f);
               }
               temp_v13 = g_lmapScene[2];
 joined_r0x002c980c:
               if (temp_v13 == 6) {
-                FUN_0025bdc4();
+                effectSpawnAheadOfScene(30.0f,20.0f);
                 FUN_0025bc80();
               }
 LAB_002c9910:
@@ -1005,9 +1001,7 @@ joined_r0x002c99a8:
             unaff_r4 = afStack_2e8[temp_v13 * 2 + 1];
           }
           if ((int)unaff_r5 >> 0x10 != 0) {
-            VectorSignedToFloat((int)unaff_r4 >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-            VectorSignedToFloat((int)romwright_subpiece_4_2_0(unaff_r4,0),(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_0025bdc4((int)unaff_r4 >> 0x10,(int)romwright_subpiece_4_2_0(unaff_r4,0));
+            effectSpawnAheadOfScene((f32)(s16)unaff_r4,(f32)((s32)unaff_r4 >> 16));
           }
           temp_v27 = (float)VectorSignedToFloat((int)romwright_subpiece_4_2_0(unaff_r5,0),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v36 = (float)g_lmapScene[0x14] * temp_v35;
@@ -1245,7 +1239,7 @@ LAB_002c9a64:
       piVar22[2] = 0;
     }
 LAB_002c9a70:
-    FUN_00280364();
+    mapSelectContainingRegions();
     FUN_00280988();
     piVar22 = g_lmapScene;
     piVar23 = g_lmapScene + 7;
@@ -1506,7 +1500,7 @@ LAB_002c9a70:
             if (temp_v7 != 0) {
               if (temp_v7 == 1) {
                 piVar22[2] = piVar22[2] + 1;
-                FUN_0024f034(1,DAT_0049f99c);
+                mapIfActivateRecord(1,DAT_0049f99c);
                 piVar22 = g_lmapScene;
                 if (g_lmapScene[2] >= 3) {
                   temp_v7 = g_lmapScene[1];
@@ -1569,7 +1563,7 @@ LAB_002c9a70:
               FUN_0027fc14(10);
               DAT_004474f4[0x2b] = -1;
               buttonHelpSetPreset(0xdb);
-              FUN_0024f034(1,DAT_0049f99c);
+              mapIfActivateRecord(1,DAT_0049f99c);
               FUN_001fa760();
               piVar22 = g_lmapScene;
               temp_v7 = piVar22[1];
@@ -1598,7 +1592,7 @@ LAB_002c9a70:
         }
         else {
           piVar22[2] = piVar22[2] + 1;
-          FUN_0024f034(1,DAT_0049f99c);
+          mapIfActivateRecord(1,DAT_0049f99c);
           temp_v7 = FUN_0027ee9c();
           piVar22 = g_lmapScene;
           if (temp_v7 != 0) {
@@ -1615,7 +1609,7 @@ LAB_002c9a70:
               piVar22 = g_lmapScene;
               g_lmapScene[0x15] = 0;
               piVar22[0x16] = temp_v13;
-              FUN_0024f034(0,DAT_0049f99c);
+              mapIfActivateRecord(0,DAT_0049f99c);
               mapIfReleaseSlot0();
               piVar22 = g_lmapScene;
               g_lmapScene[1] = 0x5a;
@@ -1634,7 +1628,7 @@ LAB_002c9a70:
             }
           }
           else {
-            FUN_002d3e58();
+            mapPartDestroy();
             temp_v7 = g_lmapScene[1];
             piVar22 = g_lmapScene;
             piVar22[1] = temp_v7 + 1;
@@ -1650,7 +1644,7 @@ LAB_002c9a70:
         temp_v7 = piVar22[2];
         piVar22[2] = temp_v7 + 1;
         if (temp_v7 + 1 == 0x14) {
-          FUN_002d3e58();
+          mapPartDestroy();
           mapIfSetMode1();
           temp_v6 = 8;
           FUN_0027fa98(temp_v6);
@@ -1731,7 +1725,7 @@ LAB_002c9a70:
             if (temp_v7 != 0) {
               if (temp_v7 == 1) {
                 piVar22[2] = piVar22[2] + 1;
-                FUN_0024f034(1,DAT_0049f99c);
+                mapIfActivateRecord(1,DAT_0049f99c);
                 piVar22 = g_lmapScene;
                 if (g_lmapScene[2] >= 3) {
                   temp_v7 = g_lmapScene[1];
@@ -1764,7 +1758,7 @@ LAB_002c9a70:
               FUN_0027fc14(0xb);
               DAT_004474f4[0x2b] = -2;
               buttonHelpSetPreset(0xdb);
-              FUN_0024f034(1,DAT_0049f99c);
+              mapIfActivateRecord(1,DAT_0049f99c);
               FUN_0028250c();
               FUN_00282390();
               FUN_001b4478();
@@ -1797,7 +1791,7 @@ LAB_002c9a70:
         }
         else {
           piVar22[2] = piVar22[2] + 1;
-          FUN_0024f034(1,DAT_0049f99c);
+          mapIfActivateRecord(1,DAT_0049f99c);
           temp_v7 = FUN_0027ee9c();
           piVar22 = g_lmapScene;
           if (temp_v7 != 0) {
@@ -1814,7 +1808,7 @@ LAB_002c9a70:
               piVar22 = g_lmapScene;
               g_lmapScene[0x15] = 0;
               piVar22[0x16] = temp_v31;
-              FUN_0024f034(0,DAT_0049f99c);
+              mapIfActivateRecord(0,DAT_0049f99c);
               mapIfReleaseSlot1();
               piVar22 = g_lmapScene;
               g_lmapScene[1] = 0x5a;
@@ -1924,7 +1918,7 @@ LAB_002c9a70:
           piVar22[1] = temp_v7 + 1;
           piVar22[2] = 0;
           FUN_002804ec(g_lmapScene + 10);
-          FUN_00280364();
+          mapSelectContainingRegions();
           return;
         }
         if (temp_v7 < 0x37) {
@@ -1944,7 +1938,7 @@ LAB_002c9a70:
             piVar22[1] = temp_v7 + 1;
             piVar22[2] = 0;
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
           if (temp_v7 == 0x33) {
@@ -1952,7 +1946,7 @@ LAB_002c9a70:
             g_lmapScene[2] = temp_v7 + 1;
             if (temp_v7 + 1 < 0x15) {
               FUN_002804ec(g_lmapScene + 10);
-              FUN_00280364();
+              mapSelectContainingRegions();
               return;
             }
             FUN_0027fae4();
@@ -1980,7 +1974,7 @@ LAB_002c9a70:
           if (temp_v7 != 0x34) {
             if (temp_v7 != 0x35) {
               FUN_002804ec(g_lmapScene + 10);
-              FUN_00280364();
+              mapSelectContainingRegions();
               return;
             }
             temp_v18 = (float)g_lmapScene[0x1a];
@@ -2000,7 +1994,7 @@ LAB_002c9a70:
             }
             if ((g_lmapScene[2] < 0x1f) || (temp_v7 = mapIfHasSelection(), temp_v7 != 0)) {
               FUN_002804ec(g_lmapScene + 10);
-              FUN_00280364();
+              mapSelectContainingRegions();
               return;
             }
             mapInterfaceSetStateTwo();
@@ -2021,7 +2015,7 @@ LAB_002c9a70:
             piVar22[2] = piVar22[2] + 1;
             if (temp_v18 <= 0.0f) {
               FUN_002804ec(g_lmapScene + 10);
-              FUN_00280364();
+              mapSelectContainingRegions();
               return;
             }
           }
@@ -2032,7 +2026,7 @@ LAB_002c9a70:
             mapDestroySecondaryModel();
             FUN_0027fa98(0xc);
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
           if (temp_v7 != 0x5a) {
@@ -2040,13 +2034,13 @@ LAB_002c9a70:
               if ((temp_v7 != 0x5c) ||
                  (temp_v7 = g_lmapScene[2], g_lmapScene[2] = temp_v7 + 1, temp_v7 + 1 < 4)) {
                 FUN_002804ec(g_lmapScene + 10);
-                FUN_00280364();
+                mapSelectContainingRegions();
                 return;
               }
               temp_v6 = 1;
               FUN_0027fa98(temp_v6);
               FUN_002804ec(g_lmapScene + 10);
-              FUN_00280364();
+              mapSelectContainingRegions();
               return;
             }
             mapDestroySecondaryModel();
@@ -2057,7 +2051,7 @@ LAB_002c9a70:
         piVar22[1] = temp_v7 + 1;
         piVar22[2] = 0;
         FUN_002804ec(g_lmapScene + 10);
-        FUN_00280364();
+        mapSelectContainingRegions();
         return;
       }
       switch(temp_v7) {
@@ -2074,7 +2068,7 @@ LAB_002c9a70:
         FUN_0027fc14(0xc);
         DAT_004474f4[0x2b] = -3;
         buttonHelpSetPreset(0xdb);
-        FUN_0024f034(1,DAT_0049f99c);
+        mapIfActivateRecord(1,DAT_0049f99c);
         FUN_0028250c();
         FUN_00282390();
         FUN_00248114();
@@ -2085,7 +2079,7 @@ LAB_002c9a70:
         break;
       case 1:
         g_lmapScene[2] = g_lmapScene[2] + 1;
-        FUN_0024f034(1,DAT_0049f99c);
+        mapIfActivateRecord(1,DAT_0049f99c);
         piVar22 = g_lmapScene;
         if (g_lmapScene[2] >= 3) {
           temp_v7 = g_lmapScene[1];
@@ -2097,11 +2091,11 @@ LAB_002c9a70:
         break;
       case 2:
         g_lmapScene[2] = g_lmapScene[2] + 1;
-        FUN_0024f034(1,DAT_0049f99c);
+        mapIfActivateRecord(1,DAT_0049f99c);
         temp_v7 = FUN_0027ee9c();
         if (temp_v7 != 0) {
           FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
-          temp_v7 = FUN_0027d748();
+          temp_v7 = dataTableGetRecord23();
           piVar22 = g_lmapScene;
           if (DAT_0049f968 != 0) {
             temp_v17 = (float)g_lmapScene[0x14] * temp_v18;
@@ -2141,7 +2135,7 @@ LAB_002c9a70:
             piVar22 = g_lmapScene;
             g_lmapScene[0x15] = 0;
             piVar22[0x16] = 0x40a00000;
-            FUN_0024f034(0,DAT_0049f99c);
+            mapIfActivateRecord(0,DAT_0049f99c);
             mapIfReleaseSlot2();
             piVar22 = g_lmapScene;
             g_lmapScene[1] = 0x5a;
@@ -2328,7 +2322,7 @@ LAB_002e94f0:
             ((int)(*(unsigned int *)((unsigned char *)&uStack_54 + 4)) < 0x3f000001)) && ((unsigned int)uStack_4c < 0xbf000001)) &&
           (((int)(unsigned int)uStack_4c < 0x3f000001 && (g_lmapScene[2] < 0x1f)))))) {
         FUN_002804ec(g_lmapScene + 10);
-        FUN_00280364();
+        mapSelectContainingRegions();
         return;
       }
       g_lmapScene[0x16] = 0x40a00000;
@@ -2336,7 +2330,7 @@ LAB_002e94f0:
       FUN_0027fa98(temp_v6);
     }
     FUN_002804ec(g_lmapScene + 10);
-    FUN_00280364();
+    mapSelectContainingRegions();
     return;
   case 0xd:
     fStack_3c = temp_v17;
@@ -2406,7 +2400,7 @@ LAB_002e94f0:
             }
             else {
               g_lmapScene[2] = g_lmapScene[2] + 1;
-              FUN_0024f034(1,DAT_0049f99c);
+              mapIfActivateRecord(1,DAT_0049f99c);
               temp_v7 = FUN_0027ee9c();
               piVar22 = g_lmapScene;
               if (temp_v7 != 0) {
@@ -2423,7 +2417,7 @@ LAB_002e94f0:
                 fStack_38 = (float)piVar22[0xc];
                 uStack_4c = romwright_piece_4_4(&fStack_34,(unsigned int)uStack_4c);
                 uStack_44 = romwright_piece_4_4(piVar22[10],0xffffffff);
-                FUN_002c8b80(2,10,0x66,(int)&uStack_44 + 4);
+                lmapFindNearestMatchingTargetPoint(2,10,0x66,(int)&uStack_44 + 4);
                 piVar22 = g_lmapScene;
                 fStack_34 = fStack_34 + temp_v18;
                 if (fStack_34 < temp_v17) {
@@ -2456,7 +2450,7 @@ LAB_002e94f0:
                   piVar22 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar22[0x16] = 0x40a00000;
-                  FUN_0024f034(0,DAT_0049f99c);
+                  mapIfActivateRecord(0,DAT_0049f99c);
                   mapIfReleaseSlot2();
                   piVar22 = g_lmapScene;
                   g_lmapScene[1] = 0x5a;
@@ -2467,7 +2461,7 @@ LAB_002e94f0:
           }
           else {
             g_lmapScene[2] = g_lmapScene[2] + 1;
-            FUN_0024f034(1,DAT_0049f99c);
+            mapIfActivateRecord(1,DAT_0049f99c);
             piVar22 = g_lmapScene;
             if (g_lmapScene[2] >= 3) {
               temp_v7 = g_lmapScene[1];
@@ -2491,7 +2485,7 @@ LAB_002e94f0:
           FUN_0027fc14(0xc);
           DAT_004474f4[0x2b] = -3;
           buttonHelpSetPreset(0xdb);
-          FUN_0024f034(1,DAT_0049f99c);
+          mapIfActivateRecord(1,DAT_0049f99c);
           FUN_0028250c();
           FUN_00282390();
           FUN_00248114();
@@ -2509,7 +2503,7 @@ LAB_002e94f0:
             g_lmapScene[1] = 0x5b;
             piVar22[2] = 0;
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
           if (temp_v7 == 0x5b) {
@@ -2518,13 +2512,13 @@ LAB_002e94f0:
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar22[2] = 0;
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
           if ((temp_v7 != 0x5c) ||
              (temp_v7 = g_lmapScene[2], g_lmapScene[2] = temp_v7 + 1, temp_v7 + 1 < 4)) {
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
           temp_v6 = 1;
@@ -2563,7 +2557,7 @@ LAB_002e94f0:
       }
     }
     FUN_002804ec(g_lmapScene + 10);
-    FUN_00280364();
+    mapSelectContainingRegions();
     return;
   case 0xf:
     fStack_28 = temp_v35;
@@ -2595,7 +2589,7 @@ LAB_002e94f0:
             }
             else {
               piVar22[2] = piVar22[2] + 1;
-              FUN_0024f034(1,DAT_0049f99c);
+              mapIfActivateRecord(1,DAT_0049f99c);
               temp_v7 = FUN_0027ee9c();
               piVar22 = g_lmapScene;
               if (temp_v7 != 0) {
@@ -2612,7 +2606,7 @@ LAB_002e94f0:
                   piVar22 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar22[0x16] = temp_v31;
-                  FUN_0024f034(0,DAT_0049f99c);
+                  mapIfActivateRecord(0,DAT_0049f99c);
                   piVar22 = g_lmapScene;
                   g_lmapScene[1] = 0x5a;
                   piVar22[2] = 0;
@@ -2622,7 +2616,7 @@ LAB_002e94f0:
           }
           else {
             piVar22[2] = piVar22[2] + 1;
-            FUN_0024f034(1,DAT_0049f99c);
+            mapIfActivateRecord(1,DAT_0049f99c);
             piVar22 = g_lmapScene;
             if (g_lmapScene[2] >= 3) {
               temp_v7 = g_lmapScene[1];
@@ -2681,7 +2675,7 @@ LAB_002e94f0:
           FUN_0027fc14(10);
           DAT_004474f4[0x2b] = -1;
           buttonHelpSetPreset(0xdb);
-          FUN_0024f034(1,DAT_0049f99c);
+          mapIfActivateRecord(1,DAT_0049f99c);
           temp_v7 = g_lmapScene[1];
           piVar22 = g_lmapScene;
           piVar22[1] = temp_v7 + 1;
@@ -2759,7 +2753,7 @@ LAB_002e94f0:
               if (temp_v7 != 1) {
                 if (temp_v7 == 2) {
                   g_lmapScene[2] = g_lmapScene[2] + 1;
-                  FUN_0024f034(1,DAT_0049f99c);
+                  mapIfActivateRecord(1,DAT_0049f99c);
                   temp_v7 = FUN_0027ee9c();
                   if (temp_v7 != 0) {
                     FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
@@ -2781,7 +2775,7 @@ LAB_002e94f0:
                       piVar22 = g_lmapScene;
                       g_lmapScene[0x15] = 0;
                       piVar22[0x16] = 0x40a00000;
-                      FUN_0024f034(0,DAT_0049f99c);
+                      mapIfActivateRecord(0,DAT_0049f99c);
                       mapIfReleaseSlot2();
                       piVar22 = g_lmapScene;
                       g_lmapScene[1] = 0x5a;
@@ -2792,7 +2786,7 @@ LAB_002e94f0:
               }
               else {
                 g_lmapScene[2] = g_lmapScene[2] + 1;
-                FUN_0024f034(1,DAT_0049f99c);
+                mapIfActivateRecord(1,DAT_0049f99c);
                 piVar22 = g_lmapScene;
                 if (g_lmapScene[2] >= 3) {
                   temp_v7 = g_lmapScene[1];
@@ -2828,7 +2822,7 @@ LAB_002e94f0:
               FUN_0027fc14(10);
               DAT_004474f4[0x2b] = -1;
               buttonHelpSetPreset(0xdb);
-              FUN_0024f034(1,DAT_0049f99c);
+              mapIfActivateRecord(1,DAT_0049f99c);
               FUN_0028250c();
               FUN_00282390();
               FUN_00248114();
@@ -2976,8 +2970,8 @@ LAB_002e94f0:
         FUN_002bf810(0x10000e7);
       }
       if (g_lmapScene[2] == 0x1e) {
-        FUN_0029c3c0(0,10,0xff);
-        FUN_0029c3c0(1,10,0xff);
+        slotSetRequest(0,10,0xff);
+        slotSetRequest(1,10,0xff);
       }
       if ((g_lmapScene[2] >= 0x1f) && (temp_v7 = FUN_002896bc(), temp_v7 != 0)) {
         temp_v7 = g_lmapScene[1];
@@ -3021,7 +3015,7 @@ LAB_002e94f0:
               if (temp_v7 != 1) {
                 if (temp_v7 == 2) {
                   g_lmapScene[2] = g_lmapScene[2] + 1;
-                  FUN_0024f034(1,DAT_0049f99c);
+                  mapIfActivateRecord(1,DAT_0049f99c);
                   temp_v7 = FUN_0027ee9c();
                   piVar22 = g_lmapScene;
                   if (temp_v7 != 0) {
@@ -3038,7 +3032,7 @@ LAB_002e94f0:
                       piVar22 = g_lmapScene;
                       g_lmapScene[0x15] = 0;
                       piVar22[0x16] = temp_v31;
-                      FUN_0024f034(0,DAT_0049f99c);
+                      mapIfActivateRecord(0,DAT_0049f99c);
                       mapIfReleaseSlot3();
                       piVar22 = g_lmapScene;
                       g_lmapScene[1] = 0x5a;
@@ -3049,7 +3043,7 @@ LAB_002e94f0:
               }
               else {
                 g_lmapScene[2] = g_lmapScene[2] + 1;
-                FUN_0024f034(1,DAT_0049f99c);
+                mapIfActivateRecord(1,DAT_0049f99c);
                 piVar22 = g_lmapScene;
                 if (g_lmapScene[2] >= 3) {
                   temp_v7 = g_lmapScene[1];
@@ -3081,7 +3075,7 @@ LAB_002e94f0:
               FUN_0027fc14(0xd);
               DAT_004474f4[0x2b] = 1;
               buttonHelpSetPreset(0xda);
-              FUN_0024f034(1,DAT_0049f99c);
+              mapIfActivateRecord(1,DAT_0049f99c);
               FUN_0019db68();
               piVar22 = g_lmapScene;
               g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -3143,10 +3137,10 @@ LAB_002d472c:
               temp_v7 = randBetween(0,1);
               FUN_00291e40(temp_v7 + 0x100023c);
               if ((DAT_0049f958 == 0x3303001) && (temp_v7 = gameFlagIsSet(0x292), temp_v7 != 0)) {
-                FUN_0029c3c0(0,0xf,0xff);
+                slotSetRequest(0,0xf,0xff);
                 temp_v8 = 0xf;
                 temp_v6 = 1;
-                FUN_0029c3c0(temp_v6,temp_v8,0xff);
+                slotSetRequest(temp_v6,temp_v8,0xff);
               }
               else {
                 mapInterfaceSetStateTwo();
@@ -3206,7 +3200,7 @@ LAB_002d472c:
             piVar22 = g_lmapScene;
             g_lmapScene[0x15] = 0;
             piVar22[0x16] = temp_v31;
-            FUN_0024f034(0,DAT_0049f99c);
+            mapIfActivateRecord(0,DAT_0049f99c);
             mapIfReleaseSlot3();
             piVar22 = g_lmapScene;
             g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -3217,7 +3211,7 @@ LAB_002d472c:
       else {
         temp_v8 = 10;
         temp_v6 = 0;
-        FUN_0029c3c0(temp_v6,temp_v8,0xff);
+        slotSetRequest(temp_v6,temp_v8,0xff);
         piVar22 = g_lmapScene;
         g_lmapScene[1] = g_lmapScene[1] + 1;
         piVar22[2] = 0;
@@ -3309,7 +3303,7 @@ LAB_002d472c:
             }
             else {
               g_lmapScene[2] = g_lmapScene[2] + 1;
-              FUN_0024f034(1,DAT_0049f99c);
+              mapIfActivateRecord(1,DAT_0049f99c);
               temp_v7 = FUN_0027ee9c();
               piVar22 = g_lmapScene;
               if (temp_v7 != 0) {
@@ -3320,7 +3314,7 @@ LAB_002d472c:
                 fStack_38 = (float)piVar22[0xc];
                 uStack_4c = romwright_piece_4_4(&fStack_34,(unsigned int)uStack_4c);
                 uStack_44 = romwright_piece_4_4(piVar22[10],1);
-                FUN_002c8b80(2,10,0x66,(int)&uStack_44 + 4);
+                lmapFindNearestMatchingTargetPoint(2,10,0x66,(int)&uStack_44 + 4);
                 piVar22 = g_lmapScene;
                 temp_v34 = 180.0f;
                 fStack_34 = fStack_34 + 180.0f;
@@ -3353,7 +3347,7 @@ LAB_002d472c:
                   piVar22 = g_lmapScene;
                   g_lmapScene[0x15] = 0;
                   piVar22[0x16] = 0x40a00000;
-                  FUN_0024f034(0,DAT_0049f99c);
+                  mapIfActivateRecord(0,DAT_0049f99c);
                   mapIfReleaseSlot3();
                   piVar22 = g_lmapScene;
                   g_lmapScene[1] = 0x5a;
@@ -3364,7 +3358,7 @@ LAB_002d472c:
           }
           else {
             g_lmapScene[2] = g_lmapScene[2] + 1;
-            FUN_0024f034(1,DAT_0049f99c);
+            mapIfActivateRecord(1,DAT_0049f99c);
             piVar22 = g_lmapScene;
             if (g_lmapScene[2] >= 3) {
               temp_v7 = g_lmapScene[1];
@@ -3395,7 +3389,7 @@ LAB_002d472c:
           FUN_0027fc14(0xd);
           DAT_004474f4[0x2b] = 1;
           buttonHelpSetPreset(0xda);
-          FUN_0024f034(1,DAT_0049f99c);
+          mapIfActivateRecord(1,DAT_0049f99c);
           FUN_0019db68();
           piVar22 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;
@@ -3411,7 +3405,7 @@ LAB_002d472c:
             g_lmapScene[1] = 0x5b;
             piVar22[2] = 0;
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
           if (temp_v7 == 0x5b) {
@@ -3420,13 +3414,13 @@ LAB_002d472c:
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar22[2] = 0;
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
           if ((temp_v7 != 0x5c) ||
              (temp_v7 = g_lmapScene[2], g_lmapScene[2] = temp_v7 + 1, temp_v7 + 1 < 4)) {
             FUN_002804ec(g_lmapScene + 10);
-            FUN_00280364();
+            mapSelectContainingRegions();
             return;
           }
           temp_v6 = 1;
@@ -3465,7 +3459,7 @@ LAB_002d472c:
       }
     }
     FUN_002804ec(g_lmapScene + 10);
-    FUN_00280364();
+    mapSelectContainingRegions();
     return;
   case 0x17:
     temp_v7 = g_lmapScene[1];
@@ -3849,7 +3843,7 @@ LAB_002d472c:
               (0xbf000000 < uStack_1ac)) || ((int)uStack_1ac >= 0x3f000001)) {
             FUN_00281e34();
             temp_v18 = afStack_1a4[0] * 57.32484f;
-            FUN_0027f414();
+            temp_v18 = mathSnapHeading8(temp_v18);
             if (iRam00447e8c != (int)(temp_v18 * 0.125f)) {
               g_lmapScene[3] = g_lmapScene[3] + 2;
             }
@@ -3924,7 +3918,7 @@ LAB_002d472c:
       piVar22[2] = 0;
     }
     FUN_002804ec(g_lmapScene + 10);
-    FUN_00280364();
+    mapSelectContainingRegions();
     return;
   case 0x20:
     if (g_lmapScene[1] != 0) {
@@ -4109,7 +4103,7 @@ LAB_0027142c:
       if (temp_v7 + 1 >= 0x5b) {
         fStack_28 = temp_v35;
         fStack_24 = temp_v20;
-        FUN_0029c3c0(0,10,0xff);
+        slotSetRequest(0,10,0xff);
         piVar22 = g_lmapScene;
         g_lmapScene[1] = g_lmapScene[1] + 1;
         piVar22[2] = 0;
@@ -4367,7 +4361,7 @@ LAB_0027142c:
     }
     FUN_002804ec(g_lmapScene + 10);
     g_lmapScene[0x57] = 0;
-    FUN_00280364();
+    mapSelectContainingRegions();
     piVar22 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +
@@ -4489,7 +4483,7 @@ LAB_0027142c:
       break;
     case 7:
       temp_v18 = (float)g_lmapScene[0x13];
-      FUN_00282318();
+      calcHeadingRoundedToCardinalDirection();
       temp_v31 = (int)temp_v18;
       temp_v18 = 0.017453292f;
       temp_v7 = temp_v9;
@@ -4527,7 +4521,7 @@ LAB_0027142c:
       break;
     case 8:
       temp_v18 = (float)g_lmapScene[0x13];
-      FUN_00282318();
+      calcHeadingRoundedToCardinalDirection();
       temp_v31 = (int)temp_v18;
       temp_v18 = 0.017453292f;
       temp_v7 = temp_v10;
@@ -4568,7 +4562,7 @@ LAB_0027142c:
       break;
     case 9:
       temp_v18 = (float)g_lmapScene[0x13];
-      FUN_00282318();
+      calcHeadingRoundedToCardinalDirection();
       temp_v31 = (int)temp_v18;
       temp_v18 = 0.017453292f;
       temp_v7 = temp_v11;
@@ -4658,7 +4652,7 @@ LAB_0027142c:
         break;
       }
       if (temp_v7 == 1) {
-        temp_v7 = FUN_002820a4();
+        temp_v7 = vectorPairTransitionStep();
         if (temp_v7 != 0) {
           iStack_98 = piVar22[0xc];
           iStack_94 = piVar22[0xd];
@@ -4702,7 +4696,7 @@ LAB_0027142c:
         }
         break;
       }
-      if ((temp_v7 != 2) || (temp_v7 = FUN_002820a4(), temp_v7 == 0)) break;
+      if ((temp_v7 != 2) || (temp_v7 = vectorPairTransitionStep(), temp_v7 == 0)) break;
       piVar22 = DAT_004474f4;
       DAT_004474f4[1] = DAT_004474f4[1] + 1;
       piVar22[2] = 0;
@@ -4758,7 +4752,7 @@ LAB_0027142c:
         break;
       }
       if (temp_v7 == 1) {
-        temp_v7 = FUN_002820a4();
+        temp_v7 = vectorPairTransitionStep();
         if (temp_v7 != 0) {
           iStack_98 = piVar23[0xc];
           iStack_94 = piVar23[0xd];
@@ -4803,7 +4797,7 @@ LAB_0027142c:
         break;
       }
       if (temp_v7 != 2) break;
-      temp_v7 = FUN_002820a4();
+      temp_v7 = vectorPairTransitionStep();
       if (temp_v7 != 0) {
         piVar22 = DAT_004474f4;
         DAT_004474f4[1] = DAT_004474f4[1] + 1;
@@ -4869,7 +4863,7 @@ LAB_0027142c:
         break;
       }
       if (temp_v7 == 1) {
-        temp_v7 = FUN_002820a4();
+        temp_v7 = vectorPairTransitionStep();
         if (temp_v7 != 0) {
           iStack_98 = piVar22[0xc];
           iStack_94 = piVar22[0xd];
@@ -4920,7 +4914,7 @@ LAB_0027142c:
         break;
       }
       if (temp_v7 != 2) break;
-      temp_v7 = FUN_002820a4();
+      temp_v7 = vectorPairTransitionStep();
       if (temp_v7 != 0) {
         piVar22 = DAT_004474f4;
         DAT_004474f4[1] = DAT_004474f4[1] + 1;
@@ -4951,7 +4945,7 @@ LAB_0027142c:
       temp_v7 = 0;
       temp_v36 = temp_v17;
       do {
-        temp_v31 = DAT_00447e58 + temp_v7 * 0x38;
+        temp_v31 = g_deferredMapModels + temp_v7 * 0x38;
         temp_v15 = *(char *)(temp_v31 + 0xc) != '\0';
         temp_v0 = '\0';
         if (temp_v15) {
@@ -5139,7 +5133,7 @@ LAB_0027142c:
     }
     FUN_002804ec(g_lmapScene + 10);
     g_lmapScene[0x57] = 0;
-    FUN_00280364();
+    mapSelectContainingRegions();
     piVar22 = g_lmapScene;
     g_lmapScene[7] =
          (int)((float)g_lmapScene[7] +

@@ -5,7 +5,7 @@
 extern "C" {
 
 int scrGetArg(int);
-int FUN_002419c4(int, unsigned int, unsigned int, int, int, int);
+int btlEmitMessageTableEntries(int, unsigned int, unsigned int, int, int, int);
 int FUN_002980e4(int, int);
 int FUN_004f5a78(void);
 int FUN_004fb6f4(int, int, int, unsigned int, int, int, unsigned int);
@@ -23,12 +23,12 @@ extern unsigned int DAT_005710ec; /* 0x5710ec */
 extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_002419c4. */
+/* Supplied declaration required: btlEmitMessageTableEntries. */
 /* Supplied declaration required: FUN_002980e4. */
 extern int isEntryUsable(unsigned int);
 extern unsigned int btlUnitGet(unsigned int);
@@ -53,12 +53,12 @@ void FUN_003a969c(void)
   temp_v0 = scrGetArg(0);
   temp_v1 = scrGetArg(1);
   temp_v2 = isEntryUsable(g_btlEvent);
-  if (((temp_v2 == 0) || (temp_v2 = DAT_00573808, FUN_004f5a78(), temp_v2 != 0)) && (temp_v1 != 0)) {
+  if (((temp_v2 == 0) || (temp_v2 = g_btlAux, FUN_004f5a78(), temp_v2 != 0)) && (temp_v1 != 0)) {
     FUN_002980e4(temp_v1,1);
     temp_v2 = btlGetMainState();
     temp_v3 = btlUnitGet(g_btlScriptUnit);
     temp_v6 = 0;
-    temp_v7 = *(unsigned int *)(DAT_00573808 + 0x1f54);
+    temp_v7 = *(unsigned int *)(g_btlAux + 0x1f54);
     temp_v5 = 0;
     do {
       temp_v4 = btlGetMainState();
@@ -69,7 +69,7 @@ void FUN_003a969c(void)
         temp_v4 = *(int *)(temp_v2 + 0x1ed4) + (short)puVar6[2] * 0x1d0;
         FUN_004fb6f4(temp_v6 << 3,0,temp_v4,temp_v0,temp_v1,temp_v5 << 3,0xffffffff);
         temp_v4 = (int)*(short *)(temp_v4 + 0x6a);
-        FUN_002419c4(temp_v1,temp_v3,temp_v7,temp_v6,temp_v4,temp_v4);
+        btlEmitMessageTableEntries(temp_v1,temp_v3,temp_v7,temp_v6,temp_v4,temp_v4);
         temp_v6 = temp_v6 + 1;
       }
       temp_v5 = temp_v5 + 1;

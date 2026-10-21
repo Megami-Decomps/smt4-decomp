@@ -10,7 +10,7 @@ void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, void *owner);
 s32 jobIsValid(void *parent);
 void jobSetParent(void *parent, u32 handle);
-void FUN_00296c80(void *widget, s32 rows, s32 unk);
+void rowWidgetInit(void *widget, s32 rows, s32 unk);
 void colorSetRgba(void *widget, s32 a, s32 b, s32 c, s32 d);
 
 /* Creates a list box process at (x, y) in `group` and registers it with `parent`. */
@@ -38,7 +38,7 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
     box->rowCount = 10;
     box->flags |= 4;
     box->unk68 = 10;
-    FUN_00296c80(box->widget, 10, 0);
+    rowWidgetInit(box->widget, 10, 0);
     colorSetRgba(box->widget, 6, 5, 32, 32);
     box->unk34 = 0;
     return handle;

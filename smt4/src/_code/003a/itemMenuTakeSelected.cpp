@@ -19,12 +19,12 @@ typedef struct ItemMenu {
     /* 0x5A8 */ ItemEntry entries[1];
 } ItemMenu;
 
-extern int FUN_0023553c(int arg);
-extern int FUN_0028ca0c(u16 itemId);
+extern int messageMainSetTargetFlags(int arg);
+extern int playerSkillInsertFirstFree(u16 itemId);
 extern int FUN_00295c04(int amount);
 extern int FUN_0029be5c(int kind, int amount);
-extern int FUN_0023360c(void *selector);
-extern int FUN_0029c3ec(void);
+extern int flaggedValueHolderGetTotal(void *selector);
+extern int messageMainTargetIsClear(void);
 extern int sys43e188GetState(void);
 
 /* Takes the selected entry's item from the menu: when ready, plays the take sequence with its amount and moves to state 3. */
@@ -33,11 +33,11 @@ void itemMenuTakeSelected(ItemMenu *menu)
     ItemEntry *entries;
     int amount;
 
-    if (sys43e188GetState() != 0 && FUN_0029c3ec() == 1) {
-        FUN_0023553c(0);
+    if (sys43e188GetState() != 0 && messageMainTargetIsClear() == 1) {
+        messageMainSetTargetFlags(0);
         entries = menu->entries;
-        FUN_0028ca0c(entries[FUN_0023360c(menu->selector)].itemId);
-        amount = menu->entries[FUN_0023360c(menu->selector)].amount;
+        playerSkillInsertFirstFree(entries[flaggedValueHolderGetTotal(menu->selector)].itemId);
+        amount = menu->entries[flaggedValueHolderGetTotal(menu->selector)].amount;
         FUN_00295c04(-amount);
         FUN_0029be5c(1, amount);
         menu->state = 3;

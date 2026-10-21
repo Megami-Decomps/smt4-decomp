@@ -18,15 +18,15 @@ typedef struct Group {
     /* 0x22 */ s16 id;
 } Group;
 
-Group *FUN_00257510(u32 group);
+Group *dataTable12FindBySortKey(u32 group);
 Record *devilGetRecord(u32 id);
 s32 FUN_00257444(s32 id);
 
 /* Compares two refs by their group's FUN_00257444 value (higher first), then record kind, grade (higher first) and id. */
 s32 FUN_001f61c4(Ref *a, Ref *b)
 {
-    Group *groupA = FUN_00257510(a->group);
-    Group *groupB = FUN_00257510(b->group);
+    Group *groupA = dataTable12FindBySortKey(a->group);
+    Group *groupB = dataTable12FindBySortKey(b->group);
     s32 diff;
 
     devilGetRecord(a->id);

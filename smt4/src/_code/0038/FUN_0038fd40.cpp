@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019e0c0(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int FUN_0023392c(...);
 int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
@@ -27,8 +27,8 @@ extern unsigned char LAB_0039000c; /* 0x39000c */
 extern unsigned char LAB_00390028; /* 0x390028 */
 extern int g_aocMain; /* 0x432fc8 */
 
-/* Supplied declaration required: FUN_0019e0c0. */
-extern int FUN_0023360c(unsigned int *);
+/* Supplied declaration required: scrRunOpcodesStub. */
+extern int flaggedValueHolderGetTotal(unsigned int *);
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
@@ -84,7 +84,7 @@ void FUN_0038fd40(unsigned int *param_1)
       }
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {
-          FUN_0019e0c0(param_1[0xd6]);
+          scrRunOpcodesStub(param_1[0xd6]);
           (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v5);
           temp_v4 = temp_v5;
           uStack_34 = uStack_20;
@@ -116,11 +116,11 @@ void FUN_0038fd40(unsigned int *param_1)
       else {
         temp_v3 = FUN_0026b564();
         if ((temp_v3 != 0) && ((*param_1 & 0x200) != 0)) {
-          FUN_0019e0c0(param_1[0xd6]);
+          scrRunOpcodesStub(param_1[0xd6]);
           puVar5 = param_1 + 0x83;
           FUN_00233fcc(puVar5,3);
           param_1[0x82] = (unsigned int)puVar5;
-          temp_v3 = FUN_0023360c(param_1 + 0x90);
+          temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x90);
           puVar5[5] = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x678) + temp_v3 * 0x9c8 + 0x9aa);
           param_1[2] = 2;
           return;
@@ -148,7 +148,7 @@ void FUN_0038fd40(unsigned int *param_1)
       }
     }
     else {
-      FUN_0019e0c0(param_1[0xd6]);
+      scrRunOpcodesStub(param_1[0xd6]);
       temp_v1 = FUN_0026ee68(0x10);
       if (temp_v1 != 0) {
         eventQueueAddUniqueIfValid(0x100016d);

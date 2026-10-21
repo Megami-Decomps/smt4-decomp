@@ -10,7 +10,7 @@ extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
 extern unsigned int DAT_0049fd20; /* 0x49fd20 */
 
 extern int dataTable23Type1CountWithAoc(void);
-extern char *FUN_0027d748(int);
+extern char *dataTableGetRecord23(int);
 
 
 void mapDepartSetTarget(int param_1,int param_2,unsigned int param_3)
@@ -30,7 +30,7 @@ void mapDepartSetTarget(int param_1,int param_2,unsigned int param_3)
     temp_v0 = dataTable23Type1CountWithAoc();
     if (0 < temp_v0) {
       do {
-        pcVar2 = (char *)FUN_0027d748(temp_v1);
+        pcVar2 = (char *)dataTableGetRecord23(temp_v1);
         temp_v0 = (int)*pcVar2;
         temp_v2 = temp_v0 == param_1;
         if (temp_v2) {

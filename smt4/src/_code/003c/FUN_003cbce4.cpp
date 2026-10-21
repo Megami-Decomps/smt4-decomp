@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002296f4(int *, int, int, int, int, int);
 int FUN_00229a3c(int, int, int, int, int);
 int battleResetCounterAndFlag(unsigned int);
-int FUN_00240530(int, int, unsigned int, int, int);
+int btlReflectInitKind9(int, int, unsigned int, int, int);
 int *FUN_003cfc84(int *, int, int);
 int FUN_003d0220(int *, int, int);
 
@@ -25,7 +25,7 @@ extern unsigned int g_btlEvent; /* 0x435d48 */
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: battleResetCounterAndFlag. */
-/* Supplied declaration required: FUN_00240530. */
+/* Supplied declaration required: btlReflectInitKind9. */
 extern int FUN_0027e3b8(unsigned int);
 extern int nodeListCountActiveById(unsigned int, int);
 /* Supplied declaration required: FUN_003cfc84. */
@@ -57,7 +57,7 @@ unsigned int FUN_003cbce4(int *param_1,int param_2)
     FUN_003d0220(param_1,param_2,0);
     piVar2 = FUN_003cfc84(param_1,param_2,0);
     if (*(int *)(param_2 + 0x56c) == 0x20) {
-      FUN_00240530(0,param_2,*(unsigned int *)(*param_1 + 0x1e98),9,0xb);
+      btlReflectInitKind9(0,param_2,*(unsigned int *)(*param_1 + 0x1e98),9,0xb);
     }
     if (*(int *)(param_2 + 0x56c) == 0x25) {
       FUN_00229a3c(0,param_2,0,2,0);

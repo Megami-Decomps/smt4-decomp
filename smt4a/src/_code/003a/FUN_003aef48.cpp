@@ -9,7 +9,7 @@ int FUN_00167c14(...);
 int sysPlaySe(...);
 int FUN_001834a4(...);
 int msgWindowReset(void);
-int FUN_002e2680(...);
+int campCecSetObjectValue(...);
 int FUN_0032ef0c(...);
 int FUN_00344bc8(...);
 int FUN_0035a0bc(...);
@@ -40,7 +40,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: msgWindowReset. */
 extern int FUN_002e1a18(unsigned int);
-/* Supplied declaration required: FUN_002e2680. */
+/* Supplied declaration required: campCecSetObjectValue. */
 extern unsigned int overlayGetStatusScene(void);
 extern unsigned int dataTableGetEntryValue(void);
 extern int FUN_0032ecac(void);
@@ -490,7 +490,7 @@ unsigned int FUN_003aef48(int param_1)
         *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
         *(unsigned int *)(param_1 + 0xf8) = 8;
         *(unsigned int *)(param_1 + 0xec) = 0xffffffff;
-        FUN_002e2680(0);
+        campCecSetObjectValue(0);
         temp_v4 = 0x100020f;
         temp_v9 = 3;
         FUN_003d2150(temp_v4);

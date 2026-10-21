@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00293db0(unsigned int, unsigned int *);
+int objSetAnglesDegrees(unsigned int, unsigned int *);
 int FUN_00293e08(unsigned int);
 int FUN_00293e78(unsigned int, int *);
 int FUN_00297684(void);
@@ -15,10 +15,10 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00293db0. */
+/* Supplied declaration required: objSetAnglesDegrees. */
 /* Supplied declaration required: FUN_00293e08. */
 /* Supplied declaration required: FUN_00293e78. */
-extern int FUN_00293edc(unsigned int);
+extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: lmapSceneSetUnk134. */
 
@@ -36,14 +36,14 @@ unsigned int FUN_0026f784(unsigned int *param_1)
   temp_v1 = 0;
   if (param_1[7] != 0) {
     FUN_00297684();
-    temp_v0 = FUN_00293edc(param_1[7]);
+    temp_v0 = objSlotsAllEmpty(param_1[7]);
     if (temp_v0 != 0) {
       temp_v2 = *param_1;
       uStack_14 = param_1[1];
       uStack_10 = param_1[2];
       FUN_00293e78(param_1[7],&temp_v2);
       FUN_00293e08(param_1[7]);
-      FUN_00293db0(param_1[7],param_1 + 3);
+      objSetAnglesDegrees(param_1[7],param_1 + 3);
       lmapSceneSetUnk134(0);
       temp_v1 = 1;
     }

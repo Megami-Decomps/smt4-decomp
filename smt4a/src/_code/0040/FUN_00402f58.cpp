@@ -9,7 +9,7 @@ int eventQueueAddUniqueIfValid(int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_004029f4(int, int, int);
-int FUN_00403510(void);
+int contentListUpdateNavigation(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_004029f4. */
-/* Supplied declaration required: FUN_00403510. */
+/* Supplied declaration required: contentListUpdateNavigation. */
 
 
 void FUN_00402f58(int param_1)
@@ -30,7 +30,7 @@ void FUN_00402f58(int param_1)
 /* irregular: 6 native warning(s); review required */
   int temp_v0;
   
-  FUN_00403510();
+  contentListUpdateNavigation();
   if (*(char *)(param_1 + 0x104) != '\0') {
     temp_v0 = 8;
     FUN_001517b4(8,1);

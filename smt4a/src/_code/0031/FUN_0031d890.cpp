@@ -8,7 +8,7 @@ int FUN_00203b40(...);
 int FUN_002a4878(...);
 int FUN_002a4914(...);
 int FUN_002a4964(...);
-int FUN_003d1d6c(void);
+int partyPanelSortByMode(void);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -26,7 +26,7 @@ extern int gameGetSlotTable(void);
 extern unsigned int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_003d1d6c. */
+/* Supplied declaration required: partyPanelSortByMode. */
 
 
 void FUN_0031d890(void)
@@ -76,7 +76,7 @@ void FUN_0031d890(void)
     *(int *)(temp_v6 + temp_v0 + 0xa80) = (int)*pcVar4;
     pcVar4 = pcVar4 + 1;
   } while (temp_v8 != 0);
-  FUN_003d1d6c();
+  partyPanelSortByMode();
   pbVar12 = (unsigned char *)(temp_v9 + 0x1ca3);
   temp_v10 = *pbVar12 >> 2;
   temp_v9 = temp_v6 + 0xc88;

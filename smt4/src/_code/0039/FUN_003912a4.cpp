@@ -33,7 +33,7 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_002332e8. */
-extern int FUN_0023360c(unsigned int *);
+extern int flaggedValueHolderGetTotal(unsigned int *);
 /* Supplied declaration required: FUN_00240d5c. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029e924. */
@@ -82,7 +82,7 @@ void FUN_003912a4(unsigned int *param_1)
     temp_v0 = 0;
     if (temp_v0 < (int)temp_v6) {
       do {
-        temp_v4 = FUN_0023360c(param_1 + 0x90);
+        temp_v4 = flaggedValueHolderGetTotal(param_1 + 0x90);
         FUN_003909d0(param_1,temp_v0,temp_v1 + temp_v0,temp_v4 == temp_v1 + temp_v0);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < (int)temp_v6);

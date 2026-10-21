@@ -10,7 +10,7 @@ int sharedRefRelease(unsigned int);
 
 /* Supplied declaration required: FUN_00120896. */
 /* Supplied declaration required: FUN_00122fe4. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
 
 
@@ -20,7 +20,7 @@ void FUN_0011422a(int param_1)
 /* irregular: 3 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_00122fe4(temp_v0,*(unsigned int *)(param_1 + 0x5c));
   if (temp_v0 == 0) {
     FUN_00120896(*(unsigned int *)(param_1 + 0x5c));

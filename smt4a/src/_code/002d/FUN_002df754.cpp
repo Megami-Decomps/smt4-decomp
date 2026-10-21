@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001568f8. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00183bb0. */
-extern int FUN_003ec620(int, unsigned int);
+extern int stateEntryFindById(int, unsigned int);
 /* Supplied declaration required: FUN_0041a534. */
 /* Supplied declaration required: FUN_0041a834. */
 
@@ -76,7 +76,7 @@ unsigned int FUN_002df754(void)
       else {
         temp_v2 = temp_v0;
         FUN_001568f8(temp_v0,(int)*(short *)(temp_v4 + 0x6a));
-        temp_v2 = FUN_003ec620(temp_v0,*(unsigned int *)(temp_v2 + 0xc));
+        temp_v2 = stateEntryFindById(temp_v0,*(unsigned int *)(temp_v2 + 0xc));
         temp_v13 = *(float *)(temp_v4 + 0x14);
         temp_v1 = (unsigned int)*(unsigned short *)(*(int *)(temp_v2 + 0x10) + 0x26);
         temp_v5 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

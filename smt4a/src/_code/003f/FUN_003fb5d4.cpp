@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fb5d4` (_code @ 0x3fb5d4, 0x39c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+struct TexNode;
 
 extern "C" {
 
@@ -12,7 +14,6 @@ int vcallSlot12IfValid(...);
 int sysFatalBreak(...);
 int asdMemFree(...);
 int asdTextureCreate(...);
-int asdTextureSetImage(...);
 int FUN_001f4a98(...);
 int FUN_002e3c44(...);
 int FUN_003fc294(...);
@@ -58,12 +59,11 @@ extern int FUN_00191e00(unsigned int, void *, unsigned int, unsigned int);
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdTextureSetImage. */
-extern int FUN_001a6508(unsigned int, void *, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, void *, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f4a98. */
 /* Supplied declaration required: FUN_002e3c44. */
 extern int FUN_003598c4(void *, unsigned int);
-extern int FUN_0035991c(void *, unsigned int);
+extern TexNode* FUN_0035991c(int, int);
 /* Supplied declaration required: FUN_003fc294. */
 extern int FUN_003fcbe0(fn_003fb5d4_arg0 *);
 /* Supplied declaration required: FUN_003fcc94. */
@@ -102,7 +102,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
   if (param_3 != 0) {
     temp_v3 = 0;
     if ((param_2 & 8) != 0) {
-      temp_v3 = FUN_001a6508(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v3 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
         temp_v3 = FUN_00191e00(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x20000);
       }
@@ -111,16 +111,16 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
       }
     }
     else if ((param_2 & 0x40) != 0) {
-      temp_v3 = FUN_001a6508(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v3 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
         temp_v3 = FUN_00191e00(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x30000);
       }
       else {
-        temp_v3 = FUN_0035991c(param_1->field_0x8,param_1->field_0xc);
+        temp_v3 = (int)FUN_0035991c((int)param_1->field_0x8,(int)param_1->field_0xc);
       }
     }
     else if ((param_2 & 1) != 0) {
-      temp_v3 = FUN_001a6508(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
+      temp_v3 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
         temp_v3 = FUN_00191e00(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x10000);
       }
@@ -202,7 +202,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
             *(unsigned int *)(temp_v0 + 8) = temp_v1;
             *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
           }
-          asdTextureSetImage(temp_v0);
+          asdTextureSetImage((AsdTexture*)temp_v0);
           asdMemFree(puVar9);
           param_1->field_0x3d = 1;
           if (temp_v3 < (int)(unsigned int)*(unsigned short *)((int)param_1->field_0x10 + 4)) {

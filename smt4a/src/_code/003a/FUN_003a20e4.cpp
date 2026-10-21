@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b2d74(unsigned int, unsigned int, int);
 int objectBufferFree(void);
-int FUN_0038439c(void);
+int polygonTrackRebuildResources(void);
 int FUN_003a1ef4(void);
 int effHolderSetParams(unsigned int *, int);
 
@@ -23,7 +23,7 @@ extern int resourceResolveDataPointer(fn_003a20e4_arg0 *);
 /* Supplied declaration required: FUN_002b2d74. */
 /* Supplied declaration required: objectBufferFree. */
 extern int resourceResolveHeaderPointer(void);
-/* Supplied declaration required: FUN_0038439c. */
+/* Supplied declaration required: polygonTrackRebuildResources. */
 /* Supplied declaration required: FUN_003a1ef4. */
 /* Supplied declaration required: effHolderSetParams. */
 
@@ -39,7 +39,7 @@ unsigned int * FUN_003a20e4(fn_003a20e4_arg0 *param_1)
   temp_v0 = resourceResolveHeaderPointer();
   puVar2 = (unsigned int *)(temp_v0 + 0x1c);
   FUN_003a1ef4();
-  FUN_0038439c();
+  polygonTrackRebuildResources();
   temp_v1 = (unsigned int)param_1->field_0xc;
   if (puVar2[0xc] != 0) {
     objectBufferFree();

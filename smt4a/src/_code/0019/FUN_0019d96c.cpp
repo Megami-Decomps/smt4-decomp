@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019c720(int, int, unsigned int);
+int uiSpriteReplaceTextureEntry(int, int, unsigned int);
 int FUN_001ad0fc(int);
 int FUN_001ad1ac(int, unsigned int);
 int VectorSignedToFloat(int, int);
@@ -15,8 +15,8 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0019c720. */
-extern int FUN_0019e378(int, unsigned int);
+/* Supplied declaration required: uiSpriteReplaceTextureEntry. */
+extern int dataTable19FindAddonWord(int, unsigned int);
 /* Supplied declaration required: FUN_001ad0fc. */
 /* Supplied declaration required: FUN_001ad1ac. */
 
@@ -144,8 +144,8 @@ LAB_0019dad0:
   }
   if ((((*(char *)(param_1 + 0x30) != '\0') && (*(int *)(param_1 + 0xc) == 0)) &&
       (*(int *)(param_1 + 0x14) == -1)) && (*(int *)(param_1 + 4) != 0)) {
-    temp_v0 = FUN_0019e378(*(int *)(param_1 + 4),1);
-    FUN_0019c720(param_1,*(unsigned short *)(temp_v0 + 2),0xffffffff);
+    temp_v0 = dataTable19FindAddonWord(*(int *)(param_1 + 4),1);
+    uiSpriteReplaceTextureEntry(param_1,*(unsigned short *)(temp_v0 + 2),0xffffffff);
     return;
   }
   return;

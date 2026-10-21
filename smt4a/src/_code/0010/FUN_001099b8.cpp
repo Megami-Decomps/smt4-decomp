@@ -15,11 +15,11 @@ int FUN_002eb744(int);
 int streamReset(int *);
 int strHolderAssignOneWide(...);
 int FUN_002f2aa0(void);
-int FUN_002f2b24(...);
+int strHolderAssignHolderValue(...);
 int FUN_002f2b5c(int, unsigned int, int);
 int FUN_002f2c0a(void);
 int FUN_002f2cb2(int *, unsigned int, int);
-int FUN_002f2d90(...);
+int refCountIncrementIndex(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_4: 23 slot(s), 90 byte(s) */
@@ -98,14 +98,14 @@ extern int FUN_002eff84(int *);
 extern int FUN_002f14a8(int, unsigned int);
 /* Supplied declaration required: FUN_002f2aa0. */
 extern int *FUN_002f2afc(void);
-/* Supplied declaration required: FUN_002f2b24. */
+/* Supplied declaration required: strHolderAssignHolderValue. */
 extern int FUN_002f2b30(unsigned int);
 /* Supplied declaration required: FUN_002f2b5c. */
 /* Supplied declaration required: FUN_002f2c0a. */
 extern int FUN_002f2c38(unsigned int, unsigned int);
 extern int FUN_002f2c94(unsigned int);
 /* Supplied declaration required: FUN_002f2cb2. */
-/* Supplied declaration required: FUN_002f2d90. */
+/* Supplied declaration required: refCountIncrementIndex. */
 
 
 int FUN_001099b8(int param_1,int *param_2,unsigned int param_3,unsigned int param_4)
@@ -272,7 +272,7 @@ LAB_00109b02:
             piVar9 = piVar5;
           }
         }
-        FUN_002f2b24(piVar5,piVar4);
+        strHolderAssignHolderValue(piVar5,piVar4);
         sharedRefAddRef(temp_v3);
         temp_v16 = temp_v10;
         (**(romwright_code **)(*temp_v26 + 0x14))(&temp_v22,temp_v26,&temp_v16);
@@ -382,16 +382,16 @@ LAB_00109b02:
     else {
       temp_v2 = 2;
     }
-    FUN_002f2d90(temp_v2);
+    refCountIncrementIndex(temp_v2);
     temp_v8 = (unsigned int)DAT_00594984;
     if (DAT_00594984 >> 1 <= temp_v3) {
-      FUN_002f2d90(3);
+      refCountIncrementIndex(3);
     }
     piVar3 = piVar5;
     if (temp_v8 <= temp_v3) {
       temp_v2 = 4;
 LAB_00109dda:
-      FUN_002f2d90(temp_v2);
+      refCountIncrementIndex(temp_v2);
     }
     if (piVar4 != (int *)0x0) {
       (**(romwright_code **)(*piVar4 + 4))(piVar4);
@@ -401,13 +401,13 @@ LAB_00109dda:
       strAssign(piVar3[2],temp_v7,2,0);
     }
     if (piVar9 != (int *)0x0) {
-      FUN_002f2b24(piVar3,piVar9);
+      strHolderAssignHolderValue(piVar3,piVar9);
       (**(romwright_code **)(*piVar9 + 4))(piVar9);
     }
     temp_v1 = 0;
     if (piVar3 != (int *)0x0) {
       if (piVar3[2] != 0) {
-        FUN_002f2d90(5);
+        refCountIncrementIndex(5);
         temp_v1 = piVar3[2];
         if (temp_v18 != 0) {
           *(unsigned char *)(temp_v1 + 0x1c) = *(unsigned char *)(temp_v1 + 0x1c) | 1;

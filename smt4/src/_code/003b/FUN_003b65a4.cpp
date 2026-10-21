@@ -6,7 +6,7 @@ extern "C" {
 
 int gameGetUnitRecord(...);
 int FUN_002b0750(...);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002bf288(...);
@@ -36,7 +36,6 @@ extern int DAT_0044dc3c; /* 0x44dc3c */
 extern int categoryGetColor(int);
 /* Supplied declaration required: FUN_002b0750. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -117,7 +116,7 @@ void FUN_003b65a4(int param_1,unsigned int param_2,int param_3,int param_4,int p
       drawSetColorFromRGBA8(temp_v6);
       DAT_0044dc3c = temp_v6;
     }
-    FUN_002b6758((int)*(short *)(temp_v1 + 0x46),
+    uiDrawDemonIcon((int)*(short *)(temp_v1 + 0x46),
                  (int)*(short *)(temp_v2 + 8) + (int)*(short *)(DAT_0044dc38 + 8) + param_5,
                  (int)*(short *)(DAT_0044dc38 + 10) + (int)*(short *)(temp_v2 + 10) + param_6,0x6a,0);
     break;

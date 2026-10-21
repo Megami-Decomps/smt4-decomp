@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00257320(...);
+int mtx44TransformPosition(...);
 int FUN_00257374(...);
 int FUN_002573d8(void);
 int FUN_0025b750(void);
@@ -132,7 +132,7 @@ typedef struct {
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00257320. */
+/* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: FUN_00257374. */
 /* Supplied declaration required: FUN_002573d8. */
 /* Supplied declaration required: FUN_0025b750. */
@@ -348,7 +348,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
       pfVar6 = &temp_v12;
       temp_v0 = 0;
       do {
-        FUN_00257320(pfVar5,temp_v63,pfVar6);
+        mtx44TransformPosition(pfVar5,temp_v63,pfVar6);
         temp_v0 = temp_v0 + 1;
         pfVar5 = pfVar5 + 4;
         pfVar6 = pfVar6 + 3;

@@ -1,32 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022cb58` (_code @ 0x22cb58, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail constructor chaining retains this in r0 across both helper calls. */
+#include "shard/W5_W5Match2_PlainData.h"
+
+struct SelectionBase {
+    u8 unk00[0xd];
+    u8 unk0d;
+    u8 unk0e;
+};
+struct SelectionObject {
+    void *vtable; // 0x000
+    u8 unk004[0x18];
+    u8 active; // 0x01c
+    u8 visible; // 0x01d
+    u8 selected; // 0x01e
+    u8 unk01f;
+    SelectionBase base; // 0x020
+    u8 unk02f[0x99];
+    EmptyRange rectangle; // 0x0c8
+    u8 unk0dc[0x480];
+    void *secondaryVtable; // 0x55c
+    u8 unk560[0x38];
+    u32 unk598;
+    u32 unk59c;
+    u32 unk5a0;
+};
 
 extern "C" {
+extern u8 DAT_00422484;
+extern u8 DAT_00422590;
+void FUN_00287314(SelectionBase *);
+void rectangleResetSelection(EmptyRange *);
 
-extern unsigned char DAT_00422484; /* 0x422484 */
-extern unsigned char DAT_00422590; /* 0x422590 */
-
-extern int rectangleResetSelection(int);
-extern int FUN_00287314(unsigned int *);
-
-
-void FUN_0022cb58(unsigned int *param_1)
-
+// Initialize the selection state and both polymorphic interfaces.
+SelectionObject *FUN_0022cb58(SelectionObject *object)
 {
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_00422484;
-  temp_v0 = FUN_00287314(param_1 + 8);
-  temp_v0 = rectangleResetSelection(temp_v0 + 0xa8);
-  *(unsigned char **)(temp_v0 + 0x494) = &DAT_00422590;
-  *(unsigned char *)(temp_v0 - 0xac) = 0;
-  *(unsigned char *)(temp_v0 - 0xab) = 0;
-  *(unsigned char *)(temp_v0 - 0xaa) = 0;
-  *(unsigned int *)(temp_v0 + 0x4d8) = 0;
-  *(unsigned int *)(temp_v0 + 0x4d0) = 0;
-  *(unsigned int *)(temp_v0 + 0x4d4) = 0;
-  return;
+    object->vtable = &DAT_00422484;
+    FUN_00287314(&object->base);
+    rectangleResetSelection(&object->rectangle);
+    object->secondaryVtable = &DAT_00422590;
+    object->active = 0;
+    object->visible = 0;
+    object->selected = 0;
+    object->unk5a0 = 0;
+    object->unk598 = 0;
+    object->unk59c = 0;
+    return object;
 }
-
-} /* extern "C" */
+}

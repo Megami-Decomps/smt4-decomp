@@ -10,7 +10,7 @@ int FUN_00289880(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 int FUN_002fdff4(void);
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 /* Supplied declaration required: FUN_002fdff4. */
@@ -45,7 +45,7 @@ void FUN_003a169c(int param_1)
   FUN_00289880();
   FUN_0028d9b0();
   buttonHelpCreate();
-  FUN_00297468("shop/shop.bf",param_1 + 0x160,0);
+  asdLoadFileAsyncSimple("shop/shop.bf",param_1 + 0x160,0);
   asdTMTexTableLoadSprites(0x2b);
   FUN_002c58c8(0x2b,0);
   temp_v1 = 0;
@@ -76,7 +76,7 @@ void FUN_003a169c(int param_1)
         temp_v1 = 0x59;
         temp_v2 = 0x1a;
       }
-      FUN_00297468(pcVar2,param_1 + 0x164,0);
+      asdLoadFileAsyncSimple(pcVar2,param_1 + 0x164,0);
     }
   }
   else {
@@ -104,7 +104,7 @@ void FUN_003a169c(int param_1)
       temp_v1 = 0x58;
       temp_v2 = 0x19;
     }
-    FUN_00297468(pcVar2,param_1 + 0x164,0);
+    asdLoadFileAsyncSimple(pcVar2,param_1 + 0x164,0);
   }
   FUN_002fdff4();
   *(unsigned int *)(param_1 + 0x15d40) = temp_v1;

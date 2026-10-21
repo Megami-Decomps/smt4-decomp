@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int uiGetEntrySize(int, unsigned int, int *, int *);
 int FUN_002b0750(...);
 int efctSetSpeed(void);
@@ -34,7 +34,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: uiGetEntrySize. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -98,7 +98,7 @@ void FUN_0039af94(int param_1)
   uiGetEntrySize(0x13,temp_v9,&temp_v25,&temp_v26);
   temp_v3 = *(unsigned int *)(param_1 + 0x10);
   NaviMain_GetPosY(temp_v27);
-  FUN_00231bb8(param_1 + 0x164,&temp_v28);
+  pairCopy(param_1 + 0x164,&temp_v28);
   temp_v6 = 0;
   temp_v22 = 160.0f;
   temp_v23 = 120.0f;

@@ -24,7 +24,7 @@ extern unsigned char DAT_0055a38c; /* 0x55a38c */
 
 /* Supplied declaration required: FUN_0010b348. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
@@ -49,7 +49,7 @@ void FUN_0011a9d0(unsigned int *param_1)
   unsigned char temp_v4 [4];
   
   *param_1 = (unsigned int)&DAT_0055a38c;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v1,temp_v0 + 0x58);
   if (param_1[0xae] != 0) {
     sharedRefRelease();

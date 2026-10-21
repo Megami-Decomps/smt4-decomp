@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001e1a70(void);
 int FUN_002430c8(unsigned char *, int, unsigned char [200]);
-int FUN_002629f0(unsigned char *, int);
+int registrationEntryInsert(unsigned char *, int);
 int libc_strcpy(unsigned char *, unsigned char [56]);
 int rt_memcpy_w(unsigned int *, unsigned char *, int);
 
@@ -26,7 +26,7 @@ extern unsigned int DAT_004d8c20; /* 0x4d8c20 */
 
 /* Supplied declaration required: FUN_001e1a70. */
 /* Supplied declaration required: FUN_002430c8. */
-/* Supplied declaration required: FUN_002629f0. */
+/* Supplied declaration required: registrationEntryInsert. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -49,7 +49,7 @@ unsigned char * FUN_0032465c(void)
   }
   else if (temp_v2 == 1) {
     if (DAT_0044ea94 != (unsigned char *)0x0) {
-      FUN_002629f0(DAT_0044ea94,3);
+      registrationEntryInsert(DAT_0044ea94,3);
     }
     libc_strcpy(&DAT_004d8bd0,temp_v1);
     FUN_001e1a70();

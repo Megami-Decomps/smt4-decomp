@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_002e6e26(void);
+s32 onlineContextGetInstance(void);
 s32 FUN_0030f78c(void);
 s32 FUN_0030f84e(void);
 
@@ -11,12 +11,12 @@ u32 FUN_0030f868(void)
 {
     s32 result;
 
-    FUN_002e6e26();
+    onlineContextGetInstance();
     result = FUN_0030f78c();
     if (result == 0) {
         return 0;
     }
-    FUN_002e6e26();
+    onlineContextGetInstance();
     result = FUN_0030f84e();
     if (result == 0) {
         return 1;

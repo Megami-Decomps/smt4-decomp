@@ -12,7 +12,7 @@ int uiSpriteSetImageKeyframe(...);
 int FUN_0021c45c(int, int);
 int FUN_002b14c8(int);
 int FUN_002cdad4(int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
+int paramsClearPacket(void);
 
 typedef struct fn_004a8ef4_arg0 fn_004a8ef4_arg0;
 struct fn_004a8ef4_arg0 {
@@ -58,7 +58,7 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_002b14c8. */
 /* Supplied declaration required: FUN_002cdad4. */
 extern unsigned int FUN_003f9ab0(void);
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_004a8ef4(fn_004a8ef4_arg0 *param_1,int param_2)
@@ -88,7 +88,7 @@ void FUN_004a8ef4(fn_004a8ef4_arg0 *param_1,int param_2)
   *(unsigned short *)(temp_v1 + 0x6eda) = 0;
   *(unsigned short *)(temp_v1 + 0x7006) = 0;
   temp_v1 = temp_v0 + 0x7508;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
+  paramsClearPacket();
   paramsInit(temp_v1,&DAT_0052ac1c,0x120,&DAT_0052ad3c,0x108,&DAT_0052ae44,0xc0,0,0,&DAT_0052af04,
                0x5b0);
   temp_v6 = 0;

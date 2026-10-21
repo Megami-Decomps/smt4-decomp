@@ -6,15 +6,15 @@ extern "C" {
 
 int objFlagsSetBits(...);
 int FUN_0014e188(unsigned int *, int, unsigned int, int, int);
-int FUN_00151408(unsigned int, int, int);
+int positionStateSet(unsigned int, int, int);
 int FUN_001527d8(int, int);
 int pairSetFirstResetSecond(unsigned int *, int);
 int uiSpriteSetImageKeyframe(unsigned int *, int, int);
-int FUN_00184c40(unsigned int *, int, int);
+int pairSetHalves(unsigned int *, int, int);
 int FUN_0019e330(unsigned int *, int, int);
 int asdMemFreeSlot(void);
 int FUN_002a1850(unsigned int *, int, unsigned int, unsigned char [16]);
-int FUN_002a1f60(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_00416388(int, int, unsigned int *);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -26,16 +26,16 @@ extern int btlGetMainState(void);
 extern int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: objFlagsSetBits. */
 /* Supplied declaration required: FUN_0014e188. */
-/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_001527d8. */
 extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_002a1850. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern unsigned int FUN_0033885c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00416388. */
 
@@ -86,7 +86,7 @@ void FUN_00416960(int param_1,int param_2,unsigned int param_3)
   puVar4[2] = (float)puVar4[2] + temp_v3;
   temp_v3 = (float)puVar4[3];
   puVar4[3] = temp_v3 + in_s1;
-  FUN_00184c40(puVar4 + 5,(int)(short)(int)(float)puVar4[2],(int)(short)(int)(temp_v3 + in_s1));
+  pairSetHalves(puVar4 + 5,(int)(short)(int)(float)puVar4[2],(int)(short)(int)(temp_v3 + in_s1));
   temp_v1 = btlGetMainState();
   temp_v2 = puVar4[0x2a];
   if (temp_v2 == 0) {
@@ -94,10 +94,10 @@ void FUN_00416960(int param_1,int param_2,unsigned int param_3)
     puVar4[0x2a] = temp_v2;
   }
   FUN_001527d8(temp_v2,0x320202ff);
-  FUN_00151408(puVar4[0x2a],0,0x646464ff);
+  positionStateSet(puVar4[0x2a],0,0x646464ff);
   objFlagsSetBits(puVar4[0x2a],8);
   objFlagsSetBits(puVar4[0x2a],0x100);
-  FUN_002a1f60(puVar4[0x2a],3,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x4d64),*puVar4);
+  asdTextDrawDirectoryEntry(puVar4[0x2a],3,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x4d64),*puVar4);
   temp_v0 = FUN_0033885c(puVar4[0x2a],0);
   puVar4[0x2b] = temp_v0;
   return;

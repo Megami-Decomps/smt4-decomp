@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004e9168(int *, unsigned int, int, unsigned int *, int *);
+int btlActionClassifyTargetSide(int *, unsigned int, int, unsigned int *, int *);
 
 typedef struct fn_004ea634_arg2 fn_004ea634_arg2;
 struct fn_004ea634_arg2 {
@@ -38,8 +38,8 @@ extern unsigned int DAT_0057114c; /* 0x57114c */
 extern unsigned int DAT_00571178; /* 0x571178 */
 extern unsigned int DAT_0057117c; /* 0x57117c */
 
-extern int FUN_004c3a98(int, unsigned int);
-/* Supplied declaration required: FUN_004e9168. */
+extern int btlFindEntryValue(int, unsigned int);
+/* Supplied declaration required: btlActionClassifyTargetSide. */
 
 
 unsigned int FUN_004ea634(int *param_1,int param_2,fn_004ea634_arg2 *param_3)
@@ -76,7 +76,7 @@ unsigned int FUN_004ea634(int *param_1,int param_2,fn_004ea634_arg2 *param_3)
         if (!temp_v4) {
           temp_v5 = 0;
           temp_v6 = 0;
-          FUN_004e9168(param_1,*(unsigned int *)(param_2 + 0x20),temp_v0,&temp_v5,&temp_v6);
+          btlActionClassifyTargetSide(param_1,*(unsigned int *)(param_2 + 0x20),temp_v0,&temp_v5,&temp_v6);
           temp_v5 = (unsigned int)(temp_v5 != 1);
           if (temp_v6 != 2) {
             temp_v2 = 0;
@@ -96,7 +96,7 @@ unsigned int FUN_004ea634(int *param_1,int param_2,fn_004ea634_arg2 *param_3)
                       puVar3 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v2 * 0x408);
                       if ((((puVar3[1] & DAT_0057114c) != 0 || (*puVar3 & DAT_00571148) != 0) &&
                           ((*puVar3 & DAT_00571178) == 0 && (puVar3[1] & DAT_0057117c) == 0)) &&
-                         (temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),0x14), 0 < temp_v1)
+                         (temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),0x14), 0 < temp_v1)
                          ) {
                         return 1;
                       }
@@ -111,7 +111,7 @@ unsigned int FUN_004ea634(int *param_1,int param_2,fn_004ea634_arg2 *param_3)
                       puVar3 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v2 * 0x408);
                       if ((((DAT_00571148 & *puVar3) != 0 || (DAT_0057114c & puVar3[1]) != 0) &&
                           ((*puVar3 & DAT_00571178) == 0 && (puVar3[1] & DAT_0057117c) == 0)) &&
-                         (temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),0x15), 0 < temp_v1)
+                         (temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),0x15), 0 < temp_v1)
                          ) {
                         return 1;
                       }
@@ -148,19 +148,19 @@ unsigned int FUN_004ea634(int *param_1,int param_2,fn_004ea634_arg2 *param_3)
                     puVar3 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v2 * 0x408);
                     if (((DAT_00571148 & *puVar3) != 0 || (DAT_0057114c & puVar3[1]) != 0) &&
                        ((*puVar3 & DAT_00571178) == 0 && (puVar3[1] & DAT_0057117c) == 0)) {
-                      temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),7);
+                      temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),7);
                       if (temp_v1 < 0) {
                         return 1;
                       }
-                      temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),8);
+                      temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),8);
                       if (temp_v1 < 0) {
                         return 1;
                       }
-                      temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),10);
+                      temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),10);
                       if (temp_v1 < 0) {
                         return 1;
                       }
-                      temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),9);
+                      temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),9);
                       if (temp_v1 < 0) {
                         return 1;
                       }
@@ -177,19 +177,19 @@ unsigned int FUN_004ea634(int *param_1,int param_2,fn_004ea634_arg2 *param_3)
                   puVar3 = (unsigned int *)(*(int *)(*param_1 + 0x1ffc) + temp_v2 * 0x408);
                   if (((DAT_00571148 & *puVar3) != 0 || (DAT_0057114c & puVar3[1]) != 0) &&
                      ((puVar3[1] & DAT_0057117c) == 0 && (DAT_00571178 & *puVar3) == 0)) {
-                    temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),7);
+                    temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),7);
                     if (0 < temp_v1) {
                       return 1;
                     }
-                    temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),8);
+                    temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),8);
                     if (0 < temp_v1) {
                       return 1;
                     }
-                    temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),10);
+                    temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),10);
                     if (0 < temp_v1) {
                       return 1;
                     }
-                    temp_v1 = FUN_004c3a98((int)*(short *)((int)puVar3 + 0x6e),9);
+                    temp_v1 = btlFindEntryValue((int)*(short *)((int)puVar3 + 0x6e),9);
                     if (0 < temp_v1) {
                       return 1;
                     }

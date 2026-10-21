@@ -5,12 +5,12 @@ struct AocRecord {
     /* 0x2a */ u16 flags;
 };
 extern "C" {
-s32 FUN_0019271c(u32 id);
+s32 aocEntryGetKind(u32 id);
 AocRecord *aocRecordLookup84(u32 id);
 /* Returns the content flags when the prerequisite query succeeds. */
 s32 FUN_0049ccec(u32 id)
 {
-    if (FUN_0019271c(id) != 10)
+    if (aocEntryGetKind(id) != 10)
         return 0;
     AocRecord *record = aocRecordLookup84(id);
     return record ? record->flags : 0;

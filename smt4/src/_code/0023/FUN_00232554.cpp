@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00231258(int, int, int, int);
+void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231434(int, int, int *, int *, int *, int *);
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -22,9 +22,8 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00231258. */
 /* Supplied declaration required: FUN_00231434. */
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 
 
 void FUN_00232554(int param_1,int param_2)
@@ -46,12 +45,12 @@ void FUN_00232554(int param_1,int param_2)
   temp_v0 = g_titleScene;
   if (param_2 != 0) {
     FUN_00231434(0x1c,0xfa4,&temp_v5,&temp_v3,&temp_v4,&uStack_18);
-    FUN_00231bb8(param_1 + 0x164,&fStack_10);
+    pairCopy(param_1 + 0x164,&fStack_10);
     temp_v2 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v5 = (int)(fStack_10 + temp_v2);
     temp_v2 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v3 = (int)(temp_v6 + temp_v2);
-    FUN_00231258(temp_v5,temp_v3,temp_v4,uStack_18);
+    gxSetClippedBottomScreenScissor(temp_v5,temp_v3,temp_v4,uStack_18);
   }
   else {
     piVar3 = (int *)(g_titleScene + 0x130c);

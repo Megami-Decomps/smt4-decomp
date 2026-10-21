@@ -26,9 +26,19 @@ typedef struct Pool {
 } Pool;
 
 typedef struct Block61a470 {
-    /* 0x000 */ u8 unk000[0x9C];
+    union {
+        /* 0x000 */ u8 unk000[0x9C];
+        struct {
+            /* 0x000 */ u8 unk000ToSubmit[0x11];
+            /* 0x011 */ u8 submitPending;
+            /* 0x012 */ u8 submitEnabled;
+        } submission;
+    };
     /* 0x09C */ Pool *pool;
-    /* 0x0A0 */ u8 unk0A0[0x84];
+    union {
+        /* 0x0A0 */ u8 unk0A0[0x84];
+        /* 0x0A0 */ Pool *activePool;
+    };
     /* 0x124 */ s32 state;
 } Block61a470;
 

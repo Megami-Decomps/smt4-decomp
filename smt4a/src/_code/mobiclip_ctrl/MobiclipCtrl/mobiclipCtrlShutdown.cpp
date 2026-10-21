@@ -9,7 +9,7 @@ int FUN_00422654(S4FsReader *reader);
 int FUN_00423c0c(void *obj);
 int FUN_00423cfc(void *obj);
 int FUN_00423d94(void *obj);
-int FUN_00424018(S4Player *player);
+int movieSyncDrainSourcePositions(S4Player *player);
 int FUN_00425cd8(S4Player *player);
 int FUN_005143ac(u32 handle);
 void vcallSlot12IfValid(u32 handle);
@@ -26,7 +26,7 @@ void mobiclipCtrlShutdown(void)
     u32 *handle;
 
     FUN_00423c0c(DAT_00617f18);
-    FUN_00424018(&DAT_00617f40);
+    movieSyncDrainSourcePositions(&DAT_00617f40);
     FUN_00425cd8(&DAT_00617f40);
     FUN_00423d94(DAT_00617e70);
     FUN_00423cfc(DAT_00617f18);

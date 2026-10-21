@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00129628` (_code @ 0x129628, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail directly reads CP15 TLS and invokes SVC 0x32; required __mrc/__svc constructs are disallowed. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the marked-item comparison loads the selected item into r0 first and compares (r0, r1); retail loads the marked item first and compares (r1, r0). */
 #include "common.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ extern s32 FUN_00187168(void);
 extern s32 FUN_0023b3b8(void);
 extern s32 FUN_0035db94(void);
 extern u32 FUN_003e4d68(u32 item);
-extern void FUN_0037e0d0(u32 item, s32 a, s32 b);
 extern void FUN_002a7324(s32 arg);
 extern void FUN_0023b45c(s32 arg);
 extern void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
@@ -61,7 +61,7 @@ void FUN_004bf174(PickMenu *menu)
     } else if (FUN_0022e714() == 0) {
         FUN_003e4d68(menu->items[menu->selected] & 0xFFFF);
         if (FUN_00187168() != 0) {
-            FUN_0037e0d0(FUN_003e4d68(menu->items[menu->selected] & 0xFFFF), 0, 0);
+            statusRequestUnitDetails((const UnitCategoryRecord*)FUN_003e4d68(menu->items[menu->selected] & 0xFFFF), 0, 0);
             FUN_002a7324(1);
         }
     }

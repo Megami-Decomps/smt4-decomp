@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00163aa4(unsigned int *);
-int FUN_00184528(unsigned int *, int);
+int uiSpriteBankApplyPreset(unsigned int *, int);
 int FUN_0019de98(int, int);
 int lmapSceneGetScript(void);
 int FUN_003e5858(void);
@@ -19,7 +19,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00163aa4. */
 extern unsigned int vec2GetXInt(unsigned int *);
 extern unsigned int vec2GetYInt(unsigned int *);
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: lmapSceneGetScript. */
 /* Supplied declaration required: FUN_003e5858. */
@@ -44,7 +44,7 @@ void FUN_00495584(unsigned int *param_1)
   }
   temp_v1 = param_1[2];
   if (temp_v1 == 0) {
-    FUN_00184528(param_1 + 0xf3,1);
+    uiSpriteBankApplyPreset(param_1 + 0xf3,1);
     param_1[2] = 1;
     FUN_0019de98(0,0x323232ff);
     return;

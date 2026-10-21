@@ -8,13 +8,13 @@ int textFormatBuffer(...);
 int FUN_00192550(void);
 int FUN_00192608(void);
 int dataTable04FindById(void);
-int FUN_0020d164(...);
+int battleAttributeFormatName(...);
 int FUN_00230c1c(...);
 int FUN_002c0940(...);
 int sysMemClear(...);
 int FUN_003180c4(...);
 int FUN_00359974(...);
-int FUN_0048026c(...);
+int equipmentGetCappedUpgradeBonuses(...);
 
 /* stack frame of param_1: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -60,16 +60,16 @@ extern unsigned int FUN_0014bd84(void);
 extern unsigned int FUN_001774d8(int);
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-extern unsigned int FUN_0019271c(int);
+extern unsigned int aocEntryGetKind(int);
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_0020d164. */
+/* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: FUN_00230c1c. */
 /* Supplied declaration required: FUN_002c0940. */
 extern int FUN_002e5c2c(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0048026c. */
+/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -106,7 +106,7 @@ void FUN_0028a888(int param_1)
   unsigned char temp_v18 [20];
   
   sysMemClear(temp_v12,0x80);
-  temp_v3 = FUN_0019271c(param_1);
+  temp_v3 = aocEntryGetKind(param_1);
   switch(temp_v3) {
   default:
     return;
@@ -157,7 +157,7 @@ void FUN_0028a888(int param_1)
       textFormatBuffer(temp_v12,&LAB_0028acd0,temp_v10,temp_v13);
       FUN_003180c4(0x25,temp_v12);
     }
-    FUN_0020d164(temp_v12,*(unsigned int *)(param_1 + 0x24) >> 0x14);
+    battleAttributeFormatName(temp_v12,*(unsigned int *)(param_1 + 0x24) >> 0x14);
     FUN_003180c4(0x26,temp_v12);
     FUN_00230c1c(temp_v12,*(unsigned char *)(param_1 + 0x29));
     FUN_003180c4(0x27,temp_v12);
@@ -209,7 +209,7 @@ void FUN_0028a888(int param_1)
     temp_v13[3] = 0;
     temp_v13[4] = 0;
     temp_v13[5] = 0;
-    FUN_0048026c(param_1,&temp_v14);
+    equipmentGetCappedUpgradeBonuses(param_1,&temp_v14);
     temp_v4 = 0;
     temp_v13[1] = (*(unsigned short *)((unsigned char *)&temp_v15 + 2)) + *(char *)(temp_v6 + 0x32);
     temp_v13[0] = (short)temp_v15 + *(char *)(temp_v6 + 0x31);
@@ -316,7 +316,7 @@ void FUN_0028a888(int param_1)
         if ('\0' < temp_v10[temp_v4]) {
           temp_v2 = temp_v4 * 0x15 - 0xa4;
           do {
-            temp_v7 = FUN_0020d164(temp_v12 + (int)puVar11,(int)acStack_a4[temp_v8 + temp_v2 + 0xa4]);
+            temp_v7 = battleAttributeFormatName(temp_v12 + (int)puVar11,(int)acStack_a4[temp_v8 + temp_v2 + 0xa4]);
             puVar11 = puVar11 + temp_v7;
             if ((temp_v8 < 0x14) && ('\0' < acStack_a4[temp_v8 + temp_v2 + 0xa5])) {
               puVar8 = temp_v12 + (int)puVar11;

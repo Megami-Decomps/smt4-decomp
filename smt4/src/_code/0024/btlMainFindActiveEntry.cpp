@@ -1,25 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlMainFindActiveEntry` (_code @ 0x2499b4, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
-extern "C" {
-
-
-int btlMainFindActiveEntry(int param_1)
-
+// Finds the first present entry with the active-selection flag.
+extern "C" BtlEntry* btlMainFindActiveEntry(BtlMainState* state)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = 0;
-  do {
-    temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288);
-    if ((temp_v1 & 0x20) != 0 && (temp_v1 & 1) != 0) {
-      return *(int *)(param_1 + 0x1fc0) + temp_v0 * 0x288;
+    for (s32 i = 0; i < BTL_ENTRY_COUNT; ++i) {
+        u32 flags = state->entries[i].flags;
+        if ((flags & 0x20) != 0 && (flags & BTL_ENTRY_FLAG_ACTIVE) != 0) {
+            return &state->entries[i];
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x6d);
-  return 0;
+    return NULL;
 }
-
-} /* extern "C" */

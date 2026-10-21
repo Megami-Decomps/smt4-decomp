@@ -1,11 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b5e08` (_code @ 0x2b5e08, 0x30c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
 int jyoucyuGetTableEntry(int);
-int FUN_00470ce0(int, unsigned int);
+u8* aocFindTable22Record(AocSystemA*, s32 id);
 int aocRecordLookup83(void);
 int flagValueAdd(...);
 
@@ -28,10 +29,10 @@ extern int randRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_00470ce0. */
+/* Supplied declaration required: aocFindTable22Record. */
 /* Supplied declaration required: aocRecordLookup83. */
 /* Supplied declaration required: flagValueAdd. */
-extern int FUN_004813bc(int);
+extern int gamePackedFlagTest(int);
 extern unsigned int __aeabi_idivmod(int, unsigned int);
 
 
@@ -67,12 +68,11 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
   unsigned int *puStack_28;
   
   temp_v15 = g_mapDepart;
-  temp_v11 = g_aocSystem;
   temp_v20 = param_1;
   iStack_30 = param_2;
   iStack_2c = param_3;
   puStack_28 = param_4;
-  FUN_00470ce0(g_aocSystem,param_1);
+  temp_v11 = reinterpret_cast<s32>(aocFindTable22Record(reinterpret_cast<AocSystemA*>(g_aocSystem), param_1));
   temp_v8 = temp_v20;
   temp_v16 = temp_v20 * 7;
   if (temp_v11 == 0) {
@@ -134,9 +134,8 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
         temp_v8 = temp_v20;
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 3);
-      temp_v11 = g_aocSystem;
       temp_v15 = (unsigned char *)asStack_1e0;
-      FUN_00470ce0(g_aocSystem,temp_v20);
+      temp_v11 = reinterpret_cast<s32>(aocFindTable22Record(reinterpret_cast<AocSystemA*>(g_aocSystem), static_cast<s32>(temp_v20)));
       if (temp_v11 == 0) {
         temp_v4 = dataTableGet(0x21,0);
         temp_v11 = dataTableGetEntries();
@@ -191,7 +190,7 @@ unsigned int FUN_002b5e08(unsigned int param_1,int param_2,int param_3,unsigned 
           do {
             temp_v2 = randRange(((int)(short)temp_v11 - 1U) & 0xffff);
             temp_v10 = (int)asStack_1e0[temp_v2];
-            temp_v2 = FUN_004813bc(temp_v10);
+            temp_v2 = gamePackedFlagTest(temp_v10);
             if (temp_v2 == 0) {
               *(unsigned char *)(param_3 + temp_v5) = 1;
             }

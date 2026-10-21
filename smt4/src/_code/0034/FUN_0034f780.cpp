@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0034ddac(int);
+int innerReleaseTexture(int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0034ddac. */
+/* Supplied declaration required: innerReleaseTexture. */
 
 
 void FUN_0034f780(int param_1)
@@ -27,7 +27,7 @@ void FUN_0034f780(int param_1)
   do {
     temp_v1 = param_1 + temp_v0 * 4;
     if (*(int *)(temp_v1 + 0x10) != 0) {
-      FUN_0034ddac(param_1 + temp_v0 * 0x20 + 0x40);
+      innerReleaseTexture(param_1 + temp_v0 * 0x20 + 0x40);
       temp_v2 = (**(romwright_code **)(**(int **)(param_1 + 4) + 4))
                         (*(int **)(param_1 + 4),*(unsigned int *)(temp_v1 + 0x10));
       if (temp_v0 == 0) {

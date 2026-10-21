@@ -13,7 +13,7 @@ int scrScriptProcessDestroy(void);
 int asdModelSlotRelease(int);
 int asdMdlManagerDestroy(unsigned int);
 int asdMemFreeSlot(void);
-int FUN_002a7890(void);
+int placeWinRelease(void);
 int asdTMTexTableFreeEntry(int);
 int asdTMTexTableReleaseNode(int, int);
 int asdMemFreeNonNull(int);
@@ -37,7 +37,7 @@ extern int DAT_0043e190; /* 0x43e190 */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: FUN_002a7890. */
+/* Supplied declaration required: placeWinRelease. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdMemFreeNonNull. */
@@ -53,7 +53,7 @@ void FUN_002a6fb8(int param_1)
   int temp_v1;
   unsigned int *puVar3;
   
-  FUN_002a7890();
+  placeWinRelease();
   temp_v0 = 0;
   do {
     temp_v1 = param_1 + temp_v0 * 4;

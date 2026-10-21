@@ -1,38 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036f934` (_code @ 0x36f934, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds child-pointer/tag validation into shorter branches and rematerializes return zero; retail keeps explicit null conversion/checks and preserves zero in R4. */
+#include "shard/S1NwGfx.h"
+
+struct TaggedResource {
+    u32 tag; // 0x00
+    u8 unk04[0x18]; // 0x04
+    RelativePointer child; // 0x1c
+};
+struct ResourceContext;
 
 extern "C" {
+void FUN_0036f464(ResourceContext* context, TaggedResource* resource);
 
-int FUN_0036f464(void);
-
-/* Supplied declaration required: FUN_0036f464. */
-
-
-unsigned int FUN_0036f934(unsigned int param_1,unsigned int *param_2)
-
+// Applies a tagged child block from a valid parent resource.
+u32 FUN_0036f934(ResourceContext* context, TaggedResource* resource)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if ((param_2 != (unsigned int *)0x0) && ((~*param_2 & 0x80000001) != 0)) {
-    param_2 = (unsigned int *)0x0;
-  }
-  temp_v0 = param_2[7];
-  if (temp_v0 != 0) {
-    puVar1 = (unsigned int *)((int)(param_2 + 7) + temp_v0);
-  }
-  else {
-    puVar1 = (unsigned int *)0x0;
-  }
-  if ((puVar1 != (unsigned int *)0x0) && ((~*puVar1 & 0x80000002) != 0)) {
-    puVar1 = (unsigned int *)0x0;
-  }
-  if (puVar1 != (unsigned int *)0x0) {
-    FUN_0036f464();
-  }
-  return 0;
+    if (resource != NULL && (~resource->tag & 0x80000001)) {
+        resource = NULL;
+    }
+    TaggedResource* child = static_cast<TaggedResource*>(resource->child.get());
+    if (child != NULL && (~child->tag & 0x80000002)) {
+        child = NULL;
+    }
+    if (child != NULL) {
+        FUN_0036f464(context, child);
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

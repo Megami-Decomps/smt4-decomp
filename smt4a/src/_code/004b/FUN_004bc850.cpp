@@ -7,10 +7,10 @@ extern "C" {
 int dataTable00FindById(void);
 
 /* Supplied declaration required: dataTable00FindById. */
-extern int FUN_004bb80c(void);
+extern int FUN_004bb80c(int index);
 
 
-unsigned int FUN_004bc850(void)
+unsigned int FUN_004bc850(int index)
 
 {
 /* irregular: 1 native warning(s); review required */
@@ -21,7 +21,7 @@ unsigned int FUN_004bc850(void)
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  temp_v0 = FUN_004bb80c();
+  temp_v0 = FUN_004bb80c(index);
   if (temp_v0 == 0) {
     return 0;
   }

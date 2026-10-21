@@ -5,14 +5,14 @@
 extern "C" {
 
 int listAppendNode(int);
-int FUN_0019102c(int, int);
+int objectCommandReserveWords(int, int);
 int FUN_0045f478(void);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_00175678(void);
+extern int objectCommandQueueGet(void);
 /* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 /* Supplied declaration required: FUN_0045f478. */
 
 
@@ -30,13 +30,13 @@ void FUN_0045fc4c(int param_1)
   float temp_v6;
   
   FUN_0045f478();
-  temp_v0 = FUN_00175678();
+  temp_v0 = objectCommandQueueGet();
   temp_v3 = 0;
   temp_v4 = (unsigned int)*(unsigned short *)(param_1 + 0x328c);
   do {
     if ((temp_v4 & 1) != 0) {
       temp_v1 = temp_v0;
-      FUN_0019102c(temp_v0,7);
+      objectCommandReserveWords(temp_v0,7);
       temp_v2 = param_1 + temp_v3 * 0x10;
       *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
       *(unsigned char *)(temp_v1 + 4) = 0x2d;

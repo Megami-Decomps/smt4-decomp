@@ -7,12 +7,12 @@ extern "C" {
 int FUN_0020349c(...);
 int FUN_00232848(void);
 int FUN_002328b4(void);
-int FUN_002332f4(void);
-int FUN_0023553c(int);
+int uiOwnerUpdateAnimationChannels(void);
+int messageMainSetTargetFlags(int);
 int FUN_00288e68(int);
 int FUN_00295660(int, unsigned char [36]);
 int scrScriptProcessStartEntry(unsigned int, int);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int FUN_0029cc44(int);
 int FUN_0029d684(...);
 int FUN_0029defc(...);
@@ -20,7 +20,7 @@ int FUN_0029dfc0(int);
 int useCounterStart(void);
 int FUN_0029e328(int);
 int sortMenuCreate(int, int);
-int FUN_0029e620(unsigned int, int);
+int messageTargetSetValue(unsigned int, int);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int FUN_0029ee6c(int, int);
 int dataTable00FindById(void);
@@ -33,14 +33,14 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0020349c. */
-extern unsigned int FUN_0022ea28(void);
+extern unsigned int gameSlotTableGetHeader(void);
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
-/* Supplied declaration required: FUN_002332f4. */
+/* Supplied declaration required: uiOwnerUpdateAnimationChannels. */
 extern int FUN_002333a4(int, unsigned int);
 extern unsigned int FUN_002333f0(int);
-extern int FUN_0023360c(int);
-/* Supplied declaration required: FUN_0023553c. */
+extern int flaggedValueHolderGetTotal(int);
+/* Supplied declaration required: messageMainSetTargetFlags. */
 extern int inputIsQuestCancelPressed(void);
 extern int FUN_00262cb0(unsigned short);
 extern int inputIsQuestMenuPressed(void);
@@ -48,7 +48,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029d684. */
 /* Supplied declaration required: FUN_0029defc. */
@@ -58,11 +58,11 @@ extern int FUN_0029e0f8(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: dataTable00FindById. */
-extern unsigned int FUN_002bce00(void);
+extern unsigned int aocIndexValueOrDefault(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_003ac468. */
 
@@ -83,10 +83,10 @@ void FUN_003abed8(int param_1)
   int temp_v8;
   unsigned char temp_v9 [36];
   
-  FUN_002332f4();
-  temp_v1 = FUN_0023360c(param_1 + 0x20);
+  uiOwnerUpdateAnimationChannels();
+  temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v6 = *(unsigned int *)(param_1 + temp_v1 * 0x20 + 0x5b4);
-  FUN_0029e620(-temp_v6,0);
+  messageTargetSetValue(-temp_v6,0);
   temp_v7 = 0;
   temp_v8 = 0;
   temp_v1 = inputIsQuestMenuPressed();
@@ -102,24 +102,24 @@ void FUN_003abed8(int param_1)
     }
   }
   temp_v5 = param_1 + 0x5a8;
-  temp_v3 = FUN_0023360c(param_1 + 0x20);
+  temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v3 = FUN_00262cb0(*(unsigned short *)(temp_v5 + temp_v3 * 0x20 + 4));
   if ((temp_v3 == 0) && (temp_v7 != 0)) {
-    temp_v4 = FUN_0022ea28();
+    temp_v4 = gameSlotTableGetHeader();
     if (temp_v4 < temp_v6) {
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),9);
       *(unsigned int *)(param_1 + 0x14) = 8;
       *(unsigned int *)(param_1 + 0x18) = 0;
     }
     else {
-      temp_v1 = FUN_0023360c(param_1 + 0x20);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
       FUN_00288e68(*(unsigned short *)(temp_v5 + temp_v1 * 0x20 + 4));
-      temp_v2 = FUN_002bce00();
+      temp_v2 = aocIndexValueOrDefault();
       libc_strcpy(temp_v9,temp_v2);
       FUN_00295660(0x14,temp_v9);
       FUN_0029ede8(0x18,temp_v6,0xffffffff,0);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x5a0),8);
-      FUN_0023553c(1);
+      messageMainSetTargetFlags(1);
       *(unsigned int *)(param_1 + 0x14) = 5;
       *(unsigned int *)(param_1 + 0x18) = 0;
     }
@@ -128,7 +128,7 @@ void FUN_003abed8(int param_1)
   else if (temp_v1 != 0) {
     FUN_0029cc44(1);
     FUN_003ac468();
-    FUN_0029ca58();
+    beginStatusPanelClose();
     FUN_0029ee6c(0,0x323232ff);
     *(unsigned int *)(param_1 + 0x14) = 10;
     *(unsigned int *)(param_1 + 0x18) = 0;
@@ -153,7 +153,7 @@ void FUN_003abed8(int param_1)
   }
   temp_v1 = FUN_0029e0f8();
   if (temp_v1 != 0) {
-    temp_v1 = FUN_0023360c(param_1 + 0x20);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v0 = *(short *)(temp_v5 + temp_v1 * 0x20 + 4);
     if (*(short *)(param_1 + 0x5a4) != temp_v0) {
       if (*(char *)(param_1 + 0x90) != '\0') {

@@ -1,18 +1,19 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b875c` (_code @ 0x3b875c, 0x2e8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
 
 extern "C" {
 
-int FUN_0022b244(unsigned int, int);
+int modelSetVisible(unsigned int, int);
 int FUN_0022b83c(int, int);
 int FUN_00232848(void);
 int FUN_002328b4(void);
 int FUN_00234cd8(unsigned int, int, int);
-int FUN_00234f04(unsigned int, unsigned int);
+void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_002758d8(void);
 int FUN_002a0400(unsigned int, unsigned int, unsigned int);
-int FUN_00341a10(unsigned int);
+int objModelDestroy(unsigned int);
 int FUN_003b9c00(int);
 int VectorSignedToFloat(int, int);
 
@@ -25,20 +26,20 @@ extern unsigned char DAT_0049fa1c; /* 0x49fa1c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0022b238(int);
-/* Supplied declaration required: FUN_0022b244. */
+/* Supplied declaration required: modelSetVisible. */
 /* Supplied declaration required: FUN_0022b83c. */
 extern int FUN_0022b8c0(int);
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
-extern unsigned short FUN_0023360c(int);
+extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00234cd8. */
-/* Supplied declaration required: FUN_00234f04. */
+/* Supplied declaration required: nodeOwnerSetEnabled. */
 extern int inputIsQuestConfirmPressed(void);
 /* Supplied declaration required: FUN_002758d8. */
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_002a0400. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_00341a10. */
+/* Supplied declaration required: objModelDestroy. */
 /* Supplied declaration required: FUN_003b9c00. */
 extern int FUN_003bb620(int);
 
@@ -69,16 +70,16 @@ void FUN_003b875c(int param_1)
      (*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) {
     if ((!(*(short *)(temp_v2 + 0x28) == 0 || *(short *)(temp_v2 + 0x28) == 6)) ||
        (*(char *)(*(int *)(param_1 + 0xe5c) + 0x14) != '\0')) {
-      FUN_0022b244(*(unsigned int *)(param_1 + 0xe5c),0);
+      modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),0);
       temp_v4 = *puVar10;
       temp_v7 = 1;
     }
     else {
-      FUN_0022b244(*(unsigned int *)(param_1 + 0xe5c),1);
+      modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),1);
       temp_v4 = *puVar10;
       temp_v7 = 0;
     }
-    FUN_00234f04(temp_v4,temp_v7);
+    nodeOwnerSetEnabled((NodeEnableOwner*)temp_v4,temp_v7);
   }
   temp_v5 = FUN_0022b8c0(param_1 + 0x9c);
   if ((temp_v5 != temp_v2) || ((*(unsigned int *)(param_1 + 0x20) & 0x40000000) != 0)) {
@@ -104,7 +105,7 @@ void FUN_003b875c(int param_1)
     *(unsigned int *)(param_1 + 0x84) = temp_v11;
     *(unsigned int *)(param_1 + 0x8c) = temp_v4;
     *(unsigned int *)(param_1 + 0x88) = 0;
-    temp_v1 = FUN_0023360c(param_1 + 0x9c);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x9c);
     *(unsigned short *)(param_1 + 0x4c) = temp_v1;
     if (*(char *)(param_1 + 0xe58) != '\0') {
       temp_v5 = FUN_0022b238(param_1 + 0x9c);
@@ -115,7 +116,7 @@ void FUN_003b875c(int param_1)
         FUN_00234cd8(*(unsigned int *)(param_1 + 0xe5c),temp_v8,0);
       }
       if (-1 < *(char *)(temp_v5 + 0x2b)) {
-        FUN_00341a10(*(unsigned int *)(param_1 + 0xe5c));
+        objModelDestroy(*(unsigned int *)(param_1 + 0xe5c));
         temp_v2 = param_1 + *(char *)(temp_v5 + 0x2b) * 4;
         FUN_002a0400(*puVar10,*(unsigned int *)(temp_v2 + 0xe60),*(unsigned int *)(temp_v2 + 0xe88));
       }

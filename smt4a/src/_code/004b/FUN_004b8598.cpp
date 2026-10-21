@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_0020401c(...);
+int placeWinStartText(...);
 int moveCameraCtrlCreateEntry(...);
 int linkSlotSetFlag1C(...);
 int linkSlotSetFlag20(...);
@@ -28,7 +28,7 @@ extern unsigned char LAB_004b87d8; /* 0x4b87d8 */
 /* Supplied declaration required: textFormatBuffer. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int gameFlagIsSet(void);
-/* Supplied declaration required: FUN_0020401c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: moveCameraCtrlCreateEntry. */
 /* Supplied declaration required: linkSlotSetFlag1C. */
 /* Supplied declaration required: linkSlotSetFlag20. */
@@ -118,7 +118,7 @@ void FUN_004b8598(int param_1)
         linkSlotSetFlag1C(temp_v1,temp_v2);
       }
       if (*(int *)(param_1 + 0x116c) != 1) {
-        FUN_0020401c(*(int *)(param_1 + 0x1118) + 2);
+        placeWinStartText(*(int *)(param_1 + 0x1118) + 2);
         return;
       }
     }

@@ -1,32 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a15f4` (_code @ 0x1a15f4, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler changes guard-return layout and schedules the byte load before calculating the bit index. */
+#include "shard/W6_W6Match2_SaveFlags.h"
 
-extern "C" {
-
-extern int DAT_0043e2ac; /* 0x43e2ac */
-
-
-unsigned int FUN_001a15f4(unsigned int param_1)
-
+// Test a saved flag for IDs 1 through 500.
+extern "C" u32 FUN_001a15f4(u32 id)
 {
-  unsigned int temp_v0;
-  
-  temp_v0 = 0;
-  if (param_1 != 0) {
-    if (param_1 >= 0x1f5) {
-      temp_v0 = 0;
+    if (id == 0 || id > 500) {
+        return 0;
     }
-    else {
-      temp_v0 = 0;
-      if (((unsigned int)*(unsigned char *)(DAT_0043e2ac +
-                           ((int)(param_1 + ((unsigned int)((int)param_1 >> 0x1f) >> 0x1d)) >> 3) + 0x24bc4)
-          & (1 << (((int)param_1 % 8) & 0xffU))) != 0) {
-        temp_v0 = 1;
-      }
-    }
-  }
-  return temp_v0;
+    const SaveFlagWork* work = &((SaveFlagImage*)g_gameDataBlocks.unk04)->work;
+    return (work->flags[(s32)id / 8] & (1u << ((s32)id % 8))) != 0;
 }
-
-} /* extern "C" */

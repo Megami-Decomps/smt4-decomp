@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_4_stack;
 
-extern unsigned int DAT_006426c0; /* 0x6426c0 */
+extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x6426c0 */
 
 /* Supplied declaration required: FUN_00501928. */
 extern unsigned int nn_cec_CTR_MessageBox_GetMessHeader(unsigned int, int, unsigned int);
@@ -34,9 +34,9 @@ unsigned int FUN_0042e388(int *param_1,int param_2,unsigned int param_3,int para
   int *piVar5;
   int temp_v3;
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_006426c0);
+  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxCriticalSection);
   if (param_1[1] == 0) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return 0xc8810bea;
   }
   if (param_2 != 1) {
@@ -53,7 +53,7 @@ unsigned int FUN_0042e388(int *param_1,int param_2,unsigned int param_3,int para
       if (param_4 != 0) {
         temp_v1 = nn_cec_CTR_MessageBox_WriteBoxInfo((unsigned int)param_1,0,(unsigned int)(param_1 + 0x7f),(unsigned int *)(param_1 + 0x87));
         if ((int)temp_v1 < 0) {
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
           return temp_v1;
         }
       }
@@ -72,7 +72,7 @@ unsigned int FUN_0042e388(int *param_1,int param_2,unsigned int param_3,int para
         param_1[0x222] = param_1[0x222] - temp_v3;
         param_1[0x224] = param_1[0x224] - 1;
       }
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return temp_v1;
     }
     if (param_4 == 0) {
@@ -87,7 +87,7 @@ unsigned int FUN_0042e388(int *param_1,int param_2,unsigned int param_3,int para
         param_1[0x226] = param_1[0x86];
       }
       *(unsigned char *)((int)param_1 + 10) = 1;
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return temp_v1;
     }
     piVar5 = param_1 + 0x87;
@@ -108,7 +108,7 @@ unsigned int FUN_0042e388(int *param_1,int param_2,unsigned int param_3,int para
       if (param_4 != 0) {
         temp_v1 = nn_cec_CTR_MessageBox_WriteBoxInfo((unsigned int)param_1,1,(unsigned int)(param_1 + 0xeb),(unsigned int *)(param_1 + 0xf3));
         if ((int)temp_v1 < 0) {
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
           return temp_v1;
         }
       }
@@ -131,7 +131,7 @@ unsigned int FUN_0042e388(int *param_1,int param_2,unsigned int param_3,int para
       if ((temp_v2 & 0x80000000) == 0) {
         nn_cec_CTR_MessageBox_ReadOutBoxIndex((unsigned int)param_1);
       }
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return temp_v1;
     }
     if (param_4 == 0) {
@@ -146,7 +146,7 @@ unsigned int FUN_0042e388(int *param_1,int param_2,unsigned int param_3,int para
         param_1[0x22e] = param_1[0xf2];
       }
       *(unsigned char *)((int)param_1 + 0xb) = 1;
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return temp_v1;
     }
     piVar5 = param_1 + 0xf3;
@@ -154,7 +154,7 @@ unsigned int FUN_0042e388(int *param_1,int param_2,unsigned int param_3,int para
     temp_v3 = 1;
   }
   nn_cec_CTR_MessageBox_WriteBoxInfo((unsigned int)param_1,temp_v3,(unsigned int)piVar3,(unsigned int *)piVar5);
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
   return temp_v1;
 }
 

@@ -5,9 +5,9 @@
 extern "C" {
 
 int dialogOpen(...);
-int FUN_0020401c(...);
+int placeWinStartText(...);
 int FUN_00215978(...);
-int FUN_00284f90(...);
+int placeWinSetValue(...);
 int FUN_002a49e4(...);
 int FUN_004b7d88(...);
 
@@ -32,10 +32,10 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: FUN_0020401c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_00215978. */
-extern int FUN_00224880(unsigned int);
-/* Supplied declaration required: FUN_00284f90. */
+extern int scrRunOpcodesStub(unsigned int);
+/* Supplied declaration required: placeWinSetValue. */
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_004b7d88. */
 
@@ -46,7 +46,7 @@ void FUN_004b8228(fn_004b8228_arg0 *param_1)
 /* irregular: 6 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00224880(param_1->field_0x1158);
+  temp_v0 = scrRunOpcodesStub(param_1->field_0x1158);
   if (temp_v0 == 2) {
     FUN_004b7d88(param_1);
     FUN_00215978(0);
@@ -56,8 +56,8 @@ void FUN_004b8228(fn_004b8228_arg0 *param_1)
     param_1->field_0x2c = 0;
     param_1->field_0x28 = 5;
     param_1->field_0xa88 = 0;
-    FUN_0020401c((int)param_1->field_0x1118 + 2);
-    FUN_00284f90(1);
+    placeWinStartText((int)param_1->field_0x1118 + 2);
+    placeWinSetValue(1);
     return;
   }
   return;

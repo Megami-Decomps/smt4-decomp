@@ -109,7 +109,12 @@ class Game:
         for old_source, new_source in self.files:
             old_path, new_path = self.dir / old_source, self.dir / new_source
             if old_path.exists() and old_path != new_path:
-                subprocess.run(["git", "mv", str(old_path), str(new_path)], cwd=ROOT, check=True, capture_output=True)
+                # A unit tools/units.py just added is not tracked yet: git mv refuses it.
+                tracked = subprocess.run(["git", "ls-files", "--error-unmatch", str(old_path)], cwd=ROOT, capture_output=True).returncode == 0
+                if tracked:
+                    subprocess.run(["git", "mv", str(old_path), str(new_path)], cwd=ROOT, check=True, capture_output=True)
+                else:
+                    old_path.rename(new_path)
         word = lambda names: re.compile(r"(?<![A-Za-z0-9_])(" + "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True)) + r")(?![A-Za-z0-9_])")
         mapping = dict(self.renamed)
         everything = word(mapping)

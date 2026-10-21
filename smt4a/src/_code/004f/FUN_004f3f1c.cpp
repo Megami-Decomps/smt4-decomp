@@ -1,36 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f3f1c` (_code @ 0x4f3f1c, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail shares the 0x400 flag calculation and branches around the preserve path; compiled code predicates the paths and uses a separate flag-address setup. */
+#include "common.h"
 
-extern "C" {
+struct TargetTransition {
+    u8 unk000[0x604]; // 0x000
+    f32 duration;     // 0x604
+    u8 unk608[0x40];  // 0x608
+    f32 previous;     // 0x648
+    u32 flags;        // 0x64c
+    u8 unk650[0xc4];  // 0x650
+    f32 pending;      // 0x714
+    u32 target;       // 0x718
+    u32 step;         // 0x71c
+    u32 parameter;    // 0x720
+};
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_4_stack;
-
-
-void FUN_004f3f1c(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+// Configures a target transition, optionally preserving its pending value.
+extern "C" void FUN_004f3f1c(TargetTransition* state, u32 target, u32 parameter,
+                            s32 preservePending, f32 duration)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int in_s0;
-  
-  *(unsigned int *)(param_1 + 0x604) = in_s0;
-  *(unsigned int *)(param_1 + 0x718) = param_2;
-  *(unsigned int *)(param_1 + 0x71c) = 0;
-  *(unsigned int *)(param_1 + 0x720) = param_3;
-  puVar1 = (unsigned int *)(param_1 + 0x64c);
-  if (param_4 == 0) {
-    *puVar1 = *puVar1 | 0x400;
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x648) = *(unsigned int *)(param_1 + 0x714);
-    *puVar1 = *puVar1 | 0x200400;
-  }
-  *(unsigned int *)(param_1 + 0x714) = 0;
-  return;
+    state->duration = duration;
+    state->target = target;
+    state->step = 0;
+    state->parameter = parameter;
+    if (preservePending == 0) {
+        state->flags |= 0x400;
+    } else {
+        state->previous = state->pending;
+        state->flags |= 0x200400;
+    }
+    state->pending = 0.0f;
 }
-
-} /* extern "C" */

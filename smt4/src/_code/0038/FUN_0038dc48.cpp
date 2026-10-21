@@ -7,9 +7,9 @@ extern "C" {
 int FUN_002341d4(...);
 int FUN_00234330(...);
 int recordClearWideHandle(...);
-int FUN_0023499c(int *, int, int);
+int archiveFileReplaceHandle(int *, int, int);
 int stringFormatUnbounded(...);
-int FUN_002a12d8(...);
+int legacyResourceIdRemap(...);
 int FUN_003526c4(...);
 int FUN_00352f14(int [3], unsigned char [1024], int);
 int FUN_003531dc(...);
@@ -48,9 +48,9 @@ extern int g_aocMain; /* 0x432fc8 */
 extern unsigned int FUN_0023445c(int);
 extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: recordClearWideHandle. */
-/* Supplied declaration required: FUN_0023499c. */
+/* Supplied declaration required: archiveFileReplaceHandle. */
 /* Supplied declaration required: stringFormatUnbounded. */
-/* Supplied declaration required: FUN_002a12d8. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_003526c4. */
 /* Supplied declaration required: FUN_00352f14. */
 /* Supplied declaration required: FUN_003531dc. */
@@ -60,8 +60,8 @@ extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: FUN_00354b3c. */
 /* Supplied declaration required: FUN_0038b2fc. */
 /* Supplied declaration required: FUN_0038d598. */
-extern unsigned int FUN_003df34c(unsigned int);
-extern unsigned int FUN_003df35c(unsigned int);
+extern unsigned int valueOwnerGet(unsigned int);
+extern unsigned int entryDataValueGet(unsigned int);
 extern int nn_fnd_DateTime_DateToDays(int, int, int);
 extern int nn_fnd_DateTime_GetDay(unsigned int);
 extern int nn_fnd_DateTime_GetMonth(unsigned int);
@@ -122,10 +122,10 @@ void FUN_0038dc48(int param_1)
   unsigned char temp_v17 [16];
   
   temp_v0 = g_aocMain;
-  FUN_0023499c(&temp_v8,g_aocMain + 0x28,g_aocMain + 0x18);
+  archiveFileReplaceHandle(&temp_v8,g_aocMain + 0x28,g_aocMain + 0x18);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
-  temp_v1 = FUN_002a12d8(param_1 + 0xc);
+  temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
   if (temp_v1 < 0) {
     return;
   }
@@ -133,7 +133,7 @@ void FUN_0038dc48(int param_1)
   FUN_00354a20(&temp_v8,temp_v17,temp_v0 + 0x694);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
-  temp_v1 = FUN_002a12d8(param_1 + 0xc);
+  temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
   if (temp_v1 < 0) {
     recordClearWideHandle(temp_v0 + 0x28);
     FUN_00354b3c(temp_v17);
@@ -250,18 +250,18 @@ void FUN_0038dc48(int param_1)
               );
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
-  temp_v1 = FUN_002a12d8(param_1 + 0xc);
+  temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
   if (-1 < temp_v1) {
-    temp_v2 = FUN_003df34c(*(unsigned int *)(temp_v0 + 0x5b0));
+    temp_v2 = valueOwnerGet(*(unsigned int *)(temp_v0 + 0x5b0));
     *(unsigned int *)(temp_v0 + 0x68c) = temp_v2;
-    temp_v2 = FUN_003df35c(*(unsigned int *)(temp_v0 + 0x5b0));
+    temp_v2 = entryDataValueGet(*(unsigned int *)(temp_v0 + 0x5b0));
     *(unsigned int *)(temp_v0 + 0x690) = temp_v2;
     temp_v16 = 0;
     uStack_34 = 0;
     FUN_003531dc(&temp_v8,temp_v0 + 0x84,&temp_v16);
     *(unsigned int *)(param_1 + 0xc) = temp_v8;
     *(unsigned int *)(param_1 + 0x10) = uStack_f4;
-    temp_v1 = FUN_002a12d8(param_1 + 0xc);
+    temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
     if (-1 < temp_v1) {
       temp_v1 = nn_fnd_DateTime_GetDay((unsigned int)&temp_v16);
       temp_v4 = nn_fnd_DateTime_GetMonth((unsigned int)&temp_v16);
@@ -275,7 +275,7 @@ void FUN_0038dc48(int param_1)
         FUN_002341d4(&temp_v8,temp_v0);
         *(unsigned int *)(param_1 + 0xc) = temp_v8;
         *(unsigned int *)(param_1 + 0x10) = uStack_f4;
-        FUN_002a12d8(param_1 + 0xc);
+        legacyResourceIdRemap(param_1 + 0xc);
       }
       FUN_00354b3c(temp_v17);
       return;

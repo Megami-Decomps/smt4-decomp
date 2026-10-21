@@ -7,7 +7,7 @@ extern "C" {
 int gameGetPlayerData(void);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002a4964(int, int);
-int FUN_002c2c88(int);
+int objClearFlagPair(int);
 int FUN_003d0bc0(int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -21,7 +21,7 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: gameGetPlayerData. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002c2c88. */
+/* Supplied declaration required: objClearFlagPair. */
 /* Supplied declaration required: FUN_003d0bc0. */
 extern int flagValueIsPositive(unsigned int);
 
@@ -166,7 +166,7 @@ LAB_0026f2a8:
       } while (temp_v5 != 0);
     }
     FUN_002a4964(temp_v6,temp_v0);
-    FUN_002c2c88(temp_v6);
+    objClearFlagPair(temp_v6);
     return;
   }
   return;

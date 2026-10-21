@@ -29,7 +29,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00229a24. */
 /* Supplied declaration required: FUN_00229b10. */
 /* Supplied declaration required: FUN_00247478. */
-extern int FUN_00295d08(unsigned int);
+extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: FUN_0033a2c4. */
@@ -126,7 +126,7 @@ LAB_003cb174:
           }
           else {
             *(unsigned char *)(param_2 + 0xe) = 1;
-            temp_v4 = FUN_00295d08(1);
+            temp_v4 = playerPadTestBit(1);
             if (temp_v4 != 0) {
               FUN_00247478(temp_v10,*param_1,param_2[8]);
               if (temp_v11 == 3) {

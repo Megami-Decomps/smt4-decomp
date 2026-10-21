@@ -37,7 +37,7 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int FUN_0019de98(int, unsigned int);
 int messageSetMode(int);
-int FUN_00224880(...);
+int scrRunOpcodesStub(...);
 int FUN_0022e774(void);
 int FUN_00267d74(int, int, int, int);
 int scrScriptProcessStartEntry(...);
@@ -79,7 +79,7 @@ extern unsigned char LAB_00321c94; /* 0x321c94 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001517b4. */
-extern int FUN_001632fc(void);
+extern int infoWinHasValue(void);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_001643b4. */
@@ -96,11 +96,11 @@ extern int gameGetSlotRecord(int);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0020b490. */
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0022e774. */
 extern int dialogIsActive(void);
-extern int FUN_0026272c(void);
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: FUN_00267d74. */
 /* Supplied declaration required: FUN_002685cc. */
 extern int FUN_0026c3a0(void);
@@ -110,12 +110,12 @@ extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a49e4. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002a7288. */
-extern int FUN_002c2c68(unsigned int);
+extern int objectApplyIfUnblocked(unsigned int);
 extern int FUN_002effbc(void);
 extern int whisperEffectIsIdle(void);
 extern int flaggedEntryGetValueA(void);
 /* Supplied declaration required: flaggedEntrySetValueA. */
-extern int FUN_0032169c(void);
+extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -353,7 +353,7 @@ void FUN_0026cbb8(int param_1)
   }
   if (temp_v9 >= 6) {
     if (temp_v9 == 99) {
-      temp_v5 = FUN_0026272c();
+      temp_v5 = messageMainIsIdle();
       if (temp_v5 == 0) {
         return;
       }
@@ -365,7 +365,7 @@ void FUN_0026cbb8(int param_1)
     if (temp_v9 < 99) {
       if (temp_v9 != 10) {
         if (temp_v9 == 0x14) {
-          temp_v5 = FUN_00224880(*(unsigned int *)(param_1 + 0x43a0));
+          temp_v5 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43a0));
           if (temp_v5 != 2) {
             return;
           }
@@ -556,7 +556,7 @@ LAB_0026e1e4:
         }
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 8);
-      temp_v5 = FUN_001632fc();
+      temp_v5 = infoWinHasValue();
       if ((temp_v5 == 0) && (temp_v5 = dialogIsActive(), temp_v5 == 0)) {
         if (!temp_v22) {
           return;
@@ -573,7 +573,7 @@ LAB_0026e1e4:
       goto LAB_0026e038;
     }
     if (temp_v9 == 100) {
-      temp_v5 = FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
+      temp_v5 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
       if (temp_v5 != 2) {
         return;
       }
@@ -607,7 +607,7 @@ LAB_0026e1e4:
     if (temp_v9 != 0x65) {
       return;
     }
-    temp_v5 = FUN_0026272c();
+    temp_v5 = messageMainIsIdle();
     if (temp_v5 == 0) {
       return;
     }
@@ -673,7 +673,7 @@ LAB_0026e1e4:
     if (temp_v9 == 0) {
       return;
     }
-    temp_v9 = FUN_0032169c();
+    temp_v9 = btlTalkBustUpGetValue();
     if (temp_v9 == 0) {
       temp_v9 = btlTalkBustupMatchesEntry(*(unsigned short *)(temp_v5 + 0x62));
       if (temp_v9 == 0) {
@@ -705,7 +705,7 @@ LAB_0026e1e4:
     temp_v9 = FUN_002a4894(temp_v26);
     FUN_00359b6c(*(unsigned short *)(temp_v5 + temp_v9 * 2 + 0x34));
     temp_v14 = 0;
-    temp_v9 = FUN_002c2c68(temp_v30);
+    temp_v9 = objectApplyIfUnblocked(temp_v30);
     if (0 < temp_v9) {
       do {
         temp_v3 = FUN_001643b4(0x1d,temp_v14 + 0xe4);
@@ -713,12 +713,12 @@ LAB_0026e1e4:
         temp_v14 = temp_v14 + 1;
         *(unsigned short *)(param_1 + temp_v9 + 0x43b6) = temp_v3;
         *(short *)(param_1 + 0x43b4) = *(short *)(param_1 + 0x43b4) + 1;
-        temp_v9 = FUN_002c2c68(temp_v30);
+        temp_v9 = objectApplyIfUnblocked(temp_v30);
       } while (temp_v14 < temp_v9);
     }
     temp_v18 = 0;
     temp_v14 = 0;
-    temp_v9 = FUN_002c2c68(temp_v26);
+    temp_v9 = objectApplyIfUnblocked(temp_v26);
     temp_v4 = 0;
     if (0 < temp_v9 - 1) {
       do {
@@ -727,7 +727,7 @@ LAB_0026e1e4:
         *(unsigned short *)(param_1 + temp_v14 * 2 + 0x43c6) = temp_v3;
         temp_v14 = temp_v14 + 1;
         *(short *)(param_1 + 0x43b4) = *(short *)(param_1 + 0x43b4) + 1;
-        temp_v9 = FUN_002c2c68(temp_v26);
+        temp_v9 = objectApplyIfUnblocked(temp_v26);
         temp_v4 = temp_v18;
       } while (temp_v14 < temp_v9 - 1);
     }
@@ -889,7 +889,7 @@ LAB_0026e66c:
     }
     break;
   case 3:
-    FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
+    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
     if ((int)(*puVar27 - *piVar22) >= 1) {
       temp_v9 = ifTouchGetButtonHelpValue();
       if (temp_v9 == 0xe3) {
@@ -919,7 +919,7 @@ LAB_0026e66c:
         flaggedEntrySetValueA(temp_v26,temp_v6 - 1);
       }
       temp_v6 = FUN_002a4894(temp_v26);
-      temp_v9 = FUN_002c2c68(temp_v26);
+      temp_v9 = objectApplyIfUnblocked(temp_v26);
       if (temp_v9 - 1 <= temp_v6) {
         screenStartOrClear(*(unsigned int *)(param_1 + 0x43a4),700);
         return;
@@ -951,7 +951,7 @@ LAB_0026e66c:
       }
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < 8);
-    temp_v9 = FUN_002c2c68(temp_v26);
+    temp_v9 = objectApplyIfUnblocked(temp_v26);
     if (temp_v9 - 1 <= temp_v28) {
       eventQueueAddUniqueIfValid(0x100020e);
       obj04Finish();
@@ -1068,7 +1068,7 @@ LAB_0026d4c4:
     eventQueueAddUniqueIfValid();
     return;
   case 4:
-    FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
+    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
     if ((int)(*puVar27 - *piVar22) >= 1) {
       temp_v6 = ifTouchGetButtonHelpValue();
       if (temp_v6 == 0xe3) {
@@ -1107,7 +1107,7 @@ LAB_0026d4c4:
         temp_v29 = param_1;
         temp_v6 = flaggedEntryGetValueA();
         temp_v9 = temp_v6 + 1;
-        temp_v14 = FUN_002c2c68(temp_v7);
+        temp_v14 = objectApplyIfUnblocked(temp_v7);
         if (temp_v14 - 2 <= temp_v6) {
           temp_v9 = 0;
         }

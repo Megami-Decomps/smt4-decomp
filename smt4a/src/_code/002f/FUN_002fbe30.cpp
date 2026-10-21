@@ -1,35 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fbe30` (_code @ 0x2fbe30, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains unused error literal 0xd8e0a002; saved string/length registers and outgoing stores also differ. */
+#include "common.h"
+
+struct WideRequestContext {
+    u32 unk00;
+    s32 state; // 0x04
+    u32 unk08;
+    u32 handle; // 0x0c
+};
 
 extern "C" {
+u32 wstrlen(const u16 *);
+u32 FUN_0043b0dc(u32 *, s32, const u16 *, u32, const u16 *, u32);
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_3_stack;
-
-extern int wstrlen(unsigned int);
-extern unsigned int FUN_0043b0dc(int, unsigned int, unsigned int, int, unsigned int, int);
-
-
-unsigned int FUN_002fbe30(int param_1,unsigned int param_2,unsigned int param_3)
-
+u32 FUN_002fbe30(WideRequestContext *context, const u16 *first, const u16 *second)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  if (*(int *)(param_1 + 4) < 1) {
-    temp_v0 = 0xd8a0a064;
-  }
-  else {
-    temp_v1 = wstrlen(param_3);
-    temp_v2 = wstrlen(param_2);
-    temp_v0 = FUN_0043b0dc(param_1 + 0xc,*(unsigned int *)(param_1 + 4),param_2,temp_v2 + 1,param_3,
-                         temp_v1 + 1);
-  }
-  return temp_v0;
+    if (context->state <= 0)
+        return 0xd8a0a064;
+    u32 secondLength = wstrlen(second) + 1;
+    u32 firstLength = wstrlen(first) + 1;
+    return FUN_0043b0dc(&context->handle, context->state, first, firstLength,
+                         second, secondLength);
 }
-
-} /* extern "C" */
+}

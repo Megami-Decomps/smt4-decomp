@@ -5,7 +5,7 @@
 extern "C" {
 
 int rt_aeabi_memclr(int, int);
-int FUN_003e48dc(int);
+void FUN_003e48dc(unsigned int);
 int FUN_003e4e4c(int);
 int FUN_003e503c(void);
 int gameFlagSetValue(int, int);
@@ -14,7 +14,6 @@ extern int gameDataBlocksGetSaveData(void);
 extern int saveSlotFindById(short);
 extern int FUN_00187168(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_003e48dc. */
 /* Supplied declaration required: FUN_003e4e4c. */
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: gameFlagSetValue. */

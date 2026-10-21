@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00162790(int, unsigned int, int, int);
 int efctSetSpeed(void);
-int FUN_0035b540(int, int, int, int);
+int largeGridDrawButtonStrip(int, int, int, int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -20,7 +20,7 @@ typedef struct {
 extern int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_0022e9b8(void);
 extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_0035b540. */
+/* Supplied declaration required: largeGridDrawButtonStrip. */
 
 
 void FUN_003b6250(int param_1,int param_2)
@@ -40,7 +40,7 @@ void FUN_003b6250(int param_1,int param_2)
     temp_v2 = 0xf5ff9fff;
   }
   temp_v1 = FUN_001834a4(0x1a,0x1af);
-  FUN_0035b540(temp_v0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
+  largeGridDrawButtonStrip(temp_v0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
                (int)*(short *)(temp_v0 + 0x8e88));
   efctSetSpeed();
   temp_v0 = FUN_001834a4(0x1a,0x1a2);

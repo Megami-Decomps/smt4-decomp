@@ -1,13 +1,14 @@
 #include "common.h"
+struct ScriptHolder;
 
 extern "C" {
 
-extern void scriptHolderUpdate(void);
+extern u32 scriptHolderUpdate(ScriptHolder *holder);
 
 /* Forwards to the function that follows it in the binary. */
-void scriptHolderUpdateForward(void)
+u32 scriptHolderUpdateForward(ScriptHolder *holder)
 {
-    scriptHolderUpdate();
+    return scriptHolderUpdate(holder);
 }
 
 } /* extern "C" */

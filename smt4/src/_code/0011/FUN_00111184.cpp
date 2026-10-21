@@ -9,7 +9,7 @@ int FUN_00126fb8(...);
 int FUN_001270f8(...);
 int FUN_002ba78c(...);
 int FUN_002ba81c(...);
-int FUN_002baa40(...);
+int resultPairInitialize(...);
 int memClear(...);
 int asdProcessCreateSimple(...);
 
@@ -34,8 +34,8 @@ extern int FUN_00121fb4(int);
 /* Supplied declaration required: FUN_002ba78c. */
 /* Supplied declaration required: FUN_002ba81c. */
 extern int FUN_002ba8e4(int);
-extern int FUN_002ba8e8(int);
-/* Supplied declaration required: FUN_002baa40. */
+extern int clearWord(int);
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_002bad5c(int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -61,7 +61,7 @@ unsigned int * FUN_00111184(int param_1)
   temp_v0 = FUN_0011b930(param_1 + 0x20);
   temp_v0 = FUN_0011b918(temp_v0 + 8);
   temp_v0 = FUN_002ba8e4(temp_v0 + 0x54);
-  temp_v0 = FUN_002ba8e8(temp_v0 + 4);
+  temp_v0 = clearWord(temp_v0 + 4);
   temp_v0 = FUN_002ba8e4(temp_v0 + 4);
   temp_v0 = FUN_00121fa0(temp_v0 + 4);
   *(unsigned int *)(temp_v0 + 0x10) = 0;
@@ -84,7 +84,7 @@ unsigned int * FUN_00111184(int param_1)
   puVar2 = (unsigned int *)FUN_002bad5c(temp_v0 + 0x6b4);
   puVar2[2] = 0;
   puVar2[3] = 0;
-  FUN_002baa40(&temp_v3,0);
+  resultPairInitialize(&temp_v3,0);
   temp_v1 = (unsigned int)ppcVar3[1];
   *puVar2 = (unsigned int)*ppcVar3;
   puVar2[1] = temp_v1;

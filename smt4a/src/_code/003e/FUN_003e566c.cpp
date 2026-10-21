@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_003fdb18(void);
+int controllerSetRotationEulerDegrees(void);
 
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 
 
 void FUN_003e566c(int param_1)
@@ -21,7 +21,7 @@ void FUN_003e566c(int param_1)
   unsigned int in_s2;
   
   if (*(int *)(*(int *)(param_1 + 8) + 4) != 0) {
-    FUN_003fdb18();
+    controllerSetRotationEulerDegrees();
     *(unsigned int *)(param_1 + 0xc) = in_s0;
     *(unsigned int *)(param_1 + 0x10) = in_s1;
     *(unsigned int *)(param_1 + 0x14) = in_s2;
@@ -34,7 +34,7 @@ void FUN_003e566c(int param_1)
       temp_v1 = *(int *)(temp_v0 + 4);
     }
     if (temp_v0 != 0 && temp_v1 != 0) {
-      FUN_003fdb18();
+      controllerSetRotationEulerDegrees();
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 3);

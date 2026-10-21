@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00122692(int, unsigned char [4]);
 int sharedRefHolderDestroy2(unsigned char [4]);
 int FUN_002fde5c(unsigned char [4]);
-int FUN_003031e4(unsigned char [4], int *);
+int streamReadWordCopy(unsigned char [4], int *);
 
 /* stack frame of param_2: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00122692. */
 /* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002fde5c. */
-/* Supplied declaration required: FUN_003031e4. */
+/* Supplied declaration required: streamReadWordCopy. */
 
 
 unsigned int FUN_00117300(int param_1,int param_2)
@@ -32,7 +32,7 @@ unsigned int FUN_00117300(int param_1,int param_2)
   
   FUN_002fde5c(temp_v1);
   FUN_00122692(param_1,temp_v1);
-  if (((*(char *)(param_1 + 4) == '\0') && (FUN_003031e4(temp_v1,&temp_v3), temp_v2 == '\0'))
+  if (((*(char *)(param_1 + 4) == '\0') && (streamReadWordCopy(temp_v1,&temp_v3), temp_v2 == '\0'))
      && (temp_v3 == param_2 + 1)) {
     sharedRefHolderDestroy2(temp_v1);
     temp_v0 = 1;

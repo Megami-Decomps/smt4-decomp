@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002ec728. */
 /* Supplied declaration required: lessU32. */
-extern int FUN_002fd078(int, unsigned int);
+extern int stringRefEqual(int, unsigned int);
 extern int wordRefsEqual_0030fbec(unsigned int **, int *);
 extern int wordRefsEqual_0030fbfc(int *, unsigned int *);
 
@@ -74,7 +74,7 @@ unsigned int FUN_002ec774(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v0 = *(int *)(param_1 + 0x14);
   }
   if ((temp_v0 != *(int *)(param_1 + 0x14)) &&
-     (temp_v0 = FUN_002fd078(temp_v0 + 0x14,temp_v8), temp_v0 != 0)) {
+     (temp_v0 = stringRefEqual(temp_v0 + 0x14,temp_v8), temp_v0 != 0)) {
     temp_v4 = param_1 + 0x39;
     puVar4 = (unsigned int *)(*(unsigned int **)(param_1 + 0x30))[1];
     puVar6 = *(unsigned int **)(param_1 + 0x30);

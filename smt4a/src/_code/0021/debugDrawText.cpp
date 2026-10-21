@@ -1,31 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `debugDrawText` (_code @ 0x21229c, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps zero in s16 across wstrlen and x/y in d9; compiler materializes zero after the call and packs x/y into d8. Candidate O2. */
+#include "shard/W6_W6Match2_TextDrawState.h"
 
 extern "C" {
+extern TextDrawState DAT_005b3bc0;
+u32 wstrlen(const char*);
+void FUN_00181ae0(TextRenderer*, TextFont*, const char*, u32,
+                  f32, f32, f32, f32, f32, f32, f32, f32);
 
-int FUN_00181ae0(unsigned int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int DAT_005b3bc8; /* 0x5b3bc8 */
-
-/* Supplied declaration required: FUN_00181ae0. */
-extern unsigned int wstrlen(unsigned int);
-
-
-void debugDrawText(unsigned int param_1,unsigned int param_2)
-
+// Draw with the current font, black RGB and the supplied alpha.
+void debugDrawText(TextRenderer* renderer, const char* text, f32 x, f32 y, f32 alpha)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  temp_v0 = wstrlen(param_2);
-  FUN_00181ae0(param_1,DAT_005b3bc8,param_2,temp_v0);
-  return;
+    FUN_00181ae0(renderer, DAT_005b3bc0.font, text, wstrlen(text),
+                  x, y, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, alpha);
 }
-
-} /* extern "C" */
+}

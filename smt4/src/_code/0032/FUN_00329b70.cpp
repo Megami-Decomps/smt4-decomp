@@ -19,7 +19,7 @@ int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int FUN_00295660(...);
 int soundChannelStopAll(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int scrScriptProcessDestroy(...);
 int FUN_002bd06c(...);
 int FUN_002bee58(...);
@@ -29,8 +29,8 @@ int asdMemFree(...);
 int asdMdlManagerMarkDestroy(...);
 int FUN_00210194(...);
 int gfxObjectDestroy(...);
-int FUN_00293a04(unsigned int, int);
-int FUN_00295d28(void);
+int asdAnimGetTrackLastFrame(unsigned int, int);
+int soundSlotStopById(void);
 int scrScriptProcessStartEntry(...);
 int asdMdlManagerCreateLoaded(...);
 int FUN_0029c2cc(...);
@@ -74,7 +74,7 @@ extern int g_screenStateWork; /* 0x43dd90 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00210194. */
 /* Supplied declaration required: FUN_00241d58. */
 /* Supplied declaration required: FUN_00258170. */
@@ -86,7 +86,7 @@ extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: statusCameraDestroy. */
 /* Supplied declaration required: FUN_0028bf2c. */
-/* Supplied declaration required: FUN_00293a04. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: FUN_00294e18. */
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
@@ -94,12 +94,12 @@ extern unsigned int FUN_00263c1c(unsigned char *);
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_002958f8. */
-/* Supplied declaration required: FUN_00295d28. */
+/* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -151,7 +151,7 @@ unsigned int FUN_00329b70(void)
   temp_v2 = g_screenStateWork;
   FUN_002bf818(g_screenStateWork + 0x8cc);
   *(int *)(temp_v2 + 0x7c) = *(int *)(temp_v2 + 0x7c) + 2;
-  FUN_00293a04(*(unsigned int *)(temp_v2 + 0x80),0);
+  asdAnimGetTrackLastFrame(*(unsigned int *)(temp_v2 + 0x80),0);
   temp_v11 = (float)(int)in_s0;
   __aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x7c),temp_v11);
   *(unsigned int *)(temp_v2 + 0x7c) = temp_v8;
@@ -349,7 +349,7 @@ LAB_0032a1a4:
             temp_v10 = 0x375;
           }
           if (*(int *)(temp_v2 + 0x24) != -1) {
-            FUN_00295d28();
+            soundSlotStopById();
             *(unsigned int *)(temp_v2 + 0x24) = 0xffffffff;
             FUN_002bf810(0x10000ad);
           }
@@ -485,7 +485,7 @@ LAB_0032a1a4:
     break;
   case 4:
     FUN_002bf818();
-    temp_v7 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x2a0));
+    temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x2a0));
     if ((temp_v7 != 2) || (*(char *)(temp_v2 + 0x60e) == '\0')) break;
   case 5:
     temp_v5 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc);
@@ -505,10 +505,10 @@ LAB_0032a1a4:
     break;
   case 6:
     FUN_002bf818();
-    temp_v7 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x2a0));
+    temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x2a0));
     if ((temp_v7 == 2) && (*(char *)(temp_v2 + 0x60e) != '\0')) {
-      FUN_0029c3c0(0,10,0xff);
-      FUN_0029c3c0(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
       soundChannelStopAll(10);
       temp_v7 = g_screenStateWork;
       *(unsigned int *)(g_screenStateWork + 4) = 7;

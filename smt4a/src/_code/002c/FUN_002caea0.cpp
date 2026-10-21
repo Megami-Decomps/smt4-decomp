@@ -7,14 +7,14 @@ extern "C" {
 int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
 int FUN_001523b8(...);
-int FUN_00183764(...);
+int ownerGetFloatValue(...);
 int FUN_00186e2c(...);
 int FUN_001ac2d4(...);
 int asdModelSlotRelease(...);
-int FUN_001f474c(...);
+int asdEnvResetModelBank(...);
 int asdMdlManagerDestroy(...);
 int FUN_00212204(...);
-int FUN_00280c5c(...);
+int lightOwnerRegister(...);
 int asdMdlManagerMarkDestroy(...);
 int FUN_002e08c8(...);
 int faderSetValue(...);
@@ -36,16 +36,16 @@ extern int nw_anim_PlayPolicy_Loop(...); /* 0x1c37f8 */
 /* Supplied declaration required: FUN_001523b8. */
 extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_00183764. */
+/* Supplied declaration required: ownerGetFloatValue. */
 /* Supplied declaration required: FUN_00186e2c. */
 extern int FUN_001ab8c0(void);
 /* Supplied declaration required: FUN_001ac2d4. */
 /* Supplied declaration required: asdModelSlotRelease. */
-/* Supplied declaration required: FUN_001f474c. */
+/* Supplied declaration required: asdEnvResetModelBank. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: FUN_00212204. */
-/* Supplied declaration required: FUN_00280c5c. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: FUN_002e08c8. */
 /* Supplied declaration required: faderSetValue. */
@@ -77,7 +77,7 @@ unsigned int FUN_002caea0(void)
   case 0:
     temp_v1 = FUN_00162ea4();
     if (temp_v1 == 0) {
-      FUN_001f474c("event/oc/oc_loop.bcenv",0);
+      asdEnvResetModelBank("event/oc/oc_loop.bcenv",0);
       *(unsigned int *)(temp_v0 + 0x55c) = 0;
       temp_v2 = FUN_00387350("event/oc/oc_loop.bccam");
       *(unsigned int *)(temp_v0 + 0x560) = temp_v2;
@@ -93,7 +93,7 @@ unsigned int FUN_002caea0(void)
       temp_v1 = *(int *)(temp_v0 + 0x558);
       *(unsigned int *)(temp_v0 + 0x574) = 1;
       if ((temp_v1 != 0) && (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0)) {
-        FUN_00280c5c(temp_v1,1);
+        lightOwnerRegister(temp_v1,1);
         animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
         FUN_001ac2d4(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x574));
         FUN_002e08c8(*(unsigned int *)(*piVar4 + 8));
@@ -121,7 +121,7 @@ unsigned int FUN_002caea0(void)
     temp_v1 = floatOwnerIsDone(*(unsigned int *)(temp_v0 + 0x55c));
     if ((temp_v1 != 0) || (temp_v1 = FUN_00162ea4(), temp_v1 != 0)) {
       piVar4 = (int *)(temp_v0 + 0x558);
-      FUN_00183764(*(unsigned int *)(*(int *)(temp_v0 + 0x558) + 8));
+      ownerGetFloatValue(*(unsigned int *)(*(int *)(temp_v0 + 0x558) + 8));
       temp_v1 = (int)in_s0;
       FUN_0037a898(*(unsigned int *)(*piVar4 + 8));
       piVar5 = (int *)(temp_v0 + 0x574);

@@ -1,47 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00290ed8` (_code @ 0x290ed8, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
+extern BgmChannelSelection DAT_0044e098;
+extern BgmRequestChannel DAT_004c53c4;
+extern BgmRequestChannel DAT_004c53e4;
+int jyoucyuGetTableEntry(u32 index);
 
-extern unsigned char DAT_0044e098; /* 0x44e098 */
-extern unsigned int DAT_004c53c4; /* 0x4c53c4 */
-extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
-
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-void FUN_00290ed8(unsigned int param_1)
-
+void FUN_00290ed8(u32 frames)
 {
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 == 0) {
-    puVar2 = (unsigned int *)0x0;
-    if ((*(int *)((unsigned char *)&DAT_0044e098 + 0x4)) == 0) {
-      puVar2 = &DAT_004c53c4;
+    if (jyoucyuGetTableEntry(1) != 0) {
+        return;
     }
-    else if ((*(int *)((unsigned char *)&DAT_0044e098 + 0x4)) == 1) {
-      puVar2 = &DAT_004c53e4;
+    BgmRequestChannel* channel = NULL;
+    if (DAT_0044e098.selected == 0) {
+        channel = &DAT_004c53c4;
+    } else if (DAT_0044e098.selected == 1) {
+        channel = &DAT_004c53e4;
     }
-    temp_v1 = puVar2[7];
-    if (((temp_v1 & 2) != 0) && ((temp_v1 & 0x3c) == 0)) {
-      temp_v2 = (temp_v1 & 0x40) != 0;
-      if (temp_v2) {
-        temp_v1 = temp_v1 | 0x200;
-      }
-      puVar2[2] = param_1;
-      if (!temp_v2) {
-        temp_v1 = temp_v1 | 0x10;
-      }
-      puVar2[7] = temp_v1;
+    u32 flags = channel->flags;
+    if ((flags & 2) != 0 && (flags & 0x3c) == 0) {
+        if ((flags & 0x40) != 0) {
+            flags |= 0x200;
+        } else {
+            flags |= 0x10;
+        }
+        channel->fadeFrames = frames;
+        channel->flags = flags;
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

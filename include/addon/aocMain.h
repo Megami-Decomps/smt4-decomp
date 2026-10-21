@@ -12,7 +12,13 @@ typedef struct AocObjC { u8 unk[1]; } AocObjC;
 
 /* The AOC system's main block (Shin Megami Tensei IV layout). */
 typedef struct AocMain {
-    /* 0x000 */ u8 unk000[0x88];
+    union {
+        /* 0x000 */ u8 unk000[0x88];
+        struct {
+            /* 0x000 */ u8 unk000BeforeQuery[0x80];
+            /* 0x080 */ u32 queryResult;
+        } operation;
+    };
     /* 0x088 */ AocObjA objA;
     /* 0x098 */ AocObjB objB;
     /* 0x0A8 */ AocObjC objC;
@@ -34,9 +40,20 @@ typedef struct AocEntry {
 
 /* The content system's block (Shin Megami Tensei IV layout). */
 typedef struct AocSystem {
-    /* 0x000 */ u8 unk000[0x38C];
+    /* 0x000 */ union {
+        u8 unk000[0x38C];
+        struct {
+            u8 unk000[0x310];
+            s32 count; /* 0x310 */
+            u32 unk314;
+            struct AocPackage *entries; /* 0x318 */
+            u8 unk31c[0x70];
+        } packages;
+    };
     /* 0x38C */ u32 entryCount;
     /* 0x390 */ AocEntry *entries;
+    /* 0x394 */ u32 questCount;
+    /* 0x398 */ struct QuestRecord *quests;
 } AocSystem;
 
 /* A step of the AOC boot, as the step function sees its owner. */

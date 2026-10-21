@@ -9,7 +9,7 @@ int mapDepartSetTarget(...);
 int FUN_00295eb0(...);
 int FUN_00297060(...);
 int scrScriptProcessDestroy(...);
-int FUN_002bd81c(...);
+int positionStateSet(...);
 int FUN_002bd82c(...);
 int FUN_002bd954(...);
 int paramsInit(...);
@@ -18,7 +18,7 @@ int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int drawParameterBlockClear(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -43,7 +43,7 @@ extern unsigned int DAT_0043da34; /* 0x43da34 */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_002bd81c. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_002bd954. */
@@ -53,7 +53,7 @@ extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_0028d664(unsigned int *param_1,unsigned char param_2)
@@ -99,7 +99,7 @@ void FUN_0028d664(unsigned int *param_1,unsigned char param_2)
     taskCreateDraw(&LAB_0028d988,0xe6,0,0,FUN_002109cc,0,0,puVar4);
     puVar3[2] = (unsigned int)puVar5;
     puVar1 = DAT_0043da2c;
-    Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0043da2c + 5);
+    drawParameterBlockClear(DAT_0043da2c + 5);
     paramsInit(puVar1 + 5,0x402506,0x30,&DAT_00402538,0xc,&DAT_00402544,0xc,0,0,&DAT_00402550,0xa8
                 );
     temp_v1 = 0;
@@ -130,7 +130,7 @@ void FUN_0028d664(unsigned int *param_1,unsigned char param_2)
     temp_v0 = asdTextCreate(0);
     puVar3[0x156] = temp_v0;
     FUN_002bd82c(temp_v0,0x323232ff);
-    FUN_002bd81c(puVar3[0x156],0,0x646464ff);
+    positionStateSet(puVar3[0x156],0,0x646464ff);
     temp_v0 = DAT_0043da34;
     FUN_00297060(DAT_0043da34,DAT_0043da30);
     puVar3[0x158] = temp_v0;

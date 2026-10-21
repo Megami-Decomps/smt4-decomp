@@ -72,12 +72,12 @@ extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
-extern int FUN_0019f240(unsigned short);
+extern int padGetMappedValue(unsigned short);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_002685cc. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4894. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_0032fea0. */
 extern int countUnlockedSlots(void);
 extern int FUN_003dfed4(unsigned short, int);
@@ -183,7 +183,7 @@ void FUN_004b1a00(int param_1,int param_2,int param_3)
   temp_v26 = param_1 + 0x7640;
   if (temp_v20 != 0) {
     temp_v1 = FUN_002a4894();
-    temp_v3 = FUN_002c2c68(temp_v26);
+    temp_v3 = objectApplyIfUnblocked(temp_v26);
     if (temp_v3 - 1 <= temp_v1) {
       temp_v15 = 1;
       temp_v1 = FUN_001834a4(0x1d,0x169);
@@ -277,7 +277,7 @@ LAB_004b1d78:
                        (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v8,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v5,0x6a,1,
                        temp_v9);
-          temp_v3 = FUN_0019f240(*(unsigned short *)(temp_v32 + 0xa4));
+          temp_v3 = padGetMappedValue(*(unsigned short *)(temp_v32 + 0xa4));
           temp_v25 = FUN_003dfed4(*(unsigned short *)(temp_v32 + 0xa4),temp_v3 + temp_v9);
           if (temp_v9 != 0) {
             temp_v17 = 0x72e027ff;
@@ -359,7 +359,7 @@ LAB_004b1d78:
       if (temp_v8 != 0) {
         temp_v10 = 0x57d8ffff;
       }
-      temp_v8 = FUN_0019f240(*(unsigned short *)(temp_v1 + 0x76a4));
+      temp_v8 = padGetMappedValue(*(unsigned short *)(temp_v1 + 0x76a4));
       temp_v25 = FUN_003dfed4(*(unsigned short *)(temp_v1 + 0x76a4),temp_v8 + temp_v9);
       if ((temp_v0 & 0xff) != 0) {
         temp_v10 = 0x72e027ff;

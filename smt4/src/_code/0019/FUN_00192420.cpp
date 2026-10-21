@@ -4,8 +4,8 @@
 
 extern "C" {
 
-extern int DAT_00447e40; /* 0x447e40 */
-extern unsigned int *DAT_00447e58; /* 0x447e58 */
+extern int g_vectorQueueWork; /* 0x447e40 */
+extern unsigned int *g_deferredMapModels; /* 0x447e58 */
 
 
 void FUN_00192420(void)
@@ -18,8 +18,8 @@ void FUN_00192420(void)
   int temp_v3;
   int temp_v4;
   
-  puVar2 = DAT_00447e58;
-  DAT_00447e58[2] = 0;
+  puVar2 = g_deferredMapModels;
+  g_deferredMapModels[2] = 0;
   *puVar2 = 0;
   puVar2[1] = 0;
   *(unsigned char *)(puVar2 + 899) = 0;
@@ -46,7 +46,7 @@ void FUN_00192420(void)
     *(unsigned short *)((int)puVar2 + temp_v4 * 0x38 + 0x36) = 0;
     puVar2[temp_v4 * 0xe + 0x10] = 0;
     *(unsigned char *)(puVar2 + temp_v4 * 0xe + 3) = 0;
-    temp_v0 = DAT_00447e40;
+    temp_v0 = g_vectorQueueWork;
     temp_v4 = temp_v2;
   } while (temp_v2 < 0x40);
   temp_v4 = 0;

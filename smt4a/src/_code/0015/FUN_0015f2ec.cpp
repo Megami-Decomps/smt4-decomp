@@ -5,13 +5,13 @@
 extern "C" {
 
 int fileSectionGetData(unsigned int, unsigned int, int);
-int FUN_00176480(void);
+void appletShowTextMessage(const unsigned short* text);
 int FUN_001764f4(unsigned int);
 
 extern int jobGetWork(void);
 /* Supplied declaration required: fileSectionGetData. */
 extern unsigned int dataTableValueOrZero(unsigned int);
-/* Supplied declaration required: FUN_00176480. */
+/* Supplied declaration required: appletShowTextMessage. */
 /* Supplied declaration required: FUN_001764f4. */
 
 
@@ -31,8 +31,7 @@ unsigned int FUN_0015f2ec(void)
       if (((temp_v1 & 4) != 0) && ((temp_v1 & 2) == 0)) {
         temp_v3 = *(unsigned int *)(temp_v0 + 0xd54);
         temp_v2 = dataTableValueOrZero(0x41);
-        fileSectionGetData(temp_v2,temp_v3,0);
-        FUN_00176480();
+        appletShowTextMessage((const unsigned short*)fileSectionGetData(temp_v2,temp_v3,0));
         *(unsigned int *)(temp_v0 + 0x754) = *(unsigned int *)(temp_v0 + 0x754) & 0xfffffff8;
       }
     }

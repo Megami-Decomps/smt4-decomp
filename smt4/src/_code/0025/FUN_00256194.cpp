@@ -3,11 +3,11 @@
 extern "C" {
 
 int memClear(void *ptr, int size);
-extern GameOptions *gameGetOptions(void);
+extern GameOptions *gameGetSupportUnitData(void);
 
 void FUN_00256194(void)
 {
-    GameOptions *options = gameGetOptions();
+    GameOptions *options = gameGetSupportUnitData();
 
     if ((options->flags & 1) == 0) {
         if (options->unk46 == 0x4b1) {

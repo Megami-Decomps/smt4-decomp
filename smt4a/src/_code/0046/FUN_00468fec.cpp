@@ -7,11 +7,11 @@ extern "C" {
 int FUN_00214da4(void);
 int FUN_002a4b74(void);
 int dataTableFindMatching35(void);
-int FUN_0034913c(void);
+int messageBannerRestartOrClear(void);
 int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
 int FUN_0037d6e4(int);
-int FUN_00388758(int);
+int messageDismissNumericBanner(int);
 int FUN_003a7630(int);
 int FUN_003c5fc4(int);
 int FUN_003fe86c(int, int);
@@ -21,18 +21,18 @@ extern unsigned char DAT_005333bb; /* 0x5333bb */
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int FUN_0019de98(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00214da4. */
-extern int FUN_00224880(unsigned int);
-extern int FUN_002a4b60(void);
+extern int scrRunOpcodesStub(unsigned int);
+extern int messageMainGetValue(void);
 /* Supplied declaration required: FUN_002a4b74. */
 /* Supplied declaration required: dataTableFindMatching35. */
 extern int messageWindowIsState1(void);
-/* Supplied declaration required: FUN_0034913c. */
+/* Supplied declaration required: messageBannerRestartOrClear. */
 extern int FUN_0034919c(void);
 extern int panelIsActiveState2(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
 /* Supplied declaration required: FUN_0037d6e4. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_003a7630. */
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -50,11 +50,11 @@ void FUN_00468fec(unsigned int *param_1)
   unsigned int temp_v3;
   unsigned char temp_v4;
   
-  temp_v0 = FUN_00224880(*(unsigned int *)param_1[0xad]);
+  temp_v0 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
   if (temp_v0 != 2) {
     temp_v0 = messageWindowIsState1();
     if (temp_v0 != 0) {
-      temp_v0 = FUN_002a4b60();
+      temp_v0 = messageMainGetValue();
       if ((char)param_1[6] == '\0') {
         temp_v4 = *(unsigned char *)(temp_v0 + 0x5333b8);
       }
@@ -73,7 +73,7 @@ void FUN_00468fec(unsigned int *param_1)
         if (temp_v0 != 0) {
           temp_v1 = panelIsActiveState2();
           if (temp_v1 != 0) {
-            FUN_00388758(0);
+            messageDismissNumericBanner(0);
           }
         }
         else {
@@ -156,7 +156,7 @@ void FUN_00468fec(unsigned int *param_1)
     case 1:
       temp_v0 = FUN_0034919c();
       if (temp_v0 != 0) {
-        FUN_00388758(0);
+        messageDismissNumericBanner(0);
       }
       FUN_00214da4();
       param_1[1] = 8;
@@ -165,17 +165,17 @@ void FUN_00468fec(unsigned int *param_1)
     case 2:
       temp_v0 = FUN_0034919c();
       if (temp_v0 != 0) {
-        FUN_00388758(0);
+        messageDismissNumericBanner(0);
       }
       FUN_00214da4();
       param_1[1] = 9;
       param_1[2] = 0;
-      FUN_00388758(0);
+      messageDismissNumericBanner(0);
       break;
     case 3:
       temp_v0 = FUN_0034919c();
       if (temp_v0 != 0) {
-        FUN_00388758(0);
+        messageDismissNumericBanner(0);
       }
       FUN_00214da4();
       param_1[1] = 10;
@@ -191,9 +191,9 @@ void FUN_00468fec(unsigned int *param_1)
     case 0xffffffff:
       temp_v0 = FUN_0034919c();
       if (temp_v0 != 0) {
-        FUN_00388758(0);
+        messageDismissNumericBanner(0);
       }
-      FUN_0034913c();
+      messageBannerRestartOrClear();
       param_1[1] = 0x11;
       param_1[2] = 0;
     }

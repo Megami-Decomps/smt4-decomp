@@ -26,7 +26,7 @@ extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
 extern int FUN_00481100(unsigned int);
 /* Supplied declaration required: cellListAppend. */
 /* Supplied declaration required: FUN_004964e0. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_004cfeb0. */
 /* Supplied declaration required: FUN_004cff88. */
 
@@ -208,7 +208,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
   FUN_004cff88(param_1 + 0xf00,0);
   FUN_004964e0(param_1,param_2);
   temp_v0 = *(int *)(param_1 + 0xb40);
-  temp_v1 = FUN_004cfe4c(param_1 + temp_v0 * 0x74 + 0xb60);
+  temp_v1 = flaggedValueHolderGetTotal(param_1 + temp_v0 * 0x74 + 0xb60);
   screenShowMessage(*(unsigned short *)(param_1 + temp_v0 * 0x1002 + 0xf74 + temp_v1 * 4));
   return;
 }

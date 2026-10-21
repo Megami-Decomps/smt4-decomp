@@ -1,36 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00217634` (_code @ 0x217634, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads x/y together, retains a distinct sum register, and assigns VFP temporaries differently. */
+#include "shard/W6_W6Match2_NormalizeVector.h"
 
-extern "C" {
+extern "C" NormalizedVector DAT_004ea91c;
 
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-
-#ifndef ROMWRIGHT_SQRT_4_DEFINED
-#define ROMWRIGHT_SQRT_4_DEFINED
-double sqrt(double);
-static float romwright_sqrt_4(float value)
+// Normalize the shared vector when its length is nonzero.
+extern "C" void FUN_00217634()
 {
-    return (float)sqrt((double)value);
+    NormalizedVector* vector = &DAT_004ea91c;
+    f32 length = sqrtf(vector->x * vector->x + vector->y * vector->y + vector->z * vector->z);
+    if (length > 0.0f) {
+        vector->x /= length;
+        vector->y /= length;
+        vector->z /= length;
+    }
 }
-#endif
-
-
-void FUN_00217634(void)
-
-{
-  float temp_v0;
-  
-  temp_v0 = romwright_sqrt_4(DAT_004ea91c * DAT_004ea91c + DAT_004ea920 * DAT_004ea920 +
-               DAT_004ea924 * DAT_004ea924);
-  if (0.0f < temp_v0) {
-    DAT_004ea91c = DAT_004ea91c / temp_v0;
-    DAT_004ea920 = DAT_004ea920 / temp_v0;
-    DAT_004ea924 = DAT_004ea924 / temp_v0;
-  }
-  return;
-}
-
-} /* extern "C" */

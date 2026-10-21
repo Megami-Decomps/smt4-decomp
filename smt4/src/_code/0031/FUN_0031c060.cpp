@@ -1,35 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031c060` (_code @ 0x31c060, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges the two enable calls; retail retains distinct branches and two alignment NOPs. */
+#include "common.h"
+
+struct BustupCutState {
+    u8 unk000[0x630]; // 0x000
+    u32 job;           // 0x630
+};
 
 extern "C" {
+extern BustupCutState* g_bustupCutAnim;
+s32 scrGetArg(u32 index);
+void FUN_002b7160(u32 job, u8 enabled);
 
-int FUN_002b7160(int, int);
-
-extern int g_bustupCutAnim; /* 0x43dfc0 */
-
-extern int scrGetArg(void);
-/* Supplied declaration required: FUN_002b7160. */
-
-
-unsigned int FUN_0031c060(void)
-
+// Apply the script argument to the current bust-up animation job's enable byte.
+u32 FUN_0031c060(u32 argumentIndex)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = *(int *)(g_bustupCutAnim + 0x630);
-  if (temp_v1 != 0) {
-    if (temp_v0 != 0) {
-      FUN_002b7160(temp_v1,1);
+    s32 enabled = scrGetArg(argumentIndex);
+    u32 job = g_bustupCutAnim->job;
+    if (job != 0) {
+        if (enabled != 0) {
+            FUN_002b7160(job, 1);
+        } else {
+            FUN_002b7160(job, 0);
+        }
     }
-    else {
-      FUN_002b7160(temp_v1,0);
-    }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

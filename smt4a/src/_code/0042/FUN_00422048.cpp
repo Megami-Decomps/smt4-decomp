@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00158b88(unsigned int [6]);
-int FUN_00158bf8(unsigned int [6]);
+int gfxCombinerStateInitialize(unsigned int [6]);
 int FUN_0015fcec(unsigned int [6], unsigned char *);
 int FUN_00177e6c(unsigned char *, unsigned int);
 int sysMemClear(unsigned int *, int);
@@ -22,7 +22,7 @@ typedef struct {
 extern unsigned char DAT_005cc554; /* 0x5cc554 */
 
 /* Supplied declaration required: FUN_00158b88. */
-/* Supplied declaration required: FUN_00158bf8. */
+/* Supplied declaration required: gfxCombinerStateInitialize. */
 /* Supplied declaration required: FUN_0015fcec. */
 /* Supplied declaration required: FUN_00177e6c. */
 /* Supplied declaration required: sysMemClear. */
@@ -51,7 +51,7 @@ unsigned int * FUN_00422048(void)
   temp_v0 = FUN_0042c5d0();
   puVar2 = &DAT_005cc554;
   FUN_00177e6c(&DAT_005cc554,temp_v0);
-  FUN_00158bf8(temp_v3);
+  gfxCombinerStateInitialize(temp_v3);
   FUN_00158b88(temp_v3);
   temp_v4 = 2;
   temp_v5 = 0xe;

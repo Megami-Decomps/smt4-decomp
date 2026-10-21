@@ -8,7 +8,7 @@ int FUN_001464cc(...);
 int FUN_002aa18c(...);
 int FUN_002aa200(unsigned int, unsigned int, int);
 int FUN_002aea44(unsigned char [4]);
-int FUN_002aea50(int *, int *, int);
+int callbackBindingInitFromKind(int *, int *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -47,7 +47,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 /* Supplied declaration required: FUN_002aa18c. */
 /* Supplied declaration required: FUN_002aa200. */
 /* Supplied declaration required: FUN_002aea44. */
-/* Supplied declaration required: FUN_002aea50. */
+/* Supplied declaration required: callbackBindingInitFromKind. */
 extern int __aeabi_uidivmod(unsigned int, int);
 
 
@@ -119,7 +119,7 @@ void FUN_002b2b88(unsigned int param_1,unsigned int *param_2,int param_3,int par
   temp_v7 = (unsigned int)((unsigned long long)temp_v16 >> 0x20);
   piVar13 = *(int **)(temp_v6 + 8);
   temp_v2 = temp_v7;
-  FUN_002aea50(&temp_v20,piVar13,0x30);
+  callbackBindingInitFromKind(&temp_v20,piVar13,0x30);
   FUN_001464cc(g_titleScene);
   temp_v20 = param_3;
   temp_v14 = (unsigned long long)temp_v7 << 0x20;

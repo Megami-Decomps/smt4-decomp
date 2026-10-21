@@ -17,15 +17,15 @@ typedef struct MessageMain {
 
 extern MessageMain g_messageMain;
 
-extern s32 FUN_002b89e4(MsgWindow *window, u32 kind);
+extern s32 titleOverlaySetModeAnimation(MsgWindow *window, u32 kind);
 
-/* If the message window is active (state != 0), runs FUN_002b89e4 for its kind and resets it to state 3. */
+/* If the message window is active (state != 0), runs titleOverlaySetModeAnimation for its kind and resets it to state 3. */
 void msgWindowReset(void)
 {
     MsgWindow *window = g_messageMain.window;
 
     if (window->state != 0 && window != NULL) {
-        FUN_002b89e4(window, window->kind);
+        titleOverlaySetModeAnimation(window, window->kind);
         window->state = 3;
         window->dirty = 0;
     }

@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned char g_appletBusyFlag; /* 0x465228 */
 
-extern unsigned int FUN_002c3124(unsigned int, unsigned int *, unsigned int);
+extern unsigned int fileLoadSync(unsigned int, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_002c3510. */
 extern unsigned long long FUN_002c3520(void);
 /* Supplied declaration required: FUN_00354dac. */
@@ -33,7 +33,7 @@ int FUN_001db820(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   unsigned long long temp_v2;
   int temp_v3;
   
-  temp_v0 = FUN_002c3124(param_5,(unsigned int *)&temp_v3,0);
+  temp_v0 = fileLoadSync(param_5,(unsigned int *)&temp_v3,0);
   temp_v1 = param_1;
   FUN_00354e48(param_1,param_2,temp_v0,temp_v3,param_4,param_3);
   FUN_002c3510();

@@ -20,7 +20,7 @@ extern int g_btlTalkBustUp; /* 0x434210 */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002a5ee4. */
 /* Supplied declaration required: FUN_002ae8e4. */
-extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002c58c8. */
@@ -46,7 +46,7 @@ void FUN_002954f4(int param_1,int param_2)
     *(unsigned int *)(temp_v0 + 0x2f8) = temp_v2;
     *(int *)(temp_v0 + 0x308) = param_1;
     if (param_2 == 0) {
-      temp_v1 = FUN_002ae98c(g_aocSystem,0x18,temp_v2,1);
+      temp_v1 = aocRunByName(g_aocSystem,0x18,temp_v2,1);
       if (temp_v1 != 0) {
         FUN_002ae8e4(g_aocSystem,0x18,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
       }
@@ -59,7 +59,7 @@ void FUN_002954f4(int param_1,int param_2)
       *(unsigned int *)(temp_v0 + 0x2ec) = 0;
       return;
     }
-    temp_v1 = FUN_002ae98c(g_aocSystem,0x18,temp_v2,1);
+    temp_v1 = aocRunByName(g_aocSystem,0x18,temp_v2,1);
     if (temp_v1 != 0) {
       FUN_002a5ee4(g_aocSystem,0x18,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
     }

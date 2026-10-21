@@ -9,7 +9,7 @@ int FUN_001ad9b4(void);
 int qcMainSetMode(int);
 int FUN_00270c58(int);
 int FUN_002e5924(int);
-int FUN_0035c6ac(void);
+int frameTexInitActive(void);
 int campButtonHelpRelease(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ extern int FUN_001bd118(void);
 /* Supplied declaration required: qcMainSetMode. */
 /* Supplied declaration required: FUN_00270c58. */
 /* Supplied declaration required: FUN_002e5924. */
-/* Supplied declaration required: FUN_0035c6ac. */
+/* Supplied declaration required: frameTexInitActive. */
 /* Supplied declaration required: campButtonHelpRelease. */
 extern int FUN_004186e0(void);
 
@@ -66,7 +66,7 @@ void FUN_00469d38(int param_1)
     *(int *)(param_1 + 0xc) = temp_v0;
     if (temp_v0 == 7) {
       eventQueueAddUnique(0x1000222);
-      FUN_0035c6ac();
+      frameTexInitActive();
     }
     if (*(int *)(param_1 + 0xc) == 8) {
       *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;

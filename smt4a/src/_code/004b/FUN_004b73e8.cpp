@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001f4908(int, int, int);
+int slotSetRequest(int, int, int);
 int obj04Finish(void);
 int FUN_00407450(unsigned int);
 int FUN_00471d00(void);
@@ -21,7 +21,7 @@ extern int g_aocSystem; /* 0x570280 */
 extern short DAT_005f17a8; /* 0x5f17a8 */
 extern short DAT_005f17aa; /* 0x5f17aa */
 
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: FUN_00407450. */
 /* Supplied declaration required: FUN_00471d00. */
@@ -59,7 +59,7 @@ void FUN_004b73e8(int param_1)
     else {
       temp_v1 = *(unsigned int *)(param_1 + 0x20);
       if ((temp_v1 & 0x400000) != 0) {
-        FUN_001f4908(0,0x1e,0xff);
+        slotSetRequest(0,0x1e,0xff);
         *(unsigned int *)(param_1 + 0x2c) = 0;
         *(unsigned int *)(param_1 + 0x28) = 0x10;
       }
@@ -69,7 +69,7 @@ void FUN_004b73e8(int param_1)
               (!(((temp_v1 & 0x2000000) == 0 && (temp_v1 & 0x8000000) == 0) && (temp_v1 & 0x20000000) == 0
                 ))) {
         if ((temp_v1 & 0x100) == 0) {
-          FUN_001f4908(0,10,0xff);
+          slotSetRequest(0,10,0xff);
         }
         temp_v1 = *(unsigned int *)(param_1 + 0x20);
         if (((((temp_v1 & 0x800000) != 0 || (temp_v1 & 0x1000000) != 0) ||
@@ -78,7 +78,7 @@ void FUN_004b73e8(int param_1)
              (((temp_v1 & 0x200000) != 0 || (temp_v1 & 0x40000) != 0 ||
               ((temp_v1 & 0x4000000) != 0 || (temp_v1 & 0x20000000) != 0)))))) && ((temp_v1 & 0x100) == 0)
            ) {
-          FUN_001f4908(1,10,0xff);
+          slotSetRequest(1,10,0xff);
         }
         *(unsigned int *)(param_1 + 0x2c) = 0;
         *(unsigned int *)(param_1 + 0x28) = 0x10;

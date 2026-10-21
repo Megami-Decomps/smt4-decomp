@@ -8,16 +8,16 @@ int CONCAT44(double, double);
 int gameFlagsGetBlock(void);
 int FUN_001835b4(...);
 int FUN_001849bc(...);
-int FUN_002bf1a4(...);
+int areaDiscoveryMarkCell(...);
 int FUN_00487d6c(...);
 int FUN_0048a5e4(...);
 int FUN_0048b420(...);
 int FUN_00490a10(...);
 int FUN_0049177c(...);
-int FUN_00492adc(...);
-int FUN_00492b98(...);
+float FUN_00492adc(int);
+float FUN_00492b98(void);
 int FUN_00492bc0(...);
-int FUN_00492c34(int);
+int naviMainSelectPair(int);
 int FUN_00492c70(int);
 int words2Copy(int, float *);
 int FUN_0049368c(...);
@@ -57,21 +57,19 @@ extern unsigned long long campIsState85(void);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001849bc. */
 extern unsigned long long gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_002bf1a4. */
+/* Supplied declaration required: areaDiscoveryMarkCell. */
 extern int gameFlagsClassify(int);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_00487d6c. */
 /* Supplied declaration required: FUN_0048a5e4. */
-extern int FUN_0048b1bc(int);
+extern unsigned char FUN_0048b1bc(int context, float angle);
 /* Supplied declaration required: FUN_0048b420. */
 /* Supplied declaration required: FUN_00490a10. */
 /* Supplied declaration required: FUN_0049177c. */
-/* Supplied declaration required: FUN_00492adc. */
 extern unsigned long long *sub68OwnerGetBlock60(int);
-/* Supplied declaration required: FUN_00492b98. */
 /* Supplied declaration required: FUN_00492bc0. */
 extern float *lmapSceneGetObj(int);
-/* Supplied declaration required: FUN_00492c34. */
+/* Supplied declaration required: naviMainSelectPair. */
 extern int FUN_00492c5c(int);
 /* Supplied declaration required: FUN_00492c70. */
 /* Supplied declaration required: words2Copy. */
@@ -139,7 +137,7 @@ void FUN_00487470(int param_1)
   gameFlagsGetBlock();
   temp_v37 = temp_v42 + 0x4cc;
   temp_v31 = FUN_00492bc0();
-  FUN_00492c34(temp_v37);
+  naviMainSelectPair(temp_v37);
   pfVar3 = (float *)lmapSceneGetObj(temp_v37);
   temp_v18 = *pfVar3;
   temp_v20 = pfVar3[2];
@@ -242,7 +240,7 @@ void FUN_00487470(int param_1)
               temp_v1 = (unsigned char)(in_fpscr >> 0x18);
               if ((unsigned char)((temp_v1 >> 5) & 1) && !(unsigned char)(temp_v1 >> 6)) goto LAB_00487744;
 LAB_00487894:
-              FUN_002bf1a4(temp_v31,(int)(temp_v14 + ((unsigned int)(temp_v14 >> 0x1f) >> 0x1a)) >> 6,temp_v5);
+              areaDiscoveryMarkCell(temp_v31,(int)(temp_v14 + ((unsigned int)(temp_v14 >> 0x1f) >> 0x1a)) >> 6,temp_v5);
             }
             else {
 LAB_00487744:
@@ -335,7 +333,7 @@ LAB_00487744:
                                ((unsigned int)(temp_v20 <= temp_v18) << 0x1d);
                     temp_v1 = (unsigned char)(in_fpscr >> 0x18);
                     if (!(unsigned char)((temp_v1 >> 5) & 1) || (unsigned char)(temp_v1 >> 6)) {
-                      FUN_002bf1a4(temp_v31,(int)(temp_v14 + ((unsigned int)(temp_v14 >> 0x1f) >> 0x1a)) >> 6,
+                      areaDiscoveryMarkCell(temp_v31,(int)(temp_v14 + ((unsigned int)(temp_v14 >> 0x1f) >> 0x1a)) >> 6,
                                    temp_v5);
                     }
                   }
@@ -437,13 +435,11 @@ LAB_00487744:
   temp_v5 = NaviMain_GetCurrentMap(temp_v37);
   if (temp_v2 == temp_v5) {
     if (temp_v38 == 0) {
-      FUN_00492adc(temp_v37);
-      temp_v2 = FUN_0048b1bc(temp_v42);
+      temp_v2 = FUN_0048b1bc(temp_v42,FUN_00492adc(temp_v37));
       temp_v14 = (int)temp_v29;
       temp_v5 = (int)temp_v28;
       FUN_0049368c(temp_v42 + 0x4d0,temp_v2 + 0xbc1,temp_v5,temp_v14,0xb,1);
-      FUN_00492b98(temp_v37);
-      temp_v2 = FUN_0048b1bc(temp_v42);
+      temp_v2 = FUN_0048b1bc(temp_v42,FUN_00492b98());
       FUN_0049368c(temp_v42 + 0x4d0,temp_v2 + 0xbb9,temp_v5,temp_v14,0xb,1);
     }
     FUN_00492adc(temp_v37);

@@ -7,7 +7,7 @@
  * name is known): the table holds member-function pointers, not a vtable. */
 class Obj5333c0 {
 public:
-    /* Once the transition (FUN_002802c8) is over, moves to state 5 when the mode byte is 1,
+    /* Once the transition (screenFadeIsBusy) is over, moves to state 5 when the mode byte is 1,
      * otherwise to state 4. */
     void chooseNextState();
 

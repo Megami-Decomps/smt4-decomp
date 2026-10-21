@@ -12,7 +12,7 @@ int FUN_004a3b48(int);
 int FUN_004a41d8(int);
 int FUN_004a6c50(int, int);
 int words4At20Clear(int);
-int FUN_004cf880(int);
+int uiOpenStartAnimations(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -30,8 +30,8 @@ extern int FUN_002a4b28(short);
 /* Supplied declaration required: FUN_004a41d8. */
 /* Supplied declaration required: FUN_004a6c50. */
 /* Supplied declaration required: words4At20Clear. */
-/* Supplied declaration required: FUN_004cf880. */
-extern int FUN_004cfe4c(int);
+/* Supplied declaration required: uiOpenStartAnimations. */
+extern int flaggedValueHolderGetTotal(int);
 extern int rangeGetMinimumLimit(int);
 
 
@@ -53,15 +53,15 @@ void FUN_004a2064(int param_1)
   temp_v7 = param_1 + 0x864;
   if (*(int *)(param_1 + 0x14) != 0xb) {
     if (*(int *)(param_1 + 0x14) == 2) {
-      temp_v3 = FUN_004cfe4c(param_1 + 0x20);
+      temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
       temp_v1 = *(short *)(temp_v7 + temp_v3 * 0x20 + 4);
-      FUN_004cf880(param_1);
-      temp_v3 = FUN_004cfe4c(param_1 + 0x20);
+      uiOpenStartAnimations(param_1);
+      temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
       temp_v0 = *(short *)(temp_v7 + temp_v3 * 0x20 + 4);
       temp_v5 = (unsigned int)temp_v0;
       if (temp_v5 != (int)temp_v1) {
         if (*(char *)(param_1 + 0x860) != '\0') {
-          temp_v3 = FUN_004cfe4c(param_1 + 0x20);
+          temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
           temp_v1 = *(short *)(temp_v7 + temp_v3 * 0x20 + 4);
           temp_v5 = (unsigned int)temp_v1;
           if (*(char *)(param_1 + 0x861) != '\x01') {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00287aec(void);
 
 extern int g_lmapScene; /* 0x447e88 */
-extern int DAT_0044cd88; /* 0x44cd88 */
+extern int g_mapStateSlots; /* 0x44cd88 */
 
 /* Supplied declaration required: FUN_00287aec. */
 
@@ -29,10 +29,10 @@ void FUN_001fc0a8(void)
   unsigned int temp_v10;
   float temp_v11;
   
-  if (*(short *)(DAT_0044cd88 + 4) == 0x65) {
+  if (*(short *)(g_mapStateSlots + 4) == 0x65) {
     temp_v3 = 0;
     do {
-      temp_v5 = DAT_0044cd88 + temp_v3 * 0x4c;
+      temp_v5 = g_mapStateSlots + temp_v3 * 0x4c;
       temp_v8 = *(char *)(temp_v5 + 0x58) != '\0';
       temp_v0 = '\0';
       if (temp_v8) {
@@ -44,7 +44,7 @@ void FUN_001fc0a8(void)
         *(unsigned int *)(temp_v5 + 0x9c) = temp_v10;
         *(unsigned int *)(temp_v5 + 0xa0) = 999;
       }
-      temp_v5 = DAT_0044cd88;
+      temp_v5 = g_mapStateSlots;
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x20);
     temp_v3 = 0;

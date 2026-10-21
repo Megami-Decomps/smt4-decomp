@@ -18,7 +18,7 @@ extern int FUN_003472f0(...); /* 0x3472f0 */
 extern int soundHandlePairDetach(...); /* 0x349500 */
 extern int FUN_00376974(...); /* 0x376974 */
 extern int FUN_00376d74(...); /* 0x376d74 */
-extern int FUN_0038097c(...); /* 0x38097c */
+extern int soundObjDetachHandles(...); /* 0x38097c */
 extern unsigned char DAT_0042198c; /* 0x42198c */
 extern unsigned char DAT_004219ac; /* 0x4219ac */
 extern unsigned char DAT_00421c78; /* 0x421c78 */
@@ -44,7 +44,7 @@ unsigned int * FUN_0033b66c(int param_1)
   *(unsigned char **)(param_1 + 0x788) = &DAT_004219ac;
   rt_vec_dtor(param_1 + 0x694,FUN_003472f0,0x3c,4);
   rt_vec_dtor(param_1 + 0x674,soundHandlePairDetach,0x10,2);
-  rt_vec_dtor(param_1 + 0x5fc,FUN_0038097c,0x3c,2);
+  rt_vec_dtor(param_1 + 0x5fc,soundObjDetachHandles,0x3c,2);
   rt_vec_dtor(param_1 + 0x4bc,FUN_003406b4,0x50,4);
   temp_v0 = FUN_00377414(param_1 + 0x244);
   temp_v0 = FUN_00378b40(temp_v0 - 0xc0);

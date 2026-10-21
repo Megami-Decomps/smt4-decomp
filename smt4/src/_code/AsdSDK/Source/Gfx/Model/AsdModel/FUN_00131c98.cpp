@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001385ac(void);
 int FUN_0014493c(...);
 int FUN_00144a64(unsigned int *, unsigned int *, int);
-int FUN_002abc9c(unsigned int, unsigned int, int, int, int);
+int allocationTrackPairedResult(unsigned int, unsigned int, int, int, int);
 int FUN_002abe38(void);
 int FUN_002c5be8(void);
 int VectorFloatToUnsigned(double, int);
@@ -55,7 +55,7 @@ static float romwright_fabs_4(float value)
 extern int FUN_001385d4(void);
 /* Supplied declaration required: FUN_0014493c. */
 /* Supplied declaration required: FUN_00144a64. */
-/* Supplied declaration required: FUN_002abc9c. */
+/* Supplied declaration required: allocationTrackPairedResult. */
 /* Supplied declaration required: FUN_002abe38. */
 /* Supplied declaration required: FUN_002c5be8. */
 /* Supplied declaration required: nw_gfx_Fog_Update. */
@@ -327,7 +327,7 @@ void FUN_00131c98(int param_1,int param_2,int param_3)
   *(unsigned char *)(temp_v5 + 0x28) = 0;
   temp_v5 = FUN_001385d4();
   if ((temp_v5 != 0) && (param_3 == 0)) {
-    FUN_002abc9c(*(unsigned int *)(param_1 + 0x14),DAT_00472950,0,0,0);
+    allocationTrackPairedResult(*(unsigned int *)(param_1 + 0x14),DAT_00472950,0,0,0);
     temp_v5 = FUN_002c5be8();
     if (temp_v5 != 0) {
       temp_v9 = *(unsigned int *)(param_1 + 0x14);
@@ -336,8 +336,8 @@ void FUN_00131c98(int param_1,int param_2,int param_3)
                 (*(int **)(param_2 + 0xc),temp_v9,*(unsigned int *)(param_2 + 4),temp_v25,1,1,
                  &DAT_00464b58,*(unsigned char *)(param_1 + 0x1c));
     }
-    FUN_002abc9c(*(unsigned int *)(param_1 + 0x14),DAT_00472954,0,0,1);
-    FUN_002abc9c(*(unsigned int *)(param_1 + 0x14),DAT_00472958,0,1,1);
+    allocationTrackPairedResult(*(unsigned int *)(param_1 + 0x14),DAT_00472954,0,0,1);
+    allocationTrackPairedResult(*(unsigned int *)(param_1 + 0x14),DAT_00472958,0,1,1);
   }
   (**(romwright_code **)(**(int **)(param_2 + 0xc) + 0x18))
             (*(int **)(param_2 + 0xc),*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(param_2 + 4),
@@ -345,7 +345,7 @@ void FUN_00131c98(int param_1,int param_2,int param_3)
   piVar20 = *(int **)(temp_v3 + 0x20);
   for (piVar18 = *(int **)(temp_v3 + 0x1c); piVar18 != piVar20; piVar18 = piVar18 + 1) {
     temp_v1 = *piVar18;
-    FUN_002abc9c(*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(temp_v1 + 0x14c),
+    allocationTrackPairedResult(*(unsigned int *)(param_1 + 0x14),*(unsigned int *)(temp_v1 + 0x14c),
                  *(unsigned char *)(temp_v1 + 0x148),*(unsigned char *)(temp_v1 + 0x149),
                  *(unsigned char *)(temp_v1 + 0x14a));
   }

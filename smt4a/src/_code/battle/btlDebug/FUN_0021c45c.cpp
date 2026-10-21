@@ -19,14 +19,14 @@ int FUN_00203b40(...);
 int FUN_0020d3d4(...);
 int FUN_0023f328(...);
 int FUN_0023f788(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int dataSet16LoadAndSort(void);
 int FUN_002bf464(void);
 int campButtonHelpAcquire(void);
 int FUN_00371c3c(...);
 int FUN_00387240(...);
 int FUN_003eb200(void);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 
 /* stack frame of param_2: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -66,7 +66,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020d3d4. */
 /* Supplied declaration required: FUN_0023f328. */
 /* Supplied declaration required: FUN_0023f788. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: dataSet16LoadAndSort. */
 /* Supplied declaration required: FUN_002bf464. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -80,7 +80,7 @@ extern unsigned short FUN_003e53ec(void);
 extern int FUN_0047fbb4(unsigned int);
 extern int flagValueIsPositive(unsigned int);
 extern int bitsAt60Test(int, unsigned int);
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_0021c45c(int param_1,int param_2)
@@ -119,7 +119,7 @@ void FUN_0021c45c(int param_1,int param_2)
   *(unsigned int *)(param_1 + 0x4bc0) = 0;
   *(unsigned char *)(param_1 + 0x3db0) = 0;
   dataSet16LoadAndSort();
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
+  paramsClearPacket(param_1);
   paramsInit(param_1,&DAT_005288c8,0x114,&DAT_005289dc,600,&DAT_00528c34,0xd8,0,0,&DAT_00528d0c,
                0x9f4);
   temp_v8 = (unsigned long long)temp_v7;
@@ -370,7 +370,7 @@ void FUN_0021c45c(int param_1,int param_2)
   FUN_00203b40(param_1 + 0x3b78,temp_v5,6,1,0,1);
   FUN_002bf464();
   campButtonHelpAcquire();
-  FUN_002804b0(&LAB_0021d124,param_1 + 0x4b98,0);
+  asdLoadFileAsyncSimple(&LAB_0021d124,param_1 + 0x4b98,0);
   wordTripleClear(&DAT_005e1560);
   return;
 }

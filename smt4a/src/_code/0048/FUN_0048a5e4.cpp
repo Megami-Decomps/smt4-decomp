@@ -8,15 +8,15 @@ int FUN_00162790(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int vec2GetXInt(...);
 int efctSetSpeed(void);
-int FUN_0016c69c(...);
-int FUN_0016c6f0(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_00183bb0(void);
 int libc_strcpy(...);
 int FUN_00328078(...);
 int FUN_003849cc(unsigned int, unsigned int, int, unsigned char [132], unsigned int);
 int FUN_00384cf4(...);
 int FUN_0048816c(...);
-int FUN_004927dc(...);
+int uiDrawSpriteWithOptionalVertexColors(...);
 int lmapSceneGetObj(unsigned char *);
 int FUN_00492c5c(...);
 int FUN_0049325c(...);
@@ -54,8 +54,8 @@ extern unsigned int vec2GetYInt(int);
 extern unsigned int FUN_00169240(unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: libc_strcpy. */
@@ -66,10 +66,10 @@ extern int gameFlagsClassify(void);
 /* Supplied declaration required: FUN_003849cc. */
 /* Supplied declaration required: FUN_00384cf4. */
 /* Supplied declaration required: FUN_0048816c. */
-/* Supplied declaration required: FUN_004927dc. */
+/* Supplied declaration required: uiDrawSpriteWithOptionalVertexColors. */
 extern unsigned int FUN_00492bc0(void);
 /* Supplied declaration required: lmapSceneGetObj. */
-extern unsigned int FUN_00492c34(unsigned char *);
+extern unsigned int naviMainSelectPair(unsigned char *);
 /* Supplied declaration required: FUN_00492c5c. */
 extern unsigned int FUN_00492c70(unsigned char *);
 /* Supplied declaration required: FUN_0049325c. */
@@ -110,11 +110,11 @@ void FUN_0048a5e4(int param_1)
   
   temp_v1 = gameFlagsGetBlock();
   temp_v2 = FUN_001692ac(5,1);
-  FUN_0016c6f0(g_renderCtx,3,temp_v2);
+  renderStackPushIndexed(g_renderCtx,3,temp_v2);
   temp_v19 = (unsigned char *)(param_1 + 0x4cc);
   VectorSignedToFloat(0x100 - DAT_00587f20,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v3 = FUN_00492bc0();
-  temp_v2 = FUN_00492c34(temp_v19);
+  temp_v2 = naviMainSelectPair(temp_v19);
   lmapSceneGetObj(temp_v19);
   temp_v16 = 0.0f;
   temp_v15 = 0.0f;
@@ -137,7 +137,7 @@ void FUN_0048a5e4(int param_1)
       }
       else {
         temp_v2 = NaviMain_GetCurrentMap(temp_v19);
-        temp_v3 = FUN_00492c34(temp_v19);
+        temp_v3 = naviMainSelectPair(temp_v19);
       }
       if ((DAT_005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
         FUN_003849cc(temp_v2,temp_v3,1,temp_v17,0xffffffff);
@@ -198,12 +198,12 @@ void FUN_0048a5e4(int param_1)
     }
   }
   temp_v2 = packNibblesAndByte(6,1,0);
-  FUN_0016c6f0(g_renderCtx,6,temp_v2);
+  renderStackPushIndexed(g_renderCtx,6,temp_v2);
   FUN_0049368c(param_1 + 0x4d0,4000,0,0,DAT_00587f20,1);
   FUN_0049368c(param_1 + 0x4d0,0xfa1,0,0,DAT_00587f20,1);
   FUN_0049368c(param_1 + 0x4d0,0xfa2,0,0,DAT_00587f20,1);
   FUN_0049368c(param_1 + 0x4d0,0xfa3,0,0,DAT_00587f20,1);
-  FUN_0016c69c(g_renderCtx,6);
+  renderCtxPopState(g_renderCtx,6);
   temp_v9 = 0xfa5;
   do {
     FUN_0049368c(param_1 + 0x4d0,temp_v9,0,0,DAT_00587f20,1);
@@ -215,7 +215,7 @@ void FUN_0048a5e4(int param_1)
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 0xfad);
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000) != 0) {
-    FUN_0016c69c(g_renderCtx,3);
+    renderCtxPopState(g_renderCtx,3);
     return;
   }
   if (*(char *)(param_1 + 0xc) != '\0') {
@@ -323,7 +323,7 @@ LAB_0048ae60:
           FUN_0049325c(temp_v5,temp_v12,temp_v10,DAT_00587f20,1);
         }
         else {
-          FUN_004927dc(temp_v5,temp_v12,temp_v10,DAT_00587f20,0x80,1);
+          uiDrawSpriteWithOptionalVertexColors(temp_v5,temp_v12,temp_v10,DAT_00587f20,0x80,1);
         }
         if (*(int *)(temp_v1 + 0x15b8) != 0) {
           FUN_0049325c(0x1244,temp_v12,temp_v10,DAT_00587f20,1);
@@ -336,7 +336,7 @@ LAB_0048ae60:
     NaviMain_GetCurrentMap(temp_v19);
     temp_v9 = gameFlagsClassify();
     if (temp_v9 == 2 || temp_v9 == 3) {
-      FUN_0016c69c(g_renderCtx,3);
+      renderCtxPopState(g_renderCtx,3);
       return;
     }
     if (*(int *)(temp_v1 + 0x1514) != 0) {
@@ -360,7 +360,7 @@ LAB_0048ae60:
         FUN_0049325c(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
       }
       else {
-        FUN_004927dc(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,0x80,1);
+        uiDrawSpriteWithOptionalVertexColors(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,0x80,1);
       }
       temp_v5 = *(int *)(temp_v1 + 0x1514);
       if (temp_v5 == 1) {
@@ -393,7 +393,7 @@ LAB_0048ae60:
       FUN_0049325c(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
     }
     else {
-      FUN_004927dc(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,0x80,1);
+      uiDrawSpriteWithOptionalVertexColors(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,0x80,1);
     }
     temp_v2 = 0xfb7;
     if ('\0' < *(char *)(param_1 + 0x58)) {
@@ -428,7 +428,7 @@ LAB_0048ae60:
       FUN_0049325c(0x1244,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
     }
   }
-  FUN_0016c69c(g_renderCtx,3);
+  renderCtxPopState(g_renderCtx,3);
   return;
 }
 

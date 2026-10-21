@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00379be8` (_code @ 0x379be8, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: unit merges a 0x20-byte navi wrapper, a second wrapper at +0x20, and a stub at +0x44; split boundaries before matching. */
 #include "romwright_types.h"
 
 extern "C" {

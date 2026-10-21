@@ -1,118 +1,79 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlTalkCommand_SelectTalkTarget` (_code @ 0x318624, 0x1c0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: -O2 candidate; preserved record/ID registers and placement of the valid-target branch differ, changing native alignment padding. */
+#include "shard/W6_W6Match5_DevilSort.h"
+#include "shard/PadState.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
+struct TalkDevilRecord {
+    u16 id;
+    u8 level;
+    u8 unk03[0x13];
+    u16 flags;                 // 0x16
+    u8 unk18[0x6a];
+    u16 targetId;              // 0x82
+    u8 unk84[0x24];
+};
 extern "C" {
+u32 scrGetArg(u32 index);
+void scrSetResult(s32 result);
+TalkDevilRecord *dataTable00FindById(u16 id);
+PadState *gameGetPlayerData();
+s32 partyHasStoredDemon(u16 id);
+void FUN_002bd06c(u16 id);
+s32 randBetween(s32 low, s32 high);
+s32 randNextInRange(u32 maximum);
+void *asdMemAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
+void asdMemFree(void *memory);
 
-int FUN_0024ea50(...);
-int scrSetResult(...);
-int dataTable00FindById(void);
-int devilGetRecord(...);
-int FUN_002bd06c(int);
-int randNextInRange(unsigned int);
-int asdMemFree(int);
-int asdMemAlloc(int, int, int, int, int);
-int SBORROW4(...);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-/* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0024ea50. */
-/* Supplied declaration required: scrSetResult. */
-extern unsigned int scrGetArg(unsigned int);
-extern int randBetween(int, unsigned int);
-/* Supplied declaration required: dataTable00FindById. */
-extern int gameGetPlayerData(void);
-/* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002bd06c. */
-/* Supplied declaration required: randNextInRange. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdMemAlloc. */
-
-
-unsigned int btlTalkCommand_SelectTalkTarget(void)
-
+u32 btlTalkCommand_SelectTalkTarget()
 {
-/* irregular: 9 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned short *puVar5;
-  unsigned short temp_v4;
-  unsigned int temp_v5;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  
-  temp_v1 = scrGetArg(0) & 0xffff;
-  dataTable00FindById();
-  temp_v6 = (unsigned int)*(unsigned short *)(temp_v1 + 0x82);
-  temp_v8 = temp_v6;
-  dataTable00FindById();
-  devilGetRecord(temp_v6);
-  if ((((temp_v6 == 0 || temp_v8 == 0) || ((*(unsigned short *)(temp_v8 + 0x16) & 0x400) == 0)) ||
-      (temp_v2 = gameGetPlayerData(), *(unsigned char *)(temp_v2 + 0x76) < *(unsigned char *)(temp_v8 + 2))) ||
-     (temp_v2 = FUN_0024ea50(temp_v6), temp_v2 != 0)) {
-    temp_v2 = 0x100;
-    asdMemAlloc(0x100,0x100,0,0x962,1);
-    temp_v6 = 0;
-    temp_v3 = gameGetPlayerData();
-    temp_v8 = (unsigned int)*(unsigned char *)(temp_v1 + 2);
-    if (*(unsigned char *)(temp_v3 + 0x76) <= temp_v8) {
-      temp_v3 = gameGetPlayerData();
-      temp_v8 = (unsigned int)*(unsigned char *)(temp_v3 + 0x76);
-    }
-    temp_v0 = (short)(temp_v8 / 2);
-    if (temp_v8 / 2 < 10) {
-      temp_v0 = 10;
-    }
-    temp_v7 = (int)(short)((short)temp_v8 - temp_v0);
-    temp_v3 = randBetween(temp_v7,temp_v8);
-    if (temp_v3 < 1) {
-      scrSetResult(0xffffffff);
-    }
-    else {
-      if (temp_v7 < 1) {
-        temp_v7 = 1;
-      }
-      temp_v1 = 1;
-      do {
-        puVar5 = (unsigned short *)(temp_v1 & 0xffff);
-        devilGetRecord();
-        temp_v4 = temp_v1;
-        dataTable00FindById();
-        temp_v5 = (unsigned int)*(unsigned char *)((int)puVar5 + 3);
-        temp_v9 = SBORROW4(temp_v5,temp_v7);
-        temp_v3 = temp_v5 - temp_v7;
-        if (temp_v7 <= (int)temp_v5) {
-          temp_v9 = SBORROW4(temp_v8,temp_v5);
-          temp_v3 = temp_v8 - temp_v5;
+    TalkDevilRecord *source = dataTable00FindById((u16)scrGetArg(0));
+    u16 target = source->targetId;
+    TalkDevilRecord *record = dataTable00FindById(target);
+    devilGetRecord(target);
+    if (!target || !record || !(record->flags & 0x400) ||
+        gameGetPlayerData()->unk76 < record->level || partyHasStoredDemon(target)) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\Talk\\btlTalkCommand.cpp", 0x387);
+        s16 *candidates = (s16 *)asdMemAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT,
+                                            0, 0x962, 1);
+        u16 count = 0;
+        u32 playerLevel = gameGetPlayerData()->unk76;
+        s32 high = source->level;
+        if (playerLevel <= (u32)high) {
+            high = gameGetPlayerData()->unk76;
         }
-        if (((temp_v3 < 0 == temp_v9) && ((*(unsigned short *)(temp_v4 + 0x16) & 0x400) != 0)) &&
-           (temp_v3 = FUN_0024ea50(*puVar5), temp_v3 == 0)) {
-          FUN_002bd06c(*puVar5);
-          temp_v3 = temp_v6 * 2;
-          temp_v6 = (temp_v6 + 1) & 0xffff;
-          *(unsigned short *)(temp_v2 + temp_v3) = *puVar5;
+        s32 span = high / 2;
+        if (span < 10) {
+            span = 10;
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x4b1);
-      if (temp_v6 != 0) {
-        randNextInRange((temp_v6 - 1) & 0xffff);
-      }
-      scrSetResult();
+        s32 low = (s16)(high - span);
+        if (randBetween(low, high) <= 0) {
+            scrSetResult(-1);
+        } else {
+            if (low <= 0) {
+                low = 1;
+            }
+            for (u32 id = 1; id <= 1200; ++id) {
+                DevilSortRecord *devil = devilGetRecord((u16)id);
+                TalkDevilRecord *data = dataTable00FindById((u16)id);
+                if (devil->level >= low && devil->level <= high &&
+                    (data->flags & 0x400) && !partyHasStoredDemon(devil->id)) {
+                    FUN_002bd06c(devil->id);
+                    candidates[count++] = (s16)devil->id;
+                }
+            }
+            s32 result;
+            if (count) {
+                result = candidates[(s16)randNextInRange((u16)(count - 1))];
+            } else {
+                result = -1;
+            }
+            scrSetResult(result);
+        }
+        asdMemFree(candidates);
+    } else {
+        scrSetResult(target);
     }
-    asdMemFree(temp_v2);
-  }
-  else {
-    scrSetResult(temp_v6);
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

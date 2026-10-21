@@ -6,7 +6,7 @@ extern "C" {
 
 int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea41e(unsigned int [3], int);
-int FUN_0030cae0(int, unsigned int *);
+int onlineJobCompleteWithResult(int, unsigned int *);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern unsigned int *FUN_002e7908(unsigned int *, unsigned int *);
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
 /* Supplied declaration required: FUN_002ea41e. */
-/* Supplied declaration required: FUN_0030cae0. */
+/* Supplied declaration required: onlineJobCompleteWithResult. */
 
 
 void FUN_0012a8a4(int param_1)
@@ -47,7 +47,7 @@ void FUN_0012a8a4(int param_1)
       else {
         if (*(char *)(param_1 + 0x191) == '\0') {
           FUN_002ea41e(temp_v1,param_1 + 0x98);
-          FUN_0030cae0(param_1,puVar2);
+          onlineJobCompleteWithResult(param_1,puVar2);
           return;
         }
         temp_v5[0] = 0x80690001;
@@ -60,7 +60,7 @@ void FUN_0012a8a4(int param_1)
         temp_v4[0] = 0x80690001;
         puVar2 = temp_v4;
         puVar2 = (unsigned int *)FUN_002e7908(puVar3,puVar2);
-        FUN_0030cae0(param_1,puVar2);
+        onlineJobCompleteWithResult(param_1,puVar2);
         return;
       }
       puVar2 = (unsigned int *)&temp_v3;
@@ -73,7 +73,7 @@ void FUN_0012a8a4(int param_1)
     puVar2 = temp_v4;
   }
   puVar2 = (unsigned int *)FUN_002e7908(puVar3,puVar2);
-  FUN_0030cae0(param_1,puVar2);
+  onlineJobCompleteWithResult(param_1,puVar2);
   return;
 }
 

@@ -11,7 +11,7 @@ int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(...);
 int FUN_0030c800(...);
-int FUN_0030c846(int *, unsigned int, unsigned int, unsigned int);
+int holderSetPairAndFlush(int *, unsigned int, unsigned int, unsigned int);
 int wordListAt(unsigned int *, unsigned int);
 int FUN_0030c884(unsigned char [8], int);
 int recordListAt(int, unsigned int);
@@ -49,11 +49,11 @@ extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char 
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
 /* Supplied declaration required: FUN_0030c800. */
-/* Supplied declaration required: FUN_0030c846. */
+/* Supplied declaration required: holderSetPairAndFlush. */
 /* Supplied declaration required: wordListAt. */
 /* Supplied declaration required: FUN_0030c884. */
 /* Supplied declaration required: recordListAt. */
-extern int FUN_0030c8c0(void);
+extern int elemVectorCount(void);
 extern unsigned int vectorCount4_0030c8ce(void);
 /* Supplied declaration required: FUN_0030cac0. */
 /* Supplied declaration required: FUN_0030d0ac. */
@@ -98,7 +98,7 @@ void FUN_0012bce8(int param_1)
     temp_v1 = vectorCount4_0030c8ce();
     if (*(unsigned int *)(param_1 + 0x3f0) <= temp_v1) {
       temp_v19 = param_1 + 0x110;
-      temp_v0 = FUN_0030c8c0();
+      temp_v0 = elemVectorCount();
       if (temp_v0 != *(int *)(param_1 + 0x3f4)) {
         FUN_0030d0ac(temp_v11);
         temp_v7 = 0;
@@ -128,7 +128,7 @@ void FUN_0012bce8(int param_1)
           temp_v0 = temp_v19;
           recordListAt(temp_v19,*(unsigned int *)(param_1 + 0x3f4));
           piVar9 = (int *)(param_1 + 0x280);
-          FUN_0030c846(piVar9,temp_v4,*(unsigned int *)(temp_v0 + 8),*(unsigned int *)(temp_v0 + 0xc));
+          holderSetPairAndFlush(piVar9,temp_v4,*(unsigned int *)(temp_v0 + 8),*(unsigned int *)(temp_v0 + 0xc));
           temp_v8 = *(unsigned int *)(param_1 + 0x294);
           temp_v7 = *(unsigned int *)(param_1 + 0x290);
           (**(romwright_code **)(**(int **)(param_1 + 0x3ec) + 0xc))(*(int **)(param_1 + 0x3ec),piVar9,0);

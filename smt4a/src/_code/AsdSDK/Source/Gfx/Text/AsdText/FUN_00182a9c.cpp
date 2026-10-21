@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0019bea4(void);
-int FUN_0019c4fc(int);
+int textHistoryAppendCodepoint(int);
 int gfxSetSelectedChannelActive(int);
 int FUN_0019c9b4(void);
 int FUN_0019caa0(unsigned int, unsigned int);
-int FUN_0019dcbc(int *, int);
+int asdTextDispatchRegisteredCommand(int *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 14 slot(s), 20 byte(s) */
@@ -40,11 +40,11 @@ extern unsigned char DAT_0063af98; /* 0x63af98 */
 #endif
 extern int FUN_0019be8c(short);
 /* Supplied declaration required: FUN_0019bea4. */
-/* Supplied declaration required: FUN_0019c4fc. */
+/* Supplied declaration required: textHistoryAppendCodepoint. */
 /* Supplied declaration required: gfxSetSelectedChannelActive. */
 /* Supplied declaration required: FUN_0019c9b4. */
 /* Supplied declaration required: FUN_0019caa0. */
-/* Supplied declaration required: FUN_0019dcbc. */
+/* Supplied declaration required: asdTextDispatchRegisteredCommand. */
 
 
 int FUN_00182a9c(int *param_1)
@@ -89,7 +89,7 @@ int FUN_00182a9c(int *param_1)
     temp_v3 = param_1[3];
     if (temp_v3 < param_1[4] + temp_v3) {
       do {
-        FUN_0019c4fc(*(unsigned short *)(*param_1 + temp_v3 * 0x20));
+        textHistoryAppendCodepoint(*(unsigned short *)(*param_1 + temp_v3 * 0x20));
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < param_1[4] + param_1[3]);
     }
@@ -175,7 +175,7 @@ int FUN_00182a9c(int *param_1)
       do {
         if ((*(int *)(temp_v3 * 4 + 0x636f68) != 0) &&
            (*(short *)(&DAT_0063af98 + temp_v3 * 2) == temp_v9)) {
-          FUN_0019dcbc(param_1,temp_v9);
+          asdTextDispatchRegisteredCommand(param_1,temp_v9);
           break;
         }
         temp_v3 = temp_v3 + 1;
@@ -197,7 +197,7 @@ LAB_00182db8:
         do {
           if ((*(int *)(temp_v8 * 4 + 0x636f68) != 0) &&
              (*(short *)(&DAT_0063af98 + temp_v8 * 2) == temp_v9)) {
-            FUN_0019dcbc(param_1,temp_v9);
+            asdTextDispatchRegisteredCommand(param_1,temp_v9);
             goto LAB_00183248;
           }
           temp_v8 = temp_v8 + 1;
@@ -329,7 +329,7 @@ LAB_00183248:
           temp_v8 = param_1[3];
           if (temp_v8 < param_1[4] + temp_v8) {
             do {
-              FUN_0019c4fc(*(unsigned short *)(*param_1 + temp_v8 * 0x20));
+              textHistoryAppendCodepoint(*(unsigned short *)(*param_1 + temp_v8 * 0x20));
               temp_v8 = temp_v8 + 1;
             } while (temp_v8 < param_1[3] + param_1[4]);
           }
@@ -351,7 +351,7 @@ LAB_00183248:
     temp_v3 = param_1[3];
     if (temp_v3 < param_1[4] + temp_v3) {
       do {
-        FUN_0019c4fc(*(unsigned short *)(*param_1 + temp_v3 * 0x20));
+        textHistoryAppendCodepoint(*(unsigned short *)(*param_1 + temp_v3 * 0x20));
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < param_1[3] + param_1[4]);
     }

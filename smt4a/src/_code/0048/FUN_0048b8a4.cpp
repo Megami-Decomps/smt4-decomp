@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00163aa4(int);
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int FUN_0048821c(int, unsigned int);
 int FUN_0048a378(int);
 int FUN_00492aa0(int, unsigned int);
@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00163aa4. */
 extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: FUN_0048821c. */
 /* Supplied declaration required: FUN_0048a378. */
 /* Supplied declaration required: FUN_00492aa0. */
@@ -71,7 +71,7 @@ void FUN_0048b8a4(int param_1)
   else {
     pointConvertToFloat(param_1 + 0x4d0,0xfffffec0);
     FUN_0048a378(param_1);
-    FUN_00184528(param_1 + 0x4e4,0);
+    uiSpriteBankApplyPreset(param_1 + 0x4e4,0);
     *(unsigned int *)(param_1 + 0x10) = (*(unsigned int *)(param_1 + 0x10) & 0xfffffffd) | 0x1000000;
     *(unsigned int *)(param_1 + 8) = 1;
     temp_v0 = param_1 + 0x4cc;

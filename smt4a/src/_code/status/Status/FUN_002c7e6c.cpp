@@ -8,18 +8,18 @@ int textFormatBuffer(...);
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
-int FUN_00151408(...);
+int positionStateSet(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int sysMemClear(...);
 int FUN_0034a544(...);
 int FUN_003e4140(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -54,18 +54,18 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0034a544. */
 /* Supplied declaration required: FUN_003e4140. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_002c7e6c(void)
@@ -116,18 +116,18 @@ void FUN_002c7e6c(void)
     puVar1[0x831] = 0;
     puVar1[0x833] = 0;
     *(unsigned char *)(puVar1 + 0x83c) = 1;
-    FUN_002804b0("status/status.tbb",puVar1 + 0x833,0);
+    asdLoadFileAsyncSimple("status/status.tbb",puVar1 + 0x833,0);
     puVar5 = DAT_00588fd4;
     if (DAT_00588fd4[0x82f] == 0) {
-      FUN_002804b0(&LAB_002c82f0,DAT_00588fd4 + 0x82f,0);
-      FUN_002804b0(&LAB_002c8308,puVar5 + 0x82e,0);
+      asdLoadFileAsyncSimple(&LAB_002c82f0,DAT_00588fd4 + 0x82f,0);
+      asdLoadFileAsyncSimple(&LAB_002c8308,puVar5 + 0x82e,0);
     }
     puVar5 = DAT_00588fd4;
     temp_v0 = spriteHandleCreate(0);
     puVar5[0x82d] = temp_v0;
     FUN_001527d8(temp_v0,0xffffffff);
-    FUN_00151408(puVar5[0x82d],0,0x646464ff);
-    Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 9);
+    positionStateSet(puVar5[0x82d],0,0x646464ff);
+    paramsClearPacket(puVar1 + 9);
     paramsInit(puVar1 + 9,&DAT_005362a8,0xe4,&DAT_0053638c,0xcc,0,0,0,0,&DAT_00536458,0x3f0);
     FUN_0014e188(puVar1 + 0x106,0xf,0,puVar1 + 9,1);
     uiSpriteSetKeyframe(puVar1 + 0x106,1,0);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_003fed38(unsigned int, int);
 int FUN_00406834(unsigned int, unsigned int);
-int FUN_004069b0(unsigned int, int *);
+int moriSceneSetFogDefaults(unsigned int, int *);
 
 /* stack frame of param_3: 14 slot(s), 32 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern unsigned int FUN_001581dc(unsigned int *);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003fed38. */
 /* Supplied declaration required: FUN_00406834. */
-/* Supplied declaration required: FUN_004069b0. */
+/* Supplied declaration required: moriSceneSetFogDefaults. */
 extern unsigned int FUN_00406e6c(void);
 
 
@@ -76,7 +76,7 @@ void FUN_0040afe0(int param_1,unsigned short param_2,int param_3)
     temp_v13 = 1;
     temp_v16 = 1;
     temp_v12 = param_2;
-    FUN_004069b0(*(unsigned int *)(param_1 + 4),&temp_v10);
+    moriSceneSetFogDefaults(*(unsigned int *)(param_1 + 4),&temp_v10);
     temp_v3 = *(unsigned int *)(param_1 + 4);
     temp_v7 = 0x10000;
     temp_v6 = 0x30000;

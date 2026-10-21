@@ -1,44 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00311780` (_code @ 0x311780, 0x42 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail constructor has an alignment NOP before its payload accessor call. */
+#include "common.h"
+
+struct BoundObject {
+    const void* vtable;     // 0x00
+    u8 unk04[0x1c];         // 0x04
+    s16 bindingId;          // 0x20
+};
+
+struct BindingOwner {
+    u8 unk00[0x0c];         // 0x00
+    void* bindings;         // 0x0c
+};
+
+struct BindingLookup {
+    u8 unk00[0x0c];         // 0x00
+    BindingOwner* owner;    // 0x0c
+};
 
 extern "C" {
+extern const u32 _ZTV9Obj55a178[];
+BoundObject* FUN_003054a4(BoundObject* object, s32 mode);
+void* FUN_0012411a(BoundObject* object);
+void* FUN_002eb56c();
+BindingLookup* FUN_002ecedc(s32 kind, void* context);
+void FUN_002f3b58(void* bindings, s32 id, void* payload);
 
-int FUN_002f3b58(unsigned int, int, unsigned int);
-
-extern unsigned char DAT_0055a180; /* 0x55a180 */
-
-extern unsigned int FUN_0012411a(unsigned int *);
-extern unsigned int FUN_002eb56c(void);
-extern int FUN_002ecedc(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002f3b58. */
-extern unsigned int *FUN_003054a4(unsigned int, unsigned int);
-
-
-unsigned int * FUN_00311780(unsigned int param_1,int param_2)
-
+// Construct a bound object and register its payload when an ID is supplied.
+BoundObject* FUN_00311780(BoundObject* object, s32 bindingId)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  puVar1 = (unsigned int *)FUN_003054a4(param_1,1);
-  *puVar1 = (unsigned int)&DAT_0055a180;
-  if (param_2 != 0) {
-    *(short *)(puVar1 + 8) = (short)param_2;
-    temp_v0 = FUN_0012411a(puVar1);
-    temp_v1 = FUN_002eb56c();
-    temp_v2 = FUN_002ecedc(0xc,temp_v1);
-    temp_v3 = 0;
-    if (temp_v2 != 0) {
-      temp_v3 = *(int *)(temp_v2 + 0xc);
+    object = FUN_003054a4(object, 1);
+    object->vtable = _ZTV9Obj55a178 + 2;
+    if (bindingId != 0) {
+        object->bindingId = bindingId;
+        void* payload = FUN_0012411a(object);
+        BindingLookup* lookup = FUN_002ecedc(12, FUN_002eb56c());
+        BindingOwner* owner = lookup ? lookup->owner : NULL;
+        FUN_002f3b58(owner->bindings, bindingId, payload);
     }
-    FUN_002f3b58(*(unsigned int *)(temp_v3 + 0xc),param_2,temp_v0);
-  }
-  return puVar1;
+    return object;
 }
-
-} /* extern "C" */
+}

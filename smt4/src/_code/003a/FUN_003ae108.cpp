@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_001e0db8(BtlUiObjC *obj);
+void displayChannelInit(BtlUiObjC *obj);
 
 extern BtlUiGlobals g_btlUi;
 
 void FUN_003ae108(void)
 {
-    FUN_001e0db8(&g_btlUi.ui->objC);
+    displayChannelInit(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

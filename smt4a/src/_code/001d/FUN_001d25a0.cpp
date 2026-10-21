@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001b57a8(void);
+int resultPairInitialize(void);
 
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned char *);
 
 
@@ -24,7 +24,7 @@ unsigned int * FUN_001d25a0(unsigned char *param_1,unsigned char param_2)
   puVar1 = (unsigned int *)FUN_001b5acc(param_1 + 4);
   puVar1[2] = 0;
   puVar1[3] = 0;
-  FUN_001b57a8();
+  resultPairInitialize();
   temp_v0 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v0;

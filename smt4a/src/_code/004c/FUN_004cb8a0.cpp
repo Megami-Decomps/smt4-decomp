@@ -1,53 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cb8a0` (_code @ 0x4cb8a0, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: zero uses a core register rather than retail's VFP register, with different global aliasing and store scheduling. */
+#include "shard/W6_W6Match7_BattleEffects.h"
 
-extern "C" {
-
-typedef struct fn_004cb8a0_arg0 fn_004cb8a0_arg0;
-struct fn_004cb8a0_arg0 {
-    unsigned char pad_0x0[0x48];
-    int field_0x48; /* +0x48 */
-    unsigned char pad_0x4c[0x64];
-    undefined4 field_0xb0; /* +0xb0 */
-    unsigned char pad_0xb4[0x10];
-    undefined4 field_0xc4; /* +0xc4 */
-    undefined4 field_0xc8; /* +0xc8 */
-    unsigned char pad_0xcc[0x30];
-    undefined4 field_0xfc; /* +0xfc */
-    undefined4 field_0x100; /* +0x100 */
+struct TransitionGlobals {
+    u32 unk00;
+    u8 reset;
+    u8 unk05[0x1b];
+    u32 first;
+    u32 second;
 };
 
-extern signed char DAT_0057aa04; /* 0x57aa04 */
-extern unsigned int DAT_0057aa20; /* 0x57aa20 */
-extern unsigned int DAT_0057aa24; /* 0x57aa24 */
+struct TransitionView {
+    u8 unk00[0x48];
+    s32 state;
+    u8 unk4c[0x64];
+    u32 first; // 0xb0
+    u8 unkb4[0x10];
+    u32 second; // 0xc4
+    u32 counter; // 0xc8
+    u8 unkcc[0x30];
+    u32 progress; // 0xfc
+    u32 target; // 0x100
+};
 
+extern "C" {
+extern BattleEffectGlobals g_battleEffectSettings;
 
-void FUN_004cb8a0(fn_004cb8a0_arg0 *param_1)
-
+void FUN_004cb8a0(TransitionView *state)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = DAT_0057aa24;
-  temp_v0 = DAT_0057aa20;
-  if (DAT_0057aa04 != '\0') {
-    param_1->field_0x100 = DAT_0057aa24;
-    param_1->field_0xb0 = temp_v0;
-    param_1->field_0xc4 = temp_v1;
-    param_1->field_0x48 = 2;
-    param_1->field_0xfc = 0;
-    param_1->field_0xc8 = 0;
-  }
-  else if (param_1->field_0x48 != 2) {
-    param_1->field_0x100 = DAT_0057aa24;
-    param_1->field_0xb0 = temp_v0;
-    param_1->field_0xc4 = temp_v1;
-    param_1->field_0x48 = 2;
-    param_1->field_0xfc = 0;
-    return;
-  }
-  return;
+    const TransitionGlobals *globals =
+        reinterpret_cast<const TransitionGlobals *>(&g_battleEffectSettings);
+    u32 first = globals->first;
+    u32 second = globals->second;
+    if (globals->reset != 0) {
+        state->target = second;
+        state->first = first;
+        state->second = second;
+        state->state = 2;
+        state->progress = 0;
+        state->counter = 0;
+    } else if (state->state != 2) {
+        state->target = second;
+        state->first = first;
+        state->second = second;
+        state->state = 2;
+        state->progress = 0;
+    }
 }
-
-} /* extern "C" */
+}

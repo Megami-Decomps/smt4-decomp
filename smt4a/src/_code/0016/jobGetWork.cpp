@@ -1,29 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `jobGetWork` (_code @ 0x164a9c, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: handle extraction and group-table load use different registers and instruction order. */
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
-extern "C" {
+extern "C" AsdProcessState g_asdProcess;
 
-extern int g_asdProcess; /* 0x640118 */
-
-
-unsigned int jobGetWork(unsigned int param_1)
-
+static __inline AsdProcess* findProcess(u32 handle)
 {
-  int temp_v0;
-  
-  temp_v0 = *(int *)(g_asdProcess + (param_1 >> 0x14) * 8);
-  while( 1 ) {
-    if (temp_v0 == 0) {
-      return 0;
+    u32 id = handle & ASD_PROC_ID_MASK;
+    for (AsdProcess* process = g_asdProcess.groups[handle >> ASD_PROC_GROUP_SHIFT].head;
+         process != NULL; process = process->next) {
+        if (process->id == id)
+            return process;
     }
-    if (*(unsigned int *)(temp_v0 + 0x24) == (param_1 & 0xfffff)) break;
-    temp_v0 = *(int *)(temp_v0 + 0x4c);
-  }
-  if (temp_v0 == 0) {
-    return 0;
-  }
-  return *(unsigned int *)(temp_v0 + 0x48);
+    return NULL;
 }
 
-} /* extern "C" */
+// Return a live job's work address, or zero when its handle is absent.
+extern "C" u32 jobGetWork(u32 handle)
+{
+    AsdProcess* process = findProcess(handle);
+    return process != NULL ? process->unk48 : 0;
+}

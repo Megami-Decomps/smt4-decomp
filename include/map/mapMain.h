@@ -11,6 +11,13 @@ typedef struct MapMain {
     /* 0x0C */ u8 freeOnEnd;      /* 0 = keep the block after the job ends */
     /* 0x0D */ u8 unk0D[0x2F];
     /* 0x3C */ u8 unk3C;
+    /* 0x3D */ u8 unk3D[0x4f];
+    /* 0x8C */ void *scriptData;
+    /* 0x90 */ void *messageData;
+    /* 0x94 */ void *scriptProcess;
+    /* 0x98 */ s32 completionFlag;
+    /* 0x9C */ u8 unk9C[0x28];
+    /* 0xC4 */ s32 scriptState;
 } MapMain;
 
 /* A table the map keeps, indexed by entry (Shin Megami Tensei IV layout). */

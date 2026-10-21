@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00282bfc(...);
 int scrGetArg(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 
 /* Supplied declaration required: FUN_00282bfc. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_002b89a4(void);
 extern int FUN_002c1d5c(void);
 
@@ -49,10 +49,10 @@ unsigned int FUN_002c9cb0(void)
       if (temp_v1 != 1) {
         return 1;
       }
-      FUN_0029c3c0(0,temp_v0,0xffffffff);
+      slotSetRequest(0,temp_v0,0xffffffff);
     }
     else {
-      FUN_0029c3c0(0,temp_v0,0xff);
+      slotSetRequest(0,temp_v0,0xff);
     }
   }
   return 0;

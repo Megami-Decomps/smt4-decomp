@@ -9,10 +9,10 @@ int asdTextureRelease(void);
 int FUN_002fe590(void);
 int FUN_00388aac(int);
 int effMenuListsClear(void);
-int FUN_00399768(int, int);
+int objectRegistryInsert(int, int);
 int floatPairAddA(int, float *);
 int floatPairAddB(void);
-int FUN_003ba614(int, int);
+int asdEffectQueueRelease(int, int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -46,10 +46,10 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_002fe590. */
 /* Supplied declaration required: FUN_00388aac. */
 /* Supplied declaration required: effMenuListsClear. */
-/* Supplied declaration required: FUN_00399768. */
+/* Supplied declaration required: objectRegistryInsert. */
 /* Supplied declaration required: floatPairAddA. */
 /* Supplied declaration required: floatPairAddB. */
-/* Supplied declaration required: FUN_003ba614. */
+/* Supplied declaration required: asdEffectQueueRelease. */
 
 
 unsigned int FUN_00282f00(void)
@@ -100,15 +100,15 @@ unsigned int FUN_00282f00(void)
   DAT_0059dbec = 0;
   DAT_0059e9b4 = 0;
   if (DAT_0059dbf4 != 0) {
-    FUN_003ba614(DAT_0059dbf4,3);
+    asdEffectQueueRelease(DAT_0059dbf4,3);
     DAT_0059dbf4 = 0;
   }
   if (DAT_0059dbf0 != 0) {
-    FUN_003ba614(DAT_0059dbf0,3);
+    asdEffectQueueRelease(DAT_0059dbf0,3);
     DAT_0059dbf0 = 0;
   }
   if (DAT_0059dc00 != 0) {
-    FUN_00399768(DAT_0059dc00,3);
+    objectRegistryInsert(DAT_0059dc00,3);
     DAT_0059dc00 = 0;
   }
   DAT_0059dc2c = 0;

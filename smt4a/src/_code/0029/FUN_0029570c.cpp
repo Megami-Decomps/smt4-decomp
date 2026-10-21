@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 extern int DAT_00581270; /* 0x581270 */
 extern int g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 extern int DAT_005f1844; /* 0x5f1844 */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 void FUN_0029570c(void)
@@ -70,7 +70,7 @@ joined_r0x00295908:
                 }
                 else {
                   temp_v9 = *(float *)(g_lmapScene + 0x1c);
-                  FUN_002b5cb4();
+                  distSpatial();
                   if (0x4395ffff >= (int)temp_v9) {
                     temp_v2 = *(int *)(temp_v5 + 0x54);
                     *(unsigned char *)(temp_v5 + 0x15) = 1;

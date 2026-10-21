@@ -27,11 +27,23 @@ typedef struct ModelEffectList {
 
 /* The effects of one model: its entries copied out of the shared table. */
 typedef struct ModelEffects {
-    /* 0x00 */ u8 unk00[4];
+    /* 0x00 */ union {
+        u8 unk00[4];
+        const void *vtable;
+    };
     /* 0x04 */ ModelEffectTable *table;
-    /* 0x08 */ u8 unk08[8];
+    /* 0x08 */ union {
+        u8 unk08[8];
+        struct {
+            u32 argument; // 0x08
+            s32 count; // 0x0c
+        } setup;
+    };
     /* 0x10 */ u32 modelId;
-    /* 0x14 */ u8 unk14[8];
+    /* 0x14 */ union {
+        u8 unk14[8];
+        ModelEffectList filtered;
+    };
     /* 0x1C */ ModelEffectList list;
 } ModelEffects;
 

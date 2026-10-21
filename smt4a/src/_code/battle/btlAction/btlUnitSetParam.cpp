@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `btlUnitSetParam` (_code @ 0x4de8b8, 0x172c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct BtlMainStateA;
 
 extern "C" {
 
@@ -12,10 +13,10 @@ int FUN_004e5b5c(...);
 int FUN_004e6ed8(int *, int);
 int FUN_004e6fb0(int *);
 int FUN_004e7c04(int *, unsigned int);
-int FUN_004e84fc(...);
-int FUN_004e9168(int *, unsigned int, int, unsigned int [2], int *);
+void btlSelectMinimumPriorityTarget(BtlMainStateA *const *);
+int btlActionClassifyTargetSide(int *, unsigned int, int, unsigned int [2], int *);
 int FUN_004e9ae8(...);
-int FUN_004e9f74(int *, unsigned int);
+int btlUnitMarkTargetCandidates(int *, unsigned int);
 int btlUnitGet(...);
 int SBORROW4(...);
 
@@ -50,10 +51,9 @@ extern int lcgRandomRange(short);
 /* Supplied declaration required: FUN_004e6ed8. */
 /* Supplied declaration required: FUN_004e6fb0. */
 /* Supplied declaration required: FUN_004e7c04. */
-/* Supplied declaration required: FUN_004e84fc. */
-/* Supplied declaration required: FUN_004e9168. */
+/* Supplied declaration required: btlActionClassifyTargetSide. */
 /* Supplied declaration required: FUN_004e9ae8. */
-/* Supplied declaration required: FUN_004e9f74. */
+/* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: btlUnitGet. */
 extern int __aeabi_idivmod(int, unsigned int);
 
@@ -116,7 +116,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
     break;
   case 2:
   case 3:
-    FUN_004e9168(param_1,*(unsigned int *)(temp_v2 + 0x20),
+    btlActionClassifyTargetSide(param_1,*(unsigned int *)(temp_v2 + 0x20),
                  (int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x1c0),temp_v11,&temp_v12);
     break;
   case 8:
@@ -132,7 +132,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
       temp_v12 = 1;
       break;
     }
-    FUN_004e9168(param_1,*(unsigned int *)(temp_v2 + 0x20),*(short *)(temp_v3 + 0x32),temp_v11,&temp_v12
+    btlActionClassifyTargetSide(param_1,*(unsigned int *)(temp_v2 + 0x20),*(short *)(temp_v3 + 0x32),temp_v11,&temp_v12
                 );
     break;
   case 0xb:
@@ -144,7 +144,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
   temp_v6 = DAT_00571194;
   temp_v8 = DAT_00571190;
   if (temp_v12 == 1 || temp_v12 == 2) {
-    FUN_004e9f74(param_1,temp_v11[0]);
+    btlUnitMarkTargetCandidates(param_1,temp_v11[0]);
     return;
   }
   temp_v10 = SBORROW4(temp_v17,0x26);
@@ -802,7 +802,7 @@ joined_r0x004deccc:
     *(unsigned char *)(temp_v13[temp_v3 + 1] + temp_v5 + 0x38) = 1;
     break;
   case 0x25:
-    FUN_004e84fc(param_1);
+    btlSelectMinimumPriorityTarget((BtlMainStateA *const *)param_1);
   }
   if (temp_v18 == 0) {
     return;

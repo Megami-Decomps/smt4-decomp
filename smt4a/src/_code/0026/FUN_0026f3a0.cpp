@@ -6,7 +6,7 @@ extern "C" {
 
 int gameGetSlotRecord(...);
 int FUN_002ade88(void);
-int FUN_0035e540(void);
+int partyPanelRefreshFilterMarks(void);
 int FUN_003f3a04(unsigned int, int);
 int slotPlacementSetSlot(int, int);
 int FUN_003f5220(...);
@@ -21,7 +21,7 @@ extern int g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002ade88. */
-/* Supplied declaration required: FUN_0035e540. */
+/* Supplied declaration required: partyPanelRefreshFilterMarks. */
 /* Supplied declaration required: FUN_003f3a04. */
 /* Supplied declaration required: slotPlacementSetSlot. */
 /* Supplied declaration required: FUN_003f5220. */
@@ -100,7 +100,7 @@ void FUN_0026f3a0(void)
   if (*(char *)(temp_v0 + 0x9b4) != '\v') {
     return;
   }
-  FUN_0035e540();
+  partyPanelRefreshFilterMarks();
   return;
 }
 

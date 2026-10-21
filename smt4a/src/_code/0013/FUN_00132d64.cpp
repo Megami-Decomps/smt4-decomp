@@ -1,45 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132d64` (_code @ 0x132d64, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains an explicit zero-capacity branch and orders chunk initialization differently. */
+#include "shard/W6_W6Match2_ChunkPool.h"
 
-extern "C" {
+extern "C" u32 vectorGrowCapacity_0012d448(u32 capacity, ChunkPool<0x0c>* pool);
 
-int rt_malloc(...);
-
-extern int vectorGrowCapacity_0012d448(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_00132d64(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Allocate and prepend another chunk of 0x0c-byte pool elements.
+extern "C" void FUN_00132d64(ChunkPool<0x0c>* pool, s32 singleElement)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 1;
-  if (param_2 == 0) {
-    if (*param_1 != 0) {
-      temp_v0 = *(unsigned int *)(*param_1 + 4);
+    u32 capacity = 1;
+    if (singleElement == 0) {
+        u32 previousCapacity = pool->chunks ? pool->chunks->capacity : 0;
+        capacity = vectorGrowCapacity_0012d448(previousCapacity, pool);
     }
-    else {
-      temp_v0 = 0;
-    }
-    temp_v2 = vectorGrowCapacity_0012d448(temp_v0,param_1,param_3,param_4,param_4);
-  }
-  piVar2 = (int *)rt_malloc(0xc);
-  temp_v1 = rt_malloc();
-  piVar2[2] = temp_v1;
-  temp_v1 = *param_1;
-  piVar2[1] = temp_v2;
-  *piVar2 = temp_v1;
-  *param_1 = (int)piVar2;
-  temp_v1 = piVar2[2];
-  param_1[3] = temp_v1 + temp_v2 * 0xc;
-  param_1[2] = temp_v1;
-  return;
+    PoolChunk<0x0c>* chunk = (PoolChunk<0x0c>*)rt_malloc(sizeof(PoolChunk<0x0c>));
+    chunk->elements = (PoolElement<0x0c>*)rt_malloc(capacity * sizeof(PoolElement<0x0c>));
+    chunk->capacity = capacity;
+    chunk->next = pool->chunks;
+    pool->chunks = chunk;
+    pool->end = chunk->elements + capacity;
+    pool->next = chunk->elements;
 }
-
-} /* extern "C" */

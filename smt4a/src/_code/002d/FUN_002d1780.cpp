@@ -26,7 +26,7 @@ typedef struct {
     unsigned int spC0; /* 0xc0: local_c0 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: FUN_001bbf0c. */
@@ -70,7 +70,7 @@ void FUN_002d1780(void)
   unsigned int temp_v25;
   unsigned int temp_v26;
   
-  temp_v1 = DAT_005806a4;
+  temp_v1 = g_lmapView;
   temp_v2 = 0.017453292f;
   temp_v7 = 120.0f;
   temp_v3 = 155.0f;
@@ -82,14 +82,14 @@ void FUN_002d1780(void)
   temp_v4 = 350.0f;
   temp_v10 = 140.0f;
   temp_v8 = 150.0f;
-  switch(*(unsigned int *)(DAT_005806a4 + 4)) {
+  switch(*(unsigned int *)(g_lmapView + 4)) {
   case 0:
-    temp_v14 = *(unsigned int *)(DAT_005806a4 + 0x5c);
-    uStack_bc = *(unsigned int *)(DAT_005806a4 + 0x60);
-    uStack_b8 = *(unsigned int *)(DAT_005806a4 + 100);
-    temp_v16 = *(unsigned int *)(DAT_005806a4 + 0x54);
-    temp_v15 = *(unsigned int *)(DAT_005806a4 + 0x50);
-    temp_v17 = *(unsigned int *)(DAT_005806a4 + 0x58);
+    temp_v14 = *(unsigned int *)(g_lmapView + 0x5c);
+    uStack_bc = *(unsigned int *)(g_lmapView + 0x60);
+    uStack_b8 = *(unsigned int *)(g_lmapView + 100);
+    temp_v16 = *(unsigned int *)(g_lmapView + 0x54);
+    temp_v15 = *(unsigned int *)(g_lmapView + 0x50);
+    temp_v17 = *(unsigned int *)(g_lmapView + 0x58);
     temp_v8 = *(float *)(g_lmapScene + 0x1c);
     temp_v12 = *(float *)(g_lmapScene + 0x20);
     temp_v4 = *(float *)(g_lmapScene + 0x4c) * 0.017453292f;
@@ -119,14 +119,14 @@ void FUN_002d1780(void)
     temp_v22 = temp_v13;
     temp_v26 = temp_v6;
     FUN_002d1e44(&temp_v14);
-    temp_v1 = DAT_005806a4;
-    *(unsigned char *)(DAT_005806a4 + 0x220) = 1;
+    temp_v1 = g_lmapView;
+    *(unsigned char *)(g_lmapView + 0x220) = 1;
     piVar1 = (int *)(temp_v1 + 4);
     *piVar1 = *piVar1 + 1;
     *(unsigned int *)(temp_v1 + 8) = 0;
     break;
   case 1:
-    temp_v0 = DAT_005806a4;
+    temp_v0 = g_lmapView;
     FUN_0033a374();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x254);
@@ -164,14 +164,14 @@ void FUN_002d1780(void)
       temp_v22 = temp_v12;
       temp_v26 = temp_v6;
       FUN_002d1e44(&temp_v14);
-      temp_v1 = DAT_005806a4;
-      *(int *)(DAT_005806a4 + 4) = *(int *)(DAT_005806a4 + 4) + 1;
+      temp_v1 = g_lmapView;
+      *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
     break;
   case 2:
-    temp_v0 = DAT_005806a4;
+    temp_v0 = g_lmapView;
     FUN_0033a374();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x254);
@@ -208,14 +208,14 @@ void FUN_002d1780(void)
       temp_v22 = temp_v12;
       temp_v26 = temp_v6;
       FUN_002d1e44(&temp_v14);
-      temp_v1 = DAT_005806a4;
-      *(int *)(DAT_005806a4 + 4) = *(int *)(DAT_005806a4 + 4) + 1;
+      temp_v1 = g_lmapView;
+      *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
     break;
   case 3:
-    temp_v0 = DAT_005806a4;
+    temp_v0 = g_lmapView;
     FUN_0033a374();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x254);
@@ -252,14 +252,14 @@ void FUN_002d1780(void)
       temp_v22 = temp_v12;
       temp_v26 = temp_v6;
       FUN_002d1e44(&temp_v14);
-      temp_v1 = DAT_005806a4;
-      *(int *)(DAT_005806a4 + 4) = *(int *)(DAT_005806a4 + 4) + 1;
+      temp_v1 = g_lmapView;
+      *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
     break;
   case 4:
-    temp_v0 = DAT_005806a4;
+    temp_v0 = g_lmapView;
     FUN_0033a374();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x254);
@@ -295,14 +295,14 @@ void FUN_002d1780(void)
       temp_v21 = temp_v3;
       temp_v22 = temp_v7;
       FUN_002d1e44(&temp_v14);
-      temp_v1 = DAT_005806a4;
-      *(int *)(DAT_005806a4 + 4) = *(int *)(DAT_005806a4 + 4) + 1;
+      temp_v1 = g_lmapView;
+      *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
     break;
   case 5:
-    temp_v0 = DAT_005806a4;
+    temp_v0 = g_lmapView;
     FUN_0033a374();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x254);
@@ -340,8 +340,8 @@ void FUN_002d1780(void)
       temp_v22 = temp_v8;
       temp_v26 = temp_v6;
       FUN_002d1e44(&temp_v14);
-      temp_v1 = DAT_005806a4;
-      *(int *)(DAT_005806a4 + 4) = *(int *)(DAT_005806a4 + 4) + 1;
+      temp_v1 = g_lmapView;
+      *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }
@@ -349,8 +349,8 @@ void FUN_002d1780(void)
   case 6:
     FUN_0033a374();
     if (temp_v1 != 0) {
-      temp_v1 = DAT_005806a4;
-      *(int *)(DAT_005806a4 + 4) = *(int *)(DAT_005806a4 + 4) + 1;
+      temp_v1 = g_lmapView;
+      *(int *)(g_lmapView + 4) = *(int *)(g_lmapView + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
       return;
     }

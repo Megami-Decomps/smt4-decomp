@@ -23,7 +23,7 @@ struct fn_0033774c_arg2 {
 };
 
 extern int padGetStickHorizontalDirection(void);
-extern unsigned short FUN_00257e0c(unsigned int);
+extern unsigned short playerDataValueAt(unsigned int);
 extern short FUN_00257e40(unsigned int);
 
 
@@ -77,13 +77,13 @@ void FUN_0033774c(unsigned int param_1,unsigned char *param_2,fn_0033774c_arg2 *
   *(unsigned int *)(param_2 + 0x180) = 0;
   temp_v3 = 0;
   do {
-    temp_v0 = FUN_00257e0c(temp_v3 & 0xff);
+    temp_v0 = playerDataValueAt(temp_v3 & 0xff);
     *(unsigned short *)(param_2 + temp_v3 * 2 + 0x102) =
          (temp_v0 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v3 * 2 + 0x102) & 0xfc00);
     temp_v1 = FUN_00257e40(temp_v3 & 0xff);
     *(unsigned short *)(param_2 + temp_v3 * 2 + 0x102) =
          (temp_v1 << 10) | (*(unsigned short *)(param_2 + temp_v3 * 2 + 0x102) & 0x3ff);
-    temp_v0 = FUN_00257e0c(temp_v3 & 0xff);
+    temp_v0 = playerDataValueAt(temp_v3 & 0xff);
     *(unsigned short *)(param_2 + temp_v3 * 2 + 0x126) =
          (temp_v0 & 0x3ff) | (*(unsigned short *)(param_2 + temp_v3 * 2 + 0x126) & 0xfc00);
     temp_v1 = FUN_00257e40(temp_v3 & 0xff);

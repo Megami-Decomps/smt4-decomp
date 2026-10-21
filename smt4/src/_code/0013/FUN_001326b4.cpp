@@ -31,8 +31,8 @@ typedef struct {
 
 extern int DAT_00464b7c; /* 0x464b7c */
 extern int *g_asdModelTransformBuilder; /* 0x464b84 */
-extern unsigned int DAT_00464b8c; /* 0x464b8c */
-extern unsigned int DAT_00464b94; /* 0x464b94 */
+extern unsigned int sceneGroup1Root; /* 0x464b8c */
+extern unsigned int sceneGroup2Root; /* 0x464b94 */
 extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 extern int DAT_004c632c; /* 0x4c632c */
@@ -89,7 +89,7 @@ void FUN_001326b4(int param_1,unsigned int param_2,unsigned int param_3,int para
   uStack_2c = param_3;
   temp_v8 = param_4;
   if ((DAT_004dad84 != '\0') && (DAT_004dad85 == '\0')) {
-    FUN_002abbe8(g_asdModelTransformBuilder + 4,DAT_00464b8c);
+    FUN_002abbe8(g_asdModelTransformBuilder + 4,sceneGroup1Root);
     piVar3 = g_asdModelTransformBuilder;
     temp_v1 = DAT_00464b7c;
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(DAT_00464b7c + 8),*(unsigned int *)(DAT_00464b7c + 4))
@@ -101,8 +101,8 @@ void FUN_001326b4(int param_1,unsigned int param_2,unsigned int param_3,int para
                  *(unsigned int *)(*(int *)(param_1 + 0x14) + 0x10),temp_v4,
                  *(unsigned int *)(param_1 + 0x18));
     asdGxCommandListEnd(DAT_004dad88,0);
-    nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,DAT_00464b8c);
-    FUN_002abbe8(g_asdModelTransformBuilder + 4,DAT_00464b94);
+    nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,sceneGroup1Root);
+    FUN_002abbe8(g_asdModelTransformBuilder + 4,sceneGroup2Root);
     piVar3 = g_asdModelTransformBuilder;
     temp_v1 = DAT_00464b7c;
     nw_gfx_SceneTraverser_Begin(*(unsigned int *)(DAT_00464b7c + 8),*(unsigned int *)(DAT_00464b7c + 4))

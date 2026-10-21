@@ -1,45 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00354c04` (_code @ 0x354c04, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: argument scheduling retains the archive pointer until late and reserves 36 bytes with LR only; retail loads the archive early, saves R4/LR, and uses STRD for the size/output pair. */
+#include "common.h"
+
+struct ArchiveState {
+    u8 unk00[8]; // 0x00
+    u64 archive;   // 0x08
+};
+struct FileSystemSession {
+    u8 unk00[0x10]; // 0x00
+    u32 handle;      // 0x10
+};
 
 extern "C" {
+ArchiveState* FUN_003f6db4(void);
+extern FileSystemSession g_titleContentFileSystem;
+u32 nn_fs_ipc_FileSystem_ControlArchive(const u32* session, u64 archive, u32 action,
+                                       const void* input, u32 inputSize, void* output, u32 outputSize);
 
-int FUN_003f6db4(void);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char DAT_0044e650; /* 0x44e650 */
-
-#ifndef ROMWRIGHT_ZEXT_4_8_DEFINED
-#define ROMWRIGHT_ZEXT_4_8_DEFINED
-#define romwright_zext_4_8(value) ((unsigned long long)(unsigned int)(value))
-#endif
-/* Supplied declaration required: FUN_003f6db4. */
-extern unsigned int nn_fs_ipc_FileSystem_ControlArchive(unsigned int, unsigned long long, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-void FUN_00354c04(int param_1)
-
+// Issues archive control action zero for the current archive, or reports no archive.
+u32 FUN_00354c04()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [4];
-  unsigned char temp_v2 [4];
-  
-  FUN_003f6db4();
-  if (param_1 != 0) {
-    temp_v0 = (*(unsigned int *)((unsigned char *)&DAT_0044e650 + 0x10));
-    nn_fs_ipc_FileSystem_ControlArchive
-              ((unsigned int)&temp_v0,romwright_zext_4_8(temp_v1) << 0x20,(unsigned int)temp_v2,*(unsigned int *)(param_1 + 8),
-               *(unsigned int *)(param_1 + 0xc),1,(unsigned int)temp_v2);
-  }
-  return;
+    ArchiveState* state = FUN_003f6db4();
+    if (state == NULL) {
+        return 0xc8804465;
+    }
+    u32 session = g_titleContentFileSystem.handle;
+    u8 input;
+    u8 output;
+    return nn_fs_ipc_FileSystem_ControlArchive(&session, state->archive, 0, &input, 1, &output, 1);
 }
-
-} /* extern "C" */
+}

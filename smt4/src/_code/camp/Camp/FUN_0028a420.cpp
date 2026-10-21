@@ -12,7 +12,7 @@ int FUN_002a0cc8(...);
 
 int FUN_001a7d48(...);
 int FUN_00262d40(void);
-int FUN_0026a3c4(...);
+int campRebuildOwnedInventoryCategory(...);
 int FUN_00282f80(...);
 int FUN_00288e68(void);
 int FUN_002898e4(void);
@@ -21,7 +21,7 @@ int buttonHelpCreate(void);
 int FUN_00292be4(...);
 int FUN_00297408(void);
 int FUN_00298ad8(void);
-int FUN_00299da0(...);
+int campRefreshEquipmentCategory(...);
 int FUN_0029e874(...);
 int FUN_0029e8b8(...);
 int FUN_0029eb5c(...);
@@ -38,7 +38,7 @@ int taskCreateDraw(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int FUN_002d666c(...);
 int words3Clear(unsigned char *);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
+int drawParameterBlockClear(void);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -71,7 +71,7 @@ extern unsigned char DAT_0049f950; /* 0x49f950 */
 /* Supplied declaration required: FUN_001a7d48. */
 extern int FUN_00262cb0(unsigned int);
 /* Supplied declaration required: FUN_00262d40. */
-/* Supplied declaration required: FUN_0026a3c4. */
+/* Supplied declaration required: campRebuildOwnedInventoryCategory. */
 extern unsigned int FUN_0026aa78(void);
 /* Supplied declaration required: FUN_0026c868. */
 /* Supplied declaration required: FUN_00282f80. */
@@ -85,7 +85,7 @@ extern unsigned int FUN_0026aa78(void);
 /* Supplied declaration required: FUN_00297408. */
 /* Supplied declaration required: FUN_00298ad8. */
 /* Supplied declaration required: FUN_00298d28. */
-/* Supplied declaration required: FUN_00299da0. */
+/* Supplied declaration required: campRefreshEquipmentCategory. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_0029e8b8. */
 extern unsigned int objectPartRunUnlessLocked(void);
@@ -105,7 +105,7 @@ extern unsigned int FUN_0029efa8(int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002d666c. */
 /* Supplied declaration required: words3Clear. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0028aa2c) */
@@ -153,7 +153,7 @@ void FUN_0028a420(void)
   buttonHelpCreate();
   FUN_002d666c(0);
   puVar3 = puVar1 + 0x18a;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
+  drawParameterBlockClear();
   paramsInit(puVar3,&DAT_00402648,0x6c,&DAT_004026b4,0x30,0,0,0,0,&DAT_004026e4,0x150);
   FUN_002bd954(puVar1 + 0x192,0x1d,0,puVar3,0xc9);
   timerStart(puVar1 + 0x192,1,0);
@@ -177,9 +177,9 @@ void FUN_0028a420(void)
   FUN_00298ad8();
   __aeabi_memset4(puVar1 + 0x37c,0x4a,0xffffffff);
   gameGetSlotTable();
-  FUN_0026a3c4(0xb);
-  FUN_0026a3c4(0xc);
-  FUN_0026a3c4(0xd);
+  campRebuildOwnedInventoryCategory(0xb);
+  campRebuildOwnedInventoryCategory(0xc);
+  campRebuildOwnedInventoryCategory(0xd);
   FUN_00262d40();
   puVar1 = g_camp;
   temp_v7 = 0x79f;
@@ -200,13 +200,13 @@ void FUN_0028a420(void)
   temp_v2 = FUN_0026aa78();
   FUN_0029f848(puVar1 + 0x90,temp_v2,0xb,1,1,1);
   FUN_00282f80(10);
-  FUN_00299da0(0x11);
-  FUN_00299da0(0x12);
-  FUN_00299da0(0x13);
-  FUN_00299da0(0x14);
-  FUN_00299da0(0x15);
-  FUN_00299da0(0x16);
-  FUN_00299da0(0x17);
+  campRefreshEquipmentCategory(0x11);
+  campRefreshEquipmentCategory(0x12);
+  campRefreshEquipmentCategory(0x13);
+  campRefreshEquipmentCategory(0x14);
+  campRefreshEquipmentCategory(0x15);
+  campRefreshEquipmentCategory(0x16);
+  campRefreshEquipmentCategory(0x17);
   FUN_0028b7f8(1);
   temp_v6 = g_partyPanel;
   gameGetSlotTable(&g_partyPanel,0,0xffffffff);

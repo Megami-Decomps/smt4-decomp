@@ -14,13 +14,13 @@ int FUN_003a6404(...);
 int FUN_001676b0(...);
 int FUN_00180310(...);
 int FUN_00183bb0(void);
-int FUN_00184c40(...);
+int pairSetHalves(...);
 int jobGetScalarValue(void);
 int markerKindGetColor(...);
 int FUN_001a1ee0(void);
 int FUN_001f3e80(...);
 int fadeObjectResetIfActive(...);
-int FUN_003482a4(...);
+int efctCallRoutineWithSpeedOverride(...);
 int FUN_0035d8f0(...);
 int FUN_003a7a88(...);
 int FUN_003c2690(...);
@@ -126,7 +126,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: markerKindGetColor. */
@@ -140,7 +140,7 @@ extern int btlMainGetUnk14(void);
 /* Supplied declaration required: FUN_002b4e7c. */
 extern int valueAtMostFifthOfTotal(int, int);
 /* Supplied declaration required: heldAmountLessThan. */
-/* Supplied declaration required: FUN_003482a4. */
+/* Supplied declaration required: efctCallRoutineWithSpeedOverride. */
 /* Supplied declaration required: FUN_0034ea70. */
 /* Supplied declaration required: FUN_0035ae58. */
 /* Supplied declaration required: FUN_0035d8f0. */
@@ -815,7 +815,7 @@ LAB_002afb00:
         temp_v1 = (short)temp_v5 + temp_v1;
         temp_v27 = (short)temp_v6 + temp_v27;
         temp_v13 = temp_v33 + 0x168c;
-        FUN_00184c40(temp_v13,(int)(short)(*(short *)(temp_v8 + 8) + *(short *)(temp_v15 + 0x4b82) +
+        pairSetHalves(temp_v13,(int)(short)(*(short *)(temp_v8 + 8) + *(short *)(temp_v15 + 0x4b82) +
                                         temp_v27),
                      (int)(short)(*(short *)(temp_v8 + 10) + *(short *)(temp_v15 + 0x4b8c) + temp_v1));
         fadeObjectResetIfActive(temp_v13);
@@ -830,7 +830,7 @@ LAB_002afb00:
             *(unsigned char *)(temp_v13 + 0x12d0) = 0;
           }
           temp_v13 = temp_v33 + 0x18bc;
-          FUN_00184c40(temp_v13,(int)(short)(*(short *)(temp_v8 + 8) + temp_v27),
+          pairSetHalves(temp_v13,(int)(short)(*(short *)(temp_v8 + 8) + temp_v27),
                        (int)(short)(*(short *)(temp_v8 + 10) + temp_v1));
           *(unsigned int *)(temp_v13 + 0x30) = *(unsigned int *)(temp_v7 + 0x4b40);
           fadeObjectResetIfActive(temp_v13);
@@ -917,7 +917,7 @@ LAB_002afb00:
                 FUN_001a1ee0();
               }
               temp_v13 = FUN_001834a4(0xd,temp_v18 * 2 + 0x28);
-              FUN_003482a4(*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,0x24);
+              efctCallRoutineWithSpeedOverride(*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,0x24);
               temp_v13 = FUN_001834a4(0xd,temp_v18 * 2 + 0x27);
               FUN_001676b0((int)(short)temp_v11,*(short *)(temp_v13 + 8) + temp_v6,
                            *(short *)(temp_v13 + 10) + temp_v5,0x24);
@@ -930,7 +930,7 @@ LAB_002afb00:
               FUN_001a1ee0();
             }
             temp_v13 = FUN_001834a4(0xd,temp_v18 * 2 + 0x28);
-            FUN_003482a4(*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,0x24);
+            efctCallRoutineWithSpeedOverride(*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,0x24);
             temp_v13 = FUN_001834a4(0xd,temp_v18 * 2 + 0x27);
             FUN_001676b0((int)(short)temp_v11,*(short *)(temp_v13 + 8) + temp_v6,
                          *(short *)(temp_v13 + 10) + temp_v5,0x24);

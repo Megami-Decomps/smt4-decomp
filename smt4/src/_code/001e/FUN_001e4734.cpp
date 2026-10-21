@@ -11,7 +11,7 @@ typedef int romwright_code(...);
 extern int *FUN_003a8824(void);
 extern int *FUN_003aa7d4(void);
 extern int *FUN_003aa820(void);
-extern int *FUN_003ac264(void);
+extern int *bibleScreenInitializeCallbacks(void);
 
 
 unsigned int FUN_001e4734(int *param_1)
@@ -86,7 +86,7 @@ unsigned int FUN_001e4734(int *param_1)
     asdOperatorNew();
     piVar2 = (int *)0x0;
     if (temp_v1 != 0) {
-      piVar2 = (int *)FUN_003ac264();
+      piVar2 = (int *)bibleScreenInitializeCallbacks();
     }
     break;
   case 4:

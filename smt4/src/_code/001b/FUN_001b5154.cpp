@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_0027e874(void);
-int FUN_00295ba4(int);
+int infoWinStartTimer(int);
 int eventQueueAddUniqueIfValid(int);
 int FUN_002c1658(...);
-int FUN_003c033c(...);
+void FUN_003c033c(unsigned int, unsigned char);
 
 extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int g_btlActionReflect; /* 0x434290 */
@@ -16,7 +16,7 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0027e874. */
 extern int btlUnitGet(void);
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int jobIsValid(unsigned int);
@@ -86,7 +86,7 @@ unsigned int FUN_001b5154(void)
               *puVar6 = *puVar6 & 0xfffffebf;
               temp_v1 = dialogIsActive();
               if (temp_v1 != 0) {
-                FUN_00295ba4(1);
+                infoWinStartTimer(1);
               }
               return 0;
             }
@@ -106,7 +106,7 @@ unsigned int FUN_001b5154(void)
               return 0;
             }
             FUN_0027e874();
-            FUN_00295ba4(1);
+            infoWinStartTimer(1);
             *puVar6 = *puVar6 & 0xffffffbf;
             eventQueueAddUniqueIfValid(0x100016e);
             return 0;
@@ -118,7 +118,7 @@ unsigned int FUN_001b5154(void)
               return 0;
             }
             FUN_0027e874();
-            FUN_00295ba4(1);
+            infoWinStartTimer(1);
             *puVar6 = *puVar6 & 0xfffffeff;
             eventQueueAddUniqueIfValid(0x100016e);
             return 0;
@@ -127,7 +127,7 @@ unsigned int FUN_001b5154(void)
           FUN_002c1658(7,1);
           if (temp_v3 != 0) {
             FUN_0027e874();
-            FUN_003c033c(0);
+            FUN_003c033c(0,0);
             *puVar6 = *puVar6 | 0x40;
             eventQueueAddUniqueIfValid(0x100016d);
             return 0;
@@ -153,7 +153,7 @@ unsigned int FUN_001b5154(void)
     }
   }
   if (temp_v1 != 0) {
-    FUN_00295ba4(1);
+    infoWinStartTimer(1);
   }
   return 0;
 }

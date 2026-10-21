@@ -2,14 +2,14 @@
 
 extern "C" {
 
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int asdTMTexLoadMainHeap(int);
 
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 
 
 void menu4CReset(int param_1)
@@ -30,9 +30,9 @@ void menu4CReset(int param_1)
     uiSpriteSetImageKeyframe(param_1 + temp_v2 * 0x8c + 0xa10,0,0);
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 10);
-  FUN_00184528(param_1 + 0xa8,0);
-  FUN_00184528(param_1 + 0xa8,1);
-  temp_v2 = FUN_004cfe4c(param_1);
+  uiSpriteBankApplyPreset(param_1 + 0xa8,0);
+  uiSpriteBankApplyPreset(param_1 + 0xa8,1);
+  temp_v2 = flaggedValueHolderGetTotal(param_1);
   temp_v0 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + temp_v2 * 4 + 0x7ec) + 0x5a);
   *(unsigned int *)(param_1 + 0x101c) = temp_v0 + 2;
   temp_v1 = temp_v0 + 1;

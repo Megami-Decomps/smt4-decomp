@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025cab8` (_code @ 0x25cab8, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: native entry consumes nine VFP floats and tail-branches to 0x0019e4a8, inside FUN_0019e3d0+0xd8. The draft crosses that boundary; no standalone named tail target exists. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -16,11 +16,11 @@ typedef struct {
 
 extern int g_uiQuest; /* 0x43dd50 */
 
-extern int FUN_0028f304(void);
+extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: FUN_002903f0. */
 extern int FUN_00298dc8(void);
 extern int FUN_00298e00(unsigned int);
-extern int FUN_00298e20(unsigned int);
+extern int questIsCompleted(unsigned int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
@@ -70,7 +70,7 @@ void FUN_00290404(void)
       }
     }
     else {
-      temp_v3 = FUN_00298e20(temp_v6);
+      temp_v3 = questIsCompleted(temp_v6);
       if (temp_v3 == 0) {
         return;
       }
@@ -81,14 +81,14 @@ void FUN_00290404(void)
     temp_v5 = temp_v6;
     dataTable1bOr1cGetRecord();
     if (*(char *)(temp_v5 + 6) != '\0') {
-      temp_v3 = FUN_0028f304();
+      temp_v3 = questIsOfferable(temp_v6);
       if (temp_v3 != 0) {
         temp_v5 = FUN_002903f0();
         if (temp_v5 == temp_v6) {
           temp_v6 = 0;
         }
         else {
-          temp_v3 = FUN_00298e20(temp_v6);
+          temp_v3 = questIsCompleted(temp_v6);
           if (temp_v3 == 0) {
             temp_v6 = 1;
           }
@@ -98,7 +98,7 @@ void FUN_00290404(void)
         }
       }
       else {
-        temp_v3 = FUN_00298e20(temp_v6);
+        temp_v3 = questIsCompleted(temp_v6);
         if (temp_v3 == 0) {
           temp_v6 = 5;
         }
@@ -108,7 +108,7 @@ void FUN_00290404(void)
       }
     }
     else {
-      temp_v3 = FUN_00298e20(temp_v6);
+      temp_v3 = questIsCompleted(temp_v6);
       if (temp_v3 != 0) {
         temp_v3 = FUN_00298e00(temp_v6);
         if (temp_v3 != 0) {

@@ -1,40 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a32ec` (_code @ 0x2a32ec, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains the mode-fifteen and zero constants in saved registers across the getters; compiler rematerializes them and uses fewer saved registers. */
+#include "common.h"
+
+struct ScriptTransitionContext;
 
 extern "C" {
+void scrCommMessageSetMode(s32 mode);
+ScriptTransitionContext* FUN_002ba85c();
+u32 scrGetArg(u32 index);
+u32 scrGetCommandFrame();
+void FUN_0021bdac(ScriptTransitionContext* context, u32 first, u32 frame, s32 mode, s32 flags, u32 second);
 
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, unsigned int);
-int FUN_002c76c0(int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: FUN_002c76c0. */
-extern unsigned int scrGetCommandFrame(void);
-
-
-void FUN_002a32ec(void)
-
+// Submit both script values and the frame to the mode-fifteen transition.
+void FUN_002a32ec()
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  FUN_002c76c0(0);
-  temp_v0 = FUN_002ba85c();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  temp_v3 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v0,temp_v1,temp_v3,0xf,0,temp_v2);
-  return;
+    scrCommMessageSetMode(0);
+    ScriptTransitionContext* context = FUN_002ba85c();
+    u32 first = scrGetArg(0);
+    u32 second = scrGetArg(1);
+    u32 frame = scrGetCommandFrame();
+    FUN_0021bdac(context, first, frame, 15, 0, second);
 }
-
-} /* extern "C" */
+}

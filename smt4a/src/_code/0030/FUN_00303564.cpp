@@ -5,7 +5,7 @@
 extern "C" {
 
 int uiSetFloatPair(unsigned char *);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ extern int g_lmapScene; /* 0x581288 */
 extern unsigned char g_localCamera; /* 0x5f10cc */
 
 /* Supplied declaration required: uiSetFloatPair. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 void FUN_00303564(void)
@@ -26,7 +26,7 @@ void FUN_00303564(void)
   int temp_v0;
   
   temp_v0 = *(int *)(g_lmapScene + 0x1c);
-  FUN_002b5cb4();
+  distSpatial();
   if (temp_v0 < 0x43340000) {
     uiSetFloatPair(&g_localCamera);
     return;

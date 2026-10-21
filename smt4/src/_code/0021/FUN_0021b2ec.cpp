@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002820a4(void);
+int vectorPairTransitionStep(void);
 int FUN_00282228(float *);
 int FUN_00282390(void);
 int FUN_0028250c(void);
@@ -29,7 +29,7 @@ typedef struct {
 extern unsigned char DAT_004474f0; /* 0x4474f0 */
 extern int g_lmapScene; /* 0x447e88 */
 
-/* Supplied declaration required: FUN_002820a4. */
+/* Supplied declaration required: vectorPairTransitionStep. */
 /* Supplied declaration required: FUN_00282228. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
@@ -158,12 +158,12 @@ void FUN_0021b2ec(void)
       temp_v28 = 0x40000000;
       temp_v23 = temp_v8;
       FUN_00282228(&temp_v16);
-      FUN_002820a4();
+      vectorPairTransitionStep();
       return;
     }
     if (temp_v2 < 0x66) {
       if (temp_v2 == 0x33) {
-        temp_v1 = FUN_002820a4();
+        temp_v1 = vectorPairTransitionStep();
         if (temp_v1 == 0) {
           return;
         }
@@ -180,7 +180,7 @@ void FUN_0021b2ec(void)
       if (temp_v2 != 0x97) {
         return;
       }
-      FUN_002820a4();
+      vectorPairTransitionStep();
       return;
     }
     temp_v7 = *(float *)(g_lmapScene + 0x28);
@@ -215,7 +215,7 @@ void FUN_0021b2ec(void)
     temp_v25 = temp_v19;
     temp_v28 = temp_v13;
     FUN_00282228(&temp_v16);
-    FUN_002820a4();
+    vectorPairTransitionStep();
     temp_v1 = (*(int *)((unsigned char *)&DAT_004474f0 + 0x4));
     *(int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 4) = *(int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 4) + 1;
     *(unsigned int *)(temp_v1 + 8) = 0;
@@ -299,11 +299,11 @@ void FUN_0021b2ec(void)
         temp_v23 = temp_v12;
         temp_v24 = temp_v8;
         FUN_00282228(&temp_v16);
-        FUN_002820a4();
+        vectorPairTransitionStep();
       }
     }
     else {
-      temp_v1 = FUN_002820a4();
+      temp_v1 = vectorPairTransitionStep();
       if (temp_v1 != 0) {
         temp_v1 = (*(int *)((unsigned char *)&DAT_004474f0 + 0x4));
         *(int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 4) = *(int *)((*(int *)((unsigned char *)&DAT_004474f0 + 0x4)) + 4) + 1;
@@ -383,7 +383,7 @@ void FUN_0021b2ec(void)
       return;
     }
     if (temp_v0 != 4) {
-      FUN_002820a4();
+      vectorPairTransitionStep();
       return;
     }
   }
@@ -405,7 +405,7 @@ void FUN_0021b2ec(void)
       return;
     }
     if (temp_v0 != 4) {
-      temp_v1 = FUN_002820a4();
+      temp_v1 = vectorPairTransitionStep();
       if (temp_v1 == 0) {
         return;
       }

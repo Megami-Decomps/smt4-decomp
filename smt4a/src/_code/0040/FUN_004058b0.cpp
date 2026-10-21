@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct SpriteDetailPanel;
+
 extern "C" {
 
 int vec2GetXInt(int);
@@ -13,7 +15,7 @@ int FUN_00402ab8(...);
 int FUN_004042fc(...);
 int FUN_004045ac(int, unsigned int, unsigned int);
 int FUN_00404a8c(...);
-int FUN_00405aac(int, int, int);
+void drawSpriteDetailPanelClipped(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -32,7 +34,6 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_004042fc. */
 /* Supplied declaration required: FUN_004045ac. */
 /* Supplied declaration required: FUN_00404a8c. */
-/* Supplied declaration required: FUN_00405aac. */
 
 
 void FUN_004058b0(int param_1)
@@ -57,6 +58,7 @@ void FUN_004058b0(int param_1)
   }
   temp_v2 = vec2GetXInt(param_1 + 0x1d8);
   temp_v3 = vec2GetYInt(param_1 + 0x1d8);
+  const f32 baseSpeed = *(f32*)(param_1 + 0x1f8);
   temp_v7 = 0.26f;
   temp_v8 = 0x3e851eb8;
   FUN_001879d0(g_renderCtx);
@@ -73,7 +75,8 @@ void FUN_004058b0(int param_1)
   temp_v4 = vec2GetYInt(param_1 + 0x264);
   if (*(int *)(param_1 + 0x108) != 0) {
     if (*(int *)(param_1 + 0x108) == 1) {
-      FUN_00405aac(param_1,temp_v5 + temp_v2,temp_v4 + temp_v3);
+      drawSpriteDetailPanelClipped((SpriteDetailPanel*)param_1,temp_v5 + temp_v2,temp_v4 + temp_v3,
+                   *(f32*)(param_1 + 0x284) * baseSpeed);
     }
   }
   else {

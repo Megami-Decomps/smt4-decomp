@@ -12,7 +12,7 @@ int FUN_00239294(void);
 int FUN_00268250(...);
 int FUN_002c9104(void);
 int gameDataBlocksSetIndexedValue(...);
-int FUN_00358dbc(void);
+void titleConfigWriteToSave(void);
 int rt_memcpy(...);
 int rt_memcpy_w(...);
 
@@ -41,8 +41,8 @@ extern unsigned int gameDataBlocksGetTable(void);
 extern unsigned int gameDataBlocksGetSelectedValue(void);
 extern int byte1IsZero(void);
 /* Supplied declaration required: gameDataBlocksSetIndexedValue. */
-/* Supplied declaration required: FUN_00358dbc. */
-extern int FUN_003881d0(void);
+/* Supplied declaration required: titleConfigWriteToSave. */
+extern int campCecGet(void);
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -67,7 +67,7 @@ unsigned int FUN_00371750(void)
     temp_v3 = 0x10000;
     asdMemoryAlloc(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
     *(unsigned int *)(temp_v1 + 8) = temp_v3;
-    FUN_00358dbc();
+    titleConfigWriteToSave();
     temp_v4 = *(int *)(temp_v1 + 0x10) - 1;
     if (*(int *)(temp_v1 + 0x14) == 1) {
       temp_v4 = *(int *)(temp_v1 + 0x10);
@@ -75,7 +75,7 @@ unsigned int FUN_00371750(void)
     temp_v3 = gameDataBlocksGetSelectedValue();
     gameDataBlocksSetIndexedValue(temp_v4,temp_v3);
     if (*(char *)(DAT_00588e2c + 0xc) != '\0') {
-      temp_v2 = FUN_003881d0();
+      temp_v2 = campCecGet();
       if (temp_v2 == 0) {
         temp_v4 = 0x1c20;
       }
@@ -126,7 +126,7 @@ unsigned int FUN_00371750(void)
     temp_v3 = 0x10000;
     asdMemoryAlloc(0x10000,0x100,0,*(unsigned int *)(temp_v1 + 0xc),1);
     *(unsigned int *)(temp_v1 + 8) = temp_v3;
-    FUN_00358dbc();
+    titleConfigWriteToSave();
     temp_v0 = (char)*(unsigned int *)(temp_v1 + 0x10);
     temp_v5 = temp_v0 - '\x01';
     if (*(int *)(temp_v1 + 0x14) == 1) {

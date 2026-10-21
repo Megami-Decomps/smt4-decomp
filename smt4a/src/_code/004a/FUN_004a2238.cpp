@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_00184528(int *, int);
+int uiSpriteBankApplyPreset(int *, int);
 int FUN_00275bc8(int, int);
 int FUN_0032d0c8(...);
 int FUN_0035ad50(int, unsigned char [300]);
@@ -22,10 +22,10 @@ typedef struct {
     unsigned int sp140; /* 0x140: local_140 */
 } param_1_stack;
 
-extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
+extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern unsigned int slotRecordFindById(unsigned short);
 /* Supplied declaration required: FUN_00275bc8. */
 extern int FUN_002a4b28(unsigned short);
@@ -37,7 +37,7 @@ extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_004a3b48. */
 extern int utilityReturnSuccess(int);
 /* Supplied declaration required: FUN_004a8750. */
-extern int FUN_004cfe4c(int *);
+extern int flaggedValueHolderGetTotal(int *);
 
 
 void FUN_004a2238(int *param_1)
@@ -60,14 +60,14 @@ void FUN_004a2238(int *param_1)
     param_1[6] = 0;
     *(unsigned char *)((int)param_1 + 0x861) = 1;
     if ((char)param_1[0x218] != '\0') {
-      temp_v1 = FUN_004cfe4c(param_1 + 8);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 8);
       temp_v1 = param_1[temp_v1 * 8 + 0x21a];
       sysPlaySe(0x4e);
       temp_v2 = slotRecordFindById((short)temp_v1);
       FUN_0032d0c8(0,1,(short)temp_v1,temp_v2);
     }
     else {
-      temp_v1 = FUN_004cfe4c(param_1 + 8);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 8);
       temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 8 + 0x21a);
       temp_v3 = (unsigned int)temp_v0;
       FUN_004a8750(temp_v3,*(unsigned char *)((int)param_1 + 0x861),0);
@@ -89,9 +89,9 @@ void FUN_004a2238(int *param_1)
         FUN_0032d0c8(0,2,temp_v0,temp_v4);
       }
     }
-    FUN_00184528(param_1 + 0x37,8);
-    FUN_00184528(param_1 + 0x37,9);
-    (*(unsigned int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = 0xffffffff;
+    uiSpriteBankApplyPreset(param_1 + 0x37,8);
+    uiSpriteBankApplyPreset(param_1 + 0x37,9);
+    (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
     FUN_004a3b48(param_1);
     return;
   }

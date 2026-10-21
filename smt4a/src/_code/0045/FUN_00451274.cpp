@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern unsigned int DAT_00589190; /* 0x589190 */
+extern unsigned int g_gfxReleaseCallback; /* 0x589190 */
 
 /* Supplied declaration required: sysMemClear. */
 
@@ -44,7 +44,7 @@ void FUN_00451274(int *param_1)
   piVar1 = unaff_r9 + *(int *)(temp_v0 + 0xc);
   temp_v5 = unaff_r9 != piVar1;
   if (temp_v5) {
-    unaff_r11 = &DAT_00589190;
+    unaff_r11 = &g_gfxReleaseCallback;
   }
   while (temp_v5) {
     temp_v2 = 0;

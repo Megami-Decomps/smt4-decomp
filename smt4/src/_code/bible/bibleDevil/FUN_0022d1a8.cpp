@@ -21,7 +21,7 @@ extern unsigned char LAB_0022d42c; /* 0x22d42c */
 extern int DAT_0043d9cc; /* 0x43d9cc */
 extern unsigned int DAT_0049375c; /* 0x49375c */
 
-extern int FUN_00233718(int);
+extern int rangeLimitMin(int);
 /* Supplied declaration required: FUN_0029ce60. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: devilGetRecord. */
@@ -52,7 +52,7 @@ void FUN_0022d1a8(int param_1)
   
   if (*(int *)(param_1 + 0x28) != 0) {
     temp_v5 = FUN_0029e924(param_1 + 0x20);
-    temp_v6 = FUN_00233718(param_1 + 0x20);
+    temp_v6 = rangeLimitMin(param_1 + 0x20);
     if ((temp_v5 != DAT_0043d9cc) && (temp_v9 = 0, DAT_0043d9cc = temp_v5, 0 < temp_v6)) {
       do {
         temp_v13 = 0xffffffff;

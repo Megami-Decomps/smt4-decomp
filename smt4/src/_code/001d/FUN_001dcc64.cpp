@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00219908(void);
 int FUN_002629a8(int, int);
-int FUN_002629f0(int, int);
+int registrationEntryInsert(int, int);
 int asdTextureRelease(void);
 int FUN_002c15fc(int);
 int FUN_002fcd98(int);
@@ -42,7 +42,7 @@ extern unsigned int DAT_0044f864; /* 0x44f864 */
 
 /* Supplied declaration required: FUN_00219908. */
 /* Supplied declaration required: FUN_002629a8. */
-/* Supplied declaration required: FUN_002629f0. */
+/* Supplied declaration required: registrationEntryInsert. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: asdTextureRelease. */
 /* Supplied declaration required: FUN_002c15fc. */
@@ -100,11 +100,11 @@ unsigned int FUN_001dcc64(void)
   DAT_0044ea8c = 0;
   DAT_0044f864 = 0;
   if (DAT_0044ea94 != 0) {
-    FUN_002629f0(DAT_0044ea94,3);
+    registrationEntryInsert(DAT_0044ea94,3);
     DAT_0044ea94 = 0;
   }
   if (DAT_0044ea90 != 0) {
-    FUN_002629f0(DAT_0044ea90,3);
+    registrationEntryInsert(DAT_0044ea90,3);
     DAT_0044ea90 = 0;
   }
   if (DAT_0044eaa0 != 0) {

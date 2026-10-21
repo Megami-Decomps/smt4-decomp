@@ -1,37 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010feb4` (_code @ 0x10feb4, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: status tests now match via nnResultIsFailure, but context/text/active-flag saved registers and final flag-store scheduling differ. */
+#include "nn/Result.h"
 
 extern "C" {
+extern u8 DAT_00471a10;
+s32 FUN_002c1398();
+u32 libc_strlen(const char* text);
+s32 asdModelForwardChecked(u32 context, const char* text, u32 length, u32 flags);
 
-extern signed char DAT_00471a10; /* 0x471a10 */
-
-extern int asdModelForwardChecked(unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_002c1398(unsigned int);
-extern unsigned int libc_strlen(unsigned int);
-
-
-int FUN_0010feb4(unsigned int param_1,unsigned int param_2)
-
+// Begin the text operation once and mark it active only when both SDK calls succeed.
+s32 FUN_0010feb4(u32 context, const char* text)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (DAT_00471a10 != '\0') {
-    temp_v0 = -0x1f5f2c07;
-  }
-  else {
-    temp_v0 = FUN_002c1398(0);
-    if (-1 < temp_v0) {
-      temp_v1 = libc_strlen(param_2);
-      temp_v0 = asdModelForwardChecked(param_1,param_2,temp_v1,0);
-      if (-1 < temp_v0) {
-        DAT_00471a10 = '\x01';
-        temp_v0 = 0;
-      }
+    s32 status;
+    if (DAT_00471a10 != 0) {
+        status = (s32)0xe0a0d3f9;
+    } else {
+        status = FUN_002c1398();
+        if (!nnResultIsFailure(status)) {
+            u32 length = libc_strlen(text);
+            status = asdModelForwardChecked(context, text, length, 0);
+            if (!nnResultIsFailure(status)) {
+                DAT_00471a10 = 1;
+                status = 0;
+            }
+        }
     }
-  }
-  return temp_v0;
+    return status;
 }
-
-} /* extern "C" */
+}

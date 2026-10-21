@@ -11,14 +11,14 @@ int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, uns
 int useCounterStart(void);
 int FUN_002686b8(...);
 int eventTexRequestStopAll(void);
-int FUN_002c76c0(int);
+int scrCommMessageSetMode(int);
 int scrGetCommandFrame(void);
 int bustupCutAnimRequestStopSlots(void);
 int FUN_0031f208(...);
-int FUN_0031f27c(unsigned int, int);
+int sortMenuAcquire(unsigned int, int);
 int scrSetResult(int);
 int obj04Finish(void);
-int FUN_0035d8a4(void);
+int useCounterRelease(void);
 
 /* stack frame of param_2: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -44,15 +44,15 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_002686b8. */
 extern unsigned int FUN_002ba85c(void);
 /* Supplied declaration required: eventTexRequestStopAll. */
-/* Supplied declaration required: FUN_002c76c0. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: scrGetCommandFrame. */
 /* Supplied declaration required: bustupCutAnimRequestStopSlots. */
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: obj04Finish. */
-/* Supplied declaration required: FUN_0035d8a4. */
+/* Supplied declaration required: useCounterRelease. */
 
 
 unsigned int FUN_0036dbdc(unsigned int param_1,int param_2)
@@ -88,7 +88,7 @@ unsigned int FUN_0036dbdc(unsigned int param_1,int param_2)
   acStack_40[3] = '\0';
   temp_v0 = scrGetCommandFrame();
   temp_v1 = scrGetArg(0);
-  FUN_002c76c0(0);
+  scrCommMessageSetMode(0);
   temp_v7 = 0;
   temp_v6 = 0;
 LAB_0036dc44:
@@ -125,7 +125,7 @@ LAB_0036dc44:
     msgBoxFlagsSetBit7(*(unsigned int *)(temp_v2 + 4));
     *(unsigned char *)(temp_v2 + 0x19c4) = 0;
     *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v2 + 0xc) | 0x20;
-    FUN_0031f27c(0xffffffff,3);
+    sortMenuAcquire(0xffffffff,3);
     temp_v0 = 0;
 LAB_0036dd68:
     do {
@@ -149,14 +149,14 @@ LAB_0036dd68:
   if (temp_v1 != 0) {
     scrSetResult(0);
     FUN_002686b8();
-    FUN_0035d8a4();
+    useCounterRelease();
     obj04Finish();
     temp_v5 = 1;
   }
   else {
     if (temp_v0 != 0x69) {
       FUN_002686b8(0);
-      FUN_0035d8a4();
+      useCounterRelease();
       scrSetResult(temp_v0 - 0x4d);
       obj04Finish();
       return 1;

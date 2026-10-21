@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002ac8b0(...);
+int multibyteToUtf16(...);
 int FUN_002bb5a4(int, unsigned char [524], int);
 int FUN_002bbb2c(void);
 
-/* Supplied declaration required: FUN_002ac8b0. */
+/* Supplied declaration required: multibyteToUtf16. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: FUN_002bbb2c. */
 
@@ -26,12 +26,12 @@ int FUN_00130320(int param_1,unsigned int param_2,int param_3)
   if (param_3 != 0) {
     temp_v2 = param_1 + 4;
     temp_v0 = 0;
-    FUN_002ac8b0();
+    multibyteToUtf16();
     temp_v1 = temp_v0 + 1U;
     if (temp_v0 + 1U >= 0x107) {
       temp_v1 = 0x106;
     }
-    FUN_002ac8b0(temp_v3,param_2,temp_v1);
+    multibyteToUtf16(temp_v3,param_2,temp_v1);
     *(unsigned int *)(param_1 + 0x10) = 0;
     *(unsigned int *)(param_1 + 0x14) = 0;
     *(unsigned int *)(param_1 + 8) = 0;
@@ -42,12 +42,12 @@ int FUN_00130320(int param_1,unsigned int param_2,int param_3)
   }
   temp_v2 = param_1 + 4;
   temp_v0 = 0;
-  FUN_002ac8b0();
+  multibyteToUtf16();
   temp_v1 = temp_v0 + 1U;
   if (temp_v0 + 1U >= 0x107) {
     temp_v1 = 0x106;
   }
-  FUN_002ac8b0(temp_v3,param_2,temp_v1);
+  multibyteToUtf16(temp_v3,param_2,temp_v1);
   *(unsigned int *)(param_1 + 0x10) = 0;
   *(unsigned int *)(param_1 + 0x14) = 0;
   *(unsigned int *)(param_1 + 8) = 0;

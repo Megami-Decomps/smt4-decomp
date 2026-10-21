@@ -1,13 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004257e4` (_code @ 0x4257e4, 0x2bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_MoviePacketPump.h"
 
 extern "C" {
 
 int nn_os_LightEvent_ClearSignal(int);
-int FUN_00424454(int);
+void moviePumpCurrentStreamPackets(MoviePacketPump*);
 int FUN_004245b4(int);
-int FUN_004249e8(int);
+int movieSyncPollBackend(int);
 int FUN_00424c4c(int);
 int FUN_00424ecc(int);
 int FUN_00513f84(unsigned int, unsigned int);
@@ -20,9 +21,9 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: nn_os_LightEvent_ClearSignal. */
-/* Supplied declaration required: FUN_00424454. */
+/* Supplied declaration required: moviePumpCurrentStreamPackets. */
 /* Supplied declaration required: FUN_004245b4. */
-/* Supplied declaration required: FUN_004249e8. */
+/* Supplied declaration required: movieSyncPollBackend. */
 /* Supplied declaration required: FUN_00424c4c. */
 /* Supplied declaration required: FUN_00424ecc. */
 /* Supplied declaration required: FUN_00513f84. */
@@ -131,10 +132,10 @@ void FUN_004257e4(int param_1,unsigned int param_2,unsigned int param_3,int para
         }
       }
       if (*(int *)(param_1 + 0xc) != 4) {
-        FUN_00424454(param_1);
+        moviePumpCurrentStreamPackets(reinterpret_cast<MoviePacketPump*>(param_1));
       }
       FUN_004245b4(param_1);
-      FUN_004249e8(param_1);
+      movieSyncPollBackend(param_1);
       nn_os_CriticalSection_Leave(param_1);
       return;
     }

@@ -8,7 +8,7 @@ int FUN_001ff474(void);
 int scrollListSetSelection(int, int);
 int eventQueueAddUniqueIfValid(int);
 int FUN_002d56c4(int, int, int);
-int FUN_002d56f0(void);
+int labelsReset(void);
 int __aeabi_idivmod(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -25,7 +25,7 @@ typedef struct {
 extern int padIsButtonPressed(unsigned char);
 extern int FUN_002c15fc(void);
 /* Supplied declaration required: FUN_002d56c4. */
-/* Supplied declaration required: FUN_002d56f0. */
+/* Supplied declaration required: labelsReset. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -90,7 +90,7 @@ unsigned char FUN_0029efd8(int param_1,int param_2)
         temp_v2 = 1;
       }
     }
-    FUN_002d56f0();
+    labelsReset();
     temp_v4 = *(int *)(param_1 + 0x48);
     temp_v9 = *(int *)(param_1 + 0x50);
     __aeabi_idivmod(temp_v9,temp_v8);

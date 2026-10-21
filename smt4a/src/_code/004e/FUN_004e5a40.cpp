@@ -1,31 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e5a40` (_code @ 0x4e5a40, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses a writeback slot pointer and a paired final store instead of retail's separate address calculations. */
+#include "common.h"
 
-extern "C" {
+struct UnitValueSlot {
+    s32 key; // 0x00: a negative key and zero value mark an unused slot
+    u32 value; // 0x04
+};
+struct UnitValueTable {
+    u8 unk000[0x5b8];
+    UnitValueSlot slots[0x85]; // 0x5b8
+};
 
-extern int btlUnitGet(void);
+extern "C" UnitValueTable *btlUnitGet(u32);
 
-
-void FUN_004e5a40(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+// Store a key/value pair in the unit's first unused value slot.
+extern "C" void FUN_004e5a40(u32 unitId, s32 key, u32 value)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = btlUnitGet();
-  temp_v1 = 0;
-  while ((temp_v2 = temp_v0 + temp_v1 * 8, -1 < *(int *)(temp_v2 + 0x5b8) || (*(int *)(temp_v2 + 0x5bc) != 0))
-        ) {
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x85) {
-      return;
+    UnitValueTable *unit = btlUnitGet(unitId);
+    for (s32 i = 0; i < 0x85; ++i) {
+        UnitValueSlot *slot = &unit->slots[i];
+        if (slot->key < 0 && slot->value == 0) {
+            slot->key = key;
+            slot->value = value;
+            return;
+        }
     }
-  }
-  *(unsigned int *)(temp_v0 + temp_v1 * 8 + 0x5b8) = param_2;
-  *(unsigned int *)(temp_v2 + 0x5bc) = param_3;
-  return;
 }
-
-} /* extern "C" */

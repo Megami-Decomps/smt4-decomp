@@ -24,7 +24,7 @@ int FUN_004ed14c(int *, unsigned int *, int, unsigned int);
 int FUN_004ed5b4(int *, unsigned int *, int, unsigned int);
 int FUN_004f8f08(...);
 int FUN_004f94b8(...);
-int FUN_004f9b54(void);
+int stateSnapshotIsReady(void);
 int FUN_004fd508(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -44,7 +44,7 @@ extern unsigned int DAT_0057125c; /* 0x57125c */
 extern unsigned int DAT_00571288; /* 0x571288 */
 extern unsigned int DAT_0057128c; /* 0x57128c */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
@@ -66,7 +66,7 @@ extern int *FUN_004dc72c(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004ddd10. */
 /* Supplied declaration required: FUN_004de37c. */
 /* Supplied declaration required: btlUnitSetParam. */
-extern int *FUN_004e0170(int *, unsigned int *, int, unsigned int);
+extern int *battleActionSnapshotCommand(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004e0314. */
 /* Supplied declaration required: FUN_004e05d4. */
 /* Supplied declaration required: FUN_004e1354. */
@@ -81,7 +81,7 @@ extern int *FUN_004e0170(int *, unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_004ed5b4. */
 /* Supplied declaration required: FUN_004f8f08. */
 /* Supplied declaration required: FUN_004f94b8. */
-/* Supplied declaration required: FUN_004f9b54. */
+/* Supplied declaration required: stateSnapshotIsReady. */
 extern int FUN_004fa0c4(int);
 /* Supplied declaration required: FUN_004fd508. */
 
@@ -129,7 +129,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     if (temp_v4 == 0) {
       return (int *)0x0;
     }
-    FUN_004f8f08(DAT_00573808);
+    FUN_004f8f08(g_btlAux);
     FUN_004eb838(param_1,puVar9);
     break;
   case 5:
@@ -219,7 +219,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
         return (int *)0x0;
       }
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
-      FUN_004f8f08(DAT_00573808);
+      FUN_004f8f08(g_btlAux);
       *puVar9 = *puVar9 & 0xffdfffff;
       *(unsigned short *)(*(int *)(temp_v4 + 0x2c) + 0x1be) = 0;
       return (int *)0x1;
@@ -254,7 +254,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     *(unsigned char *)(temp_v4 + 9) = temp_v3;
     break;
   case 0x1d:
-    piVar3 = (int *)FUN_004e0170(param_1,puVar9,temp_v6,param_4);
+    piVar3 = (int *)battleActionSnapshotCommand(param_1,puVar9,temp_v6,param_4);
     return piVar3;
   case 0x1e:
     FUN_004e7418(param_1,puVar9,temp_v6,param_4);
@@ -289,19 +289,19 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     break;
   case 0x22:
     if (*(int *)(temp_v4 + 0xc) == 0) {
-      temp_v6 = DAT_00573808;
-      FUN_004f9b54();
+      temp_v6 = g_btlAux;
+      stateSnapshotIsReady();
       if (temp_v6 == 0) {
         return (int *)0x0;
       }
-      FUN_004f94b8(DAT_00573808);
+      FUN_004f94b8(g_btlAux);
       *(int *)(temp_v4 + 0xc) = *(int *)(temp_v4 + 0xc) + 1;
       return (int *)0x0;
     }
     if (*(int *)(temp_v4 + 0xc) != 1) {
       return (int *)0x0;
     }
-    temp_v4 = FUN_004fa0c4(DAT_00573808);
+    temp_v4 = FUN_004fa0c4(g_btlAux);
     if (temp_v4 == 0) {
       return (int *)0x0;
     }

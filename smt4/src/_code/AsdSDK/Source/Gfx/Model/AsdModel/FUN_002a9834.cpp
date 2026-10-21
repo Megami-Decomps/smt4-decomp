@@ -43,7 +43,7 @@ typedef struct {
 extern signed char DAT_00464af3; /* 0x464af3 */
 extern int DAT_00464b30; /* 0x464b30 */
 extern unsigned int DAT_00464b6c; /* 0x464b6c */
-extern unsigned int DAT_00464b8c; /* 0x464b8c */
+extern unsigned int sceneGroup1Root; /* 0x464b8c */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
 #define ROMWRIGHT_PIECE_3_1_DEFINED
@@ -389,7 +389,7 @@ LAB_002a9bac:
     }
     piVar8 = temp_v15;
   }
-  temp_v6 = (&DAT_00464b8c)[(unsigned char)param_2[0x24]];
+  temp_v6 = (&sceneGroup1Root)[(unsigned char)param_2[0x24]];
   piVar15 = temp_v14;
   do {
     if (piVar15 == piVar8) {

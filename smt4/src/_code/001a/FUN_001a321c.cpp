@@ -130,7 +130,7 @@ extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002ba12c. */
-extern unsigned int FUN_002bce00(unsigned int);
+extern unsigned int aocIndexValueOrDefault(unsigned int);
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int FUN_002bd1fc(void);
@@ -1687,7 +1687,7 @@ LAB_001a68b0:
                        (unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v13 + 10),0xe2,0,0);
           temp_v13 = FUN_002bf4f8(0x1a,0xc4);
-          temp_v21 = FUN_002bce00(temp_v8);
+          temp_v21 = aocIndexValueOrDefault(temp_v8);
           VectorSignedToFloat((int)temp_v30 + (int)*(short *)(temp_v13 + 10),
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v13 + 8)),

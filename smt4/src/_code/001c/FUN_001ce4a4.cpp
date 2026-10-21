@@ -10,7 +10,7 @@ int asdTMTexTableLoadEntryAsync(void);
 int FUN_002a5ee4(int, unsigned int, unsigned int, int);
 int FUN_002a60cc(int, unsigned int, unsigned int);
 int asdTMTexTableReleaseNode(unsigned int);
-int FUN_002aeb38(int, int, unsigned int);
+int uiSpriteReplaceTextureEntry(int, int, unsigned int);
 
 typedef int romwright_code(...);
 extern int g_aocSystem; /* 0x433158 */
@@ -22,8 +22,8 @@ extern int g_aocSystem; /* 0x433158 */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a60cc. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-extern int FUN_002ae98c(int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002aeb38. */
+extern int aocRunByName(int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: uiSpriteReplaceTextureEntry. */
 extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
 
@@ -45,7 +45,7 @@ unsigned int FUN_001ce4a4(void)
   temp_v0 = jobGetWork();
   temp_v1 = 0;
   if ((*(char *)(temp_v0 + 0x7c) != '\0') && (temp_v1 = FUN_002c1d5c(), temp_v1 == 0)) {
-    temp_v1 = FUN_002ae98c(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),1)
+    temp_v1 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),1)
     ;
     if (temp_v1 != 0) {
       temp_v1 = g_aocSystem;
@@ -68,7 +68,7 @@ unsigned int FUN_001ce4a4(void)
     temp_v1 = *(int *)(temp_v0 + 0xc);
   }
   if (temp_v2 != -1 && temp_v1 != 0) {
-    FUN_002aeb38(temp_v0,temp_v2,0xffffffff);
+    uiSpriteReplaceTextureEntry(temp_v0,temp_v2,0xffffffff);
     *(unsigned int *)(temp_v0 + 0x18) = 0xffffffff;
   }
   temp_v7 = 0.0f;

@@ -8,7 +8,7 @@ int FUN_0010d300(void);
 int FUN_0010d35c(void);
 int asdOperatorDelete(void);
 int vectorCopyHeader(unsigned int *, int *);
-int FUN_003f2d7c(int, unsigned int *, unsigned int *);
+int asyncOperationStartOrPoll(int, unsigned int *, unsigned int *);
 int FUN_003fa1c8(unsigned int *);
 int FUN_00414a24(void);
 int FUN_004321a0(void);
@@ -36,7 +36,7 @@ extern int FUN_001224a0(void);
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: vectorCopyHeader. */
 extern int refIsNonNegative(unsigned int *);
-/* Supplied declaration required: FUN_003f2d7c. */
+/* Supplied declaration required: asyncOperationStartOrPoll. */
 /* Supplied declaration required: FUN_003fa1c8. */
 extern unsigned int *FUN_003fa580(unsigned int *);
 /* Supplied declaration required: FUN_00414a24. */
@@ -68,7 +68,7 @@ unsigned int * FUN_003fa83c(unsigned int *param_1)
     break;
   case 1:
     temp_v1 = param_1[0xc];
-    FUN_003f2d7c(temp_v1,param_1 + 6,param_1 + 10);
+    asyncOperationStartOrPoll(temp_v1,param_1 + 6,param_1 + 10);
     if (temp_v1 == 0) {
       if ((int)param_1[6] < 0) {
         *(unsigned char *)(param_1 + 3) = 1;

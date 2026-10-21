@@ -1,36 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00328a30` (_code @ 0x328a30, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains unused pool words 0x0044ea80/0x0044f858; the initial index-load order also differs. */
+#include "shard/W6_W6Match5_IndexedRecord.h"
 
 extern "C" {
+extern IndexedRecordBuffer DAT_004d8b40;
+IndexedRecordBuffer *linkedFindItemByIndex(IndexedRecordList *, s32);
+void rt_memcpy_w(void *, const void *, u32);
+u32 FUN_003224c0(IndexedRecordBuffer *, u32);
 
-int FUN_003224c0(unsigned char *, int);
-int rt_memcpy_w(...);
-
-extern unsigned char DAT_004d8b40; /* 0x4d8b40 */
-
-extern unsigned int linkedFindItemByIndex(unsigned int, int);
-/* Supplied declaration required: FUN_003224c0. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned char * FUN_00328a30(int param_1,int param_2)
-
+// Edit an indexed record through scratch storage and mark flagged results.
+u32 FUN_00328a30(IndexedRecordSource *source, const IndexedRecordSelection *selection)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = linkedFindItemByIndex(*(unsigned int *)(param_1 + 0x14),
-                       *(int *)(param_2 + 0xc) + *(int *)(param_1 + 0xc));
-  rt_memcpy_w(&DAT_004d8b40,temp_v0,0x90);
-  puVar2 = &DAT_004d8b40;
-  FUN_003224c0(&DAT_004d8b40,1);
-  rt_memcpy_w(temp_v0,&DAT_004d8b40,0x90);
-  if (((unsigned int)puVar2 & 1) != 0) {
-    puVar2 = (unsigned char *)((unsigned int)puVar2 | 0x800000);
-  }
-  return puVar2;
+    IndexedRecordBuffer *record = linkedFindItemByIndex(source->records,
+                                            selection->index + source->baseIndex);
+    rt_memcpy_w(&DAT_004d8b40, record, sizeof(IndexedRecordBuffer));
+    u32 result = FUN_003224c0(&DAT_004d8b40, 1);
+    rt_memcpy_w(record, &DAT_004d8b40, sizeof(IndexedRecordBuffer));
+    if ((result & 1) != 0)
+        result |= 0x800000;
+    return result;
 }
-
-} /* extern "C" */
+}

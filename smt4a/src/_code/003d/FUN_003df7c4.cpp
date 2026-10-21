@@ -1,13 +1,15 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003df7c4` (_code @ 0x3df7c4, 0x30c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_StatGrowth.h"
 
 extern "C" {
 
 int FUN_00192608(void);
 int FUN_0034cb50(unsigned short *, int *, int);
-int FUN_0048026c(unsigned int, int *);
-int FUN_004cc6a4(int, unsigned short *, int *);
+int equipmentGetCappedUpgradeBonuses(unsigned int, int *);
+struct ValuePair;
+void FUN_004cc6a4(s32 level, ValuePair *output, const StatGrowthParameters *parameters);
 int FUN_004cceb8(int *, int);
 
 /* stack frame of param_1: 10 slot(s), 28 byte(s) */
@@ -29,8 +31,7 @@ extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_0034cb50. */
 extern short FUN_003da998(unsigned int, unsigned int *);
 extern short FUN_003daaf4(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_0048026c. */
-/* Supplied declaration required: FUN_004cc6a4. */
+/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
 /* Supplied declaration required: FUN_004cceb8. */
 
 
@@ -106,7 +107,7 @@ void FUN_003df7c4(unsigned short *param_1)
       param_1[0x14] = param_1[0x14] + (short)*(char *)(temp_v4 + 0x35);
       temp_v8 = *(short *)(temp_v4 + 0x36);
       temp_v2 = *(short *)(temp_v4 + 0x38);
-      FUN_0048026c(unaff_r6,&temp_v9);
+      equipmentGetCappedUpgradeBonuses(unaff_r6,&temp_v9);
       param_1[0x10] = (short)temp_v10 + param_1[0x10];
       param_1[0x11] = (*(unsigned short *)((unsigned char *)&temp_v10 + 2)) + param_1[0x11];
       param_1[0x12] = (short)temp_v11 + param_1[0x12];
@@ -154,7 +155,8 @@ void FUN_003df7c4(unsigned short *param_1)
   uStack_40 = temp_v11;
   uStack_3c = temp_v12;
   uStack_38 = uStack_4c;
-  FUN_004cc6a4(param_1[0x31],param_1 + 0xe,&temp_v13);
+  FUN_004cc6a4(param_1[0x31],(ValuePair *)(param_1 + 0xe),
+                (const StatGrowthParameters *)&temp_v13);
   temp_v1 = FUN_003da998(1,(unsigned int *)&temp_v13);
   temp_v3 = param_1[7];
   temp_v2 = FUN_003daaf4(1,(unsigned int *)&temp_v13);

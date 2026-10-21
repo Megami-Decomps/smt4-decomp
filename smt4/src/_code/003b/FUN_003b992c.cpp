@@ -18,7 +18,7 @@ extern unsigned short DAT_0049fa80; /* 0x49fa80 */
 extern short DAT_0049fa82; /* 0x49fa82 */
 extern unsigned char DAT_0049fa84; /* 0x49fa84 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022b778. */
 extern unsigned int tableGroupFindEntryIndex(int, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -27,7 +27,7 @@ extern unsigned int tableGroupFindEntryIndex(int, unsigned char *);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: asdMemFree. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 
 
 void FUN_003b992c(int param_1)
@@ -43,7 +43,7 @@ void FUN_003b992c(int param_1)
   piVar3 = (int *)(param_1 + 0xdb4);
   if (*(int *)(param_1 + 0x2c) != 0) {
     if ((*(int *)(param_1 + 0x2c) == 1) &&
-       (temp_v0 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xdbc)), temp_v0 == 2)) {
+       (temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xdbc)), temp_v0 == 2)) {
       scrScriptProcessDestroy(*(unsigned int *)(param_1 + 0xdbc));
       *(unsigned int *)(param_1 + 0xdbc) = 0;
       asdMemFree(*(unsigned int *)(param_1 + 0xdb4));
@@ -58,10 +58,10 @@ void FUN_003b992c(int param_1)
   DAT_0049fa80 = 0;
   FUN_002bff50();
   textFormatBuffer(temp_v2,&LAB_003b9a54,(int)DAT_0049fa82,(int)DAT_0049fa82);
-  temp_v1 = FUN_002c5c04(temp_v2);
+  temp_v1 = asdLoadFileSyncDefault(temp_v2);
   *(unsigned int *)(param_1 + 0xdb4) = temp_v1;
   textFormatBuffer(temp_v2,&LAB_003b9a6c,(int)DAT_0049fa82,(int)DAT_0049fa82);
-  temp_v1 = FUN_002c5c04(temp_v2);
+  temp_v1 = asdLoadFileSyncDefault(temp_v2);
   *(unsigned int *)(param_1 + 0xdb8) = temp_v1;
   temp_v0 = *piVar3;
   FUN_00297060(temp_v0,temp_v1);

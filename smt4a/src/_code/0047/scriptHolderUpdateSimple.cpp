@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00275bc8(void);
 int scrScriptProcessStartEntry(int, int);
-int FUN_002804b0(unsigned char *, int *, int);
+int asdLoadFileAsyncSimple(unsigned char *, int *, int);
 int FUN_003a36b4(void);
 int FUN_00418070(unsigned int, int);
 int FUN_004731d8(void);
@@ -15,10 +15,10 @@ int optionsClearFlag1(void);
 extern unsigned char LAB_0047e5dc; /* 0x47e5dc */
 extern unsigned char LAB_0047e5f4; /* 0x47e5f4 */
 
-extern int FUN_00224880(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_003a36b4. */
 /* Supplied declaration required: FUN_00418070. */
 extern unsigned int FUN_004186e0(void);
@@ -37,7 +37,7 @@ unsigned int scriptHolderUpdateSimple(int *param_1)
   if (temp_v0 != 0) {
     if (temp_v0 != 1) {
       if (temp_v0 == 2) {
-        temp_v0 = FUN_00224880(param_1[5]);
+        temp_v0 = scrRunOpcodesStub(param_1[5]);
         if (temp_v0 != 2) {
           return 0;
         }
@@ -68,8 +68,8 @@ unsigned int scriptHolderUpdateSimple(int *param_1)
     temp_v0 = 2;
   }
   else {
-    FUN_002804b0(&LAB_0047e5dc,param_1 + 3,0);
-    FUN_002804b0(&LAB_0047e5f4,param_1 + 4,0);
+    asdLoadFileAsyncSimple(&LAB_0047e5dc,param_1 + 3,0);
+    asdLoadFileAsyncSimple(&LAB_0047e5f4,param_1 + 4,0);
     temp_v0 = 1;
   }
   *param_1 = temp_v0;

@@ -9,7 +9,7 @@ int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_00416610(...);
 
 typedef struct fn_004119fc_arg0 fn_004119fc_arg0;
@@ -43,10 +43,10 @@ typedef struct {
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-extern int FUN_00224880(void);
+extern int scrRunOpcodesStub(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_00416610. */
 
 
@@ -67,7 +67,7 @@ void FUN_004119fc(fn_004119fc_arg0 *param_1)
   temp_v0 = param_1->field_0x10;
   if (temp_v0 != 0) {
     if (temp_v0 != 1) {
-      if ((temp_v0 == 2) && ((param_1->field_0x28 == 0 || (temp_v0 = FUN_00224880(), temp_v0 == 2)))) {
+      if ((temp_v0 == 2) && ((param_1->field_0x28 == 0 || (temp_v0 = scrRunOpcodesStub(), temp_v0 == 2)))) {
         if ((param_1->field_0x1c != 0) && (param_1->field_0x20 >= 0)) {
           FUN_00416610(*(unsigned int *)&param_1[1].field_0x4);
           param_1->field_0x8 = 5;
@@ -126,7 +126,7 @@ void FUN_004119fc(fn_004119fc_arg0 *param_1)
       else {
         textFormatBuffer(&temp_v1,"battle/scr_prtatk_cure.bf");
       }
-      FUN_002804b0(&temp_v1,&param_1->field_0x24,0);
+      asdLoadFileAsyncSimple(&temp_v1,&param_1->field_0x24,0);
       param_1->field_0x10 = param_1->field_0x10 + 1;
       return;
     }

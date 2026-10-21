@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c5c88` (_code @ 0x3c5c88, 0xe0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_001028b8(unsigned char [132], int, unsigned char *, unsigned char *, cha
 int FUN_0013c174(unsigned char *, int *, int);
 int asdMemFree(unsigned int);
 int asdTextureCreate(void);
-int asdTextureSetImage(int);
 int asdTexTgaLoadNw4c(int, unsigned char *, int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -25,7 +25,6 @@ extern char s_flar02_02_00570300[10]; /* 0x570300 */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTexTgaLoadNw4c. */
 
 
@@ -58,7 +57,7 @@ void FUN_003c5c88(void)
       *(unsigned int *)(*piVar4 + 0x3c) = 1;
       *(unsigned int *)(*piVar4 + 0x40) = 1;
       *(unsigned int *)(*piVar4 + 0x38) = 0;
-      asdTextureSetImage(*piVar4);
+      asdTextureSetImage((AsdTexture*)*piVar4);
       *(unsigned char *)(temp_v0 + 0x570344) = 1;
       asdMemFree(*(unsigned int *)(temp_v0 + 0x570340));
       *(unsigned int *)(temp_v0 + 0x570340) = 0;

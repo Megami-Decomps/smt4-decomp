@@ -7,18 +7,18 @@ extern "C" {
 int FUN_00201148(...);
 int FUN_002276f8(...);
 int FUN_0023c6e4(...);
-int FUN_0023ea20(...);
+int modelSetAnimationChannels(...);
 int animPlayerSetLoopPolicy(...);
 int FUN_0028c618(...);
 int btlGetMainState(...);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002a0428(...);
 int textFormatBuffer(...);
 int libc_strcpy(...);
 int memClear(...);
-int FUN_002d582c(...);
+void FUN_002d582c(unsigned int, float);
 int FUN_003da0ec(...);
-int FUN_003daf6c(...);
+int modelAttachmentsUpdateFromParents(...);
 int FUN_003dbed8(...);
 int FUN_003dc924(...);
 int rt_memcpy_w(...);
@@ -37,13 +37,13 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 /* Supplied declaration required: FUN_00201148. */
 /* Supplied declaration required: FUN_002276f8. */
 /* Supplied declaration required: FUN_0023c6e4. */
-/* Supplied declaration required: FUN_0023ea20. */
-extern int FUN_0024a808(int);
+/* Supplied declaration required: modelSetAnimationChannels. */
+extern int keyedRecordFindByName(int);
 extern int FUN_002522e0(unsigned char *, unsigned int);
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002a0428. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
@@ -52,7 +52,7 @@ extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002d582c. */
 extern int gameObjectFlagIsSet(void);
 /* Supplied declaration required: FUN_003da0ec. */
-/* Supplied declaration required: FUN_003daf6c. */
+/* Supplied declaration required: modelAttachmentsUpdateFromParents. */
 /* Supplied declaration required: FUN_003dbed8. */
 /* Supplied declaration required: FUN_003dc924. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -157,7 +157,7 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 0x6d);
     }
-    FUN_003daf6c(param_1);
+    modelAttachmentsUpdateFromParents(param_1);
     temp_v2 = 0;
     do {
       temp_v3 = param_1 + temp_v2 * 0x28;
@@ -172,8 +172,8 @@ unsigned int FUN_003dd1a4(int param_1,unsigned int param_2,unsigned int param_3,
           FUN_002a0428(temp_v1,1);
         }
         FUN_0028c618(*(unsigned int *)(*puVar8 + 8),0);
-        FUN_0023ea20(*puVar8,0);
-        FUN_002d582c(*puVar8);
+        modelSetAnimationChannels(*puVar8,0);
+        FUN_002d582c(*puVar8, 0.0f);
         animPlayerSetLoopPolicy(*(unsigned int *)(*puVar8 + 8),1);
         puVar8 = (unsigned int *)*puVar8;
         *puVar8 = *puVar8 | 2;
@@ -220,9 +220,9 @@ LAB_003dd4ac:
       temp_v3 = param_1 + temp_v2 * 0x8c;
       temp_v4 = FUN_002522e0(temp_v8,0x2f);
       libc_strcpy(temp_v3 + 0x25c8,temp_v4 + 1);
-      temp_v4 = FUN_0024a808(temp_v3 + 0x25c8);
+      temp_v4 = keyedRecordFindByName(temp_v3 + 0x25c8);
       if (temp_v4 == 0xff) {
-        FUN_00297468(temp_v8,temp_v3 + 0x25c4,0);
+        asdLoadFileAsyncSimple(temp_v8,temp_v3 + 0x25c4,0);
         *(unsigned char *)(temp_v3 + 0x2648) = *(unsigned char *)(temp_v3 + 0x2648) | 1;
       }
       temp_v2 = temp_v2 + 1;

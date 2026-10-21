@@ -44,7 +44,7 @@ extern void eventCommandSetPendingCleanup(s32 arg);
 extern void FUN_00359370(u32 object, s32 arg);
 extern void gfxObjectDestroy(u32 object);
 extern void cameraRegistryRemove(void *entry);
-extern void FUN_00226578(s32 a, s32 b, f32 seconds);
+extern void asdCameraResetScreenDefaults(s32 a, s32 b, f32 seconds);
 extern void asdMemFree(void *block);
 
 /* Tears down the battle camera (its job, gfx object, backend and registry entry) and stops the calling job. */
@@ -72,7 +72,7 @@ void btlCameraDestroy(void)
             camera->backend = NULL;
         }
         cameraRegistryRemove(camera->registryEntry);
-        FUN_00226578(0, 1, 10.0f);
+        asdCameraResetScreenDefaults(0, 1, 10.0f);
         asdMemFree(g_btlCamera);
         g_btlCamera = NULL;
     }

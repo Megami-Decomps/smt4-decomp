@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002580d4(...);
 int FUN_0029a17c(...);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
 int devilGetRecord(void);
 int FUN_002bdf94(...);
@@ -45,7 +45,6 @@ extern int FUN_0026280c(void);
 extern int FUN_0029d65c(unsigned int);
 extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029ea68(unsigned short);
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
@@ -138,7 +137,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
               FUN_002bf288(2,0x24,0x66,*(short *)(temp_v2 + 8) + param_1,
                            *(short *)(temp_v2 + 10) + param_2,0xc9);
               temp_v4 = FUN_002bf4f8(0x24,0x6a);
-              FUN_002b6758((unsigned short)*puVar12 & 0x7fff,
+              uiDrawDemonIcon((unsigned short)*puVar12 & 0x7fff,
                            (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                            (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,0xc9,
                            1);
@@ -147,7 +146,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                            (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0xce)
               ;
               temp_v4 = FUN_002bf4f8(0x24,0x6b);
-              FUN_002b6758((*puVar12 & 0x3fffffff) >> 0xf,
+              uiDrawDemonIcon((*puVar12 & 0x3fffffff) >> 0xf,
                            (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                            (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,0xc9,
                            1);
@@ -156,7 +155,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                            (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0xce)
               ;
               temp_v4 = FUN_002bf4f8(0x24,0x6c);
-              FUN_002b6758((*(unsigned int *)(temp_v6 + 0x943c) & 0x1ffff) >> 2,
+              uiDrawDemonIcon((*(unsigned int *)(temp_v6 + 0x943c) & 0x1ffff) >> 2,
                            (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
                            (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0xc9,
                            0);
@@ -274,21 +273,21 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
             *(unsigned char *)(temp_v1 + 0x1324) = 0;
           }
           temp_v1 = FUN_002bf4f8(0x24,0x7f);
-          FUN_002b6758((unsigned short)*puVar12 & 0x7fff,
+          uiDrawDemonIcon((unsigned short)*puVar12 & 0x7fff,
                        (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                        (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0xc9,1);
           FUN_002580d4(*puVar12 & 0x7fff,
                        (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,0xe2);
           temp_v1 = FUN_002bf4f8(0x24,0x80);
-          FUN_002b6758((*puVar12 & 0x3fffffff) >> 0xf,
+          uiDrawDemonIcon((*puVar12 & 0x3fffffff) >> 0xf,
                        (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                        (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0xc9,1);
           FUN_002580d4((*puVar12 & 0x3fffffff) >> 0xf,
                        (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                        (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0xe2);
           temp_v1 = FUN_002bf4f8(0x24,0x81);
-          FUN_002b6758((*(unsigned int *)(temp_v2 + 0x943c) & 0x1ffff) >> 2,
+          uiDrawDemonIcon((*(unsigned int *)(temp_v2 + 0x943c) & 0x1ffff) >> 2,
                        (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,0xc9,0);
           FUN_002580d4((*(unsigned int *)(temp_v2 + 0x943c) & 0x1ffff) >> 2,

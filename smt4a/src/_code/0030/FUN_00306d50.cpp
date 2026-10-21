@@ -1,33 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00306d50` (_code @ 0x306d50, 0x42 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reloads the next link and uses different register allocation and virtual-call scheduling. */
+#include "common.h"
 
-extern "C" {
+class ListValue {
+public:
+    virtual void release();
+};
 
-typedef int romwright_code(...);
+struct ListNode {
+    ListNode* next;   // 0x00
+    ListNode* prev;   // 0x04
+    u32 valueStorage; // 0x08: inline polymorphic value
+};
 
-void FUN_00306d50(int *param_1,int param_2,int *param_3)
+struct NodeList {
+    u32 unk00;       // 0x00
+    ListNode* free;   // 0x04
+    u32 unk08[2];    // 0x08
+    ListNode* end;    // 0x10
+    u32 count;       // 0x14
+};
 
+extern "C" void FUN_00306d50(ListNode** result, NodeList* list, ListNode** iterator)
 {
-  unsigned int *puVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  piVar2 = (int *)*param_3;
-  if (piVar2 == *(int **)(param_2 + 0x10)) {
-    *param_1 = (int)*(int **)(param_2 + 0x10);
-    return;
-  }
-  temp_v0 = *piVar2;
-  *(int *)piVar2[1] = *piVar2;
-  *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) - 1;
-  (*(romwright_code *)**(unsigned int **)(*param_3 + 8))();
-  puVar1 = (unsigned int *)*param_3;
-  *puVar1 = *(unsigned int *)(param_2 + 4);
-  *(unsigned int **)(param_2 + 4) = puVar1;
-  *param_1 = temp_v0;
-  return;
+    if (list->end == *iterator) {
+        *result = list->end;
+        return;
+    }
+    ListNode* next = (*iterator)->next;
+    (*iterator)->prev->next = (*iterator)->next;
+    (*iterator)->next->prev = (*iterator)->prev;
+    --list->count;
+    reinterpret_cast<ListValue*>(&(*iterator)->valueStorage)->release();
+    ListNode* node = *iterator;
+    node->next = list->free;
+    list->free = node;
+    *result = next;
 }
-
-} /* extern "C" */

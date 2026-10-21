@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0027da30(int, int);
 int btlGetMainState(void);
-int FUN_003daedc(int, int, int, unsigned int, int);
+int modelEffectReleaseEntry(int, int, int, unsigned int, int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ typedef struct {
 extern int FUN_0027dab0(unsigned int, int);
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_003daedc. */
+/* Supplied declaration required: modelEffectReleaseEntry. */
 
 
 void FUN_003dc924(int param_1,int param_2,int param_3,unsigned int param_4)
@@ -61,7 +61,7 @@ LAB_003dca98:
           }
           else if ((temp_v3 & 0x400) == 0) goto LAB_003dca98;
         } while (!(param_2 != 0 && param_2 != 0x16));
-        FUN_003daedc(param_1,temp_v9,temp_v9 * 5,param_4,temp_v10);
+        modelEffectReleaseEntry(param_1,temp_v9,temp_v9 * 5,param_4,temp_v10);
         temp_v1 = btlGetMainState();
         temp_v1 = *(int *)(temp_v1 + 0x1e98) + temp_v9 * 0x114;
         temp_v2 = (int)*(short *)(temp_v1 + 0x62);

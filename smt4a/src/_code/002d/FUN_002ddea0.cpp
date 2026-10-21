@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00244c70(...);
 int sub68OwnerCall5(void);
-int FUN_00357b70(int, int, int, int, int, int, int);
+int naviConfigureEntry(int, int, int, int, int, int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 
 /* Supplied declaration required: FUN_00244c70. */
 extern int FUN_0033aa6c(int);
 /* Supplied declaration required: sub68OwnerCall5. */
-/* Supplied declaration required: FUN_00357b70. */
+/* Supplied declaration required: naviConfigureEntry. */
 extern int gameFlagsTestSecondBank(int);
 
 
@@ -66,7 +66,7 @@ void FUN_002ddea0(void)
               if (temp_v2 != 0) {
                 FUN_00244c70(0,0x23,0xffffffff,(int)*(short *)(temp_v3 + 0xc6));
                 if (*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0) < 0x10) {
-                  FUN_00357b70(*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0),
+                  naviConfigureEntry(*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0),
                                (int)*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4),
                                (int)*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 6),
                                (int)*(float *)(temp_v3 + 0xb0),(int)*(float *)(temp_v3 + 0xb4),

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00373ee0` (_code @ 0x373ee0, 0x14c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: C++ destructor twin requires FUN_00373ee0 -> _ZN9Obj421874D1Ev and vtable base421874 -> _ZTV9Obj421874(size3c) before an honest member implementation; config edits are integrator-only. */
 #include "romwright_types.h"
 
 extern "C" {

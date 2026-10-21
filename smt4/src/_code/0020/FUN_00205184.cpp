@@ -16,7 +16,7 @@ int FUN_002a0428(...);
 int modelSlotAttachChild(...);
 int FUN_002a04f0(...);
 int FUN_002a09b4(...);
-int FUN_002a5710(...);
+int modelSelectPrimaryMotion(...);
 int asdModelSlotRelease(...);
 int asdMdlManagerDestroy(...);
 int FUN_002adf00(...);
@@ -46,7 +46,7 @@ extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: modelSlotAttachChild. */
 /* Supplied declaration required: FUN_002a04f0. */
 /* Supplied declaration required: FUN_002a09b4. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
@@ -95,7 +95,7 @@ unsigned int FUN_00205184(void)
       if ((temp_v1 != 0) && (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0)) {
         FUN_002a0428(temp_v1,1);
         animPlayerSetLoopPolicy(*(unsigned int *)(*piVar4 + 8),1);
-        FUN_002a5710(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x570));
+        modelSelectPrimaryMotion(*(unsigned int *)(*piVar4 + 8),*(unsigned int *)(temp_v0 + 0x570));
         FUN_0028703c(*(unsigned int *)(*piVar4 + 8));
         FUN_0029bb14(*(unsigned int *)(*piVar4 + 8));
       }
@@ -125,11 +125,11 @@ unsigned int FUN_00205184(void)
       temp_v1 = (int)in_s0;
       FUN_002f50b8(*(unsigned int *)(*piVar5 + 8));
       piVar4 = (int *)(temp_v0 + 0x570);
-      FUN_002a5710(*(unsigned int *)(*piVar5 + 8),*(unsigned int *)(temp_v0 + 0x570));
+      modelSelectPrimaryMotion(*(unsigned int *)(*piVar5 + 8),*(unsigned int *)(temp_v0 + 0x570));
       FUN_0029c2cc(*(unsigned int *)(temp_v0 + 0x558),0);
       VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       *piVar4 = 0;
-      FUN_002a5710(*(unsigned int *)(*piVar5 + 8),0);
+      modelSelectPrimaryMotion(*(unsigned int *)(*piVar5 + 8),0);
       temp_v2 = *(unsigned int *)(temp_v0 + *piVar4 * 4 + 0x55c);
       *(unsigned int *)(temp_v0 + 0x558) = temp_v2;
       modelSlotAttachChild(temp_v2,0);

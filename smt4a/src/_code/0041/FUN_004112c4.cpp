@@ -5,10 +5,10 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_001f4908(int, int, int);
+int slotSetRequest(int, int, int);
 int dialogClose(int);
 int FUN_003eb26c(void);
-int FUN_00411bb4(int);
+int btlStageGetModeIndex(int);
 int FUN_004a9d1c(unsigned int);
 int FUN_004f5238(unsigned int, int, int, int, int, int, int, int, int);
 int FUN_004f8f08(unsigned int);
@@ -20,18 +20,18 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 extern int FUN_00163e84(unsigned int);
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: dialogClose. */
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_003eb26c. */
 extern int btlStartEntries(void);
-/* Supplied declaration required: FUN_00411bb4. */
+/* Supplied declaration required: btlStageGetModeIndex. */
 /* Supplied declaration required: FUN_004a9d1c. */
 extern int btlUiIsIdleB(unsigned int);
 /* Supplied declaration required: FUN_004f5238. */
@@ -59,7 +59,7 @@ void FUN_004112c4(int param_1)
       else {
         temp_v0 = FUN_00163e84(0);
         if (temp_v0 != 0) {
-          FUN_004f8f08(DAT_00573808);
+          FUN_004f8f08(g_btlAux);
           btlGetMainState();
           FUN_003eb26c();
           *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
@@ -71,7 +71,7 @@ void FUN_004112c4(int param_1)
       temp_v0 = btlUiIsIdleB(g_btlUiBlock);
       if ((temp_v0 != 0) &&
          ((temp_v0 = dialogIsActive(), temp_v0 == 0 || (*(unsigned int *)(param_1 + 0xc) >= 0x37)))) {
-        FUN_001f4908(0,10,0xff);
+        slotSetRequest(0,10,0xff);
         *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
         return;
       }
@@ -80,8 +80,8 @@ void FUN_004112c4(int param_1)
   else {
     temp_v0 = FUN_0013def0(0);
     if (temp_v0 == 3) {
-      FUN_00411bb4(param_1);
-      FUN_004f5238(DAT_00573808,0,0,9,0,6,0,1,0);
+      btlStageGetModeIndex(param_1);
+      FUN_004f5238(g_btlAux,0,0,9,0,6,0,1,0);
       FUN_004a9d1c(g_btlUiBlock);
       temp_v0 = dialogIsActive();
       if (temp_v0 != 0) {

@@ -11,7 +11,7 @@ int FUN_0021b274(...);
 int FUN_0022e774(void);
 int FUN_0026f148(...);
 int FUN_002a4878(...);
-int FUN_002adce8(...);
+int campTouchRegionsRemoveGroup(...);
 int FUN_002cb278(...);
 int FUN_002f78a0(...);
 int menuItemPlaySe(...);
@@ -25,7 +25,7 @@ int eventQueueAddUniqueIfValid(...);
 int FUN_00228b04(...);
 int FUN_0028b088(...);
 int FUN_0031f208(...);
-int FUN_0031f27c(...);
+int sortMenuAcquire(...);
 int stateAtF4Apply(void);
 int FUN_003450d4(...);
 int engineForwardVariadicCommand(...);
@@ -53,7 +53,7 @@ int FUN_003fe86c(...);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 int FUN_0045b538(...);
 
 typedef int romwright_code(...);
@@ -96,9 +96,9 @@ extern int FUN_002a4860(int);
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7324. */
-/* Supplied declaration required: FUN_002adce8. */
+/* Supplied declaration required: campTouchRegionsRemoveGroup. */
 extern unsigned int FUN_002bf520(void);
-extern int FUN_002c2c4c(int);
+extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: FUN_002cb278. */
 /* Supplied declaration required: FUN_002f0384. */
@@ -106,7 +106,7 @@ extern int FUN_002c2c4c(int);
 /* Supplied declaration required: menuItemPlaySe. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_00320940. */
 /* Supplied declaration required: objBStateAllowsAction. */
 /* Supplied declaration required: FUN_003343d8. */
@@ -134,8 +134,8 @@ extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(unsigned int);
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0045b538. */
 extern int unitMatchesAlignment(short);
 
@@ -261,7 +261,7 @@ void FUN_001fdde8(int param_1)
       FUN_00178b04(0x20,&LAB_001fe2e8,0x1e47);
       temp_v3 = 0;
       if (temp_v9 != 0) {
-        temp_v3 = FUN_0040ac08();
+        temp_v3 = modelListInit();
       }
       *(unsigned int *)(temp_v5 + 0x32ac) = temp_v3;
       FUN_0040aa6c();
@@ -278,7 +278,7 @@ void FUN_001fdde8(int param_1)
     temp_v9 = FUN_0040ab8c(*(unsigned int *)(temp_v5 + 0x32ac));
     if (temp_v9 != 0) {
       temp_v3 = *(unsigned int *)(*(int *)(temp_v5 + 0x32ac) + 4);
-      FUN_0040ace8(g_handleRegistry,temp_v3);
+      handleRegistryRegisterObject(g_handleRegistry,temp_v3);
       FUN_003fe86c(temp_v3,0,2);
       FUN_003fd7b4(temp_v3);
     }
@@ -486,28 +486,28 @@ void FUN_001fdde8(int param_1)
           return;
         }
         if (param_1 == 0x13 || param_1 == 0x48) {
-          FUN_0031f27c(5,0);
+          sortMenuAcquire(5,0);
           FUN_0031f208(6);
           FUN_0031f208(0x11);
           FUN_0031f208(0x12);
           FUN_0031f208(3);
         }
         if (param_1 == 0x14 || param_1 == 0x49) {
-          FUN_0031f27c(6,0);
+          sortMenuAcquire(6,0);
           FUN_0031f208(6);
           FUN_0031f208(0x11);
           FUN_0031f208(0x12);
           FUN_0031f208(3);
         }
         if (param_1 == 0x15 || param_1 == 0x4a) {
-          FUN_0031f27c(7,0);
+          sortMenuAcquire(7,0);
           FUN_0031f208(6);
           FUN_0031f208(0x1f);
           FUN_0031f208(0x13);
           FUN_0031f208(3);
         }
         if ((param_1 == 0x16 || param_1 == 0x4b) || (param_1 == 0x18 || param_1 == 0x4d)) {
-          FUN_0031f27c();
+          sortMenuAcquire();
           FUN_0031f208(4);
           FUN_0031f208(0x24);
           FUN_0031f208(0x25);
@@ -517,13 +517,13 @@ void FUN_001fdde8(int param_1)
           FUN_0031f208(3);
         }
         if (param_1 == 0x17 || param_1 == 0x4c) {
-          FUN_0031f27c(9,0);
+          sortMenuAcquire(9,0);
           FUN_0031f208(4);
           FUN_0031f208(0x32);
           FUN_0031f208(3);
         }
         if (param_1 == 0x19 || param_1 == 0x4e) {
-          FUN_0031f27c(0xb,0);
+          sortMenuAcquire(0xb,0);
           FUN_0031f208(0x33);
           FUN_0031f208(3);
         }
@@ -561,23 +561,23 @@ void FUN_001fdde8(int param_1)
       }
       temp_v9 = FUN_002a4878(temp_v5 + 0x40);
       temp_v8 = 0;
-      temp_v4 = FUN_002c2c4c(temp_v5 + 0x40);
+      temp_v4 = widgetSubCallIfVisible(temp_v5 + 0x40);
       if (0 < temp_v4) {
         do {
           temp_v9 = temp_v9 + 1;
-          temp_v4 = FUN_002c2c4c(temp_v5 + 0x40);
+          temp_v4 = widgetSubCallIfVisible(temp_v5 + 0x40);
           if (temp_v4 <= temp_v9) {
             temp_v9 = 0;
           }
           temp_v11 = temp_v5 + temp_v9 * 100;
-          temp_v4 = FUN_002c2c4c(temp_v11 + 0x2b4);
+          temp_v4 = widgetSubCallIfVisible(temp_v11 + 0x2b4);
           temp_v6 = gameFlagIsSet(0x410);
           if ((temp_v6 == 0) && (0 < temp_v9)) {
-            temp_v4 = FUN_002c2c4c(temp_v11 + 0x37c);
+            temp_v4 = widgetSubCallIfVisible(temp_v11 + 0x37c);
           }
           if (0 < temp_v4) goto LAB_001fea60;
           temp_v8 = temp_v8 + 1;
-          temp_v4 = FUN_002c2c4c(temp_v5 + 0x40);
+          temp_v4 = widgetSubCallIfVisible(temp_v5 + 0x40);
         } while (temp_v8 < temp_v4);
       }
     }
@@ -607,27 +607,27 @@ void FUN_001fdde8(int param_1)
       }
       temp_v9 = FUN_002a4878(temp_v5 + 0x40);
       temp_v8 = 0;
-      temp_v4 = FUN_002c2c4c(temp_v5 + 0x40);
+      temp_v4 = widgetSubCallIfVisible(temp_v5 + 0x40);
       if (0 < temp_v4) {
         do {
           temp_v9 = temp_v9 - 1;
           if (temp_v9 < 0) {
-            temp_v9 = FUN_002c2c4c(temp_v5 + 0x40);
+            temp_v9 = widgetSubCallIfVisible(temp_v5 + 0x40);
             temp_v9 = temp_v9 - 1;
           }
           temp_v11 = temp_v5 + temp_v9 * 100;
-          temp_v4 = FUN_002c2c4c(temp_v11 + 0x2b4);
+          temp_v4 = widgetSubCallIfVisible(temp_v11 + 0x2b4);
           temp_v6 = gameFlagIsSet(0x410);
           if ((temp_v6 == 0) && (0 < temp_v9)) {
-            temp_v4 = FUN_002c2c4c(temp_v11 + 0x37c);
+            temp_v4 = widgetSubCallIfVisible(temp_v11 + 0x37c);
           }
           if (0 < temp_v4) goto LAB_001fea60;
           temp_v8 = temp_v8 + 1;
-          temp_v4 = FUN_002c2c4c(temp_v5 + 0x40);
+          temp_v4 = widgetSubCallIfVisible(temp_v5 + 0x40);
         } while (temp_v8 < temp_v4);
       }
     }
-    FUN_002adce8(temp_v13,0);
+    campTouchRegionsRemoveGroup(temp_v13,0);
     *(unsigned int *)(temp_v5 + 0x20) = 2;
     menuItemPlaySe(param_1);
     temp_v3 = 0x1000210;
@@ -638,7 +638,7 @@ void FUN_001fdde8(int param_1)
       FUN_0028b088(0);
       *(unsigned int *)(temp_v5 + 0x24) = 6;
       FUN_0020b660(5);
-      FUN_002adce8(temp_v13,0);
+      campTouchRegionsRemoveGroup(temp_v13,0);
       return;
     }
     temp_v9 = objBStateAllowsAction();
@@ -656,7 +656,7 @@ void FUN_001fdde8(int param_1)
         (**(romwright_code **)(**(int **)(temp_v5 + 0x32ac) + 4))();
         *(unsigned int *)(temp_v5 + 0x32ac) = 0;
       }
-      FUN_002adce8(temp_v13,0);
+      campTouchRegionsRemoveGroup(temp_v13,0);
       FUN_0037c8e4(1,0);
       FUN_0038843c();
       FUN_002f78a0(temp_v5);
@@ -670,7 +670,7 @@ LAB_001fea60:
   temp_v3 = FUN_002a4878(temp_v5 + 0x40);
   param_1 = FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v3);
   FUN_0028b088();
-  FUN_002adce8(temp_v13,0);
+  campTouchRegionsRemoveGroup(temp_v13,0);
   *(unsigned int *)(temp_v5 + 0x20) = 2;
   menuItemPlaySe(param_1);
   temp_v3 = 0x1000210;

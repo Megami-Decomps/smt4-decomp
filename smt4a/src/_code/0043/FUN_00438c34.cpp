@@ -8,7 +8,7 @@ int FUN_001883b0(unsigned int *, unsigned char [132], int);
 int vcallSlot12IfValid(unsigned int);
 int sysFatalBreak(void);
 int FUN_002e9768(unsigned char [132], int, unsigned char *, int);
-int FUN_00438e28(unsigned int *, unsigned int *, char [4], unsigned int, unsigned int);
+int textChannelParseUtf16Stream(unsigned int *, unsigned int *, char [4], unsigned int, unsigned int);
 int FUN_00439394(unsigned int *, unsigned char [8], int *, unsigned int);
 
 /* stack frame of param_5: 9 slot(s), 36 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned char LAB_00438e04; /* 0x438e04 */
 /* Supplied declaration required: vcallSlot12IfValid. */
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_002e9768. */
-/* Supplied declaration required: FUN_00438e28. */
+/* Supplied declaration required: textChannelParseUtf16Stream. */
 /* Supplied declaration required: FUN_00439394. */
 extern unsigned int *validateSetupArgs(unsigned int *, unsigned int *, unsigned int, unsigned int);
 
@@ -107,7 +107,7 @@ joined_r0x00438d38:
       }
       *(unsigned char *)((int)param_1 + 0x1b) = temp_v10[temp_v1];
       puVar1 = param_1;
-      FUN_00438e28(param_1,param_2,temp_v3,temp_v11,param_5);
+      textChannelParseUtf16Stream(param_1,param_2,temp_v3,temp_v11,param_5);
       if ((int)puVar1 < 0) goto joined_r0x00438d38;
       if ((temp_v4 & 0xfffffffe) != 0) {
         if ((temp_v4 & 1) != 0) {

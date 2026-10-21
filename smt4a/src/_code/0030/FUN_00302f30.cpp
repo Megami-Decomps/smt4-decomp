@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00302f30` (_code @ 0x302f30, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: missing real class hierarchy for virtual callbacks at 0x3c/0x40/0x44; retail takes an object and a three-word callback result, not four arguments. */
 #include "romwright_types.h"
 
 extern "C" {

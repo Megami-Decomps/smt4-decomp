@@ -30,7 +30,7 @@ extern int DAT_0043e318; /* 0x43e318 */
 extern int DAT_0043e31c; /* 0x43e31c */
 
 /* Supplied declaration required: FUN_00103c9c. */
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern unsigned int FUN_001c0954(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00223898. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -143,7 +143,7 @@ unsigned int FUN_001a1d08(unsigned int param_1,int param_2)
     *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
     return 0;
   case 10:
-    temp_v0 = FUN_0019e0c0(*(unsigned int *)(puVar1 + 0x58));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(puVar1 + 0x58));
     if (temp_v0 != 2) {
       *(int *)(puVar1 + 0x10) = *(int *)(puVar1 + 0x10) + 1;
       return 0;

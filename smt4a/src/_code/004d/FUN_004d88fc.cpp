@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_003e9fe4(int, int, int);
+int btlActionPrepareFromSource(int, int, int);
 
-/* Supplied declaration required: FUN_003e9fe4. */
+/* Supplied declaration required: btlActionPrepareFromSource. */
 
 
 void FUN_004d88fc(int param_1,int param_2)
@@ -27,7 +27,7 @@ void FUN_004d88fc(int param_1,int param_2)
     temp_v0 = *(int *)(param_2 + 0x17c);
   }
   if (!temp_v2 || temp_v0 < 0) {
-    FUN_003e9fe4(param_2,param_2 + 0xf4,0);
+    btlActionPrepareFromSource(param_2,param_2 + 0xf4,0);
     *(int *)(param_2 + 0x178) = (int)*(char *)(param_2 + 0x114);
     *(int *)(param_2 + 0x17c) = (int)*(char *)(param_2 + 0x115);
   }

@@ -1,0 +1,20 @@
+#include "common.h"
+
+extern "C" {
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+s32 randRange(u16 range);
+
+// Tests a script-supplied chance against a random value in the supplied range.
+u32 scrCommTestChance(s32 argumentIndex)
+{
+    s32 chance = scrGetArg(argumentIndex);
+    s32 range = scrGetArg(1);
+    if (chance >= range) {
+        scrSetResult(1);
+        return 1;
+    }
+    scrSetResult(randRange(static_cast<u16>(range)) < chance);
+    return 1;
+}
+}

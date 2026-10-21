@@ -17,7 +17,7 @@ extern unsigned char LAB_00273b50; /* 0x273b50 */
 extern unsigned char LAB_00273b6c; /* 0x273b6c */
 extern unsigned int g_aocSystem; /* 0x433158 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_00289e54(unsigned int, unsigned short, unsigned int);
 extern int FUN_002903f0(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -85,7 +85,7 @@ unsigned int FUN_0027398c(unsigned int *param_1)
     temp_v2 = 2;
     break;
   case 2:
-    temp_v3 = FUN_0019e0c0(param_1[5]);
+    temp_v3 = scrRunOpcodesStub(param_1[5]);
     if (temp_v3 != 2) {
       return 0;
     }

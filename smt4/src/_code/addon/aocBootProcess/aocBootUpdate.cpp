@@ -11,9 +11,9 @@ int FUN_0027eafc(void);
 int jobOwnerFreeSlotAndStop(int);
 int FUN_002a126c(int *, int);
 int FUN_002ba9ac(int);
-int FUN_002baa40(unsigned int *, int);
+int resultPairInitialize(unsigned int *, int);
 int jyoucyuGetTableEntry(int);
-int FUN_00387af0(int);
+int aocResetOperationState(int);
 int FUN_003887cc(int *, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -41,10 +41,10 @@ extern int strIsEmpty(unsigned int *);
 extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002ba9ac. */
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_002bad5c(unsigned int *);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_00387af0. */
+/* Supplied declaration required: aocResetOperationState. */
 /* Supplied declaration required: FUN_003887cc. */
 extern int FUN_003943f8(unsigned int *);
 
@@ -78,7 +78,7 @@ unsigned int aocBootUpdate(void)
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar2 = (unsigned int *)&uStack_38;
-  FUN_002baa40(puVar2,0);
+  resultPairInitialize(puVar2,0);
   temp_v4 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v4;
@@ -112,7 +112,7 @@ unsigned int aocBootUpdate(void)
       if (temp_v2 != 0) {
         *(unsigned char *)(temp_v0 + 8) = 1;
         *(unsigned char *)(g_aocMain + 0xd50) = 1;
-        FUN_00387af0(g_aocSystem);
+        aocResetOperationState(g_aocSystem);
       }
       else {
         jyoucyuGetTableEntry(0);

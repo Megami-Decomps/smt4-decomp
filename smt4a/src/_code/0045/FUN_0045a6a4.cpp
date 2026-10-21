@@ -2,20 +2,22 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct GpuLogicState;
+
 extern "C" {
 
-int FUN_00158bf8(unsigned char [124]);
+int gfxCombinerStateInitialize(unsigned char [124]);
 int FUN_0015fcec(unsigned char *, unsigned char *);
 int FUN_0016d1f4(unsigned int [4]);
-int FUN_00177cdc(...);
-int FUN_00192de4(...);
+int gpuEmitDepthBufferCommands(...);
+int gxEmitFramebufferAccessMasks(...);
 int FUN_001b14dc(...);
 int sysMemClear(unsigned char *, int);
 int FUN_002f5020(...);
 int FUN_0045b170(unsigned int *, unsigned int *, int, int);
 int FUN_00500cac(...);
-int FUN_00500d38(unsigned int [4], unsigned char *, int);
-int FUN_00500e74(unsigned char *, unsigned int *, int);
+unsigned int* FUN_00500d38(unsigned int [4], unsigned int*, int);
+unsigned int* FUN_00500e74(const GpuLogicState*, unsigned int*, int);
 int FUN_00500ee4(...);
 int FUN_00500f3c(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char *, unsigned int);
@@ -37,12 +39,12 @@ extern int setFourMinus1(...); /* 0x45b510 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00158bf8. */
+/* Supplied declaration required: gfxCombinerStateInitialize. */
 /* Supplied declaration required: FUN_0015fcec. */
 /* Supplied declaration required: FUN_0016d1f4. */
-/* Supplied declaration required: FUN_00177cdc. */
-/* Supplied declaration required: FUN_00192de4. */
-extern unsigned char *FUN_001a04e0(unsigned char *, unsigned int);
+/* Supplied declaration required: gpuEmitDepthBufferCommands. */
+/* Supplied declaration required: gxEmitFramebufferAccessMasks. */
+extern unsigned char *asdGxAppendStateReset(unsigned char *, unsigned int);
 extern unsigned int FUN_001a1e28(void);
 /* Supplied declaration required: FUN_001b14dc. */
 /* Supplied declaration required: sysMemClear. */
@@ -51,9 +53,7 @@ extern int FUN_0042c4cc(unsigned char *);
 extern unsigned char *FUN_0042cbd8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0045b170. */
 /* Supplied declaration required: FUN_00500cac. */
-/* Supplied declaration required: FUN_00500d38. */
 extern unsigned char *FUN_00500df8(unsigned char *, unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00500e74. */
 /* Supplied declaration required: FUN_00500ee4. */
 /* Supplied declaration required: FUN_00500f3c. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -69,7 +69,6 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
   unsigned int *puVar4;
   unsigned int temp_v3;
   int temp_v4;
-  unsigned int *puVar7;
   unsigned char *puVar8;
   int temp_v5;
   int temp_v6;
@@ -91,7 +90,6 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
   unsigned int temp_v19;
   unsigned char *temp_v20;
   
-  puVar7 = temp_v8;
   puVar13 = param_2;
   if ((char)param_3[3] != '\0') {
     puVar13 = param_2 + ((*param_3 + 0xfU) & 0xfffffff0) +
@@ -234,8 +232,8 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
     temp_v19 = ((int)puVar13 + 0x5bU) & 0xfffffff0;
     temp_v20 = (unsigned char *)temp_v19;
     temp_v20 = (unsigned char *)FUN_0042cbd8(temp_v19,1);
-    temp_v20 = (unsigned char *)FUN_001a04e0(temp_v20,1);
-    FUN_00158bf8(temp_v16);
+    temp_v20 = (unsigned char *)asdGxAppendStateReset(temp_v20,1);
+    gfxCombinerStateInitialize(temp_v16);
     temp_v17 = 0;
     temp_v18 = 0;
     puVar12 = temp_v16;
@@ -247,13 +245,13 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
       temp_v8[0] = romwright_piece_3_1((((unsigned int)(temp_v8[0]) >> 8) & 0xffffffU),1);
     }
     temp_v20 = (unsigned char *)FUN_00500df8(temp_v14,temp_v20,0);
-    FUN_00500d38(temp_v8,temp_v20,0);
-    puVar12 = temp_v9;
-    temp_v20 = (unsigned char *)puVar7;
-    FUN_00500e74(puVar12,puVar7,0);
+    temp_v20 = reinterpret_cast<unsigned char*>(FUN_00500d38(
+        temp_v8, reinterpret_cast<unsigned int*>(temp_v20), 0));
+    temp_v20 = reinterpret_cast<unsigned char*>(FUN_00500e74(
+        reinterpret_cast<const GpuLogicState*>(temp_v9),
+        reinterpret_cast<unsigned int*>(temp_v20), 0));
     puVar8 = temp_v10;
-    temp_v20 = puVar12;
-    FUN_00177cdc(puVar8,puVar12,0,1);
+    gpuEmitDepthBufferCommands(puVar8,temp_v20,0,1);
     puVar12 = temp_v11;
     temp_v20 = puVar8;
     FUN_00500ee4(puVar12,puVar8,0);
@@ -265,7 +263,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
     FUN_00500f3c(puVar12,puVar8,0);
     puVar8 = temp_v15;
     temp_v20 = puVar12;
-    FUN_00192de4(puVar8,puVar12,1);
+    gxEmitFramebufferAccessMasks(puVar8,puVar12,1);
     temp_v20 = puVar8;
     FUN_001b14dc(&temp_v19,param_1[0x33] + 0xc);
   }

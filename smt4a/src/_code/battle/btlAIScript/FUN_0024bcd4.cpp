@@ -33,9 +33,9 @@ int FUN_002c2610(void);
 int holderStopJob(...);
 int FUN_00331410(void);
 int FUN_00339270(void);
-int FUN_003b5050(void);
+int sysClearCachedFlag(void);
 int soundChannelStopAll(...);
-int FUN_003e9fe4(...);
+int btlActionPrepareFromSource(...);
 int FUN_003ee734(...);
 int FUN_003ef1e4(...);
 int gameFlagSetValue(...);
@@ -43,7 +43,7 @@ int FUN_0040a244(void);
 int FUN_004c8b10(void);
 int FUN_004c8e30(...);
 int FUN_004f1530(...);
-int FUN_004f1a30(...);
+int motionClearVectors(...);
 int obj4FSlotsReset(...);
 int obj4FSlots28Reset(...);
 int FUN_004f8fa0(...);
@@ -69,7 +69,7 @@ int FUN_004a9d1c(...);
 int FUN_004aa2e0(unsigned int, int);
 int FUN_004ac0bc(...);
 int FUN_004c5da4(int, int);
-int FUN_004c8bb8(...);
+void FUN_004c8bb8(int alternate, unsigned int argument);
 int FUN_004d7a70(...);
 int FUN_004d7fe4(void);
 int state4DStart(int);
@@ -99,7 +99,7 @@ extern unsigned int g_btlAiScript; /* 0x571130 */
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern unsigned int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern int g_btlEvent; /* 0x573898 */
 extern unsigned int g_btlMain; /* 0x573920 */
 extern int DAT_00573924; /* 0x573924 */
@@ -186,10 +186,10 @@ extern unsigned int gameGetSlotTable(void);
 extern unsigned int FUN_001bce18(void);
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_00215978. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int tmnlHasSelection(void);
 extern int dialogIsActive(void);
-extern int FUN_0026272c(void);
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002ba998. */
@@ -210,13 +210,13 @@ extern int btlEncountCheck(unsigned int);
 /* Supplied declaration required: sequenceRequestFlushDeferred. */
 extern int sequenceRequestIsPending(void);
 /* Supplied declaration required: FUN_003848a4. */
-/* Supplied declaration required: FUN_003b5050. */
+/* Supplied declaration required: sysClearCachedFlag. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: stateAtCIs4. */
 /* Supplied declaration required: FUN_003e785c. */
 extern int FUN_003e9964(unsigned int);
-/* Supplied declaration required: FUN_003e9fe4. */
+/* Supplied declaration required: btlActionPrepareFromSource. */
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003ebad4. */
 /* Supplied declaration required: FUN_003ebca0. */
@@ -244,7 +244,7 @@ extern int btlUiIsIdleB(unsigned int);
 extern int FUN_004ab6dc(unsigned int);
 extern int FUN_004ab8a4(unsigned int);
 extern int FUN_004abac8(unsigned int);
-extern int FUN_004abb54(unsigned int);
+extern int btlUiIsMenuReady(unsigned int);
 /* Supplied declaration required: FUN_004ac0bc. */
 extern int flagGroupsCDAtLeast11(void);
 /* Supplied declaration required: FUN_004c5da4. */
@@ -262,7 +262,7 @@ extern int isEntryUsable(int);
 /* Supplied declaration required: hasFlag80Or1000. */
 /* Supplied declaration required: btlUnitGet. */
 /* Supplied declaration required: FUN_004f1530. */
-/* Supplied declaration required: FUN_004f1a30. */
+/* Supplied declaration required: motionClearVectors. */
 /* Supplied declaration required: obj4FSlotsReset. */
 /* Supplied declaration required: obj4FSlots28Reset. */
 /* Supplied declaration required: FUN_004f8fa0. */
@@ -488,7 +488,7 @@ joined_r0x0024c078:
     if (((*(int *)(temp_v2 + 0x94) < 0x1f) || (temp_v5 = temp_v2, FUN_003eebf4(temp_v2,1), (int)temp_v5 < 0))
        || (((*(unsigned int *)(temp_v2 + 0x45a4) & DAT_005739ec) != 0 ||
             (DAT_005739e8 & *(unsigned int *)(temp_v2 + 0x45a0)) != 0 ||
-           (temp_v3 = FUN_00224880(*(unsigned int *)(temp_v2 + 0x228c)), temp_v3 != 2)))) goto LAB_0024d75c;
+           (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x228c)), temp_v3 != 2)))) goto LAB_0024d75c;
     temp_v3 = g_btlEvent;
     FUN_004d7a70(g_btlEvent,0,0xffffffff);
     if (temp_v3 == 0) {
@@ -511,7 +511,7 @@ joined_r0x0024c078:
     if ((((temp_v3 != 0) || (temp_v3 = FUN_004aaa4c(g_btlUiBlock), temp_v3 == 0)) ||
         ((temp_v3 = FUN_004abac8(g_btlUiBlock), temp_v3 == 0 ||
          ((temp_v3 = FUN_004aaf94(g_btlUiBlock), temp_v3 == 0 ||
-          (temp_v3 = FUN_004abb54(g_btlUiBlock), temp_v3 == 0)))))) ||
+          (temp_v3 = btlUiIsMenuReady(g_btlUiBlock), temp_v3 == 0)))))) ||
        (temp_v3 = FUN_004ab8a4(g_btlUiBlock), temp_v3 == 0)) goto LAB_0024d75c;
     switch(*(unsigned int *)(temp_v2 + 0xa8)) {
     default:
@@ -686,7 +686,7 @@ LAB_0024c88c:
     if (((((*(int *)(temp_v2 + 0x94) < 0) || (temp_v3 = FUN_004aaa4c(g_btlUiBlock), temp_v3 == 0)) ||
          (temp_v3 = FUN_004abac8(g_btlUiBlock), temp_v3 == 0)) ||
         ((temp_v3 = FUN_004aaf94(g_btlUiBlock), temp_v3 == 0 ||
-         (temp_v3 = FUN_004abb54(g_btlUiBlock), temp_v3 == 0)))) ||
+         (temp_v3 = btlUiIsMenuReady(g_btlUiBlock), temp_v3 == 0)))) ||
        (temp_v3 = FUN_004ab8a4(g_btlUiBlock), temp_v3 == 0)) goto LAB_0024d75c;
     temp_v5 = temp_v2;
     FUN_003ebca0();
@@ -804,12 +804,12 @@ joined_r0x0024cba8:
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 0x2a);
-      FUN_004fa01c(DAT_00573808);
-      FUN_004f8fa0(DAT_00573808);
-      obj4FSlots28Reset(DAT_00573808);
-      obj4FSlotsReset(DAT_00573808);
+      FUN_004fa01c(g_btlAux);
+      FUN_004f8fa0(g_btlAux);
+      obj4FSlots28Reset(g_btlAux);
+      obj4FSlotsReset(g_btlAux);
       FUN_004f1530(g_btlCamera);
-      FUN_004f1a30(g_btlCamera);
+      motionClearVectors(g_btlCamera);
       temp_v5 = ~DAT_00573a00;
       temp_v12 = ~DAT_00573a08;
       temp_v20 = ~DAT_00573a1c;
@@ -842,7 +842,7 @@ joined_r0x0024cba8:
       *(unsigned int *)(temp_v2 + 0x108) = 0;
       *(unsigned int *)(temp_v2 + 0x124) = 0x3f800000;
       *(unsigned int *)(temp_v2 + 0x128) = 0x3f800000;
-      FUN_003e9fe4(temp_v2,temp_v2 + 0xf4,0);
+      btlActionPrepareFromSource(temp_v2,temp_v2 + 0xf4,0);
       FUN_003ef1e4(temp_v2,1);
       if ((*(unsigned int *)(temp_v2 + 0x110) & 8) == 0) {
         FUN_004c8e30(3,0,1);
@@ -914,7 +914,7 @@ joined_r0x0024cba8:
     goto LAB_0024d75c;
   case 0x1b:
     temp_v3 = isEntryUsable(g_btlEvent);
-    if ((temp_v3 != 0) || ((*(int *)(temp_v2 + 0xa8) == 3 && (temp_v3 = FUN_0026272c(), temp_v3 == 0))))
+    if ((temp_v3 != 0) || ((*(int *)(temp_v2 + 0xa8) == 3 && (temp_v3 = messageMainIsIdle(), temp_v3 == 0))))
     goto LAB_0024d75c;
     temp_v6 = 0x1c;
     break;
@@ -948,7 +948,7 @@ joined_r0x0024cba8:
         }
         goto LAB_0024d75c;
       }
-      if ((temp_v3 != 2) || (temp_v3 = FUN_00224880(*(unsigned int *)(temp_v2 + 0x4d54)), temp_v3 != 2))
+      if ((temp_v3 != 2) || (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x4d54)), temp_v3 != 2))
       goto LAB_0024d75c;
       goto LAB_0024d284;
     case 3:
@@ -1006,14 +1006,14 @@ LAB_0024d284:
     }
     FUN_00331410();
     if (*(int *)(temp_v2 + 0xa8) == 3) {
-      FUN_003b5050();
+      sysClearCachedFlag();
     }
     if ((!((DAT_00573aa0 & *puVar16) == 0 && (DAT_00573aa4 & *(unsigned int *)(temp_v2 + 0x45a4)) == 0)) &&
        (*(int *)(temp_v2 + 0xa8) == 2)) {
       *(unsigned int *)(temp_v2 + 0xa8) = 0xe;
     }
     else if (*(int *)(temp_v2 + 0xa8) == 4) {
-      FUN_003b5050();
+      sysClearCachedFlag();
     }
     if ((*(unsigned int *)(temp_v2 + 0x45ac) & DAT_00573b0c) == 0 &&
         (DAT_00573b08 & *(unsigned int *)(temp_v2 + 0x45a8)) == 0) {
@@ -1095,12 +1095,12 @@ LAB_0024d284:
       }
       else if (*(int *)(temp_v2 + 0x4c80) != 1) {
         if (*(int *)(temp_v2 + 0x4c80) == 0) {
-          FUN_003b5050();
+          sysClearCachedFlag();
           FUN_00137ed0();
         }
       }
       else {
-        FUN_003b5050();
+        sysClearCachedFlag();
         FUN_003848a4();
       }
     }

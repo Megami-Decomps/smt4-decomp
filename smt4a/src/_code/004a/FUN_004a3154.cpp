@@ -24,7 +24,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_004a0ef4. */
 /* Supplied declaration required: FUN_004a8750. */
 /* Supplied declaration required: dispatchIfFound. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 extern int FUN_004d0cd4(void);
 
 
@@ -39,7 +39,7 @@ void FUN_004a3154(int param_1)
   temp_v1 = panelStateIs0();
   if ((temp_v1 == 1) && (temp_v1 = FUN_0035dbb0(), temp_v1 != 0)) {
     FUN_003c5fc4(0);
-    temp_v1 = FUN_004cfe4c(param_1 + 0x20);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 0x20 + 0x868);
     temp_v1 = FUN_004d0cd4();
     if (temp_v1 != -1) {

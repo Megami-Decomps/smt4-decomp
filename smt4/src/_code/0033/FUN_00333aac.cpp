@@ -1,22 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00333aac` (_code @ 0x333aac, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail compares the threshold against the ID, reversing the compiler's CMP operands. */
+#include "shard/W6_W6Match2_RecordCategory.h"
 
-extern "C" {
+extern "C" CategoryRecord* dataTable1bOr1cGetRecord(u32 recordId);
 
-int dataTable1bOr1cGetRecord(void);
-
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-
-
-void FUN_00333aac(unsigned int param_1)
-
+// Category-nine records are active only in game mode 24.
+extern "C" s32 FUN_00333aac(u32 recordId)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1 >= 0x15e) {
-    dataTable1bOr1cGetRecord();
-  }
-  return;
+    if (recordId >= 0x15e) {
+        CategoryRecord* record = dataTable1bOr1cGetRecord(recordId);
+        if (record == NULL) {
+            return 0;
+        }
+        if (record->category == 9 && g_gameState.mode == 24) {
+            return 1;
+        }
+    }
+    return 0;
 }
-
-} /* extern "C" */

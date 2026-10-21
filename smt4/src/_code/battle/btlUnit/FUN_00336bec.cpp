@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00336bec` (_code @ 0x336bec, 0x1ac bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_BattleVersionResources.h"
 
 extern "C" {
 
-int FUN_00240530(int, int, int, unsigned int, int);
+int btlReflectInitKind9(int, int, int, unsigned int, int);
 int FUN_0024057c(int, int, int, int, int);
-int FUN_00240614(unsigned int);
 int FUN_0024082c(int, int);
 int FUN_002451c4(int, int, int, int, int, int);
 int FUN_002b7bca(int [50], int, int, unsigned char *);
@@ -30,9 +30,8 @@ extern unsigned int DAT_00439a30; /* 0x439a30 */
 extern unsigned int DAT_00439a34; /* 0x439a34 */
 extern unsigned int DAT_00439a38; /* 0x439a38 */
 
-/* Supplied declaration required: FUN_00240530. */
+/* Supplied declaration required: btlReflectInitKind9. */
 /* Supplied declaration required: FUN_0024057c. */
-/* Supplied declaration required: FUN_00240614. */
 /* Supplied declaration required: FUN_0024082c. */
 /* Supplied declaration required: FUN_002451c4. */
 /* Supplied declaration required: FUN_002b7bca. */
@@ -61,7 +60,7 @@ void FUN_00336bec(int param_1)
   
   *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000;
   temp_v13 = param_1;
-  FUN_00240614(DAT_00435d18);
+  FUN_00240614(reinterpret_cast<BattleVersionResources*>(DAT_00435d18));
   temp_v9 = 0;
   piVar8 = (int *)(temp_v13 + 0x1e98);
   temp_v6 = 4;
@@ -104,7 +103,7 @@ void FUN_00336bec(int param_1)
         if ((*(unsigned int *)(temp_v4 + 0x50) & 0x10) != 0) {
           temp_v8 = 7;
         }
-        FUN_00240530((int)temp_v10 * (int)temp_v11 + (int)temp_v2,0,temp_v4,temp_v8,0xd);
+        btlReflectInitKind9((int)temp_v10 * (int)temp_v11 + (int)temp_v2,0,temp_v4,temp_v8,0xd);
         temp_v10 = temp_v10 + 1;
         if (!temp_v3) {
           temp_v3 = 1;

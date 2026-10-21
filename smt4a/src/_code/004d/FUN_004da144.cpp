@@ -8,7 +8,7 @@ int gameGetOptions(void);
 int sysMemClear(unsigned short *, int);
 
 extern int randRange(short);
-extern int FUN_00168518(unsigned int, unsigned int);
+extern int dataTableGetCategoryEntry(unsigned int, unsigned int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: gameGetOptions. */
 /* Supplied declaration required: sysMemClear. */
@@ -70,7 +70,7 @@ void FUN_004da144(void)
     }
   }
   sysMemClear(puVar12,300);
-  temp_v8 = FUN_00168518(temp_v12,temp_v13);
+  temp_v8 = dataTableGetCategoryEntry(temp_v12,temp_v13);
   puVar12[0x96] = temp_v7;
   puVar12[0x97] = (short)temp_v13;
   puVar12[0x31] = 0x4b1;

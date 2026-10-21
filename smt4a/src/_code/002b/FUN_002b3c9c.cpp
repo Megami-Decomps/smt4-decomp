@@ -11,7 +11,7 @@ int FUN_002b358c(unsigned int);
 int FUN_002ff8e8(unsigned int);
 int camSetMatrixB(int, int *);
 int FUN_00409c60(int, unsigned int, unsigned int, unsigned int);
-int FUN_00412e44(unsigned int);
+int primitiveSourceBuildBatch(unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -35,7 +35,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ff8e8. */
 /* Supplied declaration required: camSetMatrixB. */
 /* Supplied declaration required: FUN_00409c60. */
-/* Supplied declaration required: FUN_00412e44. */
+/* Supplied declaration required: primitiveSourceBuildBatch. */
 
 
 void FUN_002b3c9c(unsigned short *param_1,unsigned int param_2)
@@ -131,7 +131,7 @@ void FUN_002b3c9c(unsigned short *param_1,unsigned int param_2)
       param_1[0x2a] = 0;
       param_1[0x2b] = 0;
     }
-    FUN_00412e44(*(unsigned int *)(param_1 + 4));
+    primitiveSourceBuildBatch(*(unsigned int *)(param_1 + 4));
     renderCtxResetColorScale(g_renderCtx);
     skinObjectUpdateMatrices(g_renderCtx);
     temp_v0 = g_renderCtx;

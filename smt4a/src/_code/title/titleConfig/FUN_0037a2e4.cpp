@@ -15,9 +15,9 @@ int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
 int wordPairCopy(...);
 int FUN_00203b40(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int fillTwoWordsWithByte(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -59,12 +59,12 @@ extern int campIsState85(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: wordPairCopy. */
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002804b0. */
-extern unsigned int FUN_003164ac(unsigned char);
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
+extern unsigned int findByteThresholdTier(unsigned char);
 extern unsigned int FUN_0032b62c(unsigned char);
 extern unsigned int thresholdIndexFind(unsigned char);
 /* Supplied declaration required: fillTwoWordsWithByte. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_0037a2e4(void)
@@ -83,7 +83,7 @@ void FUN_0037a2e4(void)
   asdProcessCreateSimple(&LAB_0037a570,4,0,0,&LAB_002a0b58,titleConfigDestroy,puVar1);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_0037a588,0xea,0,0,FUN_0032ba8c,0,0,puVar2);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xf);
+  paramsClearPacket(puVar1 + 0xf);
   paramsInit(puVar1 + 0xf,&DAT_00536bec,0x30,&DAT_00536c1c,0x30,0,0,0,0,0,0);
   temp_v1 = 0x3f800000;
   FUN_0014e188(puVar1 + 0x17,0x24,0,puVar1 + 0xf,0xc9);
@@ -96,15 +96,15 @@ void FUN_0037a2e4(void)
   *(unsigned short *)((int)puVar1 + 0x1a) = 0;
   fillTwoWordsWithByte(puVar1 + 7,0xffffffff);
   *(unsigned short *)(puVar1 + 9) = 0;
-  FUN_002804b0(&LAB_0037a5a0,puVar1 + 0x55,0);
-  FUN_002804b0(&LAB_0037a5b0,puVar1 + 0x56,0);
+  asdLoadFileAsyncSimple(&LAB_0037a5a0,puVar1 + 0x55,0);
+  asdLoadFileAsyncSimple(&LAB_0037a5b0,puVar1 + 0x56,0);
   sysPlaySe(0x9b);
   FUN_0019de98(0,0xf4f4f4ff);
   temp_v0 = campIsState85();
   if ((temp_v0 != 0) && (temp_v0 = gameDataBlocksGetSaveData(), *(char *)(temp_v0 + 0x27e94) != '\0')) {
     temp_v1 = FUN_0032b62c(*(unsigned char *)(temp_v0 + 0x27e90));
     puVar1[10] = temp_v1;
-    temp_v1 = FUN_003164ac(*(unsigned char *)(temp_v0 + 0x27e91));
+    temp_v1 = findByteThresholdTier(*(unsigned char *)(temp_v0 + 0x27e91));
     puVar1[0xb] = temp_v1;
     temp_v1 = thresholdIndexFind(*(unsigned char *)(temp_v0 + 0x27e92));
     puVar1[0xc] = temp_v1;
@@ -116,7 +116,7 @@ void FUN_0037a2e4(void)
   }
   temp_v1 = FUN_0032b62c(DAT_00588fc0);
   puVar1[10] = temp_v1;
-  temp_v1 = FUN_003164ac(DAT_00588fc1);
+  temp_v1 = findByteThresholdTier(DAT_00588fc1);
   puVar1[0xb] = temp_v1;
   temp_v1 = thresholdIndexFind(DAT_00588fc2);
   puVar1[0xc] = temp_v1;

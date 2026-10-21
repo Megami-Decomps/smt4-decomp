@@ -1,46 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bfd2c` (_code @ 0x2bfd2c, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match4_CampCecResumeState.h"
 
 extern "C" {
+u32 campCecRecvExists(void);
+u32 campCecRecvIsDone(void);
+void FUN_0037bd00(void);
+void sysPlaySe(u32 id);
+void FUN_0031d890(void);
+void FUN_00344348(s32 mode);
 
-int sysPlaySe(int);
-int FUN_0031d890(void);
-int FUN_00344348(int);
-int FUN_0037bd00(void);
-
-/* Supplied declaration required: sysPlaySe. */
-extern int campCecRecvExists(void);
-extern int campCecRecvIsDone(void);
-/* Supplied declaration required: FUN_0031d890. */
-/* Supplied declaration required: FUN_00344348. */
-/* Supplied declaration required: FUN_0037bd00. */
-
-
-unsigned int FUN_002bfd2c(int param_1)
-
+u32 FUN_002bfd2c(CampCecResumeState* work)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  temp_v0 = campCecRecvExists();
-  if (temp_v0 != 0) {
-    temp_v0 = campCecRecvIsDone();
-    if (temp_v0 != 0) {
-      FUN_0037bd00();
-      sysPlaySe(0x10d);
-      *(unsigned int *)(param_1 + 0x144) = 1;
-      *(unsigned int *)(param_1 + 0x14c) = 0;
-      FUN_0031d890();
-      temp_v1 = 3;
+    u32 result = 0;
+    switch (campCecRecvExists()) {
+    case 0:
+        FUN_00344348(1);
+        break;
+    default:
+        if (campCecRecvIsDone() != 0) {
+            FUN_0037bd00();
+            sysPlaySe(0x10d);
+            work->state = 1;
+            work->unk14c = 0;
+            FUN_0031d890();
+            result = 3;
+        }
+        break;
     }
-  }
-  else {
-    FUN_00344348(1);
-  }
-  return temp_v1;
+    return result;
 }
-
-} /* extern "C" */
+}

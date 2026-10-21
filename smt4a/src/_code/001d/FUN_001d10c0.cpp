@@ -1,45 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d10c0` (_code @ 0x1d10c0, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail saves only LR; the compiler adds R4 to maintain call-stack alignment. */
+#include "nn/Result.h"
 
 extern "C" {
+u32 legacyResourceIdRemap(const u32* result);
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} void_stack;
-
-extern unsigned int FUN_001d25ec(void);
-
-
-unsigned int FUN_001d10c0(void)
-
+// Tests module 0x4e results for the three recognized description ranges.
+u32 FUN_001d10c0(const u32* status)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = FUN_001d25ec();
-  if ((temp_v0 & 0x3fc00) == 0x13800) {
-    temp_v0 = temp_v0 & 0x3ff;
-    temp_v1 = temp_v0 - 0xc0;
-    temp_v2 = temp_v1 >= 0x40;
-    if (temp_v2) {
-      temp_v1 = temp_v0 - 0x140;
+    u32 result = legacyResourceIdRemap(status);
+    if (nnResultModule(result) == 0x4e) {
+        u32 description = nnResultDescription(result);
+        if (description - 0xc0 < 0x40 || description - 0x140 < 0x40 ||
+            description - 0x40 < 0x20) {
+            return 1;
+        }
     }
-    temp_v3 = temp_v2 && temp_v1 >= 0x40;
-    if (temp_v2 && temp_v1 >= 0x40) {
-      temp_v3 = temp_v0 - 0x40 >= 0x20;
-    }
-    if (!temp_v3) {
-                    /* WARNING: Treating indirect jump as return */
-      return 1;
-    }
-  }
-                    /* WARNING: Treating indirect jump as return */
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001af814` (_code @ 0x1af814, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: vtable-writing C++ cleanup has unresolved class/base identities and returns the enclosing object sixteen bytes before its incoming subobject pointer. Constructor/destructor naming and base layout need integration. */
 #include "romwright_types.h"
 
 extern "C" {

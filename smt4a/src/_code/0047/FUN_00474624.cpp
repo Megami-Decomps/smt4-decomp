@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00161a10(void);
-int FUN_001b57a8(int *, int);
-int FUN_001d25ec(unsigned int *);
+int resultPairInitialize(int *, int);
+int legacyResourceIdRemap(unsigned int *);
 int FUN_004288e0(int *, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -17,9 +17,9 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_00161a10. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned char *);
-/* Supplied declaration required: FUN_001d25ec. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_004288e0. */
 
 
@@ -40,7 +40,7 @@ void FUN_00474624(unsigned char *param_1)
   puVar2 = (unsigned int *)FUN_001b5acc(param_1 + 4);
   puVar2[2] = 0;
   puVar2[3] = 0;
-  FUN_001b57a8(&temp_v3,0);
+  resultPairInitialize(&temp_v3,0);
   temp_v2 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v2;
@@ -49,17 +49,17 @@ void FUN_00474624(unsigned char *param_1)
   FUN_004288e0(&temp_v3,temp_v1 + 0x7c);
   *puVar2 = temp_v3;
   puVar2[1] = uStack_14;
-  temp_v1 = FUN_001d25ec(puVar2);
+  temp_v1 = legacyResourceIdRemap(puVar2);
   if (temp_v1 >= 0) {
     *(unsigned char *)(puVar2 + -1) = 0;
   }
   else {
-    temp_v1 = FUN_001d25ec(puVar2);
+    temp_v1 = legacyResourceIdRemap(puVar2);
     if (temp_v1 == -0x36dec7ff) {
       temp_v0 = 0x67;
     }
     else {
-      FUN_001d25ec(puVar2);
+      legacyResourceIdRemap(puVar2);
       temp_v0 = 100;
     }
     *(unsigned char *)(puVar2 + -1) = temp_v0;

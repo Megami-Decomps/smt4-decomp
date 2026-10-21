@@ -1,35 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ed64c` (_code @ 0x1ed64c, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler forwards kind to r3 earlier and reuses r5 rather than ip for the outgoing-stack cursor. */
+#include "shard/W4_W4Match5b_MessageMain.h"
 
 extern "C" {
+void FUN_0028dcf4(MessageObject *, u32);
+void FUN_0028e6d0(MessageObject *, u32, u32, u32, u32, u32, u32);
 
-int FUN_0028dcf4(int, unsigned int);
-int FUN_0028e6d0(int, unsigned int, unsigned int, unsigned int, int, int, int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-extern unsigned char g_messageMain; /* 0x43e188 */
-
-/* Supplied declaration required: FUN_0028dcf4. */
-/* Supplied declaration required: FUN_0028e6d0. */
-
-
-void FUN_001ed64c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+// Select the message layout and open the requested message.
+void FUN_001ed64c(u32 kind, u32 message, u32 argument)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_messageMain + 0x4));
-  *(unsigned char *)((*(int *)((unsigned char *)&g_messageMain + 0x4)) + 0x2c) = 0;
-  FUN_0028dcf4(temp_v0,param_1);
-  FUN_0028e6d0(temp_v0,param_2,param_3,param_1,0,2,0);
-  return;
+    MessageObject *state = g_messageMain.state;
+    state->message.empty = 0;
+    FUN_0028dcf4(state, kind);
+    FUN_0028e6d0(state, message, argument, kind, 0, 2, 0);
 }
-
-} /* extern "C" */
+}

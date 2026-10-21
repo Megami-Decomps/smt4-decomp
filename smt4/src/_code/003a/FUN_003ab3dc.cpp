@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022d7b0(...);
 int FUN_00230cc0(int, int, int, int, int);
 int FUN_00231bcc(int, int, int, int, int, int);
-int FUN_0023360c(...);
+int flaggedValueHolderGetTotal(...);
 int FUN_00240d5c(...);
 int FUN_00288e68(...);
 int FUN_0029c94c(void);
@@ -22,8 +22,8 @@ typedef struct {
 /* Supplied declaration required: FUN_0022d7b0. */
 /* Supplied declaration required: FUN_00230cc0. */
 /* Supplied declaration required: FUN_00231bcc. */
-/* Supplied declaration required: FUN_0023360c. */
-extern int FUN_00233718(int);
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
+extern int rangeLimitMin(int);
 /* Supplied declaration required: FUN_00240d5c. */
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_0029c94c. */
@@ -48,7 +48,7 @@ void FUN_003ab3dc(int param_1)
   FUN_00231bcc(param_1 + 200,0x4ca,0,0,0x1f,1);
   if (*(int *)(param_1 + 0x28) != 0) {
     temp_v0 = FUN_0029e924(param_1 + 0x20);
-    temp_v1 = FUN_00233718(param_1 + 0x20);
+    temp_v1 = rangeLimitMin(param_1 + 0x20);
     temp_v5 = 0;
     if (temp_v5 < temp_v1) {
       do {
@@ -60,10 +60,10 @@ void FUN_003ab3dc(int param_1)
       } while (temp_v5 < temp_v1);
     }
     if (*(int *)(param_1 + 0x14) == 3) {
-      temp_v3 = FUN_0023360c(param_1 + 0x20);
+      temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x20);
       temp_v4 = FUN_00240d5c(param_1 + 0x20);
       FUN_003abae8(param_1,temp_v4,temp_v3,1,0x20);
-      temp_v0 = FUN_0023360c(param_1 + 0x20);
+      temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
       FUN_00288e68((int)*(short *)(param_1 + temp_v0 * 0x20 + 0x5ac));
       FUN_0029c94c();
     }

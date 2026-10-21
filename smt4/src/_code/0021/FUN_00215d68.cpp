@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_001ce224(...);
 int FUN_002580d4(...);
-int FUN_00288154(...);
+int gameRecordCopy(...);
 int FUN_0029a17c(...);
 int FUN_0029f7d4(...);
-int FUN_002b066c(...);
-int FUN_002b6758(...);
+int partyMemberFindById(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
 int devilGetRecord(...);
 int FUN_002bce30(...);
@@ -63,7 +63,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_001ce224. */
 /* Supplied declaration required: FUN_002580d4. */
 extern unsigned int *FUN_0026280c(void);
-/* Supplied declaration required: FUN_00288154. */
+/* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029b7b8(unsigned int, unsigned short, unsigned char *);
 extern int FUN_0029d65c(int);
@@ -72,8 +72,7 @@ extern int FUN_0029efa8(unsigned int *);
 extern int FUN_0029efc0(unsigned int *);
 /* Supplied declaration required: FUN_0029f7d4. */
 extern int *gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002b066c. */
-/* Supplied declaration required: FUN_002b6758. */
+/* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bce30. */
@@ -163,7 +162,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
       temp_v11 = 0xdc0f14ff;
     }
     else {
-      temp_v3 = FUN_002b066c(*puVar6);
+      temp_v3 = partyMemberFindById(*puVar6);
       if (temp_v3 != 0) {
         temp_v9 = 0x5a5a5aff;
       }
@@ -328,11 +327,11 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
         temp_v0 = *(char *)((int)puVar2 + temp_v1 + 0x522a);
         if (temp_v0 != '\0') {
           if (temp_v0 != '\x03') {
-            temp_v3 = FUN_002b066c();
+            temp_v3 = partyMemberFindById();
             temp_v7 = (unsigned short)*(unsigned char *)(temp_v3 + 0x48);
           }
           else {
-            FUN_00288154(*psVar10,temp_v13);
+            gameRecordCopy(*psVar10,temp_v13);
             temp_v7 = temp_v13[0];
           }
           FUN_002bdf94(0,(int)&param_1->field_0x0 +
@@ -358,7 +357,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
           temp_v3 = (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v2 + 8);
           temp_v5 = 0;
         }
-        FUN_002b6758(temp_v5,(int)&param_1->field_0x0 + temp_v3,temp_v6 + param_2,0x8d,!temp_v12);
+        uiDrawDemonIcon(temp_v5,(int)&param_1->field_0x0 + temp_v3,temp_v6 + param_2,0x8d,!temp_v12);
         temp_v3 = g_titleScene;
         if (*(char *)(temp_v17 + 0x38) == temp_v18) {
           temp_v6 = packNibblesAndByte(6,1,0);

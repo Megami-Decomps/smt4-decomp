@@ -38,7 +38,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: wordPairCopy. */
 extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
-extern int FUN_001ba514(unsigned int);
+extern int partyFindSlotById(unsigned int);
 extern unsigned int configGetSettings(void);
 extern int FUN_00229c9c(void);
 extern unsigned int *FUN_00239294(void);
@@ -110,7 +110,7 @@ unsigned int FUN_003712a4(void)
           gameFlagSetValue(0x595,1);
           temp_v4 = 0;
           do {
-            temp_v2 = FUN_001ba514(0);
+            temp_v2 = partyFindSlotById(0);
             if (-1 < temp_v2) {
               FUN_004d0d70();
             }

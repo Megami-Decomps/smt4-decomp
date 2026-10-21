@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003534b0(int, int, unsigned char *, int, int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int);
+int sceneRegisterBoxEffect(int, int, unsigned char *, int, int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int);
 
 /* stack frame of void: 14 slot(s), 56 byte(s) */
 typedef struct {
@@ -27,8 +27,8 @@ typedef struct {
 extern unsigned char LAB_003ae494; /* 0x3ae494 */
 
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_003534b0. */
-extern int FUN_00376f94(void);
+/* Supplied declaration required: sceneRegisterBoxEffect. */
+extern int lmapGetSpawnIndex(void);
 
 
 void FUN_003ae3c4(void)
@@ -39,9 +39,9 @@ void FUN_003ae3c4(void)
   int temp_v1;
   
   temp_v0 = gameFlagsGetBlock();
-  temp_v1 = FUN_00376f94();
+  temp_v1 = lmapGetSpawnIndex();
   if ((*(char *)(temp_v0 + 0x1664) != '\0') && (temp_v1 >= 100)) {
-    FUN_003534b0(0,0,&LAB_003ae494,0x58,0,0xffffffff,0,0,0,0,0,0,0,0,0,0,0,0,0);
+    sceneRegisterBoxEffect(0,0,&LAB_003ae494,0x58,0,0xffffffff,0,0,0,0,0,0,0,0,0,0,0,0,0);
   }
   return;
 }

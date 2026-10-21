@@ -1,33 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b9a48` (_code @ 0x3b9a48, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: initial map load/zero initialization scheduling and literal-pool order differ. */
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
+s32 gameFlagIsSet(u32 flag);
+void scrSetResult(s32 result);
 
-int scrSetResult(int);
-
-extern int g_gameState; /* 0x5f15fc */
-
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003b9a48(int param_1)
-
+// Classify the current map range, suppressing it by flag except in game mode 26.
+u32 FUN_003b9a48(const GameState* state)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v0 = *(int *)(param_1 + 0x578);
-  temp_v1 = gameFlagIsSet(0x594);
-  temp_v2 = temp_v1 == 0 && temp_v0 - 200U < 100;
-  if (g_gameState == 0x1a) {
-    temp_v2 = 2;
-  }
-  scrSetResult(temp_v2);
-  return 1;
+    u8 result = 0;
+    if (state->sourceMap - 200u < 100u)
+        result = 1;
+    if (gameFlagIsSet(0x594) != 0)
+        result = 0;
+    if (g_gameState.mode == 0x1a)
+        result = 2;
+    scrSetResult(result);
+    return 1;
 }
-
-} /* extern "C" */
+}

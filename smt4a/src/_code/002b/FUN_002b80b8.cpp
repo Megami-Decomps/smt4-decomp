@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_002d8c90(s32 state);
+void popupQueueInsertUnique(s32 state);
 s32 randRange(s32 arg);
 
 extern LmapEventA *g_popupState;
@@ -14,7 +14,7 @@ void FUN_002b80b8(void)
         return;
     }
     if (randRange(99) + 1 <= 10) {
-        FUN_002d8c90(0x12);
+        popupQueueInsertUnique(0x12);
         return;
     }
 }

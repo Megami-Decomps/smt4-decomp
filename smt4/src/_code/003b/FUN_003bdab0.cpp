@@ -50,7 +50,7 @@ extern int randRange(unsigned int);
 extern unsigned int *btlGetMainState(void);
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
-extern unsigned int FUN_002ae108(unsigned int);
+extern unsigned int playerGetSkillRank(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -302,7 +302,7 @@ LAB_003be190:
         puVar6 = (unsigned int *)btlGetMainState();
         btlMainFindEntryByListedId(puVar6,param_5);
         if (((*puVar6 & 2) != 0) && (temp_v7 = temp_v1, FUN_002ae164(), temp_v7 != 0)) {
-          temp_v3 = FUN_002ae108(temp_v1);
+          temp_v3 = playerGetSkillRank(temp_v1);
           FUN_00283ebc(temp_v7,temp_v3,2);
         }
         else {

@@ -11,7 +11,7 @@ typedef struct ModelWork {
 extern ModelWork *jobGetWork(u32 job);
 extern void asdModelSlotRelease(s32 value);
 extern void asdMdlManagerDestroy(void *manager);
-extern void FUN_001ad6d8(void);
+extern void asdCameraInitAreas(void);
 extern void asdMemFree(void *ptr);
 
 /* Destroys the job's work area. */
@@ -27,7 +27,7 @@ void modelWorkDestroy(u32 job)
         asdMdlManagerDestroy(work->manager);
         work->manager = NULL;
     }
-    FUN_001ad6d8();
+    asdCameraInitAreas();
     asdMemFree(work);
 }
 

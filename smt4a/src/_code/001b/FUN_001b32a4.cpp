@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(int);
 int asdTextureCreate(void);
-int FUN_001ab914(int);
+int asdTextureEntryApply(int);
 int FUN_001ad15c(int, int);
 int FUN_001ba204(int, unsigned int, int);
 
@@ -19,7 +19,7 @@ extern unsigned char LAB_001b3420; /* 0x1b3420 */
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_001ab914. */
+/* Supplied declaration required: asdTextureEntryApply. */
 /* Supplied declaration required: FUN_001ad15c. */
 /* Supplied declaration required: FUN_001ba204. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
@@ -73,7 +73,7 @@ void FUN_001b32a4(int param_1,int param_2,int param_3)
         FUN_001ad15c(param_2,0x30000);
       }
     }
-    FUN_001ab914(param_2);
+    asdTextureEntryApply(param_2);
     return;
   }
   asdMemFree(param_1);

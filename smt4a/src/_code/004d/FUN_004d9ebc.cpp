@@ -39,7 +39,7 @@ struct fn_004d9ebc_arg0 {
     undefined2 field_0x12e; /* +0x12e */
 };
 
-extern int FUN_00168518(fn_004d9ebc_arg0 *, unsigned int);
+extern int dataTableGetCategoryEntry(fn_004d9ebc_arg0 *, unsigned int);
 extern int gameGetPlayerData(void);
 extern unsigned short *gameGetOptions(void);
 /* Supplied declaration required: sysMemClear. */
@@ -73,7 +73,7 @@ void FUN_004d9ebc(fn_004d9ebc_arg0 *param_1)
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 3);
   sysMemClear(puVar8,300);
-  temp_v7 = FUN_00168518(param_1,temp_v8);
+  temp_v7 = dataTableGetCategoryEntry(param_1,temp_v8);
   puVar8[0x96] = (short)(int)param_1;
   puVar8[0x97] = (short)temp_v8;
   puVar8[0x31] = 0x4b1;

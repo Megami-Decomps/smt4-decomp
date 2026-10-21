@@ -11,7 +11,7 @@ int onlineSockAddrFormatIpv4(unsigned int, unsigned char [256], int);
 int FUN_002ea2e8(unsigned char [4]);
 int FUN_002ea3a8(unsigned char [4]);
 int wideBufferAppend(...);
-int FUN_002fbd00(unsigned int, unsigned char [8]);
+int wideBufferAppendHolderValue(unsigned int, unsigned char [8]);
 int FUN_0030f090(unsigned int, unsigned char [32], int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -28,7 +28,7 @@ extern unsigned char LAB_001238b8; /* 0x1238b8 */
 /* Supplied declaration required: FUN_002ea2e8. */
 /* Supplied declaration required: FUN_002ea3a8. */
 /* Supplied declaration required: wideBufferAppend. */
-/* Supplied declaration required: FUN_002fbd00. */
+/* Supplied declaration required: wideBufferAppendHolderValue. */
 /* Supplied declaration required: FUN_0030f090. */
 
 
@@ -49,7 +49,7 @@ void FUN_00123860(unsigned int param_1,unsigned int param_2)
   FUN_00123844(temp_v4,param_1);
   temp_v0 = wideBufferAppend(temp_v1,temp_v3);
   temp_v0 = wideBufferAppend(temp_v0,&LAB_001238b8);
-  FUN_002fbd00(temp_v0,temp_v4);
+  wideBufferAppendHolderValue(temp_v0,temp_v4);
   onlineStringDestroy(temp_v4);
   wstrcpyU16(param_2,temp_v2);
   FUN_002ea3a8(temp_v1);

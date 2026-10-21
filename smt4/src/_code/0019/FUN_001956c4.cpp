@@ -48,7 +48,7 @@ extern int g_uiQuest; /* 0x43dd50 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: uiQuestStartSelected. */
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001afc0c. */
 /* Supplied declaration required: uiFadeRequestHalf. */
 /* Supplied declaration required: FUN_0028fe0c. */
@@ -87,7 +87,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int randNextInRange(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: asdMemFree. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
 /* Supplied declaration required: FUN_003944d4. */
 /* Supplied declaration required: gameOptionsHasEnabledParameters. */
@@ -160,9 +160,9 @@ unsigned int FUN_001956c4(void)
         temp_v7 = 2;
         break;
       }
-      temp_v7 = FUN_002c5c04(&LAB_00195cc8);
+      temp_v7 = asdLoadFileSyncDefault(&LAB_00195cc8);
       *(unsigned int *)(temp_v1 + 0x5b8) = temp_v7;
-      temp_v7 = FUN_002c5c04(&LAB_00195cdc);
+      temp_v7 = asdLoadFileSyncDefault(&LAB_00195cdc);
       *(unsigned int *)(temp_v1 + 0x5bc) = temp_v7;
       FUN_00297060(temp_v7,*(unsigned int *)(temp_v1 + 0x5b8));
       *(unsigned int *)(temp_v1 + 0x5c0) = temp_v7;
@@ -386,7 +386,7 @@ unsigned int FUN_001956c4(void)
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 6:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -430,7 +430,7 @@ unsigned int FUN_001956c4(void)
     }
     break;
   case 7:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -465,7 +465,7 @@ unsigned int FUN_001956c4(void)
     temp_v7 = 0x10;
     break;
   case 8:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -501,7 +501,7 @@ unsigned int FUN_001956c4(void)
     temp_v7 = 9;
     break;
   case 9:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -526,7 +526,7 @@ unsigned int FUN_001956c4(void)
     temp_v7 = 2;
     break;
   case 10:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -535,7 +535,7 @@ unsigned int FUN_001956c4(void)
     temp_v7 = 2;
     break;
   case 0xb:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -569,7 +569,7 @@ unsigned int FUN_001956c4(void)
   case 0xc:
     FUN_002bf818(temp_v1 + 0x264);
     if ((*(char *)(temp_v1 + 0x2ee) == '\0') ||
-       (temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4)), temp_v11 != 2)) {
+       (temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4)), temp_v11 != 2)) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
@@ -606,7 +606,7 @@ unsigned int FUN_001956c4(void)
     temp_v7 = 0x1b;
     break;
   case 0xe:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -633,7 +633,7 @@ joined_r0x0019627c:
     temp_v7 = 3;
     break;
   case 0xf:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -654,7 +654,7 @@ joined_r0x0019627c:
     temp_v7 = 3;
     break;
   case 0x10:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5b4));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5b4));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -1007,7 +1007,7 @@ joined_r0x0019627c:
     temp_v7 = 0;
     break;
   case 0x1a:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5c0));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5c0));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -1015,7 +1015,7 @@ joined_r0x0019627c:
     temp_v7 = 2;
     break;
   case 0x1b:
-    temp_v11 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x5c0));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x5c0));
     if (temp_v11 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;

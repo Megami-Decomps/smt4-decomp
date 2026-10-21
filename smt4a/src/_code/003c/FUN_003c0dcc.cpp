@@ -7,11 +7,11 @@ extern "C" {
 int gameFlagIsSet(int);
 int dataTableGetEntries(void);
 int FUN_0039b984(void);
-int FUN_0040a76c(unsigned int, unsigned int);
+int gameDataSetModeAndFlag(unsigned int, unsigned int);
 int FUN_0040a790(unsigned int);
 int FUN_0040a7b4(void);
 int FUN_0040a844(unsigned int, int);
-int FUN_0040a864(unsigned int, int);
+int gameDataSetEnabledBit(unsigned int, int);
 
 extern unsigned int g_aocSystem; /* 0x570280 */
 
@@ -21,14 +21,14 @@ extern int dataTableGetCount(unsigned int);
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_0039b984. */
 extern unsigned int tableByteGet1(unsigned int);
-/* Supplied declaration required: FUN_0040a76c. */
+/* Supplied declaration required: gameDataSetModeAndFlag. */
 /* Supplied declaration required: FUN_0040a790. */
 /* Supplied declaration required: FUN_0040a7b4. */
 extern int tableFlagBit2(unsigned int);
 extern int tableFlagBit0(unsigned int);
 extern int tableFlagBit1(unsigned int);
 /* Supplied declaration required: FUN_0040a844. */
-/* Supplied declaration required: FUN_0040a864. */
+/* Supplied declaration required: gameDataSetEnabledBit. */
 extern int FUN_004717e0(unsigned int);
 
 
@@ -91,7 +91,7 @@ unsigned int FUN_003c0dcc(void)
               } while (temp_v5 < 5);
             }
             if (temp_v4 < temp_v6) {
-              FUN_0040a76c(temp_v7,temp_v6);
+              gameDataSetModeAndFlag(temp_v7,temp_v6);
               return 1;
             }
           }
@@ -102,14 +102,14 @@ unsigned int FUN_003c0dcc(void)
              ((temp_v3 = gameFlagIsSet(psVar4[0x2e]), psVar4[0x2e] == 0 || (temp_v3 != 0)))) {
             FUN_0040a790(temp_v7);
             if (psVar4[0x2c] == 1) {
-              FUN_0040a864(temp_v7,0);
+              gameDataSetEnabledBit(temp_v7,0);
               FUN_0040a844(temp_v7,1);
               return 1;
             }
             if (psVar4[0x2c] != 2) {
               return 1;
             }
-            FUN_0040a864(temp_v7,0);
+            gameDataSetEnabledBit(temp_v7,0);
             FUN_0040a844(temp_v7,0);
           }
         }

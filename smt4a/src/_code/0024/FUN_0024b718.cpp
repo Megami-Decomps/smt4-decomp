@@ -10,7 +10,7 @@ int dialogClose(int);
 int FUN_003ea20c(void);
 int FUN_004c89e8(void);
 int FUN_004c8b10(void);
-int FUN_004c8bb8(...);
+void FUN_004c8bb8(int alternate, unsigned int argument);
 
 extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
@@ -41,7 +41,7 @@ extern int dialogIsActive(void);
 extern int FUN_003eb1cc(int);
 extern int btlScriptUnitIsNotKind6(int);
 extern int FUN_0040ddec(unsigned int, unsigned int);
-extern int FUN_004a9428(void);
+extern int btlUiCanStartMenu(void);
 /* Supplied declaration required: FUN_004c89e8. */
 /* Supplied declaration required: FUN_004c8b10. */
 /* Supplied declaration required: FUN_004c8bb8. */
@@ -148,7 +148,7 @@ unsigned int FUN_0024b718(void)
         if (g_btlUiBlock == 0) {
           return 0;
         }
-        temp_v5 = FUN_004a9428();
+        temp_v5 = btlUiCanStartMenu();
         if (temp_v5 == 0) {
           return 0;
         }
@@ -215,7 +215,7 @@ unsigned int FUN_0024b718(void)
         FUN_001517b4(7,1);
         if (temp_v5 != 0) {
           FUN_004c89e8();
-          FUN_004c8bb8(0);
+          FUN_004c8bb8(0,0);
           temp_v4 = DAT_005713bc | *(unsigned int *)(temp_v3 + 0x45a4);
           *puVar8 = DAT_005713b8 | *puVar8;
           *(unsigned int *)(temp_v3 + 0x45a4) = temp_v4;

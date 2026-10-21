@@ -32,9 +32,9 @@ extern unsigned char gaugePercent(int);
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: FUN_00233730. */
 /* Supplied declaration required: FUN_002498ec. */
-extern int FUN_0025b6e8(unsigned int);
+extern int unlockFlagTest(unsigned int);
 extern int FUN_002a0d0c(void);
-extern unsigned int FUN_002bce00(void);
+extern unsigned int aocIndexValueOrDefault(void);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 
 
@@ -64,10 +64,10 @@ void FUN_003aaeb0(int param_1)
   temp_v7 = 0;
   do {
     temp_v7 = temp_v7 + 1;
-    temp_v3 = FUN_0025b6e8(temp_v6);
+    temp_v3 = unlockFlagTest(temp_v6);
     if ((temp_v3 != 0) && (temp_v4 = temp_v6, FUN_002498ec(), *(short *)(temp_v4 + 0x26) != 0)) {
       temp_v8 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v8 + 2)),*(unsigned short *)(temp_v4 + 0x20));
-      temp_v12 = FUN_002bce00();
+      temp_v12 = aocIndexValueOrDefault();
       temp_v10 = *(unsigned int *)(temp_v4 + 0x28);
       temp_v11 = *(unsigned short *)(temp_v4 + 0x24);
       recordAppendFloatEntry(temp_v2,&temp_v8);

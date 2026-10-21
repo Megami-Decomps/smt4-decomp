@@ -7,7 +7,7 @@ extern "C" {
 int qsort(int [50], int, int, unsigned char *);
 int FUN_001568f8(int, int);
 int FUN_004cae0c(int, int, int, int, int);
-int FUN_004fc040(...);
+int reflectActionSetScalarPayload(...);
 int FUN_004fd204(int, unsigned int, int, int, int, int);
 int FUN_004fdcd8(int, unsigned int, int, int, int, int, int, int);
 
@@ -34,9 +34,9 @@ extern unsigned int DAT_0057a64c; /* 0x57a64c */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_003f10c8(int, unsigned short);
+extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_004cae0c. */
-/* Supplied declaration required: FUN_004fc040. */
+/* Supplied declaration required: reflectActionSetScalarPayload. */
 /* Supplied declaration required: FUN_004fd204. */
 /* Supplied declaration required: FUN_004fdcd8. */
 
@@ -94,7 +94,7 @@ void FUN_003e2840(unsigned int param_1,int param_2,int param_3)
          (*(unsigned short *)(temp_v5 + 0x60) & 0x800) == 0)) {
         temp_v3 = temp_v14;
         FUN_001568f8(temp_v14,(int)*(short *)(temp_v5 + 0x6a));
-        temp_v3 = FUN_003f10c8(temp_v14,*(unsigned short *)(temp_v3 + 2));
+        temp_v3 = pairedEntryTableContains(temp_v14,*(unsigned short *)(temp_v3 + 2));
         if (temp_v3 == 0) {
           *(unsigned short *)(temp_v5 + 0x60) = *(unsigned short *)(temp_v5 + 0x60) | 0x800;
           if ((*(unsigned int *)(temp_v5 + 0x50) & 0x10) != 0) {
@@ -117,7 +117,7 @@ void FUN_003e2840(unsigned int param_1,int param_2,int param_3)
           FUN_004fd204(temp_v3 + temp_v12,temp_v13,temp_v5,0xff,temp_v9,0);
           FUN_004fdcd8(temp_v12,temp_v13,0,(int)*(short *)(temp_v5 + 0x6a),7,0,0xe,0);
           if ((param_3 != 4) || (temp_v8 < 3)) {
-            FUN_004fc040(temp_v11,temp_v13,0x1000218,(int)*(short *)(temp_v5 + 0x6a),
+            reflectActionSetScalarPayload(temp_v11,temp_v13,0x1000218,(int)*(short *)(temp_v5 + 0x6a),
                          (int)*(short *)(temp_v5 + 0x6a),0xe);
           }
           temp_v7 = temp_v7 + 1;

@@ -7,9 +7,22 @@
 /* State of the running command. */
 typedef struct EventCommand {
     /* 0x00 */ u32 job;      /* job that runs the command */
-    /* 0x04 */ u8 unk04[0x0C];
-    /* 0x10 */ s32 unk10;
-    /* 0x14 */ s32 unk14;
+    union {
+        /* 0x04 */ u8 unk04[0x0C];
+        struct {
+            /* 0x04 */ u32 color;
+            /* 0x08 */ f32 alpha;
+            /* 0x0C */ f32 delta;
+        } fade;
+    };
+    union {
+        /* 0x10 */ s32 unk10;
+        /* 0x10 */ s32 elapsed;
+    };
+    union {
+        /* 0x14 */ s32 unk14;
+        /* 0x14 */ s32 duration;
+    };
 } EventCommand;
 
 /* The command's state and a second job handle, side by side in memory. */

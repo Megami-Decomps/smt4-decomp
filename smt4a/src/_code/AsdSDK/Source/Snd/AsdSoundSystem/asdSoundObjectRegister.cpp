@@ -4,7 +4,7 @@
 
 extern "C" {
 extern AsdSndStatusApoc g_asdSoundStatus;
-void FUN_00152d64(AsdSndObject *sound, u32 arg, f32 volume, f32 scale);
+void asdSoundObjectStartOrRestart(AsdSndObject *sound, u32 arg, f32 volume, f32 scale);
 
 void asdSoundObjectRegister(AsdSndObject *sound, u32 volumeSteps, u32 arg)
 {
@@ -40,6 +40,6 @@ void asdSoundObjectRegister(AsdSndObject *sound, u32 volumeSteps, u32 arg)
         }
     }
 
-    FUN_00152d64(sound, arg, volume, 1.0f);
+    asdSoundObjectStartOrRestart(sound, arg, volume, 1.0f);
 }
 }

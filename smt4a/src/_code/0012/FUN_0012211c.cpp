@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00135b16(unsigned int, unsigned int, int, int *);
+int elemCopyForward(unsigned int, unsigned int, int, int *);
 int vectorCount8_0030fcf6(unsigned int *);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_00135b16. */
+/* Supplied declaration required: elemCopyForward. */
 extern int *wordRefMax(unsigned int *, unsigned int *);
 extern int rt_malloc(void);
 /* Supplied declaration required: vectorCount8_0030fcf6. */
@@ -41,7 +41,7 @@ int * FUN_0012211c(int *param_1,unsigned int *param_2,unsigned int param_3,unsig
   temp_v0 = *piVar1;
   temp_v1 = rt_malloc();
   *param_1 = temp_v1;
-  FUN_00135b16(*param_2,param_2[1],temp_v1,param_1);
+  elemCopyForward(*param_2,param_2[1],temp_v1,param_1);
   temp_v1 = vectorCount8_0030fcf6(param_2);
   param_1[1] = temp_v1 * 8 + *param_1;
   param_1[2] = *param_1 + temp_v0 * 8;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
@@ -21,7 +21,7 @@ extern float DAT_004ea920; /* 0x4ea920 */
 extern float DAT_004ea924; /* 0x4ea924 */
 extern float DAT_004ea928; /* 0x4ea928 */
 
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 
 
@@ -43,15 +43,15 @@ void FUN_003f6b88(void)
   temp_v4 = 40.743664f;
   temp_v2 = in_s0 * -0.5f * 40.743664f;
   temp_v0 = temp_v2;
-  FUN_002b7064();
+  phaseCosInterpolate();
   FUN_002b70cc();
   temp_v3 = in_s1 * temp_v5 * temp_v4;
   temp_v1 = temp_v3;
-  FUN_002b7064();
+  phaseCosInterpolate();
   FUN_002b70cc();
   temp_v4 = in_s2 * temp_v5 * temp_v4;
   temp_v5 = temp_v4;
-  FUN_002b7064();
+  phaseCosInterpolate();
   FUN_002b70cc();
   DAT_004ea91c = temp_v5 * temp_v1 * temp_v2 + temp_v4 * temp_v3 * temp_v0;
   DAT_004ea920 = temp_v4 * temp_v1 * temp_v2 - temp_v5 * temp_v3 * temp_v0;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0012b2cc` (_code @ 0x12b2cc, 0x176 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_OnlineValueCompletion.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ int FUN_00306f3e(int, unsigned char *);
 int FUN_00306f9a(unsigned char [8], unsigned char *, int);
 int FUN_00306fe0(unsigned int, unsigned int, unsigned int);
 int FUN_0030700c(unsigned char [12], unsigned int, int, unsigned char [8]);
-int FUN_0030c96e(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -55,7 +55,6 @@ extern unsigned int FUN_002f7e4c(int, unsigned int, int, int);
 /* Supplied declaration required: FUN_00306f9a. */
 /* Supplied declaration required: FUN_00306fe0. */
 /* Supplied declaration required: FUN_0030700c. */
-/* Supplied declaration required: FUN_0030c96e. */
 
 
 void FUN_0012b2cc(int param_1)
@@ -140,7 +139,7 @@ void FUN_0012b2cc(int param_1)
       else {
         temp_v7 = -0x7ffefff3;
         temp_v2 = FUN_002e7908(&temp_v4,&temp_v7);
-        FUN_0030c96e(param_1,temp_v2);
+        onlineJobFinishValueRequest((OnlineValueJob *)param_1, (const OnlineCallbackResult *)temp_v2);
       }
       onlineStringDestroy(temp_v10);
       return;
@@ -152,7 +151,7 @@ void FUN_0012b2cc(int param_1)
     temp_v7 = -0x7ffefffc;
     piVar2 = (int *)FUN_002e7908(&temp_v4,&temp_v7);
   }
-  FUN_0030c96e(param_1,piVar2);
+  onlineJobFinishValueRequest((OnlineValueJob *)param_1, (const OnlineCallbackResult *)piVar2);
   return;
 }
 

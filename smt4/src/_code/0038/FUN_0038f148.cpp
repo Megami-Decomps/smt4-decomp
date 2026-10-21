@@ -14,7 +14,7 @@ int jobOwnerFreeSlotAndStop(unsigned int *);
 int FUN_002a126c(int *, unsigned int);
 int FUN_002b8244(int);
 int FUN_002ba9ac(unsigned int);
-int FUN_00387af0(unsigned int);
+int aocResetOperationState(unsigned int);
 int FUN_003887cc(int *, unsigned int);
 
 typedef int romwright_code(...);
@@ -41,7 +41,7 @@ extern int byteIsAtLeast100(unsigned int *);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: FUN_002ba9ac. */
-/* Supplied declaration required: FUN_00387af0. */
+/* Supplied declaration required: aocResetOperationState. */
 /* Supplied declaration required: FUN_003887cc. */
 
 
@@ -98,7 +98,7 @@ void FUN_0038f148(unsigned int *param_1)
             return;
           }
           FUN_00233db8(param_1,1);
-          FUN_00387af0(g_aocSystem);
+          aocResetOperationState(g_aocSystem);
           temp_v0 = 2;
         }
         else {

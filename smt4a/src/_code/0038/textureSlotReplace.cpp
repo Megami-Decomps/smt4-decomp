@@ -8,7 +8,7 @@ typedef struct TextureSlot {
 } TextureSlot;
 
 extern void asdTextureRelease(void *texture);
-extern s32 FUN_0025cc50(u32 id);
+extern s32 texIsStexFile(u32 id);
 extern void *asdEffectTextureCreate(u32 id);
 extern void *textureCreateFromImage(u32 id);
 
@@ -18,7 +18,7 @@ void textureSlotReplace(TextureSlot *slot, u32 id)
     if (slot->texture != NULL) {
         asdTextureRelease(slot->texture);
     }
-    if (FUN_0025cc50(id) != 0) {
+    if (texIsStexFile(id) != 0) {
         slot->texture = asdEffectTextureCreate(id);
     } else {
         slot->texture = textureCreateFromImage(id);

@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTable1bOr1cGetRecord(void);
 
-extern unsigned char *FUN_00240cd4(unsigned int);
+extern unsigned char *questGetRuntimeStatus(unsigned int);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
@@ -34,7 +34,7 @@ void FUN_00333af8(unsigned int param_1,int param_2,int param_3)
         temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x1ac);
       }
       if ((!temp_v5 || temp_v2 == param_1) &&
-         ((param_3 == 0 || (pbVar4 = (unsigned char *)FUN_00240cd4(temp_v3 & 0xffff), (*pbVar4 & 1) != 0)))) {
+         ((param_3 == 0 || (pbVar4 = (unsigned char *)questGetRuntimeStatus(temp_v3 & 0xffff), (*pbVar4 & 1) != 0)))) {
         temp_v0 = temp_v4 * 2;
         temp_v4 = temp_v4 + 1;
         *(short *)(param_2 + temp_v0) = (short)temp_v3;

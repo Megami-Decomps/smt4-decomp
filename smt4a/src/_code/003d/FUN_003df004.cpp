@@ -10,7 +10,7 @@ int FUN_001ad9b4(void);
 extern int gameCountersGetWord(unsigned short);
 extern int FUN_001b5660(int);
 extern int FUN_001ba3d4(unsigned short);
-extern int FUN_001ba514(unsigned short);
+extern int partyFindSlotById(unsigned short);
 
 
 void FUN_003df004(int param_1,int param_2,int *param_3)
@@ -54,7 +54,7 @@ void FUN_003df004(int param_1,int param_2,int *param_3)
         *(unsigned char *)((int)param_3 + 6) = 0;
         *(unsigned short *)(param_3 + 1) = *(unsigned short *)(temp_v4 + 0x102);
         if (*(char *)(temp_v3 + 6) != '\x01') {
-          temp_v3 = FUN_001ba514(*(unsigned short *)(temp_v4 + 0x102));
+          temp_v3 = partyFindSlotById(*(unsigned short *)(temp_v4 + 0x102));
           if (-1 < temp_v3) {
             param_3[2] = 1;
             *param_3 = 0;

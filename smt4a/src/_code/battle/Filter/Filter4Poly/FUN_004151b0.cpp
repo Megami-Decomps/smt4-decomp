@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004151b0` (_code @ 0x4151b0, 0x144 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_FilterTexture.h"
 
 extern "C" {
 
 int asdOperatorNew(void);
 int asdMemoryAlloc(int, int, int, int, int);
 int mtx44Copy(int *, unsigned int);
-int FUN_00409e20(int *, unsigned int, unsigned int);
 int FUN_00415310(int *);
 
 typedef int romwright_code(...);
@@ -24,7 +24,6 @@ extern unsigned char DAT_00557d30; /* 0x557d30 */
 /* Supplied declaration required: asdMemoryAlloc. */
 extern unsigned int FUN_0018aeb8(void);
 /* Supplied declaration required: mtx44Copy. */
-/* Supplied declaration required: FUN_00409e20. */
 /* Supplied declaration required: FUN_00415310. */
 
 
@@ -85,7 +84,7 @@ int * FUN_004151b0(int param_1,unsigned int param_2,int param_3)
   (**(romwright_code **)(*piVar2 + 0x10))(piVar2);
   temp_v0 = FUN_0018aeb8();
   mtx44Copy(piVar2 + 6,temp_v0);
-  FUN_00409e20(piVar2,param_2,*(unsigned int *)(piVar2[0x18] + 0x1c));
+  btlFilterLoadTexture((Filter4Poly*)piVar2,param_2,*(unsigned int *)(piVar2[0x18] + 0x1c));
   (**(romwright_code **)(*piVar1 + 0x14))
             (piVar1,*(unsigned int *)(param_1 + 0x34),*(unsigned int *)(param_1 + 0x38),
              *(unsigned int *)(param_1 + 0x3c));

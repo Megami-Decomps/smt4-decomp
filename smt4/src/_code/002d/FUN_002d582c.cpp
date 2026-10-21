@@ -4,28 +4,27 @@
 
 extern "C" {
 
-int FUN_0028c668(unsigned int);
-int FUN_0029bb14(unsigned int);
+void nodeSetPropertyScale(unsigned int, float);
+int FUN_0029bb14(unsigned int, float);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0028c668. */
+/* Supplied declaration required: nodeSetPropertyScale. */
 /* Supplied declaration required: FUN_0029bb14. */
 
 
-void FUN_002d582c(int param_1)
+void FUN_002d582c(int param_1, float in_s0)
 
 {
 /* irregular: irregular input(s): in_s0; 2 native warning(s); review required */
   int temp_v0;
   int temp_v1;
-  float in_s0;
   
-  FUN_0029bb14(*(unsigned int *)(param_1 + 8));
-  FUN_0028c668(*(unsigned int *)(param_1 + 8));
+  FUN_0029bb14(*(unsigned int *)(param_1 + 8), in_s0);
+  nodeSetPropertyScale(*(unsigned int *)(param_1 + 8), in_s0);
   temp_v0 = *(int *)(param_1 + 8);
   if (0 < *(int *)(temp_v0 + 0x68)) {
     *(float *)(temp_v0 + 0x80) = in_s0;

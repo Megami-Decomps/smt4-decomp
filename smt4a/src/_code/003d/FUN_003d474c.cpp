@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0019de98(int, unsigned int);
 int FUN_001ad9b4(void);
-int FUN_003defe0(void);
+unsigned int questHasSpecialDetailPage(unsigned int);
 int partyEntryFlagsBit3(...);
 int FUN_004186e0(void);
 
@@ -25,7 +25,6 @@ extern int dataTableGetEntries(void);
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
 extern int FUN_003de75c(unsigned int);
-/* Supplied declaration required: FUN_003defe0. */
 /* Supplied declaration required: partyEntryFlagsBit3. */
 extern int partyEntryFlagsBit1(void);
 /* Supplied declaration required: FUN_004186e0. */
@@ -86,9 +85,9 @@ void FUN_003d474c(void)
       if (temp_v4 != 0) {
         temp_v4 = partyEntryBitsBit4(temp_v8);
         if (temp_v4 == 0) {
-          FUN_003defe0();
+          temp_v4 = questHasSpecialDetailPage(temp_v8);
 joined_r0x003d4934:
-          if (temp_v8 != 0) {
+          if (temp_v4 != 0) {
             temp_v8 = 10;
             goto LAB_003d493c;
           }
@@ -108,7 +107,7 @@ LAB_003d4938:
         }
         temp_v4 = partyEntryBitsBit4(temp_v8);
         if (temp_v4 == 0) {
-          FUN_003defe0();
+          temp_v4 = questHasSpecialDetailPage(temp_v8);
           goto joined_r0x003d4934;
         }
         goto LAB_003d4938;

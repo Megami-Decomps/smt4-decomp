@@ -6,7 +6,7 @@ extern "C" {
 
 int rectangleResetSelection(...);
 int rectangleInitializeSelection(int, int, int, int);
-int FUN_0023346c(int);
+int uiInitializeEightTimerSet(int);
 int FUN_002637c8(void);
 int FUN_00282bfc(int, int);
 int buttonHelpCreate(void);
@@ -31,8 +31,8 @@ extern unsigned char DAT_00422590; /* 0x422590 */
 
 /* Supplied declaration required: rectangleResetSelection. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-extern unsigned int *FUN_00233228(void);
-/* Supplied declaration required: FUN_0023346c. */
+extern unsigned int *uiSelectionControllerConstruct(void);
+/* Supplied declaration required: uiInitializeEightTimerSet. */
 /* Supplied declaration required: FUN_002637c8. */
 /* Supplied declaration required: FUN_00282bfc. */
 extern int FUN_00287314(int);
@@ -97,14 +97,14 @@ unsigned int * FUN_003a5e30(unsigned int *param_1,unsigned int param_2,int param
   *(unsigned int *)(temp_v1 - 0x9930) = 0;
   *(unsigned char *)(temp_v1 - 0x9c8c) = 0;
   *(unsigned char *)(temp_v1 - 0x9c8b) = 0;
-  FUN_0023346c(temp_v1 - 0x9900);
+  uiInitializeEightTimerSet(temp_v1 - 0x9900);
   rectangleInitializeSelection(temp_v1 - 0x9928,0x140,0,0x2b);
   rectangleInitializeSelection(temp_v1 - 0x9914,0x140,0,0x2b);
   temp_v2 = 0x68;
   asdOperatorNew();
   puVar4 = (unsigned int *)0x0;
   if (temp_v2 != 0) {
-    puVar4 = (unsigned int *)FUN_00233228();
+    puVar4 = (unsigned int *)uiSelectionControllerConstruct();
     *puVar4 = (unsigned int)&DAT_004223b0;
   }
   *(unsigned int **)(temp_v1 - 0x944c) = puVar4;

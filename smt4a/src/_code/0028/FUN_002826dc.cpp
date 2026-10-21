@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_002c28dc(float [11], int, int, int);
+int collisionTestProjectedSpherePlanes(float [11], int, int, int);
 
 /* stack frame of param_4: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -35,7 +35,7 @@ static float romwright_fabs_4(float value)
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002c28dc. */
+/* Supplied declaration required: collisionTestProjectedSpherePlanes. */
 
 
 unsigned int FUN_002826dc(unsigned int *param_1,unsigned int *param_2,int param_3,int param_4)
@@ -92,7 +92,7 @@ LAB_0028278c:
                    (float)temp_v12 * *(float *)(temp_v0 + 0x14)) - *(float *)(temp_v0 + 0x18);
           temp_v14 = romwright_fabs_4(temp_v13);
           if ((temp_v14 < (float)temp_v10) &&
-             (FUN_002c28dc(temp_v18,(int)*(char *)(temp_v0 + 4),(int)*(char *)(temp_v0 + 5),temp_v0),
+             (collisionTestProjectedSpherePlanes(temp_v18,(int)*(char *)(temp_v0 + 4),(int)*(char *)(temp_v0 + 5),temp_v0),
              temp_v15 <= temp_v18[0])) {
             temp_v6 = (float)((unsigned long long)temp_v10 >> 0x20) - *(float *)(temp_v0 + 0xc) * temp_v13;
             temp_v7 = (float)((unsigned long long)temp_v12 >> 0x20) - *(float *)(temp_v0 + 0x10) * temp_v13;

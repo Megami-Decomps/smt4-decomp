@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_00164ce0(u32 job, s32 flag);
-void FUN_00167f24(s32 mode);
+void messageMainSetMode(s32 mode);
 s32 jobIsValid(u32 job);
 
 typedef struct JobSet {
@@ -11,7 +11,7 @@ typedef struct JobSet {
     /* 0x634 */ u32 jobs[4];
 } JobSet;
 
-/* Stops jobs 1..3 of the set `*set` (index 0 is skipped), then runs FUN_00167f24(2); always returns 1. */
+/* Stops jobs 1..3 of the set `*set` (index 0 is skipped), then runs messageMainSetMode(2); always returns 1. */
 u32 FUN_002e5728(JobSet **set)
 {
     s32 valid;
@@ -29,7 +29,7 @@ u32 FUN_002e5728(JobSet **set)
             i = i + 1;
         } while (i < 4);
     }
-    FUN_00167f24(2);
+    messageMainSetMode(2);
     return 1;
 }
 

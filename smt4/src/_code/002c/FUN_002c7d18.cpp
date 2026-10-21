@@ -15,7 +15,7 @@ int FUN_002a34e8(...);
 int mathMatrixTranslateLocal(...);
 int FUN_002aff70(...);
 int FUN_002b011c(...);
-int FUN_002b7064(...);
+int phaseCosInterpolate(...);
 int FUN_002b70cc(...);
 int cameraSetViewMatrix(...);
 int FUN_002c1b64(...);
@@ -122,7 +122,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
 /* Supplied declaration required: FUN_002aff70. */
 /* Supplied declaration required: FUN_002b011c. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002c1b64. */
@@ -313,7 +313,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
             if ((temp_v0 & 0xff) != 0) {
               FUN_00256cd8(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
               FUN_002c1b64(g_titleScene,temp_v29);
-              FUN_002b7064();
+              phaseCosInterpolate();
               FUN_002b70cc();
               temp_v18 = (unsigned long long)(unsigned int)temp_v12 << 0x20;
               FUN_002b011c();
@@ -360,7 +360,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
             if ((temp_v0 & 0xff) != 0) {
               FUN_00256cd8(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
               FUN_002c1b64(g_titleScene,temp_v29);
-              FUN_002b7064();
+              phaseCosInterpolate();
               FUN_002b70cc();
               temp_v18 = (unsigned long long)(unsigned int)temp_v19 << 0x20;
               FUN_002b011c();

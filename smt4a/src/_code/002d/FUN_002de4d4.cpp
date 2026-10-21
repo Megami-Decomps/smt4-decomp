@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameFlagsGetBlock(void);
-int FUN_002c0dbc(int, int, int);
+int mapCollisionQueueQuad(int, int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *, float *);
 
 /* stack frame of param_1: 25 slot(s), 100 byte(s) */
@@ -40,7 +40,7 @@ typedef struct {
 extern int DAT_005f180c; /* 0x5f180c */
 
 /* Supplied declaration required: gameFlagsGetBlock. */
-/* Supplied declaration required: FUN_002c0dbc. */
+/* Supplied declaration required: mapCollisionQueueQuad. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -168,7 +168,7 @@ void FUN_002de4d4(short param_1)
   temp_v4 = temp_v4 + in_s0;
   temp_v5 = temp_v5 + in_s1;
   temp_v6 = temp_v6 + in_s2;
-  FUN_002c0dbc(2,0,(int)param_1);
+  mapCollisionQueueQuad(2,0,(int)param_1);
   DAT_005f180c = DAT_005f180c + 1;
   return;
 }

@@ -7,13 +7,13 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int paramsInit(...);
 int FUN_001513ec(...);
-int FUN_00151408(...);
+int positionStateSet(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdMemoryAllocTracked(...);
 int FUN_001692d4(...);
 int sysMemClear(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -40,13 +40,13 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: FUN_001513ec. */
-/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001692d4. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 unsigned int * FUN_00145280(void)
@@ -66,7 +66,7 @@ unsigned int * FUN_00145280(void)
   puVar1[1] = temp_v0;
   FUN_001527d8(temp_v0,0xffffffff);
   FUN_001513ec(puVar1[1],3,0xff);
-  FUN_00151408(puVar1[1],0,0xffffffff);
+  positionStateSet(puVar1[1],0,0xffffffff);
   *(unsigned char *)(puVar1 + 2) = 0;
   *(unsigned char *)(puVar1 + 0xd) = 0;
   *(unsigned char *)((int)puVar1 + 0x35) = 0;
@@ -112,7 +112,7 @@ unsigned int * FUN_00145280(void)
   *puVar1 = (unsigned int)puVar3;
   taskCreateDraw(&LAB_00145510,0x86,0,0,FUN_0014f3f4,0,puVar1,puVar3);
   taskCreateDraw(&LAB_0014551c,0xe2,0,0,FUN_0014f3f4,0,puVar1,*puVar1);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0x65);
+  paramsClearPacket(puVar1 + 0x65);
   paramsInit(puVar1 + 0x65,&DAT_0052fe6c,0x114,&DAT_0052ff80,0xcc,&DAT_0053004c,0x54,0,0,
                &DAT_005300a0,0x94c);
   return puVar1;

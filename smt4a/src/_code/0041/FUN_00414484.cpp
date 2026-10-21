@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e32a4(...);
+void FUN_002e32a4(int kind, ...);
 int onlineStringDestroy(...);
 int FUN_002e9590(...);
 int vectorCopyHeader(...);

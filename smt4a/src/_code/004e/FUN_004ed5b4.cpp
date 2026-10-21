@@ -10,7 +10,7 @@ int FUN_004e5b5c(...);
 int FUN_004e7080(...);
 int FUN_004e7c04(...);
 int FUN_004e8454(...);
-int FUN_004e9f74(...);
+int btlUnitMarkTargetCandidates(...);
 int FUN_004eb838(...);
 
 int btlScriptUnitHasFlags(...);
@@ -28,7 +28,7 @@ int clearTwo200Buffers(unsigned int);
 int FUN_004fb670(int, unsigned int *);
 int FUN_004fcffc(int, int, unsigned int, int);
 int FUN_004fd508(int, unsigned int *, int, unsigned int);
-int FUN_004fedd8(int, unsigned int *, int);
+int btlReflectRequestPairScalar(int, unsigned int *, int);
 
 /* stack frame of param_2: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -94,7 +94,7 @@ extern unsigned int DAT_0057129c; /* 0x57129c */
 extern unsigned int DAT_005712b8; /* 0x5712b8 */
 extern unsigned int DAT_005712bc; /* 0x5712bc */
 extern int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: sysMemClear. */
@@ -117,14 +117,14 @@ extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004e7080. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: FUN_004e8454. */
-/* Supplied declaration required: FUN_004e9f74. */
+/* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: FUN_004eb838. */
 extern int FUN_004f2708(int, int, unsigned int);
 /* Supplied declaration required: clearTwo200Buffers. */
 /* Supplied declaration required: FUN_004fb670. */
 /* Supplied declaration required: FUN_004fcffc. */
 /* Supplied declaration required: FUN_004fd508. */
-/* Supplied declaration required: FUN_004fedd8. */
+/* Supplied declaration required: btlReflectRequestPairScalar. */
 
 
 unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
@@ -240,7 +240,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
     *(unsigned int *)(temp_v19 + 0x50) = *(unsigned int *)(temp_v19 + 0x50) & 0xff7fffff;
     temp_v19 = temp_v25;
   } while (temp_v25 < 0x6d);
-  clearTwo200Buffers(DAT_00573808);
+  clearTwo200Buffers(g_btlAux);
   *(unsigned short *)(param_2[10] + 0x1be) = 0;
   *(unsigned short *)(param_2[10] + 0x1c0) = 0;
   *(unsigned int *)(param_2[8] + 0x150) = 0;
@@ -328,7 +328,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         FUN_004fb670(0,param_2);
       }
       temp_v27[0] = 1;
-      FUN_004fedd8(1,param_2,(int)*(short *)(*param_1 + 0x2004));
+      btlReflectRequestPairScalar(1,param_2,(int)*(short *)(*param_1 + 0x2004));
       temp_v24 = 0;
       temp_v19 = (int)*(short *)(param_2[9] + 0x6a);
       if (((*(unsigned short *)(param_2[10] + 0x110) & 0x80) != 0) &&
@@ -533,11 +533,11 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
         if (temp_v28 != '\0') {
           if (temp_v28 != '\x01') {
             if (temp_v28 == '\x02') {
-              FUN_004e9f74(param_1,temp_v26,2);
+              btlUnitMarkTargetCandidates(param_1,temp_v26,2);
             }
           }
           else {
-            FUN_004e9f74(param_1,temp_v26,1);
+            btlUnitMarkTargetCandidates(param_1,temp_v26,1);
           }
         }
         else {

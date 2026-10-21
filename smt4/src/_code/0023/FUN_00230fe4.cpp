@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230fe4` (_code @ 0x230fe4, 0x184 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ExtendedRecordCall.h"
 
 extern "C" {
 
-int FUN_00210854(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
 int jobGetScalarValue(void);
 int FUN_002b0750(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
-int FUN_002b1fc4(int *, int *, int *, int *, int, int);
+int quadSetOrderedVectors(int *, int *, int *, int *, int, int);
 int FUN_002bed3c(void);
 int efctSetSpeed(void);
 int __aeabi_vec_ctor_nocookie_nodtor(int *, unsigned char *, int, int);
@@ -29,10 +29,9 @@ typedef struct {
 
 extern unsigned char LAB_00141adc; /* 0x141adc */
 
-/* Supplied declaration required: FUN_00210854. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002b0750. */
-/* Supplied declaration required: FUN_002b1fc4. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
@@ -126,12 +125,12 @@ void FUN_00230fe4(unsigned int param_1,unsigned int param_2,unsigned int param_3
     uStack_44 = uStack_b4;
     uStack_40 = uStack_b0;
     uStack_3c = uStack_ac;
-    FUN_002b1fc4(&temp_v9,&temp_v8,&temp_v7,&temp_v6,0,0);
+    quadSetOrderedVectors(&temp_v9,&temp_v8,&temp_v7,&temp_v6,0,0);
     efctSetSpeed();
   }
   temp_v2 = (unsigned int)((unsigned long long)param_6 >> 0x20);
   uStack_b4 = param_7;
-  FUN_00210854(param_1,param_2,param_3,param_4,param_5,(int)param_6);
+  texTableRecordCallExtended(param_1,param_2,param_3,param_4,param_5,(int)param_6,temp_v2,param_7);
   efctSetSpeed();
   FUN_002bed3c();
   return;

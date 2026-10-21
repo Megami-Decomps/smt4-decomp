@@ -4,12 +4,13 @@
 
 extern "C" {
 
-int FUN_0022ac3c(int, unsigned int);
+struct AocSystem;
+struct Table02Sub2Entry;
+Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *, unsigned int);
 int dataTable00FindById(void);
 
 extern int g_aocSystem; /* 0x433158 */
 
-/* Supplied declaration required: FUN_0022ac3c. */
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
@@ -29,7 +30,7 @@ unsigned int FUN_003bc198(unsigned int param_1)
   temp_v1 = dataTableGetEntries();
   temp_v3 = temp_v1;
   if (((-1 < (int)param_1) && (temp_v2 = dataTableGetCount(temp_v0), param_1 < temp_v2)) &&
-     (temp_v3 = g_aocSystem, FUN_0022ac3c(g_aocSystem,param_1), temp_v3 == 0)) {
+     (temp_v3 = (int)aocFindSpriteTemplateByKey((AocSystem *)g_aocSystem,param_1), temp_v3 == 0)) {
     temp_v3 = temp_v1 + param_1 * 0x1c;
   }
   if (temp_v3 != 0) {

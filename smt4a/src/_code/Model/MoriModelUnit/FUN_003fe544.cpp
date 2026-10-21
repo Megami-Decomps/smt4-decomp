@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_003fdd1c(int, unsigned int);
-int FUN_003fe3e8(int);
+int moriModelUnitAllocateChannels(int);
 int FUN_003fe90c(int);
 int nn_math_ARMv6_MTX34CopyAsm(int, unsigned int *);
 
@@ -33,7 +33,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 /* Supplied declaration required: FUN_00178b04. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_003fdd1c. */
-/* Supplied declaration required: FUN_003fe3e8. */
+/* Supplied declaration required: moriModelUnitAllocateChannels. */
 /* Supplied declaration required: FUN_003fe90c. */
 extern unsigned int FUN_0041a3ac(void);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -55,7 +55,7 @@ void FUN_003fe544(int param_1,int param_2,unsigned int param_3)
     FUN_003fdd1c(param_1,*(unsigned int *)(**(int **)(param_2 + 0x3c) + param_3 * 4));
   }
   *(int *)(param_1 + 0x20c) = param_2;
-  FUN_003fe3e8(param_1);
+  moriModelUnitAllocateChannels(param_1);
   temp_v0 = *(int *)(param_1 + 0x20c);
   temp_v6 = temp_v0 == 0;
   if (!temp_v6) {

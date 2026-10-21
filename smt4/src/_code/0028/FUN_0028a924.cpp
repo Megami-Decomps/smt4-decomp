@@ -21,7 +21,7 @@ int FUN_0026c9c0(void);
 int FUN_0026d144(...);
 int FUN_0026d3e0(...);
 int FUN_00292be4(unsigned int, int);
-int FUN_00293348(...);
+int partyPanelSetState(...);
 int FUN_0029e874(int);
 int gameGetUnitRecord(...);
 int FUN_002ae164(void);
@@ -29,7 +29,7 @@ int dataTable08Sub1GetRecord(void);
 int buttonHelpSetPreset(...);
 int __aeabi_memset4(int, int, int);
 int FUN_002e36f8(void);
-int FUN_002effac(int);
+int partyPanelFocusSelectedPartyMember(int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0026d144. */
 /* Supplied declaration required: FUN_0026d3e0. */
 /* Supplied declaration required: FUN_00292be4. */
-/* Supplied declaration required: FUN_00293348. */
+/* Supplied declaration required: partyPanelSetState. */
 /* Supplied declaration required: FUN_0029378c. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_0029e874. */
@@ -66,7 +66,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_002e36f8. */
-/* Supplied declaration required: FUN_002effac. */
+/* Supplied declaration required: partyPanelFocusSelectedPartyMember. */
 
 
 void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
@@ -199,14 +199,14 @@ void FUN_0028a924(int param_1,unsigned int param_2,unsigned short param_3)
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 3);
-    FUN_002effac(1);
+    partyPanelFocusSelectedPartyMember(1);
     FUN_001d13b0();
     *(unsigned int *)(temp_v0 + 0x20) = 6;
     FUN_0026c868();
     if (*(int *)(temp_v0 + 0x1c) != 0x17) {
       return;
     }
-    FUN_00293348(*(unsigned int *)(temp_v0 + 0x20),1);
+    partyPanelSetState(*(unsigned int *)(temp_v0 + 0x20),1);
     return;
   case 5:
   case 6:
@@ -692,7 +692,7 @@ LAB_0028b6d0:
   if (*(int *)(temp_v0 + 0x1c) != 0x17) {
     return;
   }
-  FUN_00293348(*(unsigned int *)(temp_v0 + 0x20),1);
+  partyPanelSetState(*(unsigned int *)(temp_v0 + 0x20),1);
   return;
 }
 

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017addc` (_code @ 0x17addc, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail is a codec fragment entered with live R5/R7/SL/LR state, calls a nonstandard refill continuation, and returns through saved R6; it is not a standalone C/C++ function boundary. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -6,11 +6,11 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_0015f858(unsigned int, int);
-int FUN_00168518(int, int);
+int dataTableGetCategoryEntry(int, int);
 int FUN_00184310(void);
 int FUN_00227af0(unsigned char [64]);
 int FUN_0022fcb8(void);
-int FUN_002a3258(void);
+int menuStateReset(void);
 int FUN_002c13b0(int);
 int FUN_002c13d4(int, int);
 int FUN_002e4308(int, unsigned int, int);
@@ -37,13 +37,13 @@ extern unsigned int *g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: textFormatBuffer. */
 extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_0015f858. */
-/* Supplied declaration required: FUN_00168518. */
+/* Supplied declaration required: dataTableGetCategoryEntry. */
 /* Supplied declaration required: FUN_00184310. */
 extern int gameGetOptions(void);
 extern int FUN_001ba3d4(unsigned short);
 /* Supplied declaration required: FUN_00227af0. */
 /* Supplied declaration required: FUN_0022fcb8. */
-/* Supplied declaration required: FUN_002a3258. */
+/* Supplied declaration required: menuStateReset. */
 extern int FUN_002a4860(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
 /* Supplied declaration required: FUN_002c13b0. */
@@ -107,7 +107,7 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
       temp_v4 = gameGetOptions();
       temp_v0 = *(unsigned short *)(temp_v4 + 0x12e);
       temp_v4 = gameGetOptions();
-      FUN_00168518((int)*(short *)(temp_v4 + 300),temp_v0);
+      dataTableGetCategoryEntry((int)*(short *)(temp_v4 + 300),temp_v0);
       temp_v5 = (short)(int)temp_v7;
       textFormatBuffer(temp_v7,&LAB_004aa70c);
       FUN_0022fcb8();
@@ -160,11 +160,11 @@ void FUN_004aa3d4(unsigned int param_1,unsigned int param_2,int param_3,int para
     else {
       textFormatBuffer(temp_v7,&LAB_004aa734);
     }
-    FUN_002a3258();
+    menuStateReset();
     break;
   case 0xb:
     textFormatBuffer(temp_v7,&LAB_004aa744);
-    FUN_002a3258();
+    menuStateReset();
   }
   FUN_00227af0(temp_v7);
   menuStateStartSelect(0);

@@ -39,7 +39,7 @@ extern unsigned int gameDataBlocksGetWord(void);
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_00371f18. */
 /* Supplied declaration required: FUN_00387ac4. */
-extern int FUN_0038b568(void);
+extern int aocDataBlockHasEntries(void);
 /* Supplied declaration required: FUN_003a7b2c. */
 
 
@@ -110,7 +110,7 @@ void FUN_0020b490(int param_1,unsigned int param_2)
   sysPlaySe(temp_v1);
 LAB_0020b584:
   if (*(int *)(param_1 + 0x4364) == 0x17) {
-    temp_v2 = FUN_0038b568();
+    temp_v2 = aocDataBlockHasEntries();
     if (temp_v2 != 0) {
       FUN_00371f18();
       FUN_003a7b2c();

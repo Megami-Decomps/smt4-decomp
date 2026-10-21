@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026ec2c(...);
+int collisionTestProjectedSpherePlanes(...);
 int FUN_00276078(int);
 int FUN_002878fc(...);
 int mapBlockBitSet(...);
@@ -30,7 +30,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_0026ec2c. */
+/* Supplied declaration required: collisionTestProjectedSpherePlanes. */
 /* Supplied declaration required: FUN_00276078. */
 /* Supplied declaration required: FUN_002878fc. */
 /* Supplied declaration required: mapBlockBitSet. */
@@ -89,7 +89,7 @@ unsigned int FUN_002804ec(float *param_1)
                       if (temp_v0 != '\v') {
                         if (((temp_v0 == '\r') && ((temp_v6 & 0x2000) == 0)) &&
                            ((temp_v7 < temp_v8 &&
-                            (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),
+                            (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),
                                           (int)*(char *)(temp_v4 + 5),temp_v4),
                             (float)in_d10 <= temp_v11[0])))) {
                           FUN_00276078((int)*(short *)(temp_v4 + 6));
@@ -99,7 +99,7 @@ unsigned int FUN_002804ec(float *param_1)
                         }
                       }
                       else if ((((temp_v6 & 0x800) == 0) && (temp_v7 < temp_v8)) &&
-                              (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),
+                              (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),
                                             (int)*(char *)(temp_v4 + 5),temp_v4),
                               (float)in_d10 <= temp_v11[0])) {
                         FUN_00276078((int)*(short *)(temp_v4 + 6));
@@ -109,7 +109,7 @@ unsigned int FUN_002804ec(float *param_1)
                       }
                     }
                     else if ((((temp_v6 & 0x400) == 0) && (temp_v7 < temp_v8)) &&
-                            (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),
+                            (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),
                                           (int)*(char *)(temp_v4 + 5),temp_v4),
                             (float)in_d10 <= temp_v11[0])) {
                       temp_v6 = temp_v6 | 0x400;
@@ -117,28 +117,28 @@ unsigned int FUN_002804ec(float *param_1)
                     }
                   }
                   else if ((((temp_v6 & 0x200) == 0) && (temp_v7 < temp_v8)) &&
-                          (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5)
+                          (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5)
                                         ,temp_v4), (float)in_d10 <= temp_v11[0])) {
                     temp_v6 = temp_v6 | 0x200;
                     DAT_0049f94c = (unsigned char)*(unsigned short *)(temp_v4 + 10);
                   }
                 }
                 else if ((((temp_v6 & 0x100) == 0) && (temp_v7 < temp_v8)) &&
-                        (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),
+                        (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),
                                       temp_v4), (float)in_d10 <= temp_v11[0])) {
                   DAT_0049fb40 = *(unsigned short *)(temp_v4 + 10);
                   temp_v6 = temp_v6 | 0x100;
                 }
               }
               else if ((((temp_v6 & 0x10) == 0) && (temp_v7 < temp_v8)) &&
-                      (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),
+                      (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),
                                     temp_v4), (float)in_d10 <= temp_v11[0])) {
                 DAT_0049fb30 = (int)*(short *)(temp_v4 + 6);
                 temp_v6 = temp_v6 | 0x10;
               }
             }
             else if ((((temp_v6 & 8) == 0) && (temp_v7 < temp_v8)) &&
-                    (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),temp_v4
+                    (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),temp_v4
                                  ), (float)in_d10 <= temp_v11[0])) {
               temp_v2 = *(unsigned int *)(temp_v4 + 0x60);
               temp_v3 = *(unsigned int *)(temp_v4 + 100);
@@ -165,7 +165,7 @@ unsigned int FUN_002804ec(float *param_1)
             }
           }
           else if ((((temp_v6 & 4) == 0) && (temp_v7 < temp_v8)) &&
-                  (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),temp_v4),
+                  (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),temp_v4),
                   (float)in_d10 <= temp_v11[0])) {
             mapBlockBitSet((int)*(short *)(temp_v4 + 6),1);
             FUN_002878fc((int)*(short *)(temp_v4 + 6));
@@ -173,7 +173,7 @@ unsigned int FUN_002804ec(float *param_1)
           }
         }
         else if ((((temp_v6 & 2) == 0) && (temp_v7 < temp_v8)) &&
-                (FUN_0026ec2c(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),temp_v4),
+                (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),temp_v4),
                 (float)in_d10 <= temp_v11[0])) {
           temp_v6 = temp_v6 | 2;
         }

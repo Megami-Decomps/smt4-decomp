@@ -8,7 +8,7 @@ extern int DAT_005f16d0; /* 0x5f16d0 */
 extern unsigned int DAT_005f16d4; /* 0x5f16d4 */
 
 extern int gameFlagsGetBlock(void);
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 extern int dataTable2FType0GetEntry(unsigned int);
 extern int dataTable2FType1GetEntry(unsigned int);
 extern int dataTable2FType2GetEntry(unsigned int);
@@ -22,7 +22,7 @@ void FUN_00352eec(void)
   int temp_v2;
   
   temp_v1 = gameFlagsGetBlock();
-  temp_v2 = FUN_00376f94();
+  temp_v2 = lmapGetSpawnIndex();
   if (temp_v2 < 100) {
     *(unsigned char *)(temp_v1 + 0x7c6) = 0;
   }

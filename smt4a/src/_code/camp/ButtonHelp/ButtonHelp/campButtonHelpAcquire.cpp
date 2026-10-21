@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
-int FUN_00151408(...);
+int positionStateSet(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdMemoryAllocTracked(...);
@@ -15,7 +15,7 @@ int FUN_00275bc8(...);
 int sysMemClear(...);
 int FUN_00387240(...);
 int FUN_003872b8(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -46,7 +46,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -54,7 +54,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_003872b8. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void campButtonHelpAcquire(void)
@@ -85,7 +85,7 @@ void campButtonHelpAcquire(void)
     taskCreateDraw(&LAB_0034230c,0xea,0,0,FUN_002e169c,0,0,puVar4);
     puVar3[2] = (unsigned int)puVar5;
     puVar1 = DAT_0057f0c8;
-    Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0057f0c8 + 5);
+    paramsClearPacket(DAT_0057f0c8 + 5);
     paramsInit(puVar1 + 5,&DAT_0052b740,0x30,&DAT_0052b770,0x18,&DAT_0052b788,0x18,0,0,
                  &DAT_0052b7a0,0xa8);
     temp_v1 = 0;
@@ -119,7 +119,7 @@ void campButtonHelpAcquire(void)
     temp_v0 = spriteHandleCreate(0);
     puVar3[0x19e] = temp_v0;
     FUN_001527d8(temp_v0,0xf4f4f4ff);
-    FUN_00151408(puVar3[0x19e],0,0x646464ff);
+    positionStateSet(puVar3[0x19e],0,0x646464ff);
     temp_v0 = DAT_0057f0d0;
     FUN_00275bc8(DAT_0057f0d0,DAT_0057f0cc);
     puVar3[0x1a0] = temp_v0;

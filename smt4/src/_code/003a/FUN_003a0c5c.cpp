@@ -18,7 +18,7 @@ typedef struct {
 
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
-extern int FUN_00293edc(void);
+extern int objSlotsAllEmpty(void);
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: lmapSceneGetScript. */
@@ -73,7 +73,7 @@ void FUN_003a0c5c(unsigned int *param_1)
     param_1[2] = 2;
   }
   lmapSceneGetScript();
-  temp_v0 = FUN_00293edc();
+  temp_v0 = objSlotsAllEmpty();
   if (temp_v0 == 0) {
     return;
   }

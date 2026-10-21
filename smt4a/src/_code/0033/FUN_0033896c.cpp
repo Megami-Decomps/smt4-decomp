@@ -1,37 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033896c` (_code @ 0x33896c, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct VariantRecord {
+    u8 unk00[0x36];
+    s8 variant;
+};
 
 extern "C" {
+u32 flagSelectVariant(void);
+const VariantRecord *dataTable04FindById(u32 id);
 
-int dataTable04FindById(void);
-
-/* Supplied declaration required: dataTable04FindById. */
-extern int flagSelectVariant(void);
-
-
-unsigned int FUN_0033896c(void)
-
+// Find the first table-four record for the currently selected flag variant.
+u32 FUN_0033896c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = flagSelectVariant();
-  temp_v3 = (unsigned int)(temp_v0 == 1);
-  if ((temp_v0 != 1) && (temp_v0 == 2)) {
-    temp_v3 = 2;
-  }
-  temp_v2 = 1;
-  while ((temp_v1 = temp_v2, dataTable04FindById(), temp_v1 == 0 || ((int)*(char *)(temp_v1 + 0x36) != temp_v3))) {
-    temp_v2 = temp_v2 + 1;
-    if (temp_v2 >= 401) {
-      return 0;
+    u32 found = 0;
+    s32 variant = 0;
+    switch (flagSelectVariant()) {
+    case 1:
+        variant = 1;
+        break;
+    case 2:
+        variant = 2;
+        break;
     }
-  }
-  return temp_v2;
+    for (u32 id = 1; id <= 400; ++id) {
+        const VariantRecord *record = dataTable04FindById(id);
+        if (record != NULL && record->variant == variant) {
+            found = id;
+            break;
+        }
+    }
+    return found;
 }
-
-} /* extern "C" */
+}

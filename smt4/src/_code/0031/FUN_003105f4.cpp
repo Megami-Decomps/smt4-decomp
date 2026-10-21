@@ -17,7 +17,7 @@ struct fn_003105f4_arg0 {
     int field_0xd38; /* +0xd38 */
 };
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 
@@ -31,7 +31,7 @@ unsigned int FUN_003105f4(fn_003105f4_arg0 *param_1)
   
   temp_v1 = 0;
   if (param_1->field_0xd38 != 0) {
-    if ((param_1->field_0xd38 == 1) && (temp_v0 = FUN_0019e0c0(param_1->field_0xd04), temp_v0 == 2)) {
+    if ((param_1->field_0xd38 == 1) && (temp_v0 = scrRunOpcodesStub(param_1->field_0xd04), temp_v0 == 2)) {
       param_1->field_0xd2c = 6;
       temp_v1 = 2;
       param_1->field_0xd38 = 0;

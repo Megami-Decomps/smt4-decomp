@@ -14,7 +14,7 @@ typedef struct {
 
 extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
-extern unsigned int *DAT_004655c0; /* 0x4655c0 */
+extern unsigned int *g_textureBindingState; /* 0x4655c0 */
 extern unsigned int DAT_004655c4; /* 0x4655c4 */
 extern unsigned int DAT_004655c8; /* 0x4655c8 */
 extern unsigned int DAT_004655cc; /* 0x4655cc */
@@ -51,8 +51,8 @@ void FUN_00137cc4(void)
   unsigned int temp_v6;
   unsigned int *puStack_2c;
   
-  puVar1 = DAT_004655c0;
-  temp_v5 = (float)VectorSignedToFloat(DAT_004655c0[10],(unsigned char)(in_fpscr >> 0x16) & 3);
+  puVar1 = g_textureBindingState;
+  temp_v5 = (float)VectorSignedToFloat(g_textureBindingState[10],(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v5 = temp_v5 * 0.5f;
   temp_v0 = 0;
   if (romwright_fabs_4(temp_v5) != 0.0f) {

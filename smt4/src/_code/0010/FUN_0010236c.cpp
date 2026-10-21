@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010236c` (_code @ 0x10236c, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: removed calls at +0x0c and +0x18 take (0, 0x04000000/0x04000026); missing weak callee symbols must be recovered before matching. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -3,16 +3,16 @@
 
 extern "C" {
 
-extern ScopedHalfwordState DAT_005b4028;
+extern ScopedHalfwordState g_allocationAddressRanges;
 
 /* Saves the original halfword on first entry and applies the scoped value. */
 void FUN_001b4ba4(u16 value)
 {
-    HalfwordTarget *target = DAT_005b4028.target;
-    if (DAT_005b4028.depth == 0) {
-        DAT_005b4028.previous = target->value;
+    HalfwordTarget *target = g_allocationAddressRanges.target;
+    if (g_allocationAddressRanges.depth == 0) {
+        g_allocationAddressRanges.previous = target->value;
     }
-    ++DAT_005b4028.depth;
+    ++g_allocationAddressRanges.depth;
     target->value = value;
 }
 

@@ -1,27 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00136c40` (_code @ 0x136c40, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: first hook argument 0x04000000 uses MOV instead of retail's literal load. */
+#include "AsdSDK/AsdDebugHooks.h"
+
+struct EncodingTableSlot {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ const u8* characterTable;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ const u8* conversionTable;
+};
 
 extern "C" {
+EncodingTableSlot* FUN_002e2ec0(void);
+const u8* FUN_00197c2c(u32 kind, const char* encoding);
+const u8* FUN_001bc5ac(u32 kind, const char* encoding);
 
-extern int FUN_00197c2c(unsigned int);
-extern unsigned int FUN_001bc5ac(unsigned int);
-extern int FUN_002e2ec0(unsigned int, unsigned int);
-
-
+// Register the default encoding tables after the release-disabled resource hooks.
 void FUN_00136c40(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_002e2ec0(0,0x4000027);
-  temp_v1 = FUN_00197c2c(0);
-  *(int *)(temp_v0 + 4) = temp_v1 + 1;
-  temp_v2 = FUN_001bc5ac(0);
-  *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
-  return;
+    asdDebugHookPtrInt(NULL, 0x04000000);
+    asdDebugHookPtrInt(NULL, 0x04000027);
+    EncodingTableSlot* slot = FUN_002e2ec0();
+    slot->characterTable = FUN_00197c2c(0, NULL) + 1;
+    slot->conversionTable = FUN_001bc5ac(0, NULL);
 }
-
-} /* extern "C" */
+}

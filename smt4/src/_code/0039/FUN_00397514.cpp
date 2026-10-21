@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_00296ee0(void *obj, int state);
 int buttonHelpSetPreset(int id);
-extern int FUN_0019e0c0(u32 value);
+extern int scrRunOpcodesStub(u32 value);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x20];
@@ -17,7 +17,7 @@ typedef struct Obj {
 
 void FUN_00397514(Obj *obj)
 {
-    if (FUN_0019e0c0(obj->unk654) != 2) {
+    if (scrRunOpcodesStub(obj->unk654) != 2) {
         return;
     }
     FUN_00296ee0(obj, 2);

@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int wordPairCopy(...);
 int FUN_001ac2d4(...);
-int FUN_00280c5c(...);
+int lightOwnerRegister(...);
 int nodeSetTranslation(...);
 int faderSetValue(...);
 int FUN_0036bb1c(...);
@@ -24,7 +24,7 @@ extern int FUN_001ab8c0(int);
 /* Supplied declaration required: FUN_001ac2d4. */
 extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
-/* Supplied declaration required: FUN_00280c5c. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: faderSetValue. */
 /* Supplied declaration required: FUN_0036bb1c. */
@@ -72,7 +72,7 @@ unsigned int FUN_00378a90(void)
           piVar3[temp_v2 * 0xb + 0x44a] = 2;
           *(unsigned char *)(piVar3 + temp_v2 * 0xb + 0x44e) = 1;
           piVar3[temp_v2 * 0xb + 0x44f] = -1;
-          FUN_00280c5c(piVar3[temp_v2 * 0xb + 0x44d],1);
+          lightOwnerRegister(piVar3[temp_v2 * 0xb + 0x44d],1);
           nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v2 * 0xb + 0x446);
           FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
@@ -118,7 +118,7 @@ unsigned int FUN_00378a90(void)
           piVar3[temp_v1 * 0xb + 0x44a] = 2;
           *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x44e) = 1;
           piVar3[temp_v1 * 0xb + 0x44f] = -1;
-          FUN_00280c5c(temp_v3,1);
+          lightOwnerRegister(temp_v3,1);
           nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v1 * 0xb + 0x446);
           FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
@@ -171,7 +171,7 @@ unsigned int FUN_00378a90(void)
         piVar3[temp_v1 * 0xb + 0x4ac] = temp_v2;
         piVar3[temp_v1 * 0xb + 0x4ad] = 2;
         *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x4b1) = 1;
-        FUN_00280c5c(temp_v3,1);
+        lightOwnerRegister(temp_v3,1);
         nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v1 * 0xb + 0x4a9
                     );
         FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
@@ -254,7 +254,7 @@ LAB_00379048:
       piVar3[temp_v2 * 0xb + 0x4ac] = temp_v3;
       piVar3[temp_v2 * 0xb + 0x4ad] = 2;
       *(unsigned char *)(piVar3 + temp_v2 * 0xb + 0x4b1) = 1;
-      FUN_00280c5c(piVar3[temp_v2 * 0xb + 0x4b0],1);
+      lightOwnerRegister(piVar3[temp_v2 * 0xb + 0x4b0],1);
       nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
       FUN_0036bb1c(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
       FUN_001ac2d4(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);

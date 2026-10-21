@@ -44,7 +44,7 @@ extern short DAT_0057a674; /* 0x57a674 */
 extern short DAT_0057a676; /* 0x57a676 */
 extern short DAT_0057a678; /* 0x57a678 */
 extern short DAT_0057a67a; /* 0x57a67a */
-extern unsigned char DAT_0057aa00; /* 0x57aa00 */
+extern unsigned char g_battleEffectSettings; /* 0x57aa00 */
 extern unsigned char DAT_0057aa01; /* 0x57aa01 */
 extern unsigned char DAT_0057aa02; /* 0x57aa02 */
 extern unsigned char DAT_0057aa03; /* 0x57aa03 */
@@ -94,7 +94,7 @@ void FUN_004d229c(int param_1,fn_004d229c_arg1 *param_2)
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),3,DAT_0057aa1c >> 0x18,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),4,temp_v3 >> 0x10,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),5,temp_v2 >> 8,0,0xff,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),6,DAT_0057aa00,0,0xff,0);
+  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),6,g_battleEffectSettings,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),7,DAT_0057aa01,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,DAT_0057aa02,0,0xff,0);
   asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),9,DAT_0057aa03,0,0xff,0);

@@ -10,7 +10,7 @@ void *resourceResolveHeaderPointer(PolyTexDesc *desc);
 u32 *resourceResolveDataPointer(PolyTexDesc *desc);
 void rt_memcpy(void *dst, const void *src, int size);
 void textureSlotReplace(PolyGeom *geom, u32 *resource);
-void *FUN_002491b4(u32 *resource);
+void *spriteGroupCreateFromFile(u32 *resource);
 u32 FUN_0024c3c8(int id);
 void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
@@ -48,7 +48,7 @@ PolyTexPivotObject *effPolyTexPivotCreate(PolyTexDesc *desc)
                 textureSlotReplace(obj->geom, resource);
                 break;
             case 2:
-                obj->resource2 = FUN_002491b4(resource);
+                obj->resource2 = spriteGroupCreateFromFile(resource);
                 break;
             case 4:
                 obj->geom->unk04 = FUN_0024c3c8(*resource & 0xffff);

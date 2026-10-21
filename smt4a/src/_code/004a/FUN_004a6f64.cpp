@@ -9,10 +9,10 @@ public:
     virtual void operation5();
 };
 extern "C" {
-extern OperationObject **DAT_0057f0b4;
+extern OperationObject **g_animatedPageSelection;
 /* Invokes operation 5 and reports success. */
 int FUN_004a6f64() {
-    (*DAT_0057f0b4)->operation5();
+    (*g_animatedPageSelection)->operation5();
     return 0;
 }
 }

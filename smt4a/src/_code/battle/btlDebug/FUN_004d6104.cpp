@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d6104` (_code @ 0x4d6104, 0x1924 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
@@ -40,10 +41,10 @@ int asdListBoxGetIntValuePtr(...);
 int asdListBoxSetIntItem(...);
 int listBoxItemHasOwner(...);
 int FUN_003592dc(...);
-int FUN_003874fc(...);
+unsigned int asdListBoxGetSelectedItemId(unsigned int);
 int dataTable22GetCount(void);
 int dataTable3Type0Count(void);
-int FUN_004d130c(unsigned int *, int);
+void btlDebugNormalizeMarkerFlags(void*, BtlMainStateA*);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -96,7 +97,7 @@ extern unsigned short DAT_0057a674; /* 0x57a674 */
 extern unsigned short DAT_0057a676; /* 0x57a676 */
 extern unsigned short DAT_0057a678; /* 0x57a678 */
 extern unsigned short DAT_0057a67a; /* 0x57a67a */
-extern unsigned char DAT_0057aa00; /* 0x57aa00 */
+extern unsigned char g_battleEffectSettings; /* 0x57aa00 */
 extern unsigned char DAT_0057aa01; /* 0x57aa01 */
 extern unsigned char DAT_0057aa02; /* 0x57aa02 */
 extern unsigned char DAT_0057aa03; /* 0x57aa03 */
@@ -124,11 +125,11 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdListBoxGetFloatValuePtr. */
 /* Supplied declaration required: FUN_00340edc. */
 /* Supplied declaration required: FUN_003592dc. */
-/* Supplied declaration required: FUN_003874fc. */
+/* Supplied declaration required: asdListBoxGetSelectedItemId. */
 /* Supplied declaration required: FUN_003ed238. */
 /* Supplied declaration required: dataTable22GetCount. */
 /* Supplied declaration required: dataTable3Type0Count. */
-/* Supplied declaration required: FUN_004d130c. */
+/* Supplied declaration required: btlDebugNormalizeMarkerFlags. */
 /* Supplied declaration required: FUN_004d1470. */
 /* Supplied declaration required: FUN_004d1af8. */
 /* Supplied declaration required: FUN_004d2124. */
@@ -182,7 +183,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     }
     break;
   case 1:
-    temp_v6 = FUN_003874fc(param_1[4]);
+    temp_v6 = asdListBoxGetSelectedItemId(param_1[4]);
     switch(temp_v6) {
     case 0:
       puVar3 = (unsigned int *)asdListBoxGetIntValuePtr(param_1[4]);
@@ -343,7 +344,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     }
     temp_v5 = padButtonIsPressed(0);
     if (temp_v5 != 0) {
-      FUN_004d130c(param_1,param_2);
+      btlDebugNormalizeMarkerFlags(param_1, reinterpret_cast<BtlMainStateA*>(param_2));
       temp_v6 = 0x20;
     }
     else {
@@ -356,7 +357,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     }
     break;
   case 2:
-    temp_v6 = FUN_003874fc(param_1[4]);
+    temp_v6 = asdListBoxGetSelectedItemId(param_1[4]);
     asdListBoxGetIntValuePtr(param_1[4],temp_v6);
     switch(temp_v6) {
     case 0:
@@ -544,7 +545,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 4;
     break;
   case 4:
-    temp_v1 = FUN_003874fc(param_1[4]);
+    temp_v1 = asdListBoxGetSelectedItemId(param_1[4]);
     if (param_1[2] == 1) {
       param_1[3] = temp_v1;
       temp_v6 = 5;
@@ -590,7 +591,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     }
     break;
   case 6:
-    temp_v6 = FUN_003874fc(param_1[4]);
+    temp_v6 = asdListBoxGetSelectedItemId(param_1[4]);
     temp_v5 = param_1[3];
     if (temp_v5 != 0) {
       if (temp_v5 != 1) {
@@ -626,7 +627,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 8;
     break;
   case 8:
-    temp_v6 = FUN_003874fc(param_1[4]);
+    temp_v6 = asdListBoxGetSelectedItemId(param_1[4]);
     switch(temp_v6) {
     case 0:
       puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(param_1[4],temp_v6);
@@ -700,7 +701,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     case 6:
       puVar3 = (unsigned int *)asdListBoxGetIntValuePtr(param_1[4],6);
       temp_v0 = (unsigned char)*puVar3;
-      puVar7 = &DAT_0057aa00;
+      puVar7 = &g_battleEffectSettings;
       *puVar7 = temp_v0;
       break;
     case 7:
@@ -878,7 +879,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x14;
     break;
   case 0x14:
-    temp_v6 = FUN_003874fc(param_1[4]);
+    temp_v6 = asdListBoxGetSelectedItemId(param_1[4]);
     switch(temp_v6) {
     case 0:
       puVar3 = (unsigned int *)asdListBoxGetIntValuePtr(param_1[4],0);
@@ -960,7 +961,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x18;
     break;
   case 0x18:
-    temp_v5 = FUN_003874fc(param_1[4]);
+    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
     if (temp_v5 != 0) {
       if (temp_v5 == 1) {
         temp_v5 = listBoxItemHasOwner(param_1[4]);
@@ -1017,7 +1018,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x1a;
     break;
   case 0x1a:
-    temp_v6 = FUN_003874fc(param_1[4]);
+    temp_v6 = asdListBoxGetSelectedItemId(param_1[4]);
     switch(temp_v6) {
     case 0:
       puVar3 = (unsigned int *)asdListBoxGetFloatValuePtr(param_1[4]);

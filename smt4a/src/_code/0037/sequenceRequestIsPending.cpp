@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s8 DAT_005e1f4c;
+extern s8 g_deferredSequenceRequest;
 
 s32 sequenceRequestIsPending(void)
 {
-    return DAT_005e1f4c;
+    return g_deferredSequenceRequest;
 }
 
 } /* extern "C" */

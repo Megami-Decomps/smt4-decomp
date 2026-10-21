@@ -1,42 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00483834` (_code @ 0x483834, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: timer arithmetic uses r0 instead of retail's r1, delaying the controller-to-r0 move; all 26 operations are present. */
+#include "shard/W5_W5Match7_SceneState.h"
+
+struct TimedController {
+    u32 flags;
+    u8 unk04[8];
+    s32 timer; // 0x0c
+};
 
 extern "C" {
+void FUN_00482f20(TimedController *controller);
+void FUN_004834b0(TimedController *controller, s32 mode);
 
-int FUN_00482f20(unsigned int *);
-int FUN_004834b0(unsigned int *, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-/* Supplied declaration required: FUN_00482f20. */
-/* Supplied declaration required: FUN_004834b0. */
-
-
-void FUN_00483834(unsigned int *param_1)
-
+// Advance and update the controller only while its primary flag allows input.
+void FUN_00483834(TimedController *controller)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  if (((*(signed char *)((unsigned char *)&g_gameState + 0x21)) == '\0') && ((*param_1 & 1) == 0)) {
-    if ((*param_1 & 2) == 0) {
-      temp_v0 = param_1[3];
-      param_1[3] = temp_v0 + 1;
-      if ((int)(temp_v0 + 1) >= 0x78) {
-        param_1[3] = 0;
-        FUN_004834b0(param_1,2);
-      }
+    if (g_gameState.controllerFlags.primary == 0 && !(controller->flags & 1)) {
+        if (!(controller->flags & 2)) {
+            ++controller->timer;
+            if (controller->timer >= 120) {
+                controller->timer = 0;
+                FUN_004834b0(controller, 2);
+            }
+        }
+        FUN_00482f20(controller);
     }
-    FUN_00482f20(param_1);
-    return;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

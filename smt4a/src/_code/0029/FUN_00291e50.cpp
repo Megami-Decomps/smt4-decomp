@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_003b5714(...);
 int VectorSignedToFloat(int, int);
 
@@ -14,8 +14,8 @@ extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b5cb4. */
-extern int FUN_003798f0(void);
+/* Supplied declaration required: distSpatial. */
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_003b5714. */
 
 
@@ -37,7 +37,7 @@ void FUN_00291e50(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v0 = g_lmapMainState;
   if (param_1 != 0) {
     FUN_003b5714(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
-    temp_v1 = FUN_003798f0();
+    temp_v1 = dataTableGetRecord23();
     temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(temp_v0 + 0x9310) = temp_v4;
     temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -53,7 +53,7 @@ void FUN_00291e50(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     *(unsigned int *)(temp_v0 + 0x9318) = temp_v2;
   }
   FUN_003b5714(*(unsigned int *)(temp_v0 + 0x40),param_3,param_4);
-  temp_v1 = FUN_003798f0();
+  temp_v1 = dataTableGetRecord23();
   temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v0 + 0x931c) = temp_v4;
   temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -61,7 +61,7 @@ void FUN_00291e50(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v0 + 0x9324) = temp_v4;
   temp_v5 = *(float *)(temp_v0 + 0x9310);
-  FUN_002b5cb4();
+  distSpatial();
   temp_v7 = *(float *)(temp_v0 + 0x931c) - *(float *)(temp_v0 + 0x9310);
   *(float *)(temp_v0 + 0x9330) = *(float *)(temp_v0 + 0x9324) - *(float *)(temp_v0 + 0x9318);
   *(float *)(temp_v0 + 0x9328) = temp_v7;

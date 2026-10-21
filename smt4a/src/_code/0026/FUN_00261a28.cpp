@@ -8,12 +8,12 @@ int asdOperatorDeleteC(...);
 
 int gameFlagIsSet(...);
 int FUN_001f50fc(...);
-int FUN_002159dc(...);
+int gameDataSetTableFlag(...);
 int gameDataCopySaveToWork(void);
 int FUN_00283d74(int);
-int FUN_002854a8(...);
+int gameValueBlockSet(...);
 int FUN_002c7ad8(void);
-int FUN_002e0798(...);
+int gameDataAddCappedPoints(...);
 int asdOperatorNewD(void);
 int FUN_002f4374(void);
 int gameDataBlocksSetFlagBits(...);
@@ -21,7 +21,7 @@ int FUN_00363c58(int);
 int FUN_003df7c4(...);
 int playerSyncPair2AOnce(void);
 int FUN_003e45bc(...);
-int FUN_003e48dc(...);
+void FUN_003e48dc(unsigned int);
 int FUN_003fd5bc(...);
 int gameFlagSetValue(...);
 int FUN_0046bd44(...);
@@ -79,14 +79,14 @@ extern int gameDataBlocksGetSaveData(void);
 extern int gameGetSlotRecord(unsigned int);
 extern unsigned int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_001f50fc. */
-extern int FUN_00213b5c(void);
-/* Supplied declaration required: FUN_002159dc. */
+extern int gameDataBlocksGetTableFlag(void);
+/* Supplied declaration required: gameDataSetTableFlag. */
 /* Supplied declaration required: gameDataCopySaveToWork. */
 /* Supplied declaration required: FUN_00283d74. */
-/* Supplied declaration required: FUN_002854a8. */
-extern int FUN_002a4654(void);
+/* Supplied declaration required: gameValueBlockSet. */
+extern int gameDataBlocksValueGet(void);
 /* Supplied declaration required: FUN_002c7ad8. */
-/* Supplied declaration required: FUN_002e0798. */
+/* Supplied declaration required: gameDataAddCappedPoints. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
 /* Supplied declaration required: FUN_002f4374. */
@@ -258,7 +258,7 @@ void FUN_00261a28(int param_1)
   temp_v23 = gameFlagIsSet(0x555);
   temp_v27 = gameFlagIsSet(0x558);
   temp_v28 = (unsigned int *)gameFlagIsSet(0x559);
-  temp_v24 = FUN_00213b5c();
+  temp_v24 = gameDataBlocksGetTableFlag();
   if (temp_v24 == 4) {
     temp_v24 = 0;
   }
@@ -294,7 +294,7 @@ void FUN_00261a28(int param_1)
   FUN_00283d74(0);
   FUN_00363c58(0);
   temp_v0 = gameDataBlocksGetSaveData();
-  temp_v1 = FUN_002a4654();
+  temp_v1 = gameDataBlocksValueGet();
   *(unsigned int *)(temp_v0 + 0x21d90) = *(unsigned int *)(temp_v1 + 0x21d90);
   temp_v9 = *(unsigned int *)(temp_v1 + 0x2154c);
   temp_v10 = *(unsigned int *)(temp_v1 + 0x21550);
@@ -478,7 +478,7 @@ void FUN_00261a28(int param_1)
   if (temp_v28 != (unsigned int *)0x0) {
     gameFlagSetValue(0x559,1);
   }
-  FUN_002159dc(temp_v24);
+  gameDataSetTableFlag(temp_v24);
   if (temp_v21 != 0) {
     gameFlagSetValue(0x603,1);
   }
@@ -557,7 +557,7 @@ void FUN_00261a28(int param_1)
         *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v1 + 4);
         break;
       case 5:
-        FUN_002e0798(*temp_v28);
+        gameDataAddCappedPoints(*temp_v28);
         break;
       case 6:
         temp_v2 = 0;
@@ -631,7 +631,7 @@ void FUN_00261a28(int param_1)
   } while (temp_v7 < 0x10);
   temp_v7 = 0;
   do {
-    FUN_002854a8(temp_v7,0);
+    gameValueBlockSet(temp_v7,0);
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 10);
   FUN_002c7ad8();

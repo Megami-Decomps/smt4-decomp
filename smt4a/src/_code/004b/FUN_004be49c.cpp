@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004be49c` (_code @ 0x4be49c, 0x16c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
 
 int FUN_002a4914(int, int);
 int FUN_002a4964(int, int);
 int FUN_002a7324(int);
-int FUN_0037e0d0(unsigned int, int);
 int flagValueSub(unsigned int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,6 @@ typedef struct {
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002a7324. */
-/* Supplied declaration required: FUN_0037e0d0. */
 extern unsigned int FUN_003e4d68(unsigned int);
 extern int FUN_004801ac(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: flagValueSub. */
@@ -54,7 +53,7 @@ void FUN_004be49c(int param_1)
         FUN_002a4914(param_1 + 0x260,temp_v0 % 4);
         FUN_002a4964(param_1 + 0x260,(int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2);
         temp_v1 = FUN_003e4d68(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x2c4) & 0xffff);
-        FUN_0037e0d0(temp_v1,0);
+        statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
         FUN_002a7324(1);
         return;
       }
@@ -73,12 +72,12 @@ void FUN_004be49c(int param_1)
       FUN_002a4914(param_1 + 0x260,temp_v0 % 4);
       FUN_002a4964(param_1 + 0x260,(int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1e)) >> 2);
       temp_v1 = FUN_003e4d68(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x2c4) & 0xffff);
-      FUN_0037e0d0(temp_v1,0);
+      statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
       FUN_002a7324(1);
       return;
     }
   }
-  FUN_0037e0d0(temp_v1,0);
+  statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
   FUN_002a7324(1);
   return;
 }

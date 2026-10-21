@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0019dc70(void);
+int sentinelLookupGetValue(void);
 
 extern int FUN_0019be8c(unsigned int);
-/* Supplied declaration required: FUN_0019dc70. */
+/* Supplied declaration required: sentinelLookupGetValue. */
 
 
 unsigned int FUN_001688c4(int *param_1)
@@ -41,7 +41,7 @@ unsigned int FUN_001688c4(int *param_1)
               return temp_v3;
             }
             if (temp_v2 != 0xf81a) {
-              FUN_0019dc70();
+              sentinelLookupGetValue();
               temp_v1 = temp_v1 + temp_v2;
             }
             else {

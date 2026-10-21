@@ -14,7 +14,7 @@ typedef struct {
 
 extern int FUN_001d1d78(...); /* 0x1d1d78 */
 extern int FUN_001f6524(...); /* 0x1f6524 */
-extern int FUN_002073e4(...); /* 0x2073e4 */
+extern int devilCompareRaceLevelDescending(...); /* 0x2073e4 */
 extern int FUN_00219720(...); /* 0x219720 */
 extern int FUN_002c6e90(...); /* 0x2c6e90 */
 extern int devilCompareByEntryValue(...); /* 0x2dcf14 */
@@ -47,7 +47,7 @@ void FUN_00191df4(int *param_1)
   temp_v2 = ~(*pbVar3 >> 7) & 1;
   if ((*pbVar3 & 0x7f) == 1) {
     if (temp_v2 != 0) {
-      FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,FUN_002073e4);
+      FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,devilCompareRaceLevelDescending);
     }
     else {
       FUN_002b7bca(temp_v1 + 0x6278,*(unsigned int *)(temp_v1 + 0x6670),2,devilCompareByRankGradeId);

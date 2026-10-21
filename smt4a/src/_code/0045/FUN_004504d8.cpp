@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern romwright_code *DAT_0058918c; /* 0x58918c */
+extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
 
 /* Supplied declaration required: FUN_0017cf74. */
 /* Supplied declaration required: FUN_001c4598. */
@@ -41,7 +41,7 @@ void FUN_004504d8(unsigned int param_1,int *param_2,unsigned int param_3)
   if (temp_v0 != 0x2010000) {
     if ((int)temp_v0 < 0x2010000) {
       if (temp_v0 == 0x1010000) {
-        temp_v1 = (*DAT_0058918c)(0x10000,0x101,param_1,temp_v3);
+        temp_v1 = (*g_gfxAllocateCallback)(0x10000,0x101,param_1,temp_v3);
         if ((param_2[3] != 0) && (temp_v2 = (int)param_2 + param_2[3] + 0xc, temp_v2 != 0)) {
           nnnstdMemCpy(temp_v1,temp_v2,temp_v3);
           FUN_001c4598(temp_v1,temp_v3);
@@ -51,7 +51,7 @@ void FUN_004504d8(unsigned int param_1,int *param_2,unsigned int param_3)
       }
     }
     else if (temp_v0 == 0x2020000 || temp_v0 == 0x2030000) {
-      temp_v1 = (*DAT_0058918c)(param_3 & 0x30000,0x101,param_1,temp_v3);
+      temp_v1 = (*g_gfxAllocateCallback)(param_3 & 0x30000,0x101,param_1,temp_v3);
       piVar3 = param_2 + 3;
       temp_v4 = param_2[3] == 0;
       if (!temp_v4) {

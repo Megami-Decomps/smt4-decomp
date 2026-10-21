@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00293a04(...);
-int FUN_00293ba8(void);
+int asdAnimGetTrackLastFrame(...);
+int statusDownRestoreTabForMode(void);
 int FUN_00296284(...);
 int statusCameraApply(void);
 int eventQueueAddUnique(...);
@@ -17,7 +17,7 @@ int FUN_002c1658(...);
 int __aeabi_uidivmod(...);
 
 int FUN_0020ffe8(...);
-int FUN_00293db0(...);
+int objSetAnglesDegrees(...);
 int FUN_00293e08(...);
 int FUN_00293e78(...);
 int FUN_00293f10(...);
@@ -77,17 +77,17 @@ extern char *DAT_0044e144; /* 0x44e144 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0020ffe8. */
-/* Supplied declaration required: FUN_00293a04. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 extern int FUN_00293a60(void);
 extern int FUN_00293a88(void);
 extern int FUN_00293aac(void);
 extern int FUN_00293ac0(void);
 extern int FUN_00293b8c(void);
-/* Supplied declaration required: FUN_00293ba8. */
-/* Supplied declaration required: FUN_00293db0. */
+/* Supplied declaration required: statusDownRestoreTabForMode. */
+/* Supplied declaration required: objSetAnglesDegrees. */
 /* Supplied declaration required: FUN_00293e08. */
 /* Supplied declaration required: FUN_00293e78. */
-extern int FUN_00293edc(unsigned int);
+extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
@@ -101,7 +101,7 @@ extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00294e18. */
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: FUN_00294fe0. */
-extern int FUN_0029505c(unsigned int);
+extern int nkdwHeaderParse(unsigned int);
 /* Supplied declaration required: FUN_002950e8. */
 /* Supplied declaration required: FUN_002958f8. */
 /* Supplied declaration required: FUN_00296284. */
@@ -215,7 +215,7 @@ unsigned int FUN_0018f660(void)
     } while (temp_v7 < 0x22);
     if (temp_v2) {
       if (pcVar4[0x1e7c] != '\0') {
-        temp_v7 = FUN_0029505c(*(unsigned int *)(pcVar4 + 0x1e74));
+        temp_v7 = nkdwHeaderParse(*(unsigned int *)(pcVar4 + 0x1e74));
         if (temp_v7 == 0) break;
         pcVar4[0x1e7c] = '\0';
       }
@@ -407,7 +407,7 @@ LAB_0018fbe4:
     pcVar5[0x12df] = '\0';
     break;
   case 5:
-    temp_v7 = FUN_0029505c(*(unsigned int *)(pcVar4 + 0x1e74));
+    temp_v7 = nkdwHeaderParse(*(unsigned int *)(pcVar4 + 0x1e74));
     if (temp_v7 != 0) {
       pcVar4[0x1e7c] = '\0';
       pcVar4[0x1e7d] = '\x01';
@@ -439,7 +439,7 @@ LAB_0018fbe4:
     else {
       pcVar13 = pcVar4 + 0x1e80;
       FUN_00297684(*(unsigned int *)pcVar13);
-      temp_v7 = FUN_00293edc(*(unsigned int *)pcVar13);
+      temp_v7 = objSlotsAllEmpty(*(unsigned int *)pcVar13);
       if (temp_v7 != 0) {
         temp_v6 = vec2GetXInt(pcVar4 + 0x38c);
         temp_v15 = *(float *)(pcVar4 + 0x1e88);
@@ -449,7 +449,7 @@ LAB_0018fbe4:
         FUN_00293e78(*(unsigned int *)pcVar13,&temp_v14);
         in_s0 = *(float *)(pcVar4 + 0x1e9c);
         FUN_00293e08(*(unsigned int *)pcVar13);
-        FUN_00293db0(*(unsigned int *)pcVar13,pcVar4 + 0x1e90);
+        objSetAnglesDegrees(*(unsigned int *)pcVar13,pcVar4 + 0x1e90);
 LAB_0018fd84:
         if ((pcVar4[0x12f2] != '\0') || ((*pcVar5 != '\x03' && (*pcVar5 != '\t')))) {
           timerStart(pcVar4 + 0x38c,1,0);
@@ -492,7 +492,7 @@ LAB_0018fd84:
               pcVar4[0x12e9] = '\0';
               pcVar4[0x12ea] = '\0';
               pcVar4[0x12eb] = '\0';
-              FUN_00293ba8();
+              statusDownRestoreTabForMode();
             }
           }
           else {
@@ -593,7 +593,7 @@ LAB_0018ffcc:
             }
           }
           pcVar5 = pcVar4 + 0x1e80;
-          FUN_00293db0(*(unsigned int *)pcVar5,pcVar4 + 0x1e90);
+          objSetAnglesDegrees(*(unsigned int *)pcVar5,pcVar4 + 0x1e90);
           statusCameraApply();
           FUN_00297684(*(unsigned int *)pcVar5);
           temp_v6 = vec2GetXInt(pcVar4 + 0x38c);
@@ -690,7 +690,7 @@ LAB_00190190:
                 pcVar4[0x12e9] = -1;
                 pcVar4[0x12ea] = -1;
                 pcVar4[0x12eb] = -1;
-                FUN_00293ba8();
+                statusDownRestoreTabForMode();
                 temp_v6 = 0x100016f;
                 goto LAB_001903c0;
               }
@@ -722,7 +722,7 @@ LAB_00190190:
                 pcVar4[0x12e9] = '\0';
                 pcVar4[0x12ea] = '\0';
                 pcVar4[0x12eb] = '\0';
-                FUN_00293ba8();
+                statusDownRestoreTabForMode();
                 temp_v6 = 0x100016f;
                 goto LAB_001903c0;
               }
@@ -749,7 +749,7 @@ LAB_00190190:
                 pcVar4[0x12e5] = '\0';
                 pcVar4[0x12e6] = '\0';
                 pcVar4[0x12e7] = '\0';
-                FUN_00293ba8();
+                statusDownRestoreTabForMode();
                 temp_v6 = 0x100016e;
                 goto LAB_001903c0;
               }
@@ -859,7 +859,7 @@ joined_r0x00190660:
     if ((0 < *(short *)(pcVar4 + 0x12fe)) && (*(int *)(pcVar4 + 0x1e74) != 0)) {
       piVar14 = (int *)(pcVar4 + 0x1e78);
       *piVar14 = *piVar14 + 2;
-      FUN_00293a04(*(int *)(pcVar4 + 0x1e74),0);
+      asdAnimGetTrackLastFrame(*(int *)(pcVar4 + 0x1e74),0);
       __aeabi_uidivmod(*piVar14,(int)in_s0);
       *piVar14 = temp_v8;
     }

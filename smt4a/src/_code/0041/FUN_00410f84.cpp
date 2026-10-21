@@ -5,12 +5,12 @@
 extern "C" {
 
 int asdMemFree(void);
-int FUN_002804b0(unsigned char *, unsigned int *, int);
+int asdLoadFileAsyncSimple(unsigned char *, unsigned int *, int);
 int FUN_003e503c(void);
 int FUN_003eaf20(void);
 int FUN_003ecfb4(int, int, unsigned int, int);
 int FUN_003f14a0(...);
-int FUN_00401128(unsigned int);
+int controllerGroupSetPosition(unsigned int);
 int FUN_004102d8(...);
 int FUN_004116a0(unsigned int *);
 int FUN_004118d0(unsigned int *);
@@ -35,18 +35,18 @@ extern int btlGetMainState(void);
 extern unsigned int saveSlotFindSelected(void);
 extern int FUN_00187168(void);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002804b0. */
-extern int FUN_003e4a00(void);
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
+extern int partyCountActiveSlots(void);
 extern unsigned int FUN_003e4fdc(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_003eaf20. */
 /* Supplied declaration required: FUN_003ecfb4. */
 /* Supplied declaration required: FUN_003f14a0. */
-/* Supplied declaration required: FUN_00401128. */
+/* Supplied declaration required: controllerGroupSetPosition. */
 /* Supplied declaration required: FUN_004102d8. */
 /* Supplied declaration required: FUN_004116a0. */
 /* Supplied declaration required: FUN_004118d0. */
-extern int FUN_00411bb4(unsigned int *);
+extern int btlStageGetModeIndex(unsigned int *);
 /* Supplied declaration required: FUN_00411c04. */
 /* Supplied declaration required: FUN_00411cec. */
 /* Supplied declaration required: FUN_00412488. */
@@ -86,12 +86,12 @@ void FUN_00410f84(unsigned int *param_1)
       asdMemFree();
       param_1[0x61] = 0;
     }
-    FUN_002804b0(&DAT_00529834,param_1 + 0x61,0);
+    asdLoadFileAsyncSimple(&DAT_00529834,param_1 + 0x61,0);
     FUN_004f1530(g_btlCamera);
     puVar1 = g_btlCamera;
     g_btlCamera[3] = 0;
     puVar1[4] = 0;
-    temp_v0 = FUN_00411bb4(param_1);
+    temp_v0 = btlStageGetModeIndex(param_1);
     puVar1 = g_btlCamera;
     if (-1 < temp_v0) {
       temp_v0 = temp_v0 * 0x1c;
@@ -105,9 +105,9 @@ void FUN_00410f84(unsigned int *param_1)
     param_1[7] = 0;
     param_1[8] = 0xffffffff;
     FUN_00411c04(param_1,1);
-    temp_v0 = FUN_00411bb4(param_1);
+    temp_v0 = btlStageGetModeIndex(param_1);
     if (-1 < temp_v0) {
-      temp_v1 = FUN_003e4a00();
+      temp_v1 = partyCountActiveSlots();
       temp_v9 = *(float *)(temp_v0 * 0x1c + 0x52978c);
       temp_v10 = *(float *)(temp_v0 * 0x1c + 0x529790);
       temp_v0 = 0;
@@ -119,7 +119,7 @@ void FUN_00410f84(unsigned int *param_1)
           temp_v0 = temp_v4;
         } while (temp_v4 < temp_v1);
       }
-      FUN_00401128(g_btlStageModel);
+      controllerGroupSetPosition(g_btlStageModel);
       return;
     }
     break;

@@ -8,7 +8,7 @@ int asd3dSoundActorIsPlaying(void);
 int FUN_002cc08c(int, int);
 int FUN_002cc1c0(int, unsigned char [16]);
 int FUN_002ebc68(int, int);
-int FUN_002fc250(void);
+int asdSoundGetPlayerPriority(void);
 
 /* Supplied declaration required: asd3dSoundActorIsPlaying. */
 extern int FUN_002c1d5c(void);
@@ -17,7 +17,7 @@ extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: FUN_002cc1c0. */
 extern int FUN_002ebc34(int);
 /* Supplied declaration required: FUN_002ebc68. */
-/* Supplied declaration required: FUN_002fc250. */
+/* Supplied declaration required: asdSoundGetPlayerPriority. */
 
 
 int FUN_00291e40(int param_1)
@@ -65,7 +65,7 @@ int FUN_00291e40(int param_1)
       temp_v1 = 0;
       do {
         temp_v2 = FUN_002ebc34(temp_v1);
-        FUN_002fc250();
+        asdSoundGetPlayerPriority();
         if (temp_v3 < temp_v2) {
           temp_v3 = temp_v2;
           temp_v5 = temp_v1;

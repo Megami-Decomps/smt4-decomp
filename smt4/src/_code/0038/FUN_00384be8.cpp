@@ -11,7 +11,7 @@ int FUN_00290d5c(int);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_002973d8(void);
-int FUN_00297468(unsigned char [64], unsigned int *, int);
+int asdLoadFileAsyncSimple(unsigned char [64], unsigned int *, int);
 int scrScriptProcessDestroy(void);
 int libc_strcat(...);
 int buttonHelpSetPreset(int);
@@ -22,7 +22,7 @@ int FUN_002bff50(void);
 int asdMemFree(void);
 int memClear(unsigned int *, int);
 int jyoucyuGetTableEntry(int);
-int FUN_002d582c(...);
+void FUN_002d582c(unsigned int, float);
 int FUN_002e1230(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -34,7 +34,7 @@ extern unsigned char LAB_00384f78; /* 0x384f78 */
 extern unsigned char LAB_00385234; /* 0x385234 */
 extern unsigned char LAB_00385254; /* 0x385254 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00210194. */
 extern int dataTable27Sub0GetRecord(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00235554. */
@@ -47,7 +47,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002973d8. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -88,7 +88,7 @@ void FUN_00384be8(unsigned int *param_1)
         return;
       }
       FUN_00210194(param_1[*(int *)(param_1[0x36a] + 4) + 0x343]);
-      FUN_002d582c(param_1[*(int *)(*puVar6 + 4) + 0x343]);
+      FUN_002d582c(param_1[*(int *)(*puVar6 + 4) + 0x343], 0.0f);
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
       *puVar6 = 0;
     }
@@ -122,7 +122,7 @@ void FUN_00384be8(unsigned int *param_1)
     param_1[2] = 0;
     break;
   case 1:
-    temp_v4 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
+    temp_v4 = scrRunOpcodesStub(*(unsigned int *)param_1[0x171]);
     if (temp_v4 != 2) {
       temp_v4 = messageWindowIsState1();
       if (temp_v4 != 0) {
@@ -156,7 +156,7 @@ void FUN_00384be8(unsigned int *param_1)
         param_1[0x369] = temp_v2;
         temp_v2 = param_1[temp_v2 + 0x364];
         param_1[0x36a] = (unsigned int)(param_1 + temp_v2 * 2 + 0x357);
-        FUN_002d582c(param_1[param_1[temp_v2 * 2 + 0x358] + 0x343]);
+        FUN_002d582c(param_1[param_1[temp_v2 * 2 + 0x358] + 0x343], 1.0f);
         FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
         param_1[2] = param_1[2] + 1;
         *param_1 = *param_1 | 0x100;
@@ -195,8 +195,8 @@ void FUN_00384be8(unsigned int *param_1)
     temp_v0 = *(unsigned short *)(temp_v4 + *(int *)param_1[0x36a] * 0x88 + 0x6a);
     textFormatBuffer(temp_v6,&LAB_00385234,temp_v0,temp_v0);
     textFormatBuffer(temp_v7,&LAB_00385254,temp_v0);
-    FUN_00297468(temp_v6,puVar8,0);
-    FUN_00297468(temp_v7,param_1 + 0x16f,0);
+    asdLoadFileAsyncSimple(temp_v6,puVar8,0);
+    asdLoadFileAsyncSimple(temp_v7,param_1 + 0x16f,0);
     param_1[2] = param_1[2] + 1;
     return;
   case 3:
@@ -208,7 +208,7 @@ void FUN_00384be8(unsigned int *param_1)
        (temp_v4 = effIsFinished(*(unsigned int *)(param_1[*(int *)(param_1[0x36a] + 4) + 0x343] + 8)),
        temp_v4 != 0)) {
       FUN_00210194(param_1[*(int *)(param_1[0x36a] + 4) + 0x343]);
-      FUN_002d582c(param_1[*(int *)(*puVar6 + 4) + 0x343]);
+      FUN_002d582c(param_1[*(int *)(*puVar6 + 4) + 0x343], 0.0f);
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
       temp_v2 = param_1[0x16e];
       FUN_00297060(temp_v2,param_1[0x16f]);
@@ -224,9 +224,9 @@ void FUN_00384be8(unsigned int *param_1)
     }
     break;
   case 4:
-    temp_v4 = FUN_0019e0c0(param_1[0x170]);
+    temp_v4 = scrRunOpcodesStub(param_1[0x170]);
     if (temp_v4 == 2) {
-      FUN_002d582c(param_1[*(int *)(param_1[0x36a] + 4) + 0x343]);
+      FUN_002d582c(param_1[*(int *)(param_1[0x36a] + 4) + 0x343], 1.0f);
       FUN_002e1230(param_1[*(int *)(*puVar6 + 4) + 0x343],0);
       FUN_002bff50();
       if (param_1[0x170] != 0) {

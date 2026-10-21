@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned char DAT_0044e650; /* 0x44e650 */
+extern unsigned char g_titleContentFileSystem; /* 0x44e650 */
 
 /* Supplied declaration required: nn_fs_ipc_FileSystem_InitializeWithSdkVersion. */
 
@@ -23,7 +23,7 @@ unsigned int FUN_0011bb34(unsigned int param_1)
   unsigned int temp_v0 [2];
   
   temp_v0[0] = param_1;
-  (*(unsigned int *)((unsigned char *)&DAT_0044e650 + 0x10)) = param_1;
+  (*(unsigned int *)((unsigned char *)&g_titleContentFileSystem + 0x10)) = param_1;
   nn_fs_ipc_FileSystem_InitializeWithSdkVersion(temp_v0,0x40201c8);
   return 0;
 }

@@ -14,9 +14,9 @@ int FUN_00407110(unsigned int *, unsigned char [128]);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 int FUN_0040ae70(unsigned int, int);
-int FUN_0040b0f8(unsigned int, unsigned char [128]);
+int resourceOwnerLoadNamed(unsigned int, unsigned char [128]);
 int FUN_0045b538(int);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
@@ -45,11 +45,11 @@ extern int FUN_00102c30(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(unsigned int);
-/* Supplied declaration required: FUN_0040b0f8. */
+/* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: FUN_0045b538. */
 
 
@@ -89,14 +89,14 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
   ;
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   param_1[6] = temp_v1;
   FUN_0040aa6c();
   FUN_0040aad4(param_1[6],0);
   FUN_0045b538(*(int *)(param_1[6] + 0xc) + 0xc);
   temp_v9 = *(int *)(param_1[6] + 4);
-  FUN_0040ace8(g_handleRegistry,temp_v9);
+  handleRegistryRegisterObject(g_handleRegistry,temp_v9);
   FUN_003fe86c(temp_v9,0,1);
   controllerSetPosition(temp_v9);
   FUN_003fd7b4(temp_v9);
@@ -104,7 +104,7 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
   FUN_00407110(param_1,temp_v11);
   textFormatBuffer(temp_v11,&LAB_00407e78,param_2);
   temp_v1 = g_handleRegistry;
-  FUN_0040b0f8(g_handleRegistry,temp_v11);
+  resourceOwnerLoadNamed(g_handleRegistry,temp_v11);
   temp_v0 = FUN_0040af60(temp_v1);
   if (temp_v0 != 0) {
     FUN_0040ae70(temp_v1,1);
@@ -153,14 +153,14 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
                  0x15e);
     temp_v1 = 0;
     if (temp_v0 != 0) {
-      temp_v1 = FUN_0040ac08();
+      temp_v1 = modelListInit();
     }
     param_1[8] = temp_v1;
     FUN_0040aa6c();
     FUN_0040ab7c(param_1[8],0);
     FUN_0040aad4(param_1[8],0);
     temp_v1 = *(unsigned int *)(param_1[8] + 4);
-    FUN_0040ace8(g_handleRegistry,temp_v1);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v1);
     FUN_003fe86c(temp_v1,0,1);
     controllerSetPosition(temp_v1);
     FUN_003fd7b4(temp_v1);
@@ -170,14 +170,14 @@ void FUN_00407ab0(unsigned int *param_1,int param_2,int param_3)
                  0x16c);
     temp_v1 = 0;
     if (temp_v0 != 0) {
-      temp_v1 = FUN_0040ac08();
+      temp_v1 = modelListInit();
     }
     param_1[7] = temp_v1;
     FUN_0040aa6c();
     FUN_0040ab7c(param_1[7],0);
     FUN_0040aad4(param_1[7],0);
     temp_v1 = *(unsigned int *)(param_1[7] + 4);
-    FUN_0040ace8(g_handleRegistry,temp_v1);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v1);
     FUN_003fe86c(temp_v1,0,1);
     controllerSetPosition(temp_v1);
     param_1[0x182] = param_1[0x188];

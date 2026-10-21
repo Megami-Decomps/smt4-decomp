@@ -1,60 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj55bc90D1Ev` (_code @ 0x457010, 0x14c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: LDRD combines buffer-owner/begin loads and narrows the saved frame; O2 may restore retail's scalar load/store scheduling. */
+#include "shard/W6_W6Match7_OwnedCollections.h"
 
-extern "C" {
-
-typedef int romwright_code(...);
-extern unsigned char DAT_0055bc98; /* 0x55bc98 */
-
-
-unsigned int * _ZN9Obj55bc90D1Ev(unsigned int *param_1)
-
+namespace {
+inline void destroyCollection(AllocatorOwnedCollection*& slot)
 {
-  unsigned int *puVar1;
-  int *piVar2;
-  int *piVar3;
-  unsigned int *puVar4;
-  unsigned int *puVar5;
-  
-  *param_1 = (unsigned int)&DAT_0055bc98;
-  puVar5 = (unsigned int *)param_1[4];
-  if (puVar5 != (unsigned int *)0x0) {
-    puVar4 = (unsigned int *)puVar5[3];
-    for (puVar1 = (unsigned int *)puVar5[2]; puVar1 != puVar4; puVar1 = puVar1 + 1) {
-      piVar2 = (int *)*puVar1;
-      piVar3 = (int *)piVar2[1];
-      if (piVar3 != (int *)0x0) {
-        (**(romwright_code **)(*piVar2 + 4))(piVar2);
-        (**(romwright_code **)(*piVar3 + 0xc))(piVar3,piVar2);
-      }
+    AllocatorOwnedCollection* collection = slot;
+    if (collection == NULL) {
+        return;
     }
-    puVar5[3] = puVar5[2];
-    if ((int *)puVar5[1] != (int *)0x0 && puVar5[2] != 0) {
-      (**(romwright_code **)(*(int *)puVar5[1] + 0xc))();
+    AllocatorOwnedCollectionEntry** end = collection->end;
+    for (AllocatorOwnedCollectionEntry** current = collection->begin; current != end; ++current) {
+        AllocatorOwnedCollectionEntry* entry = *current;
+        AsdAllocatorObject* owner = entry->owner;
+        if (owner != NULL) {
+            entry->destroy();
+            owner->release(entry);
+        }
     }
-    (**(romwright_code **)(*(int *)*puVar5 + 0xc))((int *)*puVar5,puVar5);
-    param_1[4] = 0;
-  }
-  puVar5 = (unsigned int *)param_1[5];
-  if (puVar5 != (unsigned int *)0x0) {
-    puVar4 = (unsigned int *)puVar5[3];
-    for (puVar1 = (unsigned int *)puVar5[2]; puVar1 != puVar4; puVar1 = puVar1 + 1) {
-      piVar2 = (int *)*puVar1;
-      piVar3 = (int *)piVar2[1];
-      if (piVar3 != (int *)0x0) {
-        (**(romwright_code **)(*piVar2 + 4))(piVar2);
-        (**(romwright_code **)(*piVar3 + 0xc))(piVar3,piVar2);
-      }
+    collection->end = collection->begin;
+    if (collection->bufferOwner != NULL && collection->begin != NULL) {
+        collection->bufferOwner->release(collection->begin);
     }
-    puVar5[3] = puVar5[2];
-    if ((int *)puVar5[1] != (int *)0x0 && puVar5[2] != 0) {
-      (**(romwright_code **)(*(int *)puVar5[1] + 0xc))();
-    }
-    (**(romwright_code **)(*(int *)*puVar5 + 0xc))((int *)*puVar5,puVar5);
-    param_1[5] = 0;
-  }
-  return param_1;
+    collection->owner->release(collection);
+    slot = NULL;
+}
 }
 
-} /* extern "C" */
+/* The allocator owns both the element storage and the collection headers. */
+Obj55bc90::~Obj55bc90()
+{
+    destroyCollection(first);
+    destroyCollection(second);
+}

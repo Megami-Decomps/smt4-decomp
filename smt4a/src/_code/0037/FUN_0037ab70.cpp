@@ -1,13 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037ab70` (_code @ 0x37ab70, 0x234 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 
 int fileHandleClose(unsigned char **, int);
 int FUN_002beec4(void);
 int FUN_002e0a6c(unsigned char **, int, unsigned int, unsigned int);
-int FUN_002e0c48(...);
+int holderReleaseObject(...);
 int FUN_002e0fac(void);
 int taggedOwnerRelease(unsigned char **);
 int taggedOwnerRelease2(...);
@@ -29,10 +30,9 @@ extern unsigned char DAT_00558024; /* 0x558024 */
 extern unsigned char *FUN_002bee0c(unsigned char **);
 /* Supplied declaration required: FUN_002beec4. */
 extern unsigned char *FUN_002befc0(void);
-extern unsigned char **FUN_002bf040(void);
 extern unsigned char *FUN_002e09b4(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e0a6c. */
-/* Supplied declaration required: FUN_002e0c48. */
+/* Supplied declaration required: holderReleaseObject. */
 /* Supplied declaration required: FUN_002e0fac. */
 /* Supplied declaration required: taggedOwnerRelease. */
 extern unsigned char *FUN_0032cab4(unsigned char **);
@@ -89,7 +89,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
       if (param_1 != 1) {
         ppuVar2 = (unsigned char **)puVar4;
         if ((param_1 != 2) && (param_1 == 3)) {
-          ppuVar2 = (unsigned char **)FUN_002bf040();
+          ppuVar2 = (unsigned char **)FUN_002bf040((PositionedStream *)&temp_v0,0,(void *)param_3,param_4);
         }
       }
       else {
@@ -113,7 +113,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
           }
         }
         else {
-          FUN_002e0c48();
+          holderReleaseObject();
         }
       }
       else {
@@ -133,7 +133,7 @@ unsigned int FUN_0037ab70(int param_1,unsigned int param_2,unsigned int param_3,
           }
         }
         else {
-          puVar4 = (unsigned char *)FUN_002e0c48(&temp_v0);
+          puVar4 = (unsigned char *)holderReleaseObject(&temp_v0);
         }
       }
       else {

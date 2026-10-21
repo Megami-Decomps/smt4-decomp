@@ -9,7 +9,7 @@ extern u32 DAT_00588118; /* network session handle */
 
 u32 memAlloc(s32 a, s32 b, s32 c, s32 size, s32 align, s32 d);
 u32 entry3F94Address(u32 offset, u32 size);
-s32 FUN_0043d3d8(u32 buffer, u32 address, u32 size, u32 align);
+s32 socketInitializeWithWorkBuffer(u32 buffer, u32 address, u32 size, u32 align);
 s32 FUN_0017fd20(u32 *handle, s32 count);
 void FUN_002e3140(s32 result);
 s32 FUN_0042640c(u32 *handle);
@@ -21,7 +21,7 @@ u32 FUN_0043299c(s32 *result)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\network\\Common\\CTRNetInit.cpp", 223);
     DAT_00588114 = memAlloc(0x100, 0x100, 0, 0x40000, 0x1000, 1);
-    s32 created = FUN_0043d3d8(DAT_00588114, entry3F94Address(0x10000, 4), 0x10000, 4);
+    s32 created = socketInitializeWithWorkBuffer(DAT_00588114, entry3F94Address(0x10000, 4), 0x10000, 4);
     *result = created;
     if (nnResultIsFailure(created)) {
         sysFatalBreak();

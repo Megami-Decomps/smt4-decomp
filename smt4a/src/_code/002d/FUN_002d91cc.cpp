@@ -24,7 +24,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002d94f8; /* 0x2d94f8 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
 extern unsigned char DAT_005f1a4e; /* 0x5f1a4e */
@@ -150,7 +150,7 @@ void FUN_002d91cc(void)
           *(unsigned int *)(g_lmapScene + 0x28) = *(unsigned int *)(g_lmapScene + 0x34);
           *(unsigned int *)(temp_v0 + 0x2c) = *puVar6;
           *(unsigned int *)(temp_v0 + 0x30) = temp_v9;
-          *(unsigned char *)(DAT_005806a4 + 0xb4) = 0;
+          *(unsigned char *)(g_lmapView + 0xb4) = 0;
           FUN_00303460(0x13);
           temp_v4 = 180.0f;
           temp_v10 = (*(float *)(g_lmapScene + 0x50) + 180.0f) * temp_v3;

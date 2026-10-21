@@ -9,7 +9,7 @@ int asdModelSlotSetTint(int);
 int FUN_0029c2cc(unsigned int, int);
 int modelSlotAttachChild(unsigned int, int);
 int FUN_002a55a8(unsigned int, int);
-int FUN_002d582c(unsigned int);
+void FUN_002d582c(unsigned int, float);
 int FUN_002e1230(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -47,7 +47,7 @@ void FUN_00263988(int param_1,int param_2)
     temp_v2 = 0;
     if (temp_v0 != -1) {
       FUN_0029c2cc(*(unsigned int *)(param_1 + temp_v0 * 4 + 0x3c),0);
-      FUN_002d582c(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34));
+      FUN_002d582c(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34), 0.0f);
       piVar2 = *(int **)(*(int *)(param_1 + *piVar3 * 4 + 0x3c) + 4);
       piVar2[0x10] = temp_v2;
       *(unsigned char *)(piVar2 + 0x16) = 1;
@@ -57,7 +57,7 @@ void FUN_00263988(int param_1,int param_2)
     modelSlotAttachChild(*(unsigned int *)(param_1 + param_2 * 4 + 0x3c),0);
     FUN_002a55a8(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34),param_2);
     temp_v3 = 0x3f800000;
-    FUN_002d582c(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34));
+    FUN_002d582c(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x560) * 4 + 0x34), 1.0f);
     temp_v0 = *(int *)(*(int *)(param_1 + *piVar3 * 4 + 0x3c) + 4);
     temp_v1 = *(unsigned int *)(temp_v0 + 0x44);
     (**(romwright_code **)(temp_v0 + 0x4c))(*(unsigned int *)(temp_v0 + 0x50));

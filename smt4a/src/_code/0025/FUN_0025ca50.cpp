@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025ca50` (_code @ 0x25ca50, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: five hard-float inputs were lost by the draft; retail tail branches to 0x19e4a8 without a symbol/relocation, so the required callee boundary is unavailable. */
 #include "romwright_types.h"
 
 extern "C" {

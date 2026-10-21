@@ -7,7 +7,7 @@ extern "C" {
 int bgmPlay(unsigned int, int, int);
 int bgmStopNoForce(...);
 int FUN_00287328(int);
-int FUN_00290ed8(int);
+void FUN_00290ed8(unsigned int frames);
 int soundChannelStopAll(int);
 int soundChannelRequestIfEnabled(unsigned int, int, int);
 int padIsButtonPressed(int);
@@ -18,7 +18,6 @@ extern unsigned int *DAT_0044e110; /* 0x44e110 */
 /* Supplied declaration required: bgmPlay. */
 /* Supplied declaration required: bgmStopNoForce. */
 /* Supplied declaration required: FUN_00287328. */
-/* Supplied declaration required: FUN_00290ed8. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 extern int padIsButtonRepeat(unsigned int);

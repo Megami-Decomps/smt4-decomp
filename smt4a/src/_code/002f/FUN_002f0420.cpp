@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0021af2c(void);
 int FUN_00230d2c(void);
-int FUN_002a1f60(unsigned int, int, unsigned int, int, int, unsigned int, int);
-int FUN_002a7104(short *);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, int);
+int statusDownRebuildOwnedDemonList(short *);
 int FUN_002f001c(short *);
 int FUN_002f01e0(int, int);
 int FUN_00333de0(void);
@@ -33,9 +33,9 @@ extern int slotRecordFindById(unsigned short);
 extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0021af2c. */
 /* Supplied declaration required: FUN_00230d2c. */
-/* Supplied declaration required: FUN_002a1f60. */
-/* Supplied declaration required: FUN_002a7104. */
-extern int FUN_002c7ca0(void);
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
+/* Supplied declaration required: statusDownRebuildOwnedDemonList. */
+extern int statusDownGetFlag(void);
 /* Supplied declaration required: FUN_002f001c. */
 /* Supplied declaration required: FUN_002f01e0. */
 /* Supplied declaration required: FUN_00333de0. */
@@ -144,7 +144,7 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
   }
   if (*(char *)(temp_v1 + 0x2017) != '\x04') {
     FUN_00333de0();
-    FUN_002a7104(psVar13 + 0x50);
+    statusDownRebuildOwnedDemonList(psVar13 + 0x50);
   }
   else {
     if (*(int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x20c0) == 0) {
@@ -181,11 +181,11 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
         do {
           if ((unsigned short)param_3[temp_v8 * 2] == temp_v12) {
             if (-1 < (int)temp_v8) {
-              FUN_002a1f60(*(unsigned int *)(temp_v9 + 0x20b4),3,0xffffffff,0,3,
+              asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v9 + 0x20b4),3,0xffffffff,0,3,
                            *(unsigned int *)(temp_v9 + 0x20b8),
                            *(unsigned short *)(*(int *)(temp_v9 + 0x20c0) + temp_v8 * 4 + 2));
             }
-            temp_v9 = FUN_002c7ca0();
+            temp_v9 = statusDownGetFlag();
             if (temp_v9 == 2) {
               *(unsigned int *)(temp_v1 + 0x1374) = 1;
               FUN_0021af2c();
@@ -202,7 +202,7 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
       do {
         if (*(unsigned short *)(*(int *)(temp_v2 + 0x20c0) + temp_v8 * 4) == temp_v12) {
           if (-1 < (int)temp_v8) {
-            FUN_002a1f60(*(unsigned int *)(temp_v9 + 0x20b4),3,0xffffffff,0,3,
+            asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v9 + 0x20b4),3,0xffffffff,0,3,
                          *(unsigned int *)(temp_v9 + 0x20b8),
                          *(unsigned short *)(*(int *)(temp_v9 + 0x20c0) + temp_v8 * 4 + 2));
           }
@@ -211,7 +211,7 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
         if (*(unsigned short *)(*(int *)(temp_v2 + 0x20c0) + temp_v8 * 4 + 4) == temp_v12) {
           temp_v8 = temp_v8 + 1;
           if (-1 < (int)temp_v8) {
-            FUN_002a1f60(*(unsigned int *)(temp_v9 + 0x20b4),3,0xffffffff,0,3,
+            asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v9 + 0x20b4),3,0xffffffff,0,3,
                          *(unsigned int *)(temp_v9 + 0x20b8),
                          *(unsigned short *)(*(int *)(temp_v9 + 0x20c0) + temp_v8 * 4 + 2));
           }
@@ -221,7 +221,7 @@ void FUN_002f0420(int param_1,unsigned int param_2,short *param_3)
       } while ((int)temp_v8 < (int)temp_v11);
     }
   }
-  temp_v9 = FUN_002c7ca0();
+  temp_v9 = statusDownGetFlag();
   if (temp_v9 == 2) {
     *(unsigned int *)(temp_v1 + 0x1374) = 1;
     FUN_0021af2c();

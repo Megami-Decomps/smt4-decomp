@@ -1,11 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042349c` (_code @ 0x42349c, 0x1b8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_MovieFilter.h"
 
 extern "C" {
 
-int FUN_00425fb4(unsigned int, unsigned int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_005133e0(unsigned int, unsigned int [11], unsigned int [12]);
+void movieY2rConfigureAndStart(s32, s32, s32, u32, u32, u32, u32, u32, s32, u32, u32, u32, u32);
+unsigned int mwmofilterApplyFrame(MovieFilterContext *, const MovieFilterFrame *, MovieFilterFrame *, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -19,9 +20,7 @@ typedef struct {
     unsigned int spA8; /* 0xa8: local_a8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00425fb4. */
 extern int FUN_00426124(void);
-/* Supplied declaration required: FUN_005133e0. */
 
 
 unsigned int FUN_0042349c(unsigned int *param_1)
@@ -57,15 +56,16 @@ unsigned int FUN_0042349c(unsigned int *param_1)
             puVar2 = temp_v5;
           }
           else {
-            temp_v0 = *param_1;
-            FUN_005133e0(temp_v0,temp_v5,temp_v7);
+            temp_v0 = mwmofilterApplyFrame((MovieFilterContext *)*param_1,
+                                  (const MovieFilterFrame *)temp_v5,
+                                  (MovieFilterFrame *)temp_v7, temp_v1 >= 5 ? 0 : 1);
             if ((temp_v0 & 0xff) != 0) {
               return 0;
             }
             puVar2 = temp_v7;
           }
           temp_v0 = puVar2[6];
-          FUN_00425fb4(temp_v0,puVar2[7],1,(char)param_1[1],1,*puVar2,puVar2[1],puVar2[2],
+          movieY2rConfigureAndStart(temp_v0,puVar2[7],1,(char)param_1[1],1,*puVar2,puVar2[1],puVar2[2],
                        puVar2[3] - temp_v0,puVar2[4] - (temp_v0 >> 1),puVar2[5] - (temp_v0 >> 1),
                        param_1[temp_v4 * 5 + 4],param_1[temp_v4 * 5 + 5] - temp_v0);
           *(unsigned char *)((int)param_1 + 6) = 1;

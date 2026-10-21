@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_00164ce0(unsigned int, int);
-int FUN_00167f24(int);
+int messageMainSetMode(int);
 
 extern int g_bustupCutAnim; /* 0x57f4c4 */
 
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00164ce0. */
 extern int jobGetWorkId(unsigned int);
-/* Supplied declaration required: FUN_00167f24. */
-extern unsigned char FUN_0016917c(unsigned int, unsigned int);
+/* Supplied declaration required: messageMainSetMode. */
+extern unsigned char jobRecordGetTableValue(unsigned int, unsigned int);
 
 
 unsigned int FUN_00153588(int param_1)
@@ -45,8 +45,8 @@ unsigned int FUN_00153588(int param_1)
           if (*(unsigned int *)(temp_v0 + 0x608) < 0xf) {
             temp_v2 = 2;
           }
-          temp_v1 = FUN_0016917c(*(unsigned int *)(temp_v5 + 0x634),temp_v2);
-          FUN_00167f24(temp_v1);
+          temp_v1 = jobRecordGetTableValue(*(unsigned int *)(temp_v5 + 0x634),temp_v2);
+          messageMainSetMode(temp_v1);
           temp_v2 = 1;
         }
         else {

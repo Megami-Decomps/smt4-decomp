@@ -5,7 +5,7 @@
 extern "C" {
 
 int libc_strcat(...);
-int FUN_001ad150(void);
+int optionalWorkGetValue(void);
 int FUN_001b3008(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
 int libc_strcpy(...);
 int sysMemClear(unsigned char [128], int);
@@ -23,7 +23,7 @@ extern unsigned int g_aocDisplay; /* 0x57027c */
 
 /* Supplied declaration required: libc_strcat. */
 extern int *asdTMTexTableGetNode(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001ad150. */
+/* Supplied declaration required: optionalWorkGetValue. */
 extern int FUN_001b2bd8(unsigned int, int, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_001b3008. */
 extern int FUN_001b3214(unsigned int);
@@ -62,7 +62,7 @@ int * FUN_001a6568(unsigned int param_1,unsigned int param_2,unsigned int param_
     return (int *)0x0;
   }
   temp_v3 = piVar2[1];
-  FUN_001ad150();
+  optionalWorkGetValue();
   libc_strcpy(temp_v4,*piVar2 + 0xc);
   pcVar5 = *(char **)(temp_v3 + 8);
   if (*pcVar5 != '-') {

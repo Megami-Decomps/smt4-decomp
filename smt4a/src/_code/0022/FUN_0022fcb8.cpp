@@ -14,14 +14,14 @@ struct OptionResult {
 };
 
 GameOptions *gameGetOptions(void);
-OptionResult *FUN_00168518(s32 value, u32 selection);
+OptionResult *dataTableGetCategoryEntry(s32 value, u32 selection);
 u32 gameOptionResourceId(u32 value);
 
 u32 FUN_0022fcb8(void)
 {
     u32 selection = gameGetOptions()->selection;
     s32 value = gameGetOptions()->value;
-    return gameOptionResourceId((FUN_00168518(value, selection)->flags >> 26) & 31);
+    return gameOptionResourceId((dataTableGetCategoryEntry(value, selection)->flags >> 26) & 31);
 }
 
 } /* extern "C" */

@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern unsigned int DAT_00570288; /* 0x570288 */
+extern unsigned int g_btlCandidateMasks; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
@@ -58,7 +58,7 @@ unsigned int FUN_0038cc20(void)
       temp_v4 = *puVar7;
       temp_v5 = puVar7[1];
       if (((((temp_v5 & DAT_005702a4) == 0 && (temp_v4 & DAT_005702a0) == 0) &&
-           ((temp_v5 & DAT_0057028c) != 0 || (temp_v4 & DAT_00570288) != 0)) &&
+           ((temp_v5 & DAT_0057028c) != 0 || (temp_v4 & g_btlCandidateMasks) != 0)) &&
           ((temp_v4 & DAT_005702b0) == 0 && (temp_v5 & DAT_005702b4) == 0)) &&
          ((*(unsigned short *)((int)puVar7 + 0x166) == temp_v0 &&
           (*(unsigned short *)((int)puVar7 + temp_v1 * 2 + 0x2b6) >> 10 == 2)))) {

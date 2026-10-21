@@ -7,7 +7,7 @@ extern "C" {
 int efctSetSpeed(void);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_00184c40(...);
+int pairSetHalves(...);
 int jobGetScalarValue(void);
 int fadeObjectResetIfActive(...);
 
@@ -29,7 +29,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 
@@ -100,9 +100,9 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
           if (*(int *)(param_1 + 0x387c) != 0x27) {
             temp_v3 = FUN_001834a4(0xd,0xfc1);
             temp_v4 = FUN_001834a4(0xd,0xfbf);
-            FUN_00184c40(temp_v6,(int)(short)(*(short *)(temp_v3 + 8) + temp_v1),
+            pairSetHalves(temp_v6,(int)(short)(*(short *)(temp_v3 + 8) + temp_v1),
                          (int)(short)((*(short *)(temp_v3 + 10) + temp_v0) - (short)param_4));
-            FUN_00184c40(temp_v2,(int)(short)((*(short *)(temp_v3 + 8) + temp_v1) - *(short *)(temp_v4 + 8))
+            pairSetHalves(temp_v2,(int)(short)((*(short *)(temp_v3 + 8) + temp_v1) - *(short *)(temp_v4 + 8))
                          ,(int)(short)(((*(short *)(temp_v3 + 10) + temp_v0) - (short)param_4) -
                                       *(short *)(temp_v4 + 10)));
             temp_v6 = g_renderCtx;
@@ -132,7 +132,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
       }
       else {
         temp_v3 = FUN_001834a4(0xd,0xfc1);
-        FUN_00184c40(temp_v6,(int)(short)(*(short *)(temp_v3 + 8) + temp_v1),
+        pairSetHalves(temp_v6,(int)(short)(*(short *)(temp_v3 + 8) + temp_v1),
                      (int)(short)(*(short *)(temp_v3 + 10) + temp_v0));
         temp_v3 = g_renderCtx;
         temp_v4 = packNibblesAndByte(6,1,0);
@@ -155,7 +155,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
         }
         temp_v6 = FUN_001834a4(0xd,0xfc2);
         temp_v3 = FUN_001834a4(0xd,0xfbf);
-        FUN_00184c40(temp_v2,(int)(short)((*(short *)(temp_v6 + 8) + temp_v1) - *(short *)(temp_v3 + 8)),
+        pairSetHalves(temp_v2,(int)(short)((*(short *)(temp_v6 + 8) + temp_v1) - *(short *)(temp_v3 + 8)),
                      (int)(short)((*(short *)(temp_v6 + 10) + temp_v0) - *(short *)(temp_v3 + 10)));
         temp_v6 = g_renderCtx;
         temp_v3 = packNibblesAndByte(6,1,0);
@@ -177,7 +177,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
           *(unsigned char *)(temp_v6 + 0x12d0) = 0;
         }
         temp_v6 = FUN_001834a4(0xd,0xfc0);
-        FUN_00184c40(param_1 + 0x1c04,(int)(short)(*(short *)(temp_v6 + 8) + temp_v1),
+        pairSetHalves(param_1 + 0x1c04,(int)(short)(*(short *)(temp_v6 + 8) + temp_v1),
                      (int)(short)(*(short *)(temp_v6 + 10) + temp_v0));
         fadeObjectResetIfActive(param_1 + 0x1c04);
       }

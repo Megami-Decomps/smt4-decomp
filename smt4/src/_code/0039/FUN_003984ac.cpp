@@ -14,7 +14,7 @@ int FUN_002bee58(...);
 int paramsInit(unsigned char *, unsigned char *, int, unsigned char *, int, int, int, int, int, unsigned char *, int);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
+int drawParameterBlockClear(void);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -57,8 +57,8 @@ extern unsigned int *FUN_002bd1fc(void);
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
-extern unsigned int FUN_002c5c04(unsigned char *);
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
@@ -144,14 +144,14 @@ void FUN_003984ac(unsigned char *param_1,unsigned char param_2)
   FUN_002c58c8(0x2e,0);
   FUN_0029f848(param_1 + 0x580,0x69,7,0xf,1,1);
   FUN_0029f848(param_1 + 0x5e4,3,1,3,1,1);
-  temp_v0 = FUN_002c5c04(&LAB_00398808);
+  temp_v0 = asdLoadFileSyncDefault(&LAB_00398808);
   *(unsigned int *)(param_1 + 0x64c) = temp_v0;
-  temp_v0 = FUN_002c5c04(&LAB_00398818);
+  temp_v0 = asdLoadFileSyncDefault(&LAB_00398818);
   *(unsigned int *)(param_1 + 0x650) = temp_v0;
   FUN_00297060(temp_v0,*(unsigned int *)(param_1 + 0x64c));
   *(unsigned int *)(param_1 + 0x654) = temp_v0;
   puVar3 = param_1 + 0x65c;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
+  drawParameterBlockClear();
   paramsInit(puVar3,&DAT_004055d0,0x18,&DAT_004055e8,0x24,0,0,0,0,&DAT_0040560c,0x70);
   FUN_002bd954(param_1 + 0x67c,0x2e,0,puVar3,1);
   FUN_002bee58(param_1 + 0x67c,0);

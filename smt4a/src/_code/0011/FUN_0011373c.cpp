@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002ea668(unsigned char [88]);
-int FUN_002fe0f4(unsigned int, unsigned int, unsigned int, unsigned int, unsigned char [88]);
+int chunkStreamFlush(unsigned int, unsigned int, unsigned int, unsigned int, unsigned char [88]);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_002ea668. */
-/* Supplied declaration required: FUN_002fe0f4. */
+/* Supplied declaration required: chunkStreamFlush. */
 
 
 unsigned int FUN_0011373c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -25,7 +25,7 @@ unsigned int FUN_0011373c(unsigned int param_1,unsigned int param_2,unsigned int
   unsigned int temp_v1;
   
   FUN_002ea668(temp_v0);
-  FUN_002fe0f4(param_1,param_2,param_3,param_4,temp_v0);
+  chunkStreamFlush(param_1,param_2,param_3,param_4,temp_v0);
   return temp_v1;
 }
 

@@ -5,9 +5,9 @@
 extern "C" {
 
 int svcSleepThread(...);
-int FUN_002804b0(unsigned char *, int *, int);
+int asdLoadFileAsyncSimple(unsigned char *, int *, int);
 int FUN_002a4664(int *);
-int FUN_002a469c(void);
+int gameDataGetRecordValue(void);
 int FUN_002bf520(void);
 int FUN_002c0b10(unsigned short [2]);
 int cecProcessForward(void);
@@ -15,7 +15,7 @@ int btlTalkBustUpCreate(void);
 int rt_aeabi_memclr(int, int);
 int cecProcessCall2(void);
 int FUN_0032e25c(...);
-int FUN_00333bfc(void);
+int dataStoreProcessCreate(void);
 int ownerSetName(unsigned int, unsigned int);
 int engineForwardVariadicCommand(unsigned int, int, unsigned int, unsigned int);
 int FUN_00387edc(void);
@@ -54,11 +54,11 @@ extern unsigned char LAB_002a2c54; /* 0x2a2c54 */
 
 /* Supplied declaration required: svcSleepThread. */
 extern unsigned char FUN_002391e0(void);
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int FUN_002840ac(void);
 extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_002a4664. */
-/* Supplied declaration required: FUN_002a469c. */
+/* Supplied declaration required: gameDataGetRecordValue. */
 extern unsigned char FUN_002a46b8(void);
 extern unsigned char saveFlagGet27e1f(void);
 /* Supplied declaration required: FUN_002bf520. */
@@ -71,7 +71,7 @@ extern int rt_memcmp(unsigned char *, int, unsigned int);
 extern unsigned char FUN_0031cee0(void);
 /* Supplied declaration required: FUN_0032e25c. */
 extern unsigned int gameDataBlocksGetWord27E8C(void);
-/* Supplied declaration required: FUN_00333bfc. */
+/* Supplied declaration required: dataStoreProcessCreate. */
 /* Supplied declaration required: ownerSetName. */
 extern int gameDataTestFlags(unsigned int);
 /* Supplied declaration required: engineForwardVariadicCommand. */
@@ -112,10 +112,10 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
     else {
       loadSlotEnsureLoaded(0x25);
       btlTalkBustUpCreate();
-      FUN_002804b0(&LAB_002a2c10,&param_1->field_0x348,0);
-      FUN_002804b0(&LAB_002a2c28,&param_1->field_0x34c,0);
-      FUN_002804b0(&LAB_002a2c40,&param_1->field_0x350,0);
-      FUN_002804b0(&LAB_002a2c54,&param_1->field_0x354,0);
+      asdLoadFileAsyncSimple(&LAB_002a2c10,&param_1->field_0x348,0);
+      asdLoadFileAsyncSimple(&LAB_002a2c28,&param_1->field_0x34c,0);
+      asdLoadFileAsyncSimple(&LAB_002a2c40,&param_1->field_0x350,0);
+      asdLoadFileAsyncSimple(&LAB_002a2c54,&param_1->field_0x354,0);
       FUN_002bf520();
       FUN_00387edc();
       temp_v0 = FUN_0031cee0();
@@ -137,13 +137,13 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
       temp_v0 = FUN_002a46b8();
       temp_v4 = FUN_002bf520();
       *(unsigned char *)(temp_v4 + 0x42) = temp_v0;
-      temp_v1 = FUN_002a469c();
+      temp_v1 = gameDataGetRecordValue();
       temp_v2 = FUN_002bf520();
       FUN_0032e25c(temp_v2,temp_v1);
       temp_v1 = gameDataBlocksGetWord27E8C();
       temp_v4 = FUN_002bf520();
       *(unsigned int *)(temp_v4 + 0x24) = temp_v1;
-      temp_v4 = FUN_002a469c();
+      temp_v4 = gameDataGetRecordValue();
       if (temp_v4 == 0) {
         temp_v4 = FUN_002bf520();
         rt_aeabi_memclr(temp_v4 + 0x50,0x14);
@@ -176,7 +176,7 @@ void FUN_002a28c0(fn_002a28c0_arg0 *param_1)
         }
       }
       else {
-        FUN_00333bfc();
+        dataStoreProcessCreate();
         param_1->field_0x8 = temp_v3;
       }
       param_1->field_0x7f4 = param_1->field_0x7f4 + 1;

@@ -13,14 +13,14 @@ int FUN_002ee524(...);
 int sharedRefHolderDestroy2(...);
 int FUN_002fde5c(...);
 int clearWords2Alt(unsigned char [8]);
-int FUN_00303018(...);
-int FUN_00303028(...);
+int streamWriterWriteWord(...);
+int streamWriteWordCopy(...);
 int FUN_00303038(...);
 int FUN_00303088(unsigned char [8]);
 int FUN_00303146(unsigned char [12], int *);
 int FUN_0030314e(...);
 int FUN_00303158(...);
-int FUN_003031e4(...);
+int streamReadWordCopy(...);
 int SBORROW4(...);
 
 typedef int romwright_code(...);
@@ -55,14 +55,14 @@ extern int operatorNew(unsigned int);
 /* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002fde5c. */
 /* Supplied declaration required: clearWords2Alt. */
-/* Supplied declaration required: FUN_00303018. */
-/* Supplied declaration required: FUN_00303028. */
+/* Supplied declaration required: streamWriterWriteWord. */
+/* Supplied declaration required: streamWriteWordCopy. */
 /* Supplied declaration required: FUN_00303038. */
 /* Supplied declaration required: FUN_00303088. */
 /* Supplied declaration required: FUN_00303146. */
 /* Supplied declaration required: FUN_0030314e. */
 /* Supplied declaration required: FUN_00303158. */
-/* Supplied declaration required: FUN_003031e4. */
+/* Supplied declaration required: streamReadWordCopy. */
 
 
 unsigned int
@@ -119,7 +119,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
     FUN_002fde5c(temp_v24);
     puVar3 = (unsigned int *)&temp_v11;
     temp_v11 = 0;
-    FUN_00303028(temp_v24,puVar3);
+    streamWriteWordCopy(temp_v24,puVar3);
   }
   else {
     temp_v0 = operatorNew(0x58);
@@ -142,7 +142,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
       }
       FUN_002fde5c(temp_v24);
       temp_v12[0] = 0;
-      FUN_00303018(temp_v24,temp_v12);
+      streamWriterWriteWord(temp_v24,temp_v12);
     }
     else {
       temp_v0 = FUN_001242f8(piVar2);
@@ -152,23 +152,23 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
         strInit(temp_v21);
         FUN_00303158(*(unsigned int *)(param_3 + 0x14),temp_v20,temp_v21,piVar2 + 0xd);
         FUN_002ee524(temp_v9,temp_v21);
-        FUN_003031e4(temp_v9,&temp_v14);
-        FUN_003031e4(temp_v9,&temp_v16);
-        FUN_003031e4(temp_v9,&temp_v13);
+        streamReadWordCopy(temp_v9,&temp_v14);
+        streamReadWordCopy(temp_v9,&temp_v16);
+        streamReadWordCopy(temp_v9,&temp_v13);
         if (temp_v10 != '\0') {
           if (piVar2 != (int *)0x0) {
             (**(romwright_code **)(*piVar2 + 4))(piVar2);
           }
           FUN_002fde5c(temp_v24);
           temp_v12[0] = 0;
-          FUN_00303028(temp_v24,temp_v12);
+          streamWriteWordCopy(temp_v24,temp_v12);
         }
         else {
           if (piVar2[0xb] == temp_v14) {
             *temp_v27 = temp_v16;
             FUN_002fde5c(temp_v22);
             temp_v15 = temp_v13 + 1;
-            FUN_00303018(temp_v22,&temp_v15);
+            streamWriterWriteWord(temp_v22,&temp_v15);
             FUN_0030314e(temp_v26,temp_v22);
             *param_5 = (unsigned int)piVar2;
             sharedRefHolderDestroy2(temp_v22);
@@ -187,7 +187,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
           }
           FUN_002fde5c(temp_v24);
           temp_v12[0] = 0;
-          FUN_00303018(temp_v24,temp_v12);
+          streamWriterWriteWord(temp_v24,temp_v12);
         }
         FUN_0030314e(temp_v26,temp_v24);
         sharedRefHolderDestroy2(temp_v24);
@@ -207,7 +207,7 @@ FUN_001170c8(int param_1,unsigned int param_2,int param_3,unsigned int *param_4,
       FUN_002fde5c(temp_v24);
       puVar3 = temp_v12;
       temp_v12[0] = 0;
-      FUN_00303028(temp_v24,puVar3);
+      streamWriteWordCopy(temp_v24,puVar3);
     }
   }
   FUN_0030314e(temp_v26,temp_v24);

@@ -1,11 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00436798` (_code @ 0x436798, 0x12c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_IdList.h"
 
 extern "C" {
 
 int FUN_004352b0(int *, int *);
-int FUN_004383d8(void);
+IdList* idListFind(unsigned int id);
 int FUN_004387f0(int *, int);
 int variantSetHalfB(int *, int *, int);
 int FUN_00515598(void);
@@ -21,7 +22,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_004352b0. */
-/* Supplied declaration required: FUN_004383d8. */
+/* Supplied declaration required: idListFind. */
 /* Supplied declaration required: FUN_004387f0. */
 /* Supplied declaration required: variantSetHalfB. */
 /* Supplied declaration required: FUN_00515598. */
@@ -52,7 +53,7 @@ unsigned int FUN_00436798(int *param_1,int *param_2,int *param_3)
   FUN_004352b0(&temp_v2,param_1);
   if (temp_v2 != 0) {
     temp_v0 = (unsigned int)*(unsigned short *)(*param_1 + 10);
-    FUN_004383d8();
+    temp_v0 = (unsigned int)idListFind(temp_v0);
     FUN_00515618(&temp_v3,*param_3 + 8);
     if (temp_v3 != (int *)0x0) {
       temp_v4 = temp_v2;

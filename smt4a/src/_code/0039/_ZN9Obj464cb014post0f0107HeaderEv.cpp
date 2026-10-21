@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelCommandBlockRelease(void);
-int FUN_00167ba0(void);
+int cursorResetFromParam(void);
 int FUN_003c8538(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern int DAT_005b3fe4; /* 0x5b3fe4 */
 extern int DAT_005b3fe8; /* 0x5b3fe8 */
 
 /* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: FUN_00167ba0. */
+/* Supplied declaration required: cursorResetFromParam. */
 /* Supplied declaration required: FUN_003c8538. */
 
 
@@ -29,7 +29,7 @@ void _ZN9Obj464cb014post0f0107HeaderEv(unsigned int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  FUN_00167ba0();
+  cursorResetFromParam();
   temp_v0 = DAT_005b3fe4;
   *(unsigned int *)(DAT_005b3fe4 + DAT_005b3fe8 * 4) =
        *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1298) * 4 + 0x12a0) |

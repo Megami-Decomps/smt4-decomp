@@ -13,7 +13,7 @@ int mapIfSetMode1(void);
 int FUN_00233e10(int, unsigned int);
 int FUN_002342b8(void);
 int FUN_0025ef68(int, int, int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002b7f58(void);
 int FUN_002dae68(void);
 int FUN_002e364c(int);
@@ -29,7 +29,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f162f; /* 0x5f162f */
 extern unsigned char DAT_005f1631; /* 0x5f1631 */
@@ -53,7 +53,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: FUN_0025ef68. */
 extern int mapIfHasSelection(void);
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b7f58. */
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002e364c. */
@@ -151,7 +151,7 @@ void FUN_00327964(void)
             *(unsigned int *)(temp_v3 + 0x54) = 0;
             *(unsigned int *)(temp_v3 + 0x58) = 0x40400000;
             *(unsigned char *)(temp_v3 + 0x6c) = 0;
-            FUN_002b5cb4();
+            distSpatial();
             temp_v5 = DAT_005f16b8;
             temp_v12 = DAT_005f16b4;
             temp_v3 = g_lmapScene;
@@ -197,7 +197,7 @@ void FUN_00327964(void)
               *(unsigned int *)(g_lmapScene + 0x50) = temp_v12;
             }
             FUN_00303460(10);
-            *(unsigned int *)(DAT_005806a4 + 0xb0) = 0xffffffff;
+            *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
             sysPlaySe(0xdd);
             FUN_00233e10(1,DAT_005f16ac);
             FUN_002b7f58();
@@ -238,8 +238,8 @@ void FUN_00327964(void)
         else {
           temp_v3 = padButtonIsPressed(5);
           if ((temp_v3 != 0) || (temp_v3 = inputIsQuestMenuPressed(), temp_v3 != 0)) {
-            temp_v3 = DAT_005806a4;
-            *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+            temp_v3 = g_lmapView;
+            *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
             *(unsigned int *)(temp_v3 + 0xb0) = 0;
             FUN_00303460(0);
             temp_v3 = g_lmapScene;
@@ -291,8 +291,8 @@ void FUN_00327964(void)
     temp_v3 = mapIfHasSelection();
     if (temp_v3 == 0) {
       mapIfReleaseSlot1();
-      temp_v3 = DAT_005806a4;
-      *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+      temp_v3 = g_lmapView;
+      *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
       *(unsigned int *)(temp_v3 + 0xb0) = 0;
       FUN_00303460(0);
       temp_v4 = *(int *)(g_lmapScene + 4);
@@ -304,7 +304,7 @@ void FUN_00327964(void)
 LAB_00327dc8:
   if (*(char *)(g_lmapScene + 0x115) != '\0') {
     temp_v7 = *(float *)(g_lmapScene + 0x28);
-    FUN_002b5cb4();
+    distSpatial();
     temp_v3 = g_lmapScene;
     temp_v8 = *(float *)(g_lmapScene + 0x130);
     if (temp_v8 >= temp_v7) {

@@ -7,12 +7,12 @@ extern "C" {
 int dataTable5Sub3Lookup(unsigned int *, int);
 int devilGetRecord(void);
 int FUN_003c9948(unsigned int, unsigned int, int);
-int FUN_003c9a04(unsigned int, int, int, int);
+int demonFindClosestEligibleLevel(unsigned int, int, int, int);
 
 /* Supplied declaration required: dataTable5Sub3Lookup. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_003c9948. */
-/* Supplied declaration required: FUN_003c9a04. */
+/* Supplied declaration required: demonFindClosestEligibleLevel. */
 
 
 unsigned int FUN_003c911c(unsigned int param_1,unsigned short *param_2,unsigned short *param_3,unsigned int *param_4)
@@ -81,7 +81,7 @@ unsigned int FUN_003c911c(unsigned int param_1,unsigned short *param_2,unsigned 
       temp_v2 = *(char *)((int)puVar5 + 3);
       temp_v3 = (unsigned char)puVar5[1];
     }
-    FUN_003c9a04(param_1,temp_v3,temp_v2 - '\x01',0);
+    demonFindClosestEligibleLevel(param_1,temp_v3,temp_v2 - '\x01',0);
     temp_v5 = param_1;
     if (*puVar5 != param_1) {
       temp_v5 = (unsigned int)*puVar6;

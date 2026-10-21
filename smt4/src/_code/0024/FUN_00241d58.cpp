@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002e1344(void);
+int blockObjectRelease(void);
 int FUN_0036ef0c(void *block);
 
 typedef struct Obj {
@@ -14,7 +14,7 @@ typedef struct Obj {
 void FUN_00241d58(Obj *obj)
 {
     if (obj->active != 0) {
-        FUN_002e1344();
+        blockObjectRelease();
         FUN_0036ef0c(obj->block);
         obj->active = 0;
     }

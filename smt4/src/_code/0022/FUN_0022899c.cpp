@@ -13,7 +13,7 @@ int FUN_002463e8(...);
 int FUN_00247478(...);
 int FUN_0027da30(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int btlGetMainState(void);
 int FUN_002ae164(void);
 int dataTable08Sub1GetRecord(void);
@@ -66,7 +66,7 @@ extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
@@ -196,7 +196,7 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
     do {
       temp_v7 = (unsigned int)*(unsigned short *)((int)&temp_v16 + temp_v10 * 2);
       if (temp_v7 != 0) {
-        FUN_00283e48();
+        passiveSkillLookupRecord();
         temp_v1 = '\0';
         if (temp_v7 != 0) {
           temp_v1 = *(char *)(temp_v7 + 0x33);
@@ -280,7 +280,7 @@ LAB_00228c48:
           do {
             temp_v9 = (unsigned int)temp_v28[temp_v11];
             if (temp_v9 != 0) {
-              FUN_00283e48();
+              passiveSkillLookupRecord();
               temp_v1 = '\0';
               if (temp_v9 != 0) {
                 temp_v1 = *(char *)(temp_v9 + 0x33);
@@ -348,7 +348,7 @@ LAB_00228de4:
           temp_v8 = 0;
           do {
             temp_v9 = (unsigned int)*(unsigned short *)((int)&temp_v17 + temp_v8 * 2);
-            if ((temp_v9 != 0) && (FUN_00283e48(), temp_v9 != 0)) {
+            if ((temp_v9 != 0) && (passiveSkillLookupRecord(), temp_v9 != 0)) {
               temp_v11 = temp_v11 + (unsigned int)*(unsigned char *)(temp_v9 + 0x30);
             }
             temp_v8 = temp_v8 + 1;

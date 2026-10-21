@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-extern unsigned short DAT_005b3d94; /* 0x5b3d94 */
+extern unsigned short g_sentinelLookupEntries; /* 0x5b3d94 */
 
 extern int libc_strncmp(unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001f4934. */
@@ -54,11 +54,11 @@ LAB_002a1d08:
     }
     return temp_v7 + 1;
   }
-  puVar11 = &DAT_005b3d94;
+  puVar11 = &g_sentinelLookupEntries;
   temp_v1 = 0;
   temp_v13 = temp_v12;
   temp_v10 = 0;
-  temp_v0 = DAT_005b3d94;
+  temp_v0 = g_sentinelLookupEntries;
   while (temp_v0 != 0xf890) {
     if (*(int *)(puVar11 + 6) != 0) {
       temp_v4 = wstrlen();
@@ -72,7 +72,7 @@ LAB_002a1d08:
       }
     }
     temp_v10 = temp_v10 + 1;
-    puVar11 = &DAT_005b3d94 + temp_v10 * 8;
+    puVar11 = &g_sentinelLookupEntries + temp_v10 * 8;
     temp_v0 = *puVar11;
   }
   goto LAB_002a1db4;
@@ -115,10 +115,10 @@ LAB_002a1db4:
     if (temp_v3 - 0xf801 < 0x8f) {
       temp_v7 = 0;
       while( 1 ) {
-        temp_v8 = (unsigned int)(&DAT_005b3d94)[temp_v7 * 8];
+        temp_v8 = (unsigned int)(&g_sentinelLookupEntries)[temp_v7 * 8];
         if (temp_v8 == 0xf890) break;
         if (temp_v8 == temp_v3) {
-          if (&DAT_005b3d94 + temp_v7 * 8 != (unsigned short *)0x0) {
+          if (&g_sentinelLookupEntries + temp_v7 * 8 != (unsigned short *)0x0) {
             temp_v7 = *(int *)(temp_v7 * 0x10 + 0x5b3d98);
             goto LAB_002a1e18;
           }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int fadeObjectResetIfActive(...);
-int FUN_002b1fc4(...);
+int quadSetOrderedVectors(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int __aeabi_vec_ctor_nocookie_nodtor(float [24], unsigned char *, int, int);
@@ -51,7 +51,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: fadeObjectResetIfActive. */
-/* Supplied declaration required: FUN_002b1fc4. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
@@ -193,7 +193,7 @@ void FUN_00190e48(void)
         temp_v36 = temp_v24;
         temp_v37 = temp_v25;
         temp_v38 = temp_v26;
-        FUN_002b1fc4(&temp_v35,&temp_v27,&temp_v31,&temp_v23,0,1);
+        quadSetOrderedVectors(&temp_v35,&temp_v27,&temp_v31,&temp_v23,0,1);
         temp_v0 = *(char *)(temp_v5 + temp_v7 * 4 + 0x494);
         if (((!(temp_v0 == '\a' || temp_v0 == '\n')) && (!(temp_v0 == '\v' || temp_v0 == '\f'))) &&
            ((!(temp_v0 == '\r' || temp_v0 == '\x0e') && (!(temp_v0 == '\x0f' || temp_v0 == '\x10'))))) {
@@ -271,7 +271,7 @@ void FUN_00190e48(void)
           temp_v38 = temp_v26;
           temp_v39 = temp_v27;
           temp_v40 = temp_v28;
-          FUN_002b1fc4(&temp_v25,&temp_v29,&temp_v33,&temp_v37,0,1);
+          quadSetOrderedVectors(&temp_v25,&temp_v29,&temp_v33,&temp_v37,0,1);
         }
         temp_v0 = acStack_8c[temp_v7];
         if (acStack_94[temp_v7] != '\0') {
@@ -389,7 +389,7 @@ void FUN_00190e48(void)
             temp_v38 = temp_v26;
             temp_v39 = temp_v27;
             temp_v40 = temp_v28;
-            FUN_002b1fc4(&temp_v25,&temp_v29,&temp_v33,&temp_v37,0,1);
+            quadSetOrderedVectors(&temp_v25,&temp_v29,&temp_v33,&temp_v37,0,1);
             FUN_002bf288(2,0x12,temp_v20,temp_v8,temp_v10,0x10);
             temp_v6 = temp_v2 - 0x100;
             temp_v16 = (float)VectorUnsignedToFloat(temp_v6 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -415,7 +415,7 @@ void FUN_00190e48(void)
             temp_v38 = temp_v26;
             temp_v39 = temp_v27;
             temp_v40 = temp_v28;
-            FUN_002b1fc4(&temp_v37,&temp_v33,&temp_v29,&temp_v25,0,1);
+            quadSetOrderedVectors(&temp_v37,&temp_v33,&temp_v29,&temp_v25,0,1);
           }
           else {
             FUN_002bf288(2,0x12,temp_v20,temp_v8,temp_v10,0x10);
@@ -460,7 +460,7 @@ void FUN_00190e48(void)
           temp_v36 = temp_v24;
           temp_v37 = temp_v25;
           temp_v38 = temp_v26;
-          FUN_002b1fc4(&temp_v23,&temp_v27,&temp_v31,&temp_v35,0,1);
+          quadSetOrderedVectors(&temp_v23,&temp_v27,&temp_v31,&temp_v35,0,1);
         }
         fadeObjectResetIfActive(temp_v5 + temp_v7 * 0x8c + 0x34);
       }

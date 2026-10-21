@@ -8,7 +8,7 @@ int sysMemClear(int, int);
 int FUN_003bfd84(unsigned char [524], unsigned int);
 int FUN_003cbb60(unsigned int, int);
 int controllerSetDestination(unsigned int, float *);
-int FUN_003fe9b4(unsigned int, unsigned char [12]);
+int tripleOwnerSetValue(unsigned int, unsigned char [12]);
 int FUN_004019c0(int, unsigned char [12]);
 int FUN_00401b50(int, float *);
 int rt_memcpy_w(int, unsigned char [524], int);
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_003bfd84. */
 /* Supplied declaration required: FUN_003cbb60. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fe9b4. */
+/* Supplied declaration required: tripleOwnerSetValue. */
 /* Supplied declaration required: FUN_004019c0. */
 /* Supplied declaration required: FUN_00401b50. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -66,7 +66,7 @@ unsigned int FUN_004f7778(int param_1)
         if (*(int *)(temp_v2 + 0x1398) == *(int *)(temp_v0 + 0x194)) {
           FUN_004019c0(temp_v2 + 0x13a0,temp_v9);
           temp_v4 = *(unsigned int *)(*piVar4 + 4);
-          FUN_003fe9b4(temp_v4,temp_v9);
+          tripleOwnerSetValue(temp_v4,temp_v9);
           FUN_00401b50(temp_v2 + 0x13a0,&temp_v6);
           temp_v6 = temp_v6 + *(float *)(temp_v0 + 0x1a0);
           temp_v7 = temp_v7 + *(float *)(temp_v0 + 0x1a4);

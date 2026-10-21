@@ -9,7 +9,7 @@ int dialogClose(int);
 
 extern int *g_btlHelp; /* 0x5738e8 */
 
-extern int FUN_001632fc(void);
+extern int infoWinHasValue(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: dialogClose. */
 
@@ -27,7 +27,7 @@ void FUN_004c89e8(void)
   while (temp_v0 != 0) {
     temp_v2 = *(int *)(temp_v0 + 0x874);
     if ((((-1 < *(short *)(temp_v0 + 0x872)) && (*(short *)(temp_v0 + 2) == 1)) &&
-        ((*(unsigned short *)(temp_v0 + 6) & 1) == 0)) && (temp_v1 = FUN_001632fc(), temp_v1 != 0)) {
+        ((*(unsigned short *)(temp_v0 + 6) & 1) == 0)) && (temp_v1 = infoWinHasValue(), temp_v1 != 0)) {
       dialogClose(1);
     }
     piVar2 = g_btlHelp;

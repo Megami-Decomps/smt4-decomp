@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015f858(...);
 int FUN_001695a0(void);
 int FUN_00180118(...);
-int FUN_001ba514(...);
+int partyFindSlotById(...);
 int FUN_002292ac(void);
 int messageForwardDefaultMode(...);
 int libc_strcpy(...);
@@ -26,7 +26,7 @@ int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageSlotSet(int);
 int resultCreate(int);
-int FUN_002c76c0(...);
+int scrCommMessageSetMode(...);
 int btlTalkBustUpCreate(void);
 int eventTexSetFlag(int);
 int scrSetResult(...);
@@ -62,7 +62,7 @@ typedef struct {
 
 extern unsigned int FUN_0015687c(void);
 /* Supplied declaration required: FUN_0015f858. */
-extern int FUN_00162880(void);
+extern int engineCleanupIsDone(void);
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
@@ -71,7 +71,7 @@ extern int dataTableValueOrZero(unsigned int);
 extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
-/* Supplied declaration required: FUN_001ba514. */
+/* Supplied declaration required: partyFindSlotById. */
 /* Supplied declaration required: FUN_002292ac. */
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: messageForwardDefaultMode. */
@@ -80,7 +80,7 @@ extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: messageSlotSet. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: resultCreate. */
-/* Supplied declaration required: FUN_002c76c0. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: libc_strcpy. */
@@ -211,7 +211,7 @@ unsigned int FUN_002ebdcc(void)
       }
       btlTalkBustUpSetUnk2F4(0);
       scrWorkSetValue(3,0);
-      FUN_002c76c0(1);
+      scrCommMessageSetMode(1);
       resultCreate(1);
       temp_v23 = 0;
       temp_v24 = 0;
@@ -233,10 +233,10 @@ unsigned int FUN_002ebdcc(void)
     }
     break;
   case 1:
-    temp_v2 = FUN_00162880();
+    temp_v2 = engineCleanupIsDone();
     if (temp_v2 != 0) {
       FUN_003315c4();
-      FUN_002c76c0(0xffffffff);
+      scrCommMessageSetMode(0xffffffff);
       messageSlotSet(0);
       sysPlaySe(0x92);
       scrWorkGetValue(3);
@@ -337,7 +337,7 @@ unsigned int FUN_002ebdcc(void)
         temp_v10 = temp_v4 + temp_v2 * 8;
         if (*(short *)(temp_v10 + 0x100) != 1) {
           if (*(short *)(temp_v10 + 0x100) == 2) {
-            FUN_001ba514(*(unsigned short *)(temp_v10 + 0x102));
+            partyFindSlotById(*(unsigned short *)(temp_v10 + 0x102));
             FUN_004d0d70();
           }
         }

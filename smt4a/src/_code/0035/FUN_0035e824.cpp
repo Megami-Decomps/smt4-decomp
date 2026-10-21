@@ -10,9 +10,9 @@ int FUN_002c7e6c(void);
 int FUN_002c8538(int);
 int FUN_002fb404(int);
 int FUN_00333f6c(void);
-int FUN_0037c770(unsigned int, int);
+int flagBitmapSetBit(unsigned int, int);
 int FUN_0038e4c4(int);
-int FUN_003a7b54(void);
+int statusDownGetValue(void);
 int statusDownEnterState1(unsigned int, int);
 int flagValueAdd(unsigned int, int);
 int flagValueSub(unsigned int, int);
@@ -29,9 +29,9 @@ extern int scrWorkGetValue(unsigned int);
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_002fb404. */
 /* Supplied declaration required: FUN_00333f6c. */
-/* Supplied declaration required: FUN_0037c770. */
+/* Supplied declaration required: flagBitmapSetBit. */
 /* Supplied declaration required: FUN_0038e4c4. */
-/* Supplied declaration required: FUN_003a7b54. */
+/* Supplied declaration required: statusDownGetValue. */
 extern int stateHolderIsMissingOrState0(void);
 /* Supplied declaration required: statusDownEnterState1. */
 /* Supplied declaration required: flagValueAdd. */
@@ -65,7 +65,7 @@ unsigned int FUN_0035e824(void)
       else {
         temp_v1 = stateHolderIsMissingOrState0();
         if (temp_v1 != 0) {
-          FUN_003a7b54();
+          statusDownGetValue();
           FUN_0022e774();
           scrWorkSetValue(0,3);
         }
@@ -80,7 +80,7 @@ unsigned int FUN_0035e824(void)
     }
   }
   else {
-    FUN_0037c770(temp_v0,1);
+    flagBitmapSetBit(temp_v0,1);
     flagValueAdd(temp_v0,1);
     flagValueSub(temp_v0,1);
     scrWorkSetValue(0,1);

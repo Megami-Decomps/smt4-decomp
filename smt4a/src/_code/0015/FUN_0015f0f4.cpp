@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001760cc(unsigned int);
 int FUN_001b3428(unsigned int *);
-int FUN_001b57a8(unsigned int *, int);
+int resultPairInitialize(unsigned int *, int);
 int FUN_001ba1c0(int, int *, int, int);
 int FUN_002e3140(void);
 int software_interrupt(int);
@@ -31,9 +31,9 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned long long jobGetWork(void);
 /* Supplied declaration required: FUN_001760cc. */
 extern int FUN_00176474(unsigned int);
-extern int FUN_001af210(int);
+extern int sysLightEventTryWait(int);
 /* Supplied declaration required: FUN_001b3428. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned int *);
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_002e3140. */
@@ -74,20 +74,20 @@ unsigned int FUN_0015f0f4(void)
     temp_v2 = puVar1[1];
   }
   if (((temp_v4 && temp_v0 == temp_v2) && (temp_v1 = FUN_00176474(g_aocSystem), temp_v1 != 0)) &&
-     (temp_v1 = FUN_001af210(g_aocMain + 0x98), temp_v1 != 0)) {
+     (temp_v1 = sysLightEventTryWait(g_aocMain + 0x98), temp_v1 != 0)) {
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     FUN_001760cc(g_aocSystem);
     puVar4 = (unsigned int *)FUN_001b5acc((unsigned int *)&temp_v7);
     puVar4[2] = 0;
     puVar4[3] = 0;
     puVar5 = temp_v11;
-    FUN_001b57a8(puVar5,0);
+    resultPairInitialize(puVar5,0);
     temp_v3 = puVar5[1];
     *puVar4 = *puVar5;
     puVar4[1] = temp_v3;
     puVar4 = temp_v11;
     temp_v9 = 0;
-    FUN_001b57a8(puVar4,0);
+    resultPairInitialize(puVar4,0);
     temp_v7 = *puVar4;
     temp_v8 = puVar4[1];
     temp_v6 = romwright_piece_3_1((((unsigned int)(temp_v6) >> 8) & 0xffffffU),200);

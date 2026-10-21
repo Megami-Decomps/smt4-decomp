@@ -12,7 +12,7 @@ int FUN_002296dc(...);
 int FUN_00229998(int *);
 int FUN_00229a24(...);
 int FUN_00229b10(...);
-int FUN_00246cf0(...);
+int bgmSwitchCurrent(...);
 int FUN_00247478(unsigned char [28], int, unsigned int);
 int btlMainFindEntryByListedId(int, int);
 int FUN_0029be5c(...);
@@ -46,7 +46,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_00229998. */
 /* Supplied declaration required: FUN_00229a24. */
 /* Supplied declaration required: FUN_00229b10. */
-/* Supplied declaration required: FUN_00246cf0. */
+/* Supplied declaration required: bgmSwitchCurrent. */
 /* Supplied declaration required: FUN_00247478. */
 /* Supplied declaration required: FUN_0027da30. */
 extern int battleUiIsFadeAndFieldReady(unsigned int);
@@ -328,7 +328,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
           temp_v1 = temp_v1 + 1;
         } while (temp_v9 != 0);
         if ((temp_v15 != 3) ||
-           (FUN_00246cf0(*param_1,*(unsigned int *)(*param_1 + 0x49dc)),
+           (bgmSwitchCurrent(*param_1,*(unsigned int *)(*param_1 + 0x49dc)),
            *(char *)(temp_v17 + 0x55) == '\0')) {
           FUN_00229b10(param_1,param_2);
         }

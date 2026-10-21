@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00256898(int, int);
 int FUN_002568c4(int);
 int FUN_0027da30(int, int);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int devilGetRecord(void);
 int textFormatBuffer(...);
 int FUN_003dadd8(unsigned int);
@@ -24,7 +24,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 /* Supplied declaration required: FUN_002568c4. */
 extern int FUN_00256940(int, int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_003dadd8. */
@@ -49,12 +49,12 @@ void FUN_003c06ac(int *param_1)
     temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 0x30);
   }
   textFormatBuffer(temp_v4,"battle/talk/Tone%s.tbb",*(unsigned int *)(temp_v3 * 4 + 0x439b70));
-  FUN_00297468(temp_v4,param_1 + 2,0);
+  asdLoadFileAsyncSimple(temp_v4,param_1 + 2,0);
   temp_v0 = *(unsigned char *)(temp_v2 + 0x30);
   param_1[0x32] = (unsigned int)temp_v0;
   textFormatBuffer(temp_v4,"battle/talk/TalkTone%s.mbm",*(unsigned int *)((unsigned int)temp_v0 * 4 + 0x439b70));
-  FUN_00297468(temp_v4,param_1 + 5,0);
-  FUN_00297468("battle/talk/talk.bf",param_1 + 3,0);
+  asdLoadFileAsyncSimple(temp_v4,param_1 + 5,0);
+  asdLoadFileAsyncSimple("battle/talk/talk.bf",param_1 + 3,0);
   FUN_003dadd8(DAT_00435d18);
   param_1[6] = 1;
   if ((-1 < *(int *)(g_btlMain + 0x760)) &&

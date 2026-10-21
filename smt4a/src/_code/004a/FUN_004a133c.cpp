@@ -17,9 +17,9 @@ extern int FUN_004a2238(...); /* 0x4a2238 */
 extern int FUN_004a2404(...); /* 0x4a2404 */
 extern int FUN_004a24a8(...); /* 0x4a24a8 */
 extern int FUN_004a2ee0(...); /* 0x4a2ee0 */
-extern int FUN_004a2f8c(...); /* 0x4a2f8c */
+extern int demonScreenConfirmSaveRefresh(...); /* 0x4a2f8c */
 extern int FUN_004a3154(...); /* 0x4a3154 */
-extern int FUN_004a35e4(...); /* 0x4a35e4 */
+extern int uiAnimatedPageToggleStep(...); /* 0x4a35e4 */
 extern int screen4AFinish(...); /* 0x4a374c */
 extern int FUN_004a38bc(...); /* 0x4a38bc */
 extern int FUN_004a39bc(...); /* 0x4a39bc */
@@ -65,9 +65,9 @@ void FUN_004a133c(int param_1)
   *(unsigned int *)(param_1 + 0xa8b4) = 0;
   *(romwright_code **)(param_1 + 0xa8b8) = FUN_004a38bc;
   *(unsigned int *)(param_1 + 0xa8bc) = 0;
-  *(romwright_code **)(param_1 + 0xa8c0) = FUN_004a2f8c;
+  *(romwright_code **)(param_1 + 0xa8c0) = demonScreenConfirmSaveRefresh;
   *(unsigned int *)(param_1 + 0xa8c4) = 0;
-  *(romwright_code **)(param_1 + 0xa8c8) = FUN_004a35e4;
+  *(romwright_code **)(param_1 + 0xa8c8) = uiAnimatedPageToggleStep;
   *(unsigned int *)(param_1 + 0xa8cc) = 0;
   *(romwright_code **)(param_1 + 0xa8d0) = FUN_004a2064;
   *(unsigned int *)(param_1 + 0xa8d4) = 0;

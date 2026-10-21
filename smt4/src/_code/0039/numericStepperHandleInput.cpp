@@ -1,0 +1,74 @@
+/* NON_MATCHING: -O2 candidate; first wrap test branches BNE/add then B/wrap instead of retail BEQ/wrap then B/add. */
+#include "shard/W6_W6Match7_NumericStepper.h"
+
+extern "C" {
+s32 FUN_0029d65c(s32 key);
+s32 FUN_002af600(s32 key);
+s32 FUN_003c2a84(u32 mode);
+s32 FUN_003c2b44(u32 mode);
+s32 FUN_003c2b14(u32 mode);
+s32 FUN_003c2ae4(u32 mode);
+s32 FUN_003c2a54(u32 mode);
+s32 FUN_003c2ab4(u32 mode);
+void FUN_00233404(void);
+}
+
+extern "C" void numericStepperHandleInput(NumericStepper* stepper)
+{
+    stepper->incrementActive = 0;
+    stepper->decrementActive = 0;
+    const s32 previous = stepper->value;
+    const s32 incrementState = FUN_0029d65c(stepper->incrementKey);
+    const s32 decrementState = FUN_0029d65c(stepper->decrementKey);
+    if (incrementState != 0) {
+        stepper->incrementActive = 1;
+    }
+    if (decrementState != 0) {
+        stepper->decrementActive = 1;
+    }
+
+    if (FUN_002af600(stepper->incrementKey) != 0) {
+        if (stepper->value != stepper->maximum) {
+            ++stepper->value;
+        } else {
+            stepper->value = stepper->minimum;
+        }
+    } else if (incrementState == 2 && stepper->value < stepper->maximum) {
+        ++stepper->value;
+    } else if (FUN_002af600(stepper->decrementKey) != 0) {
+        if (stepper->value == stepper->minimum) {
+            stepper->value = stepper->maximum;
+        } else {
+            --stepper->value;
+        }
+    } else if (decrementState == 2 && stepper->value > 0) {
+        --stepper->value;
+    } else if (FUN_003c2a84(0) != 0 && stepper->value == stepper->maximum) {
+        stepper->value = stepper->minimum;
+    } else if (FUN_003c2b44(0) != 0 && stepper->value == stepper->minimum) {
+        stepper->value = stepper->maximum;
+    } else {
+        if (FUN_003c2b14(0) != 0) {
+            stepper->value += 10;
+        }
+        if (FUN_003c2ae4(0) != 0) {
+            stepper->value -= 10;
+        }
+        if (FUN_003c2a54(0) != 0) {
+            ++stepper->value;
+        }
+        if (FUN_003c2ab4(0) != 0) {
+            --stepper->value;
+        }
+    }
+
+    if (stepper->value <= stepper->minimum) {
+        stepper->value = stepper->minimum;
+    }
+    if (stepper->value > stepper->maximum) {
+        stepper->value = stepper->maximum;
+    }
+    if (stepper->value != previous) {
+        FUN_00233404();
+    }
+}

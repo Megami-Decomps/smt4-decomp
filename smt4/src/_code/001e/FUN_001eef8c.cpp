@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00290994(...);
 
 int FUN_002580d4(...);
-int FUN_00288154(...);
+int gameRecordCopy(...);
 int FUN_0029a17c(...);
 int FUN_0029e6f0(void);
 int FUN_0029efc0(...);
-int FUN_002b066c(...);
-int FUN_002b6758(...);
+int partyMemberFindById(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
 int devilGetRecord(void);
 int FUN_002bce30(...);
@@ -58,7 +58,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002580d4. */
 extern int FUN_0026280c(void);
-/* Supplied declaration required: FUN_00288154. */
+/* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029d644(int);
@@ -68,8 +68,7 @@ extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
 extern int *gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002b066c. */
-/* Supplied declaration required: FUN_002b6758. */
+/* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bce30. */
@@ -146,7 +145,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       temp_v15 = 0xdc0f14ff;
     }
     else {
-      temp_v6 = FUN_002b066c(*puVar5);
+      temp_v6 = partyMemberFindById(*puVar5);
       if ((temp_v6 == 0) && (temp_v16 = 0xffffffff, *(char *)(temp_v3 + 0xe0) == '\0')) {
         temp_v16 = 0x72e027ff;
       }
@@ -239,11 +238,11 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         FUN_002be5a4(2,0x7a4c00ff,temp_v19,(int)*(short *)(temp_v11 + 8));
         temp_v12 = FUN_002bf4f8(0x24,0x117);
         if (*(unsigned int *)(temp_v10 + 0x1390) >> 0x1e == 3) {
-          FUN_00288154(*psVar13,temp_v17);
+          gameRecordCopy(*psVar13,temp_v17);
           temp_v5 = (unsigned int)temp_v17[0];
         }
         else {
-          temp_v14 = FUN_002b066c(*psVar13);
+          temp_v14 = partyMemberFindById(*psVar13);
           temp_v5 = (unsigned int)*(unsigned char *)(temp_v14 + 0x48);
         }
         drawSetColorFromRGBA8(0xff);
@@ -252,7 +251,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                      &LAB_001ef4c8,temp_v5);
         FUN_002bed3c();
         temp_v12 = FUN_002bf4f8(0x24,0x115);
-        FUN_002b6758((int)*psVar13,
+        uiDrawDemonIcon((int)*psVar13,
                      (int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,0x79,1);
         FUN_002580d4(*psVar13,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
@@ -288,11 +287,11 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         FUN_002be5a4(2,0x7a4c00ff,temp_v19,(int)*(short *)(temp_v11 + 8));
         temp_v12 = FUN_002bf4f8(0x24,0x117);
         if ((*(unsigned int *)(temp_v10 + 0x1394) & 3) == 3) {
-          FUN_00288154(*psVar13,temp_v17);
+          gameRecordCopy(*psVar13,temp_v17);
           temp_v1 = temp_v17[0];
         }
         else {
-          temp_v10 = FUN_002b066c(*psVar13);
+          temp_v10 = partyMemberFindById(*psVar13);
           temp_v1 = (unsigned short)*(unsigned char *)(temp_v10 + 0x48);
         }
         drawSetColorFromRGBA8(0xff);
@@ -301,7 +300,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                      &LAB_001ef4c8,temp_v1);
         FUN_002bed3c();
         temp_v10 = FUN_002bf4f8(0x24,0x115);
-        FUN_002b6758((int)*psVar13,
+        uiDrawDemonIcon((int)*psVar13,
                      (int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v6,0x6f,1);
         FUN_002580d4(*psVar13,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v8,
@@ -411,18 +410,18 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       FUN_002be5a4(2,0xf49800ff,temp_v19,(int)*(short *)(temp_v13 + 8));
       temp_v10 = FUN_002bf4f8(0x24,0x138);
       if (*(unsigned int *)(temp_v6 + 0x1390) >> 0x1e == 3) {
-        FUN_00288154(*psVar13,temp_v17);
+        gameRecordCopy(*psVar13,temp_v17);
         temp_v1 = temp_v17[0];
       }
       else {
-        temp_v11 = FUN_002b066c(*psVar13);
+        temp_v11 = partyMemberFindById(*psVar13);
         temp_v1 = (unsigned short)*(unsigned char *)(temp_v11 + 0x48);
       }
       FUN_002bdf94(0,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
                    (int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,1,2,0x8d,
                    &LAB_001efd48,temp_v1);
       temp_v11 = FUN_002bf4f8(0x24,0x136);
-      FUN_002b6758((int)*psVar13,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v9,
+      uiDrawDemonIcon((int)*psVar13,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v9,
                    (int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v8,0x8d,1);
       temp_v10 = g_titleScene;
       if (*(char *)(temp_v3 + 0xe0) == '\x01') {
@@ -484,17 +483,17 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       FUN_002be5a4(2,0xf49800ff,temp_v19,(int)*(short *)(temp_v13 + 8));
       temp_v10 = FUN_002bf4f8(0x24,0x138);
       if ((*(unsigned int *)(temp_v6 + 0x1394) & 3) == 3) {
-        FUN_00288154(*psVar13,temp_v17);
+        gameRecordCopy(*psVar13,temp_v17);
       }
       else {
-        temp_v6 = FUN_002b066c(*psVar13);
+        temp_v6 = partyMemberFindById(*psVar13);
         temp_v17[0] = (unsigned short)*(unsigned char *)(temp_v6 + 0x48);
       }
       FUN_002bdf94(0,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,1,2,0x8d,
                    &LAB_001f051c,temp_v17[0]);
       temp_v10 = FUN_002bf4f8(0x24,0x136);
-      FUN_002b6758((int)*psVar13,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
+      uiDrawDemonIcon((int)*psVar13,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
                    (int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,0x8d,1);
       temp_v6 = g_titleScene;
       if (*(char *)(temp_v3 + 0xe0) == '\x02') {

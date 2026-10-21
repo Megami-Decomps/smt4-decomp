@@ -1,5 +1,5 @@
 /* NON_MATCHING: stack layout only: retail packs the 88- and 20-byte buffers at sp+4/sp+92 with no 8-byte alignment and the position/size ints at sp+112/116 */
-/* Builds a request from the entry's position and size, hands it to FUN_002fe0f4 and returns 1. */
+/* Builds a request from the entry's position and size, hands it to chunkStreamFlush and returns 1. */
 #include "common.h"
 
 extern "C" {
@@ -21,7 +21,7 @@ typedef struct Handle {
 } Handle;
 
 extern void FUN_002ea668(Request *request);
-extern void FUN_002fe0f4(u32 owner, s32 *position, s32 *size, s32 flag, Request *request);
+extern void chunkStreamFlush(u32 owner, s32 *position, s32 *size, s32 flag, Request *request);
 extern void strAssign(u32 target, Handle *handle, s32 length, s32 arg);
 
 s32 FUN_001136f8(u32 owner, Entry *entry, u32 target)
@@ -34,7 +34,7 @@ s32 FUN_001136f8(u32 owner, Entry *entry, u32 target)
     FUN_002ea668(&request);
     position = entry->x + entry->offset;
     size = entry->size;
-    FUN_002fe0f4(owner, &position, &size, 1, &request);
+    chunkStreamFlush(owner, &position, &size, 1, &request);
     strAssign(target, &handle, 0x10, -1);
     return 1;
 }

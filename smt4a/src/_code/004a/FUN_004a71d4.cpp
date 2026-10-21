@@ -1,38 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a71d4` (_code @ 0x4a71d4, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
-extern "C" {
+struct SlotSortKeysView {
+    SlotSortInfo base;
+    u8 unk03[3];
+    u16 secondary; // 0x06
+    u8 unk08[0x12];
+    u16 primary; // 0x1a; preserve the shared three-byte prefix.
+};
 
-int FUN_00184310(void);
-
-/* Supplied declaration required: FUN_00184310. */
-
-
-int FUN_004a71d4(unsigned short *param_1,unsigned short *param_2)
-
+extern "C" s32 FUN_004a71d4(const u16 *left, const u16 *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00184310();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00184310();
-  temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x1a) - (unsigned int)*(unsigned short *)(temp_v1 + 0x1a);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_00184310();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_00184310();
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 6) - (unsigned int)*(unsigned short *)(temp_v0 + 6);
-    if (temp_v2 == 0) {
-      temp_v2 = (unsigned int)*param_1 - (unsigned int)*param_2;
+    const SlotSortKeysView *leftRecord =
+        reinterpret_cast<const SlotSortKeysView *>(FUN_00184310(*left));
+    const SlotSortKeysView *rightRecord =
+        reinterpret_cast<const SlotSortKeysView *>(FUN_00184310(*right));
+    s32 comparison = leftRecord->primary - rightRecord->primary;
+    if (comparison == 0) {
+        leftRecord = reinterpret_cast<const SlotSortKeysView *>(FUN_00184310(*left));
+        rightRecord = reinterpret_cast<const SlotSortKeysView *>(FUN_00184310(*right));
+        comparison = rightRecord->secondary - leftRecord->secondary;
+        if (comparison == 0)
+            comparison = *left - *right;
     }
-  }
-  return temp_v2;
+    return comparison;
 }
-
-} /* extern "C" */

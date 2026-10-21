@@ -43,7 +43,7 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern int *gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
-extern int FUN_002bce00(unsigned int);
+extern int aocIndexValueOrDefault(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -100,7 +100,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
                    0x6f);
       if ((temp_v7 != 0) && (FUN_00288e68(), temp_v10 = temp_v7, temp_v7 != 0)) {
         temp_v2 = FUN_002bf4f8(0x1d,0x454);
-        temp_v3 = FUN_002bce00(temp_v10);
+        temp_v3 = aocIndexValueOrDefault(temp_v10);
         if (temp_v3 != 0) {
           temp_v8 = 0xff;
           temp_v4 = FUN_00298848(temp_v10,0xffffffff);
@@ -178,7 +178,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
     return;
   }
   temp_v5 = FUN_002bf4f8(0x1d,0x460);
-  temp_v0 = FUN_002bce00(temp_v7);
+  temp_v0 = aocIndexValueOrDefault(temp_v7);
   if (temp_v0 != 0) {
     temp_v8 = 0xffffffff;
     temp_v1 = FUN_00298848(temp_v7,0xffffffff);

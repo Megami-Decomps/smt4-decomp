@@ -2,16 +2,16 @@
 
 extern "C" {
 
-extern JobRef *DAT_00589144;
+extern JobRef *g_freeCamera;
 extern void jobStop(u32 job, u16 arg);
 extern void asdOperatorDelete(JobRef *ref);
 
 void jobRefStopAndFree(void)
 {
-    jobStop(DAT_00589144->job, 0);
-    if (DAT_00589144 != NULL) {
-        asdOperatorDelete(DAT_00589144);
-        DAT_00589144 = NULL;
+    jobStop(g_freeCamera->job, 0);
+    if (g_freeCamera != NULL) {
+        asdOperatorDelete(g_freeCamera);
+        g_freeCamera = NULL;
     }
 }
 

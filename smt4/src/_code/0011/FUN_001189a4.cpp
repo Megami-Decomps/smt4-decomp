@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00126830(void *, int);
 int FUN_002b75ec(...);
-int FUN_002bd81c(...);
+int positionStateSet(...);
 int FUN_002bedb0(...);
 int FUN_002bee04(unsigned int, int, unsigned int);
 int FUN_002bf380(int, int, int, int, int, int);
@@ -36,7 +36,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00126830. */
 /* Supplied declaration required: FUN_002b75ec. */
-/* Supplied declaration required: FUN_002bd81c. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -126,11 +126,11 @@ void FUN_001189a4(fn_001189a4_arg0 *param_1)
         temp_v1 = FUN_002bf4f8(0xe,temp_v6[temp_v3 + temp_v2]);
         if (param_1->field_0x18 == temp_v2) {
           *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 10;
-          FUN_002bd81c(param_1->field_0x4,0,0xffffffff);
+          positionStateSet(param_1->field_0x4,0,0xffffffff);
         }
         else {
           *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 0xb;
-          FUN_002bd81c(param_1->field_0x4,0,temp_v0);
+          positionStateSet(param_1->field_0x4,0,temp_v0);
         }
         FUN_002b75ec(param_1->field_0x4,(int)*(short *)(temp_v1 + 8),*(short *)(temp_v1 + 10) - 4,0x33,6
                      ,temp_v2);
@@ -139,7 +139,7 @@ void FUN_001189a4(fn_001189a4_arg0 *param_1)
     }
   }
   *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 0;
-  FUN_002bd81c(param_1->field_0x4,0,0x646464ff);
+  positionStateSet(param_1->field_0x4,0,0x646464ff);
   FUN_002bedb0(g_titleScene,3);
   return;
 }

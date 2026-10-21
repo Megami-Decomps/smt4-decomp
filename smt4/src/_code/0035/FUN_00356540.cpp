@@ -6,7 +6,7 @@ extern "C" {
 
 int software_interrupt(int);
 
-extern unsigned int DAT_004d4358; /* 0x4d4358 */
+extern unsigned int g_titleContentAdapterHeap; /* 0x4d4358 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern unsigned int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
@@ -20,7 +20,7 @@ unsigned int FUN_00356540(unsigned int param_1,unsigned int *param_2,unsigned in
   
   puVar1 = (unsigned int *)
            nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
-                     (&DAT_004d4358);
+                     (&g_titleContentAdapterHeap);
   if (puVar1 != (unsigned int *)0x0) {
     *puVar1 = (unsigned int)"扄5抄5兀=慬5";
     puVar1[1] = param_3;

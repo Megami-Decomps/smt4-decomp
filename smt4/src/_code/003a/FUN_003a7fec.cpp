@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ad42c(...);
+int gameDataStoreRecord(...);
 
 typedef struct fn_003a7fec_arg1 fn_003a7fec_arg1;
 struct fn_003a7fec_arg1 {
@@ -59,8 +59,8 @@ typedef struct {
     unsigned short sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001ad42c. */
-extern int FUN_00288154(fn_003a7fec_arg1 *, unsigned short *);
+/* Supplied declaration required: gameDataStoreRecord. */
+extern int gameRecordCopy(fn_003a7fec_arg1 *, unsigned short *);
 extern unsigned short *FUN_003ad6e0(fn_003a7fec_arg1 *);
 
 
@@ -91,7 +91,7 @@ void FUN_003a7fec(unsigned int param_1,fn_003a7fec_arg1 *param_2)
   unsigned int temp_v16;
   
   puVar1 = (unsigned short *)FUN_003ad6e0(param_2);
-  temp_v0 = FUN_00288154(param_2,&temp_v1);
+  temp_v0 = gameRecordCopy(param_2,&temp_v1);
   if (temp_v0 != 0) {
     temp_v1 = (unsigned short)*(unsigned char *)(puVar1 + 0x24);
     temp_v16 = *(unsigned int *)(puVar1 + 0x18);
@@ -112,7 +112,7 @@ void FUN_003a7fec(unsigned int param_1,fn_003a7fec_arg1 *param_2)
     uStack_1c = *(unsigned int *)(puVar1 + 0x1e);
     uStack_18 = *(unsigned int *)(puVar1 + 0x20);
     temp_v12 = (temp_v12 & 0xc3) | ((*(unsigned char *)((int)puVar1 + 0x601) & 0xf) << 2);
-    FUN_001ad42c(param_2,&temp_v1);
+    gameDataStoreRecord(param_2,&temp_v1);
   }
   return;
 }

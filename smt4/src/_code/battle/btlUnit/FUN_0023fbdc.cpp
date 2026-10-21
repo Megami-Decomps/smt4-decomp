@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023fbdc` (_code @ 0x23fbdc, 0x400 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_BattleVersionResources.h"
 
 extern "C" {
 
-int FUN_00240530(...);
+int btlReflectInitKind9(...);
 int FUN_0024057c(int, int, int, int, int);
-int FUN_00240614(int);
 int FUN_00240678(...);
 int FUN_0024082c(...);
 int FUN_002451c4(int, unsigned int *, int, int, int, int);
@@ -15,7 +15,7 @@ int FUN_00254f58(...);
 int FUN_0027da30(int, int);
 int FUN_0027e6f4(int, int);
 int FUN_002b7bca(int [50], int, int, unsigned char *);
-int FUN_00394c6c(int);
+int btlSetSelectedListedValue(int);
 int FUN_003ae720(...);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -41,10 +41,9 @@ extern unsigned int DAT_00439a34; /* 0x439a34 */
 extern unsigned int DAT_00439a38; /* 0x439a38 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00240530. */
+/* Supplied declaration required: btlReflectInitKind9. */
 /* Supplied declaration required: FUN_0024057c. */
-extern int FUN_002405c8(int, unsigned short);
-/* Supplied declaration required: FUN_00240614. */
+extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_00240678. */
 /* Supplied declaration required: FUN_0024082c. */
 /* Supplied declaration required: FUN_002451c4. */
@@ -53,7 +52,7 @@ extern int FUN_002405c8(int, unsigned short);
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: FUN_0027e6f4. */
 /* Supplied declaration required: FUN_002b7bca. */
-/* Supplied declaration required: FUN_00394c6c. */
+/* Supplied declaration required: btlSetSelectedListedValue. */
 /* Supplied declaration required: FUN_003ae720. */
 extern int FUN_003db7b4(int);
 
@@ -93,7 +92,7 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
       temp_v3 = param_2;
       FUN_0027e6f4(param_2,1);
       if ((temp_v3 < 0) && ((*(unsigned int *)(param_2 + 0xe4) & 0x20) == 0)) {
-        FUN_00394c6c(3);
+        btlSetSelectedListedValue(3);
       }
     }
     else {
@@ -108,7 +107,7 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
   }
   if ((param_1[3] == 0) && ((*(unsigned int *)(DAT_00435d18 + 0x3028) & 0x400) != 0)) {
     *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000;
-    FUN_00240614(temp_v3);
+    FUN_00240614(reinterpret_cast<BattleVersionResources*>(temp_v3));
     param_1[3] = param_1[3] | 2;
   }
   if (((param_1[3] & 2) != 0) && (temp_v3 = FUN_003db7b4(DAT_00435d18), temp_v3 != 0)) {
@@ -136,7 +135,7 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
            (*(unsigned short *)(temp_v4 + 0x58) & 0x800) == 0)) {
           temp_v5 = param_2;
           FUN_0027da30(param_2,(int)*(short *)(temp_v4 + 0x62));
-          temp_v5 = FUN_002405c8(param_2,*(unsigned short *)(temp_v5 + 2));
+          temp_v5 = pairedEntryTableContains(param_2,*(unsigned short *)(temp_v5 + 2));
           if (temp_v5 == 0) {
             *(unsigned short *)(temp_v4 + 0x58) = *(unsigned short *)(temp_v4 + 0x58) | 0x800;
             if ((*(unsigned int *)(temp_v4 + 0x50) & 0x10) != 0) {
@@ -158,7 +157,7 @@ void FUN_0023fbdc(unsigned int *param_1,int param_2)
             if ((*(unsigned int *)(temp_v4 + 0x50) & 0x10) != 0) {
               temp_v6 = 7;
             }
-            FUN_00240530((int)temp_v8 * (int)temp_v0 + temp_v9,param_1,temp_v4,temp_v6,0xd);
+            btlReflectInitKind9((int)temp_v8 * (int)temp_v0 + temp_v9,param_1,temp_v4,temp_v6,0xd);
             if (temp_v11 == 0) {
               FUN_002505c0((int)temp_v8 * (int)temp_v0,param_1,0x10001d4,0,0,0,0);
               temp_v11 = 1;

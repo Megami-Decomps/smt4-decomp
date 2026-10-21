@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029c3c0(int, int, unsigned int);
+int slotSetRequest(int, int, unsigned int);
 int FUN_002a03d8(...);
 int mathInterpolateTimed(...);
 
@@ -12,7 +12,7 @@ extern int DAT_0043df28; /* 0x43df28 */
 extern unsigned int DAT_0043df40; /* 0x43df40 */
 extern unsigned int DAT_0043df44; /* 0x43df44 */
 
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_002a03d8. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_002c1d5c(void);
@@ -74,7 +74,7 @@ unsigned int FUN_001ad6fc(void)
       *(float *)(temp_v0 + 0x20) = temp_v6;
       *(float *)(temp_v0 + 0x1c) = temp_v6;
       *(unsigned int *)(temp_v0 + 0xc) = 2;
-      FUN_0029c3c0(1,piVar4[2] + 1,0xffffffff);
+      slotSetRequest(1,piVar4[2] + 1,0xffffffff);
     }
     else {
       FUN_002a03d8(0);
@@ -117,7 +117,7 @@ unsigned int FUN_001ad6fc(void)
     }
     *(int *)(temp_v0 + 0x18) = *(int *)(temp_v0 + 0x18) + 1;
     if (*(int *)(temp_v0 + 0x20) >= 0x3f733333) {
-      FUN_0029c3c0(0,0,0xffffffff);
+      slotSetRequest(0,0,0xffffffff);
     }
     if (*(int *)(temp_v0 + 0x20) != 0x3f800000) {
       return 0;

@@ -5,9 +5,9 @@
 extern "C" {
 
 int gameFlagsGetBlock(...);
-int FUN_001b4aa0(void);
-int FUN_00268450(int);
-int FUN_002854a8(int, int);
+int gameDataTableGetFlag(void);
+int sectionValueSetClamped(int);
+int gameValueBlockSet(int, int);
 int FUN_002b945c(unsigned int);
 int FUN_002c7ad8(void);
 int gameFlagSetValue(...);
@@ -28,15 +28,15 @@ extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
 
 /* Supplied declaration required: gameFlagsGetBlock. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001b4aa0. */
+/* Supplied declaration required: gameDataTableGetFlag. */
 extern int FUN_001ba570(void);
-extern int FUN_00261424(void);
-/* Supplied declaration required: FUN_00268450. */
-/* Supplied declaration required: FUN_002854a8. */
+extern int gameDataGetTableValue(void);
+/* Supplied declaration required: sectionValueSetClamped. */
+/* Supplied declaration required: gameValueBlockSet. */
 /* Supplied declaration required: FUN_002b945c. */
 /* Supplied declaration required: FUN_002c7ad8. */
 extern int sequenceRequestIsPending(void);
-extern char *FUN_003798f0(int);
+extern char *dataTableGetRecord23(int);
 extern int FUN_003857c8(int);
 extern int dataTable23Type1CountWithAoc(void);
 /* Supplied declaration required: gameFlagSetValue. */
@@ -61,10 +61,10 @@ void FUN_002d2000(void)
   if (temp_v0 != '\0') {
     *(unsigned char *)(temp_v1 + 0x7c4) = 0;
     if (temp_v0 != '\x01') {
-      temp_v2 = FUN_001b4aa0();
+      temp_v2 = gameDataTableGetFlag();
       if (temp_v2 == 0) {
         temp_v2 = FUN_003857c8((int)*(float *)(temp_v1 + 0x15c4));
-        FUN_002854a8(temp_v2,1);
+        gameValueBlockSet(temp_v2,1);
         if (temp_v2 == 9) {
           temp_v4 = 0x4d2;
           temp_v2 = gameFlagIsSet(0x4d2);
@@ -72,11 +72,11 @@ void FUN_002d2000(void)
             temp_v4 = 0x4d3;
           }
           gameFlagSetValue(temp_v4,1);
-          temp_v2 = FUN_00261424();
-          FUN_00268450(temp_v2 + 1);
+          temp_v2 = gameDataGetTableValue();
+          sectionValueSetClamped(temp_v2 + 1);
           temp_v2 = 0;
           do {
-            FUN_002854a8(temp_v2,0);
+            gameValueBlockSet(temp_v2,0);
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 10);
           FUN_002c7ad8();
@@ -97,7 +97,7 @@ void FUN_002d2000(void)
           temp_v3 = dataTable23Type1CountWithAoc();
           if (0 < temp_v3) {
             do {
-              pcVar5 = (char *)FUN_003798f0(temp_v5);
+              pcVar5 = (char *)dataTableGetRecord23(temp_v5);
               temp_v0 = *pcVar5;
               temp_v6 = temp_v0 == '\x18';
               if (temp_v6) {
@@ -134,7 +134,7 @@ LAB_002d21fc:
       }
     }
     else {
-      temp_v4 = FUN_001b4aa0();
+      temp_v4 = gameDataTableGetFlag();
       switch(temp_v4) {
       case 0:
       case 1:

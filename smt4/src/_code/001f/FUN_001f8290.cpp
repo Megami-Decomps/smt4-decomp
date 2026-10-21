@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00214568(...);
 int FUN_00223360(...);
-int FUN_00267d3c(...);
+int btlUiPlaySceneFadeOutWhenReady(...);
 int playSceneSetState(...);
 int resultCreateDefault(...);
 int taskCreateDraw(...);
-int FUN_002ce2e4(...);
+void resultAddExperienceReward(const int *);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -27,11 +27,10 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00214568. */
 /* Supplied declaration required: FUN_00223360. */
-/* Supplied declaration required: FUN_00267d3c. */
+/* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
 /* Supplied declaration required: playSceneSetState. */
 /* Supplied declaration required: resultCreateDefault. */
 /* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: FUN_002ce2e4. */
 
 
 /* WARNING: Removing unreachable block (ram,0x002bd91c) */
@@ -53,12 +52,12 @@ void FUN_001f8290(unsigned int *param_1)
   temp_v0 = 0;
   if (temp_v0 < (int)param_1[0xfc]) {
     do {
-      FUN_002ce2e4(param_1 + temp_v0 * 2 + 0x7c);
+      resultAddExperienceReward((const int *)(param_1 + temp_v0 * 2 + 0x7c));
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < (int)param_1[0xfc]);
   }
   param_1[0xfc] = 0;
-  FUN_00267d3c(g_btlUiBlock);
+  btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
   temp_v0 = g_btlUiBlock;
   *(unsigned int *)(g_btlUiBlock + 0x7e38) = 0x10;
   if (*(int *)(temp_v0 + 0x54a8) == 0) {

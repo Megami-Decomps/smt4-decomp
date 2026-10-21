@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0029c3c0(int, int, unsigned int);
+int slotSetRequest(int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
 int ifTouchRegionRemove(void);
 int eventQueueAddUnique(int);
 
 extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -127,8 +127,8 @@ unsigned int FUN_00221310(void)
       *(unsigned int *)(temp_v0 + 0x1c) = 0;
       *(unsigned int *)(temp_v0 + 4) = 6;
       *(unsigned int *)(temp_v0 + 8) = 0;
-      FUN_0029c3c0(0,0x1e,0xffffffff);
-      FUN_0029c3c0(1,0x1e,0xffffffff);
+      slotSetRequest(0,0x1e,0xffffffff);
+      slotSetRequest(1,0x1e,0xffffffff);
     }
     break;
   case 6:

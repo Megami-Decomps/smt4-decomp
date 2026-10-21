@@ -1,48 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ea5e8` (_code @ 0x4ea5e8, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail computes both field cursors from the unit base and saves only LR. */
+#include "common.h"
 
-extern "C" {
+struct UnitCountPair {
+    s32 first;  // 0x00
+    s32 second; // 0x04
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} void_stack;
+struct UnitCountTable {
+    u8 unk000[0x5b8]; // 0x000
+    UnitCountPair records[133]; // 0x5b8
+};
 
-extern int btlUnitGet(void);
+extern "C" UnitCountTable* btlUnitGet(u32 unitId);
 
-
-int FUN_004ea5e8(void)
-
+// Count records with a nonnegative first value and a positive second value.
+extern "C" s32 FUN_004ea5e8(u32 unitId)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  int *piVar4;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = btlUnitGet();
-  temp_v1 = 0;
-  temp_v2 = 0x85;
-  piVar3 = (int *)(temp_v0 + 0x5b8);
-  piVar4 = (int *)(temp_v0 + 0x5bc);
-  do {
-    temp_v0 = *piVar3;
-    piVar3 = piVar3 + 2;
-    temp_v3 = -1 < temp_v0;
-    if (temp_v3) {
-      temp_v0 = *piVar4;
+    UnitCountTable* unit = btlUnitGet(unitId);
+    const UnitCountPair* record = unit->records;
+    s32 count = 0;
+    for (s32 remaining = 133; remaining != 0; --remaining, ++record) {
+        if (record->first >= 0 && record->second > 0) {
+            ++count;
+        }
     }
-    piVar4 = piVar4 + 2;
-    if (temp_v0 != 0 && (temp_v3 && -1 < temp_v0)) {
-      temp_v1 = temp_v1 + 1;
-    }
-    temp_v2 = temp_v2 - 1;
-  } while (temp_v2 != 0);
-                    /* WARNING: Treating indirect jump as return */
-  return temp_v1;
+    return count;
 }
-
-} /* extern "C" */

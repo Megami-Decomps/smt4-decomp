@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00178b04(int, unsigned char *, int);
 int controllerSetDestination(int, int *);
 int controllerSetPosition(int);
-int FUN_003fdb18(int);
+int controllerSetRotationEulerDegrees(int);
 int FUN_003fe86c(int, int, int);
 int moriModelContentCopyBody(void);
-int FUN_0040ace8(unsigned int, int);
+int handleRegistryRegisterObject(unsigned int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -25,11 +25,11 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: moriModelContentCopyBody. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 void FUN_004824fc(int param_1)
@@ -46,19 +46,19 @@ void FUN_004824fc(int param_1)
   FUN_00178b04(0x20,&LAB_004825d0,0x9a);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   *(unsigned int *)(param_1 + 0x78) = temp_v1;
   moriModelContentCopyBody();
   temp_v0 = *(int *)(*(int *)(param_1 + 0x78) + 4);
-  FUN_0040ace8(g_handleRegistry,temp_v0);
+  handleRegistryRegisterObject(g_handleRegistry,temp_v0);
   *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
   *(unsigned char *)(param_1 + 0xc) = *(unsigned char *)(param_1 + 0xc) | 2;
   temp_v2 = 0;
   temp_v3 = 0;
   temp_v4 = 0;
   controllerSetDestination(temp_v0,&temp_v2);
-  FUN_003fdb18(temp_v0);
+  controllerSetRotationEulerDegrees(temp_v0);
   controllerSetPosition(temp_v0);
   FUN_003fe86c(temp_v0,0,2);
   return;

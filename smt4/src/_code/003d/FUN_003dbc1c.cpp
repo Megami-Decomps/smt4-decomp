@@ -33,7 +33,7 @@ typedef char romwright_storage_s__B_B_B_B_B_B_00435d00_25_1_s1_width_check[(size
 extern union romwright_storage_s__B_B_B_B_B_B_00435d00_25_1 s__B_B_B_B_B_B_00435d00; /* 0x435d00 */
 
 /* Supplied declaration required: FUN_00249e54. */
-extern unsigned int FUN_0024a6b0(int);
+extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: libc_strncmp. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -115,7 +115,7 @@ void FUN_003dbc1c(int param_1)
                   temp_v6 = pcVar3[2] == 'R';
                 }
                 if (temp_v6) {
-                  temp_v2 = FUN_0024a6b0(temp_v1 + 0x1d08);
+                  temp_v2 = keyedRecordRegisterName(temp_v1 + 0x1d08);
                   *(char *)(temp_v1 + 0x1d00) = (char)temp_v2;
                   FUN_00249e54(temp_v2,pcVar3);
                   *(char *)(temp_v1 + 0x1d00) = (char)temp_v2;

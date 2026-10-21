@@ -1,30 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00316de4` (_code @ 0x316de4, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: armcc merges the clear/set stores and uses a writeback load, unlike retail's separate clear and conditional-set address forms. */
+#include "shard/SaveWork.h"
 
-extern "C" {
+struct MapFlagWords {
+    /* 0x000 */ u8 unk000[0xcd8];
+    /* 0xcd8 */ u32 words[1];
+};
 
-extern int gameGetMapBlock(void);
+extern "C" SaveWork* gameGetMapBlock(void);
 
-
-void FUN_00316de4(int param_1,int param_2)
-
+extern "C" void FUN_00316de4(s32 index, s32 enabled)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = gameGetMapBlock();
-  temp_v1 = temp_v1 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-  temp_v2 = *(unsigned int *)(temp_v1 + 0xcd8);
-  temp_v0 = 1 << ((param_1 % 0x20) & 0xffU);
-  if (param_2 == 0) {
-    *(unsigned int *)(temp_v1 + 0xcd8) = temp_v2 & ~temp_v0;
-  }
-  else if ((temp_v2 & temp_v0) == 0) {
-    *(unsigned int *)(temp_v1 + 0xcd8) = temp_v0 | temp_v2;
-  }
-  return;
+    MapFlagWords* flags = (MapFlagWords*)gameGetMapBlock();
+    u32* word = &flags->words[index / 32];
+    u32 mask = 1u << (index % 32);
+    if (enabled == 0) {
+        *word &= ~mask;
+    } else if ((*word & mask) == 0) {
+        *word |= mask;
+    }
 }
-
-} /* extern "C" */

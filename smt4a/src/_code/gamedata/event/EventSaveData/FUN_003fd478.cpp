@@ -1,34 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fd478` (_code @ 0x3fd478, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: snapshot, source, and copy-size locals occupy different saved registers from retail. */
+#include "gamedata/event/EventSaveData.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
+GameSaveData *gameFlagBlockGet(void);
+void *asdMemoryAlloc(s32, s32, s32, u32, s32);
+void *rt_memcpy(void *, const void *, u32);
 
-int asdMemoryAlloc(int, int, int, int, int);
-int gameFlagBlockGet(void);
-int rt_memcpy(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: gameFlagBlockGet. */
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int FUN_003fd478(void)
-
+// Allocate a snapshot of the event save-data block.
+EventSaveData *FUN_003fd478(void)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  gameFlagBlockGet();
-  temp_v0 = 0x100;
-  asdMemoryAlloc(0x100,0x100,0,0x44,1);
-  rt_memcpy();
-  return temp_v0;
+    GameSaveData *save = gameFlagBlockGet();
+    u32 size = sizeof(EventSaveData);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\event\\EventSaveData.cpp", 0x79);
+    EventSaveData *snapshot = (EventSaveData *)asdMemoryAlloc(
+        ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, size, 1);
+    rt_memcpy(snapshot, &save->event, size);
+    return snapshot;
 }
-
-} /* extern "C" */
+}

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022b064(...);
 int FUN_002305e8(...);
-int FUN_0026374c(...);
+int placeWinStartText(...);
 int scrLoaderReset(...);
 int scrLoaderFreeBuffers(...);
 int FUN_0027db24(...);
@@ -36,7 +36,7 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0022b064. */
 /* Supplied declaration required: FUN_002305e8. */
-/* Supplied declaration required: FUN_0026374c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: scrLoaderReset. */
 /* Supplied declaration required: scrLoaderFreeBuffers. */
 extern int FUN_002736e8(int);
@@ -63,7 +63,7 @@ void FUN_003b9a84(fn_003b9a84_arg0 *param_1)
       param_1->field_0x2c = 0;
       param_1->field_0x28 = 5;
       param_1->field_0x6cc = 0;
-      FUN_0026374c((int)param_1->field_0xd5c + 2);
+      placeWinStartText((int)param_1->field_0xd5c + 2);
       FUN_002305e8(1);
       return;
     }

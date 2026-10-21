@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00226724(int, int, int, int);
+extern int lerpIntSplitClamped(int, int, int, int);
 
 
 unsigned int FUN_00318e08(int *param_1,int param_2,int param_3,int param_4,int param_5)
@@ -12,7 +12,7 @@ unsigned int FUN_00318e08(int *param_1,int param_2,int param_3,int param_4,int p
 {
   int temp_v0;
   
-  temp_v0 = FUN_00226724(param_3,param_4,param_2,param_5);
+  temp_v0 = lerpIntSplitClamped(param_3,param_4,param_2,param_5);
   *param_1 = temp_v0;
   if (param_4 - param_3 >= 1) {
     if (param_4 <= temp_v0) {

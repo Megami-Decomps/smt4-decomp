@@ -23,8 +23,8 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
-extern int FUN_0032526c(void);
-extern unsigned int FUN_00376f94(void);
+extern int mapEnemyHasSpecialKind(void);
+extern unsigned int lmapGetSpawnIndex(void);
 extern int partyEntryFlagsBit1(short);
 
 
@@ -43,9 +43,9 @@ unsigned char * FUN_003b52ec(void)
   unsigned char temp_v7;
   
   temp_v0 = gameFlagsGetBlock();
-  temp_v1 = FUN_0032526c();
+  temp_v1 = mapEnemyHasSpecialKind();
   if (DAT_005f1623 != '\0') {
-    temp_v2 = FUN_00376f94();
+    temp_v2 = lmapGetSpawnIndex();
     if (temp_v2 != 0) {
       temp_v6 = 0;
       dataTableGet(0x23,7);

@@ -9,8 +9,8 @@ int jobGetScalarValue(void);
 int renderCtxCallB(void);
 int FUN_002a8a58(int *, unsigned int);
 int FUN_002a8ac4(...);
-int FUN_002b1fc4(...);
-int FUN_002b7064(void);
+int quadSetOrderedVectors(...);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int FUN_002b76d0(...);
 int FUN_002ba12c(...);
@@ -75,8 +75,8 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: FUN_002a8a58. */
 /* Supplied declaration required: FUN_002a8ac4. */
-/* Supplied declaration required: FUN_002b1fc4. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: quadSetOrderedVectors. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002b76d0. */
 /* Supplied declaration required: FUN_002ba12c. */
@@ -277,7 +277,7 @@ LAB_00393954:
           fStack_ac = temp_v19[0x1b];
           fStack_9c = temp_v19[0x17];
           fStack_8c = temp_v19[0x13];
-          FUN_002b1fc4(&temp_v24,&temp_v23,&temp_v22,temp_v19 + 0x20,temp_v18,1);
+          quadSetOrderedVectors(&temp_v24,&temp_v23,&temp_v22,temp_v19 + 0x20,temp_v18,1);
         }
         goto LAB_00393b58;
       }
@@ -313,7 +313,7 @@ LAB_00393954:
           fStack_6c = temp_v19[0x1b];
           fStack_5c = temp_v19[0x17];
           fStack_4c = temp_v19[0x13];
-          FUN_002b1fc4(&temp_v27,&temp_v26,&temp_v25,temp_v19 + 0x20,temp_v18,1);
+          quadSetOrderedVectors(&temp_v27,&temp_v26,&temp_v25,temp_v19 + 0x20,temp_v18,1);
         }
         temp_v13 = 0.00390625f;
         temp_v11 = (*param_3 & 0x10) == 0;
@@ -392,7 +392,7 @@ LAB_00393954:
             FUN_002b70cc();
             temp_v13 = (float)VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
             param_3[2] = (int)(temp_v13 - temp_v12 * temp_v15);
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v15 = temp_v8 * temp_v15;
           }
           temp_v8 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -427,7 +427,7 @@ LAB_00393954:
           uStack_64 = temp_v19[1];
           uStack_60 = temp_v19[2];
           fStack_5c = temp_v19[3];
-          FUN_002b1fc4(&temp_v26,&temp_v25,temp_v19 + 0x20,&temp_v17,temp_v21,0);
+          quadSetOrderedVectors(&temp_v26,&temp_v25,temp_v19 + 0x20,&temp_v17,temp_v21,0);
         }
         if (temp_v10) {
           FUN_002331c0();
@@ -463,7 +463,7 @@ LAB_00393b58:
       uStack_a4 = temp_v19[1];
       uStack_a0 = temp_v19[2];
       fStack_9c = temp_v19[3];
-      FUN_002b1fc4(&temp_v23,&temp_v22,temp_v19 + 0x20,&temp_v18,temp_v21,0);
+      quadSetOrderedVectors(&temp_v23,&temp_v22,temp_v19 + 0x20,&temp_v18,temp_v21,0);
     }
     if (temp_v10) {
       FUN_002331c0();

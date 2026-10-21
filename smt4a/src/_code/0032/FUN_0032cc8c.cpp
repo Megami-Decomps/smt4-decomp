@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0015e198(int, int);
+int trackerMoveTo(int, int);
 
 typedef struct fn_0032cc8c_arg0 fn_0032cc8c_arg0;
 struct fn_0032cc8c_arg0 {
@@ -20,7 +20,7 @@ struct fn_0032cc8c_arg0 {
 
 extern signed char DAT_0063f4c4; /* 0x63f4c4 */
 
-/* Supplied declaration required: FUN_0015e198. */
+/* Supplied declaration required: trackerMoveTo. */
 
 
 void FUN_0032cc8c(fn_0032cc8c_arg0 *param_1,unsigned int *param_2)
@@ -34,7 +34,7 @@ void FUN_0032cc8c(fn_0032cc8c_arg0 *param_1,unsigned int *param_2)
     *(unsigned int *)(temp_v0 + 0x63f338) = *param_2;
     *(unsigned int *)(temp_v0 + 0x63f33c) = param_2[1];
     *(unsigned int *)(temp_v0 + 0x63f340) = param_2[2];
-    FUN_0015e198((int)param_1 * 0x88 + 0x63ea78,temp_v0 + 0x63f338);
+    trackerMoveTo((int)param_1 * 0x88 + 0x63ea78,temp_v0 + 0x63f338);
     return;
   }
   return;

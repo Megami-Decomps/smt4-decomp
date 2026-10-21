@@ -12,7 +12,7 @@ extern int g_btlActionReflect; /* 0x5712f0 */
 /* Supplied declaration required: btlGetMainState. */
 extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: FUN_004102d8. */
-extern short FUN_004c3a98(int, unsigned int);
+extern short btlFindEntryValue(int, unsigned int);
 
 
 int FUN_004fda78(short param_1,short param_2,unsigned int param_3,int param_4,int param_5,
@@ -29,7 +29,7 @@ int FUN_004fda78(short param_1,short param_2,unsigned int param_3,int param_4,in
   *(unsigned char *)(temp_v1 + 4) = 8;
   *(int *)(temp_v1 + 0x28) = param_5;
   *(int *)(temp_v1 + 0x14) = param_4;
-  temp_v0 = FUN_004c3a98((int)*(short *)(param_4 + 0x6a),1);
+  temp_v0 = btlFindEntryValue((int)*(short *)(param_4 + 0x6a),1);
   *(short *)(temp_v1 + 0x24) = temp_v0 - 1;
   *(unsigned short *)(temp_v1 + 0x48) = param_6;
   if (param_5 != 4) {

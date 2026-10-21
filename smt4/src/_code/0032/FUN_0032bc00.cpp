@@ -8,7 +8,7 @@ int dataTable0cLookupById(void);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
 int FUN_0029ab54(int, int);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002be5a4(...);
 int textFormatBuffer(unsigned char [64], unsigned char *);
 int FUN_002bf288(...);
@@ -46,7 +46,6 @@ extern int FUN_0029e9cc(unsigned short);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(void);
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
 extern int vec2GetYInt(int);
@@ -140,7 +139,7 @@ void FUN_0032bc00(int param_1,int param_2)
         temp_v8 = (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v8 + 8);
         temp_v10 = (int)*(short *)(temp_v6 + 0x5c8);
       }
-      FUN_002b6758(temp_v10,temp_v8 + param_1,(int)*(short *)(temp_v7 + 10) + (int)temp_v0 + param_2,0xb5,0
+      uiDrawDemonIcon(temp_v10,temp_v8 + param_1,(int)*(short *)(temp_v7 + 10) + (int)temp_v0 + param_2,0xb5,0
                   );
       temp_v8 = FUN_002bf4f8(0x1a,0x44a);
       FUN_002e1ed4(*(unsigned short *)(temp_v6 + 0x5ca),
@@ -217,7 +216,7 @@ void FUN_0032bc00(int param_1,int param_2)
       temp_v3 = (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8);
       temp_v6 = (int)*(short *)(temp_v5 + 200);
     }
-    FUN_002b6758(temp_v6,temp_v3 + param_1,(int)*(short *)(temp_v4 + 10) + (int)temp_v0 + param_2,0xc9,0);
+    uiDrawDemonIcon(temp_v6,temp_v3 + param_1,(int)*(short *)(temp_v4 + 10) + (int)temp_v0 + param_2,0xc9,0);
     temp_v3 = FUN_002bf4f8(0x1a,0x459);
     FUN_002e1ed4(*(unsigned short *)(temp_v5 + 0xca),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,

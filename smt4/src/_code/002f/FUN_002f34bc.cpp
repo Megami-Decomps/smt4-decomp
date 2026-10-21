@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern s8 DAT_004937a0;
+extern s8 g_deferredSequenceRequest;
 
 s32 FUN_002f34bc(void)
 {
-    return DAT_004937a0;
+    return g_deferredSequenceRequest;
 }
 
 } /* extern "C" */

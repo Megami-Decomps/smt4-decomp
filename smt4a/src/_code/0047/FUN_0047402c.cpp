@@ -1,11 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047402c` (_code @ 0x47402c, 0x88 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_AocPoll.h"
 
 extern "C" {
 
-int FUN_001b57a8(void);
-int FUN_0047448c(unsigned int *, int, int);
+int resultPairInitialize(void);
+void aocFileContentPrepareMountBuffer(AocPollOutput*, void*, u32);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,9 +14,9 @@ typedef struct {
 } param_3_stack;
 
 extern int objGetFlagBit0(int);
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned int *);
-/* Supplied declaration required: FUN_0047448c. */
+/* Supplied declaration required: aocFileContentPrepareMountBuffer. */
 
 
 void FUN_0047402c(unsigned int *param_1,int param_2,unsigned int *param_3)
@@ -42,7 +43,7 @@ void FUN_0047402c(unsigned int *param_1,int param_2,unsigned int *param_3)
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar2 = temp_v7;
-  FUN_001b57a8();
+  resultPairInitialize();
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;
@@ -66,7 +67,8 @@ void FUN_0047402c(unsigned int *param_1,int param_2,unsigned int *param_3)
     param_1[4] = uStack_28;
   }
   else {
-    FUN_0047448c(param_1,param_2,*(unsigned short *)param_3);
+    aocFileContentPrepareMountBuffer(reinterpret_cast<AocPollOutput*>(param_1),
+                 reinterpret_cast<void*>(param_2), *(unsigned short*)param_3);
   }
   return;
 }

@@ -6,9 +6,9 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00184310(void);
-int FUN_0020d164(unsigned char [140], int);
+int battleAttributeFormatName(unsigned char [140], int);
 int FUN_00230c1c(unsigned char [140], int);
-int FUN_002a1f60(unsigned int, int, unsigned int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_002ad414(int, unsigned int, unsigned int, unsigned char [140]);
 int FUN_002c0940(...);
 int FUN_003180c4(int, unsigned char [140]);
@@ -38,9 +38,9 @@ extern unsigned int DAT_0057f0cc; /* 0x57f0cc */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00184310. */
 extern unsigned int slotRecordFindById(unsigned short);
-/* Supplied declaration required: FUN_0020d164. */
+/* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: FUN_00230c1c. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_002ad414. */
 /* Supplied declaration required: FUN_002c0940. */
@@ -48,7 +48,7 @@ extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_0035ad50. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 
 
 void FUN_0032cfe0(int param_1)
@@ -66,10 +66,10 @@ void FUN_0032cfe0(int param_1)
   unsigned int temp_v6 [2];
   unsigned char temp_v7 [140];
   
-  temp_v2 = FUN_004cfe4c(param_1 + 0x20);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v1 = *(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
   if (*(char *)(param_1 + 0x860) != '\0') {
-    temp_v2 = FUN_004cfe4c(param_1 + 0x20);
+    temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v1 = *(unsigned short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
     if (*(char *)(param_1 + 0x861) == '\x01') {
       temp_v3 = slotRecordFindById(temp_v1);
@@ -92,7 +92,7 @@ void FUN_0032cfe0(int param_1)
           textFormatBuffer(temp_v7,&LAB_0032d2f4,&uStack_b0,temp_v6);
           FUN_003180c4(0x25,temp_v7);
         }
-        FUN_0020d164(temp_v7,*(unsigned char *)(temp_v4 + 0xc));
+        battleAttributeFormatName(temp_v7,*(unsigned char *)(temp_v4 + 0xc));
         FUN_003180c4(0x26,temp_v7);
         FUN_00230c1c(temp_v7,(*(unsigned short *)(temp_v4 + 10) & 0x1f) >> 1);
         FUN_003180c4(0x27,temp_v7);
@@ -132,7 +132,7 @@ void FUN_0032cfe0(int param_1)
         uStack_ac = DAT_0057f0cc;
         uStack_b0 = 3;
         temp_v6[0] = 1;
-        FUN_002a1f60(*(unsigned int *)(temp_v2 + 0x678),2,0xffffffff,0);
+        asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v2 + 0x678),2,0xffffffff,0);
       }
       return;
     }

@@ -13,7 +13,7 @@ int msgWindowReset(void);
 int gameFlagSetValue(...);
 int FUN_00289880(void);
 int FUN_002898e4(void);
-int FUN_00289d74(int, unsigned int, int);
+int aocBufferQueueDisplay(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
 int buttonHelpCreate(void);
 int messageSlotSet(int);
@@ -40,7 +40,7 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int g_aocSystem; /* 0x433158 */
 extern unsigned int *g_aocJob; /* 0x43e0d0 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_001aba04(void);
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern int asdLoadFileGetUseRawPaths(void);
@@ -52,7 +52,7 @@ extern int asdLoadFileGetUseRawPaths(void);
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
-/* Supplied declaration required: FUN_00289d74. */
+/* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
 extern int FUN_00289e54(int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
@@ -72,7 +72,7 @@ extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 extern int jyoucyuGetTableEntry(unsigned int);
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: FUN_002cb8d8. */
 extern int FUN_002d860c(void);
 /* Supplied declaration required: eventTexReleaseJobs. */
@@ -103,7 +103,7 @@ unsigned int FUN_001e4d70(void)
   temp_v0 = g_aocJob[2];
   if (temp_v0 == 3) {
     g_aocJob[3] = g_aocJob[3] + 1;
-    temp_v0 = FUN_0019e0c0(puVar1[0xc]);
+    temp_v0 = scrRunOpcodesStub(puVar1[0xc]);
     if (temp_v0 != 2) {
       temp_v0 = FUN_001aba04();
       if (temp_v0 != 0) {
@@ -192,7 +192,7 @@ unsigned int FUN_001e4d70(void)
       FUN_00289de4(g_aocSystem,puVar1[5],0);
       puVar1[0xb] = temp_v0;
       temp_v0 = g_aocSystem;
-      FUN_00289d74(g_aocSystem,puVar1[5],0);
+      aocBufferQueueDisplay(g_aocSystem,puVar1[5],0);
       puVar1[0xd] = temp_v0;
       if (puVar1[0xb] == 0 || temp_v0 == 0) {
         puVar1[2] = 1;
@@ -207,9 +207,9 @@ unsigned int FUN_001e4d70(void)
         puVar1[3] = 0;
         return 0;
       }
-      temp_v3 = FUN_002c5c04(temp_v5);
+      temp_v3 = asdLoadFileSyncDefault(temp_v5);
       puVar1[0xb] = temp_v3;
-      temp_v3 = FUN_002c5c04(temp_v6);
+      temp_v3 = asdLoadFileSyncDefault(temp_v6);
       puVar1[0xd] = temp_v3;
     }
     FUN_002898e4();

@@ -1,38 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a6f38` (_code @ 0x3a6f38, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves the enable/duration constants across jobGetWork in saved registers. */
+#include "common.h"
 
 extern "C" {
+s32 scrGetCommandFrame();
+u32 scrGetArg(s32 index);
+void* jobGetWork(u32 job);
+void FUN_0019d96c(void* work, s32 enabled, s32 duration);
 
-int FUN_0019d96c(unsigned int, int, int);
-int scrGetArg(int);
-
-extern unsigned int jobGetWork(void);
-/* Supplied declaration required: FUN_0019d96c. */
-/* Supplied declaration required: scrGetArg. */
-extern int scrGetCommandFrame(void);
-
-
-unsigned int FUN_003a6f38(void)
-
+// Start a ten-frame job operation on the first script frame and finish on frame ten.
+u32 FUN_003a6f38()
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetCommandFrame();
-  if (temp_v0 != 0) {
-    temp_v0 = scrGetCommandFrame();
-    if (temp_v0 == 10) {
-      return 1;
+    if (scrGetCommandFrame() != 0) {
+        if (scrGetCommandFrame() == 10) {
+            return 1;
+        }
+    } else {
+        FUN_0019d96c(jobGetWork(scrGetArg(0)), 1, 10);
     }
-  }
-  else {
-    scrGetArg(0);
-    temp_v1 = jobGetWork();
-    FUN_0019d96c(temp_v1,1,10);
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

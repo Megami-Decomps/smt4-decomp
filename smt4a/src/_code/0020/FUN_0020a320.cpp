@@ -17,7 +17,7 @@ extern unsigned int DAT_00573bcc; /* 0x573bcc */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0020ad6c. */
-extern int FUN_002c2c68(void);
+extern int objectApplyIfUnblocked(void);
 /* Supplied declaration required: FUN_002cc9e0. */
 extern int FUN_003e98e0(void);
 
@@ -62,7 +62,7 @@ unsigned int FUN_0020a320(int param_1)
                     FUN_0020ad6c(param_1,0,1);
                   }
                   else {
-                    temp_v0 = FUN_002c2c68();
+                    temp_v0 = objectApplyIfUnblocked();
                     if (temp_v0 < 1) {
                       return 0;
                     }
@@ -92,7 +92,7 @@ unsigned int FUN_0020a320(int param_1)
           }
         }
         else {
-          temp_v0 = FUN_002c2c68();
+          temp_v0 = objectApplyIfUnblocked();
           if (temp_v0 < 1) {
             return 0;
           }
@@ -106,7 +106,7 @@ unsigned int FUN_0020a320(int param_1)
         }
       }
       else {
-        temp_v0 = FUN_002c2c68();
+        temp_v0 = objectApplyIfUnblocked();
         if (temp_v0 < 1) {
           return 0;
         }

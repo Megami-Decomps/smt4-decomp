@@ -1,27 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f8a54` (_code @ 0x2f8a54, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global-base/address ADD order and the first component's VFP load order differ. */
+#include "shard/W6_W6Match3_EffectColor.h"
 
-extern "C" {
+extern "C" EffectColorProductState DAT_006471dc;
 
-extern float DAT_006472dc; /* 0x6472dc */
-extern float DAT_006472e0; /* 0x6472e0 */
-extern float DAT_006472e4; /* 0x6472e4 */
-extern float DAT_006472e8; /* 0x6472e8 */
-extern float DAT_006472ec; /* 0x6472ec */
-extern float DAT_006472f0; /* 0x6472f0 */
-extern float DAT_006472f4; /* 0x6472f4 */
-extern float DAT_006472f8; /* 0x6472f8 */
-
-
-void FUN_002f8a54(void)
-
+// Multiply the current color by its four component-wise factors.
+extern "C" void FUN_002f8a54(void)
 {
-  DAT_006472dc = DAT_006472dc * DAT_006472ec;
-  DAT_006472e0 = DAT_006472e0 * DAT_006472f0;
-  DAT_006472e4 = DAT_006472e4 * DAT_006472f4;
-  DAT_006472e8 = DAT_006472e8 * DAT_006472f8;
-  return;
+    EffectColor* color = &DAT_006471dc.color;
+    const EffectColor* factor = &DAT_006471dc.factor;
+    color->red *= factor->red;
+    color->green *= factor->green;
+    color->blue *= factor->blue;
+    color->alpha *= factor->alpha;
 }
-
-} /* extern "C" */

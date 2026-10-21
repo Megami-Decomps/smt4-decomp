@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0028caf8(...);
+int btlItemComputeValues(...);
 
-/* Supplied declaration required: FUN_0028caf8. */
+/* Supplied declaration required: btlItemComputeValues. */
 extern int gameGetSlotTable(void);
 extern int gameCountUnits(void);
 
@@ -24,7 +24,7 @@ unsigned int FUN_003a651c(unsigned int param_1,unsigned int param_2)
   
   if ((param_1 == 0 || param_1 == 2) || param_1 == 3) {
     temp_v0 = -1;
-    FUN_0028caf8(0xffffffff,param_2,temp_v4,temp_v5);
+    btlItemComputeValues(0xffffffff,param_2,temp_v4,temp_v5);
     if (temp_v0 == 0) {
       return 1;
     }
@@ -46,7 +46,7 @@ unsigned int FUN_003a651c(unsigned int param_1,unsigned int param_2)
   if (temp_v3 < temp_v0) {
     do {
       temp_v2 = (int)*(char *)(temp_v1 + temp_v3);
-      if ((-1 < temp_v2) && (FUN_0028caf8(temp_v2,param_2,temp_v4,temp_v5), temp_v2 == 0)) {
+      if ((-1 < temp_v2) && (btlItemComputeValues(temp_v2,param_2,temp_v4,temp_v5), temp_v2 == 0)) {
         return 1;
       }
       temp_v3 = temp_v3 + 1;

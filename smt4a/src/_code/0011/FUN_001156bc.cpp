@@ -7,12 +7,12 @@ extern "C" {
 int asdOperatorDeleteArray(void);
 int FUN_002e6e34(int *, int);
 int _ZN9Obj55b28cD1Ev(int *);
-int FUN_003014a8(void);
+int socketResetReturn(void);
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: FUN_003014a8. */
+/* Supplied declaration required: socketResetReturn. */
 
 
 void FUN_001156bc(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ void FUN_001156bc(int param_1,int param_2,unsigned int param_3,unsigned int para
   } while (temp_v0 < 8);
   param_1 = temp_v0 * 4 + param_1;
   if (*(int *)(param_1 + 0x34) != 0) {
-    FUN_003014a8();
+    socketResetReturn();
     asdOperatorDeleteArray();
   }
   *(unsigned int *)(param_1 + 0x34) = 0;

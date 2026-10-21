@@ -17,8 +17,8 @@ int FUN_002551ac(...);
 int FUN_0027df30(...);
 int FUN_0027e3e8(...);
 int FUN_003bd124(void);
-int FUN_003be8c8(...);
-int FUN_003beb58(...);
+int btlEntryGetNormalizedPercent(...);
+int btlEntryGetSummaryRatio(...);
 int FUN_003d0ac8(...);
 int FUN_003dda54(...);
 int VectorSignedToFloat(...);
@@ -29,14 +29,14 @@ int mathScaleThreeHalves(...);
 int FUN_0022899c(unsigned int, unsigned int, unsigned int, int, int, int);
 int FUN_002296f4(...);
 int FUN_00229a3c(...);
-int FUN_0022a8c8(...);
-int FUN_00240530(...);
+int btlTargetSetFlag10(...);
+int btlReflectInitKind9(...);
 int FUN_00246080(...);
 int FUN_00247478(...);
 int FUN_002505c0(...);
 int FUN_002550d8(...);
 int btlMainFindEntryByListedId(...);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int FUN_002ae164(void);
 int FUN_003bcda0(int);
 int FUN_003bd1d8(int, int);
@@ -142,14 +142,14 @@ extern int FUN_00228808(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002296f4. */
 extern int FUN_00229914(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_00229a3c. */
-/* Supplied declaration required: FUN_0022a8c8. */
+/* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: FUN_0023c0d0. */
 /* Supplied declaration required: FUN_0023c154. */
 /* Supplied declaration required: FUN_0023c638. */
 extern int FUN_0023c684(unsigned int);
 extern int questCurrentIsFlagged(void);
 extern int FUN_0023dcfc(void);
-/* Supplied declaration required: FUN_00240530. */
+/* Supplied declaration required: btlReflectInitKind9. */
 extern int FUN_00245cc0(void);
 /* Supplied declaration required: FUN_00246080. */
 /* Supplied declaration required: FUN_00247478. */
@@ -163,7 +163,7 @@ extern int battleGetEntryHalfword(int, unsigned int);
 extern int btlUnitGet(int *);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028299c(int);
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 extern int FUN_00293230(int);
 /* Supplied declaration required: FUN_002ae164. */
 extern int FUN_003bcc70(unsigned int, unsigned int, int, int, unsigned int);
@@ -173,8 +173,8 @@ extern int FUN_003bcc70(unsigned int, unsigned int, int, int, unsigned int);
 /* Supplied declaration required: FUN_003bd2e0. */
 /* Supplied declaration required: FUN_003bdab0. */
 /* Supplied declaration required: FUN_003be334. */
-/* Supplied declaration required: FUN_003be8c8. */
-/* Supplied declaration required: FUN_003beb58. */
+/* Supplied declaration required: btlEntryGetNormalizedPercent. */
+/* Supplied declaration required: btlEntryGetSummaryRatio. */
 extern int questGetCurrentRecordValue6(void);
 /* Supplied declaration required: FUN_003d0ac8. */
 extern int FUN_003dcad0(int);
@@ -313,7 +313,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   }
   if (param_2[0xc] == 4) {
     temp_v4 = param_2[0x160];
-    FUN_00283e48();
+    passiveSkillLookupRecord();
     if ((temp_v4 != 0) && (*(unsigned char *)(temp_v4 + 0x2d) != 0)) {
       temp_v21 = (float)VectorUnsignedToFloat
                                 ((unsigned int)*(unsigned char *)(temp_v4 + 0x2d),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -345,9 +345,9 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
       else {
         temp_v5 = FUN_00228808(param_8,3,temp_v33);
         if (temp_v5 != 0) {
-          FUN_0022a8c8(*param_1,param_8,1);
+          btlTargetSetFlag10(*param_1,param_8,1);
         }
-        FUN_0022a8c8(*param_1,param_7,0);
+        btlTargetSetFlag10(*param_1,param_7,0);
         temp_v54 = 0;
         temp_v59 = 0;
         param_9 = 1;
@@ -357,9 +357,9 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     else {
       temp_v5 = FUN_00228808(param_8,2,temp_v33);
       if (temp_v5 != 0) {
-        FUN_0022a8c8(*param_1,param_8,1);
+        btlTargetSetFlag10(*param_1,param_8,1);
       }
-      FUN_0022a8c8(*param_1,param_7,0);
+      btlTargetSetFlag10(*param_1,param_7,0);
       FUN_002296f4(param_1,param_2,param_8,temp_v30,0xf,0x1e);
       param_9 = 1;
       temp_v30 = temp_v30 + 0xd;
@@ -376,9 +376,9 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     }
     temp_v5 = FUN_00228808(param_8,temp_v70,temp_v33);
     if (temp_v5 != 0) {
-      FUN_0022a8c8(*param_1,param_8,1);
+      btlTargetSetFlag10(*param_1,param_8,1);
     }
-    FUN_0022a8c8(*param_1,param_7,0);
+    btlTargetSetFlag10(*param_1,param_7,0);
     FUN_002296f4(param_1,param_2,param_8,temp_v30,0xf,0x1e);
     temp_v30 = temp_v30 + 0xd;
     temp_v54 = 0;
@@ -422,7 +422,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
       }
       temp_v7 = FUN_0028299c(DAT_00435d18);
       temp_v8 = FUN_002281a4(DAT_00435d18);
-      FUN_00240530(temp_v8 + temp_v7 * param_11,param_2,*(int *)(*param_1 + 0x1e98) + temp_v5 * 0x114,0,
+      btlReflectInitKind9(temp_v8 + temp_v7 * param_11,param_2,*(int *)(*param_1 + 0x1e98) + temp_v5 * 0x114,0,
                    temp_v26);
       if (temp_v57 != 0) {
         temp_v5 = FUN_002281a4(DAT_00435d18);
@@ -598,7 +598,7 @@ LAB_003cd124:
         temp_v7 = FUN_0028299c(DAT_00435d18);
         temp_v7 = temp_v7 * (param_11 + temp_v35);
         temp_v8 = FUN_002281a4(DAT_00435d18);
-        FUN_00240530(temp_v8 + temp_v7,param_2,*(int *)(*param_1 + 0x1e98) + temp_v63 * 4);
+        btlReflectInitKind9(temp_v8 + temp_v7,param_2,*(int *)(*param_1 + 0x1e98) + temp_v63 * 4);
         if ((temp_v70 == 1) && (temp_v57 != 0)) {
           temp_v8 = FUN_002281a4(DAT_00435d18);
           temp_v5 = 1;
@@ -684,7 +684,7 @@ LAB_003cd944:
             }
             temp_v44 = temp_v6 + temp_v44;
           }
-          FUN_003be8c8(param_7,param_8);
+          btlEntryGetNormalizedPercent(param_7,param_8);
           temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v21 < temp_v23) << 0x1f) |
                   ((unsigned int)(temp_v21 == temp_v23) << 0x1e);
           in_fpscr = temp_v6 | ((unsigned int)((temp_v21 != temp_v21) || (temp_v23 != temp_v23)) << 0x1c);
@@ -729,7 +729,7 @@ LAB_003cd944:
         if (temp_v54 != 0) {
           temp_v45 = temp_v45 + temp_v16;
         }
-        FUN_003beb58(param_7,param_8);
+        btlEntryGetSummaryRatio(param_7,param_8);
         temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v21 < temp_v23) << 0x1f) |
                 ((unsigned int)(temp_v21 == temp_v23) << 0x1e);
         in_fpscr = temp_v6 | ((unsigned int)((temp_v21 != temp_v21) || (temp_v23 != temp_v23)) << 0x1c);
@@ -778,7 +778,7 @@ LAB_003cd944:
             temp_v10 = 0;
           }
           temp_v5 = FUN_002280b0(DAT_00435d18);
-          FUN_00240530(temp_v5 + temp_v7 + 5,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,10,
+          btlReflectInitKind9(temp_v5 + temp_v7 + 5,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,10,
                        temp_v10);
           temp_v8 = FUN_002280b0(DAT_00435d18);
           temp_v5 = 0;
@@ -950,7 +950,7 @@ LAB_003cd944:
                 param_2[7] = temp_v4;
               }
               temp_v33 = 4;
-              FUN_0022a8c8(*param_1,param_7,0);
+              btlTargetSetFlag10(*param_1,param_7,0);
               temp_v5 = btlUnitGet(param_1);
               temp_v7 = 0;
               goto LAB_003ce3ec;
@@ -989,7 +989,7 @@ LAB_003ce43c:
 LAB_003ce46c:
       temp_v5 = FUN_00228808(param_7,temp_v70,temp_v33);
       if (temp_v5 != 0) {
-        FUN_0022a8c8(*param_1,param_7,1);
+        btlTargetSetFlag10(*param_1,param_7,1);
       }
     }
   }
@@ -999,7 +999,7 @@ LAB_003ce46c:
   }
   if (((*(unsigned int *)(*param_1 + 0x44ac) & 1) != 0) &&
      (temp_v5 = FUN_00228808(param_7,temp_v70,temp_v33), temp_v5 != 0)) {
-    FUN_0022a8c8(*param_1,param_7,1);
+    btlTargetSetFlag10(*param_1,param_7,1);
   }
   temp_v17 = temp_v33 != 5;
   temp_v4 = temp_v33;

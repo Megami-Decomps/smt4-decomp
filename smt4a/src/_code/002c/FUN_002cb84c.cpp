@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002c2c4c(...);
-int FUN_002c2c68(...);
+int widgetSubCallIfVisible(...);
+int objectApplyIfUnblocked(...);
 int flaggedEntrySetValueB(...);
 int flaggedEntrySetValueA(...);
 
@@ -18,8 +18,8 @@ extern int g_partyPanel; /* 0x57f268 */
 
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002c2c4c. */
-/* Supplied declaration required: FUN_002c2c68. */
+/* Supplied declaration required: widgetSubCallIfVisible. */
+/* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 
@@ -41,7 +41,7 @@ void FUN_002cb84c(void)
       if (temp_v1 == 8) {
         temp_v1 = g_partyPanel + 0xdb4;
         temp_v3 = 0;
-        temp_v2 = FUN_002c2c4c();
+        temp_v2 = widgetSubCallIfVisible();
         if (0 < temp_v2) {
           do {
             if (*(char *)(temp_v0 + temp_v3 + 0x9c0) != '\0') {
@@ -54,15 +54,15 @@ LAB_002cbb00:
               goto LAB_002cbb58;
             }
             temp_v3 = temp_v3 + 1;
-            temp_v2 = FUN_002c2c4c(temp_v1);
+            temp_v2 = widgetSubCallIfVisible(temp_v1);
           } while (temp_v3 < temp_v2);
         }
         temp_v3 = 1;
-        temp_v2 = FUN_002c2c68(temp_v1);
+        temp_v2 = objectApplyIfUnblocked(temp_v1);
         if (temp_v2 >= 2) {
           do {
             temp_v4 = 0;
-            temp_v2 = FUN_002c2c4c(temp_v1);
+            temp_v2 = widgetSubCallIfVisible(temp_v1);
             if (0 < temp_v2) {
               do {
                 temp_v2 = (temp_v4 + temp_v3 * 4) - 4;
@@ -82,11 +82,11 @@ LAB_002cbb00:
                   goto LAB_002cbb00;
                 }
                 temp_v4 = temp_v4 + 1;
-                temp_v2 = FUN_002c2c4c(temp_v1);
+                temp_v2 = widgetSubCallIfVisible(temp_v1);
               } while (temp_v4 < temp_v2);
             }
             temp_v3 = temp_v3 + 1;
-            temp_v2 = FUN_002c2c68(temp_v1);
+            temp_v2 = objectApplyIfUnblocked(temp_v1);
           } while (temp_v3 < temp_v2);
         }
       }
@@ -94,11 +94,11 @@ LAB_002cbb00:
     else {
       temp_v1 = g_partyPanel + 0xcec;
       temp_v3 = 0;
-      temp_v2 = FUN_002c2c68();
+      temp_v2 = objectApplyIfUnblocked();
       if (0 < temp_v2) {
         do {
           temp_v4 = 0;
-          temp_v2 = FUN_002c2c4c(temp_v1);
+          temp_v2 = widgetSubCallIfVisible(temp_v1);
           if (0 < temp_v2) {
             do {
               temp_v2 = temp_v4 + temp_v3 * 4;
@@ -119,11 +119,11 @@ LAB_002cbb00:
                 goto LAB_002cbb00;
               }
               temp_v4 = temp_v4 + 1;
-              temp_v2 = FUN_002c2c4c(temp_v1);
+              temp_v2 = widgetSubCallIfVisible(temp_v1);
             } while (temp_v4 < temp_v2);
           }
           temp_v3 = temp_v3 + 1;
-          temp_v2 = FUN_002c2c68(temp_v1);
+          temp_v2 = objectApplyIfUnblocked(temp_v1);
         } while (temp_v3 < temp_v2);
       }
     }
@@ -131,7 +131,7 @@ LAB_002cbb00:
   else {
     temp_v1 = g_partyPanel + 0xc24;
     temp_v3 = 0;
-    temp_v2 = FUN_002c2c4c();
+    temp_v2 = widgetSubCallIfVisible();
     if (0 < temp_v2) {
       do {
         if (*(char *)(temp_v0 + temp_v3 + 0x9c0) != '\0') {
@@ -139,7 +139,7 @@ LAB_002cbb00:
           break;
         }
         temp_v3 = temp_v3 + 1;
-        temp_v2 = FUN_002c2c4c(temp_v1);
+        temp_v2 = widgetSubCallIfVisible(temp_v1);
       } while (temp_v3 < temp_v2);
     }
   }

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } void_stack;
 
-extern int FUN_00270cb4(...); /* 0x270cb4 */
+extern int itemSortCompare(...); /* 0x270cb4 */
 extern int entryCompareByDataValue(...); /* 0x2b2ad4 */
 extern int FUN_002ce0d8(...); /* 0x2ce0d8 */
 extern int FUN_002ce15c(...); /* 0x2ce15c */
@@ -59,7 +59,7 @@ void FUN_003d4104(void)
       qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_00321c18);
     }
     else {
-      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,FUN_00270cb4);
+      qsort(temp_v0 + 0xf48,(int)*(short *)(temp_v0 + 0x2348),4,itemSortCompare);
     }
   }
   if ((*pbVar3 & 0x7f) != 3) {

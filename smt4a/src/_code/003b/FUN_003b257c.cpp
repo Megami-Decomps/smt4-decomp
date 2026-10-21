@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
-int FUN_00221d78(unsigned int);
+int asdGxSetEffectColorFromRGBA8(unsigned int);
 int randomAdvanceShiftRegister(void);
 int FUN_00514540(...);
 int VectorFloatToUnsigned(...);
@@ -77,7 +77,7 @@ extern float DAT_00647308; /* 0x647308 */
 /* Supplied declaration required: FUN_001a1ee0. */
 extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
-/* Supplied declaration required: FUN_00221d78. */
+/* Supplied declaration required: asdGxSetEffectColorFromRGBA8. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -163,12 +163,12 @@ void FUN_003b257c(fn_003b257c_arg0 *param_1)
       pfVar18 = *(float **)(*(int *)(temp_v9 + 8) + 0x30);
       puVar19 = *(unsigned char **)(*(int *)(temp_v9 + 8) + 0x38);
       *(unsigned int *)(temp_v9 + 0x54) = *(unsigned int *)(temp_v9 + 0x54) | 0x21;
-      FUN_00221d78(*(unsigned int *)((int)pvVar15 + 0x58) & 0xffffff);
+      asdGxSetEffectColorFromRGBA8(*(unsigned int *)((int)pvVar15 + 0x58) & 0xffffff);
       temp_v6 = DAT_006472e8;
       temp_v4 = DAT_006472e4;
       temp_v2 = DAT_006472e0;
       temp_v16 = DAT_006472dc;
-      FUN_00221d78(*(unsigned int *)((int)pvVar15 + 0x5c) & 0xffffff);
+      asdGxSetEffectColorFromRGBA8(*(unsigned int *)((int)pvVar15 + 0x5c) & 0xffffff);
       temp_v7 = DAT_006472e8;
       temp_v5 = DAT_006472e4;
       temp_v3 = DAT_006472e0;

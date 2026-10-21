@@ -16,10 +16,10 @@ int libc_strcpy(...);
 int FUN_003180c4(...);
 int FUN_0034a240(int);
 int contentEntryFindById(void);
-int FUN_003b7348(...);
+int dataTableFindRecordWord(...);
 int dataTable5Type9Count(void);
 int FUN_004da858(...);
-int FUN_004db450(int, int *);
+int fusionListAvailableSpecialRecipes(int, int *);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -41,12 +41,12 @@ extern int FUN_0026140c(void);
 extern int FUN_00330bb4(unsigned short);
 /* Supplied declaration required: FUN_0034a240. */
 /* Supplied declaration required: contentEntryFindById. */
-/* Supplied declaration required: FUN_003b7348. */
+/* Supplied declaration required: dataTableFindRecordWord. */
 /* Supplied declaration required: dataTable5Type9Count. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004da858. */
 extern int FUN_004db07c(int, unsigned short, unsigned int *);
-/* Supplied declaration required: FUN_004db450. */
+/* Supplied declaration required: fusionListAvailableSpecialRecipes. */
 
 
 unsigned int FUN_003a7d74(void)
@@ -79,7 +79,7 @@ unsigned int FUN_003a7d74(void)
       piVar3[0x241b] = 0;
       __aeabi_memset4(piVar3 + 0x2407,0x50,0xffffffff);
       temp_v6 = *piVar3;
-      FUN_004db450(temp_v6,piVar3 + 0x23df);
+      fusionListAvailableSpecialRecipes(temp_v6,piVar3 + 0x23df);
       temp_v9 = 0;
       *(short *)(piVar3 + 0x23de) = (short)temp_v6;
       temp_v3 = 0;
@@ -196,7 +196,7 @@ unsigned int FUN_003a7d74(void)
         return 0;
       }
       puVar8 = (unsigned short *)
-               FUN_003b7348((short)*(char *)((int)(char)g_unite[0x2481] + (int)piVar13));
+               dataTableFindRecordWord((short)*(char *)((int)(char)g_unite[0x2481] + (int)piVar13));
       temp_v4 = (unsigned int)*puVar8;
       FUN_00180118(temp_v4);
       libc_strcpy(temp_v10,temp_v4);
@@ -233,7 +233,7 @@ unsigned int FUN_003a7d74(void)
     temp_v8 = 0;
     if (temp_v4 != 0) {
       do {
-        puVar6 = (unsigned short *)FUN_003b7348(temp_v8 & 0xffff);
+        puVar6 = (unsigned short *)dataTableFindRecordWord(temp_v8 & 0xffff);
         if (puVar6 != (unsigned short *)0x0) {
           temp_v6 = *piVar3;
           FUN_004da858(temp_v6,*puVar6);

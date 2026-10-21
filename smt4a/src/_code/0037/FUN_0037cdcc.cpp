@@ -18,7 +18,7 @@ extern unsigned int *DAT_0059dc20; /* 0x59dc20 */
 /* Supplied declaration required: effMenuCreate. */
 /* Supplied declaration required: handleHolderFree. */
 extern unsigned int linkedObjGetValue(unsigned int *);
-extern unsigned int FUN_003c2d90(unsigned int *, int);
+extern unsigned int formattedTextCopyLabel(unsigned int *, int);
 /* Supplied declaration required: FUN_003c4984. */
 
 
@@ -32,7 +32,7 @@ void FUN_0037cdcc(unsigned int param_1,unsigned int param_2,int param_3)
   if (DAT_0059dc1c != 0) {
     FUN_00381874(DAT_0059dc20);
     *(unsigned int *)(param_3 + 0x100) = *(unsigned int *)((int)DAT_0059dc20 + 8);
-    temp_v0 = FUN_003c2d90(DAT_0059dc20,param_3);
+    temp_v0 = formattedTextCopyLabel(DAT_0059dc20,param_3);
     *(unsigned int *)(param_3 + 0xfc) = temp_v0;
     temp_v0 = linkedObjGetValue(DAT_0059dc20);
     *(unsigned int *)(param_3 + 0x104) = temp_v0;

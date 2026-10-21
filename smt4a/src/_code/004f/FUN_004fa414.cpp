@@ -1,15 +1,18 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fa414` (_code @ 0x4fa414, 0x1d8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match2_AnimationVisualState.h"
 
 extern "C" {
 
-int FUN_00420dec(...);
+int animationGetModeChannelValue(...);
 int FUN_004f5238(...);
 int FUN_004f6254(...);
-int FUN_004fddf4(...);
+unsigned int btlReflectQueuePairedParameters(int actor, unsigned int flags, unsigned int value,
+                         unsigned int parameter, unsigned int target, unsigned int first,
+                         unsigned int second, unsigned int third, unsigned int fourth);
 int FUN_004fea10(...);
-int FUN_004fed00(...);
+int btlReflectSetValuePair(...);
 int VectorSignedToFloat(...);
 
 typedef struct fn_004fa414_arg0 fn_004fa414_arg0;
@@ -33,13 +36,12 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00420dec. */
-extern int FUN_0042125c(unsigned int);
+/* Supplied declaration required: animationGetModeChannelValue. */
+extern u8 animationVisualIsComplete(const AnimationVisualState *state);
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004f6254. */
-/* Supplied declaration required: FUN_004fddf4. */
 /* Supplied declaration required: FUN_004fea10. */
-/* Supplied declaration required: FUN_004fed00. */
+/* Supplied declaration required: btlReflectSetValuePair. */
 
 
 void FUN_004fa414(fn_004fa414_arg0 *param_1)
@@ -53,9 +55,9 @@ void FUN_004fa414(fn_004fa414_arg0 *param_1)
   unsigned int in_fpscr;
   float in_s0;
   
-  temp_v0 = FUN_0042125c(param_1->field_0x33c0);
+  temp_v0 = animationVisualIsComplete((const AnimationVisualState *)param_1->field_0x33c0);
   if (temp_v0 == 0) {
-    FUN_00420dec(param_1->field_0x33c0);
+    animationGetModeChannelValue(param_1->field_0x33c0);
     temp_v0 = (int)in_s0;
     if (param_1->field_0x33c4[2] == temp_v0) {
       FUN_004fea10(0,0,(int)param_1->field_0x33c4[3]);
@@ -81,17 +83,17 @@ void FUN_004fa414(fn_004fa414_arg0 *param_1)
     }
     psVar2 = param_1->field_0x33c8;
     if (psVar2[7] == temp_v0) {
-      FUN_004fddf4(0,0,(int)psVar2[8],10,param_1->field_0x33bc,(int)psVar2[6],0,0,0xffffffff);
+      btlReflectQueuePairedParameters(0,0,(int)psVar2[8],10,(u32)param_1->field_0x33bc,(int)psVar2[6],0,0,0xffffffff);
     }
     if (psVar2[10] == temp_v0) {
-      FUN_004fddf4(0,0,(int)psVar2[0xb],9,param_1->field_0x33bc,(int)psVar2[9],0,0,0xffffffff);
+      btlReflectQueuePairedParameters(0,0,(int)psVar2[0xb],9,(u32)param_1->field_0x33bc,(int)psVar2[9],0,0,0xffffffff);
     }
     if (psVar2[0xc] == temp_v0) {
-      FUN_004fed00(0,0,(int)psVar2[0xd],0,0);
+      btlReflectSetValuePair(0,0,(int)psVar2[0xd],0,0);
     }
     FUN_004f6254(param_1,(int)(short)temp_v0,3);
   }
-  temp_v0 = FUN_0042125c(param_1->field_0x33c0);
+  temp_v0 = animationVisualIsComplete((const AnimationVisualState *)param_1->field_0x33c0);
   if (temp_v0 != 0) {
     param_1->field_0x33b4 = 0xd;
   }

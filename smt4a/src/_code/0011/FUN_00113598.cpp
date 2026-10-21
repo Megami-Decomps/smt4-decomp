@@ -29,7 +29,7 @@ extern unsigned int FUN_002ecaee(unsigned int);
 /* Supplied declaration required: sharedRefHolderDestroy2. */
 /* Supplied declaration required: FUN_002f6bfc. */
 /* Supplied declaration required: FUN_002fde5c. */
-extern unsigned int FUN_002fde84(unsigned int);
+extern unsigned int rangeLength(unsigned int);
 /* Supplied declaration required: FUN_002fde8c. */
 
 
@@ -48,10 +48,10 @@ void FUN_00113598(unsigned int param_1,unsigned int param_2,unsigned int param_3
   unsigned char temp_v8 [12];
   
   FUN_002fde5c(temp_v2);
-  temp_v0 = FUN_002fde84(param_2);
+  temp_v0 = rangeLength(param_2);
   temp_v1 = FUN_002ecaee(param_2);
   FUN_002fde8c(temp_v2,temp_v1,temp_v0);
-  temp_v0 = FUN_002fde84(param_3);
+  temp_v0 = rangeLength(param_3);
   temp_v1 = FUN_002ecaee(param_3);
   FUN_002fde8c(temp_v2,temp_v1,temp_v0);
   initVtable00558630(temp_v8);

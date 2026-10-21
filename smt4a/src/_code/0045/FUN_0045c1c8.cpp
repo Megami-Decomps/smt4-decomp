@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045c1c8` (_code @ 0x45c1c8, 0x148 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_WaveArchiveReader.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct {
 /* Supplied declaration required: slotTableReplace. */
 /* Supplied declaration required: FUN_001a5e84. */
 extern int FUN_001a8930(int, unsigned int, unsigned int *);
-extern unsigned int FUN_001a8d40(unsigned char *, unsigned int);
 extern unsigned int FUN_005090f4(void);
 
 
@@ -76,7 +76,7 @@ void FUN_0045c1c8(int *param_1,unsigned int param_2,unsigned int param_3)
           temp_v6 = 0;
           if (temp_v6 < temp_v10) {
             do {
-              temp_v3 = FUN_001a8d40(temp_v12,temp_v6);
+              temp_v3 = (unsigned int)FUN_001a8d40((const WaveArchiveReader*)temp_v12,temp_v6);
               if (((temp_v3 != 0) && (param_2 <= temp_v3)) && (temp_v3 <= param_3)) {
                 slotTableReplace(temp_v12,temp_v6,0);
               }

@@ -25,7 +25,7 @@ extern unsigned int DAT_005949a0; /* 0x5949a0 */
 /* Supplied declaration required: _ZN9Obj559f087vfunc00Ev. */
 extern int FUN_0012bc90(unsigned int *);
 /* Supplied declaration required: asdOperatorNew. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 extern int FUN_002e9ff4(int);
 /* Supplied declaration required: FUN_004130c0. */
 extern int FUN_00432acc(void);
@@ -83,7 +83,7 @@ void FUN_003fa6a4(int param_1)
     *(unsigned int *)(temp_v1 + 0x10) = 0;
     *(unsigned char *)(temp_v1 + 0x14) = 0;
     _ZN9Obj559f087vfunc00Ev(temp_v1 - 0xe4,temp_v3);
-    temp_v2 = FUN_002e6e26();
+    temp_v2 = onlineContextGetInstance();
     if ((*(char *)(temp_v2 + 0x84) == '\x02') ||
        (((*(char *)(temp_v2 + 0x84) == '\x01' && (*(unsigned int *)(temp_v2 + 0x80) != 0)) &&
         ((*(unsigned int *)(temp_v2 + 0x80) & ~DAT_005949a0) == 0)))) {

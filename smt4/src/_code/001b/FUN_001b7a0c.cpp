@@ -10,10 +10,10 @@ int FUN_0027da30(...);
 int FUN_00281e34(void);
 int btlMainFindEntryByListedId(unsigned char *, int);
 int btlGetMainState(void);
-int FUN_00293a04(unsigned int, int);
+int asdAnimGetTrackLastFrame(unsigned int, int);
 int FUN_002b70cc(void);
 int FUN_003c14e8(...);
-int FUN_003c174c(unsigned char *, int);
+int battleActionPollMemberResources(unsigned char *, int);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -42,12 +42,12 @@ extern int FUN_0027db08(unsigned int);
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_00293a04. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b70cc. */
 extern unsigned char *jobGetWork(void);
 /* Supplied declaration required: FUN_003c14e8. */
-/* Supplied declaration required: FUN_003c174c. */
+/* Supplied declaration required: battleActionPollMemberResources. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -135,7 +135,7 @@ unsigned int FUN_001b7a0c(void)
           *(int *)(temp_v10 + 0xa4) = (int)((unsigned long long)temp_v17 >> 0x20);
           temp_v4 = FUN_0027d9e8(pbVar1,*(unsigned int *)(pbVar4 + temp_v1 * 4 + 0xc));
           *(short *)(temp_v10 + 0x5a) = *(short *)(temp_v10 + 0x5a) + 2;
-          FUN_00293a04(temp_v4,0);
+          asdAnimGetTrackLastFrame(temp_v4,0);
           in_s0 = (float)(int)in_s0;
           __aeabi_idivmod(*(unsigned short *)(temp_v10 + 0x5a),in_s0);
           *(unsigned short *)(temp_v10 + 0x5a) = temp_v7;
@@ -187,7 +187,7 @@ unsigned int FUN_001b7a0c(void)
         }
         break;
       case 4:
-        FUN_003c174c(pbVar1,temp_v10);
+        battleActionPollMemberResources(pbVar1,temp_v10);
       }
       *(int *)(temp_v10 + 0x28) = (int)temp_v19;
       temp_v18 = (float)temp_v17;

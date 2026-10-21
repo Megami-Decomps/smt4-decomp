@@ -6,12 +6,12 @@ extern "C" {
 
 int vec2GetYInt(int);
 int efctSetSpeed(void);
-int FUN_0016c69c(...);
-int FUN_0016c6f0(int, int, unsigned int);
+int renderCtxPopState(...);
+int renderStackPushIndexed(int, int, unsigned int);
 int FUN_001835b4(int, int, int, int, int, unsigned int);
 int FUN_00492bc0(void);
 int lmapSceneGetObj(int);
-int FUN_00492c34(int);
+int naviMainSelectPair(int);
 int FUN_0049325c(...);
 int words2Copy(int, float *);
 int NaviMain_GetCurrentMap(int);
@@ -38,15 +38,15 @@ extern unsigned int vec2GetXInt(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_001835b4. */
 extern int lmapSceneGetUnk0(void);
 extern int lmapMainGetUnkCC(void);
 extern int gameFlagsClassify(void);
 /* Supplied declaration required: FUN_00492bc0. */
 /* Supplied declaration required: lmapSceneGetObj. */
-/* Supplied declaration required: FUN_00492c34. */
+/* Supplied declaration required: naviMainSelectPair. */
 /* Supplied declaration required: FUN_0049325c. */
 /* Supplied declaration required: words2Copy. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
@@ -82,10 +82,10 @@ void FUN_00487d6c(int param_1)
     }
   }
   temp_v2 = FUN_001692ac(5,1);
-  FUN_0016c6f0(g_renderCtx,3,temp_v2);
+  renderStackPushIndexed(g_renderCtx,3,temp_v2);
   temp_v1 = param_1 + 0x4cc;
   FUN_00492bc0();
-  FUN_00492c34(temp_v1);
+  naviMainSelectPair(temp_v1);
   lmapSceneGetObj(temp_v1);
   temp_v8 = 0;
   temp_v7 = 0.0f;
@@ -159,7 +159,7 @@ void FUN_00487d6c(int param_1)
       }
     }
   }
-  FUN_0016c69c(g_renderCtx,3);
+  renderCtxPopState(g_renderCtx,3);
   return;
 }
 

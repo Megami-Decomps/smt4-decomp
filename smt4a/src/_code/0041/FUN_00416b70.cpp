@@ -7,7 +7,7 @@ extern "C" {
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int asdMemFreeSlot(void);
 int FUN_002f5020(int, unsigned char *, int, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern unsigned char DAT_00529ac0; /* 0x529ac0 */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_002f5020. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 int FUN_00416b70(int param_1)
@@ -72,7 +72,7 @@ int FUN_00416b70(int param_1)
     temp_v0 = temp_v0 + 1;
     puVar4[0x2b] = 0;
   } while (temp_v0 < 0xc);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x840);
+  paramsClearPacket(param_1 + 0x840);
   paramsInit(param_1 + 0x840,&DAT_0052988c,0x114,&DAT_005299a0,0xcc,&DAT_00529a6c,0x54,0,0,
                &DAT_00529ac0,0x94c);
   return param_1;

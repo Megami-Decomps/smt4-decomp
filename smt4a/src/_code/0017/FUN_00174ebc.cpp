@@ -55,7 +55,7 @@ extern int FUN_00178400(int, unsigned int, unsigned int *);
 extern int soundInfoOwnerReadInfo(int, unsigned int, unsigned int *);
 extern int soundGroupUpdate(int, unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00194834. */
-extern unsigned int FUN_00194850(unsigned int **);
+extern unsigned int optionalNestedValueGet(unsigned int **);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
 extern int nw_snd_internal_GroupFileReader_ReadGroupItemInfoEx(unsigned int **, unsigned int *, unsigned int);
 extern int nw_snd_internal_GroupFileReader_ReadGroupItemLocationInfo(unsigned int **, unsigned int *, unsigned int);
@@ -109,7 +109,7 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         (**(romwright_code **)(*param_1 + 8))(param_1,temp_v4,temp_v5);
       }
       else if (temp_v1 == 0) {
-        temp_v1 = FUN_00194850(temp_v19);
+        temp_v1 = optionalNestedValueGet(temp_v19);
         temp_v2 = 0;
         if (temp_v1 == 0) {
           return;
@@ -128,7 +128,7 @@ void FUN_00174ebc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v2);
   }
-  temp_v18 = FUN_00194850(temp_v19);
+  temp_v18 = optionalNestedValueGet(temp_v19);
   if (temp_v18 != 0) {
     unaff_r9 = &temp_v5;
     unaff_r8 = 0xffffffff;

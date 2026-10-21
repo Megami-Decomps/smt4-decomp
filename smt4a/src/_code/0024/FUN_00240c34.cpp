@@ -2,10 +2,10 @@
 #include "common.h"
 
 extern "C" {
-s32 FUN_00167f94(void* context);
+u32 asdLoadFileExists(const char *path);
 
 s32 FUN_00240c34(void* context)
 {
-    return FUN_00167f94(context) != 0;
+    return asdLoadFileExists((const char *)context) != 0;
 }
 }

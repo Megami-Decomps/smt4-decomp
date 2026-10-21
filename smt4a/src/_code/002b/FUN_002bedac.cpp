@@ -1,34 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bedac` (_code @ 0x2bedac, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses a writeback mapping load and two short-circuit bit tests; compiled code separates the address ADD and combines the mode bits into TST #3. */
+#include "common.h"
+
+struct ButtonMapping {
+    u32 type; // 0x00
+    u32 mask; // 0x04
+};
+struct InputMode {
+    u32 unk00[2]; // 0x00
+    u32 flags;    // 0x08
+};
+struct ButtonState {
+    u32 unk00[2]; // 0x00
+    u32 buttons;  // 0x08
+};
 
 extern "C" {
+extern const ButtonMapping DAT_0053d740[31];
+extern InputMode DAT_005b4000;
+extern ButtonState DAT_0063fff0;
+extern ButtonState DAT_0063ffd0;
 
-extern unsigned int DAT_005b4008; /* 0x5b4008 */
-extern unsigned int DAT_0063ffd0; /* 0x63ffd0 */
-extern unsigned int DAT_0063fff0; /* 0x63fff0 */
-
-
-unsigned char FUN_002bedac(unsigned int param_1)
-
+// Tests a mapped digital button in the normal or alternate input state.
+bool FUN_002bedac(u32 button)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if ((param_1 < 0x1f) && (*(int *)(param_1 * 8 + 0x53d740) == 0)) {
-    if (!((DAT_005b4008 & 1) == 0 && (DAT_005b4008 & 2) == 0)) {
-      puVar1 = &DAT_0063fff0;
+    if (button >= 31) {
+        return false;
     }
-    else {
-      puVar1 = &DAT_0063ffd0;
+    const ButtonMapping* mapping = &DAT_0053d740[button];
+    if (mapping->type != 0) {
+        return false;
     }
-    temp_v0 = 0;
-    if (puVar1 != (unsigned int *)0x0) {
-      temp_v0 = puVar1[2];
+    u32 mask = mapping->mask;
+    ButtonState* state;
+    if ((DAT_005b4000.flags & 3) != 0) {
+        state = &DAT_0063fff0;
+    } else {
+        state = &DAT_0063ffd0;
     }
-    return (temp_v0 & *(unsigned int *)(param_1 * 8 + 0x53d744)) != 0;
-  }
-  return 0;
+    u32 buttons = state ? state->buttons : 0;
+    return (buttons & mask) != 0;
 }
-
-} /* extern "C" */
+}

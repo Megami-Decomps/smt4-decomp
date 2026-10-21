@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail loads the pool limit into r2, built into r1 */
 /* Pool allocator: pops a node from the free list, otherwise bump-allocates one 0x38-byte element (growing the pool first when the current block is full). */
 #include "common.h"
 
@@ -19,9 +18,9 @@ typedef struct Pool {
     /* 0x0C */ Element *limit;
 } Pool;
 
-extern void FUN_00132626(Pool *pool);
+extern void FUN_00132626(Pool *pool, s32 singleElement);
 
-Element *FUN_001325fe(Pool *pool)
+Element *FUN_001325fe(Pool *pool, s32 singleElement)
 {
     FreeNode *node = pool->freeList;
     Element *element;
@@ -31,7 +30,7 @@ Element *FUN_001325fe(Pool *pool)
         return (Element *)node;
     }
     if (pool->cursor == pool->limit) {
-        FUN_00132626(pool);
+        FUN_00132626(pool, singleElement);
     }
     element = pool->cursor;
     pool->cursor = element + 1;

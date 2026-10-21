@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int FUN_0029ef78(...); /* 0x29ef78 */
+extern int soundTestActionMenuUpdate(...); /* 0x29ef78 */
 extern unsigned char LAB_002a0b28; /* 0x2a0b28 */
 extern unsigned char LAB_002a0b38; /* 0x2a0b38 */
 extern unsigned char LAB_0032afe4; /* 0x32afe4 */
@@ -43,7 +43,7 @@ void FUN_002a0a38(void)
   puVar1[4] = 0;
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar2 = &LAB_002a0b28;
-  asdProcessCreateSimple(&LAB_002a0b28,4,0,0,FUN_0029ef78,&LAB_0032afe4,0);
+  asdProcessCreateSimple(&LAB_002a0b28,4,0,0,soundTestActionMenuUpdate,&LAB_0032afe4,0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_002a0b38,0xea,0,0,&LAB_0032affc,&LAB_0037a114,0,puVar2);
   return;

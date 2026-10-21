@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003fe9b4(void);
+int tripleOwnerSetValue(void);
 int FUN_004019c0(unsigned int, unsigned char [28]);
 int FUN_00401a74(int, float *, float *);
 int FUN_0040619c(int, int);
@@ -20,7 +20,7 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_00102c30(unsigned int, char *);
-/* Supplied declaration required: FUN_003fe9b4. */
+/* Supplied declaration required: tripleOwnerSetValue. */
 /* Supplied declaration required: FUN_004019c0. */
 /* Supplied declaration required: FUN_00401a74. */
 /* Supplied declaration required: FUN_0040619c. */
@@ -71,7 +71,7 @@ void FUN_00421514(int param_1,unsigned int param_2)
         temp_v0 = *(int *)(*(int *)(temp_v20 + 8) + 8);
         FUN_0040619c(temp_v0,temp_v9);
         if (temp_v0 != 0) {
-          FUN_003fe9b4();
+          tripleOwnerSetValue();
         }
         temp_v15 = 0;
         temp_v7 = 0;

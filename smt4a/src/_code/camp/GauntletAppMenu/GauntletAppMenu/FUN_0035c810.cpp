@@ -17,7 +17,7 @@ int FUN_00275bc8(...);
 int sysMemClear(...);
 int FUN_003dc0c0(...);
 int loadSlotEnsureLoaded(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -59,7 +59,7 @@ extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003dc0c0. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 unsigned int FUN_0035c810(void)
@@ -109,7 +109,7 @@ unsigned int FUN_0035c810(void)
   puVar1[0xab] = temp_v2;
   temp_v1 = dataTableGetCount(temp_v1);
   puVar1[0xac] = temp_v1;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0xae);
+  paramsClearPacket(puVar1 + 0xae);
   paramsInit(puVar1 + 0xae,&DAT_0052caec,0x3c,&DAT_0052cb28,0x60,0,0,0,0,&DAT_0052cb88,0x134);
   FUN_0014e188(puVar1 + 0xb6,0x14,0,puVar1 + 0xae,0xc9);
   uiSpriteSetKeyframe(puVar1 + 0xb6,3,0);

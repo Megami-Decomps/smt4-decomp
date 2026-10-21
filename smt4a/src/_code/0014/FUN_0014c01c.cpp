@@ -15,7 +15,7 @@ int FUN_00169704(void);
 int FUN_001517b4(...);
 int FUN_00162ec0(...);
 int ifTouchRegionRemove(void);
-int FUN_00164288(void);
+int workCommandRefreshActiveSlots(void);
 int FUN_00165088(...);
 int msgBoxFlagsClearBit7(...);
 int ifTouchGetButtonHelpValue(void);
@@ -71,15 +71,15 @@ extern float DAT_005e2054; /* 0x5e2054 */
 /* Supplied declaration required: gameDataCounterSpend. */
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int campIsState85(void);
-extern int FUN_00162880(void);
+extern int engineCleanupIsDone(void);
 /* Supplied declaration required: FUN_00162ec0. */
-extern int FUN_0016345c(void);
+extern int querySlotHasHandle(void);
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163e84(unsigned int);
 extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_00164288. */
+/* Supplied declaration required: workCommandRefreshActiveSlots. */
 extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 /* Supplied declaration required: msgBoxFlagsSetBit7. */
 extern int FUN_001643a0(void);
@@ -93,7 +93,7 @@ extern int FUN_00165070(void);
 /* Supplied declaration required: msgBoxFlagsClearBit7. */
 /* Supplied declaration required: FUN_00167400. */
 /* Supplied declaration required: FUN_00167458. */
-extern int FUN_00167e54(void);
+extern int aocJobIsValid(void);
 /* Supplied declaration required: ifTouchGetButtonHelpValue. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
@@ -754,9 +754,9 @@ LAB_0014d1e0:
             temp_v3 = *(unsigned int *)(temp_v2 + 0x18);
           }
           *(unsigned int *)(temp_v2 + 0x1c) = temp_v3;
-          temp_v8 = FUN_0016345c();
+          temp_v8 = querySlotHasHandle();
           if (temp_v8 != 0) {
-            FUN_00164288();
+            workCommandRefreshActiveSlots();
           }
           temp_v4 = *(unsigned int *)(temp_v2 + 0xc);
           if ((temp_v4 & 8) != 0) {
@@ -973,12 +973,12 @@ LAB_0014d5c4:
                       }
                     }
                     else {
-                      temp_v8 = FUN_00167e54();
+                      temp_v8 = aocJobIsValid();
                       if (((((temp_v8 == 0) && (temp_v8 = lmapMainIsRunning(), temp_v8 == 0)) &&
                            (temp_v8 = mapMainIsBusy(), temp_v8 == 0)) &&
                           (temp_v8 = QuestCenterMode_IsBusy(), temp_v8 == 0)) ||
                          ((temp_v8 = campIsState85(), temp_v8 != 0 ||
-                          (temp_v8 = FUN_00162880(), temp_v8 == 0)))) {
+                          (temp_v8 = engineCleanupIsDone(), temp_v8 == 0)))) {
                         temp_v3 = 0x9d;
                       }
                       else {
@@ -1393,7 +1393,7 @@ LAB_0014dfd4:
       DAT_005e204e = '\0';
     }
     else {
-      temp_v8 = FUN_0016345c();
+      temp_v8 = querySlotHasHandle();
       if (temp_v8 == 0) {
         if (DAT_005e204e == '\0') {
           temp_v8 = 0x69;

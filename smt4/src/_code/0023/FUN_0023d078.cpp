@@ -1,47 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023d078` (_code @ 0x23d078, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: constant-color extraction registers and independent byte-store scheduling differ. */
+#include "common.h"
+
+struct CombinerStage {
+    u8 colorFunction; // 0x00
+    u8 colorOperands[3];
+    u8 colorSources[3]; // 0x04
+    u8 colorScale;
+    u8 colorBufferInput;
+    u8 alphaFunction; // 0x09
+    u8 alphaOperands[3];
+    u8 alphaSources[3]; // 0x0d
+    u8 alphaScale;
+    u8 alphaBufferInput;
+    u8 constantColor[4]; // 0x12
+    u16 registerId; // 0x16
+};
+struct CombinerState {
+    CombinerStage stages[6];
+    u32 bufferColor; // 0x90
+};
 
 extern "C" {
+void FUN_002b612c(CombinerState *);
+void nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(CombinerStage *);
+u32 *nn_gr_CTR_Combiner_MakeCommand(CombinerState *, u32 *);
 
-int FUN_002b612c(unsigned char [24]);
-int nn_gr_CTR_Combiner_MakeCommand(unsigned char [24], unsigned int);
-int nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(unsigned char [24]);
-
-/* stack frame of param_2: 5 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char sp74; /* 0x74: local_74 */
-    unsigned char sp75; /* 0x75: local_75 */
-    unsigned char sp76; /* 0x76: local_76 */
-    unsigned char sp83; /* 0x83: local_83 */
-    unsigned char sp88; /* 0x88: local_88 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_002b612c. */
-/* Supplied declaration required: nn_gr_CTR_Combiner_MakeCommand. */
-/* Supplied declaration required: nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0. */
-
-
-void FUN_0023d078(unsigned int param_1,unsigned int param_2)
-
+// Modulate the texture by primary color, then add the supplied constant RGB color.
+u32 *FUN_0023d078(u32 *commands, u32 color)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char temp_v0 [24];
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3;
-  unsigned char temp_v4;
-  unsigned char temp_v5;
-  
-  FUN_002b612c(temp_v0);
-  nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(temp_v0);
-  temp_v1 = 2;
-  temp_v3 = (unsigned char)((unsigned int)param_2 >> 0x18);
-  temp_v4 = (unsigned char)((unsigned int)param_2 >> 0x10);
-  temp_v2 = 0xe;
-  temp_v5 = (unsigned char)((unsigned int)param_2 >> 8);
-  nn_gr_CTR_Combiner_MakeCommand(temp_v0,param_1);
-  return;
+    CombinerState combiner;
+    FUN_002b612c(&combiner);
+    nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(&combiner.stages[0]);
+    CombinerStage &stage = combiner.stages[1];
+    stage.colorFunction = 2; // add
+    stage.colorSources[1] = 0x0e; // constant color
+    stage.constantColor[0] = color >> 24;
+    stage.constantColor[1] = color >> 16;
+    stage.constantColor[2] = color >> 8;
+    return nn_gr_CTR_Combiner_MakeCommand(&combiner, commands);
 }
-
-} /* extern "C" */
+}

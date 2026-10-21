@@ -55,9 +55,9 @@ extern int btlGetMainState(void);
 extern int FUN_0017760c(unsigned int);
 /* Supplied declaration required: FUN_003ff22c. */
 /* Supplied declaration required: FUN_003ff524. */
-extern int FUN_003ff5b8(unsigned int *);
+extern int btlCanSelectReservePartyMember(unsigned int *);
 extern int FUN_003ff888(void);
-extern int FUN_004c3a98(int, unsigned int);
+extern int btlFindEntryValue(int, unsigned int);
 extern int FUN_004c6b8c(int, int);
 extern int halfTable152TopIs2(unsigned int *, unsigned int);
 extern int btlUnitGet(unsigned int);
@@ -225,37 +225,37 @@ LAB_003ffb9c:
       temp_v8 = temp_v7 | 4;
     }
   }
-  if (((temp_v6 & 0x200) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0xd), temp_v5 < 1)) {
+  if (((temp_v6 & 0x200) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0xd), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x200;
   }
-  if (((temp_v6 & 0x400) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0x14), temp_v5 < 1)) {
+  if (((temp_v6 & 0x400) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0x14), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x400;
   }
-  if (((temp_v6 & 0x800) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0x15), temp_v5 < 1)) {
+  if (((temp_v6 & 0x800) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0x15), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x800;
   }
-  if (((temp_v6 & 0x1000) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0x14), 0 < temp_v5)) {
+  if (((temp_v6 & 0x1000) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0x14), 0 < temp_v5)) {
     temp_v8 = temp_v8 | 0x1000;
   }
-  if (((temp_v6 & 0x2000) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0x15), 0 < temp_v5)) {
+  if (((temp_v6 & 0x2000) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0x15), 0 < temp_v5)) {
     temp_v8 = temp_v8 | 0x2000;
   }
-  if (((temp_v6 & 0x4000) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0x16), temp_v5 < 1)) {
+  if (((temp_v6 & 0x4000) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0x16), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x4000;
   }
-  if (((temp_v6 & 0x8000) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0xe), temp_v5 < 1)) {
+  if (((temp_v6 & 0x8000) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0xe), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x8000;
   }
-  if (((temp_v6 & 0x10000) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0xf), temp_v5 < 1)) {
+  if (((temp_v6 & 0x10000) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0xf), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x10000;
   }
-  if (((temp_v6 & 0x20000) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0x10), temp_v5 < 1)) {
+  if (((temp_v6 & 0x20000) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0x10), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x20000;
   }
-  if (((temp_v6 & 0x40000) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0x11), temp_v5 < 1)) {
+  if (((temp_v6 & 0x40000) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0x11), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x40000;
   }
-  if (((temp_v6 & 0x80000) != 0) && (temp_v5 = FUN_004c3a98((int)(short)param_1[2],0x13), temp_v5 < 1)) {
+  if (((temp_v6 & 0x80000) != 0) && (temp_v5 = btlFindEntryValue((int)(short)param_1[2],0x13), temp_v5 < 1)) {
     temp_v8 = temp_v8 | 0x80000;
   }
   if ((temp_v6 & 0x200000) != 0) {
@@ -276,7 +276,7 @@ LAB_003ffb9c:
       ))) {
     temp_v8 = temp_v8 | 0x800000;
   }
-  if (((temp_v6 & 0x1000000) != 0) && (temp_v5 = FUN_003ff5b8(param_1), temp_v5 != 0)) {
+  if (((temp_v6 & 0x1000000) != 0) && (temp_v5 = btlCanSelectReservePartyMember(param_1), temp_v5 != 0)) {
     temp_v8 = temp_v8 | 0x1000000;
   }
   if (((temp_v6 & 0x2000000) != 0) && (temp_v5 = FUN_003ff888(), temp_v5 != 0)) {
@@ -299,7 +299,7 @@ LAB_003ffb9c:
     temp_v8 = temp_v8 | 0x10000000;
   }
   if ((((temp_v6 & 0x20000000) != 0) &&
-      (temp_v5 = FUN_004c3a98((int)*(short *)((int)param_1 + 0x6e),0x17), temp_v5 < 1)) &&
+      (temp_v5 = btlFindEntryValue((int)*(short *)((int)param_1 + 0x6e),0x17), temp_v5 < 1)) &&
      ((((temp_v5 = halfTable152TopIs2(param_1 + 0x59,0), temp_v5 != 0 ||
         ((((temp_v5 = halfTable152TopIs2(param_1 + 0x59,1), temp_v5 != 0 ||
            (temp_v5 = halfTable152TopIs2(param_1 + 0x59,2), temp_v5 != 0)) ||

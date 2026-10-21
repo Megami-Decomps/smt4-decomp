@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int dataTable08Sub1GetRecord(void);
 
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 
 
@@ -22,7 +22,7 @@ unsigned int FUN_00394d90(int param_1,int param_2)
     temp_v1 = 0;
     do {
       temp_v0 = (unsigned int)*(unsigned short *)(param_2 + temp_v1 * 2 + 0x34);
-      if (((temp_v0 != 0) && (FUN_00283e48(), temp_v0 != 0)) &&
+      if (((temp_v0 != 0) && (passiveSkillLookupRecord(), temp_v0 != 0)) &&
          (*(unsigned char *)(temp_v0 + 0x35) == *(unsigned char *)(param_1 + 0x6e) >> 4)) {
         return 1;
       }

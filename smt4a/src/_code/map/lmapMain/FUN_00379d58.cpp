@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_003c323c(void);
+int lmapApplyAreaHandleVisibility(void);
 int FUN_0040619c(unsigned int, int);
 int FUN_0040a908(void);
 int FUN_0040a918(int, int);
@@ -50,7 +50,7 @@ extern unsigned int DAT_0064c050; /* 0x64c050 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00178b04. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_003c323c. */
+/* Supplied declaration required: lmapApplyAreaHandleVisibility. */
 extern int FUN_003fdadc(void);
 /* Supplied declaration required: FUN_0040619c. */
 /* Supplied declaration required: FUN_0040a908. */
@@ -58,7 +58,7 @@ extern int FUN_003fdadc(void);
 /* Supplied declaration required: moriModelContentCreateBinding. */
 /* Supplied declaration required: FUN_0040a9a0. */
 /* Supplied declaration required: FUN_0040ab9c. */
-extern unsigned int FUN_0040ac08(void);
+extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_00416168. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
 
@@ -111,7 +111,7 @@ void FUN_00379d58(void)
     FUN_00178b04(0x20,&LAB_00379fe4,0x25a0);
     temp_v2 = 0;
     if (temp_v1 != 0) {
-      temp_v2 = FUN_0040ac08();
+      temp_v2 = modelListInit();
     }
     piVar6 = (int *)(temp_v0 + 0xae4);
     *(unsigned int *)(temp_v0 + 0xae4) = temp_v2;
@@ -123,7 +123,7 @@ void FUN_00379d58(void)
     moriModelContentCreateBinding(*piVar6);
     *(unsigned int *)(temp_v0 + 0xad8) = 0;
     *(unsigned int *)(temp_v0 + 0xadc) = 0;
-    FUN_003c323c();
+    lmapApplyAreaHandleVisibility();
     temp_v1 = 0;
     temp_v6 = *(int *)(*(int *)(*piVar6 + 8) + 0x10);
     if (0 < temp_v6) {

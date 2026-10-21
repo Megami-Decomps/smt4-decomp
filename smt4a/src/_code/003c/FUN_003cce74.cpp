@@ -10,7 +10,7 @@ int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00185e84(...);
-int FUN_0035b540(int, int, int, int);
+int largeGridDrawButtonStrip(int, int, int, int);
 int FUN_00389d9c(...);
 int FUN_004bd6b0(...);
 int VectorSignedToFloat(...);
@@ -37,7 +37,7 @@ extern unsigned int FUN_0014bd84(unsigned short);
 /* Supplied declaration required: FUN_00185e84. */
 extern int FUN_00284140(int);
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_0035b540. */
+/* Supplied declaration required: largeGridDrawButtonStrip. */
 /* Supplied declaration required: FUN_00389d9c. */
 extern int recordContainsPairedId(unsigned int, unsigned short);
 extern unsigned int FUN_004bcbb4(unsigned int, unsigned short);
@@ -70,7 +70,7 @@ void FUN_003cce74(int param_1,unsigned int param_2,int param_3,int param_4)
   temp_v1 = FUN_001834a4(0x1a,temp_v0 + 0x23c);
   temp_v2 = FUN_002a4894(param_1 + 0x8db0);
   temp_v2 = temp_v2 + 0x20;
-  FUN_0035b540(param_1,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,temp_v2);
+  largeGridDrawButtonStrip(param_1,*(short *)(temp_v1 + 8) + param_3,*(short *)(temp_v1 + 10) + param_4,temp_v2);
   temp_v3 = param_1 + temp_v0 * 2;
   temp_v6 = 0x9fe7ffff;
   if (*(short *)(temp_v3 + 0x8b60) != 0) {

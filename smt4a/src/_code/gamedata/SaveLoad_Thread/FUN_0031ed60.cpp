@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_2_stack;
 
-extern int FUN_00349b38(...); /* 0x349b38 */
+extern void saveLoadReadThreadWorker(unsigned int);
 extern int FUN_00349ca4(...); /* 0x349ca4 */
 extern int FUN_00349e60(...); /* 0x349e60 */
 extern int FUN_00371100(...); /* 0x371100 */
@@ -127,7 +127,7 @@ unsigned char FUN_0031ed60(int param_1,int param_2)
       uStack_40 = 0xfffffffe;
       temp_v4[0] = 0;
       temp_v5 = param_1;
-      FUN_002fb0d4(temp_v2,&temp_v6,FUN_00349b38,&temp_v5);
+      FUN_002fb0d4(temp_v2,&temp_v6,saveLoadReadThreadWorker,&temp_v5);
     }
   }
   else {

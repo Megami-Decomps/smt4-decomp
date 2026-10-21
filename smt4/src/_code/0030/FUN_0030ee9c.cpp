@@ -1,51 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030ee9c` (_code @ 0x30ee9c, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: texture moves to r5 early and dimension/model addresses use r0 instead of retail r1. -O2 also loses retail's paired VFP loads/stores. */
+#include "AsdSDK/Source/Gfx/Effect/AsdEffectTexture.h"
+#include "shard/W6_W6Match5_TextureAttachment.h"
 
 extern "C" {
+EffectTexture *asdEffectTextureCreate(EffectTextureFile *image);
+void refCountIncrement(AsdTexture *texture);
+void asdTextureRelease(AsdTexture *texture);
 
-int refCountIncrement(int);
-int asdEffectTextureCreate(void);
-int asdTextureRelease(int);
-int VectorSignedToFloat(unsigned int, int);
-
-typedef struct fn_0030ee9c_arg0 fn_0030ee9c_arg0;
-struct fn_0030ee9c_arg0 {
-    void *field_0x0; /* +0x0 */
-    unsigned char pad_0x4[0x4c];
-    void *field_0x50; /* +0x50 */
-    float field_0x54; /* +0x54 */
-    float field_0x58; /* +0x58 */
-};
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: refCountIncrement. */
-/* Supplied declaration required: asdEffectTextureCreate. */
-/* Supplied declaration required: asdTextureRelease. */
-
-
-void FUN_0030ee9c(fn_0030ee9c_arg0 *param_1,int param_2)
-
+// Compute scaled half-dimensions and attach a retained effect texture.
+void FUN_0030ee9c(TextureAttachment *attachment, EffectTextureFile *image)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  unsigned int in_fpscr;
-  float temp_v0;
-  float temp_v1;
-  
-  asdEffectTextureCreate();
-  temp_v0 = (float)VectorSignedToFloat(*(unsigned int *)(param_2 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = (float)VectorSignedToFloat(*(unsigned int *)(param_2 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
-  param_1->field_0x54 = temp_v0 * 0.5f * 0.0625f;
-  param_1->field_0x58 = temp_v1 * 0.5f * 0.0625f;
-  *(int *)(*(int *)((int)param_1->field_0x50 + 0xc) + 0xb4) = param_2;
-  refCountIncrement(param_2);
-  asdTextureRelease(param_2);
-  return;
+    AsdTexture *texture = (AsdTexture *)asdEffectTextureCreate(image);
+    f32 width = (f32)texture->dimensions.width;
+    f32 height = (f32)texture->dimensions.height;
+    attachment->halfWidth = width * 0.5f * 0.0625f;
+    attachment->halfHeight = height * 0.5f * 0.0625f;
+    attachment->content->model->texture = texture;
+    refCountIncrement(texture);
+    asdTextureRelease(texture);
 }
-
-} /* extern "C" */
+}

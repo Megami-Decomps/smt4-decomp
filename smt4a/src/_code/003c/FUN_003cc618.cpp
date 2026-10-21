@@ -1,28 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cc618` (_code @ 0x3cc618, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selected-record addressing/call sharing differ, and retail retains unreferenced pool word 0x00588c40. */
+#include "common.h"
+
+struct SelectableRecord {
+    u8 unk00[0x38];
+    u16 id; // 0x38
+    u8 unk3a[0x116];
+};
+struct RecordSelection {
+    u8 unk0000[0x452c];
+    SelectableRecord records[36]; // 0x452c
+    u8 unk746c[0x54];
+    s32 selected; // 0x74c0
+};
+struct RecordQueryContext {
+    u32 unk00;
+    RecordSelection *selection; // 0x04
+    SelectableRecord *record; // 0x08
+};
 
 extern "C" {
+void scrSetResult(s32 result);
 
-int scrSetResult(int);
-
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_003cc618(unsigned int param_1,int param_2)
-
+// Return the selected record id, or the direct record id when no selector is present.
+u32 FUN_003cc618(u32 argument, RecordQueryContext *context)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_2 + 4);
-  if (temp_v0 != 0) {
-    scrSetResult(*(unsigned short *)(temp_v0 + *(int *)(temp_v0 + 0x74c0) * 0x150 + 0x4564));
-  }
-  else if (*(int *)(param_2 + 8) != 0) {
-    scrSetResult(*(unsigned short *)(*(int *)(param_2 + 8) + 0x38));
-  }
-  return 1;
+    RecordSelection *selection = context->selection;
+    if (selection != NULL) {
+        scrSetResult(selection->records[selection->selected].id);
+    } else if (context->record != NULL) {
+        scrSetResult(context->record->id);
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -7,18 +7,18 @@ extern "C" {
 int FUN_0022dde8(...);
 int FUN_0022e2fc(void);
 int rectangleInitializeSelection(...);
-int FUN_00233228(void);
-int FUN_0023346c(...);
+int uiSelectionControllerConstruct(void);
+int uiInitializeEightTimerSet(...);
 int FUN_00233670(...);
 int FUN_00240cec(int);
 int fileSlotLoad(...);
-int FUN_0029dd7c(int);
+int menuSetModeAndResetTransitions(int);
 int asdOperatorNew(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
 int FUN_003a8aa0(...);
-int FUN_003aab40(...);
+int partyIdsReset(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -43,20 +43,20 @@ extern int *DAT_0043d990; /* 0x43d990 */
 /* Supplied declaration required: FUN_0022dde8. */
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: FUN_00233228. */
-/* Supplied declaration required: FUN_0023346c. */
+/* Supplied declaration required: uiSelectionControllerConstruct. */
+/* Supplied declaration required: uiInitializeEightTimerSet. */
 /* Supplied declaration required: FUN_00233670. */
-extern int FUN_00233718(int *);
+extern int rangeLimitMin(int *);
 /* Supplied declaration required: FUN_00240cec. */
 /* Supplied declaration required: fileSlotLoad. */
-/* Supplied declaration required: FUN_0029dd7c. */
+/* Supplied declaration required: menuSetModeAndResetTransitions. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_003420f4(int);
 /* Supplied declaration required: FUN_003a8aa0. */
-/* Supplied declaration required: FUN_003aab40. */
+/* Supplied declaration required: partyIdsReset. */
 
 
 void FUN_003a8fe0(int *param_1)
@@ -75,7 +75,7 @@ void FUN_003a8fe0(int *param_1)
   *(unsigned char *)((int)param_1 + 0xa6be) = 0xff;
   FUN_0022e2fc();
   (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  FUN_0029dd7c(6);
+  menuSetModeAndResetTransitions(6);
   if ((char)param_1[0x169] == '\x01') {
     FUN_00240cec(0);
   }
@@ -97,7 +97,7 @@ void FUN_003a8fe0(int *param_1)
     asdOperatorNew();
     puVar5 = (unsigned int *)0x0;
     if (temp_v0 != 0) {
-      puVar5 = (unsigned int *)FUN_00233228();
+      puVar5 = (unsigned int *)uiSelectionControllerConstruct();
       *puVar5 = (unsigned int)&DAT_00422394;
     }
     param_1[0x164] = (int)puVar5;
@@ -126,7 +126,7 @@ void FUN_003a8fe0(int *param_1)
     asdOperatorNew();
     piVar1 = (int *)0x0;
     if (temp_v0 != 0) {
-      piVar1 = (int *)FUN_00233228();
+      piVar1 = (int *)uiSelectionControllerConstruct();
       *piVar1 = (int)&DAT_00422434;
     }
     param_1[0x164] = (int)piVar1;
@@ -141,9 +141,9 @@ void FUN_003a8fe0(int *param_1)
     *(unsigned char *)(param_1 + 0x15b) = 1;
   }
   FUN_003a8aa0(param_1);
-  FUN_003aab40((int)param_1 + 0x96);
+  partyIdsReset((int)param_1 + 0x96);
   FUN_0022dde8((int)param_1 + 0x96,0);
-  temp_v0 = FUN_00233718(param_1 + 8);
+  temp_v0 = rangeLimitMin(param_1 + 8);
   temp_v1 = 0;
   if (temp_v1 < temp_v0) {
     do {
@@ -153,7 +153,7 @@ void FUN_003a8fe0(int *param_1)
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v0);
   }
-  FUN_0023346c(param_1 + 0x37);
+  uiInitializeEightTimerSet(param_1 + 0x37);
   fileSlotLoad(0x22);
   if ((char)param_1[0x169] != '\0') {
     rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x1c);

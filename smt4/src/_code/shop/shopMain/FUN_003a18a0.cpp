@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022fa2c(...);
 int FUN_002328b4(void);
 
-int FUN_0022f834(...);
+int equipmentPreviewUpdateSelection(...);
 int FUN_0022faf8(void);
 int FUN_0022fb64(int);
 int FUN_0022fbc0(int);
@@ -19,7 +19,7 @@ int FUN_002992e0(int);
 int FUN_002996d8(int);
 int FUN_00299d84(...);
 int nodeSetTranslation3f(unsigned int, int);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int FUN_002a0428(int, int);
 int asdMdlManagerDestroy(void);
 
@@ -33,7 +33,7 @@ extern unsigned int DAT_0044e014; /* 0x44e014 */
 extern unsigned int DAT_0044e018; /* 0x44e018 */
 extern unsigned int DAT_0044e01c; /* 0x44e01c */
 
-/* Supplied declaration required: FUN_0022f834. */
+/* Supplied declaration required: equipmentPreviewUpdateSelection. */
 /* Supplied declaration required: FUN_0022fa2c. */
 /* Supplied declaration required: FUN_0022faf8. */
 extern int inputIsQuestRepeatLeft(void);
@@ -52,7 +52,7 @@ extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: FUN_00299d84. */
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: nodeSetTranslation3f. */
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -206,15 +206,15 @@ void FUN_003a18a0(int param_1)
     }
     piVar4 = (int *)(param_1 + 0x15d24);
     if (*piVar4 == 3) {
-      FUN_0022f834(param_1);
+      equipmentPreviewUpdateSelection(param_1);
       return;
     }
     if (*piVar4 == 1) {
       *piVar4 = 4;
-      FUN_0022f834(param_1);
+      equipmentPreviewUpdateSelection(param_1);
       return;
     }
-    FUN_0029ca58();
+    beginStatusPanelClose();
     *piVar4 = 3;
     messageWindowStartTimer(0);
     if (*piVar3 != 0) {
@@ -232,7 +232,7 @@ void FUN_003a18a0(int param_1)
   if (*(int *)(param_1 + 0x860) == 7) {
     return;
   }
-  FUN_0022f834(param_1);
+  equipmentPreviewUpdateSelection(param_1);
   return;
 }
 

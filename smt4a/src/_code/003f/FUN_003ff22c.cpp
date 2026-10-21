@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_004c3a98(...);
+int btlFindEntryValue(...);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp2C; /* 0x2c: local_2c */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_004c3a98. */
+/* Supplied declaration required: btlFindEntryValue. */
 extern short FUN_004c52ec(unsigned int);
 extern short FUN_004c53fc(unsigned int);
 
@@ -28,7 +28,7 @@ unsigned char FUN_003ff22c(int param_1,int param_2,int param_3,int param_4,int p
   temp_v3 = param_6 != 0;
   temp_v2 = 0;
   if (temp_v3 || param_2 != 0) {
-    temp_v0 = FUN_004c3a98((int)*(short *)(param_1 + 8),7,param_3,param_4,param_1,param_2,param_3);
+    temp_v0 = btlFindEntryValue((int)*(short *)(param_1 + 8),7,param_3,param_4,param_1,param_2,param_3);
     if (param_2 != -7) {
       if (param_2 != -6) {
         if (param_2 != -5) {
@@ -50,7 +50,7 @@ LAB_003ff30c:
     else if (temp_v0 != 0) goto LAB_003ff30c;
   }
   if (temp_v3 || param_3 != 0) {
-    temp_v0 = FUN_004c3a98((int)*(short *)(param_1 + 8),8);
+    temp_v0 = btlFindEntryValue((int)*(short *)(param_1 + 8),8);
     if (param_3 != -7) {
       if (param_3 != -6) {
         if (param_3 != -5) {
@@ -72,7 +72,7 @@ LAB_003ff3b0:
     else if (temp_v0 != 0) goto LAB_003ff3b0;
   }
   if (temp_v3 || param_4 != 0) {
-    temp_v0 = FUN_004c3a98((int)*(short *)(param_1 + 8),10);
+    temp_v0 = btlFindEntryValue((int)*(short *)(param_1 + 8),10);
     if (param_4 != -7) {
       if (param_4 != -6) {
         if (param_4 != -5) {
@@ -94,7 +94,7 @@ LAB_003ff458:
     else if (temp_v0 != 0) goto LAB_003ff458;
   }
   if (temp_v3 || param_5 != 0) {
-    temp_v0 = FUN_004c3a98((int)*(short *)(param_1 + 8),0xb);
+    temp_v0 = btlFindEntryValue((int)*(short *)(param_1 + 8),0xb);
     if (param_5 != -7) {
       if (param_5 != -6) {
         if (param_5 != -5) {

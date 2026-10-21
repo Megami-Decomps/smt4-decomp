@@ -1,45 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013253c` (_code @ 0x13253c, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains the zero-capacity branch and uses different block/capacity register allocation and allocation-size scheduling. */
+#include "common.h"
+
+struct VectorElement {
+    u32 words[10];
+};
+struct VectorBlock {
+    VectorBlock* next;   // 0x00
+    u32 capacity;        // 0x04
+    VectorElement* data; // 0x08
+};
+struct BlockVector {
+    VectorBlock* head;     // 0x00
+    u32 unk04;             // 0x04
+    VectorElement* begin;  // 0x08
+    VectorElement* end;    // 0x0c
+};
 
 extern "C" {
+void* rt_malloc(u32 size);
+u32 vectorGrowCapacity_0012d382(u32 capacity, BlockVector* vector);
 
-int rt_malloc(...);
-
-extern int vectorGrowCapacity_0012d382(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_0013253c(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Prepends an allocation block and resets the writable element range.
+void FUN_0013253c(BlockVector* vector, s32 singleElement)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 1;
-  if (param_2 == 0) {
-    if (*param_1 != 0) {
-      temp_v0 = *(unsigned int *)(*param_1 + 4);
+    u32 capacity = 1;
+    if (singleElement == 0) {
+        u32 oldCapacity = vector->head ? vector->head->capacity : 0;
+        capacity = vectorGrowCapacity_0012d382(oldCapacity, vector);
     }
-    else {
-      temp_v0 = 0;
-    }
-    temp_v2 = vectorGrowCapacity_0012d382(temp_v0,param_1,param_3,param_4,param_4);
-  }
-  piVar2 = (int *)rt_malloc(0xc);
-  temp_v1 = rt_malloc();
-  piVar2[2] = temp_v1;
-  temp_v1 = *param_1;
-  piVar2[1] = temp_v2;
-  *piVar2 = temp_v1;
-  *param_1 = (int)piVar2;
-  temp_v1 = piVar2[2];
-  param_1[3] = temp_v1 + temp_v2 * 0x28;
-  param_1[2] = temp_v1;
-  return;
+    VectorBlock* block = static_cast<VectorBlock*>(rt_malloc(sizeof(VectorBlock)));
+    block->data = static_cast<VectorElement*>(rt_malloc(capacity * sizeof(VectorElement)));
+    VectorBlock* previous = vector->head;
+    block->capacity = capacity;
+    block->next = previous;
+    vector->head = block;
+    VectorElement* data = block->data;
+    vector->end = data + capacity;
+    vector->begin = data;
 }
-
-} /* extern "C" */
+}

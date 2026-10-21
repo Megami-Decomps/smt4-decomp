@@ -33,8 +33,8 @@ extern int FUN_0026140c(void);
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a4964. */
-extern int FUN_002c2c68(int);
-extern int FUN_004813bc(void);
+extern int objectApplyIfUnblocked(int);
+extern int gamePackedFlagTest(void);
 
 
 void FUN_0028a2e8(int param_1)
@@ -72,7 +72,7 @@ void FUN_0028a2e8(int param_1)
       temp_v7 = dataTableGetEntries();
       temp_v8 = dataTableGetCount(temp_v6);
       if ((temp_v8 <= temp_v9) ||
-         ((*(short *)(temp_v7 + temp_v9 * 0x94 + 4) == 0 || (temp_v7 = FUN_004813bc(), temp_v7 != 0)))) {
+         ((*(short *)(temp_v7 + temp_v9 * 0x94 + 4) == 0 || (temp_v7 = gamePackedFlagTest(), temp_v7 != 0)))) {
         temp_v7 = temp_v10 * 4;
         temp_v10 = temp_v10 + 1;
         *(unsigned int *)(temp_v0 + temp_v7 + 0x927c) = temp_v9;
@@ -103,7 +103,7 @@ void FUN_0028a2e8(int param_1)
     ifTouchRegionRemove();
     temp_v2 = 0;
     do {
-      temp_v4 = FUN_002c2c68(temp_v3);
+      temp_v4 = objectApplyIfUnblocked(temp_v3);
       if (temp_v4 <= temp_v2) break;
       temp_v1 = FUN_001643b4(0x1a,temp_v2 + 0xa9);
       temp_v4 = temp_v2 * 2;

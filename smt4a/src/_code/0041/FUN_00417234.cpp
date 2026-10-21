@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_00224880(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_00333dc8(int);
 int obj04Finish(void);
@@ -16,8 +16,8 @@ int FUN_003a7b74(void);
 int FUN_003b0744(void);
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00224880. */
-extern int FUN_0026272c(void);
+/* Supplied declaration required: scrRunOpcodesStub. */
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_00333dc8. */
@@ -53,7 +53,7 @@ unsigned int FUN_00417234(int param_1)
     sysPlaySe(0x69);
     *(unsigned int *)(param_1 + 0xc) = 2;
   case 2:
-    FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
+    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
     temp_v3 = stateHolderStateIs8Or10();
     if (temp_v3 != 0) {
       *(unsigned int *)(param_1 + 0xc) = 3;
@@ -69,7 +69,7 @@ unsigned int FUN_00417234(int param_1)
     sysPlaySe(0x9c);
     return 0;
   case 3:
-    temp_v3 = FUN_0026272c();
+    temp_v3 = messageMainIsIdle();
     if (temp_v3 == 0) {
       return 0;
     }
@@ -87,7 +87,7 @@ unsigned int FUN_00417234(int param_1)
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x11);
     *(unsigned int *)(param_1 + 0xc) = 4;
   case 4:
-    temp_v3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
     if (temp_v3 != 2) {
       return 0;
     }
@@ -119,7 +119,7 @@ unsigned int FUN_00417234(int param_1)
     sysPlaySe(temp_v2);
     return 0;
   case 7:
-    temp_v3 = FUN_0026272c();
+    temp_v3 = messageMainIsIdle();
     if (temp_v3 == 0) {
       return 0;
     }
@@ -127,7 +127,7 @@ unsigned int FUN_00417234(int param_1)
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x1c),0x10);
     *(unsigned int *)(param_1 + 0xc) = 8;
   case 8:
-    temp_v3 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
     if (temp_v3 != 2) {
       return 0;
     }

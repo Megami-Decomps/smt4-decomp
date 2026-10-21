@@ -50,7 +50,7 @@ extern unsigned int FUN_002ee568(unsigned char *, unsigned char *);
 /* Supplied declaration required: onlineFormatWideString. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
-extern int FUN_002fe22a(int, unsigned int);
+extern int wstrNotEqualById(int, unsigned int);
 extern int FUN_003054ce(unsigned int);
 /* Supplied declaration required: FUN_003054f0. */
 extern unsigned long long ownerChildValue(unsigned int, int *);
@@ -78,7 +78,7 @@ void FUN_0011973c(int param_1)
     _ZN9Obj55aff4C1Ev(temp_v8);
     FUN_002ea974(temp_v6);
     temp_v1 = FUN_002ee568(temp_v7,&LAB_0011986c);
-    temp_v0 = FUN_002fe22a(param_1 + 0x210,temp_v1);
+    temp_v0 = wstrNotEqualById(param_1 + 0x210,temp_v1);
     onlineUrlDestroy(temp_v7);
     if (temp_v0 != 0) {
       FUN_002ee5b8(temp_v6,param_1 + 0x210);

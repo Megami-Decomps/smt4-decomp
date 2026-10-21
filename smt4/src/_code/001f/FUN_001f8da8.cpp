@@ -7,7 +7,7 @@ extern "C" {
 int aocRecordLookup83(void);
 int FUN_00295a18(...);
 int jyoucyuGetTableEntry(int);
-int FUN_00389c44(int, unsigned int);
+int aocFindPackageTable22Record(int, unsigned int);
 
 /* stack frame of param_4: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -24,14 +24,14 @@ typedef struct {
 extern int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: aocRecordLookup83. */
-extern int FUN_0025b6e8(int);
+extern int unlockFlagTest(int);
 /* Supplied declaration required: FUN_00295a18. */
 extern int randNextInRange(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_00389c44. */
+/* Supplied declaration required: aocFindPackageTable22Record. */
 extern unsigned int __aeabi_idivmod(int, unsigned int);
 
 
@@ -71,7 +71,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
   iStack_30 = param_2;
   iStack_2c = param_3;
   puStack_28 = param_4;
-  FUN_00389c44(g_aocSystem,param_1);
+  aocFindPackageTable22Record(g_aocSystem,param_1);
   temp_v3 = temp_v20;
   if (temp_v5 != 0) {
     unaff_r10 = temp_v5;
@@ -136,7 +136,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
       } while (temp_v2 < 3);
       temp_v2 = g_aocSystem;
       temp_v14 = (unsigned char *)asStack_200;
-      FUN_00389c44(g_aocSystem,temp_v20);
+      aocFindPackageTable22Record(g_aocSystem,temp_v20);
       if (temp_v2 == 0) {
         temp_v4 = dataTableGet(0x21,0);
         temp_v2 = dataTableGetEntries();
@@ -191,7 +191,7 @@ unsigned int FUN_001f8da8(unsigned int param_1,int param_2,int param_3,unsigned 
           do {
             temp_v10 = randNextInRange(((int)(short)temp_v2 - 1U) & 0xffff);
             temp_v7 = (int)asStack_200[temp_v10];
-            temp_v10 = FUN_0025b6e8(temp_v7);
+            temp_v10 = unlockFlagTest(temp_v7);
             if (temp_v10 == 0) {
               *(unsigned char *)(param_3 + temp_v5) = 1;
             }

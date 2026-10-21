@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableLoadTmx(...);
 int FUN_001527d8(unsigned int, unsigned int);
 int asdTMTexLoadMainHeap(int, int);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_004029f4(int, int, int);
 int FUN_00405c94(int);
 int FUN_00471d94(unsigned int);
@@ -23,7 +23,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_004029f4. */
 /* Supplied declaration required: FUN_00405c94. */
@@ -47,8 +47,8 @@ void FUN_00402e34(int param_1)
   *(unsigned char *)(param_1 + 0x104) = 0;
   *(unsigned int *)(param_1 + 0x108) = 0;
   *(unsigned int *)(param_1 + 0x14) = 0;
-  FUN_002804b0("event/HunterDataBase/HunterDataBase.mbm",param_1 + 8,0);
-  FUN_002804b0("event/HunterDataBase/HunterDataBaseHelp.mbm",param_1 + 0xc,0);
+  asdLoadFileAsyncSimple("event/HunterDataBase/HunterDataBase.mbm",param_1 + 8,0);
+  asdLoadFileAsyncSimple("event/HunterDataBase/HunterDataBaseHelp.mbm",param_1 + 0xc,0);
   FUN_00471d94(g_aocSystem);
   *(unsigned short *)(param_1 + 0x18) = 0;
   asdTMTexTableLoadTmx(0x32,0);

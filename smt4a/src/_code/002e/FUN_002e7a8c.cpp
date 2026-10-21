@@ -24,7 +24,7 @@ int vec2GetXInt(...);
 int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_00183bb0(void);
-int FUN_002892a8(...);
+int partyPanelDrawHighlight(...);
 int FUN_002a4878(...);
 int FUN_003f3fe4(...);
 int FUN_003f4cc0(...);
@@ -70,7 +70,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int FUN_002618f8(void);
 extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_002892a8. */
+/* Supplied declaration required: partyPanelDrawHighlight. */
 /* Supplied declaration required: FUN_002a4878. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ace4c. */
@@ -196,13 +196,13 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
                 temp_v4 = temp_v2 + temp_v3 * 4;
                 if ((*(char *)(*(int *)(temp_v4 + 0xa10) + 0x20) == '\0') &&
                    (*(int *)(*(int *)(temp_v4 + 0xa10) + 0x34) == (int)*(short *)(temp_v2 + 0x38))) {
-                  FUN_002892a8(temp_v3,temp_v5,temp_v6,0x79,0);
+                  partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,0);
                 }
                 temp_v3 = temp_v3 + 1;
               } while (temp_v3 < 4);
             }
             temp_v3 = FUN_002a4878(temp_v2 + 0xc24);
-            FUN_002892a8(temp_v3,temp_v5,temp_v6,0x79,1);
+            partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,1);
             break;
           case 6:
             temp_v0 = *(char *)(temp_v2 + 0x9b4);
@@ -213,7 +213,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
                 temp_v4 = temp_v2 + temp_v3 * 4;
                 if ((*(char *)(*(int *)(temp_v4 + 0xa10) + 0x20) == '\0') &&
                    (*(int *)(*(int *)(temp_v4 + 0xa10) + 0x34) == (int)*(short *)(temp_v2 + 0x38))) {
-                  FUN_002892a8(temp_v3,temp_v5,temp_v6,0x79,0);
+                  partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,0);
                 }
                 temp_v3 = temp_v3 + 1;
               } while (temp_v3 < 4);
@@ -221,7 +221,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
             temp_v3 = FUN_002a4878();
             temp_v4 = FUN_002a4894(temp_v2 + 0xcec);
             temp_v3 = temp_v3 + temp_v4 * 4 + 4;
-            FUN_002892a8(temp_v3,temp_v5,temp_v6,0x79,1);
+            partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,1);
           }
           goto LAB_002e90ec;
         }
@@ -233,7 +233,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
               temp_v4 = temp_v2 + temp_v3 * 4;
               if ((*(char *)(*(int *)(temp_v4 + 0xa10) + 0x20) == '\0') &&
                  (*(int *)(*(int *)(temp_v4 + 0xa10) + 0x34) == (int)*(short *)(temp_v2 + 0x38))) {
-                FUN_002892a8(temp_v3,temp_v5,temp_v6,0x79,0);
+                partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,0);
                 temp_v1 = 1;
               }
               temp_v3 = temp_v3 + 1;
@@ -244,7 +244,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
                 temp_v4 = temp_v2 + temp_v3 * 4;
                 if ((*(char *)(*(int *)(temp_v4 + 0xa20) + 0x20) == '\0') &&
                    (*(int *)(*(int *)(temp_v4 + 0xa20) + 0x34) == (int)*(short *)(temp_v2 + 0x38))) {
-                  FUN_002892a8(temp_v3 + 4,temp_v5,temp_v6,0x79,0);
+                  partyPanelDrawHighlight(temp_v3 + 4,temp_v5,temp_v6,0x79,0);
                 }
                 temp_v3 = temp_v3 + 1;
               } while (temp_v3 < 3);
@@ -259,7 +259,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
             temp_v4 = temp_v2 + temp_v3 * 4;
             if ((*(char *)(*(int *)(temp_v4 + 0xa10) + 0x20) == '\0') &&
                (*(char *)(*(int *)(temp_v4 + 0xa10) + 0x23) == '\0')) {
-              FUN_002892a8(temp_v3,temp_v5,temp_v6,0x79,1);
+              partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,1);
             }
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < 4);
@@ -268,7 +268,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
             temp_v4 = temp_v2 + temp_v3 * 4;
             if ((*(char *)(*(int *)(temp_v4 + 0xa20) + 0x20) == '\0') &&
                (*(char *)(*(int *)(temp_v4 + 0xa20) + 0x23) == '\0')) {
-              FUN_002892a8(temp_v3 + 4,temp_v5,temp_v6,0x79,1);
+              partyPanelDrawHighlight(temp_v3 + 4,temp_v5,temp_v6,0x79,1);
             }
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < 0x18);
@@ -283,7 +283,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
           temp_v7 = temp_v2 + temp_v4 * 4;
           if ((*(char *)(*(int *)(temp_v7 + 0xa10) + 0x20) == '\0') &&
              (*(int *)(*(int *)(temp_v7 + 0xa10) + 0x34) == (int)*(short *)(temp_v2 + 0x38))) {
-            FUN_002892a8(temp_v4,temp_v5,temp_v6,0x79,0);
+            partyPanelDrawHighlight(temp_v4,temp_v5,temp_v6,0x79,0);
             temp_v3 = 1;
           }
           temp_v4 = temp_v4 + 1;
@@ -294,7 +294,7 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
             temp_v4 = temp_v2 + temp_v3 * 4;
             if ((*(char *)(*(int *)(temp_v4 + 0xa20) + 0x20) == '\0') &&
                (*(int *)(*(int *)(temp_v4 + 0xa20) + 0x34) == (int)*(short *)(temp_v2 + 0x38))) {
-              FUN_002892a8(temp_v3 + 4,temp_v5,temp_v6,0x79,0);
+              partyPanelDrawHighlight(temp_v3 + 4,temp_v5,temp_v6,0x79,0);
             }
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < 3);
@@ -307,14 +307,14 @@ unsigned int FUN_002e7a8c(unsigned int param_1,int param_2)
           temp_v4 = temp_v2 + temp_v3 * 4;
           if ((*(char *)(*(int *)(temp_v4 + 0xa10) + 0x20) == '\0') &&
              (*(int *)(*(int *)(temp_v4 + 0xa10) + 0x34) == (int)*(short *)(temp_v2 + 0x38))) {
-            FUN_002892a8(temp_v3,temp_v5,temp_v6,0x79,0);
+            partyPanelDrawHighlight(temp_v3,temp_v5,temp_v6,0x79,0);
           }
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 4);
       }
       temp_v3 = FUN_002a4878();
       temp_v4 = FUN_002a4894(temp_v2 + 0xdb4);
-      FUN_002892a8(temp_v3 + temp_v4 * 4,temp_v5,temp_v6,0x79,1);
+      partyPanelDrawHighlight(temp_v3 + temp_v4 * 4,temp_v5,temp_v6,0x79,1);
     }
   }
   else {

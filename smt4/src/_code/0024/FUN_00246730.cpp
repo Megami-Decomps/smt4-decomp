@@ -15,7 +15,7 @@ extern unsigned int DAT_0047e500; /* 0x47e500 */
 extern unsigned int DAT_0047e504; /* 0x47e504 */
 
 /* Supplied declaration required: FUN_00249e54. */
-extern unsigned int FUN_0024a6b0(int);
+extern unsigned int keyedRecordRegisterName(int);
 
 
 unsigned int FUN_00246730(int param_1)
@@ -45,7 +45,7 @@ unsigned int FUN_00246730(int param_1)
       temp_v6 = pcVar6[2] == 'R';
     }
     if (temp_v6) {
-      temp_v2 = FUN_0024a6b0(temp_v1 + 0x2bcc);
+      temp_v2 = keyedRecordRegisterName(temp_v1 + 0x2bcc);
       *(char *)(temp_v1 + 0x2bc4) = (char)temp_v2;
       FUN_00249e54(temp_v2,pcVar6);
       *(char *)(temp_v1 + 0x2bc4) = (char)temp_v2;

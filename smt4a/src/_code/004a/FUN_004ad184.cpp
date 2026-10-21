@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ad184` (_code @ 0x4ad184, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: allocated polymorphic node installs vtable DAT_0055c9a4; genuine C++ emission requires class/vtable symbol migration first. */
 #include "romwright_types.h"
 
 extern "C" {

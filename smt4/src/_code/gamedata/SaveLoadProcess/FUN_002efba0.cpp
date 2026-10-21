@@ -11,7 +11,7 @@ int FUN_002ad8b4(int, unsigned int);
 int gameDataBlocksGetSaveData(void);
 int asdMemFree(unsigned int);
 int asdMemAlloc(int, int, int, unsigned int, int);
-int FUN_002e0cc8(void);
+void FUN_002e0cc8(void);
 int rt_memcpy(unsigned int, unsigned int, int);
 int rt_memcpy_w(unsigned short *, unsigned int, int);
 
@@ -34,7 +34,6 @@ extern int jobGetWork(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemAlloc. */
 extern int FUN_002cedbc(void);
-/* Supplied declaration required: FUN_002e0cc8. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 

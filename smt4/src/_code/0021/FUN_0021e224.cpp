@@ -8,7 +8,7 @@ int FUN_00281e34(void);
 int FUN_00287aec(void);
 int FUN_00287b0c(void);
 
-extern int DAT_00447e40; /* 0x447e40 */
+extern int g_vectorQueueWork; /* 0x447e40 */
 
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_00287aec. */
@@ -83,7 +83,7 @@ void FUN_0021e224(char *param_1)
     temp_v0 = *(int *)(param_1 + 8);
     temp_v2 = temp_v0 + 1;
     *(int *)(param_1 + 8) = temp_v2;
-    temp_v1 = DAT_00447e40 + *(int *)(param_1 + 4) * 0x284;
+    temp_v1 = g_vectorQueueWork + *(int *)(param_1 + 4) * 0x284;
     if (temp_v0 + 2 < *(int *)(temp_v1 + 0x280)) {
       temp_v1 = temp_v1 + temp_v2 * 0x28;
       temp_v4 = *(unsigned int *)(temp_v1 + 8);

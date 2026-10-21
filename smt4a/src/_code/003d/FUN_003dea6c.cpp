@@ -8,7 +8,7 @@ int FUN_0015f858(unsigned int, int);
 int FUN_001654f0(unsigned char [128], unsigned char [132]);
 int FUN_00180118(unsigned int);
 int FUN_001ad9b4(void);
-int FUN_00282bf4(unsigned int);
+int dataTable0cFindByKey(unsigned int);
 int libc_strcpy(...);
 int FUN_002ebda8(void);
 int FUN_003180c4(...);
@@ -18,7 +18,7 @@ int FUN_00359974(...);
 /* Supplied declaration required: FUN_001654f0. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_00282bf4. */
+/* Supplied declaration required: dataTable0cFindByKey. */
 extern short *dataTableGetEntry37(int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002ebda8. */
@@ -82,7 +82,7 @@ void FUN_003dea6c(int param_1,int param_2,int param_3)
         break;
       case 5:
         temp_v0 = (unsigned int)*(unsigned short *)(temp_v3 + 0x102);
-        FUN_00282bf4(temp_v0);
+        dataTable0cFindByKey(temp_v0);
         temp_v3 = temp_v2 + 0x29;
         FUN_003180c4(temp_v3,temp_v0);
         break;

@@ -29,8 +29,8 @@ extern unsigned int DAT_005714d0; /* 0x5714d0 */
 extern unsigned int DAT_005714d4; /* 0x5714d4 */
 
 extern int btlGetMainState(void);
-extern int FUN_00213b5c(void);
-extern int FUN_002626e0(void);
+extern int gameDataBlocksGetTableFlag(void);
+extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_003eebf4. */
 extern int __aeabi_idivmod(int, int);
 
@@ -61,7 +61,7 @@ int FUN_004c67d0(void)
       (DAT_0057149c & *(unsigned int *)(temp_v3 + 0x45a4)) != 0) {
     return 100;
   }
-  temp_v4 = FUN_002626e0();
+  temp_v4 = gameProgressIsAdvanced();
   temp_v2 = DAT_005713f4;
   temp_v1 = DAT_005713f0;
   if (temp_v4 != 0) {
@@ -128,7 +128,7 @@ int FUN_004c67d0(void)
     temp_v10 = -0x32;
   }
   temp_v3 = temp_v10 + (temp_v4 - temp_v7) + (temp_v5 - temp_v8) / 2 + (unsigned int)temp_v0 * 10 + 0x32;
-  temp_v4 = FUN_00213b5c();
+  temp_v4 = gameDataBlocksGetTableFlag();
   if (temp_v4 != 1) {
     if (temp_v4 == 2) {
       temp_v3 = temp_v3 / 2;

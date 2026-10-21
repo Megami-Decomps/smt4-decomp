@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00281b94(...);
-int FUN_003534b0(...);
+int sceneRegisterBoxEffect(...);
 int VectorSignedToFloat(...);
 
 typedef struct fn_00313974_arg0 fn_00313974_arg0;
@@ -55,9 +55,9 @@ extern unsigned char LAB_00314000; /* 0x314000 */
 extern int gameFlagsGetBlock(void);
 extern int FUN_00262614(int);
 /* Supplied declaration required: FUN_00281b94. */
-/* Supplied declaration required: FUN_003534b0. */
+/* Supplied declaration required: sceneRegisterBoxEffect. */
 extern short *dataTable4CGetEntry(fn_00313974_arg0 *);
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 
 
 void FUN_00313974(fn_00313974_arg0 *param_1)
@@ -77,7 +77,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
   unsigned int temp_v8;
   
   temp_v2 = gameFlagsGetBlock();
-  temp_v3 = FUN_00376f94();
+  temp_v3 = lmapGetSpawnIndex();
   psVar5 = (short *)dataTable4CGetEntry(param_1);
   if (temp_v3 < 100) {
     return;
@@ -124,17 +124,17 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
     if (temp_v1 != 0) {
       if (temp_v1 != 1) {
         if (temp_v1 == 2) {
-          FUN_003534b0(0,0,&LAB_00314000,0x55,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
+          sceneRegisterBoxEffect(0,0,&LAB_00314000,0x55,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
                        (int)psVar5[0xb],(int)psVar5[0xc],0);
         }
       }
       else {
-        FUN_003534b0(0,0,&LAB_00313cbc,0x50,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
+        sceneRegisterBoxEffect(0,0,&LAB_00313cbc,0x50,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
                      (int)psVar5[0xb],(int)psVar5[0xc],0);
       }
     }
     else {
-      FUN_003534b0(0,0,&LAB_00313cb4,0x4f,0x29,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
+      sceneRegisterBoxEffect(0,0,&LAB_00313cb4,0x4f,0x29,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
                    (int)psVar5[0xb],(int)psVar5[0xc],0);
     }
     FUN_00281b94(0);
@@ -181,7 +181,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
         temp_v2 = (int)psVar5[8];
         temp_v8 = 4;
         if (temp_v6 == 0) {
-          FUN_003534b0(0,0,&LAB_00314000,0x51,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,temp_v2,0);
+          sceneRegisterBoxEffect(0,0,&LAB_00314000,0x51,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,temp_v2,0);
           FUN_00281b94(0);
           return;
         }
@@ -191,7 +191,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
       else {
         temp_v2 = FUN_00262614((int)*psVar5);
         if (temp_v2 != 0) {
-          FUN_003534b0(0,0,&LAB_00314000,0x54,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
+          sceneRegisterBoxEffect(0,0,&LAB_00314000,0x54,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
                        (int)psVar5[7],(int)psVar5[8],0);
           FUN_00281b94(0);
           return;
@@ -203,12 +203,12 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
         temp_v5 = 0x205;
         temp_v7 = 0x53;
       }
-      FUN_003534b0(temp_v5,0,&LAB_00314000,temp_v7,temp_v8,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,
+      sceneRegisterBoxEffect(temp_v5,0,&LAB_00314000,temp_v7,temp_v8,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,
                    temp_v2,0);
     }
   }
   else {
-    FUN_003534b0(0,0,&LAB_00314000,0x4e,0x2a,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
+    sceneRegisterBoxEffect(0,0,&LAB_00314000,0x4e,0x2a,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
                  (int)psVar5[7],(int)psVar5[8],0);
   }
   FUN_00281b94(0);

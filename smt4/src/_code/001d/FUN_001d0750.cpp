@@ -9,7 +9,7 @@ int FUN_00194ec8(void);
 int bibleOpenMode0(...);
 int bibleOpenMode1(...);
 int FUN_00269cb8(...);
-int FUN_00269cd0(void);
+int campUiResetSlots(void);
 int uniteSetMode(...);
 int FUN_0028a368(...);
 int FUN_0028a924(...);
@@ -17,22 +17,22 @@ int FUN_0029e774(void);
 int FUN_002a035c(void);
 int FUN_002cd37c(void);
 int bibleOpenMode3(int);
-int FUN_002e333c(void);
+int uniteReleaseModel(void);
 
 int bgmRestart(int);
 int bibleOpenMode2(int);
 int FUN_00223cf0(void);
 int FUN_00269dc8(void);
-int FUN_0026a348(void);
+int scrEffectRunIfActive(void);
 int partyPanelSetEnabled(...);
-int FUN_0026a3c4(...);
+int campRebuildOwnedInventoryCategory(...);
 int guestWinRequestClose(void);
-int FUN_0026a598(void);
+int campTimersStart(void);
 int FUN_0026d5a4(void);
-int FUN_00298940(void);
+int campUpdateCategoryHighlightColors(void);
 int FUN_00298d0c(int);
-int FUN_00299da0(int);
-int FUN_0029c3c0(int, int, int);
+int campRefreshEquipmentCategory(int);
+int slotSetRequest(int, int, int);
 int FUN_0029cc44(...);
 int FUN_0029e788(void);
 int FUN_0029e874(int);
@@ -61,23 +61,23 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: bibleOpenMode2. */
 /* Supplied declaration required: FUN_00223cf0. */
 /* Supplied declaration required: FUN_00269cb8. */
-/* Supplied declaration required: FUN_00269cd0. */
+/* Supplied declaration required: campUiResetSlots. */
 extern int FUN_00269d4c(void);
 /* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: FUN_00269dc8. */
-/* Supplied declaration required: FUN_0026a348. */
+/* Supplied declaration required: scrEffectRunIfActive. */
 /* Supplied declaration required: partyPanelSetEnabled. */
-/* Supplied declaration required: FUN_0026a3c4. */
+/* Supplied declaration required: campRebuildOwnedInventoryCategory. */
 /* Supplied declaration required: guestWinRequestClose. */
-/* Supplied declaration required: FUN_0026a598. */
+/* Supplied declaration required: campTimersStart. */
 /* Supplied declaration required: FUN_0026d5a4. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
-/* Supplied declaration required: FUN_00298940. */
+/* Supplied declaration required: campUpdateCategoryHighlightColors. */
 /* Supplied declaration required: FUN_00298d0c. */
 extern int FUN_00299218(int, unsigned int);
-/* Supplied declaration required: FUN_00299da0. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: campRefreshEquipmentCategory. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029e774. */
 /* Supplied declaration required: FUN_0029e788. */
@@ -94,7 +94,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002cf780. */
 /* Supplied declaration required: bibleOpenMode3. */
 /* Supplied declaration required: FUN_002e24c8. */
-/* Supplied declaration required: FUN_002e333c. */
+/* Supplied declaration required: uniteReleaseModel. */
 /* Supplied declaration required: FUN_003aacd0. */
 /* Supplied declaration required: FUN_003aca0c. */
 /* Supplied declaration required: spriteTable22Acquire. */
@@ -120,14 +120,14 @@ void FUN_001d0750(int *param_1)
   switch(temp_v1) {
   case 7:
     *(unsigned char *)(temp_v2 + 0x25bd) = 1;
-    FUN_0029c3c0(0,10,0xff);
+    slotSetRequest(0,10,0xff);
     bgmRestart(0x1e);
     return;
   case 9:
-    FUN_0026a598();
+    campTimersStart();
     timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
-    FUN_00298940();
+    campUpdateCategoryHighlightColors();
     guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = FUN_0029ee54(temp_v2 + 0x1dc);
@@ -149,7 +149,7 @@ void FUN_001d0750(int *param_1)
     if (temp_v1 < 1) {
       return;
     }
-    FUN_0026a598();
+    campTimersStart();
     timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
     spriteTable22Acquire();
@@ -183,26 +183,26 @@ void FUN_001d0750(int *param_1)
     if (temp_v4 < 1) {
       return;
     }
-    FUN_0026a598();
+    campTimersStart();
     timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
     if (temp_v1 != 0xb) {
       if (temp_v1 != 0xc) {
         if (temp_v1 == 0xd) {
           *(unsigned int *)(temp_v2 + 0x20) = 0xd;
-          FUN_0026a3c4();
+          campRebuildOwnedInventoryCategory();
         }
       }
       else {
         temp_v0 = 0xc;
         *(unsigned int *)(temp_v2 + 0x20) = 0xc;
-        FUN_0026a3c4(temp_v0);
+        campRebuildOwnedInventoryCategory(temp_v0);
       }
     }
     else {
       *(unsigned int *)(temp_v2 + 0x20) = 10;
       temp_v0 = 0xb;
-      FUN_0026a3c4(temp_v0);
+      campRebuildOwnedInventoryCategory(temp_v0);
     }
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -212,7 +212,7 @@ void FUN_001d0750(int *param_1)
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     return;
   case 0xe:
-    FUN_0026a598();
+    campTimersStart();
     guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = g_camp;
@@ -223,7 +223,7 @@ void FUN_001d0750(int *param_1)
     *(unsigned int *)(temp_v1 + 0x18) = 0x16;
     return;
   case 0x10:
-    FUN_0026a598();
+    campTimersStart();
     guestWinRequestClose();
     FUN_0029cc44(1);
     temp_v1 = g_camp;
@@ -263,7 +263,7 @@ void FUN_001d0750(int *param_1)
     }
     temp_v1 = FUN_0029ee54(temp_v4);
     if (0 < temp_v1) {
-      FUN_0026a598();
+      campTimersStart();
       timerStart(temp_v2 + 0x6d4,1,0);
       FUN_0026d5a4();
       guestWinRequestClose();
@@ -271,13 +271,13 @@ void FUN_001d0750(int *param_1)
       FUN_0029e874(1);
       FUN_0029e788();
       *(unsigned int *)(temp_v2 + 0x20) = 0x1a;
-      FUN_00299da0(0x11);
-      FUN_00299da0(0x12);
-      FUN_00299da0(0x13);
-      FUN_00299da0(0x14);
-      FUN_00299da0(0x15);
-      FUN_00299da0(0x16);
-      FUN_00299da0(0x17);
+      campRefreshEquipmentCategory(0x11);
+      campRefreshEquipmentCategory(0x12);
+      campRefreshEquipmentCategory(0x13);
+      campRefreshEquipmentCategory(0x14);
+      campRefreshEquipmentCategory(0x15);
+      campRefreshEquipmentCategory(0x16);
+      campRefreshEquipmentCategory(0x17);
       temp_v1 = g_camp;
       puVar5 = (unsigned int *)(g_camp + 0x18);
       *(unsigned int *)(g_camp + 0x1c) = 0;
@@ -288,7 +288,7 @@ void FUN_001d0750(int *param_1)
     }
     break;
   case 0x18:
-    FUN_0026a598();
+    campTimersStart();
     guestWinRequestClose();
     FUN_0029cc44(1);
     partyPanelSetEnabled(0);
@@ -300,7 +300,7 @@ void FUN_001d0750(int *param_1)
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     return;
   case 0x19:
-    FUN_0026a598();
+    campTimersStart();
     FUN_0026d5a4();
     guestWinRequestClose();
     FUN_0029cc44(1);
@@ -325,7 +325,7 @@ void FUN_001d0750(int *param_1)
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     guestWinRequestClose();
     FUN_0029cc44(1);
-    FUN_0026a348();
+    scrEffectRunIfActive();
     return;
   case 0x1b:
     FUN_0026d5a4();
@@ -356,7 +356,7 @@ void FUN_001d0750(int *param_1)
     *(unsigned char *)(temp_v2 + 0x248d) = 1;
     return;
   case 0x24:
-    FUN_0026a598();
+    campTimersStart();
     bibleOpenMode3(0);
     FUN_002a035c();
     temp_v1 = g_camp;
@@ -365,10 +365,10 @@ void FUN_001d0750(int *param_1)
     *puVar5 = 0x21;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
-    FUN_00269cd0();
+    campUiResetSlots();
     return;
   case 0x25:
-    FUN_0026a598();
+    campTimersStart();
     FUN_0026d5a4();
     guestWinRequestClose();
     FUN_0029cc44(1);
@@ -380,7 +380,7 @@ void FUN_001d0750(int *param_1)
     *(unsigned int *)(temp_v1 + 0x14) = 0;
     return;
   case 0x26:
-    FUN_0026a598();
+    campTimersStart();
     FUN_0026d5a4();
     guestWinRequestClose();
     FUN_0029cc44(1);
@@ -393,7 +393,7 @@ void FUN_001d0750(int *param_1)
     return;
   case 0x27:
     configOpen();
-    FUN_0026a598();
+    campTimersStart();
     timerStart(temp_v2 + 0x6d4,1,0);
     FUN_0026d5a4();
     guestWinRequestClose();
@@ -408,7 +408,7 @@ void FUN_001d0750(int *param_1)
     return;
   case 0x29:
     FUN_00194ec8();
-    FUN_0026a598();
+    campTimersStart();
     timerStart(temp_v2 + 0x6d4,0);
     FUN_0026d5a4();
     *(unsigned int *)(temp_v2 + 0x20) = 0x2c;
@@ -422,7 +422,7 @@ void FUN_001d0750(int *param_1)
   case 0x2a:
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
-      FUN_0026a598();
+      campTimersStart();
       uniteSetMode(0);
       temp_v1 = g_camp;
       puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -430,12 +430,12 @@ void FUN_001d0750(int *param_1)
       *puVar5 = 0x1d;
       *(unsigned int *)(temp_v1 + 0x1c) = 0;
       *(unsigned int *)(temp_v1 + 0x14) = 0;
-      FUN_00269cd0();
+      campUiResetSlots();
       return;
     }
     break;
   case 0x2b:
-    FUN_0026a598();
+    campTimersStart();
     uniteSetMode(1);
     temp_v1 = g_camp;
     puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -443,12 +443,12 @@ void FUN_001d0750(int *param_1)
     *puVar5 = 0x1d;
     *(unsigned int *)(temp_v1 + 0x1c) = 0;
     *(unsigned int *)(temp_v1 + 0x14) = 0;
-    FUN_00269cd0();
+    campUiResetSlots();
     return;
   case 0x2c:
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
-      FUN_0026a598();
+      campTimersStart();
       bibleOpenMode0(0);
       temp_v1 = g_camp;
       puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -457,7 +457,7 @@ void FUN_001d0750(int *param_1)
       *(unsigned int *)(temp_v1 + 0x14) = 0;
       *(unsigned int *)(temp_v1 + 0x18) = 0x21;
       FUN_002a035c();
-      FUN_00269cd0();
+      campUiResetSlots();
       return;
     }
     break;
@@ -473,7 +473,7 @@ void FUN_001d0750(int *param_1)
             temp_v2 = temp_v1 + temp_v2 * 0x604 + 0x90;
             FUN_002cd37c();
             if (temp_v2 == 0) {
-              FUN_0026a598();
+              campTimersStart();
               bibleOpenMode1(0);
               temp_v1 = g_camp;
               puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -482,7 +482,7 @@ void FUN_001d0750(int *param_1)
               *(unsigned int *)(temp_v1 + 0x1c) = 0;
               *(unsigned int *)(temp_v1 + 0x14) = 0;
               FUN_002a035c();
-              FUN_00269cd0();
+              campUiResetSlots();
               return;
             }
           }
@@ -497,7 +497,7 @@ void FUN_001d0750(int *param_1)
   case 0x2f:
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
-      FUN_0026a598();
+      campTimersStart();
       uniteSetMode(3);
       temp_v1 = g_camp;
       puVar5 = (unsigned int *)(g_camp + 0x18);
@@ -505,7 +505,7 @@ void FUN_001d0750(int *param_1)
       *puVar5 = 0x1d;
       *(unsigned int *)(temp_v1 + 0x1c) = 0;
       *(unsigned int *)(temp_v1 + 0x14) = 0;
-      FUN_00269cd0();
+      campUiResetSlots();
       *(unsigned char *)(temp_v2 + 0x248e) = 1;
       return;
     }
@@ -513,10 +513,10 @@ void FUN_001d0750(int *param_1)
   case 0x30:
     temp_v1 = FUN_00269d4c();
     if (temp_v1 != 0) {
-      FUN_0026a598();
+      campTimersStart();
       uniteSetMode(4);
-      FUN_00269cd0();
-      FUN_002e333c();
+      campUiResetSlots();
+      uniteReleaseModel();
       guestWinRequestClose();
       FUN_0029cc44(1);
       partyPanelSetEnabled(1);
@@ -540,21 +540,21 @@ void FUN_001d0750(int *param_1)
     FUN_00269cb8(2);
     FUN_0026d5a4();
     FUN_0029cc44(1);
-    FUN_0026a348();
+    scrEffectRunIfActive();
     return;
   case 0x33:
     *(unsigned int *)(temp_v2 + 0x18) = 0x32;
     FUN_00269cb8(1);
     FUN_0026d5a4();
     FUN_0029cc44(1);
-    FUN_0026a348();
+    scrEffectRunIfActive();
     return;
   case 0x34:
     *(unsigned int *)(temp_v2 + 0x18) = 0x33;
     FUN_00269cb8(3);
     FUN_0026d5a4();
     FUN_0029cc44(1);
-    FUN_0026a348();
+    scrEffectRunIfActive();
     return;
   }
   return;

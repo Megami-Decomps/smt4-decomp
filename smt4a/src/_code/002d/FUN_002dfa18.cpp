@@ -16,7 +16,7 @@ extern int FUN_0013def0(unsigned int);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: messageSlotSet. */
 extern int FUN_002e07f4(void);
 extern int getByteTableAValue(void);
@@ -60,7 +60,7 @@ unsigned int FUN_002dfa18(int *param_1)
       *(unsigned int *)(temp_v1 + 0x9354) = 2;
       return 0;
     }
-    temp_v0 = FUN_00224880(*(unsigned int *)(temp_v1 + 0xa34));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0xa34));
     if (temp_v0 == 2) {
       if (*(int *)(temp_v1 + 0xa38) != 0) {
         gameFlagSetValue(*(int *)(temp_v1 + 0xa38),1);

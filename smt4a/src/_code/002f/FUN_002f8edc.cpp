@@ -10,7 +10,7 @@ int FUN_003f0e20(int, int);
 int bitsAt60Set(...);
 int FUN_004fb43c(...);
 int FUN_004fbc30(...);
-int FUN_004fbe50(...);
+int btlReflectCreateKind10(...);
 int FUN_004fbfbc(...);
 int FUN_004fc094(int, unsigned int, int, int, int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
 
@@ -47,7 +47,7 @@ extern int scrGetArg(unsigned int);
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fbc30. */
-/* Supplied declaration required: FUN_004fbe50. */
+/* Supplied declaration required: btlReflectCreateKind10. */
 /* Supplied declaration required: FUN_004fbfbc. */
 /* Supplied declaration required: FUN_004fc094. */
 
@@ -82,7 +82,7 @@ unsigned int FUN_002f8edc(void)
     FUN_004fbfbc(0,temp_v1,0xf);
   }
   FUN_004fb43c(0,temp_v1,0x10000cd,1,0,0,0);
-  FUN_004fbe50(0,temp_v1,0,1,2,0xb4,3);
+  btlReflectCreateKind10(0,temp_v1,0,1,2,0xb4,3);
   return 1;
 }
 

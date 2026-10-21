@@ -14,18 +14,18 @@ int configSettingsResetDefaults(void);
 int FUN_002326b4(void);
 int FUN_0023b410(void);
 int FUN_00281a0c(void);
-int FUN_00282b60(void);
+int commonBgLoadSpritesOnFirstUse(void);
 int FUN_00283d74(int);
-int FUN_002856f8(void);
-int FUN_002a4cac(void);
+int dataTableRefAcquire(void);
+int texTableRefAcquire(void);
 int FUN_002bf464(void);
 int dataTableResolveEntryVariants(void);
 int FUN_002c3364(void);
-int FUN_002e51c4(void);
+int tmSpriteTableAcquire(void);
 int FUN_0031f4fc(void);
 int FUN_00387454(void);
 int engineClearStateTriple(void);
-int FUN_0039c304(void);
+int saveLoadEnsureResources(void);
 int FUN_003c5c88(void);
 int FUN_003f8898(void);
 int FUN_003f8940(void);
@@ -46,18 +46,18 @@ extern signed char g_jyoucyuLevel; /* 0x57ffd4 */
 /* Supplied declaration required: FUN_002326b4. */
 /* Supplied declaration required: FUN_0023b410. */
 /* Supplied declaration required: FUN_00281a0c. */
-/* Supplied declaration required: FUN_00282b60. */
+/* Supplied declaration required: commonBgLoadSpritesOnFirstUse. */
 /* Supplied declaration required: FUN_00283d74. */
-/* Supplied declaration required: FUN_002856f8. */
-/* Supplied declaration required: FUN_002a4cac. */
+/* Supplied declaration required: dataTableRefAcquire. */
+/* Supplied declaration required: texTableRefAcquire. */
 /* Supplied declaration required: FUN_002bf464. */
 /* Supplied declaration required: dataTableResolveEntryVariants. */
 /* Supplied declaration required: FUN_002c3364. */
-/* Supplied declaration required: FUN_002e51c4. */
+/* Supplied declaration required: tmSpriteTableAcquire. */
 /* Supplied declaration required: FUN_0031f4fc. */
 /* Supplied declaration required: FUN_00387454. */
 /* Supplied declaration required: engineClearStateTriple. */
-/* Supplied declaration required: FUN_0039c304. */
+/* Supplied declaration required: saveLoadEnsureResources. */
 /* Supplied declaration required: FUN_003c5c88. */
 /* Supplied declaration required: FUN_003f8898. */
 /* Supplied declaration required: FUN_003f8940. */
@@ -79,12 +79,12 @@ void FUN_0022258c(unsigned int param_1)
         }
         if (temp_v0 && param_1 == 0) {
           FUN_00281a0c();
-          FUN_002a4cac();
+          texTableRefAcquire();
           FUN_00212774();
           FUN_002c3364();
           FUN_0023b410();
           FUN_0031f4fc();
-          FUN_002856f8();
+          dataTableRefAcquire();
           resetFlagGroupsCD();
           FUN_003c5c88();
           DAT_0057ffba = 1;
@@ -107,15 +107,15 @@ void FUN_0022258c(unsigned int param_1)
         asdTMTexTableLoadTmx(0xe,0);
         FUN_0014afd0(3,2);
         FUN_0014afd0(3);
-        FUN_002e51c4();
+        tmSpriteTableAcquire();
         DAT_0057ffb9 = '\x01';
       }
     }
     else if (g_jyoucyu == '\0') {
       FUN_003f8940();
       engineClearStateTriple();
-      FUN_0039c304();
-      FUN_00282b60();
+      saveLoadEnsureResources();
+      commonBgLoadSpritesOnFirstUse();
       FUN_002bf464();
       configSettingsResetDefaults();
       FUN_00283d74(0);

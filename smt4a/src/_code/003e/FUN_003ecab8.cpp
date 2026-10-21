@@ -8,7 +8,7 @@ int FUN_001568f8(int, int);
 int dataTable00FindById(void);
 int FUN_00348f74(void);
 int FUN_003f0e20(int, int);
-int FUN_003fb994(unsigned int, int *);
+void btlEnemyDrawCalcVerticalOffset(unsigned int, int *, float);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -23,9 +23,9 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTable00FindById. */
 extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: FUN_00348f74. */
-extern unsigned int FUN_003ec620(int, unsigned int);
+extern unsigned int stateEntryFindById(int, unsigned int);
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_003fb994. */
+/* Supplied declaration required: btlEnemyDrawCalcVerticalOffset. */
 
 
 void FUN_003ecab8(int param_1,int param_2,int param_3)
@@ -78,8 +78,9 @@ LAB_003ecbc0:
             if (-1 < temp_v3) {
               temp_v5 = param_1;
               FUN_001568f8(param_1,param_2);
-              temp_v1 = FUN_003ec620(param_1,*(unsigned int *)(temp_v5 + temp_v3 * 4 + 0xc));
-              FUN_003fb994(temp_v1,&temp_v7);
+              temp_v1 = stateEntryFindById(param_1,*(unsigned int *)(temp_v5 + temp_v3 * 4 + 0xc));
+              btlEnemyDrawCalcVerticalOffset(temp_v1,&temp_v7,
+                  *(float *)(*(int *)(param_1 + 0x1ed4) + param_2 * 0x1d0 + 0x40));
               return;
             }
             break;
@@ -94,8 +95,9 @@ LAB_003ecbc0:
       temp_v3 = 0;
       temp_v5 = param_1;
       FUN_001568f8(param_1,param_2);
-      temp_v1 = FUN_003ec620(param_1,*(unsigned int *)(temp_v5 + temp_v3 * 4 + 0xc));
-      FUN_003fb994(temp_v1,&temp_v7);
+      temp_v1 = stateEntryFindById(param_1,*(unsigned int *)(temp_v5 + temp_v3 * 4 + 0xc));
+      btlEnemyDrawCalcVerticalOffset(temp_v1,&temp_v7,
+          *(float *)(*(int *)(param_1 + 0x1ed4) + param_2 * 0x1d0 + 0x40));
     }
     else {
       puVar5 = *(unsigned int **)(param_1 + 0x1ec4);

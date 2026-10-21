@@ -10,9 +10,9 @@ int FUN_0010a770(...);
 int FUN_0010afac(...);
 int FUN_0010b390(int);
 int FUN_0010b3b0(unsigned char *);
-int FUN_0010baa0(...);
+int asdTextRegisterSlot(...);
 int FUN_0010bedc(int);
-int FUN_0010d6a4(...);
+int callbackBindingInstall(...);
 int FUN_0010e594(unsigned char *);
 int FUN_0010e5f0(unsigned int);
 int FUN_002c44dc(int);
@@ -47,9 +47,9 @@ extern unsigned int uRam004729cc; /* 0x4729cc */
 /* Supplied declaration required: FUN_0010afac. */
 /* Supplied declaration required: FUN_0010b390. */
 /* Supplied declaration required: FUN_0010b3b0. */
-/* Supplied declaration required: FUN_0010baa0. */
+/* Supplied declaration required: asdTextRegisterSlot. */
 /* Supplied declaration required: FUN_0010bedc. */
-/* Supplied declaration required: FUN_0010d6a4. */
+/* Supplied declaration required: callbackBindingInstall. */
 /* Supplied declaration required: FUN_0010e594. */
 /* Supplied declaration required: FUN_0010e5f0. */
 /* Supplied declaration required: FUN_002c44dc. */
@@ -92,13 +92,13 @@ void FUN_00102b10(void)
   FUN_0010b3b0(&DAT_0043e1b8);
   FUN_0010e594(&DAT_0043e1f8);
   FUN_0010e5f0(0xffffff00);
-  FUN_0010d6a4(&LAB_0010a2f8,FUN_0010c83c);
+  callbackBindingInstall(&LAB_0010a2f8,FUN_0010c83c);
   FUN_0010a694(0xf87a,1,0);
   FUN_0010a694(0xf87b,4,0);
   FUN_0010afac(scrCommQueueRequest);
   FUN_0010a770(FUN_00109b08);
-  FUN_0010baa0(0xf87a,1,FUN_00108074);
-  FUN_0010baa0(0xf87b,4,FUN_0010930c);
+  asdTextRegisterSlot(0xf87a,1,FUN_00108074);
+  asdTextRegisterSlot(0xf87b,4,FUN_0010930c);
   DAT_00464d68 = 0x8190;
   uRam004729cc = 0x8190;
   return;

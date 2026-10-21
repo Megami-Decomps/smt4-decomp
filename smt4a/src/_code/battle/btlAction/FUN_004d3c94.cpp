@@ -12,12 +12,12 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int DAT_00571140; /* 0x571140 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: asdListBoxGetIntValuePtr. */
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int, int);
-extern int FUN_003874fc(unsigned int);
-extern unsigned int *FUN_003eccd0(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
+extern unsigned int *btlFindMarkedReserveRecord(unsigned int);
 
 
 void FUN_004d3c94(int param_1,unsigned int param_2)
@@ -30,9 +30,9 @@ void FUN_004d3c94(int param_1,unsigned int param_2)
   unsigned int temp_v2;
   unsigned int *puVar5;
   
-  temp_v1 = FUN_003874fc(*(unsigned int *)(param_1 + 0x10));
-  puVar3 = (unsigned int *)FUN_003eccd0(param_2);
-  temp_v0 = DAT_00573808;
+  temp_v1 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
+  puVar3 = (unsigned int *)btlFindMarkedReserveRecord(param_2);
+  temp_v0 = g_btlAux;
   if (puVar3 != (unsigned int *)0x0) {
     switch(temp_v1) {
     case 0:

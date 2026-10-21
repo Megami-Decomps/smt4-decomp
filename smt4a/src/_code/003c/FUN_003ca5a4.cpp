@@ -8,7 +8,7 @@ int ptrListRemoveClearOwner(unsigned int, int);
 int dataTable2dSub5GetCount(void);
 int FUN_003b5c54(unsigned int, int);
 int FUN_0040619c(int, unsigned int);
-int FUN_0040ace8(unsigned int, int);
+int handleRegistryRegisterObject(unsigned int, int);
 int rt_memcpy(unsigned char *, int *, int);
 int rt_memcpy_w(unsigned char [160], unsigned char *, int);
 
@@ -37,7 +37,7 @@ extern char *dataTable2DGetEntry(int);
 /* Supplied declaration required: dataTable2dSub5GetCount. */
 /* Supplied declaration required: FUN_003b5c54. */
 /* Supplied declaration required: FUN_0040619c. */
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -119,7 +119,7 @@ LAB_003ca648:
     else {
       if ((g_lmapMainState == 0) || (*(char *)(g_lmapMainState + temp_v3 * 0x88 + 0x4f84) == '\0')) {
         FUN_0040619c(temp_v0,temp_v3);
-        FUN_0040ace8(g_handleRegistry,temp_v0);
+        handleRegistryRegisterObject(g_handleRegistry,temp_v0);
         if ((g_lmapMainState != 0) &&
            (temp_v0 = g_lmapMainState + temp_v3 * 0x88, *(char *)(temp_v0 + 0x4f84) == '\0')) {
           *(unsigned char *)(temp_v0 + 0x4f84) = 1;

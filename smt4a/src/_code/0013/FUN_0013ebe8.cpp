@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015e2bc(unsigned char *, int *, int, int);
 int FUN_0015e874(...);
-int FUN_001742e4(int, int);
+int asdSoundObjectStop(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 extern unsigned char DAT_0063e37c; /* 0x63e37c */
@@ -16,7 +16,7 @@ extern int DAT_0063e948; /* 0x63e948 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0015e2bc. */
 /* Supplied declaration required: FUN_0015e874. */
-/* Supplied declaration required: FUN_001742e4. */
+/* Supplied declaration required: asdSoundObjectStop. */
 
 
 unsigned int FUN_0013ebe8(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -35,7 +35,7 @@ unsigned int FUN_0013ebe8(int param_1,int param_2,unsigned int param_3,unsigned 
     while (piVar4 != (int *)0x0) {
       if (piVar4[6] == param_1) {
         if (*piVar4 != 0) {
-          FUN_001742e4(*piVar4,0);
+          asdSoundObjectStop(*piVar4,0);
         }
         puVar2 = &DAT_0063e37c;
         FUN_0015e2bc(&DAT_0063e37c,piVar4,param_2,0);

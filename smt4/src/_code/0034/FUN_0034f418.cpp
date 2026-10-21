@@ -12,13 +12,13 @@ struct ItemGroup {
 
 extern "C" {
 
-void FUN_0034dd4c(GroupItem *item);
+void asdGxBlitScaledSurface(GroupItem *item);
 
 /* Updates an active item in the group. */
 void FUN_0034f418(ItemGroup *group, u32 index)
 {
     if (group->active[index] != 0)
-        FUN_0034dd4c(&group->items[index]);
+        asdGxBlitScaledSurface(&group->items[index]);
 }
 
 }

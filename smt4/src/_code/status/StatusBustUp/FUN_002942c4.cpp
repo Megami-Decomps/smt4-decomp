@@ -17,7 +17,7 @@ extern int DAT_0044e160; /* 0x44e160 */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002a5ee4. */
 /* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
-extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilGetRecord. */
 
@@ -59,7 +59,7 @@ void FUN_002942c4(unsigned int param_1,int param_2)
 LAB_00294358:
   if ((*(char *)(DAT_0044e15c + param_1) < '\x01') &&
      (temp_v2 = asdTMTexTableNodeIsLoaded(0x17,param_1), temp_v2 == 0)) {
-    temp_v2 = FUN_002ae98c(g_aocSystem,0x17,param_1,1);
+    temp_v2 = aocRunByName(g_aocSystem,0x17,param_1,1);
     if (temp_v2 != 0) {
       FUN_002a5ee4(g_aocSystem,0x17,param_1,0x10000);
     }

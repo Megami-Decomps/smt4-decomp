@@ -12,7 +12,7 @@ int mathPositionHeadingDegrees(void);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int);
 int FUN_00291e40(unsigned int);
-int FUN_002a5710(unsigned int);
+int modelSelectPrimaryMotion(unsigned int);
 int FUN_002b2b64(unsigned int);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 } void_stack;
 
 extern int *DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e58; /* 0x447e58 */
+extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int g_gameState; /* 0x49f91c */
 extern signed char DAT_0049f93e; /* 0x49f93e */
@@ -41,7 +41,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00291e40. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002b2b64. */
 
 
@@ -78,7 +78,7 @@ void FUN_00274798(void)
   temp_v13 = 0x47c34f8000000000;
   temp_v20 = 0;
   do {
-    temp_v1 = DAT_00447e58 + temp_v20 * 0x38;
+    temp_v1 = g_deferredMapModels + temp_v20 * 0x38;
     if ((*(char *)(temp_v1 + 0xc) != '\0') && (*(char *)(temp_v1 + 0xf) == '\0')) {
       puVar3 = *(unsigned int **)(temp_v1 + 0x3c);
       if (DAT_0049f93e != '\0') {
@@ -107,7 +107,7 @@ void FUN_00274798(void)
         }
         else {
 LAB_002748b4:
-          if ((*(char *)(DAT_00447e58 + 0xe3c) == '\0') || (*(char *)(temp_v1 + 0xe) != '\0')) {
+          if ((*(char *)(g_deferredMapModels + 0xe3c) == '\0') || (*(char *)(temp_v1 + 0xe) != '\0')) {
             temp_v11 = *(int *)(g_lmapScene + 0x1c);
             FUN_00287aec();
             temp_v8 = *(int *)(temp_v1 + 0x38);
@@ -131,7 +131,7 @@ LAB_002748b4:
                 *(unsigned int *)(temp_v1 + 0x28) = *(unsigned int *)(temp_v8 + 0x28);
               }
             }
-            if (((*(char *)(DAT_00447e58 + 0xe3c) == '\0') && (*DAT_004474f4 != 3)) &&
+            if (((*(char *)(g_deferredMapModels + 0xe3c) == '\0') && (*DAT_004474f4 != 3)) &&
                (*(char *)(temp_v1 + 0xe) == '\0')) {
               temp_v11 = DAT_004474f4[0x13];
               FUN_002878e4();
@@ -160,7 +160,7 @@ LAB_002748b4:
               temp_v9 = 0;
               temp_v19[2] = -1;
               do {
-                temp_v2 = DAT_00447e58 + temp_v9 * 0x38;
+                temp_v2 = g_deferredMapModels + temp_v9 * 0x38;
                 if (*(char *)(temp_v2 + 0xc) != '\0') {
                   *(unsigned char *)(temp_v2 + 0xd) = 0;
                   temp_v12 = *(float *)(g_lmapScene + 0x1c);
@@ -221,7 +221,7 @@ LAB_002748b4:
                 do {
                   piVar10 = temp_v19 + temp_v9;
                   temp_v9 = temp_v9 + 1;
-                  temp_v2 = DAT_00447e58 + *piVar10 * 0x38;
+                  temp_v2 = g_deferredMapModels + *piVar10 * 0x38;
                   if (*(char *)(temp_v2 + 0xc) != '\0') {
                     *(unsigned char *)(temp_v2 + 0xd) = 1;
                   }
@@ -235,7 +235,7 @@ LAB_002748b4:
               temp_v15 = 50.0f;
               temp_v17 = 0x428c0000;
               do {
-                temp_v9 = DAT_00447e58 + temp_v8 * 0x38;
+                temp_v9 = g_deferredMapModels + temp_v8 * 0x38;
                 if (*(char *)(temp_v9 + 0xc) != '\0') {
                   temp_v16 = temp_v15;
                   mathPositionHeadingDegrees();
@@ -261,7 +261,7 @@ LAB_002748b4:
             FUN_0028c618(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8),0);
             if (*(int *)(*(int *)(*(int *)(temp_v1 + 0x3c) + 8) + 0x38) != *(int *)(temp_v1 + 0x2c)) {
               temp_v8 = (int)temp_v13;
-              FUN_002a5710(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8));
+              modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8));
               *(int *)(temp_v1 + 0x30) = (int)temp_v13;
             }
             FUN_002b2b64(*(unsigned int *)(*(int *)(temp_v1 + 0x3c) + 8));
@@ -297,7 +297,7 @@ LAB_002748b4:
               }
             }
             *(int *)(temp_v1 + 0x30) = temp_v8;
-            if ((*(char *)(DAT_00447e58 + 0xe3c) == '\0') && (*DAT_004474f4 != 3)) {
+            if ((*(char *)(g_deferredMapModels + 0xe3c) == '\0') && (*DAT_004474f4 != 3)) {
               puVar3 = *(unsigned int **)(temp_v1 + 0x3c);
               temp_v4 = *puVar3;
               temp_v5 = temp_v4 & 2;

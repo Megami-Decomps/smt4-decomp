@@ -5,14 +5,14 @@
 extern "C" {
 
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int FUN_00151408(...);
+int positionStateSet(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int sysPlaySe(...);
 int FUN_00182054(void);
 int gameGetSlotRecord(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int sysMemClear(void);
 int rt_aeabi_memclr(...);
 int FUN_0039a3b4(...);
@@ -56,7 +56,7 @@ extern unsigned int *g_campCecEdit; /* 0x57f118 */
 extern int gameDataBlocksGetSaveData(void);
 extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -65,7 +65,7 @@ extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00182054. */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int FUN_002bf520(void);
 extern unsigned int campCecDispatchMode(unsigned int);
 /* Supplied declaration required: sysMemClear. */
@@ -189,9 +189,9 @@ void FUN_0034280c(unsigned char param_1)
   campCecDrawPageCreate();
   puVar3[3] = temp_v3;
   FUN_003a4980();
-  FUN_002804b0(&LAB_00342cdc,puVar3 + 0x14,0);
-  FUN_002804b0(&LAB_00342cf0,puVar3 + 0x15,0);
-  FUN_002804b0(&LAB_00342d08,puVar3 + 0x16,0);
+  asdLoadFileAsyncSimple(&LAB_00342cdc,puVar3 + 0x14,0);
+  asdLoadFileAsyncSimple(&LAB_00342cf0,puVar3 + 0x15,0);
+  asdLoadFileAsyncSimple(&LAB_00342d08,puVar3 + 0x16,0);
   temp_v0 = *(unsigned char *)(puVar3[2] + 0x22);
   temp_v4 = (unsigned int)temp_v0;
   FUN_00182054();
@@ -201,7 +201,7 @@ void FUN_0034280c(unsigned char param_1)
   temp_v3 = spriteHandleCreate(0);
   puVar3[0x17] = temp_v3;
   FUN_001527d8(temp_v3,0xffffffff);
-  FUN_00151408(puVar3[0x17],0,0x646464ff);
+  positionStateSet(puVar3[0x17],0,0x646464ff);
   sysPlaySe(0xb3);
   temp_v2 = 0;
   do {

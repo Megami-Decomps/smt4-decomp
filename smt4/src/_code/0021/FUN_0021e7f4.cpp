@@ -9,7 +9,7 @@ int dataTableGet(...);
 int FUN_00387c78(int, unsigned int);
 
 extern int g_aocSystem; /* 0x433158 */
-extern int DAT_0044cd88; /* 0x44cd88 */
+extern int g_mapStateSlots; /* 0x44cd88 */
 
 extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: FUN_00295a18. */
@@ -38,7 +38,7 @@ unsigned short FUN_0021e7f4(unsigned int param_1,int param_2)
   int temp_v7;
   unsigned short temp_v8;
   
-  *(unsigned char *)(DAT_0044cd88 + 0x14) = 0;
+  *(unsigned char *)(g_mapStateSlots + 0x14) = 0;
   temp_v0 = dataTableGet(0x20);
   temp_v1 = dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v0);
@@ -80,7 +80,7 @@ LAB_0021e958:
               temp_v1 = recordPackedValue(temp_v8);
               temp_v6 = FUN_0028fb40(temp_v8);
               if (temp_v6 >= temp_v1) {
-                *(unsigned char *)(DAT_0044cd88 + 0x14) = 1;
+                *(unsigned char *)(g_mapStateSlots + 0x14) = 1;
               }
               else {
                 FUN_00295a18(temp_v8,1);

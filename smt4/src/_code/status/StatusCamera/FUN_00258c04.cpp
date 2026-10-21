@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00298d50(int);
 int FUN_002bc644(int, int, int, int);
-int FUN_002c1568(int);
+int asdCameraRegister(int);
 int FUN_002c159c(int);
 int FUN_002c1e30(int, int);
 int FUN_002c1edc(int, float *, float *, int *);
@@ -29,7 +29,7 @@ extern int g_statusCamera; /* 0x44e178 */
 
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002bc644. */
-/* Supplied declaration required: FUN_002c1568. */
+/* Supplied declaration required: asdCameraRegister. */
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
@@ -98,7 +98,7 @@ void FUN_00258c04(float *param_1,float *param_2,unsigned int *param_3)
   FUN_002c1edc(temp_v0,pfVar5,&temp_v5,&temp_v8);
   FUN_002c1e30(temp_v0,1);
   FUN_00298d50(temp_v0);
-  FUN_002c1568(temp_v0);
+  asdCameraRegister(temp_v0);
   FUN_002c159c(temp_v0);
   return;
 }

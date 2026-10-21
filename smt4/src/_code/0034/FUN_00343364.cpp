@@ -21,12 +21,12 @@ extern int flagsPackFourBooleans(unsigned char);
 extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002b7638. */
 extern unsigned int FUN_002c15ac(unsigned int);
-extern unsigned int FUN_002c15d4(unsigned int);
+extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5d80(unsigned int, unsigned char);
 extern int packNibblesAndByte(unsigned int, unsigned int);
 extern int FUN_00310578(unsigned int, unsigned int, unsigned int);
-extern int FUN_0031b854(unsigned int);
+extern int packThreeNibbles(unsigned int);
 
 
 void FUN_00343364(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -51,7 +51,7 @@ void FUN_00343364(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v0 = *(unsigned int *)(param_1 + 0x11e4);
   temp_v1 = FUN_002c15ac(*(unsigned int *)(param_1 + 0x528));
   VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = FUN_002c15d4(*(unsigned int *)(param_1 + 0x528));
+  temp_v1 = asdGxPresetsGetByKind(*(unsigned int *)(param_1 + 0x528));
   VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   if ((param_4 & 4) != 0) {
     temp_v5 = 2;
@@ -107,7 +107,7 @@ void FUN_00343364(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     (**(romwright_code **)(param_1 + 0x1228))();
     *(unsigned char *)(param_1 + 0x1224) = 0;
   }
-  temp_v2 = FUN_0031b854(temp_v5);
+  temp_v2 = packThreeNibbles(temp_v5);
   piVar12 = (int *)(param_1 + 0x122c);
   temp_v3 = *piVar12;
   temp_v4 = piVar12[temp_v3 + 2];

@@ -2,14 +2,14 @@
 
 extern "C" {
 
-void FUN_003d9164(void);
+void eventCommandClearPending(void);
 void state339CFinish(void);
 s32 recordAreAllCountsNonpositive(void *object);
 s32 chainCountIdUnflagged(s32 value, s32 arg);
 
 extern s32 g_btlActionReflect;
 extern BtlMainA *g_btlCamera;
-extern void *DAT_00573808;
+extern void *g_btlAux;
 
 u32 btlEncountTryFinish(void)
 {
@@ -20,14 +20,14 @@ u32 btlEncountTryFinish(void)
     if (result > 0) {
         done = 0;
     } else {
-        result = recordAreAllCountsNonpositive(DAT_00573808);
+        result = recordAreAllCountsNonpositive(g_btlAux);
         done = result;
         if (result != 0) {
-            if (DAT_00573808 != NULL) {
+            if (g_btlAux != NULL) {
                 state339CFinish();
             }
             g_btlCamera->flags &= ~0x4000;
-            FUN_003d9164();
+            eventCommandClearPending();
             done = 1;
         }
     }

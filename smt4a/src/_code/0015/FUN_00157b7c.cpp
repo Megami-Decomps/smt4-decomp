@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0016d338(int *, unsigned int);
-int FUN_0017d7c4(int);
+int gfxCommandBufferSubmit(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,9 +13,9 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0016d338. */
-/* Supplied declaration required: FUN_0017d7c4. */
-extern unsigned int FUN_0017db04(int);
-extern int FUN_0017dd70(int);
+/* Supplied declaration required: gfxCommandBufferSubmit. */
+extern unsigned int rangeGetEnd(int);
+extern int rangeOffsetAdd(int);
 
 
 void FUN_00157b7c(int param_1)
@@ -31,16 +31,16 @@ void FUN_00157b7c(int param_1)
   piVar4 = *(int **)(param_1 + 0xa8);
   if (((*piVar4 - piVar4[1]) & 0xfffffffcU) != 0) {
     temp_v3 = param_1 + *(int *)(param_1 + 0x9c) * 0x4c + 4;
-    temp_v0 = FUN_0017dd70(temp_v3);
+    temp_v0 = rangeOffsetAdd(temp_v3);
     temp_v2 = piVar4[4];
     if (temp_v2 != 0) {
       temp_v0 = temp_v3;
     }
     *(int *)(param_1 + 0xa0) = temp_v2;
     if (temp_v2 != 0) {
-      FUN_0017d7c4(temp_v0);
+      gfxCommandBufferSubmit(temp_v0);
     }
-    temp_v1 = FUN_0017db04(temp_v3);
+    temp_v1 = rangeGetEnd(temp_v3);
     FUN_0016d338(piVar4,temp_v1);
     return;
   }

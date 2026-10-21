@@ -1,37 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00314c38` (_code @ 0x314c38, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
+void flagsSetIfUnset3(s32, s32, s32, s32, s32, s32);
+s32 FUN_0048e40c(NaviTransitionState *);
+void menuMarkActive(NaviTransitionState *);
 
-int flagsSetIfUnset3(void);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int g_naviMain; /* 0x587f28 */
-
-/* Supplied declaration required: flagsSetIfUnset3. */
-extern int FUN_0048e40c(int);
-
-
-void FUN_00314c38(void)
-
+// Set the requested flags and activate the navigation menu when its conditions hold.
+void FUN_00314c38(s32 firstGroup, s32 firstBit, s32 secondGroup, s32 secondBit,
+                  s32 thirdGroup, s32 thirdBit)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = g_naviMain;
-  flagsSetIfUnset3();
-  if ((temp_v0 != 0) && (temp_v1 = FUN_0048e40c(temp_v0 + 0x68), temp_v1 != 0)) {
-    *(unsigned char *)(temp_v0 + 0x7bf8) = 1;
-    return;
-  }
-  return;
+    NaviMain *navigation = g_naviMain;
+    flagsSetIfUnset3(firstGroup, firstBit, secondGroup, secondBit, thirdGroup, thirdBit);
+    if (navigation != NULL && FUN_0048e40c(&navigation->stateView.transition))
+        menuMarkActive(&navigation->stateView.transition);
 }
-
-} /* extern "C" */
+}

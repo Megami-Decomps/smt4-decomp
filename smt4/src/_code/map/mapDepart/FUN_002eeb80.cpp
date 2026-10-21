@@ -23,7 +23,7 @@ int FUN_00275be8(int);
 int FUN_00275dc4(void);
 int FUN_0027653c(void);
 int mapEntryTriggerForScene(unsigned int);
-int FUN_0027dba4(void);
+int frameTexResetFlags(void);
 int FUN_00280ac0(int);
 int FUN_0028a420(int);
 int FUN_00294834(int, int, int, int, int, int, int, int, int, int, int, int);
@@ -72,7 +72,7 @@ extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: FUN_00275dc4. */
 /* Supplied declaration required: FUN_0027653c. */
 /* Supplied declaration required: mapEntryTriggerForScene. */
-/* Supplied declaration required: FUN_0027dba4. */
+/* Supplied declaration required: frameTexResetFlags. */
 /* Supplied declaration required: FUN_00280ac0. */
 /* Supplied declaration required: FUN_0028a420. */
 /* Supplied declaration required: FUN_00294834. */
@@ -129,7 +129,7 @@ unsigned int FUN_002eeb80(void)
   if (DAT_0044751c != 0) {
     if (DAT_0044751c == 10) {
       DAT_0049fb48 = 1;
-      FUN_0027dba4();
+      frameTexResetFlags();
       FUN_00275dc4();
       FUN_00275be8(1);
       FUN_00275bc8();
@@ -138,7 +138,7 @@ unsigned int FUN_002eeb80(void)
       DAT_0049f93e = 1;
       *(unsigned char *)(g_mapDepartWork + 10) = 0;
       FUN_00275a30();
-      FUN_0027dba4();
+      frameTexResetFlags();
     }
     if (0x13 >= DAT_0044751c) {
       DAT_0044751c = DAT_0044751c + 1;

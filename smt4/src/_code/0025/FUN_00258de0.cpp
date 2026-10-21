@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_00262260(int, int, unsigned int);
-int FUN_00262410(...);
+int padClearBits(...);
 int FUN_0026242c(void);
-int FUN_00262f68(...);
+int objectFlagsClear(...);
 int FUN_00269bf0(void);
 
 typedef struct fn_00258de0_arg1 fn_00258de0_arg1;
@@ -28,12 +28,12 @@ typedef struct {
 
 extern int FUN_001ad4c0(int);
 /* Supplied declaration required: FUN_00262260. */
-/* Supplied declaration required: FUN_00262410. */
+/* Supplied declaration required: padClearBits. */
 /* Supplied declaration required: FUN_0026242c. */
-/* Supplied declaration required: FUN_00262f68. */
+/* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: FUN_00269bf0. */
 extern int btlGetMainState(void);
-extern int FUN_00295d08(unsigned int);
+extern int playerPadTestBit(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
@@ -105,13 +105,13 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
       if (*(char *)(param_3 + 0x23) == '\a') {
         return 1;
       }
-      temp_v5 = FUN_00295d08(1);
+      temp_v5 = playerPadTestBit(1);
       if (temp_v5 == 0) {
         return 1;
       }
       if (param_4 == 0) {
-        FUN_00262410(2);
-        temp_v5 = FUN_00295d08(3);
+        padClearBits(2);
+        temp_v5 = playerPadTestBit(3);
         if (temp_v5 != 0) {
           temp_v1 = *(short *)(temp_v4 + 0x2a) + 1;
         }
@@ -129,7 +129,7 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
       if (param_5 == (int *)0x0) {
         return 0;
       }
-      temp_v4 = FUN_00295d08(3);
+      temp_v4 = playerPadTestBit(3);
       if (temp_v4 == 0) {
         FUN_00262260(param_3,(int)temp_v1,param_1);
         *param_5 = param_3;
@@ -142,7 +142,7 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
         return 1;
       }
       if (param_4 == 0) {
-        FUN_00262f68(temp_v5,2);
+        objectFlagsClear(temp_v5,2);
         temp_v4 = flagWordTestBit(temp_v5,3);
         if (temp_v4 != 0) {
           temp_v1 = *(short *)(temp_v5 + 0x2a) + 1;
@@ -179,7 +179,7 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
     temp_v3 = FUN_0032b278(param_3,*(unsigned short *)(temp_v5 + 0x44));
     if (temp_v3 != 0) {
       if (param_4 == 0) {
-        FUN_00262f68(temp_v5,temp_v3 & 0xffff);
+        objectFlagsClear(temp_v5,temp_v3 & 0xffff);
       }
       temp_v8 = 0;
     }
@@ -220,20 +220,20 @@ FUN_00258de0(unsigned int param_1,fn_00258de0_arg1 *param_2,int param_3,int para
     *(short *)(temp_v5 + 0x2a) = (short)temp_v7;
     return temp_v8;
   }
-  temp_v5 = FUN_00295d08(1);
+  temp_v5 = playerPadTestBit(1);
   if (temp_v5 != 0) {
     return 1;
   }
   temp_v3 = FUN_0032b278(param_3,*(unsigned short *)(temp_v4 + 0x72));
   if (temp_v3 != 0) {
     if (param_4 == 0) {
-      FUN_00262410(temp_v3 & 0xffff);
+      padClearBits(temp_v3 & 0xffff);
     }
     temp_v8 = 0;
   }
   FUN_00262260(param_3,(int)temp_v1,param_1);
   if (param_3 != 0) {
-    temp_v5 = FUN_00295d08(3);
+    temp_v5 = playerPadTestBit(3);
     temp_v1 = *(short *)(temp_v4 + 0x2a);
     if (temp_v5 != 0) {
       param_3 = 1;

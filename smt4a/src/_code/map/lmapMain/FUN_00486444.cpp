@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0016c69c(...);
+int renderCtxPopState(...);
 int FUN_0049368c(...);
 
-int FUN_0016c6f0(...);
-int FUN_002b5cb4(void);
+int renderStackPushIndexed(...);
+int distSpatial(void);
 int FUN_00486d0c(...);
 int FUN_00487d6c(...);
 int FUN_004884d8(...);
@@ -20,8 +20,8 @@ int FUN_0048d98c(...);
 int FUN_004900e0(...);
 int FUN_004915f0(int);
 int FUN_00491c60(int);
-int FUN_00492adc(...);
-int FUN_00492b98(...);
+float FUN_00492adc(int);
+float FUN_00492b98(void);
 int lmapSceneGetObj(...);
 int NaviMain_GetCurrentMap(...);
 int VectorSignedToFloat(...);
@@ -55,9 +55,9 @@ extern float DAT_005f1c8c; /* 0x5f1c8c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
+/* Supplied declaration required: distSpatial. */
 extern int gameFlagsClassify(unsigned int);
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_00486d0c. */
@@ -65,19 +65,17 @@ extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_004884d8. */
 /* Supplied declaration required: FUN_004888e4. */
 /* Supplied declaration required: FUN_0048a5e4. */
-extern int FUN_0048b1bc(int);
+extern unsigned char FUN_0048b1bc(int context, float angle);
 /* Supplied declaration required: FUN_0048b420. */
 /* Supplied declaration required: FUN_0048d67c. */
 /* Supplied declaration required: FUN_0048d98c. */
 /* Supplied declaration required: FUN_004900e0. */
 /* Supplied declaration required: FUN_004915f0. */
 /* Supplied declaration required: FUN_00491c60. */
-/* Supplied declaration required: FUN_00492adc. */
 extern unsigned long long *sub68OwnerGetBlock60(int);
-/* Supplied declaration required: FUN_00492b98. */
 extern int FUN_00492bc0(int);
 /* Supplied declaration required: lmapSceneGetObj. */
-extern int FUN_00492c34(int);
+extern int naviMainSelectPair(int);
 extern unsigned int FUN_00492c5c(int);
 extern int FUN_00492c70(int);
 /* Supplied declaration required: FUN_0049368c. */
@@ -133,7 +131,7 @@ void FUN_00486444(int param_1)
   }
   else {
     temp_v5 = NaviMain_GetCurrentMap(temp_v3);
-    temp_v4 = FUN_00492c34(temp_v3);
+    temp_v4 = naviMainSelectPair(temp_v3);
   }
   if (DAT_005f1c73 != '\0') {
     temp_v7 = -14.0f;
@@ -171,7 +169,7 @@ void FUN_00486444(int param_1)
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0) {
     if (*(char *)(param_1 + 0x7b91) == '\0') {
       temp_v6 = *(int *)(param_1 + 0x2051c);
-      FUN_002b5cb4();
+      distSpatial();
       if (temp_v6 >= 0x3f800001) {
         *(unsigned char *)(param_1 + 0x7b91) = 1;
         goto LAB_004866c8;
@@ -256,7 +254,7 @@ LAB_004866c8:
     puVar9 = (unsigned long long *)sub68OwnerGetBlock60(temp_v3);
     temp_v13 = *puVar9;
     temp_v5 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v5);
+    renderStackPushIndexed(g_renderCtx,3,temp_v5);
     piVar10 = (int *)(param_1 + 0x20508);
     if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0) {
       temp_v1 = 1;
@@ -268,7 +266,7 @@ LAB_004866c8:
     temp_v16 = 120.0f;
     piVar11 = (int *)(param_1 + 0x2050c);
     if (DAT_005f1a5e != '\0') {
-      temp_v4 = FUN_00492c34(temp_v3);
+      temp_v4 = naviMainSelectPair(temp_v3);
       pfVar5 = (float *)lmapSceneGetObj(temp_v3);
       temp_v7 = pfVar5[2];
       if (*(char *)(temp_v2 + 0xd8e) != '\f') {
@@ -315,12 +313,12 @@ LAB_004866c8:
       *(float *)(param_1 + 0x2051c) = temp_v7;
       *(float *)(param_1 + 0x20520) = temp_v17;
       *(float *)(param_1 + 0x20524) = temp_v8;
-      FUN_00492b98(temp_v3);
+      FUN_00492b98();
       *(float *)(param_1 + 0x20514) = temp_v17;
       FUN_00492adc(temp_v3);
       *(float *)(param_1 + 0x20518) = temp_v17;
       if (DAT_005f1c73 != '\0') {
-        FUN_00492b98(temp_v3);
+        FUN_00492b98();
         *(float *)(param_1 + 0x20518) = temp_v17;
       }
     }
@@ -328,21 +326,21 @@ LAB_004866c8:
       temp_v15 = (float)VectorSignedToFloat(*piVar10,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v14 = (float)VectorSignedToFloat(*piVar11,(unsigned char)(in_fpscr >> 0x16) & 3);
     }
-    temp_v4 = FUN_0048b1bc(param_1);
+    temp_v4 = FUN_0048b1bc(param_1,*(float*)(param_1 + 0x20518));
     if (*(char *)(temp_v2 + 0xd8e) != '\f') {
       FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbd5,(int)temp_v15,(int)temp_v14,0xb,1);
     }
     else {
       FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbc1,(int)temp_v15,(int)temp_v14,0xb,1);
     }
-    temp_v4 = FUN_0048b1bc(param_1);
+    temp_v4 = FUN_0048b1bc(param_1,*(float*)(param_1 + 0x20514));
     if (*(char *)(temp_v2 + 0xd8e) != '\f') {
       FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbcd,(int)temp_v15,(int)temp_v14,0xb,1);
     }
     else {
       FUN_0049368c(param_1 + 0x4d0,temp_v4 + 0xbb9,(int)temp_v15,(int)temp_v14,0xb,1);
     }
-    FUN_0016c69c(g_renderCtx,3);
+    renderCtxPopState(g_renderCtx,3);
     FUN_00492adc(temp_v3);
   }
   FUN_0048b420(param_1,0);

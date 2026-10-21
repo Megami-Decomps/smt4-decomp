@@ -5,25 +5,25 @@
 extern "C" {
 
 int FUN_00223cf0(void);
-int FUN_002353b4(void);
-int FUN_0023553c(int);
+int messageBannerBeginClose(void);
+int messageMainSetTargetFlags(int);
 int FUN_002355ac(int);
 int FUN_002636b0(void);
 int FUN_00269dc8(void);
 int FUN_00290e9c(void);
 int FUN_002973d8(void);
 int FUN_0029cc44(int);
-int FUN_0029e620(unsigned int, int);
+int messageTargetSetValue(unsigned int, int);
 int FUN_0029e648(int, int);
 int FUN_0029ee6c(unsigned int, int);
 int eventQueueAddUnique(int);
 int FUN_002c1658(int, int);
 int FUN_002f6208(void);
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00223cf0. */
-/* Supplied declaration required: FUN_002353b4. */
-/* Supplied declaration required: FUN_0023553c. */
+/* Supplied declaration required: messageBannerBeginClose. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: FUN_002355ac. */
 extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_002636b0. */
@@ -32,7 +32,7 @@ extern int FUN_002485b8(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_002973d8. */
 /* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: eventQueueAddUnique. */
@@ -51,7 +51,7 @@ void FUN_00382f4c(int param_1)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_0019e0c0(**(unsigned int **)(param_1 + 0x5c4));
+  temp_v0 = scrRunOpcodesStub(**(unsigned int **)(param_1 + 0x5c4));
   if (temp_v0 != 2) {
     temp_v0 = messageWindowIsState1();
     if (temp_v0 != 0) {
@@ -76,8 +76,8 @@ void FUN_00382f4c(int param_1)
             temp_v0 = FUN_002485b8();
             if (temp_v0 == 0) {
               FUN_0029e648(1,0);
-              FUN_0029e620(0xffffff9c,0);
-              FUN_0023553c(1);
+              messageTargetSetValue(0xffffff9c,0);
+              messageMainSetTargetFlags(1);
             }
           }
         }
@@ -145,7 +145,7 @@ void FUN_00382f4c(int param_1)
       if (temp_v0 != 0) {
         FUN_0029cc44(0);
       }
-      FUN_002353b4();
+      messageBannerBeginClose();
       *(unsigned int *)(param_1 + 4) = 0xf;
       *(unsigned int *)(param_1 + 8) = 0;
     }
@@ -178,7 +178,7 @@ void FUN_00382f4c(int param_1)
     else {
       *(unsigned int *)(param_1 + 8) = 0;
       *(unsigned int *)(param_1 + 4) = 0xf;
-      FUN_002353b4();
+      messageBannerBeginClose();
     }
     temp_v0 = FUN_002973d8();
   }

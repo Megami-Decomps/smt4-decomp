@@ -5,10 +5,10 @@
 extern "C" {
 
 int asdOperatorDeleteArray(void);
-int FUN_003014a8(void);
+int socketResetReturn(void);
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_003014a8. */
+/* Supplied declaration required: socketResetReturn. */
 
 
 void FUN_00311082(unsigned int param_1,int param_2)
@@ -16,7 +16,7 @@ void FUN_00311082(unsigned int param_1,int param_2)
 {
 /* irregular: 2 native warning(s); review required */
   if (param_2 != 0) {
-    FUN_003014a8();
+    socketResetReturn();
     asdOperatorDeleteArray();
   }
   return;

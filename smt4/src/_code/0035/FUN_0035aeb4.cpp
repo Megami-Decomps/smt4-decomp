@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00238bec(...);
 
 /* Supplied declaration required: FUN_00238bec. */
-extern int FUN_003fc778(int, unsigned short);
+extern int rangeSelectionContains(int, unsigned short);
 
 
 int FUN_0035aeb4(int *param_1,int param_2,unsigned short *param_3)
@@ -109,7 +109,7 @@ LAB_0035af8c:
         if (temp_v5 == temp_v1 + 8) {
           return 0;
         }
-        temp_v2 = FUN_003fc778(temp_v5 + 8,temp_v0);
+        temp_v2 = rangeSelectionContains(temp_v5 + 8,temp_v0);
         if (temp_v2 != 0) break;
         temp_v5 = *(int *)(temp_v5 + 4);
       }

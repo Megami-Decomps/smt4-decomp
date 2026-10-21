@@ -1,23 +1,24 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002227e8` (_code @ 0x2227e8, 0xdfc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_EnemyPosition.h"
 
 extern "C" {
 
-int FUN_00297f00(...);
+void FUN_00297f00(int value, int count);
 
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_00223fac(void);
 int FUN_002240f0(void);
 int FUN_002826dc(float *, float *, int, int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002d0394(void);
 int FUN_002d8614(...);
 int FUN_00317af8(float *, float *, int);
 int mathPositionHeadingDegrees(void);
 int FUN_0036d984(...);
-int FUN_003a26fc(void);
+EnemyPosition mapEnemyGetEncounterTargetPosition(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -84,7 +85,7 @@ extern int DAT_005f1c64; /* 0x5f1c64 */
 /* Supplied declaration required: FUN_002826dc. */
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_00297f00. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002d0394. */
 /* Supplied declaration required: FUN_002d8614. */
 extern int lmapSceneGetUnk0(void);
@@ -93,7 +94,6 @@ extern int lmapSceneGetUnk0(void);
 extern int FUN_003646d4(unsigned int);
 /* Supplied declaration required: FUN_0036d984. */
 extern int FUN_003850b4(void);
-/* Supplied declaration required: FUN_003a26fc. */
 extern int linkHolderCallFirst(unsigned int);
 extern int FUN_004ff98c(unsigned int);
 extern int FUN_004ffa14(unsigned int);
@@ -229,7 +229,7 @@ LAB_00222b78:
         FUN_002d0394();
       }
       temp_v5 = *(float *)(g_lmapScene + 0x1c);
-      FUN_002b5cb4();
+      distSpatial();
       if (DAT_005f1a94 >= temp_v5) {
         temp_v1 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if (temp_v1 != 2) {
@@ -341,7 +341,7 @@ LAB_00222b78:
       FUN_001bbf0c();
       DAT_005f0c9c = DAT_005f0c9c + temp_v6 * (temp_v5 - DAT_005f0cbc);
       DAT_005f0cbc = (float)temp_v12;
-      FUN_002b5cb4();
+      distSpatial();
       if (DAT_005f1a90 <= temp_v8) {
         return;
       }
@@ -396,7 +396,7 @@ LAB_00222b88:
   case 8:
     temp_v1 = FUN_003646d4(0);
     if (temp_v1 != 0) {
-      FUN_003a26fc();
+      mapEnemyGetEncounterTargetPosition();
       temp_v5 = DAT_005f0c94;
       mathPositionHeadingDegrees();
       temp_v6 = 0.017453292f;
@@ -427,7 +427,7 @@ LAB_00222b88:
       DAT_005f0d28 = 0xf;
       return;
     }
-    FUN_003a26fc();
+    mapEnemyGetEncounterTargetPosition();
     temp_v5 = DAT_005f0c94;
     mathPositionHeadingDegrees();
     DAT_005f0d24 = 1;
@@ -503,7 +503,7 @@ LAB_00222b88:
     DAT_005f0c9c = DAT_005f0c9c + ((temp_v6 + temp_v13 * temp_v10) - DAT_005f0c9c) * 0.33333334f;
     DAT_005f0cbc = 0.0f;
     temp_v1 = *(int *)(g_lmapScene + 0x1c);
-    FUN_002b5cb4();
+    distSpatial();
     if (temp_v1 >= 0x43340000) {
       DAT_005f0ce4 = 0;
       temp_v5 = DAT_005f0c94;

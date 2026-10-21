@@ -18,8 +18,8 @@ int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int FUN_0029ee6c(...);
 int FUN_0029efa8(...);
 int FUN_0029efd8(...);
-int FUN_0029f5d8(...);
-int FUN_002a71fc(...);
+int uiScrollHandleActionsOrTouch(...);
+int messageStatesSetFirst(...);
 int gameGetPlayerData(void);
 int buttonHelpSetPreset(...);
 int FUN_002b8ee0(int, int);
@@ -45,8 +45,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00191c64. */
-extern int FUN_0019e0c0(unsigned int);
-extern int FUN_00254008(int);
+extern int scrRunOpcodesStub(unsigned int);
+extern int statsAreAllCapped(int);
 extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_00296774. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -61,12 +61,12 @@ extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_0029f5d8. */
-/* Supplied declaration required: FUN_002a71fc. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
+/* Supplied declaration required: messageStatesSetFirst. */
 /* Supplied declaration required: gameGetPlayerData. */
 extern unsigned short FUN_002b8584(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern int FUN_002b898c(void);
+extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
@@ -156,7 +156,7 @@ void FUN_00204358(int param_1)
     *piVar16 = *piVar16 + 1;
     break;
   case 2:
-    temp_v12 = FUN_0019e0c0(*puVar19);
+    temp_v12 = scrRunOpcodesStub(*puVar19);
     if (temp_v12 == 2) {
       buttonHelpSetPreset(99);
       temp_v6 = FUN_0029efa8(temp_v10);
@@ -263,7 +263,7 @@ LAB_00204838:
       eventQueueAddUniqueIfValid(0x100016c);
     }
     temp_v12 = temp_v10;
-    FUN_0029f5d8(temp_v10,0,param_1 + 0x357e,0xffffffff,0xffffffff,0xffffffff,temp_v14,0,1);
+    uiScrollHandleActionsOrTouch(temp_v10,0,param_1 + 0x357e,0xffffffff,0xffffffff,0xffffffff,temp_v14,0,1);
     piVar14 = (int *)(param_1 + 0xcfcc);
     if (temp_v12 == 0) {
       temp_v12 = temp_v10;
@@ -354,7 +354,7 @@ LAB_002049f8:
               } while( 1 );
             }
 LAB_00204d40:
-            temp_v10 = FUN_002b898c();
+            temp_v10 = buttonHelpGetStatus();
             if (temp_v10 == 99) {
               temp_v7 = 0xbc;
               buttonHelpSetPreset(temp_v7);
@@ -366,14 +366,14 @@ LAB_00204d40:
             if (temp_v10 != 0) {
               if (*piVar14 != 0) {
                 temp_v10 = gameGetPlayerData();
-                temp_v10 = FUN_00254008(temp_v10 + 0xe);
+                temp_v10 = statsAreAllCapped(temp_v10 + 0xe);
                 if (temp_v10 == 0) {
                   temp_v10 = (int)*psVar13;
                   if (temp_v10 >= 0x3e7) goto LAB_002049fc;
                   goto LAB_00204ca0;
                 }
               }
-              FUN_002a71fc(0);
+              messageStatesSetFirst(0);
               buttonHelpSetPreset(0x9a);
               scrScriptProcessStartEntry(*puVar19,0xb);
               *piVar16 = *piVar16 + 1;
@@ -407,7 +407,7 @@ LAB_00204cb8:
               else {
 LAB_00204cf8:
                 temp_v10 = gameGetPlayerData();
-                temp_v10 = FUN_00254008(temp_v10 + 0xe);
+                temp_v10 = statsAreAllCapped(temp_v10 + 0xe);
                 if (temp_v10 == 0) {
                   return;
                 }
@@ -416,9 +416,9 @@ LAB_00204cf8:
 LAB_00204d14:
             if (*piVar14 < 1) goto LAB_00204d40;
             temp_v10 = gameGetPlayerData();
-            temp_v10 = FUN_00254008(temp_v10 + 0xe);
+            temp_v10 = statsAreAllCapped(temp_v10 + 0xe);
             if (temp_v10 != 0) goto LAB_00204d40;
-            temp_v10 = FUN_002b898c();
+            temp_v10 = buttonHelpGetStatus();
             if (temp_v10 == 0xbc) {
               temp_v7 = 99;
               buttonHelpSetPreset(temp_v7);
@@ -460,11 +460,11 @@ LAB_002049f0:
     temp_v7 = 0x100016c;
     goto LAB_002049fc;
   case 4:
-    temp_v5 = FUN_0019e0c0(*puVar19);
+    temp_v5 = scrRunOpcodesStub(*puVar19);
     if (temp_v5 != 2) {
       return;
     }
-    FUN_002a71fc(1);
+    messageStatesSetFirst(1);
     FUN_0029c424(0);
     temp_v5 = FUN_002973d8();
     if (temp_v5 == 0) {

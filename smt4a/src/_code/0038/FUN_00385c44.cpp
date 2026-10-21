@@ -10,9 +10,9 @@ int FUN_003f0e20(...);
 int FUN_003f26d4(...);
 int gameFlagSetValue(int, int, int);
 int FUN_0047f1c4(...);
-int FUN_004a9a64(...);
+void btlUiStartCommandSelection(unsigned int, int, signed char, signed char, bool, bool);
 int FUN_004a9c84(...);
-int FUN_004c3a98(...);
+int btlFindEntryValue(...);
 int btlSlotSetStoreValue(unsigned int, int, int);
 int FUN_004c571c(...);
 int FUN_004fdc9c(...);
@@ -74,8 +74,8 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 extern int randRange(unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int flagSelectVariant(void);
-extern int FUN_00261424(void);
-extern int FUN_002626e0(void);
+extern int gameDataGetTableValue(void);
+extern int gameProgressIsAdvanced(void);
 extern int FUN_002e2b38(void);
 extern int FUN_003e48bc(void);
 extern int FUN_003e4978(void);
@@ -85,9 +85,8 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003f26d4. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0047f1c4. */
-/* Supplied declaration required: FUN_004a9a64. */
 /* Supplied declaration required: FUN_004a9c84. */
-/* Supplied declaration required: FUN_004c3a98. */
+/* Supplied declaration required: btlFindEntryValue. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: FUN_004c571c. */
 extern int hasFlag80Or1000(unsigned int);
@@ -200,10 +199,10 @@ void FUN_00385c44(unsigned int *param_1)
       gameFlagSetValue(0x590,0,1);
     }
   }
-  temp_v8 = FUN_002626e0();
+  temp_v8 = gameProgressIsAdvanced();
   if (((temp_v8 != 0) && (-1 < (int)param_1[0x3c])) &&
      ((param_1[0x1169] & DAT_005739f4) != 0 || (*puVar15 & DAT_005739f0) != 0)) {
-    temp_v8 = FUN_00261424();
+    temp_v8 = gameDataGetTableValue();
     temp_v11 = (short)param_1[0x131c] + (short)(temp_v8 / 2);
     *(short *)(param_1 + 0x131c) = temp_v11;
     if (temp_v11 >= 6) {
@@ -237,11 +236,11 @@ void FUN_00385c44(unsigned int *param_1)
       btlSlotSetStoreValue(temp_v12,0x27,0);
       btlSlotSetStoreValue(temp_v12,0x28,0);
       btlSlotSetStoreValue(temp_v12,0x29,0);
-      temp_v8 = FUN_004c3a98(temp_v12,0x24);
+      temp_v8 = btlFindEntryValue(temp_v12,0x24);
       if (0 < temp_v8) {
         FUN_004c571c(temp_v12,0x24,0xffffffff,0);
       }
-      temp_v8 = FUN_004c3a98(temp_v12,0x25);
+      temp_v8 = btlFindEntryValue(temp_v12,0x25);
       if (0 < temp_v8) {
         FUN_004c571c(temp_v12,0x25,0xffffffff,0);
       }
@@ -284,7 +283,7 @@ void FUN_00385c44(unsigned int *param_1)
       puVar20 = (unsigned int *)(param_1[0x7ff] + temp_v7 * 0x408);
       if ((((DAT_00573978 & *puVar20) != 0 || (DAT_0057397c & puVar20[1]) != 0) &&
           ((puVar20[1] & DAT_005739a4) == 0 && (*puVar20 & DAT_005739a0) == 0)) &&
-         ((-1 < (short)puVar20[2] && (temp_v8 = FUN_004c3a98((int)(short)puVar20[2],0xd), 0 < temp_v8)))
+         ((-1 < (short)puVar20[2] && (temp_v8 = btlFindEntryValue((int)(short)puVar20[2],0xd), 0 < temp_v8)))
          ) {
         FUN_004c571c((int)(short)puVar20[2],0xd,0xffffffff,0);
       }
@@ -331,8 +330,9 @@ LAB_003861d0:
         temp_v20[0] = 1;
       }
       temp_v20[1] = (unsigned int)((temp_v7 & DAT_00573a04) != 0 || (temp_v12 & DAT_00573a00) != 0);
-      FUN_004a9a64(g_btlUiBlock,temp_v18 || temp_v19,
-                   (int)(char)((char)temp_v26 + (char)(short)param_1[0x131c]),(int)(char)temp_v26);
+      btlUiStartCommandSelection(g_btlUiBlock,temp_v18 || temp_v19,
+                   (int)(char)((char)temp_v26 + (char)(short)param_1[0x131c]),(int)(char)temp_v26,
+                   temp_v20[0] != 0, temp_v20[1] != 0);
       temp_v7 = *puVar15 | DAT_00573a00;
       temp_v12 = param_1[0x1169] | DAT_00573a04;
       *puVar15 = temp_v7;

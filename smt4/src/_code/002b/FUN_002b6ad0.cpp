@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern GameOptions *gameGetOptions(void);
+extern GameOptions *gameGetSupportUnitData(void);
 
 /* 1 when the options record has both its marker (0x46) and counter (0x604) set. */
 u32 FUN_002b6ad0(void)
 {
-    GameOptions *options = gameGetOptions();
+    GameOptions *options = gameGetSupportUnitData();
     u32 result;
 
     if ((options->unk46 == 0) || (options->unk604 == 0)) {

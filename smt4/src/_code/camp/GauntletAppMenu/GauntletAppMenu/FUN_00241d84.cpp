@@ -14,11 +14,11 @@ typedef struct {
 
 extern int FUN_0019d758(...); /* 0x19d758 */
 extern int FUN_001a80b4(...); /* 0x1a80b4 */
-extern int FUN_001a8214(...); /* 0x1a8214 */
+extern int gauntletAppCompareBySortKeys(...); /* 0x1a8214 */
 extern int FUN_001b1974(...); /* 0x1b1974 */
 extern int FUN_001f64c0(...); /* 0x1f64c0 */
 extern int FUN_0020713c(...); /* 0x20713c */
-extern int FUN_0020729c(...); /* 0x20729c */
+extern int gauntletAppCompareBySortKeysDescending(...); /* 0x20729c */
 extern int entryRefCompareByKindLevelOrder(...); /* 0x21966c */
 extern int g_gauntletAppMenu; /* 0x43dc88 */
 
@@ -75,11 +75,11 @@ void FUN_00241d84(void)
   if ((*pbVar5 & 0x7f) == 3) {
     if (temp_v3 != 0) {
       temp_v2 = FUN_0029ee54(temp_v0 + 0x10);
-      FUN_0027f3dc(temp_v0 + 0x74,temp_v2,4,FUN_001a8214);
+      FUN_0027f3dc(temp_v0 + 0x74,temp_v2,4,gauntletAppCompareBySortKeys);
       return;
     }
     temp_v2 = FUN_0029ee54(temp_v0 + 0x10);
-    FUN_0027f3dc(temp_v0 + 0x74,temp_v2,4,FUN_0020729c);
+    FUN_0027f3dc(temp_v0 + 0x74,temp_v2,4,gauntletAppCompareBySortKeysDescending);
     return;
   }
   return;

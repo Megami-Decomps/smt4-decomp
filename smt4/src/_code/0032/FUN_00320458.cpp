@@ -5,10 +5,10 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_00246c8c(unsigned int);
+int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b830(...);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int SUB41(...);
 int VectorFloatToUnsigned(...);
@@ -84,10 +84,10 @@ extern float DAT_004ea948; /* 0x4ea948 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
-/* Supplied declaration required: FUN_00246c8c. */
+/* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -196,12 +196,12 @@ void FUN_00320458(fn_00320458_arg0 *param_1)
       temp_v52 = *(float **)(*(int *)(temp_v12 + 8) + 0x30);
       temp_v50 = *(unsigned char **)(*(int *)(temp_v12 + 8) + 0x38);
       *(unsigned int *)(temp_v12 + 0x54) = *(unsigned int *)(temp_v12 + 0x54) | 0x21;
-      FUN_00246c8c(*(unsigned int *)((int)pvVar12 + 0x58));
+      asdSetNormalizedColorRgba(*(unsigned int *)((int)pvVar12 + 0x58));
       temp_v9 = DAT_004ea928;
       temp_v7 = DAT_004ea924;
       temp_v5 = DAT_004ea920;
       temp_v15 = DAT_004ea91c;
-      FUN_00246c8c(*(unsigned int *)((int)pvVar12 + 0x5c));
+      asdSetNormalizedColorRgba(*(unsigned int *)((int)pvVar12 + 0x5c));
       temp_v10 = DAT_004ea928;
       temp_v8 = DAT_004ea924;
       temp_v6 = DAT_004ea920;
@@ -269,7 +269,7 @@ void FUN_00320458(fn_00320458_arg0 *param_1)
                 temp_v16 = ((float)temp_v44[1] + temp_v32 * temp_v16 * temp_v38) * temp_v16;
                 temp_v17 = (float)temp_v44[2] * temp_v41;
                 temp_v32 = temp_v17;
-                FUN_002b7064();
+                phaseCosInterpolate();
                 FUN_002b70cc();
                 temp_v36 = (float)temp_v37;
                 temp_v18 = (float)temp_v44[3];

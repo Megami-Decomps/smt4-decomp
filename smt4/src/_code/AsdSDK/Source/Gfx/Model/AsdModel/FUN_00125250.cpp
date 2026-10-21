@@ -40,8 +40,8 @@ extern unsigned int DAT_00464b34; /* 0x464b34 */
 extern unsigned int g_asdModelSlotFlags; /* 0x464b74 */
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-extern unsigned int DAT_00464b8c; /* 0x464b8c */
-extern unsigned int DAT_00464b94; /* 0x464b94 */
+extern unsigned int sceneGroup1Root; /* 0x464b8c */
+extern unsigned int sceneGroup2Root; /* 0x464b94 */
 extern unsigned int g_asdModelSlotArray1; /* 0x464ba4 */
 extern unsigned int g_asdModelSlotArray2; /* 0x464bac */
 extern unsigned int g_asdModelSlotArray3; /* 0x464bb4 */
@@ -122,7 +122,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
       if ((&DAT_004dad84)[temp_v0] != '\0') {
         if ((&DAT_004dad85)[temp_v0] == '\0') {
           temp_v1 = (&g_asdModelTransformBuilder)[temp_v3];
-          piVar8 = (int *)(&DAT_00464b8c)[temp_v3];
+          piVar8 = (int *)(&sceneGroup1Root)[temp_v3];
           piVar4 = *(int **)(temp_v1 + 0x18);
           piVar7 = *(int **)(temp_v1 + 0x1c);
           while( 1 ) {
@@ -192,7 +192,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
       }
       else if ((&DAT_004dad94)[temp_v0] != '\0') {
         temp_v1 = (&g_asdModelTransformBuilder)[temp_v3];
-        temp_v4 = (&DAT_00464b94)[temp_v3];
+        temp_v4 = (&sceneGroup2Root)[temp_v3];
         piVar4 = *(int **)(temp_v1 + 0x18);
         piVar7 = *(int **)(temp_v1 + 0x1c);
         while( 1 ) {
@@ -214,7 +214,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
           *(unsigned int *)(temp_v4 + 0xc) = 0;
         }
         temp_v1 = (&g_asdModelTransformBuilder)[temp_v3];
-        piVar8 = (int *)(&DAT_00464b8c)[temp_v3];
+        piVar8 = (int *)(&sceneGroup1Root)[temp_v3];
         piVar4 = *(int **)(temp_v1 + 0x18);
         piVar7 = *(int **)(temp_v1 + 0x1c);
         while( 1 ) {
@@ -285,7 +285,7 @@ void FUN_00125250(unsigned int param_1,unsigned int param_2,int *param_3)
       if ((&DAT_004dad84)[temp_v0] != '\0') {
         if ((&DAT_004dad85)[temp_v0] == '\0') {
           temp_v4 = (&g_asdModelTransformBuilder)[temp_v3];
-          temp_v1 = (&DAT_00464b8c)[temp_v3];
+          temp_v1 = (&sceneGroup1Root)[temp_v3];
           temp_v0 = *(int *)(temp_v4 + 0xc);
           if (((temp_v0 == 0) ||
               ((temp_v0 != temp_v1 && (nw_gfx_SceneNode_IsCircularReference(), temp_v0 == 0)))) &&
@@ -373,7 +373,7 @@ LAB_00125c3c:
       }
       else if ((&DAT_004dad94)[temp_v0] != '\0') {
         temp_v4 = (&g_asdModelTransformBuilder)[temp_v3];
-        temp_v1 = (&DAT_00464b94)[temp_v3];
+        temp_v1 = (&sceneGroup2Root)[temp_v3];
         temp_v0 = *(int *)(temp_v4 + 0xc);
         if (((temp_v0 == 0) ||
             ((temp_v0 != temp_v1 && (nw_gfx_SceneNode_IsCircularReference(), temp_v0 == 0)))) &&
@@ -401,7 +401,7 @@ LAB_00125c3c:
         }
 LAB_00125a0c:
         temp_v4 = (&g_asdModelTransformBuilder)[temp_v3];
-        temp_v1 = (&DAT_00464b8c)[temp_v3];
+        temp_v1 = (&sceneGroup1Root)[temp_v3];
         temp_v0 = *(int *)(temp_v4 + 0xc);
         if (((temp_v0 == 0) ||
             ((temp_v0 != temp_v1 && (nw_gfx_SceneNode_IsCircularReference(), temp_v0 == 0)))) &&

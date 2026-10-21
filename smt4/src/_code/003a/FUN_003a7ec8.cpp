@@ -12,9 +12,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned int FUN_0022ea28(void);
-extern int FUN_0023360c(int);
-extern int FUN_0024ea50(unsigned int);
+extern unsigned int gameSlotTableGetHeader(void);
+extern int flaggedValueHolderGetTotal(int);
+extern int partyHasStoredDemon(unsigned int);
 extern int FUN_0029c1fc(void);
 /* Supplied declaration required: FUN_0029ce60. */
 /* Supplied declaration required: devilGetRecord. */
@@ -31,16 +31,16 @@ unsigned int FUN_003a7ec8(int param_1,unsigned int param_2)
   
   temp_v1 = param_2;
   FUN_0029ce60(param_2,*(unsigned char *)(param_1 + 0x5a5),0,'c' < *(char *)(param_1 + 0x94),0);
-  temp_v2 = FUN_0023360c(param_1 + 0x20);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
   if (*(char *)(param_1 + 0x5a5) == '\0') {
     devilGetRecord(*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x5ac));
   }
-  temp_v3 = FUN_0022ea28();
+  temp_v3 = gameSlotTableGetHeader();
   if (temp_v3 < temp_v1) {
     temp_v0 = '\x01';
   }
   else {
-    temp_v2 = FUN_0024ea50(param_2);
+    temp_v2 = partyHasStoredDemon(param_2);
     if (temp_v2 != 0) {
       temp_v0 = '\x02';
     }

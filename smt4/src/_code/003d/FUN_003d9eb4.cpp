@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0022708c(void);
-int FUN_00249ddc(void);
+int shakeEffectAlloc(void);
 
 typedef struct fn_003d9eb4_arg0 fn_003d9eb4_arg0;
 struct fn_003d9eb4_arg0 {
@@ -24,7 +24,7 @@ struct fn_003d9eb4_arg0 {
 };
 
 /* Supplied declaration required: FUN_0022708c. */
-/* Supplied declaration required: FUN_00249ddc. */
+/* Supplied declaration required: shakeEffectAlloc. */
 extern unsigned int btlGetMainState(void);
 extern void *FUN_00337ba0(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_003383a4(unsigned int);
@@ -56,13 +56,13 @@ void FUN_003d9eb4(fn_003d9eb4_arg0 *param_1,unsigned int param_2,unsigned int pa
     param_1->field_0x3054 = pvVar3;
     temp_v2 = (unsigned int)*(unsigned char *)((int)pvVar3 + 8);
     if ((*(unsigned char *)((int)pvVar3 + 8) & 2) != 0) {
-      FUN_00249ddc();
+      shakeEffectAlloc();
       param_1->field_0x3058 = temp_v2;
     }
     temp_v0 = *(unsigned char *)((int)param_1->field_0x3054 + 8);
     temp_v2 = (unsigned int)temp_v0;
     if ((temp_v0 & 4) != 0) {
-      FUN_00249ddc();
+      shakeEffectAlloc();
       param_1->field_0x305c = temp_v2;
     }
   }

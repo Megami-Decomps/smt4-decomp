@@ -10,8 +10,8 @@ int FUN_00164b5c(...);
 int vec2GetXInt(...);
 int efctSetSpeed(...);
 int FUN_00168594(...);
-int FUN_0016c69c(...);
-int FUN_0016c6f0(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_00183bb0(...);
 int words2Copy(...);
 int VectorSignedToFloat(...);
@@ -36,8 +36,8 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168594. */
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: words2Copy. */
@@ -59,7 +59,7 @@ void FUN_0048b260(int param_1)
   
   words2Copy(param_1 + 0x4d0,&temp_v5);
   temp_v0 = FUN_001692ac(1,0);
-  FUN_0016c6f0(g_renderCtx,3,temp_v0);
+  renderStackPushIndexed(g_renderCtx,3,temp_v0);
   efctSetSpeed();
   FUN_00183bb0();
   temp_v0 = vec2GetXInt();
@@ -77,7 +77,7 @@ void FUN_0048b260(int param_1)
   VectorSignedToFloat(temp_v2 + *(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00162790(2,DAT_00587f1c,temp_v4);
-  FUN_0016c69c(g_renderCtx,3);
+  renderCtxPopState(g_renderCtx,3);
   efctSetSpeed();
   FUN_00163aa4(param_1 + 0x136c);
   if ((*(char *)(param_1 + 0x136a) != '\0') && (*(char *)(param_1 + 0x13f6) != '\0')) {

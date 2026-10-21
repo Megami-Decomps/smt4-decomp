@@ -5,8 +5,8 @@
 extern "C" {
 
 int scrScriptProcessStartEntry(...);
-int FUN_0034913c(...);
-int FUN_00388758(...);
+int messageBannerRestartOrClear(...);
+int messageDismissNumericBanner(...);
 int FUN_004ce300(...);
 
 typedef struct fn_004cdbd4_arg0 fn_004cdbd4_arg0;
@@ -24,13 +24,13 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b60(void);
-/* Supplied declaration required: FUN_0034913c. */
+extern int messageMainGetValue(void);
+/* Supplied declaration required: messageBannerRestartOrClear. */
 extern int FUN_0034919c(void);
 extern int tableGroupFindEntryIndex(unsigned int, char *);
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_004ce300. */
 extern int FUN_004ced50(fn_004cdbd4_arg0 *);
 
@@ -42,14 +42,14 @@ void FUN_004cdbd4(fn_004cdbd4_arg0 *param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_00224880(param_1->field_0x18);
+  temp_v0 = scrRunOpcodesStub(param_1->field_0x18);
   if (temp_v0 == 2) {
-    FUN_0034913c();
-    temp_v0 = FUN_002a4b60();
+    messageBannerRestartOrClear();
+    temp_v0 = messageMainGetValue();
     if (temp_v0 != 0) {
       temp_v0 = FUN_0034919c();
       if (temp_v0 != 0) {
-        FUN_00388758(0);
+        messageDismissNumericBanner(0);
       }
       temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,"fountian_top");
       if (-1 < temp_v0) {
@@ -67,7 +67,7 @@ void FUN_004cdbd4(fn_004cdbd4_arg0 *param_1)
       }
       temp_v0 = FUN_0034919c();
       if (temp_v0 != 0) {
-        FUN_00388758(0);
+        messageDismissNumericBanner(0);
       }
       temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,"fountian_no_healing");
       if (-1 < temp_v0) {

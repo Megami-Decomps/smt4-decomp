@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned int DAT_00570288; /* 0x570288 */
+extern unsigned int g_btlCandidateMasks; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
@@ -28,7 +28,7 @@ extern unsigned int FUN_00232388(void);
 /* Supplied declaration required: FUN_00301a08. */
 /* Supplied declaration required: scrSetResult. */
 /* Supplied declaration required: FUN_003eaf20. */
-extern int FUN_004c3a98(int, unsigned int);
+extern int btlFindEntryValue(int, unsigned int);
 
 
 unsigned int FUN_003cc2f0(void)
@@ -57,10 +57,10 @@ unsigned int FUN_003cc2f0(void)
       temp_v3 = *puVar6;
       temp_v4 = puVar6[1];
       if (((((DAT_005702a0 & temp_v3) == 0 && (DAT_005702a4 & temp_v4) == 0) &&
-           ((DAT_00570288 & temp_v3) != 0 || (DAT_0057028c & temp_v4) != 0)) &&
+           ((g_btlCandidateMasks & temp_v3) != 0 || (DAT_0057028c & temp_v4) != 0)) &&
           ((temp_v3 & DAT_005702b0) == 0 && (temp_v4 & DAT_005702b4) == 0)) &&
          ((*(unsigned short *)((int)puVar6 + 0x166) == temp_v0 &&
-          (temp_v2 = FUN_004c3a98((int)(short)puVar6[2],0x13), 0 < temp_v2)))) {
+          (temp_v2 = btlFindEntryValue((int)(short)puVar6[2],0x13), 0 < temp_v2)))) {
         scrSetResult(1);
         return 1;
       }
@@ -72,7 +72,7 @@ unsigned int FUN_003cc2f0(void)
     temp_v5 = btlGetMainState();
     FUN_003eaf20();
     if (((temp_v5 != 0) && (*(unsigned short *)(temp_v5 + 0x166) == temp_v0)) &&
-       (temp_v5 = FUN_004c3a98((int)*(short *)(temp_v5 + 8),0x13), 0 < temp_v5)) {
+       (temp_v5 = btlFindEntryValue((int)*(short *)(temp_v5 + 8),0x13), 0 < temp_v5)) {
       scrSetResult(1);
       return 1;
     }

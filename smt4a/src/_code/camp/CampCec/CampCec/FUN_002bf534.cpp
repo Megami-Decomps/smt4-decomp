@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bf534` (_code @ 0x2bf534, 0x7cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match4_CampCecResumeState.h"
 
 extern "C" {
 
@@ -15,9 +16,9 @@ int messageSetMode(int);
 int asdTMTexLoadMainHeap(...);
 int cecProcessStart(void);
 int bgmRestart(int);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002a4664(...);
-int FUN_002a469c(void);
+int gameDataGetRecordValue(void);
 int FUN_002a4aa4(void);
 int FUN_002c0b10(...);
 int cecProcessForward(...);
@@ -50,9 +51,9 @@ typedef struct {
 extern unsigned char LAB_002021c4; /* 0x2021c4 */
 extern int FUN_002021cc(...); /* 0x2021cc */
 extern int FUN_0025cf44(...); /* 0x25cf44 */
-extern int FUN_00281744(...); /* 0x281744 */
-extern int FUN_002817ac(...); /* 0x2817ac */
-extern int FUN_00281814(...); /* 0x281814 */
+extern int campCecEditPollConfirmation(...); /* 0x281744 */
+extern u32 campCecRecvWaitAndResume(CampCecResumeState*); /* 0x2817ac */
+extern int campCecWaitForView(...); /* 0x281814 */
 extern int FUN_002a283c(...); /* 0x2a283c */
 extern unsigned char LAB_002bf948; /* 0x2bf948 */
 extern unsigned char LAB_002bf95c; /* 0x2bf95c */
@@ -61,9 +62,9 @@ extern unsigned char LAB_002bf988; /* 0x2bf988 */
 extern unsigned char LAB_002bf9d0; /* 0x2bf9d0 */
 extern unsigned char LAB_002bf9e4; /* 0x2bf9e4 */
 extern int FUN_002bfd2c(...); /* 0x2bfd2c */
-extern int FUN_002e221c(...); /* 0x2e221c */
+extern u32 campCecRankingWaitAndResume(CampCecResumeState*); /* 0x2e221c */
 extern int FUN_002e2284(...); /* 0x2e2284 */
-extern int FUN_002e2384(...); /* 0x2e2384 */
+extern int campCecWaitForSettings(...); /* 0x2e2384 */
 extern int jobSceneWaitStep(...); /* 0x31934c */
 extern unsigned char LAB_003193a0; /* 0x3193a0 */
 extern unsigned char LAB_0035a2a4; /* 0x35a2a4 */
@@ -87,11 +88,11 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: bgmRestart. */
 extern unsigned char FUN_002391e0(void);
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int FUN_002840ac(void);
 extern unsigned char cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_002a4664. */
-/* Supplied declaration required: FUN_002a469c. */
+/* Supplied declaration required: gameDataGetRecordValue. */
 extern unsigned char FUN_002a46b8(void);
 extern unsigned char saveFlagGet27e1f(void);
 /* Supplied declaration required: FUN_002a4aa4. */
@@ -189,12 +190,12 @@ void FUN_002bf534(int param_1)
   }
   puVar4[2] = (unsigned int)FUN_002e2284;
   puVar4[3] = (unsigned int)&LAB_0035a2a4;
-  puVar4[9] = (unsigned int)FUN_002e2384;
-  puVar4[4] = (unsigned int)FUN_00281744;
-  puVar4[5] = (unsigned int)FUN_002817ac;
+  puVar4[9] = (unsigned int)campCecWaitForSettings;
+  puVar4[4] = (unsigned int)campCecEditPollConfirmation;
+  puVar4[5] = (unsigned int)campCecRecvWaitAndResume;
   puVar4[6] = (unsigned int)FUN_002bfd2c;
-  puVar4[7] = (unsigned int)FUN_00281814;
-  puVar4[8] = (unsigned int)FUN_002e221c;
+  puVar4[7] = (unsigned int)campCecWaitForView;
+  puVar4[8] = (unsigned int)campCecRankingWaitAndResume;
   puVar4[10] = (unsigned int)FUN_002a283c;
   puVar4[0xc] = (unsigned int)FUN_0036cfb0;
   puVar4[0xe] = (unsigned int)&LAB_003193a0;
@@ -213,8 +214,8 @@ void FUN_002bf534(int param_1)
   }
   *(unsigned char *)(puVar4 + 0x5c) = 0;
   if (puVar4[0x5a] != 0) {
-    FUN_002804b0(&LAB_002bf9d0,puVar4 + 0x39,0);
-    FUN_002804b0(&LAB_002bf9e4,puVar4 + 0x3a,0);
+    asdLoadFileAsyncSimple(&LAB_002bf9d0,puVar4 + 0x39,0);
+    asdLoadFileAsyncSimple(&LAB_002bf9e4,puVar4 + 0x3a,0);
     puVar4[0x50] = 10;
     return;
   }
@@ -231,8 +232,8 @@ void FUN_002bf534(int param_1)
     bgmRestart(0);
     soundChannelRequestIfEnabled(0x1000049,0,0x3c);
   }
-  FUN_002804b0(&LAB_002bf9d0,puVar4 + 0x39,0);
-  FUN_002804b0(&LAB_002bf9e4,puVar4 + 0x3a,0);
+  asdLoadFileAsyncSimple(&LAB_002bf9d0,puVar4 + 0x39,0);
+  asdLoadFileAsyncSimple(&LAB_002bf9e4,puVar4 + 0x3a,0);
   asdTMTexTableLoadSprites(0x2e);
   asdTMTexLoadMainHeap(0x2e,0);
   loadSlotRequestAsync(0x4a,0);
@@ -254,7 +255,7 @@ void FUN_002bf534(int param_1)
   engineForwardVariadicCommand(DAT_0057f114 + 0x10,temp_v10,temp_v11,temp_v12);
   temp_v1 = FUN_002a46b8();
   *(unsigned char *)((int)DAT_0057f114 + 0x82) = temp_v1;
-  temp_v3 = FUN_002a469c();
+  temp_v3 = gameDataGetRecordValue();
   FUN_0032e25c(DAT_0057f114 + 0x10,temp_v3);
   temp_v3 = gameDataBlocksGetWord27E8C();
   DAT_0057f114[0x19] = temp_v3;
@@ -303,7 +304,7 @@ void FUN_002bf534(int param_1)
   engineForwardVariadicCommand(DAT_0057f114 + 0x10,temp_v10,temp_v11,temp_v12);
   temp_v1 = FUN_002a46b8();
   *(unsigned char *)((int)DAT_0057f114 + 0x82) = temp_v1;
-  temp_v3 = FUN_002a469c();
+  temp_v3 = gameDataGetRecordValue();
   FUN_0032e25c(DAT_0057f114 + 0x10,temp_v3);
   temp_v3 = gameDataBlocksGetWord27E8C();
   DAT_0057f114[0x19] = temp_v3;
@@ -315,7 +316,7 @@ LAB_002bfb8c:
     temp_v7 = temp_v7 + 1;
     if (temp_v7 >= 0x18) {
 LAB_002bfc18:
-      temp_v2 = FUN_002a469c();
+      temp_v2 = gameDataGetRecordValue();
       if (temp_v2 == 0) {
         FUN_0032e25c(DAT_0057f114 + 0x10,0);
       }
@@ -327,7 +328,7 @@ LAB_002bfc18:
           cecProcessForward(DAT_0057f114 + 0x10);
         }
       }
-      temp_v2 = FUN_002a469c();
+      temp_v2 = gameDataGetRecordValue();
       if (temp_v2 == 0) {
         temp_v2 = rt_aeabi_memclr(DAT_0057f114 + 0x24,0x14);
       }
@@ -344,7 +345,7 @@ LAB_002bfc18:
       return;
     }
   }
-  temp_v6 = FUN_002a469c();
+  temp_v6 = gameDataGetRecordValue();
   if (temp_v6 != *(unsigned short *)(temp_v4 + 0x62)) {
     FUN_0032e25c(DAT_0057f114 + 0x10,(int)*(short *)(temp_v4 + 0x62));
     FUN_002a6480((int)*(short *)(temp_v4 + 0x62));

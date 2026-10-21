@@ -1,34 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010f588` (_code @ 0x10f588, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern u32 DAT_00472a58;
+extern const char DAT_0040b739[]; // "am:app"
+s32 FUN_002c1398(void);
+u32 libc_strlen(const char* string);
+s32 asdModelForwardChecked(u32* handle, const char* name, u32 length, u32 flags);
 
-extern int DAT_00472a58; /* 0x472a58 */
-
-extern int asdModelForwardChecked(unsigned int *, char *, unsigned int, unsigned int);
-extern int FUN_002c1398(void);
-extern unsigned int libc_strlen(char *);
-
-
-int FUN_0010f588(void)
-
+// Lazily connect to the application-manager service, preserving failure results.
+s32 FUN_0010f588(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (DAT_00472a58 == 0) {
-    temp_v0 = FUN_002c1398();
-    if (temp_v0 < 0) {
-      return temp_v0;
+    if (DAT_00472a58 == 0) {
+        s32 result = FUN_002c1398();
+        if (nnResultIsFailure(result))
+            return result;
+        u32 length = libc_strlen(DAT_0040b739);
+        result = asdModelForwardChecked(&DAT_00472a58, DAT_0040b739, length, 0);
+        if (nnResultIsFailure(result))
+            return result;
     }
-    temp_v1 = libc_strlen("am:app");
-    temp_v0 = asdModelForwardChecked((unsigned int *)&DAT_00472a58,"am:app",temp_v1,0);
-    if (temp_v0 < 0) {
-      return temp_v0;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

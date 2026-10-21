@@ -26,8 +26,8 @@ typedef struct {
 /* Supplied declaration required: FUN_00230cc0. */
 /* Supplied declaration required: FUN_00231bcc. */
 /* Supplied declaration required: FUN_002332e8. */
-extern int FUN_0023360c(int);
-extern int FUN_00233718(int);
+extern int flaggedValueHolderGetTotal(int);
+extern int rangeLimitMin(int);
 /* Supplied declaration required: FUN_00240d5c. */
 /* Supplied declaration required: FUN_0029e924. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -126,7 +126,7 @@ void FUN_003a2960(int param_1,unsigned int param_2)
   temp_v10 = temp_v2 + 0x880;
   temp_v9 = param_1 + *(int *)(param_1 + 0x860) * 0x1002 + 0xc94;
   temp_v3 = FUN_0029e924(temp_v10);
-  temp_v4 = FUN_00233718(temp_v10);
+  temp_v4 = rangeLimitMin(temp_v10);
   temp_v7 = 0;
   temp_v1 = temp_v4;
   if (0 < temp_v4) {
@@ -144,7 +144,7 @@ void FUN_003a2960(int param_1,unsigned int param_2)
     temp_v1 = temp_v3;
   }
   if ((temp_v8 && temp_v1 != 0) && -1 < temp_v3) {
-    temp_v1 = FUN_0023360c(temp_v10);
+    temp_v1 = flaggedValueHolderGetTotal(temp_v10);
     temp_v2 = FUN_00240d5c(temp_v10);
     FUN_0022ea70(param_1,temp_v2 + 2,1,temp_v9 + temp_v1 * 4);
   }

@@ -1,27 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b7a08` (_code @ 0x4b7a08, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves a separate source-field base and duplicates the global base before the last store. */
+#include "shard/W5_W5Match7_SceneState.h"
 
-extern "C" {
+struct DepartureArea {
+    u8 unk00[0x20]; // 0x00
+    u8 area;         // 0x20
+};
 
-extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
-extern unsigned char g_gameState; /* 0x5f15fc */
-extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
-extern int DAT_005f1b94; /* 0x5f1b94 */
-extern unsigned int DAT_005f1b98; /* 0x5f1b98 */
+struct DepartureSource {
+    u8 unk0000[0x3c]; // 0x0000
+    s16 map;           // 0x003c
+    u8 unk003e[0x10de]; // 0x003e
+    DepartureArea* area; // 0x111c
+};
 
-
-void FUN_004b7a08(int param_1)
-
+// Seed both ends of a map transition from the selected departure source.
+extern "C" void FUN_004b7a08(const DepartureSource* source)
 {
-  DAT_005f1b70 = 1;
-  (*(int *)((unsigned char *)&g_gameState + 0x578)) = *(short *)(param_1 + 0x3c) + 200;
-  DAT_005f1b94 = (*(int *)((unsigned char *)&g_gameState + 0x578));
-  if (*(int *)(param_1 + 0x111c) != 0) {
-    DAT_005f1b78 = (unsigned int)*(unsigned char *)(*(int *)(param_1 + 0x111c) + 0x20);
-    DAT_005f1b98 = (unsigned int)*(unsigned char *)(*(int *)(param_1 + 0x111c) + 0x20);
-  }
-  return;
+    GameState* state = &g_gameState;
+    state->transitionActive = 1;
+    state->sourceMap = source->map + 200;
+    state->destinationMap = state->sourceMap;
+    if (source->area != NULL) {
+        state->sourceArea = source->area->area;
+        state->destinationArea = source->area->area;
+    }
 }
-
-} /* extern "C" */

@@ -24,7 +24,7 @@ int gameGlobalsSetSelected(s32 arg);
 int FUN_0029e874(s32 arg);
 int FUN_0029e788(void);
 int FUN_002a0cc8(s32 arg);
-int FUN_00297468(const char *path, void **slot, s32 arg);
+int asdLoadFileAsyncSimple(const char *path, void **slot, s32 arg);
 
 /* Prepares the bible screen: button help, the two sprite tables and the bible.bf / bible.mbm files. */
 void FUN_003ab844(BibleScreen *screen)
@@ -53,8 +53,8 @@ void FUN_003ab844(BibleScreen *screen)
     FUN_0029e874(1);
     FUN_0029e788();
     FUN_002a0cc8(1);
-    FUN_00297468("bible/bible.bf", &screen->file0, 0);
-    FUN_00297468("bible/bible.mbm", &screen->file1, 0);
+    asdLoadFileAsyncSimple("bible/bible.bf", &screen->file0, 0);
+    asdLoadFileAsyncSimple("bible/bible.mbm", &screen->file1, 0);
 }
 
 } /* extern "C" */

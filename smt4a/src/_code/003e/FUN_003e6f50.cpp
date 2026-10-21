@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int campCommonBgRelease(...);
 int campButtonHelpRelease(...);
 int FUN_003e6c14(...);
@@ -19,14 +19,14 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 
 extern int btlGetMainState(void);
 extern int gameDataBlocksGetSaveData(void);
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: campButtonHelpRelease. */
 /* Supplied declaration required: FUN_003e6c14. */
@@ -48,9 +48,9 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
   
   switch(*param_1) {
   case 0:
-    FUN_004f7b84(DAT_00573808,"Dead_eyes");
+    FUN_004f7b84(g_btlAux,"Dead_eyes");
     *param_1 = 1;
-    temp_v2 = DAT_00573808;
+    temp_v2 = g_btlAux;
     FUN_004f6d34();
     if (temp_v2 != 0) {
       param_1[2] = 0;
@@ -60,7 +60,7 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
     }
     break;
   case 1:
-    temp_v2 = DAT_00573808;
+    temp_v2 = g_btlAux;
     FUN_004f6d34();
     if (temp_v2 != 0) {
       param_1[2] = 0;
@@ -73,8 +73,8 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
     FUN_003e6c14(param_1);
     return param_1;
   case 3:
-    FUN_002804b0("battle/gameover/gameover.bf",param_1 + 4,0);
-    FUN_002804b0("battle/gameover/gameover.mbm",param_1 + 6,0);
+    asdLoadFileAsyncSimple("battle/gameover/gameover.bf",param_1 + 4,0);
+    asdLoadFileAsyncSimple("battle/gameover/gameover.mbm",param_1 + 6,0);
     temp_v2 = gameDataBlocksGetSaveData();
     temp_v0 = *(char *)(temp_v2 + 0x27e3d);
     if (temp_v0 != -1) {
@@ -101,7 +101,7 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
         stepStateBattleStart(param_1);
         return param_1;
       }
-      temp_v2 = FUN_00224880(param_1[5]);
+      temp_v2 = scrRunOpcodesStub(param_1[5]);
       if (temp_v2 != 2) {
         return (unsigned int *)0x0;
       }
@@ -122,7 +122,7 @@ unsigned int * FUN_003e6f50(unsigned int *param_1)
     stepStateBattleStart(param_1);
     return param_1;
   case 8:
-    temp_v2 = FUN_00224880(param_1[5]);
+    temp_v2 = scrRunOpcodesStub(param_1[5]);
     if (temp_v2 == 2) {
       campCommonBgRelease();
       campButtonHelpRelease();

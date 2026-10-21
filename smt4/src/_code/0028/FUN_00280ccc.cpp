@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_001f7c78(void);
-int FUN_0024f034(int, unsigned int);
+int mapIfActivateRecord(int, unsigned int);
 int FUN_00281e34(void);
 int mathPositionHeadingDegrees(void);
 int libc_strcpy(unsigned int *, int);
@@ -82,7 +82,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001f7c78. */
-/* Supplied declaration required: FUN_0024f034. */
+/* Supplied declaration required: mapIfActivateRecord. */
 extern int FUN_0027d968(void);
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -296,7 +296,7 @@ void FUN_00280ccc(void)
                     DAT_0049f974 = 0xffffffff;
                     libc_strcpy(&DAT_0049f978,temp_v0 + 0x4a139c);
                   }
-                  temp_v23 = FUN_0024f034(1,DAT_0049f99c);
+                  temp_v23 = mapIfActivateRecord(1,DAT_0049f99c);
                 }
                 else {
                   DAT_0049fb49 = 1;
@@ -475,7 +475,7 @@ LAB_00281704:
       return;
     }
   }
-  FUN_0024f034(0,0xffffffff);
+  mapIfActivateRecord(0,0xffffffff);
   return;
 }
 

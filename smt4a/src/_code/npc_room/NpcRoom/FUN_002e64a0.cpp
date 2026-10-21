@@ -20,8 +20,8 @@ int campCommonBgAcquire(...);
 int campButtonHelpAcquire(...);
 int FUN_003423cc(...);
 int jobSetWork3C(...);
-int FUN_0039af48(...);
-int FUN_003afe2c(...);
+unsigned int FUN_0039af48(unsigned int, unsigned int, int, int, float);
+unsigned int npc2dCreateDemonPortrait(unsigned int, unsigned int, int, int, float);
 int FUN_003b61ec(...);
 int loadSlotEnsureLoaded(...);
 
@@ -64,8 +64,6 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_003423cc. */
 /* Supplied declaration required: jobSetWork3C. */
-/* Supplied declaration required: FUN_0039af48. */
-/* Supplied declaration required: FUN_003afe2c. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 
@@ -258,10 +256,10 @@ LAB_002e6874:
     if (temp_v11 != 0) {
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v11 + 2);
       if (*(short *)(temp_v11 + 4) != 0) {
-        FUN_003afe2c();
+        temp_v7 = npc2dCreateDemonPortrait(temp_v7,0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v11 + 6),0,1.0f);
       }
       else {
-        FUN_0039af48(temp_v7,0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v11 + 6));
+        temp_v7 = FUN_0039af48(temp_v7,0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v11 + 6),0,1.0f);
       }
       puVar8[temp_v9 + 1] = temp_v7;
       jobSetParent(*puVar8,puVar8[temp_v9 + 1]);

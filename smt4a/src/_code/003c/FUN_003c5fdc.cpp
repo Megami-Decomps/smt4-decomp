@@ -1,39 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c5fdc` (_code @ 0x3c5fdc, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves return-one and null constants in R7/R6 across cleanup calls and saves six registers; compiled code materializes them at use with a four-register frame. */
+#include "common.h"
+
+struct CleanupSceneObject {
+    u32 job; // 0x00
+};
+struct EngineCleanupOwner {
+    u8 unk00[8]; // 0x00
+    CleanupSceneObject* object; // 0x08
+};
 
 extern "C" {
+extern EngineCleanupOwner g_engineCleanupOwner;
+u32 jobIsValid(u32 job);
+void sceneObjDestroy(CleanupSceneObject* object);
+void asdOperatorDelete(void* allocation);
 
-int asdOperatorDelete(void);
-int sceneObjDestroy(unsigned int *);
-
-extern unsigned char g_engineCleanupOwner; /* 0x588c40 */
-
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: sceneObjDestroy. */
-
-
-unsigned int FUN_003c5fdc(void)
-
+// Waits for the owned object's job to stop before destroying and freeing it.
+u32 FUN_003c5fdc()
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = (*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8));
-  if ((*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8)) != (unsigned int *)0x0) {
-    temp_v0 = jobIsValid(*(*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8)));
-    if (temp_v0 != 0) {
-      return 0;
+    CleanupSceneObject* object = g_engineCleanupOwner.object;
+    if (object != NULL) {
+        if (jobIsValid(object->job)) {
+            return 0;
+        }
+        sceneObjDestroy(object);
+        if (g_engineCleanupOwner.object != NULL) {
+            asdOperatorDelete(g_engineCleanupOwner.object);
+            g_engineCleanupOwner.object = NULL;
+        }
     }
-    sceneObjDestroy(puVar1);
-    if ((*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8)) != (unsigned int *)0x0) {
-      asdOperatorDelete();
-      (*(unsigned int * *)((unsigned char *)&g_engineCleanupOwner + 0x8)) = (unsigned int *)0x0;
-    }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

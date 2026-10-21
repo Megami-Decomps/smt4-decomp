@@ -6,10 +6,10 @@ extern "C" {
 
 int dataTable1bOr1cGetRecord(void);
 
-extern int FUN_0025b6e8(unsigned short);
+extern int unlockFlagTest(unsigned short);
 extern int FUN_0028fb40(unsigned short);
-extern int FUN_0029bcf0(unsigned short);
-extern int FUN_002ae3c4(unsigned short);
+extern int partyFindActiveSlotById(unsigned short);
+extern int aocEntryGetKind(unsigned short);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_00348b7c(int);
 
@@ -35,8 +35,8 @@ void FUN_00298e40(int param_1,int param_2,int *param_3)
       if (temp_v0 != 7) {
         return;
       }
-      temp_v2 = FUN_002ae3c4(*(unsigned short *)(temp_v3 + 0x16e));
-      if ((temp_v2 == 0xb) && (temp_v2 = FUN_0025b6e8(*(unsigned short *)(temp_v3 + 0x16e)), temp_v2 != 0)) {
+      temp_v2 = aocEntryGetKind(*(unsigned short *)(temp_v3 + 0x16e));
+      if ((temp_v2 == 0xb) && (temp_v2 = unlockFlagTest(*(unsigned short *)(temp_v3 + 0x16e)), temp_v2 != 0)) {
         param_3[2] = 1;
       }
       *(unsigned char *)((int)param_3 + 6) = 1;
@@ -48,7 +48,7 @@ void FUN_00298e40(int param_1,int param_2,int *param_3)
       *(unsigned char *)((int)param_3 + 6) = 0;
       *(unsigned short *)(param_3 + 1) = *(unsigned short *)(temp_v3 + 0x16e);
       if (*(char *)(temp_v2 + 6) != '\x01') {
-        temp_v2 = FUN_0029bcf0(*(unsigned short *)(temp_v3 + 0x16e));
+        temp_v2 = partyFindActiveSlotById(*(unsigned short *)(temp_v3 + 0x16e));
         if (-1 < temp_v2) {
           param_3[2] = 1;
           *param_3 = 0;

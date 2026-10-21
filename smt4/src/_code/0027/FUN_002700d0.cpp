@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMdlManagerDestroy(...);
 
-extern int DAT_0044cd88; /* 0x44cd88 */
+extern int g_mapStateSlots; /* 0x44cd88 */
 
 /* Supplied declaration required: asdMdlManagerDestroy. */
 
@@ -23,7 +23,7 @@ void FUN_002700d0(void)
   
   temp_v1 = 0;
   do {
-    temp_v2 = DAT_0044cd88 + temp_v1 * 0x4c;
+    temp_v2 = g_mapStateSlots + temp_v1 * 0x4c;
     if (*(char *)(temp_v2 + 0x9d8) != '\0') {
       asdMdlManagerDestroy(*(unsigned int *)(temp_v2 + 0xa08));
       *(unsigned int *)(temp_v2 + 0xa08) = 0;
@@ -32,7 +32,7 @@ void FUN_002700d0(void)
   } while (temp_v1 < 3);
   temp_v1 = 0;
   do {
-    temp_v2 = DAT_0044cd88 + temp_v1 * 0x4c;
+    temp_v2 = g_mapStateSlots + temp_v1 * 0x4c;
     temp_v3 = *(char *)(temp_v2 + 0x58) != '\0';
     temp_v0 = 0;
     if (temp_v3) {
@@ -50,9 +50,9 @@ void FUN_002700d0(void)
   } while (temp_v1 < 0x20);
   temp_v1 = 0;
   do {
-    if (*(int *)(DAT_0044cd88 + temp_v1 * 8 + 0x1c) != 0) {
+    if (*(int *)(g_mapStateSlots + temp_v1 * 8 + 0x1c) != 0) {
       asdMdlManagerDestroy();
-      *(unsigned int *)(DAT_0044cd88 + temp_v1 * 8 + 0x1c) = 0;
+      *(unsigned int *)(g_mapStateSlots + temp_v1 * 8 + 0x1c) = 0;
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);

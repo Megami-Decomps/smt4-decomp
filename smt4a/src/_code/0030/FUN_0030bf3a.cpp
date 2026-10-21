@@ -1,13 +1,8 @@
-#include "common.h"
+#include "shard/W6_W6Match5_SequenceTree.h"
 
-extern "C" {
-
-void seq16IsGreater(u32 value);
-
-/* Passes the third argument to seq16IsGreater. */
-void FUN_0030bf3a(u32 unused1, u32 unused2, u32 value)
+// The state-free tree comparator reverses operands for the greater-than primitive.
+extern "C" u32 FUN_0030bf3a(void *context, const SequenceTreeKey *left,
+                            const SequenceTreeKey *right)
 {
-    seq16IsGreater(value);
+    return seq16IsGreater(right, left);
 }
-
-} /* extern "C" */

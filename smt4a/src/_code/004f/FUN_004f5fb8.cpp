@@ -9,10 +9,10 @@ int FUN_001568f8(int, int);
 int controllerSetDestination(unsigned int, float *);
 int FUN_003fd7b4(unsigned int);
 int FUN_003fe86c(unsigned int, int, int);
-int FUN_003fe9b4(unsigned int, unsigned char [24]);
+int tripleOwnerSetValue(unsigned int, unsigned char [24]);
 int FUN_004019c0(int, unsigned char [24]);
 int FUN_00401b50(int, float *);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -25,14 +25,14 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_003ef9e0(unsigned int, int);
+extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_003fe9b4. */
+/* Supplied declaration required: tripleOwnerSetValue. */
 /* Supplied declaration required: FUN_004019c0. */
 /* Supplied declaration required: FUN_00401b50. */
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 void FUN_004f5fb8(int param_1,int param_2)
@@ -56,11 +56,11 @@ void FUN_004f5fb8(int param_1,int param_2)
     temp_v4 = *(unsigned int *)(*(int *)(temp_v6 + 0x960) + 4);
     FUN_003fd7b4(temp_v4);
     FUN_003fe86c(temp_v4,0,2);
-    FUN_0040ace8(g_handleRegistry,temp_v4);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v4);
     temp_v0 = btlGetMainState();
     temp_v3 = *(int *)(temp_v0 + 0x1ed4) + param_2 * 0x1d0;
     temp_v4 = btlGetMainState();
-    temp_v0 = FUN_003ef9e0(temp_v4,temp_v3);
+    temp_v0 = idSetFindSubjectIndex(temp_v4,temp_v3);
     if (temp_v0 < 0) {
       temp_v0 = 0;
     }
@@ -76,7 +76,7 @@ void FUN_004f5fb8(int param_1,int param_2)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x32);
     FUN_004019c0(temp_v5 + 8,temp_v10);
-    FUN_003fe9b4(*(unsigned int *)(*(int *)(temp_v6 + 0x960) + 4),temp_v10);
+    tripleOwnerSetValue(*(unsigned int *)(*(int *)(temp_v6 + 0x960) + 4),temp_v10);
     FUN_00401b50(temp_v5 + 8,&temp_v7);
     temp_v7 = temp_v7 + *(float *)(temp_v3 + 0xc);
     temp_v8 = temp_v8 + *(float *)(temp_v3 + 0x10);

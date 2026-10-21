@@ -42,7 +42,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: dataTable00FindById. */
 extern int gameGetSlotTable(void);
-extern int FUN_00213b5c(void);
+extern int gameDataBlocksGetTableFlag(void);
 extern int FUN_00228ab0(int);
 
 
@@ -203,13 +203,13 @@ void FUN_003ef1e4(int param_1,int param_2)
   } while (temp_v9 < 6);
   temp_v16 = (int)((temp_v17 - temp_v18) * 0.2f);
   temp_v9 = temp_v16 + 0x32;
-  temp_v6 = FUN_00213b5c();
+  temp_v6 = gameDataBlocksGetTableFlag();
   if (temp_v6 != 0) {
-    temp_v6 = FUN_00213b5c();
-    if ((temp_v6 != 1) && (temp_v6 = FUN_00213b5c(), temp_v6 != 3)) {
-      temp_v6 = FUN_00213b5c();
+    temp_v6 = gameDataBlocksGetTableFlag();
+    if ((temp_v6 != 1) && (temp_v6 = gameDataBlocksGetTableFlag(), temp_v6 != 3)) {
+      temp_v6 = gameDataBlocksGetTableFlag();
       if (temp_v6 != 2) {
-        temp_v6 = FUN_00213b5c();
+        temp_v6 = gameDataBlocksGetTableFlag();
         if (temp_v6 != 4) goto LAB_003ef5b0;
         temp_v18 = (float)VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v9 = (int)(temp_v18 * 0.1f);

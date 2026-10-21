@@ -8,7 +8,7 @@ int FUN_0024bc98(unsigned char [100], int);
 int FUN_0024bda8(unsigned char [100], unsigned int);
 int FUN_002907c4(...);
 int FUN_00295660(int, unsigned char [100]);
-int FUN_00296ae8(unsigned int, int, unsigned int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_0029ede8(int, int, unsigned int, int);
 int dataTable08Sub2GetRecord(void);
 int textFormatBuffer(...);
@@ -33,7 +33,7 @@ extern int DAT_0043da30; /* 0x43da30 */
 /* Supplied declaration required: FUN_0024bda8. */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern int gameGetPlayerData(void);
@@ -109,7 +109,7 @@ void FUN_00309bc8(int param_1,unsigned int param_2)
     temp_v5 = 3;
     iStack_8c = param_1;
     temp_v6[0] = param_2;
-    FUN_00296ae8(*(unsigned int *)(temp_v1 + 0x558),3,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x558),3,0xffffffff,0);
   }
   return;
 }

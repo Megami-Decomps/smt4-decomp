@@ -1,35 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fcf0c` (_code @ 0x4fcf0c, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains the first/second IDs in R4/R5 and stacked IDs in R6/R7; compiled code swaps these saved-register pairs despite otherwise identical instructions. */
+#include "shard/W6_W6Match2_ReflectAction.h"
 
 extern "C" {
+void* btlGetMainState(void);
+ReflectAction* FUN_004102d8(ReflectContext* context, s32 source, s32 flags, u32 target);
 
-int btlGetMainState(void);
-int FUN_004102d8(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x5712f0 */
-
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_004102d8. */
-
-
-unsigned int
-FUN_004fcf0c(short param_1,unsigned int param_2,unsigned short param_3,unsigned short param_4,
-            unsigned short param_5,unsigned short param_6)
-
+// Enqueues a type-0x2d reflection action with four halfword IDs.
+u32 FUN_004fcf0c(s32 source, u32 target, u32 first, u32 second, u32 third, u32 fourth)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  btlGetMainState();
-  temp_v0 = g_btlActionReflect;
-  FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x2d;
-  *(unsigned short *)(temp_v0 + 0x24) = param_3;
-  *(unsigned short *)(temp_v0 + 0x26) = param_4;
-  *(unsigned short *)(temp_v0 + 0x48) = param_5;
-  *(unsigned short *)(temp_v0 + 0x4a) = param_6;
-  return 1;
+    btlGetMainState();
+    ReflectAction* action = FUN_004102d8(g_btlActionReflect, static_cast<s16>(source), 0, target);
+    action->kind = 0x2d;
+    action->first = first;
+    action->second = second;
+    action->extraIds.third = third;
+    action->extraIds.fourth = fourth;
+    return 1;
 }
-
-} /* extern "C" */
+}

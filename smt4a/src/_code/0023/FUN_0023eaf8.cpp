@@ -11,7 +11,7 @@ int FUN_00212724(void);
 int useCounterStart(void);
 int slotBlockSetPair(...);
 int FUN_0031f208(...);
-int FUN_0031f27c(...);
+int sortMenuAcquire(...);
 int FUN_003dea6c(...);
 
 int FUN_001517b4(...);
@@ -26,7 +26,7 @@ int FUN_002ae320(void);
 int FUN_003450d4(int, unsigned int, int, int, int, int, char [8], int, int);
 int FUN_003d474c(void);
 int FUN_003d498c(...);
-int FUN_003defe0(void);
+unsigned int questHasSpecialDetailPage(unsigned int);
 int FUN_00417d08(...);
 int SBORROW4(...);
 
@@ -60,19 +60,18 @@ extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ae320. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: slotBlockSetPair. */
 extern int FUN_002f7730(int, unsigned int);
 extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: FUN_003d474c. */
 /* Supplied declaration required: FUN_003d498c. */
 extern int FUN_003de75c(unsigned int);
 /* Supplied declaration required: FUN_003dea6c. */
 extern int FUN_003dee58(unsigned int);
-/* Supplied declaration required: FUN_003defe0. */
 /* Supplied declaration required: FUN_00417d08. */
 extern int partyEntryFlagsBit3(unsigned int);
 extern int FUN_004186a4(void);
@@ -110,7 +109,7 @@ void FUN_0023eaf8(void)
     temp_v11 = g_uiQuest + 0x9ac;
     temp_v8 = g_uiQuest + 0xad6;
   }
-  temp_v3 = FUN_002c2c68(temp_v11);
+  temp_v3 = objectApplyIfUnblocked(temp_v11);
   temp_v12 = 0x100020f;
   if (temp_v3 < 1) {
     temp_v11 = 1;
@@ -154,7 +153,7 @@ void FUN_0023eaf8(void)
         FUN_0023ff10();
         temp_v8 = g_uiQuest;
         temp_v3 = partyEntryBitsBit4(temp_v10);
-        if ((temp_v3 == 0) && (temp_v6 = temp_v10, FUN_003defe0(), temp_v6 != 0)) {
+        if ((temp_v3 == 0) && ((temp_v6 = questHasSpecialDetailPage(temp_v10)) != 0)) {
           temp_v3 = 0;
           if (temp_v3 < *(int *)(temp_v8 + 0x918)) {
             do {
@@ -207,7 +206,7 @@ void FUN_0023eaf8(void)
         FUN_0023ff10();
         temp_v8 = g_uiQuest;
         temp_v3 = partyEntryBitsBit4(temp_v10);
-        if ((temp_v3 == 0) && (temp_v6 = temp_v10, FUN_003defe0(), temp_v6 != 0)) {
+        if ((temp_v3 == 0) && ((temp_v6 = questHasSpecialDetailPage(temp_v10)) != 0)) {
           temp_v3 = 0;
           if (temp_v3 < *(int *)(temp_v8 + 0x918)) {
             do {
@@ -294,7 +293,7 @@ LAB_0023f080:
               if (temp_v3 != 0) {
                 eventQueueAddUniqueIfValid(0x100020e);
                 FUN_0019de98(0,0xf4f4f4ff);
-                FUN_0031f27c(0xe,0);
+                sortMenuAcquire(0xe,0);
                 FUN_0031f208(0x22);
                 FUN_0031f208(0x21);
                 FUN_0031f208(0x18);

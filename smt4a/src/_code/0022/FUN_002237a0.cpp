@@ -9,7 +9,7 @@ int eventQueueAddUnique(...);
 int FUN_00234880(void);
 int FUN_00295108(void);
 int mapIfStart(void);
-int FUN_002d8c90(...);
+int popupQueueInsertUnique(...);
 int FUN_00312af0(void);
 int FUN_00398258(...);
 
@@ -32,7 +32,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_00234880. */
 /* Supplied declaration required: FUN_00295108. */
 /* Supplied declaration required: mapIfStart. */
-/* Supplied declaration required: FUN_002d8c90. */
+/* Supplied declaration required: popupQueueInsertUnique. */
 /* Supplied declaration required: FUN_00312af0. */
 extern int lmapSceneGetUnk0(void);
 extern int popupHasActiveValue(void);
@@ -333,7 +333,7 @@ LAB_00223c28:
       DAT_005f18e4 = 0;
       if ((*g_popupState != 0 && *g_popupState != 0x12) &&
          (temp_v3 = randRange(99), temp_v3 + 1 < 0xb)) {
-        FUN_002d8c90(0x12);
+        popupQueueInsertUnique(0x12);
       }
     }
   }

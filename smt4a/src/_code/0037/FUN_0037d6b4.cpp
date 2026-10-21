@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_0030354c(void);
+extern void lmapClearExtraFlag(void);
 
-/* Script command: runs FUN_0030354c. */
+/* Script command: runs lmapClearExtraFlag. */
 u32 FUN_0037d6b4(void)
 {
-    FUN_0030354c();
+    lmapClearExtraFlag();
     return 1;
 }
 

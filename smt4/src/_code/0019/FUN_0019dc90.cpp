@@ -3,12 +3,12 @@
 
 extern "C" {
 
-extern MapTimerBanks *DAT_00447e40;
+extern MapTimerBanks *g_vectorQueueWork;
 
 /* Clears the timer banks and invalidates all pending slots. */
 void FUN_0019dc90(void)
 {
-    MapTimerBanks *work = DAT_00447e40;
+    MapTimerBanks *work = g_vectorQueueWork;
     for (s32 bank = 0; bank < 16; ++bank) {
         for (s32 entry = 0; entry < 16; ++entry) {
             work->banks[bank].entries[entry].active = 0;

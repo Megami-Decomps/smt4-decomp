@@ -19,7 +19,7 @@ void asdMemFreeSlot(u32 slot);
 void bustupCutAnimStopJob(void);
 s32 FUN_0028520c(s16 index);
 void FUN_0023a55c(s16 index);
-void FUN_002ef750(void);
+void taskWindowRelease(void);
 void eventTexReleaseJobs(void);
 void jobStop(void *job, s32 arg);
 void scrScriptProcessDestroy(void *process);
@@ -38,7 +38,7 @@ void FUN_002e1614(Holder002e1614 *holder)
             FUN_0023a55c((s16)i);
         }
     }
-    FUN_002ef750();
+    taskWindowRelease();
     if (object->buffer != NULL) {
         asdMemFree(object->buffer);
         object->buffer = NULL;

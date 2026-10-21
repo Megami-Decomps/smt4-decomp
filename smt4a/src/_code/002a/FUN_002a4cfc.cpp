@@ -16,7 +16,7 @@ int FUN_00215bbc(void);
 int FUN_00230ac0(...);
 int FUN_0026f0c4(void);
 int bibleOpenMode0(...);
-int FUN_0028187c(...);
+int campCecScriptStart(...);
 int FUN_00284ee4(...);
 int bibleOpenMode1(...);
 int FUN_002a4708(void);
@@ -27,7 +27,7 @@ int FUN_0032fbd0(void);
 int FUN_00359974(...);
 int FUN_0035de50(void);
 int FUN_00370d84(void);
-int FUN_0037a2c8(void);
+int texEntrySpritesLoad(void);
 int FUN_0038800c(...);
 int FUN_0038a694(void);
 int FUN_0039a638(void);
@@ -35,7 +35,7 @@ int loadSlotEnsureLoaded(...);
 
 int uiSpriteSetImageKeyframe(...);
 int FUN_0019de98(...);
-int FUN_001f4908(int, int, int);
+int slotSetRequest(int, int, int);
 int configOpen(...);
 int FUN_0020b660(...);
 int FUN_00215254(void);
@@ -43,9 +43,9 @@ int FUN_00215bd0(void);
 int FUN_0021b274(...);
 int bgmRestart(int);
 int FUN_0023c08c(...);
-int FUN_0023f604(...);
+int campRebuildEnabledFlagList(...);
 int FUN_0026f148(...);
-int FUN_0026fc00(...);
+void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int FUN_002a5cf4(void);
 int FUN_002a7b74(void);
 int bibleOpenMode2(...);
@@ -53,11 +53,11 @@ int FUN_002c8538(...);
 int FUN_002e738c(int);
 int FUN_002f0c18(void);
 int FUN_00319b10(void);
-int FUN_0031f924(void);
+int uiQuestReturnToList(void);
 int FUN_00334560(void);
 int FUN_0035c810(void);
 int FUN_0035dbd4(int);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int partyPanelSetHidden(...);
 int FUN_003d386c(int);
 
@@ -74,10 +74,10 @@ extern int g_partyPanel; /* 0x57f268 */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_0020b660. */
-extern unsigned int FUN_00213b5c(void);
+extern unsigned int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: FUN_00215254. */
 /* Supplied declaration required: FUN_00215bbc. */
 /* Supplied declaration required: FUN_00215bd0. */
@@ -86,12 +86,11 @@ extern unsigned int FUN_00213b5c(void);
 /* Supplied declaration required: FUN_00230ac0. */
 /* Supplied declaration required: bgmRestart. */
 /* Supplied declaration required: FUN_0023c08c. */
-/* Supplied declaration required: FUN_0023f604. */
+/* Supplied declaration required: campRebuildEnabledFlagList. */
 /* Supplied declaration required: FUN_0026f0c4. */
 /* Supplied declaration required: FUN_0026f148. */
-/* Supplied declaration required: FUN_0026fc00. */
 /* Supplied declaration required: bibleOpenMode0. */
-/* Supplied declaration required: FUN_0028187c. */
+/* Supplied declaration required: campCecScriptStart. */
 /* Supplied declaration required: FUN_00284ee4. */
 /* Supplied declaration required: bibleOpenMode1. */
 /* Supplied declaration required: FUN_002a4708. */
@@ -100,18 +99,18 @@ extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a5cf4. */
 /* Supplied declaration required: FUN_002a7b74. */
-extern int FUN_002ab790(void);
+extern int uniteRequestGet(void);
 /* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: bibleOpenMode2. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c39dc. */
 /* Supplied declaration required: FUN_002c8538. */
-extern int FUN_002c90b0(void);
+extern int uniteHasPendingIdle(void);
 /* Supplied declaration required: FUN_002e2404. */
 /* Supplied declaration required: FUN_002e738c. */
 /* Supplied declaration required: FUN_002f0c18. */
 /* Supplied declaration required: FUN_00319b10. */
-/* Supplied declaration required: FUN_0031f924. */
+/* Supplied declaration required: uiQuestReturnToList. */
 extern int stateAtF4IsActive(void);
 /* Supplied declaration required: FUN_0032fbd0. */
 extern int gameDataBlocksGetSelectedValue(void);
@@ -124,9 +123,9 @@ extern int campCecEditIsStateSixteen(void);
 /* Supplied declaration required: FUN_0035de50. */
 /* Supplied declaration required: FUN_0036cf98. */
 /* Supplied declaration required: FUN_00370d84. */
-/* Supplied declaration required: FUN_0037a2c8. */
+/* Supplied declaration required: texEntrySpritesLoad. */
 /* Supplied declaration required: FUN_0038800c. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_0038a694. */
 /* Supplied declaration required: FUN_0038b548. */
 /* Supplied declaration required: FUN_0039a638. */
@@ -174,17 +173,17 @@ void FUN_002a4cfc(void)
   case 4:
     FUN_0020b660(0x48);
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     FUN_002e738c(0);
     return;
   case 7:
     *(unsigned char *)(temp_v3 + 0x32a9) = 1;
-    FUN_001f4908(0,10,0xff);
+    slotSetRequest(0,10,0xff);
     bgmRestart(0x1e);
     return;
   case 9:
-    FUN_0026fc00(2,3,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     FUN_0021b274(1,0xffffffff,0);
     FUN_002a5cf4();
     FUN_003d386c(1);
@@ -193,8 +192,8 @@ void FUN_002a4cfc(void)
     if (g_camp != 0) {
       *(int *)(g_camp + 0xbc) = temp_v2 + temp_v6;
     }
-    FUN_00388758(1);
-    temp_v2 = FUN_002c2c68(temp_v3 + 0x1ec);
+    messageDismissNumericBanner(1);
+    temp_v2 = objectApplyIfUnblocked(temp_v3 + 0x1ec);
     if (0 < temp_v2) {
       FUN_002c8538(1);
       FUN_00215bd0();
@@ -215,18 +214,18 @@ void FUN_002a4cfc(void)
     else if (temp_v2 == 0xe) {
       temp_v6 = temp_v3 + 0x188;
     }
-    temp_v6 = FUN_002c2c68(temp_v6);
+    temp_v6 = objectApplyIfUnblocked(temp_v6);
     if (temp_v6 < 1) {
       return;
     }
-    FUN_0026fc00(2,3,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     FUN_0021b274(1,0xffffffff,0);
     FUN_002a5cf4();
     if (temp_v2 != 0xb) {
       if (temp_v2 != 0xd) {
         if (temp_v2 == 0xe) {
           *(unsigned int *)(temp_v3 + 0x24) = 0x10;
-          FUN_0023f604(0xe);
+          campRebuildEnabledFlagList(0xe);
         }
         FUN_0020b660(4);
         return;
@@ -238,23 +237,23 @@ void FUN_002a4cfc(void)
       *(unsigned int *)(temp_v3 + 0x24) = 10;
       temp_v1 = 0xb;
     }
-    FUN_0023f604(temp_v1);
+    campRebuildEnabledFlagList(temp_v1);
     FUN_0020b660(4);
     return;
   case 0xf:
-    FUN_0026fc00(2,3,0xffffffff,0);
-    FUN_00388758(1);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
+    messageDismissNumericBanner(1);
     FUN_0020b660(0x19);
     return;
   case 0x11:
-    FUN_0026fc00(2,3,0xffffffff,0);
-    FUN_00388758(1);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
+    messageDismissNumericBanner(1);
     FUN_0020b660(0x49);
     FUN_00319b10();
     return;
   case 0x12:
-    FUN_0026fc00(2,3,0xffffffff,0);
-    FUN_00388758(1);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
+    messageDismissNumericBanner(1);
     FUN_0020b660(0x1a);
     return;
   case 0x13:
@@ -285,12 +284,12 @@ void FUN_002a4cfc(void)
     else if (temp_v2 == 0x19) {
       temp_v6 = temp_v3 + 0x50c;
     }
-    temp_v2 = FUN_002c2c68(temp_v6);
+    temp_v2 = objectApplyIfUnblocked(temp_v6);
     if (0 < temp_v2) {
-      FUN_0026fc00(2,3,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,3,0xffffffff,0);
       FUN_0021b274(1,0xffffffff,0);
       FUN_002a5cf4();
-      FUN_00388758(1);
+      messageDismissNumericBanner(1);
       FUN_002c8538(1);
       FUN_00215bd0();
       *(unsigned int *)(temp_v3 + 0x24) = 0x1d;
@@ -306,15 +305,15 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x1a:
-    FUN_0026fc00(2,3,0xffffffff,0);
-    FUN_00388758(1);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
+    messageDismissNumericBanner(1);
     partyPanelSetHidden(0);
     FUN_0020b660(0x15);
     return;
   case 0x1b:
-    FUN_0026fc00(2,3,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     bibleOpenMode2(0);
     FUN_0020b660(0x24);
     return;
@@ -328,7 +327,7 @@ void FUN_002a4cfc(void)
     return;
   case 0x1d:
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0020b660(0x26);
     FUN_002f0c18();
     FUN_00334560();
@@ -336,55 +335,55 @@ void FUN_002a4cfc(void)
     return;
   case 0x1e:
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0020b660(0x27);
     FUN_002f0c18();
-    FUN_0031f924();
+    uiQuestReturnToList();
     *(unsigned char *)(temp_v3 + 0x3179) = 1;
     return;
   case 0x24:
     temp_v3 = gameFlagIsSet(0x459);
-    if ((temp_v3 == 0) && (temp_v3 = FUN_002ab790(), temp_v3 != 0x19)) {
+    if ((temp_v3 == 0) && (temp_v3 = uniteRequestGet(), temp_v3 != 0x19)) {
       FUN_002a7b74();
       FUN_0023c08c(0x19);
       return;
     }
     break;
   case 0x27:
-    FUN_0026fc00(2,3,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0020b660(0x31);
     return;
   case 0x28:
-    FUN_0026fc00(2,3,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0020b660(0x32);
     return;
   case 0x29:
-    temp_v1 = FUN_00213b5c();
+    temp_v1 = gameDataBlocksGetTableFlag();
     configOpen(temp_v1,1);
-    FUN_0026fc00(2,3,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     FUN_0021b274(0,0xffffffff);
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     *(unsigned int *)(temp_v3 + 0x24) = 0x2e;
     FUN_0020b660(4);
     return;
   case 0x2b:
     FUN_00215254();
-    FUN_0026fc00(2,3,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     FUN_0021b274(0,0xffffffff);
     FUN_002a5cf4();
     *(unsigned int *)(temp_v3 + 0x24) = 0x2f;
     FUN_0020b660(4);
     return;
   case 0x2c:
-    temp_v3 = FUN_002c90b0();
+    temp_v3 = uniteHasPendingIdle();
     if (temp_v3 != 0) {
-      FUN_0026fc00(2,3,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,3,0xffffffff,0);
       uniteSetMode(0);
       FUN_0020b660(0x20);
       FUN_0026f0c4();
@@ -392,15 +391,15 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x2d:
-    FUN_0026fc00(2,3,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     uniteSetMode(2);
     FUN_0020b660(0x20);
     FUN_0026f0c4();
     return;
   case 0x2e:
-    temp_v3 = FUN_002c90b0();
+    temp_v3 = uniteHasPendingIdle();
     if (temp_v3 != 0) {
-      FUN_0026fc00(2,3,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,3,0xffffffff,0);
       bibleOpenMode0(0);
       FUN_0020b660(0x24);
       FUN_002a7b74();
@@ -409,7 +408,7 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x2f:
-    temp_v3 = FUN_002c90b0();
+    temp_v3 = uniteHasPendingIdle();
     if (temp_v3 != 0) {
       temp_v3 = gameGetSlotTable();
       temp_v5 = 0;
@@ -420,7 +419,7 @@ void FUN_002a4cfc(void)
             temp_v2 = temp_v3 + temp_v2 * 300 + 0x68;
             FUN_0032fbd0();
             if (temp_v2 == 0) {
-              FUN_0026fc00(2,3,0xffffffff,0);
+              campSetSpriteAnimationPreset(2,3,0xffffffff,0);
               bibleOpenMode1(0);
               FUN_0020b660(0x24);
               FUN_002a7b74();
@@ -435,9 +434,9 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x31:
-    temp_v2 = FUN_002c90b0();
+    temp_v2 = uniteHasPendingIdle();
     if (temp_v2 != 0) {
-      FUN_0026fc00(2,3,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,3,0xffffffff,0);
       uniteSetMode(4);
       FUN_0020b660(0x20);
       FUN_0026f0c4();
@@ -446,13 +445,13 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x32:
-    temp_v3 = FUN_002c90b0();
+    temp_v3 = uniteHasPendingIdle();
     if (temp_v3 != 0) {
-      FUN_0026fc00(2,3,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,3,0xffffffff,0);
       uniteSetMode(5);
       FUN_0026f0c4();
       FUN_0035de50();
-      FUN_00388758(1);
+      messageDismissNumericBanner(1);
       partyPanelSetHidden(1);
       FUN_002c39dc(0xd,0,0xffffffff);
       FUN_00284ee4(1);
@@ -468,7 +467,7 @@ void FUN_002a4cfc(void)
   case 0x34:
     *(unsigned int *)(temp_v3 + 0x1c) = 0x34;
     FUN_002e2404(2);
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0039a638();
     return;
   case 0x35:
@@ -476,9 +475,9 @@ void FUN_002a4cfc(void)
     if (temp_v2 == 0) {
       *(unsigned int *)(temp_v3 + 0x2c) = 0;
       *(unsigned int *)(temp_v3 + 0x1c) = 0x35;
-      FUN_0028187c(0x26);
+      campCecScriptStart(0x26);
       sysPlaySe(0x92);
-      FUN_00388758(1);
+      messageDismissNumericBanner(1);
       FUN_0039a638();
       uiSpriteSetImageKeyframe(temp_v3 + 0x1634,7,0);
       return;
@@ -488,34 +487,34 @@ void FUN_002a4cfc(void)
     FUN_00359974(0,temp_v5,0xffffffff);
     FUN_00359974(1,((temp_v2 + 0x3bU) % 0xe10) / 0x3c,2);
     if (temp_v5 == 0) {
-      FUN_0028187c(0x2e);
+      campCecScriptStart(0x2e);
       return;
     }
-    FUN_0028187c(0x2d);
+    campCecScriptStart(0x2d);
     return;
   case 0x36:
     *(unsigned int *)(temp_v3 + 0x24) = 0x3d;
     FUN_002e2404(1);
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0039a638();
     uiSpriteSetImageKeyframe(temp_v3 + 0x1634,7,0);
     return;
   case 0x37:
     *(unsigned int *)(temp_v3 + 0x1c) = 0x3b;
     FUN_002e2404(4);
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0039a638();
     return;
   case 0x38:
     *(unsigned int *)(temp_v3 + 0x1c) = 0x3b;
     FUN_002e2404(5);
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0039a638();
     return;
   case 0x39:
     *(unsigned int *)(temp_v3 + 0x1c) = 0x45;
     FUN_002e2404(6);
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0039a638();
     return;
   case 0x3a:
@@ -570,9 +569,9 @@ void FUN_002a4cfc(void)
     }
     break;
   case 0x41:
-    temp_v3 = FUN_002c90b0();
+    temp_v3 = uniteHasPendingIdle();
     if (temp_v3 != 0) {
-      FUN_0026fc00(2,3,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,3,0xffffffff,0);
       uniteSetMode(1);
       FUN_0020b660(0x20);
       FUN_0026f0c4();
@@ -582,32 +581,32 @@ void FUN_002a4cfc(void)
   case 0x42:
     FUN_0020b660(0x50);
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     FUN_0038a694();
     return;
   case 0x44:
     FUN_0020b660(0x4b);
-    FUN_00388758(1);
-    FUN_0026fc00(2,3,0xffffffff,0);
+    messageDismissNumericBanner(1);
+    campSetSpriteAnimationPreset(2,3,0xffffffff,0);
     return;
   case 0x45:
     FUN_0020b660(0x51);
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     FUN_00370d84();
     return;
   case 0x46:
     FUN_0020b660(0x52);
     FUN_002a5cf4();
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
     FUN_002a4708();
     return;
   case 0x47:
     FUN_0020b660(0x53);
-    FUN_0037a2c8();
+    texEntrySpritesLoad();
     loadSlotEnsureLoaded(0x3a);
     temp_v3 = g_partyPanel;
     if (g_partyPanel != 0) {
@@ -695,9 +694,9 @@ void FUN_002a4cfc(void)
       else if (temp_v2 == 0x4e) {
         temp_v6 = temp_v3 + 0x50c;
       }
-      temp_v2 = FUN_002c2c68(temp_v6);
+      temp_v2 = objectApplyIfUnblocked(temp_v6);
       if (0 < temp_v2) {
-        FUN_0026fc00(2,3,0xffffffff,0);
+        campSetSpriteAnimationPreset(2,3,0xffffffff,0);
         FUN_0021b274(1,0xffffffff,0);
         *(unsigned int *)(temp_v3 + 0x24) = 0x1d;
         FUN_0026f148(0x48);

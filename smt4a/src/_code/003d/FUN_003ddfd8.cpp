@@ -1,33 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ddfd8` (_code @ 0x3ddfd8, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler shares the global base and lays out the chord tests and zero-return paths differently. */
+#include "common.h"
+
+struct ChordFlagState {
+    u8 unk00[0x1c];
+    u32 flags; // 0x1c
+};
 
 extern "C" {
+extern ChordFlagState DAT_0061951c[2];
+void *jyoucyuGetTableEntry(u32);
 
-extern unsigned int DAT_00619538; /* 0x619538 */
-extern unsigned int DAT_00619558; /* 0x619558 */
-
-extern int jyoucyuGetTableEntry(unsigned int);
-
-
-unsigned int FUN_003ddfd8(void)
-
+// Require both chord flags in either state, unless the resident table entry is active.
+u32 FUN_003ddfd8(void)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = jyoucyuGetTableEntry(1);
-  if (temp_v0 != 0) {
-    temp_v1 = 0;
-  }
-  else {
-    if (((DAT_00619538 & 2) == 0 || (DAT_00619538 & 0x20) == 0) &&
-       ((DAT_00619558 & 2) == 0 || (DAT_00619558 & 0x20) == 0)) {
-      return 0;
-    }
-    temp_v1 = 1;
-  }
-  return temp_v1;
+    if (jyoucyuGetTableEntry(1) != NULL)
+        return 0;
+    u32 first = DAT_0061951c[0].flags;
+    if ((first & 2) != 0 && (first & 0x20) != 0)
+        return 1;
+    u32 second = DAT_0061951c[1].flags;
+    if ((second & 2) != 0 && (second & 0x20) != 0)
+        return 1;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050e5e0` (_code @ 0x50e5e0, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: initial array-constructor call relies on incoming r0-r3 while its apparent array/constructor literals at +0x48/+0x4c are unreferenced; entry/pool ownership needs review. */
 #include "romwright_types.h"
 
 extern "C" {

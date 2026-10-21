@@ -9,12 +9,12 @@ int eventQueueAddUniqueIfValid(int);
 int ifTouchRegionRemove(void);
 int FUN_00169548(int);
 int FUN_0016ccb4(int);
-int FUN_001b57a8(unsigned int *, int);
+int resultPairInitialize(unsigned int *, int);
 int FUN_001d0fcc(unsigned char [4], unsigned int);
 int FUN_0021c118(int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int msgWindowReset(void);
-int FUN_0034913c(void);
+int messageBannerRestartOrClear(void);
 int messageClearActiveFlags(void);
 int FUN_00477d10(...);
 int releaseEntriesA(unsigned int *);
@@ -36,16 +36,16 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_00169548. */
 /* Supplied declaration required: FUN_0016ccb4. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_0021c118. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: msgWindowReset. */
 extern int FUN_002a4b74(void);
 extern int FUN_002e19f8(void);
-/* Supplied declaration required: FUN_0034913c. */
+/* Supplied declaration required: messageBannerRestartOrClear. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int obj04StateIs4(void);
 /* Supplied declaration required: messageClearActiveFlags. */
@@ -100,7 +100,7 @@ void FUN_0047b224(unsigned int *param_1)
     param_1[2] = 0;
   }
   else {
-    temp_v1 = FUN_00224880(param_1[0xd6]);
+    temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v1 == 2) {
       temp_v1 = FUN_002a4b74();
       if (temp_v1 == 0) {
@@ -111,7 +111,7 @@ void FUN_0047b224(unsigned int *param_1)
         puVar5[2] = 0;
         puVar5[3] = 0;
         puVar6 = temp_v8;
-        FUN_001b57a8(puVar6,0);
+        resultPairInitialize(puVar6,0);
         temp_v3 = *puVar6;
         temp_v0 = puVar6[1];
         puVar5[1] = temp_v0;
@@ -151,7 +151,7 @@ void FUN_0047b224(unsigned int *param_1)
     }
     eventQueueAddUniqueIfValid(0x100020e);
     msgWindowReset();
-    FUN_0034913c();
+    messageBannerRestartOrClear();
     messageClearActiveFlags();
     ifTouchRegionRemove();
     ifTouchRegionRemove();

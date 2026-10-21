@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013f7c4` (_code @ 0x13f7c4, 0x868 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -17,9 +18,8 @@ int FUN_00164490(int);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_001678a8(int);
-int FUN_001689e8(...);
-int FUN_0016c69c(...);
-int FUN_0016c6f0(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -55,11 +55,10 @@ extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001678a8. */
-/* Supplied declaration required: FUN_001689e8. */
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169e38. */
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -92,9 +91,9 @@ unsigned int FUN_0013f7c4(void)
       if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 8) != '\0') {
         efctSetSpeed();
         temp_v3 = FUN_001692ac(1,0);
-        FUN_0016c6f0(g_renderCtx,3,temp_v3);
+        renderStackPushIndexed(g_renderCtx,3,temp_v3);
         FUN_001835b4(2,0x2f,0x8d,0,0,6);
-        FUN_0016c69c(g_renderCtx,3);
+        renderCtxPopState(g_renderCtx,3);
         efctSetSpeed();
       }
       FUN_001678a8(temp_v1);
@@ -105,9 +104,9 @@ unsigned int FUN_0013f7c4(void)
     if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 8) != '\0') {
       efctSetSpeed();
       temp_v3 = FUN_001692ac(1,0);
-      FUN_0016c6f0(g_renderCtx,3,temp_v3);
+      renderStackPushIndexed(g_renderCtx,3,temp_v3);
       FUN_001835b4(2,8,0x101,0,0,6);
-      FUN_0016c69c(g_renderCtx,3);
+      renderCtxPopState(g_renderCtx,3);
       efctSetSpeed();
     }
     FUN_001678a8(temp_v1);
@@ -120,7 +119,7 @@ unsigned int FUN_0013f7c4(void)
     temp_v1 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
     temp_v2 = vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
     temp_v3 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v3);
+    renderStackPushIndexed(g_renderCtx,3,temp_v3);
     efctSetSpeed();
     FUN_00183bb0();
     temp_v4 = FUN_001834a4(8,200);
@@ -135,7 +134,7 @@ unsigned int FUN_0013f7c4(void)
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(2,0xffffffff,temp_v9,(int)*(short *)(temp_v4 + 8));
     temp_v5 = FUN_001834a4(8,0xc1);
-    FUN_001689e8((int)(short)*(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x78),
+    uiDrawItemCategoryIcon((int)(short)*(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x78),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,0x10,0);
     drawSetColorFromRGBA8(0xffffffff);
@@ -149,14 +148,14 @@ unsigned int FUN_0013f7c4(void)
                  &LAB_0013fbc0);
     FUN_00183bb0();
     efctSetSpeed();
-    FUN_0016c69c(g_renderCtx,3);
+    renderCtxPopState(g_renderCtx,3);
   }
   temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   if (*(int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x158) != 0) {
     temp_v2 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xd30);
     temp_v4 = vec2GetYInt(temp_v1 + 0xd30);
     temp_v3 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v3);
+    renderStackPushIndexed(g_renderCtx,3,temp_v3);
     efctSetSpeed();
     FUN_00183bb0();
     temp_v5 = FUN_001834a4(8,0xc0);
@@ -189,7 +188,7 @@ unsigned int FUN_0013f7c4(void)
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v4,0,0xf,0x10,
                  &LAB_0013fbc0);
     FUN_00183bb0();
-    FUN_0016c69c(g_renderCtx,3);
+    renderCtxPopState(g_renderCtx,3);
   }
   if ((*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x19fb) != '\0') &&
      (temp_v1 = *(int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x19fc), temp_v1 != 0)) {

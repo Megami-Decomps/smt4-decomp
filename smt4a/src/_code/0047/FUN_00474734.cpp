@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdOperatorNew(void);
-int FUN_001b57a8(unsigned int [4], int);
+int resultPairInitialize(unsigned int [4], int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned int *);
 
 
@@ -41,7 +41,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
       puVar1[3] = 0;
       *(unsigned char *)(puVar1 + 4) = 0;
       puVar1[-2] = 0;
-      FUN_001b57a8(temp_v1,0);
+      resultPairInitialize(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -60,7 +60,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x55c758;
       puVar1[-2] = 0;
-      FUN_001b57a8(temp_v1,0);
+      resultPairInitialize(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -79,7 +79,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x55c70c;
       puVar1[-2] = 0;
-      FUN_001b57a8(temp_v1,0);
+      resultPairInitialize(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -98,7 +98,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x55c6cc;
       puVar1[-2] = 0;
-      FUN_001b57a8(temp_v1,0);
+      resultPairInitialize(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -117,7 +117,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x55c740;
       puVar1[-2] = 0;
-      FUN_001b57a8(temp_v1,0);
+      resultPairInitialize(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -136,7 +136,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x55c6f4;
       puVar1[-2] = 0;
-      FUN_001b57a8(temp_v1,0);
+      resultPairInitialize(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -155,7 +155,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x55c7a0;
       puVar1[-2] = 0;
-      FUN_001b57a8(temp_v1,0);
+      resultPairInitialize(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;
@@ -174,7 +174,7 @@ unsigned int * FUN_00474734(unsigned int param_1,unsigned int param_2)
       puVar1[2] = 0xffffffff;
       puVar1[-3] = 0x55c770;
       puVar1[-2] = 0;
-      FUN_001b57a8(temp_v1,0);
+      resultPairInitialize(temp_v1,0);
       temp_v0 = puVar2[1];
       *puVar1 = *puVar2;
       puVar1[1] = temp_v0;

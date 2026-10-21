@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00152464(void);
+unsigned int asdSoundEnsureArchiveItemLoaded(unsigned int id);
 int FUN_0015e2bc(unsigned int, unsigned int, int, int);
 int nw_snd_SoundArchive_GetSoundType(unsigned char *, int);
 int asd3dSoundActorIsPlaying(void);
@@ -17,7 +17,6 @@ extern unsigned char DAT_0063f4c5; /* 0x63f4c5 */
 extern int DAT_0063f50c; /* 0x63f50c */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00152464. */
 /* Supplied declaration required: FUN_0015e2bc. */
 extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 /* Supplied declaration required: nw_snd_SoundArchive_GetSoundType. */
@@ -47,8 +46,7 @@ unsigned char FUN_0036bca0(int param_1,unsigned int param_2)
   {
     nw_snd_SoundArchive_GetSoundType(&g_asdSoundSystem,param_1);
     if ((*(char *)(temp_v1 + 0x3b) != '\0') && (puVar5 == (unsigned char *)0x3)) {
-      temp_v1 = param_1;
-      FUN_00152464();
+      temp_v1 = asdSoundEnsureArchiveItemLoaded((unsigned int)param_1);
       if (temp_v1 == 0) {
         return 0;
       }

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0019102c(unsigned int *, int);
+int objectCommandReserveWords(unsigned int *, int);
 int FUN_001aa228(void);
 int coproc_moveto_Data_Memory_Barrier(int);
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Memory_Barrier (CALLOTHER). */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 /* Supplied declaration required: FUN_001aa228. */
 extern int nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_TryEnqueue(unsigned int *, unsigned int);
 
@@ -27,7 +27,7 @@ unsigned int FUN_001911a4(unsigned int *param_1,int param_2)
       return 0;
     }
     puVar1 = param_1;
-    FUN_0019102c(param_1,4);
+    objectCommandReserveWords(param_1,4);
     puVar1[3] = param_1[0x61];
     *(unsigned char *)(puVar1 + 1) = 0;
     if ((unsigned int *)param_1[0x5c] == (unsigned int *)0x0) {

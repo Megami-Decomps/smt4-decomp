@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003c3f1c(void);
+int findSkillMetadataById(void);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: findSkillMetadataById. */
 
 
 int FUN_003f391c(int param_1)
@@ -37,7 +37,7 @@ int FUN_003f391c(int param_1)
   temp_v3[7] = '\0';
   do {
     temp_v0 = (unsigned int)*(unsigned short *)(param_1 + temp_v1 * 2);
-    if ((temp_v0 != 0) && (FUN_003c3f1c(), (*(unsigned char *)(temp_v0 + 3) & 0x40) != 0)) {
+    if ((temp_v0 != 0) && (findSkillMetadataById(), (*(unsigned char *)(temp_v0 + 3) & 0x40) != 0)) {
       temp_v3[temp_v2] = (char)temp_v1;
       temp_v2 = temp_v2 + 1;
     }

@@ -1,29 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aa380` (_code @ 0x4aa380, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct BattleUiEntry {
+    u8 unk00[0x56]; // 0x00
+    u16 state;       // 0x56
+    u8 unk58[0xd4]; // 0x58
+};
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} void_stack;
+struct BattleUiEntries {
+    u8 unk0000[0x6b00]; // 0x0000
+    BattleUiEntry entries[5]; // 0x6b00
+};
 
-extern unsigned char g_btlUi; /* 0x57a9b8 */
+struct BattleUiGlobals {
+    u8 unk00[0x10]; // 0x00
+    BattleUiEntries* work; // 0x10
+};
 
+extern "C" BattleUiGlobals g_btlUi;
 
-void FUN_004aa380(void)
-
+// Clear the state of each of the five battle UI entries.
+extern "C" void FUN_004aa380()
 {
-  int temp_v0;
-  
-  temp_v0 = (*(int *)((unsigned char *)&g_btlUi + 0x10));
-  *(unsigned short *)((*(int *)((unsigned char *)&g_btlUi + 0x10)) + 0x6b56) = 0;
-  *(unsigned short *)(temp_v0 + 0x6c82) = 0;
-  *(unsigned short *)(temp_v0 + 0x6dae) = 0;
-  *(unsigned short *)(temp_v0 + 0x6eda) = 0;
-  *(unsigned short *)(temp_v0 + 0x7006) = 0;
-  return;
+    BattleUiEntries* work = g_btlUi.work;
+    for (s32 index = 0; index < 5; ++index) {
+        work->entries[index].state = 0;
+    }
 }
-
-} /* extern "C" */

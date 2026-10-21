@@ -21,7 +21,13 @@ struct GrTextureUnit {
     /* 0x14 */ u8 lodMin;
     /* 0x15 */ u8 lodMax;
     /* 0x16 */ u8 unk16[4];        /* low 24 bits of the first command word (unaligned) */
-    /* 0x1a */ u8 unk1a[6];
+    union {
+        /* 0x1a */ u8 unk1a[6];
+        struct {
+            u8 unk1a[2];
+            /* 0x1c */ u8 targetMode;
+        } targetView;
+    };
     /* 0x20 */ void *funcSource;   /* what nn_gr_CTR_Texture_MakeFuncCommand emits from */
 };
 

@@ -50,7 +50,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapEnemy; /* 0x5806d4 */
 extern unsigned int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f161c; /* 0x5f161c */
@@ -188,7 +188,7 @@ LAB_002b6ffc:
                 *(float *)(temp_v4 + 0x188) = temp_v18;
                 *(float *)(temp_v4 + 0x18c) = temp_v22;
                 *(float *)(temp_v4 + 400) = temp_v19;
-                temp_v9 = *(float *)(DAT_005806a4 + 0x50) - temp_v18;
+                temp_v9 = *(float *)(g_lmapView + 0x50) - temp_v18;
                 FUN_0050d8e4();
                 temp_v9 = temp_v9 * temp_v26 * (float)temp_v27;
                 temp_v10 = 0;

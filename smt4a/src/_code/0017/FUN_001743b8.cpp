@@ -5,7 +5,7 @@
 extern "C" {
 
 int listAppendNode(int, int);
-int FUN_0019102c(int, int);
+int objectCommandReserveWords(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
@@ -23,9 +23,9 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_1_stack;
 
-extern int FUN_00175678(void);
+extern int objectCommandQueueGet(void);
 /* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 
 
 void FUN_001743b8(int *param_1)
@@ -62,9 +62,9 @@ void FUN_001743b8(int *param_1)
     return;
   }
   if (*(char *)(temp_v2 + 0x10) != '\0') {
-    temp_v3 = FUN_00175678();
+    temp_v3 = objectCommandQueueGet();
     temp_v2 = temp_v3;
-    FUN_0019102c(temp_v3,5);
+    objectCommandReserveWords(temp_v3,5);
     *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v3 + 0x184);
     *(unsigned char *)(temp_v2 + 4) = 0xc;
     temp_v4 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
@@ -182,10 +182,10 @@ LAB_00174528:
     }
     (**(romwright_code **)(*param_1 + 0x30))(param_1);
     if ((*(char *)((int)param_1 + 0x9b) == '\0') || (param_1[0x1d] < param_1[0x1c])) {
-      temp_v2 = FUN_00175678();
+      temp_v2 = objectCommandQueueGet();
       if (temp_v1) {
         temp_v3 = temp_v2;
-        FUN_0019102c(temp_v2,6);
+        objectCommandReserveWords(temp_v2,6);
         *(unsigned int *)(temp_v3 + 0xc) = *(unsigned int *)(temp_v2 + 0x184);
         *(unsigned char *)(temp_v3 + 4) = 5;
         temp_v4 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
@@ -201,7 +201,7 @@ LAB_00174528:
       }
       else if (param_1[0x20] <= param_1[0x21]) {
         temp_v3 = temp_v2;
-        FUN_0019102c(temp_v2,6);
+        objectCommandReserveWords(temp_v2,6);
         *(unsigned int *)(temp_v3 + 0xc) = *(unsigned int *)(temp_v2 + 0x184);
         *(unsigned char *)(temp_v3 + 4) = 7;
         temp_v4 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
@@ -212,7 +212,7 @@ LAB_00174528:
       }
       if (*(char *)((int)param_1 + 0xa3) != '\0') {
         temp_v3 = temp_v2;
-        FUN_0019102c(temp_v2,6);
+        objectCommandReserveWords(temp_v2,6);
         *(unsigned int *)(temp_v3 + 0xc) = *(unsigned int *)(temp_v2 + 0x184);
         *(unsigned char *)(temp_v3 + 4) = 7;
         temp_v4 = (**(romwright_code **)(*param_1 + 0x20))(param_1);

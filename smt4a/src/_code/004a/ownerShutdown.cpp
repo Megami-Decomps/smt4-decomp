@@ -27,7 +27,7 @@ typedef struct Owner004a1d04 {
 } Owner004a1d04;
 
 void jobStop(u32 job, s32 flags);
-void FUN_004a6d5c(u8 *part);
+void indexedSlotsClear(u8 *part);
 
 /* Shuts the owner down: releases its child, clears its part, runs its stop slot and stops its job. */
 void ownerShutdown(Owner004a1d04 *owner)
@@ -38,7 +38,7 @@ void ownerShutdown(Owner004a1d04 *owner)
         child->vtbl->release(child);
         owner->child = NULL;
     }
-    FUN_004a6d5c(owner->part);
+    indexedSlotsClear(owner->part);
     owner->vtbl->stop(owner);
     jobStop(owner->job, 0);
 }

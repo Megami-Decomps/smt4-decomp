@@ -13,13 +13,13 @@ int FUN_002c85b0(...);
 int FUN_002f0384(...);
 int FUN_003343f0(...);
 int FUN_0033449c(...);
-int FUN_003c12d8(...);
+int saveLoadProcessCreate(...);
 int FUN_003fd7b4(...);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 int FUN_0045b538(...);
 
 typedef struct fn_0041fae8_arg0 fn_0041fae8_arg0;
@@ -48,14 +48,14 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_002f0384. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0033449c. */
-/* Supplied declaration required: FUN_003c12d8. */
+/* Supplied declaration required: saveLoadProcessCreate. */
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
-extern void *FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern void *modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0045b538. */
 
 
@@ -80,7 +80,7 @@ void FUN_0041fae8(fn_0041fae8_arg0 *param_1)
     FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\saveLoadUI\\SaveLoadUIBase.cpp",0x930);
     pvVar2 = (void *)0x0;
     if (temp_v0 != 0) {
-      pvVar2 = (void *)FUN_0040ac08();
+      pvVar2 = (void *)modelListInit();
     }
     param_1->field_0x58 = pvVar2;
     FUN_0040aa6c();
@@ -88,12 +88,12 @@ void FUN_0041fae8(fn_0041fae8_arg0 *param_1)
     FUN_0040aad4(param_1->field_0x58,0);
     FUN_0045b538(*(int *)((int)param_1->field_0x58 + 0xc) + 0xc);
     temp_v0 = *(int *)((int)param_1->field_0x58 + 4);
-    FUN_0040ace8(g_handleRegistry,temp_v0);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v0);
     FUN_003fe86c(temp_v0,0,2);
     FUN_003fd7b4(temp_v0);
     *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 1;
   }
-  FUN_003c12d8(param_1->field_0x2f4 + 1,1);
+  saveLoadProcessCreate(param_1->field_0x2f4 + 1,1);
   param_1->field_0xd = param_1->field_0x7;
   param_1->field_0x7 = 2;
   param_1->field_0x8 = 0;

@@ -5,16 +5,16 @@
 extern "C" {
 
 int navigationFinishReadyField(void);
-int FUN_002c8b60(void);
+int mapDepartClearExtra(void);
 int mapGimicReset(void);
 
 extern unsigned char DAT_00447518; /* 0x447518 */
 
 /* Supplied declaration required: navigationFinishReadyField. */
-/* Supplied declaration required: FUN_002c8b60. */
-extern int FUN_002d3ec0(void);
+/* Supplied declaration required: mapDepartClearExtra. */
+extern int mapModelsPollDeferredDestroy(void);
 /* Supplied declaration required: mapGimicReset. */
-extern int FUN_002f3af4(void);
+extern int mapGimicIsIdle(void);
 
 
 unsigned int FUN_00311048(void)
@@ -26,18 +26,18 @@ unsigned int FUN_00311048(void)
   if ((*(int *)((unsigned char *)&DAT_00447518 + 0x8)) != 0) {
     if ((*(int *)((unsigned char *)&DAT_00447518 + 0x8)) != 1) {
       if ((*(int *)((unsigned char *)&DAT_00447518 + 0x8)) != 2) {
-        if (((*(int *)((unsigned char *)&DAT_00447518 + 0x8)) == 3) && (temp_v0 = FUN_002d3ec0(), temp_v0 != 0)) {
+        if (((*(int *)((unsigned char *)&DAT_00447518 + 0x8)) == 3) && (temp_v0 = mapModelsPollDeferredDestroy(), temp_v0 != 0)) {
           (*(int *)((unsigned char *)&DAT_00447518 + 0x8)) = 0;
           return 1;
         }
       }
       else {
-        FUN_002c8b60();
+        mapDepartClearExtra();
         (*(int *)((unsigned char *)&DAT_00447518 + 0x8)) = 3;
       }
     }
     else {
-      temp_v0 = FUN_002f3af4();
+      temp_v0 = mapGimicIsIdle();
       if (temp_v0 != 0) {
         (*(int *)((unsigned char *)&DAT_00447518 + 0x8)) = 2;
       }

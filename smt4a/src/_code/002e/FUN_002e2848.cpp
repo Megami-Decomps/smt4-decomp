@@ -24,8 +24,8 @@ extern int FUN_002a4878(unsigned int);
 extern int FUN_002a4894(unsigned int);
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
-extern int FUN_002c2c4c(unsigned int);
-extern int FUN_002c2c68(unsigned int);
+extern int widgetSubCallIfVisible(unsigned int);
+extern int objectApplyIfUnblocked(unsigned int);
 extern short __aeabi_idivmod(int);
 
 
@@ -51,11 +51,11 @@ FUN_002e2848(unsigned int param_1,unsigned int param_2,int param_3,short param_4
       if (temp_v3 == 0) {
         return 0;
       }
-      temp_v1 = FUN_002c2c68(param_1);
+      temp_v1 = objectApplyIfUnblocked(param_1);
       temp_v0 = FUN_002618e0();
       temp_v2 = (int)(short)(temp_v0 - (short)((unsigned int)param_2 >> 0x10));
       if (param_7 != 0) {
-        temp_v2 = FUN_002c2c4c(param_1);
+        temp_v2 = widgetSubCallIfVisible(param_1);
         temp_v0 = FUN_002618c8();
         temp_v3 = (int)(short)(temp_v0 - (short)param_2);
         temp_v6 = temp_v3 == 0;
@@ -96,14 +96,14 @@ FUN_002e2848(unsigned int param_1,unsigned int param_2,int param_3,short param_4
       temp_v1 = FUN_002a4844();
       temp_v2 = FUN_002a4878(param_1);
       temp_v2 = temp_v2 + temp_v1 + 1;
-      temp_v1 = FUN_002c2c4c(param_1);
+      temp_v1 = widgetSubCallIfVisible(param_1);
       if (temp_v1 <= temp_v2) {
         return 1;
       }
       FUN_002a4914(param_1,temp_v2);
     }
     else {
-      temp_v2 = FUN_002c2c68(param_1);
+      temp_v2 = objectApplyIfUnblocked(param_1);
       if (temp_v2 <= temp_v1) {
         return 1;
       }

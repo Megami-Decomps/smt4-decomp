@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0024dd00(int, int, int, unsigned char *);
+int asdDebugLog(int, int, int, unsigned char *);
 int FUN_0024dd80(int);
 int padIsButtonRepeat(...);
 int padIsButtonPressed(...);
@@ -51,7 +51,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_0024dd00. */
+/* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: padIsButtonPressed. */
@@ -75,9 +75,9 @@ unsigned int FUN_00326fd8(void)
   float temp_v10;
   
   temp_v3 = 1;
-  FUN_0024dd00(8,8,0,&LAB_003272bc);
-  FUN_0024dd00(8,0x14,0,&LAB_003272d4);
-  FUN_0024dd00(8,0x20,0,&LAB_003272e8);
+  asdDebugLog(8,8,0,&LAB_003272bc);
+  asdDebugLog(8,0x14,0,&LAB_003272d4);
+  asdDebugLog(8,0x20,0,&LAB_003272e8);
   temp_v2 = padIsButtonRepeat(5);
   temp_v5 = 10.0f;
   if (temp_v2 == 0) {

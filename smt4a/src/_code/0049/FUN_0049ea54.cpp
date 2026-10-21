@@ -38,7 +38,7 @@ extern u32 dataTableGetCount(void *table);
 extern TableEntry *dataTableGetEntries(void);
 extern void asdTMTexLoadMainHeap(s32 group, s32 id);
 extern void FUN_00203b40(void *panel, u32 arg, s32 a, s32 b, s32 c, s32 d);
-extern void FUN_002e08b0(void *panel, s32 arg);
+extern void flagsSetOrClearBit(void *panel, s32 arg);
 extern s32 textureGetIndexedResource(s32 id);
 extern void FUN_003d2150(u32 id);
 extern s32 loadSlotIsLoaded(s32 id);
@@ -74,7 +74,7 @@ void FUN_0049ea54(Screen *screen)
     }
     FUN_0049de10(screen);
     FUN_00203b40(screen->panel, screen->unk094, 9, 1, 1, 1);
-    FUN_002e08b0(screen->panel, 0);
+    flagsSetOrClearBit(screen->panel, 0);
     screen->unk188 = 0;
     uiSpriteSelectAnim(screen->widgetA, 0);
     uiSpriteSelectAnim(screen->widgetB, 0);

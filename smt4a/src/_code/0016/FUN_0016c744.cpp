@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelCommandBlockRelease(void);
-int FUN_00167ba0(void);
+int cursorResetFromParam(void);
 int FUN_00177e6c(int, int);
 int asdModelCommitCommandRange(int, int);
 int FUN_0019eafc(void);
@@ -20,7 +20,7 @@ extern int DAT_005b3fe4; /* 0x5b3fe4 */
 extern int DAT_005b3fe8; /* 0x5b3fe8 */
 
 /* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: FUN_00167ba0. */
+/* Supplied declaration required: cursorResetFromParam. */
 /* Supplied declaration required: FUN_00177e6c. */
 /* Supplied declaration required: asdModelCommitCommandRange. */
 /* Supplied declaration required: FUN_0019eafc. */
@@ -42,7 +42,7 @@ void FUN_0016c744(int param_1)
   param_1 = param_1 + 0x138;
   FUN_00177e6c(param_1,temp_v0);
   asdModelCommitCommandRange(temp_v0,param_1);
-  FUN_00167ba0();
+  cursorResetFromParam();
   temp_v0 = DAT_005b3fe4;
   *(unsigned int *)(DAT_005b3fe4 + DAT_005b3fe8 * 4) = 0x210;
   *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf02bb;
@@ -56,7 +56,7 @@ void FUN_0016c744(int param_1)
   uStack_18 = 2;
   uStack_14 = 0xf0242;
   FUN_001b4128(&temp_v1,0x10,1);
-  FUN_00167ba0();
+  cursorResetFromParam();
   temp_v0 = DAT_005b3fe4;
   *(unsigned int *)(DAT_005b3fe4 + DAT_005b3fe8 * 4) = 1;
   *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0111;

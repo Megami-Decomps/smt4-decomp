@@ -11,8 +11,8 @@ typedef struct Row00394750 {
 } Row00394750;
 
 s32 jyoucyuGetTableEntry(s32 index);
-void FUN_002c1dd8(s32 value);
-void FUN_002c1d78(u32 value);
+void asdSoundSelectSlotB(s32 value);
+void asdSndEnsureCurrentSlotData(u32 value);
 
 extern Row00394750 DAT_0043988c[3]; /* 0x43988c */
 
@@ -35,8 +35,8 @@ void jyoucyuRowApply(u32 id)
                 if (jyoucyuGetTableEntry(1) != 0) {
                     return;
                 }
-                FUN_002c1dd8(2);
-                FUN_002c1d78(id);
+                asdSoundSelectSlotB(2);
+                asdSndEnsureCurrentSlotData(id);
                 return;
             }
         }

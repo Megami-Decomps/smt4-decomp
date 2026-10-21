@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0028cf30(...);
 int FUN_0028e9ec(int);
-int FUN_00292dd0(void);
+void battleSelectButtonHelpPreset(int);
 int FUN_00292f4c(void);
 int btlGetMainState(void);
 int FUN_00297b94(...);
@@ -28,7 +28,6 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0028cf30. */
 /* Supplied declaration required: FUN_0028e9ec. */
-/* Supplied declaration required: FUN_00292dd0. */
 /* Supplied declaration required: FUN_00292f4c. */
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
@@ -43,7 +42,7 @@ extern int FUN_0029ee54(unsigned int);
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern int FUN_002b898c(void);
+extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: __aeabi_memset4. */
@@ -149,7 +148,7 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
               buttonHelpGetMode();
               buttonHelpSetPreset();
             }
-            temp_v4 = FUN_002b898c();
+            temp_v4 = buttonHelpGetStatus();
             if (temp_v4 == 0x3d) {
               btlGetMainState();
               temp_v4 = FUN_00293230();
@@ -167,7 +166,7 @@ void FUN_00297f1c(int param_1,unsigned int param_2,int param_3,unsigned int para
                 FUN_00297b94(param_1,temp_v1,*(unsigned int *)(param_1 + 0x305c));
               }
             }
-            FUN_00292dd0();
+            battleSelectButtonHelpPreset(0);
             *(unsigned int *)(param_1 + 0x304c) = *(unsigned int *)(param_1 + 0x3048);
             *(unsigned int *)(param_1 + 0x3044) = 0;
             *(unsigned int *)(param_1 + 0x3048) = 0xc;

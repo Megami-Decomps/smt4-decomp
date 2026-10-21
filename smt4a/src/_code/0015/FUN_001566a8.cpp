@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int libc_strcat(unsigned char [64], unsigned char [76]);
 int asdSoundGetObjectCount(void);
-int FUN_00167f94(void);
+unsigned int asdLoadFileExists(const char *);
 int FUN_00168750(unsigned char [64], int, int, unsigned char *, unsigned char *);
 int libc_strcpy(int, unsigned char [64]);
 int rt_aeabi_memclr(...);
@@ -25,7 +25,6 @@ extern signed char DAT_00619972; /* 0x619972 */
 /* Supplied declaration required: libc_strcat. */
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdSoundGetObjectCount. */
-/* Supplied declaration required: FUN_00167f94. */
 /* Supplied declaration required: FUN_00168750. */
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
@@ -39,7 +38,6 @@ unsigned int FUN_001566a8(unsigned int param_1,unsigned int param_2,int param_3,
 /* irregular: irregular input(s): in_d0; 7 native warning(s); review required */
   int temp_v0;
   char *pcVar2;
-  unsigned char *puVar3;
   unsigned char *puVar4;
   unsigned int temp_v1;
   unsigned long long in_d0;
@@ -76,9 +74,7 @@ unsigned int FUN_001566a8(unsigned int param_1,unsigned int param_2,int param_3,
         if (puVar4 == (unsigned char *)0x0) {
           return 0xffffffff;
         }
-        puVar3 = temp_v2;
-        FUN_00167f94();
-        if (puVar3 == (unsigned char *)0x0) {
+        if (asdLoadFileExists((const char *)temp_v2) == 0) {
           return 0xffffffff;
         }
         *(unsigned int *)(temp_v0 + 0x6197f4) = 0;

@@ -1,28 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00145f04` (_code @ 0x145f04, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved argument registers differ; compiler folds the second bank's row adjustment into the base offset. */
+#include "shard/W6_W6Match5_StatisticsBanks.h"
 
 extern "C" {
+StatisticsBankPrefix *gameDataBlocksGetStats(void);
 
-extern int gameDataBlocksGetStats(void);
-
-
-int FUN_00145f04(int param_1,int param_2,int param_3)
-
+u32 *FUN_00145f04(s32 bank, s32 row, s32 column)
 {
-  int temp_v0;
-  
-  temp_v0 = gameDataBlocksGetStats();
-  if (param_1 == 0) {
-    return temp_v0 + ((param_2 - 1) * 7 + param_3) * 4 + 0x1c;
-  }
-  if (param_1 != 1) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = temp_v0 + ((param_2 * 2 - 2) + param_3) * 4 + 0x16c;
-  }
-  return temp_v0;
+    StatisticsBankPrefix *statistics = gameDataBlocksGetStats();
+    if (bank == 0)
+        return &statistics->primary[(row - 1) * 7 + column];
+    if (bank != 1)
+        return NULL;
+    return &statistics->secondary[row * 2 - 2 + column];
 }
-
-} /* extern "C" */
+}

@@ -2,12 +2,12 @@
 
 extern "C" {
 
-s32 FUN_003e4a00(void);
+s32 partyCountActiveSlots(void);
 
-/* Maps the state FUN_003e4a00 reports (2..7) to its id 201..206; anything else gives 200. */
+/* Maps the state partyCountActiveSlots reports (2..7) to its id 201..206; anything else gives 200. */
 u32 FUN_003f217c(void)
 {
-    switch ((s16)FUN_003e4a00()) {
+    switch ((s16)partyCountActiveSlots()) {
     case 2:
         return 201;
     case 3:

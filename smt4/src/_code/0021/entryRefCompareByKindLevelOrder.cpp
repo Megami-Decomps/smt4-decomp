@@ -9,15 +9,15 @@ typedef struct SortEntry {
 } SortEntry;
 
 extern SortEntry *FUN_002ae584(u32 id);
-extern s32 questEntryCheck(u32 id);
+extern s32 appCheckPurchaseRequirements(u32 id);
 
 /* Comparator: entries of kind 2 sort first; then by level and by order, both descending. */
 s32 entryRefCompareByKindLevelOrder(u32 *a, u32 *b)
 {
     SortEntry *entryA = FUN_002ae584(*a);
     SortEntry *entryB = FUN_002ae584(*b);
-    s32 kindA = questEntryCheck(*a);
-    s32 kindB = questEntryCheck(*b);
+    s32 kindA = appCheckPurchaseRequirements(*a);
+    s32 kindB = appCheckPurchaseRequirements(*b);
     s32 diff;
 
     if (kindA == 2) {

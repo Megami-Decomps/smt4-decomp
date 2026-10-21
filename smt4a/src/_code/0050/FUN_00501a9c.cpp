@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_7_stack;
 
-extern unsigned char DAT_005b448b; /* 0x5b448b */
+extern unsigned char g_asdCecModuleFlags; /* 0x5b448b */
 
 /* Supplied declaration required: FUN_0042d3d8. */
 /* Supplied declaration required: FUN_0042fd64. */
@@ -36,9 +36,9 @@ int FUN_00501a9c(unsigned int param_1,int param_2,unsigned int param_3,unsigned 
     }
     FUN_0042d3d8(1,0);
     temp_v1 = temp_v1 + 1;
-    (*(unsigned char *)((unsigned char *)&DAT_005b448b + 0x1)) = 1;
+    (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
   } while (temp_v1 < 3);
-  (*(unsigned char *)((unsigned char *)&DAT_005b448b + 0x1)) = 1;
+  (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
   return temp_v0;
 }
 

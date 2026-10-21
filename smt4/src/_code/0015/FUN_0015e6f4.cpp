@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0015e8c4(int, int, unsigned int, int);
 int FUN_002a1130(...);
 int libc_strcmp(int, unsigned int *);
-int FUN_002baa40(...);
+int resultPairInitialize(...);
 int FUN_002bad5c(int *);
 int jyoucyuGetTableEntry(int);
 
@@ -32,10 +32,10 @@ extern int g_aocMain; /* 0x432fc8 */
 #endif
 /* Supplied declaration required: FUN_0015e8c4. */
 /* Supplied declaration required: FUN_002a1130. */
-extern int FUN_002a12d8(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: libc_strcmp. */
 extern int FUN_002ad1e0(int);
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: FUN_002bad5c. */
 extern int FUN_002c3dfc(int);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -75,7 +75,7 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
       *(unsigned char *)(param_2 + 0x330) = 0;
       if (temp_v1 < 0) {
         FUN_002a1130(temp_v8,0);
-        FUN_002baa40(&temp_v2,temp_v1);
+        resultPairInitialize(&temp_v2,temp_v1);
         temp_v6 = *puVar3;
         uStack_68 = puVar3[1];
         *param_1 = temp_v8[0];
@@ -97,13 +97,13 @@ void FUN_0015e6f4(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
     temp_v3 = param_5;
     FUN_0015e8c4(temp_v0,0xe5c,param_6,2);
     puVar3 = temp_v9;
-    FUN_002baa40(puVar3,temp_v0);
+    resultPairInitialize(puVar3,temp_v0);
     temp_v7 = *puVar3;
     uStack_54 = puVar3[1];
-    temp_v1 = FUN_002a12d8((unsigned int *)&temp_v7);
+    temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v7);
     if (temp_v1 < 0) {
       FUN_002a1130(&temp_v5,0);
-      temp_v1 = FUN_002a12d8((unsigned int *)&temp_v7);
+      temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v7);
       temp_v8[0] = temp_v5;
       uStack_44 = uStack_64;
       uStack_40 = uStack_60;

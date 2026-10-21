@@ -8,7 +8,7 @@ int asdMemFree(unsigned int);
 int FUN_00422ef8(void);
 int FUN_00426140(void);
 int FUN_00512e38(void);
-int FUN_00513210(void);
+int valuePairClear(void);
 int FUN_00513620(void);
 int FUN_00513718(void);
 int mobiclipAllocatorReset(void);
@@ -36,7 +36,7 @@ extern unsigned int DAT_00617e30; /* 0x617e30 */
 /* Supplied declaration required: FUN_00422ef8. */
 /* Supplied declaration required: FUN_00426140. */
 /* Supplied declaration required: FUN_00512e38. */
-/* Supplied declaration required: FUN_00513210. */
+/* Supplied declaration required: valuePairClear. */
 /* Supplied declaration required: FUN_00513620. */
 /* Supplied declaration required: FUN_00513718. */
 /* Supplied declaration required: mobiclipAllocatorReset. */
@@ -53,7 +53,7 @@ void FUN_001f51ac(void)
   FUN_00422ef8();
   FUN_00426140();
   FUN_00513f6c();
-  FUN_00513210();
+  valuePairClear();
   FUN_00512e38();
   FUN_00513718();
   mobiclipAllocatorReset();

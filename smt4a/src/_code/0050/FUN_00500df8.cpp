@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00192de4(int, unsigned int *, int);
+int gxEmitFramebufferAccessMasks(int, unsigned int *, int);
 
-/* Supplied declaration required: FUN_00192de4. */
+/* Supplied declaration required: gxEmitFramebufferAccessMasks. */
 
 
 void FUN_00500df8(char *param_1,unsigned int *param_2,int param_3)
@@ -26,7 +26,7 @@ LAB_00500e64:
         if (param_3 == 0) {
           return;
         }
-        FUN_00192de4(*(int *)(param_1 + 4) + 0x7c,param_2 + 2,1);
+        gxEmitFramebufferAccessMasks(*(int *)(param_1 + 4) + 0x7c,param_2 + 2,1);
         return;
       }
     }
@@ -38,7 +38,7 @@ LAB_00500e64:
   if (param_3 == 0) {
     return;
   }
-  FUN_00192de4(*(int *)(param_1 + 4) + 0x7c,param_2 + 2,1);
+  gxEmitFramebufferAccessMasks(*(int *)(param_1 + 4) + 0x7c,param_2 + 2,1);
   return;
 }
 

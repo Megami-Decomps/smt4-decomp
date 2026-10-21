@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00411e8c(int, int);
 
 extern int btlGetMainState(void);
-extern int FUN_003e4a00(void);
+extern int partyCountActiveSlots(void);
 /* Supplied declaration required: FUN_00411e8c. */
 
 
@@ -36,7 +36,7 @@ void FUN_00411c04(int param_1,int param_2)
           *(unsigned int *)(temp_v1 + 0x4d80) = 0;
         }
         temp_v1 = param_1 + temp_v6 * 0x1c;
-        temp_v2 = FUN_003e4a00();
+        temp_v2 = partyCountActiveSlots();
         if (*(int *)(param_1 + 0x184) != 0) {
           puVar4 = (unsigned int *)((temp_v6 * 0xc - 0x90) + *(int *)(param_1 + 0x188) + temp_v2 * 0x90);
           temp_v4 = *puVar4;

@@ -1,35 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041a3ac` (_code @ 0x41a3ac, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: reset stores are rescheduled and the index/first-count pair does not combine into retail's STRD. */
+#include "shard/S1ModelEffect.h"
 
 extern "C" {
+extern const u8 _ZTV9Obj557d58[];
+void rt_aeabi_memclr(void *, u32);
+void FUN_0041a270(ModelEffects *);
 
-int rt_aeabi_memclr(unsigned int *, int);
-int FUN_0041a270(unsigned int *);
-
-extern unsigned char DAT_00557d60; /* 0x557d60 */
-
-/* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_0041a270. */
-
-
-unsigned int * FUN_0041a3ac(unsigned int *param_1,int param_2,unsigned int param_3)
-
+ModelEffects *FUN_0041a3ac(ModelEffects *effects, ModelEffectTable *table, u32 argument)
 {
-/* irregular: 2 native warning(s); review required */
-  *param_1 = (unsigned int)&DAT_00557d60;
-  param_1[1] = param_2;
-  param_1[2] = param_3;
-  param_1[3] = *(unsigned int *)(param_2 + 8);
-  param_1[4] = 0xffffffff;
-  param_1[5] = 0;
-  param_1[6] = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  rt_aeabi_memclr(param_1 + 5,8);
-  rt_aeabi_memclr(param_1 + 7,8);
-  FUN_0041a270(param_1);
-  return param_1;
+    effects->vtable = _ZTV9Obj557d58 + 8;
+    effects->table = table;
+    effects->setup.argument = argument;
+    effects->setup.count = table->count;
+    effects->modelId = 0xffffffff;
+    effects->filtered.count = 0;
+    effects->filtered.items = NULL;
+    effects->list.count = 0;
+    effects->list.items = NULL;
+    rt_aeabi_memclr(&effects->filtered, sizeof(effects->filtered));
+    rt_aeabi_memclr(&effects->list, sizeof(effects->list));
+    FUN_0041a270(effects);
+    return effects;
 }
-
-} /* extern "C" */
+}

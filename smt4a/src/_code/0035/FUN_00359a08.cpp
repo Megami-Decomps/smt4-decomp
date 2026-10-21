@@ -6,12 +6,12 @@ extern "C" {
 
 int textFormatBuffer(int *, unsigned char *);
 int dataTable04FindById(void);
-int FUN_0020d164(int *, unsigned int);
+int battleAttributeFormatName(int *, unsigned int);
 int FUN_00230c1c(int *, unsigned int);
-int FUN_002a1f60(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_002a48e0(int, int);
 int FUN_002a4964(int, int);
-int FUN_002c2c68(...);
+int objectApplyIfUnblocked(...);
 int FUN_003180c4(...);
 int flaggedEntrySetValueA(int, int);
 int FUN_0034a290(void);
@@ -30,12 +30,12 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 extern unsigned int FUN_0016a0e8(void);
 extern int idIsAbove400(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_0020d164. */
+/* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: FUN_00230c1c. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: FUN_002c2c68. */
+/* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int uiSearchPrimary(void);
@@ -75,7 +75,7 @@ void FUN_00359a08(int param_1)
     temp_v3 = 0;
   } while (temp_v5 < 8);
   temp_v5 = param_1 + 0x8db0;
-  temp_v0 = FUN_002c2c68();
+  temp_v0 = objectApplyIfUnblocked();
   if (temp_v3 < temp_v0) {
     FUN_002a48e0(temp_v5,0);
     FUN_002a4964(temp_v5,temp_v3);
@@ -94,7 +94,7 @@ void FUN_00359a08(int param_1)
   param_1 = param_1 + 0x8e14;
   temp_v0 = uiSearchPrimary();
   temp_v0 = temp_v0 - 2;
-  temp_v1 = FUN_002c2c68(param_1);
+  temp_v1 = objectApplyIfUnblocked(param_1);
   temp_v8 = SBORROW4(temp_v3,temp_v0);
   temp_v5 = temp_v3 - temp_v0;
   temp_v6 = 0;
@@ -126,7 +126,7 @@ void FUN_00359a08(int param_1)
     if (temp_v3 != 0) {
       temp_v4 = temp_v7;
       FUN_0034a290();
-      FUN_0020d164(&uStack_80,(*(unsigned int *)(temp_v4 + 0x44) & 0xffff) >> 0xb);
+      battleAttributeFormatName(&uStack_80,(*(unsigned int *)(temp_v4 + 0x44) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&uStack_80);
       textFormatBuffer(&uStack_80,&LAB_00359c6c);
       FUN_003180c4(0x25,&uStack_80);
@@ -134,7 +134,7 @@ void FUN_00359a08(int param_1)
     else {
       temp_v4 = temp_v7;
       dataTable04FindById();
-      FUN_0020d164(&uStack_80,(*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb);
+      battleAttributeFormatName(&uStack_80,(*(unsigned int *)(temp_v4 + 0x28) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&uStack_80);
       FUN_00230c1c(&uStack_80,(*(unsigned int *)(temp_v4 + 0x28) & 0x1ff) >> 5);
       FUN_003180c4(0x25,&uStack_80);
@@ -142,7 +142,7 @@ void FUN_00359a08(int param_1)
     uStack_80 = 3;
     uStack_7c = temp_v2;
     uStack_78 = temp_v7;
-    FUN_002a1f60(*(unsigned int *)(temp_v5 + 0x678),2,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v5 + 0x678),2,0xffffffff,0);
   }
   return;
 }

@@ -10,7 +10,7 @@ int btlTalkBustUpDestroy(void);
 int FUN_0026a958(int);
 int mdlPartsRelease(void);
 int FUN_00294f64(void);
-int FUN_00295ba4(int);
+int infoWinStartTimer(int);
 int FUN_0029b074(void);
 int scrScriptProcessDestroy(void);
 int asdMemFreeNonNull(int);
@@ -42,7 +42,7 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0026a958. */
 /* Supplied declaration required: mdlPartsRelease. */
 /* Supplied declaration required: FUN_00294f64. */
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 /* Supplied declaration required: FUN_0029b074. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMemFreeNonNull. */
@@ -192,7 +192,7 @@ void FUN_0020f04c(void)
   } while (temp_v0 < 0x2a);
   textureSlotsReleaseAll();
   btlTalkBustUpDestroy();
-  FUN_00295ba4(1);
+  infoWinStartTimer(1);
   temp_v0 = jobIsValid(*puVar1);
   if (temp_v0 != 0) {
     jobStop(*puVar1,0);

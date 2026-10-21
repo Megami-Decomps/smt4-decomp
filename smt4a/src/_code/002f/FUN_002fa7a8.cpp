@@ -14,7 +14,7 @@ int FUN_002ccde8(...);
 int flaggedEntrySetValueB(...);
 int FUN_004000a8(...);
 int FUN_00400164(...);
-int FUN_0047fbf0(...);
+int btlItemComputeValues(...);
 
 /* stack frame of param_1: 11 slot(s), 28 byte(s) */
 typedef struct {
@@ -44,7 +44,7 @@ extern int FUN_002a4878(int);
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_004000a8. */
 /* Supplied declaration required: FUN_00400164. */
-/* Supplied declaration required: FUN_0047fbf0. */
+/* Supplied declaration required: btlItemComputeValues. */
 
 
 void FUN_002fa7a8(int param_1)
@@ -226,12 +226,12 @@ void FUN_002fa7a8(int param_1)
         temp_v15[0] = 0;
         temp_v13[0] = 0;
         FUN_002ccde8(param_1,temp_v15,temp_v13);
-        FUN_0047fbf0(0xffffffff,(int)temp_v13[0],temp_v5,temp_v6);
+        btlItemComputeValues(0xffffffff,(int)temp_v13[0],temp_v5,temp_v6);
         temp_v5 = 1;
         do {
           temp_v6 = gameGetSlotTable();
           temp_v3 = param_1 + temp_v5 * 4;
-          FUN_0047fbf0((int)*(char *)(temp_v6 + temp_v5 + 0x1c9f),(int)temp_v13[0],temp_v3 + 0x3c88,
+          btlItemComputeValues((int)*(char *)(temp_v6 + temp_v5 + 0x1c9f),(int)temp_v13[0],temp_v3 + 0x3c88,
                        temp_v3 + 0x3c98);
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 4);
@@ -241,12 +241,12 @@ void FUN_002fa7a8(int param_1)
         temp_v10[0] = 0;
         temp_v11[0] = 0;
         FUN_002ccde8(param_1,temp_v10,temp_v11);
-        FUN_0047fbf0(0xffffffff,(int)temp_v11[0],temp_v5,temp_v6);
+        btlItemComputeValues(0xffffffff,(int)temp_v11[0],temp_v5,temp_v6);
         temp_v5 = 1;
         do {
           temp_v6 = gameGetSlotTable();
           temp_v3 = param_1 + temp_v5 * 4;
-          FUN_0047fbf0((int)*(char *)(temp_v6 + temp_v5 + 0x1c9f),(int)temp_v11[0],temp_v3 + 0x3c88,
+          btlItemComputeValues((int)*(char *)(temp_v6 + temp_v5 + 0x1c9f),(int)temp_v11[0],temp_v3 + 0x3c88,
                        temp_v3 + 0x3c98);
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < 4);
@@ -259,7 +259,7 @@ void FUN_002fa7a8(int param_1)
         if (temp_v3 != 0) {
           temp_v5 = gameGetSlotTable();
           temp_v6 = param_1 + temp_v3 * 4;
-          FUN_0047fbf0((int)*(char *)(temp_v5 + temp_v3 + 0x1c9f),(int)temp_v10[0],temp_v6 + 0x3c88,
+          btlItemComputeValues((int)*(char *)(temp_v5 + temp_v3 + 0x1c9f),(int)temp_v10[0],temp_v6 + 0x3c88,
                        temp_v6 + 0x3c98);
           temp_v5 = gameGetSlotTable();
           if (*(char *)(temp_v5 + temp_v3 + 0x1c9f) < '\0') {
@@ -267,7 +267,7 @@ void FUN_002fa7a8(int param_1)
           }
         }
         else {
-          FUN_0047fbf0(0xffffffff,(int)temp_v10[0],temp_v5,temp_v6);
+          btlItemComputeValues(0xffffffff,(int)temp_v10[0],temp_v5,temp_v6);
         }
       }
       temp_v5 = -1;

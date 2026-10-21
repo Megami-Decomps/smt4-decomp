@@ -34,7 +34,7 @@ extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
 extern unsigned int dataTableGetEntry24Byte0(unsigned int);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 
 
 void FUN_002aa038(int param_1,int param_2)
@@ -89,7 +89,7 @@ void FUN_002aa038(int param_1,int param_2)
               (((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) * temp_v7 >> 0xc);
     }
     FUN_001835b4(2,0x1a,0xb1,param_1 + temp_v11,param_2 + temp_v5,0x9c);
-    temp_v7 = FUN_002c2c68(temp_v0 + 0x560);
+    temp_v7 = objectApplyIfUnblocked(temp_v0 + 0x560);
     temp_v8 = temp_v13 + temp_v3;
     if (temp_v8 < temp_v7) {
       temp_v6 = FUN_001834a4(0x1a,0xb2);

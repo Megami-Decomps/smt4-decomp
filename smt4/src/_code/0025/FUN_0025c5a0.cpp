@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
 extern int asdLoadFileGetUseRawPaths(void);
-extern unsigned int FUN_002c3124(unsigned int, int *, unsigned int);
+extern unsigned int fileLoadSync(unsigned int, int *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -37,7 +37,7 @@ void FUN_0025c5a0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     if (*(int *)(temp_v0 + 0x493830) != 0) {
       temp_v1 = asdLoadFileGetUseRawPaths();
       asdLoadFileSetUseRawPaths(1);
-      temp_v2 = FUN_002c3124(*(unsigned int *)(temp_v0 + 0x49382c),&temp_v3,0);
+      temp_v2 = fileLoadSync(*(unsigned int *)(temp_v0 + 0x49382c),&temp_v3,0);
       if (*(int *)(temp_v0 + 0x493834) == temp_v3) {
         rt_memcpy(*(unsigned int *)(temp_v0 + 0x493830),temp_v2);
         asdMemFree(temp_v2);

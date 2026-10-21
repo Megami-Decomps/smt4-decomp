@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int FUN_002f0384(int);
 int FUN_0037e0b8(...);
 int FUN_0038b57c(int);
 int FUN_003fd7b4(unsigned int);
 int FUN_0040aad4(int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 int FUN_004954e8(int);
 int FUN_004964e0(int, int);
 int FUN_0049706c(int);
-int FUN_00498994(int);
+int messageChoiceShowCurrent(int);
 int FUN_00498de0(...);
 int FUN_0049af90(int);
 int sendEvent100020F(void);
@@ -32,7 +32,7 @@ extern unsigned int DAT_00588f6c; /* 0x588f6c */
 extern unsigned int DAT_00588f70; /* 0x588f70 */
 extern unsigned int DAT_00588f74; /* 0x588f74 */
 
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern int gameFlagIsSet(unsigned int);
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002f0384. */
@@ -42,11 +42,11 @@ extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(void);
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: FUN_0049706c. */
-/* Supplied declaration required: FUN_00498994. */
+/* Supplied declaration required: messageChoiceShowCurrent. */
 /* Supplied declaration required: FUN_00498de0. */
 /* Supplied declaration required: FUN_0049af90. */
 /* Supplied declaration required: sendEvent100020F. */
@@ -78,7 +78,7 @@ void FUN_00497290(int param_1)
       if (*(int *)(*(int *)(param_1 + 0x16028) + 4) == 0) {
         FUN_0040aad4(*(int *)(param_1 + 0x16028),0);
         temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x16028) + 4);
-        FUN_0040ace8(g_handleRegistry,temp_v1);
+        handleRegistryRegisterObject(g_handleRegistry,temp_v1);
         FUN_003fd7b4(temp_v1);
       }
     }
@@ -96,7 +96,7 @@ void FUN_00497290(int param_1)
     }
   }
   FUN_004954e8(param_1);
-  FUN_00498994(param_1);
+  messageChoiceShowCurrent(param_1);
   temp_v0 = inputIsQuestRepeatRight();
   if ((temp_v0 == 0) && (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v0 != 6)) {
     temp_v0 = FUN_004d0494();
@@ -190,7 +190,7 @@ void FUN_00497290(int param_1)
     if (*(int *)(param_1 + 0xb40) == 5) {
       FUN_0038b57c(2);
     }
-    FUN_00184528(param_1 + 0x3cc,1);
+    uiSpriteBankApplyPreset(param_1 + 0x3cc,1);
     sendEvent100020F();
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
     *(unsigned int *)(param_1 + 4) = 0x13;

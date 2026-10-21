@@ -44,7 +44,7 @@ extern unsigned int *g_clearSave; /* 0x43de80 */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002c58c8. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 
 
 void FUN_001e121c(int param_1)
@@ -68,9 +68,9 @@ void FUN_001e121c(int param_1)
   FUN_002898e4();
   buttonHelpCreate();
   FUN_00289880();
-  temp_v0 = FUN_002c5c04(&LAB_001e139c);
+  temp_v0 = asdLoadFileSyncDefault(&LAB_001e139c);
   puVar1[0x22] = temp_v0;
-  temp_v0 = FUN_002c5c04(&LAB_001e13b4);
+  temp_v0 = asdLoadFileSyncDefault(&LAB_001e13b4);
   puVar1[0x24] = temp_v0;
   temp_v1 = puVar1[0x22];
   FUN_00297060(temp_v1,temp_v0);

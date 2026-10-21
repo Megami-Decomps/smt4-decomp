@@ -4,7 +4,7 @@ extern "C" {
 
 int scrGetArg(...);
 int mapCameraLoad(u32 a, u32 b);
-int FUN_002e8530(void);
+int modelSlotAttachObjectChild(void);
 
 u32 FUN_002fe938(void)
 {
@@ -12,7 +12,7 @@ u32 FUN_002fe938(void)
     u32 a = scrGetArg(0);
 
     mapCameraLoad(a, b);
-    FUN_002e8530();
+    modelSlotAttachObjectChild();
     return 1;
 }
 

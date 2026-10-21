@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdTMTexTableReleaseNode(unsigned int);
-int FUN_0019c720(int, int, unsigned int);
+int uiSpriteReplaceTextureEntry(int, int, unsigned int);
 int FUN_001a6568(int, unsigned int, unsigned int, int);
 int asdTMTexLoadMainHeap(void);
 int FUN_001ad1ac(int, unsigned int);
@@ -19,8 +19,8 @@ extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_0019c720. */
-extern int FUN_001a6508(int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: uiSpriteReplaceTextureEntry. */
+extern int aocRunByName(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_001ad1ac. */
@@ -45,7 +45,7 @@ unsigned int FUN_0026c568(void)
   temp_v0 = jobGetWork();
   temp_v1 = 0;
   if ((*(char *)(temp_v0 + 0x7c) != '\0') && (temp_v1 = FUN_00162ea4(), temp_v1 == 0)) {
-    temp_v1 = FUN_001a6508(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),1)
+    temp_v1 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v0 + 0x10),*(unsigned int *)(temp_v0 + 0x14),1)
     ;
     if (temp_v1 != 0) {
       temp_v1 = g_aocSystem;
@@ -68,7 +68,7 @@ unsigned int FUN_0026c568(void)
     temp_v1 = *(int *)(temp_v0 + 0xc);
   }
   if (temp_v2 != -1 && temp_v1 != 0) {
-    FUN_0019c720(temp_v0,temp_v2,0xffffffff);
+    uiSpriteReplaceTextureEntry(temp_v0,temp_v2,0xffffffff);
     *(unsigned int *)(temp_v0 + 0x18) = 0xffffffff;
   }
   temp_v6 = 0.0f;

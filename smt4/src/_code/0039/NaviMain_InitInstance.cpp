@@ -5,7 +5,7 @@
 extern "C" {
 
 int rectangleInitializeSelection(unsigned char *, int, int, int);
-int FUN_0023346c(unsigned char *);
+int uiInitializeEightTimerSet(unsigned char *);
 int memFill8(unsigned char *, int);
 int timerStart(...);
 int FUN_002bd954(unsigned char *, int, int, unsigned char *, int);
@@ -15,7 +15,7 @@ int rt_memclr(unsigned char *, int);
 int asdTMTexTableLoadTmx(int, int);
 int FUN_003eb068(unsigned char *);
 int NaviMain_InitCallbacks(unsigned char *);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
+int drawParameterBlockClear(void);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern unsigned char DAT_00404a78; /* 0x404a78 */
 extern unsigned char DAT_00404a9c; /* 0x404a9c */
 
 /* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: FUN_0023346c. */
+/* Supplied declaration required: uiInitializeEightTimerSet. */
 /* Supplied declaration required: memFill8. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
@@ -44,7 +44,7 @@ extern int gameGetMapBlock(void);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_003eb068. */
 /* Supplied declaration required: NaviMain_InitCallbacks. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void NaviMain_InitInstance(unsigned char *param_1)
@@ -70,7 +70,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
   *(unsigned int *)(param_1 + 8) = 0;
   FUN_003eb068(param_1 + 0x56);
   puVar2 = param_1 + 0x5f8;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
+  drawParameterBlockClear();
   paramsInit(puVar2,&DAT_00404a24,0x54,&DAT_00404a78,0x24,0,0,0,0,&DAT_00404a9c,0x8c);
   temp_v1 = 0;
   do {
@@ -78,7 +78,7 @@ void NaviMain_InitInstance(unsigned char *param_1)
     timerStart(param_1 + temp_v1 * 0x8c + 0x618,4,0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 5);
-  FUN_0023346c(param_1 + 0x178);
+  uiInitializeEightTimerSet(param_1 + 0x178);
   *(unsigned int *)(param_1 + 0xb84) = 0x78;
   *(unsigned int *)(param_1 + 0xb80) = 0xa0;
   *(unsigned int *)(param_1 + 0xb7c) = 0;

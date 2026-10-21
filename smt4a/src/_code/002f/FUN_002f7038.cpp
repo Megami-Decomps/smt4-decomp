@@ -19,7 +19,7 @@ extern unsigned char LAB_0012359f; /* 0x12359f */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e9c64. */
@@ -40,7 +40,7 @@ unsigned long long FUN_002f7038(unsigned int param_1,unsigned int param_2,unsign
   uStack_10 = param_3;
   temp_v1 = param_3;
   FUN_002e9c64(param_2,&LAB_0012359f,&temp_v1,0);
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
   _ZN9Obj55b28cD1Ev(&uStack_18);
   return romwright_piece_4_4(uStack_14,uStack_18);

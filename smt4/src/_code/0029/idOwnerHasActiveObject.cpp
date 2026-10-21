@@ -12,7 +12,7 @@ typedef struct IdObject {
     /* 0x35 */ u8 active;
 } IdObject;
 
-extern IdObject *FUN_00283e48(u32 id);
+extern IdObject *passiveSkillLookupRecord(u32 id);
 
 /* Returns 1 when any of the owner's eight ids resolves to an active object. */
 u32 idOwnerHasActiveObject(IdOwner *owner)
@@ -21,7 +21,7 @@ u32 idOwnerHasActiveObject(IdOwner *owner)
 
     for (i = 0; i < 8; i++) {
         if (owner->ids[i] != 0) {
-            IdObject *object = FUN_00283e48(owner->ids[i]);
+            IdObject *object = passiveSkillLookupRecord(owner->ids[i]);
 
             if (object != NULL && object->active != 0) {
                 return 1;

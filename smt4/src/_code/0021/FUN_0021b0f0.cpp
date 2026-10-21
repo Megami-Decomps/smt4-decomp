@@ -36,7 +36,7 @@ extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Supplied declaration required: FUN_001e27f8. */
-extern int FUN_00211804(unsigned int *, unsigned int *, unsigned int *, unsigned char *);
+extern int mapCollisionGetStoredVectors(unsigned int *, unsigned int *, unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 extern int gameGetMapBlock(void);
@@ -79,7 +79,7 @@ void FUN_0021b0f0(void)
   else if (DAT_0049f920 == 3) {
     return;
   }
-  temp_v0 = FUN_00211804((unsigned int *)&temp_v12,(unsigned int *)&temp_v3,(unsigned int *)&temp_v9,temp_v21);
+  temp_v0 = mapCollisionGetStoredVectors((unsigned int *)&temp_v12,(unsigned int *)&temp_v3,(unsigned int *)&temp_v9,temp_v21);
   if (temp_v0 != 0) {
     temp_v6 = temp_v12;
     temp_v15 = temp_v13;

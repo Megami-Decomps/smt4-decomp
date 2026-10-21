@@ -5,8 +5,8 @@
 extern "C" {
 
 extern int campIsState85(void);
-extern int FUN_00162880(void);
-extern int FUN_00167e54(void);
+extern int engineCleanupIsDone(void);
+extern int aocJobIsValid(void);
 extern int gameFlagIsSet(unsigned int);
 extern int FUN_00270a70(void);
 extern int FUN_00284d94(void);
@@ -56,9 +56,9 @@ unsigned int FUN_0039a7ac(int param_1)
     if ((temp_v1 != 0) &&
        (((temp_v1 = gameFlagIsSet(0xc), temp_v1 == 0 || (temp_v1 = gameFlagIsSet(0x10), temp_v1 != 0)) &&
         (temp_v1 = gameFlagIsSet(0x11), temp_v1 == 0)))) {
-      temp_v1 = FUN_00167e54();
+      temp_v1 = aocJobIsValid();
       if (temp_v1 != 0) {
-        temp_v1 = FUN_00162880();
+        temp_v1 = engineCleanupIsDone();
 joined_r0x0039a964:
         if (temp_v1 == 0) goto LAB_0039a970;
       }

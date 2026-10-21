@@ -6,7 +6,7 @@ extern "C" {
 
 int mathInterpolateTimed(...);
 int FUN_00212204(int);
-int FUN_00226724(...);
+int lerpIntSplitClamped(...);
 
 extern int g_eventEffect; /* 0x57f3b4 */
 extern unsigned int DAT_0057f3d0; /* 0x57f3d0 */
@@ -17,7 +17,7 @@ extern int FUN_00162ea4(void);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 extern int FUN_00203d74(void);
 /* Supplied declaration required: FUN_00212204. */
-/* Supplied declaration required: FUN_00226724. */
+/* Supplied declaration required: lerpIntSplitClamped. */
 
 
 unsigned int FUN_0031c794(void)
@@ -92,36 +92,36 @@ unsigned int FUN_0031c794(void)
     else {
       temp_v4 = *(int *)(g_eventEffect + 0x10) - 0xf;
       if (temp_v4 < 0x79) {
-        temp_v2 = FUN_00226724(0x28,0xffffff4c,0x78,temp_v4);
+        temp_v2 = lerpIntSplitClamped(0x28,0xffffff4c,0x78,temp_v4);
         *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
       }
       temp_v4 = *(int *)(temp_v0 + 0x10) - 0x88;
       if (temp_v4 < 7) {
-        temp_v2 = FUN_00226724(0xffffff4c,0x28,6,temp_v4);
+        temp_v2 = lerpIntSplitClamped(0xffffff4c,0x28,6,temp_v4);
         *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
       }
       temp_v4 = *(int *)(temp_v0 + 0x10) - 0x8f;
       if (temp_v4 < 8) {
-        temp_v2 = FUN_00226724(0x28,0xffffff4c,7,temp_v4);
+        temp_v2 = lerpIntSplitClamped(0x28,0xffffff4c,7,temp_v4);
         *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
       }
       temp_v4 = *(int *)(temp_v0 + 0x10) - 0xc3;
       if (temp_v4 < 5) {
-        temp_v2 = FUN_00226724(0xffffff4c,0x28,4,temp_v4);
+        temp_v2 = lerpIntSplitClamped(0xffffff4c,0x28,4,temp_v4);
         *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
       }
       temp_v4 = *(int *)(temp_v0 + 0x10) - 200;
       if (temp_v4 < 7) {
-        temp_v2 = FUN_00226724(0x28,0xffffff4c,6,temp_v4);
+        temp_v2 = lerpIntSplitClamped(0x28,0xffffff4c,6,temp_v4);
         *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
       }
       temp_v4 = *(int *)(temp_v0 + 0x10) - 0xcf;
       if (temp_v4 < 5) {
-        temp_v2 = FUN_00226724(0xffffff4c,0x28,4,temp_v4);
+        temp_v2 = lerpIntSplitClamped(0xffffff4c,0x28,4,temp_v4);
         *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
       }
       if (*(int *)(temp_v0 + 0x10) >= 0xd4) {
-        temp_v2 = FUN_00226724(0x28,0xffffff4c,0x2d,*(int *)(temp_v0 + 0x10) - 0xd4);
+        temp_v2 = lerpIntSplitClamped(0x28,0xffffff4c,0x2d,*(int *)(temp_v0 + 0x10) - 0xd4);
         *(unsigned int *)(temp_v0 + 0xc) = temp_v2;
       }
       temp_v2 = 0x3f19999a;
@@ -141,7 +141,7 @@ unsigned int FUN_0031c794(void)
       temp_v1 = FUN_00203d74();
       if (temp_v1 != 0) {
         *(unsigned char *)(temp_v0 + 0x19) = 1;
-        temp_v9 = FUN_00226724(0,10,0xdc,0x28 - *(int *)(temp_v0 + 0xc));
+        temp_v9 = lerpIntSplitClamped(0,10,0xdc,0x28 - *(int *)(temp_v0 + 0xc));
         *(unsigned int *)(temp_v0 + 0x10) = temp_v9;
       }
     }

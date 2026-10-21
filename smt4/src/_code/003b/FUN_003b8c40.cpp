@@ -18,17 +18,17 @@ extern unsigned char LAB_003b8e28; /* 0x3b8e28 */
 extern unsigned char LAB_003b8e40; /* 0x3b8e40 */
 extern int g_aocMain; /* 0x432fc8 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022b064. */
 extern int FUN_0022b14c(int);
-extern unsigned short FUN_0023360c(int);
+extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 /* Supplied declaration required: tableGroupFindEntryIndex. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 
 
 void FUN_003b8c40(int param_1)
@@ -41,10 +41,10 @@ void FUN_003b8c40(int param_1)
   unsigned int temp_v3;
   
   temp_v1 = FUN_0022b14c(param_1 + 0x9c);
-  temp_v2 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd74));
+  temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd74));
   if ((temp_v2 == 2) && (temp_v1 != 0)) {
     FUN_0022b064(param_1);
-    temp_v0 = FUN_0023360c(param_1 + 0x9c);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x9c);
     *(unsigned short *)(param_1 + 0x4c) = temp_v0;
     if (*(char *)(g_aocMain + 0xc1) == '\0') {
       temp_v1 = *(int *)(param_1 + 0xdb0);
@@ -61,9 +61,9 @@ void FUN_003b8c40(int param_1)
         if (temp_v1 == 3) {
           *(unsigned int *)(param_1 + 0x28) = 0xb;
           *(unsigned int *)(param_1 + 0x2c) = 0;
-          temp_v3 = FUN_002c5c04(&LAB_003b8e14);
+          temp_v3 = asdLoadFileSyncDefault(&LAB_003b8e14);
           *(unsigned int *)(param_1 + 0xda0) = temp_v3;
-          temp_v3 = FUN_002c5c04(&LAB_003b8e28);
+          temp_v3 = asdLoadFileSyncDefault(&LAB_003b8e28);
           *(unsigned int *)(param_1 + 0xda4) = temp_v3;
           temp_v1 = *(int *)(param_1 + 0xda0);
           FUN_00297060(temp_v1,temp_v3);

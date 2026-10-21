@@ -16,8 +16,8 @@ int FUN_00296934(void);
 int FUN_0029b074(void);
 int resultCreate(int);
 int FUN_0029bbc8(void);
-int FUN_0029bcf0(int);
-int FUN_0029c3c0(...);
+int partyFindActiveSlotById(int);
+int slotSetRequest(...);
 int FUN_0029ee6c(int, int);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(int);
@@ -50,7 +50,7 @@ extern unsigned char LAB_00382684; /* 0x382684 */
 extern unsigned char LAB_00382694; /* 0x382694 */
 extern char s_e022_02_0044db24[8]; /* 0x44db24 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern unsigned int FUN_00223ca0(void);
 /* Supplied declaration required: FUN_0023547c. */
 /* Supplied declaration required: FUN_00235554. */
@@ -60,20 +60,20 @@ extern int FUN_00250ec0(unsigned int);
 /* Supplied declaration required: FUN_00269dc8. */
 /* Supplied declaration required: buttonHelpResetSlots. */
 extern int FUN_0026b564(void);
-extern int FUN_00282b28(void);
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287528. */
 extern int FUN_00287894(unsigned short);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0028eeb8. */
 /* Supplied declaration required: FUN_00296934. */
 extern int idIsAtLeast350(unsigned int);
-extern int FUN_00298e20(unsigned int);
+extern int questIsCompleted(unsigned int);
 extern int FUN_00298fa0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029b074. */
 /* Supplied declaration required: resultCreate. */
 /* Supplied declaration required: FUN_0029bbc8. */
-/* Supplied declaration required: FUN_0029bcf0. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: partyFindActiveSlotById. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b8660(void);
@@ -179,7 +179,7 @@ LAB_003822fc:
     temp_v4 = 10;
     break;
   case 1:
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0x171]);
     if (temp_v2 != 2) {
       return;
     }
@@ -221,7 +221,7 @@ LAB_003822fc:
     param_1[2] = 0;
     return;
   case 6:
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0x171]);
     if (temp_v2 != 2) {
       return;
     }
@@ -238,7 +238,7 @@ LAB_003822fc:
       temp_v3 = temp_v4 + temp_v2 * 8;
       if (*(short *)(temp_v3 + 0x16c) != 1) {
         if (*(short *)(temp_v3 + 0x16c) == 2) {
-          FUN_0029bcf0(*(unsigned short *)(temp_v3 + 0x16e));
+          partyFindActiveSlotById(*(unsigned short *)(temp_v3 + 0x16e));
           FUN_0029bbc8();
         }
       }
@@ -291,13 +291,13 @@ LAB_003822fc:
     temp_v4 = 8;
     break;
   case 8:
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0x171]);
     if (temp_v2 != 2) {
       return;
     }
-    temp_v2 = FUN_00298e20(0x6f);
-    if (((temp_v2 != 0) && (temp_v2 = FUN_00298e20(0xd4), temp_v2 != 0)) &&
-       (temp_v2 = FUN_00298e20(0xd5), temp_v2 != 0)) {
+    temp_v2 = questIsCompleted(0x6f);
+    if (((temp_v2 != 0) && (temp_v2 = questIsCompleted(0xd4), temp_v2 != 0)) &&
+       (temp_v2 = questIsCompleted(0xd5), temp_v2 != 0)) {
       gameFlagSetValue(0x669,1);
     }
     FUN_00287528(0);
@@ -307,9 +307,9 @@ LAB_003822fc:
       if ((unsigned short)(unsigned char)param_1[6] == *(unsigned short *)(temp_v2 + 0x44db3a)) {
         if (*(short *)(temp_v2 + 0x44db36) != 0) {
           if (*(short *)(temp_v2 + 0x44db36) == -1) {
-            temp_v3 = FUN_00298e20(0x65);
-            if ((temp_v3 == 0) || (temp_v3 = FUN_00298e20(0x66), temp_v3 == 0)) goto LAB_003827bc;
-            temp_v3 = FUN_00298e20(0x67);
+            temp_v3 = questIsCompleted(0x65);
+            if ((temp_v3 == 0) || (temp_v3 = questIsCompleted(0x66), temp_v3 == 0)) goto LAB_003827bc;
+            temp_v3 = questIsCompleted(0x67);
           }
           else {
             temp_v3 = gameFlagIsSet();
@@ -319,8 +319,8 @@ LAB_003822fc:
         if ((*(short *)(temp_v2 + 0x44db38) == 0) || (temp_v3 = gameFlagIsSet(), temp_v3 == 0)) {
           *param_1 = *param_1 | 0x20000;
           param_1[5] = (unsigned int)(s_e022_02_0044db24 + temp_v2);
-          FUN_0029c3c0(0,10,0xff);
-          FUN_0029c3c0(1,10,0xff);
+          slotSetRequest(0,10,0xff);
+          slotSetRequest(1,10,0xff);
           buttonHelpResetSlots();
           temp_v4 = 9;
           param_1[2] = temp_v4;
@@ -333,7 +333,7 @@ LAB_003827bc:
     temp_v4 = 0xb;
     break;
   case 9:
-    temp_v2 = FUN_00282b28();
+    temp_v2 = screenFadeIsBusy();
     if (temp_v2 != 0) {
       return;
     }
@@ -345,7 +345,7 @@ LAB_003827bc:
     param_1[2] = 0;
     return;
   case 10:
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)param_1[0x171]);
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0x171]);
     if (temp_v2 != 2) {
       return;
     }

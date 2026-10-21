@@ -9,10 +9,10 @@ typedef struct Record {
 
 extern s32 scrGetCommandFrame(void);
 extern Record *FUN_00192550(u32 id);
-extern s32 FUN_0036b6cc(void);
+extern s32 arousalSkillOpen(void);
 extern s32 sceneHolderUpdate(void);
 
-/* Script command: on the first frame starts FUN_0036b6cc when record 0x7B6 has a count; then reports whether sceneHolderUpdate is done. */
+/* Script command: on the first frame starts arousalSkillOpen when record 0x7B6 has a count; then reports whether sceneHolderUpdate is done. */
 u32 scrCommRecordProgressWait(void)
 {
     if (scrGetCommandFrame() == 0) {
@@ -21,7 +21,7 @@ u32 scrCommRecordProgressWait(void)
         if (record == NULL || record->count == 0) {
             return 1;
         }
-        FUN_0036b6cc();
+        arousalSkillOpen();
     }
     if (sceneHolderUpdate() != 0) {
         return 1;

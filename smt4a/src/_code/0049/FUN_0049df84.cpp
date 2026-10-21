@@ -13,7 +13,7 @@ int asdTMTexLoadMainHeap(int, int);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
 int FUN_00212724(void);
 int FUN_00228b04(int, int);
-int FUN_002e08b0(int, int);
+int flagsSetOrClearBit(int, int);
 int FUN_003450d4(int, unsigned int, int, int, int, int, unsigned char [16], int, int);
 int FUN_003fd690(int, int);
 int FUN_0049d140(...);
@@ -41,7 +41,7 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 extern unsigned int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002e08b0. */
+/* Supplied declaration required: flagsSetOrClearBit. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: FUN_003fd690. */
 extern int flagsAtGetBit1(unsigned short);
@@ -91,7 +91,7 @@ void FUN_0049df84(int param_1)
       }
       FUN_0049de10(param_1);
       FUN_00203b40(param_1 + 0x124,*(unsigned int *)(param_1 + 0x94),9,1,1,1);
-      FUN_002e08b0(param_1 + 0x124,0);
+      flagsSetOrClearBit(param_1 + 0x124,0);
       *(unsigned int *)(param_1 + 0x188) = 0;
       temp_v2 = flagsAtGetBit1(**(unsigned short **)(param_1 + 0x84));
       if (temp_v2 != 0) {

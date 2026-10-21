@@ -31,7 +31,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: FUN_00340edc. */
 /* Supplied declaration required: FUN_003592dc. */
-extern int FUN_003eccd0(int);
+extern int btlFindMarkedReserveRecord(int);
 extern int FUN_004d8688(unsigned int);
 
 
@@ -54,7 +54,7 @@ void FUN_004d352c(int param_1,int param_2)
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_004d37b0);
-  temp_v0 = FUN_003eccd0(param_2);
+  temp_v0 = btlFindMarkedReserveRecord(param_2);
   if (temp_v0 != 0) {
     FUN_00340edc(*(unsigned int *)(param_1 + 0x10),2,0xfffffc19,999);
     FUN_00340edc(*(unsigned int *)(param_1 + 0x10),3,0xfffffc19,999);

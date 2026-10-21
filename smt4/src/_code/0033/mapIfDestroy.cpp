@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00295ba4(s32 arg);
+void infoWinStartTimer(s32 arg);
 void jobStop(u32 job, s32 arg);
 s32 FUN_002b6b04(void);
 
@@ -14,7 +14,7 @@ void mapIfDestroy(void)
 
     if (state->unk18 != 0 && FUN_002b6b04() != 0) {
         state->unk18 = 0;
-        FUN_00295ba4(1);
+        infoWinStartTimer(1);
     }
     jobStop(state->job, 0);
 }

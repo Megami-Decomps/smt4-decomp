@@ -7,7 +7,7 @@
 extern "C" {
 
 int fileSlotLoad(int id);
-int FUN_00297468(void (*fn)(void), void **out, int arg);
+int asdLoadFileAsyncSimple(void (*fn)(void), void **out, int arg);
 int FUN_0029f848(ConfigWork *config, u32 value, int a, int b, int c, int d);
 int asdTMTexTableLoadEntryAsync(int type, int index);
 int dataTableGetEntries(void);
@@ -40,8 +40,8 @@ void configOpen(void)
     config->flag = 0;
     asdTMTexTableLoadSprites(0x2f);
     asdTMTexTableLoadEntryAsync(0x2f, 0);
-    FUN_00297468(LAB_0018b954, &config->heapA, 0);
-    FUN_00297468(LAB_0018b964, &config->heapB, 0);
+    asdLoadFileAsyncSimple(LAB_0018b954, &config->heapA, 0);
+    asdLoadFileAsyncSimple(LAB_0018b964, &config->heapB, 0);
     fileSlotLoad(0x36);
     value = dataTableGet(0x36, 0);
     dataTableGetEntries();

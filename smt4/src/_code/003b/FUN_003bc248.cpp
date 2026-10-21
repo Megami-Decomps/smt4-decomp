@@ -1,24 +1,25 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc248` (_code @ 0x3bc248, 0x428 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct AocSystem;
+struct Table03Record;
 
 extern "C" {
 
 int libc_strcmp(unsigned char *, unsigned int *);
 int memClear(unsigned int *, int);
-int FUN_0038959c(unsigned int *, unsigned int);
+Table03Record *aocFindTable03RecordByKey(AocSystem *, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 extern unsigned char LAB_003bc65c; /* 0x3bc65c */
-extern unsigned int *g_aocSystem; /* 0x433158 */
+extern AocSystem *g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: libc_strcmp. */
 extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int *dataTableGetEntries(void);
+extern unsigned int *dataTableGetEntries(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_0038959c. */
 
 
 void FUN_003bc248(unsigned int *param_1,unsigned int param_2,unsigned char param_3,unsigned char param_4)
@@ -42,10 +43,10 @@ void FUN_003bc248(unsigned int *param_1,unsigned int param_2,unsigned char param
   float temp_v10;
   
   temp_v2 = dataTableGet(3,0);
-  puVar4 = (unsigned int *)dataTableGetEntries();
+  puVar4 = (unsigned int *)dataTableGetEntries(temp_v2);
   puVar6 = puVar4;
   if (((-1 < (int)param_2) && (temp_v3 = dataTableGetCount(temp_v2), param_2 < temp_v3)) &&
-     (puVar6 = g_aocSystem, FUN_0038959c(g_aocSystem,param_2), puVar6 == (unsigned int *)0x0)) {
+     (puVar6 = (unsigned int *)aocFindTable03RecordByKey(g_aocSystem,param_2), puVar6 == (unsigned int *)0x0)) {
     puVar6 = puVar4 + param_2 * 0x18;
   }
   memClear(param_1,0x74);

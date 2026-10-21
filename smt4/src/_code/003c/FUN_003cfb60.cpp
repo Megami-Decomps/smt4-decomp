@@ -47,7 +47,7 @@ extern u32 g_btlEvent; /* 0x435d48 */
 extern u32 g_btlUiBlock; /* 0x439ca8 */
 
 extern int FUN_0027e3b8(u32);
-extern int FUN_0026c820(u32);
+extern int btlUiPanelFadeInWhenReady(u32);
 extern int FUN_003ddb14(int, BtlAction *, u32, int);
 extern int FUN_003ddee0(int, BtlAction *, BtlTarget *, int, int, int);
 extern int FUN_002296f4(BtlWork **, BtlAction *, int, int, int, int);
@@ -68,7 +68,7 @@ u32 FUN_003cfb60(BtlWork **work, BtlAction *action)
             (*work)->state = 1;
         } else {
             (*work)->state = 0;
-            FUN_0026c820(g_btlUiBlock);
+            btlUiPanelFadeInWhenReady(g_btlUiBlock);
         }
     }
     if ((action->target->flags & 0xFF) != 0) {

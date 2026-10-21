@@ -9,7 +9,7 @@ int FUN_00163aa4(unsigned int *);
 int ifTouchRegionRemove(void);
 int FUN_0016ccb4(int);
 int FUN_001760cc(unsigned int);
-int FUN_001b57a8(unsigned int [5], int);
+int resultPairInitialize(unsigned int [5], int);
 int aocClearDisplayFlag(unsigned int);
 int jobOwnerFreeSlotAndStop(unsigned int *);
 int FUN_00477d10(unsigned int *, unsigned int, int);
@@ -30,8 +30,8 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_0016ccb4. */
 /* Supplied declaration required: FUN_001760cc. */
-extern int FUN_001af210(int);
-/* Supplied declaration required: FUN_001b57a8. */
+extern int sysLightEventTryWait(int);
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: aocClearDisplayFlag. */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: FUN_00477d10. */
@@ -49,7 +49,7 @@ void FUN_0047c36c(unsigned int *param_1)
   unsigned int temp_v2 [5];
   
   puVar2 = temp_v2;
-  if ((param_1[1] - 4 >= 11) || (temp_v0 = FUN_001af210(g_aocMain + 0x98), temp_v0 == 0)) {
+  if ((param_1[1] - 4 >= 11) || (temp_v0 = sysLightEventTryWait(g_aocMain + 0x98), temp_v0 == 0)) {
     temp_v0 = 0;
     do {
       FUN_00163aa4(param_1 + temp_v0 * 0x23 + 0xdf);
@@ -90,7 +90,7 @@ void FUN_0047c36c(unsigned int *param_1)
   }
   *(unsigned char *)(param_1 + 0x84) = 1;
   param_1[0x87] = 0;
-  FUN_001b57a8(temp_v2,0);
+  resultPairInitialize(temp_v2,0);
   temp_v1 = puVar2[1];
   param_1[0x85] = *puVar2;
   param_1[0x86] = temp_v1;

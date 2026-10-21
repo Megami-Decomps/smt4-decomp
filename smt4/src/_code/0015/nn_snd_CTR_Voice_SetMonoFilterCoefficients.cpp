@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 
 
 void nn_snd_CTR_Voice_SetMonoFilterCoefficients(int param_1,unsigned int param_2)
@@ -37,7 +37,7 @@ void nn_snd_CTR_Voice_SetMonoFilterCoefficients(int param_1,unsigned int param_2
   }
   temp_v1 = (float)VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v1 = temp_v1 * 0.008f;
-  FUN_002b7064();
+  phaseCosInterpolate();
   temp_v1 = 2.0f - temp_v1;
   temp_v1 = romwright_sqrt_4(temp_v1 * temp_v1 - 1.0f) - temp_v1;
   *(short *)(param_1 + 8) = (short)(int)((temp_v1 + 1.0f) * 32768.0f);

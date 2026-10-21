@@ -5,13 +5,12 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_002c2160(int);
+void frameTransitionSetMode(int);
 
 extern unsigned char g_titleMain; /* 0x58916c */
 
 extern unsigned short FUN_001643b4(unsigned int, unsigned int);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_002c2160. */
 
 
 void FUN_003ca7d8(void)
@@ -36,7 +35,7 @@ void FUN_003ca7d8(void)
   temp_v1 = FUN_001643b4(9,0x2b);
   *(unsigned short *)(temp_v0 + 0x58) = temp_v1;
   *(unsigned char *)(temp_v0 + 0x3d) = 0;
-  FUN_002c2160(2);
+  frameTransitionSetMode(2);
   *(unsigned char *)(temp_v0 + 0x60) = 1;
   *(unsigned int *)(temp_v0 + 0x78) = 0xb;
   *(unsigned int *)(temp_v0 + 0x7c) = 0;

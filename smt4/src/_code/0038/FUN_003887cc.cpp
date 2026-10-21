@@ -1,18 +1,20 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003887cc` (_code @ 0x3887cc, 0x6c4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W4_Match6_DataSet.h"
+#include "shard/W6_W6Match1_QueuedRequestToken.h"
 
 extern "C" {
 
-int FUN_0015dd58(...);
+u32 FUN_0015dd58(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int FUN_002348a8(...);
 int FUN_0027eafc(...);
-int FUN_002a12d8(...);
+int legacyResourceIdRemap(...);
 int byteIsAtLeast100(...);
 int FUN_002b486c(...);
 int FUN_002b4b88(...);
 int FUN_002ba968(...);
-int FUN_002baa40(...);
+int resultPairInitialize(...);
 int FUN_002bcc60(...);
 int FUN_002c526c(...);
 int jyoucyuGetTableEntry(...);
@@ -21,8 +23,8 @@ int FUN_00387b54(...);
 int FUN_00388f3c(...);
 int FUN_0038b4f0(...);
 int FUN_0038b760(...);
-int FUN_0038b7f0(...);
-int FUN_0038b87c(...);
+int aocEntryBeginBaseLoad(...);
+void dataEntryQueueSupportedFiles(DataEntry *entry);
 
 /* stack frame of param_2: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -48,14 +50,14 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int recordIsEnabledAndPresent(int);
 /* Supplied declaration required: FUN_002348a8. */
 /* Supplied declaration required: FUN_0027eafc. */
-/* Supplied declaration required: FUN_002a12d8. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: byteIsAtLeast100. */
 extern int objGetFlagBit0(int);
 extern int FUN_002ad1e0(int);
 /* Supplied declaration required: FUN_002b486c. */
 /* Supplied declaration required: FUN_002b4b88. */
 /* Supplied declaration required: FUN_002ba968. */
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 extern int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: FUN_002c526c. */
@@ -65,8 +67,7 @@ extern int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: FUN_00388f3c. */
 /* Supplied declaration required: FUN_0038b4f0. */
 /* Supplied declaration required: FUN_0038b760. */
-/* Supplied declaration required: FUN_0038b7f0. */
-/* Supplied declaration required: FUN_0038b87c. */
+/* Supplied declaration required: aocEntryBeginBaseLoad. */
 extern int FUN_0038ba40(int);
 
 
@@ -92,11 +93,6 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
   int temp_v10;
   int iStack_64;
   int iStack_60;
-  int temp_v11;
-  int iStack_58;
-  int iStack_54;
-  int iStack_50;
-  int iStack_4c;
   int temp_v12;
   unsigned char *temp_v13;
   unsigned char *temp_v14;
@@ -113,7 +109,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
   piVar11 = piVar1 + -1;
   piVar1[3] = 0;
   piVar2 = &temp_v10;
-  FUN_002baa40(piVar2,0);
+  resultPairInitialize(piVar2,0);
   temp_v3 = piVar2[1];
   *piVar1 = *piVar2;
   piVar1[1] = temp_v3;
@@ -142,8 +138,8 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
       if (temp_v3 != 0) {
         temp_v12 = temp_v9;
         temp_v13 = (unsigned char *)temp_v10;
-        temp_v3 = FUN_002a12d8(&temp_v12);
-        temp_v6 = FUN_002a12d8(&temp_v12);
+        temp_v3 = legacyResourceIdRemap(&temp_v12);
+        temp_v6 = legacyResourceIdRemap(&temp_v12);
         if ((temp_v6 == -0x377ec779) || (temp_v3 == -0x377ec76c)) {
           *(char *)piVar11 = '\0';
           return;
@@ -214,7 +210,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
           do {
             temp_v6 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v3 * 0x50 + 8);
             if (temp_v6 != 0) {
-              FUN_0038b7f0(*(int *)(param_2 + 0x318) + temp_v3 * 0x50);
+              aocEntryBeginBaseLoad(*(int *)(param_2 + 0x318) + temp_v3 * 0x50);
             }
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < *(int *)(param_2 + 0x310));
@@ -279,7 +275,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
             if ((temp_v3 != 0) &&
                (temp_v3 = recordIsEnabledAndPresent(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
                temp_v3 != 0)) {
-              FUN_0038b87c(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50);
+              dataEntryQueueSupportedFiles(reinterpret_cast<DataEntry *>(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50));
               *(unsigned int *)(param_2 + 0x358) = 1;
               break;
             }
@@ -318,33 +314,36 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
     *(unsigned int *)(g_aocMain + 0x754) = temp_v4 | 0x10;
     *(unsigned int *)(temp_v3 + 0x754) = temp_v4 | 0x50;
     *(unsigned int *)(param_2 + 0x344) = 6;
-    temp_v3 = FUN_002a12d8(piVar1);
+    temp_v3 = legacyResourceIdRemap(piVar1);
     if (temp_v3 != -0x36bec76f) {
       temp_v3 = FUN_002ad1e0(g_aocMain + 0x98);
       if (temp_v3 != 0) {
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       }
       else if ((char)*piVar11 != -0x38) {
-        temp_v11 = *piVar11;
-        iStack_58 = *piVar1;
-        iStack_54 = piVar1[1];
-        iStack_50 = piVar1[2];
-        iStack_4c = piVar1[3];
-        temp_v3 = g_aocMain;
-        FUN_0015dd58(g_aocMain,&temp_v11,*piVar1,piVar1[1]);
+        {
+          RequestParameters parameters = {{
+            static_cast<u32>(*piVar11), static_cast<u32>(*piVar1),
+            static_cast<u32>(piVar1[1]), static_cast<u32>(piVar1[2]),
+            static_cast<u32>(piVar1[3])
+          }};
+          QueuedRequestHandle handle = {parameters.words[1], parameters.words[2]};
+          temp_v3 = FUN_0015dd58(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+                                &parameters, handle);
+        }
         if (temp_v3 != 0) {
           return;
         }
         if ((char)*piVar11 != 'i') {
           if ((char)*piVar11 != 'j') {
-            FUN_002a12d8(piVar1);
-            temp_v2 = FUN_002a12d8(piVar1);
+            legacyResourceIdRemap(piVar1);
+            temp_v2 = legacyResourceIdRemap(piVar1);
             temp_v4 = temp_v2 >> 0x1b;
             if ((temp_v2 & 0x80000000) != 0) {
               temp_v4 = temp_v4 - 0x20;
             }
             if (temp_v4 != 0xfffffffc) {
-              temp_v2 = FUN_002a12d8(piVar1);
+              temp_v2 = legacyResourceIdRemap(piVar1);
               temp_v4 = temp_v2 >> 0x1b;
               if ((temp_v2 & 0x80000000) != 0) {
                 temp_v4 = temp_v4 - 0x20;
@@ -359,7 +358,7 @@ void FUN_003887cc(unsigned char *param_1,int param_2)
                 *(char *)piVar11 = '\x01';
                 piVar2 = &temp_v10;
                 piVar1[2] = 0;
-                FUN_002baa40();
+                resultPairInitialize();
                 temp_v3 = piVar2[1];
                 *piVar1 = *piVar2;
                 piVar1[1] = temp_v3;

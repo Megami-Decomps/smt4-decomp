@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern void FUN_0039c488(void);
+extern void statusDownInitializeSkillList(void);
 extern void FUN_002c7ce8(int value);
 void FUN_002c7cd4(void)
 {
-    FUN_0039c488();
+    statusDownInitializeSkillList();
     FUN_002c7ce8(6);
 }
 

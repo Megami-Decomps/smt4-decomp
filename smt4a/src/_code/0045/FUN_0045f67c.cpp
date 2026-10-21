@@ -5,7 +5,7 @@
 extern "C" {
 
 int listAppendNode(int, int);
-int FUN_0019102c(int, int);
+int objectCommandReserveWords(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -13,9 +13,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern int FUN_00175678(void);
+extern int objectCommandQueueGet(void);
 /* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 
 
 void FUN_0045f67c(int *param_1,unsigned char param_2)
@@ -26,9 +26,9 @@ void FUN_0045f67c(int *param_1,unsigned char param_2)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v0 = FUN_00175678();
+  temp_v0 = objectCommandQueueGet();
   temp_v1 = temp_v0;
-  FUN_0019102c(temp_v0,6);
+  objectCommandReserveWords(temp_v0,6);
   *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
   *(unsigned char *)(temp_v1 + 4) = 0xb;
   temp_v2 = (**(romwright_code **)(*param_1 + 0x20))(param_1);

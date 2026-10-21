@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_0023553c(int a);
+int messageMainSetTargetFlags(int a);
 int buttonHelpGetMode(void);
 int FUN_002a0cc8(int a);
 int buttonHelpSetPreset(void);
-extern int FUN_0019e0c0(u32 value);
+extern int scrRunOpcodesStub(u32 value);
 
 typedef struct Scene {
     /* 0x0000 */ u8 unk0000[0x14];
@@ -20,8 +20,8 @@ typedef struct Scene {
 
 void FUN_003a7f98(Scene *scene)
 {
-    if (FUN_0019e0c0(scene->unk5A0) == 2) {
-        FUN_0023553c(0);
+    if (scrRunOpcodesStub(scene->unk5A0) == 2) {
+        messageMainSetTargetFlags(0);
         FUN_002a0cc8(0);
         scene->unk18 = 0;
         scene->unk14 = 2;

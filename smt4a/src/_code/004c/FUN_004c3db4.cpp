@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTable00FindById(void);
-int FUN_00261424(void);
+int gameDataGetTableValue(void);
 int asdOperatorNewD(void);
 int asdOperatorDeleteC(unsigned int *);
 int VectorSignedToFloat(...);
@@ -26,8 +26,8 @@ extern unsigned int randRange(unsigned int);
 extern int lcgRandomRange(unsigned int);
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_00261424. */
-extern int FUN_002626e0(void);
+/* Supplied declaration required: gameDataGetTableValue. */
+extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
 extern int FUN_003e8244(int, unsigned int);
@@ -68,9 +68,9 @@ void FUN_004c3db4(unsigned int *param_1)
   dataTable00FindById();
   if (temp_v2 != 0) {
     temp_v10 = *(int *)(temp_v2 + 0x74);
-    temp_v3 = FUN_002626e0();
+    temp_v3 = gameProgressIsAdvanced();
     if (temp_v3 != 0) {
-      temp_v4 = FUN_00261424();
+      temp_v4 = gameDataGetTableValue();
       temp_v15 = 0.0f;
       temp_v14 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f < temp_v14) << 0x1f) |
@@ -97,16 +97,16 @@ void FUN_004c3db4(unsigned int *param_1)
     *(unsigned int *)(temp_v1 + 0x1e8) = temp_v6;
     temp_v10 = valueAtF0IsReady(temp_v1);
     if (temp_v10 != 0) {
-      temp_v10 = FUN_00261424();
+      temp_v10 = gameDataGetTableValue();
       temp_v10 = temp_v10 + 1;
       if (temp_v10 >= 6) {
         temp_v10 = 6;
       }
-      temp_v5 = FUN_00261424();
+      temp_v5 = gameDataGetTableValue();
       temp_v3 = 0;
       temp_v15 = (float)VectorSignedToFloat(temp_v5 << 1,(unsigned char)(in_fpscr >> 0x16) & 3);
       if (0 < temp_v10) {
-        temp_v5 = FUN_00261424();
+        temp_v5 = gameDataGetTableValue();
         if ((temp_v5 >= 2) &&
            (temp_v5 = FUN_003eaea0(temp_v1,(int)*(short *)((int)param_1 + 0x166)), 0 < temp_v5)) {
           temp_v4 = randRange(99);

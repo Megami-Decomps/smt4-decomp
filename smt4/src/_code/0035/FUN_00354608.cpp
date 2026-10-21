@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002baa40(...);
+int resultPairInitialize(...);
 int FUN_003520dc(unsigned char *, unsigned char [24], int, unsigned int, unsigned int, unsigned int, int);
 int FUN_0035228c(unsigned char *, int, unsigned int *);
 
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: FUN_003520dc. */
 /* Supplied declaration required: FUN_0035228c. */
 
@@ -50,11 +50,11 @@ void FUN_00354608(unsigned int param_1,unsigned int *param_2,unsigned int *param
   puVar2 = temp_v1;
   FUN_003520dc(puVar2,temp_v3,1,*param_3,temp_v2,uStack_44,0);
   if (puVar2 == (unsigned char *)0xd8a083fa) {
-    FUN_002baa40(param_1,0xc8813894);
+    resultPairInitialize(param_1,0xc8813894);
     return;
   }
   if ((int)puVar2 < 0) {
-    FUN_002baa40(param_1,puVar2);
+    resultPairInitialize(param_1,puVar2);
     return;
   }
   puVar2 = temp_v4;
@@ -70,14 +70,14 @@ void FUN_00354608(unsigned int param_1,unsigned int *param_2,unsigned int *param
       if (-1 < (int)puVar2) {
         *param_2 = temp_v2;
         param_2[1] = uStack_44;
-        FUN_002baa40(param_1,0);
+        resultPairInitialize(param_1,0);
         return;
       }
-      FUN_002baa40(param_1,puVar2);
+      resultPairInitialize(param_1,puVar2);
       return;
     }
   }
-  FUN_002baa40(param_1,0xc8813887);
+  resultPairInitialize(param_1,0xc8813887);
   return;
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00263cb8(int, int, unsigned char *, int, int, unsigned int, unsigned int, unsigned int, int, int, int, int, int, int, int, int, unsigned int, int, int);
 int FUN_0027b65c(unsigned int, int);
-int FUN_00284838(void);
+int mapSpawnActiveSlotEffects(void);
 int FUN_00297a00(void);
 
 /* stack frame of param_1: 13 slot(s), 52 byte(s) */
@@ -31,7 +31,7 @@ extern int g_lmapMainState; /* 0x447060 */
 
 /* Supplied declaration required: FUN_00263cb8. */
 /* Supplied declaration required: FUN_0027b65c. */
-/* Supplied declaration required: FUN_00284838. */
+/* Supplied declaration required: mapSpawnActiveSlotEffects. */
 /* Supplied declaration required: FUN_00297a00. */
 extern int gameFlagIsSet(unsigned int);
 
@@ -46,7 +46,7 @@ void FUN_00266584(unsigned int param_1)
   
   FUN_00297a00();
   FUN_0027b65c(param_1,0);
-  FUN_00284838();
+  mapSpawnActiveSlotEffects();
   temp_v0 = g_lmapMainState;
   temp_v1 = gameFlagIsSet(0x261);
   if ((temp_v1 != 0) && (*(int *)(temp_v0 + 0x40) == 0x65)) {

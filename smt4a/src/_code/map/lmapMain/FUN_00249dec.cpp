@@ -5,7 +5,7 @@
 extern "C" {
 
 int ptrListRemoveClearOwner(...);
-int FUN_00357b70(...);
+int naviConfigureEntry(...);
 int FUN_003659f4(void);
 int sub68OwnerStart2(void);
 int FUN_00378964(void);
@@ -30,7 +30,7 @@ int gameFlagSetValue(int, int);
 int FUN_00408184(...);
 int FUN_0046e800(unsigned short *, unsigned int);
 int flagValueAdd(...);
-int FUN_004813bc(...);
+int gamePackedFlagTest(...);
 
 typedef int romwright_code(...);
 /* stack frame of void: 28 slot(s), 112 byte(s) */
@@ -70,7 +70,7 @@ extern unsigned char LAB_0024a6bc; /* 0x24a6bc */
 extern unsigned char LAB_0024ad40; /* 0x24ad40 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned short *g_aocSystem; /* 0x570280 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
@@ -125,7 +125,7 @@ extern int lmapSceneGetUnk0(void);
 extern int FUN_0033aa6c(int);
 /* Supplied declaration required: FUN_0033abb4. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_00357b70. */
+/* Supplied declaration required: naviConfigureEntry. */
 extern int gameFlagsTestSecondBank(int);
 /* Supplied declaration required: gameFlagsBitSet. */
 /* Supplied declaration required: FUN_003659f4. */
@@ -143,7 +143,7 @@ extern int mathCirclesOverlap(void);
 extern unsigned int FUN_00480738(unsigned int);
 extern unsigned int FUN_00480c28(void);
 /* Supplied declaration required: flagValueAdd. */
-/* Supplied declaration required: FUN_004813bc. */
+/* Supplied declaration required: gamePackedFlagTest. */
 extern int FUN_004d0584(void);
 
 
@@ -242,7 +242,7 @@ joined_r0x00249fd4:
             if ((DAT_005f161d == '\0') && ((DAT_005f1be4 == 0 || (DAT_005f1be4 == 4)))) {
               temp_v4 = FUN_004d0584();
               temp_v5 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
-              if ((temp_v4 != 0) && ((*(char *)(DAT_005806a4 + 0xb4) == '\0' && (temp_v11)))) {
+              if ((temp_v4 != 0) && ((*(char *)(g_lmapView + 0xb4) == '\0' && (temp_v11)))) {
                 DAT_005f1768 = '\0';
                 DAT_005f1769 = 0;
                 *(unsigned char *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcdc) = 0;
@@ -279,7 +279,7 @@ joined_r0x00249fd4:
                   *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcac) = (unsigned int)temp_v0;
                   *(int *)(temp_v10 + 0xcbc) = (int)(char)puVar4[3];
                   *(unsigned char *)(temp_v10 + 0xcdc) = 1;
-                  temp_v4 = FUN_004813bc((unsigned int)temp_v0);
+                  temp_v4 = gamePackedFlagTest((unsigned int)temp_v0);
                   if (temp_v4 == 0) {
                     *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xccc) = 1;
                   }
@@ -301,7 +301,7 @@ joined_r0x00249fd4:
                   if (*(short *)(temp_v4 + 0x12) != 0) {
                     *(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcac) = (int)*(short *)(temp_v4 + 0x12);
                     *(unsigned int *)(temp_v10 + 0xcbc) = 1;
-                    temp_v6 = FUN_004813bc();
+                    temp_v6 = gamePackedFlagTest();
                     if (temp_v6 == 0) {
                       *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xccc) = 1;
                     }
@@ -653,7 +653,7 @@ LAB_0024a684:
               temp_v17 = (int)*(float *)(temp_v8 + 0xb4);
               temp_v18 = (int)*(float *)(temp_v8 + 0xb8);
               temp_v19 = 1;
-              FUN_00357b70(*(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0),
+              naviConfigureEntry(*(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xce0),
                            (int)*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4),
                            (int)*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 6),(int)*(float *)(temp_v8 + 0xb0)
                           );

@@ -11,10 +11,10 @@ struct TextureTableEntry {
 
 extern "C" {
 extern TextureTableEntry* g_texTable;
-TextureNode* FUN_0019ea90(TextureTable* table, s32 nodeIndex);
+TextureNode* fixedRecordTableGet(TextureTable* table, s32 nodeIndex);
 
 TextureNode* asdTMTexTableGetNode(s32 tableIndex, s32 nodeIndex)
 {
-    return FUN_0019ea90(g_texTable[tableIndex].table, nodeIndex);
+    return fixedRecordTableGet(g_texTable[tableIndex].table, nodeIndex);
 }
 }

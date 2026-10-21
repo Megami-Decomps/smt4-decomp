@@ -5,7 +5,7 @@
 extern "C" {
 
 int listAppendNode(int, int);
-int FUN_0019102c(int, int);
+int objectCommandReserveWords(int, int);
 int rt_memcpy_w(int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -13,9 +13,9 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_2_stack;
 
-extern int FUN_00175678(void);
+extern int objectCommandQueueGet(void);
 /* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -27,9 +27,9 @@ void FUN_0045fee8(int param_1,int param_2)
   int temp_v1;
   
   *(unsigned short *)(param_1 + 0x328c) = *(unsigned short *)(param_2 + 8);
-  temp_v0 = FUN_00175678();
+  temp_v0 = objectCommandQueueGet();
   temp_v1 = temp_v0;
-  FUN_0019102c(temp_v0,0x19);
+  objectCommandReserveWords(temp_v0,0x19);
   *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
   *(unsigned char *)(temp_v1 + 4) = 0x27;
   *(int *)(temp_v1 + 0x10) = param_1 + 0x118;

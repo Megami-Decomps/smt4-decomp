@@ -10,7 +10,7 @@ int FUN_00290994(...);
 int FUN_0029a17c(...);
 int FUN_0029cde0(...);
 int FUN_0029dc74(...);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6c34(...);
 int devilGetRecord(void);
 int FUN_002bdf94(...);
@@ -68,7 +68,7 @@ extern int FUN_0026280c(void);
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern unsigned int FUN_0029a924(unsigned short);
-extern int FUN_0029c8f4(unsigned char *);
+extern int flagCountUnlockedSlots(unsigned char *);
 /* Supplied declaration required: FUN_0029cde0. */
 extern int FUN_0029d644(int);
 extern int FUN_0029d65c(int);
@@ -76,10 +76,9 @@ extern int FUN_0029d65c(int);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: devilGetRecord. */
-extern unsigned int FUN_002bce00(unsigned short);
+extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int FUN_002bce30(short, unsigned int);
 extern unsigned int FUN_002bd068(short);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -205,10 +204,10 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
       } while ((int)temp_v15 < temp_v2);
     }
     temp_v2 = FUN_002bf4f8(0x24,0x1ed);
-    FUN_002b6758((int)*psVar4,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v13,0x8d,0);
+    uiDrawDemonIcon((int)*psVar4,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v13,0x8d,0);
     FUN_002580d4(*psVar4,*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v13,0x92);
     FUN_0029dc74(*psVar4,temp_v16);
-    temp_v4 = FUN_0029c8f4(temp_v16);
+    temp_v4 = flagCountUnlockedSlots(temp_v16);
     temp_v21 = temp_v1 + 0x9000;
     temp_v17 = temp_v1 + 0x9204;
     temp_v12 = 0;
@@ -316,7 +315,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
           if ((int)temp_v12 < (int)(temp_v15 - *(int *)(temp_v21 + 0x26c))) {
             temp_v3 = 0xffffffff;
           }
-          temp_v9 = FUN_002bce00(*(unsigned short *)(temp_v14 + 0x9010));
+          temp_v9 = aocIndexValueOrDefault(*(unsigned short *)(temp_v14 + 0x9010));
           textFormatBuffer(temp_v18,&LAB_001f12f4,temp_v9);
           temp_v10 = FUN_002bf4f8(0x24,0x178);
           VectorSignedToFloat((int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v2,
@@ -455,7 +454,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
           if (temp_v10 != 0) {
             temp_v3 = 0x8400ff;
           }
-          temp_v9 = FUN_002bce00(*(unsigned short *)(temp_v8 + 0x9020));
+          temp_v9 = aocIndexValueOrDefault(*(unsigned short *)(temp_v8 + 0x9020));
           textFormatBuffer(temp_v18,&LAB_001f12f4,temp_v9);
           temp_v10 = FUN_002bf4f8(0x24,0x178);
           VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v2,
@@ -536,7 +535,7 @@ void FUN_001f0540(int param_1,int param_2,int param_3,int param_4,int param_5,in
       if (temp_v4 != 0) {
         temp_v3 = 0x8400ff;
       }
-      temp_v9 = FUN_002bce00(*(unsigned short *)(temp_v5 + 0x9020));
+      temp_v9 = aocIndexValueOrDefault(*(unsigned short *)(temp_v5 + 0x9020));
       textFormatBuffer(temp_v18,&LAB_001f1a84,temp_v9);
       temp_v4 = FUN_002bf4f8(0x24,0x1a2);
       VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,

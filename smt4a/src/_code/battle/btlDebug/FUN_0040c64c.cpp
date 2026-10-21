@@ -7,7 +7,7 @@ extern "C" {
 int FUN_003e7ef0(int);
 int FUN_003ed238(int, int);
 int FUN_003f24e0(int, int);
-int FUN_004ca460(int, int, int, int);
+int btlPopulateSelectedSlot(int, int, int, int);
 int FUN_004cae0c(int, int, int);
 int FUN_004f9450(void);
 int FUN_004fd204(int, unsigned int, int, int, int, int);
@@ -36,7 +36,7 @@ typedef struct {
 
 extern unsigned int DAT_00571350; /* 0x571350 */
 extern unsigned int DAT_00571354; /* 0x571354 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_0057a638; /* 0x57a638 */
 extern unsigned int DAT_0057a63c; /* 0x57a63c */
 extern unsigned int DAT_0057a64c; /* 0x57a64c */
@@ -49,7 +49,7 @@ extern int FUN_003f1534(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003f24e0. */
 extern int FUN_004aa750(unsigned int);
 extern int FUN_004c9b38(int);
-/* Supplied declaration required: FUN_004ca460. */
+/* Supplied declaration required: btlPopulateSelectedSlot. */
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: FUN_004f9450. */
 /* Supplied declaration required: FUN_004fd204. */
@@ -71,13 +71,13 @@ void FUN_0040c64c(unsigned int param_1,fn_0040c64c_arg1 *param_2)
   temp_v3 = btlGetMainState();
   if (param_2->field_0x20 == 0) {
     FUN_003e7ef0(temp_v3);
-    FUN_004ca460((int)param_2->field_0x24,(int)param_2->field_0x26,(int)param_2->field_0x48,
+    btlPopulateSelectedSlot((int)param_2->field_0x24,(int)param_2->field_0x26,(int)param_2->field_0x48,
                  (int)param_2->field_0x4a);
     if (param_2->field_0x24 != 0) {
       if (param_2->field_0x24 == 1) {
         if (!((*(unsigned int *)(temp_v3 + 0x45a4) & DAT_00571354) == 0 &&
              (DAT_00571350 & *(unsigned int *)(temp_v3 + 0x45a0)) == 0)) {
-          if ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x400) != 0) {
+          if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
             FUN_004f9450();
           }
           param_2->field_0x20 = 1;

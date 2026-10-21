@@ -6,9 +6,9 @@ extern "C" {
 
 int textFormatBuffer(int *, unsigned char *);
 int dataTable04FindById(void);
-int FUN_0020d164(int *, unsigned int);
+int battleAttributeFormatName(int *, unsigned int);
 int FUN_00230c1c(int *, unsigned int);
-int FUN_002a1f60(unsigned int, int, unsigned int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_003180c4(int, int *);
 int FUN_0034a290(void);
 
@@ -25,9 +25,9 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 extern unsigned int FUN_0016a0e8(void);
 extern int idIsAbove400(int);
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_0020d164. */
+/* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: FUN_00230c1c. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0034a290. */
 
@@ -55,7 +55,7 @@ void FUN_00359b6c(int param_1)
     if (temp_v2 != 0) {
       temp_v2 = param_1;
       FUN_0034a290();
-      FUN_0020d164(&temp_v3,(*(unsigned int *)(temp_v2 + 0x44) & 0xffff) >> 0xb);
+      battleAttributeFormatName(&temp_v3,(*(unsigned int *)(temp_v2 + 0x44) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&temp_v3);
       textFormatBuffer(&temp_v3,&LAB_00359c6c);
       FUN_003180c4(0x25,&temp_v3);
@@ -63,7 +63,7 @@ void FUN_00359b6c(int param_1)
     else {
       temp_v2 = param_1;
       dataTable04FindById();
-      FUN_0020d164(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb);
+      battleAttributeFormatName(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0xffff) >> 0xb);
       FUN_003180c4(0x24,&temp_v3);
       FUN_00230c1c(&temp_v3,(*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5);
       FUN_003180c4(0x25,&temp_v3);
@@ -71,7 +71,7 @@ void FUN_00359b6c(int param_1)
     temp_v3 = 3;
     uStack_7c = temp_v1;
     temp_v4 = param_1;
-    FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x678),2,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x678),2,0xffffffff,0);
   }
   return;
 }

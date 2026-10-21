@@ -19,7 +19,7 @@ int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_001e3944; /* 0x1e3944 */
 extern int g_aocSystem; /* 0x433158 */
-extern int *DAT_00447e58; /* 0x447e58 */
+extern int *g_deferredMapModels; /* 0x447e58 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -59,23 +59,23 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
   int temp_v6;
   unsigned char temp_v7 [68];
   
-  piVar9 = DAT_00447e58;
-  temp_v3 = *DAT_00447e58;
+  piVar9 = g_deferredMapModels;
+  temp_v3 = *g_deferredMapModels;
   if (temp_v3 != 0) {
     if (temp_v3 != 1) {
       if (temp_v3 == 2) {
-        temp_v4 = DAT_00447e58[2];
+        temp_v4 = g_deferredMapModels[2];
         temp_v5 = param_1 == 100;
         temp_v3 = param_1 - 100;
         if (param_1 >= 0x65) {
           temp_v5 = temp_v4 == 0;
           temp_v3 = temp_v4;
         }
-        piVar10 = DAT_00447e58 + temp_v4 * 0xe + 3;
+        piVar10 = g_deferredMapModels + temp_v4 * 0xe + 3;
         if ((!temp_v5 && temp_v3 < 0 == (param_1 < 0x65 && SBORROW4(param_1,100))) ||
-           (temp_v3 = FUN_002adee0(DAT_00447e58[temp_v4 * 0xe + 0xf]), temp_v3 != 0)) {
+           (temp_v3 = FUN_002adee0(g_deferredMapModels[temp_v4 * 0xe + 0xf]), temp_v3 != 0)) {
           FUN_002a0428(piVar9[temp_v4 * 0xe + 0xf],1);
-          temp_v3 = DAT_00447e58[1];
+          temp_v3 = g_deferredMapModels[1];
           FUN_00266f30();
           FUN_002fb4a4();
           if (*(char *)(temp_v3 + 0x33) == '\x13') {
@@ -84,7 +84,7 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
           *(unsigned char *)piVar10 = 1;
           temp_v0 = *(short *)(temp_v3 + 0x28);
           *(short *)(piVar9 + temp_v4 * 0xe + 4) = temp_v0;
-          *(short *)(piVar9 + temp_v4 * 0xe + 5) = (short)DAT_00447e58[1];
+          *(short *)(piVar9 + temp_v4 * 0xe + 5) = (short)g_deferredMapModels[1];
           temp_v2 = (int)*(char *)(temp_v3 + 0x32);
           *(short *)((int)piVar9 + temp_v4 * 0x38 + 0x16) = (short)*(char *)(temp_v3 + 0x32);
           piVar9[temp_v4 * 0xe + 6] = 0x40800000;
@@ -102,8 +102,8 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
             FUN_0021e16c();
             piVar9[temp_v4 * 0xe + 0xe] = temp_v2;
           }
-          piVar9 = DAT_00447e58;
-          DAT_00447e58[2] = DAT_00447e58[2] + 1;
+          piVar9 = g_deferredMapModels;
+          g_deferredMapModels[2] = g_deferredMapModels[2] + 1;
           piVar9[1] = piVar9[1] + 1;
           *piVar9 = 1;
         }
@@ -111,7 +111,7 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
     }
     else {
       temp_v3 = FUN_002fb4a4();
-      for (psVar8 = (short *)DAT_00447e58[1]; (int)psVar8 < temp_v3;
+      for (psVar8 = (short *)g_deferredMapModels[1]; (int)psVar8 < temp_v3;
           psVar8 = (short *)((int)psVar8 + 1)) {
         psVar3 = psVar8;
         FUN_00266f30();
@@ -122,16 +122,16 @@ unsigned int FUN_001e34fc(int param_1,unsigned int param_2,int param_3)
           temp_v4 = g_aocSystem;
           FUN_0025bed8(g_aocSystem,0x24,0);
           if (temp_v3 - temp_v4 <= (int)psVar8) {
-            piVar9 = DAT_00447e58;
-            *DAT_00447e58 = 0;
+            piVar9 = g_deferredMapModels;
+            *g_deferredMapModels = 0;
             piVar9[1] = -1;
             return 1;
           }
         }
         else {
           if (*psVar3 == -1) {
-            piVar9 = DAT_00447e58;
-            *DAT_00447e58 = 0;
+            piVar9 = g_deferredMapModels;
+            *g_deferredMapModels = 0;
             piVar9[1] = -1;
             return 1;
           }
@@ -145,15 +145,15 @@ LAB_001e36a4:
             if ((!temp_v5 || temp_v1 == 0x13) &&
                (temp_v4 = FUN_00316d64((int)psVar3[2],(int)psVar3[3]), temp_v4 != 0)) {
               if (param_3 == 0) {
-                DAT_00447e58[1] = (int)psVar8;
+                g_deferredMapModels[1] = (int)psVar8;
                 break;
               }
               temp_v4 = 0;
-              while (((char)DAT_00447e58[temp_v4 * 0xe + 3] == '\0' ||
-                     ((short *)(int)(short)DAT_00447e58[temp_v4 * 0xe + 5] != psVar8))) {
+              while (((char)g_deferredMapModels[temp_v4 * 0xe + 3] == '\0' ||
+                     ((short *)(int)(short)g_deferredMapModels[temp_v4 * 0xe + 5] != psVar8))) {
                 temp_v4 = temp_v4 + 1;
                 if (temp_v4 >= 0x40) {
-                  DAT_00447e58[1] = (int)psVar8;
+                  g_deferredMapModels[1] = (int)psVar8;
                   goto LAB_001e3758;
                 }
               }
@@ -162,28 +162,28 @@ LAB_001e36a4:
         }
       }
 LAB_001e3758:
-      piVar9 = DAT_00447e58;
-      temp_v4 = DAT_00447e58[2];
-      temp_v3 = DAT_00447e58[1];
+      piVar9 = g_deferredMapModels;
+      temp_v4 = g_deferredMapModels[2];
+      temp_v3 = g_deferredMapModels[1];
       FUN_00266f30();
       *(unsigned short *)(piVar9 + temp_v4 * 0xe + 0xd) = *(unsigned short *)(temp_v3 + 4);
       *(unsigned short *)((int)piVar9 + temp_v4 * 0x38 + 0x36) = *(unsigned short *)(temp_v3 + 6);
       *(unsigned char *)((int)piVar9 + temp_v4 * 0x38 + 0xf) = 0;
-      *(short *)(piVar9 + temp_v4 * 0xe + 5) = (short)DAT_00447e58[1];
+      *(short *)(piVar9 + temp_v4 * 0xe + 5) = (short)g_deferredMapModels[1];
       *(short *)((int)piVar9 + temp_v4 * 0x38 + 0x12) = (short)*(char *)(temp_v3 + 0x33);
       textFormatBuffer(temp_v7,&LAB_001e3944);
-      if ((param_1 >= 0x65) && (DAT_00447e58[2] >= 1)) {
-        temp_v3 = asdMdlManagerClone(DAT_00447e58[0xf],0);
+      if ((param_1 >= 0x65) && (g_deferredMapModels[2] >= 1)) {
+        temp_v3 = asdMdlManagerClone(g_deferredMapModels[0xf],0);
       }
       else {
         temp_v3 = asdMdlManagerCreateSecondList(temp_v7,0x1c0);
       }
       piVar9[temp_v4 * 0xe + 0xf] = temp_v3;
-      *DAT_00447e58 = *DAT_00447e58 + 1;
+      *g_deferredMapModels = *g_deferredMapModels + 1;
     }
   }
   else if (param_3 != 0) {
-    DAT_00447e58[1] = 0;
+    g_deferredMapModels[1] = 0;
     *piVar9 = 1;
   }
   else {
@@ -211,8 +211,8 @@ LAB_001e3758:
         piVar9 = (int *)((int)piVar9 + 1);
       } while ((int)piVar9 < temp_v3);
     }
-    piVar9 = DAT_00447e58;
-    DAT_00447e58[1] = 0;
+    piVar9 = g_deferredMapModels;
+    g_deferredMapModels[1] = 0;
     piVar9[2] = 0;
     *piVar9 = *piVar9 + 1;
   }

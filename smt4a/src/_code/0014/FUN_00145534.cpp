@@ -8,7 +8,7 @@ int FUN_0015059c(int);
 int FUN_001517b4(...);
 int FUN_00163fd4(int);
 int eventQueueAddUniqueIfValid(...);
-int FUN_00164288(void);
+int workCommandRefreshActiveSlots(void);
 
 extern int DAT_0057f58c; /* 0x57f58c */
 extern int DAT_0057f590; /* 0x57f590 */
@@ -18,10 +18,10 @@ extern unsigned char DAT_005e204d; /* 0x5e204d */
 /* Supplied declaration required: FUN_0015059c. */
 /* Supplied declaration required: FUN_001517b4. */
 extern unsigned int FUN_00152f44(void);
-extern int FUN_0016345c(void);
+extern int querySlotHasHandle(void);
 /* Supplied declaration required: FUN_00163fd4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_00164288. */
+/* Supplied declaration required: workCommandRefreshActiveSlots. */
 
 
 unsigned int FUN_00145534(int param_1)
@@ -90,9 +90,9 @@ LAB_001455c8:
   if ((temp_v2 != 0) || (temp_v2 = FUN_00163fd4(6), temp_v2 != 0)) {
     FUN_0015059c(1);
   }
-  temp_v2 = FUN_0016345c();
+  temp_v2 = querySlotHasHandle();
   if ((temp_v2 != 0) && (temp_v3 = FUN_00152f44(), (temp_v3 & 1) != 0)) {
-    FUN_00164288();
+    workCommandRefreshActiveSlots();
     temp_v1 = 0;
   }
   if ((unsigned char)(temp_v1 & ~(DAT_005e204d != 0))) {

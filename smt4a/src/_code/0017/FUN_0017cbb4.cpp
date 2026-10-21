@@ -6,7 +6,7 @@ extern "C" {
 
 extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
-extern int DAT_005b4400; /* 0x5b4400 */
+extern int g_textureBindingState; /* 0x5b4400 */
 
 
 void FUN_0017cbb4(unsigned int *param_1)
@@ -14,7 +14,7 @@ void FUN_0017cbb4(unsigned int *param_1)
 {
   int temp_v0;
   
-  temp_v0 = DAT_005b4400;
+  temp_v0 = g_textureBindingState;
   *param_1 = 0x1c00;
   *(unsigned int *)(temp_v0 + 0x770) = (*(unsigned int *)(temp_v0 + 0x770) & 0xffffdfff) | 0x11000;
   temp_v0 = 0;

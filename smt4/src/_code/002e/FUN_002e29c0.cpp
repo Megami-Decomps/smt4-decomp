@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002486a8(int, int);
-int FUN_0027f414(void);
+float mathSnapHeading8(float angle);
 int SBORROW4(int, int);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -21,14 +21,12 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002486a8. */
-/* Supplied declaration required: FUN_0027f414. */
 extern int gameGetMapBlock(void);
 
 
-void FUN_002e29c0(void)
+void FUN_002e29c0(float in_s0, float in_s1, float in_s2)
 
 {
-/* irregular: irregular input(s): in_s0, in_s1, in_s2; 3 native warning(s); review required */
   char temp_v0;
   int temp_v1;
   unsigned int temp_v2;
@@ -40,9 +38,6 @@ void FUN_002e29c0(void)
   int unaff_r9;
   int unaff_r10;
   unsigned char temp_v8;
-  float in_s0;
-  float in_s1;
-  float in_s2;
   int temp_v9;
   int temp_v10;
   int temp_v11 [9];
@@ -84,7 +79,7 @@ void FUN_002e29c0(void)
   if (*(char *)(temp_v1 + 0xdd1) - 2 < temp_v11[2]) {
     temp_v11[2] = *(char *)(temp_v1 + 0xdd1) - 2;
   }
-  FUN_0027f414();
+  in_s2 = mathSnapHeading8(in_s2);
   temp_v5 = (int)(((long long)(int)in_s2 * -0x49f49f49 + ((unsigned long long)(unsigned int)(int)in_s2 << 0x20)) >> 0x20
                );
   temp_v5 = (temp_v5 >> 5) - (temp_v5 >> 0x1f);

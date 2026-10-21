@@ -27,7 +27,7 @@ extern unsigned int DAT_00573804; /* 0x573804 */
 /* Supplied declaration required: libc_strncmp. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: libc_strcpy. */
-extern unsigned int FUN_002e4c2c(int);
+extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: libc_strcmp. */
 /* Supplied declaration required: FUN_003478dc. */
@@ -104,7 +104,7 @@ void FUN_004f8790(int param_1)
                   temp_v6 = pcVar3[2] == 'R';
                 }
                 if (temp_v6) {
-                  temp_v2 = FUN_002e4c2c(temp_v1 + 0x1f64);
+                  temp_v2 = keyedRecordRegisterName(temp_v1 + 0x1f64);
                   *(char *)(temp_v1 + 0x1f5c) = (char)temp_v2;
                   FUN_003478dc(temp_v2,pcVar3);
                   *(char *)(temp_v1 + 0x1f5c) = (char)temp_v2;

@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_002946a0(unsigned int, int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int controllerSetDestination(unsigned int, float *);
 int controllerSetPosition(unsigned int);
-int FUN_003fdb18(unsigned int);
+int controllerSetRotationEulerDegrees(unsigned int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,17 +17,17 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 extern signed char DAT_005f161f; /* 0x5f161f */
 extern int DAT_005f189c; /* 0x5f189c */
 
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002946a0. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 
 
 void FUN_00481784(int param_1)
@@ -61,7 +61,7 @@ void FUN_00481784(int param_1)
     if ((*(unsigned int *)(param_1 + 0x7c) & 4) == 0) goto LAB_004818d0;
   }
   temp_v4 = *(int *)(param_1 + 0x2c);
-  FUN_002b5cb4();
+  distSpatial();
   if (temp_v4 < 0x43960000) {
     return;
   }
@@ -93,7 +93,7 @@ LAB_004818d0:
   if ((*(unsigned int *)(param_1 + 0x7c) & 1) != 0) {
 LAB_004818dc:
     temp_v1 = *(int *)(param_1 + 0x2c);
-    FUN_002b5cb4();
+    distSpatial();
     if (temp_v1 < 0x43960000) {
       return;
     }
@@ -115,8 +115,8 @@ LAB_004818dc:
     temp_v8 = *(float *)(param_1 + 0x2c) + *(float *)(param_1 + 0x98);
     temp_v9 = *(float *)(param_1 + 0x30) + *(float *)(param_1 + 0x9c);
     temp_v10 = *(float *)(param_1 + 0x34) + *(float *)(param_1 + 0xa0);
-    if ((int)*(float *)(DAT_005806a4 + 0x308) >= 0x3f666667) {
-      temp_v5 = (*(float *)(DAT_005806a4 + 0x308) - 0.9f) * 10.0f;
+    if ((int)*(float *)(g_lmapView + 0x308) >= 0x3f666667) {
+      temp_v5 = (*(float *)(g_lmapView + 0x308) - 0.9f) * 10.0f;
       if ((temp_v6 <= temp_v5) && (temp_v6 = temp_v5, (int)temp_v5 >= 0x3f800001)) {
         temp_v6 = 1.0f;
       }
@@ -128,7 +128,7 @@ LAB_004818dc:
       temp_v3 = *(unsigned int *)(*(int *)(param_1 + 0x78) + 4);
       controllerSetDestination(temp_v3,&temp_v8);
     }
-    FUN_003fdb18(temp_v3);
+    controllerSetRotationEulerDegrees(temp_v3);
     controllerSetPosition(*(unsigned int *)(*(int *)(param_1 + 0x78) + 4));
     temp_v1 = *(int *)(*(int *)(param_1 + 0x78) + 4);
     if (DAT_005f161d != '\0') {

@@ -34,7 +34,7 @@ extern unsigned int DAT_00571194; /* 0x571194 */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0026264c(unsigned short);
-extern int FUN_002626e0(void);
+extern int gameProgressIsAdvanced(void);
 extern int FUN_003df57c(unsigned short, unsigned int);
 extern int valueAtF0IsReady(int);
 extern int FUN_004bcbb4(unsigned int, unsigned short);
@@ -184,7 +184,7 @@ LAB_004e89c4:
             if ((((-1 < *(int *)(*param_1 + 0xec)) && ((*(unsigned int *)(*param_1 + 0x110) & 0x80) != 0))
                 || (temp_v0 == 0x493 || temp_v0 == 0x494)) ||
                ((temp_v0 == 0x495 || temp_v0 == 0x496 ||
-                ((temp_v2 = FUN_002626e0(), temp_v2 != 0 && (temp_v2 = valueAtF0IsReady(*param_1), temp_v2 == 0)
+                ((temp_v2 = gameProgressIsAdvanced(), temp_v2 != 0 && (temp_v2 = valueAtF0IsReady(*param_1), temp_v2 == 0)
                  ))))) {
               *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1be) = 6;
               *(unsigned short *)(*(int *)(param_2 + 0x28) + 0x1c0) = 0;

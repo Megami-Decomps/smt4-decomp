@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010dc00` (_code @ 0x10dc00, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: merged functions: tail-call NOP at +0x14 enters an unnamed function beginning at +0x18. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022e2fc(int *);
 int rectangleInitializeSelection(...);
 int FUN_00233240(...);
-int FUN_0023346c(...);
+int uiInitializeEightTimerSet(...);
 int FUN_00233670(...);
 int FUN_0029ee6c(...);
 int asdOperatorNew(void);
@@ -39,9 +39,9 @@ extern int *DAT_0043d9f8; /* 0x43d9f8 */
 
 /* Supplied declaration required: FUN_0022e2fc. */
 /* Supplied declaration required: rectangleInitializeSelection. */
-extern unsigned int *FUN_00233228(void);
+extern unsigned int *uiSelectionControllerConstruct(void);
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_0023346c. */
+/* Supplied declaration required: uiInitializeEightTimerSet. */
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -84,14 +84,14 @@ void FUN_003ab550(int *param_1)
   taskCreateDraw(&LAB_003ab77c,0xe6,1,0,&LAB_003ad368,0,DAT_0043d9f8,param_1[1]);
   param_1[3] = (int)puVar2;
   rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x1d);
-  FUN_0023346c(param_1 + 0x37);
+  uiInitializeEightTimerSet(param_1 + 0x37);
   FUN_00233240(param_1 + 0x37,0);
   FUN_00233240(param_1 + 0x37,1);
   temp_v0 = 0x68;
   asdOperatorNew();
   puVar5 = (unsigned int *)0x0;
   if (temp_v0 != 0) {
-    puVar5 = (unsigned int *)FUN_00233228();
+    puVar5 = (unsigned int *)uiSelectionControllerConstruct();
     *puVar5 = (unsigned int)&DAT_00422434;
   }
   param_1[0x164] = (int)puVar5;

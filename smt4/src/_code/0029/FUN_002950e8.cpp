@@ -4,8 +4,9 @@
 
 extern "C" {
 
-int FUN_002b1ad4(...);
-int FUN_002b1c44(...);
+int spriteSequencePlayerAdvance(...);
+struct ScaleController;
+void controllerUpdateUniformScaleTrack(ScaleController *);
 int FUN_002b1e08(...);
 
 typedef struct fn_002950e8_arg0 fn_002950e8_arg0;
@@ -23,8 +24,7 @@ struct fn_002950e8_arg0 {
     byte field_0x8a; /* +0x8a */
 };
 
-/* Supplied declaration required: FUN_002b1ad4. */
-/* Supplied declaration required: FUN_002b1c44. */
+/* Supplied declaration required: spriteSequencePlayerAdvance. */
 /* Supplied declaration required: FUN_002b1e08. */
 
 
@@ -87,8 +87,8 @@ unsigned int FUN_002950e8(fn_002950e8_arg0 *param_1,int param_2)
   }
   param_1->field_0x52 = param_1->field_0x52 + 1;
   FUN_002b1e08(param_1);
-  FUN_002b1c44(param_1);
-  FUN_002b1ad4(param_1);
+  controllerUpdateUniformScaleTrack((ScaleController *)param_1);
+  spriteSequencePlayerAdvance(param_1);
   temp_v4 = param_1->field_0x86 != 0;
   temp_v0 = 0;
   if (temp_v4) {

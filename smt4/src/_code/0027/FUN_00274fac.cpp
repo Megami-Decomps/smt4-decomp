@@ -8,7 +8,7 @@ int asdMdlManagerMarkDestroy(void);
 int FUN_002671f4(int);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int *);
-int FUN_002a5710(unsigned int);
+int modelSelectPrimaryMotion(unsigned int);
 int asdMdlManagerDestroy(void);
 
 extern int *g_mapGimic; /* 0x447a48 */
@@ -19,7 +19,7 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 extern int FUN_0027cda0(void);
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 
 
@@ -57,7 +57,7 @@ void FUN_00274fac(void)
             FUN_0028c618(*(unsigned int *)(piVar2[temp_v0 * 10 + 0xd] + 8),0);
             if (*(int *)(*(int *)(piVar2[temp_v0 * 10 + 0xd] + 8) + 0x38) !=
                 (int)(short)piVar2[temp_v0 * 10 + 0xc]) {
-              FUN_002a5710(*(unsigned int *)(piVar2[temp_v0 * 10 + 0xd] + 8));
+              modelSelectPrimaryMotion(*(unsigned int *)(piVar2[temp_v0 * 10 + 0xd] + 8));
             }
             *(unsigned char *)((int)piVar2 + temp_v0 * 0x28 + 0x1d) = 0;
           }

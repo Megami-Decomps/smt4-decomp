@@ -12,7 +12,7 @@ int uiSpriteSetImageKeyframe(...);
 int gameFlagIsSet(int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_002a4964(int, unsigned int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -37,7 +37,7 @@ extern unsigned char DAT_0052c884; /* 0x52c884 */
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_003d05a4(int param_1,unsigned short param_2)
@@ -147,7 +147,7 @@ LAB_003d06d4:
       *(int *)(param_1 + 0x88) = temp_v0;
       FUN_00203b40(param_1,temp_v5,temp_v5,1,0,1);
       FUN_002a4964(param_1,*(unsigned int *)(param_1 + 0x88));
-      Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 200);
+      paramsClearPacket(param_1 + 200);
       paramsInit(param_1 + 200,&DAT_0052c83c,0x18,&DAT_0052c854,0x30,0,0,0,0,&DAT_0052c884,0x70);
       FUN_0014e188(param_1 + 0xe8,0x24,0x57,param_1 + 200,1);
       uiSpriteSetKeyframe(param_1 + 0xe8,0);

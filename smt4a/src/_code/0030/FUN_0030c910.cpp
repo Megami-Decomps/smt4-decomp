@@ -1,71 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030c910` (_code @ 0x30c910, 0x5e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Ospace restores the retail stack-save shape, but result/output field addresses use separate bases and two extra instructions instead of retail's shared job+0x180 base. */
+#include "common.h"
+
+struct OnlineReference {
+    s32 index;
+    u32 unk04;
+    u32 unk08;
+};
+struct OnlineResultPair { u32 first, second; };
+struct OnlineCompletionJob {
+    u8 unk000[0x68];
+    u32 instanceKey; // 0x68
+    u8 unk06c[0x24];
+    u8 state[0x114]; // 0x90
+    OnlineResultPair *output; // 0x1a4
+    u8 unk1a8[8];
+    OnlineResultPair result; // 0x1b0
+};
+struct OnlineInstanceTable;
+struct OnlineInstance;
 
 extern "C" {
+OnlineInstanceTable *onlineInstanceTableGetCurrent(void);
+OnlineInstance *onlineInstanceTableFind(OnlineInstanceTable *table, u32 key);
+s32 refIsNonNegative(s32 *index);
+void FUN_002f3dc4(OnlineInstance *instance, const OnlineReference *reference);
+void FUN_002f3dde(OnlineInstance *instance, const OnlineReference *reference);
+void FUN_002e9f00(void *state, s32 value);
+void onlineJobSetStateDone(OnlineCompletionJob *job);
 
-int onlineInstanceTableFind(int, unsigned int);
-int FUN_002e9f00(int, int);
-int onlineJobSetStateDone(int);
-int FUN_002f3dc4(int, unsigned int **, unsigned int, unsigned char *);
-int FUN_002f3dde(int, unsigned int **, unsigned int, unsigned char *);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-extern int onlineInstanceTableGetCurrent(void);
-/* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002f3dc4. */
-/* Supplied declaration required: FUN_002f3dde. */
-extern int refIsNonNegative(unsigned int *);
-
-
-void FUN_0030c910(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
-
+// Complete an online job by delivering its result/reference to the matching instance.
+void FUN_0030c910(OnlineCompletionJob *job, OnlineReference *reference)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int *puVar3;
-  unsigned int temp_v2;
-  unsigned int *temp_v3;
-  unsigned int uStack_1c;
-  unsigned int uStack_18;
-  unsigned char uStack_14;
-  
-  temp_v3 = param_2;
-  uStack_1c = param_3;
-  uStack_18 = param_4;
-  temp_v0 = onlineInstanceTableGetCurrent();
-  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0x68));
-  if (temp_v0 != 0) {
-    temp_v1 = refIsNonNegative(param_2);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_1 + 0x1b4);
-      puVar3 = *(unsigned int **)(param_1 + 0x1a4);
-      *puVar3 = *(unsigned int *)(param_1 + 0x1b0);
-      puVar3[1] = temp_v2;
-      temp_v3 = (unsigned int *)*param_2;
-      uStack_1c = param_2[1];
-      uStack_18 = param_2[2];
-      FUN_002f3dc4(temp_v0,&temp_v3,uStack_18,&uStack_14);
+    OnlineInstance *instance = onlineInstanceTableFind(onlineInstanceTableGetCurrent(), job->instanceKey);
+    if (instance != NULL) {
+        if (refIsNonNegative(&reference->index) != 0) {
+            *job->output = job->result;
+            OnlineReference copied = *reference;
+            FUN_002f3dc4(instance, &copied);
+        } else {
+            OnlineReference copied = *reference;
+            FUN_002f3dde(instance, &copied);
+        }
+    } else {
+        FUN_002e9f00(job->state, 4);
     }
-    else {
-      temp_v3 = (unsigned int *)*param_2;
-      uStack_1c = param_2[1];
-      uStack_18 = param_2[2];
-      FUN_002f3dde(temp_v0,&temp_v3,uStack_18,&uStack_14);
-    }
-  }
-  else {
-    FUN_002e9f00(param_1 + 0x90,4);
-  }
-  onlineJobSetStateDone(param_1);
-  return;
+    onlineJobSetStateDone(job);
 }
-
-} /* extern "C" */
+}

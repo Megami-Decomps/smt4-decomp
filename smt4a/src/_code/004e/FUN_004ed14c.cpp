@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ed14c` (_code @ 0x4ed14c, 0x45c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
 
@@ -9,9 +10,8 @@ int FUN_004a9308(...);
 int FUN_004c571c(...);
 int FUN_004c9160(...);
 int FUN_004dd800(...);
-int FUN_004e0114(...);
 int FUN_004e5c10(...);
-int FUN_004e626c(int *, unsigned int);
+int btlUnitClearRecordFields(int *, unsigned int);
 int FUN_004fd508(...);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -33,13 +33,12 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004a9308. */
-extern int FUN_004c3a98(int, unsigned int);
+extern int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: FUN_004c571c. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004dd800. */
-/* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004e5c10. */
-/* Supplied declaration required: FUN_004e626c. */
+/* Supplied declaration required: btlUnitClearRecordFields. */
 /* Supplied declaration required: FUN_004fd508. */
 
 
@@ -59,7 +58,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
   unsigned int temp_v8;
   int temp_v9;
   
-  FUN_004e626c(param_1,*(unsigned int *)(*param_1 + 0xa4));
+  btlUnitClearRecordFields(param_1,*(unsigned int *)(*param_1 + 0xa4));
   temp_v9 = 0;
   do {
     param_2[temp_v9 * 4 + 0x279] = 0;
@@ -85,7 +84,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
     }
     FUN_004c9160(0xb,param_2[8],0,1);
     FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
-    FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
     *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
   }
   else if ((temp_v1 & 0x100) != 0) {
@@ -97,7 +96,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
     temp_v4 = 0xc;
     FUN_004c9160(temp_v4,puVar9,0,1);
     FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
-    FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
     *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
   }
   else {
@@ -109,7 +108,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
           (temp_v7 & (DAT_0057116c | DAT_00571174)) == 0) {
         FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
       }
-      temp_v9 = FUN_004c3a98((int)*(short *)(param_2[9] + 0x6a),0x1a);
+      temp_v9 = btlFindEntryValue((int)*(short *)(param_2[9] + 0x6a),0x1a);
       puVar9 = (unsigned int *)param_2[8];
       if (!((*puVar9 & DAT_005711a0) == 0 && (puVar9[1] & DAT_005711a4) == 0)) {
         temp_v4 = 0xd;
@@ -122,7 +121,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
       }
       FUN_004c9160(temp_v4,puVar9,0,1);
       FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
-      FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     }
     else if ((temp_v1 & 0x40) != 0) {
@@ -139,14 +138,14 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
       FUN_004c571c((int)*(short *)(param_2[9] + 0x6a),0x20,1,0);
       FUN_004c9160(0x26,param_2[8],0,1);
       FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
-      FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
     }
   }
   if (((DAT_005711a4 | DAT_005711ac) & ((unsigned int *)param_2[8])[1]) != 0 ||
       ((DAT_005711a8 | DAT_005711a0) & *(unsigned int *)param_2[8]) != 0) {
     FUN_004c571c((int)*(short *)(param_2[9] + 0x6a),0x1a,0xffffffff,0);
-    temp_v9 = FUN_004c3a98((int)*(short *)(param_2[9] + 0x6a),0x1a);
+    temp_v9 = btlFindEntryValue((int)*(short *)(param_2[9] + 0x6a),0x1a);
     if (temp_v9 == 0) {
       puVar9 = (unsigned int *)param_2[8];
       temp_v6 = *puVar9;

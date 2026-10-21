@@ -53,7 +53,7 @@ extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: asdOperatorDeleteC. */
 /* Supplied declaration required: FUN_003eaf20. */
-extern unsigned char *FUN_004aa7b0(unsigned int);
+extern unsigned char *btlUiHasSelection(unsigned int);
 extern unsigned char *hasFlag80Or1000(unsigned int);
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -115,7 +115,7 @@ unsigned char * FUN_003ece9c(int param_1)
   if (puVar2 != (unsigned char *)0x0) {
     return puVar2;
   }
-  puVar2 = (unsigned char *)FUN_004aa7b0(g_btlUiBlock);
+  puVar2 = (unsigned char *)btlUiHasSelection(g_btlUiBlock);
   if (puVar2 != (unsigned char *)0x0) {
     return puVar2;
   }

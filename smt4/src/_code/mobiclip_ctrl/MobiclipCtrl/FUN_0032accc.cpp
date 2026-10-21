@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002adba8(unsigned long long *, int, int);
 int FUN_002b7dc4(unsigned int, unsigned int, unsigned int, unsigned int, unsigned long long, unsigned long long);
-int FUN_002b81e4(void);
+int gpuSubmitDefaultPacket(void);
 int FUN_002c1b64(int, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -20,7 +20,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002adba8. */
 /* Supplied declaration required: FUN_002b7dc4. */
-/* Supplied declaration required: FUN_002b81e4. */
+/* Supplied declaration required: gpuSubmitDefaultPacket. */
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5210(void);
 
@@ -57,7 +57,7 @@ void FUN_0032accc(void)
   temp_v0 = *(int *)(temp_v0 * 0x20 + 0x4c3aa0);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002b81e4();
+  gpuSubmitDefaultPacket();
   FUN_002b7dc4(0xffffffff,0xffffffff,0xffffffff,0xffffffff,in_d8,in_d9);
   uStack_20 = 0x1024500000001;
   uStack_18 = 0xf023100000001;

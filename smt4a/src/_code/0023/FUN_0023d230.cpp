@@ -64,7 +64,7 @@ extern int FUN_002684d0(unsigned int, int);
 extern int FUN_00284140(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_00389d9c. */
 extern unsigned int FUN_003df57c(unsigned int, unsigned int);
 extern unsigned int FUN_004bcbb4(int, unsigned int);
@@ -110,7 +110,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
   temp_v7 = 0;
   do {
     temp_v1 = FUN_002a4860(temp_v13);
-    temp_v2 = FUN_002c2c68(temp_v13);
+    temp_v2 = objectApplyIfUnblocked(temp_v13);
     if (temp_v2 <= temp_v1 + temp_v7) break;
     temp_v1 = FUN_002a4860(temp_v13);
     temp_v9 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b70);
@@ -212,7 +212,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 0xb);
   FUN_0023d150(temp_v13,param_1,param_2,1);
-  if ((temp_v18 != 0) && (temp_v7 = FUN_002c2c68(temp_v6 + 0x1ec), temp_v7 >= 1)) {
+  if ((temp_v18 != 0) && (temp_v7 = objectApplyIfUnblocked(temp_v6 + 0x1ec), temp_v7 >= 1)) {
     temp_v7 = FUN_002a4860(temp_v13);
     temp_v1 = FUN_002a4894(temp_v13);
     temp_v9 = *(unsigned int *)(temp_v6 + (temp_v1 + temp_v7) * 8 + 0x1b70);
@@ -317,7 +317,7 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     }
     FUN_00183bb0();
   }
-  temp_v6 = FUN_002c2c68(temp_v6 + 0x1ec);
+  temp_v6 = objectApplyIfUnblocked(temp_v6 + 0x1ec);
   if (temp_v6 < 1) {
     FUN_00164b5c(2,0x12,0x1b,param_1,param_2,0xdd);
     temp_v6 = FUN_001834a4(0x12,0x544);

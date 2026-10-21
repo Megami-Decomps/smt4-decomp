@@ -1,53 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ff088` (_code @ 0x2ff088, 0x62 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: iterator spills occupy28 instead of20 bytes and the left-child branch is not outlined after the iterator comparison. -O2 differs; -Ospace restores total spill size but not registers/branch layout. */
+#include "common.h"
+
+struct WordKeyTreeNode {
+    u32 color; // 0x00
+    WordKeyTreeNode *parent; // 0x04; the sentinel stores the root here.
+    WordKeyTreeNode *left; // 0x08
+    WordKeyTreeNode *right; // 0x0c
+    u32 key; // 0x10
+};
+struct WordKeyTree {
+    u8 unk00[0x10];
+    WordKeyTreeNode *sentinel; // 0x10
+    u8 unk14[5];
+    u8 comparator; // 0x19
+};
+struct WordKeyTreeIterator { WordKeyTreeNode *node; };
 
 extern "C" {
+u32 lessU32(const u8 *comparator, const u32 *left, const u32 *right);
+u32 wordRefsEqual_002ff370(const WordKeyTreeIterator *left, const WordKeyTreeIterator *right);
 
-int lessU32(...);
-
-/* stack frame of param_3: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_3_stack;
-
-/* Supplied declaration required: lessU32. */
-extern int wordRefsEqual_002ff370(int *, unsigned int *);
-
-
-void FUN_002ff088(int *param_1,int param_2,unsigned int param_3)
-
+void FUN_002ff088(WordKeyTreeIterator *out, WordKeyTree *tree, const u32 *key)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4 [2];
-  
-  temp_v0 = *(int *)(*(int *)(param_2 + 0x10) + 4);
-  temp_v2 = *(int *)(param_2 + 0x10);
-  while (temp_v1 = temp_v0, temp_v1 != 0) {
-    temp_v0 = lessU32(param_2 + 0x19,temp_v1 + 0x10,param_3);
-    if (temp_v0 != 0) {
-      temp_v0 = *(int *)(temp_v1 + 0xc);
+    WordKeyTreeNode *candidate = tree->sentinel;
+    WordKeyTreeNode *node = candidate->parent;
+    while (node != NULL) {
+        if (lessU32(&tree->comparator, &node->key, key)) {
+            node = node->right;
+        }
+        else {
+            candidate = node;
+            node = node->left;
+        }
+    }
+    WordKeyTreeIterator result = {candidate};
+    WordKeyTreeIterator end = {tree->sentinel};
+    if (wordRefsEqual_002ff370(&result, &end) ||
+        lessU32(&tree->comparator, key, &result.node->key)) {
+        out->node = tree->sentinel;
     }
     else {
-      temp_v0 = *(int *)(temp_v1 + 8);
-      temp_v2 = temp_v1;
+        out->node = result.node;
     }
-  }
-  temp_v4[0] = *(unsigned int *)(param_2 + 0x10);
-  temp_v3 = temp_v2;
-  temp_v0 = wordRefsEqual_002ff370(&temp_v3,temp_v4);
-  if ((temp_v0 != 0) || (temp_v0 = lessU32(param_2 + 0x19,param_3,temp_v3 + 0x10), temp_v0 != 0)) {
-    temp_v3 = *(int *)(param_2 + 0x10);
-  }
-  *param_1 = temp_v3;
-  return;
 }
-
-} /* extern "C" */
+}

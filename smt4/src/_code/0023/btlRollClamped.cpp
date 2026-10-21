@@ -2,14 +2,14 @@
 
 extern "C" {
 
-s32 FUN_0022ea28(void);
+s32 gameSlotTableGetHeader(void);
 s32 recordPackedValue(u32 id);
 s32 FUN_0028fb40(u32 id);
 
-/* Divides FUN_0022ea28() by `divisor`, clamps the quotient to 0-99 and then to the id's available count. */
+/* Divides gameSlotTableGetHeader() by `divisor`, clamps the quotient to 0-99 and then to the id's available count. */
 s32 btlRollClamped(u32 id, s32 divisor)
 {
-    s32 quotient = FUN_0022ea28() / divisor;
+    s32 quotient = gameSlotTableGetHeader() / divisor;
     s32 amount;
     s32 available;
 

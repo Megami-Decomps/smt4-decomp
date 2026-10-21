@@ -11,7 +11,7 @@ int FUN_003f22fc(int, int);
 int FUN_003f26d4(int);
 int gameFlagSetValue(int, int);
 int FUN_004a9d1c(unsigned int);
-int FUN_004abbe8(unsigned int);
+int btlUiIdsRefresh(unsigned int);
 int FUN_004fbf90(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -49,7 +49,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_003f26d4. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004a9d1c. */
-/* Supplied declaration required: FUN_004abbe8. */
+/* Supplied declaration required: btlUiIdsRefresh. */
 /* Supplied declaration required: FUN_004fbf90. */
 
 
@@ -170,7 +170,7 @@ void FUN_003f034c(int param_1)
     return;
   }
   FUN_003f26d4(param_1);
-  FUN_004abbe8(g_btlUiBlock);
+  btlUiIdsRefresh(g_btlUiBlock);
   temp_v3 = ~DAT_00573a14;
   temp_v0 = ~DAT_00573a74;
   *puVar7 = *puVar7 & ~DAT_00573a10 & ~DAT_00573a70;

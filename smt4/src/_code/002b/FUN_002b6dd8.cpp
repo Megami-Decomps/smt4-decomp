@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002aea44(unsigned char [6]);
-int FUN_002aea50(int *, int *, int);
+int callbackBindingInitFromKind(int *, int *, int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -19,8 +19,8 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002aea44. */
-/* Supplied declaration required: FUN_002aea50. */
-extern int FUN_002aeaac(unsigned int);
+/* Supplied declaration required: callbackBindingInitFromKind. */
+extern int recordTableGet(unsigned int);
 
 
 int FUN_002b6dd8(int param_1,unsigned int param_2)
@@ -41,11 +41,11 @@ int FUN_002b6dd8(int param_1,unsigned int param_2)
   unsigned char temp_v7 [6];
   char temp_v8;
   
-  temp_v0 = FUN_002aeaac(param_2);
+  temp_v0 = recordTableGet(param_2);
   piVar6 = *(int **)(temp_v0 + 8);
   temp_v0 = 0;
   temp_v2 = 0;
-  FUN_002aea50(&temp_v4,piVar6,0x30);
+  callbackBindingInitFromKind(&temp_v4,piVar6,0x30);
   FUN_002aea44(temp_v7);
   temp_v4 = param_1;
   piVar2 = (int *)((int)&temp_v4 + ((int)temp_v6 >> 1));

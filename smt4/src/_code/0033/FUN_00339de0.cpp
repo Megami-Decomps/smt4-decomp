@@ -1,32 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00339de0` (_code @ 0x339de0, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed vector stores let the compiler retain g_btlMain; retail reloads the global pointer after both aggregate copies, also changing address scheduling. */
+#include "shard/W5_W5Match4_BattleVectorTransition.h"
+
+struct BattleSnapshotSource {
+    u8 unk00[0x0c];  // 0x00
+    BattleVector3 first; // 0x0c
+    BattleVector3 second; // 0x18
+    u32 value;            // 0x24
+};
+struct BattleSnapshotOwner {
+    u8 unk0000[0x1ea4]; // 0x0000
+    BattleVector3 first;  // 0x1ea4
+    BattleVector3 second; // 0x1eb0
+    u32 value;             // 0x1ebc
+};
 
 extern "C" {
+extern BattleSnapshotSource* g_btlMain;
 
-extern int g_btlMain; /* 0x4342c8 */
-
-
-void FUN_00339de0(int param_1)
-
+// Saves the battle's current pair of vectors and accompanying value.
+void FUN_00339de0(BattleSnapshotOwner* owner)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (g_btlMain != 0) {
-    temp_v0 = *(unsigned int *)(g_btlMain + 0x10);
-    temp_v1 = *(unsigned int *)(g_btlMain + 0x14);
-    *(unsigned int *)(param_1 + 0x1ea4) = *(unsigned int *)(g_btlMain + 0xc);
-    *(unsigned int *)(param_1 + 0x1ea8) = temp_v0;
-    *(unsigned int *)(param_1 + 0x1eac) = temp_v1;
-    temp_v0 = *(unsigned int *)(g_btlMain + 0x1c);
-    temp_v1 = *(unsigned int *)(g_btlMain + 0x20);
-    *(unsigned int *)(param_1 + 0x1eb0) = *(unsigned int *)(g_btlMain + 0x18);
-    *(unsigned int *)(param_1 + 0x1eb4) = temp_v0;
-    *(unsigned int *)(param_1 + 0x1eb8) = temp_v1;
-    *(unsigned int *)(param_1 + 0x1ebc) = *(unsigned int *)(g_btlMain + 0x24);
-  }
-  return;
+    if (g_btlMain != NULL) {
+        owner->first = g_btlMain->first;
+        owner->second = g_btlMain->second;
+        owner->value = g_btlMain->value;
+    }
 }
-
-} /* extern "C" */
+}

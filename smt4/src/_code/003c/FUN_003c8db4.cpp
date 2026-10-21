@@ -33,7 +33,7 @@ struct fn_003c8db4_arg0 {
 extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029ea68(unsigned short);
 extern int gameGetUnitRecord(void);
-extern int FUN_002b066c(unsigned short);
+extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: devilGetRecord. */
 
 
@@ -61,7 +61,7 @@ unsigned short FUN_003c8db4(fn_003c8db4_arg0 *param_1,unsigned int param_2,unsig
   if ((((param_1->field_0x17d == 0) ||
        (temp_v0 = FUN_0029dde0(), *(unsigned char *)((int)param_4 + 3) <= temp_v0)) &&
       ((param_1->field_0x17c == 0 || (temp_v1 = FUN_0029ea68(*param_4), temp_v1 == 0)))) &&
-     ((param_1->field_0x17d == 0 || (temp_v1 = FUN_002b066c(*param_4), temp_v1 == 0)))) {
+     ((param_1->field_0x17d == 0 || (temp_v1 = partyMemberFindById(*param_4), temp_v1 == 0)))) {
     temp_v2 = param_2;
     devilGetRecord();
     temp_v0 = param_3;

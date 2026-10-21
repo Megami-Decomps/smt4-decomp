@@ -19,7 +19,7 @@ extern unsigned char LAB_0027c9b8; /* 0x27c9b8 */
 extern unsigned char LAB_0027c9cc; /* 0x27c9cc */
 extern unsigned char LAB_0027c9e0; /* 0x27c9e0 */
 extern unsigned char LAB_0027c9f4; /* 0x27c9f4 */
-extern int DAT_0044cd88; /* 0x44cd88 */
+extern int g_mapStateSlots; /* 0x44cd88 */
 extern unsigned int DAT_0049fbf4; /* 0x49fbf4 */
 extern unsigned int DAT_0049fbf8; /* 0x49fbf8 */
 extern unsigned int DAT_0049fbfc; /* 0x49fbfc */
@@ -29,7 +29,7 @@ extern unsigned int DAT_0049fc08; /* 0x49fc08 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int dataTableGetRecordFortyNine(void);
-extern int FUN_00253154(int);
+extern int mapSavedFlagIsSet(int);
 extern unsigned int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nodeSetScale. */
 /* Supplied declaration required: FUN_0027ee24. */
@@ -62,7 +62,7 @@ unsigned int FUN_0027c3d0(void)
   int temp_v10;
   
   temp_v0 = gameGetMapBlock();
-  temp_v5 = *(short *)(DAT_0044cd88 + 8);
+  temp_v5 = *(short *)(g_mapStateSlots + 8);
   if (temp_v5 != 0) {
     if (temp_v5 != 1) {
       if (temp_v5 != 2) {
@@ -71,9 +71,9 @@ unsigned int FUN_0027c3d0(void)
         }
         return 0;
       }
-      temp_v2 = (int)*(short *)(DAT_0044cd88 + 10);
+      temp_v2 = (int)*(short *)(g_mapStateSlots + 10);
       if (((temp_v2 != 0) && (temp_v2 != 1 && temp_v2 != 3)) &&
-         (temp_v2 = FUN_002adee0(*(unsigned int *)(DAT_0044cd88 + temp_v2 * 8 + 0x1c)), temp_v2 == 0)) {
+         (temp_v2 = FUN_002adee0(*(unsigned int *)(g_mapStateSlots + temp_v2 * 8 + 0x1c)), temp_v2 == 0)) {
         return 0;
       }
       goto LAB_0027c7c0;
@@ -90,8 +90,8 @@ unsigned int FUN_0027c3d0(void)
         do {
           pcVar2 = pcVar11;
           FUN_0027ee24();
-          if ((*pcVar2 != -1) && (temp_v7 = (int)*(short *)(DAT_0044cd88 + 4), *pcVar2 == temp_v7)) {
-            temp_v1 = (int)*(short *)(DAT_0044cd88 + 6);
+          if ((*pcVar2 != -1) && (temp_v7 = (int)*(short *)(g_mapStateSlots + 4), *pcVar2 == temp_v7)) {
+            temp_v1 = (int)*(short *)(g_mapStateSlots + 6);
             temp_v9 = temp_v1 == 0;
             if (!temp_v9) {
               temp_v7 = (int)pcVar2[1];
@@ -108,7 +108,7 @@ unsigned int FUN_0027c3d0(void)
                                      * 4 + 0x794) & (1 << (((int)pcVar11 % 0x20) & 0xffU))) == 0)) {
                 temp_v9 = 1;
               }
-              if (((((temp_v1 != 1) || (temp_v7 = FUN_00253154((int)(short)(int)pcVar11), temp_v7 == 0)) &&
+              if (((((temp_v1 != 1) || (temp_v7 = mapSavedFlagIsSet((int)(short)(int)pcVar11), temp_v7 == 0)) &&
                    (!temp_v9)) &&
                   ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 != 0)))) &&
                  ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v7 = gameFlagIsSet(), temp_v7 == 0)))) {
@@ -122,34 +122,34 @@ unsigned int FUN_0027c3d0(void)
         } while ((int)pcVar11 < temp_v7);
         if (temp_v4 != 0) {
           if (temp_v4 != 1) {
-            *(unsigned int *)(DAT_0044cd88 + temp_v2 * 8 + 0x18) = 2;
+            *(unsigned int *)(g_mapStateSlots + temp_v2 * 8 + 0x18) = 2;
           }
           else {
-            *(unsigned int *)(DAT_0044cd88 + temp_v2 * 8 + 0x18) = 1;
+            *(unsigned int *)(g_mapStateSlots + temp_v2 * 8 + 0x18) = 1;
           }
         }
         else {
-          *(unsigned int *)(DAT_0044cd88 + temp_v2 * 8 + 0x18) = 0;
+          *(unsigned int *)(g_mapStateSlots + temp_v2 * 8 + 0x18) = 0;
         }
       }
       else {
-        *(unsigned int *)(DAT_0044cd88 + temp_v2 * 8 + 0x18) = 0;
+        *(unsigned int *)(g_mapStateSlots + temp_v2 * 8 + 0x18) = 0;
       }
-      temp_v7 = DAT_0044cd88;
+      temp_v7 = g_mapStateSlots;
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 8);
     if (temp_v10 == 0) {
-      *(unsigned short *)(DAT_0044cd88 + 8) = 99;
+      *(unsigned short *)(g_mapStateSlots + 8) = 99;
       return 1;
     }
-    *(unsigned short *)(DAT_0044cd88 + 10) = 0;
+    *(unsigned short *)(g_mapStateSlots + 10) = 0;
     *(short *)(temp_v7 + 8) = *(short *)(temp_v7 + 8) + 1;
   }
-  temp_v2 = DAT_0044cd88;
-  temp_v7 = (int)*(short *)(DAT_0044cd88 + 10);
-  if (*(int *)(DAT_0044cd88 + temp_v7 * 8 + 0x18) == 0) {
-    temp_v5 = *(short *)(DAT_0044cd88 + 10) + 1;
-    *(short *)(DAT_0044cd88 + 10) = temp_v5;
+  temp_v2 = g_mapStateSlots;
+  temp_v7 = (int)*(short *)(g_mapStateSlots + 10);
+  if (*(int *)(g_mapStateSlots + temp_v7 * 8 + 0x18) == 0) {
+    temp_v5 = *(short *)(g_mapStateSlots + 10) + 1;
+    *(short *)(g_mapStateSlots + 10) = temp_v5;
     if (temp_v5 >= 8) {
       *(unsigned short *)(temp_v2 + 8) = 99;
       return 1;
@@ -164,65 +164,65 @@ unsigned int FUN_0027c3d0(void)
             if (temp_v7 != 5) {
               if (temp_v7 != 6) {
                 temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9a4,0x1c0);
-                *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
+                *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
               }
               else {
                 temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9f4,0x1c0);
-                *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
+                *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
               }
             }
             else {
               temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9e0,0x1c0);
-              *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
+              *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
             }
           }
           else {
             temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9cc,0x1c0);
-            *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
+            *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
           }
         }
         else {
           temp_v3 = asdMdlManagerCreateFromSource(DAT_0049fc04,DAT_0049fc08,0x1c0);
-          *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
+          *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
         }
       }
       else {
         temp_v3 = asdMdlManagerCreateSecondList(&LAB_0027c9b8,0x1c0);
-        *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
+        *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
       }
     }
     else {
       temp_v3 = asdMdlManagerCreateFromSource(DAT_0049fbfc,DAT_0049fc00,0x1c0);
-      *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
+      *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
     }
   }
   else {
     temp_v3 = asdMdlManagerCreateFromSource(DAT_0049fbf4,DAT_0049fbf8,0x1c0);
-    *(unsigned int *)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = temp_v3;
+    *(unsigned int *)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = temp_v3;
   }
-  temp_v2 = DAT_0044cd88;
-  *(short *)(DAT_0044cd88 + 8) = *(short *)(DAT_0044cd88 + 8) + 1;
+  temp_v2 = g_mapStateSlots;
+  *(short *)(g_mapStateSlots + 8) = *(short *)(g_mapStateSlots + 8) + 1;
   if (*(unsigned short *)(temp_v2 + 10) >= 2 && *(unsigned short *)(temp_v2 + 10) != 3) {
     return 0;
   }
 LAB_0027c7c0:
-  temp_v5 = *(short *)(DAT_0044cd88 + 4);
+  temp_v5 = *(short *)(g_mapStateSlots + 4);
   temp_v9 = temp_v5 == 0x65;
   if (temp_v9) {
-    temp_v5 = *(short *)(DAT_0044cd88 + 10);
+    temp_v5 = *(short *)(g_mapStateSlots + 10);
   }
   if (temp_v9 && temp_v5 == 3) {
-    FUN_002a0428(*(unsigned int *)(DAT_0044cd88 + 0x34),1);
+    FUN_002a0428(*(unsigned int *)(g_mapStateSlots + 0x34),1);
     temp_v2 = 0;
-    puVar5 = *(unsigned int **)(DAT_0044cd88 + 0x34);
+    puVar5 = *(unsigned int **)(g_mapStateSlots + 0x34);
     *puVar5 = *puVar5 | 2;
     *(unsigned char *)(*(int *)(puVar5[2] + 0x2c) + 0x1f6) = 0;
     do {
-      temp_v7 = DAT_0044cd88 + temp_v2 * 0x4c;
+      temp_v7 = g_mapStateSlots + temp_v2 * 0x4c;
       *(unsigned char *)(temp_v7 + 0x9d8) = 1;
       *(unsigned char *)(temp_v7 + 0x9f8) = 0;
       *(unsigned char *)(temp_v7 + 0xa04) = 1;
-      temp_v3 = asdMdlManagerClone(*(unsigned int *)(DAT_0044cd88 + 0x34),0);
+      temp_v3 = asdMdlManagerClone(*(unsigned int *)(g_mapStateSlots + 0x34),0);
       *(unsigned int *)(temp_v7 + 0xa08) = temp_v3;
       *(unsigned char *)(temp_v7 + 0xa0c) = 1;
       *(unsigned int *)(temp_v7 + 0xa10) = 0;
@@ -241,32 +241,32 @@ LAB_0027c7c0:
     do {
       pcVar2 = pcVar11;
       FUN_0027ee24();
-      if ((*pcVar2 != -1) && (temp_v2 = (int)*(short *)(DAT_0044cd88 + 4), *pcVar2 == temp_v2)) {
-        temp_v4 = (int)*(short *)(DAT_0044cd88 + 6);
+      if ((*pcVar2 != -1) && (temp_v2 = (int)*(short *)(g_mapStateSlots + 4), *pcVar2 == temp_v2)) {
+        temp_v4 = (int)*(short *)(g_mapStateSlots + 6);
         if (temp_v4 != 0) {
           temp_v2 = (int)pcVar2[1];
         }
         if ((temp_v4 == 0 || temp_v2 == temp_v4) &&
-           (temp_v2 = (int)pcVar2[0xb], temp_v2 == *(short *)(DAT_0044cd88 + 10))) {
+           (temp_v2 = (int)pcVar2[0xb], temp_v2 == *(short *)(g_mapStateSlots + 10))) {
           temp_v9 = 0;
           if (((temp_v2 == 0) || (temp_v2 == 6)) &&
              ((*(unsigned int *)(temp_v0 + ((int)(pcVar11 + ((unsigned int)((int)pcVar11 >> 0x1f) >> 0x1b)) >> 5) * 4
                         + 0x794) & (1 << (((int)pcVar11 % 0x20) & 0xffU))) == 0)) {
             temp_v9 = 1;
           }
-          if ((((temp_v2 != 1) || (temp_v2 = FUN_00253154((int)(short)(int)pcVar11), temp_v2 == 0)) &&
+          if ((((temp_v2 != 1) || (temp_v2 = mapSavedFlagIsSet((int)(short)(int)pcVar11), temp_v2 == 0)) &&
               (!temp_v9)) &&
              (((*(short *)(pcVar2 + 0xc) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 != 0)) &&
               ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v2 = gameFlagIsSet(), temp_v2 == 0)))))) {
-            temp_v2 = DAT_0044cd88;
+            temp_v2 = g_mapStateSlots;
             temp_v4 = 0;
             do {
               temp_v1 = temp_v4;
-              if (*(char *)(DAT_0044cd88 + temp_v4 * 0x4c + 0x58) == '\0') break;
+              if (*(char *)(g_mapStateSlots + temp_v4 * 0x4c + 0x58) == '\0') break;
               temp_v4 = temp_v4 + 1;
               temp_v1 = -1;
             } while (temp_v4 < 0x20);
-            *(short *)(DAT_0044cd88 + 0xc) = (short)temp_v1;
+            *(short *)(g_mapStateSlots + 0xc) = (short)temp_v1;
             temp_v4 = temp_v2 + (short)temp_v1 * 0x4c;
             *(int *)(temp_v2 + 0x10) = *(int *)(temp_v2 + 0x10) + 1;
             *(unsigned char *)(temp_v4 + 0x58) = 1;
@@ -283,19 +283,19 @@ LAB_0027c7c0:
             *(unsigned int *)(temp_v4 + 0x74) = 0;
             *(unsigned char *)(temp_v4 + 0x78) = 1;
             *(short *)(temp_v4 + 0x7a) = (short)pcVar2[10];
-            temp_v5 = *(short *)(DAT_0044cd88 + 10);
+            temp_v5 = *(short *)(g_mapStateSlots + 10);
             *(short *)(temp_v4 + 0x7c) = temp_v5;
             *(char **)(temp_v4 + 0x80) = pcVar11;
             if (((temp_v5 == 3 || temp_v5 == 4) || (temp_v5 == 5 || temp_v5 == 7)) &&
-               (temp_v2 = FUN_00253154((int)(short)(int)pcVar11), temp_v2 != 0)) {
+               (temp_v2 = mapSavedFlagIsSet((int)(short)(int)pcVar11), temp_v2 != 0)) {
               *(unsigned int *)(temp_v4 + 0x74) = 2;
               *(unsigned int *)(temp_v4 + 0x5c) = 6;
             }
-            temp_v2 = DAT_0044cd88;
-            temp_v5 = *(short *)(DAT_0044cd88 + 4);
+            temp_v2 = g_mapStateSlots;
+            temp_v5 = *(short *)(g_mapStateSlots + 4);
             temp_v9 = temp_v5 == 0x65;
             if (temp_v9) {
-              temp_v5 = *(short *)(DAT_0044cd88 + 10);
+              temp_v5 = *(short *)(g_mapStateSlots + 10);
             }
             if (temp_v9 && temp_v5 == 3) {
               *(unsigned char *)(temp_v4 + 0x94) = 1;
@@ -311,7 +311,7 @@ LAB_0027c7c0:
                 *(unsigned char *)(temp_v4 + 0x8c) = 1;
                 *(unsigned int *)(temp_v4 + 0x90) = 0;
                 FUN_002a0428(temp_v3,1);
-                if (*(short *)(DAT_0044cd88 + 4) >= 100) {
+                if (*(short *)(g_mapStateSlots + 4) >= 100) {
                   nodeSetScale(*(unsigned int *)(*(int *)(temp_v4 + 0x88) + 8),0);
                 }
               }
@@ -322,9 +322,9 @@ LAB_0027c7c0:
                 temp_v5 = *(short *)(temp_v2 + 10);
                 *(int *)(temp_v4 + 0x90) = (int)temp_v5;
                 FUN_002a0428(*(unsigned int *)(temp_v2 + temp_v5 * 8 + 0x1c),1);
-                if (*(short *)(DAT_0044cd88 + 4) >= 100) {
+                if (*(short *)(g_mapStateSlots + 4) >= 100) {
                   nodeSetScale(*(unsigned int *)
-                                (*(int *)(DAT_0044cd88 + *(int *)(temp_v4 + 0x90) * 8 + 0x1c) + 8),0);
+                                (*(int *)(g_mapStateSlots + *(int *)(temp_v4 + 0x90) * 8 + 0x1c) + 8),0);
                 }
               }
             }
@@ -336,9 +336,9 @@ LAB_0027c7c0:
       temp_v2 = dataTableGetRecordFortyNine();
     } while ((int)pcVar11 < temp_v2);
   }
-  temp_v0 = DAT_0044cd88;
-  temp_v5 = *(short *)(DAT_0044cd88 + 10) + 1;
-  *(short *)(DAT_0044cd88 + 10) = temp_v5;
+  temp_v0 = g_mapStateSlots;
+  temp_v5 = *(short *)(g_mapStateSlots + 10) + 1;
+  *(short *)(g_mapStateSlots + 10) = temp_v5;
   if (temp_v5 < 8) {
     temp_v6 = *(short *)(temp_v0 + 8) - 1;
   }

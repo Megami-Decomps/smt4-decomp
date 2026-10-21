@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00123934(void);
 int FUN_00234624(unsigned char [4], unsigned int, unsigned int);
-int FUN_002a12d8(unsigned int *);
-int FUN_002baa40(unsigned int *, int);
+int legacyResourceIdRemap(unsigned int *);
+int resultPairInitialize(unsigned int *, int);
 int FUN_003540d8(int *, int, int, int *);
 int FUN_003df244(int *, unsigned char [4]);
 
@@ -24,8 +24,8 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00123934. */
 /* Supplied declaration required: FUN_00234624. */
-/* Supplied declaration required: FUN_002a12d8. */
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: legacyResourceIdRemap. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: FUN_003540d8. */
 /* Supplied declaration required: FUN_003df244. */
@@ -67,7 +67,7 @@ unsigned char * FUN_0038bd90(unsigned char *param_1,int param_2)
   puVar2[2] = 0;
   puVar2[3] = 0;
   puVar3 = (unsigned int *)&temp_v4;
-  FUN_002baa40(puVar3,0);
+  resultPairInitialize(puVar3,0);
   temp_v2 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v2;
@@ -87,17 +87,17 @@ unsigned char * FUN_0038bd90(unsigned char *param_1,int param_2)
   FUN_003540d8(&temp_v4,temp_v1 + 0x7c,temp_v1 + 0x18,&temp_v5);
   *puVar2 = temp_v4;
   puVar2[1] = uStack_64;
-  temp_v1 = FUN_002a12d8(puVar2);
+  temp_v1 = legacyResourceIdRemap(puVar2);
   if (temp_v1 >= 0) {
     *(unsigned char *)(puVar2 + -1) = 0;
   }
   else {
-    temp_v1 = FUN_002a12d8(puVar2);
+    temp_v1 = legacyResourceIdRemap(puVar2);
     if (temp_v1 == -0x36dec7ff) {
       temp_v0 = 0x67;
     }
     else {
-      FUN_002a12d8(puVar2);
+      legacyResourceIdRemap(puVar2);
       temp_v0 = 100;
     }
     *(unsigned char *)(puVar2 + -1) = temp_v0;

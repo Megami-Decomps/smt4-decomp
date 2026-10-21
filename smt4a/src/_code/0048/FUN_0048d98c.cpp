@@ -9,8 +9,8 @@ int FUN_00183bb0(void);
 int FUN_0014e314(...);
 int FUN_001692ac(...);
 int FUN_0016c4b8(...);
-int FUN_0016c69c(...);
-int FUN_0016c6f0(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_001835b4(...);
 int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
@@ -41,8 +41,8 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Supplied declaration required: FUN_0014e314. */
 /* Supplied declaration required: FUN_001692ac. */
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -204,7 +204,7 @@ void FUN_0048d98c(int param_1)
   }
   if (DAT_005f1c60 != '\0') {
     temp_v12 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v12);
+    renderStackPushIndexed(g_renderCtx,3,temp_v12);
     FUN_0016c4b8(g_renderCtx,0);
     temp_v6 = 0;
     if (0 < *piVar9) {
@@ -286,10 +286,10 @@ LAB_0048ddd4:
       goto LAB_0048dfb4;
     }
 LAB_0048dfc4:
-    FUN_0016c69c(g_renderCtx,3);
+    renderCtxPopState(g_renderCtx,3);
   }
   temp_v12 = FUN_001692ac(1,0);
-  FUN_0016c6f0(g_renderCtx,3,temp_v12);
+  renderStackPushIndexed(g_renderCtx,3,temp_v12);
   temp_v6 = 0;
   if (0 < *(int *)(param_1 + 0x7b8c)) {
     temp_v11 = 0x40400000;
@@ -404,7 +404,7 @@ LAB_0048dfc4:
     } while (temp_v6 < *(int *)(param_1 + 0x7b8c));
   }
   FUN_00183bb0();
-  FUN_0016c69c(g_renderCtx,3);
+  renderCtxPopState(g_renderCtx,3);
   return;
 LAB_0048de78:
   temp_v12 = 0x80ff8080;

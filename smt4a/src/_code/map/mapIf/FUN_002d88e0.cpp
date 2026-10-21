@@ -9,11 +9,11 @@ int FUN_0014afd0(int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int controllerSetDestination(unsigned int, int);
 int controllerSetPosition(unsigned int);
-int FUN_003fdb18(unsigned int);
+int controllerSetRotationEulerDegrees(unsigned int);
 int FUN_003fe86c(unsigned int, int, int);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(unsigned int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 
 extern unsigned char LAB_002d89f4; /* 0x2d89f4 */
 extern unsigned char LAB_002d8a10; /* 0x2d8a10 */
@@ -25,12 +25,12 @@ extern int g_mapIf; /* 0x58103c */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 void FUN_002d88e0(void)
@@ -59,15 +59,15 @@ void FUN_002d88e0(void)
   FUN_00178b04(0x20,&LAB_002d8a10,0x1745);
   temp_v2 = 0;
   if (temp_v1 != 0) {
-    temp_v2 = FUN_0040ac08();
+    temp_v2 = modelListInit();
   }
   *(unsigned int *)(temp_v0 + 0xcbf8) = temp_v2;
   FUN_0040aa6c();
   FUN_0040aad4(*(unsigned int *)(temp_v0 + 0xcbf8),0);
   temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0xcbf8) + 4);
-  FUN_0040ace8(g_handleRegistry,temp_v2);
+  handleRegistryRegisterObject(g_handleRegistry,temp_v2);
   controllerSetDestination(temp_v2,temp_v0 + 0xcbe8);
-  FUN_003fdb18(temp_v2);
+  controllerSetRotationEulerDegrees(temp_v2);
   controllerSetPosition(temp_v2);
   FUN_003fe86c(temp_v2,0,2);
   FUN_0014afd0(4,0x25);

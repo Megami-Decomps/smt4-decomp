@@ -9,7 +9,7 @@ int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 
 /* Supplied declaration required: aocRecordLookup84. */
-extern unsigned int FUN_002ae3c4(unsigned int);
+extern unsigned int aocEntryGetKind(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 
@@ -24,7 +24,7 @@ int FUN_00246570(unsigned short *param_1)
   
   temp_v2 = (unsigned int)*param_1;
   temp_v1 = 0;
-  temp_v0 = FUN_002ae3c4(temp_v2);
+  temp_v0 = aocEntryGetKind(temp_v2);
   switch(temp_v0) {
   default:
     if ((param_1[1] & 2) != 0) {

@@ -1,57 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132fac` (_code @ 0x132fac, 0x66 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail caches list/iterator addresses in R5-R7 and uses different copied-input/result stack slots and loop rotation. */
+#include "shard/W6_W6Match2_ReferenceList.h"
 
 extern "C" {
+u32 wordRefsDiffer_002f4d8c(ReferenceListNode* const* first, ReferenceListNode* const* second);
+void FUN_002f4d64(ReferenceListIterator* result, ReferenceList* list, ReferenceListNode** position);
+void asdOperatorDeleteArray(void* memory);
 
-int asdOperatorDeleteArray(...);
-int FUN_002f4d64(int *, int *, unsigned int [2]);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_002f4d64. */
-extern int wordRefsDiffer_002f4d8c(unsigned int *, unsigned int **);
-
-
-int * FUN_00132fac(int *param_1)
-
+ReferenceList* FUN_00132fac(ReferenceList* list)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  unsigned int *temp_v2;
-  int temp_v3;
-  unsigned int temp_v4 [2];
-  
-  temp_v2 = (unsigned int *)param_1[4];
-  if (temp_v2 != (unsigned int *)0x0) {
-    temp_v1 = *temp_v2;
-    while (temp_v0 = wordRefsDiffer_002f4d8c((unsigned int *)&temp_v1,&temp_v2), temp_v0 != 0) {
-      temp_v4[0] = temp_v1;
-      FUN_002f4d64(&temp_v3,param_1,temp_v4);
-      temp_v1 = temp_v3;
+    if (list->end != NULL) {
+        ReferenceListIterator cursor(list->end->next);
+        ReferenceListIterator end(list->end);
+        while (wordRefsDiffer_002f4d8c(&cursor.node, &end.node)) {
+            ReferenceListNode* position = cursor.node;
+            ReferenceListIterator following;
+            FUN_002f4d64(&following, list, &position);
+            cursor = following;
+        }
+        ReferenceListNode* sentinel = list->end;
+        sentinel->next = static_cast<ReferenceListNode*>(list->pool.freeList);
+        list->pool.freeList = sentinel;
+        while (list->pool.chunks != NULL) {
+            PoolChunk* chunk = list->pool.chunks;
+            list->pool.chunks = chunk->next;
+            asdOperatorDeleteArray(chunk->data);
+            asdOperatorDeleteArray(chunk);
+        }
+        list->pool.freeList = NULL;
+        list->pool.cursor = NULL;
+        list->pool.limit = NULL;
     }
-    piVar2 = (int *)param_1[4];
-    *piVar2 = param_1[1];
-    param_1[1] = (int)piVar2;
-    while (piVar2 = (int *)*param_1, piVar2 != (int *)0x0) {
-      *param_1 = *piVar2;
-      asdOperatorDeleteArray(piVar2[2]);
-      asdOperatorDeleteArray(piVar2);
-    }
-    param_1[1] = 0;
-    param_1[2] = 0;
-    param_1[3] = 0;
-  }
-  return param_1;
+    return list;
 }
-
-} /* extern "C" */
+}

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_002d8c90(s32 state);
+void popupQueueInsertUnique(s32 state);
 void lmapApplyMapAndArea(void);
 void FUN_003b5d1c(void);
 s32 lmapMainIsRunning(void);
@@ -17,7 +17,7 @@ void FUN_00295024(void)
 
     if (g_popupState->state != 0) {
         if (g_popupState->state != 0xD) {
-            FUN_002d8c90(0xD);
+            popupQueueInsertUnique(0xD);
             return;
         }
     } else {

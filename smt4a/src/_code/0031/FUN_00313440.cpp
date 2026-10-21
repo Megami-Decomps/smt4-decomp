@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018a924(unsigned char [4], unsigned char [36]);
-int FUN_003534b0(int, int, unsigned char *, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
+int sceneRegisterBoxEffect(int, int, unsigned char *, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int);
 int saveSlotInfoSet(void);
 
 /* stack frame of void: 15 slot(s), 60 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned char LAB_00313588; /* 0x313588 */
 extern int g_mapObj; /* 0x581284 */
 
 /* Supplied declaration required: FUN_0018a924. */
-/* Supplied declaration required: FUN_003534b0. */
+/* Supplied declaration required: sceneRegisterBoxEffect. */
 /* Supplied declaration required: saveSlotInfoSet. */
 
 
@@ -52,7 +52,7 @@ void FUN_00313440(void)
        ((temp_v0 = *(int *)(temp_v1 + 0x38), temp_v0 == 6 || temp_v0 == 7 || (temp_v0 == 9 || temp_v0 == 0xb))))
     {
       FUN_0018a924(temp_v3,temp_v4);
-      FUN_003534b0(0,0,&LAB_00313588,0x1e,0xc,*(int *)(temp_v1 + 0x58) + 0x1000,0,0,0,0,0,0,0,0,1,0,0,
+      sceneRegisterBoxEffect(0,0,&LAB_00313588,0x1e,0xc,*(int *)(temp_v1 + 0x58) + 0x1000,0,0,0,0,0,0,0,0,1,0,0,
                    0,0);
       if (*(char *)(temp_v1 + 0x40) != '\0') {
         saveSlotInfoSet();

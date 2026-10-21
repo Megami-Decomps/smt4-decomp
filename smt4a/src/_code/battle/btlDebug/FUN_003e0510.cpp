@@ -50,7 +50,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 /* Supplied declaration required: FUN_003eba0c. */
 /* Supplied declaration required: FUN_003edaf0. */
 /* Supplied declaration required: FUN_003eebf4. */
-extern int FUN_003ef9e0(int, int);
+extern int idSetFindSubjectIndex(int, int);
 /* Supplied declaration required: FUN_0050dda4. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -234,8 +234,8 @@ LAB_003e06c8:
             temp_v16 = *(float *)(temp_v8 + 0xc) * *(float *)(temp_v8 + 0xc);
             if (in_s1 <= temp_v16) goto LAB_003e0a8c;
           }
-          temp_v15 = FUN_003ef9e0(temp_v33,temp_v7);
-          temp_v11 = FUN_003ef9e0(temp_v33,temp_v8);
+          temp_v15 = idSetFindSubjectIndex(temp_v33,temp_v7);
+          temp_v11 = idSetFindSubjectIndex(temp_v33,temp_v8);
           temp_v11 = temp_v3 + 0x164 + temp_v11 * 4;
           temp_v15 = temp_v3 + 0x164 + temp_v15 * 4;
           temp_v12 = *(unsigned int *)(temp_v15 + 0xc);

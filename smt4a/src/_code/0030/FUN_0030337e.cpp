@@ -1,46 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030337e` (_code @ 0x30337e, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: std::lower_bound uses different Thumb register allocation and smaller local storage; retail keeps the owner in R6, spills the midpoint/key, and enters through the bottom loop test. */
+#include "common.h"
+#include <algorithm>
 
-extern "C" {
+struct ByteKeyEntry {
+    u8 key;      // 0x00
+    u8 unk01[7]; // 0x01
+};
+struct SortedByteEntries {
+    u32 unk00;          // 0x00
+    ByteKeyEntry* begin; // 0x04
+    ByteKeyEntry* end;   // 0x08
+};
 
-int FUN_0030d01e(...);
+extern "C" u32 FUN_0030d01e(const u8* first, const u8* second);
 
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0030d01e. */
-
-
-int FUN_0030337e(int param_1,unsigned int param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  temp_v4 = *(int *)(param_1 + 4);
-  temp_v2 = (*(int *)(param_1 + 8) - temp_v4) >> 3;
-  while (temp_v3 = temp_v2, 0 < temp_v3) {
-    temp_v2 = temp_v3 / 2;
-    temp_v0 = temp_v2 * 8 + temp_v4;
-    temp_v1 = FUN_0030d01e(temp_v0,param_2);
-    if (temp_v1 != 0) {
-      temp_v4 = temp_v0 + 8;
-      temp_v2 = (temp_v3 - temp_v2) - 1;
+struct ByteKeyLess {
+    bool operator()(const ByteKeyEntry& entry, const u8* key) const
+    {
+        return FUN_0030d01e(&entry.key, key) != 0;
     }
-  }
-  if ((*(int *)(param_1 + 8) != temp_v4) && (temp_v2 = FUN_0030d01e(param_2,temp_v4), temp_v2 != 0)) {
-    temp_v4 = *(int *)(param_1 + 8);
-  }
-  return temp_v4;
-}
+};
 
-} /* extern "C" */
+// Finds a byte-key entry with lower_bound and returns end when the key is absent.
+extern "C" ByteKeyEntry* FUN_0030337e(SortedByteEntries* entries, const u8* key)
+{
+    ByteKeyEntry* first = std::lower_bound(entries->begin, entries->end, key, ByteKeyLess());
+    if (first != entries->end && FUN_0030d01e(key, &first->key)) {
+        first = entries->end;
+    }
+    return first;
+}

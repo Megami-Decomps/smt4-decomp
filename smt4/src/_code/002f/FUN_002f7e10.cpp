@@ -7,8 +7,8 @@ extern "C" {
 int FUN_00246d38(int, unsigned int, int, int);
 int FUN_00246e24(int, unsigned int, int, int, int);
 int FUN_002505c0(int, unsigned int, int, int, int, int, int);
-int FUN_00262f68(unsigned int, int);
-int FUN_0026e61c(unsigned int, unsigned int);
+int objectFlagsClear(unsigned int, int);
+int objectFlagSetBit(unsigned int, unsigned int);
 int scrGetArg(int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -23,8 +23,8 @@ extern unsigned int g_btlScriptUnit; /* 0x43427c */
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: FUN_00246e24. */
 /* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_00262f68. */
-/* Supplied declaration required: FUN_0026e61c. */
+/* Supplied declaration required: objectFlagsClear. */
+/* Supplied declaration required: objectFlagSetBit. */
 extern unsigned int btlUnitGet(unsigned int);
 extern int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
@@ -59,12 +59,12 @@ unsigned int FUN_002f7e10(void)
   else {
     temp_v5 = gameGetUnitRecord(temp_v0 - 0x6d);
     if (temp_v2 == 0) {
-      FUN_00262f68(temp_v5,(1 << (temp_v1 & 0xff)) & 0xffff);
+      objectFlagsClear(temp_v5,(1 << (temp_v1 & 0xff)) & 0xffff);
       return 1;
     }
-    FUN_0026e61c(temp_v5,temp_v1 & 0xffff);
+    objectFlagSetBit(temp_v5,temp_v1 & 0xffff);
     if (((temp_v1 & 0xffff) != 4) && (temp_v0 = flagWordTestBit(temp_v5,4), temp_v0 != 0)) {
-      FUN_00262f68(temp_v5,0x10);
+      objectFlagsClear(temp_v5,0x10);
     }
   }
   FUN_002505c0(0,temp_v3,0x10001bd,0,0,0,0);

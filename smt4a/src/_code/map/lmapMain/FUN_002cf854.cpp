@@ -8,7 +8,7 @@ extern signed char DAT_005f1b70; /* 0x5f1b70 */
 extern int DAT_005f1b74; /* 0x5f1b74 */
 extern int DAT_005f1b94; /* 0x5f1b94 */
 
-extern unsigned int FUN_001b4aa0(void);
+extern unsigned int gameDataTableGetFlag(void);
 
 
 unsigned int FUN_002cf854(void)
@@ -17,7 +17,7 @@ unsigned int FUN_002cf854(void)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v1 = FUN_001b4aa0();
+  temp_v1 = gameDataTableGetFlag();
   switch(temp_v1) {
   case 0:
   case 3:

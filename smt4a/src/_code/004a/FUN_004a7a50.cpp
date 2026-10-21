@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018349c(int, int);
-int FUN_004932ec(int, int, int, int, unsigned int);
+int devilDrawIconRelative(int, int, int, int, unsigned int);
 int FUN_004934ac(int, int, int, int, unsigned int);
 
 /* stack frame of param_6: 1 slot(s), 4 byte(s) */
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0018349c. */
 extern unsigned int FUN_002a4b28(short);
-/* Supplied declaration required: FUN_004932ec. */
+/* Supplied declaration required: devilDrawIconRelative. */
 /* Supplied declaration required: FUN_004934ac. */
 extern int FUN_004d0bf0(short);
 
@@ -53,10 +53,10 @@ void FUN_004a7a50(int param_1,int param_2,short param_3,int param_4,int param_5,
     temp_v2 = (unsigned int)*(unsigned char *)(param_1 + 0x95);
   }
   if (!(temp_v5 && temp_v2 == 0)) {
-    FUN_004932ec(param_1 + 200,(int)param_3,temp_v4,temp_v1,param_6);
+    devilDrawIconRelative(param_1 + 200,(int)param_3,temp_v4,temp_v1,param_6);
   }
   else {
-    FUN_004932ec(param_1 + 200,0,temp_v4,temp_v1,param_6);
+    devilDrawIconRelative(param_1 + 200,0,temp_v4,temp_v1,param_6);
   }
   if ((param_2 != 0) && (temp_v1 = FUN_004d0bf0(param_3), temp_v1 != 0)) {
     if (param_5 == 0) {

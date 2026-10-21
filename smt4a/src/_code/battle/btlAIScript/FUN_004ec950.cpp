@@ -12,7 +12,7 @@ int btlUnitSetParam(...);
 int FUN_004e5b5c(int *);
 int FUN_004e7c04(int *, int);
 int FUN_004e8454(int *);
-int FUN_004e9f74(int *, int, int);
+int btlUnitMarkTargetCandidates(int *, int, int);
 int FUN_004eb838(...);
 
 /* stack frame of param_2: 2 slot(s), 3 byte(s) */
@@ -53,7 +53,7 @@ extern int FUN_004c87e0(void);
 /* Supplied declaration required: FUN_004e5b5c. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: FUN_004e8454. */
-/* Supplied declaration required: FUN_004e9f74. */
+/* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: FUN_004eb838. */
 
 
@@ -99,11 +99,11 @@ unsigned int FUN_004ec950(int *param_1,int param_2)
         if (temp_v9 != '\0') {
           if (temp_v9 != '\x01') {
             if (temp_v9 == '\x02') {
-              FUN_004e9f74(param_1,0,2);
+              btlUnitMarkTargetCandidates(param_1,0,2);
             }
           }
           else {
-            FUN_004e9f74(param_1,0,1);
+            btlUnitMarkTargetCandidates(param_1,0,1);
           }
         }
         else {

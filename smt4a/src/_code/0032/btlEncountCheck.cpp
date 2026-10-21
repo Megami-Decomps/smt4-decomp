@@ -7,7 +7,7 @@ s32 jobIsValid(u32 job);
 
 extern s32 g_btlActionReflect;
 extern BtlMainA *g_btlCamera;
-extern s32 DAT_00573808;
+extern s32 g_btlAux;
 extern BtlEncount *g_btlEncount;
 
 /* 0 when the owner job is running with all battle state set up and either the no-encounter flag
@@ -15,7 +15,7 @@ extern BtlEncount *g_btlEncount;
 u32 btlEncountCheck(BtlEncountOwner *owner)
 {
     if (jobIsValid(owner->job) != 0 && g_btlEncount != NULL && g_btlActionReflect != 0 &&
-        DAT_00573808 != 0 && g_btlCamera != NULL) {
+        g_btlAux != 0 && g_btlCamera != NULL) {
         if ((g_btlCamera->flags & BTL_FLAG_NO_ENCOUNT) != 0) {
             return 0;
         }

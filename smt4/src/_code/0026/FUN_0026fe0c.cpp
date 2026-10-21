@@ -15,7 +15,7 @@ extern unsigned int DAT_0049fd30; /* 0x49fd30 */
 extern unsigned int DAT_0049fd34; /* 0x49fd34 */
 
 extern int dataTable23Type1CountWithAoc(void);
-extern char *FUN_0027d748(int);
+extern char *dataTableGetRecord23(int);
 extern char *gameGetMapBlock(void);
 
 
@@ -39,7 +39,7 @@ void FUN_0026fe0c(void)
     temp_v1 = dataTable23Type1CountWithAoc();
     if (0 < temp_v1) {
       do {
-        pcVar2 = (char *)FUN_0027d748(temp_v2);
+        pcVar2 = (char *)dataTableGetRecord23(temp_v2);
         temp_v0 = *pcVar2;
         temp_v3 = temp_v0 == '\x01';
         if (temp_v3) {

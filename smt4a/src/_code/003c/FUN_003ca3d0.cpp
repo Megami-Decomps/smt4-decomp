@@ -12,7 +12,7 @@ int asdMemFree(...);
 int scrScriptProcessDestroy(...);
 int FUN_0019de98(...);
 int dataTableFree(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int asdOperatorDelete(...);
 int campButtonHelpAcquire(...);
 int campButtonHelpRelease(...);
@@ -38,7 +38,7 @@ extern unsigned int *DAT_00588130; /* 0x588130 */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: dataTableFree. */
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -75,8 +75,8 @@ unsigned int FUN_003ca3d0(void)
     *puVar3 = (unsigned int)pcVar4;
     taskCreateDraw("SAINT_GERMAIN DD",0xeb,0,0,&LAB_003710f8,0,0,pcVar4);
     puVar3[8] = temp_v1;
-    FUN_002804b0("npc_shop/SaintGermain/SaintGermain.mbm",puVar3 + 4,0);
-    FUN_002804b0("npc_shop/SaintGermain/SaintGermain.bf",puVar3 + 5,0);
+    asdLoadFileAsyncSimple("npc_shop/SaintGermain/SaintGermain.mbm",puVar3 + 4,0);
+    asdLoadFileAsyncSimple("npc_shop/SaintGermain/SaintGermain.bf",puVar3 + 5,0);
     *(unsigned char *)(puVar3 + 7) = 0;
     temp_v0 = loadSlotIsLoaded(0x4f);
     if (temp_v0 == 0) {

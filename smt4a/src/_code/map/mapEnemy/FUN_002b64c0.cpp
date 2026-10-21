@@ -9,7 +9,7 @@ int FUN_00178b04(...);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
 int FUN_0040aad4(...);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 int FUN_004bc2dc(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -25,10 +25,10 @@ extern int g_mapEnemy; /* 0x5806d4 */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
-extern int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_004bc2dc. */
-extern int FUN_004bc850(void);
+extern int FUN_004bc850(int index);
 
 
 unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
@@ -71,9 +71,9 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
       if (*piVar6 == -1) {
         *piVar6 = param_1;
         iStack_28 = param_3;
-        FUN_004bc2dc(param_2,0);
-        piVar6[1] = param_2;
-        temp_v0 = FUN_004bc850();
+        temp_v0 = FUN_004bc2dc(param_2,0);
+        piVar6[1] = temp_v0;
+        temp_v0 = FUN_004bc850(temp_v0);
         piVar6[2] = temp_v0;
         temp_v4 = (unsigned int)*(unsigned char *)(temp_v0 + 0x5806e0);
         piVar6[3] = temp_v4;
@@ -91,14 +91,14 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
         FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp",0x375);
         temp_v2 = 0;
         if (temp_v3 != 0) {
-          temp_v2 = FUN_0040ac08();
+          temp_v2 = modelListInit();
         }
         *piVar6 = temp_v2;
         FUN_0040aa6c();
         FUN_0040aad4(*piVar6,0);
         temp_v2 = *(int *)(*piVar6 + 4);
         FUN_003fe86c(temp_v2,0,2);
-        FUN_0040ace8(g_handleRegistry,temp_v2);
+        handleRegistryRegisterObject(g_handleRegistry,temp_v2);
         *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
         *(unsigned char *)(temp_v0 + 0x3d90) = 1;
         *(unsigned char *)(temp_v0 + 0x3d91) = 0;
@@ -112,10 +112,9 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
         *piVar6 = param_1;
         iStack_28 = 1;
         do {
-          temp_v2 = temp_v6;
-          FUN_004bc2dc(temp_v6,0);
+          temp_v2 = FUN_004bc2dc(temp_v6,0);
           piVar6[temp_v0 + 1] = temp_v2;
-          temp_v2 = FUN_004bc850();
+          temp_v2 = FUN_004bc850(temp_v2);
           piVar6[temp_v0 + 0x11] = temp_v2;
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v2 + 0x5806e0);
           piVar6[temp_v0 + 0x21] = temp_v4;
@@ -131,14 +130,14 @@ unsigned int FUN_002b64c0(int param_1,int param_2,int param_3)
             FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapEnemy.cpp",0x375);
             temp_v3 = 0;
             if (temp_v1 != 0) {
-              temp_v3 = FUN_0040ac08();
+              temp_v3 = modelListInit();
             }
             *piVar7 = temp_v3;
             FUN_0040aa6c();
             FUN_0040aad4(*piVar7,0);
             temp_v3 = *(int *)(*piVar7 + 4);
             FUN_003fe86c(temp_v3,0,2);
-            FUN_0040ace8(g_handleRegistry,temp_v3);
+            handleRegistryRegisterObject(g_handleRegistry,temp_v3);
             *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 3;
             *(unsigned char *)(temp_v2 + 0x3d90) = 1;
             *(unsigned char *)(temp_v2 + 0x3d91) = 0;

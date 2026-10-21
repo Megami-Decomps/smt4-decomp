@@ -7,14 +7,14 @@ extern "C" {
 extern s32 FUN_0029e0f8(void);
 extern void FUN_0029defc(u32 a, s32 b);
 extern void FUN_0029d684(s32 a);
-extern s32 FUN_0023360c(Scene3aSlotInfo *info);
+extern s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *info);
 extern s32 FUN_002ae3c0(u32 id);
 extern void FUN_0029a084(s32 kind, u16 id);
 extern s32 FUN_00295618(void);
 extern void gameGlobalsSetSelected(s32 a);
 extern void FUN_00292c0c(void);
 extern void FUN_002305e8(s32 a);
-extern void FUN_0029ca58(void);
+extern void beginStatusPanelClose(void);
 extern void messageWindowStartTimer(s32 a);
 extern void asdMdlManagerDestroy(void *manager);
 
@@ -33,7 +33,7 @@ void FUN_003a1504(Scene3a *scene)
             FUN_0029defc(0xffffffff, 0);
             FUN_0029d684(1);
             list = &scene->lists[scene->slot];
-            id = list->entries[FUN_0023360c(&scene->slotInfo[scene->slot])].id;
+            id = list->entries[flaggedValueHolderGetTotal(&scene->slotInfo[scene->slot])].id;
             if (id != 0) {
                 if (FUN_002ae3c0(id) == 4) {
                     FUN_0029a084(0, id);
@@ -64,7 +64,7 @@ void FUN_003a1504(Scene3a *scene)
                 *state = SCENE3A_STATE_FINISH;
                 return;
             }
-            FUN_0029ca58();
+            beginStatusPanelClose();
             *state = SCENE3A_STATE_STOP;
             messageWindowStartTimer(0);
             if (scene->modelManager != NULL) {

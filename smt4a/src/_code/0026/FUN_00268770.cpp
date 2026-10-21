@@ -14,9 +14,9 @@ int FUN_002a7288(void);
 int FUN_002e2848(...);
 int FUN_002f7cd4(...);
 int FUN_002f7f6c(...);
-int FUN_0031aa04(void);
+unsigned short* dataTable0cSub1GetText(unsigned short id);
 int flaggedEntrySetValueB(...);
-int FUN_00335510(...);
+void statusSkillsCommitOnDialogResult(void*);
 int screenShowMessage(...);
 int obj04Finish(void);
 int FUN_00359b6c(...);
@@ -31,11 +31,11 @@ int useCounterStart(void);
 int FUN_002a4860(...);
 int FUN_002a4894(...);
 int FUN_002a4964(...);
-int FUN_002c2c68(...);
+int objectApplyIfUnblocked(...);
 int FUN_0031f208(...);
-int FUN_0031f27c(...);
+int sortMenuAcquire(...);
 int FUN_003343f0(...);
-int FUN_0035d8a4(void);
+int useCounterRelease(void);
 
 int FUN_001517b4(...);
 int FUN_00163aa4(...);
@@ -56,7 +56,7 @@ int flaggedEntrySetValueA(...);
 int FUN_003423e8(...);
 int FUN_003450d4(...);
 int FUN_00387240(...);
-int FUN_0039c488(int);
+int statusDownInitializeSkillList(int);
 int FUN_003e40d0(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -84,7 +84,7 @@ extern int randRange(unsigned int);
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_0015f490. */
-extern int FUN_0016345c(void);
+extern int querySlotHasHandle(void);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int FUN_00167458(int, unsigned int);
@@ -99,7 +99,7 @@ extern unsigned int FUN_00180114(unsigned short, short);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00203b40. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_00230544(void);
 /* Supplied declaration required: FUN_0023092c. */
@@ -107,7 +107,7 @@ extern int FUN_00230544(void);
 /* Supplied declaration required: FUN_00230d30. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
-extern int FUN_0023c068(void);
+extern int uniteNotBusy(void);
 extern int FUN_0026140c(void);
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_00275bc8. */
@@ -117,9 +117,9 @@ extern short FUN_002a4844(int);
 /* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a4964. */
-extern int FUN_002a4b60(void);
+extern int messageMainGetValue(void);
 /* Supplied declaration required: FUN_002a7288. */
-/* Supplied declaration required: FUN_002c2c68. */
+/* Supplied declaration required: objectApplyIfUnblocked. */
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_002c7ce8. */
 extern unsigned short *FUN_002c7e24(void);
@@ -128,26 +128,26 @@ extern int FUN_002c7e54(void);
 /* Supplied declaration required: FUN_002e2848. */
 /* Supplied declaration required: FUN_002f7cd4. */
 /* Supplied declaration required: FUN_002f7f6c. */
-/* Supplied declaration required: FUN_0031aa04. */
+/* Supplied declaration required: dataTable0cSub1GetText. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 extern int FUN_00334044(void);
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_00335510. */
+/* Supplied declaration required: statusSkillsCommitOnDialogResult. */
 /* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: FUN_003423e8. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: obj04Finish. */
 extern int asdSoundIsBankHandleLoaded(unsigned int);
 /* Supplied declaration required: FUN_00359b6c. */
-/* Supplied declaration required: FUN_0035d8a4. */
+/* Supplied declaration required: useCounterRelease. */
 extern int FUN_0037b564(void);
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_00387240. */
-/* Supplied declaration required: FUN_0039c488. */
+/* Supplied declaration required: statusDownInitializeSkillList. */
 extern int fieldStateAllowsAction(void);
 extern unsigned int FUN_003d2150(unsigned int);
 /* Supplied declaration required: FUN_003d4104. */
@@ -461,7 +461,7 @@ LAB_00268d68:
             temp_v6 = 10;
             FUN_001517b4(10,1);
             if (temp_v6 != 0) {
-              FUN_0039c488(0);
+              statusDownInitializeSkillList(0);
               eventQueueAddUniqueIfValid(0x100020e);
               temp_v3 = 6;
               FUN_002c7ce8(temp_v3);
@@ -532,7 +532,7 @@ LAB_00268d68:
       if (*(int *)(temp_v2 + 0x524) == 8) {
         temp_v6 = temp_v2 + 0x5ec;
         temp_v7 = FUN_002a4894();
-        temp_v14 = FUN_002c2c68(temp_v6);
+        temp_v14 = objectApplyIfUnblocked(temp_v6);
         FUN_00203b40(temp_v6,temp_v14 + 1,9,1,0,1);
         FUN_002a4964(temp_v6,temp_v7);
         *(unsigned char *)(temp_v2 + 0x528) = 1;
@@ -548,7 +548,7 @@ LAB_00268d68:
           if ((temp_v6 != 0) || (*(char *)(temp_v2 + 0x24a0) != '\0')) {
             temp_v6 = FUN_002a4860(temp_v14);
             temp_v8 = FUN_002a4894(temp_v14);
-            temp_v10 = FUN_002c2c68(temp_v14);
+            temp_v10 = objectApplyIfUnblocked(temp_v14);
             if ((temp_v6 + temp_v8) - temp_v10 != -1) {
               FUN_002a4860();
               FUN_002a4894(temp_v14);
@@ -576,7 +576,7 @@ LAB_00268d68:
               *(unsigned int *)(temp_v2 + 0x668) = 0;
               break;
             }
-            temp_v6 = FUN_002c2c68(temp_v14);
+            temp_v6 = objectApplyIfUnblocked(temp_v14);
             *(int *)(temp_v2 + 0x654) = temp_v6 - 1;
             temp_v6 = g_statusDown;
             temp_v12 = *(unsigned int *)(temp_v2 + 0x524);
@@ -596,7 +596,7 @@ LAB_00268d68:
             if (temp_v6 != 0) {
               temp_v7 = FUN_003d2150(0x100020f);
               *(unsigned int *)(temp_v2 + 0x24a4) = temp_v7;
-              temp_v6 = FUN_002c2c68(temp_v14);
+              temp_v6 = objectApplyIfUnblocked(temp_v14);
               *(int *)(temp_v2 + 0x654) = temp_v6 - 1;
               temp_v7 = *(unsigned int *)(temp_v2 + 0x524);
               temp_v14 = FUN_002c7e54();
@@ -631,7 +631,7 @@ LAB_00268d68:
     FUN_00163aa4(temp_v2 + 0x1cc);
     temp_v6 = asdSoundIsBankHandleLoaded(*(unsigned int *)(temp_v2 + 0x24a4));
     if ((temp_v6 == 0) && (*(char *)(temp_v2 + 0x24a9) != '\0')) {
-      temp_v6 = FUN_002c2c68(temp_v2 + 0x5ec);
+      temp_v6 = objectApplyIfUnblocked(temp_v2 + 0x5ec);
       if (temp_v6 - 1 == *(int *)(temp_v2 + 0x654)) {
         temp_v6 = randRange(1);
         FUN_0015f490((int)*(short *)(temp_v2 + 0x598),temp_v6 != 0,1,0);
@@ -651,7 +651,7 @@ LAB_0026941c:
     temp_v6 = *(int *)(temp_v2 + 0x668) + 1;
     *(int *)(temp_v2 + 0x668) = temp_v6;
     if (temp_v6 >= 9) {
-      temp_v6 = FUN_0016345c();
+      temp_v6 = querySlotHasHandle();
 joined_r0x002694c0:
       if (temp_v6 == 0) goto LAB_0026941c;
     }
@@ -677,7 +677,7 @@ joined_r0x002694c0:
       if (*(int *)(temp_v2 + 0x524) == 8) {
         *(unsigned char *)(temp_v2 + 0x24a8) = 0;
         temp_v6 = temp_v2 + 0x5ec;
-        temp_v14 = FUN_002c2c68();
+        temp_v14 = objectApplyIfUnblocked();
         if (temp_v14 - 1 == *(int *)(temp_v2 + 0x654)) {
           FUN_0023092c();
           temp_v14 = g_statusDown;
@@ -692,7 +692,7 @@ joined_r0x002694c0:
                *(unsigned short *)(temp_v2 + 0x5bc);
           eventQueueAddUnique(0x100021a);
         }
-        temp_v14 = FUN_002c2c68(temp_v6);
+        temp_v14 = objectApplyIfUnblocked(temp_v6);
         FUN_00203b40(temp_v6,temp_v14 - 1,8,1,0,1);
         if (*(int *)(temp_v2 + 0x654) >= 8) {
           flaggedEntrySetValueA(temp_v6,0);
@@ -748,7 +748,7 @@ joined_r0x002694c0:
     if (*(int *)(temp_v2 + 0x524) >= 8) {
       if (*(int *)(temp_v2 + 0x524) == 8) {
         if (*(int *)(temp_v2 + 0x65c) < 0) {
-          temp_v6 = FUN_002c2c68();
+          temp_v6 = objectApplyIfUnblocked();
           FUN_00203b40(temp_v2 + 0x5ec,temp_v6 - 1,8,1,0,1);
           flaggedEntrySetValueA(temp_v2 + 0x5ec,0);
           temp_v6 = g_statusDown;
@@ -762,7 +762,7 @@ joined_r0x002694c0:
         else {
           *(short *)(temp_v2 + *(int *)(temp_v2 + 0x65c) * 2 + 0x59c) =
                (short)*(unsigned int *)(temp_v2 + 0x658);
-          temp_v6 = FUN_002c2c68();
+          temp_v6 = objectApplyIfUnblocked();
           FUN_00203b40(temp_v2 + 0x5ec,temp_v6 - 1,8,1,0,1);
           uiSpriteSetKeyframe(temp_v2 + 0x2e4,1,0);
           uiSpriteSelectAnim(temp_v2 + 0x370,2);
@@ -891,7 +891,7 @@ joined_r0x002694c0:
       temp_v6 = 9;
       FUN_001517b4(9,1);
       if (temp_v6 != 0) {
-        FUN_0031f27c(0x15,0);
+        sortMenuAcquire(0x15,0);
         FUN_0031f208(1);
         FUN_0031f208(0x21);
         FUN_0031f208(3);
@@ -926,7 +926,7 @@ joined_r0x002694c0:
   case 0x15:
     temp_v6 = useCounterIsFinished();
     if (temp_v6 != 0) {
-      FUN_0035d8a4();
+      useCounterRelease();
       FUN_003343f0(0);
       temp_v6 = FUN_002c7e3c();
       if (temp_v6 == 0xe || temp_v6 == 7) {
@@ -1012,7 +1012,7 @@ LAB_00269f7c:
               temp_v6 = 9;
               FUN_001517b4(9,1);
               if (temp_v6 != 0) {
-                FUN_0031f27c(0x16,0);
+                sortMenuAcquire(0x16,0);
                 FUN_0031f208(1);
                 FUN_0031f208(8);
                 FUN_0031f208(2);
@@ -1090,7 +1090,7 @@ LAB_00269f7c:
   case 0x17:
     temp_v6 = useCounterIsFinished();
     if (temp_v6 != 0) {
-      FUN_0035d8a4();
+      useCounterRelease();
       FUN_003343f0(0);
       temp_v6 = FUN_002c7e3c();
       if ((((temp_v6 == 9) || (temp_v6 = FUN_002c7e3c(), temp_v6 == 10)) ||
@@ -1162,7 +1162,7 @@ LAB_00269f7c:
       else {
         temp_v14 = temp_v2 + 0x23c0;
         FUN_00228b04(temp_v14,0);
-        if ((temp_v14 != 0) && (temp_v14 = FUN_002c2c68(temp_v2 + 0x23c0), temp_v14 >= 11)) {
+        if ((temp_v14 != 0) && (temp_v14 = objectApplyIfUnblocked(temp_v2 + 0x23c0), temp_v14 >= 11)) {
           FUN_002a4860(temp_v2 + 0x23c0);
           temp_v14 = FUN_002a4894(temp_v2 + 0x23c0);
           if ((temp_v14 != 9) && (temp_v14 = FUN_002a4894(temp_v2 + 0x23c0), temp_v14 != 0)) {
@@ -1173,7 +1173,7 @@ LAB_00269f7c:
                  ((temp_v14 = FUN_002a4860(temp_v2 + 0x23c0), temp_v14 != 0 ||
                   (temp_v14 = FUN_002a4894(temp_v2 + 0x23c0), temp_v14 != 0))))) {
             temp_v14 = FUN_002a4860(temp_v2 + 0x23c0);
-            temp_v8 = FUN_002c2c68(temp_v2 + 0x23c0);
+            temp_v8 = objectApplyIfUnblocked(temp_v2 + 0x23c0);
             if ((temp_v14 == temp_v8 - 10) && (temp_v14 = FUN_002a4894(temp_v2 + 0x23c0), temp_v14 == 9))
             break;
             FUN_00228b04(temp_v2 + 0x23c0,0);
@@ -1242,7 +1242,7 @@ LAB_00269f7c:
       FUN_001517b4();
       if (temp_v6 == 0) break;
     }
-    temp_v6 = FUN_0023c068();
+    temp_v6 = uniteNotBusy();
     if (temp_v6 == 0) {
       obj04Finish();
     }
@@ -1262,11 +1262,11 @@ LAB_00269f7c:
     FUN_001517b4(0,1);
     if ((temp_v6 != 0) || (*(char *)(temp_v2 + 0x24a0) != '\0')) {
       temp_v6 = FUN_002a4894(temp_v14);
-      temp_v8 = FUN_002c2c68(temp_v14);
+      temp_v8 = objectApplyIfUnblocked(temp_v14);
       if (temp_v6 == temp_v8 - 1) {
         *(unsigned int *)(temp_v2 + 0x249c) = 0;
         if (*(char *)(temp_v2 + 0x52b) != '\0') {
-          temp_v6 = FUN_0023c068();
+          temp_v6 = uniteNotBusy();
           if (temp_v6 == 0) {
             obj04Finish();
           }
@@ -1291,7 +1291,7 @@ LAB_00269f7c:
       FUN_001517b4();
       if (temp_v6 != 0) {
         *(unsigned int *)(temp_v2 + 0x249c) = 0;
-        temp_v6 = FUN_0023c068();
+        temp_v6 = uniteNotBusy();
         if (temp_v6 == 0) {
           obj04Finish();
         }
@@ -1307,7 +1307,7 @@ LAB_00269f7c:
         if (*(int *)(temp_v2 + 0x249c) != 0) {
           temp_v14 = FUN_002a4894();
           *(unsigned short *)(temp_v2 + temp_v14 * 2 + 0x2488) = *(unsigned short *)(temp_v2 + 0x2498);
-          temp_v8 = FUN_002c2c68(temp_v6);
+          temp_v8 = objectApplyIfUnblocked(temp_v6);
           FUN_00203b40(temp_v6,temp_v8 - 1,8,1,1,1);
           flaggedEntrySetValueA(temp_v6,temp_v14);
           *(unsigned char *)(temp_v2 + 0x528) = 1;
@@ -1317,7 +1317,7 @@ LAB_00269f7c:
           *(unsigned short *)(temp_v2 + 0x388) = 0xa0;
         }
         else {
-          temp_v14 = FUN_002c2c68();
+          temp_v14 = objectApplyIfUnblocked();
           FUN_00203b40(temp_v6,temp_v14 - 1,8,1,1,1);
           flaggedEntrySetValueA(temp_v6,0);
           temp_v6 = g_statusDown;
@@ -1354,7 +1354,7 @@ LAB_00269f7c:
       FUN_001517b4();
       if (temp_v6 == 0) break;
     }
-    temp_v6 = FUN_0023c068();
+    temp_v6 = uniteNotBusy();
     if (temp_v6 == 0) {
       obj04Finish();
     }
@@ -1442,12 +1442,12 @@ LAB_00269f7c:
       }
       break;
     case 3:
-      FUN_00335510(temp_v14);
+      statusSkillsCommitOnDialogResult(reinterpret_cast<void*>(temp_v14));
       break;
     case 4:
-      temp_v6 = FUN_00224880(*(unsigned int *)(temp_v14 + 0x2574));
+      temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v14 + 0x2574));
       if (temp_v6 == 2) {
-        temp_v6 = FUN_002a4b60();
+        temp_v6 = messageMainGetValue();
         if (temp_v6 != 0) {
           *(unsigned int *)(temp_v14 + 0x2564) = 1;
           *(unsigned int *)(temp_v14 + 0x2568) = 0;
@@ -1507,7 +1507,7 @@ LAB_00269f7c:
     temp_v14 = temp_v14 + temp_v8;
     if (*(int *)(temp_v2 + 0x518) == 7) {
       if (*(int *)(temp_v2 + 0x524) >= 8) {
-        temp_v8 = FUN_002c2c68(temp_v6);
+        temp_v8 = objectApplyIfUnblocked(temp_v6);
         if (temp_v8 - 1 != temp_v14) goto LAB_0026adc4;
         temp_v11 = (unsigned int)*(unsigned short *)(temp_v2 + 0x5bc);
       }
@@ -1517,7 +1517,7 @@ LAB_00269f7c:
     }
     else {
 LAB_0026adc4:
-      if ((*(int *)(temp_v2 + 0x518) == 0xe) && (temp_v6 = FUN_002c2c68(temp_v6), temp_v6 - 1 == temp_v14)) {
+      if ((*(int *)(temp_v2 + 0x518) == 0xe) && (temp_v6 = objectApplyIfUnblocked(temp_v6), temp_v6 - 1 == temp_v14)) {
         temp_v11 = *(unsigned int *)(temp_v2 + 0x658);
       }
       else {
@@ -1570,7 +1570,7 @@ LAB_0026adc4:
       temp_v14 = FUN_002a4894(temp_v2 + 0xee4);
       temp_v11 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v14 + temp_v6) * 4 + 0x6e2);
       if (temp_v11 != 0) {
-        FUN_0031aa04();
+        temp_v11 = (unsigned int)dataTable0cSub1GetText((unsigned short)temp_v11);
         textFormatBuffer(temp_v17,&LAB_0026b0d8,temp_v11);
         FUN_0019de98(temp_v17,0xf4f4f4ff);
       }
@@ -1602,7 +1602,7 @@ LAB_0026adc4:
   }
   temp_v6 = temp_v2 + 0x2424;
   temp_v14 = FUN_002a4894();
-  temp_v8 = FUN_002c2c68(temp_v6);
+  temp_v8 = objectApplyIfUnblocked(temp_v6);
   if (temp_v14 == temp_v8 - 1) {
     temp_v1 = *(unsigned short *)(temp_v2 + 0x2498);
     temp_v11 = (unsigned int)temp_v1;

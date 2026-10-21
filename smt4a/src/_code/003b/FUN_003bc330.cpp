@@ -8,7 +8,7 @@ int FUN_00221754(...);
 int scrSetResult(int);
 int FUN_003eaf20(void);
 
-extern unsigned int DAT_00570288; /* 0x570288 */
+extern unsigned int g_btlCandidateMasks; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
@@ -48,7 +48,7 @@ unsigned int FUN_003bc330(void)
     if (puVar7 != (unsigned int *)0x0) {
       temp_v3 = *puVar7;
       temp_v5 = puVar7[1];
-      if ((((DAT_0057028c & temp_v5) != 0 || (DAT_00570288 & temp_v3) != 0) &&
+      if ((((DAT_0057028c & temp_v5) != 0 || (g_btlCandidateMasks & temp_v3) != 0) &&
           ((DAT_005702b0 & temp_v3) == 0 && (DAT_005702b4 & temp_v5) == 0)) &&
          ((DAT_005702a0 & temp_v3) == 0 && (DAT_005702a4 & temp_v5) == 0)) {
         if (((temp_v3 & DAT_005702a8) == 0 && (temp_v5 & DAT_005702ac) == 0) &&

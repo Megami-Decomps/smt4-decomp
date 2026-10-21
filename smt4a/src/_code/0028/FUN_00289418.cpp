@@ -7,11 +7,11 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_00162790(...);
 int vec2GetYInt(...);
-int efctSetSpeed(...);
+void efctSetSpeed(float alpha);
 int FUN_001834a4(...);
 int FUN_0018408c(...);
 int FUN_002f67c4(...);
-int FUN_00334ad0(...);
+void statusDownDrawEndBanner(int x, int y, float alpha);
 int FUN_00334c6c(...);
 int FUN_0037e5c0(...);
 int VectorSignedToFloat(...);
@@ -30,18 +30,16 @@ extern int g_statusDown; /* 0x588fe8 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: vec2GetYInt. */
-/* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_0018408c. */
 extern int FUN_00284140(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002f67c4. */
-/* Supplied declaration required: FUN_00334ad0. */
 /* Supplied declaration required: FUN_00334c6c. */
 /* Supplied declaration required: FUN_0037e5c0. */
 
 
-void FUN_00289418(int param_1,int param_2)
+void FUN_00289418(int param_1,int param_2,float alpha)
 
 {
 /* irregular: 1 goto(s); irregular input(s): in_fpscr; 11 native warning(s); review required */
@@ -73,7 +71,7 @@ void FUN_00289418(int param_1,int param_2)
       temp_v10 = 0xf5ff9fff;
     }
     FUN_00334c6c(*(short *)(temp_v4 + 8) + param_1,*(short *)(temp_v4 + 10) + param_2,temp_v9);
-    efctSetSpeed();
+    efctSetSpeed(alpha);
     textFormatBuffer(temp_v11,"撂躂蒂＀");
     puVar7 = temp_v11;
     FUN_0018408c(puVar7,3);
@@ -85,10 +83,10 @@ void FUN_00289418(int param_1,int param_2)
     VectorSignedToFloat(param_1 + (int)temp_v0 + ((int)temp_v1 - (int)puVar7) / 2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,temp_v10,temp_v11);
-    efctSetSpeed();
+    efctSetSpeed(1.0f);
   }
   else {
-    FUN_00334ad0(param_1,param_2);
+    statusDownDrawEndBanner(param_1,param_2,alpha);
   }
   if (*(char *)(temp_v6 + 0x2578) == '\0') {
     temp_v5 = vec2GetYInt(temp_v6 + 0x3fc);

@@ -12,7 +12,7 @@ int FUN_00246134(unsigned int, unsigned int, int, unsigned int);
 int FUN_00247478(...);
 int FUN_0027da30(unsigned int *, unsigned int);
 int btlMainFindEntryByListedId(...);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int FUN_00283ebc(...);
 int btlGetMainState(void);
 int FUN_002ae164(void);
@@ -75,10 +75,10 @@ extern unsigned int FUN_002463e8(unsigned int);
 extern unsigned int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: FUN_00283ebc. */
 /* Supplied declaration required: btlGetMainState. */
-extern unsigned int FUN_002ae108(unsigned int);
+extern unsigned int playerGetSkillRank(unsigned int);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: memClear. */
@@ -313,7 +313,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
             puVar7 = (unsigned int *)btlGetMainState();
             btlMainFindEntryByListedId(puVar7,temp_v3);
             if (((*puVar7 & 2) != 0) && (temp_v6 = temp_v8, FUN_002ae164(), temp_v6 != 0)) {
-              temp_v3 = FUN_002ae108(temp_v8);
+              temp_v3 = playerGetSkillRank(temp_v8);
               FUN_00283ebc(temp_v6,temp_v3,3);
               temp_v14 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
             }
@@ -347,7 +347,7 @@ unsigned int FUN_003bd2e0(unsigned int param_1,unsigned int param_2,int param_3,
               do {
                 temp_v6 = (unsigned int)temp_v33[temp_v9];
                 if (temp_v6 != 0) {
-                  FUN_00283e48();
+                  passiveSkillLookupRecord();
                   temp_v5 = temp_v7;
                   if (temp_v6 != 0) {
                     temp_v5 = (unsigned int)*(unsigned char *)(temp_v6 + 0x2e);

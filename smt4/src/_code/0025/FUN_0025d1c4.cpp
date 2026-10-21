@@ -17,7 +17,7 @@ int FUN_0028cfd8(void);
 int listGetU16OrZero(...);
 int btlGetMainState(void);
 int FUN_002b6c34(...);
-int FUN_002bce00(...);
+int aocIndexValueOrDefault(...);
 int FUN_002bdf94(...);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
@@ -92,7 +92,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6db0. */
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_002bce00. */
+/* Supplied declaration required: aocIndexValueOrDefault. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -309,7 +309,7 @@ void FUN_0025d1c4(int param_1)
             FUN_002b6c34(temp_v10,(int)*(short *)(temp_v14 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
                          (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v14 + 10) + temp_v7,0x49,0,
                          0);
-            temp_v13 = FUN_002bce00(temp_v10);
+            temp_v13 = aocIndexValueOrDefault(temp_v10);
             textFormatBuffer(temp_v19,&LAB_0025dca4,temp_v13);
             temp_v10 = FUN_002bf4f8(0x15,0x8b);
             VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,
@@ -340,14 +340,14 @@ void FUN_0025d1c4(int param_1)
               temp_v5 = btlGetMainState();
               if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
                 temp_v5 = (int)(short)temp_v14;
-                temp_v13 = FUN_002bce00();
+                temp_v13 = aocIndexValueOrDefault();
                 textFormatBuffer(temp_v19,&LAB_0025d64c,temp_v13);
                 temp_v13 = FUN_0029a924(temp_v5);
               }
               else {
                 temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + temp_v14 * 2 +
                                        0x341a);
-                temp_v13 = FUN_002bce00();
+                temp_v13 = aocIndexValueOrDefault();
                 textFormatBuffer(temp_v19,&LAB_0025d64c,temp_v13);
                 temp_v13 = FUN_0029a924(temp_v5);
               }
@@ -398,14 +398,14 @@ void FUN_0025d1c4(int param_1)
                 temp_v14 = btlGetMainState();
                 if ((*(unsigned int *)(temp_v14 + 0x44a8) & 0x40) != 0) {
                   temp_v5 = (int)(short)((short)(temp_v10 + temp_v5) + 1);
-                  temp_v13 = FUN_002bce00();
+                  temp_v13 = aocIndexValueOrDefault();
                   textFormatBuffer(temp_v19,&LAB_0025d64c,temp_v13);
                   temp_v13 = FUN_0029a9d4(temp_v5,1);
                 }
                 else {
                   temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 +
                                           (temp_v10 + temp_v5) * 2 + 0x341c);
-                  temp_v13 = FUN_002bce00();
+                  temp_v13 = aocIndexValueOrDefault();
                   textFormatBuffer(temp_v19,&LAB_0025d64c,temp_v13);
                   temp_v13 = FUN_0029a9d4(temp_v5,1);
                 }
@@ -638,7 +638,7 @@ void FUN_0025d1c4(int param_1)
         btlGetMainState();
         temp_v1 = FUN_0028d24c();
       }
-      temp_v13 = FUN_002bce00((int)temp_v1);
+      temp_v13 = aocIndexValueOrDefault((int)temp_v1);
       textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v13);
       temp_v4 = FUN_002bf4f8(0x15,0xa8);
       if (temp_v23 != 0) {
@@ -676,13 +676,13 @@ void FUN_0025d1c4(int param_1)
         temp_v4 = btlGetMainState();
         if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x40) != 0) {
           temp_v5 = (int)(short)temp_v15;
-          temp_v12 = FUN_002bce00();
+          temp_v12 = aocIndexValueOrDefault();
           textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v12);
           temp_v12 = FUN_0029a924(temp_v5);
         }
         else {
           temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + temp_v15 * 2 + 0x341a);
-          temp_v12 = FUN_002bce00();
+          temp_v12 = aocIndexValueOrDefault();
           textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v12);
           temp_v12 = FUN_0029a924(temp_v5);
         }
@@ -732,14 +732,14 @@ void FUN_0025d1c4(int param_1)
           temp_v5 = btlGetMainState();
           if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
             temp_v5 = (int)(short)((short)(temp_v15 + temp_v4) + 1);
-            temp_v12 = FUN_002bce00();
+            temp_v12 = aocIndexValueOrDefault();
             textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v12);
             temp_v12 = FUN_0029a9d4(temp_v5,1);
           }
           else {
             temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + (temp_v15 + temp_v4) * 2 +
                                    0x341c);
-            temp_v12 = FUN_002bce00();
+            temp_v12 = aocIndexValueOrDefault();
             textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v12);
             temp_v12 = FUN_0029a9d4(temp_v5,1);
           }

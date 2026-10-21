@@ -11,7 +11,7 @@ struct SoundGlobals {
     /* 0x318 */ SoundHandleTable *table;
 };
 extern SoundGlobals g_asdSoundHandleState;
-void FUN_001742e4(void *sound, s32 fadeFrames);
+void asdSoundObjectStop(void *sound, s32 fadeFrames);
 void nw_snd_SoundHandle_DetachSound(void **handle);
 void asdSoundDetachAllHandles(void)
 {
@@ -19,7 +19,7 @@ void asdSoundDetachAllHandles(void)
     if (table != NULL) {
         for (u8 index = 0; index < 16; ++index) {
             if (table->handles[index] != NULL) {
-                FUN_001742e4(table->handles[index], 0);
+                asdSoundObjectStop(table->handles[index], 0);
                 nw_snd_SoundHandle_DetachSound(&table->handles[index]);
             }
         }

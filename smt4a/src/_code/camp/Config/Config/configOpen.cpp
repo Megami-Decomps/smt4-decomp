@@ -9,7 +9,7 @@ int asdMemoryAllocTracked(int, int, int, int, int);
 int sysPlaySe(int);
 int FUN_0019de98(int, unsigned int);
 int asdTMTexLoadMainHeap(int, int);
-int FUN_002804b0(unsigned char *, int, int);
+int asdLoadFileAsyncSimple(unsigned char *, int, int);
 int sysMemClear(void);
 int FUN_003d05a4(int, unsigned int);
 int loadSlotEnsureLoaded(int);
@@ -29,7 +29,7 @@ extern int g_config; /* 0x57f230 */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_003d05a4. */
@@ -63,8 +63,8 @@ void configOpen(unsigned int param_1,unsigned char param_2)
     *(unsigned char *)(temp_v0 + 0x4c1) = 1;
     asdTMTexLoadMainHeap(0x24,0);
   }
-  FUN_002804b0(&LAB_00202e80,temp_v0 + 0x7c,0);
-  FUN_002804b0(&LAB_00202e90,temp_v0 + 0x80,0);
+  asdLoadFileAsyncSimple(&LAB_00202e80,temp_v0 + 0x7c,0);
+  asdLoadFileAsyncSimple(&LAB_00202e90,temp_v0 + 0x80,0);
   loadSlotEnsureLoaded(0x36);
   sysPlaySe(5);
   FUN_0019de98(0,0xf4f4f4ff);

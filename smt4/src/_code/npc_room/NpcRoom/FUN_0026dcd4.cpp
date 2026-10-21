@@ -21,7 +21,7 @@ int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
 int FUN_002c58c8(...);
-int FUN_002c5c04(...);
+int asdLoadFileSyncDefault(...);
 int FUN_002fdfe0(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -65,7 +65,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002c58c8. */
-/* Supplied declaration required: FUN_002c5c04. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: FUN_002fdfe0. */
 
 
@@ -235,9 +235,9 @@ LAB_0026e0ac:
     }
     temp_v6 = temp_v6 + 1;
   } while (7 >= temp_v6);
-  temp_v4 = FUN_002c5c04(&LAB_0026e300);
+  temp_v4 = asdLoadFileSyncDefault(&LAB_0026e300);
   puVar6[0x12] = temp_v4;
-  temp_v6 = FUN_002c5c04(&LAB_0026e314);
+  temp_v6 = asdLoadFileSyncDefault(&LAB_0026e314);
   puVar6[0x13] = temp_v6;
   FUN_00297060(temp_v6,puVar6[0x12]);
   puVar6[0x14] = temp_v6;

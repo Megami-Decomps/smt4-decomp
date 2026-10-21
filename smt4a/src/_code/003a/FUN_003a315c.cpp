@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0046c35c(int, int, int);
-int FUN_00470a44(int, unsigned int);
+int dataSetRecordAt(int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0046c35c. */
-/* Supplied declaration required: FUN_00470a44. */
+/* Supplied declaration required: dataSetRecordAt. */
 
 
 int FUN_003a315c(unsigned int param_1)
@@ -40,7 +40,7 @@ int FUN_003a315c(unsigned int param_1)
     FUN_0046c35c(g_aocSystem,0x23,4);
     if (param_1 < temp_v1 + temp_v2) {
       temp_v1 = g_aocSystem;
-      FUN_00470a44(g_aocSystem,param_1 - temp_v2);
+      dataSetRecordAt(g_aocSystem,param_1 - temp_v2);
       return temp_v1;
     }
     temp_v1 = 0;

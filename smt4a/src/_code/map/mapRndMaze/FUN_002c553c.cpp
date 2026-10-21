@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00178b04(...);
-int FUN_0035d1e0(void);
+void FUN_0035d1e0(float x, float z, float heading);
 int controllerSetPosition(...);
 int FUN_003fe86c(...);
 int FUN_0040a908(...);
@@ -15,8 +15,8 @@ int FUN_0040aa6c(void);
 int moriModelContentCopyBody(...);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
-int FUN_0040ac08(void);
-int FUN_0040ace8(...);
+int modelListInit(void);
+int handleRegistryRegisterObject(...);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 13 slot(s), 52 byte(s) */
@@ -59,8 +59,7 @@ extern int DAT_006105e0; /* 0x6105e0 */
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_0035d1e0. */
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 extern unsigned int FUN_003857c8(int);
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fe86c. */
@@ -70,8 +69,8 @@ extern unsigned int FUN_003857c8(int);
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
-/* Supplied declaration required: FUN_0040ac08. */
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: modelListInit. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 void FUN_002c553c(void)
@@ -144,9 +143,7 @@ void FUN_002c553c(void)
         do {
           temp_v11 = 0;
           do {
-            VectorSignedToFloat(temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);
-            VectorSignedToFloat(temp_v18,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_0035d1e0();
+            FUN_0035d1e0((float)(int)temp_v17 * 700.0f + 350.0f,(float)(int)temp_v18 * 700.0f + 350.0f,(float)temp_v11 * 45.0f);
             temp_v13[0] = 0;
             temp_v10 = 0;
             temp_v13[1] = 0;
@@ -205,7 +202,7 @@ void FUN_002c553c(void)
   DAT_0060ffb4 = temp_v13[6];
   DAT_0060ffa4 = temp_v7;
   DAT_0060ffa8 = temp_v9;
-  temp_v7 = FUN_00376f94();
+  temp_v7 = lmapGetSpawnIndex();
   if (temp_v7 >= 100) {
     temp_v6 = FUN_003857c8((int)*(float *)(temp_v3 + 0x15c4));
     textFormatBuffer(temp_v12,&LAB_002c59b4,temp_v6);
@@ -213,7 +210,7 @@ void FUN_002c553c(void)
     FUN_00178b04(0x20,&LAB_002c59d0,0x862);
     temp_v7 = 0;
     if (temp_v9 != 0) {
-      temp_v7 = FUN_0040ac08();
+      temp_v7 = modelListInit();
     }
     DAT_006105d4 = temp_v7;
     FUN_0040aa6c();
@@ -221,31 +218,31 @@ void FUN_002c553c(void)
     FUN_0040aad4(DAT_006105d4,0);
     temp_v6 = *(unsigned int *)(DAT_006105d4 + 4);
     FUN_003fe86c(temp_v6,0,2);
-    FUN_0040ace8(g_handleRegistry,temp_v6);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v6);
     temp_v9 = 0x20;
     FUN_00178b04(0x20,&LAB_002c59d0,0x86f);
     temp_v7 = 0;
     if (temp_v9 != 0) {
-      temp_v7 = FUN_0040ac08();
+      temp_v7 = modelListInit();
     }
     DAT_006105d8 = temp_v7;
     moriModelContentCopyBody();
     temp_v6 = *(unsigned int *)(DAT_006105d8 + 4);
     FUN_003fe86c(temp_v6,0,2);
-    FUN_0040ace8(g_handleRegistry,temp_v6);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v6);
     textFormatBuffer(temp_v12,&LAB_002c5a04);
     temp_v9 = 0x20;
     FUN_00178b04(0x20,&LAB_002c59d0,0x878);
     temp_v7 = 0;
     if (temp_v9 != 0) {
-      temp_v7 = FUN_0040ac08();
+      temp_v7 = modelListInit();
     }
     DAT_006105e0 = temp_v7;
     FUN_0040aa6c();
     FUN_0040aad4(DAT_006105e0,0);
     temp_v6 = *(unsigned int *)(DAT_006105e0 + 4);
     FUN_003fe86c(temp_v6,0,2);
-    FUN_0040ace8(g_handleRegistry,temp_v6);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v6);
   }
   DAT_0060ffb8 = 2;
   temp_v7 = 0;
@@ -257,7 +254,7 @@ void FUN_002c553c(void)
   do {
     temp_v3 = temp_v7 * 4;
     if (0 < (&DAT_0060ffa4)[temp_v7]) {
-      temp_v9 = FUN_00376f94();
+      temp_v9 = lmapGetSpawnIndex();
       if (temp_v9 != 0) {
         textFormatBuffer(temp_v12,&LAB_002c5db0,temp_v7 + 1);
         if (temp_v9 >= 100) {
@@ -274,7 +271,7 @@ void FUN_002c553c(void)
           FUN_00178b04(0x20,&LAB_002c59d0,0x8dd);
           temp_v6 = 0;
           if (temp_v9 != 0) {
-            temp_v6 = FUN_0040ac08();
+            temp_v6 = modelListInit();
           }
           *(unsigned int *)(temp_v3 + 0x60ffbc) = temp_v6;
           FUN_0040aa6c();
@@ -282,7 +279,7 @@ void FUN_002c553c(void)
           FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x60ffbc),0);
           temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4);
           FUN_003fe86c(temp_v6,0,2);
-          FUN_0040ace8(g_handleRegistry,temp_v6);
+          handleRegistryRegisterObject(g_handleRegistry,temp_v6);
           if (temp_v7 != 5) {
             controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
           }
@@ -292,7 +289,7 @@ void FUN_002c553c(void)
           FUN_00178b04(0x20,&LAB_002c59d0,0x8d2);
           temp_v6 = 0;
           if (temp_v9 != 0) {
-            temp_v6 = FUN_0040ac08();
+            temp_v6 = modelListInit();
           }
           uRam0060ffcc = temp_v6;
           FUN_0040aa6c();
@@ -302,7 +299,7 @@ void FUN_002c553c(void)
           FUN_0040aad4(*(unsigned int *)(temp_v14 + 0x3b4),0);
           temp_v6 = *(unsigned int *)(*(int *)(temp_v14 + 0x3b4) + 4);
           FUN_003fe86c(temp_v6,0,2);
-          FUN_0040ace8(g_handleRegistry,temp_v6);
+          handleRegistryRegisterObject(g_handleRegistry,temp_v6);
           controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
         }
       }
@@ -311,7 +308,7 @@ void FUN_002c553c(void)
         FUN_00178b04(0x20,&LAB_002c59d0,0x8c4);
         temp_v6 = 0;
         if (temp_v9 != 0) {
-          temp_v6 = FUN_0040ac08();
+          temp_v6 = modelListInit();
         }
         *(unsigned int *)(temp_v3 + 0x60ffbc) = temp_v6;
         FUN_0040aa6c();
@@ -321,7 +318,7 @@ void FUN_002c553c(void)
         FUN_0040aad4(*(unsigned int *)(temp_v3 + 0x60ffbc),0);
         temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4);
         FUN_003fe86c(temp_v6,0,2);
-        FUN_0040ace8(g_handleRegistry,temp_v6);
+        handleRegistryRegisterObject(g_handleRegistry,temp_v6);
         if (temp_v7 != 5) {
           controllerSetPosition(*(unsigned int *)(*(int *)(temp_v3 + 0x60ffbc) + 4));
         }
@@ -338,7 +335,7 @@ void FUN_002c553c(void)
             FUN_00178b04(0x20,&LAB_002c59d0,0x90b);
             temp_v6 = 0;
             if (temp_v11 != 0) {
-              temp_v6 = FUN_0040ac08();
+              temp_v6 = modelListInit();
             }
             temp_v11 = temp_v9 * 4 + temp_v7 * 0x100;
             *(unsigned int *)(&g_mapRndMaze + temp_v11 + 0x3cc) = temp_v6;
@@ -347,7 +344,7 @@ void FUN_002c553c(void)
                          *(unsigned int *)(temp_v3 + 0x60ffbc),0);
             temp_v6 = *(unsigned int *)(*(int *)(&g_mapRndMaze + temp_v11 + 0x3cc) + 4);
             FUN_003fe86c(temp_v6,0,2);
-            FUN_0040ace8(g_handleRegistry,temp_v6);
+            handleRegistryRegisterObject(g_handleRegistry,temp_v6);
             if (temp_v7 != 5) {
               controllerSetPosition(temp_v6);
             }

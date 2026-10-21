@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002569fc(int *);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 
 /* stack frame of void: 9 slot(s), 36 byte(s) */
@@ -39,7 +39,7 @@ extern unsigned int DAT_004ea994; /* 0x4ea994 */
 extern unsigned int DAT_004ea998; /* 0x4ea998 */
 
 /* Supplied declaration required: FUN_002569fc. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 
 
@@ -65,7 +65,7 @@ void FUN_002484e0(void)
   
   temp_v1 = in_s0 * 40.743664f;
   temp_v0 = temp_v1;
-  FUN_002b7064();
+  phaseCosInterpolate();
   FUN_002b70cc();
   FUN_002569fc(&temp_v2);
   DAT_004ea974 = temp_v0;

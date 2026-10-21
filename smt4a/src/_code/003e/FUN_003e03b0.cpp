@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(unsigned char [132], unsigned char *, int, int);
 int dataTable00FindById(void);
-int FUN_002804b0(unsigned char [132], int *, int);
+int asdLoadFileAsyncSimple(unsigned char [132], int *, int);
 int sysMemClear(unsigned char [132], int);
 int FUN_003e12a8(unsigned int *, int);
 int FUN_003e3188(unsigned int *, int);
@@ -25,7 +25,7 @@ extern unsigned int DAT_00573884; /* 0x573884 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e12a8. */
 /* Supplied declaration required: FUN_003e3188. */
@@ -61,7 +61,7 @@ void FUN_003e03b0(unsigned int *param_1,int param_2)
       aocQueueType38(g_aocSystem,*puVar1,piVar4,temp_v2);
     }
     else {
-      FUN_002804b0(temp_v2,piVar4,0);
+      asdLoadFileAsyncSimple(temp_v2,piVar4,0);
     }
     *param_1 = 9;
     param_1[4] = 0;

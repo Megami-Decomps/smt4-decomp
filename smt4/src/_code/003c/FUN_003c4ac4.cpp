@@ -6,7 +6,7 @@ extern "C" {
 
 int asdListBoxSetItemMode3(...);
 int asdListBoxSetItemMode2(...);
-int FUN_0024571c(...);
+int gameRecordSetValueClamped(...);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -19,10 +19,10 @@ typedef struct {
 /* Supplied declaration required: asdListBoxSetItemMode2. */
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0024571c. */
+/* Supplied declaration required: gameRecordSetValueClamped. */
 extern unsigned int saveIsRecordValueBounded(unsigned short);
 extern unsigned int *FUN_002561d8(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_0025628c(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 extern unsigned int btlGetMainState(void);
 
 
@@ -38,7 +38,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
   unsigned int *puVar6;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_0025628c(*(unsigned int *)(param_1 + 0x10));
+  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   puVar2 = (unsigned int *)FUN_002561d8(param_2,*(unsigned int *)(param_1 + 0x1c),1);
   puVar6 = (unsigned int *)0x0;
   if (puVar2 != (unsigned int *)0x0) {
@@ -185,7 +185,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
   case 0xc:
     if ((puVar2 != (unsigned int *)0x0) && ((*puVar2 & 0x10) != 0)) {
       puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      FUN_0024571c(*(unsigned short *)((int)puVar2 + 0xce),*puVar4);
+      gameRecordSetValueClamped(*(unsigned short *)((int)puVar2 + 0xce),*puVar4);
       return;
     }
   }

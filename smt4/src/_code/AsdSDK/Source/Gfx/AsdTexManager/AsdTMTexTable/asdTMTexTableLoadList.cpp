@@ -4,7 +4,7 @@
 extern "C" {
 
 void *asdMemAlloc(int, int, int, s32 size, int);
-void *FUN_002c3124(u32 handle, u8 *size, u32 flags);
+void *fileLoadSync(u32 handle, u8 *size, u32 flags);
 void rt_memcpy(void *dst, const void *src, s32 size);
 void asdMemFree(void *block);
 
@@ -14,7 +14,7 @@ extern TexTable g_texTable;
 u32 asdTMTexTableLoadList(u32 handle)
 {
     u8 size[8];
-    u8 *file = (u8 *)FUN_002c3124(handle, size, 0);
+    u8 *file = (u8 *)fileLoadSync(handle, size, 0);
     u32 *src;
     s32 i;
 

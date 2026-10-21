@@ -16,7 +16,7 @@ int FUN_00339fa8(...);
 int FUN_0033a360(...);
 int FUN_003d6fd4(...);
 int FUN_003dba3c(...);
-int FUN_003dcb94(...);
+int btlAuxAreResourcesReady(...);
 
 extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int g_btlMain; /* 0x4342c8 */
@@ -40,7 +40,7 @@ extern int FUN_0033ac58(int);
 extern int FUN_003d6b48(unsigned int);
 /* Supplied declaration required: FUN_003d6fd4. */
 /* Supplied declaration required: FUN_003dba3c. */
-/* Supplied declaration required: FUN_003dcb94. */
+/* Supplied declaration required: btlAuxAreResourcesReady. */
 
 
 unsigned int FUN_003d1c1c(int *param_1,int param_2)
@@ -65,7 +65,7 @@ unsigned int FUN_003d1c1c(int *param_1,int param_2)
     break;
   case 2:
     temp_v1 = DAT_00435d18;
-    FUN_003dcb94();
+    btlAuxAreResourcesReady();
     if (temp_v1 == 0) {
       return 0;
     }

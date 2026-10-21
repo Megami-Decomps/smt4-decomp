@@ -6,10 +6,10 @@ extern "C" {
 
 int asdMemFree(void);
 int sysMemClear(int, int);
-int FUN_0035bb70(void);
+int textureCacheReleaseAll(void);
 int FUN_0035bbc4(void);
 int workOwnerRelease(int);
-int FUN_004f612c(int);
+int btlCameraFinishTransition(int);
 int FUN_004f6e68(int);
 int obj4FSlots28Reset(int);
 int FUN_004f7f08(void);
@@ -20,10 +20,10 @@ extern int g_btlCamera; /* 0x571508 */
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_0035bb70. */
+/* Supplied declaration required: textureCacheReleaseAll. */
 /* Supplied declaration required: FUN_0035bbc4. */
 /* Supplied declaration required: workOwnerRelease. */
-/* Supplied declaration required: FUN_004f612c. */
+/* Supplied declaration required: btlCameraFinishTransition. */
 /* Supplied declaration required: FUN_004f6e68. */
 /* Supplied declaration required: obj4FSlots28Reset. */
 /* Supplied declaration required: FUN_004f7f08. */
@@ -58,10 +58,10 @@ void FUN_004f5e6c(int param_1)
     (**(romwright_code **)(*piVar1 + 4))();
     *(int *)(param_1 + 0x1f50) = 0;
   }
-  FUN_004f612c(param_1);
+  btlCameraFinishTransition(param_1);
   *(unsigned int *)(param_1 + 0x3050) = 0;
   FUN_0035bbc4();
-  FUN_0035bb70();
+  textureCacheReleaseAll();
   if (g_btlCamera != 0) {
     *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xf7ffffff;
   }

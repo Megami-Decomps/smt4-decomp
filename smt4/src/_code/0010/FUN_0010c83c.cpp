@@ -41,7 +41,7 @@ extern int FUN_0011921c(short);
 /* Supplied declaration required: FUN_0011a0d4. */
 extern unsigned int FUN_0011b454(void);
 extern unsigned int FUN_002bcddc(unsigned short, unsigned int);
-extern unsigned int FUN_002bce00(unsigned short);
+extern unsigned int aocIndexValueOrDefault(unsigned short);
 extern unsigned int FUN_002bce30(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bcf10. */
 /* Supplied declaration required: wstrBufferPutChar. */
@@ -185,7 +185,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       FUN_002bd0f8(param_3,param_5,temp_v12,param_6);
       break;
     case 0xf876:
-      temp_v6 = FUN_002bce00(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
+      temp_v6 = aocIndexValueOrDefault(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
       FUN_002bcfc0(temp_v6,temp_v11);
       FUN_002bd0f8(param_3,param_5,temp_v11,param_6);
       break;

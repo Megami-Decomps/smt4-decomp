@@ -8,7 +8,7 @@ int FUN_001e1104(unsigned int *, int, int, int);
 int FUN_00206368(unsigned int *, unsigned int, int, int);
 int communicationBeginTransition(int);
 int communicationSetResultPointer(void);
-int FUN_0026c7b8(unsigned char *);
+void FUN_0026c7b8(const unsigned char* text);
 int memFill8(unsigned int *, unsigned int);
 int FUN_002ad8a8(unsigned int *, unsigned int *);
 int FUN_002dc464(void);
@@ -51,7 +51,6 @@ extern unsigned char g_btlUi; /* 0x439c88 */
 extern unsigned short slotFindNonnegativeRank(unsigned int, unsigned int);
 /* Supplied declaration required: communicationBeginTransition. */
 /* Supplied declaration required: communicationSetResultPointer. */
-/* Supplied declaration required: FUN_0026c7b8. */
 /* Supplied declaration required: memFill8. */
 /* Supplied declaration required: FUN_002ad8a8. */
 /* Supplied declaration required: FUN_002dc464. */

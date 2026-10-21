@@ -56,7 +56,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002c2044. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 extern unsigned int asdMemoryGetAllocatorA(void);
-extern int FUN_002c5c04(fn_00341340_arg1 *);
+extern int asdLoadFileSyncDefault(fn_00341340_arg1 *);
 /* Supplied declaration required: FUN_003416bc. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 
@@ -90,7 +90,7 @@ void FUN_00341340(int *param_1,fn_00341340_arg1 *param_2)
   unsigned char temp_v18;
   int temp_v19;
   
-  temp_v0 = FUN_002c5c04(param_2);
+  temp_v0 = asdLoadFileSyncDefault(param_2);
   param_1[6] = temp_v0;
   temp_v9 = *(int *)(temp_v0 + 0x48);
   temp_v8 = 0;

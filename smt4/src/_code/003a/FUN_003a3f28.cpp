@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002305fc(int);
-int FUN_0023360c(int);
+int flaggedValueHolderGetTotal(int);
 int FUN_0027f3dc(...);
 int FUN_0029e17c(void);
 int FUN_002a0cc8(int);
@@ -30,7 +30,7 @@ extern int FUN_003a63a8(...); /* 0x3a63a8 */
 
 extern int useCounterGetValue(void);
 /* Supplied declaration required: FUN_002305fc. */
-/* Supplied declaration required: FUN_0023360c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: FUN_0027f3dc. */
 extern int FUN_0029e130(void);
 /* Supplied declaration required: FUN_0029e17c. */
@@ -81,7 +81,7 @@ void FUN_003a3f28(int param_1)
   else {
     temp_v2 = param_1 + *(int *)(param_1 + 0x860) * 0x1002;
     temp_v3 = temp_v2 + 0xc94;
-    FUN_0023360c(param_1 + *(int *)(param_1 + 0x860) * 0x74 + 0x880);
+    flaggedValueHolderGetTotal(param_1 + *(int *)(param_1 + 0x860) * 0x74 + 0x880);
     temp_v0 = FUN_0029e130();
     if (temp_v0 == 0xf) {
       temp_v0 = useCounterGetValue();

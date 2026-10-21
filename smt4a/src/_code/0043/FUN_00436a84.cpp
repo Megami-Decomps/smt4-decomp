@@ -30,7 +30,7 @@ typedef struct SlotRef {
 
 extern void FUN_00515618(SlotRef *ref, void *key);
 extern void variantSetWordB(void *header, void **item, u32 arg);
-extern s32 FUN_004386c4(void *body, u8 kind);
+extern s32 rangeSetAddPresetGroup(void *body, u8 kind);
 
 /* Resolves the cursor's item and its slot, fills in the slot and advances the cursor; 0 on success, 2 on failure. */
 s32 FUN_00436a84(Cursor *cursor, void **result, void **owner)
@@ -45,7 +45,7 @@ s32 FUN_00436a84(Cursor *cursor, void **result, void **owner)
         if (ref.slot != NULL) {
             copy = item;
             variantSetWordB(ref.slot->header, &copy, cursor->arg);
-            if (FUN_004386c4(ref.slot->body, cursor->record->kind) != 0) {
+            if (rangeSetAddPresetGroup(ref.slot->body, cursor->record->kind) != 0) {
                 *result = item;
                 cursor->record = cursor->record->next;
                 return 0;

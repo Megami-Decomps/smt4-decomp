@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00299370(int);
 int FUN_0029c6b0(int);
 
-extern int FUN_00295d08(unsigned int);
+extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029c6b0. */
 extern int flagWordTestBit(int, unsigned int);
@@ -28,7 +28,7 @@ unsigned char FUN_0031c344(int param_1,int param_2,int param_3)
   temp_v1 = 0;
   if (param_1 < 0) {
     temp_v2 = gameGetPlayerData();
-    temp_v0 = FUN_00295d08(1);
+    temp_v0 = playerPadTestBit(1);
   }
   else {
     temp_v1 = gameGetUnitRecord();

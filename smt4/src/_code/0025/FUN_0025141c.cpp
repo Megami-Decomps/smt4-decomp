@@ -9,7 +9,7 @@ int FUN_0026242c(int);
 int FUN_00269bf0(int);
 int FUN_002888a8(...);
 int FUN_00288ddc(...);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int textFormatBuffer(...);
@@ -79,7 +79,6 @@ extern int isLowThreshold(int, int);
 extern int gameGetUnitRecord(void);
 extern unsigned int categoryGetColor(int);
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002b6758. */
 extern unsigned int FUN_002bd068(unsigned short);
 extern unsigned int FUN_002bd1fc(void);
 /* Supplied declaration required: FUN_002bdf94. */
@@ -222,7 +221,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         efctSetSpeed();
       }
       temp_v3 = FUN_002bf4f8(0x19,0x51);
-      FUN_002b6758(temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6a,0);
+      uiDrawDemonIcon(temp_v9,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6a,0);
       FUN_002bed3c();
       efctSetSpeed();
       FUN_002bf288(2,0x19,0x40,param_2,param_3,0x6f);

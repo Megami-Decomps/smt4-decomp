@@ -4,13 +4,15 @@
 
 extern "C" {
 
-int FUN_001f4908(int, unsigned int, int);
-int FUN_002804b0(...);
+int slotSetRequest(int, unsigned int, int);
+int asdLoadFileAsyncSimple(...);
 int FUN_003e6dc8(...);
 int FUN_003e71a8(...);
 int btlUiPanelStart(unsigned int);
 int FUN_004fdcd8(int, int, int, int, int, int, int, int);
-int FUN_004fddf4(int, int, unsigned int, int, int, unsigned int, int, int, unsigned int);
+unsigned int btlReflectQueuePairedParameters(int actor, unsigned int flags, unsigned int value,
+                         unsigned int parameter, unsigned int target, unsigned int first,
+                         unsigned int second, unsigned int third, unsigned int fourth);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -24,7 +26,7 @@ typedef struct {
 
 extern unsigned int DAT_005738e0; /* 0x5738e0 */
 extern unsigned int DAT_005738e4; /* 0x5738e4 */
-extern int DAT_0057a684; /* 0x57a684 */
+extern int g_btlGameOverEyeTimeline; /* 0x57a684 */
 extern int DAT_0057a688; /* 0x57a688 */
 extern unsigned int DAT_0057a68c; /* 0x57a68c */
 extern int DAT_0057a690; /* 0x57a690 */
@@ -37,13 +39,12 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(unsigned int);
 extern int gameDataBlocksGetSaveData(void);
-/* Supplied declaration required: FUN_001f4908. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: slotSetRequest. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_003e6dc8. */
 /* Supplied declaration required: FUN_003e71a8. */
 /* Supplied declaration required: btlUiPanelStart. */
 /* Supplied declaration required: FUN_004fdcd8. */
-/* Supplied declaration required: FUN_004fddf4. */
 
 
 void FUN_003e6c14(unsigned int *param_1)
@@ -53,26 +54,26 @@ void FUN_003e6c14(unsigned int *param_1)
   char temp_v0;
   int temp_v1;
   
-  if (param_1[2] == DAT_0057a684) {
+  if (param_1[2] == g_btlGameOverEyeTimeline) {
     FUN_004fdcd8(0,0,0,0,7,0,0xb,0);
     btlUiPanelStart(g_btlUiBlock);
   }
   if (param_1[2] == DAT_0057a698) {
-    FUN_004fddf4(0,0,DAT_0057a69c,0x10,0,DAT_0057a6a0,0,2,0xffffffff);
+    btlReflectQueuePairedParameters(0,0,DAT_0057a69c,0x10,0,DAT_0057a6a0,0,2,0xffffffff);
   }
   if (param_1[2] == DAT_0057a688) {
-    FUN_001f4908(0,DAT_0057a68c,0xff);
+    slotSetRequest(0,DAT_0057a68c,0xff);
   }
   if (param_1[2] == DAT_0057a690) {
-    FUN_001f4908(1,DAT_0057a694,0xff);
+    slotSetRequest(1,DAT_0057a694,0xff);
   }
   if (DAT_0057a6a4 < (unsigned int)param_1[2]) {
     temp_v1 = btlGetMainState(DAT_0057a6a4);
     if ((*(unsigned int *)(temp_v1 + 0x45ac) & DAT_005738e4) == 0 &&
         (DAT_005738e0 & *(unsigned int *)(temp_v1 + 0x45a8)) == 0) {
       *param_1 = 3;
-      FUN_002804b0("battle/gameover/gameover.bf",param_1 + 4,0);
-      FUN_002804b0("battle/gameover/gameover.mbm",param_1 + 6,0);
+      asdLoadFileAsyncSimple("battle/gameover/gameover.bf",param_1 + 4,0);
+      asdLoadFileAsyncSimple("battle/gameover/gameover.mbm",param_1 + 6,0);
       temp_v1 = gameDataBlocksGetSaveData();
       temp_v0 = *(char *)(temp_v1 + 0x27e3d);
       if (temp_v0 != -1) {

@@ -16,7 +16,7 @@ typedef struct TalkEntry {
 
 extern BtlTalk *g_btlTalk; /* 0x439b58 */
 
-extern u32 FUN_003c0868(BtlTalk *talk);
+extern u32 dataTableFileTouch(BtlTalk *talk);
 extern int dataTableGetCount(u32 table);
 extern TalkEntry *dataTableGetEntries(u32 table);
 extern int gameFlagIsSet(int flag);
@@ -29,7 +29,7 @@ u32 FUN_00318b3c(void)
 {
     s32 free[32];
     s32 candidates[32];
-    u32 table = FUN_003c0868(g_btlTalk);
+    u32 table = dataTableFileTouch(g_btlTalk);
     int count = dataTableGetCount(table);
     TalkEntry *entries = dataTableGetEntries(table);
     int numCandidates = 0;

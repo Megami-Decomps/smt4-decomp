@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00218c50(int);
-int FUN_00224f68(int, int);
-int FUN_002b2650(int, int, int);
+int btlDrawFloatingNumbers(int, int);
+int pairSetHalves(int, int, int);
 int FUN_002b7638(...);
 int FUN_002b93c8(int);
 int FUN_002ba12c(...);
@@ -52,9 +52,9 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB84 (SUBPIECE). */
 /* Supplied declaration required: FUN_00218c50. */
-/* Supplied declaration required: FUN_00224f68. */
+/* Supplied declaration required: btlDrawFloatingNumbers. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
-/* Supplied declaration required: FUN_002b2650. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
@@ -126,7 +126,7 @@ unsigned int FUN_001b72e0(void)
         (**(romwright_code **)(temp_v5 + 0x1268))();
         *(unsigned char *)(temp_v5 + 0x1264) = 0;
       }
-      FUN_00224f68(temp_v1,1);
+      btlDrawFloatingNumbers(temp_v1,1);
       temp_v6 = 0.8f;
       FUN_002ba12c(g_titleScene);
       temp_v8 = (unsigned long long)(unsigned int)(int)temp_v6;
@@ -134,7 +134,7 @@ unsigned int FUN_001b72e0(void)
       do {
         temp_v4 = temp_v1 + temp_v5 * 0x14c;
         if (*(short *)(temp_v4 + 0xe1c4) != 0) {
-          FUN_002b2650(temp_v4 + 0xe0ac,(int)(short)(int)*(float *)(temp_v4 + 0xe1d0),
+          pairSetHalves(temp_v4 + 0xe0ac,(int)(short)(int)*(float *)(temp_v4 + 0xe1d0),
                        (int)(short)(int)*(float *)(temp_v4 + 0xe1d4));
           VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_002b93c8(temp_v4 + 0xe0ac);
@@ -149,7 +149,7 @@ unsigned int FUN_001b72e0(void)
               *(unsigned char *)(temp_v0 + 0x12c4) = 0;
             }
             temp_v0 = temp_v4 + 0xe138;
-            FUN_002b2650(temp_v0,(int)(short)(int)(float)*(unsigned long long *)(temp_v4 + 0xe1d0),
+            pairSetHalves(temp_v0,(int)(short)(int)(float)*(unsigned long long *)(temp_v4 + 0xe1d0),
                          (int)(short)(int)(float)((unsigned long long)*(unsigned long long *)(temp_v4 + 0xe1d0) >> 0x20
                                                  ));
             *(unsigned int *)(temp_v4 + 0xe168) = *(unsigned int *)(temp_v4 + 0xe1c8);

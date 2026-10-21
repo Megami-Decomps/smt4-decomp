@@ -13,15 +13,15 @@ typedef struct MapIf {
 
 extern MapIf *g_mapIf;
 
-extern s32 FUN_00376f94(void);
+extern s32 lmapGetSpawnIndex(void);
 extern s32 gameFlagsValueGet(s32 id);
 
-/* Queues a map interface request (1) for `id` and `arg`, unless the id is blocked: 0x24, 0x29 while FUN_00376f94 is 1, or an id below 100 (other than 0x18) that gameFlagsValueGet reports as 1. */
+/* Queues a map interface request (1) for `id` and `arg`, unless the id is blocked: 0x24, 0x29 while lmapGetSpawnIndex is 1, or an id below 100 (other than 0x18) that gameFlagsValueGet reports as 1. */
 void FUN_0033e014(s32 id, u16 arg)
 {
     MapIf *mapIf = g_mapIf;
 
-    if (id != 0x24 && (FUN_00376f94() != 1 || gameFlagsValueGet(0x29) != 1) &&
+    if (id != 0x24 && (lmapGetSpawnIndex() != 1 || gameFlagsValueGet(0x29) != 1) &&
         (id == 0x18 || id >= 100 || gameFlagsValueGet(id) != 1)) {
         mapIf->id = id;
         mapIf->arg = arg;

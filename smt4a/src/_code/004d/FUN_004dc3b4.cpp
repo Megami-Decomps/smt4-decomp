@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_003bb6b0(unsigned int, int);
+int dataTable05FindByPriorityAndKey(unsigned int, int);
 
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_003bb6b0. */
+/* Supplied declaration required: dataTable05FindByPriorityAndKey. */
 extern unsigned int FUN_004da980(void);
 extern unsigned int FUN_004db198(unsigned int, unsigned int, unsigned int, unsigned int *);
 extern unsigned int FUN_004db2b8(unsigned int, unsigned int, unsigned int, unsigned int *);
@@ -39,7 +39,7 @@ unsigned int FUN_004dc3b4(unsigned int param_1,unsigned int param_2,unsigned int
     temp_v2 = param_3;
     FUN_00184310();
     temp_v1 = (unsigned int)*(unsigned char *)(temp_v1 + 2);
-    FUN_003bb6b0(temp_v1,*(unsigned char *)(temp_v2 + 2));
+    dataTable05FindByPriorityAndKey(temp_v1,*(unsigned char *)(temp_v2 + 2));
     temp_v3 = 0;
     if (param_2 != param_3 && temp_v1 != 0) {
       temp_v2 = param_4[1];

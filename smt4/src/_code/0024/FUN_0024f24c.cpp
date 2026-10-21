@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0021c694(void);
-int FUN_002524bc(unsigned int, unsigned int, unsigned int, unsigned int);
+int mapIfSpawnEffect(unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_19: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ typedef struct {
 extern int DAT_00447a2c; /* 0x447a2c */
 
 /* Supplied declaration required: FUN_0021c694. */
-/* Supplied declaration required: FUN_002524bc. */
+/* Supplied declaration required: mapIfSpawnEffect. */
 
 
 void FUN_0024f24c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -68,7 +68,7 @@ void FUN_0024f24c(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v1 = temp_v1 + 0x4afdc0;
   FUN_0021c694();
   temp_v2 = param_1;
-  FUN_002524bc(param_1,param_5,param_6,param_19);
+  mapIfSpawnEffect(param_1,param_5,param_6,param_19);
   temp_v1 = temp_v1 * 0x178;
   *(unsigned int *)(temp_v1 + 0x4a1388) = temp_v2;
   *(unsigned char *)(temp_v1 + 0x4a13d0) = param_13;

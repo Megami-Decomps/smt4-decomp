@@ -50,7 +50,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern unsigned int *g_activeTextureSlot; /* 0x5806cc */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
@@ -139,7 +139,7 @@ void FUN_002443e4(void)
     temp_v5 = (float)temp_v18;
     if (0 < (int)g_activeTextureSlot[temp_v1 + 1]) {
       temp_v13 = (float)g_activeTextureSlot[temp_v1 + 0x101];
-      temp_v3 = *(float *)(DAT_005806a4 + 0x50) - (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
+      temp_v3 = *(float *)(g_lmapView + 0x50) - (float)g_activeTextureSlot[temp_v1 * 3 + 0x41];
       FUN_0050d8e4();
       temp_v3 = temp_v3 * temp_v17 * temp_v5;
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 <= temp_v3) << 0x1d);

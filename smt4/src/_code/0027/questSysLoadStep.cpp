@@ -1,91 +1,81 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `questSysLoadStep` (_code @ 0x2734f0, 0x14c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: state-store tail merging and reuse of the script mode constant differ from retail. */
+#include "common.h"
+
+struct QuestScriptProcess {
+    u8 unk00[0x108];
+    u32 mode;                    /* 0x108 */
+};
+struct QuestLoadStep {
+    u32 state;                   /* 0x00 */
+    u32 entry;                   /* 0x04 */
+    u8 showButtonHelp;           /* 0x08 */
+    u8 unk09[3];
+    void *script;                /* 0x0c */
+    void *messages;              /* 0x10 */
+    QuestScriptProcess *process; /* 0x14 */
+};
 
 extern "C" {
+extern const char g_questScriptPath[];
+extern const char g_questMessagesPath[];
+void asdLoadFileAsyncSimple(const char *path, void **resource, s32 flags);
+void buttonHelpSetPreset(s32 preset);
+QuestScriptProcess *FUN_00297060(void *script, void *messages);
+void scrScriptProcessStartEntry(QuestScriptProcess *process, u32 entry);
+s32 scrRunOpcodesStub(QuestScriptProcess *process);
+u32 FUN_002903f0();
+s32 FUN_00298dc8();
+void FUN_0029016c(u32 selection, s32 flags);
+void FUN_002900d0();
+s32 gameJumpRequestIsPending();
 
-int FUN_002900d0(void);
-int FUN_0029016c(unsigned int, int);
-int scrScriptProcessStartEntry(...);
-int FUN_00297060(int, unsigned int);
-int FUN_00297468(...);
-int buttonHelpSetPreset(int);
-
-extern int FUN_0019e0c0(unsigned int);
-/* Supplied declaration required: FUN_002900d0. */
-/* Supplied declaration required: FUN_0029016c. */
-extern int gameJumpRequestIsPending(void);
-extern unsigned int FUN_002903f0(void);
-/* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297468. */
-extern int FUN_00298dc8(void);
-/* Supplied declaration required: buttonHelpSetPreset. */
-
-
-unsigned int questSysLoadStep(unsigned int *param_1)
-
+// Load quest script resources, run the requested entry, and finish any jump entry.
+u32 questSysLoadStep(QuestLoadStep *step)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  switch(*param_1) {
-  case 0:
-    FUN_00297468("event/quest/QuestScr.bf",param_1 + 3,0);
-    FUN_00297468("event/quest/QuestSys.mbm",param_1 + 4,0);
-    *param_1 = 1;
-    break;
-  case 1:
-    temp_v1 = 0;
-    if (param_1[3] != 0) {
-      temp_v1 = param_1[4];
+    switch (step->state) {
+    case 0:
+        asdLoadFileAsyncSimple(g_questScriptPath, &step->script, 0);
+        asdLoadFileAsyncSimple(g_questMessagesPath, &step->messages, 0);
+        step->state = 1;
+        break;
+    case 1:
+        if (step->script == NULL || step->messages == NULL) {
+            return 0;
+        }
+        if (step->showButtonHelp) {
+            buttonHelpSetPreset(0x90);
+        }
+        step->process = FUN_00297060(step->script, step->messages);
+        step->process->mode = 2;
+        scrScriptProcessStartEntry(step->process, step->entry);
+        step->state = 2;
+        break;
+    case 2: {
+        if (scrRunOpcodesStub(step->process) != 2) {
+            return 0;
+        }
+        u32 selection = FUN_002903f0();
+        if (FUN_00298dc8()) {
+            FUN_0029016c(selection, 0);
+        }
+        FUN_002900d0();
+        if (!gameJumpRequestIsPending()) {
+            step->state = 4;
+            break;
+        }
+        scrScriptProcessStartEntry(step->process, 13);
+        step->state = 3;
+        break;
     }
-    if (param_1[3] == 0 || temp_v1 == 0) {
-      return 0;
+    case 3:
+        if (scrRunOpcodesStub(step->process) != 2) {
+            return 0;
+        }
+        step->state = 4;
+        break;
+    case 4:
+        return 1;
     }
-    if (*(char *)(param_1 + 2) != '\0') {
-      buttonHelpSetPreset(0x90);
-    }
-    temp_v1 = param_1[3];
-    FUN_00297060(temp_v1,param_1[4]);
-    param_1[5] = temp_v1;
-    *(unsigned int *)(temp_v1 + 0x108) = 2;
-    scrScriptProcessStartEntry(param_1[5],param_1[1]);
-    temp_v0 = 2;
-    *param_1 = temp_v0;
-    break;
-  case 2:
-    temp_v1 = FUN_0019e0c0(param_1[5]);
-    if (temp_v1 != 2) {
-      return 0;
-    }
-    temp_v0 = FUN_002903f0();
-    temp_v1 = FUN_00298dc8();
-    if (temp_v1 != 0) {
-      FUN_0029016c(temp_v0,0);
-    }
-    FUN_002900d0();
-    temp_v1 = gameJumpRequestIsPending();
-    if (temp_v1 == 0) {
-      *param_1 = 4;
-      break;
-    }
-    scrScriptProcessStartEntry(param_1[5],0xd);
-    temp_v0 = 3;
-    *param_1 = temp_v0;
-    break;
-  case 3:
-    temp_v1 = FUN_0019e0c0(param_1[5]);
-    if (temp_v1 != 2) {
-      return 0;
-    }
-    *param_1 = 4;
-    break;
-  case 4:
-    return 1;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

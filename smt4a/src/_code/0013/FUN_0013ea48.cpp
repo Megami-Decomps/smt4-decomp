@@ -15,18 +15,18 @@ struct VectorState {
 };
 
 extern "C" {
-extern VectorState DAT_005b4028;
+extern VectorState g_allocationAddressRanges;
 
 void __softfp FUN_0013ea48(f32 firstX, f32 secondX, f32 firstY, f32 secondY,
                          f32 firstZ, f32 secondZ, f32 firstW, f32 secondW)
 {
-    DAT_005b4028.first.x = firstX;
-    DAT_005b4028.first.y = firstY;
-    DAT_005b4028.second.x = secondX;
-    DAT_005b4028.second.y = secondY;
-    DAT_005b4028.first.z = firstZ;
-    DAT_005b4028.second.z = secondZ;
-    DAT_005b4028.first.w = firstW;
-    DAT_005b4028.second.w = secondW;
+    g_allocationAddressRanges.first.x = firstX;
+    g_allocationAddressRanges.first.y = firstY;
+    g_allocationAddressRanges.second.x = secondX;
+    g_allocationAddressRanges.second.y = secondY;
+    g_allocationAddressRanges.first.z = firstZ;
+    g_allocationAddressRanges.second.z = secondZ;
+    g_allocationAddressRanges.first.w = firstW;
+    g_allocationAddressRanges.second.w = secondW;
 }
 }

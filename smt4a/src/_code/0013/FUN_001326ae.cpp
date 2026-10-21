@@ -1,45 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001326ae` (_code @ 0x1326ae, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: capacity fallback branching and allocation-size/register scheduling differ from retail. */
+#include "common.h"
+
+struct PoolElement24 { u8 data[0x18]; };
+struct PoolBlock24 {
+    PoolBlock24 *next; // 0x00
+    u32 capacity; // 0x04
+    PoolElement24 *elements; // 0x08
+};
+struct BlockPool24 {
+    PoolBlock24 *blocks; // 0x00
+    u32 unk04;
+    PoolElement24 *begin; // 0x08
+    PoolElement24 *end; // 0x0c
+};
 
 extern "C" {
+u32 vectorGrowCapacity_0012d3b8(u32 capacity, BlockPool24 *pool);
+void *rt_malloc(u32 size);
 
-int rt_malloc(...);
-
-extern int vectorGrowCapacity_0012d3b8(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_001326ae(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Add a block of 24-byte elements to the pool's free range.
+void FUN_001326ae(BlockPool24 *pool, s32 singleElement)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 1;
-  if (param_2 == 0) {
-    if (*param_1 != 0) {
-      temp_v0 = *(unsigned int *)(*param_1 + 4);
+    u32 capacity = 1;
+    if (singleElement == 0) {
+        capacity = vectorGrowCapacity_0012d3b8(pool->blocks != NULL ? pool->blocks->capacity : 0, pool);
     }
-    else {
-      temp_v0 = 0;
-    }
-    temp_v2 = vectorGrowCapacity_0012d3b8(temp_v0,param_1,param_3,param_4,param_4);
-  }
-  piVar2 = (int *)rt_malloc(0xc);
-  temp_v1 = rt_malloc();
-  piVar2[2] = temp_v1;
-  temp_v1 = *param_1;
-  piVar2[1] = temp_v2;
-  *piVar2 = temp_v1;
-  *param_1 = (int)piVar2;
-  temp_v1 = piVar2[2];
-  param_1[3] = temp_v1 + temp_v2 * 0x18;
-  param_1[2] = temp_v1;
-  return;
+    PoolBlock24 *block = (PoolBlock24 *)rt_malloc(sizeof(PoolBlock24));
+    block->elements = (PoolElement24 *)rt_malloc(capacity * sizeof(PoolElement24));
+    PoolBlock24 *previous = pool->blocks;
+    block->capacity = capacity;
+    block->next = previous;
+    pool->blocks = block;
+    PoolElement24 *elements = block->elements;
+    pool->end = elements + capacity;
+    pool->begin = elements;
 }
-
-} /* extern "C" */
+}

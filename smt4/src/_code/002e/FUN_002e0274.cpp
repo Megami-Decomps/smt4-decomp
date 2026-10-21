@@ -14,7 +14,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_002e0384; /* 0x2e0384 */
-extern int DAT_0044cd88; /* 0x44cd88 */
+extern int g_mapStateSlots; /* 0x44cd88 */
 
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -34,15 +34,15 @@ void FUN_002e0274(int param_1)
   unsigned int in_s2;
   
   gameGetMapBlock();
-  temp_v0 = DAT_0044cd88;
-  *(unsigned short *)(DAT_0044cd88 + 8) = 0;
+  temp_v0 = g_mapStateSlots;
+  *(unsigned short *)(g_mapStateSlots + 8) = 0;
   *(unsigned short *)(temp_v0 + 4) = 0x18;
   *(unsigned short *)(temp_v0 + 6) = 1;
   *(unsigned short *)(temp_v0 + 10) = 1;
   puVar2 = &LAB_002e0384;
   asdMdlManagerCreateLoaded(&LAB_002e0384,0x1c0);
-  temp_v0 = DAT_0044cd88;
-  *(unsigned char **)(DAT_0044cd88 + *(short *)(DAT_0044cd88 + 10) * 8 + 0x1c) = puVar2;
+  temp_v0 = g_mapStateSlots;
+  *(unsigned char **)(g_mapStateSlots + *(short *)(g_mapStateSlots + 10) * 8 + 0x1c) = puVar2;
   temp_v1 = 0;
   do {
     if (*(char *)(temp_v0 + temp_v1 * 0x4c + 0x58) == '\0') goto LAB_002e02f8;
@@ -63,8 +63,8 @@ LAB_002e02f8:
   *(unsigned int *)(temp_v1 + 0x74) = 0;
   *(unsigned char *)(temp_v1 + 0x78) = 1;
   *(unsigned short *)(temp_v1 + 0x7a) = 0;
-  temp_v0 = DAT_0044cd88;
-  *(unsigned short *)(temp_v1 + 0x7c) = *(unsigned short *)(DAT_0044cd88 + 10);
+  temp_v0 = g_mapStateSlots;
+  *(unsigned short *)(temp_v1 + 0x7c) = *(unsigned short *)(g_mapStateSlots + 10);
   *(int *)(temp_v1 + 0x80) = -param_1;
   *(unsigned char *)(temp_v1 + 0x84) = 0;
   *(unsigned int *)(temp_v1 + 0x88) = 0;

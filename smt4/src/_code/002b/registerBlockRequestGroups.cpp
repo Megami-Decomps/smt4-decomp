@@ -13,12 +13,12 @@ typedef struct GpuState {
     /* 0x190 */ u8 blockB[0x84];
 } GpuState;
 
-extern GpuState *DAT_004655c0;
+extern GpuState *g_textureBindingState;
 
 /* Marks the register groups selected by `groups` (minus the locked ones) dirty. */
 void registerBlockRequestGroups(u32 groups)
 {
-    GpuState *gpu = DAT_004655c0;
+    GpuState *gpu = g_textureBindingState;
 
     groups = groups & ~gpu->locked;
     if ((groups & 1) != 0) {

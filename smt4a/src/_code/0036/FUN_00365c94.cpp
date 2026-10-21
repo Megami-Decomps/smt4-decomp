@@ -13,7 +13,7 @@ int naviMainSetRequestTriple(unsigned int, unsigned int, unsigned int);
 int FUN_003b5714(void);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapMain; /* 0x581274 */
 extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
@@ -28,7 +28,7 @@ extern unsigned int DAT_005f160c; /* 0x5f160c */
 /* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_00357ab0. */
 /* Supplied declaration required: naviMainSetRequestValue. */
-extern char *FUN_003798f0(void);
+extern char *dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003b5714. */
 
@@ -47,7 +47,7 @@ void FUN_00365c94(void)
   temp_v0 = g_mapMain;
   *(unsigned char *)(g_mapMain + 0x23) = 1;
   FUN_003b5714();
-  pcVar3 = (char *)FUN_003798f0();
+  pcVar3 = (char *)dataTableGetRecord23();
   temp_v1 = g_lmapScene;
   puVar4 = (unsigned int *)(g_lmapScene + 0x1c);
   temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -67,7 +67,7 @@ void FUN_00365c94(void)
   *(unsigned int *)(temp_v1 + 0x4c) = temp_v2;
   *(unsigned int *)(temp_v1 + 0x50) = temp_v2;
   temp_v2 = VectorSignedToFloat((int)*(short *)(pcVar3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(DAT_005806a4 + 0x18) = temp_v2;
+  *(unsigned int *)(g_lmapView + 0x18) = temp_v2;
   g_gameState = (int)*pcVar3;
   *(int *)(temp_v0 + 0x30) = g_gameState;
   DAT_005f1600 = (int)pcVar3[1];

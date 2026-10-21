@@ -18,10 +18,10 @@ typedef struct {
 } Context;
 
 Context *jobGetWork(void);
-int FUN_001546e8(int arg);
+int stateValuesGetBySelector(int arg);
 int FUN_0014aa9c(int arg);
 
-/* Fires FUN_0014aa9c when both extension switches are on, FUN_001546e8 is idle and a request is pending; always returns 0. */
+/* Fires FUN_0014aa9c when both extension switches are on, stateValuesGetBySelector is idle and a request is pending; always returns 0. */
 u8 FUN_0013d2dc(void)
 {
     Context *context = jobGetWork();
@@ -32,7 +32,7 @@ u8 FUN_0013d2dc(void)
     if (context->ext.enableB == 0) {
         return 0;
     }
-    if (FUN_001546e8(0) != 0) {
+    if (stateValuesGetBySelector(0) != 0) {
         return 0;
     }
     if (context->pending != 0) {

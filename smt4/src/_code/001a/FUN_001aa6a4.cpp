@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019552c(int, int);
+int facingUpdateAngles(int, int);
 int FUN_00286198(...);
 int mtxMakeTranslation(...);
 int layoutApplyForState(int);
@@ -64,7 +64,7 @@ extern float DAT_004efd94; /* 0x4efd94 */
 extern float DAT_004efd98; /* 0x4efd98 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0019552c. */
+/* Supplied declaration required: facingUpdateAngles. */
 /* Supplied declaration required: FUN_00286198. */
 /* Supplied declaration required: mtxMakeTranslation. */
 /* Supplied declaration required: layoutApplyForState. */
@@ -207,7 +207,7 @@ void FUN_001aa6a4(int param_1)
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
-    FUN_0019552c(param_1,0);
+    facingUpdateAngles(param_1,0);
   }
   temp_v10 = 1.0f;
   if ((*(unsigned char *)(param_1 + 0x130) & 1) != 0) {

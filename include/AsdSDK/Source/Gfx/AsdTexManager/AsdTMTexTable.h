@@ -26,7 +26,16 @@ typedef struct TexFile {
 typedef struct TexNode {
     /* 0x00 */ TexFile *file;
     /* 0x04 */ u32 *set;              /* set descriptor inside the file image */
-    /* 0x08 */ u8 unk08[0x18];
+    /* 0x08 */ union {
+        u8 unk08[0x18];
+        struct {
+            struct AsdTexture *texture; // 0x08
+            void *data; // 0x0c
+            u32 state; // 0x10
+            u8 unk14[8];
+            u32 count; // 0x1c
+        } loaded;
+    };
 } TexNode;
 
 /* One TexTable slot (0x18 bytes). */

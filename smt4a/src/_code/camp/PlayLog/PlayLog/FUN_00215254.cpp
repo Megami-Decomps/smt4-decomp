@@ -15,7 +15,7 @@ int FUN_00203b40(...);
 int FUN_0022feb0(...);
 int sysMemClear(void);
 int loadSlotEnsureLoaded(int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 int rt_memcpy_w(...);
 
 /* stack frame of void: 6 slot(s), 24 byte(s) */
@@ -45,7 +45,7 @@ extern int g_playLog; /* 0x57f278 */
 extern int gameDataBlocksGetTable(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -69,7 +69,7 @@ void FUN_00215254(void)
   asdTMTexTableLoadSprites(0x25);
   asdTMTexLoadMainHeap(0x25,0);
   loadSlotEnsureLoaded(0x37);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
+  paramsClearPacket(temp_v0);
   paramsInit(temp_v0,&DAT_0052dd98,0x48,&DAT_0052dde0,0x18,0,0,0,0,&DAT_0052ddf8,0xe0);
   temp_v1 = 0;
   do {

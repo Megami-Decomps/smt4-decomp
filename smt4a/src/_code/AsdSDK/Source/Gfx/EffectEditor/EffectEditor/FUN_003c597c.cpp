@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00243c24(void);
 int FUN_002b30e4(void);
-int FUN_002b41e4(unsigned int, unsigned int, unsigned int, int);
+int effPartSetData(unsigned int, unsigned int, unsigned int, int);
 int libc_strcpy(unsigned int *, unsigned int);
 int rt_memcpy_w144(unsigned int *, int);
-int FUN_00350a8c(void);
-int FUN_00351590(unsigned int, unsigned int);
-int FUN_00399768(int, int);
+int effectEditorApplyHandlerState(void);
+int nodeListFindByKey(unsigned int, unsigned int);
+int objectRegistryInsert(int, int);
 int FUN_003c2df0(unsigned int, unsigned int *);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
 int rt_memcpy_w(unsigned char *, unsigned int *, int);
@@ -38,15 +38,15 @@ extern unsigned char DAT_00634d20; /* 0x634d20 */
 /* Supplied declaration required: FUN_00243c24. */
 /* Supplied declaration required: FUN_002b30e4. */
 extern unsigned int resourceResolveHeaderPointer(unsigned int);
-/* Supplied declaration required: FUN_002b41e4. */
+/* Supplied declaration required: effPartSetData. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: rt_memcpy_w144. */
 extern int linkedFindItemByIndex(unsigned int, int);
 extern unsigned int nodeChainCount(unsigned int);
-/* Supplied declaration required: FUN_00350a8c. */
-/* Supplied declaration required: FUN_00351590. */
+/* Supplied declaration required: effectEditorApplyHandlerState. */
+/* Supplied declaration required: nodeListFindByKey. */
 extern unsigned int *FUN_00376628(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00399768. */
+/* Supplied declaration required: objectRegistryInsert. */
 /* Supplied declaration required: FUN_003c2df0. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -70,7 +70,7 @@ unsigned int FUN_003c597c(void)
   DAT_0059dc04 = puVar2;
   rt_memcpy_w144(puVar2,temp_v0);
   if ((*(unsigned int *)(temp_v0 + 0x98) & 2) != 0) {
-    FUN_00351590(DAT_0059dbf4,*(unsigned int *)(temp_v0 + 0x94));
+    nodeListFindByKey(DAT_0059dbf4,*(unsigned int *)(temp_v0 + 0x94));
   }
   FUN_003c2df0(DAT_0059dbf4,puVar2);
   rt_memcpy_w(&DAT_00634bc0,puVar2,0x90);
@@ -84,11 +84,11 @@ unsigned int FUN_003c597c(void)
     rt_memcpy(puVar3[3],temp_v1,puVar3[4]);
   }
   if (puVar3[3] != 0) {
-    FUN_002b41e4(DAT_0059dbfc,puVar3[3],puVar3[4],*(unsigned short *)(puVar3 + 2));
+    effPartSetData(DAT_0059dbfc,puVar3[3],puVar3[4],*(unsigned short *)(puVar3 + 2));
   }
   temp_v1 = DAT_0059dbfc;
   FUN_00243c24();
-  FUN_00350a8c();
+  effectEditorApplyHandlerState();
   temp_v2 = 0;
   do {
     puVar5 = *(unsigned int **)(temp_v2 * 4 + 0x59e624);
@@ -132,7 +132,7 @@ LAB_003c5af0:
       DAT_0059dc44 = 0;
       DAT_0059dc48 = 0;
       if (DAT_0059dc00 != 0) {
-        FUN_00399768(DAT_0059dc00,3);
+        objectRegistryInsert(DAT_0059dc00,3);
         DAT_0059dc00 = 0;
       }
       return 0x800000;

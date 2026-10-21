@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ee5b4` (_code @ 0x4ee5b4, 0x46c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct BattleUiOwner;
+struct BattleUiContext;
 
 extern "C" {
 
@@ -9,22 +11,22 @@ int FUN_00192550(void);
 int dataTable04FindById(void);
 int sysMemClear(unsigned int *, int);
 int FUN_003ece9c(...);
-int FUN_003ed9b4(int);
+int btlResetEntryCounters(int);
 int FUN_003eebf4(int, int);
 int FUN_003f0e20(int, int);
 int FUN_003f2498(...);
 int FUN_0047f08c(...);
 int FUN_0047f584(void);
 int FUN_004e1f58(...);
-int FUN_004e5650(int *, unsigned int *);
-int FUN_004e626c(int *, unsigned int, unsigned int *, unsigned int, unsigned int);
+void dispatchBattleCommandUiVariant(BattleUiOwner *, BattleUiContext *);
+int btlUnitClearRecordFields(int *, unsigned int, unsigned int *, unsigned int, unsigned int);
 int FUN_004e638c(...);
 int FUN_004e69e8(int *, unsigned int *, int);
 int FUN_004f5f90(unsigned int);
 int FUN_004f6e68(unsigned int);
 int obj4FSlots28Reset(...);
 int runFourUpdates(unsigned int);
-int FUN_004f7fbc(unsigned int);
+int entryTableInvalidate(unsigned int);
 int FUN_004fbeac(int, int, int, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -35,7 +37,7 @@ typedef struct {
 extern unsigned int DAT_00571160; /* 0x571160 */
 extern unsigned int DAT_00571164; /* 0x571164 */
 extern int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int randRange(unsigned int);
@@ -46,7 +48,7 @@ extern int randRange(unsigned int);
 extern int FUN_003e7adc(int);
 extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_003ece9c. */
-/* Supplied declaration required: FUN_003ed9b4. */
+/* Supplied declaration required: btlResetEntryCounters. */
 /* Supplied declaration required: FUN_003eebf4. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f2498. */
@@ -54,8 +56,7 @@ extern int btlScriptUnitHasFlags(int);
 /* Supplied declaration required: FUN_0047f584. */
 extern int FUN_004ab594(unsigned int);
 /* Supplied declaration required: FUN_004e1f58. */
-/* Supplied declaration required: FUN_004e5650. */
-/* Supplied declaration required: FUN_004e626c. */
+/* Supplied declaration required: btlUnitClearRecordFields. */
 /* Supplied declaration required: FUN_004e638c. */
 /* Supplied declaration required: FUN_004e69e8. */
 /* Supplied declaration required: FUN_004f5f90. */
@@ -63,7 +64,7 @@ extern int FUN_004ab594(unsigned int);
 /* Supplied declaration required: obj4FSlots28Reset. */
 extern int FUN_004f7aa4(unsigned int, unsigned char);
 /* Supplied declaration required: runFourUpdates. */
-/* Supplied declaration required: FUN_004f7fbc. */
+/* Supplied declaration required: entryTableInvalidate. */
 /* Supplied declaration required: FUN_004fbeac. */
 
 
@@ -110,7 +111,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     temp_v3 = temp_v3 + 1;
   } while (temp_v5 != 0);
   *(unsigned char *)(param_2 + 0x167) = 0;
-  FUN_004e626c(param_1,*(unsigned int *)(*param_1 + 0xa4),param_2 + temp_v2 + 0x16e,0xffffffff,param_4);
+  btlUnitClearRecordFields(param_1,*(unsigned int *)(*param_1 + 0xa4),param_2 + temp_v2 + 0x16e,0xffffffff,param_4);
   temp_v3 = 0;
   do {
     param_2[temp_v3 * 4 + 0x279] = 0;
@@ -123,17 +124,17 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     temp_v3 = temp_v3 + 1;
   } while (temp_v3 < 0x6d);
   FUN_004e69e8(param_1,param_2,0);
-  FUN_003ed9b4(*param_1);
-  FUN_004f7fbc(DAT_00573808);
-  FUN_004f6e68(DAT_00573808);
+  btlResetEntryCounters(*param_1);
+  entryTableInvalidate(g_btlAux);
+  FUN_004f6e68(g_btlAux);
   if (param_2[0x165] == 9) {
-    FUN_004f5f90(DAT_00573808);
+    FUN_004f5f90(g_btlAux);
   }
-  FUN_004e5650(param_1,param_2);
-  runFourUpdates(DAT_00573808);
+  dispatchBattleCommandUiVariant((BattleUiOwner *)param_1,(BattleUiContext *)param_2);
+  runFourUpdates(g_btlAux);
   temp_v3 = *param_1;
   FUN_003eebf4(temp_v3,1);
-  temp_v3 = FUN_004f7aa4(DAT_00573808,-1 < temp_v3);
+  temp_v3 = FUN_004f7aa4(g_btlAux,-1 < temp_v3);
   if (temp_v3 != 0) {
     FUN_004e638c(param_1,param_2,*(unsigned short *)(temp_v3 + 0x12),*(unsigned short *)(temp_v3 + 0x14));
   }
@@ -141,7 +142,7 @@ void FUN_004ee5b4(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     FUN_004e638c(param_1,param_2,0xffff,0);
   }
   FUN_004e1f58(param_1,param_2,0);
-  obj4FSlots28Reset(DAT_00573808);
+  obj4FSlots28Reset(g_btlAux);
   *(unsigned int *)(g_btlCamera + 0x64c) = (*(unsigned int *)(g_btlCamera + 0x64c) & 0xfeffffff) | 0x4000;
   switch(*(unsigned short *)(param_2[10] + 0x1be)) {
   case 1:

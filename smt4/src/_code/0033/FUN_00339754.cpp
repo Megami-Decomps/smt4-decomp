@@ -1,31 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00339754` (_code @ 0x339754, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_ArmySummon.h"
+#include "shard/W4_Match1b_Node.h"
 
 extern "C" {
+void nodeSetTranslation3f(NodeOwner *owner, u32 selector, f32 x, f32 y, f32 z);
+void FUN_0028c618(NodeOwner *owner, u32 selector, f32 x, f32 y, f32 z);
 
-int FUN_0028c618(unsigned int, int);
-int nodeSetTranslation3f(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0028c618. */
-/* Supplied declaration required: nodeSetTranslation3f. */
-
-
-void FUN_00339754(int param_1)
-
+// Restore the summoned model's root translation and rotation to zero.
+void FUN_00339754(ArmySummonState *state)
 {
-/* irregular: 2 native warning(s); review required */
-  if (*(int *)(param_1 + 0x4398) != 0) {
-    nodeSetTranslation3f(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),0);
-    FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),0);
-    return;
-  }
-  return;
+    if (state->model) {
+        nodeSetTranslation3f(reinterpret_cast<NodeOwner *>(state->model->node),
+                             0, 0.0f, 0.0f, 0.0f);
+        FUN_0028c618(reinterpret_cast<NodeOwner *>(state->model->node),
+                     0, 0.0f, 0.0f, 0.0f);
+    }
 }
-
-} /* extern "C" */
+}

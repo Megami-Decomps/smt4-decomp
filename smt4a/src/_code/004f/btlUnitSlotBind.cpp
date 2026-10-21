@@ -28,7 +28,7 @@ extern void FUN_004f7f08(BtlUnitSlot *slot);
 extern void *btlGetMainState(void);
 extern SlotEntry *FUN_003eae20(void *state, s32 arg0, s32 arg1);
 extern u32 FUN_003eda28(void *state, s32 id);
-extern u32 FUN_00208b84(void);
+extern u32 shakeEffectAlloc(void);
 
 /* Binds the slot to the entry for (arg0, arg1) of the battle state, or marks it empty (state 13). */
 void btlUnitSlotBind(BtlUnitSlot *slot, s32 arg0, s32 arg1)
@@ -52,10 +52,10 @@ void btlUnitSlotBind(BtlUnitSlot *slot, s32 arg0, s32 arg1)
         slot->handle = FUN_003eda28(state, id);
         slot->entry = entry;
         if ((entry->flags & 2) != 0) {
-            slot->valueA = FUN_00208b84();
+            slot->valueA = shakeEffectAlloc();
         }
         if ((slot->entry->flags & 4) != 0) {
-            slot->valueB = FUN_00208b84();
+            slot->valueB = shakeEffectAlloc();
         }
     }
 }

@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00113bc0` (_code @ 0x113bc0, 0x8c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ChunkPool.h"
+
+struct PoolTreeNode88;
 
 extern "C" {
 
@@ -9,7 +12,7 @@ int FUN_002eca44(void);
 extern unsigned char LAB_00113c50; /* 0x113c50 */
 extern unsigned char DAT_005595c8; /* 0x5595c8 */
 
-extern int FUN_0013146e(void);
+extern PoolTreeNode88* nodePoolAcquireRecordTreeNode(ChunkPool*);
 extern int onlineStringConstruct(int, unsigned char *);
 /* Supplied declaration required: FUN_002eca44. */
 extern int FUN_002f8728(unsigned int *);
@@ -49,7 +52,7 @@ void FUN_00113bc0(unsigned int *param_1)
   *(unsigned int *)(temp_v0 + 0x80) = 0;
   *(unsigned int *)(temp_v0 + 0x7c) = 0;
   *(unsigned int *)(temp_v0 + 0x78) = 0;
-  temp_v1 = FUN_0013146e();
+  temp_v1 = (int)nodePoolAcquireRecordTreeNode((ChunkPool*)((unsigned char*)param_1 + 0xf4));
   *(int *)(temp_v0 + 0x84) = temp_v1;
   *(unsigned int *)(temp_v1 + 4) = 0;
   *(int *)(*(int *)(temp_v0 + 0x84) + 8) = *(int *)(temp_v0 + 0x84);

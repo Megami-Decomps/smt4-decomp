@@ -16,15 +16,15 @@ int gameGetSlotTable(...);
 int FUN_00203b40(...);
 int FUN_00215bd0(...);
 int FUN_00230ac0(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002c7e6c(...);
 int FUN_002c8538(...);
 int sysMemClear(...);
 int FUN_0031d890(...);
-int FUN_003d1d6c(...);
+int partyPanelSortByMode(...);
 int slotPlacementSetSlot(...);
-int FUN_004dc4b4(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int fusionRaceSelectionInitialize(...);
+int paramsClearPacket(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -63,15 +63,15 @@ extern unsigned int *g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: FUN_00215bd0. */
 /* Supplied declaration required: FUN_00230ac0. */
 extern int FUN_0026140c(void);
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031d890. */
-/* Supplied declaration required: FUN_003d1d6c. */
+/* Supplied declaration required: partyPanelSortByMode. */
 /* Supplied declaration required: slotPlacementSetSlot. */
-/* Supplied declaration required: FUN_004dc4b4. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: fusionRaceSelectionInitialize. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_003493dc(int param_1)
@@ -105,8 +105,8 @@ void FUN_003493dc(int param_1)
   puVar5 = &LAB_00349804;
   taskCreateDraw(&LAB_00349804,0xea,0,0,FUN_002e7a8c,0,0,puVar4);
   puVar2[2] = (unsigned int)puVar5;
-  FUN_002804b0(&LAB_00349814,puVar2 + 3,1);
-  FUN_002804b0(&LAB_00349828,puVar2 + 4,1);
+  asdLoadFileAsyncSimple(&LAB_00349814,puVar2 + 3,1);
+  asdLoadFileAsyncSimple(&LAB_00349828,puVar2 + 4,1);
   FUN_002c7e6c();
   if (param_1 != 0) {
     FUN_002c8538(1);
@@ -118,7 +118,7 @@ void FUN_003493dc(int param_1)
   temp_v1 = 0x1b8;
   asdOperatorNew();
   if (temp_v1 != 0) {
-    FUN_004dc4b4();
+    fusionRaceSelectionInitialize();
   }
   puVar2[0x41f] = temp_v1;
   *(unsigned char *)(temp_v1 + 0x17a) = 1;
@@ -146,12 +146,12 @@ void FUN_003493dc(int param_1)
     puVar2[temp_v1 + 0x288] = temp_v3;
     temp_v1 = temp_v2;
   } while (temp_v2 < 0x18);
-  FUN_003d1d6c();
+  partyPanelSortByMode();
   puVar2 = g_partyPanel;
   puVar8 = g_partyPanel + 0x12;
   *(unsigned short *)((int)g_partyPanel + 0x36) = 0;
   *(unsigned short *)(puVar2 + 0xe) = 0xffff;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar8);
+  paramsClearPacket(puVar8);
   paramsInit(puVar2 + 0x12,&DAT_0052d888,0xb4,&DAT_0052d93c,0xa8,&DAT_0052d9e4,0x18,0,0,
                &DAT_0052d9fc,0x39c);
   FUN_0014e188(puVar2 + 0x1a,0x11,0x24,puVar2 + 0x12,0x6a);

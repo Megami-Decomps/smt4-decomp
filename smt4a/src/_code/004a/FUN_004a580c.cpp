@@ -4,17 +4,17 @@
 
 extern "C" {
 
-int FUN_00184528(...);
+int uiSpriteBankApplyPreset(...);
 int FUN_0019de98(int, unsigned int);
 int FUN_00212724(void);
 int FUN_0022e774(void);
 int useCounterStart(void);
 int FUN_0031f208(int);
-int FUN_0031f27c(int, int);
+int sortMenuAcquire(int, int);
 int FUN_0032d0c8(int, int, int);
 int FUN_003343f0(...);
 int FUN_004a4848(int);
-int FUN_004cf880(int);
+int uiOpenStartAnimations(int);
 int FUN_004d03d8(int, int, int, int);
 int FUN_004d0420(int, int, int, int);
 int sendEvent100020F(void);
@@ -31,20 +31,20 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0018349c(int, int);
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: useCounterStart. */
-extern int FUN_002f036c(void);
+extern int gameGetMode(void);
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_003343f0. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_004a4848. */
-/* Supplied declaration required: FUN_004cf880. */
-extern int FUN_004cfe4c(int);
+/* Supplied declaration required: uiOpenStartAnimations. */
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_004d03d8. */
 /* Supplied declaration required: FUN_004d0420. */
 /* Supplied declaration required: sendEvent100020F. */
@@ -70,10 +70,10 @@ void FUN_004a580c(int param_1)
   int temp_v8;
   int temp_v9;
   
-  temp_v2 = FUN_004cfe4c(param_1 + 0x20);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v1 = *(short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
-  FUN_004cf880(param_1);
-  temp_v2 = FUN_004cfe4c(param_1 + 0x20);
+  uiOpenStartAnimations(param_1);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v0 = *(short *)(param_1 + 0x864 + temp_v2 * 0x20 + 4);
   if (temp_v0 != temp_v1) {
     FUN_0032d0c8(0,1,temp_v0);
@@ -125,7 +125,7 @@ void FUN_004a580c(int param_1)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 2);
   }
-  temp_v5 = FUN_002f036c();
+  temp_v5 = gameGetMode();
   if (temp_v5 != 0) {
     *(unsigned int *)(param_1 + 0x14) = 4;
     *(unsigned int *)(param_1 + 0x18) = 0;
@@ -137,7 +137,7 @@ void FUN_004a580c(int param_1)
       temp_v4 = 0xb;
     }
     *(unsigned short *)(param_1 + 0xa872) = temp_v4;
-    FUN_00184528(param_1 + 0xdc,temp_v4);
+    uiSpriteBankApplyPreset(param_1 + 0xdc,temp_v4);
     releaseEntriesB(*(unsigned int *)(param_1 + 0x84c));
     releaseEntriesA(param_1 + 0x818);
     return;
@@ -146,7 +146,7 @@ void FUN_004a580c(int param_1)
     if (temp_v9 == 0) {
       return;
     }
-    FUN_0031f27c(0xc,0);
+    sortMenuAcquire(0xc,0);
     FUN_0031f208(1);
     FUN_0031f208(2);
     FUN_0031f208(4);
@@ -165,7 +165,7 @@ void FUN_004a580c(int param_1)
     FUN_00212724();
   }
   FUN_0019de98(0,0xf4f4f4ff);
-  FUN_00184528(param_1 + 0xdc,1);
+  uiSpriteBankApplyPreset(param_1 + 0xdc,1);
   FUN_003343f0(1);
   *(unsigned int *)(param_1 + 0x14) = 6;
   *(unsigned int *)(param_1 + 0x18) = 0;

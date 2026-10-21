@@ -44,7 +44,7 @@ extern int FUN_00284140(int);
 extern int FUN_002861fc(unsigned short);
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
-extern int FUN_002c0914(unsigned short);
+extern int bitTableIndexIsClear(unsigned short);
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(int);
 
@@ -92,7 +92,7 @@ void FUN_002c8940(int param_1,int param_2)
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v6 + 8) + param_1,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_00162790(2,0xffffffff,temp_v9,(int)*(short *)(temp_v6 + 10));
-          temp_v5 = FUN_002c0914(*(unsigned short *)(temp_v5 + 0x90a8));
+          temp_v5 = bitTableIndexIsClear(*(unsigned short *)(temp_v5 + 0x90a8));
           if (temp_v5 != 0) {
             temp_v5 = FUN_001834a4(0x1a,0x1d4);
             FUN_00164b5c(2,0x1a,7,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + param_1,
@@ -177,7 +177,7 @@ void FUN_002c8940(int param_1,int param_2)
   else {
     FUN_00162790(3,0xf5ff9fff,temp_v9,temp_v6);
   }
-  temp_v3 = FUN_002c0914(*(unsigned short *)(temp_v3 + 0x90a8));
+  temp_v3 = bitTableIndexIsClear(*(unsigned short *)(temp_v3 + 0x90a8));
   if (temp_v3 != 0) {
     temp_v3 = FUN_001834a4(0x1a,0x1d7);
     FUN_00164b5c(2,0x1a,7,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v8 + 8) + param_1,

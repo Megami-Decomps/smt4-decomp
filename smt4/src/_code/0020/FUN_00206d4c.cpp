@@ -1,32 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00206d4c` (_code @ 0x206d4c, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
-extern "C" {
-
-int devilGetRecord(void);
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_00206d4c(unsigned short *param_1,unsigned short *param_2)
-
+// Sort demons by race, descending level, then ID.
+extern "C" s32 FUN_00206d4c(const u16 *firstId, const u16 *secondId)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  int temp_v0;
-  
-  puVar1 = (unsigned short *)(unsigned int)*param_1;
-  devilGetRecord();
-  puVar2 = (unsigned short *)(unsigned int)*param_2;
-  devilGetRecord();
-  temp_v0 = (unsigned int)(unsigned char)puVar1[1] - (unsigned int)(unsigned char)puVar2[1];
-  if ((temp_v0 == 0) &&
-     (temp_v0 = (unsigned int)*(unsigned char *)((int)puVar2 + 3) - (unsigned int)*(unsigned char *)((int)puVar1 + 3), temp_v0 == 0)) {
-    temp_v0 = (unsigned int)*puVar1 - (unsigned int)*puVar2;
-  }
-  return temp_v0;
+    DevilSortRecord *first = devilGetRecord(*firstId);
+    DevilSortRecord *second = devilGetRecord(*secondId);
+    s32 order = first->race - second->race;
+    if (order == 0) {
+        order = second->level - first->level;
+        if (order == 0)
+            order = first->id - second->id;
+    }
+    return order;
 }
-
-} /* extern "C" */

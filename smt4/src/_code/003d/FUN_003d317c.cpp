@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00227ab4(...);
+int btlEntryValuesCopy(...);
 int FUN_00229a24(void);
 int FUN_00229b10(int *, unsigned int *);
-int FUN_0023c5ec(int, unsigned int *, int, int, int);
+int btlReflectCreateKind18(int, unsigned int *, int, int, int);
 int FUN_00245cc0(...);
 int FUN_00245d0c(...);
 int FUN_00246d38(...);
@@ -32,10 +32,10 @@ extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00227ab4. */
+/* Supplied declaration required: btlEntryValuesCopy. */
 /* Supplied declaration required: FUN_00229a24. */
 /* Supplied declaration required: FUN_00229b10. */
-/* Supplied declaration required: FUN_0023c5ec. */
+/* Supplied declaration required: btlReflectCreateKind18. */
 extern int FUN_00245c78(void);
 /* Supplied declaration required: FUN_00245cc0. */
 /* Supplied declaration required: FUN_00245d0c. */
@@ -47,7 +47,7 @@ extern int FUN_00245c78(void);
 extern int FUN_00256940(int, int, unsigned int);
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0026beb4. */
-extern int FUN_0027e350(int);
+extern int btlSceneIsReady(int);
 extern int FUN_00293230(int);
 /* Supplied declaration required: memClear. */
 extern int FUN_003af0fc(int);
@@ -130,7 +130,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
   temp_v7 = *param_1;
   puVar10 = (unsigned int *)(temp_v7 + 0x44a0);
   if ((*puVar10 & 0x20000) != 0) {
-    temp_v7 = FUN_0027e350(g_btlUiBlock);
+    temp_v7 = btlSceneIsReady(g_btlUiBlock);
     if (temp_v7 == 0) {
       return 0;
     }
@@ -211,7 +211,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
        (temp_v7 = FUN_00256940(g_btlMain,*param_1,1), temp_v7 != 0)) {
       FUN_002568c4(0,param_2);
     }
-    FUN_0023c5ec(1,param_2,(int)*(short *)(*param_1 + 0x1fc8),1,1);
+    btlReflectCreateKind18(1,param_2,(int)*(short *)(*param_1 + 0x1fc8),1,1);
     if (((*(unsigned int *)param_2[8] & 0x20) == 0) || (temp_v7 = FUN_00245c78(), temp_v7 != 0)) {
       temp_v6 = 0;
       temp_v7 = (int)*(short *)(param_2[9] + 0x62);
@@ -271,7 +271,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
       return 1;
     }
     FUN_002569ac(param_1,*(unsigned int *)(*param_1 + 0x84));
-    FUN_00227ab4(param_1,param_2);
+    btlEntryValuesCopy(param_1,param_2);
     FUN_002550d8((int)*(short *)(param_2[9] + 0x62),0x1d,1,0);
     temp_v7 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
   }

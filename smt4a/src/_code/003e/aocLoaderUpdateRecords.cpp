@@ -48,7 +48,7 @@ typedef struct AocLoaderTask {
 
 extern "C" {
 
-AocRecord *FUN_003ec620(AocLoader *loader, u32 id);
+AocRecord *stateEntryFindById(AocLoader *loader, u32 id);
 s32 nkdwLoaderParse(AocRecord *record);
 s32 FUN_003fce08(AocRecord *record, s32 arg);
 void aocHandleButtons(AocRecord *record, s32 mode);
@@ -67,7 +67,7 @@ AocLoaderTask *aocLoaderUpdateRecords(AocLoaderTask *task, AocLoader *loader)
     s32 ready = 1;
 
     for (i = 0; i < task->count; i++) {
-        AocRecord *record = FUN_003ec620(loader, loader->slots[i].id);
+        AocRecord *record = stateEntryFindById(loader, loader->slots[i].id);
 
         if ((loader->slots[i].state & 1) == 0) {
             if (nkdwLoaderParse(record) == 0) {

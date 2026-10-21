@@ -6,7 +6,7 @@ extern "C" {
 
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
-int FUN_002a6a84(...);
+unsigned char* textGetNameToken(unsigned int);
 int FUN_00344cd0(...);
 
 int textFormatBuffer(...);
@@ -72,8 +72,8 @@ extern unsigned int dataTableGetEntries(void);
 extern int FUN_00284140(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002a6a84. */
-extern int FUN_002c2c68(int);
+/* Supplied declaration required: textGetNameToken. */
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(int);
 extern int FUN_00358e28(unsigned int);
@@ -363,8 +363,8 @@ unsigned int FUN_0022a5d8(void)
           textFormatBuffer(temp_v17,&LAB_0022b2cc,temp_v4);
           temp_v7 = FUN_002a4860(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v7 + temp_v2 + temp_v1 + 0x758);
-          FUN_002a6a84(temp_v4);
-          textFormatBuffer(temp_v18,&LAB_0022b2cc,temp_v4);
+          const unsigned char* tokenName = textGetNameToken(temp_v4);
+          textFormatBuffer(temp_v18,&LAB_0022b2cc,tokenName);
           if (g_lmapMain != '\0') {
             temp_v8 = FUN_002a4860(temp_v19);
             if (*(unsigned char *)(temp_v8 + temp_v2 + temp_v1 + 0x758) == DAT_005f1b00) {
@@ -422,7 +422,7 @@ unsigned int FUN_0022a5d8(void)
         FUN_00162790(3,temp_v8,temp_v17,temp_v7);
       }
     }
-    temp_v8 = FUN_002c2c68(temp_v19);
+    temp_v8 = objectApplyIfUnblocked(temp_v19);
     temp_v2 = uiSearchPrimary(temp_v19);
     if (temp_v2 < temp_v8) {
       efctSetSpeed();

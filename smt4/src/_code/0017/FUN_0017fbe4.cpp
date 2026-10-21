@@ -7,7 +7,7 @@ extern "C" {
 int taskUpdateOrderedPasses(int);
 int FUN_002c1e30(int, int);
 int FUN_002c1edc(int, int, int, int *);
-int FUN_002ee56c(void);
+int effectTextureRequestsPump(void);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
-/* Supplied declaration required: FUN_002ee56c. */
+/* Supplied declaration required: effectTextureRequestsPump. */
 
 
 unsigned int FUN_0017fbe4(void)
@@ -32,7 +32,7 @@ unsigned int FUN_0017fbe4(void)
   unsigned int temp_v2;
   
   temp_v0 = jobGetWork();
-  FUN_002ee56c();
+  effectTextureRequestsPump();
   temp_v1 = 0;
   uStack_14 = 0x3f800000;
   temp_v2 = 0;

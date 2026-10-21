@@ -71,7 +71,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern unsigned int FUN_002bc11c(int);
+extern unsigned int osVirtToPhysAddress(int);
 /* Supplied declaration required: nw_gfx_res_ResTextureSampler_SetTextureMipmapCommand. */
 
 
@@ -164,7 +164,7 @@ void FUN_0015b9ec(fn_0015b9ec_arg0 *param_1,fn_0015b9ec_arg1 *param_2)
     temp_v3 = temp_v1 + (int)(temp_v6 + 1);
   }
   *(unsigned int *)(temp_v3 + 0x24) = (*(unsigned int *)(temp_v3 + 0x24) & 0xfffff8ff) | 0x100;
-  temp_v1 = FUN_002bc11c(temp_v4);
+  temp_v1 = osVirtToPhysAddress(temp_v4);
   param_1->field_0x2c = param_1->field_0x2c | ((temp_v1 & 0x7fffffff) >> 3);
   temp_v1 = param_1->field_0x44 | (unsigned int)(param_2->field_0x3c == 0);
   param_1->field_0x44 = temp_v1;

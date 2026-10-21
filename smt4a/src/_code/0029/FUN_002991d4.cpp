@@ -9,26 +9,26 @@ int dataTableFree(...);
 int panelSetMode3(...);
 int mapPlaceSet(...);
 int panelSetTarget(...);
-int FUN_004a0ef8(...);
+int partyAddMoneyClamped(...);
 
 int FUN_001628c0(...);
 int FUN_00163aa4(...);
 int uiSpriteSetKeyframe(...);
 int FUN_00234528(...);
-int FUN_00246688(void);
-int FUN_002e0798(...);
+int popupStateClose(void);
+int gameDataAddCappedPoints(...);
 int FUN_002e5c2c(...);
 int FUN_00312714(...);
-int FUN_00312d88(void);
-int FUN_00312db0(...);
-int FUN_0034913c(void);
-int FUN_003539b4(...);
+int mapJobIsDone(void);
+int mapMainStartEntry(...);
+int messageBannerRestartOrClear(void);
+int mapIfRequestById(...);
 int FUN_00359974(...);
-int FUN_0035b164(...);
+int messageCounterBeginTransition(...);
 int gameFlagsBitSet(...);
 int FUN_003689d0(void);
 int FUN_00377158(...);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int scrCommResetPanel(void);
 int FUN_003d2158(...);
 int FUN_00408184(...);
@@ -87,7 +87,7 @@ extern unsigned char LAB_00299d04; /* 0x299d04 */
 extern unsigned char LAB_0029a23c; /* 0x29a23c */
 extern unsigned char LAB_0029a5c4; /* 0x29a5c4 */
 extern unsigned char LAB_0029a5dc; /* 0x29a5dc */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapDepart; /* 0x5806c4 */
 extern int DAT_005806c8; /* 0x5806c8 */
 extern int g_gameState; /* 0x5f15fc */
@@ -113,9 +113,9 @@ extern unsigned int FUN_0014af98(void);
 /* Supplied declaration required: FUN_0014afd0. */
 extern int randRange(unsigned int);
 extern unsigned int FUN_00152f44(void);
-extern int FUN_00153f64(unsigned int);
+extern int asdTMTexTableGetHeaderValue(unsigned int);
 /* Supplied declaration required: FUN_001628c0. */
-extern int FUN_001632fc(void);
+extern int infoWinHasValue(void);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -129,36 +129,36 @@ extern int gameFlagIsSet(unsigned int, int, int);
 /* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: mapPopupReset. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00234528. */
 /* Supplied declaration required: FUN_00246128. */
-/* Supplied declaration required: FUN_00246688. */
-extern int FUN_0026272c(void);
+/* Supplied declaration required: popupStateClose. */
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_00295108. */
-extern int FUN_002a4b60(void);
+extern int messageMainGetValue(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002b5e08. */
 extern int popupIsActive(void);
-/* Supplied declaration required: FUN_002e0798. */
+/* Supplied declaration required: gameDataAddCappedPoints. */
 /* Supplied declaration required: FUN_002e5c2c. */
 extern int FUN_002e5db4(void);
 extern int FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: blockResetAxis. */
 /* Supplied declaration required: FUN_00312714. */
-/* Supplied declaration required: FUN_00312d88. */
-/* Supplied declaration required: FUN_00312db0. */
+/* Supplied declaration required: mapJobIsDone. */
+/* Supplied declaration required: mapMainStartEntry. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_0033ab1c. */
-/* Supplied declaration required: FUN_0034913c. */
-/* Supplied declaration required: FUN_003539b4. */
+/* Supplied declaration required: messageBannerRestartOrClear. */
+/* Supplied declaration required: mapIfRequestById. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00359974. */
-/* Supplied declaration required: FUN_0035b164. */
+/* Supplied declaration required: messageCounterBeginTransition. */
 /* Supplied declaration required: gameFlagsBitSet. */
 /* Supplied declaration required: FUN_003689d0. */
 /* Supplied declaration required: FUN_00377158. */
@@ -167,9 +167,9 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_00398258. */
-extern int FUN_00399378(unsigned short);
+extern int dataTable20FindAddonRecord(unsigned short);
 extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: FUN_003a6b10. */
 /* Supplied declaration required: scrCommResetPanel. */
@@ -182,7 +182,7 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: FUN_004808c0. */
 /* Supplied declaration required: FUN_00480a54. */
 /* Supplied declaration required: flagValueAdd. */
-/* Supplied declaration required: FUN_004a0ef8. */
+/* Supplied declaration required: partyAddMoneyClamped. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 
@@ -227,7 +227,7 @@ unsigned int FUN_002991d4(void)
   switch(*(unsigned int *)(g_mapDepart + 0x48)) {
   case 0:
     FUN_0014afd0(4);
-    temp_v11 = FUN_00153f64(4);
+    temp_v11 = asdTMTexTableGetHeaderValue(4);
     *(int *)(temp_v4 + 0x124) = temp_v11;
     *(unsigned int *)(temp_v11 + 0x3c) = 1;
     *(unsigned int *)(*(int *)(temp_v4 + 0x124) + 0x40) = 1;
@@ -285,7 +285,7 @@ unsigned int FUN_002991d4(void)
     break;
   case 4:
     if (*(int *)(g_mapDepart + 0x4c) != 0) {
-      temp_v11 = FUN_00224880(*(unsigned int *)(g_mapDepart + 0x108));
+      temp_v11 = scrRunOpcodesStub(*(unsigned int *)(g_mapDepart + 0x108));
       if (temp_v11 == 2) {
         if (*(int *)(temp_v4 + 0x10c) != 0) {
           gameFlagSetValue(*(int *)(temp_v4 + 0x10c),1);
@@ -492,7 +492,7 @@ unsigned int FUN_002991d4(void)
       FUN_003d2150(0x10000c7);
     }
     if (*(int *)(temp_v4 + 0x4c) == 7) {
-      if ((*(int *)(temp_v4 + 0xc) == 0) && (*(int *)(DAT_005806a4 + 0xb0) == 0)) {
+      if ((*(int *)(temp_v4 + 0xc) == 0) && (*(int *)(g_lmapView + 0xb0) == 0)) {
         blockResetAxis(0xb);
         goto LAB_00299da8;
       }
@@ -506,7 +506,7 @@ LAB_00299da8:
       }
       if (*(int *)(temp_v4 + 0x4c) == 0xd) {
         *(unsigned char *)(temp_v4 + 0x50) = 1;
-        temp_v11 = FUN_001632fc();
+        temp_v11 = infoWinHasValue();
         if (temp_v11 != 0) {
           mapPopupReset();
         }
@@ -641,7 +641,7 @@ LAB_0029a094:
       *(int *)(temp_v4 + 0x90) = temp_v11;
       if (temp_v11 >= 6) {
         if ((temp_v11 >= 0x33) && (*(char *)(temp_v4 + 0x8d) != '\0')) {
-          FUN_00246688();
+          popupStateClose();
           *(unsigned char *)(temp_v4 + 0x8d) = 0;
         }
         *(unsigned char *)(temp_v4 + 0x60) = 1;
@@ -697,10 +697,10 @@ LAB_0029a094:
           temp_v2 = *(char *)(temp_v4 + 0x8e);
         }
         if (!temp_v16 || temp_v2 != '\0') {
-          FUN_00246688();
+          popupStateClose();
         }
         if ((*(unsigned int *)(temp_v4 + 0xc) < 2) || (*(char *)(temp_v4 + 0x4c8) == '\x01')) {
-          FUN_00388758(1);
+          messageDismissNumericBanner(1);
           scrCommResetPanel();
         }
         *(unsigned char *)(temp_v4 + 0xac) = 0;
@@ -716,7 +716,7 @@ LAB_0029a094:
         *(unsigned char *)(temp_v4 + 0xa1) = 0;
         *(unsigned int *)(temp_v4 + 0x58) = 0;
         if (*(int *)(temp_v4 + 0xc) == 0) {
-          FUN_003539b4(*(unsigned int *)(temp_v4 + 0x10));
+          mapIfRequestById(*(unsigned int *)(temp_v4 + 0x10));
           FUN_00312714(*(unsigned int *)(temp_v4 + 0x10),5,0);
           FUN_00408184(0x13,1);
         }
@@ -727,7 +727,7 @@ LAB_0029a094:
           if (*(int *)(temp_v4 + 0x18) != 0) {
             flagValueAdd(*(int *)(temp_v4 + 0x18),*(unsigned int *)(temp_v4 + 0x28));
           }
-          FUN_00246688();
+          popupStateClose();
           DAT_005f1859 = 1;
         }
         if (DAT_005f16d0 != 0) {
@@ -754,7 +754,7 @@ LAB_0029a094:
       temp_v12 = 2;
     }
     else {
-      FUN_0035b164(0x14,1);
+      messageCounterBeginTransition(0x14,1);
       temp_v12 = 1;
     }
     *(unsigned int *)(temp_v4 + 0xfc) = temp_v12;
@@ -782,7 +782,7 @@ LAB_0029a094:
     *(unsigned int *)(temp_v4 + 0x4c) = 0;
     break;
   case 8:
-    temp_v11 = FUN_00224880(*(unsigned int *)(g_mapDepart + 0x108));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(g_mapDepart + 0x108));
     if (temp_v11 != 2) {
       return 0;
     }
@@ -801,18 +801,18 @@ LAB_0029a094:
     *(unsigned char *)(g_mapDepart + 0x70) = 1;
     *(unsigned int *)(temp_v4 + 0x74) = 1;
     *(unsigned int *)(temp_v4 + 0x78) = 0;
-    FUN_00312db0(&LAB_0029985c);
+    mapMainStartEntry(&LAB_0029985c);
     temp_v12 = 10;
     *(unsigned int *)(temp_v4 + 0x48) = temp_v12;
     break;
   case 10:
-    temp_v11 = FUN_00312d88();
+    temp_v11 = mapJobIsDone();
     if (temp_v11 != 0) {
-      FUN_0034913c();
-      temp_v11 = FUN_002a4b60();
+      messageBannerRestartOrClear();
+      temp_v11 = messageMainGetValue();
       if (temp_v11 == 0) {
         gameFlagsBitSet((int)(short)*(unsigned int *)(temp_v4 + 0xb4),1);
-        FUN_00312db0(&LAB_0029986c);
+        mapMainStartEntry(&LAB_0029986c);
         temp_v12 = 0xb;
         *(unsigned int *)(temp_v4 + 0x48) = temp_v12;
         break;
@@ -842,13 +842,13 @@ LAB_0029a094:
         temp_v11 = *(int *)(temp_v4 + 0xb4);
         FUN_003689d0();
         puVar6 = (unsigned short *)dataTable20GetEntry((int)*(short *)(temp_v11 + 0x14));
-        temp_v11 = FUN_00399378(*puVar6);
+        temp_v11 = dataTable20FindAddonRecord(*puVar6);
         FUN_00359974(0x18,(int)*(char *)(temp_v11 + 7),0xffffffff,0);
         uiSpriteSetKeyframe(temp_v4 + 0x148,0);
         *(unsigned int *)(temp_v4 + 0x490) = 1;
         temp_v12 = FUN_002e5c2c();
         *(unsigned int *)(temp_v4 + 0x498) = temp_v12;
-        FUN_002e0798((int)*(char *)(temp_v11 + 7));
+        gameDataAddCappedPoints((int)*(char *)(temp_v11 + 7));
         *(int *)(temp_v4 + 0x494) = *(int *)(temp_v4 + 0x498) << 0xc;
         *(unsigned int *)(temp_v4 + 0x49c) = 0;
         break;
@@ -877,7 +877,7 @@ LAB_0029a094:
           *(int *)(temp_v4 + 0x494) = temp_v11 << 0xc;
           FUN_003d2158(*(unsigned int *)(temp_v4 + 0x49c),0);
         }
-        temp_v11 = FUN_0026272c();
+        temp_v11 = messageMainIsIdle();
         if (temp_v11 != 0) {
           FUN_003d2158(*(unsigned int *)(temp_v4 + 0x49c),0);
           temp_v11 = FUN_002e5c2c();
@@ -895,12 +895,12 @@ LAB_0029a094:
         }
         break;
       case 4:
-        temp_v11 = FUN_00312d88();
+        temp_v11 = mapJobIsDone();
         if (temp_v11 != 0) {
           *(unsigned int *)(temp_v4 + 0x48) = 0xd;
         }
       }
-      FUN_00312d88();
+      mapJobIsDone();
     }
     if (*(char *)(temp_v4 + 0x70) == '\0') {
       return 0;
@@ -926,7 +926,7 @@ LAB_0029a094:
     *(unsigned int *)(temp_v4 + 0x4c) = 0;
     break;
   case 0xd:
-    temp_v11 = FUN_00312d88();
+    temp_v11 = mapJobIsDone();
     if (temp_v11 != 0) {
       *(unsigned int *)(temp_v4 + 0x48) = 0xc;
     }
@@ -952,7 +952,7 @@ LAB_0029a094:
       FUN_003d2150(0x10000c7);
     }
     if (*(int *)(temp_v4 + 0x4c) == 7) {
-      if ((*(int *)(temp_v4 + 0xc) == 0) && (*(int *)(DAT_005806a4 + 0xb0) == 0)) {
+      if ((*(int *)(temp_v4 + 0xc) == 0) && (*(int *)(g_lmapView + 0xb0) == 0)) {
         blockResetAxis(0xb);
         goto LAB_002993c0;
       }
@@ -964,7 +964,7 @@ LAB_002993c0:
       }
       if (*(int *)(temp_v4 + 0x4c) == 0xd) {
         *(unsigned char *)(temp_v4 + 0x50) = 1;
-        temp_v11 = FUN_001632fc();
+        temp_v11 = infoWinHasValue();
         if (temp_v11 != 0) {
           mapPopupReset();
         }
@@ -995,8 +995,8 @@ LAB_002993c0:
   case 0xf:
     temp_v11 = panelStateIs0();
     if (temp_v11 == 1) {
-      FUN_00388758(1);
-      FUN_004a0ef8(*(unsigned int *)(temp_v4 + 0x44));
+      messageDismissNumericBanner(1);
+      partyAddMoneyClamped(*(unsigned int *)(temp_v4 + 0x44));
       *(unsigned char *)(temp_v4 + 0xac) = 0;
       blockResetAxis(0xffffffff);
       *(unsigned char *)(temp_v4 + 0x50) = 0;
@@ -1014,7 +1014,7 @@ LAB_002993c0:
     }
     break;
   case 0x10:
-    if (*(int *)(DAT_005806a4 + 0xb0) == 0) {
+    if (*(int *)(g_lmapView + 0xb0) == 0) {
       blockResetAxis(0xb);
     }
     FUN_001681c4();
@@ -1040,7 +1040,7 @@ LAB_002993c0:
     *(unsigned int *)(temp_v4 + 0x4c) = 0;
     break;
   case 0x11:
-    temp_v11 = FUN_00224880(*(unsigned int *)(g_mapDepart + 0x108));
+    temp_v11 = scrRunOpcodesStub(*(unsigned int *)(g_mapDepart + 0x108));
     if (temp_v11 == 2) {
       scrScriptProcessDestroy(*(unsigned int *)(temp_v4 + 0x108));
       asdMemFree(*(unsigned int *)(temp_v4 + 0x100));

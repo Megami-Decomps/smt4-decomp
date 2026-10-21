@@ -12,7 +12,7 @@ int FUN_00186940(void);
 int FUN_0018a924(...);
 int FUN_0019a0fc(...);
 int FUN_001bced4(...);
-int FUN_001d3e54(...);
+int mtx44TransformPosition(...);
 int FUN_002371b0(void);
 int FUN_002b3538(...);
 int FUN_00409c60(...);
@@ -140,7 +140,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001bced4. */
-/* Supplied declaration required: FUN_001d3e54. */
+/* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: FUN_002b3538. */
 /* Supplied declaration required: FUN_00409c60. */
@@ -348,7 +348,7 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
       pfVar6 = &temp_v12;
       temp_v0 = 0;
       do {
-        FUN_001d3e54(pfVar5,temp_v63,pfVar6);
+        mtx44TransformPosition(pfVar5,temp_v63,pfVar6);
         temp_v0 = temp_v0 + 1;
         pfVar5 = pfVar5 + 4;
         pfVar6 = pfVar6 + 3;

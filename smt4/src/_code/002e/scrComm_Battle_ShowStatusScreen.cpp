@@ -8,15 +8,15 @@ int FUN_00218b9c(int);
 int FUN_00250d84(unsigned int, int);
 int scrWorkSetValue(...);
 int FUN_0028c040(void);
-int FUN_0028ca0c(unsigned int);
-int FUN_0028ca60(unsigned int);
+int playerSkillInsertFirstFree(unsigned int);
+int gameClearUnlockedSavedId(unsigned int);
 int FUN_00292c0c(void);
 int FUN_00295a18(unsigned int, int);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int FUN_0029e874(int);
 int FUN_002bd8d4(int);
 int FUN_002f5eac(unsigned int, int);
-int FUN_00311430(unsigned int, int);
+int statusOpenSkillSelection(unsigned int, int);
 
 extern int g_btlUiBlock; /* 0x439ca8 */
 
@@ -26,19 +26,19 @@ extern int scrWorkGetValue(unsigned int);
 /* Supplied declaration required: scrWorkSetValue. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_0028c040. */
-/* Supplied declaration required: FUN_0028ca0c. */
-/* Supplied declaration required: FUN_0028ca60. */
-extern unsigned int FUN_0028cab8(void);
+/* Supplied declaration required: playerSkillInsertFirstFree. */
+/* Supplied declaration required: gameClearUnlockedSavedId. */
+extern unsigned int statusDownGetValue(void);
 extern int statusScreenIsClosed(void);
 /* Supplied declaration required: FUN_00292c0c. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295a18. */
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_002bd8d4. */
 /* Supplied declaration required: FUN_002f5eac. */
-/* Supplied declaration required: FUN_00311430. */
+/* Supplied declaration required: statusOpenSkillSelection. */
 
 
 unsigned int scrComm_Battle_ShowStatusScreen(void)
@@ -69,12 +69,12 @@ unsigned int scrComm_Battle_ShowStatusScreen(void)
       else {
         temp_v1 = statusScreenIsClosed();
         if (temp_v1 != 0) {
-          temp_v2 = FUN_0028cab8();
+          temp_v2 = statusDownGetValue();
           if (temp_v2 != 0) {
-            FUN_0028ca60(temp_v2 & 0xffff);
+            gameClearUnlockedSavedId(temp_v2 & 0xffff);
           }
-          FUN_0028ca0c(temp_v0 & 0xffff);
-          FUN_0029ca58();
+          playerSkillInsertFirstFree(temp_v0 & 0xffff);
+          beginStatusPanelClose();
           scrWorkSetValue(0,3);
         }
       }
@@ -83,7 +83,7 @@ unsigned int scrComm_Battle_ShowStatusScreen(void)
       scrWorkSetValue(0,2);
       FUN_0028c040();
       FUN_0029e874(0);
-      FUN_00311430(temp_v0 & 0xffff,0);
+      statusOpenSkillSelection(temp_v0 & 0xffff,0);
       FUN_00218b9c(g_btlUiBlock + 0x2460);
     }
   }

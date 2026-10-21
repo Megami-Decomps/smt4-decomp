@@ -5,11 +5,11 @@
 extern "C" {
 
 int listAppendNode(...);
-int FUN_0019102c(int, int);
+int objectCommandReserveWords(int, int);
 
-extern int FUN_00175678(void);
+extern int objectCommandQueueGet(void);
 /* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 
 
 void FUN_0046089c(int param_1,unsigned int *param_2,unsigned int *param_3)
@@ -31,9 +31,9 @@ void FUN_0046089c(int param_1,unsigned int *param_2,unsigned int *param_3)
   unsigned int temp_v12;
   unsigned int temp_v13;
   
-  temp_v2 = FUN_00175678();
+  temp_v2 = objectCommandQueueGet();
   temp_v4 = temp_v2;
-  FUN_0019102c(temp_v2,0x10);
+  objectCommandReserveWords(temp_v2,0x10);
   *(unsigned int *)(temp_v4 + 0xc) = *(unsigned int *)(temp_v2 + 0x184);
   *(unsigned char *)(temp_v4 + 4) = 0xf;
   *(int *)(temp_v4 + 0x10) = param_1 + 0x128;
@@ -62,9 +62,9 @@ void FUN_0046089c(int param_1,unsigned int *param_2,unsigned int *param_3)
   temp_v4 = param_3[2];
   if (0 < temp_v4) {
     temp_v0 = *(unsigned char *)(param_3 + 1);
-    temp_v3 = FUN_00175678();
+    temp_v3 = objectCommandQueueGet();
     temp_v2 = temp_v3;
-    FUN_0019102c(temp_v3,7);
+    objectCommandReserveWords(temp_v3,7);
     *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v3 + 0x184);
     *(unsigned char *)(temp_v2 + 4) = 0x10;
     *(int *)(temp_v2 + 0x10) = param_1 + 0x128;

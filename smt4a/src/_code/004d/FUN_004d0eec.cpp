@@ -1,30 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d0eec` (_code @ 0x4d0eec, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the final signed comparison is commuted (capacity > occupied instead of occupied < capacity), with corresponding condition codes. */
+#include "shard/Shard0031.h"
+
+struct PartySlotCapacity {
+    SlotTable table;
+    u8 unk1CA0[3];
+    u8 capacity;
+};
 
 extern "C" {
+SlotTable* gameGetSlotTable(void);
 
-extern int gameGetSlotTable(void);
-
-
-unsigned char FUN_004d0eec(void)
-
+u8 FUN_004d0eec(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = gameGetSlotTable();
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    if (*(char *)(temp_v1 + temp_v2 + 0x1c88) < '\0') break;
-    temp_v2 = temp_v2 + 1;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v2 < 0x18);
-  return temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x1ca3);
+    const PartySlotCapacity* party = reinterpret_cast<const PartySlotCapacity*>(gameGetSlotTable());
+    const SlotTable* slots = gameGetSlotTable();
+    s32 occupied = 0;
+    for (s32 index = 0; index < 24; ++index) {
+        if (slots->slots[index] < 0) {
+            break;
+        }
+        ++occupied;
+    }
+    return occupied < party->capacity;
 }
-
-} /* extern "C" */
+}

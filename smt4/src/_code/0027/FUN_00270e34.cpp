@@ -5,20 +5,20 @@
 extern "C" {
 
 int FUN_002897f0(unsigned int, int);
-int FUN_00289d74(int, unsigned int, int);
+int aocBufferQueueDisplay(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_00297060(int, int);
 int textFormatBuffer(...);
 int FUN_002bff50(void);
 int asdMemFree(...);
-int FUN_002c5c04(...);
+int asdLoadFileSyncDefault(...);
 
 extern int g_aocSystem; /* 0x433158 */
 extern int g_mapMain; /* 0x447e28 */
 
 /* Supplied declaration required: FUN_002897f0. */
-/* Supplied declaration required: FUN_00289d74. */
+/* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
 extern int FUN_00289e54(int, unsigned int, unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
@@ -27,7 +27,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bff50. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002c5c04. */
+/* Supplied declaration required: asdLoadFileSyncDefault. */
 
 
 unsigned int FUN_00270e34(void)
@@ -53,7 +53,7 @@ unsigned int FUN_00270e34(void)
     FUN_00289de4(g_aocSystem,*(unsigned int *)(temp_v0 + 100),0);
     *(int *)(temp_v0 + 0x8c) = temp_v1;
     temp_v1 = g_aocSystem;
-    FUN_00289d74(g_aocSystem,*(unsigned int *)(temp_v0 + 100),0);
+    aocBufferQueueDisplay(g_aocSystem,*(unsigned int *)(temp_v0 + 100),0);
     *(int *)(temp_v0 + 0x90) = temp_v1;
     if (*(int *)(temp_v0 + 0x8c) != 0) {
       if (temp_v1 != 0) goto LAB_00270f10;
@@ -66,9 +66,9 @@ unsigned int FUN_00270e34(void)
     }
     return 0;
   }
-  temp_v3 = FUN_002c5c04(temp_v4);
+  temp_v3 = asdLoadFileSyncDefault(temp_v4);
   *(unsigned int *)(temp_v0 + 0x8c) = temp_v3;
-  temp_v1 = FUN_002c5c04(temp_v5);
+  temp_v1 = asdLoadFileSyncDefault(temp_v5);
   *(int *)(temp_v0 + 0x90) = temp_v1;
 LAB_00270f10:
   temp_v2 = *(int *)(temp_v0 + 0x8c);

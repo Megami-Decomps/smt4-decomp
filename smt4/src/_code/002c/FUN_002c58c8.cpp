@@ -1,35 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c58c8` (_code @ 0x2c58c8, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail hoists the 0x10000 texture-kind constant into a saved register before preparation. */
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
+TexNode* asdTMTexTableCallFileB(s32 tableIndex, s32 nodeIndex);
+void FUN_002b9178(TexNode* node);
 
-int FUN_002b9178(void);
-int asdTextureSetImage(void);
-
-/* Supplied declaration required: FUN_002b9178. */
-extern int asdTMTexTableCallFileB(void);
-/* Supplied declaration required: asdTextureSetImage. */
-
-
-int FUN_002c58c8(void)
-
+// Prepare a table texture and mark its image as uploaded.
+TexNode* FUN_002c58c8(s32 tableIndex, s32 nodeIndex)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = asdTMTexTableCallFileB();
-  if (temp_v0 != 0) {
-    FUN_002b9178();
-    if (*(int *)(temp_v0 + 8) != 0) {
-      *(unsigned int *)(*(int *)(temp_v0 + 8) + 8) = 0x10000;
-      if (*(int *)(temp_v0 + 8) != 0) {
-        asdTextureSetImage();
-        *(unsigned int *)(temp_v0 + 0x10) = *(unsigned int *)(temp_v0 + 0x10) | 4;
-      }
+    TexNode* node = asdTMTexTableCallFileB(tableIndex, nodeIndex);
+    if (node != NULL) {
+        FUN_002b9178(node);
+        if (node->loaded.texture != NULL) {
+            node->loaded.texture->unk08 = 0x10000;
+            if (node->loaded.texture != NULL) {
+                asdTextureSetImage(node->loaded.texture);
+                node->loaded.state |= 4;
+            }
+        }
     }
-  }
-  return temp_v0;
+    return node;
 }
-
-} /* extern "C" */
+}

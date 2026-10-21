@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047c65c` (_code @ 0x47c65c, 0x1bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+class Obj526238;
 
 extern "C" {
 
@@ -14,8 +15,8 @@ extern int FUN_00477c74(...); /* 0x477c74 */
 extern int FUN_0047815c(...); /* 0x47815c */
 extern int FUN_004782ec(...); /* 0x4782ec */
 extern int _ZN9Obj52623816leaveWhenAocFreeEv(...); /* 0x4785b4 */
-extern int FUN_00478608(...); /* 0x478608 */
-extern int FUN_00478778(...); /* 0x478778 */
+extern void aocQuestReturnToScript(Obj526238 *);
+extern void aocQuestSceneReleaseStepResources(Obj526238 *);
 extern int FUN_00478dc4(...); /* 0x478dc4 */
 extern int FUN_00478edc(...); /* 0x478edc */
 extern int FUN_004791d4(...); /* 0x4791d4 */
@@ -80,9 +81,9 @@ void FUN_0047c65c(int param_1)
   *(unsigned int *)(param_1 + 0x84) = 0;
   *(romwright_code **)(param_1 + 0x88) = FUN_00477c74;
   *(unsigned int *)(param_1 + 0x8c) = 0;
-  *(romwright_code **)(param_1 + 0x90) = FUN_00478778;
+  *(void (**)(Obj526238 *))(param_1 + 0x90) = aocQuestSceneReleaseStepResources;
   *(unsigned int *)(param_1 + 0x94) = 0;
-  *(romwright_code **)(param_1 + 0x98) = FUN_00478608;
+  *(void (**)(Obj526238 *))(param_1 + 0x98) = aocQuestReturnToScript;
   *(unsigned int *)(param_1 + 0x9c) = 0;
   *(romwright_code **)(param_1 + 0xa0) = _ZN9Obj52623816leaveWhenAocFreeEv;
   *(unsigned int *)(param_1 + 0xa4) = 0;

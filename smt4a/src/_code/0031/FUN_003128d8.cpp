@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 extern int g_mapGimic; /* 0x580ca0 */
 extern int g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 void FUN_003128d8(void)
@@ -29,7 +29,7 @@ void FUN_003128d8(void)
     temp_v0 = g_mapGimic + temp_v1 * 0x3c;
     if ((*(char *)(temp_v0 + 0x90) != '\0') && (*(short *)(temp_v0 + 0xa6) == 0xf)) {
       temp_v4 = *(float *)(g_lmapScene + 0x1c);
-      FUN_002b5cb4();
+      distSpatial();
       if ((int)temp_v4 < temp_v3) {
         temp_v2 = temp_v1;
         temp_v3 = (int)temp_v4;

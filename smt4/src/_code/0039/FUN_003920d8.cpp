@@ -22,14 +22,14 @@ typedef struct {
 
 extern int g_aocMain; /* 0x432fc8 */
 
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
 /* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_00234124. */
 /* Supplied declaration required: FUN_002341d4. */
 extern int strIsEmpty(unsigned int *);
-extern int FUN_002a12d8(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 extern int byteIsAtLeast100(unsigned int *);
 
 
@@ -78,7 +78,7 @@ void FUN_003920d8(int param_1)
           temp_v0 = param_1 + 0x20c;
           FUN_00233fcc(temp_v0,2);
           *(int *)(param_1 + 0x208) = temp_v0;
-          temp_v1 = FUN_0023360c(param_1 + 0x240);
+          temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x240);
           *(unsigned int *)(temp_v0 + 0x14) =
                (unsigned int)*(unsigned short *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9aa);
           *(unsigned int *)(param_1 + 8) = 3;
@@ -112,7 +112,7 @@ void FUN_003920d8(int param_1)
         FUN_002341d4(&temp_v7,g_aocMain);
         temp_v6 = temp_v7;
         uStack_3c = uStack_34;
-        temp_v2 = FUN_002a12d8((unsigned int *)&temp_v6);
+        temp_v2 = legacyResourceIdRemap((unsigned int *)&temp_v6);
         if (temp_v2 < 0) {
           *(unsigned int *)(param_1 + 8) = 9999;
           *(unsigned char *)(param_1 + 0x210) = 100;

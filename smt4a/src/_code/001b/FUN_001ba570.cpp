@@ -10,11 +10,11 @@ typedef struct Options {
 } Options;
 
 extern Options *gameGetOptions(void);
-extern s32 FUN_001b34b8(void);
+extern s32 gameOptionsClassifyMode(void);
 
 s32 FUN_001ba570(void)
 {
-    switch (FUN_001b34b8()) {
+    switch (gameOptionsClassifyMode()) {
     case 0:
         return 0;
     case 1:

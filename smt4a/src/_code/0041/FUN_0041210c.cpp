@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00410f84(int *);
 int FUN_00412248(int *);
 int FUN_00416840(void);
-int FUN_004ff364(int, unsigned int);
+int asdAnimGetTrackLastFrame(int, unsigned int);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -16,7 +16,7 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00410f84. */
 /* Supplied declaration required: FUN_00412248. */
 /* Supplied declaration required: FUN_00416840. */
-/* Supplied declaration required: FUN_004ff364. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 
 
 unsigned int FUN_0041210c(int *param_1)
@@ -50,7 +50,7 @@ unsigned int FUN_0041210c(int *param_1)
       temp_v3 = temp_v2 + temp_v4 * 0x10;
       if (*(int *)(temp_v3 + 0x4d78) != 0) {
         *(int *)(temp_v3 + 0x4d80) = *(int *)(temp_v3 + 0x4d80) + 2;
-        FUN_004ff364(*(int *)(temp_v3 + 0x4d78),*(unsigned int *)(temp_v3 + 0x4d7c));
+        asdAnimGetTrackLastFrame(*(int *)(temp_v3 + 0x4d78),*(unsigned int *)(temp_v3 + 0x4d7c));
         temp_v5 = *(int *)(temp_v3 + 0x4d80);
         temp_v6 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(in_s0 == temp_v6) << 0x1e) |

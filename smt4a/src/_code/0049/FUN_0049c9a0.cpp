@@ -22,7 +22,7 @@ typedef struct RecordD {
     /* 0x28 */ u16 value;
 } RecordD;
 
-extern u32 FUN_0019271c(u32 id);
+extern u32 aocEntryGetKind(u32 id);
 extern RecordA *FUN_00192550(u32 id);
 extern RecordB *FUN_00192608(u32 id);
 extern RecordC *aocRecordLookup83(u32 id);
@@ -34,7 +34,7 @@ u16 FUN_0049c9a0(const u16 *idPtr)
     u16 value = 0;
     u32 id = *idPtr;
 
-    switch (FUN_0019271c(id)) {
+    switch (aocEntryGetKind(id)) {
     case 1:
     case 12: {
         RecordA *record = FUN_00192550(id);

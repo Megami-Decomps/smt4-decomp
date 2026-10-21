@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032d61c` (_code @ 0x32d644, 0xbb8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int FUN_00157558(int);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_00168770(void);
-int FUN_001689e8(...);
 int FUN_00168e00(int, int, int, int);
 int FUN_00180310(...);
 int FUN_001834a4(...);
@@ -55,7 +55,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168770. */
-/* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_00168e00. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
@@ -263,7 +262,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
             temp_v8 = temp_v11 + (int)temp_v22;
             FUN_00164b5c(2,0x2e,0x11,temp_v8,temp_v9,0x71);
             temp_v7 = FUN_001834a4(0x2e,0xaa);
-            FUN_001689e8((int)*(short *)((int)param_1 + temp_v5 * 2 + 0x24),
+            uiDrawItemCategoryIcon((int)*(short *)((int)param_1 + temp_v5 * 2 + 0x24),
                          *(short *)(temp_v7 + 8) + temp_v8,*(short *)(temp_v7 + 10) + temp_v9,0x72,0);
             temp_v7 = FUN_001834a4(0x2e,0xab);
             temp_v0 = *(short *)(temp_v7 + 8);

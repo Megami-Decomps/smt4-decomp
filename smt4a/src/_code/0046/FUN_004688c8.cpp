@@ -9,7 +9,7 @@ int FUN_001695a0(void);
 int FUN_0019de98(int, unsigned int);
 int messageSetMode(int);
 int FUN_001ad9b4(void);
-int FUN_001ba514(int);
+int partyFindSlotById(int);
 int resultCreate(int);
 int FUN_002f0c18(void);
 int FUN_003315c4(void);
@@ -49,7 +49,7 @@ extern unsigned char LAB_00468d74; /* 0x468d74 */
 extern unsigned char LAB_00468d84; /* 0x468d84 */
 extern unsigned char LAB_00468e88; /* 0x468e88 */
 
-extern int FUN_00162880(void);
+extern int engineCleanupIsDone(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_0019de98. */
@@ -58,10 +58,10 @@ extern int idIsAtLeast350(unsigned int);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
-/* Supplied declaration required: FUN_001ba514. */
+/* Supplied declaration required: partyFindSlotById. */
 extern int FUN_001bd118(unsigned short);
-extern int FUN_00224880(unsigned int);
-extern int FUN_002802c8(void);
+extern int scrRunOpcodesStub(unsigned int);
+extern int screenFadeIsBusy(void);
 extern int FUN_002a746c(void);
 /* Supplied declaration required: resultCreate. */
 extern int FUN_002e19f8(void);
@@ -177,7 +177,7 @@ LAB_004689f8:
     temp_v4 = 10;
     break;
   case 1:
-    temp_v2 = FUN_00224880(*(unsigned int *)param_1[0xad]);
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
     if (temp_v2 != 2) {
       return;
     }
@@ -220,7 +220,7 @@ LAB_004689f8:
     messageSetMode(0);
     return;
   case 6:
-    temp_v2 = FUN_00224880(*(unsigned int *)param_1[0xad]);
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
     if (temp_v2 != 2) {
       return;
     }
@@ -237,7 +237,7 @@ LAB_004689f8:
         temp_v3 = temp_v4 + temp_v2 * 8;
         if (*(short *)(temp_v3 + 0x100) != 1) {
           if (*(short *)(temp_v3 + 0x100) == 2) {
-            FUN_001ba514(*(unsigned short *)(temp_v3 + 0x102));
+            partyFindSlotById(*(unsigned short *)(temp_v3 + 0x102));
             FUN_004d0d70();
           }
         }
@@ -290,7 +290,7 @@ LAB_004689f8:
     }
     break;
   case 7:
-    temp_v2 = FUN_00162880();
+    temp_v2 = engineCleanupIsDone();
     if (temp_v2 == 0) {
       return;
     }
@@ -305,7 +305,7 @@ LAB_004689f8:
     temp_v4 = 8;
     break;
   case 8:
-    temp_v2 = FUN_00224880(*(unsigned int *)param_1[0xad]);
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
     if (temp_v2 != 2) {
       return;
     }
@@ -313,7 +313,7 @@ LAB_004689f8:
     messageSetMode(0);
     return;
   case 9:
-    temp_v2 = FUN_002802c8();
+    temp_v2 = screenFadeIsBusy();
     if (temp_v2 != 0) {
       return;
     }
@@ -325,7 +325,7 @@ LAB_004689f8:
     param_1[2] = 0;
     return;
   case 10:
-    temp_v2 = FUN_00224880(*(unsigned int *)param_1[0xad]);
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
     if (temp_v2 != 2) {
       return;
     }

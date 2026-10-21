@@ -2,14 +2,14 @@
 
 extern "C" {
 
-u32 FUN_002fd444(void);
+u32 textHolderSetDefault(void);
 
-/* Returns bit 1 of FUN_002fd444's result (0 or 1). */
+/* Returns bit 1 of textHolderSetDefault's result (0 or 1). */
 u32 FUN_002fd454(void)
 {
     u32 value;
 
-    value = FUN_002fd444();
+    value = textHolderSetDefault();
     return (value & 3) >> 1;
 }
 

@@ -19,7 +19,7 @@ typedef struct {
 
 extern int FUN_001dfbe0(...); /* 0x1dfbe0 */
 extern unsigned char LAB_001dfc44; /* 0x1dfc44 */
-extern int FUN_002db900(...); /* 0x2db900 */
+extern int jobWorkFreeWork(...); /* 0x2db900 */
 extern unsigned char DAT_00403738; /* 0x403738 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -57,7 +57,7 @@ unsigned int EVE_EffectLineStart(void)
     puVar3[1] = 0;
     puVar3[2] = temp_v0;
     pcVar5 = "EffectLine";
-    asdProcessCreateSimple("EffectLine",2,0,0,FUN_001dfbe0,FUN_002db900,puVar3);
+    asdProcessCreateSimple("EffectLine",2,0,0,FUN_001dfbe0,jobWorkFreeWork,puVar3);
     taskCreateDraw(&DAT_00403738,0x71,0,0,&LAB_001dfc44,0,puVar3,pcVar5);
     bustupCutAnimSetJobParam(pcVar5);
   }

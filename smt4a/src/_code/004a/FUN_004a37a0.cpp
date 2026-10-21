@@ -64,7 +64,7 @@ typedef struct {
 
 extern int gameDataCopySaveEntry(fn_004a37a0_arg1 *, unsigned short *);
 /* Supplied declaration required: FUN_0023ac54. */
-extern unsigned short *FUN_004a86dc(fn_004a37a0_arg1 *);
+extern unsigned short *slotEntryFindById(fn_004a37a0_arg1 *);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -97,7 +97,7 @@ void FUN_004a37a0(unsigned int param_1,fn_004a37a0_arg1 *param_2)
   unsigned int temp_v17;
   unsigned char temp_v18 [24];
   
-  puVar1 = (unsigned short *)FUN_004a86dc(param_2);
+  puVar1 = (unsigned short *)slotEntryFindById(param_2);
   temp_v0 = gameDataCopySaveEntry(param_2,&temp_v1);
   if (temp_v0 != 0) {
     temp_v1 = puVar1[0x32];

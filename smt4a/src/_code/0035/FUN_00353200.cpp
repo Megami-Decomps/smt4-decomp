@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_1_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 extern short DAT_005f187e; /* 0x5f187e */
@@ -84,7 +84,7 @@ unsigned int FUN_00353200(int param_1)
     temp_v15 = *(float *)(g_lmapScene + 0x24);
     temp_v13 = *(float *)(g_lmapScene + 0x1c);
     temp_v14 = *(float *)(g_lmapScene + 0x20);
-    temp_v6 = *(float *)(DAT_005806a4 + 0x18);
+    temp_v6 = *(float *)(g_lmapView + 0x18);
     temp_v0 = *puVar5;
     if (DAT_005f187e != 0) {
       if (0 < (int)temp_v0) {

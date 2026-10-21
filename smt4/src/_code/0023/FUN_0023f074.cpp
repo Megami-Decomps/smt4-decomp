@@ -13,7 +13,7 @@ int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_00297060(int, unsigned int);
 int buttonHelpSetPreset(int);
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern unsigned int FUN_0023ed64(unsigned int *);
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
@@ -46,7 +46,7 @@ unsigned int FUN_0023f074(unsigned int *param_1)
     *(unsigned int *)(temp_v0 + 0x108) = 1;
     scrScriptProcessStartEntry(param_1[4],0);
     *param_1 = 7;
-    temp_v0 = FUN_0019e0c0(param_1[4]);
+    temp_v0 = scrRunOpcodesStub(param_1[4]);
     if (temp_v0 != 2) {
       temp_v1 = 0;
     }

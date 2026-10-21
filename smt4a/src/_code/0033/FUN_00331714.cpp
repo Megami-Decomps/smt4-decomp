@@ -14,7 +14,7 @@ int FUN_002f0c18(void);
 int FUN_0034a290(void);
 int soundChannelRequestIfEnabled(int, int, int);
 int soundChannelStopAll(int);
-int FUN_003de02c(int);
+void FUN_003de02c(unsigned int frames);
 int FUN_003e503c(unsigned int);
 int FUN_00408184(int, int);
 int VectorSignedToFloat(int, int);
@@ -46,9 +46,8 @@ extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 extern int FUN_003ddfd8(void);
-/* Supplied declaration required: FUN_003de02c. */
 extern int playerHasFlagBit(unsigned int);
-extern int FUN_003e4940(void);
+extern int actorIsActive(void);
 extern int FUN_003e4cb4(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_00408184. */
@@ -250,7 +249,7 @@ void FUN_00331714(int param_1)
       do {
         temp_v8 = temp_v7 & 0xffff;
         FUN_003e503c(temp_v8);
-        temp_v4 = FUN_003e4940();
+        temp_v4 = actorIsActive();
         if (temp_v4 != 0) {
           temp_v5 = FUN_003e4cb4(temp_v8);
           temp_v18 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);

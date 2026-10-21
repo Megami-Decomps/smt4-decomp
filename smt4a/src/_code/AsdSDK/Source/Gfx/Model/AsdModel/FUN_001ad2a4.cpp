@@ -10,8 +10,8 @@ void FUN_002e59f8(const void *src, void *dst, s32 size);
 void *asdMemoryAllocTracked(u32 size, u32 align, u32 arg2, u32 arg3, u32 arg4);
 void *FUN_001abbc4(AsdEplTail *tail);
 
-extern const char DAT_0053d190[];  /* "ATBC" */
-extern const char DAT_0053d198[];  /* second container magic */
+extern const char g_asdModelContainerAtbcMagic[];  /* "ATBC" */
+extern const char g_asdModelContainerAbchMagic[];  /* second container magic */
 extern const char DAT_0053d1a0[];  /* "EPLSIGN" */
 
 /* Rebuilds the model's attribute records for `key`: one record per id of every matching entry
@@ -26,7 +26,7 @@ void FUN_001ad2a4(AsdModelAttrModel *model, u8 *data, s32 key)
     for (s32 i = 0; i < model->containers.count; i++) {
         AsdAtbcHeader *atbc = (AsdAtbcHeader *)data;
 
-        if ((rt_memcmp(atbc, DAT_0053d190, 4) == 0 || rt_memcmp(atbc, DAT_0053d198, 4) == 0) && atbc->count > 0 && atbc->count > i) {
+        if ((rt_memcmp(atbc, g_asdModelContainerAtbcMagic, 4) == 0 || rt_memcmp(atbc, g_asdModelContainerAbchMagic, 4) == 0) && atbc->count > 0 && atbc->count > i) {
             u8 *cursor = (u8 *)atbc + atbc->firstOffset;
 
             for (s32 j = 0;; j++) {
@@ -60,7 +60,7 @@ void FUN_001ad2a4(AsdModelAttrModel *model, u8 *data, s32 key)
     for (s32 i = 0; i < model->containers.count; i++) {
         AsdAtbcHeader *atbc = (AsdAtbcHeader *)data;
 
-        if ((rt_memcmp(atbc, DAT_0053d190, 4) == 0 || rt_memcmp(atbc, DAT_0053d198, 4) == 0) && atbc->count > 0 && atbc->count > i) {
+        if ((rt_memcmp(atbc, g_asdModelContainerAtbcMagic, 4) == 0 || rt_memcmp(atbc, g_asdModelContainerAbchMagic, 4) == 0) && atbc->count > 0 && atbc->count > i) {
             u8 *cursor = (u8 *)atbc + atbc->firstOffset;
 
             for (s32 j = 0;; j++) {

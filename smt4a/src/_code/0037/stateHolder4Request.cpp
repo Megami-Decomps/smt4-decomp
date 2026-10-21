@@ -4,7 +4,7 @@ extern "C" {
 
 extern StateHolder4 *g_uiQuest;
 extern void FUN_001ff724(void);
-extern void FUN_0031f924(void);
+extern void uiQuestReturnToList(void);
 
 void stateHolder4Request(u8 value)
 {
@@ -13,7 +13,7 @@ void stateHolder4Request(u8 value)
     obj->unk93D = 1;
     obj->unk945 = value;
     FUN_001ff724();
-    FUN_0031f924();
+    uiQuestReturnToList();
 }
 
 } /* extern "C" */

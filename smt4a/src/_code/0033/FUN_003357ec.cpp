@@ -1,36 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003357ec` (_code @ 0x3357ec, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler shares the command-mode store with a different switch case, placing case-alignment NOPs and tail branches differently from retail. */
+#include "common.h"
+
+struct BattleCommandState {
+    u8 unk00[0xa8]; // 0x00
+    u32 mode;        // 0xa8
+};
 
 extern "C" {
+s32 scrGetArg(u32 index);
+BattleCommandState* btlGetMainState(void);
 
-extern int btlGetMainState(void);
-extern int scrGetArg(void);
-
-
-unsigned int FUN_003357ec(void)
-
+// Maps the script selector to command modes 12, 11, or the default 5.
+u32 FUN_003357ec(u32 argumentIndex)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  if (temp_v0 != 0) {
-    if (temp_v0 != 1) {
-      temp_v0 = btlGetMainState();
-      temp_v1 = 5;
+    switch (scrGetArg(argumentIndex)) {
+    case 0:
+        btlGetMainState()->mode = 12;
+        break;
+    case 1:
+        btlGetMainState()->mode = 11;
+        break;
+    default:
+        btlGetMainState()->mode = 5;
+        break;
     }
-    else {
-      temp_v0 = btlGetMainState();
-      temp_v1 = 0xb;
-    }
-    *(unsigned int *)(temp_v0 + 0xa8) = temp_v1;
-  }
-  else {
-    temp_v0 = btlGetMainState();
-    *(unsigned int *)(temp_v0 + 0xa8) = 0xc;
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

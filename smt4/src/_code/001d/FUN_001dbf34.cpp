@@ -10,7 +10,7 @@ int FUN_002958f8(...);
 int FUN_0029c4ac(...);
 int FUN_0029c4c8(...);
 int FUN_0029c4e4(void);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int FUN_0029d684(...);
 int FUN_0029d8f4(...);
 int FUN_0029dfc0(...);
@@ -18,7 +18,7 @@ int FUN_002a0cc8(...);
 int buttonHelpSetPreset(...);
 int FUN_002bf810(...);
 
-int FUN_00262f68(...);
+int objectFlagsClear(...);
 int FUN_00262f78(void);
 int FUN_00262f94(void);
 int btlTalkBustUpReleaseAllSlots(void);
@@ -41,12 +41,12 @@ int FUN_002bd06c(unsigned int);
 int libc_strcpy(unsigned char [32], unsigned int);
 int rt_memcpy_w(int, int, int);
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_001ddc00(void);
 extern int FUN_00223c78(void);
 extern int partyPanelIsActive(void);
 extern int battleTalkIsBustReady(void);
-/* Supplied declaration required: FUN_00262f68. */
+/* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: FUN_00262f78. */
 /* Supplied declaration required: FUN_00262f94. */
 /* Supplied declaration required: FUN_0026d654. */
@@ -61,7 +61,7 @@ extern int FUN_00293aac(void);
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
-extern int FUN_002955fc(void);
+extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_00295660. */
@@ -73,7 +73,7 @@ extern int FUN_0029563c(void);
 /* Supplied declaration required: FUN_0029c4c8. */
 /* Supplied declaration required: FUN_0029c4e4. */
 /* Supplied declaration required: FUN_0029c6b0. */
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029d684. */
 /* Supplied declaration required: FUN_0029d8f4. */
 /* Supplied declaration required: FUN_0029dfc0. */
@@ -118,7 +118,7 @@ unsigned int FUN_001dbf34(int param_1)
     libc_strcpy(temp_v8,temp_v4);
     FUN_00295660(0,temp_v8);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0x16);
-    temp_v2 = FUN_002955fc();
+    temp_v2 = btlTalkBustUpGetValue();
     if (temp_v2 == 0) {
       FUN_002954f4(*(unsigned short *)(temp_v3 + 0x46),1);
     }
@@ -126,7 +126,7 @@ unsigned int FUN_001dbf34(int param_1)
     *piVar7 = *(int *)(param_1 + 0xd38) + 1;
     break;
   case 1:
-    temp_v3 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd04));
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
     if (temp_v3 != 2) {
       return 0;
     }
@@ -134,7 +134,7 @@ unsigned int FUN_001dbf34(int param_1)
     *piVar7 = *(int *)(param_1 + 0xd38) + 1;
     break;
   case 2:
-    temp_v3 = FUN_002955fc();
+    temp_v3 = btlTalkBustUpGetValue();
     if (temp_v3 == 0) {
       return 0;
     }
@@ -142,7 +142,7 @@ unsigned int FUN_001dbf34(int param_1)
     *piVar7 = *(int *)(param_1 + 0xd38) + 1;
     break;
   case 3:
-    temp_v3 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd08));
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd08));
     if (temp_v3 != 2) {
       return 0;
     }
@@ -245,7 +245,7 @@ unsigned int FUN_001dbf34(int param_1)
               temp_v6 = FUN_00262f78();
               FUN_002942c4(temp_v6,1);
               FUN_0029c6b0(temp_v3);
-              FUN_00262f68(temp_v3,0x220);
+              objectFlagsClear(temp_v3,0x220);
               FUN_002954bc(temp_v3);
               *(unsigned int *)(param_1 + 0xd38) = 6;
               btlTalkBustUpReleaseAllSlots();
@@ -283,7 +283,7 @@ unsigned int FUN_001dbf34(int param_1)
     *piVar7 = temp_v3;
     break;
   case 5:
-    temp_v3 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd04));
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
     if (temp_v3 != 2) {
       return 0;
     }
@@ -341,7 +341,7 @@ unsigned int FUN_001dbf34(int param_1)
       FUN_002a0cc8(1);
       FUN_002bf810(0x100016d);
       *piVar7 = *(int *)(param_1 + 0xd38) + 1;
-      FUN_0029ca58();
+      beginStatusPanelClose();
     }
     break;
   case 9:

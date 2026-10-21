@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003a2904(int);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 
 /* Supplied declaration required: FUN_003a2904. */
 
@@ -26,8 +26,8 @@ unsigned int FUN_002bd170(unsigned int param_1,int *param_2)
   else if (param_2[1] != 5) {
     return 0;
   }
-  if (((DAT_005806a4 != 0) && (*(char *)(DAT_005806a4 + 0x220) == '\0')) &&
-     (*(char *)(DAT_005806a4 + 0x2b8) == '\0')) {
+  if (((g_lmapView != 0) && (*(char *)(g_lmapView + 0x220) == '\0')) &&
+     (*(char *)(g_lmapView + 0x2b8) == '\0')) {
     FUN_003a2904(0);
   }
   return 0;

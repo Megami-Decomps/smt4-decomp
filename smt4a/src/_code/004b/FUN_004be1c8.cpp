@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004be1c8` (_code @ 0x4be1c8, 0x1a4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
 
@@ -8,10 +9,9 @@ int ifTouchRegionRemove(void);
 int __aeabi_memset4(int, int, unsigned int);
 int dialogOpen(int, int);
 int FUN_00275bc8(int, unsigned int);
-int FUN_002a49b4(void);
+int ifTouchResetRecord(void);
 int FUN_002a49e4(unsigned int, int);
 int FUN_002a7324(int);
-int FUN_0037e0d0(unsigned int, int);
 int FUN_003e4d68(unsigned int);
 
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -21,10 +21,9 @@ extern int FUN_00187168(void);
 /* Supplied declaration required: dialogOpen. */
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002a49b4. */
+/* Supplied declaration required: ifTouchResetRecord. */
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_002a7324. */
-/* Supplied declaration required: FUN_0037e0d0. */
 /* Supplied declaration required: FUN_003e4d68. */
 
 
@@ -76,7 +75,7 @@ void FUN_004be1c8(int param_1)
         } while (temp_v3 < temp_v1);
       }
       *(unsigned int *)(param_1 + 0x310) = 0;
-      FUN_002a49b4();
+      ifTouchResetRecord();
     }
     temp_v4 = 0;
     do {
@@ -90,7 +89,7 @@ void FUN_004be1c8(int param_1)
     } while ((int)temp_v4 < 0xc);
     if (0 < *(int *)(param_1 + 0x324)) {
       temp_v2 = FUN_003e4d68(*(unsigned int *)(param_1 + 0x2c4) & 0xffff);
-      FUN_0037e0d0(temp_v2,0);
+      statusRequestUnitDetails((const UnitCategoryRecord*)temp_v2,0,0);
       FUN_002a7324(1);
     }
     *(unsigned int *)(param_1 + 8) = 2;

@@ -17,7 +17,7 @@ typedef struct ContentDesc003e1390 {
 } ContentDesc003e1390;
 
 void asdMemFree(void);
-void FUN_002804b0(u8 name[132], u32 *handle, s32 flags);
+void asdLoadFileAsyncSimple(u8 name[132], u32 *handle, s32 flags);
 void libc_strcpy(u8 dst[132], u32 src);
 void sysMemClear(u8 dst[132], s32 size);
 void FUN_003e21c8(ContentRequest003e1390 *request, ContentDesc003e1390 *desc);
@@ -41,7 +41,7 @@ void contentRequestStart(ContentRequest003e1390 *request, ContentDesc003e1390 *d
     if (0 < desc->aocIndex && FUN_0046ebf0(g_aocSystem) != 0) {
         aocQueueType39(g_aocSystem, desc->aocIndex, &request->handle, name);
     } else {
-        FUN_002804b0(name, &request->handle, 0);
+        asdLoadFileAsyncSimple(name, &request->handle, 0);
     }
     request->state = 0x16;
     request->unk10 = 0;

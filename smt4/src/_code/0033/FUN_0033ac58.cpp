@@ -10,7 +10,7 @@ int aocHandleButtons(int, int);
 /* Supplied declaration required: FUN_0023fb84. */
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_00294fe0(int);
-extern int FUN_0029505c(int);
+extern int nkdwHeaderParse(int);
 
 
 unsigned int FUN_0033ac58(int param_1)
@@ -42,7 +42,7 @@ unsigned int FUN_0033ac58(int param_1)
 LAB_0033acc8:
       puVar5 = (unsigned int *)(temp_v3 + 0x1fe4);
       if ((*puVar5 & 1) == 0) {
-        temp_v3 = FUN_0029505c(temp_v0);
+        temp_v3 = nkdwHeaderParse(temp_v0);
         if (temp_v3 == 0) {
           temp_v4 = 0;
         }

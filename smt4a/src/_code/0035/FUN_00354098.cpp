@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0030354c(void);
+int lmapClearExtraFlag(void);
 int FUN_003d2158(int, int);
 
 extern int g_lmapScene; /* 0x581288 */
@@ -12,7 +12,7 @@ extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0030354c. */
+/* Supplied declaration required: lmapClearExtraFlag. */
 /* Supplied declaration required: FUN_003d2158. */
 
 
@@ -75,7 +75,7 @@ void FUN_00354098(void)
     return;
   }
   if (*(int *)(g_lmapScene + 0x288) == 3) {
-    FUN_0030354c();
+    lmapClearExtraFlag();
     if (*(int *)(g_lmapScene + 0x28c) != 0) {
       FUN_003d2158(*(int *)(g_lmapScene + 0x28c),0);
     }

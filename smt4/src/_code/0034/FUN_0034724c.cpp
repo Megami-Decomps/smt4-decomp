@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdPrimAlloc(int);
-int FUN_0023b7d8(int, int, unsigned int *);
+int modelShaderSubmitCommands(int, int, unsigned int *);
 int FUN_00346f2c(int);
 int rt_memcpy(void);
 
@@ -15,8 +15,8 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: asdPrimAlloc. */
-/* Supplied declaration required: FUN_0023b7d8. */
-extern unsigned int FUN_002bc11c(int);
+/* Supplied declaration required: modelShaderSubmitCommands. */
+extern unsigned int osVirtToPhysAddress(int);
 /* Supplied declaration required: FUN_00346f2c. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -36,12 +36,12 @@ void FUN_0034724c(int param_1)
       temp_v0 = temp_v2 << 1;
       asdPrimAlloc(temp_v0);
       rt_memcpy();
-      temp_v1 = FUN_002bc11c(temp_v0);
+      temp_v1 = osVirtToPhysAddress(temp_v0);
       *(unsigned int *)(param_1 + 0x7dc) = temp_v1;
       *(int *)(param_1 + 0x7e0) = temp_v2;
       *(unsigned char *)(param_1 + 0x7e4) = 0;
     }
-    FUN_0023b7d8(param_1,param_1 + 0x4c,(unsigned int *)(param_1 + 0x7dc));
+    modelShaderSubmitCommands(param_1,param_1 + 0x4c,(unsigned int *)(param_1 + 0x7dc));
     return;
   }
   return;

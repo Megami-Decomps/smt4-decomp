@@ -6,7 +6,7 @@ extern "C" {
 
 int jobStop(...);
 int aocHandleButtons(...);
-int FUN_004ff364(...);
+int asdAnimGetTrackLastFrame(...);
 
 typedef struct fn_00289d8c_arg0 fn_00289d8c_arg0;
 struct fn_00289d8c_arg0 {
@@ -31,7 +31,7 @@ extern int jobGetWork(void);
 extern int FUN_003fce08(unsigned int, unsigned int);
 extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
-/* Supplied declaration required: FUN_004ff364. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 
 
 unsigned int FUN_00289d8c(fn_00289d8c_arg0 *param_1)
@@ -80,7 +80,7 @@ unsigned int FUN_00289d8c(fn_00289d8c_arg0 *param_1)
     if ((*(int *)(temp_v0 + 0x34) != 0) && (*(char *)(temp_v0 + 0x44) != '\0')) {
       temp_v3 = *(float *)(temp_v0 + 0x40) + 2.0f;
       *(float *)(temp_v0 + 0x40) = temp_v3;
-      FUN_004ff364(*(int *)(temp_v0 + 0x34),0);
+      asdAnimGetTrackLastFrame(*(int *)(temp_v0 + 0x34),0);
       if (temp_v3 <= *(float *)(temp_v0 + 0x40)) {
         *(float *)(temp_v0 + 0x40) = *(float *)(temp_v0 + 0x40) - temp_v3;
       }

@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_00272e64(void);
+int calcHeadingRoundedToCardinalDirection(void);
 int FUN_002941b0(void);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002b5cd4(void);
 int FUN_00312ea0(int);
 int mathPositionHeadingDegrees(void);
 int FUN_00384830(void);
 int FUN_003d4ed8(unsigned int);
 int controllerSetDestination(int, int);
-int FUN_003fdb18(int);
+int controllerSetRotationEulerDegrees(int);
 int FUN_003fe86c(int, int, int);
-int FUN_004ff920(int);
+int candidateGetPreferredValue(int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 9 slot(s), 36 byte(s) */
@@ -31,7 +31,7 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } void_stack;
 
-extern int *DAT_005806a4; /* 0x5806a4 */
+extern int *g_lmapView; /* 0x5806a4 */
 extern int DAT_00581280; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
@@ -43,18 +43,18 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00272e64. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: FUN_002941b0. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_00312ea0. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00384830. */
 /* Supplied declaration required: FUN_003d4ed8. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_004ff920. */
+/* Supplied declaration required: candidateGetPreferredValue. */
 extern int slots4FGetActiveValue(int);
 
 
@@ -109,7 +109,7 @@ void FUN_00234b30(void)
         temp_v6 = *(unsigned int *)(temp_v5 + 4);
         temp_v7 = temp_v6 & 0xfffffffc;
         *(unsigned int *)(temp_v5 + 4) = temp_v7;
-        if (*DAT_005806a4 == 3) {
+        if (*g_lmapView == 3) {
           temp_v0 = *(short *)(temp_v4 + 0x12);
           if ((temp_v0 != 0x10) && (temp_v0 != 0x11 && temp_v0 != 0x16)) {
             *(unsigned int *)(temp_v5 + 4) = temp_v7 | 3;
@@ -123,7 +123,7 @@ void FUN_00234b30(void)
         }
         if ((*(char *)(temp_v10 + 0xf40) == '\0') || (*(char *)(temp_v4 + 0xe) != '\0')) {
           temp_v13 = *(int *)(g_lmapScene + 0x1c);
-          FUN_002b5cb4();
+          distSpatial();
           temp_v10 = *(int *)(temp_v4 + 0x3c);
           if (temp_v10 != 0) {
             if (*(char *)(temp_v4 + 0xe) != '\0') {
@@ -145,13 +145,13 @@ void FUN_00234b30(void)
               *(unsigned int *)(temp_v4 + 0x28) = *(unsigned int *)(temp_v10 + 0x28);
             }
           }
-          if (((*(char *)(DAT_00581280 + 0xf40) == '\0') && (*DAT_005806a4 != 3)) &&
+          if (((*(char *)(DAT_00581280 + 0xf40) == '\0') && (*g_lmapView != 3)) &&
              (*(char *)(temp_v4 + 0xe) == '\0')) {
-            temp_v13 = DAT_005806a4[0x14];
+            temp_v13 = g_lmapView[0x14];
             FUN_002941b0();
             if (temp_v13 < 0x42aa0000) {
               temp_v6 = in_fpscr & 0xfffffff;
-              in_fpscr = temp_v6 | ((unsigned int)((float)DAT_005806a4[0x15] <= *(float *)(temp_v4 + 0x20)) <<
+              in_fpscr = temp_v6 | ((unsigned int)((float)g_lmapView[0x15] <= *(float *)(temp_v4 + 0x20)) <<
                                  0x1d);
               if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
                 temp_v14 = (float)temp_v19;
@@ -159,7 +159,7 @@ void FUN_00234b30(void)
                   temp_v14 = (float)((unsigned long long)temp_v19 >> 0x20);
                 }
                 in_fpscr = temp_v6 | ((unsigned int)(temp_v14 <=
-                                          (float)DAT_005806a4[0x15] - *(float *)(temp_v4 + 0x20)) <<
+                                          (float)g_lmapView[0x15] - *(float *)(temp_v4 + 0x20)) <<
                                    0x1d);
                 if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) goto LAB_002352dc;
               }
@@ -179,7 +179,7 @@ void FUN_00234b30(void)
               if (*(char *)(temp_v2 + 0xc) != '\0') {
                 *(unsigned char *)(temp_v2 + 0xd) = 0;
                 temp_v14 = *(float *)(g_lmapScene + 0x1c);
-                FUN_002b5cb4();
+                distSpatial();
                 if (temp_v10 < 3) {
                   if (temp_v23[0] != -1) {
                     if (temp_v23[1] == -1) {
@@ -248,7 +248,7 @@ void FUN_00234b30(void)
             }
           }
           else {
-            temp_v14 = (float)DAT_005806a4[0x14];
+            temp_v14 = (float)g_lmapView[0x14];
             mathPositionHeadingDegrees();
             temp_v10 = 0;
             do {
@@ -257,7 +257,7 @@ void FUN_00234b30(void)
               if (*(char *)(temp_v11 + 0xc) != '\0') {
                 temp_v17 = (float)temp_v18;
                 mathPositionHeadingDegrees();
-                if (DAT_005806a4[0x2c] == -1) {
+                if (g_lmapView[0x2c] == -1) {
                   temp_v17 = (float)((unsigned long long)temp_v18 >> 0x20);
                 }
                 temp_v21 = temp_v14;
@@ -281,22 +281,22 @@ void FUN_00234b30(void)
           }
           controllerSetDestination(temp_v5,temp_v4 + 0x1c);
           temp_v10 = (int)temp_v16;
-          FUN_003fdb18(temp_v5);
+          controllerSetRotationEulerDegrees(temp_v5);
           if (((*(char *)(DAT_00581280 + 0xf40) != '\0') && (*(char *)(temp_v4 + 0xe) != '\0')) &&
              (*(short *)(temp_v4 + 0x10) == 2)) {
             temp_v10 = *(int *)(temp_v4 + 0x1c);
             FUN_00384830();
             temp_v14 = *(float *)(temp_v4 + 0x28);
             if (temp_v10 >= 0x42dc0000) {
-              FUN_00272e64();
+              calcHeadingRoundedToCardinalDirection();
               temp_v14 = temp_v14 + temp_v20;
             }
             else {
-              FUN_00272e64();
+              calcHeadingRoundedToCardinalDirection();
             }
             VectorSignedToFloat((int)temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v10 = (int)temp_v16;
-            FUN_003fdb18(temp_v5);
+            controllerSetRotationEulerDegrees(temp_v5);
           }
           temp_v11 = slots4FGetActiveValue(temp_v5);
           if (temp_v11 != *(int *)(temp_v4 + 0x2c)) {
@@ -304,7 +304,7 @@ void FUN_00234b30(void)
             FUN_003fe86c(temp_v5,*(int *)(temp_v4 + 0x2c),2);
             *(int *)(temp_v4 + 0x30) = (int)temp_v16;
           }
-          FUN_004ff920(temp_v5);
+          candidateGetPreferredValue(temp_v5);
           if ((*(int *)(temp_v4 + 0x2c) == 1) && (temp_v13 < 0x44960000)) {
             temp_v11 = *(int *)(temp_v4 + 0x30);
             if ((((temp_v11 < 0x3f800000) && (temp_v10 >= 0x3f800000)) ||
@@ -337,7 +337,7 @@ void FUN_00234b30(void)
             }
           }
           *(int *)(temp_v4 + 0x30) = temp_v10;
-          if ((*(char *)(DAT_00581280 + 0xf40) == '\0') && (*DAT_005806a4 != 3)) {
+          if ((*(char *)(DAT_00581280 + 0xf40) == '\0') && (*g_lmapView != 3)) {
             if (*(char *)(temp_v4 + 0xd) != '\0') {
               *(unsigned int *)(temp_v5 + 4) = *(unsigned int *)(temp_v5 + 4) & 0xfffffffc;
             }

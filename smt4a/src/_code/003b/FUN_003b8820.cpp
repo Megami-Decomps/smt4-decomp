@@ -4,7 +4,7 @@ extern "C" {
 
 int scrSetResult(unsigned int);
 
-extern unsigned int FUN_00213b5c(void);
+extern unsigned int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: scrSetResult. */
 
 
@@ -16,7 +16,7 @@ unsigned int FUN_003b8820(void)
   unsigned int temp_v1;
   
   temp_v1 = 0xffffffff;
-  temp_v0 = FUN_00213b5c();
+  temp_v0 = gameDataBlocksGetTableFlag();
   switch(temp_v0) {
   case 0:
     temp_v1 = 0;

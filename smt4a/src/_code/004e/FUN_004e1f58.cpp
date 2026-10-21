@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001568f8(int, int);
 
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_003ef9e0(int, int);
+extern int idSetFindSubjectIndex(int, int);
 
 
 void FUN_004e1f58(int *param_1,int param_2,int param_3)
@@ -41,7 +41,7 @@ void FUN_004e1f58(int *param_1,int param_2,int param_3)
         }
         if (((temp_v0 != 0) && ((*(unsigned int *)(temp_v4 + 0x10c) & 2) == 0)) &&
            (FUN_001568f8(temp_v3,(int)*(short *)(temp_v4 + 0x6a)), temp_v3 != 0)) {
-          temp_v1 = FUN_003ef9e0(*param_1,temp_v4);
+          temp_v1 = idSetFindSubjectIndex(*param_1,temp_v4);
           if (temp_v1 < 0) {
             temp_v1 = 0;
           }

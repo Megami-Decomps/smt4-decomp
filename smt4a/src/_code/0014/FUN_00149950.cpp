@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0058918c; /* 0x58918c */
+extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
 
 
 void FUN_00149950(int param_1,int param_2)
@@ -22,8 +22,8 @@ void FUN_00149950(int param_1,int param_2)
   if (temp_v1 < param_1) {
     do {
       puVar3 = (unsigned int *)0x0;
-      if (DAT_0058918c != (romwright_code *)0x0) {
-        puVar3 = (unsigned int *)(*DAT_0058918c)(0x10000,0x100,0,0x1c);
+      if (g_gfxAllocateCallback != (romwright_code *)0x0) {
+        puVar3 = (unsigned int *)(*g_gfxAllocateCallback)(0x10000,0x100,0,0x1c);
       }
       *puVar3 = 0;
       puVar3[1] = 0;
@@ -33,29 +33,29 @@ void FUN_00149950(int param_1,int param_2)
       puVar3[5] = 0;
       puVar3[6] = 0;
       while( 1 ) {
-        temp_v0 = ((*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) & 0x1f) * 4;
+        temp_v0 = ((*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) & 0x1f) * 4;
         puVar4 = *(unsigned int **)(temp_v0 + 0x61a514);
         if (puVar4 == (unsigned int *)0x0) break;
-        if (*puVar4 != (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc))) {
-          if ((*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) < *puVar4) {
-            *(unsigned int *)(param_2 + temp_v1 * 4) = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc));
-            *puVar3 = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc));
-            puVar3[6] = *(unsigned int *)(((*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) & 0x1f) * 4 + 0x61a514);
+        if (*puVar4 != (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc))) {
+          if ((*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) < *puVar4) {
+            *(unsigned int *)(param_2 + temp_v1 * 4) = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc));
+            *puVar3 = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc));
+            puVar3[6] = *(unsigned int *)(((*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) & 0x1f) * 4 + 0x61a514);
             goto LAB_001499f0;
           }
           puVar2 = (unsigned int *)puVar4[6];
           while( 1 ) {
             if (puVar2 == (unsigned int *)0x0) {
               puVar4[6] = (unsigned int)puVar3;
-              *puVar3 = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc));
+              *puVar3 = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc));
               puVar3[6] = 0;
-              *(unsigned int *)(param_2 + temp_v1 * 4) = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc));
+              *(unsigned int *)(param_2 + temp_v1 * 4) = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc));
               goto LAB_00149a60;
             }
-            if (*puVar2 == (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc))) break;
-            if ((*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) < *puVar2) {
-              *(unsigned int *)(param_2 + temp_v1 * 4) = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc));
-              *puVar3 = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc));
+            if (*puVar2 == (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc))) break;
+            if ((*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) < *puVar2) {
+              *(unsigned int *)(param_2 + temp_v1 * 4) = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc));
+              *puVar3 = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc));
               puVar4[6] = (unsigned int)puVar3;
               puVar3[6] = (unsigned int)puVar2;
               goto LAB_00149a60;
@@ -64,16 +64,16 @@ void FUN_00149950(int param_1,int param_2)
             puVar2 = (unsigned int *)puVar2[6];
           }
         }
-        (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) + 1;
+        (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) + 1;
       }
-      *(unsigned int *)(param_2 + temp_v1 * 4) = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc));
-      *puVar3 = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc));
-      temp_v0 = ((*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) & 0x1f) * 4;
+      *(unsigned int *)(param_2 + temp_v1 * 4) = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc));
+      *puVar3 = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc));
+      temp_v0 = ((*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) & 0x1f) * 4;
       puVar3[6] = 0;
 LAB_001499f0:
       *(unsigned int **)(temp_v0 + 0x61a514) = puVar3;
 LAB_00149a60:
-      (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) = (*(unsigned int *)((unsigned char *)&DAT_0058918c + 0xc)) + 1;
+      (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) = (*(unsigned int *)((unsigned char *)&g_gfxAllocateCallback + 0xc)) + 1;
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < param_1);
   }

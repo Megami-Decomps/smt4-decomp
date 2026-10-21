@@ -45,7 +45,7 @@ extern int FUN_002903f0(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdSequenceRequest. */
-extern int FUN_003bb36c(int);
+extern int spriteTableFreeLoaded(int);
 
 
 void FUN_003b92b4(int param_1)
@@ -62,7 +62,7 @@ void FUN_003b92b4(int param_1)
   unsigned char *puStack_2c;
   
   puVar5 = temp_v5;
-  temp_v0 = FUN_003bb36c(param_1 + 0x9c);
+  temp_v0 = spriteTableFreeLoaded(param_1 + 0x9c);
   if (temp_v0 == 0) {
     return;
   }

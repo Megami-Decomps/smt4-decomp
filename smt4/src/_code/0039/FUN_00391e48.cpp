@@ -6,16 +6,16 @@ extern "C" {
 
 int FUN_00126fb8(int);
 int FUN_00233818(unsigned int *);
-int FUN_00233854(unsigned int *);
+int ifTouchRegionClearAll(unsigned int *);
 int FUN_0023392c(...);
-int FUN_002353b4(void);
+int messageBannerBeginClose(void);
 int bgmStopNoForce(int, int);
 int msgWindowReset(void);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002a126c(unsigned char [4], unsigned int);
 int FUN_002b8244(int);
 int ifTouchRegionRemove(void);
-int FUN_002baa40(unsigned int *, int);
+int resultPairInitialize(unsigned int *, int);
 int eventQueueAddUniqueIfValid(int);
 int FUN_002c1658(void);
 int messageClearObjectFlags(void);
@@ -32,11 +32,11 @@ extern int g_aocDisplay; /* 0x433130 */
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_00126fb8. */
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 /* Supplied declaration required: FUN_0023392c. */
-/* Supplied declaration required: FUN_002353b4. */
+/* Supplied declaration required: messageBannerBeginClose. */
 /* Supplied declaration required: bgmStopNoForce. */
 extern int FUN_0026b564(void);
 /* Supplied declaration required: msgWindowReset. */
@@ -46,7 +46,7 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_002a126c. */
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_002c1658. */
@@ -78,7 +78,7 @@ void FUN_00391e48(unsigned int *param_1)
     *param_1 = *param_1 & 0xffffffef;
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffffeff;
     *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
-    FUN_00233854(param_1 + 0xba);
+    ifTouchRegionClearAll(param_1 + 0xba);
     FUN_00233818(param_1 + 0xad);
     *(unsigned char *)(g_aocMain + 0xd50) = 2;
     temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_003920c0);
@@ -100,7 +100,7 @@ void FUN_00391e48(unsigned int *param_1)
     param_1[2] = 0;
   }
   else {
-    temp_v1 = FUN_0019e0c0(param_1[0xd6]);
+    temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v1 == 2) {
       temp_v1 = FUN_002973d8();
       if (temp_v1 == 0) {
@@ -111,7 +111,7 @@ void FUN_00391e48(unsigned int *param_1)
         puVar5[2] = 0;
         puVar5[3] = 0;
         puVar6 = temp_v8;
-        FUN_002baa40(puVar6,0);
+        resultPairInitialize(puVar6,0);
         temp_v3 = *puVar6;
         temp_v0 = puVar6[1];
         puVar5[1] = temp_v0;
@@ -151,7 +151,7 @@ void FUN_00391e48(unsigned int *param_1)
     }
     eventQueueAddUniqueIfValid(0x100016d);
     msgWindowReset();
-    FUN_002353b4();
+    messageBannerBeginClose();
     messageClearObjectFlags();
     ifTouchRegionRemove();
     ifTouchRegionRemove();

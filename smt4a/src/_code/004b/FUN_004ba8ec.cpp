@@ -8,7 +8,7 @@ extern "C" {
 
 extern s32 asdTMTexTableNodeIsLoaded(s32 table, ...);
 extern void asdTMTexTableReleaseNode(s32 table, s32 node);
-extern s32 FUN_004cfe4c(UiTexLoader *loader);
+extern s32 flaggedValueHolderGetTotal(UiTexLoader *loader);
 extern void uiSpriteSetImageKeyframe(UiTexSprite *sprite, s32 a, s32 b);
 extern s32 FUN_00163aa4(UiTexSprite *sprite, f32 time);
 extern void FUN_004cf8dc(void *anim, s32 count);
@@ -26,7 +26,7 @@ void FUN_004ba8ec(UiTexLoader *loader)
     }
 
     if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE) != 0 && sprite->animating != 0) {
-        if (loader->next.keyframe == loader->entries[FUN_004cfe4c(loader)]->frame + 1) {
+        if (loader->next.keyframe == loader->entries[flaggedValueHolderGetTotal(loader)]->frame + 1) {
             loader->pending.node = loader->next.node;
             loader->pending.keyframe = loader->next.keyframe;
             loader->next.node = UI_TEX_NONE;

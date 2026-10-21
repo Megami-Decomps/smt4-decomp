@@ -30,7 +30,7 @@ typedef struct {
 
 /* Supplied declaration required: asdPrimAlloc. */
 /* Supplied declaration required: FUN_0023b9d0. */
-extern unsigned int FUN_002bc11c(int);
+extern unsigned int osVirtToPhysAddress(int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: rt_memcpy. */
 
@@ -80,7 +80,7 @@ void FUN_00346f2c(int param_1)
     asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x30));
     temp_v10 = 0;
-    temp_v1 = FUN_002bc11c(temp_v0);
+    temp_v1 = osVirtToPhysAddress(temp_v0);
     FUN_0023b9d0(temp_v2,&temp_v8,temp_v1,0xb);
   }
   if ((*(unsigned int *)(param_1 + 4) & 2) != 0) {
@@ -88,7 +88,7 @@ void FUN_00346f2c(int param_1)
     asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x34));
     temp_v5 = 1;
-    temp_v1 = FUN_002bc11c(temp_v0);
+    temp_v1 = osVirtToPhysAddress(temp_v0);
     FUN_0023b9d0(temp_v2,&temp_v3,temp_v1,0xf);
   }
   if ((*(unsigned int *)(param_1 + 4) & 0x20) != 0) {
@@ -96,7 +96,7 @@ void FUN_00346f2c(int param_1)
     asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x38));
     temp_v5 = 1;
-    temp_v1 = FUN_002bc11c(temp_v0);
+    temp_v1 = osVirtToPhysAddress(temp_v0);
     FUN_0023b9d0(temp_v2,&temp_v3,temp_v1,0xd);
   }
   if ((*(unsigned int *)(param_1 + 4) & 4) != 0) {
@@ -104,7 +104,7 @@ void FUN_00346f2c(int param_1)
     asdPrimAlloc(temp_v0);
     rt_memcpy(temp_v0,*(unsigned int *)(param_1 + 0x3c));
     temp_v15 = 2;
-    temp_v1 = FUN_002bc11c(temp_v0);
+    temp_v1 = osVirtToPhysAddress(temp_v0);
     FUN_0023b9d0(temp_v2,&temp_v13,temp_v1,7);
   }
   return;

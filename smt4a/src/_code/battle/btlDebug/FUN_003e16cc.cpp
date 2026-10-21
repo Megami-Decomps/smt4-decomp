@@ -29,7 +29,7 @@ typedef struct {
 
 extern unsigned char LAB_00221a94; /* 0x221a94 */
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_00573858; /* 0x573858 */
 extern unsigned int DAT_0057385c; /* 0x57385c */
 extern unsigned int DAT_00573878; /* 0x573878 */
@@ -49,7 +49,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: FUN_003e0cd4. */
 /* Supplied declaration required: FUN_003ed6e8. */
-extern int FUN_003f10c8(int, unsigned short);
+extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_003f26d4. */
 /* Supplied declaration required: FUN_004aa2e0. */
 /* Supplied declaration required: FUN_004cae0c. */
@@ -81,12 +81,12 @@ void FUN_003e16cc(unsigned int *param_1,int param_2)
   int temp_v11;
   int temp_v12;
   
-  if ((param_1[3] == 0) && ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x400) != 0)) {
+  if ((param_1[3] == 0) && ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0)) {
     *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
     FUN_004f9450();
     param_1[3] = param_1[3] | 2;
   }
-  if (((param_1[3] & 2) != 0) && (temp_v3 = FUN_004f8264(DAT_00573808), temp_v3 != 0)) {
+  if (((param_1[3] & 2) != 0) && (temp_v3 = FUN_004f8264(g_btlAux), temp_v3 != 0)) {
     temp_v8 = 0;
     temp_v3 = 4;
     do {
@@ -111,7 +111,7 @@ void FUN_003e16cc(unsigned int *param_1,int param_2)
            (*(unsigned short *)(temp_v4 + 0x60) & 0x800) == 0)) {
           temp_v5 = param_2;
           FUN_001568f8(param_2,(int)*(short *)(temp_v4 + 0x6a));
-          temp_v5 = FUN_003f10c8(param_2,*(unsigned short *)(temp_v5 + 2));
+          temp_v5 = pairedEntryTableContains(param_2,*(unsigned short *)(temp_v5 + 2));
           if (temp_v5 == 0) {
             *(unsigned short *)(temp_v4 + 0x60) = *(unsigned short *)(temp_v4 + 0x60) | 0x800;
             if ((*(unsigned int *)(temp_v4 + 0x50) & 0x10) != 0) {

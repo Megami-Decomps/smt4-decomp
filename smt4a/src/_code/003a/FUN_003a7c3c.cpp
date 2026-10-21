@@ -24,7 +24,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d498c. */
 /* Supplied declaration required: uiQuestSpritesCreate. */
@@ -59,7 +59,7 @@ void FUN_003a7c3c(unsigned int param_1)
   }
   temp_v3 = 0;
   *(unsigned char *)(temp_v0 + 0x93e) = 1;
-  temp_v2 = FUN_002c2c68(temp_v4);
+  temp_v2 = objectApplyIfUnblocked(temp_v4);
   if (0 < temp_v2) {
     do {
       if (*(unsigned short *)(temp_v1 + temp_v3 * 2) == param_1) {
@@ -67,7 +67,7 @@ void FUN_003a7c3c(unsigned int param_1)
         break;
       }
       temp_v3 = temp_v3 + 1;
-      temp_v2 = FUN_002c2c68(temp_v4);
+      temp_v2 = objectApplyIfUnblocked(temp_v4);
     } while (temp_v3 < temp_v2);
   }
   uiQuestSpritesCreate();

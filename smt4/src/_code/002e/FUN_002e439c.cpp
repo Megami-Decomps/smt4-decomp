@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00292dd0(int);
+void battleSelectButtonHelpPreset(int);
 int playSceneSetState(int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,6 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001eb82c(void);
-/* Supplied declaration required: FUN_00292dd0. */
 /* Supplied declaration required: playSceneSetState. */
 extern int objectPartRunUnlessLocked(int);
 
@@ -41,7 +40,7 @@ void FUN_002e439c(int param_1)
   temp_v0 = FUN_001eb82c();
   if (temp_v0 == 0) {
     temp_v0 = objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
-    FUN_00292dd0(temp_v0 == 0);
+    battleSelectButtonHelpPreset(temp_v0 == 0);
   }
   playSceneSetState(param_1,0xe,1);
   return;

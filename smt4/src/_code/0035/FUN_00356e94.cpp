@@ -9,7 +9,7 @@ int memClear(unsigned int *, int);
 extern unsigned int *FUN_001394c8(void);
 /* Supplied declaration required: memClear. */
 extern unsigned int *FUN_00356d98(unsigned int *, unsigned int);
-extern unsigned int FUN_00356e38(unsigned int *, unsigned int);
+extern unsigned int asdGxAppendStateReset(unsigned int *, unsigned int);
 extern unsigned int *FUN_003572e8(unsigned int, unsigned int);
 
 
@@ -46,7 +46,7 @@ unsigned int * FUN_00356e94(void)
   } while (temp_v2 != 0);
   puVar1[0x72] = 0;
   puVar1[0x73] = 0x100e0;
-  temp_v0 = FUN_00356e38(puVar1 + 0x74,1);
+  temp_v0 = asdGxAppendStateReset(puVar1 + 0x74,1);
   puVar1 = (unsigned int *)FUN_003572e8(temp_v0,1);
   *puVar1 = 0;
   puVar1[1] = 0x10062;

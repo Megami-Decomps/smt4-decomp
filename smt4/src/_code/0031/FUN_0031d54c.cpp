@@ -81,7 +81,7 @@ extern int FUN_0026f950(void);
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027d0ec. */
 /* Supplied declaration required: navigationSetArguments. */
-extern int FUN_0027d748(void);
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 /* Supplied declaration required: FUN_0027fa98. */
 /* Supplied declaration required: FUN_0027fc14. */
@@ -217,7 +217,7 @@ void FUN_0031d54c(unsigned int param_1,unsigned int param_2,int param_3)
     }
     FUN_0027d7b0(temp_v1,temp_v3,DAT_0049fd1c);
     if (temp_v1 != -1) {
-      temp_v3 = FUN_0027d748();
+      temp_v3 = dataTableGetRecord23();
       temp_v1 = g_lmapScene;
       temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v3 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
       *(unsigned int *)(g_lmapScene + 0x1c) = temp_v6;

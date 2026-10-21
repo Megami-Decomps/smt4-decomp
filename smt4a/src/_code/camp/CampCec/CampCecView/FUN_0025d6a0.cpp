@@ -21,7 +21,7 @@ int FUN_002e1c94(...);
 int FUN_002e207c(...);
 int FUN_002e2114(void);
 int FUN_002e2184(...);
-int FUN_002e2680(int);
+int campCecSetObjectValue(int);
 int gameDataGetMarkEntry(...);
 int FUN_00359974(int, unsigned int);
 int FUN_0035a0bc(...);
@@ -56,7 +56,7 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e207c. */
 /* Supplied declaration required: FUN_002e2114. */
 /* Supplied declaration required: FUN_002e2184. */
-/* Supplied declaration required: FUN_002e2680. */
+/* Supplied declaration required: campCecSetObjectValue. */
 extern int overlayGetStatusScene(void);
 extern int FUN_0032cfc8(void);
 extern unsigned int overlayGetBuffer1(void);
@@ -141,7 +141,7 @@ unsigned int FUN_0025d6a0(void)
             temp_v1 = (int)*(short *)(*(int *)(temp_v0 + 0x110) + 0x90);
             FUN_003a7a88(temp_v1,1);
             if (temp_v1 != 0) {
-              FUN_002e2680(0);
+              campCecSetObjectValue(0);
               *(unsigned char *)(temp_v0 + 0x134) = 1;
             }
           }

@@ -1,15 +1,7 @@
-#include "common.h"
+#include "shard/W6_W6Match8_StatGrowth.h"
 
 extern "C" {
 
-typedef struct LevelEntry {
-    /* 0x00 */ u16 level;
-    /* 0x02 */ u16 id;
-    /* 0x04 */ u8 kind;
-    /* 0x05 */ u8 rateA;
-    /* 0x06 */ u8 rateB;
-    /* 0x07 */ u8 flags;
-} LevelEntry;
 
 extern u32 dataTableGet(u32 table, u32 index);
 extern u32 dataTableGetCount(u32 table);

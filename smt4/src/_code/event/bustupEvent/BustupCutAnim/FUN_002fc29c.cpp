@@ -26,7 +26,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_002169cc; /* 0x2169cc */
-extern int FUN_002cf954(...); /* 0x2cf954 */
+extern int jobDrawOrderedChildren(...); /* 0x2cf954 */
 extern int bustupCutAnimDestroy(...); /* 0x2f6a78 */
 extern unsigned char LAB_002fc598; /* 0x2fc598 */
 extern unsigned char LAB_002fc5ac; /* 0x2fc5ac */
@@ -97,7 +97,7 @@ unsigned int FUN_002fc29c(void)
     puVar2 = &LAB_002fc598;
     asdProcessCreateSimple(&LAB_002fc598,2,0,0,&LAB_002169cc,bustupCutAnimDestroy,puVar1);
     *puVar1 = (unsigned int)puVar2;
-    taskCreateDraw(&LAB_002fc5ac,0x6f,0,0,FUN_002cf954,0,puVar1,puVar2);
+    taskCreateDraw(&LAB_002fc5ac,0x6f,0,0,jobDrawOrderedChildren,0,puVar1,puVar2);
     puVar1[0x17b] = 0;
     temp_v2 = 0;
     do {

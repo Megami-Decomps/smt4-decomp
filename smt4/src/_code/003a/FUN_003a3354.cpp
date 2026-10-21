@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0029cc44(...);
 
-int FUN_0019e0c0(...);
+int scrRunOpcodesStub(...);
 int shopSelectEntryStart(...);
 int FUN_0022e818(...);
 int dataTable17Sub0GetRecord(...);
@@ -29,7 +29,7 @@ extern unsigned char LAB_003a377c; /* 0x3a377c */
 extern unsigned char LAB_003a3788; /* 0x3a3788 */
 extern unsigned char LAB_003a3798; /* 0x3a3798 */
 
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: shopSelectEntryStart. */
 /* Supplied declaration required: FUN_0022e818. */
 /* Supplied declaration required: dataTable17Sub0GetRecord. */
@@ -78,7 +78,7 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
       temp_v1 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a3798);
       scrScriptProcessStartEntry(param_1[0x5a],temp_v1);
     }
-    FUN_0019e0c0(param_1[0x5a]);
+    scrRunOpcodesStub(param_1[0x5a]);
     *param_1 = *param_1 | 4;
     FUN_0022e818(param_1,0);
     shopSelectEntryStart(param_1,0);
@@ -89,8 +89,8 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
   puVar5 = param_1 + 0x115;
   if (temp_v0 != 1) {
     if (temp_v0 == 3 || temp_v0 == 4) {
-      FUN_0019e0c0(param_1[0x5a]);
-      FUN_0019e0c0(param_1[0x5b]);
+      scrRunOpcodesStub(param_1[0x5a]);
+      scrRunOpcodesStub(param_1[0x5b]);
       FUN_002bf818(puVar5);
       temp_v1 = vec2GetYInt(puVar5);
       temp_v2 = vec2GetXInt(puVar5);
@@ -131,8 +131,8 @@ void FUN_003a3354(unsigned int *param_1,unsigned int param_2,unsigned int param_
     }
   }
   else {
-    FUN_0019e0c0(param_1[0x5a]);
-    FUN_0019e0c0(param_1[0x5b]);
+    scrRunOpcodesStub(param_1[0x5a]);
+    scrRunOpcodesStub(param_1[0x5b]);
     FUN_002bf818(puVar5);
     temp_v1 = vec2GetYInt(puVar5);
     temp_v2 = vec2GetXInt(puVar5);

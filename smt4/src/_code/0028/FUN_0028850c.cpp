@@ -25,8 +25,8 @@ extern unsigned char DAT_00424adc; /* 0x424adc */
 extern unsigned char DAT_00424e55; /* 0x424e55 */
 extern unsigned char DAT_00424f04; /* 0x424f04 */
 
-extern unsigned int FUN_0028e934(unsigned int, unsigned int);
-extern unsigned int FUN_002bce00(unsigned int);
+extern unsigned int aocEntryDataById(unsigned int, unsigned int);
+extern unsigned int aocIndexValueOrDefault(unsigned int);
 extern unsigned int FUN_002bd068(unsigned int);
 /* Supplied declaration required: libc_sprintf. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -55,7 +55,7 @@ void FUN_0028850c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     return;
   }
   if (param_2 == 2) {
-    temp_v0 = FUN_0028e934(param_3,0);
+    temp_v0 = aocEntryDataById(param_3,0);
     libc_sprintf(param_4,&LAB_0028862c,temp_v0);
     return;
   }
@@ -81,7 +81,7 @@ void FUN_0028850c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
     textFormatBuffer(param_4,&LAB_0028862c,puVar2);
     return;
   }
-  temp_v0 = FUN_002bce00(param_3);
+  temp_v0 = aocIndexValueOrDefault(param_3);
   libc_sprintf(param_4,&LAB_0028862c,temp_v0);
   return;
 }

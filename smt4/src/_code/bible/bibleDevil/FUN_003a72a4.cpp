@@ -11,11 +11,11 @@ int FUN_00233240(int, int);
 int FUN_00233344(int, int);
 int FUN_00233404(void);
 int FUN_0029ce60(unsigned int, int, int);
-int FUN_0029e620(unsigned int, int);
+int messageTargetSetValue(unsigned int, int);
 int FUN_0029e648(int, int);
 int FUN_002b8454(int, int, int, int);
 int buttonHelpSetPreset(void);
-int FUN_002b898c(void);
+int buttonHelpGetStatus(void);
 int FUN_003c2b74(int);
 int FUN_003c2c6c(int);
 
@@ -32,7 +32,7 @@ extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: FUN_00233344. */
 /* Supplied declaration required: FUN_00233404. */
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 extern int FUN_00240d5c(int);
 extern int inputIsQuestConfirmPressed(void);
 extern int gameGetNavigationState(void);
@@ -41,12 +41,12 @@ extern int FUN_00293b8c(void);
 /* Supplied declaration required: FUN_0029ce60. */
 extern int gameGetFlagByte12e8(void);
 extern int useCounterIsFinished(void);
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029e648. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: FUN_002b8454. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002b898c. */
+/* Supplied declaration required: buttonHelpGetStatus. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_003c2b74. */
@@ -89,11 +89,11 @@ void FUN_003a72a4(int param_1)
     if (*(char *)(param_1 + 0x5a4) != '\0') {
       return;
     }
-    temp_v1 = FUN_0023360c(param_1 + 0x20);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + temp_v1 * 0x20 + 0x5ac);
     FUN_0029ce60(temp_v6,*(unsigned char *)(param_1 + 0x5a5),0);
     FUN_0029e648(1,0);
-    FUN_0029e620(-temp_v6,0);
+    messageTargetSetValue(-temp_v6,0);
     return;
   }
   temp_v1 = gameGetNavigationState();
@@ -128,7 +128,7 @@ void FUN_003a72a4(int param_1)
         *(unsigned char *)(param_1 + 0x5a7) = 1;
         (*(unsigned int *)((unsigned char *)&DAT_0043d9c8 + 0x4)) = 0xffffffff;
         FUN_0022de74(param_1);
-        FUN_002b898c();
+        buttonHelpGetStatus();
         buttonHelpSetPreset();
       }
     }

@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00153068` (_code @ 0x153070, 0x1b4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
 int asdTMSprDecompress(int, unsigned int, int);
-int asdTextureSetImage(void);
 int asdTextureCreate(void);
 int asdMemFree(int);
 
@@ -15,7 +15,6 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: asdTMSprDecompress. */
-/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdTextureCreate. */
 extern int rt_memcmp(int, char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
@@ -68,7 +67,7 @@ void FUN_00153068(int param_1,int param_2,int param_3)
     if ((temp_v1 & 0x20) != 0) {
       if (param_2 == 0) {
         if (*(int *)(param_2 + 8) != 0) {
-          asdTextureSetImage();
+          asdTextureSetImage(*(AsdTexture**)(param_2 + 8));
           *(unsigned int *)(param_2 + 0x10) = *(unsigned int *)(param_2 + 0x10) | 4;
         }
         return;
@@ -90,7 +89,7 @@ void FUN_00153068(int param_1,int param_2,int param_3)
     }
   }
   if (*(int *)(param_2 + 8) != 0) {
-    asdTextureSetImage();
+    asdTextureSetImage(*(AsdTexture**)(param_2 + 8));
     *(unsigned int *)(param_2 + 0x10) = *(unsigned int *)(param_2 + 0x10) | 4;
   }
   return;

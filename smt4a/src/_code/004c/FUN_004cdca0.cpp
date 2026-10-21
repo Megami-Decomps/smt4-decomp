@@ -6,11 +6,11 @@ extern "C" {
 
 int asdMemFree(int);
 int scrScriptProcessDestroy(int);
-int FUN_0019e2dc(void);
-int FUN_001ad6d8(void);
+int placeWinRelease(void);
+int asdCameraInitAreas(void);
 int ptrListRemoveClearOwner(unsigned int, unsigned int);
 int FUN_001aeafc(unsigned int);
-int FUN_00249c9c(void);
+int mapReleaseTableTexture(void);
 int FUN_002c2358(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
@@ -21,11 +21,11 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0019e2dc. */
-/* Supplied declaration required: FUN_001ad6d8. */
+/* Supplied declaration required: placeWinRelease. */
+/* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001aeafc. */
-/* Supplied declaration required: FUN_00249c9c. */
+/* Supplied declaration required: mapReleaseTableTexture. */
 /* Supplied declaration required: FUN_002c2358. */
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: campButtonHelpRelease. */
@@ -40,8 +40,8 @@ void FUN_004cdca0(int param_1)
   int temp_v1;
   
   FUN_002c2358();
-  FUN_001ad6d8();
-  FUN_00249c9c();
+  asdCameraInitAreas();
+  mapReleaseTableTexture();
   ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(param_1 + 0x20) + 4));
   if (*(int **)(param_1 + 0x20) != (int *)0x0) {
     (**(romwright_code **)(**(int **)(param_1 + 0x20) + 4))(*(int **)(param_1 + 0x20));
@@ -69,7 +69,7 @@ void FUN_004cdca0(int param_1)
   }
   campCommonBgRelease();
   campButtonHelpRelease();
-  FUN_0019e2dc();
+  placeWinRelease();
   if (*(int *)(param_1 + 0x18) != 0) {
     scrScriptProcessDestroy(*(int *)(param_1 + 0x18));
     *(unsigned int *)(param_1 + 0x18) = 0;

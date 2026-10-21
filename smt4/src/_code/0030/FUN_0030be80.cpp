@@ -1,39 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030be80` (_code @ 0x30be80, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler swaps first/second argument retention between R4/R5 and reuses R4 for the second computed value; retail uses R4/R5 in the opposite roles. */
+#include "common.h"
+
+struct LinkedEntryMetadata {
+    u8 unk00[0x26]; // 0x00
+    u16 linkedId;    // 0x26
+};
 
 extern "C" {
+LinkedEntryMetadata* FUN_002498ec(u32 id);
+u16 FUN_00288e68(u16 id);
+s32 FUN_0028d1f4(u32 id);
 
-int FUN_002498ec(void);
-int FUN_00288e68(int);
-
-/* Supplied declaration required: FUN_002498ec. */
-/* Supplied declaration required: FUN_00288e68. */
-extern int FUN_0028d1f4(void);
-
-
-int FUN_0030be80(unsigned short *param_1,unsigned short *param_2)
-
+// Sorts entries by computed linked-record value descending, then linked ID descending.
+s32 FUN_0030be80(const u16* first, const u16* second)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_002498ec();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_002498ec();
-  FUN_00288e68(*param_2);
-  temp_v2 = FUN_0028d1f4();
-  FUN_00288e68(*param_1);
-  temp_v3 = FUN_0028d1f4();
-  temp_v2 = temp_v2 - temp_v3;
-  if (temp_v2 == 0) {
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 0x26) - (unsigned int)*(unsigned short *)(temp_v0 + 0x26);
-  }
-  return temp_v2;
+    LinkedEntryMetadata* a = FUN_002498ec(*first);
+    LinkedEntryMetadata* b = FUN_002498ec(*second);
+    s32 secondValue = FUN_0028d1f4(FUN_00288e68(*second));
+    s32 firstValue = FUN_0028d1f4(FUN_00288e68(*first));
+    s32 order = secondValue - firstValue;
+    if (order == 0) {
+        order = b->linkedId - a->linkedId;
+    }
+    return order;
 }
-
-} /* extern "C" */
+}

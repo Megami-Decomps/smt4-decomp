@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001db608(unsigned char *, int);
+int memClearWords(unsigned char *, int);
 
 extern unsigned char DAT_004e0d88; /* 0x4e0d88 */
 
-/* Supplied declaration required: FUN_001db608. */
+/* Supplied declaration required: memClearWords. */
 
 
 void FUN_00295660(int param_1,int param_2)
@@ -24,7 +24,7 @@ void FUN_00295660(int param_1,int param_2)
   unsigned char *puVar7;
   
   puVar7 = (unsigned char *)(param_1 * 0x60 + 0x4def48);
-  FUN_001db608(puVar7,0x60);
+  memClearWords(puVar7,0x60);
   if (puVar7 == (unsigned char *)0x0) {
     puVar7 = &DAT_004e0d88;
   }

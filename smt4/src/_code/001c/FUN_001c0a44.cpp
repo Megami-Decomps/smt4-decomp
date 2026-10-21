@@ -18,10 +18,10 @@ extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int DAT_00464b80; /* 0x464b80 */
 extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned int DAT_00464b88; /* 0x464b88 */
-extern int DAT_00464b8c; /* 0x464b8c */
-extern int DAT_00464b90; /* 0x464b90 */
-extern int DAT_00464b94; /* 0x464b94 */
-extern int DAT_00464b98; /* 0x464b98 */
+extern int sceneGroup1Root; /* 0x464b8c */
+extern int sceneGroup4Root; /* 0x464b90 */
+extern int sceneGroup2Root; /* 0x464b94 */
+extern int sceneGroup5Root; /* 0x464b98 */
 extern int g_asdLightCount; /* 0x4dad80 */
 extern unsigned char DAT_004dad84; /* 0x4dad84 */
 extern unsigned char DAT_004dad85; /* 0x4dad85 */
@@ -41,21 +41,21 @@ void FUN_001c0a44(int param_1,int param_2)
   int temp_v1;
   int temp_v2;
   
-  temp_v2 = DAT_00464b8c;
+  temp_v2 = sceneGroup1Root;
   if (param_2 != 1) {
     if (param_2 == 2) {
       temp_v0 = 0;
-      temp_v2 = DAT_00464b94;
+      temp_v2 = sceneGroup2Root;
       FUN_002a2dc8(temp_v0);
     }
     else {
-      temp_v2 = DAT_00464b90;
+      temp_v2 = sceneGroup4Root;
       if (param_2 != 4) {
         if (param_2 != 5) {
           return;
         }
         temp_v0 = 1;
-        temp_v2 = DAT_00464b98;
+        temp_v2 = sceneGroup5Root;
         FUN_002a2dc8(temp_v0);
       }
     }
@@ -64,11 +64,11 @@ void FUN_001c0a44(int param_1,int param_2)
     return;
   }
   temp_v2 = *(int *)(param_1 + 0xc);
-  if (DAT_00464b94 == temp_v2) {
+  if (sceneGroup2Root == temp_v2) {
     temp_v1 = 0;
   }
   else {
-    if (DAT_00464b98 != temp_v2) {
+    if (sceneGroup5Root != temp_v2) {
       FUN_002abbe8(temp_v2 + 0x10,param_1);
       if (param_2 >= 3) {
         sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
@@ -85,7 +85,7 @@ void FUN_001c0a44(int param_1,int param_2)
   if (*(int *)(temp_v2 + 0x18) == *(int *)(temp_v2 + 0x1c)) {
     (&DAT_004dad84)[temp_v1 * 0x18] = 0;
     (&DAT_004dad85)[temp_v1 * 0x18] = 0;
-    nw_gfx_SceneNode_AttachChild((&g_asdModelTransformBuilder)[temp_v1],(&DAT_00464b94)[temp_v1]);
+    nw_gfx_SceneNode_AttachChild((&g_asdModelTransformBuilder)[temp_v1],(&sceneGroup2Root)[temp_v1]);
     sceneTraverserVisit((&DAT_00464b7c)[temp_v1],(&g_asdModelTransformBuilder)[temp_v1]);
   }
   if (temp_v1 != 0) {

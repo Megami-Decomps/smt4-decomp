@@ -34,7 +34,7 @@ extern unsigned int DAT_00571194; /* 0x571194 */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
 extern int FUN_0026264c(unsigned short);
-extern int FUN_002626e0(void);
+extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_003e8bb0. */
 extern int valueAtF0IsReady(int);
 /* Supplied declaration required: FUN_004bfcfc. */
@@ -114,7 +114,7 @@ unsigned int FUN_004ea200(int *param_1,int param_2,int param_3,unsigned int para
                 temp_v0 = temp_v2 - 0x400;
               }
               if (((temp_v2 != 0x493 && temp_v0 != 0x94) && (temp_v2 != 0x495 && temp_v2 != 0x496)) &&
-                 ((temp_v0 = FUN_002626e0(), temp_v0 == 0 ||
+                 ((temp_v0 = gameProgressIsAdvanced(), temp_v0 == 0 ||
                   (temp_v0 = valueAtF0IsReady(*param_1), temp_v0 != 0)))) goto LAB_004ea470;
             }
           }

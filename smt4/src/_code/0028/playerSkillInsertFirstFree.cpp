@@ -1,0 +1,27 @@
+#include "shard/GameDataBlocks.h"
+
+struct PlayerSkillSlots {
+    u8 unk00[0x78];
+    u16 skills[8]; // 0x78
+};
+struct PlayerSkillDataBlock {
+    u8 unk00[0x90];
+    PlayerSkillSlots player; // 0x90
+};
+
+extern "C" {
+s32 FUN_0026aa78(void);
+
+// Add a skill to the first empty slot within the player's unlocked capacity.
+void playerSkillInsertFirstFree(u32 skill)
+{
+    PlayerSkillSlots *player = &((PlayerSkillDataBlock *)g_gameDataBlocks.unk04)->player;
+    s32 capacity = FUN_0026aa78();
+    for (s32 index = 0; index < capacity; ++index) {
+        if (player->skills[index] == 0) {
+            player->skills[index] = skill;
+            return;
+        }
+    }
+}
+}

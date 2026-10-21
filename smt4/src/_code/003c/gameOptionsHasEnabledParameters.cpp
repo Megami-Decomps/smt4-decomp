@@ -7,10 +7,10 @@ struct Options {
     /* 0x60c */ s16 second;
     /* 0x60e */ s16 third;
 };
-extern "C" Options *gameGetOptions();
+extern "C" Options *gameGetSupportUnitData();
 /* Reports whether enabled options contain any nonzero parameter. */
 extern "C" s32 gameOptionsHasEnabledParameters()
 {
-    Options *options = gameGetOptions();
+    Options *options = gameGetSupportUnitData();
     return (options->flags & 1) && (options->first != 0 || options->second != 0 || options->third != 0);
 }

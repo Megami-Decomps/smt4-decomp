@@ -1,51 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e4064` (_code @ 0x2e4064, 0x5e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail includes a post-return pool cleanup region and construction-lifetime MOVs absent from explicit constructor-entry calls. Original C++ construction/unwind contract is unresolved. */
+#include "common.h"
+
+struct AllocationPool {
+    u8 unk00[0x10];
+    u32 mask;
+    u8 unk14[4];
+    u32 initialValue;
+    u8 unk1C[4];
+};
+struct PoolBucket;
+struct AllocationPools {
+    u8 unk00[8];
+    AllocationPool* primary;
+    AllocationPool* secondary;
+    AllocationPool* current;
+};
 
 extern "C" {
-
-int FUN_00101e28(unsigned int, unsigned int);
-int asdOperatorNewB(void);
-int FUN_002e4d84(void);
-
-extern int DAT_005c4bf8; /* 0x5c4bf8 */
-extern int DAT_005c4bfc; /* 0x5c4bfc */
-extern int DAT_005c4c00; /* 0x5c4c00 */
-
-extern unsigned int intArrayGetElementPtr(int, int);
-/* Supplied declaration required: FUN_00101e28. */
-/* Supplied declaration required: asdOperatorNewB. */
-/* Supplied declaration required: FUN_002e4d84. */
-
+extern AllocationPools DAT_005c4bf0;
+void* asdOperatorNewB(u32 size);
+AllocationPool* FUN_002e4d84(AllocationPool* pool, const char* name, s32 bits, s32 count);
+PoolBucket* intArrayGetElementPtr(AllocationPool* pool, s32 index);
+void FUN_00101e28(PoolBucket* bucket, u32 value);
 
 void FUN_002e4064(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  if (DAT_005c4c00 == 0) {
-    temp_v0 = 0x20;
-    asdOperatorNewB();
-    FUN_002e4d84();
-    temp_v3 = 0;
-    DAT_005c4bf8 = temp_v0;
-    for (temp_v2 = 0x10; (temp_v2 & 0x3ff) != 0; temp_v2 = temp_v2 << 1) {
-      temp_v1 = intArrayGetElementPtr(DAT_005c4bf8,temp_v3);
-      FUN_00101e28(temp_v1,*(unsigned int *)(DAT_005c4bf8 + 0x18));
-      temp_v3 = temp_v3 + 1;
+    if (DAT_005c4bf0.current == NULL) {
+        DAT_005c4bf0.primary = FUN_002e4d84(static_cast<AllocationPool*>(asdOperatorNewB(sizeof(AllocationPool))), "C", 10, 2);
+        s32 index = 0;
+        for (u32 bit = 0x10; (bit & 0x3f0) != 0; bit <<= 1) {
+            PoolBucket* bucket = intArrayGetElementPtr(DAT_005c4bf0.primary, index);
+            FUN_00101e28(bucket, DAT_005c4bf0.primary->initialValue);
+            ++index;
+        }
+        DAT_005c4bf0.secondary = FUN_002e4d84(static_cast<AllocationPool*>(asdOperatorNewB(sizeof(AllocationPool))), "", 10, 1);
+        DAT_005c4bf0.secondary->mask = 0x3f0;
+        DAT_005c4bf0.current = DAT_005c4bf0.primary;
     }
-    temp_v0 = 0x20;
-    asdOperatorNewB();
-    FUN_002e4d84();
-    DAT_005c4bfc = temp_v0;
-    *(unsigned int *)(temp_v0 + 0x10) = 0x3f0;
-    DAT_005c4c00 = DAT_005c4bf8;
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024eaac(...);
+int uiAnimateStaggeredSlidesAndFades(...);
 int FUN_0026f188(...);
 int FUN_0026f204(...);
 int FUN_0026f784(...);
@@ -34,7 +34,7 @@ struct fn_002e1744_arg0 {
     byte field_0x129; /* +0x129 */
 };
 
-/* Supplied declaration required: FUN_0024eaac. */
+/* Supplied declaration required: uiAnimateStaggeredSlidesAndFades. */
 /* Supplied declaration required: FUN_0026f188. */
 extern unsigned int FUN_0026f1f0(void);
 /* Supplied declaration required: FUN_0026f204. */
@@ -91,7 +91,7 @@ unsigned int FUN_002e1744(fn_002e1744_arg0 *param_1,unsigned int param_2,int par
           }
           temp_v2 = 2;
         }
-        FUN_0024eaac(param_1,1);
+        uiAnimateStaggeredSlidesAndFades(param_1,1);
       }
     }
   }

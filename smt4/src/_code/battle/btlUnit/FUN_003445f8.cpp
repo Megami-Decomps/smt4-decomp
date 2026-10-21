@@ -13,7 +13,7 @@ int FUN_002630e0(...);
 int FUN_003d64dc(...);
 int FUN_003d6b7c(...);
 int FUN_003d710c(...);
-int FUN_003d8834(int, unsigned int, int);
+int btlSetVectorTransitionTarget(int, unsigned int, int);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -52,7 +52,7 @@ extern unsigned int FUN_002c501c(void);
 /* Supplied declaration required: FUN_003d64dc. */
 /* Supplied declaration required: FUN_003d6b7c. */
 /* Supplied declaration required: FUN_003d710c. */
-/* Supplied declaration required: FUN_003d8834. */
+/* Supplied declaration required: btlSetVectorTransitionTarget. */
 
 
 void FUN_003445f8(unsigned int param_1,int param_2)
@@ -179,7 +179,7 @@ LAB_00344904:
         in_s2 = *(float *)(g_btlMain + 0x588);
       }
     }
-    FUN_003d8834(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
+    btlSetVectorTransitionTarget(g_btlMain,*(unsigned int *)(param_2 + 0x28),(int)*(short *)(param_2 + 0x48));
     temp_v11[0] = in_s0;
     temp_v12 = in_s2;
     temp_v4 = FUN_002c501c();

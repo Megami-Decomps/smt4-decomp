@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b0164` (_code @ 0x4b0164, 0x189c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -8,8 +9,7 @@ int FUN_0015f858(...);
 int FUN_001634b4(...);
 int vec2GetXInt(...);
 int efctSetSpeed(...);
-int FUN_001689e8(...);
-int FUN_00184c40(...);
+int pairSetHalves(...);
 int FUN_00185dd4(...);
 int FUN_004b457c(...);
 
@@ -25,7 +25,7 @@ int FUN_0018408c(...);
 int drawSetColorFromRGBA8(...);
 int FUN_001879d0(...);
 int gameGetSlotRecord(...);
-int FUN_003482a4(...);
+int efctCallRoutineWithSpeedOverride(...);
 int FUN_003bb50c(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -75,7 +75,6 @@ extern unsigned int FUN_0015687c(void);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001676b0. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 extern int gameGetPlayerData(void);
@@ -84,16 +83,16 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_0018408c. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_001879d0. */
 extern int markerKindGetColor(int);
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
-/* Supplied declaration required: FUN_003482a4. */
+/* Supplied declaration required: efctCallRoutineWithSpeedOverride. */
 /* Supplied declaration required: FUN_003bb50c. */
-extern int FUN_004813bc(unsigned int);
+extern int gamePackedFlagTest(unsigned int);
 /* Supplied declaration required: FUN_004b457c. */
 extern int FUN_004cc8d8(unsigned short, int);
 extern int FUN_004ccbf0(int);
@@ -300,7 +299,7 @@ LAB_004b0658:
       }
       if (((unsigned int)temp_v0 & (1 << (temp_v16 & 0xff))) != 0) {
         temp_v7 = FUN_001834a4(0x1d,temp_v14 * 2 + 0x11e);
-        FUN_003482a4(*(short *)(temp_v7 + 8) + temp_v5,(int)*(short *)(temp_v7 + 10) + temp_v4 + temp_v13,0x24
+        efctCallRoutineWithSpeedOverride(*(short *)(temp_v7 + 8) + temp_v5,(int)*(short *)(temp_v7 + 10) + temp_v4 + temp_v13,0x24
                     );
         temp_v7 = FUN_001834a4(0x1d,temp_v14 * 2 + 0x11d);
         FUN_001676b0((int)(short)temp_v16,*(short *)(temp_v7 + 8) + temp_v5,
@@ -704,14 +703,14 @@ LAB_004b13b4:
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(2,0xffffffff,temp_v31,(int)*(short *)(temp_v9 + 8));
       temp_v11 = FUN_001834a4(temp_v25,0x42);
-      FUN_001689e8((int)(short)*(unsigned int *)(temp_v5 + 0x43f0),
+      uiDrawItemCategoryIcon((int)(short)*(unsigned int *)(temp_v5 + 0x43f0),
                    (int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v7,
                    (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v13,0x6f,0);
       temp_v11 = FUN_001834a4(temp_v25,0x46);
       FUN_00180310(0,(int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v7,
                    (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v13,1,3,0x6f,
                    &LAB_004b178c,*(unsigned int *)(temp_v5 + 0x4408));
-      temp_v9 = FUN_004813bc(*(unsigned int *)(temp_v5 + 0x43f0));
+      temp_v9 = gamePackedFlagTest(*(unsigned int *)(temp_v5 + 0x43f0));
       if ((temp_v9 == 0) && (*(short *)(temp_v35 + 0x3d32) >= 0xe)) {
         temp_v9 = FUN_001834a4(temp_v25,temp_v15 + 0x4d);
         temp_v5 = *(int *)(temp_v5 + 0x4380) % 0x20;
@@ -754,7 +753,7 @@ LAB_004b13b4:
         temp_v5 = FUN_001834a4(temp_v25,temp_v4 + 0x47);
         temp_v19 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v15 + 0xc) + 2),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_00184c40(temp_v7 + 0x3cd4,(int)(short)(*(short *)(temp_v5 + 8) + (short)temp_v3 + temp_v2),
+        pairSetHalves(temp_v7 + 0x3cd4,(int)(short)(*(short *)(temp_v5 + 8) + (short)temp_v3 + temp_v2),
                      (int)(short)((short)(int)(temp_v19 * ((float)temp_v20 - *(float *)(temp_v7 + 0x3cf8))
                                               ) + (short)temp_v13 + *(short *)(temp_v5 + 10)));
         efctSetSpeed();

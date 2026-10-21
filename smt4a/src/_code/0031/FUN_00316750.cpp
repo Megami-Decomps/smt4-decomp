@@ -2,11 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct AsdCecMessageBox;
+
 extern "C" {
 
 int FUN_0042d5b4(int);
 int FUN_0042dd98(unsigned int, unsigned char [360], int, unsigned int);
-int asdCecMessageBoxOpen(unsigned int, unsigned int, unsigned int);
+s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag);
 int asdCecMessageBoxClose(unsigned int, unsigned int);
 int nn_cec_CTR_Message_Message_sub_object(unsigned char [360]);
 int nn_cec_CTR_Message_NewMessage(unsigned char [360], unsigned int, int, int, int, int, int);
@@ -21,7 +23,6 @@ extern unsigned char g_asdCec; /* 0x5b3f94 */
 extern int wstrlenU16(unsigned int);
 /* Supplied declaration required: FUN_0042d5b4. */
 /* Supplied declaration required: FUN_0042dd98. */
-/* Supplied declaration required: asdCecMessageBoxOpen. */
 /* Supplied declaration required: asdCecMessageBoxClose. */
 /* Supplied declaration required: nn_cec_CTR_Message_Message_sub_object. */
 /* Supplied declaration required: nn_cec_CTR_Message_NewMessage. */
@@ -41,7 +42,9 @@ unsigned int FUN_00316750(unsigned int param_1,unsigned int param_2,unsigned int
   
   nn_cec_CTR_Message_Message_sub_object(temp_v3);
   temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
-  asdCecMessageBoxOpen(temp_v0,*(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)),(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[1]);
+  temp_v0 = asdCecMessageBoxOpen((AsdCecMessageBox*)temp_v0,
+      *(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)),
+      (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[1]);
   if (-1 < (int)temp_v0) {
     nn_cec_CTR_Message_NewMessage
               (temp_v3,*(*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)),0,*(unsigned char *)((*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4)) + 2),

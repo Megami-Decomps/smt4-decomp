@@ -6,7 +6,7 @@ extern "C" {
 extern u8 DAT_0055c68c[];
 extern u8 DAT_0055c770[];
 WindowSize *FUN_001b5acc(WindowSize *size);
-WindowSize *FUN_001b57a8(WindowSize *size, u32 value);
+WindowSize *resultPairInitialize(WindowSize *size, u32 value);
 /* Initializes the window's base state, size and final dispatch table. */
 WindowState *FUN_00475e40(WindowState *window) {
     window->vtable = DAT_0055c68c;
@@ -18,7 +18,7 @@ WindowState *FUN_00475e40(WindowState *window) {
     window->vtable = DAT_0055c770 + 0;
     window->state = 0;
     WindowSize initialSize;
-    window->size = *FUN_001b57a8(&initialSize, 0);
+    window->size = *resultPairInitialize(&initialSize, 0);
     return window;
 }
 }

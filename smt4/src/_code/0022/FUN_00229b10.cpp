@@ -5,7 +5,7 @@
 extern "C" {
 
 int battleSetActionKind(int *);
-int FUN_0027e3f8(int, int, int, int);
+int btlEventSelectTrigger(int, int, int, int);
 int FUN_002ae164(void);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern int g_btlEvent; /* 0x435d48 */
 
 /* Supplied declaration required: battleSetActionKind. */
 extern int FUN_0027e3b8(int);
-/* Supplied declaration required: FUN_0027e3f8. */
+/* Supplied declaration required: btlEventSelectTrigger. */
 /* Supplied declaration required: FUN_002ae164. */
 
 
@@ -36,10 +36,10 @@ void FUN_00229b10(int *param_1,int param_2)
     temp_v3 = (int)*(short *)(*(int *)(param_2 + 0x20) + 0x6e);
     temp_v2 = g_btlEvent;
     if (*(short *)(*(int *)(param_2 + 0x28) + 0x14c) != 0xb) {
-      FUN_0027e3f8(g_btlEvent,3,temp_v3,0);
+      btlEventSelectTrigger(g_btlEvent,3,temp_v3,0);
     }
     else {
-      FUN_0027e3f8(g_btlEvent,7,temp_v3,0);
+      btlEventSelectTrigger(g_btlEvent,7,temp_v3,0);
     }
     if (temp_v2 != 0) {
       *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x18;

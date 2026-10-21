@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013c1ec(...);
+int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
 int FUN_001bbf0c(void);
@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f162e; /* 0x5f162e */
 extern int DAT_005f164c; /* 0x5f164c */
@@ -52,8 +52,8 @@ extern unsigned int DAT_005f16bc; /* 0x5f16bc */
 extern unsigned char DAT_005f185a; /* 0x5f185a */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0013c1ec. */
-extern unsigned int FUN_00145868(void);
+/* Supplied declaration required: soundVolumeSettingSet. */
+extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
@@ -75,7 +75,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: FUN_00352308. */
-extern int FUN_003798f0(void);
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_003b5714. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
@@ -101,7 +101,7 @@ void FUN_003661c8(void)
   unsigned int temp_v9;
   unsigned int temp_v10 [11];
   
-  temp_v0 = FUN_00145868();
+  temp_v0 = soundVolumeSettingGet();
   if (*(int *)(g_lmapScene + 4) < 10) {
     FUN_002dae68();
     temp_v1 = g_lmapScene;
@@ -126,8 +126,8 @@ void FUN_003661c8(void)
         mapIfReleaseSlot3();
         temp_v2 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x68) = 0;
-        temp_v1 = DAT_005806a4;
-        *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(temp_v2 + 0x50);
+        temp_v1 = g_lmapView;
+        *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(temp_v2 + 0x50);
         *(unsigned int *)(temp_v1 + 0xb0) = 0;
         FUN_00303460(0);
         temp_v1 = g_lmapScene;
@@ -141,7 +141,7 @@ void FUN_003661c8(void)
       if (temp_v2 < 0x37) {
         if (temp_v2 == 0x32) {
           DAT_005f185a = 0;
-          *(unsigned int *)(DAT_005806a4 + 0xc) = 2;
+          *(unsigned int *)(g_lmapView + 0xc) = 2;
           *(unsigned int *)(temp_v1 + 0x54) = 5;
           *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
           *(float *)(temp_v1 + 0xb4) = *(float *)(temp_v1 + 0xa4) - *(float *)(temp_v1 + 0x20);
@@ -289,7 +289,7 @@ void FUN_003661c8(void)
       *(unsigned int *)(temp_v1 + 0x30) = temp_v4;
       *(unsigned int *)(temp_v1 + 0x50) = DAT_005f16bc;
       FUN_00303460(0xc);
-      *(unsigned int *)(DAT_005806a4 + 0xb0) = 0xfffffffd;
+      *(unsigned int *)(g_lmapView + 0xb0) = 0xfffffffd;
       sysPlaySe(0xdd);
       FUN_00233e10(1,DAT_005f16ac);
       FUN_001bc124();
@@ -318,7 +318,7 @@ void FUN_003661c8(void)
       temp_v1 = FUN_004d0584();
       if (temp_v1 != 0) {
         FUN_003b5714(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
-        temp_v2 = FUN_003798f0();
+        temp_v2 = dataTableGetRecord23();
         temp_v1 = g_lmapScene;
         if (DAT_005f164c != 0) {
           temp_v5 = *(float *)(g_lmapScene + 0x50) * temp_v6;
@@ -351,8 +351,8 @@ void FUN_003661c8(void)
       else {
         temp_v1 = padButtonIsPressed(5);
         if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
-          temp_v1 = DAT_005806a4;
-          *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+          temp_v1 = g_lmapView;
+          *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
           *(unsigned int *)(temp_v1 + 0xb0) = 0;
           FUN_00303460(0);
           temp_v1 = g_lmapScene;
@@ -368,7 +368,7 @@ void FUN_003661c8(void)
       break;
     case 10:
       DAT_005f185a = 0;
-      *(unsigned int *)(DAT_005806a4 + 0xc) = 1;
+      *(unsigned int *)(g_lmapView + 0xc) = 1;
       *(unsigned int *)(temp_v1 + 0x54) = 5;
       *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
       temp_v6 = *(float *)(temp_v1 + 0xa0) - *(float *)(temp_v1 + 0x1c);
@@ -420,9 +420,9 @@ LAB_00366704:
       FUN_001bc124();
       FUN_001bbf0c();
       FUN_0014af98();
-      FUN_0013c1ec();
+      soundVolumeSettingSet();
       FUN_003d2150(0x10002e5);
-      FUN_0013c1ec(temp_v0);
+      soundVolumeSettingSet(temp_v0);
       temp_v1 = g_lmapScene;
       *(unsigned int *)(g_lmapScene + 0x68) = 0x41700000;
       *(float *)(temp_v1 + 0x20) = *(float *)(temp_v1 + 0x20) + 15.0f;
@@ -493,11 +493,11 @@ LAB_00366704:
       *(int *)(g_lmapScene + 8) = temp_v1;
       if (temp_v1 == 1) {
         mapIfReleaseSlot3();
-        temp_v1 = DAT_005806a4;
-        *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+        temp_v1 = g_lmapView;
+        *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
         *(unsigned int *)(temp_v1 + 0xb0) = 0;
         FUN_00303460(0);
-        *(unsigned char *)(DAT_005806a4 + 0xa8) = 1;
+        *(unsigned char *)(g_lmapView + 0xa8) = 1;
       }
       if (*(int *)(g_lmapScene + 8) == 3) {
         FUN_0033abd4();
@@ -533,9 +533,9 @@ LAB_00366a74:
         FUN_001bc124();
         FUN_001bbf0c();
         FUN_0014af98();
-        FUN_0013c1ec();
+        soundVolumeSettingSet();
         FUN_003d2150(0x10002e6);
-        FUN_0013c1ec(temp_v0);
+        soundVolumeSettingSet(temp_v0);
       }
       if (*(int *)(g_lmapScene + 8) != 6) break;
       if (*(int *)(g_lmapScene + 0xbc) >= 0x24) {

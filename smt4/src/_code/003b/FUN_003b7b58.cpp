@@ -8,7 +8,7 @@ int FUN_0028c040(void);
 int buttonHelpCreate(void);
 int statusDownSwitchTab(...);
 int FUN_002942c4(...);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int gameGlobalsSetSelected(...);
 int FUN_0029e874(...);
 int asdTMTexTableLoadEntryAsync(int, int);
@@ -18,8 +18,8 @@ int FUN_002bee58(...);
 int paramsInit(...);
 int memClear(int, int);
 int FUN_002eb76c(...);
-int FUN_0033c5bc(int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int mapIfRequestResource(int);
+int drawParameterBlockClear(int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -38,7 +38,7 @@ extern unsigned char DAT_00405a4c; /* 0x405a4c */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: statusDownSwitchTab. */
 /* Supplied declaration required: FUN_002942c4. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
@@ -50,8 +50,8 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: FUN_002eb76c. */
-/* Supplied declaration required: FUN_0033c5bc. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: mapIfRequestResource. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_003b7b58(int param_1)
@@ -77,15 +77,15 @@ void FUN_003b7b58(int param_1)
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 3);
-  FUN_0033c5bc(0x14);
-  FUN_0033c5bc(0x25);
+  mapIfRequestResource(0x14);
+  mapIfRequestResource(0x25);
   *(unsigned int *)(param_1 + 0x3564) = 0;
   *(unsigned int *)(param_1 + 0x356c) = 0;
   *(unsigned int *)(param_1 + 0x3570) = 0;
   *(unsigned int *)(param_1 + 0x3568) = 0;
-  FUN_00297468("battle/Result.bf",(unsigned int *)(param_1 + 0x3564),0);
-  FUN_00297468("battle/ResultMsg.mbm",(unsigned int *)(param_1 + 0x356c),0);
-  FUN_00297468("battle/DevilLvUp.bf",(unsigned int *)(param_1 + 0x3570),0);
+  asdLoadFileAsyncSimple("battle/Result.bf",(unsigned int *)(param_1 + 0x3564),0);
+  asdLoadFileAsyncSimple("battle/ResultMsg.mbm",(unsigned int *)(param_1 + 0x356c),0);
+  asdLoadFileAsyncSimple("battle/DevilLvUp.bf",(unsigned int *)(param_1 + 0x3570),0);
   memClear(param_1 + 0x35b4,100);
   *(unsigned int *)(param_1 + 0x3618) = 0;
   *(unsigned int *)(param_1 + 0x361c) = 0;
@@ -117,7 +117,7 @@ void FUN_003b7b58(int param_1)
   *(unsigned char *)(param_1 + 0xd640) = 0;
   *(unsigned char *)(param_1 + 0xd641) = 0;
   *(unsigned char *)(param_1 + 0xd642) = 0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
+  drawParameterBlockClear(param_1);
   paramsInit(param_1,&DAT_004058d4,0x48,&DAT_0040591c,0xa8,&DAT_004059c4,0x6c,&DAT_00405a30,0x1c,
                &DAT_00405a4c,0x32c);
   FUN_002bd954(param_1 + 0x20,0x28,0,param_1,1);

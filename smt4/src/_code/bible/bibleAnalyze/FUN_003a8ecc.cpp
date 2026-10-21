@@ -19,9 +19,9 @@ typedef struct {
 extern unsigned int DAT_0043d998; /* 0x43d998 */
 
 extern int FUN_0022caa4(unsigned char *, unsigned int);
-extern int FUN_00231184(void);
+extern int buttonHelpIsNotActive(void);
 /* Supplied declaration required: pointConvertToFloat. */
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
@@ -46,13 +46,13 @@ void FUN_003a8ecc(int param_1)
   temp_v0 = vec2GetYInt(temp_v2);
   temp_v1 = vec2GetXInt(temp_v2);
   pointConvertToFloat(param_1 + 200,temp_v1,temp_v0);
-  if ((*(char *)(param_1 + 0x186) != '\0') && (temp_v2 = FUN_00231184(), temp_v2 != 0)) {
+  if ((*(char *)(param_1 + 0x186) != '\0') && (temp_v2 = buttonHelpIsNotActive(), temp_v2 != 0)) {
     FUN_002a0cc8(0);
     *(unsigned int *)(param_1 + 0x14) = 2;
     *(unsigned int *)(param_1 + 0x18) = 0;
     pointConvertToFloat(param_1 + 200,0,0);
     if (*(char *)(param_1 + 0x5a4) == '\0') {
-      temp_v2 = FUN_0023360c(param_1 + 0x20);
+      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
       FUN_0029da34(0,1,*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x5ac));
       return;
     }

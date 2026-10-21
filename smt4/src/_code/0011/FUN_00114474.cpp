@@ -13,14 +13,14 @@ int FUN_002b8244(...);
 int FUN_002b827c(...);
 int FUN_002b8454(...);
 int buttonHelpSetPreset(...);
-int FUN_002b898c(void);
-int FUN_002b89e4(...);
+int buttonHelpGetStatus(void);
+int titleOverlaySetModeAnimation(...);
 int msgBoxFlagsClearBit7(...);
-int FUN_002bc02c(void);
+int workCommandRefreshActiveSlots(void);
 int mathInterpolateTimed(...);
 
 int gameDataCounterSpend(int);
-int FUN_002b8b4c(...);
+void uiLayoutSelectionSpritePair(void* context);
 int ifTouchRegionRemove(void);
 int pairSetFirstResetSecond(...);
 int msgBoxFlagsClear(...);
@@ -65,12 +65,11 @@ extern unsigned short FUN_002b8584(unsigned int, unsigned int);
 extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
 extern int lmapMainIsRunning(void);
-extern int FUN_002b8804(void);
+extern int aocJobIsValid(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002b898c. */
+/* Supplied declaration required: buttonHelpGetStatus. */
 extern int FUN_002b89a4(unsigned int);
-/* Supplied declaration required: FUN_002b89e4. */
-/* Supplied declaration required: FUN_002b8b4c. */
+/* Supplied declaration required: titleOverlaySetModeAnimation. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int padIsButtonRepeat(unsigned int);
 extern int FUN_002b8d54(void);
@@ -83,8 +82,8 @@ extern int msgBoxFlagsTestAny(unsigned int, unsigned int);
 /* Supplied declaration required: eventQueueAddUnique. */
 /* Supplied declaration required: FUN_002b8ee0. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_002bc02c. */
-extern int FUN_002bc088(void);
+/* Supplied declaration required: workCommandRefreshActiveSlots. */
+extern int querySlotHasHandle(void);
 /* Supplied declaration required: FUN_002bf818. */
 extern int jobGetWork(void);
 extern int FUN_002c15fc(unsigned int);
@@ -415,7 +414,7 @@ LAB_00114d48:
                       temp_v12 = *(char *)(temp_v3 + 0x31) == '\0';
                       if (!temp_v12) {
                         *(int *)(temp_v3 + 0x18) = temp_v9 - 1;
-                        FUN_002b8b4c(temp_v3);
+                        uiLayoutSelectionSpritePair(reinterpret_cast<void*>(temp_v3));
                       }
                       *(unsigned char *)(temp_v3 + 0x30) = 0;
                       *(unsigned char *)(temp_v3 + 0x31) = 0;
@@ -510,7 +509,7 @@ LAB_00114ea4:
 LAB_00114ee0:
         if (!temp_v11) {
           if (*(int *)(temp_v3 + 0x18) != temp_v6) {
-            FUN_002b8b4c(temp_v3);
+            uiLayoutSelectionSpritePair(reinterpret_cast<void*>(temp_v3));
           }
           break;
         }
@@ -523,9 +522,9 @@ LAB_00114ee0:
         temp_v14 = *(unsigned int *)(temp_v3 + 0x18);
       }
       *(unsigned int *)(temp_v3 + 0x1c) = temp_v14;
-      temp_v6 = FUN_002bc088();
+      temp_v6 = querySlotHasHandle();
       if (temp_v6 != 0) {
-        FUN_002bc02c();
+        workCommandRefreshActiveSlots();
       }
       temp_v5 = *(unsigned int *)(temp_v3 + 0xc);
       if ((temp_v5 & 8) != 0) {
@@ -533,14 +532,14 @@ LAB_00114ee0:
           temp_v5 = (unsigned int)*(unsigned char *)(temp_v3 + 8);
         }
         if (temp_v3 != 0 && temp_v5 != 0) {
-          FUN_002b89e4(temp_v3,*(unsigned char *)(temp_v3 + 9));
+          titleOverlaySetModeAnimation(temp_v3,*(unsigned char *)(temp_v3 + 9));
           *(unsigned char *)(temp_v3 + 8) = 3;
           *(unsigned char *)(temp_v3 + 0x35) = 0;
         }
         temp_v6 = DAT_0043e18c;
         if ((*(char *)(DAT_0043e18c + 8) != '\x01' && DAT_0043e18c != 0) &&
             *(char *)(DAT_0043e18c + 8) != '\0') {
-          FUN_002b89e4(DAT_0043e18c,*(unsigned char *)(DAT_0043e18c + 9));
+          titleOverlaySetModeAnimation(DAT_0043e18c,*(unsigned char *)(DAT_0043e18c + 9));
           *(unsigned char *)(temp_v6 + 8) = 3;
           *(unsigned char *)(temp_v6 + 0x35) = 0;
         }
@@ -620,7 +619,7 @@ LAB_001151a8:
         if (*(char *)(temp_v3 + 0x5f) != '\0') {
           *(unsigned char *)(temp_v3 + 0x5f) = 0;
           *(unsigned char *)(DAT_0043e18c + 0x5f) = 0;
-          temp_v1 = FUN_002b898c();
+          temp_v1 = buttonHelpGetStatus();
           *(unsigned char *)(temp_v3 + 0xa12) = temp_v1;
           if (*(char *)(temp_v3 + 9) == '\v') {
             eventQueueAddUniqueIfValid(0x1000183);
@@ -657,7 +656,7 @@ LAB_001151e4:
                     }
                   }
                   else {
-                    temp_v6 = FUN_002b8804();
+                    temp_v6 = aocJobIsValid();
                     if ((((temp_v6 == 0) && (temp_v6 = lmapMainIsRunning(), temp_v6 == 0)) &&
                         ((temp_v6 = mapMainIsBusy(), temp_v6 == 0 &&
                          (temp_v6 = QuestCenterMode_IsBusy(), temp_v6 == 0)))) ||
@@ -936,7 +935,7 @@ LAB_00115134:
       if (temp_v3 == 0) break;
       if (*(char *)(temp_v3 + 8) == '\0') goto LAB_00115ab4;
 LAB_001158ec:
-      FUN_002b89e4(temp_v3,*(unsigned char *)(temp_v3 + 9));
+      titleOverlaySetModeAnimation(temp_v3,*(unsigned char *)(temp_v3 + 9));
       *(unsigned char *)(temp_v3 + 8) = 3;
       *(unsigned char *)(temp_v3 + 0x35) = 0;
       goto LAB_001159f0;
@@ -984,7 +983,7 @@ LAB_001159f0:
       }
     }
     else {
-      temp_v6 = FUN_002b898c();
+      temp_v6 = buttonHelpGetStatus();
       if ((temp_v6 != 0x51) && (g_messageMain != '\0')) {
         temp_v6 = 7;
         FUN_002c1658(7,2);
@@ -1030,7 +1029,7 @@ LAB_00115ad8:
       DAT_0049382a = '\0';
     }
     else {
-      temp_v6 = FUN_002bc088();
+      temp_v6 = querySlotHasHandle();
       if (temp_v6 == 0) {
         if (DAT_0049382a == '\0') {
           temp_v6 = 0x69;

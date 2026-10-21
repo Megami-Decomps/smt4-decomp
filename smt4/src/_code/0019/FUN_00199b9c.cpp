@@ -4,15 +4,15 @@
 
 extern "C" {
 
-int FUN_001b03ec(...);
+int partyCaptureEligibleSkills(...);
 int FUN_001e0698(void);
 int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
-int FUN_0028da40(...);
+void partyStatusRefreshSlot(void*, int, int);
 int FUN_0028e9ec(...);
 int FUN_002942c4(...);
 int FUN_00295eb0(...);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_0029f848(...);
 int uiSpriteSetImageKeyframe(int, unsigned int, int);
 int FUN_002b7bca(...);
@@ -20,7 +20,7 @@ int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int drawParameterBlockClear(int);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -40,11 +40,11 @@ extern unsigned char DAT_00400c40; /* 0x400c40 */
 extern unsigned char DAT_00400d24; /* 0x400d24 */
 extern unsigned char DAT_00400d84; /* 0x400d84 */
 
-/* Supplied declaration required: FUN_001b03ec. */
+/* Supplied declaration required: partyCaptureEligibleSkills. */
 /* Supplied declaration required: FUN_001e0698. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_0028da40. */
+/* Supplied declaration required: partyStatusRefreshSlot. */
 extern int btlActorIsDown(unsigned int);
 extern int FUN_0028e9a0(unsigned int);
 extern int flagValueIsPositive(unsigned int);
@@ -52,20 +52,20 @@ extern int flagValueIsPositive(unsigned int);
 extern int flagBitIsSet(int);
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_00295eb0. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_0029f848. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_002b6a54(int, unsigned short);
 extern int FUN_002b6ad0(void);
-extern int gameGetOptions(void);
+extern int gameGetSupportUnitData(void);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_00199b9c(int param_1,unsigned int param_2)
@@ -97,7 +97,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   *(unsigned int *)(param_1 + 0x3894) = 0;
   *(unsigned int *)(param_1 + 0x3898) = 0;
   FUN_001e0698();
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
+  drawParameterBlockClear(param_1);
   paramsInit(param_1,&DAT_00400b98,0xa8,&DAT_00400c40,0xe4,&DAT_00400d24,0x60,0,0,&DAT_00400d84,
                0x4d0);
   temp_v7 = (unsigned long long)temp_v6;
@@ -215,18 +215,18 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   } while (temp_v1 < 3);
   temp_v1 = FUN_002b6ad0();
   if (temp_v1 != 0) {
-    temp_v1 = gameGetOptions();
+    temp_v1 = gameGetSupportUnitData();
     temp_v0 = *(unsigned short *)(temp_v1 + 0x606);
-    temp_v1 = gameGetOptions();
+    temp_v1 = gameGetSupportUnitData();
     temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 0x604),temp_v0);
     FUN_002942c4((int)(short)(*(short *)(temp_v1 + 0x5a) + 1),0);
   }
-  FUN_0028da40(param_1,0,1);
-  FUN_0028da40(param_1,1);
-  FUN_0028da40(param_1,2,1);
-  FUN_0028da40(param_1,3,1);
-  FUN_0028da40(param_1,4,1);
-  FUN_001b03ec(param_1);
+  partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),0,1);
+  partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),1,1);
+  partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),2,1);
+  partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),3,1);
+  partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),4,1);
+  partyCaptureEligibleSkills(param_1);
   temp_v1 = 0;
   do {
     temp_v5 = param_1 + temp_v1 * 2;
@@ -271,7 +271,7 @@ void FUN_00199b9c(int param_1,unsigned int param_2)
   FUN_0029f848(param_1 + 0x3344,temp_v5,6,1,0,1);
   FUN_0028d9b0();
   buttonHelpCreate();
-  FUN_00297468(0x19a4e0,param_1 + 0x59bc,0);
+  asdLoadFileAsyncSimple(0x19a4e0,param_1 + 0x59bc,0);
   return;
 }
 

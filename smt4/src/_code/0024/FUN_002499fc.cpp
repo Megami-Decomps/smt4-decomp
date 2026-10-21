@@ -1,39 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002499fc` (_code @ 0x2499fc, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_002499fc(int param_1,unsigned int *param_2,unsigned int *param_3)
-
+// Selects a four-entry range beginning at 0, 55, 59, or 63.
+extern "C" void FUN_002499fc(s32 kind, u32* first, u32* count)
 {
-  unsigned int temp_v0;
-  
-  if (param_1 != 1) {
-    if (param_1 == 2) {
-      *param_2 = 0x37;
-      *param_3 = 4;
-      return;
+    switch (kind) {
+    case 1:
+        *first = 0;
+        *count = 4;
+        break;
+    case 2:
+        *first = 55;
+        *count = 4;
+        break;
+    case 3:
+        *first = 59;
+        *count = 4;
+        break;
+    case 4:
+        *first = 63;
+        *count = 4;
+        break;
+    default:
+        *first = 0;
+        *count = 4;
+        break;
     }
-    if (param_1 == 3) {
-      temp_v0 = 0x3b;
-    }
-    else {
-      if (param_1 != 4) {
-        *param_2 = 0;
-        *param_3 = 4;
-        return;
-      }
-      temp_v0 = 0x3f;
-    }
-    *param_2 = temp_v0;
-  }
-  else {
-    *param_2 = 0;
-  }
-  *param_3 = 4;
-  return;
 }
-
-} /* extern "C" */

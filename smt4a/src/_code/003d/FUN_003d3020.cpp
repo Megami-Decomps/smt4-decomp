@@ -62,7 +62,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-extern unsigned int FUN_00153f64(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001640cc. */
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, int, unsigned int);
@@ -171,7 +171,7 @@ void FUN_003d3020(int param_1,int param_2,int param_3)
   temp_v20 = 0.003921569f;
   temp_v24 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v24 = temp_v24 * 0.003921569f;
-  temp_v2 = FUN_00153f64(0xc,3);
+  temp_v2 = asdTMTexTableGetHeaderValue(0xc,3);
   FUN_0016c4b8(g_renderCtx,temp_v2);
   VectorSignedToFloat(0x100 - param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v13 = temp_v25[2];
@@ -181,7 +181,7 @@ void FUN_003d3020(int param_1,int param_2,int param_3)
   temp_v21 = temp_v19;
   temp_v22 = temp_v19;
   temp_v23 = temp_v19;
-  temp_v1 = FUN_00153f64(0xc,2);
+  temp_v1 = asdTMTexTableGetHeaderValue(0xc,2);
   FUN_0016c4b8(g_renderCtx,temp_v1);
   temp_v25[0] = -42.0f;
   temp_v25[1] = -42.0f;

@@ -7,7 +7,7 @@ extern void gameGetPlayerData(void);
 extern s32 scrGetCommandFrame(void);
 extern void resultCreate(s32 value);
 extern void addStepCostTotal(u32 scene);
-extern s32 FUN_00162880(void);
+extern s32 engineCleanupIsDone(void);
 extern void FUN_003315c4(void);
 
 /* Script command: starts the scene on the first call, then reports whether it is still running. */
@@ -21,7 +21,7 @@ u8 scrCommRunScene2(s32 argIndex)
         resultCreate(3);
         addStepCostTotal(scene);
     }
-    running = FUN_00162880();
+    running = engineCleanupIsDone();
     if (running != 0) {
         FUN_003315c4();
     }

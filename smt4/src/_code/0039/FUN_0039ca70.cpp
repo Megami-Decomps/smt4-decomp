@@ -19,7 +19,7 @@ struct fn_0039ca70_arg0 {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-extern int FUN_00231184(void);
+extern int buttonHelpIsNotActive(void);
 /* Supplied declaration required: commonBgReset. */
 /* Supplied declaration required: FUN_00275f00. */
 /* Supplied declaration required: FUN_00289880. */
@@ -37,7 +37,7 @@ void FUN_0039ca70(fn_0039ca70_arg0 *param_1)
   temp_v0 = 0;
   if (temp_v1 != 0) {
     if (temp_v1 == 1) {
-      temp_v0 = FUN_00231184();
+      temp_v0 = buttonHelpIsNotActive();
       if (temp_v0 != 0) {
         param_1->field_0x8 = 2;
       }

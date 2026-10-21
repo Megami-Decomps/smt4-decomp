@@ -34,7 +34,7 @@ extern int FUN_001ba3d0(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: aocRecordLookup83. */
 extern int FUN_00481100(unsigned int);
-extern unsigned int FUN_0049c848(unsigned int, unsigned int, unsigned int);
+extern unsigned int resolveWeightedItemChoice(unsigned int, unsigned int, unsigned int, unsigned int);
 extern int FUN_0049cab8(unsigned int);
 extern int FUN_0049cc10(unsigned int *);
 /* Supplied declaration required: FUN_0049cd18. */
@@ -86,7 +86,7 @@ void FUN_0049a5b4(int param_1)
       if (temp_v7 < temp_v3) {
         do {
           aocRecordLookup83(temp_v8);
-          temp_v4 = FUN_0049c848(temp_v8,0xffff,0xffff);
+          temp_v4 = resolveWeightedItemChoice(temp_v8,0xffff,0xffff,1);
           if (temp_v4 != 0) {
             temp_v1 = temp_v8;
             temp_v2 = (unsigned short)temp_v4;

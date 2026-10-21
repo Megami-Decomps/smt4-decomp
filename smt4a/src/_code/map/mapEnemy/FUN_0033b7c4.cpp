@@ -8,12 +8,12 @@ int textFormatBuffer(unsigned char *, unsigned char *, unsigned int, unsigned in
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_0020eb44(char *, int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_0033abb4(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00376fa4(unsigned int);
 int sequenceRequestDefer(int, unsigned int);
-int FUN_003b5050(void);
+int sysClearCachedFlag(void);
 int FUN_003d4ed8(int);
 int FUN_00408184(int, int);
 int VectorSignedToFloat(...);
@@ -56,13 +56,13 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_0020eb44. */
-extern unsigned int FUN_00261424(void);
-/* Supplied declaration required: FUN_002b5cb4. */
+extern unsigned int gameDataGetTableValue(void);
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_0033abb4. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00376fa4. */
 /* Supplied declaration required: sequenceRequestDefer. */
-/* Supplied declaration required: FUN_003b5050. */
+/* Supplied declaration required: sysClearCachedFlag. */
 extern int FUN_003d21dc(void);
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int gameDataFlagTestBit(unsigned int);
@@ -131,7 +131,7 @@ unsigned int FUN_0033b7c4(void)
             }
           }
           else {
-            FUN_003b5050();
+            sysClearCachedFlag();
           }
           FUN_00376fa4(*(unsigned int *)(temp_v4 + 0xa4));
           if (0 < *(int *)(temp_v4 + 0x90)) {
@@ -154,7 +154,7 @@ unsigned int FUN_0033b7c4(void)
             ((*(int *)(temp_v6 + 0xb8) != 3 || (*(int *)(temp_v6 + 0xbc) >= 0x14)))) &&
            (*(int *)(temp_v6 + 100) != 6)) {
           temp_v8 = *(int *)(g_lmapScene + 0x1c);
-          FUN_002b5cb4();
+          distSpatial();
           if (temp_v8 >= 0x42700000) {
             temp_v8 = *(int *)(temp_v6 + 0x1b0);
             temp_v7 = temp_v8 == 6 || temp_v8 == 0x10;
@@ -165,7 +165,7 @@ unsigned int FUN_0033b7c4(void)
               FUN_001bc124();
               FUN_001bbf0c();
               temp_v8 = *(int *)(g_lmapScene + 0x1c);
-              FUN_002b5cb4();
+              distSpatial();
               if (temp_v8 < 0x42700000) goto LAB_0033baac;
             }
             *(unsigned short *)(temp_v6 + 0x1aa) = 0;
@@ -227,7 +227,7 @@ LAB_0033baac:
                 temp_v8 = FUN_003d21dc();
                 temp_v13 = (int)temp_v0;
                 if (temp_v8 != 0) {
-                  temp_v5 = FUN_00261424();
+                  temp_v5 = gameDataGetTableValue();
                   temp_v9 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v10 = (float)VectorSignedToFloat((int)*(short *)(temp_v6 + 0x1a8),
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);

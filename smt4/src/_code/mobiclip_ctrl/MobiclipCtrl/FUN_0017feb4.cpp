@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdMemFree(unsigned int);
-int FUN_0034e9b8(void);
+int mobiclipAudioDeviceFinalize(void);
 int FUN_00351b44(void);
 int videoResetFilterState(void);
 int videoResetSecondaryFilterState(void);
@@ -33,7 +33,7 @@ extern unsigned int DAT_004c39e0; /* 0x4c39e0 */
 extern unsigned int DAT_004c3a10; /* 0x4c3a10 */
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0034e9b8. */
+/* Supplied declaration required: mobiclipAudioDeviceFinalize. */
 /* Supplied declaration required: FUN_00351b44. */
 /* Supplied declaration required: videoResetFilterState. */
 /* Supplied declaration required: videoResetSecondaryFilterState. */
@@ -50,7 +50,7 @@ void FUN_0017feb4(void)
 /* irregular: 9 native warning(s); review required */
   unsigned int temp_v0;
   
-  FUN_0034e9b8();
+  mobiclipAudioDeviceFinalize();
   FUN_00351b44();
   videoResetAuxFilterState();
   videoResetSecondaryFilterState();

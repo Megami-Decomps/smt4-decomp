@@ -8,7 +8,7 @@ int FUN_001695a0(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_0019de98(int, unsigned int);
-int FUN_0019e2dc(void);
+int placeWinRelease(void);
 int messageSetMode(int);
 int FUN_0019f548(void);
 int FUN_001a6500(int);
@@ -29,7 +29,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_0019e2dc. */
+/* Supplied declaration required: placeWinRelease. */
 /* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_0019f548. */
 /* Supplied declaration required: FUN_001a6500. */
@@ -47,7 +47,7 @@ void FUN_001919a4(int param_1)
   int temp_v1;
   
   FUN_0019de98(0,0xf4f4f4ff);
-  FUN_0019e2dc();
+  placeWinRelease();
   FUN_001add1c(param_1 + 0x19);
   FUN_001a6500(param_1 + 0x19);
   if (*(int *)(param_1 + 0xcdc) != 0) {

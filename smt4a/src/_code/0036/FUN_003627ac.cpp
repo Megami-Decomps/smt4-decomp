@@ -6,11 +6,11 @@ struct FloatPair {
 };
 
 extern "C" {
-extern FloatPair DAT_005c10c4;
+extern FloatPair g_uiDrawOffset;
 
 /* Stores the current floating-point pair. */
 void FUN_003627ac(FloatPair value)
 {
-    DAT_005c10c4 = value;
+    g_uiDrawOffset = value;
 }
 }

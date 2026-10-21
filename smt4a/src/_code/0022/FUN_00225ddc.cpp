@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00225ddc` (_code @ 0x225ddc, 0x75c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct ScriptHolder;
 
 extern "C" {
 
 int asdSequenceRequest(...);
 int jobStop(...);
-int FUN_001656e0(...);
+int jobSetIntensity(...);
 int messageSlotSet(...);
 int FUN_00324c48(...);
 int FUN_004731d8(void);
@@ -71,20 +72,20 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 extern int FUN_0013def0(unsigned int);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001656e0. */
+/* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_00183318. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0020214c. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessGetEntry. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: messageSlotSet. */
-extern int FUN_002a4b60(void);
+extern int messageMainGetValue(void);
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: campCommonBgAcquire. */
@@ -112,7 +113,7 @@ extern char *gameBlockGetArea27E98(void);
 /* Supplied declaration required: FUN_004731d8. */
 extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: FUN_0047db34. */
-extern int scriptHolderUpdateForward(int);
+extern unsigned int scriptHolderUpdateForward(ScriptHolder *);
 /* Supplied declaration required: scriptHolderFree2. */
 /* Supplied declaration required: FUN_0047e430. */
 
@@ -242,7 +243,7 @@ unsigned int FUN_00225ddc(void)
       }
       temp_v3 = getByteTableAValue();
       if ((temp_v3 == 0) || (temp_v3 = FUN_00162ea4(), temp_v3 != 0)) {
-        temp_v3 = FUN_00224880(puVar2[0xc]);
+        temp_v3 = scrRunOpcodesStub(puVar2[0xc]);
         if (temp_v3 == 2) {
           if (puVar2[7] != 0) {
             gameFlagSetValue(puVar2[7],1);
@@ -281,15 +282,15 @@ unsigned int FUN_00225ddc(void)
         }
         do {
           if (puVar2[temp_v3 * 2 + 0xf] != 0) {
-            FUN_001656e0(puVar2[temp_v3 * 2 + 0xf],0);
+            jobSetIntensity(puVar2[temp_v3 * 2 + 0xf],0);
           }
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 8);
         temp_v3 = 0;
         do {
           if ((puVar2[temp_v3 * 2 + 0xf] != 0) &&
-             (temp_v1 = FUN_002a4b60(), temp_v1 == puVar2[temp_v3 * 2 + 0x10])) {
-            FUN_001656e0(puVar2[temp_v3 * 2 + 0xf],1);
+             (temp_v1 = messageMainGetValue(), temp_v1 == puVar2[temp_v3 * 2 + 0x10])) {
+            jobSetIntensity(puVar2[temp_v3 * 2 + 0xf],1);
           }
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 8);
@@ -304,7 +305,7 @@ unsigned int FUN_00225ddc(void)
     return 0;
   }
   if (temp_v3 == 0x60) {
-    temp_v3 = scriptHolderUpdateForward(g_aocMain + 0xa8);
+    temp_v3 = scriptHolderUpdateForward((ScriptHolder *)(g_aocMain + 0xa8));
     if (temp_v3 == 0) {
       return 0;
     }

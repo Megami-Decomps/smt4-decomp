@@ -20,7 +20,7 @@ extern unsigned int markerKindGetColor(int);
 extern int gameGetSlotRecord(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: mapBlockSetRequest. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -46,10 +46,10 @@ void FUN_003d386c(int param_1)
   
   temp_v0 = g_camp;
   temp_v11 = param_1;
-  temp_v1 = FUN_002c2c68(g_camp + 0x1ec);
-  temp_v2 = FUN_002c2c68(temp_v0 + 0x1ec);
+  temp_v1 = objectApplyIfUnblocked(g_camp + 0x1ec);
+  temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x1ec);
   if (temp_v2 < temp_v1) {
-    temp_v1 = FUN_002c2c68(temp_v0 + 0x1ec);
+    temp_v1 = objectApplyIfUnblocked(temp_v0 + 0x1ec);
   }
   sysMemClear(temp_v10,100);
   temp_v2 = 0;

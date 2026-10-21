@@ -1,39 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bcad0` (_code @ 0x3bcad0, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the initial cyclic-buffer index load/scaled address uses r3 where retail uses r2; the remaining instructions match. */
+#include "battle/btlMain.h"
+
+struct BtlCombatantValueRingView {
+    u8 unk000[0x394];
+    u32 values[6]; // 0x394
+    s32 next;      // 0x3ac
+};
 
 extern "C" {
+u32 scrGetArg(u32 index);
+BtlMainStateA *btlGetMainState(void);
+BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
 
-int FUN_003f0e20(int, unsigned int);
-
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003f0e20. */
-
-
-unsigned int FUN_003bcad0(void)
-
+// Append a script value to the selected combatant's six-entry cyclic buffer.
+u32 FUN_003bcad0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  temp_v2 = btlGetMainState();
-  FUN_003f0e20(temp_v2,temp_v0);
-  if (temp_v2 != 0) {
-    piVar4 = (int *)(temp_v2 + 0x3ac);
-    *(unsigned int *)(temp_v2 + *(int *)(temp_v2 + 0x3ac) * 4 + 0x394) = temp_v1;
-    temp_v2 = *piVar4;
-    *piVar4 = temp_v2 + 1;
-    if (temp_v2 + 1 >= 6) {
-      *piVar4 = 0;
+    u32 id = scrGetArg(0);
+    u32 value = scrGetArg(1);
+    BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), id);
+    if (entry != NULL) {
+        BtlCombatantValueRingView *ring = reinterpret_cast<BtlCombatantValueRingView *>(entry);
+        s32 &next = ring->next;
+        ring->values[next] = value;
+        if (++next > 5)
+            next = 0;
     }
-  }
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

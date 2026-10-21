@@ -58,7 +58,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002a7b74. */
-extern unsigned int *FUN_002c2c68(int);
+extern unsigned int *objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_0032fea0. */
@@ -126,7 +126,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
     if ((*piVar11 >= 9) && ((char)temp_v18 == '\0')) {
       temp_v11 = FUN_00284140((int)*(short *)(param_1 + *(short *)(param_1 + 0x8e88) * 2 + 0x438));
       temp_v6 = FUN_00284140((int)*(short *)(param_1 + 0x446));
-      temp_v12 = (unsigned int *)FUN_002c2c68(temp_v14);
+      temp_v12 = (unsigned int *)objectApplyIfUnblocked(temp_v14);
       temp_v1 = *(char *)(param_1 + 0x8eac);
       *puVar12 = 0;
       if (temp_v11 != 0) {

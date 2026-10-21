@@ -1,47 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001081b0` (_code @ 0x1081b0, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/JobWork.h"
+#include "title/titleMain.h"
+
+struct FrameReadinessView {
+    u8 unk00[0xdc];
+    u8 active;
+    u8 ready;
+    u8 unkde[7];
+    u8 surfaceReady;
+};
+
+struct FrameCompletionView {
+    u8 unk0000[0xe00];
+    FrameReadinessView flags; // 0xe00
+    u8 unkee6[0xf2];
+    u8 blocked; // 0xfd8
+    u8 unkfd9[3];
+    JobSurface *surface; // 0xfdc
+};
+
+struct Screen2c39a4;
 
 extern "C" {
+extern TitleScene *g_titleScene;
+void FUN_002c39a4(Screen2c39a4 *screen);
+void FUN_00117da4(s32 mode);
 
-int FUN_00117da4(int);
-int FUN_002c39a4(unsigned int);
-
-extern unsigned int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_00117da4. */
-extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c39a4. */
-
-
-unsigned int FUN_001081b0(void)
-
+// Refresh the title layout and process the prepared frame surface once its gates permit.
+u32 FUN_001081b0(void)
 {
-/* irregular: 2 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v1 = jobGetWork();
-  temp_v3 = *(char *)(temp_v1 + 0xedc) != '\0';
-  temp_v0 = '\0';
-  if (temp_v3) {
-    temp_v0 = *(char *)(temp_v1 + 0xedd);
-  }
-  if (temp_v3 && temp_v0 != '\0') {
-    temp_v3 = *(char *)(temp_v1 + 0xee5) != '\0';
-    temp_v2 = 0;
-    if (temp_v3) {
-      temp_v2 = *(int *)(temp_v1 + 0xfdc);
+    FrameCompletionView *work = reinterpret_cast<FrameCompletionView *>(jobGetWork());
+    const FrameReadinessView &flags = work->flags;
+    if (flags.active && flags.ready && flags.surfaceReady &&
+        work->surface != NULL && !work->blocked) {
+        FUN_002c39a4(reinterpret_cast<Screen2c39a4 *>(g_titleScene));
+        FUN_00117da4(1);
+        return 0;
     }
-    if ((temp_v3 && temp_v2 != 0) && (*(char *)(temp_v1 + 0xfd8) == '\0')) {
-      FUN_002c39a4(g_titleScene);
-      FUN_00117da4(1);
-      return 0;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

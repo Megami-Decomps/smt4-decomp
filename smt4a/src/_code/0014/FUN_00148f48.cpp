@@ -5,9 +5,9 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_00589190; /* 0x589190 */
+extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
 extern int *DAT_005b40e8; /* 0x5b40e8 */
-extern unsigned int *DAT_005b4400; /* 0x5b4400 */
+extern unsigned int *g_textureBindingState; /* 0x5b4400 */
 
 
 void FUN_00148f48(void)
@@ -36,7 +36,7 @@ void FUN_00148f48(void)
       while (temp_v0 != 0) {
         temp_v2 = temp_v0 != 0;
         if (temp_v2) {
-          in_r12 = DAT_00589190;
+          in_r12 = g_gfxReleaseCallback;
         }
         temp_v0 = *(int *)(temp_v0 + 0x24);
         if (temp_v2 && in_r12 != (romwright_code *)0x0) {
@@ -54,7 +54,7 @@ void FUN_00148f48(void)
           puVar5 = (unsigned int *)(temp_v0 + temp_v1 * 0x10);
           if ((int *)puVar5[3] == piVar1) {
             if (piVar2[2] == temp_v0) {
-              *DAT_005b4400 = *DAT_005b4400 | 1;
+              *g_textureBindingState = *g_textureBindingState | 1;
             }
             puVar5[3] = 0;
             *puVar5 = 0;
@@ -65,15 +65,15 @@ void FUN_00148f48(void)
         } while (temp_v1 < 2);
       }
       if (*piVar1 != 0) {
-        in_r12 = DAT_00589190;
+        in_r12 = g_gfxReleaseCallback;
         piVar2 = DAT_005b40e8;
-        if (DAT_00589190 == (romwright_code *)0x0) continue;
-        (*DAT_00589190)(piVar1[0xf],0x103,piVar1[0x10]);
+        if (g_gfxReleaseCallback == (romwright_code *)0x0) continue;
+        (*g_gfxReleaseCallback)(piVar1[0xf],0x103,piVar1[0x10]);
       }
-      in_r12 = DAT_00589190;
+      in_r12 = g_gfxReleaseCallback;
       piVar2 = DAT_005b40e8;
-      if (DAT_00589190 != (romwright_code *)0x0) {
-        (*DAT_00589190)(0x10000,0x100,0,piVar1);
+      if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+        (*g_gfxReleaseCallback)(0x10000,0x100,0,piVar1);
         piVar2 = DAT_005b40e8;
       }
     }

@@ -17,11 +17,11 @@ int effBlockLoadClone(...);
 int FUN_00243c24(void);
 int FUN_00272204(unsigned int, unsigned int [2], int);
 int taskRunWithObject(unsigned int, int, int);
-int FUN_002b41e4(void);
+int effPartSetData(void);
 int libc_strcpy(int, unsigned int);
-int FUN_00350a8c(void);
-int FUN_00399768(...);
-int FUN_003ba614(...);
+int effectEditorApplyHandlerState(void);
+int objectRegistryInsert(...);
+int asdEffectQueueRelease(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
@@ -82,13 +82,13 @@ extern unsigned int uRam00634d68; /* 0x634d68 */
 /* Supplied declaration required: FUN_00272204. */
 /* Supplied declaration required: taskRunWithObject. */
 extern unsigned int resourceResolveHeaderPointer(void);
-/* Supplied declaration required: FUN_002b41e4. */
+/* Supplied declaration required: effPartSetData. */
 /* Supplied declaration required: libc_strcpy. */
-extern int FUN_00323c54(unsigned int, unsigned int);
+extern int effPartAppend(unsigned int, unsigned int);
 extern unsigned int nodeChainCount(unsigned int);
-/* Supplied declaration required: FUN_00350a8c. */
-/* Supplied declaration required: FUN_00399768. */
-/* Supplied declaration required: FUN_003ba614. */
+/* Supplied declaration required: effectEditorApplyHandlerState. */
+/* Supplied declaration required: objectRegistryInsert. */
+/* Supplied declaration required: asdEffectQueueRelease. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -191,7 +191,7 @@ LAB_0039ab4c:
       temp_v1 = (unsigned int)*(unsigned short *)(temp_v6 + 4);
       FUN_0020ea14();
       if (*(int *)(temp_v6 + 0xc) != 0) {
-        FUN_002b41e4();
+        effPartSetData();
       }
       if (*(int *)(temp_v6 + 0x1c) != 0) {
         taskRunWithObject(temp_v1,*(int *)(temp_v6 + 0x1c),*(unsigned short *)(temp_v6 + 0x18));
@@ -208,7 +208,7 @@ LAB_0039ab4c:
     DAT_0059dc40 = 0;
     DAT_0059dc44 = 0;
     DAT_0059dc48 = 0;
-    temp_v6 = FUN_00323c54(DAT_0059dbf4,temp_v1);
+    temp_v6 = effPartAppend(DAT_0059dbf4,temp_v1);
     DAT_0059dc04 = temp_v6;
     libc_strcpy(temp_v6 + 0x9c,*(unsigned int *)*piVar3);
     *(int *)(temp_v6 + 0x40) = piVar3[3];
@@ -220,11 +220,11 @@ LAB_0039ab4c:
     rt_memcpy_w(&DAT_00634d20,temp_v6,0x80);
     DAT_0059dbfc = *(unsigned int *)(temp_v6 + 0x90);
     if (*(int *)(*piVar3 + 0xc) != 0) {
-      FUN_002b41e4();
+      effPartSetData();
     }
     temp_v2 = DAT_0059dbfc;
     FUN_00243c24();
-    FUN_00350a8c();
+    effectEditorApplyHandlerState();
     DAT_0059dc18 = piVar3[1];
     DAT_0059dbf8 = temp_v2;
     temp_v1 = nodeChainCount(DAT_0059dbf4);
@@ -254,13 +254,13 @@ LAB_0039ab4c:
           asdMemFree(temp_v0);
           return temp_v1;
         }
-        FUN_00399768(DAT_0059dc00,3);
+        objectRegistryInsert(DAT_0059dc00,3);
         DAT_0059dc00 = 0;
       }
       param_2 = param_2 + temp_v6 * 0x1c;
       if (*(int *)(param_2 + 8) != 0) {
         if (DAT_0059dbf0 != 0) {
-          FUN_003ba614(DAT_0059dbf0,3);
+          asdEffectQueueRelease(DAT_0059dbf0,3);
           DAT_0059dbf0 = 0;
         }
         FUN_001b4ddc(&DAT_00634d20);
@@ -271,12 +271,12 @@ LAB_0039ab4c:
         temp_v6 = temp_v5;
         FUN_00243c24();
         DAT_0059dc00 = temp_v6;
-        FUN_00399768(temp_v5,3);
+        objectRegistryInsert(temp_v5,3);
       }
     }
   }
   else if (DAT_0059dc00 != 0) {
-    FUN_00399768(DAT_0059dc00,3);
+    objectRegistryInsert(DAT_0059dc00,3);
     DAT_0059dc00 = 0;
   }
   asdMemFree(temp_v0);

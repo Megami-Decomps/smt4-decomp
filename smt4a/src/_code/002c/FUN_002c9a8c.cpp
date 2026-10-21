@@ -23,7 +23,7 @@ int scrScriptProcessStartEntry(...);
 int ifTouchRegionAdd(int, int, int, int);
 int FUN_002a4894(...);
 int FUN_002a49e4(...);
-int FUN_002c2d5c(...);
+int infoWinSetTimer(...);
 int flaggedEntrySetValueA(...);
 int FUN_003450d4(...);
 int FUN_00359974(int, int, unsigned int, int);
@@ -47,7 +47,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001517b4. */
-extern int FUN_001632fc(void);
+extern int infoWinHasValue(void);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern unsigned short FUN_001643b4(unsigned int, int);
@@ -64,7 +64,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_0020b490. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_0022e750(void);
 extern int dialogIsActive(void);
@@ -74,9 +74,9 @@ extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002a4894. */
 /* Supplied declaration required: FUN_002a49e4. */
 extern int FUN_002a4b74(void);
-/* Supplied declaration required: FUN_002c2d5c. */
+/* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
-extern int FUN_0031f6ac(int);
+extern int statsAreAllCapped(int);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: FUN_00359974. */
@@ -167,7 +167,7 @@ void FUN_002c9a8c(int param_1)
       if ((temp_v20 != 0) && (*(char *)(temp_v19 + 0x8a) != '\0')) {
         FUN_002a49e4(*(unsigned int *)(param_1 + 0x43a4),0xcc);
         dialogOpen(1);
-        FUN_002c2d5c(0x3c);
+        infoWinSetTimer(0x3c);
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
       }
       break;
@@ -301,7 +301,7 @@ LAB_002ca0e0:
       }
 LAB_002ca3c0:
       temp_v19 = gameGetPlayerData();
-      temp_v19 = FUN_0031f6ac(temp_v19 + 0xe);
+      temp_v19 = statsAreAllCapped(temp_v19 + 0xe);
       if (temp_v19 != 0) {
         FUN_003df7c4(0);
         temp_v16 = gameGetPlayerData();
@@ -397,13 +397,13 @@ LAB_002ca354:
     }
     if (*piVar23 != 0) {
       temp_v19 = gameGetPlayerData();
-      temp_v19 = FUN_0031f6ac(temp_v19 + 0xe);
+      temp_v19 = statsAreAllCapped(temp_v19 + 0xe);
       if (temp_v19 == 0) break;
     }
     messageSetMode(0);
     sysPlaySe(0x9c);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x43a0),0xb);
-    temp_v19 = FUN_001632fc();
+    temp_v19 = infoWinHasValue();
     if (temp_v19 != 0) {
       dialogClose(0);
     }
@@ -411,7 +411,7 @@ LAB_002ca354:
     *(int *)(param_1 + 0x436c) = temp_v19;
     break;
   case 4:
-    temp_v14 = FUN_00224880(*(unsigned int *)(param_1 + 0x43a0));
+    temp_v14 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43a0));
     if (temp_v14 != 2) break;
     messageSetMode(1);
     FUN_00333dc8(0);
@@ -476,7 +476,7 @@ LAB_002ca524:
     temp_v19 = FUN_00163aa4(temp_v19);
     if (temp_v19 != 0) {
       FUN_0019de98(0,0xf4f4f4ff);
-      temp_v19 = FUN_001632fc();
+      temp_v19 = infoWinHasValue();
       if (temp_v19 != 0) {
         dialogClose(1);
       }
@@ -484,11 +484,11 @@ LAB_002ca524:
     }
     break;
   case 6:
-    temp_v19 = FUN_00224880(*(unsigned int *)(param_1 + 0x43a0));
+    temp_v19 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43a0));
     if (temp_v19 != 2) break;
     FUN_002a49e4(*(unsigned int *)(param_1 + 0x43a4),0xcc);
     dialogOpen(1);
-    FUN_002c2d5c(0x3c);
+    infoWinSetTimer(0x3c);
     temp_v19 = 2;
     *(int *)(param_1 + 0x436c) = temp_v19;
     break;

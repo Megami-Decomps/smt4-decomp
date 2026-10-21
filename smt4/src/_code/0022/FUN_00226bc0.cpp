@@ -1,14 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00226bc0` (_code @ 0x226bc0, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: selected primary/secondary track pointers occupy opposite r0/r1 registers; floating operations and control flow agree. */
+#include "common.h"
 
-extern "C" {
+struct AnimationFrameTrack {
+    u8 unk00[0x38];
+    f32 frame; // 0x38
+};
+struct AnimationFrameState {
+    u8 unk00[8];
+    u32 active; // 0x08
+    AnimationFrameTrack *primary[3]; // 0x0c
+    AnimationFrameTrack *secondary[3]; // 0x18
+    u8 unk24[8];
+    s32 mode; // 0x2c
+};
 
-
-void FUN_00226bc0(void)
-
+// Return the furthest current frame of the selected animation-channel pair.
+extern "C" f32 FUN_00226bc0(const AnimationFrameState *animation)
 {
-  return;
+    s32 channel = 0;
+    f32 frame = 0.0f;
+    if (animation->mode == 4)
+        channel = 1;
+    else if (animation->mode == 5)
+        channel = 2;
+    if (animation->active != 0) {
+        AnimationFrameTrack *first = animation->primary[channel];
+        AnimationFrameTrack *second = animation->secondary[channel];
+        if (first != NULL)
+            frame = first->frame;
+        if (second != NULL && second->frame > frame)
+            frame = second->frame;
+    }
+    return frame;
 }
-
-} /* extern "C" */

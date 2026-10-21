@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern int asdTMTexTableNodeIsLoaded(unsigned int);
-extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilGetRecord. */
@@ -91,7 +91,7 @@ void FUN_001ee4e4(unsigned int param_1,unsigned int param_2,unsigned int param_3
   }
   temp_v2 = asdTMTexTableNodeIsLoaded(temp_v5);
   if (temp_v2 != 0) {
-    temp_v2 = FUN_002ae98c(g_aocSystem,temp_v6,temp_v3,1);
+    temp_v2 = aocRunByName(g_aocSystem,temp_v6,temp_v3,1);
     if (temp_v2 == 0) {
       if (temp_v4 == '\0') {
         FUN_002ae9ec(2,temp_v6,temp_v3 * 1000,param_2,param_3,param_4);

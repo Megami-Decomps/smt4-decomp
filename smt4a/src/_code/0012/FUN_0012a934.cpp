@@ -10,7 +10,7 @@ int onlineInstanceTableFind(int, unsigned int);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
-int FUN_0030cae0(int, unsigned int);
+int onlineJobCompleteWithResult(int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned ch
 /* Supplied declaration required: FUN_002f7c94. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
-/* Supplied declaration required: FUN_0030cae0. */
+/* Supplied declaration required: onlineJobCompleteWithResult. */
 
 
 void FUN_0012a934(int param_1)
@@ -79,7 +79,7 @@ void FUN_0012a934(int param_1)
     temp_v4[0] = 0x80010004;
   }
   temp_v1 = FUN_002e7908(temp_v3,temp_v4);
-  FUN_0030cae0(param_1,temp_v1);
+  onlineJobCompleteWithResult(param_1,temp_v1);
   return;
 }
 

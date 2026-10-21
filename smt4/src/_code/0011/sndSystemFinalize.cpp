@@ -11,7 +11,7 @@ typedef struct SoundSystem {
     /* 0x08 */ u8 taskThread[1];         /* object torn down by FUN_001216bc */
 } SoundSystem;
 
-extern SoundSystem DAT_0044e908;
+extern SoundSystem g_nwSoundSystemInitFlags;
 extern u8 DAT_004ea168;                  /* hardware manager */
 
 __weak u32 nw_snd_SoundSystem_FinalizeHook(u32 arg);
@@ -36,7 +36,7 @@ void nw_snd_internal_driver_HardwareManager_Finalize(void *manager);
 /* Shuts the sound system down when it is running. */
 void sndSystemFinalize(void)
 {
-    if (DAT_0044e908.initialized) {
+    if (g_nwSoundSystemInitFlags.initialized) {
         FUN_00130498(nw_snd_SoundSystem_FinalizeHook(FUN_002bb020()));
         nw_snd_internal_TaskThread_Destroy();
         FUN_002bb020();
@@ -50,15 +50,15 @@ void sndSystemFinalize(void)
         FUN_002baf30();
         nw_snd_internal_driver_VoiceManager_Finalize();
         nw_snd_internal_driver_HardwareManager_Finalize(&DAT_004ea168);
-        FUN_001216bc(DAT_0044e908.taskThread);
+        FUN_001216bc(g_nwSoundSystemInitFlags.taskThread);
         nw_snd_internal_driver_SoundThread_GetInstance();
         nw_snd_internal_driver_SoundThread_Finalize();
         FUN_002baed8();
         FUN_00121970();
         FUN_002bae7c();
         FUN_00121970();
-        DAT_0044e908.flag = 0;
-        DAT_0044e908.initialized = 0;
+        g_nwSoundSystemInitFlags.flag = 0;
+        g_nwSoundSystemInitFlags.initialized = 0;
     }
 }
 

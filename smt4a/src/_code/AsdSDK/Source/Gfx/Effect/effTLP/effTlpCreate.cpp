@@ -4,7 +4,7 @@
 extern "C" {
 
 void *memAlloc(int, int, int, u32 size, int align, int);
-s32 FUN_0025cc50(void *data);
+s32 texIsStexFile(void *data);
 void *asdEffectTextureCreate(void *data);
 void *textureCreateFromImage(void);
 
@@ -34,7 +34,7 @@ TlpObject *effTlpCreate(TlpFile *file)
         TlpEntry *dst = &tlp->entries[i];
 
         *dst = *src;
-        if (FUN_0025cc50(block) != 0) {
+        if (texIsStexFile(block) != 0) {
             tlp->objects[i] = asdEffectTextureCreate(block);
         } else {
             tlp->objects[i] = textureCreateFromImage();

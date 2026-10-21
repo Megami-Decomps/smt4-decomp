@@ -24,8 +24,8 @@ typedef struct Object {
 
 void asdOperatorDelete(Object *object);
 void controllerSetDestination(u32 handle, u8 *data);
-void FUN_003fdb18(u32 handle, Vec3 vector);
-void FUN_003fe9b4(u32 handle, u8 *data);
+void controllerSetRotationEulerDegrees(u32 handle, Vec3 vector);
+void tripleOwnerSetValue(u32 handle, u8 *data);
 
 /* Deleting destructor: sets the vtable, hands the object's data to its owner's handle, then frees it. */
 void FUN_0041be60(Object *object, u32 vtable)
@@ -35,8 +35,8 @@ void FUN_0041be60(Object *object, u32 vtable)
     object->vtable = vtable;
     handle = object->owner->handle;
     controllerSetDestination(handle, object->first);
-    FUN_003fdb18(handle, object->vector);
-    FUN_003fe9b4(handle, object->second);
+    controllerSetRotationEulerDegrees(handle, object->vector);
+    tripleOwnerSetValue(handle, object->second);
     asdOperatorDelete(object);
 }
 

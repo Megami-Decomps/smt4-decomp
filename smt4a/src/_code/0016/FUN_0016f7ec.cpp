@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016f7ec` (_code @ 0x16f7ec, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail emits a CP15 data-synchronization MCR barrier directly; the required intrinsic/assembly is forbidden by this assignment. */
 #include "romwright_types.h"
 
 extern "C" {

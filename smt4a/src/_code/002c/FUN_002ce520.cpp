@@ -1,35 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ce520` (_code @ 0x2ce520, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct MaskedSortRecord {
+    u8 unk00[0x43];
+    u8 secondary; // 0x43
+    u32 flags; // 0x44
+};
 
 extern "C" {
+MaskedSortRecord *FUN_00192550(u32 id);
 
-int FUN_00192550(void);
-
-/* Supplied declaration required: FUN_00192550. */
-
-
-int FUN_002ce520(unsigned short *param_1,unsigned short *param_2)
-
+// Compare ascending low-byte primary keys, then ascending secondary bytes.
+s32 FUN_002ce520(const u16 *left, const u16 *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00192550();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00192550();
-  temp_v2 = (*(unsigned int *)(temp_v0 + 0x44) & 0xff) - (*(unsigned int *)(temp_v1 + 0x44) & 0xff);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_00192550();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_00192550();
-    temp_v2 = (unsigned int)*(unsigned char *)(temp_v0 + 0x43) - (unsigned int)*(unsigned char *)(temp_v1 + 0x43);
-  }
-  return temp_v2;
+    MaskedSortRecord *leftRecord = FUN_00192550(*left);
+    MaskedSortRecord *rightRecord = FUN_00192550(*right);
+    s32 difference = (leftRecord->flags & 0xff) - (rightRecord->flags & 0xff);
+    if (difference == 0) {
+        leftRecord = FUN_00192550(*left);
+        rightRecord = FUN_00192550(*right);
+        difference = leftRecord->secondary - rightRecord->secondary;
+    }
+    return difference;
 }
-
-} /* extern "C" */
+}

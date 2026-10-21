@@ -20,7 +20,7 @@ extern unsigned char DAT_00558af4; /* 0x558af4 */
 extern unsigned int DAT_0063030c; /* 0x63030c */
 
 extern unsigned int *FUN_0010531c(int, unsigned int, unsigned char *);
-extern unsigned int FUN_002e6e26(void);
+extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefAddRef. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: FUN_002e78d0. */
@@ -57,7 +57,7 @@ void FUN_00114250(int param_1)
   }
   *(unsigned int *)(*(int *)(param_1 + 0x5c) + 0x3c) = DAT_0063030c;
   sharedRefAddRef(*(unsigned int *)(param_1 + 0x5c));
-  temp_v1 = FUN_002e6e26();
+  temp_v1 = onlineContextGetInstance();
   FUN_002e78d0(temp_v1,*(unsigned int *)(param_1 + 0x5c),0);
   return;
 }

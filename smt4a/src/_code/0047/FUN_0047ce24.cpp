@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00167618(...);
 int efctSetSpeed(void);
 int FUN_0016c4b8(...);
-int FUN_0018291c(...);
+int quadSetOrderedVectors(...);
 int FUN_001879d0(...);
 int FUN_0019ac70(int *, unsigned int);
 int FUN_0019b770(...);
@@ -74,7 +74,7 @@ extern unsigned int DAT_00630754; /* 0x630754 */
 /* Supplied declaration required: efctSetSpeed. */
 extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0018291c. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_0019ac70. */
 /* Supplied declaration required: FUN_0019b770. */
@@ -280,7 +280,7 @@ LAB_0047cf80:
           fStack_ac = temp_v19[0x1b];
           fStack_9c = temp_v19[0x17];
           fStack_8c = temp_v19[0x13];
-          FUN_0018291c(&temp_v24,&temp_v23,&temp_v22,temp_v19 + 0x20,temp_v18,1);
+          quadSetOrderedVectors(&temp_v24,&temp_v23,&temp_v22,temp_v19 + 0x20,temp_v18,1);
         }
         goto LAB_0047d190;
       }
@@ -316,7 +316,7 @@ LAB_0047cf80:
           fStack_6c = temp_v19[0x1b];
           fStack_5c = temp_v19[0x17];
           fStack_4c = temp_v19[0x13];
-          FUN_0018291c(&temp_v27,&temp_v26,&temp_v25,temp_v19 + 0x20,temp_v18,1);
+          quadSetOrderedVectors(&temp_v27,&temp_v26,&temp_v25,temp_v19 + 0x20,temp_v18,1);
         }
         temp_v13 = 0.00390625f;
         temp_v10 = (*param_3 & 0x10) == 0;
@@ -430,7 +430,7 @@ LAB_0047cf80:
           uStack_64 = temp_v19[1];
           uStack_60 = temp_v19[2];
           fStack_5c = temp_v19[3];
-          FUN_0018291c(&temp_v26,&temp_v25,temp_v19 + 0x20,&temp_v17,temp_v21,0);
+          quadSetOrderedVectors(&temp_v26,&temp_v25,temp_v19 + 0x20,&temp_v17,temp_v21,0);
         }
         if (temp_v9) {
           renderStatePop();
@@ -466,7 +466,7 @@ LAB_0047d190:
       uStack_a4 = temp_v19[1];
       uStack_a0 = temp_v19[2];
       fStack_9c = temp_v19[3];
-      FUN_0018291c(&temp_v23,&temp_v22,temp_v19 + 0x20,&temp_v18,temp_v21,0);
+      quadSetOrderedVectors(&temp_v23,&temp_v22,temp_v19 + 0x20,&temp_v18,temp_v21,0);
     }
     if (temp_v9) {
       renderStatePop();

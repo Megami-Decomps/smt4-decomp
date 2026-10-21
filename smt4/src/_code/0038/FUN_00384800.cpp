@@ -19,7 +19,7 @@ extern s32 gameFlagIsSet(u32 id);
 extern void FUN_00235554(StateObject *obj, const char *name);
 extern void FUN_002355ac(s32 arg);
 extern void FUN_00259258(void);
-extern void FUN_0026374c(void);
+extern void placeWinStartText(void);
 extern void buttonHelpSetPreset(s32 arg);
 extern void dataTable28Sub0GetRecord(void *display, s32 slot);
 
@@ -38,7 +38,7 @@ void FUN_00384800(StateObject *obj)
     FUN_00259258();
     FUN_00235554(obj, "qc_start");
     dataTable28Sub0GetRecord(obj->display, obj->slot);
-    FUN_0026374c();
+    placeWinStartText();
     obj->state = 6;
     obj->stateStep = 0;
 }

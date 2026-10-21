@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002c5c04(void);
+int asdLoadFileSyncDefault(void);
 
 typedef struct Obj {
     /* 0x00 */ u8 unk00[0x14];
@@ -13,7 +13,7 @@ extern Obj *asdCameraCreateFromResource(void);
 
 void FUN_00263c1c(void)
 {
-    int value = FUN_002c5c04();
+    int value = asdLoadFileSyncDefault();
     Obj *obj = asdCameraCreateFromResource();
 
     obj->unk14 = value;

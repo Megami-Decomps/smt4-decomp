@@ -12,7 +12,7 @@ typedef struct Holder {
     Source *source; /* 0x08 */
 } Holder;
 
-extern f32 FUN_004ff920(void *data);
+extern f32 candidateGetPreferredValue(void *data);
 
 /* The value read from the holder's source data, 0.0 while it has none. */
 f32 controllerGetSourceValue(Holder *holder)
@@ -22,7 +22,7 @@ f32 controllerGetSourceValue(Holder *holder)
     if (data == NULL) {
         return 0.0f;
     }
-    return FUN_004ff920(data);
+    return candidateGetPreferredValue(data);
 }
 
 } /* extern "C" */

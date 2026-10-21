@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002a71fc(int arg);
+int messageStatesSetFirst(int arg);
 
 void FUN_003a0994(void)
 {
-    FUN_002a71fc(0);
+    messageStatesSetFirst(0);
 }
 
 } /* extern "C" */

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0034a290(void);
 
-extern int FUN_002625b0(unsigned int, unsigned int);
+extern int affinityShouldReplaceState(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0034a290. */
 
 
@@ -42,7 +42,7 @@ unsigned int FUN_002ada48(int param_1,unsigned int param_2)
           case 4:
             temp_v4 = 4;
           }
-          temp_v1 = FUN_002625b0(temp_v3,temp_v4);
+          temp_v1 = affinityShouldReplaceState(temp_v3,temp_v4);
           if (temp_v1 != 0) {
             temp_v3 = temp_v4;
           }

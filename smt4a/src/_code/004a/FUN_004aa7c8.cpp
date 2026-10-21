@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184748(int);
+int uiSpriteSetKeyframeThree(int);
 int menu32PlayCursorSeAndSelect(int);
 int FUN_00321500(int);
 int FUN_0039ebcc(void);
@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned char g_btlUi; /* 0x57a9b8 */
 
-/* Supplied declaration required: FUN_00184748. */
+/* Supplied declaration required: uiSpriteSetKeyframeThree. */
 /* Supplied declaration required: menu32PlayCursorSeAndSelect. */
 /* Supplied declaration required: FUN_00321500. */
 extern int menu32ModeIsNot6(int);
@@ -46,7 +46,7 @@ void FUN_004aa7c8(void)
       FUN_0039ebcc();
       if (temp_v1 != 0) {
         FUN_00321500(temp_v0 + 8);
-        FUN_00184748(temp_v0 + 0x24bc);
+        uiSpriteSetKeyframeThree(temp_v0 + 0x24bc);
         return;
       }
     }

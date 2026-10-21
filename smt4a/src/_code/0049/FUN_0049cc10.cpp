@@ -10,7 +10,7 @@ int aocRecordLookup84(void);
 
 /* Supplied declaration required: FUN_00192550. */
 /* Supplied declaration required: FUN_00192608. */
-extern unsigned int FUN_0019271c(unsigned int);
+extern unsigned int aocEntryGetKind(unsigned int);
 /* Supplied declaration required: aocRecordLookup84. */
 
 
@@ -24,7 +24,7 @@ int FUN_0049cc10(unsigned short *param_1)
   
   temp_v2 = (unsigned int)*param_1;
   temp_v1 = 0;
-  temp_v0 = FUN_0019271c(temp_v2);
+  temp_v0 = aocEntryGetKind(temp_v2);
   switch(temp_v0) {
   default:
     if ((param_1[1] & 2) != 0) {

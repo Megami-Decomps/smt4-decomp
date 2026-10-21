@@ -15,7 +15,7 @@ extern unsigned int DAT_005f1cb4; /* 0x5f1cb4 */
 extern unsigned int DAT_005f1cb8; /* 0x5f1cb8 */
 
 extern char *gameFlagsGetBlock(void);
-extern char *FUN_003798f0(int);
+extern char *dataTableGetRecord23(int);
 extern int dataTable23Type1CountWithAoc(void);
 
 
@@ -39,7 +39,7 @@ void FUN_003b5064(void)
     temp_v1 = dataTable23Type1CountWithAoc();
     if (0 < temp_v1) {
       do {
-        pcVar2 = (char *)FUN_003798f0(temp_v2);
+        pcVar2 = (char *)dataTableGetRecord23(temp_v2);
         temp_v0 = *pcVar2;
         temp_v3 = temp_v0 == '\x01';
         if (temp_v3) {

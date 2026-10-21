@@ -10,7 +10,7 @@ int FUN_00297060(int, int);
 int FUN_0029ce60(unsigned int, int, int);
 int FUN_0029d770(int, unsigned char [1548]);
 int FUN_0029da34(...);
-int FUN_0029e620(unsigned int, int);
+int messageTargetSetValue(unsigned int, int);
 int FUN_0029e648(int, int);
 int buttonHelpSetPreset(int);
 
@@ -26,14 +26,14 @@ extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 extern int utilityReturnSuccess(int);
 /* Supplied declaration required: FUN_0022de74. */
 /* Supplied declaration required: FUN_00233240. */
-extern int FUN_0023360c(int *);
+extern int flaggedValueHolderGetTotal(int *);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_0029ce60. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029da34. */
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029e648. */
-extern unsigned int FUN_002b066c(unsigned short);
+extern unsigned int partyMemberFindById(unsigned short);
 /* Supplied declaration required: buttonHelpSetPreset. */
 
 
@@ -57,19 +57,19 @@ void FUN_003a76b8(int *param_1)
     param_1[6] = 0;
     *(unsigned char *)((int)param_1 + 0x5a5) = 1;
     if ((char)param_1[0x169] != '\0') {
-      temp_v1 = FUN_0023360c(param_1 + 8);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 8);
       temp_v1 = param_1[temp_v1 * 8 + 0x16b];
       buttonHelpSetPreset(0x4c);
-      temp_v2 = FUN_002b066c((short)temp_v1);
+      temp_v2 = partyMemberFindById((short)temp_v1);
       FUN_0029da34(0,1,(short)temp_v1,temp_v2);
     }
     else {
-      temp_v1 = FUN_0023360c(param_1 + 8);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 8);
       temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 8 + 0x16b);
       temp_v3 = (unsigned int)temp_v0;
       FUN_0029ce60(temp_v3,*(unsigned char *)((int)param_1 + 0x5a5),0);
       FUN_0029e648(1,0);
-      FUN_0029e620(-temp_v3,0);
+      messageTargetSetValue(-temp_v3,0);
       buttonHelpSetPreset(0x2d);
       FUN_0029d770(temp_v0,temp_v4);
       FUN_0029da34(0,1,temp_v0,temp_v4);

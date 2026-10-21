@@ -7,11 +7,11 @@
  * name is known): the table holds member-function pointers, not a vtable. */
 class Obj536044 {
 public:
-    /* After the transition (FUN_002802c8) is over: marks the scene changed (flags 0x102), remembers
+    /* After the transition (screenFadeIsBusy) is over: marks the scene changed (flags 0x102), remembers
      * the current state and moves to state 3. */
     void enterState3();
 
-    /* Moves to state 5 once FUN_00224880 reports 2 for the scene's controller. */
+    /* Moves to state 5 once scrRunOpcodesStub reports 2 for the scene's controller. */
     void waitController();
 
 protected:

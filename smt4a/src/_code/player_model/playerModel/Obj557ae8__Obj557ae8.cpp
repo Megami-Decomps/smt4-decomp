@@ -13,7 +13,7 @@ extern unsigned char DAT_00557af0; /* 0x557af0 */
 
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_002f5020. */
-extern unsigned int FUN_0040ac08(void);
+extern unsigned int modelListInit(void);
 
 
 unsigned int * _ZN9Obj557ae8C1Ev(unsigned int *param_1)
@@ -35,7 +35,7 @@ unsigned int * _ZN9Obj557ae8C1Ev(unsigned int *param_1)
   FUN_00178b04(0x20,&LAB_003e5dac,0x18);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   puVar1[-5] = temp_v1;
   temp_v0 = 0;
@@ -44,7 +44,7 @@ unsigned int * _ZN9Obj557ae8C1Ev(unsigned int *param_1)
     FUN_00178b04(0x20,&LAB_003e5dac,0x1b);
     temp_v1 = 0;
     if (temp_v2 != 0) {
-      temp_v1 = FUN_0040ac08();
+      temp_v1 = modelListInit();
     }
     temp_v2 = temp_v0 + 1;
     (puVar1 + -7)[temp_v0 * 0x17 + 9] = temp_v1;

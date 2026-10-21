@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_00282bfc(...);
 int scrGetArg(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 
 extern int frameTextureGetState(void);
 /* Supplied declaration required: FUN_00282bfc. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: scrGetArg. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_002b89a4(unsigned int);
 extern int FUN_002c1d5c(void);
 
@@ -31,9 +31,9 @@ unsigned int FUN_0021ea6c(void)
     if (temp_v1 == 0) {
       temp_v1 = frameTextureGetState();
       if (temp_v1 == 0) {
-        FUN_0029c3c0(0,temp_v0,0xff);
+        slotSetRequest(0,temp_v0,0xff);
       }
-      FUN_0029c3c0(1,temp_v0,0xff);
+      slotSetRequest(1,temp_v0,0xff);
       return 0;
     }
     if (temp_v1 != 1) {
@@ -41,9 +41,9 @@ unsigned int FUN_0021ea6c(void)
     }
     temp_v1 = frameTextureGetState();
     if (temp_v1 == 0) {
-      FUN_0029c3c0(0,temp_v0,0xffffffff);
+      slotSetRequest(0,temp_v0,0xffffffff);
     }
-    FUN_0029c3c0(1,temp_v0,0xffffffff);
+    slotSetRequest(1,temp_v0,0xffffffff);
     return 0;
   }
   temp_v1 = frameTextureGetState();

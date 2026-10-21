@@ -17,8 +17,8 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00183e58. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int FUN_00224880(unsigned int);
-extern int FUN_0026272c(void);
+extern int scrRunOpcodesStub(unsigned int);
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002bf4f4. */
@@ -54,7 +54,7 @@ void FUN_00485308(int param_1)
     if (temp_v0 != 0) {
       FUN_002bf4f4(0);
     }
-    temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x26c));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x26c));
     if (temp_v0 == 2) {
       temp_v0 = FUN_002a4b74();
       if (temp_v0 != 0) {
@@ -77,7 +77,7 @@ void FUN_00485308(int param_1)
     }
   }
   else {
-    temp_v0 = FUN_0026272c();
+    temp_v0 = messageMainIsIdle();
     if (temp_v0 != 0) {
       if (*(char *)(param_1 + 0x261) == '\x04') {
         temp_v1 = 2;

@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } void_stack;
 
-extern unsigned int *DAT_0044cd88; /* 0x44cd88 */
+extern unsigned int *g_mapStateSlots; /* 0x44cd88 */
 
 
 void FUN_0027cc6c(void)
@@ -20,8 +20,8 @@ void FUN_0027cc6c(void)
   int temp_v1;
   int temp_v2;
   
-  puVar1 = DAT_0044cd88;
-  *DAT_0044cd88 = 0;
+  puVar1 = g_mapStateSlots;
+  *g_mapStateSlots = 0;
   *(unsigned short *)(puVar1 + 1) = 0;
   *(unsigned short *)((int)puVar1 + 6) = 0;
   *(unsigned short *)(puVar1 + 2) = 0;
@@ -29,9 +29,9 @@ void FUN_0027cc6c(void)
   puVar1[4] = 0;
   temp_v2 = 0;
   do {
-    puVar1 = DAT_0044cd88;
+    puVar1 = g_mapStateSlots;
     temp_v0 = temp_v2 + 1;
-    *(unsigned char *)(DAT_0044cd88 + temp_v2 * 0x13 + 0x16) = 0;
+    *(unsigned char *)(g_mapStateSlots + temp_v2 * 0x13 + 0x16) = 0;
     puVar1[temp_v2 * 0x13 + 0x17] = 0;
     puVar1[temp_v2 * 0x13 + 0x18] = 0;
     puVar1[temp_v2 * 0x13 + 0x19] = 0;
@@ -49,7 +49,7 @@ void FUN_0027cc6c(void)
     puVar1[temp_v2 * 0x13 + 0x24] = 0;
     *(unsigned char *)(puVar1 + temp_v2 * 0x13 + 0x25) = 0;
     puVar1[temp_v2 * 0x13 + 0x26] = 0xffffffff;
-    puVar1 = DAT_0044cd88;
+    puVar1 = g_mapStateSlots;
     temp_v2 = temp_v0;
   } while (temp_v0 < 0x20);
   temp_v0 = 8;
@@ -62,9 +62,9 @@ void FUN_0027cc6c(void)
     temp_v1 = 0;
   } while (temp_v0 != 0);
   do {
-    puVar1 = DAT_0044cd88;
+    puVar1 = g_mapStateSlots;
     temp_v2 = temp_v1 + 1;
-    *(unsigned char *)(DAT_0044cd88 + temp_v1 * 0x13 + 0x276) = 0;
+    *(unsigned char *)(g_mapStateSlots + temp_v1 * 0x13 + 0x276) = 0;
     puVar1[temp_v1 * 0x13 + 0x277] = 0;
     puVar1[temp_v1 * 0x13 + 0x278] = 0;
     puVar1[temp_v1 * 0x13 + 0x279] = 0;

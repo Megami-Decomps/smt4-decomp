@@ -18,10 +18,10 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char DAT_0057f0b4; /* 0x57f0b4 */
+extern unsigned char g_animatedPageSelection; /* 0x57f0b4 */
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_002a482c(int);
 extern int FUN_002a4b74(void);
 extern int FUN_0031d174(int);
@@ -31,7 +31,7 @@ extern int FUN_0031d174(int);
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: screen4AEnter. */
 /* Supplied declaration required: FUN_004a37a0. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: setListWindow. */
 
 
@@ -42,13 +42,13 @@ void FUN_004a38bc(int param_1)
   int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x85c));
+  temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x85c));
   if (temp_v0 == 2) {
     temp_v0 = FUN_002a4b74();
     if (temp_v0 == 0) {
-      temp_v0 = FUN_004cfe4c(param_1 + 0x20);
+      temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
       FUN_004a37a0(param_1,*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x868));
-      (*(unsigned int *)((unsigned char *)&DAT_0057f0b4 + 0x4)) = 0xffffffff;
+      (*(unsigned int *)((unsigned char *)&g_animatedPageSelection + 0x4)) = 0xffffffff;
       temp_v1 = FUN_0031d174(param_1 + 0x20);
       temp_v0 = FUN_002a482c(param_1 + 0x20);
       FUN_004a1958(param_1);

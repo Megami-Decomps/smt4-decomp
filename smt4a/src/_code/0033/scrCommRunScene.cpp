@@ -4,7 +4,7 @@ extern "C" {
 
 extern u32 scrGetArg(s32 index);
 extern s32 scrGetCommandFrame(void);
-extern void FUN_002c76c0(s32 value);
+extern void scrCommMessageSetMode(s32 value);
 extern void FUN_002f0c18(void);
 extern void FUN_0038b710(u32 scene);
 extern s32 stateHolder4IsZero(void);
@@ -19,7 +19,7 @@ u8 scrCommRunScene(s32 argIndex)
     s32 running;
 
     if (scrGetCommandFrame() == 0) {
-        FUN_002c76c0(1);
+        scrCommMessageSetMode(1);
         FUN_002f0c18();
         FUN_0038b710(scene);
     }
@@ -27,7 +27,7 @@ u8 scrCommRunScene(s32 argIndex)
     if (running != 0) {
         FUN_0034aae4();
         sysPlaySe(0x92);
-        FUN_002c76c0(-1);
+        scrCommMessageSetMode(-1);
         messageSlotSet(0);
     }
     return running != 0;

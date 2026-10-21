@@ -4,13 +4,13 @@
 
 extern "C" {
 
-extern GuestWinOptions *gameGetOptions(void);
+extern GuestWinOptions *gameGetSupportUnitData(void);
 
 extern GuestWinWork *g_guestWin;
 
 u32 guestWinIsShown(void)
 {
-    u32 shown = (u16)gameGetOptions()->guestWinEnabled;
+    u32 shown = (u16)gameGetSupportUnitData()->guestWinEnabled;
 
     if (shown != 0) {
         shown = g_guestWin->state != 0;

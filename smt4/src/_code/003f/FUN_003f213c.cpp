@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f213c` (_code @ 0x3f213c, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: unit begins eight bytes late. The decoded image has LDR r2 / MVN r0 at 0x3f2134/0x3f2138 before this PUSH; its initial STRD uses those values, not real incoming arguments. Needs boundary repair. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -14,7 +13,7 @@ typedef struct {
 extern unsigned char LAB_003574a8; /* 0x3574a8 */
 extern unsigned int DAT_004656e0; /* 0x4656e0 */
 extern unsigned int DAT_004656e4; /* 0x4656e4 */
-extern unsigned int DAT_004e62a8; /* 0x4e62a8 */
+extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x4e62a8 */
 extern unsigned int DAT_004e62b4; /* 0x4e62b4 */
 
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
@@ -28,8 +27,8 @@ unsigned long long FUN_003f213c(unsigned int param_1,unsigned int param_2,int pa
   *(unsigned int *)(param_3 + 0xc) = param_1;
   DAT_004656e0 = 0;
   DAT_004656e4 = 0;
-  DAT_004e62a8 = 0;
-  nn_os_CriticalSection_Initialize(&DAT_004e62a8);
+  g_asdCecMessageBoxCriticalSection = 0;
+  nn_os_CriticalSection_Initialize(&g_asdCecMessageBoxCriticalSection);
   DAT_004e62b4 = 0;
   nn_os_CriticalSection_Initialize(&DAT_004e62b4,&LAB_003574a8,0x100000);
   return 0x3574a8004e62b4;

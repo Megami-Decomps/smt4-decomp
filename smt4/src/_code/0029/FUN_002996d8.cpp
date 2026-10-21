@@ -1,40 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002996d8` (_code @ 0x2996d8, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: two retail hint NOPs and its shared pre-else tail block are not reproduced; float constant-load order also differs. */
+#include "shard/GameGlobals.h"
 
 extern "C" {
+void FUN_00294d6c(void);
+void statusCameraSetEye(f32 x, f32 y, f32 z);
+void statusCameraApply(void);
 
-int statusCameraSetEye(void);
-int FUN_00294d6c(void);
-int statusCameraApply(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned char g_gameGlobals; /* 0x44e140 */
-
-/* Supplied declaration required: statusCameraSetEye. */
-/* Supplied declaration required: FUN_00294d6c. */
-/* Supplied declaration required: statusCameraApply. */
-
-
-void FUN_002996d8(int param_1)
-
+void FUN_002996d8(s32 usePreset)
 {
-/* irregular: 3 native warning(s); review required */
-  if (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e67) != '\x03' && *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e67) != '\t') {
-    return;
-  }
-  if (param_1 != 0) {
-    FUN_00294d6c();
-  }
-  else {
-    statusCameraSetEye();
-  }
-  statusCameraApply();
-  return;
+    u32 mode = g_gameGlobals.data->unk1E67;
+    if (mode != 3 && mode != 9) {
+        return;
+    }
+    if (usePreset != 0) {
+        FUN_00294d6c();
+    } else {
+        statusCameraSetEye(mode == 9 ? 125.0f : 100.0f, 6.3f, 4.5f);
+    }
+    statusCameraApply();
 }
-
-} /* extern "C" */
+}

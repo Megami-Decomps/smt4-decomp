@@ -1,51 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019e330` (_code @ 0x19e330, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail reuses R1 for the range index multiplication; compiled code saves R4 as an extra address temporary. */
+#include "common.h"
 
-extern "C" {
-
-typedef struct fn_0019e330_arg0 fn_0019e330_arg0;
-struct fn_0019e330_arg0 {
-    unsigned char pad_0x0[0x24];
-    undefined4 field_0x24; /* +0x24 */
-    undefined4 field_0x28; /* +0x28 */
-    undefined4 field_0x2c; /* +0x2c */
-    unsigned char pad_0x30[0x34];
-    int field_0x64; /* +0x64 */
-    short field_0x68; /* +0x68 */
-    undefined2 field_0x6a; /* +0x6a */
-    char field_0x6c; /* +0x6c */
-    unsigned char pad_0x6d[0x1b];
-    undefined1 field_0x88; /* +0x88 */
-    unsigned char pad_0x89[0x1];
-    undefined1 field_0x8a; /* +0x8a */
+struct SelectionRange {
+    u32 first; // 0x00
+    u32 last;  // 0x04
+    u32 unk08; // 0x08
+};
+struct RangeSelection {
+    u8 unk00[0x24];       // 0x00
+    u32 current[3];       // 0x24
+    u8 unk30[0x34];       // 0x30
+    SelectionRange* ranges; // 0x64
+    s16 index;            // 0x68
+    u16 step;             // 0x6a
+    u8 reverse;           // 0x6c
+    u8 unk6d[0x1b];       // 0x6d
+    u8 flag88;            // 0x88
+    u8 unk89;             // 0x89
+    u8 flag8a;            // 0x8a
 };
 
-
-void FUN_0019e330(fn_0019e330_arg0 *param_1,int param_2,int param_3)
-
+// Selects a range endpoint and resets its progress flags.
+extern "C" void FUN_0019e330(RangeSelection* selection, s32 index, s32 reverse)
 {
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  
-  if (param_1->field_0x64 != 0) {
-    param_1->field_0x68 = (short)param_2;
-    param_1->field_0x6a = 0;
-    param_1->field_0x88 = 0;
-    puVar1 = (unsigned int *)(param_1->field_0x64 + param_2 * 0xc);
-    param_1->field_0x8a = 0;
-    param_1->field_0x6c = (char)param_3;
-    if (param_3 != 0) {
-      temp_v0 = puVar1[1];
+    if (selection->ranges != NULL) {
+        selection->index = static_cast<s16>(index);
+        selection->step = 0;
+        selection->flag88 = 0;
+        SelectionRange* range = &selection->ranges[index];
+        selection->flag8a = 0;
+        selection->reverse = static_cast<u8>(reverse);
+        u32 endpoint;
+        if (reverse != 0) {
+            endpoint = range->last;
+        } else {
+            endpoint = range->first;
+        }
+        selection->current[0] = endpoint;
+        selection->current[1] = endpoint;
+        selection->current[2] = endpoint;
     }
-    else {
-      temp_v0 = *puVar1;
-    }
-    param_1->field_0x24 = temp_v0;
-    param_1->field_0x28 = temp_v0;
-    param_1->field_0x2c = temp_v0;
-  }
-  return;
 }
-
-} /* extern "C" */

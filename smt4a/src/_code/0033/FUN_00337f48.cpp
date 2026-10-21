@@ -11,21 +11,21 @@ typedef struct Resources {
 
 extern Resources g_effectEditor;
 
-int FUN_00399768(int handle, int arg);
-int FUN_003ba614(int handle, int arg);
+int objectRegistryInsert(int handle, int arg);
+int asdEffectQueueRelease(int handle, int arg);
 
 /* Frees the global effect and sound handles (clearing them), then frees `handle`. */
 void FUN_00337f48(int handle)
 {
     if (g_effectEditor.effect != 0) {
-        FUN_003ba614(g_effectEditor.effect, 3);
+        asdEffectQueueRelease(g_effectEditor.effect, 3);
         g_effectEditor.effect = 0;
     }
     if (g_effectEditor.sound != 0) {
-        FUN_00399768(g_effectEditor.sound, 3);
+        objectRegistryInsert(g_effectEditor.sound, 3);
         g_effectEditor.sound = 0;
     }
-    FUN_00399768(handle, 3);
+    objectRegistryInsert(handle, 3);
 }
 
 } /* extern "C" */

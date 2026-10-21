@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002aead8(unsigned int, unsigned int, unsigned int, unsigned int, int);
+int textureRequestIndexedFrame(unsigned int, unsigned int, unsigned int, unsigned int, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 
 extern int g_bustupCutAnim; /* 0x43dfc0 */
 
-/* Supplied declaration required: FUN_002aead8. */
+/* Supplied declaration required: textureRequestIndexedFrame. */
 extern int jobWorkGetFirstWord(unsigned int);
 extern int jobIsValid(unsigned int);
 
@@ -38,7 +38,7 @@ FUN_002bf6fc(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       temp_v1 = jobIsValid(*(unsigned int *)(temp_v3 + 0x630));
       if ((temp_v1 != 0) && (temp_v1 = jobWorkGetFirstWord(*(unsigned int *)(temp_v3 + 0x630)), temp_v1 == param_1))
       {
-        FUN_002aead8(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x630),param_2,param_3,param_4,(int)temp_v4);
+        textureRequestIndexedFrame(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x630),param_2,param_3,param_4,(int)temp_v4);
         return 1;
       }
       temp_v2 = temp_v2 + 1;

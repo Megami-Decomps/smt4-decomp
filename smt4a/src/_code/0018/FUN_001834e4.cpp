@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0018291c(int *, int *, int *, int *, int, int);
+int quadSetOrderedVectors(int *, int *, int *, int *, int, int);
 int FUN_002f5020(int *, unsigned char *, int, int);
 
 /* stack frame of param_1: 14 slot(s), 56 byte(s) */
@@ -28,7 +28,7 @@ typedef struct {
 extern unsigned char LAB_00192824; /* 0x192824 */
 extern unsigned int DAT_0063077c; /* 0x63077c */
 
-/* Supplied declaration required: FUN_0018291c. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: FUN_002f5020. */
 
 
@@ -102,7 +102,7 @@ void FUN_001834e4(unsigned int *param_1)
   uStack_14 = uStack_84;
   uStack_10 = uStack_80;
   uStack_c = temp_v1;
-  FUN_0018291c(&temp_v11,&temp_v10,&temp_v9,&uStack_48,0,0);
+  quadSetOrderedVectors(&temp_v11,&temp_v10,&temp_v9,&uStack_48,0,0);
   return;
 }
 

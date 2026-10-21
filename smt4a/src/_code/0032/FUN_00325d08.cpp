@@ -5,19 +5,19 @@
 extern "C" {
 
 int CONCAT44(int, double);
-int FUN_00293f1c(void);
-int FUN_00293f94(void);
+float mathSnapHeading16(float angle);
+float calcHeadingRoundedTo32Directions(float angle);
 int FUN_002b5cd4(void);
 int FUN_00327ee8(void);
-int FUN_0033f224(...);
+void lmapSceneStartMovement(unsigned char);
 int FUN_0050d8e4(void);
 
-int FUN_0013c1ec(...);
+int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int FUN_001bbf0c(void);
 int FUN_002469d0(void);
 int FUN_0025ef68(...);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002d1f40(...);
 int FUN_002e364c(...);
 int FUN_003d2150(...);
@@ -25,13 +25,13 @@ int FUN_003fd7c0(...);
 int FUN_00408184(...);
 int SBORROW4(...);
 
-int FUN_00145868(void);
+int soundVolumeSettingGet(void);
 int FUN_001bc124(void);
 int FUN_002dae68(void);
 int FUN_003135bc(...);
 int FUN_00313648(...);
 int FUN_00317af8(...);
-int FUN_00324cd0(void);
+int mapSpawnRandomEventKindEffect(void);
 int FUN_00324e38(...);
 int FUN_00325998(int, int);
 int FUN_003d4ed8(...);
@@ -54,7 +54,7 @@ extern unsigned char DAT_00531c18; /* 0x531c18 */
 extern unsigned char DAT_00531cb8; /* 0x531cb8 */
 extern unsigned char DAT_00531d58; /* 0x531d58 */
 extern unsigned char DAT_00531df8; /* 0x531df8 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
@@ -80,8 +80,8 @@ extern signed char DAT_005f1c48; /* 0x5f1c48 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0013c1ec. */
-/* Supplied declaration required: FUN_00145868. */
+/* Supplied declaration required: soundVolumeSettingSet. */
+/* Supplied declaration required: soundVolumeSettingGet. */
 /* Supplied declaration required: FUN_0014af98. */
 extern int gameFlagsGetBlock(void);
 extern int FUN_00184964(unsigned int, unsigned int);
@@ -90,9 +90,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_002469d0. */
 /* Supplied declaration required: FUN_0025ef68. */
-/* Supplied declaration required: FUN_00293f1c. */
-/* Supplied declaration required: FUN_00293f94. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_002dae68. */
@@ -101,11 +99,10 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003135bc. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: FUN_00317af8. */
-/* Supplied declaration required: FUN_00324cd0. */
+/* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: FUN_00327ee8. */
-/* Supplied declaration required: FUN_0033f224. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int gameDataFlagTestBit(unsigned int);
@@ -163,7 +160,7 @@ void FUN_00325d08(void)
   
   temp_v21 = 0;
   temp_v0 = gameFlagsGetBlock();
-  FUN_00145868();
+  soundVolumeSettingGet();
   rt_memcpy_w(aiStack_2e8,&DAT_00531c18,0xa0);
   rt_memcpy_w(aiStack_248,&DAT_00531cb8,0xa0);
   rt_memcpy_w(aiStack_1a8,&DAT_00531d58,0xa0);
@@ -197,13 +194,13 @@ void FUN_00325d08(void)
           if (DAT_005f1848 == 1) {
             if (*(int *)(g_lmapScene + 8) == 5) {
               FUN_00324e38(0xffffffff);
-              FUN_00324cd0();
+              mapSpawnRandomEventKindEffect();
               FUN_003135bc();
             }
             temp_v3 = *(int *)(g_lmapScene + 8);
 joined_r0x00326e7c:
             if (temp_v3 == 6) {
-              FUN_00324cd0();
+              mapSpawnRandomEventKindEffect();
               FUN_003135bc();
             }
             goto LAB_00326f3c;
@@ -211,7 +208,7 @@ joined_r0x00326e7c:
           if (DAT_005f1848 == 2) {
             if (*(int *)(g_lmapScene + 8) == 5) {
               FUN_00324e38(0xffffffff);
-              FUN_00324cd0();
+              mapSpawnRandomEventKindEffect();
               FUN_003135bc();
             }
             temp_v3 = *(int *)(g_lmapScene + 8);
@@ -220,7 +217,7 @@ joined_r0x00326e7c:
           if (DAT_005f1848 == 3) {
             if (*(int *)(g_lmapScene + 8) == 5) {
               FUN_00324e38(0xffffffff);
-              FUN_00324cd0();
+              mapSpawnRandomEventKindEffect();
               FUN_003135bc();
             }
             temp_v3 = *(int *)(g_lmapScene + 8);
@@ -230,14 +227,14 @@ joined_r0x00326e7c:
         else {
           if (*(int *)(g_lmapScene + 8) == 5) {
             FUN_00324e38(0xffffffff);
-            FUN_00324cd0();
+            mapSpawnRandomEventKindEffect();
             FUN_003135bc();
           }
           temp_v3 = *(int *)(g_lmapScene + 8);
 joined_r0x00326e38:
           if (temp_v3 == 6) {
             FUN_003135bc();
-            FUN_00324cd0();
+            mapSpawnRandomEventKindEffect();
           }
 LAB_00326f3c:
           if (DAT_005f1848 != 0) {
@@ -380,11 +377,11 @@ LAB_00326fcc:
       }
       temp_v16 = temp_v11;
       if ((g_gameState != 0x24) && (temp_v3 = FUN_004a0e38(2,5), temp_v16 = temp_v11, temp_v3 != 0)) {
-        FUN_002b5cb4();
+        distSpatial();
         *(float *)(g_lmapScene + 0x160) = *(float *)(g_lmapScene + 0x160) - temp_v11;
       }
       temp_v15 = temp_v16;
-      FUN_002b5cb4();
+      distSpatial();
       temp_v11 = *(float *)(temp_v0 + 0xdf8) + temp_v16;
       *(float *)(temp_v0 + 0xdf8) = temp_v11;
       temp_v8 = *(int *)(temp_v0 + 0xdf4) != 0;
@@ -458,13 +455,13 @@ LAB_00326fcc:
       FUN_002e364c();
       temp_v11 = temp_v15;
       if ((temp_v2 & 2) != 0) {
-        FUN_002b5cb4();
+        distSpatial();
         *(float *)(g_lmapScene + 0x15c) = *(float *)(g_lmapScene + 0x15c) - temp_v15;
         DAT_005f1633 = 4;
       }
       else {
         if (temp_v13 < *(float *)(g_lmapScene + 0x15c)) {
-          FUN_002b5cb4();
+          distSpatial();
           *(float *)(g_lmapScene + 0x15c) = *(float *)(g_lmapScene + 0x15c) - temp_v15;
         }
         if (temp_v13 < *(float *)(g_lmapScene + 0x15c)) {
@@ -498,7 +495,7 @@ LAB_00326fcc:
       *(int *)(temp_v3 + 0x38) = (int)((unsigned long long)temp_v10 >> 0x20);
       *(int *)(temp_v3 + 0x3c) = (int)temp_v10;
     }
-    temp_v4 = FUN_00145868();
+    temp_v4 = soundVolumeSettingGet();
     if (DAT_005f1848 != 0) {
       if (DAT_005f1848 != 1) {
         if (DAT_005f1848 != 2) {
@@ -512,9 +509,9 @@ LAB_00326fcc:
               temp_v3 = FUN_00184964(0,1);
               if (*(int *)(g_lmapScene + 0x1d0) != 10) {
                 FUN_0014af98();
-                FUN_0013c1ec();
+                soundVolumeSettingSet();
                 FUN_003d2150(temp_v3 + 0x10002e2);
-                FUN_0013c1ec(temp_v4);
+                soundVolumeSettingSet(temp_v4);
               }
             }
             if (*(int *)(g_lmapScene + 8) == 3) {
@@ -524,7 +521,7 @@ LAB_00326fcc:
               FUN_00324e38(0xffffffff);
             }
             if ((*(int *)(g_lmapScene + 8) == 6) &&
-               (FUN_00324cd0(), *(int *)(g_lmapScene + 8) == 6)) {
+               (mapSpawnRandomEventKindEffect(), *(int *)(g_lmapScene + 8) == 6)) {
               temp_v6 = 0x14;
               temp_v4 = 6;
               FUN_002d1f40(temp_v4,temp_v6,0);
@@ -554,9 +551,9 @@ LAB_00326870:
             temp_v3 = FUN_00184964(0,1);
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
               FUN_0014af98();
-              FUN_0013c1ec();
+              soundVolumeSettingSet();
               FUN_003d2150(temp_v3 + 0x10002e0);
-              FUN_0013c1ec(temp_v4);
+              soundVolumeSettingSet(temp_v4);
             }
             goto LAB_00326870;
           }
@@ -579,16 +576,16 @@ LAB_003267fc:
             temp_v3 = FUN_00184964(0,1);
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
               FUN_0014af98();
-              FUN_0013c1ec();
+              soundVolumeSettingSet();
               FUN_003d2150(temp_v3 + 0x10002de);
-              FUN_0013c1ec(temp_v4);
+              soundVolumeSettingSet(temp_v4);
             }
           }
           FUN_00324e38(0xffffffff);
         }
         if (*(int *)(g_lmapScene + 8) == 6) {
 LAB_003268e4:
-          FUN_00324cd0();
+          mapSpawnRandomEventKindEffect();
         }
         if (*(int *)(g_lmapScene + 8) >= 8) {
           *(unsigned char *)(g_lmapScene + 0x224) = 0;
@@ -610,14 +607,14 @@ LAB_003268e4:
           temp_v3 = FUN_00184964(0,1);
           if (*(int *)(g_lmapScene + 0x1d0) != 10) {
             FUN_0014af98();
-            FUN_0013c1ec();
+            soundVolumeSettingSet();
             FUN_003d2150(temp_v3 + 0x10002dc);
-            FUN_0013c1ec(temp_v4);
+            soundVolumeSettingSet(temp_v4);
           }
         }
         FUN_00324e38(0xffffffff);
       }
-      if ((*(int *)(g_lmapScene + 8) == 6) && (FUN_00324cd0(), *(int *)(g_lmapScene + 8) == 6)) {
+      if ((*(int *)(g_lmapScene + 8) == 6) && (mapSpawnRandomEventKindEffect(), *(int *)(g_lmapScene + 8) == 6)) {
         temp_v6 = 8;
         temp_v4 = 4;
         FUN_002d1f40(temp_v4,temp_v6,0);
@@ -691,7 +688,7 @@ LAB_00326a10:
             *(unsigned int *)(temp_v3 + 8) = 0;
             if (*(int *)(temp_v3 + 0x1d0) != 1 && *(int *)(temp_v3 + 0x1d0) != 9) goto LAB_003270b0;
 LAB_00326cc4:
-            FUN_0033f224(0);
+            lmapSceneStartMovement(0);
           }
         }
         else if ((*(int *)(g_lmapScene + 8) >= 9) &&
@@ -756,18 +753,18 @@ LAB_00326cc4:
         (0xbeffffff < temp_v19)) || ((int)temp_v19 >= 0x3f000000)) {
       FUN_0050d8e4();
       temp_v14 = CONCAT44(0x43b40000,temp_v13);
-      temp_v16 = temp_v20[0] * 57.32484f - *(float *)(DAT_005806a4 + 0x18);
+      temp_v16 = temp_v20[0] * 57.32484f - *(float *)(g_lmapView + 0x18);
       if (temp_v16 < temp_v13) {
         temp_v16 = temp_v16 + 360.0f;
       }
       if ((int)temp_v16 >= 0x43b40001) {
         temp_v16 = temp_v16 - 360.0f;
       }
-      if (*(int *)(DAT_005806a4 + 200) != 3) {
-        FUN_00293f94();
+      if (*(int *)(g_lmapView + 200) != 3) {
+        temp_v16 = calcHeadingRoundedTo32Directions(temp_v16);
       }
       else {
-        FUN_00293f1c();
+        temp_v16 = mathSnapHeading16(temp_v16);
       }
       temp_v16 = -temp_v16;
       temp_v15 = *(float *)(g_lmapScene + 0x50);

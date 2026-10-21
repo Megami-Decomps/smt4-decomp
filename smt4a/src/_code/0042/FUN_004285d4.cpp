@@ -8,7 +8,7 @@ int FUN_001029f4(...);
 int FUN_00102bbc(...);
 int libc_strtok(...);
 int FUN_0043bd0c(...);
-int FUN_0043c2f4(...);
+int stringFormatBounded(...);
 int strncpy(...);
 
 /* stack frame of param_3: 3 slot(s), 9 byte(s) */
@@ -26,7 +26,7 @@ extern unsigned char DAT_00536cd4; /* 0x536cd4 */
 /* Supplied declaration required: libc_strtok. */
 extern int wstrlen(int);
 /* Supplied declaration required: FUN_0043bd0c. */
-/* Supplied declaration required: FUN_0043c2f4. */
+/* Supplied declaration required: stringFormatBounded. */
 
 
 unsigned int FUN_004285d4(int param_1,unsigned int param_2,int param_3)
@@ -63,7 +63,7 @@ unsigned int FUN_004285d4(int param_1,unsigned int param_2,int param_3)
       temp_v1 = 0x536cd8;
       temp_v3 = &DAT_00536cd4;
     }
-    FUN_0043c2f4(temp_v8,3,"%s%s",temp_v1);
+    stringFormatBounded(temp_v8,3,"%s%s",temp_v1);
     puVar4 = temp_v8;
     FUN_001029f4(puVar4,&temp_v4,10);
     if ((*temp_v4 == '\0') && (-1 < temp_v0 && -1 < (int)puVar4)) {

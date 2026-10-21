@@ -1,107 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdVramHeapAlloc` (_code @ 0x19ad80, 0x160 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the pooled-descriptor helper keeps separate requested/aligned sizes and delays the selected-slot address, adding one saved register. */
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" {
-
-int FUN_0019c920(...);
-
-typedef struct fn_0019ad80_arg0 fn_0019ad80_arg0;
-struct fn_0019ad80_arg0 {
-    uint field_0x0; /* +0x0 */
-    unsigned char pad_0x4[0x8];
-    void *field_0xc; /* +0xc */
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x3];
-    unsigned char field_0x14; /* +0x14 */
-    unsigned char pad_0x15[0x3];
-    int field_0x18; /* +0x18 */
+struct AsdVramBlockA {
+    /* 0x00 */ u32 addr;
+    /* 0x04 */ u32 size;
+    /* 0x08 */ u32 poolId;
+    /* 0x0c */ AsdVramBlockA *prev;
+    /* 0x10 */ AsdVramBlockA *next;
 };
 
-extern unsigned char g_asdMemory; /* 0x5b406c */
+struct AsdVramBlockListA {
+    /* 0x00 */ AsdVramBlockA *head;
+    /* 0x04 */ AsdVramBlockA *tail;
+    /* 0x08 */ s32 count;
+};
 
-/* Supplied declaration required: FUN_0019c920. */
+struct AsdVramHeapA {
+    /* 0x00 */ AsdVramBlockListA used;
+    /* 0x0c */ AsdVramBlockListA free;
+    /* 0x18 */ u32 freeBytes;
+};
 
+extern "C" {
+extern AsdMemoryApoc g_asdMemory;
+void FUN_0019c920(AsdVramHeapA *, AsdVramBlockA *);
 
-int asdVramHeapAlloc(fn_0019ad80_arg0 *param_1,unsigned int param_2)
-
+static __inline AsdVramBlockA *allocateVramBlock(u32 size)
 {
-/* irregular: 1 goto(s); irregular input(s): in_r12; 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  void *pvVar4;
-  int *piVar5;
-  int *piVar6;
-  int in_r12;
-  
-  piVar1 = (*(int * *)((unsigned char *)&g_asdMemory + 0x18));
-  piVar5 = (int *)param_1->field_0xc;
-  while( 1 ) {
-    if (piVar5 == (int *)0x0) {
-      return 0;
+    if (size & 0x7f)
+        size += 0x80 - (size & 0x7f);
+    AsdMemTable *table = g_asdMemory.table;
+    AsdVramBlockA *block = NULL;
+    if (table != NULL && table->entries != NULL) {
+        AsdVramBlockA *entries = static_cast<AsdVramBlockA *>(table->entries);
+        for (s32 i = 0; i < 512; ++i) {
+            if (entries[i].poolId == 0) {
+                block = &entries[i];
+                block->addr = 0;
+                block->size = 0;
+                block->poolId = i + 1;
+                block->prev = NULL;
+                block->next = NULL;
+                ++table->count;
+                break;
+            }
+        }
     }
-    if (param_2 <= (unsigned int)piVar5[1]) break;
-    piVar5 = (int *)piVar5[4];
-  }
-  if ((param_2 & 0x7f) != 0) {
-    param_2 = param_2 + (0x80 - (param_2 & 0x7f));
-  }
-  if (piVar5[1] == param_2) {
-    param_1->field_0x18 = param_1->field_0x18 - piVar5[1];
-    temp_v1 = piVar5[3];
-    pvVar4 = (void *)piVar5[4];
-    if (temp_v1 != 0) {
-      *(void **)(temp_v1 + 0x10) = pvVar4;
-    }
-    else {
-      param_1->field_0xc = pvVar4;
-    }
-    if (pvVar4 != (void *)0x0) {
-      *(int *)((int)pvVar4 + 0xc) = temp_v1;
-    }
-    else {
-      *(int *)&param_1->field_0x10 = temp_v1;
-    }
-    piVar5[3] = 0;
-    piVar5[4] = 0;
-    *(int *)&param_1->field_0x14 = *(int *)&param_1->field_0x14 - 1;
-    FUN_0019c920(param_1,piVar5);
-    return *piVar5;
-  }
-  if ((param_2 & 0x7f) != 0) {
-    param_2 = param_2 + (0x80 - (param_2 & 0x7f));
-  }
-  if ((*(int * *)((unsigned char *)&g_asdMemory + 0x18)) != (int *)0x0) {
-    in_r12 = *(*(int * *)((unsigned char *)&g_asdMemory + 0x18));
-  }
-  if ((*(int * *)((unsigned char *)&g_asdMemory + 0x18)) != (int *)0x0 && in_r12 != 0) {
-    temp_v1 = 0;
-    do {
-      temp_v0 = temp_v1 + 1;
-      piVar6 = (int *)(in_r12 + temp_v1 * 0x14);
-      if (piVar6[2] == 0) {
-        *piVar6 = 0;
-        piVar6[1] = 0;
-        piVar6[2] = temp_v0;
-        piVar6[3] = 0;
-        piVar6[4] = 0;
-        piVar1[1] = piVar1[1] + 1;
-        goto LAB_0019ae14;
-      }
-      temp_v1 = temp_v0;
-    } while (temp_v0 < 0x200);
-  }
-  piVar6 = (int *)0x0;
-LAB_0019ae14:
-  temp_v1 = *piVar5;
-  piVar6[1] = param_2;
-  *piVar6 = temp_v1;
-  *piVar5 = *piVar5 + param_2;
-  piVar5[1] = piVar5[1] - param_2;
-  param_1->field_0x18 = param_1->field_0x18 - piVar6[1];
-  FUN_0019c920(param_1,piVar6);
-  return *piVar6;
+    block->size = size;
+    return block;
 }
 
-} /* extern "C" */
+// Reserve the first fitting VRAM range, splitting it with a pooled block descriptor.
+u32 asdVramHeapAlloc(AsdVramHeapA *heap, u32 size)
+{
+    for (AsdVramBlockA *free = heap->free.head; free != NULL; free = free->next) {
+        if (free->size >= size) {
+            if (size & 0x7f)
+                size += 0x80 - (size & 0x7f);
+            if (free->size != size) {
+                AsdVramBlockA *block = allocateVramBlock(size);
+                block->addr = free->addr;
+                free->addr += size;
+                free->size -= size;
+                heap->freeBytes -= block->size;
+                FUN_0019c920(heap, block);
+                return block->addr;
+            }
+            heap->freeBytes -= free->size;
+            AsdVramBlockA *prev = free->prev;
+            AsdVramBlockA *next = free->next;
+            if (prev != NULL)
+                prev->next = next;
+            else
+                heap->free.head = next;
+            if (next != NULL)
+                next->prev = prev;
+            else
+                heap->free.tail = prev;
+            free->prev = NULL;
+            free->next = NULL;
+            --heap->free.count;
+            FUN_0019c920(heap, free);
+            return free->addr;
+        }
+    }
+    return 0;
+}
+}

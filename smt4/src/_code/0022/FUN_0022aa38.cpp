@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022abe0(unsigned int, unsigned short [10]);
 int FUN_00247478(unsigned char [22], unsigned int, unsigned int);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int FUN_002ae164(void);
 
 /* stack frame of param_2: 6 slot(s), 22 byte(s) */
@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0022abe0. */
 /* Supplied declaration required: FUN_00247478. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: FUN_002ae164. */
 
@@ -66,7 +66,7 @@ unsigned int FUN_0022aa38(unsigned int param_1,int param_2)
   do {
     temp_v2 = (unsigned int)temp_v4[temp_v1];
     if (temp_v2 != 0) {
-      FUN_00283e48();
+      passiveSkillLookupRecord();
       temp_v3 = 0;
       if (temp_v2 != 0) {
         temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 0x32);

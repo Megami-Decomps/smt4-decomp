@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0027461c(void);
 int moriModelContentCopyBody(...);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 int VectorSignedToFloat(...);
 
 int FUN_00178b04(...);
@@ -43,8 +43,8 @@ extern int dataTableCountWithAoc(void);
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 unsigned int FUN_0033d6c0(void)
@@ -78,7 +78,7 @@ unsigned int FUN_0033d6c0(void)
         FUN_00178b04(0x20,&LAB_0033dc04,0xf5);
         temp_v4 = 0;
         if (temp_v1 != 0) {
-          temp_v4 = FUN_0040ac08();
+          temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x20) = temp_v4;
         FUN_0040aa6c();
@@ -93,7 +93,7 @@ unsigned int FUN_0033d6c0(void)
         FUN_00178b04(0x20,&LAB_0033dc04,0xff);
         temp_v4 = 0;
         if (temp_v1 != 0) {
-          temp_v4 = FUN_0040ac08();
+          temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x24) = temp_v4;
         FUN_0040aa6c();
@@ -108,7 +108,7 @@ unsigned int FUN_0033d6c0(void)
         FUN_00178b04(0x20,&LAB_0033dc04,0x109);
         temp_v4 = 0;
         if (temp_v1 != 0) {
-          temp_v4 = FUN_0040ac08();
+          temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x28) = temp_v4;
         FUN_0040aa6c();
@@ -123,7 +123,7 @@ unsigned int FUN_0033d6c0(void)
         FUN_00178b04(0x20,&LAB_0033dc04,0x113);
         temp_v4 = 0;
         if (temp_v1 != 0) {
-          temp_v4 = FUN_0040ac08();
+          temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x2c) = temp_v4;
         FUN_0040aa6c();
@@ -138,7 +138,7 @@ unsigned int FUN_0033d6c0(void)
         FUN_00178b04(0x20,&LAB_0033dc04,0x122);
         temp_v4 = 0;
         if (temp_v1 != 0) {
-          temp_v4 = FUN_0040ac08();
+          temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x34) = temp_v4;
         FUN_0040aa6c();
@@ -153,7 +153,7 @@ unsigned int FUN_0033d6c0(void)
         FUN_00178b04(0x20,&LAB_0033dc04,299);
         temp_v4 = 0;
         if (temp_v1 != 0) {
-          temp_v4 = FUN_0040ac08();
+          temp_v4 = modelListInit();
         }
         *(unsigned int *)(g_mapHakai + *(short *)(g_mapHakai + 10) * 0x20 + 0x38) = temp_v4;
         FUN_0040aa6c();
@@ -216,13 +216,13 @@ LAB_0033dd20:
               temp_v4 = 0;
             }
             else {
-              temp_v4 = FUN_0040ac08();
+              temp_v4 = modelListInit();
             }
             *(unsigned int *)(temp_v2 + 0x88) = temp_v4;
             moriModelContentCopyBody(temp_v4,*(unsigned int *)
                                 (g_mapHakai + *(int *)(temp_v2 + 0x90) * 0x20 +
                                  *(short *)(temp_v2 + 0xac) * 4 + 0x20),0);
-            FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x88) + 4));
+            handleRegistryRegisterObject(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x88) + 4));
             *(unsigned char *)(temp_v2 + 0x84) = 1;
             *(unsigned char *)(temp_v2 + 0x8c) = 1;
             *(unsigned int *)(temp_v2 + 0x90) = 0;
@@ -234,7 +234,7 @@ LAB_0033dd20:
             temp_v1 = g_mapHakai;
             temp_v0 = *(short *)(g_mapHakai + 10);
             *(int *)(temp_v2 + 0x90) = (int)temp_v0;
-            FUN_0040ace8(g_handleRegistry,
+            handleRegistryRegisterObject(g_handleRegistry,
                          *(unsigned int *)
                           (*(int *)(temp_v1 + temp_v0 * 0x20 + *(short *)(temp_v2 + 0xac) * 4 + 0x20) + 4)
                         );

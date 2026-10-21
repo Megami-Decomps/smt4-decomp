@@ -9,7 +9,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 extern int saveTestFlagRow(unsigned char);
 extern int gameFlagIsSet(void);
 extern int FUN_002fb094(int);
-extern int FUN_00316dac(int);
+extern int mapBlockBitTest(int);
 
 
 void FUN_0039edf0(int param_1)
@@ -42,7 +42,7 @@ LAB_0039eeac:
           *(unsigned short *)(temp_v1 + 0xebc) = 0;
         }
         else {
-          temp_v0 = FUN_00316dac((int)*(short *)(temp_v1 + 0xeb6));
+          temp_v0 = mapBlockBitTest((int)*(short *)(temp_v1 + 0xeb6));
           if (temp_v0 == 0) {
             *(unsigned short *)(temp_v1 + 0xebc) = 0;
           }
@@ -72,7 +72,7 @@ LAB_0039eee0:
           goto LAB_0039efac;
         }
         else {
-          temp_v0 = FUN_00316dac((int)*(short *)(temp_v1 + 0x5abe));
+          temp_v0 = mapBlockBitTest((int)*(short *)(temp_v1 + 0x5abe));
           if (temp_v0 != 0) goto LAB_0039efac;
         }
 LAB_0039ef90:

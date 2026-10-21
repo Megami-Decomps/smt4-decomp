@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00184310(void);
 
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_002625b0(unsigned short, int);
+extern int affinityShouldReplaceState(unsigned short, int);
 extern int FUN_002ada48(int, int);
 
 
@@ -32,7 +32,7 @@ void FUN_001fef70(unsigned short *param_1,int param_2,int param_3)
     *param_1 = temp_v3 | 1;
   }
   temp_v4 = FUN_002ada48(param_2 + 0x34,param_3);
-  temp_v2 = FUN_002625b0(*param_1 >> 10,temp_v4);
+  temp_v2 = affinityShouldReplaceState(*param_1 >> 10,temp_v4);
   if (temp_v2 != 0) {
     *param_1 = (*param_1 & 0x3ff) | (unsigned short)(temp_v4 << 10);
   }

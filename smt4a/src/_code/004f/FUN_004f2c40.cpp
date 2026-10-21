@@ -1,6 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f2c40` (_code @ 0x4f2c40, 0x1298 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W5_W5Match8_CameraTransition.h"
+
+namespace {
+struct CameraBlendFrameView {
+    u8 unk000[0x654];
+    s32 frame;
+};
+}
 
 extern "C" {
 
@@ -9,11 +17,11 @@ int uiSetFloatPair(...);
 int FUN_0014f0dc(...);
 int FUN_0018a924(...);
 int FUN_00280070(...);
-int FUN_002e5104(...);
+int effectSetValueVec(...);
 int FUN_002e512c(...);
-int FUN_0031b91c(void);
+int effectProcessSetValue(void);
 int words5Clear(...);
-int FUN_003f9c6c(...);
+int cameraAnimationSampleAndAdvance(...);
 int FUN_004f112c(...);
 
 int FUN_001a1ee0(void);
@@ -24,7 +32,7 @@ int FUN_003d4dd4(...);
 int FUN_003d8f24(...);
 int FUN_004f0c80(float *, double);
 int FUN_004f1708(...);
-int FUN_004f18e8(float *, double);
+void btlCameraInterpolateAllParameters(W5Match8CameraTransition*, s32);
 int FUN_004f1f78(float *);
 int FUN_004f2094(...);
 int FUN_004f2548(...);
@@ -98,7 +106,7 @@ extern int DAT_00571520; /* 0x571520 */
 extern int DAT_00571524; /* 0x571524 */
 extern int DAT_00571528; /* 0x571528 */
 extern int DAT_0057152c; /* 0x57152c */
-extern int DAT_00589144; /* 0x589144 */
+extern int g_freeCamera; /* 0x589144 */
 extern float DAT_005e1530; /* 0x5e1530 */
 extern float DAT_005e1534; /* 0x5e1534 */
 extern float DAT_005e1538; /* 0x5e1538 */
@@ -128,18 +136,18 @@ extern float *FUN_00208bfc(void);
 extern int rangeIsValid(float *);
 /* Supplied declaration required: FUN_00280070. */
 extern int effectProcessIsActive(void);
-/* Supplied declaration required: FUN_002e5104. */
+/* Supplied declaration required: effectSetValueVec. */
 /* Supplied declaration required: FUN_002e512c. */
-/* Supplied declaration required: FUN_0031b91c. */
+/* Supplied declaration required: effectProcessSetValue. */
 /* Supplied declaration required: pairSourceGet. */
 /* Supplied declaration required: FUN_003d4dd4. */
 /* Supplied declaration required: FUN_003d8f24. */
 /* Supplied declaration required: words5Clear. */
-/* Supplied declaration required: FUN_003f9c6c. */
+/* Supplied declaration required: cameraAnimationSampleAndAdvance. */
 /* Supplied declaration required: FUN_004f0c80. */
 /* Supplied declaration required: FUN_004f112c. */
 /* Supplied declaration required: FUN_004f1708. */
-/* Supplied declaration required: FUN_004f18e8. */
+/* Supplied declaration required: btlCameraInterpolateAllParameters. */
 /* Supplied declaration required: FUN_004f1f78. */
 /* Supplied declaration required: FUN_004f2094. */
 /* Supplied declaration required: FUN_004f2548. */
@@ -213,7 +221,7 @@ unsigned int FUN_004f2c40(float *param_1)
   float *temp_v51;
   float *temp_v52;
   
-  temp_v3 = DAT_00589144;
+  temp_v3 = g_freeCamera;
   temp_v44 = param_1 + 0x19e;
   pfVar6 = param_1 + 0x193;
   temp_v10 = 1.0f;
@@ -228,7 +236,8 @@ unsigned int FUN_004f2c40(float *param_1)
       break;
     }
     if (((unsigned int)param_1[0x193] & 1) != 0) {
-      FUN_004f18e8(param_1,param_1[0x195]);
+      btlCameraInterpolateAllParameters(reinterpret_cast<W5Match8CameraTransition*>(param_1),
+                  reinterpret_cast<const CameraBlendFrameView*>(param_1)->frame);
       temp_v0 = (float)((int)param_1[0x195] + 1);
       param_1[0x195] = temp_v0;
       if ((int)param_1[0x194] < (int)temp_v0) {
@@ -632,9 +641,9 @@ LAB_004f33d8:
     FUN_00280070(param_1 + 0x1b,0);
     temp_v3 = effectProcessIsActive();
     if (temp_v3 != 0) {
-      FUN_002e5104(&temp_v14);
+      effectSetValueVec(&temp_v14);
       FUN_002e512c(&temp_v17);
-      FUN_0031b91c();
+      effectProcessSetValue();
     }
     param_1[0x163] = temp_v14;
     param_1[0x164] = temp_v15;
@@ -679,7 +688,7 @@ LAB_004f33d8:
     break;
   case 0x3:
     temp_v10 = param_1[0x196];
-    FUN_003f9c6c(temp_v10,param_1 + 0x198,param_1[0x1a9]);
+    cameraAnimationSampleAndAdvance(temp_v10,param_1 + 0x198,param_1[0x1a9]);
     if (temp_v10 == 0.0f) {
       if (*(char *)(param_1 + 0x1aa) == '\0') {
         param_1[0xf] = 0.0f;

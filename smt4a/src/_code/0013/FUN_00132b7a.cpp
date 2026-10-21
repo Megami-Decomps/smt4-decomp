@@ -1,45 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132b7a` (_code @ 0x132b7a, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: capacity null-path folding, allocation registers, and element-range stores differ from retail. */
+#include "common.h"
+
+struct PoolElement12 {
+    u8 data[0xc];
+};
+struct PoolBlock12 {
+    PoolBlock12 *next; // 0x00
+    u32 capacity; // 0x04
+    PoolElement12 *elements; // 0x08
+};
+struct ElementPool12 {
+    PoolBlock12 *blocks; // 0x00
+    u32 unk04;
+    PoolElement12 *current; // 0x08
+    PoolElement12 *end; // 0x0c
+};
 
 extern "C" {
+u32 vectorGrowCapacity_0012d424(u32, ElementPool12 *);
+void *rt_malloc(u32);
 
-int rt_malloc(...);
-
-extern int vectorGrowCapacity_0012d424(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_00132b7a(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Prepend a new allocation block and expose its element range.
+void FUN_00132b7a(ElementPool12 *pool, s32 singleElement)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 1;
-  if (param_2 == 0) {
-    if (*param_1 != 0) {
-      temp_v0 = *(unsigned int *)(*param_1 + 4);
-    }
-    else {
-      temp_v0 = 0;
-    }
-    temp_v2 = vectorGrowCapacity_0012d424(temp_v0,param_1,param_3,param_4,param_4);
-  }
-  piVar2 = (int *)rt_malloc(0xc);
-  temp_v1 = rt_malloc();
-  piVar2[2] = temp_v1;
-  temp_v1 = *param_1;
-  piVar2[1] = temp_v2;
-  *piVar2 = temp_v1;
-  *param_1 = (int)piVar2;
-  temp_v1 = piVar2[2];
-  param_1[3] = temp_v1 + temp_v2 * 0xc;
-  param_1[2] = temp_v1;
-  return;
+    u32 capacity = 1;
+    if (!singleElement)
+        capacity = vectorGrowCapacity_0012d424(pool->blocks ? pool->blocks->capacity : 0,
+                                               pool);
+    PoolBlock12 *block = (PoolBlock12 *)rt_malloc(sizeof(PoolBlock12));
+    block->elements = (PoolElement12 *)rt_malloc(capacity * sizeof(PoolElement12));
+    block->capacity = capacity;
+    block->next = pool->blocks;
+    pool->blocks = block;
+    pool->end = block->elements + capacity;
+    pool->current = block->elements;
 }
-
-} /* extern "C" */
+}

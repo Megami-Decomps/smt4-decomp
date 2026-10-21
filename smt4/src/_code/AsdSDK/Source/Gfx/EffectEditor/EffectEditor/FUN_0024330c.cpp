@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0024dd00(...);
+int asdDebugLog(...);
 int effEditorNodeChainApply(int);
 int FUN_0024dd80(...);
 int FUN_0024dd90(int);
@@ -69,7 +69,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_0024dd00. */
+/* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
@@ -498,7 +498,7 @@ LAB_00243564:
     *(int *)(temp_v11 + 0xc) = temp_v9;
     effMenuListAppend();
   }
-  FUN_0024dd00(0xa4,0x6e,8,&LAB_00243d04,temp_v30);
+  asdDebugLog(0xa4,0x6e,8,&LAB_00243d04,temp_v30);
   temp_v16 = padIsButtonPressed(1);
   if (temp_v16 == 0) {
     FUN_0024dd80(1);

@@ -2,18 +2,20 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct MessageCloseWork;
+
 extern "C" {
 
 int asdSequenceRequest(int, int *);
 int asdOperatorNew(void);
 int FUN_002bf464(void);
 int asdOperatorDelete(void);
-int FUN_00318d6c(void);
+int helpTexturesRelease(void);
 int campCommonBgAcquire(void);
 int campButtonHelpAcquire(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
-int FUN_003a7644(void);
+void FUN_003a7644(MessageCloseWork *);
 int soundChannelStopAll(int);
 int FUN_003d54f8(...);
 int FUN_0047c36c(unsigned int);
@@ -33,7 +35,7 @@ typedef struct {
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_002bf464. */
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_00318d6c. */
+/* Supplied declaration required: helpTexturesRelease. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: campCommonBgRelease. */
@@ -85,7 +87,7 @@ unsigned int FUN_0024b5ac(int *param_1,unsigned int param_2,unsigned int param_3
           *(unsigned int *)(temp_v3 + 0x1c) = 0;
         }
         campButtonHelpRelease();
-        FUN_00318d6c();
+        helpTexturesRelease();
         campCommonBgRelease();
       }
     }
@@ -107,7 +109,7 @@ unsigned int FUN_0024b5ac(int *param_1,unsigned int param_2,unsigned int param_3
       temp_v2 = FUN_0047c8b8();
     }
     *(unsigned int *)(temp_v3 + 0x1c) = temp_v2;
-    FUN_003a7644();
+    FUN_003a7644((MessageCloseWork *)temp_v2);
     *(unsigned char *)(temp_v3 + 0x1a) = 1;
   }
   return 0;

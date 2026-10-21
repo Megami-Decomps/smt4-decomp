@@ -5,15 +5,15 @@
 extern "C" {
 
 int FUN_00297060(unsigned int, unsigned int);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int asdTMTexTableLoadEntryAsync(int, unsigned int);
 int textFormatBuffer(...);
 
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: textFormatBuffer. */
-extern unsigned int FUN_002c5c04(char *);
+extern unsigned int asdLoadFileSyncDefault(char *);
 
 
 void FUN_003b82c4(int param_1)
@@ -51,11 +51,11 @@ void FUN_003b82c4(int param_1)
                (int)*(short *)(param_1 + 0x3c));
   textFormatBuffer(temp_v4,"mikado/m%03d/m%03d.mbm",(int)*(short *)(param_1 + 0x3c),
                (int)*(short *)(param_1 + 0x3c));
-  FUN_00297468(temp_v3,param_1 + 0xd6c,0);
-  FUN_00297468(temp_v4,param_1 + 0xd70,0);
-  temp_v0 = FUN_002c5c04("map/all/mapsys_scr.bf");
+  asdLoadFileAsyncSimple(temp_v3,param_1 + 0xd6c,0);
+  asdLoadFileAsyncSimple(temp_v4,param_1 + 0xd70,0);
+  temp_v0 = asdLoadFileSyncDefault("map/all/mapsys_scr.bf");
   *(unsigned int *)(param_1 + 0xd94) = temp_v0;
-  temp_v0 = FUN_002c5c04("map/all/mapsys_mes.mbm");
+  temp_v0 = asdLoadFileSyncDefault("map/all/mapsys_mes.mbm");
   *(unsigned int *)(param_1 + 0xd98) = temp_v0;
   temp_v1 = *(unsigned int *)(param_1 + 0xd94);
   FUN_00297060(temp_v1,temp_v0);

@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d8d40` (_code @ 0x4d8d40, 0x1a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_BattleStageModelA.h"
+
+struct FrameColorUpdateWork;
 
 extern "C" {
 
@@ -8,9 +11,8 @@ int FUN_002c2358(void);
 int FUN_002c23cc(int);
 int FUN_00400d80(void);
 int FUN_00401198(int);
-int FUN_0040128c(int);
+void FUN_0040128c(FrameColorUpdateWork *);
 int objectOwner3Release(int);
-int FUN_00401390(int);
 int FUN_004013f0(int);
 int FUN_004d896c(int, unsigned int, unsigned int);
 int FUN_004d8bf8(int);
@@ -25,7 +27,6 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 /* Supplied declaration required: FUN_00401198. */
 /* Supplied declaration required: FUN_0040128c. */
 /* Supplied declaration required: objectOwner3Release. */
-/* Supplied declaration required: FUN_00401390. */
 /* Supplied declaration required: FUN_004013f0. */
 extern int FUN_00401440(int);
 extern unsigned short FUN_00406798(unsigned int, char *);
@@ -58,7 +59,7 @@ unsigned int FUN_004d8d40(int param_1,int param_2)
   case 2:
     temp_v1 = FUN_00401440(param_1);
     if (temp_v1 == 0) break;
-    FUN_00401390(param_1);
+    btlStageUpdateNodePositions((BattleStageModelA*)param_1,((BattleStageModelA*)param_1)->position);
     FUN_004013f0(param_1);
     temp_v0 = FUN_00406798(*(unsigned int *)(g_handleRegistry + 4),"Light_EFT");
     *(unsigned short *)(param_1 + 0xac) = temp_v0;
@@ -76,10 +77,10 @@ unsigned int FUN_004d8d40(int param_1,int param_2)
     *(unsigned int *)(param_1 + 0xa0) = 0;
     break;
   case 4:
-    FUN_00401390(param_1);
+    btlStageUpdateNodePositions((BattleStageModelA*)param_1,((BattleStageModelA*)param_1)->position);
     FUN_004013f0(param_1);
     FUN_00401198(param_1);
-    FUN_0040128c(param_1);
+    FUN_0040128c((FrameColorUpdateWork *)param_1);
   }
   if (*(short *)(param_1 + 0xbc) != -1) {
     *(short *)(param_1 + 0xbc) = *(short *)(param_1 + 0xbc) + 1;

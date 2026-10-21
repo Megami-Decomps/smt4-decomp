@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_002937d0(void *p);
+void objClearFlagPair(void *p);
 
 void FUN_002937c8(u8 *p)
 {
-    FUN_002937d0(p + 16);
+    objClearFlagPair(p + 16);
 }
 
 }

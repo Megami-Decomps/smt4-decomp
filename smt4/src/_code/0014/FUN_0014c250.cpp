@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014c250` (_code @ 0x14c250, 0x164 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_WaveArchiveReader.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ extern int *FUN_001522ac(unsigned char *, unsigned int);
 extern unsigned int FUN_001522d4(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a4b0c. */
 /* Supplied declaration required: FUN_002a78c0. */
-extern int FUN_002a7a3c(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a7ac4. */
 extern unsigned int FUN_002ac780(int);
 extern int FUN_002c3984(void);
@@ -59,7 +59,7 @@ FUN_0014c250(int *param_1,unsigned int param_2,unsigned int param_3,int *param_4
   if ((piVar2 != (int *)0x0) ||
      (piVar2 = param_1, FUN_00150d2c(param_1,param_2,param_4,param_5), piVar2 != (int *)0x0)) {
     FUN_002a7ac4(temp_v8,piVar2,1);
-    if ((temp_v9 != '\0') && (temp_v1 = FUN_002a7a3c(temp_v8,param_3), temp_v1 != 0)) {
+    if ((temp_v9 != '\0') && (temp_v1 = (unsigned int)FUN_002a7a3c((const WaveArchiveReader*)temp_v8,param_3), temp_v1 != 0)) {
       return 1;
     }
     piVar2 = (int *)FUN_001522ac(temp_v8,param_3);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0020401c(int);
+int placeWinStartText(int);
 int FUN_00275bc8(void *, unsigned int);
 int FUN_003d54f8(int, int);
 int dataTable17Type1GetEntry(...);
@@ -30,7 +30,7 @@ struct fn_0049569c_arg0 {
 };
 
 extern int gameFlagIsSet(unsigned short);
-/* Supplied declaration required: FUN_0020401c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_003d54f8. */
 extern int FUN_004962e4(void);
@@ -93,7 +93,7 @@ void FUN_0049569c(fn_0049569c_arg0 *param_1)
     if (temp_v1 != 0) {
       temp_v2 = temp_v2 + 0x6c;
     }
-    FUN_0020401c(temp_v2);
+    placeWinStartText(temp_v2);
     param_1->field_0x10 = param_1->field_0x4;
     param_1->field_0x4 = 1;
     param_1->field_0x8 = 0;

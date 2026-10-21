@@ -25,7 +25,7 @@ extern unsigned char LAB_00161da4; /* 0x161da4 */
 /* Unsupported intrinsic, declaration required: UnsignedSaturate (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: UnsignedDoesSaturate (CALLOTHER). */
 /* Supplied declaration required: FUN_00173818. */
-extern unsigned int FUN_00175678(void);
+extern unsigned int objectCommandQueueGet(void);
 /* Supplied declaration required: FUN_0018c87c. */
 /* Supplied declaration required: FUN_001911a4. */
 /* Supplied declaration required: FUN_00191260. */
@@ -129,7 +129,7 @@ void FUN_00147c10(int param_1)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0x80);
   }
-  temp_v3 = FUN_00175678();
+  temp_v3 = objectCommandQueueGet();
   FUN_00191260();
   FUN_001911a4(temp_v3,0);
   return;

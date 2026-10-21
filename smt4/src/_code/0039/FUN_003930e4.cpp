@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003930e4` (_code @ 0x3930e4, 0x1bc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+class Obj526238;
 
 extern "C" {
 
@@ -14,7 +15,7 @@ extern int FUN_0038ebd8(...); /* 0x38ebd8 */
 extern int FUN_0038efb8(...); /* 0x38efb8 */
 extern int FUN_0038f148(...); /* 0x38f148 */
 extern int FUN_0038f410(...); /* 0x38f410 */
-extern int FUN_0038f464(...); /* 0x38f464 */
+extern void aocQuestReturnToScript(Obj526238 *);
 extern int FUN_0038f5d4(...); /* 0x38f5d4 */
 extern int FUN_0038fc28(...); /* 0x38fc28 */
 extern int FUN_0038fd40(...); /* 0x38fd40 */
@@ -82,7 +83,7 @@ void FUN_003930e4(int param_1)
   *(unsigned int *)(param_1 + 0x8c) = 0;
   *(romwright_code **)(param_1 + 0x90) = FUN_0038f5d4;
   *(unsigned int *)(param_1 + 0x94) = 0;
-  *(romwright_code **)(param_1 + 0x98) = FUN_0038f464;
+  *(void (**)(Obj526238 *))(param_1 + 0x98) = aocQuestReturnToScript;
   *(unsigned int *)(param_1 + 0x9c) = 0;
   *(romwright_code **)(param_1 + 0xa0) = FUN_0038f410;
   *(unsigned int *)(param_1 + 0xa4) = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int controllerSetPosition(...);
 int moriModelContentCopyBody(void);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 int VectorSignedToFloat(...);
 
 int FUN_00178b04(...);
@@ -41,7 +41,7 @@ extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(void);
-extern int FUN_0033aaac(void);
+extern int gameFlagBitsTest(void);
 extern int gameFlagsTestSecondBank(int);
 /* Supplied declaration required: FUN_003689d0. */
 extern int dataTableGetRecordFortyNine(void);
@@ -52,8 +52,8 @@ extern int dataTableGetRecordFortyNine(void);
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 unsigned int FUN_00356674(void)
@@ -129,7 +129,7 @@ unsigned int FUN_00356674(void)
                    ((!temp_v9 &&
                     ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))))) &&
                   ((*(short *)(pcVar2 + 0xe) == 0 || (temp_v6 = gameFlagIsSet(), temp_v6 == 0)))) &&
-                 ((*(short *)(pcVar2 + 0x28) == 0 || (temp_v6 = FUN_0033aaac(), temp_v6 == 0)))) {
+                 ((*(short *)(pcVar2 + 0x28) == 0 || (temp_v6 = gameFlagBitsTest(), temp_v6 == 0)))) {
                 temp_v5 = temp_v5 + 1;
                 temp_v10 = temp_v10 + 1;
               }
@@ -202,7 +202,7 @@ unsigned int FUN_00356674(void)
                               FUN_00178b04(0x20,&LAB_00356bcc,0x1e4);
                               temp_v2 = 0;
                               if (temp_v1 != 0) {
-                                temp_v2 = FUN_0040ac08();
+                                temp_v2 = modelListInit();
                               }
                               *(unsigned int *)
                                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
@@ -225,7 +225,7 @@ unsigned int FUN_00356674(void)
                               FUN_00178b04(0x20,&LAB_00356bcc,0x1db);
                               temp_v2 = 0;
                               if (temp_v1 != 0) {
-                                temp_v2 = FUN_0040ac08();
+                                temp_v2 = modelListInit();
                               }
                               *(unsigned int *)
                                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
@@ -249,7 +249,7 @@ unsigned int FUN_00356674(void)
                             FUN_00178b04(0x20,&LAB_00356bcc,0x1d2);
                             temp_v2 = 0;
                             if (temp_v1 != 0) {
-                              temp_v2 = FUN_0040ac08();
+                              temp_v2 = modelListInit();
                             }
                             *(unsigned int *)
                              ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
@@ -273,7 +273,7 @@ unsigned int FUN_00356674(void)
                           FUN_00178b04(0x20,&LAB_00356bcc,0x1c9);
                           temp_v2 = 0;
                           if (temp_v1 != 0) {
-                            temp_v2 = FUN_0040ac08();
+                            temp_v2 = modelListInit();
                           }
                           *(unsigned int *)
                            ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 +
@@ -297,7 +297,7 @@ unsigned int FUN_00356674(void)
                         FUN_00178b04(0x20,&LAB_00356bcc,0x1c0);
                         temp_v2 = 0;
                         if (temp_v1 != 0) {
-                          temp_v2 = FUN_0040ac08();
+                          temp_v2 = modelListInit();
                         }
                         *(unsigned int *)
                          ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20)
@@ -319,7 +319,7 @@ unsigned int FUN_00356674(void)
                       FUN_00178b04(0x20,&LAB_00356bcc,0x1b7);
                       temp_v2 = 0;
                       if (temp_v1 != 0) {
-                        temp_v2 = FUN_0040ac08();
+                        temp_v2 = modelListInit();
                       }
                       *(unsigned int *)
                        ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
@@ -341,7 +341,7 @@ unsigned int FUN_00356674(void)
                     FUN_00178b04(0x20,&LAB_00356bcc,0x1ae);
                     temp_v2 = 0;
                     if (temp_v1 != 0) {
-                      temp_v2 = FUN_0040ac08();
+                      temp_v2 = modelListInit();
                     }
                     *(unsigned int *)
                      ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
@@ -363,7 +363,7 @@ unsigned int FUN_00356674(void)
                   FUN_00178b04(0x20,&LAB_00356bcc,0x1a5);
                   temp_v2 = 0;
                   if (temp_v1 != 0) {
-                    temp_v2 = FUN_0040ac08();
+                    temp_v2 = modelListInit();
                   }
                   *(unsigned int *)
                    ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
@@ -385,7 +385,7 @@ unsigned int FUN_00356674(void)
                 FUN_00178b04(0x20,&LAB_00356bcc,0x18a);
                 temp_v2 = 0;
                 if (temp_v1 != 0) {
-                  temp_v2 = FUN_0040ac08();
+                  temp_v2 = modelListInit();
                 }
                 *(unsigned int *)
                  ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2
@@ -407,7 +407,7 @@ unsigned int FUN_00356674(void)
               FUN_00178b04(0x20,&LAB_00356bcc,0x181);
               temp_v2 = 0;
               if (temp_v1 != 0) {
-                temp_v2 = FUN_0040ac08();
+                temp_v2 = modelListInit();
               }
               *(unsigned int *)
                ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2;
@@ -429,7 +429,7 @@ unsigned int FUN_00356674(void)
 joined_r0x00356bb0:
             temp_v2 = 0;
             if (temp_v1 != 0) {
-              temp_v2 = FUN_0040ac08();
+              temp_v2 = modelListInit();
             }
             *(unsigned int *)
              ((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2;
@@ -451,7 +451,7 @@ joined_r0x00356bb0:
 joined_r0x00356b80:
           temp_v2 = 0;
           if (temp_v1 != 0) {
-            temp_v2 = FUN_0040ac08();
+            temp_v2 = modelListInit();
           }
           *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20)
                = temp_v2;
@@ -472,7 +472,7 @@ joined_r0x00356b80:
         FUN_00178b04(0x20,&LAB_00356bcc,0x166);
         temp_v2 = 0;
         if (temp_v1 != 0) {
-          temp_v2 = FUN_0040ac08();
+          temp_v2 = modelListInit();
         }
         *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
              temp_v2;
@@ -493,7 +493,7 @@ joined_r0x00356b80:
       FUN_00178b04(0x20,&LAB_00356bcc,0x15d);
       temp_v2 = 0;
       if (temp_v1 != 0) {
-        temp_v2 = FUN_0040ac08();
+        temp_v2 = modelListInit();
       }
       *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
            temp_v2;
@@ -513,7 +513,7 @@ joined_r0x00356b80:
     FUN_00178b04(0x20,&LAB_00356bcc,0x154);
     temp_v2 = 0;
     if (temp_v1 != 0) {
-      temp_v2 = FUN_0040ac08();
+      temp_v2 = modelListInit();
     }
     *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) =
          temp_v2;
@@ -540,7 +540,7 @@ LAB_003572ac:
   }
   if (temp_v9 && temp_v3 == 3) {
     temp_v1 = *(int *)(*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0x38) + 4);
-    FUN_0040ace8(g_handleRegistry,temp_v1);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v1);
     temp_v6 = 0;
     *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
     do {
@@ -554,12 +554,12 @@ LAB_003572ac:
       FUN_00178b04(0x20,&LAB_00356bcc,0x276);
       temp_v2 = 0;
       if (temp_v1 != 0) {
-        temp_v2 = FUN_0040ac08();
+        temp_v2 = modelListInit();
       }
       *(unsigned int *)(temp_v5 + 0xbd4) = temp_v2;
       moriModelContentCopyBody();
       temp_v1 = *(int *)(*(int *)(temp_v5 + 0xbd4) + 4);
-      FUN_0040ace8(g_handleRegistry,temp_v1);
+      handleRegistryRegisterObject(g_handleRegistry,temp_v1);
       controllerSetPosition(temp_v1);
       temp_v6 = temp_v6 + 1;
       *(unsigned int *)(temp_v1 + 4) = *(unsigned int *)(temp_v1 + 4) | 3;
@@ -590,7 +590,7 @@ LAB_003572ac:
                 (temp_v1 = gameFlagsTestSecondBank((int)(short)(int)pcVar8), temp_v1 == 0)) && (!temp_v9)) &&
               ((*(short *)(pcVar2 + 0xc) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
              (((*(short *)(pcVar2 + 0xe) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) &&
-              ((*(short *)(pcVar2 + 0x28) == 0 || (temp_v1 = FUN_0033aaac(), temp_v1 == 0)))))) {
+              ((*(short *)(pcVar2 + 0x28) == 0 || (temp_v1 = gameFlagBitsTest(), temp_v1 == 0)))))) {
             temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
             temp_v1 = 0;
             do {
@@ -659,11 +659,11 @@ LAB_0035755c:
                 FUN_00178b04(0x20,&LAB_00356bcc,0x333);
                 temp_v2 = 0;
                 if (temp_v1 != 0) {
-                  temp_v2 = FUN_0040ac08();
+                  temp_v2 = modelListInit();
                 }
                 *(unsigned int *)(temp_v7 + 0xd4) = temp_v2;
                 moriModelContentCopyBody();
-                FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
+                handleRegistryRegisterObject(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
                 if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) >= 100) {
                   controllerSetPosition(*(unsigned int *)(*(int *)(temp_v7 + 0xd4) + 4));
                 }
@@ -674,7 +674,7 @@ LAB_0035755c:
                 *(unsigned char *)(temp_v7 + 0xd8) = 0;
                 temp_v1 = (int)*(short *)(temp_v2 + 10);
                 *(int *)(temp_v7 + 0xdc) = temp_v1;
-                FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + temp_v1 * 8 + 0x20) + 4));
+                handleRegistryRegisterObject(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + temp_v1 * 8 + 0x20) + 4));
                 if (*(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 4) >= 100) {
                   controllerSetPosition(*(unsigned int *)
                                 (*(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(int *)(temp_v7 + 0xdc) * 8 + 0x20

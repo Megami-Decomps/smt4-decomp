@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_002015d0(...);
+int infoWinSetTimer(...);
 int dialogOpen(int);
 int FUN_0027e7b4(unsigned int, unsigned int);
 int FUN_00295660(int, int *);
-int FUN_00295ba4(int);
+int infoWinStartTimer(int);
 int FUN_002bd06c(unsigned int);
 int libc_strcpy(int *, unsigned int);
 
@@ -29,11 +29,11 @@ extern int g_infoWin; /* 0x43e128 */
 
 extern int FUN_001ab9dc(void);
 extern int dialogGetTimer(void);
-/* Supplied declaration required: FUN_002015d0. */
+/* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
 extern int gameGetUnitRecord(int);
 extern int FUN_002b6b04(void);
@@ -104,18 +104,18 @@ LAB_00296090:
       *(short *)(param_1 + 0xcfc8) = *(short *)(param_1 + 0xcfc8) + 1;
       dialogOpen(1);
       if (*(short *)(param_1 + 0xcfca) == *(short *)(param_1 + 0xcfc8)) {
-        FUN_002015d0(0xffffffff);
+        infoWinSetTimer(0xffffffff);
         *(unsigned int *)(g_infoWin + 0xc) = 0;
         return;
       }
-      FUN_002015d0(0x5a);
+      infoWinSetTimer(0x5a);
       return;
     }
     temp_v0 = dialogIsActive();
     if ((((temp_v0 != 0) && (temp_v0 = FUN_001ab9dc(), temp_v0 >= 0x5b)) &&
         (temp_v0 = dialogGetTimer(), temp_v0 == -1)) &&
        (*(short *)(param_1 + 0xcfca) != *(short *)(param_1 + 0xcfc8))) {
-      FUN_00295ba4(1);
+      infoWinStartTimer(1);
       return;
     }
   }

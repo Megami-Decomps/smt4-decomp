@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002c86ec(void);
 
 int FUN_001fa760(void);
-int FUN_0024f034(int, unsigned int);
+int mapIfActivateRecord(int, unsigned int);
 int FUN_0025247c(...);
 int mapInterfaceSetStateTwo(void);
 int mapIfSetMode1(void);
@@ -21,7 +21,7 @@ int FUN_0028250c(void);
 int FUN_00287aec(void);
 int mathPositionHeadingDegrees(void);
 int buttonHelpSetPreset(int);
-int FUN_002d3e58(void);
+int mapPartDestroy(void);
 int mapIfReleaseSlot0(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -41,7 +41,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 extern int DAT_004c2420; /* 0x4c2420 */
 
 /* Supplied declaration required: FUN_001fa760. */
-/* Supplied declaration required: FUN_0024f034. */
+/* Supplied declaration required: mapIfActivateRecord. */
 /* Supplied declaration required: FUN_0025247c. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
@@ -60,7 +60,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
 /* Supplied declaration required: FUN_002c86ec. */
-/* Supplied declaration required: FUN_002d3e58. */
+/* Supplied declaration required: mapPartDestroy. */
 /* Supplied declaration required: mapIfReleaseSlot0. */
 
 
@@ -114,7 +114,7 @@ void FUN_0027fde4(void)
           if (temp_v3 != 0) {
             if (temp_v3 == 1) {
               *(int *)(temp_v2 + 8) = *(int *)(temp_v2 + 8) + 1;
-              FUN_0024f034(1,DAT_0049f99c);
+              mapIfActivateRecord(1,DAT_0049f99c);
               temp_v2 = g_lmapScene;
               if (*(int *)(g_lmapScene + 8) >= 3) {
                 temp_v3 = *(int *)(g_lmapScene + 4);
@@ -177,7 +177,7 @@ void FUN_0027fde4(void)
             FUN_0027fc14(10);
             *(unsigned int *)(DAT_004474f4 + 0xac) = 0xffffffff;
             buttonHelpSetPreset(0xdb);
-            FUN_0024f034(1,DAT_0049f99c);
+            mapIfActivateRecord(1,DAT_0049f99c);
             FUN_001fa760();
             temp_v2 = g_lmapScene;
             temp_v3 = *(int *)(temp_v2 + 4);
@@ -206,7 +206,7 @@ void FUN_0027fde4(void)
       }
       else {
         *(int *)(temp_v2 + 8) = *(int *)(temp_v2 + 8) + 1;
-        FUN_0024f034(1,DAT_0049f99c);
+        mapIfActivateRecord(1,DAT_0049f99c);
         temp_v3 = FUN_0027ee9c();
         temp_v2 = g_lmapScene;
         if (temp_v3 != 0) {
@@ -223,7 +223,7 @@ void FUN_0027fde4(void)
             temp_v2 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 0x54) = 0;
             *(unsigned int *)(temp_v2 + 0x58) = temp_v11;
-            FUN_0024f034(0,DAT_0049f99c);
+            mapIfActivateRecord(0,DAT_0049f99c);
             mapIfReleaseSlot0();
             temp_v2 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -242,7 +242,7 @@ void FUN_0027fde4(void)
           FUN_0027fa98(temp_v11);
         }
         else {
-          FUN_002d3e58();
+          mapPartDestroy();
           temp_v3 = *(int *)(g_lmapScene + 4);
           temp_v2 = g_lmapScene;
           *(int *)(temp_v2 + 4) = temp_v3 + 1;
@@ -258,7 +258,7 @@ void FUN_0027fde4(void)
       temp_v3 = *(int *)(temp_v2 + 8) + 1;
       *(int *)(temp_v2 + 8) = temp_v3;
       if (temp_v3 == 0x14) {
-        FUN_002d3e58();
+        mapPartDestroy();
         mapIfSetMode1();
         temp_v11 = 8;
         FUN_0027fa98(temp_v11);

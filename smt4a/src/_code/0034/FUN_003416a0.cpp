@@ -5,7 +5,7 @@
 extern "C" {
 
 int fileHandleClose(unsigned char **, int);
-int FUN_002e0c48(void);
+int holderReleaseObject(void);
 int FUN_002e0fac(void);
 int taggedOwnerRelease(unsigned char **);
 int taggedOwnerRelease2(void);
@@ -27,7 +27,7 @@ extern unsigned char DAT_00558024; /* 0x558024 */
 extern int FUN_002bee0c(unsigned char **);
 extern int FUN_002befc0(void);
 extern int FUN_002e09b4(unsigned char **, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e0c48. */
+/* Supplied declaration required: holderReleaseObject. */
 /* Supplied declaration required: FUN_002e0fac. */
 /* Supplied declaration required: taggedOwnerRelease. */
 extern int FUN_0032cab4(unsigned char **);
@@ -89,7 +89,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
       }
     }
     else {
-      FUN_002e0c48();
+      holderReleaseObject();
     }
   }
   else {

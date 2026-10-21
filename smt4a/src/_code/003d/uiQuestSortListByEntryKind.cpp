@@ -24,7 +24,7 @@ typedef struct QuestEntry {
 extern QuestMenu *g_uiQuest;
 
 extern QuestEntry *FUN_0026140c(void);
-extern u32 FUN_002c2c68(QuestCursor *cursor);
+extern u32 objectApplyIfUnblocked(QuestCursor *cursor);
 extern void qsort(void *list, u32 count, u32 size, SortCompare compare);
 extern void arraySortQsort(void *list, u32 count, u32 size, SortCompare compare);
 
@@ -52,30 +52,30 @@ void uiQuestSortListByEntryKind(s32 mode)
 
         if ((*info & 0x7F) == 0x22) {
             if (primary) {
-                qsort(list, FUN_002c2c68(cursor), 2, dataTable1bOr1cCompareRecordKeys);
+                qsort(list, objectApplyIfUnblocked(cursor), 2, dataTable1bOr1cCompareRecordKeys);
             } else {
-                qsort(list, FUN_002c2c68(cursor), 2, dataTableCompareRecordValues);
+                qsort(list, objectApplyIfUnblocked(cursor), 2, dataTableCompareRecordValues);
             }
         }
         if ((*info & 0x7F) == 0x21) {
             if (primary) {
-                qsort(list, FUN_002c2c68(cursor), 2, FUN_002b2b34);
+                qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002b2b34);
             } else {
-                qsort(list, FUN_002c2c68(cursor), 2, FUN_0034f46c);
+                qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_0034f46c);
             }
         }
         if ((*info & 0x7F) == 0x18) {
             if (primary) {
-                qsort(list, FUN_002c2c68(cursor), 2, FUN_002fdc2c);
+                qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002fdc2c);
             } else {
-                qsort(list, FUN_002c2c68(cursor), 2, FUN_003759f0);
+                qsort(list, objectApplyIfUnblocked(cursor), 2, FUN_003759f0);
             }
         }
         if ((*info & 0x7F) == 0x19) {
             if (primary) {
-                arraySortQsort(list, FUN_002c2c68(cursor), 2, FUN_002417a8);
+                arraySortQsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002417a8);
             } else {
-                arraySortQsort(list, FUN_002c2c68(cursor), 2, FUN_002fdb20);
+                arraySortQsort(list, objectApplyIfUnblocked(cursor), 2, FUN_002fdb20);
             }
         }
     }

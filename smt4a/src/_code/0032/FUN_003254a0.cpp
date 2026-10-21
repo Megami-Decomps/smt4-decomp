@@ -7,9 +7,9 @@ extern "C" {
 int dialogClose(int);
 int FUN_002392b8(...);
 int FUN_00244bb4(int, int);
-int FUN_00261918(int, int, int);
-int FUN_002c2d5c(unsigned int);
-int FUN_0033def0(...);
+int infoWindowShow(int, int, int);
+int infoWinSetTimer(unsigned int);
+int mapIfControllerApply(...);
 int FUN_003d4ed8(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -42,16 +42,16 @@ extern unsigned int DAT_005f1874; /* 0x5f1874 */
 extern unsigned int DAT_005f1878; /* 0x5f1878 */
 extern unsigned char DAT_005f187c; /* 0x5f187c */
 
-extern int FUN_001632fc(void);
+extern int infoWinHasValue(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002392b8. */
 /* Supplied declaration required: FUN_00244bb4. */
-/* Supplied declaration required: FUN_00261918. */
+/* Supplied declaration required: infoWindowShow. */
 extern int dataTableEntryNameById(void);
 extern int popupIsActive(void);
-/* Supplied declaration required: FUN_002c2d5c. */
-/* Supplied declaration required: FUN_0033def0. */
+/* Supplied declaration required: infoWinSetTimer. */
+/* Supplied declaration required: mapIfControllerApply. */
 extern int dataTable23FindIndexByValue(unsigned int);
 extern int gameFlagIsSetByBlockAt14f8(int);
 /* Supplied declaration required: FUN_003d4ed8. */
@@ -77,7 +77,7 @@ void FUN_003254a0(void)
   
   temp_v2 = g_mapIf;
   if (DAT_005f185e != '\0') {
-    temp_v4 = FUN_001632fc();
+    temp_v4 = infoWinHasValue();
     if (temp_v4 == 0) {
       temp_v9 = g_gameState >= 100;
       if (!temp_v9) {
@@ -131,15 +131,15 @@ LAB_00325644:
             if ((temp_v6 == 0) && (temp_v6 = gameFlagIsSetByBlockAt14f8(temp_v7), temp_v6 == 0)) goto LAB_003256bc;
           }
           FUN_002392b8(temp_v4);
-          FUN_00261918(g_gameState,DAT_005f1600,1);
-          FUN_002c2d5c(0xffffffff);
+          infoWindowShow(g_gameState,DAT_005f1600,1);
+          infoWinSetTimer(0xffffffff);
           DAT_005f185f = '\x01';
         }
         else {
 LAB_003256bc:
           FUN_002392b8(&LAB_00325978);
-          FUN_00261918(g_gameState,DAT_005f1600,1);
-          FUN_002c2d5c(0xffffffff);
+          infoWindowShow(g_gameState,DAT_005f1600,1);
+          infoWinSetTimer(0xffffffff);
           DAT_005f185f = '\x01';
         }
       }
@@ -212,7 +212,7 @@ LAB_003256e4:
     *(unsigned char *)(temp_v2 + 0xcc7d) = 0;
     *(unsigned char *)(temp_v2 + 0xcc7e) = 1;
   }
-  FUN_0033def0(temp_v2 + 0xcc7c);
+  mapIfControllerApply(temp_v2 + 0xcc7c);
   if (DAT_005f1638 != 0x20) {
     if ((int)DAT_005f1638 < 0x20) {
       if ((DAT_005f1638 == 5 || DAT_005f1638 == 0x19) ||
@@ -240,7 +240,7 @@ LAB_003258b0:
     *(unsigned char *)(temp_v2 + 0xcca2) = 1;
   }
 LAB_00325868:
-  FUN_0033def0();
+  mapIfControllerApply();
   temp_v0 = *(char *)(temp_v2 + 0xccc5);
   if (DAT_005f187c != 0) {
     temp_v1 = temp_v0;
@@ -264,7 +264,7 @@ LAB_00325868:
     *(unsigned char *)(temp_v2 + 0xccc5) = 0;
     *(unsigned char *)(temp_v2 + 0xccc6) = 1;
   }
-  FUN_0033def0(temp_v2 + 0xccc4);
+  mapIfControllerApply(temp_v2 + 0xccc4);
   return;
 }
 

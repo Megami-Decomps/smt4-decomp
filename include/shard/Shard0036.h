@@ -9,10 +9,29 @@
 typedef struct Rec194 {
     /* 0x00 */ u8 active;
     /* 0x01 */ u8 unk01[0x3];
-    /* 0x04 */ s32 type;
-    /* 0x08 */ u8 unk08[0x1C];
+    /* 0x04 */ union {
+        s32 type;
+        s32 state;
+    };
+    /* 0x08 */ union {
+        u8 unk08[0x1C];
+        struct {
+            u8 unk08[0x0C];
+            s32 category; // 0x14
+        } display;
+        struct {
+            u8 unk08[0x10];
+            s32 id; // 0x18
+        } groupView;
+    };
     /* 0x24 */ u32 handle;
-    /* 0x28 */ u8 unk28[0x16C];
+    /* 0x28 */ union {
+        u8 unk28[0x16C];
+        struct {
+            u8 unk28[0x19];
+            u8 pending; // 0x41
+        } request;
+    };
 } Rec194;
 
 typedef struct RecHolder {

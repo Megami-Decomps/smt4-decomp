@@ -23,7 +23,7 @@ int FUN_00184b90(...);
 int __aeabi_memset4(...);
 int FUN_001cd3ec(...);
 int FUN_0020214c(...);
-int FUN_0026f608(...);
+int rebuildFusionCatalogLists(...);
 int FUN_00275bc8(...);
 int FUN_002e3140(...);
 int sysMemClear(...);
@@ -33,9 +33,9 @@ int mapSettings5BSetValueIfActive(...);
 int loadSlotEnsureLoaded(...);
 int FUN_003f9e80(...);
 int gameFlagSetValue(...);
-int FUN_004db450(...);
-int FUN_004dc4b4(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int fusionListAvailableSpecialRecipes(...);
+int fusionRaceSelectionInitialize(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -94,7 +94,7 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_0020214c. */
 extern int FUN_0026140c(void);
-/* Supplied declaration required: FUN_0026f608. */
+/* Supplied declaration required: rebuildFusionCatalogLists. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: FUN_002e3140. */
 extern int FUN_002e50d4(void);
@@ -106,12 +106,12 @@ extern int lmapSceneGetScript(void);
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: FUN_003f9e80. */
 /* Supplied declaration required: gameFlagSetValue. */
-extern int FUN_0040ac08(void);
+extern int modelListInit(void);
 extern int bitsAt60Test(int, unsigned int);
 extern int FUN_004dad8c(void);
-/* Supplied declaration required: FUN_004db450. */
-/* Supplied declaration required: FUN_004dc4b4. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: fusionListAvailableSpecialRecipes. */
+/* Supplied declaration required: fusionRaceSelectionInitialize. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_002ab804(void)
@@ -152,7 +152,7 @@ void FUN_002ab804(void)
   temp_v1 = 0x1b8;
   asdOperatorNew();
   if (temp_v1 != 0) {
-    FUN_004dc4b4();
+    fusionRaceSelectionInitialize();
   }
   *piVar2 = temp_v1;
   temp_v1 = FUN_004dad8c();
@@ -200,7 +200,7 @@ void FUN_002ab804(void)
     *(unsigned char *)(temp_v1 + 0x35) = 0xff;
     *(unsigned char *)(temp_v1 + 0x37) = 0;
     *(unsigned char *)(temp_v1 + 0x36) = *(unsigned char *)(temp_v1 + 0x36) & 0xfc;
-    FUN_0026f608();
+    rebuildFusionCatalogLists();
   }
   temp_v1 = FUN_0026140c();
   if (-1 < *(short *)(temp_v1 + 0x20)) {
@@ -229,8 +229,8 @@ void FUN_002ab804(void)
     }
   }
   __aeabi_memset4(piVar2 + 0x10e,0xa0,0xffffffff);
-  FUN_0026f608();
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(piVar2 + 1);
+  rebuildFusionCatalogLists();
+  paramsClearPacket(piVar2 + 1);
   temp_v6 = (int *)0x1dc;
   paramsInit(piVar2 + 1,&DAT_0052ef50,0x84,&DAT_0052efd4,0x60,0,0,0,0,&DAT_0052f034);
   FUN_0014e188(piVar2 + 9,0x1a,0,piVar2 + 1,1);
@@ -276,7 +276,7 @@ void FUN_002ab804(void)
   FUN_00178b04(0x20,&LAB_002abbd8,0x1d15);
   temp_v1 = 0;
   if (temp_v2 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   piVar2[0x2482] = temp_v1;
   FUN_001cd3ec();
@@ -284,7 +284,7 @@ void FUN_002ab804(void)
   FUN_00178b04(0x20,&LAB_002abbd8,0x1d18);
   temp_v1 = 0;
   if (temp_v2 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   piVar2[0x2483] = temp_v1;
   FUN_001cd3ec();
@@ -294,7 +294,7 @@ void FUN_002ab804(void)
   temp_v1 = FUN_002e50d4();
   piVar2[0x107] = temp_v1;
   temp_v1 = *piVar2;
-  FUN_004db450(temp_v1,piVar2 + 0x23df);
+  fusionListAvailableSpecialRecipes(temp_v1,piVar2 + 0x23df);
   gameFlagSetValue(0x52c,temp_v1 != 0,1);
   piVar2 = g_unite;
   *(unsigned short *)(g_unite + 0x24af) = 0;

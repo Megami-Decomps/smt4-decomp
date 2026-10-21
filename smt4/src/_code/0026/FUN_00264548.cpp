@@ -14,7 +14,7 @@ int asdMemFree(unsigned int);
 
 extern int g_lmapMainState; /* 0x447060 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_002896bc(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897b0. */
@@ -64,7 +64,7 @@ unsigned int FUN_00264548(void)
       *piVar3 = 2;
       return 0;
     }
-    temp_v0 = FUN_0019e0c0(*(unsigned int *)(temp_v1 + 0x9ec));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x9ec));
     if (temp_v0 == 2) {
       if (*(int *)(temp_v1 + 0x9f0) != 0) {
         gameFlagSetValue(*(int *)(temp_v1 + 0x9f0),1);

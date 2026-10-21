@@ -15,9 +15,9 @@ int FUN_0035de50(void);
 int rectangleInitializeSelection(...);
 int FUN_004a1958(...);
 int FUN_004a3e04(...);
-int FUN_004a6c18(...);
+int partyIdsReset(...);
 int FUN_004a6c50(...);
-int FUN_004a83f8(void);
+int slotPoolResetTrackedState(void);
 int FUN_004cf7cc(...);
 int FUN_004d05c4(...);
 
@@ -39,7 +39,7 @@ extern unsigned char LAB_004a6e7c; /* 0x4a6e7c */
 extern unsigned char LAB_004a6f64; /* 0x4a6f64 */
 extern unsigned char LAB_004a7260; /* 0x4a7260 */
 extern unsigned char DAT_0055c90c; /* 0x55c90c */
-extern int *DAT_0057f0b4; /* 0x57f0b4 */
+extern int *g_animatedPageSelection; /* 0x57f0b4 */
 extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
@@ -53,11 +53,11 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004a1958. */
 /* Supplied declaration required: FUN_004a3e04. */
-/* Supplied declaration required: FUN_004a6c18. */
+/* Supplied declaration required: partyIdsReset. */
 /* Supplied declaration required: FUN_004a6c50. */
-/* Supplied declaration required: FUN_004a83f8. */
+/* Supplied declaration required: slotPoolResetTrackedState. */
 /* Supplied declaration required: FUN_004cf7cc. */
-extern int FUN_004cfe4c(int *);
+extern int flaggedValueHolderGetTotal(int *);
 extern int rangeGetMinimumLimit(int *);
 /* Supplied declaration required: FUN_004d05c4. */
 extern unsigned int *FUN_004d0b3c(void);
@@ -80,21 +80,21 @@ void FUN_004a2c00(int *param_1)
   *(unsigned char *)(param_1 + 0x2a1c) = 0;
   *(unsigned char *)((int)param_1 + 0x95) = 0;
   *(unsigned char *)((int)param_1 + 0xa876) = 0;
-  FUN_004a83f8();
+  slotPoolResetTrackedState();
   (**(romwright_code **)(*param_1 + 0x20))(param_1);
   FUN_002c8550(2);
   piVar1 = (int *)0x100;
   asdMemoryAllocTracked(0x100,0x100,0,4,1);
-  DAT_0057f0b4 = piVar1;
+  g_animatedPageSelection = piVar1;
   *piVar1 = (int)param_1;
   puVar2 = &LAB_004a2e94;
   asdProcessCreateSimple(&LAB_004a2e94,4,0,0,&LAB_004a6e54,&LAB_004a6e7c,piVar1);
   param_1[1] = (int)puVar2;
   puVar3 = &LAB_004a2eac;
-  taskCreateDraw(&LAB_004a2eac,0x71,1,0,&LAB_004a6f64,0,DAT_0057f0b4,puVar2);
+  taskCreateDraw(&LAB_004a2eac,0x71,1,0,&LAB_004a6f64,0,g_animatedPageSelection,puVar2);
   param_1[2] = (int)puVar3;
   puVar2 = &LAB_004a2ec0;
-  taskCreateDraw(&LAB_004a2ec0,0xea,1,0,&LAB_004a7260,0,DAT_0057f0b4,param_1[1]);
+  taskCreateDraw(&LAB_004a2ec0,0xea,1,0,&LAB_004a7260,0,g_animatedPageSelection,param_1[1]);
   param_1[3] = (int)puVar2;
   rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x14);
   temp_v0 = 0x68;
@@ -107,7 +107,7 @@ void FUN_004a2c00(int *param_1)
   param_1[0x213] = (int)puVar5;
   puVar5[0x19] = (unsigned int)(param_1 + 0x32);
   FUN_004a1958(param_1);
-  FUN_004a6c18((int)param_1 + 0x96);
+  partyIdsReset((int)param_1 + 0x96);
   FUN_004a6c50((int)param_1 + 0x96,0);
   temp_v0 = rangeGetMinimumLimit(param_1 + 8);
   temp_v1 = 0;
@@ -132,7 +132,7 @@ void FUN_004a2c00(int *param_1)
   FUN_0035de50();
   DAT_0057f0b8 = 0xffffffff;
   FUN_004a3e04(param_1);
-  temp_v0 = FUN_004cfe4c(param_1 + 8);
+  temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);
   FUN_0034a9c4((short)param_1[temp_v0 * 8 + 0x21a],0);
   if ((char)param_1[0x218] == '\x01') {
     FUN_002c8550(2);

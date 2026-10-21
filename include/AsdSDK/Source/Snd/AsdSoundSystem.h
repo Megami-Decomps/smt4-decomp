@@ -8,6 +8,7 @@
 #define ASDSDK_SOURCE_SND_ASDSOUNDSYSTEM_H
 
 #include "common.h"
+#include "shard/S3SoundArchiveLoader.h"
 
 #define ASD_SND_SLOT_A_COUNT 4
 #define ASD_SND_SLOT_B_COUNT 4
@@ -59,14 +60,18 @@ typedef struct AsdSndWaveVoice {
     /* 0x3c */ f32 mix[2];               /* SetMixParam input: front-left/right gains */
     /* 0x44 */ u8 unk44[0x28];
     /* 0x6c */ void *data;               /* heap copy of the sample data */
-    /* 0x70 */ u8 unk70[0xc];
+    /* 0x70 */ u8 unk70[8];
+    /* 0x78 */ s32 fadeFrames;
     /* 0x7c */ s32 unk7c;
     /* 0x80 */ u32 headerSize;           /* bytes before the samples */
     /* 0x84 */ u32 unk84;
     /* 0x88 */ u32 sampleBytes;
     /* 0x8c */ u32 unk8c;
     /* 0x90 */ u32 unk90;
-    /* 0x94 */ u32 unk94;
+    union {
+        /* 0x94 */ u32 unk94;
+        /* 0x94 */ f32 targetVolume;
+    };
 } AsdSndWaveVoice;
 
 /* The ducking state: while it is on, slot A's sounds are scaled by `level`. */
@@ -83,13 +88,22 @@ typedef struct AsdSndDuck {
     /* 0x1b */ u8 pad1b;
 } AsdSndDuck;
 
+typedef struct AsdSndDataManagerView {
+    /* 0x000 */ u8 unk000[0xc];
+    /* 0x00c */ SoundArchiveLoader loader;
+    /* 0x014 */ u8 unk014[0x20c];
+} AsdSndDataManagerView;
+
 /* Everything the sound system owns, in one block. Some functions reach a member through its own
  * symbol (the duck state, the current-slot pointers) rather than through the block. */
 typedef struct AsdSoundSystem {
     /* 0x000 */ u8 archive[0x12c];          /* nw::snd::SoundArchive */
     /* 0x12c */ u8 archiveFile[0x58];       /* nw::snd::internal::SoundArchiveFile::FileHeader */
     /* 0x184 */ u8 player[0xc0];            /* nw::snd::SoundArchivePlayer */
-    /* 0x244 */ u8 dataManager[0x220];      /* nw::snd::SoundDataManager */
+    union {
+        /* 0x244 */ u8 dataManager[0x220];  /* nw::snd::SoundDataManager */
+        /* 0x244 */ AsdSndDataManagerView loaderState;
+    };
     /* 0x464 */ void *workBuffer;           /* nn::snd work memory */
     /* 0x468 */ void *infoBlock;
     /* 0x46c */ void *dataManagerBuffer;
@@ -141,8 +155,21 @@ typedef struct AsdSndStatusApoc {
 
 /* Apocalypse: a playing sound (0xfc bytes), linked into the status block's list. */
 typedef struct AsdSndObject {
-    /* 0x00 */ u8 unk00[0x68];
-    /* 0x68 */ u32 voices[0x1c];    /* nn::snd::CTR::Voice handles, `voiceCount` of them */
+    union {
+        /* 0x00 */ u8 unk00[0x68];
+        struct {
+            u32 active, unk04;
+            u8 waveBuffers[2][2][0x18]; // 0x08
+        } stream;
+    };
+    union {
+        /* 0x68 */ u32 voices[0x1c]; /* preserved legacy storage view */
+        struct {
+            u32 voices[2]; // 0x68
+            u8 mix[2][0x30]; // 0x70
+            u32 sampleParameters[2]; // 0xd0
+        } playback;
+    };
     /* 0xd8 */ struct AsdSndObject *next;
     /* 0xdc */ struct AsdSndObject *prev;
     /* 0xe0 */ s32 fadeFrames;

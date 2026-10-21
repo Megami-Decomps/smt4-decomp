@@ -1,36 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018eb44` (_code @ 0x18eb44, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: after the conditional unit-scale tests, the final identity-flag OR/store uses r1 instead of retail's r3. */
+#include "shard/W4_Match1b_Node.h"
+
+struct ModelScaleRecord {
+    u32 flags;       // 0x00
+    NodeVec3 scale;  // 0x04
+    u8 unk10[0x30];
+};
+
+struct ModelScaleTable {
+    u8 unk00[0x0c];
+    ModelScaleRecord *records; // 0x0c
+    s32 count;                // 0x10
+};
 
 extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-
-void FUN_0018eb44(int param_1)
-
+// Cache the identity-scale flags for records whose three scale components are one.
+void FUN_0018eb44(ModelScaleTable *table)
 {
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  
-  puVar1 = *(unsigned int **)(param_1 + 0xc);
-  puVar3 = puVar1 + *(int *)(param_1 + 0x10) * 0x10;
-  for (; puVar1 != puVar3; puVar1 = puVar1 + 0x10) {
-    puVar2 = puVar1 + 1;
-    if (((~*puVar1 & 0x2800000) != 0) && (*puVar2 == 0x3f800000)) {
-      if (puVar1[2] == 0x3f800000) {
-        puVar2 = (unsigned int *)puVar1[3];
-      }
-      if (puVar1[2] == 0x3f800000 && puVar2 == (unsigned int *)0x3f800000) {
-        *puVar1 = *puVar1 | 0x2800000;
-      }
+    const u32 unitScaleFlags = 0x02800000;
+    ModelScaleRecord *record = table->records;
+    ModelScaleRecord *end = record + table->count;
+    while (record != end) {
+        const NodeVec3 *scale = &record->scale;
+        if ((~record->flags & unitScaleFlags) != 0 &&
+            scale->x == 1.0f &&
+            scale->y == 1.0f &&
+            scale->z == 1.0f)
+            record->flags |= unitScaleFlags;
+        ++record;
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

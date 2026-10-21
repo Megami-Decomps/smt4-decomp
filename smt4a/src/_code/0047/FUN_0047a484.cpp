@@ -45,7 +45,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0031d174. */
 /* Supplied declaration required: FUN_00344cd0. */
 /* Supplied declaration required: FUN_00479b6c. */
-extern int FUN_004cfe4c(unsigned int *);
+extern int flaggedValueHolderGetTotal(unsigned int *);
 /* Supplied declaration required: size40Set. */
 
 
@@ -84,7 +84,7 @@ void FUN_0047a484(unsigned int *param_1)
     temp_v0 = 0;
     if (temp_v0 < (int)temp_v6) {
       do {
-        temp_v4 = FUN_004cfe4c(param_1 + 0x90);
+        temp_v4 = flaggedValueHolderGetTotal(param_1 + 0x90);
         FUN_00479b6c(param_1,temp_v0,temp_v1 + temp_v0,temp_v4 == temp_v1 + temp_v0);
         temp_v0 = temp_v0 + 1;
       } while (temp_v0 < (int)temp_v6);

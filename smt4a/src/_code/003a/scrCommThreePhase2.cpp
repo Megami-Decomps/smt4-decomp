@@ -3,7 +3,7 @@
 extern "C" {
 
 extern s32 scrGetCommandFrame(void);
-extern void FUN_003bb210(void);
+extern void frameTexEnableAndClearFlags(void);
 extern void FUN_002e5924(s32 value);
 extern void eventQueueAddUnique(u32 value);
 
@@ -11,7 +11,7 @@ extern void eventQueueAddUnique(u32 value);
 u8 scrCommThreePhase2(void)
 {
     if (scrGetCommandFrame() == 0) {
-        FUN_003bb210();
+        frameTexEnableAndClearFlags();
         FUN_002e5924(3);
         return 0;
     }

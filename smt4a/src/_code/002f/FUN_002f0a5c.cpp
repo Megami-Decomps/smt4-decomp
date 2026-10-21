@@ -1,44 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f0a5c` (_code @ 0x2f0a5c, 0x5a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler removes the unchanged high-word store and intermediate level-two constant, and uses a leaf BX return. Candidate Thumb O1/O2 or cpu=5TE. */
+#include "common.h"
 
-extern "C" {
-
-typedef struct fn_002f0a5c_arg0 fn_002f0a5c_arg0;
-struct fn_002f0a5c_arg0 {
-    unsigned char pad_0x0[0x150];
-    uint field_0x150; /* +0x150 */
-    unsigned char pad_0x154[0x4];
-    uint field_0x158; /* +0x158 */
-    undefined4 field_0x15c; /* +0x15c */
+struct PackedLevelState {
+    u8 unk000[0x150]; // 0x000
+    u32 configuration; // 0x150: level in the low byte, payload in the upper bytes
+    u32 unk154;        // 0x154
+    u64 flags;         // 0x158
 };
 
-
-void FUN_002f0a5c(fn_002f0a5c_arg0 *param_1)
-
+// Encode the level-dependent flags and the configuration payload into one mask.
+extern "C" void FUN_002f0a5c(PackedLevelState* state)
 {
-  unsigned char temp_v0;
-  
-  param_1->field_0x158 = 0;
-  param_1->field_0x15c = 0;
-  temp_v0 = param_1->field_0x150;
-  if (temp_v0 != 0) {
-    param_1->field_0x15c = 0;
-    param_1->field_0x158 = 0x1000000;
-    if (temp_v0 >= 2) {
-      param_1->field_0x15c = 0;
-      param_1->field_0x158 = 0x7000000;
+    u32 configuration = state->configuration;
+    state->flags = 0;
+    u8 level = configuration;
+    if (level != 0) {
+        state->flags = 0x01000000;
+        if (level >= 2) {
+            state->flags = 0x07000000;
+        }
+        if (level >= 3) {
+            state->flags |= 0x08000000;
+        }
+        if (level >= 4) {
+            state->flags |= 0x10000000;
+        }
     }
-    if (temp_v0 >= 3) {
-      param_1->field_0x158 = param_1->field_0x158 | 0x8000000;
-    }
-    if (temp_v0 >= 4) {
-      param_1->field_0x158 = param_1->field_0x158 | 0x10000000;
-    }
-  }
-  param_1->field_0x15c = param_1->field_0x15c;
-  param_1->field_0x158 = (param_1->field_0x150 >> 8) | param_1->field_0x158;
-  return;
+    state->flags |= configuration >> 8;
 }
-
-} /* extern "C" */

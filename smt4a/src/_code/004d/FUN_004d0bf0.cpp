@@ -1,29 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d0bf0` (_code @ 0x4d0bf0, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
+
+struct GameStockTable {
+    GameSlotEntry entries[24]; // 0x0000
+    u8 unk1c20[0x68];
+    s8 activeSlots[24]; // 0x1c88
+};
 
 extern "C" {
+GameStockTable *gameGetSlotTable(void);
 
-extern int gameGetSlotTable(void);
-
-
-unsigned int FUN_004d0bf0(unsigned int param_1)
-
+// Check whether any occupied stock slot contains the requested entry identifier.
+u32 FUN_004d0bf0(u32 id)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = 0;
-  while ((temp_v2 = (int)*(char *)(temp_v0 + temp_v1 + 0x1c88), temp_v2 < 0 ||
-         (*(unsigned short *)(temp_v0 + temp_v2 * 300 + 0xca) != param_1))) {
-    temp_v1 = temp_v1 + 1;
-    if (temp_v1 >= 0x18) {
-      return 0;
+    GameStockTable *stock = gameGetSlotTable();
+    for (s32 index = 0; index < 24; ++index) {
+        s32 slot = stock->activeSlots[index];
+        if (slot >= 0 && stock->entries[slot].record.entryId == id)
+            return 1;
     }
-  }
-  return 1;
+    return 0;
 }
-
-} /* extern "C" */
+}

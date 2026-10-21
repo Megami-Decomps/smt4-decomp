@@ -1,10 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0049b00c` (_code @ 0x49b00c, 0xcf0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_NumericStepper.h"
 
 extern "C" {
 
-int FUN_00224880(...);
+int scrRunOpcodesStub(...);
 int scrScriptProcessStartEntry(...);
 int FUN_002f0384(...);
 int FUN_003180c4(...);
@@ -22,24 +23,23 @@ int setListWindow(...);
 
 int ifTouchRegionRemove(void);
 int sysPlaySe(...);
-int FUN_00184528(unsigned int *, int);
+int uiSpriteBankApplyPreset(unsigned int *, int);
 int FUN_002c2c80(...);
 int screenShowMessage(...);
 int obj04Finish(void);
 int panelSetTarget(...);
-int FUN_003a76a8(...);
+int messageMainSetFlag(...);
 int pointConvertToFloat(...);
 int rectangleInitializeSelection(unsigned int *, int, int, int);
 int FUN_00493a7c(...);
-int FUN_00493b74(void);
 int FUN_00498de0(...);
 int FUN_00498ff0(...);
 int FUN_0049cad0(...);
 int FUN_004cf8dc(...);
-int FUN_004cfe4c(...);
+int flaggedValueHolderGetTotal(...);
 int sendEvent100020F(void);
 int sendEvent100020E(void);
-int FUN_004d0738(unsigned int *, unsigned int *);
+int menuSynchronizeFlaggedSelection(unsigned int *, unsigned int *);
 
 typedef int romwright_code(...);
 extern unsigned char LAB_0049ba78; /* 0x49ba78 */
@@ -54,12 +54,12 @@ extern unsigned int vec2GetXInt(unsigned int *);
 extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned short *gameGetPlayerData(void);
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern unsigned int FUN_00192718(unsigned short);
 extern unsigned int FUN_001ba3d0(unsigned short);
-/* Supplied declaration required: FUN_00224880. */
-extern int FUN_0023b3f8(void);
-extern int FUN_0026272c(void);
+/* Supplied declaration required: scrRunOpcodesStub. */
+extern int gameRecordExists(void);
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a482c(unsigned int *);
 extern int FUN_002a4b74(void);
@@ -78,7 +78,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00372100. */
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
-/* Supplied declaration required: FUN_003a76a8. */
+/* Supplied declaration required: messageMainSetFlag. */
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003df7c4. */
@@ -86,7 +86,6 @@ extern int FUN_00481100(unsigned short);
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_00493a7c. */
-/* Supplied declaration required: FUN_00493b74. */
 /* Supplied declaration required: FUN_00496a0c. */
 extern int FUN_00498408(unsigned int *, unsigned short);
 /* Supplied declaration required: FUN_00498de0. */
@@ -97,13 +96,13 @@ extern unsigned int btlRollClamped(unsigned short, unsigned int);
 extern int FUN_0049cc10(int);
 /* Supplied declaration required: FUN_0049cd18. */
 /* Supplied declaration required: FUN_004cf8dc. */
-/* Supplied declaration required: FUN_004cfe4c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: setListWindow. */
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
-/* Supplied declaration required: FUN_004d0738. */
+/* Supplied declaration required: menuSynchronizeFlaggedSelection. */
 
 
 void FUN_0049b00c(unsigned int *param_1)
@@ -128,13 +127,13 @@ void FUN_0049b00c(unsigned int *param_1)
   switch(param_1[2]) {
   case 0:
     *param_1 = *param_1 | 0x1000;
-    FUN_00184528(param_1 + 0xf3,6);
-    FUN_00184528(param_1 + 0xf3,7);
+    uiSpriteBankApplyPreset(param_1 + 0xf3,6);
+    uiSpriteBankApplyPreset(param_1 + 0xf3,7);
     rectangleInitializeSelection(param_1 + 0xee,0x140,0,0x20);
     param_1[2] = 1;
     sysPlaySe(0x87);
     param_1[0x5812] = 0xffffffff;
-    temp_v6 = FUN_004cfe4c(param_1 + param_1[0x2d0] * 0x1d + 0x2d8);
+    temp_v6 = flaggedValueHolderGetTotal(param_1 + param_1[0x2d0] * 0x1d + 0x2d8);
     param_1[0x5812] = temp_v6;
     break;
   case 1:
@@ -146,7 +145,7 @@ void FUN_0049b00c(unsigned int *param_1)
       FUN_00493a7c(param_1 + 0x2d2);
       param_1[2] = 2;
       temp_v6 = param_1[0x2d0];
-      temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+      temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
       if (param_1[0x2d0] != 8) {
         temp_v5 = FUN_0049cad0();
         temp_v5 = temp_v5 * param_1[0x2d2];
@@ -162,23 +161,23 @@ void FUN_0049b00c(unsigned int *param_1)
     }
     break;
   case 2:
-    FUN_00493b74();
+    numericStepperHandleInput(reinterpret_cast<NumericStepper*>(param_1 + 0x2d2));
     puVar9 = param_1 + 0x2d0;
     puVar10 = param_1 + param_1[0x2d0] * 0x1d + 0x2d8;
-    temp_v6 = FUN_004cfe4c(puVar10);
-    FUN_004d0738(param_1 + 0x2c2,puVar10);
+    temp_v6 = flaggedValueHolderGetTotal(puVar10);
+    menuSynchronizeFlaggedSelection(param_1 + 0x2c2,puVar10);
     (**(romwright_code **)(*(int *)param_1[0x2cf] + 0xc))((int *)param_1[0x2cf],puVar10);
     FUN_004cf8dc(param_1 + 0xf3,2);
     FUN_004cf8dc(param_1 + 0xf3,0xc);
-    temp_v1 = FUN_004cfe4c(puVar10);
+    temp_v1 = flaggedValueHolderGetTotal(puVar10);
     if (temp_v6 == temp_v1) {
       FUN_002c2c80(puVar10);
     }
     temp_v6 = param_1[0x2d0];
-    temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+    temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
     screenShowMessage(*(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74));
     temp_v6 = param_1[0x2d0];
-    temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+    temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
     if (*puVar9 != 8) {
       temp_v5 = FUN_0049cad0();
       temp_v5 = temp_v5 * param_1[0x2d2];
@@ -202,7 +201,7 @@ void FUN_0049b00c(unsigned int *param_1)
         else {
           obj04Finish();
           if (param_1[1] == 0xd) {
-            FUN_003a76a8(1);
+            messageMainSetFlag(1);
           }
           ifTouchRegionRemove();
           ifTouchRegionRemove();
@@ -237,7 +236,7 @@ void FUN_0049b00c(unsigned int *param_1)
       else {
         temp_v1 = temp_v5 + 2;
       }
-      temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+      temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
       puVar5 = (unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       if (*puVar9 != 8) {
         temp_v4 = FUN_0049cad0(puVar5);
@@ -279,7 +278,7 @@ void FUN_0049b00c(unsigned int *param_1)
     param_1[0x5812] = 0xffffffff;
     FUN_00498ff0(param_1);
     if (param_1[1] == 0xd) {
-      FUN_003a76a8(0);
+      messageMainSetFlag(0);
     }
     *param_1 = *param_1 & 0xffffefff;
     if (param_1[0x2d0] != 8) {
@@ -300,17 +299,17 @@ void FUN_0049b00c(unsigned int *param_1)
     }
     break;
   case 4:
-    temp_v5 = FUN_0026272c();
+    temp_v5 = messageMainIsIdle();
     if (temp_v5 == 0) break;
     temp_v6 = 5;
     param_1[2] = temp_v6;
     break;
   case 5:
     temp_v6 = param_1[0x2d0];
-    temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+    temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
     temp_v0 = *(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
     temp_v6 = param_1[0x2d0];
-    temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+    temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
     if (param_1[0x2d0] != 8) {
       temp_v5 = FUN_0049cad0();
       temp_v5 = temp_v5 * param_1[0x2d2];
@@ -332,7 +331,7 @@ void FUN_0049b00c(unsigned int *param_1)
       scrScriptProcessStartEntry(param_1[99],temp_v4);
     }
     FUN_003c5fc4(1);
-    temp_v5 = FUN_0023b3f8();
+    temp_v5 = gameRecordExists();
     if (temp_v5 != 0) {
       FUN_003720e4(1);
     }
@@ -340,7 +339,7 @@ void FUN_0049b00c(unsigned int *param_1)
     param_1[2] = temp_v6;
     break;
   case 6:
-    temp_v5 = FUN_00224880(param_1[99]);
+    temp_v5 = scrRunOpcodesStub(param_1[99]);
     if (temp_v5 != 2) break;
     temp_v5 = FUN_002a4b74();
     if (temp_v5 == 0) {
@@ -348,7 +347,7 @@ void FUN_0049b00c(unsigned int *param_1)
       sysPlaySe(0x78);
       break;
     }
-    temp_v5 = FUN_0023b3f8();
+    temp_v5 = gameRecordExists();
     if (temp_v5 != 0) {
       FUN_003720e4(0);
     }
@@ -357,21 +356,21 @@ void FUN_0049b00c(unsigned int *param_1)
     sysPlaySe(0x87);
     temp_v6 = param_1[0x2d0];
     if (temp_v6 == 8) {
-      FUN_003a76a8(0);
+      messageMainSetFlag(0);
       temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049bd0c);
       scrScriptProcessStartEntry(param_1[99],temp_v4);
-      FUN_00224880(param_1[99]);
+      scrRunOpcodesStub(param_1[99]);
       break;
     }
 joined_r0x0049bb38:
     if (temp_v6 != 7) break;
     temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049ba9c);
     scrScriptProcessStartEntry(param_1[99],temp_v4);
-    FUN_00224880(param_1[99]);
+    scrRunOpcodesStub(param_1[99]);
     break;
   case 7:
     temp_v6 = param_1[0x2d0];
-    temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+    temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
     if (param_1[0x2d0] != 8) {
       temp_v5 = FUN_0049cad0();
       temp_v5 = temp_v5 * param_1[0x2d2];
@@ -388,12 +387,12 @@ joined_r0x0049bb38:
     param_1[2] = 8;
     temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049baac);
     scrScriptProcessStartEntry(param_1[99],temp_v4);
-    FUN_00224880(param_1[99]);
+    scrRunOpcodesStub(param_1[99]);
     param_1[3] = 0;
     break;
   case 8:
     param_1[3] = param_1[3] + 1;
-    FUN_00224880(param_1[99]);
+    scrRunOpcodesStub(param_1[99]);
     if ((*param_1 & 0x1000) != 0) {
       FUN_004cf8dc(param_1 + 0xf3,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1f0);
@@ -406,7 +405,7 @@ joined_r0x0049bb38:
     temp_v5 = panelStateIs0();
     if ((temp_v5 == 1) && ((int)param_1[3] >= 0x1e)) {
       temp_v6 = param_1[0x2d0];
-      temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+      temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
       puVar5 = (unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       temp_v6 = param_1[0x2d2];
       if (param_1[0x2d0] == 8) {
@@ -431,11 +430,11 @@ joined_r0x0049bb38:
     }
     break;
   case 9:
-    temp_v5 = FUN_00224880(param_1[99]);
+    temp_v5 = scrRunOpcodesStub(param_1[99]);
     if (temp_v5 != 2) break;
     temp_v6 = param_1[0x2d0];
     if ((temp_v6 != 7) && (temp_v6 != 8)) {
-      temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+      temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
       temp_v5 = FUN_00498408(param_1,*(unsigned short *)
                                     ((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74));
       if (temp_v5 == 0) {
@@ -452,15 +451,15 @@ joined_r0x0049bb38:
     if (temp_v6 != 8) goto joined_r0x0049bb38;
     temp_v4 = tableGroupFindEntryIndex(param_1[0x61],&LAB_0049bd0c);
     scrScriptProcessStartEntry(param_1[99],temp_v4);
-    FUN_00224880(param_1[99]);
+    scrRunOpcodesStub(param_1[99]);
     break;
   case 10:
-    temp_v5 = FUN_00224880(param_1[99]);
+    temp_v5 = scrRunOpcodesStub(param_1[99]);
     if (temp_v5 != 2) break;
     temp_v5 = FUN_002a4b74();
     if (temp_v5 == 0) {
       temp_v6 = param_1[0x2d0];
-      temp_v5 = FUN_004cfe4c(param_1 + temp_v6 * 0x1d + 0x2d8);
+      temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
       temp_v0 = *(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       puVar5 = (unsigned short *)gameGetPlayerData();
       temp_v4 = FUN_00192718(temp_v0);
@@ -491,14 +490,14 @@ joined_r0x0049bb38:
       FUN_00372100(puVar5,0);
       FUN_003d2150(0x10000cc);
     }
-    temp_v5 = FUN_0023b3f8();
+    temp_v5 = gameRecordExists();
     if (temp_v5 != 0) {
       FUN_003720e4(0);
     }
     temp_v6 = 3;
     param_1[2] = temp_v6;
   }
-  temp_v5 = FUN_0023b3f8();
+  temp_v5 = gameRecordExists();
   if (((temp_v5 != 0) && (temp_v5 = objBStateAllowsAction(), temp_v5 != 0)) &&
      ((*(char *)((int)param_1 + 0x23) == '\0' && (!temp_v7)))) {
     FUN_002f0384(1);

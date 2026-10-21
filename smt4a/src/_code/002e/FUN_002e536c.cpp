@@ -2,8 +2,8 @@
 
 extern "C" {
 
-void FUN_001656e0(u32 job, s32 flag);
-void FUN_0016572c(u32 job, s32 flag);
+void jobSetIntensity(u32 job, s32 flag);
+void jobBlendSetRate(u32 job, s32 flag);
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);
 
@@ -29,7 +29,7 @@ u32 FUN_002e536c(JobSet **set)
             do {
                 valid = jobIsValid(jobs->jobs[i]);
                 if ((valid != 0) && (valid = jobGetStatus(jobs->jobs[i]), valid != 4)) {
-                    FUN_001656e0(jobs->jobs[i], 0);
+                    jobSetIntensity(jobs->jobs[i], 0);
                 }
                 i = i + 1;
             } while (i < jobs->jobCount);
@@ -38,7 +38,7 @@ u32 FUN_002e536c(JobSet **set)
         do {
             valid = jobIsValid(jobs->extraJobs[i]);
             if (valid != 0) {
-                FUN_0016572c(jobs->extraJobs[i], 0);
+                jobBlendSetRate(jobs->extraJobs[i], 0);
             }
             i = i + 1;
         } while (i < 0x10);

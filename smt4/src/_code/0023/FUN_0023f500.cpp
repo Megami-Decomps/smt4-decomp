@@ -11,7 +11,7 @@ int FUN_002505c0(int, int, int, int, int, int, int);
 int FUN_00254f58(...);
 int FUN_00270028(int);
 int FUN_0027da30(int, int);
-int FUN_00297468(unsigned char [128], unsigned int *, int);
+int asdLoadFileAsyncSimple(unsigned char [128], unsigned int *, int);
 int libc_strcpy(unsigned char [128], unsigned int);
 int FUN_002c29d8(...);
 int asdMemFree(void);
@@ -20,7 +20,7 @@ int FUN_00338424(int);
 int FUN_00338458(int);
 int FUN_00339de0(int);
 int FUN_0033a144(int);
-int FUN_00394c6c(...);
+int btlSetSelectedListedValue(...);
 int vec3CopyFromOffsetC(unsigned int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -36,13 +36,13 @@ extern unsigned int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: FUN_0023fffc. */
 /* Supplied declaration required: FUN_002402c4. */
 extern unsigned int btlPosArrangeGetFilePath(int);
-extern int FUN_002405c8(int, unsigned short);
+extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00254f58. */
 /* Supplied declaration required: FUN_00270028. */
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_002896bc(void);
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002c29d8. */
 extern int FUN_002c2a04(unsigned int);
@@ -52,7 +52,7 @@ extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: FUN_00338458. */
 /* Supplied declaration required: FUN_00339de0. */
 /* Supplied declaration required: FUN_0033a144. */
-/* Supplied declaration required: FUN_00394c6c. */
+/* Supplied declaration required: btlSetSelectedListedValue. */
 /* Supplied declaration required: vec3CopyFromOffsetC. */
 
 
@@ -81,7 +81,7 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
       asdMemFree();
       param_1[1] = 0;
     }
-    FUN_00297468(temp_v5,param_1 + 1,0);
+    asdLoadFileAsyncSimple(temp_v5,param_1 + 1,0);
     *param_1 = 0xc;
     FUN_0023fffc(param_1,param_2);
   }
@@ -107,7 +107,7 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
            (*(unsigned int *)(temp_v3 + 0x54) = *(unsigned int *)(temp_v3 + 0x54) & 0xfffffff7,
            (*(unsigned short *)(temp_v3 + 0x58) & 0x800) == 0)) {
           temp_v1 = FUN_0027da30(param_2,(int)*(short *)(temp_v3 + 0x62));
-          temp_v1 = FUN_002405c8(param_2,*(unsigned short *)(temp_v1 + 2));
+          temp_v1 = pairedEntryTableContains(param_2,*(unsigned short *)(temp_v1 + 2));
           if (temp_v1 == 0) {
             *(unsigned short *)(temp_v3 + 0x58) = *(unsigned short *)(temp_v3 + 0x58) | 0x800;
           }
@@ -118,7 +118,7 @@ void FUN_0023f500(unsigned int *param_1,int param_2)
       FUN_00254f58(param_2);
       *puVar5 = *puVar5 | 0x200000;
       if ((*(unsigned int *)(param_2 + 0xe4) & 0x20) == 0) {
-        FUN_00394c6c(3);
+        btlSetSelectedListedValue(3);
       }
     }
     temp_v2 = FUN_002c2a04(0);

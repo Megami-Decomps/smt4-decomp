@@ -2,18 +2,18 @@
 
 extern "C" {
 
-s32 FUN_001546e8(u32 arg);
+s32 stateValuesGetBySelector(u32 arg);
 u8 FUN_00154edc(u32 arg, JobSurface *surface);
 void surfaceCopy(JobSurface *dest, JobSurface *source);
 void FUN_00157558(u32 renderCtx);
 extern u32 g_renderCtx;
 
-/* Per-frame job step: marks a pending request when FUN_001546e8 asks for one; otherwise, if enabled and neither done nor pending, renders once into a 0x200 x 0x200 surface, halves its size and sets `done`. Always returns 0. */
+/* Per-frame job step: marks a pending request when stateValuesGetBySelector asks for one; otherwise, if enabled and neither done nor pending, renders once into a 0x200 x 0x200 surface, halves its size and sets `done`. Always returns 0. */
 u8 jobRenderOnce(void)
 {
     JobWork *work = jobGetWork();
 
-    if (FUN_001546e8(0) != 0) {
+    if (stateValuesGetBySelector(0) != 0) {
         work->pending = 1;
     } else if (work->enabled == 0) {
         return work->enabled;

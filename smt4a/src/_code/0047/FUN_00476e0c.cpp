@@ -1,31 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00476e0c` (_code @ 0x476e0c, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: count/end-pointer zero initialization moves are emitted in the opposite order. */
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 
 extern "C" {
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-
-void FUN_00476e0c(int param_1)
-
+// Recover the directory length from the start of the first nonempty data block.
+void FUN_00476e0c(RelativeDirectory *directory)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 0;
-  for (temp_v0 = 0; temp_v1 = param_1 + temp_v0 * 0x10 + *(int *)(param_1 + 0x14), temp_v1 != temp_v2;
-      temp_v0 = temp_v0 + 1) {
-    if ((*(int *)(temp_v1 + 4) != 0) && (temp_v2 == 0)) {
-      temp_v2 = *(int *)(temp_v1 + 8) + param_1;
+    DirectoryRecord *dataBegin = NULL;
+    s32 count = 0;
+    for (;; ++count) {
+        DirectoryRecord *record = (DirectoryRecord *)((u8 *)directory + directory->recordsOffset) + count;
+        if (record == dataBegin) {
+            break;
+        }
+        if (record->size != 0 && dataBegin == NULL) {
+            dataBegin = (DirectoryRecord *)((u8 *)directory + record->dataOffset);
+        }
     }
-  }
-  *(int *)(param_1 + 0x10) = temp_v0;
-  return;
+    directory->count = count;
 }
-
-} /* extern "C" */
+}

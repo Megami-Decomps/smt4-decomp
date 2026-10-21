@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00107734(int, int);
+int randomStateSeed(int, int);
 int FUN_00298d50(unsigned char *);
 int FUN_002c1e30(unsigned char *, int);
 int FUN_002c1edc(unsigned char *, unsigned int *);
@@ -47,7 +47,7 @@ extern unsigned int DAT_004d9258; /* 0x4d9258 */
 extern unsigned int DAT_004d925c; /* 0x4d925c */
 extern unsigned int DAT_004d9260; /* 0x4d9260 */
 
-/* Supplied declaration required: FUN_00107734. */
+/* Supplied declaration required: randomStateSeed. */
 /* Supplied declaration required: FUN_00298d50. */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
@@ -62,7 +62,7 @@ void FUN_001dce30(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  FUN_00107734(0,0x12345678);
+  randomStateSeed(0,0x12345678);
   FUN_002fc1a8();
   temp_v0 = 0;
   DAT_004d9228 = 0;

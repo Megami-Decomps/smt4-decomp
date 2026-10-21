@@ -13,7 +13,7 @@ int FUN_002ff8e8(unsigned int);
 int camSetMatrixB(int, int *);
 int FUN_00409bc8(int, unsigned int);
 int FUN_00412678(unsigned int, unsigned char [352], int *);
-int FUN_00412aec(unsigned int, int *, int, int);
+int asdPrimCopyIndexRange(unsigned int, int *, int, int);
 int FUN_00412c54(unsigned int, unsigned char [352]);
 int FUN_0042cb74(unsigned char *);
 
@@ -45,7 +45,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: camSetMatrixB. */
 /* Supplied declaration required: FUN_00409bc8. */
 /* Supplied declaration required: FUN_00412678. */
-/* Supplied declaration required: FUN_00412aec. */
+/* Supplied declaration required: asdPrimCopyIndexRange. */
 /* Supplied declaration required: FUN_00412c54. */
 /* Supplied declaration required: FUN_0042cb74. */
 
@@ -162,7 +162,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   if (temp_v5 < *(short *)(param_1 + 2)) {
     do {
       FUN_00409bc8(g_renderCtx,param_1[1] + temp_v5 * 0x10);
-      FUN_00412aec(*param_1,&temp_v16,(int)*(short *)(param_1 + 3) * temp_v5 * 3,
+      asdPrimCopyIndexRange(*param_1,&temp_v16,(int)*(short *)(param_1 + 3) * temp_v5 * 3,
                    *(short *)(param_1 + 3) * 3);
       FUN_00412678(*param_1,temp_v14,&temp_v16);
       temp_v5 = temp_v5 + 1;

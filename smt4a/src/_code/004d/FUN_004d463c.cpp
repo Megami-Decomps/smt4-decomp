@@ -16,7 +16,7 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 extern int padButtonIsPressed(unsigned int);
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int);
-extern unsigned int FUN_003874fc(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 /* Supplied declaration required: childrenLowerToLevel. */
 
 
@@ -29,7 +29,7 @@ void FUN_004d463c(int param_1)
   int temp_v1;
   unsigned int *puVar4;
   
-  temp_v0 = FUN_003874fc(*(unsigned int *)(param_1 + 0x10));
+  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   temp_v1 = g_btlStageModel;
   puVar4 = (unsigned int *)(g_btlStageModel + 0xb0);
   switch(temp_v0) {

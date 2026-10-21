@@ -8,7 +8,7 @@ int FUN_001029f4(unsigned int, int, int);
 int sysFatalBreak(void);
 int recordTableAppend(unsigned char *);
 int FUN_00427d6c(int);
-int FUN_00427e10(void);
+int wordPairClear(void);
 int FUN_00428334(int, unsigned char **, unsigned int);
 int FUN_00428428(int, int, int);
 int FUN_004396bc(int, unsigned int, int *, int);
@@ -47,9 +47,9 @@ extern unsigned char DAT_00642b80; /* 0x642b80 */
 extern int libc_strncmp(unsigned int, unsigned char *, unsigned int);
 /* Supplied declaration required: recordTableAppend. */
 /* Supplied declaration required: FUN_00427d6c. */
-/* Supplied declaration required: FUN_00427e10. */
+/* Supplied declaration required: wordPairClear. */
 /* Supplied declaration required: FUN_00428334. */
-extern unsigned char *FUN_004283c0(int);
+extern unsigned char *dataGetBlockBase(int);
 extern unsigned int FUN_004283e0(int);
 /* Supplied declaration required: FUN_00428428. */
 /* Supplied declaration required: FUN_004396bc. */
@@ -97,11 +97,11 @@ void FUN_00426acc(int param_1,int param_2,unsigned int param_3,int *param_4)
   if (-1 < temp_v0) {
     temp_v22 = param_2;
     uStack_30 = param_3;
-    temp_v9 = (unsigned char *)FUN_004283c0(param_1);
+    temp_v9 = (unsigned char *)dataGetBlockBase(param_1);
     temp_v10 = FUN_004283e0(param_1);
     temp_v2 = *(unsigned int *)(param_1 + 8);
     temp_v5 = *(unsigned int *)(param_1 + 0xc);
-    FUN_00427e10();
+    wordPairClear();
     recordTableAppend(&LAB_00426dc8);
     recordTableAppend(&LAB_00426dd0);
     recordTableAppend(&LAB_00426dd8);

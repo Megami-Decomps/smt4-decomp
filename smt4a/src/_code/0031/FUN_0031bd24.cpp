@@ -5,9 +5,9 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_001f474c(unsigned char [64], int);
+int asdEnvResetModelBank(unsigned char [64], int);
 int FUN_001ffba8(void);
-int FUN_00280c5c(int, int);
+int lightOwnerRegister(int, int);
 int animPlayerSetLoopPolicy(unsigned int, int);
 int nodeSetTranslation3f(unsigned int, int);
 int FUN_003d502c(int);
@@ -16,10 +16,10 @@ int FUN_003d502c(int);
 extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
 extern int FUN_001ab8c0(void);
-/* Supplied declaration required: FUN_001f474c. */
+/* Supplied declaration required: asdEnvResetModelBank. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_001ffba8. */
-/* Supplied declaration required: FUN_00280c5c. */
+/* Supplied declaration required: lightOwnerRegister. */
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: nodeSetTranslation3f. */
 /* Supplied declaration required: FUN_003d502c. */
@@ -47,7 +47,7 @@ unsigned int FUN_0031bd24(void)
       temp_v1 = *(int *)(temp_v0 + 0x18);
       if (temp_v1 != 0) {
         if (*(int *)(*(int *)(temp_v1 + 8) + 0xc) < 0) {
-          FUN_00280c5c(temp_v1,1);
+          lightOwnerRegister(temp_v1,1);
         }
         nodeSetTranslation3f(*(unsigned int *)(*(int *)(temp_v0 + 0x18) + 8),0);
         animPlayerSetLoopPolicy(*(unsigned int *)(*(int *)(temp_v0 + 0x18) + 8),1);
@@ -62,7 +62,7 @@ unsigned int FUN_0031bd24(void)
     if (temp_v1 == 0) {
       textFormatBuffer(temp_v3,"battle/battle_map/e%03d_%02d.bcenv",*(unsigned int *)(temp_v0 + 0x10),
                    *(unsigned int *)(temp_v0 + 0x14));
-      FUN_001f474c(temp_v3,0);
+      asdEnvResetModelBank(temp_v3,0);
       *(unsigned char *)(temp_v0 + 0x1c) = 1;
       textFormatBuffer(temp_v3,"battle/battle_map/b%03d_%02d.bam",*(unsigned int *)(temp_v0 + 0x10),
                    *(unsigned int *)(temp_v0 + 0x14));

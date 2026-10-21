@@ -9,16 +9,16 @@ int FUN_0023c0d0(...);
 int FUN_0023c5c0(...);
 int FUN_00250680(...);
 int FUN_002551ac(...);
-int FUN_00283e48(void);
-int FUN_003dd9d4(...);
+int passiveSkillLookupRecord(void);
+int btlReflectCreateKind1c(...);
 int FUN_003de874(...);
 
-int FUN_0023c564(...);
-int FUN_0023f27c(...);
+int btlReflectSetValuePair(...);
+unsigned int FUN_0023f27c(int, unsigned int, unsigned int, unsigned int, void *, int, int, int, int);
 int FUN_00250720(...);
 int FUN_00250d84(...);
 int FUN_0026beb4(...);
-int FUN_002953b8(void);
+int gameSavedFlagSet(void);
 int dataTable08Sub1GetRecord(void);
 int FUN_0033b33c(...);
 int FUN_003dcc48(...);
@@ -32,7 +32,7 @@ int FUN_00228220(unsigned int, int, int, int, int, unsigned int, int, char [16])
 int FUN_00228930(...);
 int FUN_002296f4(...);
 int FUN_00229a3c(...);
-int FUN_0022a8c8(...);
+int btlTargetSetFlag10(...);
 int FUN_00246080(...);
 int FUN_00246454(...);
 int FUN_00247478(short *, unsigned int, unsigned int);
@@ -124,9 +124,9 @@ extern int FUN_002281a4(int);
 /* Supplied declaration required: FUN_002296f4. */
 extern int FUN_00229914(unsigned int *, unsigned int *, int);
 /* Supplied declaration required: FUN_00229a3c. */
-/* Supplied declaration required: FUN_0022a8c8. */
+/* Supplied declaration required: btlTargetSetFlag10. */
 /* Supplied declaration required: FUN_0023c0d0. */
-/* Supplied declaration required: FUN_0023c564. */
+/* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: FUN_0023c5c0. */
 extern int FUN_0023c684(unsigned int);
 extern unsigned int FUN_0023dcfc(unsigned int);
@@ -148,8 +148,8 @@ extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_00282820. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028299c(int);
-/* Supplied declaration required: FUN_00283e48. */
-/* Supplied declaration required: FUN_002953b8. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
+/* Supplied declaration required: gameSavedFlagSet. */
 extern unsigned int FUN_0029a924(unsigned int);
 extern unsigned int FUN_0029a9d4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0029cc44. */
@@ -163,10 +163,10 @@ extern int slotTableValueReducedByRecord(unsigned int);
 /* Supplied declaration required: FUN_003cf4f8. */
 /* Supplied declaration required: FUN_003d13d4. */
 extern int FUN_003d98a0(int, int);
-extern int FUN_003db654(int);
+extern int btlGetMaximumNamedValue(int);
 /* Supplied declaration required: FUN_003dcc48. */
 extern unsigned int FUN_003dcf34(int);
-/* Supplied declaration required: FUN_003dd9d4. */
+/* Supplied declaration required: btlReflectCreateKind1c. */
 /* Supplied declaration required: FUN_003dda20. */
 /* Supplied declaration required: FUN_003ddae8. */
 /* Supplied declaration required: FUN_003ddd30. */
@@ -305,7 +305,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       }
       temp_v12 = temp_v3 + temp_v5 + temp_v6;
       FUN_00246080(temp_v12,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v7 * 0x114,3);
-      FUN_0022a8c8(*param_1,temp_v4,0);
+      btlTargetSetFlag10(*param_1,temp_v4,0);
       FUN_002296f4(param_1,param_2,temp_v7,temp_v3 + temp_v5,10,0x14);
       FUN_00228930(param_1,temp_v7,1);
       temp_v4 = FUN_00227c30(temp_v4,temp_v7);
@@ -676,7 +676,7 @@ LAB_003d444c:
   if (temp_v13 != 0) {
     temp_v14 = 0;
     do {
-      temp_v4 = FUN_003db654(DAT_00435d18);
+      temp_v4 = btlGetMaximumNamedValue(DAT_00435d18);
       if (-1 < temp_v4) {
         temp_v4 = temp_v13 + temp_v14 * 0x16;
         FUN_00282820((int)*(short *)(temp_v4 + 0x10),param_2,(int)*(short *)(param_2[9] + 0x62),0,0,
@@ -733,14 +733,14 @@ LAB_003d444c:
                 }
                 if ((*param_2 & 0x1080) == 0) {
                   temp_v15 = (unsigned int)*(unsigned char *)(temp_v4 + 0x161);
-                  FUN_0023f27c(temp_v15,param_2,*(unsigned char *)(temp_v4 + 0x162),temp_v10,temp_v12,
+                  FUN_0023f27c(temp_v15,(unsigned int)param_2,*(unsigned char *)(temp_v4 + 0x162),temp_v10,(void *)temp_v12,
                                (int)*(short *)(temp_v4 + 0x164),(int)*(short *)(temp_v4 + 0x166),
                                *(unsigned char *)(temp_v4 + 0x163),temp_v2);
                 }
               }
               else if ((*param_2 & 0x1080) == 0) {
                 temp_v15 = (unsigned int)*(unsigned char *)(temp_v4 + 0x161);
-                FUN_0023c564(temp_v15,param_2,*(unsigned char *)(temp_v4 + 0x162),0,1);
+                btlReflectSetValuePair(temp_v15,param_2,*(unsigned char *)(temp_v4 + 0x162),0,1);
               }
             }
             else if ((*param_2 & 0x1080) == 0) {
@@ -751,7 +751,7 @@ LAB_003d444c:
           }
           else if ((*param_2 & 0x1080) == 0) {
             temp_v15 = (unsigned int)*(unsigned char *)(temp_v4 + 0x161);
-            FUN_0023c564(temp_v15,param_2,*(unsigned char *)(temp_v4 + 0x162),1,1);
+            btlReflectSetValuePair(temp_v15,param_2,*(unsigned char *)(temp_v4 + 0x162),1,1);
           }
         }
       }
@@ -764,25 +764,25 @@ LAB_003d444c:
       temp_v12 = param_2[9];
     }
     if ((-1 < DAT_0043431c) && (-1 < DAT_004342d4)) {
-      FUN_0023f27c(DAT_0043431c,param_2,DAT_004342d4,0x15,temp_v12,(int)(DAT_00434318 * 100.0f),0,
+      FUN_0023f27c(DAT_0043431c,(unsigned int)param_2,DAT_004342d4,0x15,(void *)temp_v12,(int)(DAT_00434318 * 100.0f),0,
                    DAT_004342d8,temp_v2);
     }
     if ((-1 < DAT_00434324) && (-1 < DAT_004342e0)) {
-      FUN_0023f27c(DAT_00434324,param_2,DAT_004342e0,0x16,temp_v12,(int)(DAT_00434320 * temp_v17),0,
+      FUN_0023f27c(DAT_00434324,(unsigned int)param_2,DAT_004342e0,0x16,(void *)temp_v12,(int)(DAT_00434320 * temp_v17),0,
                    DAT_00434328,temp_v2);
     }
     if ((-1 < DAT_00434330) && (-1 < DAT_004342e4)) {
-      FUN_0023f27c(DAT_00434330,param_2,DAT_004342e4,0x17,temp_v12,(int)(DAT_0043432c * temp_v17),0,
+      FUN_0023f27c(DAT_00434330,(unsigned int)param_2,DAT_004342e4,0x17,(void *)temp_v12,(int)(DAT_0043432c * temp_v17),0,
                    DAT_00434334,temp_v2);
     }
     if ((-1 < DAT_00434338) && (-1 < DAT_004342e8)) {
-      FUN_0023f27c(DAT_00434338,param_2,DAT_004342e8,0x18,temp_v12,0,0,DAT_0043433c,temp_v2);
+      FUN_0023f27c(DAT_00434338,(unsigned int)param_2,DAT_004342e8,0x18,(void *)temp_v12,0,0,DAT_0043433c,temp_v2);
     }
     if ((-1 < DAT_00434340) && (-1 < DAT_004342ec)) {
-      FUN_0023f27c(DAT_00434340,param_2,DAT_004342ec,0x19,temp_v12,0,0,DAT_00434344,temp_v2);
+      FUN_0023f27c(DAT_00434340,(unsigned int)param_2,DAT_004342ec,0x19,(void *)temp_v12,0,0,DAT_00434344,temp_v2);
     }
     if ((-1 < DAT_00434348) && (-1 < DAT_0043434c)) {
-      FUN_0023c564(DAT_00434348,param_2,DAT_0043434c,1,1);
+      btlReflectSetValuePair(DAT_00434348,param_2,DAT_0043434c,1,1);
     }
   }
   temp_v11 = param_2[9];
@@ -828,7 +828,7 @@ LAB_003d444c:
     temp_v12 = temp_v27;
   }
   if ((temp_v3 != 0 && temp_v12 != 0) && -1 < (int)temp_v11) {
-    FUN_002953b8();
+    gameSavedFlagSet();
   }
   temp_v2 = 0;
   if ((param_2[0x15c] == 0) && ((*(unsigned int *)(*param_1 + 0x44a8) & 0x400) == 0)) {
@@ -894,7 +894,7 @@ LAB_003d444c:
           }
         }
         FUN_003de874(1,0,param_2,param_2[9],temp_v3,0,1);
-        FUN_003dd9d4(1,param_2,param_2[9],-temp_v3,1);
+        btlReflectCreateKind1c(1,param_2,param_2[9],-temp_v3,1);
       }
     }
   }
@@ -902,7 +902,7 @@ LAB_003d444c:
     switch(temp_v28) {
     case 1:
       temp_v2 = *(int *)(param_2[8] + 0xc0);
-      FUN_00283e48();
+      passiveSkillLookupRecord();
       if (temp_v2 != 0) {
         FUN_00227334(g_btlUiBlock,2,*(unsigned int *)(param_2[8] + 0xc0) & 0xffff,
                      *(unsigned int *)(param_2[8] + 0x278),0,0);

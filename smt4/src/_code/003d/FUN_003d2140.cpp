@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_00227218(void);
+int eventCommandDispatchPendingCleanup(void);
 int FUN_002276f8(...);
 int battleResetCounterAndFlag(void);
 int FUN_0027dd9c(...);
 int FUN_0027de24(...);
-int FUN_002c1dd8(...);
-int FUN_003af1c4(...);
-int FUN_003da0bc(...);
+int asdSoundSelectSlotB(...);
+int btlUiRecountParty(...);
+int objDestroyChild(...);
 int nw_snd_SoundHeap_LoadState(...);
 
 int btlAiScriptCall(unsigned int *);
 int FUN_001d2710(...);
-int FUN_00227ab4(...);
+int btlEntryValuesCopy(...);
 int FUN_00227b14(int *, int, int, int);
 int FUN_00229098(int *);
 int FUN_002296f4(...);
@@ -26,20 +26,21 @@ int FUN_00246454(int, unsigned int *, unsigned int *);
 int FUN_00256898(...);
 int FUN_002569ac(...);
 int FUN_0026beb4(...);
-int FUN_0027e3f8(...);
-int FUN_00292dd0(int);
+int btlEventSelectTrigger(...);
+void battleSelectButtonHelpPreset(int);
 int gameGetSlotTable(void);
 int buttonHelpSetPreset(...);
 int memClear(int, int);
 int FUN_0033a780(...);
-int FUN_003ae8ec(int *);
+int btlUiRouteSelectedAction(int *);
 int FUN_003ca32c(...);
-int FUN_003ca4b0(...);
+int battleResolveEscapeAttempt(...);
 int FUN_003ca6c4(int *, unsigned int *);
-int FUN_003cf94c(...);
+int btlResolveCommandEvent(...);
 int FUN_003d3944(int *, unsigned int *);
 int FUN_003d3ba8(...);
-int FUN_003d647c(...);
+struct BtlMainState;
+void btlResetTransitionProgress(BtlMainState *state);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -57,15 +58,15 @@ extern int DAT_004e316c; /* 0x4e316c */
 
 /* Supplied declaration required: btlAiScriptCall. */
 /* Supplied declaration required: FUN_001d2710. */
-/* Supplied declaration required: FUN_00227218. */
+/* Supplied declaration required: eventCommandDispatchPendingCleanup. */
 /* Supplied declaration required: FUN_002276f8. */
-/* Supplied declaration required: FUN_00227ab4. */
+/* Supplied declaration required: btlEntryValuesCopy. */
 /* Supplied declaration required: FUN_00227b14. */
 /* Supplied declaration required: FUN_00229098. */
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_00229c5c. */
 /* Supplied declaration required: battleResetCounterAndFlag. */
-extern int *FUN_0023eb7c(void);
+extern int *gameSlotFindByCategory(void);
 /* Supplied declaration required: FUN_00244fb0. */
 /* Supplied declaration required: FUN_00246454. */
 extern unsigned int saveResolvePartySlot(int);
@@ -75,28 +76,26 @@ extern unsigned int saveResolvePartySlot(int);
 /* Supplied declaration required: FUN_0027dd9c. */
 /* Supplied declaration required: FUN_0027de24. */
 extern int *FUN_0027e3b8(unsigned int *);
-/* Supplied declaration required: FUN_0027e3f8. */
-/* Supplied declaration required: FUN_00292dd0. */
+/* Supplied declaration required: btlEventSelectTrigger. */
 extern int *FUN_00293230(int);
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern int FUN_002b898c(void);
-/* Supplied declaration required: FUN_002c1dd8. */
+extern int buttonHelpGetStatus(void);
+/* Supplied declaration required: asdSoundSelectSlotB. */
 /* Supplied declaration required: memClear. */
 extern int *jyoucyuGetTableEntry(unsigned int);
 extern int FUN_002e14e4(unsigned int);
 /* Supplied declaration required: FUN_0033a780. */
-/* Supplied declaration required: FUN_003ae8ec. */
-/* Supplied declaration required: FUN_003af1c4. */
+/* Supplied declaration required: btlUiRouteSelectedAction. */
+/* Supplied declaration required: btlUiRecountParty. */
 extern int questGetCurrentRecordHalf4(void);
 /* Supplied declaration required: FUN_003ca32c. */
-/* Supplied declaration required: FUN_003ca4b0. */
+/* Supplied declaration required: battleResolveEscapeAttempt. */
 /* Supplied declaration required: FUN_003ca6c4. */
-/* Supplied declaration required: FUN_003cf94c. */
+/* Supplied declaration required: btlResolveCommandEvent. */
 /* Supplied declaration required: FUN_003d3944. */
 /* Supplied declaration required: FUN_003d3ba8. */
-/* Supplied declaration required: FUN_003d647c. */
-/* Supplied declaration required: FUN_003da0bc. */
+/* Supplied declaration required: objDestroyChild. */
 extern int *FUN_003dbb40(int);
 extern int *FUN_003ddcf4(unsigned int, unsigned int *, int, unsigned int);
 /* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
@@ -151,7 +150,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     btlAiScriptCall(puVar8);
     memClear(temp_v2 + 0x3c,0x85);
     FUN_00229098(param_1);
-    temp_v2 = FUN_002b898c();
+    temp_v2 = buttonHelpGetStatus();
     piVar2 = (int *)FUN_00293230(*param_1);
     if (piVar2 != (int *)0x0) {
       if (temp_v2 != 0x3d) {
@@ -162,7 +161,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     }
     else if ((temp_v2 != 0xb3) && (temp_v2 != 0xb4)) {
       piVar2 = (int *)0x0;
-      FUN_00292dd0(0);
+      battleSelectButtonHelpPreset(0);
       return piVar2;
     }
     break;
@@ -175,7 +174,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     FUN_003ca6c4(param_1,puVar8);
     return param_1;
   case 7:
-    FUN_003ae8ec(g_btlUiBlock);
+    btlUiRouteSelectedAction(g_btlUiBlock);
     memClear(temp_v2 + 0x3c,0x85);
     piVar2 = (int *)gameGetSlotTable();
     return piVar2;
@@ -192,7 +191,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
              (temp_v3 = saveResolvePartySlot(temp_v5),
              *(short *)(temp_v3 + 0x46) == *(short *)((int)puVar9 + 0xce))) {
             puVar9[0x9f] = temp_v3;
-            piVar2 = (int *)FUN_0023eb7c();
+            piVar2 = (int *)gameSlotFindByCategory();
             *(short *)(puVar9 + 0x35) = (short)(int)piVar2;
             goto LAB_003d243c;
           }
@@ -215,7 +214,7 @@ LAB_003d243c:
     return piVar11;
   case 0xd:
     FUN_0033a780(piVar11);
-    FUN_003d647c(g_btlMain);
+    btlResetTransitionProgress((BtlMainState *)g_btlMain);
     *(unsigned int *)(temp_v2 + 0x10) = 0;
     FUN_00256898(0,0);
     piVar2 = (int *)0xed;
@@ -252,7 +251,7 @@ LAB_003d243c:
     FUN_001d2710(piVar11,puVar8,0,temp_v4);
     return piVar11;
   case 0x10:
-    FUN_003cf94c(param_1,puVar8);
+    btlResolveCommandEvent(param_1,puVar8);
     return param_1;
   case 0x12:
     if ((*puVar8 & 0x1080) == 0) {
@@ -289,7 +288,7 @@ LAB_003d243c:
     }
     break;
   case 0x14:
-    FUN_003ca4b0(param_1,puVar8);
+    battleResolveEscapeAttempt(param_1,puVar8);
     return param_1;
   case 0x18:
     piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
@@ -297,14 +296,14 @@ LAB_003d243c:
       temp_v4 = (int)*(short *)(*(int *)(temp_v2 + 0x24) + 0x6e);
       if (*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) != 0xb) {
         puVar4 = g_btlEvent;
-        FUN_0027e3f8(g_btlEvent,3,temp_v4,0);
+        btlEventSelectTrigger(g_btlEvent,3,temp_v4,0);
         if (puVar4 == (unsigned int *)0x0) {
           return (int *)0x0;
         }
       }
       else {
         puVar4 = g_btlEvent;
-        FUN_0027e3f8(g_btlEvent,7,temp_v4,0);
+        btlEventSelectTrigger(g_btlEvent,7,temp_v4,0);
         if (puVar4 == (unsigned int *)0x0) {
           return (int *)0x0;
         }
@@ -320,7 +319,7 @@ code_r0x0027e38c:
     break;
   case 0x1c:
     FUN_002569ac(param_1,piVar2);
-    FUN_00227ab4(param_1,puVar8);
+    btlEntryValuesCopy(param_1,puVar8);
     piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
     if (piVar2 == (int *)0x0) goto code_r0x0027e38c;
     break;
@@ -348,7 +347,7 @@ code_r0x0027e38c:
     piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
     if (piVar2 == (int *)0x0) {
       puVar4 = g_btlEvent;
-      FUN_0027e3f8(g_btlEvent,4,(int)*(short *)(*(int *)(temp_v2 + 0x24) + 0x6e),0);
+      btlEventSelectTrigger(g_btlEvent,4,(int)*(short *)(*(int *)(temp_v2 + 0x24) + 0x6e),0);
       piVar2 = (int *)0x0;
       if (puVar4 != (unsigned int *)0x0) goto code_r0x0027e38c;
     }
@@ -356,19 +355,19 @@ code_r0x0027e38c:
   case 0x23:
     temp_v4 = g_btlScriptUnit;
     if ((**(unsigned int **)(temp_v2 + 0x24) & 0x10) == 0) {
-      FUN_003af1c4(g_btlUiBlock);
+      btlUiRecountParty(g_btlUiBlock);
     }
-    FUN_003da0bc(DAT_00435d18);
+    objDestroyChild(DAT_00435d18);
     FUN_002276f8(DAT_00435d18);
     *(unsigned int *)(DAT_00435d18 + 0x3028) = *(unsigned int *)(DAT_00435d18 + 0x3028) & 0xffff7fff;
     battleResetCounterAndFlag();
     FUN_0027de24(DAT_00435d18);
     FUN_0027dd9c(DAT_00435d18);
     *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xffffbfff;
-    FUN_00227218();
+    eventCommandDispatchPendingCleanup();
     piVar2 = (int *)jyoucyuGetTableEntry(1);
     if (piVar2 == (int *)0x0) {
-      FUN_002c1dd8(2);
+      asdSoundSelectSlotB(2);
       temp_v2 = FUN_002e14e4(2);
       piVar2 = (int *)0x0;
       if (DAT_004e316c != 0) {

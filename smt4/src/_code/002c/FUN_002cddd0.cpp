@@ -4,7 +4,7 @@ extern "C" {
 
 int FUN_00269dc8(void);
 int messageSlotSet(int a);
-int FUN_0028dc98(...);
+int scrCommMessageSetMode(...);
 int FUN_00296934(void);
 int buttonHelpSetPreset(int a);
 int FUN_002fec80(int a);
@@ -19,7 +19,7 @@ u8 FUN_002cddd0(void)
 
     arg = scrGetArg();
     if (scrGetCommandFrame() == 0) {
-        FUN_0028dc98(1);
+        scrCommMessageSetMode(1);
         FUN_00269dc8();
         FUN_002fec80(arg);
     }
@@ -27,7 +27,7 @@ u8 FUN_002cddd0(void)
     if (done != 0) {
         FUN_00296934();
         buttonHelpSetPreset(0x90);
-        FUN_0028dc98(0xffffffff);
+        scrCommMessageSetMode(0xffffffff);
         messageSlotSet(0);
     }
     return done != 0;

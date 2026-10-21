@@ -6,7 +6,7 @@ extern "C" {
 
 int scrGetArg(int);
 
-extern unsigned int DAT_00570d78; /* 0x570d78 */
+extern unsigned int g_battleMaskPresets; /* 0x570d78 */
 extern unsigned int DAT_00570d7c; /* 0x570d7c */
 extern unsigned int DAT_00570d80; /* 0x570d80 */
 extern unsigned int DAT_00570d84; /* 0x570d84 */
@@ -39,7 +39,7 @@ unsigned int FUN_0039e588(void)
     puVar7 = (unsigned int *)(*(int *)(temp_v2 + 0x1ffc) + temp_v5 * 0x408);
     temp_v3 = *puVar7;
     temp_v4 = puVar7[1];
-    if (((((temp_v4 & DAT_00570d7c) != 0 || (temp_v3 & DAT_00570d78) != 0) &&
+    if (((((temp_v4 & DAT_00570d7c) != 0 || (temp_v3 & g_battleMaskPresets) != 0) &&
          ((DAT_00570d90 & temp_v3) == 0 && (DAT_00570d94 & temp_v4) == 0)) &&
         ((temp_v3 & DAT_00570d80) != 0 || (temp_v4 & DAT_00570d84) != 0)) &&
        ((*(char *)((int)puVar7 + 0x23a) != '\0' && (*(unsigned short *)((int)puVar7 + 0x166) == temp_v1))))

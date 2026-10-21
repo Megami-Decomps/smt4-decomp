@@ -28,7 +28,7 @@ extern unsigned int DAT_004c582c; /* 0x4c582c */
 /* Supplied declaration required: asdSoundSetVolumeIfEnabled. */
 /* Supplied declaration required: FUN_0010dd80. */
 /* Supplied declaration required: asdSoundDuckSetup. */
-extern int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
+extern int fileLoadSync(unsigned char *, unsigned int *, unsigned int);
 extern int jyoucyuGetTableEntry(unsigned int);
 
 
@@ -54,7 +54,7 @@ void FUN_00106650(void)
     asdSoundDuckSetup(1);
     temp_v1[0] = 0;
     if (DAT_004c5814 == 0) {
-      DAT_004c5814 = FUN_002c3124(&LAB_001066f4,temp_v1,0);
+      DAT_004c5814 = fileLoadSync(&LAB_001066f4,temp_v1,0);
     }
   }
   return;

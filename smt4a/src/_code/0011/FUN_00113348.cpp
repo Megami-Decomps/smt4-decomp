@@ -31,7 +31,7 @@ extern unsigned int DAT_00594a60; /* 0x594a60 */
 extern unsigned int DAT_00594a64; /* 0x594a64 */
 
 /* Supplied declaration required: FUN_0010a0cc. */
-extern unsigned int FUN_002e6e26(void);
+extern unsigned int onlineContextGetInstance(void);
 extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
 /* Supplied declaration required: FUN_002e78d0. */
@@ -100,7 +100,7 @@ void FUN_00113348(int param_1)
           FUN_002f8174(temp_v2,DAT_00594a60,DAT_00594a64,0x10a077);
         }
         FUN_002f81c8();
-        temp_v1 = FUN_002e6e26();
+        temp_v1 = onlineContextGetInstance();
         FUN_002e78d0(temp_v1,temp_v2,1);
         temp_v3 = *(unsigned int *)(param_1 + 0x184);
         temp_v1 = onlineInstanceTableGetCurrent();

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int gameGetOptions(void);
+int gameGetSupportUnitData(void);
 int memClear(unsigned short *, int);
 
 extern int gameGetPlayerData(void);
 extern int FUN_002b6a54(unsigned int, unsigned int);
-/* Supplied declaration required: gameGetOptions. */
+/* Supplied declaration required: gameGetSupportUnitData. */
 extern int randNextInRange(short);
 /* Supplied declaration required: memClear. */
 extern unsigned int tableEntryIndexByKey(unsigned int, unsigned char);
@@ -35,7 +35,7 @@ void FUN_003c86bc(void)
   unsigned int temp_v12;
   unsigned int temp_v13;
   
-  temp_v8 = gameGetOptions();
+  temp_v8 = gameGetSupportUnitData();
   temp_v11 = (unsigned short)(*(short *)(temp_v8 + 0x60a) != 0);
   if (*(short *)(temp_v8 + 0x60c) != 0) {
     temp_v11 = temp_v11 + 1;
@@ -50,7 +50,7 @@ void FUN_003c86bc(void)
       if (temp_v9 == 0) {
         temp_v7 = *(short *)(temp_v8 + temp_v10 * 2 + 0x60a);
         temp_v12 = (unsigned int)temp_v7;
-        puVar12 = (unsigned short *)gameGetOptions();
+        puVar12 = (unsigned short *)gameGetSupportUnitData();
         temp_v13 = 0xffffffff;
         temp_v8 = 0;
         break;

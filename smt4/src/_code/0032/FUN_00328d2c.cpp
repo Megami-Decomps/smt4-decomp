@@ -21,7 +21,7 @@ extern char s_flar02_02_004332a4[10]; /* 0x4332a4 */
 /* Supplied declaration required: FUN_002522f8. */
 /* Supplied declaration required: asdTexTgaLoadNw4c. */
 /* Supplied declaration required: asdTextureCreate. */
-extern unsigned int FUN_002c3124(unsigned char *, unsigned int *, unsigned int);
+extern unsigned int fileLoadSync(unsigned char *, unsigned int *, unsigned int);
 
 
 void FUN_00328d2c(void)
@@ -45,7 +45,7 @@ void FUN_00328d2c(void)
       asdTextureCreate();
       *piVar5 = temp_v1;
       FUN_002522f8(temp_v5,0x80,&LAB_00328de0,&LAB_00328dcc,s_flar02_02_004332a4 + temp_v0);
-      temp_v2 = FUN_002c3124(temp_v5,(unsigned int *)&temp_v4,0);
+      temp_v2 = fileLoadSync(temp_v5,(unsigned int *)&temp_v4,0);
       *(unsigned int *)(temp_v0 + 0x4332e4) = temp_v2;
       asdTexTgaLoadNw4c(*piVar5,temp_v2,temp_v4,0x10000);
     }

@@ -28,7 +28,7 @@ extern unsigned char LAB_00382cd0; /* 0x382cd0 */
 extern int FUN_00235414(unsigned char);
 extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
 /* Supplied declaration required: FUN_00287528. */
-extern int FUN_002876f0(unsigned int, unsigned int);
+extern int objectFlagBitIsSet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287704. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00296b3c. */
@@ -72,7 +72,7 @@ void FUN_00382878(int param_1)
       FUN_00381ac0();
     }
     temp_v2 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
-    temp_v1 = FUN_002876f0(temp_v2,4);
+    temp_v1 = objectFlagBitIsSet(temp_v2,4);
     if (temp_v1 == 0) {
       temp_v8 = 0;
       if (*(char *)(param_1 + 0x18) == '\0') {

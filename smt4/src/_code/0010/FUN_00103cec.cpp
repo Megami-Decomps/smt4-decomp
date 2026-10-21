@@ -1,32 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00103cec` (_code @ 0x103cec, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: float store is scheduled after the integer stores; literal-pool order also differs. */
+#include "shard/W6_W6Match3_SlotState.h"
 
 extern "C" {
+extern W6Match3SlotState DAT_004d9758[2];
 
-extern unsigned int DAT_004d975c; /* 0x4d975c */
-extern unsigned char DAT_004d9768; /* 0x4d9768 */
-
-
+// Reset both slots to their inactive state.
 void FUN_00103cec(void)
-
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = temp_v1 * 0x14;
-    temp_v2 = temp_v1 + 1;
-    *(unsigned int *)(temp_v0 + 0x4d9758) = 0;
-    (&DAT_004d975c)[temp_v1 * 5] = 0;
-    *(unsigned int *)(temp_v0 + 0x4d9760) = 0;
-    *(unsigned int *)(temp_v0 + 0x4d9764) = 0xff;
-    (&DAT_004d9768)[temp_v0] = 0;
-    temp_v1 = temp_v2;
-  } while (temp_v2 < 2);
-  return;
+    for (u8 slot = 0; slot < 2; ++slot) {
+        DAT_004d9758[slot].value = 0.0f;
+        DAT_004d9758[slot].unk04 = 0;
+        DAT_004d9758[slot].unk08 = 0;
+        DAT_004d9758[slot].index = 0xff;
+        DAT_004d9758[slot].active = 0;
+    }
 }
-
-} /* extern "C" */
+}

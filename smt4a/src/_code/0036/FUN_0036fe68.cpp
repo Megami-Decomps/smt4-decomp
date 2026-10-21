@@ -14,7 +14,7 @@ int FUN_002737a8(void);
 int FUN_00296530(void);
 int FUN_00297c3c(void);
 int FUN_002b9520(void);
-int FUN_002c2160(int);
+void frameTransitionSetMode(int);
 int FUN_002c2358(void);
 int FUN_002c23cc(int);
 int FUN_002c2610(void);
@@ -24,7 +24,7 @@ int FUN_0031416c(int, int, int, int, int, int, int, int, int, int, int, int);
 int objectE0ResetFlags1040(void);
 int FUN_0033a988(void);
 int sub68OwnerCall3(void);
-int FUN_003794bc(unsigned int);
+int mapEnvironmentSelectPreset(unsigned int);
 int FUN_00379be8(void);
 int FUN_0037a078(void);
 int linkHolderClearFlag(unsigned int);
@@ -63,7 +63,6 @@ extern int campIsState85(void);
 /* Supplied declaration required: FUN_00296530. */
 /* Supplied declaration required: FUN_00297c3c. */
 /* Supplied declaration required: FUN_002b9520. */
-/* Supplied declaration required: FUN_002c2160. */
 /* Supplied declaration required: FUN_002c2358. */
 /* Supplied declaration required: FUN_002c23cc. */
 /* Supplied declaration required: FUN_002c2610. */
@@ -74,7 +73,7 @@ extern int mikadoIsCameraNotState7(void);
 /* Supplied declaration required: objectE0ResetFlags1040. */
 /* Supplied declaration required: FUN_0033a988. */
 /* Supplied declaration required: sub68OwnerCall3. */
-/* Supplied declaration required: FUN_003794bc. */
+/* Supplied declaration required: mapEnvironmentSelectPreset. */
 /* Supplied declaration required: FUN_00379be8. */
 /* Supplied declaration required: FUN_0037a078. */
 extern int naviMainIsActive(void);
@@ -117,7 +116,7 @@ unsigned int FUN_0036fe68(void)
   }
   if (DAT_005806b5 != '\0') {
     DAT_005f1620 = '\0';
-    FUN_002c2160(0);
+    frameTransitionSetMode(0);
     DAT_005806b5 = '\0';
     DAT_005806b4 = 0;
     if (DAT_005806b6 != '\0') {
@@ -131,7 +130,7 @@ unsigned int FUN_0036fe68(void)
       DAT_005f185c = 1;
       FUN_002c2610();
       objectE0ResetFlags1040();
-      FUN_002c2160(1);
+      frameTransitionSetMode(1);
       FUN_00379be8();
     }
     if (DAT_005806b8 == 0xb) {
@@ -172,7 +171,7 @@ unsigned int FUN_0036fe68(void)
       DAT_005f161f = 0;
       sub68OwnerCall3();
       FUN_002b9520();
-      FUN_003794bc(DAT_005f1600);
+      mapEnvironmentSelectPreset(DAT_005f1600);
       FUN_00297c3c();
       FUN_0023534c();
       FUN_002737a8();

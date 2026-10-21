@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00295108(int);
-int FUN_002d8c90(...);
+int popupQueueInsertUnique(...);
 int lmapApplyMapAndArea(void);
 int FUN_003b5d1c(void);
 
@@ -15,7 +15,7 @@ extern int lmapMainIsRunning(void);
 /* Supplied declaration required: FUN_00295108. */
 extern int FUN_002c2758(unsigned int);
 extern int FUN_002d8b58(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002d8c90. */
+/* Supplied declaration required: popupQueueInsertUnique. */
 /* Supplied declaration required: lmapApplyMapAndArea. */
 /* Supplied declaration required: FUN_003b5d1c. */
 
@@ -40,7 +40,7 @@ void FUN_00312af0(void)
           return;
         }
         temp_v0 = 0xd;
-        FUN_002d8c90(temp_v0);
+        popupQueueInsertUnique(temp_v0);
       }
       else {
         temp_v1 = lmapMainIsRunning();
@@ -80,7 +80,7 @@ void FUN_00312af0(void)
         return;
       }
       temp_v0 = 0x10;
-      FUN_002d8c90(temp_v0);
+      popupQueueInsertUnique(temp_v0);
       g_popupState[temp_v2 + 0x2c] = 0;
       return;
     }
@@ -88,7 +88,7 @@ void FUN_00312af0(void)
       if (temp_v1 == 0x13) {
         if (*g_popupState != 0) {
           if (*g_popupState != 0x13) {
-            FUN_002d8c90(0x13);
+            popupQueueInsertUnique(0x13);
           }
         }
         else {

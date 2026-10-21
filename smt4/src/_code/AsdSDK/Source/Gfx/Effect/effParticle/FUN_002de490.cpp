@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00248f70(void);
-int FUN_002491b4(void);
+int spriteGroupCreateFromFile(void);
 int FUN_002493a4(...);
 int effTlpCreate(void);
 int effBlockClone(void);
@@ -45,7 +45,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00248f70. */
-/* Supplied declaration required: FUN_002491b4. */
+/* Supplied declaration required: spriteGroupCreateFromFile. */
 /* Supplied declaration required: FUN_002493a4. */
 /* Supplied declaration required: effTlpCreate. */
 extern int FUN_0024c3c8(unsigned int);
@@ -125,7 +125,7 @@ unsigned int * FUN_002de490(fn_002de490_arg0 *param_1)
       if (puVar3[0x11] != 0) {
         handleBlockRefDrop();
       }
-      FUN_002491b4();
+      spriteGroupCreateFromFile();
       puVar3[0x11] = (unsigned int)puVar4;
       break;
     case 4:

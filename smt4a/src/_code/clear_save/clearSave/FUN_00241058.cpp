@@ -8,8 +8,8 @@ int asdSequenceRequest(...);
 int jobStop(...);
 int sysPlaySe(...);
 int FUN_0019de98(...);
-int FUN_001f3fa8(...);
-int FUN_001f4908(...);
+int uiAdjustIntegerFromRepeat(...);
+int slotSetRequest(...);
 int FUN_00212204(...);
 int FUN_00239b08(void);
 int FUN_00261a28(...);
@@ -39,15 +39,15 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 extern int gameGetSlotTable(void);
 extern unsigned int gameSlotTableFindFree(void);
-/* Supplied declaration required: FUN_001f3fa8. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: uiAdjustIntegerFromRepeat. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_00212204. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00239b08. */
 /* Supplied declaration required: FUN_00261a28. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002802c8(void);
-extern unsigned int FUN_002a4b60(void);
+extern int screenFadeIsBusy(void);
+extern unsigned int messageMainGetValue(void);
 extern int FUN_002a4b74(void);
 extern int FUN_002e07f4(void);
 extern int FUN_002ef9f0(void);
@@ -74,8 +74,8 @@ unsigned int FUN_00241058(void)
   switch(*(unsigned int *)(temp_v0 + 0xc)) {
   case 0:
     *(unsigned int *)(temp_v0 + 0xc) = 1;
-    FUN_001f4908(0,0,0xff);
-    FUN_001f4908(1,0,0xff);
+    slotSetRequest(0,0,0xff);
+    slotSetRequest(1,0,0xff);
     break;
   case 1:
     *(unsigned int *)(temp_v0 + 0xc) = 2;
@@ -91,7 +91,7 @@ unsigned int FUN_00241058(void)
     }
     break;
   case 3:
-    temp_v5 = FUN_001f3fa8(temp_v0 + 0x20,0,8,1,0,1);
+    temp_v5 = uiAdjustIntegerFromRepeat(temp_v0 + 0x20,0,8,1,0,1);
     if (temp_v5 == 0) {
       temp_v5 = padButtonIsPressed(0);
       if (temp_v5 == 0) {
@@ -109,8 +109,8 @@ unsigned int FUN_00241058(void)
       temp_v5 = *(int *)(temp_v0 + 0x20);
       if (temp_v5 == 7) {
         *(unsigned int *)(temp_v0 + 0xc) = 4;
-        FUN_001f4908(0,10,0xff);
-        FUN_001f4908(1,10,0xff);
+        slotSetRequest(0,10,0xff);
+        slotSetRequest(1,10,0xff);
         return 0;
       }
       if (temp_v5 != 8) {
@@ -162,15 +162,15 @@ unsigned int FUN_00241058(void)
     FUN_0019de98(temp_v0,0xf4f4f4ff);
     break;
   case 6:
-    temp_v5 = FUN_00224880(*(unsigned int *)(temp_v0 + 0x90));
+    temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x90));
     if (temp_v5 != 2) {
       return 0;
     }
     temp_v5 = FUN_002a4b74();
     if (temp_v5 == 0) {
       *(unsigned int *)(temp_v0 + 0xc) = 0xb;
-      FUN_001f4908(0,10,0xff);
-      FUN_001f4908(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
       return 0;
     }
     if (temp_v5 != 1) {
@@ -180,7 +180,7 @@ unsigned int FUN_00241058(void)
     *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
     break;
   case 7:
-    temp_v5 = FUN_001f3fa8(temp_v0 + 0x24,0,*(int *)(temp_v0 + 0x88) - 1,1,1,1);
+    temp_v5 = uiAdjustIntegerFromRepeat(temp_v0 + 0x24,0,*(int *)(temp_v0 + 0x88) - 1,1,1,1);
     if (temp_v5 != 0) {
       return 0;
     }
@@ -199,7 +199,7 @@ unsigned int FUN_00241058(void)
     *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
     break;
   case 8:
-    temp_v5 = FUN_00224880(*(unsigned int *)(temp_v0 + 0x90));
+    temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x90));
     if (temp_v5 == 2) {
       clearTwoWordsAndByte(temp_v0 + 0x10);
       temp_v5 = FUN_002a4b74();
@@ -226,7 +226,7 @@ unsigned int FUN_00241058(void)
       *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
       break;
     }
-    temp_v2 = FUN_002a4b60();
+    temp_v2 = messageMainGetValue();
     temp_v4 = dataTableGet(0x3c,0);
     temp_v0 = dataTableGetEntries();
     temp_v3 = dataTableGetCount(temp_v4);
@@ -253,20 +253,20 @@ unsigned int FUN_00241058(void)
       scrScriptProcessStartEntry(temp_v4,temp_v6);
       return 0;
     }
-    FUN_001f4908(0,0x14,0xff);
-    FUN_001f4908(1,0x14,0xff);
+    slotSetRequest(0,0x14,0xff);
+    slotSetRequest(1,0x14,0xff);
     temp_v4 = 0xb;
     *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
     break;
   case 10:
-    temp_v5 = FUN_00224880(*(unsigned int *)(temp_v0 + 0x90));
+    temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x90));
     if (temp_v5 != 2) {
       return 0;
     }
     temp_v5 = FUN_002a4b74();
     if (temp_v5 == 0) {
-      FUN_001f4908(0,0x14,0xff);
-      FUN_001f4908(1,0x14,0xff);
+      slotSetRequest(0,0x14,0xff);
+      slotSetRequest(1,0x14,0xff);
       temp_v4 = 0xb;
       *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
       break;
@@ -278,7 +278,7 @@ unsigned int FUN_00241058(void)
     *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
     break;
   case 0xb:
-    temp_v5 = FUN_002802c8();
+    temp_v5 = screenFadeIsBusy();
     if (temp_v5 == 0) {
       if (*(char *)(temp_v0 + 8) != '\0') {
         FUN_00212204(0);

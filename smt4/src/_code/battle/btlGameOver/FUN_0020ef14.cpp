@@ -14,19 +14,19 @@ int buttonHelpSetPreset(...);
 int FUN_001e1874(...);
 int jobStopIfValidA(...);
 int jobStopIfValidB(...);
-int FUN_00227218(...);
-int FUN_0023f27c(...);
+int eventCommandDispatchPendingCleanup(...);
+unsigned int FUN_0023f27c(int, unsigned int, unsigned int, unsigned int, void *, int, int, int, int);
 int FUN_00246f18(...);
 int btlTalkBustUpDestroy(...);
-int FUN_00267d3c(...);
+int btlUiPlaySceneFadeOutWhenReady(...);
 int FUN_00282820(...);
 int gameFlagSetValue(...);
 int buttonHelpRelease(...);
 int uiFadeRelease(...);
 int btlGetMainState(...);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int soundChannelStopAll(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int ifTouchRegionAdd(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_002a03d8(...);
@@ -58,17 +58,17 @@ extern unsigned int DAT_00439a8c; /* 0x439a8c */
 extern unsigned int DAT_00439a90; /* 0x439a90 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001e1874. */
 /* Supplied declaration required: jobStopIfValidA. */
 /* Supplied declaration required: jobStopIfValidB. */
-extern int FUN_00220238(unsigned int);
-/* Supplied declaration required: FUN_00227218. */
+extern int asdProcessGetFrames(unsigned int);
+/* Supplied declaration required: eventCommandDispatchPendingCleanup. */
 extern int FUN_0023ed64(unsigned int *);
 /* Supplied declaration required: FUN_0023f27c. */
 /* Supplied declaration required: FUN_00246f18. */
 /* Supplied declaration required: btlTalkBustUpDestroy. */
-/* Supplied declaration required: FUN_00267d3c. */
+/* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
 /* Supplied declaration required: FUN_00282820. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: gameFlagSetValue. */
@@ -80,9 +80,9 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
@@ -139,7 +139,7 @@ int FUN_0020ef14(void)
   if ((*(int *)(temp_v1 + 0x88) != 2) ||
      (temp_v4 = *(unsigned int *)(temp_v1 + 0x44a4) & 4,
      (*(unsigned int *)(temp_v1 + 0x44a0) & 0x40000) != 0 || temp_v4 != 0)) {
-    temp_v1 = FUN_00220238(*(unsigned int *)(temp_v1 + 0x2c));
+    temp_v1 = asdProcessGetFrames(*(unsigned int *)(temp_v1 + 0x2c));
     if (temp_v1 != 0) {
       return -1;
     }
@@ -164,16 +164,16 @@ joined_r0x003359d4:
 FUN_003357c0:
     if (puVar2[2] == DAT_00439a70) {
       FUN_00282820(0,0,0,0,8,0,0xb,0);
-      FUN_00267d3c(g_btlUiBlock);
+      btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
     }
     if (puVar2[2] == DAT_00439a84) {
       FUN_0023f27c(0,0,DAT_00439a88,0x10,0,DAT_00439a8c,0,2,0xffffffff);
     }
     if (puVar2[2] == DAT_00439a74) {
-      FUN_0029c3c0(0,DAT_00439a78,0xff);
+      slotSetRequest(0,DAT_00439a78,0xff);
     }
     if (puVar2[2] == DAT_00439a7c) {
-      FUN_0029c3c0(1,DAT_00439a80,0xff);
+      slotSetRequest(1,DAT_00439a80,0xff);
     }
     if ((unsigned int)puVar2[2] <= DAT_00439a90) {
       return 0;
@@ -185,14 +185,14 @@ FUN_003357c0:
     else {
       pcVar5 = "battle/gameover/level_event.bf";
     }
-    FUN_00297468(pcVar5,puVar2 + 3,0);
+    asdLoadFileAsyncSimple(pcVar5,puVar2 + 3,0);
     if ((puVar2[1] & 1) == 0) {
       pcVar5 = "battle/gameover/gameover.mbm";
     }
     else {
       pcVar5 = "battle/gameover/level_event.mbm";
     }
-    FUN_00297468(pcVar5,puVar2 + 5,0);
+    asdLoadFileAsyncSimple(pcVar5,puVar2 + 5,0);
     temp_v1 = gameDataBlocksGetSaveData();
     temp_v0 = *(char *)(temp_v1 + 0x24b29);
     if (temp_v0 != -1) {
@@ -209,14 +209,14 @@ FUN_003357c0:
     else {
       pcVar5 = "battle/gameover/level_event.bf";
     }
-    FUN_00297468(pcVar5,puVar2 + 3,0);
+    asdLoadFileAsyncSimple(pcVar5,puVar2 + 3,0);
     if ((puVar2[1] & 1) == 0) {
       pcVar5 = "battle/gameover/gameover.mbm";
     }
     else {
       pcVar5 = "battle/gameover/level_event.mbm";
     }
-    FUN_00297468(pcVar5,puVar2 + 5,0);
+    asdLoadFileAsyncSimple(pcVar5,puVar2 + 5,0);
     temp_v1 = gameDataBlocksGetSaveData();
     temp_v0 = *(char *)(temp_v1 + 0x24b29);
     if (temp_v0 != -1) {
@@ -236,7 +236,7 @@ FUN_003357c0:
   case 6:
     goto FUN_0023f074;
   case 7:
-    temp_v1 = FUN_0019e0c0(puVar2[4]);
+    temp_v1 = scrRunOpcodesStub(puVar2[4]);
     if (temp_v1 != 2) {
       temp_v1 = 0;
     }
@@ -347,7 +347,7 @@ FUN_003357c0:
       }
       puVar2[7] = 3;
       puVar2[0xe] = 300;
-      FUN_0029c3c0(0,0x2d,0xff);
+      slotSetRequest(0,0x2d,0xff);
     }
     if ((puVar2[7] == 3) && (temp_v1 = FUN_002c2a04(0), temp_v1 == 3)) {
       temp_v1 = 1;
@@ -384,7 +384,7 @@ FUN_003357c0:
   jobStopIfValidA(temp_v9);
   FUN_001e1874(temp_v9);
   if (g_btlMain != 0) {
-    FUN_00227218();
+    eventCommandDispatchPendingCleanup();
   }
   if ((puVar2[1] & 1) == 0) {
     temp_v9 = gameFlagIsSet();
@@ -412,7 +412,7 @@ FUN_0023f074:
     *(unsigned int *)(temp_v1 + 0x108) = 1;
     scrScriptProcessStartEntry(puVar2[4],0);
     *puVar2 = 7;
-    temp_v1 = FUN_0019e0c0(puVar2[4]);
+    temp_v1 = scrRunOpcodesStub(puVar2[4]);
     if (temp_v1 != 2) {
       temp_v1 = 0;
     }

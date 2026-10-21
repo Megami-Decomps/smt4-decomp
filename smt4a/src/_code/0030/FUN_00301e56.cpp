@@ -1,9 +1,12 @@
 /* NON_MATCHING: compiler moves the value argument before the null check. */
-#include "common.h"
+#include "shard/W6_W6Match3_TreeCopy.h"
 extern "C" {
-void FUN_001301be(void *object, u32 value, u32 option);
-/* Applies a value to an optional object. */
-void FUN_00301e56(void *unused, void *object, u32 value) {
-    if (object != NULL) FUN_001301be(object, value, 0);
+// Copy-construct an optional object from the supplied erased source pointer.
+void FUN_00301e56(void* unused, void* object, u32 value)
+{
+    if (object != NULL) {
+        FUN_001301be(static_cast<OnlineRecordTree*>(object),
+                     reinterpret_cast<const OnlineRecordTree*>(value), 0);
+    }
 }
 }

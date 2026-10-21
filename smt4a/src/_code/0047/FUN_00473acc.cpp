@@ -21,7 +21,7 @@ typedef struct {
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_001b576c. */
 /* Supplied declaration required: FUN_001b5acc. */
-extern int FUN_001d25ec(int *);
+extern int legacyResourceIdRemap(int *);
 /* Supplied declaration required: FUN_00428a58. */
 
 
@@ -46,12 +46,12 @@ void FUN_00473acc(int *param_1,int param_2)
   FUN_00428a58(&temp_v3,param_2 + 0x7c,param_2 + 0x80,param_2 + 0x10);
   temp_v2 = temp_v3;
   iStack_1c = iStack_14;
-  temp_v0 = FUN_001d25ec(&temp_v2);
+  temp_v0 = legacyResourceIdRemap(&temp_v2);
   if (-1 < temp_v0) {
     FUN_001b576c(&temp_v1,param_2 + 0x84,*(unsigned int *)(param_2 + 0x80));
     temp_v2 = temp_v1;
     iStack_1c = iStack_2c;
-    temp_v0 = FUN_001d25ec(&temp_v2);
+    temp_v0 = legacyResourceIdRemap(&temp_v2);
     if (-1 < temp_v0) {
       *param_1 = temp_v2;
       param_1[1] = iStack_1c;

@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_00167458(int, int);
-int FUN_00184528(int, int);
-int FUN_00224880(unsigned int);
+int uiSpriteBankApplyPreset(int, int);
+int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_0038b010(int);
 int FUN_003fd7b4(unsigned int);
 int FUN_0040aad4(int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 int pointConvertToFloat(int, unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -26,8 +26,8 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00167458. */
-/* Supplied declaration required: FUN_00184528. */
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -35,7 +35,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(void);
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: pointConvertToFloat. */
 
 
@@ -76,7 +76,7 @@ void FUN_00494740(int param_1)
           *(unsigned int *)(param_1 + 8) = 0;
           temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00494914);
           scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v0);
-          FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
+          scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
           break;
         case 8:
           *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
@@ -84,7 +84,7 @@ void FUN_00494740(int param_1)
           *(unsigned int *)(param_1 + 8) = 0;
           temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00494924);
           scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v0);
-          FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
+          scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
           break;
         default:
         }
@@ -93,14 +93,14 @@ void FUN_00494740(int param_1)
   }
   else {
     FUN_0038b010(1);
-    FUN_00184528(param_1 + 0x3cc,0);
+    uiSpriteBankApplyPreset(param_1 + 0x3cc,0);
     *(unsigned int *)(param_1 + 8) = 1;
   }
   if (((*(int *)(param_1 + 0x16028) != 0) && (temp_v2 = FUN_0040ab8c(), temp_v2 != 0)) &&
      (*(int *)(*(int *)(param_1 + 0x16028) + 4) == 0)) {
     FUN_0040aad4(*(int *)(param_1 + 0x16028),0);
     temp_v0 = *(unsigned int *)(*(int *)(param_1 + 0x16028) + 4);
-    FUN_0040ace8(g_handleRegistry,temp_v0);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v0);
     FUN_003fd7b4(temp_v0);
     return;
   }

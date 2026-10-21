@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd5d4` (_code @ 0x2fd5d4, 0x4a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: this is a polymorphic URL-object constructor (vtable address point DAT_0055852c); constructor/vtable symbol migration is required for genuine C++ source. */
 #include "romwright_types.h"
 
 extern "C" {

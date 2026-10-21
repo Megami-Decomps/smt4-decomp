@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004e626c(int *, unsigned int);
+int btlUnitClearRecordFields(int *, unsigned int);
 
 typedef struct fn_004dcb40_arg1 fn_004dcb40_arg1;
 struct fn_004dcb40_arg1 {
@@ -31,7 +31,7 @@ extern unsigned int DAT_0057121c; /* 0x57121c */
 extern unsigned int DAT_00571228; /* 0x571228 */
 extern unsigned int DAT_0057122c; /* 0x57122c */
 
-/* Supplied declaration required: FUN_004e626c. */
+/* Supplied declaration required: btlUnitClearRecordFields. */
 
 
 void FUN_004dcb40(int *param_1,fn_004dcb40_arg1 *param_2,int param_3,int param_4,int param_5,
@@ -70,13 +70,13 @@ void FUN_004dcb40(int *param_1,fn_004dcb40_arg1 *param_2,int param_3,int param_4
   }
   else {
     if ((temp_v0 & DAT_00571228) == 0 && (temp_v2 & DAT_0057122c) == 0) {
-      FUN_004e626c(param_1,*(unsigned int *)(*param_1 + 0xa4));
+      btlUnitClearRecordFields(param_1,*(unsigned int *)(*param_1 + 0xa4));
       return;
     }
     temp_v1 = 0x1000;
   }
   param_1[temp_v3 * 0x495 + 1] = temp_v1;
-  FUN_004e626c(param_1,*(unsigned int *)(*param_1 + 0xa4));
+  btlUnitClearRecordFields(param_1,*(unsigned int *)(*param_1 + 0xa4));
   return;
 }
 

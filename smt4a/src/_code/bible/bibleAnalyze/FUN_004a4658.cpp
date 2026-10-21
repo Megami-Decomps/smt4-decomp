@@ -32,7 +32,7 @@ extern unsigned int vec2GetYInt(int);
 extern int FUN_004929d8(unsigned char *, unsigned int);
 /* Supplied declaration required: pointConvertToFloat. */
 extern int FUN_004cf8dc(int, int);
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_004d05c4. */
 
 
@@ -61,7 +61,7 @@ void FUN_004a4658(int param_1)
     sysPlaySe(0x48);
   }
   else {
-    temp_v0 = FUN_004cfe4c(param_1 + 0x20);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v3 = (unsigned int)*(unsigned short *)(param_1 + 0x864 + temp_v0 * 0x20 + 4);
     FUN_00184310();
     if ((*(unsigned char *)(temp_v3 + 0xb3) & 2) == 0) {
@@ -81,7 +81,7 @@ void FUN_004a4658(int param_1)
     FUN_0019de98(temp_v5,0x323232ff);
   }
   else {
-    temp_v0 = FUN_004cfe4c(param_1 + 0x20);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
     FUN_0032d0c8(0,1,*(unsigned short *)(param_1 + 0x864 + temp_v0 * 0x20 + 4));
   }
   FUN_003343f0(0);

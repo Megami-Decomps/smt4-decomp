@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj558c28D1Ev` (_code @ 0x2f33b4, 0xba bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_PooledNodeList.h"
 
 extern "C" {
 
 int FUN_00117828(int);
 int FUN_0012d86c(int *, unsigned int *, int *, int *);
-int FUN_00132cd6(int);
+PooledNodeList* nodeListReleaseStorage(PooledNodeList*);
 int asdOperatorDeleteArray(...);
 int FUN_002f3474(unsigned int *, unsigned int, int);
 
@@ -25,7 +26,7 @@ extern unsigned char DAT_00558c30; /* 0x558c30 */
 #endif
 /* Supplied declaration required: FUN_00117828. */
 /* Supplied declaration required: FUN_0012d86c. */
-/* Supplied declaration required: FUN_00132cd6. */
+/* Supplied declaration required: nodeListReleaseStorage. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 extern int onlineStringDestroy(unsigned int *);
 extern int FUN_002eb624(int);
@@ -82,7 +83,7 @@ unsigned long long _ZN9Obj558c28D1Ev(unsigned int *param_1,unsigned int param_2,
   asdOperatorDeleteArray();
   temp_v1 = _ZN9Obj558b24D1Ev(temp_v1 - 100);
   temp_v1 = temp_v1 - 0x18;
-  FUN_00132cd6(temp_v1);
+  nodeListReleaseStorage((PooledNodeList*)temp_v1);
   temp_v1 = temp_v1 - 0x20;
   FUN_00117828(temp_v1);
   temp_v1 = FUN_002eb624(temp_v1 - 0x70);

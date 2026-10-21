@@ -1,37 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f25e8` (_code @ 0x3f25e8, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges all three pointer guards; retail branches before loading the form pointer. */
+#include "common.h"
+
+struct ScriptUnitForm {
+    u8 unk000[0x12c]; // 0x000
+    u16 id;            // 0x12c
+};
+
+struct ScriptUnitData {
+    u8 unk000[0x400]; // 0x000
+    ScriptUnitForm* form; // 0x400
+};
+
+struct ScriptBattleUnit {
+    u8 unk00[0x20]; // 0x00
+    ScriptUnitData* data; // 0x20
+};
 
 extern "C" {
+extern u32 g_btlScriptUnit;
+ScriptBattleUnit* btlUnitGet(u32 unitId);
+s32 FUN_0019acdc(u16 formId, u32 flags);
 
-extern unsigned int g_btlScriptUnit; /* 0x57113c */
-
-extern int FUN_0019acdc(unsigned short, unsigned int);
-extern int btlUnitGet(unsigned int);
-
-
-int FUN_003f25e8(void)
-
+// Test whether the script's battle unit resolves to form category three.
+s32 FUN_003f25e8()
 {
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = btlUnitGet(g_btlScriptUnit);
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = *(int *)(temp_v0 + 0x20);
-  }
-  if ((temp_v0 != 0 && temp_v1 != 0) && (piVar1 = (int *)(temp_v1 + 0x400), temp_v1 = 0, *piVar1 != 0)) {
-    temp_v1 = FUN_0019acdc(*(unsigned short *)(*piVar1 + 300),0);
-    if (temp_v1 == 3) {
-      temp_v1 = 1;
+    ScriptBattleUnit* unit = btlUnitGet(g_btlScriptUnit);
+    if (unit != NULL && unit->data != NULL && unit->data->form != NULL) {
+        return FUN_0019acdc(unit->data->form->id, 0) == 3;
     }
-    else {
-      temp_v1 = 0;
-    }
-  }
-  return temp_v1;
+    return 0;
 }
-
-} /* extern "C" */
+}

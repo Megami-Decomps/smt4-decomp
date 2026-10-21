@@ -1,21 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026e70c` (_code @ 0x26e70c, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail merges the end-value return and uses s3 for the interpolation product. */
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_0026e70c(void)
-
+// Interpolate over the duration, retaining the start value before time zero.
+extern "C" f32 FUN_0026e70c(f32 start, f32 end, f32 duration, f32 time)
 {
-/* irregular: irregular input(s): in_s2, in_s3; 2 native warning(s); review required */
-  float in_s2;
-  float in_s3;
-  
-  if (((in_s2 != 0.0f) && (0.0f < in_s3)) && (in_s3 < in_s2)) {
-    return;
-  }
-  return;
+    if (duration == 0.0f) {
+        start = end;
+    } else if (time > 0.0f) {
+        if (time < duration) {
+            start += time * (end - start) / duration;
+        } else {
+            start = end;
+        }
+    }
+    return start;
 }
-
-} /* extern "C" */

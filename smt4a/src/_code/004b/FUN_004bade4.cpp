@@ -13,7 +13,7 @@ int jobGetScalarValue(void);
 int FUN_0019de98(...);
 int FUN_0031d174(...);
 int FUN_004ba354(...);
-int FUN_004cfe4c(...);
+int flaggedValueHolderGetTotal(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -33,7 +33,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_0031d174. */
 /* Supplied declaration required: FUN_004ba354. */
-/* Supplied declaration required: FUN_004cfe4c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 extern int rangeGetMinimumLimit(int);
 
 
@@ -90,14 +90,14 @@ void FUN_004bade4(int param_1)
       else {
         temp_v2 = 2;
       }
-      temp_v3 = FUN_004cfe4c(param_1);
+      temp_v3 = flaggedValueHolderGetTotal(param_1);
       temp_v6 = FUN_0031d174(param_1);
       FUN_004ba354(param_1,temp_v6,temp_v3,temp_v2,0x25);
-      temp_v4 = FUN_004cfe4c(param_1);
+      temp_v4 = flaggedValueHolderGetTotal(param_1);
       temp_v4 = *(int *)(param_1 + temp_v4 * 4 + 0x7ec) + 0x80;
     }
     else {
-      temp_v2 = FUN_004cfe4c(param_1);
+      temp_v2 = flaggedValueHolderGetTotal(param_1);
       temp_v3 = FUN_0031d174(param_1);
       FUN_004ba354(param_1,temp_v3,temp_v2,0,0x24);
       temp_v4 = 0;

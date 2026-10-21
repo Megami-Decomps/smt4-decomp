@@ -22,7 +22,7 @@ extern int DAT_00464b30; /* 0x464b30 */
 extern unsigned char DAT_004dae3c; /* 0x4dae3c */
 extern unsigned char DAT_004dae48; /* 0x4dae48 */
 
-extern int FUN_00153228(unsigned char *, unsigned int *);
+extern int lookupListFindByKey(unsigned char *, unsigned int *);
 /* Supplied declaration required: asdFileRequestRelease. */
 /* Supplied declaration required: FUN_002b26d4. */
 /* Supplied declaration required: resourceListDestroy. */
@@ -141,7 +141,7 @@ void FUN_00152894(unsigned int *param_1,int param_2,unsigned int param_3,int par
       nw_gfx_res_ResGraphicsFile_Cleanup(&temp_v1);
     }
     puVar1 = (unsigned int *)param_1[1];
-    temp_v0 = FUN_00153228(&DAT_004dae3c,puVar1);
+    temp_v0 = lookupListFindByKey(&DAT_004dae3c,puVar1);
     if (temp_v0 != 0) {
       *puVar1 = 0;
       if (*(char *)(puVar1 + 1) == '\0') {
@@ -159,7 +159,7 @@ void FUN_00152894(unsigned int *param_1,int param_2,unsigned int param_3,int par
   }
   asdMemFree(param_1[9]);
   param_1[9] = 0;
-  temp_v0 = FUN_00153228(&DAT_004dae48,param_1);
+  temp_v0 = lookupListFindByKey(&DAT_004dae48,param_1);
   if (temp_v0 != 0) {
     FUN_002b26d4(&DAT_004dae48,temp_v0);
   }

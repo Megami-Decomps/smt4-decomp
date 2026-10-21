@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00295ba4(int);
+int infoWinStartTimer(int);
 int asdMemFree(void);
 
 extern int *DAT_00435d78; /* 0x435d78 */
 
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 extern int FUN_002b6b04(void);
 /* Supplied declaration required: asdMemFree. */
 
@@ -28,7 +28,7 @@ void FUN_0027e874(void)
     temp_v2 = *(int *)(temp_v0 + 0x2a4);
     if ((((-1 < *(short *)(temp_v0 + 0x2a2)) && (*(short *)(temp_v0 + 2) == 1)) &&
         ((*(unsigned short *)(temp_v0 + 6) & 1) == 0)) && (temp_v1 = FUN_002b6b04(), temp_v1 != 0)) {
-      FUN_00295ba4(1);
+      infoWinStartTimer(1);
     }
     piVar2 = DAT_00435d78;
     if (*(int *)(temp_v0 + 0x2a8) == 0) {

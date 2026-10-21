@@ -8,12 +8,12 @@ int FUN_0025765c(...);
 int FUN_0026e6a0(...);
 int messageKindForward(...);
 int FUN_00288844(...);
-int FUN_0028f048(...);
+void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
 int FUN_00293f10(...);
 int fadeObjectResetIfActive(...);
 int categoryGetColor(...);
-int FUN_002b2650(...);
-int FUN_002b6758(...);
+int pairSetHalves(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6940(...);
 int FUN_002b70cc(void);
 int FUN_002bcf4c(...);
@@ -98,20 +98,18 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int isLowThreshold(int, int);
 /* Supplied declaration required: FUN_00288ddc. */
 extern int btlActorIsDown(unsigned int);
-/* Supplied declaration required: FUN_0028f048. */
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int gameGetUnitRecord(int);
 /* Supplied declaration required: categoryGetColor. */
-/* Supplied declaration required: FUN_002b2650. */
+/* Supplied declaration required: pairSetHalves. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6940. */
 extern int FUN_002b6a54(int, unsigned short);
 extern int FUN_002b6ad0(void);
-extern int gameGetOptions(void);
+extern int gameGetSupportUnitData(void);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002bcf4c. */
@@ -693,7 +691,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
             temp_v14 = temp_v12 + temp_v6 + (int)*(short *)(temp_v7 + 8);
             temp_v13 = (int)(short)*piVar21;
             temp_v11 = (int)*(short *)(temp_v7 + 10) + temp_v5 + temp_v8;
-            FUN_0028f048(temp_v13,temp_v14,temp_v11,0x15,1);
+            textureLoadOptionalDemonModel(temp_v13,temp_v14,temp_v11,0x15,1);
           }
         }
       }
@@ -701,7 +699,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         temp_v11 = (int)*(short *)(temp_v7 + 10) + temp_v5 + temp_v8;
         temp_v14 = temp_v12 + temp_v6 + (int)*(short *)(temp_v7 + 8);
         temp_v13 = -1;
-        FUN_0028f048(temp_v13,temp_v14,temp_v11,0x15,1);
+        textureLoadOptionalDemonModel(temp_v13,temp_v14,temp_v11,0x15,1);
       }
       temp_v7 = temp_v44;
       if (*(short *)(temp_v44 + 0x5950) != 0) {
@@ -790,7 +788,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         }
         temp_v26 = (short)temp_v5 + temp_v26;
         temp_v25 = (short)temp_v6 + temp_v25;
-        FUN_002b2650(temp_v36 + 0x1600,
+        pairSetHalves(temp_v36 + 0x1600,
                      (int)(short)(*(short *)(temp_v12 + 8) + *(short *)(temp_v7 + 0x59a6) + temp_v25),
                      (int)(short)(*(short *)(temp_v12 + 10) + *(short *)(temp_v7 + 0x59b0) + temp_v26));
         fadeObjectResetIfActive(temp_v36 + 0x1600);
@@ -805,7 +803,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
             *(unsigned char *)(temp_v8 + 0x12c4) = 0;
           }
           temp_v8 = temp_v36 + 0x1830;
-          FUN_002b2650(temp_v8,(int)(short)(*(short *)(temp_v12 + 8) + temp_v25),
+          pairSetHalves(temp_v8,(int)(short)(*(short *)(temp_v12 + 8) + temp_v25),
                        (int)(short)(*(short *)(temp_v12 + 10) + temp_v26));
           *(unsigned int *)(temp_v8 + 0x30) = *(unsigned int *)(temp_v32 + 0x5964);
           fadeObjectResetIfActive(temp_v8);
@@ -949,7 +947,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
     FUN_002bf288(2,0xe,0x106,0,0,0x33);
     efctSetSpeed();
   }
-  temp_v3 = gameGetOptions();
+  temp_v3 = gameGetSupportUnitData();
   if ((*(short *)(temp_v3 + 0x46) != 0) &&
      (temp_v4 = btlGetMainState(), (*(unsigned int *)(temp_v4 + 0x44a0) & 0x40000) == 0)) {
     temp_v10 = *(unsigned int *)(param_1 + 0x386c);
@@ -1051,7 +1049,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
       FUN_002b6940(*(unsigned short *)(temp_v3 + 0x5a),*(short *)(temp_v4 + 8) + temp_v5,
                    (*(short *)(temp_v4 + 10) + temp_v6) - temp_v28,0x42);
       FUN_002bed3c();
-      temp_v3 = gameGetOptions();
+      temp_v3 = gameGetSupportUnitData();
       temp_v10 = (unsigned int)*(unsigned short *)(temp_v3 + 0x604);
       FUN_002bcf4c(temp_v10);
       textFormatBuffer(temp_v29,temp_v10);
@@ -1061,7 +1059,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         categoryGetColor(1);
         drawSetColorFromRGBA8();
       }
-      FUN_002b6758((int)*(short *)(temp_v3 + 0x46),*(short *)(temp_v4 + 8) + temp_v5,
+      uiDrawDemonIcon((int)*(short *)(temp_v3 + 0x46),*(short *)(temp_v4 + 8) + temp_v5,
                    (*(short *)(temp_v4 + 10) + temp_v6) - temp_v28,0x42,0);
       FUN_002bed3c();
       temp_v18 = FUN_002bd068(*(unsigned short *)(temp_v3 + 0x46));
@@ -1137,11 +1135,11 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
           FUN_0029a17c(*(short *)(temp_v15 + 8) + temp_v4,(int)*(short *)(temp_v15 + 10),
                        (int)**(short **)(temp_v15 + 0xc),(int)(*(short **)(temp_v15 + 0xc))[1],1);
           temp_v3 = FUN_002bf4f8(0x15,0x1ba);
-          temp_v15 = gameGetOptions();
+          temp_v15 = gameGetSupportUnitData();
           temp_v1 = *(unsigned short *)(temp_v15 + 0x606);
-          temp_v15 = gameGetOptions();
+          temp_v15 = gameGetSupportUnitData();
           temp_v15 = FUN_002b6a54((int)*(short *)(temp_v15 + 0x604),temp_v1);
-          FUN_0028f048((int)(short)(*(short *)(temp_v15 + 0x5a) + 1),*(short *)(temp_v3 + 8) + temp_v4,
+          textureLoadOptionalDemonModel((int)(short)(*(short *)(temp_v15 + 0x5a) + 1),*(short *)(temp_v3 + 8) + temp_v4,
                        (int)*(short *)(temp_v3 + 10),0x54,0);
           temp_v3 = g_titleScene;
           piVar21 = (int *)(g_titleScene + 0x130c);

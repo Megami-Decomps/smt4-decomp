@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned char LAB_0011f40d; /* 0x11f40d */
 extern unsigned char DAT_00630374; /* 0x630374 */
 
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f4f00. */
@@ -32,7 +32,7 @@ extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_00303d10. */
 extern int FUN_00303d1e(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00303d3a. */
-extern int FUN_00303d44(int, unsigned int);
+extern int holderCheckBitsAllowed(int, unsigned int);
 /* Supplied declaration required: onlineScopedLockRelease. */
 /* Supplied declaration required: FUN_00303d74. */
 /* Supplied declaration required: FUN_00311010. */
@@ -55,7 +55,7 @@ int FUN_0011f03c(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   temp_v3 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v2,temp_v0 + 0x58);
   FUN_00303cd8(temp_v1);
   FUN_00303d10(temp_v1,*(unsigned short *)(param_1 + 0x20),1);
@@ -67,7 +67,7 @@ int FUN_0011f03c(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
     FUN_00311010(temp_v1,param_5);
     FUN_00311010(temp_v1,param_6);
     (*(unsigned char * *)((unsigned char *)&DAT_00630374 + 0x58)) = &LAB_0011f40d;
-    if ((*(char *)(param_1 + 0x34) != '\0') && (temp_v0 = FUN_00303d44(param_1,0x10), temp_v0 != 0)) {
+    if ((*(char *)(param_1 + 0x34) != '\0') && (temp_v0 = holderCheckBitsAllowed(param_1,0x10), temp_v0 != 0)) {
       onlineScopedLockRelease(temp_v2);
     }
     FUN_00303d74(param_1,temp_v3,temp_v1);

@@ -11,11 +11,11 @@ int FUN_00183f58(int, int, int);
 int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(...);
 int FUN_00215bd0(void);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002c8538(int);
 int FUN_004be990(...);
 int fillThreeWordsWithByte(int, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -41,13 +41,13 @@ extern int FUN_00187068(int);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00215bd0. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned char FUN_002857b8(void);
 /* Supplied declaration required: FUN_002c8538. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_004be990. */
 /* Supplied declaration required: fillThreeWordsWithByte. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_004bd794(int param_1,unsigned char param_2)
@@ -95,9 +95,9 @@ LAB_004bd854:
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 0xc);
   *(int *)(param_1 + 0x324) = temp_v5;
-  FUN_002804b0("camp/partnerHelpMsg.mbm",param_1 + 0x314,0);
-  FUN_002804b0("camp/partnerMsg.mbm",param_1 + 0x318,0);
-  FUN_002804b0("camp/partnerScr.bf",param_1 + 0x31c,0);
+  asdLoadFileAsyncSimple("camp/partnerHelpMsg.mbm",param_1 + 0x314,0);
+  asdLoadFileAsyncSimple("camp/partnerMsg.mbm",param_1 + 0x318,0);
+  asdLoadFileAsyncSimple("camp/partnerScr.bf",param_1 + 0x31c,0);
   if (*(char *)(param_1 + 4) != '\x01') {
     temp_v0 = (int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2;
     if (0 < temp_v5 % 4) {
@@ -130,7 +130,7 @@ LAB_004bd854:
       temp_v3 = 0x118;
       sysPlaySe(temp_v3);
     }
-    Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x10);
+    paramsClearPacket(param_1 + 0x10);
     paramsInit(param_1 + 0x10,&DAT_0052d780,0x60,&DAT_0052d7e0,0x18,0,0,0,0,0,0);
     temp_v0 = 0;
     do {

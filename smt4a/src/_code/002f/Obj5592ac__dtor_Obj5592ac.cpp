@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj5592acD1Ev` (_code @ 0x2fedf4, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: honest C++ iterator-value destructor hits armcc O3 Internal fault [0x44288b:410713]; O2 compiles but differs in frame/registry grouping and member return-this reuse. Draft restored per integrator; readable C++ is in notes_W6Match3.txt. */
 #include "romwright_types.h"
 
 extern "C" {

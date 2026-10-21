@@ -52,9 +52,9 @@ extern unsigned int FUN_0014bf3c(fn_00368e10_arg1 *, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018408c. */
 /* Supplied declaration required: dataTable00FindById. */
-extern unsigned int FUN_00261424(void);
+extern unsigned int gameDataGetTableValue(void);
 extern unsigned char FUN_0026264c(fn_00368e10_arg1 *);
-extern int FUN_002626e0(void);
+extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_002a1850. */
 extern int FUN_002a4b28(fn_00368e10_arg1 *);
 extern unsigned int obj80Select(unsigned int);
@@ -98,9 +98,9 @@ void FUN_00368e10(unsigned int *param_1,fn_00368e10_arg1 *param_2,unsigned int p
   temp_v0 = FUN_0026264c(param_2);
   *(unsigned char *)(*piVar1 + 0x24) = temp_v0;
   *(unsigned int *)(*piVar1 + 0x28) = pfVar3->field_0x2 & 0xffff7fff;
-  temp_v2 = FUN_002626e0();
+  temp_v2 = gameProgressIsAdvanced();
   if (temp_v2 != 0) {
-    temp_v1 = FUN_00261424();
+    temp_v1 = gameDataGetTableValue();
     temp_v5 = 0.0f;
     temp_v3 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v3) << 0x1d);

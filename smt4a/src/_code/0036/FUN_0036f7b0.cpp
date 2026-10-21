@@ -3,9 +3,9 @@
 extern "C" {
 
 extern u32 scrGetArg(s32 index);
-extern void FUN_00318544(u32 a, u32 b, s32 c, u32 d, u32 e);
+extern void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y);
 
-/* Script command: FUN_00318544 on four arguments. */
+/* Script command: bustupCutAnimSetPlacement on four arguments. */
 u32 FUN_0036f7b0(void)
 {
     u32 a = scrGetArg(0);
@@ -13,7 +13,7 @@ u32 FUN_0036f7b0(void)
     u32 c = scrGetArg(2);
     u32 d = scrGetArg(3);
 
-    FUN_00318544(a, b, 0, c, d);
+    bustupCutAnimSetPlacement(a, b, 0, c, d);
     return 1;
 }
 

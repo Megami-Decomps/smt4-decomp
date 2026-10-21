@@ -7,7 +7,7 @@ extern "C" {
 int obj80Select(int);
 int FUN_0035c708(int, unsigned int, int, unsigned int);
 int FUN_00401178(int, int, int, int, int, int, int);
-int FUN_0045b334(int, int);
+int packedScalarControlInit(int, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -16,14 +16,14 @@ typedef struct {
 } param_3_stack;
 
 extern int g_handleRegistry; /* 0x56fcc0 */
-extern unsigned char DAT_0057aa00; /* 0x57aa00 */
+extern unsigned char g_battleEffectSettings; /* 0x57aa00 */
 extern unsigned char DAT_0057aa01; /* 0x57aa01 */
 extern unsigned char DAT_0057aa02; /* 0x57aa02 */
 
 /* Supplied declaration required: obj80Select. */
 /* Supplied declaration required: FUN_0035c708. */
 /* Supplied declaration required: FUN_00401178. */
-/* Supplied declaration required: FUN_0045b334. */
+/* Supplied declaration required: packedScalarControlInit. */
 
 
 void FUN_004d896c(int param_1,int param_2,int param_3)
@@ -60,7 +60,7 @@ void FUN_004d896c(int param_1,int param_2,int param_3)
                (int)*(short *)(temp_v5 + temp_v7 * 0x2c + 10));
   if (0 < *(int *)(*(int *)(param_1 + 0xc0) + temp_v7 * 0x2c + 0x18)) {
     obj80Select(0);
-    FUN_0045b334(*(int *)(g_handleRegistry + 4) + 0xcc,0x18);
+    packedScalarControlInit(*(int *)(g_handleRegistry + 4) + 0xcc,0x18);
   }
   temp_v5 = *(int *)(param_1 + 0xc0);
   temp_v6 = *(unsigned int *)(temp_v5 + temp_v7 * 0x2c + 0x10);
@@ -82,7 +82,7 @@ void FUN_004d896c(int param_1,int param_2,int param_3)
   temp_v3 = (long long)(int)((unsigned int)temp_v0 * 0x24) * -0x7f7f7f7f +
           ((unsigned long long)((unsigned int)temp_v0 * 0x24) << 0x20);
   (*(signed char *)((unsigned char *)&(*(int *)((unsigned char *)&DAT_0057aa02 + 0x1a)) - 0x1c)) = (char)(int)(temp_v1 >> 0x27) - (char)(temp_v1 >> 0x3f);
-  (*(signed char *)((unsigned char *)&DAT_0057aa00 + 0x1)) = (char)(int)(temp_v2 >> 0x27) - (char)(temp_v2 >> 0x3f);
+  (*(signed char *)((unsigned char *)&g_battleEffectSettings + 0x1)) = (char)(int)(temp_v2 >> 0x27) - (char)(temp_v2 >> 0x3f);
   (*(signed char *)((unsigned char *)&DAT_0057aa01 + 0x1)) = (char)(int)(temp_v3 >> 0x27) - (char)(temp_v3 >> 0x3f);
   (*(int *)((unsigned char *)&DAT_0057aa02 + 0x1a)) = ((temp_v8 >> 7) - (temp_v8 >> 0x1f)) * 0x1000000 +
                  ((temp_v9 >> 7) - (temp_v9 >> 0x1f)) * 0x10000 +

@@ -13,14 +13,14 @@ int bitArrayCountSet1to500(void);
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int gameSlotTableFindFree(void);
-extern int FUN_001b34b8(void);
-extern int FUN_001b4aa0(void);
+extern int gameOptionsClassifyMode(void);
+extern int gameDataTableGetFlag(void);
 /* Supplied declaration required: bitArrayCountSet1to500. */
 extern unsigned int gameCountersGetWord(unsigned short);
 extern int FUN_001b5660(int);
 extern unsigned int FUN_001ba3d4(unsigned short);
 extern int bitSetTest(unsigned int, unsigned short);
-extern int FUN_001ba514(unsigned short);
+extern int partyFindSlotById(unsigned short);
 extern int FUN_001ba570(void);
 
 
@@ -47,7 +47,7 @@ void FUN_001ada74(int param_1)
     temp_v0 = *(char *)(temp_v3 + 6);
     if (!(temp_v0 == '\x04' || temp_v0 == '\x05')) {
       if (temp_v0 != '\x06') {
-        temp_v2 = FUN_001b34b8();
+        temp_v2 = gameOptionsClassifyMode();
         if ((temp_v2 != 2) || (temp_v2 = FUN_001ba570(), temp_v2 == 0)) {
           if (*(short *)(temp_v3 + 0x100) == 5) {
             temp_v2 = gameSlotTableFindFree();
@@ -88,7 +88,7 @@ void FUN_001ada74(int param_1)
               break;
             case 2:
               if (*(char *)(temp_v3 + 6) != '\x01') {
-                temp_v10 = FUN_001ba514(*(unsigned short *)(temp_v10 + 0x102));
+                temp_v10 = partyFindSlotById(*(unsigned short *)(temp_v10 + 0x102));
                 if (temp_v10 < 0) {
                   return;
                 }
@@ -140,14 +140,14 @@ LAB_001add08:
         }
       }
       else {
-        temp_v3 = FUN_001b4aa0();
+        temp_v3 = gameDataTableGetFlag();
         if (temp_v3 != 4) {
           return;
         }
       }
     }
     else {
-      temp_v3 = FUN_001b34b8();
+      temp_v3 = gameOptionsClassifyMode();
       if ((temp_v3 != 0) && (temp_v3 = FUN_001ba570(), temp_v3 == 0)) {
         return;
       }

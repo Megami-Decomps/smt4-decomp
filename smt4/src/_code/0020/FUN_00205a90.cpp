@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028caf8(...);
+int btlItemComputeValues(...);
 int FUN_00292be4(unsigned int, int, unsigned int);
 int FUN_00298d28(unsigned int, unsigned int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern int g_partyPanel; /* 0x43dcf0 */
 
-/* Supplied declaration required: FUN_0028caf8. */
+/* Supplied declaration required: btlItemComputeValues. */
 /* Supplied declaration required: FUN_00292be4. */
 /* Supplied declaration required: FUN_00298d28. */
 extern int gameGetSlotTable(void);
@@ -38,14 +38,14 @@ void FUN_00205a90(void)
   temp_v4 = 0;
   temp_v5[0] = 0;
   if (*(char *)(temp_v0 + 0x678) != '\0') {
-    FUN_0028caf8(0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
+    btlItemComputeValues(0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
     FUN_00292be4(*(unsigned int *)(temp_v0 + 0x6c8),temp_v4,temp_v5[0]);
   }
   temp_v3 = 0;
   do {
     temp_v2 = (int)*(char *)(temp_v1 + temp_v3 + 0x9108);
     if (-1 < temp_v2) {
-      FUN_0028caf8(temp_v2,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
+      btlItemComputeValues(temp_v2,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
       FUN_00292be4(*(unsigned int *)(temp_v0 + temp_v3 * 4 + 0x6cc),temp_v4,temp_v5[0]);
     }
     temp_v3 = temp_v3 + 1;
@@ -54,7 +54,7 @@ void FUN_00205a90(void)
   do {
     temp_v3 = *(int *)(temp_v0 + temp_v1 * 8 + 0x738);
     if (-1 < temp_v3) {
-      FUN_0028caf8(temp_v3,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
+      btlItemComputeValues(temp_v3,*(unsigned short *)(temp_v0 + 0x36),&temp_v4,temp_v5);
       FUN_00292be4(*(unsigned int *)(temp_v0 + temp_v1 * 4 + 0x6d8),temp_v4,temp_v5[0]);
     }
     temp_v1 = temp_v1 + 1;

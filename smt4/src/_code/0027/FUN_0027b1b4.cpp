@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002671f4(int);
 
-extern int DAT_0044cd88; /* 0x44cd88 */
+extern int g_mapStateSlots; /* 0x44cd88 */
 
 /* Supplied declaration required: FUN_002671f4. */
 
@@ -21,7 +21,7 @@ void FUN_0027b1b4(void)
   
   temp_v2 = 0;
   do {
-    temp_v1 = DAT_0044cd88 + temp_v2 * 0x4c;
+    temp_v1 = g_mapStateSlots + temp_v2 * 0x4c;
     if (*(char *)(temp_v1 + 0x58) != '\0') {
       temp_v0 = *(short *)(temp_v1 + 0x7c);
       if (!((temp_v0 == 3 || temp_v0 == 4) || temp_v0 == 5)) {

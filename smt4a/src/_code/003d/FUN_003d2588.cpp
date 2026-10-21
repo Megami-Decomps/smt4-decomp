@@ -23,7 +23,7 @@ extern int g_sWin; /* 0x57f57c */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 extern int textureGetIndexedResource(unsigned int);
@@ -55,7 +55,7 @@ void FUN_003d2588(unsigned int param_1,unsigned int param_2)
     temp_v4[0] = (unsigned short)param_1;
     libc_bsearch(puVar4,temp_v2,temp_v1,4,&LAB_002321f8);
     if ((puVar4 != (unsigned short *)0x0) && (temp_v3 = (int)(short)puVar4[1], -1 < temp_v3)) {
-      temp_v0 = FUN_001a6508(g_aocSystem,0x34,temp_v3,1);
+      temp_v0 = aocRunByName(g_aocSystem,0x34,temp_v3,1);
       if (temp_v0 != 0) {
         FUN_001a6568(g_aocSystem,0x34,temp_v3,0x10000);
         return;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ad6d8(void);
+int asdCameraInitAreas(void);
 int ptrListRemoveClearOwner(unsigned int, unsigned int);
 int FUN_001aeafc(unsigned int);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
-/* Supplied declaration required: FUN_001ad6d8. */
+/* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001aeafc. */
 
@@ -68,7 +68,7 @@ void FUN_0019f548(int param_1)
     *(unsigned int *)(param_1 + 0x594) = 0;
   }
   *(unsigned int *)(param_1 + 0x598) = 0xffffffff;
-  FUN_001ad6d8();
+  asdCameraInitAreas();
   return;
 }
 

@@ -10,7 +10,7 @@ typedef struct CounterTables {
 
 extern CounterTables *gameGetCounters(void);
 extern void FUN_0040a378(u32 amount);
-extern void FUN_0040a3a0(u32 amount);
+extern void gameAddPointsClamped(u32 amount);
 extern void FUN_0040a3c8(u32 amount);
 extern void questCenterAddPoints(u32 amount);
 
@@ -36,7 +36,7 @@ void FUN_00408184(s32 index, u32 amount)
     } else if (index == 0x13) {
         FUN_0040a378(amount);
     } else if (index == 0x26) {
-        FUN_0040a3a0(amount);
+        gameAddPointsClamped(amount);
     }
 }
 

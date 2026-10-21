@@ -1,15 +1,15 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00492c98` (_code @ 0x492c98, 0x184 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ExtendedRecordCall.h"
 
 extern "C" {
 
 int efctSetSpeed(void);
-int FUN_0018291c(int *, int *, int *, int *, int, int);
+int quadSetOrderedVectors(int *, int *, int *, int *, int, int);
 int FUN_00183bb0(void);
 int FUN_00185dd4(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
 int jobGetScalarValue(void);
-int FUN_002e129c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int);
 int FUN_002f5020(int *, unsigned char *, int, int);
 
 /* stack frame of param_8: 11 slot(s), 44 byte(s) */
@@ -30,12 +30,11 @@ typedef struct {
 extern unsigned char LAB_00192824; /* 0x192824 */
 
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0018291c. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: jobGetScalarValue. */
-/* Supplied declaration required: FUN_002e129c. */
 /* Supplied declaration required: FUN_002f5020. */
 
 
@@ -126,12 +125,12 @@ void FUN_00492c98(unsigned int param_1,unsigned int param_2,unsigned int param_3
     uStack_44 = uStack_b4;
     uStack_40 = uStack_b0;
     uStack_3c = uStack_ac;
-    FUN_0018291c(&temp_v9,&temp_v8,&temp_v7,&temp_v6,0,0);
+    quadSetOrderedVectors(&temp_v9,&temp_v8,&temp_v7,&temp_v6,0,0);
     efctSetSpeed();
   }
   temp_v2 = (unsigned int)((unsigned long long)param_6 >> 0x20);
   uStack_b4 = param_7;
-  FUN_002e129c(param_1,param_2,param_3,param_4,param_5,(int)param_6);
+  texTableRecordCallExtended(param_1,param_2,param_3,param_4,param_5,(int)param_6,temp_v2,param_7);
   efctSetSpeed();
   FUN_00183bb0();
   return;

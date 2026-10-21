@@ -1,37 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031d588` (_code @ 0x31d588, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
+u32 scrGetArg(u32);
+u32 FUN_002a4b28(u16);
 
-extern unsigned char g_gameState; /* 0x5f15fc */
-
-extern unsigned int scrGetArg(void);
-extern int FUN_002a4b28(unsigned int);
-
-
-unsigned int FUN_0031d588(void)
-
+// Queue an unregistered identifier once, using the first empty pending slot.
+u32 FUN_0031d588(u32 argumentIndex)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = FUN_002a4b28(temp_v0 & 0xffff);
-  if (temp_v1 == 0) {
-    temp_v1 = 0;
-    do {
-      if (*(unsigned int *)(&(*(unsigned char *)((unsigned char *)&g_gameState + 0x310)) + temp_v1 * 4) == temp_v0) {
-        return 1;
-      }
-      if (*(unsigned int *)(&(*(unsigned char *)((unsigned char *)&g_gameState + 0x310)) + temp_v1 * 4) == 0) {
-        *(unsigned int *)(&(*(unsigned char *)((unsigned char *)&g_gameState + 0x310)) + temp_v1 * 4) = temp_v0;
-        return 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < 0x20);
-  }
-  return 1;
+    u32 id = scrGetArg(argumentIndex);
+    if (FUN_002a4b28((u16)id) == 0) {
+        for (s32 index = 0; index < 32; ++index) {
+            if (g_gameState.pendingEntries.ids[index] == id)
+                return 1;
+            if (g_gameState.pendingEntries.ids[index] == 0) {
+                g_gameState.pendingEntries.ids[index] = id;
+                return 1;
+            }
+        }
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

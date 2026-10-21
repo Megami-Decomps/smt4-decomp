@@ -7,17 +7,17 @@ extern "C" {
 int FUN_002b5cd4(void);
 int mathPositionHeadingDegrees(void);
 int controllerSetDestination(int, int);
-int FUN_003fdb18(int);
+int controllerSetRotationEulerDegrees(int);
 int FUN_003fe86c(int, int, int);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapHakai; /* 0x581038 */
 extern signed char DAT_005f161f; /* 0x5f161f */
 
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int slots4FGetActiveValue(int);
 
@@ -38,7 +38,7 @@ void FUN_0027461c(void)
   float temp_v9;
   unsigned long long temp_v10;
   
-  temp_v6 = *(float *)(DAT_005806a4 + 0x50);
+  temp_v6 = *(float *)(g_lmapView + 0x50);
   mathPositionHeadingDegrees();
   temp_v3 = 0;
   temp_v10 = 0x42480000;
@@ -73,7 +73,7 @@ void FUN_0027461c(void)
           temp_v9 = (float)temp_v10;
           temp_v7 = temp_v6;
           mathPositionHeadingDegrees();
-          if (*(int *)(DAT_005806a4 + 0xb0) == -1) {
+          if (*(int *)(g_lmapView + 0xb0) == -1) {
             temp_v9 = (float)((unsigned long long)temp_v8 >> 0x20);
           }
           temp_v6 = temp_v7;
@@ -84,7 +84,7 @@ void FUN_0027461c(void)
         }
         if (*(char *)(temp_v4 + 0x7c) != '\0') {
           controllerSetDestination(temp_v2,temp_v4 + 0x68);
-          FUN_003fdb18(temp_v2);
+          controllerSetRotationEulerDegrees(temp_v2);
           temp_v1 = slots4FGetActiveValue(temp_v2);
           if (temp_v1 != *(int *)(temp_v4 + 0x78)) {
             FUN_003fe86c(temp_v2,*(int *)(temp_v4 + 0x78),2);

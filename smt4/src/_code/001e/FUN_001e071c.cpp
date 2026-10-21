@@ -8,7 +8,7 @@ int FUN_0025ccac(...);
 int FUN_0025d1c4(...);
 int FUN_0025ee64(...);
 int FUN_0025f300(...);
-int FUN_0025f4b4(...);
+int campDrawPartyComparisonIndicators(...);
 int FUN_0025f6b8(...);
 int FUN_002bed3c(...);
 int FUN_002c18e4(...);
@@ -46,7 +46,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0025d1c4. */
 /* Supplied declaration required: FUN_0025ee64. */
 /* Supplied declaration required: FUN_0025f300. */
-/* Supplied declaration required: FUN_0025f4b4. */
+/* Supplied declaration required: campDrawPartyComparisonIndicators. */
 /* Supplied declaration required: FUN_0025f6b8. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002c18e4. */
@@ -103,28 +103,28 @@ LAB_001e076c:
   case 0x14:
   case 0x15:
     FUN_0025f6b8(param_1,0,0,0);
-    FUN_0025f4b4(param_1,0);
+    campDrawPartyComparisonIndicators(param_1,0);
     FUN_0025f300(param_1);
     FUN_0025ee64(param_1);
     FUN_0025d1c4(param_1);
     break;
   case 0x10:
     FUN_0025f6b8(param_1,1,1,*(unsigned int *)&param_1->field_0x3044);
-    FUN_0025f4b4(param_1,1);
+    campDrawPartyComparisonIndicators(param_1,1);
     FUN_0025ee64(param_1);
     FUN_0025d1c4(param_1);
     break;
   case 0x11:
   case 0x29:
     FUN_0025f6b8(param_1,0,0,0);
-    FUN_0025f4b4(param_1,0);
+    campDrawPartyComparisonIndicators(param_1,0);
     FUN_0025ee64(param_1);
     FUN_0025d1c4(param_1);
     break;
   case 0x12:
   case 0x13:
     FUN_0025f6b8(param_1,0,0,0);
-    FUN_0025f4b4(param_1,0);
+    campDrawPartyComparisonIndicators(param_1,0);
     FUN_0025f300(param_1);
     FUN_0025ee64(param_1);
     FUN_0025d1c4(param_1);
@@ -132,7 +132,7 @@ LAB_001e076c:
     break;
   case 0x16:
     FUN_0025f6b8(param_1,0,1,0);
-    FUN_0025f4b4(param_1,0);
+    campDrawPartyComparisonIndicators(param_1,0);
     FUN_0025ee64(param_1);
     FUN_0025ccac(param_1,1);
     break;
@@ -155,11 +155,11 @@ LAB_001e076c:
     temp_v0 = param_1->field_0x304c;
     if (!((temp_v0 == 0x22 || temp_v0 == 0x23) || temp_v0 == 0x24)) {
       FUN_0025f6b8(param_1,1,0,0);
-      FUN_0025f4b4(param_1,0);
+      campDrawPartyComparisonIndicators(param_1,0);
     }
     else {
       FUN_0025f6b8(param_1,1,1,0);
-      FUN_0025f4b4(param_1,1);
+      campDrawPartyComparisonIndicators(param_1,1);
     }
     if ((param_1->field_0x304c == 0x1a) && (*(int *)&param_1[1].field_0xc != 0)) break;
     FUN_002dc120(param_1,0);
@@ -181,19 +181,19 @@ LAB_001e076c:
     break;
   case 0x22:
     FUN_0025f6b8(param_1,0,1);
-    FUN_0025f4b4(param_1,1);
+    campDrawPartyComparisonIndicators(param_1,1);
     FUN_0025ee64(param_1);
     FUN_0025ccac(param_1,0);
     break;
   case 0x23:
     FUN_0025f6b8(param_1,0,1);
-    FUN_0025f4b4(param_1,1);
+    campDrawPartyComparisonIndicators(param_1,1);
     FUN_0025ee64(param_1);
     FUN_0025ccac(param_1,1);
     break;
   case 0x24:
     FUN_0025f6b8(param_1,0,0,0);
-    FUN_0025f4b4(param_1,0);
+    campDrawPartyComparisonIndicators(param_1,0);
     FUN_0025ee64(param_1);
     FUN_0025ccac(param_1,0);
     break;
@@ -202,13 +202,13 @@ LAB_001e076c:
     temp_v0 = param_1->field_0x304c;
     if ((temp_v0 != 0x22 && temp_v0 != 0x23) && temp_v0 != 0x24) {
       FUN_0025f6b8(param_1,0,0,0);
-      FUN_0025f4b4(param_1,0);
+      campDrawPartyComparisonIndicators(param_1,0);
       FUN_0025f300(param_1);
       FUN_0025ee64(param_1);
       break;
     }
     FUN_0025f6b8(param_1,0,1);
-    FUN_0025f4b4(param_1,1);
+    campDrawPartyComparisonIndicators(param_1,1);
     FUN_0025f300(param_1);
     FUN_0025ee64(param_1);
     break;
@@ -224,13 +224,13 @@ LAB_001e076c:
   case 0x1b:
   case 0x2d:
     FUN_0025f6b8(param_1,0,0,0);
-    FUN_0025f4b4(param_1,0);
+    campDrawPartyComparisonIndicators(param_1,0);
     FUN_0025f300(param_1);
     FUN_0025ee64(param_1);
     break;
   case 0x28:
     FUN_0025f6b8(param_1,1,0,0);
-    FUN_0025f4b4(param_1,0);
+    campDrawPartyComparisonIndicators(param_1,0);
     FUN_002dc120(param_1,0);
   }
   if (param_1->field_0x3048 == 6) {

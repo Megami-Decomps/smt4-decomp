@@ -12,11 +12,11 @@ typedef struct {
 
 extern int FUN_0022cba8(...); /* 0x22cba8 */
 extern int FUN_003a6e68(...); /* 0x3a6e68 */
-extern int FUN_003a7530(...); /* 0x3a7530 */
+extern int devilListUpdatePreviewAndVisibility(...); /* 0x3a7530 */
 extern int FUN_003a76b8(...); /* 0x3a76b8 */
 extern int FUN_003a7834(...); /* 0x3a7834 */
 extern int FUN_003a7b54(...); /* 0x3a7b54 */
-extern int FUN_003a7be4(...); /* 0x3a7be4 */
+extern int partyRefreshCompleteAndUpdateSummaries(...); /* 0x3a7be4 */
 extern int FUN_003a7de4(...); /* 0x3a7de4 */
 extern int FUN_003a7f98(...); /* 0x3a7f98 */
 extern int FUN_003a80f4(...); /* 0x3a80f4 */
@@ -49,7 +49,7 @@ void FUN_003a6c4c(int param_1)
   *(unsigned int *)(param_1 + 0xa5bc) = 0;
   *(romwright_code **)(param_1 + 0xa5c0) = FUN_003a7834;
   *(unsigned int *)(param_1 + 0xa5c4) = 0;
-  *(romwright_code **)(param_1 + 0xa5c8) = FUN_003a7530;
+  *(romwright_code **)(param_1 + 0xa5c8) = devilListUpdatePreviewAndVisibility;
   *(unsigned int *)(param_1 + 0xa5cc) = 0;
   *(romwright_code **)(param_1 + 0xa5d0) = FUN_003a8240;
   *(unsigned int *)(param_1 + 0xa5d4) = 0;
@@ -61,9 +61,9 @@ void FUN_003a6c4c(int param_1)
   *(unsigned int *)(param_1 + 0xa5ec) = 0;
   *(romwright_code **)(param_1 + 0xa5f0) = FUN_003a80f4;
   *(unsigned int *)(param_1 + 0xa5f4) = 0;
-  *(romwright_code **)(param_1 + 0xa5f8) = FUN_003a7be4;
+  *(romwright_code **)(param_1 + 0xa5f8) = partyRefreshCompleteAndUpdateSummaries;
   *(unsigned int *)(param_1 + 0xa5fc) = 0;
-  *(romwright_code **)(param_1 + 0xa600) = FUN_003a7530;
+  *(romwright_code **)(param_1 + 0xa600) = devilListUpdatePreviewAndVisibility;
   *(unsigned int *)(param_1 + 0xa604) = 0;
   *(romwright_code **)(param_1 + 0xa608) = FUN_003a6e68;
   *(unsigned int *)(param_1 + 0xa60c) = 0;

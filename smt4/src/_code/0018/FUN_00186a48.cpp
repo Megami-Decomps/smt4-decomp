@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0029acc4(...);
+void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int FUN_002b0750(int, int, int, int, int, int, int, int);
 int FUN_002b93c8(...);
 int FUN_002ba12c(...);
@@ -30,7 +30,7 @@ extern int g_uiQuest; /* 0x43dd50 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0029acc4. */
+/* Supplied declaration required: drawSkillCategoryLabel. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: FUN_002ba12c. */
@@ -199,7 +199,7 @@ void FUN_00186a48(void)
     FUN_002bf288(2,0x29,0x51,temp_v9 + temp_v10 + (int)temp_v12,temp_v8,0xa1);
     temp_v11 = FUN_002bf4f8(0x29,0x54);
     temp_v10 = temp_v10 + (int)temp_v12;
-    FUN_0029acc4(temp_v0,*(short *)(temp_v11 + 8) + temp_v9 + temp_v10,*(short *)(temp_v11 + 10) + temp_v8,
+    drawSkillCategoryLabel(temp_v0,*(short *)(temp_v11 + 8) + temp_v9 + temp_v10,*(short *)(temp_v11 + 10) + temp_v8,
                  0xa6);
     temp_v11 = FUN_002bf4f8(0x29,0x55);
     temp_v4 = FUN_002bcddc(temp_v0,0);

@@ -1,39 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bb80c` (_code @ 0x4bb80c, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "addon/aocMain.h"
+#include "gamedata/DataTable.h"
+
+struct Table02Record {
+    u8 data[0x28];
+};
 
 extern "C" {
+extern AocSystemA* g_aocSystem;
+Table02Record* FUN_0046e6b8(AocSystemA* system, u32 index);
 
-int FUN_0046e6b8(int, unsigned int);
-
-extern int g_aocSystem; /* 0x570280 */
-
-extern unsigned int dataTableGet(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0046e6b8. */
-
-
-int FUN_004bb80c(unsigned int param_1)
-
+Table02Record* FUN_004bb80c(s32 index)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = dataTableGet(2);
-  temp_v1 = dataTableGetEntries();
-  if ((-1 < (int)param_1) && (temp_v2 = dataTableGetCount(temp_v0), param_1 < temp_v2)) {
-    temp_v3 = g_aocSystem;
-    FUN_0046e6b8(g_aocSystem,param_1);
-    if (temp_v3 == 0) {
-      temp_v3 = temp_v1 + param_1 * 0x28;
+    void* section = dataTableGet(2, 2);
+    Table02Record* records = static_cast<Table02Record*>(dataTableGetEntries(section));
+    if (index < 0 || static_cast<u32>(index) >= dataTableGetCount(section)) {
+        return records;
     }
-    return temp_v3;
-  }
-  return temp_v1;
+    Table02Record* record = FUN_0046e6b8(g_aocSystem, index);
+    if (record == NULL) {
+        record = &records[index];
+    }
+    return record;
 }
-
-} /* extern "C" */
+}

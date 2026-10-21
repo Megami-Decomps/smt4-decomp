@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004760bc` (_code @ 0x4760bc, 0x6ec bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_ArchiveIcon.h"
+#include "shard/W6_W6Match8_DateTimeValue.h"
 
 extern "C" {
 
@@ -16,11 +18,9 @@ int FUN_002f5020(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
 int FUN_0037a728(...);
 int FUN_00426eb8(...);
-int FUN_0042718c(...);
 int FUN_00473c5c(...);
 int FUN_004749a0(...);
 int table30GetEntry(unsigned char [56], unsigned int, unsigned int);
-int FUN_00500520(...);
 int FUN_005006a8(...);
 int archiveFindEntryValue(...);
 int FUN_00500788(...);
@@ -66,7 +66,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern unsigned char objGetFlagBit0(int);
 extern unsigned char objGetFlagBit1(int);
-extern int FUN_001d25ec(int);
+extern int legacyResourceIdRemap(int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: FUN_002e56e4. */
@@ -76,14 +76,12 @@ extern int FUN_001d25ec(int);
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_0037a728. */
 /* Supplied declaration required: FUN_00426eb8. */
-/* Supplied declaration required: FUN_0042718c. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00473c5c. */
 /* Supplied declaration required: FUN_004749a0. */
 /* Supplied declaration required: table30GetEntry. */
 extern int FUN_00500514(unsigned char *);
-/* Supplied declaration required: FUN_00500520. */
 /* Supplied declaration required: FUN_005006a8. */
 /* Supplied declaration required: archiveFindEntryValue. */
 /* Supplied declaration required: FUN_00500788. */
@@ -422,13 +420,15 @@ int FUN_004760bc(int param_1)
         sysMemClear(temp_v40,0x1200);
       }
       else {
-        FUN_001029f4(temp_v10,0,10);
+        temp_v10 = static_cast<u16>(FUN_001029f4(temp_v10,0,10));
         *(short *)(temp_v39 + 0xa8) = (short)temp_v10;
         if ((temp_v10 & 0xffff) != 0xffff) {
-          FUN_0042718c(&temp_v13,temp_v5 + 0x28,temp_v40);
-          *(int *)(temp_v43 + 0xc) = temp_v13;
-          *(unsigned int *)(temp_v43 + 0x10) = temp_v14;
-          temp_v6 = FUN_001d25ec(temp_v43 + 0xc);
+          ValidationPair iconResult = archiveReadIcon(
+              reinterpret_cast<const ArchiveIconSource *>(temp_v5 + 0x28),
+              reinterpret_cast<void *>(temp_v40), temp_v10);
+          *(int *)(temp_v43 + 0xc) = static_cast<s32>(iconResult.first);
+          *(unsigned int *)(temp_v43 + 0x10) = iconResult.second;
+          temp_v6 = legacyResourceIdRemap(temp_v43 + 0xc);
           if (temp_v6 < 0) {
             return temp_v6;
           }
@@ -441,14 +441,13 @@ int FUN_004760bc(int param_1)
       FUN_00500788(&temp_v15,temp_v21,&temp_v37);
       *(unsigned int *)(temp_v43 + 0xc) = temp_v15;
       *(unsigned int *)(temp_v43 + 0x10) = temp_v16;
-      temp_v6 = FUN_001d25ec(temp_v43 + 0xc);
+      temp_v6 = legacyResourceIdRemap(temp_v43 + 0xc);
       if (temp_v6 < 0) {
         return temp_v6;
       }
       *(unsigned int *)(temp_v12 + 0x9b8) = temp_v37;
-      FUN_00500520(&temp_v13,temp_v21);
-      *(int *)(temp_v12 + 0x9a0) = temp_v13;
-      *(unsigned int *)(temp_v12 + 0x9a4) = temp_v14;
+      archiveReadNewsSinceDateTime(reinterpret_cast<DateTimeValue *>(temp_v12 + 0x9a0),
+                   reinterpret_cast<const Archive *>(temp_v21));
       temp_v11 = FUN_00500514(temp_v21);
       temp_v6 = temp_v11 * 0x18;
       asdOperatorNewE(temp_v6,temp_v5);
@@ -459,10 +458,10 @@ int FUN_004760bc(int param_1)
       FUN_005006a8(&temp_v17,temp_v21,&temp_v36,temp_v6);
       *(unsigned int *)(temp_v43 + 0xc) = temp_v17;
       *(unsigned int *)(temp_v43 + 0x10) = temp_v18;
-      temp_v11 = FUN_001d25ec(temp_v43 + 0xc);
+      temp_v11 = legacyResourceIdRemap(temp_v43 + 0xc);
       if (temp_v11 < 0) {
         asdOperatorDeleteB(temp_v6);
-        temp_v5 = FUN_001d25ec(temp_v43 + 0xc);
+        temp_v5 = legacyResourceIdRemap(temp_v43 + 0xc);
         return temp_v5;
       }
       temp_v11 = 0;

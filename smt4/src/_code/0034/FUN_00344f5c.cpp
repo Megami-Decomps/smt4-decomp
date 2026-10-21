@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00344f5c` (_code @ 0x344f5c, 0x1b8c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleQueue.h"
 
 extern "C" {
 
 int FUN_0023c0d0(...);
 int actionCreateKindSeventeen(...);
-int FUN_00246cf0(...);
+int bgmSwitchCurrent(...);
 int FUN_0027df30(...);
 int gameMoneyAdd(...);
 int FUN_0029c43c(...);
@@ -23,8 +24,7 @@ int FUN_0023c1bc(...);
 int FUN_0023c24c(...);
 int FUN_0023c368(...);
 int FUN_0023c428(...);
-int FUN_0023ce90(...);
-int FUN_0023ea20(...);
+int modelSetAnimationChannels(...);
 int FUN_0024057c(...);
 int effectAreAllCompletionChecksReady(...);
 int FUN_0026beb4(...);
@@ -36,11 +36,11 @@ int FUN_003c0d70(...);
 int FUN_003c149c(...);
 int FUN_003d9ba0(...);
 int FUN_003d9f74(...);
-int FUN_003dd14c(...);
+int keyedValueFindPair(...);
 
-int FUN_0023c564(...);
+int btlReflectSetValuePair(...);
 int FUN_0023c5c0(...);
-int FUN_0023c5ec(...);
+int btlReflectCreateKind18(...);
 int FUN_0023cd08(...);
 int FUN_0023f4e4(...);
 int FUN_002505c0(...);
@@ -53,8 +53,8 @@ int FUN_003ae108(...);
 int FUN_003ae418(...);
 int FUN_003ae574(...);
 int FUN_003bcdb0(...);
-int FUN_003c000c(...);
-int FUN_003c0238(...);
+int btlAddClampedVital(...);
+unsigned int btlDispatchTargetActionKind(int target, int kind, unsigned int argument);
 int FUN_003c1414(...);
 int FUN_003c1a2c(...);
 int FUN_003d6420(...);
@@ -68,7 +68,7 @@ int FUN_0023c638(...);
 int FUN_0023c6e4(...);
 int FUN_0023c700(...);
 int FUN_00244fb0(...);
-int FUN_00245228(...);
+int slotResetIdle(...);
 int FUN_0027dbc8(...);
 int btlUnitGet(...);
 int btlMainFindEntryByListedId(...);
@@ -107,7 +107,7 @@ extern int DAT_004398d4; /* 0x4398d4 */
 extern int g_btlUiBlock; /* 0x439ca8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0020ffd8. */
 /* Supplied declaration required: FUN_0023c0d0. */
 /* Supplied declaration required: actionCreateKindSeventeen. */
@@ -116,23 +116,22 @@ extern int FUN_0019e0c0(unsigned int);
 /* Supplied declaration required: FUN_0023c24c. */
 /* Supplied declaration required: FUN_0023c368. */
 /* Supplied declaration required: FUN_0023c428. */
-/* Supplied declaration required: FUN_0023c564. */
+/* Supplied declaration required: btlReflectSetValuePair. */
 /* Supplied declaration required: FUN_0023c5c0. */
-/* Supplied declaration required: FUN_0023c5ec. */
+/* Supplied declaration required: btlReflectCreateKind18. */
 /* Supplied declaration required: FUN_0023c638. */
 extern int FUN_0023c684(unsigned int);
 /* Supplied declaration required: FUN_0023c6e4. */
 /* Supplied declaration required: FUN_0023c700. */
 /* Supplied declaration required: FUN_0023cd08. */
-/* Supplied declaration required: FUN_0023ce90. */
-/* Supplied declaration required: FUN_0023ea20. */
+/* Supplied declaration required: modelSetAnimationChannels. */
 /* Supplied declaration required: FUN_0023f4e4. */
 /* Supplied declaration required: FUN_0024057c. */
 /* Supplied declaration required: FUN_00244fb0. */
 extern int FUN_0024502c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00245228. */
+/* Supplied declaration required: slotResetIdle. */
 extern int tableIsSupportedKind(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00246cf0. */
+/* Supplied declaration required: bgmSwitchCurrent. */
 extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_002568c4. */
@@ -148,7 +147,7 @@ extern int FUN_00256940(int, int, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: gameMoneyAdd. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_0029c3ec(void);
+extern int messageMainTargetIsClear(void);
 /* Supplied declaration required: FUN_0029c43c. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029e648. */
@@ -176,9 +175,9 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: FUN_003aef64. */
 /* Supplied declaration required: FUN_003bcdb0. */
 /* Supplied declaration required: FUN_003bf5a8. */
-/* Supplied declaration required: FUN_003c000c. */
+/* Supplied declaration required: btlAddClampedVital. */
 /* Supplied declaration required: FUN_003c017c. */
-/* Supplied declaration required: FUN_003c0238. */
+/* Supplied declaration required: btlDispatchTargetActionKind. */
 /* Supplied declaration required: FUN_003c0390. */
 /* Supplied declaration required: btlMessageStartUnlessFlagged. */
 /* Supplied declaration required: FUN_003c0d70. */
@@ -197,7 +196,7 @@ extern int FUN_003d700c(int);
 extern int FUN_003d9af8(int, int);
 /* Supplied declaration required: FUN_003d9ba0. */
 /* Supplied declaration required: FUN_003d9f74. */
-/* Supplied declaration required: FUN_003dd14c. */
+/* Supplied declaration required: keyedValueFindPair. */
 /* Supplied declaration required: FUN_003de758. */
 
 
@@ -413,7 +412,7 @@ joined_r0x003463c0:
       else {
         temp_v5 = FUN_0024502c(temp_v4,0);
         if (temp_v5 != 0) {
-          FUN_00245228(temp_v4,0);
+          slotResetIdle(temp_v4,0);
           temp_v1 = 2;
           psVar2[0x12] = temp_v1;
         }
@@ -444,7 +443,7 @@ LAB_00345680:
           temp_v5 = *(int *)(psVar2 + 0x28);
           *(unsigned int *)(psVar2 + 0x28) = temp_v5 + 1U;
           if (*(unsigned int *)(psVar2 + 0x16) <= temp_v5 + 1U) {
-            FUN_00245228(temp_v4,1);
+            slotResetIdle(temp_v4,1);
             temp_v10 = 3;
             *(unsigned char *)(psVar2 + 0x10) = temp_v10;
           }
@@ -621,8 +620,8 @@ LAB_00345938:
   case '\x11':
     temp_v5 = btlGetMainState();
     if ((*(unsigned int *)(temp_v5 + 0x44a0) & 0x140) == 0) {
-      FUN_003c0238(*(int *)(temp_v5 + 0x1fc0) + *(int *)(psVar2 + 0x14) * 0x288,
-                   *(unsigned int *)(psVar2 + 0x26));
+      btlDispatchTargetActionKind(*(int *)(temp_v5 + 0x1fc0) + *(int *)(psVar2 + 0x14) * 0x288,
+                   *(unsigned int *)(psVar2 + 0x26),1);
       break;
     }
     temp_v1 = 0;
@@ -696,7 +695,7 @@ LAB_00345938:
     if ((*puVar9 & 0x200) != 0) {
       unaff_r5 = (unsigned int *)0x0;
       *(unsigned int *)(temp_v5 + 0x44a0) = *(unsigned int *)(temp_v5 + 0x44a0) | 0x80;
-      FUN_0023c5ec(1,*(unsigned int *)(psVar2 + 4),0xffffffff,1,1);
+      btlReflectCreateKind18(1,*(unsigned int *)(psVar2 + 4),0xffffffff,1,1);
       if ((*(unsigned int *)(temp_v5 + 0x44a4) & 2) != 0) {
         FUN_0023c5c0(0,*(unsigned int *)(psVar2 + 4));
       }
@@ -709,7 +708,7 @@ LAB_00345938:
       else if ((*(unsigned int *)(temp_v5 + 0x44a4) & 2) != 0) {
         FUN_0023c5c0(0,*(unsigned int *)(psVar2 + 4));
       }
-      FUN_0023c5ec(1,*(unsigned int *)(psVar2 + 4),temp_v4,1,unaff_r5);
+      btlReflectCreateKind18(1,*(unsigned int *)(psVar2 + 4),temp_v4,1,unaff_r5);
     }
     break;
   case '\x17':
@@ -737,7 +736,7 @@ LAB_00345938:
           if (*(char *)(temp_v5 + 0x2f04) < '\x01') {
             btlGetMainState();
             FUN_0023f4e4();
-            FUN_0023c564(0,*(unsigned int *)(psVar2 + 4),0,1,1);
+            btlReflectSetValuePair(0,*(unsigned int *)(psVar2 + 4),0,1,1);
             goto LAB_00346258;
           }
           goto LAB_003453f8;
@@ -766,7 +765,7 @@ LAB_00345938:
     break;
   case '\x1c':
     if ((*(unsigned int *)(*param_1 + 0x44a8) & 4) == 0) {
-      FUN_003c000c((int)*(short *)(*(int *)(psVar2 + 10) + 0x62),*(unsigned int *)(psVar2 + 0x14));
+      btlAddClampedVital((int)*(short *)(*(int *)(psVar2 + 10) + 0x62),*(unsigned int *)(psVar2 + 0x14));
     }
     break;
   case '\x1d':
@@ -868,15 +867,14 @@ joined_r0x0034611c:
     break;
   case '$':
     FUN_003c0d70((int)*(short *)(*(int *)(psVar2 + 0xc) + 0x6e),0);
-    btlGetMainState();
-    FUN_0023ce90();
+    btlPruneInvalidQueuedEntries((BtlMainState*)btlGetMainState());
     break;
   case '%':
     temp_v5 = *(int *)(psVar2 + 0x26);
     if (temp_v5 != 0) {
       if (temp_v5 != 1) {
         if ((temp_v5 != 2) ||
-           (((temp_v5 = DAT_00435d18, FUN_003dd14c(DAT_00435d18,(int)psVar2[0x12]), temp_v5 != 0 &&
+           (((temp_v5 = DAT_00435d18, keyedValueFindPair(DAT_00435d18,(int)psVar2[0x12]), temp_v5 != 0 &&
              (temp_v5 = effectAreAllCompletionChecksReady(), temp_v5 == 0)) &&
             ((*(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) & 1) != 0)))) {
           temp_v1 = 1;
@@ -937,7 +935,7 @@ joined_r0x0034611c:
   case '\'':
     unaff_r5 = (unsigned int *)(int)*(short *)(*(int *)(psVar2 + 10) + 0x62);
     temp_v5 = DAT_00435d18;
-    FUN_003dd14c(DAT_00435d18,(int)psVar2[0x12]);
+    keyedValueFindPair(DAT_00435d18,(int)psVar2[0x12]);
     if ((temp_v5 != 0) && ((*(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) & 1) != 0)) {
       temp_v9 = *(int *)(psVar2 + 0x26);
       if (temp_v9 != 0) {
@@ -952,7 +950,7 @@ joined_r0x0034611c:
             if ((*(unsigned short *)(*(int *)(psVar2 + 10) + 0x58) & 0x1000) != 0) {
               temp_v9 = FUN_0020ffd8();
               if (temp_v9 == 1) {
-                FUN_0023ea20(temp_v5,2);
+                modelSetAnimationChannels(temp_v5,2);
               }
               temp_v5 = 3;
               *(int *)(psVar2 + 0x26) = temp_v5;
@@ -962,7 +960,7 @@ joined_r0x0034611c:
             }
             temp_v9 = effectAreAllCompletionChecksReady(temp_v5);
             if (temp_v9 != 0) {
-              FUN_0023ea20(temp_v5,1);
+              modelSetAnimationChannels(temp_v5,1);
             }
           }
         }
@@ -971,7 +969,7 @@ joined_r0x0034611c:
           if (temp_v9 != 0) {
             temp_v9 = FUN_0020ffd8(temp_v5);
             if (temp_v9 == 0) {
-              FUN_0023ea20(temp_v5,1);
+              modelSetAnimationChannels(temp_v5,1);
             }
             temp_v5 = 2;
             *(int *)(psVar2 + 0x26) = temp_v5;
@@ -1032,7 +1030,7 @@ LAB_00346258:
       break;
     }
     if ((*(int *)(psVar2 + 0x26) == 1) &&
-       (temp_v5 = FUN_0019e0c0(*(unsigned int *)(temp_v5 + 0x2254)), temp_v5 == 2)) {
+       (temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v5 + 0x2254)), temp_v5 == 2)) {
       FUN_0026beb4(0,*(unsigned int *)(psVar2 + 4),0,0,1);
       buttonHelpGetMode();
       buttonHelpSetPreset();
@@ -1110,7 +1108,7 @@ LAB_00346854:
       break;
     }
     if (temp_v5 != 1) {
-      if ((temp_v5 == 2) && (temp_v5 = FUN_0029c3ec(), temp_v5 == 1)) {
+      if ((temp_v5 == 2) && (temp_v5 = messageMainTargetIsClear(), temp_v5 == 1)) {
         gameMoneyAdd(*(unsigned int *)(psVar2 + 0x14));
         FUN_0029cc44(1);
         temp_v1 = 0;
@@ -1137,7 +1135,7 @@ LAB_003453f8:
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v5 + 0x496e);
     }
     if (temp_v11 && temp_v7 == 0) {
-      FUN_00246cf0(temp_v5,*(unsigned int *)(temp_v5 + 0x49dc));
+      bgmSwitchCurrent(temp_v5,*(unsigned int *)(temp_v5 + 0x49dc));
     }
     break;
   case '1':

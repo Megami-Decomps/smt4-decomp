@@ -61,7 +61,7 @@ extern int FUN_002c7e3c(void);
 extern int FUN_00372014(void);
 /* Supplied declaration required: FUN_004a3e04. */
 /* Supplied declaration required: FUN_004bcd90. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -103,7 +103,7 @@ void FUN_004a3b48(int param_1)
     FUN_0023b45c(0);
     return;
   }
-  temp_v2 = FUN_004cfe4c(param_1 + 0x20);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v0 = *(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x868);
   temp_v2 = FUN_0023b3d0();
   if (temp_v2 == 0) {

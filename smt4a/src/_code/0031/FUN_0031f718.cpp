@@ -24,7 +24,7 @@ extern unsigned char g_gameGlobals; /* 0x588fd0 */
 
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: dataTable00FindById. */
-extern int FUN_002626e0(void);
+extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_0026fd50. */
 extern int FUN_002b4dcc(unsigned char *);
 /* Supplied declaration required: FUN_002cb55c. */
@@ -74,7 +74,7 @@ void FUN_0031f718(unsigned int param_1,int param_2,unsigned int param_3)
         *(unsigned int *)(temp_v0 + 0x13a0) = *(unsigned int *)(temp_v2 + 4);
       }
     }
-    temp_v3 = FUN_002626e0();
+    temp_v3 = gameProgressIsAdvanced();
     if (temp_v3 != 0) {
       *(unsigned char *)(temp_v0 + 0x2017) = 0x10;
       temp_v8 = 0;

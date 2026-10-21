@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_00178b04(...);
 int FUN_003f0e20(...);
-int FUN_004d881c(...);
+int modelOwnerLoadNamed(...);
 
 typedef struct fn_003e9b74_arg0 fn_003e9b74_arg0;
 struct fn_003e9b74_arg0 {
@@ -49,8 +49,8 @@ extern unsigned char LAB_003e9cb4; /* 0x3e9cb4 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004d881c. */
-extern unsigned int clearWord(void);
+/* Supplied declaration required: modelOwnerLoadNamed. */
+extern unsigned int *battleModelOwnerInitialize(unsigned int *value);
 
 
 void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
@@ -78,13 +78,12 @@ void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
   unsigned int temp_v17;
   unsigned int temp_v18;
   
-  temp_v0 = 0x24;
-  FUN_00178b04(0x24,&LAB_003e9c80,0x3626);
+  temp_v0 = FUN_00178b04(0x24,&LAB_003e9c80,0x3626);
   if (temp_v0 == 0) {
     temp_v1 = 0;
   }
   else {
-    temp_v1 = clearWord();
+    temp_v1 = (unsigned int)battleModelOwnerInitialize((unsigned int *)temp_v0);
   }
   param_1->field_0x22bc = temp_v1;
   temp_v3 = 0;
@@ -111,7 +110,7 @@ void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
       pfVar2 = param_1;
       FUN_003f0e20(param_1,(int)*(short *)(temp_v0 + 0x6a));
       textFormatBuffer(&temp_v3,&LAB_003e9cb4,(int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
-      FUN_004d881c(param_1->field_0x22bc,&temp_v3);
+      modelOwnerLoadNamed(param_1->field_0x22bc,&temp_v3);
       param_1->field_0x22cc = 1;
       return;
     }
@@ -121,7 +120,7 @@ void FUN_003e9b74(fn_003e9b74_arg0 *param_1)
   pfVar2 = param_1;
   FUN_003f0e20(param_1,(int)*(short *)(temp_v0 + 0x6a));
   textFormatBuffer(&temp_v3,&LAB_003e9cb4,(int)*(short *)((int)pfVar2->field_0x404 + 0x8c));
-  FUN_004d881c(param_1->field_0x22bc,&temp_v3);
+  modelOwnerLoadNamed(param_1->field_0x22bc,&temp_v3);
   param_1->field_0x22cc = 1;
   return;
 }

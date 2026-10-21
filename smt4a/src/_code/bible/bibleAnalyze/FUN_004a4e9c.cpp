@@ -14,9 +14,9 @@ int loadSlotEnsureLoaded(...);
 int FUN_004930e4(int);
 int rectangleInitializeSelection(...);
 int FUN_004a4848(...);
-int FUN_004a6c18(...);
+int partyIdsReset(...);
 int FUN_004a6c50(...);
-int FUN_004a83f8(void);
+int slotPoolResetTrackedState(void);
 int FUN_004cf7cc(...);
 int FUN_004d05c4(...);
 int FUN_004d0b3c(void);
@@ -53,9 +53,9 @@ extern int FUN_004082f8(int);
 /* Supplied declaration required: FUN_004930e4. */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004a4848. */
-/* Supplied declaration required: FUN_004a6c18. */
+/* Supplied declaration required: partyIdsReset. */
 /* Supplied declaration required: FUN_004a6c50. */
-/* Supplied declaration required: FUN_004a83f8. */
+/* Supplied declaration required: slotPoolResetTrackedState. */
 /* Supplied declaration required: FUN_004cf7cc. */
 extern int rangeGetMinimumLimit(int *);
 /* Supplied declaration required: FUN_004d05c4. */
@@ -77,7 +77,7 @@ void FUN_004a4e9c(int *param_1)
   *(unsigned short *)(param_1 + 0x2a1c) = 0xffff;
   *(unsigned char *)((int)param_1 + 0xa97e) = 0xff;
   *(unsigned char *)((int)param_1 + 0x95) = 1;
-  FUN_004a83f8();
+  slotPoolResetTrackedState();
   (**(romwright_code **)(*param_1 + 0x20))(param_1);
   FUN_0031f718(0,1);
   FUN_002c8550(7);
@@ -146,7 +146,7 @@ void FUN_004a4e9c(int *param_1)
     *(unsigned char *)(param_1 + 0x20a) = 1;
   }
   FUN_004a4848(param_1);
-  FUN_004a6c18((int)param_1 + 0x96);
+  partyIdsReset((int)param_1 + 0x96);
   FUN_004a6c50((int)param_1 + 0x96,0);
   temp_v0 = rangeGetMinimumLimit(param_1 + 8);
   temp_v1 = 0;

@@ -10,7 +10,7 @@ int skinObjectUpdateMatrices(...);
 int FUN_00183bb0(void);
 int FUN_00486444(void);
 int FUN_00487470(...);
-int FUN_0048a1b8(...);
+int uiDrawAnimatedMessage(...);
 int FUN_0048b260(...);
 int FUN_0048b514(...);
 int FUN_00492c5c(int);
@@ -58,12 +58,12 @@ extern unsigned int gameFlagsGetWord1590Ptr(unsigned int);
 extern int FUN_004083a8(int);
 /* Supplied declaration required: FUN_00486444. */
 /* Supplied declaration required: FUN_00487470. */
-/* Supplied declaration required: FUN_0048a1b8. */
+/* Supplied declaration required: uiDrawAnimatedMessage. */
 /* Supplied declaration required: FUN_0048b260. */
 /* Supplied declaration required: FUN_0048b514. */
 extern int FUN_0048e40c(int);
 extern unsigned int lmapSceneGetObj(void);
-extern int FUN_00492c34(int);
+extern int naviMainSelectPair(int);
 /* Supplied declaration required: FUN_00492c5c. */
 extern int FUN_00492c70(int);
 /* Supplied declaration required: FUN_00492c84. */
@@ -138,7 +138,7 @@ void FUN_004920d4(int param_1)
     pfVar5 = (float *)lmapSceneGetObj();
     temp_v15 = *pfVar5;
     temp_v17 = pfVar5[2];
-    temp_v4 = FUN_00492c34(temp_v3);
+    temp_v4 = naviMainSelectPair(temp_v3);
     NaviMain_GetCurrentMap(temp_v3);
     temp_v27 = DAT_005f1604;
     if (DAT_005f1a5e != '\0') {
@@ -324,7 +324,7 @@ LAB_004925c8:
     }
     if (((*(char *)(temp_v33 + 0x1369) != '\0') && (*(char *)(temp_v33 + 0x1368) == '\0')) ||
        (temp_v3 = gameFlagsClassify(g_gameState), temp_v3 == 3)) {
-      FUN_0048a1b8(temp_v33);
+      uiDrawAnimatedMessage(temp_v33);
       return;
     }
   }

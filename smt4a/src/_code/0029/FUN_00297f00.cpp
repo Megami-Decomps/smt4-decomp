@@ -1,40 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00297f00` (_code @ 0x297f00, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses R0 for the trap and R1 for zero; retail uses R1 for the trap, R2 for zero and R0 for the active byte. Floating-point operations match. */
+#include "map/mapTrap.h"
 
 extern "C" {
+extern MapTrapA* g_mapTrap;
 
-int VectorSignedToFloat(unsigned int, int);
-
-extern int g_mapTrap; /* 0x587f0c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-
-
-void FUN_00297f00(unsigned int param_1,unsigned int param_2)
-
+void FUN_00297f00(s32 value, s32 count)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int in_fpscr;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  float temp_v3;
-  
-  temp_v0 = g_mapTrap;
-  temp_v3 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned char *)(g_mapTrap + 0x40) = 1;
-  *(int *)(temp_v0 + 0x44) = (int)(temp_v3 * 0.5f);
-  *(unsigned int *)(temp_v0 + 0x48) = 0;
-  *(unsigned int *)(temp_v0 + 0x50) = temp_v1;
-  *(unsigned int *)(temp_v0 + 0x54) = temp_v2;
-  *(unsigned int *)(temp_v0 + 0x58) = 0;
-  *(unsigned int *)(temp_v0 + 0x5c) = 0;
-  *(unsigned int *)(temp_v0 + 0x4c) = 0;
-  *(unsigned char *)(temp_v0 + 0x60) = 0;
-  return;
+    MapTrapA* trap = g_mapTrap;
+    trap->motion.active = 1;
+    trap->motion.halfCount = static_cast<s32>(static_cast<f32>(count) * 0.5f);
+    trap->motion.count = 0;
+    trap->motion.initialValue = static_cast<f32>(value);
+    trap->motion.currentValue = static_cast<f32>(value);
+    trap->motion.delta = 0.0f;
+    trap->motion.previousDelta = 0.0f;
+    trap->motion.reverseCount = 0;
+    trap->motion.alternating = 0;
 }
-
-} /* extern "C" */
+}

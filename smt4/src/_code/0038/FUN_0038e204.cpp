@@ -6,7 +6,7 @@ extern "C" {
 extern const u8 DAT_00422184[];
 extern const u8 DAT_00422298[];
 void FUN_002bad5c(WindowResult *result);
-void FUN_002baa40(WindowResult *result, u32 code);
+void resultPairInitialize(WindowResult *result, u32 code);
 
 /* Initializes the window's status and translated result pair. */
 WindowInitState *FUN_0038e204(WindowInitState *window)
@@ -19,7 +19,7 @@ WindowInitState *FUN_0038e204(WindowInitState *window)
     window->vtable = DAT_00422298;
     window->reserved = 0;
     WindowResult result;
-    FUN_002baa40(&result, 0);
+    resultPairInitialize(&result, 0);
     window->result = result;
     return window;
 }

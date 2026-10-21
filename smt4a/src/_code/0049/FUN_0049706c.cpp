@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int FUN_0019de98(int, unsigned int);
 int useCounterStart(void);
 int FUN_0031f208(int);
-int FUN_0031f27c(int, int);
+int sortMenuAcquire(int, int);
 int FUN_003343f0(int);
 
 typedef struct fn_0049706c_arg0 fn_0049706c_arg0;
@@ -26,7 +26,7 @@ struct fn_0049706c_arg0 {
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_003343f0. */
 
 
@@ -35,7 +35,7 @@ void FUN_0049706c(fn_0049706c_arg0 *param_1)
 {
 /* irregular: 6 native warning(s); review required */
   FUN_003343f0(1);
-  FUN_0031f27c(0xc,0);
+  sortMenuAcquire(0xc,0);
   if (param_1->field_0xb40 != 8) {
     FUN_0031f208(0x1c);
     FUN_0031f208(7);

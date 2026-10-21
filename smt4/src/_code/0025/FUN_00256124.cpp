@@ -3,11 +3,11 @@
 extern "C" {
 
 int gameFlagSetValue(int a, int b, int c);
-extern GameOptions *gameGetOptions(void);
+extern GameOptions *gameGetSupportUnitData(void);
 
 void FUN_00256124(void)
 {
-    GameOptions *options = gameGetOptions();
+    GameOptions *options = gameGetSupportUnitData();
 
     if ((options->flags & 1) != 0) {
         if (options->unk46 == 0x2a3) {

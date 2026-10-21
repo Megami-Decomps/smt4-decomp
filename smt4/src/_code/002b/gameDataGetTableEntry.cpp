@@ -15,12 +15,12 @@ struct Blocks { u32 first; GameData *data; };
 
 extern "C" {
 extern Blocks g_gameDataBlocks;
-u32 FUN_00132970(void);
+u32 gameDataFindEntryIndex(void);
 
 /* Returns the current indexed record's trailing value address. */
 u32 *gameDataGetTableEntry(void)
 {
-    u32 index = FUN_00132970();
+    u32 index = gameDataFindEntryIndex();
     RecordRegion *record = (RecordRegion *)&g_gameDataBlocks.data->records[index];
     return &record->value;
 }

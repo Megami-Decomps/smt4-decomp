@@ -8,7 +8,7 @@ int gameFlagsGetBlock(void);
 int ptrListRemoveClearOwner(unsigned int);
 int dataTable2EType1Count(void);
 int dataTable2EType0Count(void);
-int FUN_0040ace8(unsigned int, int);
+int handleRegistryRegisterObject(unsigned int, int);
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern short *g_lmapScene; /* 0x581288 */
@@ -28,7 +28,7 @@ extern short *dataTable2EType1GetEntry(int);
 extern short *dataTable2EType0GetEntry(int);
 /* Supplied declaration required: dataTable2EType1Count. */
 /* Supplied declaration required: dataTable2EType0Count. */
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 unsigned int FUN_0033e348(void)
@@ -59,7 +59,7 @@ unsigned int FUN_0033e348(void)
           *(int *)(g_lmapScene + 0xb8) = temp_v2;
         }
         temp_v2 = *(int *)(*(int *)(psVar2 + 0xb8) + 4);
-        FUN_0040ace8(g_handleRegistry,temp_v2);
+        handleRegistryRegisterObject(g_handleRegistry,temp_v2);
         *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
         psVar2 = g_lmapScene;
         psVar2[0xb2] = 0;
@@ -71,7 +71,7 @@ unsigned int FUN_0033e348(void)
         psVar2[0xb7] = 0;
         *(int *)(psVar2 + 0xc2) = DAT_005f1b14;
         temp_v2 = *(int *)(temp_v2 + 4);
-        FUN_0040ace8(g_handleRegistry,temp_v2);
+        handleRegistryRegisterObject(g_handleRegistry,temp_v2);
         *(unsigned int *)(temp_v2 + 4) = *(unsigned int *)(temp_v2 + 4) | 3;
         psVar2 = g_lmapScene;
         psVar2[0xb2] = 0;

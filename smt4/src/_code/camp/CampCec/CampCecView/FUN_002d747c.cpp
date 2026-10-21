@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_0026eda8(...);
-int FUN_0026ee14(...);
+int campCecDisplaySetRecord(...);
 int FUN_0026ef04(unsigned int);
 int saveGetIndexedMapValue(...);
 int FUN_0026f204(unsigned int, unsigned int, unsigned int);
 int FUN_0026f784(void);
 int linkHolderApplyFlag(...);
-int FUN_00297468(unsigned char *, unsigned int *, int);
+int asdLoadFileAsyncSimple(unsigned char *, unsigned int *, int);
 int buttonHelpSetPreset(...);
 int rt_aeabi_memclr(...);
 int memClear(void);
@@ -35,7 +35,7 @@ typedef struct {
 extern unsigned char LAB_001c0fb0; /* 0x1c0fb0 */
 extern int FUN_001c1014(...); /* 0x1c1014 */
 extern unsigned char LAB_001ec9ac; /* 0x1ec9ac */
-extern int FUN_00211580(...); /* 0x211580 */
+extern int campCecViewDrawCallback(...); /* 0x211580 */
 extern unsigned char LAB_002d77ac; /* 0x2d77ac */
 extern unsigned char LAB_002d77c4; /* 0x2d77c4 */
 extern unsigned char LAB_002d77e0; /* 0x2d77e0 */
@@ -47,13 +47,13 @@ extern unsigned int *g_campCecView; /* 0x43db10 */
 
 extern unsigned int FUN_0024aaa0(void);
 /* Supplied declaration required: FUN_0026eda8. */
-/* Supplied declaration required: FUN_0026ee14. */
+/* Supplied declaration required: campCecDisplaySetRecord. */
 /* Supplied declaration required: FUN_0026ef04. */
 /* Supplied declaration required: saveGetIndexedMapValue. */
 /* Supplied declaration required: FUN_0026f204. */
 /* Supplied declaration required: FUN_0026f784. */
 /* Supplied declaration required: linkHolderApplyFlag. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: memClear. */
@@ -118,7 +118,7 @@ void FUN_002d747c(void)
   temp_v7 = 0;
   taskCreateDraw(&LAB_002d7818,0xdf,0);
   temp_v8 = (unsigned char *)*puVar2;
-  temp_v5 = FUN_00211580;
+  temp_v5 = campCecViewDrawCallback;
   temp_v6 = 0;
   temp_v7 = 0;
   taskCreateDraw(&LAB_002d7834,0xe6,0);
@@ -137,7 +137,7 @@ void FUN_002d747c(void)
     }
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 0xc);
-  FUN_00297468(&LAB_002d784c,puVar2 + 0x58,0);
+  asdLoadFileAsyncSimple(&LAB_002d784c,puVar2 + 0x58,0);
   temp_v1 = FUN_0024aaa0();
   puVar2[2] = temp_v1;
   temp_v1 = saveGetIndexedMapValue(puVar2[0x4f]);
@@ -170,7 +170,7 @@ void FUN_002d747c(void)
   temp_v4 = puVar1[2];
   FUN_0026f784();
   if (temp_v4 != 0) {
-    FUN_0026ee14(puVar1[2],&temp_v5);
+    campCecDisplaySetRecord(puVar1[2],&temp_v5);
     FUN_0026eda8(puVar1[2]);
     linkHolderApplyFlag(puVar1[2],0);
     puVar1[0x53] = puVar1[0x4f];

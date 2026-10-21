@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00416168` (_code @ 0x416168, 0x12c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_MaterialTextures.h"
 
 extern "C" {
 
-int FUN_0018f4e4(unsigned int, unsigned int, int, unsigned int, unsigned int);
 int libc_strcmp(int, unsigned int);
 
 /* stack frame of param_2: 6 slot(s), 24 byte(s) */
@@ -17,7 +17,6 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0018f4e4. */
 /* Supplied declaration required: libc_strcmp. */
 
 
@@ -57,10 +56,14 @@ unsigned int FUN_00416168(int param_1,int param_2)
             do {
               temp_v7 = temp_v6 + temp_v5 * 4;
               temp_v3 = *(int *)(temp_v7 + 0x1c);
-              if ((temp_v3 != 0) && (libc_strcmp(temp_v3,*(unsigned int *)(temp_v8 + 0x1c)), temp_v3 == 0)) {
-                temp_v4 = temp_v2;
-                FUN_0018f4e4(temp_v2,*(unsigned int *)(temp_v7 + 0x1c),temp_v8,
-                             *(unsigned int *)(param_1 + 0x7c),*(unsigned int *)(param_1 + 100));
+              if (temp_v3 != 0 &&
+                  libc_strcmp(temp_v3, *(unsigned int *)(temp_v8 + 0x1c)) == 0) {
+                temp_v4 = gfxModelBindTextureByName(
+                    reinterpret_cast<ModelTextureBindings*>(temp_v2),
+                    reinterpret_cast<const char*>(*(unsigned int *)(temp_v7 + 0x1c)),
+                    reinterpret_cast<NamedModelTexture*>(temp_v8),
+                    reinterpret_cast<u8*>(*(unsigned int *)(param_1 + 0x7c)),
+                    reinterpret_cast<const u8*>(*(unsigned int *)(param_1 + 100)));
                 temp_v9 = temp_v9 | temp_v4;
               }
               temp_v5 = temp_v5 + 1;

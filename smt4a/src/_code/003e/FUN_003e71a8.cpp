@@ -9,12 +9,12 @@ int ifTouchRegionRemove(void);
 int asdTMTexTableNodeIsLoaded(int, int);
 int asdTMTexTableReleaseNode(int, int);
 int asdTMTexLoadMainHeap(int, int);
-int FUN_001f4908(int, int, int);
+int slotSetRequest(int, int, int);
 int ifTouchRegionAdd(int, int, int, int);
 int asdTMTexTableFreeEntry(...);
 int FUN_0037ed38(void);
 int ref208SetPair1C(int);
-int FUN_003cbb0c(void);
+int commonBgReleaseOwnedJob(void);
 int soundChannelRequestIfEnabled(int, int, int);
 int soundChannelStopAll(...);
 int FUN_003d54f8(int, int);
@@ -28,14 +28,14 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: asdTMTexTableNodeIsLoaded. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
 extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_0037ed38. */
 /* Supplied declaration required: ref208SetPair1C. */
-/* Supplied declaration required: FUN_003cbb0c. */
+/* Supplied declaration required: commonBgReleaseOwnedJob. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -165,12 +165,12 @@ unsigned int FUN_003e71a8(unsigned int *param_1)
     }
     param_1[8] = 3;
     param_1[0xf] = 300;
-    FUN_001f4908(0,0x2d,0xff);
-    FUN_001f4908(1,0x2d,0xff);
+    slotSetRequest(0,0x2d,0xff);
+    slotSetRequest(1,0x2d,0xff);
   }
   if ((param_1[8] == 3) && (temp_v0 = FUN_0013def0(0), temp_v0 == 3)) {
     ref208SetPair1C(0);
-    FUN_003cbb0c();
+    commonBgReleaseOwnedJob();
     temp_v0 = 1;
     do {
       if (*(char *)((int)param_1 + temp_v0 + 0x44) != '\0') {

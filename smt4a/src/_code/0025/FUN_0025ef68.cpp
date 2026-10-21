@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_002c28dc(float *, int, int, int);
+int collisionTestProjectedSpherePlanes(float *, int, int, int);
 
 /* stack frame of param_3: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -52,7 +52,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_002c28dc. */
+/* Supplied declaration required: collisionTestProjectedSpherePlanes. */
 
 
 unsigned int FUN_0025ef68(float *param_1,float *param_2,int param_3)
@@ -172,7 +172,7 @@ LAB_0025f158:
                    (float)temp_v14 * *(float *)(temp_v1 + 0x14)) - *(float *)(temp_v1 + 0x18);
           temp_v8 = romwright_fabs_4(temp_v9);
           if ((temp_v8 < (float)temp_v12) &&
-             (FUN_002c28dc(&temp_v17,(int)*(char *)(temp_v1 + 4),(int)*(char *)(temp_v1 + 5),temp_v1),
+             (collisionTestProjectedSpherePlanes(&temp_v17,(int)*(char *)(temp_v1 + 4),(int)*(char *)(temp_v1 + 5),temp_v1),
              temp_v5 <= temp_v17)) {
             temp_v10 = (float)temp_v14 - *(float *)(temp_v1 + 0x14) * temp_v9;
             temp_v13 = (float)((unsigned long long)temp_v12 >> 0x20) - *(float *)(temp_v1 + 0xc) * temp_v9;

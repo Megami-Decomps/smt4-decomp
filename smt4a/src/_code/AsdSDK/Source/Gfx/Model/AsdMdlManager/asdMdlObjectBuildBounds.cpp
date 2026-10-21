@@ -20,7 +20,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: asdMemoryAllocTracked. */
-extern int FUN_0019c49c(int, int, int);
+extern int resourceGetRelativeElement(int, int, int);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2A87B4. */
 
 
@@ -106,7 +106,7 @@ unsigned int asdMdlObjectBuildBounds(int param_1,int param_2)
       temp_v9 = temp_v8;
       if (0 < temp_v4) {
         do {
-          temp_v2 = FUN_0019c49c(param_1,temp_v6,temp_v3);
+          temp_v2 = resourceGetRelativeElement(param_1,temp_v6,temp_v3);
           temp_v5 = *(int *)(temp_v2 + 0x1c);
           if (temp_v5 != 0) {
             temp_v5 = temp_v2 + 0x1c + temp_v5;

@@ -15,7 +15,7 @@ int FUN_0018408c(unsigned char *, int);
 int FUN_001879d0(int);
 int jobGetScalarValue(void);
 int FUN_002f6f44(...);
-int FUN_0037ce80(unsigned int, int, int, int);
+int partyDrawCategorySelectionIcon(unsigned int, int, int, int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -47,7 +47,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002f6f44. */
-/* Supplied declaration required: FUN_0037ce80. */
+/* Supplied declaration required: partyDrawCategorySelectionIcon. */
 
 
 void FUN_002f6048(int param_1)
@@ -120,7 +120,7 @@ void FUN_002f6048(int param_1)
   temp_v6 = temp_v6 + *(short *)(temp_v2 + 10);
   efctSetSpeed();
   FUN_001835b4(2,0x1e,0x51,temp_v15,temp_v6,0xa6);
-  FUN_0037ce80(temp_v13,temp_v15 + 1,temp_v6 + 1,0xa6);
+  partyDrawCategorySelectionIcon(temp_v13,temp_v15 + 1,temp_v6 + 1,0xa6);
   temp_v6 = vec2GetXInt(temp_v14);
   temp_v1 = *(short *)(temp_v2 + 8);
   temp_v7 = temp_v10 + temp_v8;

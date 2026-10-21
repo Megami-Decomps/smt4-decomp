@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001b57a8(unsigned int [3], int);
+int resultPairInitialize(unsigned int [3], int);
 int FUN_001b5acc(...);
 
 extern int FUN_001585d4(int);
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: FUN_001b5acc. */
 
 
@@ -29,7 +29,7 @@ void FUN_00148030(int param_1)
   puVar2 = (unsigned int *)FUN_001b5acc(temp_v0 + 0x318);
   puVar2[2] = 0;
   puVar2[3] = 0;
-  FUN_001b57a8(temp_v3,0);
+  resultPairInitialize(temp_v3,0);
   temp_v1 = puVar3[1];
   *puVar2 = *puVar3;
   puVar2[1] = temp_v1;

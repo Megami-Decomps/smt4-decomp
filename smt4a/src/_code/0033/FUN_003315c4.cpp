@@ -23,7 +23,7 @@ extern int jobIsValid(unsigned int);
 extern int lmapMainIsRunning(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: bgmFadeOut. */
-extern int FUN_0023b880(void);
+extern int uniteSoundRequest(void);
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: campButtonHelpRelease. */
@@ -46,7 +46,7 @@ void FUN_003315c4(void)
       }
     }
     else {
-      temp_v1 = FUN_0023b880();
+      temp_v1 = uniteSoundRequest();
       if (temp_v1 == 0) {
         temp_v1 = mapMainIsBusy();
         if ((temp_v1 != 0) || (temp_v1 = lmapMainIsRunning(), temp_v1 != 0)) {

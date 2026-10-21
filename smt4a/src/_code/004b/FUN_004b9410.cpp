@@ -16,7 +16,7 @@ extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_001d1438. */
-extern int FUN_002802c8(void);
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: mapPlaceSet. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: FUN_004a0bac. */
@@ -33,7 +33,7 @@ void FUN_004b9410(int param_1)
   unsigned int temp_v2;
   unsigned int temp_v3;
   
-  if (((*(unsigned int *)(param_1 + 0x20) & 0x100) != 0) || (temp_v1 = FUN_002802c8(), temp_v1 == 0)) {
+  if (((*(unsigned int *)(param_1 + 0x20) & 0x100) != 0) || (temp_v1 = screenFadeIsBusy(), temp_v1 == 0)) {
     temp_v2 = *(unsigned int *)(param_1 + 0x20);
     if ((temp_v2 & 0x400000) == 0) {
       if (((((temp_v2 & 0x200000) == 0 && (temp_v2 & 0x40000) == 0) &&

@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00227ab4(int *, int);
+int btlEntryValuesCopy(int *, int);
 int FUN_0023e52c(int *, int, int, int);
-int FUN_00246cf0(int, unsigned int);
+int bgmSwitchCurrent(int, unsigned int);
 int FUN_002569ac(int *, unsigned int, unsigned int *, unsigned int, unsigned int);
 int FUN_0027dd9c(unsigned int);
 int FUN_0027e6f4(int, int);
@@ -18,7 +18,7 @@ int FUN_003cee94(int *, int);
 int FUN_003d9d74(unsigned int);
 int FUN_003da890(unsigned int);
 int FUN_003db378(unsigned int);
-int FUN_003db5bc(unsigned int);
+int entryTableInvalidate(unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -28,10 +28,10 @@ typedef struct {
 extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int DAT_00435d18; /* 0x435d18 */
 
-/* Supplied declaration required: FUN_00227ab4. */
+/* Supplied declaration required: btlEntryValuesCopy. */
 extern int FUN_00227ecc(unsigned int, unsigned char);
 /* Supplied declaration required: FUN_0023e52c. */
-/* Supplied declaration required: FUN_00246cf0. */
+/* Supplied declaration required: bgmSwitchCurrent. */
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0027dd9c. */
 /* Supplied declaration required: FUN_0027e6f4. */
@@ -43,7 +43,7 @@ extern int FUN_00227ecc(unsigned int, unsigned char);
 /* Supplied declaration required: FUN_003d9d74. */
 /* Supplied declaration required: FUN_003da890. */
 /* Supplied declaration required: FUN_003db378. */
-/* Supplied declaration required: FUN_003db5bc. */
+/* Supplied declaration required: entryTableInvalidate. */
 
 
 void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -78,7 +78,7 @@ void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int par
   } while (temp_v4 != 0);
   *(unsigned char *)(param_2 + 0x59c) = 0;
   FUN_002569ac(param_1,*(unsigned int *)(*param_1 + 0x84),puVar7,0xffffffff,param_4);
-  FUN_00227ab4(param_1,param_2);
+  btlEntryValuesCopy(param_1,param_2);
   *(unsigned int *)(param_2 + 0x594) = 0;
   temp_v2 = *(unsigned int *)(*param_1 + 0x44a0);
   if ((((temp_v2 & 4) == 0 && (temp_v2 & 0x40) == 0) && (temp_v2 & 0x100) == 0) &&
@@ -122,7 +122,7 @@ void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int par
     }
   }
   entryInvalidateStateTable(*param_1);
-  FUN_003db5bc(DAT_00435d18);
+  entryTableInvalidate(DAT_00435d18);
   FUN_003da890(DAT_00435d18);
   if (*(int *)(param_2 + 0x594) == 9) {
     FUN_003d9d74(DAT_00435d18);
@@ -151,7 +151,7 @@ void FUN_003d3944(int *param_1,int param_2,unsigned int param_3,unsigned int par
   case 9:
   case 10:
   case 0xb:
-    FUN_00246cf0(*param_1,*(unsigned int *)(*param_1 + 0x49dc));
+    bgmSwitchCurrent(*param_1,*(unsigned int *)(*param_1 + 0x49dc));
     return;
   }
 }

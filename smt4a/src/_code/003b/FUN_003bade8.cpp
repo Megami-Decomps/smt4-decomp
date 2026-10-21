@@ -1,36 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bade8` (_code @ 0x3bade8, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: separate scratch globals prevent retail's shared base; payload assignment calls __aeabi_memcpy4 instead of specialized rt_memcpy_w144. */
+#include "shard/W6_W6Match2_EffectEditor.h"
+#include "shard/W5_W5Match2_LinkedItems.h"
 
 extern "C" {
+extern s32 DAT_0059e9b4;
+extern u32 DAT_0059e69c;
+extern EffectSelectionTemplate DAT_0059e9a8;
+LinkedItem* linkedFindItemByIndex(LinkedItems* list, s32 index);
+LinkedItem* FUN_0037658c(LinkedItems* list, LinkedItem* after);
 
-int rt_memcpy_w144(unsigned int, unsigned int);
-
-extern int DAT_0059dbec; /* 0x59dbec */
-extern unsigned int DAT_0059dbf4; /* 0x59dbf4 */
-extern unsigned char *DAT_0059dc18; /* 0x59dc18 */
-extern unsigned int DAT_0059e69c; /* 0x59e69c */
-extern unsigned char DAT_0059e9a8; /* 0x59e9a8 */
-extern int DAT_0059e9b4; /* 0x59e9b4 */
-
-/* Supplied declaration required: rt_memcpy_w144. */
-extern unsigned int linkedFindItemByIndex(unsigned int, int);
-extern unsigned int FUN_0037658c(unsigned int, unsigned int);
-
-
-unsigned int FUN_003bade8(void)
-
+// Duplicate the selected effect part and select the scratch template.
+u32 FUN_003bade8(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = linkedFindItemByIndex(DAT_0059dbf4,DAT_0059dbec + DAT_0059e9b4);
-  temp_v1 = FUN_0037658c(DAT_0059dbf4,temp_v0);
-  DAT_0059e69c = 0;
-  rt_memcpy_w144(temp_v1,temp_v0);
-  DAT_0059dc18 = &DAT_0059e9a8;
-  return 0;
+    LinkedItem* selected = linkedFindItemByIndex(
+        static_cast<LinkedItems*>(g_effectEditor.selection.list),
+        g_effectEditor.selection.index + DAT_0059e9b4);
+    LinkedItem* copy = FUN_0037658c(
+        static_cast<LinkedItems*>(g_effectEditor.selection.list), selected);
+    DAT_0059e69c = 0;
+    copy->data = selected->data;
+    g_effectEditor.selection.object = &DAT_0059e9a8;
+    return 0;
 }
-
-} /* extern "C" */
+}

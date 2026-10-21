@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern unsigned char DAT_0043e313; /* 0x43e313 */
 extern unsigned char *DAT_0043e314; /* 0x43e314 */
 extern unsigned int DAT_0043e31c; /* 0x43e31c */
 
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: asdMemoryAlloc. */
 
 
@@ -43,9 +43,9 @@ void FUN_00247af8(unsigned char param_1,unsigned int param_2,unsigned int param_
   *(unsigned int *)(puVar1 + 0x58) = 0;
   *(unsigned int *)(puVar1 + 0x50) = 0;
   *(unsigned int *)(puVar1 + 0x54) = 0;
-  FUN_00297468(&DAT_00404290,puVar1 + 0x50,0);
+  asdLoadFileAsyncSimple(&DAT_00404290,puVar1 + 0x50,0);
   if (*(int *)(puVar1 + 0x54) == 0) {
-    FUN_00297468("saveLoadER/saveLoadER.mbm",puVar1 + 0x54,0);
+    asdLoadFileAsyncSimple("saveLoadER/saveLoadER.mbm",puVar1 + 0x54,0);
   }
   DAT_0043e31c = 0xffffffff;
   DAT_0043e312 = 0;

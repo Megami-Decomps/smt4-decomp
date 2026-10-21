@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int recordValidatePair(int, int, unsigned int);
 int FUN_004395fc(unsigned char *, char [16], int, int, unsigned int, unsigned int);
 
@@ -17,8 +17,8 @@ typedef struct {
 extern char s_sys_ECardStatus_005892a4[16]; /* 0x5892a4 */
 
 extern unsigned char libc_toupper(void);
-/* Supplied declaration required: FUN_001b57a8. */
-extern int FUN_001d25ec(unsigned int *);
+/* Supplied declaration required: resultPairInitialize. */
+extern int legacyResourceIdRemap(unsigned int *);
 extern int FUN_004283cc(int);
 /* Supplied declaration required: recordValidatePair. */
 extern int FUN_00429a1c(int);
@@ -50,9 +50,9 @@ void FUN_00429c08(unsigned int *param_1,int param_2,int param_3)
     puVar3 = temp_v4;
     FUN_004395fc(puVar3,s_sys_ECardStatus_005892a4,3,param_2 + 4,*(unsigned int *)(param_2 + 8),
                  *(unsigned int *)(param_2 + 0xc));
-    FUN_001b57a8(&temp_v3,puVar3);
+    resultPairInitialize(&temp_v3,puVar3);
     recordValidatePair(param_2,temp_v3,uStack_44);
-    temp_v1 = FUN_001d25ec((unsigned int *)&temp_v3);
+    temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v3);
     if (temp_v1 < 0) {
       *param_1 = temp_v3;
       param_1[1] = uStack_44;
@@ -60,11 +60,11 @@ void FUN_00429c08(unsigned int *param_1,int param_2,int param_3)
     }
     temp_v1 = FUN_00429a1c(param_2);
     if (-1 < temp_v1) {
-      FUN_001b57a8(param_1,0);
+      resultPairInitialize(param_1,0);
       return;
     }
   }
-  FUN_001b57a8(param_1,temp_v1);
+  resultPairInitialize(param_1,temp_v1);
   return;
 }
 

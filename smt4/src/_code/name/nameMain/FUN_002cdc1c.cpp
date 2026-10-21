@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001d3848(unsigned int *, int);
-int FUN_0028dc98(...);
+int nameMainCreateJobs(unsigned int *, int);
+int scrCommMessageSetMode(...);
 int FUN_00295660(int, unsigned int);
 int buttonHelpSetPreset(int);
 int asdMemFree(void);
@@ -20,10 +20,10 @@ extern signed char g_name; /* 0x44d180 */
 extern signed char DAT_0044d181; /* 0x44d181 */
 extern unsigned int *DAT_0044d184; /* 0x44d184 */
 
-/* Supplied declaration required: FUN_001d3848. */
+/* Supplied declaration required: nameMainCreateJobs. */
 extern unsigned int gameDataGetSecondName(void);
 extern unsigned int gameDataGetPlayerName(void);
-/* Supplied declaration required: FUN_0028dc98. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: FUN_00295660. */
 extern unsigned int scrGetArg(unsigned int);
 extern int jobFind(unsigned int);
@@ -48,12 +48,12 @@ unsigned int FUN_002cdc1c(void)
     DAT_0044d181 = '\x01';
     temp_v2 = 2;
   }
-  FUN_0028dc98(1);
+  scrCommMessageSetMode(1);
   if (g_name == '\0') {
     if ((temp_v2 >= 2) && (temp_v2 == 2)) {
       FUN_0033f7f4();
     }
-    FUN_001d3848(&temp_v2,4);
+    nameMainCreateJobs(&temp_v2,4);
     g_name = '\x01';
   }
   puVar1 = DAT_0044d184;
@@ -78,7 +78,7 @@ unsigned int FUN_002cdc1c(void)
     FUN_00295660(0x33,temp_v1);
   }
   g_name = 0;
-  FUN_0028dc98(0xffffffff);
+  scrCommMessageSetMode(0xffffffff);
   if (DAT_0044d181 != '\0') {
     DAT_0044d181 = '\0';
     buttonHelpSetPreset(0x90);

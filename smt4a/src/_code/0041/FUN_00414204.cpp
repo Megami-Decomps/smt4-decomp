@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00414204` (_code @ 0x414204, 0x210 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_Obj55a5a8.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int operatorNew(int);
 int onlineStringDestroy(unsigned char [8]);
 int FUN_004311c0(int);
 int FUN_00432b10(unsigned char [5]);
-int _ZN9Obj55a5a8D1Ev(unsigned char [5]);
 int FUN_00522a48(unsigned int **, unsigned int);
 int FUN_00522bf4(unsigned char [44], unsigned int **);
 
@@ -49,7 +49,6 @@ extern unsigned int FUN_002ea100(unsigned char *, unsigned int *);
 extern unsigned int FUN_002fafd8(int, unsigned int);
 /* Supplied declaration required: FUN_004311c0. */
 /* Supplied declaration required: FUN_00432b10. */
-/* Supplied declaration required: _ZN9Obj55a5a8D1Ev. */
 /* Supplied declaration required: FUN_00522a48. */
 /* Supplied declaration required: FUN_00522bf4. */
 
@@ -135,7 +134,7 @@ void FUN_00414204(int param_1)
     (**(romwright_code **)*puVar5)(puVar5);
   }
   asdOperatorDeleteArray(temp_v7);
-  _ZN9Obj55a5a8D1Ev(temp_v3);
+  reinterpret_cast<Obj55a5a8*>(temp_v3)->Obj55a5a8::~Obj55a5a8();
   asdOperatorDeleteArray(puVar2);
   return;
 }

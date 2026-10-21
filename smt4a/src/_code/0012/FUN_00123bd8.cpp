@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e7908. */
@@ -45,7 +45,7 @@ void FUN_00123bd8(unsigned int param_1,fn_00123bd8_arg1 *param_2)
   unsigned int temp_v3 [2];
   
   puVar3 = (unsigned int *)&temp_v1;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v2,temp_v0 + 0x58);
   if ((((param_2->field_0x98 != (void *)0x0) &&
        (*(char *)((int)param_2->field_0x98 + 0x22) != '\x05')) ||

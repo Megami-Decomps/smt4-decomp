@@ -1,41 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045f410` (_code @ 0x45f410, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: queue/owner/option saved registers differ, as do initial command stores; direct owner-handle assignment also omits retail's MOV R1,R0. */
+#include "common.h"
+
+struct CommandOwner;
+struct CommandOwnerVtable {
+    u8 unk00[0x20];
+    u32 (*getHandle)(CommandOwner* owner);
+};
+struct CommandOwner {
+    const CommandOwnerVtable* vtable;
+};
+struct OwnerCommand {
+    u32 next;
+    u8 kind;
+    u8 unk05[7];
+    u32 token;
+    u32 owner;
+    u8 unk14;
+    u8 option;
+};
+struct OwnerCommandQueue {
+    u8 unk00[0x184];
+    u32 token;
+};
 
 extern "C" {
+OwnerCommandQueue* objectCommandQueueGet(void);
+OwnerCommand* objectCommandReserveWords(OwnerCommandQueue* queue, u32 kind);
+void listAppendNode(OwnerCommandQueue* queue, OwnerCommand* command);
 
-int listAppendNode(int, int);
-int FUN_0019102c(int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int FUN_00175678(void);
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
-
-
-void FUN_0045f410(int *param_1,unsigned char param_2)
-
+void FUN_0045f410(CommandOwner* owner, u8 option)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_00175678();
-  temp_v1 = temp_v0;
-  FUN_0019102c(temp_v0,6);
-  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
-  *(unsigned char *)(temp_v1 + 4) = 10;
-  temp_v2 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  *(unsigned int *)(temp_v1 + 0x10) = temp_v2;
-  *(unsigned char *)(temp_v1 + 0x15) = param_2;
-  listAppendNode(temp_v0,temp_v1);
-  return;
+    OwnerCommandQueue* queue = objectCommandQueueGet();
+    OwnerCommand* command = objectCommandReserveWords(queue, 6);
+    command->token = queue->token;
+    command->kind = 10;
+    command->owner = owner->vtable->getHandle(owner);
+    command->option = option;
+    listAppendNode(queue, command);
 }
-
-} /* extern "C" */
+}

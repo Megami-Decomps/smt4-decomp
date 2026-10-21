@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b1fc4(...);
+int quadSetOrderedVectors(...);
 int FUN_002bf288(...);
 int FUN_002bf380(...);
 int efctSetSpeed(void);
@@ -54,7 +54,7 @@ typedef struct {
 extern int DAT_0043dc24; /* 0x43dc24 */
 extern int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_002b1fc4. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -146,7 +146,7 @@ int FUN_001ecd68(void)
       temp_v12 = 0x3f800000;
       temp_v13 = 0x3f800000;
       temp_v14 = 0x3f800000;
-      FUN_002b1fc4(&temp_v11,&temp_v15,&temp_v19,&temp_v7,0,1);
+      quadSetOrderedVectors(&temp_v11,&temp_v15,&temp_v19,&temp_v7,0,1);
       FUN_002bf288(2,0x11,0,0,0,1);
       temp_v0 = g_titleScene;
       temp_v1 = packNibblesAndByte(6,1,0);
@@ -176,7 +176,7 @@ int FUN_001ecd68(void)
         temp_v36 = temp_v23;
         temp_v37 = temp_v23;
         temp_v38 = temp_v23;
-        FUN_002b1fc4(&temp_v35,&temp_v23,&temp_v27,&temp_v31,0,1);
+        quadSetOrderedVectors(&temp_v35,&temp_v23,&temp_v27,&temp_v31,0,1);
         FUN_002bf288(2,0x11,3,0,(int)*(float *)(temp_v4 + temp_v0 * 0x14 + 0x7c),1);
         temp_v5 = (unsigned int)temp_v6;
         temp_v0 = temp_v0 + 1;
@@ -198,7 +198,7 @@ int FUN_001ecd68(void)
       temp_v20 = temp_v5;
       temp_v21 = temp_v5;
       temp_v22 = temp_v5;
-      FUN_002b1fc4(&temp_v7,&temp_v19,&temp_v15,&temp_v11,0,1);
+      quadSetOrderedVectors(&temp_v7,&temp_v19,&temp_v15,&temp_v11,0,1);
       temp_v0 = g_titleScene;
       temp_v1 = packNibblesAndByte(6,1,0);
       piVar6 = (int *)(temp_v0 + 0x12ac);

@@ -1,30 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00418870` (_code @ 0x418870, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the two independent parameter-save MOVs are reversed; all remaining default-flag instructions match. */
+#include "shard/Shard0041.h"
 
 extern "C" {
+PartyBlockB* gameFlagBlockGet(void);
 
-extern int gameFlagBlockGet(void);
-
-
-void FUN_00418870(int param_1,unsigned int param_2)
-
+void FUN_00418870(s32 index, u32 value)
 {
-  int temp_v0;
-  unsigned char *pbVar2;
-  
-  temp_v0 = gameFlagBlockGet();
-  temp_v0 = temp_v0 + param_1 * 4;
-  pbVar2 = (unsigned char *)(temp_v0 + 0x2a0);
-  if (*(unsigned char *)(temp_v0 + 0x2a1) != param_2 && param_2 != 0) {
-    *pbVar2 = *pbVar2 | 0x40;
-  }
-  *(char *)(temp_v0 + 0x2a1) = (char)param_2;
-  if ((param_2 & 0xff) < 2) {
-    *(unsigned char *)(temp_v0 + 0x2a1) = 0;
-    *pbVar2 = *pbVar2 & 0xbf;
-  }
-  return;
+    PartyEntryB* entry = &gameFlagBlockGet()->e[index];
+    if (entry->byte1 != value && value != 0) {
+        entry->flags |= 0x40;
+    }
+    entry->byte1 = static_cast<u8>(value);
+    if (entry->byte1 < 2) {
+        entry->flags &= ~0x40;
+        entry->byte1 = 0;
+    }
 }
-
-} /* extern "C" */
+}

@@ -8,7 +8,7 @@ void nn_os_CriticalSection_Enter(void *cs);
 void nn_os_CriticalSection_Leave(void *cs);
 int FUN_001b207c(u8 *);
 int FUN_00191330(void);
-int FUN_00175678(void);
+int objectCommandQueueGet(void);
 int FUN_001b1f80(void);
 int FUN_00191548(void);
 int nw_snd_internal_DriverCommandManager_ProcessCommand(void);
@@ -27,7 +27,7 @@ void FUN_001a5fb8(SoundThread *thread)
     SoundThreadListCallVfunc08(&thread->listA);
     SoundThreadListCallVfunc0C(&thread->listB);
     FUN_001b207c(&DAT_00646b38);
-    FUN_00175678();
+    objectCommandQueueGet();
     nw_snd_internal_DriverCommandManager_ProcessCommand();
     FUN_00191330();
     nw_snd_internal_DriverCommandManager_ProcessCommand();

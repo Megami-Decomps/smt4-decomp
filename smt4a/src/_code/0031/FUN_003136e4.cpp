@@ -8,7 +8,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_0027376c(int);
 int FUN_00294774(int);
-int FUN_00353484(int, unsigned char [72]);
+int eplSlotApplyParameters(int, unsigned char [72]);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [72], int *);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
@@ -34,7 +34,7 @@ extern signed char DAT_005f199f; /* 0x5f199f */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_0027376c. */
 /* Supplied declaration required: FUN_00294774. */
-/* Supplied declaration required: FUN_00353484. */
+/* Supplied declaration required: eplSlotApplyParameters. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 
 
@@ -79,7 +79,7 @@ void FUN_003136e4(void)
       temp_v11 = 0;
       temp_v8 = 0x80000000;
       nn_math_ARMv6_MTX34CopyAsm(temp_v12,&temp_v0);
-      FUN_00353484(0,temp_v12);
+      eplSlotApplyParameters(0,temp_v12);
     }
   }
   else {
@@ -96,7 +96,7 @@ void FUN_003136e4(void)
     temp_v8 = 0x80000000;
     temp_v9 = temp_v4;
     nn_math_ARMv6_MTX34CopyAsm(temp_v12,&temp_v0);
-    FUN_00353484(0,temp_v12);
+    eplSlotApplyParameters(0,temp_v12);
   }
   FUN_00294774(0);
   return;

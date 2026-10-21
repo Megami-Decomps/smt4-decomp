@@ -63,7 +63,7 @@ extern int uiSearchPrimary(int);
 extern int FUN_003e4230(unsigned int);
 extern unsigned int dataRecordGetValue(unsigned int);
 extern int gameDataFlagTestBit(unsigned int);
-extern int FUN_003e4718(unsigned int);
+extern int gameDataAreaBitTest(unsigned int);
 
 
 void FUN_003db56c(int param_1)
@@ -162,7 +162,7 @@ void FUN_003db56c(int param_1)
         VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00162790(2,temp_v6,temp_v3,(int)*(short *)(temp_v4 + 10));
-        temp_v4 = FUN_003e4718(temp_v7);
+        temp_v4 = gameDataAreaBitTest(temp_v7);
         if (temp_v4 != 0) {
           temp_v4 = FUN_001834a4(0x14,0x58e);
           FUN_00164b5c(2,0x14,7,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
@@ -258,7 +258,7 @@ void FUN_003db56c(int param_1)
     VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_00162790(3,temp_v6,temp_v3,(int)*(short *)(temp_v5 + 10));
-    temp_v5 = FUN_003e4718(temp_v7);
+    temp_v5 = gameDataAreaBitTest(temp_v7);
     if (temp_v5 != 0) {
       temp_v5 = FUN_001834a4(0x14,0x597);
       FUN_00164b5c(2,0x14,7,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,

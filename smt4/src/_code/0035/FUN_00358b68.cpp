@@ -8,7 +8,7 @@ int FUN_00238f4c(int, int);
 int FUN_002399ec(unsigned int);
 int FUN_0024ee68(int);
 
-extern signed char DAT_004656d0; /* 0x4656d0 */
+extern signed char g_asdCecModuleFlags; /* 0x4656d0 */
 extern signed char DAT_004656d1; /* 0x4656d1 */
 extern signed char DAT_004656d3; /* 0x4656d3 */
 extern signed char DAT_004656d4; /* 0x4656d4 */
@@ -26,7 +26,7 @@ unsigned int FUN_00358b68(int param_1)
 {
 /* irregular: 3 native warning(s); review required */
   *(unsigned int *)(param_1 + 4) = 0;
-  if (DAT_004656d0 != '\0') {
+  if (g_asdCecModuleFlags != '\0') {
     FUN_00238f4c(param_1,0);
   }
   nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62b4);

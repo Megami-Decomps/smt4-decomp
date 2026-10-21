@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int FUN_002e5b68(...); /* 0x2e5b68 */
+extern int jobDestroyGlobal(...); /* 0x2e5b68 */
 extern unsigned char LAB_002e5ba0; /* 0x2e5ba0 */
 extern unsigned char LAB_00330a58; /* 0x330a58 */
 extern unsigned char LAB_00330a60; /* 0x330a60 */
@@ -48,7 +48,7 @@ void FUN_00231464(void)
   }
   pcVar2 = "GAME_OVER_BASE PROC";
   DAT_0057f678 = puVar1;
-  asdProcessCreateSimple("GAME_OVER_BASE PROC",4,0,0,&LAB_002e5ba0,FUN_002e5b68,0);
+  asdProcessCreateSimple("GAME_OVER_BASE PROC",4,0,0,&LAB_002e5ba0,jobDestroyGlobal,0);
   *puVar1 = (unsigned int)pcVar2;
   taskCreateDraw("GAME_OVER UL",0x7e,0,0,&LAB_00330a60,0,0,pcVar2);
   taskCreateDraw("GAME_OVER UR",0xda,0,0,&LAB_00330a60,0,0,*puVar1);

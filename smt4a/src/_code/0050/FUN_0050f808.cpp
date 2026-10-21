@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050f808` (_code @ 0x50f808, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: original initializer/class metadata is missing; retail retains unused literal 0x61a5fc at0x54 and a removed registration-call NOP at0x24 with entry/FUN_0046bc78 arguments. No matching class/vtable declaration for DAT_00536c7c exists in headers. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -7,7 +7,7 @@ extern "C" {
 int scrSetResult(int);
 int FUN_003eaf20(void);
 
-extern unsigned int DAT_00570288; /* 0x570288 */
+extern unsigned int g_btlCandidateMasks; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_00570290; /* 0x570290 */
 extern unsigned int DAT_00570294; /* 0x570294 */
@@ -41,7 +41,7 @@ unsigned int FUN_0038c45c(void)
     temp_v1 = *puVar5;
     temp_v2 = puVar5[1];
     if ((((DAT_005702a4 & temp_v2) == 0 && (DAT_005702a0 & temp_v1) == 0) &&
-        ((temp_v2 & DAT_0057028c) != 0 || (temp_v1 & DAT_00570288) != 0)) &&
+        ((temp_v2 & DAT_0057028c) != 0 || (temp_v1 & g_btlCandidateMasks) != 0)) &&
        ((DAT_005702b0 & temp_v1) == 0 && (DAT_005702b4 & temp_v2) == 0)) {
       if (!((temp_v2 & DAT_00570294) == 0 && (temp_v1 & DAT_00570290) == 0)) {
         if ((int)puVar5[0x97] <= (int)*(short *)(puVar5[0xfe] + 0x1c)) {

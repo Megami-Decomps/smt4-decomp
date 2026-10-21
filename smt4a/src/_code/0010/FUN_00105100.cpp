@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00105100` (_code @ 0x105100, 0xf0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match2_ReferenceList.h"
 
 extern "C" {
 
@@ -8,7 +9,7 @@ int FUN_001047fc(unsigned int *);
 int FUN_0010cf68(int);
 int FUN_00120d42(void);
 int FUN_0012df0c(unsigned char [8], int *, int *, int *);
-int FUN_00132b14(void);
+ReferenceList* FUN_00132b14(ReferenceList*);
 int asdOperatorDeleteArray(...);
 int FUN_002e6e34(unsigned char [12], unsigned int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
@@ -36,7 +37,6 @@ extern unsigned char DAT_00558658; /* 0x558658 */
 extern int FUN_0011c900(int);
 /* Supplied declaration required: FUN_00120d42. */
 /* Supplied declaration required: FUN_0012df0c. */
-/* Supplied declaration required: FUN_00132b14. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
@@ -100,7 +100,7 @@ void FUN_00105100(unsigned int *param_1)
   FUN_002eb638(temp_v1);
   temp_v2 = FUN_0011c900(temp_v1 - 0x10);
   temp_v2 = temp_v2 - 0x2c;
-  FUN_00132b14();
+  temp_v2 = reinterpret_cast<int>(FUN_00132b14(reinterpret_cast<ReferenceList*>(temp_v2)));
   piVar5 = (int *)(temp_v2 - 0x1c);
   temp_v1 = *(int *)(temp_v2 - 0xc);
   if (temp_v1 != 0) {

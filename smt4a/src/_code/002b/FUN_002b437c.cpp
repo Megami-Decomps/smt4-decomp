@@ -8,7 +8,7 @@ int FUN_0018a924(...);
 int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int FUN_001d3e14(...);
-int FUN_001d3e54(...);
+int mtx44TransformPosition(...);
 int refCountIncrement(...);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
@@ -126,7 +126,7 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001d3e14. */
-/* Supplied declaration required: FUN_001d3e54. */
+/* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
@@ -418,7 +418,7 @@ void FUN_002b437c(int param_1)
   pfVar6 = &temp_v42;
   temp_v2 = 0;
   do {
-    FUN_001d3e54(puVar5,temp_v54,pfVar6);
+    mtx44TransformPosition(puVar5,temp_v54,pfVar6);
     temp_v2 = temp_v2 + 1;
     puVar5 = puVar5 + 4;
     pfVar6 = pfVar6 + 3;

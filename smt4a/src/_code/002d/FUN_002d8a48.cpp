@@ -1,30 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d8a48` (_code @ 0x2d8a48, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: global pointer and loop-counter initialization are scheduled differently from retail. */
+#include "shard/Shard0036.h"
 
-extern "C" {
+extern "C" RecHolder *g_mapIf;
 
-extern int g_mapIf; /* 0x58103c */
-
-
-void FUN_002d8a48(void)
-
+// Move active map-interface entries in either selected category to state six.
+extern "C" void FUN_002d8a48(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = g_mapIf;
-  temp_v1 = 0;
-  do {
-    temp_v2 = temp_v0 + temp_v1 * 0x194;
-    if ((*(char *)(temp_v2 + 0x1dc) != '\0') &&
-       (*(int *)(temp_v2 + 0x1f0) == 0x25 || *(int *)(temp_v2 + 0x1f0) == 0x28)) {
-      *(unsigned int *)(temp_v2 + 0x1e0) = 6;
+    RecHolder *mapInterface = g_mapIf;
+    for (s32 i = 0; i < 128; ++i) {
+        Rec194 *entry = &mapInterface->recs[i];
+        if (entry->active && (entry->display.category == 0x25 ||
+                              entry->display.category == 0x28))
+            entry->state = 6;
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x80);
-  return;
 }
-
-} /* extern "C" */

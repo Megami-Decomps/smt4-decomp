@@ -12,10 +12,10 @@ int effEditorNodeChainApply(unsigned int *);
 int FUN_0024dd80(int);
 int FUN_0024dd90(unsigned int *);
 int effBlockCreateFromBlock(void);
-int FUN_00250200(void);
+int effectEditorApplyHandlerState(void);
 int effBlockSetBlobB(unsigned int, unsigned int [2], int);
 int FUN_002629a8(...);
-int FUN_002629f0(...);
+int registrationEntryInsert(...);
 int FUN_002a3d58(...);
 int textFormatBuffer(int, unsigned char *, unsigned int);
 int libc_strcpy(int, unsigned int);
@@ -79,17 +79,17 @@ extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
 /* Supplied declaration required: effBlockCreateFromBlock. */
-/* Supplied declaration required: FUN_00250200. */
+/* Supplied declaration required: effectEditorApplyHandlerState. */
 /* Supplied declaration required: effBlockSetBlobB. */
 /* Supplied declaration required: FUN_002629a8. */
-/* Supplied declaration required: FUN_002629f0. */
+/* Supplied declaration required: registrationEntryInsert. */
 /* Supplied declaration required: FUN_002a3d58. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
-extern int FUN_002c7a54(unsigned int, unsigned int);
+extern int effPartAppend(unsigned int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -210,7 +210,7 @@ LAB_002424b8:
     DAT_0044eae0 = 0;
     DAT_0044eae4 = 0;
     DAT_0044eae8 = 0;
-    temp_v6 = FUN_002c7a54(DAT_0044ea94,temp_v1);
+    temp_v6 = effPartAppend(DAT_0044ea94,temp_v1);
     DAT_0044eaa4 = temp_v6;
     libc_strcpy(temp_v6 + 0x9c,*(unsigned int *)*piVar3);
     *(int *)(temp_v6 + 0x40) = piVar3[3];
@@ -226,7 +226,7 @@ LAB_002424b8:
     }
     temp_v2 = DAT_0044ea9c;
     effBlockCreateFromBlock();
-    FUN_00250200();
+    effectEditorApplyHandlerState();
     DAT_0044eab8 = piVar3[1];
     DAT_0044ea98 = temp_v2;
     temp_v1 = effEditorNodeListCount(DAT_0044ea94);
@@ -262,7 +262,7 @@ LAB_002424b8:
       param_2 = param_2 + temp_v6 * 0x1c;
       if (*(int *)(param_2 + 8) != 0) {
         if (DAT_0044ea90 != 0) {
-          FUN_002629f0(DAT_0044ea90,3);
+          registrationEntryInsert(DAT_0044ea90,3);
           DAT_0044ea90 = 0;
         }
         FUN_002a3d58(&DAT_004d8ca0);

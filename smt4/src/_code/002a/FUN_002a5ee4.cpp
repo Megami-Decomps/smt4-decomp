@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014ed4c(void);
+int optionalWorkGetValue(void);
 int FUN_00151b98(unsigned int, unsigned char [132], unsigned char [128], int, unsigned int, unsigned char *, int *, int, int);
 int libc_strcat(...);
 int libc_strcpy(...);
@@ -21,7 +21,7 @@ extern unsigned char LAB_002a609c; /* 0x2a609c */
 extern unsigned char LAB_002a60a4; /* 0x2a60a4 */
 extern unsigned int g_aocDisplay; /* 0x433130 */
 
-/* Supplied declaration required: FUN_0014ed4c. */
+/* Supplied declaration required: optionalWorkGetValue. */
 /* Supplied declaration required: FUN_00151b98. */
 extern int FUN_002a6e7c(unsigned int, int, unsigned int, unsigned char *);
 extern int FUN_002a6f48(unsigned int);
@@ -62,7 +62,7 @@ int * FUN_002a5ee4(unsigned int param_1,unsigned int param_2,unsigned int param_
     return (int *)0x0;
   }
   temp_v3 = piVar2[1];
-  FUN_0014ed4c();
+  optionalWorkGetValue();
   libc_strcpy(temp_v4,*piVar2 + 0xc);
   pcVar5 = *(char **)(temp_v3 + 8);
   if (*pcVar5 != '-') {

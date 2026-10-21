@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00119e54(int, int *, unsigned int **, unsigned int **, int);
-int FUN_00120b5c(void);
+int drawableSetRectangle(void);
 int FUN_002c05f4(...);
 int asdMemoryGetDefaultAllocator(void);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -50,7 +50,7 @@ extern unsigned int DAT_00464ba0; /* 0x464ba0 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00119e54. */
-/* Supplied declaration required: FUN_00120b5c. */
+/* Supplied declaration required: drawableSetRectangle. */
 /* Supplied declaration required: FUN_002c05f4. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 /* Supplied declaration required: nw_gfx_Camera_DynamicBuilder_Create. */
@@ -183,7 +183,7 @@ void FUN_001079d8(void)
     FUN_002c05f4(temp_v1,&temp_v8,&temp_v11,0);
     DAT_00464b34 = temp_v1;
     *(float *)(temp_v1 + 0x294) = temp_v4 / DAT_00464b40;
-    FUN_00120b5c();
+    drawableSetRectangle();
   }
   nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0,DAT_00464b34);
   temp_v16 = (unsigned int)temp_v3;

@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_0024bc98(int *, unsigned int);
 int FUN_0024bda8(int *, unsigned int);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int FUN_00295660(int, int *);
-int FUN_00296ae8(unsigned int, int, unsigned int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_002ae164(void);
 int textFormatBuffer(int *, unsigned char *);
 
@@ -23,9 +23,9 @@ extern int DAT_0043da2c; /* 0x43da2c */
 
 /* Supplied declaration required: FUN_0024bc98. */
 /* Supplied declaration required: FUN_0024bda8. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_002ae164. */
 extern int idIsAbove400(int);
 extern unsigned int FUN_002b47ec(void);
@@ -54,7 +54,7 @@ void FUN_0029c94c(int param_1)
     temp_v2 = idIsAbove400(param_1);
     if (temp_v2 != 0) {
       temp_v2 = param_1;
-      FUN_00283e48();
+      passiveSkillLookupRecord();
       FUN_0024bda8(&temp_v3,(*(unsigned int *)(temp_v2 + 0x38) & 0xffff) >> 0xb);
       FUN_00295660(0x24,&temp_v3);
       textFormatBuffer(&temp_v3,&LAB_0029ca4c);
@@ -71,7 +71,7 @@ void FUN_0029c94c(int param_1)
     temp_v3 = 3;
     uStack_74 = temp_v1;
     temp_v4 = param_1;
-    FUN_00296ae8(*(unsigned int *)(temp_v0 + 0x558),3,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x558),3,0xffffffff,0);
   }
   return;
 }

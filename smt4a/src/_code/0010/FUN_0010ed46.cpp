@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e6e26(void);
+int onlineContextGetInstance(void);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002e6e26. */
+/* Supplied declaration required: onlineContextGetInstance. */
 
 
 void FUN_0010ed46(int *param_1)
@@ -21,7 +21,7 @@ void FUN_0010ed46(int *param_1)
     if (*(char *)((int)param_1 + 0x22) != '\x04') {
       return;
     }
-    FUN_002e6e26();
+    onlineContextGetInstance();
     if ((param_1[0x15] & 1U) != 0) {
       pcVar1 = *(romwright_code **)(*(int *)((param_1[0x15] >> 1) + (int)param_1) + param_1[0x14]);
     }

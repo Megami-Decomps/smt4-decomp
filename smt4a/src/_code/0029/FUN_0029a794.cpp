@@ -10,7 +10,7 @@ int uiSpriteSelectAnim(int, int);
 int uiSpriteSetKeyframe(int, int);
 int FUN_00352d30(float *);
 int FUN_00352eec(void);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 
 /* stack frame of param_2: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00352d30. */
 /* Supplied declaration required: FUN_00352eec. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_0029a794(int param_1,int param_2)
@@ -137,7 +137,7 @@ void FUN_0029a794(int param_1,int param_2)
   DAT_005f1dc4 = 0;
   DAT_005f1e18 = 0;
   DAT_005f1e1a = 0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x128);
+  paramsClearPacket(param_1 + 0x128);
   paramsInit(param_1 + 0x128,&DAT_005315d8,0x18,&DAT_00531608,0x18,&DAT_005315f0,0x18,
                &DAT_005315d0,8,&DAT_00531620,0x54);
   *(unsigned int *)(param_1 + 0x490) = 0;

@@ -26,9 +26,9 @@ int FUN_004db048(...);
 int recSet174(...);
 int rec16ASet(...);
 int FUN_004db65c(...);
-int FUN_004dbc64(...);
+int fusionCollectEligibleDemonsByRace(...);
 int recSet17B(...);
-int FUN_004dbef8(...);
+int idListAppendEightNonzero(...);
 int wordAt1B0Clear(...);
 int SBORROW4(...);
 
@@ -66,7 +66,7 @@ extern int FUN_00321cc0(...); /* 0x321cc0 */
 extern int FUN_00337110(...); /* 0x337110 */
 extern int FUN_0034f6fc(...); /* 0x34f6fc */
 extern unsigned char LAB_0034f784; /* 0x34f784 */
-extern int FUN_003603a0(...); /* 0x3603a0 */
+extern int recordKindOrderCompare(...); /* 0x3603a0 */
 extern int FUN_00375b80(...); /* 0x375b80 */
 extern int *g_unite; /* 0x57f290 */
 
@@ -105,9 +105,9 @@ extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: recSet174. */
 /* Supplied declaration required: rec16ASet. */
 /* Supplied declaration required: FUN_004db65c. */
-/* Supplied declaration required: FUN_004dbc64. */
+/* Supplied declaration required: fusionCollectEligibleDemonsByRace. */
 /* Supplied declaration required: recSet17B. */
-/* Supplied declaration required: FUN_004dbef8. */
+/* Supplied declaration required: idListAppendEightNonzero. */
 /* Supplied declaration required: wordAt1B0Clear. */
 
 
@@ -279,7 +279,7 @@ void FUN_0028625c(int *param_1)
               temp_v5 = FUN_002a4b28(temp_v1);
               if (temp_v5 != 0) {
                 wordAt1B0Clear(*param_1);
-                FUN_004dbef8(*param_1,0,temp_v4 + 0x34);
+                idListAppendEightNonzero(*param_1,0,temp_v4 + 0x34);
                 param_1[param_1[0x172] * 2 + 0x4ee] =
                      (param_1[param_1[0x172] * 2 + 0x4ee] & 0x3fffffffU) | 0x40000000;
                 temp_v5 = slotRecordFindById(temp_v1);
@@ -296,12 +296,12 @@ void FUN_0028625c(int *param_1)
                     if (temp_v5 < 0 != temp_v15) goto LAB_00286938;
                   }
                   param_1[param_1[0x172] * 2 + 0x4ef] = param_1[param_1[0x172] * 2 + 0x4ef] | 3;
-                  FUN_004dbef8(*param_1,1,temp_v27);
+                  idListAppendEightNonzero(*param_1,1,temp_v27);
                 }
                 else {
                   param_1[param_1[0x172] * 2 + 0x4ef] =
                        (param_1[param_1[0x172] * 2 + 0x4ef] & 0xfffffffcU) | 1;
-                  FUN_004dbef8(*param_1,1,temp_v5 + 0x34);
+                  idListAppendEightNonzero(*param_1,1,temp_v5 + 0x34);
                 }
                 temp_v5 = FUN_004db65c(*param_1,*(unsigned short *)(temp_v4 + 0x62),temp_v1,
                                      param_1 + param_1[0x172] * 2 + 0x4ee);
@@ -333,7 +333,7 @@ LAB_00286938:
           asdMemoryAlloc(0x100,0x100,0,0xa00);
           temp_v3 = *piVar9;
           temp_v16 = temp_v12;
-          FUN_004dbc64(temp_v3,temp_v12);
+          fusionCollectEligibleDemonsByRace(temp_v3,temp_v12);
           temp_v4 = computeCountLimit();
           temp_v17 = piVar9[0x2429];
           if (temp_v4 <= temp_v17) {
@@ -374,7 +374,7 @@ LAB_00286938:
                     temp_v6 = temp_v6 + temp_v38 * 0x10;
                     if (*(char *)(temp_v2 + 0x37) < '\x01') {
 LAB_00286b78:
-                      FUN_004dbef8(*piVar9,0,temp_v6 + 0x5ea0);
+                      idListAppendEightNonzero(*piVar9,0,temp_v6 + 0x5ea0);
                       piVar8 = piVar9 + piVar9[0x172] * 2;
                       temp_v12 = piVar8[0x4ee] | 0xc0000000;
                       goto LAB_00286b9c;
@@ -389,7 +389,7 @@ LAB_00286b78:
                     if (temp_v0 < 0 == temp_v15) goto LAB_00286b78;
                   }
                   else {
-                    FUN_004dbef8(*piVar9,0,temp_v4 + 0x34);
+                    idListAppendEightNonzero(*piVar9,0,temp_v4 + 0x34);
                     piVar8 = piVar9 + piVar9[0x172] * 2;
                     temp_v12 = (piVar8[0x4ee] & 0x3fffffffU) | 0x40000000;
 LAB_00286b9c:
@@ -409,13 +409,13 @@ LAB_00286b9c:
                         }
                         if (temp_v0 < 0 != temp_v15) goto LAB_00286c80;
                       }
-                      FUN_004dbef8(*piVar9,1,temp_v6 + 0x5ea0);
+                      idListAppendEightNonzero(*piVar9,1,temp_v6 + 0x5ea0);
                       temp_v6 = piVar9[0x172];
                       piVar9[temp_v6 * 2 + 0x4ee] = piVar9[temp_v6 * 2 + 0x4ee];
                       piVar9[temp_v6 * 2 + 0x4ef] = piVar9[temp_v6 * 2 + 0x4ef] | 3;
                     }
                     else {
-                      FUN_004dbef8(*piVar9,1,temp_v22 + 0x34);
+                      idListAppendEightNonzero(*piVar9,1,temp_v22 + 0x34);
                       temp_v6 = piVar9[0x172];
                       piVar9[temp_v6 * 2 + 0x4ee] = piVar9[temp_v6 * 2 + 0x4ee];
                       piVar9[temp_v6 * 2 + 0x4ef] = (piVar9[temp_v6 * 2 + 0x4ef] & 0xfffffffcU) | 1;
@@ -461,8 +461,8 @@ LAB_00286c80:
                 temp_v6 = bitsAt60Test(temp_v2,10);
                 if ((temp_v6 == 0) && (temp_v6 = bitsAt60Test(temp_v5,10), temp_v6 == 0)) {
                   wordAt1B0Clear(*param_1);
-                  FUN_004dbef8(*param_1,0,temp_v2 + 0x34);
-                  FUN_004dbef8(*param_1,1,temp_v5 + 0x34);
+                  idListAppendEightNonzero(*param_1,0,temp_v2 + 0x34);
+                  idListAppendEightNonzero(*param_1,1,temp_v5 + 0x34);
                   temp_v6 = param_1[0x172];
                   temp_v12 = param_1[temp_v6 * 2 + 0x4ef];
                   temp_v13 = (param_1[temp_v6 * 2 + 0x4ee] & 0x3fffffffU) | 0x40000000;
@@ -706,7 +706,7 @@ LAB_0028727c:
               qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,devilCompareByRankGradeAscending);
             }
             else {
-              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,FUN_003603a0);
+              qsort(piVar9 + 0x18a8,piVar9[0x19a6],2,recordKindOrderCompare);
             }
           }
           if ((*pbVar19 & 0x7f) == 2) {

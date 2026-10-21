@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_001ab6f4(unsigned int, unsigned char [288], unsigned char [496], unsigned int *, unsigned int *, int, int, int);
 int FUN_001ab7dc(unsigned int, unsigned char [288], unsigned char [496], unsigned int *, unsigned int *, int, int, int);
-int FUN_001dcf78(...);
-int FUN_001dcfd0(...);
+int nodeTreeReleaseGroup(...);
+int btlItemGroupRelease(...);
 int FUN_001ed268(...);
 int FUN_00211c90(...);
 int rangeInit(...);
@@ -28,9 +28,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_001ab6f4. */
 /* Supplied declaration required: FUN_001ab7dc. */
-extern int FUN_001ab9cc(void);
-/* Supplied declaration required: FUN_001dcf78. */
-/* Supplied declaration required: FUN_001dcfd0. */
+extern int keyedRecordCountGet(void);
+/* Supplied declaration required: nodeTreeReleaseGroup. */
+/* Supplied declaration required: btlItemGroupRelease. */
 /* Supplied declaration required: FUN_001ed268. */
 /* Supplied declaration required: FUN_00211c90. */
 /* Supplied declaration required: rangeInit. */
@@ -41,9 +41,9 @@ extern unsigned int eventCommandGetPendingCleanup(void);
 /* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 extern int FUN_002cda20(unsigned char, unsigned int);
-extern int FUN_002fdecc(unsigned char, int);
+extern int keyedRecordGetEntryValue(unsigned char, int);
 extern int keyedRecordGetKey(void);
-extern int FUN_0030a0d4(unsigned char);
+extern int keyedRecordGetValue(unsigned char);
 extern unsigned long long *FUN_00322aa8(unsigned char, int);
 extern int FUN_00324b24(unsigned char, int);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -72,10 +72,10 @@ void FUN_00200c9c(unsigned int *param_1)
   
   temp_v2 = 0;
   if ((int)param_1[1] <= (int)param_1[2]) {
-    temp_v0 = FUN_001ab9cc();
+    temp_v0 = keyedRecordCountGet();
     if (-1 < (int)((temp_v0 - (unsigned int)*(unsigned char *)(param_1 + 0xc)) - 1)) {
       temp_v0 = keyedRecordGetKey();
-      temp_v1 = FUN_0030a0d4(*(unsigned char *)(param_1 + 0xc));
+      temp_v1 = keyedRecordGetValue(*(unsigned char *)(param_1 + 0xc));
       if (0 < temp_v1) {
         do {
           temp_v1 = FUN_00324b24(*(unsigned char *)(param_1 + 0xc),temp_v2);
@@ -87,7 +87,7 @@ void FUN_00200c9c(unsigned int *param_1)
             puVar3 = (unsigned long long *)FUN_00322aa8(*(unsigned char *)(param_1 + 0xc),temp_v2);
             temp_v5 = *puVar3;
             temp_v7 = *(unsigned int *)(puVar3 + 1);
-            temp_v1 = FUN_002fdecc(*(unsigned char *)(param_1 + 0xc),temp_v2);
+            temp_v1 = keyedRecordGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
             if (temp_v1 < 1) {
               temp_v1 = 1;
             }
@@ -147,7 +147,7 @@ void FUN_00200c9c(unsigned int *param_1)
             }
           }
           temp_v2 = temp_v2 + 1;
-          temp_v1 = FUN_0030a0d4(*(unsigned char *)(param_1 + 0xc));
+          temp_v1 = keyedRecordGetValue(*(unsigned char *)(param_1 + 0xc));
         } while (temp_v2 < temp_v1);
       }
     }
@@ -177,14 +177,14 @@ void FUN_00200c9c(unsigned int *param_1)
     temp_v2 = 0;
     if (temp_v2 < (int)param_1[6]) {
       do {
-        FUN_001dcfd0(param_1[temp_v2 + 0x44]);
+        btlItemGroupRelease(param_1[temp_v2 + 0x44]);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)param_1[6]);
     }
     temp_v2 = 0;
     if (temp_v2 < (int)param_1[5]) {
       do {
-        FUN_001dcf78(param_1[temp_v2 + 0x34]);
+        nodeTreeReleaseGroup(param_1[temp_v2 + 0x34]);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)param_1[5]);
     }

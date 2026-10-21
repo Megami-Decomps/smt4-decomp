@@ -1,46 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a8738` (_code @ 0x3a8738, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+
+struct BtlMainStateA;
 
 extern "C" {
+u32 scrGetArg(u32);
+void scrSetResult(s32);
+BtlMainStateA *btlGetMainState(void);
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 
-int scrSetResult(int);
-int FUN_003eaf20(void);
-
-extern int btlGetMainState(void);
-extern int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_003eaf20. */
-
-
-unsigned int FUN_003a8738(void)
-
+u32 FUN_003a8738(u32 argumentIndex)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v1 = scrGetArg();
-  temp_v2 = btlGetMainState();
-  FUN_003eaf20();
-  if (temp_v2 != 0) {
-    temp_v0 = *(unsigned short *)(temp_v2 + temp_v1 * 2 + 0x2b6);
-    temp_v5 = (temp_v0 & 0xfc00) != 0;
-    temp_v4 = temp_v3;
-    if (temp_v5) {
-      temp_v4 = 2;
+    s32 index = scrGetArg(argumentIndex);
+    BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+    if (entry != NULL) {
+        u16 encoded = entry->encodedStats.values[index];
+        if ((encoded & 0xfc00) == 0 || (encoded >> 10) == 2) {
+            scrSetResult(1);
+            return 1;
+        }
     }
-    if (!temp_v5 || temp_v4 == temp_v0 >> 10) {
-      scrSetResult(1);
-      return 1;
-    }
-  }
-  scrSetResult(0);
-  return 1;
+    scrSetResult(0);
+    return 1;
 }
-
-} /* extern "C" */
+}

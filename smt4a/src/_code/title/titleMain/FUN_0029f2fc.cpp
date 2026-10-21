@@ -9,7 +9,7 @@ int asdSequenceRequest(...);
 int configOpen(...);
 int FUN_00202ea4(void);
 int FUN_0020e79c(void);
-int FUN_00215994(...);
+int stateModeDispatch(...);
 int configDestroy(void);
 int FUN_00283d74(...);
 int FUN_002c7150(void);
@@ -29,8 +29,8 @@ int sysPlaySe(...);
 int FUN_00168980(...);
 int eventQueueAddUnique(...);
 int dataTableGet(...);
-int FUN_002c2160(...);
-int FUN_002e4b9c(void);
+void frameTransitionSetMode(int);
+int commonBgBeginExit(void);
 int objectE0ResetFlags1040(void);
 int campCommonBgRelease(void);
 int FUN_0037a2e4(void);
@@ -45,13 +45,13 @@ int asdTMTexTableLoadTmx(int, int);
 int FUN_001517b4(...);
 int FUN_0019de98(...);
 int asdTMTexLoadMainHeap(int, int);
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int FUN_0022258c(...);
 int FUN_0022677c(...);
 int campCommonBgAcquire(void);
 int campButtonHelpAcquire(void);
-int FUN_00370b8c(...);
-int FUN_0037a2c8(void);
+int mobiclipProcessCreate(...);
+int texEntrySpritesLoad(void);
 int mobiclipProcessSetFlag78(...);
 int soundChannelStopAll(...);
 int FUN_003d54f8(...);
@@ -97,28 +97,27 @@ extern unsigned int gameFlagIsSet(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: configOpen. */
 /* Supplied declaration required: FUN_00202ea4. */
 /* Supplied declaration required: FUN_0020e79c. */
 extern int slotIsReady(unsigned int);
 extern int configIsClosed(void);
-/* Supplied declaration required: FUN_00215994. */
+/* Supplied declaration required: stateModeDispatch. */
 /* Supplied declaration required: FUN_0022258c. */
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: configDestroy. */
 extern int s4LoadIsActive(void);
-extern int FUN_002802c8(void);
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00283d74. */
 extern int FUN_00284140(int);
 extern int FUN_0028a230(unsigned int *);
-/* Supplied declaration required: FUN_002c2160. */
 /* Supplied declaration required: FUN_002c7150. */
 extern int jyoucyuGetLevel(void);
 extern int FUN_002e07f4(void);
 extern int FUN_002e1a18(unsigned int);
-/* Supplied declaration required: FUN_002e4b9c. */
+/* Supplied declaration required: commonBgBeginExit. */
 extern int configGetValueBC(void);
 extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_002f4374. */
@@ -131,8 +130,8 @@ extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: campCommonBgRelease. */
 extern int FUN_0035e6d4(unsigned int *);
 /* Supplied declaration required: FUN_00363c58. */
-/* Supplied declaration required: FUN_00370b8c. */
-/* Supplied declaration required: FUN_0037a2c8. */
+/* Supplied declaration required: mobiclipProcessCreate. */
+/* Supplied declaration required: texEntrySpritesLoad. */
 /* Supplied declaration required: FUN_0037a2e4. */
 extern int titleConfigIsClosed(void);
 extern int FUN_0038b358(void);
@@ -194,7 +193,7 @@ unsigned int FUN_0029f2fc(void)
     asdTMTexLoadMainHeap(0x2a,6);
     asdTMTexLoadMainHeap(0x2a,7);
     asdTMTexLoadMainHeap(0x2a,8);
-    FUN_0037a2c8();
+    texEntrySpritesLoad();
     temp_v5 = FUN_0013def0(0);
     if (temp_v5 != 3) {
       FUN_0022677c(0,0xff);
@@ -211,8 +210,8 @@ unsigned int FUN_0029f2fc(void)
   case 2:
     temp_v5 = DAT_00589170[0x1f];
     if (temp_v5 == 0) {
-      FUN_001f4908(0,0xf,0xff);
-      FUN_001f4908(1,0xf,0xff);
+      slotSetRequest(0,0xf,0xff);
+      slotSetRequest(1,0xf,0xff);
       soundChannelStopAll(0xf);
       puVar4[0x1f] = 1;
       break;
@@ -221,7 +220,7 @@ unsigned int FUN_0029f2fc(void)
       if (temp_v5 != 2) break;
     }
     else {
-      temp_v5 = FUN_002802c8();
+      temp_v5 = screenFadeIsBusy();
       if (temp_v5 != 0) break;
       puVar4[0x1f] = 2;
     }
@@ -319,14 +318,14 @@ joined_r0x0029f8b8:
       else {
         *(unsigned char *)(puVar4 + 0x24) = 0;
       }
-      FUN_001f4908(0,0xf,0xff);
+      slotSetRequest(0,0xf,0xff);
       temp_v6 = 4;
       puVar4[0x1f] = temp_v6;
       break;
     case 3:
       temp_v5 = puVar4[0x20];
       if ((int)puVar4[0x21] <= temp_v5) {
-        FUN_001f4908(0,0xf,0xff);
+        slotSetRequest(0,0xf,0xff);
         puVar4[0x1f] = 4;
         break;
       }
@@ -439,7 +438,7 @@ LAB_0029f848:
       default:
         goto LAB_002a0858;
       }
-      FUN_001f4908(0,0xf,0xff);
+      slotSetRequest(0,0xf,0xff);
       temp_v6 = 4;
     }
     puVar4[0x1f] = temp_v6;
@@ -490,7 +489,7 @@ LAB_0029fb00:
       gameFlagSetValue(0x81d,1);
       temp_v6 = gameFlagIsSet(0x81d);
       temp_v8 = 0x1d;
-      FUN_00370b8c(0x1d,temp_v6);
+      mobiclipProcessCreate(0x1d,temp_v6);
       puVar4[0x22] = temp_v8;
       mobiclipProcessSetFlag77(1);
       temp_v6 = 1;
@@ -589,7 +588,7 @@ LAB_0029fb00:
         commonBgReset();
       }
       else {
-        FUN_002e4b9c();
+        commonBgBeginExit();
       }
       temp_v5 = 0;
       do {
@@ -731,7 +730,7 @@ LAB_0029fb00:
           *(unsigned char *)((int)puVar5 + 0x5a) = 1;
           puVar5[0x17] = 2;
           objectE0ResetFlags1040();
-          FUN_002c2160(1);
+          frameTransitionSetMode(1);
           puVar5[0x1f] = 0;
           puVar5[0x1e] = 0xd;
           puVar5[0x20] = 0;
@@ -747,7 +746,7 @@ LAB_0029fb00:
           *(unsigned char *)((int)puVar5 + 0x5a) = 1;
           puVar5[0x17] = 2;
           objectE0ResetFlags1040();
-          FUN_002c2160(1);
+          frameTransitionSetMode(1);
           temp_v5 = aocHasType36(g_aocSystem,0x558);
           if (temp_v5 != 0) {
             gameFlagSetValue(0x558,1,1);
@@ -777,7 +776,7 @@ LAB_0029fb00:
           *(unsigned char *)((int)puVar5 + 0x5a) = 1;
           puVar5[0x17] = 2;
           objectE0ResetFlags1040();
-          FUN_002c2160(1);
+          frameTransitionSetMode(1);
           puVar5[0x1f] = 0;
           puVar5[0x1e] = 0xf;
           puVar5[0x20] = 0;
@@ -792,8 +791,8 @@ LAB_0029fb00:
           puVar5[0x1f] = 0;
           puVar5[0x1e] = 0x11;
           puVar5[0x20] = 0;
-          FUN_001f4908(0,10,0xff);
-          FUN_001f4908(1,10,0xff);
+          slotSetRequest(0,10,0xff);
+          slotSetRequest(1,10,0xff);
         }
         else if (temp_v5 == 4) {
           temp_v5 = 0;
@@ -890,7 +889,7 @@ LAB_0029fb00:
           FUN_0046bd44(g_aocSystem);
           FUN_00363c58(0);
           FUN_0046e238(g_aocSystem);
-          FUN_00215994(puVar4[0x25]);
+          stateModeDispatch(puVar4[0x25]);
           FUN_002f4374();
           FUN_00324c94(0x25,3);
           FUN_00324c94(0x26,3);
@@ -965,7 +964,7 @@ LAB_0029fb00:
           commonBgReset();
         }
         else {
-          FUN_002e4b9c();
+          commonBgBeginExit();
         }
       }
       else {
@@ -973,8 +972,8 @@ LAB_0029fb00:
         *(unsigned char *)((int)puVar5 + 0x3f) = 0;
         *(unsigned char *)(puVar5 + 0x26) = 0;
         puVar5[0x25] = temp_v5;
-        FUN_001f4908(0,0xc,0xff);
-        FUN_001f4908(1,0xc,0xff);
+        slotSetRequest(0,0xc,0xff);
+        slotSetRequest(1,0xc,0xff);
         soundChannelStopAll(0xf);
         puVar5[0x1f] = 0;
         puVar5[0x1e] = 0xc;

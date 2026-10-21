@@ -5,7 +5,7 @@ extern "C" {
 void asdMemFree(void *block);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void dataTableFree(s32 table);
-void FUN_002c2160(s32 arg);
+void frameTransitionSetMode(s32 arg);
 void asdTMTexTableFreeEntry(s32 table);
 void campButtonHelpRelease(void);
 s32 campButtonHelpIsActive(void);
@@ -27,7 +27,7 @@ void titleMainRelease(void)
         asdTMTexTableReleaseNode(0x2A, i);
     }
     asdTMTexTableFreeEntry(0x2A);
-    FUN_002c2160(0);
+    frameTransitionSetMode(0);
     if (campButtonHelpIsActive() != 0) {
         campButtonHelpRelease();
     }

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00426478(unsigned int, unsigned int);
 int FUN_004264d0(unsigned int, unsigned int);
-int FUN_004266e4(unsigned int, unsigned int, int);
+unsigned int FUN_004266e4(unsigned int, unsigned int, unsigned char, unsigned char);
 int FUN_00432104(void);
 
 /* stack frame of param_4: 1 slot(s), 1 byte(s) */
@@ -20,7 +20,6 @@ extern int FUN_0015997c(void);
 /* Supplied declaration required: FUN_00426478. */
 /* Supplied declaration required: FUN_004264d0. */
 extern int FUN_0042656c(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_004266e4. */
 extern int FUN_00432040(unsigned int);
 /* Supplied declaration required: FUN_00432104. */
 
@@ -52,7 +51,7 @@ void FUN_00426344(unsigned int param_1,unsigned int *param_2,unsigned int param_
       if (temp_v0 < 0) {
         return;
       }
-      FUN_004266e4(param_1,param_1,0);
+      FUN_004266e4(param_1,param_1,0,0);
     }
     FUN_00426478(param_1,*param_2);
   }

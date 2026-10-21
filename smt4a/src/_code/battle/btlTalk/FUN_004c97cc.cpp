@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c97cc` (_code @ 0x4c97cc, 0x348 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
@@ -10,19 +11,19 @@ int sysPlaySe(int);
 int FUN_00184310(void);
 int FUN_00275bc8(void);
 int scrScriptProcessStartEntry(int, int);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_003756c8(int);
 int FUN_004aa8b0(unsigned int, int);
 int FUN_004f741c(int);
 int FUN_004f89e8(int);
-int FUN_004f9080(void);
+u32 btlAuxAreResourcesReady(BtlAuxA*);
 int FUN_004fb670(int, int);
 int FUN_004fcde0(int);
 int FUN_004feecc(int, int);
 
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_0057a7c0; /* 0x57a7c0 */
 extern unsigned int DAT_0057a7c4; /* 0x57a7c4 */
 extern unsigned int DAT_0057a7c8; /* 0x57a7c8 */
@@ -35,17 +36,16 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
-extern int FUN_00224880(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_003756c8. */
 extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004aa8b0. */
 extern int FUN_004f2708(int, int, unsigned int);
 /* Supplied declaration required: FUN_004f741c. */
 /* Supplied declaration required: FUN_004f89e8. */
-/* Supplied declaration required: FUN_004f9080. */
 extern int FUN_004f9c2c(int);
 /* Supplied declaration required: FUN_004fb670. */
 /* Supplied declaration required: FUN_004fcde0. */
@@ -71,14 +71,14 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
     FUN_00184310();
     textFormatBuffer(temp_v4,"battle/talk/Tone%s.tbb",
                  *(unsigned int *)((unsigned int)*(unsigned char *)(temp_v1 + 0x38) * 4 + 0x57a7d8));
-    FUN_002804b0(temp_v4,param_1 + 2,1);
+    asdLoadFileAsyncSimple(temp_v4,param_1 + 2,1);
     temp_v0 = *(unsigned char *)(temp_v1 + 0x38);
     param_1[0x52] = (unsigned int)temp_v0;
     textFormatBuffer(temp_v4,"battle/talk/TalkTone%s.mbm",*(unsigned int *)((unsigned int)temp_v0 * 4 + 0x57a7d8)
                 );
-    FUN_002804b0(temp_v4,param_1 + 5,1);
-    FUN_002804b0("battle/talk/talk.bf",param_1 + 3,1);
-    FUN_004f741c(DAT_00573808);
+    asdLoadFileAsyncSimple(temp_v4,param_1 + 5,1);
+    asdLoadFileAsyncSimple("battle/talk/talk.bf",param_1 + 3,1);
+    FUN_004f741c(g_btlAux);
     param_1[6] = 1;
     if ((-1 < *(int *)(g_btlCamera + 0x7cc)) &&
        (temp_v2 = FUN_004f2708(g_btlCamera,*param_1,1), temp_v2 != 0)) {
@@ -89,7 +89,7 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
   case 1:
     if ((char)param_1[0x51] != '\0') {
       if ((char)param_1[0x51] == '\x01') {
-        temp_v2 = FUN_004f9c2c(DAT_00573808);
+        temp_v2 = FUN_004f9c2c(g_btlAux);
         if (temp_v2 == 0) {
           return 0;
         }
@@ -98,14 +98,13 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
       }
     }
     else {
-      temp_v2 = DAT_00573808;
-      FUN_004f9080();
+      temp_v2 = btlAuxAreResourcesReady((BtlAuxA*)g_btlAux);
       if (temp_v2 == 0) {
         return 0;
       }
-      FUN_004f89e8(DAT_00573808);
+      FUN_004f89e8(g_btlAux);
       *(unsigned char *)(param_1 + 0x51) = 1;
-      temp_v2 = FUN_004f9c2c(DAT_00573808);
+      temp_v2 = FUN_004f9c2c(g_btlAux);
       if (temp_v2 == 0) {
         return 0;
       }
@@ -131,7 +130,7 @@ unsigned int FUN_004c97cc(int *param_1,int param_2)
     temp_v2 = 2;
     break;
   case 2:
-    temp_v2 = FUN_00224880(param_1[4]);
+    temp_v2 = scrRunOpcodesStub(param_1[4]);
     if (temp_v2 != 2) {
       return 0;
     }

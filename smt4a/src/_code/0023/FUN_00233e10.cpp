@@ -7,7 +7,7 @@ extern "C" {
 int FUN_003d4ed8(int);
 int FUN_0050245c(int);
 
-extern int *DAT_005806a4; /* 0x5806a4 */
+extern int *g_lmapView; /* 0x5806a4 */
 extern int g_mapIf; /* 0x58103c */
 extern int g_gameState; /* 0x5f15fc */
 extern signed char DAT_005f1614; /* 0x5f1614 */
@@ -36,7 +36,7 @@ unsigned int FUN_00233e10(unsigned char param_1,int param_2)
   if (param_2 != -1) {
     temp_v5 = (unsigned int)*(unsigned char *)(temp_v4 + 0x1dc);
   }
-  if ((param_2 != -1 && temp_v5 != 0) && (DAT_005806a4[0x2c] != *(int *)(temp_v4 + 0x1fc))) {
+  if ((param_2 != -1 && temp_v5 != 0) && (g_lmapView[0x2c] != *(int *)(temp_v4 + 0x1fc))) {
     *(unsigned char *)(temp_v0 + 0x1c) = 0;
   }
   if (*(char *)(temp_v0 + 0x1c) == '\0') {
@@ -99,7 +99,7 @@ unsigned int FUN_00233e10(unsigned char param_1,int param_2)
       else {
         if (*(int *)(temp_v4 + 0x368) != 0) {
           *(unsigned int *)(temp_v4 + 0x1e0) = 7;
-          if ((DAT_005f1614 != '\0') && (*DAT_005806a4 == 0)) {
+          if ((DAT_005f1614 != '\0') && (*g_lmapView == 0)) {
             *(unsigned short *)(temp_v4 + 0x208) = 0;
             return 1;
           }

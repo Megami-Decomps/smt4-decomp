@@ -15,7 +15,7 @@ extern struct {
     MessageWork *work;
 } g_messageMain;
 
-extern void FUN_002b89e4(MessageWork *work, u8 window);
+extern void titleOverlaySetModeAnimation(MessageWork *work, u8 window);
 
 /* Performs a requested close of the message window: closes it, goes to state 3 and clears the request. */
 void messageMainApplyClose(void)
@@ -23,7 +23,7 @@ void messageMainApplyClose(void)
     MessageWork *work = g_messageMain.work;
 
     if (work->closeRequested != 0) {
-        FUN_002b89e4(work, work->window);
+        titleOverlaySetModeAnimation(work, work->window);
         work->state = 3;
         work->closeRequested = 0;
     }

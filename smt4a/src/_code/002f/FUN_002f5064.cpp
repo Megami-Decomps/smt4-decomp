@@ -30,7 +30,7 @@ int libc_strcpy(unsigned char [32], unsigned int);
 int FUN_002f01c4(int);
 int FUN_003180c4(...);
 int FUN_00333dc8(...);
-int FUN_00334214(int, int, int);
+int statusDisplayBindUnitRecord(int, int, int);
 int FUN_00336de4(...);
 int FUN_0035ab40(int);
 int FUN_0035da20(...);
@@ -77,9 +77,9 @@ extern unsigned int dataTableGetEntries(void);
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_0020b490. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
-extern int FUN_0026272c(void);
+extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0026c3c4. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -92,9 +92,9 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002f01c4. */
 /* Supplied declaration required: FUN_003180c4. */
-extern int FUN_0032169c(void);
+extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: FUN_0035ab40. */
 /* Supplied declaration required: FUN_0035da20. */
@@ -194,7 +194,7 @@ void FUN_002f5064(int param_1)
       }
       FUN_00336de4(*(unsigned short *)(temp_v2 + 0x62),0);
       btlTalkBustUpSetUnk2F4(1);
-      FUN_00334214(temp_v2,0,0);
+      statusDisplayBindUnitRecord(temp_v2,0,0);
       FUN_0026c3c4(temp_v2 + 0x34);
       FUN_002f01c4((int)*(short *)(temp_v2 + 0x62));
       if (*(char *)(temp_v20 + 0xd4) != '\0') {
@@ -337,7 +337,7 @@ LAB_002f56d4:
     case 1:
       temp_v3 = FUN_0026c3a0();
       if (temp_v3 != 0) {
-        temp_v3 = FUN_0032169c();
+        temp_v3 = btlTalkBustUpGetValue();
         if (temp_v3 == 0) {
           FUN_00336de4(*(unsigned short *)(temp_v2 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
@@ -369,7 +369,7 @@ LAB_002f56d4:
       }
       break;
     case 2:
-      temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
+      temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
       if (temp_v2 == 2) {
         temp_v2 = FUN_002a4b74();
         if (temp_v2 == 0) {
@@ -383,7 +383,7 @@ LAB_002f56d4:
       }
       break;
     case 3:
-      temp_v2 = FUN_0026272c();
+      temp_v2 = messageMainIsIdle();
       if (temp_v2 == 0) {
         return;
       }
@@ -393,7 +393,7 @@ LAB_002f56d4:
       *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
       return;
     case 4:
-      temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
+      temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
       if (temp_v2 == 2) {
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
         *(unsigned int *)(param_1 + 0x437c) = 0;
@@ -408,7 +408,7 @@ LAB_002f56d4:
     if (temp_v3 != 0xb) {
       if (temp_v3 < 0xb) {
         if (temp_v3 == 6) {
-          temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
+          temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
           if (temp_v2 != 2) {
             return;
           }
@@ -418,7 +418,7 @@ LAB_002f56d4:
         if (temp_v3 != 10) {
           return;
         }
-        temp_v2 = FUN_0026272c();
+        temp_v2 = messageMainIsIdle();
         if (temp_v2 == 0) {
           return;
         }
@@ -441,10 +441,10 @@ LAB_002f56d4:
         roundObjFinish(param_1);
         return;
       }
-      temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
+      temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
     }
     else {
-      temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x43ac));
+      temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43ac));
     }
     if (temp_v2 == 2) {
       FUN_00333dc8(0);

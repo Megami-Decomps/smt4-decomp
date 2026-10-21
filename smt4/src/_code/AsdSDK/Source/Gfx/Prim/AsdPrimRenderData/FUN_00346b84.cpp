@@ -30,7 +30,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0023b9d0. */
-extern unsigned int FUN_002bc11c(unsigned int);
+extern unsigned int osVirtToPhysAddress(unsigned int);
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: memAlloc. */
 extern unsigned int FUN_0034711c(int, unsigned int);
@@ -98,7 +98,7 @@ void FUN_00346b84(int param_1)
     temp_v6 = *(int *)(param_1 + 0xc) * 0xc;
     if ((*(unsigned int *)(param_1 + 4) & 0x100) != 0) {
       temp_v20 = 0;
-      temp_v0 = FUN_002bc11c(*(unsigned int *)(param_1 + 0x30));
+      temp_v0 = osVirtToPhysAddress(*(unsigned int *)(param_1 + 0x30));
       FUN_0023b9d0(param_1 + 0x4c,&temp_v18,temp_v0,0xb);
     }
   }
@@ -125,7 +125,7 @@ void FUN_00346b84(int param_1)
     }
     if ((*(unsigned int *)(param_1 + 4) & 0x100) != 0) {
       temp_v10 = 1;
-      temp_v0 = FUN_002bc11c(*(unsigned int *)(param_1 + 0x34));
+      temp_v0 = osVirtToPhysAddress(*(unsigned int *)(param_1 + 0x34));
       FUN_0023b9d0(param_1 + 0x4c,&temp_v8,temp_v0,0xf);
     }
   }
@@ -147,7 +147,7 @@ void FUN_00346b84(int param_1)
     }
     if ((*(unsigned int *)(param_1 + 4) & 0x100) != 0) {
       temp_v10 = 1;
-      temp_v0 = FUN_002bc11c(*(unsigned int *)(param_1 + 0x38));
+      temp_v0 = osVirtToPhysAddress(*(unsigned int *)(param_1 + 0x38));
       FUN_0023b9d0(param_1 + 0x4c,&temp_v8,temp_v0,0xd);
     }
   }
@@ -155,7 +155,7 @@ void FUN_00346b84(int param_1)
     *(int *)(param_1 + 0x3c) = *(int *)(param_1 + 0x2c) + temp_v6;
     if ((*(unsigned int *)(param_1 + 4) & 0x100) != 0) {
       temp_v15 = 2;
-      temp_v0 = FUN_002bc11c(*(unsigned int *)(param_1 + 0x3c));
+      temp_v0 = osVirtToPhysAddress(*(unsigned int *)(param_1 + 0x3c));
       FUN_0023b9d0(param_1 + 0x4c,&temp_v13,temp_v0,7);
       goto LAB_00346e10;
     }
@@ -193,7 +193,7 @@ LAB_00346e10:
     }
   }
   if ((*(unsigned int *)(param_1 + 4) & 0x100) != 0) {
-    temp_v0 = FUN_002bc11c(*(unsigned int *)(param_1 + 0x48));
+    temp_v0 = osVirtToPhysAddress(*(unsigned int *)(param_1 + 0x48));
     *(unsigned int *)(param_1 + 0x7dc) = temp_v0;
     *(unsigned int *)(param_1 + 0x7e0) = *(unsigned int *)(param_1 + 0x18);
     *(unsigned char *)(param_1 + 0x7e4) = 0;

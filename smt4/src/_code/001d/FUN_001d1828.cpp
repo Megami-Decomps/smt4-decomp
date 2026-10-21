@@ -34,13 +34,13 @@ extern int FUN_002624b8(unsigned int, int, int);
 /* Supplied declaration required: FUN_0029b130. */
 /* Supplied declaration required: FUN_0029c528. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern int FUN_0029c8f4(int);
+extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: FUN_0029cde0. */
 /* Supplied declaration required: FUN_0029dc74. */
 extern int gameGetUnitRecord(int);
 /* Supplied declaration required: gameGetSlotTable. */
 extern int gameCountUnits(void);
-extern int FUN_002b066c(unsigned int);
+extern int partyMemberFindById(unsigned int);
 
 
 unsigned int FUN_001d1828(void)
@@ -66,7 +66,7 @@ unsigned int FUN_001d1828(void)
   temp_v9[0] = 0;
   temp_v9[1] = 0;
   do {
-    temp_v2 = FUN_002b066c(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 0xb34) & 0xffff);
+    temp_v2 = partyMemberFindById(*(unsigned int *)(temp_v1 + temp_v7 * 4 + 0xb34) & 0xffff);
     temp_v9[temp_v7] = temp_v2;
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 2);
@@ -183,7 +183,7 @@ LAB_001d1a4c:
         *psVar7 = *(short *)(temp_v7 + 0x42);
       }
       FUN_0029b130(temp_v8,temp_v3,0);
-      temp_v7 = FUN_0029c8f4(temp_v1 + 0xb50);
+      temp_v7 = flagCountUnlockedSlots(temp_v1 + 0xb50);
       temp_v2 = 0;
       do {
         if (((temp_v8[temp_v2] != 0) &&

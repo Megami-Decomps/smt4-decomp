@@ -20,7 +20,7 @@ typedef struct {
 } param_4_stack;
 
 extern int FUN_002835f4(...); /* 0x2835f4 */
-extern int FUN_00283a48(...); /* 0x283a48 */
+extern int eventColorTransitionUpdate(...); /* 0x283a48 */
 extern unsigned char LAB_0035c628; /* 0x35c628 */
 extern unsigned char LAB_0035c640; /* 0x35c640 */
 extern unsigned char LAB_0035c660; /* 0x35c660 */
@@ -71,7 +71,7 @@ int FUN_0035c3d0(unsigned int param_1,int param_2,int param_3,int param_4)
       piVar1[0xd] = 0;
       textFormatBuffer(temp_v2,&LAB_0035c628,temp_v1);
       puVar2 = temp_v2;
-      asdProcessCreateSimple(puVar2,3,0,0,FUN_00283a48,0,piVar1);
+      asdProcessCreateSimple(puVar2,3,0,0,eventColorTransitionUpdate,0,piVar1);
       *piVar1 = (int)puVar2;
       textFormatBuffer(temp_v2,&LAB_0035c640,temp_v1);
       taskCreateDraw(temp_v2,0x85,0,0,FUN_002835f4,0,piVar1,*piVar1);

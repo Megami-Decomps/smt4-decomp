@@ -1,16 +1,16 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00305b14` (_code @ 0x305b14, 0xa28 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_RotationY.h"
 
 extern "C" {
 
 int CONCAT44(...);
 int FUN_002482d4(void);
-int FUN_00248480(void);
 int FUN_002484e0(void);
 int randomAdvanceShiftRegister(void);
 int FUN_0024b830(...);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int memClear(float *, int);
 int VectorSignedToFloat(...);
@@ -89,11 +89,10 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_002482d4. */
-/* Supplied declaration required: FUN_00248480. */
 /* Supplied declaration required: FUN_002484e0. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -219,12 +218,12 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
                 }
                 temp_v24 = CONCAT44(temp_v29[10],temp_v13 / temp_v10);
                 FUN_002484e0();
-                FUN_00248480();
+                matrixSetRotationY(((f32*)temp_v29)[3]);
                 FUN_002482d4();
                 temp_v26 = 40.743664f;
                 temp_v28 = temp_v14 * 40.743664f;
                 temp_v13 = temp_v28;
-                FUN_002b7064();
+                phaseCosInterpolate();
                 FUN_002b70cc();
                 temp_v20 = (float)temp_v23;
                 temp_v10 = 0.0f;
@@ -246,7 +245,7 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
                     DAT_004ea940 = DAT_004ea920;
                     DAT_004ea944 = DAT_004ea924;
                     DAT_004ea948 = DAT_004ea928;
-                    FUN_002b7064();
+                    phaseCosInterpolate();
                     temp_v20 = (float)temp_v23;
                     FUN_002b70cc();
                     temp_v18 = (float)temp_v19;

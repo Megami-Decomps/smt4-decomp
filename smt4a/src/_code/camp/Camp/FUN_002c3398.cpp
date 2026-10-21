@@ -24,10 +24,10 @@ int uiSpriteSetKeyframe(...);
 int gameGetSlotTable(...);
 int __aeabi_memset4(...);
 int FUN_0020d700(...);
-int FUN_0023f604(...);
+int campRebuildEnabledFlagList(...);
 int FUN_0026f148(...);
 int FUN_0026f7f0(...);
-int FUN_0026fc00(...);
+void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int FUN_002a2cb4(...);
 int FUN_002a4878(...);
 int FUN_002c8538(...);
@@ -42,7 +42,7 @@ int FUN_0038b1c4(...);
 int FUN_003a7040(...);
 int pair40Set(...);
 int clearThreeWords(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -87,10 +87,9 @@ extern unsigned char DAT_005f1634; /* 0x5f1634 */
 /* Supplied declaration required: FUN_0020d700. */
 /* Supplied declaration required: FUN_0020d934. */
 /* Supplied declaration required: FUN_002304d0. */
-/* Supplied declaration required: FUN_0023f604. */
+/* Supplied declaration required: campRebuildEnabledFlagList. */
 /* Supplied declaration required: FUN_0026f148. */
 /* Supplied declaration required: FUN_0026f7f0. */
-/* Supplied declaration required: FUN_0026fc00. */
 /* Supplied declaration required: FUN_002a2cb4. */
 /* Supplied declaration required: FUN_002a4878. */
 extern unsigned int FUN_002a4894(int);
@@ -110,7 +109,7 @@ extern int FUN_002ef9f0(void);
 /* Supplied declaration required: FUN_003493dc. */
 extern unsigned char FUN_0036d134(void);
 /* Supplied declaration required: FUN_0038b1c4. */
-extern int FUN_0038b568(void);
+extern int aocDataBlockHasEntries(void);
 /* Supplied declaration required: FUN_003a7040. */
 extern unsigned char FUN_003b6f00(void);
 extern unsigned char FUN_003c0dcc(void);
@@ -121,7 +120,7 @@ extern unsigned char FUN_003e42f0(void);
 /* Supplied declaration required: pair40Set. */
 extern int flagSetAllCoveredBy(unsigned int);
 /* Supplied declaration required: clearThreeWords. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 /* WARNING: Removing unreachable block (ram,0x002c3ae0) */
@@ -173,7 +172,7 @@ void FUN_002c3398(void)
   campButtonHelpAcquire();
   FUN_003423e8(0);
   puVar4 = puVar2 + 0x18e;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
+  paramsClearPacket();
   paramsInit(puVar4,&DAT_0052b8bc,0xb4,&DAT_0052b970,0x150,&DAT_0052bac0,0x30,0,0,&DAT_0052baf0,
                0x4d0);
   FUN_0014e188(puVar2 + 0x196,0x14,0,puVar4,0xc9);
@@ -193,7 +192,7 @@ void FUN_002c3398(void)
   uiSpriteSelectAnim(puVar2 + 0x35d,1);
   FUN_0014e188(puVar2 + 0x380,0x14,0,puVar4,0xc9);
   uiSpriteSelectAnim(puVar2 + 0x380,9);
-  FUN_0026fc00(2,1,0xffffffff,0);
+  campSetSpriteAnimationPreset(2,1,0xffffffff,0);
   FUN_002f78a0(puVar2);
   FUN_0014e188(puVar2 + 0x682,0x14,0,puVar4,2);
   *(unsigned char *)(puVar2 + 0x6c8) = 0;
@@ -238,9 +237,9 @@ void FUN_002c3398(void)
   FUN_0020d700();
   __aeabi_memset4((int)puVar2 + 0x1b22,0x4a,0xffffffff);
   gameGetSlotTable();
-  FUN_0023f604(0xb);
-  FUN_0023f604(0xd);
-  FUN_0023f604(0xe);
+  campRebuildEnabledFlagList(0xb);
+  campRebuildEnabledFlagList(0xd);
+  campRebuildEnabledFlagList(0xe);
   FUN_0026f7f0();
   FUN_0026f148(0x13);
   FUN_0026f148(0x14);
@@ -495,7 +494,7 @@ LAB_002c4a2c:
   *(int *)(temp_v1 + 0x1c) = temp_v6;
   *(unsigned int *)(temp_v1 + 0x18) = 0;
   if (temp_v6 == 0x1b) {
-    temp_v6 = FUN_0038b568();
+    temp_v6 = aocDataBlockHasEntries();
     if (temp_v6 == 0) {
       *(unsigned int *)(temp_v1 + 0x1c) = 0x1c;
       return;

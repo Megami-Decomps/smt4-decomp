@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050f4d0` (_code @ 0x50f4d0, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: initializer has unrecovered VFP arguments/array-constructor ABI and unused pool words at +0x50..0x5c (0, 0x006309a0, 100.0f, 1280.0f). */
 #include "romwright_types.h"
 
 extern "C" {
@@ -13,7 +12,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned char LAB_003f2be4; /* 0x3f2be4 */
-extern int FUN_00416d04(...); /* 0x416d04 */
+extern int objFillFromTemplate(...); /* 0x416d04 */
 
 /* Supplied declaration required: emptyStub_002f4370. */
 /* Supplied declaration required: FUN_002f5020. */
@@ -38,7 +37,7 @@ void FUN_0050f4d0(unsigned int *param_1)
   param_1[8] = in_s0;
   param_1 = param_1 + 10;
   FUN_002f5020(param_1,&LAB_003f2be4,0x548,2);
-  emptyStub_002f4370(param_1 + -1,FUN_00416d04,0x100000);
+  emptyStub_002f4370(param_1 + -1,objFillFromTemplate,0x100000);
   return;
 }
 

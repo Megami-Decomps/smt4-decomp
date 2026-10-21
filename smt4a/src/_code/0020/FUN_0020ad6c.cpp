@@ -13,7 +13,7 @@ int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_00270104(void);
 int FUN_002a4878(int);
-int FUN_002c2c4c(...);
+int widgetSubCallIfVisible(...);
 int FUN_002cb438(int, unsigned int, int);
 int buttonHelpGetValue(void);
 int FUN_003756c8(void);
@@ -35,8 +35,8 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00270104. */
 /* Supplied declaration required: FUN_002a4878. */
-/* Supplied declaration required: FUN_002c2c4c. */
-extern int FUN_002c2c68(unsigned int);
+/* Supplied declaration required: widgetSubCallIfVisible. */
+extern int objectApplyIfUnblocked(unsigned int);
 /* Supplied declaration required: FUN_002cb438. */
 extern unsigned int FUN_002cc9e0(int, unsigned int);
 /* Supplied declaration required: buttonHelpGetValue. */
@@ -127,7 +127,7 @@ void FUN_0020ad6c(int param_1,int param_2,int param_3)
     if (param_2 != 8) goto LAB_0020afa8;
 LAB_0020b03c:
     piVar5 = (int *)(param_1 + 0x3890);
-    temp_v3 = FUN_002c2c4c(param_1 + *piVar5 * 100 + 0x38bc);
+    temp_v3 = widgetSubCallIfVisible(param_1 + *piVar5 * 100 + 0x38bc);
     temp_v1 = 0;
     if (temp_v1 < (int)temp_v3) {
       do {
@@ -166,7 +166,7 @@ LAB_0020b03c:
         temp_v1 = uiSearchPrimary(*puVar7);
       } while (temp_v4 < temp_v1);
     }
-    temp_v1 = FUN_002c2c68(*puVar7);
+    temp_v1 = objectApplyIfUnblocked(*puVar7);
     temp_v4 = uiSearchPrimary(*puVar7);
     if (temp_v4 < temp_v1) {
       if (*piVar5 != 1) {
@@ -199,7 +199,7 @@ LAB_0020b03c:
     }
   }
   else {
-    temp_v3 = FUN_002c2c4c(param_1 + *piVar8 * 100 + 0x38bc);
+    temp_v3 = widgetSubCallIfVisible(param_1 + *piVar8 * 100 + 0x38bc);
     temp_v1 = 0;
     if ((int)temp_v3 < 1) {
       return;
@@ -272,7 +272,7 @@ LAB_0020b1c0:
     if (param_2 != 0x2d) goto LAB_0020b3e4;
   }
   temp_v4 = 0;
-  temp_v1 = FUN_002c2c4c(param_1 + 0x3bdc);
+  temp_v1 = widgetSubCallIfVisible(param_1 + 0x3bdc);
   if (0 < temp_v1) {
     do {
       if (*(char *)(param_1 + temp_v4 + 0x41ed) == '\0') {
@@ -281,13 +281,13 @@ LAB_0020b1c0:
         *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
       }
       temp_v4 = temp_v4 + 1;
-      temp_v1 = FUN_002c2c4c(param_1 + 0x3bdc);
+      temp_v1 = widgetSubCallIfVisible(param_1 + 0x3bdc);
     } while (temp_v4 < temp_v1);
   }
 LAB_0020b3e4:
   if (param_2 == 0x16) {
     temp_v4 = 0;
-    temp_v1 = FUN_002c2c4c(param_1 + 0x3bdc);
+    temp_v1 = widgetSubCallIfVisible(param_1 + 0x3bdc);
     if (0 < temp_v1) {
       do {
         if (*(char *)(param_1 + temp_v4 + 0x3c84) == '\x01') {
@@ -296,7 +296,7 @@ LAB_0020b3e4:
           *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
         }
         temp_v4 = temp_v4 + 1;
-        temp_v1 = FUN_002c2c4c(param_1 + 0x3bdc);
+        temp_v1 = widgetSubCallIfVisible(param_1 + 0x3bdc);
       } while (temp_v4 < temp_v1);
     }
   }

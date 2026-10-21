@@ -27,7 +27,7 @@ s32 randRange(u32 id);
 PopupCandidate *saveSlotFindSelected(void);
 PopupEntry *FUN_0015fa74(u32 a, u32 b);
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_00213b5c(void);
+s32 gameDataBlocksGetTableFlag(void);
 s32 FUN_002d8b58(u32 kind, u16 id);
 f32 FUN_004a00f4(s32 index);
 
@@ -43,7 +43,7 @@ void popupTryStartScrollPrompt(u32 arg1, u32 arg2)
     }
 
     adjust = 0;
-    switch (FUN_00213b5c()) {
+    switch (gameDataBlocksGetTableFlag()) {
     case 1:
         adjust = -12;
         break;

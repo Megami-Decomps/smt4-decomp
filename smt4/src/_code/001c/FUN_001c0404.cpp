@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00192884(void);
 int configSettingsResetDefaults(void);
 int FUN_001a8748(void);
-int FUN_001ad98c(void);
-int FUN_001dc720(void);
-int FUN_001dc994(void);
+int spriteTableRefAcquire(void);
+int texTableLoadWithEntries(void);
+int commonBgLoadSpritesOnFirstUse(void);
 int FUN_001ddb40(void);
-int FUN_001ed7bc(void);
-int FUN_001f4c50(void);
+int texTableRefAcquire(void);
+int battleLoadCommonResources(void);
 int dataTable19ResolveVariants(void);
 int FUN_00201ac8(void);
 int FUN_00211d00(void);
@@ -37,12 +37,12 @@ extern unsigned char DAT_00446db4; /* 0x446db4 */
 /* Supplied declaration required: FUN_00192884. */
 /* Supplied declaration required: configSettingsResetDefaults. */
 /* Supplied declaration required: FUN_001a8748. */
-/* Supplied declaration required: FUN_001ad98c. */
-/* Supplied declaration required: FUN_001dc720. */
-/* Supplied declaration required: FUN_001dc994. */
+/* Supplied declaration required: spriteTableRefAcquire. */
+/* Supplied declaration required: texTableLoadWithEntries. */
+/* Supplied declaration required: commonBgLoadSpritesOnFirstUse. */
 /* Supplied declaration required: FUN_001ddb40. */
-/* Supplied declaration required: FUN_001ed7bc. */
-/* Supplied declaration required: FUN_001f4c50. */
+/* Supplied declaration required: texTableRefAcquire. */
+/* Supplied declaration required: battleLoadCommonResources. */
 /* Supplied declaration required: dataTable19ResolveVariants. */
 /* Supplied declaration required: FUN_00201ac8. */
 /* Supplied declaration required: FUN_00211d00. */
@@ -72,7 +72,7 @@ unsigned int FUN_001c0404(int *param_1)
   temp_v1 = *param_1;
   temp_v0 = *(int *)(temp_v1 + 8);
   if (temp_v0 == 7) {
-    FUN_001ed7bc();
+    texTableRefAcquire();
     FUN_00211d00();
     *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
     return 0;
@@ -91,7 +91,7 @@ unsigned int FUN_001c0404(int *param_1)
         FUN_0028d9b0();
         FUN_00192884();
         FUN_00201ac8();
-        FUN_001ad98c();
+        spriteTableRefAcquire();
         FUN_00223b84();
         FUN_001ddb40();
         spriteTables14And15Load(g_btlUiBlock);
@@ -103,7 +103,7 @@ unsigned int FUN_001c0404(int *param_1)
         if (temp_v0 != 10) {
           return 0;
         }
-        FUN_001f4c50();
+        battleLoadCommonResources();
         *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
         return 0;
       }
@@ -164,11 +164,11 @@ unsigned int FUN_001c0404(int *param_1)
   case 5:
     FUN_002c58c8(5,2);
     FUN_002c58c8(5,3);
-    FUN_001dc994();
+    commonBgLoadSpritesOnFirstUse();
     *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
     break;
   case 6:
-    FUN_001dc720();
+    texTableLoadWithEntries();
     *(int *)(temp_v1 + 8) = *(int *)(temp_v1 + 8) + 1;
   }
   return 0;

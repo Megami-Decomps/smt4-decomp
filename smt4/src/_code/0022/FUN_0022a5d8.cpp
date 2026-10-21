@@ -17,7 +17,7 @@ typedef struct {
 extern int btlGetMainState(void);
 
 
-void FUN_0022a5d8(unsigned int param_1,int param_2,unsigned int param_3)
+unsigned int FUN_0022a5d8(unsigned int param_1,int param_2,unsigned int param_3)
 
 {
 /* irregular: 1 native warning(s); review required */
@@ -36,16 +36,16 @@ void FUN_0022a5d8(unsigned int param_1,int param_2,unsigned int param_3)
     else {
       temp_v0 = btlGetMainState();
       if ((*(unsigned int *)(temp_v0 + 0x44a0) & 0x40) != 0 || (*(unsigned int *)(temp_v0 + 0x44a0) & 0x100) != 0) {
-        return;
+        return 0;
       }
       temp_v2 = *(unsigned int *)(temp_v0 + 0x2230);
       temp_v3 = 0xffffffff;
       param_2 = 0;
       temp_v1 = 0;
     }
-    FUN_0022a4ac(temp_v1,0,param_1,temp_v2,param_2,param_3,temp_v3);
+    return FUN_0022a4ac(temp_v1,0,param_1,temp_v2,param_2,param_3,temp_v3);
   }
-  return;
+  return 0;
 }
 
 } /* extern "C" */

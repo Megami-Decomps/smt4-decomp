@@ -5,7 +5,7 @@
 extern "C" {
 
 int memAlloc(int, int, int, int, int, int);
-int FUN_00271f24(void);
+int spriteGroupPlayerSelect(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_00271f24. */
+/* Supplied declaration required: spriteGroupPlayerSelect. */
 
 
 int * handleBlockRefCreate(int *param_1)
@@ -29,7 +29,7 @@ int * handleBlockRefCreate(int *param_1)
   memAlloc(0x10000,0x100,0,*(int *)(temp_v0 + 8) * 0x14 + 0x18,0x10,1);
   piVar1[4] = (int)(piVar1 + 6);
   *piVar1 = temp_v0;
-  FUN_00271f24();
+  spriteGroupPlayerSelect();
   *(unsigned short *)(piVar1 + 5) = 1;
   return piVar1;
 }

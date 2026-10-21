@@ -17,9 +17,9 @@ typedef struct EffectEditor {
 
 extern EffectEditor g_effectEditor;
 
-int FUN_002b41e4(u32 block, void *parts, u32 param, s32 count);
+int effPartSetData(u32 block, void *parts, u32 param, s32 count);
 u32 FUN_00243c24(u32 block);
-int FUN_00350a8c(void);
+int effectEditorApplyHandlerState(void);
 
 /* Applies the parts data to the editor's block, then creates the effect block from it and returns that call's result. */
 u32 effEditorCreateBlock(PartsData *data)
@@ -27,10 +27,10 @@ u32 effEditorCreateBlock(PartsData *data)
     u32 result;
 
     if (data->parts != NULL) {
-        FUN_002b41e4(g_effectEditor.block, data->parts, data->param, data->count);
+        effPartSetData(g_effectEditor.block, data->parts, data->param, data->count);
     }
     result = FUN_00243c24(g_effectEditor.block);
-    FUN_00350a8c();
+    effectEditorApplyHandlerState();
     return result;
 }
 

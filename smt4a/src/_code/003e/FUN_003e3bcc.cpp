@@ -20,11 +20,11 @@ int FUN_003343f0(...);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int panelSetTarget(int, int);
 int FUN_0037c8e4(int, int);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int FUN_003c1060(void);
 int FUN_003c3e14(void);
 int FUN_003c5fc4(...);
-int FUN_004a0ef8(int);
+int partyAddMoneyClamped(int);
 int FUN_004bcd90(int);
 int dispatchIfFound(unsigned int, int, int);
 int FUN_004bd6b0(int, int, int);
@@ -63,7 +63,7 @@ extern unsigned char LAB_003e400c; /* 0x3e400c */
 /* Supplied declaration required: FUN_0019de98. */
 extern int slotRecordFindById(unsigned short);
 extern unsigned int *gameGetSlotTable(void);
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_0026c3a0(void);
@@ -82,11 +82,11 @@ extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 extern int panelStateIs0(void);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_003c1060. */
 /* Supplied declaration required: FUN_003c3e14. */
 /* Supplied declaration required: FUN_003c5fc4. */
-/* Supplied declaration required: FUN_004a0ef8. */
+/* Supplied declaration required: partyAddMoneyClamped. */
 /* Supplied declaration required: FUN_004bcd90. */
 extern int getUnlockedSlotCount(unsigned int);
 /* Supplied declaration required: dispatchIfFound. */
@@ -134,7 +134,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     temp_v7 = *(unsigned int *)((int)param_1 + temp_v0 * 0x24 + 0x38);
     temp_v8 = *(unsigned int *)((int)param_1 + temp_v0 * 0x24 + 0x3c);
     temp_v9 = *(unsigned int *)((int)param_1 + temp_v0 * 0x24 + 0x40);
-    FUN_004a0ef8(-*(int *)((int)param_1 + temp_v0 * 0x24 + 0x24));
+    partyAddMoneyClamped(-*(int *)((int)param_1 + temp_v0 * 0x24 + 0x24));
     temp_v4 = FUN_004d0cd4();
     uStack_3e = (unsigned short)((unsigned int)temp_v3 >> 0x10);
     temp_v0 = FUN_002a4b28();
@@ -170,7 +170,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
   if (temp_v0 < 4) {
     if (temp_v0 != 0) {
       if (temp_v0 == 1) {
-        temp_v0 = FUN_00224880(param_1->field_0x18);
+        temp_v0 = scrRunOpcodesStub(param_1->field_0x18);
         if (temp_v0 != 2) {
           return;
         }
@@ -218,7 +218,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
       if (temp_v0 != 3) {
         return;
       }
-      temp_v0 = FUN_00224880(param_1->field_0x18);
+      temp_v0 = scrRunOpcodesStub(param_1->field_0x18);
       if (temp_v0 != 2) {
         return;
       }
@@ -263,7 +263,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     temp_v0 = 99;
   }
   else {
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     FUN_0022e774();
     FUN_0023b45c(0);
     FUN_002a7288();

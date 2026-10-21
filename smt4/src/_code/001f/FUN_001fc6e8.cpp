@@ -1,10 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fc6e8` (_code @ 0x1fc6e8, 0x130c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlTargetSelect.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 
-int FUN_001ddafc(...);
+int gameDataSlotSetFlag(...);
 int FUN_001f7d50(...);
 int FUN_001f7fac(...);
 int FUN_001f8290(...);
@@ -13,10 +15,10 @@ int gameDataEntrySetLevel(...);
 int messageForwardDefaultMode(...);
 int FUN_002903f0(void);
 int FUN_00295660(...);
-int FUN_00295ba4(...);
-int FUN_00297468(...);
+int infoWinStartTimer(...);
+int asdLoadFileAsyncSimple(...);
 int soundChannelStopAll(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(...);
 int devilGetRecord(void);
@@ -24,7 +26,6 @@ int FUN_002bd06c(...);
 int libc_strcpy(...);
 int asdMemFree(void);
 int jobStop(...);
-int FUN_002e82d4(...);
 int FUN_00308d5c(...);
 int FUN_0033a670(...);
 int FUN_0033b3c4(...);
@@ -47,22 +48,21 @@ int FUN_002551ac(...);
 int bgmStopNoForce(...);
 int FUN_0027dbc8(...);
 int FUN_0027de98(void);
-int FUN_0027e3f8(...);
+int btlEventSelectTrigger(...);
 int FUN_0027e760(...);
-int FUN_00290ed8(...);
+void FUN_00290ed8(unsigned int frames);
 int btlTalkBustUpCreate(void);
 int FUN_0029be5c(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_002bff50(void);
-int FUN_00336830(...);
+int battleInitializeEnemyFormation(...);
 int FUN_003ae134(...);
 int FUN_003c7c84(...);
 int FUN_003c7f20(...);
 
 int FUN_001a84d8(...);
 int btlAutoCalcTaskCreate(...);
-int FUN_001d2844(...);
-int FUN_001e204c(...);
+int btlUnitInitializeDrawJobs(...);
 int FUN_001e2350(...);
 int FUN_001f7ecc(...);
 int FUN_00255e38(...);
@@ -70,7 +70,7 @@ int FUN_002560a4(int);
 int FUN_00256124(void);
 int FUN_00256194(void);
 int FUN_0027dc24(int, int, int);
-int FUN_0028ee90(void);
+int gameOptionsEnableAndReset(void);
 int memClear(...);
 int FUN_002f34cc(...);
 int FUN_003370ac(int);
@@ -118,9 +118,8 @@ extern int DAT_0049fb9c; /* 0x49fb9c */
 /* Supplied declaration required: FUN_001a84d8. */
 /* Supplied declaration required: btlAutoCalcTaskCreate. */
 /* Supplied declaration required: FUN_001d2628. */
-/* Supplied declaration required: FUN_001d2844. */
-/* Supplied declaration required: FUN_001ddafc. */
-/* Supplied declaration required: FUN_001e204c. */
+/* Supplied declaration required: btlUnitInitializeDrawJobs. */
+/* Supplied declaration required: gameDataSlotSetFlag. */
 /* Supplied declaration required: btlEventTaskStart. */
 /* Supplied declaration required: FUN_001e2350. */
 /* Supplied declaration required: FUN_001f7d50. */
@@ -151,27 +150,26 @@ extern int FUN_00255de0(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027dc24. */
 /* Supplied declaration required: FUN_0027de98. */
 extern int FUN_0027e3b8(unsigned int *);
-/* Supplied declaration required: FUN_0027e3f8. */
+/* Supplied declaration required: btlEventSelectTrigger. */
 /* Supplied declaration required: FUN_0027e760. */
 extern unsigned int *btlUnitGet(unsigned int);
 extern int FUN_00287894(void);
-/* Supplied declaration required: FUN_0028ee90. */
+/* Supplied declaration required: gameOptionsEnableAndReset. */
 extern int FUN_0029022c(void);
 /* Supplied declaration required: FUN_002903f0. */
-/* Supplied declaration required: FUN_00290ed8. */
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 extern int dialogIsActive(void);
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int gameGetSlotTable(void);
-extern int gameGetOptions(void);
-extern int FUN_002b6b38(void);
+extern int gameGetSupportUnitData(void);
+extern int gameGetOptionProgressStatus(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bd06c. */
@@ -181,10 +179,9 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_002e82d4. */
 /* Supplied declaration required: FUN_002f34cc. */
 /* Supplied declaration required: FUN_00308d5c. */
-/* Supplied declaration required: FUN_00336830. */
+/* Supplied declaration required: battleInitializeEnemyFormation. */
 /* Supplied declaration required: FUN_003370ac. */
 /* Supplied declaration required: FUN_00337cfc. */
 /* Supplied declaration required: FUN_00338cfc. */
@@ -265,7 +262,7 @@ void FUN_001fc6e8(unsigned int param_1)
   *(unsigned int *)(temp_v4 + 0x78) = 0;
   switch(*(unsigned int *)(temp_v4 + 100)) {
   case 1:
-    FUN_001e204c(temp_v4,0);
+    btlDebugOpen((BtlMainState *)temp_v4,0);
     return;
   case 2:
     if (*(int *)(temp_v4 + 0xc4) >= 1) {
@@ -298,17 +295,17 @@ void FUN_001fc6e8(unsigned int param_1)
         }
       }
       else {
-        temp_v3 = FUN_002b6b38();
+        temp_v3 = gameGetOptionProgressStatus();
         if (*(int *)(temp_v4 + 0x2f28) >= 1) {
           if (temp_v3 != 1) {
             if (temp_v3 == 2) {
               FUN_00256124();
-              FUN_0028ee90();
+              gameOptionsEnableAndReset();
             }
           }
           else {
             FUN_00256194();
-            FUN_0028ee90();
+            gameOptionsEnableAndReset();
           }
           FUN_002560a4(*(int *)(temp_v4 + 0x2f28));
           temp_v3 = gameGetSlotTable();
@@ -351,7 +348,7 @@ void FUN_001fc6e8(unsigned int param_1)
     else {
       FUN_003ad754(g_btlUiBlock,0);
     }
-    FUN_001d2844(temp_v4);
+    btlUnitInitializeDrawJobs(temp_v4);
     FUN_001e2350(temp_v4);
     FUN_001f8158(temp_v4);
     FUN_0021ae40(temp_v4);
@@ -413,7 +410,7 @@ void FUN_001fc6e8(unsigned int param_1)
     *(unsigned char *)(temp_v4 + 0x44b4) = 0;
     *(unsigned char *)(temp_v4 + 0x44b5) = 0;
     *(unsigned int *)(temp_v4 + 0x2314) = 0;
-    FUN_00336830(temp_v4);
+    battleInitializeEnemyFormation(temp_v4);
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x50));
     if (temp_v3 == 0) {
       btlEventTaskStart(temp_v4);
@@ -565,14 +562,14 @@ void FUN_001fc6e8(unsigned int param_1)
     if (temp_v3 == 0) {
       if ((*(unsigned int *)(temp_v4 + 0x44a0) & 4) != 0) {
         puVar5 = g_btlEvent;
-        FUN_0027e3f8(g_btlEvent,2,0xffffffff,0);
+        btlEventSelectTrigger(g_btlEvent,2,0xffffffff,0);
         if (puVar5 == (unsigned int *)0x0) {
           return;
         }
       }
       else {
         puVar5 = g_btlEvent;
-        FUN_0027e3f8(g_btlEvent,1,0xffffffff,0);
+        btlEventSelectTrigger(g_btlEvent,1,0xffffffff,0);
         if (puVar5 == (unsigned int *)0x0) {
           return;
         }
@@ -622,7 +619,7 @@ void FUN_001fc6e8(unsigned int param_1)
     FUN_001f7d50(temp_v4,temp_v16,temp_v17,temp_v18,temp_v19);
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x1c));
     if (temp_v3 == 0) {
-      FUN_002e82d4(temp_v4);
+      btlTargetSelectCreate(reinterpret_cast<BtlMainState *>(temp_v4));
     }
     return;
   case 0xe:
@@ -639,7 +636,7 @@ void FUN_001fc6e8(unsigned int param_1)
         FUN_002903f0();
         temp_v3 = FUN_00287894();
         if (temp_v3 != 0 && temp_v3 != 3) {
-          temp_v3 = gameGetOptions();
+          temp_v3 = gameGetSupportUnitData();
           temp_v0 = *(unsigned short *)(temp_v3 + 0x608);
           temp_v14 = (temp_v0 & 1) != 0;
           if (temp_v14) {
@@ -714,7 +711,7 @@ LAB_001fd348:
     default:
       temp_v4 = FUN_0027e3b8(g_btlEvent);
       if ((temp_v4 == 0) &&
-         (puVar5 = g_btlEvent, FUN_0027e3f8(g_btlEvent,8,0xffffffff,0),
+         (puVar5 = g_btlEvent, btlEventSelectTrigger(g_btlEvent,8,0xffffffff,0),
          puVar5 != (unsigned int *)0x0)) {
         puVar5 = g_btlEvent;
         *g_btlEvent = 9;
@@ -724,7 +721,7 @@ LAB_001fd348:
       }
       break;
     case 3:
-      temp_v3 = gameGetOptions();
+      temp_v3 = gameGetSupportUnitData();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v3 + 0x46);
       if ((temp_v6 != 0) && (temp_v10 = temp_v6, devilGetRecord(), temp_v10 != 0)) {
         memClear(&temp_v16,0x60);
@@ -744,7 +741,7 @@ LAB_001fd348:
     FUN_003d9be4(DAT_00435d18,temp_v4);
     temp_v3 = dialogIsActive();
     if (temp_v3 != 0) {
-      FUN_00295ba4(1);
+      infoWinStartTimer(1);
     }
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + 0x24));
     if (temp_v3 != 0) {
@@ -789,7 +786,7 @@ LAB_001fd348:
         temp_v5 = gameDataEntryGetLevel(*psVar18);
         gameDataEntrySetLevel(*psVar18,temp_v5 + (unsigned int)*(unsigned short *)(temp_v12 + 0x445e));
         FUN_00348c10(*psVar18,*(unsigned short *)(temp_v12 + 0x445e));
-        FUN_001ddafc(*psVar18,1);
+        gameDataSlotSetFlag(*psVar18,1);
       }
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x10);
@@ -878,24 +875,24 @@ LAB_001fd348:
         }
         piVar15 = (int *)(temp_v4 + 0x4a4c);
         *piVar15 = 0;
-        FUN_00297468("battle/Common/btlfade.bf",piVar19,0);
+        asdLoadFileAsyncSimple("battle/Common/btlfade.bf",piVar19,0);
         *piVar15 = *piVar15 + 1;
         return;
       }
     default:
-      FUN_0029c3c0(0,10,0xff);
-      FUN_0029c3c0(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
       return;
     case 2:
-      FUN_0029c3c0(0,10,0xffffffff);
-      FUN_0029c3c0(1,10,0xffffffff);
+      slotSetRequest(0,10,0xffffffff);
+      slotSetRequest(1,10,0xffffffff);
       return;
     case 3:
       break;
     case 4:
       if (*(int *)(temp_v4 + 0x88) == 2) {
-        FUN_0029c3c0(0,10,0xff);
-        FUN_0029c3c0(1,10,0xff);
+        slotSetRequest(0,10,0xff);
+        slotSetRequest(1,10,0xff);
         return;
       }
     }
@@ -908,7 +905,7 @@ LAB_001fd348:
     *(unsigned int *)(temp_v4 + 0x84) = 0;
     puVar5 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
     *puVar5 = 0;
-    FUN_001e204c(temp_v4,1);
+    btlDebugOpen((BtlMainState *)temp_v4,1);
     return;
   case 0x18:
     temp_v3 = jobIsValid(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc));

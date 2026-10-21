@@ -6,10 +6,10 @@ extern "C" {
 
 int FUN_001d1438(...);
 int gameDataCopySaveToWork(...);
-int FUN_00261a14(...);
+int infoWinSetValue(...);
 int FUN_00341fa4(...);
-int FUN_0037b3fc(...);
-int FUN_004731b8(...);
+int helpResourcesRelease(...);
+int gameDataSaveSetValues(...);
 int FUN_004731d8(...);
 int FUN_004b7a08(...);
 int FUN_004b7d88(...);
@@ -49,10 +49,10 @@ extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 
 /* Supplied declaration required: FUN_001d1438. */
 /* Supplied declaration required: gameDataCopySaveToWork. */
-/* Supplied declaration required: FUN_00261a14. */
+/* Supplied declaration required: infoWinSetValue. */
 /* Supplied declaration required: FUN_00341fa4. */
-/* Supplied declaration required: FUN_0037b3fc. */
-/* Supplied declaration required: FUN_004731b8. */
+/* Supplied declaration required: helpResourcesRelease. */
+/* Supplied declaration required: gameDataSaveSetValues. */
 /* Supplied declaration required: FUN_004731d8. */
 extern int FUN_0047e150(int);
 /* Supplied declaration required: FUN_004b7a08. */
@@ -82,7 +82,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
     }
     temp_v0 = FUN_0047e150(g_aocMain + 0xa8);
     if (temp_v0 != 0) {
-      FUN_0037b3fc(g_aocMain + 0xa8);
+      helpResourcesRelease(g_aocMain + 0xa8);
       if (g_mapSelection >= 0) {
         temp_v5 = 0;
         temp_v6 = 0;
@@ -91,7 +91,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
         temp_v2 = 3;
         temp_v3 = (unsigned char)param_1->field_0x3c;
         temp_v4 = (unsigned char)param_1->field_0x40;
-        FUN_004731b8(&temp_v2);
+        gameDataSaveSetValues(&temp_v2);
         gameDataCopySaveToWork();
         temp_v9 = (unsigned short)g_mapSelection;
         temp_v10 = (unsigned short)DAT_005f1c9c;
@@ -113,7 +113,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
         temp_v2 = 3;
         temp_v3 = (unsigned char)param_1->field_0x3c;
         temp_v4 = (unsigned char)param_1->field_0x40;
-        FUN_004731b8(&temp_v2);
+        gameDataSaveSetValues(&temp_v2);
         gameDataCopySaveToWork();
         FUN_004b7a08(param_1);
         param_1->field_0x20 = param_1->field_0x20 | 0x40100;
@@ -122,7 +122,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
       }
       else {
         FUN_004731d8();
-        FUN_00261a14(1);
+        infoWinSetValue(1);
         FUN_004b7d88(param_1);
         param_1->field_0x2c = 0;
         param_1->field_0x28 = 5;
@@ -142,7 +142,7 @@ void FUN_004b8f18(fn_004b8f18_arg0 *param_1)
     }
   }
   else {
-    FUN_00261a14(0);
+    infoWinSetValue(0);
     FUN_00341fa4(g_aocMain + 0xa8,1);
     param_1->field_0x2c = 1;
   }

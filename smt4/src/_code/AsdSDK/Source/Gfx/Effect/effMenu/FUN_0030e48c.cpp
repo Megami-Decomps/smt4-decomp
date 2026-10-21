@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030e48c` (_code @ 0x30e48c, 0x8cc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_MenuRectangle.h"
 
 extern "C" {
 
@@ -18,8 +19,7 @@ int FUN_002c39a4(int);
 int asdMemFree(void);
 int FUN_002c4f8c(int, unsigned int);
 int FUN_002c733c(...);
-int FUN_002cbc40(...);
-int FUN_002f2ea0(...);
+int effectDrawProjectedCircleFan(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX44TransposeAsm(...);
 
@@ -47,7 +47,7 @@ extern unsigned int *DAT_004ea7f4; /* 0x4ea7f4 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern unsigned int FUN_0024ac4c(unsigned int);
+extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: effectSpawnPositionDefault. */
@@ -64,8 +64,7 @@ extern unsigned int FUN_0024ac4c(unsigned int);
 extern unsigned int FUN_002c501c(void);
 extern int FUN_002c5d80(unsigned int);
 /* Supplied declaration required: FUN_002c733c. */
-/* Supplied declaration required: FUN_002cbc40. */
-/* Supplied declaration required: FUN_002f2ea0. */
+/* Supplied declaration required: effectDrawProjectedCircleFan. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
 
@@ -194,7 +193,7 @@ joined_r0x0030e620:
     case 5:
       temp_v15 = param_2[6];
       temp_v16 = param_2[7];
-      FUN_002f2ea0(param_2[2],param_2[3],param_2[4],param_2[5]);
+      menuDrawRectangle(param_2[2],param_2[3],param_2[4],param_2[5],temp_v15,temp_v16);
       break;
     case 6:
       temp_v10 = (float)VectorSignedToFloat(param_2[2],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -240,14 +239,14 @@ joined_r0x0030e620:
       temp_v19 = param_2[7];
       temp_v20 = param_2[8];
       temp_v7 = *(unsigned int *)(g_titleScene + 0x528);
-      temp_v4 = FUN_0024ac4c(temp_v7);
+      temp_v4 = asdCameraValueGet(temp_v7);
       FUN_002630e0(&temp_v15,0,temp_v4);
       FUN_002630e0(&temp_v18,0,temp_v4,&temp_v18);
       FUN_002c1b64(g_titleScene,0);
       FUN_002c39a4(g_titleScene);
       FUN_00263028((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
                    (((temp_v3 & 0xffffff) >> 0x10) << 8) | (temp_v3 >> 0x18));
-      temp_v7 = FUN_0024ac4c(temp_v7);
+      temp_v7 = asdCameraValueGet(temp_v7);
       FUN_002c4f8c(g_titleScene,temp_v7);
       break;
     case 9:
@@ -268,7 +267,7 @@ joined_r0x0030e620:
     case 10:
       temp_v7 = param_2[8];
       nn_math_ARMv6_MTX44TransposeAsm(&temp_v15,param_2 + 9);
-      FUN_002cbc40(param_2 + 2,temp_v7,&temp_v15);
+      effectDrawProjectedCircleFan(param_2 + 2,temp_v7,&temp_v15);
       break;
     case 0xb:
       puVar11 = (unsigned int *)param_2[2];
@@ -306,17 +305,17 @@ joined_r0x0030e620:
         FUN_002b7d30();
       }
       break;
-    case 0xc:
+    case 0xc: {
       temp_v7 = param_2[6];
-      temp_v12 = *(unsigned long long *)(param_2 + 2);
+      const MenuDrawPoint point = *reinterpret_cast<const MenuDrawPoint *>(param_2 + 2);
       FUN_002c1b64(g_titleScene,0);
       temp_v15 = 0xffffffff;
       temp_v16 = 0xff64646;
-      FUN_002f2ea0((int)(float)temp_v12,(int)(float)((unsigned long long)temp_v12 >> 0x20),0x80);
+      menuDrawRectangle(static_cast<s32>(point.x),static_cast<s32>(point.y),0x80,0x80,temp_v15,temp_v16);
       temp_v15 = 0xffffff00;
       temp_v16 = 0xff000000;
-      FUN_002f2ea0((int)((float)temp_v12 + 48.0f),(int)((float)((unsigned long long)temp_v12 >> 0x20) + 48.0f),0x20
-                  );
+      menuDrawRectangle(static_cast<s32>(point.x + 48.0f),static_cast<s32>(point.y + 48.0f),
+                  0x20,0x20,temp_v15,temp_v16);
       FUN_002c1b64(g_titleScene,temp_v7);
       FUN_002b7d30();
       FUN_002c1b64(g_titleScene,0);
@@ -324,6 +323,7 @@ joined_r0x0030e620:
       FUN_00263028(0xffffffff);
       FUN_00263028(0xff0000ff);
       FUN_00263028(0xff0000ff);
+    }
     }
     param_2 = piVar9;
     if (param_3 != 0) {

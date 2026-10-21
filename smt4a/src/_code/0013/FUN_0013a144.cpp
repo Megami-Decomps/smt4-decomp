@@ -7,7 +7,7 @@ extern "C" {
 int resourceDestroy(void);
 int resourceListDestroy(void);
 
-extern unsigned char DAT_00635370; /* 0x635370 */
+extern unsigned char g_objectRegistry; /* 0x635370 */
 
 /* Supplied declaration required: resourceDestroy. */
 /* Supplied declaration required: resourceListDestroy. */
@@ -24,7 +24,7 @@ void FUN_0013a144(void)
   temp_v1 = 0;
   do {
     temp_v0 = temp_v1 * 8;
-    piVar3 = (int *)(&DAT_00635370 + temp_v0);
+    piVar3 = (int *)(&g_objectRegistry + temp_v0);
     if (*(int *)(temp_v0 + 0x635374) != 0) {
       if (*piVar3 >= 1) {
         *piVar3 = *piVar3 - 1;

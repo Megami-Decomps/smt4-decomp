@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_001bf074(int);
+int asdModelRefreshRenderData(int);
 int FUN_001bf200(unsigned int, int);
 int nw_gfx_RenderContext_MaterialHash_ResetMaterialHash(int, int);
 
 typedef int romwright_code(...);
-/* Supplied declaration required: FUN_001bf074. */
+/* Supplied declaration required: asdModelRefreshRenderData. */
 /* Supplied declaration required: FUN_001bf200. */
 /* Supplied declaration required: nw_gfx_RenderContext_MaterialHash_ResetMaterialHash. */
 
@@ -43,7 +43,7 @@ void FUN_001b68e8(int param_1,int *param_2)
         *(unsigned char *)(param_1 + 0x13) = 1;
       }
     }
-    FUN_001bf074(param_1);
+    asdModelRefreshRenderData(param_1);
     if ((~*(unsigned int *)(param_1 + 0x14) & 1) != 0) {
       if (param_2 == (int *)0x0) {
         param_2 = *(int **)(*(int *)(*(int *)(param_1 + 0x20) + 0x1c) + 0x1ec);

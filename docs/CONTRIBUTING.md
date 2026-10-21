@@ -54,6 +54,8 @@ Every match must be one a programmer could have written for a reason.
     a plain `b`, so its NOP has no `pop` around it;
   - **a branch to the very next instruction** (armlink's `--branchnop`): a tail call into the
     function placed right after. Write the call as the last statement.
+- **`nop {0}` (`e320f000`) is the compiler's**, not the linker's: armcc places these hints itself
+  in some branch and `switch` layouts. Plain C reproduces them; never infer a missing call from them.
 - **A function that starts with a NOP before its `push`** is two functions the analysis merged: a
   stub forwarding to the next one, and that function. Split the unit with
   `python -B tools/units.py split ROWS` (`<game> <function> <hex offset>` per row) and write both.

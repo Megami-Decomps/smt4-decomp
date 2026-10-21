@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e933c` (_code @ 0x4e933c, 0x4d0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
 
@@ -13,9 +14,8 @@ int sysMemClear(int [109], int);
 int FUN_003e8bb0(...);
 int FUN_004c8340(...);
 int FUN_004c9160(...);
-int FUN_004e0114(...);
 int FUN_004e7c04(...);
-int FUN_004e9f74(...);
+int btlUnitMarkTargetCandidates(...);
 int FUN_004eb838(...);
 
 /* stack frame of param_2: 8 slot(s), 32 byte(s) */
@@ -51,9 +51,8 @@ extern int gameGetPlayerData(void);
 extern int isOutsideRange4To53(int);
 /* Supplied declaration required: FUN_004c8340. */
 /* Supplied declaration required: FUN_004c9160. */
-/* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004e7c04. */
-/* Supplied declaration required: FUN_004e9f74. */
+/* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: FUN_004eb838. */
 
 
@@ -174,11 +173,11 @@ LAB_004e960c:
       if (temp_v11 != 0) {
         if (temp_v11 != 1) {
           if (temp_v11 == 2) {
-            FUN_004e9f74(param_1,temp_v0,2);
+            btlUnitMarkTargetCandidates(param_1,temp_v0,2);
           }
         }
         else {
-          FUN_004e9f74(param_1,temp_v0,1);
+          btlUnitMarkTargetCandidates(param_1,temp_v0,1);
         }
       }
       else {
@@ -194,7 +193,7 @@ LAB_004e960c:
         *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v4) = temp_v5 & 0xfffffff3;
         temp_v1 = temp_v1 + 1;
       } while (temp_v6 != 0);
-      FUN_004e0114(param_1,param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x6a),0,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(*(int *)(param_2 + 0x24) + 0x6a),0,0x1e,0x1e);
       FUN_004eb838(param_1,param_2);
       FUN_004c9160(10,*(unsigned int *)(param_2 + 0x20),0,1);
       temp_v8 = 1;

@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTable1bOr1cGetRecord(void);
 
-extern unsigned int FUN_00298e20(unsigned short);
+extern unsigned int questIsCompleted(unsigned short);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
@@ -18,9 +18,9 @@ void FUN_001b1824(unsigned short *param_1,unsigned short *param_2)
   unsigned int temp_v1;
   int temp_v2;
   
-  temp_v0 = FUN_00298e20(*param_1);
+  temp_v0 = questIsCompleted(*param_1);
   temp_v2 = 0;
-  temp_v1 = FUN_00298e20(*param_2);
+  temp_v1 = questIsCompleted(*param_2);
   if ((temp_v1 & ~temp_v0) != 0) {
     temp_v2 = -1;
   }

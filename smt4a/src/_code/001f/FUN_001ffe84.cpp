@@ -10,10 +10,10 @@ int FUN_0019de98(...);
 int FUN_002277d8(void);
 int FUN_00228b04(...);
 int FUN_002b5c88(void);
-int FUN_002e1b3c(...);
+int buttonHelpScriptStart(...);
 int FUN_0031f208(...);
-int FUN_0031f27c(...);
-int FUN_003250ec(...);
+int sortMenuAcquire(...);
+int flagBanksResetPendingState(...);
 int FUN_003343f0(...);
 int FUN_003450d4(...);
 int FUN_003da8f4(...);
@@ -28,11 +28,11 @@ int FUN_0022e774(void);
 int FUN_0023b45c(...);
 int FUN_0028b088(...);
 int FUN_002a7324(...);
-int FUN_002adce8(...);
+int campTouchRegionsRemoveGroup(...);
 int FUN_002c7e24(void);
 int FUN_002cb278(int, int);
 int FUN_0031f718(...);
-int FUN_00334214(...);
+int statusDisplayBindUnitRecord(...);
 int FUN_003344b4(...);
 int FUN_0035dbd4(...);
 int FUN_003d386c(int);
@@ -76,17 +76,17 @@ extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7324. */
 extern int FUN_002a7410(void);
-/* Supplied declaration required: FUN_002adce8. */
+/* Supplied declaration required: campTouchRegionsRemoveGroup. */
 /* Supplied declaration required: FUN_002b5c88. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c7e24. */
 /* Supplied declaration required: FUN_002cb278. */
-/* Supplied declaration required: FUN_002e1b3c. */
+/* Supplied declaration required: buttonHelpScriptStart. */
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_0031f718. */
-/* Supplied declaration required: FUN_003250ec. */
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: flagBanksResetPendingState. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_003344b4. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -147,14 +147,14 @@ void FUN_001ffe84(void)
   if (*(int *)(g_camp + 0x20) != 1) {
     return;
   }
-  temp_v3 = FUN_002c2c68(g_camp + 0x1ec);
+  temp_v3 = objectApplyIfUnblocked(g_camp + 0x1ec);
   if (temp_v3 < 1) {
     temp_v3 = 1;
     FUN_001517b4();
     if (temp_v3 == 0) {
       return;
     }
-    FUN_002adce8(temp_v8 + 0x1ec,1);
+    campTouchRegionsRemoveGroup(temp_v8 + 0x1ec,1);
     FUN_0022e774();
     FUN_0035dbd4(0);
     FUN_0028b088(0);
@@ -212,14 +212,14 @@ void FUN_001ffe84(void)
       }
       else {
         temp_v7 = gameGetSlotRecord();
-        FUN_00334214(temp_v7,0,0);
+        statusDisplayBindUnitRecord(temp_v7,0,0);
         FUN_002a7324(1);
       }
     }
     temp_v4 = FUN_002a7410();
     if (temp_v4 != 0) {
       FUN_002c7e24();
-      FUN_002adce8(temp_v8 + 0x1ec,1);
+      campTouchRegionsRemoveGroup(temp_v8 + 0x1ec,1);
       temp_v4 = 0;
       temp_v3 = uiSearchPrimary(temp_v8 + 0x1ec);
       if (0 < temp_v3) {
@@ -323,18 +323,18 @@ void FUN_001ffe84(void)
         }
         else {
           temp_v7 = gameGetSlotRecord();
-          FUN_00334214(temp_v7,0,0);
+          statusDisplayBindUnitRecord(temp_v7,0,0);
           FUN_002a7324(0);
         }
         eventQueueAddUniqueIfValid(0x100021c);
-        FUN_002e1b3c(0);
+        buttonHelpScriptStart(0);
         FUN_0020b660(0x47);
         sysPlaySe(0xa0);
         FUN_003343f0(1);
         return;
       }
       if (*piVar11 == 0x93) {
-        FUN_003250ec(0);
+        flagBanksResetPendingState(0);
         if (*piVar12 < 0) {
           temp_v8 = gameGetPlayerData();
           temp_v1 = FUN_003df57c(*piVar11,1);
@@ -356,17 +356,17 @@ void FUN_001ffe84(void)
         }
         else {
           temp_v7 = gameGetSlotRecord();
-          FUN_00334214(temp_v7,0,0);
+          statusDisplayBindUnitRecord(temp_v7,0,0);
           FUN_002a7324(0);
         }
         eventQueueAddUniqueIfValid(0x100021c);
-        FUN_002e1b3c(4);
+        buttonHelpScriptStart(4);
         FUN_0020b660(0x47);
         sysPlaySe(0xa0);
         FUN_003343f0(1);
         return;
       }
-      FUN_002adce8(temp_v8 + 0x1ec,1);
+      campTouchRegionsRemoveGroup(temp_v8 + 0x1ec,1);
       FUN_0021b274(3,0xffffffff,0);
       FUN_0023b45c(0);
       FUN_0035dbd4(0);
@@ -385,7 +385,7 @@ void FUN_001ffe84(void)
         temp_v3 = 9;
         FUN_001517b4(9,1);
         if (temp_v3 != 0) {
-          FUN_0031f27c(1,0);
+          sortMenuAcquire(1,0);
           FUN_0031f208(0xb);
           FUN_0031f208(0x20);
           FUN_0031f208(0xd);
@@ -402,7 +402,7 @@ void FUN_001ffe84(void)
       }
       return;
     }
-    FUN_002adce8(temp_v8 + 0x1ec,1);
+    campTouchRegionsRemoveGroup(temp_v8 + 0x1ec,1);
     if (*(char *)(temp_v8 + 0x32a8) != '\0') {
       *(unsigned char *)(temp_v8 + 0xa4) = 1;
       FUN_0020d700();

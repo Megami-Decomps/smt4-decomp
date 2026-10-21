@@ -9,6 +9,8 @@ typedef struct AocMainAObjC { u8 unk[1]; } AocMainAObjC;
 typedef struct AocMainA {
     /* 0x00 */ u8 unk00[0xA8];
     /* 0xA8 */ AocMainAObjC objC;
+    /* 0x0A9 */ u8 unk0a9[0xad8];
+    /* 0xB81 */ u8 unkB81;
 } AocMainA;
 
 extern "C" AocMainA *g_aocMain;

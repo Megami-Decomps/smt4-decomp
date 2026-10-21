@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int FUN_003219b0(unsigned int, float *, unsigned int);
 
@@ -23,7 +23,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_003219b0. */
 
@@ -47,7 +47,7 @@ unsigned int FUN_001a9f6c(unsigned int param_1,float *param_2,unsigned int param
   temp_v2 = param_2[1] * temp_v3;
   temp_v3 = param_2[2] * temp_v3;
   FUN_002b70cc();
-  FUN_002b7064();
+  phaseCosInterpolate();
   FUN_003219b0(param_1,&temp_v1,param_3);
   return param_1;
 }

@@ -30,9 +30,9 @@ typedef struct {
 
 extern int FUN_001f4c80(...); /* 0x1f4c80 */
 extern int FUN_0023799c(...); /* 0x23799c */
-extern int FUN_00237ba4(...); /* 0x237ba4 */
+extern int renderScopedTaskPhaseZero(...); /* 0x237ba4 */
 extern int effectProcessDestroy(...); /* 0x282c4c */
-extern int FUN_00282cf8(...); /* 0x282cf8 */
+extern int renderScopedTaskPhaseThree(...); /* 0x282cf8 */
 extern unsigned char LAB_0031b8d0; /* 0x31b8d0 */
 extern unsigned char LAB_0031b8e0; /* 0x31b8e0 */
 extern unsigned char LAB_0031b8f8; /* 0x31b8f8 */
@@ -99,13 +99,13 @@ unsigned int FUN_0031b654(unsigned char param_1)
   }
   else {
     puVar3 = &LAB_0031b8f8;
-    taskCreateDraw(&LAB_0031b8f8,0x72,0,0,FUN_00237ba4,0,temp_v0,puVar2);
+    taskCreateDraw(&LAB_0031b8f8,0x72,0,0,renderScopedTaskPhaseZero,0,temp_v0,puVar2);
     *(unsigned char **)(temp_v0 + 0x52c) = puVar3;
     puVar2 = &LAB_0031b908;
     taskCreateDraw(&LAB_0031b908,0x89,0,0,FUN_0023799c,0,temp_v0,*(unsigned int *)(temp_v0 + 0x528));
     *(unsigned char **)(temp_v0 + 0x530) = puVar2;
     puVar2 = &LAB_0031b8e0;
-    taskCreateDraw(&LAB_0031b8e0,0xec,0,0,FUN_00282cf8,0,temp_v0,*(unsigned int *)(temp_v0 + 0x528));
+    taskCreateDraw(&LAB_0031b8e0,0xec,0,0,renderScopedTaskPhaseThree,0,temp_v0,*(unsigned int *)(temp_v0 + 0x528));
     *(unsigned char **)(temp_v0 + 0x534) = puVar2;
   }
   return *(unsigned int *)(temp_v0 + 0x528);

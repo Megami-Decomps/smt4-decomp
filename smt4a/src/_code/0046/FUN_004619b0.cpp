@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004619b0` (_code @ 0x4619b0, 0xa4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_WaveArchiveReader.h"
 
 extern "C" {
 
 int FUN_00190fc8(unsigned char [8], unsigned int);
 int FUN_001a5e84(unsigned char [16], int, int);
 int FUN_001a8930(unsigned int, int, unsigned int [2]);
-int FUN_001a8d40(unsigned char [16], unsigned int);
 int FUN_00508a6c(int, int);
 int nw_snd_internal_WaveSoundFileReader_ReadNoteInfo(unsigned char [8], int *, unsigned int, int);
 
@@ -61,7 +61,7 @@ void FUN_004619b0(unsigned int param_1,unsigned int param_2,unsigned int param_3
     temp_v8 = '\0';
     FUN_001a8930(param_3,temp_v0,temp_v7);
     FUN_001a5e84(temp_v9,param_4,(int)temp_v8);
-    FUN_001a8d40(temp_v9,temp_v1);
+    FUN_001a8d40((const WaveArchiveReader*)temp_v9,temp_v1);
   }
   return;
 }

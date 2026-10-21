@@ -8,7 +8,7 @@ int FUN_0028c618(...);
 int nodeSetTranslation(...);
 int FUN_0029bb14(...);
 int FUN_002a0428(...);
-int FUN_002a5710(...);
+int modelSelectPrimaryMotion(...);
 int FUN_002ad8b4(...);
 int textFormatBuffer(...);
 int dataTable2cSub1GetCount(void);
@@ -24,7 +24,7 @@ extern int asdMdlManagerClone(int, unsigned int);
 extern int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_0029bb14. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002ad8b4. */
 extern int FUN_002adee0(int);
 /* Supplied declaration required: textFormatBuffer. */
@@ -76,7 +76,7 @@ unsigned int FUN_002f400c(void)
           nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v2 * 0xb + 0x446);
           FUN_0028c618(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),0);
-          FUN_002a5710(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),piVar3[temp_v2 * 0xb + 0x44a])
+          modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8),piVar3[temp_v2 * 0xb + 0x44a])
           ;
           FUN_0029bb14(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x44d] + 8));
           puVar2 = (unsigned int *)piVar3[temp_v2 * 0xb + 0x44d];
@@ -122,7 +122,7 @@ unsigned int FUN_002f400c(void)
           nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0,
                        piVar3 + temp_v1 * 0xb + 0x446);
           FUN_0028c618(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),0);
-          FUN_002a5710(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),piVar3[temp_v1 * 0xb + 0x44a])
+          modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8),piVar3[temp_v1 * 0xb + 0x44a])
           ;
           FUN_0029bb14(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x44d] + 8));
           puVar2 = (unsigned int *)piVar3[temp_v1 * 0xb + 0x44d];
@@ -175,7 +175,7 @@ unsigned int FUN_002f400c(void)
         nodeSetTranslation(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v1 * 0xb + 0x4a9
                     );
         FUN_0028c618(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),0);
-        FUN_002a5710(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),piVar3[temp_v1 * 0xb + 0x4ad]);
+        modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8),piVar3[temp_v1 * 0xb + 0x4ad]);
         FUN_0029bb14(*(unsigned int *)(piVar3[temp_v1 * 0xb + 0x4b0] + 8));
         puVar2 = (unsigned int *)piVar3[temp_v1 * 0xb + 0x4b0];
         temp_v1 = temp_v1 + 1;
@@ -257,7 +257,7 @@ LAB_002f45c4:
       FUN_002a0428(piVar3[temp_v2 * 0xb + 0x4b0],1);
       nodeSetTranslation(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0,piVar3 + temp_v2 * 0xb + 0x4a9);
       FUN_0028c618(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),0);
-      FUN_002a5710(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);
+      modelSelectPrimaryMotion(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8),piVar3[temp_v2 * 0xb + 0x4ad]);
       FUN_0029bb14(*(unsigned int *)(piVar3[temp_v2 * 0xb + 0x4b0] + 8));
       puVar2 = (unsigned int *)piVar3[temp_v2 * 0xb + 0x4b0];
       *puVar2 = *puVar2 | 2;

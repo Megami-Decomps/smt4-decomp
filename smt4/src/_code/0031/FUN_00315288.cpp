@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00246afc(unsigned short *, int, int, int);
 int FUN_00246bd4(void);
-int FUN_00246c8c(...);
+int asdSetNormalizedColorRgba(...);
 int FUN_00256a50(unsigned short *, unsigned int);
 int FUN_00269694(int, int);
 
@@ -27,7 +27,7 @@ extern unsigned int DAT_004ea938; /* 0x4ea938 */
 /* Supplied declaration required: FUN_00246afc. */
 /* Supplied declaration required: FUN_00246bd4. */
 extern unsigned int FUN_00246c28(void);
-/* Supplied declaration required: FUN_00246c8c. */
+/* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: FUN_00256a50. */
 /* Supplied declaration required: FUN_00269694. */
 
@@ -49,12 +49,12 @@ void FUN_00315288(int param_1)
   }
   temp_v1 = temp_v3;
   FUN_00269694(temp_v3,temp_v3 + 0x24);
-  FUN_00246c8c(*(unsigned int *)(param_1 + 0x30));
+  asdSetNormalizedColorRgba(*(unsigned int *)(param_1 + 0x30));
   DAT_004ea92c = DAT_004ea91c;
   DAT_004ea930 = DAT_004ea920;
   DAT_004ea934 = DAT_004ea924;
   DAT_004ea938 = DAT_004ea928;
-  FUN_00246c8c(temp_v1);
+  asdSetNormalizedColorRgba(temp_v1);
   FUN_00246bd4();
   temp_v2 = FUN_00246c28();
   *(unsigned int *)(puVar4 + 0x28) =

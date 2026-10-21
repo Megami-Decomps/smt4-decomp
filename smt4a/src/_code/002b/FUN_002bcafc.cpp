@@ -9,7 +9,7 @@ int bgmGetStateById(...);
 int FUN_00249ac4(unsigned int, unsigned int);
 int bgmReleaseStopped(void);
 int FUN_002b9520(void);
-int FUN_00376f94(void);
+int lmapGetSpawnIndex(void);
 int slotFindByPair(int, unsigned int);
 int FUN_003d4c68(int);
 
@@ -33,7 +33,7 @@ extern signed char DAT_005f1a00; /* 0x5f1a00 */
 extern int FUN_002b950c(void);
 /* Supplied declaration required: FUN_002b9520. */
 extern int gameFlagsValueGet(void);
-/* Supplied declaration required: FUN_00376f94. */
+/* Supplied declaration required: lmapGetSpawnIndex. */
 /* Supplied declaration required: slotFindByPair. */
 extern int FUN_003cb88c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003d4c68. */
@@ -89,7 +89,7 @@ void FUN_002bcafc(void)
     }
   }
   else {
-    FUN_00376f94();
+    lmapGetSpawnIndex();
   }
   temp_v0 = *(int *)(temp_v2 + 0x30);
   if (temp_v0 != 0x18) {
@@ -155,12 +155,12 @@ void FUN_002bcafc(void)
       if (temp_v0 == 0) {
         DAT_005f1628 = 0x1000084;
       }
-      if ((*(int *)(temp_v2 + 0x30) == 0x18) && (temp_v2 = FUN_00376f94(), temp_v2 >= 100)) {
+      if ((*(int *)(temp_v2 + 0x30) == 0x18) && (temp_v2 = lmapGetSpawnIndex(), temp_v2 >= 100)) {
         DAT_005f1628 = 0x1000067;
       }
     }
   }
-  else if ((*(int *)(temp_v2 + 0x30) == 0x18) && (temp_v2 = FUN_00376f94(), temp_v2 >= 100)) {
+  else if ((*(int *)(temp_v2 + 0x30) == 0x18) && (temp_v2 = lmapGetSpawnIndex(), temp_v2 >= 100)) {
     DAT_005f1628 = 0x1000067;
   }
   temp_v2 = bgmGetStateById(DAT_005f1628);

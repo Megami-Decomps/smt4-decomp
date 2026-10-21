@@ -3,11 +3,12 @@
 #include "romwright_types.h"
 
 extern "C" {
+extern unsigned char* DAT_004474f4;
 
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, float *);
-int FUN_002e29c0(void);
-int FUN_002f35d8(void);
+void FUN_002e29c0(float x, float z, float heading);
+float FUN_002f35d8(void);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 10 slot(s), 40 byte(s) */
@@ -35,8 +36,6 @@ extern int iRam004bd614; /* 0x4bd614 */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 extern int gameGetMapBlock(void);
-/* Supplied declaration required: FUN_002e29c0. */
-/* Supplied declaration required: FUN_002f35d8. */
 
 
 void FUN_00202254(void)
@@ -99,8 +98,10 @@ void FUN_00202254(void)
       } while (temp_v2 < DAT_004bd0f4);
     }
     if (DAT_004bd0dc != '\0') {
-      FUN_002f35d8();
-      FUN_002e29c0();
+      {
+        float cameraHeading = FUN_002f35d8();
+        FUN_002e29c0(*(float*)(DAT_004474f4 + 0x4c),*(float*)(DAT_004474f4 + 0x54),cameraHeading);
+      }
       temp_v2 = temp_v18;
       temp_v19[0] = 0;
       temp_v19[1] = 0;

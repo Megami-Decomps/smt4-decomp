@@ -13,15 +13,15 @@ typedef struct Global57f110 {
 } Global57f110;
 extern Global57f110 g_campCec;
 
-s32 FUN_00224880(u32 handle);
+s32 scrRunOpcodesStub(u32 handle);
 
-/* Returns 1 when the held object exists and FUN_00224880 does not report 2 for its handle. */
+/* Returns 1 when the held object exists and scrRunOpcodesStub does not report 2 for its handle. */
 u8 FUN_00237620(void)
 {
     s32 state;
 
     if (g_campCec.object != NULL) {
-        state = FUN_00224880(g_campCec.object->handle);
+        state = scrRunOpcodesStub(g_campCec.object->handle);
         if (state == 2) {
             return 0;
         }

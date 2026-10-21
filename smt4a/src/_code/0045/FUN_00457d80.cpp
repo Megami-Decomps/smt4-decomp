@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001bc768(...);
 int FUN_001bc7ec(...);
-int FUN_00457160(float *, unsigned int);
+int textureCalcSrtMatrix(float *, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX34CopyAsm(...);
@@ -78,7 +78,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 /* Supplied declaration required: FUN_001bc768. */
 /* Supplied declaration required: FUN_001bc7ec. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_00457160. */
+/* Supplied declaration required: textureCalcSrtMatrix. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nw_gfx_Camera_GetFar. */
@@ -196,7 +196,7 @@ void FUN_00457d80(int param_1,int param_2,int param_3)
       if (*(char *)((int)puVar6 + 0x25) != '\0') {
         if (*(char *)(puVar6 + 9) != '\0') {
           temp_v6 = (float)puVar6[4];
-          FUN_00457160(&temp_v32,puVar6[3] & 0xff);
+          textureCalcSrtMatrix(&temp_v32,puVar6[3] & 0xff);
           temp_v11 = temp_v32;
           uStack_154 = uStack_d4;
           uStack_150 = uStack_d0;

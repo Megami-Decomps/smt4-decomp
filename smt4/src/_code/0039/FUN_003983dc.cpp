@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int FUN_002aeaac(unsigned int);
+extern int recordTableGet(unsigned int);
 
 
 void FUN_003983dc(int param_1)
@@ -26,7 +26,7 @@ void FUN_003983dc(int param_1)
          (temp_v2 = param_1 + temp_v0 * 2,
          (unsigned short)((unsigned short)*(unsigned char *)(temp_v2 + 0xb0) * 0x100 + (unsigned short)*(unsigned char *)(temp_v2 + 0xb1)) ==
          -0x7ec0)) {
-        temp_v2 = FUN_002aeaac(3);
+        temp_v2 = recordTableGet(3);
         (**(romwright_code **)(**(int **)(temp_v2 + 8) + 0x44))(*(int **)(temp_v2 + 8),0x8140);
         temp_v2 = param_1 + temp_v0 * 2;
         *(unsigned char *)(temp_v2 + 0xb0) = 0x81;

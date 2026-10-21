@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00355428` (_code @ 0x355428, 0xed0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -10,10 +11,9 @@ int FUN_00162790(...);
 int FUN_001634b4(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(...);
-int FUN_001689e8(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
-int FUN_00184c40(...);
+int pairSetHalves(...);
 int FUN_003799d0(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
@@ -56,11 +56,10 @@ extern short DAT_005f1e1a; /* 0x5f1e1a */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_003799d0. */
 extern int panelInitBlockB00(void);
 /* Supplied declaration required: rt_memcpy_w. */
@@ -216,7 +215,7 @@ void FUN_00355428(void)
           }
           temp_v9 = temp_v1 + (5 - temp_v3) * 0x8c;
           efctSetSpeed();
-          FUN_00184c40(temp_v9 + 0x148,(int)(short)(*(short *)(temp_v14 + 8) + (short)temp_v7),
+          pairSetHalves(temp_v9 + 0x148,(int)(short)(*(short *)(temp_v14 + 8) + (short)temp_v7),
                        (int)*(short *)(temp_v14 + 10));
           FUN_001634b4(temp_v9 + 0x148);
           efctSetSpeed();
@@ -268,7 +267,7 @@ void FUN_00355428(void)
                                            );
         temp_v11 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3)
         ;
-        FUN_001689e8((int)*(short *)(temp_v7 + 0x5f1d20),(int)(temp_v12 + (float)temp_v15 + temp_v11),
+        uiDrawItemCategoryIcon((int)*(short *)(temp_v7 + 0x5f1d20),(int)(temp_v12 + (float)temp_v15 + temp_v11),
                      (int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v5 + 10),0x6f,0);
         if (*(char *)(temp_v3 + 0x5f1d40) != '\0') {
           temp_v6 = temp_v1 + temp_v3 * 4;
@@ -350,7 +349,7 @@ LAB_00355f74:
                                            );
         temp_v11 = (float)VectorSignedToFloat((int)*(short *)(temp_v5 + 8),(unsigned char)(in_fpscr >> 0x16) & 3)
         ;
-        FUN_001689e8((int)*(short *)(temp_v7 + 0x5f1dc8),(int)(temp_v12 + (float)temp_v15 + temp_v11),
+        uiDrawItemCategoryIcon((int)*(short *)(temp_v7 + 0x5f1dc8),(int)(temp_v12 + (float)temp_v15 + temp_v11),
                      (int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v5 + 10),0x6f,0);
         if (*(char *)(temp_v3 + 0x5f1de8) != '\0') {
           temp_v6 = temp_v1 + temp_v3 * 4;

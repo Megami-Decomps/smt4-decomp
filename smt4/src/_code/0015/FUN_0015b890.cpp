@@ -46,7 +46,7 @@ struct fn_0015b890_arg1 {
     int field_0x38; /* +0x38 */
 };
 
-extern unsigned int FUN_002bc11c(int);
+extern unsigned int osVirtToPhysAddress(int);
 
 
 void FUN_0015b890(fn_0015b890_arg0 *param_1,fn_0015b890_arg1 *param_2)
@@ -105,7 +105,7 @@ void FUN_0015b890(fn_0015b890_arg0 *param_1,fn_0015b890_arg1 *param_2)
   if (temp_v5 && temp_v1 != 1) {
     param_1->field_0x28 = param_1->field_0x28 | (((param_2->field_0x28 - 1U) & 0xf) << 0x10);
   }
-  temp_v1 = FUN_002bc11c(temp_v4);
+  temp_v1 = osVirtToPhysAddress(temp_v4);
   param_1->field_0x2c = param_1->field_0x2c | ((temp_v1 & 0x7fffffff) >> 3);
   return;
 }

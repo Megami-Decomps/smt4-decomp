@@ -68,7 +68,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -157,7 +157,7 @@ void FUN_0032a904(fn_0032a904_arg0 *param_1)
       if (temp_v2 != 2) {
         return;
       }
-      temp_v14 = (*(float *)(DAT_005806a4 + 0x18) + 180.0f) * 0.7111111f;
+      temp_v14 = (*(float *)(g_lmapView + 0x18) + 180.0f) * 0.7111111f;
       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v14) << 0x1d);
       for (temp_v14 = romwright_fabs_4(temp_v14); (int)temp_v14 >= 0x47800000; temp_v14 = temp_v14 - 65536.0f) {
       }
@@ -236,7 +236,7 @@ void FUN_0032a904(fn_0032a904_arg0 *param_1)
     }
   }
   else {
-    temp_v7 = *(float *)(DAT_005806a4 + 0x50) - param_1->field_0x68;
+    temp_v7 = *(float *)(g_lmapView + 0x50) - param_1->field_0x68;
     FUN_0050d8e4();
     temp_v14 = temp_v7 * 57.32484f * temp_v14;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v12 <= temp_v14) << 0x1d);

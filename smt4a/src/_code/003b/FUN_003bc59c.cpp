@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003bc59c` (_code @ 0x3bc59c, 0x29c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 
@@ -10,7 +11,7 @@ int dataTable04FindById(void);
 int scrGetArg(int);
 int FUN_00301a08(unsigned int, int [8], int [3]);
 int scrSetResult(int);
-int FUN_003eaf20(void);
+BtlCombatantEntryA *FUN_003eaf20(int state);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -18,7 +19,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
 
-extern unsigned int DAT_00570288; /* 0x570288 */
+extern unsigned int g_btlCandidateMasks; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
@@ -35,8 +36,7 @@ extern unsigned int FUN_00232388(void);
 /* Supplied declaration required: scrGetArg. */
 /* Supplied declaration required: FUN_00301a08. */
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_00352144(void);
-/* Supplied declaration required: FUN_003eaf20. */
+extern int battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, unsigned int attribute);
 
 
 unsigned int FUN_003bc59c(void)
@@ -71,7 +71,7 @@ unsigned int FUN_003bc59c(void)
       temp_v4 = *puVar9;
       temp_v6 = puVar9[1];
       if ((((DAT_005702a0 & temp_v4) == 0 && (DAT_005702a4 & temp_v6) == 0) &&
-          ((DAT_00570288 & temp_v4) != 0 || (DAT_0057028c & temp_v6) != 0)) &&
+          ((g_btlCandidateMasks & temp_v4) != 0 || (DAT_0057028c & temp_v6) != 0)) &&
          ((temp_v6 & DAT_005702b4) == 0 && (temp_v4 & DAT_005702b0) == 0)) {
         temp_v3 = 0;
         if (((DAT_005702a0 & temp_v4) == 0 && (DAT_005702a4 & temp_v6) == 0) &&
@@ -136,9 +136,9 @@ unsigned int FUN_003bc59c(void)
   temp_v8 = btlGetMainState();
   if (*(char *)(temp_v8 + 0x4cd1) != '\0') {
     temp_v8 = btlGetMainState();
-    FUN_003eaf20();
-    if (temp_v8 != 0) {
-      temp_v8 = FUN_00352144();
+    const BtlCombatantEntryA *combatant = FUN_003eaf20(temp_v8);
+    if (combatant != 0) {
+      temp_v8 = battleCountActionsByAttribute(combatant,temp_v1);
       temp_v9 = temp_v9 + temp_v8;
     }
   }

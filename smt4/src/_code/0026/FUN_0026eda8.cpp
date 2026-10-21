@@ -1,37 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026eda8` (_code @ 0x26eda8, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct ScalarEffectState {
+    f32 first;    // 0x00
+    f32 second;   // 0x04
+    f32 third;    // 0x08
+    u32 unk0c;    // 0x0c
+    f32 limit;    // 0x10
+    u32 unk14;    // 0x14
+    f32 rate;     // 0x18
+    u32 handle;   // 0x1c
+    u32 unk20;    // 0x20
+    u32 active;   // 0x24
+    u32 counter;  // 0x28
+};
 
 extern "C" {
+void FUN_0020ffe8(u32 handle, f32 first, f32 second);
+void FUN_002d9208();
 
-int FUN_0020ffe8(unsigned int);
-int FUN_002d9208(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0020ffe8. */
-/* Supplied declaration required: FUN_002d9208. */
-
-
-void FUN_0026eda8(unsigned int *param_1)
-
+// Restore scalar-effect defaults and stop its active handle before the shared reset.
+void FUN_0026eda8(ScalarEffectState* effect)
 {
-/* irregular: 2 native warning(s); review required */
-  param_1[6] = 0x3c449ba6;
-  param_1[4] = 0x43af0000;
-  *param_1 = 0x3f99999a;
-  param_1[1] = 0x40a9999a;
-  param_1[2] = 0x3f000000;
-  param_1[10] = 0;
-  if (param_1[9] != 0) {
-    param_1[9] = 0;
-    FUN_0020ffe8(param_1[7]);
-  }
-  FUN_002d9208();
-  return;
+    effect->rate = 0.012f;
+    effect->limit = 350.0f;
+    effect->first = 1.2f;
+    effect->second = 5.3f;
+    effect->third = 0.5f;
+    effect->counter = 0;
+    if (effect->active != 0) {
+        effect->active = 0;
+        FUN_0020ffe8(effect->handle, 0.0f, 0.0f);
+    }
+    FUN_002d9208();
 }
-
-} /* extern "C" */
+}

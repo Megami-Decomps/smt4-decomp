@@ -16,7 +16,7 @@ int FUN_0029c94c(...);
 int FUN_0029cde0(...);
 int flaggedEntrySetValueA(...);
 int FUN_0029efd8(...);
-int FUN_0029f5d8(...);
+int uiScrollHandleActionsOrTouch(...);
 int FUN_0029f848(...);
 int soundChannelRequestIfEnabled(...);
 int eventQueueAddUniqueIfValid(...);
@@ -25,7 +25,7 @@ int FUN_00333de4(...);
 int FUN_00334058(...);
 int SBORROW4(...);
 
-int FUN_0019e0c0(...);
+int scrRunOpcodesStub(...);
 int FUN_001c8a7c(int, int, int, int);
 int buttonHelpResetSlots(void);
 int FUN_0026b738(...);
@@ -34,9 +34,9 @@ int btlTalkBustUpSetUnk2F4(...);
 int FUN_002954f4(...);
 int scrScriptProcessStartEntry(...);
 int FUN_0029bd4c(void);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int FUN_0029ee6c(...);
-int FUN_002a71fc(...);
+int messageStatesSetFirst(...);
 int FUN_002b7bca(...);
 int buttonHelpSetPreset(...);
 int timerStart(...);
@@ -64,7 +64,7 @@ typedef struct {
 extern unsigned char LAB_002c6e64; /* 0x2c6e64 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_001c8a7c. */
 extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: buttonHelpResetSlots. */
@@ -76,7 +76,7 @@ extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: FUN_0029541c. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
-extern int FUN_002955fc(void);
+extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00296774. */
@@ -88,25 +88,25 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: soundChannelStopAll. */
 extern int FUN_0029c48c(void);
 /* Supplied declaration required: FUN_0029c94c. */
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cde0. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_0029f5d8. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 extern int sys43e188GetState(void);
-/* Supplied declaration required: FUN_002a71fc. */
+/* Supplied declaration required: messageStatesSetFirst. */
 extern int gameGetUnitRecord(int);
 extern int gameGetPlayerData(void);
 extern int FUN_002b6b04(void);
 /* Supplied declaration required: FUN_002b7bca. */
 extern unsigned short FUN_002b8584(unsigned int, int);
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern int FUN_002b898c(void);
+extern int buttonHelpGetStatus(void);
 extern int FUN_002b8ee0(int, unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
@@ -315,7 +315,7 @@ void FUN_001cea8c(int param_1)
       if (temp_v4 == 0) {
         return;
       }
-      FUN_002a71fc(0);
+      messageStatesSetFirst(0);
       scrScriptProcessStartEntry(*puVar28,0xf);
       *piVar9 = *piVar9 + 1;
       return;
@@ -325,7 +325,7 @@ void FUN_001cea8c(int param_1)
         if (temp_v15 != 0x14) {
           return;
         }
-        temp_v4 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0x3568));
+        temp_v4 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x3568));
         if (temp_v4 != 2) {
           return;
         }
@@ -366,7 +366,7 @@ void FUN_001cea8c(int param_1)
     }
     else {
       if (temp_v15 == 100) {
-        temp_v4 = FUN_0019e0c0(*puVar28);
+        temp_v4 = scrRunOpcodesStub(*puVar28);
         if (temp_v4 != 2) {
           return;
         }
@@ -393,7 +393,7 @@ void FUN_001cea8c(int param_1)
           whisperEffectFinish();
           buttonHelpResetSlots();
         }
-        FUN_002a71fc(1);
+        messageStatesSetFirst(1);
         return;
       }
       if (temp_v15 != 0x65) {
@@ -438,7 +438,7 @@ void FUN_001cea8c(int param_1)
     *(unsigned int *)(param_1 + 0xd120) = temp_v22;
     temp_v4 = FUN_00295618();
     if (temp_v4 == 0) {
-      FUN_0029ca58();
+      beginStatusPanelClose();
     }
     FUN_0029bd4c();
     *piVar9 = *piVar9 + 1;
@@ -453,7 +453,7 @@ void FUN_001cea8c(int param_1)
     if (temp_v15 == 0) {
       return;
     }
-    temp_v15 = FUN_002955fc();
+    temp_v15 = btlTalkBustUpGetValue();
     if (temp_v15 == 0) {
       FUN_002954f4(*(unsigned short *)(temp_v5 + 0x46),1);
       btlTalkBustUpSetUnk2F4(1);
@@ -667,16 +667,16 @@ LAB_001cfdfc:
     }
     break;
   case 2:
-    FUN_0019e0c0(*puVar28);
+    scrRunOpcodesStub(*puVar28);
     if (*(int *)(param_1 + 0xd2c4) - *(int *)(param_1 + 0xd2c8) >= 1) {
-      temp_v4 = FUN_002b898c();
+      temp_v4 = buttonHelpGetStatus();
       if (temp_v4 == 0xe1) {
         temp_v11 = 0x6b;
         buttonHelpSetPreset(temp_v11);
       }
     }
     else {
-      temp_v4 = FUN_002b898c();
+      temp_v4 = buttonHelpGetStatus();
       if (temp_v4 == 0x6b) {
         temp_v11 = 0xe1;
         buttonHelpSetPreset(temp_v11);
@@ -684,7 +684,7 @@ LAB_001cfdfc:
     }
     temp_v6 = FUN_0029efa8(temp_v10);
     temp_v4 = temp_v10;
-    FUN_0029f5d8(temp_v10,0,param_1 + 0x358e,0xffffffff,0xffffffff,0xffffffff,temp_v25,0,1);
+    uiScrollHandleActionsOrTouch(temp_v10,0,param_1 + 0x358e,0xffffffff,0xffffffff,0xffffffff,temp_v25,0,1);
     if ((temp_v4 == 0) && (temp_v4 = temp_v10, FUN_0029efd8(temp_v10,0), temp_v4 == 0)) {
       temp_v15 = 0;
       FUN_002c1658(0,1);
@@ -787,16 +787,16 @@ LAB_001cf28c:
     FUN_0029c94c(*(unsigned short *)(temp_v5 + temp_v4 * 2 + 0x34));
     return;
   case 3:
-    FUN_0019e0c0(*puVar28);
+    scrRunOpcodesStub(*puVar28);
     if (*(int *)(param_1 + 0xd2c4) - *(int *)(param_1 + 0xd2c8) >= 1) {
-      temp_v4 = FUN_002b898c();
+      temp_v4 = buttonHelpGetStatus();
       if (temp_v4 == 0xe1) {
         temp_v11 = 0x6b;
         buttonHelpSetPreset(temp_v11);
       }
     }
     else {
-      temp_v4 = FUN_002b898c();
+      temp_v4 = buttonHelpGetStatus();
       if (temp_v4 == 0x6b) {
         temp_v11 = 0xe1;
         buttonHelpSetPreset(temp_v11);
@@ -804,7 +804,7 @@ LAB_001cf28c:
     }
     temp_v6 = FUN_0029efa8(temp_v9);
     temp_v4 = temp_v9;
-    FUN_0029f5d8(temp_v9,0,param_1 + 0x357e,0xffffffff,0xffffffff,0xffffffff,temp_v25,0,1);
+    uiScrollHandleActionsOrTouch(temp_v9,0,param_1 + 0x357e,0xffffffff,0xffffffff,0xffffffff,temp_v25,0,1);
     if ((temp_v4 != 0) || (temp_v4 = temp_v9, FUN_0029efd8(temp_v9,0), temp_v4 != 0)) {
       temp_v4 = FUN_0029efa8(temp_v9);
       if (temp_v4 != temp_v6) {

@@ -7,11 +7,11 @@ typedef struct Obj {
     /* 0x530 */ u32 entries[1];
 } Obj;
 
-extern int FUN_0023360c(void);
+extern int flaggedValueHolderGetTotal(void);
 
 u32 FUN_0022b8c0(Obj *obj)
 {
-    int index = FUN_0023360c();
+    int index = flaggedValueHolderGetTotal();
 
     return obj->entries[index];
 }

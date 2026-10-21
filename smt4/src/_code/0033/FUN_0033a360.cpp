@@ -8,7 +8,7 @@ int FUN_0023e52c(unsigned int, int, int, int);
 int FUN_0027dd9c(unsigned int);
 int FUN_003cc944(unsigned int, int, int);
 int FUN_003cf438(unsigned int, int, int);
-int FUN_003db5bc(unsigned int);
+int entryTableInvalidate(unsigned int);
 int FUN_003dbed8(unsigned int, unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned int DAT_00435d18; /* 0x435d18 */
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_003cc944. */
 /* Supplied declaration required: FUN_003cf438. */
-/* Supplied declaration required: FUN_003db5bc. */
+/* Supplied declaration required: entryTableInvalidate. */
 /* Supplied declaration required: FUN_003dbed8. */
 
 
@@ -49,7 +49,7 @@ void FUN_0033a360(int param_1)
     *(unsigned int *)(temp_v3 + 0x231c) = 0xffffffff;
     *(unsigned int *)(temp_v3 + 0x2330) = 0xffffffff;
   } while (temp_v2 != 0);
-  FUN_003db5bc(DAT_00435d18);
+  entryTableInvalidate(DAT_00435d18);
   FUN_0023e52c(g_btlScriptUnit,temp_v0,5,0);
   FUN_003cc944(g_btlScriptUnit,temp_v0,1);
   FUN_0027dd9c(DAT_00435d18);

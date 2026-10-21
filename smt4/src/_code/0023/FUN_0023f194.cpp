@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001e1874(unsigned int);
 int jobStopIfValidA(unsigned int);
 int jobStopIfValidB(unsigned int);
-int FUN_00227218(void);
+int eventCommandDispatchPendingCleanup(void);
 int btlTalkBustUpDestroy(void);
 int gameFlagSetValue(int, int);
 int FUN_002ef6b8(int, unsigned int);
@@ -23,7 +23,7 @@ extern int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: FUN_001e1874. */
 /* Supplied declaration required: jobStopIfValidA. */
 /* Supplied declaration required: jobStopIfValidB. */
-/* Supplied declaration required: FUN_00227218. */
+/* Supplied declaration required: eventCommandDispatchPendingCleanup. */
 extern int FUN_0023f074(unsigned int *);
 /* Supplied declaration required: btlTalkBustUpDestroy. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -57,7 +57,7 @@ int FUN_0023f194(unsigned int *param_1)
       jobStopIfValidA(temp_v1);
       FUN_001e1874(temp_v1);
       if (g_btlMain != 0) {
-        FUN_00227218();
+        eventCommandDispatchPendingCleanup();
       }
       if ((param_1[1] & 1) != 0) {
         *param_1 = 6;

@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } void_stack;
 
-extern unsigned int FUN_002a12d8(void);
+extern unsigned int legacyResourceIdRemap(void);
 
 
 unsigned int FUN_002a116c(void)
@@ -19,7 +19,7 @@ unsigned int FUN_002a116c(void)
   unsigned int temp_v0;
   int temp_v1;
   
-  temp_v0 = FUN_002a12d8();
+  temp_v0 = legacyResourceIdRemap();
   if ((temp_v0 & 0x3fc00) == 0x13800) {
     if (temp_v0 == 0xc9413910) {
       return 1;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00287098(unsigned int, int);
+int modelSelectSecondaryMotion(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int *);
 int FUN_002a0428(unsigned int, int);
-int FUN_002a5710(unsigned int, int);
+int modelSelectPrimaryMotion(unsigned int, int);
 int textFormatBuffer(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -25,11 +25,11 @@ extern unsigned char g_gameState; /* 0x49f91c */
 
 extern int mapTableGetValue(int);
 extern unsigned int asdMdlManagerCreateFromSource(int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00287098. */
+/* Supplied declaration required: modelSelectSecondaryMotion. */
 /* Supplied declaration required: nodeSetTranslation. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 
@@ -56,8 +56,8 @@ unsigned int FUN_00208160(void)
       temp_v1 = asdMdlManagerCreateFromSource(*(int *)(g_mapDepartWork + 0x20),*(unsigned int *)(g_mapDepartWork + 0x24),0x38);
       *(unsigned int *)(g_mapDepartWork + 0xc) = temp_v1;
       FUN_002a0428(temp_v1,1);
-      FUN_002a5710(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
-      FUN_00287098(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
+      modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
+      modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
       *(unsigned short *)(g_mapDepartWork + 8) = 99;
       return 0;
     }
@@ -86,8 +86,8 @@ unsigned int FUN_00208160(void)
         return 0;
       }
       FUN_002a0428(*(unsigned int *)(g_mapDepartWork + 0xc),1);
-      FUN_002a5710(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
-      FUN_00287098(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
+      modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
+      modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8),0);
       *(unsigned short *)(g_mapDepartWork + 8) = 99;
       return 0;
     }
@@ -113,8 +113,8 @@ unsigned int FUN_00208160(void)
       ;
       *(unsigned int *)(g_mapDepartWork + 0x10) = temp_v1;
       FUN_002a0428(temp_v1,1);
-      FUN_002a5710(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
-      FUN_00287098(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
+      modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
+      modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
       temp_v0 = *(short *)(g_mapDepartWork + 4);
       if (temp_v0 == 0x13) {
         temp_v6 = (unsigned int)temp_v4;
@@ -143,8 +143,8 @@ unsigned int FUN_00208160(void)
     return 0;
   }
   FUN_002a0428(*(unsigned int *)(g_mapDepartWork + 0x10),1);
-  FUN_002a5710(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
-  FUN_00287098(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
+  modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
+  modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8),0);
   temp_v0 = *(short *)(g_mapDepartWork + 4);
   if (temp_v0 == 0x13) {
     temp_v6 = (unsigned int)temp_v4;

@@ -11,7 +11,7 @@ int ifTouchRegionRemove(void);
 int FUN_001643b4(int, int);
 int FUN_0019de98(...);
 int FUN_00228b04(int, int);
-int FUN_002c2c68(...);
+int objectApplyIfUnblocked(...);
 int FUN_00318df4(int);
 int FUN_003450d4(int, unsigned int, int, int, int, int, char [16], int, int);
 int FUN_00387ac4(...);
@@ -35,10 +35,10 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_0026140c(void);
-extern unsigned int FUN_00285518(unsigned char);
+extern unsigned int mapGetDisplayName(unsigned char);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002c2c68. */
+/* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: FUN_00318df4. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchPrimary(int);
@@ -116,9 +116,9 @@ unsigned int FUN_0022a0a0(void)
           }
           temp_v6 = FUN_002a4860(temp_v5);
           temp_v4 = FUN_002a4894(temp_v5);
-          temp_v7 = FUN_00285518(*(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758));
+          temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758));
           FUN_0019de98(temp_v7,0xf4f4f4ff);
-          temp_v6 = FUN_002c2c68(temp_v5);
+          temp_v6 = objectApplyIfUnblocked(temp_v5);
           temp_v4 = uiSearchPrimary(temp_v5);
           if (temp_v4 < temp_v6) {
             temp_v3 = FUN_001643b4(0x15,0x46);
@@ -138,7 +138,7 @@ unsigned int FUN_0022a0a0(void)
     FUN_00163aa4(DAT_0057f280 + 0x5a0);
     FUN_00163aa4(temp_v0 + 0x62c);
     temp_v8 = temp_v0 + 0x788;
-    temp_v9 = FUN_002c2c68();
+    temp_v9 = objectApplyIfUnblocked();
     temp_v5 = uiSearchPrimary(temp_v8);
     if (temp_v5 < temp_v9) {
       FUN_00163aa4(temp_v0 + 0x6b8);
@@ -216,13 +216,13 @@ unsigned int FUN_0022a0a0(void)
     }
     temp_v9 = FUN_002a4860(temp_v8);
     temp_v8 = FUN_002a4894(temp_v8);
-    temp_v7 = FUN_00285518(*(unsigned char *)(temp_v8 + temp_v9 + temp_v0 + 0x758));
+    temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v8 + temp_v9 + temp_v0 + 0x758));
     FUN_0019de98(temp_v7,0xf4f4f4ff);
     break;
   case 3:
     FUN_00163aa4(DAT_0057f280 + 0x5a0);
     FUN_00163aa4(temp_v0 + 0x62c);
-    temp_v8 = FUN_002c2c68();
+    temp_v8 = objectApplyIfUnblocked();
     temp_v9 = uiSearchPrimary(temp_v0 + 0x788);
     if (temp_v9 < temp_v8) {
       FUN_00163aa4(temp_v0 + 0x6b8);

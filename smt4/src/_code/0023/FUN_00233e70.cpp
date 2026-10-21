@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00234124(int, int *);
 int FUN_002a116c(void);
 int FUN_002a1200(void);
-int FUN_002a12d8(int);
+int legacyResourceIdRemap(int);
 int FUN_002ba8f4(int);
 int FUN_0038b420(int, unsigned int, unsigned int);
 
@@ -23,7 +23,7 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int queryResultFailureOnly(int);
 /* Supplied declaration required: FUN_002a116c. */
 /* Supplied declaration required: FUN_002a1200. */
-/* Supplied declaration required: FUN_002a12d8. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_002ba8f4. */
 /* Supplied declaration required: FUN_0038b420. */
 
@@ -45,7 +45,7 @@ void FUN_00233e70(int param_1,unsigned int param_2,unsigned int param_3)
   
   temp_v1 = g_aocMain;
   FUN_002ba8f4(g_aocMain + 0x88);
-  temp_v0 = FUN_002a12d8(param_1 + 0x214);
+  temp_v0 = legacyResourceIdRemap(param_1 + 0x214);
   if (temp_v0 != -0x36bec76f) {
     FUN_0038b420(g_aocMain,*(unsigned int *)(param_1 + 0x214),*(unsigned int *)(param_1 + 0x218));
     temp_v0 = param_1 + 0x214;
@@ -64,7 +64,7 @@ void FUN_00233e70(int param_1,unsigned int param_2,unsigned int param_3)
         *(unsigned int *)(param_1 + 8) = 0;
       }
       else {
-        temp_v2 = FUN_002a12d8(param_1 + 0x214);
+        temp_v2 = legacyResourceIdRemap(param_1 + 0x214);
         temp_v3 = temp_v2 >> 0x1b;
         if ((temp_v2 & 0x80000000) != 0) {
           temp_v3 = temp_v3 - 0x20;
@@ -79,12 +79,12 @@ LAB_00233fa0:
           FUN_00234124(param_1,&temp_v4);
           return;
         }
-        temp_v2 = FUN_002a12d8(param_1 + 0x214);
+        temp_v2 = legacyResourceIdRemap(param_1 + 0x214);
         temp_v3 = temp_v2 >> 0x1b;
         if ((temp_v2 & 0x80000000) != 0) {
           temp_v3 = temp_v3 - 0x20;
         }
-        if ((temp_v3 == 0xfffffffb) || (temp_v1 = FUN_002a12d8(param_1 + 0x214), temp_v1 == -0x377ec770))
+        if ((temp_v3 == 0xfffffffb) || (temp_v1 = legacyResourceIdRemap(param_1 + 0x214), temp_v1 == -0x377ec770))
         goto LAB_00233fa0;
         *(unsigned int *)(param_1 + 4) = param_3;
         piVar2 = *(int **)(param_1 + 0x208);

@@ -1,28 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004acea0` (_code @ 0x4acea0, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: allocated object is polymorphic; its class and vtable symbols must be recovered before replacing the explicit layout initialization with its real constructor. */
+#include "common.h"
+
+class ObjectAllocator {
+public:
+    virtual void* allocate(u32 size) = 0;
+};
+struct AllocatedObjectState {
+    const u32* vtable;      // 0x00
+    u32 active;             // 0x04
+    u32 kind;               // 0x08
+    ObjectAllocator* owner; // 0x0c
+    u32 parameter;          // 0x10
+    s32 index;              // 0x14
+    u8 unk18[0x0c];         // 0x18
+};
 
 extern "C" {
+extern const u32 DAT_0055c980[];
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0055c980; /* 0x55c980 */
-
-
-void FUN_004acea0(unsigned int *param_1,unsigned int param_2)
-
+// Allocates and initializes the recovered 0x24-byte object layout.
+AllocatedObjectState* FUN_004acea0(ObjectAllocator* allocator, u32 parameter)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)*param_1)(param_1,0x24);
-  if (puVar1 != (unsigned int *)0x0) {
-    puVar1[5] = 0xffffffff;
-    *puVar1 = (unsigned int)&DAT_0055c980;
-    puVar1[1] = 1;
-    puVar1[2] = 0xc;
-    puVar1[3] = (unsigned int)param_1;
-    puVar1[4] = param_2;
-  }
-  return;
+    AllocatedObjectState* object =
+        static_cast<AllocatedObjectState*>(allocator->allocate(sizeof(AllocatedObjectState)));
+    if (object != NULL) {
+        object->index = -1;
+        object->vtable = DAT_0055c980;
+        object->active = 1;
+        object->kind = 0xc;
+        object->owner = allocator;
+        object->parameter = parameter;
+    }
+    return object;
 }
-
-} /* extern "C" */
+}

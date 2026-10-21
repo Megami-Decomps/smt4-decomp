@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdTextureCreate(void);
-int FUN_001ab914(int);
+int asdTextureEntryApply(int);
 int FUN_001ad15c(int, int);
 int FUN_001ba204(int, unsigned int, int);
 
@@ -17,7 +17,7 @@ typedef struct {
 extern unsigned char LAB_0047d74c; /* 0x47d74c */
 
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: FUN_001ab914. */
+/* Supplied declaration required: asdTextureEntryApply. */
 /* Supplied declaration required: FUN_001ad15c. */
 /* Supplied declaration required: FUN_001ba204. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
@@ -79,7 +79,7 @@ void FUN_0047d5dc(unsigned int *param_1,int *param_2)
       FUN_001ad15c(temp_v3,0x30000);
     }
   }
-  FUN_001ab914(temp_v3);
+  asdTextureEntryApply(temp_v3);
   return;
 }
 

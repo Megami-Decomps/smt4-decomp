@@ -1,48 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00300252` (_code @ 0x300252, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Ospace restores the shared loop test, but append argument setup/end-pointer updates still use different registers and two extra instructions. */
+#include "common.h"
+
+struct QueuePayload { u32 words[8]; };
+struct QueueRecord {
+    u8 unk00[0x14];
+    QueuePayload payload; // 0x14
+};
+struct QueueCollection {
+    QueueRecord *records; // 0x00
+    u32 count; // 0x04
+    u8 unk08[8];
+    void *mutex; // 0x10
+};
+struct QueuePayloadVector {
+    QueuePayload *begin;
+    QueuePayload *end;
+    QueuePayload *capacity;
+};
 
 extern "C" {
+void onlineMutexLock(void *mutex);
+void onlineMutexUnlock(void *mutex);
+void rt_memcpy_w(void *destination, const void *source, u32 size);
+void FUN_0030ed3c(QueuePayloadVector *vector, QueuePayload *destination, const QueuePayload *source);
+void FUN_00133508(QueuePayloadVector *vector, QueuePayload *position, const QueuePayload *source);
 
-int FUN_00133508(int, int, unsigned char [32]);
-int onlineMutexLock(void);
-int onlineMutexUnlock(void);
-int FUN_0030ed3c(int, int);
-int rt_memcpy_w(unsigned char [32], unsigned int, int);
-
-/* Supplied declaration required: FUN_00133508. */
-/* Supplied declaration required: onlineMutexLock. */
-/* Supplied declaration required: onlineMutexUnlock. */
-/* Supplied declaration required: FUN_0030ed3c. */
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-void FUN_00300252(int *param_1,int param_2)
-
+// Append each queued payload to a vector while holding the optional collection mutex.
+void FUN_00300252(QueueCollection *source, QueuePayloadVector *destination)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned char temp_v2 [32];
-  
-  if (param_1[4] != 0) {
-    onlineMutexLock();
-  }
-  for (temp_v1 = 0; temp_v1 < (unsigned int)param_1[1]; temp_v1 = temp_v1 + 1) {
-    rt_memcpy_w(temp_v2,*param_1 + temp_v1 * 0x34 + 0x14,0x20);
-    temp_v0 = *(int *)(param_2 + 4);
-    if (temp_v0 != *(int *)(param_2 + 8)) {
-      *(int *)(param_2 + 4) = temp_v0 + 0x20;
-      FUN_0030ed3c(param_2,temp_v0);
+    if (source->mutex != NULL) {
+        onlineMutexLock(source->mutex);
     }
-    else {
-      FUN_00133508(param_2,temp_v0,temp_v2);
+    for (u32 index = 0; index < source->count; ++index) {
+        QueuePayload payload;
+        rt_memcpy_w(&payload, &source->records[index].payload, sizeof(payload));
+        if (destination->end != destination->capacity) {
+            FUN_0030ed3c(destination, destination->end++, &payload);
+        } else {
+            FUN_00133508(destination, destination->end, &payload);
+        }
     }
-  }
-  if (param_1[4] != 0) {
-    onlineMutexUnlock();
-  }
-  return;
+    if (source->mutex != NULL) {
+        onlineMutexUnlock(source->mutex);
+    }
 }
-
-} /* extern "C" */
+}

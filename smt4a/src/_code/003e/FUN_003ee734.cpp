@@ -12,7 +12,7 @@ int playerClearFlagMask(int);
 int FUN_003e4e64(void);
 int halves34Copy(int, unsigned short [30]);
 int FUN_004bd354(int, int);
-int FUN_004bd3bc(int, int);
+int selectionStateSetClamped(int, int);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -48,7 +48,7 @@ extern unsigned int FUN_003e0164(void);
 /* Supplied declaration required: halves34Copy. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: FUN_004bd354. */
-/* Supplied declaration required: FUN_004bd3bc. */
+/* Supplied declaration required: selectionStateSetClamped. */
 
 
 void FUN_003ee734(int param_1)
@@ -208,7 +208,7 @@ void FUN_003ee734(int param_1)
                                                 (unsigned char)(temp_v2 >> 0x16) & 3);
             temp_v7 = (int)(short)((short)(int)(temp_v10 * temp_v9 * (float)temp_v18) +
                                 *(short *)(temp_v4 + 0x2c));
-            FUN_004bd3bc(temp_v4,temp_v7);
+            selectionStateSetClamped(temp_v4,temp_v7);
             if (temp_v7 == 0) {
               *(unsigned short *)(temp_v4 + 0x2c) = 0;
             }

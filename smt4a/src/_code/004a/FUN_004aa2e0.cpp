@@ -1,13 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004aa2e0` (_code @ 0x4aa2e0, 0x9c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct BtlUiObjCA;
 
 extern "C" {
 
 int btlGetMainState(void);
 int ifTouchRegionRemove(void);
 int sysPlaySe(void);
-int FUN_001a9104(unsigned int *, unsigned int *);
+void FUN_001a9104(BtlUiObjCA *, unsigned short *);
 int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(unsigned int *, int, int, int, int, int);
 int FUN_00270104(void);
@@ -53,7 +54,6 @@ extern unsigned char g_btlUi; /* 0x57a9b8 */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001a9104. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00270104. */
@@ -169,7 +169,7 @@ void FUN_004aa2e0(fn_004aa2e0_arg0 *param_1,int param_2)
   *(unsigned short *)(puVar1 + 0x1d40) = temp_v0;
   temp_v0 = uiFindValidIdOrdinal(*puVar1,3);
   *(unsigned short *)((int)puVar1 + 0x7502) = temp_v0;
-  FUN_001a9104(puVar1 + 0xa31,puVar5);
+  FUN_001a9104((BtlUiObjCA *)(puVar1 + 0xa31), (unsigned short *)puVar5);
   puVar5 = puVar1 + 0xa31;
   if (param_2 != 0) {
     menu32Advance();

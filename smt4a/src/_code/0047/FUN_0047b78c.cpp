@@ -9,7 +9,7 @@ int taskCreateDraw(...);
 int jobStop(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(...);
-int FUN_00184528(...);
+int uiSpriteBankApplyPreset(...);
 int scrScriptProcessStartEntry(...);
 int FUN_00429f38(...);
 int FUN_00474734(...);
@@ -42,9 +42,9 @@ extern int g_aocMain; /* 0x570260 */
 extern int jobIsValid(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern int byteIsAtLeast100(unsigned int *);
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_00284140(int);
 extern int FUN_002a4b74(void);
@@ -104,8 +104,8 @@ void FUN_0047b78c(unsigned int *param_1)
               *puVar2 = 0xffffffff;
               *puVar7 = 0;
               *param_1 = *param_1 | 0x1000;
-              FUN_00184528(param_1 + 0x5ec,0);
-              FUN_00184528(param_1 + 0x5ec,1);
+              uiSpriteBankApplyPreset(param_1 + 0x5ec,0);
+              uiSpriteBankApplyPreset(param_1 + 0x5ec,1);
               pcVar5 = "Aoc guide CALC";
               asdProcessCreateSimple("Aoc guide CALC",4,0,0,FUN_0047a1e0,0,param_1);
               *puVar8 = (unsigned int)pcVar5;
@@ -194,7 +194,7 @@ void FUN_0047b78c(unsigned int *param_1)
         }
       }
       else {
-        temp_v1 = FUN_00224880(param_1[0xd6]);
+        temp_v1 = scrRunOpcodesStub(param_1[0xd6]);
         if (temp_v1 == 2) {
           temp_v1 = FUN_002a4b74();
           if (temp_v1 != 0) {

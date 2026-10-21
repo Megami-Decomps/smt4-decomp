@@ -1,44 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039c2a4` (_code @ 0x39c2a4, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler rematerializes the virtual-call mode constant instead of retaining retail's saved r6 value. */
+#include "common.h"
+
+// The constructed object's vtable address point is 0x557e44.
+class Obj557e3c {
+public:
+    virtual ~Obj557e3c();
+    virtual void initialize(u32 mode, u32 argument);
+private:
+    u8 unk004[0x72c];
+};
+struct WindowOwner {
+    u32 unk00;
+    u8 state; // 0x04
+    u8 unk05[3];
+    Obj557e3c *window; // 0x08
+    u8 pending; // 0x0c
+};
 
 extern "C" {
+extern WindowOwner *DAT_00588e2c;
+void FUN_002c75c0(u32, u32);
+void FUN_0038b330(void);
+void *asdOperatorNew(u32);
+Obj557e3c *FUN_00420d08(Obj557e3c *);
 
-int asdOperatorNew(void);
-int FUN_002c75c0(int);
-int FUN_0038b330(void);
-
-typedef int romwright_code(...);
-extern int DAT_00588e2c; /* 0x588e2c */
-
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002c75c0. */
-/* Supplied declaration required: FUN_0038b330. */
-extern int *FUN_00420d08(void);
-
-
-void FUN_0039c2a4(void)
-
+// Construct the menu object, start its mode-one request, and reset owner flags.
+void FUN_0039c2a4(u32 argument)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int *piVar3;
-  
-  FUN_002c75c0(0);
-  FUN_0038b330();
-  temp_v0 = DAT_00588e2c;
-  temp_v1 = 0x730;
-  asdOperatorNew();
-  piVar3 = (int *)0x0;
-  if (temp_v1 != 0) {
-    piVar3 = (int *)FUN_00420d08();
-  }
-  *(int **)(temp_v0 + 8) = piVar3;
-  (**(romwright_code **)(*piVar3 + 8))();
-  *(unsigned char *)(temp_v0 + 4) = 0;
-  *(unsigned char *)(temp_v0 + 0xc) = 0;
-  return;
+    FUN_002c75c0(0, 0);
+    FUN_0038b330();
+    WindowOwner *owner = DAT_00588e2c;
+    Obj557e3c *window = (Obj557e3c *)asdOperatorNew(sizeof(Obj557e3c));
+    if (window != NULL)
+        window = FUN_00420d08(window);
+    owner->window = window;
+    window->initialize(1, argument);
+    owner->state = 0;
+    owner->pending = 0;
 }
-
-} /* extern "C" */
+}

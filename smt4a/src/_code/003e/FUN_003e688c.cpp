@@ -9,7 +9,7 @@ int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_00275bc8(int, int);
 int scrScriptProcessStartEntry(int, int);
-int FUN_002804b0(int *, int *, int);
+int asdLoadFileAsyncSimple(int *, int *, int);
 int aocQueueType1d(int, int, int *, int *);
 
 extern int g_aocSystem; /* 0x570280 */
@@ -17,10 +17,10 @@ extern int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-extern int FUN_00224880(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int FUN_003efb18(void);
 /* Supplied declaration required: aocQueueType1d. */
 
@@ -38,7 +38,7 @@ unsigned int FUN_003e688c(int *param_1)
       *(unsigned int *)(g_aocSystem + 0x460) = 0xffffffff;
     }
     else {
-      FUN_002804b0(param_1 + 4,param_1,0);
+      asdLoadFileAsyncSimple(param_1 + 4,param_1,0);
     }
     btlGetMainState();
     temp_v0 = FUN_003efb18();
@@ -62,7 +62,7 @@ unsigned int FUN_003e688c(int *param_1)
     param_1[3] = temp_v0;
     break;
   case 3:
-    temp_v0 = FUN_00224880(param_1[1]);
+    temp_v0 = scrRunOpcodesStub(param_1[1]);
     if (temp_v0 != 2) {
       return 0;
     }

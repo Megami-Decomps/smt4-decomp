@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_0019e0c0(u32 value);
+extern int scrRunOpcodesStub(u32 value);
 
 typedef struct Source {
     /* 0x0 */ u32 value;
@@ -18,7 +18,7 @@ typedef struct Obj {
 
 void FUN_003832d0(Obj *obj)
 {
-    if (FUN_0019e0c0(obj->source->value) == 2) {
+    if (scrRunOpcodesStub(obj->source->value) == 2) {
         obj->unk004 = 4;
         obj->unk008 = 0;
     }

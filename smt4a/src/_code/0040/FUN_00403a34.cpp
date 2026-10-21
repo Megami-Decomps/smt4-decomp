@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023723c(unsigned int, int, unsigned int, int);
-int FUN_002a1f60(unsigned int, int, unsigned int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 extern char *fileSectionGetData(unsigned int, int, int *);
 extern int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_0023723c. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int tableByteGet1(int);
 extern unsigned char *FUN_00471678(unsigned int, int, int);
 
@@ -66,7 +66,7 @@ LAB_00403ac4:
           iStack_28 = temp_v2 + param_2 * 10;
           temp_v3 = param_1 + temp_v2 * 4;
           temp_v5 = puVar2;
-          FUN_002a1f60(*(unsigned int *)(temp_v3 + 0x66c),3,0xffffffff,0);
+          asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v3 + 0x66c),3,0xffffffff,0);
           temp_v3 = FUN_001688c4(*(unsigned int *)(temp_v3 + 0x66c));
           temp_v1 = param_1 + temp_v2 * 8;
           *(unsigned int *)(temp_v1 + 0x688) = *(unsigned int *)(param_1 + 0x684);

@@ -9,7 +9,7 @@ int FUN_00295214(...);
 int FUN_0029ee54(...);
 int FUN_0029ee6c(...);
 int FUN_0029efd8(...);
-int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [4], int, int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [4], int, int);
 int libc_bsearch(...);
 int FUN_002b8584(int, int);
 int ifTouchRegionRemove(void);
@@ -39,7 +39,7 @@ extern int FUN_0029d644(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_0029f5d8. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int FUN_002a0d0c(void);
 /* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_002b8584. */
@@ -177,7 +177,7 @@ LAB_001a2150:
     temp_v7 = FUN_002bf4f8(0x1e,0x48);
     puVar13 = (unsigned short *)0x0;
     temp_v10 = temp_v9;
-    FUN_0029f5d8(temp_v9,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
+    uiScrollHandleActionsOrTouch(temp_v9,temp_v7,temp_v0 + 0x772,(int)*(short *)(temp_v0 + 0x770),
                  (int)*(short *)(temp_v0 + 0x76c),(int)*(short *)(temp_v0 + 0x76e),temp_v11,0,1);
     if (temp_v10 != 0) {
       temp_v10 = FUN_0029efa8(temp_v9);

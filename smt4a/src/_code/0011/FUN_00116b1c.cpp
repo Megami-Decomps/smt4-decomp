@@ -26,7 +26,7 @@ extern unsigned char DAT_00558950; /* 0x558950 */
 extern char s__V_V_V_V___00589588[23]; /* 0x589588 */
 
 /* Supplied declaration required: FUN_001068e4. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int *operatorNew(unsigned int);
@@ -59,7 +59,7 @@ void FUN_00116b1c(unsigned int param_1,int param_2,unsigned int param_3,unsigned
   iStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v4,temp_v0 + 0x58);
   *(unsigned int *)(param_2 + 0x6c) = param_3;
   onlineStringAssign(param_2 + 0x70,param_4);

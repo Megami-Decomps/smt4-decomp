@@ -7,7 +7,7 @@ extern "C" {
 int sysMemClear(unsigned int *, int);
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0058918c; /* 0x58918c */
+extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
 extern int g_commandBufferCursor; /* 0x5b40e0 */
 extern int g_commandBufferEnd; /* 0x5b40e4 */
 extern unsigned int *DAT_0061a50c; /* 0x61a50c */
@@ -35,12 +35,12 @@ void FUN_0017cfe8(int param_1,int param_2,unsigned int param_3)
     }
   }
   if (temp_v1 != 0) {
-    if (DAT_0058918c == (romwright_code *)0x0) {
+    if (g_gfxAllocateCallback == (romwright_code *)0x0) {
       puVar5 = (unsigned int *)0x0;
     }
     else {
       param_3 = 0;
-      puVar5 = (unsigned int *)(*DAT_0058918c)(0x10000,0x100,0,0x44);
+      puVar5 = (unsigned int *)(*g_gfxAllocateCallback)(0x10000,0x100,0,0x44);
     }
     sysMemClear(puVar5,0x44);
     puVar5[0xb] = 0x300;

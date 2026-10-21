@@ -12,7 +12,7 @@ int FUN_00169548(void);
 int FUN_00203da4(...);
 int messageSlotSet(int);
 int FUN_0028b350(int, int);
-int FUN_002c76c0(unsigned int);
+int scrCommMessageSetMode(unsigned int);
 int scrSetResult(unsigned int);
 
 /* stack frame of param_6: 4 slot(s), 16 byte(s) */
@@ -28,7 +28,7 @@ extern int DAT_0057f590; /* 0x57f590 */
 extern int DAT_0057f594; /* 0x57f594 */
 
 /* Supplied declaration required: objFlagsSetBits. */
-extern int FUN_00162880(void);
+extern int engineCleanupIsDone(void);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: msgBoxFlagsClear. */
 /* Supplied declaration required: FUN_00165088. */
@@ -39,7 +39,7 @@ extern unsigned int FUN_001688c4(unsigned int);
 /* Supplied declaration required: FUN_00203da4. */
 /* Supplied declaration required: messageSlotSet. */
 /* Supplied declaration required: FUN_0028b350. */
-/* Supplied declaration required: FUN_002c76c0. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: scrSetResult. */
 extern unsigned short screenGetSlotValue(unsigned int);
 extern unsigned char screenGetSlotFlag(unsigned int);
@@ -123,7 +123,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
       }
       if (temp_v2 == 0 || temp_v6 == '\0') {
         scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
-        FUN_002c76c0(0xffffffff);
+        scrCommMessageSetMode(0xffffffff);
         messageSlotSet(0);
         return 1;
       }
@@ -137,7 +137,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
     if (temp_v2 == 0) {
       return 0;
     }
-    temp_v2 = FUN_00162880();
+    temp_v2 = engineCleanupIsDone();
     temp_v6 = '\0';
     if (temp_v2 != 0) {
       temp_v6 = *(char *)(temp_v5 + 8);
@@ -164,7 +164,7 @@ FUN_0021bdac(unsigned int param_1,int param_2,int param_3,int param_4,int param_
     }
     if (temp_v5 == 0 || temp_v3 == 0) {
       temp_v2 = FUN_00162ea4();
-      if ((temp_v2 != 0) && (temp_v2 = FUN_00162880(), temp_v2 != 0)) {
+      if ((temp_v2 != 0) && (temp_v2 = engineCleanupIsDone(), temp_v2 != 0)) {
         return 1;
       }
       FUN_00203da4(temp_v5,param_1,param_2,param_4,0x1a,1,param_6);

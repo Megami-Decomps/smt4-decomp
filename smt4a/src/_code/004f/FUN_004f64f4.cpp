@@ -18,7 +18,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: btlGetMainState. */
-extern unsigned int FUN_002e4c2c(int);
+extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: FUN_003afd30. */
 extern int btlScriptUnitHasFlags(void);
@@ -59,7 +59,7 @@ void FUN_004f64f4(int param_1)
       temp_v5 = pcVar5[2] == 'R';
     }
     if (temp_v5) {
-      temp_v3 = FUN_002e4c2c(temp_v2 + 0x2824);
+      temp_v3 = keyedRecordRegisterName(temp_v2 + 0x2824);
       *(char *)(temp_v2 + 0x281c) = (char)temp_v3;
       FUN_003478dc(temp_v3,pcVar5);
       *(char *)(temp_v2 + 0x281c) = (char)temp_v3;

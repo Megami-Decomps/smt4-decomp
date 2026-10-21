@@ -11,7 +11,7 @@ int gameFlagSetValue(...);
 int textFormatBuffer(...);
 int asdSequenceRequest(...);
 int jobStop(unsigned int, int);
-int FUN_001656e0(...);
+int jobSetIntensity(...);
 int sysPlaySe(...);
 int FUN_00168980(...);
 int gameFlagIsSet(...);
@@ -19,10 +19,10 @@ int asdMemFree(...);
 int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(...);
 int dataTableFree(int);
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int FUN_0020214c(void);
 int bgmFadeOut(int);
-int FUN_00224880(...);
+int scrRunOpcodesStub(...);
 int FUN_00275bc8(void);
 int scrScriptProcessStartEntry(...);
 int obj04Finish(void);
@@ -58,7 +58,7 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: jobStop. */
-/* Supplied declaration required: FUN_001656e0. */
+/* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
 extern int FUN_001801b8(unsigned short, unsigned char);
@@ -71,15 +71,15 @@ extern short *dataTableGetEntries(void);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: dataTableFree. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_0020214c. */
 extern int slotIsReady(unsigned int);
 /* Supplied declaration required: bgmFadeOut. */
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: npcRoomDestroy. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b60(void);
+extern int messageMainGetValue(void);
 extern int FUN_002a4b74(void);
 extern int messageWindowIsState1(void);
 extern int panelIsMissingOrFlagClear(void);
@@ -182,7 +182,7 @@ unsigned int FUN_00214324(void)
           do {
             temp_v6 = (int)*(short *)((int)puVar2 + temp_v5 * 2 + temp_v7 * 0x10 + 100);
             if (-1 < temp_v6) {
-              FUN_001656e0(puVar2[temp_v6 + 1],0);
+              jobSetIntensity(puVar2[temp_v6 + 1],0);
             }
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 8);
@@ -256,20 +256,20 @@ LAB_002146c0:
     temp_v7 = messageWindowIsState1();
     if ((temp_v7 != 0) && (temp_v7 = 0, 0 < (int)puVar2[0x39])) {
       do {
-        temp_v5 = FUN_002a4b60();
+        temp_v5 = messageMainGetValue();
         temp_v6 = 0;
         do {
           temp_v1 = (int)*(short *)((int)puVar2 + temp_v6 * 2 + temp_v7 * 0x10 + 100);
           if (-1 < temp_v1) {
-            FUN_001656e0(puVar2[temp_v1 + 1],temp_v5 == temp_v7);
+            jobSetIntensity(puVar2[temp_v1 + 1],temp_v5 == temp_v7);
           }
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 8);
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < (int)puVar2[0x39]);
     }
-    FUN_00224880(puVar2[0x14]);
-    FUN_00224880(puVar2[0x15]);
+    scrRunOpcodesStub(puVar2[0x14]);
+    scrRunOpcodesStub(puVar2[0x15]);
     temp_v7 = panelIsMissingOrFlagClear();
     if (temp_v7 == 0) break;
     obj04Finish();
@@ -284,8 +284,8 @@ LAB_002146c0:
       puVar2[0x41] = puVar2[0x3f];
       break;
     }
-    FUN_001f4908(0,10,0xff);
-    FUN_001f4908(1,10,0xff);
+    slotSetRequest(0,10,0xff);
+    slotSetRequest(1,10,0xff);
     puVar4 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar4[0x3c] = 6;
@@ -302,12 +302,12 @@ LAB_002146c0:
     temp_v7 = 0;
     if (0 < (int)puVar2[0x39]) {
       do {
-        temp_v5 = FUN_002a4b60();
+        temp_v5 = messageMainGetValue();
         temp_v6 = 0;
         do {
           temp_v1 = (int)*(short *)((int)puVar2 + temp_v6 * 2 + temp_v7 * 0x10 + 100);
           if (-1 < temp_v1) {
-            FUN_001656e0(puVar2[temp_v1 + 1],temp_v5 == temp_v7);
+            jobSetIntensity(puVar2[temp_v1 + 1],temp_v5 == temp_v7);
           }
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 8);
@@ -333,7 +333,7 @@ LAB_002146c0:
     sysPlaySe(0xa4);
     break;
   case 4:
-    temp_v7 = FUN_00224880(g_npcRoom[0x18]);
+    temp_v7 = scrRunOpcodesStub(g_npcRoom[0x18]);
     if (temp_v7 != 2) break;
     scrScriptProcessDestroy(puVar2[0x18]);
     asdMemFree(puVar2[0x17]);
@@ -405,11 +405,11 @@ joined_r0x00214af8:
     FUN_003423cc(0xa2);
     break;
   case 5:
-    temp_v7 = FUN_00224880(g_npcRoom[0x14]);
+    temp_v7 = scrRunOpcodesStub(g_npcRoom[0x14]);
     if (temp_v7 != 2) break;
 LAB_00214b50:
-    FUN_001f4908(0,10,0xff);
-    FUN_001f4908(1,10,0xff);
+    slotSetRequest(0,10,0xff);
+    slotSetRequest(1,10,0xff);
     puVar4 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar4[0x3c] = 6;

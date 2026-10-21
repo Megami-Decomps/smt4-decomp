@@ -34,9 +34,9 @@ extern int listBoxItemHasOwner(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetToggleItem. */
 extern unsigned int *asdListBoxGetFloatValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00340edc. */
-extern unsigned int FUN_003874fc(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 extern unsigned int *FUN_003e83b4(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_004c3a98(int, unsigned int);
+extern unsigned int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlSlotSetStoreValue. */
 
 
@@ -53,7 +53,7 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
   unsigned int *puVar7;
   unsigned int temp_v3;
   
-  temp_v0 = FUN_003874fc(*(unsigned int *)(param_1 + 0x10));
+  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   puVar2 = (unsigned int *)FUN_003e83b4(param_2,*(unsigned int *)(param_1 + 0x1c),1);
   puVar7 = (unsigned int *)0x0;
   if (puVar2 != (unsigned int *)0x0) {
@@ -94,13 +94,13 @@ void FUN_004d3df0(int param_1,unsigned int param_2)
         FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xd,0xffffffce,0x32);
         FUN_00340edc(*(unsigned int *)(param_1 + 0x10),0xe,0xffffffce,0x32);
       }
-      temp_v0 = FUN_004c3a98((int)(short)puVar2[2],7);
+      temp_v0 = btlFindEntryValue((int)(short)puVar2[2],7);
       asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x10,temp_v0,0xfffffffd,3,0);
-      temp_v0 = FUN_004c3a98((int)(short)puVar2[2],8);
+      temp_v0 = btlFindEntryValue((int)(short)puVar2[2],8);
       asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x11,temp_v0,0xfffffffd,3,0);
-      temp_v0 = FUN_004c3a98((int)(short)puVar2[2],10);
+      temp_v0 = btlFindEntryValue((int)(short)puVar2[2],10);
       asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x12,temp_v0,0xfffffffd,3,0);
-      temp_v0 = FUN_004c3a98((int)(short)puVar2[2],9);
+      temp_v0 = btlFindEntryValue((int)(short)puVar2[2],9);
       asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x13,temp_v0,0xfffffffd,3,0);
     }
     break;

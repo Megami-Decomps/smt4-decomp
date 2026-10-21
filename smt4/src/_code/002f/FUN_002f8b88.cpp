@@ -5,10 +5,10 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_00246c8c(unsigned int);
+int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(void);
 int FUN_0024b830(...);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int SUB41(...);
 int VectorFloatToUnsigned(double, int);
@@ -67,10 +67,10 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 extern unsigned int FUN_00246c28(void);
-/* Supplied declaration required: FUN_00246c8c. */
+/* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -146,12 +146,12 @@ void FUN_002f8b88(int param_1)
       pfVar18 = *(float **)(*(int *)(temp_v11 + 8) + 0x30);
       puVar19 = *(unsigned char **)(*(int *)(temp_v11 + 8) + 0x38);
       *(unsigned int *)(temp_v11 + 0x54) = *(unsigned int *)(temp_v11 + 0x54) | 0x21;
-      FUN_00246c8c(*(unsigned int *)(temp_v16 + 0x58) & 0xffffff);
+      asdSetNormalizedColorRgba(*(unsigned int *)(temp_v16 + 0x58) & 0xffffff);
       temp_v10 = DAT_004ea928;
       temp_v9 = DAT_004ea924;
       temp_v8 = DAT_004ea920;
       temp_v7 = DAT_004ea91c;
-      FUN_00246c8c(*(unsigned int *)(temp_v16 + 0x5c) & 0xffffff);
+      asdSetNormalizedColorRgba(*(unsigned int *)(temp_v16 + 0x5c) & 0xffffff);
       temp_v21 = (float)VectorSignedToFloat(temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v23 = (float)VectorSignedToFloat(temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v30 = (unsigned long long)*(unsigned int *)(temp_v16 + 0xa4) << 0x20;
@@ -206,7 +206,7 @@ void FUN_002f8b88(int param_1)
                 temp_v28 = (float)((unsigned long long)temp_v29 >> 0x20);
                 temp_v26 = (pfVar20[1] + (pfVar20[2] + temp_v26 * temp_v23 * temp_v38) * temp_v23) * temp_v36;
                 temp_v23 = temp_v26;
-                FUN_002b7064();
+                phaseCosInterpolate();
                 FUN_002b70cc();
                 DAT_004ea91c = temp_v26 * temp_v25;
                 DAT_004ea924 = temp_v23 * temp_v25;

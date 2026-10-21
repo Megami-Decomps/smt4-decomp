@@ -7,7 +7,7 @@ extern int FUN_002898e4(void);
 extern int FUN_0028c040(void);
 extern int buttonHelpCreate(void);
 extern int FUN_0028d9b0(void);
-extern int FUN_00297468(const char *path, void **buffer, int flags);
+extern int asdLoadFileAsyncSimple(const char *path, void **buffer, int flags);
 extern int gameGlobalsSetSelected(int);
 extern int FUN_0029e788(void);
 extern int FUN_0029e874(int);
@@ -43,8 +43,8 @@ void bibleScreenOpen(BibleScreen *screen)
     FUN_0029e874(1);
     FUN_0029e788();
     FUN_002a0cc8(1);
-    FUN_00297468("bible/bible.bf", &screen->files.bibleBf, 0);
-    FUN_00297468("bible/bible.mbm", &screen->files.bibleMbm, 0);
+    asdLoadFileAsyncSimple("bible/bible.bf", &screen->files.bibleBf, 0);
+    asdLoadFileAsyncSimple("bible/bible.mbm", &screen->files.bibleMbm, 0);
 }
 
 }

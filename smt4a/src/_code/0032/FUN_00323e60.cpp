@@ -9,7 +9,7 @@ int FUN_002b2d74(unsigned int, int, int *);
 int objectBufferFree(void);
 int FUN_002b4078(void);
 int effParticleParamCopy(int, unsigned int);
-int FUN_0038439c(int *, int, int);
+int polygonTrackRebuildResources(int *, int, int);
 int FUN_003a1ef4(void);
 
 /* Supplied declaration required: FUN_00271d28. */
@@ -17,7 +17,7 @@ int FUN_003a1ef4(void);
 /* Supplied declaration required: objectBufferFree. */
 /* Supplied declaration required: FUN_002b4078. */
 /* Supplied declaration required: effParticleParamCopy. */
-/* Supplied declaration required: FUN_0038439c. */
+/* Supplied declaration required: polygonTrackRebuildResources. */
 /* Supplied declaration required: FUN_003a1ef4. */
 
 
@@ -33,7 +33,7 @@ int * FUN_00323e60(int param_1)
   piVar3 = *(int **)(*(int *)(param_1 + 0x30) + 0x24);
   piVar1 = piVar3;
   FUN_003a1ef4();
-  FUN_0038439c(piVar1,**(unsigned short **)(param_1 + 0x30),param_1 + 0xc);
+  polygonTrackRebuildResources(piVar1,**(unsigned short **)(param_1 + 0x30),param_1 + 0xc);
   temp_v1 = (unsigned int)**(unsigned short **)(param_1 + 0x30);
   if (piVar1[0xc] != 0) {
     objectBufferFree();

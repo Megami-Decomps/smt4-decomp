@@ -1,18 +1,19 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f0e20` (_code @ 0x4f0e20, 0x2e8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W5_W5Match8_CameraTransition.h"
 
 extern "C" {
 
 int FUN_0013c884(unsigned int *, int);
-int FUN_00140e38(unsigned int *);
+int asdCameraRegister(unsigned int *);
 int FUN_0014f0dc(unsigned int *, unsigned int *, float *, int *);
 int FUN_001523b8(unsigned int *, int);
 int eventCommandSetPendingCleanup(void);
-int FUN_00208b84(void);
+int shakeEffectAlloc(void);
 int FUN_00348c50(int);
 int FUN_0036b824(unsigned int *);
-int FUN_004f3fe8(unsigned int *, int);
+void btlCameraApplyBlendPreset(W5Match8CameraTransition*, u32 preset, s32 slot);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -25,17 +26,16 @@ typedef struct {
 } param_1_stack;
 
 extern int g_handleRegistry; /* 0x56fcc0 */
-extern int DAT_00589144; /* 0x589144 */
+extern int g_freeCamera; /* 0x589144 */
 
 /* Supplied declaration required: FUN_0013c884. */
-/* Supplied declaration required: FUN_00140e38. */
+/* Supplied declaration required: asdCameraRegister. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: eventCommandSetPendingCleanup. */
-/* Supplied declaration required: FUN_00208b84. */
+/* Supplied declaration required: shakeEffectAlloc. */
 /* Supplied declaration required: FUN_00348c50. */
 /* Supplied declaration required: FUN_0036b824. */
-/* Supplied declaration required: FUN_004f3fe8. */
 
 
 void FUN_004f0e20(unsigned int *param_1)
@@ -52,7 +52,7 @@ void FUN_004f0e20(unsigned int *param_1)
   unsigned int temp_v7;
   unsigned int temp_v8;
   
-  FUN_004f3fe8(param_1,0);
+  btlCameraApplyBlendPreset(reinterpret_cast<W5Match8CameraTransition*>(param_1),0,0);
   temp_v2 = 0;
   param_1[0x200] = 0;
   param_1[0x206] = 0;
@@ -83,7 +83,7 @@ void FUN_004f0e20(unsigned int *param_1)
   FUN_0014f0dc(param_1 + 0x1b,param_1 + 0x160,&temp_v3,&temp_v6);
   FUN_001523b8(param_1 + 0x1b,1);
   FUN_0036b824(param_1 + 0x1b);
-  FUN_00140e38(param_1 + 0x1b);
+  asdCameraRegister(param_1 + 0x1b);
   *(unsigned int **)(g_handleRegistry + 0xc) = param_1 + 0x1b;
   param_1[0x1ad] = temp_v2;
   param_1[0x1ac] = temp_v2;
@@ -145,7 +145,7 @@ void FUN_004f0e20(unsigned int *param_1)
   param_1[0x1f2] = 0xffffffff;
   param_1[499] = 0xffffffff;
   *(unsigned char *)(param_1 + 0x1aa) = 0;
-  FUN_00208b84();
+  shakeEffectAlloc();
   param_1[0x10] = temp_v0;
   eventCommandSetPendingCleanup();
   param_1[0x11] = 0;
@@ -159,7 +159,7 @@ void FUN_004f0e20(unsigned int *param_1)
   param_1[0x19] = 0;
   param_1[0x1a] = 0;
   FUN_00348c50(0);
-  *(unsigned int **)(DAT_00589144 + 0x10) = param_1 + 0x1b;
+  *(unsigned int **)(g_freeCamera + 0x10) = param_1 + 0x1b;
   param_1[0xe] = 1;
   param_1[0xf] = 0;
   return;

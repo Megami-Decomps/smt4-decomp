@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f4348` (_code @ 0x4f4348, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail tail-branches to FUN_004f23b0, currently classified outside every real function; draft absorbed that target's flow and omits the three VFP inputs. Resolve the target boundary before matching. */
 #include "romwright_types.h"
 
 extern "C" {

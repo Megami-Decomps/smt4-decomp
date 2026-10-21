@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_0023ea20(unsigned int, int);
+int modelSetAnimationChannels(unsigned int, int);
 int animPlayerSetLoopPolicy(unsigned int, int);
 int FUN_0028c618(unsigned int, int);
 int FUN_002a0428(unsigned int, int);
-int FUN_002d582c(unsigned int);
+void FUN_002d582c(unsigned int, float);
 
-/* Supplied declaration required: FUN_0023ea20. */
+/* Supplied declaration required: modelSetAnimationChannels. */
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -42,8 +42,8 @@ void FUN_003d9d9c(int param_1)
         FUN_002a0428(temp_v1,1);
       }
       FUN_0028c618(*(unsigned int *)(*puVar4 + 8),0);
-      FUN_0023ea20(*puVar4,0);
-      FUN_002d582c(*puVar4);
+      modelSetAnimationChannels(*puVar4,0);
+      FUN_002d582c(*puVar4, 0.0f);
       animPlayerSetLoopPolicy(*(unsigned int *)(*puVar4 + 8),1);
       puVar4 = (unsigned int *)*puVar4;
       *puVar4 = *puVar4 | 2;

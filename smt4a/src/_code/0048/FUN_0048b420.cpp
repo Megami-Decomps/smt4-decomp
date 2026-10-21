@@ -6,7 +6,7 @@ extern "C" {
 
 int rectRecRead(int, int, int *, int *, int *, int *);
 int words2Copy(int, float *);
-int FUN_004cfb64(int, int, int, int);
+void renderSetClippedScissor(int, int, int, int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -24,7 +24,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: rectRecRead. */
 /* Supplied declaration required: words2Copy. */
-/* Supplied declaration required: FUN_004cfb64. */
+/* Supplied declaration required: renderSetClippedScissor. */
 
 
 void FUN_0048b420(int param_1,int param_2)
@@ -51,7 +51,7 @@ void FUN_0048b420(int param_1,int param_2)
     temp_v5 = (int)(fStack_10 + temp_v2);
     temp_v2 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v3 = (int)(temp_v6 + temp_v2);
-    FUN_004cfb64(temp_v5,temp_v3,temp_v4,uStack_18);
+    renderSetClippedScissor(temp_v5,temp_v3,temp_v4,uStack_18);
   }
   else {
     piVar3 = (int *)(g_renderCtx + 0x1318);

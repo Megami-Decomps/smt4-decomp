@@ -15,7 +15,7 @@ struct fn_0042fa08_arg0 {
     byte field_0x8; /* +0x8 */
 };
 
-extern signed char DAT_005b448b; /* 0x5b448b */
+extern signed char g_asdCecModuleFlags; /* 0x5b448b */
 extern signed char DAT_005b448c; /* 0x5b448c */
 extern signed char DAT_005b448e; /* 0x5b448e */
 extern signed char DAT_005b448f; /* 0x5b448f */
@@ -33,7 +33,7 @@ unsigned int FUN_0042fa08(fn_0042fa08_arg0 *param_1)
 {
 /* irregular: 3 native warning(s); review required */
   param_1->field_0x4 = 0;
-  if (DAT_005b448b != '\0') {
+  if (g_asdCecModuleFlags != '\0') {
     FUN_0042e870(param_1,0);
   }
   nn_os_CriticalSection_Enter((unsigned int)&DAT_006426cc);

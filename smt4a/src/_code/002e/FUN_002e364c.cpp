@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002c28dc(...);
+int collisionTestProjectedSpherePlanes(...);
 int FUN_00314bbc(void);
 int FUN_00319f64(...);
 int FUN_003278c8(int);
@@ -66,7 +66,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002c28dc. */
+/* Supplied declaration required: collisionTestProjectedSpherePlanes. */
 /* Supplied declaration required: FUN_00314bbc. */
 /* Supplied declaration required: FUN_00319f64. */
 /* Supplied declaration required: FUN_003278c8. */
@@ -127,7 +127,7 @@ unsigned int FUN_002e364c(float *param_1)
                             if (((temp_v1 == '\r') && ((temp_v5 & 0x2000) == 0)) &&
                                (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d)
                                , !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-                              FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),
+                              collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),
                                            (int)*(char *)(temp_v3 + 5),temp_v3);
                               temp_v0 = (in_fpscr & 0xfffffff) |
                                       ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
@@ -145,7 +145,7 @@ unsigned int FUN_002e364c(float *param_1)
                                   (in_fpscr = (in_fpscr & 0xfffffff) |
                                               ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                                   !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-                            FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),
+                            collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),
                                          (int)*(char *)(temp_v3 + 5),temp_v3);
                             temp_v0 = (in_fpscr & 0xfffffff) |
                                     ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
@@ -163,7 +163,7 @@ unsigned int FUN_002e364c(float *param_1)
                                 (in_fpscr = (in_fpscr & 0xfffffff) |
                                             ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                                 !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-                          FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),
+                          collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),
                                        temp_v3);
                           temp_v0 = (in_fpscr & 0xfffffff) |
                                   ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
@@ -179,7 +179,7 @@ unsigned int FUN_002e364c(float *param_1)
                       else if (((temp_v5 & 0x200) == 0) &&
                               (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                               !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-                        FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),
+                        collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),
                                      temp_v3);
                         temp_v0 = (in_fpscr & 0xfffffff) |
                                 ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
@@ -194,7 +194,7 @@ unsigned int FUN_002e364c(float *param_1)
                     else if (((temp_v5 & 0x100) == 0) &&
                             (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                             !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-                      FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),
+                      collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),
                                    temp_v3);
                       temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f)
                       ;
@@ -208,7 +208,7 @@ unsigned int FUN_002e364c(float *param_1)
                   else if (((temp_v5 & 0x10) == 0) &&
                           (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                           !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-                    FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3)
+                    collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3)
                     ;
                     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
                     in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
@@ -221,7 +221,7 @@ unsigned int FUN_002e364c(float *param_1)
                 else if (((temp_v5 & 0x8000) == 0) &&
                         (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                         !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-                  FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
+                  collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
                   temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
                   in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
                   if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
@@ -234,7 +234,7 @@ unsigned int FUN_002e364c(float *param_1)
               else if (((temp_v5 & 0x4000) == 0) &&
                       (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                       !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-                FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
+                collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
                 temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
                 in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
                 if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
@@ -259,7 +259,7 @@ unsigned int FUN_002e364c(float *param_1)
             else if (((temp_v5 & 8) == 0) &&
                     (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                     !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-              FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
+              collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
               temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
               in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
               if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
@@ -283,7 +283,7 @@ unsigned int FUN_002e364c(float *param_1)
           else if (((temp_v5 & 4) == 0) &&
                   (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                   !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-            FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
+            collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
             temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
             in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
             if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
@@ -298,7 +298,7 @@ unsigned int FUN_002e364c(float *param_1)
         else if (((temp_v5 & 2) == 0) &&
                 (in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 <= temp_v6) << 0x1d),
                 !romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0))) {
-          FUN_002c28dc(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
+          collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v3 + 4),(int)*(char *)(temp_v3 + 5),temp_v3);
           temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11[0] < (float)temp_v10) << 0x1f);
           in_fpscr = temp_v0 | ((unsigned int)(romwright_isnanf(temp_v11[0]) || romwright_isnanf((float)temp_v10)) << 0x1c);
           if ((unsigned char)(temp_v0 >> 0x1f) == ((unsigned char)(in_fpscr >> 0x1c) & 1)) {

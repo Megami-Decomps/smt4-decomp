@@ -7,11 +7,11 @@ extern "C" {
 int FUN_003b5714(void);
 int VectorSignedToFloat(int, int);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_003798f0(void);
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_003b5714. */
 
 
@@ -25,7 +25,7 @@ void FUN_0033f188(void)
   unsigned int temp_v2;
   
   FUN_003b5714();
-  temp_v1 = FUN_003798f0();
+  temp_v1 = dataTableGetRecord23();
   temp_v0 = g_lmapScene;
   temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(g_lmapScene + 0x1c) = temp_v2;
@@ -43,7 +43,7 @@ void FUN_0033f188(void)
   *(unsigned int *)(temp_v0 + 0x4c) = temp_v2;
   *(unsigned int *)(temp_v0 + 0x50) = temp_v2;
   temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-  *(unsigned int *)(DAT_005806a4 + 0x18) = temp_v2;
+  *(unsigned int *)(g_lmapView + 0x18) = temp_v2;
   return;
 }
 

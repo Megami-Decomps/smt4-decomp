@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00135ae4(int, int, unsigned int);
+int elemCopyBackward(int, int, unsigned int);
 int FUN_00135b4a(int, unsigned int, unsigned int);
 int asdOperatorDeleteArray(...);
 int FUN_0030798e(unsigned int, int, unsigned int, int *);
@@ -22,7 +22,7 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned int FUN_001321fc(int *);
-/* Supplied declaration required: FUN_00135ae4. */
+/* Supplied declaration required: elemCopyBackward. */
 /* Supplied declaration required: FUN_00135b4a. */
 extern int *wordRefMax(int *, unsigned int *);
 /* Supplied declaration required: asdOperatorDeleteArray. */
@@ -68,7 +68,7 @@ void FUN_001340c6(int *param_1,int param_2,int param_3,unsigned int param_4)
       if (temp_v2 < temp_v1) {
         temp_v0 = temp_v1 + param_3 * -8;
         FUN_003079c6(temp_v0,temp_v1,temp_v1,param_1);
-        FUN_00135ae4(temp_v9,temp_v0,temp_v1);
+        elemCopyBackward(temp_v9,temp_v0,temp_v1);
         temp_v1 = temp_v2;
       }
       else {

@@ -13,7 +13,7 @@ extern unsigned int g_btlTalk; /* 0x439b58 */
 extern int scrGetArg(unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(unsigned int);
-extern unsigned int FUN_003c0868(unsigned int);
+extern unsigned int dataTableFileTouch(unsigned int);
 
 
 unsigned int FUN_00318ab0(void)
@@ -30,7 +30,7 @@ unsigned int FUN_00318ab0(void)
   temp_v1 = scrGetArg(0);
   temp_v2 = scrGetArg(1);
   temp_v3 = scrGetArg(2);
-  temp_v4 = FUN_003c0868(g_btlTalk);
+  temp_v4 = dataTableFileTouch(g_btlTalk);
   dataTableGetCount();
   temp_v5 = dataTableGetEntries(temp_v4);
   if (temp_v2 != 0) {

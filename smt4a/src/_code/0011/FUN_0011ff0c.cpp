@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011ff0c` (_code @ 0x11ff0c, 0x5a bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ChunkPool.h"
+
+struct PoolTreeNode20;
 
 extern "C" {
 
@@ -31,7 +34,7 @@ extern unsigned char DAT_0055acc0; /* 0x55acc0 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_0012f76e(void);
+extern PoolTreeNode20* FUN_0012f76e(ChunkPool*);
 extern unsigned int onlineStringConstruct(unsigned int *, char *);
 /* Supplied declaration required: onlineStringDestroy. */
 extern unsigned int *initVtable00558fb4(fn_0011ff0c_arg0 *, unsigned int);
@@ -63,7 +66,7 @@ FUN_0011ff0c(fn_0011ff0c_arg0 *param_1,unsigned int param_2,unsigned int param_3
   puVar1[0x13] = 0;
   puVar1[0x12] = 0;
   puVar1[0x11] = 0;
-  temp_v0 = FUN_0012f76e();
+  temp_v0 = reinterpret_cast<int>(FUN_0012f76e(reinterpret_cast<ChunkPool*>(puVar1 + 0x10)));
   puVar1[0x14] = temp_v0;
   *(unsigned int *)(temp_v0 + 4) = 0;
   *(unsigned int *)(puVar1[0x14] + 8) = puVar1[0x14];

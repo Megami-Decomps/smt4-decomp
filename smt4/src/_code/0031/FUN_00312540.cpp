@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00245228(u32 btl, int a, u32 b);
+int slotResetIdle(u32 btl, int a, u32 b);
 extern int tableIsSupportedKind(u32 btl, u32 a);
 extern u32 btlGetMainState(void);
 extern u32 scrGetArg(u32 index);
@@ -16,7 +16,7 @@ u8 FUN_00312540(void)
     if (FUN_0033b35c(btl, 0) != 0) {
         return tableIsSupportedKind(btl, 0) != 0;
     }
-    FUN_00245228(btl, 0, arg);
+    slotResetIdle(btl, 0, arg);
     return 0;
 }
 

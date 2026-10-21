@@ -1,40 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e699c` (_code @ 0x4e699c, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses separate conditional stores and saves five registers; compiled code groups the pair into STM and pads the call frame with R8. */
+#include "common.h"
+
+struct BattleRecord {
+    s32 first;  // 0x00
+    s32 second; // 0x04
+};
+struct BattleRecordSet {
+    u8 unk000[0x5b8]; // 0x000
+    BattleRecord records[133]; // 0x5b8
+};
+struct BattleReference;
 
 extern "C" {
+BattleRecordSet* btlUnitGet(BattleReference* reference);
 
-extern int btlUnitGet(void);
-
-
-void FUN_004e699c(unsigned int param_1,int param_2,int param_3)
-
+// Clears every unit record matching the requested pair.
+void FUN_004e699c(BattleReference* reference, s32 first, s32 second)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = btlUnitGet();
-  temp_v1 = 0;
-  temp_v2 = 0x85;
-  do {
-    temp_v4 = temp_v0 + temp_v1 * 8;
-    temp_v1 = temp_v1 + 1;
-    temp_v3 = *(int *)(temp_v4 + 0x5b8);
-    temp_v5 = temp_v3 == param_2;
-    if (temp_v5) {
-      temp_v3 = *(int *)(temp_v4 + 0x5bc);
+    BattleRecordSet* unit = btlUnitGet(reference);
+    for (s32 i = 0; i < 133; ++i) {
+        if (unit->records[i].first == first && unit->records[i].second == second) {
+            unit->records[i].first = -1;
+            unit->records[i].second = 0;
+        }
     }
-    if (temp_v5 && temp_v3 == param_3) {
-      *(unsigned int *)(temp_v4 + 0x5b8) = 0xffffffff;
-      *(unsigned int *)(temp_v4 + 0x5bc) = 0;
-    }
-    temp_v2 = temp_v2 - 1;
-  } while (temp_v2 != 0);
-  return;
 }
-
-} /* extern "C" */
+}

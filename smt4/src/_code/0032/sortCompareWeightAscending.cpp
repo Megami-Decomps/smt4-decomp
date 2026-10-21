@@ -6,7 +6,9 @@ struct WeightedEntry {
 };
 
 /* Compares the entries' floating-point weights. */
-extern "C" s32 sortCompareWeightAscending(const WeightedEntry *left, const WeightedEntry *right)
+extern "C" s32 sortCompareWeightAscending(const void *leftData, const void *rightData)
 {
+    const WeightedEntry *left = (const WeightedEntry *)leftData;
+    const WeightedEntry *right = (const WeightedEntry *)rightData;
     return (s32)(left->weight - right->weight);
 }

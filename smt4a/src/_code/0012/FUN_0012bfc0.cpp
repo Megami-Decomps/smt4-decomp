@@ -8,7 +8,7 @@ int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *);
 int FUN_0030c800(int, unsigned int *);
-int FUN_0030c846(int, unsigned int, unsigned int, unsigned int);
+int holderSetPairAndFlush(int, unsigned int, unsigned int, unsigned int);
 int wordListAt(unsigned int *, unsigned int);
 int recordListAt(int, unsigned int);
 
@@ -31,9 +31,9 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002ea41e. */
 extern int FUN_002fd38c(unsigned int *);
-extern int FUN_0030c7f4(unsigned int *, unsigned int *);
+extern int wordRefNotEqual(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_0030c800. */
-/* Supplied declaration required: FUN_0030c846. */
+/* Supplied declaration required: holderSetPairAndFlush. */
 /* Supplied declaration required: wordListAt. */
 /* Supplied declaration required: recordListAt. */
 
@@ -63,7 +63,7 @@ void FUN_0012bfc0(int param_1)
 LAB_0012c018:
         temp_v1 = param_1 + 0x110;
         recordListAt(temp_v1,*(unsigned int *)(param_1 + 0x3f4));
-        FUN_0030c846(param_1 + 0x280,temp_v2,*(unsigned int *)(temp_v1 + 8),
+        holderSetPairAndFlush(param_1 + 0x280,temp_v2,*(unsigned int *)(temp_v1 + 8),
                      *(unsigned int *)(temp_v1 + 0xc));
         temp_v6 = *(int **)(param_1 + 0x3ec);
         temp_v4 = *(unsigned int *)(param_1 + 0x290);
@@ -89,7 +89,7 @@ LAB_0012c018:
       temp_v1 = FUN_002fd38c((unsigned int *)&temp_v4);
       if (temp_v1 == 0x69) {
         temp_v7[0] = 0x80690001;
-        temp_v1 = FUN_0030c7f4((unsigned int *)&temp_v4,temp_v7);
+        temp_v1 = wordRefNotEqual((unsigned int *)&temp_v4,temp_v7);
         puVar3 = (unsigned int *)&temp_v4;
         if (temp_v1 != 0) {
           temp_v0 = 1;

@@ -26,7 +26,9 @@ typedef struct BtlUi {
     /* 0x7E20 */ u32 unk7E20;
     /* 0x7E24 */ u8 unk7E24[0x14];
     /* 0x7E38 */ s32 state;
-    /* 0x7E3C */ u8 unk7E3C[0x0F];
+    /* 0x7E3C */ u8 unk7E3C[0xc];
+    /* 0x7E48 */ u8 requiresTargetSelection;
+    /* 0x7E49 */ u8 unk7E49[2];
     /* 0x7E4B */ u8 unk7E4B;
     /* 0x7E4C */ u8 unk7E4C[2];
     /* 0x7E4E */ u16 unk7E4E;

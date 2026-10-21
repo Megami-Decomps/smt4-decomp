@@ -1,47 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ec4a4` (_code @ 0x3ec4a4, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: original array classes/constructors are unrecovered; retail retains an unreferenced 0x00447e40 pool word and clears counters with STM. */
+#include "common.h"
+
+struct InitializationArguments {
+    u32 unk00[2]; // 0x00
+    u32 first;    // 0x08
+    u32 second;   // 0x0c
+};
+struct InitializationCounters {
+    u32 first;  // 0x00
+    u32 second; // 0x04
+};
+struct FirstElement {
+    u32 storage[0x284 / 4];
+};
+struct SecondElement {
+    u32 storage[0x30 / 4];
+};
+struct SharedElements {
+    FirstElement first[16];   // 0x0000
+    u32 separator;            // 0x2840
+    SecondElement second[32]; // 0x2844
+};
 
 extern "C" {
+extern InitializationCounters DAT_00447e50;
+extern SharedElements DAT_004b896c;
+void FUN_00340650(void* element);
+void FUN_00340664(void* element);
+void* __aeabi_vec_ctor_nocookie_nodtor(
+    void* elements, void (*constructor)(void*), u32 stride, u32 count);
+void* FUN_002c5d54(
+    void* elements, void (*constructor)(void*), u32 stride, u32 count);
 
-int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-extern unsigned char LAB_00340650; /* 0x340650 */
-extern unsigned int DAT_00447e50; /* 0x447e50 */
-extern unsigned int DAT_00447e54; /* 0x447e54 */
-extern unsigned char DAT_004b896c; /* 0x4b896c */
-
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-
-
-unsigned char * FUN_003ec4a4(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Initializes both groups of shared elements and clears their counters.
+void* FUN_003ec4a4(u32 first, u32 second, InitializationArguments* arguments)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  unsigned char temp_v1;
-  
-  *(unsigned int *)(param_3 + 8) = param_1;
-  *(unsigned int *)(param_3 + 0xc) = param_2;
-  DAT_00447e50 = 0;
-  DAT_00447e54 = 0;
-  puVar1 = &DAT_004b896c;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004b896c,&LAB_00340650,0x284,0x10);
-  temp_v0 = 0x20;
-  puVar3 = puVar1 + 0x2844;
-  while (temp_v1 = temp_v0 != 0, temp_v0 = temp_v0 - 1, temp_v1) {
-    (*(romwright_code *)0x340664)(puVar3);
-    puVar3 = puVar3 + 0x30;
-  }
-  return puVar1 + 0x2844;
+    arguments->first = first;
+    arguments->second = second;
+    DAT_00447e50.first = 0;
+    DAT_00447e50.second = 0;
+    SharedElements* elements = static_cast<SharedElements*>(
+        __aeabi_vec_ctor_nocookie_nodtor(
+            &DAT_004b896c, FUN_00340650, sizeof(FirstElement), 16));
+    return FUN_002c5d54(elements->second, FUN_00340664, sizeof(SecondElement), 32);
 }
-
-} /* extern "C" */
+}

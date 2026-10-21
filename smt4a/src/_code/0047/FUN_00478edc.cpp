@@ -6,7 +6,7 @@ extern "C" {
 
 int eventQueueAddUniqueIfValid(int);
 int FUN_00169548(int);
-int FUN_00224880(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int obj04Finish(void);
 int FUN_00474734(unsigned int *, int);
@@ -30,8 +30,8 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: FUN_00169548. */
 extern int byteIsAtLeast100(unsigned int *);
-/* Supplied declaration required: FUN_00224880. */
-extern int FUN_0026272c(void);
+/* Supplied declaration required: scrRunOpcodesStub. */
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002e19f8(void);
 extern int FUN_002e1a18(unsigned int);
@@ -45,7 +45,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0047bcdc. */
 extern int isEmptyString(unsigned int *);
 /* Supplied declaration required: timeInitializeActiveState. */
-extern int FUN_004cfe4c(unsigned int *);
+extern int flaggedValueHolderGetTotal(unsigned int *);
 
 
 void FUN_00478edc(unsigned int *param_1)
@@ -84,7 +84,7 @@ void FUN_00478edc(unsigned int *param_1)
       }
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {
-          FUN_00224880(param_1[0xd6]);
+          scrRunOpcodesStub(param_1[0xd6]);
           (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v5);
           temp_v4 = temp_v5;
           uStack_34 = uStack_20;
@@ -116,11 +116,11 @@ void FUN_00478edc(unsigned int *param_1)
       else {
         temp_v3 = FUN_002e19f8();
         if ((temp_v3 != 0) && ((*param_1 & 0x200) != 0)) {
-          FUN_00224880(param_1[0xd6]);
+          scrRunOpcodesStub(param_1[0xd6]);
           puVar5 = param_1 + 0x83;
           FUN_00474734(puVar5,3);
           param_1[0x82] = (unsigned int)puVar5;
-          temp_v3 = FUN_004cfe4c(param_1 + 0x90);
+          temp_v3 = flaggedValueHolderGetTotal(param_1 + 0x90);
           puVar5[5] = (unsigned int)*(unsigned short *)(*(int *)(temp_v1 + 0x678) + temp_v3 * 0x9c8 + 0x9aa);
           param_1[2] = 2;
           return;
@@ -135,7 +135,7 @@ void FUN_00478edc(unsigned int *param_1)
         }
       }
       else {
-        temp_v1 = FUN_0026272c();
+        temp_v1 = messageMainIsIdle();
         if ((temp_v1 != 0) && (temp_v1 = panelIsMissingOrFlagClear(), temp_v1 != 0)) {
           param_1[1] = 10;
           param_1[2] = 0;
@@ -148,7 +148,7 @@ void FUN_00478edc(unsigned int *param_1)
       }
     }
     else {
-      FUN_00224880(param_1[0xd6]);
+      scrRunOpcodesStub(param_1[0xd6]);
       temp_v1 = FUN_002e1a18(0x10);
       if (temp_v1 != 0) {
         eventQueueAddUniqueIfValid(0x100020e);
@@ -160,7 +160,7 @@ void FUN_00478edc(unsigned int *param_1)
     }
   }
   else {
-    temp_v1 = FUN_0026272c();
+    temp_v1 = messageMainIsIdle();
     if (temp_v1 != 0) {
       temp_v2 = tableGroupFindEntryIndex(param_1[0xd4],&LAB_004791c4);
       scrScriptProcessStartEntry(param_1[0xd6],temp_v2);

@@ -32,7 +32,7 @@ extern unsigned char LAB_003e36cc; /* 0x3e36cc */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(void);
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int gameDataCopySaveEntry(unsigned short, unsigned char *);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
@@ -63,13 +63,13 @@ void FUN_003e32b0(int param_1)
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {
       if (temp_v1 != 2) {
-        if ((temp_v1 == 3) && (temp_v1 = FUN_00224880(*(unsigned int *)(param_1 + 0x18)), temp_v1 == 2)) {
+        if ((temp_v1 == 3) && (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18)), temp_v1 == 2)) {
           *(unsigned char *)(param_1 + 0x98) = 1;
           *(unsigned int *)(param_1 + 8) = 0;
         }
       }
       else {
-        temp_v1 = FUN_00224880(*(unsigned int *)(param_1 + 0x18));
+        temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
         if (temp_v1 == 2) {
           *(unsigned int *)(param_1 + 0xc) = *(unsigned int *)(param_1 + 4);
           *(unsigned int *)(param_1 + 4) = 7;
@@ -79,7 +79,7 @@ void FUN_003e32b0(int param_1)
       }
     }
     else {
-      temp_v1 = FUN_00224880(*(unsigned int *)(param_1 + 0x18));
+      temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
       if ((temp_v1 == 2) && (temp_v1 = panelIsMissingOrFlagClear(), temp_v1 != 0)) {
         temp_v1 = FUN_002a4b74();
         if (!(temp_v1 == -1 || temp_v1 == 3)) {

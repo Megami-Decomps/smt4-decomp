@@ -28,7 +28,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 
 extern unsigned int scrGetArgString(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
@@ -75,7 +75,7 @@ unsigned int FUN_00335934(void)
   temp_v15 = 0;
   temp_v16 = 0;
   libc_strcpy(&temp_v1,temp_v0);
-  FUN_004f7b84(DAT_00573808,&temp_v1);
+  FUN_004f7b84(g_btlAux,&temp_v1);
                     /* WARNING: Treating indirect jump as return */
   return 1;
 }

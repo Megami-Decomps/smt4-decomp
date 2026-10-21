@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001124ac` (_code @ 0x1124ac, 0xca4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
 
 extern "C" {
 
@@ -70,8 +71,8 @@ extern unsigned char DAT_00401000; /* 0x401000 */
 extern unsigned char DAT_00401080; /* 0x401080 */
 extern unsigned char DAT_004010c0; /* 0x4010c0 */
 extern unsigned char DAT_004010d0; /* 0x4010d0 */
-extern romwright_code *DAT_0044e330; /* 0x44e330 */
-extern romwright_code *DAT_0044e334; /* 0x44e334 */
+extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
+extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
 extern unsigned int DAT_0044e338; /* 0x44e338 */
 extern unsigned int DAT_0044e33c; /* 0x44e33c */
 extern int DAT_0044e340; /* 0x44e340 */
@@ -98,7 +99,6 @@ extern int DAT_004c640c; /* 0x4c640c */
 extern int FUN_001221e0(int);
 /* Supplied declaration required: FUN_00122224. */
 extern int FUN_00122a6c(void);
-extern int FUN_00122f04(int);
 extern int blockOpen(int);
 /* Supplied declaration required: FUN_00123254. */
 extern unsigned long long FUN_0012419c(void);
@@ -152,8 +152,8 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
   DAT_0044e33c = 1;
   DAT_0044e338 = 1;
   DAT_004c63f4 = 0x700;
-  DAT_0044e330 = param_1;
-  DAT_0044e334 = param_2;
+  g_gfxAllocateCallback = param_1;
+  g_gfxReleaseCallback = param_2;
   DAT_0044e340 = (*param_1)(0x10000,0x100,0,0x30fc);
   if (DAT_0044e340 != 0) {
     temp_v9[0] = DAT_0044e340 + 0x30ec;
@@ -164,23 +164,23 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
     temp_v0 = FUN_00122a6c();
     if ((((-1 < temp_v0) && (temp_v0 = FUN_001221e0(temp_v1), -1 < temp_v0)) &&
         (temp_v0 = blockOpen(temp_v2), -1 < temp_v0)) &&
-       ((FUN_00122224(), -1 < temp_v4 && (temp_v0 = FUN_00122f04(temp_v5), -1 < temp_v0)))) {
+       ((FUN_00122224(), -1 < temp_v4 && (temp_v0 = gfxDefaultTexturesInitialize(reinterpret_cast<DefaultTextureWork *>(temp_v5)), -1 < temp_v0)))) {
       nngxGetError();
       nngxBindCmdlist(temp_v9[2]);
       puVar1 = DAT_004c632c;
       if (DAT_004c632c != (unsigned int *)0x0) {
         if (DAT_004c632c[1] != 0) {
-          in_r12 = DAT_0044e334;
+          in_r12 = g_gfxReleaseCallback;
         }
         if (DAT_004c632c[1] != 0 && in_r12 != (romwright_code *)0x0) {
           (*in_r12)(0x10000,0x105,*DAT_004c632c);
         }
-        in_r12 = DAT_0044e330;
-        if (DAT_0044e330 == (romwright_code *)0x0) {
+        in_r12 = g_gfxAllocateCallback;
+        if (g_gfxAllocateCallback == (romwright_code *)0x0) {
           temp_v0 = 0;
         }
         else {
-          temp_v0 = (*DAT_0044e330)(0x10000,0x105,*puVar1,0x101c0);
+          temp_v0 = (*g_gfxAllocateCallback)(0x10000,0x105,*puVar1,0x101c0);
         }
         puVar1[3] = 0;
         puVar1[8] = 0;
@@ -363,8 +363,8 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
           *(unsigned int *)(puVar7 + 0x14) = (*(unsigned int *)(puVar7 + 0x14) & 0xfffffff8) | 4;
           temp_v4 = nngxGetVramEndAddr(0x30000);
           *(int *)(puVar7 + 4) = temp_v4 - 0x7fff;
-          if ((DAT_0044e330 == (romwright_code *)0x0) ||
-             (in_r12 = DAT_0044e330, temp_v3 = (*DAT_0044e330)(0x10000,0x100,0,0x8010), temp_v3 == 0)) {
+          if ((g_gfxAllocateCallback == (romwright_code *)0x0) ||
+             (in_r12 = g_gfxAllocateCallback, temp_v3 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x8010), temp_v3 == 0)) {
             FUN_00123254(1,temp_v9 + 2);
             return 0;
           }
@@ -400,7 +400,7 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
           if (DAT_004c62a1 == '\0') {
 LAB_00113098:
             if (temp_v0 != 0) {
-              in_r12 = DAT_0044e334;
+              in_r12 = g_gfxReleaseCallback;
             }
             if (temp_v0 != 0 && in_r12 != (romwright_code *)0x0) {
               (*in_r12)(0x10000,0x100,0,temp_v3);

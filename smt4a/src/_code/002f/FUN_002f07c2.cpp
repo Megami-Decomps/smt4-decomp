@@ -17,7 +17,7 @@ int FUN_002efcf2(...);
 int FUN_002efcfc(int *, unsigned int);
 int FUN_002efd12(...);
 int mapIteratorNext2(...);
-int FUN_002efdb4(...);
+int onlineLockRelease(...);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -47,7 +47,7 @@ extern unsigned int seq16Diff(unsigned int, unsigned int);
 extern int seq16IsGreater(unsigned char *, unsigned char *);
 extern int FUN_002efd4a(unsigned char *, unsigned char *);
 /* Supplied declaration required: mapIteratorNext2. */
-/* Supplied declaration required: FUN_002efdb4. */
+/* Supplied declaration required: onlineLockRelease. */
 
 
 void FUN_002f07c2(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -126,7 +126,7 @@ void FUN_002f07c2(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       FUN_002efd12(temp_v3,&temp_v12);
     } while (temp_v4 < 2);
     puVar7 = (unsigned int *)arrayElementAddress_002eee88(temp_v2,temp_v16);
-    FUN_002efdb4(*puVar7);
+    onlineLockRelease(*puVar7);
     onlineEntryApply(param_1,temp_v16);
   }
   else {

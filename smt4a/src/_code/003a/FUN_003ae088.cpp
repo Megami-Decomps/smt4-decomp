@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 unsigned char FUN_003ae088(void)
@@ -35,7 +35,7 @@ unsigned char FUN_003ae088(void)
     }
     if (temp_v5 && temp_v2 != 2) {
       temp_v2 = *(int *)(g_lmapScene + 0x1c);
-      FUN_002b5cb4();
+      distSpatial();
       if (temp_v2 < 0x43480001) {
         temp_v4 = temp_v4 + 1;
       }

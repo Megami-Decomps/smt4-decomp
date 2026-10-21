@@ -1,34 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040a710` (_code @ 0x40a710, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves both ID and ID-minus-one across the getter; compiled code shares the index and schedules the signed division and flag test differently. */
+#include "common.h"
 
 extern "C" {
+u8* FUN_00261440(void);
 
-extern int FUN_00261440(void);
-
-
-void FUN_0040a710(int param_1,int param_2)
-
+// Sets or clears the one-based flag in the saved bit array.
+void FUN_0040a710(s32 id, s32 enabled)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  unsigned char temp_v2;
-  int temp_v3;
-  
-  temp_v3 = param_1 - 1;
-  temp_v1 = FUN_00261440();
-  pbVar3 = (unsigned char *)(temp_v1 + ((int)(temp_v3 + ((unsigned int)(temp_v3 >> 0x1f) >> 0x1d)) >> 3));
-  temp_v2 = (unsigned char)(1 << (((param_1 - 1) + (temp_v3 / 8) * -8) & 0xffU));
-  temp_v0 = *pbVar3;
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v0 & ~temp_v2;
-  }
-  *pbVar3 = temp_v2;
-  return;
+    s32 index = id - 1;
+    u8* flags = FUN_00261440();
+    u8* byte = &flags[index / 8];
+    u32 mask = 1u << (index % 8);
+    if (enabled != 0) {
+        *byte |= mask;
+    } else {
+        *byte &= ~mask;
+    }
 }
-
-} /* extern "C" */
+}

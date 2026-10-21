@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern romwright_code *DAT_0044e330; /* 0x44e330 */
+extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
 
 /* Supplied declaration required: FUN_002a666c. */
 /* Supplied declaration required: FUN_002c2424. */
@@ -69,7 +69,7 @@ void FUN_0036f28c(unsigned int *param_1)
         if (temp_v0 != 0x2010000) {
           if ((int)temp_v0 < 0x2010000) {
             if (temp_v0 == 0x1010000) {
-              temp_v1 = (*DAT_0044e330)(0x10000,0x101,param_1,temp_v5);
+              temp_v1 = (*g_gfxAllocateCallback)(0x10000,0x101,param_1,temp_v5);
               if ((piVar7[3] != 0) && (temp_v3 = (int)piVar7 + piVar7[3] + 0xc, temp_v3 != 0)) {
                 nnnstdMemCpy(temp_v1,temp_v3,temp_v5);
                 FUN_002c2424(temp_v1,temp_v5);
@@ -81,7 +81,7 @@ void FUN_0036f28c(unsigned int *param_1)
           }
           else if (temp_v0 == 0x2020000 || temp_v0 == 0x2030000) {
             temp_v2 = temp_v2 & 0x30000;
-            temp_v1 = (*DAT_0044e330)(temp_v2,0x101,param_1,temp_v5);
+            temp_v1 = (*g_gfxAllocateCallback)(temp_v2,0x101,param_1,temp_v5);
             piVar2 = piVar7 + 3;
             temp_v7 = piVar7[3] == 0;
             if (!temp_v7) {

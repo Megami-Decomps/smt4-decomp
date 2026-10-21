@@ -16,7 +16,7 @@ int FUN_0020214c(void);
 int FUN_00275bc8(...);
 int FUN_00371c3c(...);
 int FUN_00387240(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 int FUN_0013c174(...);
 int FUN_00178b04(...);
@@ -82,10 +82,10 @@ extern unsigned int FUN_00409fe8(unsigned short, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
-extern unsigned int FUN_0040ac08(void);
+extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_0040bd04. */
 /* Supplied declaration required: FUN_0040c190. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_002a74ac(void)
@@ -141,7 +141,7 @@ void FUN_002a74ac(void)
       FUN_00178b04(0x20,&LAB_002a7940,0x6ea);
       temp_v2 = 0;
       if (temp_v3 != 0) {
-        temp_v2 = FUN_0040ac08();
+        temp_v2 = modelListInit();
       }
       *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
       FUN_0040aa6c();
@@ -156,7 +156,7 @@ void FUN_002a74ac(void)
       FUN_00178b04(0x20,&LAB_002a7940,0x6f2);
       temp_v2 = 0;
       if (temp_v3 != 0) {
-        temp_v2 = FUN_0040ac08();
+        temp_v2 = modelListInit();
       }
       *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
       FUN_0040aa6c();
@@ -178,7 +178,7 @@ void FUN_002a74ac(void)
     FUN_00178b04(0x20,&LAB_002a7940,0x70c);
     temp_v2 = 0;
     if (temp_v3 != 0) {
-      temp_v2 = FUN_0040ac08();
+      temp_v2 = modelListInit();
     }
     *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
     FUN_0040aa6c();
@@ -199,7 +199,7 @@ void FUN_002a74ac(void)
     FUN_00178b04(0x20,&LAB_002a7940,0x723);
     temp_v2 = 0;
     if (temp_v3 != 0) {
-      temp_v2 = FUN_0040ac08();
+      temp_v2 = modelListInit();
     }
     *(unsigned int *)(temp_v0 + 0x90) = temp_v2;
     FUN_0040aa6c();
@@ -235,7 +235,7 @@ void FUN_002a74ac(void)
   temp_v2 = *(unsigned int *)(temp_v0 + 0x334);
   FUN_00275bc8(temp_v2,puVar4);
   *(unsigned int *)(temp_v0 + 0x338) = temp_v2;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0 + 0x340);
+  paramsClearPacket(temp_v0 + 0x340);
   temp_v6 = &DAT_0052f3b4;
   temp_v10 = &DAT_0052f3c0;
   temp_v7 = 0xc;

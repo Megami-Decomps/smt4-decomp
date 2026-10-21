@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00297468(u32 a, void *slot, int b);
+int asdLoadFileAsyncSimple(u32 a, void *slot, int b);
 
 typedef struct Obj {
     /* 0x000 */ u8 unk000[0x730];
@@ -13,7 +13,7 @@ typedef struct Obj {
 void FUN_003d6fd4(Obj *obj, u32 a)
 {
     if (obj->value == 0) {
-        FUN_00297468(a, obj->slot, 0);
+        asdLoadFileAsyncSimple(a, obj->slot, 0);
         return;
     }
 }

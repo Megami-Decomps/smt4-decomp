@@ -8,7 +8,7 @@ s32 FUN_00162ea4(void);
 u32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
 void FUN_002f0c18(s32 value);
-s32 FUN_002f151c(void);
+s32 uiQuestIsIdle(void);
 void FUN_002f1554(u32 id);
 void FUN_0034aae4(void);
 void FUN_00418870(u32 first, u32 second);
@@ -28,7 +28,7 @@ u8 FUN_003b7044(void)
         FUN_002f0c18(result);
         FUN_002f1554(first);
     }
-    result = FUN_002f151c();
+    result = uiQuestIsIdle();
     if (result != 0) {
         FUN_0034aae4();
         sysPlaySe(0x92);

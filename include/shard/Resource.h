@@ -15,7 +15,14 @@ typedef struct Handler {
     /* 0x28 */ void (*callback28)(void *data);
     /* 0x2C */ void (*callback2C)(void *data, u32 arg);
     /* 0x30 */ void (*callback30)(void *data, s32 arg);
-    /* 0x34 */ u8 unk34[0x10];
+    /* 0x34 */ union {
+        u8 unk34[0x10];
+        struct {
+            u8 unk34[4];
+            s32 (*isActive)(void *data);
+            u8 unk3C[8];
+        } status;
+    };
 } Handler;                      /* 0x44 */
 
 typedef struct Resource {

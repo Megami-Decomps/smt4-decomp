@@ -12,7 +12,7 @@ int FUN_0021b274(...);
 int FUN_002277d8(void);
 int FUN_00228b04(...);
 int FUN_0022e774(void);
-int FUN_0023f604(...);
+int campRebuildEnabledFlagList(...);
 int gameGlobalsQueueValues(...);
 int FUN_003d2150(...);
 int FUN_004803e4(...);
@@ -25,7 +25,7 @@ int gameGetPlayerData(void);
 int FUN_001834a4(...);
 int FUN_00203b40(int, int, int, int);
 int FUN_00215bd0(void);
-int FUN_0026fc00(...);
+void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
 int FUN_002a4860(...);
 int FUN_002a7324(...);
@@ -84,21 +84,20 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0022e774. */
 extern int FUN_0023b3d0(void);
-/* Supplied declaration required: FUN_0023f604. */
+/* Supplied declaration required: campRebuildEnabledFlagList. */
 extern int FUN_0026c3a0(void);
-/* Supplied declaration required: FUN_0026fc00. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_002a4860. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a7324. */
-extern int FUN_002c2c4c(int);
-extern int FUN_002c2c68(int);
+extern int widgetSubCallIfVisible(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
 /* Supplied declaration required: FUN_0031f718. */
-extern int FUN_00320af8(int, int);
+extern int itemSelectionCanUse(int, int);
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_0033449c. */
@@ -147,7 +146,7 @@ void FUN_0020dc1c(void)
   temp_v4 = g_camp;
   switch(*(unsigned int *)(g_camp + 0x20)) {
   case 0:
-    FUN_0026fc00(2,1,0xffffffff,0);
+    campSetSpriteAnimationPreset(2,1,0xffffffff,0);
     *(unsigned int *)(temp_v4 + 0x331c) = 0;
     *(unsigned int *)(temp_v4 + 0x3320) = 0;
     *(unsigned int *)(temp_v4 + 0x3324) = 0;
@@ -184,7 +183,7 @@ void FUN_0020dc1c(void)
                 flaggedEntrySetValueA(temp_v6,temp_v2);
                 temp_v5 = FUN_002a4860(temp_v6);
                 temp_v6 = FUN_002a4894(temp_v6);
-                temp_v6 = FUN_00320af8(temp_v4,temp_v5 + temp_v6);
+                temp_v6 = itemSelectionCanUse(temp_v4,temp_v5 + temp_v6);
                 if (temp_v6 == 0) {
                   temp_v2 = 0x118;
                 }
@@ -209,7 +208,7 @@ void FUN_0020dc1c(void)
   case 1:
 LAB_0020de28:
     temp_v5 = g_camp;
-    temp_v6 = FUN_002c2c4c(g_camp + 0x40);
+    temp_v6 = widgetSubCallIfVisible(g_camp + 0x40);
     FUN_00163aa4(temp_v5 + 0x658);
     if ((*(short *)(temp_v5 + 0x964) != 2) && (*(short *)(temp_v5 + 0x964) != 10)) {
       temp_v3 = 0;
@@ -284,7 +283,7 @@ LAB_0020de28:
       FUN_00372100(temp_v12,0);
       objBSetRecord2000(&temp_v18);
       FUN_003343c0(1);
-      temp_v4 = FUN_00320af8(temp_v4,temp_v6 + temp_v5);
+      temp_v4 = itemSelectionCanUse(temp_v4,temp_v6 + temp_v5);
     }
     else {
       temp_v6 = temp_v3;
@@ -297,7 +296,7 @@ LAB_0020de28:
           FUN_001517b4();
           if (temp_v6 != 0) {
             eventQueueAddUniqueIfValid(0x100020f);
-            FUN_0026fc00(2,3,0xffffffff,0);
+            campSetSpriteAnimationPreset(2,3,0xffffffff,0);
             FUN_0022e774();
             *(unsigned int *)(temp_v4 + 0x20) = 3;
             return;
@@ -306,7 +305,7 @@ LAB_0020de28:
         }
         temp_v6 = FUN_002a4860(temp_v3);
         temp_v5 = FUN_002a4894(temp_v3);
-        temp_v3 = FUN_00320af8(temp_v4,temp_v6 + temp_v5);
+        temp_v3 = itemSelectionCanUse(temp_v4,temp_v6 + temp_v5);
         if (temp_v3 == 0) {
           return;
         }
@@ -338,8 +337,8 @@ LAB_0020de28:
         flagValueSub(temp_v0,1);
         temp_v6 = flagValueIsPositive(temp_v0);
         if (temp_v6 == 0) {
-          FUN_0023f604(0xb);
-          FUN_0026fc00(2,3,0xffffffff,0);
+          campRebuildEnabledFlagList(0xb);
+          campSetSpriteAnimationPreset(2,3,0xffffffff,0);
           FUN_0022e774();
           *(unsigned int *)(temp_v4 + 0x20) = 3;
           return;
@@ -363,7 +362,7 @@ LAB_0020de28:
       FUN_00372100(temp_v12,0);
       objBSetRecord2000(&temp_v18);
       FUN_003343c0(1);
-      temp_v4 = FUN_00320af8(temp_v4,temp_v6 + temp_v5);
+      temp_v4 = itemSelectionCanUse(temp_v4,temp_v6 + temp_v5);
     }
     if (temp_v4 == 0) {
       temp_v2 = 0x118;
@@ -374,7 +373,7 @@ LAB_0020de28:
     sysPlaySe(temp_v2);
     return;
   case 3:
-    temp_v6 = FUN_002c2c4c(g_camp + 0x40);
+    temp_v6 = widgetSubCallIfVisible(g_camp + 0x40);
     FUN_00163aa4(temp_v4 + 0x658);
     if ((*(short *)(temp_v4 + 0x964) != 2) && (*(short *)(temp_v4 + 0x964) != 10)) {
       temp_v5 = 0;
@@ -420,10 +419,10 @@ LAB_0020de28:
     FUN_0033449c(0);
     temp_v6 = flagValueIsPositive(*(unsigned int *)(temp_v4 + 0x33b8));
     if (temp_v6 == 0) {
-      FUN_0023f604(0xb);
+      campRebuildEnabledFlagList(0xb);
     }
     FUN_002277d8();
-    temp_v6 = FUN_002c2c68(temp_v4 + 0xc0);
+    temp_v6 = objectApplyIfUnblocked(temp_v4 + 0xc0);
     if (temp_v6 >= 1) {
       FUN_0021b274(1,0xffffffff,0);
       *(unsigned int *)(temp_v4 + 0x24) = 10;

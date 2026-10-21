@@ -11,6 +11,7 @@ typedef struct NwFontInfo NwFontInfo;
 typedef struct NwFontTexObj NwFontTexObj;
 typedef struct NwFontGlyph NwFontGlyph;
 typedef struct NwResFontBase NwResFontBase;
+typedef struct NwFontFileHeader NwFontFileHeader;
 
 struct NwFontCharWidths {
     s8 left;       /* 0x0 */
@@ -71,7 +72,13 @@ struct NwFontGlyph {
 };
 
 struct NwResFontBase {
-    u8 unk00[8];                /* 0x0 */
+    union {
+        u8 unk00[8];            /* 0x0 */
+        struct {
+            u32 unk00;
+            NwFontFileHeader* resource; /* 0x4 */
+        } resourceView;
+    };
     NwFontInfo *fontInfo;       /* 0x8 */
     NwFontTexObj *texObjs;      /* 0xc: one per sheet, or NULL */
     u8 unk10[4];                /* 0x10 */

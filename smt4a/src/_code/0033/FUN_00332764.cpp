@@ -20,7 +20,7 @@ extern int DAT_006105e4; /* 0x6105e4 */
 extern int randRange(unsigned int);
 extern int gameFlagsGetBlock(void);
 extern int FUN_003683b8(int);
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 
 
 void FUN_00332764(void)
@@ -129,7 +129,7 @@ void FUN_00332764(void)
     temp_v8 = temp_v5;
     temp_v4 = temp_v9;
   }
-  temp_v5 = FUN_00376f94();
+  temp_v5 = lmapGetSpawnIndex();
   if (temp_v5 < 100) {
     temp_v5 = 0;
     if ('\0' < *(char *)(temp_v3 + 0xe05)) {

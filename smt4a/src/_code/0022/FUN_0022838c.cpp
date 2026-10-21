@@ -14,7 +14,7 @@ int FUN_003339ec(void);
 int FUN_0034c8e8(void);
 int partyFlagRange(void);
 int FUN_003fd6dc(void);
-int FUN_003ff1a8(void);
+int slotFlagsClearState(void);
 int tableClearFlags300(void);
 int FUN_004bb880(void);
 int FUN_004cd960(void);
@@ -33,7 +33,7 @@ extern unsigned int *DAT_0057f6a4; /* 0x57f6a4 */
 /* Supplied declaration required: FUN_0034c8e8. */
 /* Supplied declaration required: partyFlagRange. */
 /* Supplied declaration required: FUN_003fd6dc. */
-/* Supplied declaration required: FUN_003ff1a8. */
+/* Supplied declaration required: slotFlagsClearState. */
 /* Supplied declaration required: tableClearFlags300. */
 /* Supplied declaration required: FUN_004bb880. */
 /* Supplied declaration required: FUN_004cd960. */
@@ -342,7 +342,7 @@ void FUN_0022838c(void)
   *(unsigned int *)(temp_v4 + 0x28054) = 0;
   *(unsigned int *)(temp_v4 + 0x28058) = 0;
   *(unsigned int *)(temp_v4 + 0x2805c) = 0;
-  FUN_003ff1a8();
+  slotFlagsClearState();
   tableClearFlags300();
   FUN_003fd6dc();
   *(unsigned char *)(DAT_0057f69c + 0x27ec6) = 6;

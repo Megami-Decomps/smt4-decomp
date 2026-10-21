@@ -14,7 +14,7 @@ extern void campButtonHelpAcquire(void);
 extern void FUN_003b61ec(void);
 extern void sysPlaySe(u32 id);
 extern void scrScriptProcessStartEntry(u32 job, s32 value);
-extern s32 FUN_00224880(u32 job);
+extern s32 scrRunOpcodesStub(u32 job);
 extern void campCommonBgRelease(void);
 extern void campButtonHelpRelease(void);
 extern BtlStateB *btlGetMainState(void);
@@ -32,7 +32,7 @@ u32 stepStateBattleStart(StepState *step)
         sysPlaySe(0xAB);
         scrScriptProcessStartEntry(step->job, 0);
         step->state = 8;
-        if (FUN_00224880(step->job) == 2) {
+        if (scrRunOpcodesStub(step->job) == 2) {
             campCommonBgRelease();
             campButtonHelpRelease();
             if (btlGetMainState()->unk4C80 != 1) {

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001990d4(int);
-int FUN_001ce29c(int);
+int categoryPreviewCycleTint(int);
 int FUN_00258a24(...);
 int FUN_0026a858(...);
 int FUN_0026a958(int);
@@ -39,7 +39,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_001990d4. */
-/* Supplied declaration required: FUN_001ce29c. */
+/* Supplied declaration required: categoryPreviewCycleTint. */
 /* Supplied declaration required: FUN_00258a24. */
 extern int ifTouchGetActiveCounter(void);
 /* Supplied declaration required: FUN_0026a858. */
@@ -229,7 +229,7 @@ joined_r0x00217be4:
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < (int)*puVar11);
     }
-    FUN_001ce29c(param_1);
+    categoryPreviewCycleTint(param_1);
     temp_v10 = (unsigned char *)(param_1 + 0x575d);
     *temp_v10 = 0;
     temp_v1 = FUN_0029e02c();
@@ -315,7 +315,7 @@ LAB_00217e94:
     break;
   case 3:
     FUN_002bf818(temp_v18);
-    FUN_001ce29c(param_1);
+    categoryPreviewCycleTint(param_1);
     temp_v6 = FUN_0029e02c();
     if (temp_v6 != 0) {
       temp_v1 = 0;

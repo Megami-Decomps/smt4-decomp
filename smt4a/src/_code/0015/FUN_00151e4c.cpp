@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00151408(...);
+int positionStateSet(...);
 int FUN_00164168(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_00168bec(...);
 int FUN_001696d4(void *, int);
-int FUN_0016c69c(...);
-int FUN_0016c6f0(unsigned int, int, unsigned int);
+int renderCtxPopState(...);
+int renderStackPushIndexed(unsigned int, int, unsigned int);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
@@ -46,7 +46,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_00164168. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int npcRoomGetEntryValue(unsigned int);
@@ -56,8 +56,8 @@ extern int FUN_00168d38(unsigned int);
 extern int FUN_001691a8(void);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001696d4. */
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -85,11 +85,11 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
     return;
   }
   temp_v0 = FUN_001692ac(1,0);
-  FUN_0016c6f0(g_renderCtx,3,temp_v0);
+  renderStackPushIndexed(g_renderCtx,3,temp_v0);
   temp_v8 = 0x3f800000;
   if (param_1->field_0x9 != 0xb) {
     if (param_1->field_0x9 != 0x14) {
-      FUN_0016c69c(g_renderCtx,3);
+      renderCtxPopState(g_renderCtx,3);
       return;
     }
     temp_v1 = FUN_001834a4(0x2f,0x97);
@@ -146,11 +146,11 @@ void FUN_00151e4c(fn_00151e4c_arg0 *param_1)
         temp_v1 = FUN_001834a4(8,temp_v9[temp_v3 + temp_v4]);
         if (param_1->field_0x18 == temp_v4) {
           *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 10;
-          FUN_00151408(param_1->field_0x4,0,0xffffffff);
+          positionStateSet(param_1->field_0x4,0,0xffffffff);
         }
         else {
           *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 0xb;
-          FUN_00151408(param_1->field_0x4,0,0x5a5a5aff);
+          positionStateSet(param_1->field_0x4,0,0x5a5a5aff);
         }
         FUN_00164168(param_1->field_0x4,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10),0x33,
                      6,temp_v4);
@@ -201,8 +201,8 @@ LAB_00151ff8:
     }
   }
   *(unsigned int *)((int)param_1->field_0x4 + 0xb0) = 0;
-  FUN_00151408(param_1->field_0x4,0,0x646464ff);
-  FUN_0016c69c(g_renderCtx,3);
+  positionStateSet(param_1->field_0x4,0,0x646464ff);
+  renderCtxPopState(g_renderCtx,3);
   return;
 }
 

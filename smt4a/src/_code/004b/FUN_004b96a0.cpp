@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b4aa0(void);
+int gameDataTableGetFlag(void);
 int FUN_00215978(int);
 int FUN_00239b10(int);
 int bgmReleaseStopped(void);
@@ -27,7 +27,7 @@ extern signed char DAT_005f1b70; /* 0x5f1b70 */
 
 extern int FUN_0013def0(unsigned int);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001b4aa0. */
+/* Supplied declaration required: gameDataTableGetFlag. */
 extern int FUN_001bd118(void);
 /* Supplied declaration required: FUN_00215978. */
 /* Supplied declaration required: FUN_00239b10. */
@@ -75,7 +75,7 @@ void FUN_004b96a0(int param_1)
   bgmReleaseStopped();
   if (DAT_005f1b70 != '\0') {
     if (temp_v0) {
-      temp_v2 = FUN_001b4aa0();
+      temp_v2 = gameDataTableGetFlag();
       switch(temp_v2) {
       case 0:
       case 3:
@@ -86,10 +86,10 @@ void FUN_004b96a0(int param_1)
         *(unsigned int *)(param_1 + 0x116c) = 2;
       }
     }
-    else if ((*(char *)(g_aocMain + 0xc1) == '\0') && (temp_v1 = FUN_001b4aa0(), temp_v1 != 6)) {
-      temp_v1 = FUN_001b4aa0();
+    else if ((*(char *)(g_aocMain + 0xc1) == '\0') && (temp_v1 = gameDataTableGetFlag(), temp_v1 != 6)) {
+      temp_v1 = gameDataTableGetFlag();
       if (temp_v1 != 1) {
-        temp_v1 = FUN_001b4aa0();
+        temp_v1 = gameDataTableGetFlag();
         if (temp_v1 == 5) {
           FUN_00239b10(1);
           FUN_00215978(0);

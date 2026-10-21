@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_00208c64(unsigned int);
+int mapFlagSet(unsigned int);
 int FUN_0025a1fc(...);
 int FUN_0025a8d8(...);
 int FUN_0025b478(...);
@@ -15,7 +15,7 @@ int FUN_00287aec(void);
 int FUN_00287b0c(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00291e40(int);
-int FUN_00295ba4(...);
+int infoWinStartTimer(...);
 int FUN_002ad314(...);
 int FUN_0030fb0c(char *, int);
 int VectorSignedToFloat(...);
@@ -65,7 +65,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_00208c64. */
+/* Supplied declaration required: mapFlagSet. */
 /* Supplied declaration required: FUN_0025a1fc. */
 /* Supplied declaration required: FUN_0025a8d8. */
 extern int FUN_0025b408(void);
@@ -77,7 +77,7 @@ extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00287b0c. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_00291e40. */
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: FUN_0030fb0c. */
 extern short __aeabi_idivmod(int, int);
@@ -378,7 +378,7 @@ LAB_001e6120:
         else {
           temp_v29 = 1;
           if (*(short *)(temp_v12 + 0x1f8) >= 0x1f) {
-            FUN_00208c64(*(unsigned int *)(temp_v12 + 500));
+            mapFlagSet(*(unsigned int *)(temp_v12 + 500));
             temp_v8 = 6;
             *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
           }
@@ -424,7 +424,7 @@ LAB_001e6120:
         temp_v7 = *(short *)(temp_v12 + 0x1fa) + 2;
         *(short *)(temp_v12 + 0x1fa) = temp_v7;
         if (temp_v7 >= 0x11) {
-          FUN_00208c64(*(unsigned int *)(temp_v12 + 500));
+          mapFlagSet(*(unsigned int *)(temp_v12 + 500));
           temp_v8 = 6;
           *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
         }
@@ -469,7 +469,7 @@ LAB_001e6120:
             if (*(char *)(temp_v4 + 0xcce0) == '\0') {
               FUN_00291e40(0x10001fd);
             }
-            FUN_00208c64(*(unsigned int *)(temp_v12 + 500));
+            mapFlagSet(*(unsigned int *)(temp_v12 + 500));
             temp_v8 = 6;
             *(unsigned int *)(temp_v12 + 0x1d4) = temp_v8;
             break;
@@ -1239,7 +1239,7 @@ joined_r0x001e7e00:
   if ((*(char *)(temp_v4 + 0x18) != '\0') &&
      (temp_v6 = *(int *)(temp_v4 + 0x1c) + 1, *(int *)(temp_v4 + 0x1c) = temp_v6, temp_v6 >= 0x5b)) {
     *(unsigned char *)(temp_v4 + 0x18) = 0;
-    FUN_00295ba4(1);
+    infoWinStartTimer(1);
   }
   temp_v4 = g_lmapScene;
   if (temp_v30 == 0) {

@@ -9,7 +9,7 @@ int FUN_003fd7c0(...);
 int FUN_003fd924(...);
 int FUN_0040619c(...);
 int FUN_00421858(...);
-int FUN_004ffa80(...);
+int ownerSlotSetText(...);
 
 typedef struct fn_00420f08_arg0 fn_00420f08_arg0;
 struct fn_00420f08_arg0 {
@@ -39,7 +39,7 @@ typedef struct {
 extern unsigned int FUN_003fdadc(void);
 /* Supplied declaration required: FUN_0040619c. */
 /* Supplied declaration required: FUN_00421858. */
-/* Supplied declaration required: FUN_004ffa80. */
+/* Supplied declaration required: ownerSlotSetText. */
 
 
 void FUN_00420f08(fn_00420f08_arg0 *param_1)
@@ -58,7 +58,7 @@ void FUN_00420f08(fn_00420f08_arg0 *param_1)
     if (temp_v0 != 0) {
       temp_v1 = FUN_003fdadc();
       temp_v2 = temp_v0;
-      FUN_004ffa80(temp_v0,temp_v1);
+      ownerSlotSetText(temp_v0,temp_v1);
       if (temp_v2 != 0xffff) {
         FUN_003fd924(temp_v0,temp_v2,2);
       }

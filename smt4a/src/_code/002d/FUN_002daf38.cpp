@@ -5,7 +5,7 @@
 extern "C" {
 
 int ptrListRemoveClearOwner(unsigned int);
-int FUN_0030354c(void);
+int lmapClearExtraFlag(void);
 int FUN_003d2158(void);
 int FUN_003e55f4(unsigned int);
 
@@ -18,7 +18,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_lmapScene; /* 0x581288 */
 
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_0030354c. */
+/* Supplied declaration required: lmapClearExtraFlag. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: FUN_003e55f4. */
 
@@ -43,7 +43,7 @@ void FUN_002daf38(void)
   FUN_003e55f4(*(unsigned int *)(g_lmapScene + 0x1a8));
   temp_v4 = temp_v1;
   if ((*(int *)(g_lmapScene + 0x288) == 3) &&
-     (FUN_0030354c(), temp_v4 = temp_v2, *(int *)(g_lmapScene + 0x28c) != 0)) {
+     (lmapClearExtraFlag(), temp_v4 = temp_v2, *(int *)(g_lmapScene + 0x28c) != 0)) {
     FUN_003d2158();
     temp_v4 = temp_v3;
   }

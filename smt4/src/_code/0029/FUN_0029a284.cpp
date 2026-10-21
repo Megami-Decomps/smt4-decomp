@@ -44,7 +44,7 @@ extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(void);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b6c34. */
-extern unsigned int FUN_002bce00(int);
+extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -161,7 +161,7 @@ void FUN_0029a284(int param_1,int param_2,int param_3,unsigned int param_4,unsig
       textFormatBuffer(temp_v10,&LAB_0029a6cc);
     }
     else {
-      temp_v4 = FUN_002bce00(param_3);
+      temp_v4 = aocIndexValueOrDefault(param_3);
       textFormatBuffer(temp_v10,&LAB_0029a710,temp_v4);
     }
   }

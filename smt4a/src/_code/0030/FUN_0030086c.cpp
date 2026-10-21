@@ -1,56 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030086c` (_code @ 0x30086c, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: Thumb register allocation retains the comparator address and spills the key, enlarging the frame; retail spills the comparator instead. Candidate O2/Ospace. */
+#include "common.h"
+
+struct OrderedRecordKey {
+    u8 unk00[6]; // 0x00
+    u16 lower;    // 0x06
+    s32 upper;    // 0x08
+};
+
+struct OrderedRecordNode {
+    u32 color;                  // 0x00
+    OrderedRecordNode* parent;  // 0x04
+    OrderedRecordNode* left;    // 0x08
+    OrderedRecordNode* right;   // 0x0c
+    OrderedRecordKey key;       // 0x10
+};
+
+struct OrderedRecordTree {
+    u8 unk00[0x10];       // 0x00
+    OrderedRecordNode* end; // 0x10
+    u8 unk14[5];          // 0x14
+    u8 comparator;        // 0x19
+};
 
 extern "C" {
+u32 FUN_0030f06c(const u8* comparator, const OrderedRecordKey* first, const OrderedRecordKey* second);
+u32 wordRefsEqual_0030c536(OrderedRecordNode* const* first, OrderedRecordNode* const* second);
 
-/* stack frame of param_4: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-extern int wordRefsEqual_0030c536(int *, unsigned int *);
-extern int FUN_0030f06c(int, int, int);
-
-
-unsigned long long FUN_0030086c(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Find the equal key in the ordered tree, returning its end node if it is absent.
+OrderedRecordNode* FUN_0030086c(OrderedRecordTree* tree, const OrderedRecordKey* key)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v4 = param_1 + 0x19;
-  temp_v0 = *(int *)(*(int *)(param_1 + 0x10) + 4);
-  temp_v2 = *(int *)(param_1 + 0x10);
-  temp_v3 = param_2;
-  temp_v5 = param_4;
-  while (temp_v1 = temp_v0, temp_v1 != 0) {
-    temp_v0 = FUN_0030f06c(temp_v4,temp_v1 + 0x10,param_2);
-    if (temp_v0 != 0) {
-      temp_v0 = *(int *)(temp_v1 + 0xc);
+    OrderedRecordNode* candidate = tree->end;
+    OrderedRecordNode* node = candidate->parent;
+    while (node != NULL) {
+        if (FUN_0030f06c(&tree->comparator, &node->key, key)) {
+            node = node->right;
+        } else {
+            candidate = node;
+            node = node->left;
+        }
     }
-    else {
-      temp_v0 = *(int *)(temp_v1 + 8);
-      temp_v2 = temp_v1;
+    OrderedRecordNode* found = candidate;
+    OrderedRecordNode* end = tree->end;
+    if (!wordRefsEqual_0030c536(&found, &end) &&
+        !FUN_0030f06c(&tree->comparator, key, &found->key)) {
+        return found;
     }
-  }
-  temp_v5 = *(unsigned int *)(param_1 + 0x10);
-  temp_v3 = temp_v2;
-  temp_v0 = wordRefsEqual_0030c536(&temp_v3,(unsigned int *)&temp_v5);
-  if ((temp_v0 == 0) && (temp_v0 = FUN_0030f06c(temp_v4,param_2,temp_v3 + 0x10), temp_v0 == 0)) {
-    return romwright_piece_4_4(temp_v3,temp_v3);
-  }
-  return romwright_piece_4_4(temp_v3,*(unsigned int *)(param_1 + 0x10));
+    return tree->end;
 }
-
-} /* extern "C" */
+}

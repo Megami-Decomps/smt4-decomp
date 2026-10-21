@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_0023478c(unsigned int, unsigned int);
-int FUN_00296ae8(unsigned int, int, unsigned int, int, int, unsigned int, unsigned int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, unsigned int);
 int asdMemFreeSlot(void);
-int FUN_002bd81c(unsigned int, int, int);
+int positionStateSet(unsigned int, int, int);
 int FUN_002bd82c(unsigned int, int);
 int FUN_0038abbc(unsigned int *, unsigned int, unsigned int, unsigned int);
 
@@ -21,9 +21,9 @@ typedef struct {
 extern unsigned int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0023478c. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: asdMemFreeSlot. */
-/* Supplied declaration required: FUN_002bd81c. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: FUN_0038abbc. */
@@ -46,10 +46,10 @@ void FUN_0027ea28(unsigned int *param_1,unsigned int param_2,unsigned int param_
   temp_v0 = asdTextCreate(0);
   param_1[0x107] = temp_v0;
   FUN_002bd82c(temp_v0,0x320202ff);
-  FUN_002bd81c(*puVar3,0,0x646464ff);
+  positionStateSet(*puVar3,0,0x646464ff);
   temp_v1 = g_aocMain;
   FUN_0023478c(g_aocMain,0xffffffff);
-  FUN_00296ae8(*puVar3,3,0xffffffff,0,3,temp_v1,param_2);
+  asdTextDrawDirectoryEntry(*puVar3,3,0xffffffff,0,3,temp_v1,param_2);
   temp_v1 = g_aocMain;
   FUN_0023478c(g_aocMain,param_2);
   FUN_0038abbc(param_1,temp_v1,param_3,param_4);

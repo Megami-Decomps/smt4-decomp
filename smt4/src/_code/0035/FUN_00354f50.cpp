@@ -29,7 +29,7 @@ typedef struct {
 } param_7_stack;
 
 extern int DAT_0044e660; /* 0x44e660 */
-extern unsigned int DAT_004d4358; /* 0x4d4358 */
+extern unsigned int g_titleContentAdapterHeap; /* 0x4d4358 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern int *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(unsigned int *);
@@ -82,7 +82,7 @@ int * FUN_00354f50(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     return piVar1;
   }
   piVar1 = (int *)nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
-                            (&DAT_004d4358);
+                            (&g_titleContentAdapterHeap);
   if (piVar1 == (int *)0x0) {
     software_interrupt(0x23);
     return (int *)0xf96047a2;

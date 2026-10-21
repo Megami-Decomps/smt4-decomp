@@ -13,7 +13,7 @@ int mathPositionHeadingDegrees(void);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int *);
 int FUN_0029bb14(unsigned int);
-int FUN_002a5710(unsigned int, unsigned int);
+int modelSelectPrimaryMotion(unsigned int, unsigned int);
 int FUN_0031d49c(void);
 int VectorSignedToFloat(unsigned int, int);
 
@@ -24,7 +24,7 @@ typedef struct {
 
 extern int *DAT_004474f4; /* 0x4474f4 */
 extern int g_mapEnemy; /* 0x447600 */
-extern int DAT_00447e58; /* 0x447e58 */
+extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
 extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
@@ -62,7 +62,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_0029bb14. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_0031d49c. */
 
 
@@ -118,7 +118,7 @@ void FUN_001d3018(void)
     } while (temp_v3 < 0x20);
     return;
   }
-  if ((*DAT_004474f4 == 3) || (*(char *)(DAT_00447e58 + 0xe3c) != '\0')) {
+  if ((*DAT_004474f4 == 3) || (*(char *)(g_deferredMapModels + 0xe3c) != '\0')) {
     temp_v3 = 0;
     do {
       temp_v4 = temp_v2 + temp_v3 * 0x180;
@@ -244,7 +244,7 @@ void FUN_001d3018(void)
         FUN_0028c618(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),0);
         if (*(int *)(temp_v4 + 100) != *(int *)(temp_v4 + 0x68)) {
           *(int *)(temp_v4 + 0x68) = *(int *)(temp_v4 + 100);
-          FUN_002a5710(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),*(unsigned int *)(temp_v4 + 100));
+          modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8),*(unsigned int *)(temp_v4 + 100));
           VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x6c),(unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_0029bb14(*(unsigned int *)(*(int *)(temp_v4 + 0x1ac) + 8));
         }

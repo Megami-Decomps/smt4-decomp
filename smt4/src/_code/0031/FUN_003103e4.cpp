@@ -2,10 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct AsdCecMessageBox;
+
 extern "C" {
 
 int asdCecMessageBoxClose(unsigned int);
-int asdCecMessageBoxOpen(int, unsigned int, unsigned int);
+s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag);
 int FUN_003580a4(int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, int, int, int, unsigned int, unsigned int, int);
 
 /* stack frame of param_8: 7 slot(s), 28 byte(s) */
@@ -22,7 +24,6 @@ typedef struct {
 extern unsigned char g_asdCec; /* 0x464fa8 */
 
 /* Supplied declaration required: asdCecMessageBoxClose. */
-/* Supplied declaration required: asdCecMessageBoxOpen. */
 extern int wstrlenU16(unsigned int);
 /* Supplied declaration required: FUN_003580a4. */
 
@@ -40,7 +41,7 @@ FUN_003103e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   
   temp_v2 = 5;
   temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
-  asdCecMessageBoxOpen(temp_v0,param_1,param_2);
+  temp_v0 = asdCecMessageBoxOpen((AsdCecMessageBox*)temp_v0,param_1,param_2);
   if (temp_v0 < 0) {
     if (temp_v0 != -0x377ef411) {
       if (temp_v0 != -0x377ef416) {
@@ -59,7 +60,7 @@ FUN_003103e4(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
       temp_v2 = 4;
     }
     temp_v0 = (*(unsigned int * *)((unsigned char *)&g_asdCec + 0x4))[6];
-    asdCecMessageBoxOpen(temp_v0,param_1,param_2);
+    temp_v0 = asdCecMessageBoxOpen((AsdCecMessageBox*)temp_v0,param_1,param_2);
     if (temp_v0 < 0) {
       return temp_v2;
     }

@@ -6,7 +6,7 @@ extern "C" {
 
 typedef int romwright_code(...);
 extern int FUN_003014c6(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_003014de(unsigned int);
+extern int onlineBufferMagicCheck(unsigned int);
 extern int FUN_00301502(unsigned int);
 
 
@@ -21,7 +21,7 @@ unsigned int FUN_0011587c(int param_1,unsigned int param_2,unsigned int param_3,
   if (temp_v0 == 0) {
     return 0;
   }
-  temp_v0 = FUN_003014de(param_2);
+  temp_v0 = onlineBufferMagicCheck(param_2);
   if (temp_v0 != 0) {
     piVar2 = *(int **)(param_1 + 0x10);
   }

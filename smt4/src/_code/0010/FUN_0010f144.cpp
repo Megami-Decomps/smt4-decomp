@@ -35,7 +35,7 @@ extern unsigned int FUN_0011b588(void);
 /* Supplied declaration required: FUN_002bbe30. */
 /* Supplied declaration required: FUN_002bbf8c. */
 extern unsigned int FUN_002c15ac(unsigned int);
-extern unsigned int FUN_002c15d4(unsigned int);
+extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
@@ -91,14 +91,14 @@ void FUN_0010f144(int param_1)
   FUN_0011b498(*(unsigned int *)(param_1 + 0x52c),temp_v0,temp_v6,0);
   temp_v0 = FUN_002c15ac(0);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = FUN_002c15d4(0);
+  temp_v0 = asdGxPresetsGetByKind(0);
   temp_v5 = 0;
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bbf8c();
   nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0x5f8,1);
   temp_v0 = FUN_002c15ac(2);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v0 = FUN_002c15d4(2);
+  temp_v0 = asdGxPresetsGetByKind(2);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bbf8c();
   nn_math_ARMv6_MTX44PivotC_FAST(param_1 + 0x638,1);

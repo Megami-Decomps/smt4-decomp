@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0011d084(int, float *);
 int FUN_0011d0dc(int);
-int FUN_002c1568(int);
+int asdCameraRegister(int);
 int FUN_002c159c(int);
 int FUN_002c2044(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -37,10 +37,10 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Supplied declaration required: FUN_0011d084. */
 /* Supplied declaration required: FUN_0011d0dc. */
-/* Supplied declaration required: FUN_002c1568. */
+/* Supplied declaration required: asdCameraRegister. */
 /* Supplied declaration required: FUN_002c159c. */
 extern unsigned int FUN_002c15ac(unsigned int);
-extern unsigned int FUN_002c15d4(unsigned int);
+extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_002c2044. */
 
 
@@ -71,7 +71,7 @@ void FUN_00106a18(int param_1)
   
   temp_v3 = 1.0f;
   FUN_002c2044(param_1,1);
-  temp_v0 = FUN_002c15d4(0);
+  temp_v0 = asdGxPresetsGetByKind(0);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v0 = FUN_002c15ac(0);
   temp_v2 = 0.0f;
@@ -103,7 +103,7 @@ void FUN_00106a18(int param_1)
   temp_v12 = temp_v11;
   FUN_0011d084(param_1,&temp_v4);
   FUN_002c159c(param_1);
-  FUN_002c1568(param_1);
+  asdCameraRegister(param_1);
   return;
 }
 

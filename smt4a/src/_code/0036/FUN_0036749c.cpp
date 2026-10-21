@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_00233e10(int, unsigned int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002dae68(void);
 int FUN_002e364c(int);
 int FUN_00303460(int);
@@ -22,7 +22,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f16ac; /* 0x5f16ac */
 extern unsigned int DAT_005f16b0; /* 0x5f16b0 */
@@ -35,7 +35,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00233e10. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002dae68. */
 /* Supplied declaration required: FUN_002e364c. */
 /* Supplied declaration required: FUN_00303460. */
@@ -103,8 +103,8 @@ void FUN_0036749c(void)
           else {
             temp_v1 = padButtonIsPressed(5);
             if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
-              temp_v1 = DAT_005806a4;
-              *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+              temp_v1 = g_lmapView;
+              *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
               *(unsigned int *)(temp_v1 + 0xb0) = 0;
               FUN_00303460(0);
               temp_v1 = g_lmapScene;
@@ -136,7 +136,7 @@ void FUN_0036749c(void)
         *(unsigned int *)(temp_v1 + 0x54) = 0;
         *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
         *(unsigned char *)(temp_v1 + 0x6c) = 0;
-        FUN_002b5cb4();
+        distSpatial();
         temp_v0 = DAT_005f16b8;
         temp_v4 = DAT_005f16b4;
         temp_v1 = g_lmapScene;
@@ -178,7 +178,7 @@ void FUN_0036749c(void)
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v7;
         }
         FUN_00303460(10);
-        *(unsigned int *)(DAT_005806a4 + 0xb0) = 0xffffffff;
+        *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
         sysPlaySe(0xdd);
         FUN_00233e10(1,DAT_005f16ac);
         temp_v2 = *(int *)(g_lmapScene + 4);

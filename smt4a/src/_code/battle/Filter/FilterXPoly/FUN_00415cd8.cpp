@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00415cd8` (_code @ 0x415cd8, 0x3a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_FilterTexture.h"
 
 extern "C" {
 
 int asdMemoryAlloc(void);
 int mtx44Copy(int, unsigned int *);
 int asdOperatorNewE(void);
-int FUN_00409e20(int, unsigned int, unsigned int);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -58,7 +58,6 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: asdOperatorNewE. */
-/* Supplied declaration required: FUN_00409e20. */
 
 
 /* WARNING: Removing unreachable block (ram,0x00415e74) */
@@ -93,7 +92,7 @@ void FUN_00415cd8(int param_1,int param_2,unsigned int param_3)
   float temp_v19;
   
   *(int *)(param_1 + 0x60) = param_2;
-  FUN_00409e20(param_1,param_3,*(unsigned int *)(param_2 + 0x2c));
+  btlFilterLoadTexture((Filter4Poly*)param_1,param_3,*(unsigned int *)(param_2 + 0x2c));
   temp_v0 = 0x100;
   asdMemoryAlloc();
   *(unsigned int *)(param_1 + 4) = temp_v0;

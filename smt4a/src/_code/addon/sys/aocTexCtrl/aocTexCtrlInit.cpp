@@ -5,7 +5,7 @@
 extern "C" {
 
 void *asdMemoryAllocTracked(s32 heap, s32 align, s32 a, s32 size, s32 flag);
-void FUN_0047cb0c(AocTexCtrl *ctrl);
+void aocTexRelocateTmxAndCreateNodes(AocTexCtrl *ctrl);
 
 /* Allocates the controller's state block on first use and clears it. */
 void aocTexCtrlInit(AocTexCtrl *ctrl)
@@ -22,7 +22,7 @@ void aocTexCtrlInit(AocTexCtrl *ctrl)
         state->unk0C = 0;
         state->unk10 = 0;
         state->unk14 = 0;
-        FUN_0047cb0c(ctrl);
+        aocTexRelocateTmxAndCreateNodes(ctrl);
     }
 }
 

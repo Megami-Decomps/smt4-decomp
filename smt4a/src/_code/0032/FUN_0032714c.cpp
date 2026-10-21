@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003250ac(int);
 int mathPositionHeadingDegrees(void);
-int FUN_003fdb18(unsigned int);
+int controllerSetRotationEulerDegrees(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 
 
 void FUN_0032714c(void)
@@ -45,8 +45,8 @@ void FUN_0032714c(void)
   temp_v2 = (*(unsigned int *)((unsigned char *)&g_gameState + 0x3a4));
   *(unsigned int *)(temp_v0 + 0x1d0) = 4;
   *(unsigned int *)(temp_v0 + 0x1e4) = temp_v2;
-  FUN_003fdb18(*(unsigned int *)(*(int *)(temp_v0 + 0x180) + 4));
-  FUN_003fdb18(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4));
+  controllerSetRotationEulerDegrees(*(unsigned int *)(*(int *)(temp_v0 + 0x180) + 4));
+  controllerSetRotationEulerDegrees(*(unsigned int *)(*(int *)(g_lmapScene + 0x18c) + 4));
   return;
 }
 

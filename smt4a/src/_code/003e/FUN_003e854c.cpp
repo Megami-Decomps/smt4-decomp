@@ -7,7 +7,7 @@ extern "C" {
 int dataTable00FindById(...);
 int sysMemClear(...);
 int sequenceRequestDeferEx(unsigned int, int);
-int FUN_003e9fe4(int, int, int);
+int btlActionPrepareFromSource(int, int, int);
 int FUN_003eb314(int, unsigned char [676], int);
 int FUN_004ca63c(int, unsigned char [676], int, int, int);
 
@@ -22,7 +22,7 @@ extern unsigned char g_btlMain; /* 0x573920 */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: sequenceRequestDeferEx. */
-/* Supplied declaration required: FUN_003e9fe4. */
+/* Supplied declaration required: btlActionPrepareFromSource. */
 /* Supplied declaration required: FUN_003eb314. */
 /* Supplied declaration required: FUN_004ca63c. */
 
@@ -59,7 +59,7 @@ void FUN_003e854c(int param_1)
   *(unsigned int *)(param_1 + 0x108) = 0;
   *(unsigned int *)(param_1 + 0x124) = 0x3f800000;
   *(unsigned int *)(param_1 + 0x128) = 0x3f800000;
-  FUN_003e9fe4(param_1,param_1 + 0xf4,1);
+  btlActionPrepareFromSource(param_1,param_1 + 0xf4,1);
   if ((int)(*(unsigned int *)((unsigned char *)&g_btlMain + 0x50)) < 1) {
     temp_v3 = 0;
     do {

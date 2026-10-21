@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001175d4(int);
 int eventQueueAddUniqueIfValid(...);
-int FUN_002bc02c(void);
+int workCommandRefreshActiveSlots(void);
 int FUN_002c15fc(int);
 int FUN_002c1658(...);
 
@@ -17,8 +17,8 @@ extern unsigned char DAT_00493829; /* 0x493829 */
 
 /* Supplied declaration required: FUN_001175d4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_002bc02c. */
-extern int FUN_002bc088(void);
+/* Supplied declaration required: workCommandRefreshActiveSlots. */
+extern int querySlotHasHandle(void);
 extern unsigned int FUN_002bfdd4(void);
 /* Supplied declaration required: FUN_002c15fc. */
 /* Supplied declaration required: FUN_002c1658. */
@@ -102,9 +102,9 @@ LAB_0010ee84:
   if ((temp_v1 != 0) || (temp_v1 = FUN_002c15fc(6), temp_v1 != 0)) {
     FUN_001175d4(1);
   }
-  temp_v1 = FUN_002bc088();
+  temp_v1 = querySlotHasHandle();
   if ((temp_v1 != 0) && (temp_v2 = FUN_002bfdd4(), (temp_v2 & 1) != 0)) {
-    FUN_002bc02c();
+    workCommandRefreshActiveSlots();
   }
   if (DAT_00493829 == 0) {
     eventQueueAddUniqueIfValid(0x100016c);

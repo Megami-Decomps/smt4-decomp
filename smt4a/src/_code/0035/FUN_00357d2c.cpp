@@ -4,13 +4,12 @@
 
 extern "C" {
 
-int FUN_003e48dc(unsigned int);
+void FUN_003e48dc(unsigned int);
 int FUN_003e4e4c(int);
 
 extern int saveSlotFindSelected(void);
 extern int FUN_00187168(int);
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003e48dc. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003e4e4c. */
 

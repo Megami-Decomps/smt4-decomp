@@ -1,40 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00167400` (_code @ 0x167400, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: -O3 unrolls the four slots; -O2 preserves the retail loop but differs in register saving and global-base reload placement. */
+#include "shard/W6_W6Match2_QuerySlots.h"
 
 extern "C" {
+extern QuerySlot DAT_0061978c[4];
 
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} void_stack;
-
-extern unsigned char DAT_0061978c; /* 0x61978c */
-
-
-unsigned int FUN_00167400(void)
-
+// Clears unprotected pending flags and reports whether any slot was changed.
+u32 FUN_00167400()
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned char *puVar3;
-  
-  temp_v0 = 0;
-  temp_v1 = 0;
-  do {
-    if (temp_v1 >= 4) {
-      puVar3 = (unsigned char *)0x0;
+    u32 changed = 0;
+    for (s32 index = 0; index < 4; ++index) {
+        QuerySlot* slot = querySlotAt(DAT_0061978c, index);
+        if (slot->status.pending != 0 && !(slot->status.flags & 4)) {
+            changed = 1;
+            slot->status.pending = 0;
+        }
     }
-    else {
-      puVar3 = &DAT_0061978c + temp_v1 * 0x78;
-    }
-    if ((puVar3[0x76] != '\0') && ((puVar3[0x74] & 4) == 0)) {
-      temp_v0 = 1;
-      puVar3[0x76] = 0;
-    }
-    temp_v1 = temp_v1 + 1;
-  } while ((int)temp_v1 < 4);
-  return temp_v0;
+    return changed;
 }
-
-} /* extern "C" */
+}

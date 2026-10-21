@@ -19,7 +19,7 @@ typedef struct {
 
 extern unsigned char LAB_0024e2f4; /* 0x24e2f4 */
 extern unsigned char LAB_002726a4; /* 0x2726a4 */
-extern int FUN_002df5c8(...); /* 0x2df5c8 */
+extern int btlTalkJobRelease(...); /* 0x2df5c8 */
 extern int *g_btlTalk; /* 0x57a7b8 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
@@ -43,7 +43,7 @@ void FUN_00272584(unsigned int *param_1,int param_2,int param_3,int param_4)
   asdMemoryAllocTracked(0x100,0x100,0,0x14c,1);
   puVar2 = &LAB_002726a4;
   g_btlTalk = piVar1;
-  taskCreateDraw(&LAB_002726a4,4,0,0,&LAB_0024e2f4,FUN_002df5c8,param_1,*param_1);
+  taskCreateDraw(&LAB_002726a4,4,0,0,&LAB_0024e2f4,btlTalkJobRelease,param_1,*param_1);
   param_1[0x10] = (unsigned int)puVar2;
   piVar1 = g_btlTalk;
   piVar3 = g_btlTalk + 7;

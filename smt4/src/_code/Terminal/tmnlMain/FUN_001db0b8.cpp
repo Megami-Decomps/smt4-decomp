@@ -8,7 +8,7 @@ int FUN_00263508(...);
 int FUN_00282bfc(...);
 int gameFlagSetValue(...);
 int FUN_0029be5c(...);
-int FUN_002a71fc(...);
+int messageStatesSetFirst(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
@@ -36,7 +36,7 @@ extern int FUN_0026354c(unsigned int);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0029be5c. */
-/* Supplied declaration required: FUN_002a71fc. */
+/* Supplied declaration required: messageStatesSetFirst. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -94,7 +94,7 @@ void FUN_001db0b8(unsigned int *param_1)
   puVar1[0x15f] = 0;
   puVar1[0x163] = 0;
   puVar1[0x162] = 0;
-  FUN_002a71fc(0);
+  messageStatesSetFirst(0);
   *(unsigned char *)(puVar1 + 1) = 0;
   if (param_1 != (unsigned int *)0x0) {
     temp_v1 = *param_1;

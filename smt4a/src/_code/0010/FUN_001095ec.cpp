@@ -13,7 +13,7 @@ int FUN_002efcb8(unsigned int *);
 int FUN_002efcfc(int *, int);
 int FUN_002efd12(int, unsigned int *);
 int mapIteratorNext2(int *);
-int FUN_002efdb4(int);
+int onlineLockRelease(int);
 int FUN_002efe80(unsigned int);
 int FUN_002f27de(int);
 int FUN_002f2834(int);
@@ -42,7 +42,7 @@ extern int vectorDestroyBytes(int);
 /* Supplied declaration required: FUN_002efcfc. */
 /* Supplied declaration required: FUN_002efd12. */
 /* Supplied declaration required: mapIteratorNext2. */
-/* Supplied declaration required: FUN_002efdb4. */
+/* Supplied declaration required: onlineLockRelease. */
 /* Supplied declaration required: FUN_002efe80. */
 /* Supplied declaration required: FUN_002f27de. */
 /* Supplied declaration required: FUN_002f2834. */
@@ -87,7 +87,7 @@ void FUN_001095ec(unsigned int *param_1,unsigned int param_2,unsigned int param_
       puVar3 = (unsigned int *)&temp_v4;
       temp_v4 = temp_v2;
     }
-    FUN_002efdb4(*piVar4);
+    onlineLockRelease(*piVar4);
     FUN_002f27de(*piVar4);
     if (*piVar4 != 0) {
       FUN_0010af50();

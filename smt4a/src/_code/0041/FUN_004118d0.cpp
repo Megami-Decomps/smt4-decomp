@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00411bb4(unsigned int);
+int btlStageGetModeIndex(unsigned int);
 int FUN_004aaa94(unsigned int);
 int FUN_004f5238(unsigned int, int, int, int, int, int, int, int, int);
 int FUN_004fb43c(...);
@@ -17,10 +17,10 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_00411bb4. */
+/* Supplied declaration required: btlStageGetModeIndex. */
 /* Supplied declaration required: FUN_004aaa94. */
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004fb43c. */
@@ -31,10 +31,10 @@ void FUN_004118d0(unsigned int param_1)
 {
 /* irregular: 4 native warning(s); review required */
   FUN_004aaa94(g_btlUiBlock);
-  FUN_00411bb4(param_1);
-  FUN_004f5238(DAT_00573808,0,0,9,1,6,0,1,0);
-  FUN_004f5238(DAT_00573808,0,0,9,1,6,0,1,0);
-  FUN_004f5238(DAT_00573808,0,0,9,1,6,0,1,0);
+  btlStageGetModeIndex(param_1);
+  FUN_004f5238(g_btlAux,0,0,9,1,6,0,1,0);
+  FUN_004f5238(g_btlAux,0,0,9,1,6,0,1,0);
+  FUN_004f5238(g_btlAux,0,0,9,1,6,0,1,0);
   FUN_004fb43c(0,0,0x10000bd,1,0,0,0);
   return;
 }

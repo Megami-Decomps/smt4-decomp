@@ -1,52 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040a9a0` (_code @ 0x40a9a0, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: constructor defaults are preserved, but constant registers and subsequent owner-field loads are allocated differently. */
+#include "common.h"
 
-extern "C" {
+struct ModelResource;
+struct ModelResourceRequest {
+    u32 id; // 0x00
+    u8 option; // 0x04
+    u8 unk05[3];
+    u32 first; // 0x08
+    u32 second; // 0x0c
+    u32 third; // 0x10
+    u8 mode; // 0x14
+    u8 unk15[3];
 
-typedef struct fn_0040a9a0_arg0 fn_0040a9a0_arg0;
-struct fn_0040a9a0_arg0 {
-    unsigned char pad_0x0[0xc];
-    undefined4 field_0xc; /* +0xc */
-    unsigned char pad_0x10[0x4];
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined4 field_0x1c; /* +0x1c */
+    ModelResourceRequest()
+        : option(0), first(0x30000), second(0x10000), third(0x10000), mode(0) {}
+};
+struct ModelResourceOwner {
+    u8 unk00[0x0c];
+    ModelResource *resource; // 0x0c
+    u32 unk10;
+    u32 mode; // 0x14
+    u32 first; // 0x18
+    u32 second; // 0x1c
 };
 
-/* stack frame of param_2: 6 slot(s), 18 byte(s) */
-typedef struct {
-    unsigned char spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned char sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
+extern "C" {
+ModelResource *FUN_001581dc(const ModelResourceRequest *);
 
-extern unsigned int FUN_001581dc(unsigned int *);
-
-
-void FUN_0040a9a0(fn_0040a9a0_arg0 *param_1,unsigned int param_2)
-
+// Create a resource using this owner's request options and retain the returned object.
+void FUN_0040a9a0(ModelResourceOwner *owner, u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v2 = 0;
-  temp_v5 = 0x10000;
-  temp_v3 = param_1->field_0x18;
-  temp_v4 = param_1->field_0x1c;
-  temp_v6 = (unsigned char)param_1->field_0x14;
-  temp_v1 = param_2;
-  temp_v0 = FUN_001581dc((unsigned int *)&temp_v1);
-  param_1->field_0xc = temp_v0;
-  return;
+    ModelResourceRequest request;
+    request.id = id;
+    request.first = owner->first;
+    request.second = owner->second;
+    request.mode = owner->mode;
+    owner->resource = FUN_001581dc(&request);
 }
-
-} /* extern "C" */
+}

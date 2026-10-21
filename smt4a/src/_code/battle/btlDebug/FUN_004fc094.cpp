@@ -12,7 +12,7 @@ int FUN_001568f8(int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_00408184(...);
 int FUN_004102d8(...);
-int FUN_004c3cb0(...);
+int btlCombatantGetSummaryValues(...);
 int FUN_004c571c(...);
 int FUN_004c8340(...);
 int FUN_004fb43c(...);
@@ -45,7 +45,7 @@ typedef struct {
 extern unsigned char LAB_00221a7c; /* 0x221a7c */
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int g_btlActionReflect; /* 0x5712f0 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_00573c08; /* 0x573c08 */
 extern unsigned int DAT_00573c0c; /* 0x573c0c */
 extern unsigned int DAT_00573c10; /* 0x573c10 */
@@ -61,14 +61,14 @@ extern unsigned char DAT_0057a574; /* 0x57a574 */
 /* Supplied declaration required: FUN_001568f8. */
 extern int btlScriptUnitHasFlags(unsigned int *);
 extern int FUN_003eb1cc(void);
-extern int FUN_003ef9e0(unsigned int, int);
+extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: countersRaiseA. */
 /* Supplied declaration required: FUN_004102d8. */
 extern int FUN_004c1480(int);
-extern short FUN_004c3a98(int, unsigned int);
-/* Supplied declaration required: FUN_004c3cb0. */
+extern short btlFindEntryValue(int, unsigned int);
+/* Supplied declaration required: btlCombatantGetSummaryValues. */
 /* Supplied declaration required: FUN_004c571c. */
 /* Supplied declaration required: FUN_004c8340. */
 extern int btlUnitGet(unsigned int);
@@ -202,7 +202,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
           *(unsigned char *)(temp_v4 + 0x59c) = 1;
           temp_v4 = 0;
           if (param_14 == 0) {
-            *(unsigned int *)(DAT_00573808 + 0x339c) = *(unsigned int *)(DAT_00573808 + 0x339c) | 0x8000;
+            *(unsigned int *)(g_btlAux + 0x339c) = *(unsigned int *)(g_btlAux + 0x339c) | 0x8000;
           }
           temp_v5 = 4;
           do {
@@ -299,7 +299,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
                       FUN_001568f8(temp_v5,(int)*(short *)(temp_v4 + 0x6a));
                       temp_v14[4] = temp_v5;
                       temp_v13 = btlGetMainState();
-                      temp_v5 = FUN_003ef9e0(temp_v13,temp_v4);
+                      temp_v5 = idSetFindSubjectIndex(temp_v13,temp_v4);
                       if (temp_v5 < 0) {
                         temp_v5 = 0;
                       }
@@ -480,7 +480,7 @@ LAB_004fca64:
         *(unsigned char *)(temp_v4 + 4) = 8;
         *(int *)(temp_v4 + 0x14) = param_4;
         *(unsigned int *)(temp_v4 + 0x28) = 1;
-        temp_v2 = FUN_004c3a98((int)*(short *)(param_4 + 0x6a),1);
+        temp_v2 = btlFindEntryValue((int)*(short *)(param_4 + 0x6a),1);
         *(short *)(temp_v4 + 0x24) = temp_v2 - 1;
         *(unsigned short *)(temp_v4 + 0x48) = 0;
         *(unsigned char *)(temp_v4 + 5) = *(unsigned char *)(temp_v4 + 5) | 4;
@@ -489,7 +489,7 @@ LAB_004fca64:
     else {
       temp_v14[1] = 0;
       temp_v14[3] = 0;
-      FUN_004c3cb0((int)*(short *)(temp_v24 + 0x6a),temp_v14 + 1,temp_v14 + 3);
+      btlCombatantGetSummaryValues((int)*(short *)(temp_v24 + 0x6a),temp_v14 + 1,temp_v14 + 3);
       temp_v14[0] = -1;
       temp_v6 = (unsigned int)*(short *)(temp_v24 + 0x6a);
       FUN_004c8340(temp_v6,(int)*(short *)(param_4 + 0x6a),temp_v14[1],temp_v14[3]);
@@ -498,7 +498,7 @@ LAB_004fca64:
       *(unsigned char *)(temp_v4 + 4) = 8;
       *(int *)(temp_v4 + 0x14) = param_4;
       *(unsigned int *)(temp_v4 + 0x28) = 2;
-      temp_v2 = FUN_004c3a98((int)*(short *)(param_4 + 0x6a),1);
+      temp_v2 = btlFindEntryValue((int)*(short *)(param_4 + 0x6a),1);
       *(short *)(temp_v4 + 0x24) = temp_v2 - 1;
       *(unsigned short *)(temp_v4 + 0x48) = (unsigned short)((temp_v6 & 0x800000) != 0);
       *(unsigned char *)(temp_v4 + 5) = *(unsigned char *)(temp_v4 + 5) | 4;
@@ -511,7 +511,7 @@ LAB_004fca64:
         if (param_5 == 1) {
           temp_v14[1] = 0;
           temp_v14[2] = 0;
-          FUN_004c3cb0((int)*(short *)(temp_v24 + 0x6a),temp_v14 + 1,temp_v14 + 2);
+          btlCombatantGetSummaryValues((int)*(short *)(temp_v24 + 0x6a),temp_v14 + 1,temp_v14 + 2);
           temp_v14[0] = -1;
           temp_v6 = (unsigned int)*(short *)(temp_v24 + 0x6a);
           FUN_004c8340(temp_v6,(int)*(short *)(param_4 + 0x6a),temp_v14[1],temp_v14[2]);

@@ -8,12 +8,12 @@ int FUN_0015f858(unsigned int, int);
 int sysPlaySe(int);
 int uiSpriteSelectAnim(int, int);
 int FUN_001ad9b4(void);
-int FUN_001b34b8(void);
+int gameOptionsClassifyMode(void);
 int libc_strcpy(unsigned char [132], unsigned int);
 int FUN_003180c4(int, unsigned char [132]);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int FUN_003d474c(void);
-int FUN_003dc38c(unsigned int);
+void uiQuestRefreshDetailPages(int);
 int FUN_003dea6c(unsigned int, int, int);
 int FUN_00417e08(unsigned int);
 int optionsSetFlag1(void);
@@ -24,7 +24,7 @@ extern int g_uiQuest; /* 0x57f28c */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_001b34b8. */
+/* Supplied declaration required: gameOptionsClassifyMode. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
@@ -32,7 +32,6 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: FUN_003d474c. */
-/* Supplied declaration required: FUN_003dc38c. */
 /* Supplied declaration required: FUN_003dea6c. */
 /* Supplied declaration required: FUN_00417e08. */
 /* Supplied declaration required: optionsSetFlag1. */
@@ -55,9 +54,9 @@ void FUN_0021a4b0(void)
   temp_v1 = FUN_002a4894(temp_v2 + 0x9ac);
   temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v1 + temp_v0) * 2 + 0xad6);
   FUN_00417e08(temp_v4);
-  FUN_001b34b8();
+  gameOptionsClassifyMode();
   optionsSetFlag1();
-  FUN_003dc38c(temp_v4);
+  uiQuestRefreshDetailPages(temp_v4);
   uiSpriteSelectAnim(temp_v2 + 0x264,2);
   FUN_003dea6c(temp_v4,0,1);
   FUN_001ad9b4();

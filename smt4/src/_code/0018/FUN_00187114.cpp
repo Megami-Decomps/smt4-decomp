@@ -13,12 +13,12 @@ int FUN_0029a17c(...);
 int FUN_0029a924(...);
 int FUN_0029ab54(int, int);
 int FUN_0029acb0(void);
-int FUN_0029c8f4(...);
+int flagCountUnlockedSlots(...);
 int FUN_0029dc74(...);
 int FUN_0029ee54(...);
 int FUN_002ae164(void);
 int FUN_002b6c34(...);
-int FUN_002bce00(...);
+int aocIndexValueOrDefault(...);
 int FUN_002bdf94(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
@@ -67,18 +67,18 @@ extern int FUN_0029aafc(void);
 /* Supplied declaration required: FUN_0029ab54. */
 extern int FUN_0029ac94(void);
 /* Supplied declaration required: FUN_0029acb0. */
-/* Supplied declaration required: FUN_0029c8f4. */
+/* Supplied declaration required: flagCountUnlockedSlots. */
 extern int FUN_0029d644(int);
 /* Supplied declaration required: FUN_0029dc74. */
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_0029ee54. */
 extern int FUN_0029efa8(void);
 /* Supplied declaration required: FUN_002ae164. */
-extern int FUN_002b066c(unsigned short);
+extern int partyMemberFindById(unsigned short);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6dd8. */
-/* Supplied declaration required: FUN_002bce00. */
+/* Supplied declaration required: aocIndexValueOrDefault. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -203,7 +203,7 @@ LAB_0018733c:
         textFormatBuffer(temp_v16,&LAB_00187424);
       }
       else {
-        temp_v10 = FUN_002bce00(*(unsigned short *)(temp_v4 + 0x482));
+        temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v4 + 0x482));
         textFormatBuffer(temp_v16,&LAB_0018742c,temp_v10);
       }
       temp_v6 = *(int *)(temp_v2 + 0x400);
@@ -274,13 +274,13 @@ LAB_0018733c:
         temp_v4 = FUN_0029aafc();
       }
       else {
-        temp_v4 = FUN_002b066c(*(unsigned short *)(temp_v19 + 0x7e));
+        temp_v4 = partyMemberFindById(*(unsigned short *)(temp_v19 + 0x7e));
         if (temp_v4 != 0) {
-          temp_v4 = FUN_0029c8f4();
+          temp_v4 = flagCountUnlockedSlots();
         }
         else {
           FUN_0029dc74(*(unsigned short *)(temp_v19 + 0x7e),temp_v13);
-          temp_v4 = FUN_0029c8f4(temp_v13);
+          temp_v4 = flagCountUnlockedSlots(temp_v13);
         }
       }
       if ((temp_v4 <= temp_v3) && (temp_v21 != 6)) {
@@ -423,7 +423,7 @@ LAB_001876ec:
                   *(unsigned char *)(temp_v8 + 0x1324) = 0;
                 }
                 temp_v8 = FUN_002bf4f8(0x1a,0x50a);
-                temp_v10 = FUN_002bce00(*(unsigned short *)(temp_v19 + 0xa2));
+                temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v19 + 0xa2));
                 textFormatBuffer(temp_v16,&LAB_001884e0,temp_v10);
                 VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v8 + 10) +
                                     param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -468,7 +468,7 @@ LAB_001876ec:
                 FUN_002b6c34((int)*(short *)(temp_v19 + 0xa2),*(short *)(temp_v8 + 8) + temp_v5,
                              *(short *)(temp_v8 + 10) + param_2,0xb5,0,0);
                 temp_v8 = FUN_002bf4f8(0x1a,0x4f7);
-                temp_v10 = FUN_002bce00(*(unsigned short *)(temp_v19 + 0xa2));
+                temp_v10 = aocIndexValueOrDefault(*(unsigned short *)(temp_v19 + 0xa2));
                 textFormatBuffer(temp_v16,&LAB_001884e0,temp_v10);
                 VectorSignedToFloat(*(short *)(temp_v8 + 8) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
                 VectorSignedToFloat(*(short *)(temp_v8 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -559,7 +559,7 @@ LAB_001876e0:
   }
   else {
     temp_v4 = FUN_002bf4f8(0x1a,0x40f);
-    temp_v10 = FUN_002bce00(*(unsigned int *)(temp_v2 + 0x540));
+    temp_v10 = aocIndexValueOrDefault(*(unsigned int *)(temp_v2 + 0x540));
     textFormatBuffer(temp_v16,&LAB_00187d54,temp_v10);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

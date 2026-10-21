@@ -17,7 +17,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: ifTouchRegionAdd. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 
 
 void FUN_00230d30(void)
@@ -46,7 +46,7 @@ void FUN_00230d30(void)
   switch(*(unsigned int *)(temp_v0 + 0x518)) {
   case 3:
     temp_v5 = 0;
-    temp_v3 = FUN_002c2c68(temp_v0 + 0x5ec);
+    temp_v3 = objectApplyIfUnblocked(temp_v0 + 0x5ec);
     if (0 < temp_v3) {
       do {
         temp_v1 = FUN_001643b4(0x12,temp_v5 + 0x414);
@@ -54,7 +54,7 @@ void FUN_00230d30(void)
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)(temp_v0 + temp_v3 + 0x544) = temp_v1;
         *(char *)(temp_v0 + 0x59a) = *(char *)(temp_v0 + 0x59a) + '\x01';
-        temp_v3 = FUN_002c2c68(temp_v0 + 0x5ec);
+        temp_v3 = objectApplyIfUnblocked(temp_v0 + 0x5ec);
       } while (temp_v5 < temp_v3);
     }
     temp_v1 = FUN_001643b4(0x12,0x50f);
@@ -65,7 +65,7 @@ void FUN_00230d30(void)
     break;
   case 4:
     temp_v5 = 0;
-    temp_v3 = FUN_002c2c68(temp_v0 + 0x5ec);
+    temp_v3 = objectApplyIfUnblocked(temp_v0 + 0x5ec);
     if (0 < temp_v3) {
       do {
         temp_v1 = FUN_001643b4(0x12,temp_v5 + 0x414);
@@ -73,7 +73,7 @@ void FUN_00230d30(void)
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)(temp_v0 + temp_v3 + 0x544) = temp_v1;
         *(char *)(temp_v0 + 0x59a) = *(char *)(temp_v0 + 0x59a) + '\x01';
-        temp_v3 = FUN_002c2c68(temp_v0 + 0x5ec);
+        temp_v3 = objectApplyIfUnblocked(temp_v0 + 0x5ec);
       } while (temp_v5 < temp_v3);
       return;
     }
@@ -81,7 +81,7 @@ void FUN_00230d30(void)
     return;
   case 7:
     temp_v5 = 0;
-    temp_v3 = FUN_002c2c68(temp_v0 + 0x5ec);
+    temp_v3 = objectApplyIfUnblocked(temp_v0 + 0x5ec);
     if (0 < temp_v3) {
       do {
         temp_v1 = FUN_001643b4(0x12,temp_v5 + 0x414);
@@ -89,7 +89,7 @@ void FUN_00230d30(void)
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)(temp_v0 + temp_v3 + 0x544) = temp_v1;
         *(char *)(temp_v0 + 0x59a) = *(char *)(temp_v0 + 0x59a) + '\x01';
-        temp_v3 = FUN_002c2c68(temp_v0 + 0x5ec);
+        temp_v3 = objectApplyIfUnblocked(temp_v0 + 0x5ec);
       } while (temp_v5 < temp_v3);
     }
     temp_v1 = FUN_001643b4(0x12,0x4f1);
@@ -98,7 +98,7 @@ void FUN_00230d30(void)
     return;
   case 0xe:
     temp_v5 = 0;
-    temp_v3 = FUN_002c2c68(temp_v0 + 0x5ec);
+    temp_v3 = objectApplyIfUnblocked(temp_v0 + 0x5ec);
     if (temp_v3 != 1 && -1 < temp_v3 - 1) {
       unaff_r6 = (char *)(temp_v0 + 0x59a);
     }
@@ -109,7 +109,7 @@ void FUN_00230d30(void)
         temp_v5 = temp_v5 + 1;
         *(unsigned short *)(temp_v0 + temp_v3 + 0x544) = temp_v1;
         *unaff_r6 = *(char *)(temp_v0 + 0x59a) + '\x01';
-        temp_v3 = FUN_002c2c68(temp_v0 + 0x5ec);
+        temp_v3 = objectApplyIfUnblocked(temp_v0 + 0x5ec);
       } while (temp_v5 < temp_v3 - 1);
     }
     temp_v3 = FUN_001834a4(0x12,0x4f1);
@@ -213,7 +213,7 @@ void FUN_00230d30(void)
   case 0x1d:
     temp_v3 = temp_v0 + 0x2424;
     temp_v4 = 0;
-    temp_v5 = FUN_002c2c68(temp_v3);
+    temp_v5 = objectApplyIfUnblocked(temp_v3);
     if (temp_v5 != 1 && -1 < temp_v5 - 1) {
       unaff_r6 = (char *)(temp_v0 + 0x59a);
     }
@@ -224,11 +224,11 @@ void FUN_00230d30(void)
         temp_v4 = temp_v4 + 1;
         *(unsigned short *)(temp_v0 + temp_v5 + 0x544) = temp_v1;
         *unaff_r6 = *(char *)(temp_v0 + 0x59a) + '\x01';
-        temp_v5 = FUN_002c2c68(temp_v3);
+        temp_v5 = objectApplyIfUnblocked(temp_v3);
       } while (temp_v4 < temp_v5 - 1);
     }
     temp_v1 = FUN_001643b4(0x12,0x54a);
-    temp_v3 = FUN_002c2c68(temp_v3);
+    temp_v3 = objectApplyIfUnblocked(temp_v3);
     *(unsigned short *)(temp_v0 + temp_v3 * 2 + 0x542) = temp_v1;
     temp_v2 = *(char *)(temp_v0 + 0x59a) + '\x01';
     break;

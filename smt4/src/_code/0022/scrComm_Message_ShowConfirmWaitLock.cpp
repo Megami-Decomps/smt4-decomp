@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002866b4(unsigned int, unsigned int, unsigned int, int, int, int);
 int scrGetCommandFrame(void);
-int FUN_0028dc98(int);
+int scrCommMessageSetMode(int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern int DAT_0043e190; /* 0x43e190 */
 extern unsigned int FUN_002865f8(void);
 /* Supplied declaration required: FUN_002866b4. */
 /* Supplied declaration required: scrGetCommandFrame. */
-/* Supplied declaration required: FUN_0028dc98. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 extern unsigned int scrGetArg(unsigned int);
 
 
@@ -34,7 +34,7 @@ void scrComm_Message_ShowConfirmWaitLock(void)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  FUN_0028dc98(0);
+  scrCommMessageSetMode(0);
   temp_v1 = scrGetCommandFrame();
   temp_v0 = DAT_0043e190;
   if (temp_v1 == 0) {

@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00337360` (_code @ 0x337360, 0x3bc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_BattleVersionResources.h"
 
 extern "C" {
 
 int FUN_0023fb84(unsigned int);
-int FUN_00240530(int, unsigned int, int, unsigned int, int);
+int btlReflectInitKind9(int, unsigned int, int, unsigned int, int);
 int FUN_0024057c(int, int, int);
-int FUN_00240614(void);
 int FUN_002451c4(int, unsigned int, int, int, int, int);
 int aocHandleButtons(unsigned int, int);
 int dataTable00FindById(void);
@@ -30,16 +30,15 @@ extern unsigned int DAT_00439a38; /* 0x439a38 */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
 /* Supplied declaration required: FUN_0023fb84. */
-/* Supplied declaration required: FUN_00240530. */
+/* Supplied declaration required: btlReflectInitKind9. */
 /* Supplied declaration required: FUN_0024057c. */
-/* Supplied declaration required: FUN_00240614. */
 /* Supplied declaration required: FUN_002451c4. */
 extern unsigned int FUN_0027d9e8(int, int);
 extern unsigned int btlUnitGet(unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
-extern int FUN_0029505c(unsigned int);
+extern int nkdwHeaderParse(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_003c1964. */
 
@@ -75,7 +74,7 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
       if (*pcVar11 == '\x01') {
         temp_v3 = FUN_0027d9e8(param_1,*piVar9);
         if ((*puVar7 & 1) == 0) {
-          temp_v4 = FUN_0029505c(temp_v3);
+          temp_v4 = nkdwHeaderParse(temp_v3);
           if (temp_v4 == 0) {
             return 0;
           }
@@ -139,7 +138,7 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
           temp_v3 = 7;
         }
         temp_v8 = btlUnitGet(g_btlScriptUnit);
-        FUN_00240530((int)temp_v1,temp_v8,temp_v6,temp_v3,0xd);
+        btlReflectInitKind9((int)temp_v1,temp_v8,temp_v6,temp_v3,0xd);
         return 1;
       }
     }
@@ -178,7 +177,7 @@ unsigned int FUN_00337360(int param_1,unsigned int param_2)
 LAB_00337490:
       *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) | 0x4000;
       if ((*(unsigned int *)(DAT_00435d18 + 0x3028) & 0x400) != 0) {
-        FUN_00240614();
+        FUN_00240614(reinterpret_cast<BattleVersionResources*>(DAT_00435d18));
       }
       *pcVar11 = '\x01';
     }

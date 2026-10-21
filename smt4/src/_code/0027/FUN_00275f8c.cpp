@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_00248e34(int);
+int mapIfClearGroupState(int);
 
 extern int DAT_0049f958; /* 0x49f958 */
 extern int DAT_0049f95c; /* 0x49f95c */
 extern unsigned char DAT_0049fb49; /* 0x49fb49 */
 
-/* Supplied declaration required: FUN_00248e34. */
+/* Supplied declaration required: mapIfClearGroupState. */
 extern int dataTable23Type0FindIndexById(void);
 extern int gameGetMapBlock(void);
 
@@ -28,7 +28,7 @@ void FUN_00275f8c(void)
       temp_v1 = temp_v1 + ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1b)) >> 5) * 4;
       *(unsigned int *)(temp_v1 + 0x7d4) = *(unsigned int *)(temp_v1 + 0x7d4) | (1 << ((temp_v0 % 0x20) & 0xffU));
     }
-    FUN_00248e34(DAT_0049f958);
+    mapIfClearGroupState(DAT_0049f958);
   }
   if (DAT_0049f95c != 0) {
     temp_v0 = dataTable23Type0FindIndexById();
@@ -38,7 +38,7 @@ void FUN_00275f8c(void)
         temp_v1 = temp_v1 + ((int)(temp_v0 + ((unsigned int)(temp_v0 >> 0x1f) >> 0x1b)) >> 5) * 4;
         *(unsigned int *)(temp_v1 + 0x7d4) = *(unsigned int *)(temp_v1 + 0x7d4) | (1 << ((temp_v0 % 0x20) & 0xffU));
       }
-      FUN_00248e34(DAT_0049f95c);
+      mapIfClearGroupState(DAT_0049f95c);
     }
     DAT_0049f95c = 0;
   }

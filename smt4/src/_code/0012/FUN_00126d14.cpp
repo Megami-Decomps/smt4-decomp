@@ -8,7 +8,7 @@ int FUN_002adba8(int *, int, int);
 int FUN_002af390(int, int);
 int FUN_002b5cf0(int, int);
 int asdModelCommandBlockRelease(void);
-int FUN_002b703c(void);
+int cursorResetFromParam(void);
 int FUN_002b7148(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,7 +23,7 @@ extern int DAT_004729e4; /* 0x4729e4 */
 /* Supplied declaration required: FUN_002af390. */
 /* Supplied declaration required: FUN_002b5cf0. */
 /* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: FUN_002b703c. */
+/* Supplied declaration required: cursorResetFromParam. */
 /* Supplied declaration required: FUN_002b7148. */
 
 
@@ -42,7 +42,7 @@ void FUN_00126d14(int param_1)
   param_1 = param_1 + 0x138;
   FUN_002b5cf0(param_1,temp_v0);
   FUN_002af390(temp_v0,param_1);
-  FUN_002b703c();
+  cursorResetFromParam();
   temp_v0 = DAT_004729e0;
   *(unsigned int *)(DAT_004729e0 + DAT_004729e4 * 4) = 0x210;
   *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf02bb;
@@ -56,7 +56,7 @@ void FUN_00126d14(int param_1)
   uStack_18 = 2;
   uStack_14 = 0xf0242;
   FUN_002adba8(&temp_v1,0x10,1);
-  FUN_002b703c();
+  cursorResetFromParam();
   temp_v0 = DAT_004729e0;
   *(unsigned int *)(DAT_004729e0 + DAT_004729e4 * 4) = 1;
   *(unsigned int *)(temp_v0 + DAT_004729e4 * 4 + 4) = 0xf0111;

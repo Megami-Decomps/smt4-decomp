@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bd81c(...);
+int positionStateSet(...);
 int FUN_002bd82c(...);
 int timerStart(...);
 int FUN_002bd954(...);
@@ -13,7 +13,7 @@ int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned int *);
+int drawParameterBlockClear(unsigned int *);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ extern unsigned char LAB_0011b29c; /* 0x11b29c */
 extern unsigned char DAT_00403a04; /* 0x403a04 */
 extern unsigned int *g_infoWin; /* 0x43e128 */
 
-/* Supplied declaration required: FUN_002bd81c. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: timerStart. */
@@ -44,7 +44,7 @@ extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_0010aff8(void)
@@ -68,7 +68,7 @@ void FUN_0010aff8(void)
   taskCreateDraw(&LAB_0010b1ec,0x81,0,0,FUN_0011aef0,0,0,puVar2);
   taskCreateDraw(&LAB_0010b200,0xdf,0,0,FUN_0011aef0,0,0,*puVar1);
   puVar1 = g_infoWin;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_infoWin + 9);
+  drawParameterBlockClear(g_infoWin + 9);
   paramsInit(puVar1 + 9,&DAT_00403a04,0x24,0,0,0,0,0,0,0,0);
   FUN_002bd954(puVar1 + 0x11,0xe,0x87,puVar1 + 9,1);
   timerStart(puVar1 + 0x11,0);
@@ -77,7 +77,7 @@ void FUN_0010aff8(void)
   temp_v0 = asdTextCreate(0);
   puVar1[0x6e] = temp_v0;
   FUN_002bd82c(temp_v0,0xffffffff);
-  FUN_002bd81c(puVar1[0x6e],0,0x646464ff);
+  positionStateSet(puVar1[0x6e],0,0x646464ff);
   puVar1[4] = 0x1e;
   return;
 }

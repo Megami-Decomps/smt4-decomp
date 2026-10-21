@@ -6,8 +6,8 @@ extern "C" {
 
 int systemApplyConfigurationByte(void);
 int stringFormatBounded(unsigned char [52], int, unsigned char *);
-int FUN_002ac8b0(unsigned char [96], unsigned char [52], int);
-int FUN_00355d68(int *, unsigned int, unsigned int, int *, int);
+int multibyteToUtf16(unsigned char [96], unsigned char [52], int);
+int archiveTryOpenFile(int *, unsigned int, unsigned int, int *, int);
 int FUN_0035a0b4(void);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
@@ -29,9 +29,9 @@ extern unsigned char LAB_00352b68; /* 0x352b68 */
 #endif
 /* Supplied declaration required: systemApplyConfigurationByte. */
 /* Supplied declaration required: stringFormatBounded. */
-/* Supplied declaration required: FUN_002ac8b0. */
+/* Supplied declaration required: multibyteToUtf16. */
 extern int wstrlenU16(void);
-/* Supplied declaration required: FUN_00355d68. */
+/* Supplied declaration required: archiveTryOpenFile. */
 /* Supplied declaration required: FUN_0035a0b4. */
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
 extern unsigned int nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(int *, unsigned int, long long, unsigned int, unsigned int);
@@ -63,7 +63,7 @@ int * FUN_00352920(unsigned int *param_1)
   unsigned char temp_v14 [52];
   
   stringFormatBounded(temp_v14,0x30,&LAB_00352b68);
-  FUN_002ac8b0(temp_v13,temp_v14,0x30);
+  multibyteToUtf16(temp_v13,temp_v14,0x30);
   temp_v12 = 0;
   temp_v2 = *param_1;
   temp_v3 = param_1[1];
@@ -72,7 +72,7 @@ int * FUN_00352920(unsigned int *param_1)
   temp_v9 = 4;
   temp_v0 = wstrlenU16();
   temp_v11 = (temp_v0 + 1) * 2;
-  FUN_00355d68(piVar4,temp_v2,temp_v3,&temp_v9,1);
+  archiveTryOpenFile(piVar4,temp_v2,temp_v3,&temp_v9,1);
   if (((((unsigned int)piVar4 & 0x3fc00) != 0x4400) || (99 >= ((unsigned int)piVar4 & 0x3ff))) ||
      (((unsigned int)piVar4 & 0x3ff) >= 0xb4)) {
     if ((-1 < (int)piVar4) &&

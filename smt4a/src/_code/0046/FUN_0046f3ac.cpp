@@ -1,16 +1,18 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046f3ac` (_code @ 0x46f3ac, 0x6c4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_QueuedRequestToken.h"
+#include "shard/W4_Match6_DataSet.h"
 
 extern "C" {
 
 int jyoucyuGetTableEntry(...);
 int FUN_00191f68(...);
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int FUN_001ba1c0(...);
-int FUN_001d1038(...);
+u32 FUN_001d1038(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int byteIsAtLeast100(...);
-int FUN_001d25ec(...);
+int legacyResourceIdRemap(...);
 int FUN_002e3140(...);
 int deletingDtor_002e56ec(...);
 int FUN_002fb0d4(...);
@@ -20,8 +22,8 @@ int FUN_0046e334(...);
 int FUN_0046fb60(...);
 int FUN_00473e44(...);
 int FUN_004740b4(...);
-int FUN_00474164(...);
-int FUN_004741f0(...);
+int aocEntryBeginBaseLoad(...);
+void aocRequestDataEntryFiles(DataEntry *);
 
 /* stack frame of param_2: 9 slot(s), 36 byte(s) */
 typedef struct {
@@ -46,13 +48,13 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00191f68. */
 extern int objGetFlagBit0(int);
-extern int FUN_001af210(int);
-/* Supplied declaration required: FUN_001b57a8. */
+extern int sysLightEventTryWait(int);
+/* Supplied declaration required: resultPairInitialize. */
 extern int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_001d1038. */
 /* Supplied declaration required: byteIsAtLeast100. */
-/* Supplied declaration required: FUN_001d25ec. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: deletingDtor_002e56ec. */
 /* Supplied declaration required: FUN_002fb0d4. */
@@ -63,8 +65,7 @@ extern int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_00473e44. */
 /* Supplied declaration required: FUN_004740b4. */
 extern int recordIsEnabledAndPresent(int);
-/* Supplied declaration required: FUN_00474164. */
-/* Supplied declaration required: FUN_004741f0. */
+/* Supplied declaration required: aocEntryBeginBaseLoad. */
 extern int FUN_004743e4(int);
 extern int FUN_0047d754(int);
 
@@ -91,11 +92,6 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
   int temp_v10;
   int iStack_64;
   int iStack_60;
-  int temp_v11;
-  int iStack_58;
-  int iStack_54;
-  int iStack_50;
-  int iStack_4c;
   int temp_v12;
   unsigned char *temp_v13;
   unsigned char *temp_v14;
@@ -112,11 +108,11 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
   piVar11 = piVar1 + -1;
   piVar1[3] = 0;
   piVar2 = &temp_v10;
-  FUN_001b57a8(piVar2,0);
+  resultPairInitialize(piVar2,0);
   temp_v3 = piVar2[1];
   *piVar1 = *piVar2;
   piVar1[1] = temp_v3;
-  temp_v3 = FUN_001af210(g_aocMain + 0x98);
+  temp_v3 = sysLightEventTryWait(g_aocMain + 0x98);
   if (temp_v3 != 0) {
     *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     *(unsigned int *)(param_2 + 0x344) = 6;
@@ -141,8 +137,8 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
       if (temp_v3 != 0) {
         temp_v12 = temp_v9;
         temp_v13 = (unsigned char *)temp_v10;
-        temp_v3 = FUN_001d25ec(&temp_v12);
-        temp_v6 = FUN_001d25ec(&temp_v12);
+        temp_v3 = legacyResourceIdRemap(&temp_v12);
+        temp_v6 = legacyResourceIdRemap(&temp_v12);
         if ((temp_v6 == -0x377ec779) || (temp_v3 == -0x377ec76c)) {
           *(char *)piVar11 = '\0';
           return;
@@ -212,7 +208,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
           do {
             temp_v6 = objGetFlagBit0(*(int *)(param_2 + 0x318) + temp_v3 * 0x50 + 8);
             if (temp_v6 != 0) {
-              FUN_00474164(*(int *)(param_2 + 0x318) + temp_v3 * 0x50);
+              aocEntryBeginBaseLoad(*(int *)(param_2 + 0x318) + temp_v3 * 0x50);
             }
             temp_v3 = temp_v3 + 1;
           } while (temp_v3 < *(int *)(param_2 + 0x310));
@@ -277,7 +273,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
             if ((temp_v3 != 0) &&
                (temp_v3 = recordIsEnabledAndPresent(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50),
                temp_v3 != 0)) {
-              FUN_004741f0(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50);
+              aocRequestDataEntryFiles((DataEntry *)(*(int *)(param_2 + 0x318) + *(int *)(param_2 + 0x354) * 0x50));
               *(unsigned int *)(param_2 + 0x358) = 1;
               break;
             }
@@ -316,33 +312,36 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
     *(unsigned int *)(g_aocMain + 0x754) = temp_v4 | 0x10;
     *(unsigned int *)(temp_v3 + 0x754) = temp_v4 | 0x50;
     *(unsigned int *)(param_2 + 0x344) = 6;
-    temp_v3 = FUN_001d25ec(piVar1);
+    temp_v3 = legacyResourceIdRemap(piVar1);
     if (temp_v3 != -0x36bec76f) {
-      temp_v3 = FUN_001af210(g_aocMain + 0x98);
+      temp_v3 = sysLightEventTryWait(g_aocMain + 0x98);
       if (temp_v3 != 0) {
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       }
       else if ((char)*piVar11 != -0x38) {
-        temp_v11 = *piVar11;
-        iStack_58 = *piVar1;
-        iStack_54 = piVar1[1];
-        iStack_50 = piVar1[2];
-        iStack_4c = piVar1[3];
-        temp_v3 = g_aocMain;
-        FUN_001d1038(g_aocMain,&temp_v11,*piVar1,piVar1[1]);
+        {
+          RequestParameters parameters = {{
+            static_cast<u32>(*piVar11), static_cast<u32>(*piVar1),
+            static_cast<u32>(piVar1[1]), static_cast<u32>(piVar1[2]),
+            static_cast<u32>(piVar1[3])
+          }};
+          QueuedRequestHandle handle = {parameters.words[1], parameters.words[2]};
+          temp_v3 = FUN_001d1038(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+                                &parameters, handle);
+        }
         if (temp_v3 != 0) {
           return;
         }
         if ((char)*piVar11 != 'i') {
           if ((char)*piVar11 != 'j') {
-            FUN_001d25ec(piVar1);
-            temp_v2 = FUN_001d25ec(piVar1);
+            legacyResourceIdRemap(piVar1);
+            temp_v2 = legacyResourceIdRemap(piVar1);
             temp_v4 = temp_v2 >> 0x1b;
             if ((temp_v2 & 0x80000000) != 0) {
               temp_v4 = temp_v4 - 0x20;
             }
             if (temp_v4 != 0xfffffffc) {
-              temp_v2 = FUN_001d25ec(piVar1);
+              temp_v2 = legacyResourceIdRemap(piVar1);
               temp_v4 = temp_v2 >> 0x1b;
               if ((temp_v2 & 0x80000000) != 0) {
                 temp_v4 = temp_v4 - 0x20;
@@ -357,7 +356,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
                 *(char *)piVar11 = '\x01';
                 piVar2 = &temp_v10;
                 piVar1[2] = 0;
-                FUN_001b57a8();
+                resultPairInitialize();
                 temp_v3 = piVar2[1];
                 *piVar1 = *piVar2;
                 piVar1[1] = temp_v3;

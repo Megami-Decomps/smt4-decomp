@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00141870(void);
+int asdProcessSetAuxiliaryCallback(void);
 int asdMdlManagerStart(void);
 int asdProcessCreateSimple(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
@@ -26,7 +26,7 @@ extern unsigned char LAB_00141260; /* 0x141260 */
 extern int FUN_00141270(...); /* 0x141270 */
 extern unsigned char *g_asdModelProcess; /* 0x5b3cd4 */
 
-/* Supplied declaration required: FUN_00141870. */
+/* Supplied declaration required: asdProcessSetAuxiliaryCallback. */
 /* Supplied declaration required: asdMdlManagerStart. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -54,7 +54,7 @@ unsigned char * FUN_00138b18(int param_1,unsigned int param_2,unsigned int param
     puVar2 = &LAB_00138c74;
     asdProcessCreateSimple(&LAB_00138c74,param_2,0,0,FUN_00141270,0,puVar1);
     *puVar1 = (unsigned int)puVar2;
-    FUN_00141870();
+    asdProcessSetAuxiliaryCallback();
     puVar2 = &LAB_00138c90;
     asdProcessCreateSimple(&LAB_00138c90,param_3,0,0,&LAB_00141260,0,puVar1);
     puVar1[2] = (unsigned int)puVar2;

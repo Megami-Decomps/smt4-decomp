@@ -13,7 +13,7 @@ extern int FUN_001ada74(unsigned short);
 extern int FUN_001ba3d4(unsigned int);
 extern int FUN_003df390(unsigned short);
 extern int partyEntryFlagsBit3(unsigned short);
-extern int FUN_004bb80c(void);
+extern int FUN_004bb80c(int index);
 
 
 void FUN_004bc5a4(int param_1)
@@ -25,7 +25,7 @@ void FUN_004bc5a4(int param_1)
   unsigned int temp_v2;
   unsigned char temp_v3;
   
-  temp_v0 = FUN_004bb80c();
+  temp_v0 = FUN_004bb80c(param_1);
   temp_v1 = partyEntryFlagsBit3(*(unsigned short *)(temp_v0 + 0xc));
   if (temp_v1 != 0) {
     return;

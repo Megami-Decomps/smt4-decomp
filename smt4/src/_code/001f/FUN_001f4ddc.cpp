@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0028da40(int, int, int);
+void partyStatusRefreshSlot(void*, int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_0028da40. */
+/* Supplied declaration required: partyStatusRefreshSlot. */
 
 
 void FUN_001f4ddc(int param_1,int param_2,unsigned short param_3,unsigned char param_4)
@@ -36,7 +36,7 @@ void FUN_001f4ddc(int param_1,int param_2,unsigned short param_3,unsigned char p
   *(unsigned char *)(temp_v2 + 0x5925) = 1;
   *(unsigned short *)(temp_v0 + 0x5940) = param_3;
   *(unsigned char *)(temp_v2 + 0x594a) = param_4;
-  FUN_0028da40(param_1,param_2,1);
+  partyStatusRefreshSlot(reinterpret_cast<void*>(param_1),param_2,1);
   return;
 }
 

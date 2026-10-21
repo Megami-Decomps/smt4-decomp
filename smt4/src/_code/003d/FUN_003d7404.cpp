@@ -22,7 +22,7 @@ int FUN_003d5698(float *, double);
 int FUN_003d60d4(...);
 int FUN_003d62a0(float *, double);
 int FUN_003d681c(float *);
-int FUN_003d6938(...);
+int battleCameraBlendTargetOffset(...);
 int FUN_003d6e20(...);
 int VectorSignedToFloat(...);
 
@@ -127,7 +127,7 @@ extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003d60d4. */
 /* Supplied declaration required: FUN_003d62a0. */
 /* Supplied declaration required: FUN_003d681c. */
-/* Supplied declaration required: FUN_003d6938. */
+/* Supplied declaration required: battleCameraBlendTargetOffset. */
 /* Supplied declaration required: FUN_003d6e20. */
 
 
@@ -487,7 +487,7 @@ unsigned int FUN_003d7404(float *param_1)
     }
   }
   if (((unsigned int)param_1[0x18d] & 0x2000) != 0) {
-    FUN_003d6938(param_1);
+    battleCameraBlendTargetOffset(param_1);
     temp_v2 = param_1[0x210];
     *temp_v31 = (float)((int)temp_v2 + 1);
     if (DAT_004342ec < (int)temp_v2 + 1) {

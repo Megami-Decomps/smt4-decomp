@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00425f18` (_code @ 0x425f18, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail inlines SVC 0x23 in the thread-handle destructor; no SDK wrapper exists here and added SVC intrinsics/assembly are prohibited. */
 #include "romwright_types.h"
 
 extern "C" {

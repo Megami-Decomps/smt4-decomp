@@ -54,7 +54,7 @@ typedef struct {
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: FUN_00283ebc. */
 /* Supplied declaration required: btlGetMainState. */
-extern unsigned int FUN_002ae108(fn_003be918_arg0 *);
+extern unsigned int playerGetSkillRank(fn_003be918_arg0 *);
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_003be670. */
 
@@ -138,7 +138,7 @@ int FUN_003be918(fn_003be918_arg0 *param_1,unsigned int param_2,unsigned int par
   pfVar10 = (fn_003be918_arg0 *)0x0;
   if (((*puVar5 & 2) != 0) && (pfVar6 = param_1, FUN_002ae164(), pfVar6 != (fn_003be918_arg0 *)0x0))
   {
-    temp_v5 = FUN_002ae108(param_1);
+    temp_v5 = playerGetSkillRank(param_1);
     FUN_00283ebc(pfVar6,temp_v5,1);
     pfVar10 = pfVar6;
   }

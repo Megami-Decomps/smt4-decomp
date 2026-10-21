@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f41f8` (_code @ 0x3f41f8, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail initializer retains an unreferenced 0x0044d0f8 pool word at+0x5c and stripped thread/destructor registrations missing from this extracted draft; boundary/initializer recovery is required. */
 #include "romwright_types.h"
 
 extern "C" {

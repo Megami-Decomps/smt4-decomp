@@ -16,7 +16,7 @@ int renderCtxResetColorScale(...);
 int FUN_0016c4b8(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_00184c40(int, int, int);
+int pairSetHalves(int, int, int);
 int FUN_001879d0(...);
 int jobGetScalarValue(void);
 int FUN_002a6c3c(...);
@@ -63,7 +63,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_002a6c3c. */
@@ -137,7 +137,7 @@ unsigned int FUN_0024e31c(void)
       do {
         temp_v5 = temp_v1 + temp_v6 * 0x14c;
         if (*(short *)(temp_v5 + 0x11a2c) != 0) {
-          FUN_00184c40(temp_v5 + 0x11914,(int)(short)(int)*(float *)(temp_v5 + 0x11a38),
+          pairSetHalves(temp_v5 + 0x11914,(int)(short)(int)*(float *)(temp_v5 + 0x11a38),
                        (int)(short)(int)*(float *)(temp_v5 + 0x11a3c));
           VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_001634b4(temp_v5 + 0x11914);
@@ -152,7 +152,7 @@ unsigned int FUN_0024e31c(void)
               *(unsigned char *)(temp_v2 + 0x12d0) = 0;
             }
             temp_v2 = temp_v5 + 0x119a0;
-            FUN_00184c40(temp_v2,(int)(short)(int)*(float *)(temp_v5 + 0x11a38),
+            pairSetHalves(temp_v2,(int)(short)(int)*(float *)(temp_v5 + 0x11a38),
                          (int)(short)(int)*(float *)(temp_v5 + 0x11a3c));
             *(unsigned int *)(temp_v5 + 0x119d0) = *(unsigned int *)(temp_v5 + 0x11a30);
             VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);

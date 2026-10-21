@@ -1,26 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002535ec` (_code @ 0x2535ec, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps values in caller-saved VFP registers across the angle-difference call; separate compilation saves d8-d9. */
+#include "common.h"
 
-extern "C" {
+extern "C" f32 FUN_00287b0c(f32, f32);
 
-int FUN_00287b0c(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00287b0c. */
-
-
-void FUN_002535ec(void)
-
+// Move an angle toward its target by at most the requested step.
+extern "C" f32 FUN_002535ec(f32 current, f32 target, f32 step)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_00287b0c();
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    f32 difference = FUN_00287b0c(current, target);
+    f32 distance = difference < 0.0f ? -difference : difference;
+    if (distance <= step)
+        return target;
+    return difference < 0.0f ? current - step : current + step;
 }
-
-} /* extern "C" */

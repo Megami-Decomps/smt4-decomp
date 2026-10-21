@@ -23,7 +23,7 @@ typedef struct {
 extern unsigned int g_aocMain; /* 0x570260 */
 
 extern int byteIsAtLeast100(unsigned int *);
-extern int FUN_001d25ec(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: FUN_00473980. */
 /* Supplied declaration required: FUN_00474734. */
 /* Supplied declaration required: FUN_00476e58. */
@@ -83,7 +83,7 @@ void FUN_00477030(int param_1)
       FUN_00473980(&temp_v5,g_aocMain);
       temp_v4 = temp_v5;
       uStack_34 = uStack_2c;
-      temp_v0 = FUN_001d25ec((unsigned int *)&temp_v4);
+      temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v4);
       if (temp_v0 < 0) {
         *(unsigned int *)(param_1 + 8) = 9999;
         *(unsigned char *)(param_1 + 0x210) = 100;

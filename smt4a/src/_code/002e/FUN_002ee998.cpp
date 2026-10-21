@@ -1,4 +1,3 @@
-/* NON_MATCHING: the element-end pointer is loaded into r1 where retail uses r2 (it keeps the link->next value in r1 live). */
 #include "common.h"
 
 extern "C" {
@@ -57,10 +56,10 @@ typedef struct Cursor {
     /* 0x0C */ Elem *end;
 } Cursor;
 
-int FUN_00132972(Cursor *cursor);
+void FUN_00132972(Cursor *cursor, s32 singleElement);
 
 /* Post-increment of the cursor: follows the link chain if there is one, otherwise advances by one element (growing at the end); returns the previous position. */
-void *FUN_002ee998(Cursor *cursor)
+void *FUN_002ee998(Cursor *cursor, s32 singleElement)
 {
     Node *link = cursor->link;
     Elem *cur;
@@ -70,7 +69,7 @@ void *FUN_002ee998(Cursor *cursor)
         return link;
     }
     if (cursor->cur == cursor->end) {
-        FUN_00132972(cursor);
+        FUN_00132972(cursor, singleElement);
     }
     cur = cursor->cur;
     cursor->cur = cur + 1;

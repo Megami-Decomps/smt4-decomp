@@ -7,7 +7,7 @@ extern "C" {
 int asdOperatorNew(int, int);
 int FUN_0031416c(int, int, int, int, int, int, int, int, int, int, int, int);
 int FUN_0040ae70(unsigned int, int);
-int FUN_0040b0f8(unsigned int, unsigned char *);
+int resourceOwnerLoadNamed(unsigned int, unsigned char *);
 int FUN_0040ba38(void);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
@@ -33,7 +33,7 @@ extern int lmapSceneGetScript(void);
 extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(unsigned int);
-/* Supplied declaration required: FUN_0040b0f8. */
+/* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: FUN_0040ba38. */
 
 
@@ -65,7 +65,7 @@ void FUN_00343d04(int param_1)
     temp_v0 = g_handleRegistry;
     temp_v1 = FUN_0040af60(g_handleRegistry);
     if (temp_v1 == 0) {
-      FUN_0040b0f8(temp_v0,&LAB_00343e48);
+      resourceOwnerLoadNamed(temp_v0,&LAB_00343e48);
       FUN_0040ae70(temp_v0,1);
       return;
     }

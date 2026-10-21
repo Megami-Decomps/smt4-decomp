@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00287aec(void);
 
-extern int DAT_00447e40; /* 0x447e40 */
+extern int g_vectorQueueWork; /* 0x447e40 */
 
 /* Supplied declaration required: FUN_00287aec. */
 
@@ -26,7 +26,7 @@ void FUN_001e33e4(void)
   float temp_v7;
   
   temp_v0 = 0;
-  temp_v1 = DAT_00447e40 + *(int *)(DAT_00447e40 + 0x2840) * 0x284;
+  temp_v1 = g_vectorQueueWork + *(int *)(g_vectorQueueWork + 0x2840) * 0x284;
   if (0 < *(int *)(temp_v1 + 0x280)) {
     temp_v6 = 0.0f;
     temp_v7 = 1.0f;
@@ -61,7 +61,7 @@ void FUN_001e33e4(void)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < *(int *)(temp_v1 + 0x280));
   }
-  *(int *)(DAT_00447e40 + 0x2840) = *(int *)(DAT_00447e40 + 0x2840) + 1;
+  *(int *)(g_vectorQueueWork + 0x2840) = *(int *)(g_vectorQueueWork + 0x2840) + 1;
   return;
 }
 

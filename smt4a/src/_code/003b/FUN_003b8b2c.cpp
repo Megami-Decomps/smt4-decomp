@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned int DAT_00570d78; /* 0x570d78 */
+extern unsigned int g_battleMaskPresets; /* 0x570d78 */
 extern unsigned int DAT_00570d7c; /* 0x570d7c */
 extern unsigned int DAT_00570d80; /* 0x570d80 */
 extern unsigned int DAT_00570d84; /* 0x570d84 */
@@ -51,7 +51,7 @@ unsigned int FUN_003b8b2c(void)
   temp_v3 = DAT_00570d84;
   temp_v2 = DAT_00570d80;
   temp_v1 = DAT_00570d7c;
-  temp_v0 = DAT_00570d78;
+  temp_v0 = g_battleMaskPresets;
   temp_v10 = 4;
   do {
     puVar11 = (unsigned int *)(*(int *)(temp_v9 + 0x1ffc) + temp_v10 * 0x408);

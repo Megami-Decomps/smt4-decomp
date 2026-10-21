@@ -5,9 +5,9 @@
 extern "C" {
 
 int FUN_002408ac(...);
-int FUN_00240990(...);
+int entryCollectNewIdentifiers(...);
 int FUN_0027e6f4(...);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int dataTable00FindById(...);
 int textFormatBuffer(...);
 int memClear(...);
@@ -18,9 +18,9 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_002408ac. */
-/* Supplied declaration required: FUN_00240990. */
+/* Supplied declaration required: entryCollectNewIdentifiers. */
 /* Supplied declaration required: FUN_0027e6f4. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
@@ -43,11 +43,11 @@ void FUN_00334140(unsigned int *param_1,int param_2)
     memClear(temp_v2,0x80);
     textFormatBuffer(temp_v2,"battle/arngmt/%02d_%02d.earg",*(unsigned char *)(temp_v1 + 0x9e),
                  *(unsigned char *)(temp_v1 + 0x9f));
-    FUN_00297468(temp_v2,(int *)(param_2 + 0x1e88),0);
+    asdLoadFileAsyncSimple(temp_v2,(int *)(param_2 + 0x1e88),0);
     *param_1 = 3;
     if (*(int *)(param_2 + 0x1e88) != 0) {
       *param_1 = 4;
-      FUN_00240990(param_1,param_2);
+      entryCollectNewIdentifiers(param_1,param_2);
     }
     return;
   }

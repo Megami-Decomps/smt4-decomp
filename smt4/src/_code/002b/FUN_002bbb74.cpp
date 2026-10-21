@@ -1,36 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bbb74` (_code @ 0x2bbb74, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler emits separate header stores and selects different command-buffer registers. */
+#include "shard/W6_W6Match5_MatrixCommand.h"
 
 extern "C" {
+u32 *FUN_002b7148(void);
+void FUN_0023ae58(u32 *, const f32 *, u32);
+void FUN_002af390(u32 *, u32 *);
 
-int FUN_0023ae58(unsigned int *, unsigned int, int);
-int FUN_002af390(unsigned int *, unsigned int *);
-int FUN_002b7148(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0023ae58. */
-/* Supplied declaration required: FUN_002af390. */
-/* Supplied declaration required: FUN_002b7148. */
-
-
-void FUN_002bbb74(unsigned int *param_1,unsigned int param_2)
-
+// Emit the register-selection header and matrix payload into the GPU command buffer.
+void FUN_002bbb74(MatrixCommandSource *source, const f32 *matrix)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = param_1;
-  FUN_002b7148();
-  *puVar1 = *(unsigned char *)((int)param_1 + 0x12a3a) | 0x80000000;
-  puVar1[1] = 0xf02c0;
-  FUN_0023ae58(puVar1 + 2,param_2,0xff02c1);
-  FUN_002af390(puVar1,puVar1 + 0x14);
-  return;
+    u32 *commands = FUN_002b7148();
+    commands[0] = source->registerIndex | 0x80000000;
+    commands[1] = 0xf02c0;
+    u32 *payload = commands + 2;
+    FUN_0023ae58(payload, matrix, 0xff02c1);
+    FUN_002af390(commands, payload + 18);
 }
-
-} /* extern "C" */
+}

@@ -49,7 +49,7 @@ typedef struct {
     unsigned int sp880; /* 0x880: local_880 */
 } param_2_stack;
 
-extern romwright_code *DAT_0058918c; /* 0x58918c */
+extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
 extern unsigned int *g_commandBufferCursor; /* 0x5b40e0 */
 extern unsigned int *g_commandBufferEnd; /* 0x5b40e4 */
 extern unsigned int *DAT_005b40f4; /* 0x5b40f4 */
@@ -58,7 +58,7 @@ extern int DAT_005b40fc; /* 0x5b40fc */
 extern int DAT_005b415c; /* 0x5b415c */
 extern int DAT_005b4174; /* 0x5b4174 */
 extern int DAT_005b418c; /* 0x5b418c */
-extern unsigned int *DAT_005b4400; /* 0x5b4400 */
+extern unsigned int *g_textureBindingState; /* 0x5b4400 */
 
 #ifndef ROMWRIGHT_FABS_4_DEFINED
 #define ROMWRIGHT_FABS_4_DEFINED
@@ -151,24 +151,24 @@ void FUN_00179178(unsigned int *param_1,unsigned int *param_2)
   unsigned int *temp_v55;
   unsigned int *temp_v56;
   
-  puVar1 = DAT_005b4400;
+  puVar1 = g_textureBindingState;
   temp_v56 = param_2;
   temp_v55 = param_1;
   temp_v53 = 0;
   if ((((unsigned int)param_2 & 0x1000) != 0) && ((*param_1 & 0x200) != 0)) {
-    if ((char)DAT_005b4400[0x192] != '\0') {
-      temp_v0 = DAT_005b4400[0x179];
-      temp_v18 = DAT_005b4400[0x17a];
-      temp_v17 = DAT_005b4400[0x1a6];
-      temp_v5 = DAT_005b4400[0x17b] + (temp_v0 - 1);
-      temp_v14 = DAT_005b4400[0x17c] + (temp_v18 - 1);
+    if ((char)g_textureBindingState[0x192] != '\0') {
+      temp_v0 = g_textureBindingState[0x179];
+      temp_v18 = g_textureBindingState[0x17a];
+      temp_v17 = g_textureBindingState[0x1a6];
+      temp_v5 = g_textureBindingState[0x17b] + (temp_v0 - 1);
+      temp_v14 = g_textureBindingState[0x17c] + (temp_v18 - 1);
       if ((int)temp_v0 >= (int)temp_v17) {
         temp_v0 = temp_v17 - 1;
       }
       else if ((int)temp_v0 < 0) {
         temp_v0 = 0;
       }
-      temp_v20 = DAT_005b4400[0x1a7];
+      temp_v20 = g_textureBindingState[0x1a7];
       if ((int)temp_v18 >= (int)temp_v20) {
         temp_v18 = temp_v20 - 1;
       }
@@ -191,8 +191,8 @@ void FUN_00179178(unsigned int *param_1,unsigned int *param_2)
     }
     else {
       temp_v0 = 0;
-      temp_v5 = DAT_005b4400[0x1a6] - 1;
-      temp_v14 = DAT_005b4400[0x1a7] - 1;
+      temp_v5 = g_textureBindingState[0x1a6] - 1;
+      temp_v14 = g_textureBindingState[0x1a7] - 1;
       temp_v17 = temp_v0;
       temp_v18 = temp_v0;
     }
@@ -1440,11 +1440,11 @@ LAB_0017abe0:
             temp_v38 = (unsigned int *)(temp_v14 + 0x81c);
             if ((*(unsigned int *)(temp_v14 + 0x81c) & 1) != 0) {
               if (*(int *)(temp_v14 + 0x804) == 0) {
-                if (DAT_0058918c == (romwright_code *)0x0) {
+                if (g_gfxAllocateCallback == (romwright_code *)0x0) {
                   temp_v25 = 0;
                 }
                 else {
-                  temp_v25 = (*DAT_0058918c)(0x10000,0x100,0,0x400);
+                  temp_v25 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x400);
                 }
                 *(unsigned int *)(temp_v14 + 0x804) = temp_v25;
               }
@@ -1527,11 +1527,11 @@ LAB_0017abe0:
               puVar1[temp_v14 + 0x49] = temp_v18;
               if ((*(unsigned int *)(temp_v10 + 0x81c) & 1) != 0) {
                 if (*(int *)(temp_v10 + 0x804) == 0) {
-                  if (DAT_0058918c == (romwright_code *)0x0) {
+                  if (g_gfxAllocateCallback == (romwright_code *)0x0) {
                     temp_v25 = 0;
                   }
                   else {
-                    temp_v25 = (*DAT_0058918c)(0x10000,0x100,0,0x400);
+                    temp_v25 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x400);
                   }
                   *(unsigned int *)(temp_v10 + 0x804) = temp_v25;
                 }
@@ -1608,11 +1608,11 @@ LAB_0017abe0:
               puVar1[temp_v14 + 0x51] = temp_v18;
               if ((*(unsigned int *)(temp_v9 + 0x81c) & 1) != 0) {
                 if (*(int *)(temp_v9 + 0x804) == 0) {
-                  if (DAT_0058918c == (romwright_code *)0x0) {
+                  if (g_gfxAllocateCallback == (romwright_code *)0x0) {
                     temp_v25 = 0;
                   }
                   else {
-                    temp_v25 = (*DAT_0058918c)(0x10000,0x100,0,0x400);
+                    temp_v25 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x400);
                   }
                   *(unsigned int *)(temp_v9 + 0x804) = temp_v25;
                 }
@@ -1701,11 +1701,11 @@ LAB_0017abe0:
           puVar1[temp_v14 + 0x59] = temp_v18;
           if ((*(unsigned int *)(temp_v9 + 0x81c) & 8) != 0) {
             if (*(int *)(temp_v9 + 0x810) == 0) {
-              if (DAT_0058918c == (romwright_code *)0x0) {
+              if (g_gfxAllocateCallback == (romwright_code *)0x0) {
                 temp_v25 = 0;
               }
               else {
-                temp_v25 = (*DAT_0058918c)(0x10000,0x100,0,0x200);
+                temp_v25 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x200);
               }
               *(unsigned int *)(temp_v9 + 0x810) = temp_v25;
             }
@@ -1797,11 +1797,11 @@ LAB_0017abe0:
           puVar1[0x5b] = temp_v18;
           if ((*(unsigned int *)(temp_v14 + 0x81c) & 0x10) != 0) {
             if (*(int *)(temp_v14 + 0x814) == 0) {
-              if (DAT_0058918c == (romwright_code *)0x0) {
+              if (g_gfxAllocateCallback == (romwright_code *)0x0) {
                 temp_v25 = 0;
               }
               else {
-                temp_v25 = (*DAT_0058918c)(0x10000,0x100,0,0x200);
+                temp_v25 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x200);
               }
               *(unsigned int *)(temp_v14 + 0x814) = temp_v25;
             }
@@ -1878,11 +1878,11 @@ LAB_0017abe0:
           }
           if ((*(unsigned int *)(temp_v9 + 0x81c) & 0x20) != 0) {
             if (*(int *)(temp_v9 + 0x818) == 0) {
-              if (DAT_0058918c == (romwright_code *)0x0) {
+              if (g_gfxAllocateCallback == (romwright_code *)0x0) {
                 temp_v25 = 0;
               }
               else {
-                temp_v25 = (*DAT_0058918c)(0x10000,0x100,0,0x200);
+                temp_v25 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x200);
               }
               *(unsigned int *)(temp_v9 + 0x818) = temp_v25;
             }
@@ -2075,11 +2075,11 @@ LAB_0017c32c:
         puVar1[0x60] = temp_v18;
         if ((*(unsigned int *)(temp_v14 + 0x81c) & 2) != 0) {
           if (*(int *)(temp_v14 + 0x808) == 0) {
-            if (DAT_0058918c == (romwright_code *)0x0) {
+            if (g_gfxAllocateCallback == (romwright_code *)0x0) {
               temp_v2 = 0;
             }
             else {
-              temp_v2 = (*DAT_0058918c)(0x10000,0x100,0,0x200);
+              temp_v2 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x200);
             }
             *(unsigned int *)(temp_v14 + 0x808) = temp_v2;
           }
@@ -2173,11 +2173,11 @@ LAB_0017c32c:
           temp_v9 = FUN_001959ec(*(unsigned int *)(temp_v17 + temp_v14 * 4 + 0xe78));
           if ((*(unsigned int *)(temp_v9 + 0x81c) & 4) != 0) {
             if (*(int *)(temp_v9 + 0x80c) == 0) {
-              if (DAT_0058918c == (romwright_code *)0x0) {
+              if (g_gfxAllocateCallback == (romwright_code *)0x0) {
                 temp_v25 = 0;
               }
               else {
-                temp_v25 = (*DAT_0058918c)(0x10000,0x100,0,0x40);
+                temp_v25 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x40);
               }
               *(unsigned int *)(temp_v9 + 0x80c) = temp_v25;
             }

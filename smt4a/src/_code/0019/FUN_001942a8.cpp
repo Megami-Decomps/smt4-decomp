@@ -1,39 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001942a8` (_code @ 0x1942a8, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: O3 coalesces middle-block loads and tail-calls the final append; O2 fixes the loads but still tail-calls instead of retail BL/POP. */
+#include "common.h"
 
-extern "C" {
-
-int FUN_001a063c(unsigned int, unsigned int, int);
-
-typedef struct fn_001942a8_arg0 fn_001942a8_arg0;
-struct fn_001942a8_arg0 {
-    unsigned char pad_0x0[0x8];
-    unsigned char field_0x8; /* +0x8 */
-    unsigned char pad_0x9[0x3];
-    int field_0xc; /* +0xc */
-    void *field_0x10; /* +0x10 */
-    unsigned char field_0x14; /* +0x14 */
-    unsigned char pad_0x15[0x3];
-    unsigned char field_0x18; /* +0x18 */
-    unsigned char pad_0x19[0x3];
-    int field_0x1c; /* +0x1c */
+struct CommandWords {
+    const u32* data;
+    u32 wordCount;
+};
+struct CommandWordBlock {
+    u8 unk00[0x2c];
+    CommandWords words;
+};
+struct CommandWordSource {
+    u8 unk00[8];
+    CommandWords prefix;
+    CommandWordBlock* blocks;
+    u32 blockCount;
+    CommandWords suffix;
 };
 
-/* Supplied declaration required: FUN_001a063c. */
+extern "C" {
+void FUN_001a063c(u32* destination, const u32* words, u32 bytes);
 
-
-void FUN_001942a8(fn_001942a8_arg0 *param_1,unsigned int param_2)
-
+void FUN_001942a8(const CommandWordSource* source, u32* destination)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_001a063c(param_2,*(unsigned int *)&param_1->field_0x8,param_1->field_0xc << 2);
-  if (*(int *)&param_1->field_0x14 * -0x34 != 0) {
-    FUN_001a063c(param_2,*(unsigned int *)((int)param_1->field_0x10 + 0x2c),
-                 *(int *)((int)param_1->field_0x10 + 0x30) << 2);
-  }
-  FUN_001a063c(param_2,*(unsigned int *)&param_1->field_0x18,param_1->field_0x1c << 2);
-  return;
+    FUN_001a063c(destination, source->prefix.data, source->prefix.wordCount * sizeof(u32));
+    const CommandWordBlock* begin = source->blocks;
+    const CommandWordBlock* end = begin + source->blockCount;
+    if (begin != end) {
+        FUN_001a063c(destination, begin->words.data, begin->words.wordCount * sizeof(u32));
+    }
+    FUN_001a063c(destination, source->suffix.data, source->suffix.wordCount * sizeof(u32));
 }
-
-} /* extern "C" */
+}

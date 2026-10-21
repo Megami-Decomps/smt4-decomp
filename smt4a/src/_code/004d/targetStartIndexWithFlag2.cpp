@@ -11,13 +11,13 @@ typedef struct Holder004d8700 {
     /* 0x00 */ Target004d8700 *target;
 } Holder004d8700;
 
-void FUN_003fda08(u32 handle, u32 index, u8 flag, f32 value);
+void animationSelectClip(u32 handle, u32 index, u8 flag, f32 value);
 
-/* Forwards `index` to FUN_003fda08 for the held target's handle (flag 2, value 0), if there is a target. */
+/* Forwards `index` to animationSelectClip for the held target's handle (flag 2, value 0), if there is a target. */
 void targetStartIndexWithFlag2(Holder004d8700 *holder, u32 index)
 {
     if (holder->target != NULL) {
-        FUN_003fda08(holder->target->handle, index, 2, 0.0f);
+        animationSelectClip(holder->target->handle, index, 2, 0.0f);
     }
 }
 

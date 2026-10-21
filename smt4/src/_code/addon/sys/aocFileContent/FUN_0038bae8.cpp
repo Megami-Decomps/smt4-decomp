@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002baa40(...);
+int resultPairInitialize(...);
 int textFormatBuffer(...);
 int rt_memclr(...);
 int asdMemFree(...);
@@ -20,9 +20,9 @@ typedef struct {
 
 extern int g_aocMain; /* 0x432fc8 */
 
-extern int FUN_002a12d8(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 extern int FUN_002ad1e0(int);
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: rt_memclr. */
@@ -54,7 +54,7 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
   puVar1 = (unsigned int *)FUN_002bad5c(param_1 + 4);
   puVar1[2] = 0;
   puVar1[3] = 0;
-  FUN_002baa40(&temp_v2,0);
+  resultPairInitialize(&temp_v2,0);
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;
@@ -62,14 +62,14 @@ void FUN_0038bae8(unsigned char *param_1,int param_2,unsigned int param_3)
   uStack_24 = 0;
   temp_v0 = param_2 + 0x34;
   FUN_003550f4(temp_v0,0xe5c,param_3,2);
-  FUN_002baa40(&temp_v3,temp_v0);
-  temp_v0 = FUN_002a12d8((unsigned int *)&temp_v3);
+  resultPairInitialize(&temp_v3,temp_v0);
+  temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v3);
   if (temp_v0 < 0) {
     jyoucyuGetTableEntry(0);
     *(unsigned char *)(puVar1 + -1) = 100;
     *puVar1 = temp_v3;
     puVar1[1] = uStack_1c;
-    temp_v0 = FUN_002a12d8((unsigned int *)&temp_v3);
+    temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v3);
     if ((temp_v0 != -0x36bec76f) && (temp_v0 = FUN_002ad1e0(g_aocMain + 0x98), temp_v0 != 0)) {
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       *(unsigned char *)(puVar1 + -1) = 200;

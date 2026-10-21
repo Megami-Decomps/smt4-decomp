@@ -1,0 +1,39 @@
+/* NON_MATCHING: panel speed loads directly from +0x22c rather than a timer-subobject base, and the first render-stack update swaps r1/r2. */
+#include "camp/RenderCtx.h"
+#include "shard/Scene43dcf0.h"
+
+struct PanelSpriteOrigin {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0a */ s16 y;
+};
+
+extern "C" {
+extern RenderCtxA *g_renderCtx;
+PanelSpriteOrigin *FUN_001834a4(u32 table, s32 index);
+void efctSetSpeed(f32 speed);
+s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
+void FUN_001835b4(s32 group, s32 table, s32 sprite, s32 x, s32 y, u32 flags);
+
+// Draw the panel sprite, temporarily changing render state for its highlighted variant.
+void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted, f32 speed)
+{
+    Scene43dcf0 *panel = g_partyPanel;
+    PanelSpriteOrigin *origin = FUN_001834a4(0x11, index + 0x57);
+    if (highlighted) {
+        efctSetSpeed(panel->effectSpeed * speed);
+        RenderCtxA *context = g_renderCtx;
+        s32 state = packNibblesAndByte(6, 1, 0);
+        renderStackSet(&context->stackB, state);
+        FUN_001835b4(2, 0x11, 0x4f, origin->x + x, origin->y + y, flags);
+        context = g_renderCtx;
+        state = packNibblesAndByte(6, 7, 0);
+        renderStackSet(&context->stackB, state);
+        efctSetSpeed(1.0f);
+        return;
+    }
+    efctSetSpeed(speed);
+    FUN_001835b4(2, 0x11, 0x4e, origin->x + x, origin->y + y, flags);
+    efctSetSpeed(1.0f);
+}
+}

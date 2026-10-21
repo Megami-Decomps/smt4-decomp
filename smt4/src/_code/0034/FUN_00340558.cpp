@@ -7,7 +7,7 @@ extern "C" {
 int nodeSetTranslation3f(unsigned int, int);
 int FUN_002a0428(int, int);
 int FUN_002a04f0(int);
-int FUN_002d582c(unsigned int);
+void FUN_002d582c(unsigned int, float);
 int FUN_002e1230(unsigned int, int);
 
 /* Supplied declaration required: nodeSetTranslation3f. */
@@ -35,7 +35,7 @@ unsigned int FUN_00340558(int param_1)
         if (*(int *)(temp_v0 + 0x10) != 0) {
           FUN_002a0428(*(int *)(temp_v0 + 0x10),1);
           FUN_002e1230(*(unsigned int *)(temp_v0 + 0x10),1);
-          FUN_002d582c(*(unsigned int *)(temp_v0 + 0x10));
+          FUN_002d582c(*(unsigned int *)(temp_v0 + 0x10), 1.0f);
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 3);

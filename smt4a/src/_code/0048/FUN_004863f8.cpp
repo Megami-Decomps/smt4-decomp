@@ -1,30 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004863f8` (_code @ 0x4863f8, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail computes the sprite address through R0 and uses a signed-byte flag load; compiled code uses R5 directly and an unsigned-byte load. */
+#include "shard/S2UiTexLoader.h"
+
+struct ConditionalUiScreen {
+    u32 unk00;        // 0x00
+    u32 state;        // 0x04
+    u32 step;         // 0x08
+    u8 unk0c[0x10a0 - 0x0c]; // 0x0c
+    UiTexSprite sprite; // 0x10a0
+};
 
 extern "C" {
+u32 FUN_0048e40c(void);
+s32 FUN_00163aa4(UiTexSprite* sprite, f32 speed);
 
-int FUN_00163aa4(void);
-
-/* Supplied declaration required: FUN_00163aa4. */
-extern int FUN_0048e40c(void);
-
-
-void FUN_004863f8(int param_1)
-
+// Advances the sprite while conditions hold and switches state when its flag is set.
+void FUN_004863f8(ConditionalUiScreen* screen)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0048e40c();
-  if (temp_v0 != 0) {
-    FUN_00163aa4();
-    if (*(char *)(param_1 + 0x112a) != '\0') {
-      *(unsigned int *)(param_1 + 4) = 2;
-      *(unsigned int *)(param_1 + 8) = 0;
+    if (FUN_0048e40c() != 0) {
+        UiTexSprite* sprite = &screen->sprite;
+        FUN_00163aa4(sprite, 1.0f);
+        if (sprite->animating != 0) {
+            screen->state = 2;
+            screen->step = 0;
+        }
     }
-  }
-  return;
 }
-
-} /* extern "C" */
+}

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00224f68(void *obj, int arg);
+int btlDrawFloatingNumbers(void *obj, int arg);
 extern int asdTMTexTableNodeIsLoaded(u32 table, int index);
 
 typedef struct Obj {
@@ -12,7 +12,7 @@ typedef struct Obj {
 
 extern Obj g_btlUi;
 
-/* Counts the set entries of tables 0x14 (5 entries) and 0x15 (4 entries); with 9 or more, calls FUN_00224f68. Returns 0. */
+/* Counts the set entries of tables 0x14 (5 entries) and 0x15 (4 entries); with 9 or more, calls btlDrawFloatingNumbers. Returns 0. */
 u32 FUN_0020f560(void)
 {
     s32 i;
@@ -36,7 +36,7 @@ u32 FUN_0020f560(void)
             i++;
         } while (i < 4);
         if (count >= 9) {
-            FUN_00224f68(target, 0);
+            btlDrawFloatingNumbers(target, 0);
             return 0;
         }
     }

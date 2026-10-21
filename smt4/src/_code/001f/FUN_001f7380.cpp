@@ -15,7 +15,7 @@ int matrixScaleRows(...);
 int FUN_00256cd8(...);
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
-int FUN_00257320(...);
+int mtx44TransformPosition(...);
 int refCountIncrement(...);
 int FUN_00269508(...);
 int FUN_00269694(unsigned int, int, int, int);
@@ -124,7 +124,7 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_00256cd8. */
 /* Supplied declaration required: FUN_00256dbc. */
 /* Supplied declaration required: entryListSetPhase. */
-/* Supplied declaration required: FUN_00257320. */
+/* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00269508. */
 /* Supplied declaration required: FUN_00269694. */
@@ -405,7 +405,7 @@ void FUN_001f7380(EffectEmitter *emitter)
   pfVar6 = &temp_v42;
   temp_v2 = 0;
   do {
-    FUN_00257320(puVar5,temp_v54,pfVar6);
+    mtx44TransformPosition(puVar5,temp_v54,pfVar6);
     temp_v2 = temp_v2 + 1;
     puVar5 = puVar5 + 4;
     pfVar6 = pfVar6 + 3;

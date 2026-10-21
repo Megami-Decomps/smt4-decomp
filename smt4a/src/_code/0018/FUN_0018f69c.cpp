@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001a081c(unsigned char [60]);
-int FUN_001a5678(int, int *, unsigned char [60], int, int, int, unsigned int, unsigned int);
+int _ZN2nn2gr3CTR7TextureC1Ev(unsigned char [60]);
+int gfxModelRebuildTextureCommands(int, int *, unsigned char [60], int, int, int, unsigned int, unsigned int);
 int FUN_001a7a20(...);
 int wstrlen(...);
 int libc_strcmp(int, int);
@@ -27,8 +27,8 @@ typedef struct {
     unsigned int sp128; /* 0x128: local_128 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001a081c. */
-/* Supplied declaration required: FUN_001a5678. */
+/* Supplied declaration required: _ZN2nn2gr3CTR7TextureC1Ev. */
+/* Supplied declaration required: gfxModelRebuildTextureCommands. */
 /* Supplied declaration required: FUN_001a7a20. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: libc_strcmp. */
@@ -126,7 +126,7 @@ unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned 
           temp_v0 = temp_v0 + 1;
         } while (temp_v0 < 6);
       }
-      FUN_001a081c(temp_v11);
+      _ZN2nn2gr3CTR7TextureC1Ev(temp_v11);
       temp_v16[0] = temp_v11;
       temp_v16[1] = temp_v16[3];
       temp_v9 = 0;
@@ -173,7 +173,7 @@ unsigned int FUN_0018f69c(int param_1,int param_2,unsigned int param_3,unsigned 
       } while ((int)temp_v5 < 3);
       if (temp_v9 != 0) {
         temp_v9 = piVar12[6];
-        FUN_001a5678(temp_v18,piVar12 + 4,temp_v11,temp_v9,temp_v9 + 0x10,temp_v9 + 0x20,temp_v19,
+        gfxModelRebuildTextureCommands(temp_v18,piVar12 + 4,temp_v11,temp_v9,temp_v9 + 0x10,temp_v9 + 0x20,temp_v19,
                      uStack_28);
       }
       piVar12 = piVar12 + 0xb;

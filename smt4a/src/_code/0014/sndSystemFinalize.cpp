@@ -26,7 +26,7 @@ void FUN_0015ec28(void);
 void nw_snd_internal_driver_VoiceManager_GetInstance(void);
 void nw_snd_internal_driver_HardwareManager_Finalize(void *manager);
 void FUN_0015e8c0(void *obj);
-void FUN_00175678(void);
+void objectCommandQueueGet(void);
 void FUN_0015eb74(void);
 void FUN_00191330(void);
 void nw_snd_internal_driver_SoundThread_Destroy(void);
@@ -53,7 +53,7 @@ void sndSystemFinalize(void)
         FUN_0015e8c0(DAT_0059dba4.taskThread);
         FUN_001b1f04();
         nw_snd_internal_driver_SoundThread_Finalize();
-        FUN_00175678();
+        objectCommandQueueGet();
         FUN_0015eb74();
         FUN_00191330();
         FUN_0015eb74();

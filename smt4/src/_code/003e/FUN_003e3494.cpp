@@ -41,7 +41,7 @@ typedef struct {
 
 extern unsigned int g_commandBufferCursor; /* 0x4652a0 */
 
-extern unsigned int FUN_002bc11c(void);
+extern unsigned int osVirtToPhysAddress(void);
 /* Supplied declaration required: nw_gfx_internal_FastWordCopyAsm_14. */
 /* Supplied declaration required: nw_gfx_internal_FastWordCopyAsm_16. */
 
@@ -126,14 +126,14 @@ void FUN_003e3494(fn_003e3494_arg0 *param_1)
     temp_v7 = 0xf0111;
     temp_v1 = 0;
     if (param_1->field_0x18 != 0) {
-      temp_v1 = FUN_002bc11c();
+      temp_v1 = osVirtToPhysAddress();
       temp_v1 = temp_v1 >> 3;
     }
     temp_v11 = 0x802f011c;
     temp_v2 = 0;
     temp_v10 = temp_v1;
     if (param_1->field_0x14 != 0) {
-      temp_v2 = FUN_002bc11c();
+      temp_v2 = osVirtToPhysAddress();
       temp_v2 = temp_v2 >> 3;
     }
     temp_v13 = param_1->field_0x8 | (param_1->field_0x4 * 0x1000 - 0x1000U) | 0x1000000;
@@ -164,7 +164,7 @@ void FUN_003e3494(fn_003e3494_arg0 *param_1)
     temp_v10 = temp_v3;
     temp_v11 = temp_v5;
     if (param_1->field_0x14 != 0) {
-      temp_v1 = FUN_002bc11c();
+      temp_v1 = osVirtToPhysAddress();
       temp_v1 = temp_v1 >> 3;
     }
     temp_v13 = 0xf011d;

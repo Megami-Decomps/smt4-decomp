@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0014f07c(...);
 int FUN_0015156c(...);
 int FUN_002a55ec(...);
-int FUN_002a5710(...);
+int modelSelectPrimaryMotion(...);
 int FUN_002a5960(...);
 int FUN_002a5dc4(...);
 int asdMemoryAlloc(...);
@@ -109,7 +109,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0014f07c. */
 /* Supplied declaration required: FUN_0015156c. */
 /* Supplied declaration required: FUN_002a55ec. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: FUN_002a5dc4. */
 extern int *asdMemoryGetDefaultAllocator(void);
@@ -357,7 +357,7 @@ void FUN_002a9244(fn_002a9244_arg0 *param_1)
       *(int **)&param_1->field_0x70 = piVar5;
     }
   }
-  FUN_002a5710(param_1,0);
+  modelSelectPrimaryMotion(param_1,0);
   *(unsigned int *)&param_1->field_0x7c = temp_v5;
   if ((0 < *(int *)&param_1->field_0x58) &&
      (piVar3 = *(int **)&param_1->field_0x60, piVar3 != (int *)0x0)) {

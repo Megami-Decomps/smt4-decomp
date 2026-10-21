@@ -6,14 +6,14 @@ extern "C" {
 
 int onlineStringDestroy(int *);
 int onlineStringAssign(...);
-int FUN_002fd768(int *, int);
+int onlineSockAddrToString(int *, int);
 int FUN_00300048(void);
 
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineStringAssign. */
 extern int FUN_002ea704(void);
 extern int FUN_002eb5f4(void);
-/* Supplied declaration required: FUN_002fd768. */
+/* Supplied declaration required: onlineSockAddrToString. */
 /* Supplied declaration required: FUN_00300048. */
 
 
@@ -41,7 +41,7 @@ unsigned int FUN_00300064(int param_1,unsigned int param_2,unsigned int param_3,
       temp_v0 = FUN_002eb5f4();
       temp_v3 = *(int *)(temp_v0 + 0xd0);
       temp_v0 = FUN_002ea704();
-      FUN_002fd768(&uStack_18,temp_v0 + 0x120);
+      onlineSockAddrToString(&uStack_18,temp_v0 + 0x120);
       onlineStringAssign(temp_v3 + 0x110,&uStack_18);
       onlineStringDestroy(&uStack_18);
     }

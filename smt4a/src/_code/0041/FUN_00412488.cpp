@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a49e4(unsigned int, unsigned int);
-int FUN_002c2cc4(int, int, int, int);
+int uiNavigatorStart(int, int, int, int);
 int FUN_003f1b3c(int, unsigned int, int, unsigned int *);
 int FUN_0047f4cc(int);
 
@@ -31,7 +31,7 @@ extern int lcgRandomRange(unsigned int);
 extern int FUN_00187168(void);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002a49e4. */
-/* Supplied declaration required: FUN_002c2cc4. */
+/* Supplied declaration required: uiNavigatorStart. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003f1b3c. */
 /* Supplied declaration required: FUN_0047f4cc. */
@@ -97,7 +97,7 @@ void FUN_00412488(void)
   FUN_0047f4cc(temp_v13);
   FUN_002a49e4(*(unsigned int *)(temp_v5 + 0x4d64),temp_v12 & 0xffff);
   temp_v6 = (unsigned int *)0x0;
-  FUN_002c2cc4(temp_v4,1,1,0);
+  uiNavigatorStart(temp_v4,1,1,0);
   return;
 }
 

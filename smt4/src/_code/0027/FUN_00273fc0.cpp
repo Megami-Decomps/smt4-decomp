@@ -1,6 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00273fc0` (_code @ 0x273fc0, 0x7d4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ForwardEffect.h"
+
+union AnimationFrameEncoding {
+    f32 frame;
+    s32 bits;
+};
 
 extern "C" {
 
@@ -8,11 +14,10 @@ int FUN_002a0428(...);
 
 int FUN_0020ffe8(int, int);
 int FUN_0025bc80(void);
-int FUN_0025bdc4(void);
 int vec4Forward(void);
-int FUN_0027f94c(int);
+f32 FUN_0027f94c(int);
 int FUN_0027fca0(unsigned int);
-int FUN_00287098(...);
+int modelSelectSecondaryMotion(...);
 int FUN_0028c618(...);
 int nodeSetTranslation(...);
 int FUN_00293e08(int);
@@ -20,7 +25,7 @@ int FUN_00293e78(int, int *);
 int FUN_00294450(...);
 int FUN_00297684(int);
 int FUN_002a55ec(...);
-int FUN_002a5710(...);
+int modelSelectPrimaryMotion(...);
 int FUN_003351e0(int);
 int FUN_00343c58(int, unsigned int, int *, int *);
 
@@ -46,11 +51,10 @@ extern int DAT_0049fc88; /* 0x49fc88 */
 /* Supplied declaration required: FUN_0020ffe8. */
 extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
-/* Supplied declaration required: FUN_0025bdc4. */
 /* Supplied declaration required: vec4Forward. */
 /* Supplied declaration required: FUN_0027f94c. */
 /* Supplied declaration required: FUN_0027fca0. */
-/* Supplied declaration required: FUN_00287098. */
+/* Supplied declaration required: modelSelectSecondaryMotion. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: FUN_00293e08. */
@@ -59,7 +63,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: FUN_00297684. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: FUN_002a55ec. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 extern int gameGetPlayerData(void);
 extern int *FUN_00335118(int);
 /* Supplied declaration required: FUN_003351e0. */
@@ -81,6 +85,7 @@ void FUN_00273fc0(void)
   int temp_v3;
   int *temp_v4;
   int temp_v5;
+  AnimationFrameEncoding frame;
   
   if ((0 < g_lmapScene[100]) && (g_lmapScene[99] != -1)) {
     vec4Forward();
@@ -151,7 +156,8 @@ void FUN_00273fc0(void)
     piVar3 = (int *)g_lmapScene[0x15];
     if (piVar1 != piVar3) goto LAB_002741d4;
     g_lmapScene[0x18] = g_lmapScene[0x18] + 1;
-    FUN_0027f94c(piVar4[0x65]);
+    frame.frame = FUN_0027f94c(piVar4[0x65]);
+    piVar7 = (int*)frame.bits;
     if (g_lmapScene[0x15] != 2) {
       if ((g_lmapScene[0x15] == 0x12) &&
          ((((temp_v2 = g_lmapScene[0x19], temp_v2 < 0x41f00000 &&
@@ -159,14 +165,17 @@ void FUN_00273fc0(void)
            (((temp_v2 < 0x42940000 && (piVar3 = piVar7, (int)piVar7 >= 0x42940000)) ||
             ((temp_v2 < 0x41000000 && ((int)piVar7 >= 0x41000000)))))) ||
           ((temp_v2 < 0x42500000 && ((int)piVar7 >= 0x42500000)))))) {
-        FUN_0025bdc4();
+        effectSpawnAheadOfScene(((temp_v2 < 0x41f00000 && (s32)piVar7 >= 0x41f00000) ||
+                     (temp_v2 < 0x42940000 && (s32)piVar7 >= 0x42940000)) ? -20.0f : 20.0f,
+                    20.0f);
         FUN_0025bc80();
         FUN_0027fca0(0xffffffff);
       }
     }
     else if (((g_lmapScene[0x19] < 0x40000000) && ((int)piVar7 >= 0x40000000)) ||
             ((g_lmapScene[0x19] < 0x41300000 && ((int)piVar7 >= 0x41300000)))) {
-      FUN_0025bdc4();
+      effectSpawnAheadOfScene((g_lmapScene[0x19] < 0x40000000 && (s32)piVar7 >= 0x40000000) ?
+                  -20.0f : 20.0f,40.0f);
       FUN_0025bc80();
       FUN_0027fca0(0xffffffff);
     }
@@ -219,8 +228,8 @@ LAB_002741d4:
     nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5e] + 8),0,&temp_v3);
     FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5e] + 8),0);
     if (*(char *)((int)g_lmapScene + 0x183) != '\0') {
-      FUN_002a5710(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
-      FUN_00287098(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
+      modelSelectPrimaryMotion(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
+      modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
       FUN_002a55ec(*(unsigned int *)(g_lmapScene[0x5e] + 8),1);
       piVar3 = g_lmapScene;
       *(unsigned char *)((int)g_lmapScene + 0x183) = 0;
@@ -247,8 +256,8 @@ LAB_002741d4:
       piVar3 = g_lmapScene;
       if (*(char *)((int)g_lmapScene + 0x181) != '\0') {
         *(unsigned char *)((int)g_lmapScene + 0x181) = 0;
-        FUN_002a5710(*(unsigned int *)(piVar3[0x5f] + 8),0);
-        FUN_00287098(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
+        modelSelectPrimaryMotion(*(unsigned int *)(piVar3[0x5f] + 8),0);
+        modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
         FUN_002a55ec(*(unsigned int *)(g_lmapScene[0x5f] + 8),0);
       }
     }
@@ -267,8 +276,8 @@ LAB_0027461c:
       piVar3 = g_lmapScene;
       if (temp_v1 != g_lmapScene[0x5b]) {
         piVar3[0x5b] = temp_v1;
-        FUN_002a5710(*(unsigned int *)(piVar3[0x59] + 8));
-        FUN_00287098(*(unsigned int *)(g_lmapScene[0x59] + 8),g_lmapScene[0x5a]);
+        modelSelectPrimaryMotion(*(unsigned int *)(piVar3[0x59] + 8));
+        modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x59] + 8),g_lmapScene[0x5a]);
       }
     }
     else {
@@ -278,8 +287,8 @@ LAB_0027461c:
       piVar3 = g_lmapScene;
       g_lmapScene[0x5a] = 0;
       piVar3[0x5b] = temp_v1;
-      FUN_002a5710(*(unsigned int *)(piVar3[0x59] + 8));
-      FUN_00287098(*(unsigned int *)(g_lmapScene[0x59] + 8),g_lmapScene[0x5a]);
+      modelSelectPrimaryMotion(*(unsigned int *)(piVar3[0x59] + 8));
+      modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x59] + 8),g_lmapScene[0x5a]);
     }
   }
   if (DAT_0049fabc != '\0') {
@@ -293,8 +302,8 @@ LAB_0027461c:
       FUN_002a0428(temp_v2,1);
       nodeSetTranslation(*(unsigned int *)(g_lmapScene[0x5d] + 8),0,&DAT_0049fac4);
       FUN_0028c618(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
-      FUN_002a5710(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
-      FUN_00287098(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
+      modelSelectPrimaryMotion(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
+      modelSelectSecondaryMotion(*(unsigned int *)(g_lmapScene[0x5d] + 8),0);
     }
     DAT_0049fac0 = DAT_0049fac0 + 1;
     if ((int)DAT_0049fac0 >= 0x33) {

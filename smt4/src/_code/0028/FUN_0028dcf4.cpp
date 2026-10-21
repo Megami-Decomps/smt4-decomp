@@ -8,9 +8,9 @@ int pairSetSecondResetFirst(...);
 int FUN_00262210(...);
 int FUN_00295eb0(...);
 int FUN_002a9fdc(...);
-int FUN_002ae3d8(void);
+int sentinelLookupGetValue(void);
 int uiSpriteSetImageKeyframe(...);
-int FUN_002b8b4c(...);
+void uiLayoutSelectionSpritePair(void* context);
 int pairSetFirstResetSecond(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
@@ -35,10 +35,9 @@ extern unsigned char g_messageMain; /* 0x43e188 */
 /* Supplied declaration required: FUN_00262210. */
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_002a9fdc. */
-/* Supplied declaration required: FUN_002ae3d8. */
+/* Supplied declaration required: sentinelLookupGetValue. */
 extern int FUN_002ae424(unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_002b8b4c. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -190,7 +189,7 @@ void FUN_0028dcf4(int param_1,int param_2)
     FUN_002bee58(param_1 + 0x268,6);
     pairSetFirstResetSecond(param_1 + 0x380,0xc);
     FUN_002bee58(param_1 + 0x380,9);
-    FUN_002b8b4c(param_1);
+    uiLayoutSelectionSpritePair(reinterpret_cast<void*>(param_1));
     return;
   case 0xc:
     temp_v11[0] = 0;
@@ -264,7 +263,7 @@ void FUN_0028dcf4(int param_1,int param_2)
             }
             else {
 LAB_0028e528:
-              FUN_002ae3d8();
+              sentinelLookupGetValue();
               temp_v5 = temp_v5 + temp_v8;
             }
             temp_v5 = temp_v5 + 1;

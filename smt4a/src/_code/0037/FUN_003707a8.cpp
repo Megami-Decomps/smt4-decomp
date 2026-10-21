@@ -5,20 +5,20 @@
 extern "C" {
 
 int jobStop(...);
-int FUN_00167f24(...);
+int messageMainSetMode(...);
 int jyoucyuGetTableEntry(int);
 int FUN_00180118(unsigned int);
 int FUN_00184310(...);
 int messageForwardDefaultMode(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
-int eventTexSetJobParam(void);
+void eventTexSetJobParam(unsigned int);
 int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_003180c4(...);
 int FUN_0031bca4(...);
 int FUN_0036f298(unsigned int);
-int FUN_003afe2c(unsigned int, int, int);
+unsigned int npc2dCreateDemonPortrait(unsigned int, unsigned int, int, int, float);
 int dispatchIfFound(unsigned int, unsigned int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(void);
 extern int jobGetWork(unsigned int);
-/* Supplied declaration required: FUN_00167f24. */
+/* Supplied declaration required: messageMainSetMode. */
 extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_00180118. */
@@ -42,14 +42,12 @@ extern int scrGetArg(unsigned int);
 /* Supplied declaration required: messageForwardDefaultMode. */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
-/* Supplied declaration required: eventTexSetJobParam. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_0031bca4. */
 /* Supplied declaration required: FUN_0036f298. */
-/* Supplied declaration required: FUN_003afe2c. */
 /* Supplied declaration required: dispatchIfFound. */
 extern unsigned int FUN_004d0cd4(void);
 
@@ -108,8 +106,8 @@ unsigned int FUN_003707a8(void)
     break;
   case 1:
     temp_v2 = scrWorkGetValue(1);
-    FUN_003afe2c(temp_v2,0,0);
-    eventTexSetJobParam();
+    temp_v2 = npc2dCreateDemonPortrait(temp_v2,0,0,0,1.0f);
+    eventTexSetJobParam(temp_v2);
     FUN_0036f298(temp_v2);
     scrWorkSetValue(2,temp_v2);
     FUN_0031bca4(temp_v2,0,1);
@@ -144,7 +142,7 @@ unsigned int FUN_003707a8(void)
     FUN_003180c4(8,temp_v8);
     FUN_003180c4(9,temp_v9);
     temp_v1 = dataTableValueOrZero(0x1e);
-    FUN_00167f24(0x15);
+    messageMainSetMode(0x15);
     temp_v7[0] = 0;
     messageForwardDefaultMode(temp_v1,0x38,DAT_00588008,6);
     DAT_00588008 = DAT_00588008 + 1;

@@ -8,7 +8,7 @@ extern AsdGxPresets g_asdGxPresets;
 
 AsdGxTexture *asdTextureCreate(s32 unk);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-u32 FUN_002bc11c(void);
+u32 osVirtToPhysAddress(void);
 
 /* Creates a 512x512 index buffer of the given preset kind (0/1: small, 2: large) in heap
  * ASD_HEAP_EXTRA; the element type comes from the preset. */
@@ -42,7 +42,7 @@ AsdGxTexture *asdGxIndexBufferCreate(u32 kind)
     }
     asdDebugTrace(DAT_00409a68, 2950);
     tex->pixels = asdMemoryAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, tex->byteSize, 1);
-    tex->handle = FUN_002bc11c();
+    tex->handle = osVirtToPhysAddress();
     return tex;
 }
 

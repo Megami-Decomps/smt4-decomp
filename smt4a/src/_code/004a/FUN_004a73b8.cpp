@@ -1,40 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a73b8` (_code @ 0x4a73b8, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match8_DevilRecordA.h"
+
+struct PrimarySortRecord {
+    u32 unk00;
+    s32 key;
+};
 
 extern "C" {
+PrimarySortRecord* dataTable00FindById(u16 id);
 
-int FUN_00184310(void);
-int dataTable00FindById(void);
-
-/* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: dataTable00FindById. */
-
-
-int FUN_004a73b8(unsigned short *param_1,unsigned short *param_2)
-
+s32 FUN_004a73b8(const u16* first, const u16* second)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  dataTable00FindById();
-  temp_v1 = (unsigned int)*param_2;
-  dataTable00FindById();
-  temp_v2 = *(int *)(temp_v1 + 4) - *(int *)(temp_v0 + 4);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_00184310();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_00184310();
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 6) - (unsigned int)*(unsigned short *)(temp_v1 + 6);
-    if (temp_v2 == 0) {
-      temp_v2 = (unsigned int)*param_2 - (unsigned int)*param_1;
+    const PrimarySortRecord* a = dataTable00FindById(*first);
+    const PrimarySortRecord* b = dataTable00FindById(*second);
+    s32 order = b->key - a->key;
+    if (order == 0) {
+        const DevilRecordA* firstDevil = FUN_00184310(*first);
+        const DevilRecordA* secondDevil = FUN_00184310(*second);
+        order = firstDevil->level - secondDevil->level;
+        if (order == 0) {
+            order = *second - *first;
+        }
     }
-  }
-  return temp_v2;
+    return order;
 }
-
-} /* extern "C" */
+}

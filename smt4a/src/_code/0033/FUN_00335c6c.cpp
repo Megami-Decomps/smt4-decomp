@@ -9,7 +9,7 @@ int FUN_00192550(void);
 int dataTable04FindById(void);
 int sysMemClear(int [21], int);
 
-extern unsigned int DAT_00570288; /* 0x570288 */
+extern unsigned int g_btlCandidateMasks; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
@@ -224,7 +224,7 @@ void FUN_00335c6c(void)
       temp_v8 = *puVar19;
       temp_v11 = puVar19[1];
       if ((((DAT_005702a0 & temp_v8) != 0 || (DAT_005702a4 & temp_v11) != 0) &&
-          ((DAT_00570288 & temp_v8) != 0 || (DAT_0057028c & temp_v11) != 0)) &&
+          ((g_btlCandidateMasks & temp_v8) != 0 || (DAT_0057028c & temp_v11) != 0)) &&
          ((temp_v8 & DAT_005702b0) == 0 && (temp_v11 & DAT_005702b4) == 0)) {
         if (0 < (int)puVar19[0x31]) {
           temp_v2 = 1;
@@ -304,7 +304,7 @@ LAB_00336174:
         temp_v8 = *puVar19;
         temp_v11 = puVar19[1];
         if ((((DAT_005702a0 & temp_v8) != 0 || (DAT_005702a4 & temp_v11) != 0) &&
-            ((DAT_00570288 & temp_v8) != 0 || (DAT_0057028c & temp_v11) != 0)) &&
+            ((g_btlCandidateMasks & temp_v8) != 0 || (DAT_0057028c & temp_v11) != 0)) &&
            ((temp_v8 & DAT_005702b0) == 0 && (temp_v11 & DAT_005702b4) == 0)) {
           temp_v7 = 0;
           do {

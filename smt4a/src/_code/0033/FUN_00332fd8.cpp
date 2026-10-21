@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_001bbf0c(void);
 int FUN_001bc124(int, int);
-int FUN_00272e64(void);
+int calcHeadingRoundedToCardinalDirection(void);
 int mathPositionHeadingDegrees(int, int);
-int FUN_003534b0(...);
+int sceneRegisterBoxEffect(...);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
@@ -34,9 +34,9 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 extern int FUN_002393cc(unsigned int);
-/* Supplied declaration required: FUN_00272e64. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_003534b0. */
+/* Supplied declaration required: sceneRegisterBoxEffect. */
 extern unsigned int FUN_003857c8(int);
 
 
@@ -64,7 +64,7 @@ void FUN_00332fd8(void)
     VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe00),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe01),(unsigned char)(in_fpscr >> 0x16) & 3);
     mathPositionHeadingDegrees((int)*(char *)(temp_v2 + 0xe00),(int)*(char *)(temp_v2 + 0xe01));
-    FUN_00272e64();
+    calcHeadingRoundedToCardinalDirection();
     temp_v4 = (short)*(char *)(temp_v2 + 0xe0a) * 700 + 0x15e;
     temp_v2 = (short)*(char *)(temp_v2 + 0xe0b) * 700 + 0x15e;
     VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -106,7 +106,7 @@ void FUN_00332fd8(void)
       temp_v3 = 0x205;
       temp_v5 = 0x56;
     }
-    FUN_003534b0(temp_v3,0,&LAB_00333264,temp_v5,temp_v7,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v6,1,0xffffffff
+    sceneRegisterBoxEffect(temp_v3,0,&LAB_00333264,temp_v5,temp_v7,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v6,1,0xffffffff
                  ,0);
   }
   return;

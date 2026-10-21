@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010e8e8` (_code @ 0x10e8e8, 0x60 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: merged retail boundary: sound-volume setter ends at0x38; a separate applet sleep-event query starts at0x3c and ends at0x5c inside this unit. */
 #include "romwright_types.h"
 
 extern "C" {

@@ -24,7 +24,7 @@ extern unsigned char LAB_00118e61; /* 0x118e61 */
 extern unsigned char *DAT_0062d7d0; /* 0x62d7d0 */
 
 /* Supplied declaration required: FUN_00128fae. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002f4f00. */
@@ -32,7 +32,7 @@ extern int FUN_002e6e26(void);
 /* Supplied declaration required: FUN_00303d10. */
 extern int FUN_00303d1e(unsigned char *, int);
 /* Supplied declaration required: FUN_00303d3a. */
-extern int FUN_00303d44(int, unsigned int);
+extern int holderCheckBitsAllowed(int, unsigned int);
 /* Supplied declaration required: onlineScopedLockRelease. */
 /* Supplied declaration required: FUN_00303d74. */
 /* Supplied declaration required: FUN_00303e66. */
@@ -54,7 +54,7 @@ int FUN_001188d8(int param_1,int param_2,unsigned int param_3,unsigned int param
   iStack_20 = param_2;
   uStack_1c = param_3;
   temp_v3 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v2,temp_v0 + 0x58);
   FUN_00303cd8(temp_v1);
   FUN_00303d10(temp_v1,*(unsigned short *)(param_1 + 0x20),1);
@@ -67,7 +67,7 @@ int FUN_001188d8(int param_1,int param_2,unsigned int param_3,unsigned int param
       FUN_00303e66(param_2,param_5);
     }
     DAT_0062d7d0 = &LAB_00118e61;
-    if ((*(char *)(param_1 + 0x34) != '\0') && (temp_v0 = FUN_00303d44(param_1,0x10), temp_v0 != 0)) {
+    if ((*(char *)(param_1 + 0x34) != '\0') && (temp_v0 = holderCheckBitsAllowed(param_1,0x10), temp_v0 != 0)) {
       onlineScopedLockRelease(temp_v2);
     }
     FUN_00303d74(param_1,param_2,temp_v1);

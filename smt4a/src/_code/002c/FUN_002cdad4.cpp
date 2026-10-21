@@ -9,9 +9,9 @@ int FUN_0014e220(...);
 int paramsInit(int, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
-int FUN_00184c40(...);
+int pairSetHalves(...);
 int FUN_00387240(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(void);
+int paramsClearPacket(void);
 
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -35,9 +35,9 @@ extern unsigned char DAT_0052aac4; /* 0x52aac4 */
 /* Supplied declaration required: paramsInit. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_00387240. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_002cdad4(int param_1)
@@ -46,7 +46,7 @@ void FUN_002cdad4(int param_1)
 /* irregular: 8 native warning(s); review required */
   *(unsigned int *)(param_1 + 0x3f8) = 0;
   *(unsigned int *)(param_1 + 0x3f4) = 0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object();
+  paramsClearPacket();
   paramsInit(param_1,&DAT_0052aa1c,0x30,&DAT_0052aa4c,0x48,&DAT_0052aa94,0x30,0,0,&DAT_0052aac4,
                0x150);
   FUN_0014e188(param_1 + 0x20,0xc,0x29,param_1,0x33);
@@ -62,7 +62,7 @@ void FUN_002cdad4(int param_1)
   FUN_0014e220(param_1 + 0x138,0xc,0xffffffff,2,param_1,0x3d);
   *(unsigned short *)(param_1 + 0x172) = 1;
   *(unsigned char *)(param_1 + 0x174) = 1;
-  FUN_00184c40(param_1 + 0x138,200,0x78);
+  pairSetHalves(param_1 + 0x138,200,0x78);
   uiSpriteSelectAnim(param_1 + 0x138,2);
   FUN_0014e220(param_1 + 0xac,0xc,0xffffffff,0,param_1,0x47);
   *(unsigned short *)(param_1 + 0xe6) = 2;

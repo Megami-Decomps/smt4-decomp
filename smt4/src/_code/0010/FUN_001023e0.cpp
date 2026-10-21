@@ -1,33 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001023e0` (_code @ 0x1023e0, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
+
+struct RuntimeInitFlags {
+    /* 0x00 */ u8 unk00[3];
+    /* 0x03 */ u8 initialized;
+};
 
 extern "C" {
+extern RuntimeInitFlags DAT_0044e360;
+extern u8 DAT_004c641c[];
+s32 FUN_00110170(void);
+void FUN_00129584(void* buffer, u32 size);
+s32 FUN_0011034c(u32 mode, u32 address, u32 flags);
 
-int FUN_0011034c(int, unsigned int, int);
-int FUN_00129584(unsigned int *, int);
-
-extern unsigned char DAT_0044e360; /* 0x44e360 */
-extern unsigned int DAT_004c641c; /* 0x4c641c */
-
-extern int FUN_00110170(void);
-/* Supplied declaration required: FUN_0011034c. */
-/* Supplied declaration required: FUN_00129584. */
-
-
-void FUN_001023e0(unsigned int param_1)
-
+// Initialize the runtime buffer once and preserve a failed setup result.
+s32 FUN_001023e0(u32 address)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_00110170();
-  if (temp_v0 == 0) {
-    (*(unsigned char *)((unsigned char *)&DAT_0044e360 + 0x3)) = 1;
-    FUN_00129584(&DAT_004c641c,0x100);
-    FUN_0011034c(0x300,param_1 & 0xfffffff8,0xf);
-  }
-  return;
+    if (FUN_00110170() == 0) {
+        address &= ~7u;
+        DAT_0044e360.initialized = 1;
+        FUN_00129584(DAT_004c641c, 0x100);
+        s32 result = FUN_0011034c(0x300, address, 0x0f);
+        if (!nnResultIsSuccess(result))
+            return result;
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -9,7 +9,7 @@ int FUN_00169614(unsigned int);
 int FUN_00173a94(unsigned char *);
 int FUN_00173c1c(unsigned char *);
 int FUN_00173c7c(unsigned char *);
-int FUN_001742e4(...);
+int asdSoundObjectStop(...);
 int uiTextStateReset(unsigned char *);
 int asdMemFree(...);
 int FUN_001b6668(unsigned char *, unsigned char *);
@@ -46,7 +46,7 @@ extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 /* Supplied declaration required: FUN_00173a94. */
 /* Supplied declaration required: FUN_00173c1c. */
 /* Supplied declaration required: FUN_00173c7c. */
-/* Supplied declaration required: FUN_001742e4. */
+/* Supplied declaration required: asdSoundObjectStop. */
 /* Supplied declaration required: uiTextStateReset. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001b6668. */
@@ -73,7 +73,7 @@ void FUN_00150784(void)
         temp_v2 = temp_v3 + temp_v1 * 4;
         temp_v0 = *(int *)(temp_v2 + 0x20);
         if (temp_v0 != 0) {
-          FUN_001742e4(temp_v0,0);
+          asdSoundObjectStop(temp_v0,0);
           nw_snd_SoundHandle_DetachSound(temp_v2 + 0x20);
         }
         temp_v1 = temp_v1 + 1;
@@ -88,7 +88,7 @@ void FUN_00150784(void)
           puVar2 = *(unsigned char **)(temp_v3 + 0x20);
         }
         if (temp_v3 != 0 && puVar2 != (unsigned char *)0x0) {
-          FUN_001742e4(puVar2,0);
+          asdSoundObjectStop(puVar2,0);
           nw_snd_SoundHandle_DetachSound(temp_v3 + 0x20);
         }
       }
@@ -100,7 +100,7 @@ void FUN_00150784(void)
       do {
         if (piVar6 == (int *)0x0) break;
         if (*piVar6 != 0) {
-          FUN_001742e4(*piVar6,0);
+          asdSoundObjectStop(*piVar6,0);
           nw_snd_SoundHandle_DetachSound(piVar6);
         }
         temp_v3 = temp_v3 + 1;
@@ -113,7 +113,7 @@ void FUN_00150784(void)
         temp_v2 = temp_v3 + temp_v1 * 4;
         temp_v0 = *(int *)(temp_v2 + 0x20);
         if (temp_v0 != 0) {
-          FUN_001742e4(temp_v0,0);
+          asdSoundObjectStop(temp_v0,0);
           nw_snd_SoundHandle_DetachSound(temp_v2 + 0x20);
         }
         temp_v1 = temp_v1 + 1;
@@ -128,7 +128,7 @@ void FUN_00150784(void)
         piVar6 = (int *)(temp_v1 * 4 + 0x63f2f8);
         temp_v3 = *piVar6;
         if (temp_v3 != 0) {
-          FUN_001742e4(temp_v3,0);
+          asdSoundObjectStop(temp_v3,0);
           nw_snd_SoundHandle_DetachSound(piVar6);
         }
         temp_v1 = temp_v1 + 1;

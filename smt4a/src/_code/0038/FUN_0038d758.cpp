@@ -18,7 +18,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } void_stack;
 
-extern unsigned int DAT_00570d78; /* 0x570d78 */
+extern unsigned int g_battleMaskPresets; /* 0x570d78 */
 extern unsigned int DAT_00570d7c; /* 0x570d7c */
 
 extern int btlGetMainState(void);
@@ -36,7 +36,7 @@ unsigned int FUN_0038d758(void)
   temp_v0 = scrGetArg(0);
   temp_v1 = btlGetMainState();
   if (((*(unsigned int **)(temp_v1 + 0x1ffc))[1] & DAT_00570d7c) == 0 &&
-      (DAT_00570d78 & **(unsigned int **)(temp_v1 + 0x1ffc)) == 0) {
+      (g_battleMaskPresets & **(unsigned int **)(temp_v1 + 0x1ffc)) == 0) {
     temp_v1 = btlGetMainState();
     FUN_004fb798(0,0,0,*(unsigned int *)(temp_v1 + 0x1ed4),0,temp_v0,0xffffffff,0xffffffff,2,0xffffffff,
                  0xffffffff,0xffffffff,0,0,0);

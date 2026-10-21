@@ -5,13 +5,13 @@
 extern "C" {
 
 int asdCecSetBoxArgs(...);
-int FUN_0022ad9c(...);
+int asdCecCanOpenMessageBox(...);
 
 extern unsigned char LAB_00112233; /* 0x112233 */
 extern unsigned int DAT_0043ddb8; /* 0x43ddb8 */
 
 /* Supplied declaration required: asdCecSetBoxArgs. */
-/* Supplied declaration required: FUN_0022ad9c. */
+/* Supplied declaration required: asdCecCanOpenMessageBox. */
 extern unsigned int FUN_00357818(unsigned int);
 
 
@@ -26,12 +26,12 @@ unsigned char FUN_003bbcf4(void)
   temp_v0 = FUN_00357818(0x910);
   asdCecSetBoxArgs(temp_v0,0xabababab);
   temp_v0 = FUN_00357818(0x910);
-  temp_v1 = FUN_0022ad9c(temp_v0,0xabababab);
+  temp_v1 = asdCecCanOpenMessageBox(temp_v0,0xabababab);
   temp_v2 = temp_v1 != 0;
   temp_v0 = FUN_00357818(0xbd3);
   asdCecSetBoxArgs(temp_v0,&LAB_00112233);
   temp_v0 = FUN_00357818(0xbd3);
-  temp_v1 = FUN_0022ad9c(temp_v0,&LAB_00112233);
+  temp_v1 = asdCecCanOpenMessageBox(temp_v0,&LAB_00112233);
   if (temp_v1 != 0) {
     temp_v2 = 2;
   }

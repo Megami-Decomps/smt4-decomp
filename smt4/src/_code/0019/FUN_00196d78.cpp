@@ -15,11 +15,11 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern int FUN_001b16a8(...); /* 0x1b16a8 */
+extern int fusionComparePairsByParentLevelRaceId(const void*, const void*); /* 0x1b16a8 */
 extern int FUN_001e1540(...); /* 0x1e1540 */
 extern int FUN_001f5f94(...); /* 0x1f5f94 */
 extern int FUN_001f6098(...); /* 0x1f6098 */
-extern int FUN_00219260(...); /* 0x219260 */
+extern int uniteComparePairsDescending(...); /* 0x219260 */
 extern int FUN_002d02b0(...); /* 0x2d02b0 */
 extern int FUN_002dc7a0(...); /* 0x2dc7a0 */
 extern int FUN_002dc8a8(...); /* 0x2dc8a8 */
@@ -60,10 +60,10 @@ void FUN_00196d78(void)
   }
   if ((*pbVar10 & 0x7f) == 2) {
     if (temp_v1 != 0) {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,FUN_001b16a8);
+      FUN_002b7bca(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,fusionComparePairsByParentLevelRaceId);
     }
     else {
-      FUN_002b7bca(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,FUN_00219260);
+      FUN_002b7bca(temp_v0 + 0x6ce2,*(unsigned int *)(temp_v0 + 0x789c),2,uniteComparePairsDescending);
     }
   }
   if ((*pbVar10 & 0x7f) == 7) {

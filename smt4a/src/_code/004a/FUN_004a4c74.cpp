@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_00184310(void);
-int FUN_00184528(int *, int);
+int uiSpriteBankApplyPreset(int *, int);
 int FUN_00202400(void);
 int FUN_004a5d5c(int *);
 
@@ -18,12 +18,12 @@ typedef struct {
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: FUN_00202400. */
 extern int sceneTexturesAreLoaded(void);
 /* Supplied declaration required: FUN_004a5d5c. */
 extern int utilityReturnSuccess(int);
-extern int FUN_004cfe4c(int *);
+extern int flaggedValueHolderGetTotal(int *);
 
 
 void FUN_004a4c74(int *param_1)
@@ -41,8 +41,8 @@ void FUN_004a4c74(int *param_1)
   }
   param_1[5] = 1;
   param_1[6] = 0;
-  FUN_00184528(param_1 + 0x37,8);
-  FUN_00184528(param_1 + 0x37,9);
+  uiSpriteBankApplyPreset(param_1 + 0x37,8);
+  uiSpriteBankApplyPreset(param_1 + 0x37,9);
   if ((char)param_1[0x218] != '\0') {
     if ((char)param_1[0x218] != '\x01') {
       FUN_004a5d5c(param_1);
@@ -52,7 +52,7 @@ void FUN_004a4c74(int *param_1)
   else {
     FUN_00202400();
     if ((char)param_1[0x218] == '\0') {
-      temp_v0 = FUN_004cfe4c(param_1 + 8);
+      temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);
       temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 8 + 0x21a);
       FUN_00184310();
       if ((*(unsigned char *)(temp_v1 + 0xb3) & 2) == 0) {

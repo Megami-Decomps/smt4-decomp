@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_003defe0(void);
+unsigned int questHasSpecialDetailPage(unsigned int);
 int partyEntrySetBitsBit4(unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,6 @@ extern int g_uiQuest; /* 0x57f28c */
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 extern int FUN_002f7730(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003defe0. */
 /* Supplied declaration required: partyEntrySetBitsBit4. */
 
 
@@ -44,8 +43,7 @@ void FUN_002ae320(void)
   temp_v0 = FUN_002a4860(temp_v5);
   temp_v5 = FUN_002a4894(temp_v5);
   temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + (temp_v5 + temp_v0) * 2);
-  temp_v1 = temp_v4;
-  FUN_003defe0();
+  temp_v1 = questHasSpecialDetailPage(temp_v4);
   if ((temp_v1 != 0) && (temp_v2 = FUN_002f7730(*(unsigned int *)(temp_v2 + 0x910),temp_v4), temp_v2 == 3)) {
     partyEntrySetBitsBit4(temp_v4);
     return;

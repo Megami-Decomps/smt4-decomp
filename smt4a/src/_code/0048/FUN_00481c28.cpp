@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_00481ba8(int);
 
 extern signed char DAT_005f1614; /* 0x5f1614 */
@@ -13,7 +13,7 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 extern int DAT_005f189c; /* 0x5f189c */
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_00481ba8. */
 
 
@@ -59,7 +59,7 @@ void FUN_00481c28(int param_1)
       return;
     }
     temp_v1 = *(int *)(temp_v1 + 0x2c);
-    FUN_002b5cb4();
+    distSpatial();
     if (temp_v1 >= 0x44160000) {
       *puVar4 = *puVar4 & 0xfffffff7;
       temp_v1 = *(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x78) + 4);
@@ -70,7 +70,7 @@ void FUN_00481c28(int param_1)
   }
   else {
     temp_v1 = *(int *)(temp_v1 + 0x2c);
-    FUN_002b5cb4();
+    distSpatial();
     if (temp_v1 >= 0x44960000) {
       *puVar4 = *puVar4 & 0xfffffff7;
       temp_v1 = *(int *)(*(int *)(*(int *)(param_1 + 0xc) + 0x78) + 4);

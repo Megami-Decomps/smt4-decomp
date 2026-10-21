@@ -14,8 +14,8 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001f5f20(...); /* 0x1f5f20 */
-extern int FUN_001f646c(...); /* 0x1f646c */
-extern int FUN_00206e9c(...); /* 0x206e9c */
+extern int dataTable08CompareStatDescending(...); /* 0x1f646c */
+extern int idCompareRankDescendingThenOrder(...); /* 0x206e9c */
 extern int dataCompareSecondaryRank(...); /* 0x206ef0 */
 extern int devilRecordCompare(...); /* 0x206f30 */
 extern int devilIdCompareGradeDesc(...); /* 0x206f94 */
@@ -23,11 +23,11 @@ extern int dataTable08Sub2CompareByRank(...); /* 0x206fd4 */
 extern int dataComparePrimaryRank(...); /* 0x207014 */
 extern int FUN_00207054(...); /* 0x207054 */
 extern int FUN_00207094(...); /* 0x207094 */
-extern int FUN_002070e0(...); /* 0x2070e0 */
+extern int table08IdCompareRankThenCategory(...); /* 0x2070e0 */
 extern int FUN_002190e4(...); /* 0x2190e4 */
 extern int FUN_00219148(...); /* 0x219148 */
 extern int FUN_00219208(...); /* 0x219208 */
-extern int FUN_002194dc(...); /* 0x2194dc */
+extern int dataTable08CompareSecondaryKeyAscending(...); /* 0x2194dc */
 extern int FUN_00219530(...); /* 0x219530 */
 extern int dataTable08Sub1CompareRank(...); /* 0x21963c */
 extern int FUN_002497f8(...); /* 0x2497f8 */
@@ -38,13 +38,13 @@ extern int FUN_002dc634(...); /* 0x2dc634 */
 extern int FUN_002dc72c(...); /* 0x2dc72c */
 extern int FUN_002dcce0(...); /* 0x2dcce0 */
 extern int FUN_002dcd38(...); /* 0x2dcd38 */
-extern int FUN_002dcda0(...); /* 0x2dcda0 */
-extern int FUN_002dcec0(...); /* 0x2dcec0 */
+extern int dataTableSortKeyCompare(...); /* 0x2dcda0 */
+extern int dataTable08Sub2CompareBySortKeys(...); /* 0x2dcec0 */
 extern int FUN_002e44e0(...); /* 0x2e44e0 */
 extern int FUN_002e46f8(...); /* 0x2e46f8 */
-extern int FUN_002e4744(...); /* 0x2e4744 */
+extern int dataTable08CompareRankAscending(...); /* 0x2e4744 */
 extern int FUN_002e4798(...); /* 0x2e4798 */
-extern int FUN_002e47d8(...); /* 0x2e47d8 */
+extern int idCompareCategoryThenOrder(...); /* 0x2e47d8 */
 extern int dataTable08Sub2CompareByGroup(...); /* 0x2e482c */
 extern int devilIdCompareGradeAsc(...); /* 0x2e4890 */
 extern int dataTable08Sub2CompareByRankAscending(...); /* 0x2e48d0 */
@@ -52,14 +52,14 @@ extern int FUN_002e4910(...); /* 0x2e4910 */
 extern int FUN_002e4950(...); /* 0x2e4950 */
 extern int dataTable08CompareIds(...); /* 0x2e4990 */
 extern int FUN_002e49dc(...); /* 0x2e49dc */
-extern int FUN_002e4a0c(...); /* 0x2e4a0c */
-extern int FUN_002e4a60(...); /* 0x2e4a60 */
+extern int dataTable08Sub0CompareBySortKeys(...); /* 0x2e4a0c */
+extern int dataTableKeyRankCompare(...); /* 0x2e4a60 */
 extern int FUN_002e4aac(...); /* 0x2e4aac */
 extern int FUN_002f261c(...); /* 0x2f261c */
 extern int FUN_002f2680(...); /* 0x2f2680 */
 extern int FUN_002f2740(...); /* 0x2f2740 */
-extern int FUN_002f27ec(...); /* 0x2f27ec */
-extern int FUN_002f2840(...); /* 0x2f2840 */
+extern int dataTable08CompareSecondaryKeyDescending(...); /* 0x2f27ec */
+extern int dataTable08Sub2ComparePackedKeyDescending(...); /* 0x2f2840 */
 extern int FUN_002f2898(...); /* 0x2f2898 */
 extern int FUN_002f8120(...); /* 0x2f8120 */
 extern int FUN_0030bce8(...); /* 0x30bce8 */
@@ -69,10 +69,10 @@ extern int FUN_0030bed8(...); /* 0x30bed8 */
 extern int dataTable08Sub2CompareIds(...); /* 0x30bf40 */
 extern int FUN_00313184(...); /* 0x313184 */
 extern int FUN_0031324c(...); /* 0x31324c */
-extern int FUN_00313298(...); /* 0x313298 */
+extern int dataTable08Sub2CompareAlternateKeysDescending(...); /* 0x313298 */
 extern int FUN_003132ec(...); /* 0x3132ec */
 extern int FUN_00313338(...); /* 0x313338 */
-extern int FUN_00313364(...); /* 0x313364 */
+extern int dataTable08CompareCategoriesDesc(...); /* 0x313364 */
 extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_0027f3dc. */
@@ -239,7 +239,7 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0x10) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v1,temp_v2,2,FUN_002e4a60);
+        FUN_002b7bca(temp_v1,temp_v2,2,dataTableKeyRankCompare);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
@@ -253,7 +253,7 @@ void FUN_00282f80(int param_1)
         return;
       }
       temp_v2 = FUN_0029ee54(temp_v3);
-      FUN_0027f3dc(temp_v1,temp_v2,2,FUN_002070e0);
+      FUN_0027f3dc(temp_v1,temp_v2,2,table08IdCompareRankThenCategory);
       return;
     }
     break;
@@ -284,11 +284,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 3) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_0027f3dc(temp_v1,temp_v2,2,FUN_00313364);
+        FUN_0027f3dc(temp_v1,temp_v2,2,dataTable08CompareCategoriesDesc);
         return;
       }
       temp_v2 = FUN_0029ee54(temp_v3);
-      FUN_0027f3dc(temp_v1,temp_v2,2,FUN_002e4a0c);
+      FUN_0027f3dc(temp_v1,temp_v2,2,dataTable08Sub0CompareBySortKeys);
       return;
     }
     break;
@@ -319,11 +319,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0x11) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_00313298);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareAlternateKeysDescending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002e47d8);
+        FUN_002b7bca(temp_v5,temp_v2,2,idCompareCategoryThenOrder);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x12) {
@@ -339,11 +339,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 3) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_0027f3dc(temp_v5,temp_v2,2,FUN_002f27ec);
+        FUN_0027f3dc(temp_v5,temp_v2,2,dataTable08CompareSecondaryKeyDescending);
         return;
       }
       temp_v2 = FUN_0029ee54(temp_v4);
-      FUN_0027f3dc(temp_v5,temp_v2,2,FUN_002194dc);
+      FUN_0027f3dc(temp_v5,temp_v2,2,dataTable08CompareSecondaryKeyAscending);
       return;
     }
     break;
@@ -364,7 +364,7 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0x1f) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,FUN_002f2840);
+        FUN_002b7bca(temp_v4,temp_v2,2,dataTable08Sub2ComparePackedKeyDescending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
@@ -374,11 +374,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 0x13) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,FUN_002e4744);
+        FUN_002b7bca(temp_v4,temp_v2,2,dataTable08CompareRankAscending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,FUN_00206e9c);
+        FUN_002b7bca(temp_v4,temp_v2,2,idCompareRankDescendingThenOrder);
       }
     }
     temp_v0 = *pbVar4;
@@ -408,11 +408,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 4) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002dcec0);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08Sub2CompareBySortKeys);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_001f646c);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08CompareStatDescending);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x24) {
@@ -468,11 +468,11 @@ void FUN_00282f80(int param_1)
     if ((*pbVar4 & 0x7f) == 3) {
       if ((char)*pbVar4 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002f27ec);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08CompareSecondaryKeyDescending);
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v4);
-        FUN_002b7bca(temp_v5,temp_v2,2,FUN_002194dc);
+        FUN_002b7bca(temp_v5,temp_v2,2,dataTable08CompareSecondaryKeyAscending);
       }
     }
     if ((*pbVar4 & 0x7f) == 0x32) {
@@ -497,7 +497,7 @@ void FUN_00282f80(int param_1)
       }
       else {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_002b7bca(temp_v4,temp_v2,2,FUN_002dcda0);
+        FUN_002b7bca(temp_v4,temp_v2,2,dataTableSortKeyCompare);
       }
     }
     temp_v0 = *(unsigned char *)(temp_v1 + 0xb);
@@ -505,11 +505,11 @@ joined_r0x00283cd8:
     if ((temp_v0 & 0x7f) == 3) {
       if ((char)temp_v0 < '\0') {
         temp_v2 = FUN_0029ee54(temp_v3);
-        FUN_0027f3dc(temp_v4,temp_v2,2,FUN_002f27ec);
+        FUN_0027f3dc(temp_v4,temp_v2,2,dataTable08CompareSecondaryKeyDescending);
         return;
       }
       temp_v2 = FUN_0029ee54(temp_v3);
-      FUN_0027f3dc(temp_v4,temp_v2,2,FUN_002194dc);
+      FUN_0027f3dc(temp_v4,temp_v2,2,dataTable08CompareSecondaryKeyAscending);
       return;
     }
   }

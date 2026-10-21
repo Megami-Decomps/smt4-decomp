@@ -23,7 +23,7 @@ extern unsigned int DAT_0043d998; /* 0x43d998 */
 extern int FUN_0022caa4(unsigned char *, unsigned int);
 /* Supplied declaration required: pointConvertToFloat. */
 extern int FUN_00233344(int, int);
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_0029da34. */
 /* Supplied declaration required: FUN_0029ee6c. */
@@ -70,7 +70,7 @@ void FUN_003a88f4(int param_1)
     FUN_0029ee6c(temp_v4,0x323232ff);
   }
   else {
-    temp_v0 = FUN_0023360c(param_1 + 0x20);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
     FUN_0029da34(0,1,*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x5ac));
   }
   FUN_002a0cc8(0);

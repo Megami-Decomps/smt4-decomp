@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00122070(...);
-int FUN_002e6e26(...);
+int onlineContextGetInstance(...);
 int FUN_002e7908(...);
 int vectorCopyHeader(...);
 int FUN_002e9d28(...);
@@ -31,7 +31,7 @@ extern unsigned char LAB_00122ea4; /* 0x122ea4 */
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: FUN_00122070. */
-/* Supplied declaration required: FUN_002e6e26. */
+/* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: FUN_002e7908. */
 /* Supplied declaration required: vectorCopyHeader. */
 /* Supplied declaration required: FUN_002e9d28. */
@@ -69,7 +69,7 @@ FUN_00122ddc(int param_1,unsigned int param_2,romwright_code *param_3,unsigned i
     temp_v2 = 0;
   }
   else {
-    FUN_002e6e26();
+    onlineContextGetInstance();
     temp_v1 = FUN_0030f84e();
     if (temp_v1 != 0) {
       FUN_002e9e60("D:/home/jenkins/workspace/Manual-Pack/5129d543/OnlineCore/src/Core/Scheduler.cpp"

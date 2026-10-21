@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050e3bc` (_code @ 0x50e3bc, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: unit begins four bytes late; decoded image has LDR r0 at0x50e3b8 loading global0x64751c before this PUSH, so the input is not a real argument. Needs boundary repair. The draft's garbled string is actually vtable DAT_005583fc. */
 #include "romwright_types.h"
 
 extern "C" {

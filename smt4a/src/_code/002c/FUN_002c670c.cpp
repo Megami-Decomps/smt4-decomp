@@ -9,7 +9,7 @@ int FUN_002b7a78(...);
 int recordSetValueAndName(...);
 int FUN_00313974(int);
 int FUN_00332fd8(void);
-int FUN_003534b0(...);
+int sceneRegisterBoxEffect(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 14 slot(s), 56 byte(s) */
@@ -44,9 +44,9 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: recordSetValueAndName. */
 /* Supplied declaration required: FUN_00313974. */
 /* Supplied declaration required: FUN_00332fd8. */
-/* Supplied declaration required: FUN_003534b0. */
+/* Supplied declaration required: sceneRegisterBoxEffect. */
 extern int FUN_003683b8(int);
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 
 
 void FUN_002c670c(int param_1)
@@ -62,7 +62,7 @@ void FUN_002c670c(int param_1)
   unsigned int in_fpscr;
   
   temp_v1 = gameFlagsGetBlock();
-  temp_v2 = FUN_00376f94();
+  temp_v2 = lmapGetSpawnIndex();
   if (temp_v2 >= 100) {
     FUN_00313974((int)*(float *)(temp_v1 + 0x15c4));
     temp_v2 = FUN_003683b8((int)*(float *)(temp_v1 + 0x15c4));
@@ -114,11 +114,11 @@ void FUN_002c670c(int param_1)
         temp_v4 = temp_v2 * 0x44;
         if (*(char *)(temp_v4 + 0x5814d8) != '\x01') {
           if (*(char *)(temp_v4 + 0x5814d8) != '\x02') {
-            FUN_003534b0(0,0,&LAB_002c6ae0,0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x5814dc),
+            sceneRegisterBoxEffect(0,0,&LAB_002c6ae0,0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x5814dc),
                          *(unsigned char *)(temp_v4 + 0x5814dd),0,0,0,0,0,0xd,1,0,0,0,0);
           }
           else {
-            FUN_003534b0(0x2400001,0,&LAB_002c6e4c,0x1b,8,0xffffffff,0,
+            sceneRegisterBoxEffect(0x2400001,0,&LAB_002c6e4c,0x1b,8,0xffffffff,0,
                          *(unsigned char *)(temp_v4 + 0x5814dc),*(unsigned char *)(temp_v4 + 0x5814dd),0,0,0,0
                          ,0xd,1,0,0,0,0);
             recordSetValueAndName(0x2400001,(int)*(short *)(temp_v4 + 0x5814de),temp_v4 + 0x5814e0);
@@ -126,14 +126,14 @@ void FUN_002c670c(int param_1)
           }
         }
         else {
-          FUN_003534b0(0,0,&LAB_002c6ae8,0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x5814dc),
+          sceneRegisterBoxEffect(0,0,&LAB_002c6ae8,0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x5814dc),
                        *(unsigned char *)(temp_v4 + 0x5814dd),0,0,0,0,0,0xd,1,
                        (int)*(char *)(temp_v4 + 0x5814d9),(int)*(char *)(temp_v4 + 0x5814da),
                        (int)*(char *)(temp_v4 + 0x5814db),0);
         }
       }
       else {
-        FUN_003534b0(0,0,&LAB_002c6ae0,0x1b,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
+        sceneRegisterBoxEffect(0,0,&LAB_002c6ae0,0x1b,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
       }
       if (param_1 == 0) {
         FUN_00281b94(0);
@@ -178,11 +178,11 @@ void FUN_002c670c(int param_1)
       if (temp_v0 != '\x01') {
         if (temp_v0 != '\x02') {
           if (temp_v0 != '\x03') {
-            FUN_003534b0(0,0,&LAB_002c6e68,0x1c,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
+            sceneRegisterBoxEffect(0,0,&LAB_002c6e68,0x1c,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
                          *(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0,0,0xd,1,0,0,0,0);
           }
           else {
-            FUN_003534b0(0x2400002,0,&LAB_002c6fd4,0x4a,4,0xffffffff,
+            sceneRegisterBoxEffect(0x2400002,0,&LAB_002c6fd4,0x4a,4,0xffffffff,
                          *(unsigned char *)(temp_v2 + 0x5814f4),*(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0
                          ,0,0xd,1,0,0,0,0);
             recordSetValueAndName(0x2400002,(int)*(short *)(temp_v2 + 0x5814f6),temp_v2 + 0x5814f8);
@@ -190,21 +190,21 @@ void FUN_002c670c(int param_1)
           }
         }
         else {
-          FUN_003534b0(0x2400002,0,&LAB_002c6fd4,0xc,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
+          sceneRegisterBoxEffect(0x2400002,0,&LAB_002c6fd4,0xc,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
                        *(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0,0,0xd,1,0,0,0,0);
           recordSetValueAndName(0x2400002,(int)*(short *)(temp_v2 + 0x5814f6),temp_v2 + 0x5814f8);
           FUN_002b7a78(0x2400002,0);
         }
       }
       else {
-        FUN_003534b0(0,0,&LAB_002c6e70,3,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
+        sceneRegisterBoxEffect(0,0,&LAB_002c6e70,3,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
                      *(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0,0,0xd,1,
                      (int)*(char *)(temp_v2 + 0x5814f1),(int)*(char *)(temp_v2 + 0x5814f2),
                      (int)*(char *)(temp_v2 + 0x5814f3),0);
       }
     }
     else {
-      FUN_003534b0(0,0,&LAB_002c6e68,0x1c,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
+      sceneRegisterBoxEffect(0,0,&LAB_002c6e68,0x1c,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
     }
     if (param_1 == 0) {
       FUN_00281b94(0);

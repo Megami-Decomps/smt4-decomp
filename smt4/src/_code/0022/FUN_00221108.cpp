@@ -7,10 +7,10 @@ extern "C" {
 int scrSetResult(unsigned int);
 int gameGetUnitRecord(...);
 
-extern int FUN_0024ea50(unsigned int);
+extern int partyHasStoredDemon(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_0029bcf0(unsigned int);
+extern unsigned int partyFindActiveSlotById(unsigned int);
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 
@@ -28,12 +28,12 @@ unsigned int FUN_00221108(void)
   temp_v0 = scrGetArg(0);
   temp_v4 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0024ea50(temp_v0 & 0xffff);
+    temp_v1 = partyHasStoredDemon(temp_v0 & 0xffff);
     if (temp_v1 == 0) {
       temp_v4 = 0xffffffff;
     }
     else {
-      temp_v2 = FUN_0029bcf0(temp_v0 & 0xffff);
+      temp_v2 = partyFindActiveSlotById(temp_v0 & 0xffff);
       temp_v3 = gameGetUnitRecord();
       temp_v1 = flagWordTestBit(temp_v3,10);
       if (temp_v1 == 0) {

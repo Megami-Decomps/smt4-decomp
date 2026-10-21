@@ -8,12 +8,12 @@ typedef struct BtlMainState {
 } BtlMainState;
 
 extern BtlMainState *btlGetMainState(void);
-extern void FUN_002cd81c(u32 messageWindow);
+extern void scrShowChoiceInWindow(u32 messageWindow);
 
-/* Script command: shows a choice from the battle's message window (FUN_002cd81c). */
+/* Script command: shows a choice from the battle's message window (scrShowChoiceInWindow). */
 void scrComm_Message_ShowChoiceFromBattle(void)
 {
-    FUN_002cd81c(btlGetMainState()->messageWindow);
+    scrShowChoiceInWindow(btlGetMainState()->messageWindow);
 }
 
 } /* extern "C" */

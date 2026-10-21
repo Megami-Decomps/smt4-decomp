@@ -23,7 +23,7 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-extern int FUN_002c2c68(void);
+extern int objectApplyIfUnblocked(void);
 
 
 void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,
@@ -43,7 +43,7 @@ void FUN_003b6354(int param_1,int param_2,int param_3,int param_4,int param_5,in
     return;
   }
   temp_v0 = param_1 + 0x8e14;
-  temp_v1 = FUN_002c2c68();
+  temp_v1 = objectApplyIfUnblocked();
   if ((*piVar1 < temp_v1) && (param_2 == param_4)) {
     if (param_3 != 1) {
       if ((param_3 == 2 || param_3 == 3) && (*param_9 != '\0')) {

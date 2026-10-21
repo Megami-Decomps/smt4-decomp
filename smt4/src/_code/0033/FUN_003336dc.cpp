@@ -25,7 +25,7 @@ struct fn_003336dc_arg0 {
     ushort field_0x184; /* +0x184 */
 };
 
-extern int FUN_00240cd4(void);
+extern int questGetRuntimeStatus(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 
 
@@ -43,7 +43,7 @@ unsigned int FUN_003336dc(fn_003336dc_arg0 *param_1,unsigned char param_2)
   int temp_v4;
   unsigned int temp_v5;
   
-  temp_v3 = FUN_00240cd4();
+  temp_v3 = questGetRuntimeStatus();
   dataTable1bOr1cGetRecord();
   if (param_1 != (fn_003336dc_arg0 *)0x0) {
     if (((*(unsigned char *)(temp_v3 + 2) & param_2) == 0) && ((param_1->field_0x7 & 0x20) != 0)) {

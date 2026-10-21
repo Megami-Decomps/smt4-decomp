@@ -19,11 +19,11 @@ typedef struct {
 extern int g_uiQuest; /* 0x43dd50 */
 
 extern int FUN_0028f1bc(int);
-extern int FUN_0028f304(int);
+extern bool questIsOfferable(unsigned short);
 extern int FUN_002903f0(void);
 extern int FUN_00298dc8(void);
 extern int FUN_00298e00(int);
-extern int FUN_00298e20(int);
+extern int questIsCompleted(int);
 extern int FUN_00298e40(int, int, int *);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: FUN_002bf288. */
@@ -67,7 +67,7 @@ FUN_001af84c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
       do {
         temp_v2 = FUN_00298e40(temp_v5,temp_v1,temp_v4);
         if ((temp_v2 != 0) &&
-           (((temp_v2 = FUN_00298e20(temp_v5), temp_v2 != 0 &&
+           (((temp_v2 = questIsCompleted(temp_v5), temp_v2 != 0 &&
              (temp_v2 = FUN_00298e00(temp_v5), temp_v2 == 0)) || (0 < temp_v4[0])))) {
           temp_v0 = 0;
           break;
@@ -80,7 +80,7 @@ FUN_001af84c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
           FUN_002bf380(2,0x29,0xe,temp_v6,param_3,param_4);
           return temp_v3;
         }
-        temp_v1 = FUN_00298e20(temp_v5);
+        temp_v1 = questIsCompleted(temp_v5);
         if (temp_v1 == 0) {
           return temp_v3;
         }
@@ -98,20 +98,20 @@ FUN_001af84c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         return 0x5a5a5aff;
       }
       temp_v1 = FUN_00298e00(temp_v5);
-      if ((temp_v1 != 0) || (temp_v1 = FUN_00298e20(temp_v5), temp_v1 == 0)) {
+      if ((temp_v1 != 0) || (temp_v1 = questIsCompleted(temp_v5), temp_v1 == 0)) {
         FUN_002bf288(2,0x29,0xc2,temp_v6,param_3,param_4);
         return temp_v3;
       }
     }
     else {
-      temp_v1 = FUN_0028f304(temp_v5);
+      temp_v1 = questIsOfferable(temp_v5);
       if (temp_v1 == 0) {
         temp_v1 = FUN_00333aac(temp_v5);
         if (temp_v1 != 0) {
           FUN_002bf288(2,0x29,0x91,temp_v6,param_3,param_4);
         }
         else {
-          temp_v1 = FUN_00298e20(temp_v5);
+          temp_v1 = questIsCompleted(temp_v5);
           if (temp_v1 != 0) {
             FUN_002bf288(2,0x29,0x93,temp_v6,param_3,param_4);
           }
@@ -132,7 +132,7 @@ FUN_001af84c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
         }
         return 0x8400ff;
       }
-      temp_v1 = FUN_00298e20(temp_v5);
+      temp_v1 = questIsCompleted(temp_v5);
       if (temp_v1 == 0) {
         return temp_v3;
       }
@@ -153,7 +153,7 @@ FUN_001af84c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int 
     FUN_002bf288(2,0x29,0x92);
   }
   else {
-    temp_v1 = FUN_00298e20(temp_v5);
+    temp_v1 = questIsCompleted(temp_v5);
     if (temp_v1 == 0) {
       return temp_v3;
     }

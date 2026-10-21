@@ -18,7 +18,7 @@ int FUN_0020caec(...);
 int unitRecordBuild(...);
 int FUN_00344cd0(...);
 int FUN_0037c988(...);
-int FUN_003afa60(...);
+int drawInteractiveEightRowList(...);
 int FUN_004bcaa8(...);
 int getUnlockedSlotCount(...);
 int VectorSignedToFloat(...);
@@ -67,7 +67,7 @@ extern int FUN_0022e9b8(void);
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0037c988. */
-/* Supplied declaration required: FUN_003afa60. */
+/* Supplied declaration required: drawInteractiveEightRowList. */
 /* Supplied declaration required: FUN_004bcaa8. */
 /* Supplied declaration required: getUnlockedSlotCount. */
 
@@ -246,7 +246,7 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00162790(2,0xf4f4f4ff,temp_v7,(int)*(short *)(temp_v5 + 8));
     }
-    FUN_003afa60(temp_v0,temp_v6,param_5,param_1,param_2);
+    drawInteractiveEightRowList(temp_v0,temp_v6,param_5,param_1,param_2);
     efctSetSpeed();
     FUN_001835b4(2,0x1a,0x273,param_1,param_2,0x97);
     FUN_00344cd0(temp_v0 + 0x8e14,param_1,param_2,0x1a,0x2a,0x2b,0x2c,0x26,0x28,0x27,0x29,

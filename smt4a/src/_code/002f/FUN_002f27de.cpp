@@ -1,57 +1,59 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f27de` (_code @ 0x2f27de, 0x56 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: scoped-lock construction still uses an unmigrated constructor entry; local guard/iterator layout and loop entry differ, and the final zero store is not forwarded from comparison. */
+#include "classes/Obj55b28c.h"
+
+struct SharedListNode {
+    u8 unk00[8]; // 0x00
+    SharedListNode* next; // 0x08
+    u8 unk0c[0x0c]; // 0x0c
+    void* reference; // 0x18
+};
+struct SharedListIterator {
+    SharedListNode* node;
+};
+struct SharedList {
+    u8 unk00[0x10]; // 0x00
+    SharedListNode* sentinel; // 0x10
+};
+struct SharedListOwner {
+    u32 unk00;      // 0x00
+    SharedList list; // 0x04
+    u8 unk18[0x10]; // 0x18
+    u16 capacity;    // 0x28
+    u8 unk2a[6];    // 0x2a
+    u16 firstLimit;  // 0x30
+    u8 unk32[6];    // 0x32
+    u16 secondLimit; // 0x38
+    u8 unk3a[2];    // 0x3a
+    u32 count;       // 0x3c
+};
 
 extern "C" {
+void* onlineGetActiveLock(void);
+void FUN_002e6e34(void* storage, void* mutex);
+void sharedRefRelease(void* reference);
+void wordMoveOut_002f1324(SharedListIterator* old, SharedListIterator* current, s32 postfix);
+u32 wordRefsDiffer_002f3e5a(const SharedListIterator* first, const SharedListIterator* second);
+void FUN_002f3ff0(SharedList* list, const SharedListIterator* item);
 
-int FUN_002e6e34(unsigned char [12], unsigned int);
-int _ZN9Obj55b28cD1Ev(unsigned char [12]);
-int sharedRefRelease(unsigned int);
-int wordMoveOut_002f1324(unsigned char [4], int *, int);
-int FUN_002f3ff0(int, unsigned char [4]);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_002e6e34. */
-/* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
-/* Supplied declaration required: sharedRefRelease. */
-extern unsigned int onlineGetActiveLock(void);
-/* Supplied declaration required: wordMoveOut_002f1324. */
-extern int wordRefsDiffer_002f3e5a(int *, unsigned int *);
-/* Supplied declaration required: FUN_002f3ff0. */
-
-
-void FUN_002f27de(int param_1)
-
+// Releases and erases every shared reference while holding the active online lock.
+void FUN_002f27de(SharedListOwner* owner)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2 [4];
-  unsigned char temp_v3 [12];
-  int temp_v4;
-  int temp_v5;
-  
-  temp_v0 = onlineGetActiveLock();
-  FUN_002e6e34(temp_v3,temp_v0);
-  temp_v4 = *(int *)(*(int *)(param_1 + 0x14) + 8);
-  while( 1 ) {
-    temp_v5 = *(unsigned int *)(param_1 + 0x14);
-    temp_v1 = wordRefsDiffer_002f3e5a(&temp_v4,(unsigned int *)&temp_v5);
-    if (temp_v1 == 0) break;
-    sharedRefRelease(*(unsigned int *)(temp_v4 + 0x18));
-    wordMoveOut_002f1324(temp_v2,&temp_v4,0);
-    FUN_002f3ff0(param_1 + 4,temp_v2);
-  }
-  *(unsigned short *)(param_1 + 0x30) = *(unsigned short *)(param_1 + 0x28);
-  *(unsigned short *)(param_1 + 0x38) = *(unsigned short *)(param_1 + 0x28);
-  *(unsigned int *)(param_1 + 0x3c) = 0;
-  _ZN9Obj55b28cD1Ev(temp_v3);
-  return;
+    u32 lockStorage[3];
+    FUN_002e6e34(lockStorage, onlineGetActiveLock());
+    SharedListIterator current = { owner->list.sentinel->next };
+    for (;;) {
+        SharedListIterator end = { owner->list.sentinel };
+        if (!wordRefsDiffer_002f3e5a(&current, &end)) {
+            break;
+        }
+        sharedRefRelease(current.node->reference);
+        SharedListIterator old;
+        wordMoveOut_002f1324(&old, &current, 0);
+        FUN_002f3ff0(&owner->list, &old);
+    }
+    owner->firstLimit = owner->capacity;
+    owner->secondLimit = owner->capacity;
+    owner->count = 0;
+    reinterpret_cast<Obj55b28c*>(lockStorage)->Obj55b28c::~Obj55b28c();
 }
-
-} /* extern "C" */
+}

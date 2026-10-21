@@ -41,7 +41,7 @@ extern int gameGetSlotTable(void);
 extern int FUN_00291e14(void);
 extern int FUN_002a4878(int);
 extern int FUN_002b24fc(void);
-extern unsigned int FUN_002c2c4c(int);
+extern unsigned int widgetSubCallIfVisible(int);
 /* Supplied declaration required: FUN_002cc228. */
 /* Supplied declaration required: FUN_002fa1b0. */
 extern int FUN_003bcf2c(int);
@@ -89,7 +89,7 @@ void FUN_0028f740(int param_1)
   FUN_001835b4(2,0xd,0xdc,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
   efctSetSpeed();
   temp_v3 = FUN_002a4878(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc);
-  temp_v8 = FUN_002c2c4c(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc);
+  temp_v8 = widgetSubCallIfVisible(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc);
   temp_v5 = 0;
   if (temp_v5 < (int)temp_v8) {
     do {

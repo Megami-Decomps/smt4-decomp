@@ -30,11 +30,11 @@ extern BtlMain *g_btlMain;
 extern void *g_btlUiBlock;
 extern u32 DAT_00435d18;
 
-extern s32 FUN_0019e0c0(u32 job);
+extern s32 scrRunOpcodesStub(u32 job);
 extern s32 FUN_00256940(BtlMain *main, BtlState *state, s32 arg);
 extern void FUN_002568c4(s32 a, s32 b);
 extern void FUN_00256898(s32 a, s32 b);
-extern void FUN_00292dd0(s32 a);
+extern void battleSelectButtonHelpPreset(s32 a);
 extern void FUN_00242914(void *block, s32 arg);
 extern void battleResetCounterAndFlag(u32 arg);
 
@@ -49,9 +49,9 @@ s32 FUN_003c7760(BtlTask *task, BtlState *state)
         FUN_00256898(1, 0);
         task->flags |= 1;
     }
-    if (FUN_0019e0c0(task->job) == 2) {
+    if (scrRunOpcodesStub(task->job) == 2) {
         if ((state->flags & BTL_FLAG_ACTIVE) != 0) {
-            FUN_00292dd0(0);
+            battleSelectButtonHelpPreset(0);
             if ((state->flags & BTL_FLAG_UI) != 0) {
                 FUN_00242914(g_btlUiBlock, 0);
                 state->flags &= ~BTL_FLAG_UI;

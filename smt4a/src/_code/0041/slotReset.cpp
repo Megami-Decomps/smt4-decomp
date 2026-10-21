@@ -27,7 +27,7 @@ typedef struct SlotReset {
 } SlotReset;
 
 /* Resets the slot to its idle state (id 0xFF). */
-void slotReset(SlotReset *slot)
+SlotReset* slotReset(SlotReset *slot)
 {
     slot->unk08 = 0xFF;
     slot->unk20 = 0x2010000;
@@ -45,6 +45,7 @@ void slotReset(SlotReset *slot)
     slot->unk40 = 0;
     slot->unk44 = 0;
     slot->unk48 = 0;
+    return slot;
 }
 
 } /* extern "C" */

@@ -20,7 +20,7 @@ int FUN_002897f0(unsigned int, unsigned int);
 int FUN_00289880(void);
 int FUN_002898e4(void);
 int FUN_00289c98(int);
-int FUN_00289d74(int, unsigned int, int);
+int aocBufferQueueDisplay(int, unsigned int, int);
 int FUN_00289de4(int, unsigned int, int);
 int buttonHelpCreate(void);
 int messageSlotSet(...);
@@ -63,7 +63,7 @@ extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_002734ec(int);
 /* Supplied declaration required: FUN_002893ec. */
 /* Supplied declaration required: gameJumpRequestClear. */
@@ -84,7 +84,7 @@ extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: FUN_00289c98. */
 extern int campButtonHelpIsActive(void);
-/* Supplied declaration required: FUN_00289d74. */
+/* Supplied declaration required: aocBufferQueueDisplay. */
 /* Supplied declaration required: FUN_00289de4. */
 extern int FUN_00289e54(int, unsigned int, unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
@@ -105,7 +105,7 @@ extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
 /* Supplied declaration required: eventCommandStop. */
@@ -162,7 +162,7 @@ unsigned int FUN_0019f3dc(void)
         FUN_00289de4(g_aocSystem,puVar2[5],0);
         puVar2[0xb] = temp_v3;
         temp_v3 = g_aocSystem;
-        FUN_00289d74(g_aocSystem,puVar2[5],0);
+        aocBufferQueueDisplay(g_aocSystem,puVar2[5],0);
         puVar2[0xd] = temp_v3;
         if (puVar2[0xb] == 0 || temp_v3 == 0) {
           puVar2[2] = 0x5f;
@@ -183,9 +183,9 @@ unsigned int FUN_0019f3dc(void)
         }
       }
       else {
-        temp_v1 = FUN_002c5c04(temp_v7);
+        temp_v1 = asdLoadFileSyncDefault(temp_v7);
         puVar2[0xb] = temp_v1;
-        temp_v1 = FUN_002c5c04(temp_v8);
+        temp_v1 = asdLoadFileSyncDefault(temp_v8);
         puVar2[0xd] = temp_v1;
       }
       FUN_002898e4();
@@ -236,7 +236,7 @@ unsigned int FUN_0019f3dc(void)
       }
       temp_v3 = FUN_002897e0();
       if ((temp_v3 == 0) || (temp_v3 = FUN_002c1d5c(), temp_v3 != 0)) {
-        temp_v3 = FUN_0019e0c0(puVar2[0xc]);
+        temp_v3 = scrRunOpcodesStub(puVar2[0xc]);
         if (temp_v3 != 2) {
           return 0;
         }

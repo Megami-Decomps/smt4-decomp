@@ -10,7 +10,7 @@ int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_00185e84(int, int, int, int, int, int);
-int FUN_002ca71c(int, int, int);
+int statusDownCreatePanelEffects(int, int, int);
 int FUN_00389d9c(...);
 int VectorSignedToFloat(...);
 
@@ -36,7 +36,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00185e84. */
 extern int FUN_00284140(int);
-/* Supplied declaration required: FUN_002ca71c. */
+/* Supplied declaration required: statusDownCreatePanelEffects. */
 /* Supplied declaration required: FUN_00389d9c. */
 extern unsigned int FUN_003df57c(short, unsigned int);
 extern unsigned int FUN_004bcbb4(unsigned int, short);
@@ -66,7 +66,7 @@ void FUN_0037e5c0(int param_1,int param_2,int param_3)
   if (*(int *)(temp_v3 + 0x24f4) == param_1) {
     temp_v5 = 0x57d8ffff;
   }
-  FUN_002ca71c(param_2,param_3,(temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6);
+  statusDownCreatePanelEffects(param_2,param_3,(temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6);
   efctSetSpeed();
   if (temp_v0 != 0) {
     FUN_001835b4(2,0x12,0x576,param_2,param_3,0xce);

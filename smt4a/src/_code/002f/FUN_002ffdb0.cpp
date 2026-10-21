@@ -1,42 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ffdb0` (_code @ 0x2ffdb0, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: portable 16-bit byte swaps expand to shifts instead of retail REV16, with different socket/address registers. */
+#include "common.h"
+
+struct SocketAddressView {
+    u8 unk00[6];
+    u16 networkPort;
+
+    u16 port() const { return (u16)((networkPort << 8) | (networkPort >> 8)); }
+    void setPort(u16 value) { networkPort = (u16)((value << 8) | (value >> 8)); }
+};
+
+struct SocketState;
+struct NetworkStateView {
+    u8 unk00[0x10c];
+    u8 active;
+};
+
+struct SocketConnectionView {
+    u8 unk00[0x68];
+    SocketAddressView address;
+    u8 unk70[0x18];
+    u8 socket[0x190]; // 0x88
+    u32 resetAddress; // 0x218
+};
 
 extern "C" {
+NetworkStateView *FUN_002ea704(void);
+u32 FUN_002f8208(SocketState *socket, u32 option);
+u32 FUN_002f2dfc(SocketState *socket, SocketAddressView *address, u32 option);
+u32 FUN_0010de3c(SocketConnectionView *connection);
 
-int FUN_002f2dfc(int, int, int);
-
-extern int FUN_0010de3c(int);
-extern int FUN_002ea704(void);
-/* Supplied declaration required: FUN_002f2dfc. */
-extern int FUN_002f8208(int, unsigned int);
-
-
-int FUN_002ffdb0(int param_1)
-
+// Resolve the active socket address, or use the default connection handler.
+u32 FUN_002ffdb0(SocketConnectionView *connection)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = FUN_002ea704();
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002ea704(), *(char *)(temp_v0 + 0x10c) != '\0')) {
-    temp_v1 = param_1 + 0x88;
-    temp_v2 = FUN_002f8208(temp_v1,1);
-    temp_v0 = 0;
-    if (temp_v2 != 0) {
-      if (*(int *)(param_1 + 0x218) != 0) {
-        *(unsigned short *)(param_1 + 0x6e) = 0;
-      }
-      if (((*(unsigned short *)(param_1 + 0x6e) & 0xff) == 0 && *(unsigned short *)(param_1 + 0x6e) >> 8 == 0) ||
-         (FUN_002f2dfc(temp_v1,param_1 + 0x68,1), temp_v0 = temp_v1, temp_v1 == 0)) {
-        temp_v0 = FUN_0010de3c(param_1);
-      }
+    if (FUN_002ea704() != NULL && FUN_002ea704()->active != 0) {
+        SocketState *socket = reinterpret_cast<SocketState *>(connection->socket);
+        u32 result = FUN_002f8208(socket, 1);
+        if (result != 0) {
+            SocketAddressView *address = &connection->address;
+            if (connection->resetAddress != 0)
+                address->setPort(0);
+            if (address->port() == 0 ||
+                (result = FUN_002f2dfc(socket, address, 1)) == 0)
+                result = FUN_0010de3c(connection);
+        }
+        return result;
     }
-    return temp_v0;
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

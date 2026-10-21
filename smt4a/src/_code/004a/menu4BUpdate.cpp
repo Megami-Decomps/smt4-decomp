@@ -19,10 +19,10 @@ extern void FUN_004cf8dc(u8 *block, s32 page);
 extern u32 vec2GetXInt(u8 *entry);
 extern u32 vec2GetYInt(u8 *entry);
 extern void pointConvertToFloat(u8 *block, u32 a, u32 b);
-extern s32 FUN_002f036c(void);
-extern u8 FUN_002c7ca0(void);
+extern s32 gameGetMode(void);
+extern u8 statusDownGetFlag(void);
 extern s32 FUN_0035db94(void);
-extern void FUN_00184528(u8 *block, s16 page);
+extern void uiSpriteBankApplyPreset(u8 *block, s16 page);
 extern u32 FUN_002a482c(u8 *block);
 extern u32 FUN_0031d174(u8 *block);
 extern s32 statusDownGetMode(void);
@@ -41,7 +41,7 @@ void menu4BUpdate(Menu4B *obj)
     FUN_004cf8dc(obj->block0DC, obj->page);
     entry = (u8 *)obj + obj->page * 0x8C + 0xFC;
     pointConvertToFloat(obj->blockC8, vec2GetXInt(entry), vec2GetYInt(entry));
-    if (FUN_002f036c() != 0 && FUN_002c7ca0() == 0) {
+    if (gameGetMode() != 0 && statusDownGetFlag() == 0) {
         obj->state = 5;
         obj->unk18 = 0;
         if (FUN_0035db94() == 1) {
@@ -49,10 +49,10 @@ void menu4BUpdate(Menu4B *obj)
         } else {
             obj->page = 10;
         }
-        FUN_00184528(obj->block0DC, obj->page);
+        uiSpriteBankApplyPreset(obj->block0DC, obj->page);
         return;
     }
-    if (FUN_002f036c() == 0 && 0 < obj->count) {
+    if (gameGetMode() == 0 && 0 < obj->count) {
         x = FUN_002a482c(obj->block20);
         y = FUN_0031d174(obj->block20);
         if (statusDownGetMode() != 1) {

@@ -7,7 +7,7 @@ extern s32 scrGetCommandFrame(void);
 extern s32 FUN_004186a4(void);
 extern u32 FUN_004186e0(u32 value);
 extern void FUN_00418070(u32 value, s32 arg);
-extern void FUN_00418714(u32 value);
+extern void partyEntryIsAvailable(u32 value);
 extern void optionsClearFlag1(void);
 extern void scrWorkSetValue(s32 index, s32 value);
 extern s32 scrWorkGetValue(u32 index);
@@ -35,7 +35,7 @@ s32 FUN_0038b28c(void)
         }
         value = FUN_004186e0(0);
         FUN_00418070(value, 0);
-        FUN_00418714(value);
+        partyEntryIsAvailable(value);
         optionsClearFlag1();
     }
     return 1;

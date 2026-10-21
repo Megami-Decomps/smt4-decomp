@@ -10,7 +10,7 @@ int FUN_00157558(unsigned int);
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_001546e8(unsigned int);
+extern int stateValuesGetBySelector(unsigned int);
 /* Supplied declaration required: FUN_00154edc. */
 /* Supplied declaration required: surfaceCopy. */
 /* Supplied declaration required: FUN_00157558. */
@@ -33,7 +33,7 @@ unsigned int FUN_0013cd7c(void)
   
   temp_v1 = jobGetWork();
   *(unsigned char *)(temp_v1 + 0xfae) = 0;
-  temp_v2 = FUN_001546e8(0);
+  temp_v2 = stateValuesGetBySelector(0);
   if ((((temp_v2 != 0) || (*(char *)(temp_v1 + 0xfa4) == '\0')) || (*(char *)(temp_v1 + 0xfa5) == '\0'))
      || ((piVar7 = (int *)(temp_v1 + 0x1490), *piVar7 == 0 || (*(char *)(temp_v1 + 0x148c) != '\0')))) {
     return 0;
@@ -44,7 +44,7 @@ unsigned int FUN_0013cd7c(void)
   temp_v0 = 0;
   FUN_00154edc(0,*piVar7);
   *(unsigned char *)(temp_v1 + 0xfac) = temp_v0;
-  temp_v2 = FUN_001546e8(0);
+  temp_v2 = stateValuesGetBySelector(0);
   temp_v3 = *(int *)(temp_v1 + 0xfa8);
   if ((temp_v2 == 0) && ((temp_v3 >= 2 && (temp_v3 = temp_v3 - 1, temp_v3 < 1)))) {
     temp_v3 = 1;

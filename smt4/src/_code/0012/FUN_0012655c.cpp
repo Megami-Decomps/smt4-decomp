@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00141fd0(unsigned char *, int);
-int FUN_002c1d78(void);
+int asdSndEnsureCurrentSlotData(void);
 int VectorUnsignedToFloat(int, int);
 int nw_snd_SoundStartable_StartSound(unsigned char *, int, int, int);
 int nw_snd_internal_BasicSound_SetVolume(...);
@@ -21,7 +21,7 @@ extern int DAT_004e316c; /* 0x4e316c */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00141fd0. */
 extern int FUN_002bf684(unsigned char *);
-/* Supplied declaration required: FUN_002c1d78. */
+/* Supplied declaration required: asdSndEnsureCurrentSlotData. */
 /* Supplied declaration required: nw_snd_SoundStartable_StartSound. */
 /* Supplied declaration required: nw_snd_internal_BasicSound_SetVolume. */
 
@@ -58,7 +58,7 @@ int FUN_0012655c(int param_1,int param_2,unsigned int param_3)
             return temp_v2;
           }
           temp_v0 = param_1;
-          FUN_002c1d78();
+          asdSndEnsureCurrentSlotData();
           if (temp_v0 != 0) {
             temp_v1 = temp_v1 + temp_v2 * 4;
             puVar4 = &DAT_004e20ec;

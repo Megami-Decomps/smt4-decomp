@@ -12,7 +12,7 @@ int matrixCopySelectedToGlobal(float *);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b830(int);
 int FUN_002a2c7c(void);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorUnsignedToFloat(unsigned int, int);
 int __aeabi_uidivmod(void);
@@ -98,7 +98,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002a2c7c. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -386,7 +386,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
                        temp_v11 * (float)puVar10[0x5b];
                   temp_v12 = temp_v41;
                   FUN_002b70cc();
-                  FUN_002b7064();
+                  phaseCosInterpolate();
                   temp_v24 = temp_v24 + temp_v25;
                   temp_v18 = (unsigned long long)(unsigned int)temp_v8;
                   temp_v4 = 0;

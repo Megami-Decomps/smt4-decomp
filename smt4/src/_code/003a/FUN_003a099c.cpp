@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019e0c0(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int FUN_00230df0(int);
 int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_00233240(int, int);
@@ -21,7 +21,7 @@ typedef struct {
 extern unsigned char LAB_003a0b50; /* 0x3a0b50 */
 extern unsigned char LAB_003a0b60; /* 0x3a0b60 */
 
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_00230df0. */
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
@@ -72,14 +72,14 @@ void FUN_003a099c(int param_1)
           *(unsigned int *)(param_1 + 8) = 0;
           temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x160),&LAB_003a0b50);
           scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x168),temp_v0);
-          FUN_0019e0c0(*(unsigned int *)(param_1 + 0x168));
+          scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
           break;
         case 8:
           *(unsigned int *)(param_1 + 4) = 7;
           *(unsigned int *)(param_1 + 8) = 0;
           temp_v0 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x160),&LAB_003a0b60);
           scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x168),temp_v0);
-          FUN_0019e0c0(*(unsigned int *)(param_1 + 0x168));
+          scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
           break;
         default:
         }

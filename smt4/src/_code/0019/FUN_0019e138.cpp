@@ -28,7 +28,7 @@ int uiSpriteSetImageKeyframe(...);
 int eventQueueAddUniqueIfValid(...);
 int FUN_002bf4f8(...);
 int randNextInRange(...);
-int FUN_00337a0c(...);
+int objectEntryAppend(...);
 int VectorSignedToFloat(...);
 
 int FUN_001ed64c(int, unsigned int, int);
@@ -52,7 +52,7 @@ int FUN_0033c6f8(...);
 int FUN_0017fbc4(void);
 int FUN_0019a4f4(unsigned int);
 int FUN_001f53d0(unsigned int);
-int FUN_001f5e9c(unsigned int);
+int objStartTimerIfIdle(unsigned int);
 int FUN_00205cc8(unsigned int);
 int FUN_00206b80(unsigned int);
 int recordQueryStateThree(void);
@@ -66,7 +66,7 @@ int gameGlobalsSetSelected(int);
 int FUN_002bee58(int, int);
 int FUN_002bf818(...);
 int FUN_002dc55c(void);
-int FUN_0033c6d4(unsigned int);
+int targetStateClear(unsigned int);
 int FUN_0033d0f0(unsigned int);
 int FUN_0033d2a8(unsigned int, unsigned int *, unsigned int);
 int FUN_003aeb64(unsigned int, unsigned int *);
@@ -96,7 +96,7 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_001ed64c. */
 /* Supplied declaration required: FUN_001f4f14. */
 /* Supplied declaration required: FUN_001f53d0. */
-/* Supplied declaration required: FUN_001f5e9c. */
+/* Supplied declaration required: objStartTimerIfIdle. */
 /* Supplied declaration required: messageMainApplyClose. */
 /* Supplied declaration required: FUN_00205cc8. */
 /* Supplied declaration required: FUN_00206b80. */
@@ -162,15 +162,15 @@ extern unsigned int FUN_002cdd74(void);
 extern int FUN_002d0080(int);
 extern int FUN_002d0298(int);
 extern int FUN_002d8e40(void);
-extern unsigned int FUN_002d8e58(void);
+extern unsigned int partyPanelGetValue(void);
 extern int FUN_002dc3ec(int);
 /* Supplied declaration required: FUN_002dc55c. */
 extern int FUN_002e4354(void);
 extern int FUN_002f25c4(void);
 extern int btlTalkBustUpIsUnk2F8(unsigned int);
 /* Supplied declaration required: FUN_00318c5c. */
-/* Supplied declaration required: FUN_00337a0c. */
-/* Supplied declaration required: FUN_0033c6d4. */
+/* Supplied declaration required: objectEntryAppend. */
+/* Supplied declaration required: targetStateClear. */
 /* Supplied declaration required: FUN_0033c6f8. */
 /* Supplied declaration required: FUN_0033d0f0. */
 /* Supplied declaration required: FUN_0033d2a8. */
@@ -326,7 +326,7 @@ unsigned int FUN_0019e138(void)
     temp_v4 = FUN_002d0298(temp_v0 + 8);
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 0x7e38) = 2;
-      FUN_001f5e9c(temp_v0 + 0x2200);
+      objStartTimerIfIdle(temp_v0 + 0x2200);
     }
     break;
   case 6:
@@ -339,7 +339,7 @@ unsigned int FUN_0019e138(void)
       temp_v8 = temp_v0;
       FUN_003aeb64(temp_v0,&temp_v17);
       FUN_0033d2a8(*(unsigned int *)(temp_v0 + 0x7e20),&temp_v17,temp_v8);
-      FUN_0033c6d4(*(unsigned int *)(temp_v0 + 0x7e20));
+      targetStateClear(*(unsigned int *)(temp_v0 + 0x7e20));
       *(unsigned int *)(temp_v0 + 0x7e38) = 9;
       temp_v8 = g_btlUiBlock;
       temp_v12 = playSceneIsFadeInDone(g_btlUiBlock + 8);
@@ -565,9 +565,9 @@ LAB_0019e7b8:
           *(unsigned char *)(temp_v0 + 0x7e49) = 1;
           temp_v12 = FUN_002d8e40();
           if (temp_v12 == 0xb) {
-            temp_v7 = FUN_002d8e58();
+            temp_v7 = partyPanelGetValue();
             temp_v6 = FUN_002cdd74();
-            FUN_00337a0c(temp_v4,temp_v6,temp_v7);
+            objectEntryAppend(temp_v4,temp_v6,temp_v7);
           }
         }
         FUN_0028a22c();

@@ -5,7 +5,7 @@
 extern "C" {
 
 int uiSpriteSelectAnim(int, int);
-int FUN_003e48dc(unsigned int);
+void FUN_003e48dc(unsigned int);
 int FUN_003e4e4c(int);
 int FUN_004bd410(void);
 
@@ -15,7 +15,6 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 extern int FUN_00187168(int);
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_003e48dc. */
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003e4e4c. */
 /* Supplied declaration required: FUN_004bd410. */

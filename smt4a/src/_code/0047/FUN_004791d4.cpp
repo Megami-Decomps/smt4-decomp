@@ -8,12 +8,12 @@ int FUN_0013c174(...);
 int asdTMTexTableLoadSprites(...);
 int FUN_0014afd0(...);
 int FUN_0016ccb4(...);
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int FUN_001d0fcc(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
 int FUN_00441f54(...);
-int FUN_004788dc(...);
+int aocMenuInitializeSprites(...);
 int rt_memcpy_w(...);
 
 typedef int romwright_code(...);
@@ -31,14 +31,14 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: FUN_0014afd0. */
 extern unsigned int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_0016ccb4. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned char *);
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
 extern int appletIsRegistered406(void);
 /* Supplied declaration required: FUN_00441f54. */
-/* Supplied declaration required: FUN_004788dc. */
+/* Supplied declaration required: aocMenuInitializeSprites. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -70,7 +70,7 @@ void FUN_004791d4(int param_1)
   puVar2[2] = 0;
   puVar2[3] = 0;
   puVar3 = temp_v8;
-  FUN_001b57a8(puVar3,0);
+  resultPairInitialize(puVar3,0);
   temp_v1 = *puVar3;
   temp_v2 = puVar3[1];
   *puVar2 = temp_v1;
@@ -82,7 +82,7 @@ void FUN_004791d4(int param_1)
   *(unsigned int *)(param_1 + 0x218) = temp_v2;
   *(unsigned int *)(param_1 + 0x21c) = temp_v3;
   *(unsigned int *)(param_1 + 0x220) = temp_v4;
-  FUN_004788dc(param_1);
+  aocMenuInitializeSprites(param_1);
   asdTMTexTableLoadSprites(0x2f);
   temp_v0 = 0;
   do {

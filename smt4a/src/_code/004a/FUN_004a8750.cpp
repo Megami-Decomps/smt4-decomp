@@ -11,7 +11,7 @@ int dataTableGetEntries(void);
 int FUN_001a9698(void);
 int unitRecordBuild(...);
 int FUN_0035ad50(unsigned int, unsigned char [104]);
-int FUN_003c3f1c(void);
+int findSkillMetadataById(void);
 int FUN_004bcd90(unsigned char [104]);
 int randomGetUpperSixBits(...);
 int VectorFloatToUnsigned(...);
@@ -65,10 +65,10 @@ extern signed char DAT_0057f0ac; /* 0x57f0ac */
 /* Supplied declaration required: dataTableGetEntries. */
 /* Supplied declaration required: FUN_001a9698. */
 extern int gameGetSlotTable(void);
-extern int FUN_00213b5c(void);
+extern int gameDataBlocksGetTableFlag(void);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0035ad50. */
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: findSkillMetadataById. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: randomGetUpperSixBits. */
@@ -316,7 +316,7 @@ LAB_004a8864:
   temp_v3 = 0;
   do {
     temp_v7 = (unsigned int)temp_v37[temp_v3];
-    if ((temp_v7 != 0) && (FUN_003c3f1c(), temp_v7 != 0)) {
+    if ((temp_v7 != 0) && (findSkillMetadataById(), temp_v7 != 0)) {
       temp_v7 = *(unsigned char *)(temp_v7 + 3) & 0x1f;
       if (temp_v7 >= 0x20) {
         temp_v7 = 0x1f;
@@ -336,7 +336,7 @@ LAB_004a8864:
   temp_v3 = 0;
   do {
     temp_v1 = (unsigned int)*(unsigned short *)(puVar12 + temp_v3 * 2 + 0x34);
-    if (((temp_v1 != 0) && (FUN_003c3f1c(), temp_v1 != 0)) && (temp_v2 < (*(unsigned char *)(temp_v1 + 3) & 0x1f))) {
+    if (((temp_v1 != 0) && (findSkillMetadataById(), temp_v1 != 0)) && (temp_v2 < (*(unsigned char *)(temp_v1 + 3) & 0x1f))) {
       temp_v4 = 0;
       do {
         temp_v5 = temp_v7 + temp_v4 * 2;
@@ -370,7 +370,7 @@ LAB_004a8864:
       temp_v7 = (temp_v3 * piVar4[3] + temp_v6 * piVar4[2] +
                (int)(temp_v8 * temp_v10) * piVar4[1] + temp_v38 * *piVar4) *
                (*(unsigned short *)(temp_v40 + 0x9a) / 10);
-      temp_v6 = FUN_00213b5c();
+      temp_v6 = gameDataBlocksGetTableFlag();
       if (temp_v6 == 2) {
         temp_v7 = temp_v7 * 3;
       }

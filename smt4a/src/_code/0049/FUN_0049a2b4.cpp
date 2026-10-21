@@ -6,9 +6,9 @@ extern "C" {
 
 int arraySortQsort(...);
 int FUN_003343f0(int);
-int FUN_0035d8a4(void);
+int useCounterRelease(void);
 int FUN_00498ff0(int);
-int FUN_004cfe4c(int);
+int flaggedValueHolderGetTotal(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -33,9 +33,9 @@ extern int useCounterGetValue(void);
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: arraySortQsort. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_0035d8a4. */
+/* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: FUN_00498ff0. */
-/* Supplied declaration required: FUN_004cfe4c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 
 
 void FUN_0049a2b4(int param_1)
@@ -50,7 +50,7 @@ void FUN_0049a2b4(int param_1)
   
   temp_v0 = useCounterIsFinished();
   if (temp_v0 != 0) {
-    FUN_0035d8a4();
+    useCounterRelease();
     FUN_003343f0(0);
     FUN_00498ff0(param_1);
     temp_v0 = *(int *)(param_1 + 0xb40);
@@ -88,7 +88,7 @@ void FUN_0049a2b4(int param_1)
   else {
     temp_v2 = param_1 + *(int *)(param_1 + 0xb40) * 0x1002;
     temp_v4 = temp_v2 + 0xf74;
-    FUN_004cfe4c(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb60);
+    flaggedValueHolderGetTotal(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb60);
     temp_v0 = FUN_002c7c54();
     if (temp_v0 == 0xf) {
       temp_v0 = useCounterGetValue();

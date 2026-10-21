@@ -26,11 +26,11 @@ int FUN_0029be5c(...);
 int FUN_0029c2cc(...);
 int soundChannelStopAll(...);
 int asdWorkAreaReset(void);
-int FUN_002a71fc(...);
+int messageStatesSetFirst(...);
 int scrScriptProcessDestroy(void);
 int asdModelSlotRelease(...);
 int asdMdlManagerDestroy(...);
-int FUN_002a7890(void);
+int placeWinRelease(void);
 int FUN_002bf810(...);
 int FUN_002bff50(void);
 int resourceListDestroy(void);
@@ -39,10 +39,10 @@ int jobStop(...);
 int asdSequenceRequest(...);
 int useCounterSelectMode2(void);
 
-int FUN_0019e0c0(...);
+int scrRunOpcodesStub(...);
 int FUN_001d04a4(...);
 int FUN_0020ffe8(...);
-int FUN_0026374c(...);
+int placeWinStartText(...);
 int FUN_0027f94c(...);
 int FUN_00282bfc(...);
 int FUN_00287030(...);
@@ -50,7 +50,7 @@ int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int FUN_0029b8ec(...);
 int FUN_0029bb08(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int FUN_0029e17c(void);
 int useCounterStart(void);
 int FUN_0029e328(...);
@@ -125,7 +125,7 @@ extern unsigned int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_001d04a4. */
 /* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: FUN_0020ffe8. */
@@ -137,7 +137,7 @@ extern int FUN_0025a030(unsigned int);
 /* Supplied declaration required: FUN_002636d0. */
 extern int effectAreAllCompletionChecksReady(unsigned int);
 extern int effTimelineIsDone(unsigned int);
-/* Supplied declaration required: FUN_0026374c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_002637c8. */
 /* Supplied declaration required: FUN_00263988. */
 extern unsigned int FUN_00263c1c(unsigned char *);
@@ -145,7 +145,7 @@ extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027f94c. */
 /* Supplied declaration required: FUN_00281bb0. */
-extern int FUN_00282b28(void);
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00287030. */
 extern int bgmGetStateById(unsigned int);
@@ -156,7 +156,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
-extern int FUN_00293edc(unsigned int);
+extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: FUN_00294450. */
 /* Supplied declaration required: playerModelListCreate. */
 extern unsigned int *_ZN9Obj4206e8C1Ev(void);
@@ -173,7 +173,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: FUN_0029be5c. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_0029e130(void);
 /* Supplied declaration required: FUN_0029e17c. */
 extern int useCounterIsFinished(void);
@@ -189,11 +189,11 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: asdWorkAreaReset. */
 /* Supplied declaration required: FUN_002a4e98. */
 /* Supplied declaration required: FUN_002a5704. */
-/* Supplied declaration required: FUN_002a71fc. */
+/* Supplied declaration required: messageStatesSetFirst. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdModelSlotRelease. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
-/* Supplied declaration required: FUN_002a7890. */
+/* Supplied declaration required: placeWinRelease. */
 extern int FUN_002adee0(unsigned int);
 /* Supplied declaration required: FUN_002adf00. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
@@ -217,7 +217,7 @@ extern int FUN_002c2a04(unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 extern unsigned int asdLoadFileSync(unsigned char *, unsigned char *, unsigned int, unsigned int);
 extern int FUN_002c79c4(unsigned int);
 /* Supplied declaration required: useCounterSelectMode2. */
@@ -450,15 +450,15 @@ unsigned int FUN_001d99c0(void)
         }
         break;
       case 2:
-        temp_v6 = FUN_00293edc(puVar2[0xc]);
+        temp_v6 = objSlotsAllEmpty(puVar2[0xc]);
         if (temp_v6 != 0) {
           FUN_002a5704(puVar2[0xc],0);
           FUN_0029bb08(puVar2[0xc]);
           puVar2[6] = g_gameState;
           puVar2[7] = DAT_0049f920;
-          temp_v3 = FUN_002c5c04(&LAB_001da298);
+          temp_v3 = asdLoadFileSyncDefault(&LAB_001da298);
           puVar2[8] = temp_v3;
-          temp_v3 = FUN_002c5c04(&LAB_001da2b0);
+          temp_v3 = asdLoadFileSyncDefault(&LAB_001da2b0);
           puVar2[9] = temp_v3;
           temp_v6 = puVar2[8];
           FUN_00297060(temp_v6,temp_v3);
@@ -471,7 +471,7 @@ unsigned int FUN_001d99c0(void)
             pcVar10 = (char *)gameDataGetPlayerName();
           }
           FUN_00295660(0x28,pcVar10);
-          temp_v3 = FUN_002c5c04(&LAB_001da2c8);
+          temp_v3 = asdLoadFileSyncDefault(&LAB_001da2c8);
           puVar2[0xb] = temp_v3;
           temp_v6 = FUN_002c2a04(0);
           if (temp_v6 == 3) {
@@ -489,7 +489,7 @@ unsigned int FUN_001d99c0(void)
             pcVar10 = (char *)gameDataGetPlayerName();
           }
           textFormatBuffer(temp_v7,&DAT_003ff040,pcVar10);
-          FUN_0026374c(temp_v7);
+          placeWinStartText(temp_v7);
           puVar2[5] = 0;
           scrScriptProcessStartEntry(puVar2[10],
                        *(unsigned int *)((unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x24 + 0x432d18));
@@ -498,7 +498,7 @@ unsigned int FUN_001d99c0(void)
         }
         break;
       case 3:
-        temp_v6 = FUN_0019e0c0(puVar2[10]);
+        temp_v6 = scrRunOpcodesStub(puVar2[10]);
         if (temp_v6 != 2) break;
         scrScriptProcessStartEntry(puVar2[10],*(unsigned int *)((unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x24 + 0x432d18))
         ;
@@ -506,7 +506,7 @@ unsigned int FUN_001d99c0(void)
         puVar2[4] = temp_v3;
         break;
       case 5:
-        temp_v6 = FUN_0019e0c0(puVar2[10]);
+        temp_v6 = scrRunOpcodesStub(puVar2[10]);
         if (temp_v6 != 2) break;
         puVar2[5] = 0;
         if (puVar2[0x179] != 0) {
@@ -625,14 +625,14 @@ LAB_001da638:
           }
         }
         else {
-          FUN_0019e0c0(puVar2[10]);
+          scrRunOpcodesStub(puVar2[10]);
           temp_v6 = useCounterIsFinished();
           if (temp_v6 != 0) {
             FUN_0029e17c();
             puVar2[4] = 99;
             puVar2[5] = 0;
-            FUN_0029c3c0(0,10,0xff);
-            FUN_0029c3c0(1,10,0xff);
+            slotSetRequest(0,10,0xff);
+            slotSetRequest(1,10,0xff);
           }
           else {
             temp_v6 = FUN_0029e130();
@@ -714,12 +714,12 @@ LAB_001da638:
         break;
       case 9:
         if (*(char *)(puVar2 + 0x157) != '\0') {
-          FUN_0029c3c0(0,10,0xff);
-          FUN_0029c3c0(1,10,0xff);
+          slotSetRequest(0,10,0xff);
+          slotSetRequest(1,10,0xff);
         }
         else {
-          FUN_0029c3c0(0,0x14,0xff);
-          FUN_0029c3c0(1,0x14,0xff);
+          slotSetRequest(0,0x14,0xff);
+          slotSetRequest(1,0x14,0xff);
         }
         puVar2[4] = puVar2[4] + 1;
         puVar2[5] = 0;
@@ -738,7 +738,7 @@ LAB_001da638:
                   pcVar10 = (char *)gameDataGetPlayerName();
                 }
                 textFormatBuffer(temp_v7,&DAT_003ff040,pcVar10);
-                FUN_0026374c(temp_v7);
+                placeWinStartText(temp_v7);
                 scrScriptProcessStartEntry(puVar2[10],0x18);
                 puVar2[4] = 5;
                 buttonHelpSetPreset(0xbd);
@@ -747,7 +747,7 @@ LAB_001da638:
               }
             }
             else {
-              temp_v6 = FUN_00282b28();
+              temp_v6 = screenFadeIsBusy();
               if ((temp_v6 == 0) &&
                  ((*(char *)(puVar2 + 0x157) != '\0' || ((int)puVar2[0x156] >= 0x87)))) {
                 puVar2[4] = 0x14;
@@ -795,7 +795,7 @@ LAB_001da638:
       }
       else if (temp_v6 != 0x16) {
         if (temp_v6 != 0x62) {
-          if ((temp_v6 == 99) && (temp_v6 = FUN_00282b28(), temp_v6 == 0)) {
+          if ((temp_v6 == 99) && (temp_v6 = screenFadeIsBusy(), temp_v6 == 0)) {
             if (puVar2[10] != 0) {
               scrScriptProcessDestroy();
               puVar2[10] = 0;
@@ -845,7 +845,7 @@ LAB_001da638:
               }
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < 3);
-            FUN_002a7890();
+            placeWinRelease();
             uiFadeRelease();
             buttonHelpRelease();
             temp_v6 = 0;
@@ -860,7 +860,7 @@ LAB_001da638:
               }
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < 4);
-            FUN_002a71fc(1);
+            messageStatesSetFirst(1);
             if (*(char *)((int)puVar2 + 5) != '\0') {
               FUN_002a03d8(0,1);
               FUN_002a03d8(1);
@@ -895,7 +895,7 @@ LAB_001da638:
           }
         }
         else {
-          temp_v6 = FUN_0019e0c0(puVar2[10]);
+          temp_v6 = scrRunOpcodesStub(puVar2[10]);
           if (temp_v6 == 2) {
             FUN_0029be5c(0x21,1);
             *(unsigned char *)(puVar2 + 0x157) = 0;
@@ -922,17 +922,17 @@ LAB_001da638:
         }
       }
       else {
-        temp_v6 = FUN_0019e0c0(puVar2[10]);
+        temp_v6 = scrRunOpcodesStub(puVar2[10]);
         if (temp_v6 == 2) {
           puVar2[4] = 99;
           puVar2[5] = 0;
-          FUN_0029c3c0(0,10,0xff);
-          FUN_0029c3c0(1,10,0xff);
+          slotSetRequest(0,10,0xff);
+          slotSetRequest(1,10,0xff);
         }
       }
     }
     else {
-      temp_v6 = FUN_0019e0c0(puVar2[10]);
+      temp_v6 = scrRunOpcodesStub(puVar2[10]);
       if (temp_v6 == 2) {
         puVar2[4] = 6;
         puVar2[5] = 0;
@@ -941,7 +941,7 @@ LAB_001da638:
     }
   }
   else {
-    temp_v6 = FUN_00282b28();
+    temp_v6 = screenFadeIsBusy();
     if (temp_v6 == 0) {
       FUN_0028d5ac();
       FUN_0029e17c();

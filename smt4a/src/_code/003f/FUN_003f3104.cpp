@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_003f2f58(void);
+int dataTableLookupCharacter(void);
 
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_003f2f58. */
+/* Supplied declaration required: dataTableLookupCharacter. */
 
 
 unsigned short FUN_003f3104(int param_1)
@@ -25,7 +25,7 @@ unsigned short FUN_003f3104(int param_1)
   temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x62);
   FUN_00184310();
   temp_v0 = (*(unsigned int *)(temp_v0 + 0x34) & 0x1fffff) >> 0xe;
-  FUN_003f2f58();
+  dataTableLookupCharacter();
   temp_v1 = randRange(0xb);
   temp_v2 = randRange(0xd);
   temp_v3 = gameDataFlagTestBit(6);

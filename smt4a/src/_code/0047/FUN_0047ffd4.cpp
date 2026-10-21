@@ -15,7 +15,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00192608. */
-extern int FUN_002625b0(unsigned short, unsigned int);
+extern int affinityShouldReplaceState(unsigned short, unsigned int);
 
 
 void FUN_0047ffd4(int param_1,unsigned short *param_2)
@@ -52,7 +52,7 @@ void FUN_0047ffd4(int param_1,unsigned short *param_2)
     do {
       if (temp_v8[temp_v2] != 0) {
         temp_v0 = ((int)*(short *)(temp_v8[temp_v2] + temp_v4) & 0x3ffffU) >> 10;
-        temp_v3 = FUN_002625b0(*param_2 >> 10,temp_v0);
+        temp_v3 = affinityShouldReplaceState(*param_2 >> 10,temp_v0);
         if (temp_v3 != 0) {
           *param_2 = (unsigned short)(temp_v0 << 10) | (*param_2 & 0x3ff);
           temp_v7 = (int)((unsigned int)*(unsigned short *)(temp_v8[temp_v2] + temp_v4) << 0x16) >> 0x16;

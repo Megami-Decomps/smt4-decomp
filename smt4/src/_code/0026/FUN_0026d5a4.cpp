@@ -3,9 +3,9 @@
 extern "C" {
 
 int FUN_0026d654(int arg);
-int FUN_00293348(int a, int b);
+int partyPanelSetState(int a, int b);
 int FUN_00298d28(int a, int b);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int timerStart(void *timer, int a, int b);
 
 void FUN_0026d5a4(void)
@@ -29,10 +29,10 @@ void FUN_0026d5a4(void)
     FUN_00298d28(0, 0);
     state = scene->state;
     if ((state != 1 && state != 6) && (state != 7)) {
-        FUN_0029ca58();
+        beginStatusPanelClose();
     }
     FUN_0026d654(1);
-    FUN_00293348(0x15, 1);
+    partyPanelSetState(0x15, 1);
 }
 
 } /* extern "C" */

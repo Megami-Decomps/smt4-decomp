@@ -14,7 +14,7 @@ int sharedRefHolderReplace(unsigned int *, int);
 extern unsigned char DAT_0055970c; /* 0x55970c */
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: FUN_002e9f00. */
@@ -36,7 +36,7 @@ void FUN_002fb028(unsigned int *param_1,unsigned int param_2,unsigned int param_
   uStack_14 = param_3;
   uStack_10 = param_4;
   if (*(char *)(param_1 + 4) == '\x01') {
-    temp_v0 = FUN_002e6e26();
+    temp_v0 = onlineContextGetInstance();
     FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
     if (*(char *)(param_1 + 4) == '\x01') {
       FUN_002e9f00(param_1,4);

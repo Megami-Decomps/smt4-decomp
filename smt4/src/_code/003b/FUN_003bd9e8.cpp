@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022abe0(void);
 int btlMainFindEntryByListedId(unsigned int, unsigned int);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0022abe0. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 extern unsigned int btlGetMainState(void);
 
 
@@ -47,7 +47,7 @@ void FUN_003bd9e8(unsigned int param_1)
   temp_v1 = 0;
   do {
     if (temp_v2[temp_v1] != 0) {
-      FUN_00283e48();
+      passiveSkillLookupRecord();
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 9);

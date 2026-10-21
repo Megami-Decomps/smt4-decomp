@@ -9,7 +9,7 @@ int FUN_002b6dd8(...);
 int FUN_0028f694(...);
 int FUN_0028f870(...);
 int gameGetUnitRecord(...);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
@@ -50,10 +50,9 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6dd8. */
-extern int FUN_002bce00(unsigned int);
+extern int aocIndexValueOrDefault(unsigned int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -116,7 +115,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     FUN_002bf288(2,0x1d,0x43d,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0x6f)
     ;
     temp_v2 = FUN_002bf4f8(0x1d,0x440);
-    temp_v12 = FUN_002bce00(temp_v9);
+    temp_v12 = aocIndexValueOrDefault(temp_v9);
     if (temp_v12 != 0) {
       temp_v14 = 0xff;
       temp_v3 = FUN_0029efc0(temp_v11);
@@ -169,7 +168,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
       temp_v6 = (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10);
       temp_v1 = (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8);
       temp_v2 = -1;
-      FUN_002b6758(temp_v2,temp_v1 + param_1,temp_v6 + param_2,0x6f,0);
+      uiDrawDemonIcon(temp_v2,temp_v1 + param_1,temp_v6 + param_2,0x6f,0);
     }
     else {
       temp_v3 = gameGetUnitRecord(temp_v8);
@@ -178,7 +177,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
         temp_v6 = (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10);
         temp_v1 = (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8);
         temp_v2 = (int)*(short *)(temp_v3 + 0x46);
-        FUN_002b6758(temp_v2,temp_v1 + param_1,temp_v6 + param_2,0x6f,0);
+        uiDrawDemonIcon(temp_v2,temp_v1 + param_1,temp_v6 + param_2,0x6f,0);
       }
     }
     FUN_002bed3c();
@@ -199,7 +198,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     FUN_0028f694(*(short *)(temp_v7 + 8) + param_1,*(short *)(temp_v7 + 10) + param_2,
                  (int)*(short *)(temp_v5 + temp_v1 * 2 + 0xe0c));
     temp_v1 = FUN_002bf4f8(0x1d,0x449);
-    temp_v12 = FUN_002bce00(temp_v9);
+    temp_v12 = aocIndexValueOrDefault(temp_v9);
     if (temp_v12 != 0) {
       temp_v4 = 0xffffffff;
       temp_v2 = FUN_0029efc0(temp_v11);
@@ -258,7 +257,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
       temp_v3 = (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v7 + 10);
       temp_v7 = (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8);
       temp_v2 = -1;
-      FUN_002b6758(temp_v2,temp_v7 + param_1,temp_v3 + param_2,0x88,0);
+      uiDrawDemonIcon(temp_v2,temp_v7 + param_1,temp_v3 + param_2,0x88,0);
     }
     else {
       temp_v2 = gameGetUnitRecord(temp_v8);
@@ -267,7 +266,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
         temp_v3 = (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v7 + 10);
         temp_v2 = (int)*(short *)(temp_v2 + 0x46);
         temp_v7 = (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8);
-        FUN_002b6758(temp_v2,temp_v7 + param_1,temp_v3 + param_2,0x88,0);
+        uiDrawDemonIcon(temp_v2,temp_v7 + param_1,temp_v3 + param_2,0x88,0);
       }
     }
     FUN_002bed3c();

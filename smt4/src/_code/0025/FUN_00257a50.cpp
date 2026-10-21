@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001e0450(unsigned int, int, int);
+int uniteBuildInheritedSkillCandidates(unsigned int, int, int);
 int FUN_0029c528(unsigned int, int, int, int, int);
 int FUN_0029c6b0(int);
 int FUN_0029cde0(int, int);
@@ -18,13 +18,13 @@ typedef struct {
 
 extern unsigned int *g_unite; /* 0x43dd68 */
 
-/* Supplied declaration required: FUN_001e0450. */
+/* Supplied declaration required: uniteBuildInheritedSkillCandidates. */
 /* Supplied declaration required: FUN_0029c528. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern int FUN_0029c8f4(int);
+extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: FUN_0029cde0. */
 /* Supplied declaration required: FUN_0029dc74. */
-extern int FUN_002b066c(unsigned int);
+extern int partyMemberFindById(unsigned int);
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -45,10 +45,10 @@ unsigned int FUN_00257a50(int param_1,int param_2,int param_3,unsigned int param
       if (param_3 != 2) {
         return 0;
       }
-      temp_v2 = FUN_002b066c((*puVar5 & 0x3fffffff) >> 0xf);
+      temp_v2 = partyMemberFindById((*puVar5 & 0x3fffffff) >> 0xf);
     }
     else {
-      temp_v2 = FUN_002b066c(*puVar5 & 0x7fff);
+      temp_v2 = partyMemberFindById(*puVar5 & 0x7fff);
     }
     if (temp_v2 == 0) {
       return 0;
@@ -61,20 +61,20 @@ unsigned int FUN_00257a50(int param_1,int param_2,int param_3,unsigned int param
     }
     FUN_0029dc74((g_unite[param_2 * 2 + 0x250f] & 0x1ffff) >> 2,param_1,0x1fffc,param_4,param_4
                 );
-    temp_v2 = FUN_002b066c(*puVar5 & 0x7fff);
-    temp_v0 = FUN_002b066c((*puVar5 & 0x3fffffff) >> 0xf);
+    temp_v2 = partyMemberFindById(*puVar5 & 0x7fff);
+    temp_v0 = partyMemberFindById((*puVar5 & 0x3fffffff) >> 0xf);
     if (temp_v2 == 0 || temp_v0 == 0) {
       return 0;
     }
     FUN_0029c528(*puVar1,temp_v2,temp_v0,0,param_1);
-    FUN_001e0450((puVar1[param_2 * 2 + 0x250f] & 0x1ffff) >> 2,temp_v2,temp_v0);
+    uniteBuildInheritedSkillCandidates((puVar1[param_2 * 2 + 0x250f] & 0x1ffff) >> 2,temp_v2,temp_v0);
     temp_v2 = 0;
     do {
       if (*(short *)((int)puVar1 + temp_v2 * 2 + 0x9020) != 0) {
         temp_v0 = param_1 + 0x34;
         FUN_0029cde0(temp_v0,8);
         if (temp_v0 == 0) {
-          temp_v0 = FUN_0029c8f4(param_1);
+          temp_v0 = flagCountUnlockedSlots(param_1);
           temp_v1 = 0;
           if (temp_v1 < temp_v0) {
             do {

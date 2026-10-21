@@ -1,31 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c7bb0` (_code @ 0x2c7bb0, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+void *dataTable04FindById(u32 id);
+s32 FUN_0028809c(u32 user, s32 target, void *record, s32 apply, s32 *result);
 
-int dataTable04FindById(void);
-int FUN_0028809c(unsigned int, unsigned int, int, int, unsigned int *);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-/* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_0028809c. */
-
-
-void FUN_002c7bb0(unsigned int param_1,unsigned int param_2,int param_3,unsigned int *param_4)
-
+// Resolve table 4's record and apply it to the requested target.
+s32 FUN_002c7bb0(u32 user, s32 target, u32 id, s32 *result)
 {
-/* irregular: 2 native warning(s); review required */
-  *param_4 = 0;
-  dataTable04FindById();
-  if (param_3 != 0) {
-    FUN_0028809c(param_1,param_2,param_3,1,param_4);
-  }
-  return;
+    *result = 0;
+    void *record = dataTable04FindById(id);
+    if (record == NULL) {
+        return 1;
+    }
+    return FUN_0028809c(user, target, record, 1, result);
 }
-
-} /* extern "C" */
+}

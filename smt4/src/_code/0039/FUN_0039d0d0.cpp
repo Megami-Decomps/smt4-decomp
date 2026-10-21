@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int effectSetByteSpeed(...);
 int FUN_002b0750(...);
 int drawSetColorFromRGBA8(...);
@@ -33,7 +33,7 @@ extern signed char DAT_0049fd00; /* 0x49fd00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: effectSetByteSpeed. */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -60,7 +60,7 @@ void FUN_0039d0d0(int param_1)
   float temp_v7;
   float temp_v8;
   
-  FUN_00231bb8(param_1 + 0x164,&temp_v7);
+  pairCopy(param_1 + 0x164,&temp_v7);
   if (DAT_0049fcfc == 0) {
     temp_v1 = FUN_002c5d80(1);
     FUN_002bee04(g_titleScene,3,temp_v1);

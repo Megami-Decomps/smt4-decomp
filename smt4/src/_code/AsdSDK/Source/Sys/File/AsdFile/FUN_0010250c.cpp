@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0010d0f8(void);
 int FUN_0010f5dc(void);
 int FUN_0010f698(unsigned char *, int, int, unsigned int);
-int FUN_0010f73c(int, int, int);
+int resourceCallDefaultOptions(int, int, int);
 int FUN_0010f764(void);
 int FUN_0010f7b8(int, int, int);
-int FUN_0010f7e4(int, int, unsigned int, unsigned int);
+int romPathForward(int, int, unsigned int, unsigned int);
 int FUN_002c5254(int *, unsigned int, int);
 int FUN_002c526c(void);
 int FUN_002c52dc(int *, int, int);
@@ -33,10 +33,10 @@ extern unsigned int g_asdFileEvent; /* 0x465028 */
 /* Supplied declaration required: FUN_0010d0f8. */
 /* Supplied declaration required: FUN_0010f5dc. */
 /* Supplied declaration required: FUN_0010f698. */
-/* Supplied declaration required: FUN_0010f73c. */
+/* Supplied declaration required: resourceCallDefaultOptions. */
 /* Supplied declaration required: FUN_0010f764. */
 /* Supplied declaration required: FUN_0010f7b8. */
-/* Supplied declaration required: FUN_0010f7e4. */
+/* Supplied declaration required: romPathForward. */
 /* Supplied declaration required: FUN_002c5254. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: FUN_002c52dc. */
@@ -62,13 +62,13 @@ void FUN_0010250c(void)
   DAT_00465010 = 0;
   FUN_0010f5dc();
   temp_v0 = 0x10;
-  FUN_0010f73c(0x10,0x10,1);
+  resourceCallDefaultOptions(0x10,0x10,1);
   temp_v1 = 0x100;
   temp_v2 = 1;
   asdMemoryAlloc(0x100,0x100,0,temp_v0);
   temp_v2 = 1;
   DAT_00465008 = temp_v1;
-  FUN_0010f7e4(0x10,0x10,temp_v1,temp_v0);
+  romPathForward(0x10,0x10,temp_v1,temp_v0);
   temp_v0 = 0x10;
   FUN_0010f7b8(0x10,0x10,1);
   temp_v1 = 0x100;

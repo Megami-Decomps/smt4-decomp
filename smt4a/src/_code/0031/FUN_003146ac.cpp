@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0046e800(int, unsigned int);
 int flagValueAdd(unsigned int, int);
-int FUN_004813bc(...);
+int gamePackedFlagTest(...);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -41,7 +41,7 @@ extern int dataTableGetEntries(void);
 extern int FUN_001ba3d4(unsigned int);
 /* Supplied declaration required: FUN_0046e800. */
 /* Supplied declaration required: flagValueAdd. */
-/* Supplied declaration required: FUN_004813bc. */
+/* Supplied declaration required: gamePackedFlagTest. */
 
 
 unsigned int FUN_003146ac(unsigned int param_1,int param_2)
@@ -112,7 +112,7 @@ unsigned int FUN_003146ac(unsigned int param_1,int param_2)
                 *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xcac) = temp_v10[0];
                 *(int *)(temp_v2 + 0xcbc) = (int)(char)psVar10[3];
                 *(unsigned char *)(temp_v2 + 0xcdc) = 1;
-                temp_v3 = FUN_004813bc(temp_v10[0]);
+                temp_v3 = gamePackedFlagTest(temp_v10[0]);
                 if (temp_v3 == 0) {
                   *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 0xccc) = 1;
                 }
@@ -181,7 +181,7 @@ LAB_00314960:
                   temp_v8 = temp_v2 + temp_v9 * 4;
                   *(unsigned int *)(temp_v8 + 0xcac) = temp_v10[temp_v9];
                   *(int *)(temp_v8 + 0xcbc) = temp_v6;
-                  temp_v8 = FUN_004813bc();
+                  temp_v8 = gamePackedFlagTest();
                   if (temp_v8 == 0) {
                     *(int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v9 * 4 + 0xccc) = temp_v5;
                   }
@@ -210,7 +210,7 @@ LAB_00314960:
                 *(unsigned int *)(temp_v5 + 0xcac) = temp_v10[temp_v9];
                 *(int *)(temp_v5 + 0xcbc) = temp_v8;
                 *(unsigned char *)(temp_v2 + 0xcdc) = 1;
-                temp_v5 = FUN_004813bc(*(unsigned int *)(temp_v5 + 0xcac));
+                temp_v5 = gamePackedFlagTest(*(unsigned int *)(temp_v5 + 0xcac));
                 if (temp_v5 == 0) {
                   *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + temp_v9 * 4 + 0xccc) = 1;
                 }

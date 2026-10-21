@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002664d8(int);
 int FUN_00266584(unsigned int);
-int FUN_002666a0(int, int, unsigned int);
+int objSetBaseAndValue(int, int, unsigned int);
 int FUN_00266a2c(void);
 int FUN_002702dc(void);
 int FUN_0027b2b4(unsigned int, unsigned int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002664d8. */
 /* Supplied declaration required: FUN_00266584. */
-/* Supplied declaration required: FUN_002666a0. */
+/* Supplied declaration required: objSetBaseAndValue. */
 /* Supplied declaration required: FUN_00266a2c. */
 /* Supplied declaration required: FUN_002702dc. */
 /* Supplied declaration required: FUN_0027b2b4. */
@@ -94,7 +94,7 @@ unsigned int FUN_002fb7dc(void)
     *(unsigned int *)(temp_v0 + 0xec) = *(unsigned int *)(temp_v0 + 0xec) & 0xfffffffd;
     FUN_00281784();
     FUN_00266584(*(unsigned int *)(temp_v0 + 0x40));
-    FUN_002666a0(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
+    objSetBaseAndValue(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
     FUN_002664d8(temp_v0 + 0xec);
     DAT_0049f934 = 0;
     DAT_0049fb46 = 1;

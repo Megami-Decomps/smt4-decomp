@@ -15,8 +15,8 @@ int FUN_00290c28(...);
 int entryListSetPhase(...);
 int FUN_002a1850(...);
 int effectSpawnPositionDefault(...);
-int FUN_003222fc(...);
-int FUN_0032c5ec(...);
+void gfxDrawOffsetTwoColorRect(int, int, int, int, unsigned int, unsigned int);
+int effectDrawProjectedCircleFan(...);
 int FUN_0032c808(void);
 int FUN_0032c810(...);
 int FUN_003762c0(...);
@@ -37,7 +37,7 @@ typedef struct {
 } param_3_stack;
 
 extern int g_renderCtx; /* 0x59dbb4 */
-extern float DAT_005c10c4; /* 0x5c10c4 */
+extern float g_uiDrawOffset; /* 0x5c10c4 */
 extern float DAT_005c10c8; /* 0x5c10c8 */
 extern unsigned int *DAT_006471a0; /* 0x6471a0 */
 extern unsigned int *DAT_006471b4; /* 0x6471b4 */
@@ -61,8 +61,8 @@ extern unsigned int FUN_001c5b4c(unsigned int);
 /* Supplied declaration required: entryListSetPhase. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: effectSpawnPositionDefault. */
-/* Supplied declaration required: FUN_003222fc. */
-/* Supplied declaration required: FUN_0032c5ec. */
+/* Supplied declaration required: gfxDrawOffsetTwoColorRect. */
+/* Supplied declaration required: effectDrawProjectedCircleFan. */
 /* Supplied declaration required: FUN_0032c808. */
 /* Supplied declaration required: FUN_0032c810. */
 /* Supplied declaration required: FUN_003762c0. */
@@ -171,7 +171,7 @@ joined_r0x003a122c:
     case 2:
       temp_v15 = 0xff00ffff;
       temp_v16 = 0xff00ffff;
-      FUN_003222fc(param_2[2] - 1,param_2[3] - 1,3);
+      gfxDrawOffsetTwoColorRect(param_2[2] - 1,param_2[3] - 1,3,3,temp_v15,temp_v16);
       break;
     case 3:
       temp_v15 = param_2[4];
@@ -180,7 +180,7 @@ joined_r0x003a122c:
       temp_v1 = param_2[3] - 1;
       temp_v2 = param_2[2] - 1;
       temp_v16 = temp_v15;
-      FUN_003222fc(temp_v2,temp_v1,temp_v7,temp_v4);
+      gfxDrawOffsetTwoColorRect(temp_v2,temp_v1,temp_v7,temp_v4,temp_v15,temp_v16);
       break;
     case 4:
       temp_v15 = param_2[6];
@@ -189,7 +189,7 @@ joined_r0x003a122c:
       temp_v1 = param_2[3];
       temp_v7 = param_2[4];
       temp_v4 = param_2[5];
-      FUN_003222fc(temp_v2,temp_v1,temp_v7,temp_v4);
+      gfxDrawOffsetTwoColorRect(temp_v2,temp_v1,temp_v7,temp_v4,temp_v15,temp_v16);
       break;
     case 5:
       temp_v15 = param_2[6];
@@ -202,8 +202,8 @@ joined_r0x003a122c:
       temp_v9 = (float)VectorSignedToFloat(param_2[4],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v8 = (float)VectorSignedToFloat(param_2[5],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v3 = param_2[6];
-      temp_v12 = romwright_piece_4_4((int)(temp_v11 + DAT_005c10c8),(int)(temp_v10 + DAT_005c10c4));
-      temp_v13 = romwright_piece_4_4((int)(temp_v8 + DAT_005c10c8),(int)(temp_v9 + DAT_005c10c4));
+      temp_v12 = romwright_piece_4_4((int)(temp_v11 + DAT_005c10c8),(int)(temp_v10 + g_uiDrawOffset));
+      temp_v13 = romwright_piece_4_4((int)(temp_v8 + DAT_005c10c8),(int)(temp_v9 + g_uiDrawOffset));
       temp_v1 = FUN_001692ac(1);
       piVar10 = (int *)(temp_v2 + 0x1258);
       temp_v6 = *piVar10;
@@ -268,7 +268,7 @@ joined_r0x003a122c:
     case 10:
       temp_v7 = param_2[8];
       nn_math_ARMv6_MTX44TransposeAsm(&temp_v15,param_2 + 9);
-      FUN_0032c5ec(param_2 + 2,temp_v7,&temp_v15);
+      effectDrawProjectedCircleFan(param_2 + 2,temp_v7,&temp_v15);
       break;
     case 0xb:
       puVar11 = (unsigned int *)param_2[2];

@@ -31,7 +31,7 @@ extern unsigned int eventCommandGetPendingCleanup(void);
 /* Supplied declaration required: FUN_00237da0. */
 /* Supplied declaration required: FUN_00238e20. */
 /* Supplied declaration required: FUN_00238f08. */
-extern int FUN_00239278(void);
+extern int keyedRecordCountGet(void);
 /* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
 /* Supplied declaration required: nodeGroupRelease. */
 /* Supplied declaration required: nodeGroupReleaseAlt. */
@@ -40,9 +40,9 @@ extern int FUN_00239278(void);
 /* Supplied declaration required: FUN_002e5154. */
 extern int FUN_00330ad4(unsigned char, unsigned int);
 /* Supplied declaration required: FUN_0035bc4c. */
-extern int FUN_00389c88(unsigned char, int);
+extern int keyedRecordGetEntryValue(unsigned char, int);
 extern int keyedRecordGetKey(void);
-extern int FUN_0039aee8(unsigned char);
+extern int keyedRecordGetValue(unsigned char);
 /* Supplied declaration required: keyedGetEntryValue. */
 extern unsigned long long *FUN_003c0d64(unsigned char, int);
 extern int FUN_003c5db4(unsigned char, int);
@@ -72,10 +72,10 @@ void FUN_002c17dc(unsigned int *param_1)
   
   temp_v2 = 0;
   if ((int)param_1[1] <= (int)param_1[2]) {
-    temp_v0 = FUN_00239278();
+    temp_v0 = keyedRecordCountGet();
     if (-1 < (int)((temp_v0 - (unsigned int)*(unsigned char *)(param_1 + 0xc)) - 1)) {
       temp_v0 = keyedRecordGetKey();
-      temp_v1 = FUN_0039aee8(*(unsigned char *)(param_1 + 0xc));
+      temp_v1 = keyedRecordGetValue(*(unsigned char *)(param_1 + 0xc));
       if (0 < temp_v1) {
         do {
           temp_v1 = FUN_003c5db4(*(unsigned char *)(param_1 + 0xc),temp_v2);
@@ -87,7 +87,7 @@ void FUN_002c17dc(unsigned int *param_1)
             puVar3 = (unsigned long long *)FUN_003c0d64(*(unsigned char *)(param_1 + 0xc),temp_v2);
             temp_v5 = *puVar3;
             temp_v7 = *(unsigned int *)(puVar3 + 1);
-            temp_v1 = FUN_00389c88(*(unsigned char *)(param_1 + 0xc),temp_v2);
+            temp_v1 = keyedRecordGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
             if (temp_v1 < 1) {
               temp_v1 = 1;
             }
@@ -147,7 +147,7 @@ void FUN_002c17dc(unsigned int *param_1)
             }
           }
           temp_v2 = temp_v2 + 1;
-          temp_v1 = FUN_0039aee8(*(unsigned char *)(param_1 + 0xc));
+          temp_v1 = keyedRecordGetValue(*(unsigned char *)(param_1 + 0xc));
         } while (temp_v2 < temp_v1);
       }
     }

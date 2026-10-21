@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023f79c` (_code @ 0x23f79c, 0x328 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct BtlMainState;
 
 extern "C" {
 
 int CONCAT44(double, double);
 int FUN_0027da30(int, int);
-int FUN_00336368(int, unsigned int);
+void btlAssignGroupedActionOrder(BtlMainState *, unsigned int);
 int FUN_003364d0(int, unsigned int);
 int FUN_003c1964(int);
 int VectorSignedToFloat(int, int);
@@ -26,7 +27,6 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_0027da30. */
-/* Supplied declaration required: FUN_00336368. */
 /* Supplied declaration required: FUN_003364d0. */
 /* Supplied declaration required: FUN_003c1964. */
 
@@ -174,7 +174,7 @@ LAB_0023f9ec:
       temp_v6 = temp_v6 + 1;
     } while (temp_v6 < 3);
     FUN_003364d0(temp_v17,temp_v18);
-    FUN_00336368(temp_v17,temp_v18);
+    btlAssignGroupedActionOrder((BtlMainState *)temp_v17, temp_v18);
   }
   return;
 }

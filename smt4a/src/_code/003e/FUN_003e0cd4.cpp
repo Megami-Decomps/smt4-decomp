@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00229ffc(...);
-int FUN_003d9164(...);
-int FUN_003e9cd0(...);
+int eventCommandRangeCheck(...);
+int eventCommandClearPending(...);
+int stateFinishIfPresent(...);
 
 typedef struct fn_003e0cd4_arg1 fn_003e0cd4_arg1;
 struct fn_003e0cd4_arg1 {
@@ -35,7 +35,7 @@ typedef struct {
 
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_00573830; /* 0x573830 */
 extern unsigned int DAT_00573834; /* 0x573834 */
 extern unsigned int DAT_00573838; /* 0x573838 */
@@ -48,9 +48,9 @@ extern unsigned int DAT_00573860; /* 0x573860 */
 extern unsigned int DAT_00573864; /* 0x573864 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
-/* Supplied declaration required: FUN_00229ffc. */
-/* Supplied declaration required: FUN_003d9164. */
-/* Supplied declaration required: FUN_003e9cd0. */
+/* Supplied declaration required: eventCommandRangeCheck. */
+/* Supplied declaration required: eventCommandClearPending. */
+/* Supplied declaration required: stateFinishIfPresent. */
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int FUN_004a96d4(unsigned int);
 extern int FUN_004f2708(int, fn_003e0cd4_arg1 *, unsigned int);
@@ -78,7 +78,7 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
   unsigned int *puVar15;
   
   if ((((param_2[1].field_0x17 == '\0') || (temp_v8 = chainCountIdUnflagged(g_btlActionReflect,param_1), temp_v8 < 1))
-      && (temp_v8 = recordAreAllCountsNonpositive(DAT_00573808), temp_v8 != 0)) &&
+      && (temp_v8 = recordAreAllCountsNonpositive(g_btlAux), temp_v8 != 0)) &&
      (((param_2->field_0x45a0 & DAT_00573860) == 0 && (*(unsigned int *)(param_2 + 1) & DAT_00573864) == 0
       || (temp_v8 = FUN_004a96d4(g_btlUiBlock), temp_v8 != 0)))) {
     temp_v7 = DAT_00573854;
@@ -136,12 +136,12 @@ unsigned int FUN_003e0cd4(unsigned int *param_1,fn_003e0cd4_arg1 *param_2)
     *param_1 = 0x1a;
     param_1[3] = 0;
     temp_v8 = chainCountIdUnflagged(g_btlActionReflect,param_1);
-    if (((temp_v8 < 1) && (temp_v8 = recordAreAllCountsNonpositive(DAT_00573808), temp_v8 != 0)) &&
-       ((temp_v8 = g_btlCamera, FUN_00229ffc(), temp_v8 != 0 &&
+    if (((temp_v8 < 1) && (temp_v8 = recordAreAllCountsNonpositive(g_btlAux), temp_v8 != 0)) &&
+       ((temp_v8 = g_btlCamera, eventCommandRangeCheck(), temp_v8 != 0 &&
         ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x80000) == 0)))) {
-      FUN_003e9cd0(param_2);
+      stateFinishIfPresent(param_2);
       *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xffffbfff;
-      FUN_003d9164();
+      eventCommandClearPending();
       return 0xffffffff;
     }
   }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001dd930(void);
-int FUN_0028ca0c(void);
+int playerSkillInsertFirstFree(void);
 int FUN_00295a18(int);
 int FUN_00299370(int);
 int FUN_0029c1c8(int, int, int);
@@ -38,9 +38,9 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_001dd930. */
-extern unsigned char FUN_0023eb7c(void);
+extern unsigned char gameSlotFindByCategory(void);
 extern unsigned int FUN_00282be4(void);
-/* Supplied declaration required: FUN_0028ca0c. */
+/* Supplied declaration required: playerSkillInsertFirstFree. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029c1c8. */
@@ -147,7 +147,7 @@ void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
           do {
             temp_v4 = gameGetUnitRecord(temp_v8);
             if (*(unsigned short *)(temp_v4 + 0x46) == puVar10[temp_v3 + 0x24]) {
-              temp_v1 = FUN_0023eb7c();
+              temp_v1 = gameSlotFindByCategory();
               *(unsigned char *)((int)puVar5 + temp_v2 + 0x9108) = temp_v1;
               temp_v2 = temp_v2 + 1;
               break;
@@ -175,7 +175,7 @@ void FUN_0033adf8(fn_0033adf8_arg0 *param_1,unsigned int param_2)
       temp_v2 = 0;
       do {
         if (puVar10[temp_v2 + 0x1c] != 0) {
-          FUN_0028ca0c();
+          playerSkillInsertFirstFree();
         }
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 8);

@@ -1,45 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132f64` (_code @ 0x132f64, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: capacity fallback branching and allocation-size/register scheduling differ from retail. */
+#include "shard/W6_W6Match4_BlockPool12.h"
 
 extern "C" {
+u32 vectorGrowCapacity_0012d46c(u32 capacity, BlockPool12 *pool);
+void *rt_malloc(u32 size);
 
-int rt_malloc(...);
-
-extern int vectorGrowCapacity_0012d46c(unsigned int, int *, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: rt_malloc. */
-
-
-void FUN_00132f64(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Add a block of 12-byte elements to the pool's free range.
+void FUN_00132f64(BlockPool12 *pool, s32 singleElement)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = 1;
-  if (param_2 == 0) {
-    if (*param_1 != 0) {
-      temp_v0 = *(unsigned int *)(*param_1 + 4);
+    u32 capacity = 1;
+    if (singleElement == 0) {
+        capacity = vectorGrowCapacity_0012d46c(pool->blocks != NULL ? pool->blocks->capacity : 0, pool);
     }
-    else {
-      temp_v0 = 0;
-    }
-    temp_v2 = vectorGrowCapacity_0012d46c(temp_v0,param_1,param_3,param_4,param_4);
-  }
-  piVar2 = (int *)rt_malloc(0xc);
-  temp_v1 = rt_malloc();
-  piVar2[2] = temp_v1;
-  temp_v1 = *param_1;
-  piVar2[1] = temp_v2;
-  *piVar2 = temp_v1;
-  *param_1 = (int)piVar2;
-  temp_v1 = piVar2[2];
-  param_1[3] = temp_v1 + temp_v2 * 0xc;
-  param_1[2] = temp_v1;
-  return;
+    PoolBlock12 *block = (PoolBlock12 *)rt_malloc(sizeof(PoolBlock12));
+    block->elements = (PoolElement12 *)rt_malloc(capacity * sizeof(PoolElement12));
+    PoolBlock12 *previous = pool->blocks;
+    block->capacity = capacity;
+    block->next = previous;
+    pool->blocks = block;
+    PoolElement12 *elements = block->elements;
+    pool->end = elements + capacity;
+    pool->begin = elements;
 }
-
-} /* extern "C" */
+}

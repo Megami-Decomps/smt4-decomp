@@ -5,11 +5,11 @@
 extern "C" {
 
 int ifTouchRegionRemove(void);
-int FUN_001f4908(int, int, int);
+int slotSetRequest(int, int, int);
 int ifTouchRegionAdd(int, int, int, int);
 int FUN_0037ed38(void);
 int ref208SetPair1C(int);
-int FUN_003cbb0c(void);
+int commonBgReleaseOwnedJob(void);
 int soundChannelRequestIfEnabled(int, int, int);
 int soundChannelStopAll(int);
 int FUN_003d54f8(int, int);
@@ -18,13 +18,13 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int FUN_001643a0(void);
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: FUN_0037ed38. */
 /* Supplied declaration required: ref208SetPair1C. */
 extern int ref208HasObj(void);
-/* Supplied declaration required: FUN_003cbb0c. */
+/* Supplied declaration required: commonBgReleaseOwnedJob. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -97,7 +97,7 @@ unsigned int FUN_004cf140(int param_1)
       *(unsigned char *)(param_1 + 0x25) = 0;
       ref208SetPair1C(0);
       if (*(char *)(param_1 + 0x24) != '\0') {
-        FUN_003cbb0c();
+        commonBgReleaseOwnedJob();
       }
       ifTouchRegionRemove();
       soundChannelStopAll(0xf);
@@ -109,8 +109,8 @@ unsigned int FUN_004cf140(int param_1)
   if (temp_v1 < 0) {
     *(unsigned int *)(param_1 + 0x28) = 3;
     *(unsigned int *)(param_1 + 0x34) = 300;
-    FUN_001f4908(0,0x2d,0xff);
-    FUN_001f4908(1,0x2d,0xff);
+    slotSetRequest(0,0x2d,0xff);
+    slotSetRequest(1,0x2d,0xff);
   }
   return 1;
 }

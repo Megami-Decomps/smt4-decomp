@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0022b064. */
-extern int FUN_00287758(void);
+extern int stageAssetsLoaded(void);
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002bd808. */
 /* Supplied declaration required: FUN_003b82c4. */
@@ -32,7 +32,7 @@ void FUN_003ba2bc(int param_1,unsigned int param_2,int param_3)
   unsigned char temp_v2;
   
   temp_v0 = FUN_003bbaa8(param_1 + 0xd58);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_00287758(), temp_v0 != 0)) {
+  if ((temp_v0 != 0) && (temp_v0 = stageAssetsLoaded(), temp_v0 != 0)) {
     temp_v1 = spriteTable2aIsLoaded(param_1 + 0x9c);
     temp_v0 = 0;
     if (temp_v1 != 0) {

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00242914(unsigned int, int);
 int FUN_00246454(int);
-int FUN_00292dd0(int);
+void battleSelectButtonHelpPreset(int);
 int scrScriptProcessStartEntry(int, int);
 int FUN_00297060(void);
 int buttonHelpSetPreset(int);
@@ -18,11 +18,10 @@ extern unsigned int g_btlActionReflect; /* 0x434290 */
 extern int DAT_00435d18; /* 0x435d18 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-extern int FUN_0019e0c0(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: FUN_00242914. */
 /* Supplied declaration required: FUN_00246454. */
 extern int nodeListCountActiveById(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00292dd0. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -91,11 +90,11 @@ unsigned int FUN_003c0880(int *param_1,int param_2)
     temp_v1 = 2;
     break;
   case 2:
-    temp_v1 = FUN_0019e0c0(param_1[4]);
+    temp_v1 = scrRunOpcodesStub(param_1[4]);
     if (temp_v1 != 2) {
       return 0;
     }
-    FUN_00292dd0(0);
+    battleSelectButtonHelpPreset(0);
     *(int *)(*param_1 + 0x225c) = param_1[0x2e];
     *(int *)(*param_1 + 0x2260) = param_1[0x2f];
     *(int *)(*param_1 + 0x2264) = param_1[0x30];

@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_00227218(void);
+void eventCommandDispatchPendingCleanup(void);
 void FUN_003d9e88(void);
 s32 recordAreAllCountsNonpositive(void *object);
 s32 nodeListCountActiveById(s32 value, s32 arg);
@@ -27,7 +27,7 @@ u32 btlEncountTryFinish(void)
                 FUN_003d9e88();
             }
             g_btlMain->flags &= ~0x4000;
-            FUN_00227218();
+            eventCommandDispatchPendingCleanup();
             done = 1;
         }
     }

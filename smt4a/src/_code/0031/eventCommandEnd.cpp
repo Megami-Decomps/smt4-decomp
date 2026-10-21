@@ -7,7 +7,7 @@ s32 jobIsValid(u32 job);
 void FUN_0035bbc4(void);
 void eventCommandSetPendingCleanup(s32 arg);
 void uiFreeCallback(void);
-void FUN_0035bb70(void);
+void textureCacheReleaseAll(void);
 void jobStop(u32 job, s32 arg);
 
 extern EventCommandGlobals g_eventCommand;
@@ -21,7 +21,7 @@ s32 eventCommandEnd(void)
         eventCommandSetPendingCleanup(0);
     }
     if (jobIsValid(g_eventCommand.job) != 0) {
-        FUN_0035bb70();
+        textureCacheReleaseAll();
         FUN_0035bbc4();
         jobStop(g_eventCommand.job, 0);
     }

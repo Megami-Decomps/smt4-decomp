@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00261424(void);
+int gameDataGetTableValue(void);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -18,7 +18,7 @@ extern unsigned char LAB_00327350; /* 0x327350 */
 extern unsigned char LAB_00327380; /* 0x327380 */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00261424. */
+/* Supplied declaration required: gameDataGetTableValue. */
 extern short *dataTable4CGetEntry(unsigned int);
 
 
@@ -82,9 +82,9 @@ void FUN_0032725c(unsigned int param_1,unsigned int param_2,int param_3)
   acStack_1c[3] = '\0';
   psVar1 = (short *)dataTable4CGetEntry(param_1);
   if (param_3 == -1) {
-    temp_v0 = FUN_00261424();
+    temp_v0 = gameDataGetTableValue();
     if (temp_v0 != 0) {
-      temp_v1 = FUN_00261424();
+      temp_v1 = gameDataGetTableValue();
       textFormatBuffer(param_2,&LAB_00327350,temp_v1,param_1,*(unsigned int *)(temp_v2 + *psVar1 * 4));
       return;
     }

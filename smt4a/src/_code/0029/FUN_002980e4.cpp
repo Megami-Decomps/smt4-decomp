@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: ARM_common_memcpy4_9. */
 /* Supplied declaration required: obj4FQueryPair. */
@@ -57,7 +57,7 @@ void FUN_002980e4(int param_1,unsigned int param_2)
   if (param_1 != 0) {
     ARM_common_memcpy4_9(&temp_v0,pcVar1);
   }
-  obj4FQueryPair(DAT_00573808,&temp_v0,param_2,0);
+  obj4FQueryPair(g_btlAux,&temp_v0,param_2,0);
   return;
 }
 

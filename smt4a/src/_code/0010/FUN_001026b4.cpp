@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e32a4(int, unsigned char *, unsigned char *, unsigned int, unsigned int);
+void FUN_002e32a4(int kind, ...);
 int FUN_002e40ec(...);
 int FUN_002e410c(unsigned int *, unsigned int, unsigned int);
 int FUN_002e5780(unsigned int *);

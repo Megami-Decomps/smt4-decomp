@@ -9,7 +9,7 @@ int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(...);
 
 int FUN_002540b8(...);
-int FUN_0028ed3c(...);
+int uiBindRecordRewardText(...);
 int FUN_0028fe0c(unsigned int, int);
 int FUN_002903f0(void);
 int FUN_00290404(void);
@@ -20,7 +20,7 @@ int sortMenuCreate(...);
 int FUN_0029ee6c(...);
 int FUN_0029efc0(...);
 int FUN_0029efd8(int, int);
-int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [8], int, int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [8], int, int);
 int eventQueueAddUniqueIfValid(...);
 int timerStart(...);
 int FUN_002c1658(...);
@@ -40,8 +40,8 @@ extern int g_uiQuest; /* 0x43dd50 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_00203460. */
 /* Supplied declaration required: FUN_002540b8. */
-/* Supplied declaration required: FUN_0028ed3c. */
-extern int FUN_0028f304(void);
+/* Supplied declaration required: uiBindRecordRewardText. */
+extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: FUN_0028fe0c. */
 extern int FUN_0029022c(void);
 /* Supplied declaration required: FUN_002903f0. */
@@ -49,7 +49,7 @@ extern int FUN_0029022c(void);
 /* Supplied declaration required: FUN_002905d0. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int FUN_00298e00(unsigned int);
-extern int FUN_00298e20(unsigned int);
+extern int questIsCompleted(unsigned int);
 extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
@@ -59,7 +59,7 @@ extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_0029f5d8. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -124,7 +124,7 @@ void FUN_001afc0c(void)
     temp_v14[0] = '\0';
     temp_v6 = FUN_002bf4f8(0x29,0xc1);
     temp_v2 = temp_v11;
-    FUN_0029f5d8(temp_v11,temp_v6,temp_v1 + 0x9dc,(int)*(short *)(temp_v1 + 0x9f6),
+    uiScrollHandleActionsOrTouch(temp_v11,temp_v6,temp_v1 + 0x9dc,(int)*(short *)(temp_v1 + 0x9f6),
                  (int)*(short *)(temp_v1 + 0x9f2),(int)*(short *)(temp_v1 + 0x9f4),temp_v14,0,1);
     if (temp_v2 != 0) {
       temp_v2 = FUN_0029efc0(temp_v11);
@@ -263,7 +263,7 @@ void FUN_001afc0c(void)
                   temp_v9 = FUN_002903f0();
                   if (temp_v9 != 0) {
                     temp_v6 = FUN_002903f0();
-                    FUN_0028ed3c(temp_v6,0,1);
+                    uiBindRecordRewardText(temp_v6,0,1);
                     temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),1);
                     if (temp_v9 != 0) {
                       buttonHelpSetPreset(0xe2);
@@ -298,7 +298,7 @@ void FUN_001afc0c(void)
                 temp_v4 = FUN_002903f0();
                 if (temp_v4 == temp_v10) {
                   temp_v5 = FUN_002903f0();
-                  FUN_0028ed3c(temp_v5,0,1);
+                  uiBindRecordRewardText(temp_v5,0,1);
                   temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),1);
                   if (temp_v9 == 0) goto LAB_001b0364;
                   buttonHelpSetPreset(0xe2);
@@ -312,9 +312,9 @@ void FUN_001afc0c(void)
                 else {
                   temp_v4 = temp_v10;
                   dataTable1bOr1cGetRecord();
-                  FUN_0028ed3c(temp_v10,0,1);
+                  uiBindRecordRewardText(temp_v10,0,1);
                   if (*(char *)(temp_v4 + 6) != '\0') {
-                    temp_v9 = FUN_0028f304();
+                    temp_v9 = questIsOfferable(temp_v10);
                     if (temp_v9 != 0) {
                       buttonHelpSetPreset(0xe2);
                       if ((*(unsigned int *)(temp_v4 + 0x150) >= 3) &&
@@ -363,7 +363,7 @@ void FUN_001afc0c(void)
                         temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),4);
                       }
                       else {
-                        temp_v9 = FUN_00298e20(temp_v10);
+                        temp_v9 = questIsCompleted(temp_v10);
                         if (temp_v9 != 0) {
                           temp_v9 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x5b4),8);
                         }
@@ -383,7 +383,7 @@ void FUN_001afc0c(void)
                     }
                   }
                   else {
-                    temp_v9 = FUN_00298e20(temp_v10);
+                    temp_v9 = questIsCompleted(temp_v10);
                     if (temp_v9 != 0) {
                       temp_v9 = FUN_00298e00(temp_v10);
                       if (temp_v9 != 0) {

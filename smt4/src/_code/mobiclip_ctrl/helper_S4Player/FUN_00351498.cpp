@@ -11,7 +11,7 @@ int memAlloc(...);
 int nn_os_CriticalSection_Initialize(...);
 int nn_os_LightEvent_Signal(...);
 int FUN_002c526c(...);
-int FUN_0034ed38(...);
+int mwmofilterDeblockerInit(...);
 
 /* stack frame of param_6: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -38,7 +38,7 @@ extern unsigned int *DAT_0044d15c; /* 0x44d15c */
 /* Supplied declaration required: nn_os_CriticalSection_Initialize. */
 /* Supplied declaration required: nn_os_LightEvent_Signal. */
 /* Supplied declaration required: FUN_002c526c. */
-/* Supplied declaration required: FUN_0034ed38. */
+/* Supplied declaration required: mwmofilterDeblockerInit. */
 extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
 
 
@@ -86,7 +86,7 @@ FUN_00351498(int param_1,int param_2,int param_3,int param_4,int param_5,unsigne
     *(unsigned int *)(param_1 + 0x144) = 0;
     *(unsigned int *)(param_1 + 0x148) = 0;
     *(unsigned int *)(param_1 + 0x14c) = 0;
-    FUN_0034ed38(param_1 + 0x158);
+    mwmofilterDeblockerInit(param_1 + 0x158);
     nn_os_LightEvent_Initialize(param_1 + 0x20,1);
     nn_os_CriticalSection_Initialize(param_1);
     nn_os_LightEvent_Signal(param_1 + 0x20);

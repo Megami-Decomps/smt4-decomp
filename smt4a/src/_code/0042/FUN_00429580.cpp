@@ -6,7 +6,7 @@ extern "C" {
 
 int sysFatalBreak(void);
 int FUN_0019a46c(unsigned int, unsigned int, int);
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int FUN_00427a10(unsigned int, unsigned char *);
 int FUN_00427e68(int, unsigned int);
 int rt_memcpy_w(unsigned char *, int, int);
@@ -31,7 +31,7 @@ extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: FUN_0019a46c. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: FUN_00427a10. */
 extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00427e68. */
@@ -62,7 +62,7 @@ void FUN_00429580(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
   puStack_2c = param_3;
   iStack_28 = param_4;
   if (param_5 >= 0x15) {
-    FUN_001b57a8(param_1,0xe061389c);
+    resultPairInitialize(param_1,0xe061389c);
     return;
   }
   if (param_6 == 0) {
@@ -128,12 +128,12 @@ void FUN_00429580(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
           FUN_00427a10(temp_v8,&DAT_0061b000);
           return;
         }
-        FUN_001b57a8(temp_v8,0xc9413891);
+        resultPairInitialize(temp_v8,0xc9413891);
         return;
       }
     }
   }
-  FUN_001b57a8(temp_v8,temp_v1);
+  resultPairInitialize(temp_v8,temp_v1);
   return;
 }
 

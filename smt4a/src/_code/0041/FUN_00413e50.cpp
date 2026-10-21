@@ -76,7 +76,7 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: FUN_0012055e. */
 extern unsigned int randRange(unsigned int);
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_00237608(void);
+extern int campCecHasObject(void);
 extern unsigned int FUN_002bf520(void);
 extern int rt_malloc(unsigned int);
 /* Supplied declaration required: asdOperatorDeleteArray. */
@@ -147,7 +147,7 @@ void FUN_00413e50(int param_1)
   unsigned int temp_v38;
   unsigned int temp_v39;
   
-  temp_v0 = FUN_00237608();
+  temp_v0 = campCecHasObject();
   if (temp_v0 != 0) {
     temp_v1 = FUN_002bf520();
     rt_memcpy_w(temp_v23,temp_v1,100);

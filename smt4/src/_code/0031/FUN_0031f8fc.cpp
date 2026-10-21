@@ -5,10 +5,10 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_00246c8c(unsigned int);
+int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(void);
 int FUN_0024b830(int);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(int, int);
@@ -99,10 +99,10 @@ extern float DAT_004ea948; /* 0x4ea948 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 extern unsigned int FUN_00246c28(void);
-/* Supplied declaration required: FUN_00246c8c. */
+/* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -181,12 +181,12 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
       pfVar21 = *(float **)(*(int *)(temp_v14 + 8) + 0x30);
       puVar22 = *(unsigned char **)(*(int *)(temp_v14 + 8) + 0x38);
       *(unsigned int *)(temp_v14 + 0x54) = *(unsigned int *)(temp_v14 + 0x54) | 0x21;
-      FUN_00246c8c(*(unsigned int *)&pfVar25->field_0x58);
+      asdSetNormalizedColorRgba(*(unsigned int *)&pfVar25->field_0x58);
       temp_v12 = DAT_004ea928;
       temp_v10 = DAT_004ea924;
       temp_v8 = DAT_004ea920;
       temp_v6 = DAT_004ea91c;
-      FUN_00246c8c(*(unsigned int *)&pfVar25->field_0x5c);
+      asdSetNormalizedColorRgba(*(unsigned int *)&pfVar25->field_0x5c);
       temp_v13 = DAT_004ea928;
       temp_v11 = DAT_004ea924;
       temp_v9 = DAT_004ea920;
@@ -269,7 +269,7 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
                 DAT_004ea928 = temp_v29;
                 temp_v24 = DAT_004ea91c;
                 temp_v26 = DAT_004ea920;
-                FUN_002b7064();
+                phaseCosInterpolate();
                 FUN_002b70cc();
                 temp_v24 = temp_v24 * temp_v27;
                 temp_v26 = temp_v26 * temp_v34;

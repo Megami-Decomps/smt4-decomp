@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00318544(...);
+void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y);
 int FUN_0038791c(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,6 @@ typedef struct {
 } void_stack;
 
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_00318544. */
 /* Supplied declaration required: FUN_0038791c. */
 extern int bustupCutAnimFindSlot(unsigned int);
 
@@ -39,22 +38,22 @@ unsigned int FUN_003cdbe8(void)
   temp_v6 = bustupCutAnimFindSlot(temp_v1);
   if (temp_v5 < 0) {
     if (temp_v6 < 0) {
-      FUN_00318544(temp_v0,2,0,0,0);
-      FUN_00318544(temp_v1,1,0,0,0);
+      bustupCutAnimSetPlacement(temp_v0,2,0,0,0);
+      bustupCutAnimSetPlacement(temp_v1,1,0,0,0);
       return 1;
     }
   }
   else if (0 < temp_v5) {
     if (temp_v6 < 1) {
-      FUN_00318544(temp_v0,2,0,0,0);
+      bustupCutAnimSetPlacement(temp_v0,2,0,0,0);
       FUN_0038791c(temp_v1,1,3,temp_v2,temp_v3,temp_v4);
       return 1;
     }
-    FUN_00318544(temp_v0,2,0,0,0);
-    FUN_00318544(temp_v1,1,0,0,0);
+    bustupCutAnimSetPlacement(temp_v0,2,0,0,0);
+    bustupCutAnimSetPlacement(temp_v1,1,0,0,0);
     return 1;
   }
-  FUN_00318544(temp_v1,1,0,0,0);
+  bustupCutAnimSetPlacement(temp_v1,1,0,0,0);
   FUN_0038791c(temp_v0,2,3,temp_v2,temp_v3,temp_v4);
   return 1;
 }

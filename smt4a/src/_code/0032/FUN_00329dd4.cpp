@@ -84,7 +84,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -261,7 +261,7 @@ void FUN_00329dd4(fn_00329dd4_arg0 *param_1)
         param_1->field_0x174 = temp_v28;
         param_1->field_0x178 = temp_v29;
         param_1->field_0x17c = temp_v30;
-        temp_v18 = (*(float *)(DAT_005806a4 + 0x18) + 180.0f) * temp_v18;
+        temp_v18 = (*(float *)(g_lmapView + 0x18) + 180.0f) * temp_v18;
         temp_v2 = (temp_v2 & 0xfffffff) | ((unsigned int)(temp_v16 <= temp_v18) << 0x1d);
         for (temp_v18 = romwright_fabs_4(temp_v18); temp_v3 = temp_v16, (int)temp_v18 >= 0x47800000;
             temp_v18 = temp_v18 - temp_v15) {
@@ -367,7 +367,7 @@ void FUN_00329dd4(fn_00329dd4_arg0 *param_1)
     temp_v36 = temp_v9 * temp_v15 + temp_v7 * temp_v18 * temp_v39;
   }
   else {
-    temp_v3 = *(float *)(DAT_005806a4 + 0x50) - param_1->field_0x68;
+    temp_v3 = *(float *)(g_lmapView + 0x50) - param_1->field_0x68;
     FUN_0050d8e4();
     temp_v18 = temp_v3 * 57.32484f * temp_v18;
     temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 <= temp_v18) << 0x1d);

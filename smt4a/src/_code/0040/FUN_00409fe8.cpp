@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdOperatorNew(int, unsigned int);
-int FUN_002804b0(unsigned char [64], unsigned int *, int);
+int asdLoadFileAsyncSimple(unsigned char [64], unsigned int *, int);
 int FUN_003fc1b0(unsigned int *, int);
 int FUN_003fcd20(unsigned int *);
 int FUN_00470b60(unsigned int, int, unsigned int *, unsigned char [64]);
@@ -17,7 +17,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_003fc1b0. */
 /* Supplied declaration required: FUN_003fcd20. */
 extern int FUN_004705ec(unsigned int, int, unsigned int);
@@ -106,11 +106,11 @@ unsigned int * FUN_00409fe8(int param_1,int param_2,int param_3,unsigned int par
       return puVar2;
     }
     if (param_3 == 0) {
-      FUN_002804b0(temp_v2,puVar2 + 10,1);
+      asdLoadFileAsyncSimple(temp_v2,puVar2 + 10,1);
       return puVar2;
     }
   }
-  FUN_002804b0(temp_v2,puVar2 + 10,0);
+  asdLoadFileAsyncSimple(temp_v2,puVar2 + 10,0);
   return puVar2;
 }
 

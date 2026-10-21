@@ -12,7 +12,7 @@ int FUN_00140280(...);
 int FUN_00140708(...);
 int FUN_001409d4(...);
 int FUN_00140e6c(...);
-int FUN_00141614(...);
+int asdTextRegisterSlot(...);
 int FUN_00141850(...);
 int FUN_001418ec(...);
 int FUN_0014190c(...);
@@ -50,7 +50,7 @@ extern unsigned int uRam005c1474; /* 0x5c1474 */
 /* Supplied declaration required: FUN_00140708. */
 /* Supplied declaration required: FUN_001409d4. */
 /* Supplied declaration required: FUN_00140e6c. */
-/* Supplied declaration required: FUN_00141614. */
+/* Supplied declaration required: asdTextRegisterSlot. */
 /* Supplied declaration required: FUN_00141850. */
 /* Supplied declaration required: FUN_001418ec. */
 /* Supplied declaration required: FUN_0014190c. */
@@ -97,8 +97,8 @@ void FUN_00137454(void)
   FUN_00140280(FUN_0013cae4);
   FUN_001418ec(FUN_0013edc8);
   FUN_0013f52c(FUN_0013e38c);
-  FUN_00141614(0xf87a,1,FUN_0013c614);
-  FUN_00141614(0xf87b,4,FUN_0013dadc);
+  asdTextRegisterSlot(0xf87a,1,FUN_0013c614);
+  asdTextRegisterSlot(0xf87b,4,FUN_0013dadc);
   DAT_005b3d78 = 0x8190;
   uRam005c1474 = 0x8190;
   return;

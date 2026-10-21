@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0022a8c8(unsigned int *, int, int);
+int btlTargetSetFlag10(unsigned int *, int, int);
 int btlMainFindEntryByListedId(...);
 int btlGetMainState(void);
 int FUN_0033b1ac(unsigned int *, int);
 
-/* Supplied declaration required: FUN_0022a8c8. */
+/* Supplied declaration required: btlTargetSetFlag10. */
 extern unsigned short FUN_00245cc0(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
@@ -38,7 +38,7 @@ void FUN_003bcdb0(int param_1,int param_2,unsigned short param_3)
             ((param_3 & 0x40) != 0 || (param_3 & 0x80) != 0)) ||
            (((param_3 & 0x100) != 0 || (param_3 & 0x200) != 0 ||
             (((param_3 & 0x400) != 0 || (param_3 & 4) != 0) || (param_3 & 8) != 0)))) {
-          FUN_0022a8c8(puVar3,param_1,0);
+          btlTargetSetFlag10(puVar3,param_1,0);
         }
         *(unsigned short *)((int)puVar4 + 0x1c6) = *(unsigned short *)((int)puVar4 + 0x1c6) | param_3;
         if (puVar4[0x9e] != 0) {

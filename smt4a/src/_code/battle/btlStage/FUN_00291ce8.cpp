@@ -6,7 +6,7 @@ extern "C" {
 
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_003e9fe4(...);
+int btlActionPrepareFromSource(...);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_003e9fe4. */
+/* Supplied declaration required: btlActionPrepareFromSource. */
 
 
 void FUN_00291ce8(unsigned int *param_1)
@@ -51,7 +51,7 @@ void FUN_00291ce8(unsigned int *param_1)
     temp_v1 = param_1[0x5f];
   }
   if (!temp_v3 || temp_v1 < 0) {
-    FUN_003e9fe4(param_1,param_1 + 0x3d,0);
+    btlActionPrepareFromSource(param_1,param_1 + 0x3d,0);
     param_1[0x5e] = (int)*(char *)(param_1 + 0x45);
     param_1[0x5f] = (int)*(char *)((int)param_1 + 0x115);
   }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00145e24(unsigned int, unsigned int);
-int FUN_00156974(unsigned int);
+int holderFlushPending(unsigned int);
 int FUN_00157e98(unsigned int, int);
 int FUN_00158124(void);
 
@@ -15,7 +15,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00145e24. */
 extern unsigned int FUN_00152f54(void);
-/* Supplied declaration required: FUN_00156974. */
+/* Supplied declaration required: holderFlushPending. */
 /* Supplied declaration required: FUN_00157e98. */
 /* Supplied declaration required: FUN_00158124. */
 
@@ -47,7 +47,7 @@ unsigned int FUN_00146314(void)
   FUN_00145e24(g_renderCtx,temp_v1);
   puVar5 = *(unsigned int **)(g_handleRegistry + 0x1c);
   for (puVar4 = *(unsigned int **)(g_handleRegistry + 0x18); puVar4 != puVar5; puVar4 = puVar4 + 1) {
-    FUN_00156974(*puVar4);
+    holderFlushPending(*puVar4);
   }
   return 0;
 }

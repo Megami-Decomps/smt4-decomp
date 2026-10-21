@@ -37,7 +37,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int gameGetPlayerData(void);
-extern unsigned int FUN_0019f240(unsigned short);
+extern unsigned int padGetMappedValue(unsigned short);
 extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_002efc44. */
 /* Supplied declaration required: FUN_0034a290. */
@@ -90,7 +90,7 @@ int FUN_0023e6d8(fn_0023e6d8_arg0 *param_1,int param_2,int param_3)
       temp_v2 = gameGetPlayerData();
       temp_v1 = *(short *)(temp_v2 + 0x24);
       playerGetWords(&temp_v7,1);
-      temp_v3 = FUN_0019f240(param_1->field_0x20);
+      temp_v3 = padGetMappedValue(param_1->field_0x20);
       pfVar7 = param_1;
       FUN_002efc44(param_1,temp_v3,2);
     }

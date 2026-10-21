@@ -6,7 +6,7 @@ extern "C" {
 
 int scrScriptProcessStartEntry(unsigned int, int);
 
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int tableGroupFindEntryIndex(unsigned int, char *);
 
@@ -46,7 +46,7 @@ void FUN_003e647c(int param_1)
       }
     }
     else {
-      temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x18));
+      temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
       if (temp_v0 == 2) {
         if (*(int *)(param_1 + 0x48) >= 3) {
           *(unsigned int *)(param_1 + 8) = 99;

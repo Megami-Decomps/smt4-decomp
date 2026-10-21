@@ -22,10 +22,10 @@ int FUN_001703b0(...);
 
 int FUN_00136d24(...);
 int asdProcessUpdate(...);
-int FUN_00137ea0(...);
+int gameDataFlagsClearBits(...);
 int FUN_001386b4(...);
 int FUN_001387c0(...);
-int FUN_001388d8(...);
+int randSetLcgState(...);
 int asdPrimSwapBuffers(...);
 int FUN_00138aa4(...);
 int gameDataBlocksMaskClearBits(...);
@@ -33,11 +33,11 @@ int FUN_00139ab0(...);
 int FUN_00139b6c(...);
 int FUN_0013a078(...);
 int FUN_0013a144(...);
-int FUN_0013a3d4(...);
+int asdGxResumeAndApplyPreset(...);
 int asdProcessSetGroupEnabled(...);
-int FUN_0013a5e0(...);
+int asdGxPresetsGetDepth(...);
 int titleCloseMoviePlayer(...);
-int FUN_0013a6a0(...);
+int asdGxSetChannelFlags(...);
 int FUN_0013a7a0(...);
 int FUN_0013ab18(...);
 int titleConfigApplyTarget(...);
@@ -56,7 +56,7 @@ int gameDataAllocBlocks(...);
 int FUN_0013778c(...);
 int asdSequenceRequest(...);
 int FUN_00138114(...);
-int FUN_001386e8(...);
+int gameDataBlocksReleaseHold(...);
 int titleConfigApply(...);
 int FUN_001389ec(...);
 int FUN_00138b18(...);
@@ -98,14 +98,14 @@ int gfxSetupResGraphicsFile(...);
 int FUN_00139c90(...);
 int FUN_0013a1e4(...);
 int FUN_0013a324(...);
-int FUN_0013a5f0(...);
+int asdGxPresetVectorSet(...);
 int asdGxPresetRequest(...);
 int asdMemorySetUseAllocatorA(...);
 int FUN_0013b4ac(...);
 int FUN_0013b5c8(...);
 int FUN_0013b6e0(...);
 int FUN_0013b790(...);
-int FUN_0013bfbc(...);
+int randomStateSeed(...);
 int FUN_001432cc(...);
 int asdGxCommandListCreate(...);
 int FUN_001642e4(...);
@@ -168,7 +168,7 @@ extern unsigned char LAB_001365fc; /* 0x1365fc */
 extern unsigned char LAB_0013660c; /* 0x13660c */
 extern unsigned char LAB_00136620; /* 0x136620 */
 extern int titleEndCommandList(...); /* 0x136f30 */
-extern int FUN_00136f74(...); /* 0x136f74 */
+extern int titleSubmitCommandList(...); /* 0x136f74 */
 extern int FUN_00136fc0(...); /* 0x136fc0 */
 extern int titleBeginCommandList(...); /* 0x137020 */
 extern int titleSceneStep(...); /* 0x13705c */
@@ -288,24 +288,24 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: asdProcessInit. */
 /* Supplied declaration required: asdProcessUpdate. */
 extern unsigned long long FUN_00137e5c(void);
-/* Supplied declaration required: FUN_00137ea0. */
+/* Supplied declaration required: gameDataFlagsClearBits. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_00137f94. */
 /* Supplied declaration required: FUN_00138114. */
-extern int FUN_001381cc(void);
+extern int engineGetStateFlag(void);
 /* Supplied declaration required: asdMemoryInit. */
 /* Supplied declaration required: asdNgcInit. */
 /* Supplied declaration required: appletCloseApplication. */
 /* Supplied declaration required: FUN_001386b4. */
-/* Supplied declaration required: FUN_001386e8. */
+/* Supplied declaration required: gameDataBlocksReleaseHold. */
 /* Supplied declaration required: titleConfigApply. */
 /* Supplied declaration required: appletReplySleepQueryAllow. */
 /* Supplied declaration required: FUN_00138764. */
 extern unsigned long long randSetSeed(unsigned int);
 /* Supplied declaration required: FUN_001387c0. */
-extern int FUN_001388c8(void);
-/* Supplied declaration required: FUN_001388d8. */
-extern unsigned long long FUN_001388e8(void);
+extern int gameDataBlocksFlagGet(void);
+/* Supplied declaration required: randSetLcgState. */
+extern unsigned long long appletProcessSleepQuery(void);
 extern int FUN_00138940(void);
 /* Supplied declaration required: FUN_001389ec. */
 /* Supplied declaration required: FUN_00138a08. */
@@ -340,19 +340,19 @@ extern unsigned long long FUN_00139c4c(void);
 /* Supplied declaration required: FUN_0013a144. */
 /* Supplied declaration required: FUN_0013a1e4. */
 /* Supplied declaration required: FUN_0013a324. */
-/* Supplied declaration required: FUN_0013a3d4. */
+/* Supplied declaration required: asdGxResumeAndApplyPreset. */
 /* Supplied declaration required: titleConfigSetDefaults. */
 /* Supplied declaration required: asdProcessSetGroupEnabled. */
 /* Supplied declaration required: FUN_0013a48c. */
-/* Supplied declaration required: FUN_0013a5e0. */
-/* Supplied declaration required: FUN_0013a5f0. */
+/* Supplied declaration required: asdGxPresetsGetDepth. */
+/* Supplied declaration required: asdGxPresetVectorSet. */
 extern unsigned int FUN_0013a608(unsigned int);
 /* Supplied declaration required: asdGxPresetRequest. */
 /* Supplied declaration required: FUN_0013a630. */
 /* Supplied declaration required: titleSelectMovieResource. */
 /* Supplied declaration required: titleCloseMoviePlayer. */
 /* Supplied declaration required: asdMemorySetUseAllocatorA. */
-/* Supplied declaration required: FUN_0013a6a0. */
+/* Supplied declaration required: asdGxSetChannelFlags. */
 /* Supplied declaration required: FUN_0013a700. */
 /* Supplied declaration required: FUN_0013a7a0. */
 /* Supplied declaration required: FUN_0013a894. */
@@ -376,7 +376,7 @@ extern unsigned int FUN_0013af10(void);
 /* Supplied declaration required: FUN_0013bb34. */
 extern int FUN_0013bdb8(unsigned int);
 /* Supplied declaration required: FUN_0013be20. */
-/* Supplied declaration required: FUN_0013bfbc. */
+/* Supplied declaration required: randomStateSeed. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 /* Supplied declaration required: FUN_00140ba4. */
 /* Supplied declaration required: FUN_001432cc. */
@@ -459,7 +459,7 @@ void FUN_00135c30(void)
   
   ppcVar5 = &temp_v22;
   nn_cfg_CTR_Initialize();
-  FUN_0013bfbc(0,0x12345678);
+  randomStateSeed(0,0x12345678);
   asdMemoryInit(0x100000);
   asdMemorySetUseAllocatorA(1);
   FUN_00136df8();
@@ -500,8 +500,8 @@ void FUN_00135c30(void)
   temp_v3 = FUN_001692ac(5,1);
   *(unsigned int *)(temp_v2 + 0x1384) = temp_v3;
   FUN_00138d34();
-  FUN_0013a5f0(0);
-  FUN_0013a5f0(1);
+  asdGxPresetVectorSet(0);
+  asdGxPresetVectorSet(1);
   FUN_002f5020(&temp_v22,&LAB_0013ba98,0x3c,2);
   *(unsigned int *)((int)ppcVar5 + 0x80) = 0;
   *(unsigned short *)((int)ppcVar5 + 0x84) = 0x8058;
@@ -589,7 +589,7 @@ void FUN_00135c30(void)
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_001364cc,0x88,0);
-  temp_v22 = FUN_00136f74;
+  temp_v22 = titleSubmitCommandList;
   temp_v23 = 0;
   temp_v24 = 0;
   asdProcessCreateSimple(&LAB_00136514,0xcb,0);
@@ -656,13 +656,13 @@ void FUN_00135c30(void)
   FUN_0013778c(0);
   temp_v16 = 0.25f;
   FUN_0013b244(g_renderCtx);
-  FUN_001386e8(0xf);
-  FUN_00137ea0(7);
+  gameDataBlocksReleaseHold(0xf);
+  gameDataFlagsClearBits(7);
   gameDataBlocksMaskClearBits(1);
   DAT_0057ffd3 = 0;
   FUN_0030fc80(&temp_v22);
   temp_v3 = (unsigned int)(romwright_zext_4_8(temp_v22) * 1000000);
-  FUN_001388d8(temp_v3,(int)(romwright_zext_4_8(temp_v22) * 1000000 >> 0x20));
+  randSetLcgState(temp_v3,(int)(romwright_zext_4_8(temp_v22) * 1000000 >> 0x20));
   temp_v19 = randSetSeed(temp_v3);
   temp_v18 = 100.0f;
 LAB_00136430:
@@ -672,7 +672,7 @@ LAB_00136430:
         software_interrupt(0x28);
         uRam0057fff0.whole = temp_v19;
         FUN_00140ba4();
-        temp_v2 = FUN_001381cc();
+        temp_v2 = engineGetStateFlag();
         g_titleFlags = temp_v2 != 0;
         temp_v2 = nngxIsStereoVisionAllowed();
         if (temp_v2 != 0) {
@@ -691,7 +691,7 @@ LAB_00136430:
           asdProcessSetGroupEnabled(0xe1,0);
           asdProcessSetGroupEnabled(0xe2,0);
         }
-        FUN_0013a6a0(0,temp_v2 == 0);
+        asdGxSetChannelFlags(0,temp_v2 == 0);
         temp_v2 = 0;
         if ((DAT_0057ffd1 != '\0') && (temp_v2 = iRam0057ffec + 1, iRam0057ffec + 1 >= 3)) {
           temp_v2 = 2;
@@ -762,7 +762,7 @@ LAB_00136430:
         temp_v12 = temp_v4 + temp_v14;
         uRam0057fff8.whole = temp_v20;
         uRam0057fff0.whole = temp_v19;
-        FUN_0013a5e0();
+        asdGxPresetsGetDepth();
         temp_v17 = (float)VectorSignedToFloat((((temp_v12 + temp_v13) >> 7) |
                                             ((((int)temp_v14 >> 0x1f) + (unsigned int)romwright_carry_4(temp_v4,temp_v14) +
                                               temp_v2 * 0x20c49ba5 +
@@ -776,12 +776,12 @@ LAB_00136430:
             FUN_00139ab0();
           }
           else {
-            FUN_0013a3d4();
+            asdGxResumeAndApplyPreset();
           }
         }
         titleConfigApplyTarget(g_handleRegistry);
         if (DAT_0057ffd3 != 0) {
-          temp_v2 = FUN_001388c8();
+          temp_v2 = gameDataBlocksFlagGet();
           if (temp_v2 != 0) {
             FUN_00161a10();
             if (g_mobiclipProcess != 0) {
@@ -805,7 +805,7 @@ LAB_00136430:
             appletCloseApplication();
           }
         }
-        temp_v20 = FUN_001388e8();
+        temp_v20 = appletProcessSleepQuery();
         temp_v3 = (unsigned int)((unsigned long long)temp_v20 >> 0x20);
         if ((int)temp_v20 == 2) {
           if (g_mobiclipProcess != 0) {

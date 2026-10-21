@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00151c18(void);
-int FUN_00152618(void);
+int asdSceneCreateDefaultLight(void);
 int asdMemoryAlloc(int, int, int, int, int);
 
 /* stack frame of void: 6 slot(s), 18 byte(s) */
@@ -33,7 +33,7 @@ typedef char romwright_storage_s__c___005b3cd8_9_1_s1_width_check[(sizeof(((unio
 extern union romwright_storage_s__c___005b3cd8_9_1 s__c___005b3cd8; /* 0x5b3cd8 */
 
 /* Supplied declaration required: FUN_00151c18. */
-/* Supplied declaration required: FUN_00152618. */
+/* Supplied declaration required: asdSceneCreateDefaultLight. */
 extern int FUN_0015add8(unsigned char *, unsigned int);
 extern int FUN_0015d35c(unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -125,7 +125,7 @@ void FUN_001445d4(void)
     *(unsigned int **)(temp_v2 + 8) = puVar1;
     FUN_00151c18();
     *(int *)((*(unsigned int *)&s__c___005b3cd8.u1[0]) + temp_v3 * 4 + 0x10) = temp_v2;
-    FUN_00152618();
+    asdSceneCreateDefaultLight();
     temp_v1 = temp_v3 * 4;
     temp_v3 = temp_v3 + 1;
     *(int *)((*(unsigned int *)&s__c___005b3cd8.u1[0]) + temp_v1 + 0x18) = temp_v2;

@@ -28,7 +28,7 @@ extern unsigned char LAB_003e645c; /* 0x3e645c */
 /* Supplied declaration required: FUN_0015f858. */
 extern int FUN_001774d8(unsigned int);
 /* Supplied declaration required: FUN_001ba3d4. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
@@ -112,7 +112,7 @@ void FUN_003e618c(int param_1)
       *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
       return;
     }
-    if (((temp_v0 == 1) && (temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x18)), temp_v0 == 2)) &&
+    if (((temp_v0 == 1) && (temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18)), temp_v0 == 2)) &&
        (temp_v0 = panelIsMissingOrFlagClear(), temp_v0 != 0)) {
       temp_v0 = FUN_002a4b74();
       if (temp_v0 == 0) {
@@ -127,7 +127,7 @@ void FUN_003e618c(int param_1)
   }
   else {
     if (temp_v0 == 3) {
-      temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x18));
+      temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
       if (temp_v0 == 2) {
         *(unsigned int *)(param_1 + 8) = 99;
       }

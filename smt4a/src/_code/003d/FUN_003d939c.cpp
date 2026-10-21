@@ -35,7 +35,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
-extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
 /* Supplied declaration required: FUN_003872b8. */
 /* Supplied declaration required: FUN_0046ed8c. */
@@ -70,7 +70,7 @@ void FUN_003d939c(int param_1)
   case 0:
   case 1:
   case 8:
-    temp_v8 = FUN_001a6508(g_aocSystem,0x10,*(unsigned int *)(param_1 + 0x2f8),1);
+    temp_v8 = aocRunByName(g_aocSystem,0x10,*(unsigned int *)(param_1 + 0x2f8),1);
     if (temp_v8 != 0) {
       FUN_0046ed8c(g_aocSystem,*(unsigned int *)(param_1 + 0x308),*(unsigned int *)(param_1 + 0x2f8),
                    param_1 + 0x20);

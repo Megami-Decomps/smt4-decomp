@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00208c64(u32 value);
+int mapFlagSet(u32 value);
 
 typedef struct Slot {
     /* 0x000 */ u8 active;
@@ -33,7 +33,7 @@ void FUN_002733d0(void)
     do {
         slot = &table->slots[i];
         if ((slot->active != 0) && (slot->state == 3)) {
-            FUN_00208c64(slot->unk024);
+            mapFlagSet(slot->unk024);
         }
         i = i + 1;
     } while (i < 0x80);

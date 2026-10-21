@@ -24,7 +24,7 @@ int FUN_002c7e24(void);
 int unitRecordBuild(int, unsigned char [300]);
 int FUN_0035ad50(int, unsigned char [300]);
 int FUN_00389d9c(...);
-int FUN_003b615c(int);
+int recordFindAcceptedById(int);
 int recordContainsPairedId(...);
 int FUN_004bcbb4(...);
 int FUN_004bd6b0(...);
@@ -83,7 +83,7 @@ extern unsigned char *slotRecordFindById(void);
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_00288b20. */
 extern int FUN_002a4894(void);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002c7e24. */
 extern int FUN_002c7e3c(void);
 extern int FUN_002c7e54(void);
@@ -91,7 +91,7 @@ extern int FUN_002c7e54(void);
 extern int uiSearchPrimary(int);
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: FUN_00389d9c. */
-/* Supplied declaration required: FUN_003b615c. */
+/* Supplied declaration required: recordFindAcceptedById. */
 extern unsigned int FUN_003df57c(unsigned short, unsigned int);
 extern int countUnlockedSlots(void);
 /* Supplied declaration required: recordContainsPairedId. */
@@ -201,12 +201,12 @@ void FUN_001fc720(int param_1,int param_2)
         temp_v3 = getUnlockedSlotCount(puVar15);
       }
       else {
-        FUN_003b615c(*(unsigned short *)(temp_v25 + 0x98));
+        recordFindAcceptedById(*(unsigned short *)(temp_v25 + 0x98));
         temp_v3 = 8;
       }
     }
     else {
-      FUN_003b615c(*(unsigned short *)(temp_v25 + 0x98));
+      recordFindAcceptedById(*(unsigned short *)(temp_v25 + 0x98));
       temp_v3 = 8;
     }
   }
@@ -360,7 +360,7 @@ LAB_001fca00:
   if (temp_v11 != 3) {
     if (temp_v11 == 7) {
       if (*(int *)(temp_v2 + 0x524) >= 9) {
-        temp_v11 = FUN_002c2c68(temp_v23);
+        temp_v11 = objectApplyIfUnblocked(temp_v23);
         if (temp_v11 - 1 == temp_v21) goto LAB_001fcee8;
         if (*(int *)(temp_v2 + 0x518) == 0xe) goto LAB_001fce54;
       }
@@ -368,7 +368,7 @@ LAB_001fca00:
     }
     if (temp_v11 == 0xe) {
 LAB_001fce54:
-      temp_v11 = FUN_002c2c68(temp_v23);
+      temp_v11 = objectApplyIfUnblocked(temp_v23);
       if (temp_v11 - 1 != temp_v21) goto LAB_001fce6c;
       goto LAB_001fcee8;
     }
@@ -426,11 +426,11 @@ LAB_001fcef4:
               temp_v12 = 0;
               if (((temp_v7 == 7) || (temp_v7 == 8 || temp_v7 == 9)) || (temp_v7 == 10 || temp_v7 == 0xb)
                  ) {
-                temp_v12 = FUN_002c2c68(temp_v23);
+                temp_v12 = objectApplyIfUnblocked(temp_v23);
                 temp_v12 = temp_v12 - 1;
               }
               if (*(int *)(temp_v2 + 0x518) == 0xc) {
-                temp_v12 = FUN_002c2c68(temp_v23);
+                temp_v12 = objectApplyIfUnblocked(temp_v23);
               }
               if ((*(int *)(temp_v2 + 0x524) >= 9) && (temp_v21 == temp_v12)) {
                 temp_v7 = FUN_001834a4(0x12,0x50b);
@@ -611,7 +611,7 @@ LAB_001fcee8:
   FUN_001835b4(2,0x12,0x4e4,temp_v12,param_2,0xb3);
   FUN_001835b4(2,0x12,0x4e5,temp_v12,param_2,0xb3);
   FUN_00164b5c(2,0x12,0x13,param_1,param_2,0xb3);
-  if ((*(int *)(temp_v2 + 0x518) == 0xe) && (temp_v11 = FUN_002c2c68(temp_v23), temp_v11 - 1 == temp_v21))
+  if ((*(int *)(temp_v2 + 0x518) == 0xe) && (temp_v11 = objectApplyIfUnblocked(temp_v23), temp_v11 - 1 == temp_v21))
   {
     FUN_00288b20(temp_v12,param_2,*(unsigned int *)(temp_v2 + 0x658) & 0xffff,0x435,temp_v24,0,0,0,0);
   }
@@ -646,7 +646,7 @@ LAB_001fcee8:
                  &LAB_001fd328,temp_v14);
   }
 LAB_001fd57c:
-  temp_v12 = FUN_002c2c68(temp_v23);
+  temp_v12 = objectApplyIfUnblocked(temp_v23);
   if (temp_v12 < 1) {
     FUN_00164b5c(2,0x12,0x1b,param_1,param_2,0xdd);
     temp_v12 = FUN_001834a4(0x12,0x544);

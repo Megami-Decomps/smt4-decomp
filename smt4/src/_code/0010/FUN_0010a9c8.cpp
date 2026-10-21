@@ -9,7 +9,7 @@ int SBORROW4(...);
 
 int FUN_001189a4(int);
 int FUN_00124d24(int);
-int FUN_00126194(int);
+int titleOverlayDraw(int);
 int FUN_002bdf94(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002be370(...);
@@ -44,7 +44,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_001189a4. */
 /* Supplied declaration required: FUN_00124d24. */
-/* Supplied declaration required: FUN_00126194. */
+/* Supplied declaration required: titleOverlayDraw. */
 /* Supplied declaration required: FUN_002bdce0. */
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -94,7 +94,7 @@ unsigned int FUN_0010a9c8(void)
         FUN_002bedb0(g_titleScene,3);
         efctSetSpeed();
       }
-      FUN_00126194(temp_v1);
+      titleOverlayDraw(temp_v1);
       FUN_001189a4(DAT_0043e190);
     }
   }
@@ -107,7 +107,7 @@ unsigned int FUN_0010a9c8(void)
       FUN_002bedb0(g_titleScene,3);
       efctSetSpeed();
     }
-    FUN_00126194(temp_v1);
+    titleOverlayDraw(temp_v1);
     FUN_001189a4(DAT_0043e190);
   }
   if ((*(char *)(DAT_0043e190 + 0x7d) != '\0') && (*(char *)(DAT_0043e190 + 0x7f) == '\0')) {

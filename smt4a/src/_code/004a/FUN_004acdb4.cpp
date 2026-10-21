@@ -1,28 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004acdb4` (_code @ 0x4acdb4, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler combines the vtable/kind stores and splits the remaining initializer group differently from retail. */
+#include "common.h"
 
-extern "C" {
+struct OperationAllocator;
+struct AllocatedOperation {
+    const void *vtable; // 0x00
+    u32 kind; // 0x04
+    u32 operation; // 0x08
+    OperationAllocator *owner; // 0x0c
+    u32 argument; // 0x10
+    s32 state; // 0x14
+    u8 unk18[0xc];
+};
+struct OperationAllocatorVtable {
+    AllocatedOperation *(*allocate)(OperationAllocator *, u32);
+};
+struct OperationAllocator {
+    OperationAllocatorVtable *vtable;
+};
 
-typedef int romwright_code(...);
-extern unsigned char DAT_0055c95c; /* 0x55c95c */
+extern "C" const u8 DAT_0055c95c[];
 
-
-void FUN_004acdb4(unsigned int *param_1,unsigned int param_2)
-
+// Allocate and initialize an operation with kind two and opcode six.
+extern "C" void FUN_004acdb4(OperationAllocator *allocator, u32 argument)
 {
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)(**(romwright_code **)*param_1)(param_1,0x24);
-  if (puVar1 != (unsigned int *)0x0) {
-    puVar1[5] = 0xffffffff;
-    *puVar1 = (unsigned int)&DAT_0055c95c;
-    puVar1[1] = 2;
-    puVar1[2] = 6;
-    puVar1[3] = (unsigned int)param_1;
-    puVar1[4] = param_2;
-  }
-  return;
+    AllocatedOperation *operation = allocator->vtable->allocate(allocator, sizeof(AllocatedOperation));
+    if (operation != NULL) {
+        operation->state = -1;
+        operation->vtable = DAT_0055c95c;
+        operation->kind = 2;
+        operation->operation = 6;
+        operation->owner = allocator;
+        operation->argument = argument;
+    }
 }
-
-} /* extern "C" */

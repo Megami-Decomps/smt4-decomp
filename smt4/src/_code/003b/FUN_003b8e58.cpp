@@ -1,55 +1,56 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b8e58` (_code @ 0x3b8e58, 0x3bc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
+#include "shard/W6_W6Match6_ContentTransition.h"
 
 extern "C" {
 
 int FUN_0022afc4(...);
-int FUN_0022b03c(int);
+int objBlockInitAndMark(int);
 int FUN_0022b064(int);
-int FUN_0022b244(unsigned int, int);
+int modelSetVisible(unsigned int, int);
 int FUN_0022b6c4(...);
-int FUN_00234f04(unsigned int, int);
+void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_0023d344(unsigned int);
 int FUN_002636d0(...);
 int dialogOpen(...);
 int FUN_0027e7b4(...);
-int FUN_00295ba4(int);
+int infoWinStartTimer(int);
 int scrScriptProcessStartEntry(...);
 int FUN_0029ee6c(int, int);
-int FUN_002a71fc(...);
+int messageStatesSetFirst(...);
 int buttonHelpSetPreset(int);
 int textFormatBuffer(unsigned char [36], unsigned char *, int);
 int modelLoadBamAndEnable(unsigned int, unsigned char *);
-int FUN_003b8404(...);
+void contentTransitionApplyCommand(ContentTransition *transition, const void *command);
 
 extern unsigned char LAB_003b9218; /* 0x3b9218 */
 extern unsigned char LAB_003b9220; /* 0x3b9220 */
 extern int DAT_0044cfb8; /* 0x44cfb8 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022afc4. */
-/* Supplied declaration required: FUN_0022b03c. */
+/* Supplied declaration required: objBlockInitAndMark. */
 /* Supplied declaration required: FUN_0022b064. */
 extern int FUN_0022b14c(int);
 extern int FUN_0022b238(int, int);
-/* Supplied declaration required: FUN_0022b244. */
+/* Supplied declaration required: modelSetVisible. */
 /* Supplied declaration required: FUN_0022b6c4. */
-/* Supplied declaration required: FUN_00234f04. */
+/* Supplied declaration required: nodeOwnerSetEnabled. */
 /* Supplied declaration required: FUN_0023d344. */
 /* Supplied declaration required: FUN_002636d0. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
 extern int FUN_002903f0(void);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002a71fc. */
+/* Supplied declaration required: messageStatesSetFirst. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: modelLoadBamAndEnable. */
-/* Supplied declaration required: FUN_003b8404. */
 
 
 void FUN_003b8e58(int param_1)
@@ -77,16 +78,16 @@ void FUN_003b8e58(int param_1)
         if (temp_v1 != 0xb) {
           if (temp_v1 == 0x14) {
             if (DAT_0044cfb8 != 0) {
-              FUN_002a71fc(1);
+              messageStatesSetFirst(1);
               FUN_0022b064(param_1);
-              FUN_0022b03c(param_1 + 0x9c);
+              objBlockInitAndMark(param_1 + 0x9c);
               FUN_0022b6c4(param_1 + 0x9c);
               *(unsigned char *)(param_1 + 0x6cc) = 0;
               temp_v1 = 0x28;
               DAT_0044cfb8 = 0;
             }
             else {
-              FUN_002a71fc(1);
+              messageStatesSetFirst(1);
               if ((*(char *)(*(int *)(param_1 + 0xd60) + 0x7c) != '\0') &&
                  (temp_v1 = FUN_002903f0(), temp_v1 != 0)) {
                 scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd9c),0x34);
@@ -109,7 +110,7 @@ void FUN_003b8e58(int param_1)
                     temp_v0 = *(char *)(temp_v1 + 0x2a);
                     if (!(temp_v0 == '\0' || temp_v0 == '\x06')) {
                       FUN_0022afc4(*(unsigned int *)(param_1 + 0xe5c),(int)*(short *)(temp_v1 + 0x28));
-                      FUN_0022b244(*puVar4,0);
+                      modelSetVisible(*puVar4,0);
                       temp_v2 = *puVar4;
                     }
                     else {
@@ -117,10 +118,10 @@ void FUN_003b8e58(int param_1)
                       FUN_0022afc4(*puVar4,(int)*(short *)(temp_v1 + 0x28),
                                    (int)*(char *)(temp_v1 + 0x2a));
                       modelLoadBamAndEnable(*puVar4,&LAB_003b9220);
-                      FUN_0022b244(*puVar4,1);
+                      modelSetVisible(*puVar4,1);
                       temp_v2 = *puVar4;
                     }
-                    FUN_00234f04(temp_v2,temp_v0 != '\0' && temp_v0 != '\x06');
+                    nodeOwnerSetEnabled((NodeEnableOwner*)temp_v2,temp_v0 != '\0' && temp_v0 != '\x06');
                   }
                 }
                 *(unsigned int *)(param_1 + 0x38) = 0;
@@ -132,7 +133,7 @@ void FUN_003b8e58(int param_1)
           }
         }
         else {
-          temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd74));
+          temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd74));
           if (temp_v1 == 2) {
             *(unsigned int *)(param_1 + 0x2c) = 0x14;
             return;
@@ -148,7 +149,7 @@ void FUN_003b8e58(int param_1)
           return;
         }
         DAT_0044cfb8 = 0;
-        FUN_00295ba4(0);
+        infoWinStartTimer(0);
         temp_v1 = 10;
       }
       *(int *)(param_1 + 0x2c) = temp_v1;
@@ -161,7 +162,7 @@ void FUN_003b8e58(int param_1)
       }
       textFormatBuffer(temp_v3,&LAB_003b9218,*(int *)(param_1 + 0xd60) + 0x6c);
       temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0xd6c),temp_v3);
-      FUN_002a71fc(0);
+      messageStatesSetFirst(0);
       buttonHelpSetPreset(0x90);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd74),temp_v2);
       *(unsigned char *)(param_1 + 0x6cc) = 1;
@@ -172,14 +173,14 @@ void FUN_003b8e58(int param_1)
   }
   else {
     if (temp_v1 == 0x1e) {
-      FUN_002a71fc(0);
-      temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd9c));
+      messageStatesSetFirst(0);
+      temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd9c));
       if (temp_v1 != 2) {
         return;
       }
       *(unsigned int *)(param_1 + 0x2c) = 0x1f;
       FUN_0022b064(param_1);
-      FUN_0022b03c(param_1 + 0x9c);
+      objBlockInitAndMark(param_1 + 0x9c);
       FUN_0022b6c4(param_1 + 0x9c);
       *(unsigned char *)(param_1 + 0x6cc) = 0;
       DAT_0044cfb8 = 0;
@@ -194,7 +195,7 @@ void FUN_003b8e58(int param_1)
       if (temp_v1 == 0) {
         return;
       }
-      FUN_002a71fc(1);
+      messageStatesSetFirst(1);
       *(unsigned int *)(param_1 + 0x28) = 5;
       *(unsigned int *)(param_1 + 0x2c) = 0;
       DAT_0044cfb8 = 0;
@@ -205,7 +206,7 @@ void FUN_003b8e58(int param_1)
       if (temp_v1 != 99) {
         return;
       }
-      FUN_003b8404(param_1,*(unsigned int *)(param_1 + 0xd60));
+      contentTransitionApplyCommand((ContentTransition *)param_1,(const void *)*(unsigned int *)(param_1 + 0xd60));
       return;
     }
     temp_v1 = FUN_0022b14c(param_1 + 0x9c);

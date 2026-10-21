@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_00589190; /* 0x589190 */
+extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
 
 
 void FUN_0045181c(int *param_1)
@@ -31,7 +31,7 @@ void FUN_0045181c(int *param_1)
       temp_v0 = *(int *)(temp_v2 + 0x20);
     }
     if (temp_v0 != 0) {
-      (*DAT_00589190)(temp_v0,0x102,temp_v1,*(unsigned int *)(temp_v2 + 0x1c));
+      (*g_gfxReleaseCallback)(temp_v0,0x102,temp_v1,*(unsigned int *)(temp_v2 + 0x1c));
       *(unsigned int *)(temp_v2 + 0x1c) = 0;
     }
     *(unsigned int *)(temp_v2 + 0xc) = 0;

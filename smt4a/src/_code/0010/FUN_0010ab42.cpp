@@ -13,7 +13,7 @@ typedef int romwright_code(...);
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 extern int FUN_0010aafa(int *, unsigned int);
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
@@ -30,7 +30,7 @@ long long FUN_0010ab42(int *param_1,unsigned int param_2,unsigned int param_3,un
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
   temp_v0 = FUN_0010aafa(param_1,param_2);
   if (temp_v0 != 0) {

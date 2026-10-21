@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_0028dc98(s32 arg);
+s32 scrCommMessageSetMode(s32 arg);
 u32 FUN_002865f8(void);
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
@@ -20,7 +20,7 @@ static void showMessage(s32 mode)
 /* Script command: clears the message state and shows a message in mode 14. */
 void scrComm_Message_ShowMode14(void)
 {
-    FUN_0028dc98(0);
+    scrCommMessageSetMode(0);
     showMessage(14);
 }
 

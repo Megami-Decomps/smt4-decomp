@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00221d78(...);
+int asdGxSetEffectColorFromRGBA8(...);
 int FUN_002b3c9c(unsigned short *, unsigned int);
 int FUN_002f8a54(void);
 int FUN_00338330(unsigned short *, int, int, int);
@@ -25,7 +25,7 @@ extern unsigned int DAT_006472f4; /* 0x6472f4 */
 extern unsigned int DAT_006472f8; /* 0x6472f8 */
 
 extern unsigned int FUN_00221cb0(void);
-/* Supplied declaration required: FUN_00221d78. */
+/* Supplied declaration required: asdGxSetEffectColorFromRGBA8. */
 /* Supplied declaration required: FUN_002b3c9c. */
 /* Supplied declaration required: FUN_002f8a54. */
 /* Supplied declaration required: FUN_00338330. */
@@ -49,12 +49,12 @@ void FUN_003b3fac(int param_1)
   }
   temp_v1 = temp_v3;
   FUN_0038136c(temp_v3,temp_v3 + 0x24);
-  FUN_00221d78(*(unsigned int *)(param_1 + 0x30));
+  asdGxSetEffectColorFromRGBA8(*(unsigned int *)(param_1 + 0x30));
   DAT_006472ec = DAT_006472dc;
   DAT_006472f0 = DAT_006472e0;
   DAT_006472f4 = DAT_006472e4;
   DAT_006472f8 = DAT_006472e8;
-  FUN_00221d78(temp_v1);
+  asdGxSetEffectColorFromRGBA8(temp_v1);
   FUN_002f8a54();
   temp_v2 = FUN_00221cb0();
   *(unsigned int *)(puVar4 + 0x28) =

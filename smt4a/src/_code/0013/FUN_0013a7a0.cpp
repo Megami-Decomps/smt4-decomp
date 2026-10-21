@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00143b58(int, int, int);
 int FUN_001448a8(int, int, int);
-int FUN_001742e4(int, int);
+int asdSoundObjectStop(int, int);
 int nw_snd_SoundHandle_DetachSound(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -15,13 +15,13 @@ typedef struct {
 } void_stack;
 
 extern unsigned char g_soundVolumeSetting; /* 0x588fb4 */
-extern unsigned char DAT_0061955c; /* 0x61955c */
+extern unsigned char g_eventQueueEntries; /* 0x61955c */
 extern int DAT_0063f500; /* 0x63f500 */
 
 /* Supplied declaration required: FUN_00143b58. */
 /* Supplied declaration required: FUN_001448a8. */
 extern int FUN_00162ea4(void);
-/* Supplied declaration required: FUN_001742e4. */
+/* Supplied declaration required: asdSoundObjectStop. */
 extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
 
@@ -37,7 +37,7 @@ void FUN_0013a7a0(void)
   
   temp_v1 = 0;
   do {
-    temp_v3 = *(int *)(&DAT_0061955c + temp_v1 * 4);
+    temp_v3 = *(int *)(&g_eventQueueEntries + temp_v1 * 4);
     if (temp_v3 != 0) {
       temp_v0 = jyoucyuGetTableEntry(1);
       if ((temp_v0 == 0) && (temp_v0 = FUN_00162ea4(), temp_v0 == 0)) {
@@ -48,7 +48,7 @@ void FUN_0013a7a0(void)
           FUN_00143b58(temp_v3,g_soundVolumeSetting,0);
         }
       }
-      *(unsigned int *)(&DAT_0061955c + temp_v1 * 4) = 0;
+      *(unsigned int *)(&g_eventQueueEntries + temp_v1 * 4) = 0;
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x20);
@@ -63,7 +63,7 @@ void FUN_0013a7a0(void)
       temp_v0 = temp_v1 + temp_v2 * 4;
       temp_v3 = *(int *)(temp_v0 + 0x20);
       if (temp_v3 != 0) {
-        FUN_001742e4(temp_v3,0);
+        asdSoundObjectStop(temp_v3,0);
         nw_snd_SoundHandle_DetachSound(temp_v0 + 0x20);
       }
       temp_v2 = temp_v2 + 1;

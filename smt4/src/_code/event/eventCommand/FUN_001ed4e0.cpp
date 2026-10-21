@@ -5,7 +5,7 @@
 extern "C" {
 
 int gameFlagSetValue(int, int);
-int FUN_002cd878(void);
+int commonBgStopAndResetFade(void);
 int FUN_002d6658(int);
 int FUN_002ef6b8(int, unsigned int);
 
@@ -15,7 +15,7 @@ extern unsigned char g_eventCommand; /* 0x43e088 */
 extern int scrGetArg(unsigned int);
 extern int jobIsValid(int);
 extern unsigned int gameFlagIsSet(void);
-/* Supplied declaration required: FUN_002cd878. */
+/* Supplied declaration required: commonBgStopAndResetFade. */
 /* Supplied declaration required: FUN_002d6658. */
 /* Supplied declaration required: FUN_002ef6b8. */
 
@@ -31,7 +31,7 @@ unsigned char FUN_001ed4e0(void)
   temp_v0 = scrGetArg(0);
   if ((*(int *)((unsigned char *)&g_eventCommand + 0x8)) == 0) {
     FUN_002d6658(0);
-    FUN_002cd878();
+    commonBgStopAndResetFade();
     temp_v1 = temp_v0 + 0x800;
     temp_v2 = gameFlagIsSet();
     FUN_002ef6b8(temp_v0,temp_v2);

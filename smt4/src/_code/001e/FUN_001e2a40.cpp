@@ -15,7 +15,7 @@ extern int g_mapGimic; /* 0x447a48 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-extern int FUN_00280a58(unsigned long long *);
+extern int mapResolveCircleOverlapXZ(unsigned long long *);
 
 
 void FUN_001e2a40(unsigned int *param_1)
@@ -38,7 +38,7 @@ void FUN_001e2a40(unsigned int *param_1)
   do {
     temp_v0 = g_mapGimic + temp_v1 * 0x28;
     if (((*(char *)(temp_v0 + 0x1c) != '\0') && (*(short *)(temp_v0 + 0x32) == 0xd)) &&
-       (temp_v0 = FUN_00280a58(&temp_v4), temp_v0 != 0)) {
+       (temp_v0 = mapResolveCircleOverlapXZ(&temp_v4), temp_v0 != 0)) {
       temp_v3 = (unsigned long long)uStack_28;
       temp_v2 = temp_v4;
     }

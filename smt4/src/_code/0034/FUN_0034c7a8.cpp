@@ -1,10 +1,17 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034c7a8` (_code @ 0x34c7a8, 0xc4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_BattleSpritePlacement.h"
+
+struct EnemySpriteAnchorObject {
+    u8 unk00[4];
+    const BattleSpritePlacement *placement;
+    u8 unk08[0x28];
+    f32 scale;
+};
 
 extern "C" {
 
-int FUN_0023ac2c(int, float *);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -13,7 +20,6 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_0023ac2c. */
 
 
 void FUN_0034c7a8(int param_1,unsigned int *param_2)
@@ -25,15 +31,14 @@ void FUN_0034c7a8(int param_1,unsigned int *param_2)
   float temp_v2;
   float temp_v3;
   float temp_v4;
-  float temp_v5;
-  float temp_v6;
-  float temp_v7;
+  BattleVector3 translation;
+  const EnemySpriteAnchorObject *owner = reinterpret_cast<const EnemySpriteAnchorObject *>(param_1);
   
   *(unsigned int *)(param_1 + 0x34) = *param_2;
   *(unsigned int *)(param_1 + 0x38) = param_2[1];
   *(unsigned int *)(param_1 + 0x3c) = param_2[2];
-  if (*(int *)(param_1 + 4) != 0) {
-    FUN_0023ac2c(*(int *)(param_1 + 4),&temp_v5);
+  if (owner->placement != NULL) {
+    enemyDrawComputeSpriteAnchorOffset(owner->placement,&translation,owner->scale);
     temp_v2 = *(float *)(param_1 + 0x34);
     temp_v3 = *(float *)(param_1 + 0x38);
     temp_v4 = *(float *)(param_1 + 0x3c);
@@ -42,9 +47,9 @@ void FUN_0034c7a8(int param_1,unsigned int *param_2)
       do {
         temp_v0 = *(int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x24) + temp_v1 * 4);
         temp_v1 = temp_v1 + 1;
-        *(float *)(temp_v0 + 0x58) = temp_v5 + temp_v2;
-        *(float *)(temp_v0 + 0x68) = temp_v6 + temp_v3;
-        *(float *)(temp_v0 + 0x78) = temp_v7 + temp_v4;
+        *(float *)(temp_v0 + 0x58) = translation.x + temp_v2;
+        *(float *)(temp_v0 + 0x68) = translation.y + temp_v3;
+        *(float *)(temp_v0 + 0x78) = translation.z + temp_v4;
         *(unsigned int *)(temp_v0 + 0x88) = *(unsigned int *)(temp_v0 + 0x88) | 0x800;
       } while (temp_v1 < 3);
     }

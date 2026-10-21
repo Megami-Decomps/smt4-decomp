@@ -1,38 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d0b58` (_code @ 0x4d0b58, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_TouchOwner.h"
 
 extern "C" {
+void ifTouchRegionRemove(void);
+void asdOperatorDelete(void *);
 
-int ifTouchRegionRemove(void);
-int asdOperatorDelete(unsigned int *);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: asdOperatorDelete. */
-
-
-void FUN_004d0b58(unsigned int *param_1,unsigned int param_2)
-
+// Remove the owner's touch regions before releasing its storage.
+void FUN_004d0b58(TouchRegionOwner *owner, void *vtable)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  *param_1 = param_2;
-  temp_v0 = 0;
-  if (temp_v0 < *(short *)((int)param_1 + 0x5a)) {
-    do {
-      ifTouchRegionRemove();
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(short *)((int)param_1 + 0x5a));
-  }
-  *(unsigned short *)((int)param_1 + 0x5a) = 0;
-  asdOperatorDelete(param_1);
-  return;
+    owner->vtable = vtable;
+    for (s32 i = 0; i < owner->regionCount; ++i)
+        ifTouchRegionRemove();
+    owner->regionCount = 0;
+    asdOperatorDelete(owner);
 }
-
-} /* extern "C" */
+}

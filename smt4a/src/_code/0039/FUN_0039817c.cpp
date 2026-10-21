@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_003fda08(unsigned int, int, int);
+int animationSelectClip(unsigned int, int, int);
 int FUN_003fe86c(unsigned int, int, int);
 int FUN_0040aad4(unsigned int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapGimic; /* 0x580ca0 */
 
-/* Supplied declaration required: FUN_003fda08. */
+/* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 unsigned int FUN_0039817c(int param_1)
@@ -42,9 +42,9 @@ unsigned int FUN_0039817c(int param_1)
     temp_v2 = *(unsigned int *)(*(int *)(temp_v1 + 0x8cc) + 4);
     FUN_003fe86c(temp_v2,0,2);
     if (param_1 == 0x2a) {
-      FUN_003fda08(temp_v2,1,2);
+      animationSelectClip(temp_v2,1,2);
     }
-    FUN_0040ace8(g_handleRegistry,temp_v2);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v2);
     temp_v2 = 1;
   }
   return temp_v2;

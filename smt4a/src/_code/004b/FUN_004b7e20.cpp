@@ -38,7 +38,7 @@ extern int DAT_0058800c; /* 0x58800c */
 /* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002a49e4. */
 /* Supplied declaration required: FUN_002bf4f4. */
@@ -146,7 +146,7 @@ void FUN_004b7e20(int param_1)
           }
         }
         else {
-          temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x1130));
+          temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1130));
           if (temp_v2 == 2) {
             *(unsigned int *)(param_1 + 0x2c) = 0x14;
             return;
@@ -187,7 +187,7 @@ void FUN_004b7e20(int param_1)
   else {
     if (temp_v2 == 0x1e) {
       messageSetMode(0);
-      temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x1158));
+      temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1158));
       if (temp_v2 != 2) {
         return;
       }

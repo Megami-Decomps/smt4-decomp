@@ -9,8 +9,8 @@ int FUN_00184310(void);
 int FUN_002a4b28(...);
 int FUN_0032fbd0(void);
 int FUN_00389f0c(...);
-int FUN_004a83f8(void);
-int FUN_004a849c(int, unsigned char [8]);
+int slotPoolResetTrackedState(void);
+int inventoryListAppend(int, unsigned char [8]);
 int FUN_004a84e8(int, int);
 int FUN_004a8584(unsigned char [8], int, int);
 int FUN_004a8750(unsigned int, int, int);
@@ -38,9 +38,9 @@ extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_002a4b28. */
 /* Supplied declaration required: FUN_0032fbd0. */
 /* Supplied declaration required: FUN_00389f0c. */
-/* Supplied declaration required: FUN_004a83f8. */
+/* Supplied declaration required: slotPoolResetTrackedState. */
 extern unsigned char gaugePercent(int, unsigned int);
-/* Supplied declaration required: FUN_004a849c. */
+/* Supplied declaration required: inventoryListAppend. */
 /* Supplied declaration required: FUN_004a84e8. */
 extern unsigned char FUN_004a8544(int, int);
 /* Supplied declaration required: FUN_004a8584. */
@@ -78,7 +78,7 @@ void FUN_004a1958(int param_1)
   releaseEntriesA();
   temp_v2 = param_1 + 0x864;
   if (*(char *)(param_1 + 0x860) != '\x01') {
-    FUN_004a83f8();
+    slotPoolResetTrackedState();
     temp_v9 = 0;
     temp_v8 = 0;
 LAB_004a19b4:
@@ -101,7 +101,7 @@ LAB_004a19b4:
           temp_v5 = (unsigned int)*puVar4;
           FUN_004a8750(temp_v5,*(unsigned char *)(param_1 + 0x861),0);
           temp_v14 = temp_v5;
-          FUN_004a849c(temp_v2,temp_v13);
+          inventoryListAppend(temp_v2,temp_v13);
         }
       }
       temp_v8 = temp_v8 + 1;
@@ -139,7 +139,7 @@ LAB_004a19b4:
     jyoucyuGetTableEntry(0);
   }
   else {
-    FUN_004a83f8();
+    slotPoolResetTrackedState();
     temp_v8 = gameGetSlotTable();
     temp_v5 = 0;
     if (temp_v5 < *(unsigned char *)(temp_v8 + 0x1ca3)) {
@@ -156,7 +156,7 @@ LAB_004a19b4:
             temp_v3 = (unsigned int)*puVar4;
             FUN_004a8750(temp_v3,*(unsigned char *)(param_1 + 0x861),0);
             temp_v14 = temp_v3;
-            FUN_004a849c(temp_v2,temp_v13);
+            inventoryListAppend(temp_v2,temp_v13);
           }
         }
         temp_v5 = (temp_v5 + 1) & 0xffff;

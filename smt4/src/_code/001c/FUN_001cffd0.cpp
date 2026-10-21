@@ -5,7 +5,7 @@
 extern "C" {
 
 int idMapLookup(void);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int dataTable06Sub1GetRecord(...);
 int FUN_002ae164(void);
 int VectorUnsignedToFloat(int, int);
@@ -32,7 +32,7 @@ struct fn_001cffd0_arg0 {
 #endif
 extern int FUN_0026a604(void);
 /* Supplied declaration required: idMapLookup. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002ae164. */
 
@@ -80,7 +80,7 @@ unsigned int FUN_001cffd0(fn_001cffd0_arg0 *param_1)
         if ((temp_v4 != 0) && (temp_v5 = 0, 0 < param_1->field_0x10)) {
           do {
             if (*(short *)(param_1->field_0xc + temp_v5 * 2) != 0) {
-              FUN_00283e48();
+              passiveSkillLookupRecord();
               temp_v3 = FUN_0026a604();
               if (temp_v3 != 0) {
                 temp_v8 = temp_v8 + temp_v10;

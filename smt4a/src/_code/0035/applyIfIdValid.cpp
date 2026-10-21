@@ -4,7 +4,7 @@ extern "C" {
 
 extern s32 dataTable23Type0FindIndexById(s32 value);
 extern void FUN_002d23f0(s32 id);
-extern void FUN_00274970(s32 value);
+extern void mapIfClearGroupRecordStates(s32 value);
 
 void applyIfIdValid(s32 value)
 {
@@ -15,7 +15,7 @@ void applyIfIdValid(s32 value)
 
     if (id != -1) {
         FUN_002d23f0(id);
-        FUN_00274970(value);
+        mapIfClearGroupRecordStates(value);
     }
 }
 

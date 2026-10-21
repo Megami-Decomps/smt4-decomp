@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a6880` (_code @ 0x4a6880, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: constructor of the class with vtable address point 0x55c8d8; base constructor FUN_004a82cc and member reset FUN_004a4bc8 need class declarations/symbol integration. */
 #include "romwright_types.h"
 
 extern "C" {

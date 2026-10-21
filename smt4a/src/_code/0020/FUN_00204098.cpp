@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00204098` (_code @ 0x204098, 0x459c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
 
@@ -60,13 +61,12 @@ int btlTalkBustUpCreate(void);
 int libc_strcpy(...);
 int FUN_003180c4(...);
 int FUN_00333dc8(...);
-int FUN_00334214(...);
+int statusDisplayBindUnitRecord(...);
 int FUN_003343f0(...);
 int objBInitBlock19D0(...);
 int FUN_0033449c(...);
 int gameGlobalsQueueValues(...);
 int FUN_00372100(...);
-int FUN_0037e0d0(...);
 int FUN_0037e12c(...);
 int soundChannelStopAll(...);
 
@@ -75,17 +75,17 @@ int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetKeyframe(...);
 int dialogClose(...);
 int FUN_0021b968(...);
-int FUN_00224880(...);
+int scrRunOpcodesStub(...);
 int FUN_002818a0(...);
 int obj04Finish(void);
 int FUN_0035ac58(...);
 int FUN_0037c6ac(...);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int FUN_0038b3f8(...);
 int FUN_003f2fb0(...);
 int FUN_003f3048(...);
 int flagValueAdd(...);
-int FUN_004a0ef8(...);
+int partyAddMoneyClamped(...);
 int bitsAt60Test(...);
 int FUN_004cd0c8(...);
 int FUN_004cd4b8(...);
@@ -95,7 +95,7 @@ int eventQueueAddUnique(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetImageKeyframe(...);
 int FUN_00203b1c(void);
-int FUN_00217358(...);
+int uiUpdateChainedSpriteRows(...);
 int FUN_0023c384(...);
 int mapDepartAdvanceState(void);
 int FUN_002e5c2c(...);
@@ -119,7 +119,7 @@ int FUN_00163aa4(...);
 int gameGetPlayerData(void);
 int FUN_001834a4(...);
 int pairSetFirstResetSecond(...);
-int FUN_00184c40(...);
+int pairSetHalves(...);
 int gameGetSlotRecord(...);
 int gameGetSlotTable(void);
 int FUN_0020b490(...);
@@ -131,7 +131,7 @@ int FUN_0037c8e4(int, int);
 int FUN_003982f4(void);
 int lmapMainCallIfActive2(void);
 int soundChannelRequestIfEnabled(...);
-int FUN_003e4940(void);
+int actorIsActive(void);
 int FUN_003e503c(...);
 int __aeabi_idivmod(...);
 
@@ -193,7 +193,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 extern int FUN_00187168(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
@@ -209,9 +209,9 @@ extern float FUN_001b4874(int, unsigned int);
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_0020b490. */
 /* Supplied declaration required: FUN_00215bd0. */
-/* Supplied declaration required: FUN_00217358. */
+/* Supplied declaration required: uiUpdateChainedSpriteRows. */
 /* Supplied declaration required: FUN_0021b968. */
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 extern int FUN_0022e750(void);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_0023acdc. */
@@ -220,7 +220,7 @@ extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_00240674. */
 extern int *FUN_0025e684(int);
 extern int dialogIsActive(void);
-extern int FUN_0026272c(void);
+extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0026c3c4. */
 /* Supplied declaration required: FUN_0026cbb8. */
@@ -247,9 +247,9 @@ extern int FUN_002effbc(void);
 extern long long FUN_002ffa9c(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: panelSetMode3. */
-extern int FUN_0032169c(void);
+extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
@@ -279,13 +279,12 @@ extern int stateHolderStateIs8Or10(void);
 extern int FUN_0037df64(void);
 /* Supplied declaration required: FUN_0037dfb0. */
 /* Supplied declaration required: FUN_0037e078. */
-/* Supplied declaration required: FUN_0037e0d0. */
 /* Supplied declaration required: FUN_0037e12c. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: FUN_00387ac4. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_0038b3f8. */
-extern int FUN_0038b568(void);
+extern int aocDataBlockHasEntries(void);
 /* Supplied declaration required: FUN_003982f4. */
 /* Supplied declaration required: stateHolderEnterState7. */
 extern int stateHolderStateIs0x12(void);
@@ -305,18 +304,18 @@ extern int statusDownGetCursorPosition(void);
 /* Supplied declaration required: soundChannelStopAll. */
 extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: engineGetFloatTableValue. */
-/* Supplied declaration required: FUN_003e4940. */
+/* Supplied declaration required: actorIsActive. */
 extern int FUN_003e4cb4(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_003f2fb0. */
 /* Supplied declaration required: FUN_003f3048. */
 extern unsigned int FUN_003f3104(int);
-extern unsigned int FUN_003f3654(int);
+extern unsigned int btlGetDemonEvolutionStatus(int);
 /* Supplied declaration required: FUN_003f36a4. */
 /* Supplied declaration required: FUN_003f391c. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: flagValueAdd. */
-/* Supplied declaration required: FUN_004a0ef8. */
+/* Supplied declaration required: partyAddMoneyClamped. */
 extern int FUN_004b6b1c(int);
 /* Supplied declaration required: itemResetOverLimitStates. */
 extern int recordContainsPairedId(unsigned int, unsigned int);
@@ -550,7 +549,7 @@ LAB_0020448c:
           pairSetFirstResetSecond(temp_v28 + 0x20,temp_v9 + 0x80c);
           temp_v8 = temp_v8 - temp_v9 * temp_v13;
           temp_v7 = FUN_001834a4(0x1d,temp_v16 + 0x30);
-          FUN_00184c40(temp_v28 + 0x20,(int)*(short *)(temp_v7 + 8),(int)*(short *)(temp_v7 + 10));
+          pairSetHalves(temp_v28 + 0x20,(int)*(short *)(temp_v7 + 8),(int)*(short *)(temp_v7 + 10));
           temp_v7 = FUN_001834a4(0x1d,0x2e - temp_v10);
           temp_v9 = __aeabi_idivmod(temp_v8,temp_v13);
           temp_v9 = FUN_001834a4(7,temp_v9 + 0x80c);
@@ -566,7 +565,7 @@ LAB_0020448c:
         temp_v16 = temp_v16 + 1;
         if (temp_v16 >= 4) {
           saveSlotFindSelected();
-          temp_v7 = FUN_003e4940();
+          temp_v7 = actorIsActive();
           if (temp_v7 != 0) {
             temp_v7 = 999999;
             temp_v27 = 0;
@@ -607,7 +606,7 @@ LAB_00204688:
                 temp_v8 = FUN_001834a4(0x1d,0x17e - temp_v27);
                 temp_v9 = __aeabi_idivmod(temp_v7,temp_v13);
                 temp_v9 = FUN_001834a4(7,temp_v9 + 0x80c);
-                FUN_00184c40(temp_v10 + 0x20,
+                pairSetHalves(temp_v10 + 0x20,
                              (int)(short)((*(short *)(temp_v8 + 8) -
                                           (short)(((((int)temp_v23 + (int)temp_v1) - (int)temp_v24) -
                                                   (((int)temp_v4 + (int)temp_v2) - (int)temp_v3)) / 2)) -
@@ -657,7 +656,7 @@ LAB_00204688:
     }
     break;
   case 3:
-    FUN_00217358(temp_v6);
+    uiUpdateChainedSpriteRows(temp_v6);
     temp_v7 = 0;
     do {
       temp_v16 = 0;
@@ -682,7 +681,7 @@ LAB_00204688:
     }
     break;
   case 4:
-    FUN_00217358(temp_v6);
+    uiUpdateChainedSpriteRows(temp_v6);
     temp_v7 = 0;
     do {
       temp_v16 = 0;
@@ -703,7 +702,7 @@ LAB_00204688:
     }
     break;
   case 5:
-    temp_v38 = FUN_00217358(temp_v6);
+    temp_v38 = uiUpdateChainedSpriteRows(temp_v6);
     temp_v45 = (int *)gameGetPlayerData();
     temp_v43 = (char *)(temp_v6 + 0x788f);
     temp_v46 = temp_v6 + 0x7800;
@@ -811,7 +810,7 @@ LAB_00204688:
       temp_v13 = temp_v13 & 0xffff;
       FUN_003e503c();
       temp_v51 = temp_v13;
-      temp_v35 = FUN_003e4940();
+      temp_v35 = actorIsActive();
       temp_v13 = (unsigned int)((unsigned long long)temp_v35 >> 0x20);
       if ((int)temp_v35 != 0) {
         *(unsigned char *)(temp_v16 + 0x788f) = 0;
@@ -1057,7 +1056,7 @@ LAB_00205528:
                   }
                 }
                 FUN_004cd4b8(temp_v8,temp_v10);
-                temp_v11 = FUN_003f3654(temp_v8);
+                temp_v11 = btlGetDemonEvolutionStatus(temp_v8);
                 *(unsigned int *)(temp_v27 + 0x46c4) = temp_v11;
                 temp_v14 = (unsigned short)*(unsigned char *)(temp_v27 + 0x46c8);
                 temp_v32 = temp_v14 != 1;
@@ -1125,7 +1124,7 @@ LAB_00205528:
             }
             temp_v13 = temp_v13 & 0xffff;
             FUN_003e503c();
-            temp_v8 = FUN_003e4940();
+            temp_v8 = actorIsActive();
             if (temp_v8 != 0) {
               *(int *)(temp_v13 + 0x30) = *(int *)(temp_v16 + 0x7870) + *(int *)(temp_v13 + 0x30);
               temp_v8 = FUN_004ccc7c(*(unsigned short *)(temp_v13 + 100),temp_v13 + 0x30);
@@ -1144,7 +1143,7 @@ LAB_00205528:
             }
             temp_v7 = temp_v7 + 1;
           } while (temp_v7 < 0x25);
-          FUN_004a0ef8(*(unsigned int *)(temp_v6 + 0x4428));
+          partyAddMoneyClamped(*(unsigned int *)(temp_v6 + 0x4428));
           temp_v7 = 1;
           temp_v16 = 1;
           *(unsigned short *)(temp_v46 + 0x8a) = 0;
@@ -1246,7 +1245,7 @@ LAB_00205528:
       } while (temp_v7 < 3);
       *(int *)(temp_v6 + 0x43ec) = *(int *)(temp_v6 + 0x43ec) + 1;
     }
-    FUN_00224880(*(unsigned int *)(temp_v6 + 0x43a0));
+    scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0));
     temp_v7 = 9;
     FUN_001517b4(9,1);
     if (temp_v7 == 0) {
@@ -1258,7 +1257,7 @@ LAB_00205528:
     FUN_0020b490(temp_v6,7);
     break;
   case 7:
-    FUN_00217358(temp_v6);
+    uiUpdateChainedSpriteRows(temp_v6);
     FUN_00163aa4();
     FUN_00163aa4(temp_v6 + 0x4134);
     if (*(char *)(temp_v6 + 0x4132) != '\0') {
@@ -1295,7 +1294,7 @@ LAB_00205528:
         uiSpriteSetKeyframe(temp_v6 + temp_v7 * 0x8c + 0xac,1,0);
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 8);
-      FUN_00388758(1);
+      messageDismissNumericBanner(1);
       eventQueueAddUniqueIfValid(0x100020e);
     }
     break;
@@ -1344,7 +1343,7 @@ LAB_00205528:
           FUN_003e503c(temp_v13);
           FUN_002c85b0(7);
           FUN_0033449c(1);
-          FUN_0037e0d0(temp_v6 + *piVar25 * 0x150 + 0x4430,0);
+          statusRequestUnitDetails((const UnitCategoryRecord*)(temp_v6 + *piVar25 * 0x150 + 0x4430),0,0);
           FUN_0037e12c(temp_v13,0);
           FUN_002a7324(1);
           FUN_0020b490(temp_v6,0x14);
@@ -1352,7 +1351,7 @@ LAB_00205528:
         else {
           FUN_002c85b0(6);
           FUN_0033449c(1);
-          FUN_00334214(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
+          statusDisplayBindUnitRecord(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
           temp_v11 = gameGetSlotRecord(temp_v7);
           objBInitBlock19D0(temp_v11,0);
           FUN_002a7324(1);
@@ -1502,7 +1501,7 @@ LAB_00206230:
       break;
     case 3:
       FUN_0033449c(0);
-      FUN_00334214(temp_v7,0,0);
+      statusDisplayBindUnitRecord(temp_v7,0,0);
       temp_v8 = 0;
       temp_v24 = *(short *)(temp_v16 + 0x4566);
       temp_v13 = (unsigned int)(*(short *)(temp_v16 + 0x4564) != 0);
@@ -1570,7 +1569,7 @@ LAB_00206230:
     case 4:
       temp_v16 = FUN_0026c3a0();
       if (temp_v16 != 0) {
-        temp_v16 = FUN_0032169c();
+        temp_v16 = btlTalkBustUpGetValue();
         if (temp_v16 == 0) {
           FUN_00336de4(*(unsigned short *)(temp_v7 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
@@ -1580,7 +1579,7 @@ LAB_00206230:
       }
       break;
     case 5:
-      temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+      temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
 joined_r0x002080f4:
       if (temp_v7 == 2) {
         temp_v7 = 10;
@@ -1636,13 +1635,13 @@ joined_r0x002075ac:
       *(int *)(temp_v6 + 0x436c) = temp_v7;
       break;
     case 2:
-      FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+      scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
       FUN_00371ef4();
       FUN_003d2150(0x1000219);
       *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
       break;
     case 3:
-      FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+      scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
       temp_v27 = stateHolderStateIsNot4();
       if (temp_v27 != 0) {
         temp_v27 = 0;
@@ -1772,7 +1771,7 @@ joined_r0x002075ac:
       temp_v7 = FUN_0023b3d0();
       if (temp_v7 != 0) {
         FUN_0033449c(1);
-        FUN_00334214(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
+        statusDisplayBindUnitRecord(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
         temp_v11 = gameGetSlotRecord((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
         objBInitBlock19D0(temp_v11,0);
         FUN_002a7324(1);
@@ -1868,7 +1867,7 @@ joined_r0x002075ac:
       }
       break;
     case 4:
-      temp_v16 = FUN_0026272c();
+      temp_v16 = messageMainIsIdle();
       if (temp_v16 != 0) {
         if (*(char *)(temp_v6 + 0x7f2c) != '\0') {
           FUN_002a5e7c(*(unsigned short *)(temp_v13 + 0x62));
@@ -1910,7 +1909,7 @@ joined_r0x002075ac:
       temp_v7 = FUN_0023b3d0();
       if (temp_v7 != 0) {
         FUN_0033449c(1);
-        FUN_00334214(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
+        statusDisplayBindUnitRecord(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
         temp_v11 = gameGetSlotRecord((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
         objBInitBlock19D0(temp_v11,0);
         FUN_002a7324(1);
@@ -1919,7 +1918,7 @@ joined_r0x002075ac:
       }
       break;
     case 6:
-      FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+      scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
       temp_v7 = stateHolderStateIs8Or10();
       if (temp_v7 != 0) {
         obj04Finish();
@@ -1929,7 +1928,7 @@ joined_r0x002075ac:
       }
       break;
     case 7:
-      temp_v7 = FUN_0026272c();
+      temp_v7 = messageMainIsIdle();
       if (temp_v7 != 0) {
         temp_v7 = FUN_003a7b74();
         temp_v16 = stateHolderCountMinus1();
@@ -1945,7 +1944,7 @@ joined_r0x002075ac:
       }
       break;
     case 8:
-      temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43a0));
+      temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0));
       if (temp_v7 == 2) {
         FUN_00333dc8(0);
         temp_v7 = FUN_002a4b74();
@@ -1994,7 +1993,7 @@ joined_r0x002075ac:
       case 1:
         temp_v16 = FUN_0026c3a0();
         if (temp_v16 != 0) {
-          temp_v16 = FUN_0032169c();
+          temp_v16 = btlTalkBustUpGetValue();
           if (temp_v16 == 0) {
             FUN_00336de4(*(unsigned short *)(temp_v7 + 0x62),1);
             btlTalkBustUpSetUnk2F4(1);
@@ -2006,7 +2005,7 @@ joined_r0x002075ac:
         }
         break;
       case 2:
-        FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+        scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
         if (*(int *)(temp_v6 + 0x437c) >= 0x21) {
           temp_v7 = 0;
           FUN_001517b4(0,1);
@@ -2050,7 +2049,7 @@ joined_r0x002073c8:
         }
         break;
       case 4:
-        temp_v16 = FUN_0026272c();
+        temp_v16 = messageMainIsIdle();
         if (temp_v16 != 0) {
           FUN_00333dc8(1);
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),10);
@@ -2060,7 +2059,7 @@ joined_r0x002073c8:
         }
         break;
       case 5:
-        temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+        temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
         if (temp_v7 == 2) {
           statusDownEnterState11(1);
           eventQueueAddUnique(0x100021a);
@@ -2085,7 +2084,7 @@ joined_r0x002073c8:
         if (temp_v16 != 0xb) {
           if (temp_v16 != 0xc) {
             if ((temp_v16 == 0x14) &&
-               (temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43a0)), temp_v7 == 2)) {
+               (temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0)), temp_v7 == 2)) {
               FUN_00333dc8(0);
               temp_v7 = FUN_002a4b74();
               if (temp_v7 == 0) {
@@ -2100,7 +2099,7 @@ joined_r0x002073c8:
             }
           }
           else {
-            temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+            temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
             if ((temp_v7 == 2) && (temp_v7 = stateHolderStateIs0x12(), temp_v7 != 0)) {
               FUN_00333dc8(0);
               temp_v7 = 100;
@@ -2109,7 +2108,7 @@ joined_r0x002073c8:
           }
         }
         else {
-          temp_v16 = FUN_0026272c();
+          temp_v16 = messageMainIsIdle();
           if (temp_v16 != 0) {
             FUN_00333dc8(1);
             scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),0xb);
@@ -2143,7 +2142,7 @@ joined_r0x002073c8:
       }
     }
     else {
-      temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43a0));
+      temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0));
       if (temp_v7 == 2) {
         FUN_00333dc8(0);
         temp_v7 = FUN_002a4b74();
@@ -2173,7 +2172,7 @@ joined_r0x002073c8:
       break;
     }
     if (temp_v16 != 1) {
-      if ((temp_v16 == 2) && (temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac)), temp_v7 == 2)) {
+      if ((temp_v16 == 2) && (temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac)), temp_v7 == 2)) {
         FUN_002a7288();
         roundObjFinish(temp_v6);
       }
@@ -2181,7 +2180,7 @@ joined_r0x002073c8:
     else {
       temp_v16 = FUN_0026c3a0();
       if ((temp_v16 != 0) && (temp_v16 = FUN_002effbc(), temp_v16 != 0)) {
-        temp_v16 = FUN_0032169c();
+        temp_v16 = btlTalkBustUpGetValue();
         if (temp_v16 == 0) {
           FUN_00336de4(*(unsigned short *)(temp_v7 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
@@ -2283,7 +2282,7 @@ joined_r0x002073c8:
       }
       break;
     case 4:
-      temp_v7 = FUN_0026272c();
+      temp_v7 = messageMainIsIdle();
       if (temp_v7 != 0) {
         piVar25 = (int *)(temp_v6 + 0x74c0);
         temp_v7 = *piVar25;
@@ -2306,7 +2305,7 @@ joined_r0x002073c8:
         if (temp_v27 >= 1) {
           FUN_002c85b0(6);
           FUN_0033449c(1);
-          FUN_00334214(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
+          statusDisplayBindUnitRecord(temp_v6 + *piVar25 * 0x150 + 0x4430,0,0);
           temp_v11 = gameGetSlotRecord((int)*(char *)(temp_v6 + *piVar25 * 0x150 + 0x442c));
           objBInitBlock19D0(temp_v11,0);
           FUN_002a7324(1);
@@ -2321,7 +2320,7 @@ joined_r0x002073c8:
           FUN_003e503c(temp_v13);
           FUN_002c85b0(7);
           FUN_0033449c(1);
-          FUN_0037e0d0(temp_v6 + *piVar25 * 0x150 + 0x4430,0);
+          statusRequestUnitDetails((const UnitCategoryRecord*)(temp_v6 + *piVar25 * 0x150 + 0x4430),0,0);
           FUN_0037e12c(temp_v13,0);
           FUN_002a7324(1);
           FUN_0020b490(temp_v6,0x14);
@@ -2470,7 +2469,7 @@ LAB_00207d0c:
       break;
     case 3:
       FUN_0033449c(0);
-      FUN_0037e0d0(temp_v13,0);
+      statusRequestUnitDetails((const UnitCategoryRecord*)temp_v13,0,0);
       temp_v16 = 0;
       temp_v24 = *(short *)(temp_v7 + 0x4566);
       temp_v26 = (unsigned int)(*(short *)(temp_v7 + 0x4564) != 0);
@@ -2530,7 +2529,7 @@ LAB_00207d0c:
     case 4:
       temp_v7 = FUN_0026c3a0();
       if (temp_v7 != 0) {
-        temp_v7 = FUN_0032169c();
+        temp_v7 = btlTalkBustUpGetValue();
         if (temp_v7 == 0) {
           FUN_00336de4(*(unsigned short *)(temp_v13 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
@@ -2543,7 +2542,7 @@ LAB_00207d0c:
       }
       break;
     case 5:
-      temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+      temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
       goto joined_r0x002080f4;
     case 10:
       FUN_00333dc8(0);
@@ -2567,14 +2566,14 @@ LAB_00207d0c:
       *(int *)(temp_v6 + 0x436c) = temp_v7;
       break;
     case 2:
-      FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+      scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
       FUN_00371ef4();
       FUN_003d2150(0x1000219);
       temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
       *(int *)(temp_v6 + 0x436c) = temp_v7;
       break;
     case 3:
-      FUN_00224880(*(unsigned int *)(temp_v6 + 0x43ac));
+      scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43ac));
       temp_v16 = stateHolderStateIsNot4();
       if (temp_v16 != 0) {
         temp_v16 = 0;
@@ -2742,7 +2741,7 @@ LAB_00207d0c:
       temp_v7 = FUN_0023b3d0();
       if (temp_v7 != 0) {
         FUN_0033449c(1);
-        FUN_0037e0d0(temp_v6 + *(int *)(temp_v6 + 0x74c0) * 0x150 + 0x4430,0);
+        statusRequestUnitDetails((const UnitCategoryRecord*)(temp_v6 + *(int *)(temp_v6 + 0x74c0) * 0x150 + 0x4430),0,0);
         FUN_0037e12c(temp_v13,0);
         FUN_002a7324(1);
         FUN_0020b490(temp_v6,0x14);
@@ -2750,7 +2749,7 @@ LAB_00207d0c:
     }
     break;
   case 0x16:
-    temp_v7 = FUN_00224880(*(unsigned int *)(temp_v6 + 0x43a0));
+    temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x43a0));
     if (temp_v7 == 2) {
       FUN_00387ac4(0);
       FUN_00168980(3);
@@ -2758,7 +2757,7 @@ LAB_00207d0c:
     }
     break;
   case 0x18:
-    temp_v7 = FUN_0038b568();
+    temp_v7 = aocDataBlockHasEntries();
     if (temp_v7 != 0) {
       FUN_0020b490(temp_v6,0x17);
     }

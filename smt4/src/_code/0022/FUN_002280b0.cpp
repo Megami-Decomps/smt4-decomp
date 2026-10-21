@@ -1,34 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002280b0` (_code @ 0x2280b0, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct SelectedBattleParameter {
+    u8 unk000[0x192]; // 0x000
+    s16 value;         // 0x192
+};
+struct BattleParameterOwner {
+    u8 unk0000[0x1cfc]; // 0x0000
+    SelectedBattleParameter* selected; // 0x1cfc
+};
 
 extern "C" {
+void* btlGetMainState(void);
+s32 FUN_00293230(void);
 
-int btlGetMainState(void);
-
-extern int FUN_00293230(void);
-/* Supplied declaration required: btlGetMainState. */
-
-
-int FUN_002280b0(int param_1)
-
+// Returns the selected nonnegative parameter, or zero while the script unit suppresses it.
+s32 FUN_002280b0(BattleParameterOwner* owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *(int *)(param_1 + 0x1cfc);
-  if ((temp_v0 != 0) && (-1 < *(short *)(temp_v0 + 0x192))) {
+    if (owner->selected == NULL || owner->selected->value < 0) {
+        return -1;
+    }
     btlGetMainState();
-    temp_v0 = FUN_00293230();
-    if (temp_v0 == 0) {
-      temp_v0 = (int)*(short *)(*(int *)(param_1 + 0x1cfc) + 0x192);
-    }
-    else {
-      temp_v0 = 0;
-    }
-    return temp_v0;
-  }
-  return -1;
+    return FUN_00293230() != 0 ? 0 : owner->selected->value;
 }
-
-} /* extern "C" */
+}

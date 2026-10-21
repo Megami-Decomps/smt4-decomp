@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_002d8c90(s32 state);
+void popupQueueInsertUnique(s32 state);
 s32 FUN_002c2758(s32 arg);
 s32 FUN_002d8b58(s32 a, s32 b);
 
@@ -15,7 +15,7 @@ void FUN_002466a8(void)
 
     if (g_popupState->state != 0) {
         if (g_popupState->state != 0x10) {
-            FUN_002d8c90(0x10);
+            popupQueueInsertUnique(0x10);
             return;
         }
     } else {

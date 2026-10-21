@@ -8,18 +8,18 @@ int FUN_00232848(void);
 int FUN_002328b4(void);
 int FUN_00233240(...);
 int FUN_00233818(int);
-int FUN_00233854(unsigned int);
-int FUN_0023553c(...);
+int ifTouchRegionClearAll(unsigned int);
+int messageMainSetTargetFlags(...);
 int FUN_0026c57c(void);
 int FUN_00295660(int, int [33]);
 int scrScriptProcessStartEntry(...);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int FUN_0029cc44(...);
 int FUN_0029ce60(unsigned int, int, int);
 int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int FUN_0029e620(unsigned int, int);
+int messageTargetSetValue(unsigned int, int);
 int FUN_0029ede8(int, unsigned int, unsigned int, int);
 int FUN_0029ee6c(...);
 int FUN_002a0cc8(...);
@@ -39,10 +39,10 @@ extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
-/* Supplied declaration required: FUN_0023553c. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: FUN_0026c57c. */
 extern int gameGetNavigationState(void);
@@ -50,14 +50,14 @@ extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029ce60. */
 extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
@@ -83,11 +83,11 @@ void FUN_003a8450(int param_1)
   
   temp_v5 = 0;
   temp_v6 = 0;
-  temp_v1 = FUN_0023360c(param_1 + 0x20);
+  temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v7[0] = 0;
   temp_v2 = (unsigned int)*(unsigned short *)(param_1 + 0x5a8 + temp_v1 * 0x20 + 4);
   FUN_0029ce60(temp_v2,*(unsigned char *)(param_1 + 0x5a5),0);
-  FUN_0029e620(-temp_v2,0);
+  messageTargetSetValue(-temp_v2,0);
   temp_v1 = inputIsQuestMenuPressed();
   temp_v7[0] = param_1 + 0x55c;
   if (0 < *(short *)(param_1 + 0x5a8)) {
@@ -112,12 +112,12 @@ void FUN_003a8450(int param_1)
     if (*(char *)(param_1 + 0x5a4) == '\0') {
       FUN_0029cc44(1);
     }
-    FUN_00233854(*(unsigned int *)(param_1 + 0x590));
+    ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x590));
     FUN_00233818(temp_v7[0]);
     return;
   }
   if (temp_v5 != 0) {
-    temp_v1 = FUN_0023360c(param_1 + 0x20);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v0 = *(unsigned short *)(param_1 + 0x5a8 + temp_v1 * 0x20 + 4);
     temp_v7[0] = 0;
     temp_v2 = (unsigned int)temp_v0;
@@ -160,7 +160,7 @@ void FUN_003a8450(int param_1)
       *(unsigned int *)(param_1 + 0x18) = 0;
       buttonHelpSetPreset(0x9e);
     }
-    FUN_0023553c(1);
+    messageMainSetTargetFlags(1);
     FUN_002a0cc8(1);
     FUN_002328b4();
     return;
@@ -187,7 +187,7 @@ void FUN_003a8450(int param_1)
     FUN_0029cc44(1);
   }
   FUN_0029ee6c(0,0x323232ff);
-  FUN_0029ca58();
+  beginStatusPanelClose();
   FUN_00233240(param_1 + 0xdc,1);
   FUN_002a0cc8(1);
   *(unsigned int *)(param_1 + 0x14) = 0xb;

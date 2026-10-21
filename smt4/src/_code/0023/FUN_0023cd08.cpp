@@ -8,7 +8,7 @@ int FUN_0027da30(int, int);
 int btlMainFindEntryByListedId(int, int);
 int dataTable00FindById(void);
 int FUN_002d8c3c(void);
-int FUN_0033e104(unsigned int, int *);
+int enemyDrawCalcVerticalOffset(unsigned int, int *);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -22,7 +22,7 @@ extern unsigned int FUN_0027d9e8(int, unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002d8c3c. */
-/* Supplied declaration required: FUN_0033e104. */
+/* Supplied declaration required: enemyDrawCalcVerticalOffset. */
 
 
 void FUN_0023cd08(int param_1,int param_2,int param_3)
@@ -55,7 +55,7 @@ LAB_0023cd88:
             temp_v3 = param_1;
             FUN_0027da30(param_1,param_2);
             temp_v1 = FUN_0027d9e8(param_1,*(unsigned int *)(temp_v3 + temp_v4 * 4 + 0xc));
-            FUN_0033e104(temp_v1,&temp_v6);
+            enemyDrawCalcVerticalOffset(temp_v1,&temp_v6);
             return;
           }
           break;
@@ -71,7 +71,7 @@ LAB_0023cd88:
     temp_v3 = param_1;
     FUN_0027da30(param_1,param_2);
     temp_v1 = FUN_0027d9e8(param_1,*(unsigned int *)(temp_v3 + temp_v4 * 4 + 0xc));
-    FUN_0033e104(temp_v1,&temp_v6);
+    enemyDrawCalcVerticalOffset(temp_v1,&temp_v6);
   }
   else {
     puVar3 = *(unsigned int **)(param_1 + 0x1e88);

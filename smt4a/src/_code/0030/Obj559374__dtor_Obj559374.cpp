@@ -1,62 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj559374D1Ev` (_code @ 0x30262c, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: vptr/test scheduling differs; compiler returns saved this instead of subtracting 4 from the member destructor result. */
+#include "shard/W6_W6Match1_Obj559374.h"
+
+struct Obj559374Implementation {
+    void* object;
+    void* buffer;
+    u32 unk08;
+    u8 borrowed;
+    u8 unk0d[3];
+};
+struct Obj559374Registry {
+    u8 unk00[0x64];
+    void* registrations;
+};
 
 extern "C" {
-
-int FUN_001055f4(int);
-int asdOperatorDeleteArray(int *);
-int operatorDeleteArray2(void);
-int FUN_002fb1c4(int);
-int FUN_002fb1d4(void);
-int FUN_002fb244(int);
-int FUN_002fb25c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-extern unsigned char DAT_0055937c; /* 0x55937c */
-extern unsigned char DAT_00594a58; /* 0x594a58 */
-
-/* Supplied declaration required: FUN_001055f4. */
-/* Supplied declaration required: asdOperatorDeleteArray. */
-extern int onlineStringDestroy(unsigned int *);
-/* Supplied declaration required: operatorDeleteArray2. */
-/* Supplied declaration required: FUN_002fb1c4. */
-/* Supplied declaration required: FUN_002fb1d4. */
-/* Supplied declaration required: FUN_002fb244. */
-/* Supplied declaration required: FUN_002fb25c. */
-
-
-int _ZN9Obj559374D1Ev(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-/* irregular: 7 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  
-  *param_1 = (unsigned int)&DAT_0055937c;
-  if (*(char *)(param_1 + 7) != '\0') {
-    FUN_002fb25c((*(unsigned int *)((unsigned char *)&DAT_00594a58 + 0x64)),param_1[4],param_3,param_4,param_4);
-  }
-  piVar2 = (int *)param_1[3];
-  if (piVar2 != (int *)0x0) {
-    temp_v0 = *piVar2;
-    if (temp_v0 != 0) {
-      if ((char)piVar2[3] == '\0') {
-        FUN_002fb1d4();
-        FUN_002fb244(*piVar2);
-        FUN_001055f4(temp_v0);
-      }
-      FUN_002fb1c4(*piVar2);
-      *piVar2 = 0;
-    }
-    if (piVar2[1] != 0) {
-      operatorDeleteArray2();
-      piVar2[1] = 0;
-    }
-    asdOperatorDeleteArray(piVar2);
-  }
-  param_1[3] = 0;
-  temp_v0 = onlineStringDestroy(param_1 + 1);
-  return temp_v0 - 4;
+extern Obj559374Registry DAT_00594a58;
+void FUN_002fb25c(void* registrations, u32 key);
+void* FUN_002fb1d4(void* object);
+void FUN_002fb244(void* object);
+void FUN_001055f4(void* data);
+void FUN_002fb1c4(void* object);
+void operatorDeleteArray2(void* buffer);
+void asdOperatorDeleteArray(void* object);
 }
 
-} /* extern "C" */
+Obj559374::~Obj559374()
+{
+    if (registered != 0) {
+        FUN_002fb25c(DAT_00594a58.registrations, registration);
+    }
+    Obj559374Implementation* resource = implementation;
+    if (resource != NULL) {
+        if (resource->object != NULL) {
+            if (resource->borrowed == 0) {
+                void* data = FUN_002fb1d4(resource->object);
+                FUN_002fb244(resource->object);
+                FUN_001055f4(data);
+            }
+            FUN_002fb1c4(resource->object);
+            resource->object = NULL;
+        }
+        if (resource->buffer != NULL) {
+            operatorDeleteArray2(resource->buffer);
+            resource->buffer = NULL;
+        }
+        asdOperatorDeleteArray(resource);
+    }
+    implementation = NULL;
+}

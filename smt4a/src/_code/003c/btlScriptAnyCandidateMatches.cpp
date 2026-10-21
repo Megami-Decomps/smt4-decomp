@@ -1,0 +1,43 @@
+/* NON_MATCHING: excluded-mask and loop-bound loads combine into LDM/LDRD; the distant state byte uses an extra ADD. */
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
+
+
+extern "C" {
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+u32 FUN_00232388(void);
+void FUN_00301a08(u32 group, s32 *first, s32 *count);
+BtlMainStateA *btlGetMainState(void);
+s32 FUN_002b54a0(BtlCombatantEntryA *entry, s32 kind);
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
+
+// Report whether a candidate in the current battle group satisfies the script query.
+u32 btlScriptAnyCandidateMatches(void)
+{
+    s32 kind = scrGetArg(0);
+    scrGetArg(1);
+    s32 first, count;
+    FUN_00301a08(FUN_00232388(), &first, &count);
+    for (s32 i = first; i < first + count; ++i) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) &&
+            !(entry->flags & g_btlCandidateMasks.excluded) &&
+            FUN_002b54a0(entry, kind)) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    if (btlGetMainState()->unk4cd1) {
+        BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
+        if (entry && FUN_002b54a0(entry, kind)) {
+            scrSetResult(1);
+            return 1;
+        }
+    }
+    scrSetResult(0);
+    return 1;
+}
+}

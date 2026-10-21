@@ -7,8 +7,8 @@ extern "C" {
 int ifTouchRegionRemove(void);
 int FUN_00167458(int, int);
 int sysPlaySe(int);
-int FUN_00184528(int, int);
-int FUN_00224880(unsigned int);
+int uiSpriteBankApplyPreset(int, int);
+int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int panelSetMode3(unsigned int, int);
 int screenShowMessage(int);
@@ -20,7 +20,7 @@ int FUN_004cf8dc(int, int);
 int sub10OwnerStart(int);
 int sendEvent100020E(void);
 int releaseEntriesA(...);
-int FUN_004d0738(int);
+int menuSynchronizeFlaggedSelection(int);
 int releaseEntriesB(...);
 
 typedef int romwright_code(...);
@@ -37,9 +37,9 @@ extern unsigned int vec2GetXInt(int);
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00167458. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184528. */
-/* Supplied declaration required: FUN_00224880. */
-extern int FUN_0026272c(void);
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
+/* Supplied declaration required: scrRunOpcodesStub. */
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: screenShowMessage. */
@@ -50,12 +50,12 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_004963f8. */
 /* Supplied declaration required: FUN_004cf8dc. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: sub10OwnerStart. */
 /* Supplied declaration required: sendEvent100020E. */
 extern int FUN_004d0584(void);
 /* Supplied declaration required: releaseEntriesA. */
-/* Supplied declaration required: FUN_004d0738. */
+/* Supplied declaration required: menuSynchronizeFlaggedSelection. */
 /* Supplied declaration required: releaseEntriesB. */
 
 
@@ -72,7 +72,7 @@ void FUN_00498ac0(int param_1)
   case 0:
     temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00498dc0);
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
-    FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
+    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
     *(unsigned int *)(param_1 + 0xc) = 0;
     *(unsigned int *)(param_1 + 0x16038) = 0;
     *(unsigned int *)(param_1 + 0x1603c) = 0;
@@ -83,12 +83,12 @@ void FUN_00498ac0(int param_1)
     *(unsigned int *)(param_1 + 8) = 1;
     return;
   case 1:
-    FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
+    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
     temp_v1 = *(int *)(param_1 + 0xc) + 1;
     *(int *)(param_1 + 0xc) = temp_v1;
     if ((temp_v1 >= 10) &&
        ((temp_v1 = FUN_004d0584(), temp_v1 != 0 ||
-        (temp_v1 = FUN_00224880(*(unsigned int *)(param_1 + 0x18c)), temp_v1 == 2)))) {
+        (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c)), temp_v1 == 2)))) {
       sendEvent100020E();
       obj04Finish();
       temp_v2 = 2;
@@ -99,12 +99,12 @@ void FUN_00498ac0(int param_1)
     }
     break;
   case 2:
-    temp_v1 = FUN_0026272c();
+    temp_v1 = messageMainIsIdle();
     if (temp_v1 != 0) {
       temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_00498dd0);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
-      FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
-      FUN_00184528(param_1 + 0x3cc,0);
+      scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
+      uiSpriteBankApplyPreset(param_1 + 0x3cc,0);
       sysPlaySe(0x79);
       temp_v2 = 3;
       *(unsigned int *)(param_1 + 8) = temp_v2;
@@ -117,7 +117,7 @@ void FUN_00498ac0(int param_1)
     temp_v2 = vec2GetYInt(temp_v1);
     temp_v0 = vec2GetXInt(temp_v1);
     pointConvertToFloat(param_1 + 0x3a4,temp_v0,temp_v2);
-    FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
+    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
     if (*(char *)(param_1 + 0x476) != '\0') {
       panelSetTarget(*(unsigned int *)(param_1 + 0x16000),0);
       temp_v2 = 4;
@@ -126,14 +126,14 @@ void FUN_00498ac0(int param_1)
     }
     break;
   case 4:
-    FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
+    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
     temp_v1 = param_1 + 0x9f88;
-    FUN_004d0738(param_1 + 0xb08);
+    menuSynchronizeFlaggedSelection(param_1 + 0xb08);
     (**(romwright_code **)(**(int **)(param_1 + 0xb3c) + 0xc))(*(int **)(param_1 + 0xb3c),temp_v1);
     sub10OwnerStart(temp_v1);
     FUN_004cf8dc(param_1 + 0x3cc,2);
     FUN_004cf8dc(param_1 + 0x3cc,0xc);
-    temp_v1 = FUN_004cfe4c(temp_v1);
+    temp_v1 = flaggedValueHolderGetTotal(temp_v1);
     screenShowMessage(*(unsigned short *)(param_1 + temp_v1 * 6 + 0x9ffe));
     temp_v1 = FUN_004d0584();
     if (temp_v1 != 0) {
@@ -146,7 +146,7 @@ void FUN_00498ac0(int param_1)
     }
     break;
   case 5:
-    temp_v1 = FUN_0026272c();
+    temp_v1 = messageMainIsIdle();
     if ((temp_v1 != 0) && (temp_v1 = panelStateIs0(), temp_v1 == 1)) {
       FUN_004963f8(param_1);
       releaseEntriesB(*(unsigned int *)(param_1 + 0xb3c));

@@ -1,37 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1458` (_code @ 0x2e1458, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: error literal loads into r4 then moves to r0; retail loads into r0 then preserves it in r4. */
+#include "common.h"
 
 extern "C" {
+s32 FUN_00254884(const char *path, u16 *converted, s32 kind);
+s32 FUN_002ad888(void);
+u32 FUN_002a84e8(const u16 *path);
+void FUN_002c3510(u32 result);
 
-int FUN_00254884(int, unsigned char [496], int);
-int FUN_002a84e8(unsigned char [496]);
-int FUN_002ad888(void);
-int FUN_002c3510(void);
-
-/* Supplied declaration required: FUN_00254884. */
-/* Supplied declaration required: FUN_002a84e8. */
-/* Supplied declaration required: FUN_002ad888. */
-/* Supplied declaration required: FUN_002c3510. */
-
-
-unsigned char * FUN_002e1458(int param_1)
-
+// Perform the filesystem operation on a converted kind-two path and save its result.
+u32 FUN_002e1458(const char *path)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned char temp_v0 [496];
-  
-  puVar1 = temp_v0;
-  FUN_00254884(param_1,temp_v0,2);
-  if (param_1 != 0) {
-    FUN_002ad888();
-    FUN_002a84e8(temp_v0);
-    FUN_002c3510();
-    return puVar1;
-  }
-  FUN_002c3510();
-  return (unsigned char *)0xe0e046bc;
+    u16 converted[248];
+    if (FUN_00254884(path, converted, 2) != 0) {
+        FUN_002ad888();
+        u32 result = FUN_002a84e8(converted);
+        FUN_002c3510(result);
+        return result;
+    }
+    u32 result = 0xe0e046bc;
+    FUN_002c3510(result);
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -1,0 +1,74 @@
+/* NON_MATCHING: -O2 candidate; first wrap test branches BNE/add then B/wrap instead of retail BEQ/wrap then B/add. */
+#include "shard/W6_W6Match7_NumericStepper.h"
+
+extern "C" {
+s32 FUN_001802d4(s32 key);
+s32 FUN_00284140(s32 key);
+s32 getMaskB5(u32 mode);
+s32 getMaskB6(u32 mode);
+s32 getMaskType3(u32 mode);
+s32 getMaskType4(u32 mode);
+s32 getMaskType5(u32 mode);
+s32 getMaskType6(u32 mode);
+void sendEvent100020D(void);
+}
+
+extern "C" void numericStepperHandleInput(NumericStepper* stepper)
+{
+    stepper->incrementActive = 0;
+    stepper->decrementActive = 0;
+    const s32 previous = stepper->value;
+    const s32 incrementState = FUN_00284140(stepper->incrementKey);
+    const s32 decrementState = FUN_00284140(stepper->decrementKey);
+    if (incrementState != 0) {
+        stepper->incrementActive = 1;
+    }
+    if (decrementState != 0) {
+        stepper->decrementActive = 1;
+    }
+
+    if (FUN_001802d4(stepper->incrementKey) != 0) {
+        if (stepper->value != stepper->maximum) {
+            ++stepper->value;
+        } else {
+            stepper->value = stepper->minimum;
+        }
+    } else if (incrementState == 2 && stepper->value < stepper->maximum) {
+        ++stepper->value;
+    } else if (FUN_001802d4(stepper->decrementKey) != 0) {
+        if (stepper->value == stepper->minimum) {
+            stepper->value = stepper->maximum;
+        } else {
+            --stepper->value;
+        }
+    } else if (decrementState == 2 && stepper->value > 0) {
+        --stepper->value;
+    } else if (getMaskB5(0) != 0 && stepper->value == stepper->maximum) {
+        stepper->value = stepper->minimum;
+    } else if (getMaskB6(0) != 0 && stepper->value == stepper->minimum) {
+        stepper->value = stepper->maximum;
+    } else {
+        if (getMaskType3(0) != 0) {
+            stepper->value += 10;
+        }
+        if (getMaskType4(0) != 0) {
+            stepper->value -= 10;
+        }
+        if (getMaskType5(0) != 0) {
+            ++stepper->value;
+        }
+        if (getMaskType6(0) != 0) {
+            --stepper->value;
+        }
+    }
+
+    if (stepper->value <= stepper->minimum) {
+        stepper->value = stepper->minimum;
+    }
+    if (stepper->value > stepper->maximum) {
+        stepper->value = stepper->maximum;
+    }
+    if (stepper->value != previous) {
+        sendEvent100020D();
+    }
+}

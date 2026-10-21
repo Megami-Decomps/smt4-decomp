@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_0024aaa0(void);
 int FUN_0026eda8(void);
-int FUN_0026ee14(...);
+int campCecDisplaySetRecord(...);
 int FUN_0026f204(void);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int gameGetUnitRecord(...);
 int buttonHelpSetPreset(...);
-int FUN_002bd81c(...);
+int positionStateSet(...);
 int FUN_002bd82c(...);
 int rt_aeabi_memclr(...);
 int memClear(void);
@@ -47,7 +47,7 @@ extern int FUN_002d6d44(...); /* 0x2d6d44 */
 extern int FUN_002e1744(...); /* 0x2e1744 */
 extern int FUN_002ec514(...); /* 0x2ec514 */
 extern int FUN_002fc7a0(...); /* 0x2fc7a0 */
-extern int FUN_002fc8dc(...); /* 0x2fc8dc */
+extern int campCecClassifyRequestedUnit(void*); /* 0x2fc8dc */
 extern int FUN_003172e0(...); /* 0x3172e0 */
 extern int FUN_00321af0(...); /* 0x321af0 */
 extern unsigned int *g_campCecEdit; /* 0x43dad0 */
@@ -55,16 +55,16 @@ extern unsigned int *g_campCecEdit; /* 0x43dad0 */
 /* Supplied declaration required: FUN_0024aaa0. */
 extern unsigned int FUN_0025463c(void);
 /* Supplied declaration required: FUN_0026eda8. */
-/* Supplied declaration required: FUN_0026ee14. */
+/* Supplied declaration required: campCecDisplaySetRecord. */
 extern unsigned int FUN_0026ef04(void);
 /* Supplied declaration required: FUN_0026f204. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
 extern int gameGetSlotTable(void);
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bd81c. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: FUN_002bd82c. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -126,7 +126,7 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1[0x2d] = (unsigned int)FUN_002e1744;
   puVar1[0x2f] = (unsigned int)FUN_002d6d44;
   puVar1[0x2e] = (unsigned int)FUN_00220d58;
-  puVar1[0x30] = (unsigned int)FUN_002fc8dc;
+  puVar1[0x30] = (unsigned int)campCecClassifyRequestedUnit;
   puVar1[0x31] = (unsigned int)FUN_002fc7a0;
   puVar1[0x32] = (unsigned int)FUN_002ec514;
   puVar1[0x35] = (unsigned int)&LAB_00220d38;
@@ -153,13 +153,13 @@ void FUN_002d67fc(unsigned char param_1)
   campCecDrawPageCreate();
   puVar1[4] = temp_v0;
   FUN_0026f204();
-  FUN_00297468(&LAB_002d6cd0,puVar1 + 0x29,0);
-  FUN_00297468(&LAB_002d6ce4,puVar1 + 0x2a,0);
-  FUN_00297468(&LAB_002d6cfc,puVar1 + 0x2b,0);
+  asdLoadFileAsyncSimple(&LAB_002d6cd0,puVar1 + 0x29,0);
+  asdLoadFileAsyncSimple(&LAB_002d6ce4,puVar1 + 0x2a,0);
+  asdLoadFileAsyncSimple(&LAB_002d6cfc,puVar1 + 0x2b,0);
   temp_v0 = asdTextCreate(0);
   puVar1[0x2c] = temp_v0;
   FUN_002bd82c(temp_v0,0xff);
-  FUN_002bd81c(puVar1[0x2c],0,0x646464ff);
+  positionStateSet(puVar1[0x2c],0,0x646464ff);
   buttonHelpSetPreset(0xb1);
   temp_v4 = 0;
   do {
@@ -177,7 +177,7 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1[0x24] = 0x14a;
   temp_v0 = gameGetPlayerData();
   temp_v1 = FUN_0024aaa0();
-  FUN_0026ee14(temp_v1,temp_v0);
+  campCecDisplaySetRecord(temp_v1,temp_v0);
   FUN_0024aaa0();
   FUN_0026eda8();
   temp_v4 = gameGetSlotTable();

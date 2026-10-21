@@ -8,11 +8,11 @@ int FUN_00249e54(int, char *);
 int asdMemFree(char *);
 
 /* Supplied declaration required: FUN_00249e54. */
-extern int FUN_0024a6b0(int);
-extern int FUN_0024a808(int);
+extern int keyedRecordRegisterName(int);
+extern int keyedRecordFindByName(int);
 extern int FUN_002522e0(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
-extern char *FUN_002c5c04(unsigned int);
+extern char *asdLoadFileSyncDefault(unsigned int);
 
 
 int FUN_002d848c(unsigned int param_1)
@@ -26,11 +26,11 @@ int FUN_002d848c(unsigned int param_1)
   unsigned char temp_v3;
   
   temp_v1 = FUN_002522e0(param_1,0x2f);
-  temp_v2 = FUN_0024a808(temp_v1 + 1);
+  temp_v2 = keyedRecordFindByName(temp_v1 + 1);
   if (temp_v2 != 0xff) {
     return temp_v2;
   }
-  pcVar4 = (char *)FUN_002c5c04(param_1);
+  pcVar4 = (char *)asdLoadFileSyncDefault(param_1);
   if ((pcVar4 != (char *)0x0) && (*pcVar4 == 'V')) {
     temp_v0 = pcVar4[1];
     temp_v3 = temp_v0 == 'E';
@@ -38,7 +38,7 @@ int FUN_002d848c(unsigned int param_1)
       temp_v0 = pcVar4[2];
     }
     if (temp_v3 && temp_v0 == 'R') {
-      temp_v1 = FUN_0024a6b0(temp_v1 + 1);
+      temp_v1 = keyedRecordRegisterName(temp_v1 + 1);
       FUN_00249e54(temp_v1,pcVar4);
       asdMemFree(pcVar4);
       return temp_v1;

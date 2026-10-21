@@ -63,7 +63,7 @@ struct fn_002fc7a0_arg0 {
     int field_0x148; /* +0x148 */
 };
 
-extern int FUN_00201ab0(unsigned char, unsigned int, unsigned int);
+extern int partyPanelExists(unsigned char, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002595e0. */
 /* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
@@ -128,7 +128,7 @@ unsigned int FUN_002fc7a0(fn_002fc7a0_arg0 *param_1,unsigned int param_2,unsigne
     temp_v2 = 2;
     param_1->field_0x128 = 1;
   }
-  temp_v3 = FUN_00201ab0(temp_v0,param_2,param_3);
+  temp_v3 = partyPanelExists(temp_v0,param_2,param_3);
   temp_v1 = temp_v2;
   if (temp_v3 != 0) {
     temp_v3 = FUN_0028a318();

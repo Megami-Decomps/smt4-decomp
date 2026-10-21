@@ -6,11 +6,11 @@ extern "C" {
 
 int sysMemClear(int, int, unsigned int, unsigned int, unsigned int);
 int FUN_0039b984(void);
-int FUN_0040a76c(unsigned int, unsigned int);
+int gameDataSetModeAndFlag(unsigned int, unsigned int);
 int FUN_0040a790(unsigned int);
 int FUN_0040a7b4(unsigned int);
 int FUN_0040a844(unsigned int, int);
-int FUN_0040a864(unsigned int, int);
+int gameDataSetEnabledBit(unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,12 +21,12 @@ extern int gameFlagIsSet(short);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0039b984. */
 extern unsigned int tableByteGet1(unsigned int);
-/* Supplied declaration required: FUN_0040a76c. */
+/* Supplied declaration required: gameDataSetModeAndFlag. */
 /* Supplied declaration required: FUN_0040a790. */
 /* Supplied declaration required: FUN_0040a7b4. */
 extern int tableFlagBit0(unsigned int);
 /* Supplied declaration required: FUN_0040a844. */
-/* Supplied declaration required: FUN_0040a864. */
+/* Supplied declaration required: gameDataSetEnabledBit. */
 
 
 void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -65,12 +65,12 @@ void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int para
           FUN_0040a790(temp_v3);
           if (psVar1[0x2c] != 1) {
             if (psVar1[0x2c] == 2) {
-              FUN_0040a864(temp_v3,0);
+              gameDataSetEnabledBit(temp_v3,0);
               FUN_0040a844(temp_v3,0);
             }
           }
           else {
-            FUN_0040a864(temp_v3,0);
+            gameDataSetEnabledBit(temp_v3,0);
             FUN_0040a844(temp_v3,1);
           }
         }
@@ -88,7 +88,7 @@ void FUN_00403b84(int param_1,int param_2,unsigned int param_3,unsigned int para
           } while (temp_v2 < 5);
         }
         if (temp_v5 < temp_v1) {
-          FUN_0040a76c(temp_v3,temp_v1);
+          gameDataSetModeAndFlag(temp_v3,temp_v1);
         }
         *(short *)(param_1 + *(int *)(param_1 + 0x660) * 2 + 0x408) = *psVar1;
         *(int *)(param_1 + 0x660) = *(int *)(param_1 + 0x660) + 1;

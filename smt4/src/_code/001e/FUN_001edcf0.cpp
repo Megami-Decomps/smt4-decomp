@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0019e0c0(...);
+int scrRunOpcodesStub(...);
 int FUN_00223898(int, int);
 int gameDataFlagsSet(int);
-int FUN_00259294(int);
+int gameDataFlagsSetBits(int);
 int gameDataBlocksAddFlags(int);
 int FUN_00289880(void);
 int FUN_002898e4(void);
@@ -33,11 +33,11 @@ extern unsigned char DAT_0043e312; /* 0x43e312 */
 extern signed char DAT_0043e313; /* 0x43e313 */
 extern int DAT_0043e314; /* 0x43e314 */
 
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 extern int FUN_002103dc(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00223898. */
 /* Supplied declaration required: gameDataFlagsSet. */
-/* Supplied declaration required: FUN_00259294. */
+/* Supplied declaration required: gameDataFlagsSetBits. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
@@ -117,24 +117,24 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
       FUN_00289880();
       DAT_0043e313 = '\x01';
     }
-    temp_v0 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x58));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
     if (temp_v0 != 2) {
       return 0;
     }
     gameDataBlocksAddFlags(1);
-    FUN_00259294(1);
+    gameDataFlagsSetBits(1);
     gameDataFlagsSet(1);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x58),1);
     temp_v1 = 5;
     break;
   case 5:
     buttonHelpSetPreset(0xe7);
-    FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x58));
+    scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
     FUN_00223898(temp_v2,1);
     temp_v1 = 6;
     break;
   case 6:
-    FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x58));
+    scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
     temp_v0 = FUN_0029ee2c();
     if (temp_v0 != 0) {
       DAT_0043e312 = 1;
@@ -172,7 +172,7 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     }
     break;
   case 7:
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x58));
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
     if (temp_v2 != 2) {
       return 0;
     }
@@ -182,7 +182,7 @@ unsigned int FUN_001edcf0(unsigned int param_1,int param_2)
     FUN_002c5758(1);
     gameDataFlagsClearAndRefresh(1);
     gameDataFlagsClear(1);
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)(temp_v2 + 0x58));
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x58));
     if (temp_v2 != 2) {
       return 0;
     }

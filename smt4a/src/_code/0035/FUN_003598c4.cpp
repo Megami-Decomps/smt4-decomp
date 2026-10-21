@@ -1,36 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003598c4` (_code @ 0x3598c4, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
+TexNode* asdTMTexTableGetNode(s32 tableIndex, s32 nodeIndex);
+void FUN_00169310(TexNode* node);
 
-int FUN_00169310(void);
-int asdTextureSetImage(void);
-
-/* Supplied declaration required: FUN_00169310. */
-extern int asdTMTexTableGetNode(void);
-/* Supplied declaration required: asdTextureSetImage. */
-
-
-int FUN_003598c4(void)
-
+static inline bool prepareTextureNode(TexNode* node, u32 imageMode, u32 stateFlag)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = asdTMTexTableGetNode();
-  if (temp_v0 != 0) {
-    FUN_00169310();
-    if (*(int *)(temp_v0 + 8) != 0) {
-      *(unsigned int *)(*(int *)(temp_v0 + 8) + 8) = 0x20000;
-      *(unsigned int *)(temp_v0 + 0x10) = *(unsigned int *)(temp_v0 + 0x10) | 0x20;
-      if (*(int *)(temp_v0 + 8) != 0) {
-        asdTextureSetImage();
-        *(unsigned int *)(temp_v0 + 0x10) = *(unsigned int *)(temp_v0 + 0x10) | 4;
-      }
+    if (node == NULL) {
+        return false;
     }
-  }
-  return temp_v0;
+    FUN_00169310(node);
+    if (node->loaded.texture == NULL) {
+        return false;
+    }
+    node->loaded.texture->unk08 = imageMode;
+    node->loaded.state |= stateFlag;
+    return true;
 }
 
-} /* extern "C" */
+// Load the requested texture node and upload its image in mode 0x20000.
+TexNode* FUN_003598c4(s32 tableIndex, s32 nodeIndex)
+{
+    TexNode* node = asdTMTexTableGetNode(tableIndex, nodeIndex);
+    if (prepareTextureNode(node, 0x20000, 0x20) && node->loaded.texture != NULL) {
+        asdTextureSetImage(node->loaded.texture);
+        node->loaded.state |= 4;
+    }
+    return node;
+}
+}

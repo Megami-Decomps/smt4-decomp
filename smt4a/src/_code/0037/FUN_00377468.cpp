@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00274970(int);
+int mapIfClearGroupRecordStates(int);
 int FUN_002d23f0(void);
 
 extern int DAT_005f163c; /* 0x5f163c */
@@ -16,7 +16,7 @@ extern unsigned int DAT_005f1860; /* 0x5f1860 */
 extern unsigned int DAT_005f1864; /* 0x5f1864 */
 extern unsigned char DAT_005f187c; /* 0x5f187c */
 
-/* Supplied declaration required: FUN_00274970. */
+/* Supplied declaration required: mapIfClearGroupRecordStates. */
 /* Supplied declaration required: FUN_002d23f0. */
 extern int dataTable23Type0FindIndexById(void);
 
@@ -29,13 +29,13 @@ void FUN_00377468(void)
   
   if ((DAT_005f163c != 0) && (temp_v0 = dataTable23Type0FindIndexById(), temp_v0 != -1)) {
     FUN_002d23f0();
-    FUN_00274970(DAT_005f163c);
+    mapIfClearGroupRecordStates(DAT_005f163c);
   }
   if (DAT_005f1640 != 0) {
     temp_v0 = dataTable23Type0FindIndexById();
     if (temp_v0 != -1) {
       FUN_002d23f0();
-      FUN_00274970(DAT_005f1640);
+      mapIfClearGroupRecordStates(DAT_005f1640);
     }
     DAT_005f1640 = 0;
   }

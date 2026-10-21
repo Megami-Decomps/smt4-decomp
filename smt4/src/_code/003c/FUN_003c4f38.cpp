@@ -19,12 +19,12 @@ extern ListSettings *DAT_004398d4; /* 0x4398d4 */
 
 extern u32 *asdListBoxGetItemText(void *listBox, u32 id);
 extern u32 *asdListBoxGetItemValuePtr(void *listBox, u32 id);
-extern u32 FUN_0025628c(void *listBox);
+extern u32 asdListBoxGetSelectedItemId(u32 job);
 
 /* Copies the selected list box item into its slot of the settings record. */
 void FUN_003c4f38(ListScreen *screen)
 {
-    u32 id = FUN_0025628c(screen->listBox);
+    u32 id = asdListBoxGetSelectedItemId((u32)screen->listBox);
     u32 *text = DAT_004398d4->text;
 
     switch (id) {

@@ -14,6 +14,7 @@ extern "C" {
 __weak void asdDebugHookVoid(void);
 __weak void asdDebugHookPtr(const void *object);
 __weak void asdDebugHookPtrInt(const void *object, int value);
+__weak void asdDebugHookWords3(u32 first, u32 second, u32 third);
 /* Hooks whose result is the object they were given (a constructor returning `this`). */
 __weak void *asdDebugHookPass(void *object);
 

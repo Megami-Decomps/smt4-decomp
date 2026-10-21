@@ -18,7 +18,7 @@ extern unsigned int DAT_00594a00; /* 0x594a00 */
 extern unsigned int rt_malloc(int);
 extern unsigned int *operatorNewArray(unsigned int);
 /* Supplied declaration required: FUN_002f5020. */
-extern unsigned int *FUN_0030cbc0(int, int);
+extern unsigned int *paramsCopyConstruct(int, int);
 
 
 void FUN_00129d40(int param_1)
@@ -41,7 +41,7 @@ void FUN_00129d40(int param_1)
   for (temp_v2 = 0; temp_v2 < DAT_00594a00; temp_v2 = temp_v2 + 1) {
     temp_v1 = *(int *)(param_1 + 8) + temp_v2 * 0x14;
     if (temp_v1 != 0) {
-      puVar1 = (unsigned int *)FUN_0030cbc0(temp_v1,param_1 + 0x20);
+      puVar1 = (unsigned int *)paramsCopyConstruct(temp_v1,param_1 + 0x20);
       *puVar1 = (unsigned int)&DAT_0055ae08;
     }
   }

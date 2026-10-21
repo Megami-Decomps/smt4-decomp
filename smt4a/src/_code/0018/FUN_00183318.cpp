@@ -7,7 +7,7 @@ extern "C" {
 int uiSpriteSelectAnim(int, int);
 int uiSpriteSetKeyframe(int, int, int);
 int uiSpriteSetImageKeyframe(int, int, int);
-int FUN_0019d36c(void);
+int ifTouchDecrementTimer(void);
 int FUN_0019e330(int, int, int);
 
 extern unsigned char g_buttonHelp; /* 0x57f0c4 */
@@ -15,7 +15,7 @@ extern unsigned char g_buttonHelp; /* 0x57f0c4 */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0019d36c. */
+/* Supplied declaration required: ifTouchDecrementTimer. */
 /* Supplied declaration required: FUN_0019e330. */
 
 
@@ -39,7 +39,7 @@ void FUN_00183318(int param_1)
       if (param_1 != 0) {
         *(unsigned char *)(temp_v1 + 0x5ac) = 0;
       }
-      FUN_0019d36c();
+      ifTouchDecrementTimer();
       *piVar4 = *(int *)(temp_v0 + 0x5d0) - 1;
     }
     temp_v2 = temp_v2 + 1;
@@ -47,7 +47,7 @@ void FUN_00183318(int param_1)
   if (0 < *(int *)(temp_v0 + 0x5d0)) {
     temp_v2 = 0;
     do {
-      FUN_0019d36c();
+      ifTouchDecrementTimer();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < *(int *)(temp_v0 + 0x5d0));
     *(unsigned int *)(temp_v0 + 0x5d0) = 0;

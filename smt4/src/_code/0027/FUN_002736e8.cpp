@@ -9,19 +9,19 @@ int FUN_002900d0(void);
 int FUN_0029016c(unsigned int, int);
 int scrScriptProcessStartEntry(int, int);
 int FUN_00297060(void);
-int FUN_00297468(unsigned char *, int *, int);
+int asdLoadFileAsyncSimple(unsigned char *, int *, int);
 
 extern unsigned char LAB_002737d4; /* 0x2737d4 */
 extern unsigned char LAB_002737ec; /* 0x2737ec */
 
-extern int FUN_0019e0c0(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: gameJumpRequestClear. */
 /* Supplied declaration required: FUN_002900d0. */
 /* Supplied declaration required: FUN_0029016c. */
 extern unsigned int FUN_002903f0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 
 
 unsigned int FUN_002736e8(int *param_1)
@@ -35,7 +35,7 @@ unsigned int FUN_002736e8(int *param_1)
   if (temp_v0 != 0) {
     if (temp_v0 != 1) {
       if (temp_v0 == 2) {
-        temp_v0 = FUN_0019e0c0(param_1[5]);
+        temp_v0 = scrRunOpcodesStub(param_1[5]);
         if (temp_v0 != 2) {
           return 0;
         }
@@ -65,8 +65,8 @@ unsigned int FUN_002736e8(int *param_1)
     temp_v0 = 2;
   }
   else {
-    FUN_00297468(&LAB_002737d4,param_1 + 3,0);
-    FUN_00297468(&LAB_002737ec,param_1 + 4,0);
+    asdLoadFileAsyncSimple(&LAB_002737d4,param_1 + 3,0);
+    asdLoadFileAsyncSimple(&LAB_002737ec,param_1 + 4,0);
     temp_v0 = 1;
   }
   *param_1 = temp_v0;

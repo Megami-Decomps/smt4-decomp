@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(unsigned char [32], unsigned char *);
-int FUN_0014aa88(void);
+int tripleClear(void);
 int asdMemoryAllocTracked(int, int, int, int);
 int FUN_001642e4(unsigned char *, unsigned int [2], int, int);
 int FUN_001abbc4(void);
@@ -21,7 +21,7 @@ extern int g_eplSlots; /* 0x580c8c */
 extern int g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0014aa88. */
+/* Supplied declaration required: tripleClear. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: FUN_001642e4. */
 /* Supplied declaration required: FUN_001abbc4. */
@@ -43,7 +43,7 @@ void FUN_002b75b0(void)
     temp_v0 = 0x100;
     asdMemoryAllocTracked(0x100,0x100,0,0x64c);
     g_eplSlots = temp_v0;
-    FUN_0014aa88();
+    tripleClear();
     temp_v1 = 0;
     do {
       temp_v2 = temp_v1 + 1;

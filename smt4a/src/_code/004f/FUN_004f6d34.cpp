@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp9C; /* 0x9c: local_9c */
 } param_1_stack;
 
-extern unsigned int FUN_002e4c2c(int);
+extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: FUN_003afd30. */
 extern int FUN_003c5d8c(void);
@@ -65,7 +65,7 @@ unsigned int FUN_004f6d34(int param_1)
       temp_v5 = pcVar6[2] == 'R';
     }
     if (temp_v5) {
-      temp_v1 = FUN_002e4c2c(param_1 + 0x3594);
+      temp_v1 = keyedRecordRegisterName(param_1 + 0x3594);
       *puVar4 = (char)temp_v1;
       FUN_003478dc(temp_v1,pcVar6);
       *puVar4 = (char)temp_v1;

@@ -31,7 +31,7 @@ extern int wstrlen(int);
 /* Supplied declaration required: wideBufferAppend. */
 /* Supplied declaration required: FUN_002f6be2. */
 /* Supplied declaration required: operatorDeleteArrayNullable. */
-extern unsigned int FUN_002fbd00(unsigned int, unsigned int);
+extern unsigned int wideBufferAppendHolderValue(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002fbd0a. */
 
 
@@ -48,14 +48,14 @@ void FUN_00114d60(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   
   FUN_002ea2e8(temp_v3);
   temp_v0 = wideBufferAppend(temp_v3,&LAB_00114dec);
-  temp_v0 = FUN_002fbd00(temp_v0,param_2);
+  temp_v0 = wideBufferAppendHolderValue(temp_v0,param_2);
   temp_v0 = wideBufferAppend(temp_v0,&DAT_00537f3c);
   temp_v0 = wideBufferAppend(temp_v0,"Content-Disposition: form-data; name=\"");
-  temp_v0 = FUN_002fbd00(temp_v0,param_3);
+  temp_v0 = wideBufferAppendHolderValue(temp_v0,param_3);
   temp_v0 = wideBufferAppend(temp_v0,&LAB_00114dfc);
   temp_v0 = wideBufferAppend(temp_v0,&DAT_00537f3c);
   temp_v0 = wideBufferAppend(temp_v0,&DAT_00537f3c);
-  temp_v0 = FUN_002fbd00(temp_v0,param_4);
+  temp_v0 = wideBufferAppendHolderValue(temp_v0,param_4);
   wideBufferAppend(temp_v0,&DAT_00537f3c);
   onlineStringConstruct(temp_v5,temp_v4);
   FUN_002f6be2(temp_v5,&temp_v2);

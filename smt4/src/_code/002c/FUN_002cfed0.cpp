@@ -11,7 +11,7 @@ int uiSpriteSetImageKeyframe(void *block, int a, int b);
 int buttonHelpSetPreset(int a);
 int FUN_002bee58(void *block, int a);
 extern int FUN_00293230(void);
-extern int FUN_002b898c(void);
+extern int buttonHelpGetStatus(void);
 
 typedef struct BtlMain {
     /* 0x0000 */ u8 unk0000[0x44A0];
@@ -72,7 +72,7 @@ void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
             }
             FUN_0029ee6c(0, 0x323232ff);
             playSceneSetState(scene, 0x28, 1);
-            result = FUN_002b898c();
+            result = buttonHelpGetStatus();
             if (result != 0x3d) {
                 btlGetMainState();
                 result = FUN_00293230();

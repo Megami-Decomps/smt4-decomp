@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004f65d4` (_code @ 0x4f65d4, 0x4bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
 int FUN_001a79e8(...);
 int FUN_003fd7c0(...);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 
 int asdOperatorNew(void);
 int FUN_00178b04(...);
@@ -24,11 +25,11 @@ int FUN_00421078(unsigned int);
 int deadEffectStartLoad(void);
 int FUN_004f913c(int);
 int FUN_004fa15c(int);
-int FUN_004fa228(...);
+void btlUpdateAttackAnimation(BtlAuxA *);
 int FUN_004fa414(...);
 int FUN_004fa64c(int);
 int FUN_004fb43c(...);
-int FUN_004ffa80(...);
+int ownerSlotSetText(...);
 int rt_memcpy_w(float *, int, int);
 
 /* stack frame of param_1: 5 slot(s), 17 byte(s) */
@@ -47,7 +48,7 @@ extern int g_btlStageModel; /* 0x57a4f8 */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001a79e8. */
 extern int rangeIsValid(void);
-extern unsigned int FUN_002e4c2c(int);
+extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: FUN_003afd30. */
 extern int FUN_003c5d8c(void);
@@ -58,8 +59,8 @@ extern int FUN_003c5d8c(void);
 extern unsigned int FUN_003fdadc(void);
 /* Supplied declaration required: FUN_0040619c. */
 /* Supplied declaration required: FUN_0040a884. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_00420e4c. */
 /* Supplied declaration required: FUN_00420f08. */
 /* Supplied declaration required: FUN_00420fc0. */
@@ -68,11 +69,10 @@ extern unsigned int FUN_0040ac08(void);
 extern unsigned int FUN_004218dc(void);
 /* Supplied declaration required: FUN_004f913c. */
 /* Supplied declaration required: FUN_004fa15c. */
-/* Supplied declaration required: FUN_004fa228. */
 /* Supplied declaration required: FUN_004fa414. */
 /* Supplied declaration required: FUN_004fa64c. */
 /* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: FUN_004ffa80. */
+/* Supplied declaration required: ownerSlotSetText. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -160,7 +160,7 @@ void FUN_004f65d4(int param_1)
         temp_v8 = pcVar8[2] == 'R';
       }
       if (temp_v8) {
-        temp_v9 = FUN_002e4c2c(temp_v5 + 0x33ec);
+        temp_v9 = keyedRecordRegisterName(temp_v5 + 0x33ec);
         *(char *)(temp_v5 + 0x33e4) = (char)temp_v9;
         FUN_003478dc(temp_v9,pcVar8);
         *(char *)(temp_v5 + 0x33e4) = (char)temp_v9;
@@ -185,7 +185,7 @@ void FUN_004f65d4(int param_1)
         temp_v8 = pcVar8[2] == 'R';
       }
       if (temp_v8) {
-        temp_v9 = FUN_002e4c2c(temp_v5 + 0x33ec);
+        temp_v9 = keyedRecordRegisterName(temp_v5 + 0x33ec);
         *(char *)(temp_v5 + 0x33e4) = (char)temp_v9;
         FUN_003478dc(temp_v9,pcVar8);
         *(char *)(temp_v5 + 0x33e4) = (char)temp_v9;
@@ -248,10 +248,10 @@ void FUN_004f65d4(int param_1)
   case 9:
     FUN_00420fc0(*(unsigned int *)(param_1 + 0x33c0));
     *(unsigned char *)(param_1 + 0x33b4) = 10;
-    FUN_004fa228(param_1);
+    btlUpdateAttackAnimation((BtlAuxA *)param_1);
     break;
   case 10:
-    FUN_004fa228(param_1);
+    btlUpdateAttackAnimation((BtlAuxA *)param_1);
     break;
   case 0xb:
     FUN_00420f08(*(unsigned int *)(param_1 + 0x33c0));
@@ -287,7 +287,7 @@ code_r0x0042138c:
                    0x451);
       temp_v9 = 0;
       if (temp_v5 != 0) {
-        temp_v9 = FUN_0040ac08();
+        temp_v9 = modelListInit();
       }
       *(unsigned int *)(temp_v4 + 8) = temp_v9;
       FUN_0040a884();
@@ -300,7 +300,7 @@ code_r0x0042138c:
           if (temp_v2 != 0) {
             temp_v9 = FUN_003fdadc();
             temp_v3 = temp_v2;
-            FUN_004ffa80(temp_v2,temp_v9);
+            ownerSlotSetText(temp_v2,temp_v9);
             if (temp_v3 != 0xffff) {
               FUN_003fd924(temp_v2,temp_v3,2);
             }
@@ -309,7 +309,7 @@ code_r0x0042138c:
             if (temp_v3 != 0xffff) {
               FUN_003fd7c0(temp_v2,temp_v3,2);
             }
-            FUN_0040ace8(g_handleRegistry,temp_v2);
+            handleRegistryRegisterObject(g_handleRegistry,temp_v2);
           }
           temp_v5 = temp_v5 + 1;
         } while (temp_v5 < temp_v6);

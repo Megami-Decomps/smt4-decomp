@@ -53,7 +53,7 @@ extern int slotRecordFindById(void);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_002a4894(void);
 extern unsigned int FUN_002a6a24(int);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 extern int FUN_002c7e3c(void);
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0035ad50. */
@@ -156,7 +156,7 @@ LAB_00288c34:
       }
     }
     else if ((*(int *)(temp_v0 + 0x65c) == temp_v2) ||
-            (temp_v3 = FUN_002c2c68(temp_v12), temp_v3 - 1 == temp_v2)) {
+            (temp_v3 = objectApplyIfUnblocked(temp_v12), temp_v3 - 1 == temp_v2)) {
       temp_v5 = 0x57d8ffff;
     }
     else {

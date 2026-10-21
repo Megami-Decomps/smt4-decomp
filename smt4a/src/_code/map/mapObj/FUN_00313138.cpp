@@ -10,7 +10,7 @@ int FUN_001cd3ec(void);
 int libc_strcpy(int, int);
 int FUN_003797e4(void);
 int FUN_0040aad4(unsigned int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_003133f4; /* 0x3133f4 */
@@ -27,8 +27,8 @@ extern int g_mapObj; /* 0x581284 */
 extern int dataTableGetRecordFortyFive(void);
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 unsigned int FUN_00313138(void)
@@ -60,7 +60,7 @@ unsigned int FUN_00313138(void)
         temp_v3 = FUN_0040ab8c(*(unsigned int *)(temp_v2 + 0x3c));
         if (temp_v3 != 0) {
           FUN_0040aad4(*(unsigned int *)(temp_v2 + 0x3c),0);
-          FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 4));
+          handleRegistryRegisterObject(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x3c) + 4));
           temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
           *(unsigned int *)(temp_v2 + 0x18) = temp_v4;
           temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -106,7 +106,7 @@ unsigned int FUN_00313138(void)
       FUN_00178b04(0x20,&LAB_00313410,0x16f);
       temp_v4 = 0;
       if (temp_v1 != 0) {
-        temp_v4 = FUN_0040ac08();
+        temp_v4 = modelListInit();
       }
       *(unsigned int *)(temp_v2 + 0x3c) = temp_v4;
       FUN_001cd3ec();

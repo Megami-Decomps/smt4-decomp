@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00258a24(int);
-int FUN_00293ba8(void);
+int statusDownRestoreTabForMode(void);
 int timerStart(int, int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char g_gameGlobals; /* 0x44e140 */
 
 /* Supplied declaration required: FUN_00258a24. */
-/* Supplied declaration required: FUN_00293ba8. */
+/* Supplied declaration required: statusDownRestoreTabForMode. */
 /* Supplied declaration required: timerStart. */
 
 
@@ -48,7 +48,7 @@ void FUN_0029d684(int param_1)
     temp_v0 = *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66);
     if (((temp_v0 == '\b') || (temp_v0 == '\t' || temp_v0 == '\n')) || (temp_v0 == '\v' || temp_v0 == '\a')) {
       *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e8) = 1;
-      FUN_00293ba8();
+      statusDownRestoreTabForMode();
     }
   }
   if (*(char *)(temp_v1 + 0x1e67) == '\x05' || *(char *)(temp_v1 + 0x1e67) == '\x06') {

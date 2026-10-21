@@ -7,7 +7,7 @@ extern "C" {
 
 s32 scrCommApplyFirstBattleMask(void)
 {
-    btlGetMainState()->mask |= DAT_00570d78.first;
+    btlGetMainState()->mask |= g_battleMaskPresets.first;
     return 1;
 }
 

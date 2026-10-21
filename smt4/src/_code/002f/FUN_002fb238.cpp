@@ -9,7 +9,7 @@ int FUN_00277d2c(unsigned int, unsigned int);
 int FUN_0027accc(void);
 int FUN_0027ae90(void);
 int FUN_0027b1b4(void);
-int FUN_0027b27c(void);
+int mapRangeEntriesRun(void);
 int FUN_0027b2b4(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -22,7 +22,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0027accc. */
 /* Supplied declaration required: FUN_0027ae90. */
 /* Supplied declaration required: FUN_0027b1b4. */
-/* Supplied declaration required: FUN_0027b27c. */
+/* Supplied declaration required: mapRangeEntriesRun. */
 /* Supplied declaration required: FUN_0027b2b4. */
 extern int gameFlagIsSet(unsigned int);
 
@@ -50,7 +50,7 @@ void FUN_002fb238(int *param_1)
     if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x108), temp_v0 == 0)) {
       FUN_0027b2b4(*(unsigned int *)(temp_v5 + 0x2c),*(unsigned int *)(temp_v5 + 0x30),
                    *(unsigned int *)(temp_v5 + 0x2c),99);
-      FUN_0027b27c();
+      mapRangeEntriesRun();
       FUN_0027b1b4();
       FUN_0027ae90();
       FUN_0027accc();
@@ -77,7 +77,7 @@ LAB_002fb2cc:
     temp_v3 = temp_v1;
   }
   FUN_0027b2b4(temp_v1,temp_v2,temp_v3,temp_v4);
-  FUN_0027b27c();
+  mapRangeEntriesRun();
   FUN_0027b1b4();
   FUN_0027ae90();
   FUN_0027accc();

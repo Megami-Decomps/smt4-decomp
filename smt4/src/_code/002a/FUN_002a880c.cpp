@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a4e18(int, unsigned int);
 int FUN_002a86d4(int);
-int FUN_002aeb38(int, int, unsigned int);
+int uiSpriteReplaceTextureEntry(int, int, unsigned int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -17,7 +17,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002a4e18. */
 /* Supplied declaration required: FUN_002a86d4. */
-/* Supplied declaration required: FUN_002aeb38. */
+/* Supplied declaration required: uiSpriteReplaceTextureEntry. */
 extern int FUN_002aecd8(int, unsigned int);
 
 
@@ -145,7 +145,7 @@ LAB_002a8970:
   if ((((*(char *)(param_1 + 0x30) != '\0') && (*(int *)(param_1 + 0xc) == 0)) &&
       (*(int *)(param_1 + 0x14) == -1)) && (*(int *)(param_1 + 4) != 0)) {
     temp_v0 = FUN_002aecd8(*(int *)(param_1 + 4),1);
-    FUN_002aeb38(param_1,*(unsigned short *)(temp_v0 + 2),0xffffffff);
+    uiSpriteReplaceTextureEntry(param_1,*(unsigned short *)(temp_v0 + 2),0xffffffff);
     return;
   }
   return;

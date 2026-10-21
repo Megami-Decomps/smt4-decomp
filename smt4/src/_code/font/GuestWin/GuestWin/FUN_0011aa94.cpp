@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6940(...);
 int FUN_002ba12c(int);
 int FUN_002bcf4c(...);
@@ -33,13 +33,12 @@ extern int g_guestWin; /* 0x43e110 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6940. */
 extern int FUN_002b6a54(int, unsigned short);
 extern int FUN_002b6ad0(void);
 extern int FUN_002b6b04(void);
-extern int gameGetOptions(void);
-extern int FUN_002b6b38(void);
+extern int gameGetSupportUnitData(void);
+extern int gameGetOptionProgressStatus(void);
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002bcf4c. */
 extern unsigned int FUN_002bd068(unsigned short);
@@ -76,8 +75,8 @@ unsigned int FUN_0011aa94(void)
   unsigned char temp_v10 [40];
   
   temp_v4 = g_guestWin;
-  if ((((*(int *)(g_guestWin + 8) != 0) && (temp_v1 = FUN_002b6b38(), temp_v1 != 0)) && (temp_v1 != 1))
-     && (temp_v1 = gameGetOptions(), *(short *)(temp_v1 + 0x46) != 0)) {
+  if ((((*(int *)(g_guestWin + 8) != 0) && (temp_v1 = gameGetOptionProgressStatus(), temp_v1 != 0)) && (temp_v1 != 1))
+     && (temp_v1 = gameGetSupportUnitData(), *(short *)(temp_v1 + 0x46) != 0)) {
     FUN_002c39a4(g_titleScene);
     temp_v3 = g_titleScene;
     temp_v2 = FUN_002c5d80(1,0);
@@ -132,19 +131,19 @@ unsigned int FUN_0011aa94(void)
     temp_v3 = FUN_002bf4f8(0xe,0xd9);
     temp_v2 = FUN_002b6ad0();
     if (temp_v2 != 0) {
-      temp_v1 = gameGetOptions();
+      temp_v1 = gameGetSupportUnitData();
       temp_v0 = *(unsigned short *)(temp_v1 + 0x606);
-      temp_v1 = gameGetOptions();
+      temp_v1 = gameGetSupportUnitData();
       temp_v1 = FUN_002b6a54((int)*(short *)(temp_v1 + 0x604),temp_v0);
       FUN_002b6940(*(unsigned short *)(temp_v1 + 0x5a),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24);
-      temp_v1 = gameGetOptions();
+      temp_v1 = gameGetSupportUnitData();
       temp_v5 = (unsigned int)*(unsigned short *)(temp_v1 + 0x604);
       FUN_002bcf4c(temp_v5);
       textFormatBuffer(temp_v10,temp_v5);
     }
     else {
-      FUN_002b6758((int)*(short *)(temp_v1 + 0x46),*(short *)(temp_v3 + 8) + temp_v8,
+      uiDrawDemonIcon((int)*(short *)(temp_v1 + 0x46),*(short *)(temp_v3 + 8) + temp_v8,
                    *(short *)(temp_v3 + 10) + temp_v4,0x24,0);
       temp_v6 = FUN_002bd068(*(unsigned short *)(temp_v1 + 0x46));
       textFormatBuffer(temp_v10,temp_v6);

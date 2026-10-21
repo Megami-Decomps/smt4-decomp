@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_001a081c(int *);
-int FUN_001bab10(int *, unsigned int, int);
+int _ZN2nn2gr3CTR7TextureC1Ev(int *);
+int texCommandListBuild(int *, unsigned int, int);
 
 typedef struct fn_00421e9c_arg1 fn_00421e9c_arg1;
 struct fn_00421e9c_arg1 {
@@ -36,8 +36,8 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_001a081c. */
-/* Supplied declaration required: FUN_001bab10. */
+/* Supplied declaration required: _ZN2nn2gr3CTR7TextureC1Ev. */
+/* Supplied declaration required: texCommandListBuild. */
 
 
 void FUN_00421e9c(unsigned int param_1,fn_00421e9c_arg1 *param_2)
@@ -57,7 +57,7 @@ void FUN_00421e9c(unsigned int param_1,fn_00421e9c_arg1 *param_2)
   unsigned char temp_v10;
   unsigned char temp_v11;
   
-  FUN_001a081c(&temp_v0);
+  _ZN2nn2gr3CTR7TextureC1Ev(&temp_v0);
   temp_v8 = 0;
   temp_v0 = param_2->field_0x30;
   temp_v1 = (unsigned short)param_2->field_0x14;
@@ -73,7 +73,7 @@ void FUN_00421e9c(unsigned int param_1,fn_00421e9c_arg1 *param_2)
   temp_v9 = 0;
   temp_v10 = 0;
   temp_v11 = 0;
-  FUN_001bab10(&temp_v0,param_1,1);
+  texCommandListBuild(&temp_v0,param_1,1);
   return;
 }
 

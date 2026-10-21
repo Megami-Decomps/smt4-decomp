@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002a87e8(void);
+int ifTouchDecrementTimer(void);
 int FUN_002a9fdc(int, int, int);
 int timerStart(int, int, int);
 int FUN_002bee58(int, int);
 
 extern unsigned char g_buttonHelp; /* 0x43da28 */
 
-/* Supplied declaration required: FUN_002a87e8. */
+/* Supplied declaration required: ifTouchDecrementTimer. */
 /* Supplied declaration required: FUN_002a9fdc. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -34,7 +34,7 @@ void FUN_00289c98(int param_1)
       if (param_1 != 0) {
         *(unsigned char *)(temp_v1 + 0x494) = 0;
       }
-      FUN_002a87e8();
+      ifTouchDecrementTimer();
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 6);

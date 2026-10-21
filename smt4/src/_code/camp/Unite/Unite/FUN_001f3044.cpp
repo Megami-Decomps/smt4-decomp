@@ -25,7 +25,7 @@ int FUN_002c526c(...);
 int asdProcessCreateSimple(...);
 int mapMainCallIfFlag(...);
 int FUN_003c9c94(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int drawParameterBlockClear(...);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -90,10 +90,10 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_002c526c. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-extern int FUN_002c5c04(unsigned char *);
+extern int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: mapMainCallIfFlag. */
 /* Supplied declaration required: FUN_003c9c94. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_001f3044(void)
@@ -209,7 +209,7 @@ void FUN_001f3044(void)
   }
   __aeabi_memset4(piVar1 + 0x10e,0x80,0xffffffff);
   FUN_002a019c();
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(piVar1 + 1);
+  drawParameterBlockClear(piVar1 + 1);
   temp_v3 = (int *)0x16c;
   paramsInit(piVar1 + 1,&DAT_004030ec,0x54,&DAT_00403140,0x3c,0,0,0,0,&DAT_0040317c);
   FUN_002bd954(piVar1 + 9,0x24,0,piVar1 + 1,1);
@@ -230,9 +230,9 @@ void FUN_001f3044(void)
   fileSlotLoad(0x22);
   piVar1[0x10d] = -1;
   piVar1[0x11e] = -1;
-  temp_v0 = FUN_002c5c04(&LAB_001f3658);
+  temp_v0 = asdLoadFileSyncDefault(&LAB_001f3658);
   piVar1[0x109] = temp_v0;
-  temp_v0 = FUN_002c5c04(&LAB_001f3668);
+  temp_v0 = asdLoadFileSyncDefault(&LAB_001f3668);
   piVar1[0x10a] = temp_v0;
   FUN_00297060(temp_v0,piVar1[0x109]);
   piVar1[0x10b] = temp_v0;

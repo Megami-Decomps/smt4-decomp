@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010095c` (_code @ 0x10095c, 0x14a bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_FormatBuffer.h"
 
 extern "C" {
 
 int FUN_00100d88(unsigned char *, unsigned char *, int *);
 int asdOperatorDelete(void);
-int FUN_002e3338(unsigned int, unsigned int, int, unsigned int);
 int asdOperatorDeleteB(unsigned int);
 int FUN_002e3ef4(...);
 int FUN_002e3f68(...);
@@ -46,7 +46,6 @@ extern unsigned char *FUN_00100d60(char *, unsigned int);
 /* Supplied declaration required: FUN_00100d88. */
 extern unsigned int FUN_00100dc8(int *);
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_002e3338. */
 /* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: FUN_002e3ef4. */
 extern int FUN_002e3f2c(unsigned char *, unsigned int);
@@ -128,7 +127,7 @@ unsigned int FUN_0010095c(unsigned int param_1,unsigned int param_2,int param_3,
     FUN_002e3f68(temp_v8);
     if (*(int *)(temp_v7 - 4) != 0) {
       temp_v2 = temp_v15;
-      FUN_002e3338(temp_v15,temp_v16,temp_v7,temp_v18);
+      temp_v2 = (int)FUN_002e3338((char*)temp_v15,(s32)temp_v16,(const char*)temp_v7,*(va_list*)&temp_v18);
       FUN_002e3f68(&temp_v7);
     }
     else {

@@ -21,14 +21,14 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0020214c. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002a49e4. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004b7d88. */
 extern int FUN_004ba698(int);
-extern unsigned short FUN_004cfe4c(int);
+extern unsigned short flaggedValueHolderGetTotal(int);
 
 
 void FUN_004b7b74(int param_1)
@@ -42,10 +42,10 @@ void FUN_004b7b74(int param_1)
   unsigned int temp_v3;
   
   temp_v1 = FUN_004ba698(param_1 + 0x9c);
-  temp_v2 = FUN_00224880(*(unsigned int *)(param_1 + 0x1130));
+  temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1130));
   if ((temp_v2 == 2) && (temp_v1 != 0)) {
     FUN_004b7d88(param_1);
-    temp_v0 = FUN_004cfe4c(param_1 + 0x9c);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x9c);
     *(unsigned short *)(param_1 + 0x4c) = temp_v0;
     if (*(char *)(g_aocMain + 0xc1) == '\0') {
       temp_v1 = *(int *)(param_1 + 0x116c);

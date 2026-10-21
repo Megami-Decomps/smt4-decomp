@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0028784c(int, int);
 int FUN_00295a18(int, int);
 int FUN_002e8598(...);
-int FUN_002e87ac(...);
+int mapIfShowItemResultMessage(...);
 
 /* stack frame of void: 9 slot(s), 34 byte(s) */
 typedef struct {
@@ -36,7 +36,7 @@ extern int FUN_00298dc8(unsigned short);
 extern int FUN_00298e40(unsigned short, int, unsigned int *);
 extern int gameGetMapBlock(void);
 /* Supplied declaration required: FUN_002e8598. */
-/* Supplied declaration required: FUN_002e87ac. */
+/* Supplied declaration required: mapIfShowItemResultMessage. */
 
 
 int FUN_001a9104(void)
@@ -150,11 +150,11 @@ int FUN_001a9104(void)
                       temp_v10 = temp_v18 & 0xffff;
                       temp_v6 = 3;
                     }
-                    FUN_002e87ac(temp_v6,temp_v10,temp_v11);
+                    mapIfShowItemResultMessage(temp_v6,temp_v10,temp_v11);
                   }
                   else {
                     temp_v6 = 0;
-                    FUN_002e87ac(temp_v6,temp_v1,0);
+                    mapIfShowItemResultMessage(temp_v6,temp_v1,0);
                     temp_v16 = 2;
                   }
                 }
@@ -162,11 +162,11 @@ int FUN_001a9104(void)
                   temp_v11 = temp_v19 & 0xffff;
                   temp_v10 = temp_v18 & 0xffff;
                   temp_v6 = 5;
-                  FUN_002e87ac(temp_v6,temp_v10,temp_v11);
+                  mapIfShowItemResultMessage(temp_v6,temp_v10,temp_v11);
                 }
                 else {
                   temp_v6 = 4;
-                  FUN_002e87ac(temp_v6,temp_v1,0);
+                  mapIfShowItemResultMessage(temp_v6,temp_v1,0);
                   temp_v16 = 2;
                 }
               }

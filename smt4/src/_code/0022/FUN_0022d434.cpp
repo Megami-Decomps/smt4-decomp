@@ -11,7 +11,7 @@ int FUN_0022e2fc(void);
 int FUN_00233670(...);
 int FUN_00233730(...);
 int FUN_00233818(void);
-int FUN_00233854(unsigned int);
+int ifTouchRegionClearAll(unsigned int);
 int FUN_0029ce60(unsigned int, int, int);
 int FUN_0029ea68(...);
 int devilGetRecord(...);
@@ -37,7 +37,7 @@ extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_00233730. */
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 /* Supplied declaration required: FUN_0029ce60. */
 /* Supplied declaration required: FUN_0029ea68. */
 extern int FUN_002a0d0c(void);
@@ -70,7 +70,7 @@ void FUN_0022d434(int param_1)
   unsigned char temp_v12 [8];
   unsigned int temp_v13;
   
-  FUN_00233854(*(unsigned int *)(param_1 + 0x590));
+  ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x590));
   FUN_00233818();
   temp_v2 = param_1 + 0x5a8;
   if (*(char *)(param_1 + 0x5a4) != '\x01') {

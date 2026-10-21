@@ -12,7 +12,7 @@ extern unsigned char LAB_00111b05; /* 0x111b05 */
 extern unsigned char LAB_00112134; /* 0x112134 */
 
 /* Supplied declaration required: FUN_00121bf8. */
-extern int FUN_001321d2(int);
+extern int containerIsEmpty(int);
 extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002ea3d0. */
 /* Supplied declaration required: FUN_002eb5f4. */
@@ -35,7 +35,7 @@ void FUN_001120d0(int param_1)
   if (temp_v0 != 0) {
     FUN_002eb5f4();
     FUN_00121bf8();
-    temp_v0 = FUN_001321d2(param_1 + 400);
+    temp_v0 = containerIsEmpty(param_1 + 400);
     if ((temp_v0 != 0) || (temp_v0 = mapIsEmpty3(param_1 + 0x9c), temp_v0 != 0)) {
       *(unsigned int *)(param_1 + 0x98) = 0;
     }

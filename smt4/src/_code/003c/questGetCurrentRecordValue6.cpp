@@ -3,8 +3,8 @@
 extern "C" {
 
 extern int questRecordFindById(u16 id);
-extern GameOptions *gameGetOptions(void);
-extern int FUN_002b6b38(void);
+extern GameOptions *gameGetSupportUnitData(void);
+extern int gameGetOptionProgressStatus(void);
 
 typedef struct Record {
     /* 0x0 */ u8 unk0[6];
@@ -17,8 +17,8 @@ u16 questGetCurrentRecordValue6(void)
     GameOptions *options;
     Record *record;
 
-    if (FUN_002b6b38() == 2) {
-        options = gameGetOptions();
+    if (gameGetOptionProgressStatus() == 2) {
+        options = gameGetSupportUnitData();
         record = (Record *)questRecordFindById(options->unk46);
         value = record->unk6;
     }

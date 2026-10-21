@@ -16,7 +16,7 @@ typedef int romwright_code(...);
 extern unsigned char DAT_005585a4; /* 0x5585a4 */
 
 /* Supplied declaration required: asdOperatorDeleteArray. */
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: _ZN9Obj55859c12freeResourceEv. */
@@ -41,9 +41,9 @@ void FUN_002ea00c(unsigned int *param_1,unsigned int param_2,unsigned int param_
   uStack_20 = param_2;
   uStack_1c = param_3;
   uStack_18 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   if (temp_v0 != 0) {
-    temp_v0 = FUN_002e6e26();
+    temp_v0 = onlineContextGetInstance();
     FUN_002e6e34(&uStack_20,temp_v0 + 0x58);
     if (*(char *)(param_1 + 4) == '\x01') {
       FUN_002e9f00(param_1,4);

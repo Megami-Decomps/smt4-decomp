@@ -30,7 +30,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: FUN_00262210. */
 /* Supplied declaration required: FUN_002963ec. */
-extern int FUN_002ae98c(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b93c8. */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -70,7 +70,7 @@ void FUN_0032fe34(int param_1)
   case 0:
   case 1:
   case 8:
-    temp_v8 = FUN_002ae98c(g_aocSystem,0x18,*(unsigned int *)(param_1 + 0x2f8),1);
+    temp_v8 = aocRunByName(g_aocSystem,0x18,*(unsigned int *)(param_1 + 0x2f8),1);
     if (temp_v8 != 0) {
       FUN_003881b0(g_aocSystem,*(unsigned int *)(param_1 + 0x308),*(unsigned int *)(param_1 + 0x2f8),
                    param_1 + 0x20);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0014e8f4(unsigned char [64]);
+int mathMatrixBuildInversePlanarTransform(unsigned char [64]);
 int cameraSetViewMatrix(unsigned int, unsigned char [64]);
 int FUN_002bfe20(int *, unsigned int);
 int nn_math_ARMv6_MTX44MultAsm(unsigned char [64], unsigned int *);
@@ -17,7 +17,7 @@ typedef struct {
 
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
-/* Supplied declaration required: FUN_0014e8f4. */
+/* Supplied declaration required: mathMatrixBuildInversePlanarTransform. */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: FUN_002bfe20. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
@@ -49,7 +49,7 @@ void FUN_002a8a58(unsigned int *param_1)
   if (param_1 == (unsigned int *)0x0) {
     param_1 = temp_v3;
   }
-  FUN_0014e8f4(temp_v0);
+  mathMatrixBuildInversePlanarTransform(temp_v0);
   FUN_002bfe20(&temp_v1,g_titleScene);
   *param_1 = temp_v1;
   param_1[1] = uStack_8c;

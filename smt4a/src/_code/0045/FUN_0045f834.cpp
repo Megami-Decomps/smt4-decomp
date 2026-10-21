@@ -5,15 +5,15 @@
 extern "C" {
 
 int listAppendNode(int, int);
-int FUN_0019102c(int, int);
+int objectCommandReserveWords(int, int);
 int FUN_0045f740(int, int *);
 int FUN_0045f7f4(int, int *);
 int nw_snd_SoundHandle_DetachSound(void);
 
 typedef int romwright_code(...);
-extern int FUN_00175678(void);
+extern int objectCommandQueueGet(void);
 /* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 /* Supplied declaration required: FUN_0045f740. */
 /* Supplied declaration required: FUN_0045f7f4. */
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
@@ -52,9 +52,9 @@ void FUN_0045f834(int *param_1)
       param_1[10] = 0;
     }
     if (*(char *)((int)param_1 + 0x99) != '\0') {
-      temp_v1 = FUN_00175678();
+      temp_v1 = objectCommandQueueGet();
       temp_v0 = temp_v1;
-      FUN_0019102c(temp_v1,6);
+      objectCommandReserveWords(temp_v1,6);
       *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v1 + 0x184);
       *(unsigned char *)(temp_v0 + 4) = 6;
       temp_v2 = (**(romwright_code **)(*param_1 + 0x20))(param_1);
@@ -65,9 +65,9 @@ void FUN_0045f834(int *param_1)
     }
     *(unsigned char *)(param_1 + 0x27) = 0;
     *(unsigned char *)(param_1 + 0x28) = 2;
-    temp_v1 = FUN_00175678();
+    temp_v1 = objectCommandQueueGet();
     temp_v0 = temp_v1;
-    FUN_0019102c(temp_v1,6);
+    objectCommandReserveWords(temp_v1,6);
     *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v1 + 0x184);
     *(unsigned char *)(temp_v0 + 4) = 4;
     temp_v2 = (**(romwright_code **)(*param_1 + 0x20))(param_1);

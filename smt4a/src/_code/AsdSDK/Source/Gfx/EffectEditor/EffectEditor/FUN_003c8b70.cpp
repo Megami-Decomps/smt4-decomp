@@ -8,7 +8,7 @@ int CONCAT44(...);
 int padButtonRepeat(...);
 int padButtonIsPressed(...);
 int FUN_00202178(int);
-int FUN_00243ce8(int, int, int, unsigned char *);
+int asdDebugLog(int, int, int, unsigned char *);
 int FUN_00514878(void);
 
 extern unsigned char LAB_003c8e54; /* 0x3c8e54 */
@@ -54,7 +54,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: padButtonRepeat. */
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: FUN_00202178. */
-/* Supplied declaration required: FUN_00243ce8. */
+/* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: FUN_00514878. */
 
 
@@ -75,9 +75,9 @@ unsigned int FUN_003c8b70(void)
   float temp_v10;
   
   temp_v3 = 1;
-  FUN_00243ce8(8,8,0,&LAB_003c8e54);
-  FUN_00243ce8(8,0x14,0,&LAB_003c8e6c);
-  FUN_00243ce8(8,0x20,0,&LAB_003c8e80);
+  asdDebugLog(8,8,0,&LAB_003c8e54);
+  asdDebugLog(8,0x14,0,&LAB_003c8e6c);
+  asdDebugLog(8,0x20,0,&LAB_003c8e80);
   temp_v2 = padButtonRepeat(5);
   temp_v5 = 10.0f;
   if (temp_v2 == 0) {

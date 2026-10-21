@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_002b7184(u32 job, int arg);
-int FUN_002b71d0(u32 job, int arg);
+int jobBlendSetRate(u32 job, int arg);
+int jobSetIntensity(u32 job, int arg);
 int FUN_002bff38(int arg);
 extern int jobGetStatus(u32 job);
 extern int jobIsValid(u32 job);
@@ -31,7 +31,7 @@ u32 FUN_001a1060(Owner *owner)
         if (i < group->jobCount) {
             do {
                 if (jobIsValid(group->jobs[i]) != 0 && jobGetStatus(group->jobs[i]) != 4) {
-                    FUN_002b71d0(group->jobs[i], 1);
+                    jobSetIntensity(group->jobs[i], 1);
                 }
                 i++;
             } while (i < group->jobCount);
@@ -39,7 +39,7 @@ u32 FUN_001a1060(Owner *owner)
         i = 0;
         do {
             if (jobIsValid(group->subJobs[i]) != 0) {
-                FUN_002b7184(group->subJobs[i], 1);
+                jobBlendSetRate(group->subJobs[i], 1);
             }
             i++;
         } while (i < 10);

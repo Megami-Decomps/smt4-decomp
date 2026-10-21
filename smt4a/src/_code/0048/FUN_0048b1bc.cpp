@@ -4,19 +4,17 @@
 
 extern "C" {
 
-int FUN_00272edc(void);
-
-/* Supplied declaration required: FUN_00272edc. */
+float mathSnapHeading8(float angle);
 
 
-unsigned char FUN_0048b1bc(void)
+
+unsigned char FUN_0048b1bc(int unused, float angle)
 
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
   float in_s0;
   int temp_v0;
   
-  FUN_00272edc();
+  in_s0 = mathSnapHeading8(angle);
   temp_v0 = (int)in_s0;
   if (temp_v0 == 0xb4) {
     return 0;

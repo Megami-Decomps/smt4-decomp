@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00293348(int a, int b);
+int partyPanelSetState(int a, int b);
 
 void FUN_003111e8(int flag)
 {
@@ -10,10 +10,10 @@ void FUN_003111e8(int flag)
         return;
     }
     if (flag != 0) {
-        FUN_00293348(8, 1);
+        partyPanelSetState(8, 1);
         return;
     }
-    FUN_00293348(0x16, 1);
+    partyPanelSetState(0x16, 1);
 }
 
 } /* extern "C" */

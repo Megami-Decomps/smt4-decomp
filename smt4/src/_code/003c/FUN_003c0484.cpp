@@ -18,7 +18,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022a5d8. */
 extern int battleGetEntryHalfword(int, unsigned int);
 extern int btlGetMainState(void);
-extern int FUN_00295d08(unsigned int);
+extern int playerPadTestBit(unsigned int);
 
 
 unsigned int FUN_003c0484(unsigned int *param_1,unsigned int param_2,unsigned int param_3)
@@ -63,7 +63,7 @@ unsigned int FUN_003c0484(unsigned int *param_1,unsigned int param_2,unsigned in
       FUN_0022a5d8(0x1f,param_1,param_3);
       return temp_v2;
     }
-    if (((*param_1 & 8) == 0) || (temp_v1 = FUN_00295d08(1), temp_v1 == 0)) {
+    if (((*param_1 & 8) == 0) || (temp_v1 = playerPadTestBit(1), temp_v1 == 0)) {
       return 0;
     }
     temp_v1 = btlGetMainState();

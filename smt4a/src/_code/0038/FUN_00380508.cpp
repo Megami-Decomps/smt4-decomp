@@ -1,29 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00380508` (_code @ 0x380508, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the 64-bit flag mask uses different registers from retail. */
+#include "shard/W5_W5Match7_BattleMask.h"
 
 extern "C" {
+u32 scrGetArg(void);
+void scrSetResult(s32);
 
-int scrSetResult(int);
-
-extern int btlGetMainState(void);
-extern unsigned int scrGetArg(void);
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_00380508(void)
-
+// Return whether the selected battle script flag is set.
+u32 FUN_00380508(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg();
-  temp_v1 = btlGetMainState();
-  temp_v0 = 1 << (temp_v0 & 0xff);
-  scrSetResult((*(unsigned int *)(temp_v1 + 0x4cdc) & ((int)temp_v0 >> 0x1f)) != 0 ||
-               (*(unsigned int *)(temp_v1 + 0x4cd8) & temp_v0) != 0);
-  return 1;
+    u32 index = scrGetArg();
+    BattleMaskState *battle = btlGetMainState();
+    s32 mask = 1 << index;
+    scrSetResult(((s64)mask & battle->scriptFlags) != 0);
+    return 1;
 }
-
-} /* extern "C" */
+}

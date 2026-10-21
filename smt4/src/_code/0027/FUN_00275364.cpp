@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int FUN_00287098(unsigned int, unsigned int);
+int modelSelectSecondaryMotion(unsigned int, unsigned int);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
-int FUN_002a5710(unsigned int);
+int modelSelectPrimaryMotion(unsigned int);
 
-extern int DAT_0044cd88; /* 0x44cd88 */
+extern int g_mapStateSlots; /* 0x44cd88 */
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_00287098. */
+/* Supplied declaration required: modelSelectSecondaryMotion. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 
 
 void FUN_00275364(void)
@@ -29,10 +29,10 @@ void FUN_00275364(void)
   unsigned int *puVar5;
   unsigned char temp_v4;
   
-  if (*(short *)(DAT_0044cd88 + 4) == 0x65) {
+  if (*(short *)(g_mapStateSlots + 4) == 0x65) {
     temp_v1 = 0;
     do {
-      temp_v2 = DAT_0044cd88 + temp_v1 * 0x4c;
+      temp_v2 = g_mapStateSlots + temp_v1 * 0x4c;
       if (*(char *)(temp_v2 + 0x9d8) != '\0') {
         puVar5 = *(unsigned int **)(temp_v2 + 0xa08);
         if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
@@ -50,8 +50,8 @@ void FUN_00275364(void)
             nodeSetTranslation(puVar5[2],0,temp_v2 + 0x9e4);
             FUN_0028c618(puVar5[2],0);
             if (*(int *)(puVar5[2] + 0x38) != *(int *)(temp_v2 + 0x9f4)) {
-              FUN_002a5710(puVar5[2]);
-              FUN_00287098(puVar5[2],*(unsigned int *)(temp_v2 + 0x9f4));
+              modelSelectPrimaryMotion(puVar5[2]);
+              modelSelectSecondaryMotion(puVar5[2],*(unsigned int *)(temp_v2 + 0x9f4));
             }
             *(unsigned char *)(temp_v2 + 0x9f8) = 0;
           }
@@ -62,7 +62,7 @@ void FUN_00275364(void)
   }
   temp_v1 = 0;
   do {
-    temp_v3 = DAT_0044cd88 + temp_v1 * 0x4c;
+    temp_v3 = g_mapStateSlots + temp_v1 * 0x4c;
     temp_v4 = *(char *)(temp_v3 + 0x58) != '\0';
     temp_v2 = 0;
     if (temp_v4) {
@@ -73,7 +73,7 @@ void FUN_00275364(void)
         puVar5 = *(unsigned int **)(temp_v3 + 0x88);
       }
       else {
-        puVar5 = *(unsigned int **)(DAT_0044cd88 + *(int *)(temp_v3 + 0x90) * 8 + 0x1c);
+        puVar5 = *(unsigned int **)(g_mapStateSlots + *(int *)(temp_v3 + 0x90) * 8 + 0x1c);
       }
       temp_v0 = *puVar5;
       if ((*(signed char *)((unsigned char *)&g_gameState + 0x22)) != '\0') {
@@ -91,8 +91,8 @@ void FUN_00275364(void)
           nodeSetTranslation(puVar5[2],0,temp_v3 + 100);
           FUN_0028c618(puVar5[2],0);
           if (*(int *)(puVar5[2] + 0x38) != *(int *)(temp_v3 + 0x74)) {
-            FUN_002a5710(puVar5[2]);
-            FUN_00287098(puVar5[2],*(unsigned int *)(temp_v3 + 0x74));
+            modelSelectPrimaryMotion(puVar5[2]);
+            modelSelectSecondaryMotion(puVar5[2],*(unsigned int *)(temp_v3 + 0x74));
           }
           *(unsigned char *)(temp_v3 + 0x78) = 0;
         }

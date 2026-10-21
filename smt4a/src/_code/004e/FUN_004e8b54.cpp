@@ -7,7 +7,7 @@ extern "C" {
 int qsort(unsigned short [18], int, int, unsigned char *);
 int lcgRandomRange(...);
 int dataTable04FindById(void);
-int FUN_004e9168(int *, unsigned int, int, unsigned int *, int *);
+int btlActionClassifyTargetSide(int *, unsigned int, int, unsigned int *, int *);
 int FUN_004ea634(int *, int, unsigned int);
 
 /* stack frame of param_2: 23 slot(s), 88 byte(s) */
@@ -46,7 +46,7 @@ extern unsigned int DAT_0057117c; /* 0x57117c */
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: lcgRandomRange. */
 /* Supplied declaration required: dataTable04FindById. */
-/* Supplied declaration required: FUN_004e9168. */
+/* Supplied declaration required: btlActionClassifyTargetSide. */
 /* Supplied declaration required: FUN_004ea634. */
 
 
@@ -122,7 +122,7 @@ unsigned int FUN_004e8b54(int *param_1,int param_2)
                (temp_v7 = *(unsigned int *)(temp_v1 + 0x3c) & 0x7f, temp_v7 != 1)) && (temp_v7 != 0x1b)) {
         temp_v15 = 0;
         temp_v16 = 0;
-        FUN_004e9168(temp_v19,*(unsigned int *)(temp_v20 + 0x20),*(unsigned short *)(temp_v1 + 0x20),
+        btlActionClassifyTargetSide(temp_v19,*(unsigned int *)(temp_v20 + 0x20),*(unsigned short *)(temp_v1 + 0x20),
                      &temp_v15,&temp_v16);
         temp_v8 = temp_v15 != 1;
         if (temp_v8) {

@@ -25,8 +25,8 @@ int FUN_00165b08(void);
 int efctSetSpeed(void);
 int FUN_00168594(int, int);
 int FUN_0016c4b8(...);
-int FUN_0016c69c(...);
-int FUN_0016c6f0(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_0017ffa8(int, int, int, int);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -76,8 +76,8 @@ extern int FUN_00169240(unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -144,7 +144,7 @@ char FUN_0014f3f4(void)
       temp_v16 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_00157558(g_renderCtx);
       temp_v7 = FUN_001692ac(1,0);
-      FUN_0016c6f0(g_renderCtx,3,temp_v7);
+      renderStackPushIndexed(g_renderCtx,3,temp_v7);
       temp_v8 = FUN_00169240(0);
       if (temp_v8 != 0) {
         temp_v22 = FUN_001834a4(0x13,0x11f1);
@@ -162,7 +162,7 @@ char FUN_0014f3f4(void)
         temp_v21 = 0x74;
         FUN_0017ffa8(2,0x13,0x1245,temp_v12 - 0x10);
       }
-      FUN_0016c69c(g_renderCtx,3);
+      renderCtxPopState(g_renderCtx,3);
     }
     temp_v6 = DAT_0057f590;
     if (*(char *)(DAT_0057f590 + 0x19f2) != '\0') {
@@ -269,11 +269,11 @@ char FUN_0014f3f4(void)
     if (*(char *)(temp_v5 + 9) == '\a' || *(char *)(temp_v5 + 9) == '\t') {
       efctSetSpeed();
       temp_v7 = FUN_001692ac(1,0);
-      FUN_0016c6f0(g_renderCtx,3,temp_v7);
+      renderStackPushIndexed(g_renderCtx,3,temp_v7);
       temp_v20 = 0;
       temp_v21 = 6;
       FUN_001835b4(2,8,0x106,0);
-      FUN_0016c69c(g_renderCtx,3);
+      renderCtxPopState(g_renderCtx,3);
       efctSetSpeed();
     }
     temp_v18 = temp_v24;
@@ -290,7 +290,7 @@ char FUN_0014f3f4(void)
         if ((temp_v8 != 0) || ((*(char *)(temp_v5 + 8) == '\x04' && (*(char *)(temp_v5 + 0x6d) != '\0'))))
         {
           temp_v7 = FUN_001692ac(1,0);
-          FUN_0016c6f0(g_renderCtx,3,temp_v7);
+          renderStackPushIndexed(g_renderCtx,3,temp_v7);
           temp_v8 = vec2GetXInt(temp_v5 + 0x3e4);
           temp_v8 = temp_v8 + temp_v6;
           temp_v12 = vec2GetYInt(temp_v5 + 0x3e4);
@@ -315,13 +315,13 @@ char FUN_0014f3f4(void)
                 temp_v20 = 0;
                 FUN_001835b4(2,8,0x116,temp_v6);
                 temp_v7 = packNibblesAndByte(6,1,0);
-                FUN_0016c6f0(g_renderCtx,6,temp_v7);
+                renderStackPushIndexed(g_renderCtx,6,temp_v7);
                 efctSetSpeed();
                 temp_v21 = 0x15;
                 temp_v20 = 0;
                 FUN_001835b4(2,8,0x117,temp_v8);
                 efctSetSpeed();
-                FUN_0016c69c(g_renderCtx,6);
+                renderCtxPopState(g_renderCtx,6);
               }
             }
             else {
@@ -343,7 +343,7 @@ char FUN_0014f3f4(void)
             temp_v21 = 0x15;
             FUN_001835b4(2,8,0xde,*(short *)(temp_v11 + 8) + temp_v8);
           }
-          FUN_0016c69c(g_renderCtx,3);
+          renderCtxPopState(g_renderCtx,3);
         }
         if ((*(unsigned int *)(temp_v5 + 0xc) & 0x20) != 0) goto LAB_0014fe54;
       }
@@ -354,18 +354,18 @@ char FUN_0014f3f4(void)
         temp_v8 = vec2GetXInt(temp_v5 + 0x3e4);
         vec2GetYInt(temp_v5 + 0x3e4);
         temp_v7 = FUN_001692ac(1,0);
-        FUN_0016c6f0(g_renderCtx,3,temp_v7);
+        renderStackPushIndexed(g_renderCtx,3,temp_v7);
         efctSetSpeed();
         temp_v20 = 0;
         temp_v21 = 0x1a;
         FUN_001835b4(2,8,0x182,temp_v6);
         temp_v7 = packNibblesAndByte(6,1,0);
-        FUN_0016c6f0(g_renderCtx,6,temp_v7);
+        renderStackPushIndexed(g_renderCtx,6,temp_v7);
         efctSetSpeed();
         temp_v20 = 0;
         temp_v21 = 0x1a;
         FUN_001835b4(2,8,0x183,temp_v8 + temp_v6);
-        FUN_0016c69c(g_renderCtx,6);
+        renderCtxPopState(g_renderCtx,6);
         efctSetSpeed();
         break;
       }
@@ -378,7 +378,7 @@ char FUN_0014f3f4(void)
     goto LAB_0014fe54;
   case 0xc:
     temp_v7 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v7);
+    renderStackPushIndexed(g_renderCtx,3,temp_v7);
     efctSetSpeed();
     FUN_00183bb0();
     temp_v24 = 0.27f;
@@ -396,7 +396,7 @@ char FUN_0014f3f4(void)
     break;
   case 0xd:
     temp_v7 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v7);
+    renderStackPushIndexed(g_renderCtx,3,temp_v7);
     efctSetSpeed();
     FUN_00183bb0();
     if (*(char *)(temp_v5 + 0x5c) != '\0') {
@@ -406,7 +406,7 @@ char FUN_0014f3f4(void)
       FUN_001634b4(temp_v5 + *(short *)(temp_v5 + 0x56) * 0x8c + 0x844);
     }
   }
-  FUN_0016c69c(g_renderCtx,3);
+  renderCtxPopState(g_renderCtx,3);
 LAB_0014fe54:
   if (*(char *)(temp_v5 + 8) == '\0') {
     return '\0';
@@ -452,7 +452,7 @@ LAB_0014fe60:
       temp_v8 = 8;
     }
     temp_v7 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v7);
+    renderStackPushIndexed(g_renderCtx,3,temp_v7);
     if (*(char *)(temp_v5 + 8) == '\x01' || *(char *)(temp_v5 + 8) == '\x04') {
       temp_v12 = ifTouchIsActive();
       if (temp_v12 != 0) {
@@ -543,7 +543,7 @@ LAB_0014fe60:
     return '\0';
   case 0xc:
     temp_v7 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v7);
+    renderStackPushIndexed(g_renderCtx,3,temp_v7);
     temp_v18 = 0.27f;
     FUN_001879d0(g_renderCtx);
     temp_v22 = FUN_001688c4(*(unsigned int *)(temp_v5 + 4));
@@ -576,7 +576,7 @@ LAB_0014fe60:
     break;
   case 0xd:
     temp_v7 = FUN_001692ac(1,0);
-    FUN_0016c6f0(g_renderCtx,3,temp_v7);
+    renderStackPushIndexed(g_renderCtx,3,temp_v7);
     temp_v18 = 0.27f;
     FUN_001879d0(g_renderCtx);
     temp_v6 = FUN_001834a4(8,0x8e);
@@ -591,10 +591,10 @@ LAB_0014fe60:
                    (int)*(short *)(temp_v5 + 0x60) / 2) + (int)temp_v18,
                    (int)*(short *)(temp_v8 + 0x85e) + (int)*(short *)(temp_v6 + 10),0x3d);
     }
-    FUN_0016c69c(g_renderCtx,3);
+    renderCtxPopState(g_renderCtx,3);
     return '\0';
   }
-  FUN_0016c69c(g_renderCtx,3);
+  renderCtxPopState(g_renderCtx,3);
   return '\0';
 }
 

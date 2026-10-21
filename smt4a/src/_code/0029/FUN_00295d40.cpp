@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 #ifndef ROMWRIGHT_STORAGE_s__________0058127c_17_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__________0058127c_17_1_DEFINED
@@ -20,7 +20,7 @@ typedef char romwright_storage_s__________0058127c_17_1_s1_width_check[(sizeof((
 #endif
 extern union romwright_storage_s__________0058127c_17_1 s__________0058127c; /* 0x58127c */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 void FUN_00295d40(void)
@@ -47,7 +47,7 @@ void FUN_00295d40(void)
       if (temp_v0 != 0) {
         *puVar1 = *puVar1 | 1;
         temp_v2 = (float)puVar1[1];
-        FUN_002b5cb4();
+        distSpatial();
         if (temp_v2 < temp_v6) {
           temp_v2 = -temp_v2;
         }

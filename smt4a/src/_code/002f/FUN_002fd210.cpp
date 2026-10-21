@@ -1,56 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd210` (_code @ 0x2fd210, 0x4e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+class OnlineRequestState {
+public:
+    virtual ~OnlineRequestState();
+    virtual void vfunc08();
+    virtual void vfunc0c();
+    virtual void vfunc10();
+    virtual void vfunc14();
+    virtual void update();
+    virtual void vfunc1c();
+    virtual s32 start();
+    virtual s32 poll();
 
-int FUN_002f9f28(int *, int, int);
+    u8 unk04[0x10]; // 0x04
+    u16 state;       // 0x14
+};
 
-typedef int romwright_code(...);
-/* Supplied declaration required: FUN_002f9f28. */
+extern "C" void FUN_002f9f28(OnlineRequestState* request, s32 state, s32 flags);
 
-
-unsigned short FUN_002fd210(int *param_1)
-
+// Update the request, start it from pending states, and finish once its virtual operation completes.
+extern "C" u16 FUN_002fd210(OnlineRequestState* request)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  romwright_code *pcVar3;
-  
-  (**(romwright_code **)(*param_1 + 0x18))(param_1);
-  temp_v0 = *(unsigned short *)(param_1 + 5);
-  if (temp_v0 == 4) {
-    return 4;
-  }
-  if (temp_v0 < 5) {
-    if (temp_v0 != 1) {
-      if (temp_v0 != 2) {
-        return temp_v0;
-      }
-      pcVar3 = *(romwright_code **)(*param_1 + 0x24);
-      temp_v1 = (*pcVar3)(param_1);
-      if (temp_v1 != 0) {
-        FUN_002f9f28(param_1,4,0);
-      }
-      return *(unsigned short *)(param_1 + 5);
+    request->update();
+    switch (request->state) {
+    case 1:
+    case 0x40:
+        FUN_002f9f28(request, 2, 0);
+        if (request->start() != 0) {
+            FUN_002f9f28(request, 4, 0);
+        }
+        break;
+    case 2:
+        if (request->poll() != 0) {
+            FUN_002f9f28(request, 4, 0);
+        }
+        break;
+    case 4:
+        return 4;
+    case 8:
+        return 8;
+    default:
+        return request->state;
     }
-  }
-  else {
-    if (temp_v0 == 8) {
-      return 8;
-    }
-    if (temp_v0 != 0x40) {
-      return temp_v0;
-    }
-  }
-  FUN_002f9f28(param_1,2,0);
-  pcVar3 = *(romwright_code **)(*param_1 + 0x20);
-  temp_v1 = (*pcVar3)(param_1);
-  if (temp_v1 != 0) {
-    FUN_002f9f28(param_1,4,0);
-  }
-  return *(unsigned short *)(param_1 + 5);
+    return request->state;
 }
-
-} /* extern "C" */

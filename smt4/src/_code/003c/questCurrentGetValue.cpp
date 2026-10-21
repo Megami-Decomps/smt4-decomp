@@ -15,20 +15,20 @@ typedef struct Options {
 } Options;
 
 extern QuestRecord *questRecordFindById(u16 id);
-extern Options *gameGetOptions(void);
-extern u32 FUN_002b6b38(void);
+extern Options *gameGetSupportUnitData(void);
+extern u32 gameGetOptionProgressStatus(void);
 
 /* Returns the value of the current quest while the state is 2; 0 otherwise. */
 u16 questCurrentGetValue(void)
 {
     u16 result = 0;
 
-    switch (FUN_002b6b38()) {
+    switch (gameGetOptionProgressStatus()) {
     case 0:
     case 1:
         break;
     case 2:
-        result = questRecordFindById(gameGetOptions()->questId)->value;
+        result = questRecordFindById(gameGetSupportUnitData()->questId)->value;
         break;
     }
     return result;

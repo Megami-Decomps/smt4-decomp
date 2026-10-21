@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b89e4(...);
+int titleOverlaySetModeAnimation(...);
 int FUN_002bee58(unsigned int, unsigned int);
 
 extern unsigned int DAT_0043e18c; /* 0x43e18c */
 extern int DAT_0043e190; /* 0x43e190 */
 
-/* Supplied declaration required: FUN_002b89e4. */
+/* Supplied declaration required: titleOverlaySetModeAnimation. */
 /* Supplied declaration required: FUN_002bee58. */
 
 
@@ -77,7 +77,7 @@ unsigned int FUN_0029cc44(int param_1)
       }
       if (DAT_0043e18c != 0 && temp_v3 != 0) {
         temp_v3 = DAT_0043e18c;
-        FUN_002b89e4(DAT_0043e18c,*(unsigned char *)(DAT_0043e18c + 9));
+        titleOverlaySetModeAnimation(DAT_0043e18c,*(unsigned char *)(DAT_0043e18c + 9));
         *(unsigned char *)(temp_v1 + 8) = 3;
         *(unsigned char *)(temp_v1 + 0x35) = 0;
       }
@@ -85,7 +85,7 @@ unsigned int FUN_0029cc44(int param_1)
         temp_v3 = (unsigned int)*(unsigned char *)(temp_v2 + 8);
       }
       if (temp_v2 != 0 && temp_v3 != 0) {
-        FUN_002b89e4(temp_v2,*(unsigned char *)(temp_v2 + 9));
+        titleOverlaySetModeAnimation(temp_v2,*(unsigned char *)(temp_v2 + 9));
         *(unsigned char *)(temp_v2 + 8) = 3;
         *(unsigned char *)(temp_v2 + 0x35) = 0;
       }

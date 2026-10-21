@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022d800(int, int, int, int);
 int FUN_00230aec(...);
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int FUN_00231bcc(int, int, int, int, int, int);
 int FUN_00288e68(...);
 int FUN_002b6c34(...);
@@ -29,7 +29,7 @@ extern unsigned char LAB_003abd7c; /* 0x3abd7c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0022d800. */
 /* Supplied declaration required: FUN_00230aec. */
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int FUN_00262cb0(unsigned short);
 /* Supplied declaration required: FUN_00288e68. */
@@ -98,7 +98,7 @@ void FUN_003abae8(int param_1,int param_2,int param_3,int param_4,int param_5)
     FUN_00231bcc(param_1 + 200,0x4df,temp_v3,temp_v1,param_5,1);
   }
   temp_v2 = FUN_002bf4f0(param_1 + 200,temp_v4);
-  FUN_00231bb8(param_1 + 200,&temp_v11);
+  pairCopy(param_1 + 200,&temp_v11);
   temp_v7 = (float)VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v8 = (float)VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = (int)(temp_v7 + temp_v11);

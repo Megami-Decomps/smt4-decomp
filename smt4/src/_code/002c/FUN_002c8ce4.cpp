@@ -1,10 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c8ce4` (_code @ 0x2c8ce4, 0xe48 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ForwardEffect.h"
 
 extern "C" {
 
-int FUN_00280364(void);
+int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int FUN_00280988(void);
 int FUN_002879dc(...);
@@ -13,7 +14,6 @@ int FUN_00287aec(void);
 int FUN_002562e4(int, int);
 int FUN_00256370(int, int);
 int FUN_0025bc80(void);
-int FUN_0025bdc4(...);
 int FUN_0027f48c(...);
 int FUN_0027f848(void);
 int FUN_0027f958(unsigned int *, unsigned int [13], int);
@@ -60,13 +60,12 @@ extern signed char DAT_0049fce8; /* 0x49fce8 */
 extern int inputIsQuestCancelPressed(void);
 extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0025bc80. */
-/* Supplied declaration required: FUN_0025bdc4. */
 /* Supplied declaration required: FUN_0027f48c. */
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f958. */
 /* Supplied declaration required: FUN_0027fa98. */
 /* Supplied declaration required: FUN_0027fca0. */
-/* Supplied declaration required: FUN_00280364. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00282390. */
@@ -160,13 +159,13 @@ void FUN_002c8ce4(void)
               if (*(int *)(g_lmapScene + 8) == 5) {
                 FUN_0027fca0(0xffffffff);
                 FUN_0025bc80();
-                FUN_0025bdc4();
+                effectSpawnAheadOfScene(30.0f,20.0f);
               }
               temp_v2 = *(int *)(g_lmapScene + 8);
 joined_r0x002c9850:
               if (temp_v2 == 6) {
                 FUN_0025bc80();
-                FUN_0025bdc4();
+                effectSpawnAheadOfScene(-130.0f,20.0f);
               }
               goto LAB_002c9910;
             }
@@ -174,7 +173,7 @@ joined_r0x002c9850:
               if (*(int *)(g_lmapScene + 8) == 5) {
                 FUN_0027fca0(0xffffffff);
                 FUN_0025bc80();
-                FUN_0025bdc4();
+                effectSpawnAheadOfScene(30.0f,20.0f);
               }
               temp_v2 = *(int *)(g_lmapScene + 8);
               goto joined_r0x002c9850;
@@ -183,7 +182,7 @@ joined_r0x002c9850:
               if (*(int *)(g_lmapScene + 8) == 5) {
                 FUN_0027fca0(0xffffffff);
                 FUN_0025bc80();
-                FUN_0025bdc4();
+                effectSpawnAheadOfScene(-130.0f,20.0f);
               }
               temp_v2 = *(int *)(g_lmapScene + 8);
               goto joined_r0x002c980c;
@@ -193,12 +192,12 @@ joined_r0x002c9850:
             if (*(int *)(g_lmapScene + 8) == 5) {
               FUN_0027fca0(0xffffffff);
               FUN_0025bc80();
-              FUN_0025bdc4();
+              effectSpawnAheadOfScene(-130.0f,20.0f);
             }
             temp_v2 = *(int *)(g_lmapScene + 8);
 joined_r0x002c980c:
             if (temp_v2 == 6) {
-              FUN_0025bdc4();
+              effectSpawnAheadOfScene(30.0f,20.0f);
               FUN_0025bc80();
             }
 LAB_002c9910:
@@ -285,9 +284,7 @@ joined_r0x002c99a8:
           unaff_r4 = aiStack_2e8[temp_v2 * 2 + 1];
         }
         if (unaff_r5 >> 0x10 != 0) {
-          VectorSignedToFloat(unaff_r4 >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-          VectorSignedToFloat((int)(short)unaff_r4,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_0025bdc4(unaff_r4 >> 0x10,(int)(short)unaff_r4);
+          effectSpawnAheadOfScene((f32)(s16)unaff_r4,(f32)(unaff_r4 >> 16));
         }
         temp_v10 = (float)VectorSignedToFloat((int)(short)unaff_r5,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v6 = *(float *)(g_lmapScene + 0x50) * temp_v11;
@@ -528,7 +525,7 @@ LAB_002c9a64:
     *(unsigned int *)(temp_v2 + 8) = 0;
   }
 LAB_002c9a70:
-  FUN_00280364();
+  mapSelectContainingRegions();
   FUN_00280988();
   temp_v2 = g_lmapScene;
   puVar7 = (unsigned int *)(g_lmapScene + 0x1c);

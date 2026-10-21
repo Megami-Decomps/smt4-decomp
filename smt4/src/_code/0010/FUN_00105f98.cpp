@@ -15,7 +15,7 @@ typedef struct {
 } void_stack;
 
 extern unsigned char g_soundVolumeSetting; /* 0x44e0b0 */
-extern unsigned char DAT_004c5404; /* 0x4c5404 */
+extern unsigned char g_eventQueueEntries; /* 0x4c5404 */
 extern int DAT_004e316c; /* 0x4e316c */
 
 /* Supplied declaration required: FUN_0012655c. */
@@ -37,7 +37,7 @@ void FUN_00105f98(void)
   
   temp_v1 = 0;
   do {
-    temp_v3 = *(int *)(&DAT_004c5404 + temp_v1 * 4);
+    temp_v3 = *(int *)(&g_eventQueueEntries + temp_v1 * 4);
     if (temp_v3 != 0) {
       temp_v0 = jyoucyuGetTableEntry(1);
       if ((temp_v0 == 0) && (temp_v0 = FUN_002c1d5c(), temp_v0 == 0)) {
@@ -48,7 +48,7 @@ void FUN_00105f98(void)
           FUN_0012655c(temp_v3,g_soundVolumeSetting,0);
         }
       }
-      *(unsigned int *)(&DAT_004c5404 + temp_v1 * 4) = 0;
+      *(unsigned int *)(&g_eventQueueEntries + temp_v1 * 4) = 0;
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x20);

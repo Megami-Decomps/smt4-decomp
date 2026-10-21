@@ -1,17 +1,17 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d9578` (_code @ 0x1d957c, 0x8c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_NameFormState.h"
 
 extern "C" {
 
 int sequenceRequestFlushDeferred(void);
 int FUN_00397aa4(int);
-int FUN_00398f50(int);
 
 /* Supplied declaration required: sequenceRequestFlushDeferred. */
 extern int FUN_002f34bc(void);
 /* Supplied declaration required: FUN_00397aa4. */
-/* Supplied declaration required: FUN_00398f50. */
+/* Supplied declaration required: nameFormUpdate. */
 
 
 unsigned int FUN_001d9578(int param_1)
@@ -44,7 +44,7 @@ unsigned int FUN_001d9578(int param_1)
       *(unsigned char *)(temp_v2 + 0xc) = 1;
     }
     else {
-      FUN_00398f50(temp_v2 + 0x10);
+      nameFormUpdate((NameFormState*)(temp_v2 + 0x10));
       if (*(char *)(temp_v2 + 0x10) == '\0') {
         return 0;
       }

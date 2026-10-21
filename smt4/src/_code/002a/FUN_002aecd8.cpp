@@ -1,35 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002aecd8` (_code @ 0x2aecd8, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds the record-header displacement and one-based index adjustment into -16; retail keeps +4 and -20 separate. */
+#include "addon/aocMain.h"
+#include "gamedata/DataTable.h"
+
+struct ContentRecordKey {
+    u8 unk00[0x2a]; // 0x00
+    u8 section;      // 0x2a
+};
+
+struct ContentRecord {
+    u32 words[5]; // 0x00
+};
+
+struct ContentRecordList {
+    u32 count;               // 0x00
+    ContentRecord records[1]; // 0x04
+};
+
 
 extern "C" {
+extern AocSystem* g_aocSystem;
+ContentRecord* FUN_0014caa4(AocSystem* system, const ContentRecordKey* key, u32 index);
 
-int FUN_0014caa4(int, int, unsigned int);
-int dataTableGetEntries(void);
-int dataTableGet(int, int);
-
-extern int g_aocSystem; /* 0x433158 */
-
-/* Supplied declaration required: FUN_0014caa4. */
-/* Supplied declaration required: dataTableGetEntries. */
-/* Supplied declaration required: dataTableGet. */
-
-
-void FUN_002aecd8(int param_1,unsigned int param_2)
-
+// Resolve the content record from add-on data, falling back to the indexed base table.
+ContentRecord* FUN_002aecd8(const ContentRecordKey* key, u32 index)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  
-  if (*(char *)(param_1 + 0x2a) != '\0') {
-    temp_v0 = g_aocSystem;
-    FUN_0014caa4(g_aocSystem,param_1,param_2);
-    if (temp_v0 == 0) {
-      dataTableGet(0x19,*(unsigned char *)(param_1 + 0x2a));
-      dataTableGetEntries();
+    if (key->section == 0) {
+        return NULL;
     }
-  }
-  return;
+    ContentRecord* record = FUN_0014caa4(g_aocSystem, key, index);
+    if (record == NULL) {
+        ContentRecordList* list = (ContentRecordList*)dataTableGetEntries(dataTableGet(25, key->section));
+        record = &list->records[index - 1];
+    }
+    return record;
 }
-
-} /* extern "C" */
+}

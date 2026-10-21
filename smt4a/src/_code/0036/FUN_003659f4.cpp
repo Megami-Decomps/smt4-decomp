@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_003d4ed8(int);
 
 extern int g_mapIf; /* 0x58103c */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_003d4ed8. */
 
 
@@ -35,7 +35,7 @@ void FUN_003659f4(void)
           (temp_v1 == 0x1e || temp_v1 == 0x1f)) || ((temp_v1 == 0x30 || temp_v1 == 0x22) || temp_v1 == 0x23)))
         ) && (*(int *)(temp_v3 + 0x1e0) == 6)) {
       temp_v1 = (int)temp_v4;
-      FUN_002b5cb4();
+      distSpatial();
       if (temp_v1 < 0x41200000) {
         if ((*(signed char *)((unsigned char *)&g_gameState + 0x18)) == '\0') {
           if (!(*(int *)(temp_v3 + 0x1f0) == 0x31 || *(int *)(temp_v3 + 0x1f0) == 0x30)) {

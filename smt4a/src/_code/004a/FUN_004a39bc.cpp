@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: FUN_003343f0. */
@@ -29,7 +29,7 @@ extern int FUN_00370794(void);
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: flagValueSub. */
 /* Supplied declaration required: FUN_004a8750. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 
 
 void FUN_004a39bc(int param_1)
@@ -40,7 +40,7 @@ void FUN_004a39bc(int param_1)
   unsigned int temp_v1;
   int temp_v2 [4];
   
-  temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x85c));
+  temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x85c));
   if (temp_v0 == 2) {
     temp_v0 = FUN_00370794();
     if (temp_v0 != 3) {
@@ -84,7 +84,7 @@ void FUN_004a39bc(int param_1)
       }
     }
     else {
-      temp_v0 = FUN_004cfe4c(param_1 + 0x20);
+      temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
       temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x868);
       FUN_004a8750(temp_v1,*(unsigned char *)(param_1 + 0x861),0);
       panelSetMode3(-temp_v1,0);

@@ -10,10 +10,10 @@ int rt_memcpy(int, int, int);
 
 extern int g_menuState; /* 0x57f56c */
 
-extern int FUN_0019f240(int);
+extern int padGetMappedValue(int);
 extern unsigned int gameGetSlotRecord(void);
 /* Supplied declaration required: dataTable04FindById. */
-extern int FUN_001ba514(unsigned int);
+extern int partyFindSlotById(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_004bd098(unsigned int, int);
 extern int FUN_004c6bd0(int, int);
@@ -45,7 +45,7 @@ void FUN_00227af0(int param_1)
     *(unsigned int *)(g_menuState + 0x2b4) = 0;
     if ((*(int *)(temp_v0 + 0x14) == 2) && (*(char *)(temp_v0 + 0x2b8) != '\x01')) {
       if (*(char *)(temp_v0 + 0x11) != '\0') {
-        temp_v1 = FUN_0019f240((int)*(short *)(temp_v0 + 0x18));
+        temp_v1 = padGetMappedValue((int)*(short *)(temp_v0 + 0x18));
         temp_v1 = temp_v1 - 1;
         *(int *)(temp_v0 + 0x2b4) = temp_v1;
         if (temp_v1 < 1) {
@@ -57,7 +57,7 @@ void FUN_00227af0(int param_1)
           return;
         }
         if (*(char *)(temp_v0 + 0x2b0) != '\0') {
-          temp_v1 = FUN_001ba514(*(unsigned int *)(temp_v0 + 0x2ac) & 0xffff);
+          temp_v1 = partyFindSlotById(*(unsigned int *)(temp_v0 + 0x2ac) & 0xffff);
           if (temp_v1 < 0) {
             return;
           }

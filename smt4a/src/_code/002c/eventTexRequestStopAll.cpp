@@ -2,8 +2,8 @@
 
 extern "C" {
 
-void FUN_0016572c(u32 handle, s32 arg);
-void FUN_001656e0(u32 handle, s32 arg);
+void jobBlendSetRate(u32 handle, s32 arg);
+void jobSetIntensity(u32 handle, s32 arg);
 s32 jobGetStatus(u32 handle);
 s32 jobIsValid(u32 handle);
 
@@ -17,12 +17,12 @@ void eventTexRequestStopAll(void)
     if (g_eventTex != NULL) {
         for (i = 0; i < tex->count; i++) {
             if (jobIsValid(tex->slots[i]) != 0 && jobGetStatus(tex->slots[i]) != 4) {
-                FUN_001656e0(tex->slots[i], 1);
+                jobSetIntensity(tex->slots[i], 1);
             }
         }
         for (i = 0; i < EVENT_TEX_HANDLES_A; i++) {
             if (jobIsValid(tex->handles[i]) != 0) {
-                FUN_0016572c(tex->handles[i], 1);
+                jobBlendSetRate(tex->handles[i], 1);
             }
         }
     }

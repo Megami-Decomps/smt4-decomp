@@ -6,8 +6,18 @@
 struct QuestEntry;
 
 struct QuestWork {
+    struct DrawJobs {
+        u32 upper;
+        u8 unk08[4];
+        u32 lower;
+        u8 unk10[8];
+    };
+
     /* 0x00 */ u32 job;
-    /* 0x04 */ u8 unk04[0x14];
+    union {
+        /* 0x04 */ u8 unk04[0x14];
+        /* 0x04 */ DrawJobs draws;
+    };
     /* 0x18 */ u8 closing;
     /* 0x19 */ u8 unk19[3];
     /* 0x1C */ QuestEntry *entry;

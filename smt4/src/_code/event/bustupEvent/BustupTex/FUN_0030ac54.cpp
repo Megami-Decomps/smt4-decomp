@@ -21,7 +21,7 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Supplied declaration required: FUN_002459d8. */
 extern unsigned int FUN_002ae8e4(unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_002ae98c(unsigned int, unsigned int, int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, int, unsigned int);
 extern int FUN_002aecd8(void);
 extern int gameFlagIsSet(unsigned int);
 extern int FUN_002c1d5c(void);
@@ -67,7 +67,7 @@ void FUN_0030ac54(unsigned int param_1,int param_2)
   }
   else {
     if (puVar2[5] != -1) {
-      temp_v0 = FUN_002ae98c(g_aocSystem,puVar2[4],puVar2[5],1);
+      temp_v0 = aocRunByName(g_aocSystem,puVar2[4],puVar2[5],1);
       if (temp_v0 != 0) {
         temp_v1 = FUN_002ae8e4(g_aocSystem,puVar2[4],puVar2[5],0x10000);
       }

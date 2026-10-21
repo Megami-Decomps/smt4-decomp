@@ -12,11 +12,11 @@ void *btlGetMainState(void);
 Entry003004fc *btlMainFindEntryByListedId(void *state, s32 id);
 s32 gameGetUnitRecord(s32 index);
 s32 FUN_0033b960(s32 value);
-void FUN_002953b8(s16 value);
+void gameSavedFlagSet(s16 value);
 void scrSetResult(s32 value);
 
 /* Script command: looks up the value for script argument 0 (a battle entry below 0x6d, a unit record from there on), converts it
- * with FUN_0033b960, calls FUN_002953b8 when the result is positive and reports it. Returns 1. */
+ * with FUN_0033b960, calls gameSavedFlagSet when the result is positive and reports it. Returns 1. */
 u32 scrCommConvertEntryValue(s32 firstArg)
 {
     s32 id = scrGetArg(firstArg);
@@ -31,7 +31,7 @@ u32 scrCommConvertEntryValue(s32 firstArg)
     }
     result = FUN_0033b960(value);
     if (result > 0) {
-        FUN_002953b8(result);
+        gameSavedFlagSet(result);
     }
     scrSetResult(result);
     return 1;

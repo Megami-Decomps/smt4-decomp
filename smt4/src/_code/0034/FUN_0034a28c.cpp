@@ -15,10 +15,10 @@ int FUN_0023d274(...);
 int FUN_002bc7f4(int, int [3]);
 int FUN_00349cdc(int, int, int, unsigned char [52]);
 int FUN_00349d88(...);
-int FUN_0034db58(void);
-int FUN_0034dbb4(void);
-int FUN_0034dc10(void);
-int FUN_0034dcec(void);
+unsigned int *commandProfileWriteDefault(unsigned int *commands);
+unsigned int *asdGxEmitAlphaDepthWritePreset(unsigned int *commands);
+unsigned int *FUN_0034dc10(void);
+unsigned int *asdGxBuildAlphaDepthPresetCommands(unsigned int *commands);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX34MultAsm(...);
@@ -86,10 +86,6 @@ extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: FUN_00349cdc. */
 /* Supplied declaration required: FUN_00349d88. */
 /* Supplied declaration required: FUN_00349e34. */
-/* Supplied declaration required: FUN_0034db58. */
-/* Supplied declaration required: FUN_0034dbb4. */
-/* Supplied declaration required: FUN_0034dc10. */
-/* Supplied declaration required: FUN_0034dcec. */
 extern int FUN_00356e90(int);
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm. */
@@ -176,8 +172,8 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
   temp_v6 = 0;
   temp_v7 = 0;
   temp_v45 = temp_v23[0];
-  FUN_0034dc10();
-  FUN_0034db58();
+  temp_v23[0] = (int)FUN_0034dc10();
+  temp_v23[0] = (int)commandProfileWriteDefault((unsigned int *)temp_v23[0]);
   temp_v4 = 0;
   temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 8) + 8))();
   if (0 < temp_v0) {
@@ -265,7 +261,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
       temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 8) + 8))();
     } while (temp_v4 < temp_v0);
   }
-  FUN_0034dbb4();
+  temp_v23[0] = (int)asdGxEmitAlphaDepthWritePreset((unsigned int *)temp_v23[0]);
   temp_v4 = 0;
   temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 8) + 8))();
   if (0 < temp_v0) {
@@ -358,7 +354,7 @@ void FUN_0034a28c(int param_1,unsigned int param_2)
       temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 8) + 8))();
     } while (temp_v4 < temp_v0);
   }
-  FUN_0034dcec();
+  temp_v23[0] = (int)asdGxBuildAlphaDepthPresetCommands((unsigned int *)temp_v23[0]);
   temp_v4 = 0;
   temp_v0 = (**(romwright_code **)(**(int **)(param_1 + 8) + 8))();
   if (0 < temp_v0) {

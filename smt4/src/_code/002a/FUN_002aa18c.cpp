@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002adba8(unsigned long long *, int, int);
 int FUN_002b7dc4(unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002b81e4(void);
+int gpuSubmitDefaultPacket(void);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002adba8. */
 /* Supplied declaration required: FUN_002b7dc4. */
-/* Supplied declaration required: FUN_002b81e4. */
+/* Supplied declaration required: gpuSubmitDefaultPacket. */
 
 
 void FUN_002aa18c(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -24,7 +24,7 @@ void FUN_002aa18c(unsigned int param_1,unsigned int param_2,unsigned int param_3
 /* irregular: 4 native warning(s); review required */
   unsigned long long uStack_20;
   
-  FUN_002b81e4();
+  gpuSubmitDefaultPacket();
   FUN_002b7dc4(param_1,param_2,param_3,param_4);
   uStack_20 = 0x1024500000001;
   FUN_002adba8(&uStack_20,0x18,1);

@@ -3,7 +3,7 @@
 extern "C" {
 
 /* Vector growth policy: the new capacity is the larger of capacity + 0x20 and capacity * 1.625. */
-u32 vectorGrowCapacity_0012d2f2(u32 capacity)
+u32 vectorGrowCapacity_0012d2f2(u32 capacity, const void* unusedPool)
 {
     u32 grown = (capacity >> 1) + capacity + (capacity >> 3);
 

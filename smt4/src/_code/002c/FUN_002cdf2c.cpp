@@ -8,8 +8,8 @@ int FUN_00203640(int);
 int FUN_00269dc8(void);
 int bgmReleaseStopped(void);
 int FUN_0027581c(void);
-int FUN_00283e48(void);
-int FUN_00290ed8(int);
+int passiveSkillLookupRecord(void);
+void FUN_00290ed8(unsigned int frames);
 int FUN_00296774(int, int);
 int FUN_0029be5c(int, int);
 int soundChannelStopAll(int);
@@ -32,9 +32,8 @@ extern int g_result; /* 0x44dc20 */
 /* Supplied declaration required: FUN_00269dc8. */
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_0027581c. */
-/* Supplied declaration required: FUN_00283e48. */
-/* Supplied declaration required: FUN_00290ed8. */
-extern int FUN_00295d08(unsigned int);
+/* Supplied declaration required: passiveSkillLookupRecord. */
+extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: FUN_00296774. */
 extern int FUN_00298f88(unsigned short);
 /* Supplied declaration required: FUN_0029be5c. */
@@ -137,8 +136,8 @@ void FUN_002cdf2c(int param_1)
         FUN_0029be5c(0x24,temp_v11);
       }
       temp_v11 = *(int *)(param_1 + 0x34);
-      temp_v4 = FUN_00295d08(1);
-      if ((temp_v4 == 0) && (temp_v4 = FUN_00295d08(10), temp_v4 == 0)) {
+      temp_v4 = playerPadTestBit(1);
+      if ((temp_v4 == 0) && (temp_v4 = playerPadTestBit(10), temp_v4 == 0)) {
         *(int *)(temp_v2 + 0x35b4) = *(int *)(temp_v2 + 0x35b4) + temp_v11;
       }
       temp_v19 = 0x3e99999a;
@@ -168,7 +167,7 @@ void FUN_002cdf2c(int param_1)
             do {
               temp_v6 = (unsigned int)*(unsigned short *)(temp_v14 + 0x34 + temp_v12 * 2);
               if (temp_v6 != 0) {
-                FUN_00283e48();
+                passiveSkillLookupRecord();
                 temp_v7 = 0;
                 if (temp_v6 != 0) {
                   temp_v7 = (unsigned int)*(unsigned char *)(temp_v6 + 0x2f);

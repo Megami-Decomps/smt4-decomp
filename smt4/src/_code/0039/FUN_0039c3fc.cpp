@@ -2,26 +2,27 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct MapNaviDisplay;
+
 extern "C" {
 
 int pointConvertToFloat(...);
-int FUN_0023150c(void);
+void mapNaviDisplayLoadMap(MapNaviDisplay*, int);
 int FUN_002316e8(void);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002b8ee0(int, int);
 int FUN_002bf818(int);
-int FUN_0039f838(int, unsigned int);
+int naviMainSetCurrentMap(int, unsigned int);
 int FUN_0039f860(int, int);
 
 /* Supplied declaration required: pointConvertToFloat. */
-/* Supplied declaration required: FUN_0023150c. */
 /* Supplied declaration required: FUN_002316e8. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002b8ee0. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf818. */
-/* Supplied declaration required: FUN_0039f838. */
+/* Supplied declaration required: naviMainSetCurrentMap. */
 /* Supplied declaration required: FUN_0039f860. */
 
 
@@ -62,7 +63,7 @@ void FUN_0039c3fc(int param_1)
       temp_v4 = param_1 + 0x224;
       temp_v0 = FUN_002bf818(temp_v4);
       if (temp_v0 != 0) {
-        FUN_0039f838(param_1 + 0x162,*(unsigned int *)(param_1 + 0x5c));
+        naviMainSetCurrentMap(param_1 + 0x162,*(unsigned int *)(param_1 + 0x5c));
         FUN_0039f860(param_1 + 0x162,0);
         *(unsigned int *)(param_1 + 0x18) = 0;
         if (*(int *)(param_1 + 0x5c) >= 100) {
@@ -71,7 +72,7 @@ void FUN_0039c3fc(int param_1)
         }
         else {
           *(unsigned char *)(param_1 + 0xc) = 1;
-          FUN_0023150c();
+          mapNaviDisplayLoadMap((MapNaviDisplay*)param_1,*(int *)(param_1 + 0x5c));
         }
         uiSpriteSetImageKeyframe(temp_v3,2,0);
         *(unsigned char *)(param_1 + 0x5b) = 1;

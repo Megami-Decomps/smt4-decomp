@@ -7,8 +7,8 @@ extern "C" {
 int scrWorkGetValue(int);
 int scrWorkSetValue(...);
 int messageForwardDefaultMode(int, int, unsigned int, int, int);
-int FUN_0028ed3c(int, int, int);
-int FUN_0028ee90(void);
+int uiBindRecordRewardText(int, int, int);
+int gameOptionsEnableAndReset(void);
 int FUN_0028eeb8(int);
 int dataTable1bOr1cGetRecord(void);
 int FUN_002bff50(void);
@@ -22,8 +22,8 @@ typedef struct {
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageForwardDefaultMode. */
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0028ed3c. */
-/* Supplied declaration required: FUN_0028ee90. */
+/* Supplied declaration required: uiBindRecordRewardText. */
+/* Supplied declaration required: gameOptionsEnableAndReset. */
 /* Supplied declaration required: FUN_0028eeb8. */
 extern int FUN_0029022c(void);
 extern int FUN_002903f0(void);
@@ -53,7 +53,7 @@ unsigned int scrComm_Party_ConfirmSwap(void)
   temp_v3 = fileSlotGetBuffer(0x1e);
   temp_v2 = scrWorkGetValue(0);
   if (temp_v2 == 0) {
-    FUN_0028ed3c(temp_v1,0,1);
+    uiBindRecordRewardText(temp_v1,0,1);
     FUN_002bff50();
     temp_v4 = scrWorkGetValue(1);
     messageForwardDefaultMode(temp_v3,0,temp_v4,6,0);
@@ -69,7 +69,7 @@ unsigned int scrComm_Party_ConfirmSwap(void)
         if ((temp_v2 != 0 && temp_v1 != 0) &&
            ((temp_v0 = *(char *)(temp_v2 + 6), (temp_v0 != '\x05' && temp_v0 != '\x04') && temp_v0 != '\x01'
             || (*(char *)(temp_v1 + 6) != '\0')))) {
-          FUN_0028ee90();
+          gameOptionsEnableAndReset();
         }
       }
       return 1;

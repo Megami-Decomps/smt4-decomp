@@ -28,7 +28,7 @@ extern int DAT_00618488; /* 0x618488 */
 /* Supplied declaration required: FUN_00423a8c. */
 /* Supplied declaration required: FUN_004241e0. */
 extern unsigned int stateObjectClassify(unsigned char *, int);
-extern unsigned int FUN_00424c0c(unsigned char *, int);
+extern unsigned int tableRecordGetChecked(unsigned char *, int);
 extern int FUN_00424c2c(unsigned char *, unsigned int);
 extern unsigned int table46COwnerGet(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_004250dc. */
@@ -62,7 +62,7 @@ void FUN_00229104(unsigned int param_1,unsigned int param_2,unsigned int param_3
   }
   temp_v6 = param_4;
   if (DAT_00618488 != -1) {
-    temp_v2 = FUN_00424c0c(&DAT_00617f40,DAT_00618488);
+    temp_v2 = tableRecordGetChecked(&DAT_00617f40,DAT_00618488);
     temp_v6 = 0x10;
     puVar6 = &DAT_00617f18;
     FUN_00423a8c(&DAT_00617f18,&DAT_00617e64,temp_v2,1);

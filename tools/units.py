@@ -201,7 +201,7 @@ def missing(game):
         return known[at] if at >= 0 and address < known[at] + sizes[known[at]] else None
 
     # What the known functions reach: branch targets and pool words. A pool word is data, never a target.
-    reached, pool_words, called, branch_origins = [], set(), set(), {}
+    reached, pool_words, pool_data, called, branch_origins = [], set(), set(), set(), {}
     for address, (name, size, thumb) in functions.items():
         data = body(address, size, thumb)
         pools, words, end = split.literal_pools(address, data, thumb)
@@ -218,6 +218,7 @@ def missing(game):
                 called.add(to)
             else:
                 branch_origins.setdefault(to, []).append(origin)
+        pool_data.update(address + at for start, stop in pools for at in range(start, stop, 2))
         for at in words:
             pool_words.add(address + at)
             if at + 4 <= len(data):
@@ -232,21 +233,30 @@ def missing(game):
         return (address not in functions and owner(address) is None and address not in pool_words and not is_text
                 and not address % (2 if thumb else 4) and any(start <= address < end for start, end in text))
 
-    def clean_start(address):
-        """Code can begin here: after a function, a pool word, padding, or a return or jump. A pool word
-        holding an address inside some instruction sequence is a number, not a callback."""
+    def clean_start(address, thumb):
+        """Code can begin here: a `push {..., lr}`, or after a function, its pool data, padding, or a
+        return or jump. A pool word holding an address inside some instruction sequence is a number,
+        not a callback."""
         before = known[bisect.bisect_left(known, address) - 1]
-        if before + sizes[before] == address or address - 4 in pool_words:
+        if before + sizes[before] == address or address - 4 in pool_words or address - 2 in pool_data:
+            return True
+        head = struct.unpack_from("<I", code, address - base)[0]
+        if (head & 0xFF00 == 0xB500) if thumb else (head & 0xFFFF4000 == 0xE92D4000):
             return True
         word = struct.unpack_from("<I", code, address - base - 4)[0]
         jumps = lambda half: returns(half, True) or half & 0xF800 == 0xE000
         last, pad = word >> 16, word & 0xFFFF       # Thumb: the instruction before; or it and a pad
         return returns(word, False) or word >> 24 == 0xEA or jumps(last) or (last in (0, 0xFFFF) and jumps(pad))
 
-    new = {}
+    # A callback right after another one's pool only shows a clean start once that one is found: the
+    # literal-pool seeds that fail are tried again whenever new functions add their pool data.
+    new, pending = {}, []
     for address, thumb, note in reached:
-        if candidate(address, thumb) and address not in new and ("literal pool" not in note or clean_start(address)):
-            new[address] = (thumb, note)
+        if candidate(address, thumb) and address not in new:
+            if "literal pool" not in note or clean_start(address, thumb):
+                new[address] = (thumb, note)
+            else:
+                pending.append((address, thumb, note))
     extend, found = {}, {}
     while True:
         starts = sorted(set(known) | set(new))
@@ -257,7 +267,10 @@ def missing(game):
             data = body(address, limit - address, thumb)
             size = function_end(split, address, data, thumb)
             found[address] = size
-            pools, words, _end = split.literal_pools(address, data[:size], thumb)
+            pools, words, end = split.literal_pools(address, data[:size], thumb)
+            if end > size:   # the pool after its last instruction: callbacks and data live there too
+                pools, words, _end = split.literal_pools(address, data[:min(end, len(data))], thumb)
+            pool_data.update(address + at for start, stop in pools for at in range(start, stop, 2))
             word = struct.unpack_from("<I", data, 0)[0] if len(data) >= 8 else 0
             if not thumb and word & 0xFFFFFF01 == 0xE28FC001 and struct.unpack_from("<I", data, 4)[0] == 0xE12FFF1C:
                 to = address + 8 + (word & 0xFF) - 1       # add ip, pc, #n; bx ip: the Thumb body
@@ -285,12 +298,20 @@ def missing(game):
                 pool_words.add(address + at)
                 value = struct.unpack_from("<I", data, at)[0]
                 reached_new.add(value & ~1)
-                if candidate(value & ~1, bool(value & 1)) and value & ~1 not in new and clean_start(value & ~1):
-                    grown = ("new", value & ~1, bool(value & 1), f"its address is in FUN_{address:08x}'s literal pool")
-                    break
+                if candidate(value & ~1, bool(value & 1)) and value & ~1 not in new:
+                    if clean_start(value & ~1, bool(value & 1)):
+                        grown = ("new", value & ~1, bool(value & 1), f"its address is in FUN_{address:08x}'s literal pool")
+                        break
+                    pending.append((value & ~1, bool(value & 1), f"its address is in FUN_{address:08x}'s literal pool"))
             if grown:
                 break
         if not grown:
+            ready = [(a, t, n) for a, t, n in pending if a not in new and candidate(a, t) and clean_start(a, t)]
+            if ready:
+                for a, t, n in ready:
+                    new[a] = (t, n)
+                pending = [p for p in pending if p[0] not in new]
+                continue
             referenced |= reached_new
             break
         if grown[0] == "new":

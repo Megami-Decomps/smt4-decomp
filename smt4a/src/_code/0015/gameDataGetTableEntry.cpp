@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern s32 FUN_001775a8(void);
+extern s32 gameDataFindEntryIndex(void);
 
-/* Address of the entry of the game data table selected by FUN_001775a8. */
+/* Address of the entry of the game data table selected by gameDataFindEntryIndex. */
 u32 *gameDataGetTableEntry(void)
 {
-    s32 index = FUN_001775a8();
+    s32 index = gameDataFindEntryIndex();
     GameDataSub *sub = &g_gameDataBlocks.block->sub;
 
     return &sub->table[index];

@@ -25,8 +25,8 @@ typedef struct {
 /* Supplied declaration required: FUN_00230cc0. */
 /* Supplied declaration required: FUN_00231bcc. */
 /* Supplied declaration required: FUN_002332e8. */
-extern int FUN_0023360c(int);
-extern int FUN_00233718(int);
+extern int flaggedValueHolderGetTotal(int);
+extern int rangeLimitMin(int);
 /* Supplied declaration required: FUN_00240d5c. */
 /* Supplied declaration required: FUN_0029e924. */
 
@@ -96,7 +96,7 @@ void FUN_003a1f00(int param_1,unsigned int param_2)
   temp_v9 = temp_v5 + 0x880;
   temp_v7 = param_1 + *(int *)(param_1 + 0x860) * 0x1002 + 0xc94;
   temp_v1 = FUN_0029e924(temp_v9);
-  temp_v2 = FUN_00233718(temp_v9);
+  temp_v2 = rangeLimitMin(temp_v9);
   temp_v6 = 0;
   temp_v0 = temp_v2;
   if (0 < temp_v2) {
@@ -112,7 +112,7 @@ void FUN_003a1f00(int param_1,unsigned int param_2)
     temp_v0 = *(int *)(temp_v5 + 0x888);
   }
   if (temp_v10 && 0 < temp_v0) {
-    temp_v0 = FUN_0023360c(temp_v9);
+    temp_v0 = flaggedValueHolderGetTotal(temp_v9);
     temp_v5 = FUN_00240d5c(temp_v9);
     FUN_0022f1d0(param_1,temp_v5 + 1,1,temp_v7 + temp_v0 * 4);
   }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015519c` (_code @ 0x15519c, 0x6a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_0016631c(...);
 int efctSetSpeed(void);
 int FUN_00167860(...);
 int FUN_00168470(...);
-int FUN_001689e8(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
 int FUN_0018408c(...);
@@ -56,7 +56,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
 /* Supplied declaration required: FUN_00168470. */
-/* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -270,7 +269,7 @@ unsigned int FUN_0015519c(void)
             FUN_00167860((int)*(short *)(temp_v0 + 0x18),temp_v1 - 0xd,8,0x79);
           }
           if (*(int *)(temp_v0 + 0x14) == 3) {
-            FUN_001689e8((int)*(short *)(temp_v0 + 0x18),temp_v1 - 0xd,8,0x79,0);
+            uiDrawItemCategoryIcon((int)*(short *)(temp_v0 + 0x18),temp_v1 - 0xd,8,0x79,0);
           }
           if (*(int *)(temp_v0 + 0x14) == 5) {
             FUN_00168470(*(unsigned short *)(temp_v0 + 0x18),temp_v1 - 0xd,temp_v6 + 8,0x79);

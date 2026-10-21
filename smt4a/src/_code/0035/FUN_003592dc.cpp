@@ -1,32 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003592dc` (_code @ 0x3592dc, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler forwards the cleared count and removes redundant cache stores; retail repeatedly computes the embedded source address and reloads each field. */
+#include "common.h"
+
+class ListJobSource {
+    u8 unk00[0x1c]; // 0x00
+    u32 count;       // 0x1c
+    u32 first;       // 0x20
+    u32 last;        // 0x24
+public:
+    void clearCount() { count = 0; }
+    u32 getCount() const { return count; }
+    u32 getFirst() const { return first; }
+    u32 getLast() const { return last; }
+};
+struct ListJobWork {
+    u8 unk00[0x0c];    // 0x00
+    ListJobSource source; // 0x0c
+    u8 unk34[0x2c];    // 0x34
+    u32 first;          // 0x60
+    u32 last;           // 0x64
+    u8 unk68[4];        // 0x68
+    u32 count;          // 0x6c
+    u32 state;          // 0x70
+};
 
 extern "C" {
+ListJobWork* jobGetWork(void);
+void dlistFreeAll(ListJobWork* work);
 
-int dlistFreeAll(void);
-
-extern int jobGetWork(void);
-/* Supplied declaration required: dlistFreeAll. */
-
-
-void FUN_003592dc(void)
-
+// Releases the job's list and resets its cached source endpoints and count.
+void FUN_003592dc()
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = jobGetWork();
-  dlistFreeAll();
-  *(unsigned int *)(temp_v0 + 0x70) = 0;
-  *(unsigned int *)(temp_v0 + 0x6c) = 0;
-  *(unsigned int *)(temp_v0 + 0x60) = 0;
-  *(unsigned int *)(temp_v0 + 100) = 0;
-  *(unsigned int *)(temp_v0 + 0x28) = 0;
-  *(unsigned int *)(temp_v0 + 0x6c) = *(unsigned int *)(temp_v0 + 0x28);
-  *(unsigned int *)(temp_v0 + 100) = *(unsigned int *)(temp_v0 + 0x30);
-  *(unsigned int *)(temp_v0 + 0x60) = *(unsigned int *)(temp_v0 + 0x2c);
-  return;
+    ListJobWork* work = jobGetWork();
+    dlistFreeAll(work);
+    work->state = 0;
+    work->count = 0;
+    work->first = 0;
+    work->last = 0;
+    work->source.clearCount();
+    work->count = work->source.getCount();
+    work->last = work->source.getLast();
+    work->first = work->source.getFirst();
 }
-
-} /* extern "C" */
+}

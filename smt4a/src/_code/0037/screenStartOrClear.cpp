@@ -3,7 +3,7 @@
 extern "C" {
 
 extern ScreenRef g_buttonHelp;
-extern void FUN_002a1f60(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, u32 g);
+extern void asdTextDrawDirectoryEntry(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, u32 g);
 
 void screenStartOrClear(s32 id, u32 arg)
 {
@@ -12,7 +12,7 @@ void screenStartOrClear(s32 id, u32 arg)
     screen->unk67C = 1;
     screen->unk5EA = 1;
     if (id != 0) {
-        FUN_002a1f60(screen->unk678, 2, -1, 0, 3, id, arg);
+        asdTextDrawDirectoryEntry(screen->unk678, 2, -1, 0, 3, id, arg);
     } else {
         screen->unk5EA = 0;
         screen->unk67C = 0;

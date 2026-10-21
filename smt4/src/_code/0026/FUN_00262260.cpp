@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00283e48(...);
+int passiveSkillLookupRecord(...);
 int FUN_00283ebc(...);
 int FUN_00283f30(...);
 int VectorUnsignedToFloat(...);
@@ -33,11 +33,11 @@ typedef struct {
 } param_3_stack;
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: FUN_00283ebc. */
 /* Supplied declaration required: FUN_00283f30. */
 extern int gameGetUnitRecord(void);
-extern unsigned int FUN_002ae108(unsigned short);
+extern unsigned int playerGetSkillRank(unsigned short);
 extern int gameGetPlayerData(void);
 extern unsigned int FUN_003bf53c(int, fn_00262260_arg0 *, unsigned int);
 extern unsigned int FUN_003bf584(unsigned int, fn_00262260_arg0 *, unsigned int);
@@ -86,7 +86,7 @@ unsigned int FUN_00262260(fn_00262260_arg0 *param_1,unsigned int param_2,int par
       temp_v2 = gameGetPlayerData();
       temp_v1 = *(short *)(temp_v2 + 0x24);
       FUN_00283f30(&temp_v6,1);
-      temp_v3 = FUN_002ae108(param_1->field_0x20);
+      temp_v3 = playerGetSkillRank(param_1->field_0x20);
       pfVar6 = param_1;
       FUN_00283ebc(param_1,temp_v3,2);
     }
@@ -104,7 +104,7 @@ unsigned int FUN_00262260(fn_00262260_arg0 *param_1,unsigned int param_2,int par
     temp_v2 = 0;
     do {
       if (*(short *)((int)&temp_v6 + temp_v2 * 2) != 0) {
-        FUN_00283e48();
+        passiveSkillLookupRecord();
       }
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 9);

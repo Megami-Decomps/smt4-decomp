@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002d1f40(int, int, int);
-int FUN_0030354c(void);
+int lmapClearExtraFlag(void);
 int FUN_003d2158(int, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -18,7 +18,7 @@ extern int *g_lmapScene; /* 0x581288 */
 
 extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002d1f40. */
-/* Supplied declaration required: FUN_0030354c. */
+/* Supplied declaration required: lmapClearExtraFlag. */
 extern int FUN_003d2150(unsigned int);
 /* Supplied declaration required: FUN_003d2158. */
 
@@ -56,7 +56,7 @@ void FUN_00385578(void)
       if (temp_v0 != 2) {
         if (temp_v0 == 3) {
           if ((*g_lmapScene != 1) && (*g_lmapScene != 3)) {
-            FUN_0030354c();
+            lmapClearExtraFlag();
             temp_v0 = g_lmapScene[0xa3];
           }
           else {

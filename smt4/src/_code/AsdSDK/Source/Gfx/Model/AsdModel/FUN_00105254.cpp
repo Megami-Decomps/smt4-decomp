@@ -10,7 +10,7 @@ int FUN_0010bdb0(void);
 int FUN_0010e614(void);
 int FUN_00131a2c(unsigned int);
 int FUN_002c2968(unsigned int, unsigned int);
-int FUN_002c29c4(unsigned char *);
+int tripleClear(unsigned char *);
 
 extern unsigned int DAT_00464b0c; /* 0x464b0c */
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
@@ -24,7 +24,7 @@ extern unsigned char DAT_004dae48; /* 0x4dae48 */
 /* Supplied declaration required: FUN_0010e614. */
 /* Supplied declaration required: FUN_00131a2c. */
 /* Supplied declaration required: FUN_002c2968. */
-/* Supplied declaration required: FUN_002c29c4. */
+/* Supplied declaration required: tripleClear. */
 
 
 void FUN_00105254(unsigned int param_1,unsigned int param_2)
@@ -33,8 +33,8 @@ void FUN_00105254(unsigned int param_1,unsigned int param_2)
 /* irregular: 7 native warning(s); review required */
   int temp_v0;
   
-  FUN_002c29c4(&DAT_004dae3c);
-  FUN_002c29c4(&DAT_004dae48);
+  tripleClear(&DAT_004dae3c);
+  tripleClear(&DAT_004dae48);
   FUN_00108c5c(param_1,param_2);
   FUN_001079d8();
   FUN_0010e614();

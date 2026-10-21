@@ -21,7 +21,7 @@ extern unsigned char LAB_002727b4; /* 0x2727b4 */
 extern unsigned char LAB_002727c8; /* 0x2727c8 */
 extern unsigned char LAB_002727dc; /* 0x2727dc */
 extern unsigned char LAB_002727f4; /* 0x2727f4 */
-extern int FUN_002987c4(...); /* 0x2987c4 */
+extern int battleDrawRosterMarkerRects(...); /* 0x2987c4 */
 extern int FUN_002df6f0(...); /* 0x2df6f0 */
 extern int FUN_002df754(...); /* 0x2df754 */
 extern int FUN_002fc0c8(...); /* 0x2fc0c8 */
@@ -43,7 +43,7 @@ void FUN_002726b8(unsigned int *param_1)
   puVar1 = &LAB_002727b4;
   taskCreateDraw(&LAB_002727b4,4,0,0,&LAB_0024ebe4,FUN_002df6f0,param_1,*param_1);
   param_1[0x16] = (unsigned int)puVar1;
-  taskCreateDraw(&LAB_002727c8,0x71,0,0,FUN_002987c4,0,param_1,puVar1);
+  taskCreateDraw(&LAB_002727c8,0x71,0,0,battleDrawRosterMarkerRects,0,param_1,puVar1);
   taskCreateDraw(&LAB_002727dc,0x7d,0,0,FUN_002df754,0,param_1,param_1[0x16]);
   taskCreateDraw(&LAB_002727f4,0xd9,0,0,FUN_002df754,0,param_1,param_1[0x16]);
   puVar2 = (unsigned int *)0x14;

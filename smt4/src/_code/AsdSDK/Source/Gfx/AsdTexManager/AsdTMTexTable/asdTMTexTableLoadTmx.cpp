@@ -24,7 +24,7 @@ extern unsigned char *FUN_0010024c(char *, unsigned int);
 /* Supplied declaration required: FUN_002b73a8. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
-extern int FUN_002c3124(unsigned char *, unsigned char *, unsigned char);
+extern int fileLoadSync(unsigned char *, unsigned char *, unsigned char);
 
 
 int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
@@ -71,7 +71,7 @@ int * asdTMTexTableLoadTmx(int param_1,unsigned int param_2)
     if ((param_2 & 2) != 0) {
       temp_v7 = temp_v7 | 2;
     }
-    temp_v1 = FUN_002c3124(temp_v9,temp_v8,temp_v7);
+    temp_v1 = fileLoadSync(temp_v9,temp_v8,temp_v7);
     if (temp_v1 == 0) {
       *puVar10 = 0;
       piVar2 = (int *)0x0;

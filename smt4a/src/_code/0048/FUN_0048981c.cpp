@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_00183e58(void);
-int FUN_00357a48(void);
+int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int FUN_003d2150(...);
 int FUN_0048816c(...);
@@ -53,7 +53,7 @@ extern unsigned int *gameFlagsGetBlock(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
 extern int FUN_00325064(void);
-/* Supplied declaration required: FUN_00357a48. */
+/* Supplied declaration required: naviRequestSelectedMap. */
 extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -267,7 +267,7 @@ LAB_004899f8:
                 *puVar8 = 1;
               }
               *(unsigned char *)(param_1 + 0x58) = 5;
-              FUN_00357a48();
+              naviRequestSelectedMap();
             }
             else {
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
@@ -302,7 +302,7 @@ LAB_004899f8:
                 *puVar8 = 1;
               }
               *(unsigned char *)(param_1 + 0x58) = 5;
-              FUN_00357a48();
+              naviRequestSelectedMap();
             }
             else {
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;

@@ -23,7 +23,7 @@ struct fn_001ebe10_arg0 {
     byte field_0xd60; /* +0xd60 */
 };
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
@@ -39,7 +39,7 @@ unsigned int FUN_001ebe10(fn_001ebe10_arg0 *param_1)
   
   temp_v1 = 0;
   if (param_1->field_0xd38 != 0) {
-    if ((param_1->field_0xd38 == 1) && (temp_v0 = FUN_0019e0c0(param_1->field_0xd04), temp_v0 == 2)) {
+    if ((param_1->field_0xd38 == 1) && (temp_v0 = scrRunOpcodesStub(param_1->field_0xd04), temp_v0 == 2)) {
       param_1->field_0xd34 = 0;
       param_1->field_0xd2c = 6;
       param_1->field_0xd38 = 0;

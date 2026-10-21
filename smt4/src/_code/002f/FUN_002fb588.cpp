@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00287728(void);
-int FUN_0029c3c0(int, unsigned int, unsigned int);
+int slotSetRequest(int, unsigned int, unsigned int);
 
 /* Supplied declaration required: FUN_00287728. */
 extern int scrGetCommandFrame(void);
 extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_002b89a4(unsigned int);
 extern int FUN_002c1d5c(void);
 
@@ -43,7 +43,7 @@ unsigned int FUN_002fb588(void)
     return 1;
   }
   temp_v1 = scrGetArg(0);
-  FUN_0029c3c0(0,temp_v1,0xffffffff);
+  slotSetRequest(0,temp_v1,0xffffffff);
   return 0;
 }
 

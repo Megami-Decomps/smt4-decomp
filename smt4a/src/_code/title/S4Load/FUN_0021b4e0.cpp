@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a1f60(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_002e59f8(int, char *, int);
 int rt_aeabi_memclr(unsigned char [512], int);
 int FUN_003180c4(...);
@@ -23,7 +23,7 @@ extern unsigned char LAB_0021b6e8; /* 0x21b6e8 */
 extern int g_s4Load; /* 0x589154 */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_002e59f8. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -52,7 +52,7 @@ void FUN_0021b4e0(int param_1)
       FUN_00359974(0,2);
     }
     if (*(char *)(temp_v1 + param_1 + 0xa4) == '\0') {
-      FUN_002a1f60(*(unsigned int *)(temp_v1 + 0x2b8),4,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x2ac),
+      asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x2b8),4,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x2ac),
                    0x65);
       return;
     }
@@ -86,7 +86,7 @@ void FUN_0021b4e0(int param_1)
     for (; temp_v3 < 4; temp_v3 = temp_v3 + 1) {
       FUN_003180c4(temp_v4 + 7,&LAB_0021b6e8);
     }
-    FUN_002a1f60(*(unsigned int *)(temp_v1 + 0x2b8),4,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x2ac),100)
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x2b8),4,0xffffffff,0,3,*(unsigned int *)(temp_v1 + 0x2ac),100)
     ;
   }
   return;

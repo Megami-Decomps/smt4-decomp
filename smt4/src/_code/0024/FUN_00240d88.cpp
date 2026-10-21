@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028f048(...);
+void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
 int FUN_0029a17c(...);
 int FUN_002b6dd8(...);
 int devilGetRecord(void);
@@ -36,7 +36,6 @@ extern int g_screenStateWork; /* 0x43dd90 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0028f048. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
@@ -147,7 +146,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
                    (int)**(short **)(temp_v4 + 0xc),
                    (int)(*(short **)(temp_v4 + 0xc))[1] + *(int *)(temp_v7 + param_1 * 4 + 0x68),1);
       temp_v5 = FUN_002bf4f8(0x24,0xda);
-      FUN_0028f048((int)*psVar7,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
+      textureLoadOptionalDemonModel((int)*psVar7,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x68,1);
       temp_v5 = g_titleScene;
       piVar12 = (int *)(g_titleScene + 0x130c);

@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern int FUN_002efa34(int, int, unsigned int, unsigned int, unsigned int);
+extern int maskSourceHasAnyBit(int, int, unsigned int, unsigned int, unsigned int);
 
 
 unsigned int FUN_00107d3e(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
@@ -15,7 +15,7 @@ unsigned int FUN_00107d3e(int param_1,int param_2,unsigned int param_3,unsigned 
   unsigned int temp_v1;
   
   if ((((*(unsigned short *)(param_2 + 0x3c) & 0xf) == 1) && (*(char *)(param_1 + 0x14c) == '\x01')) &&
-     (temp_v0 = FUN_002efa34(param_1,param_2,0x2000000,0,param_4), temp_v0 == 0)) {
+     (temp_v0 = maskSourceHasAnyBit(param_1,param_2,0x2000000,0,param_4), temp_v0 == 0)) {
     return 4;
   }
   temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 0x1fc) + 0x10))

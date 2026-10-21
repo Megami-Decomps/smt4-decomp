@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -22,8 +22,8 @@ extern int g_result; /* 0x44dc20 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern int dataTable09Sub3GetRecord(unsigned char, int);
-/* Supplied declaration required: FUN_00283e48. */
-extern int FUN_00295d08(unsigned int);
+/* Supplied declaration required: passiveSkillLookupRecord. */
+extern int playerPadTestBit(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
@@ -99,8 +99,8 @@ void FUN_00223360(int *param_1)
   if ((temp_v12 < 1) && (temp_v9 != 0)) {
     temp_v12 = 1;
   }
-  temp_v4 = FUN_00295d08(1);
-  if ((temp_v4 == 0) && (temp_v4 = FUN_00295d08(10), temp_v4 == 0)) {
+  temp_v4 = playerPadTestBit(1);
+  if ((temp_v4 == 0) && (temp_v4 = playerPadTestBit(10), temp_v4 == 0)) {
     *(int *)(temp_v2 + 0x35b4) = *(int *)(temp_v2 + 0x35b4) + temp_v12;
   }
   temp_v17 = 1.0f;
@@ -134,7 +134,7 @@ void FUN_00223360(int *param_1)
         do {
           temp_v6 = (unsigned int)*(unsigned short *)(temp_v5 + 0x34 + temp_v10 * 2);
           if (temp_v6 != 0) {
-            FUN_00283e48();
+            passiveSkillLookupRecord();
             temp_v7 = 0;
             if (temp_v6 != 0) {
               temp_v7 = (unsigned int)*(unsigned char *)(temp_v6 + 0x2f);

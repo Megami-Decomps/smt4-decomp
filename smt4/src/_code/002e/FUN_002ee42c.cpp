@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int FUN_002216e4(...); /* 0x2216e4 */
+extern int jobGroupStopWhenReady(...); /* 0x2216e4 */
 extern unsigned char LAB_002ee508; /* 0x2ee508 */
 extern unsigned char LAB_002ee520; /* 0x2ee520 */
 extern unsigned char LAB_002ee534; /* 0x2ee534 */
@@ -23,7 +23,7 @@ extern unsigned char LAB_002fcd0c; /* 0x2fcd0c */
 extern unsigned char LAB_002fcd2c; /* 0x2fcd2c */
 extern unsigned char LAB_002fcd4c; /* 0x2fcd4c */
 extern unsigned char LAB_0030a0b4; /* 0x30a0b4 */
-extern unsigned char *DAT_0043dea8; /* 0x43dea8 */
+extern unsigned char *g_shutdownJobs; /* 0x43dea8 */
 extern unsigned char *DAT_0043deac; /* 0x43deac */
 extern unsigned char *DAT_0043deb0; /* 0x43deb0 */
 extern unsigned char *DAT_0043deb4; /* 0x43deb4 */
@@ -42,9 +42,9 @@ unsigned char * FUN_002ee42c(void)
   unsigned char *puVar2;
   
   puVar1 = &LAB_002ee508;
-  asdProcessCreateSimple(&LAB_002ee508,2,0,0,FUN_002216e4,0,0);
+  asdProcessCreateSimple(&LAB_002ee508,2,0,0,jobGroupStopWhenReady,0,0);
   puVar2 = &LAB_002ee520;
-  DAT_0043dea8 = puVar1;
+  g_shutdownJobs = puVar1;
   asdProcessCreateSimple(&LAB_002ee520,0x65,0,0,&LAB_002fcd2c,0,0);
   puVar1 = &LAB_002ee534;
   DAT_0043deac = puVar2;
@@ -58,7 +58,7 @@ unsigned char * FUN_002ee42c(void)
   DAT_0043deb0 = puVar1;
   FUN_001dce30();
   DAT_0043debc = 0;
-  return DAT_0043dea8;
+  return g_shutdownJobs;
 }
 
 } /* extern "C" */

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00254824` (_code @ 0x254824, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail retains Result module/description range checks and an unused R3 line literal but has no surviving diagnostic call; the draft's void contract cannot express these as live C/C++ behavior. Original check/diagnostic contract is unrecovered; body left unchanged. */
 #include "romwright_types.h"
 
 extern "C" {

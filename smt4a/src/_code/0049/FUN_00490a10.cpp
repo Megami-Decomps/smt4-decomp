@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0016c69c(...);
-int FUN_0016c6f0(unsigned int, int, unsigned int);
+int renderCtxPopState(...);
+int renderStackPushIndexed(unsigned int, int, unsigned int);
 int FUN_001835b4(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(unsigned int);
@@ -32,8 +32,8 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -76,7 +76,7 @@ void FUN_00490a10(int param_1)
   temp_v17 = 0;
   temp_v11 = temp_v12;
   temp_v3 = FUN_001692ac(1,0);
-  FUN_0016c6f0(g_renderCtx,3,temp_v3);
+  renderStackPushIndexed(g_renderCtx,3,temp_v3);
   temp_v7 = 0;
   if (0 < *(int *)(param_1 + 0x7b8c)) {
     temp_v14 = 0xc1800000;
@@ -263,7 +263,7 @@ LAB_00490c50:
     } while (temp_v7 < *(int *)(param_1 + 0x7b8c));
   }
   FUN_00183bb0();
-  FUN_0016c69c(g_renderCtx,3);
+  renderCtxPopState(g_renderCtx,3);
   return;
 }
 

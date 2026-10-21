@@ -1,43 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ee16c` (_code @ 0x3ee16c, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match3_ThreadHandleState.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern ThreadHandleState DAT_0044e7b4;
+extern const u32 DAT_00408ee0;
+s32 FUN_0015f858(u32* handle, u32 original);
+void FUN_002c526c(s32 result);
+void nn_os_Thread_Thread_sub_object(void* object);
+void entry(void);
+void sceneNotifyNoop(void* object, void (*destroy)(void*), void* module);
 
-int FUN_0015f858(unsigned int *, unsigned int);
-int FUN_002c526c(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern unsigned int DAT_0044e7b4; /* 0x44e7b4 */
-extern unsigned char DAT_0044e7b8; /* 0x44e7b8 */
-extern unsigned char DAT_0044e7b9; /* 0x44e7b9 */
-
-/* Supplied declaration required: FUN_0015f858. */
-/* Supplied declaration required: FUN_002c526c. */
-
-
-unsigned long long FUN_003ee16c(void)
-
+static __inline ThreadHandleState* initializeCurrentThread(ThreadHandleState* thread)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = (unsigned int *)&temp_v0;
-  DAT_0044e7b4 = 0;
-  temp_v0 = 0;
-  FUN_0015f858(puVar1,0xffff8000);
-  if ((int)puVar1 < 0) {
-    FUN_002c526c();
-  }
-  DAT_0044e7b4 = temp_v0;
-  DAT_0044e7b8 = 0;
-  DAT_0044e7b9 = 0;
-  return 0x3577280044e7b4;
+    thread->handle = 0;
+    u32 handle = 0;
+    s32 result = FUN_0015f858(&handle, DAT_00408ee0);
+    if (nnResultIsFailure(result)) {
+        FUN_002c526c(result);
+    }
+    thread->handle = handle;
+    thread->unk04 = 0;
+    thread->unk05 = 0;
+    return thread;
 }
 
-} /* extern "C" */
+// Duplicate the current thread handle and register the thread object's cleanup.
+void FUN_003ee16c(void)
+{
+    sceneNotifyNoop(initializeCurrentThread(&DAT_0044e7b4),
+                    nn_os_Thread_Thread_sub_object, reinterpret_cast<void*>(entry));
+}
+}

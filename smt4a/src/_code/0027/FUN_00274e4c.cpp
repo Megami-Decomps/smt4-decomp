@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_00234044(...);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int libc_strcpy(int, int);
 int dataTable2aGetEntryWithAoc(void);
 int FUN_00384830(void);
@@ -22,7 +22,7 @@ extern unsigned char DAT_005f1724; /* 0x5f1724 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00234044. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: dataTable2aGetEntryWithAoc. */
 /* Supplied declaration required: FUN_00384830. */
@@ -78,7 +78,7 @@ void FUN_00274e4c(void)
         temp_v9 = (float)temp_v13;
       }
       temp_v6 = (float)((unsigned long long)temp_v11 >> 0x20);
-      FUN_002b5cb4();
+      distSpatial();
       temp_v8 = CONCAT44(temp_v7,temp_v6);
       if (temp_v6 < temp_v7) {
         temp_v7 = (float)((unsigned long long)temp_v11 >> 0x20);

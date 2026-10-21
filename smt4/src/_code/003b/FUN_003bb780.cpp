@@ -11,9 +11,9 @@ void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 f32 *FUN_002bf4f8(s32 group, s32 id);
 void efctSetSpeed(f32 alpha);
 s32 FUN_0029e924(ListMenu *menu);
-s32 FUN_00233718(ListMenu *menu);
+s32 rangeLimitMin(ListMenu *menu);
 s32 FUN_00240d5c(ListMenu *menu);
-u32 FUN_0023360c(ListMenu *menu);
+u32 flaggedValueHolderGetTotal(ListMenu *menu);
 void FUN_0022ade4(ListMenu *menu, s32 index, s32 value, s32 marked, s32 size);
 void FUN_0029ee6c(u8 *highlight, u32 color);
 
@@ -47,7 +47,7 @@ void FUN_003bb780(ListMenu *menu)
     }
 
     s32 first = FUN_0029e924(menu);
-    s32 count = FUN_00233718(menu);
+    s32 count = rangeLimitMin(menu);
 
     for (s32 i = 0; i < count; i++) {
         if (FUN_00240d5c(menu) != i) {
@@ -59,12 +59,12 @@ void FUN_003bb780(ListMenu *menu)
 
     if (menu->hasCursor != 0) {
         s32 marked = menu->cursorMarked == 0 ? 1 : 2;
-        u32 value = FUN_0023360c(menu);
+        u32 value = flaggedValueHolderGetTotal(menu);
 
         FUN_0022ade4(menu, FUN_00240d5c(menu), value, marked, 37);
-        highlight = &menu->entries[FUN_0023360c(menu)]->highlight;
+        highlight = &menu->entries[flaggedValueHolderGetTotal(menu)]->highlight;
     } else {
-        u32 value = FUN_0023360c(menu);
+        u32 value = flaggedValueHolderGetTotal(menu);
 
         FUN_0022ade4(menu, FUN_00240d5c(menu), value, 0, 36);
         highlight = NULL;

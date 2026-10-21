@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00150618(void);
+void asdModelRenderLightPass(void);
 
-/* Calls FUN_00150618 and returns 0. */
+/* Calls asdModelRenderLightPass and returns 0. */
 u32 FUN_00141270(void)
 {
-    FUN_00150618();
+    asdModelRenderLightPass();
     return 0;
 }
 

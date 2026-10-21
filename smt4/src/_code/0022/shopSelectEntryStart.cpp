@@ -19,8 +19,8 @@ u32 FUN_002bcfc0(u32 record, s32 arg);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 s32 scrScriptProcessStartEntry(u32 process, u32 entry);
-s32 FUN_0019e0c0(u32 process);
-s32 FUN_0023553c(s32 arg);
+s32 scrRunOpcodesStub(u32 process);
+s32 messageMainSetTargetFlags(s32 arg);
 
 /* Builds the shop's item text list (one "name<br>" per item) and starts the "shop_select" script entry. */
 void shopSelectEntryStart(ShopScene *scene, s32 mode)
@@ -45,8 +45,8 @@ void shopSelectEntryStart(ShopScene *scene, s32 mode)
         textFormatBuffer(scene->text, "%s%s<br>", scene->text, name);
     }
     scrScriptProcessStartEntry(scene->process, tableGroupFindEntryIndex(scene->tableGroup, entryName));
-    FUN_0019e0c0(scene->process);
-    FUN_0023553c(1);
+    scrRunOpcodesStub(scene->process);
+    messageMainSetTargetFlags(1);
 }
 
 } /* extern "C" */

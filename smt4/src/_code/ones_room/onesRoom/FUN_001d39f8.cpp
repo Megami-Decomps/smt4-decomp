@@ -35,7 +35,7 @@ extern unsigned int *g_onesRoom; /* 0x44d1c8 */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 
 
 void FUN_001d39f8(int param_1)
@@ -62,9 +62,9 @@ void FUN_001d39f8(int param_1)
   buttonHelpCreate();
   FUN_00289880();
   buttonHelpSetPreset(0xa2);
-  temp_v0 = FUN_002c5c04(&LAB_001d3b3c);
+  temp_v0 = asdLoadFileSyncDefault(&LAB_001d3b3c);
   puVar1[1] = temp_v0;
-  temp_v0 = FUN_002c5c04(&LAB_001d3b54);
+  temp_v0 = asdLoadFileSyncDefault(&LAB_001d3b54);
   puVar1[3] = temp_v0;
   temp_v1 = puVar1[1];
   FUN_00297060(temp_v1,temp_v0);

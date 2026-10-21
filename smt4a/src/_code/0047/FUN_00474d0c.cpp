@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00474d0c` (_code @ 0x474d0c, 0x9f0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_ArchiveIcon.h"
 
 extern "C" {
 
@@ -18,12 +19,11 @@ int FUN_002f5020(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
 int FUN_0037a728(...);
 int FUN_00426eb8(...);
-int FUN_0042718c(...);
 int FUN_00428060(...);
 int FUN_00473c5c(...);
 int FUN_004749a0(...);
 int holderOwnerFree(...);
-int FUN_004ffd58(...);
+int dictionaryWasUpdatedSince(...);
 int FUN_004ffee0(...);
 int FUN_004fff5c(...);
 int FUN_004fffc0(...);
@@ -81,7 +81,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_001a1564. */
 extern unsigned char objGetFlagBit0(int);
 extern unsigned char objGetFlagBit1(int);
-extern int FUN_001d25ec(int);
+extern int legacyResourceIdRemap(int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: deletingDtor_002e56ec. */
@@ -91,7 +91,6 @@ extern int FUN_001d25ec(int);
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_0037a728. */
 /* Supplied declaration required: FUN_00426eb8. */
-/* Supplied declaration required: FUN_0042718c. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00428060. */
@@ -100,7 +99,7 @@ extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: holderOwnerFree. */
 extern int FUN_004ffd38(unsigned char *);
 extern int FUN_004ffd4c(unsigned char *);
-/* Supplied declaration required: FUN_004ffd58. */
+/* Supplied declaration required: dictionaryWasUpdatedSince. */
 /* Supplied declaration required: FUN_004ffee0. */
 /* Supplied declaration required: FUN_004fff5c. */
 /* Supplied declaration required: FUN_004fffc0. */
@@ -276,7 +275,7 @@ int FUN_00474d0c(int param_1)
     do {
       table30GetEntryB(temp_v50,*(unsigned int *)(temp_v8 + 0x5a8),temp_v41);
       temp_v17 = temp_v50;
-      FUN_004ffd58(&temp_v14,temp_v50);
+      dictionaryWasUpdatedSince(&temp_v14,temp_v50);
       temp_v47 = temp_v14;
       uStack_1a8c = temp_v15;
       temp_v9 = nn_fnd_DateTime_GetDay((unsigned int)&temp_v47);
@@ -455,13 +454,15 @@ int FUN_00474d0c(int param_1)
           sysMemClear(temp_v48,0x1200);
         }
         else {
-          FUN_001029f4(temp_v13,0,10);
+          temp_v13 = static_cast<u16>(FUN_001029f4(temp_v13,0,10));
           *(short *)(temp_v45 + 0xa8) = (short)temp_v13;
           if ((temp_v13 & 0xffff) != 0xffff) {
-            FUN_0042718c(&temp_v14,temp_v8 + 0x28,temp_v48);
-            *(int *)(temp_v51 + 0xc) = temp_v14;
-            *(unsigned int *)(temp_v51 + 0x10) = temp_v15;
-            temp_v9 = FUN_001d25ec(temp_v51 + 0xc);
+            ValidationPair iconResult = archiveReadIcon(
+                reinterpret_cast<const ArchiveIconSource *>(temp_v8 + 0x28),
+                reinterpret_cast<void *>(temp_v48), temp_v13);
+            *(int *)(temp_v51 + 0xc) = static_cast<s32>(iconResult.first);
+            *(unsigned int *)(temp_v51 + 0x10) = iconResult.second;
+            temp_v9 = legacyResourceIdRemap(temp_v51 + 0xc);
             if (temp_v9 < 0) {
               return temp_v9;
             }
@@ -475,12 +476,12 @@ int FUN_00474d0c(int param_1)
         FUN_004fffc0(&temp_v19,temp_v17,&temp_v40);
         *(unsigned int *)(temp_v51 + 0xc) = temp_v19;
         *(unsigned int *)(temp_v51 + 0x10) = uStack_1c0c;
-        temp_v9 = FUN_001d25ec(temp_v51 + 0xc);
+        temp_v9 = legacyResourceIdRemap(temp_v51 + 0xc);
         if (temp_v9 < 0) {
           return temp_v9;
         }
         *(unsigned int *)(temp_v4 + 0x9b8) = temp_v40;
-        FUN_004ffd58(&temp_v14,temp_v17);
+        dictionaryWasUpdatedSince(&temp_v14,temp_v17);
         *(int *)(temp_v4 + 0x9a0) = temp_v14;
         *(unsigned int *)(temp_v4 + 0x9a4) = temp_v15;
         temp_v9 = FUN_004ffd38(temp_v17);
@@ -498,7 +499,7 @@ int FUN_00474d0c(int param_1)
           FUN_00428060(&temp_v14,temp_v8 + 0x84,&uStack_1bc8,&temp_v25);
           *(int *)(temp_v51 + 0xc) = temp_v14;
           *(unsigned int *)(temp_v51 + 0x10) = temp_v15;
-          temp_v9 = FUN_001d25ec(temp_v51 + 0xc);
+          temp_v9 = legacyResourceIdRemap(temp_v51 + 0xc);
           if (temp_v9 < 0) {
             return temp_v9;
           }
@@ -558,10 +559,10 @@ int FUN_00474d0c(int param_1)
         FUN_004ffee0(&temp_v20,temp_v17,&temp_v37,temp_v9);
         *(unsigned int *)(temp_v51 + 0xc) = temp_v20;
         *(unsigned int *)(temp_v51 + 0x10) = temp_v21;
-        temp_v5 = FUN_001d25ec(temp_v51 + 0xc);
+        temp_v5 = legacyResourceIdRemap(temp_v51 + 0xc);
         if (temp_v5 < 0) {
           asdOperatorDeleteB(temp_v9);
-          temp_v8 = FUN_001d25ec(temp_v51 + 0xc);
+          temp_v8 = legacyResourceIdRemap(temp_v51 + 0xc);
           return temp_v8;
         }
         temp_v5 = 0;

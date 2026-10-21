@@ -57,7 +57,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_002237a0. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00234b30. */
 /* Supplied declaration required: FUN_0025cb1c. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -360,7 +360,7 @@ void FUN_003401a4(int param_1)
         FUN_003d2150(0x10002aa);
       }
       *(int *)(param_1 + 0xd4) = *(int *)(param_1 + 0xd4) + 1;
-      temp_v7 = FUN_00224880(*(unsigned int *)(param_1 + 0x9f4));
+      temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x9f4));
       if ((temp_v7 == 2) && (*(int *)(param_1 + 0xd4) >= 0xf1)) {
         *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
         *(unsigned int *)(param_1 + 0xd4) = 0;

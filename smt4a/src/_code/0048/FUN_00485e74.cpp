@@ -17,7 +17,7 @@ int FUN_0048738c(unsigned char *);
 int rectangleInitializeSelection(unsigned char *, int, int, int);
 int FUN_004cf7cc(...);
 int fillTwoWordsWithByte(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned char *);
+int paramsClearPacket(unsigned char *);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -49,7 +49,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004cf7cc. */
 /* Supplied declaration required: fillTwoWordsWithByte. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_00485e74(unsigned char *param_1)
@@ -95,7 +95,7 @@ void FUN_00485e74(unsigned char *param_1)
   *(unsigned int *)(param_1 + 0x4b8) = 0;
   *(unsigned int *)(param_1 + 0x4c4) = 0;
   *(unsigned int *)(param_1 + 0x4c8) = 0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0xc20);
+  paramsClearPacket(param_1 + 0xc20);
   paramsInit(param_1 + 0xc20,&DAT_00532378,0x60,&DAT_005323d8,0x54,0,0,0,0,&DAT_0053242c,0x8c);
   temp_v2 = 0;
   do {

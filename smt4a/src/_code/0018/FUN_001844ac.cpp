@@ -1,30 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001844ac` (_code @ 0x1844ac, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: alignment narrowing and metadata stores schedule differently; -O2 reduces register use but is not identical. */
+#include "common.h"
+
+struct AllocationHeader {
+    u32 size; // 0x00
+    u16 alignment; // 0x04
+    u16 flags; // 0x06
+    u32 unk08;
+    u32 unk0c;
+    u32 unk10;
+    u8 unk14[0x2c];
+};
 
 extern "C" {
+void FUN_0019a64c(AllocationHeader *header);
 
-int FUN_0019a64c(void);
-
-/* Supplied declaration required: FUN_0019a64c. */
-
-
-int FUN_001844ac(unsigned int *param_1,unsigned int param_2,unsigned short param_3,unsigned short param_4)
-
+// Align the user allocation after its header and install the preceding back-pointer.
+void *FUN_001844ac(AllocationHeader *header, u32 size, u32 alignment, u32 flags)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  
-  *param_1 = param_2;
-  *(unsigned short *)(param_1 + 1) = param_3;
-  *(unsigned short *)((int)param_1 + 6) = param_4;
-  temp_v0 = param_3 - 1;
-  temp_v0 = ((unsigned int)param_3 - ((unsigned int)(param_1 + 0x10) & temp_v0)) & temp_v0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  *(unsigned int **)((int)param_1 + temp_v0 + 0x3c) = param_1;
-  FUN_0019a64c();
-  return (int)param_1 + temp_v0 + 0x40;
+    header->size = size;
+    header->alignment = alignment;
+    header->flags = flags;
+    u32 boundary = header->alignment;
+    u32 mask = boundary - 1;
+    u32 padding = (boundary - ((u32)(header + 1) & mask)) & mask;
+    header->unk0c = 0;
+    header->unk10 = 0;
+    u8 *data = (u8 *)(header + 1) + padding;
+    ((AllocationHeader **)data)[-1] = header;
+    FUN_0019a64c(header);
+    return data;
 }
-
-} /* extern "C" */
+}

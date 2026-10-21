@@ -1,31 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00352e54` (_code @ 0x352e54, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: quotient/remainder registers and enabled-condition scheduling differ from retail. */
+#include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
-
-extern int gameFlagsGetBlock(void);
-
-
-void FUN_00352e54(int param_1,int param_2)
-
+// Set or clear one bit in the first game flag bank.
+void FUN_00352e54(s32 bit, s32 enabled)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = gameFlagsGetBlock();
-  temp_v1 = temp_v1 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-  temp_v2 = *(unsigned int *)(temp_v1 + 0x744);
-  temp_v0 = 1 << ((param_1 % 0x20) & 0xffU);
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v2 & ~temp_v0;
-  }
-  *(unsigned int *)(temp_v1 + 0x744) = temp_v2;
-  return;
+    FlagWorkBanks *flags = gameFlagsGetBlock();
+    s32 index = bit / 32;
+    u32 value = flags->first[index];
+    u32 mask = 1u << (bit % 32);
+    if (enabled != 0) {
+        value |= mask;
+    } else {
+        value &= ~mask;
+    }
+    flags->first[index] = value;
 }
-
-} /* extern "C" */
+}

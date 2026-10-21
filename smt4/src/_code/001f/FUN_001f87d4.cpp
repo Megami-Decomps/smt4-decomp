@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002820a4(void);
+int vectorPairTransitionStep(void);
 int FUN_00282228(unsigned int *);
 int FUN_00282390(void);
 int FUN_0028250c(void);
@@ -30,7 +30,7 @@ extern int DAT_004474f4; /* 0x4474f4 */
 extern float DAT_00447500; /* 0x447500 */
 extern int g_lmapScene; /* 0x447e88 */
 
-/* Supplied declaration required: FUN_002820a4. */
+/* Supplied declaration required: vectorPairTransitionStep. */
 /* Supplied declaration required: FUN_00282228. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
@@ -182,7 +182,7 @@ void FUN_001f87d4(void)
           *(unsigned int *)(temp_v1 + 8) = 0;
           return;
         }
-        FUN_002820a4();
+        vectorPairTransitionStep();
       }
     }
     else {
@@ -196,7 +196,7 @@ void FUN_001f87d4(void)
         *(unsigned int *)(temp_v1 + 8) = 0;
         return;
       }
-      temp_v1 = FUN_002820a4();
+      temp_v1 = vectorPairTransitionStep();
       if (temp_v1 != 0) {
         temp_v15 = *(unsigned int *)(DAT_004474f4 + 0x58);
         fStack_ac = *(float *)(DAT_004474f4 + 0x5c);
@@ -270,7 +270,7 @@ void FUN_001f87d4(void)
       temp_v24 = temp_v18;
       temp_v27 = temp_v11;
       FUN_00282228(&temp_v15);
-      FUN_002820a4();
+      vectorPairTransitionStep();
       temp_v1 = DAT_004474f4;
       *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;
       *(unsigned int *)(temp_v1 + 8) = 0;
@@ -303,12 +303,12 @@ void FUN_001f87d4(void)
       temp_v25 = 1;
       temp_v27 = 0x40000000;
       FUN_00282228(&temp_v15);
-      FUN_002820a4();
+      vectorPairTransitionStep();
       return;
     }
   }
   else {
-    temp_v1 = FUN_002820a4();
+    temp_v1 = vectorPairTransitionStep();
     if (temp_v1 != 0) {
       temp_v1 = DAT_004474f4;
       *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;

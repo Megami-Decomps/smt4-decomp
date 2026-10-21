@@ -8,10 +8,10 @@ int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int scrScriptProcessStartEntry(...);
-int FUN_0034913c(...);
+int messageBannerRestartOrClear(...);
 int panelSetTarget(...);
 int FUN_0037c8e4(...);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int FUN_004cdbd4(...);
 
 typedef struct fn_004ceb9c_arg0 fn_004ceb9c_arg0;
@@ -41,17 +41,17 @@ extern unsigned char LAB_004ced40; /* 0x4ced40 */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_00224880(unsigned int);
-extern int FUN_00239414(void);
-extern int FUN_0026272c(void);
+extern int scrRunOpcodesStub(unsigned int);
+extern int messageAnyWindowActive(void);
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b60(void);
-/* Supplied declaration required: FUN_0034913c. */
+extern int messageMainGetValue(void);
+/* Supplied declaration required: messageBannerRestartOrClear. */
 extern int FUN_0034919c(void);
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: panelSetTarget. */
 /* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_004cdbd4. */
 
 
@@ -61,7 +61,7 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
 /* irregular: 9 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00224880(param_1->field_0x18);
+  temp_v0 = scrRunOpcodesStub(param_1->field_0x18);
   sysPlaySe(0x122);
   if (temp_v0 != 2) {
     temp_v0 = 1;
@@ -69,26 +69,26 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
     if (temp_v0 == 0) {
       return;
     }
-    temp_v0 = FUN_00239414();
+    temp_v0 = messageAnyWindowActive();
     if (temp_v0 != 0) {
       return;
     }
     eventQueueAddUniqueIfValid(0x100020f);
-    FUN_0034913c();
+    messageBannerRestartOrClear();
     param_1->field_0x598 = 0xb;
     temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,&LAB_004ced30);
     if (-1 < temp_v0) {
       scrScriptProcessStartEntry(param_1->field_0x18);
     }
-    temp_v0 = FUN_00224880(param_1->field_0x18);
+    temp_v0 = scrRunOpcodesStub(param_1->field_0x18);
     if (temp_v0 != 2) {
       return;
     }
-    temp_v0 = FUN_0026272c();
+    temp_v0 = messageMainIsIdle();
   }
   else {
-    FUN_0034913c();
-    temp_v0 = FUN_002a4b60();
+    messageBannerRestartOrClear();
+    temp_v0 = messageMainGetValue();
     if (temp_v0 == 0) {
       temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,&LAB_004ced40);
       if (-1 < temp_v0) {
@@ -110,17 +110,17 @@ void FUN_004ceb9c(fn_004ceb9c_arg0 *param_1)
     }
     temp_v0 = FUN_0034919c();
     if (temp_v0 != 0) {
-      FUN_00388758(0);
+      messageDismissNumericBanner(0);
     }
     param_1->field_0x598 = 0xb;
-    temp_v0 = FUN_00224880(param_1->field_0x18);
+    temp_v0 = scrRunOpcodesStub(param_1->field_0x18);
     if (temp_v0 != 2) {
       return;
     }
-    temp_v0 = FUN_0026272c();
+    temp_v0 = messageMainIsIdle();
   }
   if (temp_v0 == 0) {
-    FUN_00388758(0);
+    messageDismissNumericBanner(0);
   }
   *(unsigned int *)&param_1->field_0xc = 4;
   return;

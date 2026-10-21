@@ -11,7 +11,7 @@ int asdMemoryAllocTracked(int, int, int, int, int);
 int memAlloc(...);
 int sysPlaySe(...);
 int resultReportIfFailed(void);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int runWinOpen(void);
 int FUN_002c76d8(...);
 int FUN_002e3140(void);
@@ -53,7 +53,7 @@ extern unsigned char LAB_0036d12c; /* 0x36d12c */
 extern int jobScene360WaitStep(...); /* 0x37bdfc */
 extern int FUN_003a5200(...); /* 0x3a5200 */
 extern int dataSceneWaitStep(...); /* 0x3a60a8 */
-extern int FUN_003a611c(...); /* 0x3a611c */
+extern int menuPollModeScript(...); /* 0x3a611c */
 extern unsigned char LAB_00514a64; /* 0x514a64 */
 extern unsigned char LAB_00514b14; /* 0x514b14 */
 extern unsigned char LAB_00514b84; /* 0x514b84 */
@@ -67,7 +67,7 @@ extern unsigned int *g_campCecRecv; /* 0x57f128 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: resultReportIfFailed. */
 extern unsigned int gameDataBlocksAddFlags(unsigned int);
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int cecQueryOptionalProcess(void);
 /* Supplied declaration required: runWinOpen. */
 /* Supplied declaration required: FUN_002c76d8. */
@@ -126,7 +126,7 @@ void FUN_00344348(unsigned char param_1)
   puVar1[8] = (unsigned int)&LAB_0035a3f0;
   puVar1[9] = (unsigned int)FUN_0035a7c4;
   puVar1[10] = (unsigned int)dataSceneWaitStep;
-  puVar1[0xb] = (unsigned int)FUN_003a611c;
+  puVar1[0xb] = (unsigned int)menuPollModeScript;
   puVar3 = &LAB_0036d12c;
   puVar1[0xd] = (unsigned int)&LAB_0036d12c;
   FUN_0031cf00();
@@ -168,8 +168,8 @@ void FUN_00344348(unsigned char param_1)
   }
   *(unsigned char *)(puVar1 + 0x1f5) = 0;
   if (puVar1[0xf8] != 0) {
-    FUN_002804b0(&LAB_00344744,puVar1 + 0xd4,0);
-    FUN_002804b0(&LAB_00344758,puVar1 + 0xd5,0);
+    asdLoadFileAsyncSimple(&LAB_00344744,puVar1 + 0xd4,0);
+    asdLoadFileAsyncSimple(&LAB_00344758,puVar1 + 0xd5,0);
     puVar1[0xeb] = 8;
   }
   else {

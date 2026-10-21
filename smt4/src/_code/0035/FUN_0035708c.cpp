@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_5_stack;
 
-extern unsigned int FUN_002bc11c(unsigned int);
+extern unsigned int osVirtToPhysAddress(unsigned int);
 /* Supplied declaration required: FUN_002c2424. */
 /* Supplied declaration required: FUN_003deae0. */
 
@@ -77,11 +77,11 @@ void FUN_0035708c(int param_1,unsigned char *param_2,unsigned int param_3,unsign
   }
   FUN_002c2424(*(unsigned int *)(param_1 + 8),*(int *)(param_1 + 4) * 0x90);
   FUN_002c2424(*(unsigned int *)(param_1 + 0xc),*(int *)(param_1 + 4) * 0xc);
-  temp_v4 = FUN_002bc11c(*(unsigned int *)(param_1 + 0xc));
+  temp_v4 = osVirtToPhysAddress(*(unsigned int *)(param_1 + 0xc));
   *(unsigned int *)(param_1 + 0x7a0) = temp_v4;
   *(unsigned char *)(param_1 + 0x7a8) = 0;
   *(int *)(param_1 + 0x7a4) = *(int *)(param_1 + 4) * 6;
-  temp_v4 = FUN_002bc11c(*(unsigned int *)(param_1 + 8));
+  temp_v4 = osVirtToPhysAddress(*(unsigned int *)(param_1 + 8));
   puVar7 = (unsigned int *)(param_1 + 0x10);
   puVar18 = (unsigned int *)0x0;
   temp_v6 = 0;

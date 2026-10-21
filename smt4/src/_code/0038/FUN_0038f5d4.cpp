@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00233818(unsigned int *);
-int FUN_00233854(unsigned int *);
+int ifTouchRegionClearAll(unsigned int *);
 int jobStopAndClearFlags(unsigned int *);
 int jobOwnerFreeSlotAndStop(unsigned int *);
 int scrScriptProcessDestroy(void);
@@ -21,7 +21,7 @@ extern int g_aocMain; /* 0x432fc8 */
 extern int g_aocDisplay; /* 0x433130 */
 
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 /* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: jobOwnerFreeSlotAndStop. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
@@ -46,7 +46,7 @@ void FUN_0038f5d4(unsigned int *param_1)
   *(unsigned char *)(temp_v0 + 0xb81) = 1;
   *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xffffff8f;
   *(unsigned char *)(g_aocDisplay + 0x450c) = 0;
-  FUN_00233854(param_1 + 0xba);
+  ifTouchRegionClearAll(param_1 + 0xba);
   FUN_00233818(param_1 + 0xad);
   jobOwnerFreeSlotAndStop(param_1 + 0x46c);
   jobStopAndClearFlags(param_1);

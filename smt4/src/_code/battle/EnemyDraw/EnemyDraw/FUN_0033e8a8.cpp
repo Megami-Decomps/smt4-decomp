@@ -77,7 +77,7 @@ extern unsigned int dataTableLookupValue0103(unsigned int);
 extern int FUN_002b8660(void);
 extern int FUN_002b8694(void);
 extern int lmapMainIsRunning(void);
-extern int FUN_002b8804(void);
+extern int aocJobIsValid(void);
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: asdMemoryAlloc. */
 extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -158,7 +158,7 @@ void FUN_0033e8a8(int param_1)
       temp_v19 = (unsigned long long)temp_v8 << 0x20;
     }
   }
-  temp_v3 = FUN_002b8804();
+  temp_v3 = aocJobIsValid();
   if (((((temp_v3 != 0) || (temp_v3 = lmapMainIsRunning(), temp_v3 != 0)) ||
        (temp_v3 = mapMainIsBusy(), temp_v3 != 0)) || (temp_v3 = QuestCenterMode_IsBusy(), temp_v3 != 0)) &&
      ((temp_v3 = FUN_002b8694(), temp_v3 == 0 && (temp_v3 = FUN_002b8660(), temp_v3 != 0)))) {

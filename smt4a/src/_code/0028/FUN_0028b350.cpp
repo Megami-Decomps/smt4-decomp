@@ -13,7 +13,7 @@ int FUN_00162ec0(...);
 int pairSetSecondResetFirst(...);
 int uiSpriteSelectAnim(...);
 int pairSetFirstResetSecond(...);
-int FUN_0019dc70(void);
+int sentinelLookupGetValue(void);
 int FUN_0019e330(...);
 int FUN_00202188(...);
 int FUN_00387240(...);
@@ -45,7 +45,7 @@ extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_0019be8c(unsigned int);
-/* Supplied declaration required: FUN_0019dc70. */
+/* Supplied declaration required: sentinelLookupGetValue. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: FUN_00202188. */
 extern unsigned short FUN_0033885c(unsigned int, int);
@@ -343,7 +343,7 @@ joined_r0x0028baa4:
             }
             else {
 LAB_0028bd98:
-              FUN_0019dc70();
+              sentinelLookupGetValue();
               temp_v8 = temp_v8 + temp_v10;
             }
             temp_v8 = temp_v8 + 1;

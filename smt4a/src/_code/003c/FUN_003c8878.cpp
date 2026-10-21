@@ -39,7 +39,7 @@ extern int linkedFindItemByIndex(unsigned int, int);
 /* Supplied declaration required: effMenuCreate. */
 /* Supplied declaration required: handleHolderFree. */
 extern int linkedObjGetValue(unsigned int *);
-extern int FUN_003c2d90(unsigned int *, unsigned char *);
+extern int formattedTextCopyLabel(unsigned int *, unsigned char *);
 /* Supplied declaration required: FUN_003c2df0. */
 /* Supplied declaration required: FUN_003ca0ec. */
 
@@ -64,7 +64,7 @@ unsigned char * FUN_003c8878(unsigned int param_1)
   if (DAT_0059dc1c != (unsigned int *)0x0) {
     FUN_00381874(DAT_0059dc20);
     temp_v5 = DAT_0059dc20[2];
-    temp_v4 = FUN_003c2d90(DAT_0059dc20,temp_v3);
+    temp_v4 = formattedTextCopyLabel(DAT_0059dc20,temp_v3);
     temp_v6 = linkedObjGetValue(DAT_0059dc20);
     if (temp_v5 == 1) {
       handleHolderFree(DAT_0059dc20);

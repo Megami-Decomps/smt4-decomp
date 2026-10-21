@@ -32,7 +32,7 @@ extern FlagBlockView g_flagBlock;
 
 void FUN_002f4ab0(Object *object, u32 mode);
 void sharedRefRelease(void *buffer);
-u32 FUN_002e6e26(void);
+u32 onlineContextGetInstance(void);
 void FUN_002f8e58(u32 pool, void *buffer);
 
 /* Marks the owner as closing, then releases its primary and secondary objects and its buffer; always returns 1. */
@@ -57,8 +57,8 @@ u32 FUN_0010e6a4(Owner *owner)
         }
         owner->secondary = NULL;
     }
-    if (owner->buffer != NULL && FUN_002e6e26() != 0) {
-        pool = FUN_002e6e26();
+    if (owner->buffer != NULL && onlineContextGetInstance() != 0) {
+        pool = onlineContextGetInstance();
         FUN_002f8e58(pool, owner->buffer);
         sharedRefRelease(owner->buffer);
         owner->buffer = NULL;

@@ -10,7 +10,7 @@ int FUN_001348c8(int, int);
 int FUN_00134a06(int, unsigned int *, int *);
 int FUN_00134abc(int, int);
 int FUN_00134b44(int *, unsigned int, unsigned int, int *);
-int FUN_001351b8(int, int, int);
+int bitVectorResizeFill(int, int, int);
 int vectorResizeBytes(int, int, int);
 int vectorCount4_002f1370(int *);
 int FUN_002f13c2(int, unsigned int, unsigned int);
@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00134a06. */
 /* Supplied declaration required: FUN_00134abc. */
 /* Supplied declaration required: FUN_00134b44. */
-/* Supplied declaration required: FUN_001351b8. */
+/* Supplied declaration required: bitVectorResizeFill. */
 extern int operatorNew(unsigned int);
 /* Supplied declaration required: vectorResizeBytes. */
 extern int FUN_002ef01c(unsigned int);
@@ -61,7 +61,7 @@ void FUN_002f091c(int param_1,int param_2)
   *(short *)(param_1 + 0x104) = (short)param_2;
   FUN_00134abc(param_1 + 0x90,param_2 + 1);
   FUN_001348c8(param_1 + 0x9c,param_2 + 1);
-  FUN_001351b8(param_1 + 0x164,param_2 + 1,0);
+  bitVectorResizeFill(param_1 + 0x164,param_2 + 1,0);
   piVar10 = (int *)(param_1 + 0x130);
   temp_v6 = 0;
   temp_v5 = param_2 + 1;

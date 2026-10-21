@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_00272e64(void);
+int calcHeadingRoundedToCardinalDirection(void);
 int mathPositionHeadingDegrees(int, int);
 int FUN_003857c8(int);
 int controllerSetDestination(unsigned int, float *);
-int FUN_003fdb18(unsigned int);
+int controllerSetRotationEulerDegrees(unsigned int);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -33,15 +33,15 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00272e64. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_003857c8. */
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
-extern int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 void FUN_002ef048(void)
@@ -72,7 +72,7 @@ void FUN_002ef048(void)
     VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe00),(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe01),(unsigned char)(in_fpscr >> 0x16) & 3);
     mathPositionHeadingDegrees((int)*(char *)(temp_v2 + 0xe00),(int)*(char *)(temp_v2 + 0xe01));
-    FUN_00272e64();
+    calcHeadingRoundedToCardinalDirection();
     temp_v0 = *(char *)(temp_v2 + 0x166c);
     temp_v6 = temp_v5;
     if (((temp_v0 != '\0') && (temp_v6 = 90.0f, temp_v0 != '@' && temp_v0 != 'B')) &&
@@ -97,15 +97,15 @@ void FUN_002ef048(void)
     FUN_00178b04(0x20,&LAB_002ef21c,0x12e1);
     temp_v2 = 0;
     if (temp_v3 != 0) {
-      temp_v2 = FUN_0040ac08();
+      temp_v2 = modelListInit();
     }
     (*(int *)((unsigned char *)&g_mapRndMaze + 0x9d4)) = temp_v2;
     FUN_0040aa6c();
     FUN_0040aad4((*(int *)((unsigned char *)&g_mapRndMaze + 0x9d4)),0);
     temp_v4 = *(unsigned int *)((*(int *)((unsigned char *)&g_mapRndMaze + 0x9d4)) + 4);
-    FUN_0040ace8(g_handleRegistry,temp_v4);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v4);
     controllerSetDestination(temp_v4,&temp_v8);
-    FUN_003fdb18(temp_v4);
+    controllerSetRotationEulerDegrees(temp_v4);
   }
   return;
 }

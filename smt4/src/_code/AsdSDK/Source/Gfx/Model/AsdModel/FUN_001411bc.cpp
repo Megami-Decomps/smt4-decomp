@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00145530(void);
+int workScalarGet(void);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 
 typedef struct fn_001411bc_arg0 fn_001411bc_arg0;
@@ -60,7 +60,7 @@ extern unsigned int DAT_004efd90; /* 0x4efd90 */
 extern unsigned int DAT_004efd94; /* 0x4efd94 */
 extern unsigned int DAT_004efd98; /* 0x4efd98 */
 
-/* Supplied declaration required: FUN_00145530. */
+/* Supplied declaration required: workScalarGet. */
 extern int FUN_00145e10(void);
 extern int __cxa_guard_acquire(unsigned int *);
 extern int FUN_002c501c(void);
@@ -89,7 +89,7 @@ void FUN_001411bc(fn_001411bc_arg0 *param_1,int param_2)
   else {
     temp_v0 = FUN_002c501c();
   }
-  FUN_00145530();
+  workScalarGet();
   param_1[1].field_0x30 = in_s0;
   puVar2 = (unsigned int *)(**(romwright_code **)(*(int *)param_1->field_0x260 + 0x10))();
   if ((puVar2 != (unsigned int *)0x0) && ((*puVar2 & 0x20000000) == 0)) {

@@ -16,7 +16,7 @@ typedef struct {
 extern int FUN_0024502c(unsigned int, unsigned int);
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_0033b390(unsigned int, unsigned int);
+extern int objSlotStateIsActiveRange(unsigned int, unsigned int);
 
 
 unsigned char FUN_0031850c(void)
@@ -33,7 +33,7 @@ unsigned char FUN_0031850c(void)
   temp_v2 = scrGetArg(1);
   temp_v0 = scrGetArg(2);
   temp_v3 = btlGetMainState();
-  temp_v4 = FUN_0033b390(temp_v3,0);
+  temp_v4 = objSlotStateIsActiveRange(temp_v3,0);
   if (temp_v4 != 0) {
     temp_v4 = FUN_0024502c(temp_v3,0);
     return temp_v4 != 0;

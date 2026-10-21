@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00249ddc(void);
+int shakeEffectAlloc(void);
 int eventCommandSetPendingCleanup(void);
 int FUN_00298d50(unsigned int *);
-int FUN_002c1568(unsigned int *);
+int asdCameraRegister(unsigned int *);
 int FUN_002c1e30(unsigned int *, int);
 int FUN_002c1edc(unsigned int *, unsigned int *, float *, int *);
 int FUN_002c2044(unsigned int *, int);
@@ -23,10 +23,10 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00249ddc. */
+/* Supplied declaration required: shakeEffectAlloc. */
 /* Supplied declaration required: eventCommandSetPendingCleanup. */
 /* Supplied declaration required: FUN_00298d50. */
-/* Supplied declaration required: FUN_002c1568. */
+/* Supplied declaration required: asdCameraRegister. */
 /* Supplied declaration required: FUN_002c1e30. */
 /* Supplied declaration required: FUN_002c1edc. */
 /* Supplied declaration required: FUN_002c2044. */
@@ -77,7 +77,7 @@ void FUN_003d5830(unsigned int *param_1)
   FUN_002c1edc(param_1 + 0x16,param_1 + 0x15a,&temp_v2,&temp_v5);
   FUN_002c1e30(param_1 + 0x16,1);
   FUN_00298d50(param_1 + 0x16);
-  FUN_002c1568(param_1 + 0x16);
+  asdCameraRegister(param_1 + 0x16);
   param_1[0x192] = temp_v1;
   param_1[0x191] = temp_v1;
   param_1[400] = temp_v1;
@@ -133,7 +133,7 @@ void FUN_003d5830(unsigned int *param_1)
   param_1[0x1d7] = 0xffffffff;
   param_1[0x1ca] = 0;
   param_1[0x1d8] = 0xffffffff;
-  FUN_00249ddc();
+  shakeEffectAlloc();
   param_1[0xb] = temp_v1;
   eventCommandSetPendingCleanup();
   param_1[0xc] = 0;

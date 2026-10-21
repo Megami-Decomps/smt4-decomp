@@ -7,7 +7,7 @@ extern "C" {
 int efctSetSpeed(void);
 int FUN_00185dd4(...);
 int FUN_002e1208(int, unsigned int, unsigned int [2], unsigned int [2]);
-int FUN_00492c34(int);
+int naviMainSelectPair(int);
 int words2Copy(int, float *);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -44,7 +44,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_002e1208. */
 extern unsigned long long *sub68OwnerGetBlock60(void);
-/* Supplied declaration required: FUN_00492c34. */
+/* Supplied declaration required: naviMainSelectPair. */
 /* Supplied declaration required: words2Copy. */
 extern int NaviMain_GetCurrentMap(int);
 
@@ -102,7 +102,7 @@ void FUN_004888e4(int param_1)
   }
   FUN_002e1208(0xb,temp_v3,temp_v23,temp_v27);
   temp_v4 = *(unsigned int *)(param_1 + 0x10);
-  FUN_00492c34(temp_v26);
+  naviMainSelectPair(temp_v26);
   temp_v28 = (int *)(param_1 + 0x1488);
   words2Copy(param_1 + 0x4d0,&temp_v24);
   temp_v7 = 0;

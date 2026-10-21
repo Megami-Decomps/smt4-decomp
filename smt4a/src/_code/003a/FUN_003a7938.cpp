@@ -26,8 +26,8 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_001879d0. */
-extern int FUN_00213d0c(void);
-extern int FUN_002852a4(void);
+extern int saveLoadThreadValueGet(void);
+extern int saveLoadJobIsReady(void);
 
 
 unsigned int FUN_003a7938(void)
@@ -41,8 +41,8 @@ unsigned int FUN_003a7938(void)
   int *piVar5;
   float temp_v4;
   
-  temp_v0 = FUN_00213d0c();
-  if ((temp_v0 != 0) || (temp_v0 = FUN_002852a4(), temp_v0 != 0)) {
+  temp_v0 = saveLoadThreadValueGet();
+  if ((temp_v0 != 0) || (temp_v0 = saveLoadJobIsReady(), temp_v0 != 0)) {
     FUN_00157558(g_renderCtx);
     temp_v0 = g_renderCtx;
     temp_v1 = FUN_001692ac(1,0);

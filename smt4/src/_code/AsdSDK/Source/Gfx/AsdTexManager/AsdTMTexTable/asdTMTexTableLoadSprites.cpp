@@ -4,7 +4,7 @@
 extern "C" {
 
 void *asdMemAlloc(int, int, int, s32 size, int);
-void *FUN_002c3124(char *path, u8 *size, u32 flags);
+void *fileLoadSync(char *path, u8 *size, u32 flags);
 TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags);
 char *FUN_0010024c(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
@@ -42,7 +42,7 @@ s32 asdTMTexTableLoadSprites(s32 idx)
         }
         libc_strcpy(header->dirPrefix, dir);
         textFormatBuffer(path, LAB_002c4e84, header->dirPrefix, entry->name, LAB_002c4e78, LAB_002c4e74);
-        file = (u32 *)FUN_002c3124(path, size, 0);
+        file = (u32 *)fileLoadSync(path, size, 0);
         if (file != NULL) {
             TexSprList *list = (TexSprList *)asdMemAlloc(0x100, 0x100, 0, 8, 1);
             u32 *copy;

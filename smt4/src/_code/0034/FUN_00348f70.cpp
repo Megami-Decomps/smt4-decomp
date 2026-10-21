@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0028eeb8(int);
 int dataTable1bOr1cGetRecord(void);
 
-extern int FUN_00240a6c(unsigned int);
+extern int questRequirementsMet(unsigned int);
 extern int FUN_00287894(unsigned int);
 /* Supplied declaration required: FUN_0028eeb8. */
 extern int FUN_00298fa0(unsigned int, unsigned int);
@@ -35,7 +35,7 @@ unsigned int FUN_00348f70(void)
       temp_v1 = temp_v2;
       dataTable1bOr1cGetRecord();
       if ((((temp_v1 != 0) && (*(char *)(temp_v1 + 6) == '\x06')) && ((*(unsigned char *)(temp_v1 + 7) & 1) == 0))
-         && (temp_v0 = FUN_00240a6c(temp_v2 & 0xffff), temp_v0 != 0)) {
+         && (temp_v0 = questRequirementsMet(temp_v2 & 0xffff), temp_v0 != 0)) {
         temp_v1 = temp_v2;
         temp_v0 = gameGetFlagBlock();
         temp_v0 = temp_v0 + temp_v1 * 4;

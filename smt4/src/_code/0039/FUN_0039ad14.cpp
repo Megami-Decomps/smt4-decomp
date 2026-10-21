@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002319c0(void);
 int FUN_0039b648(int);
-int FUN_0039d53c(int);
+int naviUpdateDragCapture(int);
 int NaviMain_SetCursorPos(int, float *);
 int VectorSignedToFloat(int, int);
 
@@ -23,7 +23,7 @@ extern signed char DAT_0049f934; /* 0x49f934 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002319c0. */
 /* Supplied declaration required: FUN_0039b648. */
-/* Supplied declaration required: FUN_0039d53c. */
+/* Supplied declaration required: naviUpdateDragCapture. */
 /* Supplied declaration required: NaviMain_SetCursorPos. */
 
 
@@ -60,7 +60,7 @@ unsigned int FUN_0039ad14(int param_1)
       }
     }
     FUN_0039b648(param_1);
-    FUN_0039d53c(param_1);
+    naviUpdateDragCapture(param_1);
     return 0;
   }
   return 0;

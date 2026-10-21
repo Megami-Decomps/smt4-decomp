@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034cfc0` (_code @ 0x34cfc0, 0xa44 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int textFormatBuffer(...);
 int FUN_0015f858(int, int);
 int FUN_00162790(...);
 int FUN_001676b0(...);
-int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -17,7 +17,7 @@ int drawSetColorFromRGBA8(...);
 int FUN_00192608(void);
 int FUN_0026ec00(int, int, unsigned int);
 int FUN_0047fc38(void);
-int FUN_0048026c(...);
+int equipmentGetCappedUpgradeBonuses(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_5: 13 slot(s), 52 byte(s) */
@@ -58,7 +58,6 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001676b0. */
-/* Supplied declaration required: FUN_001689e8. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -71,7 +70,7 @@ extern unsigned int FUN_001ba3d4(int);
 extern int FUN_00284140(int);
 extern int unitMatchesAlignment(int);
 /* Supplied declaration required: FUN_0047fc38. */
-/* Supplied declaration required: FUN_0048026c. */
+/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
 extern int FUN_00480960(int);
 
 
@@ -129,7 +128,7 @@ void FUN_0034cfc0(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v14 = 0;
   temp_v15 = 0;
   temp_v16 = 0;
-  FUN_0048026c(temp_v22,&temp_v13);
+  equipmentGetCappedUpgradeBonuses(temp_v22,&temp_v13);
   temp_v2 = FUN_00284140((int)*(short *)(temp_v2 + param_2 * 2 + 0x1b3a));
   temp_v10 = 0x9fe7ffff;
   if ((temp_v2 == 1 || temp_v2 == 2) || temp_v2 == 6) {
@@ -171,7 +170,7 @@ void FUN_0034cfc0(int param_1,int param_2,int param_3,int param_4,int param_5)
   FUN_00183bb0();
   FUN_001835b4(2,0x14,0x521,*(short *)(temp_v3 + 8) + param_4,*(short *)(temp_v3 + 10) + param_5,0x83);
   temp_v2 = FUN_001834a4(0x14,0x522);
-  FUN_001689e8((int)(short)temp_v22,
+  uiDrawItemCategoryIcon((int)(short)temp_v22,
                (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + param_4,
                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v2 + 10) + param_5,0x88,1);
   if (param_1 != 0x48) {
@@ -270,7 +269,7 @@ LAB_0034d85c:
       }
       temp_v2 = (int)(*(short *)((unsigned char *)&temp_v13 + 2)) + (int)*(short *)(temp_v9 + 0x38);
       temp_v9 = (int)*(short *)(temp_v9 + 0x36) + (int)(short)temp_v13;
-      FUN_0048026c(temp_v8,&temp_v17);
+      equipmentGetCappedUpgradeBonuses(temp_v8,&temp_v17);
       if (temp_v8 == 0) {
         temp_v7 = 0;
         temp_v4 = temp_v7;

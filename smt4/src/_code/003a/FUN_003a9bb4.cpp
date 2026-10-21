@@ -30,13 +30,13 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_0022c9f4. */
 /* Supplied declaration required: FUN_0022e17c. */
 /* Supplied declaration required: FUN_00233730. */
-extern int FUN_0023eb18(void);
+extern int dataTable02GetEntryByIndex(void);
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_003ad608. */
 extern int FUN_003bc0ac(unsigned int, int, int);
-extern int FUN_003bc874(void);
+extern int dataTableGetRecord02(void);
 
 
 void FUN_003a9bb4(int param_1)
@@ -82,11 +82,11 @@ LAB_003a9d60:
           if (temp_v9 < 0x10) goto LAB_003a9bf0;
           break;
         }
-        temp_v1 = FUN_003bc874();
+        temp_v1 = dataTableGetRecord02();
         if (temp_v1 != 0) {
           temp_v6 = 0;
           do {
-            if ((*(short *)(temp_v1 + temp_v6 * 4) != 0) && (temp_v2 = FUN_0023eb18(), temp_v2 != 0)) {
+            if ((*(short *)(temp_v1 + temp_v6 * 4) != 0) && (temp_v2 = dataTable02GetEntryByIndex(), temp_v2 != 0)) {
               temp_v5 = 0;
               do {
                 puVar9 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v2 + temp_v5 * 2 + 0xc);

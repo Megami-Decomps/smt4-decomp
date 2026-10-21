@@ -32,7 +32,7 @@ extern unsigned char LAB_001f4998; /* 0x1f4998 */
 extern unsigned char LAB_001f49b0; /* 0x1f49b0 */
 
 /* Supplied declaration required: randomGetLowerTenBits. */
-extern int FUN_00257e0c(void);
+extern int playerDataValueAt(void);
 extern int FUN_00257e40(unsigned char);
 /* Supplied declaration required: randomGetUpperSixBits. */
 /* Supplied declaration required: dataTable00FindById. */
@@ -94,7 +94,7 @@ void FUN_001f4568(int param_1,int param_2,unsigned int param_3,fn_001f4568_arg3 
           temp_v6 = temp_v6 + 1;
         }
         else {
-          temp_v3 = FUN_00257e0c();
+          temp_v3 = playerDataValueAt();
           if (temp_v3 < 100) {
             temp_v12[temp_v7] = pbVar10[(int)unaff_r4];
             temp_v7 = temp_v7 + 1;

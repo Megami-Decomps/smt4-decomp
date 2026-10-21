@@ -8,8 +8,8 @@ int FUN_002990a0(void);
 int guestWinRequestOpen(void);
 int FUN_00299bc4(...);
 int FUN_00299d84(...);
-int FUN_00299da0(...);
-int FUN_0029ca58(void);
+int campRefreshEquipmentCategory(...);
+int beginStatusPanelClose(void);
 int FUN_0029e648(...);
 int asdMdlManagerDestroy(...);
 int timerStart(...);
@@ -37,7 +37,7 @@ int FUN_0029a164(...);
 int FUN_0029c4c8(...);
 int FUN_0029d684(int);
 int FUN_0029efd8(...);
-int FUN_0029f5d8(...);
+int uiScrollHandleActionsOrTouch(...);
 int FUN_002a0428(...);
 int eventQueueAddUniqueIfValid(...);
 int FUN_002c1658(...);
@@ -67,7 +67,7 @@ extern unsigned int FUN_0029963c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00299900. */
 /* Supplied declaration required: FUN_00299bc4. */
 /* Supplied declaration required: FUN_00299d84. */
-/* Supplied declaration required: FUN_00299da0. */
+/* Supplied declaration required: campRefreshEquipmentCategory. */
 extern int FUN_00299fc0(void);
 /* Supplied declaration required: nodeSetTranslation3f. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
@@ -77,7 +77,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_0029a164. */
 /* Supplied declaration required: FUN_0029c4c8. */
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029d684. */
 extern int FUN_0029dfa8(void);
@@ -91,13 +91,13 @@ extern int FUN_0029e958(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_0029f5d8. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_002a0428. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(int);
 extern short *gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned char FUN_002b898c(void);
+extern unsigned char buttonHelpGetStatus(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
@@ -319,7 +319,7 @@ void FUN_0018854c(unsigned int param_1)
     temp_v13[0] = '\0';
     temp_v2 = FUN_002bf4f8(0x1d,0x572);
     temp_v4 = temp_v11;
-    FUN_0029f5d8(temp_v11,temp_v2,temp_v5 + 0xe0c,(int)*(short *)(temp_v5 + 0xe02),
+    uiScrollHandleActionsOrTouch(temp_v11,temp_v2,temp_v5 + 0xe0c,(int)*(short *)(temp_v5 + 0xe02),
                  (int)*(short *)(temp_v5 + 0xe04),(int)*(short *)(temp_v5 + 0xe06),temp_v13,0,1);
     if ((temp_v4 != 0) || (temp_v4 = temp_v11, FUN_0029efd8(temp_v11,1), temp_v4 != 0)) {
       FUN_00299900(param_1);
@@ -474,7 +474,7 @@ void FUN_0018854c(unsigned int param_1)
           }
           *(unsigned char *)(temp_v5 + 0x33) = 1;
           FUN_0029ee6c(0,0x323232ff);
-          temp_v1 = FUN_002b898c();
+          temp_v1 = buttonHelpGetStatus();
           *(unsigned char *)(temp_v5 + 0x31) = temp_v1;
           temp_v5 = g_camp;
           puVar11 = (unsigned int *)(g_camp + 0x18);
@@ -708,7 +708,7 @@ joined_r0x00188f3c:
     if (temp_v9 != 0) {
       FUN_0029a164(0xffffffff);
       FUN_0029c4c8(0);
-      FUN_0029ca58();
+      beginStatusPanelClose();
       gameGlobalsSetSelected(0);
       FUN_00299900(0);
       timerStart(temp_v5 + 0x6d4,3,0);
@@ -732,35 +732,35 @@ joined_r0x00188f3c:
   }
   switch(param_1) {
   case 0x11:
-    FUN_00299da0(0x11);
+    campRefreshEquipmentCategory(0x11);
     temp_v2 = 0;
     FUN_00299d84(temp_v2);
     break;
   case 0x12:
-    FUN_00299da0(0x12);
+    campRefreshEquipmentCategory(0x12);
     temp_v2 = 0;
     FUN_00299d84(temp_v2);
     break;
   case 0x13:
-    FUN_00299da0(0x13);
+    campRefreshEquipmentCategory(0x13);
     FUN_00299d84(0);
     break;
   case 0x14:
-    FUN_00299da0(0x14);
+    campRefreshEquipmentCategory(0x14);
     temp_v2 = 1;
     FUN_00299d84(temp_v2);
     break;
   case 0x15:
-    FUN_00299da0(0x15);
+    campRefreshEquipmentCategory(0x15);
     FUN_00299d84(0);
     break;
   case 0x16:
-    FUN_00299da0(0x16);
+    campRefreshEquipmentCategory(0x16);
     temp_v2 = 2;
     FUN_00299d84(temp_v2);
     break;
   case 0x17:
-    FUN_00299da0(0x17);
+    campRefreshEquipmentCategory(0x17);
     FUN_00299d84(0);
   }
   *(unsigned char *)(temp_v5 + 0x33) = 0;

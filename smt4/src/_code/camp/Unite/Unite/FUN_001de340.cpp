@@ -13,10 +13,10 @@ int devilGetRecord(void);
 int asdMemFree(...);
 
 int FUN_002624c4(...);
-int FUN_00262770(...);
+int halfwordListAppendGroup(...);
 int FUN_00269bc4(...);
-int FUN_00288154(int, unsigned short [14]);
-int FUN_002b066c(...);
+int gameRecordCopy(int, unsigned short [14]);
+int partyMemberFindById(...);
 int threadSleepDuration(...);
 int memClear(int *, int);
 int asdMemoryAlloc(...);
@@ -24,10 +24,10 @@ int FUN_003c8bb8(int, int);
 int FUN_003c8da0(...);
 int FUN_003c8f58(int);
 int FUN_003c8fb4(int, int);
-int FUN_003c8fc8(...);
+int objSetKindFlagValues(...);
 int FUN_003c90ec(...);
 int FUN_003c9100(...);
-int FUN_003c9590(...);
+int fusionCollectAvailableRacePartners(...);
 int FUN_003c9744(...);
 int SBORROW4(...);
 
@@ -61,7 +61,7 @@ typedef struct {
 
 extern int FUN_001d1d78(...); /* 0x1d1d78 */
 extern int FUN_001f6524(...); /* 0x1f6524 */
-extern int FUN_002073e4(...); /* 0x2073e4 */
+extern int devilCompareRaceLevelDescending(...); /* 0x2073e4 */
 extern int FUN_00219720(...); /* 0x219720 */
 extern int FUN_002c6e90(...); /* 0x2c6e90 */
 extern int FUN_002d0544(...); /* 0x2d0544 */
@@ -77,9 +77,9 @@ extern int *g_unite; /* 0x43dd68 */
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_002624c4. */
-/* Supplied declaration required: FUN_00262770. */
+/* Supplied declaration required: halfwordListAppendGroup. */
 /* Supplied declaration required: FUN_00269bc4. */
-/* Supplied declaration required: FUN_00288154. */
+/* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0029d684. */
 extern int FUN_0029dde0(void);
@@ -91,7 +91,7 @@ extern int FUN_002a0d0c(void);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 extern int gameCountUnits(void);
-/* Supplied declaration required: FUN_002b066c. */
+/* Supplied declaration required: partyMemberFindById. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: devilGetRecord. */
@@ -104,10 +104,10 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_003c8da0. */
 /* Supplied declaration required: FUN_003c8f58. */
 /* Supplied declaration required: FUN_003c8fb4. */
-/* Supplied declaration required: FUN_003c8fc8. */
+/* Supplied declaration required: objSetKindFlagValues. */
 /* Supplied declaration required: FUN_003c90ec. */
 /* Supplied declaration required: FUN_003c9100. */
-/* Supplied declaration required: FUN_003c9590. */
+/* Supplied declaration required: fusionCollectAvailableRacePartners. */
 /* Supplied declaration required: FUN_003c9744. */
 
 
@@ -236,7 +236,7 @@ void FUN_001de340(int *param_1)
           puVar17 = (unsigned int *)0x0;
           temp_v2 = *param_1;
         }
-        FUN_003c8fc8(temp_v2,temp_v26[6] != 0,0,puVar17);
+        objSetKindFlagValues(temp_v2,temp_v26[6] != 0,0,puVar17);
       }
       if (param_1[0x100] == 2) {
         *(unsigned char *)(*param_1 + 0x17d) = 1;
@@ -248,7 +248,7 @@ void FUN_001de340(int *param_1)
         FUN_003c9744(*param_1,0);
         *(unsigned char *)(*param_1 + 0x17c) = 0;
         FUN_003c9100(*param_1,0);
-        FUN_003c8fc8(*param_1,0,0);
+        objSetKindFlagValues(*param_1,0,0);
         param_1[0x16c] = 2000;
       }
       param_1[0x16d] = 0;
@@ -285,13 +285,13 @@ void FUN_001de340(int *param_1)
                 temp_v5 = FUN_0029ea68(temp_v1);
                 if (temp_v5 != 0) {
                   FUN_00269bc4(*param_1);
-                  FUN_00262770(*param_1,0,temp_v4 + 0x34);
+                  halfwordListAppendGroup(*param_1,0,temp_v4 + 0x34);
                   param_1[param_1[0x16d] * 2 + 0x4e4] =
                        (param_1[param_1[0x16d] * 2 + 0x4e4] & 0x3fffffffU) | 0x40000000;
-                  temp_v5 = FUN_002b066c(temp_v1);
+                  temp_v5 = partyMemberFindById(temp_v1);
                   if (((temp_v5 == 0) || (temp_v6 = flagWordTestBit(temp_v5,10), temp_v6 != 0)) ||
                      (temp_v6 = flagWordTestBit(temp_v5,2), temp_v6 != 0)) {
-                    FUN_00288154(temp_v1,temp_v24);
+                    gameRecordCopy(temp_v1,temp_v24);
                     if ('\0' < *(char *)((int)temp_v26 + 0x17)) {
                       temp_v13 = (unsigned int)temp_v24[0];
                       temp_v16 = SBORROW4(temp_v13,temp_v3);
@@ -303,12 +303,12 @@ void FUN_001de340(int *param_1)
                       if (temp_v5 < 0 != temp_v16) goto LAB_001dea48;
                     }
                     param_1[param_1[0x16d] * 2 + 0x4e5] = param_1[param_1[0x16d] * 2 + 0x4e5] | 3;
-                    FUN_00262770(*param_1,1,temp_v25);
+                    halfwordListAppendGroup(*param_1,1,temp_v25);
                   }
                   else {
                     param_1[param_1[0x16d] * 2 + 0x4e5] =
                          (param_1[param_1[0x16d] * 2 + 0x4e5] & 0xfffffffcU) | 1;
-                    FUN_00262770(*param_1,1,temp_v5 + 0x34);
+                    halfwordListAppendGroup(*param_1,1,temp_v5 + 0x34);
                   }
                   temp_v5 = FUN_002624c4(*param_1,*(unsigned short *)(temp_v4 + 0x46),temp_v1,
                                        param_1 + param_1[0x16d] * 2 + 0x4e4);
@@ -341,7 +341,7 @@ LAB_001dea48:
           asdMemoryAlloc(0x100,0x100,0,0xa00);
           temp_v3 = *piVar9;
           temp_v17 = temp_v13;
-          FUN_003c9590(temp_v3,temp_v13);
+          fusionCollectAvailableRacePartners(temp_v3,temp_v13);
           temp_v18 = FUN_0029dde0();
           if (piVar9[0x2519] < temp_v18) {
             temp_v18 = piVar9[0x2519];
@@ -368,7 +368,7 @@ LAB_001dea48:
               if (((unsigned int)piVar9[0x16c] <= (unsigned int)piVar9[0x16d]) || ((char)piVar9[0x2514] == '\0'))
               break;
               temp_v21 = (unsigned int)*(unsigned short *)(temp_v17 + temp_v20 * 2);
-              temp_v4 = FUN_002b066c(temp_v21);
+              temp_v4 = partyMemberFindById(temp_v21);
               temp_v5 = temp_v20 + 1;
               if (temp_v5 < temp_v3) {
                 temp_v41 = temp_v21 * 0xd;
@@ -383,7 +383,7 @@ LAB_001dea48:
                     temp_v6 = temp_v6 + temp_v41 * 4;
                     if (*(char *)(temp_v2 + 0x33) < '\x01') {
 LAB_001deca0:
-                      FUN_00262770(*piVar9,0,temp_v6 + 0xc18c);
+                      halfwordListAppendGroup(*piVar9,0,temp_v6 + 0xc18c);
                       piVar12 = piVar9 + piVar9[0x16d] * 2;
                       temp_v13 = piVar12[0x4e4] | 0xc0000000;
                       goto LAB_001decc4;
@@ -398,13 +398,13 @@ LAB_001deca0:
                     if (temp_v0 < 0 == temp_v16) goto LAB_001deca0;
                   }
                   else {
-                    FUN_00262770(*piVar9,0,temp_v4 + 0x34);
+                    halfwordListAppendGroup(*piVar9,0,temp_v4 + 0x34);
                     piVar12 = piVar9 + piVar9[0x16d] * 2;
                     temp_v13 = (piVar12[0x4e4] & 0x3fffffffU) | 0x40000000;
 LAB_001decc4:
                     piVar12[0x4e4] = temp_v13;
                     temp_v13 = (unsigned int)*(unsigned short *)(temp_v17 + temp_v5 * 2);
-                    temp_v23 = FUN_002b066c(temp_v13);
+                    temp_v23 = partyMemberFindById(temp_v13);
                     if (((temp_v23 == 0) || (temp_v6 = flagWordTestBit(temp_v23,10), temp_v6 != 0)) ||
                        (temp_v6 = flagWordTestBit(temp_v23,2), temp_v6 != 0)) {
                       temp_v6 = gameDataBlocksGetSaveData();
@@ -419,13 +419,13 @@ LAB_001decc4:
                         }
                         if (temp_v0 < 0 != temp_v16) goto LAB_001dedf4;
                       }
-                      FUN_00262770(*piVar9,1,temp_v6 + 0xc18c);
+                      halfwordListAppendGroup(*piVar9,1,temp_v6 + 0xc18c);
                       temp_v6 = piVar9[0x16d];
                       piVar9[temp_v6 * 2 + 0x4e4] = piVar9[temp_v6 * 2 + 0x4e4];
                       piVar9[temp_v6 * 2 + 0x4e5] = piVar9[temp_v6 * 2 + 0x4e5] | 3;
                     }
                     else {
-                      FUN_00262770(*piVar9,1,temp_v23 + 0x34);
+                      halfwordListAppendGroup(*piVar9,1,temp_v23 + 0x34);
                       temp_v6 = piVar9[0x16d];
                       piVar9[temp_v6 * 2 + 0x4e4] = piVar9[temp_v6 * 2 + 0x4e4];
                       piVar9[temp_v6 * 2 + 0x4e5] = (piVar9[temp_v6 * 2 + 0x4e5] & 0xfffffffcU) | 1;
@@ -473,8 +473,8 @@ LAB_001dedf4:
                    ((temp_v6 = flagWordTestBit(temp_v2,2), temp_v6 == 0 &&
                     (temp_v6 = flagWordTestBit(temp_v5,2), temp_v6 == 0)))) {
                   FUN_00269bc4(*param_1);
-                  FUN_00262770(*param_1,0,temp_v2 + 0x34);
-                  FUN_00262770(*param_1,1,temp_v5 + 0x34);
+                  halfwordListAppendGroup(*param_1,0,temp_v2 + 0x34);
+                  halfwordListAppendGroup(*param_1,1,temp_v5 + 0x34);
                   temp_v6 = param_1[0x16d];
                   temp_v13 = param_1[temp_v6 * 2 + 0x4e5];
                   temp_v14 = (param_1[temp_v6 * 2 + 0x4e4] & 0x3fffffffU) | 0x40000000;
@@ -716,7 +716,7 @@ LAB_001df3cc:
           temp_v15 = ~(*pbVar20 >> 7) & 1;
           if ((*pbVar20 & 0x7f) == 1) {
             if (temp_v15 != 0) {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_002073e4);
+              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareRaceLevelDescending);
             }
             else {
               FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareByRankGradeId);

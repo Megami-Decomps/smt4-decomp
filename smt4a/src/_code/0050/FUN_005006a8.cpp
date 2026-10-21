@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b57a8(unsigned int, int);
+int resultPairInitialize(unsigned int, int);
 int FUN_004267bc(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_6: 2 slot(s), 8 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: FUN_004267bc. */
 
 
@@ -41,7 +41,7 @@ void FUN_005006a8(unsigned int param_1,int *param_2,unsigned int *param_3,int pa
       *param_3 = param_5;
     }
   }
-  FUN_001b57a8(param_1,param_4);
+  resultPairInitialize(param_1,param_4);
   return;
 }
 

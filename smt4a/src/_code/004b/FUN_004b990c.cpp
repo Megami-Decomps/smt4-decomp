@@ -8,10 +8,10 @@ int textFormatBuffer(...);
 int asdOperatorNew(void);
 int eventQueueAddUnique(...);
 int dialogOpen(...);
-int FUN_0020401c(...);
+int placeWinStartText(...);
 int FUN_002a49e4(...);
 int FUN_002e5924(...);
-int FUN_0035c6ac(void);
+int frameTexInitActive(void);
 int moveCameraCtrlCreateEntry(...);
 int linkSlotSetFlag1C(...);
 int linkSlotSetFlag20(...);
@@ -26,13 +26,13 @@ int dataTable33TypeCount(...);
 int asdMemFree(void);
 int FUN_0019f548(unsigned int);
 int FUN_001ad9b4(void);
-int FUN_001f4908(int, int, int);
+int slotSetRequest(int, int, int);
 int dialogClose(int);
 int FUN_00214da4(void);
-int FUN_00261a14(...);
+int infoWinSetValue(...);
 int campGetState(void);
-int FUN_00284f90(...);
-int FUN_002c2160(int);
+int placeWinSetValue(...);
+void frameTransitionSetMode(int);
 int FUN_002c3398(int);
 int asdOperatorDelete(int);
 int libc_strcpy(unsigned char *, unsigned int);
@@ -71,7 +71,7 @@ extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameDataBlocksGetSaveData(void);
-extern int FUN_0015a21c(int);
+extern int floatPairClear(int);
 /* Supplied declaration required: asdOperatorNew. */
 extern int campIsState85(void);
 extern int gameFlagsGetBlock(void);
@@ -80,18 +80,17 @@ extern int gameFlagIsSet(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0019f548. */
 /* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 extern int campIsState51(void);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
-/* Supplied declaration required: FUN_0020401c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_00214da4. */
-/* Supplied declaration required: FUN_00261a14. */
-extern int FUN_002802c8(void);
+/* Supplied declaration required: infoWinSetValue. */
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: campGetState. */
-/* Supplied declaration required: FUN_00284f90. */
+/* Supplied declaration required: placeWinSetValue. */
 /* Supplied declaration required: FUN_002a49e4. */
-/* Supplied declaration required: FUN_002c2160. */
 /* Supplied declaration required: FUN_002c3398. */
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: libc_strcpy. */
@@ -100,7 +99,7 @@ extern int FUN_002802c8(void);
 /* Supplied declaration required: obj04Finish. */
 /* Supplied declaration required: sub68OwnerCall4. */
 /* Supplied declaration required: FUN_0035b1c0. */
-/* Supplied declaration required: FUN_0035c6ac. */
+/* Supplied declaration required: frameTexInitActive. */
 /* Supplied declaration required: FUN_00363c58. */
 /* Supplied declaration required: clearFlags310To31F. */
 /* Supplied declaration required: FUN_003b5064. */
@@ -126,7 +125,7 @@ extern int menu4CGetCurrentEntry(int);
 /* Supplied declaration required: menu4CStartBlock74. */
 /* Supplied declaration required: dataTable33Entries. */
 /* Supplied declaration required: dataTable33TypeCount. */
-extern unsigned short FUN_004cfe4c(int);
+extern unsigned short flaggedValueHolderGetTotal(int);
 
 
 void FUN_004b990c(int param_1)
@@ -153,10 +152,10 @@ void FUN_004b990c(int param_1)
   FUN_004b75d0();
   switch(*(unsigned int *)(param_1 + 0x2c)) {
   case 0:
-    FUN_00284f90(0);
-    FUN_00261a14(0);
+    placeWinSetValue(0);
+    infoWinSetValue(0);
     objectE0ResetFlags1040();
-    FUN_002c2160(1);
+    frameTransitionSetMode(1);
     if ((*(unsigned int *)(param_1 + 0x20) & 0x40) != 0) {
       *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffffbf;
       obj04Finish();
@@ -202,7 +201,7 @@ void FUN_004b990c(int param_1)
     temp_v6 = campIsState51();
     if ((temp_v6 != 0) || (temp_v6 = campIsState85(), temp_v6 == 0)) {
       if (DAT_005f1634 == '\0') {
-        FUN_001f4908(1,10,0xff);
+        slotSetRequest(1,10,0xff);
       }
       temp_v6 = *(int *)(param_1 + 0x2c) + 1;
       *(int *)(param_1 + 0x2c) = temp_v6;
@@ -213,7 +212,7 @@ void FUN_004b990c(int param_1)
     if (temp_v6 != 0) {
       return;
     }
-    temp_v6 = FUN_002802c8();
+    temp_v6 = screenFadeIsBusy();
     if (temp_v6 != 0) {
       return;
     }
@@ -251,7 +250,7 @@ void FUN_004b990c(int param_1)
     }
     FUN_003c91e8();
     FUN_00363c58(1);
-    FUN_002c2160(0);
+    frameTransitionSetMode(0);
     temp_v6 = gameDataBlocksGetSaveData();
     if (*(unsigned char *)(temp_v6 + 2) >= 2) {
       if (*(unsigned char *)(temp_v6 + 2) == 2) {
@@ -280,10 +279,10 @@ void FUN_004b990c(int param_1)
       temp_v0 = *(unsigned char *)(temp_v6 + 0x20);
       FUN_004b6bc4(param_1,(int)*(short *)(param_1 + 0x3c),*(unsigned int *)(param_1 + 0x1120));
       menu4CScrollToKind(param_1 + 0x9c,temp_v0);
-      temp_v2 = FUN_004cfe4c(param_1 + 0x9c);
+      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x9c);
       *(unsigned short *)(param_1 + 0x4c) = temp_v2;
     }
-    FUN_002c2160(0);
+    frameTransitionSetMode(0);
     FUN_003b61ec();
     menu4CStartBlock74(param_1 + 0x9c);
     menu4CReset(param_1 + 0x9c);
@@ -304,7 +303,7 @@ void FUN_004b990c(int param_1)
       asdOperatorNew();
       temp_v6 = 0;
       if (temp_v4 != 0) {
-        temp_v6 = FUN_0015a21c(temp_v4 + 0x4f0);
+        temp_v6 = floatPairClear(temp_v4 + 0x4f0);
         temp_v6 = temp_v6 - 0x4f0;
       }
       *(int *)(param_1 + 0x1218) = temp_v6;
@@ -360,22 +359,22 @@ void FUN_004b990c(int param_1)
       dialogOpen(0);
       FUN_002a49e4(*(unsigned int *)(param_1 + 0x113c),
                    *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
-      FUN_0020401c(*(int *)(param_1 + 0x1118) + 2);
-      FUN_00284f90(1);
-      FUN_00261a14(1);
+      placeWinStartText(*(int *)(param_1 + 0x1118) + 2);
+      placeWinSetValue(1);
+      infoWinSetValue(1);
       return;
     }
     break;
   case 6:
     temp_v6 = FUN_004ba698(param_1 + 0x9c);
-    if ((temp_v6 != 0) && (temp_v6 = FUN_002802c8(), temp_v6 == 0)) {
+    if ((temp_v6 != 0) && (temp_v6 = screenFadeIsBusy(), temp_v6 == 0)) {
       if (*(char *)(param_1 + 0x1168) == '\0') {
         temp_v6 = 5;
         piVar11 = (int *)(param_1 + 0x28);
       }
       else {
         eventQueueAddUnique(0x1000222);
-        FUN_0035c6ac();
+        frameTexInitActive();
         piVar11 = (int *)(param_1 + 0x2c);
         temp_v6 = *piVar11 + 1;
       }

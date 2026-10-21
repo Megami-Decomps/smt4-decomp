@@ -12,14 +12,14 @@ typedef struct RegisterBlock {
 } RegisterBlock;
 
 void sysMemClear(void *block, s32 size);
-extern RegisterBlock *DAT_005b4400;
+extern RegisterBlock *g_textureBindingState;
 
 /* Requests the register groups in `groups` (minus the blocked ones): ORs each group's register bits into `pending`, clears the two tables for group 0x40 and records the groups in `applied`. */
 void registerBlockRequestGroups(u32 groups)
 {
     RegisterBlock *block;
 
-    block = DAT_005b4400;
+    block = g_textureBindingState;
     groups = groups & ~block->blocked;
     if ((groups & 1) != 0) {
         block->pending = block->pending | 0x100000;

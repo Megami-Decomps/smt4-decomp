@@ -1,41 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_QuestCenter_RegisterKind2` (_code @ 0x322b00, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: packet kind constant is materialized/stored through r0 rather than retail r1. */
+#include "common.h"
+
+struct QuestRegistration {
+    u32 quest; // 0x00
+    u32 parameter; // 0x04
+    u32 kind; // 0x08
+};
 
 extern "C" {
+u32 scrGetArg(u32 index);
+void *jyoucyuGetTableEntry(u32 index);
+void QcMain_Register(const QuestRegistration *request, u32 size);
 
-int jyoucyuGetTableEntry(int);
-int QcMain_Register(int *, int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-extern unsigned int scrGetArg(unsigned int);
-/* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: QcMain_Register. */
-
-
-unsigned int scrComm_QuestCenter_RegisterKind2(void)
-
+// Register a kind-two quest-center request from the two script arguments.
+u32 scrComm_QuestCenter_RegisterKind2(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int uStack_14;
-  unsigned int temp_v3;
-  
-  temp_v0 = scrGetArg(0);
-  temp_v1 = scrGetArg(1);
-  jyoucyuGetTableEntry(0);
-  temp_v3 = 2;
-  temp_v2 = temp_v0;
-  uStack_14 = temp_v1;
-  QcMain_Register(&temp_v2,0xc);
-  return 1;
+    u32 quest = scrGetArg(0);
+    u32 parameter = scrGetArg(1);
+    jyoucyuGetTableEntry(0);
+    QuestRegistration request;
+    request.kind = 2;
+    request.quest = quest;
+    request.parameter = parameter;
+    QcMain_Register(&request, sizeof(request));
+    return 1;
 }
-
-} /* extern "C" */
+}

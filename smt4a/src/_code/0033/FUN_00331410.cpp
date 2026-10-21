@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331410` (_code @ 0x331410, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: save-block load scheduling and the record flag register differ from retail. */
+#include "gamedata/GameData.h"
 
-extern "C" {
+struct SavedRecordState {
+    u8 unk00[0x16]; // 0x00
+    u8 flags;       // 0x16
+    u8 unk17[0x39]; // 0x17
+};
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
+struct SavedRecordBlock {
+    u8 unk0000[0x5f5c]; // 0x0000
+    SavedRecordState records[0x500]; // 0x5f5c
+};
 
+extern "C" GameDataBlocksA g_gameDataBlocks;
 
-void FUN_00331410(void)
-
+// Advance record state bits from 01 to 10, preserving the low six bits.
+extern "C" void FUN_00331410()
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4));
-  temp_v2 = 0;
-  do {
-    temp_v3 = temp_v1 + temp_v2 * 0x50;
-    temp_v0 = *(unsigned char *)(temp_v3 + 0x5f72);
-    if (temp_v0 >> 6 == 1) {
-      *(unsigned char *)(temp_v3 + 0x5f72) = (temp_v0 & 0x3f) | 0x80;
+    SavedRecordBlock* block = (SavedRecordBlock*)g_gameDataBlocks.saveBlock;
+    for (s32 index = 0; index < 0x500; ++index) {
+        SavedRecordState* record = &block->records[index];
+        u8 flags = record->flags;
+        if ((flags >> 6) == 1) {
+            record->flags = (flags & ~0xc0u) | 0x80;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x500);
-  return;
 }
-
-} /* extern "C" */

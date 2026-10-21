@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002adba8(unsigned long long *, int, int);
 int FUN_002b7dc4(unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002b81e4(void);
+int gpuSubmitDefaultPacket(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -32,7 +32,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002adba8. */
 /* Supplied declaration required: FUN_002b7dc4. */
-/* Supplied declaration required: FUN_002b81e4. */
+/* Supplied declaration required: gpuSubmitDefaultPacket. */
 
 
 void FUN_002aa100(unsigned int param_1,fn_002aa100_arg1 *param_2,unsigned int param_3,unsigned int param_4
@@ -50,7 +50,7 @@ void FUN_002aa100(unsigned int param_1,fn_002aa100_arg1 *param_2,unsigned int pa
   VectorUnsignedToFloat((unsigned int)param_2->field_0x5,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)param_2->field_0x4,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat((unsigned int)param_2->field_0x7,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002b81e4();
+  gpuSubmitDefaultPacket();
   FUN_002b7dc4(param_3,param_4,param_5,param_6);
   uStack_20 = 0x1024500000001;
   FUN_002adba8(&uStack_20,0x18,1);

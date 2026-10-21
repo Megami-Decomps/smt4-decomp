@@ -11,7 +11,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_00381d78(...); /* 0x381d78 */
-extern int FUN_00381dac(...); /* 0x381dac */
+extern int questConfirmSetup(...); /* 0x381dac */
 extern int FUN_00381fd4(...); /* 0x381fd4 */
 extern int FUN_003821d8(...); /* 0x3821d8 */
 extern int FUN_00382cd8(...); /* 0x382cd8 */
@@ -54,7 +54,7 @@ void FUN_003852c8(int param_1)
   *(unsigned int *)(param_1 + 0x5e4) = 0;
   *(romwright_code **)(param_1 + 0x5e8) = FUN_00384800;
   *(unsigned int *)(param_1 + 0x5ec) = 0;
-  *(romwright_code **)(param_1 + 0x5f0) = FUN_00381dac;
+  *(romwright_code **)(param_1 + 0x5f0) = questConfirmSetup;
   *(unsigned int *)(param_1 + 0x5f4) = 0;
   *(romwright_code **)(param_1 + 0x5f8) = FUN_00382f4c;
   *(unsigned int *)(param_1 + 0x5fc) = 0;

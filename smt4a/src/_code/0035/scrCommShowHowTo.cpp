@@ -1,0 +1,84 @@
+/* NON_MATCHING: retail retains separate cleanup/job work pointers while the build coalesces them, and the controller address is hoisted; candidate -O2. */
+#include "shard/W5_W5Match6_CallbackController.h"
+
+struct HowToWork {
+    u32 job;
+    u8 state;
+    u8 unk05[3];
+    void *bufferA;
+    void *bufferB;
+    u8 unk10[0x78];
+    void **slots[3];
+    u8 unk94[0x184];
+    u16 touchCount;
+};
+struct HowToControllerView {
+    u8 ownsTable;
+    u8 unk01[3];
+    HowToWork *work;
+};
+extern "C" {
+u32 scrGetCommandFrame();
+u32 scrGetArg(u32 index);
+u32 loadSlotIsLoaded(u32 slot);
+void loadSlotRequestAsync(u32 slot, s32 flags);
+void FUN_00348d7c(s32 id);
+void dataTableFree(u32 table);
+void ifTouchRegionRemove();
+void asdMemFreeSlot(void **slot);
+void asdMemFree(void *buffer);
+u32 asdTMTexTableNodeIsLoaded(s32 table, s32 index);
+void asdTMTexTableReleaseNode(s32 table, s32 index);
+void asdTMTexTableFreeEntry(s32 table);
+u32 jobStop(u32 job, u16 mode);
+void asdOperatorDelete(void *object);
+
+u32 scrCommShowHowTo()
+{
+    HowToControllerView *controller = (HowToControllerView *)&g_callbackController;
+    if (scrGetCommandFrame() == 0) {
+        s32 id = (s32)scrGetArg(0);
+        if (!loadSlotIsLoaded(0x46)) {
+            loadSlotRequestAsync(0x46, 0);
+            controller->ownsTable = 1;
+        }
+        FUN_00348d7c(id);
+    }
+    u8 state = controller->work->state;
+    if (state != 0 && state != 10) {
+        return 0;
+    }
+    if (controller->ownsTable) {
+        dataTableFree(0x46);
+        controller->ownsTable = 0;
+    }
+    HowToWork *work = controller->work;
+    for (s32 index = 0; index < work->touchCount; ++index) {
+        ifTouchRegionRemove();
+    }
+    for (s32 index = 0; index < 3; ++index) {
+        asdMemFreeSlot(work->slots[index]);
+        work->slots[index] = NULL;
+    }
+    if (work->bufferA != NULL) {
+        asdMemFree(work->bufferA);
+        work->bufferA = NULL;
+    }
+    if (work->bufferB != NULL) {
+        asdMemFree(work->bufferB);
+        work->bufferB = NULL;
+    }
+    for (s32 index = 0; index < 19; ++index) {
+        if (asdTMTexTableNodeIsLoaded(0x33, index)) {
+            asdTMTexTableReleaseNode(0x33, index);
+        }
+    }
+    asdTMTexTableFreeEntry(0x33);
+    jobStop(work->job, 0);
+    if (controller->work != NULL) {
+        asdOperatorDelete(controller->work);
+        controller->work = NULL;
+    }
+    return 1;
+}
+}

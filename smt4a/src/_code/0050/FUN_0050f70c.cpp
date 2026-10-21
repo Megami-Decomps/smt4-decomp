@@ -1,46 +1,33 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050f70c` (_code @ 0x50f70c, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match3_ThreadHandleState.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern ThreadHandleState DAT_005894d8;
+extern const u32 DAT_00537d24;
+s32 FUN_001d3ef8(u32* handle, u32 original);
+void FUN_002e3140(s32 result);
+void FUN_002fd02a(void* object);
+void entry(void);
+void emptyStub_002f4370(void* object, void (*destroy)(void*), void* module);
 
-int FUN_001d3ef8(unsigned int *, unsigned int);
-int FUN_002e3140(void);
-int emptyStub_002f4370(unsigned int *, int, int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern unsigned int DAT_005894d8; /* 0x5894d8 */
-extern unsigned char DAT_005894dc; /* 0x5894dc */
-extern unsigned char DAT_005894dd; /* 0x5894dd */
-
-/* Supplied declaration required: FUN_001d3ef8. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: emptyStub_002f4370. */
-
-
-void FUN_0050f70c(void)
-
+static __inline ThreadHandleState* initializeCurrentThread(ThreadHandleState* thread)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  puVar1 = (unsigned int *)&temp_v0;
-  DAT_005894d8 = 0;
-  temp_v0 = 0;
-  FUN_001d3ef8(puVar1,0xffff8000);
-  if ((int)puVar1 < 0) {
-    FUN_002e3140();
-  }
-  DAT_005894d8 = temp_v0;
-  DAT_005894dc = 0;
-  DAT_005894dd = 0;
-  emptyStub_002f4370(&DAT_005894d8,0x2fd02b,0x100000,temp_v0);
-  return;
+    thread->handle = 0;
+    u32 handle = 0;
+    s32 result = FUN_001d3ef8(&handle, DAT_00537d24);
+    if (nnResultIsFailure(result)) {
+        FUN_002e3140(result);
+    }
+    thread->handle = handle;
+    thread->unk04 = 0;
+    thread->unk05 = 0;
+    return thread;
 }
 
-} /* extern "C" */
+// Duplicate the current thread handle and register the thread object's cleanup.
+void FUN_0050f70c(void)
+{
+    emptyStub_002f4370(initializeCurrentThread(&DAT_005894d8),
+                       FUN_002fd02a, reinterpret_cast<void*>(entry));
+}
+}

@@ -10,7 +10,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
-extern int FUN_002b066c(unsigned int);
+extern int partyMemberFindById(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
 
 
@@ -64,7 +64,7 @@ void FUN_0026c9c0(void)
   if (temp_v6 < *(int *)(temp_v0 + 0xb3c)) {
     do {
       temp_v3 = *(unsigned int *)(temp_v0 + temp_v6 * 4 + 0xb34);
-      if ((-1 < (int)temp_v3) && (temp_v7 = FUN_002b066c(temp_v3 & 0xffff), temp_v7 != 0)) {
+      if ((-1 < (int)temp_v3) && (temp_v7 = partyMemberFindById(temp_v3 & 0xffff), temp_v7 != 0)) {
         temp_v2 = 0;
         do {
           if ((-1 < *(char *)(temp_v1 + temp_v2 + 0x9108)) &&

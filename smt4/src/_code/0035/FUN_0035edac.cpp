@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00100b88(...);
 int FUN_002bb5a4(...);
 int asdFatalError(...);
-int FUN_0035efa0(...);
+int textChannelParseUtf16Stream(...);
 int FUN_0035f50c(...);
 int builtin_strncpy(...);
 
@@ -30,7 +30,7 @@ extern unsigned char LAB_0035ef7c; /* 0x35ef7c */
 /* Supplied declaration required: FUN_00100b88. */
 /* Supplied declaration required: FUN_002bb5a4. */
 /* Supplied declaration required: asdFatalError. */
-/* Supplied declaration required: FUN_0035efa0. */
+/* Supplied declaration required: textChannelParseUtf16Stream. */
 /* Supplied declaration required: FUN_0035f50c. */
 extern unsigned int argsValidate(unsigned int *, unsigned int *, unsigned int, unsigned int);
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(unsigned int);
@@ -105,7 +105,7 @@ joined_r0x0035eeb0:
       }
       *(unsigned char *)((int)param_1 + 0x1b) = temp_v10[temp_v1];
       puVar1 = param_1;
-      FUN_0035efa0(param_1,param_2,temp_v3,temp_v11,param_5);
+      textChannelParseUtf16Stream(param_1,param_2,temp_v3,temp_v11,param_5);
       if ((int)puVar1 < 0) goto joined_r0x0035eeb0;
       if ((temp_v4 & 0xfffffffe) != 0) {
         if ((temp_v4 & 1) != 0) {

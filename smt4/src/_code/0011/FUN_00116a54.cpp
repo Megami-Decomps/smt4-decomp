@@ -12,7 +12,7 @@ int FUN_002bd82c(...);
 int SBORROW4(...);
 
 int FUN_00124d24(int);
-int FUN_00126194(int);
+int titleOverlayDraw(int);
 int FUN_002ba12c(...);
 int FUN_002bed3c(void);
 int vec2GetYInt(...);
@@ -44,7 +44,7 @@ extern int FUN_001247d0(unsigned int);
 /* Supplied declaration required: FUN_00124c60. */
 /* Supplied declaration required: FUN_00124d24. */
 extern int FUN_00125e30(void);
-/* Supplied declaration required: FUN_00126194. */
+/* Supplied declaration required: titleOverlayDraw. */
 extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b75ec. */
@@ -141,7 +141,7 @@ char FUN_00116a54(void)
       FUN_002bedb0(g_titleScene,3);
       efctSetSpeed();
     }
-    FUN_00126194(temp_v4);
+    titleOverlayDraw(temp_v4);
     temp_v7 = *(unsigned int *)(temp_v4 + 0xc);
     if ((temp_v7 & 0x20) != 0) goto LAB_00117048;
     if (((temp_v4 == 0) || (temp_v7 = (unsigned int)*(unsigned char *)(temp_v4 + 8), temp_v7 != 4)) ||

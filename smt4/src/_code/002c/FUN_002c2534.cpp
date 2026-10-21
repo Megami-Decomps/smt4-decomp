@@ -5,8 +5,8 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0044e330; /* 0x44e330 */
-extern romwright_code *DAT_0044e334; /* 0x44e334 */
+extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
+extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
 extern int DAT_004c63b4; /* 0x4c63b4 */
 
 
@@ -47,16 +47,16 @@ void FUN_002c2534(int param_1,int param_2,int param_3,int param_4)
   }
   if ((param_4 == 0x10000 || param_4 == 0x20000) || param_4 == 0x30000) {
     if (puVar2[1] != 0) {
-      in_r12 = DAT_0044e334;
+      in_r12 = g_gfxReleaseCallback;
     }
     if (puVar2[1] != 0 && in_r12 != (romwright_code *)0x0) {
       (*in_r12)(puVar2[5],0x104,*puVar2);
     }
-    if (DAT_0044e330 == (romwright_code *)0x0) {
+    if (g_gfxAllocateCallback == (romwright_code *)0x0) {
       temp_v0 = 0;
     }
     else {
-      temp_v0 = (*DAT_0044e330)(param_4,0x104,*puVar2,temp_v1 * param_2 * param_3);
+      temp_v0 = (*g_gfxAllocateCallback)(param_4,0x104,*puVar2,temp_v1 * param_2 * param_3);
     }
     puVar2[5] = param_4;
     puVar2[1] = temp_v0;

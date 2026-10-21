@@ -1,38 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cda7c` (_code @ 0x3cda7c, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler synthesizes the large current-index address with ADDs and hoists the entry base; retail uses a literal offset and different cold-return placement. */
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
-extern "C" {
+struct SlotSelectionEntry {
+    s8 slot;
+    u8 unk01[0x14f];
+};
 
-int scrSetResult(int);
+struct SlotSelectionView {
+    u8 unk0000[0x442c];
+    u8 entries[0x74c0 - 0x442c];
+    s32 current; // 0x74c0
+};
 
-extern int gameGetSlotRecord(int);
-/* Supplied declaration required: scrSetResult. */
-extern int FUN_003a7b74(void);
+struct DirectSkillView {
+    u8 unk00[0x3a];
+    u16 skill;
+};
 
+struct SkillCommandWork {
+    u32 unk00;
+    SlotSelectionView *selection;
+    DirectSkillView *direct;
+};
 
-unsigned int FUN_003cda7c(unsigned int param_1,int param_2)
-
+static __inline const u16 *slotSkillWords(const SlotRecord *record)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v1 = *(int *)(param_2 + 4);
-  if (temp_v1 != 0) {
-    temp_v1 = gameGetSlotRecord((int)*(char *)(temp_v1 + *(int *)(temp_v1 + 0x74c0) * 0x150 + 0x442c));
-    temp_v2 = FUN_003a7b74();
-    temp_v0 = *(unsigned short *)(temp_v1 + temp_v2 * 2 + 0x34);
-  }
-  else {
-    if (*(int *)(param_2 + 8) == 0) {
-      return 1;
-    }
-    temp_v0 = *(unsigned short *)(*(int *)(param_2 + 8) + 0x3a);
-  }
-  scrSetResult(temp_v0);
-  return 1;
+    return reinterpret_cast<const u16 *>(record->unk00 + 0x34);
 }
 
-} /* extern "C" */
+extern "C" {
+u32 FUN_003a7b74(void);
+void scrSetResult(u32 value);
+
+// Publish the currently selected slot skill, or the direct skill when no list is active.
+u32 FUN_003cda7c(u32 unused, const SkillCommandWork *work)
+{
+    u16 skill;
+    if (work->selection != NULL) {
+        const SlotSelectionEntry *entries =
+            reinterpret_cast<const SlotSelectionEntry *>(work->selection->entries);
+        SlotRecord *record = gameGetSlotRecord(entries[work->selection->current].slot);
+        u32 index = FUN_003a7b74();
+        skill = slotSkillWords(record)[index];
+    } else {
+        if (work->direct == NULL)
+            return 1;
+        skill = work->direct->skill;
+    }
+    scrSetResult(skill);
+    return 1;
+}
+}

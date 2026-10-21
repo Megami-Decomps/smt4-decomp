@@ -25,7 +25,7 @@ int FUN_002beed0(...);
 int paramsInit(...);
 int FUN_0033dcec(unsigned int, int, int);
 int FUN_00343e5c(int, int, int, int, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int drawParameterBlockClear(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -75,12 +75,12 @@ extern unsigned int FUN_00294090(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002beed0. */
 /* Supplied declaration required: paramsInit. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 extern int FUN_002cdecc(int);
 extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: FUN_0033dcec. */
 /* Supplied declaration required: FUN_00343e5c. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_001eea88(void)
@@ -167,18 +167,18 @@ void FUN_001eea88(void)
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x1e));
   }
-  temp_v2 = FUN_002c5c04(&LAB_001eef58);
+  temp_v2 = asdLoadFileSyncDefault(&LAB_001eef58);
   *(unsigned int *)(temp_v0 + 0x29c) = temp_v2;
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
   devilGetRecord();
   temp_v4 = FUN_002cdecc((int)*(char *)(temp_v1 + 0x30));
   textFormatBuffer(temp_v6,&LAB_001eef6c,temp_v4 + 1);
-  temp_v2 = FUN_002c5c04(temp_v6);
+  temp_v2 = asdLoadFileSyncDefault(temp_v6);
   *(unsigned int *)(temp_v0 + 0x2a4) = temp_v2;
   temp_v3 = *(unsigned int *)(temp_v0 + 0x29c);
   FUN_00297060(temp_v3,temp_v2);
   *(unsigned int *)(temp_v0 + 0x2a0) = temp_v3;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0 + 0x2a8);
+  drawParameterBlockClear(temp_v0 + 0x2a8);
   paramsInit(temp_v0 + 0x2a8,&DAT_004033e0,0x24,&DAT_00403404,0x30,&DAT_00403434,0xc,0,0,
                &DAT_00403440,0xe0);
   temp_v4 = 0;

@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_0026a348(void);
+int scrEffectRunIfActive(void);
 int randBetween(int, int);
 int FUN_00297060(void);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_0029cc44(void);
 int buttonHelpSetPreset(...);
 int textFormatBuffer(...);
@@ -16,9 +16,9 @@ int FUN_001db56c(void);
 int FUN_00220ffc(void);
 int runWinClose(void);
 int FUN_00254600(int);
-int FUN_00259294(int);
+int gameDataFlagsSetBits(int);
 int FUN_0025981c(void);
-int FUN_00262f68(unsigned int, int);
+int objectFlagsClear(unsigned int, int);
 int FUN_00262f78(void);
 int FUN_00262f94(void);
 int gameDataBlocksAddFlags(int);
@@ -58,16 +58,16 @@ extern int g_campCec; /* 0x43daa8 */
 /* Supplied declaration required: FUN_00220ffc. */
 /* Supplied declaration required: runWinClose. */
 extern int asdCecInboxGetMessageCount(void);
-extern int FUN_0024ea50(unsigned short);
+extern int partyHasStoredDemon(unsigned short);
 /* Supplied declaration required: FUN_00254600. */
-/* Supplied declaration required: FUN_00259294. */
+/* Supplied declaration required: gameDataFlagsSetBits. */
 extern int gameDataBlockTestFlag(unsigned int);
 extern int gameDataBlocksGetFlagByteA(void);
 /* Supplied declaration required: FUN_0025981c. */
-/* Supplied declaration required: FUN_00262f68. */
+/* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: FUN_00262f78. */
 /* Supplied declaration required: FUN_00262f94. */
-/* Supplied declaration required: FUN_0026a348. */
+/* Supplied declaration required: scrEffectRunIfActive. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_0026b9bc. */
 extern int FUN_0028fb40(unsigned short);
@@ -75,7 +75,7 @@ extern int FUN_0028fb40(unsigned short);
 /* Supplied declaration required: randBetween. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_0029cc44. */
 extern int flagWordTestBit(unsigned int, unsigned int);
 /* Supplied declaration required: gameGetUnitRecord. */
@@ -90,7 +90,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: gameDataFlagsClearAndRefresh. */
 /* Supplied declaration required: FUN_002c5758. */
-extern int FUN_002cd648(int);
+extern int cecSlotGet(int);
 /* Supplied declaration required: FUN_002cd680. */
 extern int FUN_002cdecc(int);
 /* Supplied declaration required: FUN_002cef34. */
@@ -142,7 +142,7 @@ unsigned int FUN_002ec588(int param_1)
           temp_v3 = flagWordTestBit(temp_v9,2);
           if (temp_v3 != 0) {
             temp_v9 = gameGetUnitRecord((int)*(char *)(temp_v8 + temp_v2 + 0x90f0));
-            FUN_00262f68(temp_v9,4);
+            objectFlagsClear(temp_v9,4);
             temp_v11 = 1;
           }
         }
@@ -163,7 +163,7 @@ unsigned int FUN_002ec588(int param_1)
     break;
   case 1:
     gameDataBlocksAddFlags(2);
-    FUN_00259294(2);
+    gameDataFlagsSetBits(2);
     FUN_001db56c();
     temp_v8 = asdCecInboxGetMessageCount();
     *(int *)(temp_v13 + 0x4c) = temp_v8;
@@ -192,7 +192,7 @@ unsigned int FUN_002ec588(int param_1)
     temp_v8 = 0;
     if (0 < *(int *)(temp_v13 + 0x4c)) {
       do {
-        temp_v2 = FUN_002cd648(temp_v8);
+        temp_v2 = cecSlotGet(temp_v8);
         if (*(short *)(temp_v2 + 0x48) != 0) {
           FUN_002cef34(temp_v2);
           FUN_002f5004(1);
@@ -212,7 +212,7 @@ unsigned int FUN_002ec588(int param_1)
     if (temp_v8 == 0) {
       temp_v8 = 0;
       do {
-        temp_v2 = FUN_002cd648(temp_v8);
+        temp_v2 = cecSlotGet(temp_v8);
         if ((*(unsigned char *)(temp_v2 + 0x20) & 0xc) != 0) {
           libc_strcpy(temp_v12,temp_v2 + 0xe);
           FUN_00295660(0,temp_v12);
@@ -261,7 +261,7 @@ unsigned int FUN_002ec588(int param_1)
             temp_v4 = FUN_0025981c();
             if ((((unsigned int)(int)(short)puVar14[1] <= temp_v4) &&
                 ((int)(short)*puVar14 != (unsigned int)*(unsigned short *)(param_1 + 0x126))) &&
-               (temp_v3 = FUN_0024ea50(*puVar14), temp_v3 == 0)) {
+               (temp_v3 = partyHasStoredDemon(*puVar14), temp_v3 == 0)) {
               temp_v4 = (unsigned int)*puVar14;
               devilGetRecord();
               if ((unsigned int)*(unsigned char *)(temp_v4 + 3) <= *(unsigned char *)(temp_v2 + 0x7a) + 5) {
@@ -289,7 +289,7 @@ unsigned int FUN_002ec588(int param_1)
               if (temp_v7 < 0x3c) {
                 puVar13 = (unsigned short *)(*(int *)(g_campCec + 0xcf0) + temp_v7 * 0xc);
               }
-              temp_v3 = FUN_0024ea50(*puVar13);
+              temp_v3 = partyHasStoredDemon(*puVar13);
             } while (temp_v3 != 0);
             *(unsigned short **)(param_1 + 0xce8) = puVar13;
           }
@@ -391,7 +391,7 @@ unsigned int FUN_002ec588(int param_1)
     temp_v7 = *(unsigned int *)(param_1 + 0xd58);
     if (temp_v7 != 0) {
       if ((temp_v7 & 7) != 0) {
-        FUN_00297468(&LAB_002ece28,temp_v16,0);
+        asdLoadFileAsyncSimple(&LAB_002ece28,temp_v16,0);
         temp_v7 = FUN_00262f78();
         puVar14 = *(unsigned short **)(param_1 + 0xd58);
         temp_v7 = temp_v7 & 0xffff;
@@ -405,10 +405,10 @@ unsigned int FUN_002ec588(int param_1)
         devilGetRecord();
         temp_v8 = FUN_002cdecc((int)*(char *)(temp_v7 + 0x30));
         textFormatBuffer(temp_v12,&LAB_002ece48,temp_v8 + 1);
-        FUN_00297468(temp_v12,param_1 + 0xd00,0);
+        asdLoadFileAsyncSimple(temp_v12,param_1 + 0xd00,0);
         *(unsigned char *)(param_1 + 0xd63) = 1;
         FUN_0029cc44();
-        FUN_0026a348();
+        scrEffectRunIfActive();
         buttonHelpSetPreset(0x3c);
         *(int *)(temp_v13 + 0x50) = *(int *)(temp_v13 + 0x50) + 1;
       }

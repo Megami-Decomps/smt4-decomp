@@ -1,26 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d9ba0` (_code @ 0x3d9ba0, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: traversal counter and resource pointer use r1/r2 opposite to retail. */
+#include "common.h"
 
-extern "C" {
+struct ModelRenderState {
+    u8 unk000[0x1f6];
+    u8 enabled; // 0x1f6
+};
+struct ModelInstance {
+    u8 unk00[0x2c];
+    ModelRenderState *renderState; // 0x2c
+};
+struct ModelResource {
+    u32 flags; // 0x00
+    u32 unk04;
+    ModelInstance *model; // 0x08
+};
+struct ModelSlot {
+    ModelResource *resource; // 0x00
+    u8 unk04[0x24];
+};
+struct ModelCollection {
+    u8 unk000[0x190];
+    ModelSlot slots[50]; // 0x190
+};
 
-
-void FUN_003d9ba0(int param_1)
-
+// Mark every occupied model slot and disable its render-state flag.
+extern "C" void FUN_003d9ba0(ModelCollection *collection)
 {
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  temp_v0 = 0;
-  do {
-    puVar1 = *(unsigned int **)(param_1 + temp_v0 * 0x28 + 400);
-    if (puVar1 != (unsigned int *)0x0) {
-      *puVar1 = *puVar1 | 2;
-      *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
+    for (s32 i = 0; i < 50; ++i) {
+        ModelResource *resource = collection->slots[i].resource;
+        if (resource != NULL) {
+            resource->flags |= 2;
+            resource->model->renderState->enabled = 0;
+        }
     }
-    temp_v0 = temp_v0 + 1;
-  } while (temp_v0 < 0x32);
-  return;
 }
-
-} /* extern "C" */

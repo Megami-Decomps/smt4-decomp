@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int gameGetMapBlock(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(int, int);
@@ -26,7 +26,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 extern float *lmapSceneGetObj(int);
 extern int saveTestFlagRow(unsigned char, unsigned char);
 extern int gameFlagIsSet(void);
@@ -68,7 +68,7 @@ void FUN_0039eb4c(int param_1)
   temp_v10 = *puVar4;
   temp_v12 = temp_v11;
   temp_v6 = temp_v11;
-  FUN_00231bb8(param_1 + 0x164,&temp_v13);
+  pairCopy(param_1 + 0x164,&temp_v13);
   temp_v4 = *(int *)(param_1 + 0x5a88);
   if (temp_v1 != 0x65) {
     if (temp_v1 != 0x66) {

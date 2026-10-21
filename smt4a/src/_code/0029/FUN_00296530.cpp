@@ -8,11 +8,11 @@ int FUN_002db06c(void);
 int FUN_003541c0(void);
 int linkHolderCopyWords(...);
 int FUN_003fda64(...);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 
 int vec4Forward(void);
 int FUN_003135bc(void);
-int FUN_00324cd0(void);
+int mapSpawnRandomEventKindEffect(void);
 int FUN_00324e38(...);
 int FUN_00385578(void);
 int linkHolderCallFirst(...);
@@ -25,8 +25,8 @@ int FUN_003e5858(int);
 int controllerSetDestination(...);
 int FUN_003fd7c0(unsigned int, int, int);
 int FUN_003fd924(...);
-int FUN_003fda08(...);
-int FUN_003fdb18(...);
+int animationSelectClip(...);
+int controllerSetRotationEulerDegrees(...);
 int FUN_003fe86c(...);
 int FUN_0040b730(int, int, int);
 int FUN_0040b9ac(int, unsigned int, int, int);
@@ -80,7 +80,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002db06c. */
 extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003135bc. */
-/* Supplied declaration required: FUN_00324cd0. */
+/* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_003541c0. */
 /* Supplied declaration required: FUN_00385578. */
@@ -95,11 +95,11 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
-/* Supplied declaration required: FUN_003fda08. */
+/* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: FUN_003fda64. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040b730. */
 /* Supplied declaration required: FUN_0040b9ac. */
 extern int FUN_004ffba8(int);
@@ -224,7 +224,7 @@ void FUN_00296530(void)
           g_lmapScene[0x8e] = 3;
           temp_v5 = *(unsigned int *)(piVar13[99] + 4);
           FUN_003fd7c0(temp_v5,0,2);
-          FUN_003fda08(temp_v5,1,2);
+          animationSelectClip(temp_v5,1,2);
           piVar13 = piVar12;
           FUN_003fd924(temp_v5,3,2);
         }
@@ -273,14 +273,14 @@ void FUN_00296530(void)
             ((temp_v3 < 0x41000000 && ((int)piVar12 >= 0x41000000)))))) ||
           ((temp_v3 < 0x42500000 && ((int)piVar12 >= 0x42500000)))))) {
         FUN_003135bc();
-        FUN_00324cd0();
+        mapSpawnRandomEventKindEffect();
         FUN_00324e38(0xffffffff);
       }
     }
     else if (((g_lmapScene[0x19] < 0x40000000) && ((int)piVar12 >= 0x40000000)) ||
             ((g_lmapScene[0x19] < 0x41300000 && ((int)piVar12 >= 0x41300000)))) {
       FUN_003135bc();
-      FUN_00324cd0();
+      mapSpawnRandomEventKindEffect();
       FUN_00324e38(0xffffffff);
     }
     g_lmapScene[0x19] = (int)piVar12;
@@ -347,7 +347,7 @@ LAB_00296958:
       temp_v8 = piVar13[7];
       temp_v10 = piVar13[9];
       controllerSetDestination(temp_v7,&temp_v8);
-      FUN_003fdb18(temp_v7);
+      controllerSetRotationEulerDegrees(temp_v7);
       if (*(char *)((int)g_lmapScene + 0x195) != '\0') {
         *(unsigned char *)((int)g_lmapScene + 0x195) = 0;
         FUN_003fe86c(temp_v7,0,2);
@@ -429,7 +429,7 @@ LAB_00296c74:
       }
 LAB_00296e98:
       controllerSetDestination(temp_v0,piVar13 + 7);
-      FUN_003fdb18(temp_v0);
+      controllerSetRotationEulerDegrees(temp_v0);
       temp_v2 = g_lmapScene[0x59];
       piVar13 = g_lmapScene;
       if (temp_v2 != g_lmapScene[0x5a]) {
@@ -463,10 +463,10 @@ LAB_00296e98:
     if ((DAT_005f17d4 == 2 && temp_v4 == 0) && (DAT_005f1be8 != 0)) {
       g_lmapScene[0x5d] = DAT_005f1b10;
       temp_v5 = *(unsigned int *)(temp_v0 + 4);
-      FUN_0040ace8(g_handleRegistry,temp_v5);
+      handleRegistryRegisterObject(g_handleRegistry,temp_v5);
       FUN_003fe86c(temp_v5,0,2);
       controllerSetDestination(temp_v5,&DAT_005f17d8);
-      FUN_003fdb18(temp_v5);
+      controllerSetRotationEulerDegrees(temp_v5);
     }
     DAT_005f17d4 = DAT_005f17d4 + 1;
     if ((int)DAT_005f17d4 >= 0x33) {

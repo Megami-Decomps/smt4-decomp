@@ -5,10 +5,10 @@
 extern "C" {
 
 int jyoucyuGetTableEntry(int);
-int FUN_001d25ec(int);
+int legacyResourceIdRemap(int);
 int asdOperatorDeleteB(int);
 int asdOperatorNewE(void);
-int FUN_0042979c(int *, int, int);
+int sdkCreateEncodedResourceDescriptor(int *, int, int);
 int FUN_004ffee0(int *, unsigned char [4], unsigned char [8], unsigned short [12]);
 int table30GetEntryB(unsigned char [4], unsigned int, unsigned int);
 int FUN_005003b4(int *, int, int, int);
@@ -26,10 +26,10 @@ extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int objGetFlagBit0(unsigned short *);
-/* Supplied declaration required: FUN_001d25ec. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: asdOperatorDeleteB. */
 /* Supplied declaration required: asdOperatorNewE. */
-/* Supplied declaration required: FUN_0042979c. */
+/* Supplied declaration required: sdkCreateEncodedResourceDescriptor. */
 extern unsigned int FUN_004ffd4c(unsigned char *);
 /* Supplied declaration required: FUN_004ffee0. */
 /* Supplied declaration required: table30GetEntryB. */
@@ -57,10 +57,10 @@ unsigned char * FUN_004733cc(int param_1)
   unsigned char temp_v12 [8];
   
   temp_v3 = g_aocMain;
-  FUN_0042979c(&temp_v8,g_aocMain + 0x20,g_aocMain + 0x18);
+  sdkCreateEncodedResourceDescriptor(&temp_v8,g_aocMain + 0x20,g_aocMain + 0x18);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_5c;
-  temp_v0 = FUN_001d25ec(param_1 + 0xc);
+  temp_v0 = legacyResourceIdRemap(param_1 + 0xc);
   if ((unsigned char *)-(temp_v0 >> 0x1f) != (unsigned char *)0x0) {
     return (unsigned char *)-(temp_v0 >> 0x1f);
   }
@@ -78,9 +78,9 @@ unsigned char * FUN_004733cc(int param_1)
         FUN_004ffee0(&temp_v10,temp_v9,temp_v12,temp_v11);
         *(unsigned int *)(param_1 + 0xc) = temp_v10;
         *(unsigned int *)(param_1 + 0x10) = uStack_44;
-        temp_v2 = FUN_001d25ec(param_1 + 0xc);
+        temp_v2 = legacyResourceIdRemap(param_1 + 0xc);
         if (temp_v2 < 0) {
-          FUN_001d25ec(param_1 + 0xc);
+          legacyResourceIdRemap(param_1 + 0xc);
           asdOperatorDeleteB(temp_v0);
           return temp_v9;
         }
@@ -96,9 +96,9 @@ unsigned char * FUN_004733cc(int param_1)
     FUN_005003b4(&temp_v6,temp_v3 + 0x20,temp_v0,temp_v5);
     *(unsigned int *)(param_1 + 0xc) = temp_v6;
     *(unsigned int *)(param_1 + 0x10) = temp_v7;
-    temp_v3 = FUN_001d25ec(param_1 + 0xc);
+    temp_v3 = legacyResourceIdRemap(param_1 + 0xc);
     if (temp_v3 < 0) {
-      FUN_001d25ec(param_1 + 0xc);
+      legacyResourceIdRemap(param_1 + 0xc);
       asdOperatorDeleteB(temp_v0);
       return temp_v9;
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002598f0(unsigned int, int, int, int);
-int FUN_00296ae8(unsigned int, int, unsigned int, int, int, unsigned int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, int);
 int FUN_002bf288(int, int, int, int, int, int);
 int FUN_002bf4f8(int, int);
 
@@ -19,7 +19,7 @@ typedef struct {
 } param_6_stack;
 
 /* Supplied declaration required: FUN_002598f0. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf4f8. */
 
@@ -42,7 +42,7 @@ void FUN_002d670c(int param_1,unsigned int param_2,unsigned int param_3,int para
   do {
     temp_v1 = FUN_002bf4f8(0x39,temp_v2 + 0xd1);
     if (temp_v2 < param_4) {
-      FUN_00296ae8(param_2,2,0xffffffff,0,3,param_3,temp_v2 + param_5 + param_6);
+      asdTextDrawDirectoryEntry(param_2,2,0xffffffff,0,3,param_3,temp_v2 + param_5 + param_6);
       FUN_002598f0(param_2,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v0 + 8) + temp_v3,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v0 + 10) + temp_v4,0x15);
       FUN_002bf288(2,0x39,0xce,*(short *)(temp_v1 + 8) + temp_v3,*(short *)(temp_v1 + 10) + temp_v4,0xc);

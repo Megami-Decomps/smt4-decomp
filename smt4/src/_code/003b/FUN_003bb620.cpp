@@ -6,14 +6,14 @@ extern "C" {
 
 int FUN_00230954(int, int);
 int FUN_00233410(int);
-int FUN_0023360c(...);
+int flaggedValueHolderGetTotal(...);
 int asdTMTexTableLoadEntryAsync(int, unsigned int);
 
 /* Supplied declaration required: FUN_00230954. */
 extern int FUN_002333a4(int, unsigned int);
 extern unsigned int FUN_002333f0(int);
 /* Supplied declaration required: FUN_00233410. */
-/* Supplied declaration required: FUN_0023360c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 
@@ -30,12 +30,12 @@ unsigned int FUN_003bb620(int param_1)
   unsigned int temp_v4;
   
   temp_v4 = 0;
-  temp_v0 = FUN_0023360c();
+  temp_v0 = flaggedValueHolderGetTotal();
   if (*(char *)(param_1 + 0x632) == '\0') {
     FUN_00230954(param_1 + 0x74,param_1);
     FUN_00233410(param_1);
   }
-  temp_v1 = FUN_0023360c(param_1);
+  temp_v1 = flaggedValueHolderGetTotal(param_1);
   piVar3 = (int *)(param_1 + 0xcb8);
   if (temp_v1 != temp_v0) {
     *(unsigned int *)(param_1 + 0xcb8) = 0;
@@ -58,7 +58,7 @@ unsigned int FUN_003bb620(int param_1)
     }
     *(int *)(param_1 + 0xcb8) = temp_v0;
     if (temp_v0 >= 0x10) {
-      temp_v0 = FUN_0023360c(param_1);
+      temp_v0 = flaggedValueHolderGetTotal(param_1);
       temp_v3 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + temp_v0 * 4 + 0x530) + 0x5a);
       temp_v0 = temp_v3 + 1;
       temp_v1 = param_1 + temp_v0;

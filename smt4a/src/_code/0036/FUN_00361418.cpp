@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00361418` (_code @ 0x361418, 0x834 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_RotationY.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int randomAdvanceShiftRegister(...);
 int FUN_00514540(...);
 int FUN_005145f4(void);
 int FUN_005147dc(void);
-int FUN_00514904(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_uidivmod(void);
@@ -74,7 +74,6 @@ extern int FUN_0037a844(void);
 /* Supplied declaration required: FUN_00514540. */
 /* Supplied declaration required: FUN_005145f4. */
 /* Supplied declaration required: FUN_005147dc. */
-/* Supplied declaration required: FUN_00514904. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -174,7 +173,7 @@ void FUN_00361418(int param_1)
             pfVar7[9] = pfVar7[9] + temp_v11;
             pfVar7[5] = pfVar7[5] + pfVar7[6] * temp_v16;
             FUN_005147dc();
-            FUN_00514904();
+            matrixSetRotationY(pfVar7[4]);
             FUN_005145f4();
             temp_v15 = temp_v15 * (float)temp_v21;
             temp_v12 = pfVar7[5];
@@ -240,7 +239,7 @@ void FUN_00361418(int param_1)
             FUN_00514540(0);
             pfVar7[4] = (temp_v3 - temp_v11) * temp_v12 * (float)((unsigned long long)temp_v21 >> 0x20);
             FUN_005147dc();
-            FUN_00514904();
+            matrixSetRotationY(pfVar7[4]);
             FUN_005145f4();
             temp_v3 = pfVar7[8] * (float)temp_v21;
             FUN_001b63b0();

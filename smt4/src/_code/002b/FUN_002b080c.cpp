@@ -6,7 +6,7 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_002aa100(...);
 int FUN_002aa200(...);
-int FUN_002ae3d8(void);
+int sentinelLookupGetValue(void);
 int FUN_002ae424(...);
 int FUN_002ba12c(unsigned int);
 int VectorFloatToUnsigned(double, int);
@@ -65,7 +65,7 @@ extern unsigned int FUN_00145e24(unsigned short);
 extern unsigned int FUN_00145e44(unsigned short);
 /* Supplied declaration required: FUN_002aa100. */
 /* Supplied declaration required: FUN_002aa200. */
-/* Supplied declaration required: FUN_002ae3d8. */
+/* Supplied declaration required: sentinelLookupGetValue. */
 /* Supplied declaration required: FUN_002ae424. */
 /* Supplied declaration required: FUN_002ba12c. */
 
@@ -217,7 +217,7 @@ LAB_002b0a30:
                   if (temp_v6 == 0xf802) {
                     return;
                   }
-                  FUN_002ae3d8();
+                  sentinelLookupGetValue();
                   temp_v9 = temp_v9 + temp_v6;
                 }
                 else {
@@ -241,7 +241,7 @@ LAB_002b0a30:
                   temp_v9 = temp_v9 + 4;
                 }
                 else {
-                  FUN_002ae3d8();
+                  sentinelLookupGetValue();
                   temp_v9 = temp_v9 + temp_v6;
                 }
               }
@@ -345,7 +345,7 @@ LAB_002b0a30:
               VectorSignedToFloat(temp_v7,(unsigned char)(temp_v13 >> 0x16) & 3);
               break;
             default:
-              FUN_002ae3d8();
+              sentinelLookupGetValue();
               temp_v9 = temp_v9 + temp_v6;
             }
           }
@@ -359,7 +359,7 @@ LAB_002b0a30:
           temp_v20 = (unsigned long long)(unsigned int)((float)param_1[6] + temp_v16 + temp_v17);
         }
         else {
-          FUN_002ae3d8();
+          sentinelLookupGetValue();
           temp_v9 = temp_v9 + temp_v6;
         }
       }

@@ -33,7 +33,7 @@ extern unsigned int DAT_0057388c; /* 0x57388c */
 extern int FUN_003e0f94(unsigned int *, int);
 /* Supplied declaration required: FUN_003f0b80. */
 /* Supplied declaration required: FUN_003f0c78. */
-extern int FUN_003f10c8(int, unsigned short);
+extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: words10CopyHighToLow. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -97,7 +97,7 @@ void FUN_003e21c8(unsigned int *param_1,int param_2)
          (*(unsigned short *)(temp_v7 + 0x60) & 0x800) == 0)) {
         temp_v5 = param_2;
         FUN_001568f8(param_2,(int)*(short *)(temp_v7 + 0x6a));
-        temp_v5 = FUN_003f10c8(param_2,*(unsigned short *)(temp_v5 + 2));
+        temp_v5 = pairedEntryTableContains(param_2,*(unsigned short *)(temp_v5 + 2));
         if (temp_v5 == 0) {
           *(unsigned short *)(temp_v7 + 0x60) = *(unsigned short *)(temp_v7 + 0x60) | 0x800;
         }

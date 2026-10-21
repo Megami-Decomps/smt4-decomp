@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_0019b738(...);
+int memClearWords(...);
 int FUN_0019c0e0(...);
 int FUN_0019f30c(...);
 int FUN_001ac8ec(...);
@@ -32,7 +32,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_0019b738. */
+/* Supplied declaration required: memClearWords. */
 /* Supplied declaration required: FUN_0019c0e0. */
 extern int lookupNameEntry(unsigned int, unsigned char *, unsigned int *);
 /* Supplied declaration required: FUN_0019f30c. */
@@ -72,7 +72,7 @@ void FUN_001881e8(int param_1,int *param_2)
     do {
       temp_v1 = *(int *)(param_2[1] + temp_v0 * 4);
       temp_v2 = *(unsigned int *)(temp_v1 + 0xc);
-      FUN_0019b738(temp_v19,0x20);
+      memClearWords(temp_v19,0x20);
       textFormatBuffer(temp_v19,"h_eff%02d",*(unsigned int *)(temp_v1 + 8));
       temp_v1 = lookupNameEntry(temp_v3,temp_v19,(unsigned int *)&temp_v4);
       if (temp_v1 != 0) {

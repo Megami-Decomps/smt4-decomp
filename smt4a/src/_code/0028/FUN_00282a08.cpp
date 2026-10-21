@@ -1,39 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00282a08` (_code @ 0x282a08, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds retail's redundant literal-21-to-kind-five comparison and rematerializes the constant kind/enabled arguments after the getters. */
+#include "common.h"
 
 extern "C" {
+void scrCommMessageSetMode(u32 mode);
+u32 FUN_002ba85c(void);
+u32 scrGetArg(u32 index);
+u32 scrGetCommandFrame(void);
+u32 FUN_0021bdac(u32 context, s32 argument, s32 frame, s32 kind, s32 enabled, u32 flags);
 
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-int FUN_002c76c0(int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} void_stack;
-
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002ba85c(void);
-/* Supplied declaration required: FUN_002c76c0. */
-extern unsigned int scrGetCommandFrame(void);
-
-
-void FUN_00282a08(void)
-
+// Request a kind-five script message using the command's context and frame.
+u32 FUN_00282a08(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  FUN_002c76c0(0);
-  temp_v0 = FUN_002ba85c();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v0,temp_v1,temp_v2,5,1,0);
-  return;
+    scrCommMessageSetMode(0);
+    u32 context = FUN_002ba85c();
+    s32 argument = scrGetArg(0);
+    s32 frame = scrGetCommandFrame();
+    return FUN_0021bdac(context, argument, frame, 5, 1, 0);
 }
-
-} /* extern "C" */
+}

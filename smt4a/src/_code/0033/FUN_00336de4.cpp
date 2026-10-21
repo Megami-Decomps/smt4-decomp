@@ -20,7 +20,7 @@ extern int g_btlTalkBustUp; /* 0x5710dc */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_00191e00. */
 /* Supplied declaration required: dataTable00FindById. */
-extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_0021ba5c. */
@@ -46,7 +46,7 @@ void FUN_00336de4(int param_1,int param_2)
     *(unsigned int *)(temp_v0 + 0x2f8) = temp_v2;
     *(int *)(temp_v0 + 0x308) = param_1;
     if (param_2 == 0) {
-      temp_v1 = FUN_001a6508(g_aocSystem,0x10,temp_v2,1);
+      temp_v1 = aocRunByName(g_aocSystem,0x10,temp_v2,1);
       if (temp_v1 != 0) {
         FUN_00191e00(g_aocSystem,0x10,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
       }
@@ -59,7 +59,7 @@ void FUN_00336de4(int param_1,int param_2)
       *(unsigned int *)(temp_v0 + 0x2ec) = 0;
       return;
     }
-    temp_v1 = FUN_001a6508(g_aocSystem,0x10,temp_v2,1);
+    temp_v1 = aocRunByName(g_aocSystem,0x10,temp_v2,1);
     if (temp_v1 != 0) {
       FUN_001a6568(g_aocSystem,0x10,*(unsigned int *)(temp_v0 + 0x2f8),0x10000);
     }

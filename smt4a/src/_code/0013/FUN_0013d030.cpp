@@ -9,7 +9,7 @@ int FUN_00157558(unsigned int);
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
-extern int FUN_001546e8(void);
+extern int stateValuesGetBySelector(void);
 /* Supplied declaration required: FUN_00154edc. */
 /* Supplied declaration required: FUN_00157558. */
 extern int jobGetWork(void);
@@ -25,7 +25,7 @@ unsigned int FUN_0013d030(void)
   
   temp_v1 = jobGetWork();
   *(unsigned char *)(temp_v1 + 0xffe) = 0;
-  temp_v2 = FUN_001546e8();
+  temp_v2 = stateValuesGetBySelector();
   if ((((temp_v2 == 0) && (*(char *)(temp_v1 + 0xff4) != '\0')) && (*(char *)(temp_v1 + 0xff5) != '\0'))
      && (((*(int *)(temp_v1 + 0x1490) != 0 && (*(char *)(temp_v1 + 0x148c) == '\0')) &&
          (*(char *)(temp_v1 + 0x1040) == '\0')))) {

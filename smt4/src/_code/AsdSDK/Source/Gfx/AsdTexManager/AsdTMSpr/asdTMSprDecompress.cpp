@@ -4,7 +4,7 @@
 extern "C" {
 
 s32 FUN_0014f4f8(u8 *data);
-void FUN_0014f16c(u8 *src, u8 *dst);
+void lzDecompressBytes(const u8 *src, u8 *dst);
 void FUN_0014f408(u8 *src, u8 *dst);
 void FUN_0014f2c8(u8 *src, u8 *dst);
 void *asdMemoryAllocAligned(int, int, int, s32 size, u32 align, int);
@@ -32,7 +32,7 @@ u8 *asdTMSprDecompress(u8 *data, u32 flags, u32 align)
             out = (u8 *)asdMemoryAllocAligned(0x100, 0x100, 0, size, align, 1);
         }
         if (format == 0x10) {
-            FUN_0014f16c(data, out);
+            lzDecompressBytes(data, out);
         } else if (format == 0x20) {
             FUN_0014f408(data, out);
         } else if (format == 0x30) {

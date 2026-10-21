@@ -10,7 +10,7 @@ int paramsInit(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int sysMemClear(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -48,11 +48,11 @@ extern int FUN_0013c660(...); /* 0x13c660 */
 extern int FUN_0013c6d4(...); /* 0x13c6d4 */
 extern int FUN_0013c764(...); /* 0x13c764 */
 extern int FUN_0013c7dc(...); /* 0x13c7dc */
-extern int FUN_0013cb90(...); /* 0x13cb90 */
+extern int renderSurfaceDownsampleJob(...); /* 0x13cb90 */
 extern int FUN_0013cd7c(...); /* 0x13cd7c */
 extern int FUN_0013cf80(...); /* 0x13cf80 */
 extern int FUN_0013d030(...); /* 0x13d030 */
-extern int FUN_0013d0f0(...); /* 0x13d0f0 */
+extern int panelUpdateAnimatedScale(...); /* 0x13d0f0 */
 extern int FUN_0013d2dc(...); /* 0x13d2dc */
 extern int FUN_0013db18(...); /* 0x13db18 */
 extern int jobRenderOnce(...); /* 0x13dbb4 */
@@ -78,7 +78,7 @@ extern unsigned int *g_frameTex; /* 0x57f65c */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_00138e14(void)
@@ -112,7 +112,7 @@ void FUN_00138e14(void)
   puVar2[5] = 0;
   puVar2[6] = 0;
   *(unsigned char *)(puVar2 + 7) = 0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 0xd);
+  paramsClearPacket(puVar2 + 0xd);
   paramsInit(puVar2 + 0xd,&DAT_00530cfc,0x18,&DAT_00530d14,0x24,&DAT_00530d38,0xc,0,0,
                &DAT_00530d44,0x70);
   puVar2[0xb] = 0x3e800000;
@@ -128,7 +128,7 @@ void FUN_00138e14(void)
   *(unsigned char *)((int)puVar2 + 0x144d) = 0;
   *(unsigned char *)(puVar2 + 0x525) = 0;
   puVar4 = &LAB_00139228;
-  asdProcessCreateSimple(&LAB_00139228,0x6c,0,0,FUN_0013cb90,FUN_0013c1a0,puVar1);
+  asdProcessCreateSimple(&LAB_00139228,0x6c,0,0,renderSurfaceDownsampleJob,FUN_0013c1a0,puVar1);
   *puVar2 = (unsigned int)puVar4;
   taskCreateDraw(&LAB_00139234,0xce,0,0,FUN_0013cd7c,0,g_frameTex,puVar4);
   taskCreateDraw(&LAB_00139240,0x6d,0,0,FUN_0013c660,0,g_frameTex,*puVar2);
@@ -139,7 +139,7 @@ void FUN_00138e14(void)
   taskCreateDraw(&LAB_0013927c,0xd0,0,0,FUN_0013c7dc,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00139288,0x7b,0,0,FUN_0013db18,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00139294,0xd7,0,0,jobRenderOnce,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392a0,0x65,0,0,FUN_0013d0f0,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392a0,0x65,0,0,panelUpdateAnimatedScale,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392ac,0xcc,0,0,FUN_0013d2dc,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392b8,0x7a,0,0,FUN_0013ee80,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392c8,0xd6,0,0,FUN_0013ef3c,0,g_frameTex,*puVar2);

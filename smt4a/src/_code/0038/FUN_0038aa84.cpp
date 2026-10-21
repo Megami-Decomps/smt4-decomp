@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_00184964(int, int);
-int FUN_004ff364(int, int);
+int asdAnimGetTrackLastFrame(int, int);
 int resourceGetSampleFloat(void);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(unsigned int, int);
@@ -25,7 +25,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00184964. */
-/* Supplied declaration required: FUN_004ff364. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: resourceGetSampleFloat. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -118,7 +118,7 @@ int FUN_0038aa84(unsigned int *param_1,int param_2,int param_3,int param_4,int p
               *(short *)((int)param_1 + 0x1e) = (short)temp_v6;
               temp_v8 = *(int *)(param_3 + 0x20);
               if (-1 < temp_v0) {
-                FUN_004ff364(param_4 + temp_v0 * 0x48,0);
+                asdAnimGetTrackLastFrame(param_4 + temp_v0 * 0x48,0);
                 if (temp_v8 == 0) {
                   *(unsigned short *)(param_1 + 1) = 0;
                 }

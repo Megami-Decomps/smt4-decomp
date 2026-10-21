@@ -9,14 +9,14 @@ struct Obj003026b0 {
 };
 
 void handleBlockRefDrop(void *resource);
-void *FUN_002491b4(u32 arg);
+void *spriteGroupCreateFromFile(u32 arg);
 
 void objResourceReplace(Obj003026b0 *obj, u32 arg)
 {
     if (obj->resource != NULL) {
         handleBlockRefDrop(obj->resource);
     }
-    obj->resource = FUN_002491b4(arg);
+    obj->resource = spriteGroupCreateFromFile(arg);
 }
 
 }

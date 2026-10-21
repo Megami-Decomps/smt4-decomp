@@ -7,7 +7,7 @@ extern "C" {
 int memClear(unsigned int *, int);
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0044e330; /* 0x44e330 */
+extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
 extern int g_commandBufferCursor; /* 0x4652a0 */
 extern int g_commandBufferEnd; /* 0x4652a4 */
 extern unsigned int *DAT_004c632c; /* 0x4c632c */
@@ -33,12 +33,12 @@ void nngxBindCmdlist(unsigned int param_1,unsigned int param_2,unsigned int para
     }
   }
   if (param_1 != 0) {
-    if (DAT_0044e330 == (romwright_code *)0x0) {
+    if (g_gfxAllocateCallback == (romwright_code *)0x0) {
       puVar4 = (unsigned int *)0x0;
     }
     else {
       param_3 = 0;
-      puVar4 = (unsigned int *)(*DAT_0044e330)(0x10000,0x100,0,0x44);
+      puVar4 = (unsigned int *)(*g_gfxAllocateCallback)(0x10000,0x100,0,0x44);
     }
     memClear(puVar4,0x44);
     puVar4[0xb] = 0x300;

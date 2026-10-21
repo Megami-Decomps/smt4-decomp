@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern int DAT_004655c0;
+extern int g_textureBindingState;
 
 void FUN_00111ff8(void)
 {
-    if (DAT_004655c0 != 0) {
-        DAT_004655c0 = 0;
+    if (g_textureBindingState != 0) {
+        g_textureBindingState = 0;
     }
 }
 

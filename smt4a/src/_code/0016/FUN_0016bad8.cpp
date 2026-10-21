@@ -1,45 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016bad8` (_code @ 0x16bad8, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct WorkingElement {
+    u8 bytes[0x30];
+};
+
+struct WorkingVectorView {
+    WorkingElement *begin;
+    WorkingElement *end;
+    u8 unk08[0xac];
+    bool active; // 0xb4
+};
+
+struct Vector;
 
 extern "C" {
+void FUN_0016b824(WorkingVectorView *owner, s32 enabled);
+void FUN_0016b8a8(WorkingVectorView *owner, s32 enabled);
+void FUN_0016bde0(WorkingVectorView *owner, s32 enabled);
+void FUN_0016c058(WorkingVectorView *owner, WorkingElement *element);
+void vectorClear(Vector *vector);
 
-int FUN_0016b824(int *, int);
-int FUN_0016b8a8(int *, int);
-int FUN_0016bde0(int *, int);
-int FUN_0016c058(int *, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_0016b824. */
-/* Supplied declaration required: FUN_0016b8a8. */
-/* Supplied declaration required: FUN_0016bde0. */
-/* Supplied declaration required: FUN_0016c058. */
-
-
-void FUN_0016bad8(int *param_1)
-
+// Reset the working state and release each live vector element before clearing it.
+void FUN_0016bad8(WorkingVectorView *owner)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  *(unsigned char *)(param_1 + 0x2d) = 0;
-  FUN_0016bde0(param_1,0);
-  FUN_0016b824(param_1,0);
-  FUN_0016b8a8(param_1,0);
-  temp_v1 = param_1[1];
-  for (temp_v0 = *param_1; temp_v0 != temp_v1; temp_v0 = temp_v0 + 0x30) {
-    FUN_0016c058(param_1,temp_v0);
-  }
-  temp_v0 = param_1[1];
-  if (*param_1 != temp_v0) {
-    param_1[1] = temp_v0 + ((temp_v0 - *param_1) / 0x30) * -0x30;
-  }
-  return;
+    owner->active = false;
+    FUN_0016bde0(owner, 0);
+    FUN_0016b824(owner, 0);
+    FUN_0016b8a8(owner, 0);
+    WorkingElement *end = owner->end;
+    for (WorkingElement *element = owner->begin; element != end; ++element)
+        FUN_0016c058(owner, element);
+    vectorClear(reinterpret_cast<Vector *>(owner));
 }
-
-} /* extern "C" */
+}

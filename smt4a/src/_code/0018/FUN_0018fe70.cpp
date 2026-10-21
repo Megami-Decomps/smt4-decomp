@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001742e4(int *, unsigned int);
+int asdSoundObjectStop(int *, unsigned int);
 
-/* Supplied declaration required: FUN_001742e4. */
+/* Supplied declaration required: asdSoundObjectStop. */
 
 
 void FUN_0018fe70(int param_1,unsigned int param_2)
@@ -20,7 +20,7 @@ void FUN_0018fe70(int param_1,unsigned int param_2)
   if (piVar1 != (int *)(param_1 + 4)) {
     do {
       piVar2 = (int *)*piVar1;
-      FUN_001742e4(piVar1 + -0x40,param_2);
+      asdSoundObjectStop(piVar1 + -0x40,param_2);
       piVar1 = piVar2;
     } while (piVar2 != (int *)(param_1 + 4));
   }

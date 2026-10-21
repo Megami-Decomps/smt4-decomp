@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011bc64(void);
 int FUN_00122fcc(unsigned int, unsigned int, int);
 int asdOperatorDeleteArray(void);
-int FUN_002e6e26(void);
+int onlineContextGetInstance(void);
 int sharedRefAddRef(unsigned int);
 int operatorNew(int);
 int onlineStringConstruct(unsigned char [4], unsigned char *);
@@ -51,7 +51,7 @@ extern int *FUN_00116770(void);
 /* Supplied declaration required: FUN_0011bc64. */
 /* Supplied declaration required: FUN_00122fcc. */
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_002e6e26. */
+/* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: sharedRefAddRef. */
 /* Supplied declaration required: operatorNew. */
 /* Supplied declaration required: onlineStringConstruct. */
@@ -98,7 +98,7 @@ void FUN_0010e4dc(int param_1)
       onlineObjectThreadRootStart(temp_v0,0);
     }
   }
-  else if ((*(int *)(param_1 + 0x154) == 0) && (temp_v0 = FUN_002e6e26(), temp_v0 != 0)) {
+  else if ((*(int *)(param_1 + 0x154) == 0) && (temp_v0 = onlineContextGetInstance(), temp_v0 != 0)) {
     temp_v0 = operatorNew(0x40);
     if (temp_v0 != 0) {
       onlineStringConstruct(temp_v2,&LAB_0010e664);
@@ -114,7 +114,7 @@ void FUN_0010e4dc(int param_1)
       temp_v1 = 0;
     }
     sharedRefAddRef(temp_v1);
-    temp_v1 = FUN_002e6e26();
+    temp_v1 = onlineContextGetInstance();
     FUN_00122fcc(temp_v1,*(unsigned int *)(param_1 + 0x154),0);
   }
   if (DAT_0059496a != '\0') {

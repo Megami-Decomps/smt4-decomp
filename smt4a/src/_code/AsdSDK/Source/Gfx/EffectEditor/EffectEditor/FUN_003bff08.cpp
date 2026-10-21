@@ -15,7 +15,7 @@ int FUN_001bbde0(void);
 int FUN_001bc2f0(...);
 int FUN_001bc3e4(void);
 int FUN_00202178(...);
-int FUN_00243ce8(...);
+int asdDebugLog(...);
 int FUN_002b3ed8(...);
 int FUN_002f8794(void);
 int effMenuListAppend(...);
@@ -105,7 +105,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001bc2f0. */
 /* Supplied declaration required: FUN_001bc3e4. */
 /* Supplied declaration required: FUN_00202178. */
-/* Supplied declaration required: FUN_00243ce8. */
+/* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: FUN_002b3ed8. */
 /* Supplied declaration required: FUN_002f8794. */
 /* Supplied declaration required: effMenuListAppend. */
@@ -154,9 +154,9 @@ unsigned int FUN_003bff08(void)
   float temp_v31;
   
   temp_v12 = 1;
-  FUN_00243ce8(8,8,0,&LAB_003c02d8);
-  FUN_00243ce8(8,0x14,0,&LAB_003c02f0);
-  FUN_00243ce8(8,0x20,0,&LAB_003c0304);
+  asdDebugLog(8,8,0,&LAB_003c02d8);
+  asdDebugLog(8,0x14,0,&LAB_003c02f0);
+  asdDebugLog(8,0x20,0,&LAB_003c0304);
   temp_v9 = padButtonRepeat(5);
   if (temp_v9 == 0) {
     FUN_00202178(5);
@@ -473,7 +473,7 @@ LAB_003c01a8:
     DAT_00635304 = DAT_006472e0;
     DAT_00635308 = DAT_006472e4;
   }
-  FUN_00243ce8(8,0x30,0,&LAB_003c0768,DAT_0059dbe2 + 8,(int)DAT_0059dbe3,(int)DAT_0059dbe4);
+  asdDebugLog(8,0x30,0,&LAB_003c0768,DAT_0059dbe2 + 8,(int)DAT_0059dbe3,(int)DAT_0059dbe4);
   DAT_00634c48 = DAT_0059dbe2;
   DAT_00634c49 = DAT_0059dbe3;
   DAT_00634c4a = DAT_0059dbe4;

@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00227228(unsigned int);
+int objClearFields(unsigned int);
 int rangeInit(unsigned int, int, int);
 int VectorSignedToFloat(int, int);
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00227228. */
+/* Supplied declaration required: objClearFields. */
 extern int rangeIsValid(void);
 /* Supplied declaration required: rangeInit. */
 
@@ -41,7 +41,7 @@ void FUN_00226a90(int param_1,int param_2,int param_3)
         (psVar5 = (short *)(temp_v3 + temp_v2 * 0x10), psVar5[1] != 0)) && (*psVar5 == param_2)) {
       temp_v0 = rangeIsValid();
       if (temp_v0 == 0) {
-        FUN_00227228(*(unsigned int *)(param_1 + 0x3058));
+        objClearFields(*(unsigned int *)(param_1 + 0x3058));
       }
       VectorSignedToFloat((int)psVar5[3],(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)psVar5[2],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -52,7 +52,7 @@ void FUN_00226a90(int param_1,int param_2,int param_3)
        (*(short *)(temp_v0 + 8) == param_2)) {
       temp_v1 = rangeIsValid();
       if (temp_v1 == 0) {
-        FUN_00227228(*(unsigned int *)(param_1 + 0x305c));
+        objClearFields(*(unsigned int *)(param_1 + 0x305c));
       }
       VectorSignedToFloat((int)*(short *)(temp_v0 + 0xe),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v0 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);

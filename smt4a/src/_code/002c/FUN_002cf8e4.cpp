@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019af70(...);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int mapRenderApplySecondary(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,7 @@ extern signed char DAT_005f161d; /* 0x5f161d */
 
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019af70. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mapRenderApplySecondary. */
 
 
@@ -43,7 +43,7 @@ void FUN_002cf8e4(void)
     if ((DAT_005f161d == '\0' && temp_v0 == '\0') && (DAT_005f0ca8 == 8 || DAT_005f0ca8 == 9)) {
       mapRenderApplySecondary();
       temp_v1 = *(int *)(g_lmapScene + 0x1c);
-      FUN_002b5cb4();
+      distSpatial();
       if (temp_v1 < 0x43c80000) {
         temp_v2 = 0xef6c3eff;
         temp_v3 = 0xfe0b22ff;

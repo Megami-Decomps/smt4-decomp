@@ -16,7 +16,7 @@ typedef struct {
 extern unsigned char DAT_005806a0; /* 0x5806a0 */
 
 /* Supplied declaration required: FUN_00292b84. */
-extern int FUN_002d8ee0(void);
+extern int mapStateGet(void);
 /* Supplied declaration required: settings5BSetValue. */
 
 
@@ -54,7 +54,7 @@ void FUN_00352388(void)
   *(unsigned char *)(temp_v0 + 0x2b8) = 0;
   *(unsigned char *)(temp_v0 + 0x304) = 0;
   FUN_00292b84();
-  temp_v0 = FUN_002d8ee0();
+  temp_v0 = mapStateGet();
   if (temp_v0 != 0) {
     settings5BSetValue(1);
     return;

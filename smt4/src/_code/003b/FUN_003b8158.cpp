@@ -12,7 +12,7 @@ int FUN_00289880(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
 int FUN_0028d9b0(void);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int asdOperatorNew(void);
 int asdTMTexTableLoadTmx(int, int);
 int FUN_003bb0ac(void);
@@ -33,7 +33,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002898e4. */
 /* Supplied declaration required: buttonHelpCreate. */
 /* Supplied declaration required: FUN_0028d9b0. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern int FUN_002c2218(int);
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
@@ -63,10 +63,10 @@ void FUN_003b8158(int param_1)
   FUN_00240cec(0);
   FUN_003bbaf4(param_1 + 0xd58);
   spriteTable2aLoad(param_1 + 0x9c);
-  FUN_00297468("mikado/talk.bf",(unsigned int *)(param_1 + 0xd7c),0);
-  FUN_00297468("mikado/talk.mbm",param_1 + 0xd80,0);
-  FUN_00297468("mikado/check.bf",param_1 + 0xd88,0);
-  FUN_00297468("mikado/check.mbm",param_1 + 0xd8c,0);
+  asdLoadFileAsyncSimple("mikado/talk.bf",(unsigned int *)(param_1 + 0xd7c),0);
+  asdLoadFileAsyncSimple("mikado/talk.mbm",param_1 + 0xd80,0);
+  asdLoadFileAsyncSimple("mikado/check.bf",param_1 + 0xd88,0);
+  asdLoadFileAsyncSimple("mikado/check.mbm",param_1 + 0xd8c,0);
   *(unsigned int *)(param_1 + 0x28) = 1;
   *(unsigned int *)(param_1 + 0x2c) = 0;
   *(unsigned int *)(param_1 + 0xd74) = 0;

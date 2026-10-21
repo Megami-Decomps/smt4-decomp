@@ -5,7 +5,7 @@
 extern "C" {
 
 int uiSpriteSetKeyframe(int, int, int);
-int FUN_002a1f60(unsigned int, int, unsigned int, int, int, int, unsigned int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, int, unsigned int);
 int effectSpawnDefaultArguments(unsigned int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -18,7 +18,7 @@ extern int g_infoWin; /* 0x57f574 */
 
 extern int vec2GetXInt(int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: effectSpawnDefaultArguments. */
 
 
@@ -34,7 +34,7 @@ void FUN_002a49e4(int param_1,unsigned int param_2)
   *(unsigned char *)(g_infoWin + 0x31) = 0;
   if (param_1 != 0) {
     *(unsigned char *)(temp_v0 + 0x31) = 1;
-    FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x328),3,0xffffffff,0,3,param_1,param_2);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x328),3,0xffffffff,0,3,param_1,param_2);
     effectSpawnDefaultArguments(*(unsigned int *)(temp_v0 + 0x328));
     if ((int)in_s0 >= 0x43a68000) {
       *(unsigned char *)(temp_v0 + 0x32) = 1;

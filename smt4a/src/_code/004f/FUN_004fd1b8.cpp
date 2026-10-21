@@ -1,30 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fd1b8` (_code @ 0x4fd1b8, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match2_ReflectAction.h"
 
 extern "C" {
+ReflectAction *FUN_004102d8(ReflectContext *context, s32 actor, s32 mode, u32 flags);
 
-int FUN_004102d8(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x5712f0 */
-
-/* Supplied declaration required: FUN_004102d8. */
-
-
-void FUN_004fd1b8(short param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5)
-
+// Configure reflect action 22 with its value and two word parameters.
+void FUN_004fd1b8(s32 actor, u32 flags, u32 value, u32 parameter, u32 auxiliary)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_004102d8(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x16;
-  *(unsigned int *)(temp_v0 + 0x28) = param_3;
-  *(unsigned int *)(temp_v0 + 0x18) = param_5;
-  *(unsigned int *)(temp_v0 + 0x4c) = param_4;
-  return;
+    ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, flags);
+    action->kind = 22;
+    action->value = value;
+    action->wordValues.unk18 = auxiliary;
+    action->parameter = parameter;
 }
-
-} /* extern "C" */
+}

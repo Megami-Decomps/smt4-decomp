@@ -10,6 +10,8 @@ typedef struct GameDataSub {
     /* 0x27E0C */ u8 unk27e0c[2];
     /* 0x27E0E */ u8 flag0e;
     /* 0x27E0F */ u8 flags;
+    /* 0x27E10 */ u8 unk27e10[0x40];
+    /* 0x27E50 */ u8 entryFlags[0x3f];
 } GameDataSub;
 
 typedef struct GameDataBlock {

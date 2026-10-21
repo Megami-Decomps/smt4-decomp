@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231bb8(unsigned int, float *);
+int pairCopy(unsigned int, float *);
 int FUN_00290994(int, int, int, int, int, int, int, int, int, int, int, int, int, int, unsigned int, int);
 
 typedef struct fn_003aaa6c_arg0 fn_003aaa6c_arg0;
@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00290994. */
 
 
@@ -44,7 +44,7 @@ void FUN_003aaa6c(fn_003aaa6c_arg0 *param_1,unsigned int param_2)
   float fStack_1c;
   
   if (param_1->field_0x50 != 0) {
-    FUN_00231bb8(*(unsigned int *)&param_1[1].field_0x8,&temp_v0);
+    pairCopy(*(unsigned int *)&param_1[1].field_0x8,&temp_v0);
     FUN_00290994(param_1->field_0x50,(int)temp_v0,(int)fStack_1c,0x1d,0x56a,0x56b,0x56c,0x566,0x568
                  ,0x567,0x569,(int)param_1->field_0x58,(int)param_1->field_0x54,
                  (int)param_1->field_0x56,param_2,0);

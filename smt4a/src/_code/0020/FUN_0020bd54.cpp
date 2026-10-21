@@ -7,7 +7,7 @@ extern "C" {
 int fadeObjectResetIfActive(...);
 
 int FUN_00164b5c(...);
-int FUN_0018291c(...);
+int quadSetOrderedVectors(...);
 int FUN_001835b4(...);
 int FUN_002f5020(float [24], unsigned char *, int, int);
 int VectorFloatToUnsigned(double, int);
@@ -58,7 +58,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0018291c. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
@@ -193,7 +193,7 @@ void FUN_0020bd54(void)
         temp_v40 = temp_v27;
         temp_v41 = temp_v28;
         temp_v42 = temp_v29;
-        FUN_0018291c(&temp_v39,&temp_v30,&temp_v34,&temp_v26,0,1);
+        quadSetOrderedVectors(&temp_v39,&temp_v30,&temp_v34,&temp_v26,0,1);
         temp_v0 = *(char *)(temp_v5 + temp_v7 * 4 + 0x5ac);
         if (((!(temp_v0 == '\a' || temp_v0 == '\n')) && (!(temp_v0 == '\v' || temp_v0 == '\f'))) &&
            ((!(temp_v0 == '\r' || temp_v0 == '\x0e') &&
@@ -286,7 +286,7 @@ void FUN_0020bd54(void)
           temp_v40 = temp_v27;
           temp_v41 = temp_v28;
           temp_v42 = temp_v29;
-          FUN_0018291c(&temp_v26,&temp_v30,&temp_v34,&temp_v39,0,1);
+          quadSetOrderedVectors(&temp_v26,&temp_v30,&temp_v34,&temp_v39,0,1);
         }
         temp_v0 = acStack_58[temp_v7];
         if (acStack_60[temp_v7] != '\0') {
@@ -434,7 +434,7 @@ LAB_0020c3d4:
               temp_v42 = temp_v27;
               temp_v43 = temp_v28;
               temp_v44 = temp_v29;
-              FUN_0018291c(&temp_v41,&temp_v26,&temp_v30,&temp_v34,0,1);
+              quadSetOrderedVectors(&temp_v41,&temp_v26,&temp_v30,&temp_v34,0,1);
               FUN_001835b4(2,10,temp_v22,temp_v20,temp_v9,0x10);
               temp_v12 = temp_v6 - 0x100;
               temp_v17 = (float)VectorUnsignedToFloat(temp_v12 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -461,7 +461,7 @@ LAB_0020c3d4:
               temp_v42 = temp_v27;
               temp_v43 = temp_v28;
               temp_v44 = temp_v29;
-              FUN_0018291c(&temp_v34,&temp_v30,&temp_v26,&temp_v41,0,1);
+              quadSetOrderedVectors(&temp_v34,&temp_v30,&temp_v26,&temp_v41,0,1);
             }
             else {
               FUN_001835b4(2,10,temp_v22,temp_v20,temp_v9,0x10);
@@ -510,7 +510,7 @@ LAB_0020c7bc:
           temp_v40 = temp_v27;
           temp_v41 = temp_v28;
           temp_v42 = temp_v29;
-          FUN_0018291c(&temp_v26,&temp_v30,&temp_v34,&temp_v39,0,1);
+          quadSetOrderedVectors(&temp_v26,&temp_v30,&temp_v34,&temp_v39,0,1);
           FUN_001835b4(2,10,temp_v3,temp_v10,temp_v9,0xd);
           temp_v6 = temp_v6 - 0x100;
           temp_v17 = (float)VectorUnsignedToFloat(temp_v6 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -536,7 +536,7 @@ LAB_0020c7bc:
           temp_v40 = temp_v27;
           temp_v41 = temp_v28;
           temp_v42 = temp_v29;
-          FUN_0018291c(&temp_v39,&temp_v34,&temp_v30,&temp_v26,0,1);
+          quadSetOrderedVectors(&temp_v39,&temp_v34,&temp_v30,&temp_v26,0,1);
         }
       }
 LAB_0020c98c:
@@ -574,7 +574,7 @@ LAB_0020c98c:
           temp_v40 = temp_v25;
           temp_v41 = temp_v26;
           temp_v42 = temp_v27;
-          FUN_0018291c(&temp_v24,&temp_v28,&temp_v32,&temp_v39,0,1);
+          quadSetOrderedVectors(&temp_v24,&temp_v28,&temp_v32,&temp_v39,0,1);
         }
         fadeObjectResetIfActive(temp_v5 + temp_v7 * 0x8c + 0x34);
       }

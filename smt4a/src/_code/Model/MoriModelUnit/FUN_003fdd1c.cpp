@@ -9,7 +9,7 @@ int asdMemoryAlloc(...);
 int FUN_0018eb44(void);
 int asdMemoryAllocAligned(...);
 int FUN_001c3bb8(...);
-int FUN_005072d4(unsigned int, int *, unsigned int [2]);
+int resourceCalculateWorkspaceSizes(unsigned int, int *, unsigned int [2]);
 int FUN_005074e8(...);
 int FUN_00507868(...);
 int FUN_005078e4(...);
@@ -67,7 +67,7 @@ extern unsigned char LAB_003fe290; /* 0x3fe290 */
 /* Supplied declaration required: FUN_0018eb44. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: FUN_001c3bb8. */
-/* Supplied declaration required: FUN_005072d4. */
+/* Supplied declaration required: resourceCalculateWorkspaceSizes. */
 /* Supplied declaration required: FUN_005074e8. */
 /* Supplied declaration required: FUN_00507868. */
 /* Supplied declaration required: FUN_005078e4. */
@@ -143,7 +143,7 @@ void FUN_003fdd1c(int param_1,unsigned int param_2)
   temp_v28 = 0;
   temp_v29 = 0;
   temp_v30 = 0;
-  FUN_005072d4(*(unsigned int *)(param_1 + 0x210),&temp_v7,temp_v35);
+  resourceCalculateWorkspaceSizes(*(unsigned int *)(param_1 + 0x210),&temp_v7,temp_v35);
   temp_v0 = 0x100;
   asdMemoryAllocAligned(0x100,0x100,0,temp_v10 + temp_v11 + temp_v7 + temp_v9 + temp_v12,4,1);
   *(unsigned int *)(param_1 + 0x260) = temp_v0;

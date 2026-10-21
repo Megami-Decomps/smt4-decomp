@@ -1,33 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004218dc` (_code @ 0x4218dc, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: constructor requires native C1/class and sized-vtable naming integration; unit renaming is outside this worker's permissions. */
+#include "common.h"
+
+struct PolymorphicDefaults {
+    const void *vtable;
+    u32 unk04;
+    u32 unk08;
+    u32 first[3]; // 0x0c
+    u32 second[3]; // 0x18
+    u32 third[3]; // 0x24
+    f32 factor; // 0x30
+    f32 components[3]; // 0x34
+    u16 flags; // 0x40
+};
 
 extern "C" {
+extern const u8 DAT_00557e74[];
 
-extern unsigned char DAT_00557e74; /* 0x557e74 */
-
-
-void FUN_004218dc(unsigned int *param_1)
-
+void FUN_004218dc(PolymorphicDefaults *object)
 {
-  param_1[1] = 0;
-  *param_1 = (unsigned int)&DAT_00557e74;
-  param_1[2] = 0;
-  param_1[9] = 0;
-  param_1[10] = 0;
-  param_1[0xb] = 0;
-  param_1[0xc] = 0x3f800000;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0xf] = 0;
-  *(unsigned short *)(param_1 + 0x10) = 7;
-  param_1[3] = 0;
-  param_1[6] = 0;
-  param_1[4] = 0;
-  param_1[7] = 0;
-  param_1[5] = 0;
-  param_1[8] = 0;
-  return;
+    object->unk04 = 0;
+    object->vtable = DAT_00557e74;
+    object->unk08 = 0;
+    object->third[0] = 0;
+    object->third[1] = 0;
+    object->third[2] = 0;
+    object->factor = 1.0f;
+    object->components[0] = 0.0f;
+    object->components[1] = 0.0f;
+    object->components[2] = 0.0f;
+    object->flags = 7;
+    object->first[0] = 0;
+    object->second[0] = 0;
+    object->first[1] = 0;
+    object->second[1] = 0;
+    object->first[2] = 0;
+    object->second[2] = 0;
 }
-
-} /* extern "C" */
+}

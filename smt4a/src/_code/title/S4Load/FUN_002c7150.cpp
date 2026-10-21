@@ -8,7 +8,7 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int asdMemoryAlloc(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002a2d14(...);
 int rt_aeabi_memclr(...);
 
@@ -37,7 +37,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002a2d14. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 
@@ -66,8 +66,8 @@ unsigned int FUN_002c7150(void)
   puVar1[0x27] = 0;
   puVar1[0x28] = 1;
   *(unsigned char *)(puVar1 + 0xad) = 0;
-  FUN_002804b0(&LAB_002c7314,puVar1 + 0xaa,0);
-  FUN_002804b0(&LAB_002c7324,puVar1 + 0xab,0);
+  asdLoadFileAsyncSimple(&LAB_002c7314,puVar1 + 0xaa,0);
+  asdLoadFileAsyncSimple(&LAB_002c7324,puVar1 + 0xab,0);
   puVar1[6] = 0x80;
   puVar1[0xac] = 0;
   temp_v0 = 0x100;

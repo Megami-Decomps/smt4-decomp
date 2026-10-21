@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00413144` (_code @ 0x413144, 0x390 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_Obj55ac68.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_0011b634(...);
 int FUN_00120648(...);
 int asdOperatorDeleteArray(...);
 int operatorNew(...);
-int onlineStringDestroy(...);
 int onlineStringAssign(int, unsigned int);
 int FUN_002f4cac(...);
 int FUN_002f4cd6(...);
@@ -20,7 +20,6 @@ int FUN_00303928(...);
 int FUN_00387edc(...);
 int FUN_004311c0(...);
 int _ZN9Obj55aad4D1Ev(...);
-int FUN_0043387c(...);
 int _ZN9Obj55ac68D1Ev(...);
 int FUN_00522a48(...);
 int FUN_00522bf4(...);
@@ -59,7 +58,7 @@ typedef struct {
 
 extern unsigned char LAB_004134dc; /* 0x4134dc */
 extern unsigned char LAB_004134e8; /* 0x4134e8 */
-extern int FUN_0041442c(...); /* 0x41442c */
+extern int referenceOwnerCopyAndAdvance(...); /* 0x41442c */
 extern unsigned char DAT_0055a30c; /* 0x55a30c */
 extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
 extern unsigned char DAT_0055aadc; /* 0x55aadc */
@@ -71,11 +70,10 @@ extern unsigned char DAT_0055cacc; /* 0x55cacc */
 /* Supplied declaration required: FUN_0011b272. */
 /* Supplied declaration required: FUN_0011b634. */
 /* Supplied declaration required: FUN_00120648. */
-extern int FUN_00237608(void);
+extern int campCecHasObject(void);
 extern unsigned int FUN_002bf520(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
 /* Supplied declaration required: operatorNew. */
-extern unsigned int onlineStringConstruct(unsigned char *, unsigned char *);
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: onlineStringAssign. */
 extern int _ZN9Obj55aff4C1Ev(unsigned char *);
@@ -89,7 +87,6 @@ extern int FUN_0030395c(int, unsigned int);
 /* Supplied declaration required: FUN_00387edc. */
 /* Supplied declaration required: FUN_004311c0. */
 /* Supplied declaration required: _ZN9Obj55aad4D1Ev. */
-/* Supplied declaration required: FUN_0043387c. */
 /* Supplied declaration required: _ZN9Obj55ac68D1Ev. */
 /* Supplied declaration required: FUN_00522a48. */
 /* Supplied declaration required: FUN_00522bf4. */
@@ -127,9 +124,6 @@ void FUN_00413144(int param_1)
   unsigned int temp_v21;
   unsigned int temp_v22;
   unsigned char temp_v23 [100];
-  int temp_v24;
-  unsigned int temp_v25;
-  unsigned int temp_v26;
   int temp_v27;
   unsigned int temp_v28;
   unsigned int temp_v29;
@@ -147,22 +141,23 @@ void FUN_00413144(int param_1)
   temp_v13 = 0;
   temp_v0 = FUN_00303928(temp_v0 + 8,3,&temp_v11);
   asdOperatorDeleteArray(temp_v11);
-  temp_v24 = 0;
-  temp_v25 = 0;
-  temp_v26 = 0;
-  temp_v0 = FUN_00303928(temp_v0 + 0x14,3,&temp_v24);
-  asdOperatorDeleteArray(temp_v24);
+  {
+    OnlineWordVectorStorage empty = { NULL, NULL, NULL };
+    temp_v0 = FUN_00303928(temp_v0 + 0x14, 3, &empty);
+    asdOperatorDeleteArray(empty.begin);
+  }
   temp_v0 = FUN_003038fc(temp_v0 + 0x18,0);
   temp_v0 = FUN_0030395c(temp_v0 + 0x20,0);
   temp_v0 = temp_v0 + 0x20;
-  FUN_0043387c();
+  temp_v0 = reinterpret_cast<int>(FUN_0043387c(
+      reinterpret_cast<Obj55ac68Storage*>(temp_v0)));
   *(unsigned char **)(temp_v0 - 0x88) = &DAT_0055a30c;
   *(unsigned int *)(temp_v0 - 0x80) = 0;
   *(unsigned int *)(temp_v0 - 0x7c) = 0;
   *(unsigned int *)(temp_v0 - 0x78) = 0;
-  temp_v1 = onlineStringConstruct(temp_v34,&LAB_004134dc);
+  temp_v1 = (u32)onlineStringConstruct((OnlineStringValue*)temp_v34,(const char*)&LAB_004134dc);
   onlineStringAssign(temp_v0 - 0x74,temp_v1);
-  onlineStringDestroy(temp_v34);
+  onlineStringDestroy((OnlineStringValue*)temp_v34);
   temp_v27 = 0;
   temp_v28 = 0;
   temp_v29 = 0;
@@ -194,14 +189,14 @@ void FUN_00413144(int param_1)
   *(unsigned int *)(temp_v0 - 0xc) = 0;
   *(unsigned short *)(temp_v0 - 4) = 0;
   *(unsigned char *)(temp_v0 - 2) = 0;
-  puVar4 = (unsigned int *)&temp_v24;
+  Obj55ac68Storage initialState;
   *(unsigned int *)(temp_v0 - 8) = 0;
-  FUN_0043387c(puVar4);
-  FUN_00120648(temp_v0,puVar4);
-  _ZN9Obj55ac68D1Ev(&temp_v24);
+  FUN_0043387c(&initialState);
+  FUN_00120648(temp_v0, &initialState);
+  _ZN9Obj55ac68D1Ev(&initialState);
   temp_v5 = *(unsigned int *)(param_1 + 0x90);
   uStack_254 = *(unsigned int *)(param_1 + 0x94);
-  temp_v0 = FUN_00237608();
+  temp_v0 = campCecHasObject();
   if (temp_v0 != 0) {
     temp_v1 = FUN_002bf520();
     rt_memcpy_w(temp_v23,temp_v1,100);
@@ -225,7 +220,7 @@ void FUN_00413144(int param_1)
   textFormatBuffer(&temp_v17,&LAB_004134e8,temp_v1,temp_v2);
   temp_v1 = FUN_002ea100(temp_v30,(unsigned int *)&temp_v17);
   FUN_00522a48(&temp_v14,temp_v1);
-  onlineStringDestroy(temp_v30);
+  onlineStringDestroy((OnlineStringValue*)temp_v30);
   FUN_00522bf4(temp_v9,&temp_v14);
   temp_v6 = 0x70;
   temp_v0 = operatorNew(0x78);
@@ -237,7 +232,7 @@ void FUN_00413144(int param_1)
   }
   puVar4 = (unsigned int *)operatorNew(0x14);
   if (puVar4 != (unsigned int *)0x0) {
-    puVar4[2] = (unsigned int)FUN_0041442c;
+    puVar4[2] = (unsigned int)referenceOwnerCopyAndAdvance;
     puVar4[3] = 0;
     puVar4[4] = temp_v1;
     *puVar4 = (unsigned int)&DAT_0055cacc;

@@ -8,7 +8,7 @@ int textFormatBuffer(int *, unsigned char *, unsigned int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_004d854c(unsigned int);
 int callOnHandleField4D(unsigned int);
-int FUN_004d881c(void);
+int modelOwnerLoadNamed(void);
 
 /* stack frame of void: 16 slot(s), 64 byte(s) */
 typedef struct {
@@ -41,8 +41,8 @@ extern int scrGetCommandFrame(void);
 /* Supplied declaration required: FUN_004d854c. */
 extern int FUN_004d87e4(unsigned int);
 /* Supplied declaration required: callOnHandleField4D. */
-/* Supplied declaration required: FUN_004d881c. */
-extern unsigned int clearWord(void);
+/* Supplied declaration required: modelOwnerLoadNamed. */
+extern unsigned int *battleModelOwnerInitialize(unsigned int *value);
 
 
 unsigned int FUN_003a9540(void)
@@ -100,14 +100,13 @@ unsigned int FUN_003a9540(void)
     temp_v18 = 0;
     textFormatBuffer(&temp_v3,&LAB_003a9644,temp_v2);
     if (*(int *)(temp_v0 + 0x2298) == 0) {
-      temp_v1 = 0x24;
-      FUN_00178b04(0x24,&LAB_003a965c,0x54b);
+      temp_v1 = FUN_00178b04(0x24,&LAB_003a965c,0x54b);
       temp_v2 = 0;
       if (temp_v1 != 0) {
-        temp_v2 = clearWord();
+        temp_v2 = (unsigned int)battleModelOwnerInitialize((unsigned int *)temp_v1);
       }
       *(unsigned int *)(temp_v0 + 0x2298) = temp_v2;
-      FUN_004d881c();
+      modelOwnerLoadNamed();
       return 0;
     }
   }

@@ -24,7 +24,7 @@ typedef struct EditorOffsets0031ba38 {
 
 void FUN_002f2aa8(EditorObject0031ba38 *object);
 s32 linkedFindItemByIndex(u32 source, s32 offset);
-void FUN_002f2e88(EditorObject0031ba38 *object, s32 offset);
+void namedObjectFormatName(EditorObject0031ba38 *object, s32 offset);
 void asdMemoryFreeLocked(EditorObject0031ba38 *object);
 
 extern EffectEditor0031ba38 g_effectEditor; /* 0x44ea80 */
@@ -37,7 +37,7 @@ u32 effectEditorUpdate(void)
 
     FUN_002f2aa8(g_effectEditor.object);
     data = linkedFindItemByIndex(g_effectEditor.source, g_effectEditor.baseOffset + DAT_0044f858.extraOffset);
-    FUN_002f2e88(g_effectEditor.object, data + 0x9c);
+    namedObjectFormatName(g_effectEditor.object, data + 0x9c);
     if (g_effectEditor.object->state == 2 || g_effectEditor.object->state == 1) {
         asdMemoryFreeLocked(g_effectEditor.object);
         g_effectEditor.object = NULL;

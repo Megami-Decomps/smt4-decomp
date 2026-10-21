@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001634b4(...);
 int efctSetSpeed(void);
 int FUN_001835b4(int, int, int, int, int, int);
-int FUN_00184c40(int, int, int);
+int pairSetHalves(int, int, int);
 int FUN_001879d0(int);
 int FUN_001a1ee0(int);
 int FUN_00387240(...);
@@ -29,7 +29,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_00387240. */
@@ -124,10 +124,10 @@ void FUN_003b21a4(int param_1)
     *(unsigned char *)(param_1 + 0x200) = 0;
     temp_v3 = (int)temp_v4;
     temp_v1 = (int)temp_v5;
-    FUN_00184c40(param_1 + 0x20,temp_v1,temp_v3);
-    FUN_00184c40(param_1 + 0xac,temp_v1,temp_v3);
-    FUN_00184c40(param_1 + 0x368,temp_v1,temp_v3);
-    FUN_00184c40(param_1 + 0x1c4,temp_v1,temp_v3);
+    pairSetHalves(param_1 + 0x20,temp_v1,temp_v3);
+    pairSetHalves(param_1 + 0xac,temp_v1,temp_v3);
+    pairSetHalves(param_1 + 0x368,temp_v1,temp_v3);
+    pairSetHalves(param_1 + 0x1c4,temp_v1,temp_v3);
   }
   VectorSignedToFloat(temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001634b4(param_1 + 0x20);

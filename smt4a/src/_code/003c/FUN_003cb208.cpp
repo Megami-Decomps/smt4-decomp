@@ -1,40 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cb208` (_code @ 0x3cb208, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct Geometry;
+struct GeometryEntry {
+    Geometry *geometry; // 0x00
+    u32 unk04;
+    u32 unk08;
+};
+struct GeometryAllocation {
+    GeometryEntry *entries; // 0x00
+};
+struct GeometryMetadata {
+    u8 unk00[0x38];
+    u32 count; // 0x38
+};
+struct GeometryOwner {
+    u8 unk00[0x30];
+    GeometryAllocation *allocation; // 0x30
+    GeometryMetadata *metadata; // 0x34
+};
 
 extern "C" {
+void geometryDestroy(Geometry *);
+void asdMemFree(void *);
 
-int asdMemFree(unsigned int *);
-int geometryDestroy(unsigned int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_1_stack;
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: geometryDestroy. */
-
-
-void FUN_003cb208(int param_1)
-
+// Destroy each geometry and free the allocation that owns its entry array.
+void FUN_003cb208(GeometryOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  
-  temp_v0 = 0;
-  puVar4 = *(unsigned int **)(param_1 + 0x30);
-  puVar1 = (unsigned int *)*puVar4;
-  temp_v1 = *(unsigned int *)(*(int *)(param_1 + 0x34) + 0x38);
-  for (temp_v0 = 0; temp_v0 < temp_v1; temp_v0++) {
-    geometryDestroy(*puVar1);
-    puVar1 = puVar1 + 3;
-  }
-  asdMemFree(puVar4);
-  return;
+    GeometryAllocation *allocation = owner->allocation;
+    GeometryEntry *entry = allocation->entries;
+    u32 count = owner->metadata->count;
+    for (u32 i = 0; i < count; ++i, ++entry)
+        geometryDestroy(entry->geometry);
+    asdMemFree(allocation);
 }
-
-} /* extern "C" */
+}

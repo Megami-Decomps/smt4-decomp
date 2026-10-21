@@ -1,36 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023f27c` (_code @ 0x23f27c, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match2_ReflectAction.h"
 
 extern "C" {
+ReflectAction *FUN_0022699c(ReflectContext *context, s32 actor, s32 mode, u32 source);
 
-int FUN_0022699c(int, int, int, unsigned int);
-
-extern int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_0022699c. */
-
-
-unsigned int
-FUN_0023f27c(short param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-            unsigned int param_5,unsigned short param_6,unsigned short param_7,unsigned short param_8,
-            unsigned short param_9)
-
+// Create the target-object action and populate its four additional IDs.
+u32 FUN_0023f27c(s32 actor, u32 source, u32 value, u32 parameter, void *target,
+                 s32 first, s32 second, s32 third, s32 fourth)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = g_btlActionReflect;
-  FUN_0022699c(g_btlActionReflect,(int)param_1,0,param_2);
-  *(unsigned char *)(temp_v0 + 4) = 0x15;
-  *(unsigned int *)(temp_v0 + 0x14) = param_5;
-  *(unsigned int *)(temp_v0 + 0x28) = param_3;
-  *(unsigned int *)(temp_v0 + 0x4c) = param_4;
-  *(unsigned short *)(temp_v0 + 0x24) = param_6;
-  *(unsigned short *)(temp_v0 + 0x26) = param_7;
-  *(unsigned short *)(temp_v0 + 0x48) = param_8;
-  *(unsigned short *)(temp_v0 + 0x4a) = param_9;
-  return 1;
+    ReflectAction *action = FUN_0022699c(g_btlActionReflect, (s16)actor, 0, source);
+    action->kind = 0x15;
+    action->target = reinterpret_cast<u32>(target);
+    action->value = value;
+    action->parameter = parameter;
+    action->first = first;
+    action->second = second;
+    action->extraIds.third = third;
+    action->extraIds.fourth = fourth;
+    return 1;
 }
-
-} /* extern "C" */
+}

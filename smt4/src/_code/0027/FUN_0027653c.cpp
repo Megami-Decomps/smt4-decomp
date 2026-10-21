@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00276540(void);
+void mapPerFrameUpdate(void);
 
-/* Forwards to FUN_00276540, the function that follows it. */
+/* Forwards to mapPerFrameUpdate, the function that follows it. */
 void FUN_0027653c(void)
 {
-    FUN_00276540();
+    mapPerFrameUpdate();
 }
 
 } /* extern "C" */

@@ -7,12 +7,12 @@ extern "C" {
 int FUN_00126fb8(int);
 int FUN_00297060(int, unsigned int);
 int FUN_002a126c(unsigned char [4], unsigned int);
-int FUN_002baa40(unsigned int *, int);
+int resultPairInitialize(unsigned int *, int);
 int memClear(int, int);
 int asdTMTexTableLoadSprites(int);
 int FUN_002c58c8(int, int);
 int FUN_0036196c(void);
-int FUN_0038f738(int);
+void aocMenuInitializePanelSprites(void *context);
 int rt_memcpy_w(int, unsigned char *, int);
 
 typedef int romwright_code(...);
@@ -29,15 +29,14 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 /* Supplied declaration required: FUN_00297060. */
 /* Supplied declaration required: FUN_002a126c. */
 extern unsigned int fileSlotGetBuffer(unsigned int);
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_002bad5c(unsigned char *);
-extern unsigned int FUN_002c3124(char *, unsigned char *, unsigned int);
+extern unsigned int fileLoadSync(char *, unsigned char *, unsigned int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_002c58c8. */
 extern int FUN_00361960(void);
 /* Supplied declaration required: FUN_0036196c. */
-/* Supplied declaration required: FUN_0038f738. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -68,7 +67,7 @@ void FUN_00390038(int param_1)
   puVar2[2] = 0;
   puVar2[3] = 0;
   puVar3 = temp_v8;
-  FUN_002baa40(puVar3,0);
+  resultPairInitialize(puVar3,0);
   temp_v1 = *puVar3;
   temp_v2 = puVar3[1];
   *puVar2 = temp_v1;
@@ -80,14 +79,14 @@ void FUN_00390038(int param_1)
   *(unsigned int *)(param_1 + 0x218) = temp_v2;
   *(unsigned int *)(param_1 + 0x21c) = temp_v3;
   *(unsigned int *)(param_1 + 0x220) = temp_v4;
-  FUN_0038f738(param_1);
+  aocMenuInitializePanelSprites((void *)param_1);
   asdTMTexTableLoadSprites(0x3a);
   temp_v0 = 0;
   do {
     FUN_002c58c8(0x3a,temp_v0);
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
-  temp_v1 = FUN_002c3124("addon/aoc_scr.bf",temp_v7,0);
+  temp_v1 = fileLoadSync("addon/aoc_scr.bf",temp_v7,0);
   *(unsigned int *)(param_1 + 0x350) = temp_v1;
   temp_v1 = fileSlotGetBuffer(0x41);
   *(unsigned int *)(param_1 + 0x354) = temp_v1;

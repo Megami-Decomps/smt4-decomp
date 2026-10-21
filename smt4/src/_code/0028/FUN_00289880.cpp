@@ -1,34 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00289880` (_code @ 0x289880, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_CommonBackground.h"
 
 extern "C" {
+s32 jobIsValid(u32);
+void jobStop(u32, s32);
 
-int jobStop(unsigned int, int);
-
-extern int DAT_0043dc24; /* 0x43dc24 */
-extern unsigned char g_commonBg; /* 0x43dc20 */
-
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: jobStop. */
-
-
+// Stop the background's child job and begin its mode-one transition.
 void FUN_00289880(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = DAT_0043dc24;
-  if (((*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8)) != (unsigned int *)0x0) && (temp_v1 = jobIsValid(*(*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8))), temp_v1 != 0)) {
-    jobStop(*(*(unsigned int * *)((unsigned char *)&g_commonBg + 0x8)),0);
-  }
-  *(unsigned int *)(temp_v0 + 8) = 3;
-  *(unsigned int *)(temp_v0 + 0xc) = 1;
-  *(unsigned int *)(temp_v0 + 0x10) = 0;
-  *(unsigned int *)(temp_v0 + 0x14) = 0;
-  return;
+    CommonBackgroundState *background = g_commonBg.background;
+    if (g_commonBg.child != NULL && jobIsValid(g_commonBg.child->job))
+        jobStop(g_commonBg.child->job, 0);
+    background->unk0c = 1;
+    background->state = 3;
+    background->progress = 0.0f;
+    background->timer = 0;
 }
-
-} /* extern "C" */
+}

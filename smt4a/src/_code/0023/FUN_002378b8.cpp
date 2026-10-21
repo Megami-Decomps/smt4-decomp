@@ -1,36 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002378b8` (_code @ 0x2378b8, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains an unfolded 21-to-5 mode remapping and keeps the result in r4 across getters; direct mode-five source is folded and uses a smaller frame. */
+#include "common.h"
+
+struct ScriptTransitionContext;
 
 extern "C" {
+ScriptTransitionContext* FUN_002ba85c();
+u32 scrGetArg(u32 index);
+u32 scrGetCommandFrame();
+void FUN_0021bdac(ScriptTransitionContext* context, u32 argument, u32 frame, s32 mode, s32 first, s32 second);
 
-int FUN_0021bdac(unsigned int, unsigned int, unsigned int, int, int, int);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: FUN_0021bdac. */
-extern unsigned int scrGetArg(unsigned int);
-extern unsigned int FUN_002ba85c(void);
-extern unsigned int scrGetCommandFrame(void);
-
-
-void FUN_002378b8(void)
-
+// Submit the script argument and frame to the mode-five transition.
+void FUN_002378b8()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_002ba85c();
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetCommandFrame();
-  FUN_0021bdac(temp_v0,temp_v1,temp_v2,5,0,0);
-  return;
+    ScriptTransitionContext* context = FUN_002ba85c();
+    u32 argument = scrGetArg(0);
+    u32 frame = scrGetCommandFrame();
+    FUN_0021bdac(context, argument, frame, 5, 0, 0);
 }
-
-} /* extern "C" */
+}

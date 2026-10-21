@@ -1,40 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024b830` (_code @ 0x24b830, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores the new state before masking/converting through R0; compiled code masks and transfers to S0 before the final two stores. */
+#include "shard/W5_W5Match2_ShiftRandom.h"
 
 extern "C" {
+extern ShiftRandomState DAT_004d9748;
 
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-
-
-unsigned int FUN_0024b830(unsigned int *param_1)
-
+// Advances the four-word shift generator and returns a 24-bit fraction in [0, 1).
+f32 FUN_0024b830(ShiftRandomState* state)
 {
-/* irregular: irregular input(s): in_fpscr; 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int in_fpscr;
-  
-  if (param_1 == (unsigned int *)0x0) {
-    param_1 = (unsigned int *)0x4d9748;
-  }
-  temp_v0 = param_1[1];
-  temp_v1 = param_1[2];
-  param_1[2] = temp_v0;
-  param_1[1] = *param_1;
-  temp_v0 = ((temp_v0 << 2) | (*param_1 >> 0x1e)) ^ ((param_1[3] << 1) | (temp_v1 >> 0x1f));
-  *param_1 = temp_v0;
-  param_1[3] = temp_v1;
-  temp_v0 = temp_v0 & 0xffffff;
-  VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-  return temp_v0;
+    if (state == NULL) {
+        state = &DAT_004d9748;
+    }
+    u32 first = state->first;
+    u32 second = state->second;
+    u32 third = state->third;
+    u32 fourth = state->fourth;
+    state->third = second;
+    state->second = first;
+    u32 next = ((second << 2) | (first >> 30)) ^ ((fourth << 1) | (third >> 31));
+    state->first = next;
+    state->fourth = third;
+    return static_cast<f32>(next & 0xffffff) * (1.0f / 16777216.0f);
 }
-
-} /* extern "C" */
+}

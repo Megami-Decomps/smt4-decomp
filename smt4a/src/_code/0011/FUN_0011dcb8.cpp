@@ -15,7 +15,7 @@ int sharedRefHolderDestroy2(unsigned char [24]);
 int clearWords2Alt(unsigned char [8]);
 int FUN_00303038(unsigned char [24], unsigned char [32]);
 int FUN_00303088(unsigned char [8]);
-int FUN_003031e4(unsigned char [24], int *);
+int streamReadWordCopy(unsigned char [24], int *);
 int FUN_00310dc6(unsigned char [24], unsigned int, int);
 int FUN_00310e5e(int, int);
 
@@ -41,7 +41,7 @@ extern int FUN_00301e8c(unsigned int, int, unsigned char *);
 /* Supplied declaration required: FUN_00303038. */
 /* Supplied declaration required: FUN_00303088. */
 extern unsigned int FUN_00303146(unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_003031e4. */
+/* Supplied declaration required: streamReadWordCopy. */
 /* Supplied declaration required: FUN_00310dc6. */
 extern unsigned int vectorOwnerResize(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00310e5e. */
@@ -75,7 +75,7 @@ void FUN_0011dcb8(int param_1)
     FUN_002ee524(temp_v5,temp_v3);
     temp_v1 = vectorOwnerResize(temp_v6,0x20);
     FUN_00310dc6(temp_v5,temp_v1,0x100);
-    FUN_003031e4(temp_v5,&temp_v2);
+    streamReadWordCopy(temp_v5,&temp_v2);
     FUN_00303038(temp_v5,temp_v4);
     clearWords2Alt(temp_v7);
     FUN_00303088(temp_v7);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002baa40(void);
+int resultPairInitialize(void);
 int FUN_0038bae8(unsigned int *, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 extern int objGetFlagBit0(int);
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_002bad5c(unsigned int *);
 /* Supplied declaration required: FUN_0038bae8. */
 
@@ -42,7 +42,7 @@ void FUN_0038b6d8(unsigned int *param_1,int param_2,unsigned int *param_3)
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar2 = temp_v7;
-  FUN_002baa40();
+  resultPairInitialize();
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;

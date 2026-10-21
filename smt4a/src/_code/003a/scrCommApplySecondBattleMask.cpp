@@ -7,7 +7,7 @@ extern "C" {
 
 s32 scrCommApplySecondBattleMask(void)
 {
-    btlGetMainState()->mask |= DAT_00570d78.second;
+    btlGetMainState()->mask |= g_battleMaskPresets.second;
     return 1;
 }
 

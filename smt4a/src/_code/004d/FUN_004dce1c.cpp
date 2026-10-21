@@ -26,11 +26,11 @@ extern unsigned int DAT_00571264; /* 0x571264 */
 extern unsigned int DAT_00571288; /* 0x571288 */
 extern unsigned int DAT_0057128c; /* 0x57128c */
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern int g_btlEvent; /* 0x573898 */
 
 extern int lcgRandomRange(unsigned int);
-extern int FUN_002626e0(void);
+extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004c67d0. */
 /* Supplied declaration required: FUN_004d7a70. */
@@ -84,11 +84,11 @@ void FUN_004dce1c(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
     temp_v0 = -1;
   }
   *(char *)(*param_1 + 0x45ba) = temp_v0;
-  if ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x400) != 0) {
+  if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
     FUN_004f9450();
   }
   temp_v2 = *(int *)(*param_1 + 0x2358);
-  temp_v3 = FUN_002626e0();
+  temp_v3 = gameProgressIsAdvanced();
   temp_v4 = *param_1;
   if (*(int *)(temp_v4 + 0xa8) != 4) {
     if (((*(unsigned int *)(temp_v4 + 0x45a4) & DAT_00571264) == 0 &&

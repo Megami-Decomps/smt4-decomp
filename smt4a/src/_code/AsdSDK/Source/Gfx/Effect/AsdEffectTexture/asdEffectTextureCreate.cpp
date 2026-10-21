@@ -1,12 +1,12 @@
 #include "AsdSDK/Source/Gfx/Effect/AsdEffectTexture.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
 EffectTexture *asdTextureCreate(int arg);
 void *asdMemoryAllocAligned(int, int, int, u32 size, int align, int);
 void memCopyWords(const void *src, void *dst, u32 size);
-void asdTextureSetImage(EffectTexture *tex);
 
 /* Builds a texture object from a texture image file: copies the header fields and the pixel data. */
 EffectTexture *asdEffectTextureCreate(EffectTextureFile *file)
@@ -25,7 +25,7 @@ EffectTexture *asdEffectTextureCreate(EffectTextureFile *file)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\AsdEffectTexture.cpp", 51);
     tex->pixels = (u8 *)asdMemoryAllocAligned(0x10000, 0x100, 0, tex->size, 0x80, 1);
     memCopyWords(file->pixels, tex->pixels, tex->size);
-    asdTextureSetImage(tex);
+    asdTextureSetImage((AsdTexture*)tex);
     return tex;
 }
 

@@ -6,12 +6,12 @@ extern "C" {
 
 int FUN_00189c24(...);
 int uiFadeSetVisible(...);
-int FUN_00254198(...);
+int gameFlagClearModeBits(...);
 int FUN_00262210(...);
 int FUN_00295eb0(...);
 int FUN_00297060(...);
 int fileSlotLoad(...);
-int FUN_002b2650(...);
+int pairSetHalves(...);
 int timerStart(...);
 int FUN_002bd954(...);
 int FUN_002bee58(...);
@@ -23,7 +23,7 @@ int taskCreateDraw(...);
 int asdTMTexTableLoadSprites(...);
 int asdProcessCreateSimple(...);
 int FUN_002c58c8(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int drawParameterBlockClear(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -53,7 +53,7 @@ extern unsigned int *g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: FUN_00189c24. */
 /* Supplied declaration required: uiFadeSetVisible. */
-/* Supplied declaration required: FUN_00254198. */
+/* Supplied declaration required: gameFlagClearModeBits. */
 /* Supplied declaration required: FUN_00262210. */
 extern int FUN_002886b0(unsigned short);
 extern int FUN_002886c8(unsigned short);
@@ -62,7 +62,7 @@ extern int FUN_002886c8(unsigned short);
 /* Supplied declaration required: fileSlotLoad. */
 extern int FUN_00298f88(unsigned short);
 extern int FUN_00298fa0(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_002b2650. */
+/* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: FUN_002bd954. */
 /* Supplied declaration required: FUN_002bee58. */
@@ -74,8 +74,8 @@ extern int FUN_00298fa0(unsigned short, unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_002c58c8. */
-extern unsigned int FUN_002c5c04(unsigned char *);
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_00269dc8(void)
@@ -104,9 +104,9 @@ void FUN_00269dc8(void)
   taskCreateDraw(&LAB_0026a240,0xe6,0,0,&LAB_001ddc7c,0,0,*puVar2);
   puVar2 = g_uiQuest;
   uiFadeSetVisible(0);
-  temp_v1 = FUN_002c5c04(&LAB_0026a250);
+  temp_v1 = asdLoadFileSyncDefault(&LAB_0026a250);
   puVar2[0x16b] = temp_v1;
-  temp_v1 = FUN_002c5c04(&LAB_0026a26c);
+  temp_v1 = asdLoadFileSyncDefault(&LAB_0026a26c);
   puVar2[0x16c] = temp_v1;
   FUN_00297060(temp_v1,puVar2[0x16b]);
   puVar2[0x16d] = temp_v1;
@@ -121,7 +121,7 @@ void FUN_00269dc8(void)
     temp_v2 = FUN_00298fa0(temp_v0,2);
     if (((temp_v2 != 0) && (temp_v2 = FUN_00298f88(temp_v0), temp_v2 != 0)) &&
        ((temp_v2 = FUN_002886c8(temp_v0), temp_v2 != 0 || (temp_v2 = FUN_002886b0(temp_v0), temp_v2 != 0)))) {
-      FUN_00254198(temp_v0);
+      gameFlagClearModeBits(temp_v0);
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 400);
@@ -130,11 +130,11 @@ void FUN_00269dc8(void)
     temp_v2 = FUN_00298fa0(temp_v0,2);
     if (((temp_v2 != 0) && (temp_v2 = FUN_00298f88(temp_v0), temp_v2 == 0)) &&
        ((temp_v2 = FUN_002886c8(temp_v0), temp_v2 != 0 || (temp_v2 = FUN_002886b0(temp_v0), temp_v2 != 0)))) {
-      FUN_00254198(temp_v0);
+      gameFlagClearModeBits(temp_v0);
     }
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 400);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 5);
+  drawParameterBlockClear(puVar2 + 5);
   paramsInit(puVar2 + 5,&DAT_00402e00,0x3c,&DAT_00402e3c,0x60,&DAT_00402e9c,0x3c,0,0,&DAT_00402ed8
                ,0x214);
   FUN_002bd954(puVar2 + 0xd,0x29,0,puVar2 + 5,0xc9);
@@ -153,7 +153,7 @@ void FUN_00269dc8(void)
   FUN_002beed0(puVar2 + 0xdf,0x29,0xffffffff,0x12,puVar2 + 5,0xc9);
   FUN_002bee58(puVar2 + 0xdf,3);
   *(unsigned short *)((int)puVar2 + 0x3b6) = 2;
-  FUN_002b2650(puVar2 + 0xdf,0,0x78);
+  pairSetHalves(puVar2 + 0xdf,0,0x78);
   puVar6 = puVar2 + 0x102;
   FUN_002bd954(puVar6,0x29,0x5c,puVar2 + 5,0xa1);
   timerStart(puVar6,0);

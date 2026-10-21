@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00296ae8(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_00296b3c(unsigned int, int, unsigned int, int, int, unsigned char *, int);
 int objFlagsSetBits(unsigned int, int);
 int FUN_002d65d0(void);
@@ -44,7 +44,7 @@ typedef struct {
 
 extern unsigned char LAB_0028e930; /* 0x28e930 */
 
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_00296b3c. */
 extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: objFlagsSetBits. */
@@ -102,10 +102,10 @@ void FUN_0028e6d0(fn_0028e6d0_arg0 *param_1,int param_2,unsigned int param_3,int
         temp_v2 = 0xffffffff;
         temp_v4 = 3;
       }
-      FUN_00296ae8(temp_v1,temp_v4,temp_v2,0,3,param_2,param_3);
+      asdTextDrawDirectoryEntry(temp_v1,temp_v4,temp_v2,0,3,param_2,param_3);
     }
     else {
-      FUN_00296ae8(temp_v1,3,0xffffffff,0,3,param_2,param_3);
+      asdTextDrawDirectoryEntry(temp_v1,3,0xffffffff,0,3,param_2,param_3);
     }
   }
   FUN_002d65d0();

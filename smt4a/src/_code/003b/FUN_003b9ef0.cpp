@@ -33,7 +33,7 @@ typedef struct {
 } param_3_stack;
 
 extern int g_aocMain; /* 0x570260 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapMain; /* 0x581274 */
 extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
@@ -92,8 +92,8 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: naviMainSetRequestValue. */
 /* Supplied declaration required: FUN_0036b004. */
 extern int FUN_00376f84(void);
-extern int FUN_00376f94(void);
-extern int FUN_003798f0(void);
+extern int lmapGetSpawnIndex(void);
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_003a2278. */
 /* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003b5714. */
@@ -198,9 +198,9 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
     if (g_mapSelection != -1) {
       temp_v5 = *(int *)(temp_v2 + 0x34);
       DAT_005f1858 = DAT_005f1648 != 0;
-      temp_v1 = FUN_00376f94();
+      temp_v1 = lmapGetSpawnIndex();
       if (temp_v1 != 0) {
-        temp_v5 = FUN_00376f94();
+        temp_v5 = lmapGetSpawnIndex();
       }
       temp_v1 = g_lmapScene;
       temp_v3 = *(int *)(temp_v2 + 0x30);
@@ -229,13 +229,13 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
         temp_v4 = DAT_005f1aec;
         *(unsigned int *)(temp_v1 + 0x4c) = DAT_005f1aec;
         *(unsigned int *)(temp_v1 + 0x50) = temp_v4;
-        *(unsigned int *)(DAT_005806a4 + 0x18) = temp_v4;
+        *(unsigned int *)(g_lmapView + 0x18) = temp_v4;
         DAT_005f1add = '\0';
       }
       else {
         FUN_003b5714(temp_v3,temp_v5,DAT_005f1ca0);
         if (temp_v3 != -1) {
-          temp_v5 = FUN_003798f0();
+          temp_v5 = dataTableGetRecord23();
           temp_v1 = g_lmapScene;
           temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v5 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
           *(unsigned int *)(g_lmapScene + 0x1c) = temp_v4;
@@ -250,7 +250,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
           *(unsigned int *)(temp_v1 + 0x4c) = temp_v4;
           *(unsigned int *)(temp_v1 + 0x50) = temp_v4;
           temp_v4 = VectorSignedToFloat((int)*(short *)(temp_v5 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
-          *(unsigned int *)(DAT_005806a4 + 0x18) = temp_v4;
+          *(unsigned int *)(g_lmapView + 0x18) = temp_v4;
         }
       }
       navigationSetArguments(DAT_005f1608,DAT_005f160c,DAT_005f1604);
@@ -263,7 +263,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       FUN_003a2278(0);
       FUN_00313648(1);
       *(unsigned char *)(temp_v2 + 0x4e) = 1;
-      *(unsigned char *)(DAT_005806a4 + 0xa8) = 1;
+      *(unsigned char *)(g_lmapView + 0xa8) = 1;
       DAT_005f1859 = 1;
       DAT_005f185a = 1;
       DAT_005f1614 = 0;
@@ -292,7 +292,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       FUN_003a2278(0);
       FUN_00313648(1);
       *(unsigned char *)(temp_v2 + 0x4e) = 1;
-      *(unsigned char *)(DAT_005806a4 + 0xa8) = 1;
+      *(unsigned char *)(g_lmapView + 0xa8) = 1;
       DAT_005f1859 = 1;
       DAT_005f185a = 1;
       DAT_005f185b = 0;

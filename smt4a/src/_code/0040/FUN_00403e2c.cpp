@@ -14,7 +14,7 @@ int FUN_00212724(void);
 int FUN_00228b04(int, int);
 int useCounterStart(void);
 int FUN_0031f208(...);
-int FUN_0031f27c(int, int);
+int sortMenuAcquire(int, int);
 int FUN_003450d4(int, unsigned int, int, int, int, int, unsigned char [16], int, int);
 int FUN_0039b984(void);
 int FUN_004029f4(...);
@@ -43,7 +43,7 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 extern unsigned int FUN_002a4860(int);
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_003450d4. */
 /* Supplied declaration required: FUN_0039b984. */
 /* Supplied declaration required: FUN_004029f4. */
@@ -101,7 +101,7 @@ void FUN_00403e2c(int param_1)
       temp_v1 = 9;
       FUN_001517b4(9,1);
       if (temp_v1 != 0) {
-        FUN_0031f27c(0x1e,0);
+        sortMenuAcquire(0x1e,0);
         FUN_0031f208(0x34);
         FUN_0031f208(0x1b);
         useCounterStart();

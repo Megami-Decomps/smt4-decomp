@@ -14,17 +14,17 @@ typedef struct {
 
 extern int FUN_00221a08(...); /* 0x221a08 */
 extern int FUN_00231f50(...); /* 0x231f50 */
-extern int FUN_002320b0(...); /* 0x2320b0 */
+extern int gauntletAppCompareBySortKeys(...); /* 0x2320b0 */
 extern int FUN_002418f8(...); /* 0x2418f8 */
 extern int FUN_002b2c44(...); /* 0x2b2c44 */
 extern int FUN_002ce57c(...); /* 0x2ce57c */
-extern int FUN_002ce6dc(...); /* 0x2ce6dc */
+extern int gauntletAppCompareBySortKeysDescending(...); /* 0x2ce6dc */
 extern int entryRefCompareByKindLevelOrder(...); /* 0x2fdfc0 */
 extern int g_gauntletAppMenu; /* 0x57f238 */
 
 /* Supplied declaration required: qsort. */
 extern int FUN_0026140c(void);
-extern unsigned int FUN_002c2c68(int);
+extern unsigned int objectApplyIfUnblocked(int);
 /* Supplied declaration required: arraySortQsort. */
 
 
@@ -44,42 +44,42 @@ void FUN_003d1bc4(void)
   temp_v3 = ~(*(unsigned char *)(temp_v1 + 0xd) >> 7) & 1;
   if ((*(unsigned char *)(temp_v1 + 0xd) & 0x7f) == 0x21) {
     if (temp_v3 != 0) {
-      temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
+      temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
       qsort(temp_v0 + 0x74,temp_v2,4,FUN_00231f50);
     }
     else {
-      temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
+      temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
       qsort(temp_v0 + 0x74,temp_v2,4,FUN_002ce57c);
     }
   }
   if ((*pbVar5 & 0x7f) == 0x15) {
     if (temp_v3 != 0) {
-      temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
+      temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
       qsort(temp_v0 + 0x74,temp_v2,4,FUN_002418f8);
     }
     else {
-      temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
+      temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
       qsort(temp_v0 + 0x74,temp_v2,4,entryRefCompareByKindLevelOrder);
     }
   }
   if ((*pbVar5 & 0x7f) == 0x16) {
     if (temp_v3 != 0) {
-      temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
+      temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
       qsort(temp_v0 + 0x74,temp_v2,4,FUN_00221a08);
     }
     else {
-      temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
+      temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
       qsort(temp_v0 + 0x74,temp_v2,4,FUN_002b2c44);
     }
   }
   if ((*pbVar5 & 0x7f) == 3) {
     if (temp_v3 != 0) {
-      temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
-      arraySortQsort(temp_v0 + 0x74,temp_v2,4,FUN_002320b0);
+      temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
+      arraySortQsort(temp_v0 + 0x74,temp_v2,4,gauntletAppCompareBySortKeys);
       return;
     }
-    temp_v2 = FUN_002c2c68(temp_v0 + 0x10);
-    arraySortQsort(temp_v0 + 0x74,temp_v2,4,FUN_002ce6dc);
+    temp_v2 = objectApplyIfUnblocked(temp_v0 + 0x10);
+    arraySortQsort(temp_v0 + 0x74,temp_v2,4,gauntletAppCompareBySortKeysDescending);
     return;
   }
   return;

@@ -22,7 +22,7 @@ void FUN_003e37f8(ScriptTransition *work);
 void FUN_003e3bcc(ScriptTransition *work);
 s32 tableGroupFindEntryIndex(u32 id, void *group);
 void scrScriptProcessStartEntry(void *process, s32 index);
-s32 FUN_00224880(void *process);
+s32 scrRunOpcodesStub(void *process);
 
 s32 scrTransitionUpdate(void)
 {
@@ -46,7 +46,7 @@ s32 scrTransitionUpdate(void)
             break;
         }
         case 1:
-            if (FUN_00224880(work->process) == 2) {
+            if (scrRunOpcodesStub(work->process) == 2) {
                 work->previousState = work->state;
                 work->started = 0;
                 work->state = 7;

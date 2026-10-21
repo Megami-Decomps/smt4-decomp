@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00280468(...);
+int rowWidgetInit(...);
 int colorSlotSet(int, int, int, int, int);
 int colorHolderSet(...);
 int SBORROW4(int, int);
@@ -15,7 +15,7 @@ typedef struct {
 } param_6_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00280468. */
+/* Supplied declaration required: rowWidgetInit. */
 /* Supplied declaration required: colorSlotSet. */
 /* Supplied declaration required: colorHolderSet. */
 extern long long __aeabi_idivmod(int, int, int, int, int);
@@ -51,14 +51,14 @@ void FUN_00203b40(int param_1,int param_2,int param_3,int param_4,int param_5,in
       temp_v0 = temp_v0 + 1;
     }
     if (param_5 != 0) {
-      FUN_00280468(param_1,temp_v1,temp_v0);
+      rowWidgetInit(param_1,temp_v1,temp_v0);
       colorSlotSet(param_1,6,5,3,4);
       if (param_6 != 0) {
         colorHolderSet(param_1,0xf,0xe,0xc,0xd);
       }
     }
     else {
-      FUN_00280468(param_1,temp_v1,temp_v0);
+      rowWidgetInit(param_1,temp_v1,temp_v0);
       colorSlotSet(param_1,6,5,0x20,0x20);
       if (param_6 != 0) {
         colorHolderSet(param_1,0xf,0xe,0x20,0x20);
@@ -68,10 +68,10 @@ void FUN_00203b40(int param_1,int param_2,int param_3,int param_4,int param_5,in
       if (param_2 < param_4) {
         param_4 = param_2;
       }
-      FUN_00280468(param_1 + 0x28,param_4,*(unsigned int *)(param_1 + 0x50));
+      rowWidgetInit(param_1 + 0x28,param_4,*(unsigned int *)(param_1 + 0x50));
     }
     else {
-      FUN_00280468(param_1 + 0x28,param_4);
+      rowWidgetInit(param_1 + 0x28,param_4);
     }
     colorSlotSet(param_1 + 0x28,3,4,0x20,0x20);
     if (param_6 != 0) {

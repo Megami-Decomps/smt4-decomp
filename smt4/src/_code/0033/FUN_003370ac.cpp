@@ -58,7 +58,7 @@ typedef struct {
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern unsigned short FUN_0023eb7c(int);
+extern unsigned short gameSlotFindByCategory(int);
 extern int saveResolvePartySlot(unsigned int);
 /* Supplied declaration required: FUN_00255e38. */
 /* Supplied declaration required: randomGetLowerTenBits. */
@@ -137,7 +137,7 @@ void FUN_003370ac(int param_1)
     if (-1 < *(char *)(temp_v2 + temp_v8 + 0x9108)) {
       temp_v4 = saveResolvePartySlot(temp_v8);
       temp_v9[0] = 2;
-      temp_v13 = FUN_0023eb7c(temp_v4);
+      temp_v13 = gameSlotFindByCategory(temp_v4);
       temp_v10 = *(unsigned short *)(temp_v4 + 0x46);
       temp_v11 = 0xffff;
       temp_v12 = 0xffff;

@@ -1,34 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030b188` (_code @ 0x30b188, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail preserves the completion/mask constant in r5 across result-setting calls. */
+#include "common.h"
+
+struct BattleMain;
+struct ActiveBattleEntry {
+    u8 unk000[0x1c6]; // 0x000
+    u16 flags;         // 0x1c6
+};
 
 extern "C" {
+u32 scrGetArg(u32 index);
+BattleMain* btlGetMainState();
+ActiveBattleEntry* btlMainFindActiveEntry(BattleMain* state);
+void scrSetResult(s32 result);
 
-int scrSetResult(int);
-int btlGetMainState(void);
-
-extern int btlMainFindActiveEntry(void);
-/* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: btlGetMainState. */
-extern unsigned int scrGetArg(unsigned int);
-
-
-unsigned int FUN_0030b188(void)
-
+// Return the selected active-entry flag bit to the script.
+u32 FUN_0030b188()
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = scrGetArg(0);
-  btlGetMainState();
-  temp_v1 = btlMainFindActiveEntry();
-  if ((temp_v1 != 0) && (((unsigned int)*(unsigned short *)(temp_v1 + 0x1c6) & (1 << (temp_v0 & 0xff))) != 0)) {
-    scrSetResult(1);
+    u32 bit = scrGetArg(0);
+    ActiveBattleEntry* entry = btlMainFindActiveEntry(btlGetMainState());
+    if (entry != NULL && (entry->flags & (1u << bit)) != 0) {
+        scrSetResult(1);
+        return 1;
+    }
+    scrSetResult(0);
     return 1;
-  }
-  scrSetResult(0);
-  return 1;
 }
-
-} /* extern "C" */
+}

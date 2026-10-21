@@ -11,7 +11,7 @@ int FUN_00330108(...);
 int FUN_00352568(...);
 int FUN_00376c64(...);
 int controllerSetDestination(...);
-int FUN_003fdb18(...);
+int controllerSetRotationEulerDegrees(...);
 int VectorFloatToUnsigned(...);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 
@@ -19,7 +19,7 @@ int FUN_0013cab8(...);
 int asdMemoryAllocTracked(...);
 int FUN_00178b04(...);
 int FUN_00234118(...);
-int FUN_00272e64(...);
+int calcHeadingRoundedToCardinalDirection(...);
 int FUN_00291038(...);
 int FUN_002b56e0(...);
 int FUN_002d1780(...);
@@ -45,7 +45,7 @@ int mapTrapGetUnk3C(...);
 int FUN_00303bd4(...);
 int FUN_00314c38(...);
 int FUN_003180c4(...);
-int FUN_0031ebf8(...);
+int lmapSceneRestoreEntryPosition(...);
 int FUN_003278ac(...);
 int naviMainApplyRequestValue(...);
 int FUN_00365c94(...);
@@ -59,17 +59,17 @@ int FUN_0049fe58(...);
 int VectorUnsignedToFloat(...);
 
 int FUN_001628c0(...);
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int FUN_0022368c(...);
-int FUN_00246688(...);
+int popupStateClose(...);
 int mapIfReleaseResource(...);
-int FUN_00297f00(...);
+void FUN_00297f00(int value, int count);
 int mapIfReleaseSlot4(...);
 int mapTrapArm(...);
 int FUN_002c2d44(...);
 int FUN_002de104(...);
 int FUN_003024a0(...);
-int FUN_00312db0(...);
+int mapMainStartEntry(...);
 int mapTrapGetUnk38(...);
 int FUN_003d2158(...);
 int linkHolderApplyFirst(...);
@@ -89,7 +89,7 @@ int FUN_00352308(...);
 int mapIfReleaseSlot1(...);
 int FUN_003b5714(...);
 
-int FUN_0013c1ec(...);
+int soundVolumeSettingSet(...);
 int FUN_0014af98(...);
 int sysPlaySe(...);
 int FUN_00233e10(...);
@@ -101,11 +101,11 @@ int FUN_0033abd4(...);
 int mathPositionHeadingDegrees(...);
 int FUN_003e54b8(...);
 
-int FUN_00145868(...);
+int soundVolumeSettingGet(...);
 int FUN_002b621c(...);
 int FUN_002dae68(...);
 int FUN_003135bc(...);
-int FUN_00324cd0(...);
+int mapSpawnRandomEventKindEffect(...);
 int FUN_00324e38(...);
 int FUN_0033ad04(...);
 int FUN_003d2150(...);
@@ -125,11 +125,11 @@ int FUN_001bbf0c(...);
 int FUN_001bc124(...);
 int FUN_002469d0(...);
 int FUN_0025ef68(...);
-int FUN_00293f1c(...);
-int FUN_00293f94(...);
+float mathSnapHeading16(float angle);
+float calcHeadingRoundedTo32Directions(float angle);
 int FUN_00294c28(...);
 int FUN_00295108(...);
-int FUN_002b5cb4(...);
+int distSpatial(...);
 int FUN_002b5cd4(...);
 int FUN_002b80b8(...);
 int FUN_002e364c(...);
@@ -137,7 +137,7 @@ int FUN_00313648(...);
 int FUN_00317af8(...);
 int FUN_00325998(...);
 int FUN_00327ee8(...);
-int FUN_0033f224(...);
+void lmapSceneStartMovement(unsigned char);
 int FUN_00354098(...);
 int FUN_00408184(...);
 int FUN_004a01c8(...);
@@ -177,7 +177,7 @@ extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int g_handleRegistry; /* 0x56fcc0 */
-extern int *DAT_005806a4; /* 0x5806a4 */
+extern int *g_lmapView; /* 0x5806a4 */
 extern int *g_lmapScene; /* 0x581288 */
 extern char s______________________00581290[67]; /* 0x581290 */
 extern float DAT_005f15d8; /* 0x5f15d8 */
@@ -293,9 +293,9 @@ static float romwright_fabs_4(float value)
 #define romwright_subpiece_4_2_0(value, offset) ((unsigned short)(unsigned int)(value))
 #endif
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_0013c1ec. */
+/* Supplied declaration required: soundVolumeSettingSet. */
 /* Supplied declaration required: FUN_0013cab8. */
-/* Supplied declaration required: FUN_00145868. */
+/* Supplied declaration required: soundVolumeSettingGet. */
 /* Supplied declaration required: FUN_0014af98. */
 extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_0015f858. */
@@ -311,7 +311,7 @@ extern int padButtonIsPressed(unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: FUN_0022368c. */
 /* Supplied declaration required: FUN_00233e10. */
@@ -319,14 +319,12 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: FUN_00245e38. */
 /* Supplied declaration required: FUN_00246014. */
-/* Supplied declaration required: FUN_00246688. */
+/* Supplied declaration required: popupStateClose. */
 /* Supplied declaration required: FUN_002469d0. */
 /* Supplied declaration required: FUN_0025ef68. */
-/* Supplied declaration required: FUN_00272e64. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: FUN_00291038. */
 extern unsigned int FUN_0029202c(void);
-/* Supplied declaration required: FUN_00293f1c. */
-/* Supplied declaration required: FUN_00293f94. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapIfReleaseResource. */
 /* Supplied declaration required: FUN_00294c28. */
@@ -334,7 +332,7 @@ extern int mapIfHasSelection(void);
 /* Supplied declaration required: FUN_00295108. */
 /* Supplied declaration required: FUN_00297f00. */
 /* Supplied declaration required: FUN_002b56e0. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_002b621c. */
 /* Supplied declaration required: FUN_002b7f58. */
@@ -362,17 +360,17 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_003128d8. */
 /* Supplied declaration required: mapIfReleaseSlot2. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
-extern int FUN_00312d88(void);
-/* Supplied declaration required: FUN_00312db0. */
+extern int mapJobIsDone(void);
+/* Supplied declaration required: mapMainStartEntry. */
 /* Supplied declaration required: FUN_003135bc. */
 /* Supplied declaration required: FUN_00313648. */
 /* Supplied declaration required: mapTrapGetUnk38. */
 /* Supplied declaration required: FUN_00314c38. */
 /* Supplied declaration required: FUN_00317af8. */
 /* Supplied declaration required: FUN_003180c4. */
-/* Supplied declaration required: FUN_0031ebf8. */
+/* Supplied declaration required: lmapSceneRestoreEntryPosition. */
 /* Supplied declaration required: FUN_00324cc0. */
-/* Supplied declaration required: FUN_00324cd0. */
+/* Supplied declaration required: mapSpawnRandomEventKindEffect. */
 /* Supplied declaration required: FUN_00324e38. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: FUN_00325998. */
@@ -385,7 +383,6 @@ extern int FUN_00312d88(void);
 /* Supplied declaration required: FUN_0033abd4. */
 /* Supplied declaration required: FUN_0033ad04. */
 /* Supplied declaration required: mapIfReleaseRequestObject. */
-/* Supplied declaration required: FUN_0033f224. */
 /* Supplied declaration required: naviMainApplyRequestValue. */
 /* Supplied declaration required: FUN_00352308. */
 /* Supplied declaration required: FUN_00352568. */
@@ -394,7 +391,7 @@ extern int FUN_00312d88(void);
 /* Supplied declaration required: FUN_00354098. */
 /* Supplied declaration required: FUN_00365c94. */
 /* Supplied declaration required: FUN_00376c64. */
-extern int FUN_003798f0(void);
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: naviMainSetRequestTriple. */
 /* Supplied declaration required: FUN_003adc58. */
 extern unsigned int asdModelGetStatic38(void);
@@ -419,7 +416,7 @@ extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: itemTableClear. */
@@ -656,7 +653,7 @@ LAB_002b82a8:
         if (temp_v32 != 0) {
           puVar6 = g_gameState;
         }
-        if ((((temp_v32 != 0 && puVar6 != (unsigned int *)0x24) && (DAT_005806a4[0x2c] == 0)) &&
+        if ((((temp_v32 != 0 && puVar6 != (unsigned int *)0x24) && (g_lmapView[0x2c] == 0)) &&
             (temp_v32 = gameFlagIsSet(0x49a), temp_v32 != 0)) && (DAT_005f19ee == '\0' && !temp_v14)) {
           *(unsigned int *)(temp_v6 + 0xdc8) = 0;
           *(unsigned int *)(temp_v6 + 0x1518) = 0;
@@ -670,7 +667,7 @@ LAB_002b82a8:
           FUN_002e364c(g_lmapScene + 10);
           FUN_00327ee8();
           if (g_lmapScene[0x74] == 1 || g_lmapScene[0x74] == 9) {
-            FUN_0033f224(0);
+            lmapSceneStartMovement(0);
           }
           return;
         }
@@ -704,7 +701,7 @@ LAB_002b82a8:
       temp_v15 = 1;
     }
     temp_v42 = CONCAT44(0x447a0000,temp_v25);
-    if (DAT_005806a4[0x2c] != 0) {
+    if (g_lmapView[0x2c] != 0) {
       temp_v15 = 1;
     }
     if ((DAT_005f161e != '\0') && (DAT_005f1c48 == '\0')) {
@@ -808,7 +805,7 @@ LAB_002b82a8:
       }
       *(unsigned char *)(g_lmapScene + 4) = 1;
       temp_v41 = CONCAT44(temp_v18,0x43b40000);
-      temp_v18 = fStack_6c - (float)DAT_005806a4[6];
+      temp_v18 = fStack_6c - (float)g_lmapView[6];
       temp_v10 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 <= temp_v18) << 0x1d);
       if (!romwright_subpiece_4_1_0(temp_v10 >> 0x1d,0)) {
         temp_v18 = temp_v18 + 360.0f;
@@ -816,11 +813,11 @@ LAB_002b82a8:
       if ((int)temp_v18 >= 0x43b40001) {
         temp_v18 = temp_v18 - 360.0f;
       }
-      if (DAT_005806a4[0x32] != 3) {
-        FUN_00293f94();
+      if (g_lmapView[0x32] != 3) {
+        temp_v18 = calcHeadingRoundedTo32Directions(temp_v18);
       }
       else {
-        FUN_00293f1c();
+        temp_v18 = mathSnapHeading16(temp_v18);
       }
       temp_v18 = -temp_v18;
       temp_v35 = (float)g_lmapScene[0x14];
@@ -907,7 +904,7 @@ LAB_002b82a8:
     if (((g_gameState != (unsigned int *)0x24) && (temp_v4 = FUN_004a0e38(2,5), temp_v4 != 0)) &&
        (!temp_v15)) {
       temp_v25 = (float)temp_v33;
-      FUN_002b5cb4();
+      distSpatial();
       temp_v35 = (float)g_lmapScene[0x58];
       g_lmapScene[0x58] = (int)(temp_v35 - temp_v25);
       in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 <= temp_v35 - temp_v25) << 0x1d);
@@ -922,7 +919,7 @@ LAB_002b82a8:
       }
     }
     temp_v35 = (float)temp_v33;
-    FUN_002b5cb4();
+    distSpatial();
     temp_v25 = *(float *)(temp_v6 + 0xde8) + temp_v35;
     *(float *)(temp_v6 + 0xde8) = temp_v25;
     if ((int)temp_v25 >= 0x47c35001) {
@@ -1018,7 +1015,7 @@ LAB_002b82a8:
     temp_v25 = (float)temp_v33;
     if (((unsigned int)piVar18 & 2) != 0) {
       if (!temp_v15) {
-        FUN_002b5cb4();
+        distSpatial();
         temp_v35 = (float)g_lmapScene[0x57];
         g_lmapScene[0x57] = (int)(temp_v35 - temp_v25);
         in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v19 <= temp_v35 - temp_v25) << 0x1d);
@@ -1047,7 +1044,7 @@ LAB_002b82a8:
       temp_v1 = (unsigned char)(temp_v5 >> 0x18);
       temp_v35 = temp_v19;
       if (!(unsigned char)((temp_v1 >> 6) & 1) && temp_v1 >> 7 == ((unsigned char)(temp_v10 >> 0x1c) & 1)) {
-        FUN_002b5cb4();
+        distSpatial();
         g_lmapScene[0x57] = (int)((float)g_lmapScene[0x57] - temp_v25);
       }
       temp_v25 = (float)g_lmapScene[0x57];
@@ -1285,7 +1282,7 @@ LAB_002b82a8:
     fStack_34 = fStack_2c;
     fStack_2c = temp_v18;
     temp_v32 = gameFlagsGetBlock();
-    FUN_00145868();
+    soundVolumeSettingGet();
     rt_memcpy_w(afStack_2e8,&DAT_00531c18,0xa0);
     rt_memcpy_w(afStack_248,&DAT_00531cb8,0xa0);
     rt_memcpy_w(afStack_1a8,&DAT_00531d58,0xa0);
@@ -1318,13 +1315,13 @@ LAB_002b82a8:
             if (DAT_005f1848 == 1) {
               if (g_lmapScene[2] == 5) {
                 FUN_00324e38(0xffffffff);
-                FUN_00324cd0();
+                mapSpawnRandomEventKindEffect();
                 FUN_003135bc();
               }
               temp_v32 = g_lmapScene[2];
 joined_r0x00326e7c:
               if (temp_v32 == 6) {
-                FUN_00324cd0();
+                mapSpawnRandomEventKindEffect();
                 FUN_003135bc();
               }
               goto LAB_00326f3c;
@@ -1332,7 +1329,7 @@ joined_r0x00326e7c:
             if (DAT_005f1848 == 2) {
               if (g_lmapScene[2] == 5) {
                 FUN_00324e38(0xffffffff);
-                FUN_00324cd0();
+                mapSpawnRandomEventKindEffect();
                 FUN_003135bc();
               }
               temp_v32 = g_lmapScene[2];
@@ -1341,7 +1338,7 @@ joined_r0x00326e7c:
             if (DAT_005f1848 == 3) {
               if (g_lmapScene[2] == 5) {
                 FUN_00324e38(0xffffffff);
-                FUN_00324cd0();
+                mapSpawnRandomEventKindEffect();
                 FUN_003135bc();
               }
               temp_v32 = g_lmapScene[2];
@@ -1351,14 +1348,14 @@ joined_r0x00326e7c:
           else {
             if (g_lmapScene[2] == 5) {
               FUN_00324e38(0xffffffff);
-              FUN_00324cd0();
+              mapSpawnRandomEventKindEffect();
               FUN_003135bc();
             }
             temp_v32 = g_lmapScene[2];
 joined_r0x00326e38:
             if (temp_v32 == 6) {
               FUN_003135bc();
-              FUN_00324cd0();
+              mapSpawnRandomEventKindEffect();
             }
 LAB_00326f3c:
             if (DAT_005f1848 != 0) {
@@ -1504,11 +1501,11 @@ LAB_00326fcc:
         temp_v35 = temp_v18;
         if ((g_gameState != (unsigned int *)0x24) &&
            (temp_v6 = FUN_004a0e38(2,5), temp_v35 = temp_v18, temp_v6 != 0)) {
-          FUN_002b5cb4();
+          distSpatial();
           g_lmapScene[0x58] = (int)((float)g_lmapScene[0x58] - temp_v18);
         }
         temp_v37 = temp_v35;
-        FUN_002b5cb4();
+        distSpatial();
         temp_v18 = *(float *)(temp_v32 + 0xdf8) + temp_v35;
         *(float *)(temp_v32 + 0xdf8) = temp_v18;
         temp_v15 = *(int *)(temp_v32 + 0xdf4) != 0;
@@ -1582,13 +1579,13 @@ LAB_00326fcc:
         FUN_002e364c();
         temp_v18 = temp_v37;
         if (((unsigned int)piVar18 & 2) != 0) {
-          FUN_002b5cb4();
+          distSpatial();
           g_lmapScene[0x57] = (int)((float)g_lmapScene[0x57] - temp_v37);
           DAT_005f1633 = 4;
         }
         else {
           if (temp_v19 < (float)g_lmapScene[0x57]) {
-            FUN_002b5cb4();
+            distSpatial();
             g_lmapScene[0x57] = (int)((float)g_lmapScene[0x57] - temp_v37);
           }
           if (temp_v19 < (float)g_lmapScene[0x57]) {
@@ -1619,7 +1616,7 @@ LAB_00326fcc:
         piVar18[0xe] = (int)((unsigned long long)temp_v33 >> 0x20);
         piVar18[0xf] = (int)temp_v33;
       }
-      temp_v17 = FUN_00145868();
+      temp_v17 = soundVolumeSettingGet();
       if (DAT_005f1848 != 0) {
         if (DAT_005f1848 != 1) {
           if (DAT_005f1848 != 2) {
@@ -1633,9 +1630,9 @@ LAB_00326fcc:
                 temp_v32 = FUN_00184964(0,1);
                 if (g_lmapScene[0x74] != 10) {
                   FUN_0014af98();
-                  FUN_0013c1ec();
+                  soundVolumeSettingSet();
                   FUN_003d2150(temp_v32 + 0x10002e2);
-                  FUN_0013c1ec(temp_v17);
+                  soundVolumeSettingSet(temp_v17);
                 }
               }
               if (g_lmapScene[2] == 3) {
@@ -1644,7 +1641,7 @@ LAB_00326fcc:
                 FUN_003d4ed8(0x100029e);
                 FUN_00324e38(0xffffffff);
               }
-              if ((g_lmapScene[2] == 6) && (FUN_00324cd0(), g_lmapScene[2] == 6)) {
+              if ((g_lmapScene[2] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[2] == 6)) {
                 temp_v3 = 0x14;
                 temp_v17 = 6;
                 FUN_002d1f40(temp_v17,temp_v3,0);
@@ -1674,9 +1671,9 @@ LAB_00326870:
               temp_v32 = FUN_00184964(0,1);
               if (g_lmapScene[0x74] != 10) {
                 FUN_0014af98();
-                FUN_0013c1ec();
+                soundVolumeSettingSet();
                 FUN_003d2150(temp_v32 + 0x10002e0);
-                FUN_0013c1ec(temp_v17);
+                soundVolumeSettingSet(temp_v17);
               }
               goto LAB_00326870;
             }
@@ -1699,16 +1696,16 @@ LAB_003267fc:
               temp_v32 = FUN_00184964(0,1);
               if (g_lmapScene[0x74] != 10) {
                 FUN_0014af98();
-                FUN_0013c1ec();
+                soundVolumeSettingSet();
                 FUN_003d2150(temp_v32 + 0x10002de);
-                FUN_0013c1ec(temp_v17);
+                soundVolumeSettingSet(temp_v17);
               }
             }
             FUN_00324e38(0xffffffff);
           }
           if (g_lmapScene[2] == 6) {
 LAB_003268e4:
-            FUN_00324cd0();
+            mapSpawnRandomEventKindEffect();
           }
           if (g_lmapScene[2] >= 8) {
             *(unsigned char *)(g_lmapScene + 0x89) = 0;
@@ -1730,14 +1727,14 @@ LAB_003268e4:
             temp_v32 = FUN_00184964(0,1);
             if (g_lmapScene[0x74] != 10) {
               FUN_0014af98();
-              FUN_0013c1ec();
+              soundVolumeSettingSet();
               FUN_003d2150(temp_v32 + 0x10002dc);
-              FUN_0013c1ec(temp_v17);
+              soundVolumeSettingSet(temp_v17);
             }
           }
           FUN_00324e38(0xffffffff);
         }
-        if ((g_lmapScene[2] == 6) && (FUN_00324cd0(), g_lmapScene[2] == 6)) {
+        if ((g_lmapScene[2] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[2] == 6)) {
           temp_v3 = 8;
           temp_v17 = 4;
           FUN_002d1f40(temp_v17,temp_v3,0);
@@ -1811,7 +1808,7 @@ LAB_00326a10:
               piVar18[2] = 0;
               if (piVar18[0x74] != 1 && piVar18[0x74] != 9) goto LAB_003270b0;
 LAB_00326cc4:
-              FUN_0033f224(0);
+              lmapSceneStartMovement(0);
             }
           }
           else if ((g_lmapScene[2] >= 9) &&
@@ -1876,18 +1873,18 @@ LAB_00326cc4:
           (0xbeffffff < uStack_2f8)) || ((int)uStack_2f8 >= 0x3f000000)) {
         FUN_0050d8e4();
         temp_v36 = CONCAT44(0x43b40000,temp_v19);
-        temp_v35 = afStack_2f4[0] * 57.32484f - (float)DAT_005806a4[6];
+        temp_v35 = afStack_2f4[0] * 57.32484f - (float)g_lmapView[6];
         if (temp_v35 < temp_v19) {
           temp_v35 = temp_v35 + 360.0f;
         }
         if ((int)temp_v35 >= 0x43b40001) {
           temp_v35 = temp_v35 - 360.0f;
         }
-        if (DAT_005806a4[0x32] != 3) {
-          FUN_00293f94();
+        if (g_lmapView[0x32] != 3) {
+          temp_v35 = calcHeadingRoundedTo32Directions(temp_v35);
         }
         else {
-          FUN_00293f1c();
+          temp_v35 = mathSnapHeading16(temp_v35);
         }
         temp_v35 = -temp_v35;
         temp_v37 = (float)g_lmapScene[0x14];
@@ -2049,7 +2046,7 @@ LAB_003270bc:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
     FUN_002dae68();
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     piVar18 = g_lmapScene;
     temp_v32 = g_lmapScene[1];
     if (temp_v32 != 0) {
@@ -2101,9 +2098,9 @@ LAB_003270bc:
             FUN_001bc124();
             FUN_001bbf0c();
             FUN_0014af98();
-            FUN_0013c1ec();
+            soundVolumeSettingSet();
             FUN_003d2150(0x10002e6);
-            FUN_0013c1ec(temp_v17);
+            soundVolumeSettingSet(temp_v17);
             piVar18 = g_lmapScene;
             g_lmapScene[1] = g_lmapScene[1] + 1;
             piVar18[2] = 0;
@@ -2146,9 +2143,9 @@ LAB_003270bc:
           FUN_001bc124();
           FUN_001bbf0c();
           FUN_0014af98();
-          FUN_0013c1ec();
+          soundVolumeSettingSet();
           FUN_003d2150(0x10002e5);
-          FUN_0013c1ec(temp_v17);
+          soundVolumeSettingSet(temp_v17);
           piVar18 = g_lmapScene;
           g_lmapScene[1] = g_lmapScene[1] + 1;
           piVar18[2] = 0;
@@ -2213,7 +2210,7 @@ LAB_003270bc:
               piVar18[0x15] = 0;
               piVar18[0x16] = 0x40400000;
               *(unsigned char *)(piVar18 + 0x1b) = 0;
-              FUN_002b5cb4();
+              distSpatial();
               temp_v25 = DAT_005f16b8;
               temp_v19 = DAT_005f16b4;
               piVar18 = g_lmapScene;
@@ -2259,7 +2256,7 @@ LAB_003270bc:
                 g_lmapScene[0x14] = temp_v32;
               }
               FUN_00303460(10);
-              DAT_005806a4[0x2c] = -1;
+              g_lmapView[0x2c] = -1;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
               FUN_002b7f58();
@@ -2300,8 +2297,8 @@ LAB_003270bc:
           else {
             temp_v32 = padButtonIsPressed(5);
             if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
-              piVar18 = DAT_005806a4;
-              DAT_005806a4[6] = g_lmapScene[0x14];
+              piVar18 = g_lmapView;
+              g_lmapView[6] = g_lmapScene[0x14];
               piVar18[0x2c] = 0;
               FUN_00303460(0);
               piVar18 = g_lmapScene;
@@ -2353,8 +2350,8 @@ LAB_003270bc:
       temp_v32 = mapIfHasSelection();
       if (temp_v32 == 0) {
         mapIfReleaseSlot1();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[6] = g_lmapScene[0x14];
+        piVar18 = g_lmapView;
+        g_lmapView[6] = g_lmapScene[0x14];
         piVar18[0x2c] = 0;
         FUN_00303460(0);
         temp_v32 = g_lmapScene[1];
@@ -2365,7 +2362,7 @@ LAB_003270bc:
     }
     if (*(char *)((int)g_lmapScene + 0x115) != '\0') {
       temp_v18 = (float)g_lmapScene[10];
-      FUN_002b5cb4();
+      distSpatial();
       piVar18 = g_lmapScene;
       temp_v19 = (float)g_lmapScene[0x4c];
       if (temp_v19 >= temp_v18) {
@@ -2450,7 +2447,7 @@ LAB_003270bc:
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v25 * temp_v19);
               piVar18[0x14] = (int)DAT_005f16bc;
               FUN_00303460(0xb);
-              DAT_005806a4[0x2c] = -2;
+              g_lmapView[0x2c] = -2;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
               FUN_001bc124();
@@ -2495,8 +2492,8 @@ LAB_003270bc:
           else {
             temp_v32 = padButtonIsPressed(5);
             if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
-              piVar18 = DAT_005806a4;
-              DAT_005806a4[6] = g_lmapScene[0x14];
+              piVar18 = g_lmapView;
+              g_lmapView[6] = g_lmapScene[0x14];
               piVar18[0x2c] = 0;
               FUN_00303460(0);
               piVar18 = g_lmapScene;
@@ -2548,8 +2545,8 @@ LAB_003270bc:
       temp_v32 = mapIfHasSelection();
       if (temp_v32 == 0) {
         mapIfReleaseSlot2();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[6] = g_lmapScene[0x14];
+        piVar18 = g_lmapView;
+        g_lmapView[6] = g_lmapScene[0x14];
         piVar18[0x2c] = 0;
         FUN_00303460(0);
         temp_v32 = g_lmapScene[1];
@@ -2570,7 +2567,7 @@ LAB_003270bc:
     iStack_38 = (int)fStack_1c;
     fStack_34 = fStack_2c;
     fStack_2c = temp_v18;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     uStack_5c = romwright_piece_4_4(temp_v17,(int)uStack_5c);
     if (g_lmapScene[1] < 10) {
       FUN_002dae68();
@@ -2594,8 +2591,8 @@ LAB_003270bc:
           mapIfReleaseSlot3();
           piVar10 = g_lmapScene;
           g_lmapScene[0x1a] = 0;
-          piVar18 = DAT_005806a4;
-          DAT_005806a4[6] = piVar10[0x14];
+          piVar18 = g_lmapView;
+          g_lmapView[6] = piVar10[0x14];
           piVar18[0x2c] = 0;
           FUN_00303460(0);
           piVar18 = g_lmapScene;
@@ -2609,7 +2606,7 @@ LAB_003270bc:
         if (temp_v32 < 0x37) {
           if (temp_v32 == 0x32) {
             DAT_005f185a = 0;
-            DAT_005806a4[3] = 2;
+            g_lmapView[3] = 2;
             piVar18[0x15] = 5;
             piVar18[0x16] = 0x40400000;
             piVar18[0x2d] = (int)((float)piVar18[0x29] - (float)piVar18[8]);
@@ -2756,7 +2753,7 @@ LAB_003270bc:
         piVar18[0xc] = (int)temp_v19;
         piVar18[0x14] = (int)DAT_005f16bc;
         FUN_00303460(0xc);
-        DAT_005806a4[0x2c] = -3;
+        g_lmapView[0x2c] = -3;
         sysPlaySe(0xdd);
         FUN_00233e10(1,DAT_005f16ac);
         FUN_001bc124();
@@ -2785,7 +2782,7 @@ LAB_003270bc:
         temp_v32 = FUN_004d0584();
         if (temp_v32 != 0) {
           FUN_003b5714(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
-          temp_v32 = FUN_003798f0();
+          temp_v32 = dataTableGetRecord23();
           piVar18 = g_lmapScene;
           if (DAT_005f164c != 0) {
             temp_v19 = (float)g_lmapScene[0x14] * temp_v18;
@@ -2818,8 +2815,8 @@ LAB_003270bc:
         else {
           temp_v32 = padButtonIsPressed(5);
           if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
-            piVar18 = DAT_005806a4;
-            DAT_005806a4[6] = g_lmapScene[0x14];
+            piVar18 = g_lmapView;
+            g_lmapView[6] = g_lmapScene[0x14];
             piVar18[0x2c] = 0;
             FUN_00303460(0);
             piVar18 = g_lmapScene;
@@ -2835,7 +2832,7 @@ LAB_003270bc:
         break;
       case 10:
         DAT_005f185a = 0;
-        DAT_005806a4[3] = 1;
+        g_lmapView[3] = 1;
         piVar18[0x15] = 5;
         piVar18[0x16] = 0x40400000;
         piVar18[0x2c] = (int)((float)piVar18[0x28] - (float)piVar18[7]);
@@ -2886,9 +2883,9 @@ LAB_00366704:
         FUN_001bc124();
         FUN_001bbf0c();
         FUN_0014af98();
-        FUN_0013c1ec();
+        soundVolumeSettingSet();
         FUN_003d2150(0x10002e5);
-        FUN_0013c1ec((*(unsigned int *)((unsigned char *)&uStack_5c + 4)));
+        soundVolumeSettingSet((*(unsigned int *)((unsigned char *)&uStack_5c + 4)));
         piVar18 = g_lmapScene;
         g_lmapScene[0x1a] = 0x41700000;
         piVar18[8] = (int)((float)piVar18[8] + 15.0f);
@@ -2959,11 +2956,11 @@ LAB_00366704:
         g_lmapScene[2] = temp_v32 + 1;
         if (temp_v32 + 1 == 1) {
           mapIfReleaseSlot3();
-          piVar18 = DAT_005806a4;
-          DAT_005806a4[6] = g_lmapScene[0x14];
+          piVar18 = g_lmapView;
+          g_lmapView[6] = g_lmapScene[0x14];
           piVar18[0x2c] = 0;
           FUN_00303460(0);
-          *(unsigned char *)(DAT_005806a4 + 0x2a) = 1;
+          *(unsigned char *)(g_lmapView + 0x2a) = 1;
         }
         if (g_lmapScene[2] == 3) {
           FUN_0033abd4();
@@ -2998,9 +2995,9 @@ LAB_00366704:
           FUN_001bc124();
           FUN_001bbf0c();
           FUN_0014af98();
-          FUN_0013c1ec();
+          soundVolumeSettingSet();
           FUN_003d2150(0x10002e6);
-          FUN_0013c1ec((*(unsigned int *)((unsigned char *)&uStack_5c + 4)));
+          soundVolumeSettingSet((*(unsigned int *)((unsigned char *)&uStack_5c + 4)));
         }
         if (g_lmapScene[2] != 6) break;
         if (g_lmapScene[0x2f] >= 0x24) {
@@ -3053,7 +3050,7 @@ LAB_00366704:
     iStack_38 = temp_v32;
     fStack_30 = temp_v35;
     fStack_2c = temp_v37;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     if (g_lmapScene[1] < 10) {
       FUN_002dae68();
       piVar18 = g_lmapScene;
@@ -3088,9 +3085,9 @@ LAB_00366704:
                   FUN_001bc124();
                   FUN_001bbf0c();
                   FUN_0014af98();
-                  FUN_0013c1ec();
+                  soundVolumeSettingSet();
                   FUN_003d2150(0x10002e7);
-                  FUN_0013c1ec(temp_v17);
+                  soundVolumeSettingSet(temp_v17);
                 }
                 piVar18 = g_lmapScene;
                 if (g_lmapScene[2] == 2) {
@@ -3128,7 +3125,7 @@ LAB_00366704:
                 else {
                   temp_v32 = 4;
                 }
-                DAT_005806a4[3] = temp_v32;
+                g_lmapView[3] = temp_v32;
                 fStack_3c = (float)piVar18[0xb];
                 iStack_38 = piVar18[0xc];
                 uStack_4c = romwright_piece_4_4(&fStack_34,(unsigned int)uStack_4c);
@@ -3159,8 +3156,8 @@ LAB_00366704:
               else {
                 temp_v32 = padButtonIsPressed(5);
                 if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
-                  piVar18 = DAT_005806a4;
-                  DAT_005806a4[6] = g_lmapScene[0x14];
+                  piVar18 = g_lmapView;
+                  g_lmapView[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
                   FUN_00303460(0);
                   piVar18 = g_lmapScene;
@@ -3199,7 +3196,7 @@ LAB_00366704:
           piVar18[0xc] = (int)temp_v19;
           piVar18[0x14] = (int)DAT_005f16bc;
           FUN_00303460(0xc);
-          DAT_005806a4[0x2c] = -3;
+          g_lmapView[0x2c] = -3;
           sysPlaySe(0xdd);
           FUN_00233e10(1,DAT_005f16ac);
           FUN_001bc124();
@@ -3264,8 +3261,8 @@ LAB_00366704:
       }
       if ((g_lmapScene[2] >= 0x1f) && (temp_v32 = mapIfHasSelection(), temp_v32 == 0)) {
         mapIfOverlayRelease();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[6] = (int)((float)g_lmapScene[0x14] + temp_v18);
+        piVar18 = g_lmapView;
+        g_lmapView[6] = (int)((float)g_lmapScene[0x14] + temp_v18);
         piVar18[0x2c] = 0;
         FUN_00303460(0);
         piVar18 = g_lmapScene;
@@ -3320,8 +3317,8 @@ LAB_00366704:
               else {
                 temp_v32 = padButtonIsPressed(5);
                 if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
-                  piVar18 = DAT_005806a4;
-                  DAT_005806a4[6] = g_lmapScene[0x14];
+                  piVar18 = g_lmapView;
+                  g_lmapView[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
                   FUN_00303460(0);
                   piVar18 = g_lmapScene;
@@ -3352,7 +3349,7 @@ LAB_00366704:
           piVar18[0x15] = 0;
           piVar18[0x16] = 0x40400000;
           *(unsigned char *)(piVar18 + 0x1b) = 0;
-          FUN_002b5cb4();
+          distSpatial();
           temp_v25 = DAT_005f16b8;
           temp_v19 = DAT_005f16b4;
           piVar18 = g_lmapScene;
@@ -3394,7 +3391,7 @@ LAB_00366704:
             g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v35 * temp_v27);
           }
           FUN_00303460(10);
-          DAT_005806a4[0x2c] = -1;
+          g_lmapView[0x2c] = -1;
           sysPlaySe(0xdd);
           FUN_00233e10(1,DAT_005f16ac);
           temp_v32 = g_lmapScene[1];
@@ -3430,7 +3427,7 @@ LAB_00366704:
   case 0x11:
     fStack_30 = temp_v35;
     fStack_2c = temp_v37;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     if (g_lmapScene[1] < 10) {
       FUN_002dae68();
       piVar18 = g_lmapScene;
@@ -3470,8 +3467,8 @@ LAB_00366704:
                   else {
                     temp_v32 = padButtonIsPressed(5);
                     if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
-                      piVar18 = DAT_005806a4;
-                      DAT_005806a4[6] = g_lmapScene[0x14];
+                      piVar18 = g_lmapView;
+                      g_lmapView[6] = g_lmapScene[0x14];
                       piVar18[0x2c] = 0;
                       FUN_00303460(0);
                       piVar18 = g_lmapScene;
@@ -3522,7 +3519,7 @@ LAB_00366704:
               FUN_001bbf0c();
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v25);
               FUN_00303460(10);
-              DAT_005806a4[0x2c] = -1;
+              g_lmapView[0x2c] = -1;
               sysPlaySe(0xdd);
               FUN_00233e10(1,DAT_005f16ac);
               FUN_001bc124();
@@ -3590,16 +3587,16 @@ LAB_00366704:
           FUN_001bc124();
           FUN_001bbf0c();
           FUN_0014af98();
-          FUN_0013c1ec();
+          soundVolumeSettingSet();
           FUN_003d2150(0x10002e5);
-          FUN_0013c1ec(temp_v17);
+          soundVolumeSettingSet(temp_v17);
           piVar18 = g_lmapScene;
           g_lmapScene[0x1a] = 0x41000000;
           piVar18[8] = (int)((float)piVar18[8] + 8.0f);
         }
         else {
           DAT_005f185a = 0;
-          DAT_005806a4[3] = 2;
+          g_lmapView[3] = 2;
           piVar18[0x15] = 5;
           piVar18[0x16] = 0x40400000;
           piVar18[0x2c] = (int)((float)piVar18[0x28] - (float)piVar18[7]);
@@ -3629,8 +3626,8 @@ LAB_00366704:
           mapIfReleaseSlot3();
           piVar10 = g_lmapScene;
           g_lmapScene[0x1a] = temp_v12;
-          piVar18 = DAT_005806a4;
-          DAT_005806a4[6] = piVar10[0x14];
+          piVar18 = g_lmapView;
+          g_lmapView[6] = piVar10[0x14];
           piVar18[0x2c] = 0;
           FUN_00303460(0);
           piVar18 = g_lmapScene;
@@ -3675,8 +3672,8 @@ LAB_00366704:
         FUN_003d2150(0x1000112);
       }
       if (g_lmapScene[2] == 0x1e) {
-        FUN_001f4908(0,10,0xff);
-        FUN_001f4908(1,10,0xff);
+        slotSetRequest(0,10,0xff);
+        slotSetRequest(1,10,0xff);
       }
       if ((g_lmapScene[2] >= 0x1f) && (temp_v32 = FUN_002e07f4(), temp_v32 != 0)) {
         temp_v32 = g_lmapScene[1];
@@ -3694,7 +3691,7 @@ LAB_00367f20:
   case 0x13:
     fStack_28 = temp_v35;
     fStack_24 = temp_v37;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     if (g_lmapScene[1] < 10) {
       FUN_002dae68();
       piVar18 = g_lmapScene;
@@ -3728,8 +3725,8 @@ LAB_00367f20:
                   else {
                     temp_v32 = padButtonIsPressed(6);
                     if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
-                      piVar18 = DAT_005806a4;
-                      DAT_005806a4[6] = g_lmapScene[0x14];
+                      piVar18 = g_lmapView;
+                      g_lmapView[6] = g_lmapScene[0x14];
                       piVar18[0x2c] = 0;
                       FUN_00303460(0);
                       piVar18 = g_lmapScene;
@@ -3776,7 +3773,7 @@ LAB_00367f20:
               g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v18 * temp_v25);
               piVar18[0x14] = (int)DAT_005f16bc;
               FUN_00303460(0xd);
-              DAT_005806a4[0x2c] = 1;
+              g_lmapView[0x2c] = 1;
               sysPlaySe(0xdc);
               FUN_00233e10(1,DAT_005f16ac);
               FUN_0022368c();
@@ -3790,8 +3787,8 @@ LAB_00367f20:
             if (temp_v32 != 0xb) {
               if ((temp_v32 == 0xc) && (temp_v32 = mapIfHasSelection(), temp_v32 == 0)) {
                 mapIfReleaseSlot4();
-                piVar18 = DAT_005806a4;
-                DAT_005806a4[6] = g_lmapScene[0x14];
+                piVar18 = g_lmapView;
+                g_lmapView[6] = g_lmapScene[0x14];
                 piVar18[0x2c] = 0;
                 FUN_00303460(0);
                 temp_v32 = g_lmapScene[1];
@@ -3836,9 +3833,9 @@ LAB_00367f20:
             FUN_001bc124();
             FUN_001bbf0c();
             FUN_0014af98();
-            FUN_0013c1ec();
+            soundVolumeSettingSet();
             FUN_003d2150(0x10002e5);
-            FUN_0013c1ec(temp_v17);
+            soundVolumeSettingSet(temp_v17);
             FUN_002342b8();
             temp_v32 = g_lmapScene[1];
             piVar18 = g_lmapScene;
@@ -3848,7 +3845,7 @@ LAB_00367f20:
         }
         else {
           DAT_005f185a = 0;
-          DAT_005806a4[3] = 1;
+          g_lmapView[3] = 1;
           piVar18[0x15] = 0x15;
           piVar18[0x16] = 0x40a00000;
           temp_v32 = piVar18[1];
@@ -3890,9 +3887,9 @@ LAB_00367f20:
         }
         else {
           temp_v32 = FUN_002e07f4();
-          piVar18 = DAT_005806a4;
+          piVar18 = g_lmapView;
           if (temp_v32 != 0) {
-            DAT_005806a4[6] = g_lmapScene[0x14];
+            g_lmapView[6] = g_lmapScene[0x14];
             piVar18[0x2c] = 0;
             FUN_00303460(0);
             piVar18 = g_lmapScene;
@@ -3908,7 +3905,7 @@ LAB_00367f20:
         }
       }
       else {
-        FUN_001f4908(0,10,0xff);
+        slotSetRequest(0,10,0xff);
         temp_v32 = g_lmapScene[1];
         piVar18 = g_lmapScene;
         piVar18[1] = temp_v32 + 1;
@@ -3935,7 +3932,7 @@ LAB_0033eae8:
     fStack_28 = temp_v37;
     fStack_20 = fStack_24;
     fStack_24 = temp_v18;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     if (g_lmapScene[1] < 10) {
       FUN_002dae68();
       piVar18 = g_lmapScene;
@@ -3970,9 +3967,9 @@ LAB_0033eae8:
                   FUN_001bc124();
                   FUN_001bbf0c();
                   FUN_0014af98();
-                  FUN_0013c1ec();
+                  soundVolumeSettingSet();
                   FUN_003d2150(0x10002e7);
-                  FUN_0013c1ec(temp_v17);
+                  soundVolumeSettingSet(temp_v17);
                 }
                 piVar18 = g_lmapScene;
                 if (g_lmapScene[2] == 2) {
@@ -4004,7 +4001,7 @@ LAB_0033eae8:
               if (temp_v32 != 0) {
                 g_lmapScene[1] = 10;
                 piVar18[2] = 0;
-                DAT_005806a4[3] = 2;
+                g_lmapView[3] = 2;
                 fStack_3c = (float)piVar18[0xb];
                 iStack_38 = piVar18[0xc];
                 uStack_4c = romwright_piece_4_4(&fStack_34,(unsigned int)uStack_4c);
@@ -4035,8 +4032,8 @@ LAB_0033eae8:
               else {
                 temp_v32 = padButtonIsPressed(6);
                 if ((temp_v32 != 0) || (temp_v32 = inputIsQuestMenuPressed(), temp_v32 != 0)) {
-                  piVar18 = DAT_005806a4;
-                  DAT_005806a4[6] = g_lmapScene[0x14];
+                  piVar18 = g_lmapView;
+                  g_lmapView[6] = g_lmapScene[0x14];
                   piVar18[0x2c] = 0;
                   FUN_00303460(0);
                   piVar18 = g_lmapScene;
@@ -4082,7 +4079,7 @@ LAB_0033eae8:
           g_lmapScene[0xc] = (int)((float)g_lmapScene[0xc] + temp_v19 * temp_v25);
           piVar18[0x14] = (int)DAT_005f16bc;
           FUN_00303460(0xd);
-          DAT_005806a4[0x2c] = 1;
+          g_lmapView[0x2c] = 1;
           sysPlaySe(0xdc);
           FUN_00233e10(1,DAT_005f16ac);
           FUN_0022368c();
@@ -4145,8 +4142,8 @@ LAB_0033eae8:
       }
       if ((g_lmapScene[2] >= 0x1f) && (temp_v32 = mapIfHasSelection(), temp_v32 == 0)) {
         mapIfReleaseResource();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[6] = g_lmapScene[0x14];
+        piVar18 = g_lmapView;
+        g_lmapView[6] = g_lmapScene[0x14];
         piVar18[0x2c] = 0;
         FUN_00303460(0);
         piVar18 = g_lmapScene;
@@ -4162,7 +4159,7 @@ LAB_0033eae8:
   case 0x17:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     piVar18 = g_lmapScene;
     temp_v32 = g_lmapScene[1];
     if (temp_v32 != 0) {
@@ -4211,9 +4208,9 @@ LAB_0033eae8:
           FUN_001bc124();
           FUN_001bbf0c();
           FUN_0014af98();
-          FUN_0013c1ec();
+          soundVolumeSettingSet();
           FUN_003d2150(0x10002e6);
-          FUN_0013c1ec(temp_v17);
+          soundVolumeSettingSet(temp_v17);
         }
         piVar18 = g_lmapScene;
         if (g_lmapScene[2] >= 0x24) {
@@ -4235,7 +4232,7 @@ LAB_0033eae8:
   case 0x18:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     piVar18 = g_lmapScene;
     temp_v32 = g_lmapScene[1];
     if (temp_v32 != 0) {
@@ -4285,9 +4282,9 @@ LAB_0033eae8:
           FUN_001bc124();
           FUN_001bbf0c();
           FUN_0014af98();
-          FUN_0013c1ec();
+          soundVolumeSettingSet();
           FUN_003d2150(0x10002e6);
-          FUN_0013c1ec(temp_v17);
+          soundVolumeSettingSet(temp_v17);
         }
         if (g_lmapScene[2] >= 0x24) {
           FUN_00303460(9);
@@ -4345,7 +4342,7 @@ LAB_0033eae8:
   case 0x1a:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     piVar18 = g_lmapScene;
     temp_v32 = g_lmapScene[1];
     if (temp_v32 != 0) {
@@ -4401,9 +4398,9 @@ LAB_0033eae8:
       FUN_001bc124();
       FUN_001bbf0c();
       FUN_0014af98();
-      FUN_0013c1ec();
+      soundVolumeSettingSet();
       FUN_003d2150(0x10002e6);
-      FUN_0013c1ec(temp_v17);
+      soundVolumeSettingSet(temp_v17);
     }
     goto code_r0x0024947c;
   case 0x1c:
@@ -4421,8 +4418,8 @@ LAB_0033eae8:
             if (temp_v6 == 10) {
               g_lmapScene[0x15] = 0x13;
               piVar18[0x16] = 0x40a00000;
-              piVar10 = DAT_005806a4;
-              DAT_005806a4[0x84] = 0;
+              piVar10 = g_lmapView;
+              g_lmapView[0x84] = 0;
               piVar10[0x85] = 0;
               piVar18[0x1a] = 0;
               piVar18[7] = piVar18[10];
@@ -4539,7 +4536,7 @@ joined_r0x00248750:
     fStack_28 = temp_v25;
     temp_v17 = gameFlagsGetBlock();
     uStack_5c = romwright_piece_4_4((*(unsigned int *)((unsigned char *)&uStack_5c + 4)),temp_v17);
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     piVar18 = g_lmapScene;
     uStack_54 = romwright_piece_4_4((*(unsigned int *)((unsigned char *)&uStack_54 + 4)),temp_v17);
     temp_v18 = 0.0f;
@@ -4614,7 +4611,7 @@ joined_r0x00248750:
         case 2:
           temp_v6 = gameFlagIsSet(0x68);
           if (temp_v6 == 0) {
-            FUN_00312db0(&LAB_002d9efc);
+            mapMainStartEntry(&LAB_002d9efc);
             g_lmapScene[1] = 99;
           }
           temp_v6 = mapTrapGetUnk38();
@@ -4656,9 +4653,9 @@ joined_r0x00248750:
                   FUN_001bbf0c();
                   uStack_60 = FUN_00184964(0,1);
                   FUN_0014af98();
-                  FUN_0013c1ec();
+                  soundVolumeSettingSet();
                   FUN_003d2150(uStack_60 + 0x10002e2);
-                  FUN_0013c1ec((unsigned int)uStack_54);
+                  soundVolumeSettingSet((unsigned int)uStack_54);
                 }
                 if (g_lmapScene[0x9c] == 3) {
                   FUN_001bc124();
@@ -4666,7 +4663,7 @@ joined_r0x00248750:
                   FUN_003d4ed8(0x100029e);
                   FUN_00324e38(0xffffffff);
                 }
-                if ((g_lmapScene[0x9c] == 6) && (FUN_00324cd0(), g_lmapScene[0x9c] == 6)) {
+                if ((g_lmapScene[0x9c] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[0x9c] == 6)) {
                   FUN_00297f00(8,10);
                   FUN_002d1f40(8,0x28,0);
                 }
@@ -4684,7 +4681,7 @@ LAB_002da1e4:
                 if (g_lmapScene[0x9c] == 4) {
                   FUN_00297f00(8,10);
                   FUN_002d1f40(8,0x28,0);
-                  FUN_00324cd0();
+                  mapSpawnRandomEventKindEffect();
                 }
                 temp_v12 = g_lmapScene[0x9c];
                 goto joined_r0x002da15c;
@@ -4696,9 +4693,9 @@ LAB_002da1e4:
                 FUN_001bbf0c();
                 uStack_60 = FUN_00184964(0,1);
                 FUN_0014af98();
-                FUN_0013c1ec();
+                soundVolumeSettingSet();
                 FUN_003d2150(uStack_60 + 0x10002e0);
-                FUN_0013c1ec((unsigned int)uStack_54);
+                soundVolumeSettingSet((unsigned int)uStack_54);
                 goto LAB_002da1e4;
               }
 LAB_002da2b0:
@@ -4718,16 +4715,16 @@ LAB_002da2b0:
                   FUN_001bbf0c();
                   uStack_60 = FUN_00184964(0,1);
                   FUN_0014af98();
-                  FUN_0013c1ec();
+                  soundVolumeSettingSet();
                   FUN_003d2150(uStack_60 + 0x10002de);
-                  FUN_0013c1ec((unsigned int)uStack_54);
+                  soundVolumeSettingSet((unsigned int)uStack_54);
                 }
                 FUN_00324e38(0xffffffff);
               }
               if (g_lmapScene[0x9c] == 6) {
                 FUN_00297f00(8,10);
                 FUN_002d1f40(8,0x28,0);
-                FUN_00324cd0();
+                mapSpawnRandomEventKindEffect();
               }
               temp_v12 = g_lmapScene[0x9c];
 joined_r0x002da15c:
@@ -4766,13 +4763,13 @@ LAB_002da3cc:
                 FUN_001bbf0c();
                 uStack_60 = FUN_00184964(0,1);
                 FUN_0014af98();
-                FUN_0013c1ec();
+                soundVolumeSettingSet();
                 FUN_003d2150(uStack_60 + 0x10002dc);
-                FUN_0013c1ec((unsigned int)uStack_54);
+                soundVolumeSettingSet((unsigned int)uStack_54);
               }
               FUN_00324e38(0xffffffff);
             }
-            if ((g_lmapScene[0x9c] == 6) && (FUN_00324cd0(), g_lmapScene[0x9c] == 6)) {
+            if ((g_lmapScene[0x9c] == 6) && (mapSpawnRandomEventKindEffect(), g_lmapScene[0x9c] == 6)) {
               FUN_00297f00(8,10);
               FUN_002d1f40(8,0x28,0);
             }
@@ -4782,7 +4779,7 @@ LAB_002da3cc:
           if ((int)(unsigned int)*(unsigned short *)(temp_v6 + 2) <= g_lmapScene[2]) {
             FUN_002d1f40(10,0x78,0);
             if (g_lmapScene[0x9b] >= (int)(unsigned int)*(unsigned short *)(temp_v6 + 4)) {
-              FUN_00246688();
+              popupStateClose();
               FUN_003d2158(g_lmapScene[0x99],0);
               FUN_002de104();
               FUN_00324e38(0);
@@ -4795,7 +4792,7 @@ LAB_002da3cc:
               DAT_005f17ac = '\0';
             }
             else {
-              FUN_00246688();
+              popupStateClose();
               FUN_003d2158(g_lmapScene[0x99],0);
               FUN_003278ac();
               FUN_00324e38(0);
@@ -4866,7 +4863,7 @@ LAB_002da3cc:
               FUN_0015f858();
               FUN_003180c4(0,temp_v10);
               flagValueSub(temp_v5,1);
-              FUN_00312db0(&LAB_002dab1c);
+              mapMainStartEntry(&LAB_002dab1c);
             }
             else {
               FUN_00313648(1);
@@ -4905,7 +4902,7 @@ LAB_002da3cc:
               flagValueSub(temp_v5,1);
               temp_v17 = 0x2dab4c;
             }
-            FUN_00312db0(temp_v17);
+            mapMainStartEntry(temp_v17);
           }
           break;
         case 6:
@@ -4919,8 +4916,8 @@ LAB_002da3cc:
             piVar18[0x16] = temp_v32;
             piVar18[1] = 7;
             piVar18[2] = 0;
-            FUN_001f4908(0,10,0xff);
-            FUN_001f4908(1,10,0xff);
+            slotSetRequest(0,10,0xff);
+            slotSetRequest(1,10,0xff);
             FUN_003d2150(0x10000c4);
           }
           break;
@@ -4942,7 +4939,7 @@ LAB_002da3cc:
               FUN_003b5714(puVar6,(unsigned int *)(unsigned int)*(unsigned short *)(temp_v32 + 0x14),
                            *(unsigned short *)(temp_v32 + 0x16));
               if (puVar6 != (unsigned int *)0xffffffff) {
-                temp_v6 = FUN_003798f0();
+                temp_v6 = dataTableGetRecord23();
                 piVar18 = g_lmapScene;
                 temp_v12 = VectorSignedToFloat((int)*(short *)(temp_v6 + 4),
                                              (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -4962,7 +4959,7 @@ LAB_002da3cc:
                 piVar18[0x14] = temp_v12;
                 temp_v6 = VectorSignedToFloat((int)*(short *)(temp_v6 + 10),
                                              (unsigned char)(in_fpscr >> 0x16) & 3);
-                DAT_005806a4[6] = temp_v6;
+                g_lmapView[6] = temp_v6;
                 uStack_60 = 0;
                 uStack_5c = uStack_5c & 0xffffffff00000000;
                 FUN_00314c38(*(unsigned short *)(temp_v32 + 0x18) & 0xff,*(unsigned short *)(temp_v32 + 0x1a) & 0xff,0);
@@ -5047,7 +5044,7 @@ LAB_002dad8c:
                 if (temp_v32 != 0) {
                   mapTrapGetUnk38();
                   g_lmapScene[2] = g_lmapScene[2] + 1;
-                  FUN_0031ebf8();
+                  lmapSceneRestoreEntryPosition();
                   if (g_lmapScene[2] >= 11) goto LAB_002dad8c;
                 }
               }
@@ -5062,13 +5059,13 @@ LAB_002dad8c:
                 piVar18[0x16] = temp_v32;
                 piVar18[1] = 0xc;
                 piVar18[2] = 0;
-                FUN_001f4908(0,10,0xff);
-                FUN_001f4908(1,10,0xff);
+                slotSetRequest(0,10,0xff);
+                slotSetRequest(1,10,0xff);
               }
             }
           }
           else {
-            temp_v32 = FUN_00312d88();
+            temp_v32 = mapJobIsDone();
             if (temp_v32 != 0) {
               DAT_005f1adc = 0;
               FUN_003adc58();
@@ -5084,7 +5081,7 @@ LAB_002dad8c:
         else if (temp_v6 != 0x17) {
           if (temp_v6 != 0x18) {
             if (temp_v6 != 0x19) {
-              if ((temp_v6 == 99) && (temp_v32 = FUN_00312d88(), temp_v32 != 0)) {
+              if ((temp_v6 == 99) && (temp_v32 = mapJobIsDone(), temp_v32 != 0)) {
                 sysPlaySe(0xe9);
                 FUN_002c2d44(
                             "碂辂閂暁銂薂䂁钂銂膂邂邂薂蒂䦁䂁熂膂邂覂蒂貂馂䂁邂銂薂鎂鎂䂁钂袂薂䂁瞂䂁憂閂钂钂辂躂䒁"
@@ -5163,11 +5160,11 @@ LAB_002dad8c:
           FUN_0015f858(temp_v32,0);
           FUN_003180c4(0,temp_v6);
           flagValueSub(temp_v32,1);
-          FUN_00312db0(&LAB_002dae40);
+          mapMainStartEntry(&LAB_002dae40);
           FUN_001681c4();
         }
         else {
-          FUN_00312db0(&LAB_002dae54);
+          mapMainStartEntry(&LAB_002dae54);
           FUN_001681c4();
         }
         g_lmapScene[1] = 10;
@@ -5183,7 +5180,7 @@ LAB_002dad8c:
   case 0x20:
     fStack_20 = temp_v35;
     fStack_1c = temp_v37;
-    temp_v17 = FUN_00145868();
+    temp_v17 = soundVolumeSettingGet();
     piVar10 = g_lmapScene;
     if (g_lmapScene[1] != 0) {
       piVar18 = g_lmapScene;
@@ -5211,9 +5208,9 @@ LAB_002dad8c:
       temp_v32 = FUN_00184964(0,1);
       if (temp_v32 == 0) {
         FUN_0014af98();
-        FUN_0013c1ec();
+        soundVolumeSettingSet();
         FUN_003d2150(0x10002e4);
-        FUN_0013c1ec(temp_v17);
+        soundVolumeSettingSet(temp_v17);
       }
       puVar6 = (unsigned int *)&g_gameState;
       if (g_gameState == (unsigned int *)0x5) {
@@ -5299,7 +5296,7 @@ LAB_002dad8c:
       if (temp_v32 + 1 >= 0x5b) {
         fStack_20 = temp_v35;
         fStack_1c = temp_v37;
-        FUN_001f4908(0,10,0xff);
+        slotSetRequest(0,10,0xff);
         piVar18 = g_lmapScene;
         g_lmapScene[1] = g_lmapScene[1] + 1;
         piVar18[2] = 0;
@@ -5917,7 +5914,7 @@ code_r0x00313648:
             g_lmapScene[10] = g_lmapScene[0xd];
             piVar18[0xb] = *piVar10;
             piVar18[0xc] = temp_v32;
-            *(unsigned char *)(DAT_005806a4 + 0x2d) = 0;
+            *(unsigned char *)(g_lmapView + 0x2d) = 0;
             FUN_00303460(0x13);
             temp_v25 = 180.0f;
             temp_v18 = ((float)g_lmapScene[0x14] + 180.0f) * temp_v19;
@@ -6266,7 +6263,7 @@ code_r0x00313648:
     piVar18[10] = 0x43220000;
     piVar18[0xb] = 0x44da6000;
     piVar18[0xc] = -0x3b4fc000;
-    *(unsigned char *)(DAT_005806a4 + 0x2d) = 0;
+    *(unsigned char *)(g_lmapView + 0x2d) = 0;
     temp_v32 = 0x1b;
     fStack_3c = temp_v19;
     goto code_r0x00303460;
@@ -6308,7 +6305,7 @@ code_r0x00313648:
     piVar18[0xc] = -0x3b4fc000;
     piVar18[10] = 0x43220000;
     piVar18[0xb] = -0x3c380000;
-    *(unsigned char *)(DAT_005806a4 + 0x2d) = 0;
+    *(unsigned char *)(g_lmapView + 0x2d) = 0;
     temp_v32 = 0x1c;
     fStack_3c = temp_v19;
     goto code_r0x00303460;
@@ -6359,9 +6356,9 @@ code_r0x00313648:
     temp_v32 = 0;
     in_d8 = CONCAT44(fStack_1c,fStack_20);
 code_r0x00303460:
-    piVar18 = DAT_005806a4;
-    piVar10 = DAT_005806a4 + 8;
-    *(unsigned char *)(DAT_005806a4 + 0x88) = 0;
+    piVar18 = g_lmapView;
+    piVar10 = g_lmapView + 8;
+    *(unsigned char *)(g_lmapView + 0x88) = 0;
     *piVar18 = temp_v32;
     piVar18[1] = 0;
     piVar18[2] = 0;
@@ -6389,7 +6386,7 @@ code_r0x00303460:
     temp_v6 = DAT_005f16f8;
     temp_v32 = DAT_005f16f4;
     piVar10 = g_lmapScene;
-    piVar18 = DAT_005806a4;
+    piVar18 = g_lmapView;
     fStack_34 = (float)in_d8;
     fStack_30 = (float)(in_d8 >> 0x20);
     fStack_2c = (float)in_d9;
@@ -6397,12 +6394,12 @@ code_r0x00303460:
     fStack_24 = (float)in_d10;
     fStack_20 = (float)(in_d10 >> 0x20);
     fStack_1c = (float)in_d11;
-    switch(*DAT_005806a4) {
+    switch(*g_lmapView) {
     case 0:
       FUN_0033982c();
       break;
     case 1:
-      temp_v19 = (float)DAT_005806a4[6];
+      temp_v19 = (float)g_lmapView[6];
       FUN_002b5cd4();
       temp_v5 = in_fpscr & 0xfffffff;
       temp_v18 = temp_v19;
@@ -6412,24 +6409,24 @@ code_r0x00303460:
       temp_v25 = temp_v18 * 0.2f;
       in_fpscr = temp_v5 | ((unsigned int)(temp_v25 <= temp_v18) << 0x1d);
       if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
-        DAT_005806a4[6] = g_lmapScene[0x14];
+        g_lmapView[6] = g_lmapScene[0x14];
       }
       else {
         in_fpscr = temp_v5 | ((unsigned int)(0.0f <= temp_v19) << 0x1d);
         if (!romwright_subpiece_4_1_0(in_fpscr >> 0x1d,0)) {
-          temp_v25 = (float)DAT_005806a4[6] - temp_v25;
+          temp_v25 = (float)g_lmapView[6] - temp_v25;
         }
         else {
-          temp_v25 = (float)DAT_005806a4[6] + temp_v25;
+          temp_v25 = (float)g_lmapView[6] + temp_v25;
         }
-        DAT_005806a4[6] = (int)temp_v25;
+        g_lmapView[6] = (int)temp_v25;
       }
       break;
     case 2:
-      DAT_005806a4[6] = g_lmapScene[0x14];
+      g_lmapView[6] = g_lmapScene[0x14];
       break;
     case 3:
-      DAT_005806a4[0x1d] = DAT_005f16f0;
+      g_lmapView[0x1d] = DAT_005f16f0;
       piVar18[0x1e] = temp_v32;
       piVar18[0x1f] = temp_v6;
       temp_v6 = DAT_005f1704;
@@ -6440,7 +6437,7 @@ code_r0x00303460:
       piVar18[0x20] = DAT_005f1708;
       break;
     case 4:
-      DAT_005806a4[0x24] = DAT_005f170c;
+      g_lmapView[0x24] = DAT_005f170c;
       piVar18[0x25] = temp_v12;
       piVar18[0x26] = temp_v13;
       temp_v6 = DAT_005f171c;
@@ -6456,7 +6453,7 @@ code_r0x00303460:
       temp_v19 = 0.017453292f;
       temp_v18 = (float)g_lmapScene[8];
       temp_v32 = g_lmapScene[9];
-      DAT_005806a4[0x17] = g_lmapScene[7];
+      g_lmapView[0x17] = g_lmapScene[7];
       piVar18[0x18] = (int)temp_v18;
       piVar18[0x19] = temp_v32;
       piVar18[0x18] = (int)(temp_v18 + 150.0f);
@@ -6469,44 +6466,44 @@ code_r0x00303460:
       temp_v18 = (float)piVar10[0x14] * 0.017453292f;
       FUN_001bc124();
       temp_v25 = 600.0f;
-      DAT_005806a4[0x14] = (int)((float)DAT_005806a4[0x14] + temp_v18 * 600.0f);
+      g_lmapView[0x14] = (int)((float)g_lmapView[0x14] + temp_v18 * 600.0f);
       temp_v19 = (float)g_lmapScene[0x14] * temp_v19;
       FUN_001bbf0c();
-      DAT_005806a4[0x16] = (int)((float)DAT_005806a4[0x16] + temp_v19 * temp_v25);
+      g_lmapView[0x16] = (int)((float)g_lmapView[0x16] + temp_v19 * temp_v25);
       break;
     case 7:
       temp_v18 = (float)g_lmapScene[0x13];
-      FUN_00272e64();
+      calcHeadingRoundedToCardinalDirection();
       temp_v6 = (int)temp_v18;
       temp_v18 = 0.017453292f;
       temp_v32 = temp_v7;
       if (temp_v6 != 0x5a) {
         temp_v32 = temp_v6 - 0x100;
       }
-      temp_v19 = (float)DAT_005806a4[0xa6] * 0.017453292f;
+      temp_v19 = (float)g_lmapView[0xa6] * 0.017453292f;
       if (!(temp_v6 != 0x5a && temp_v32 != 0xe)) {
         FUN_001bc124();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xd] = (int)temp_v19;
+        piVar18 = g_lmapView;
+        g_lmapView[0xd] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
         FUN_001bbf0c();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xc] = (int)temp_v18;
+        piVar18 = g_lmapView;
+        g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xb] = 0;
       }
       else {
         FUN_001bc124();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xb] = (int)temp_v19;
+        piVar18 = g_lmapView;
+        g_lmapView[0xb] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
         FUN_001bbf0c();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xc] = (int)temp_v18;
+        piVar18 = g_lmapView;
+        g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xd] = 0;
       }
-      piVar18 = DAT_005806a4;
-      temp_v18 = (float)DAT_005806a4[0xa6] + 10.0f;
-      DAT_005806a4[0xa6] = (int)temp_v18;
+      piVar18 = g_lmapView;
+      temp_v18 = (float)g_lmapView[0xa6] + 10.0f;
+      g_lmapView[0xa6] = (int)temp_v18;
       if ((int)temp_v18 >= 0x43340001) {
         temp_v18 = 180.0f;
       }
@@ -6514,40 +6511,40 @@ code_r0x00303460:
       break;
     case 8:
       temp_v18 = (float)g_lmapScene[0x13];
-      FUN_00272e64();
+      calcHeadingRoundedToCardinalDirection();
       temp_v6 = (int)temp_v18;
       temp_v18 = 0.017453292f;
       temp_v32 = temp_v8;
       if (temp_v6 != 0x5a) {
         temp_v32 = temp_v6 - 0x100;
       }
-      temp_v19 = (float)DAT_005806a4[0xa6] * 0.017453292f;
+      temp_v19 = (float)g_lmapView[0xa6] * 0.017453292f;
       if (!(temp_v6 != 0x5a && temp_v32 != 0xe)) {
         FUN_001bc124();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xd] = (int)temp_v19;
+        piVar18 = g_lmapView;
+        g_lmapView[0xd] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
         FUN_001bbf0c();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xc] = (int)temp_v18;
+        piVar18 = g_lmapView;
+        g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xb] = 0;
       }
       else {
         FUN_001bc124();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xb] = (int)temp_v19;
+        piVar18 = g_lmapView;
+        g_lmapView[0xb] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
         FUN_001bbf0c();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xc] = (int)temp_v18;
+        piVar18 = g_lmapView;
+        g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xd] = 0;
       }
-      temp_v18 = (float)DAT_005806a4[0xa6];
+      temp_v18 = (float)g_lmapView[0xa6];
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 < 0.0f) << 0x1f) |
               ((unsigned int)(temp_v18 == 0.0f) << 0x1e);
       in_fpscr = temp_v5 | ((unsigned int)(temp_v18 != temp_v18) << 0x1c);
       temp_v1 = (unsigned char)(temp_v5 >> 0x18);
-      piVar18 = DAT_005806a4;
+      piVar18 = g_lmapView;
       if ((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1)) {
         temp_v18 = 0.0f;
       }
@@ -6555,37 +6552,37 @@ code_r0x00303460:
       break;
     case 9:
       temp_v18 = (float)g_lmapScene[0x13];
-      FUN_00272e64();
+      calcHeadingRoundedToCardinalDirection();
       temp_v6 = (int)temp_v18;
       temp_v18 = 0.017453292f;
       temp_v32 = temp_v9;
       if (temp_v6 != 0x5a) {
         temp_v32 = temp_v6 - 0x100;
       }
-      temp_v19 = (float)DAT_005806a4[0xa6] * 0.017453292f;
+      temp_v19 = (float)g_lmapView[0xa6] * 0.017453292f;
       if (!(temp_v6 != 0x5a && temp_v32 != 0xe)) {
         FUN_001bc124();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xd] = (int)temp_v19;
+        piVar18 = g_lmapView;
+        g_lmapView[0xd] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
         FUN_001bbf0c();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xc] = (int)temp_v18;
+        piVar18 = g_lmapView;
+        g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xb] = 0;
       }
       else {
         FUN_001bc124();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xb] = (int)temp_v19;
+        piVar18 = g_lmapView;
+        g_lmapView[0xb] = (int)temp_v19;
         temp_v18 = (float)piVar18[0xa6] * temp_v18;
         FUN_001bbf0c();
-        piVar18 = DAT_005806a4;
-        DAT_005806a4[0xc] = (int)temp_v18;
+        piVar18 = g_lmapView;
+        g_lmapView[0xc] = (int)temp_v18;
         piVar18[0xd] = 0;
       }
-      piVar18 = DAT_005806a4;
-      temp_v18 = (float)DAT_005806a4[0xa6] - 10.0f;
-      DAT_005806a4[0xa6] = (int)temp_v18;
+      piVar18 = g_lmapView;
+      temp_v18 = (float)g_lmapView[0xa6] - 10.0f;
+      g_lmapView[0xa6] = (int)temp_v18;
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 < 0.0f) << 0x1f) |
               ((unsigned int)(temp_v18 == 0.0f) << 0x1e);
       in_fpscr = temp_v5 | ((unsigned int)(temp_v18 != temp_v18) << 0x1c);
@@ -6596,13 +6593,13 @@ code_r0x00303460:
       piVar18[0xa6] = (int)temp_v18;
       break;
     case 10:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 != 1) {
           if (temp_v32 == 2) {
             FUN_0033a374();
-            piVar18 = DAT_005806a4;
-            DAT_005806a4 = piVar18;
+            piVar18 = g_lmapView;
+            g_lmapView = piVar18;
             if (temp_v32 != 0) {
               piVar18[1] = piVar18[1] + 1;
               piVar18[2] = 0;
@@ -6649,20 +6646,20 @@ code_r0x00303460:
             uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
             fStack_94 = temp_v37;
             FUN_002d1e44(&fStack_b8);
-            piVar18 = DAT_005806a4;
-            DAT_005806a4[1] = DAT_005806a4[1] + 1;
+            piVar18 = g_lmapView;
+            g_lmapView[1] = g_lmapView[1] + 1;
             piVar18[2] = 0;
           }
         }
       }
       else {
-        fStack_b8 = (float)DAT_005806a4[0x17];
-        fStack_b4 = (float)DAT_005806a4[0x18];
-        fStack_b0 = (float)DAT_005806a4[0x19];
+        fStack_b8 = (float)g_lmapView[0x17];
+        fStack_b4 = (float)g_lmapView[0x18];
+        fStack_b0 = (float)g_lmapView[0x19];
         temp_v19 = 0.017453292f;
-        fStack_ac = (float)DAT_005806a4[0x14];
-        fStack_a8 = (float)DAT_005806a4[0x15];
-        iStack_a4 = DAT_005806a4[0x16];
+        fStack_ac = (float)g_lmapView[0x14];
+        fStack_a8 = (float)g_lmapView[0x15];
+        iStack_a4 = g_lmapView[0x16];
         temp_v25 = (float)g_lmapScene[0xc];
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
@@ -6693,21 +6690,21 @@ code_r0x00303460:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v37;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         piVar10 = piVar18 + 1;
         *piVar10 = *piVar10 + 1;
         piVar18[2] = 0;
       }
       break;
     case 0xb:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 != 1) {
           if (temp_v32 == 2) {
             FUN_0033a374();
-            piVar18 = DAT_005806a4;
-            DAT_005806a4 = piVar18;
+            piVar18 = g_lmapView;
+            g_lmapView = piVar18;
             if (temp_v32 != 0) {
               piVar18[1] = piVar18[1] + 1;
               piVar18[2] = 0;
@@ -6753,15 +6750,15 @@ code_r0x00303460:
             uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
             fStack_94 = temp_v37;
             FUN_002d1e44(&fStack_b8);
-            piVar18 = DAT_005806a4;
-            DAT_005806a4[1] = DAT_005806a4[1] + 1;
+            piVar18 = g_lmapView;
+            g_lmapView[1] = g_lmapView[1] + 1;
             piVar18[2] = 0;
           }
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -6798,8 +6795,8 @@ code_r0x00303460:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v37;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         piVar10 = piVar18 + 1;
         *piVar10 = *piVar10 + 1;
         piVar18[2] = 0;
@@ -6812,13 +6809,13 @@ code_r0x00303460:
       FUN_002b56e0();
       break;
     case 0xe:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 != 1) {
           if (temp_v32 == 2) {
             FUN_0033a374();
-            piVar18 = DAT_005806a4;
-            DAT_005806a4 = piVar18;
+            piVar18 = g_lmapView;
+            g_lmapView = piVar18;
             if (temp_v32 != 0) {
               piVar18[1] = piVar18[1] + 1;
               piVar18[2] = 0;
@@ -6869,20 +6866,20 @@ code_r0x00303460:
             uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
             fStack_94 = temp_v35;
             FUN_002d1e44(&fStack_b8);
-            piVar18 = DAT_005806a4;
-            DAT_005806a4[1] = DAT_005806a4[1] + 1;
+            piVar18 = g_lmapView;
+            g_lmapView[1] = g_lmapView[1] + 1;
             piVar18[2] = 0;
           }
         }
       }
       else {
-        fStack_b8 = (float)DAT_005806a4[0x17];
-        fStack_b4 = (float)DAT_005806a4[0x18];
-        fStack_b0 = (float)DAT_005806a4[0x19];
+        fStack_b8 = (float)g_lmapView[0x17];
+        fStack_b4 = (float)g_lmapView[0x18];
+        fStack_b0 = (float)g_lmapView[0x19];
         temp_v19 = 0.017453292f;
-        fStack_ac = (float)DAT_005806a4[0x14];
-        fStack_a8 = (float)DAT_005806a4[0x15];
-        iStack_a4 = DAT_005806a4[0x16];
+        fStack_ac = (float)g_lmapView[0x14];
+        fStack_a8 = (float)g_lmapView[0x15];
+        iStack_a4 = g_lmapView[0x16];
         temp_v25 = (float)g_lmapScene[0xc];
         temp_v18 = (float)g_lmapScene[0x14] * 0.017453292f;
         temp_v35 = (float)g_lmapScene[10];
@@ -6917,8 +6914,8 @@ code_r0x00303460:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v35;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         piVar10 = piVar18 + 1;
         *piVar10 = *piVar10 + 1;
         piVar18[2] = 0;
@@ -6931,12 +6928,12 @@ code_r0x00303460:
       FUN_00352568();
       break;
     case 0x12:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 == 1) {
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
-          DAT_005806a4 = piVar18;
+          piVar18 = g_lmapView;
+          g_lmapView = piVar18;
           if (temp_v32 != 0) {
             piVar18[1] = piVar18[1] + 1;
             piVar18[2] = 0;
@@ -6944,7 +6941,7 @@ code_r0x00303460:
         }
       }
       else {
-        DAT_005806a4[3] = 0;
+        g_lmapView[3] = 0;
         fStack_b8 = (float)piVar18[0x17];
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -6954,9 +6951,9 @@ code_r0x00303460:
         temp_v25 = 100.0f;
         fStack_b8 = fStack_b8 + temp_v18 * 100.0f;
         fStack_b4 = fStack_b4 - 100.0f;
-        fStack_ac = (float)DAT_005806a4[0x14];
-        fStack_a8 = (float)DAT_005806a4[0x15];
-        iStack_a4 = DAT_005806a4[0x16];
+        fStack_ac = (float)g_lmapView[0x14];
+        fStack_a8 = (float)g_lmapView[0x15];
+        iStack_a4 = g_lmapView[0x16];
         temp_v18 = (float)g_lmapScene[0x14] * temp_v19;
         FUN_001bc124();
         fStack_ac = fStack_ac + temp_v18 * temp_v25;
@@ -6991,21 +6988,21 @@ code_r0x00303460:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v37;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
       }
       break;
     case 0x13:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 == 1) {
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
-          DAT_005806a4 = piVar18;
+          piVar18 = g_lmapView;
+          g_lmapView = piVar18;
           if (temp_v32 != 0) {
             piVar18[1] = piVar18[1] + 1;
             piVar18[2] = 0;
@@ -7013,8 +7010,8 @@ code_r0x00303460:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7051,19 +7048,19 @@ code_r0x00303460:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v37;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
       }
       break;
     case 0x14:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
-        if ((temp_v32 == 1) && (FUN_0033a374(), piVar18 = DAT_005806a4, temp_v32 != 0)) {
-          DAT_005806a4[0x86] = 0;
+        if ((temp_v32 == 1) && (FUN_0033a374(), piVar18 = g_lmapView, temp_v32 != 0)) {
+          g_lmapView[0x86] = 0;
           piVar18[0x87] = 0;
           piVar18[6] = (int)((float)g_lmapScene[0x14] + 110.0f);
           piVar18[0x14] = (int)fStack_94;
@@ -7077,8 +7074,8 @@ code_r0x00303460:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7116,9 +7113,9 @@ code_r0x00303460:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v37;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
@@ -7126,12 +7123,12 @@ code_r0x00303460:
       break;
     case 0x15:
       temp_v32 = FUN_003033d4();
-      piVar18 = DAT_005806a4;
-      if (DAT_005806a4[1] != 0) {
-        if ((DAT_005806a4[1] == 1) &&
-           (piVar10 = DAT_005806a4, FUN_0033a374(), piVar18 = DAT_005806a4, piVar10 != (int *)0x0))
+      piVar18 = g_lmapView;
+      if (g_lmapView[1] != 0) {
+        if ((g_lmapView[1] == 1) &&
+           (piVar10 = g_lmapView, FUN_0033a374(), piVar18 = g_lmapView, piVar10 != (int *)0x0))
         {
-          DAT_005806a4[0x86] = 0;
+          g_lmapView[0x86] = 0;
           piVar18[0x87] = 0;
           piVar18[6] = (int)((float)g_lmapScene[0x14] + 110.0f);
           piVar18[0x14] = (int)fStack_94;
@@ -7145,8 +7142,8 @@ code_r0x00303460:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7160,36 +7157,36 @@ code_r0x00303460:
         temp_v37 = (float)g_lmapScene[8] + (float)piVar18[temp_v32 + 0x33];
         temp_v18 = ((float)piVar18[6] - 90.0f) * 0.017453292f;
         FUN_001bc124();
-        temp_v35 = temp_v35 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v18 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v35 = temp_v35 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bbf0c();
-        fStack_98 = temp_v25 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v18 = (float)DAT_005806a4[6] * temp_v19;
+        fStack_98 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v18 = (float)g_lmapView[6] * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v37;
         FUN_001bc124();
-        temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)DAT_005806a4[temp_v32 + 99];
-        temp_v18 = (float)DAT_005806a4[6] * temp_v19;
+        temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
+        temp_v18 = (float)g_lmapView[6] * temp_v19;
         FUN_001bbf0c();
-        temp_v37 = (float)g_lmapScene[9] - temp_v18 * (float)DAT_005806a4[temp_v32 + 99];
-        temp_v35 = (float)g_lmapScene[8] + (float)DAT_005806a4[temp_v32 + 0x43] +
-                 (float)DAT_005806a4[7];
-        temp_v18 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v37 = (float)g_lmapScene[9] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
+        temp_v35 = (float)g_lmapScene[8] + (float)g_lmapView[temp_v32 + 0x43] +
+                 (float)g_lmapView[7];
+        temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bc124();
-        temp_v25 = temp_v25 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v19 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v25 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v19 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bbf0c();
         temp_v6 = 0;
-        fStack_8c = temp_v37 + temp_v19 * (float)DAT_005806a4[temp_v32 + 0x53];
+        fStack_8c = temp_v37 + temp_v19 * (float)g_lmapView[temp_v32 + 0x53];
         fStack_6c = 1.26117e-43f;
         uStack_70 = 0;
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v25;
         fStack_90 = temp_v35;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         piVar18[0x86] = temp_v6;
         piVar18[0x87] = temp_v6;
         *piVar10 = piVar18[1] + 1;
@@ -7198,10 +7195,10 @@ code_r0x00303460:
       }
       break;
     case 0x16:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
-        if ((temp_v32 == 1) && (FUN_0033a374(), piVar18 = DAT_005806a4, temp_v32 != 0)) {
-          DAT_005806a4[0x86] = 0;
+        if ((temp_v32 == 1) && (FUN_0033a374(), piVar18 = g_lmapView, temp_v32 != 0)) {
+          g_lmapView[0x86] = 0;
           piVar18[0x87] = 0;
           piVar18[6] = g_lmapScene[0x13];
           piVar18[0x14] = (int)fStack_94;
@@ -7215,8 +7212,8 @@ code_r0x00303460:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7254,9 +7251,9 @@ code_r0x00303460:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v37;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
@@ -7264,14 +7261,14 @@ code_r0x00303460:
       break;
     case 0x17:
       temp_v32 = FUN_003033d4();
-      piVar18 = DAT_005806a4;
-      if (DAT_005806a4[1] != 0) {
-        if (DAT_005806a4[1] == 1) {
-          piVar10 = DAT_005806a4;
+      piVar18 = g_lmapView;
+      if (g_lmapView[1] != 0) {
+        if (g_lmapView[1] == 1) {
+          piVar10 = g_lmapView;
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
+          piVar18 = g_lmapView;
 joined_r0x00397538:
-          DAT_005806a4 = piVar18;
+          g_lmapView = piVar18;
           if (piVar10 != (int *)0x0) {
             piVar18[0x86] = 0;
             piVar18[0x87] = 0;
@@ -7288,8 +7285,8 @@ joined_r0x00397538:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7303,26 +7300,26 @@ joined_r0x00397538:
         temp_v37 = (float)g_lmapScene[8] + (float)piVar18[temp_v32 + 0x33];
         temp_v18 = ((float)piVar18[6] - 90.0f) * 0.017453292f;
         FUN_001bc124();
-        temp_v35 = temp_v35 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v18 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v35 = temp_v35 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bbf0c();
-        fStack_98 = temp_v25 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v18 = (float)DAT_005806a4[6] * temp_v19;
+        fStack_98 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v18 = (float)g_lmapView[6] * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v37;
         FUN_001bc124();
-        temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)DAT_005806a4[temp_v32 + 99];
-        temp_v18 = (float)DAT_005806a4[6] * temp_v19;
+        temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
+        temp_v18 = (float)g_lmapView[6] * temp_v19;
         FUN_001bbf0c();
-        temp_v35 = (float)g_lmapScene[9] - temp_v18 * (float)DAT_005806a4[temp_v32 + 99];
-        temp_v37 = (float)g_lmapScene[8] + (float)DAT_005806a4[temp_v32 + 0x43] +
-                 (float)DAT_005806a4[7];
-        temp_v18 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v35 = (float)g_lmapScene[9] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
+        temp_v37 = (float)g_lmapScene[8] + (float)g_lmapView[temp_v32 + 0x43] +
+                 (float)g_lmapView[7];
+        temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bc124();
-        temp_v25 = temp_v25 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v19 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v25 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v19 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bbf0c();
-        fStack_8c = temp_v35 + temp_v19 * (float)DAT_005806a4[temp_v32 + 0x53];
+        fStack_8c = temp_v35 + temp_v19 * (float)g_lmapView[temp_v32 + 0x53];
         fStack_94 = temp_v25;
         fStack_90 = temp_v37;
         FUN_00330108(&fStack_94,&fStack_a0,&uStack_44);
@@ -7334,9 +7331,9 @@ joined_r0x00397538:
         fStack_8c = fStack_3c;
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         piVar18[0x86] = temp_v32;
         piVar18[0x87] = temp_v32;
         *piVar10 = piVar18[1] + 1;
@@ -7346,18 +7343,18 @@ joined_r0x00397538:
       break;
     case 0x18:
       temp_v32 = FUN_003033d4();
-      piVar18 = DAT_005806a4;
-      if (DAT_005806a4[1] != 0) {
-        if (DAT_005806a4[1] == 1) {
-          piVar10 = DAT_005806a4;
+      piVar18 = g_lmapView;
+      if (g_lmapView[1] != 0) {
+        if (g_lmapView[1] == 1) {
+          piVar10 = g_lmapView;
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
+          piVar18 = g_lmapView;
           goto joined_r0x00397538;
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7371,26 +7368,26 @@ joined_r0x00397538:
         temp_v37 = (float)g_lmapScene[8] + (float)piVar18[temp_v32 + 0x33];
         temp_v18 = ((float)piVar18[6] - 90.0f) * 0.017453292f;
         FUN_001bc124();
-        temp_v35 = temp_v35 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v18 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v35 = temp_v35 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bbf0c();
-        fStack_98 = temp_v25 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v18 = (float)DAT_005806a4[6] * temp_v19;
+        fStack_98 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v18 = (float)g_lmapView[6] * temp_v19;
         fStack_a0 = temp_v35;
         fStack_9c = temp_v37;
         FUN_001bc124();
-        temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)DAT_005806a4[temp_v32 + 99];
-        temp_v18 = (float)DAT_005806a4[6] * temp_v19;
+        temp_v25 = (float)g_lmapScene[7] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
+        temp_v18 = (float)g_lmapView[6] * temp_v19;
         FUN_001bbf0c();
-        temp_v35 = (float)g_lmapScene[9] - temp_v18 * (float)DAT_005806a4[temp_v32 + 99];
-        temp_v37 = (float)g_lmapScene[8] + (float)DAT_005806a4[temp_v32 + 0x43] +
-                 (float)DAT_005806a4[7];
-        temp_v18 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v35 = (float)g_lmapScene[9] - temp_v18 * (float)g_lmapView[temp_v32 + 99];
+        temp_v37 = (float)g_lmapScene[8] + (float)g_lmapView[temp_v32 + 0x43] +
+                 (float)g_lmapView[7];
+        temp_v18 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bc124();
-        temp_v25 = temp_v25 + temp_v18 * (float)DAT_005806a4[temp_v32 + 0x53];
-        temp_v19 = ((float)DAT_005806a4[6] - temp_v27) * temp_v19;
+        temp_v25 = temp_v25 + temp_v18 * (float)g_lmapView[temp_v32 + 0x53];
+        temp_v19 = ((float)g_lmapView[6] - temp_v27) * temp_v19;
         FUN_001bbf0c();
-        fStack_8c = temp_v35 + temp_v19 * (float)DAT_005806a4[temp_v32 + 0x53];
+        fStack_8c = temp_v35 + temp_v19 * (float)g_lmapView[temp_v32 + 0x53];
         fStack_94 = temp_v25;
         fStack_90 = temp_v37;
         FUN_00330108(&fStack_94,&fStack_a0,&uStack_44);
@@ -7402,9 +7399,9 @@ joined_r0x00397538:
         fStack_8c = fStack_3c;
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         piVar18[0x86] = temp_v32;
         piVar18[0x87] = temp_v32;
         *piVar10 = piVar18[1] + 1;
@@ -7414,11 +7411,11 @@ joined_r0x00397538:
       break;
     case 0x19:
       FUN_003033d4();
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
-        if ((temp_v32 == 1) && (FUN_0033a374(), piVar10 = DAT_005806a4, temp_v32 != 0)) {
-          piVar7 = DAT_005806a4 + 0x14;
-          DAT_005806a4[6] = g_lmapScene[0x13];
+        if ((temp_v32 == 1) && (FUN_0033a374(), piVar10 = g_lmapView, temp_v32 != 0)) {
+          piVar7 = g_lmapView + 0x14;
+          g_lmapView[6] = g_lmapScene[0x13];
           temp_v32 = piVar18[0x99];
           temp_v6 = piVar18[0x9a];
           *piVar7 = piVar18[0x98];
@@ -7436,7 +7433,7 @@ joined_r0x00397538:
         }
       }
       else {
-        DAT_005806a4[3] = 0;
+        g_lmapView[3] = 0;
         fStack_b0 = DAT_005f1a2c;
         fStack_b8 = DAT_005f1a24;
         fStack_b4 = DAT_005f1a28;
@@ -7462,9 +7459,9 @@ joined_r0x00397538:
         fStack_6c = DAT_005f1a48;
         uStack_4c = uStack_4c & 0xffffffff00000000;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
@@ -7472,12 +7469,12 @@ joined_r0x00397538:
       break;
     case 0x1a:
       FUN_003033d4();
-      piVar18 = DAT_005806a4;
-      if (DAT_005806a4[1] != 0) {
-        if ((DAT_005806a4[1] == 1) &&
-           (piVar10 = DAT_005806a4, FUN_0033a374(), piVar18 = DAT_005806a4, piVar10 != (int *)0x0))
+      piVar18 = g_lmapView;
+      if (g_lmapView[1] != 0) {
+        if ((g_lmapView[1] == 1) &&
+           (piVar10 = g_lmapView, FUN_0033a374(), piVar18 = g_lmapView, piVar10 != (int *)0x0))
         {
-          DAT_005806a4[0x86] = 0;
+          g_lmapView[0x86] = 0;
           piVar18[0x87] = 0;
           piVar18[6] = g_lmapScene[0x14];
           piVar18[0x14] = (int)fStack_94;
@@ -7491,8 +7488,8 @@ joined_r0x00397538:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7530,20 +7527,20 @@ joined_r0x00397538:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_94 = temp_v37;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         piVar10 = piVar18 + 1;
         *piVar10 = *piVar10 + 1;
         piVar18[2] = 0;
       }
       break;
     case 0x1b:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 == 1) {
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
-          DAT_005806a4 = piVar18;
+          piVar18 = g_lmapView;
+          g_lmapView = piVar18;
           if (temp_v32 != 0) {
             piVar18[1] = piVar18[1] + 1;
             piVar18[2] = 0;
@@ -7551,7 +7548,7 @@ joined_r0x00397538:
         }
       }
       else {
-        DAT_005806a4[3] = 0;
+        g_lmapView[3] = 0;
         fStack_b8 = 1520.0f;
         fStack_b4 = 1786.0f;
         fStack_b0 = -369.0f;
@@ -7568,21 +7565,21 @@ joined_r0x00397538:
         uStack_70 = 0;
         uStack_4c = uStack_4c & 0xffffffff00000000;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
       }
       break;
     case 0x1c:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 == 1) {
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
-          DAT_005806a4 = piVar18;
+          piVar18 = g_lmapView;
+          g_lmapView = piVar18;
           if (temp_v32 != 0) {
             piVar18[1] = piVar18[1] + 1;
             piVar18[2] = 0;
@@ -7590,7 +7587,7 @@ joined_r0x00397538:
         }
       }
       else {
-        DAT_005806a4[3] = 0;
+        g_lmapView[3] = 0;
         fStack_b8 = 1571.0f;
         fStack_b4 = 1684.0f;
         fStack_b0 = -323.0f;
@@ -7607,21 +7604,21 @@ joined_r0x00397538:
         uStack_70 = 0;
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
       }
       break;
     case 0x1d:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 == 1) {
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
-          DAT_005806a4 = piVar18;
+          piVar18 = g_lmapView;
+          g_lmapView = piVar18;
           if (temp_v32 != 0) {
             piVar18[1] = piVar18[1] + 1;
             piVar18[2] = 0;
@@ -7629,8 +7626,8 @@ joined_r0x00397538:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7668,21 +7665,21 @@ joined_r0x00397538:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_90 = temp_v19;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
       }
       break;
     case 0x1e:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 == 1) {
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
-          DAT_005806a4 = piVar18;
+          piVar18 = g_lmapView;
+          g_lmapView = piVar18;
           if (temp_v32 != 0) {
             piVar18[1] = piVar18[1] + 1;
             piVar18[2] = 0;
@@ -7690,8 +7687,8 @@ joined_r0x00397538:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7728,9 +7725,9 @@ joined_r0x00397538:
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         fStack_90 = temp_v25;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
@@ -7740,12 +7737,12 @@ joined_r0x00397538:
       FUN_00376c64();
       break;
     case 0x20:
-      temp_v32 = DAT_005806a4[1];
+      temp_v32 = g_lmapView[1];
       if (temp_v32 != 0) {
         if (temp_v32 == 1) {
           FUN_0033a374();
-          piVar18 = DAT_005806a4;
-          DAT_005806a4 = piVar18;
+          piVar18 = g_lmapView;
+          g_lmapView = piVar18;
           if (temp_v32 != 0) {
             piVar18[1] = piVar18[1] + 1;
             piVar18[2] = 0;
@@ -7753,8 +7750,8 @@ joined_r0x00397538:
         }
       }
       else {
-        pfVar8 = (float *)(DAT_005806a4 + 0x17);
-        DAT_005806a4[3] = 0;
+        pfVar8 = (float *)(g_lmapView + 0x17);
+        g_lmapView[3] = 0;
         fStack_b8 = *pfVar8;
         fStack_b4 = (float)piVar18[0x18];
         fStack_b0 = (float)piVar18[0x19];
@@ -7771,9 +7768,9 @@ joined_r0x00397538:
         uStack_70 = 0;
         uStack_4c = (unsigned long long)(*(unsigned int *)((unsigned char *)&uStack_4c + 4)) << 0x20;
         FUN_002d1e44(&fStack_b8);
-        piVar18 = DAT_005806a4;
-        piVar10 = DAT_005806a4 + 1;
-        *(unsigned char *)(DAT_005806a4 + 0x88) = 1;
+        piVar18 = g_lmapView;
+        piVar10 = g_lmapView + 1;
+        *(unsigned char *)(g_lmapView + 0x88) = 1;
         *piVar10 = piVar18[1] + 1;
         piVar18[2] = 0;
         piVar18[3] = 0;
@@ -7793,7 +7790,7 @@ joined_r0x00397538:
     temp_v35 = (float)g_lmapScene[9];
     pfVar8 = (float *)asdModelGetStatic38();
     *pfVar8 = temp_v19;
-    if ((*DAT_005806a4 == 0xc) && (DAT_005806a4[1] >= 100)) {
+    if ((*g_lmapView == 0xc) && (g_lmapView[1] >= 100)) {
       temp_v20 = ((float)g_lmapScene[0x13] + 180.0f) * 0.7111111f;
       temp_v5 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v37 <= temp_v20) << 0x1d);
       for (temp_v20 = romwright_fabs_4(temp_v20); temp_v31 = temp_v37, (int)temp_v20 >= 0x47800000;
@@ -7896,11 +7893,11 @@ joined_r0x00397538:
     fStack_ac = fStack_ac * temp_v19;
     fStack_a8 = fStack_a8 * temp_v19;
     temp_v37 = 0.017453292f;
-    temp_v19 = (float)DAT_005806a4[6] * 0.017453292f;
+    temp_v19 = (float)g_lmapView[6] * 0.017453292f;
     FUN_001bc124();
     temp_v31 = 290.0f;
     temp_v25 = temp_v25 + temp_v19 * 290.0f;
-    temp_v37 = (float)DAT_005806a4[6] * temp_v37;
+    temp_v37 = (float)g_lmapView[6] * temp_v37;
     FUN_001bbf0c();
     temp_v18 = temp_v18 + DAT_005f1a04;
     temp_v32 = *(int *)(g_handleRegistry + 0x14);
@@ -8209,7 +8206,7 @@ joined_r0x002495a4:
       temp_v32 = *(int *)(piVar18[0x61] + 4);
       *(unsigned int *)(temp_v32 + 4) = *(unsigned int *)(temp_v32 + 4) & 0xfffffffc;
       controllerSetDestination(temp_v32,piVar18 + 7);
-      FUN_003fdb18(temp_v32);
+      controllerSetRotationEulerDegrees(temp_v32);
       *(unsigned int *)(temp_v32 + 0x1fc) = 0x3f400000;
       FUN_003fd7c0(temp_v32,0,2);
       FUN_003fd924(temp_v32,0,2);

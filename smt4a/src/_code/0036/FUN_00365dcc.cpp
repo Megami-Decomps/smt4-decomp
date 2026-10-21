@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f16ac; /* 0x5f16ac */
 extern unsigned int DAT_005f16b0; /* 0x5f16b0 */
@@ -95,8 +95,8 @@ void FUN_00365dcc(void)
         else {
           temp_v1 = padButtonIsPressed(5);
           if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
-            temp_v1 = DAT_005806a4;
-            *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+            temp_v1 = g_lmapView;
+            *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
             *(unsigned int *)(temp_v1 + 0xb0) = 0;
             FUN_00303460(0);
             temp_v1 = g_lmapScene;
@@ -150,7 +150,7 @@ void FUN_00365dcc(void)
         *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v5 * temp_v6;
         *(unsigned int *)(temp_v1 + 0x50) = DAT_005f16bc;
         FUN_00303460(0xb);
-        *(unsigned int *)(DAT_005806a4 + 0xb0) = 0xfffffffe;
+        *(unsigned int *)(g_lmapView + 0xb0) = 0xfffffffe;
         sysPlaySe(0xdd);
         FUN_00233e10(1,DAT_005f16ac);
         FUN_001bc124();
@@ -224,8 +224,8 @@ void FUN_00365dcc(void)
       return;
     }
     mapIfReleaseSlot2();
-    temp_v1 = DAT_005806a4;
-    *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+    temp_v1 = g_lmapView;
+    *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
     *(unsigned int *)(temp_v1 + 0xb0) = 0;
     FUN_00303460(0);
     temp_v2 = *(int *)(g_lmapScene + 4);

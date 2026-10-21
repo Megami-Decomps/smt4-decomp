@@ -1,37 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `ll_sdiv` (_code @ 0x1623dc, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail packs quotient/remainder signs into one shifted word and returns directly in four registers. */
+#include "shard/W6_W6Match2_LongDivision.h"
 
-extern "C" {
+extern "C" __value_in_regs LongDivisionResult FUN_002ffa9c(u64 dividend, u64 divisor);
 
-extern int FUN_002ffa9c(int, int, int, unsigned int);
-
-
-int ll_sdiv(int param_1,int param_2,int param_3,unsigned int param_4)
-
+// Divide signed magnitudes, restoring the quotient and remainder signs.
+extern "C" __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v1 = param_2 >> 1;
-  temp_v0 = param_4 >> 1;
-  if ((int)temp_v1 < 0) {
-    temp_v3 = param_1 != 0;
-    param_1 = -param_1;
-    param_2 = -(param_2 + (unsigned int)temp_v3);
-  }
-  if ((int)param_4 < 0) {
-    temp_v3 = param_3 != 0;
-    param_3 = -param_3;
-    param_4 = -(param_4 + temp_v3);
-  }
-  temp_v2 = FUN_002ffa9c(param_1,param_2,param_3,param_4);
-  if (((temp_v1 ^ temp_v0) & 0x40000000) != 0) {
-    temp_v2 = -temp_v2;
-  }
-  return temp_v2;
+    bool dividendNegative = dividend < 0;
+    bool quotientNegative = dividendNegative != (divisor < 0);
+    u64 dividendMagnitude = dividendNegative ? 0u - (u64)dividend : (u64)dividend;
+    u64 divisorMagnitude = divisor < 0 ? 0u - (u64)divisor : (u64)divisor;
+    LongDivisionResult result = FUN_002ffa9c(dividendMagnitude, divisorMagnitude);
+    if (quotientNegative) {
+        result.quotient = 0u - result.quotient;
+    }
+    if (dividendNegative) {
+        result.remainder = 0u - result.remainder;
+    }
+    return result;
 }
-
-} /* extern "C" */

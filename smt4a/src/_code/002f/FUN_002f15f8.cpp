@@ -24,7 +24,7 @@ extern int g_uiQuest; /* 0x57f28c */
 extern unsigned char FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: uiFadeRequestClear. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_003d2150. */
 
 
@@ -61,7 +61,7 @@ void FUN_002f15f8(unsigned int param_1,int param_2)
       temp_v6 = temp_v0 + 0x9ac;
       temp_v5 = temp_v0 + 0xad6;
     }
-    temp_v2 = FUN_002c2c68(temp_v6);
+    temp_v2 = objectApplyIfUnblocked(temp_v6);
     if (0 < temp_v2) {
       do {
         if (*(unsigned short *)(temp_v5 + temp_v4 * 2) == param_1) {
@@ -69,7 +69,7 @@ void FUN_002f15f8(unsigned int param_1,int param_2)
           break;
         }
         temp_v4 = temp_v4 + 1;
-        temp_v2 = FUN_002c2c68(temp_v6);
+        temp_v2 = objectApplyIfUnblocked(temp_v6);
       } while (temp_v4 < temp_v2);
     }
     uiSpriteSetKeyframe(temp_v0 + 0x34,0);

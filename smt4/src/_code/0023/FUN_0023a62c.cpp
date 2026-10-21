@@ -13,7 +13,7 @@ int VectorSignedToFloat(int, int);
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_002a66e0. */
-extern unsigned int FUN_002bc11c(unsigned int);
+extern unsigned int osVirtToPhysAddress(unsigned int);
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: FUN_002c2424. */
 
@@ -52,7 +52,7 @@ void FUN_0023a62c(float *param_1,unsigned int param_2,unsigned int param_3,unsig
                                      (unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v2 = VectorFloatToUnsigned(temp_v3 * temp_v1,3);
   FUN_002c2424(*(unsigned int *)((int)temp_v0 + 0x24),temp_v2);
-  temp_v2 = FUN_002bc11c(*(unsigned int *)((int)param_1[4] + 0x24));
+  temp_v2 = osVirtToPhysAddress(*(unsigned int *)((int)param_1[4] + 0x24));
   *(unsigned int *)((int)param_1[4] + 0x30) = temp_v2;
   param_1[6] = 1.0f;
   *(unsigned char *)(param_1 + 7) = 0;

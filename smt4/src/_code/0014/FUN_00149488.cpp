@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002bc11c(...);
+int osVirtToPhysAddress(...);
 int vramAreaGetBaseAddress(int);
 
 /* stack frame of param_2: 12 slot(s), 48 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } param_2_stack;
 
-/* Supplied declaration required: FUN_002bc11c. */
+/* Supplied declaration required: osVirtToPhysAddress. */
 /* Supplied declaration required: vramAreaGetBaseAddress. */
 
 
@@ -69,7 +69,7 @@ void FUN_00149488(int param_1,int param_2)
     temp_v3 = temp_v23;
     temp_v4 = temp_v16;
     vramAreaGetBaseAddress(0x20000);
-    temp_v1 = FUN_002bc11c();
+    temp_v1 = osVirtToPhysAddress();
     temp_v5 = temp_v3 + temp_v4 * 4;
     puVar15 = *(unsigned int **)(temp_v5 + 0xc);
     temp_v17 = *(unsigned int *)(temp_v3 + 0x34);
@@ -124,7 +124,7 @@ void FUN_00149488(int param_1,int param_2)
             }
             temp_v7 = *(unsigned int *)(temp_v12 + temp_v8 * 4 + 0x44);
           }
-          temp_v2 = FUN_002bc11c(temp_v7);
+          temp_v2 = osVirtToPhysAddress(temp_v7);
           puVar13 = puVar15 + temp_v10;
           temp_v15 = temp_v14 == 0x1400;
           *(unsigned int **)(temp_v12 + temp_v4 * 4 + 0x4c) = puVar13;

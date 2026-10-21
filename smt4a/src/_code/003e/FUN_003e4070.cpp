@@ -1,48 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e4070` (_code @ 0x3e4070, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses a 3988-byte stack reservation and different argument/enabled store ordering. */
+#include "common.h"
+
+struct OperationState {
+    u32 unk000;
+    u32 argument; // 0x004
+    u8 unk008[0xedc];
+    u8 enabled; // 0xee4
+    u8 unkee5[0x9b];
+};
+struct OperationResult {
+    u32 words[4];
+};
 
 extern "C" {
+void FUN_00161a10(void);
+void FUN_0018c740(OperationState *);
+void FUN_001a1f5c(void);
+void FUN_0018c840(void);
+void FUN_0018c870(void);
+void FUN_0018c7b0(OperationResult *, OperationState *);
 
-int FUN_00161a10(void);
-int FUN_0018c740(unsigned char [4]);
-int FUN_0018c7b0(unsigned char [16], unsigned char [4]);
-int FUN_0018c840(void);
-int FUN_0018c870(void);
-int FUN_001a1f5c(void);
-
-/* stack frame of param_2: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char spBC; /* 0xbc: local_bc */
-    unsigned int spF9C; /* 0xf9c: local_f9c */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00161a10. */
-/* Supplied declaration required: FUN_0018c740. */
-/* Supplied declaration required: FUN_0018c7b0. */
-/* Supplied declaration required: FUN_0018c840. */
-/* Supplied declaration required: FUN_0018c870. */
-/* Supplied declaration required: FUN_001a1f5c. */
-
-
-void FUN_003e4070(unsigned int param_1,unsigned int param_2)
-
+// Reset the operation's backing storage and submit its initialized state.
+void FUN_003e4070(u32, u32 argument)
 {
-/* irregular: 6 native warning(s); review required */
-  unsigned char temp_v0 [4];
-  unsigned int temp_v1;
-  unsigned char temp_v2;
-  unsigned char temp_v3 [16];
-  
-  FUN_00161a10();
-  FUN_0018c740(temp_v0);
-  temp_v2 = 0;
-  temp_v1 = param_2;
-  FUN_001a1f5c();
-  FUN_0018c840();
-  FUN_0018c870();
-  FUN_0018c7b0(temp_v3,temp_v0);
-  return;
+    FUN_00161a10();
+    OperationState state;
+    FUN_0018c740(&state);
+    state.enabled = 0;
+    state.argument = argument;
+    FUN_001a1f5c();
+    FUN_0018c840();
+    FUN_0018c870();
+    OperationResult result;
+    FUN_0018c7b0(&result, &state);
 }
-
-} /* extern "C" */
+}

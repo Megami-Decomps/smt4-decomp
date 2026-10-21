@@ -10,13 +10,13 @@ typedef struct {
     u16 flags;          /* 0x44 */
 } Record;
 
-Record *gameGetOptions(void);
-int FUN_002b6b38(void);
+Record *gameGetSupportUnitData(void);
+int gameGetOptionProgressStatus(void);
 
 /* True when the mode is 2 and the current record has flag 2 set or an empty count. */
 u32 FUN_00287800(void)
 {
-    int mode = FUN_002b6b38();
+    int mode = gameGetOptionProgressStatus();
 
     if (mode == 0) {
         return 0;
@@ -25,7 +25,7 @@ u32 FUN_00287800(void)
         return 0;
     }
     if (mode == 2) {
-        Record *record = gameGetOptions();
+        Record *record = gameGetSupportUnitData();
 
         if ((record->flags & 2) != 0 || record->count == 0) {
             return 1;

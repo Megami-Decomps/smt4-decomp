@@ -1,44 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003aeaa4` (_code @ 0x3aeaa4, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses a 44-byte stack frame and schedules command assembly before the global UI lookup. */
+#include "battle/btlUI.h"
+
+struct UiPosition {
+    f32 x, y, z;
+};
+struct BattleUiCommand {
+    u16 kind; // 0x00
+    u16 first; // 0x02
+    u16 second; // 0x04
+    u16 third; // 0x06
+    UiPosition position; // 0x08
+    u32 value; // 0x14
+    u8 unk18[0x14];
+};
 
 extern "C" {
+extern BtlUiGlobals g_btlUi;
+u32 FUN_002d00a4(BtlUiObjC *, const BattleUiCommand *);
 
-int FUN_002d00a4(int, unsigned short *);
-
-/* stack frame of param_6: 6 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned short sp32; /* 0x32: local_32 */
-    unsigned short sp34; /* 0x34: local_34 */
-    unsigned short sp36; /* 0x36: local_36 */
-    unsigned short sp38; /* 0x38: local_38 */
-} param_6_stack;
-
-extern unsigned char g_btlUi; /* 0x439c88 */
-
-/* Supplied declaration required: FUN_002d00a4. */
-
-
-void FUN_003aeaa4(unsigned int param_1,unsigned short param_2,unsigned int param_3,unsigned short param_4,
-                 unsigned short param_5,unsigned short param_6)
-
+// Queue a battle-UI command with its position and four halfword parameters.
+void FUN_003aeaa4(u32, u16 kind, u32 value, u16 first, u16 second, u16 third,
+                  UiPosition position)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  unsigned short temp_v2;
-  unsigned short temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v2 = param_5;
-  temp_v3 = param_6;
-  temp_v0 = param_2;
-  temp_v1 = param_4;
-  temp_v4 = param_3;
-  FUN_002d00a4((*(int *)((unsigned char *)&g_btlUi + 0x20)) + 0x2460,&temp_v0);
-  return;
+    BattleUiCommand command;
+    command.kind = kind;
+    command.first = first;
+    command.second = second;
+    command.third = third;
+    command.position = position;
+    command.value = value;
+    FUN_002d00a4(&g_btlUi.ui->objC, &command);
 }
-
-} /* extern "C" */
+}

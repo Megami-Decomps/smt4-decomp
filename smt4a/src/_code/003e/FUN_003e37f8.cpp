@@ -24,7 +24,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00215bd0. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
@@ -129,7 +129,7 @@ void FUN_003e37f8(int param_1)
     }
   }
   else {
-    temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x18));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
     if (temp_v0 != 2) {
       return;
     }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int fileSlotLoad(...);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int asdTMTexTableLoadEntryAsync(...);
 int FUN_002ad8b4(...);
 int buttonHelpSetPreset(...);
@@ -20,7 +20,7 @@ int taskCreateDraw(...);
 int asdTMTexTableLoadSprites(...);
 int asdMemoryAlloc(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int drawParameterBlockClear(...);
 int rt_memcpy_w(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -56,7 +56,7 @@ extern unsigned int DAT_0044de34; /* 0x44de34 */
 extern unsigned int configGetSettings(void);
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: fileSlotLoad. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: FUN_002ad8b4. */
@@ -72,7 +72,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -120,8 +120,8 @@ void FUN_00202ab4(void)
   puVar1[0x90] = 0;
   puVar1[0x91] = 0;
   puVar1[0x92] = 0;
-  FUN_00297468(&LAB_00202f18,puVar1 + 0x90,0);
-  FUN_00297468(&LAB_00202f34,puVar1 + 0x91,0);
+  asdLoadFileAsyncSimple(&LAB_00202f18,puVar1 + 0x90,0);
+  asdLoadFileAsyncSimple(&LAB_00202f34,puVar1 + 0x91,0);
   asdTMTexTableLoadSprites(0x36);
   asdTMTexTableLoadEntryAsync(0x36,0);
   fileSlotLoad(0x3d);
@@ -155,7 +155,7 @@ void FUN_00202ab4(void)
   puVar1[7] = 0;
   puVar1[0xb] = 0x3f000000;
   puVar1[0xc] = 0x3f000000;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 0x1f);
+  drawParameterBlockClear(puVar1 + 0x1f);
   paramsInit(puVar1 + 0x1f,&DAT_00405e2c,0x3c,0,0,0,0,0,0,&DAT_00405e68,0xe0);
   FUN_002bd954(puVar1 + 0x27,0x36,1,puVar1 + 0x1f,0xc9);
   FUN_002beed0(puVar1 + 0x4a,0x36,0x51,2,puVar1 + 0x1f,2);

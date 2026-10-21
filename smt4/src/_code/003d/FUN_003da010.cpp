@@ -7,10 +7,10 @@ extern "C" {
 int FUN_0024679c(void);
 int FUN_00249e54(unsigned int, char *);
 int btlGetMainState(void);
-int FUN_003db3a4(int);
+int btlEffectLoadVersionedResources(int);
 int FUN_003dbc1c(int);
-int FUN_003dc2d8(int);
-int FUN_003dcd10(int);
+int btlEffectLoadSecondaryResources(int);
+int battleLoadVersionEffectResources(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,13 +19,13 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0024679c. */
 /* Supplied declaration required: FUN_00249e54. */
-extern unsigned int FUN_0024a6b0(int);
+extern unsigned int keyedRecordRegisterName(int);
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_003db3a4. */
+/* Supplied declaration required: btlEffectLoadVersionedResources. */
 /* Supplied declaration required: FUN_003dbc1c. */
-/* Supplied declaration required: FUN_003dc2d8. */
-/* Supplied declaration required: FUN_003dcd10. */
+/* Supplied declaration required: btlEffectLoadSecondaryResources. */
+/* Supplied declaration required: battleLoadVersionEffectResources. */
 
 
 void FUN_003da010(int param_1)
@@ -59,7 +59,7 @@ void FUN_003da010(int param_1)
       temp_v5 = pcVar5[2] == 'R';
     }
     if (temp_v5) {
-      temp_v3 = FUN_0024a6b0(temp_v2 + 0x25c8);
+      temp_v3 = keyedRecordRegisterName(temp_v2 + 0x25c8);
       *(char *)(temp_v2 + 0x25c0) = (char)temp_v3;
       FUN_00249e54(temp_v3,pcVar5);
       *(char *)(temp_v2 + 0x25c0) = (char)temp_v3;
@@ -67,9 +67,9 @@ void FUN_003da010(int param_1)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0xb);
   FUN_003dbc1c(param_1);
-  FUN_003db3a4(param_1);
-  FUN_003dc2d8(param_1);
-  FUN_003dcd10(param_1);
+  btlEffectLoadVersionedResources(param_1);
+  btlEffectLoadSecondaryResources(param_1);
+  battleLoadVersionEffectResources(param_1);
   FUN_0024679c();
   return;
 }

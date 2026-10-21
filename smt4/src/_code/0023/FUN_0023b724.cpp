@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdPrimAlloc(int);
-int FUN_0023b7d8(int, int, int *);
+int modelShaderSubmitCommands(int, int, int *);
 int FUN_0023bb00(unsigned int *, unsigned int *, unsigned int *);
 int FUN_0023bba0(unsigned int *, int);
 int asdModelAdvanceCommandCursor(unsigned int);
@@ -22,11 +22,11 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: asdPrimAlloc. */
-/* Supplied declaration required: FUN_0023b7d8. */
+/* Supplied declaration required: modelShaderSubmitCommands. */
 /* Supplied declaration required: FUN_0023bb00. */
 /* Supplied declaration required: FUN_0023bba0. */
 /* Supplied declaration required: asdModelAdvanceCommandCursor. */
-extern unsigned int FUN_002bc11c(int);
+extern unsigned int osVirtToPhysAddress(int);
 /* Supplied declaration required: FUN_002bc7f4. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -53,10 +53,10 @@ void FUN_0023b724(int param_1,unsigned int param_2,int param_3,unsigned int *par
     temp_v4 = 0;
     temp_v5 = (unsigned int *)0x0;
     temp_v6 = 0;
-    temp_v4 = FUN_002bc11c(*(int *)(param_1 + 0x48) + param_3 * 2);
+    temp_v4 = osVirtToPhysAddress(*(int *)(param_1 + 0x48) + param_3 * 2);
     temp_v6 = 0;
     temp_v5 = param_4;
-    FUN_0023b7d8(param_1,param_1 + 0x4c,&temp_v4);
+    modelShaderSubmitCommands(param_1,param_1 + 0x4c,&temp_v4);
     return;
   }
   temp_v0 = (int)param_4 << 1;
@@ -64,7 +64,7 @@ void FUN_0023b724(int param_1,unsigned int param_2,int param_3,unsigned int *par
   puVar8 = param_4;
   asdPrimAlloc(temp_v0);
   rt_memcpy(temp_v1,*(int *)(param_1 + 0x48) + param_3 * 2,temp_v0);
-  temp_v2 = FUN_002bc11c(temp_v1);
+  temp_v2 = osVirtToPhysAddress(temp_v1);
   *(unsigned int *)(param_1 + 0x7dc) = temp_v2;
   *(unsigned int **)(param_1 + 0x7e0) = param_4;
   *(unsigned char *)(param_1 + 0x7e4) = 0;

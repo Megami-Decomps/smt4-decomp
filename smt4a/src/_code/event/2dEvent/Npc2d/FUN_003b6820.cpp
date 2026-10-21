@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int asdMemoryAllocTracked(...);
 int FUN_00191e00(...);
-int FUN_0019e378(...);
+int dataTable19FindAddonWord(...);
 int asdTMTexLoadMainHeap(...);
 int FUN_00283498(...);
 int sysMemClear(...);
@@ -26,8 +26,8 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: asdMemoryAllocTracked. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00191e00. */
-/* Supplied declaration required: FUN_0019e378. */
-extern int FUN_001a6508(unsigned int, unsigned int, unsigned int, unsigned int);
+/* Supplied declaration required: dataTable19FindAddonWord. */
+extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_00283498. */
 /* Supplied declaration required: sysMemClear. */
@@ -46,7 +46,7 @@ void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
   temp_v0 = gameFlagIsSet(0x522);
   if (temp_v0 != 0) {
     FUN_00283498(param_1);
-    temp_v0 = FUN_0019e378();
+    temp_v0 = dataTable19FindAddonWord();
     if (temp_v0 == 0) {
       return;
     }
@@ -73,7 +73,7 @@ void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
   puVar2[0x21] = 0;
   FUN_00283498();
   puVar2[0x16] = param_1;
-  puVar3 = (unsigned short *)FUN_0019e378();
+  puVar3 = (unsigned short *)dataTable19FindAddonWord();
   puVar2[0x11] = (unsigned int)*puVar3;
   if (param_2 != 0) {
     if (param_2 != 1) {
@@ -104,7 +104,7 @@ void FUN_003b6820(unsigned int param_1,int param_2,unsigned int param_3)
   }
   else {
     puVar2[3] = 0;
-    temp_v0 = FUN_001a6508(g_aocSystem,puVar2[0x10],puVar2[0x11],1);
+    temp_v0 = aocRunByName(g_aocSystem,puVar2[0x10],puVar2[0x11],1);
     if (temp_v0 != 0) {
       FUN_00191e00(g_aocSystem,puVar2[0x10],puVar2[0x11],0x10000);
     }

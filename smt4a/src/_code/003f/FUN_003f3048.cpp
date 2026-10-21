@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00184310(void);
-int FUN_003c3f1c(void);
+int findSkillMetadataById(void);
 
 extern int randRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int FUN_0031cfd0(unsigned short);
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: findSkillMetadataById. */
 extern int gameDataFlagTestBit(unsigned int);
 
 
@@ -42,7 +42,7 @@ unsigned int FUN_003f3048(int param_1,int param_2,int param_3)
         temp_v2 = 0;
         do {
           temp_v0 = (unsigned int)*(unsigned short *)(param_1 + 0x34 + temp_v2 * 2);
-          FUN_003c3f1c();
+          findSkillMetadataById();
           if ((*(unsigned char *)(temp_v0 + 3) & 0x40) != 0) {
             return 1;
           }

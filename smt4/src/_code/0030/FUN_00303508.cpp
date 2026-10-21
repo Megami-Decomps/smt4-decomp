@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -43,7 +43,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 
 
@@ -144,7 +144,7 @@ void FUN_00303508(int param_1)
       do {
         temp_v8 = temp_v21 * 40.743664f;
         temp_v9 = temp_v8;
-        FUN_002b7064();
+        phaseCosInterpolate();
         FUN_002b70cc();
         *puVar7 = 0;
         puVar7[1] = 0;

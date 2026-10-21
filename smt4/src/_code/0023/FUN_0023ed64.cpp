@@ -5,7 +5,7 @@
 extern "C" {
 
 int soundChannelStopAll(int);
-int FUN_0029c3c0(int, int, int);
+int slotSetRequest(int, int, int);
 int ifTouchRegionAdd(void);
 int soundChannelRequestIfEnabled(int, int);
 int FUN_002a03d8(int, int);
@@ -17,7 +17,7 @@ int asdTMTexTableLoadTmx(int, int);
 
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
@@ -136,7 +136,7 @@ unsigned int FUN_0023ed64(unsigned int *param_1)
     }
     param_1[7] = 3;
     param_1[0xe] = 300;
-    FUN_0029c3c0(0,0x2d,0xff);
+    slotSetRequest(0,0x2d,0xff);
   }
   if ((param_1[7] == 3) && (temp_v1 = FUN_002c2a04(0), temp_v1 == 3)) {
     temp_v1 = 1;

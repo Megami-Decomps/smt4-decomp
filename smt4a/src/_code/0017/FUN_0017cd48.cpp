@@ -5,7 +5,7 @@
 extern "C" {
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0058918c; /* 0x58918c */
+extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
 
 
 unsigned int * FUN_0017cd48(void)
@@ -13,11 +13,11 @@ unsigned int * FUN_0017cd48(void)
 {
   unsigned int *puVar1;
   
-  if (DAT_0058918c == (romwright_code *)0x0) {
+  if (g_gfxAllocateCallback == (romwright_code *)0x0) {
     puVar1 = (unsigned int *)0x0;
   }
   else {
-    puVar1 = (unsigned int *)(*DAT_0058918c)(0x10000,0x100,0,0x28);
+    puVar1 = (unsigned int *)(*g_gfxAllocateCallback)(0x10000,0x100,0,0x28);
     if (puVar1 != (unsigned int *)0x0) {
       *puVar1 = 0;
       puVar1[1] = 0;

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern const char DAT_00544a20[];
+extern const char g_effBlurFilterSourcePath[];
 
 void *memAlloc(int, int, int, s32 size, int align, int);
 
@@ -15,7 +15,7 @@ void effBlurFilterInitSamples(BlurParams *params)
     BlurSample *samples;
     s32 i;
 
-    asdDebugTrace(DAT_00544a20, 1208);
+    asdDebugTrace(g_effBlurFilterSourcePath, 1208);
     samples = (BlurSample *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
     i = 0;
 

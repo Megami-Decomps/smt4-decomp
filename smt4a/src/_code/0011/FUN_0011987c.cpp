@@ -9,7 +9,7 @@ int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
 int FUN_003054f0(int, unsigned int);
 int FUN_003056f2(unsigned int, unsigned int);
-int FUN_003056fc(int, int, unsigned int);
+int onlineSubmitEligibleRequest(int, int, unsigned int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -29,7 +29,7 @@ extern unsigned int FUN_003054ce(void);
 /* Supplied declaration required: FUN_003054f0. */
 extern int ownerChildValue(unsigned int);
 /* Supplied declaration required: FUN_003056f2. */
-/* Supplied declaration required: FUN_003056fc. */
+/* Supplied declaration required: onlineSubmitEligibleRequest. */
 
 
 void FUN_0011987c(int param_1)
@@ -56,7 +56,7 @@ void FUN_0011987c(int param_1)
   *(unsigned int *)(param_1 + 0xe4) = *(unsigned int *)(param_1 + 0x31c);
   temp_v0 = ownerChildValue(*(unsigned int *)(param_1 + 0x198));
   temp_v0 = *(int *)(temp_v0 + 0x18);
-  FUN_003056fc(temp_v0,param_1 + 0x88,temp_v2);
+  onlineSubmitEligibleRequest(temp_v0,param_1 + 0x88,temp_v2);
   if (temp_v0 != 0) {
     onlineJobSetStateWaiting(param_1);
     temp_v0 = operatorNew(0x10);

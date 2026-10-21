@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016e1dc` (_code @ 0x16e1dc, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: extracted bit-decoder fragment has live-in r5/sl/lr and modifies callee-saved r6/r7 without a function prologue; it is not a standalone C/C++ function. */
 #include "romwright_types.h"
 
 extern "C" {

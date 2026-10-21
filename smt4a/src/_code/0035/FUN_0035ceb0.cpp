@@ -1,40 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035ceb0` (_code @ 0x35ceb0, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match7_SceneState.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
+
+struct ScriptTransitionState {
+    GameState state;
+    u8 unk678[0x1d];
+    u8 pending;
+};
 
 extern "C" {
+u32 scrGetArg(s32 index);
+void FUN_00376fb8(u32 id);
+void mapPlaceSet(s32 map, s32 area, s32 object);
+void FUN_002b945c(u32 id);
 
-int asdSequenceRequest(int, int);
-int FUN_002b945c(int);
-int mapPlaceSet(int, int, int);
-int FUN_00376fb8(int);
-
-extern unsigned char DAT_005f1623; /* 0x5f1623 */
-extern unsigned char DAT_005f1b70; /* 0x5f1b70 */
-extern unsigned char DAT_005f1c91; /* 0x5f1c91 */
-
-/* Supplied declaration required: asdSequenceRequest. */
-extern int scrGetArg(void);
-/* Supplied declaration required: FUN_002b945c. */
-/* Supplied declaration required: mapPlaceSet. */
-/* Supplied declaration required: FUN_00376fb8. */
-
-
-unsigned int FUN_0035ceb0(void)
-
+u32 FUN_0035ceb0(s32 argumentIndex)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = scrGetArg();
-  FUN_00376fb8(temp_v0 + 100);
-  mapPlaceSet(0x18,1,0);
-  FUN_002b945c(temp_v0);
-  DAT_005f1623 = 1;
-  DAT_005f1b70 = 0;
-  DAT_005f1c91 = 1;
-  asdSequenceRequest(6,0);
-  return 1;
+    u32 id = scrGetArg(argumentIndex);
+    FUN_00376fb8(id + 100);
+    mapPlaceSet(0x18, 1, 0);
+    FUN_002b945c(id);
+    g_gameState.progressEnabled = 1;
+    g_gameState.transitionActive = 0;
+    reinterpret_cast<ScriptTransitionState*>(&g_gameState)->pending = 1;
+    asdSequenceRequest(6, NULL, 0);
+    return 1;
 }
-
-} /* extern "C" */
+}

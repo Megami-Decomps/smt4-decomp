@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003041a0` (_code @ 0x3041a0, 0xe54 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_RotationY.h"
 
 extern "C" {
 
@@ -9,12 +10,11 @@ int FUN_0019dad8(float *);
 int FUN_00245ed0(void);
 int FUN_00245f48(void);
 int FUN_002482d4(void);
-int FUN_00248480(void);
 int FUN_002484e0(void);
 int matrixCopySelectedToGlobal(float *);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b830(...);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int FUN_00360e64(void);
 int VectorSignedToFloat(int, int);
@@ -105,13 +105,12 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00245ed0. */
 /* Supplied declaration required: FUN_00245f48. */
 /* Supplied declaration required: FUN_002482d4. */
-/* Supplied declaration required: FUN_00248480. */
 /* Supplied declaration required: FUN_002484e0. */
 /* Supplied declaration required: matrixCopySelectedToGlobal. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_00360e64. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -254,11 +253,11 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
               temp_v12 = (float)temp_v22[10] +
                        ((float)temp_v22[9] + temp_v27 * temp_v12 * 0.5f) * temp_v12;
               FUN_002484e0();
-              FUN_00248480();
+              matrixSetRotationY(((f32*)temp_v22)[8]);
               FUN_002482d4();
               temp_v12 = temp_v12 * temp_v15;
               temp_v7 = temp_v12;
-              FUN_002b7064();
+              phaseCosInterpolate();
               temp_v19 = 0.0f;
               temp_v12 = temp_v12 * temp_v41;
               FUN_002b70cc();
@@ -533,11 +532,11 @@ void FUN_003041a0(fn_003041a0_arg0 *param_1)
             FUN_0024b830(0);
             temp_v22[8] = (int)((temp_v7 - 0.5f) * 2.0f * 3.1415927f);
             FUN_002484e0();
-            FUN_00248480();
+            matrixSetRotationY(((f32*)temp_v22)[8]);
             FUN_002482d4();
             temp_v12 = (float)temp_v22[10] * 40.743664f;
             temp_v7 = temp_v12;
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v12 = temp_v12 * temp_v41;
             FUN_002b70cc();
             DAT_004ea924 = temp_v7 * temp_v41;

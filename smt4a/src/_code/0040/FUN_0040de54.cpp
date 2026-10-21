@@ -1,20 +1,24 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040de54` (_code @ 0x40de54, 0x247c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_BattleCamera.h"
+#include "battle/btlMain.h"
+struct BattleMaskState;
+struct TransitionView;
 
 extern "C" {
 
 int panelSetMode3(...);
 int FUN_0037c8e4(...);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int FUN_003e5354(...);
 int FUN_003edfd4(...);
 int FUN_003f2498(...);
-int FUN_0040c888(...);
+int btlApplyDirectionBucket(...);
 int FUN_004112b0(...);
 int FUN_00416960(...);
 int FUN_0047f314(...);
-int FUN_004a0ef8(...);
+int partyAddMoneyClamped(...);
 int FUN_004c8c10(...);
 int FUN_004d86c0(...);
 int FUN_004d888c(...);
@@ -44,7 +48,7 @@ int FUN_004f5de4(...);
 int FUN_004f5fb8(...);
 int FUN_004f63dc(...);
 int FUN_004f7628(...);
-int FUN_004fa7d0(...);
+int keyedValueFindPair(...);
 int FUN_004fb43c(...);
 int FUN_004fb798(...);
 int FUN_004fd508(...);
@@ -52,10 +56,10 @@ int FUN_004fe7e4(...);
 int FUN_004fe900(...);
 
 int btlScriptUnitHasFlags(...);
-int FUN_003e9cd0(...);
+int stateFinishIfPresent(...);
 int FUN_0040ca18(...);
 int FUN_0040d274(...);
-int FUN_004a9a38(...);
+int btlUiSetDefaultLimits(...);
 int FUN_004c8800(...);
 int FUN_004c8cb0(...);
 int FUN_004c8d8c(...);
@@ -66,17 +70,17 @@ int FUN_004c9474(...);
 int FUN_004c9538(...);
 int FUN_004cab9c(...);
 int FUN_004cad84(void);
-int FUN_004cb8a0(void);
+void FUN_004cb8a0(TransitionView *state);
 int FUN_004cbab0(...);
 int FUN_004f1ad0(...);
-int FUN_004f1cdc(...);
+void btlCameraSetFormationSlot(BattleActionCamera *, BattleMaskState *, int);
 int flags64CSetTarget(...);
 int FUN_004f26cc(...);
 int FUN_004f41b0(...);
 int FUN_004fb4fc(...);
 int FUN_004fb670(...);
-int FUN_004fed00(...);
-int FUN_004fedd8(...);
+int btlReflectSetValuePair(...);
+int btlReflectRequestPairScalar(...);
 
 int btlGetMainState(void);
 int asdMemFree(void);
@@ -96,7 +100,7 @@ int FUN_004f5238(...);
 int FUN_004f741c(...);
 int FUN_004f85c8(...);
 int FUN_004f89e8(...);
-int FUN_004f9080(void);
+u32 btlAuxAreResourcesReady(BtlAuxA*);
 int FUN_004f950c(...);
 int FUN_004f9b94(...);
 int FUN_004f9c40(...);
@@ -163,7 +167,7 @@ extern unsigned int uRam005713a4; /* 0x5713a4 */
 extern unsigned int uRam005713a8; /* 0x5713a8 */
 extern unsigned int uRam005713ac; /* 0x5713ac */
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern int g_btlPartnerAttack; /* 0x573c50 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
@@ -173,7 +177,7 @@ extern int FUN_001632f8(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: asdMemFree. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: panelSetMode3. */
@@ -182,7 +186,7 @@ extern int FUN_0034919c(void);
 extern int panelIsActiveState2(void);
 extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_0037c8e4. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 extern unsigned int FUN_003d214c(unsigned int);
 extern int FUN_003e48bc(void);
 /* Supplied declaration required: FUN_003e5354. */
@@ -195,7 +199,7 @@ extern int btlIsExtendedState(unsigned int, unsigned int);
 extern unsigned int FUN_003e82d4(int);
 /* Supplied declaration required: btlScriptUnitHasFlags. */
 extern int btlSlotStateIsNot456(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_003e9cd0. */
+/* Supplied declaration required: stateFinishIfPresent. */
 extern int FUN_003ec77c(int);
 extern int FUN_003ec7b0(int);
 /* Supplied declaration required: FUN_003edfd4. */
@@ -205,7 +209,7 @@ extern int FUN_003ec7b0(int);
 /* Supplied declaration required: FUN_003f2498. */
 extern int controllerGetRecordValue(void);
 /* Supplied declaration required: FUN_0040c64c. */
-/* Supplied declaration required: FUN_0040c888. */
+/* Supplied declaration required: btlApplyDirectionBucket. */
 /* Supplied declaration required: FUN_0040ca18. */
 /* Supplied declaration required: FUN_0040cd6c. */
 /* Supplied declaration required: FUN_0040d274. */
@@ -220,9 +224,9 @@ extern unsigned int FUN_0047ecc8(void);
 /* Supplied declaration required: FUN_0047f394. */
 extern int FUN_0047f5b8(void);
 extern unsigned int FUN_0047fa50(unsigned int);
-/* Supplied declaration required: FUN_004a0ef8. */
+/* Supplied declaration required: partyAddMoneyClamped. */
 /* Supplied declaration required: FUN_004a96fc. */
-/* Supplied declaration required: FUN_004a9a38. */
+/* Supplied declaration required: btlUiSetDefaultLimits. */
 /* Supplied declaration required: FUN_004a9d68. */
 /* Supplied declaration required: FUN_004aa008. */
 /* Supplied declaration required: FUN_004ab6f4. */
@@ -253,7 +257,7 @@ extern int FUN_004d86e4(unsigned int);
 /* Supplied declaration required: FUN_004e5f2c. */
 /* Supplied declaration required: btlUnitGet. */
 /* Supplied declaration required: FUN_004f1ad0. */
-/* Supplied declaration required: FUN_004f1cdc. */
+/* Supplied declaration required: btlCameraSetFormationSlot. */
 /* Supplied declaration required: flags64CSetTarget. */
 /* Supplied declaration required: FUN_004f26cc. */
 extern int FUN_004f2708(int, int, unsigned int);
@@ -269,7 +273,6 @@ extern int FUN_004f5c84(int, int);
 /* Supplied declaration required: FUN_004f7628. */
 /* Supplied declaration required: FUN_004f85c8. */
 /* Supplied declaration required: FUN_004f89e8. */
-/* Supplied declaration required: FUN_004f9080. */
 /* Supplied declaration required: FUN_004f950c. */
 /* Supplied declaration required: FUN_004f9b94. */
 extern int FUN_004f9c2c(int);
@@ -278,7 +281,7 @@ extern int FUN_004fa0d8(int);
 /* Supplied declaration required: FUN_004fa0ec. */
 /* Supplied declaration required: FUN_004fa5ec. */
 extern int FUN_004fa7bc(int);
-/* Supplied declaration required: FUN_004fa7d0. */
+/* Supplied declaration required: keyedValueFindPair. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fb4fc. */
 /* Supplied declaration required: FUN_004fb670. */
@@ -287,8 +290,8 @@ extern int FUN_004fa7bc(int);
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: FUN_004fe7e4. */
 /* Supplied declaration required: FUN_004fe900. */
-/* Supplied declaration required: FUN_004fed00. */
-/* Supplied declaration required: FUN_004fedd8. */
+/* Supplied declaration required: btlReflectSetValuePair. */
+/* Supplied declaration required: btlReflectRequestPairScalar. */
 extern int FUN_004ffba8(unsigned int);
 
 
@@ -376,8 +379,8 @@ LAB_0040deb4:
       psVar2[1] = temp_v4;
     }
     else {
-      temp_v3 = DAT_00573808;
-      FUN_004f5238(DAT_00573808,(int)psVar2[0x12],(int)psVar2[0x13],(int)psVar2[0x24],
+      temp_v3 = g_btlAux;
+      FUN_004f5238(g_btlAux,(int)psVar2[0x12],(int)psVar2[0x13],(int)psVar2[0x24],
                    (int)psVar2[0x25],*(unsigned int *)(psVar2 + 0x14),psVar2 + 0x34,
                    *(int *)(psVar2 + 0x28) != 0,*(int *)(psVar2 + 0x26) != 0);
       wstrlen(psVar2 + 0x34);
@@ -423,12 +426,12 @@ LAB_0040deb4:
     }
     break;
   case '\x04':
-    temp_v5 = *(unsigned int *)(DAT_00573808 + 0x339c);
+    temp_v5 = *(unsigned int *)(g_btlAux + 0x339c);
     if ((temp_v5 & 0x8000) != 0) {
-      *(unsigned int *)(DAT_00573808 + 0x339c) = temp_v5 & 0xffff7fff;
+      *(unsigned int *)(g_btlAux + 0x339c) = temp_v5 & 0xffff7fff;
     }
     else {
-      *(unsigned int *)(DAT_00573808 + 0x339c) = temp_v5 | 2;
+      *(unsigned int *)(g_btlAux + 0x339c) = temp_v5 | 2;
       temp_v3 = btlUnitGet(g_btlScriptUnit);
       if (*(char *)(temp_v3 + 0x59c) != '\0') {
         FUN_0047f394(*(unsigned int *)(temp_v3 + 0x594) & 0xffff,*(unsigned int *)(psVar2 + 4));
@@ -491,28 +494,28 @@ LAB_0040deb4:
     }
     break;
   case '\n':
-    FUN_004f5238(DAT_00573808);
+    FUN_004f5238(g_btlAux);
     break;
   case '\f':
   case '\r':
   case '\x0e':
     btlGetMainState();
-    temp_v3 = DAT_00573808;
+    temp_v3 = g_btlAux;
     temp_v4 = psVar2[0x12];
     if (temp_v4 == 0) {
       temp_v0 = (char)psVar2[2];
       if (temp_v0 != '\f') {
         if (temp_v0 != '\x0e') {
           if (temp_v0 == '\r') {
-            FUN_004f9c40(DAT_00573808);
+            FUN_004f9c40(g_btlAux);
           }
         }
         else {
-          FUN_004f741c(DAT_00573808);
+          FUN_004f741c(g_btlAux);
         }
       }
       else {
-        FUN_004f85c8(DAT_00573808,*(int *)(psVar2 + 0x14) != 0);
+        FUN_004f85c8(g_btlAux,*(int *)(psVar2 + 0x14) != 0);
       }
       psVar2[0x12] = psVar2[0x12] + 1;
       temp_v4 = 1;
@@ -524,7 +527,7 @@ LAB_0040deb4:
       if (temp_v0 != '\f') {
         if (temp_v0 != '\x0e') {
           if (temp_v0 == '\r') {
-            temp_v6 = DAT_00573808;
+            temp_v6 = g_btlAux;
             FUN_004fa5ec();
             if (temp_v6 == 0) {
               temp_v4 = 1;
@@ -535,8 +538,7 @@ LAB_0040deb4:
           }
         }
         else {
-          temp_v6 = DAT_00573808;
-          FUN_004f9080();
+          temp_v6 = btlAuxAreResourcesReady((BtlAuxA*)g_btlAux);
           if (temp_v6 == 0) {
             temp_v4 = 1;
             psVar2[1] = temp_v4;
@@ -546,8 +548,8 @@ LAB_0040deb4:
         }
       }
       else {
-        temp_v6 = DAT_00573808;
-        FUN_004f9b94(DAT_00573808,*(int *)(psVar2 + 0x14) != 0);
+        temp_v6 = g_btlAux;
+        FUN_004f9b94(g_btlAux,*(int *)(psVar2 + 0x14) != 0);
         if (temp_v6 == 0) {
           temp_v4 = 1;
           psVar2[1] = temp_v4;
@@ -573,14 +575,14 @@ LAB_0040deb4:
           psVar2[1] = temp_v4;
           break;
         }
-        temp_v3 = FUN_004fa7bc(DAT_00573808);
+        temp_v3 = FUN_004fa7bc(g_btlAux);
       }
       else {
-        temp_v3 = FUN_004f9c2c(DAT_00573808);
+        temp_v3 = FUN_004f9c2c(g_btlAux);
       }
     }
     else {
-      temp_v3 = FUN_004fa0d8(DAT_00573808);
+      temp_v3 = FUN_004fa0d8(g_btlAux);
     }
     if (temp_v3 == 0) {
       temp_v4 = 1;
@@ -865,7 +867,7 @@ joined_r0x0040ec14:
         if ((*puVar6 & DAT_00571320) != 0 || (puVar6[1] & DAT_00571324) != 0) {
           temp_v3 = 4;
         }
-        FUN_004a9a38(g_btlUiBlock,temp_v3);
+        btlUiSetDefaultLimits(g_btlUiBlock,temp_v3);
         if (psVar2[0x12] != 0) {
           flags64CSetTarget(g_btlCamera);
         }
@@ -894,9 +896,9 @@ joined_r0x0040ec14:
     break;
   case '\x1d':
     temp_v3 = btlGetMainState();
-    FUN_003f0e20(temp_v3,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    temp_v3 = FUN_003f0e20(temp_v3,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     if (temp_v3 != 0) {
-      FUN_004cb8a0();
+      FUN_004cb8a0(reinterpret_cast<TransitionView *>(*(int *)(psVar2 + 10)));
     }
     break;
   case '\x1e':
@@ -922,7 +924,7 @@ joined_r0x0040ec14:
       puVar6 = (unsigned int *)(temp_v3 + 0x45a0);
       *(unsigned int *)(temp_v3 + 0x45a4) = uRam00571364 | *(unsigned int *)(temp_v3 + 0x45a4);
       *puVar6 = temp_v5 | *puVar6;
-      FUN_004fedd8(1,*(unsigned int *)(psVar2 + 4),0xffffffff,1,1);
+      btlReflectRequestPairScalar(1,*(unsigned int *)(psVar2 + 4),0xffffffff,1,1);
       if ((*(unsigned int *)(temp_v3 + 0x45a4) & uRam0057137c) != 0 || (uRam00571378 & *puVar6) != 0) {
         FUN_004fb4fc(0,*(unsigned int *)(psVar2 + 4));
       }
@@ -938,7 +940,7 @@ joined_r0x0040ec14:
                (uRam00571378 & *(unsigned int *)(temp_v3 + 0x45a0)) != 0) {
         FUN_004fb4fc(0,*(unsigned int *)(psVar2 + 4));
       }
-      FUN_004fedd8(1,*(unsigned int *)(psVar2 + 4),temp_v8,1,temp_v6);
+      btlReflectRequestPairScalar(1,*(unsigned int *)(psVar2 + 4),temp_v8,1,temp_v6);
     }
     break;
   case ' ':
@@ -947,7 +949,7 @@ joined_r0x0040ec14:
   case '!':
     temp_v8 = btlGetMainState();
     if (-1 < psVar2[0x12]) {
-      FUN_004f1cdc(g_btlCamera,temp_v8);
+      btlCameraSetFormationSlot((BattleActionCamera *)g_btlCamera,(BattleMaskState *)temp_v8,psVar2[0x12]);
     }
     if (psVar2[0x13] != 0) {
       FUN_004f41b0(g_btlCamera,0);
@@ -982,8 +984,8 @@ joined_r0x0040ec14:
       break;
     }
     btlGetMainState();
-    FUN_003e9cd0();
-    FUN_004fed00(0,*(unsigned int *)(psVar2 + 4),0,1,1);
+    stateFinishIfPresent();
+    btlReflectSetValuePair(0,*(unsigned int *)(psVar2 + 4),0,1,1);
     temp_v4 = 0;
     psVar2[1] = temp_v4;
     break;
@@ -1126,8 +1128,8 @@ LAB_0040f258:
         psVar2[1] = temp_v4;
         break;
       }
-      temp_v3 = DAT_00573808;
-      FUN_004fa7d0(DAT_00573808,(int)psVar2[0x12]);
+      temp_v3 = g_btlAux;
+      keyedValueFindPair(g_btlAux,(int)psVar2[0x12]);
       if ((temp_v3 != 0) && (temp_v3 = FUN_004ffba8(*(unsigned int *)(temp_v3 + 4)), temp_v3 == 0)) {
         temp_v5 = *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50);
 joined_r0x0040f750:
@@ -1143,12 +1145,12 @@ joined_r0x0040f750:
       psVar2[1] = temp_v4;
       break;
     }
-    FUN_004f5fb8(DAT_00573808,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
+    FUN_004f5fb8(g_btlAux,(int)*(short *)(*(int *)(psVar2 + 10) + 0x6a));
     *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
 LAB_0040f684:
     *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) = *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50) | 0x100000;
     FUN_004fe900(0,*(unsigned int *)(psVar2 + 4),*(unsigned int *)(psVar2 + 10),0,0,0,0,0);
-    FUN_004f7628(DAT_00573808,(int)psVar2[0x12],*(unsigned int *)(*(int *)(psVar2 + 10) + 100));
+    FUN_004f7628(g_btlAux,(int)psVar2[0x12],*(unsigned int *)(*(int *)(psVar2 + 10) + 100));
     FUN_0047effc(*(unsigned int *)(psVar2 + 0x14) & 0xffff,*(unsigned int *)(psVar2 + 4));
     *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
     temp_v4 = 1;
@@ -1158,8 +1160,8 @@ LAB_0040f684:
     temp_v3 = *(int *)(psVar2 + 0x26);
     temp_v6 = (int)*(short *)(*(int *)(psVar2 + 10) + 0x6a);
     if (temp_v3 == 0) {
-      FUN_004f5fb8(DAT_00573808,temp_v6);
-      FUN_004f63dc(DAT_00573808,temp_v6);
+      FUN_004f5fb8(g_btlAux,temp_v6);
+      FUN_004f63dc(g_btlAux,temp_v6);
       *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
       goto LAB_0040f684;
     }
@@ -1169,7 +1171,7 @@ LAB_0040f684:
       psVar2[1] = temp_v4;
       break;
     }
-    temp_v3 = FUN_004f5c84(DAT_00573808,temp_v6);
+    temp_v3 = FUN_004f5c84(g_btlAux,temp_v6);
     if (temp_v3 != 0) {
       temp_v5 = *(unsigned int *)(*(int *)(psVar2 + 10) + 0x50);
       goto joined_r0x0040f750;
@@ -1192,7 +1194,7 @@ LAB_0040f684:
     }
     break;
   case '3':
-    FUN_004f5de4(DAT_00573808);
+    FUN_004f5de4(g_btlAux);
     break;
   case '4':
     temp_v11 = (DAT_00571334 & (*(unsigned int **)(psVar2 + 0xc))[1]) != 0;
@@ -1225,7 +1227,7 @@ LAB_0040f684:
           psVar2[1] = temp_v4;
           break;
         }
-        temp_v3 = FUN_00224880(*(unsigned int *)(temp_v3 + 0x228c));
+        temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 0x228c));
         if (temp_v3 != 2) {
           temp_v4 = 1;
           psVar2[1] = temp_v4;
@@ -1245,7 +1247,7 @@ LAB_0040f684:
     break;
   case '7':
     if (*(int *)(psVar2 + 0x14) == 0) {
-      FUN_004f5238(DAT_00573808);
+      FUN_004f5238(g_btlAux);
     }
     break;
   case '8':
@@ -1305,8 +1307,8 @@ LAB_0040fb78:
           psVar2[1] = temp_v4;
           break;
         }
-        FUN_004a0ef8(*(unsigned int *)(psVar2 + 0x14));
-        FUN_00388758(1);
+        partyAddMoneyClamped(*(unsigned int *)(psVar2 + 0x14));
+        messageDismissNumericBanner(1);
         temp_v4 = 0;
         psVar2[1] = temp_v4;
         break;
@@ -1356,7 +1358,7 @@ LAB_0040fb78:
     }
     break;
   case '<':
-    FUN_0040c888(param_1,psVar2);
+    btlApplyDirectionBucket(param_1,psVar2);
     break;
   case '=':
     temp_v3 = btlGetMainState();
@@ -1387,7 +1389,7 @@ LAB_0040fb78:
     }
     break;
   case '?':
-    FUN_004f56cc(DAT_00573808,*(unsigned int *)(psVar2 + 0x14));
+    FUN_004f56cc(g_btlAux,*(unsigned int *)(psVar2 + 0x14));
     break;
   case '@':
     temp_v3 = FUN_003ec77c(*param_1);

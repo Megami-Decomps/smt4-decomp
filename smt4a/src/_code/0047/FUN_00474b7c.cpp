@@ -5,10 +5,10 @@
 extern "C" {
 
 int FUN_00161a10(void);
-int FUN_001b57a8(int *, int);
-int FUN_001d25ec(int);
+int resultPairInitialize(int *, int);
+int legacyResourceIdRemap(int);
 int FUN_00428940(int *, int, int, unsigned char [128]);
-int FUN_004ffcf0(unsigned char [4], unsigned char [128], unsigned int, int);
+int halfwordBufferCopyRange(unsigned char [4], unsigned char [128], unsigned int, int);
 int table30GetEntryB(unsigned char [4], unsigned int, unsigned int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -21,11 +21,11 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_00161a10. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned char *);
-/* Supplied declaration required: FUN_001d25ec. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_00428940. */
-/* Supplied declaration required: FUN_004ffcf0. */
+/* Supplied declaration required: halfwordBufferCopyRange. */
 extern unsigned int FUN_004ffd4c(unsigned char *);
 /* Supplied declaration required: table30GetEntryB. */
 
@@ -52,7 +52,7 @@ unsigned char * FUN_00474b7c(unsigned char *param_1,int param_2)
   puVar1[2] = 0;
   puVar6 = puVar1 + -1;
   puVar1[3] = 0;
-  FUN_001b57a8(&temp_v2,0);
+  resultPairInitialize(&temp_v2,0);
   temp_v1 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v1;
@@ -60,7 +60,7 @@ unsigned char * FUN_00474b7c(unsigned char *param_1,int param_2)
   puVar3 = *(unsigned char **)(param_2 + 4);
   if (puVar3 != (unsigned char *)0x0) {
     if (puVar3 == (unsigned char *)0x1) {
-      temp_v0 = FUN_001d25ec(param_2 + 0xc);
+      temp_v0 = legacyResourceIdRemap(param_2 + 0xc);
       puVar3 = (unsigned char *)-(temp_v0 >> 0x1f);
       if (puVar3 != (unsigned char *)0x1) {
         *(unsigned char *)puVar6 = 0;
@@ -69,10 +69,10 @@ unsigned char * FUN_00474b7c(unsigned char *param_1,int param_2)
         temp_v1 = *(unsigned int *)(param_2 + 0x10);
         *puVar1 = *(unsigned int *)(param_2 + 0xc);
         puVar1[1] = temp_v1;
-        temp_v0 = FUN_001d25ec(param_2 + 0xc);
+        temp_v0 = legacyResourceIdRemap(param_2 + 0xc);
         if (temp_v0 != -0x36dec7ff) {
           *(unsigned char *)puVar6 = 100;
-          puVar3 = (unsigned char *)FUN_001d25ec(param_2 + 0xc);
+          puVar3 = (unsigned char *)legacyResourceIdRemap(param_2 + 0xc);
           return puVar3;
         }
         puVar3 = (unsigned char *)0x67;
@@ -83,7 +83,7 @@ unsigned char * FUN_00474b7c(unsigned char *param_1,int param_2)
   else {
     table30GetEntryB(temp_v3,*(unsigned int *)(g_aocMain + 0x5a8),*(unsigned int *)(param_2 + 0x14));
     temp_v1 = FUN_004ffd4c(temp_v3);
-    FUN_004ffcf0(temp_v3,temp_v4,temp_v1,0);
+    halfwordBufferCopyRange(temp_v3,temp_v4,temp_v1,0);
     FUN_00161a10();
     temp_v2 = temp_v1;
     FUN_00428940(&temp_v5,temp_v0 + 0x7c,temp_v0 + 0x18,temp_v4);

@@ -1,40 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030bc94` (_code @ 0x30bc94, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler duplicates the success epilogue and aligns the shared result call differently from retail. */
+#include "common.h"
+
+struct CampCecCountState {
+    u8 unk000[0x126];
+    u16 count; // 0x126
+};
+struct CecSavedEntry {
+    u8 unk00[0x46];
+    u16 count; // 0x46
+};
 
 extern "C" {
+extern CampCecCountState *g_campCec;
+s32 scrGetArg(void);
+void scrSetResult(s32);
+CecSavedEntry *FUN_00262f94(void);
 
-int FUN_00262f94(void);
-int scrSetResult(int);
-
-extern int g_campCec; /* 0x43daa8 */
-
-/* Supplied declaration required: FUN_00262f94. */
-/* Supplied declaration required: scrSetResult. */
-extern int scrGetArg(void);
-
-
-unsigned int FUN_0030bc94(void)
-
+// Return either the current StreetPass count or the selected saved entry's count.
+u32 FUN_0030bc94(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v1 = scrGetArg();
-  if (g_campCec == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    if (temp_v1 != 0) {
-      scrSetResult(*(unsigned short *)(g_campCec + 0x126));
-      return 1;
+    s32 current = scrGetArg();
+    u16 count;
+    if (g_campCec == NULL) {
+        count = 0;
+    } else {
+        if (current != 0) {
+            scrSetResult(g_campCec->count);
+            return 1;
+        }
+        count = FUN_00262f94()->count;
     }
-    FUN_00262f94();
-    temp_v0 = *(unsigned short *)(temp_v1 + 0x46);
-  }
-  scrSetResult(temp_v0);
-  return 1;
+    scrSetResult(count);
+    return 1;
 }
-
-} /* extern "C" */
+}

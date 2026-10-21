@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00133f1c` (_code @ 0x133f1c, 0xee bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_TreeCopy.h"
 
 extern "C" {
 
 int asdOperatorDeleteArray(int);
-int FUN_00301d64(...);
 int FUN_00301dc2(int);
 int FUN_00301e56(...);
 int FUN_003079e8(int, int, int, int *);
@@ -21,7 +21,6 @@ typedef struct {
 
 extern int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_00301d64. */
 /* Supplied declaration required: FUN_00301dc2. */
 /* Supplied declaration required: FUN_00301e56. */
 /* Supplied declaration required: FUN_003079e8. */
@@ -52,9 +51,9 @@ void FUN_00133f1c(int *param_1,int param_2,unsigned int param_3)
     while (param_2 != temp_v3) {
       temp_v4 = temp_v4 - 0x1c;
       temp_v3 = temp_v3 - 0x1c;
-      FUN_00301d64(temp_v4,temp_v3);
+      onlineTreeAssign((OnlineRecordTree*)temp_v4,(const OnlineRecordTree*)temp_v3);
     }
-    FUN_00301d64(param_2,param_3);
+    onlineTreeAssign((OnlineRecordTree*)param_2,(const OnlineRecordTree*)param_3);
   }
   else {
     temp_v1 = vecCount28(param_1);

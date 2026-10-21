@@ -27,15 +27,15 @@ typedef struct Menu {
 int asdMemFree(void *resource);
 int scrScriptProcessDestroy(void *handle);
 int dialogOpen(int arg0, int arg1);
-int FUN_0020401c(u8 *name);
-int FUN_00224880(void *handle);
-int FUN_00284f90(int arg);
+int placeWinStartText(u8 *name);
+int scrRunOpcodesStub(void *handle);
+int placeWinSetValue(int arg);
 int FUN_002a49e4(u32 owner, int kind);
 
 /* When the menu's handle is in state 2, releases its handle and resources, switches to state 5 and applies the selected entry. */
 void FUN_004b797c(Menu *menu)
 {
-    if (FUN_00224880(menu->handle) == 2) {
+    if (scrRunOpcodesStub(menu->handle) == 2) {
         scrScriptProcessDestroy(menu->handle);
         menu->handle = NULL;
         asdMemFree(menu->resourceA);
@@ -48,8 +48,8 @@ void FUN_004b797c(Menu *menu)
         menu->state = 5;
         menu->stateArg = 0;
         menu->busy = 0;
-        FUN_0020401c(menu->entry->name);
-        FUN_00284f90(1);
+        placeWinStartText(menu->entry->name);
+        placeWinSetValue(1);
     }
 }
 

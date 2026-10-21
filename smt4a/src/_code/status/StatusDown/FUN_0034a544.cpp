@@ -8,7 +8,7 @@ int FUN_0014e188(...);
 int FUN_0014e220(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
-int FUN_00151408(...);
+int positionStateSet(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdMemoryAllocTracked(...);
@@ -16,11 +16,11 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int __aeabi_memset4(...);
 int FUN_00230b9c(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int sysMemClear(...);
 int FUN_003e4140(...);
 int fillTwoWordsWithByte(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -50,7 +50,7 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e220. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
@@ -58,11 +58,11 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00230b9c. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e4140. */
 /* Supplied declaration required: fillTwoWordsWithByte. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_0034a544(void)
@@ -89,7 +89,7 @@ void FUN_0034a544(void)
   taskCreateDraw(&LAB_0034a924,0xeb,0,0,FUN_0026b0e4,0,0,puVar2);
   puVar1[1] = (unsigned int)puVar3;
   puVar1 = g_statusDown;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_statusDown + 2);
+  paramsClearPacket(g_statusDown + 2);
   paramsInit(puVar1 + 2,&DAT_0053687c,0xa8,&DAT_00536924,0x90,&DAT_005369b4,0x18,0,0,&DAT_005369cc
                ,0x1a4);
   FUN_0014e188(puVar1 + 10,0x12,1000,puVar1 + 2,1);
@@ -112,7 +112,7 @@ void FUN_0034a544(void)
   temp_v0 = spriteHandleCreate(0);
   puVar1[0x8ee] = temp_v0;
   FUN_001527d8(temp_v0,0xffffffff);
-  FUN_00151408(puVar1[0x8ee],0,0x91a2a2ff);
+  positionStateSet(puVar1[0x8ee],0,0x91a2a2ff);
   __aeabi_memset4(puVar1 + 0x151,0x2a,0xffffffff);
   *(unsigned char *)((int)puVar1 + 0x24aa) = 1;
   puVar5 = g_statusDown;
@@ -143,8 +143,8 @@ void FUN_0034a544(void)
   puVar1 = g_statusDown;
   puVar5 = g_statusDown + 0x95b;
   g_statusDown[0x95d] = 0;
-  FUN_002804b0(&LAB_0034a948,puVar5,0);
-  FUN_002804b0(0x34a958,puVar1 + 0x95c,0);
+  asdLoadFileAsyncSimple(&LAB_0034a948,puVar5,0);
+  asdLoadFileAsyncSimple(0x34a958,puVar1 + 0x95c,0);
   return;
 }
 

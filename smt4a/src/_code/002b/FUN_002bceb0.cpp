@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_0040ae70(...);
 int FUN_0040afe0(...);
-int FUN_0040b0f8(...);
+int resourceOwnerLoadNamed(...);
 
 typedef struct fn_002bceb0_arg0 fn_002bceb0_arg0;
 struct fn_002bceb0_arg0 {
@@ -30,7 +30,7 @@ extern signed char DAT_005f1858; /* 0x5f1858 */
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(unsigned int);
 /* Supplied declaration required: FUN_0040afe0. */
-/* Supplied declaration required: FUN_0040b0f8. */
+/* Supplied declaration required: resourceOwnerLoadNamed. */
 
 
 void FUN_002bceb0(fn_002bceb0_arg0 *param_1)
@@ -58,7 +58,7 @@ void FUN_002bceb0(fn_002bceb0_arg0 *param_1)
     textFormatBuffer(temp_v2,"map/m%03d/e%03d_%02d.bch",param_1->field_0x30,param_1->field_0x30,
                  param_1->field_0x34);
   }
-  FUN_0040b0f8(param_1->field_0xd0,temp_v2);
+  resourceOwnerLoadNamed(param_1->field_0xd0,temp_v2);
   temp_v0 = FUN_0040af60(param_1->field_0xd0);
   if (temp_v0 != 0) {
     temp_v0 = param_1->field_0x30;

@@ -7,7 +7,7 @@ int FUN_00208504(void);
 int FUN_0021b0f0(void);
 int FUN_0021b2ec(void);
 int FUN_00282228(int *);
-int FUN_00282318(void);
+int calcHeadingRoundedToCardinalDirection(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00287b0c(void);
@@ -82,9 +82,9 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00208504. */
 /* Supplied declaration required: FUN_0021b0f0. */
 /* Supplied declaration required: FUN_0021b2ec. */
-extern int FUN_002820a4(void);
+extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_00282228. */
-/* Supplied declaration required: FUN_00282318. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287b0c. */
@@ -232,7 +232,7 @@ void FUN_003079b4(void)
     break;
   case 7:
     temp_v24 = *(float *)(g_lmapScene + 0x4c);
-    FUN_00282318();
+    calcHeadingRoundedToCardinalDirection();
     temp_v11 = (int)temp_v24;
     temp_v24 = 0.017453292f;
     temp_v6 = temp_v8;
@@ -270,7 +270,7 @@ void FUN_003079b4(void)
     break;
   case 8:
     temp_v24 = *(float *)(g_lmapScene + 0x4c);
-    FUN_00282318();
+    calcHeadingRoundedToCardinalDirection();
     temp_v11 = (int)temp_v24;
     temp_v24 = 0.017453292f;
     temp_v6 = temp_v9;
@@ -311,7 +311,7 @@ void FUN_003079b4(void)
     break;
   case 9:
     temp_v24 = *(float *)(g_lmapScene + 0x4c);
-    FUN_00282318();
+    calcHeadingRoundedToCardinalDirection();
     temp_v11 = (int)temp_v24;
     temp_v24 = 0.017453292f;
     temp_v6 = temp_v10;
@@ -401,7 +401,7 @@ void FUN_003079b4(void)
       break;
     }
     if (temp_v6 == 1) {
-      temp_v6 = FUN_002820a4();
+      temp_v6 = vectorPairTransitionStep();
       if (temp_v6 != 0) {
         temp_v31 = piVar7[0xc];
         iStack_94 = piVar7[0xd];
@@ -445,7 +445,7 @@ void FUN_003079b4(void)
       }
       break;
     }
-    if ((temp_v6 != 2) || (temp_v6 = FUN_002820a4(), temp_v6 == 0)) break;
+    if ((temp_v6 != 2) || (temp_v6 = vectorPairTransitionStep(), temp_v6 == 0)) break;
     piVar7 = DAT_004474f4;
     DAT_004474f4[1] = DAT_004474f4[1] + 1;
     piVar7[2] = 0;
@@ -501,7 +501,7 @@ void FUN_003079b4(void)
       break;
     }
     if (temp_v6 == 1) {
-      temp_v6 = FUN_002820a4();
+      temp_v6 = vectorPairTransitionStep();
       if (temp_v6 != 0) {
         temp_v31 = piVar13[0xc];
         iStack_94 = piVar13[0xd];
@@ -546,7 +546,7 @@ void FUN_003079b4(void)
       break;
     }
     if (temp_v6 != 2) break;
-    temp_v6 = FUN_002820a4();
+    temp_v6 = vectorPairTransitionStep();
     if (temp_v6 != 0) {
       piVar7 = DAT_004474f4;
       DAT_004474f4[1] = DAT_004474f4[1] + 1;
@@ -612,7 +612,7 @@ void FUN_003079b4(void)
       break;
     }
     if (temp_v6 == 1) {
-      temp_v6 = FUN_002820a4();
+      temp_v6 = vectorPairTransitionStep();
       if (temp_v6 != 0) {
         temp_v31 = piVar7[0xc];
         iStack_94 = piVar7[0xd];
@@ -663,7 +663,7 @@ void FUN_003079b4(void)
       break;
     }
     if (temp_v6 != 2) break;
-    temp_v6 = FUN_002820a4();
+    temp_v6 = vectorPairTransitionStep();
     if (temp_v6 != 0) {
       piVar7 = DAT_004474f4;
       DAT_004474f4[1] = DAT_004474f4[1] + 1;

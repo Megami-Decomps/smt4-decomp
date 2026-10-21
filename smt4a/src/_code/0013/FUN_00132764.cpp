@@ -1,55 +1,52 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00132764` (_code @ 0x132764, 0x4e bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail folds iterator/result locals into PUSH and shares loop-test blocks; compiled code reserves stack separately and uses different local/register layout. */
+#include "common.h"
+
+struct ListNode {
+    ListNode* next; // 0x00
+    ListNode* prev; // 0x04
+};
+struct AllocationBlock {
+    AllocationBlock* next; // 0x00
+    u32 capacity;          // 0x04
+    void* data;            // 0x08
+};
+struct PooledList {
+    AllocationBlock* blocks; // 0x00
+    ListNode* free;          // 0x04
+    void* begin;             // 0x08
+    void* end;               // 0x0c
+    ListNode* sentinel;      // 0x10
+};
 
 extern "C" {
+void FUN_002fd642(ListNode** result, PooledList* list, ListNode** iterator);
+void asdOperatorDeleteArray(void* allocation);
 
-int asdOperatorDeleteArray(...);
-int FUN_002fd642(unsigned int **, int *, unsigned int **);
-
-/* stack frame of param_4: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-/* Supplied declaration required: asdOperatorDeleteArray. */
-/* Supplied declaration required: FUN_002fd642. */
-
-
-int * FUN_00132764(int *param_1,unsigned int param_2,unsigned int *param_3,unsigned int *param_4)
-
+// Erases all nodes, returns the sentinel, and releases the allocation blocks.
+PooledList* FUN_00132764(PooledList* list)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  unsigned int *puVar3;
-  unsigned int *temp_v0;
-  unsigned int *temp_v1;
-  
-  puVar3 = (unsigned int *)param_1[4];
-  if (puVar3 != (unsigned int *)0x0) {
-    puVar1 = (unsigned int *)*puVar3;
-    temp_v0 = param_3;
-    temp_v1 = param_4;
-    while (puVar1 != puVar3) {
-      temp_v1 = puVar1;
-      FUN_002fd642(&temp_v0,param_1,&temp_v1);
-      puVar1 = temp_v0;
+    ListNode* sentinel = list->sentinel;
+    if (sentinel != NULL) {
+        ListNode* node = sentinel->next;
+        while (node != sentinel) {
+            ListNode* iterator = node;
+            ListNode* next;
+            FUN_002fd642(&next, list, &iterator);
+            node = next;
+        }
+        ListNode* nodeToFree = list->sentinel;
+        nodeToFree->next = list->free;
+        list->free = nodeToFree;
+        while (list->blocks != NULL) {
+            AllocationBlock* block = list->blocks;
+            list->blocks = block->next;
+            asdOperatorDeleteArray(block->data);
+            asdOperatorDeleteArray(block);
+        }
+        list->free = NULL;
+        list->begin = NULL;
+        list->end = NULL;
     }
-    piVar2 = (int *)param_1[4];
-    *piVar2 = param_1[1];
-    param_1[1] = (int)piVar2;
-    while (piVar2 = (int *)*param_1, piVar2 != (int *)0x0) {
-      *param_1 = *piVar2;
-      asdOperatorDeleteArray(piVar2[2]);
-      asdOperatorDeleteArray(piVar2);
-    }
-    param_1[1] = 0;
-    param_1[2] = 0;
-    param_1[3] = 0;
-  }
-  return param_1;
+    return list;
 }
-
-} /* extern "C" */
+}

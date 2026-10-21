@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00293ba8(void);
+int statusDownRestoreTabForMode(void);
 
 typedef struct GameData {
     /* 0x0000 */ u8 unk0000[0x12E4];
@@ -21,7 +21,7 @@ void FUN_0026d670(void)
     GameData *data = g_gameGlobals.data;
 
     g_gameGlobals.data->unk12E4 = 0;
-    FUN_00293ba8();
+    statusDownRestoreTabForMode();
     data->unk1E63 = 0;
 }
 

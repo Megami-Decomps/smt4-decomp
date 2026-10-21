@@ -8,23 +8,23 @@ int CONCAT44(double, int);
 int FUN_0027376c(...);
 int FUN_00294774(...);
 int controllerSetDestination(...);
-int FUN_003fda08(...);
+int animationSelectClip(...);
 
-int FUN_00145868(void);
+int soundVolumeSettingGet(void);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_001f3f34(void);
 int FUN_00201ce0(...);
 int FUN_0025ef68(int *, int *, int);
 int FUN_002826dc(int *, int *, int, int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002d1f40(int, int, int);
 int FUN_003250ac(int *);
 int mathPositionHeadingDegrees(void);
 int FUN_003d4ed8(...);
 int FUN_003fd7c0(...);
 int FUN_003fd924(...);
-int FUN_003fdb18(...);
+int controllerSetRotationEulerDegrees(...);
 int FUN_004ff98c(...);
 int VectorSignedToFloat(int, int);
 
@@ -43,7 +43,7 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int *g_lmapScene; /* 0x581288 */
 extern float DAT_0058128c; /* 0x58128c */
 extern signed char DAT_005f161c; /* 0x5f161c */
@@ -78,7 +78,7 @@ extern signed char DAT_005f1c7e; /* 0x5f1c7e */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_00145868. */
+/* Supplied declaration required: soundVolumeSettingGet. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -88,7 +88,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_0027376c. */
 /* Supplied declaration required: FUN_002826dc. */
 /* Supplied declaration required: FUN_00294774. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_003250ac. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -96,8 +96,8 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
-/* Supplied declaration required: FUN_003fda08. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: animationSelectClip. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_004ff98c. */
 extern int FUN_004ffa14(unsigned int);
 
@@ -147,7 +147,7 @@ void FUN_002db06c(void)
   int temp_v31;
   
   temp_v0 = gameFlagsGetBlock();
-  FUN_00145868();
+  soundVolumeSettingGet();
   piVar2 = g_lmapScene;
   if (((*g_lmapScene == 0xd || *g_lmapScene == 0x15) && (g_lmapScene[0x60] != 0)) &&
      (g_lmapScene[1] == 0xb)) {
@@ -243,10 +243,10 @@ LAB_002db2e8:
       g_lmapScene[0x91] = (int)temp_v10;
       temp_v15 = (float)piVar2[7];
       temp_v14 = *(unsigned long long *)(piVar2 + 8);
-      temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+      temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
       FUN_001bc124();
       temp_v15 = temp_v15 + temp_v9 * DAT_005f19b8;
-      temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+      temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
       FUN_001bbf0c();
       temp_v13 = (float)((unsigned long long)temp_v14 >> 0x20) + temp_v9 * DAT_005f19b8;
       temp_v17 = (float)temp_v14 + DAT_005f1aa0 + temp_v12;
@@ -259,8 +259,8 @@ LAB_002db2e8:
       if (*(char *)((int)piVar2 + 0x23d) == '\x01') {
         mathPositionHeadingDegrees();
       }
-      FUN_003fdb18(*(unsigned int *)(g_lmapScene[0x60] + 4));
-      FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
+      controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[0x60] + 4));
+      controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
       break;
     case 2:
       g_lmapScene[0x91] = (int)temp_v10;
@@ -299,11 +299,11 @@ LAB_002db724:
           g_lmapScene[0x82] = (int)temp_v17;
           piVar2[0x83] = (int)temp_v15;
           piVar2[0x84] = (int)temp_v13;
-          temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+          temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
           FUN_001bc124();
           temp_v19 = (float)((unsigned long long)temp_v16 >> 0x20);
           temp_v17 = temp_v17 + temp_v9 * DAT_005f19b8;
-          temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+          temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
           FUN_001bbf0c();
           temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
           temp_v12 = temp_v15 + DAT_005f1aa0 + temp_v12;
@@ -335,8 +335,8 @@ LAB_002db724:
           g_lmapScene[0x86] = (int)temp_v17;
           piVar2[0x87] = piVar2[0x13];
           piVar2[0x79] = DAT_005f19a0;
-          FUN_003fdb18(*(unsigned int *)(piVar2[0x60] + 4));
-          FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
+          controllerSetRotationEulerDegrees(*(unsigned int *)(piVar2[0x60] + 4));
+          controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
           DAT_0058128c = temp_v9;
           FUN_003fd924(*(unsigned int *)(g_lmapScene[0x60] + 4),1,2);
           return;
@@ -375,7 +375,7 @@ LAB_002db724:
           DAT_0058128c = temp_v10;
         }
         temp_v9 = (float)g_lmapScene[0x82];
-        FUN_002b5cb4();
+        distSpatial();
         temp_v17 = (float)g_lmapScene[0x79];
         temp_v22 = g_lmapScene[0x7c];
         iStack_a8 = g_lmapScene[0x7d];
@@ -525,7 +525,7 @@ LAB_002dba80:
         DAT_0058128c = temp_v10;
       }
       temp_v9 = (float)g_lmapScene[0x82];
-      FUN_002b5cb4();
+      distSpatial();
       temp_v13 = 70.0f;
       temp_v21 = g_lmapScene[0x7c];
       temp_v22 = g_lmapScene[0x7d];
@@ -812,15 +812,15 @@ joined_r0x002dc288:
       temp_v17 = (float)piVar2[9];
       temp_v13 = (float)piVar2[7];
       temp_v15 = (float)piVar2[8];
-      temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+      temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
       FUN_001bc124();
       temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
-      temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+      temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
       FUN_001bbf0c();
       temp_v17 = temp_v17 + temp_v9 * DAT_005f19b8;
       temp_v9 = temp_v15 + DAT_005f1aa0 + temp_v12;
-      FUN_003fdb18(*(unsigned int *)(g_lmapScene[0x60] + 4));
-      FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
+      controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[0x60] + 4));
+      controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
       piVar2 = g_lmapScene;
       pfVar12 = (float *)(g_lmapScene + 0x7c);
       g_lmapScene[0x7e] = (int)temp_v17;
@@ -863,10 +863,10 @@ joined_r0x002dc288:
         temp_v13 = (float)piVar2[7];
         temp_v17 = (float)piVar2[8];
         temp_v15 = (float)piVar2[9];
-        temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+        temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
         FUN_001bc124();
         temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
-        temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+        temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
         FUN_001bbf0c();
         piVar2 = g_lmapScene;
         temp_v17 = temp_v17 + DAT_005f1aa0;
@@ -925,10 +925,10 @@ joined_r0x002dc288:
     temp_v13 = (float)piVar2[7];
     temp_v17 = (float)piVar2[8];
     temp_v15 = (float)piVar2[9];
-    temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+    temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
     FUN_001bc124();
     temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
-    temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+    temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
     FUN_001bbf0c();
     piVar2 = g_lmapScene;
     temp_v9 = temp_v9 * DAT_005f19b8;
@@ -951,18 +951,18 @@ joined_r0x002dc288:
       piVar2[0x75] = 0;
       FUN_003fd7c0(*(unsigned int *)(piVar2[0x60] + 4),1);
     }
-    FUN_003fdb18(*(unsigned int *)(g_lmapScene[0x60] + 4));
-    FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[0x60] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
   }
   if (g_lmapScene[0x74] == 0xb) {
     DAT_005f19e8 = 0;
     temp_v13 = (float)g_lmapScene[7];
     temp_v17 = (float)g_lmapScene[8];
     temp_v15 = (float)g_lmapScene[9];
-    temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+    temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
     FUN_001bc124();
     temp_v13 = temp_v13 + temp_v9 * DAT_005f19b8;
-    temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+    temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
     FUN_001bbf0c();
     piVar2 = g_lmapScene;
     temp_v17 = temp_v17 + DAT_005f1aa0;
@@ -1056,7 +1056,7 @@ LAB_002dcd94:
   temp_v0 = FUN_004ff98c(temp_v5);
   if ((temp_v0 != g_lmapScene[0x8e]) || ((char)g_lmapScene[0x8f] != '\0')) {
     FUN_003fd924(temp_v5,g_lmapScene[0x8e],2);
-    FUN_003fda08(temp_v5,0,2);
+    animationSelectClip(temp_v5,0,2);
     *(unsigned char *)(g_lmapScene + 0x8f) = 0;
   }
   piVar2 = g_lmapScene;
@@ -1083,7 +1083,7 @@ LAB_002dcd94:
       mathPositionHeadingDegrees();
     }
     temp_v18 = (int)((unsigned long long)temp_v14 >> 0x20);
-    FUN_003fdb18(*(unsigned int *)(g_lmapScene[0x60] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[0x60] + 4));
   }
   piVar2 = g_lmapScene;
   if (g_lmapScene[0x74] == 0x10) {
@@ -1131,10 +1131,10 @@ LAB_002dd03c:
     temp_v17 = (float)piVar2[7];
     temp_v15 = (float)piVar2[8];
     temp_v13 = (float)piVar2[9];
-    temp_v9 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+    temp_v9 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
     FUN_001bc124();
     temp_v17 = temp_v17 + temp_v9 * DAT_005f19b8;
-    temp_v11 = (*(float *)(DAT_005806a4 + 0x18) + DAT_005f19bc) * temp_v11;
+    temp_v11 = (*(float *)(g_lmapView + 0x18) + DAT_005f19bc) * temp_v11;
     FUN_001bbf0c();
     temp_v13 = temp_v13 + temp_v11 * DAT_005f19b8;
     temp_v12 = temp_v15 + DAT_005f1aa0 + temp_v12;
@@ -1144,8 +1144,8 @@ LAB_002dd03c:
     g_lmapScene[0x7c] = (int)temp_v17;
     piVar2[0x7d] = (int)(temp_v12 + temp_v11 * temp_v19);
     piVar2[0x7e] = (int)temp_v13;
-    FUN_003fdb18(*(unsigned int *)(piVar2[0x60] + 4));
-    FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(piVar2[0x60] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
   }
   piVar2 = g_lmapScene;
   if (g_lmapScene[0x74] == 0xc) {
@@ -1157,8 +1157,8 @@ LAB_002dd03c:
     temp_v16 = CONCAT44(temp_v10,piVar2[0x95]);
     temp_v10 = (float)piVar2[0x96] - 20.0f;
     temp_v0 = piVar2[0x97];
-    FUN_003fdb18(*(unsigned int *)(piVar2[0x60] + 4));
-    FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(piVar2[0x60] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
     piVar2 = g_lmapScene;
     g_lmapScene[0x7c] = (int)temp_v16;
     piVar2[0x7d] = (int)temp_v10;
@@ -1167,8 +1167,8 @@ LAB_002dd03c:
       mathPositionHeadingDegrees();
     }
     temp_v5 = (unsigned int)((unsigned long long)temp_v16 >> 0x20);
-    FUN_003fdb18(*(unsigned int *)(g_lmapScene[0x60] + 4));
-    FUN_003fdb18(*(unsigned int *)(g_lmapScene[99] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[0x60] + 4));
+    controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
     if (g_lmapScene[0x75] == 1) {
       FUN_0027376c(1);
       FUN_00294774(1);

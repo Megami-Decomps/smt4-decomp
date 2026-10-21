@@ -8,7 +8,7 @@ int gameGetSlotTable(void);
 int FUN_0032fea0(int, int);
 int unitRecordBuild(unsigned int);
 int FUN_0034c340(short [16], int, int, int);
-int FUN_003c3f1c(void);
+int findSkillMetadataById(void);
 int FUN_004bcd90(int);
 int FUN_004da6e0(unsigned int, int, int, int, int);
 int wordAt1B0Clear(unsigned int);
@@ -37,7 +37,7 @@ extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0034c340. */
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: FUN_004bcd90. */
 extern int getUnlockedSlotCount(int);
 /* Supplied declaration required: FUN_004da6e0. */
@@ -122,7 +122,7 @@ LAB_002705ec:
       do {
         temp_v6 = temp_v3 + temp_v4 * 2;
         temp_v2 = (unsigned int)*(unsigned short *)(temp_v6 + 0x34);
-        if ((temp_v2 != 0) && ((FUN_003c3f1c(), temp_v2 == 0 || ((*(unsigned char *)(temp_v2 + 3) & 0x20) != 0))))
+        if ((temp_v2 != 0) && ((findSkillMetadataById(), temp_v2 == 0 || ((*(unsigned char *)(temp_v2 + 3) & 0x20) != 0))))
         {
           psVar4 = temp_v8 + temp_v5;
           temp_v5 = temp_v5 + 1;
@@ -148,7 +148,7 @@ LAB_0027069c:
       do {
         temp_v6 = temp_v3 + temp_v4 * 2;
         temp_v2 = (unsigned int)*(unsigned short *)(temp_v6 + 0x34);
-        if ((temp_v2 != 0) && ((FUN_003c3f1c(), temp_v2 == 0 || ((*(unsigned char *)(temp_v2 + 3) & 0x20) != 0))))
+        if ((temp_v2 != 0) && ((findSkillMetadataById(), temp_v2 == 0 || ((*(unsigned char *)(temp_v2 + 3) & 0x20) != 0))))
         {
           psVar4 = temp_v8 + temp_v5;
           temp_v5 = temp_v5 + 1;

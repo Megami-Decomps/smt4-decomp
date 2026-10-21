@@ -5,17 +5,17 @@
 extern "C" {
 
 int asdTMTexLoadMainHeap(int);
-int FUN_004cfe4c(...);
+int flaggedValueHolderGetTotal(...);
 int sub10OwnerStart(int);
-int FUN_004d0738(int, int);
+int menuSynchronizeFlaggedSelection(int, int);
 
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_004cfe4c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 extern int FUN_004d0058(int, unsigned int);
 /* Supplied declaration required: sub10OwnerStart. */
 extern int FUN_004d0584(void);
 extern unsigned int selectOwnerGetSelected(int);
-/* Supplied declaration required: FUN_004d0738. */
+/* Supplied declaration required: menuSynchronizeFlaggedSelection. */
 
 
 unsigned int FUN_004babd8(int param_1)
@@ -29,12 +29,12 @@ unsigned int FUN_004babd8(int param_1)
   unsigned int temp_v4;
   
   temp_v4 = 0;
-  temp_v0 = FUN_004cfe4c();
+  temp_v0 = flaggedValueHolderGetTotal();
   if (*(char *)(param_1 + 0x9ee) == '\0') {
-    FUN_004d0738(param_1 + 0x74,param_1);
+    menuSynchronizeFlaggedSelection(param_1 + 0x74,param_1);
     sub10OwnerStart(param_1);
   }
-  temp_v1 = FUN_004cfe4c(param_1);
+  temp_v1 = flaggedValueHolderGetTotal(param_1);
   if (temp_v1 != temp_v0) {
     *(unsigned int *)(param_1 + 0x1074) = 0;
   }
@@ -56,7 +56,7 @@ unsigned int FUN_004babd8(int param_1)
     }
     *(int *)(param_1 + 0x1074) = temp_v0;
     if (temp_v0 >= 0x10) {
-      temp_v0 = FUN_004cfe4c(param_1);
+      temp_v0 = flaggedValueHolderGetTotal(param_1);
       temp_v2 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + temp_v0 * 4 + 0x7ec) + 0x5a);
       temp_v0 = temp_v2 + 1;
       temp_v1 = param_1 + temp_v0;

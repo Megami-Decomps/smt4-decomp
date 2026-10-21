@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c5150` (_code @ 0x3c5150, 0x210 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 
@@ -20,8 +21,6 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned char LAB_003c5364; /* 0x3c5364 */
-extern unsigned char DAT_00434388; /* 0x434388 */
-extern unsigned int DAT_0043438c; /* 0x43438c */
 extern unsigned int DAT_00435dc0; /* 0x435dc0 */
 extern unsigned int DAT_00435dd8; /* 0x435dd8 */
 
@@ -52,16 +51,16 @@ void FUN_003c5150(int param_1,int param_2)
   asdListBoxAddItems();
   asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
   jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_003c5364);
-  temp_v1 = (unsigned int)DAT_00434388;
+  temp_v1 = (unsigned int)(unsigned char)g_btlDebugState.category;
   if (temp_v1 != 0) {
     dataTable03Sub0GetCount();
-    asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0,DAT_0043438c,0,temp_v1 - 1,0);
-    asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1,(int)(char)DAT_00434388);
+    asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0,g_btlDebugState.selectedId,0,temp_v1 - 1,0);
+    asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1,(int)(char)g_btlDebugState.category);
   }
   else {
     dataTable22GetCount();
-    asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0,DAT_0043438c,0,temp_v1 - 1,0);
-    asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1,(int)(char)DAT_00434388);
+    asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),0,g_btlDebugState.selectedId,0,temp_v1 - 1,0);
+    asdListBoxSetItemMode2(*(unsigned int *)(param_1 + 0x10),1,(int)(char)g_btlDebugState.category);
   }
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),2,DAT_00435dc0,0,0x4b1,0);
   asdListBoxSetItemMode3(*(unsigned int *)(param_1 + 0x10),3,DAT_00435dd8,0,1000,0);

@@ -1,30 +1,22 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004013f0` (_code @ 0x4013f0, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct ChildResource {
+    u32 unk00;
+    u32 resource; // 0x04
+};
+struct ChildResourceOwner {
+    u8 unk00[0x1c];
+    ChildResource *children[3]; // 0x1c
+};
 
-int FUN_003fdb18(unsigned int);
+extern "C" void controllerSetRotationEulerDegrees(u32, f32, f32, f32);
 
-/* Supplied declaration required: FUN_003fdb18. */
-
-
-void FUN_004013f0(int param_1)
-
+// Apply the three-component resource operation to each occupied child slot.
+extern "C" void FUN_004013f0(ChildResourceOwner *owner, f32 x, f32 y, f32 z)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = 0;
-  do {
-    temp_v0 = *(int *)(param_1 + temp_v1 * 4 + 0x1c);
-    if (temp_v0 != 0) {
-      FUN_003fdb18(*(unsigned int *)(temp_v0 + 4));
+    for (s32 i = 0; i < 3; ++i) {
+        ChildResource *child = owner->children[i];
+        if (child != NULL)
+            controllerSetRotationEulerDegrees(child->resource, x, y, z);
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 3);
-  return;
 }
-
-} /* extern "C" */

@@ -11,7 +11,7 @@ int resourceListDestroy(...);
 int asdMemFree(...);
 int FUN_001abbc4(void);
 int refCountIncrement(...);
-int FUN_00221f20(void);
+int spriteGroupCreateFromFile(void);
 int handleBlockRefDrop(void);
 int FUN_00222180(void);
 int effTlpCreate(void);
@@ -51,7 +51,7 @@ typedef struct {
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001abbc4. */
 /* Supplied declaration required: refCountIncrement. */
-/* Supplied declaration required: FUN_00221f20. */
+/* Supplied declaration required: spriteGroupCreateFromFile. */
 /* Supplied declaration required: handleBlockRefDrop. */
 /* Supplied declaration required: FUN_00222180. */
 /* Supplied declaration required: effTlpCreate. */
@@ -65,7 +65,7 @@ extern unsigned int resourceResolveHeaderPointer(void);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_0035105c. */
 extern int textureCreateFromImage(unsigned int *);
-extern int FUN_0037a834(unsigned int);
+extern int sysGetTableWord(unsigned int);
 /* Supplied declaration required: asdEffectTextureCreate. */
 
 
@@ -125,12 +125,12 @@ unsigned int * FUN_003510dc(fn_003510dc_arg0 *param_1)
       if (puVar3[0x11] != 0) {
         handleBlockRefDrop();
       }
-      FUN_00221f20();
+      spriteGroupCreateFromFile();
       puVar3[0x11] = (unsigned int)puVar4;
       break;
     case 4:
       FUN_0035105c(puVar3,*(unsigned int *)(puVar3[0x13] + 8),4);
-      temp_v1 = FUN_0037a834(*puVar4 & 0xffff);
+      temp_v1 = sysGetTableWord(*puVar4 & 0xffff);
       temp_v4 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3)
       ;
       temp_v5 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v1 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3)

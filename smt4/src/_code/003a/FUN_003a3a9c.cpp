@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019e0c0(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int FUN_0022e648(int, int);
 int FUN_0022fa2c(int);
 int FUN_0022fb64(int);
@@ -13,9 +13,9 @@ int FUN_00232848(void);
 int FUN_002328b4(void);
 int FUN_00233240(int, int);
 int FUN_00233818(int);
-int FUN_00233854(unsigned int);
+int ifTouchRegionClearAll(unsigned int);
 int FUN_00296e90(void);
-int FUN_0029e620(int);
+int messageTargetSetValue(int);
 int FUN_0029ee6c(int, int);
 int ifTouchRegionRemove(void);
 
@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_0022e648. */
 /* Supplied declaration required: FUN_0022fa2c. */
 /* Supplied declaration required: FUN_0022fb64. */
@@ -35,14 +35,14 @@ extern unsigned int FUN_00230e04(unsigned short *);
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 extern int inputIsQuestCancelPressed(void);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 
@@ -61,7 +61,7 @@ void FUN_003a3a9c(int param_1)
     if (*(int *)(param_1 + 8) != 1) {
       return;
     }
-    temp_v0 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0x168));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
     if (temp_v0 != 2) {
       return;
     }
@@ -70,8 +70,8 @@ void FUN_003a3a9c(int param_1)
     *(unsigned int *)(param_1 + 8) = 0;
     return;
   }
-  FUN_0019e0c0(*(unsigned int *)(param_1 + 0x168));
-  FUN_0029e620(0);
+  scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x168));
+  messageTargetSetValue(0);
   temp_v0 = FUN_0022fbc0(param_1);
   FUN_0022fb64(param_1);
   if ((0 < *(int *)(param_1 + *(int *)(param_1 + 0x860) * 0x74 + 0x888)) &&
@@ -79,7 +79,7 @@ void FUN_003a3a9c(int param_1)
     temp_v0 = 1;
   }
   temp_v1 = *(int *)(param_1 + 0x860);
-  temp_v2 = FUN_0023360c(param_1 + temp_v1 * 0x74 + 0x880);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + temp_v1 * 0x74 + 0x880);
   puVar5 = (unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xc94 + temp_v2 * 4);
   if (*(int *)(param_1 + 0x860) != 8) {
     temp_v3 = FUN_00230e04(puVar5);
@@ -104,7 +104,7 @@ void FUN_003a3a9c(int param_1)
     FUN_00232848();
     FUN_00233240(param_1 + 0x3a8,1);
     FUN_00296e90();
-    FUN_00233854(*(unsigned int *)(param_1 + 0x85c));
+    ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x85c));
     FUN_00233818(param_1 + 0x828);
     temp_v0 = 0;
     if (temp_v0 < *(short *)(param_1 + 0x15d50)) {

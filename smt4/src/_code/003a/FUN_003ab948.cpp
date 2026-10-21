@@ -1,31 +1,36 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ab948` (_code @ 0x3ab948, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: count and entries share one captured base instead of retail's separate bases and larger saved-register set. */
+#include "common.h"
+
+struct ListedFlagEntry {
+    u16 flag;
+    u8 unk02[0x1e];
+};
+struct ListedFlags {
+    s16 count;
+    u16 unk02;
+    ListedFlagEntry entries[1];
+};
+struct FlagListOwner {
+    u8 unk00[0x10];
+    u8 active; // 0x10
+    u8 unk11[3];
+    s32 state; // 0x14
+    u32 timer; // 0x18
+    u8 unk01c[0x58c];
+    ListedFlags list; // 0x5a8
+};
 
 extern "C" {
+void FUN_002f5eac(u32, u32);
 
-int FUN_002f5eac(int, int);
-
-/* Supplied declaration required: FUN_002f5eac. */
-
-
-void FUN_003ab948(int param_1)
-
+// Clear each listed flag and activate state twelve.
+void FUN_003ab948(FlagListOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  if (temp_v0 < *(short *)(param_1 + 0x5a8)) {
-    do {
-      FUN_002f5eac(*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x5ac),0);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < *(short *)(param_1 + 0x5a8));
-  }
-  *(unsigned char *)(param_1 + 0x10) = 1;
-  *(unsigned int *)(param_1 + 0x14) = 0xc;
-  *(unsigned int *)(param_1 + 0x18) = 0;
-  return;
+    ListedFlags *list = &owner->list;
+    for (s32 index = 0; index < list->count; ++index)
+        FUN_002f5eac(list->entries[index].flag, 0);
+    owner->active = 1;
+    owner->state = 0xc;
+    owner->timer = 0;
 }
-
-} /* extern "C" */
+}

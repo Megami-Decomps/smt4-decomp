@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00115fac` (_code @ 0x115fac, 0x1d0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_TreeCopy.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int arrayElementAddress_00301c5c(...);
 int FUN_00301c66(...);
 int FUN_00301c76(...);
 int FUN_00301c88(...);
-int FUN_00301d64(int, int);
 int FUN_00301dc2(...);
 int FUN_00301e56(...);
 
@@ -53,7 +53,6 @@ extern int vectorSize12A(void);
 /* Supplied declaration required: FUN_00301c66. */
 /* Supplied declaration required: FUN_00301c76. */
 /* Supplied declaration required: FUN_00301c88. */
-/* Supplied declaration required: FUN_00301d64. */
 /* Supplied declaration required: FUN_00301dc2. */
 extern int FUN_00301df0(int *);
 /* Supplied declaration required: FUN_00301e56. */
@@ -139,7 +138,7 @@ void FUN_00115fac(int param_1,unsigned int param_2,int *param_3)
       temp_v10[2] = temp_v1;
       if (temp_v4 != temp_v1) {
         for (; temp_v10[0] = temp_v0, temp_v1 != temp_v10[0]; temp_v1 = temp_v1 + 0x1c) {
-          FUN_00301d64(temp_v4,temp_v1);
+          onlineTreeAssign((OnlineRecordTree*)temp_v4,(const OnlineRecordTree*)temp_v1);
           temp_v4 = temp_v4 + 0x1c;
           temp_v0 = temp_v10[0];
         }

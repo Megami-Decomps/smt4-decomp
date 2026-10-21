@@ -3,9 +3,9 @@
 extern "C" {
 
 void uiSpriteSetImageKeyframe(u8 *member, s32 a, s32 b);
-void FUN_002c2160(s32 mode);
+void frameTransitionSetMode(s32 mode);
 s32 FUN_0033e164(void);
-s32 FUN_0038b568(void);
+s32 aocDataBlockHasEntries(void);
 
 typedef struct Game {
     /* 0x0000 */ u8 unk0000[0x14];
@@ -20,7 +20,7 @@ typedef struct Game {
 } Game;
 extern Game *g_camp;
 
-/* Switches the game to `newState`, remembering the previous one; state 0x33 runs its set-up, and state 0x55 falls back to 0x56 when FUN_0038b568 reports 0. */
+/* Switches the game to `newState`, remembering the previous one; state 0x33 runs its set-up, and state 0x55 falls back to 0x56 when aocDataBlockHasEntries reports 0. */
 void FUN_0020b660(s32 newState)
 {
     Game *game;
@@ -32,11 +32,11 @@ void FUN_0020b660(s32 newState)
     game->unk14 = 0;
     if (newState == 0x33) {
         FUN_0033e164();
-        FUN_002c2160(2);
+        frameTransitionSetMode(2);
         uiSpriteSetImageKeyframe(game->member1634, 7, 0);
         return;
     }
-    if ((newState == 0x55) && (FUN_0038b568() == 0)) {
+    if ((newState == 0x55) && (aocDataBlockHasEntries() == 0)) {
         game->state = 0x56;
     }
 }

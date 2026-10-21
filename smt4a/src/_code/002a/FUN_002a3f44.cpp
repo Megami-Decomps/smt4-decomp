@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_00164288(void);
+void workCommandRefreshActiveSlots(void);
 
-/* Calls FUN_00164288 and returns 1. */
+/* Calls workCommandRefreshActiveSlots and returns 1. */
 u32 FUN_002a3f44(void)
 {
-    FUN_00164288();
+    workCommandRefreshActiveSlots();
     return 1;
 }
 

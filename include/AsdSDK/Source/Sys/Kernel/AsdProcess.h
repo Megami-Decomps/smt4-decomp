@@ -60,7 +60,10 @@ typedef struct AsdProcess {
     /* 0x58 */ struct AsdProcess *firstChild;
     /* 0x5c */ struct AsdProcess *nextSibling;
     /* 0x60 */ u32 cmdList;                   /* this process's GPU command list (AsdGxCommandList), begun/ended around onUpdate */
-    /* 0x64 */ s32 unk64;
+    /* 0x64 */ union {
+        s32 unk64;
+        AsdProcFunc onAuxiliary;            /* callback run by the auxiliary process pass */
+    };
     /* 0x68 */ u8 unk68[4];
     /* 0x6c */ AsdProcTimer startTimer;
     /* 0x74 */ AsdProcTimer timer74;

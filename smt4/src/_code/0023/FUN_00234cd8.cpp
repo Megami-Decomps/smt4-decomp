@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023d3c0(unsigned int, int);
+int providerEntrySetVector(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_0023d3c0. */
+/* Supplied declaration required: providerEntrySetVector. */
 /* Supplied declaration required: nodeSetTranslation. */
 extern unsigned int *FUN_002a86a4(unsigned int);
 
@@ -61,7 +61,7 @@ void FUN_00234cd8(int param_1,int param_2,int param_3)
     *(unsigned int *)(temp_v4 + 0x68) = temp_v6;
     *(unsigned int *)(temp_v4 + 0x78) = temp_v7;
     *(unsigned int *)(temp_v4 + 0x88) = *(unsigned int *)(temp_v4 + 0x88) | 0x800;
-    FUN_0023d3c0(*(unsigned int *)(param_1 + 0x56c),param_1 + 0x1610);
+    providerEntrySetVector(*(unsigned int *)(param_1 + 0x56c),param_1 + 0x1610);
     if (*(char *)(param_1 + 0x15) != '\0') {
       temp_v6 = *(unsigned int *)(temp_v5 + 0x1670);
       temp_v7 = *(unsigned int *)(temp_v5 + 0x1674);

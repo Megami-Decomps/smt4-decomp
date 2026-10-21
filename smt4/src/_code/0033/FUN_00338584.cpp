@@ -7,7 +7,7 @@ extern "C" {
 int dataTable00FindById(void);
 
 extern int randRange(unsigned int);
-extern int FUN_00295d08(unsigned int);
+extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
@@ -24,7 +24,7 @@ unsigned int FUN_00338584(int param_1)
   unsigned int temp_v1;
   unsigned int *puVar3;
   
-  temp_v0 = FUN_00295d08(1);
+  temp_v0 = playerPadTestBit(1);
   if ((((temp_v0 == 0) && ((*(unsigned int *)(param_1 + 0x44a0) & 0x40000) == 0)) &&
       (temp_v0 = gameFlagIsSet(0x416), temp_v0 == 0)) &&
      ((*(short *)(param_1 + 0x1fc6) < 2 && (*(short *)(param_1 + 0x1fc6) != 0)))) {

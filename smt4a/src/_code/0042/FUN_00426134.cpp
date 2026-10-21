@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u32 DAT_00589538;
+extern u32 g_y2rTransferEvent;
 
 u32 *FUN_00426134(void)
 {
-    return &DAT_00589538;
+    return &g_y2rTransferEvent;
 }
 
 } /* extern "C" */

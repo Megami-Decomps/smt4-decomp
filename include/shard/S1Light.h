@@ -24,10 +24,23 @@ enum {
     LIGHT_OWNER_PENDING = 0x200000
 };
 
+struct LightCommandBuffer;
+
 /* Number of lights registered per scene (24 bytes each; the count is the first word). */
 typedef struct LightCount {
     /* 0x00 */ u32 count;
-    /* 0x04 */ u8 unk04[0x14];
+    union {
+        /* 0x04 */ u8 unk04[0x14];
+        struct {
+            u8 active;                  /* 0x04 */
+            u8 dirty;                   /* 0x05 */
+            u8 unk06[2];
+            u32 context;                /* 0x08 */
+            u32 unk0c;
+            LightCommandBuffer* buffer; /* 0x10 */
+            u32 unk14;
+        } render;
+    };
 } LightCount;
 
 #endif

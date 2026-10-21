@@ -1,28 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00437e50` (_code @ 0x437e50, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct RangeListNode {
+    RangeListNode *previous; // 0x00
+    RangeListNode *next; // 0x04
+    u16 first; // 0x08
+    u16 last; // 0x0a
+};
 
-extern int FUN_00437cac(unsigned int, unsigned short, unsigned short);
+extern "C" s32 FUN_00437cac(u32, u16, u16);
 
-
-unsigned int FUN_00437e50(unsigned int param_1,int param_2)
-
+// Require every range in the circular list to pass the range predicate.
+extern "C" u32 FUN_00437e50(u32 context, RangeListNode *sentinel)
 {
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)(param_2 + 4);
-  while( 1 ) {
-    if (temp_v1 == param_2) {
-      return 1;
+    for (RangeListNode *node = sentinel->next; node != sentinel; node = node->next) {
+        if (FUN_00437cac(context, node->first, node->last) == 0)
+            return 0;
     }
-    temp_v0 = FUN_00437cac(param_1,*(unsigned short *)(temp_v1 + 8),*(unsigned short *)(temp_v1 + 10));
-    if (temp_v0 == 0) break;
-    temp_v1 = *(int *)(temp_v1 + 4);
-  }
-  return 0;
+    return 1;
 }
-
-} /* extern "C" */

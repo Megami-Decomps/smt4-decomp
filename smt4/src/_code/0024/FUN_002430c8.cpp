@@ -18,7 +18,7 @@ extern unsigned int *DAT_0044eac0; /* 0x44eac0 */
 /* Supplied declaration required: FUN_002f82ac. */
 /* Supplied declaration required: FUN_0030ed8c. */
 extern unsigned int FUN_00318cac(unsigned int *);
-extern unsigned int FUN_00323468(unsigned int *, int);
+extern unsigned int formattedTextCopyLabel(unsigned int *, int);
 /* Supplied declaration required: FUN_003241c4. */
 
 
@@ -32,7 +32,7 @@ void FUN_002430c8(unsigned int param_1,unsigned int param_2,int param_3)
   if (DAT_0044eabc != 0) {
     FUN_002f82ac(DAT_0044eac0);
     *(unsigned int *)(param_3 + 0x100) = *(unsigned int *)((int)DAT_0044eac0 + 8);
-    temp_v0 = FUN_00323468(DAT_0044eac0,param_3);
+    temp_v0 = formattedTextCopyLabel(DAT_0044eac0,param_3);
     *(unsigned int *)(param_3 + 0xfc) = temp_v0;
     temp_v0 = FUN_00318cac(DAT_0044eac0);
     *(unsigned int *)(param_3 + 0x104) = temp_v0;

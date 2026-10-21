@@ -14,8 +14,8 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern romwright_code *DAT_0058918c; /* 0x58918c */
-extern romwright_code *DAT_00589190; /* 0x589190 */
+extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
+extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
 extern int *g_commandBufferCursor; /* 0x5b40e0 */
 extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
 extern int DAT_005b40f4; /* 0x5b40f4 */
@@ -268,11 +268,11 @@ void FUN_0017909c(unsigned int *param_1)
     FUN_001a9124(0x291,8,0);
     temp_v1 = temp_v1 + 2;
   } while (temp_v1 < 0x60);
-  if (DAT_0058918c == (romwright_code *)0x0) {
+  if (g_gfxAllocateCallback == (romwright_code *)0x0) {
     temp_v4 = 0;
   }
   else {
-    temp_v4 = (*DAT_0058918c)(0x10000,0x100,0,0x4000);
+    temp_v4 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x4000);
   }
   sysMemClear(temp_v4,0x4000);
   if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
@@ -292,8 +292,8 @@ void FUN_0017909c(unsigned int *param_1)
     *g_commandBufferCursor = 0;
     g_commandBufferCursor = g_commandBufferCursor + 2;
   }
-  if (DAT_00589190 != (romwright_code *)0x0) {
-    (*DAT_00589190)(0x10000,0x100,0,temp_v4);
+  if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+    (*g_gfxReleaseCallback)(0x10000,0x100,0,temp_v4);
   }
   temp_v1 = 0;
   do {

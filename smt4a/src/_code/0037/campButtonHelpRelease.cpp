@@ -8,7 +8,7 @@ int jobStop(unsigned int, int);
 int uiSpriteSelectAnim(unsigned int *, int);
 int asdMemFree(unsigned int *);
 int scrScriptProcessDestroy(unsigned int);
-int FUN_0019d36c(void);
+int ifTouchDecrementTimer(void);
 int asdMemFreeSlot(unsigned int);
 
 extern signed char g_buttonHelp; /* 0x57f0c4 */
@@ -18,7 +18,7 @@ extern unsigned int *DAT_0057f0c8; /* 0x57f0c8 */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-/* Supplied declaration required: FUN_0019d36c. */
+/* Supplied declaration required: ifTouchDecrementTimer. */
 /* Supplied declaration required: asdMemFreeSlot. */
 
 
@@ -39,7 +39,7 @@ void campButtonHelpRelease(void)
       do {
         uiSpriteSelectAnim(puVar1 + temp_v0 * 0x23 + 0xd,1);
         if (*(char *)(puVar1 + temp_v0 + 0x16b) != '\0') {
-          FUN_0019d36c();
+          ifTouchDecrementTimer();
           puVar1[0x174] = puVar1[0x174] - 1;
         }
         temp_v0 = temp_v0 + 1;
@@ -47,7 +47,7 @@ void campButtonHelpRelease(void)
       if (0 < (int)puVar1[0x174]) {
         temp_v0 = 0;
         do {
-          FUN_0019d36c();
+          ifTouchDecrementTimer();
           temp_v0 = temp_v0 + 1;
         } while (temp_v0 < (int)puVar1[0x174]);
         puVar1[0x174] = 0;

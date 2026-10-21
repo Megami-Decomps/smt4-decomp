@@ -3,7 +3,7 @@
 namespace { struct Value { u32 low, high; }; struct Payload { Value value; u32 first, second; }; struct Owner { u8 kind; u8 padding[3]; Payload payload; }; }
 extern "C" {
 Payload *FUN_002bad5c(Payload *payload);
-Value *FUN_002baa40(Value *value);
+Value *resultPairInitialize(Value *value);
 Owner *FUN_002a1130(Owner *owner, u8 kind)
 {
     owner->kind = kind;
@@ -11,7 +11,7 @@ Owner *FUN_002a1130(Owner *owner, u8 kind)
     Owner *result = (Owner *)((u8 *)payload - 4);
     payload->first = payload->second = 0;
     Value temporary;
-    result->payload.value = *FUN_002baa40(&temporary);
+    result->payload.value = *resultPairInitialize(&temporary);
     return result;
 }
 }

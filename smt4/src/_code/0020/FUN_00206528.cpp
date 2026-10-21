@@ -9,7 +9,7 @@ int FUN_002a60cc(...);
 int asdTMTexTableReleaseNode(int);
 int FUN_002bee58(int, int);
 int FUN_002bf818(int);
-int FUN_002e0da0(int);
+int objectSetPosition(int);
 int FUN_0032c3fc(...);
 int VectorSignedToFloat(int, int);
 
@@ -24,7 +24,7 @@ extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bee58. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int randNextInRange(unsigned int);
-/* Supplied declaration required: FUN_002e0da0. */
+/* Supplied declaration required: objectSetPosition. */
 /* Supplied declaration required: FUN_0032c3fc. */
 
 
@@ -104,24 +104,24 @@ unsigned int FUN_00206528(void)
           else {
             if (temp_v1 >= 0x32) {
               if (temp_v1 >= 0x3c) {
-                FUN_002e0da0(temp_v0 + 0x20);
-                FUN_002e0da0(temp_v0 + 0xac);
+                objectSetPosition(temp_v0 + 0x20);
+                objectSetPosition(temp_v0 + 0xac);
                 break;
               }
               temp_v6 = *(float *)(temp_v0 + 0x2fc) + 0.01f;
               temp_v5 = *(float *)(temp_v0 + 0x300) + 0.005f;
               *(float *)(temp_v0 + 0x2fc) = temp_v6;
               *(float *)(temp_v0 + 0x300) = temp_v5;
-              FUN_002e0da0(temp_v0 + 0x20);
-              FUN_002e0da0(temp_v0 + 0xac);
+              objectSetPosition(temp_v0 + 0x20);
+              objectSetPosition(temp_v0 + 0xac);
               break;
             }
             temp_v5 = *(float *)(temp_v0 + 0x300) + 0.005f;
           }
           *(float *)(temp_v0 + 0x300) = temp_v5;
         }
-        FUN_002e0da0(temp_v0 + 0x20);
-        FUN_002e0da0(temp_v0 + 0xac);
+        objectSetPosition(temp_v0 + 0x20);
+        objectSetPosition(temp_v0 + 0xac);
         break;
       case 4:
         FUN_002bf818(g_btlTalkBustUp + 0x20);

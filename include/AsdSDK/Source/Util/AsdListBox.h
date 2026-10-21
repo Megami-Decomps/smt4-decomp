@@ -54,7 +54,10 @@ typedef struct AsdListBoxEntry {
 
 /* What FUN_002c08f0 returns for a list box. */
 typedef struct AsdListBoxModel {
-    /* 0x00 */ u8 list[0xc];                 /* AsdList of AsdListNode */
+    /* 0x00 */ union {
+        u8 list[0xc];
+        AsdList items;
+    };
     /* 0x0c */ u8 view[0x1c];                /* the scrolling widget */
     /* 0x28 */ s32 viewCursor;               /* the widget's cursor row (view + 0x1c) */
     /* 0x2c */ u8 unk2c[0x40];
@@ -65,7 +68,7 @@ typedef struct AsdListBoxModel {
 /* The list box object (0x18c bytes). */
 typedef struct AsdListBox {
     /* 0x000 */ u8 unk000[0xc];
-    /* 0x00c */ u8 widget[0x28];             /* row widget, set up by FUN_00296c80/colorSetRgba */
+    /* 0x00c */ u8 widget[0x28];             /* row widget, set up by rowWidgetInit/colorSetRgba */
     /* 0x034 */ s32 unk34;
     /* 0x038 */ u32 flags;
     /* 0x03c */ u8 unk3c;

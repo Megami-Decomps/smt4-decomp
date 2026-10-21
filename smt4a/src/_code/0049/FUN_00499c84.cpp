@@ -24,8 +24,8 @@ typedef struct Scene {
 
 extern void scrScriptProcessDestroy(void *process);
 extern void asdMemFree(void *block);
-extern void FUN_0019e2dc(void);
-extern void FUN_00497144(Scene *scene);
+extern void placeWinRelease(void);
+extern void sceneReleaseJobsAndResources(Scene *scene);
 extern void FUN_001695a0(void);
 extern void messageSetMode(s32 arg);
 
@@ -50,8 +50,8 @@ void FUN_00499c84(Scene *scene)
         asdMemFree(scene->bufferB);
         scene->bufferB = NULL;
     }
-    FUN_0019e2dc();
-    FUN_00497144(scene);
+    placeWinRelease();
+    sceneReleaseJobsAndResources(scene);
     FUN_001695a0();
     messageSetMode(1);
 }

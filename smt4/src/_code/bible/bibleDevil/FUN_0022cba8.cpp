@@ -12,7 +12,7 @@ int FUN_0022daac(...);
 int FUN_0022db94(...);
 int FUN_0022dcac(...);
 int FUN_00230cc0(int, int, int);
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int FUN_00231bcc(int, int, int);
 int FUN_00240d5c(...);
 int drawSetColorFromRGBA8(...);
@@ -37,10 +37,10 @@ extern unsigned int DAT_0049375c; /* 0x49375c */
 /* Supplied declaration required: FUN_0022db94. */
 /* Supplied declaration required: FUN_0022dcac. */
 /* Supplied declaration required: FUN_00230cc0. */
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
-extern int FUN_0023360c(int);
-extern unsigned long long FUN_00233718(int);
+extern int flaggedValueHolderGetTotal(int);
+extern unsigned long long rangeLimitMin(int);
 /* Supplied declaration required: FUN_00240d5c. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -74,7 +74,7 @@ void FUN_0022cba8(int param_1)
   float temp_v17;
   float temp_v18 [3];
   
-  FUN_00231bb8(param_1 + 200,&temp_v16);
+  pairCopy(param_1 + 200,&temp_v16);
   FUN_0039fc20(param_1 + 200,temp_v18);
   if (((int)(temp_v16 + temp_v18[0]) < 0x43a00000) && ((unsigned int)(temp_v16 + temp_v18[0]) < 0xc3a00000))
   {
@@ -105,7 +105,7 @@ void FUN_0022cba8(int param_1)
     }
     if (*(int *)(param_1 + 0x28) != 0) {
       temp_v0 = FUN_0029e924(param_1 + 0x20);
-      temp_v15 = FUN_00233718(param_1 + 0x20);
+      temp_v15 = rangeLimitMin(param_1 + 0x20);
       temp_v2 = (int)((unsigned long long)temp_v15 >> 0x20);
       temp_v1 = (int)temp_v15;
       temp_v14 = 1;
@@ -204,7 +204,7 @@ LAB_0022cd30:
           temp_v2 = *(int *)(param_1 + 0x14);
           if (((temp_v2 == 2 || temp_v2 == 3) || (temp_v2 == 7 || temp_v2 == 4)) ||
              (temp_v2 == 5 || temp_v2 == 8)) {
-            temp_v2 = FUN_0023360c(param_1 + 0x20);
+            temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
             temp_v0 = (int)*(short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
             temp_v2 = FUN_00240d5c(param_1 + 0x20);
             temp_v12 = (float)(*(int *)(param_1 + 0x594) + 1);

@@ -1,14 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00343f44` (_code @ 0x343f44, 0x1fc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_BattleVersionResources.h"
+#include "shard/W6_W6Match3_BattleQueue.h"
 
 extern "C" {
 
-int FUN_0023ce90(int);
 int FUN_0023f79c(int, int);
-int FUN_00240530(int, unsigned int, int, unsigned int, int);
+int btlReflectInitKind9(int, unsigned int, int, unsigned int, int);
 int FUN_0024057c(int, int, int);
-int FUN_00240614(void);
 int FUN_002451c4(int, unsigned int, int, int, int, int);
 int FUN_0033b1ac(int, int);
 int FUN_003c1248(int, int, int, int);
@@ -40,11 +40,9 @@ extern unsigned int DAT_00439a28; /* 0x439a28 */
 extern unsigned int DAT_00439a38; /* 0x439a38 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_0023ce90. */
 /* Supplied declaration required: FUN_0023f79c. */
-/* Supplied declaration required: FUN_00240530. */
+/* Supplied declaration required: btlReflectInitKind9. */
 /* Supplied declaration required: FUN_0024057c. */
-/* Supplied declaration required: FUN_00240614. */
 /* Supplied declaration required: FUN_002451c4. */
 extern int btlGetMainState(void);
 extern int FUN_0033a7f8(int, int, unsigned int, unsigned int);
@@ -68,14 +66,14 @@ void FUN_00343f44(unsigned int param_1,fn_00343f44_arg1 *param_2)
   
   temp_v3 = btlGetMainState();
   if (param_2->field_0x20 == 0) {
-    FUN_0023ce90(temp_v3);
+    btlPruneInvalidQueuedEntries((BtlMainState*)temp_v3);
     FUN_003c1248((int)param_2->field_0x24,(int)param_2->field_0x26,(int)param_2->field_0x48,
                  (int)param_2->field_0x4a);
     if (param_2->field_0x24 != 0) {
       if (param_2->field_0x24 == 1) {
         if ((*(unsigned int *)(temp_v3 + 0x44a0) & 4) != 0) {
           if ((*(unsigned int *)(DAT_00435d18 + 0x3028) & 0x400) != 0) {
-            FUN_00240614();
+            FUN_00240614(reinterpret_cast<BattleVersionResources*>(DAT_00435d18));
           }
           param_2->field_0x20 = 1;
           goto LAB_00343fdc;
@@ -119,7 +117,7 @@ LAB_00343fdc:
       if ((*(unsigned int *)(temp_v6 + 0x50) & 0x10) != 0) {
         temp_v5 = 7;
       }
-      FUN_00240530((int)temp_v1,*(unsigned int *)&param_2->field_0x8,temp_v6,temp_v5,0xd);
+      btlReflectInitKind9((int)temp_v1,*(unsigned int *)&param_2->field_0x8,temp_v6,temp_v5,0xd);
     }
   }
   if (param_2->field_0x20 == 2) {

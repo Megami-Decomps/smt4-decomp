@@ -11,7 +11,7 @@ int FUN_0016ccb4(...);
 int FUN_0016ce28(...);
 int FUN_0019a46c(...);
 int nn_os_LightEvent_Initialize(...);
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int sysMemClear(...);
 
 typedef int romwright_code(...);
@@ -38,7 +38,7 @@ extern int FUN_0016cd0c(int);
 /* Supplied declaration required: FUN_0016ce28. */
 /* Supplied declaration required: FUN_0019a46c. */
 /* Supplied declaration required: nn_os_LightEvent_Initialize. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(int);
 /* Supplied declaration required: sysMemClear. */
 
@@ -85,7 +85,7 @@ unsigned int * FUN_001482c0(int param_1)
   puVar2 = (unsigned int *)FUN_001b5acc(temp_v0 + 0x6b4);
   puVar2[2] = 0;
   puVar2[3] = 0;
-  FUN_001b57a8(&temp_v3,0);
+  resultPairInitialize(&temp_v3,0);
   temp_v1 = (unsigned int)ppcVar3[1];
   *puVar2 = (unsigned int)*ppcVar3;
   puVar2[1] = temp_v1;

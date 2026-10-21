@@ -22,7 +22,7 @@ struct fn_00333b74_arg1 {
 
 extern int g_aocSystem; /* 0x433158 */
 
-extern unsigned char *FUN_00240cd4(fn_00333b74_arg1 *);
+extern unsigned char *questGetRuntimeStatus(fn_00333b74_arg1 *);
 /* Supplied declaration required: dataTable9EntryOrZero. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
@@ -57,7 +57,7 @@ void FUN_00333b74(unsigned int *param_1,fn_00333b74_arg1 *param_2)
   pfVar4 = param_2;
   dataTable1bOr1cGetRecord();
   if (pfVar4 != (fn_00333b74_arg1 *)0x0) {
-    pbVar5 = (unsigned char *)FUN_00240cd4(param_2);
+    pbVar5 = (unsigned char *)questGetRuntimeStatus(param_2);
     puVar17 = (unsigned short *)((int)pfVar4 + ((int)((unsigned int)*pbVar5 << 0x1c) >> 0x1f) * -0xc + 0x154);
     if (((*pbVar5 & 8) != 0) && (*puVar17 == 0)) {
       puVar17 = &pfVar4->field_0x154;

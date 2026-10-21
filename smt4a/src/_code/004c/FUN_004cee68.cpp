@@ -13,7 +13,7 @@ typedef struct Object {
     /* 0x02C */ u32 field2C;
     /* 0x030 */ u32 field30;
     /* 0x034 */ u8 unk034[0x4D8 - 0x34];
-    /* 0x4D8 */ u8 member[0x70];      /* embedded sub-object constructed by FUN_0015a21c */
+    /* 0x4D8 */ u8 member[0x70];      /* embedded sub-object constructed by floatPairClear */
     /* 0x548 */ u32 field548[4];      /* 0x548..0x554 */
     /* 0x558 */ u8 unk558[4];
     /* 0x55C */ u32 field55C;
@@ -37,7 +37,7 @@ typedef struct Object {
 
 extern u8 DAT_00557ed8;
 
-int FUN_0015a21c(void *member);
+int floatPairClear(void *member);
 
 /* Constructor: installs the vtable, constructs the embedded member and zero-initialises the state (active = 1). */
 void FUN_004cee68(Object *self)
@@ -45,7 +45,7 @@ void FUN_004cee68(Object *self)
     Object *obj;
 
     self->vtbl = &DAT_00557ed8;
-    obj = (Object *)((u8 *)FUN_0015a21c(self->member) - 0x4d8);
+    obj = (Object *)((u8 *)floatPairClear(self->member) - 0x4d8);
     obj->active = 1;
     obj->field0C[0] = 0;
     obj->field0C[1] = 0;

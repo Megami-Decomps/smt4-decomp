@@ -11,7 +11,7 @@ int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned int *);
+int drawParameterBlockClear(unsigned int *);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -42,7 +42,7 @@ extern unsigned int *g_comWin; /* 0x43e0f8 */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_0010a7bc(void)
@@ -65,7 +65,7 @@ void FUN_0010a7bc(void)
   taskCreateDraw(&LAB_0010a984,0x81,0,0,FUN_0011a434,0,0,puVar2);
   taskCreateDraw(&LAB_0010a998,0xdf,0,0,FUN_0011a434,0,0,*puVar1);
   puVar1 = g_comWin;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_comWin + 7);
+  drawParameterBlockClear(g_comWin + 7);
   paramsInit(puVar1 + 7,0,0,&DAT_004037ec,0x30,&DAT_0040381c,0x30,0,0,&DAT_0040384c,0x118);
   FUN_002beed0(puVar1 + 0xf,0xe,0xffffffff,2,puVar1 + 7,1);
   FUN_002bee58(puVar1 + 0xf,0);

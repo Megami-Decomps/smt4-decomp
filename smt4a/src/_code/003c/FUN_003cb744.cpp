@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0018a924(int *, unsigned int [6]);
-int FUN_003534b0(int, int, unsigned char *, int, int, unsigned int, int, int, int, int, int, int, int, unsigned int, int, int, int, unsigned int, int);
+int sceneRegisterBoxEffect(int, int, unsigned char *, int, int, unsigned int, int, int, int, int, int, int, int, unsigned int, int, int, int, unsigned int, int);
 
 /* stack frame of void: 15 slot(s), 60 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern unsigned char LAB_003cb844; /* 0x3cb844 */
 extern int g_mapGimic; /* 0x580ca0 */
 
 /* Supplied declaration required: FUN_0018a924. */
-/* Supplied declaration required: FUN_003534b0. */
+/* Supplied declaration required: sceneRegisterBoxEffect. */
 
 
 void FUN_003cb744(void)
@@ -44,7 +44,7 @@ void FUN_003cb744(void)
   temp_v1[0] = 0;
   if (*(char *)(g_mapGimic + 0x9b4) != '\0') {
     FUN_0018a924(&temp_v0,temp_v1);
-    FUN_003534b0(0x208,0,&LAB_003cb844,0x57,0xc,0xffffffff,0,0,0,0,0,0,0,0xffffffff,1,1,1,0xffffffff
+    sceneRegisterBoxEffect(0x208,0,&LAB_003cb844,0x57,0xc,0xffffffff,0,0,0,0,0,0,0,0xffffffff,1,1,1,0xffffffff
                  ,0);
   }
   return;

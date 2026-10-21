@@ -19,7 +19,7 @@ struct SequenceArguments {
 extern "C" {
 
 void FUN_0027db90();
-void FUN_00285ca4(s32 mode);
+void gameRestoreWorkSave(s32 mode);
 void asdSequenceRequest(s32 kind, const SequenceArguments *arguments, u32 size);
 
 /* Consumes a pending sequence request and forwards its packed arguments. */
@@ -34,7 +34,7 @@ s32 FUN_0039440c(SequenceRequestState *request)
     for (u32 index = 0; index < 6; ++index)
         arguments.values[index] = request->arguments[index];
     FUN_0027db90();
-    FUN_00285ca4(2);
+    gameRestoreWorkSave(2);
     asdSequenceRequest(4, &arguments, 32);
     return 1;
 }

@@ -11,7 +11,22 @@ typedef struct MapTrapA {
     /* 0x0D */ u8 unk0D[0x2B];
     /* 0x38 */ u32 unk38;
     /* 0x3C */ u32 unk3C;
-    /* 0x40 */ u8 unk40[0x2C];
+    /* 0x40 */ union {
+        u8 unk40[0x2C];
+        struct {
+            u8 active;
+            u8 unk41[3];
+            s32 halfCount;
+            s32 count;
+            s32 reverseCount;
+            f32 initialValue;
+            f32 currentValue;
+            f32 delta;
+            f32 previousDelta;
+            u8 alternating;
+            u8 unk61[0x0B];
+        } motion;
+    };
     /* 0x6C */ u8 unk6C;
 } MapTrapA;
 

@@ -11,8 +11,8 @@ int FUN_0023d274(int, int);
 int asdModelAdvanceCommandCursor(unsigned int);
 int FUN_002bc7f4(int, int *);
 int FUN_00349d88(int, int, int, unsigned char [48]);
-int FUN_0034dbb4(void);
-int FUN_0034dc10(void);
+unsigned int *asdGxEmitAlphaDepthWritePreset(unsigned int *commands);
+unsigned int *FUN_0034dc10(void);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX34MultAsm(unsigned char [48], unsigned char [48], float *);
@@ -72,8 +72,6 @@ extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 /* Supplied declaration required: asdModelAdvanceCommandCursor. */
 /* Supplied declaration required: FUN_002bc7f4. */
 /* Supplied declaration required: FUN_00349d88. */
-/* Supplied declaration required: FUN_0034dbb4. */
-/* Supplied declaration required: FUN_0034dc10. */
 extern int FUN_00356e90(int);
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm. */
@@ -145,8 +143,8 @@ void FUN_00342250(int param_1,unsigned int param_2)
   temp_v8 = 0;
   temp_v9 = 0;
   temp_v7 = 0;
-  FUN_0034dc10();
-  FUN_0034dbb4();
+  temp_v22 = (int)FUN_0034dc10();
+  temp_v22 = (int)asdGxEmitAlphaDepthWritePreset((unsigned int *)temp_v22);
   temp_v6 = 0;
   temp_v1 = (**(romwright_code **)(**(int **)(param_1 + 8) + 8))();
   if (0 < temp_v1) {

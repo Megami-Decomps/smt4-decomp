@@ -6,7 +6,7 @@ extern "C" {
 
 int objFlagsSetBits(unsigned int, int);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, int);
-int FUN_002a1f60(...);
+int asdTextDrawDirectoryEntry(...);
 int bustupCutAnimClearFlags(void);
 int eventTexClearFlagB8(void);
 
@@ -47,7 +47,7 @@ extern unsigned char LAB_00204014; /* 0x204014 */
 /* Supplied declaration required: objFlagsSetBits. */
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: FUN_0023723c. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: bustupCutAnimClearFlags. */
 /* Supplied declaration required: eventTexClearFlagB8. */
 extern int bustupCutAnimIsStateFive(void);
@@ -102,10 +102,10 @@ void FUN_00203da4(fn_00203da4_arg0 *param_1,int param_2,unsigned int param_3,int
         temp_v6 = 0xffffffff;
         temp_v2 = 3;
       }
-      FUN_002a1f60(temp_v5,temp_v2,temp_v6,0,3,param_2,param_3);
+      asdTextDrawDirectoryEntry(temp_v5,temp_v2,temp_v6,0,3,param_2,param_3);
     }
     else {
-      FUN_002a1f60(temp_v5,3,0xffffffff,0,3,param_2,param_3);
+      asdTextDrawDirectoryEntry(temp_v5,3,0xffffffff,0,3,param_2,param_3);
     }
   }
   bustupCutAnimClearFlags();

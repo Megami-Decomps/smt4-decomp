@@ -15,7 +15,7 @@ int paramsInit(int, unsigned char *, int, int, int, int, int, int, int, int, int
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int asdTMTexTableLoadSprites(int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int drawParameterBlockClear(int);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_00194ec8(void)
@@ -72,7 +72,7 @@ void FUN_00194ec8(void)
   asdTMTexTableLoadSprites(0x30);
   asdTMTexTableLoadEntryAsync(0x30,0);
   fileSlotLoad(0x37);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
+  drawParameterBlockClear(temp_v0);
   paramsInit(temp_v0,&DAT_00402d04,0x18,0,0,0,0,0,0,0,0);
   temp_v4 = 0;
   do {

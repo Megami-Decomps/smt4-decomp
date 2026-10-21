@@ -5,14 +5,14 @@
 extern "C" {
 
 int controllerSetDestination(int, int);
-int FUN_003fdb18(int);
+int controllerSetRotationEulerDegrees(int);
 int FUN_003fe86c(int, int, int);
 
 extern int g_mapObj; /* 0x581284 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int slots4FGetActiveValue(int);
 
@@ -46,7 +46,7 @@ void FUN_0023534c(void)
       if (*(char *)(temp_v3 + 0x15) != '\0') {
         if (*(char *)(temp_v3 + 0x16) != '\0') {
           controllerSetDestination(temp_v4,temp_v3 + 0x18);
-          FUN_003fdb18(temp_v4);
+          controllerSetRotationEulerDegrees(temp_v4);
         }
         temp_v1 = slots4FGetActiveValue(temp_v4);
         if (temp_v1 != *(int *)(temp_v3 + 0x34)) {

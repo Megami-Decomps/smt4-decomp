@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002e9acc(int *, int);
 int FUN_002f3b58(unsigned int, int, unsigned int);
 int FUN_00300b18(int, int);
-int FUN_00300b4c(void);
+int systemAcquireHandleList(void);
 
 typedef struct fn_00114e54_arg0 fn_00114e54_arg0;
 struct fn_00114e54_arg0 {
@@ -37,7 +37,7 @@ extern int FUN_002ecf28(void);
 /* Supplied declaration required: FUN_002f3b58. */
 extern unsigned int *FUN_00300ae8(fn_00114e54_arg0 *, unsigned int);
 /* Supplied declaration required: FUN_00300b18. */
-/* Supplied declaration required: FUN_00300b4c. */
+/* Supplied declaration required: systemAcquireHandleList. */
 
 
 unsigned int *
@@ -84,7 +84,7 @@ FUN_00114e54(fn_00114e54_arg0 *param_1,unsigned int param_2,unsigned int param_3
   FUN_002e9acc(&temp_v3,30000);
   puVar1[8] = temp_v3;
   puVar1[9] = temp_v4;
-  FUN_00300b4c();
+  systemAcquireHandleList();
   temp_v0 = operatorNew(0x44);
   temp_v1 = 0;
   if (temp_v0 != 0) {

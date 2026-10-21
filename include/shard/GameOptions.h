@@ -1,4 +1,4 @@
-/* The game options record returned by gameGetOptions() (settings plus a progress marker at 0x46). */
+/* The game options record returned by gameGetSupportUnitData() (settings plus a progress marker at 0x46). */
 #ifndef SHARD_GAMEOPTIONS_H
 #define SHARD_GAMEOPTIONS_H
 

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_001ee690(short *);
+int statusBuildFlaggedDemonList(short *);
 int FUN_001ee8b4(short *);
 int FUN_00215a8c(short *);
 int FUN_00215b5c(int, int);
 int FUN_0026a978(unsigned int *, int);
 int FUN_0026ae64(void);
-int FUN_00293ba8(void);
-int FUN_002cf58c(void);
+int statusDownRestoreTabForMode(void);
+int statusDownSetSelectedEntryDescription(void);
 int FUN_002e2fb0(int, int);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
@@ -25,7 +25,7 @@ typedef struct {
 
 extern unsigned char g_gameGlobals; /* 0x44e140 */
 
-/* Supplied declaration required: FUN_001ee690. */
+/* Supplied declaration required: statusBuildFlaggedDemonList. */
 /* Supplied declaration required: FUN_001ee8b4. */
 /* Supplied declaration required: FUN_00215a8c. */
 /* Supplied declaration required: FUN_00215b5c. */
@@ -33,11 +33,11 @@ extern unsigned char g_gameGlobals; /* 0x44e140 */
 extern char FUN_0026a9cc(short, short, short *, unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_0026ae64. */
 extern int FUN_00293aac(void);
-/* Supplied declaration required: FUN_00293ba8. */
+/* Supplied declaration required: statusDownRestoreTabForMode. */
 extern unsigned char FUN_0029aafc(void);
-extern unsigned char FUN_0029c8f4(unsigned int);
-extern int FUN_002b066c(short);
-/* Supplied declaration required: FUN_002cf58c. */
+extern unsigned char flagCountUnlockedSlots(unsigned int);
+extern int partyMemberFindById(short);
+/* Supplied declaration required: statusDownSetSelectedEntryDescription. */
 /* Supplied declaration required: FUN_002e2fb0. */
 
 
@@ -71,7 +71,7 @@ void FUN_00258a24(int param_1)
     temp_v2 = FUN_0029aafc();
   }
   else if ((0 < temp_v0) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66) != '\x06')) {
-    temp_v2 = FUN_0029c8f4(0);
+    temp_v2 = flagCountUnlockedSlots(0);
   }
   FUN_00215b5c(temp_v1 + 0x1348,temp_v2);
   if (param_1 != 0) {
@@ -83,7 +83,7 @@ void FUN_00258a24(int param_1)
   temp_v9 = 0;
   if ((*psVar8 >= 1) && (temp_v3 = *(char *)(temp_v1 + 0x1e66), temp_v3 != '\x06')) {
     if (temp_v3 == '\x02' || temp_v3 == '\x03') {
-      temp_v4 = FUN_002b066c(*psVar9);
+      temp_v4 = partyMemberFindById(*psVar9);
       temp_v3 = '\0';
       if (temp_v4 != 0) {
         temp_v3 = *(char *)(temp_v4 + 0x4b);
@@ -110,21 +110,21 @@ void FUN_00258a24(int param_1)
   temp_v4 = (*(int *)((unsigned char *)&g_gameGlobals + 0x4));
   if (*(char *)(temp_v1 + 0x1e67) == '\x06') {
     *(unsigned int *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x12e4) = 0;
-    FUN_00293ba8();
+    statusDownRestoreTabForMode();
     *(unsigned char *)(temp_v4 + 0x1e63) = 0;
   }
   if ((*psVar8 < 0) && (FUN_00215a8c(psVar8 + 0x1d), *(int *)(temp_v1 + 0x12e4) >= 2)) {
     *(unsigned int *)(temp_v1 + 0x12e4) = 1;
-    FUN_00293ba8();
+    statusDownRestoreTabForMode();
   }
   if (0 < *psVar8) {
-    FUN_002cf58c();
-    FUN_001ee690(psVar8 + 0x2c);
+    statusDownSetSelectedEntryDescription();
+    statusBuildFlaggedDemonList(psVar8 + 0x2c);
     FUN_001ee8b4(psVar8 + 0x4c);
     temp_v4 = FUN_00293aac();
     if (temp_v4 == 2) {
       *(unsigned int *)(temp_v1 + 0x12e4) = 1;
-      FUN_00293ba8();
+      statusDownRestoreTabForMode();
     }
   }
   FUN_0026ae64();

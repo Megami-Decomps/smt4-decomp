@@ -8,7 +8,7 @@ int FUN_00107284(int, unsigned int *);
 int FUN_0010728e(int, unsigned int *);
 int onlineStringDestroy(unsigned int *);
 int FUN_002ea704(void);
-int FUN_002fd768(...);
+int onlineSockAddrToString(...);
 int FUN_002fd784(unsigned int, int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0010728e. */
 /* Supplied declaration required: onlineStringDestroy. */
 /* Supplied declaration required: FUN_002ea704. */
-/* Supplied declaration required: FUN_002fd768. */
+/* Supplied declaration required: onlineSockAddrToString. */
 /* Supplied declaration required: FUN_002fd784. */
 
 
@@ -48,7 +48,7 @@ long long FUN_00112910(int param_1,unsigned int param_2,unsigned int param_3,uns
   temp_v0 = FUN_002ea704();
   if (((temp_v0 != 0) && (*(int *)(param_1 + 0x374) != 0)) && (*(int *)(param_1 + 0x39c) != 0)) {
     temp_v6 = param_1 + 0x138;
-    FUN_002fd768(&uStack_20);
+    onlineSockAddrToString(&uStack_20);
     temp_v0 = param_1 + 0x34c;
     FUN_0010728e(temp_v0,&uStack_20);
     onlineStringDestroy(&uStack_20);
@@ -61,7 +61,7 @@ long long FUN_00112910(int param_1,unsigned int param_2,unsigned int param_3,uns
     *(unsigned short *)(param_1 + 0x15e) =
          (unsigned short)((*(unsigned int *)(param_1 + 0x39c) & 0xff) << 8) |
          ((unsigned short)(*(unsigned int *)(param_1 + 0x39c) >> 8) & 0xff);
-    FUN_002fd768(&uStack_20,param_1 + 0x158);
+    onlineSockAddrToString(&uStack_20,param_1 + 0x158);
     FUN_00107284(temp_v0,&uStack_20);
     onlineStringDestroy(&uStack_20);
     *(unsigned short *)(param_1 + 0x364) =

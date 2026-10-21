@@ -16,14 +16,14 @@ typedef struct {
     unsigned char sp5E6; /* 0x5e6: local_5e6 */
 } param_3_stack;
 
-extern int FUN_0020154c(...); /* 0x20154c */
+extern int dataTable06Sub1CompareBySortKeys(...); /* 0x20154c */
 
 extern int recordContainsPairedId(int);
 /* Supplied declaration required: FUN_0029bbc8. */
 /* Supplied declaration required: FUN_0029bde4. */
 /* Supplied declaration required: FUN_0029c1c8. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern unsigned int FUN_0029c8f4(int);
+extern unsigned int flagCountUnlockedSlots(int);
 extern int gameGetUnitRecord(unsigned int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002b7bca. */
@@ -105,8 +105,8 @@ unsigned int FUN_0033bb94(int param_1,unsigned int param_2,int param_3)
     }
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 8);
-  FUN_002b7bca(param_3,8,2,FUN_0020154c);
-  temp_v5 = FUN_0029c8f4(temp_v2);
+  FUN_002b7bca(param_3,8,2,dataTable06Sub1CompareBySortKeys);
+  temp_v5 = flagCountUnlockedSlots(temp_v2);
   if (0 < 8 - temp_v1) {
     *(unsigned short *)(param_3 + temp_v1 * 2) = 0;
   }

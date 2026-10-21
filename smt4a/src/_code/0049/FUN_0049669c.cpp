@@ -7,12 +7,12 @@ extern "C" {
 int asdTMTexTableLoadSprites(int);
 int FUN_0014afd0(int, int);
 int dataTable00FindById(void);
-int FUN_002804b0(unsigned char *, unsigned int *, int);
+int asdLoadFileAsyncSimple(unsigned char *, unsigned int *, int);
 int FUN_002bf464(void);
 int campCommonBgAcquire(void);
 int FUN_0031bca4(void);
 int campButtonHelpAcquire(void);
-int FUN_00389fe0(...);
+unsigned int npcCreateTextureEffectJob(unsigned int id, int x, int y);
 int FUN_0039af48(...);
 int FUN_003b61ec(void);
 int FUN_0040a244(void);
@@ -34,12 +34,11 @@ extern unsigned char LAB_00496990; /* 0x496990 */
 /* Supplied declaration required: asdTMTexTableLoadSprites. */
 /* Supplied declaration required: FUN_0014afd0. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002bf464. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031bca4. */
 /* Supplied declaration required: campButtonHelpAcquire. */
-/* Supplied declaration required: FUN_00389fe0. */
 /* Supplied declaration required: FUN_0039af48. */
 /* Supplied declaration required: FUN_003b61ec. */
 extern unsigned int FUN_00409fe8(int, unsigned int);
@@ -59,7 +58,7 @@ void FUN_0049669c(unsigned int *param_1)
   FUN_003b61ec();
   FUN_002bf464();
   campButtonHelpAcquire();
-  FUN_002804b0(&LAB_004968ec,param_1 + 0x61,0);
+  asdLoadFileAsyncSimple(&LAB_004968ec,param_1 + 0x61,0);
   asdTMTexTableLoadSprites(0x20);
   FUN_0014afd0(0x20,0);
   temp_v1 = 0;
@@ -72,20 +71,20 @@ void FUN_0049669c(unsigned int *param_1)
         if (temp_v1 != 5) {
           if (temp_v1 != 10) {
             temp_v1 = 0x5b;
-            FUN_002804b0(&LAB_0049695c,param_1 + 0x62,0);
+            asdLoadFileAsyncSimple(&LAB_0049695c,param_1 + 0x62,0);
             *(unsigned char *)(param_1 + 0x5813) = 1;
           }
           else {
             temp_v1 = 0x89;
             temp_v2 = 0xa3;
-            FUN_002804b0(&LAB_0049695c,param_1 + 0x62,0);
+            asdLoadFileAsyncSimple(&LAB_0049695c,param_1 + 0x62,0);
             *(unsigned char *)(param_1 + 0x5813) = 1;
           }
         }
         else {
           temp_v1 = 0x8b;
           temp_v2 = 0x50;
-          FUN_002804b0(&LAB_00496990,param_1 + 0x62,0);
+          asdLoadFileAsyncSimple(&LAB_00496990,param_1 + 0x62,0);
           temp_v0 = 6;
           *(unsigned char *)(param_1 + 0x5813) = temp_v0;
         }
@@ -93,7 +92,7 @@ void FUN_0049669c(unsigned int *param_1)
       else {
         temp_v1 = 0x59;
         temp_v2 = 0x148;
-        FUN_002804b0(&LAB_00496978,param_1 + 0x62,0);
+        asdLoadFileAsyncSimple(&LAB_00496978,param_1 + 0x62,0);
         temp_v0 = 4;
         *(unsigned char *)(param_1 + 0x5813) = temp_v0;
       }
@@ -105,13 +104,13 @@ void FUN_0049669c(unsigned int *param_1)
       if (!(temp_v1 == 6 || temp_v1 == 7)) {
         if (temp_v1 != 9) {
           temp_v1 = 0x5a;
-          FUN_002804b0(&LAB_004968fc,param_1 + 0x62,0);
+          asdLoadFileAsyncSimple(&LAB_004968fc,param_1 + 0x62,0);
           *(unsigned char *)(param_1 + 0x5813) = 0;
         }
         else {
           temp_v1 = 0x8b;
           temp_v3 = 0xf9;
-          FUN_002804b0(&LAB_00496944,param_1 + 0x62,0);
+          asdLoadFileAsyncSimple(&LAB_00496944,param_1 + 0x62,0);
           temp_v0 = 5;
           *(unsigned char *)(param_1 + 0x5813) = temp_v0;
         }
@@ -119,7 +118,7 @@ void FUN_0049669c(unsigned int *param_1)
       else {
         temp_v1 = 0x8b;
         temp_v2 = 0x78;
-        FUN_002804b0(&LAB_0049692c,param_1 + 0x62,0);
+        asdLoadFileAsyncSimple(&LAB_0049692c,param_1 + 0x62,0);
         temp_v0 = 2;
         *(unsigned char *)(param_1 + 0x5813) = temp_v0;
       }
@@ -127,11 +126,11 @@ void FUN_0049669c(unsigned int *param_1)
     else {
       temp_v1 = 0x58;
       temp_v2 = 0x149;
-      FUN_002804b0(&LAB_00496914,param_1 + 0x62,0);
+      asdLoadFileAsyncSimple(&LAB_00496914,param_1 + 0x62,0);
       *(unsigned char *)(param_1 + 0x5813) = 3;
     }
   }
-  FUN_00389fe0(temp_v1,0);
+  temp_v1 = npcCreateTextureEffectJob(temp_v1,0,0);
   param_1[0x5808] = temp_v1;
   if (temp_v2 != 0) {
     FUN_0039af48(temp_v2,0,0);

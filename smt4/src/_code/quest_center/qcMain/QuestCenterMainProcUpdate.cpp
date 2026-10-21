@@ -24,7 +24,7 @@ int FUN_0032c69c(void);
 int FUN_00381b8c(void);
 int FUN_003840f4(unsigned int, int, unsigned int, int);
 int FUN_003848b8(unsigned int);
-int FUN_00385278(void);
+int entryRequestSequence(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern int FUN_00287314(unsigned int *);
 /* Supplied declaration required: FUN_00287328. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_00287528. */
-extern int FUN_002876f0(unsigned int, unsigned int);
+extern int objectFlagBitIsSet(unsigned int, unsigned int);
 extern unsigned int FUN_00287704(unsigned int);
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_002898e4. */
@@ -53,7 +53,7 @@ extern unsigned int FUN_00287704(unsigned int);
 /* Supplied declaration required: FUN_0028d9b0. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
-extern int FUN_00298e20(unsigned int);
+extern int questIsCompleted(unsigned int);
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a6fb8. */
 /* Supplied declaration required: asdMemFreeNonNull. */
@@ -65,7 +65,7 @@ extern int FUN_00298e20(unsigned int);
 /* Supplied declaration required: FUN_00381b8c. */
 /* Supplied declaration required: FUN_003840f4. */
 /* Supplied declaration required: FUN_003848b8. */
-/* Supplied declaration required: FUN_00385278. */
+/* Supplied declaration required: entryRequestSequence. */
 
 
 unsigned int QuestCenterMainProcUpdate(void)
@@ -118,7 +118,7 @@ unsigned int QuestCenterMainProcUpdate(void)
         temp_v2 = gameFlagIsSet(0x1c0);
         if ((temp_v2 != 0) && (temp_v2 = gameFlagIsSet(0x424), temp_v2 != 0)) {
           temp_v3 = FUN_00287704(1);
-          temp_v2 = FUN_002876f0(temp_v3,4);
+          temp_v2 = objectFlagBitIsSet(temp_v3,4);
           if (temp_v2 != 0) {
             FUN_00287528(0);
           }
@@ -135,9 +135,9 @@ unsigned int QuestCenterMainProcUpdate(void)
         {
           if (*(short *)(temp_v2 + 0x44dbc2) != 0) {
             if (*(short *)(temp_v2 + 0x44dbc2) == -1) {
-              temp_v1 = FUN_00298e20(0x65);
-              if ((temp_v1 == 0) || (temp_v1 = FUN_00298e20(0x66), temp_v1 == 0)) goto LAB_001a9c38;
-              temp_v1 = FUN_00298e20(0x67);
+              temp_v1 = questIsCompleted(0x65);
+              if ((temp_v1 == 0) || (temp_v1 = questIsCompleted(0x66), temp_v1 == 0)) goto LAB_001a9c38;
+              temp_v1 = questIsCompleted(0x67);
             }
             else {
               temp_v1 = gameFlagIsSet();
@@ -204,7 +204,7 @@ LAB_001a9c38:
     break;
   case 3:
     temp_v2 = *(int *)(DAT_0044db8c + 0x1c);
-    if ((((temp_v2 == 0) || (FUN_00385278(), temp_v2 == 0)) && (temp_v2 = FUN_00287304(), temp_v2 != 0)) &&
+    if ((((temp_v2 == 0) || (entryRequestSequence(), temp_v2 == 0)) && (temp_v2 = FUN_00287304(), temp_v2 != 0)) &&
        (DAT_0044db98 == 0)) {
       temp_v2 = gameStateIsFlagSetAndLarge();
       if (temp_v2 != 0) {

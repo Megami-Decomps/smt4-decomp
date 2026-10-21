@@ -13,7 +13,7 @@ int FUN_00183bb0(void);
 int FUN_001879d0(int);
 int FUN_003fabfc(unsigned int, int, float [3], unsigned int, int);
 int FUN_00499b58(unsigned int *);
-int FUN_004ff364(unsigned int, int);
+int asdAnimGetTrackLastFrame(unsigned int, int);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(unsigned int, int);
 
@@ -38,12 +38,12 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_001879d0. */
-extern int FUN_00267bd0(void);
+extern int placeWinGetValue(void);
 extern int FUN_00284f50(void);
 extern int FUN_00284f70(void);
 /* Supplied declaration required: FUN_003fabfc. */
 /* Supplied declaration required: FUN_00499b58. */
-/* Supplied declaration required: FUN_004ff364. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -78,7 +78,7 @@ void FUN_004990e4(unsigned int *param_1)
   }
   if (param_1[5] != 1) {
     FUN_00499b58(param_1);
-    temp_v1 = FUN_00267bd0();
+    temp_v1 = placeWinGetValue();
     if (temp_v1 != 0) {
       temp_v1 = FUN_00284f50();
       temp_v0 = FUN_00284f70();
@@ -109,7 +109,7 @@ void FUN_004990e4(unsigned int *param_1)
       temp_v8[2] = 0.0f;
       param_1[0x5816] = param_1[0x5816] + 2;
       temp_v8[0] = temp_v7;
-      FUN_004ff364(param_1[0x5815],0);
+      asdAnimGetTrackLastFrame(param_1[0x5815],0);
       __aeabi_idivmod(param_1[0x5816],(int)temp_v7);
       param_1[0x5816] = temp_v5;
       VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);

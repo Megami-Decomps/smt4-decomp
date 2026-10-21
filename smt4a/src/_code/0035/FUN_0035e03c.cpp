@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_002e0798(int);
+int gameDataAddCappedPoints(int);
 int FUN_0034a290(void);
 int playerGetWords(unsigned short [10], int);
-int FUN_003e00bc(int);
+int playerMaskSetBit(int);
 int halves34Copy(int, unsigned short [10]);
 int FUN_004bd17c(int);
 int bitsAt60Set(int, int);
@@ -26,13 +26,13 @@ extern int g_gameState; /* 0x5f15fc */
 extern unsigned int randRange(unsigned int);
 extern int gameGetPlayerData(void);
 extern int gameGetSlotRecord(void);
-/* Supplied declaration required: FUN_002e0798. */
+/* Supplied declaration required: gameDataAddCappedPoints. */
 extern int FUN_002e5c2c(void);
 /* Supplied declaration required: FUN_0034a290. */
 extern int FUN_003df4a4(void);
 /* Supplied declaration required: playerGetWords. */
 extern int playerHasFlagBit(unsigned int);
-/* Supplied declaration required: FUN_003e00bc. */
+/* Supplied declaration required: playerMaskSetBit. */
 /* Supplied declaration required: halves34Copy. */
 /* Supplied declaration required: FUN_004bd17c. */
 extern int bitsAt60Test(int, unsigned int);
@@ -108,7 +108,7 @@ unsigned int FUN_0035e03c(int param_1,int param_2,int param_3,int param_4)
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 8);
         if (temp_v9 != 0) {
-          FUN_003e00bc(5);
+          playerMaskSetBit(5);
         }
         else {
           bitsAt60Set(temp_v8,5);
@@ -150,7 +150,7 @@ LAB_0035e194:
   }
   if ((*(short *)(param_2 + 0x4a) != 0 && temp_v9 != 0) && (temp_v3 = FUN_002e5c2c(), temp_v3 != 9999)) {
     if (param_4 == 0) {
-      FUN_002e0798(*(unsigned short *)(param_2 + 0x4a));
+      gameDataAddCappedPoints(*(unsigned short *)(param_2 + 0x4a));
     }
     temp_v10 = 0;
   }

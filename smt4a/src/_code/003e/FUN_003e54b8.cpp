@@ -1,34 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e54b8` (_code @ 0x3e54b8, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads the target into R0 then copies/tests it in R4; compiled code loads R4 directly and adds a separate comparison and argument move. */
+#include "common.h"
+
+struct Slots4F;
+struct SlotTargetHolder {
+    u32 unk00;          // 0x00
+    Slots4F* target;    // 0x04
+};
+struct SlotTargetOwner {
+    u32 unk00[2];             // 0x00
+    SlotTargetHolder* holder; // 0x08
+};
 
 extern "C" {
+u32 slots4FGetActiveValue(Slots4F* target);
+void FUN_003fe86c(Slots4F* target, u32 slot, s32 flags, f32 value, f32 delay);
 
-int FUN_003fe86c(int, unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_003fe86c. */
-extern unsigned int slots4FGetActiveValue(void);
-
-
-void FUN_003e54b8(int param_1)
-
+// Applies a value to the active slot when the owner has a target.
+void FUN_003e54b8(SlotTargetOwner* owner, f32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = *(int *)(*(int *)(param_1 + 8) + 4);
-  if (temp_v0 != 0) {
-    temp_v1 = slots4FGetActiveValue();
-    FUN_003fe86c(temp_v0,temp_v1,0);
-    return;
-  }
-  return;
+    if (Slots4F* target = owner->holder->target) {
+        u32 slot = slots4FGetActiveValue(target);
+        FUN_003fe86c(target, slot, 0, value, 0.0f);
+    }
 }
-
-} /* extern "C" */
+}

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00357b18(unsigned int, unsigned int, unsigned int, int, int, int, int);
+void FUN_00357b18(unsigned int, int, int, int, int, int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {

@@ -1,47 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00105b94` (_code @ 0x105b94, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail chains the three component initializer return-this values in R0; the current void helper API requires preserving the allocation and computing independent member addresses. */
+#include "title/titleMain.h"
 
-extern "C" {
-
-int FUN_0010f144(void);
-int asdOperatorNew(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-extern int g_titleScene; /* 0x44ea00 */
-
-/* Supplied declaration required: FUN_0010f144. */
-extern int FUN_002c2218(int);
-/* Supplied declaration required: asdOperatorNew. */
-
-
-void FUN_00105b94(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = 0x139c;
-  asdOperatorNew();
-  temp_v1 = 0;
-  if (temp_v0 != 0) {
-    temp_v1 = FUN_002c2218(temp_v0 + 0x4a0);
-    temp_v1 = FUN_002c2218(temp_v1 + 0x6fc);
-    temp_v0 = FUN_002c2218(temp_v1 + 0x508);
-    temp_v1 = temp_v0 - 0x10a4;
-    *(unsigned int *)(temp_v0 + 0x128) = 0x3f800000;
-    *(unsigned int *)(temp_v0 + 300) = 0x3f800000;
-    *(unsigned int *)(temp_v0 + 0x130) = 0x3f800000;
-    *(unsigned int *)(temp_v0 + 0x134) = 0x3f800000;
-  }
-  g_titleScene = temp_v1;
-  FUN_0010f144();
-  return;
+namespace {
+struct TitleSceneStorage {
+    u8 unk0000[0x4a0];       // 0x0000
+    u8 firstState[0x6fc];    // 0x04a0
+    u8 secondState[0x508];   // 0x0b9c
+    u8 thirdState[0x128];    // 0x10a4
+    f32 unitValues[4];       // 0x11cc
+    u8 unk11dc[0x1c0];      // 0x11dc
+};
 }
 
-} /* extern "C" */
+extern "C" {
+void* asdOperatorNew(u32);
+void FUN_002c2218(void*);
+void FUN_0010f144(TitleScene*);
+extern TitleScene* g_titleScene;
+
+// Allocate the full scene, initialize its three state blocks and publish it.
+void FUN_00105b94()
+{
+    TitleSceneStorage* scene = (TitleSceneStorage*)asdOperatorNew(sizeof(TitleSceneStorage));
+    if (scene != NULL) {
+        FUN_002c2218(scene->firstState);
+        FUN_002c2218(scene->secondState);
+        FUN_002c2218(scene->thirdState);
+        scene->unitValues[0] = 1.0f;
+        scene->unitValues[1] = 1.0f;
+        scene->unitValues[2] = 1.0f;
+        scene->unitValues[3] = 1.0f;
+    }
+    g_titleScene = (TitleScene*)scene;
+    FUN_0010f144((TitleScene*)scene);
+}
+}

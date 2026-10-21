@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int btlGetMainState(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002c1c88(...);
 int libc_strcpy(...);
 int sysMemClear(...);
@@ -15,8 +15,8 @@ int FUN_003fd7b4(...);
 int FUN_003fe86c(...);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
-int FUN_0040ace8(...);
-int FUN_004f612c(...);
+int handleRegistryRegisterObject(...);
+int btlCameraFinishTransition(...);
 int FUN_004f65d4(...);
 int FUN_004f7778(...);
 int FUN_004f8a58(...);
@@ -33,12 +33,12 @@ typedef struct {
 
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002c1c88. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
@@ -50,8 +50,8 @@ extern int findRecordByKey(int);
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
 extern int FUN_0040ab8c(unsigned int);
-/* Supplied declaration required: FUN_0040ace8. */
-/* Supplied declaration required: FUN_004f612c. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
+/* Supplied declaration required: btlCameraFinishTransition. */
 /* Supplied declaration required: FUN_004f65d4. */
 /* Supplied declaration required: FUN_004f7778. */
 /* Supplied declaration required: FUN_004f8a58. */
@@ -96,7 +96,7 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
     (**(romwright_code **)(**(int **)(param_1 + 0x33a8) + 8))();
     temp_v4 = (**(romwright_code **)(**(int **)(param_1 + 0x33a8) + 0x14))();
     if (temp_v4 != 0) {
-      FUN_004f612c(param_1);
+      btlCameraFinishTransition(param_1);
     }
   }
   if ((*(unsigned int *)(param_1 + 0x339c) & 4) != 0) {
@@ -115,7 +115,7 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
     temp_v1 = *(unsigned int *)(param_1 + 0x339c);
   }
   else {
-    FUN_004f8d90(DAT_00573808,*(unsigned int *)(param_1 + 0x33a0));
+    FUN_004f8d90(g_btlAux,*(unsigned int *)(param_1 + 0x33a0));
     temp_v1 = (*(unsigned int *)(param_1 + 0x339c) & 0xffffffef) | 0x20;
     *(unsigned int *)(param_1 + 0x339c) = temp_v1;
   }
@@ -178,7 +178,7 @@ unsigned int FUN_004fa828(int param_1,unsigned int param_2,unsigned int param_3,
         FUN_003fd7b4(temp_v3);
         *(int *)(temp_v3 + 0x1fc) = (int)temp_v9;
         FUN_003fe86c(temp_v3,0,2);
-        FUN_0040ace8(g_handleRegistry,temp_v3);
+        handleRegistryRegisterObject(g_handleRegistry,temp_v3);
         *(unsigned int *)(temp_v3 + 4) = *(unsigned int *)(temp_v3 + 4) | 1;
         if (-1 < *(int *)(temp_v2 + 0x1ac)) {
           temp_v3 = param_1 + *(int *)(temp_v2 + 0x1ac) * 8;
@@ -237,7 +237,7 @@ LAB_004fab24:
       libc_strcpy(temp_v2 + 0x2824,temp_v3 + 1);
       temp_v3 = findRecordByKey(temp_v2 + 0x2824);
       if (temp_v3 == 0xff) {
-        FUN_002804b0(temp_v12,temp_v2 + 0x2820,1);
+        asdLoadFileAsyncSimple(temp_v12,temp_v2 + 0x2820,1);
         *(unsigned char *)(temp_v2 + 0x28a4) = *(unsigned char *)(temp_v2 + 0x28a4) | 1;
       }
       temp_v4 = temp_v4 + 1;

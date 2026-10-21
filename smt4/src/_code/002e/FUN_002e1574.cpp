@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail builds the constant 0x30000 in r5 right after the first call (before the null test) and ORs flags through a second register; the constant is built where it is used here. */
-#include "common.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
@@ -17,7 +17,6 @@ typedef struct Texture {
 
 Texture *asdTMTexTableCallFileB(void);
 int FUN_002b9178(Texture *texture);
-int asdTextureSetImage(TextureImage *image);
 
 /* Fetches the texture, gives its image format 0x30000 and flags it (0x40, then 4 once the image is set). */
 Texture *FUN_002e1574(void)
@@ -31,7 +30,7 @@ Texture *FUN_002e1574(void)
             texture->image->format = format;
             texture->flags |= 0x40;
             if (texture->image != NULL) {
-                asdTextureSetImage(texture->image);
+                asdTextureSetImage((AsdTexture*)texture->image);
                 texture->flags |= 4;
             }
         }

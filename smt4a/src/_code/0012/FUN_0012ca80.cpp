@@ -12,7 +12,7 @@ int FUN_0030c720(int, unsigned char *);
 int FUN_0030c7ac(...);
 int FUN_0030c7b6(int, int);
 int FUN_0030c7ea(int, int);
-int FUN_0030c846(int, int, unsigned int, unsigned int);
+int holderSetPairAndFlush(int, int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 8 slot(s), 32 byte(s) */
@@ -39,11 +39,11 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned int, unsigned int, un
 /* Supplied declaration required: FUN_002ea41e. */
 extern int FUN_002f7896(int, char *);
 /* Supplied declaration required: FUN_0030c720. */
-extern int FUN_0030c79c(unsigned int, int);
+extern int strNotEqualNullSafe(unsigned int, int);
 /* Supplied declaration required: FUN_0030c7ac. */
 /* Supplied declaration required: FUN_0030c7b6. */
 /* Supplied declaration required: FUN_0030c7ea. */
-/* Supplied declaration required: FUN_0030c846. */
+/* Supplied declaration required: holderSetPairAndFlush. */
 
 
 void FUN_0012ca80(int param_1)
@@ -120,7 +120,7 @@ LAB_0012cbaa:
         FUN_0030c7ea(temp_v0,0);
       }
       temp_v2 = FUN_002ea100(temp_v15,param_1 + 0x138);
-      temp_v7 = FUN_0030c79c(temp_v2,temp_v6);
+      temp_v7 = strNotEqualNullSafe(temp_v2,temp_v6);
       onlineStringDestroy(temp_v15);
       temp_v4 = temp_v7 != 0;
       if (temp_v4) {
@@ -138,7 +138,7 @@ LAB_0012cbaa:
       }
       goto LAB_0012cbaa;
     }
-    FUN_0030c846(temp_v0,temp_v1,*(unsigned int *)(param_1 + 0xf8),*(unsigned int *)(param_1 + 0xfc));
+    holderSetPairAndFlush(temp_v0,temp_v1,*(unsigned int *)(param_1 + 0xf8),*(unsigned int *)(param_1 + 0xfc));
     FUN_0030c7b6(temp_v0,temp_v6);
     FUN_0030c7ac(temp_v0,*(unsigned int *)(temp_v6 + 8));
     temp_v7 = *(int *)(param_1 + 0x294);

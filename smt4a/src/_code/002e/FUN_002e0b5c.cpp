@@ -12,7 +12,7 @@ extern signed char DAT_005b40c8; /* 0x5b40c8 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: FUN_0013ebd8. */
-extern unsigned int FUN_0014374c(unsigned int);
+extern unsigned int globalBlockGetFirst(unsigned int);
 /* Supplied declaration required: FUN_00429d98. */
 
 
@@ -31,7 +31,7 @@ unsigned int FUN_002e0b5c(void)
     temp_v3 = 2;
   }
   else {
-    temp_v2 = FUN_0014374c(0);
+    temp_v2 = globalBlockGetFirst(0);
     FUN_00429d98();
     FUN_0013ebd8();
     if ((temp_v2 & 0x80000000) == 0) {

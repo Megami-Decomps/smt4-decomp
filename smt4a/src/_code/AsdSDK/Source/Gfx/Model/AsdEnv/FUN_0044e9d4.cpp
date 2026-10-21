@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_004588b8(int, unsigned int, int);
+int gfxEmitTextureTransform(int, unsigned int, int);
 int nnnstdMemCpy(...);
 int nw_gfx_internal_FastWordCopyAsm_6(...);
 
@@ -56,7 +56,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_004588b8. */
+/* Supplied declaration required: gfxEmitTextureTransform. */
 /* Supplied declaration required: nnnstdMemCpy. */
 /* Supplied declaration required: nw_gfx_internal_FastWordCopyAsm_6. */
 
@@ -175,7 +175,7 @@ void FUN_0044e9d4(unsigned int param_1,int param_2,int param_3)
   }
   temp_v10 = *(int *)(temp_v9 + 0x2a8);
   if (temp_v12 != temp_v10) {
-    FUN_004588b8(param_2,temp_v3,temp_v9);
+    gfxEmitTextureTransform(param_2,temp_v3,temp_v9);
     temp_v12 = temp_v10;
   }
   temp_v10 = *(int *)(temp_v9 + 0x2b0);

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001f3f34(void);
 int controllerSetDestination(int, int);
 int controllerSetPosition(int);
-int FUN_003fdb18(int);
+int controllerSetRotationEulerDegrees(int);
 int FUN_003fe86c(int, unsigned int, int);
 int VectorSignedToFloat(...);
 
@@ -18,7 +18,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: FUN_001f3f34. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: controllerSetPosition. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 
 
@@ -99,7 +99,7 @@ void FUN_0024aeb0(void)
         }
         if (*(char *)(temp_v0 + 0x28) != '\0') {
           controllerSetDestination(temp_v2,temp_v0 + 0x14);
-          FUN_003fdb18(temp_v2);
+          controllerSetRotationEulerDegrees(temp_v2);
           controllerSetPosition(temp_v2);
           FUN_003fe86c(temp_v2,*(unsigned int *)(temp_v0 + 0x24),2);
           *(unsigned char *)(temp_v0 + 0x28) = 0;

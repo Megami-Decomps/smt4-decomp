@@ -15,7 +15,7 @@ typedef struct Actor Actor;
 int FUN_003e1114(PhaseState *phase, Actor *actor);
 int FUN_003ebec8(Actor *actor);
 int valueAtF0IsReady(Actor *actor);
-int FUN_003f0f40(Actor *actor);
+int loadSlotMainIsLoaded(Actor *actor);
 int FUN_003f1334(Actor *actor);
 int loadSlotIsLoaded(u32 id);
 
@@ -42,7 +42,7 @@ void FUN_003e2470(PhaseState *phase, Actor *actor)
         phase->state = 5;
         phase->counter10 = 0;
         phase->counter0c = 0;
-        if (FUN_003f0f40(actor) == 0) {
+        if (loadSlotMainIsLoaded(actor) == 0) {
             return;
         }
     }

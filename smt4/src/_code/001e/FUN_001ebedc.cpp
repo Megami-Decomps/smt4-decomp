@@ -11,7 +11,7 @@ int FUN_002595e0(...);
 int cecProcessForward(...);
 int FUN_002597c0(void);
 int FUN_00262f78(void);
-int FUN_0026e61c(...);
+int objectFlagSetBit(...);
 int btlTalkBustUpReleaseAllSlots(void);
 int FUN_0028bf2c(void);
 int btlTalkBustUpSetUnk2F4(...);
@@ -22,7 +22,7 @@ int FUN_0029bbc8(int);
 int FUN_0029bde4(...);
 int FUN_0029bed8(...);
 int FUN_0029c1c8(int, int, int);
-int FUN_0029c3c0(int, int, unsigned int);
+int slotSetRequest(int, int, unsigned int);
 int FUN_0029c6b0(...);
 int dataTable06Sub1GetRecord(void);
 int devilGetRecord(void);
@@ -49,7 +49,7 @@ typedef struct {
 extern int g_campCec; /* 0x43daa8 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_002595e0. */
 /* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
@@ -59,13 +59,13 @@ extern unsigned int FUN_0025981c(void);
 extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_00262f78. */
 /* Supplied declaration required: FUN_0026b9bc. */
-/* Supplied declaration required: FUN_0026e61c. */
+/* Supplied declaration required: objectFlagSetBit. */
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 /* Supplied declaration required: FUN_0028bf2c. */
-extern unsigned int FUN_0028e934(unsigned char, unsigned int);
+extern unsigned int aocEntryDataById(unsigned char, unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
-extern int FUN_002955fc(void);
+extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00295660. */
 extern int randBetween(unsigned int, int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -73,9 +73,9 @@ extern int randBetween(unsigned int, int);
 /* Supplied declaration required: FUN_0029bde4. */
 /* Supplied declaration required: FUN_0029bed8. */
 /* Supplied declaration required: FUN_0029c1c8. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern int FUN_0029c8f4(int);
+extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 extern int FUN_0029ea68(unsigned short);
 /* Supplied declaration required: FUN_002a03d8. */
@@ -127,13 +127,13 @@ unsigned int FUN_001ebedc(int param_1)
   switch(*(unsigned int *)(param_1 + 0xd38)) {
   case 0:
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0x17);
-    temp_v7 = FUN_002955fc();
+    temp_v7 = btlTalkBustUpGetValue();
     if (temp_v7 == 0) {
       FUN_002954f4(*(unsigned short *)(param_1 + 0x126),1);
     }
     break;
   case 1:
-    temp_v7 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd04));
+    temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
     if (temp_v7 != 2) {
       return temp_v18;
     }
@@ -144,7 +144,7 @@ unsigned int FUN_001ebedc(int param_1)
     btlTalkBustUpSetUnk2F4(1);
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x126);
     devilGetRecord();
-    temp_v5 = FUN_0028e934(*(unsigned char *)(temp_v6 + 2),1);
+    temp_v5 = aocEntryDataById(*(unsigned char *)(temp_v6 + 2),1);
     libc_strcpy(temp_v15,temp_v5);
     FUN_002bd158(temp_v15,temp_v16);
     FUN_00295660(0,temp_v16);
@@ -157,16 +157,16 @@ unsigned int FUN_001ebedc(int param_1)
     scrScriptProcessStartEntry(temp_v5,temp_v8);
     break;
   case 2:
-    temp_v7 = FUN_002955fc();
+    temp_v7 = btlTalkBustUpGetValue();
     if (temp_v7 == 0) {
       return temp_v18;
     }
-    temp_v7 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd04));
+    temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
     if (temp_v7 != 2) {
       return temp_v18;
     }
     btlTalkBustUpReleaseAllSlots();
-    FUN_0029c3c0(0,0x1e,0xffffffff);
+    slotSetRequest(0,0x1e,0xffffffff);
     temp_v5 = 0x1000173;
     FUN_002bf810(temp_v5);
     break;
@@ -175,7 +175,7 @@ unsigned int FUN_001ebedc(int param_1)
     if (temp_v7 == 0) {
       return temp_v18;
     }
-    temp_v7 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd04));
+    temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
     if (temp_v7 == 2) {
       FUN_0028bf2c();
       break;
@@ -234,10 +234,10 @@ unsigned int FUN_001ebedc(int param_1)
         }
         temp_v6 = temp_v6 + 1;
       } while ((int)temp_v6 < 0x500);
-      FUN_0026e61c(temp_v7,2);
+      objectFlagSetBit(temp_v7,2);
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v7 + 0x46);
       devilGetRecord();
-      temp_v9 = FUN_0029c8f4(temp_v7);
+      temp_v9 = flagCountUnlockedSlots(temp_v7);
       temp_v10 = 0;
       temp_v12 = 4;
       temp_v2 = temp_v6 + 0x3a;
@@ -361,7 +361,7 @@ LAB_001ec4d0:
     temp_v6 = FUN_00262f78();
     temp_v6 = temp_v6 & 0xffff;
     devilGetRecord();
-    temp_v5 = FUN_0028e934(*(unsigned char *)(temp_v6 + 2),1);
+    temp_v5 = aocEntryDataById(*(unsigned char *)(temp_v6 + 2),1);
     libc_strcpy(temp_v15,temp_v5);
     FUN_002bd158(temp_v15,temp_v16);
     FUN_00295660(0,temp_v16);
@@ -385,13 +385,13 @@ LAB_001ec4d0:
     }
     return temp_v18;
   case 6:
-    temp_v7 = FUN_002955fc();
+    temp_v7 = btlTalkBustUpGetValue();
     if (temp_v7 == 0) {
       return temp_v18;
     }
     temp_v7 = FUN_002b89a4(0);
     if (temp_v7 != 0) {
-      temp_v7 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd04));
+      temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
       if (temp_v7 == 2) {
         temp_v5 = *(unsigned int *)(param_1 + 0xd08);
         temp_v8 = 0;
@@ -402,7 +402,7 @@ LAB_001ec4d0:
     }
     return temp_v18;
   case 7:
-    temp_v7 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd08));
+    temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd08));
     if (temp_v7 != 2) {
       return temp_v18;
     }

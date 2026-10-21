@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0029127c(void);
 int libc_strcpy(unsigned char *, unsigned char [56]);
 int FUN_0037cdcc(unsigned char *, int, unsigned char [200]);
-int FUN_003ba614(unsigned char *, int);
+int asdEffectQueueRelease(unsigned char *, int);
 int rt_memcpy_w(unsigned int *, unsigned char *, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -27,7 +27,7 @@ extern unsigned int DAT_00634ca0; /* 0x634ca0 */
 /* Supplied declaration required: FUN_0029127c. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_0037cdcc. */
-/* Supplied declaration required: FUN_003ba614. */
+/* Supplied declaration required: asdEffectQueueRelease. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -49,7 +49,7 @@ unsigned char * FUN_003c58c4(void)
   }
   else if (temp_v2 == 1) {
     if (DAT_0059dbf4 != (unsigned char *)0x0) {
-      FUN_003ba614(DAT_0059dbf4,3);
+      asdEffectQueueRelease(DAT_0059dbf4,3);
     }
     libc_strcpy(&DAT_00634c50,temp_v1);
     FUN_0029127c();

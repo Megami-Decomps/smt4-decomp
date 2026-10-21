@@ -17,16 +17,16 @@ int FUN_0029ede8(...);
 int FUN_002ae584(void);
 int FUN_002dfefc(...);
 
-int FUN_00241f98(...);
+int dataTable0BFindById(...);
 int FUN_00242000(...);
 int FUN_00248738(...);
-int FUN_0026e420(...);
-int questEntryCheck(void);
+unsigned int appTryPurchase(unsigned int, int, int);
+int appCheckPurchaseRequirements(void);
 int FUN_00295660(...);
 int FUN_0029eb5c(int, int);
 int FUN_0029efc0(...);
 int FUN_0029efd8(...);
-int FUN_0029f5d8(...);
+int uiScrollHandleActionsOrTouch(...);
 int FUN_0029f848(...);
 int FUN_002b8584(int, int);
 int buttonHelpSetPreset(...);
@@ -44,14 +44,14 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00241d84. */
 /* Supplied declaration required: FUN_00241f2c. */
-/* Supplied declaration required: FUN_00241f98. */
+/* Supplied declaration required: dataTable0BFindById. */
 /* Supplied declaration required: FUN_00242000. */
 /* Supplied declaration required: FUN_00248738. */
-/* Supplied declaration required: FUN_0026e420. */
-/* Supplied declaration required: questEntryCheck. */
+/* Supplied declaration required: appTryPurchase. */
+/* Supplied declaration required: appCheckPurchaseRequirements. */
 extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -70,7 +70,7 @@ extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_0029f5d8. */
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_0029f848. */
 extern int sys43e188GetState(void);
 /* Supplied declaration required: FUN_002ae584. */
@@ -228,7 +228,7 @@ unsigned int FUN_003291e0(int *param_1)
     temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
     temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
     temp_v6 = *(int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74);
-    FUN_0026e420(temp_v6,0);
+    temp_v6 = appTryPurchase(temp_v6,0,0);
     if (temp_v6 == 0) {
       return 0;
     }
@@ -239,7 +239,7 @@ unsigned int FUN_003291e0(int *param_1)
       temp_v6 = flagBitIsSet(0x2e);
       if (temp_v6 == 0) {
         temp_v6 = 0x2e;
-        questEntryCheck();
+        appCheckPurchaseRequirements();
         if (temp_v6 == 0) {
           *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v10;
           *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
@@ -250,7 +250,7 @@ unsigned int FUN_003291e0(int *param_1)
       temp_v8 = 1;
       do {
         temp_v6 = flagBitIsSet(temp_v8);
-        if ((temp_v6 == 0) && (temp_v5 = temp_v8, questEntryCheck(), temp_v5 == 0)) {
+        if ((temp_v6 == 0) && (temp_v5 = temp_v8, appCheckPurchaseRequirements(), temp_v5 == 0)) {
           *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v8;
           *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
         }
@@ -262,7 +262,7 @@ unsigned int FUN_003291e0(int *param_1)
       temp_v6 = flagBitIsSet(0x18);
       if (temp_v6 == 0) {
         temp_v6 = 0x18;
-        questEntryCheck();
+        appCheckPurchaseRequirements();
         if (temp_v6 == 0) {
           *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v10;
           *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
@@ -280,7 +280,7 @@ unsigned int FUN_003291e0(int *param_1)
     temp_v12[0] = '\0';
     temp_v3 = FUN_002bf4f8(0x1d,0x575);
     temp_v6 = temp_v7 + 0x10;
-    FUN_0029f5d8(temp_v6,temp_v3,temp_v7 + 0x508,(int)*(short *)(temp_v7 + 0x522),
+    uiScrollHandleActionsOrTouch(temp_v6,temp_v3,temp_v7 + 0x508,(int)*(short *)(temp_v7 + 0x522),
                  (int)*(short *)(temp_v7 + 0x51e),(int)*(short *)(temp_v7 + 0x520),temp_v12,0,1);
     if (temp_v6 != 0) {
       FUN_00242000();
@@ -298,14 +298,13 @@ unsigned int FUN_003291e0(int *param_1)
       temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
       temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
       temp_v4 = *(int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74);
-      temp_v6 = temp_v4;
-      FUN_0026e420(temp_v4,0,1);
+      temp_v6 = appTryPurchase(temp_v4,0,1);
       if (temp_v6 == 0) {
         eventQueueAddUnique(0x100016e);
         return 0;
       }
       temp_v6 = temp_v4;
-      FUN_00241f98(temp_v4);
+      dataTable0BFindById(temp_v4);
       FUN_00295660(0,temp_v6);
       FUN_00241f2c(temp_v4);
       FUN_0029ede8(0x18,temp_v4,0xffffffff,0);
@@ -354,7 +353,7 @@ unsigned int FUN_003291e0(int *param_1)
     FUN_00248738(temp_v7,temp_v10);
     return 0;
   case 4:
-    temp_v6 = FUN_0019e0c0(*(unsigned int *)(temp_v7 + 0x530));
+    temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v7 + 0x530));
     if ((temp_v6 == 2) && (temp_v6 = sys43e188GetState(), temp_v6 != 0)) {
       temp_v6 = FUN_002973d8();
       if (temp_v6 != 0) {
@@ -363,7 +362,7 @@ unsigned int FUN_003291e0(int *param_1)
       else {
         temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
         temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
-        FUN_0026e420(*(unsigned int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74),0);
+        appTryPurchase(*(unsigned int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74),0,0);
         eventQueueAddUnique(0x100025c);
         FUN_00248738(temp_v7,5);
       }
@@ -409,7 +408,7 @@ unsigned int FUN_003291e0(int *param_1)
             FUN_002ae584();
             if ((temp_v5 != 0) &&
                ((temp_v6 = flagBitIsSet(temp_v8), temp_v6 != 0 ||
-                (temp_v5 = temp_v8, questEntryCheck(), temp_v5 != 2)))) {
+                (temp_v5 = temp_v8, appCheckPurchaseRequirements(), temp_v5 != 2)))) {
               *(unsigned int *)(temp_v7 + *(int *)(temp_v7 + 0x2a8) * 4 + 0x74) = temp_v8;
               *(int *)(temp_v7 + 0x2a8) = *(int *)(temp_v7 + 0x2a8) + 1;
             }

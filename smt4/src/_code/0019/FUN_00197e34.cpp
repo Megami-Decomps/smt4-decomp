@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0028f4b4(...);
 int FUN_002907c4(...);
-int FUN_00298e20(...);
-int FUN_0029acc4(...);
+int questIsCompleted(...);
+void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int dataTable1bOr1cGetRecord(void);
 int FUN_002b75ec(...);
 int FUN_002b93c8(...);
@@ -55,14 +55,14 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern unsigned int FUN_0011b454(unsigned int);
 extern int FUN_0028f1bc(unsigned int);
-extern int FUN_0028f304(void);
+extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: FUN_0028f4b4. */
 extern unsigned int FUN_002903f0(void);
 /* Supplied declaration required: FUN_002907c4. */
 extern int idIsAtLeast350(unsigned int);
-/* Supplied declaration required: FUN_00298e20. */
+/* Supplied declaration required: questIsCompleted. */
 extern int FUN_00298e40(unsigned int, int, unsigned char **);
-/* Supplied declaration required: FUN_0029acc4. */
+/* Supplied declaration required: drawSkillCategoryLabel. */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern int gameGetFlagBlock(void);
@@ -178,7 +178,7 @@ void FUN_00197e34(void)
     temp_v7 = temp_v25;
     dataTable1bOr1cGetRecord();
     FUN_002ba12c(g_titleScene);
-    temp_v13 = FUN_00298e20(temp_v25);
+    temp_v13 = questIsCompleted(temp_v25);
     temp_v11 = temp_v4 + (int)temp_v17;
     if (temp_v13 != 0) {
       FUN_002bf288(2,0x29,0x10,temp_v11,temp_v5,0x68);
@@ -188,7 +188,7 @@ void FUN_00197e34(void)
     }
     temp_v13 = FUN_002bf4f8(0x29,0x11);
     temp_v11 = temp_v4 + (int)temp_v17;
-    FUN_0029acc4(temp_v25,*(short *)(temp_v13 + 8) + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
+    drawSkillCategoryLabel(temp_v25,*(short *)(temp_v13 + 8) + temp_v11,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
     temp_v13 = FUN_002bf4f8(0x29,0x12);
     temp_v19 = FUN_002bcddc(temp_v25,0);
     textFormatBuffer(temp_v24,&LAB_00198208,temp_v19);
@@ -339,13 +339,13 @@ LAB_00198518:
   temp_v7 = temp_v25;
   dataTable1bOr1cGetRecord();
   if (*(char *)(temp_v28[0] + 0xc4) != '\0') {
-    temp_v8 = FUN_00298e20(temp_v25);
+    temp_v8 = questIsCompleted(temp_v25);
     if (temp_v8 != 0) {
       FUN_002bf288(2,0x29,0x2b,temp_v11,temp_v13,0x68);
     }
   }
   else if (*(char *)(temp_v7 + 6) != '\0') {
-    temp_v8 = FUN_0028f304();
+    temp_v8 = questIsOfferable(temp_v25);
     if (temp_v8 != 0) {
       temp_v12 = FUN_002903f0();
       if (temp_v12 == temp_v25) {
@@ -358,21 +358,21 @@ LAB_00198518:
         }
       }
       else {
-        temp_v8 = FUN_00298e20();
+        temp_v8 = questIsCompleted();
         if (temp_v8 != 0) {
           FUN_002bf288(2,0x29,0x2b,temp_v11,temp_v13,0x68);
         }
       }
     }
     else {
-      temp_v8 = FUN_00298e20(temp_v25);
+      temp_v8 = questIsCompleted(temp_v25);
       if (temp_v8 != 0) {
         FUN_002bf288(2,0x29,0x2b,temp_v11,temp_v13,0x68);
       }
     }
   }
   else {
-    temp_v8 = FUN_00298e20(temp_v25);
+    temp_v8 = questIsCompleted(temp_v25);
     if (temp_v8 != 0) {
       FUN_002bf288(2,0x29,0x2b,temp_v11,temp_v13,0x68);
     }

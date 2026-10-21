@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00257510(void);
+int dataTable12FindBySortKey(void);
 int devilGetRecord(...);
 
 extern int FUN_00257444(int);
-/* Supplied declaration required: FUN_00257510. */
+/* Supplied declaration required: dataTable12FindBySortKey. */
 /* Supplied declaration required: devilGetRecord. */
 
 
@@ -24,9 +24,9 @@ int FUN_002dc9d4(unsigned short *param_1,unsigned short *param_2)
   unsigned short *puVar6;
   
   temp_v0 = (unsigned int)param_1[1];
-  FUN_00257510();
+  dataTable12FindBySortKey();
   temp_v1 = (unsigned int)param_2[1];
-  FUN_00257510();
+  dataTable12FindBySortKey();
   devilGetRecord(*param_1);
   devilGetRecord(*param_2);
   temp_v2 = FUN_00257444((int)*(short *)(temp_v1 + 0x22));

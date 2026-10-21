@@ -19,7 +19,7 @@ typedef struct {
 extern unsigned char LAB_00243e6c; /* 0x243e6c */
 extern unsigned char LAB_00243e7c; /* 0x243e7c */
 extern unsigned char LAB_0025c7e4; /* 0x25c7e4 */
-extern int FUN_0029f188(...); /* 0x29f188 */
+extern unsigned int jyoucyuDrawLoadingOverlay(void);
 extern unsigned char LAB_002e0548; /* 0x2e0548 */
 extern unsigned int *DAT_0057ffbc; /* 0x57ffbc */
 
@@ -43,7 +43,7 @@ void FUN_00243d90(void)
   puVar2 = &LAB_00243e6c;
   asdProcessCreateSimple(&LAB_00243e6c,4,0,0,&LAB_0025c7e4,&LAB_002e0548,0);
   *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_00243e7c,0x89,0,0,FUN_0029f188,0,0,puVar2);
+  taskCreateDraw(&LAB_00243e7c,0x89,0,0,jyoucyuDrawLoadingOverlay,0,0,puVar2);
   return;
 }
 

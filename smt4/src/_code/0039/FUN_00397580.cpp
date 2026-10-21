@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0019e0c0(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int FUN_00232848(void);
-int FUN_00232854(...);
+int nameFormSetCharacter(...);
 int FUN_002328b4(void);
 int FUN_00233404(void);
 int flaggedEntryGetValueB(...);
@@ -25,9 +25,9 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_00232848. */
-/* Supplied declaration required: FUN_00232854. */
+/* Supplied declaration required: nameFormSetCharacter. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233404. */
 /* Supplied declaration required: flaggedEntryGetValueB. */
@@ -62,7 +62,7 @@ void FUN_00397580(int param_1)
   unsigned int temp_v10;
   int in_r12;
   
-  FUN_0019e0c0(*(unsigned int *)(param_1 + 0x654));
+  scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x654));
   FUN_002bf818(param_1 + 0x67c);
   temp_v7 = param_1;
   FUN_00398fa8();
@@ -129,7 +129,7 @@ void FUN_00397580(int param_1)
           return;
         }
       }
-      FUN_00232854(param_1,(int)*(char *)(param_1 + 0x22),0);
+      nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22),0);
       temp_v7 = 0;
       if ('\0' < *(char *)(param_1 + 0x22)) {
         *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) - '\x01';
@@ -225,7 +225,7 @@ LAB_00397744:
     temp_v4 = 0;
   }
   else {
-    FUN_00232854(param_1,(int)*(char *)(param_1 + 0x22),0xffff8140);
+    nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22),0xffff8140);
     FUN_003983dc(param_1);
     if (*(char *)(param_1 + 0x22) < '\a') {
       *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
@@ -237,7 +237,7 @@ LAB_00397744:
     if (*(short *)(
                   "艠艡艢艣艤芁节芃芄芅艏艐艑艒艓艥艦艧艨艩芆芇芈芉芊艔艕艖艗艘艪艫艬艭艮芋芌芍芎芏腉膗膔膓腏良艰艱色艳芐芑芒芓芔膕膖腩腪腻艴艵艶艷艸芕芖芗芘芙腼膁膃膄腈艹腀腀腀腀芚腀腀腀腀腞腃腄腆腇芠芢芤芦芨苂苢苤苦苭腉腈腠膏膐膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘腡膦膨膪膩膫腆膎臍臝臎膸膹螔臣膇膿膾膼膽膺膻臧螓膈臦莟莠莡莢莣莤莥莦莧莨莩莪莫莬莭莮莯莰莱莲莳莴莵莶莿菀菁菂菃菄菅菆菇菈菉菊菋菌菍菎菏菐菑菒菓菔菕菖葀葁葂葃葄葅葆葇葈葉葊葋葌葍葎葏葐葑葒葓葔葕葖著葘葙葚葜葞葟葠葝葛葰葱葲葳葴葵葶葷葸葹葺葻葼葽葾蒀蒁蒂蒃蒄蒅蒆蒇蒈蒉蒊蒋蒍蒏蒐蒑蒎蒌蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝懲敏既暑梅海渚漢煮爫蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉臷膝腉腈腠膏膐膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘腡膦膨膪膩膫腆膎臍臝臎膸膹膛臣膇膿膾膼膽膺膻臧膛膈臦莟莠莡莢莣莤莥莦莧莨莩莪莫莬莭莮莯莰莱莲莳莴莵莶莿菀菁菂菃菄菅菆菇菈菉菊菋菌菍菎菏菐菑菒菓菔菕菖葀葁葂葃葄葅葆葇葈葉葊葋葌葍葎葏葐葑葒葓葔葕葖著葘葙葚葜葞葟葠葝葛葰葱葲葳葴葵葶葷葸葹葺葻葼葽葾蒀蒁蒂蒃蒄蒅蒆蒇蒈蒉蒊蒋蒍蒏蒐蒑蒎蒌艐艑艒艓艔艕艖艗艘艏艐艑艒艓艔艕艖艗艘艏艐艑艒艓艔艕艖艗艘艏臷膝艐艑艒艓艔艕艖艗艘艏腀腀腀腀裪鏱蹏蹬賜顚躵钪诣轜腚镓郧障裫鏳蹑\xe3e6賞鞤躽蹊诨轅覭銛讞骴蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉腀腀腀腀蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝腀腀腀腀懲敏既暑梅海渚漢煮爫腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀裪鏱蹏蹬賜顚躵钪诣轜腚镓郧障裫鏳蹑\xe3e6賞鞤躽蹊诨轅覭銛讞骴艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀ŀ"
                   + *(int *)(param_1 + 0x10) * 2 + *(int *)(param_1 + 0x14) * 0x1e) != -0x7ec0) {
-      FUN_00232854(param_1,(int)*(char *)(param_1 + 0x22));
+      nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22));
       FUN_003983dc(param_1);
       if (*(char *)(param_1 + 0x22) < '\a') {
         *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';

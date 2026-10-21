@@ -1,34 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a7658` (_code @ 0x4a7658, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct RankedEntry {
+    u16 id;  // 0x00
+    u8 rank; // 0x02
+};
+struct SortMetadata {
+    u8 unk00[6]; // 0x00
+    u16 key;     // 0x06
+};
 
 extern "C" {
+SortMetadata* FUN_00184310(u16 id);
 
-int FUN_00184310(void);
-
-/* Supplied declaration required: FUN_00184310. */
-
-
-int FUN_004a7658(unsigned short *param_1,unsigned short *param_2)
-
+// Sorts by entry rank descending, metadata key ascending, then ID descending.
+s32 FUN_004a7658(const RankedEntry* first, const RankedEntry* second)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = (unsigned int)(unsigned char)param_2[1] - (unsigned int)(unsigned char)param_1[1];
-  if (temp_v0 == 0) {
-    temp_v1 = (unsigned int)*param_1;
-    FUN_00184310();
-    temp_v2 = (unsigned int)*param_2;
-    FUN_00184310();
-    temp_v0 = (unsigned int)*(unsigned short *)(temp_v1 + 6) - (unsigned int)*(unsigned short *)(temp_v2 + 6);
-    if (temp_v0 == 0) {
-      temp_v0 = (unsigned int)*param_2 - (unsigned int)*param_1;
+    s32 order = second->rank - first->rank;
+    if (order == 0) {
+        SortMetadata* a = FUN_00184310(first->id);
+        SortMetadata* b = FUN_00184310(second->id);
+        order = a->key - b->key;
+        if (order == 0) {
+            order = second->id - first->id;
+        }
     }
-  }
-  return temp_v0;
+    return order;
 }
-
-} /* extern "C" */
+}

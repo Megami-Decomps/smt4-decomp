@@ -16,7 +16,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_002c0944. */
 extern unsigned int FUN_002c15ac(unsigned int);
-extern unsigned int FUN_002c15d4(unsigned int);
+extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
@@ -55,7 +55,7 @@ void FUN_00107784(int param_1)
       *(unsigned char *)(temp_v0 + 0x1264) = 0;
     }
     FUN_002c1b64(g_titleScene,0);
-    temp_v2 = FUN_002c15d4(*(unsigned int *)(g_titleScene + 0x528));
+    temp_v2 = asdGxPresetsGetByKind(*(unsigned int *)(g_titleScene + 0x528));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v2 = FUN_002c15ac(*(unsigned int *)(g_titleScene + 0x528));
     VectorUnsignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);

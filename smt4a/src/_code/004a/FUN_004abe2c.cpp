@@ -1,19 +1,20 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004abe2c` (_code @ 0x4abe2c, 0x164 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct BtlUiObjCA;
 
 extern "C" {
 
 int btlGetMainState(void);
 int ifTouchRegionRemove(void);
 int sysPlaySe(void);
-int FUN_001a9104(unsigned int *, unsigned int *);
+void FUN_001a9104(BtlUiObjCA *, unsigned short *);
 int __aeabi_memset4(...);
 int FUN_00203b40(...);
 int FUN_00227af0(unsigned char *);
 int FUN_00270104(void);
-int FUN_00290274(unsigned int *, int, int, int);
-int FUN_002a3258(void);
+int eventPanelSelectSpritePreset(unsigned int *, int, int, int);
+int menuStateReset(void);
 int FUN_002cb438(...);
 int FUN_002cd118(unsigned int *, unsigned int, int, int);
 int buttonHelpGetValue(void);
@@ -59,14 +60,13 @@ extern unsigned char g_btlUi; /* 0x57a9b8 */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_001a9104. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00227af0. */
 /* Supplied declaration required: FUN_00270104. */
-/* Supplied declaration required: FUN_00290274. */
+/* Supplied declaration required: eventPanelSelectSpritePreset. */
 extern int FUN_002a21c8(void);
-/* Supplied declaration required: FUN_002a3258. */
+/* Supplied declaration required: menuStateReset. */
 extern int FUN_002a4878(unsigned int *);
 /* Supplied declaration required: FUN_002cb438. */
 extern unsigned int FUN_002cc9e0(unsigned int *, unsigned int);
@@ -191,7 +191,7 @@ void FUN_004abe2c(fn_004abe2c_arg0 *param_1,int param_2,unsigned char param_3,un
     temp_v1 = 0;
   }
   temp_v2 = 1;
-  FUN_00290274(puVar1 + 0x92f,param_2,param_6,temp_v1);
+  eventPanelSelectSpritePreset(puVar1 + 0x92f,param_2,param_6,temp_v1);
   FUN_002cd118(puVar1 + 2,puVar1[0x1d29],(int)*(char *)((int)puVar1 + 0x7505),
                (int)*(char *)((int)puVar1 + 0x7506));
   if ((param_2 == 1) && (param_5 != 0)) {
@@ -199,7 +199,7 @@ void FUN_004abe2c(fn_004abe2c_arg0 *param_1,int param_2,unsigned char param_3,un
     puVar1[0x3012] = 0;
     *(unsigned char *)(puVar1 + 0x3010) = 1;
     FUN_00227af0(&LAB_004abf9c);
-    FUN_002a3258();
+    menuStateReset();
     menuStateStartSelect(0);
   }
   puVar5 = (*(unsigned int * *)((unsigned char *)&g_btlUi + 0x10));
@@ -216,7 +216,7 @@ void FUN_004abe2c(fn_004abe2c_arg0 *param_1,int param_2,unsigned char param_3,un
   *(unsigned short *)(puVar5 + 0x1d40) = temp_v0;
   temp_v0 = uiFindValidIdOrdinal(*puVar5,3);
   *(unsigned short *)((int)puVar5 + 0x7502) = temp_v0;
-  FUN_001a9104(puVar5 + 0xa31,puVar4);
+  FUN_001a9104((BtlUiObjCA *)(puVar5 + 0xa31), (unsigned short *)puVar4);
   puVar5 = puVar1 + 0xa31;
   if (param_2 != 0) {
     menu32Advance();

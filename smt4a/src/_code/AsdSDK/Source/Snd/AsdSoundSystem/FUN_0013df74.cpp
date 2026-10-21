@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00150784(void);
 int FUN_00154710(...);
-int FUN_0015e158(...);
-int FUN_0015e198(...);
+int holderStartOnce(...);
+int trackerMoveTo(...);
 int FUN_0015e1ec(...);
 int FUN_0015e314(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int FUN_0015e420(...);
@@ -68,8 +68,8 @@ extern unsigned int DAT_0064c01c; /* 0x64c01c */
 #endif
 /* Supplied declaration required: FUN_00150784. */
 /* Supplied declaration required: FUN_00154710. */
-/* Supplied declaration required: FUN_0015e158. */
-/* Supplied declaration required: FUN_0015e198. */
+/* Supplied declaration required: holderStartOnce. */
+/* Supplied declaration required: trackerMoveTo. */
 /* Supplied declaration required: FUN_0015e1ec. */
 /* Supplied declaration required: FUN_0015e314. */
 /* Supplied declaration required: FUN_0015e420. */
@@ -180,7 +180,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
     temp_v3 = 0;
     DAT_0063f4bc = 0;
     do {
-      FUN_0015e158(temp_v3 * 0x88 + 0x63ea78,&DAT_0063e37c,&DAT_0063ea3c);
+      holderStartOnce(temp_v3 * 0x88 + 0x63ea78,&DAT_0063e37c,&DAT_0063ea3c);
       if ((DAT_0063f4c4 != '\0') && (temp_v3 < 0x10)) {
         if (((DAT_005c4c20 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_005c4c20), temp_v0 != 0)) {
           g_asdSoundListener = (unsigned int)temp_v4;
@@ -193,7 +193,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
         *(unsigned int *)(temp_v0 + 0x63f338) = g_asdSoundListener;
         *(unsigned int *)(temp_v0 + 0x63f33c) = temp_v1;
         *(unsigned int *)(temp_v0 + 0x63f340) = temp_v2;
-        FUN_0015e198(temp_v3 * 0x88 + 0x63ea78,temp_v0 + 0x63f338);
+        trackerMoveTo(temp_v3 * 0x88 + 0x63ea78,temp_v0 + 0x63f338);
       }
       temp_v3 = temp_v3 + 1;
     } while ((int)temp_v3 < 0x10);

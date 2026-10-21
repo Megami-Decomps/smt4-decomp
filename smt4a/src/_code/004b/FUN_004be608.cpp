@@ -15,7 +15,7 @@ int FUN_0022e774(void);
 int scrScriptProcessStartEntry(unsigned int);
 int FUN_002c8538(int);
 int FUN_003343f0(int);
-int FUN_0034913c(void);
+int messageBannerRestartOrClear(void);
 int FUN_0035d03c(int);
 int FUN_003e4e4c(int);
 int FUN_004be1c8(int);
@@ -30,15 +30,15 @@ extern signed char DAT_0057f25c; /* 0x57f25c */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: dialogClose. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int FUN_002a4894(int);
-extern int FUN_002a4b60(void);
+extern int messageMainGetValue(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_0034913c. */
+/* Supplied declaration required: messageBannerRestartOrClear. */
 extern int tableGroupFindEntryIndex(unsigned int, char *);
 /* Supplied declaration required: FUN_0035d03c. */
 extern int FUN_003e4d68(unsigned int);
@@ -85,14 +85,14 @@ unsigned int FUN_004be608(int param_1)
     FUN_004bf174(param_1);
     break;
   case 5:
-    temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 800));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 800));
     if (temp_v0 != 2) {
       return 0;
     }
     if (*(char *)(param_1 + 4) == '\x01') {
-      FUN_0034913c();
+      messageBannerRestartOrClear();
     }
-    temp_v0 = FUN_002a4b60();
+    temp_v0 = messageMainGetValue();
     if (temp_v0 != 0) {
       if (*(char *)(param_1 + 4) != '\x01') {
         *(unsigned int *)(param_1 + 8) = 3;
@@ -127,11 +127,11 @@ unsigned int FUN_004be608(int param_1)
     *(unsigned int *)(param_1 + 8) = temp_v1;
     break;
   case 7:
-    temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 800));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 800));
     if (temp_v0 != 2) {
       return 0;
     }
-    temp_v0 = FUN_002a4b60();
+    temp_v0 = messageMainGetValue();
     if (temp_v0 != 0) {
       *(unsigned int *)(param_1 + 8) = 3;
       temp_v1 = 0xf0;
@@ -168,11 +168,11 @@ unsigned int FUN_004be608(int param_1)
     }
     break;
   case 10:
-    temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 800));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 800));
     if (temp_v0 != 2) {
       return 0;
     }
-    FUN_0034913c();
+    messageBannerRestartOrClear();
     temp_v1 = *(unsigned int *)(param_1 + 0xc);
     *(unsigned int *)(param_1 + 8) = temp_v1;
     break;

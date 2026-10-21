@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int taskCreateDraw(...);
 int asdOperatorNew(void);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int loadSlotRequestAsync(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -30,7 +30,7 @@ extern unsigned int *g_callbackWork; /* 0x57f134 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: loadSlotRequestAsync. */
 
 
@@ -60,9 +60,9 @@ void FUN_00319b10(void)
   puVar1[7] = 0;
   puVar1[8] = 0;
   puVar1[5] = 0;
-  FUN_002804b0("battle/Result.bf",puVar1 + 4,0);
-  FUN_002804b0("battle/ResultMsg.mbm",puVar1 + 6,0);
-  FUN_002804b0("battle/DevilLvUp.bf",puVar1 + 7,0);
+  asdLoadFileAsyncSimple("battle/Result.bf",puVar1 + 4,0);
+  asdLoadFileAsyncSimple("battle/ResultMsg.mbm",puVar1 + 6,0);
+  asdLoadFileAsyncSimple("battle/DevilLvUp.bf",puVar1 + 7,0);
   puVar1[2] = 0;
   *(unsigned char *)(puVar1 + 1) = 1;
   return;

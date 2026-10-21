@@ -6,7 +6,7 @@ extern "C" {
 
 int messageKindForward(...);
 int categoryGetColor(int);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002ba12c(int);
 int drawSetColorFromRGBA8(void);
 int FUN_002be5a4(...);
@@ -38,7 +38,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: categoryGetColor. */
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -126,7 +125,7 @@ void FUN_0033c72c(int param_1,int param_2,int param_3)
     drawSetColorFromRGBA8();
   }
   temp_v13 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002b6758((int)(short)*(unsigned int *)(param_3 + 0x3c),
+  uiDrawDemonIcon((int)(short)*(unsigned int *)(param_3 + 0x3c),
                (int)(*(float *)(param_1 + 0x300) + (float)temp_v12 + temp_v13),
                (int)(*(float *)(param_1 + 0x304) + (float)((unsigned long long)temp_v12 >> 0x20)),param_2 + 5,0
               );

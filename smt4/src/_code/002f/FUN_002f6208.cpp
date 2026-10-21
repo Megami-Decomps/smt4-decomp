@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_002b89e4(...);
+int titleOverlaySetModeAnimation(...);
 int ifTouchRegionRemove(void);
 
 extern int DAT_0043e18c; /* 0x43e18c */
 extern unsigned int DAT_0043e190; /* 0x43e190 */
 
-/* Supplied declaration required: FUN_002b89e4. */
+/* Supplied declaration required: titleOverlaySetModeAnimation. */
 /* Supplied declaration required: ifTouchRegionRemove. */
-extern unsigned int FUN_002bc02c(void);
-extern int FUN_002bc088(void);
+extern unsigned int workCommandRefreshActiveSlots(void);
+extern int querySlotHasHandle(void);
 
 
 void FUN_002f6208(unsigned int param_1,unsigned int param_2)
@@ -41,10 +41,10 @@ void FUN_002f6208(unsigned int param_1,unsigned int param_2)
     temp_v1 = DAT_0043e190;
     *(unsigned char *)(DAT_0043e190 + 0x2f) = 0;
     *(unsigned int *)(temp_v1 + 0x1c) = *(unsigned int *)(temp_v1 + 0x18);
-    temp_v2 = FUN_002bc088();
+    temp_v2 = querySlotHasHandle();
     temp_v1 = 0;
     if (temp_v2 != 0) {
-      temp_v1 = FUN_002bc02c();
+      temp_v1 = workCommandRefreshActiveSlots();
     }
     temp_v0 = DAT_0043e190;
     if (DAT_0043e190 != 0) {
@@ -52,7 +52,7 @@ void FUN_002f6208(unsigned int param_1,unsigned int param_2)
     }
     if (DAT_0043e190 != 0 && temp_v1 != 0) {
       temp_v1 = DAT_0043e190;
-      FUN_002b89e4(DAT_0043e190,*(unsigned char *)(DAT_0043e190 + 9));
+      titleOverlaySetModeAnimation(DAT_0043e190,*(unsigned char *)(DAT_0043e190 + 9));
       *(unsigned char *)(temp_v0 + 8) = 3;
       *(unsigned char *)(temp_v0 + 0x35) = 0;
     }
@@ -61,7 +61,7 @@ void FUN_002f6208(unsigned int param_1,unsigned int param_2)
       temp_v1 = (unsigned int)*(unsigned char *)(DAT_0043e18c + 8);
     }
     if (DAT_0043e18c != 0 && temp_v1 != 0) {
-      FUN_002b89e4(DAT_0043e18c,*(unsigned char *)(DAT_0043e18c + 9));
+      titleOverlaySetModeAnimation(DAT_0043e18c,*(unsigned char *)(DAT_0043e18c + 9));
       *(unsigned char *)(temp_v2 + 8) = 3;
       *(unsigned char *)(temp_v2 + 0x35) = 0;
     }

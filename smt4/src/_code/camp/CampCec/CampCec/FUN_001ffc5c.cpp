@@ -7,9 +7,9 @@ extern "C" {
 int bgmRestart(...);
 int runWinOpen(void);
 int FUN_002579bc(...);
-int FUN_00259294(...);
+int gameDataFlagsSetBits(...);
 int gameDataBlocksAddFlags(...);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int soundChannelRequestIfEnabled(...);
 int buttonHelpSetPreset(...);
 int FUN_002bcc60(...);
@@ -38,7 +38,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern int FUN_0018b06c(...); /* 0x18b06c */
+extern int campCecDrawDimmingOverlay(...); /* 0x18b06c */
 extern unsigned char LAB_0018b20c; /* 0x18b20c */
 extern int FUN_001dbeb8(...); /* 0x1dbeb8 */
 extern int FUN_001dbf34(...); /* 0x1dbf34 */
@@ -67,9 +67,9 @@ extern unsigned int *g_campCec; /* 0x43daa8 */
 /* Supplied declaration required: bgmRestart. */
 /* Supplied declaration required: runWinOpen. */
 /* Supplied declaration required: FUN_002579bc. */
-/* Supplied declaration required: FUN_00259294. */
+/* Supplied declaration required: gameDataFlagsSetBits. */
 /* Supplied declaration required: gameDataBlocksAddFlags. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bcc60. */
@@ -111,8 +111,8 @@ void FUN_001ffc5c(void)
   puVar2 = &LAB_001fffcc;
   asdProcessCreateSimple(&LAB_001fffcc,1,0,0,&LAB_0018b20c,0,0);
   *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(0x1fffe0,0x7d,0,0,FUN_0018b06c,0,0,puVar2);
-  taskCreateDraw(&LAB_001ffff4,0xdb,0,0,FUN_0018b06c,0,0,*puVar1);
+  taskCreateDraw(0x1fffe0,0x7d,0,0,campCecDrawDimmingOverlay,0,0,puVar2);
+  taskCreateDraw(&LAB_001ffff4,0xdb,0,0,campCecDrawDimmingOverlay,0,0,*puVar1);
   puVar1[0x349] = 0xffffffff;
   puVar1[0x34a] = 0;
   puVar1[0x34b] = 0xffffffff;
@@ -147,8 +147,8 @@ void FUN_001ffc5c(void)
   }
   *(unsigned char *)(puVar1 + 0x359) = 0;
   if (puVar1[0x357] != 0) {
-    FUN_00297468(&LAB_00200040,puVar1 + 0x33d,0);
-    FUN_00297468(&LAB_00200054,puVar1 + 0x33e,0);
+    asdLoadFileAsyncSimple(&LAB_00200040,puVar1 + 0x33d,0);
+    asdLoadFileAsyncSimple(&LAB_00200054,puVar1 + 0x33e,0);
     puVar1[0x34a] = 0xd;
   }
   else {
@@ -164,14 +164,14 @@ void FUN_001ffc5c(void)
     runWinOpen();
     runWinOpenState();
     gameDataBlocksAddFlags(2);
-    FUN_00259294(2);
+    gameDataFlagsSetBits(2);
     *(unsigned char *)((int)puVar1 + 0xd65) = 0;
     puVar1[0x35a] = 0;
     temp_v0 = 0x100;
     memAlloc(0x100,0x100,0,0x1000,0x1000,1);
     puVar1[0x35e] = temp_v0;
     puVar4 = (unsigned int *)0x18;
-    asdOperatorNew(0x18,FUN_0018b06c);
+    asdOperatorNew(0x18,campCecDrawDimmingOverlay);
     if (puVar4 != (unsigned int *)0x0) {
       *puVar4 = 0;
       puVar4[1] = 0;

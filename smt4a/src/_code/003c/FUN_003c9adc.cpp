@@ -6,7 +6,7 @@ extern "C" {
 
 int scrSetResult(int);
 
-extern unsigned int DAT_00570288; /* 0x570288 */
+extern unsigned int g_btlCandidateMasks; /* 0x570288 */
 extern unsigned int DAT_0057028c; /* 0x57028c */
 extern unsigned int DAT_005702a0; /* 0x5702a0 */
 extern unsigned int DAT_005702a4; /* 0x5702a4 */
@@ -15,7 +15,7 @@ extern unsigned int DAT_005702b4; /* 0x5702b4 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: scrSetResult. */
-extern int FUN_004c3a98(int, unsigned int);
+extern int btlFindEntryValue(int, unsigned int);
 
 
 unsigned int FUN_003c9adc(void)
@@ -35,9 +35,9 @@ unsigned int FUN_003c9adc(void)
     temp_v1 = *puVar4;
     temp_v2 = puVar4[1];
     if (((DAT_005702a0 & temp_v1) != 0 || (DAT_005702a4 & temp_v2) != 0) &&
-       ((temp_v2 & DAT_0057028c) != 0 || (temp_v1 & DAT_00570288) != 0)) {
+       ((temp_v2 & DAT_0057028c) != 0 || (temp_v1 & g_btlCandidateMasks) != 0)) {
       if (((temp_v1 & DAT_005702b0) == 0 && (temp_v2 & DAT_005702b4) == 0) &&
-         (temp_v0 = FUN_004c3a98((int)(short)puVar4[2],0x13), 0 < temp_v0)) {
+         (temp_v0 = btlFindEntryValue((int)(short)puVar4[2],0x13), 0 < temp_v0)) {
         scrSetResult(1);
         return 1;
       }

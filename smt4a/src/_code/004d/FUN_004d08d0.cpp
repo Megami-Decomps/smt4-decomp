@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d08d0` (_code @ 0x4d08d0, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: destructor for vtable address point 0x55ca10; requires class/symbol integration before expressing the vtable write as a C++ destructor. */
 #include "romwright_types.h"
 
 extern "C" {

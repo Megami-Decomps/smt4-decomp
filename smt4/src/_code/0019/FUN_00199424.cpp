@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b03ec(int);
+int partyCaptureEligibleSkills(int);
 int FUN_0028e9ec(int);
 int FUN_0029e8b8(...);
 int FUN_0029eb5c(...);
@@ -23,7 +23,7 @@ extern int FUN_0021960c(...); /* 0x21960c */
 extern int DAT_00435de8; /* 0x435de8 */
 extern unsigned int DAT_00435dec; /* 0x435dec */
 
-/* Supplied declaration required: FUN_001b03ec. */
+/* Supplied declaration required: partyCaptureEligibleSkills. */
 extern int FUN_0023dcb8(void);
 extern int FUN_0028e9a0(unsigned int);
 extern int flagValueIsPositive(unsigned int);
@@ -60,7 +60,7 @@ void FUN_00199424(int param_1)
   FUN_003bf1e4();
   *(int *)(param_1 + 0x306c) = temp_v1;
   FUN_0028e9ec(param_1);
-  FUN_001b03ec(param_1);
+  partyCaptureEligibleSkills(param_1);
   temp_v1 = btlGetMainState();
   temp_v2 = *(int *)(param_1 + 0x305c);
   temp_v5 = param_1 + 0x3218;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002b0750(...);
-int FUN_002b2650(...);
+int pairSetHalves(...);
 int FUN_002b93c8(...);
 int FUN_002be370(...);
 int FUN_002be650(...);
@@ -61,7 +61,7 @@ extern int g_titleScene; /* 0x44ea00 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0025b6e8(int);
+extern int unlockFlagTest(int);
 /* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_00288844. */
 extern int FUN_00295c60(unsigned short, int);
@@ -70,7 +70,7 @@ extern int dataTable9EntryOrZero(int);
 extern int gameGetSlotTable(void);
 extern int categoryGetColor(int);
 /* Supplied declaration required: FUN_002b0750. */
-/* Supplied declaration required: FUN_002b2650. */
+/* Supplied declaration required: pairSetHalves. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002b93c8. */
@@ -638,7 +638,7 @@ LAB_003b4444:
         FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v5,
                      (int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,1,3,0x6f,
                      &LAB_003b4820,*(unsigned int *)(temp_v28 + 0x3630));
-        temp_v8 = FUN_0025b6e8(*piVar13);
+        temp_v8 = unlockFlagTest(*piVar13);
         if ((temp_v8 == 0) && (*(short *)(temp_v29 + 0x31b6) >= 0xe)) {
           temp_v8 = FUN_002bf4f8(0x28,temp_v14 + 0x4d);
           temp_v6 = *(int *)(temp_v28 + 0x3548) % 0x20;
@@ -684,7 +684,7 @@ LAB_003b4444:
         temp_v8 = FUN_002bf4f8(0x28,temp_v21 + 0x47);
         temp_v19 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v14 + 0xc) + 2),
                                             (unsigned char)(in_fpscr >> 0x16) & 3);
-        FUN_002b2650(temp_v5,(int)(short)(*(short *)(temp_v8 + 8) + (short)temp_v4 + temp_v3),
+        pairSetHalves(temp_v5,(int)(short)(*(short *)(temp_v8 + 8) + (short)temp_v4 + temp_v3),
                      (int)(short)((short)(int)(temp_v19 * ((float)temp_v17 - *(float *)(temp_v6 + 0x317c))
                                               ) + (short)param_3 + *(short *)(temp_v8 + 10)));
         efctSetSpeed();

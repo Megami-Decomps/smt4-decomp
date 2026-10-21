@@ -19,7 +19,7 @@ extern EffectEditor g_effectEditor;
 
 int effPartsSetData(u32 block, void *parts, u32 param, s32 count);
 u32 effBlockCreateFromBlock(u32 block);
-int FUN_00250200(void);
+int effectEditorApplyHandlerState(void);
 
 /* Applies the parts data to the editor's block, then creates the effect block from it and returns that call's result. */
 u32 FUN_002de22c(PartsData *data)
@@ -30,7 +30,7 @@ u32 FUN_002de22c(PartsData *data)
         effPartsSetData(g_effectEditor.block, data->parts, data->param, data->count);
     }
     result = effBlockCreateFromBlock(g_effectEditor.block);
-    FUN_00250200();
+    effectEditorApplyHandlerState();
     return result;
 }
 

@@ -9,7 +9,7 @@ int FUN_0039ba24(unsigned int [43], int, unsigned int);
 int aocLoaderUpdateRecords(unsigned int *, int);
 int uiEntriesReset(int);
 int uiInsertIdInFirstFreeSlot(int, int);
-int FUN_003efb68(int, unsigned int);
+int valueSlotsInsert(int, unsigned int);
 
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0039ba24. */
@@ -17,7 +17,7 @@ int FUN_003efb68(int, unsigned int);
 /* Supplied declaration required: uiEntriesReset. */
 /* Supplied declaration required: uiInsertIdInFirstFreeSlot. */
 extern int uiHasEntryId(int, unsigned int);
-/* Supplied declaration required: FUN_003efb68. */
+/* Supplied declaration required: valueSlotsInsert. */
 extern unsigned int FUN_00409fe8(unsigned int, unsigned int);
 
 
@@ -44,7 +44,7 @@ void FUN_003e12a8(unsigned int *param_1,int param_2)
       temp_v0 = uiHasEntryId(param_2,temp_v4[temp_v2]);
       if (temp_v0 == 0) {
         temp_v1 = FUN_00409fe8(temp_v4[temp_v2],1);
-        FUN_003efb68(param_2,temp_v1);
+        valueSlotsInsert(param_2,temp_v1);
         *(unsigned int *)(param_2 + temp_v3 * 8 + 0x2020) = temp_v4[temp_v2];
         uiInsertIdInFirstFreeSlot(param_2,(int)(short)temp_v4[temp_v2]);
         temp_v3 = temp_v3 + 1;

@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_00285ca4(u32);
+void gameRestoreWorkSave(u32);
 
 void FUN_00285c9c(void)
 {
-    FUN_00285ca4(0);
+    gameRestoreWorkSave(0);
 }
 
 }

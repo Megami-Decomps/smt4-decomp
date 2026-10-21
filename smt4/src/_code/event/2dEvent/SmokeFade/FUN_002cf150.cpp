@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int asdTMTexTableLoadEntryAsync(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
@@ -30,7 +30,7 @@ extern unsigned int DAT_0043df40; /* 0x43df40 */
 extern unsigned int DAT_0043df44; /* 0x43df44 */
 
 extern int textureGetIndexedResource(unsigned int);
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemAlloc. */
@@ -90,7 +90,7 @@ void FUN_002cf150(unsigned int param_1,unsigned int param_2)
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 2);
-  FUN_00297468(0x2cf36c,puVar1 + 2,0);
+  asdLoadFileAsyncSimple(0x2cf36c,puVar1 + 2,0);
   return;
 }
 

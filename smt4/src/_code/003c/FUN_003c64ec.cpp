@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c64ec` (_code @ 0x3c64ec, 0x126c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 
@@ -30,7 +31,7 @@ int asdListBoxSetItemMode3(...);
 int listBoxItemHasOwner(...);
 int asdListBoxGetItemValuePtr(...);
 int FUN_0024ef90(...);
-int FUN_0025628c(...);
+unsigned int asdListBoxGetSelectedItemId(unsigned int);
 int dataTableGetEntries(void);
 int dataTableGet(...);
 int jobStop(...);
@@ -43,9 +44,6 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern signed char DAT_00434388; /* 0x434388 */
-extern short DAT_0043438a; /* 0x43438a */
-extern unsigned int DAT_0043438c; /* 0x43438c */
 extern unsigned char DAT_004357c8; /* 0x4357c8 */
 extern unsigned short DAT_00439a50; /* 0x439a50 */
 extern unsigned char DAT_00439cf4; /* 0x439cf4 */
@@ -90,7 +88,7 @@ extern char *asdListBoxGetItemText(unsigned int, unsigned int);
 /* Supplied declaration required: listBoxItemHasOwner. */
 /* Supplied declaration required: asdListBoxGetItemValuePtr. */
 /* Supplied declaration required: FUN_0024ef90. */
-/* Supplied declaration required: FUN_0025628c. */
+/* Supplied declaration required: asdListBoxGetSelectedItemId. */
 /* Supplied declaration required: asdListBoxSetByteValue. */
 /* Supplied declaration required: asdListBoxAddItems. */
 /* Supplied declaration required: asdListBoxCreateDefault. */
@@ -153,28 +151,28 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     }
     break;
   case 1:
-    temp_v5 = FUN_0025628c(param_1[4]);
+    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
     switch(temp_v5) {
     case 0:
       puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
       temp_v5 = *puVar7;
-      if (DAT_00434388 != '\0') {
+      if (g_btlDebugState.category != '\0') {
         dataTable03Sub0GetCount();
         asdListBoxSetItemMode3(param_1[4],0,temp_v5,0,(int)puVar7 - 1,0);
         *(unsigned int *)(param_2 + 0xc0) = 0xffffffff;
         *(unsigned int *)(param_2 + 0xc4) = temp_v5;
-        DAT_0043438c = temp_v5;
+        g_btlDebugState.selectedId = temp_v5;
       }
       else {
         dataTable22GetCount();
         asdListBoxSetItemMode3(param_1[4],0,temp_v5,0,(int)puVar7 - 1,0);
         *(unsigned int *)(param_2 + 0xc4) = 0xffffffff;
         *(unsigned int *)(param_2 + 0xc0) = temp_v5;
-        DAT_0043438c = temp_v5;
+        g_btlDebugState.selectedId = temp_v5;
       }
       break;
     case 1:
-      DAT_00434388 = listBoxItemHasOwner(param_1[4],temp_v5);
+      g_btlDebugState.category = listBoxItemHasOwner(param_1[4],temp_v5);
       break;
     case 2:
       puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
@@ -242,16 +240,16 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
         temp_v4 = dataTableGetEntries();
         psVar2 = (short *)((temp_v4 + temp_v3 * 0x10) - 0x10);
         if (psVar2 == (short *)0x0) {
-          DAT_0043438a = 0;
-          *(int *)(param_2 + 0x2f28) = (int)DAT_0043438a;
+          g_btlDebugState.selection = 0;
+          *(int *)(param_2 + 0x2f28) = (int)g_btlDebugState.selection;
           break;
         }
-        DAT_0043438a = *psVar2;
+        g_btlDebugState.selection = *psVar2;
       }
       else {
-        DAT_0043438a = 0;
+        g_btlDebugState.selection = 0;
       }
-      *(int *)(param_2 + 0x2f28) = (int)DAT_0043438a;
+      *(int *)(param_2 + 0x2f28) = (int)g_btlDebugState.selection;
       break;
     case 0xb:
       temp_v4 = listBoxItemHasOwner(param_1[4],temp_v5);
@@ -309,7 +307,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     }
     break;
   case 2:
-    temp_v5 = FUN_0025628c(param_1[4]);
+    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
     asdListBoxGetItemValuePtr(param_1[4],temp_v5);
     switch(temp_v5) {
     case 0:
@@ -453,7 +451,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = 4;
     break;
   case 4:
-    temp_v1 = FUN_0025628c(param_1[4]);
+    temp_v1 = asdListBoxGetSelectedItemId(param_1[4]);
     if (param_1[2] == 1) {
       param_1[3] = temp_v1;
       temp_v5 = 5;
@@ -492,7 +490,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = 6;
     break;
   case 6:
-    temp_v5 = FUN_0025628c(param_1[4]);
+    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
     if (param_1[3] != 0) {
       if (param_1[3] == 1) {
         FUN_003c63a8(param_1,param_2,temp_v5);
@@ -522,7 +520,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = 8;
     break;
   case 8:
-    temp_v5 = FUN_0025628c(param_1[4]);
+    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
     switch(temp_v5) {
     case 0:
       puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0);
@@ -756,7 +754,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = 0x18;
     break;
   case 0x18:
-    temp_v4 = FUN_0025628c(param_1[4]);
+    temp_v4 = asdListBoxGetSelectedItemId(param_1[4]);
     if (temp_v4 != 0) {
       if (temp_v4 == 1) {
         temp_v4 = listBoxItemHasOwner(param_1[4],1);

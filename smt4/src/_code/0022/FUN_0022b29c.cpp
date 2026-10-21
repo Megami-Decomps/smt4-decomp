@@ -26,7 +26,7 @@ extern int DAT_0044cfb8; /* 0x44cfb8 */
 extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022b6c4. */
 /* Supplied declaration required: FUN_0022b778. */
 /* Supplied declaration required: FUN_0022b83c. */
@@ -105,7 +105,7 @@ void FUN_0022b29c(int param_1,int param_2,int param_3)
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v9);
           scrScriptProcessStartEntry(temp_v5,temp_v4);
           do {
-            temp_v2 = FUN_0019e0c0(temp_v5);
+            temp_v2 = scrRunOpcodesStub(temp_v5);
           } while (temp_v2 != 2);
           if (DAT_0044cfb8 != 0) goto LAB_0022b450;
         }
@@ -135,7 +135,7 @@ LAB_0022b450:
           temp_v5 = tableGroupFindEntryIndex(temp_v5,temp_v9);
           scrScriptProcessStartEntry(temp_v4,temp_v5);
           do {
-            temp_v2 = FUN_0019e0c0(temp_v4);
+            temp_v2 = scrRunOpcodesStub(temp_v4);
           } while (temp_v2 != 2);
           if (DAT_0044cfb8 != 0) goto LAB_0022b560;
         }

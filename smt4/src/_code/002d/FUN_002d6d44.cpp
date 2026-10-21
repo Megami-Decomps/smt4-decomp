@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0019e0c0(...);
-int FUN_0024aa74(void);
+int scrRunOpcodesStub(...);
+int partyPanelReset(void);
 int FUN_002579bc(...);
 int FUN_0026d5a4(void);
 int FUN_0026ef04(...);
@@ -15,7 +15,7 @@ int linkHolderApplyFlag(...);
 int FUN_0028a368(int);
 int FUN_0028a924(int, int, unsigned int);
 int FUN_00295214(...);
-int FUN_00295228(...);
+int devilCreateRaceEffect(...);
 int scrScriptProcessStartEntry(...);
 int FUN_002973d8(void);
 int FUN_0029e774(void);
@@ -24,8 +24,8 @@ int FUN_002bd2b4(...);
 int rt_aeabi_memclr(int, int);
 int FUN_003111e8(...);
 
-/* Supplied declaration required: FUN_0019e0c0. */
-/* Supplied declaration required: FUN_0024aa74. */
+/* Supplied declaration required: scrRunOpcodesStub. */
+/* Supplied declaration required: partyPanelReset. */
 /* Supplied declaration required: FUN_002579bc. */
 extern unsigned int FUN_00259800(void);
 /* Supplied declaration required: FUN_0026d5a4. */
@@ -39,7 +39,7 @@ extern unsigned int FUN_0026f1f0(void);
 extern int FUN_00290e9c(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_00295214. */
-/* Supplied declaration required: FUN_00295228. */
+/* Supplied declaration required: devilCreateRaceEffect. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002973d8. */
 /* Supplied declaration required: FUN_0029e774. */
@@ -62,7 +62,7 @@ unsigned int FUN_002d6d44(int param_1)
   temp_v3 = 0;
   switch(*(unsigned int *)(param_1 + 0x100)) {
   case 0:
-    temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xa0));
+    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (temp_v1 != 2) {
       temp_v1 = FUN_00290e9c();
       if (temp_v1 == *(int *)(param_1 + 0x15c)) {
@@ -117,7 +117,7 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned char *)(param_1 + 0x38) = 0;
     break;
   case 1:
-    temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xa0));
+    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (temp_v1 != 2) {
       return 0;
     }
@@ -139,7 +139,7 @@ unsigned int FUN_002d6d44(int param_1)
       FUN_0028a924(0x10,0,0xffffffff);
       FUN_0029e774();
       FUN_0028a368(1);
-      FUN_0024aa74();
+      partyPanelReset();
       FUN_002579bc(1);
       *(unsigned int *)(param_1 + 0x100) = 0xffffffff;
       *(unsigned int *)(param_1 + 0x104) = 0xffffffff;
@@ -174,20 +174,20 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned int *)(param_1 + 0x104) = 7;
     return 2;
   case 2:
-    temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xa0));
+    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (temp_v1 != 2) {
       return 0;
     }
     FUN_002579bc(1);
     *(unsigned int *)(param_1 + 0x110) = 3;
-    FUN_0024aa74();
+    partyPanelReset();
     FUN_003111e8(1);
     temp_v2 = 0xffffffff;
     temp_v3 = 2;
     *(unsigned int *)(param_1 + 0x100) = temp_v2;
     return temp_v3;
   case 3:
-    temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xa0));
+    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (temp_v1 != 2) {
       return 0;
     }
@@ -197,7 +197,7 @@ unsigned int FUN_002d6d44(int param_1)
     break;
   case 4:
   case 5:
-    temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xa0));
+    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (temp_v1 != 2) {
       return 0;
     }
@@ -209,7 +209,7 @@ unsigned int FUN_002d6d44(int param_1)
       *(unsigned int *)(param_1 + 0x100) = 0xffffffff;
       *(unsigned int *)(param_1 + 0x104) = 0xffffffff;
       FUN_002579bc(1);
-      FUN_0024aa74();
+      partyPanelReset();
       FUN_003111e8(1);
       *(unsigned int *)(param_1 + 0x110) = 3;
       return 2;
@@ -237,11 +237,11 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned int *)(param_1 + 0x34) = 0;
     *(unsigned char *)(param_1 + 0x38) = 0;
     buttonHelpSetPreset(200);
-    FUN_00295228((int)*(short *)(param_1 + 0x120),0);
+    devilCreateRaceEffect((int)*(short *)(param_1 + 0x120),0);
     break;
   case 6:
   case 9:
-    temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xa0));
+    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (temp_v1 != 2) {
       return 0;
     }
@@ -250,7 +250,7 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned int *)(param_1 + 0x104) = 0xffffffff;
     break;
   case 7:
-    FUN_0019e0c0(*(unsigned int *)(param_1 + 0xa0));
+    scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (*(short *)(param_1 + 0x120) != 0) {
       temp_v4 = *(char *)(param_1 + 0x123) == '\x01';
       if (temp_v4) {
@@ -282,7 +282,7 @@ unsigned int FUN_002d6d44(int param_1)
     *(unsigned int *)(param_1 + 0x114) = 2;
     break;
   case 8:
-    temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xa0));
+    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xa0));
     if (temp_v1 != 2) {
       return 0;
     }

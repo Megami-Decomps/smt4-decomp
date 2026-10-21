@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0030be2a` (_code @ 0x30be2a, 0x110 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ChunkPool.h"
+
+struct PoolTreeNode28;
 
 extern "C" {
 
@@ -25,7 +28,7 @@ typedef struct {
 } param_5_stack;
 
 extern int FUN_002ef00c(char *, int);
-extern char *FUN_00300690(fn_0030be2a_arg1 *);
+extern PoolTreeNode28* FUN_00300690(ChunkPool*);
 extern int FUN_0030bf3a(unsigned char *, int, int);
 /* Supplied declaration required: rbTreeRotateRight_0030bf64. */
 /* Supplied declaration required: rbTreeRotateLeft_0030bf96. */
@@ -42,7 +45,7 @@ void FUN_0030be2a(unsigned int *param_1,fn_0030be2a_arg1 *param_2,int param_3,in
   char *pcVar5;
   char *pcVar6;
   
-  pcVar1 = (char *)FUN_00300690(param_2);
+  pcVar1 = reinterpret_cast<char*>(FUN_00300690(reinterpret_cast<ChunkPool*>(param_2)));
   if (pcVar1 + 0x10 != (char *)0x0) {
     temp_v0 = FUN_002ef00c(pcVar1 + 0x10,param_5);
     *(unsigned int *)(temp_v0 + 8) = *(unsigned int *)(param_5 + 8);

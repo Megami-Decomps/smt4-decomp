@@ -1,38 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022fb64` (_code @ 0x22fb64, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: page index and list-address registers R1/R2 are swapped, changing the selected-ID table address setup order; all calls and item selection behavior are recovered. */
+#include "common.h"
+
+struct SelectionList {
+    u8 unk00[8]; // 0x00
+    s32 count;    // 0x08
+    u8 unk0c[0x68]; // 0x0c
+};
+struct SelectionId {
+    u16 id;
+    u16 unk02;
+};
+struct SelectionPage {
+    u16 unk00;
+    SelectionId items[1024]; // 0x02
+};
+struct SelectionOwner {
+    u8 unk000[0x860]; // 0x000
+    s32 page;          // 0x860
+    union {
+        struct {
+            u8 unk864[0x1c];
+            SelectionList lists[1]; // 0x880
+        } menu;
+        struct {
+            u8 unk864[0x42e];
+            SelectionPage pages[1]; // 0xc92
+        } data;
+    };
+};
 
 extern "C" {
+s32 flaggedValueHolderGetTotal(SelectionList* list);
+void FUN_0029212c(u32 id);
+void FUN_0029ee6c(u32 index, u32 color);
 
-int FUN_0029212c(int);
-int FUN_0029ee6c(int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int FUN_0023360c(int);
-/* Supplied declaration required: FUN_0029212c. */
-/* Supplied declaration required: FUN_0029ee6c. */
-
-
-void FUN_0022fb64(int param_1)
-
+// Renders the selected page's current item, or a dark placeholder for an empty page.
+void FUN_0022fb64(SelectionOwner* owner)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)(param_1 + 0x860);
-  temp_v0 = param_1 + temp_v1 * 0x74;
-  if (0 < *(int *)(temp_v0 + 0x888)) {
-    temp_v0 = FUN_0023360c(temp_v0 + 0x880);
-    FUN_0029212c(*(unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xc94 + temp_v0 * 4));
-    return;
-  }
-  FUN_0029ee6c(0,0x323232ff);
-  return;
+    s32 page = owner->page;
+    if (owner->menu.lists[page].count > 0) {
+        SelectionId* items = owner->data.pages[page].items;
+        s32 selection = flaggedValueHolderGetTotal(&owner->menu.lists[page]);
+        FUN_0029212c(items[selection].id);
+    } else {
+        FUN_0029ee6c(0, 0x323232ff);
+    }
 }
-
-} /* extern "C" */
+}

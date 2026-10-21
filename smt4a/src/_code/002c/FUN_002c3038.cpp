@@ -11,7 +11,7 @@ int FUN_00167618(float *);
 int renderCtxResetColorScale(int);
 int FUN_0016c4b8(int, int);
 int skinObjectUpdateMatrices(int);
-int FUN_003d1fac(void);
+int mobiclipRenderCurrentScreen(void);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -36,7 +36,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_003d1fac. */
+/* Supplied declaration required: mobiclipRenderCurrentScreen. */
 
 
 unsigned int FUN_002c3038(void)
@@ -66,7 +66,7 @@ unsigned int FUN_002c3038(void)
     FUN_00157558(g_renderCtx);
     temp_v1 = *(int *)(temp_v0 + 0x10);
     if (!((temp_v1 == 7 || temp_v1 == 8) || temp_v1 == 0xe)) {
-      FUN_003d1fac();
+      mobiclipRenderCurrentScreen();
     }
     else {
       temp_v8 = temp_v7;

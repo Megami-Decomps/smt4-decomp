@@ -12,13 +12,13 @@ typedef struct Resources {
 extern Resources g_effectEditor;
 
 int FUN_002629a8(int handle, int arg);
-int FUN_002629f0(int handle, int arg);
+int registrationEntryInsert(int handle, int arg);
 
 /* Frees the global effect and sound handles (clearing them), then frees `handle`. */
 void FUN_002d142c(int handle)
 {
     if (g_effectEditor.effect != 0) {
-        FUN_002629f0(g_effectEditor.effect, 3);
+        registrationEntryInsert(g_effectEditor.effect, 3);
         g_effectEditor.effect = 0;
     }
     if (g_effectEditor.sound != 0) {

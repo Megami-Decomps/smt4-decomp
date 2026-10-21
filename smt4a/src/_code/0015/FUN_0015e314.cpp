@@ -5,7 +5,7 @@
 extern "C" {
 
 int listAppendNode(int, int);
-int FUN_0019102c(int, int);
+int objectCommandReserveWords(int, int);
 int FUN_00194f94(unsigned int);
 
 typedef struct fn_0015e314_arg0 fn_0015e314_arg0;
@@ -21,9 +21,9 @@ struct fn_0015e314_arg0 {
     undefined4 field_0x190; /* +0x190 */
 };
 
-extern int FUN_00175678(void);
+extern int objectCommandQueueGet(void);
 /* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 /* Supplied declaration required: FUN_00194f94. */
 
 
@@ -62,9 +62,9 @@ unsigned int FUN_0015e314(fn_0015e314_arg0 *param_1,unsigned int param_2,int par
       }
     }
     *(unsigned int *)&param_1->field_0x10 = param_2;
-    temp_v3 = FUN_00175678();
+    temp_v3 = objectCommandQueueGet();
     temp_v0 = temp_v3;
-    FUN_0019102c(temp_v3,5);
+    objectCommandReserveWords(temp_v3,5);
     *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v3 + 0x184);
     *(unsigned char *)(temp_v0 + 4) = 0x32;
     *(fn_0015e314_arg0 **)(temp_v0 + 0x10) = param_1;

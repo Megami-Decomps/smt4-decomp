@@ -8,11 +8,11 @@ struct TargetState {
     /* 0x0c */ u8 unk0c[5];
     /* 0x11 */ u8 variant;
 };
-extern "C" s32 FUN_00282b28();
+extern "C" s32 screenFadeIsBusy();
 /* Starts state four or five when the shared query is idle. */
 extern "C" void FUN_00381d78(TargetState *target)
 {
-    if (!FUN_00282b28()) {
+    if (!screenFadeIsBusy()) {
         target->state = target->variant == 1 ? 5 : 4;
         target->step = 0;
     }

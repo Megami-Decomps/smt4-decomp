@@ -7,7 +7,7 @@ extern u32 g_aocSystem;
 extern s32 FUN_0046e458(u32 system, s32 id);
 extern s32 dataTableValue0f(void);
 extern void FUN_0028a888(s32 id);
-extern void FUN_002a1f60(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
+extern void asdTextDrawDirectoryEntry(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 
 void screenShowMessage(s32 id)
 {
@@ -24,7 +24,7 @@ void screenShowMessage(s32 id)
             value = dataTableValue0f();
         }
         FUN_0028a888(id);
-        FUN_002a1f60(screen->unk678, 2, -1, 0, 3, value, id);
+        asdTextDrawDirectoryEntry(screen->unk678, 2, -1, 0, 3, value, id);
     }
 }
 

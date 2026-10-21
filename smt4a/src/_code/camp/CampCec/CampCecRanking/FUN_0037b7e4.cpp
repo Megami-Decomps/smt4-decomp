@@ -14,12 +14,12 @@ int FUN_001654f8(...);
 int FUN_00180118(...);
 int asdTMTexLoadMainHeap(...);
 int FUN_0023723c(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int sysMemClear(...);
 int rt_aeabi_memclr(...);
 int FUN_00319aec(...);
 int gameFlagSetValue(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -62,13 +62,13 @@ extern unsigned int spriteHandleCreate(unsigned int);
 extern int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_0023723c. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00319aec. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_0037b7e4(void)
@@ -114,7 +114,7 @@ void FUN_0037b7e4(void)
   taskCreateDraw(&LAB_0037bc38,0xea,0,0,FUN_00343e5c,0);
   puVar2[1] = 0;
   asdTMTexLoadMainHeap(0x2e,1);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar2 + 0x26);
+  paramsClearPacket(puVar2 + 0x26);
   temp_v10 = &DAT_0052c284;
   temp_v7 = 0x30;
   temp_v11 = 0x4d0;
@@ -136,8 +136,8 @@ void FUN_0037b7e4(void)
     puVar2[temp_v5 + 0x96] = temp_v1;
     temp_v5 = temp_v4;
   } while (temp_v4 < 7);
-  FUN_002804b0(&LAB_0037bc58,puVar2 + 0x2e,0);
-  FUN_002804b0(&LAB_0037bc6c,puVar2 + 0x2f,0);
+  asdLoadFileAsyncSimple(&LAB_0037bc58,puVar2 + 0x2e,0);
+  asdLoadFileAsyncSimple(&LAB_0037bc6c,puVar2 + 0x2f,0);
   puVar2 = g_campCecRanking;
   if (g_campCecRanking != (unsigned int *)0x0) {
     temp_v4 = gameDataBlocksGetSaveData();

@@ -3,7 +3,7 @@
 extern "C" {
 
 void uiSpriteSetImageKeyframe(u8 *member, s32 a, s32 b);
-void FUN_00388758(s32 value);
+void messageDismissNumericBanner(s32 value);
 
 typedef struct Game {
     /* 0x0000 */ u8 unk0000[0x1634];
@@ -11,10 +11,10 @@ typedef struct Game {
 } Game;
 extern Game *g_camp;
 
-/* Runs FUN_00388758(1), then uiSpriteSetImageKeyframe on the game's member at 0x1634. */
+/* Runs messageDismissNumericBanner(1), then uiSpriteSetImageKeyframe on the game's member at 0x1634. */
 void FUN_00237650(void)
 {
-    FUN_00388758(1);
+    messageDismissNumericBanner(1);
     uiSpriteSetImageKeyframe(g_camp->member1634, 7, 0);
 }
 

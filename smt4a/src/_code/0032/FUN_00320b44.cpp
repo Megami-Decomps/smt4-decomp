@@ -7,7 +7,7 @@ extern "C" {
 int btlGetMainState(void);
 int FUN_001568f8(unsigned int, int);
 int FUN_003ecab8(unsigned int, int, int);
-int FUN_003ef9e0(unsigned int, int);
+int idSetFindSubjectIndex(unsigned int, int);
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -21,7 +21,7 @@ static float romwright_sqrt_4(float value)
 extern int FUN_00152f54(void);
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: FUN_003ecab8. */
-/* Supplied declaration required: FUN_003ef9e0. */
+/* Supplied declaration required: idSetFindSubjectIndex. */
 
 
 unsigned char FUN_00320b44(float *param_1,int param_2,int param_3)
@@ -47,7 +47,7 @@ unsigned char FUN_00320b44(float *param_1,int param_2,int param_3)
     temp_v1 = *(int *)(temp_v1 + 0x1ed4) + param_2 * 0x1d0;
     if (temp_v1 != 0) {
       temp_v2 = btlGetMainState();
-      FUN_003ef9e0(temp_v2,temp_v1);
+      idSetFindSubjectIndex(temp_v2,temp_v1);
       temp_v2 = btlGetMainState();
       FUN_001568f8(temp_v2,param_2);
       temp_v3 = *(unsigned int *)(temp_v1 + 0x50);

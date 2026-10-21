@@ -9,7 +9,7 @@ int FUN_001d01f8(...);
 int FUN_001df8d4(...);
 int FUN_00205568(...);
 int idMapLookup(...);
-int FUN_00283e48(...);
+int passiveSkillLookupRecord(...);
 int dataTable06Sub1GetRecord(...);
 int FUN_002ae164(...);
 int FUN_002b7bca(...);
@@ -44,8 +44,8 @@ typedef struct {
     unsigned int sp108; /* 0x108: local_108 */
 } param_4_stack;
 
-extern int FUN_002c6ce0(...); /* 0x2c6ce0 */
-extern int FUN_002dcaa8(...); /* 0x2dcaa8 */
+extern int recordCompareCategorySixFirst(...); /* 0x2c6ce0 */
+extern int dataTable06ComparePriority(...); /* 0x2dcaa8 */
 extern unsigned char DAT_004207e8; /* 0x4207e8 */
 
 /* Supplied declaration required: FUN_001cffd0. */
@@ -54,8 +54,8 @@ extern unsigned char DAT_004207e8; /* 0x4207e8 */
 /* Supplied declaration required: FUN_00205568. */
 extern int FUN_0026a604(unsigned int);
 /* Supplied declaration required: idMapLookup. */
-/* Supplied declaration required: FUN_00283e48. */
-extern int FUN_0029903c(unsigned short, unsigned int);
+/* Supplied declaration required: passiveSkillLookupRecord. */
+extern int affinityShouldReplaceState(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
 /* Supplied declaration required: FUN_002ae164. */
 /* Supplied declaration required: FUN_002b7bca. */
@@ -168,7 +168,7 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
         }
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 8);
-      FUN_00283e48();
+      passiveSkillLookupRecord();
       if ((temp_v3 != 0) && (temp_v3 = *(unsigned int *)(temp_v3 + 0x38), (temp_v3 & 0x7ff) >> 6 == 5)) {
         temp_v4 = (temp_v3 & 0xfffff) >> 0x10;
         switch(temp_v4) {
@@ -193,7 +193,7 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
           else if (temp_v4 == 4) {
             temp_v6 = 4;
           }
-          temp_v2 = FUN_0029903c(*(unsigned short *)(temp_v7 + ((temp_v3 & 0xf800) >> 10) + 0x6c) >> 10,temp_v6);
+          temp_v2 = affinityShouldReplaceState(*(unsigned short *)(temp_v7 + ((temp_v3 & 0xf800) >> 10) + 0x6c) >> 10,temp_v6);
           if (temp_v2 != 0) {
             *(unsigned short *)(temp_v11 + temp_v12 * 2) = *puVar9;
             temp_v12 = temp_v12 + 1;
@@ -216,8 +216,8 @@ LAB_0029b3f4:
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < param_2);
   }
-  FUN_002b7bca(temp_v13,temp_v14,2,FUN_002c6ce0);
-  FUN_002b7bca(temp_v19,temp_v20,2,FUN_002dcaa8);
+  FUN_002b7bca(temp_v13,temp_v14,2,recordCompareCategorySixFirst);
+  FUN_002b7bca(temp_v19,temp_v20,2,dataTable06ComparePriority);
   temp_v16 = FUN_00205568(0,temp_v7,param_3,param_4);
   temp_v1 = 0x100;
   asdMemoryAlloc(0x100,0x100,0,temp_v16 << 1,1);
@@ -241,7 +241,7 @@ LAB_0029b3f4:
     do {
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v13 + temp_v2 * 2);
       if (temp_v3 != 0) {
-        FUN_00283e48();
+        passiveSkillLookupRecord();
         temp_v1 = 0;
         do {
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v7 + temp_v1 * 2 + 0x3c);

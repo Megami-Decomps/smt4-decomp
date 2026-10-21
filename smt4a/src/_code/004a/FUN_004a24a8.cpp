@@ -39,7 +39,7 @@ extern int FUN_002a482c(int);
 /* Supplied declaration required: FUN_004a3238. */
 /* Supplied declaration required: owner4ASetSizeAndCall. */
 /* Supplied declaration required: FUN_004a7950. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 extern int rangeGetMinimumLimit(int);
 
 
@@ -171,7 +171,7 @@ void FUN_004a24a8(int param_1)
       temp_v1 = *(int *)(param_1 + 0x14);
       if ((((temp_v1 == 2 || temp_v1 == 3) || (temp_v1 == 8 || temp_v1 == 4)) || (temp_v1 == 5 || temp_v1 == 6))
          || (temp_v1 == 10 || temp_v1 == 9)) {
-        temp_v1 = FUN_004cfe4c(param_1 + 0x20);
+        temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
         temp_v0 = *(short *)(temp_v6 + temp_v1 * 0x20 + 4);
         temp_v4 = FUN_0031d174(param_1 + 0x20);
         FUN_004a2a30(param_1,temp_v4,1,(int)temp_v0);

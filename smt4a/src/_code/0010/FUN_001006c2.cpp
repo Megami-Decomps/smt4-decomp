@@ -3,7 +3,7 @@
 
 extern "C" {
 void* asdOperatorNewB(u32 size);
-void FUN_002e32a4(s32 errorCode);
+void FUN_002e32a4(int kind, ...);
 
 void* FUN_001006c2(u32 size)
 {

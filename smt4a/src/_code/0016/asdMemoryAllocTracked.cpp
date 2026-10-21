@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_5_stack;
 
-extern unsigned char DAT_005b4028; /* 0x5b4028 */
+extern unsigned char g_allocationAddressRanges; /* 0x5b4028 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -35,7 +35,7 @@ int asdMemoryAllocTracked(int param_1,unsigned int param_2,unsigned int param_3,
     rt_memclr();
   }
   software_interrupt(0x14);
-  if (*(*(int * *)((unsigned char *)&DAT_005b4028 + 0x4)) < 0) {
+  if (*(*(int * *)((unsigned char *)&g_allocationAddressRanges + 0x4)) < 0) {
     FUN_002e3140();
   }
   return param_1;

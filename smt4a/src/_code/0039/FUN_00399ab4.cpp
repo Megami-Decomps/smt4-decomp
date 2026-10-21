@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelCommandBlockRelease(void);
-int FUN_00167ba0(void);
+int cursorResetFromParam(void);
 int asdGxGetPresetIndex(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -18,7 +18,7 @@ extern int DAT_005b3fe4; /* 0x5b3fe4 */
 extern int DAT_005b3fe8; /* 0x5b3fe8 */
 
 /* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: FUN_00167ba0. */
+/* Supplied declaration required: cursorResetFromParam. */
 extern unsigned int FUN_00169d8c(void);
 extern unsigned int FUN_00169db4(void);
 /* Supplied declaration required: asdGxGetPresetIndex. */
@@ -39,7 +39,7 @@ void FUN_00399ab4(unsigned int param_1)
   temp_v1 = FUN_00169d8c();
   asdGxGetPresetIndex();
   temp_v2 = FUN_00169db4();
-  FUN_00167ba0();
+  cursorResetFromParam();
   temp_v0 = DAT_005b3fe4;
   if (*(int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1318) * 4 + 0x1320) != 0) {
     temp_v5 = param_1 >> 0x10;

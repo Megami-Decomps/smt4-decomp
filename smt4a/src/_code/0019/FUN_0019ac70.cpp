@@ -7,7 +7,7 @@ extern "C" {
 int camSetMatrixA(unsigned int, unsigned char [64]);
 int FUN_0019a0dc(int *, unsigned int);
 int FUN_0019a0fc(unsigned char [64], unsigned int *);
-int FUN_001ac6ec(unsigned char [64]);
+int mathMatrixBuildInversePlanarTransform(unsigned char [64]);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -20,7 +20,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_0019a0dc. */
 /* Supplied declaration required: FUN_0019a0fc. */
-/* Supplied declaration required: FUN_001ac6ec. */
+/* Supplied declaration required: mathMatrixBuildInversePlanarTransform. */
 
 
 void FUN_0019ac70(unsigned int *param_1)
@@ -49,7 +49,7 @@ void FUN_0019ac70(unsigned int *param_1)
   if (param_1 == (unsigned int *)0x0) {
     param_1 = temp_v3;
   }
-  FUN_001ac6ec(temp_v0);
+  mathMatrixBuildInversePlanarTransform(temp_v0);
   FUN_0019a0dc(&temp_v1,g_renderCtx);
   *param_1 = temp_v1;
   param_1[1] = uStack_8c;

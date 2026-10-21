@@ -5,7 +5,7 @@ extern "C" {
 s32 scrWorkGetValue(s32 index);
 void scrWorkSetValue(s32 index, s32 value);
 s32 messageForwardDefaultMode(s32 buffer, s32 size, u32 value, s32 kind, s32 flag);
-void FUN_0028ed3c(u32 arg, s32 a, s32 b);
+void uiBindRecordRewardText(u32 arg, s32 a, s32 b);
 void FUN_002bff50(void);
 s32 FUN_00348a1c(u32 arg);
 s32 scrGetCommandFrame(void);
@@ -23,7 +23,7 @@ u8 scrComm_Message_ShowConfirmAndApply(void)
 
     if (scrGetCommandFrame() == 0) {
         scrWorkSetValue(0, 0);
-        FUN_0028ed3c(arg, 0, 1);
+        uiBindRecordRewardText(arg, 0, 1);
         FUN_002bff50();
     }
     buffer = fileSlotGetBuffer(0x1e);

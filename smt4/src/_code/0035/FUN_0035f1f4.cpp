@@ -1,31 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035f1f4` (_code @ 0x35f1f4, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail is a C++ constructor; proper class/constructor/vtable symbol migration is required before this C-linkage unit can be replaced. */
+#include "shard/W6_W6Match1_TextScannerState.h"
 
 extern "C" {
+extern const u32 DAT_00420fac[];
 
-extern unsigned char DAT_00420fac; /* 0x420fac */
-
-
-void FUN_0035f1f4(unsigned int *param_1)
-
+// Initializes the recovered text-scanner object layout.
+void FUN_0035f1f4(TextScannerState* scanner)
 {
-  *param_1 = (unsigned int)&DAT_00420fac;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  param_1[3] = 0;
-  param_1[4] = 0;
-  *(unsigned char *)(param_1 + 5) = 0;
-  *(unsigned char *)(param_1 + 6) = 0;
-  *(unsigned char *)((int)param_1 + 0x19) = 0;
-  *(unsigned char *)((int)param_1 + 0x1a) = 0;
-  param_1[7] = 0;
-  param_1[8] = 0;
-  param_1[9] = 0;
-  param_1[10] = 0;
-  param_1[0xb] = 0;
-  *(unsigned char *)(param_1 + 0xc) = 1;
-  return;
+    scanner->vtable = DAT_00420fac;
+    scanner->unk04 = 0;
+    scanner->unk08 = 0;
+    scanner->unk0c = 0;
+    scanner->unk10 = 0;
+    scanner->unk14 = 0;
+    scanner->unk18 = 0;
+    scanner->unk19 = 0;
+    scanner->unk1a = 0;
+    scanner->unk1c = 0;
+    scanner->unk20 = 0;
+    scanner->unk24 = 0;
+    scanner->unk28 = 0;
+    scanner->unk2c = 0;
+    scanner->enabled = 1;
 }
-
-} /* extern "C" */
+}

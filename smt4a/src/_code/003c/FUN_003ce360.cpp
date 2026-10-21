@@ -1,14 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ce360` (_code @ 0x3ce360, 0x7c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
 int asdMemFree(unsigned int);
-int asdTextureSetImage(int);
 
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdTextureSetImage. */
 
 
 void FUN_003ce360(void)
@@ -35,7 +34,7 @@ void FUN_003ce360(void)
       *(unsigned int *)(*piVar3 + 0x3c) = 1;
       *(unsigned int *)(*piVar3 + 0x40) = 1;
       *(unsigned int *)(*piVar3 + 0x38) = 0;
-      asdTextureSetImage(*piVar3);
+      asdTextureSetImage((AsdTexture*)*piVar3);
       *(unsigned char *)(temp_v0 + 0x570344) = 1;
       asdMemFree(*(unsigned int *)(temp_v0 + 0x570340));
       *(unsigned int *)(temp_v0 + 0x570340) = 0;

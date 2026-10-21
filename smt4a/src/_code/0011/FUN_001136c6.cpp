@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002ea668(unsigned char [88]);
 int fixedBufferAssign(unsigned int, unsigned char [24], int);
-int FUN_002fe0f4(unsigned int, unsigned int, unsigned int, unsigned int, unsigned char [88]);
+int chunkStreamFlush(unsigned int, unsigned int, unsigned int, unsigned int, unsigned char [88]);
 
 /* stack frame of param_5: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002ea668. */
 /* Supplied declaration required: fixedBufferAssign. */
-/* Supplied declaration required: FUN_002fe0f4. */
+/* Supplied declaration required: chunkStreamFlush. */
 
 
 unsigned int
@@ -28,7 +28,7 @@ FUN_001136c6(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   unsigned char temp_v1 [24];
   
   FUN_002ea668(temp_v0);
-  FUN_002fe0f4(param_1,param_2,param_3,param_4,temp_v0);
+  chunkStreamFlush(param_1,param_2,param_3,param_4,temp_v0);
   fixedBufferAssign(param_5,temp_v1,0x10);
   return 1;
 }

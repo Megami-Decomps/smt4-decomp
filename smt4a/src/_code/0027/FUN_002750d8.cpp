@@ -7,8 +7,8 @@ extern "C" {
 int CONCAT44(...);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_00272e64(void);
-int FUN_002b5cb4(void);
+int calcHeadingRoundedToCardinalDirection(void);
+int distSpatial(void);
 int FUN_002b5cd4(void);
 int FUN_00330108(float *, float *, unsigned char [52]);
 int mathPositionHeadingDegrees(void);
@@ -39,8 +39,8 @@ extern float DAT_005f1720; /* 0x5f1720 */
 #endif
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00272e64. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_00330108. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -117,11 +117,11 @@ void FUN_002750d8(int param_1,int param_2)
       FUN_00384830();
       temp_v9 = *(float *)(temp_v0 + 0x28);
       if (temp_v1 >= 0x42dc0000) {
-        FUN_00272e64();
+        calcHeadingRoundedToCardinalDirection();
         temp_v9 = temp_v9 + temp_v11;
       }
       else {
-        FUN_00272e64();
+        calcHeadingRoundedToCardinalDirection();
       }
       temp_v1 = (int)temp_v9;
       temp_v9 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -147,7 +147,7 @@ void FUN_002750d8(int param_1,int param_2)
         return;
       }
       temp_v9 = temp_v15;
-      FUN_002b5cb4();
+      distSpatial();
       temp_v8 = CONCAT44(temp_v9,temp_v6);
       temp_v9 = 90.0f;
       mathPositionHeadingDegrees();
@@ -160,7 +160,7 @@ void FUN_002750d8(int param_1,int param_2)
       }
       do {
         temp_v6 = *(float *)(temp_v0 + 0x28) + temp_v4;
-        FUN_00272e64();
+        calcHeadingRoundedToCardinalDirection();
         temp_v5 = CONCAT44(temp_v4,temp_v6);
         temp_v6 = temp_v6 * (float)((unsigned long long)temp_v12 >> 0x20);
         temp_v4 = temp_v6;
@@ -181,12 +181,12 @@ void FUN_002750d8(int param_1,int param_2)
           return;
         }
         temp_v4 = temp_v15;
-        FUN_002b5cb4();
+        distSpatial();
         temp_v2 = (temp_v2 & 0xfffffff) | ((unsigned int)((float)((unsigned long long)temp_v8 >> 0x20) <= temp_v4) << 0x1d);
         if (!romwright_subpiece_4_1_0(temp_v2 >> 0x1d,0)) {
           temp_v7 = (unsigned int)temp_v5;
           temp_v4 = temp_v15;
-          FUN_002b5cb4();
+          distSpatial();
           temp_v8 = CONCAT44(temp_v4,temp_v7);
         }
         temp_v4 = (float)((unsigned long long)temp_v5 >> 0x20) + temp_v9;
@@ -207,11 +207,11 @@ void FUN_002750d8(int param_1,int param_2)
         FUN_00384830();
         temp_v4 = *(float *)(temp_v0 + 0x28);
         if (temp_v1 >= 0x42dc0000) {
-          FUN_00272e64();
+          calcHeadingRoundedToCardinalDirection();
           temp_v4 = temp_v4 + temp_v11;
         }
         else {
-          FUN_00272e64();
+          calcHeadingRoundedToCardinalDirection();
         }
         temp_v0 = (int)temp_v4;
         temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(temp_v2 >> 0x16) & 3);

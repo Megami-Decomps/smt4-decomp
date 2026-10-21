@@ -7,7 +7,7 @@ extern "C" {
 int memClear(int, int);
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0044e330; /* 0x44e330 */
+extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
 
 /* Supplied declaration required: memClear. */
 
@@ -22,11 +22,11 @@ int FUN_00137c14(void)
   int temp_v3;
   int temp_v4;
   
-  if (DAT_0044e330 == (romwright_code *)0x0) {
+  if (g_gfxAllocateCallback == (romwright_code *)0x0) {
     temp_v3 = 0;
   }
   else {
-    temp_v3 = (*DAT_0044e330)(0x10000,0x100,0,0x348);
+    temp_v3 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x348);
     if (temp_v3 != 0) {
       memClear(temp_v3,0x348);
       temp_v2 = 0;

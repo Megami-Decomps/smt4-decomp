@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_0038a1d4(unsigned int, unsigned int, unsigned int);
+int eventSetUnderMessageFade(unsigned int, unsigned int, unsigned int);
 
 extern int FUN_00162ea4(void);
 extern int scrGetCommandFrame(void);
-/* Supplied declaration required: FUN_0038a1d4. */
+/* Supplied declaration required: eventSetUnderMessageFade. */
 
 
 unsigned int FUN_002a3d40(void)
@@ -40,7 +40,7 @@ unsigned int FUN_002a3d40(void)
     temp_v1 = 10;
     temp_v2 = 1;
   }
-  FUN_0038a1d4(0xffffffff,temp_v1,temp_v2);
+  eventSetUnderMessageFade(0xffffffff,temp_v1,temp_v2);
   return 0;
 }
 

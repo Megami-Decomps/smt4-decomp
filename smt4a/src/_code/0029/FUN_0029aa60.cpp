@@ -10,7 +10,7 @@ int FUN_0025cb1c(void);
 int CONCAT44(double, double);
 int FUN_0018a924(...);
 int FUN_001bc124(void);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002b5cd4(void);
 int gameFlagIsSetByBlock(...);
 int FUN_002d23f0(...);
@@ -36,7 +36,7 @@ typedef struct {
     unsigned int sp100; /* 0x100: local_100 */
 } param_1_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapIf; /* 0x58103c */
 extern int DAT_00581040; /* 0x581040 */
 extern int g_lmapScene; /* 0x581288 */
@@ -73,7 +73,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_0025cb1c. */
 extern int FUN_0029d6f0(void);
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: gameFlagIsSetByBlock. */
 /* Supplied declaration required: FUN_002d23f0. */
@@ -168,8 +168,8 @@ void FUN_0029aa60(int param_1)
     *(unsigned char *)(temp_v5 + 0xcd10) = 1;
   }
   temp_v8 = g_mapIf;
-  temp_v14 = *(int *)(DAT_005806a4 + 0x5c);
-  FUN_002b5cb4();
+  temp_v14 = *(int *)(g_lmapView + 0x5c);
+  distSpatial();
   temp_v9 = g_mapIf;
   temp_v23 = 0x4248000000000000;
   temp_v24 = 0x3f800000;
@@ -179,7 +179,7 @@ void FUN_0029aa60(int param_1)
       temp_v11 = temp_v9 + temp_v14 * 0x194;
       if (*(char *)(temp_v11 + 0x1dc) != '\0') {
         temp_v15 = *(unsigned int *)(g_lmapScene + 0x1c);
-        FUN_002b5cb4();
+        distSpatial();
         *(unsigned int *)(temp_v11 + 0x224) = temp_v15;
       }
       temp_v11 = g_mapIf;
@@ -227,13 +227,13 @@ void FUN_0029aa60(int param_1)
       }
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < 0x80);
-    temp_v19 = *(float *)(DAT_005806a4 + 0x5c) - *(float *)(DAT_005806a4 + 0x50);
-    temp_v17 = *(float *)(DAT_005806a4 + 0x60) - *(float *)(DAT_005806a4 + 0x54);
-    temp_v16 = *(float *)(DAT_005806a4 + 100) - *(float *)(DAT_005806a4 + 0x58);
+    temp_v19 = *(float *)(g_lmapView + 0x5c) - *(float *)(g_lmapView + 0x50);
+    temp_v17 = *(float *)(g_lmapView + 0x60) - *(float *)(g_lmapView + 0x54);
+    temp_v16 = *(float *)(g_lmapView + 100) - *(float *)(g_lmapView + 0x58);
     temp_v21 = (float)temp_v24 / romwright_sqrt_4(temp_v19 * temp_v19 + temp_v17 * temp_v17 + temp_v16 * temp_v16);
     temp_v19 = temp_v19 * temp_v21;
     temp_v23 = CONCAT44(temp_v17 * temp_v21,temp_v16 * temp_v21);
-    temp_v10 = *(unsigned int *)(DAT_005806a4 + 0x50);
+    temp_v10 = *(unsigned int *)(g_lmapView + 0x50);
     mathPositionHeadingDegrees();
     temp_v25 = (unsigned long long)temp_v10;
     temp_v16 = 10000.0f;
@@ -281,9 +281,9 @@ LAB_0029ad50:
             }
             else {
               mathPositionHeadingDegrees();
-              temp_v17 = *(float *)(temp_v14 + 0x238) - *(float *)(DAT_005806a4 + 0x50);
-              temp_v20 = *(float *)(temp_v14 + 0x240) - *(float *)(DAT_005806a4 + 0x58);
-              temp_v21 = *(float *)(temp_v14 + 0x23c) - *(float *)(DAT_005806a4 + 0x54);
+              temp_v17 = *(float *)(temp_v14 + 0x238) - *(float *)(g_lmapView + 0x50);
+              temp_v20 = *(float *)(temp_v14 + 0x240) - *(float *)(g_lmapView + 0x58);
+              temp_v21 = *(float *)(temp_v14 + 0x23c) - *(float *)(g_lmapView + 0x54);
               temp_v22 = (float)temp_v24 / romwright_sqrt_4(temp_v17 * temp_v17 + temp_v21 * temp_v21 + temp_v20 * temp_v20);
               temp_v10 = (unsigned int)temp_v25;
               temp_v17 = temp_v19 * temp_v17 * temp_v22 +

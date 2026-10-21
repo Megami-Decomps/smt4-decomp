@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017e5a4(int, unsigned char *);
+int heapCloseOpenBlock(int, unsigned char *);
 int globalCriticalSectionEnterForward(void);
 int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
@@ -21,7 +21,7 @@ extern signed char DAT_0061a482; /* 0x61a482 */
 extern int DAT_0061a50c; /* 0x61a50c */
 extern int DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0017e5a4. */
+/* Supplied declaration required: heapCloseOpenBlock. */
 /* Supplied declaration required: globalCriticalSectionEnterForward. */
 /* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
@@ -74,7 +74,7 @@ void FUN_0017d294(void)
   *(int *)(puVar4 + 4) = *(int *)(temp_v0 + 4) + *(int *)(temp_v0 + 0x14);
   *(int *)(puVar4 + 8) = *(int *)(temp_v0 + 0xc) - *(int *)(temp_v0 + 0x14);
   if (*(int *)(temp_v0 + 0x34) != 0) {
-    FUN_0017e5a4(temp_v0,puVar4);
+    heapCloseOpenBlock(temp_v0,puVar4);
   }
   temp_v1 = *(unsigned int *)(puVar4 + 0xc);
   *(unsigned int *)(puVar4 + 0xc) = temp_v1 & 0xfffffffd;

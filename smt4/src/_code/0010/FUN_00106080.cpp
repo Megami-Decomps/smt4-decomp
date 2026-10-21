@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00106080` (_code @ 0x106080, 0xc0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_SoundInit.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_001096ec(unsigned int, int, int);
 int asdSoundGetStringBlock(void);
 int asdSoundSlotAActivate(int);
 int FUN_0010d3f8(int);
-int FUN_0010d494(int);
 int FUN_00119da8(int);
 int asdSoundSlotBCreate(...);
 int rt_aeabi_memclr(unsigned int *, int);
@@ -23,7 +23,6 @@ extern unsigned int DAT_004c53e4; /* 0x4c53e4 */
 /* Supplied declaration required: asdSoundGetStringBlock. */
 /* Supplied declaration required: asdSoundSlotAActivate. */
 /* Supplied declaration required: FUN_0010d3f8. */
-/* Supplied declaration required: FUN_0010d494. */
 /* Supplied declaration required: FUN_00119da8. */
 /* Supplied declaration required: asdSoundSlotBCreate. */
 /* Supplied declaration required: rt_aeabi_memclr. */
@@ -39,7 +38,7 @@ void FUN_00106080(void)
   
   temp_v0 = jyoucyuGetTableEntry(1);
   if (temp_v0 == 0) {
-    FUN_0010d494(0);
+    asdSoundInitialize(0);
     temp_v0 = jyoucyuGetTableEntry(0);
     if (temp_v0 == 0) {
       temp_v1 = 0x10616c;

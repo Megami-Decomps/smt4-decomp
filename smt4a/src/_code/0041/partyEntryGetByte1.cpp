@@ -4,7 +4,7 @@ extern "C" {
 
 extern PartyBlockB *gameFlagBlockGet(void);
 
-u8 partyEntryGetByte1(s32 index)
+s32 partyEntryGetByte1(s32 index)
 {
     return gameFlagBlockGet()->e[index].byte1;
 }

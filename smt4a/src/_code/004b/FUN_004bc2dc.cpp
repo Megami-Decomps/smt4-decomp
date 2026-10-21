@@ -5,7 +5,7 @@
 extern "C" {
 
 int dataTable00FindById(void);
-int FUN_0046fd8c(int, unsigned int);
+int resourceFindType27Record(int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -19,8 +19,8 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_0046fd8c. */
-extern int FUN_004bb80c(void);
+/* Supplied declaration required: resourceFindType27Record. */
+extern int FUN_004bb80c(int index);
 
 
 unsigned short FUN_004bc2dc(unsigned int param_1,int param_2)
@@ -40,7 +40,7 @@ unsigned short FUN_004bc2dc(unsigned int param_1,int param_2)
   temp_v1 = dataTableGetEntries();
   temp_v5 = temp_v1;
   if (((-1 < (int)param_1) && (temp_v2 = dataTableGetCount(temp_v0), param_1 < temp_v2)) &&
-     (temp_v5 = g_aocSystem, FUN_0046fd8c(g_aocSystem,param_1), temp_v5 == 0)) {
+     (temp_v5 = g_aocSystem, resourceFindType27Record(g_aocSystem,param_1), temp_v5 == 0)) {
     temp_v5 = temp_v1 + param_1 * 0x78;
   }
   temp_v6 = 0;
@@ -49,7 +49,7 @@ unsigned short FUN_004bc2dc(unsigned int param_1,int param_2)
     psVar7 = (short *)(temp_v5 + temp_v1 * 4);
     if (*psVar7 != 0) {
       if (param_2 != 0) {
-        temp_v3 = FUN_004bb80c();
+        temp_v3 = FUN_004bb80c((unsigned short)*psVar7);
         temp_v4 = 0;
         do {
           temp_v2 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v4 * 2 + 0x14);

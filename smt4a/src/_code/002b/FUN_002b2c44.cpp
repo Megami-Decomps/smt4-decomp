@@ -1,41 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b2c44` (_code @ 0x2b2c44, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match3_LookupSortKeys.h"
 
 extern "C" {
+u32 gameDataFlagTestBit(s32 id);
+const LookupSortKeys* FUN_00186f58(u32 id);
 
-int FUN_00186f58(void);
-
-/* Supplied declaration required: FUN_00186f58. */
-extern unsigned int gameDataFlagTestBit(int);
-
-
-unsigned int FUN_002b2c44(int *param_1,int *param_2)
-
+// Compare flag differences first, then the table's secondary key descending.
+s32 FUN_002b2c44(const s32* first, const s32* second)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned char temp_v5;
-  
-  temp_v0 = gameDataFlagTestBit(*param_1);
-  temp_v1 = gameDataFlagTestBit(*param_2);
-  temp_v4 = (unsigned int)((temp_v0 & ~temp_v1) != 0);
-  temp_v5 = (temp_v1 & ~temp_v0) != 0;
-  if (temp_v5) {
-    temp_v4 = 0xffffffff;
-  }
-  if (!temp_v5 && temp_v4 == 0) {
-    temp_v2 = *param_1;
-    FUN_00186f58();
-    temp_v3 = *param_2;
-    FUN_00186f58();
-    temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + 0x24) - (unsigned int)*(unsigned short *)(temp_v2 + 0x24);
-  }
-  return temp_v4;
+    u32 firstFlags = gameDataFlagTestBit(*first);
+    s32 result = 0;
+    u32 secondFlags = gameDataFlagTestBit(*second);
+    if ((firstFlags & ~secondFlags) != 0) {
+        result = 1;
+    }
+    if ((secondFlags & ~firstFlags) != 0) {
+        result = -1;
+    } else if (result == 0) {
+        const LookupSortKeys* a = FUN_00186f58(*first);
+        const LookupSortKeys* b = FUN_00186f58(*second);
+        result = b->secondary - a->secondary;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

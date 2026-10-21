@@ -8,13 +8,13 @@ int textFormatBuffer(...);
 int asdTMTexLoadMainHeap(int, unsigned int);
 int FUN_0020214c(void);
 int FUN_00275bc8(unsigned int, char *);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 
 
 void FUN_004b7128(int param_1)
@@ -53,8 +53,8 @@ void FUN_004b7128(int param_1)
                (int)*(short *)(param_1 + 0x3c));
   textFormatBuffer(temp_v4,"mikado/m%03d/m%03d.mbm",(int)*(short *)(param_1 + 0x3c),
                (int)*(short *)(param_1 + 0x3c));
-  FUN_002804b0(temp_v3,param_1 + 0x1128,0);
-  FUN_002804b0(temp_v4,param_1 + 0x112c,0);
+  asdLoadFileAsyncSimple(temp_v3,param_1 + 0x1128,0);
+  asdLoadFileAsyncSimple(temp_v4,param_1 + 0x112c,0);
   pcVar1 = "map/all/mapsys_scr.bf";
   FUN_0020214c();
   *(char **)(param_1 + 0x1150) = pcVar1;

@@ -29,7 +29,7 @@ extern unsigned int dataTableFileGetTable(int, unsigned int);
 /* Supplied declaration required: FUN_004d8724. */
 extern int FUN_004d87e4(unsigned int);
 /* Supplied declaration required: callOnHandleField4D. */
-extern unsigned int clearWord(void);
+extern unsigned int *battleModelOwnerInitialize(unsigned int *value);
 
 
 void FUN_003eaa9c(int param_1)
@@ -54,11 +54,10 @@ void FUN_003eaa9c(int param_1)
     FUN_004d854c(*(unsigned int *)(param_1 + 0x22bc));
     temp_v1 = 1;
     do {
-      temp_v2 = 0x24;
-      FUN_00178b04(0x24,&LAB_003eac80,0x3649);
+      temp_v2 = FUN_00178b04(0x24,&LAB_003eac80,0x3649);
       temp_v3 = 0;
       if (temp_v2 != 0) {
-        temp_v3 = clearWord();
+        temp_v3 = (unsigned int)battleModelOwnerInitialize((unsigned int *)temp_v2);
       }
       temp_v2 = param_1 + temp_v1 * 4;
       *(unsigned int *)(temp_v2 + 0x22bc) = temp_v3;

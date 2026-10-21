@@ -8,7 +8,7 @@ int FUN_00152530(unsigned int *, unsigned int *);
 int FUN_00233670(...);
 int FUN_00233730(unsigned int *, int, int, int, int, int);
 int FUN_00233818(unsigned int *);
-int FUN_00233854(unsigned int *);
+int ifTouchRegionClearAll(unsigned int *);
 int FUN_0023392c(...);
 int jobStopAndClearFlags(...);
 int FUN_00233db8(unsigned int *, int);
@@ -34,10 +34,10 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00152530. */
 /* Supplied declaration required: FUN_00233670. */
-extern unsigned int FUN_00233718(unsigned int *);
+extern unsigned int rangeLimitMin(unsigned int *);
 /* Supplied declaration required: FUN_00233730. */
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: jobStopAndClearFlags. */
 /* Supplied declaration required: FUN_00233db8. */
@@ -142,7 +142,7 @@ void FUN_0038ebd8(unsigned int *param_1)
     else {
       temp_v1 = FUN_0026b564();
       if (temp_v1 != 0) {
-        FUN_00233854(param_1 + 0xba);
+        ifTouchRegionClearAll(param_1 + 0xba);
         FUN_00233818(param_1 + 0xad);
         FUN_00233db8(param_1,0);
         puVar4 = param_1 + 0x83;
@@ -184,7 +184,7 @@ void FUN_0038ebd8(unsigned int *param_1)
                      (int)**(short **)(temp_v1 + 0xc),(int)(*(short **)(temp_v1 + 0xc))[1]);
         *(unsigned char *)(param_1 + 0xd3) = 1;
         *(unsigned short *)(param_1 + 0xbb) = (unsigned short)param_1[0xbb] | 0x1000;
-        temp_v3 = FUN_00233718(param_1 + 0x90);
+        temp_v3 = rangeLimitMin(param_1 + 0x90);
         FUN_00233670(param_1 + 0xad,0x3a,0x88,temp_v3);
         *(unsigned char *)(param_1 + 0xb1) = 1;
         *(unsigned char *)((int)param_1 + 0x2e6) = 0;

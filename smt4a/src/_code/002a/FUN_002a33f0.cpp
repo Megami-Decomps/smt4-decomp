@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_002c76c0(s32 arg0);
+void scrCommMessageSetMode(s32 arg0);
 u32 FUN_002ba85c(void);
 s32 scrGetArg(...);
 u32 scrGetCommandFrame(void);
@@ -18,11 +18,11 @@ typedef struct MessageMain {
 
 extern MessageMain g_messageMain;
 
-/* Script command body: resets message state FUN_002c76c0(0), sets the window mode byte to 0x15
+/* Script command body: resets message state scrCommMessageSetMode(0), sets the window mode byte to 0x15
  * if a window exists, then queues the command. */
 void FUN_002a33f0(void)
 {
-    FUN_002c76c0(0);
+    scrCommMessageSetMode(0);
     if (g_messageMain.window != NULL) {
         g_messageMain.window[MESSAGE_WINDOW_MODE] = 0x15;
     }

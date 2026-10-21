@@ -6,7 +6,14 @@
 
 /* Sprite description returned by FUN_001834a4(group, id). */
 typedef struct SpriteInfo {
-    /* 0x00 */ u8 unk00[8];
+    union {
+        /* 0x00 */ u8 unk00[8];
+        struct {
+            u8 unk00[4];
+            /* 0x04 */ u16 width;
+            /* 0x06 */ u16 height;
+        } bounds;
+    };
     /* 0x08 */ s16 x;
     /* 0x0A */ s16 y;
     /* 0x0C */ s16 *size;        /* width, height */
@@ -20,7 +27,7 @@ typedef struct RenderCtx {
     /* 0x1320 */ s32 states[4];
     /* 0x1330 */ u8 dirty;
     /* 0x1331 */ u8 unk1331[3];
-    /* 0x1334 */ void (*flush)(void);
+    /* 0x1334 */ void (*flush)(int state);
 } RenderCtx;
 
 enum {
@@ -37,7 +44,7 @@ static __inline bool renderCtxSuspendScissor(RenderCtx *ctx)
 
     ctx->states[ctx->stateIndex] = 0;
     if (ctx->dirty != 0 || previous != 0) {
-        ctx->flush();
+        ctx->flush(0);
         ctx->dirty = 0;
     }
     return true;
@@ -50,7 +57,7 @@ static __inline void renderCtxResumeScissor(RenderCtx *ctx)
 
     ctx->states[ctx->stateIndex] = RENDER_STATE_SCISSOR;
     if (ctx->dirty != 0 || previous != RENDER_STATE_SCISSOR) {
-        ctx->flush();
+        ctx->flush(RENDER_STATE_SCISSOR);
         ctx->dirty = 0;
     }
 }
@@ -72,7 +79,7 @@ typedef struct ListPanel {
     /* 0x005 */ u8 unk005[0x83];
     /* 0x088 */ u32 icons[4];
     /* 0x098 */ PanelRow rows[5];
-    /* 0x124 */ u8 scrollBar[0x64]; /* scroll bar state (FUN_002c2c68 and friends) */
+    /* 0x124 */ u8 scrollBar[0x64]; /* scroll bar state (objectApplyIfUnblocked and friends) */
     /* 0x188 */ s32 scroll;         /* first visible entry */
     /* 0x18C */ u8 unk18C[0x13C];
     /* 0x2C8 */ u8 position[0x20];  /* a vec2 (x, y) */

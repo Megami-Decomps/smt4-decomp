@@ -6,18 +6,18 @@ int FUN_002123dc(void);
 int commonBgReset(void);
 int buttonHelpResetSlots(void);
 int messageSlotSet(int a);
-int FUN_0028dc98(...);
+int scrCommMessageSetMode(...);
 int commonBgCreate(void);
 extern int scrGetCommandFrame(void);
 extern int FUN_002ed5bc(void);
 
 u32 FUN_001ecd00(void)
 {
-    FUN_0028dc98();
+    scrCommMessageSetMode();
     if (scrGetCommandFrame() != 0) {
         if (FUN_002ed5bc() != 0) {
             FUN_002123dc();
-            FUN_0028dc98(0xffffffff);
+            scrCommMessageSetMode(0xffffffff);
             messageSlotSet(0);
             return 1;
         }

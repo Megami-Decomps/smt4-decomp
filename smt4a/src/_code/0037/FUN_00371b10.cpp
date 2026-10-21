@@ -1,30 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00371b10` (_code @ 0x371b10, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail references shared save-format strings and computes the prefixed format relative to its directory string; this standalone compilation places literals inline and uses ADR. */
+#include "common.h"
 
 extern "C" {
+extern char DAT_005e2114[0x80];
+void rt_aeabi_memclr(void* buffer, u32 size);
+s32 textFormatBuffer(char* buffer, const char* format, ...);
 
-int textFormatBuffer(...);
-int rt_aeabi_memclr(unsigned char *, int);
-
-extern unsigned char DAT_005e2114; /* 0x5e2114 */
-
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: rt_aeabi_memclr. */
-
-
-unsigned char * FUN_00371b10(unsigned int param_1,int param_2)
-
+// Formats the slot's save filename, optionally with the sdds4/ directory prefix.
+char* FUN_00371b10(u32 slot, s32 directoryMode)
 {
-/* irregular: 2 native warning(s); review required */
-  rt_aeabi_memclr(&DAT_005e2114,0x80);
-  if (param_2 != 1) {
-    textFormatBuffer(&DAT_005e2114,"sdds4game%d.sav",param_1);
-  }
-  else {
-    textFormatBuffer(&DAT_005e2114,"%ssdds4game%d.sav","sdds4/",param_1);
-  }
-  return &DAT_005e2114;
+    rt_aeabi_memclr(DAT_005e2114, sizeof(DAT_005e2114));
+    switch (directoryMode) {
+    case 1:
+        textFormatBuffer(DAT_005e2114, "%ssdds4game%d.sav", "sdds4/", slot);
+        break;
+    default:
+        textFormatBuffer(DAT_005e2114, "sdds4game%d.sav", slot);
+        break;
+    }
+    return DAT_005e2114;
 }
-
-} /* extern "C" */
+}

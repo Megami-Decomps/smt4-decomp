@@ -7,7 +7,7 @@ extern "C" {
 
 int asdGxPresetRequest(int arg);
 int asdMemFree(void *ptr);               /* heap free */
-int FUN_001ad6d8(void);
+int asdCameraInitAreas(void);
 int asdOperatorDeleteB(u32 movie);
 extern MobiclipProcessWork *jobGetWork(u32 arg);
 
@@ -17,7 +17,7 @@ void mobiclipProcessDestroy(u32 arg)
 {
     MobiclipProcessWork *work;
 
-    FUN_001ad6d8();
+    asdCameraInitAreas();
     work = jobGetWork(arg);
     if (work->unk79 != 0) {
         work->unk79 = 0;

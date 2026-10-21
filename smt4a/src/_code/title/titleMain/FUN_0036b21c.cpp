@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036b21c` (_code @ 0x36b21c, 0x404 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ExtendedRecordCall.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_001835b4(...);
 int FUN_001879d0(...);
-int FUN_002e129c(...);
 int FUN_0034dc3c(int);
 
 typedef int romwright_code(...);
@@ -33,7 +33,6 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
-/* Supplied declaration required: FUN_002e129c. */
 /* Supplied declaration required: FUN_0034dc3c. */
 
 
@@ -138,7 +137,7 @@ unsigned int FUN_0036b21c(void)
       (**(romwright_code **)(temp_v7 + 0x12d4))();
       *(unsigned char *)(temp_v7 + 0x12d0) = 0;
     }
-    FUN_002e129c(2,*(unsigned int *)(temp_v2 + 0x248),*(unsigned int *)(temp_v2 + 0x24c),
+    texTableRecordCallExtended(2,*(unsigned int *)(temp_v2 + 0x248),*(unsigned int *)(temp_v2 + 0x24c),
                  *(int *)(temp_v2 + 0x224) + (int)temp_v6,*(unsigned int *)(temp_v2 + 0x228),(int)temp_v0,
                  (int)temp_v1,0x10);
     temp_v2 = g_renderCtx;

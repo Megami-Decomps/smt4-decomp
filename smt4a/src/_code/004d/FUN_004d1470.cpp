@@ -26,7 +26,7 @@ extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 /* Supplied declaration required: listBoxItemHasOwner. */
-extern unsigned int FUN_003874fc(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 /* Supplied declaration required: FUN_003e83b4. */
 extern int FUN_004bd0d8(void);
 /* Supplied declaration required: bitsAt60Set. */
@@ -53,7 +53,7 @@ void FUN_004d1470(int param_1,int param_2)
   int temp_v8;
   unsigned char temp_v9;
   
-  temp_v3 = FUN_003874fc(*(unsigned int *)(param_1 + 0x10));
+  temp_v3 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   temp_v8 = 0;
   switch(temp_v3) {
   case 0:

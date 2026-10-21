@@ -18,7 +18,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_002b8804(void);
+extern int aocJobIsValid(void);
 /* Supplied declaration required: FUN_002ba12c. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
@@ -62,7 +62,7 @@ unsigned int FUN_0022535c(void)
       temp_v5 = temp_v6;
       FUN_002ba12c(g_titleScene);
       temp_v7 = CONCAT44(temp_v5,(int)temp_v6);
-      temp_v2 = FUN_002b8804();
+      temp_v2 = aocJobIsValid();
       if ((temp_v2 != 0) || (temp_v2 = btlMainIsSecondJobValid(), temp_v2 != 0)) {
         temp_v5 = (float)(temp_v7 >> 0x20);
         FUN_002ba12c(g_titleScene);

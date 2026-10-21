@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0026c820(u32 arg);
+void btlUiPanelFadeInWhenReady(u32 arg);
 void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
@@ -18,7 +18,7 @@ void btlTalkDestroy(u32 job)
     BtlTalk *talk = g_btlTalk;
 
     if (g_btlTalk != NULL) {
-        FUN_0026c820(g_btlUiBlock);
+        btlUiPanelFadeInWhenReady(g_btlUiBlock);
         if (talk->dataA != NULL) {
             asdMemFree(talk->dataA);
             talk->dataA = NULL;

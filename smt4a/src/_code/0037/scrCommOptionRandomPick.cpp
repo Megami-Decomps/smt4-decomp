@@ -13,14 +13,14 @@ typedef struct Options0037d358 {
 void scrSetResult(s32 value);
 s32 randRange(u16 limit);
 Options0037d358 *gameGetOptions(void);
-s32 FUN_001b34b8(void);
+s32 gameOptionsClassifyMode(void);
 
-/* Script command: when FUN_001b34b8 reports 1, picks one of the options that are set at random (always the first when only one is); the result defaults to 2. */
+/* Script command: when gameOptionsClassifyMode reports 1, picks one of the options that are set at random (always the first when only one is); the result defaults to 2. */
 u32 scrCommOptionRandomPick(void)
 {
     u16 result = 2;
 
-    if (FUN_001b34b8() == 1) {
+    if (gameOptionsClassifyMode() == 1) {
         s32 count = 1;
         Options0037d358 *options = gameGetOptions();
         s32 pick;

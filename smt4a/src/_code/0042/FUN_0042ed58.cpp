@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_13_stack;
 
-extern unsigned char DAT_005b448b; /* 0x5b448b */
+extern unsigned char g_asdCecModuleFlags; /* 0x5b448b */
 extern signed char DAT_005b448c; /* 0x5b448c */
 
 /* Supplied declaration required: FUN_00193038. */
@@ -187,7 +187,7 @@ unsigned int FUN_0042ed58(int *param_1,unsigned int param_2,int param_3,int para
                 else {
                   temp_v0 = nn_cec_CTR_MessageBox_SetMessageBoxData((unsigned int)param_1,0x65,param_5,param_6);
                   if ((temp_v0 & 0x80000000) == 0) {
-                    DAT_005b448b = 1;
+                    g_asdCecModuleFlags = 1;
                     return 0;
                   }
                   temp_v3 = (unsigned char *)0x0;

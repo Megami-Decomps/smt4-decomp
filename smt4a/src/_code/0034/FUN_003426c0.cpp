@@ -9,7 +9,7 @@ int FUN_001834a4(int, int);
 int FUN_001835b4(...);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned int);
 int FUN_0025cc78(...);
-int FUN_002a1f60(...);
+int asdTextDrawDirectoryEntry(...);
 
 /* stack frame of param_7: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_0025cc78. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern unsigned int FUN_0035aa90(int);
 
 
@@ -53,7 +53,7 @@ void FUN_003426c0(int param_1,unsigned int param_2,unsigned int param_3,int para
       if (param_7 != 0) {
         if (param_7 != 1) {
           if (param_7 == 2 || param_7 == 3) {
-            FUN_002a1f60(param_2,2,0xffffffff,0,3,param_3,temp_v3 + param_5 + param_6,param_1,param_2,
+            asdTextDrawDirectoryEntry(param_2,2,0xffffffff,0,3,param_3,temp_v3 + param_5 + param_6,param_1,param_2,
                          param_3,temp_v6);
           }
         }
@@ -64,7 +64,7 @@ void FUN_003426c0(int param_1,unsigned int param_2,unsigned int param_3,int para
         }
       }
       else {
-        FUN_002a1f60(param_2,2,0xffffffff,0,3,param_3,temp_v3 + param_5 + param_6,param_1,param_2,
+        asdTextDrawDirectoryEntry(param_2,2,0xffffffff,0,3,param_3,temp_v3 + param_5 + param_6,param_1,param_2,
                      param_3,temp_v6);
       }
       FUN_0025cc78(param_2,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v0 + 8) + temp_v4,

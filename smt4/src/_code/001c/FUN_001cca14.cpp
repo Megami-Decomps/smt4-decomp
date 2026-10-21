@@ -19,7 +19,7 @@ int FUN_0029a17c(...);
 int FUN_0029ab54(...);
 int FUN_0029efa8(...);
 int FUN_0029efc0(...);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
 int FUN_002be370(...);
 int FUN_002be5a4(...);
@@ -76,7 +76,6 @@ extern int FUN_0029e9cc(unsigned short);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: FUN_002b75ec. */
 /* Supplied declaration required: devilGetRecord. */
@@ -362,7 +361,7 @@ LAB_001ccb9c:
         temp_v7 = temp_v10 + temp_v7 * 4;
         if (*(short *)(temp_v7 + 0xe32) != 0) {
           temp_v6 = FUN_002bf4f8(0x1a,0x4a4);
-          FUN_002b6758((int)*(short *)(temp_v7 + 0xe30),
+          uiDrawDemonIcon((int)*(short *)(temp_v7 + 0xe30),
                        (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v6 + 8) + temp_v1,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v6 + 10) + temp_v2,0xba,0);
           FUN_002bf288(2,0x1a,0x4a6,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,

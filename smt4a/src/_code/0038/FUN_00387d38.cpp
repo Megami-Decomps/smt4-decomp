@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(int);
 int gameGetSlotRecord(...);
 int linkHolderApplyFlag(unsigned int, int);
-int FUN_002e2680(int);
+int campCecSetObjectValue(int);
 int FUN_00331380(int);
 int FUN_003b6fc4(void);
 int FUN_003c1060(void);
@@ -38,8 +38,8 @@ struct fn_00387d38_arg0 {
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_00284e94(void);
-extern int FUN_002c334c(void);
-/* Supplied declaration required: FUN_002e2680. */
+extern int partyPanelExists(void);
+/* Supplied declaration required: campCecSetObjectValue. */
 /* Supplied declaration required: FUN_00331380. */
 /* Supplied declaration required: FUN_003b6fc4. */
 /* Supplied declaration required: FUN_003c1060. */
@@ -57,13 +57,13 @@ unsigned int FUN_00387d38(fn_00387d38_arg0 *param_1)
   temp_v3 = 0;
   temp_v1 = FUN_003b6fc4();
   if (temp_v1 == 0) {
-    temp_v1 = FUN_002c334c();
+    temp_v1 = partyPanelExists();
     if (temp_v1 == 0) {
       return 0;
     }
     temp_v1 = FUN_00284e94();
     if (temp_v1 != 0) {
-      FUN_002e2680(0);
+      campCecSetObjectValue(0);
       param_1->field_0x154 = 1;
       FUN_00331380(0);
       linkHolderApplyFlag(*(unsigned int *)&param_1->field_0x4,1);

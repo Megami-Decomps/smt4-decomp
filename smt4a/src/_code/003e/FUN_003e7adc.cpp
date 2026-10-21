@@ -1,38 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e7adc` (_code @ 0x3e7adc, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: state/global mask pair-load selection and global-base relocation addend differ from retail. */
+#include "battle/btlMain.h"
+#include "shard/W5_W5Match7_BattleMask.h"
 
 extern "C" {
+extern BtlMainA g_btlMain;
 
-typedef struct fn_003e7adc_arg0 fn_003e7adc_arg0;
-struct fn_003e7adc_arg0 {
-    unsigned char pad_0x0[0xec];
-    int field_0xec; /* +0xec */
-    unsigned char pad_0xf0[0x1c];
-    int field_0x10c; /* +0x10c */
-    unsigned char pad_0x110[0x4490];
-    uint field_0x45a0; /* +0x45a0 */
-    uint field_0x45a4; /* +0x45a4 */
-};
-
-extern unsigned int DAT_00573a50; /* 0x573a50 */
-extern unsigned int DAT_00573a54; /* 0x573a54 */
-
-
-unsigned int FUN_003e7adc(fn_003e7adc_arg0 *param_1)
-
+// Activity is present when either state index or a currently enabled mask bit is set.
+s32 FUN_003e7adc(BattleMaskState *state)
 {
-  unsigned int temp_v0;
-  
-  if (((param_1->field_0xec < 0) &&
-      ((param_1->field_0x45a0 & DAT_00573a50) == 0 && (param_1->field_0x45a4 & DAT_00573a54) == 0))
-     && (param_1->field_0x10c < 0)) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    if (state->activity.first < 0) {
+        u64 mask = state->mask;
+        u64 enabled = (u64)g_btlMain.activeMask.words[0] |
+                      ((u64)g_btlMain.activeMask.words[1] << 32);
+        if ((mask & enabled) == 0 && state->activity.second < 0) {
+            return 0;
+        }
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

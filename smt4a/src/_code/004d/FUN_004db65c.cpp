@@ -6,20 +6,20 @@ extern "C" {
 
 int qsort(int, unsigned int, int, unsigned char *);
 int FUN_00184310(void);
-int FUN_003a8370(...);
-int FUN_003c3f1c(void);
+int dataTable1fFindPairedKey(...);
+int findSkillMetadataById(void);
 int FUN_004daf18(int, unsigned int);
-int FUN_004dbf60(int, unsigned int, unsigned int, unsigned int);
+int battleCandidateMatchesSkillFilters(int, unsigned int, unsigned int, unsigned int);
 
 extern unsigned char LAB_00321d38; /* 0x321d38 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_003a8370. */
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: dataTable1fFindPairedKey. */
+/* Supplied declaration required: findSkillMetadataById. */
 extern int FUN_004dab08(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004daf18. */
-/* Supplied declaration required: FUN_004dbf60. */
+/* Supplied declaration required: battleCandidateMatchesSkillFilters. */
 
 
 int FUN_004db65c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int *param_4)
@@ -35,11 +35,11 @@ int FUN_004db65c(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
   temp_v4 = 0;
   if (param_2 < param_3) {
     temp_v3 = param_2;
-    FUN_003a8370(param_2,param_3);
+    dataTable1fFindPairedKey(param_2,param_3);
   }
   else {
     temp_v3 = param_3;
-    FUN_003a8370();
+    dataTable1fFindPairedKey();
   }
   if (temp_v3 != 0) {
     temp_v1 = param_4[1];
@@ -71,7 +71,7 @@ int FUN_004db65c(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
         do {
           temp_v2 = param_1 + temp_v4 * 2;
           temp_v1 = (unsigned int)*(unsigned short *)(temp_v2 + 0x17e);
-          if ((temp_v1 != 0) && (FUN_003c3f1c(), (*(unsigned char *)(temp_v1 + 3) & 0x20) == 0)) {
+          if ((temp_v1 != 0) && (findSkillMetadataById(), (*(unsigned char *)(temp_v1 + 3) & 0x20) == 0)) {
             *(unsigned short *)(temp_v2 + 0x17e) = 0;
           }
           temp_v4 = temp_v4 + 1;
@@ -95,13 +95,13 @@ int FUN_004db65c(int param_1,unsigned int param_2,unsigned int param_3,unsigned 
           do {
             temp_v3 = (unsigned int)*(unsigned short *)(param_1 + temp_v4 * 2 + 0x17e);
             if (temp_v3 == 0) break;
-            FUN_003c3f1c();
+            findSkillMetadataById();
             temp_v4 = temp_v4 + 1;
             temp_v2 = temp_v2 + (*(unsigned char *)(temp_v3 + 3) & 0x1f) * 5;
           } while (temp_v4 < 0x18);
           param_4[1] = (param_4[1] & 0x1ffff) | (temp_v2 << 0x11);
         }
-        FUN_004dbf60(param_1,param_2,param_3,(param_4[1] & 0x1ffff) >> 2);
+        battleCandidateMatchesSkillFilters(param_1,param_2,param_3,(param_4[1] & 0x1ffff) >> 2);
         temp_v4 = param_1;
       }
     }

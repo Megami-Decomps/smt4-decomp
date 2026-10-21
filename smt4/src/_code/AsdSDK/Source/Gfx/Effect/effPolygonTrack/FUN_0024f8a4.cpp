@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002469ec(unsigned int, unsigned int, unsigned char *, int, int);
-int FUN_0024ad88(unsigned int);
+int bufferObjDestroy(unsigned int);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(unsigned int);
 int memClear(void);
@@ -28,7 +28,7 @@ extern unsigned char DAT_004737ce; /* 0x4737ce */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002469ec. */
-/* Supplied declaration required: FUN_0024ad88. */
+/* Supplied declaration required: bufferObjDestroy. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -67,8 +67,8 @@ void FUN_0024f8a4(unsigned int *param_1,unsigned int param_2,unsigned int *param
   if (*param_1 != 0) {
     temp_v0 = param_1[10];
     if (temp_v0 != 0) {
-      FUN_0024ad88(*(unsigned int *)(temp_v0 + 0x10));
-      FUN_0024ad88(*(unsigned int *)(temp_v0 + 0x14));
+      bufferObjDestroy(*(unsigned int *)(temp_v0 + 0x10));
+      bufferObjDestroy(*(unsigned int *)(temp_v0 + 0x14));
       asdMemFree(temp_v0);
     }
     temp_v1 = *param_3;

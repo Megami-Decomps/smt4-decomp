@@ -1,37 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00156ea8` (_code @ 0x156ea8, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail clears handles through a post-increment interior pointer while retaining the work base separately. */
+#include "common.h"
+
+struct ShadowMapWork {
+    u8 unk00[0x48];
+    u32 handles[6]; // 0x48
+    u8 unk60[8];
+};
+struct ModelShadowMap {
+    u32 unk00;
+    ShadowMapWork *work; // 0x04
+};
 
 extern "C" {
+void *FUN_00178b04(u32 size, const char *file, u32 line);
+ShadowMapWork *FUN_0016d17c(ShadowMapWork *work);
 
-int FUN_0016d17c(void);
-int FUN_00178b04(int, unsigned char *, int);
-
-extern unsigned char LAB_00156ef8; /* 0x156ef8 */
-
-/* Supplied declaration required: FUN_0016d17c. */
-/* Supplied declaration required: FUN_00178b04. */
-
-
-void FUN_00156ea8(int param_1)
-
+// Allocate and initialize the model's shadow-map work area.
+void FUN_00156ea8(ModelShadowMap *shadow)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0x68;
-  FUN_00178b04(0x68,&LAB_00156ef8,0x3e);
-  if (temp_v0 != 0) {
-    FUN_0016d17c();
-    *(unsigned int *)(temp_v0 + 0x48) = 0;
-    *(unsigned int *)(temp_v0 + 0x4c) = 0;
-    *(unsigned int *)(temp_v0 + 0x50) = 0;
-    *(unsigned int *)(temp_v0 + 0x54) = 0;
-    *(unsigned int *)(temp_v0 + 0x58) = 0;
-    *(unsigned int *)(temp_v0 + 0x5c) = 0;
-  }
-  *(int *)(param_1 + 4) = temp_v0;
-  return;
+    ShadowMapWork *work = (ShadowMapWork *)FUN_00178b04(sizeof(ShadowMapWork),
+        "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelShadowMap.cpp", 62);
+    if (work != NULL) {
+        work = FUN_0016d17c(work);
+        for (s32 index = 0; index < 6; ++index) {
+            work->handles[index] = 0;
+        }
+    }
+    shadow->work = work;
 }
-
-} /* extern "C" */
+}

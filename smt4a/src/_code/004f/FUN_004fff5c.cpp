@@ -1,30 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fff5c` (_code @ 0x4fff5c, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: table/index use r5/r4 instead of retail r4/r5; all 25 operations, including the native hint NOP, match. */
+#include "common.h"
 
-extern "C" {
+struct NamedValueEntry {
+    const char *name;
+    u32 value;
+};
 
-extern int libc_strncmp(unsigned int, unsigned int, unsigned int);
+struct NamedValueTable {
+    u8 unk00[0x18];
+    NamedValueEntry *entries;
+    u32 count;
+};
 
+struct NamedValueOwner {
+    NamedValueTable *table;
+};
 
-unsigned int FUN_004fff5c(int *param_1,unsigned int param_2)
+extern "C" s32 libc_strncmp(const char *left, const char *right, u32 size);
 
+// Return the first value whose name matches within the table's 64-byte name limit.
+extern "C" u32 FUN_004fff5c(const NamedValueOwner *owner, const char *name)
 {
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v2 = 0;
-  temp_v1 = *param_1;
-  temp_v3 = *(unsigned int *)(temp_v1 + 0x1c);
-  for (temp_v2 = 0; temp_v2 < temp_v3; temp_v2++) {
-    temp_v0 = libc_strncmp(*(unsigned int *)(*(int *)(temp_v1 + 0x18) + temp_v2 * 8),param_2,0x40);
-    if (temp_v0 == 0) {
-      return *(unsigned int *)(*(int *)(temp_v1 + 0x18) + temp_v2 * 8 + 4);
+    const NamedValueTable &table = *owner->table;
+    u32 count = table.count;
+    for (u32 index = 0; index < count; ++index) {
+        if (libc_strncmp(table.entries[index].name, name, 0x40) == 0)
+            return table.entries[index].value;
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */

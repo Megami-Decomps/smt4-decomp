@@ -1,31 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00500ee4` (_code @ 0x500ee4, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler changes the packed-header store and input/bitfield register scheduling; O2 also differs. */
+#include "common.h"
 
-extern "C" {
+struct PackedSettingData {
+    u8 unk00[0x7c]; // 0x00
+    u32 payload;     // 0x7c
+};
 
-int FUN_00192de4(int, unsigned int *, int);
+struct PackedSetting {
+    u8 enabled;             // 0x00
+    u8 first;               // 0x01
+    u8 second;              // 0x02
+    u8 unk03;               // 0x03
+    PackedSettingData* data; // 0x04
+};
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_3_stack;
+extern "C" u32* gxEmitFramebufferAccessMasks(u32* data, u32* output, s32 count);
 
-/* Supplied declaration required: FUN_00192de4. */
-
-
-void FUN_00500ee4(char *param_1,unsigned int *param_2,int param_3)
-
+// Write the setting's command header and optionally append its data payload.
+extern "C" u32* FUN_00500ee4(const PackedSetting* setting, u32* output, s32 includeData)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_2 = (unsigned int)(*param_1 != '\0') | ((unsigned int)(unsigned char)param_1[2] << 4) |
-             ((unsigned int)(unsigned char)param_1[1] << 8);
-  param_2[1] = 0x30104;
-  if (param_3 != 0) {
-    FUN_00192de4(*(int *)(param_1 + 4) + 0x7c,param_2 + 2,1);
-    return;
-  }
-  return;
+    *output++ = (setting->enabled != 0) | (setting->second << 4) | (setting->first << 8);
+    *output++ = 0x30104;
+    if (includeData) {
+        return gxEmitFramebufferAccessMasks(&setting->data->payload, output, 1);
+    }
+    return output;
 }
-
-} /* extern "C" */

@@ -57,7 +57,7 @@ extern unsigned int DAT_00407ed4; /* 0x407ed4 */
 extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int *DAT_004474f4; /* 0x4474f4 */
-extern int DAT_00447e58; /* 0x447e58 */
+extern int g_deferredMapModels; /* 0x447e58 */
 extern int g_lmapScene; /* 0x447e88 */
 extern float DAT_0049f8f8; /* 0x49f8f8 */
 extern float DAT_0049f8fc; /* 0x49f8fc */
@@ -89,7 +89,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0021b0f0. */
 /* Supplied declaration required: FUN_0021b2ec. */
 /* Supplied declaration required: FUN_00282228. */
-/* Supplied declaration required: FUN_00282318. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_00287b0c. */
@@ -164,7 +164,7 @@ void FUN_0030860c(void)
     temp_v6 = 0;
     temp_v30 = temp_v25;
     do {
-      temp_v11 = DAT_00447e58 + temp_v6 * 0x38;
+      temp_v11 = g_deferredMapModels + temp_v6 * 0x38;
       temp_v13 = *(char *)(temp_v11 + 0xc) != '\0';
       temp_v1 = '\0';
       if (temp_v13) {

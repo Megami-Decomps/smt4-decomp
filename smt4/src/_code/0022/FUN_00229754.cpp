@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023c154(int, int, int, int, unsigned int *);
-int FUN_0027e3f8(int, int, int, int);
+int btlEventSelectTrigger(int, int, int, int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern int g_btlEvent; /* 0x435d48 */
 
 /* Supplied declaration required: FUN_0023c154. */
 extern int FUN_0027e3b8(int);
-/* Supplied declaration required: FUN_0027e3f8. */
+/* Supplied declaration required: btlEventSelectTrigger. */
 extern int btlFindFirstActiveUnit(int);
 extern int FUN_00338584(int);
 
@@ -37,7 +37,7 @@ void FUN_00229754(int *param_1,unsigned int *param_2)
     if (*(short *)(temp_v0 + 0x1fc4) >= 1) {
       temp_v0 = FUN_0027e3b8(g_btlEvent);
       if ((temp_v0 == 0) &&
-         (temp_v0 = g_btlEvent, FUN_0027e3f8(g_btlEvent,4,(int)*(short *)(param_2[8] + 0x6e),0),
+         (temp_v0 = g_btlEvent, btlEventSelectTrigger(g_btlEvent,4,(int)*(short *)(param_2[8] + 0x6e),0),
          temp_v0 != 0)) {
         *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x21;
         return;
@@ -47,7 +47,7 @@ void FUN_00229754(int *param_1,unsigned int *param_2)
   else if (((*(unsigned int *)param_2[8] & 1) != 0) && ((*(unsigned int *)param_2[8] & 0x40) == 0)) {
     temp_v0 = FUN_0027e3b8(g_btlEvent);
     if ((temp_v0 == 0) &&
-       (temp_v0 = g_btlEvent, FUN_0027e3f8(g_btlEvent,4,(int)*(short *)(param_2[8] + 0x6e),0),
+       (temp_v0 = g_btlEvent, btlEventSelectTrigger(g_btlEvent,4,(int)*(short *)(param_2[8] + 0x6e),0),
        temp_v0 != 0)) {
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x21;
       return;

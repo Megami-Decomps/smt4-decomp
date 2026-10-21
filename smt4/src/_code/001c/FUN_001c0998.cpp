@@ -10,10 +10,10 @@ int nw_gfx_SceneNode_AttachChild(int, unsigned int);
 
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
-extern int DAT_00464b8c; /* 0x464b8c */
-extern int DAT_00464b90; /* 0x464b90 */
-extern int DAT_00464b94; /* 0x464b94 */
-extern int DAT_00464b98; /* 0x464b98 */
+extern int sceneGroup1Root; /* 0x464b8c */
+extern int sceneGroup4Root; /* 0x464b90 */
+extern int sceneGroup2Root; /* 0x464b94 */
+extern int sceneGroup5Root; /* 0x464b98 */
 extern unsigned int g_asdLightCount; /* 0x4dad80 */
 
 /* Supplied declaration required: FUN_002a2dc8. */
@@ -29,21 +29,21 @@ void FUN_001c0998(unsigned int param_1,int param_2)
   int temp_v1;
   unsigned int temp_v2;
   
-  temp_v1 = DAT_00464b8c;
+  temp_v1 = sceneGroup1Root;
   if (param_2 != 1) {
     if (param_2 == 2) {
       temp_v0 = 0;
-      temp_v1 = DAT_00464b94;
+      temp_v1 = sceneGroup2Root;
       FUN_002a2dc8(temp_v0);
     }
     else {
-      temp_v1 = DAT_00464b90;
+      temp_v1 = sceneGroup4Root;
       if (param_2 != 4) {
         if (param_2 != 5) {
           return;
         }
         temp_v0 = 1;
-        temp_v1 = DAT_00464b98;
+        temp_v1 = sceneGroup5Root;
         FUN_002a2dc8(temp_v0);
       }
     }

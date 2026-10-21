@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001af84c(...);
 int FUN_00290994(...);
 int FUN_0029a17c(...);
-int FUN_0029acc4(...);
+void drawSkillCategoryLabel(unsigned short, int, int, unsigned int);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002bf288(...);
@@ -39,9 +39,9 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int FUN_002886b0(unsigned int);
 extern int FUN_002886c8(unsigned int);
 /* Supplied declaration required: FUN_00290994. */
-extern int FUN_00298e20(unsigned int);
+extern int questIsCompleted(unsigned int);
 /* Supplied declaration required: FUN_0029a17c. */
-/* Supplied declaration required: FUN_0029acc4. */
+/* Supplied declaration required: drawSkillCategoryLabel. */
 extern int FUN_0029d644(int);
 extern int FUN_0029d65c(int);
 extern int FUN_0029efa8(int);
@@ -125,7 +125,7 @@ void FUN_001a6d98(void)
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           FUN_002be5a4(2,temp_v6,temp_v13,(int)*(short *)(temp_v5 + 8));
           temp_v5 = FUN_002bf4f8(0x29,0x9a);
-          FUN_0029acc4(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
+          drawSkillCategoryLabel(temp_v11,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f);
           temp_v5 = FUN_002bf4f8(0x29,0x9d);
           temp_v8 = FUN_002886c8(temp_v11);
@@ -204,7 +204,7 @@ void FUN_001a6d98(void)
     VectorSignedToFloat((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002be5a4(3,temp_v11,temp_v13,(int)*(short *)(temp_v12 + 8));
-    temp_v12 = FUN_00298e20(temp_v6);
+    temp_v12 = questIsCompleted(temp_v6);
     temp_v4 = *(short *)(temp_v10 + 10) + temp_v2;
     temp_v5 = *(short *)(temp_v10 + 8) + temp_v1;
     if (temp_v12 != 0) {
@@ -214,7 +214,7 @@ void FUN_001a6d98(void)
       FUN_002bf288(2,0x29,0xaf,temp_v5,temp_v4,0xab);
     }
     temp_v12 = FUN_002bf4f8(0x29,0xb1);
-    FUN_0029acc4(temp_v6,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
+    drawSkillCategoryLabel(temp_v6,(int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v1,
                  (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,0xb0);
     temp_v12 = FUN_002bf4f8(0x29,0xb4);
     temp_v4 = FUN_002886c8(temp_v6);

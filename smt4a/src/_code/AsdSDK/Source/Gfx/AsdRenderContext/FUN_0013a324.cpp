@@ -16,7 +16,7 @@ extern unsigned char LAB_0013a390; /* 0x13a390 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00145adc. */
-extern int FUN_0015a21c(int);
+extern int floatPairClear(int);
 /* Supplied declaration required: FUN_00178b04. */
 
 
@@ -31,9 +31,9 @@ void FUN_0013a324(void)
   FUN_00178b04(0x13a8,&LAB_0013a390,0x24);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0015a21c(temp_v0 + 0x4a0);
-    temp_v1 = FUN_0015a21c(temp_v1 + 0x700);
-    temp_v0 = FUN_0015a21c(temp_v1 + 0x50c);
+    temp_v1 = floatPairClear(temp_v0 + 0x4a0);
+    temp_v1 = floatPairClear(temp_v1 + 0x700);
+    temp_v0 = floatPairClear(temp_v1 + 0x50c);
     temp_v1 = temp_v0 - 0x10ac;
     *(unsigned int *)(temp_v0 + 300) = 0x3f800000;
     *(unsigned int *)(temp_v0 + 0x130) = 0x3f800000;

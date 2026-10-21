@@ -1,16 +1,17 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024b280` (_code @ 0x24b280, 0x31c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
 int FUN_001760cc(int);
 int jyoucyuGetTableEntry(int);
-int FUN_001b57a8(unsigned int *, int);
+int resultPairInitialize(unsigned int *, int);
 int FUN_001d0fcc(int *, int);
 int FUN_00429f38(void);
 int aocClearDisplayFlag(int);
-int FUN_0046e2d0(int);
+void aocResetOperationState(AocSystemA*);
 int FUN_0046f3ac(int *, int);
 int flagObjAdvance(int);
 int FUN_0047306c(int, int, int, int);
@@ -33,14 +34,13 @@ extern int g_aocSystem; /* 0x570280 */
 #endif
 /* Supplied declaration required: FUN_001760cc. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-extern int FUN_001af210(int);
-/* Supplied declaration required: FUN_001b57a8. */
+extern int sysLightEventTryWait(int);
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int *FUN_001b5acc(unsigned int *);
 /* Supplied declaration required: FUN_001d0fcc. */
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_00429f38. */
 /* Supplied declaration required: aocClearDisplayFlag. */
-/* Supplied declaration required: FUN_0046e2d0. */
 /* Supplied declaration required: FUN_0046f3ac. */
 /* Supplied declaration required: flagObjAdvance. */
 /* Supplied declaration required: FUN_0047306c. */
@@ -78,7 +78,7 @@ unsigned int FUN_0024b280(void)
   puVar1[2] = 0;
   puVar1[3] = 0;
   puVar2 = (unsigned int *)&uStack_38;
-  FUN_001b57a8(puVar2,0);
+  resultPairInitialize(puVar2,0);
   temp_v4 = puVar2[1];
   *puVar1 = *puVar2;
   puVar1[1] = temp_v4;
@@ -93,7 +93,7 @@ unsigned int FUN_0024b280(void)
     FUN_001760cc(g_aocSystem);
     jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
     *(unsigned char *)(temp_v0 + 9) = 0;
-    temp_v0 = FUN_001af210(g_aocMain + 0x98);
+    temp_v0 = sysLightEventTryWait(g_aocMain + 0x98);
     if (temp_v0 != 0) {
       *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
     }
@@ -101,7 +101,7 @@ unsigned int FUN_0024b280(void)
   else {
     switch(*(unsigned char *)(temp_v0 + 8)) {
     case 0:
-      temp_v1 = FUN_001af210(temp_v3 + 0x98);
+      temp_v1 = sysLightEventTryWait(temp_v3 + 0x98);
       temp_v3 = g_aocMain;
       temp_v2 = 0;
       if (temp_v1 != 0) {
@@ -112,7 +112,7 @@ unsigned int FUN_0024b280(void)
       if (temp_v2 != 0) {
         *(unsigned char *)(temp_v0 + 8) = 1;
         *(unsigned char *)(g_aocMain + 0xd50) = 1;
-        FUN_0046e2d0(g_aocSystem);
+        aocResetOperationState((AocSystemA*)g_aocSystem);
       }
       else {
         jyoucyuGetTableEntry(0);
@@ -152,7 +152,7 @@ unsigned int FUN_0024b280(void)
       FUN_001760cc(g_aocSystem);
       jobOwnerFreeSlotAndStop(temp_v0 + 0xc);
       *(unsigned char *)(temp_v0 + 9) = 0;
-      temp_v0 = FUN_001af210(g_aocMain + 0x98);
+      temp_v0 = sysLightEventTryWait(g_aocMain + 0x98);
       if (temp_v0 != 0) {
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       }

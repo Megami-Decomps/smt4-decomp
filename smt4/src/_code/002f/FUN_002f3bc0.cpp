@@ -1,32 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f3bc0` (_code @ 0x2f3bc0, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: all instructions match, but the record address/value use r2/r0 rather than retail r0/r2. */
+#include "map/mapIf.h"
+#include "shard/Shard0036.h"
 
 extern "C" {
+extern MapIfGlobals g_mapIf;
 
-extern int g_mapIf; /* 0x447a78 */
-
-
+// Return the selected active map-interface categories from state eight to six.
 void FUN_002f3bc0(void)
-
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = g_mapIf;
-  temp_v2 = 0;
-  do {
-    temp_v1 = temp_v0 + temp_v2 * 0x194;
-    if ((*(char *)(temp_v1 + 0x1d0) != '\0') &&
-       (((temp_v3 = *(int *)(temp_v1 + 0x1e4), temp_v3 == 0x1d || temp_v3 == 0x26 ||
-         ((temp_v3 == 0x1e || temp_v3 == 0x1f) || temp_v3 == 0x25)) && (*(int *)(temp_v1 + 0x1d4) == 8)))) {
-      *(unsigned int *)(temp_v1 + 0x1d4) = 6;
+    MapIfState *state = g_mapIf.state;
+    for (s32 index = 0; index < 128; ++index) {
+        Rec194 &record = mapIfGetRecords(state)[index];
+        if (record.active != 0) {
+            s32 category = record.display.category;
+            if ((category == 0x1d || category == 0x26 ||
+                 category == 0x1e || category == 0x1f || category == 0x25) &&
+                record.state == 8)
+                record.state = 6;
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x80);
-  return;
 }
-
-} /* extern "C" */
+}

@@ -11,18 +11,18 @@ typedef struct GameOptions {
 } GameOptions;
 
 s32 scrSetResult(s32 value);
-GameOptions *gameGetOptions(void);
-s32 FUN_002b6b38(void);
+GameOptions *gameGetSupportUnitData(void);
+s32 gameGetOptionProgressStatus(void);
 s32 randNextInRange(u16 range);
 
-/* Script command: with FUN_002b6b38() == 1, picks one of the options' non-zero choices at random; the result defaults to 2. */
+/* Script command: with gameGetOptionProgressStatus() == 1, picks one of the options' non-zero choices at random; the result defaults to 2. */
 u32 FUN_002f607c(void)
 {
     u16 result = 2;
 
-    if (FUN_002b6b38() == 1) {
+    if (gameGetOptionProgressStatus() == 1) {
         s32 count = 1;
-        GameOptions *options = gameGetOptions();
+        GameOptions *options = gameGetSupportUnitData();
         s32 pick;
 
         if (options->choiceA != 0) {

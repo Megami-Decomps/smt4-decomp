@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e7210` (_code @ 0x3e7210, 0x174 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_WaveArchiveReader.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002358b4. */
-extern unsigned int FUN_002a7a3c(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00379c18. */
 /* Supplied declaration required: FUN_00379c90. */
 /* Supplied declaration required: FUN_0037b174. */
@@ -78,7 +78,7 @@ void FUN_003e7210(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v13 = 0;
   temp_v0 = FUN_003e6334(param_2,temp_v6,*param_4,param_4[1],param_4[2]);
   if (temp_v0 != 0) {
-    temp_v1 = FUN_002a7a3c(param_3,temp_v7);
+    temp_v1 = (unsigned int)FUN_002a7a3c((const WaveArchiveReader*)param_3,temp_v7);
     FUN_0037b174(temp_v5,temp_v1);
     temp_v0 = nw_snd_internal_WaveFileReader_ReadWaveInfo(temp_v5,temp_v3,0);
     if (temp_v0 != 0) {

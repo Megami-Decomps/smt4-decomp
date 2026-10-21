@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002941b0(void);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 extern int g_gameState; /* 0x5f15fc */
 
@@ -17,7 +17,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Supplied declaration required: FUN_002941b0. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 unsigned int FUN_0029d6f0(void)
@@ -36,7 +36,7 @@ unsigned int FUN_0029d6f0(void)
       return 1;
     }
   }
-  else if ((romwright_fabs_4(in_s1 - in_s4) < in_s7) && (FUN_002b5cb4(), in_s0 < in_s6)) {
+  else if ((romwright_fabs_4(in_s1 - in_s4) < in_s7) && (distSpatial(), in_s0 < in_s6)) {
     return 1;
   }
   return 0;

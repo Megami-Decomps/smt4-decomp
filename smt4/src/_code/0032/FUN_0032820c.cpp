@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0020ffa0(unsigned int, int);
+int sceneAttachLightChild(unsigned int, int);
 int FUN_00265b78(int, int);
 
 extern int g_lmapMainState; /* 0x447060 */
 
-/* Supplied declaration required: FUN_0020ffa0. */
+/* Supplied declaration required: sceneAttachLightChild. */
 /* Supplied declaration required: FUN_00265b78. */
 
 
@@ -72,7 +72,7 @@ void FUN_0032820c(int param_1)
         FUN_00265b78(temp_v2,0);
       }
       else {
-        FUN_0020ffa0(*(unsigned int *)(temp_v1 + 0xa9c),temp_v2);
+        sceneAttachLightChild(*(unsigned int *)(temp_v1 + 0xa9c),temp_v2);
         if ((g_lmapMainState != 0) &&
            (temp_v5 = g_lmapMainState + temp_v2 * 0x88, *(char *)(temp_v5 + 0xb30) == '\0')) {
           *(unsigned char *)(temp_v5 + 0xb30) = 1;

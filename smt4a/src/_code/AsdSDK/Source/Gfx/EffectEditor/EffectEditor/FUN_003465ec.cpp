@@ -11,7 +11,7 @@ int memAlloc(...);
 int FUN_00200bcc(...);
 int FUN_00202178(...);
 int effEditorNodeChainApply(...);
-int FUN_00243ce8(...);
+int asdDebugLog(...);
 int FUN_002b3fd8(int, int, int, int);
 int FUN_002cf28c(...);
 int effMenuListAppend(void);
@@ -77,7 +77,7 @@ extern int FUN_00163fd4(unsigned int);
 /* Supplied declaration required: FUN_00200bcc. */
 /* Supplied declaration required: FUN_00202178. */
 /* Supplied declaration required: effEditorNodeChainApply. */
-/* Supplied declaration required: FUN_00243ce8. */
+/* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: FUN_002b3fd8. */
 /* Supplied declaration required: FUN_002cf28c. */
 /* Supplied declaration required: effMenuListAppend. */
@@ -752,7 +752,7 @@ LAB_00346d7c:
   *(unsigned int *)(temp_v4 + 0x14) = 0x40;
   *(unsigned int *)(temp_v4 + 0x18) = 0xffffffff;
   effMenuListAppend();
-  FUN_00243ce8(0xa4,0x44,8,&LAB_00347650,temp_v21);
+  asdDebugLog(0xa4,0x44,8,&LAB_00347650,temp_v21);
   temp_v4 = padButtonIsPressed(1);
   if (temp_v4 == 0) {
     FUN_00202178(1);

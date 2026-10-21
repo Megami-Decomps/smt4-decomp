@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_002c28dc(float [18], int);
+int collisionTestProjectedSpherePlanes(float [18], int);
 int FUN_002c2a58(int, int);
 
 /* stack frame of param_3: 2 slot(s), 8 byte(s) */
@@ -36,7 +36,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_002c28dc. */
+/* Supplied declaration required: collisionTestProjectedSpherePlanes. */
 /* Supplied declaration required: FUN_002c2a58. */
 
 
@@ -117,7 +117,7 @@ int FUN_00330108(float *param_1,float *param_2,float *param_3)
                 temp_v19[0] = temp_v6;
               }
               else {
-                FUN_002c28dc(temp_v19,(int)*(char *)(temp_v0 + 4));
+                collisionTestProjectedSpherePlanes(temp_v19,(int)*(char *)(temp_v0 + 4));
               }
               if ((float)temp_v16 <= temp_v19[0]) {
                 temp_v11 = ((float)temp_v17 + temp_v19[0]) / (float)((unsigned long long)temp_v17 >> 0x20);

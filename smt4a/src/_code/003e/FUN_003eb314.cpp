@@ -20,8 +20,8 @@ int VectorUnsignedToFloat(unsigned int, int);
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: FUN_001f4da0. */
-extern unsigned int FUN_00261424(void);
-extern int FUN_002626e0(void);
+extern unsigned int gameDataGetTableValue(void);
+extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: clearTwoWords. */
@@ -148,9 +148,9 @@ void FUN_003eb314(int param_1,unsigned char *param_2,unsigned short *param_3)
   *(unsigned int *)(param_2 + 0x19d) = 0;
   *(unsigned int *)(param_2 + 0x1a1) = 0;
   param_2[0x1a5] = 0;
-  temp_v3 = FUN_002626e0();
+  temp_v3 = gameProgressIsAdvanced();
   if (temp_v3 != 0) {
-    temp_v8 = FUN_00261424();
+    temp_v8 = gameDataGetTableValue();
     temp_v12 = 0.0f;
     temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v2 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v10) << 0x1d);
@@ -221,7 +221,7 @@ void FUN_003eb314(int param_1,unsigned char *param_2,unsigned short *param_3)
     }
     *(short *)(param_2 + 0x10c) = temp_v4;
     *(short *)(param_2 + 0x10c) = temp_v6;
-    temp_v3 = FUN_002626e0();
+    temp_v3 = gameProgressIsAdvanced();
     if ((temp_v3 != 0) && (-1 < *(int *)(param_1 + 0xf0))) {
       temp_v3 = (int)*(short *)(param_2 + 2);
       FUN_001f4da0();

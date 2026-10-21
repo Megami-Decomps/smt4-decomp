@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int FUN_0017db04(int);
+extern int rangeGetEnd(int);
 
 
 void FUN_0016d304(int param_1)
@@ -18,7 +18,7 @@ void FUN_0016d304(int param_1)
   int temp_v0;
   int *piVar2;
   
-  temp_v0 = FUN_0017db04(param_1 + *(int *)(param_1 + 0x9c) * 0x4c + 4);
+  temp_v0 = rangeGetEnd(param_1 + *(int *)(param_1 + 0x9c) * 0x4c + 4);
   piVar2 = *(int **)(param_1 + 0xa8);
   *piVar2 = temp_v0;
   if ((unsigned int *)piVar2[3] != (unsigned int *)0x0) {

@@ -25,13 +25,13 @@ typedef struct Globals {
     /* 0x6A0 */ Table table;
 } Globals;
 
-extern Globals *DAT_005b4400;
+extern Globals *g_textureBindingState;
 
 /* Copies source `index` into the table (its value twice, and its total or count times the kind's
  * multiplier); index 16 clears the table's header and last value. */
 void FUN_001aa030(s32 index)
 {
-    Globals *globals = DAT_005b4400;
+    Globals *globals = g_textureBindingState;
     Table *table = &globals->table;
     Source *sources = globals->sources;
     Source *source;

@@ -1,31 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2bf4` (_code @ 0x2c2bf4, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match6_CompactSortRecord.h"
 
 extern "C" {
 
-int FUN_003c3f1c(void);
-
-/* Supplied declaration required: FUN_003c3f1c. */
-
-
-int FUN_002c2bf4(unsigned short *param_1,unsigned short *param_2)
-
+s32 FUN_002c2bf4(const u16 *left, const u16 *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned short *puVar2;
-  int temp_v0;
-  
-  puVar1 = (unsigned short *)(unsigned int)*param_1;
-  FUN_003c3f1c();
-  puVar2 = (unsigned short *)(unsigned int)*param_2;
-  FUN_003c3f1c();
-  temp_v0 = (*(unsigned char *)((int)puVar2 + 3) & 0x1f) - (*(unsigned char *)((int)puVar1 + 3) & 0x1f);
-  if ((temp_v0 == 0) && (temp_v0 = (unsigned int)(unsigned char)puVar1[1] - (unsigned int)(unsigned char)puVar2[1], temp_v0 == 0)) {
-    temp_v0 = (unsigned int)*puVar1 - (unsigned int)*puVar2;
-  }
-  return temp_v0;
+    CompactSortRecord *leftRecord = findSkillMetadataById(*left);
+    CompactSortRecord *rightRecord = findSkillMetadataById(*right);
+    s32 result = (rightRecord->flags & 0x1f) - (leftRecord->flags & 0x1f);
+    if (result == 0) {
+        result = leftRecord->category - rightRecord->category;
+        if (result == 0)
+            result = leftRecord->id - rightRecord->id;
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

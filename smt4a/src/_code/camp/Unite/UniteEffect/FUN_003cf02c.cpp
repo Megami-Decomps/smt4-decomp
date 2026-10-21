@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(...);
 int scrScriptProcessDestroy(...);
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int FUN_003180c4(...);
 int FUN_00336de4(...);
 int btlTalkBustUpReleaseContent(void);
@@ -29,7 +29,7 @@ int uniteCameraDestroy(void);
 int FUN_003d2158(...);
 int FUN_003d2a00(...);
 int FUN_0040c190(...);
-int FUN_004ff920(...);
+int candidateGetPreferredValue(...);
 
 int FUN_0013c174(...);
 int FUN_00163aa4(...);
@@ -48,8 +48,8 @@ int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
 int FUN_0040aad4(...);
 int FUN_0040ab7c(...);
-int FUN_0040ace8(...);
-int FUN_004ff364(unsigned int, int);
+int handleRegistryRegisterObject(...);
+int asdAnimGetTrackLastFrame(unsigned int, int);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(unsigned int, double);
 
@@ -93,9 +93,9 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019eb14. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_001fc348. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -123,11 +123,11 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040c190. */
-/* Supplied declaration required: FUN_004ff364. */
-/* Supplied declaration required: FUN_004ff920. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
+/* Supplied declaration required: candidateGetPreferredValue. */
 extern int FUN_004ffba8(unsigned int);
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -166,7 +166,7 @@ unsigned int FUN_003cf02c(void)
   temp_v18 = 0x3f800000;
   FUN_00163aa4(DAT_0057f2c4 + 0x964);
   *(int *)(temp_v2 + 0x88) = *(int *)(temp_v2 + 0x88) + 2;
-  FUN_004ff364(*(unsigned int *)(temp_v2 + 0x8c),0);
+  asdAnimGetTrackLastFrame(*(unsigned int *)(temp_v2 + 0x8c),0);
   temp_v16 = (float)(int)temp_v16;
   __aeabi_idivmod(*(unsigned int *)(temp_v2 + 0x88),temp_v16);
   *(unsigned int *)(temp_v2 + 0x88) = temp_v7;
@@ -216,7 +216,7 @@ unsigned int FUN_003cf02c(void)
     if (((temp_v6 != 0) && (temp_v6 = FUN_00163e84(1), temp_v6 != 0)) &&
        (*(char *)(temp_v2 + 0x61a) != '\0')) {
       temp_v6 = *(int *)(*(int *)(temp_v2 + 0x90) + 4);
-      FUN_0040ace8(g_handleRegistry,temp_v6);
+      handleRegistryRegisterObject(g_handleRegistry,temp_v6);
       FUN_003fe86c(temp_v6,0,2);
       *(unsigned int *)(temp_v6 + 4) = *(unsigned int *)(temp_v6 + 4) & 0xfffffffc;
       temp_v6 = *(int *)(temp_v2 + 0x98);
@@ -327,7 +327,7 @@ unsigned int FUN_003cf02c(void)
       FUN_00178b04(0x20,&LAB_003cf760,0x300);
       temp_v5 = 0;
       if (temp_v6 != 0) {
-        temp_v5 = FUN_0040ac08();
+        temp_v5 = modelListInit();
       }
       *(unsigned int *)(temp_v2 + 0x94) = temp_v5;
       if (*(short *)(temp_v2 + 0x1e) == 2) {
@@ -382,7 +382,7 @@ unsigned int FUN_003cf02c(void)
       }
       uniteCameraDestroy();
       temp_v6 = *(int *)(*(int *)(temp_v2 + 0x94) + 4);
-      FUN_0040ace8(g_handleRegistry,temp_v6);
+      handleRegistryRegisterObject(g_handleRegistry,temp_v6);
       FUN_003fe86c(temp_v6,0,2);
       *(unsigned int *)(temp_v6 + 4) = *(unsigned int *)(temp_v6 + 4) & 0xfffffffc;
       temp_v6 = *(int *)(temp_v2 + 0x9c);
@@ -432,7 +432,7 @@ unsigned int FUN_003cf02c(void)
       break;
     }
     temp_v5 = *(unsigned int *)(*(int *)(temp_v2 + 0x90) + 4);
-    FUN_004ff920(temp_v5);
+    candidateGetPreferredValue(temp_v5);
     temp_v10 = 9;
     FUN_001517b4(9,1);
     temp_v6 = 0x28e;
@@ -620,7 +620,7 @@ LAB_003cf9bc:
     break;
   case 4:
     FUN_00163aa4();
-    temp_v6 = FUN_00224880(*(unsigned int *)(temp_v2 + 0x338));
+    temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x338));
     if ((temp_v6 != 2) || (*(char *)(temp_v2 + 0x6a6) == '\0')) break;
   case 5:
     temp_v4 = (unsigned int)*(unsigned short *)(temp_v2 + 0xc);
@@ -640,10 +640,10 @@ LAB_003cf9bc:
     break;
   case 6:
     FUN_00163aa4();
-    temp_v6 = FUN_00224880(*(unsigned int *)(temp_v2 + 0x338));
+    temp_v6 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x338));
     if ((temp_v6 == 2) && (*(char *)(temp_v2 + 0x6a6) != '\0')) {
-      FUN_001f4908(0,10,0xff);
-      FUN_001f4908(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
       soundChannelStopAll(10);
       temp_v6 = DAT_0057f2c4;
       *(unsigned int *)(DAT_0057f2c4 + 4) = 7;

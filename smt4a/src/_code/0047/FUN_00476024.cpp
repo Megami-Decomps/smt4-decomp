@@ -5,7 +5,7 @@ extern "C" {
 extern const u32 DAT_0055c68c[];
 extern const u32 DAT_0055c788[];
 WindowResult *FUN_001b5acc(WindowResult *result);
-WindowResult *FUN_001b57a8(WindowResult *result, s32 value);
+WindowResult *resultPairInitialize(WindowResult *result, s32 value);
 /* Initializes the base result and the derived window's extra state. */
 DerivedWindowInitState *FUN_00476024(DerivedWindowInitState *window)
 {
@@ -19,7 +19,7 @@ DerivedWindowInitState *FUN_00476024(DerivedWindowInitState *window)
     window->active = 0;
     window->base.reserved = 0;
     WindowResult result;
-    window->base.result = *FUN_001b57a8(&result, 0);
+    window->base.result = *resultPairInitialize(&result, 0);
     return window;
 }
 }

@@ -17,7 +17,7 @@ extern int DAT_00588fd4; /* 0x588fd4 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: dataTable00FindById. */
-extern unsigned int FUN_00261424(void);
+extern unsigned int gameDataGetTableValue(void);
 
 
 void FUN_0034dae0(int param_1,unsigned int param_2)
@@ -36,7 +36,7 @@ void FUN_0034dae0(int param_1,unsigned int param_2)
   float temp_v8;
   
   temp_v0 = DAT_00588fd4;
-  temp_v2 = FUN_00261424();
+  temp_v2 = gameDataGetTableValue();
   temp_v4 = 0.0f;
   temp_v8 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v3 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v8) << 0x1d);

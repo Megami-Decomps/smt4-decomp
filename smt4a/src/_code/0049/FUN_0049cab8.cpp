@@ -2,11 +2,11 @@
 
 extern "C" {
 
-extern u8 FUN_0019271c(void);
+extern u8 aocEntryGetKind(void);
 
 u8 FUN_0049cab8(void)
 {
-    return FUN_0019271c() == 10;
+    return aocEntryGetKind() == 10;
 }
 
 } /* extern "C" */

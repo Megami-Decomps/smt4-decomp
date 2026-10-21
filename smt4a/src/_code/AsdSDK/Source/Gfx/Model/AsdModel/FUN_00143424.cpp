@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001529a0(...);
 int FUN_0015493c(int, int *, unsigned int **, unsigned int **);
-int FUN_0015dda4(void);
+int drawableSetRectangle(void);
 int asdMemoryGetDefaultAllocator(void);
 int FUN_0017314c(int *, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -51,7 +51,7 @@ extern float DAT_005b3c44; /* 0x5b3c44 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001529a0. */
 /* Supplied declaration required: FUN_0015493c. */
-/* Supplied declaration required: FUN_0015dda4. */
+/* Supplied declaration required: drawableSetRectangle. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
 /* Supplied declaration required: FUN_0017314c. */
 
@@ -182,7 +182,7 @@ void FUN_00143424(void)
     FUN_001529a0(temp_v1,&temp_v9,&temp_v12,0);
     DAT_005b3c38 = temp_v1;
     *(float *)(temp_v1 + 0x294) = temp_v4 / DAT_005b3c44;
-    FUN_0015dda4();
+    drawableSetRectangle();
   }
   temp_v16 = (unsigned int)temp_v3;
   uStack_54 = (unsigned int)((unsigned long long)temp_v3 >> 0x20);

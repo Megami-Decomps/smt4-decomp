@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_0023d3c0(MovedPart *part, Vec3f *position);
+void providerEntrySetVector(MovedPart *part, Vec3f *position);
 void nodeSetTranslation(u32 node, s32 flags, Vec3f *translation);
 void FUN_00341bec(Mover *mover);
 
@@ -25,7 +25,7 @@ void FUN_00341a3c(Mover *mover)
         part->y = mover->position.y;
         part->z = mover->position.z;
         part->flags |= MOVED_PART_DIRTY;
-        FUN_0023d3c0(mover->parts[0], &mover->positionB);
+        providerEntrySetVector(mover->parts[0], &mover->positionB);
 
         if (mover->moveNode != 0) {
             mover->nodePosition.x += mover->nodeVelocity.x;
@@ -45,7 +45,7 @@ void FUN_00341a3c(Mover *mover)
             part->y = mover->position.y;
             part->z = mover->position.z;
             part->flags |= MOVED_PART_DIRTY;
-            FUN_0023d3c0(mover->parts[0], &mover->positionB);
+            providerEntrySetVector(mover->parts[0], &mover->positionB);
 
             if (mover->moveNode != 0) {
                 mover->nodePosition = mover->nodeFinalPosition;

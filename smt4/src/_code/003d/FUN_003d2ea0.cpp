@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00227ab4(int *, unsigned int *);
+int btlEntryValuesCopy(int *, unsigned int *);
 int FUN_00227b14(...);
 int FUN_002296f4(...);
 int FUN_0022a5d8(...);
@@ -22,7 +22,7 @@ typedef struct {
 extern int g_btlScriptUnit; /* 0x43427c */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00227ab4. */
+/* Supplied declaration required: btlEntryValuesCopy. */
 /* Supplied declaration required: FUN_00227b14. */
 /* Supplied declaration required: FUN_002296f4. */
 /* Supplied declaration required: FUN_0022a5d8. */
@@ -48,7 +48,7 @@ unsigned int FUN_003d2ea0(int *param_1,unsigned int *param_2)
   unsigned int temp_v5;
   
   FUN_002569ac(param_1,*(unsigned int *)(*param_1 + 0x84));
-  FUN_00227ab4(param_1,param_2);
+  btlEntryValuesCopy(param_1,param_2);
   temp_v0 = *(unsigned short *)(param_2[10] + 0xfa);
   if ((*param_2 & 0x1080) == 0) {
     temp_v5 = 0x32;

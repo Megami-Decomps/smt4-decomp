@@ -32,7 +32,7 @@ extern unsigned int DAT_00573a50; /* 0x573a50 */
 extern unsigned int DAT_00573a54; /* 0x573a54 */
 
 extern int gameGetSlotTable(void);
-extern int FUN_001b34b8(void);
+extern int gameOptionsClassifyMode(void);
 /* Supplied declaration required: FUN_003eb760. */
 /* Supplied declaration required: FUN_004ca63c. */
 /* Supplied declaration required: optionsApplyOverride. */
@@ -57,7 +57,7 @@ void FUN_003e87a8(fn_003e87a8_arg0 *param_1)
     FUN_004d9ebc((int)param_1->field_0x150);
   }
   else {
-    temp_v0 = FUN_001b34b8();
+    temp_v0 = gameOptionsClassifyMode();
     if ((int)param_1->field_0x3028 >= 1) {
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {

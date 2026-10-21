@@ -21,7 +21,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 extern int FUN_002eb5f4(void);
 extern int FUN_002ee978(int);
 extern int wordRefsEqual_002fd432(int *, unsigned int *);
-extern int FUN_002fd444(int);
+extern int textHolderSetDefault(int);
 extern int FUN_002fd454(int);
 
 
@@ -62,7 +62,7 @@ void FUN_00111a08(int param_1)
           FUN_002ea3d0(param_1,temp_v2);
           return;
         }
-        temp_v0 = FUN_002fd444(*piVar2 + 8);
+        temp_v0 = textHolderSetDefault(*piVar2 + 8);
         if ((temp_v0 << 0x1f < 0) && (temp_v0 = FUN_002fd454(*piVar2 + 8), temp_v0 != 0)) {
           puVar6 = (unsigned char *)0x111d0d;
           temp_v2 = FUN_002ea3c0(puVar5,puVar6,0,&LAB_00111ad0);

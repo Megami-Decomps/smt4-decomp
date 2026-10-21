@@ -7,8 +7,8 @@ extern "C" {
 int dataTable1bOr1cGetRecord(void);
 int gameFlagIsSet(...);
 
-extern int FUN_00240a6c(unsigned int);
-extern int FUN_00298e20(void);
+extern int questRequirementsMet(unsigned int);
+extern int questIsCompleted(void);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: gameFlagIsSet. */
 
@@ -26,14 +26,14 @@ unsigned int FUN_0028f1bc(unsigned int param_1)
   if (temp_v1 == 0) {
     return 0;
   }
-  temp_v2 = FUN_00240a6c(param_1);
+  temp_v2 = questRequirementsMet(param_1);
   if (temp_v2 == 0) {
     return 0;
   }
-  if ((*(short *)(temp_v1 + 0x1aa) != 0) && (temp_v2 = FUN_00298e20(), temp_v2 != 0)) {
+  if ((*(short *)(temp_v1 + 0x1aa) != 0) && (temp_v2 = questIsCompleted(), temp_v2 != 0)) {
     return 0;
   }
-  if ((*(short *)(temp_v1 + 0x1ac) != 0) && (temp_v2 = FUN_00298e20(), temp_v2 != 0)) {
+  if ((*(short *)(temp_v1 + 0x1ac) != 0) && (temp_v2 = questIsCompleted(), temp_v2 != 0)) {
     return 0;
   }
   if (param_1 < 0x15e) {

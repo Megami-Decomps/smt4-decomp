@@ -52,14 +52,14 @@ extern int FUN_00262614(int);
 /* Supplied declaration required: FUN_002de4d4. */
 /* Supplied declaration required: FUN_002edf08. */
 /* Supplied declaration required: FUN_002ef048. */
-extern int FUN_00313930(int);
+extern int flagCategoryIsAvailable(int);
 /* Supplied declaration required: FUN_00314c38. */
 /* Supplied declaration required: FUN_003273ac. */
 extern int FUN_00327540(int);
 /* Supplied declaration required: FUN_003276f0. */
 /* Supplied declaration required: FUN_00331efc. */
 extern int FUN_003683b8(int);
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 extern int FUN_003857c8(int);
 /* Supplied declaration required: FUN_00398004. */
 extern int FUN_003adc40(void);
@@ -95,7 +95,7 @@ void FUN_00239c24(void)
   
   temp_v3 = gameFlagsGetBlock();
   randRange(4);
-  temp_v4 = FUN_00376f94();
+  temp_v4 = lmapGetSpawnIndex();
   temp_v5 = FUN_003adc40();
   if (temp_v4 >= 0x65) {
     if (temp_v5 == 0) {
@@ -260,7 +260,7 @@ void FUN_00239c24(void)
       FUN_001bbf0c();
       temp_v4 = FUN_003857c8((int)*(float *)(temp_v3 + 0x15c4));
       if ((((*(char *)(temp_v3 + 0xe09) == '\0') || (temp_v5 = FUN_00262614(temp_v4), temp_v5 != 0)) ||
-          (*(int *)(temp_v3 + 0x15d0) != 0)) || (temp_v3 = FUN_00313930(temp_v4), temp_v3 != 0)) {
+          (*(int *)(temp_v3 + 0x15d0) != 0)) || (temp_v3 = flagCategoryIsAvailable(temp_v4), temp_v3 != 0)) {
         FUN_003276f0(temp_v4 + 0x186,1);
       }
       else {
@@ -279,7 +279,7 @@ void FUN_00239c24(void)
     }
   }
   temp_v3 = gameFlagsGetBlock();
-  temp_v4 = FUN_00376f94();
+  temp_v4 = lmapGetSpawnIndex();
   temp_v18 = 0x442f000043af0000;
   if (temp_v4 != 8) {
     DAT_0060ff88 = 0;

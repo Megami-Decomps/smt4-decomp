@@ -8,7 +8,7 @@ int cecProcessStart(void);
 int cecProcessDestroy(void);
 int FUN_00254600(int);
 int FUN_0025461c(void);
-int FUN_00262f68(unsigned int, int);
+int objectFlagsClear(unsigned int, int);
 int FUN_0026b9bc(void);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(void);
@@ -30,12 +30,12 @@ struct fn_002ece60_arg0 {
     undefined4 field_0xd5c; /* +0xd5c */
 };
 
-extern int FUN_0019e0c0(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: cecProcessDestroy. */
 /* Supplied declaration required: FUN_00254600. */
 /* Supplied declaration required: FUN_0025461c. */
-/* Supplied declaration required: FUN_00262f68. */
+/* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
@@ -59,14 +59,14 @@ unsigned int FUN_002ece60(fn_002ece60_arg0 *param_1)
   temp_v4 = 0;
   if (temp_v0 != 0) {
     if (temp_v0 != 1) {
-      if ((temp_v0 == 2) && (temp_v0 = FUN_0019e0c0(param_1->field_0xd04), temp_v0 == 2)) {
+      if ((temp_v0 == 2) && (temp_v0 = scrRunOpcodesStub(param_1->field_0xd04), temp_v0 == 2)) {
         param_1->field_0xd2c = 0xf;
         temp_v4 = 2;
         param_1->field_0xd38 = 0;
       }
     }
     else {
-      temp_v0 = FUN_0019e0c0(param_1->field_0xd04);
+      temp_v0 = scrRunOpcodesStub(param_1->field_0xd04);
       if (temp_v0 == 2) {
         temp_v0 = gameGetSlotTable();
         temp_v3 = 0;
@@ -76,7 +76,7 @@ unsigned int FUN_002ece60(fn_002ece60_arg0 *param_1)
             temp_v2 = flagWordTestBit(temp_v1,2);
             if (temp_v2 != 0) {
               temp_v1 = gameGetUnitRecord((int)*(char *)(temp_v0 + temp_v3 + 0x90f0));
-              FUN_00262f68(temp_v1,4);
+              objectFlagsClear(temp_v1,4);
             }
           }
           temp_v3 = temp_v3 + 1;

@@ -1,21 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlUnitGet` (_code @ 0x27e928, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges signed bounds into an unsigned check and changes return-block/address-add scheduling. */
+#include "common.h"
 
-extern "C" {
+struct BattleScriptContext {
+    /* 0x00 */ u8 unk00[0x84];
+    /* 0x84 */ s32 slotIndex;
+};
 
-extern int g_btlScriptUnit; /* 0x43427c */
+struct BattleActionSlot {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u8 unit[0xf18];
+};
 
+struct BattleActionState {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ BattleActionSlot* slots;
+};
 
-int btlUnitGet(int *param_1)
+extern "C" BattleActionState g_btlAction;
 
+// Resolve a script context's selected battle-unit slot.
+extern "C" int btlUnitGet(int* contextHandle)
 {
-  int temp_v0;
-  
-  if (((*param_1 != 0) && (temp_v0 = *(int *)(*param_1 + 0x84), -1 < temp_v0)) && (temp_v0 < 4)) {
-    return g_btlScriptUnit + temp_v0 * 0xf1c + 4;
-  }
-  return 0;
+    BattleScriptContext* context = (BattleScriptContext*)*contextHandle;
+    if (context != NULL) {
+        s32 index = context->slotIndex;
+        if (index >= 0 && index < 4)
+            return (int)&g_btlAction.slots[index].unit;
+    }
+    return 0;
 }
-
-} /* extern "C" */

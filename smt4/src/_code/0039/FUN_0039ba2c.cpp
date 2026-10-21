@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int FUN_0028f4b4(unsigned char [64], int);
 int FUN_002be5a4(int, unsigned int, unsigned char [64]);
 int FUN_002bed3c(void);
@@ -30,7 +30,7 @@ extern unsigned char DAT_0044cdc8; /* 0x44cdc8 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_0028f4b4. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -58,7 +58,7 @@ void FUN_0039ba2c(int param_1)
   float temp_v5;
   float temp_v6;
   
-  FUN_00231bb8(param_1 + 0x164,&temp_v5);
+  pairCopy(param_1 + 0x164,&temp_v5);
   temp_v0 = FUN_002c5d80(1,0);
   FUN_002bee04(g_titleScene,3,temp_v0);
   efctSetSpeed();

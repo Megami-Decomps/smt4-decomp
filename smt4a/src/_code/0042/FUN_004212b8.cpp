@@ -1,43 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004212b8` (_code @ 0x4212b8, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable state guard is shrink-wrapped before the push, and the zero index argument is loaded later than retail. */
+#include "common.h"
+
+struct MoriScene;
+struct MoriSceneModel;
+struct SceneModelContainer {
+    u8 unk00[8];
+    MoriScene *scene; // 0x08
+};
+struct SceneCompletionOwner {
+    u8 unk00[8];
+    SceneModelContainer *container; // 0x08
+    u8 unk0c[0x20];
+    s32 state; // 0x2c
+};
 
 extern "C" {
+MoriSceneModel *FUN_0040619c(MoriScene *scene, s32 index);
+u32 FUN_004ffa14(MoriSceneModel *model);
+u32 animationIsClipComplete(MoriSceneModel *model);
 
-int FUN_0040619c(int, int);
-
-/* Supplied declaration required: FUN_0040619c. */
-extern int FUN_004ff9b4(int);
-extern int FUN_004ffa14(void);
-
-
-unsigned char FUN_004212b8(int param_1)
-
+// In state three, require both completion predicates when a scene model exists.
+bool FUN_004212b8(SceneCompletionOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  
-  if (*(int *)(param_1 + 0x2c) != 3) {
-    temp_v2 = 0;
-  }
-  else {
-    temp_v2 = 1;
-    if (*(int *)(param_1 + 8) != 0) {
-      temp_v0 = *(int *)(*(int *)(param_1 + 8) + 8);
-      FUN_0040619c(temp_v0,0);
-      if (temp_v0 != 0) {
-        temp_v1 = FUN_004ffa14();
-        temp_v2 = temp_v1 != 0;
-        temp_v0 = FUN_004ff9b4(temp_v0);
-        if (temp_v0 == 0) {
-          temp_v2 = 0;
-        }
-      }
+    if (owner->state != 3) {
+        return false;
     }
-  }
-  return temp_v2;
+    bool complete = true;
+    if (owner->container != NULL) {
+        MoriSceneModel *model = FUN_0040619c(owner->container->scene, 0);
+        if (model != NULL) {
+            if (FUN_004ffa14(model) == 0) {
+                complete = false;
+            }
+            if (animationIsClipComplete(model) == 0) {
+                complete = false;
+            }
+        }
+    }
+    return complete;
 }
-
-} /* extern "C" */
+}

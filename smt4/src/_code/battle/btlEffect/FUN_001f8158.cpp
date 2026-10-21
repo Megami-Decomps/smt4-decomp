@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002218d4(void);
+int effectProcessCreate(void);
 int jobSetParent(unsigned int, unsigned int);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
@@ -25,7 +25,7 @@ extern int FUN_0020ee0c(...); /* 0x20ee0c */
 extern int btlEffectDestroy(...); /* 0x2c9fd0 */
 extern unsigned char g_btlEffect; /* 0x435d00 */
 
-/* Supplied declaration required: FUN_002218d4. */
+/* Supplied declaration required: effectProcessCreate. */
 /* Supplied declaration required: jobSetParent. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
@@ -43,7 +43,7 @@ void FUN_001f8158(unsigned int *param_1)
   taskCreateDraw(&LAB_001f8230,2,0,0,FUN_001e4a84,btlEffectDestroy,param_1,*param_1);
   param_1[0xe] = (unsigned int)puVar1;
   temp_v0 = 0;
-  FUN_002218d4();
+  effectProcessCreate();
   param_1[0xf] = temp_v0;
   jobSetParent(*param_1,temp_v0);
   puVar1 = &LAB_001f8244;

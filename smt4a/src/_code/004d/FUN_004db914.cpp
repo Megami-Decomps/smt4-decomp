@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00184310(void);
 int FUN_0023e32c(...);
 int dataTable5GetEntries(void);
-int FUN_004dc214(unsigned short *, int, unsigned int, int);
+int uniteFindClosestEligibleCandidate(unsigned short *, int, unsigned int, int);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ extern int gameGetSlotTable(void);
 extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: dataTable5GetEntries. */
 extern int FUN_003a8298(void);
-/* Supplied declaration required: FUN_004dc214. */
+/* Supplied declaration required: uniteFindClosestEligibleCandidate. */
 extern int FUN_004dc3b4(unsigned short *, unsigned short *, unsigned short *, unsigned int *);
 
 
@@ -117,7 +117,7 @@ unsigned int FUN_004db914(unsigned short *param_1,unsigned short *param_2,unsign
 LAB_004dba94:
     do {
       puVar16 = param_1;
-      FUN_004dc214(param_1,temp_v1,temp_v3,1);
+      uniteFindClosestEligibleCandidate(param_1,temp_v1,temp_v3,1);
       puVar9 = puVar16;
       FUN_00184310();
       puVar10 = (unsigned short *)(unsigned int)*puVar9;

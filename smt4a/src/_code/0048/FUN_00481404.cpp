@@ -1,26 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00481404` (_code @ 0x481404, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds the final flag test into conditional loads and merges the early zero returns differently. */
+#include "common.h"
+
+struct EntryCategory {
+    u32 firstId;
+    u32 lastId;
+    u8 type; // 0x08
+};
+struct FlaggedTableEntry {
+    u8 unk00[0x68];
+    u32 flags; // 0x68
+};
 
 extern "C" {
+EntryCategory *FUN_0019c06c(u32);
+FlaggedTableEntry *FUN_00192550(u16);
 
-int FUN_00192550(void);
-
-/* Supplied declaration required: FUN_00192550. */
-extern int FUN_0019c06c(void);
-
-
-void FUN_00481404(void)
-
+// Test the first entry flag only for the two supported entry categories.
+bool FUN_00481404(u16 id)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = FUN_0019c06c();
-  if ((temp_v0 != 0) && (*(char *)(temp_v0 + 8) == '\x01' || *(char *)(temp_v0 + 8) == '\f')) {
-    FUN_00192550();
-  }
-  return;
+    EntryCategory *category = FUN_0019c06c(id);
+    if (category == NULL || (category->type != 1 && category->type != 12))
+        return 0;
+    FlaggedTableEntry *entry = FUN_00192550(id);
+    if (entry == NULL)
+        return 0;
+    return (entry->flags & 1) != 0;
 }
-
-} /* extern "C" */
+}

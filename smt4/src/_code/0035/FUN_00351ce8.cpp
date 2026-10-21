@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0023a244(void);
 int FUN_00351dfc(unsigned int, unsigned int);
 int FUN_00351e54(unsigned int, unsigned int);
-int FUN_00352008(unsigned int, unsigned int, int);
+unsigned int FUN_00352008(unsigned int, unsigned int, unsigned char, unsigned char);
 
 /* stack frame of param_4: 1 slot(s), 1 byte(s) */
 typedef struct {
@@ -21,7 +21,6 @@ extern int FUN_0011c834(void);
 /* Supplied declaration required: FUN_00351dfc. */
 /* Supplied declaration required: FUN_00351e54. */
 extern int FUN_00351ef0(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_00352008. */
 extern int FUN_0035adf0(unsigned int);
 
 
@@ -52,7 +51,7 @@ void FUN_00351ce8(unsigned int param_1,unsigned int *param_2,unsigned int param_
       if (temp_v0 < 0) {
         return;
       }
-      FUN_00352008(param_1,param_1,0);
+      FUN_00352008(param_1,param_1,0,0);
     }
     FUN_00351dfc(param_1,*param_2);
   }

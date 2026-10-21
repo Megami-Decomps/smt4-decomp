@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023553c(int);
+int messageMainSetTargetFlags(int);
 int FUN_0029c43c(unsigned int, int);
 int FUN_0029ce60(unsigned int, int, int);
 int FUN_002a0cc8(int);
@@ -16,9 +16,9 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-extern int FUN_0019e0c0(unsigned int);
-extern int FUN_0023360c(int);
-/* Supplied declaration required: FUN_0023553c. */
+extern int scrRunOpcodesStub(unsigned int);
+extern int flaggedValueHolderGetTotal(int);
+/* Supplied declaration required: messageMainSetTargetFlags. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029c43c. */
 /* Supplied declaration required: FUN_0029ce60. */
@@ -34,13 +34,13 @@ void FUN_003a8240(int param_1)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0x5a0));
+  temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x5a0));
   if (temp_v0 != 2) {
     return;
   }
   temp_v0 = FUN_002973d8();
   if (temp_v0 == 0) {
-    temp_v0 = FUN_0023360c(param_1 + 0x20);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x5ac);
     FUN_0029ce60(temp_v1,*(unsigned char *)(param_1 + 0x5a5),0);
     FUN_0029c43c(-temp_v1,0);
@@ -51,7 +51,7 @@ void FUN_003a8240(int param_1)
     buttonHelpSetPreset(0x2d);
     return;
   }
-  FUN_0023553c(0);
+  messageMainSetTargetFlags(0);
   FUN_002a0cc8(0);
   *(unsigned int *)(param_1 + 0x14) = 2;
   *(unsigned int *)(param_1 + 0x18) = 0;

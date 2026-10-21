@@ -1,36 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023cb70` (_code @ 0x23cb70, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail uses a writeback flags pointer and a conditional branch rather than predicated flag updates. */
+#include "common.h"
 
-extern "C" {
+struct ScalarTransition {
+    u8 unk000[0x5ec]; // 0x000
+    f32 duration;      // 0x5ec
+    u8 unk5f0[0x40];  // 0x5f0
+    f32 previous;      // 0x630
+    u32 flags;         // 0x634
+    u8 unk638[0x70];  // 0x638
+    f32 current;       // 0x6a8
+    u32 first;         // 0x6ac
+    u32 counter;       // 0x6b0
+    u32 second;        // 0x6b4
+};
 
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_4_stack;
-
-
-void FUN_0023cb70(int param_1,unsigned int param_2,unsigned int param_3,int param_4)
-
+// Reset the scalar transition, optionally retaining its previous current value.
+extern "C" void FUN_0023cb70(ScalarTransition* transition, u32 first, u32 second, s32 preserve, f32 duration)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int in_s0;
-  
-  *(unsigned int *)(param_1 + 0x5ec) = in_s0;
-  *(unsigned int *)(param_1 + 0x6ac) = param_2;
-  *(unsigned int *)(param_1 + 0x6b0) = 0;
-  *(unsigned int *)(param_1 + 0x6b4) = param_3;
-  puVar1 = (unsigned int *)(param_1 + 0x634);
-  if (param_4 == 0) {
-    *puVar1 = *puVar1 | 0x400;
-  }
-  else {
-    *(unsigned int *)(param_1 + 0x630) = *(unsigned int *)(param_1 + 0x6a8);
-    *puVar1 = *puVar1 | 0x200400;
-  }
-  *(unsigned int *)(param_1 + 0x6a8) = 0;
-  return;
+    transition->duration = duration;
+    transition->first = first;
+    transition->counter = 0;
+    transition->second = second;
+    if (preserve == 0) {
+        transition->flags |= 0x400;
+    } else {
+        transition->previous = transition->current;
+        transition->flags |= 0x200400;
+    }
+    transition->current = 0.0f;
 }
-
-} /* extern "C" */

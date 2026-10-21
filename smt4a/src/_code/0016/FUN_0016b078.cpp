@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016b078` (_code @ 0x16b078, 0x7a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_MaterialPipeline.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int flagBitsMergeRange(...);
 int FUN_00192840(...);
 int FUN_001933b4(...);
 int FUN_00193840(...);
-int FUN_0019394c(...);
 int FUN_00193b40(...);
 int FUN_0019430c(...);
 int FUN_0019a270(...);
@@ -62,7 +62,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 extern unsigned short FUN_001932e0(int *, int *, unsigned short *, int);
 /* Supplied declaration required: FUN_001933b4. */
 /* Supplied declaration required: FUN_00193840. */
-/* Supplied declaration required: FUN_0019394c. */
+/* Supplied declaration required: modelEmitMaterialPipelineCommands. */
 /* Supplied declaration required: FUN_00193b40. */
 /* Supplied declaration required: FUN_001942a8. */
 /* Supplied declaration required: FUN_0019430c. */
@@ -236,7 +236,8 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
       *puVar12 = *puVar12 & ~(unsigned short)(int)pvVar4;
     }
     else {
-      FUN_0019394c(piVar13,piVar11,puVar12,temp_v15);
+      modelEmitMaterialPipelineCommands((MaterialPipelineInstance *)piVar13, (MaterialPipelineWriter *)piVar11,
+                   (MaterialPipelinePiece *)puVar12, (MaterialPipelineContext *)temp_v15);
       FUN_00193b40(piVar13,piVar11,puVar12);
       if ((*puVar12 & 1) != 0) {
         FUN_00193840(piVar13,piVar11,puVar12,temp_v15);
@@ -324,7 +325,8 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
       *puVar12 = *puVar12 & ~(unsigned short)(int)pvVar4;
     }
     else {
-      FUN_0019394c(piVar13,piVar11,puVar12,temp_v15);
+      modelEmitMaterialPipelineCommands((MaterialPipelineInstance *)piVar13, (MaterialPipelineWriter *)piVar11,
+                   (MaterialPipelinePiece *)puVar12, (MaterialPipelineContext *)temp_v15);
       FUN_00193b40(piVar13,piVar11,puVar12);
       if ((*puVar12 & 1) != 0) {
         FUN_00193840(piVar13,piVar11,puVar12,temp_v15);

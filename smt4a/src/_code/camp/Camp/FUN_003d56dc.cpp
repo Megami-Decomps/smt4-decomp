@@ -25,18 +25,18 @@ int FUN_00202ea4(void);
 int FUN_0021545c(void);
 int FUN_002309dc(void);
 int useCounterStart(void);
-int FUN_0028187c(...);
+int campCecScriptStart(...);
 int FUN_002bf534(...);
 int FUN_002e2404(...);
-int FUN_002e2680(...);
+int campCecSetObjectValue(...);
 int FUN_00319aec(...);
 int FUN_0032d388(...);
 int FUN_0034aae4(void);
 int sub68OwnerCall4(void);
-int FUN_0035d8a4(void);
+int useCounterRelease(void);
 int clearFlags310To31F(void);
 int FUN_003881e0(...);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int FUN_0039c244(void);
 int FUN_0039c2a4(...);
 int FUN_003d0bc0(...);
@@ -44,10 +44,10 @@ int flag0CSet(...);
 
 int FUN_0014afa8(void);
 int FUN_001517b4(void);
-int FUN_00164288(void);
+int workCommandRefreshActiveSlots(void);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int FUN_001fdde8(void);
 int FUN_00215bd0(void);
 int bgmFadeOut(...);
@@ -58,11 +58,11 @@ int FUN_00287598(void);
 int processQueryChain(void);
 int FUN_002a7b74(void);
 int FUN_002ab804(void);
-int FUN_002c2344(...);
+int frameTexSetValue(...);
 int FUN_002c8538(...);
-int FUN_002e1308(void);
+int dataTableAndTexRelease(void);
 int FUN_00312d6c(void);
-int FUN_0031fad8(void);
+int uniteValueRefresh(void);
 int FUN_0031fb04(void);
 int lmapMainCallIfActive(void);
 int gauntletAppMenuKillTask(void);
@@ -78,7 +78,7 @@ int FUN_0021b274(...);
 int FUN_002277d8(void);
 int FUN_0023b45c(...);
 int FUN_0023c08c(...);
-int FUN_0023f604(...);
+int campRebuildEnabledFlagList(...);
 int FUN_0026f7f0(void);
 int FUN_002a7324(...);
 int uniteSetMode(...);
@@ -89,7 +89,7 @@ int FUN_0032d0c8(...);
 int FUN_003492dc(void);
 int FUN_0035ab90(void);
 int FUN_0035dbd4(...);
-int FUN_0036b6cc(...);
+int arousalSkillOpen(...);
 int obj25CRefreshFlags(...);
 int FUN_0037e1b0(...);
 int FUN_003a7788(void);
@@ -105,7 +105,7 @@ int FUN_00284ee4(...);
 int FUN_0028b088(...);
 int menuItemPlaySe(...);
 int FUN_0031f718(...);
-int FUN_00334214(...);
+int statusDisplayBindUnitRecord(...);
 int FUN_003343c0(...);
 int objBInitBlock19D0(...);
 int FUN_0033449c(...);
@@ -118,10 +118,10 @@ int sysPlaySe(...);
 int FUN_001834a4(...);
 int FUN_0019de98(...);
 int FUN_0020d700(void);
-int FUN_0026fc00(...);
+void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(...);
 int FUN_002add8c(void);
-int FUN_002c2c4c(...);
+int widgetSubCallIfVisible(...);
 int FUN_002c39dc(...);
 int FUN_002e26c4(...);
 int rt_memclr(...);
@@ -159,12 +159,12 @@ extern unsigned char DAT_005f19ef; /* 0x5f19ef */
 /* Supplied declaration required: FUN_001517b4. */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: jobStop. */
-extern int FUN_0016345c(void);
+extern int querySlotHasHandle(void);
 /* Supplied declaration required: FUN_00163aa4. */
 extern int jobIsValid(unsigned int);
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_00164288. */
+/* Supplied declaration required: workCommandRefreshActiveSlots. */
 extern unsigned char FUN_001643a0(void);
 /* Supplied declaration required: FUN_001643b4. */
 extern int lmapMainIsRunning(void);
@@ -178,11 +178,11 @@ extern unsigned int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: FUN_0019de98. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTableFree. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_001fdde8. */
 /* Supplied declaration required: FUN_001ffe84. */
 /* Supplied declaration required: FUN_00202ea4. */
-extern int FUN_0020a2fc(void);
+extern int uniteStateIsDone(void);
 /* Supplied declaration required: FUN_0020b660. */
 /* Supplied declaration required: FUN_0020d700. */
 /* Supplied declaration required: FUN_0020dc1c. */
@@ -199,21 +199,20 @@ extern int playLogIsClosed(void);
 extern int FUN_0022a030(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_002309dc. */
-extern int FUN_00237608(void);
+extern int campCecHasObject(void);
 extern int FUN_00237620(void);
 extern int FUN_00239480(void);
 /* Supplied declaration required: playLogDestroy. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_0023b45c. */
-extern int FUN_0023c068(void);
+extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0023c08c. */
-/* Supplied declaration required: FUN_0023f604. */
+/* Supplied declaration required: campRebuildEnabledFlagList. */
 extern int gameDataBlocksGetTable(void);
 /* Supplied declaration required: FUN_0026f0c4. */
 /* Supplied declaration required: FUN_0026f7f0. */
-/* Supplied declaration required: FUN_0026fc00. */
-/* Supplied declaration required: FUN_0028187c. */
+/* Supplied declaration required: campCecScriptStart. */
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: msgWindowReset. */
 extern int FUN_00284e94(void);
@@ -232,7 +231,7 @@ extern int FUN_002a73f8(void);
 extern int FUN_002a7410(void);
 extern int FUN_002a746c(void);
 /* Supplied declaration required: FUN_002a7b74. */
-extern int FUN_002ab790(void);
+extern int uniteRequestGet(void);
 extern int uniteGetState(void);
 /* Supplied declaration required: FUN_002ab804. */
 /* Supplied declaration required: uniteSetMode. */
@@ -241,19 +240,19 @@ extern int uniteGetState(void);
 extern int FUN_002bf508(void);
 /* Supplied declaration required: FUN_002bf534. */
 extern int FUN_002bfd04(void);
-/* Supplied declaration required: FUN_002c2344. */
+/* Supplied declaration required: frameTexSetValue. */
 extern int FUN_002c2bd0(void);
-/* Supplied declaration required: FUN_002c2c4c. */
-extern int FUN_002c2c68(unsigned int *);
+/* Supplied declaration required: widgetSubCallIfVisible. */
+extern int objectApplyIfUnblocked(unsigned int *);
 /* Supplied declaration required: FUN_002c39dc. */
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_002c8538. */
 extern int FUN_002e07f4(void);
-/* Supplied declaration required: FUN_002e1308. */
+/* Supplied declaration required: dataTableAndTexRelease. */
 extern int campCecEditIsActive(void);
 extern int FUN_002e2054(void);
 /* Supplied declaration required: FUN_002e2404. */
-/* Supplied declaration required: FUN_002e2680. */
+/* Supplied declaration required: campCecSetObjectValue. */
 /* Supplied declaration required: FUN_002e26a4. */
 /* Supplied declaration required: FUN_002e26c4. */
 extern int FUN_002e27b8(void);
@@ -261,10 +260,10 @@ extern unsigned long long runtimeShiftLeftWide(unsigned int, unsigned int, int);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: FUN_002e738c. */
 extern int FUN_002ebce4(void);
-extern int FUN_002ebd74(void);
+extern int recordValueIsZero(void);
 extern int FUN_002ef9f0(void);
 extern int FUN_002f153c(void);
-extern int FUN_002f3b90(void);
+extern int uniteIsReady(void);
 /* Supplied declaration required: FUN_002f3bc4. */
 /* Supplied declaration required: FUN_002f78a0. */
 /* Supplied declaration required: menuItemPlaySe. */
@@ -276,7 +275,7 @@ extern int objIsNotInState0xF(void);
 /* Supplied declaration required: FUN_0031db84. */
 /* Supplied declaration required: FUN_0031f718. */
 extern int FUN_0031f90c(void);
-/* Supplied declaration required: FUN_0031fad8. */
+/* Supplied declaration required: uniteValueRefresh. */
 /* Supplied declaration required: FUN_0031fb04. */
 /* Supplied declaration required: lmapMainCallIfActive. */
 /* Supplied declaration required: FUN_0032d0c8. */
@@ -285,7 +284,7 @@ extern int FUN_003309e0(void);
 /* Supplied declaration required: FUN_00330b74. */
 /* Supplied declaration required: FUN_00331380. */
 extern int gameGlobalsGetState(void);
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: FUN_003343c0. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: objBInitBlock19D0. */
@@ -307,11 +306,11 @@ extern int campCecEditIsStateSixteen(void);
 /* Supplied declaration required: FUN_0035a094. */
 /* Supplied declaration required: FUN_0035ab90. */
 /* Supplied declaration required: campCommonBgRelease. */
-/* Supplied declaration required: FUN_0035d8a4. */
+/* Supplied declaration required: useCounterRelease. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_0035dbd4. */
 /* Supplied declaration required: clearFlags310To31F. */
-/* Supplied declaration required: FUN_0036b6cc. */
+/* Supplied declaration required: arousalSkillOpen. */
 extern int FUN_0036cf78(void);
 extern unsigned char FUN_0036d134(void);
 extern unsigned int dataTable15Sub0FindEntry(int);
@@ -324,16 +323,16 @@ extern int uiQuestGetStep(void);
 extern int FUN_0037d438(void);
 extern int obj14IsZero(void);
 /* Supplied declaration required: FUN_0037dab0. */
-extern int FUN_0037db9c(void);
+extern int partyPanelHasMembers(void);
 /* Supplied declaration required: FUN_0037e1b0. */
 extern int titleConfigIsClosed(void);
-extern int FUN_003881d0(void);
+extern int campCecGet(void);
 /* Supplied declaration required: FUN_003881e0. */
 /* Supplied declaration required: FUN_0038843c. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: gauntletAppMenuKillTask. */
 extern int FUN_0038b358(void);
-extern int FUN_0038b568(void);
+extern int aocDataBlockHasEntries(void);
 extern int flagAt4IsClear(void);
 /* Supplied declaration required: FUN_0039c0e4. */
 /* Supplied declaration required: FUN_0039c244. */
@@ -442,7 +441,7 @@ unsigned int FUN_003d56dc(void)
   puVar12 = g_camp;
   if ((((temp_v4 != 7 && temp_v4 != 8) && ((temp_v4 != 9 && temp_v4 != 0x1e) && temp_v4 != 0x1f)) &&
       (*(short *)(puVar2 + 0x1aa) != 3)) && (*(short *)(puVar2 + 0x1aa) != 4)) {
-    temp_v4 = FUN_002c2c4c(g_camp + 0x10);
+    temp_v4 = widgetSubCallIfVisible(g_camp + 0x10);
     FUN_00163aa4(puVar12 + 0x196);
     if ((*(short *)(puVar12 + 0x259) != 2) && (*(short *)(puVar12 + 0x259) != 10)) {
       temp_v10 = 0;
@@ -474,9 +473,9 @@ unsigned int FUN_003d56dc(void)
     FUN_00163aa4(puVar2 + 0x65f);
     puVar2[6] = puVar2[6] + 1;
     FUN_00163aa4(puVar2 + 0x58d);
-    temp_v4 = FUN_0020a2fc();
+    temp_v4 = uniteStateIsDone();
     if (((temp_v4 == 0) && (temp_v4 = uniteGetState(), temp_v4 == 3)) &&
-       (temp_v4 = FUN_002f3b90(), temp_v4 != 0)) {
+       (temp_v4 = uniteIsReady(), temp_v4 != 0)) {
       FUN_00163aa4(puVar2 + 0x222);
     }
   }
@@ -559,7 +558,7 @@ unsigned int FUN_003d56dc(void)
           }
         }
         else {
-          temp_v4 = FUN_00237608();
+          temp_v4 = campCecHasObject();
           if (temp_v4 != 0) {
             rt_memclr((int)puVar2 + 0x1b22,0x25);
           }
@@ -567,7 +566,7 @@ unsigned int FUN_003d56dc(void)
             FUN_002c39dc(1,0,0xffffffff);
           }
         }
-        temp_v7 = FUN_002c2c4c(puVar2 + 0x10);
+        temp_v7 = widgetSubCallIfVisible(puVar2 + 0x10);
         temp_v4 = 0;
         if (0 < (int)temp_v7) {
           pbVar20 = (unsigned char *)(puVar2 + 0x6db);
@@ -592,7 +591,7 @@ unsigned int FUN_003d56dc(void)
           }
         }
         else {
-          temp_v4 = FUN_00237608();
+          temp_v4 = campCecHasObject();
           if (temp_v4 != 0) {
             temp_v4 = FUN_002bf508();
             if (temp_v4 != 0) {
@@ -651,7 +650,7 @@ unsigned int FUN_003d56dc(void)
     }
     break;
   case 3:
-    FUN_0026fc00(0,1,0xffffffff);
+    campSetSpriteAnimationPreset(0,1,0xffffffff,0);
     *(unsigned char *)((int)puVar2 + 0xa5) = *(unsigned char *)(puVar2 + 0x29);
     *(unsigned char *)(puVar2 + 0x29) = *(unsigned char *)((int)puVar2 + 0xa6);
     FUN_0020d700();
@@ -704,7 +703,7 @@ unsigned int FUN_003d56dc(void)
     temp_v6 = FUN_003da8f4((int)*(char *)(puVar2 + 0x29),temp_v6);
     temp_v4 = puVar2[9];
     if (temp_v4 == 0x11) {
-      temp_v4 = FUN_002c2c68(puVar2 + 0x7b);
+      temp_v4 = objectApplyIfUnblocked(puVar2 + 0x7b);
       if (temp_v4 >= 1) {
         temp_v5 = 0x34;
         sysPlaySe(temp_v5);
@@ -799,7 +798,7 @@ unsigned int FUN_003d56dc(void)
               FUN_002f78a0(puVar2);
             }
           }
-          FUN_0026fc00(2,1,0xffffffff,0);
+          campSetSpriteAnimationPreset(2,1,0xffffffff,0);
           if (puVar2[10] != 0x30) {
             FUN_002add8c();
           }
@@ -869,7 +868,7 @@ unsigned int FUN_003d56dc(void)
       if (puVar7 != (unsigned int *)0x0) {
         if (*(char *)(puVar2 + 0x2e) != '\0') {
           FUN_0033449c(0);
-          FUN_00334214(&temp_v15,0,0);
+          statusDisplayBindUnitRecord(&temp_v15,0,0);
         }
         else {
           FUN_0033449c(1);
@@ -885,12 +884,12 @@ unsigned int FUN_003d56dc(void)
     if (temp_v4 == 0) {
       temp_v4 = FUN_0035db94();
       if (temp_v4 < 0) {
-        FUN_0026fc00(2,2,0xffffffff,0);
+        campSetSpriteAnimationPreset(2,2,0xffffffff,0);
       }
       else {
         temp_v4 = FUN_0035db94();
         if (0 < temp_v4) {
-          FUN_0026fc00(2,1,0xffffffff,0);
+          campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         }
       }
       sysPlaySe(0x52);
@@ -930,9 +929,9 @@ unsigned int FUN_003d56dc(void)
     if (temp_v4 != 0) {
       temp_v4 = flagValueIsPositive(puVar12[0xd]);
       if (temp_v4 == 0) {
-        FUN_0023f604(0xb);
+        campRebuildEnabledFlagList(0xb);
       }
-      temp_v4 = FUN_002c2c68(puVar12 + 0x30);
+      temp_v4 = objectApplyIfUnblocked(puVar12 + 0x30);
       if (temp_v4 < 1) {
         FUN_0021b274(3,0xffffffff,0);
         puVar12[9] = 6;
@@ -958,7 +957,7 @@ unsigned int FUN_003d56dc(void)
     if (temp_v4 == 0) {
       temp_v4 = 0x7b6;
       FUN_00192550();
-      FUN_0036b6cc(*(unsigned short *)(temp_v4 + 0x54));
+      arousalSkillOpen(*(unsigned short *)(temp_v4 + 0x54));
       puVar12[8] = puVar12[8] + 1;
       goto LAB_003d6870;
     }
@@ -987,17 +986,17 @@ LAB_003d6870:
         if (temp_v4 != 2) break;
       }
       else {
-        temp_v4 = FUN_002ebd74();
+        temp_v4 = recordValueIsZero();
         if (temp_v4 == 0) break;
         FUN_003492dc();
         puVar12[8] = 2;
       }
       temp_v4 = flagValueIsPositive(puVar12[0xcee]);
       if (temp_v4 == 0) {
-        FUN_0023f604(0xb);
+        campRebuildEnabledFlagList(0xb);
       }
       FUN_002277d8();
-      temp_v4 = FUN_002c2c68(puVar12 + 0x30);
+      temp_v4 = objectApplyIfUnblocked(puVar12 + 0x30);
       if (temp_v4 >= 1) {
         FUN_0021b274(1,0xffffffff,0);
         puVar12[9] = 10;
@@ -1076,7 +1075,7 @@ LAB_003d6870:
   case 0x17:
     temp_v4 = FUN_00284e94();
     if (temp_v4 != 0) {
-      temp_v4 = FUN_0037db9c();
+      temp_v4 = partyPanelHasMembers();
       if (temp_v4 != 0) {
         *(unsigned char *)(puVar12 + 0x29) = 4;
         *(unsigned char *)(puVar12 + 0x2a) = 2;
@@ -1085,7 +1084,7 @@ LAB_003d6870:
         FUN_002c39dc(1,0,0xffffffff);
       }
       if (*(char *)(puVar12 + 0xcaa) != '\0') {
-        temp_v4 = FUN_0037db9c();
+        temp_v4 = partyPanelHasMembers();
         if (temp_v4 == 0) {
           *(unsigned char *)(puVar12 + 0x29) = 1;
         }
@@ -1096,7 +1095,7 @@ LAB_003d6870:
       puVar12[9] = 6;
       FUN_0020b660(2);
       if (*(char *)(puVar12 + 0x29) != '\b') {
-        FUN_0026fc00(1,1,0xffffffff,0);
+        campSetSpriteAnimationPreset(1,1,0xffffffff,0);
         temp_v4 = FUN_0034919c();
         if (temp_v4 == 0) {
           FUN_0037c8e4(1,0);
@@ -1107,7 +1106,7 @@ LAB_003d6870:
       FUN_002add8c();
       temp_v0 = *(char *)(puVar12 + 0x29);
       if (temp_v0 == '\b') {
-        FUN_0026fc00(2,1,0xffffffff,0);
+        campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         uniteSetMode(3);
         FUN_0023c08c(0);
       }
@@ -1252,7 +1251,7 @@ LAB_003d6870:
       FUN_0020d700();
       FUN_0026f7f0();
       FUN_002c39dc(1,0,0xffffffff);
-      FUN_0026fc00(1,1,0xffffffff,0);
+      campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       puVar12[9] = 6;
       FUN_0020b660(2);
       temp_v4 = FUN_0034919c();
@@ -1287,7 +1286,7 @@ LAB_003d6870:
     }
     break;
   case 0x1f:
-    temp_v4 = FUN_002f3b90();
+    temp_v4 = uniteIsReady();
     if ((temp_v4 != 0) && (temp_v4 = loadSlotIsLoaded(0x1f), temp_v4 != 0)) {
       *(unsigned char *)((int)puVar2 + 0xb7) = 1;
       *(unsigned char *)(puVar2 + 0x2e) = 0;
@@ -1308,7 +1307,7 @@ LAB_003d6870:
       FUN_00163aa4(puVar2 + temp_v4 * 0x23 + 0x245);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 8);
-    if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (temp_v4 = FUN_0020a2fc(), temp_v4 != 0)) {
+    if ((*(char *)((int)puVar2 + 0x6e2) != '\0') && (temp_v4 = uniteStateIsDone(), temp_v4 != 0)) {
       FUN_0031d890();
       uniteSetMode(3);
       FUN_0026f7f0();
@@ -1319,9 +1318,9 @@ LAB_003d6870:
     }
     break;
   case 0x21:
-    temp_v4 = FUN_002ab790();
-    if ((temp_v4 == 0x10) && (temp_v4 = FUN_0023c068(), temp_v4 != 0)) {
-      FUN_001f4908(0,0x14,0xff);
+    temp_v4 = uniteRequestGet();
+    if ((temp_v4 == 0x10) && (temp_v4 = uniteNotBusy(), temp_v4 != 0)) {
+      slotSetRequest(0,0x14,0xff);
       FUN_0020b660(0x22);
       soundChannelStopAll(10);
       FUN_00287598();
@@ -1339,7 +1338,7 @@ LAB_003d6870:
     temp_v4 = FUN_00163e84(0);
     if (temp_v4 != 0) {
       FUN_0031fb04();
-      FUN_002e1308();
+      dataTableAndTexRelease();
       FUN_002c39dc(1,0,0xffffffff);
       FUN_00284ee4(1);
       puVar12 = g_camp;
@@ -1350,9 +1349,9 @@ LAB_003d6870:
       }
       *(unsigned char *)((int)puVar2 + 0xb7) = 0;
       FUN_0026f0c4();
-      temp_v4 = FUN_0016345c();
+      temp_v4 = querySlotHasHandle();
       if (temp_v4 != 0) {
-        FUN_00164288();
+        workCommandRefreshActiveSlots();
       }
       FUN_0020b660(3);
       FUN_003d54f8(0,10);
@@ -1369,7 +1368,7 @@ LAB_003d6870:
           bgmFadeOut(0x2d);
         }
       }
-      FUN_002c2344(1);
+      frameTexSetValue(1);
     }
     break;
   case 0x23:
@@ -1380,7 +1379,7 @@ LAB_003d6870:
       FUN_00163aa4(puVar2 + temp_v4 * 0x23 + 0x245);
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 8);
-    temp_v4 = FUN_002f3b90();
+    temp_v4 = uniteIsReady();
     if (temp_v4 != 0) {
       FUN_002f3bc4(&temp_v15,(int)*(char *)((int)puVar2 + 0xb9),(int)*(char *)(puVar2 + 0x2e));
       if (puVar13 != (unsigned int *)0x0) {
@@ -1388,7 +1387,7 @@ LAB_003d6870:
         if (temp_v4 != 0) {
           if (*(char *)(puVar2 + 0x2e) != '\0') {
             FUN_0033449c(0);
-            FUN_00334214(&temp_v15,0,1);
+            statusDisplayBindUnitRecord(&temp_v15,0,1);
           }
           else {
             FUN_0033449c(1);
@@ -1419,7 +1418,7 @@ LAB_003d6870:
       FUN_002add8c();
       FUN_0031d890();
       FUN_0026f7f0();
-      FUN_0026fc00(2,1,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,1,0xffffffff,0);
       puVar2[9] = 6;
       temp_v4 = 2;
       FUN_0020b660(temp_v4);
@@ -1453,7 +1452,7 @@ LAB_003d6870:
       }
       uniteSetMode(3);
       FUN_0023c08c(0);
-      FUN_0031fad8();
+      uniteValueRefresh();
     }
     break;
   case 0x25:
@@ -1473,7 +1472,7 @@ LAB_003d6870:
       puVar12 = g_camp;
       temp_v2 = FUN_003e42f0();
       *(unsigned char *)((int)puVar12 + 0x32b5) = temp_v2;
-      FUN_0026fc00(1,1,0xffffffff,0);
+      campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       FUN_0031d890();
       puVar2[9] = 6;
       FUN_0020b660(2);
@@ -1579,7 +1578,7 @@ LAB_003d6870:
     puVar12 = g_camp;
     temp_v4 = useCounterIsFinished();
     if (temp_v4 != 0) {
-      FUN_0035d8a4();
+      useCounterRelease();
       temp_v6 = FUN_002a4878(puVar12 + 0x10);
       FUN_003da8f4((int)*(char *)(puVar12 + 0x29),temp_v6);
       FUN_0028b088();
@@ -1716,7 +1715,7 @@ joined_r0x003d7c38:
   case 0x45:
     temp_v4 = FUN_002bfd04();
     if (temp_v4 != 0) {
-      temp_v4 = FUN_003881d0();
+      temp_v4 = campCecGet();
       if (temp_v4 == 0) {
 LAB_003d801c:
         FUN_0020d700();
@@ -1724,7 +1723,7 @@ LAB_003d801c:
         FUN_0037c8e4(1,0);
         FUN_0038843c();
         FUN_002f78a0(puVar2);
-        FUN_0026fc00(2,1,0xffffffff,0);
+        campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         temp_v4 = 1;
         FUN_0020b660(temp_v4);
         break;
@@ -1747,7 +1746,7 @@ LAB_003d801c:
           FUN_0038843c();
         }
         FUN_002f78a0(puVar2);
-        FUN_0026fc00(2,1,0xffffffff,0);
+        campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         temp_v4 = 1;
         FUN_0020b660(temp_v4);
       }
@@ -1757,14 +1756,14 @@ LAB_003d801c:
       if (temp_v4 == 0) {
         temp_v4 = FUN_002a4b74();
         if (temp_v4 != 0) {
-          FUN_0028187c(0x27);
+          campCecScriptStart(0x27);
           sysPlaySe(0x92);
           temp_v4 = puVar2[0xb] + 1;
           puVar2[0xb] = temp_v4;
           break;
         }
-        FUN_0026fc00(2,3,0xffffffff,0);
-        FUN_00388758(1);
+        campSetSpriteAnimationPreset(2,3,0xffffffff,0);
+        messageDismissNumericBanner(1);
         FUN_00319aec(0);
         FUN_0020b660(0x36);
         temp_v4 = 0;
@@ -1794,7 +1793,7 @@ LAB_003d801c:
     if (temp_v4 != 0) {
       if (temp_v4 != 1) {
         if ((temp_v4 == 2) && (temp_v4 = overlayIsNotBusy(), temp_v4 != 0)) {
-          temp_v4 = FUN_003881d0();
+          temp_v4 = campCecGet();
           if (temp_v4 != 0) {
             FUN_003881e0(0);
             FUN_003343f0(0);
@@ -1810,7 +1809,7 @@ LAB_003d801c:
       else {
         temp_v4 = FUN_002bfd04();
         if (temp_v4 != 0) {
-          FUN_002e2680(0);
+          campCecSetObjectValue(0);
           temp_v4 = puVar2[0xb] + 1;
           puVar2[0xb] = temp_v4;
         }
@@ -1847,7 +1846,7 @@ LAB_003d801c:
     else {
       temp_v4 = FUN_002bfd04();
       if (temp_v4 != 0) {
-        FUN_002e2680(0);
+        campCecSetObjectValue(0);
         FUN_0037c8e4(1,0);
         FUN_0038843c();
         FUN_002f78a0(puVar2);
@@ -1873,7 +1872,7 @@ LAB_003d801c:
       puVar12 = g_camp;
       temp_v2 = FUN_0036d134();
       *(unsigned char *)((int)puVar12 + 0x32b6) = temp_v2;
-      FUN_0026fc00(2,1,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,1,0xffffffff,0);
       FUN_0019de98(0,0xf4f4f4ff);
       temp_v4 = 1;
       FUN_0020b660(temp_v4);
@@ -1883,7 +1882,7 @@ LAB_003d801c:
     if (temp_v4 != 0) {
       *(unsigned char *)(puVar2 + 0x29) = 0xc;
       FUN_0020d700();
-      FUN_0026fc00(1,1,0xffffffff,0);
+      campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       puVar2[9] = 6;
       FUN_0020b660(2);
       FUN_002309dc();
@@ -1901,7 +1900,7 @@ LAB_003d801c:
       FUN_0020d700();
       puVar12 = g_camp;
       if (puVar2[7] != 0x3f) {
-        FUN_0026fc00(1,1,0xffffffff,0);
+        campSetSpriteAnimationPreset(1,1,0xffffffff,0);
         puVar2[9] = 6;
         FUN_0020b660(2);
         FUN_002309dc();
@@ -1909,7 +1908,7 @@ LAB_003d801c:
       }
       temp_v2 = FUN_0036d134();
       *(unsigned char *)((int)puVar12 + 0x32b6) = temp_v2;
-      FUN_0026fc00(1,1,0xffffffff,0);
+      campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       puVar2[9] = 6;
       FUN_0020b660(2);
       FUN_002309dc();
@@ -1920,8 +1919,8 @@ LAB_003d801c:
     if (temp_v4 == 0) {
       *(unsigned char *)(puVar2 + 0x29) = 0xd;
       FUN_0020d700();
-      FUN_002e2680(0);
-      FUN_0026fc00(1,1,0xffffffff,0);
+      campCecSetObjectValue(0);
+      campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       puVar2[9] = 6;
       FUN_0020b660(2);
       FUN_002309dc();
@@ -1936,13 +1935,13 @@ LAB_003d801c:
       *(unsigned char *)(puVar2 + 0x29) = temp_v2;
       FUN_0020d700();
       puVar2[9] = 6;
-      FUN_0026fc00(1,1,0xffffffff,0);
+      campSetSpriteAnimationPreset(1,1,0xffffffff,0);
       temp_v4 = 1;
       FUN_0020b660(temp_v4);
     }
     break;
   case 0x46:
-    temp_v4 = FUN_00237608();
+    temp_v4 = campCecHasObject();
     if (temp_v4 == 0) {
       temp_v4 = 0;
       while( 1 ) {
@@ -1966,10 +1965,10 @@ LAB_003d801c:
       *(unsigned char *)(puVar2 + 0x29) = temp_v2;
       FUN_0020d700();
       puVar2[9] = 6;
-      FUN_0026fc00(2,1,0xffffffff,0);
+      campSetSpriteAnimationPreset(2,1,0xffffffff,0);
       FUN_0019de98(0,0xf4f4f4ff);
       FUN_0020b660(1);
-      FUN_002e2680(0);
+      campCecSetObjectValue(0);
     }
     else {
       temp_v4 = FUN_002a2814();
@@ -1979,7 +1978,7 @@ LAB_003d801c:
         FUN_00284ee4(1);
         *(unsigned char *)(puVar2 + 0x29) = 9;
         FUN_0020d700();
-        FUN_0026fc00(1,1,0xffffffff,0);
+        campSetSpriteAnimationPreset(1,1,0xffffffff,0);
         puVar2[9] = 6;
         FUN_0020b660(2);
         FUN_002309dc();
@@ -1989,7 +1988,7 @@ LAB_003d801c:
   case 0x47:
     temp_v4 = FUN_002a21e8();
     if (temp_v4 != 0) {
-      temp_v4 = FUN_002c2c68(puVar2 + 0x7b);
+      temp_v4 = objectApplyIfUnblocked(puVar2 + 0x7b);
       if (temp_v4 < 1) {
         temp_v6 = 7;
       }
@@ -2002,7 +2001,7 @@ LAB_003d801c:
     }
     break;
   case 0x48:
-    temp_v4 = FUN_002ebd74();
+    temp_v4 = recordValueIsZero();
     if (temp_v4 != 0) {
       FUN_003492dc();
       FUN_0028b088(0);
@@ -2047,7 +2046,7 @@ LAB_003d801c:
   case 0x4c:
     temp_v4 = FUN_00284e94();
     if (temp_v4 != 0) {
-      temp_v4 = FUN_0037db9c();
+      temp_v4 = partyPanelHasMembers();
       if (temp_v4 != 0) {
         *(unsigned char *)(puVar12 + 0x29) = 4;
         *(unsigned char *)(puVar12 + 0x2a) = 2;
@@ -2056,7 +2055,7 @@ LAB_003d801c:
         FUN_002c39dc(1,0,0xffffffff);
       }
       if (*(char *)(puVar12 + 0xcaa) != '\0') {
-        temp_v4 = FUN_0037db9c();
+        temp_v4 = partyPanelHasMembers();
         if (temp_v4 == 0) {
           *(unsigned char *)(puVar12 + 0x29) = 1;
         }
@@ -2067,7 +2066,7 @@ LAB_003d801c:
       puVar12[9] = 6;
       FUN_0020b660(2);
       if (*(char *)(puVar12 + 0x29) != '\b') {
-        FUN_0026fc00(1,1,0xffffffff,0);
+        campSetSpriteAnimationPreset(1,1,0xffffffff,0);
         temp_v4 = FUN_0034919c();
         if (temp_v4 == 0) {
           FUN_0037c8e4(1,0);
@@ -2078,7 +2077,7 @@ LAB_003d801c:
       FUN_002add8c();
       temp_v0 = *(char *)(puVar12 + 0x29);
       if (temp_v0 == '\b') {
-        FUN_0026fc00(2,1,0xffffffff,0);
+        campSetSpriteAnimationPreset(2,1,0xffffffff,0);
         uniteSetMode(3);
         FUN_0023c08c(0);
       }
@@ -2086,9 +2085,9 @@ LAB_003d801c:
     break;
   case 0x4d:
     FUN_002bf4f4(0);
-    FUN_00388758(1);
-    FUN_001f4908(0,10,0xff);
-    FUN_001f4908(1,10,0xff);
+    messageDismissNumericBanner(1);
+    slotSetRequest(0,10,0xff);
+    slotSetRequest(1,10,0xff);
     FUN_0020b660(0x4f);
     DAT_005f19ef = 1;
     break;
@@ -2180,7 +2179,7 @@ LAB_003d801c:
     g_camp = (unsigned int *)0x0;
     break;
   case 0x56:
-    temp_v4 = FUN_0038b568();
+    temp_v4 = aocDataBlockHasEntries();
     if (temp_v4 != 0) {
       FUN_0020b660(0x55);
     }

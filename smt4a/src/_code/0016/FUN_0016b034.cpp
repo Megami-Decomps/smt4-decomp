@@ -1,25 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016b034` (_code @ 0x16b034, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: iterator termination comparisons have reversed operands relative to retail. */
+#include "common.h"
+
+struct GroupItem {
+    u8 unk00;
+    u8 enabled; // 0x01
+};
+
+struct ItemPointerList {
+    GroupItem **begin; // 0x00
+    GroupItem **end; // 0x04
+    GroupItem **capacity; // 0x08
+};
+
+struct GroupItemTable {
+    u8 unk000[0x114];
+    ItemPointerList groups[1]; // 0x114: variable-length group table
+};
 
 extern "C" {
-
-
-unsigned int FUN_0016b034(int param_1,int param_2)
-
+// Report whether any item in the selected group is enabled.
+s32 FUN_0016b034(GroupItemTable *table, s32 group)
 {
-  int *piVar1;
-  
-  param_1 = param_1 + param_2 * 0xc;
-  piVar1 = *(int **)(param_1 + 0x114);
-  while( 1 ) {
-    if (piVar1 == *(int **)(param_1 + 0x118)) {
-      return 0;
+    ItemPointerList *items = &table->groups[group];
+    for (GroupItem **item = items->begin; item != items->end; ++item) {
+        if ((*item)->enabled != 0) {
+            return 1;
+        }
     }
-    if (*(char *)(*piVar1 + 1) != '\0') break;
-    piVar1 = piVar1 + 1;
-  }
-  return 1;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: FUN_0015f858. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
@@ -38,7 +38,7 @@ void FUN_003e65a4(int param_1)
   if (temp_v0 != 0) {
     if (temp_v0 != 1) {
       if (temp_v0 == 2) {
-        temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x18));
+        temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
         if (temp_v0 != 2) {
           return;
         }
@@ -65,7 +65,7 @@ void FUN_003e65a4(int param_1)
       if (temp_v0 != 3) {
         return;
       }
-      temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x18));
+      temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18));
       if (temp_v0 != 2) {
         return;
       }

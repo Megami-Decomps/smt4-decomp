@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00178b04(...);
 int controllerSetDestination(...);
-int FUN_003fdb18(...);
+int controllerSetRotationEulerDegrees(...);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
 int FUN_0040aad4(...);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -24,12 +24,12 @@ extern unsigned char g_mapEntries; /* 0x580ca8 */
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 void FUN_003b51a4(void)
@@ -68,16 +68,16 @@ void FUN_003b51a4(void)
   FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0xa04);
   temp_v3 = 0;
   if (temp_v4 != 0) {
-    temp_v3 = FUN_0040ac08();
+    temp_v3 = modelListInit();
   }
   *(unsigned int *)(temp_v1 + 0x9c8) = temp_v3;
   FUN_0040aa6c();
   FUN_0040aad4(*(unsigned int *)(temp_v1 + 0x9c8),0);
   temp_v3 = *(unsigned int *)(*(int *)(temp_v1 + 0x9c8) + 4);
   controllerSetDestination(temp_v3,temp_v1 + 0x9b8);
-  FUN_003fdb18(temp_v3);
+  controllerSetRotationEulerDegrees(temp_v3);
   FUN_003fe86c(temp_v3,(int)*(short *)(temp_v1 + 0x9b6),2);
-  FUN_0040ace8(g_handleRegistry,temp_v3);
+  handleRegistryRegisterObject(g_handleRegistry,temp_v3);
   return;
 }
 

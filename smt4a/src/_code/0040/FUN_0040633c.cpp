@@ -1,47 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040633c` (_code @ 0x406348, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler shares a root+0x400 base for scalar stores instead of retail's separate vector bases; VSTM address setup/scheduling differs. */
+#include "shard/W5_W5Match1_RecordKeys.h"
 
-extern "C" {
-
-int FUN_002f5020(void);
-
-typedef struct fn_00406348_arg0 fn_00406348_arg0;
-struct fn_00406348_arg0 {
-    unsigned char pad_0x0[0x6a9];
-    undefined1 field_0x6a9; /* +0x6a9 */
-    unsigned char pad_0x6aa[0x6];
-    undefined4 field_0x6b0; /* +0x6b0 */
-    undefined4 field_0x6b4; /* +0x6b4 */
-    undefined4 field_0x6b8; /* +0x6b8 */
-    undefined4 field_0x6bc; /* +0x6bc */
-    undefined4 field_0x6c0; /* +0x6c0 */
-    undefined4 field_0x6c4; /* +0x6c4 */
-    undefined4 field_0x6c8; /* +0x6c8 */
-    undefined4 field_0x6cc; /* +0x6cc */
-    unsigned char pad_0x6d0[0x30];
-    undefined1 field_0x700; /* +0x700 */
+struct ElementVectorState {
+    u8 elements[8][0x70];
+    u8 unk380[0x329];
+    u8 active;
+    u8 unk6aa[6];
+    Vector4 first;
+    Vector4 second;
+    u8 unk6d0[0x30];
+    u8 enabled;
 };
 
-/* Supplied declaration required: FUN_002f5020. */
+
+extern "C" {
+void FUN_0045b580(void *element);
+void *FUN_002f5020(u8 *begin, void (*visit)(void *), u32 stride, u32 count);
 
 
-void FUN_0040633c(fn_00406348_arg0 *param_1)
-
+ElementVectorState *FUN_0040633c(ElementVectorState *state)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_002f5020();
-  param_1->field_0x6b0 = 0;
-  param_1->field_0x6b4 = 0;
-  param_1->field_0x6b8 = 0;
-  param_1->field_0x6bc = 0x3f800000;
-  param_1->field_0x6c0 = 0;
-  param_1->field_0x6c4 = 0;
-  param_1->field_0x6c8 = 0;
-  param_1->field_0x6cc = 0x3f800000;
-  param_1->field_0x700 = 0;
-  param_1->field_0x6a9 = 0;
-  return;
+    state = (ElementVectorState *)FUN_002f5020(&state->elements[0][0], FUN_0045b580,
+        sizeof(state->elements[0]), sizeof(state->elements) / sizeof(state->elements[0]));
+    state->first.x = 0.0f;
+    state->first.y = 0.0f;
+    state->first.z = 0.0f;
+    state->first.w = 1.0f;
+    state->second.x = 0.0f;
+    state->second.y = 0.0f;
+    state->second.z = 0.0f;
+    state->second.w = 1.0f;
+    state->enabled = 0;
+    state->active = 0;
+    return state;
 }
 
 } /* extern "C" */

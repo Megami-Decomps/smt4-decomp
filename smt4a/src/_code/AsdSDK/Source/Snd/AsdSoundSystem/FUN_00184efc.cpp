@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00167618(...);
 int efctSetSpeed(void);
 int FUN_0016c4b8(...);
-int FUN_0018291c(...);
+int quadSetOrderedVectors(...);
 int FUN_001879d0(...);
 int camSetMatrixA(...);
 int FUN_0019ac70(unsigned char [92], unsigned int);
@@ -75,7 +75,7 @@ extern unsigned int DAT_0063098c; /* 0x63098c */
 /* Supplied declaration required: FUN_00167618. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0016c4b8. */
-/* Supplied declaration required: FUN_0018291c. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_0019ac70. */
@@ -293,7 +293,7 @@ LAB_00185068:
           fStack_b4 = temp_v25[0xb];
           fStack_a4 = temp_v25[7];
           fStack_94 = temp_v25[3];
-          FUN_0018291c(&temp_v32,&temp_v31,&temp_v30,&temp_v29,temp_v25[0x10],1);
+          quadSetOrderedVectors(&temp_v32,&temp_v31,&temp_v30,&temp_v29,temp_v25[0x10],1);
         }
         goto LAB_001852bc;
       }
@@ -329,7 +329,7 @@ LAB_00185068:
           fStack_b4 = temp_v25[0xb];
           fStack_a4 = temp_v25[7];
           fStack_94 = temp_v25[3];
-          FUN_0018291c(&temp_v32,&temp_v31,&temp_v30,&temp_v29,temp_v25[0x10],1);
+          quadSetOrderedVectors(&temp_v32,&temp_v31,&temp_v30,&temp_v29,temp_v25[0x10],1);
         }
         temp_v16 = 0.00390625f;
         temp_v15 = (*param_3 & 0x10) == 0;
@@ -446,7 +446,7 @@ LAB_00185068:
           uStack_cc = temp_v22[1];
           uStack_c8 = temp_v22[2];
           fStack_c4 = temp_v22[3];
-          FUN_0018291c(&temp_v29,&temp_v26,temp_v25 + 0x10,&temp_v20,temp_v28,0);
+          quadSetOrderedVectors(&temp_v29,&temp_v26,temp_v25 + 0x10,&temp_v20,temp_v28,0);
         }
         temp_v13 = g_renderCtx;
         if (temp_v5) {
@@ -497,7 +497,7 @@ LAB_001852bc:
       uStack_cc = temp_v22[1];
       uStack_c8 = temp_v22[2];
       fStack_c4 = temp_v22[3];
-      FUN_0018291c(&temp_v29,&temp_v26,temp_v25 + 0x10,&temp_v21,temp_v28,0);
+      quadSetOrderedVectors(&temp_v29,&temp_v26,temp_v25 + 0x10,&temp_v21,temp_v28,0);
     }
     temp_v13 = g_renderCtx;
     if (temp_v5) {

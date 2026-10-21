@@ -20,7 +20,7 @@ int FUN_00283498(void);
 int FUN_0028520c(void);
 int FUN_0028c258(void);
 int rt_aeabi_memclr(unsigned char [140], int);
-int FUN_002ef750(void);
+int taskWindowRelease(void);
 int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
 int FUN_0037d038(...);
@@ -42,8 +42,8 @@ extern int dataTableGet(unsigned int, unsigned char);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: dataTable00FindById. */
-extern int FUN_0019e378(void);
-extern int FUN_00224880(void);
+extern int dataTable19FindAddonWord(void);
+extern int scrRunOpcodesStub(void);
 /* Supplied declaration required: asdMemFreeSlot. */
 /* Supplied declaration required: FUN_0023a55c. */
 /* Supplied declaration required: FUN_0026812c. */
@@ -53,7 +53,7 @@ extern int FUN_00224880(void);
 /* Supplied declaration required: FUN_0028520c. */
 /* Supplied declaration required: FUN_0028c258. */
 /* Supplied declaration required: rt_aeabi_memclr. */
-/* Supplied declaration required: FUN_002ef750. */
+/* Supplied declaration required: taskWindowRelease. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: eventTexReleaseJobs. */
 /* Supplied declaration required: bustupCutAnimStopJob. */
@@ -104,7 +104,7 @@ unsigned int FUN_003150f4(void)
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 0x40);
-      FUN_002ef750();
+      taskWindowRelease();
       if (puVar3[0x26] != 0) {
         asdMemFree();
         puVar3[0x26] = 0;
@@ -120,7 +120,7 @@ unsigned int FUN_003150f4(void)
   else {
     temp_v6 = 0;
     if (puVar2[0x27] != 0) {
-      temp_v1 = FUN_00224880();
+      temp_v1 = scrRunOpcodesStub();
       temp_v6 = temp_v1 != 2;
       if (!temp_v6) {
         *(unsigned char *)(puVar2 + 0x11) = 0;
@@ -458,7 +458,7 @@ LAB_00315864:
           if (puVar3[3] != 4) {
             temp_v1 = puVar3[6];
             FUN_00283498();
-            if ((temp_v1 != 0) && (temp_v1 = FUN_0019e378(), temp_v1 != 0)) {
+            if ((temp_v1 != 0) && (temp_v1 = dataTable19FindAddonWord(), temp_v1 != 0)) {
               if (puVar3[3] != 2) {
 LAB_0031526c:
                 if (puVar3[3] == 3) goto LAB_003152b4;
@@ -467,7 +467,7 @@ LAB_0031526c:
               temp_v1 = puVar3[0xb];
               FUN_00283498();
               if (temp_v1 != 0) {
-                temp_v1 = FUN_0019e378();
+                temp_v1 = dataTable19FindAddonWord();
                 temp_v6 = temp_v1 != 0;
                 temp_v1 = 0;
                 if (temp_v6) {
@@ -502,7 +502,7 @@ LAB_003153fc:
                     }
                     temp_v1 = temp_v1 + 1;
                   } while (temp_v1 < 0x40);
-                  FUN_002ef750();
+                  taskWindowRelease();
                   FUN_0037d038(0,puVar3[5]);
                   temp_v1 = puVar3[3];
                   if (temp_v1 == 3) {

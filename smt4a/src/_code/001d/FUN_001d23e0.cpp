@@ -5,7 +5,7 @@
 extern "C" {
 
 int jyoucyuGetTableEntry(int);
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int FUN_001b5acc(int *);
 int FUN_001d25a0(...);
 int FUN_001d2a2c(int, int, unsigned int, int);
@@ -32,11 +32,11 @@ extern int g_aocMain; /* 0x570260 */
 #endif
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 extern int FUN_001a0380(int);
-extern int FUN_001af210(int);
-/* Supplied declaration required: FUN_001b57a8. */
+extern int sysLightEventTryWait(int);
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: FUN_001b5acc. */
 /* Supplied declaration required: FUN_001d25a0. */
-extern int FUN_001d25ec(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: FUN_001d2a2c. */
 /* Supplied declaration required: libc_strcmp. */
 
@@ -75,7 +75,7 @@ void FUN_001d23e0(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
       *(unsigned char *)(param_2 + 0x330) = 0;
       if (temp_v1 < 0) {
         FUN_001d25a0(temp_v8,0);
-        FUN_001b57a8(&temp_v2,temp_v1);
+        resultPairInitialize(&temp_v2,temp_v1);
         temp_v6 = *puVar3;
         uStack_68 = puVar3[1];
         *param_1 = temp_v8[0];
@@ -97,13 +97,13 @@ void FUN_001d23e0(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
     temp_v3 = param_5;
     FUN_001d2a2c(temp_v0,0x19a2,param_6,2);
     puVar3 = temp_v9;
-    FUN_001b57a8(puVar3,temp_v0);
+    resultPairInitialize(puVar3,temp_v0);
     temp_v7 = *puVar3;
     uStack_54 = puVar3[1];
-    temp_v1 = FUN_001d25ec((unsigned int *)&temp_v7);
+    temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v7);
     if (temp_v1 < 0) {
       FUN_001d25a0(&temp_v5,0);
-      temp_v1 = FUN_001d25ec((unsigned int *)&temp_v7);
+      temp_v1 = legacyResourceIdRemap((unsigned int *)&temp_v7);
       temp_v8[0] = temp_v5;
       uStack_44 = uStack_64;
       uStack_40 = uStack_60;
@@ -112,7 +112,7 @@ void FUN_001d23e0(unsigned int *param_1,int param_2,unsigned int *param_3,unsign
         temp_v6 = temp_v7;
         uStack_68 = uStack_54;
         jyoucyuGetTableEntry(0);
-        temp_v1 = FUN_001af210(g_aocMain + 0x98);
+        temp_v1 = sysLightEventTryWait(g_aocMain + 0x98);
         temp_v8[0] = temp_v5;
         uStack_44 = uStack_64;
         uStack_40 = uStack_60;

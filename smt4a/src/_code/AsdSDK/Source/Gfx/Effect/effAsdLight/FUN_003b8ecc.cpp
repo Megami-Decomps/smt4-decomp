@@ -32,7 +32,7 @@ extern int g_asdLightCount; /* 0x636e00 */
 /* Supplied declaration required: sceneTraverserVisit. */
 extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: FUN_001b6d08. */
-extern int FUN_0036bc10(unsigned int);
+extern int asdLightSelectActive(unsigned int);
 /* Supplied declaration required: nw_gfx_SceneNode_IsCircularReference. */
 
 
@@ -72,7 +72,7 @@ void FUN_003b8ecc(int param_1)
     return;
   }
   temp_v14 = *(int *)(*(int *)(*(int *)(param_1 + 0x54) + 8) + 0x2c);
-  temp_v15 = FUN_0036bc10(1);
+  temp_v15 = asdLightSelectActive(1);
   piVar11 = *(int **)(param_1 + 0xa0);
   temp_v4 = 0;
   if (*(int *)(*(int *)(param_1 + 0x9c) + 8) != 0) {

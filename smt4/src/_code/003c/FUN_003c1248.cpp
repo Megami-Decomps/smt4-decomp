@@ -7,9 +7,9 @@ extern "C" {
 int FUN_0023ebc8(int, unsigned char [448]);
 int FUN_002505c0(int, int, int, int, int, int, int);
 int FUN_00255e38(int, unsigned char [448], int, int, int);
-int FUN_00262f68(int, int);
+int objectFlagsClear(int, int);
 int dataTable00FindById(void);
-int FUN_00336ed0(int, unsigned char [448], int, int);
+int btlSummaryInitializeSavedDemon(int, unsigned char [448], int, int);
 int FUN_003ae2d0(unsigned int, int, int, int);
 
 /* stack frame of param_4: 5 slot(s), 20 byte(s) */
@@ -27,13 +27,13 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00255e38. */
 extern int FUN_002561d8(int, int, unsigned int);
-/* Supplied declaration required: FUN_00262f68. */
+/* Supplied declaration required: objectFlagsClear. */
 extern int btlGetMainState(void);
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_00336ed0. */
+/* Supplied declaration required: btlSummaryInitializeSavedDemon. */
 /* Supplied declaration required: FUN_003ae2d0. */
 
 
@@ -74,9 +74,9 @@ void FUN_003c1248(int param_1,int param_2,int param_3,int param_4)
     temp_v6 = flagWordTestBit(temp_v5,1);
     if (temp_v6 != 0) {
       *(unsigned short *)(temp_v5 + 0x2a) = *(unsigned short *)(temp_v5 + 0xe);
-      FUN_00262f68(temp_v5,2);
+      objectFlagsClear(temp_v5,2);
     }
-    FUN_00336ed0(temp_v1,temp_v7,temp_v5,(int)(short)param_2);
+    btlSummaryInitializeSavedDemon(temp_v1,temp_v7,temp_v5,(int)(short)param_2);
     if (-1 < *(char *)(temp_v4 + 0x90f0)) {
       temp_v5 = FUN_002561d8(temp_v1,temp_v8,0);
       *(unsigned char *)(*(short *)(temp_v5 + 0x6e) + temp_v3 + 0x9107) = *(unsigned char *)(temp_v4 + 0x90f0);

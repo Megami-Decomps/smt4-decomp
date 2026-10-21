@@ -2,17 +2,17 @@
 
 extern "C" {
 
-extern s32 FUN_003e4a00(void);
+extern s32 partyCountActiveSlots(void);
 extern s32 randRange(u32 value);
 extern Rec12C *FUN_003e4d68(u32 index);
 extern s32 FUN_00187168(Rec12C *entry);
 extern void scrSetResult(u32 value);
 
-/* Script command: result is a halfword (+0x12C) of the n-th active entry selected by FUN_003e4a00, or 0xAD. */
+/* Script command: result is a halfword (+0x12C) of the n-th active entry selected by partyCountActiveSlots, or 0xAD. */
 u32 scrCommPickEntryHalf(void)
 {
     u16 result = 0xAD;
-    s32 count = FUN_003e4a00();
+    s32 count = partyCountActiveSlots();
     s32 skip;
     u32 i;
     Rec12C *entry;

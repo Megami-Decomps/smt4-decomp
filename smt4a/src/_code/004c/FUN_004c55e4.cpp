@@ -24,7 +24,7 @@ extern unsigned int DAT_00571414; /* 0x571414 */
 
 extern unsigned int *btlGetMainState(void);
 /* Supplied declaration required: FUN_00184310. */
-extern unsigned int FUN_0019f240(int);
+extern unsigned int padGetMappedValue(int);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_002efc44. */
 /* Supplied declaration required: FUN_0034a304. */
@@ -51,7 +51,7 @@ int FUN_004c55e4(unsigned int param_1,int param_2)
     temp_v4 = param_2;
     dataTable04FindById();
     if (temp_v4 != 0) {
-      temp_v2 = FUN_0019f240(param_2);
+      temp_v2 = padGetMappedValue(param_2);
       FUN_002efc44(temp_v4,temp_v2,2);
       return temp_v4;
     }

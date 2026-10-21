@@ -31,10 +31,10 @@ typedef struct {
 
 extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned int DAT_00464b88; /* 0x464b88 */
-extern unsigned int DAT_00464b8c; /* 0x464b8c */
-extern unsigned int DAT_00464b90; /* 0x464b90 */
-extern unsigned int DAT_00464b94; /* 0x464b94 */
-extern unsigned int DAT_00464b98; /* 0x464b98 */
+extern unsigned int sceneGroup1Root; /* 0x464b8c */
+extern unsigned int sceneGroup4Root; /* 0x464b90 */
+extern unsigned int sceneGroup2Root; /* 0x464b94 */
+extern unsigned int sceneGroup5Root; /* 0x464b98 */
 extern unsigned int g_asdModelSlotArray0; /* 0x464b9c */
 extern unsigned int DAT_00464ba0; /* 0x464ba0 */
 extern unsigned int g_asdModelSlotArray1; /* 0x464ba4 */
@@ -121,7 +121,7 @@ void FUN_00108c5c(int *param_1,int *param_2)
     temp_v11 = 8;
     temp_v11 = param_1[2];
     temp_v10 = param_1[3];
-    DAT_00464b8c = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
+    sceneGroup1Root = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
     temp_v1 = asdMemoryGetDefaultAllocator();
@@ -130,17 +130,17 @@ void FUN_00108c5c(int *param_1,int *param_2)
     temp_v10 = 4;
     temp_v11 = 8;
     temp_v8 = 0;
-    DAT_00464b8c = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
+    sceneGroup1Root = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,DAT_00464b8c);
+  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,sceneGroup1Root);
   temp_v1 = asdMemoryGetDefaultAllocator();
   temp_v5 = 1;
   temp_v7 = 1;
   temp_v6 = 4;
   uStack_40 = 8;
   temp_v4 = 0;
-  DAT_00464b94 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v4,temp_v1);
-  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,DAT_00464b94);
+  sceneGroup2Root = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v4,temp_v1);
+  nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,sceneGroup2Root);
   temp_v0 = param_1[4];
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {
@@ -258,7 +258,7 @@ void FUN_00108c5c(int *param_1,int *param_2)
     temp_v11 = 8;
     temp_v11 = param_2[2];
     temp_v10 = param_2[3];
-    DAT_00464b90 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
+    sceneGroup4Root = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
   else {
     temp_v1 = asdMemoryGetDefaultAllocator();
@@ -267,17 +267,17 @@ void FUN_00108c5c(int *param_1,int *param_2)
     temp_v10 = 4;
     temp_v11 = 8;
     temp_v8 = 0;
-    DAT_00464b90 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
+    sceneGroup4Root = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v8,temp_v1);
   }
-  nw_gfx_SceneNode_AttachChild(DAT_00464b88,DAT_00464b90);
+  nw_gfx_SceneNode_AttachChild(DAT_00464b88,sceneGroup4Root);
   temp_v1 = asdMemoryGetDefaultAllocator();
   temp_v5 = 1;
   temp_v7 = 1;
   temp_v6 = 4;
   uStack_40 = 8;
   temp_v4 = 0;
-  DAT_00464b98 = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v4,temp_v1);
-  nw_gfx_SceneNode_AttachChild(DAT_00464b88,DAT_00464b98);
+  sceneGroup5Root = nw_gfx_TransformNode_DynamicBuilder_Create(&temp_v4,temp_v1);
+  nw_gfx_SceneNode_AttachChild(DAT_00464b88,sceneGroup5Root);
   temp_v0 = param_2[4];
   temp_v2 = temp_v0 == 0;
   if (temp_v2) {

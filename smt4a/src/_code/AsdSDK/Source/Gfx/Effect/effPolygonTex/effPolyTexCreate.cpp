@@ -10,8 +10,8 @@ void *resourceResolveHeaderPointer(PolyTexDesc *desc);
 u32 *resourceResolveDataPointer(PolyTexDesc *desc);
 void rt_memcpy(void *dst, const void *src, int size);
 void textureSlotReplace(PolyGeom *geom, u32 *resource);
-void *FUN_00221f20(u32 *resource);
-u32 FUN_0037a834(int id);
+void *spriteGroupCreateFromFile(u32 *resource);
+u32 sysGetTableWord(int id);
 void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
 
@@ -48,10 +48,10 @@ PolyTexObject *effPolyTexCreate(PolyTexDesc *desc)
                 textureSlotReplace(obj->geom, resource);
                 break;
             case 2:
-                obj->resource2 = FUN_00221f20(resource);
+                obj->resource2 = spriteGroupCreateFromFile(resource);
                 break;
             case 4:
-                obj->geom->unk04 = FUN_0037a834(*resource & 0xffff);
+                obj->geom->unk04 = sysGetTableWord(*resource & 0xffff);
                 refCountIncrement(obj->geom->unk04);
                 break;
             case 7:

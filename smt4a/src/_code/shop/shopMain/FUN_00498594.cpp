@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int FUN_004954e8(void);
 int FUN_00496a0c(int, int);
 int FUN_0049706c(int);
-int FUN_00498994(int);
+int messageChoiceShowCurrent(int);
 int sendEvent100020F(void);
 int sendEvent100020E(void);
 int sendEvent1000210(void);
@@ -18,12 +18,12 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_00496a0c. */
 /* Supplied declaration required: FUN_0049706c. */
-/* Supplied declaration required: FUN_00498994. */
+/* Supplied declaration required: messageChoiceShowCurrent. */
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
 /* Supplied declaration required: sendEvent1000210. */
@@ -40,7 +40,7 @@ void FUN_00498594(int param_1)
   int temp_v0;
   
   FUN_004954e8();
-  FUN_00498994(param_1);
+  messageChoiceShowCurrent(param_1);
   temp_v0 = inputIsQuestRepeatRight();
   if ((temp_v0 != 0) || (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602c)), temp_v0 == 6)) {
     *(unsigned int *)(param_1 + 0xb44) = *(unsigned int *)(*(int *)(param_1 + 0xb44) * 8 + 0x588f78);
@@ -52,7 +52,7 @@ void FUN_00498594(int param_1)
   if ((temp_v0 == 0) && (temp_v0 = FUN_00284140((int)*(short *)(param_1 + 0x1602e)), temp_v0 != 6)) {
     temp_v0 = inputIsQuestMenuPressed();
     if (temp_v0 != 0) {
-      FUN_00184528(param_1 + 0x3cc,1);
+      uiSpriteBankApplyPreset(param_1 + 0x3cc,1);
       sendEvent100020F();
       *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 4);
       *(unsigned int *)(param_1 + 4) = 0x13;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0017e5a4(unsigned int *, unsigned int);
+int heapCloseOpenBlock(unsigned int *, unsigned int);
 int globalCriticalSectionEnterForward(void);
 int globalCriticalSectionLeaveForward(void);
 int FUN_001963e0(void);
@@ -23,7 +23,7 @@ extern signed char DAT_0061a482; /* 0x61a482 */
 extern unsigned int *DAT_0061a50c; /* 0x61a50c */
 extern unsigned int *DAT_0061a510; /* 0x61a510 */
 
-/* Supplied declaration required: FUN_0017e5a4. */
+/* Supplied declaration required: heapCloseOpenBlock. */
 /* Supplied declaration required: globalCriticalSectionEnterForward. */
 /* Supplied declaration required: globalCriticalSectionLeaveForward. */
 /* Supplied declaration required: FUN_001963e0. */
@@ -97,7 +97,7 @@ void FUN_0017db14(unsigned int param_1,int param_2)
     temp_v1 = *(int *)(param_2 + 0xc);
   }
   if (puVar6[0xd] != 0 && temp_v1 != 0) {
-    FUN_0017e5a4(puVar6,puVar6[6] + puVar6[8] * 0x1c);
+    heapCloseOpenBlock(puVar6,puVar6[6] + puVar6[8] * 0x1c);
   }
   if (DAT_0061a50c == puVar6) {
     g_commandBufferCursor = (unsigned int *)((*(unsigned int *)(param_2 + 8) & 0xfffffffc) + (int)g_commandBufferCursor);

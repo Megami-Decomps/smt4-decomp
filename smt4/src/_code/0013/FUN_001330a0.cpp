@@ -15,7 +15,7 @@ typedef struct {
 extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
 extern int DAT_004652a8; /* 0x4652a8 */
-extern unsigned int *DAT_004655c0; /* 0x4655c0 */
+extern unsigned int *g_textureBindingState; /* 0x4655c0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_FABS_4_DEFINED
@@ -55,7 +55,7 @@ void FUN_001330a0(void)
   float temp_v10;
   unsigned int temp_v11 [6];
   
-  puVar1 = DAT_004655c0;
+  puVar1 = g_textureBindingState;
   temp_v2 = 0;
   temp_v3 = 0;
   temp_v7 = *(int *)(DAT_004652a8 + 8);
@@ -103,13 +103,13 @@ LAB_0013314c:
   }
 LAB_00133154:
   if (temp_v8 != 0x8cd5) {
-    DAT_004655c0[0x1a1] = 0;
+    g_textureBindingState[0x1a1] = 0;
     *(unsigned char *)(puVar1 + 0x1a4) = 0;
     *(unsigned char *)((int)puVar1 + 0x691) = 0;
     *(unsigned char *)((int)puVar1 + 0x692) = 0;
     return;
   }
-  DAT_004655c0[0x1a1] = 0x8cd5;
+  g_textureBindingState[0x1a1] = 0x8cd5;
   if ((puVar1[2] & 0x100) != 0) {
     return;
   }
@@ -272,7 +272,7 @@ LAB_00133154:
     return;
   }
   *(unsigned char *)(puVar1 + 0xc) = 1;
-  puVar1 = DAT_004655c0;
+  puVar1 = g_textureBindingState;
   temp_v10 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v10 = temp_v10 * 0.5f;
   temp_v1 = 0;

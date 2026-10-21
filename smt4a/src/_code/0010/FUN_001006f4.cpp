@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001006f4` (_code @ 0x1006f4, 0x82 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_FormatBuffer.h"
 
 extern "C" {
 
 int FUN_0010095c(int, int, unsigned int, unsigned int, int, unsigned int, unsigned int);
-int FUN_002e3338(int, int, unsigned int, unsigned int);
 int wstrlen(...);
 int asdOperatorNewC(int);
 int libc_strcpy(void);
@@ -17,7 +17,6 @@ int asdOperatorDeleteB(...);
 #endif
 extern int libc_strcat(void);
 /* Supplied declaration required: FUN_0010095c. */
-/* Supplied declaration required: FUN_002e3338. */
 /* Supplied declaration required: wstrlen. */
 /* Supplied declaration required: asdOperatorNewC. */
 /* Supplied declaration required: libc_strcpy. */
@@ -41,10 +40,10 @@ unsigned long long FUN_001006f4(int param_1,unsigned int param_2,unsigned int pa
       param_2 = 0;
     }
     temp_v0 = 0;
-    FUN_002e3338(0,0,*(unsigned int *)
+    temp_v0 = (int)FUN_002e3338(0,0,(const char*)*(unsigned int *)
                       (
                       "壐V墂V墐V姖V妯V壀V姳V妯V妼V執V壦V埏V夌V壸V妈V夼V奢V够V堸V垵V塞V堢V墩V"
-                      + param_2 * 4),param_3);
+                      + param_2 * 4),*(va_list*)&param_3);
   }
   temp_v1 = temp_v0;
   if (*(int *)(param_1 + 4) != 0) {

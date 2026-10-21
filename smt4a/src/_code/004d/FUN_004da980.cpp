@@ -9,14 +9,14 @@ int contentEntryFindById(void);
 int dataTable5Count(void);
 int FUN_0039c64c(unsigned int, int);
 int dataTable5Sub3Lookup(unsigned int *, int);
-int FUN_003bb6b0(unsigned int, int);
+int dataTable05FindByPriorityAndKey(unsigned int, int);
 
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: dataTable5Count. */
 /* Supplied declaration required: FUN_0039c64c. */
 /* Supplied declaration required: dataTable5Sub3Lookup. */
-/* Supplied declaration required: FUN_003bb6b0. */
+/* Supplied declaration required: dataTable05FindByPriorityAndKey. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -79,7 +79,7 @@ unsigned char FUN_004da980(unsigned int param_1,unsigned short *param_2,unsigned
     } while (psVar9 < psVar4);
   }
   temp_v1 = (unsigned int)(unsigned char)param_2[1];
-  FUN_003bb6b0(temp_v1,(char)param_3[1]);
+  dataTable05FindByPriorityAndKey(temp_v1,(char)param_3[1]);
   if (temp_v1 != 0) {
     return (unsigned char)4;
   }

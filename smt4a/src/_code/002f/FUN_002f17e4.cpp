@@ -1,54 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f17e4` (_code @ 0x2f17e4, 0x4a bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps count/value/growth locals in one PUSH-reserved block; taking the count parameter's address produces a separate argument spill area. */
+#include "common.h"
+
+struct ByteBuffer {
+    u8* begin;    // 0x00
+    u8* end;      // 0x04
+    u8* capacity; // 0x08
+};
 
 extern "C" {
+u32 bufGrowCapacity(u32 capacity, ByteBuffer* buffer);
+const u32* wordRefMax(const u32* first, const u32* second);
+void* rt_malloc(u32 size);
+void FUN_0030c588(u8* data, u32 count, const u8* value, ByteBuffer* buffer);
 
-int FUN_0030c588(int, int, unsigned int *, int *);
-
-/* stack frame of param_4: 3 slot(s), 9 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned char sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_4_stack;
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-extern int *wordRefMax(int *, unsigned int *);
-extern int rt_malloc(int);
-/* Supplied declaration required: FUN_0030c588. */
-extern unsigned int bufGrowCapacity(unsigned int, int *);
-
-
-unsigned long long FUN_002f17e4(int *param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
+// Allocates a byte buffer with the requested number of zero-initialized bytes.
+ByteBuffer* FUN_002f17e4(ByteBuffer* buffer, u32 count)
 {
-/* irregular: 1 native warning(s); review required */
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  
-  temp_v3 = param_3 & 0xffffff00;
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  temp_v2 = param_2;
-  temp_v4 = param_4;
-  temp_v4 = bufGrowCapacity(0,param_1);
-  piVar1 = (int *)wordRefMax(&temp_v2,(unsigned int *)&temp_v4);
-  temp_v1 = *piVar1;
-  temp_v0 = rt_malloc(temp_v1);
-  *param_1 = temp_v0;
-  FUN_0030c588(temp_v0,temp_v2,&temp_v3,param_1);
-  param_1[2] = *param_1 + temp_v1;
-  param_1[1] = *param_1 + temp_v2;
-  return romwright_piece_4_4(temp_v2,param_1);
+    u8 value = 0;
+    buffer->begin = NULL;
+    buffer->end = NULL;
+    buffer->capacity = NULL;
+    u32 grown = bufGrowCapacity(0, buffer);
+    u32 capacity = *wordRefMax(&count, &grown);
+    buffer->begin = static_cast<u8*>(rt_malloc(capacity));
+    FUN_0030c588(buffer->begin, count, &value, buffer);
+    buffer->capacity = buffer->begin + capacity;
+    buffer->end = buffer->begin + count;
+    return buffer;
 }
-
-} /* extern "C" */
+}

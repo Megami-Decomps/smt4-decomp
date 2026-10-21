@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002a3178(int);
 int FUN_002b4cd4(int, unsigned int);
-int FUN_002bcc54(void);
+int nw_snd_SoundSystem_SetMasterVolume(void);
 int VectorSignedToFloat(int, int);
 int nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync(unsigned int, int);
 
@@ -22,7 +22,7 @@ extern int trackIsInRange(void);
 /* Supplied declaration required: FUN_002a3178. */
 /* Supplied declaration required: FUN_002b4cd4. */
 extern unsigned int FUN_002baf30(void);
-/* Supplied declaration required: FUN_002bcc54. */
+/* Supplied declaration required: nw_snd_SoundSystem_SetMasterVolume. */
 /* Supplied declaration required: nw_snd_internal_driver_VoiceManager_UpdateAllVoicesSync. */
 
 
@@ -138,7 +138,7 @@ LAB_001510cc:
         VectorSignedToFloat(*(int *)(param_1 + 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(int *)(param_1 + 0x1c),(unsigned char)(in_fpscr >> 0x16) & 3);
       }
-      FUN_002bcc54();
+      nw_snd_SoundSystem_SetMasterVolume();
       return;
     }
   } while( 1 );

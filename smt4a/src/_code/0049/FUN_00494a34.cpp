@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(int);
 int FUN_0019de98(int, int);
-int FUN_00224880(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int panelSetTarget(int);
 int FUN_0037c8e4(int, int);
@@ -27,7 +27,7 @@ extern unsigned int DAT_005f1990; /* 0x5f1990 */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 extern int FUN_001ba3d4(unsigned int);
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: panelSetTarget. */
@@ -53,7 +53,7 @@ void FUN_00494a34(unsigned int *param_1)
   temp_v4 = 0x47f;
   if (temp_v0 != 0) {
     if (temp_v0 == 1) {
-      temp_v1 = FUN_00224880(param_1[99]);
+      temp_v1 = scrRunOpcodesStub(param_1[99]);
       if (temp_v1 == 2) {
         puVar4 = param_1;
         FUN_0049a9a8();
@@ -68,7 +68,7 @@ void FUN_00494a34(unsigned int *param_1)
       }
     }
     else {
-      temp_v1 = FUN_00224880(param_1[99]);
+      temp_v1 = scrRunOpcodesStub(param_1[99]);
       if (temp_v1 != 2) {
         return;
       }
@@ -105,7 +105,7 @@ LAB_00494cb0:
         if (temp_v1 == 0) {
           temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d28);
           scrScriptProcessStartEntry(param_1[99],temp_v2);
-          FUN_00224880(param_1[99]);
+          scrRunOpcodesStub(param_1[99]);
           param_1[2] = 1;
           sysPlaySe(0xa0);
           return;
@@ -120,7 +120,7 @@ LAB_00494cb0:
 LAB_00494b40:
         temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d28);
         scrScriptProcessStartEntry(param_1[99],temp_v2);
-        FUN_00224880(param_1[99]);
+        scrRunOpcodesStub(param_1[99]);
         param_1[2] = 1;
         sysPlaySe(0xa0);
         return;
@@ -143,7 +143,7 @@ LAB_00494bb0:
           temp_v2 = tableGroupFindEntryIndex(param_1[0x61],&LAB_00494d4c);
           scrScriptProcessStartEntry(param_1[99],temp_v2);
         }
-        FUN_00224880(param_1[99]);
+        scrRunOpcodesStub(param_1[99]);
         param_1[2] = 2;
         sysPlaySe(0xa0);
         return;

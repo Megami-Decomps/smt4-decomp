@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a87e8(void);
+int ifTouchDecrementTimer(void);
 int FUN_002a9fdc(int, int, int);
 int dataTableGetEntry0e(...);
 int timerStart(int, int, int);
@@ -12,7 +12,7 @@ int FUN_002bee58(int, int);
 
 extern unsigned char g_buttonHelp; /* 0x43da28 */
 
-/* Supplied declaration required: FUN_002a87e8. */
+/* Supplied declaration required: ifTouchDecrementTimer. */
 /* Supplied declaration required: FUN_002a9fdc. */
 /* Supplied declaration required: dataTableGetEntry0e. */
 /* Supplied declaration required: timerStart. */
@@ -40,13 +40,13 @@ void FUN_002b827c(unsigned int param_1)
         temp_v0 = *(char *)(temp_v3 + 0x494);
         if (temp_v0 != '\0') {
           if (temp_v0 == '\a' || temp_v0 == '\t') {
-            FUN_002a87e8();
+            ifTouchDecrementTimer();
           }
           if (*(char *)(temp_v3 + 0x494) == '\b') {
-            FUN_002a87e8();
-            FUN_002a87e8();
+            ifTouchDecrementTimer();
+            ifTouchDecrementTimer();
           }
-          FUN_002a87e8();
+          ifTouchDecrementTimer();
         }
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 6);
@@ -59,7 +59,7 @@ void FUN_002b827c(unsigned int param_1)
           temp_v3 = temp_v1 + temp_v2 * 4;
           if (*(char *)(temp_v3 + 0x494) != '\0') {
             *(unsigned char *)(temp_v3 + 0x494) = 0;
-            FUN_002a87e8();
+            ifTouchDecrementTimer();
           }
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < 6);
@@ -82,13 +82,13 @@ void FUN_002b827c(unsigned int param_1)
           temp_v0 = *(char *)(temp_v3 + 0x494);
           if (temp_v0 != '\0') {
             if (temp_v0 == '\a' || temp_v0 == '\t') {
-              FUN_002a87e8();
+              ifTouchDecrementTimer();
             }
             if (*(char *)(temp_v3 + 0x494) == '\b') {
-              FUN_002a87e8();
-              FUN_002a87e8();
+              ifTouchDecrementTimer();
+              ifTouchDecrementTimer();
             }
-            FUN_002a87e8();
+            ifTouchDecrementTimer();
           }
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < 6);

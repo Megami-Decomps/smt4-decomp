@@ -1,25 +1,26 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d4874` (_code @ 0x2d4874, 0x5d4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/S1Mover.h"
 
 extern "C" {
 
 int FUN_0019db68(void);
 int mapDestroyOverlayModel(...);
 int mapIfReleaseSlot3(void);
-int FUN_0024f034(int, unsigned int);
+int mapIfActivateRecord(int, unsigned int);
 int mapInterfaceSetStateTwo(void);
 int FUN_0027fa98(unsigned int);
 int FUN_0027fc14(int);
 int FUN_0027fca0(unsigned int);
-int FUN_00280364(void);
+int mapSelectContainingRegions(void);
 int FUN_002804ec(int);
 int FUN_00280988(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_00291e40(...);
 int buttonHelpSetPreset(int);
-int FUN_002c8b80(int, int, int, int *, float [7], int);
+void lmapFindNearestMatchingTargetPoint(s32, s32, s32, Vec3f *, f32 *, s32, Vec3f);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -42,7 +43,7 @@ extern unsigned char DAT_0049fb46; /* 0x49fb46 */
 /* Supplied declaration required: FUN_0019db68. */
 /* Supplied declaration required: mapDestroyOverlayModel. */
 /* Supplied declaration required: mapIfReleaseSlot3. */
-/* Supplied declaration required: FUN_0024f034. */
+/* Supplied declaration required: mapIfActivateRecord. */
 extern int mapIfHasSelection(void);
 /* Supplied declaration required: mapInterfaceSetStateTwo. */
 extern int inputIsQuestMenuPressed(void);
@@ -50,7 +51,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_0027fa98. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: FUN_0027fca0. */
-/* Supplied declaration required: FUN_00280364. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00282390. */
@@ -58,7 +59,6 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonPressed(unsigned int);
-/* Supplied declaration required: FUN_002c8b80. */
 
 
 void FUN_002d4874(void)
@@ -75,10 +75,8 @@ void FUN_002d4874(void)
   unsigned int temp_v6;
   float temp_v7;
   float temp_v8;
-  int temp_v9;
-  float fStack_3c;
-  unsigned int uStack_38;
-  float temp_v10 [7];
+  Vec3f nearestPoint;
+  f32 nearestYaw;
   
   if (*(int *)(g_lmapScene + 4) < 10) {
     FUN_00280988();
@@ -134,31 +132,27 @@ void FUN_002d4874(void)
           }
           else {
             *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-            FUN_0024f034(1,DAT_0049f99c);
+            mapIfActivateRecord(1,DAT_0049f99c);
             temp_v1 = FUN_0027ee9c();
             temp_v0 = g_lmapScene;
             if (temp_v1 != 0) {
               *(unsigned int *)(g_lmapScene + 4) = 10;
               *(unsigned int *)(temp_v0 + 8) = 0;
               *(unsigned int *)(DAT_004474f4 + 0xc) = 2;
-              temp_v9 = *(unsigned int *)(temp_v0 + 0x28);
-              fStack_3c = *(float *)(temp_v0 + 0x2c);
-              uStack_38 = *(unsigned int *)(temp_v0 + 0x30);
-              FUN_002c8b80(2,10,0x66,&temp_v9,temp_v10,1);
+              nearestPoint = *(const Vec3f *)(temp_v0 + 0x28);
+              lmapFindNearestMatchingTargetPoint(2, 10, 0x66, &nearestPoint, &nearestYaw, 1, nearestPoint);
               temp_v0 = g_lmapScene;
               temp_v7 = 180.0f;
-              temp_v10[0] = temp_v10[0] + 180.0f;
-              if (temp_v10[0] < temp_v8) {
-                temp_v10[0] = temp_v10[0] + 360.0f;
+              nearestYaw += 180.0f;
+              if (nearestYaw < temp_v8) {
+                nearestYaw += 360.0f;
               }
-              if ((int)temp_v10[0] >= 0x43b40001) {
-                temp_v10[0] = temp_v10[0] - 360.0f;
+              if (nearestYaw > 360.0f) {
+                nearestYaw -= 360.0f;
               }
-              *(float *)(g_lmapScene + 0x50) = temp_v10[0];
-              *(unsigned int *)(temp_v0 + 0x28) = temp_v9;
-              *(float *)(temp_v0 + 0x2c) = fStack_3c;
-              *(unsigned int *)(temp_v0 + 0x30) = uStack_38;
-              *(float *)(temp_v0 + 0x2c) = fStack_3c - 250.0f;
+              *(float *)(g_lmapScene + 0x50) = nearestYaw;
+              *(Vec3f *)(temp_v0 + 0x28) = nearestPoint;
+              *(float *)(temp_v0 + 0x2c) = nearestPoint.y - 250.0f;
               temp_v8 = (*(float *)(temp_v0 + 0x4c) + 180.0f) * temp_v4;
               FUN_0028250c();
               temp_v0 = g_lmapScene;
@@ -177,7 +171,7 @@ void FUN_002d4874(void)
                 temp_v0 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 0x54) = 0;
                 *(unsigned int *)(temp_v0 + 0x58) = 0x40a00000;
-                FUN_0024f034(0,DAT_0049f99c);
+                mapIfActivateRecord(0,DAT_0049f99c);
                 mapIfReleaseSlot3();
                 temp_v0 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -188,7 +182,7 @@ void FUN_002d4874(void)
         }
         else {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          FUN_0024f034(1,DAT_0049f99c);
+          mapIfActivateRecord(1,DAT_0049f99c);
           temp_v0 = g_lmapScene;
           if (*(int *)(g_lmapScene + 8) >= 3) {
             temp_v1 = *(int *)(g_lmapScene + 4);
@@ -219,7 +213,7 @@ void FUN_002d4874(void)
         FUN_0027fc14(0xd);
         *(unsigned int *)(DAT_004474f4 + 0xac) = 1;
         buttonHelpSetPreset(0xda);
-        FUN_0024f034(1,DAT_0049f99c);
+        mapIfActivateRecord(1,DAT_0049f99c);
         FUN_0019db68();
         temp_v0 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
@@ -235,7 +229,7 @@ void FUN_002d4874(void)
           *(unsigned int *)(g_lmapScene + 4) = 0x5b;
           *(unsigned int *)(temp_v0 + 8) = 0;
           FUN_002804ec(g_lmapScene + 0x28);
-          FUN_00280364();
+          mapSelectContainingRegions();
           return;
         }
         if (temp_v1 == 0x5b) {
@@ -244,14 +238,14 @@ void FUN_002d4874(void)
           *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
           *(unsigned int *)(temp_v0 + 8) = 0;
           FUN_002804ec(g_lmapScene + 0x28);
-          FUN_00280364();
+          mapSelectContainingRegions();
           return;
         }
         if ((temp_v1 != 0x5c) ||
            (temp_v0 = *(int *)(g_lmapScene + 8) + 1, *(int *)(g_lmapScene + 8) = temp_v0, temp_v0 < 4))
         {
           FUN_002804ec(g_lmapScene + 0x28);
-          FUN_00280364();
+          mapSelectContainingRegions();
           return;
         }
         temp_v6 = 1;
@@ -290,7 +284,7 @@ void FUN_002d4874(void)
     }
   }
   FUN_002804ec(g_lmapScene + 0x28);
-  FUN_00280364();
+  mapSelectContainingRegions();
   return;
 }
 

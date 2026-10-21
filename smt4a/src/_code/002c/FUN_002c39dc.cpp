@@ -21,14 +21,14 @@ int FUN_0020b718(...);
 int FUN_0020d934(void);
 int FUN_00228ab0(...);
 int FUN_0026f3a0(void);
-int FUN_002707d8(...);
+void partyPanelRefreshSelectedItemValues(void*, int);
 int FUN_0028c2ec(...);
 int FUN_002ade88(void);
 int FUN_002c8538(int);
 int FUN_002cc0c0(void);
 int FUN_002f8288(void);
 int FUN_00333694(...);
-int FUN_0035e540(void);
+int partyPanelRefreshFilterMarks(void);
 int FUN_00372570(int);
 int pair40Set(unsigned int, int);
 int FUN_00480140(...);
@@ -56,7 +56,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_002304d0. */
 extern int FUN_0025e684(void);
 /* Supplied declaration required: FUN_0026f3a0. */
-/* Supplied declaration required: FUN_002707d8. */
+/* Supplied declaration required: partyPanelRefreshSelectedItemValues. */
 /* Supplied declaration required: FUN_0028c2ec. */
 /* Supplied declaration required: FUN_002a4878. */
 extern unsigned int FUN_002a4894(int);
@@ -68,7 +68,7 @@ extern unsigned int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002cc0c0. */
 /* Supplied declaration required: FUN_002f8288. */
 /* Supplied declaration required: FUN_00333694. */
-/* Supplied declaration required: FUN_0035e540. */
+/* Supplied declaration required: partyPanelRefreshFilterMarks. */
 /* Supplied declaration required: FUN_00372570. */
 /* Supplied declaration required: FUN_003f5220. */
 /* Supplied declaration required: pair40Set. */
@@ -351,7 +351,7 @@ LAB_002c4018:
               else {
                 temp_v2 = temp_v0 + 0xd50;
               }
-              FUN_002707d8(temp_v2,0);
+              partyPanelRefreshSelectedItemValues(reinterpret_cast<void*>(temp_v2),0);
               break;
             }
             *(unsigned int *)(temp_v0 + 0x20) = 10;
@@ -511,7 +511,7 @@ LAB_002c4018:
   case 0xb:
     *(short *)(temp_v0 + 0x36) = (short)param_2;
     *(unsigned short *)(temp_v0 + 0x38) = 0xffff;
-    FUN_0035e540();
+    partyPanelRefreshFilterMarks();
     *(unsigned int *)(temp_v0 + 0x20) = 8;
     if (*(char *)(temp_v0 + 0x42) == '\0') {
       temp_v7 = 0xc6;

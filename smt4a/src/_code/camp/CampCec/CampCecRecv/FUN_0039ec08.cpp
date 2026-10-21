@@ -1,40 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039ec08` (_code @ 0x39ec08, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: current C compilation omits the retail ARM hint NOP before the record lookup; the original source/inlining shape remains unrecovered. */
+#include "camp/CampCec/CampCecRecv.h"
+
+struct CampCecRecord {
+    u8 unk00[0x62]; // 0x00
+    u16 value;      // 0x62
+};
 
 extern "C" {
+extern CampCecRecv* g_campCecRecv;
+s32 scrGetArg(s32 index);
+void scrSetResult(s32 result);
+CampCecRecord* FUN_0031cf00(void);
 
-int FUN_0031cf00(void);
-int scrSetResult(int);
-
-extern int g_campCecRecv; /* 0x57f128 */
-
-extern int scrGetArg(void);
-/* Supplied declaration required: FUN_0031cf00. */
-/* Supplied declaration required: scrSetResult. */
-
-
-unsigned int FUN_0039ec08(void)
-
+// Returns the screen value or the current received record's value to the script.
+u32 FUN_0039ec08(s32 argumentIndex)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  
-  temp_v1 = scrGetArg();
-  if (g_campCecRecv == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    if (temp_v1 != 0) {
-      scrSetResult(*(unsigned short *)(g_campCecRecv + 0x14e));
-      return 1;
+    s32 screenValue = scrGetArg(argumentIndex);
+    if (g_campCecRecv == NULL) {
+        scrSetResult(0);
+    } else if (screenValue != 0) {
+        scrSetResult(g_campCecRecv->scriptValue.value);
+    } else {
+        scrSetResult(FUN_0031cf00()->value);
     }
-    FUN_0031cf00();
-    temp_v0 = *(unsigned short *)(temp_v1 + 0x62);
-  }
-  scrSetResult(temp_v0);
-  return 1;
+    return 1;
 }
-
-} /* extern "C" */
+}

@@ -1,45 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001388dc` (_code @ 0x1388dc, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: current-slot access loads literal0x1218 and uses register-indexed addressing instead of retail sound+0x1000/offset0x218, with swapped root/slot registers. */
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
+extern AsdSoundSystem g_asdSound;
+s32 FUN_00132da4(SoundArchiveLoader *loader, u32 item, u32 flags);
+s32 FUN_002af3b4(SoundArchiveLoader *loader, u32 item, void *heap, u32 flags, u32 mode);
 
-int FUN_00132da4(unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002af3b4(unsigned char *, unsigned int, int, unsigned int, int);
-
-/* stack frame of param_4: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_4_stack;
-
-extern unsigned char DAT_004e21b8; /* 0x4e21b8 */
-extern unsigned char DAT_004e2f68; /* 0x4e2f68 */
-extern int DAT_004e3180; /* 0x4e3180 */
-
-/* Supplied declaration required: FUN_00132da4. */
-/* Supplied declaration required: FUN_002af3b4. */
-
-
-void FUN_001388dc(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Reuse loaded archive data, or load it into the current slot's sound heap.
+s32 FUN_001388dc(u32 item)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  
-  temp_v0 = DAT_004e3180;
-  puVar2 = &DAT_004e2f68;
-  if (DAT_004e3180 != 0) {
-    puVar2 = (unsigned char *)(unsigned int)*(unsigned char *)(DAT_004e3180 + 0x3b);
-  }
-  if (DAT_004e3180 != 0 && puVar2 != (unsigned char *)0x0) {
-    puVar2 = &DAT_004e21b8;
-    FUN_00132da4(&DAT_004e21b8,param_1,0xffffffff,param_4,param_4);
-    if (puVar2 == (unsigned char *)0x0) {
-      FUN_002af3b4(&DAT_004e21b8,param_1,temp_v0,0xffffffff,0);
+    AsdSoundSystem *sound = &g_asdSound;
+    s32 result = 0;
+    AsdSndSlotA *slot = sound->currentSlotA;
+    if (slot != NULL && slot->hasHeap != 0) {
+        result = FUN_00132da4(&sound->loaderState.loader, item, 0xffffffff);
+        if (result != 0) {
+            result = 1;
+        }
+        else {
+            result = FUN_002af3b4(&sound->loaderState.loader, item, slot->heap, 0xffffffff, 0);
+        }
     }
-  }
-  return;
+    return result;
 }
-
-} /* extern "C" */
+}

@@ -49,7 +49,7 @@ extern int FUN_003e0f94(unsigned int *, int);
 extern unsigned int btlPosArrangeGetFileName(int);
 /* Supplied declaration required: FUN_003f0b28. */
 /* Supplied declaration required: FUN_003f0d50. */
-extern int FUN_003f10c8(int, unsigned short);
+extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_003f26d4. */
 extern int FUN_0046ebf0(unsigned int);
 /* Supplied declaration required: words10CopyHighToLow. */
@@ -94,7 +94,7 @@ void FUN_003e1454(unsigned int *param_1,int param_2)
            (*(unsigned short *)(temp_v5 + 0x60) & 0x800) == 0)) {
           temp_v3 = param_2;
           FUN_001568f8(param_2,(int)*(short *)(temp_v5 + 0x6a));
-          temp_v3 = FUN_003f10c8(param_2,*(unsigned short *)(temp_v3 + 2));
+          temp_v3 = pairedEntryTableContains(param_2,*(unsigned short *)(temp_v3 + 2));
           if (temp_v3 == 0) {
             *(unsigned short *)(temp_v5 + 0x60) = *(unsigned short *)(temp_v5 + 0x60) | 0x800;
           }

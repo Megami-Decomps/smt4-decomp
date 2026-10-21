@@ -4,7 +4,7 @@ extern "C" {
 
 int asdMdlManagerMarkDestroy(void);
 
-extern int DAT_0044cd88; /* 0x44cd88 */
+extern int g_mapStateSlots; /* 0x44cd88 */
 
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
 
@@ -17,7 +17,7 @@ void FUN_002701e8(void)
   
   i = 0;
   do {
-    p = (char *)(DAT_0044cd88 + i * 0x4c) + 0x9d8;
+    p = (char *)(g_mapStateSlots + i * 0x4c) + 0x9d8;
     if (*p != '\0' && p[0x34] != '\0' && *(int *)(p + 0x30) != 0) {
       asdMdlManagerMarkDestroy();
     }
@@ -25,7 +25,7 @@ void FUN_002701e8(void)
   } while (i < 3);
   i = 0;
   do {
-    p = (char *)(DAT_0044cd88 + i * 0x4c) + 0x58;
+    p = (char *)(g_mapStateSlots + i * 0x4c) + 0x58;
     if (*p != '\0' && p[0x2c] != '\0' && p[0x34] != '\0' && *(int *)(p + 0x30) != 0) {
       asdMdlManagerMarkDestroy();
     }
@@ -33,7 +33,7 @@ void FUN_002701e8(void)
   } while (i < 0x20);
   i = 0;
   do {
-    if (*(int *)(DAT_0044cd88 + i * 8 + 0x1c) != 0) {
+    if (*(int *)(g_mapStateSlots + i * 8 + 0x1c) != 0) {
       asdMdlManagerMarkDestroy();
     }
     i = i + 1;

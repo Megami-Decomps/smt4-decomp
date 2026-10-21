@@ -2,8 +2,8 @@
 
 extern "C" {
 
-int FUN_001dcf78(u32 item);
-int FUN_001dcfd0(u32 item);
+int nodeTreeReleaseGroup(u32 item);
+int btlItemGroupRelease(u32 item);
 int FUN_00211c90(u32 item);
 int nodeTreeReleaseItemClearOwner(u32 item);
 
@@ -45,14 +45,14 @@ void FUN_00221c70(Collection *collection)
         i = 0;
         if (i < collection->countC) {
             do {
-                FUN_001dcfd0(collection->itemsC[i]);
+                btlItemGroupRelease(collection->itemsC[i]);
                 i++;
             } while (i < collection->countC);
         }
         i = 0;
         if (i < collection->countD) {
             do {
-                FUN_001dcf78(collection->itemsD[i]);
+                nodeTreeReleaseGroup(collection->itemsD[i]);
                 i++;
             } while (i < collection->countD);
         }

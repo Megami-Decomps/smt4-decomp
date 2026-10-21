@@ -29,7 +29,7 @@ extern unsigned int DAT_00464b18; /* 0x464b18 */
 extern unsigned int g_asdModelSlotFlags; /* 0x464b74 */
 extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern int g_asdModelTransformBuilder; /* 0x464b84 */
-extern int DAT_00464b8c; /* 0x464b8c */
+extern int sceneGroup1Root; /* 0x464b8c */
 extern int g_asdModelSlotArray3; /* 0x464bb4 */
 extern unsigned int DAT_00464bbc; /* 0x464bbc */
 extern int g_asdLightCount; /* 0x4dad80 */
@@ -68,9 +68,9 @@ void FUN_00117604(void)
     FUN_001325c4(g_asdModelSlotArray3,DAT_00464b7c,DAT_00464b10,DAT_00464bbc);
     temp_v0 = g_asdModelTransformBuilder;
     if ((DAT_004dad84 != '\0') && (DAT_004dad85 == '\0')) {
-      temp_v1 = DAT_00464b8c;
+      temp_v1 = sceneGroup1Root;
       piVar4 = *(int **)(g_asdModelTransformBuilder + 0x1c);
-      for (piVar1 = *(int **)(g_asdModelTransformBuilder + 0x18); (piVar1 != piVar4 && (*piVar1 != DAT_00464b8c));
+      for (piVar1 = *(int **)(g_asdModelTransformBuilder + 0x18); (piVar1 != piVar4 && (*piVar1 != sceneGroup1Root));
           piVar1 = piVar1 + 1) {
       }
       piVar2 = piVar1;
@@ -89,7 +89,7 @@ void FUN_00117604(void)
       FUN_00131c98(g_asdModelSlotArray3,DAT_00464b7c,DAT_00464bbc);
     }
     if ((DAT_004dad84 != '\0') && (DAT_004dad85 == '\0')) {
-      nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,DAT_00464b8c);
+      nw_gfx_SceneNode_AttachChild(g_asdModelTransformBuilder,sceneGroup1Root);
       sceneTraverserVisit(DAT_00464b7c,g_asdModelTransformBuilder);
     }
     temp_v0 = FUN_002c5210();

@@ -7,7 +7,7 @@ extern "C" {
 int effectSpawnPositionDefault(unsigned int);
 int FUN_002573d8(void);
 int FUN_0025b750(void);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int FUN_002c1b64(int, int);
 int VectorSignedToFloat(int, int);
@@ -19,7 +19,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: effectSpawnPositionDefault. */
 /* Supplied declaration required: FUN_002573d8. */
 /* Supplied declaration required: FUN_0025b750. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002c1b64. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -58,7 +58,7 @@ void FUN_001f67ec(int param_1)
   temp_v5 = 0;
   do {
     VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    FUN_002b7064();
+    phaseCosInterpolate();
     VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002b70cc();
     effectSpawnPositionDefault(temp_v1);

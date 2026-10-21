@@ -12,9 +12,9 @@ int FUN_001695a0(void);
 int resourceListDestroy(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
-int FUN_0019e2dc(void);
+int placeWinRelease(void);
 int messageSetMode(...);
-int FUN_001ad6d8(void);
+int asdCameraInitAreas(void);
 int ptrListRemoveClearOwner(...);
 int FUN_001aeafc(...);
 int FUN_001f3eec(...);
@@ -43,9 +43,9 @@ int sysPlaySe(...);
 int resOwnerRunNodeHandlers(...);
 int FUN_001abbc4(void);
 int FUN_001b4eb8(void);
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int FUN_0020214c(void);
-int FUN_0020401c(...);
+int placeWinStartText(...);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
 int campCommonBgAcquire(void);
@@ -69,9 +69,9 @@ int FUN_001523b8(...);
 int asdOperatorNew(void);
 int FUN_00178b04(...);
 int FUN_0019c0e0(unsigned int);
-int FUN_003e4740(...);
+int controllerSelectionSetMode(...);
 int controllerApplyAtUnitScale(void);
-int FUN_003f9c6c(...);
+int cameraAnimationSampleAndAdvance(...);
 int FUN_003f9e80(void);
 int controllerSetPosition(...);
 int FUN_003fd7b4(...);
@@ -79,9 +79,9 @@ int FUN_003fe86c(...);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(unsigned int, int);
 int FUN_0040ab7c(unsigned int, int);
-int FUN_0040ace8(int, unsigned int);
+int handleRegistryRegisterObject(int, unsigned int);
 int FUN_0040ae70(...);
-int FUN_0040b0f8(...);
+int resourceOwnerLoadNamed(...);
 int FUN_0040b730(unsigned int, unsigned int, int);
 int FUN_0040ba38(void);
 int FUN_0045b538(int);
@@ -142,24 +142,24 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_0019c0e0. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: resOwnerRunNodeHandlers. */
-/* Supplied declaration required: FUN_0019e2dc. */
+/* Supplied declaration required: placeWinRelease. */
 /* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: FUN_001abbc4. */
-/* Supplied declaration required: FUN_001ad6d8. */
+/* Supplied declaration required: asdCameraInitAreas. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001aeafc. */
 /* Supplied declaration required: FUN_001b4eb8. */
 /* Supplied declaration required: FUN_001f3eec. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: FUN_0020214c. */
-/* Supplied declaration required: FUN_0020401c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_00214da4. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002802c8(void);
+extern int screenFadeIsBusy(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: FUN_00314c38. */
@@ -178,7 +178,7 @@ extern int FUN_00323bc4(unsigned int);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_003e4740. */
+/* Supplied declaration required: controllerSelectionSetMode. */
 extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: controllerGetSourceValue. */
 /* Supplied declaration required: controllerTargetNodeStart. */
@@ -193,7 +193,7 @@ extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: FUN_003e5c00. */
 extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: controllerApplyAtUnitScale. */
-/* Supplied declaration required: FUN_003f9c6c. */
+/* Supplied declaration required: cameraAnimationSampleAndAdvance. */
 /* Supplied declaration required: FUN_003f9e80. */
 /* Supplied declaration required: controllerSetPosition. */
 /* Supplied declaration required: FUN_003fd7b4. */
@@ -203,11 +203,11 @@ extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(int);
-/* Supplied declaration required: FUN_0040b0f8. */
+/* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: FUN_0040b730. */
 /* Supplied declaration required: FUN_0040ba38. */
 /* Supplied declaration required: FUN_0045b538. */
@@ -267,10 +267,10 @@ unsigned int FUN_00328838(void)
     in_fpscr = temp_v5 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v7 != temp_v7)) << 0x1c);
     temp_v1 = (unsigned char)(temp_v5 >> 0x18);
     if (!((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
-      FUN_003f9c6c(temp_v4,&temp_v9,0);
+      cameraAnimationSampleAndAdvance(temp_v4,&temp_v9,0);
     }
     else {
-      FUN_003f9c6c(temp_v4,&temp_v9,0);
+      cameraAnimationSampleAndAdvance(temp_v4,&temp_v9,0);
     }
     *(int *)(temp_v0 + 0x3c) = *(int *)(temp_v0 + 0x3c) + 1;
     uiSetFloatPair(temp_v0 + 0x40);
@@ -311,7 +311,7 @@ unsigned int FUN_00328838(void)
     FUN_00178b04(0x20,&LAB_00328c18,0x1ab);
     temp_v3 = 0;
     if (temp_v6 != 0) {
-      temp_v3 = FUN_0040ac08();
+      temp_v3 = modelListInit();
     }
     *(unsigned int *)(temp_v4 + 0x2c) = temp_v3;
     FUN_0040aa6c();
@@ -319,7 +319,7 @@ unsigned int FUN_00328838(void)
     FUN_0040ab7c(*(unsigned int *)(temp_v4 + 0x2c),0);
     FUN_0045b538(*(int *)(*(int *)(temp_v4 + 0x2c) + 0xc) + 0xc);
     temp_v3 = *(unsigned int *)(*(int *)(temp_v4 + 0x2c) + 4);
-    FUN_0040ace8(g_handleRegistry,temp_v3);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v3);
     FUN_003fe86c(temp_v3,0,1);
     controllerSetPosition(temp_v3);
     FUN_003fd7b4(temp_v3);
@@ -349,12 +349,12 @@ unsigned int FUN_00328838(void)
     controllerApplyAtUnitScale();
     *(unsigned int *)(temp_v4 + 0x54c) = 0xffffffff;
     temp_v6 = g_handleRegistry;
-    FUN_0040b0f8(g_handleRegistry,&LAB_00328ccc);
+    resourceOwnerLoadNamed(g_handleRegistry,&LAB_00328ccc);
     temp_v2 = FUN_0040af60(temp_v6);
     if (temp_v2 != 0) {
       FUN_0040ae70(temp_v6,1);
     }
-    FUN_003e4740(temp_v4,2);
+    controllerSelectionSetMode(temp_v4,2);
     FUN_0013c884(temp_v4 + 0x40,1);
     temp_v7 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v4 + 0x3c),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v6 = *(int *)(temp_v4 + *(int *)(temp_v4 + 0x54c) * 4 + 0x30);
@@ -364,10 +364,10 @@ unsigned int FUN_00328838(void)
     in_fpscr = temp_v5 | ((unsigned int)((temp_v8 != temp_v8) || (temp_v7 != temp_v7)) << 0x1c);
     temp_v1 = (unsigned char)(temp_v5 >> 0x18);
     if (!((unsigned char)((temp_v1 >> 6) & 1) || temp_v1 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
-      FUN_003f9c6c(temp_v6,&temp_v9,0);
+      cameraAnimationSampleAndAdvance(temp_v6,&temp_v9,0);
     }
     else {
-      FUN_003f9c6c(temp_v6,&temp_v9,0);
+      cameraAnimationSampleAndAdvance(temp_v6,&temp_v9,0);
     }
     *(int *)(temp_v4 + 0x3c) = *(int *)(temp_v4 + 0x3c) + 1;
     uiSetFloatPair(temp_v4 + 0x40);
@@ -460,7 +460,7 @@ unsigned int FUN_00328838(void)
     if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 3) {
       textFormatBuffer(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
     }
-    FUN_0020401c(&temp_v9);
+    placeWinStartText(&temp_v9);
     sysPlaySe(0x92);
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v0 + 0x20),
@@ -469,13 +469,13 @@ unsigned int FUN_00328838(void)
     *(unsigned int *)(temp_v0 + 8) = temp_v3;
     break;
   case 4:
-    temp_v4 = FUN_00224880(*(unsigned int *)(temp_v0 + 0x20));
+    temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x20));
     if (temp_v4 != 2) break;
     temp_v4 = FUN_002a4b74();
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 8) = 0xf;
-      FUN_001f4908(0,10,0xff);
-      FUN_001f4908(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
       *(unsigned int *)(temp_v0 + 0xc) = 0;
     }
     else {
@@ -553,18 +553,18 @@ unsigned int FUN_00328838(void)
     break;
   case 6:
     if (*(char *)(temp_v0 + 0x558) != '\0') {
-      FUN_001f4908(0,10,0xff);
-      FUN_001f4908(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
     }
     else {
-      FUN_001f4908(0,0x14,0xff);
-      FUN_001f4908(1,0x14,0xff);
+      slotSetRequest(0,0x14,0xff);
+      slotSetRequest(1,0x14,0xff);
     }
     *(unsigned int *)(temp_v0 + 8) = 7;
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     break;
   case 7:
-    temp_v4 = FUN_002802c8();
+    temp_v4 = screenFadeIsBusy();
     if (temp_v4 != 0) break;
     linkHolderSetFlag(*(unsigned int *)(temp_v0 + 0x28));
     *(unsigned char *)(temp_v0 + 0x56c) = 0;
@@ -581,7 +581,7 @@ unsigned int FUN_00328838(void)
     break;
   case 9:
     if (*(char *)(temp_v0 + 0x558) != '\0') {
-      FUN_003e4740(temp_v0,2);
+      controllerSelectionSetMode(temp_v0,2);
       *(unsigned char *)(temp_v0 + 0x550) = 1;
       *(unsigned int *)(temp_v0 + 0x554) = 0x88;
       controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x1a);
@@ -589,7 +589,7 @@ unsigned int FUN_00328838(void)
       FUN_003d54f8(1,10);
     }
     else {
-      FUN_003e4740(temp_v0,1);
+      controllerSelectionSetMode(temp_v0,1);
       *(unsigned char *)(temp_v0 + 0x550) = 1;
       *(unsigned int *)(temp_v0 + 0x554) = 0;
       controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x1a);
@@ -600,7 +600,7 @@ unsigned int FUN_00328838(void)
     *(unsigned int *)(temp_v0 + 0xc) = 0;
     break;
   case 10:
-    temp_v6 = FUN_002802c8();
+    temp_v6 = screenFadeIsBusy();
     temp_v4 = g_localTmnl;
     if (temp_v6 != 0) break;
     if (*(char *)(temp_v0 + 0x558) == '\0') {
@@ -617,7 +617,7 @@ unsigned int FUN_00328838(void)
         if (*(int *)(*(int *)(temp_v4 + 0x560) * 0x10 + 0x56fcd8) == 3) {
           textFormatBuffer(&temp_v9,"厂钂袂䂁憂銂膂躂薂＀");
         }
-        FUN_0020401c(&temp_v9);
+        placeWinStartText(&temp_v9);
         if (*(char *)(temp_v0 + 0x558) != '\0') {
           *(unsigned int *)(temp_v0 + 8) = 0xb;
           *(unsigned int *)(temp_v0 + 0xc) = 0;
@@ -631,12 +631,12 @@ unsigned int FUN_00328838(void)
     break;
   case 0xb:
     *(unsigned int *)(temp_v0 + 0xc) = 0;
-    FUN_001f4908(0,0x14,0xff);
-    FUN_001f4908(1,0x14,0xff);
+    slotSetRequest(0,0x14,0xff);
+    slotSetRequest(1,0x14,0xff);
     *(unsigned int *)(temp_v0 + 8) = 0xf;
     break;
   case 0xe:
-    temp_v4 = FUN_00224880(*(unsigned int *)(temp_v0 + 0x20));
+    temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x20));
     if (temp_v4 != 2) break;
     *(unsigned char *)(temp_v0 + 0x558) = 0;
     FUN_003d2150(0x10000b2);
@@ -656,13 +656,13 @@ unsigned int FUN_00328838(void)
     *(unsigned char *)(temp_v0 + 0x578) = 0;
     *(unsigned char *)(temp_v0 + 0x584) = 0;
     *(unsigned char *)(temp_v0 + 0x590) = 0;
-    FUN_003e4740(temp_v0,0);
+    controllerSelectionSetMode(temp_v0,0);
     controllerTargetNodeStart(*(unsigned int *)(temp_v0 + 0x28),0x13);
     temp_v3 = *(unsigned int *)(temp_v0 + 0x28);
     linkedTargetSetFloat(temp_v3);
     break;
   case 0xf:
-    temp_v4 = FUN_002802c8();
+    temp_v4 = screenFadeIsBusy();
     if (temp_v4 == 0) {
       if (*(int *)(temp_v0 + 0x20) != 0) {
         scrScriptProcessDestroy();
@@ -683,7 +683,7 @@ unsigned int FUN_00328838(void)
       FUN_001695a0();
       FUN_001aeafc(g_handleRegistry);
       temp_v4 = g_localTmnl;
-      FUN_001ad6d8();
+      asdCameraInitAreas();
       if (*(int *)(temp_v4 + 0x28) != 0) {
         FUN_003e5c00();
         if (*(int **)(temp_v4 + 0x28) != (int *)0x0) {
@@ -708,7 +708,7 @@ unsigned int FUN_00328838(void)
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 3);
-      FUN_0019e2dc();
+      placeWinRelease();
       campCommonBgRelease();
       campButtonHelpRelease();
       temp_v6 = 0;
@@ -782,7 +782,7 @@ unsigned int FUN_00328838(void)
     if ((*(int *)(temp_v0 + 0x554) >= 0x88) &&
        (temp_v4 = linkHolderCheckFirst(*(unsigned int *)(temp_v0 + 0x28)), temp_v4 != 0)) {
       linkHolderApplyFirst(*(unsigned int *)(temp_v0 + 0x28),0);
-      FUN_003e4740(temp_v0,2);
+      controllerSelectionSetMode(temp_v0,2);
       *(unsigned char *)(temp_v0 + 0x550) = 0;
     }
   }

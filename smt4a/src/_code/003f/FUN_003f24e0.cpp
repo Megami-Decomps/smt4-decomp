@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003f0e20(void);
 int FUN_003f2aec(int);
-int FUN_004abbe8(unsigned int);
+int btlUiIdsRefresh(unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f2aec. */
-/* Supplied declaration required: FUN_004abbe8. */
+/* Supplied declaration required: btlUiIdsRefresh. */
 
 
 void FUN_003f24e0(int param_1,int param_2)
@@ -38,13 +38,13 @@ void FUN_003f24e0(int param_1,int param_2)
   do {
     temp_v2 = temp_v2 + 1;
     if (temp_v2 >= 0xc) {
-      FUN_004abbe8(g_btlUiBlock);
+      btlUiIdsRefresh(g_btlUiBlock);
       return;
     }
   } while (-1 < *(short *)(param_1 + temp_v2 * 2 + 0x3006));
   *(unsigned short *)(param_1 + temp_v2 * 2 + 0x3006) = *(unsigned short *)(temp_v1 + 0x6e);
   FUN_003f2aec(param_1);
-  FUN_004abbe8(g_btlUiBlock);
+  btlUiIdsRefresh(g_btlUiBlock);
   return;
 }
 

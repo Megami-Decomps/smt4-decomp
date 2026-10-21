@@ -1,41 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a7644` (_code @ 0x3a7644, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: zero-pair stores differ, and retail falls through into the adjacent message-flag setter instead of branching to it. */
+#include "common.h"
+
+/* The abstract window base at 0x55c684: slot 4 is its deleting destructor,
+ * a tail call to asdOperatorDelete. The factory at 0x474734 derives from it. */
+class Obj55c684 {
+public:
+    virtual ~Obj55c684() = 0;
+    u8 unk04[0x14];
+};
+
+struct MessageCloseWork {
+    u32 flags;
+    u32 state;
+    u32 frame;
+    u32 phase;
+    u8 unk010[0x1f8];
+    Obj55c684 *child;
+    u8 unk20c[0x2c];
+    u32 timeout;
+};
 
 extern "C" {
+void FUN_002c76d8(u32 flags);
+void gameDataBlocksAddFlags(u32 flags);
+void messageMainSetFlag(u8 enabled);
 
-int gameDataBlocksAddFlags(int);
-int FUN_002c76d8(int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned char g_messageMain; /* 0x57f588 */
-
-/* Supplied declaration required: gameDataBlocksAddFlags. */
-/* Supplied declaration required: FUN_002c76d8. */
-
-
-void FUN_003a7644(unsigned int *param_1)
-
+void FUN_003a7644(MessageCloseWork *work)
 {
-/* irregular: 2 native warning(s); review required */
-  param_1[1] = 0;
-  param_1[2] = 0;
-  if ((int *)param_1[0x82] != (int *)0x0) {
-    (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
-    param_1[0x82] = 0;
-  }
-  *param_1 = 0;
-  param_1[3] = 0;
-  param_1[0x8e] = 0x32;
-  FUN_002c76d8(4);
-  gameDataBlocksAddFlags(4);
-  g_messageMain = 0;
-  return;
+    work->state = 0;
+    work->frame = 0;
+    if (work->child != 0) {
+        delete work->child;
+        work->child = 0;
+    }
+    work->flags = 0;
+    work->phase = 0;
+    work->timeout = 50;
+    FUN_002c76d8(4);
+    gameDataBlocksAddFlags(4);
+    messageMainSetFlag(0);
 }
-
-} /* extern "C" */
+}

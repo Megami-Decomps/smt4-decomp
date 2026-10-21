@@ -11,7 +11,7 @@ int FUN_0014f0dc(...);
 int FUN_001523b8(...);
 int FUN_00162ea4(...);
 int asdMemoryAllocTracked(...);
-int FUN_001f474c(...);
+int asdEnvResetModelBank(...);
 int sysMemClear(...);
 int FUN_0036b824(...);
 
@@ -33,7 +33,7 @@ extern unsigned int *g_event3dOpening; /* 0x57f4c0 */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: FUN_00162ea4. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001f474c. */
+/* Supplied declaration required: asdEnvResetModelBank. */
 extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0036b824. */
@@ -78,7 +78,7 @@ unsigned int event3dOpeningCreate(void)
     FUN_00162ea4();
     puVar1[0x15a] = 1;
     puVar1[0x15b] = 0;
-    FUN_001f474c("event/oc/oc_loop.bcenv",0);
+    asdEnvResetModelBank("event/oc/oc_loop.bcenv",0);
     puVar1[0x157] = 0;
     temp_v0 = FUN_00387350("event/oc/oc_loop.bccam");
     puVar1[0x158] = temp_v0;

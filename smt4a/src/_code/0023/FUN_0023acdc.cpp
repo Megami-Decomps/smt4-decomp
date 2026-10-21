@@ -1,23 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023acdc` (_code @ 0x23acdc, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler folds sub/bitset offsets and uses indexed writeback; retail keeps the 0x88 sub-base and separate address adds. */
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
-extern "C" {
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-void FUN_0023acdc(unsigned int param_1)
-
+// Set the persistent entry bit for a valid identifier in the range 1..500.
+extern "C" void FUN_0023acdc(u32 id)
 {
-  unsigned char *pbVar1;
-  
-  if ((param_1 != 0) && (param_1 < 0x1f5)) {
-    pbVar1 = (unsigned char *)((*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + ((int)(param_1 + ((unsigned int)((int)param_1 >> 0x1f) >> 0x1d)) >> 3)
-                     + 0x27ed8);
-    *pbVar1 = *pbVar1 | (unsigned char)(1 << (((int)param_1 % 8) & 0xffU));
-  }
-  return;
+    if (id != 0 && id < 501) {
+        u8* flags = g_gameDataBlocks.block->sub.entryFlags;
+        flags[(s32)id / 8] |= (u8)(1u << ((s32)id % 8));
+    }
 }
-
-} /* extern "C" */

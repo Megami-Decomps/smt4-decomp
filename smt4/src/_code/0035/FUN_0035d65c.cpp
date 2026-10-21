@@ -30,7 +30,7 @@ typedef struct SlotRef {
 
 extern void FUN_00237a94(SlotRef *ref, void *key);
 extern void FUN_00237a7c(void *header, void **item, u32 arg);
-extern s32 FUN_00237d9c(void *body, u8 kind);
+extern s32 rangeSetAddPresetGroup(void *body, u8 kind);
 
 /* Resolves the cursor's item and its slot, fills in the slot and advances the cursor; 0 on success, 2 on failure. */
 s32 FUN_0035d65c(Cursor *cursor, void **result, void **owner)
@@ -45,7 +45,7 @@ s32 FUN_0035d65c(Cursor *cursor, void **result, void **owner)
         if (ref.slot != NULL) {
             copy = item;
             FUN_00237a7c(ref.slot->header, &copy, cursor->arg);
-            if (FUN_00237d9c(ref.slot->body, cursor->record->kind) != 0) {
+            if (rangeSetAddPresetGroup(ref.slot->body, cursor->record->kind) != 0) {
                 *result = item;
                 cursor->record = cursor->record->next;
                 return 0;

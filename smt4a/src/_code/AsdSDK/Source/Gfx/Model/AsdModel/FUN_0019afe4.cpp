@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019afe4` (_code @ 0x19afe4, 0x750 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct SceneChildSet;
+struct SceneNodePrefix;
 
 extern "C" {
 
@@ -10,7 +12,7 @@ int asdMemoryGetDefaultAllocator(void);
 int FUN_0018d9f0(...);
 int FUN_001aa528(...);
 int FUN_001acca0(void);
-int FUN_001b0758(...);
+void sceneNodeAttachDeclaredChild(SceneChildSet *, SceneNodePrefix *);
 int nw_gfx_SceneBuilder_CreateObject(int *, unsigned int, unsigned int);
 int FUN_001b4288(int *, int);
 int FUN_001b431c(int *, int);
@@ -62,7 +64,7 @@ extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001aa528. */
 /* Supplied declaration required: FUN_001acca0. */
 extern unsigned int asdMemoryGetAllocatorA(void);
-/* Supplied declaration required: FUN_001b0758. */
+/* Supplied declaration required: sceneNodeAttachDeclaredChild. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: FUN_001b4288. */
 /* Supplied declaration required: FUN_001b431c. */
@@ -386,7 +388,7 @@ LAB_0019b358:
   }
   for (; piVar11 = piVar1, temp_v15 = piVar8, piVar15 != piVar2; piVar15 = piVar15 + 1) {
     for (; piVar11 != piVar2; piVar11 = piVar11 + 1) {
-      FUN_001b0758(*piVar15,*piVar11);
+      sceneNodeAttachDeclaredChild((SceneChildSet *)*piVar15,(SceneNodePrefix *)*piVar11);
     }
     piVar8 = temp_v15;
   }

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-extern int FUN_002bc11c(void);
+extern int osVirtToPhysAddress(void);
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: asdMemoryAlloc. */
 
@@ -91,7 +91,7 @@ LAB_002bc450:
         asdMemoryAllocAligned(0x10000,0x100,0,temp_v3,0x40,1);
       }
       piVar4[2] = temp_v0;
-      temp_v3 = FUN_002bc11c();
+      temp_v3 = osVirtToPhysAddress();
       piVar4[3] = temp_v3;
     }
     temp_v2 = temp_v2 + 1;

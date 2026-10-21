@@ -7,9 +7,9 @@ int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int FUN_00292c0c(void);
 int gameGlobalsSetSelected(int a);
-int FUN_002a71fc(int a);
+int messageStatesSetFirst(int a);
 int scrScriptProcessDestroy(void);
-int FUN_002a7890(void);
+int placeWinRelease(void);
 int asdTMTexTableFreeEntry(int table);
 int asdTMTexTableReleaseNode(int table, int index);
 int FUN_002bff50(void);
@@ -68,7 +68,7 @@ void FUN_003a3914(Scene *scene)
         asdMemFree();
         scene->bufferD = 0;
     }
-    FUN_002a7890();
+    placeWinRelease();
     if (jobIsValid(scene->jobA) != 0) {
         jobStop(scene->jobA, 0);
     }
@@ -103,7 +103,7 @@ void FUN_003a3914(Scene *scene)
     buttonHelpRelease();
     buttonHelpTexturesUnref();
     FUN_002bff50();
-    FUN_002a71fc(1);
+    messageStatesSetFirst(1);
 }
 
 } /* extern "C" */

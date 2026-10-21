@@ -10,7 +10,7 @@ int FUN_0025463c(void);
 int FUN_002595e0(void);
 int cecProcessForward(void);
 int FUN_002597c0(void);
-int FUN_00262f68(unsigned int, int);
+int objectFlagsClear(unsigned int, int);
 int saveGetMapFlag(int, int);
 int gameFlagSetValue(int, int);
 int scrScriptProcessStartEntry(...);
@@ -22,7 +22,7 @@ int rt_aeabi_memclr(int, int);
 int FUN_002d67fc(int);
 int campCecEditDestroy(void);
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int campCecEditGetFlag125(void);
 /* Supplied declaration required: FUN_00254600. */
 /* Supplied declaration required: FUN_0025461c. */
@@ -32,7 +32,7 @@ extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_002595e0. */
 /* Supplied declaration required: cecProcessForward. */
 /* Supplied declaration required: FUN_002597c0. */
-/* Supplied declaration required: FUN_00262f68. */
+/* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: saveGetMapFlag. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -74,14 +74,14 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
       *(unsigned char *)(temp_v4 + 0x3d) = 1;
     }
     if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-       (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+       (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
       *(unsigned char *)(temp_v4 + 0x40) = 1;
     }
     return 0;
   }
   if (*(char *)(temp_v4 + 0x40) != '\0') {
     if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-       (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+       (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
       *(unsigned char *)(temp_v4 + 0x40) = 1;
     }
     return 0;
@@ -96,7 +96,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
     return 0;
   }
   if ((*(unsigned char *)(temp_v4 + 0x3c) & 1) != 0) {
-    temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4));
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4));
     if (temp_v3 == 2) {
       temp_v3 = *(int *)(temp_v4 + 0x38);
       if (temp_v3 != 0) {
@@ -114,7 +114,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
           *(unsigned int *)(temp_v4 + 0x38) = 7;
           *(unsigned char *)(temp_v4 + 0x3c) = (*(unsigned char *)(temp_v4 + 0x3c) & 0xfe) | 2;
           if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-             (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+             (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
             *(unsigned char *)(temp_v4 + 0x40) = 1;
           }
           return 0;
@@ -125,7 +125,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
             *(unsigned char *)(temp_v4 + 0x3e) = 1;
             *(unsigned char *)(temp_v4 + 0x3c) = 0;
             if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-               (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+               (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
               *(unsigned char *)(temp_v4 + 0x40) = 1;
             }
             return 0;
@@ -139,7 +139,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
               *(unsigned char *)(temp_v4 + 0x40) = 1;
             }
             if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-               (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+               (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
               *(unsigned char *)(temp_v4 + 0x40) = 1;
             }
             return 0;
@@ -155,7 +155,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
               temp_v2 = flagWordTestBit(temp_v1,2);
               if (temp_v2 != 0) {
                 temp_v1 = gameGetUnitRecord((int)*(char *)(temp_v3 + temp_v5 + 0x90f0));
-                FUN_00262f68(temp_v1,4);
+                objectFlagsClear(temp_v1,4);
               }
             }
             temp_v5 = temp_v5 + 1;
@@ -164,7 +164,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
         }
         *(unsigned char *)(temp_v4 + 0x3c) = 0;
         if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-           (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+           (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
           *(unsigned char *)(temp_v4 + 0x40) = 1;
         }
         return 0;
@@ -184,7 +184,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
               *(unsigned int *)(temp_v4 + 0x38) = 4;
               FUN_0025461c();
               if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-                 (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+                 (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
                 *(unsigned char *)(temp_v4 + 0x40) = 1;
               }
               return 0;
@@ -205,7 +205,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
               temp_v3 = 6;
               *(int *)(temp_v4 + 0x38) = temp_v3;
               if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-                 (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+                 (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
                 *(unsigned char *)(temp_v4 + 0x40) = 1;
               }
               return 0;
@@ -220,13 +220,13 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
                 temp_v2 = flagWordTestBit(temp_v1,2);
                 if (temp_v2 != 0) {
                   temp_v1 = gameGetUnitRecord((int)*(char *)(temp_v3 + temp_v5 + 0x90f0));
-                  FUN_00262f68(temp_v1,4);
+                  objectFlagsClear(temp_v1,4);
                 }
               }
               temp_v5 = temp_v5 + 1;
               if (temp_v5 >= 0x18) {
                 if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-                   (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+                   (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
                   *(unsigned char *)(temp_v4 + 0x40) = 1;
                 }
                 return 0;
@@ -244,7 +244,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
         }
         *(int *)(temp_v4 + 0x38) = temp_v3;
         if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-           (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+           (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
           *(unsigned char *)(temp_v4 + 0x40) = 1;
         }
         return 0;
@@ -279,7 +279,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
     *(unsigned char *)(temp_v4 + 0x3c) = temp_v0;
   }
   if ((*(char *)(temp_v4 + 0x3f) != '\0') &&
-     (temp_v3 = FUN_0019e0c0(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
+     (temp_v3 = scrRunOpcodesStub(*(unsigned int *)(temp_v4 + 4)), temp_v3 == 2)) {
     *(unsigned char *)(temp_v4 + 0x40) = 1;
   }
   return 0;

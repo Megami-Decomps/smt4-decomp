@@ -19,7 +19,7 @@ typedef struct {
 } param_2_stack;
 
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_00573858; /* 0x573858 */
 extern unsigned int DAT_0057385c; /* 0x57385c */
 extern unsigned int DAT_00573878; /* 0x573878 */
@@ -50,13 +50,13 @@ void FUN_003e2a88(unsigned int *param_1,int param_2)
     temp_v0 = param_1[3];
   }
   else {
-    FUN_004f7b84(DAT_00573808,"ef_Ancient_01G");
+    FUN_004f7b84(g_btlAux,"ef_Ancient_01G");
     *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
     temp_v0 = param_1[3] | 2;
     param_1[3] = temp_v0;
   }
   if ((temp_v0 & 2) != 0) {
-    temp_v1 = DAT_00573808;
+    temp_v1 = g_btlAux;
     FUN_004f6d34();
     if (temp_v1 != 0) {
       FUN_003e2840(param_1,param_2,4);

@@ -13,7 +13,7 @@ extern unsigned int DAT_00570dd4; /* 0x570dd4 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(void);
-extern int FUN_00168518(int, unsigned short);
+extern int dataTableGetCategoryEntry(int, unsigned short);
 extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_003e87a8. */
@@ -34,7 +34,7 @@ unsigned int FUN_0038d548(void)
   temp_v2 = gameGetOptions();
   temp_v0 = *(unsigned short *)(temp_v2 + 0x12e);
   temp_v2 = gameGetOptions();
-  temp_v2 = FUN_00168518((int)*(short *)(temp_v2 + 300),temp_v0);
+  temp_v2 = dataTableGetCategoryEntry((int)*(short *)(temp_v2 + 300),temp_v0);
   FUN_00371c3c((int)(short)(*(short *)(temp_v2 + 100) + 1),0);
   temp_v3 = DAT_00570dd4 | *(unsigned int *)(temp_v1 + 0x45a4);
   *(unsigned int *)(temp_v1 + 0x45a0) = DAT_00570dd0 | *(unsigned int *)(temp_v1 + 0x45a0);

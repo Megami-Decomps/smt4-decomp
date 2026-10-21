@@ -33,7 +33,7 @@ struct fn_0036cfb0_arg0 {
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
-extern int FUN_00224880(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: cecProcessStart. */
 /* Supplied declaration required: cecProcessDestroy. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -59,14 +59,14 @@ unsigned int FUN_0036cfb0(fn_0036cfb0_arg0 *param_1)
   temp_v0 = param_1->field_0x150;
   if (temp_v0 != 0) {
     if (temp_v0 != 1) {
-      if ((temp_v0 == 2) && (temp_v0 = FUN_00224880(param_1->field_0xf4), temp_v0 == 2)) {
+      if ((temp_v0 == 2) && (temp_v0 = scrRunOpcodesStub(param_1->field_0xf4), temp_v0 == 2)) {
         param_1->field_0x144 = 0xc;
         temp_v4 = 3;
         param_1->field_0x150 = 0;
       }
     }
     else {
-      temp_v0 = FUN_00224880(param_1->field_0xf4);
+      temp_v0 = scrRunOpcodesStub(param_1->field_0xf4);
       if (temp_v0 == 2) {
         temp_v0 = gameGetSlotTable();
         temp_v3 = 0;

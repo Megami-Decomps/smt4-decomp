@@ -6,22 +6,22 @@ extern "C" {
 
 int pointConvertToFloat(int, unsigned int, unsigned int);
 int FUN_00233240(int, int);
-int FUN_0023360c(int);
-int FUN_0023553c(int);
-int FUN_0028ca60(unsigned int);
+int flaggedValueHolderGetTotal(int);
+int messageMainSetTargetFlags(int);
+int gameClearUnlockedSavedId(unsigned int);
 int FUN_0029c43c(int, int);
 int buttonHelpSetPreset(int);
 int FUN_002b8ee0(int, int);
 int FUN_002bf818(int);
-int FUN_00311430(int, int);
+int statusOpenSkillSelection(int, int);
 
-extern int FUN_00231184(void);
+extern int buttonHelpIsNotActive(void);
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_0023360c. */
-/* Supplied declaration required: FUN_0023553c. */
-/* Supplied declaration required: FUN_0028ca60. */
-extern unsigned int FUN_0028cab8(void);
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
+/* Supplied declaration required: gameClearUnlockedSavedId. */
+extern unsigned int statusDownGetValue(void);
 extern int statusScreenIsClosed(void);
 /* Supplied declaration required: FUN_0029c43c. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -29,7 +29,7 @@ extern int statusScreenIsClosed(void);
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf818. */
-/* Supplied declaration required: FUN_00311430. */
+/* Supplied declaration required: statusOpenSkillSelection. */
 
 
 void FUN_003ab128(int param_1)
@@ -42,15 +42,15 @@ void FUN_003ab128(int param_1)
   unsigned int temp_v3;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_0023360c(param_1 + 0x20);
+  temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 0x20 + 0x5ac);
   switch(*(unsigned int *)(param_1 + 0x18)) {
   case 0:
-    FUN_0023553c(0);
+    messageMainSetTargetFlags(0);
     break;
   case 1:
     FUN_00233240(param_1 + 0xdc,1);
-    FUN_00311430(temp_v0,1);
+    statusOpenSkillSelection(temp_v0,1);
     break;
   case 2:
     temp_v1 = param_1 + 0x188;
@@ -67,12 +67,12 @@ void FUN_003ab128(int param_1)
     if (temp_v1 == 0) {
       return;
     }
-    temp_v2 = FUN_0028cab8();
+    temp_v2 = statusDownGetValue();
     *(unsigned int *)(param_1 + 0xa5b4) = temp_v2;
     if (temp_v2 != 0) {
-      FUN_0028ca60(temp_v2 & 0xffff);
-      FUN_0023360c(param_1 + 0x20);
-      FUN_0023553c(1);
+      gameClearUnlockedSavedId(temp_v2 & 0xffff);
+      flaggedValueHolderGetTotal(param_1 + 0x20);
+      messageMainSetTargetFlags(1);
     }
     FUN_00233240(param_1 + 0xdc,0);
     buttonHelpSetPreset(0x3e);
@@ -86,7 +86,7 @@ void FUN_003ab128(int param_1)
     if (*(char *)(param_1 + 0x186) == '\0') {
       return;
     }
-    temp_v1 = FUN_00231184();
+    temp_v1 = buttonHelpIsNotActive();
     if (temp_v1 == 0) {
       return;
     }
@@ -98,7 +98,7 @@ void FUN_003ab128(int param_1)
     *(int *)(param_1 + 0x18) = temp_v1;
     return;
   case 5:
-    temp_v1 = FUN_0023360c(param_1 + 0x20);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
     FUN_0029c43c(-*(int *)(param_1 + temp_v1 * 0x20 + 0x5b4),0);
     *(unsigned int *)(param_1 + 0x14) = 7;
     *(unsigned int *)(param_1 + 0x18) = 0;

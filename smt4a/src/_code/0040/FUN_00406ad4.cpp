@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001006c2(...);
 int FUN_001006ec(int, int, int);
-int FUN_002e32a4(int, unsigned char *, unsigned char *, unsigned int, int);
+void FUN_002e32a4(int kind, ...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
 typedef struct {

@@ -7,7 +7,7 @@ int bgmFadeOut(int id);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
 int jobStop(u32 job, int mode);
-extern int FUN_001add6c(void);
+extern int uniteRequestSoundChannel(void);
 extern int lmapMainIsRunning(void);
 extern int jobIsValid(u32 job);
 extern int mapMainIsBusy(void);
@@ -25,7 +25,7 @@ extern ScriptWork *g_result;
 void FUN_0029b074(void)
 {
     if ((g_result != NULL) && (jobIsValid(g_result->job) != 0)) {
-        if ((g_result->unk3560 == 1) && (FUN_001add6c() == 0)) {
+        if ((g_result->unk3560 == 1) && (uniteRequestSoundChannel() == 0)) {
             if ((mapMainIsBusy() != 0) || (lmapMainIsRunning() != 0)) {
                 bgmReleaseStopped();
             } else {

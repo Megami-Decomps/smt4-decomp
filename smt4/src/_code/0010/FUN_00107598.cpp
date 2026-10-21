@@ -13,8 +13,8 @@ int FUN_00112490(void);
 int FUN_0011d12c(void);
 
 typedef int romwright_code(...);
-extern unsigned int DAT_0044e330; /* 0x44e330 */
-extern romwright_code *DAT_0044e334; /* 0x44e334 */
+extern unsigned int g_gfxAllocateCallback; /* 0x44e330 */
+extern romwright_code *g_gfxReleaseCallback; /* 0x44e334 */
 extern unsigned int DAT_0044e340; /* 0x44e340 */
 extern signed char DAT_004c62a0; /* 0x4c62a0 */
 
@@ -52,15 +52,15 @@ joined_r0x001075e8:
       if (puVar1 != (unsigned int *)0x0) {
         puVar2 = (unsigned int *)puVar1[0x10];
         if (puVar1[1] != 0) {
-          if (DAT_0044e334 != (romwright_code *)0x0) {
-            (*DAT_0044e334)(0x10000,0x105,*puVar1);
-            if (DAT_0044e334 != (romwright_code *)0x0) {
-              (*DAT_0044e334)(0x10000,0x100,0,puVar1);
+          if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+            (*g_gfxReleaseCallback)(0x10000,0x105,*puVar1);
+            if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+              (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar1);
             }
           }
         }
-        else if (DAT_0044e334 != (romwright_code *)0x0) {
-          (*DAT_0044e334)(0x10000,0x100,0,puVar1);
+        else if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+          (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar1);
         }
         goto joined_r0x001075e8;
       }
@@ -74,26 +74,26 @@ joined_r0x0010765c:
       if (puVar1 != (unsigned int *)0x0) {
         puVar2 = (unsigned int *)puVar1[6];
         if (puVar1[1] != 0) {
-          if (DAT_0044e334 != (romwright_code *)0x0) {
-            (*DAT_0044e334)(puVar1[5],0x104,*puVar1);
-            if (DAT_0044e334 != (romwright_code *)0x0) {
-              (*DAT_0044e334)(0x10000,0x100,0,puVar1);
+          if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+            (*g_gfxReleaseCallback)(puVar1[5],0x104,*puVar1);
+            if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+              (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar1);
             }
           }
         }
-        else if (DAT_0044e334 != (romwright_code *)0x0) {
-          (*DAT_0044e334)(0x10000,0x100,0,puVar1);
+        else if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+          (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar1);
         }
         goto joined_r0x0010765c;
       }
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 0x20);
-    if (DAT_0044e334 != (romwright_code *)0x0) {
-      (*DAT_0044e334)(0x10000,0x100,0,DAT_0044e340);
+    if (g_gfxReleaseCallback != (romwright_code *)0x0) {
+      (*g_gfxReleaseCallback)(0x10000,0x100,0,DAT_0044e340);
     }
     DAT_0044e340 = 0;
-    DAT_0044e330 = 0;
-    DAT_0044e334 = (romwright_code *)0x0;
+    g_gfxAllocateCallback = 0;
+    g_gfxReleaseCallback = (romwright_code *)0x0;
   }
   return;
 }

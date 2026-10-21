@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019102c(unsigned int *, int);
+int objectCommandReserveWords(unsigned int *, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -12,8 +12,8 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_2_stack;
 
-extern unsigned int *FUN_00175678(void);
-/* Supplied declaration required: FUN_0019102c. */
+extern unsigned int *objectCommandQueueGet(void);
+/* Supplied declaration required: objectCommandReserveWords. */
 
 
 unsigned int FUN_001756d0(int *param_1,unsigned char param_2)
@@ -24,9 +24,9 @@ unsigned int FUN_001756d0(int *param_1,unsigned char param_2)
   unsigned int *puVar2;
   unsigned int temp_v0;
   
-  puVar1 = (unsigned int *)FUN_00175678();
+  puVar1 = (unsigned int *)objectCommandQueueGet();
   puVar2 = puVar1;
-  FUN_0019102c(puVar1,6);
+  objectCommandReserveWords(puVar1,6);
   puVar2[3] = puVar1[0x61];
   *(unsigned char *)(puVar2 + 1) = 9;
   temp_v0 = (**(romwright_code **)(*param_1 + 0x20))(param_1);

@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_00163aa4(int);
 int eventQueueAddUniqueIfValid(int);
-int FUN_00224880(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int FUN_00228b04(int, int);
 int flaggedEntryGetValueB(int);
 int flaggedEntryGetValueA(int);
 int flaggedEntrySetValueB(int, int);
 int FUN_00484be0(int);
-int FUN_00485060(...);
+int nameFormSetCharacter(...);
 int stateSetterEnterState(int, int);
 int sendEvent100020F(void);
 int sendEvent100020E(void);
@@ -24,16 +24,16 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: flaggedEntryGetValueB. */
 /* Supplied declaration required: flaggedEntryGetValueA. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 extern int FUN_0048408c(int, int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00484be0. */
-/* Supplied declaration required: FUN_00485060. */
+/* Supplied declaration required: nameFormSetCharacter. */
 /* Supplied declaration required: stateSetterEnterState. */
-extern int FUN_00485b14(int);
+extern int largeGridHandleTouchSelection(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
 extern int inputIsQuestConfirmPressed(void);
@@ -57,9 +57,9 @@ void FUN_00483d34(int param_1)
   unsigned int temp_v9;
   int in_r12;
   
-  FUN_00224880(*(unsigned int *)(param_1 + 0x26c));
+  scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x26c));
   FUN_00163aa4(param_1 + 0x294);
-  temp_v5 = FUN_00485b14(param_1);
+  temp_v5 = largeGridHandleTouchSelection(param_1);
   *(int *)(param_1 + 0x568) = temp_v5;
   if ((temp_v5 == 1 || temp_v5 == 2) || (temp_v6 = inputIsQuestConfirmPressed(), temp_v6 != 0)) {
     return;
@@ -76,7 +76,7 @@ void FUN_00483d34(int param_1)
       temp_v3 = 0;
     }
     else {
-      FUN_00485060(param_1,(int)*(char *)(param_1 + 0x22),0xffff8140);
+      nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22),0xffff8140);
       FUN_00484be0(param_1);
       if (*(char *)(param_1 + 0x22) < '\a') {
         *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
@@ -88,7 +88,7 @@ void FUN_00483d34(int param_1)
       if (*(short *)(
                     "艠艡艢艣艤芁节芃芄芅艏艐艑艒艓艥艦艧艨艩芆芇芈芉芊艔艕艖艗艘艪艫艬艭艮芋芌芍芎芏腉膗膔膓腏良艰艱色艳芐芑芒芓芔膕膖腩腪腻艴艵艶艷艸芕芖芗芘芙腼膁膃膄腈艹腀腀腀腀芚腀腀腀腀腞腃腄腆腇腉腈腠膏膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘膦膨膪膩膫腆膎臍臝臎蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉臷膝腉腈腠膏膑膒膓膕腇腩腪膃膄腫腬腭腮腯腰腱腲腳腴腵腶腷腸腹腺腞腟腑腐腢腻腼腾膀膁膖腅腁腂腄腣腤腥腦腧腨膋膍腕腔腓腒腗腖腘腙膧膔致至臉臈腌腍腎腽膙膚膠膡膞膟膤膥膢膣膛膜臵臶膉膊膘膦膨膪膩膫腆膎臍臝臎艐艑艒艓艔艕艖艗艘艏艐艑艒艓艔艕艖艗艘艏臷膝艐艑艒艓艔艕艖艗艘艏腀腀腀腀蝀蝁蝂蝃蝄蝅蝆蝇蝈蝉腀腀腀腀蝔蝕蝖蝗蝘蝙蝚蝛蝜蝝腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀艐艑艒艓艔艕艖艗艘艏腀腀腀腀ŀ"
                     + *(int *)(param_1 + 0x10) * 2 + *(int *)(param_1 + 0x14) * 0x1e) != -0x7ec0) {
-        FUN_00485060(param_1,(int)*(char *)(param_1 + 0x22));
+        nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22));
         FUN_00484be0(param_1);
         if (*(char *)(param_1 + 0x22) < '\a') {
           *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) + '\x01';
@@ -119,7 +119,7 @@ void FUN_00483d34(int param_1)
         return;
       }
     }
-    FUN_00485060(param_1,(int)*(char *)(param_1 + 0x22),0);
+    nameFormSetCharacter(param_1,(int)*(char *)(param_1 + 0x22),0);
     temp_v5 = 0;
     if ('\0' < *(char *)(param_1 + 0x22)) {
       *(char *)(param_1 + 0x22) = *(char *)(param_1 + 0x22) - '\x01';

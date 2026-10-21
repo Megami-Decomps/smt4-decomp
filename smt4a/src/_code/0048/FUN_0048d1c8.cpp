@@ -15,7 +15,7 @@ struct fn_0048d1c8_arg0 {
     uint field_0x10; /* +0x10 */
 };
 
-extern int FUN_002bf444(void);
+extern int buttonHelpIsNotActive(void);
 /* Supplied declaration required: FUN_0048a378. */
 
 
@@ -28,7 +28,7 @@ void FUN_0048d1c8(fn_0048d1c8_arg0 *param_1)
   temp_v0 = param_1->field_0x8;
   if (temp_v0 != 0) {
     if (temp_v0 == 1) {
-      temp_v0 = FUN_002bf444();
+      temp_v0 = buttonHelpIsNotActive();
       if (temp_v0 != 0) {
         param_1->field_0x8 = 2;
       }

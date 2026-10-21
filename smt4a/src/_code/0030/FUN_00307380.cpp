@@ -20,7 +20,7 @@ typedef struct {
 } param_7_stack;
 
 extern int *FUN_00116f6c(void);
-extern unsigned int FUN_002e6e26(void);
+extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
 extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
@@ -76,7 +76,7 @@ void FUN_00307380(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
       param_1[2] = uStack_2c;
       return;
     }
-    temp_v1 = FUN_002e6e26();
+    temp_v1 = onlineContextGetInstance();
     FUN_002e78d0(temp_v1,piVar2,0);
     puVar4 = (unsigned int *)&temp_v6;
     temp_v6 = 0x10001;

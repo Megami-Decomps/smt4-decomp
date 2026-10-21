@@ -5,17 +5,17 @@
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_00184528(...);
+int uiSpriteBankApplyPreset(...);
 int scrScriptProcessStartEntry(...);
 int FUN_0040a55c(...);
 
 int FUN_00148bb8(...);
 int FUN_00163aa4(unsigned int *);
 int FUN_0019de98(...);
-int FUN_00224880(...);
+int scrRunOpcodesStub(...);
 int messageWindowIsState1(...);
 int obj04Finish(void);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int pointConvertToFloat(unsigned int *, unsigned int, unsigned int);
 int FUN_004964e0(...);
 int FUN_00496a0c(...);
@@ -39,17 +39,17 @@ extern unsigned char LAB_004999c8; /* 0x4999c8 */
 extern unsigned int vec2GetXInt(unsigned int *);
 extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-extern int FUN_002a4b60(void);
+extern int messageMainGetValue(void);
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: messageWindowIsState1. */
 extern int panelIsMissingOrFlagClear(void);
 /* Supplied declaration required: obj04Finish. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 extern int FUN_0040a4cc(unsigned int);
 /* Supplied declaration required: FUN_0040a55c. */
 /* Supplied declaration required: pointConvertToFloat. */
@@ -78,15 +78,15 @@ void FUN_004995b0(unsigned int *param_1)
     puVar6 = param_1 + 0x11e;
     if (temp_v0 != 1) {
       if (temp_v0 == 3 || temp_v0 == 4) {
-        FUN_00224880(param_1[99]);
-        FUN_00224880(param_1[100]);
+        scrRunOpcodesStub(param_1[99]);
+        scrRunOpcodesStub(param_1[100]);
         FUN_00163aa4(puVar6);
         temp_v1 = vec2GetYInt(puVar6);
         temp_v2 = vec2GetXInt(puVar6);
         pointConvertToFloat(param_1 + 0xe9,temp_v2,temp_v1);
         temp_v3 = messageWindowIsState1((int)*(char *)((int)param_1 + 0x502));
         if (temp_v3 != 0) {
-          temp_v3 = FUN_002a4b60();
+          temp_v3 = messageMainGetValue();
           temp_v3 = dataTable17Type0GetEntry(temp_v5,param_1[temp_v3 + 0x5803] + 4);
           FUN_0019de98(temp_v3 + 0x40,0xf4f4f4ff);
         }
@@ -119,8 +119,8 @@ void FUN_004995b0(unsigned int *param_1)
       }
     }
     else {
-      FUN_00224880(param_1[99]);
-      FUN_00224880(param_1[100]);
+      scrRunOpcodesStub(param_1[99]);
+      scrRunOpcodesStub(param_1[100]);
       FUN_00163aa4(puVar6);
       temp_v1 = vec2GetYInt(puVar6);
       temp_v2 = vec2GetXInt(puVar6);
@@ -129,7 +129,7 @@ void FUN_004995b0(unsigned int *param_1)
         *param_1 = *param_1 & 0xfffff0ff;
         temp_v3 = messageWindowIsState1();
         if (temp_v3 != 0) {
-          temp_v3 = FUN_002a4b60();
+          temp_v3 = messageMainGetValue();
           temp_v3 = dataTable17Type0GetEntry(temp_v5,param_1[temp_v3 + 0x5803]);
           FUN_0019de98(temp_v3 + 0x40,0xf4f4f4ff);
         }
@@ -139,7 +139,7 @@ void FUN_004995b0(unsigned int *param_1)
           FUN_0019de98(0,0xf4f4f4ff);
           temp_v3 = FUN_002a4b74();
           if (temp_v3 == -1) {
-            FUN_00388758(1);
+            messageDismissNumericBanner(1);
             param_1[4] = param_1[1];
             param_1[1] = 0xe;
             param_1[2] = 0;
@@ -227,17 +227,17 @@ void FUN_004995b0(unsigned int *param_1)
         temp_v1 = tableGroupFindEntryIndex(param_1[0x61],&LAB_004999c8);
         scrScriptProcessStartEntry(param_1[99],temp_v1);
       }
-      FUN_00224880(param_1[99]);
+      scrRunOpcodesStub(param_1[99]);
       FUN_00497690(param_1,0);
       FUN_004989f0(param_1,0);
-      FUN_00184528(param_1 + 0xf3,1);
+      uiSpriteBankApplyPreset(param_1 + 0xf3,1);
       param_1[2] = 1;
       return;
     }
     FUN_0040a55c(temp_v0,1);
     temp_v1 = tableGroupFindEntryIndex(param_1[0x61],&LAB_004999a8);
     scrScriptProcessStartEntry(param_1[99],temp_v1);
-    FUN_00224880(param_1[99]);
+    scrRunOpcodesStub(param_1[99]);
     sysPlaySe(0xa0);
     param_1[4] = param_1[1];
     param_1[1] = 4;

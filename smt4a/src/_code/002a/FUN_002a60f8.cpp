@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00137ea0(...);
-int FUN_001386e8(...);
+int gameDataFlagsClearBits(...);
+int gameDataBlocksReleaseHold(...);
 int gameDataBlocksMaskClearBits(...);
 int sysPlaySe(int);
-int FUN_00224880(...);
+int scrRunOpcodesStub(...);
 int gameDataBlocksAddFlags(int);
 int FUN_00275bc8(void);
 int scrScriptProcessStartEntry(...);
@@ -25,15 +25,15 @@ extern signed char DAT_0057f6c9; /* 0x57f6c9 */
 extern unsigned char DAT_0057f6cb; /* 0x57f6cb */
 extern signed char DAT_0057f6cc; /* 0x57f6cc */
 extern int DAT_0057f6d0; /* 0x57f6d0 */
-extern int DAT_005e2108; /* 0x5e2108 */
+extern int g_lazyScriptState; /* 0x5e2108 */
 extern int DAT_005e210c; /* 0x5e210c */
 extern int DAT_005e2110; /* 0x5e2110 */
 
-/* Supplied declaration required: FUN_00137ea0. */
-/* Supplied declaration required: FUN_001386e8. */
+/* Supplied declaration required: gameDataFlagsClearBits. */
+/* Supplied declaration required: gameDataBlocksReleaseHold. */
 /* Supplied declaration required: gameDataBlocksMaskClearBits. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 extern int FUN_00239480(void);
 /* Supplied declaration required: gameDataBlocksAddFlags. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -58,14 +58,14 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
   int temp_v2;
   
   temp_v2 = DAT_0057f6d0;
-  if (DAT_005e2108 != 0) {
+  if (g_lazyScriptState != 0) {
     param_2 = DAT_005e210c;
   }
-  if (DAT_005e2108 == 0 || param_2 == 0) {
+  if (g_lazyScriptState == 0 || param_2 == 0) {
     return 0;
   }
   if (DAT_005e2110 == 0) {
-    temp_v0 = DAT_005e2108;
+    temp_v0 = g_lazyScriptState;
     FUN_00275bc8();
     DAT_005e2110 = temp_v0;
     *(unsigned int *)(temp_v0 + 0x108) = 2;
@@ -100,8 +100,8 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
   default:
     return 0;
   case 4:
-    FUN_001386e8(1);
-    FUN_00137ea0(1);
+    gameDataBlocksReleaseHold(1);
+    gameDataFlagsClearBits(1);
     gameDataBlocksMaskClearBits(1);
     sysPlaySe(0xe8);
     if (DAT_0057f6cc == '\0') {
@@ -109,7 +109,7 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
       FUN_003b61ec();
       DAT_0057f6cc = '\x01';
     }
-    temp_v0 = FUN_00224880(DAT_005e2110);
+    temp_v0 = scrRunOpcodesStub(DAT_005e2110);
     if (temp_v0 != 2) {
       return 0;
     }
@@ -121,12 +121,12 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     break;
   case 5:
     sysPlaySe(0xe9);
-    FUN_00224880(DAT_005e2110);
+    scrRunOpcodesStub(DAT_005e2110);
     FUN_0031ed60(temp_v2,1);
     temp_v1 = 6;
     break;
   case 6:
-    FUN_00224880(DAT_005e2110);
+    scrRunOpcodesStub(DAT_005e2110);
     temp_v0 = FUN_00239480();
     if (temp_v0 != 0) {
       DAT_0057f6cb = 1;
@@ -138,8 +138,8 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     FUN_0035d7bc(temp_v2);
     sysPlaySe(0xe8);
     if (DAT_0057f6c9 != '\0') {
-      FUN_001386e8(1);
-      FUN_00137ea0(1);
+      gameDataBlocksReleaseHold(1);
+      gameDataFlagsClearBits(1);
       gameDataBlocksMaskClearBits(1);
       obj04Finish();
       DAT_0057f6cb = 0;
@@ -147,8 +147,8 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
       temp_v1 = 7;
     }
     else {
-      FUN_001386e8(1);
-      FUN_00137ea0(1);
+      gameDataBlocksReleaseHold(1);
+      gameDataFlagsClearBits(1);
       gameDataBlocksMaskClearBits(1);
       obj04Finish();
       DAT_0057f6cb = 0;
@@ -157,17 +157,17 @@ unsigned int FUN_002a60f8(unsigned int param_1,int param_2)
     }
     break;
   case 7:
-    temp_v2 = FUN_00224880(DAT_005e2110);
+    temp_v2 = scrRunOpcodesStub(DAT_005e2110);
     if (temp_v2 != 2) {
       return 0;
     }
   case 8:
     return 1;
   case 9:
-    FUN_001386e8(1);
-    FUN_00137ea0(1);
+    gameDataBlocksReleaseHold(1);
+    gameDataFlagsClearBits(1);
     gameDataBlocksMaskClearBits(1);
-    temp_v2 = FUN_00224880(DAT_005e2110);
+    temp_v2 = scrRunOpcodesStub(DAT_005e2110);
     if (temp_v2 != 2) {
       return 0;
     }

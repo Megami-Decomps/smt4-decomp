@@ -5,7 +5,7 @@
 extern "C" {
 
 int listAppendNode(int, int);
-int FUN_0019102c(int, int);
+int objectCommandReserveWords(int, int);
 int FUN_001911a4(int, int);
 int FUN_004632f8(int, int);
 int FUN_00463618(int, int);
@@ -45,7 +45,7 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: FUN_0019102c. */
+/* Supplied declaration required: objectCommandReserveWords. */
 /* Supplied declaration required: FUN_001911a4. */
 extern int FUN_00191330(void);
 /* Supplied declaration required: FUN_004632f8. */
@@ -64,7 +64,7 @@ void FUN_00463b94(fn_00463b94_arg0 *param_1)
   temp_v3 = *(int *)&param_1->field_0x1c;
   temp_v1 = FUN_00191330();
   temp_v2 = temp_v1;
-  FUN_0019102c(temp_v1,0xf);
+  objectCommandReserveWords(temp_v1,0xf);
   *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v1 + 0x184);
   *(unsigned char *)(temp_v2 + 4) = 0x2a;
   if (*(char *)(temp_v3 + 0x1c) != '\0') {

@@ -5,12 +5,12 @@
 extern "C" {
 
 int controllerSetDestination(unsigned int, unsigned char [16]);
-int FUN_003fdb18(unsigned int);
+int controllerSetRotationEulerDegrees(unsigned int);
 
 extern int g_mapGimic; /* 0x580ca0 */
 
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 
 
 void FUN_00377f54(int param_1)
@@ -30,7 +30,7 @@ void FUN_00377f54(int param_1)
     if ((*(char *)(temp_v0 + 0x8c4) != '\0') && (*(short *)(temp_v0 + 0x8c8) == param_1)) {
       temp_v2 = *(unsigned int *)(*(int *)(temp_v0 + 0x8cc) + 4);
       controllerSetDestination(temp_v2,temp_v3);
-      FUN_003fdb18(temp_v2);
+      controllerSetRotationEulerDegrees(temp_v2);
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 10);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00293a04(...);
+int asdAnimGetTrackLastFrame(...);
 int aocHandleButtons(...);
 int jobStop(...);
 
@@ -24,11 +24,11 @@ struct fn_001e00c0_arg0 {
     byte field_0x44; /* +0x44 */
 };
 
-/* Supplied declaration required: FUN_00293a04. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: aocHandleButtons. */
 extern unsigned int FUN_00294090(int, unsigned int);
 extern int FUN_00294fe0(unsigned int);
-extern int FUN_0029505c(unsigned int);
+extern int nkdwHeaderParse(unsigned int);
 extern int jobGetWork(void);
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: jobStop. */
@@ -58,7 +58,7 @@ unsigned int FUN_001e00c0(fn_001e00c0_arg0 *param_1)
         temp_v2 = 0;
       }
       else {
-        temp_v1 = FUN_0029505c(*(unsigned int *)(temp_v0 + 0x34));
+        temp_v1 = nkdwHeaderParse(*(unsigned int *)(temp_v0 + 0x34));
         if (temp_v1 == 0) {
           return 0;
         }
@@ -80,7 +80,7 @@ unsigned int FUN_001e00c0(fn_001e00c0_arg0 *param_1)
     if ((*(int *)(temp_v0 + 0x34) != 0) && (*(char *)(temp_v0 + 0x44) != '\0')) {
       temp_v3 = *(float *)(temp_v0 + 0x40) + 2.0f;
       *(float *)(temp_v0 + 0x40) = temp_v3;
-      FUN_00293a04(*(int *)(temp_v0 + 0x34),0);
+      asdAnimGetTrackLastFrame(*(int *)(temp_v0 + 0x34),0);
       if (temp_v3 <= *(float *)(temp_v0 + 0x40)) {
         *(float *)(temp_v0 + 0x40) = *(float *)(temp_v0 + 0x40) - temp_v3;
       }

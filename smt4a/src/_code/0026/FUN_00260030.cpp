@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a649c(unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *);
+int vectorKeyPrepareNextStep(unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *);
 
 typedef struct fn_00260030_arg0 fn_00260030_arg0;
 struct fn_00260030_arg0 {
@@ -29,8 +29,8 @@ extern int g_keyedRecordCount; /* 0x5702f8 */
 extern unsigned int *DAT_00570ab4; /* 0x570ab4 */
 
 extern unsigned int *FUN_00239218(fn_00260030_arg0 *);
-extern int FUN_002a398c(void);
-/* Supplied declaration required: FUN_002a649c. */
+extern int keyedRecordGet(void);
+/* Supplied declaration required: vectorKeyPrepareNextStep. */
 
 
 void FUN_00260030(fn_00260030_arg0 *param_1)
@@ -53,7 +53,7 @@ void FUN_00260030(fn_00260030_arg0 *param_1)
   
   puVar3 = DAT_00570ab4;
   if (((-1 < (g_keyedRecordCount - (int)param_1) - 1) &&
-      (temp_v2 = FUN_002a398c(), 0 < *(int *)(temp_v2 + 0xd8))) && (DAT_00570ab4 != (unsigned int *)0x0))
+      (temp_v2 = keyedRecordGet(), 0 < *(int *)(temp_v2 + 0xd8))) && (DAT_00570ab4 != (unsigned int *)0x0))
   {
     temp_v2 = *(int *)((int)param_1 * 0x148 + 0x5c60d8);
     puVar5 = (unsigned int *)FUN_00239218(param_1);
@@ -98,7 +98,7 @@ void FUN_00260030(fn_00260030_arg0 *param_1)
     }
     *(char *)((int)puVar3 + 0x6d) = (char)(int)param_1;
     puVar3[1] = puVar3[2] + temp_v2;
-    FUN_002a649c(puVar3 + 3,puVar3 + 0x17,puVar3 + 0x19,puVar3 + 0xf,puVar3 + 0x13);
+    vectorKeyPrepareNextStep(puVar3 + 3,puVar3 + 0x17,puVar3 + 0x19,puVar3 + 0xf,puVar3 + 0x13);
     puVar3[0x1a] = 1;
   }
   return;

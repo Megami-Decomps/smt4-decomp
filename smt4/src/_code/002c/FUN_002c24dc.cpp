@@ -1,38 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c24dc` (_code @ 0x2c24dc, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_DisplayMode.h"
 
-extern "C" {
-
-extern unsigned char g_asdGfxContext; /* 0x4c6290 */
-
-
-void FUN_002c24dc(int param_1,unsigned int *param_2)
-
+// Read a property of the selected graphics target, leaving unsupported queries unchanged.
+extern "C" void FUN_002c24dc(u32 property, u32 *result)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = *(int *)((*(int *)((unsigned char *)&g_asdGfxContext + 0x124)) * 4 + 0x4c63b8);
-  if (temp_v1 != 0) {
-    if (param_1 == 0x600) {
-      temp_v0 = *(unsigned int *)(temp_v1 + 4);
-    }
-    else if (param_1 == 0x601) {
-      temp_v0 = *(unsigned int *)(temp_v1 + 8);
-    }
-    else if (param_1 == 0x602) {
-      temp_v0 = *(unsigned int *)(temp_v1 + 0xc);
-    }
-    else {
-      if (param_1 != 0x603) {
+    GraphicsTarget *target = g_asdGfxContext.query.targets[g_asdGfxContext.query.active];
+    if (target == NULL)
         return;
-      }
-      temp_v0 = *(unsigned int *)(temp_v1 + 0x10);
+    switch (property) {
+    case 0x600: *result = (u32)target->pixels; break;
+    case 0x601: *result = target->format; break;
+    case 0x602: *result = target->width; break;
+    case 0x603: *result = target->height; break;
     }
-    *param_2 = temp_v0;
-  }
-  return;
 }
-
-} /* extern "C" */

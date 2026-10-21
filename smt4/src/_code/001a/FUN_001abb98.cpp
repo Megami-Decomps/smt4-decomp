@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00284838(void);
+int mapSpawnActiveSlotEffects(void);
 int FUN_002849a4(...);
 int FUN_0028527c(int);
 int FUN_0028529c(int, int, int, int, int, int);
@@ -16,7 +16,7 @@ int randNextInRange(...);
 int gameGetMapBlock(void);
 int FUN_002ce4e4(void);
 int FUN_002e0274(...);
-int FUN_002e29c0(void);
+void FUN_002e29c0(float x, float z, float heading);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 16 slot(s), 64 byte(s) */
@@ -64,7 +64,7 @@ extern int DAT_004bd0f4; /* 0x4bd0f4 */
 extern unsigned char *puRam004bd108; /* 0x4bd108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00284838. */
+/* Supplied declaration required: mapSpawnActiveSlotEffects. */
 /* Supplied declaration required: FUN_002849a4. */
 extern unsigned int asdMdlManagerClone(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028527c. */
@@ -79,7 +79,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gameGetMapBlock. */
 /* Supplied declaration required: FUN_002ce4e4. */
 /* Supplied declaration required: FUN_002e0274. */
-/* Supplied declaration required: FUN_002e29c0. */
 extern int FUN_00316ce4(void);
 
 
@@ -649,9 +648,7 @@ LAB_001ac248:;
         do {
           temp_v8 = 0;
           do {
-            VectorSignedToFloat(temp_v26,(unsigned char)(in_fpscr >> 0x16) & 3);
-            VectorSignedToFloat(temp_v27,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_002e29c0();
+            FUN_002e29c0((float)(int)temp_v26 * 500.0f + 250.0f,(float)(int)temp_v27 * 500.0f + 250.0f,(float)temp_v8 * 45.0f);
             temp_v23[0] = 0;
             temp_v13 = 0;
             temp_v23[1] = 0;
@@ -769,7 +766,7 @@ LAB_001aca98:
         VectorSignedToFloat(temp_v15,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002e0274((int)*(short *)(temp_v6 + 0xdb0),temp_v7,temp_v15);
-        FUN_00284838();
+        mapSpawnActiveSlotEffects();
       }
       temp_v6 = gameGetMapBlock();
       temp_v7 = FUN_00285574();

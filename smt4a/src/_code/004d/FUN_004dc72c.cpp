@@ -36,7 +36,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004a9c40. */
 extern int FUN_004aa020(unsigned int);
 /* Supplied declaration required: FUN_004aa7c8. */
-extern int FUN_004abb54(unsigned int);
+extern int btlUiIsMenuReady(unsigned int);
 /* Supplied declaration required: FUN_004eb838. */
 
 
@@ -64,7 +64,7 @@ unsigned int FUN_004dc72c(int *param_1,unsigned int *param_2)
     *(unsigned int *)(temp_v1 + 0x45a0) = *(unsigned int *)(temp_v1 + 0x45a0) & temp_v2;
     FUN_004a96b8(g_btlUiBlock);
   }
-  temp_v1 = FUN_004abb54(g_btlUiBlock);
+  temp_v1 = btlUiIsMenuReady(g_btlUiBlock);
   if (temp_v1 != 0) {
     temp_v2 = *(unsigned int *)(*param_1 + 0x45a0);
     temp_v3 = *(unsigned int *)(*param_1 + 0x45a4);

@@ -1,33 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c1480` (_code @ 0x4c1480, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler fuses the status tests into a mask; retail retains individual short-circuit tests. */
+#include "common.h"
 
 extern "C" {
-
-
-unsigned int FUN_004c1480(unsigned int param_1)
-
+// Report whether any of the selected status bits is present.
+s32 FUN_004c1480(u32 flags)
 {
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  
-  if (((((param_1 & 2) == 0 && (param_1 & 0x20) == 0) &&
-       ((param_1 & 0x40) == 0 && (param_1 & 0x80) == 0)) &&
-      ((param_1 & 0x100) == 0 && (param_1 & 0x200) == 0)) &&
-     ((param_1 & 0x400) == 0 && (param_1 & 8) == 0)) {
-    temp_v0 = (param_1 & 0x800) == 0;
-    temp_v1 = (param_1 & 0x1000) == 0;
-    temp_v2 = temp_v0 && temp_v1;
-    if (temp_v0 && temp_v1) {
-      param_1 = param_1 & 0x2000;
-      temp_v2 = param_1 == 0;
+    if ((flags & 0x2) != 0 || (flags & 0x20) != 0 ||
+        (flags & 0x40) != 0 || (flags & 0x80) != 0 ||
+        (flags & 0x100) != 0 || (flags & 0x200) != 0 ||
+        (flags & 0x400) != 0 || (flags & 0x8) != 0 ||
+        (flags & 0x800) != 0 || (flags & 0x1000) != 0 ||
+        (flags & 0x2000) != 0) {
+        return 1;
     }
-    if (temp_v2) {
-      return param_1;
-    }
-  }
-  return 1;
+    return 0;
 }
-
-} /* extern "C" */
+}

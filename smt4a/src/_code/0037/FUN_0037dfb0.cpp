@@ -32,7 +32,7 @@ extern void __aeabi_memset4(void *dst, int size, u32 value);
 extern int FUN_00203b40(StatusList *list, int a, int b, int c, int d, int e);
 extern int FUN_00230d30(void);
 extern int FUN_002a4964(StatusList *list, int index);
-extern int FUN_002c2c68(StatusList *list);
+extern int objectApplyIfUnblocked(StatusList *list);
 
 /* Opens the status screen's list with the two arguments: rebuilds the list, resets the touch regions and slots and enters state 0xE. */
 void FUN_0037dfb0(u32 argA, u32 argB)
@@ -43,8 +43,8 @@ void FUN_0037dfb0(u32 argA, u32 argB)
 
     status->argB = argA;
     status->argA = argB;
-    FUN_00203b40(&status->list, FUN_002c2c68(&status->list) + 1, 9, 1, 0, 1);
-    FUN_002a4964(&status->list, FUN_002c2c68(&status->list) - 1);
+    FUN_00203b40(&status->list, objectApplyIfUnblocked(&status->list) + 1, 9, 1, 0, 1);
+    FUN_002a4964(&status->list, objectApplyIfUnblocked(&status->list) - 1);
     status->unk528 = 1;
     status = g_statusDown;
     for (i = 0; i < status->touchRegionCount; i++) {

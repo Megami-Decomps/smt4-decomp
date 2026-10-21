@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 
 /* stack frame of param_3: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 
 
 void FUN_002dada4(short *param_1,int param_2,int param_3)
@@ -46,7 +46,7 @@ void FUN_002dada4(short *param_1,int param_2,int param_3)
   if (temp_v3 < param_3) {
     do {
       temp_v0 = (unsigned int)*(unsigned short *)(param_2 + temp_v3 * 2);
-      if (((temp_v0 != 0) && (FUN_00283e48(), temp_v0 != 0)) &&
+      if (((temp_v0 != 0) && (passiveSkillLookupRecord(), temp_v0 != 0)) &&
          ((*(unsigned int *)(temp_v0 + 0x38) & 0x7ff) >> 6 == 10)) {
         temp_v8 = temp_v8 + (unsigned int)*(unsigned char *)(temp_v0 + 0x24) * 10;
         temp_v6 = (int)(short)((unsigned short)*(unsigned char *)(temp_v0 + 0x28) + (short)temp_v6);

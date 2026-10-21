@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00418c3c(int, int);
 int FUN_004191f0(unsigned char [256], int, int, int *);
-int FUN_0041936c(unsigned char [256], unsigned int, int, int *);
+int textureConvertLinearTile(unsigned char [256], unsigned int, int, int *);
 int rt_memcpy(...);
 
 typedef int romwright_code(...);
@@ -38,7 +38,7 @@ extern union romwright_storage_s__A_A_A_A_A_A_A_A_A_005c143c_37_1 s__A_A_A_A_A_A
 
 /* Supplied declaration required: FUN_00418c3c. */
 /* Supplied declaration required: FUN_004191f0. */
-/* Supplied declaration required: FUN_0041936c. */
+/* Supplied declaration required: textureConvertLinearTile. */
 extern unsigned long long __aeabi_uidivmod(int, unsigned int);
 /* Supplied declaration required: rt_memcpy. */
 
@@ -127,7 +127,7 @@ FUN_00418cfc(int param_1,int param_2,int param_3,unsigned int param_4,unsigned i
               if (temp_v16 != 0) {
                 temp_v4 = ((temp_v12 - temp_v5) - 1) * temp_v11 + temp_v3;
               }
-              FUN_0041936c(temp_v9,temp_v14 + ((temp_v4 * temp_v2) & 0x3ffffffU) * 8,8,&temp_v10);
+              textureConvertLinearTile(temp_v9,temp_v14 + ((temp_v4 * temp_v2) & 0x3ffffffU) * 8,8,&temp_v10);
             }
             else {
               if (temp_v16 != 0) {

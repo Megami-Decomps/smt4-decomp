@@ -8,7 +8,7 @@ int FUN_00434d9c(void);
 int FUN_00436d04(int *, int);
 int FUN_00436d88(int *, int **);
 int FUN_004372bc(int *, int **);
-int FUN_00437644(int *, int **);
+int maskWorkProcessGroupedActions(int *, int **);
 int FUN_004387f0(...);
 
 typedef struct fn_00437828_arg1 fn_00437828_arg1;
@@ -31,7 +31,7 @@ extern int FUN_00434d04(int *, int, int, unsigned int);
 /* Supplied declaration required: FUN_00436d88. */
 /* Supplied declaration required: FUN_004372bc. */
 extern int FUN_0043756c(int *, int **);
-/* Supplied declaration required: FUN_00437644. */
+/* Supplied declaration required: maskWorkProcessGroupedActions. */
 /* Supplied declaration required: FUN_004387f0. */
 
 
@@ -99,7 +99,7 @@ unsigned int FUN_00437828(int *param_1,fn_00437828_arg1 *param_2,int param_3,int
                   return 0;
                 }
                 if (((int *)piVar3[6] != piVar3 + 5) &&
-                   (piVar5 = param_1, temp_v5 = piVar3, FUN_00437644(param_1,&temp_v5),
+                   (piVar5 = param_1, temp_v5 = piVar3, maskWorkProcessGroupedActions(param_1,&temp_v5),
                    piVar5 == (int *)0x0)) {
                   return 0;
                 }

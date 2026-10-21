@@ -6,7 +6,7 @@ extern "C" {
 extern s32 FUN_00246708(void);
 extern s32 scrGetCommandFrame(void);
 extern void FUN_0024679c(void);
-extern void FUN_002ee56c(s32 arg);
+extern void effectTextureRequestsPump(s32 arg);
 
 u8 FUN_002fe194(void)
 {
@@ -17,7 +17,7 @@ u8 FUN_002fe194(void)
     }
     ok = FUN_00246708();
     if (ok == 0) {
-        FUN_002ee56c(ok);
+        effectTextureRequestsPump(ok);
     }
     return ok != 0;
 }

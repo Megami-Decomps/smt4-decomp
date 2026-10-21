@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern int g_btlMain; /* 0x573920 */
 extern unsigned int DAT_00573978; /* 0x573978 */
 extern unsigned int DAT_0057397c; /* 0x57397c */
@@ -37,7 +37,7 @@ extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: SCARRY4 (INT_SCARRY). */
 /* Supplied declaration required: dataTable00FindById. */
-extern unsigned int FUN_003ec620(int, unsigned int);
+extern unsigned int stateEntryFindById(int, unsigned int);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003fce8c. */
@@ -82,7 +82,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
     if (temp_v5 != 0) {
       temp_v10 = SBORROW4(temp_v5,1);
       if (temp_v5 == 1) {
-        temp_v4 = FUN_003ec620(param_1,*(unsigned int *)(param_1 + 0x2020));
+        temp_v4 = stateEntryFindById(param_1,*(unsigned int *)(param_1 + 0x2020));
         if ((*(unsigned int *)(param_1 + 0x201c) & 1) == 0) {
           temp_v6 = nkdwLoaderParse(temp_v4);
           temp_v10 = '\0';
@@ -194,7 +194,7 @@ unsigned int FUN_003ea2b0(int param_1,unsigned int param_2)
       *(int *)(param_1 + 0x2020) = (int)*(short *)(param_2 + 0x8c);
 LAB_003ea3c8:
       *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
-      if ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x400) != 0) {
+      if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
         FUN_004f9450();
       }
       *pbVar12 = 1;

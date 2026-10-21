@@ -1,35 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fdd2c` (_code @ 0x2fdd2c, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_EntrySortPrimaryKey.h"
 
-extern "C" {
-
-int FUN_00192608(void);
-
-/* Supplied declaration required: FUN_00192608. */
-
-
-int FUN_002fdd2c(unsigned short *param_1,unsigned short *param_2)
-
+// Compare the primary key, then the existing table tie-break key.
+extern "C" s32 FUN_002fdd2c(const SortItem *left, const SortItem *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  FUN_00192608();
-  temp_v1 = (unsigned int)*param_2;
-  FUN_00192608();
-  temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x7e) - (unsigned int)*(unsigned short *)(temp_v1 + 0x7e);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_00192608();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_00192608();
-    temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x70) - (unsigned int)*(unsigned short *)(temp_v1 + 0x70);
-  }
-  return temp_v2;
+    EntrySortData *leftData = FUN_00192608(left->id);
+    EntrySortData *rightData = FUN_00192608(right->id);
+    s32 result = entrySortGetPrimaryKey(leftData) - entrySortGetPrimaryKey(rightData);
+    if (result == 0) {
+        leftData = FUN_00192608(left->id);
+        rightData = FUN_00192608(right->id);
+        result = leftData->tieKey - rightData->tieKey;
+    }
+    return result;
 }
-
-} /* extern "C" */

@@ -8,7 +8,7 @@ int qsort(...);
 int btlGetMainState(void);
 int FUN_003eebf4(int, int);
 int FUN_003f0e20(unsigned int *, int);
-int FUN_004c3a98(int, int);
+int btlFindEntryValue(int, int);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -35,7 +35,7 @@ extern int btlMainGetUnk14(void);
 extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_003eebf4. */
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004c3a98. */
+/* Supplied declaration required: btlFindEntryValue. */
 
 
 int FUN_004ab10c(unsigned int param_1,int param_2)
@@ -207,15 +207,15 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
             }
           }
           *(short *)(puVar11 + 4) = (short)puVar4[0x9d];
-          temp_v1 = FUN_004c3a98((int)*(short *)(temp_v7 + 0x6a),7);
+          temp_v1 = btlFindEntryValue((int)*(short *)(temp_v7 + 0x6a),7);
           *(unsigned char *)((int)puVar11 + 0x12) = temp_v1;
-          temp_v1 = FUN_004c3a98((int)*(short *)(temp_v7 + 0x6a),10);
+          temp_v1 = btlFindEntryValue((int)*(short *)(temp_v7 + 0x6a),10);
           *(unsigned char *)((int)puVar11 + 0x13) = temp_v1;
-          temp_v1 = FUN_004c3a98((int)*(short *)(temp_v7 + 0x6a),0xb);
+          temp_v1 = btlFindEntryValue((int)*(short *)(temp_v7 + 0x6a),0xb);
           *(unsigned char *)(puVar11 + 5) = temp_v1;
-          temp_v1 = FUN_004c3a98((int)*(short *)(temp_v7 + 0x6a),8);
+          temp_v1 = btlFindEntryValue((int)*(short *)(temp_v7 + 0x6a),8);
           *(unsigned char *)((int)puVar11 + 0x15) = temp_v1;
-          temp_v7 = FUN_004c3a98((int)*(short *)(temp_v7 + 0x6a),0x16);
+          temp_v7 = btlFindEntryValue((int)*(short *)(temp_v7 + 0x6a),0x16);
           temp_v2 = temp_v2 + 1;
           *(unsigned char *)((int)puVar11 + 0x16) = temp_v7 != 0;
         }

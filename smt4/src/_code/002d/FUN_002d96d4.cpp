@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0028f048(...);
+void textureLoadOptionalDemonModel(s32 id, s32 x, s32 y, u32 layer, s32 mapped);
 int FUN_00290994(...);
 
 int FUN_002580d4(...);
@@ -12,8 +12,8 @@ int FUN_0029a17c(...);
 int FUN_0029ea68(...);
 int FUN_0029efc0(...);
 int FUN_0029f7d4(void);
-int FUN_002b066c(...);
-int FUN_002b6758(...);
+int partyMemberFindById(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6dd8(...);
 int devilGetRecord(void);
 int FUN_002bce30(...);
@@ -77,7 +77,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002580d4. */
 extern unsigned int *FUN_0026280c(void);
 extern int FUN_0028cfbc(unsigned int *);
-/* Supplied declaration required: FUN_0028f048. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
 extern int FUN_0029b7b8(unsigned int, unsigned int, unsigned char *);
@@ -91,8 +90,7 @@ extern int FUN_0029efa8(unsigned int *);
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: FUN_0029f7d4. */
 extern int FUN_002a0d0c(void);
-/* Supplied declaration required: FUN_002b066c. */
-/* Supplied declaration required: FUN_002b6758. */
+/* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_002bce30. */
@@ -225,7 +223,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
               temp_v5 = 0xdc0f14ff;
             }
             else {
-              temp_v13 = FUN_002b066c(*psVar8);
+              temp_v13 = partyMemberFindById(*psVar8);
               if (temp_v13 != 0) {
                 temp_v24 = 0x5a5a5aff;
               }
@@ -265,13 +263,13 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             FUN_002bed3c();
             temp_v13 = FUN_002bf4f8(0x24,0xf5);
             if (temp_v25 != 0) {
-              FUN_002b6758(0,(int)&param_1->field_0x0 +
+              uiDrawDemonIcon(0,(int)&param_1->field_0x0 +
                              (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v13 + 8),
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2,0x6f
                            ,0);
             }
             else {
-              FUN_002b6758((int)*psVar8,
+              uiDrawDemonIcon((int)*psVar8,
                            (int)&param_1->field_0x0 +
                            (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v13 + 8),
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2,0x6f
@@ -375,7 +373,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           temp_v5 = 0xdc0f14ff;
         }
         else {
-          temp_v4 = FUN_002b066c(*psVar8);
+          temp_v4 = partyMemberFindById(*psVar8);
           if (temp_v4 != 0) {
             temp_v9 = 0x5a5a5aff;
           }
@@ -415,12 +413,12 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         FUN_002bed3c();
         temp_v4 = FUN_002bf4f8(0x24,0xfb);
         if (temp_v25 != 0) {
-          FUN_002b6758(0,(int)&param_1->field_0x0 +
+          uiDrawDemonIcon(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8),
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,0x83,0);
         }
         else {
-          FUN_002b6758((int)*psVar8,
+          uiDrawDemonIcon((int)*psVar8,
                        (int)&param_1->field_0x0 +
                        (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8),
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,0x83,0);
@@ -524,7 +522,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
                        (int)**(short **)(temp_v8 + 0xc),(int)(*(short **)(temp_v8 + 0xc))[1],1);
           temp_v10 = FUN_002bf4f8(0x24,0xda);
-          FUN_0028f048((int)*(short *)((int)puVar4 + temp_v4 * 2 + 0x6278),
+          textureLoadOptionalDemonModel((int)*(short *)((int)puVar4 + temp_v4 * 2 + 0x6278),
                        (int)&param_1->field_0x0 +
                        (int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v10 + 8),
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v10 + 10) + param_2,0x68,1)
@@ -562,7 +560,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             temp_v9 = 0xdc0f14ff;
           }
           else {
-            temp_v4 = FUN_002b066c(*puVar10);
+            temp_v4 = partyMemberFindById(*puVar10);
             if (temp_v4 != 0) {
               temp_v5 = 0x5a5a5aff;
             }

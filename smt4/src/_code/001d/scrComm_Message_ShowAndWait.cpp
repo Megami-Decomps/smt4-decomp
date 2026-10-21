@@ -2,7 +2,7 @@
 
 extern "C" {
 
-s32 FUN_0028dc98(s32 arg);
+s32 scrCommMessageSetMode(s32 arg);
 s32 FUN_0028660c(void);
 u32 FUN_002865f8(void);
 u32 scrGetArg(u32 index);
@@ -23,7 +23,7 @@ void scrComm_Message_ShowAndWait(void)
 {
     s32 mode;
 
-    FUN_0028dc98(0);
+    scrCommMessageSetMode(0);
     mode = FUN_0028660c();
     if (mode == 20) {
         mode = 5;

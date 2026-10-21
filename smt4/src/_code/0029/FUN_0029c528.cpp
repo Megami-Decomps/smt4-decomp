@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029c528` (_code @ 0x29c528, 0x188 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail ends with POP LR/NOP fallthrough into FUN_0029c6b0, whose source is already a boundary fragment; this draft also incorrectly absorbs that following stat-rebuild body. */
 #include "romwright_types.h"
 
 extern "C" {

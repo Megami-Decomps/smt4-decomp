@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_0023f194(...);
-int FUN_0023f27c(int, int, unsigned int, int, int, unsigned int, int, int, unsigned int);
-int FUN_00267d3c(unsigned int);
+unsigned int FUN_0023f27c(int, unsigned int, unsigned int, unsigned int, void *, int, int, int, int);
+int btlUiPlaySceneFadeOutWhenReady(unsigned int);
 int FUN_00282820(int, int, int, int, int, int, int, int);
-int FUN_00297468(char *, unsigned int *, int);
-int FUN_0029c3c0(int, unsigned int, int);
+int asdLoadFileAsyncSimple(char *, unsigned int *, int);
+int slotSetRequest(int, unsigned int, int);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -34,10 +34,10 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_0023f194. */
 /* Supplied declaration required: FUN_0023f27c. */
-/* Supplied declaration required: FUN_00267d3c. */
+/* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
 /* Supplied declaration required: FUN_00282820. */
-/* Supplied declaration required: FUN_00297468. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
+/* Supplied declaration required: slotSetRequest. */
 extern int gameDataBlocksGetSaveData(void);
 
 
@@ -51,16 +51,16 @@ unsigned int * FUN_003357c0(unsigned int *param_1)
   
   if (param_1[2] == DAT_00439a70) {
     FUN_00282820(0,0,0,0,8,0,0xb,0);
-    FUN_00267d3c(g_btlUiBlock);
+    btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
   }
   if (param_1[2] == DAT_00439a84) {
     FUN_0023f27c(0,0,DAT_00439a88,0x10,0,DAT_00439a8c,0,2,0xffffffff);
   }
   if (param_1[2] == DAT_00439a74) {
-    FUN_0029c3c0(0,DAT_00439a78,0xff);
+    slotSetRequest(0,DAT_00439a78,0xff);
   }
   if (param_1[2] == DAT_00439a7c) {
-    FUN_0029c3c0(1,DAT_00439a80,0xff);
+    slotSetRequest(1,DAT_00439a80,0xff);
   }
   if (DAT_00439a90 < (unsigned int)param_1[2]) {
     *param_1 = 3;
@@ -70,14 +70,14 @@ unsigned int * FUN_003357c0(unsigned int *param_1)
     else {
       pcVar2 = "battle/gameover/level_event.bf";
     }
-    FUN_00297468(pcVar2,param_1 + 3,0);
+    asdLoadFileAsyncSimple(pcVar2,param_1 + 3,0);
     if ((param_1[1] & 1) == 0) {
       pcVar2 = "battle/gameover/gameover.mbm";
     }
     else {
       pcVar2 = "battle/gameover/level_event.mbm";
     }
-    FUN_00297468(pcVar2,param_1 + 5,0);
+    asdLoadFileAsyncSimple(pcVar2,param_1 + 5,0);
     temp_v1 = gameDataBlocksGetSaveData();
     temp_v0 = *(char *)(temp_v1 + 0x24b29);
     if (temp_v0 != -1) {

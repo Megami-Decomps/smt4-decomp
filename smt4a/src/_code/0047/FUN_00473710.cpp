@@ -1,32 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00473710` (_code @ 0x473710, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler preserves the object-slot address; retail stores NULL through the owner base. */
+#include "common.h"
+
+struct ScreenResourceOwner {
+    u8 unk000[0x5a8]; // 0x000
+    void* object;      // 0x5a8
+    void* buffer;      // 0x5ac
+};
 
 extern "C" {
+void* FUN_004279cc(void* object);
+void asdOperatorDelete(void* object);
+void asdMemFree(void* memory);
 
-int asdMemFree(void);
-int asdOperatorDelete(void);
-int FUN_004279cc(void);
-
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_004279cc. */
-
-
-void FUN_00473710(int param_1)
-
+// Release the owned object and backing allocation.
+void FUN_00473710(ScreenResourceOwner* owner)
 {
-/* irregular: 3 native warning(s); review required */
-  if (*(int *)(param_1 + 0x5a8) != 0) {
-    FUN_004279cc();
-    asdOperatorDelete();
-    *(unsigned int *)(param_1 + 0x5a8) = 0;
-  }
-  if (*(int *)(param_1 + 0x5ac) != 0) {
-    asdMemFree();
-    *(unsigned int *)(param_1 + 0x5ac) = 0;
-  }
-  return;
+    if (owner->object != NULL) {
+        asdOperatorDelete(FUN_004279cc(owner->object));
+        owner->object = NULL;
+    }
+    if (owner->buffer != NULL) {
+        asdMemFree(owner->buffer);
+        owner->buffer = NULL;
+    }
 }
-
-} /* extern "C" */
+}

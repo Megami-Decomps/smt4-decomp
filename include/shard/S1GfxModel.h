@@ -12,7 +12,9 @@ typedef struct ModelSlotNodes {
 
 /* A model slot. */
 typedef struct ModelSlot {
-    /* 0x00 */ u8 unk00[0xC];
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ void *sceneObject;
+    /* 0x08 */ u8 unk08[4];
     /* 0x0C */ u32 attached;
     /* 0x10 */ u8 unk10[0x30];
     /* 0x40 */ ModelSlotNodes nodes;

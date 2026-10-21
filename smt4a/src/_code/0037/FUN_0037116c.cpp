@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00229fc0(int);
+int saveLoadSetValue(int);
 int FUN_00268250(int, unsigned int, int, int, int);
 int FUN_002bf464(void);
-int FUN_00318d6c(void);
+int helpTexturesRelease(void);
 int campButtonHelpAcquire(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
-int FUN_003a76a8(int);
+int messageMainSetFlag(int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -23,16 +23,16 @@ extern unsigned short DAT_0057f6c2; /* 0x57f6c2 */
 extern int DAT_0057f6c4; /* 0x57f6c4 */
 
 extern int jobGetWork(void);
-extern int FUN_00213cfc(void);
-/* Supplied declaration required: FUN_00229fc0. */
+extern int saveLoadGetValue(void);
+/* Supplied declaration required: saveLoadSetValue. */
 /* Supplied declaration required: FUN_00268250. */
 extern int FUN_002a60f8(void);
 /* Supplied declaration required: FUN_002bf464. */
-/* Supplied declaration required: FUN_00318d6c. */
+/* Supplied declaration required: helpTexturesRelease. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: FUN_003a76a8. */
+/* Supplied declaration required: messageMainSetFlag. */
 
 
 unsigned int FUN_0037116c(void)
@@ -50,14 +50,14 @@ unsigned int FUN_0037116c(void)
       if (temp_v1 != 0xe) {
         return 0;
       }
-      temp_v0 = FUN_00213cfc();
+      temp_v0 = saveLoadGetValue();
       if (temp_v0 != 0) {
         campCommonBgRelease();
-        FUN_00229fc0(0);
+        saveLoadSetValue(0);
       }
-      FUN_003a76a8(1);
+      messageMainSetFlag(1);
       campButtonHelpRelease();
-      FUN_00318d6c();
+      helpTexturesRelease();
       DAT_0057f6be = 1;
       return 0xffffffff;
     }
@@ -79,7 +79,7 @@ unsigned int FUN_0037116c(void)
   else {
     FUN_002bf464();
     campButtonHelpAcquire();
-    FUN_003a76a8(0);
+    messageMainSetFlag(0);
     FUN_00268250(0,*(unsigned int *)(temp_v0 + 0x14),0,0,0);
     temp_v2 = 0xd;
   }

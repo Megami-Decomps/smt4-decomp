@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_0030c62c(int, unsigned int *, unsigned int *);
+int nodeListLink(int, unsigned int *, unsigned int *);
 
-/* Supplied declaration required: FUN_0030c62c. */
+/* Supplied declaration required: nodeListLink. */
 extern int wordRefsDiffer_0030f88a(int, int);
 
 
@@ -18,7 +18,7 @@ void FUN_0030f558(int param_1,unsigned int *param_2)
   
   temp_v0 = wordRefsDiffer_0030f88a(param_1 + 4,param_1 + 0xc);
   if (temp_v0 != 0) {
-    FUN_0030c62c(param_1,(unsigned int *)(param_1 + 8),param_2);
+    nodeListLink(param_1,(unsigned int *)(param_1 + 8),param_2);
   }
   else {
     *(unsigned int *)(param_1 + 4) = *param_2;

@@ -1,32 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032ef0c` (_code @ 0x32ef0c, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: bit-index registers and enabled-test scheduling differ from retail. */
+#include "common.h"
 
-extern "C" {
+struct SaveToggleFlags {
+    u8 unk00000[0x282fc]; // 0x00000
+    u8 flags[1];           // 0x282fc
+};
 
-extern int gameDataBlocksGetSaveData(void);
+extern "C" SaveToggleFlags* gameDataBlocksGetSaveData();
 
-
-void FUN_0032ef0c(int param_1,int param_2)
-
+// Set or clear one bit in the saved toggle-flag bank.
+extern "C" void FUN_0032ef0c(s32 flagIndex, s32 enabled)
 {
-  unsigned char temp_v0;
-  int temp_v1;
-  unsigned char *pbVar3;
-  unsigned char temp_v2;
-  
-  temp_v1 = gameDataBlocksGetSaveData();
-  temp_v2 = (unsigned char)(1 << ((param_1 % 8) & 0xffU));
-  pbVar3 = (unsigned char *)(temp_v1 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1d)) >> 3) + 0x282fc);
-  temp_v0 = *pbVar3;
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v0 & ~temp_v2;
-  }
-  *pbVar3 = temp_v2;
-  return;
+    s32 byteIndex = flagIndex / 8;
+    SaveToggleFlags* save = gameDataBlocksGetSaveData();
+    u8* byte = &save->flags[byteIndex];
+    u32 mask = 1u << (flagIndex % 8);
+    u32 bits = *byte;
+    if (enabled != 0) {
+        bits |= mask;
+    } else {
+        bits &= ~mask;
+    }
+    *byte = bits;
 }
-
-} /* extern "C" */

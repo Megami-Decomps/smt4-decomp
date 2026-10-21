@@ -8,7 +8,7 @@ typedef struct JobFlagObj {
     /* 0x1D */ u8 unk1D;
 } JobFlagObj;
 
-extern u8 FUN_001632fc(void);
+extern u8 infoWinHasValue(void);
 extern void dialogClose(s32 value);
 extern u32 jobStop(u32 job, u16 arg);
 
@@ -19,7 +19,7 @@ void jobFlagObjStop(void)
 {
     JobFlagObj *obj = g_mapIf;
 
-    if (obj->unk1D != 0 && FUN_001632fc() != 0) {
+    if (obj->unk1D != 0 && infoWinHasValue() != 0) {
         obj->unk1D = 0;
         dialogClose(1);
     }

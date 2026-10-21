@@ -33,9 +33,9 @@ extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_004a6610. */
 /* Supplied declaration required: FUN_004a833c. */
 /* Supplied declaration required: FUN_004a8584. */
-extern int FUN_004bb80c(void);
+extern int FUN_004bb80c(int index);
 extern int FUN_004bbae0(unsigned int, int, int);
-extern int FUN_004bc8e0(void);
+extern int dataTableGetRecord02(void);
 /* Supplied declaration required: FUN_004cfeb0. */
 
 
@@ -82,11 +82,11 @@ LAB_004a5ccc:
           if (temp_v9 < 0x10) goto LAB_004a5b5c;
           break;
         }
-        temp_v1 = FUN_004bc8e0();
+        temp_v1 = dataTableGetRecord02();
         if (temp_v1 != 0) {
           temp_v6 = 0;
           do {
-            if ((*(short *)(temp_v1 + temp_v6 * 4) != 0) && (temp_v2 = FUN_004bb80c(), temp_v2 != 0)) {
+            if ((*(unsigned short *)(temp_v1 + temp_v6 * 4) != 0) && (temp_v2 = FUN_004bb80c(*(unsigned short *)(temp_v1 + temp_v6 * 4)), temp_v2 != 0)) {
               temp_v5 = 0;
               do {
                 puVar9 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v2 + temp_v5 * 2 + 0x14);

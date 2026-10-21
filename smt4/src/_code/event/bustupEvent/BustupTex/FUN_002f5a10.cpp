@@ -20,7 +20,7 @@ extern int FUN_002cfb68(...); /* 0x2cfb68 */
 extern unsigned int g_aocSystem; /* 0x433158 */
 
 extern unsigned int FUN_002ae8e4(unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_002ae98c(unsigned int, unsigned int, int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
@@ -58,7 +58,7 @@ void FUN_002f5a10(int param_1)
   }
   else {
     if (puVar1[5] != -1) {
-      temp_v1 = FUN_002ae98c(g_aocSystem,puVar1[4],puVar1[5],1);
+      temp_v1 = aocRunByName(g_aocSystem,puVar1[4],puVar1[5],1);
       if (temp_v1 != 0) {
         temp_v0 = FUN_002ae8e4(g_aocSystem,puVar1[4],puVar1[5],0x10000);
       }

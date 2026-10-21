@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int FUN_0022677c(...);
 int scrGetArg(...);
 int SBORROW4(int, int);
@@ -12,7 +12,7 @@ int SBORROW4(int, int);
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern int FUN_00162ea4(void);
 extern int FUN_00163e84(unsigned int);
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_00203d74(void);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: scrGetArg. */
@@ -44,9 +44,9 @@ unsigned int FUN_00314d1c(void)
     if (temp_v1 == 0) {
       temp_v1 = frameTextureGetState();
       if (temp_v1 == 0) {
-        FUN_001f4908(0,temp_v0,0xff);
+        slotSetRequest(0,temp_v0,0xff);
       }
-      FUN_001f4908(1,temp_v0,0xff);
+      slotSetRequest(1,temp_v0,0xff);
       return 0;
     }
     if (temp_v1 != 1) {
@@ -54,9 +54,9 @@ unsigned int FUN_00314d1c(void)
     }
     temp_v1 = frameTextureGetState();
     if (temp_v1 == 0) {
-      FUN_001f4908(0,temp_v0,0xffffffff);
+      slotSetRequest(0,temp_v0,0xffffffff);
     }
-    FUN_001f4908(1,temp_v0,0xffffffff);
+    slotSetRequest(1,temp_v0,0xffffffff);
     return 0;
   }
   temp_v0 = frameTextureGetState();

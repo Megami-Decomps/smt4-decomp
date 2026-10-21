@@ -1,46 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `cecProcessStart` (_code @ 0x1a07e4, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail forwards an uninitialized incoming r5 into r1 before operator new, and the child constructor still has a C-form symbol. */
+#include "shard/W5_W5Match2_StatusQuery.h"
+#include "AsdSDK/AsdDebug.h"
+
+struct CecProcessChild {
+    const void* vtable; // 0x00
+    u32 fields[4];      // 0x04
+};
 
 extern "C" {
+extern CecProcessView* g_cecProcess;
+void* asdMemAlloc(s32 heap, s32 alignment, s32 mode, u32 size, s32 fromFront);
+void memClear(void* memory, u32 size);
+void* asdOperatorNew(u32 size);
+CecProcessChild* FUN_003bbe6c(CecProcessChild* child);
 
-int asdOperatorNew(void);
-int memClear(void);
-int asdMemAlloc(int, int, int, int, int);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-extern int g_cecProcess; /* 0x43de68 */
-
-/* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-extern unsigned int FUN_003bbe6c(void);
-
-
-void cecProcessStart(void)
-
+// Allocate the cleared CEC process block and construct its child object.
+void cecProcessStart()
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = 0x100;
-  asdMemAlloc(0x100,0x100,0,0x460,1);
-  memClear();
-  temp_v1 = 0x14;
-  g_cecProcess = temp_v0;
-  asdOperatorNew();
-  temp_v2 = 0;
-  if (temp_v1 != 0) {
-    temp_v2 = FUN_003bbe6c();
-  }
-  *(unsigned int *)(temp_v0 + 4) = temp_v2;
-  return;
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\cec\\CecProcess.cpp", 641);
+    CecProcessView* process = (CecProcessView*)asdMemAlloc(0x100, 0x100, 0, 0x460, 1);
+    memClear(process, 0x460);
+    g_cecProcess = process;
+    CecProcessChild* child = (CecProcessChild*)asdOperatorNew(sizeof(CecProcessChild));
+    if (child != NULL) {
+        child = FUN_003bbe6c(child);
+    }
+    process->process = child;
 }
-
-} /* extern "C" */
+}

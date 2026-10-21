@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_002ba474(void);
+extern void mapTrapBeginMoveToScene(void);
 
-/* Script command: runs FUN_002ba474 and finishes. */
+/* Script command: runs mapTrapBeginMoveToScene and finishes. */
 u32 FUN_00330d68(void)
 {
-    FUN_002ba474();
+    mapTrapBeginMoveToScene();
     return 1;
 }
 

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001467a4(void);
 int FUN_0023a244(void);
 int FUN_00351e54(int, int);
-int FUN_00352008(int, int, int);
+unsigned int FUN_00352008(unsigned int, unsigned int, unsigned char, unsigned char);
 int FUN_00359f90(void);
 
 extern signed char DAT_0044e348; /* 0x44e348 */
@@ -18,7 +18,6 @@ extern int FUN_0011c834(void);
 extern int FUN_00351dfc(int, unsigned int);
 /* Supplied declaration required: FUN_00351e54. */
 extern int FUN_00351ef0(int, unsigned int *);
-/* Supplied declaration required: FUN_00352008. */
 /* Supplied declaration required: FUN_00359f90. */
 extern int FUN_0035adf0(unsigned int);
 extern void nn_cfg_CTR_Initialize(void);
@@ -59,7 +58,7 @@ int FUN_00351c08(int param_1,unsigned int *param_2,unsigned int param_3,unsigned
         if (temp_v0 < 0) {
           return temp_v0;
         }
-        FUN_00352008(param_1,param_1,0);
+        FUN_00352008(param_1,param_1,0,0);
       }
       temp_v0 = FUN_00351dfc(param_1,*param_2);
     }

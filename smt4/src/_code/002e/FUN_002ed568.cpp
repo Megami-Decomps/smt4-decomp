@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_002b89e4(void *state, int arg);
+int titleOverlaySetModeAnimation(void *state, int arg);
 
 typedef struct StateObj {
     /* 0x00 */ u8 unk00[8];
@@ -23,7 +23,7 @@ u32 FUN_002ed568(Owner *owner)
     StateObj *state = owner->state;
 
     if (state->unk35 != 0) {
-        FUN_002b89e4(state, state->unk09);
+        titleOverlaySetModeAnimation(state, state->unk09);
         state->state = 3;
         state->unk34 = 0;
         state->unk35 = 0;

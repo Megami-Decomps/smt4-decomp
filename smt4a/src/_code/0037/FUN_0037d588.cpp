@@ -2,13 +2,13 @@
 
 extern "C" {
 
-extern u32 FUN_00261424(void);
+extern u32 gameDataGetTableValue(void);
 extern void scrSetResult(u32 value);
 
-/* Script command: result is FUN_00261424(). */
+/* Script command: result is gameDataGetTableValue(). */
 u32 FUN_0037d588(void)
 {
-    scrSetResult(FUN_00261424());
+    scrSetResult(gameDataGetTableValue());
     return 1;
 }
 

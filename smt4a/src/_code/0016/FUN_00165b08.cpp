@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0016c69c(...);
+int renderCtxPopState(...);
 
 int textFormatBuffer(...);
 int FUN_00162790(...);
 int vec2GetXInt(...);
 int vec2GetYInt(...);
 int efctSetSpeed(void);
-int FUN_0016c6f0(unsigned int, int, unsigned int);
+int renderStackPushIndexed(unsigned int, int, unsigned int);
 int FUN_00180310(...);
 int FUN_0018152c(...);
 int FUN_001835b4(...);
@@ -42,8 +42,8 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: vec2GetYInt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c69c. */
-/* Supplied declaration required: FUN_0016c6f0. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -91,7 +91,7 @@ void FUN_00165b08(void)
   vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
   vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
   temp_v2 = FUN_001692ac(1,0);
-  FUN_0016c6f0(g_renderCtx,3,temp_v2);
+  renderStackPushIndexed(g_renderCtx,3,temp_v2);
   FUN_00183bb0();
   temp_v14 = 0x3e800000;
   FUN_001879d0(g_renderCtx);
@@ -255,7 +255,7 @@ LAB_00165eec:
   }
   efctSetSpeed();
   FUN_00183bb0();
-  FUN_0016c69c(g_renderCtx,3);
+  renderCtxPopState(g_renderCtx,3);
   return;
 }
 

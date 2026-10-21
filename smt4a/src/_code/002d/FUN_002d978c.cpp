@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013c1ec(...);
+int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
@@ -26,8 +26,8 @@ extern int g_lmapScene; /* 0x581288 */
 extern unsigned char g_gameState; /* 0x5f15fc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0013c1ec. */
-extern unsigned int FUN_00145868(void);
+/* Supplied declaration required: soundVolumeSettingSet. */
+extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -52,7 +52,7 @@ void FUN_002d978c(void)
   float temp_v4;
   
   FUN_002dae68();
-  temp_v0 = FUN_00145868();
+  temp_v0 = soundVolumeSettingGet();
   temp_v3 = g_lmapScene;
   temp_v2 = *(int *)(g_lmapScene + 4);
   if (temp_v2 != 0) {
@@ -105,9 +105,9 @@ LAB_002d99dc:
           FUN_001bc124();
           FUN_001bbf0c();
           FUN_0014af98();
-          FUN_0013c1ec();
+          soundVolumeSettingSet();
           FUN_003d2150(0x10002e6);
-          FUN_0013c1ec(temp_v0);
+          soundVolumeSettingSet(temp_v0);
           temp_v3 = g_lmapScene;
           *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
           *(unsigned int *)(temp_v3 + 8) = 0;
@@ -151,9 +151,9 @@ LAB_002d9870:
         FUN_001bc124();
         FUN_001bbf0c();
         FUN_0014af98();
-        FUN_0013c1ec();
+        soundVolumeSettingSet();
         FUN_003d2150(0x10002e5);
-        FUN_0013c1ec(temp_v0);
+        soundVolumeSettingSet(temp_v0);
         temp_v3 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
         *(unsigned int *)(temp_v3 + 8) = 0;

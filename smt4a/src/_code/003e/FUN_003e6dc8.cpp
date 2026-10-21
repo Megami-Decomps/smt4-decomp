@@ -26,7 +26,7 @@ extern void btlTalkBustUpDestroy(void);
 extern void holderStopJob2(u32 state);
 extern void objectJobStop(u32 state);
 extern void FUN_00290ba4(u32 state);
-extern void FUN_003d9164(void);
+extern void eventCommandClearPending(void);
 extern ScriptProcess *FUN_00275bc8(u32 owner, u32 script);
 extern void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 
@@ -44,7 +44,7 @@ s32 FUN_003e6dc8(TalkEvent *event)
             objectJobStop(state);
             FUN_00290ba4(state);
             if (g_btlCamera != 0) {
-                FUN_003d9164();
+                eventCommandClearPending();
             }
             event->state = 6;
             event->running = 0;

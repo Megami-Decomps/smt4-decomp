@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_002a8a58(float *, unsigned int);
 int FUN_002a8ac4(...);
-int FUN_002b1fc4(...);
-int FUN_002b7064(void);
+int quadSetOrderedVectors(...);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int FUN_002b76d0(...);
 int cameraSetViewMatrix(...);
@@ -76,8 +76,8 @@ extern unsigned int DAT_004d4914; /* 0x4d4914 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002a8a58. */
 /* Supplied declaration required: FUN_002a8ac4. */
-/* Supplied declaration required: FUN_002b1fc4. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: quadSetOrderedVectors. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: FUN_002b76d0. */
 /* Supplied declaration required: cameraSetViewMatrix. */
@@ -289,7 +289,7 @@ LAB_002af7a0:
           fStack_bc = temp_v24[0x1b];
           fStack_ac = temp_v24[0x17];
           fStack_9c = temp_v24[0x13];
-          FUN_002b1fc4(&temp_v27,&temp_v26,&temp_v25,temp_v24 + 0x20,temp_v23,temp_v12);
+          quadSetOrderedVectors(&temp_v27,&temp_v26,&temp_v25,temp_v24 + 0x20,temp_v23,temp_v12);
         }
         goto LAB_002af9f0;
       }
@@ -325,7 +325,7 @@ LAB_002af7a0:
           fStack_6c = temp_v24[0x1b];
           fStack_5c = temp_v24[0x17];
           fStack_4c = temp_v24[0x13];
-          FUN_002b1fc4(&temp_v33,&temp_v32,&temp_v31,&temp_v30,temp_v23,temp_v12);
+          quadSetOrderedVectors(&temp_v33,&temp_v32,&temp_v31,&temp_v30,temp_v23,temp_v12);
         }
         temp_v17 = 0.00390625f;
         temp_v14 = (*param_3 & 0x10) == 0;
@@ -398,7 +398,7 @@ LAB_002af7a0:
             FUN_002b70cc();
             temp_v18 = (float)VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);
             param_3[2] = (int)(temp_v18 - temp_v17 * temp_v15);
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v15 = temp_v16 * temp_v15;
           }
           temp_v16 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -433,7 +433,7 @@ LAB_002af7a0:
           uStack_64 = temp_v24[1];
           uStack_60 = temp_v24[2];
           fStack_5c = temp_v24[3];
-          FUN_002b1fc4(&temp_v32,&temp_v31,&temp_v30,&temp_v21,temp_v29,0);
+          quadSetOrderedVectors(&temp_v32,&temp_v31,&temp_v30,&temp_v21,temp_v29,0);
         }
         temp_v13 = g_titleScene;
         if (temp_v5) {
@@ -484,7 +484,7 @@ LAB_002af9f0:
       uStack_a4 = temp_v24[1];
       uStack_a0 = temp_v24[2];
       fStack_9c = temp_v24[3];
-      FUN_002b1fc4(&temp_v27,&temp_v26,&temp_v25,temp_v24 + 0x20,temp_v29,0);
+      quadSetOrderedVectors(&temp_v27,&temp_v26,&temp_v25,temp_v24 + 0x20,temp_v29,0);
     }
     temp_v13 = g_titleScene;
     if (temp_v5) {

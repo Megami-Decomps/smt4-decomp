@@ -1,17 +1,17 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019f678` (_code @ 0x19f678, 0xe8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
-int FUN_001ade24(...);
+unsigned int* gfxAppendTextureUnitPacket(void*, unsigned int*, const AsdTexture*);
 int FUN_001adf78(...);
 
 typedef struct fn_0019f678_arg0 fn_0019f678_arg0;
 struct fn_0019f678_arg0 {
     unsigned char pad_0x0[0x10];
-    unsigned char field_0x10; /* +0x10 */
-    unsigned char pad_0x11[0x3];
+    unsigned int* commandCursor; /* +0x10 */
     undefined4 field_0x14; /* +0x14 */
     undefined4 field_0x18; /* +0x18 */
     undefined4 field_0x1c; /* +0x1c */
@@ -48,7 +48,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_001ade24. */
+/* Supplied declaration required: gfxAppendTextureUnitPacket. */
 /* Supplied declaration required: FUN_001adf78. */
 
 
@@ -57,7 +57,7 @@ void FUN_0019f678(fn_0019f678_arg0 *param_1,int param_2,unsigned int *param_3,un
 
 {
 /* irregular: irregular input(s): in_s0, in_s1, in_s2, in_s3, in_s4, in_s5, in_s6, in_s7, in_s8; 2 native warning(s); review required */
-  fn_0019f678_arg0 *pfVar1;
+  unsigned int* cursor;
   unsigned int temp_v0;
   unsigned int temp_v1;
   unsigned int temp_v2;
@@ -73,10 +73,10 @@ void FUN_0019f678(fn_0019f678_arg0 *param_1,int param_2,unsigned int *param_3,un
   unsigned int in_s8;
   unsigned int temp_v4;
   
-  pfVar1 = param_1;
-  FUN_001ade24(param_1,*(unsigned int *)&param_1->field_0x10,param_2);
+  cursor = gfxAppendTextureUnitPacket(param_1, param_1->commandCursor,
+                       reinterpret_cast<const AsdTexture*>(param_2));
   temp_v4 = 0;
-  FUN_001adf78(param_1,pfVar1,param_3,param_4,param_5,param_6);
+  FUN_001adf78(param_1,cursor,param_3,param_4,param_5,param_6);
   param_1->field_0x30 = in_s7;
   param_1->field_0x14 = in_s0;
   param_1->field_0x18 = in_s1;

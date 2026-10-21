@@ -8,10 +8,10 @@ int FUN_001a1648(void);
 int asdMemFreeIfNotNull(...);
 int FUN_00250d84(...);
 int messageForwardDefaultMode(...);
-int FUN_0028ed3c(...);
+int uiBindRecordRewardText(...);
 int FUN_00295660(...);
 int FUN_0029bbc8(void);
-int FUN_0029bcf0(...);
+int partyFindActiveSlotById(...);
 int FUN_0029ede8(...);
 int FUN_002be650(...);
 int libc_strcpy(...);
@@ -25,7 +25,7 @@ int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int FUN_0028784c(unsigned int, int);
 int messageSlotSet(int);
-int FUN_0028dc98(...);
+int scrCommMessageSetMode(...);
 int scrSetResult(...);
 int FUN_002900d0(void);
 int btlTalkBustUpSetUnk2F4(int);
@@ -71,9 +71,9 @@ extern int FUN_00250ec0(unsigned int);
 /* Supplied declaration required: FUN_0028784c. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: messageSlotSet. */
-/* Supplied declaration required: FUN_0028dc98. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_0028ed3c. */
+/* Supplied declaration required: uiBindRecordRewardText. */
 /* Supplied declaration required: FUN_002900d0. */
 extern int FUN_0029022c(void);
 extern unsigned int FUN_002903f0(void);
@@ -86,11 +86,11 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029b074. */
 /* Supplied declaration required: resultCreate. */
 /* Supplied declaration required: FUN_0029bbc8. */
-/* Supplied declaration required: FUN_0029bcf0. */
+/* Supplied declaration required: partyFindActiveSlotById. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern int fileSlotGetBuffer(unsigned int);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern int gameGetOptions(void);
+extern int gameGetSupportUnitData(void);
 extern int FUN_002b8660(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002bd06c. */
@@ -198,7 +198,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       }
       btlTalkBustUpSetUnk2F4(0);
       scrWorkSetValue(3,0);
-      FUN_0028dc98(1);
+      scrCommMessageSetMode(1);
       resultCreate(1);
       temp_v22 = 0;
       temp_v23 = 0;
@@ -225,7 +225,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
       return 0;
     }
     FUN_0029b074();
-    FUN_0028dc98(0xffffffff);
+    scrCommMessageSetMode(0xffffffff);
     messageSlotSet(0);
     buttonHelpSetPreset(0x90);
     scrWorkGetValue(3);
@@ -286,7 +286,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     }
     else {
       temp_v2 = 8;
-      temp_v7 = gameGetOptions();
+      temp_v7 = gameGetSupportUnitData();
       temp_v0 = (unsigned int)*(unsigned short *)(temp_v7 + 0x46);
       FUN_002bd06c(temp_v0);
       libc_strcpy(&temp_v12,temp_v0);
@@ -332,7 +332,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
         temp_v6 = temp_v3 + temp_v1 * 8;
         if (*(short *)(temp_v6 + 0x16c) != 1) {
           if (*(short *)(temp_v6 + 0x16c) == 2) {
-            FUN_0029bcf0(*(unsigned short *)(temp_v6 + 0x16e));
+            partyFindActiveSlotById(*(unsigned short *)(temp_v6 + 0x16e));
             FUN_0029bbc8();
           }
         }
@@ -393,7 +393,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
     asdOperatorNewC();
     FUN_00333af8(temp_v0,temp_v6,1);
     puVar11 = (unsigned short *)(temp_v6 + temp_v7 * 2);
-    FUN_0028ed3c(*puVar11,0,1);
+    uiBindRecordRewardText(*puVar11,0,1);
     FUN_002bff50();
     temp_v2 = scrWorkGetValue(1);
     temp_v10 = 0;

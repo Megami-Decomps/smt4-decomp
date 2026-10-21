@@ -16,7 +16,7 @@ int SBORROW4(int, int);
 /* Supplied declaration required: FUN_002a4860. */
 /* Supplied declaration required: FUN_002a48e0. */
 extern int FUN_002bedac(unsigned int);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_002f0384. */
 extern int flaggedEntryGetValueA(int);
 /* Supplied declaration required: flaggedEntrySetValueA. */
@@ -46,7 +46,7 @@ void FUN_0041e7c0(int param_1)
   if (temp_v0 != 0) {
     temp_v0 = FUN_002a4860(param_1 + 0x3d8);
     temp_v1 = flaggedEntryGetValueA(param_1 + 0x3d8);
-    temp_v2 = FUN_002c2c68(param_1 + 0x3d8);
+    temp_v2 = objectApplyIfUnblocked(param_1 + 0x3d8);
     temp_v5 = *(int *)(param_1 + 0x300);
     temp_v3 = temp_v0 + temp_v1 + temp_v5;
     *(int *)(param_1 + 0x2f8) = temp_v3;

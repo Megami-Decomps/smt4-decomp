@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_00384830(void);
 int SBORROW4(int, int);
 int VectorSignedToFloat(int, int);
@@ -15,7 +15,7 @@ extern signed char DAT_005f18bf; /* 0x5f18bf */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 extern int FUN_0036d984(int, int, unsigned int);
 /* Supplied declaration required: FUN_00384830. */
 
@@ -41,7 +41,7 @@ unsigned int FUN_003850b4(void)
     if ((*(char *)(temp_v4 + 0x34) != '\0') &&
        (temp_v2 = *(int *)(temp_v4 + 0xb8), (temp_v2 == 6 || temp_v2 == 7) || temp_v2 == 0xf)) {
       temp_v2 = *(int *)(g_lmapScene + 0x1c);
-      FUN_002b5cb4();
+      distSpatial();
       if (temp_v2 < 0x447a0001) {
         temp_v6 = *(int *)(g_lmapScene + 0x1c);
         FUN_00384830();

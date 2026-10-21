@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00419d8c(...);
-int FUN_00422124(void);
+int asdGxBuildAlphaDepthPresetCommands(void);
 
 int CONCAT44(...);
 int FUN_001d3d38(...);
@@ -13,9 +13,9 @@ int FUN_00419c34(...);
 int FUN_00419ce0(...);
 int FUN_00421e9c(...);
 int FUN_00421f34(...);
-int FUN_00421f90(void);
-int FUN_00421fec(void);
-int FUN_00422048(void);
+unsigned int* commandProfileWriteDefault(unsigned int*);
+unsigned int *asdGxEmitAlphaDepthWritePreset(unsigned int *commands);
+unsigned int* FUN_00422048(void);
 int FUN_004fefe0(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(...);
@@ -102,10 +102,9 @@ extern unsigned int resourceGetIndexedEntry(int, unsigned int);
 extern unsigned int FUN_00421e18(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00421e9c. */
 /* Supplied declaration required: FUN_00421f34. */
-/* Supplied declaration required: FUN_00421f90. */
-/* Supplied declaration required: FUN_00421fec. */
+/* Supplied declaration required: commandProfileWriteDefault. */
 /* Supplied declaration required: FUN_00422048. */
-/* Supplied declaration required: FUN_00422124. */
+/* Supplied declaration required: asdGxBuildAlphaDepthPresetCommands. */
 extern unsigned int FUN_0042c5cc(unsigned int);
 /* Supplied declaration required: FUN_004fefe0. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
@@ -211,9 +210,9 @@ void FUN_002fc0c8(unsigned int param_1)
   temp_v0 = 0;
   temp_v4 = 0;
   temp_v5 = 0;
-  FUN_00422048();
+  param_1 = (unsigned int)FUN_00422048();
   *puVar8 = param_1;
-  FUN_00421f90();
+  param_1 = (unsigned int)commandProfileWriteDefault((unsigned int*)param_1);
   *puVar8 = param_1;
   temp_v3 = 0;
   temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 8))();
@@ -289,7 +288,7 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v2 = param_1;
             if (temp_v0 != temp_v39) {
               temp_v2 = resourceGetIndexedEntry(temp_v39,0);
-              FUN_00421e9c(param_1,temp_v2);
+              param_1 = (unsigned int)FUN_00421e9c(param_1,temp_v2);
               *puVar8 = param_1;
               temp_v0 = temp_v39;
               temp_v2 = param_1;
@@ -300,7 +299,7 @@ void FUN_002fc0c8(unsigned int param_1)
               temp_v4 = temp_v43;
             }
             param_1 = *(unsigned int *)(temp_v39 + 0x44);
-            FUN_00419c34(param_1,temp_v2,temp_v53,temp_v23);
+            param_1 = (unsigned int)FUN_00419c34(param_1,temp_v2,temp_v53,temp_v23);
             *puVar8 = param_1;
           }
         }
@@ -309,7 +308,7 @@ void FUN_002fc0c8(unsigned int param_1)
       temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 8))();
     } while (temp_v3 < temp_v1);
   }
-  FUN_00421fec();
+  param_1 = (unsigned int)asdGxEmitAlphaDepthWritePreset((unsigned int *)param_1);
   *puVar8 = param_1;
   temp_v3 = 0;
   temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 8))();
@@ -387,7 +386,7 @@ void FUN_002fc0c8(unsigned int param_1)
             temp_v2 = param_1;
             if (temp_v0 != temp_v39) {
               temp_v2 = resourceGetIndexedEntry(temp_v39,0);
-              FUN_00421e9c(param_1,temp_v2);
+              param_1 = (unsigned int)FUN_00421e9c(param_1,temp_v2);
               *puVar8 = param_1;
               temp_v0 = temp_v39;
               temp_v2 = param_1;
@@ -398,12 +397,12 @@ void FUN_002fc0c8(unsigned int param_1)
               temp_v4 = temp_v43;
             }
             if (temp_v5 != temp_v40) {
-              FUN_00421f34(temp_v2,temp_v40);
+              temp_v2 = FUN_00421f34(temp_v2,temp_v40);
               *puVar8 = temp_v2;
               temp_v5 = temp_v40;
             }
             param_1 = *(unsigned int *)(temp_v39 + 0x44);
-            FUN_00419ce0(param_1,temp_v2,temp_v55,temp_v23);
+            param_1 = (unsigned int)FUN_00419ce0(param_1,temp_v2,temp_v55,temp_v23);
             *puVar8 = param_1;
           }
         }
@@ -412,7 +411,7 @@ void FUN_002fc0c8(unsigned int param_1)
       temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 8))();
     } while (temp_v3 < temp_v1);
   }
-  FUN_00421fec();
+  param_1 = (unsigned int)asdGxEmitAlphaDepthWritePreset((unsigned int *)param_1);
   *puVar8 = param_1;
   temp_v3 = 0;
   temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 8))();
@@ -514,7 +513,7 @@ void FUN_002fc0c8(unsigned int param_1)
       temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 8))();
     } while (temp_v3 < temp_v1);
   }
-  FUN_00422124();
+  asdGxBuildAlphaDepthPresetCommands();
   *puVar8 = param_1;
   temp_v3 = 0;
   temp_v1 = (**(romwright_code **)(*DAT_0057aa08 + 8))();

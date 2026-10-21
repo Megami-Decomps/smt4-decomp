@@ -12,7 +12,7 @@ extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_001568f8. */
-extern int FUN_003ef9e0(unsigned int, int);
+extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: FUN_004102d8. */
 
 
@@ -37,7 +37,7 @@ int FUN_004feb50(short param_1,unsigned int param_2,int param_3,unsigned int par
         temp_v1 = btlGetMainState();
         FUN_001568f8(temp_v1,(int)*(short *)(param_3 + 0x6a));
         temp_v2 = btlGetMainState();
-        temp_v3 = FUN_003ef9e0(temp_v2,param_3);
+        temp_v3 = idSetFindSubjectIndex(temp_v2,param_3);
         if (temp_v3 < 0) {
           temp_v3 = 0;
         }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002d8614(...);
 int FUN_00384830(void);
 
@@ -18,7 +18,7 @@ extern unsigned int DAT_005f0ca8; /* 0x5f0ca8 */
 extern signed char DAT_005f0cc0; /* 0x5f0cc0 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002d8614. */
 /* Supplied declaration required: FUN_00384830. */
 
@@ -36,7 +36,7 @@ void FUN_002d0394(void)
   temp_v1 = 80.0f;
   if ((DAT_005f0ca4 == 0) && (DAT_005f0cc0 = '\0', DAT_005f1614 == '\0')) {
     temp_v0 = in_s0;
-    FUN_002b5cb4();
+    distSpatial();
     if ((in_s0 < temp_v2) && (FUN_00384830(), temp_v0 < temp_v1)) {
       if (DAT_005f0cc0 != '\0') {
         return;

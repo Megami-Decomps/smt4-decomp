@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002625b0(int, int);
+int affinityShouldReplaceState(int, int);
 int FUN_0034a290(void);
 int FUN_0047ffd4(unsigned int, int);
 
@@ -18,7 +18,7 @@ typedef struct {
 } param_2_stack;
 
 extern int gameGetPlayerData(void);
-/* Supplied declaration required: FUN_002625b0. */
+/* Supplied declaration required: affinityShouldReplaceState. */
 /* Supplied declaration required: FUN_0034a290. */
 /* Supplied declaration required: FUN_0047ffd4. */
 
@@ -87,7 +87,7 @@ void FUN_003dfad4(int param_1,unsigned int param_2)
             case 4:
               temp_v1 = 4;
             }
-            temp_v4 = FUN_002625b0(temp_v6,temp_v1);
+            temp_v4 = affinityShouldReplaceState(temp_v6,temp_v1);
             if (temp_v4 != 0) {
               temp_v6 = temp_v1;
             }
@@ -132,7 +132,7 @@ LAB_003dfca0:
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 8);
     puVar7 = (unsigned short *)(param_1 + temp_v7 * 2);
-    temp_v2 = FUN_002625b0(*puVar7 >> 10,temp_v6);
+    temp_v2 = affinityShouldReplaceState(*puVar7 >> 10,temp_v6);
     if (temp_v2 != 0) {
       *puVar7 = (temp_v6 << 10) | (*puVar7 & 0x3ff);
     }

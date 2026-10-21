@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001742e4(int, int);
+int asdSoundObjectStop(int, int);
 int nw_snd_SoundHeap_LoadState(int, unsigned int);
 
 extern unsigned char DAT_0063e984; /* 0x63e984 */
@@ -12,7 +12,7 @@ extern unsigned char DAT_0063e986; /* 0x63e986 */
 extern unsigned char DAT_0063e987; /* 0x63e987 */
 extern unsigned int DAT_0063f50c; /* 0x63f50c */
 
-/* Supplied declaration required: FUN_001742e4. */
+/* Supplied declaration required: asdSoundObjectStop. */
 /* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
 
 
@@ -41,7 +41,7 @@ unsigned int FUN_00154890(unsigned int param_1)
       do {
         temp_v2 = *(int *)(temp_v0 + 0x63e94c + temp_v4 * 4 + 0x20);
         if (temp_v2 != 0) {
-          FUN_001742e4(temp_v2,0);
+          asdSoundObjectStop(temp_v2,0);
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 4);

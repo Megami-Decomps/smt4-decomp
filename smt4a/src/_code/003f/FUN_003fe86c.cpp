@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003fd7c0(int, unsigned int, unsigned int);
 int FUN_003fd924(void);
-int FUN_0041a0fc(int, unsigned int);
+int modelEffectsSelect(int, unsigned int);
 int FUN_0045adc0(int, int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
-/* Supplied declaration required: FUN_0041a0fc. */
+/* Supplied declaration required: modelEffectsSelect. */
 /* Supplied declaration required: FUN_0045adc0. */
 
 
@@ -42,7 +42,7 @@ void FUN_003fe86c(int param_1,unsigned int param_2,unsigned int param_3)
     *(char *)(param_1 + 0xd4) = (char)param_3;
   }
   if (*(int *)(param_1 + 0x25c) != 0) {
-    FUN_0041a0fc(*(int *)(param_1 + 0x25c),param_2);
+    modelEffectsSelect(*(int *)(param_1 + 0x25c),param_2);
     return;
   }
   return;

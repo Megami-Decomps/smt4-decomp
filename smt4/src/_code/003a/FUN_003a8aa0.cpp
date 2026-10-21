@@ -11,7 +11,7 @@ int FUN_0022e2fc(void);
 int FUN_00233670(int, int, int, int);
 int FUN_00233730(int, int, int, int, int, int);
 int FUN_00233818(void);
-int FUN_00233854(unsigned int);
+int ifTouchRegionClearAll(unsigned int);
 int dataTable00FindById(void);
 int devilGetRecord(void);
 int jyoucyuGetTableEntry(int);
@@ -34,7 +34,7 @@ extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: FUN_00233670. */
 /* Supplied declaration required: FUN_00233730. */
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: devilGetRecord. */
@@ -56,7 +56,7 @@ void FUN_003a8aa0(int param_1)
   unsigned char temp_v5 [24];
   unsigned char temp_v6;
   
-  FUN_00233854(*(unsigned int *)(param_1 + 0x590));
+  ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x590));
   FUN_00233818();
   FUN_0022e2fc();
   if (*(char *)(param_1 + 0x5a4) == '\0') {

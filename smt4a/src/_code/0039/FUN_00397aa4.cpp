@@ -15,7 +15,7 @@ extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int g_handleRegistry; /* 0x56fcc0 */
-extern int *DAT_005806a4; /* 0x5806a4 */
+extern int *g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern float DAT_005f15d8; /* 0x5f15d8 */
 extern float DAT_005f15dc; /* 0x5f15dc */
@@ -87,7 +87,7 @@ void FUN_00397aa4(void)
   temp_v23 = *(float *)(g_lmapScene + 0x24);
   pfVar8 = (float *)asdModelGetStatic38();
   *pfVar8 = temp_v21;
-  if ((*DAT_005806a4 == 0xc) && (DAT_005806a4[1] >= 100)) {
+  if ((*g_lmapView == 0xc) && (g_lmapView[1] >= 100)) {
     temp_v11 = (*(float *)(g_lmapScene + 0x4c) + 180.0f) * 0.7111111f;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v25 <= temp_v11) << 0x1d);
     for (temp_v11 = romwright_fabs_4(temp_v11); temp_v20 = temp_v25, (int)temp_v11 >= 0x47800000; temp_v11 = temp_v11 - 65536.0f)
@@ -190,11 +190,11 @@ void FUN_00397aa4(void)
   temp_v30 = temp_v30 * temp_v21;
   temp_v31 = temp_v31 * temp_v21;
   temp_v25 = 0.017453292f;
-  temp_v21 = (float)DAT_005806a4[6] * 0.017453292f;
+  temp_v21 = (float)g_lmapView[6] * 0.017453292f;
   FUN_001bc124();
   temp_v20 = 290.0f;
   temp_v22 = temp_v22 + temp_v21 * 290.0f;
-  temp_v25 = (float)DAT_005806a4[6] * temp_v25;
+  temp_v25 = (float)g_lmapView[6] * temp_v25;
   FUN_001bbf0c();
   temp_v24 = temp_v24 + DAT_005f1a04;
   temp_v9 = *(int *)(g_handleRegistry + 0x14);

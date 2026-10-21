@@ -8,9 +8,9 @@ int uiSpriteSetKeyframe(int, int, int);
 int dialogOpen(...);
 int dialogClose(int);
 int FUN_002392b8(...);
-int FUN_002c2d5c(...);
+int infoWinSetTimer(...);
 int FUN_002d22c0(int);
-int FUN_00357a48(void);
+int naviRequestSelectedMap(void);
 int lmapEnableSceneState(void);
 int FUN_003d2150(int);
 int rectRecRead(int, int, int *, int *);
@@ -42,11 +42,11 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
 /* Supplied declaration required: FUN_002392b8. */
-/* Supplied declaration required: FUN_002c2d5c. */
+/* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: FUN_002d22c0. */
 extern int lmapSceneGetUnk0(void);
 extern int mapIfGetState(void);
-/* Supplied declaration required: FUN_00357a48. */
+/* Supplied declaration required: naviRequestSelectedMap. */
 extern int gameFlagsClassify(void);
 /* Supplied declaration required: lmapEnableSceneState. */
 /* Supplied declaration required: FUN_003d2150. */
@@ -110,7 +110,7 @@ unsigned int FUN_00489480(int param_1)
         temp_v2 = NaviMain_GetCurrentMap(temp_v7);
         if ((temp_v1 != temp_v2) && (DAT_005f1a5c == '\0')) {
           FUN_003d2150(0x100020f);
-          FUN_00357a48();
+          naviRequestSelectedMap();
           temp_v1 = 0;
           do {
             uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
@@ -157,7 +157,7 @@ unsigned int FUN_00489480(int param_1)
             (temp_v1 = mapIfGetState(), temp_v1 == 0)) && (*(char *)(param_1 + 0x65) != '\0')) {
           FUN_002392b8(&DAT_00532760);
           dialogOpen(1);
-          FUN_002c2d5c(0xffffffff);
+          infoWinSetTimer(0xffffffff);
           *(unsigned char *)(param_1 + 0x65) = 0;
         }
         return temp_v3;
@@ -184,7 +184,7 @@ LAB_00489788:
      && (*(char *)(param_1 + 0x65) != '\0')) {
     FUN_002392b8(&DAT_00532760);
     dialogOpen(1);
-    FUN_002c2d5c(0xffffffff);
+    infoWinSetTimer(0xffffffff);
     *(unsigned char *)(param_1 + 0x65) = 0;
   }
   return temp_v3;

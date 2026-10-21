@@ -6,23 +6,23 @@ extern "C" {
 
 int battleSetActionKind(...);
 int FUN_00244fb0(...);
-int FUN_0026c820(...);
+int btlUiPanelFadeInWhenReady(...);
 int buttonHelpGetMode(void);
 int buttonHelpSetPreset(void);
-int FUN_00339828(...);
+int objResourceRelease(...);
 
 int actionCreateKindFive(...);
 int FUN_0024082c(...);
-int FUN_00245228(...);
+int slotResetIdle(...);
 int FUN_002505c0(...);
-int FUN_00267d3c(unsigned int);
+int btlUiPlaySceneFadeOutWhenReady(unsigned int);
 int FUN_00282820(...);
 int FUN_00293e08(void);
-int FUN_00295d28(void);
+int soundSlotStopById(void);
 int FUN_002c1658(int, int);
 int FUN_00338358(int);
 int FUN_00338404(int);
-int FUN_00338754(...);
+int objectScriptDestroy(...);
 int FUN_00338fb0(...);
 int FUN_0033911c(int);
 int FUN_00339254(...);
@@ -31,8 +31,8 @@ int FUN_00339dc0(...);
 int FUN_0033a264(int);
 int groupStartItems(...);
 int FUN_003d5ef4(unsigned int);
-int FUN_003d6408(unsigned int);
-int FUN_003d660c(...);
+int modelSlotDetachChild(unsigned int);
+int objectDestroyGfx(...);
 int FUN_003dc02c(...);
 int FUN_003ddb50(int, int, int);
 int FUN_003de8c4(unsigned int, int, int);
@@ -56,32 +56,32 @@ extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_0024082c. */
 /* Supplied declaration required: FUN_00244fb0. */
 extern int FUN_0024502c(int, unsigned int);
-/* Supplied declaration required: FUN_00245228. */
+/* Supplied declaration required: slotResetIdle. */
 extern int tableIsSupportedKind(int, unsigned int);
 /* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_00267d3c. */
-/* Supplied declaration required: FUN_0026c820. */
+/* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
+/* Supplied declaration required: btlUiPanelFadeInWhenReady. */
 /* Supplied declaration required: FUN_00282820. */
 /* Supplied declaration required: FUN_00293e08. */
 extern int FUN_00293ed0(int);
-/* Supplied declaration required: FUN_00295d28. */
+/* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: FUN_002c1658. */
 /* Supplied declaration required: FUN_00338358. */
 /* Supplied declaration required: FUN_00338404. */
-/* Supplied declaration required: FUN_00338754. */
+/* Supplied declaration required: objectScriptDestroy. */
 /* Supplied declaration required: FUN_00338fb0. */
 /* Supplied declaration required: FUN_0033911c. */
 /* Supplied declaration required: FUN_00339254. */
 /* Supplied declaration required: FUN_00339754. */
-/* Supplied declaration required: FUN_00339828. */
+/* Supplied declaration required: objResourceRelease. */
 /* Supplied declaration required: FUN_00339dc0. */
 /* Supplied declaration required: FUN_0033a264. */
 /* Supplied declaration required: groupStartItems. */
 /* Supplied declaration required: FUN_003d5ef4. */
-/* Supplied declaration required: FUN_003d6408. */
-/* Supplied declaration required: FUN_003d660c. */
+/* Supplied declaration required: modelSlotDetachChild. */
+/* Supplied declaration required: objectDestroyGfx. */
 /* Supplied declaration required: FUN_003dc02c. */
 /* Supplied declaration required: FUN_003ddb50. */
 /* Supplied declaration required: FUN_003de8c4. */
@@ -122,7 +122,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
         (temp_v2 = tableIsSupportedKind(*param_1,0), temp_v2 != 0)) &&
        (temp_v2 = FUN_0024502c(*param_1,0), temp_v2 != 0)) {
       if (-1 < *(int *)(*param_1 + 0x49e8)) {
-        FUN_00295d28();
+        soundSlotStopById();
       }
       temp_v0 = 0x122;
     }
@@ -166,10 +166,10 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
         else {
           FUN_0033911c(*param_1);
           FUN_0033a264(*param_1);
-          FUN_003d6408(g_btlMain);
+          modelSlotDetachChild(g_btlMain);
           FUN_003d5ef4(g_btlMain);
-          FUN_00267d3c(g_btlUiBlock);
-          FUN_00245228(*param_1,0,10);
+          btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
+          slotResetIdle(*param_1,0,10);
           FUN_002505c0(0,param_2,0x100010a,0,0,0,1);
         }
       }
@@ -197,14 +197,14 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
           FUN_00339254(*param_1);
           groupStartItems(DAT_004398d4);
           actionCreateKindFive(0,param_2,1);
-          FUN_003d660c(g_btlMain);
+          objectDestroyGfx(g_btlMain);
           FUN_0024082c(g_btlMain,0);
           FUN_003dc02c(DAT_00435d18);
           FUN_00339dc0(*param_1);
           FUN_00338fb0(*param_1);
-          FUN_00338754(*param_1);
-          FUN_00339828(*param_1);
-          FUN_0026c820(g_btlUiBlock);
+          objectScriptDestroy(*param_1);
+          objResourceRelease(*param_1);
+          btlUiPanelFadeInWhenReady(g_btlUiBlock);
           buttonHelpGetMode();
           buttonHelpSetPreset();
           battleSetActionKind(param_1);

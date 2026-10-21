@@ -10,7 +10,7 @@ int FUN_00168e00(...);
 int FUN_001835b4(...);
 int FUN_001879d0(int);
 int FUN_002a4860(int);
-int FUN_002c2c68(int);
+int objectApplyIfUnblocked(int);
 int uiSearchPrimary(int);
 int VectorSignedToFloat(...);
 
@@ -32,7 +32,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_002a4860. */
-/* Supplied declaration required: FUN_002c2c68. */
+/* Supplied declaration required: objectApplyIfUnblocked. */
 /* Supplied declaration required: uiSearchPrimary. */
 
 
@@ -62,13 +62,13 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
   FUN_001835b4(2,0x31,0x73,param_2,param_3,0xc9);
   temp_v7 = 0;
   temp_v1 = FUN_001834a4(0x31,0x75);
-  temp_v2 = FUN_002c2c68(param_1);
+  temp_v2 = objectApplyIfUnblocked(param_1);
   temp_v3 = uiSearchPrimary(param_1);
   if (temp_v3 >= temp_v2) {
     temp_v2 = (int)*(short *)(*(int *)(temp_v1 + 0xc) + 2);
   }
   else {
-    temp_v4 = FUN_002c2c68(param_1);
+    temp_v4 = objectApplyIfUnblocked(param_1);
     temp_v9 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat((int)*(short *)(*(int *)(temp_v1 + 0xc) + 2),
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -84,7 +84,7 @@ void FUN_003f61b4(int param_1,int param_2,int param_3)
     temp_v7 = (int)(temp_v9 * temp_v8);
     temp_v3 = FUN_002a4860(param_1);
     temp_v5 = uiSearchPrimary(param_1);
-    temp_v6 = FUN_002c2c68(param_1);
+    temp_v6 = objectApplyIfUnblocked(param_1);
     if ((temp_v3 + temp_v5 == temp_v6) &&
        (temp_v3 = (int)*(short *)(*(int *)(temp_v1 + 0xc) + 2), temp_v7 + temp_v2 < temp_v3)) {
       temp_v7 = temp_v3 - temp_v2;

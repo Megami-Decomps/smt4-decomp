@@ -19,7 +19,7 @@ extern int FUN_0020ef14(...); /* 0x20ef14 */
 extern unsigned char LAB_0021b064; /* 0x21b064 */
 extern unsigned char LAB_0021b07c; /* 0x21b07c */
 extern unsigned char LAB_0021b094; /* 0x21b094 */
-extern int FUN_002ca030(...); /* 0x2ca030 */
+extern int btlGameOverRunForJob(...); /* 0x2ca030 */
 extern int btlGameOverDestroy(...); /* 0x2e06b4 */
 extern int g_btlGameOver; /* 0x435d60 */
 
@@ -40,8 +40,8 @@ void FUN_0021af44(unsigned int *param_1)
   puVar1 = &LAB_0021b064;
   taskCreateDraw(&LAB_0021b064,2,0,0,FUN_0020ef14,btlGameOverDestroy,param_1,*param_1);
   param_1[0xb] = (unsigned int)puVar1;
-  taskCreateDraw(&LAB_0021b07c,0x7a,0,0,FUN_002ca030,0,param_1,puVar1);
-  taskCreateDraw(&LAB_0021b094,0xd8,0,0,FUN_002ca030,0,param_1,param_1[0xb]);
+  taskCreateDraw(&LAB_0021b07c,0x7a,0,0,btlGameOverRunForJob,0,param_1,puVar1);
+  taskCreateDraw(&LAB_0021b094,0xd8,0,0,btlGameOverRunForJob,0,param_1,param_1[0xb]);
   temp_v0 = 0x100;
   asdMemAlloc(0x100,0x100,0,0x40,1);
   g_btlGameOver = temp_v0;

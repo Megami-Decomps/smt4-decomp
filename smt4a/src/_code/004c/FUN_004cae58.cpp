@@ -49,7 +49,7 @@ typedef struct {
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int g_btlCamera; /* 0x571508 */
 
-extern int FUN_0016345c(void);
+extern int querySlotHasHandle(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_003ec668. */
 extern unsigned long long FUN_003eca48(fn_004cae58_arg0 *, unsigned short);
@@ -61,7 +61,7 @@ extern int holderObjectCall(unsigned int);
 /* Supplied declaration required: FUN_004d86a0. */
 /* Supplied declaration required: FUN_004d86c0. */
 /* Supplied declaration required: targetStartIndexWithFlag2. */
-extern int FUN_004d87a0(unsigned int);
+extern int handleOwnerIsActive(unsigned int);
 /* Supplied declaration required: FUN_004d888c. */
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: obj4FStartSwitch. */
@@ -95,7 +95,7 @@ void FUN_004cae58(fn_004cae58_arg0 *param_1,int param_2)
   if (temp_v4 == 0x35b) {
     temp_v2 = gameFlagIsSet(0x592);
     if (temp_v2 != 0) {
-      temp_v2 = FUN_0016345c();
+      temp_v2 = querySlotHasHandle();
       if (temp_v2 != 0) {
         temp_v2 = callOnHandleField4A(*(unsigned int *)(param_2 + 0x1bc));
         if (temp_v2 == 0xd) {
@@ -209,7 +209,7 @@ LAB_004cb0b4:
         return;
       }
       if (*(int *)(temp_v8 + 0xc) == 0) {
-        temp_v2 = FUN_004d87a0(*(unsigned int *)(param_2 + 0x1bc));
+        temp_v2 = handleOwnerIsActive(*(unsigned int *)(param_2 + 0x1bc));
         if (temp_v2 != 0) {
           FUN_004d8668();
           temp_v10 = (float)(int)in_s0;
@@ -227,7 +227,7 @@ LAB_004cb0b4:
         *(short *)(param_2 + 0x1ce) = *(short *)(param_2 + 0x1ce) + 1;
         return;
       }
-      temp_v3 = FUN_004d87a0(*(unsigned int *)(param_2 + 0x1bc));
+      temp_v3 = handleOwnerIsActive(*(unsigned int *)(param_2 + 0x1bc));
       if ((temp_v3 == 0) && (temp_v3 = holderObjectCall(*(unsigned int *)(param_2 + 0x1bc)), temp_v3 == 0)) {
         return;
       }

@@ -1,10 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015f028` (_code @ 0x15f028, 0xcc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match2_HandleRequest.h"
 
 extern "C" {
 
-int FUN_002ad9e8(int **, unsigned int [4], unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+u32 titleContentStreamCreate(u32 *, const HandleRequest *, u32, u32, u32, u32, u32);
 
 typedef int romwright_code(...);
 /* stack frame of param_9: 4 slot(s), 16 byte(s) */
@@ -15,7 +16,6 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_9_stack;
 
-/* Supplied declaration required: FUN_002ad9e8. */
 extern int FUN_002bb99c(unsigned int, int *);
 
 
@@ -26,19 +26,22 @@ void FUN_0015f028(unsigned int param_1,unsigned int param_2,unsigned int param_3
 
 {
 /* irregular: 2 native warning(s); review required */
-  int **ppiVar1;
   int temp_v0;
   int *temp_v1;
-  unsigned int temp_v2 [4];
+  u32 handle;
+  u32 status;
+  HandleRequest request;
   
-  temp_v2[0] = param_3 | ((param_2 & 0xff0fffff) << 8);
-  temp_v2[1] = 0x4008c;
-  temp_v2[2] = 1;
-  ppiVar1 = &temp_v1;
-  temp_v2[3] = param_4;
-  FUN_002ad9e8(ppiVar1,temp_v2,param_5,param_6,param_7,param_8,param_9);
-  if ((-1 < (int)ppiVar1) && (temp_v0 = FUN_002bb99c(param_1,temp_v1), temp_v0 < 0)) {
-    (**(romwright_code **)(*temp_v1 + 0x30))();
+  request.value = (static_cast<u64>(0x4008c) << 32) |
+                  (param_3 | ((param_2 & 0xff0fffff) << 8));
+  request.kind = 1;
+  request.argument = param_4;
+  status = titleContentStreamCreate(&handle,&request,param_5,param_6,param_7,param_8,param_9);
+  if (static_cast<s32>(status) >= 0) {
+    temp_v1 = reinterpret_cast<int *>(handle);
+    temp_v0 = FUN_002bb99c(param_1,temp_v1);
+    if (temp_v0 < 0)
+      (**(romwright_code **)(*temp_v1 + 0x30))(temp_v1);
   }
   return;
 }

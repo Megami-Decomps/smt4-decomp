@@ -9,8 +9,8 @@ int FUN_00280988(void);
 int mapEnemyAdvancePursuit(void);
 
 int CONCAT44(...);
-int FUN_001e2670(void);
-int FUN_001e26e8(void);
+float mathSnapHeading16(float angle);
+float calcHeadingRoundedTo32Directions(float angle);
 int FUN_001e2be4(void);
 int FUN_002562e4(int, int);
 int FUN_00256370(int, int);
@@ -18,7 +18,7 @@ int FUN_0027f48c(int, int);
 int FUN_0027f848(void);
 int FUN_0027f958(float *, unsigned int *, int);
 int FUN_0027fa98(...);
-int FUN_00280364(void);
+int mapSelectContainingRegions(void);
 int FUN_002804ec(...);
 int FUN_00281e34(void);
 int FUN_00282390(void);
@@ -54,8 +54,6 @@ extern int DAT_0049fd04; /* 0x49fd04 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_001e2670. */
-/* Supplied declaration required: FUN_001e26e8. */
 /* Supplied declaration required: FUN_001e2be4. */
 /* Supplied declaration required: FUN_001f9188. */
 /* Supplied declaration required: FUN_002562e4. */
@@ -67,7 +65,7 @@ extern int FUN_0025a140(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027f848. */
 /* Supplied declaration required: FUN_0027f958. */
 /* Supplied declaration required: FUN_0027fa98. */
-/* Supplied declaration required: FUN_00280364. */
+/* Supplied declaration required: mapSelectContainingRegions. */
 /* Supplied declaration required: FUN_002804ec. */
 /* Supplied declaration required: FUN_00280988. */
 /* Supplied declaration required: FUN_00281e34. */
@@ -176,7 +174,7 @@ void FUN_001fa8e4(void)
           FUN_0027fa98(3);
           FUN_0029be5c(0x14,1);
           FUN_002804ec(g_lmapScene + 0x28);
-          FUN_00280364();
+          mapSelectContainingRegions();
           return;
         }
       }
@@ -282,10 +280,10 @@ void FUN_001fa8e4(void)
         temp_v12 = temp_v12 - 360.0f;
       }
       if (*(int *)(DAT_004474f4 + 0xc4) != 3) {
-        FUN_001e26e8();
+        temp_v12 = calcHeadingRoundedTo32Directions(temp_v12);
       }
       else {
-        FUN_001e2670();
+        temp_v12 = mathSnapHeading16(temp_v12);
       }
       temp_v12 = -temp_v12;
       temp_v21 = *(float *)(g_lmapScene + 0x50);
@@ -457,7 +455,7 @@ void FUN_001fa8e4(void)
       FUN_0027fa98(0x1f);
       FUN_0029be5c(0x16,1);
     }
-    FUN_00280364();
+    mapSelectContainingRegions();
     if ((temp_v9 & 0x800) != 0) {
       mapEnemyAdvancePursuit();
     }
@@ -503,7 +501,7 @@ void FUN_001fa8e4(void)
   }
   *(unsigned int *)(temp_v2 + 0xd94) = 0;
   FUN_002804ec(g_lmapScene + 0x28);
-  FUN_00280364();
+  mapSelectContainingRegions();
   return;
 }
 

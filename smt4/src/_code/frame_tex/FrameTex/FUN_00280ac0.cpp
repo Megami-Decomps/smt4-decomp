@@ -14,7 +14,7 @@ typedef struct {
 
 extern int g_frameTex; /* 0x43e278 */
 
-extern unsigned int FUN_002bc11c(void);
+extern unsigned int osVirtToPhysAddress(void);
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: asdMemoryAlloc. */
 
@@ -44,7 +44,7 @@ void FUN_00280ac0(int param_1)
       temp_v2 = 0x30000;
       asdMemoryAlloc(0x30000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = FUN_002bc11c();
+      temp_v2 = osVirtToPhysAddress();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
       *(int *)(temp_v0 + 0xfdc) = temp_v1;
     }
@@ -60,7 +60,7 @@ void FUN_00280ac0(int param_1)
       temp_v2 = 0x20000;
       asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = FUN_002bc11c();
+      temp_v2 = osVirtToPhysAddress();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
       temp_v3 = 0;
       *(int *)(temp_v0 + 0xfdc) = temp_v1;
@@ -75,7 +75,7 @@ void FUN_00280ac0(int param_1)
       temp_v2 = 0x20000;
       asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v3 + 0x28),1);
       *(unsigned int *)(temp_v3 + 0x24) = temp_v2;
-      temp_v2 = FUN_002bc11c();
+      temp_v2 = osVirtToPhysAddress();
       *(unsigned int *)(temp_v3 + 0x30) = temp_v2;
       temp_v1 = 0;
       *(int *)(temp_v0 + 0xfe4) = temp_v3;
@@ -90,7 +90,7 @@ void FUN_00280ac0(int param_1)
       temp_v2 = 0x20000;
       asdMemoryAlloc(0x20000,0x100,0,*(unsigned int *)(temp_v1 + 0x28),1);
       *(unsigned int *)(temp_v1 + 0x24) = temp_v2;
-      temp_v2 = FUN_002bc11c();
+      temp_v2 = osVirtToPhysAddress();
       *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
       *(int *)(temp_v0 + 0xfe8) = temp_v1;
     }

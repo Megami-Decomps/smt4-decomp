@@ -23,10 +23,13 @@ typedef struct BtlEffectOwner {
 
 /* The module global (Shin Megami Tensei IV). */
 typedef struct BtlEffectGlobals {
-    /* 0x00 */ u32 unk00;
+    /* 0x00 */ union { u32 unk00; const char *prefix; };
     /* 0x04 */ u8 unk04[8];
-    /* 0x0C */ u32 unk0C;
-    /* 0x10 */ u8 unk10[8];
+    /* 0x0C */ union { u32 unk0C; const char *otherPrefix; };
+    union {
+        /* 0x10 */ u8 unk10[8];
+        struct { const char *name, *otherName; } reserved;
+    };
     /* 0x18 */ void *data;         /* heap block */
 } BtlEffectGlobals;
 

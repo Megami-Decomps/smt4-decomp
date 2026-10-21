@@ -11,9 +11,9 @@ typedef struct BtlMainState {
 
 extern BtlMainState *btlGetMainState(void);
 extern void *devilGetRecord(u32 id);
-extern void FUN_00295228(u32 id, s32 arg);
+extern void devilCreateRaceEffect(u32 id, s32 arg);
 
-/* Script command: when the battle is not flagged 2 and its devil has a record, calls FUN_00295228 for it with 3; returns 1. */
+/* Script command: when the battle is not flagged 2 and its devil has a record, calls devilCreateRaceEffect for it with 3; returns 1. */
 u32 FUN_00312b28(void)
 {
     BtlMainState *state = btlGetMainState();
@@ -22,7 +22,7 @@ u32 FUN_00312b28(void)
         u32 devilId = state->devilId;
 
         if (devilId != 0 && devilGetRecord(devilId) != NULL) {
-            FUN_00295228(devilId, 3);
+            devilCreateRaceEffect(devilId, 3);
         }
     }
     return 1;

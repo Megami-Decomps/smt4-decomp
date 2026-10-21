@@ -11,7 +11,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
 int sysMemClear(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -42,7 +42,7 @@ extern unsigned int *g_menuState; /* 0x57f56c */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_0013f578(void)
@@ -66,7 +66,7 @@ void FUN_0013f578(void)
   taskCreateDraw(&LAB_0013f77c,0x86,0,0,FUN_0015519c,0,0,puVar2);
   taskCreateDraw(&LAB_0013f790,0xe2,0,0,FUN_0015519c,0,0,*puVar1);
   puVar1 = g_menuState;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_menuState + 7);
+  paramsClearPacket(g_menuState + 7);
   paramsInit(puVar1 + 7,&DAT_0052f7bc,0x18,&DAT_0052f7d4,0x30,&DAT_0052f804,0x48,0,0,&DAT_0052f84c
                ,0x1dc);
   puVar3 = puVar1 + 7;

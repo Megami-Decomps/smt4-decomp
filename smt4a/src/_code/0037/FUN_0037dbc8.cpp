@@ -10,7 +10,7 @@ int FUN_001ad9b4(...);
 int scrWorkGetValue(int);
 int scrWorkSetValue(...);
 int messageSlotSet(int);
-int FUN_002c76c0(...);
+int scrCommMessageSetMode(...);
 int btlTalkBustUpCreate(void);
 int eventTexSetFlag(int);
 int scrSetResult(int);
@@ -30,7 +30,7 @@ extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageSlotSet. */
-/* Supplied declaration required: FUN_002c76c0. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: eventTexSetFlag. */
@@ -69,7 +69,7 @@ unsigned int FUN_0037dbc8(void)
     temp_v2 = scrWorkGetValue(0);
     if (temp_v2 != 0) {
       if (temp_v2 == 1) {
-        FUN_002c76c0(0xffffffff);
+        scrCommMessageSetMode(0xffffffff);
         messageSlotSet(0);
         sysPlaySe(0x92);
         scrWorkGetValue(3);
@@ -110,7 +110,7 @@ unsigned int FUN_0037dbc8(void)
       }
       btlTalkBustUpSetUnk2F4(0);
       scrWorkSetValue(3,0);
-      FUN_002c76c0(1);
+      scrCommMessageSetMode(1);
       scrWorkSetValue(0,1);
     }
   }

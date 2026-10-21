@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002eb164(...);
 int onlineTimeGetNow(unsigned char [8]);
 int FUN_002ef268(int *, int);
-int FUN_002ef33c(unsigned char [4], unsigned char [8], int);
+int valueAddIncrement(unsigned char [4], unsigned char [8], int);
 int FUN_002ef34c(unsigned char [12], int *, int);
 int FUN_002ef584(int, int);
 int SBORROW4(...);
@@ -28,7 +28,7 @@ extern unsigned long long FUN_002eab1c(unsigned char *, int *);
 /* Supplied declaration required: onlineTimeGetNow. */
 extern int FUN_002ef01c(int);
 /* Supplied declaration required: FUN_002ef268. */
-/* Supplied declaration required: FUN_002ef33c. */
+/* Supplied declaration required: valueAddIncrement. */
 /* Supplied declaration required: FUN_002ef34c. */
 /* Supplied declaration required: FUN_002ef584. */
 
@@ -72,7 +72,7 @@ void FUN_001072cc(int *param_1)
          && (*(char *)(temp_v1 + 0x9d) != '\0')) {
         temp_v1 = param_1[0x2a];
         FUN_002eb164(temp_v8,temp_v1);
-        FUN_002ef33c(temp_v5,temp_v8,1);
+        valueAddIncrement(temp_v5,temp_v8,1);
         *(unsigned short *)(temp_v1 + 0x44) = temp_v6;
         *(unsigned char *)(param_1[0x2a] + 0x89) = 0;
         temp_v1 = (**(romwright_code **)(*param_1 + 0x44))(param_1);

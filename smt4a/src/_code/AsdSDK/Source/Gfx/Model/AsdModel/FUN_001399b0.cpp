@@ -9,7 +9,7 @@ int FUN_00141724(void);
 int FUN_00143424(void);
 int FUN_001445d4(void);
 int FUN_0014850c(unsigned int, unsigned int *);
-int FUN_0014aa88(unsigned char *);
+int tripleClear(unsigned char *);
 int FUN_00176538(unsigned int);
 int FUN_001767a4(unsigned int, unsigned int);
 int FUN_0018e9d8(...);
@@ -33,7 +33,7 @@ extern unsigned char DAT_00636ec8; /* 0x636ec8 */
 /* Supplied declaration required: FUN_00143424. */
 /* Supplied declaration required: FUN_001445d4. */
 /* Supplied declaration required: FUN_0014850c. */
-/* Supplied declaration required: FUN_0014aa88. */
+/* Supplied declaration required: tripleClear. */
 extern unsigned int asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_00176538. */
 /* Supplied declaration required: FUN_001767a4. */
@@ -49,8 +49,8 @@ void FUN_001399b0(unsigned int param_1,unsigned int param_2)
   int temp_v2;
   int temp_v3;
   
-  FUN_0014aa88(&DAT_00636ebc);
-  FUN_0014aa88(&DAT_00636ec8);
+  tripleClear(&DAT_00636ebc);
+  tripleClear(&DAT_00636ec8);
   DAT_005b3c10 = 0;
   temp_v0 = asdMemoryGetDefaultAllocator();
   FUN_0014850c(temp_v0,&DAT_00636e30);

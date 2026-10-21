@@ -1,34 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c83e0` (_code @ 0x3c83e0, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/GameOptions.h"
+
+struct QuestRecordState {
+    u16 id;    // 0x00
+    u8 flag;   // 0x02
+};
 
 extern "C" {
+s32 gameGetOptionProgressStatus(void);
+GameOptions* gameGetSupportUnitData(void);
+QuestRecordState* questRecordFindById(u16 id);
 
-extern int questRecordFindById(unsigned short);
-extern int gameGetOptions(void);
-extern int FUN_002b6b38(void);
-
-
-unsigned int FUN_003c83e0(void)
-
+// Checks whether the current mode allows the selected quest.
+u32 FUN_003c83e0(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002b6b38();
-  if (temp_v0 == 0) {
-    return 0;
-  }
-  if (temp_v0 != 1) {
-    if (temp_v0 != 2) {
-      return 0;
+    u32 allowed = 0;
+    switch (gameGetOptionProgressStatus()) {
+    case 0:
+        break;
+    case 1:
+        allowed = 1;
+        break;
+    case 2:
+        if (questRecordFindById(gameGetSupportUnitData()->unk46)->flag == 0) {
+            allowed = 1;
+        }
+        break;
     }
-    temp_v0 = gameGetOptions();
-    temp_v0 = questRecordFindById(*(unsigned short *)(temp_v0 + 0x46));
-    if (*(char *)(temp_v0 + 2) != '\0') {
-      return 0;
-    }
-  }
-  return 1;
+    return allowed;
 }
-
-} /* extern "C" */
+}

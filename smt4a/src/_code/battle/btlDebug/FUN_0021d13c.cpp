@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015f490(...);
 int FUN_002a49e4(...);
-int FUN_002c2cc4(...);
+int uiNavigatorStart(...);
 int FUN_00370ecc(...);
 int FUN_003f1b3c(...);
 int FUN_0047f4cc(...);
@@ -18,9 +18,9 @@ int FUN_0022e774(void);
 int FUN_0023f328(...);
 int FUN_00333f6c(void);
 int FUN_00371c3c(...);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int FUN_0038e4cc(...);
-int FUN_003a7b54(void);
+int statusDownGetValue(void);
 int FUN_003d2150(...);
 int FUN_003ec6d8(...);
 int FUN_003eeb4c(...);
@@ -46,7 +46,7 @@ int FUN_003df57c(...);
 int FUN_003eb200(void);
 int FUN_003eed44(...);
 int FUN_0040082c(void);
-int FUN_0047fbf0(...);
+int btlItemComputeValues(...);
 int FUN_004bcbb4(...);
 int bitsAt60Test(...);
 
@@ -63,8 +63,8 @@ int FUN_002a4860(...);
 int FUN_002a4894(...);
 int FUN_002a4914(...);
 int FUN_0031f208(...);
-int FUN_0031f27c(...);
-int FUN_0035d8a4(void);
+int sortMenuAcquire(...);
+int useCounterRelease(void);
 int FUN_004009d0(...);
 
 int btlGetMainState(void);
@@ -104,7 +104,7 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } param_1_stack;
 
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern signed char DAT_00573b88; /* 0x573b88 */
 extern signed char DAT_00573b89; /* 0x573b89 */
 extern int DAT_00573b8c; /* 0x573b8c */
@@ -186,29 +186,29 @@ extern int FUN_00291e14(void);
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002a49e4. */
 extern int FUN_002a6a24(unsigned short);
-extern int FUN_002c2c4c(int);
-/* Supplied declaration required: FUN_002c2cc4. */
+extern int widgetSubCallIfVisible(int);
+/* Supplied declaration required: uiNavigatorStart. */
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_002cb438. */
 /* Supplied declaration required: FUN_002cc9e0. */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 extern int FUN_0032cfc8(void);
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_003450d4. */
 extern int uiSearchSecondary(int);
 extern int uiSearchPrimary(int *);
-/* Supplied declaration required: FUN_0035d8a4. */
+/* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: FUN_00370ecc. */
 /* Supplied declaration required: FUN_00371c3c. */
 /* Supplied declaration required: FUN_003756c8. */
 extern int panelStateIs0(void);
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_0038b3f8. */
 /* Supplied declaration required: FUN_0038e4cc. */
 /* Supplied declaration required: FUN_003a7a88. */
-/* Supplied declaration required: FUN_003a7b54. */
+/* Supplied declaration required: statusDownGetValue. */
 extern int stateHolderIsMissingOrState0(void);
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003df57c. */
@@ -229,11 +229,11 @@ extern unsigned int halfTableGet(unsigned int, int);
 /* Supplied declaration required: FUN_004009d0. */
 /* Supplied declaration required: FUN_0047f4cc. */
 extern int FUN_0047fbb4(unsigned int);
-/* Supplied declaration required: FUN_0047fbf0. */
+/* Supplied declaration required: btlItemComputeValues. */
 extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_004bcbb4. */
 /* Supplied declaration required: bitsAt60Test. */
-extern int FUN_004c3a98(int, unsigned int);
+extern int btlFindEntryValue(int, unsigned int);
 extern int FUN_004c52ec(unsigned int);
 extern int FUN_004c87e0(void);
 /* Supplied declaration required: FUN_004c8e30. */
@@ -682,7 +682,7 @@ joined_r0x0021db60:
     break;
   case 3:
     FUN_0020ad6c(param_1,4,0);
-    FUN_0031f27c(0xffffffff,1);
+    sortMenuAcquire(0xffffffff,1);
     FUN_0031f208(10);
     temp_v4 = FUN_00291e14();
     if (temp_v4 == 0) {
@@ -697,7 +697,7 @@ joined_r0x0021db60:
   case 4:
     temp_v4 = useCounterIsFinished();
     if (temp_v4 != 0) {
-      FUN_0035d8a4();
+      useCounterRelease();
       if (*(int *)(param_1 + 0x3880) - 8U < 6) {
         FUN_00270104(param_1);
       }
@@ -713,11 +713,11 @@ joined_r0x0021db60:
         *(unsigned int *)(param_1 + 0x3884) = *(unsigned int *)(param_1 + 0x3880);
         FUN_0020ad6c(param_1,7,0);
         FUN_002686b8();
-        FUN_0035d8a4();
+        useCounterRelease();
       }
       if (temp_v4 == 10) {
         FUN_002686b8();
-        FUN_0035d8a4();
+        useCounterRelease();
         FUN_0020ad6c(param_1,5,0);
       }
     }
@@ -1593,7 +1593,7 @@ LAB_0021f708:
     break;
   case 0x16:
     temp_v7 = 0;
-    temp_v4 = FUN_002c2c4c(param_1 + 0x3bdc);
+    temp_v4 = widgetSubCallIfVisible(param_1 + 0x3bdc);
     temp_v10 = (unsigned int)temp_v23;
     if (0 < temp_v4) {
       do {
@@ -1604,7 +1604,7 @@ LAB_0021f708:
           break;
         }
         temp_v7 = temp_v7 + 1;
-        temp_v4 = FUN_002c2c4c(param_1 + 0x3bdc);
+        temp_v4 = widgetSubCallIfVisible(param_1 + 0x3bdc);
         temp_v10 = (unsigned int)temp_v23;
       } while (temp_v7 < temp_v4);
     }
@@ -1798,7 +1798,7 @@ LAB_0021fbdc:
           if (temp_v4 != 0) {
             temp_v7 = gameGetSlotTable();
             temp_v9 = param_1 + temp_v4 * 4;
-            FUN_0047fbf0((int)*(char *)(temp_v7 + temp_v4 + 0x1c9f),(int)(short)(int)temp_v27,temp_v9 + 0x3c88
+            btlItemComputeValues((int)*(char *)(temp_v7 + temp_v4 + 0x1c9f),(int)(short)(int)temp_v27,temp_v9 + 0x3c88
                          ,temp_v9 + 0x3c98);
             temp_v7 = gameGetSlotTable();
             if (*(char *)(temp_v7 + temp_v4 + 0x1c9f) < '\0') {
@@ -1806,7 +1806,7 @@ LAB_0021fbdc:
             }
           }
           else {
-            FUN_0047fbf0(0xffffffff,(int)(short)(int)temp_v27,param_1 + 0x3c88,param_1 + 0x3c98);
+            btlItemComputeValues(0xffffffff,(int)(short)(int)temp_v27,param_1 + 0x3c88,param_1 + 0x3c98);
           }
         }
       }
@@ -1874,12 +1874,12 @@ LAB_0021fbdc:
               temp_v4 = FUN_002a4878(temp_v7);
               temp_v10 = (unsigned int)temp_v23;
               if (temp_v4 == 0) {
-                FUN_0047fbf0(0xffffffff,(int)(short)(int)temp_v25,param_1 + 0x3c88,param_1 + 0x3c98);
+                btlItemComputeValues(0xffffffff,(int)(short)(int)temp_v25,param_1 + 0x3c88,param_1 + 0x3c98);
                 break;
               }
               temp_v9 = gameGetSlotTable();
               temp_v13 = param_1 + temp_v4 * 4;
-              FUN_0047fbf0((int)*(char *)(temp_v9 + temp_v4 + 0x1c9f),(int)(short)(int)temp_v25,
+              btlItemComputeValues((int)*(char *)(temp_v9 + temp_v4 + 0x1c9f),(int)(short)(int)temp_v25,
                            temp_v13 + 0x3c88,temp_v13 + 0x3c98);
               temp_v9 = gameGetSlotTable();
               temp_v10 = (unsigned int)temp_v23;
@@ -1899,7 +1899,7 @@ LAB_0021fbdc:
     break;
   case 0x23:
     temp_v7 = 0;
-    temp_v4 = FUN_002c2c4c(param_1 + 0x3bdc);
+    temp_v4 = widgetSubCallIfVisible(param_1 + 0x3bdc);
     temp_v10 = (unsigned int)temp_v23;
     if (0 < temp_v4) {
       do {
@@ -1910,7 +1910,7 @@ LAB_0021fbdc:
           break;
         }
         temp_v7 = temp_v7 + 1;
-        temp_v4 = FUN_002c2c4c(param_1 + 0x3bdc);
+        temp_v4 = widgetSubCallIfVisible(param_1 + 0x3bdc);
         temp_v10 = (unsigned int)temp_v23;
       } while (temp_v7 < temp_v4);
     }
@@ -1993,7 +1993,7 @@ joined_r0x0022027c:
   case 0x25:
     temp_v4 = panelStateIs0();
     if (temp_v4 == 1) {
-      FUN_00388758(1);
+      messageDismissNumericBanner(1);
       FUN_0020ad6c(param_1,0x26,0);
     }
     break;
@@ -2024,7 +2024,7 @@ joined_r0x0022027c:
     FUN_00163aa4(param_1 + 0x12b8);
     temp_v4 = stateHolderIsMissingOrState0();
     if (temp_v4 != 0) {
-      FUN_003a7b54();
+      statusDownGetValue();
       FUN_0022e774();
       FUN_0020ad6c(param_1,0x2c,1);
     }
@@ -2486,7 +2486,7 @@ LAB_0022129c:
         }
         if ((temp_v5 & 0x10) != 0) {
           temp_v7 = FUN_004c52ec(0x22);
-          temp_v9 = FUN_004c3a98(temp_v4,0x22);
+          temp_v9 = btlFindEntryValue(temp_v4,0x22);
           if ((temp_v9 == temp_v7) || (temp_v9 < *temp_v34 + (temp_v7 - 1))) {
             *(unsigned short *)(temp_v29 + 0x3e44) = 0;
           }
@@ -2555,7 +2555,7 @@ LAB_0022129c:
                   }
                 }
               }
-              else if ((*(unsigned int *)(DAT_00573808 + 0x339c) & 0x400) != 0) {
+              else if ((*(unsigned int *)(g_btlAux + 0x339c) & 0x400) != 0) {
                 FUN_004f9450();
               }
             }
@@ -2582,7 +2582,7 @@ LAB_0022129c:
               FUN_0047f4cc(temp_v32);
               FUN_002a49e4(*(unsigned int *)(*temp_v37 + 0x4d64),temp_v29 & 0xffff);
               temp_v25 = (short **)0x0;
-              FUN_002c2cc4(temp_v1,1,1,0);
+              uiNavigatorStart(temp_v1,1,1,0);
             }
           }
           else if (*(short *)(param_1 + 0x4b1e) == -1) {

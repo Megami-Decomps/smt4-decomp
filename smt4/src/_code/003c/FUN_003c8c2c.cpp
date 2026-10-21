@@ -9,14 +9,14 @@ int dataTable05Sub4GetCount(void);
 int FUN_0029f7d4(void);
 int devilGetRecord(void);
 int FUN_0030abc8(unsigned int, int);
-int FUN_0031ed94(unsigned int, int);
+int dataTable05FindByPriorityAndKey(unsigned int, int);
 
 /* Supplied declaration required: dataTable5Sub3Lookup. */
 /* Supplied declaration required: dataTable05Sub4GetCount. */
 /* Supplied declaration required: FUN_0029f7d4. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: FUN_0030abc8. */
-/* Supplied declaration required: FUN_0031ed94. */
+/* Supplied declaration required: dataTable05FindByPriorityAndKey. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -79,7 +79,7 @@ unsigned char FUN_003c8c2c(unsigned int param_1,unsigned short *param_2,unsigned
     } while (psVar9 < psVar4);
   }
   temp_v1 = (unsigned int)(unsigned char)param_2[1];
-  FUN_0031ed94(temp_v1,(char)param_3[1]);
+  dataTable05FindByPriorityAndKey(temp_v1,(char)param_3[1]);
   if (temp_v1 != 0) {
     return (unsigned char)4;
   }

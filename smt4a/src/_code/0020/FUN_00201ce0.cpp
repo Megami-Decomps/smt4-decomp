@@ -8,7 +8,7 @@ int FUN_0032cc8c(int, unsigned char [16]);
 int FUN_00359768(int, int, unsigned int);
 int FUN_0036bca0(int, int);
 int asd3dSoundActorIsPlaying(void);
-int FUN_003875b8(void);
+int asdSoundGetPlayerPriority(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -23,7 +23,7 @@ extern int jyoucyuGetTableEntry(unsigned int);
 extern int FUN_0036bc6c(int);
 /* Supplied declaration required: FUN_0036bca0. */
 /* Supplied declaration required: asd3dSoundActorIsPlaying. */
-/* Supplied declaration required: FUN_003875b8. */
+/* Supplied declaration required: asdSoundGetPlayerPriority. */
 
 
 int FUN_00201ce0(int param_1)
@@ -73,7 +73,7 @@ int FUN_00201ce0(int param_1)
       temp_v2 = 0;
       do {
         temp_v3 = FUN_0036bc6c(temp_v2);
-        FUN_003875b8();
+        asdSoundGetPlayerPriority();
         if (temp_v4 < temp_v3) {
           temp_v4 = temp_v3;
           temp_v6 = temp_v2;

@@ -1,12 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bbc4c` (_code @ 0x4bbc4c, 0x674 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct AocSystemA;
+struct Table03Record;
 
 extern "C" {
 
 int sysMemClear(unsigned int *, int);
 int libc_strcmp(unsigned char *, unsigned int *);
-int FUN_00470340(unsigned int *, unsigned int);
+Table03Record *aocFindTable03RecordByKey(AocSystemA *, unsigned int);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -15,14 +17,13 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char LAB_004bc2c0; /* 0x4bc2c0 */
-extern unsigned int *g_aocSystem; /* 0x570280 */
+extern AocSystemA *g_aocSystem; /* 0x570280 */
 
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int *dataTableGetEntries(void);
+extern unsigned int *dataTableGetEntries(unsigned int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: libc_strcmp. */
-/* Supplied declaration required: FUN_00470340. */
 
 
 void FUN_004bbc4c(unsigned int *param_1,unsigned int param_2,unsigned char param_3,unsigned char param_4)
@@ -45,10 +46,10 @@ void FUN_004bbc4c(unsigned int *param_1,unsigned int param_2,unsigned char param
   unsigned int temp_v10;
   
   temp_v1 = dataTableGet(3,0);
-  puVar3 = (unsigned int *)dataTableGetEntries();
+  puVar3 = (unsigned int *)dataTableGetEntries(temp_v1);
   puVar5 = puVar3;
   if (((-1 < (int)param_2) && (temp_v2 = dataTableGetCount(temp_v1), param_2 < temp_v2)) &&
-     (puVar5 = g_aocSystem, FUN_00470340(g_aocSystem,param_2), puVar5 == (unsigned int *)0x0)) {
+     (puVar5 = (unsigned int *)aocFindTable03RecordByKey(g_aocSystem,param_2), puVar5 == (unsigned int *)0x0)) {
     puVar5 = puVar3 + param_2 * 0x18;
   }
   sysMemClear(param_1,0x84);

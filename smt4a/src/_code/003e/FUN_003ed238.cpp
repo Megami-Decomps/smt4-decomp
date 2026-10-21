@@ -1,11 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ed238` (_code @ 0x3ed238, 0x4b0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
 int FUN_001568f8(int, int);
-int FUN_003e7b5c(int, unsigned int);
+void battleRosterAssignGroupXOrder(BtlMainStateA*, unsigned int);
 int FUN_003e7cc8(int, unsigned int);
 int FUN_003f0e20(int, int);
 int VectorSignedToFloat(...);
@@ -28,7 +29,7 @@ extern float DAT_00573974; /* 0x573974 */
 extern int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 extern unsigned int dataTableFileGetTable(int, unsigned int);
-/* Supplied declaration required: FUN_003e7b5c. */
+/* Supplied declaration required: battleRosterAssignGroupXOrder. */
 /* Supplied declaration required: FUN_003e7cc8. */
 /* Supplied declaration required: FUN_003f0e20. */
 
@@ -243,7 +244,7 @@ LAB_003ed62c:
       temp_v13 = temp_v19;
     } while (temp_v9 < 3);
     FUN_003e7cc8(temp_v27,temp_v28);
-    FUN_003e7b5c(temp_v27,temp_v28);
+    battleRosterAssignGroupXOrder(reinterpret_cast<BtlMainStateA*>(temp_v27),temp_v28);
   }
   return;
 }

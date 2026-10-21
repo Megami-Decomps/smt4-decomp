@@ -1,27 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ec7b0` (_code @ 0x3ec7b0, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler loads the first exclusion mask with ADD/LDM into R3/IP; retail interleaves separate low/high loads into IP/R3 around the state LDRD. */
+#include "shard/W5_W5Match7_BattleMask.h"
+
+struct BattleCountedMaskState {
+    BattleMaskState state;
+    u8 unk4CE0[0x8c];
+    s32 count;
+};
+
+struct BattleExclusionMasks {
+    u8 unk00[0xd0];
+    u64 first;
+    u8 unkD8[0x30];
+    u64 second;
+};
 
 extern "C" {
+extern BattleExclusionMasks g_btlMain;
 
-extern unsigned int DAT_005739f0; /* 0x5739f0 */
-extern unsigned int DAT_005739f4; /* 0x5739f4 */
-extern unsigned int DAT_00573a28; /* 0x573a28 */
-extern unsigned int DAT_00573a2c; /* 0x573a2c */
-
-
-unsigned int FUN_003ec7b0(int param_1)
-
+u32 FUN_003ec7b0(const BattleCountedMaskState* battle)
 {
-  if (0 < *(int *)(param_1 + 0x4d6c)) {
-    if (((DAT_005739f4 & *(unsigned int *)(param_1 + 0x45a4)) == 0 &&
-         (DAT_005739f0 & *(unsigned int *)(param_1 + 0x45a0)) == 0) &&
-       ((*(unsigned int *)(param_1 + 0x45a0) & DAT_00573a28) == 0 &&
-        (*(unsigned int *)(param_1 + 0x45a4) & DAT_00573a2c) == 0)) {
-      return 1;
+    if (battle->count > 0) {
+        u64 mask = battle->state.mask;
+        if ((g_btlMain.first & mask) == 0 && (mask & g_btlMain.second) == 0) {
+            return 1;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

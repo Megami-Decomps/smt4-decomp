@@ -14,7 +14,7 @@ int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002a4b74(void);
 int libc_strcpy(unsigned char [64], unsigned int);
 int sysMemClear(unsigned int *, int);
@@ -24,7 +24,7 @@ int FUN_003c1060(void);
 int FUN_003fe86c(...);
 int pickObjStart(unsigned int *, unsigned char *);
 int FUN_0046a278(unsigned int *, unsigned int);
-int FUN_004ff920(...);
+int candidateGetPreferredValue(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -44,11 +44,11 @@ extern unsigned char LAB_0046b910; /* 0x46b910 */
 extern unsigned int FUN_001801b8(unsigned short, unsigned char);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002804b0. */
-extern unsigned int FUN_002a4b60(void);
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
+extern unsigned int messageMainGetValue(void);
 /* Supplied declaration required: FUN_002a4b74. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
@@ -61,7 +61,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: pickObjStart. */
 /* Supplied declaration required: FUN_0046a278. */
 extern int dataTable27GetEntry(int, unsigned int);
-/* Supplied declaration required: FUN_004ff920. */
+/* Supplied declaration required: candidateGetPreferredValue. */
 extern int FUN_004ffba8(int);
 
 
@@ -142,11 +142,11 @@ void FUN_0046b18c(unsigned int *param_1)
     param_1[2] = 0;
     break;
   case 1:
-    temp_v3 = FUN_00224880(*(unsigned int *)param_1[0xad]);
+    temp_v3 = scrRunOpcodesStub(*(unsigned int *)param_1[0xad]);
     if (temp_v3 != 2) {
       temp_v3 = messageWindowIsState1();
       if (temp_v3 != 0) {
-        temp_v2 = FUN_002a4b60();
+        temp_v2 = messageMainGetValue();
         param_1[0x2b5] = temp_v2;
         if (temp_v2 != 0xffffffff) {
           FUN_0046a278(param_1,temp_v2);
@@ -208,8 +208,8 @@ void FUN_0046b18c(unsigned int *param_1)
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
     textFormatBuffer(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
     textFormatBuffer(temp_v8,&LAB_0046b910,temp_v0);
-    FUN_002804b0(temp_v7,param_1 + 0xa7,0);
-    FUN_002804b0(temp_v8,param_1 + 0xa8,0);
+    asdLoadFileAsyncSimple(temp_v7,param_1 + 0xa7,0);
+    asdLoadFileAsyncSimple(temp_v8,param_1 + 0xa8,0);
     param_1[2] = param_1[2] + 1;
     return;
   case 3:
@@ -220,7 +220,7 @@ void FUN_0046b18c(unsigned int *param_1)
     if (param_1[0xa7] == 0 || temp_v2 == 0) {
       return;
     }
-    FUN_004ff920(*(unsigned int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4));
+    candidateGetPreferredValue(*(unsigned int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4));
     if (in_s0 < (float)param_1[0x297]) {
       return;
     }
@@ -236,7 +236,7 @@ void FUN_0046b18c(unsigned int *param_1)
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 4);
     }
-    temp_v3 = FUN_00224880(param_1[0xa9]);
+    temp_v3 = scrRunOpcodesStub(param_1[0xa9]);
     if (temp_v3 == 2) {
       *(unsigned int *)(*(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4) + 0x1fc) = temp_v5;
       FUN_001695a0();
@@ -281,8 +281,8 @@ void FUN_0046b18c(unsigned int *param_1)
     temp_v0 = *(unsigned short *)(temp_v3 + *(int *)param_1[0x2b6] * 0x88 + 0x6a);
     textFormatBuffer(temp_v7,&LAB_0046b8f0,temp_v0,temp_v0);
     textFormatBuffer(temp_v8,&LAB_0046b910,temp_v0);
-    FUN_002804b0(temp_v7,param_1 + 0xa7,0);
-    FUN_002804b0(temp_v8,param_1 + 0xa8,0);
+    asdLoadFileAsyncSimple(temp_v7,param_1 + 0xa7,0);
+    asdLoadFileAsyncSimple(temp_v8,param_1 + 0xa8,0);
     *param_1 = *param_1 | 0x100;
     temp_v2 = 7;
     param_1[2] = temp_v2;
@@ -295,7 +295,7 @@ void FUN_0046b18c(unsigned int *param_1)
     if (param_1[0xa7] == 0 || temp_v2 == 0) {
       return;
     }
-    FUN_004ff920(*(unsigned int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4));
+    candidateGetPreferredValue(*(unsigned int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4));
     if (in_s0 < (float)param_1[0x297]) {
       return;
     }
@@ -316,7 +316,7 @@ LAB_0046b85c:
     param_1[2] = temp_v2;
     return;
   case 8:
-    temp_v3 = FUN_00224880(param_1[0xa9]);
+    temp_v3 = scrRunOpcodesStub(param_1[0xa9]);
     if (temp_v3 == 2) {
       *(unsigned int *)(*(int *)(param_1[*(int *)(param_1[0x2b6] + 4) + 0x283] + 4) + 0x1fc) = temp_v5;
       FUN_001695a0();

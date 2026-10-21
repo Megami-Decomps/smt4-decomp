@@ -7,7 +7,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_002b5540(void);
 int FUN_002c263c(void);
-int FUN_0031e6b0(void);
+int gameDataResetFloat(void);
 int FUN_00359974(int, int, unsigned int, int);
 int VectorSignedToFloat(int, int);
 
@@ -46,7 +46,7 @@ extern int gameSlotTableFindFree(void);
 extern int FUN_00272d44(void);
 /* Supplied declaration required: FUN_002b5540. */
 /* Supplied declaration required: FUN_002c263c. */
-/* Supplied declaration required: FUN_0031e6b0. */
+/* Supplied declaration required: gameDataResetFloat. */
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_003e0024(void);
 extern int playerHasFlagBit(unsigned int);
@@ -166,7 +166,7 @@ LAB_00339020:
       FUN_002c263c();
       temp_v0 = randRange(4);
       temp_v0 = (int)(temp_v9[temp_v0] * in_s0 * temp_v6 * temp_v8);
-      FUN_0031e6b0();
+      gameDataResetFloat();
       if (temp_v0 != 0) {
         DAT_005f0cf4 = temp_v0;
         if (temp_v0 >= 1000000000) {

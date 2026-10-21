@@ -46,7 +46,7 @@ extern unsigned int FUN_001bce18(void);
 /* Supplied declaration required: sysMemClear. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
 /* Supplied declaration required: flagValueAdd. */
-extern unsigned char FUN_004bca20(void);
+extern unsigned char partySlotFindIndex(void);
 /* Supplied declaration required: dispatchIfFound. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Clear. */
@@ -165,7 +165,7 @@ void FUN_003ebec8(int param_1)
           temp_v7 = (unsigned int)*(unsigned short *)(temp_v5 + 0x62);
         }
         if (temp_v5 != 0 && temp_v7 != 0) {
-          temp_v1 = FUN_004bca20();
+          temp_v1 = partySlotFindIndex();
           temp_v5 = gameGetSlotTable();
           temp_v5 = temp_v5 + temp_v9;
           temp_v9 = temp_v9 + 1;

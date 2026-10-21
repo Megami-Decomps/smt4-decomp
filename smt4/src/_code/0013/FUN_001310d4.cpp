@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0013a69c(int, char *, char *);
 int FUN_002b4cbc(int, int);
-int FUN_002bcc54(void);
+int nw_snd_SoundSystem_SetMasterVolume(void);
 
 extern unsigned int DAT_00472348; /* 0x472348 */
 extern unsigned int DAT_0047234c; /* 0x47234c */
@@ -17,7 +17,7 @@ extern unsigned int DAT_00472358; /* 0x472358 */
 /* Supplied declaration required: FUN_0013a69c. */
 extern int FUN_0013ac60(void);
 /* Supplied declaration required: FUN_002b4cbc. */
-/* Supplied declaration required: FUN_002bcc54. */
+/* Supplied declaration required: nw_snd_SoundSystem_SetMasterVolume. */
 
 
 void FUN_001310d4(char *param_1)
@@ -58,7 +58,7 @@ void FUN_001310d4(char *param_1)
     *(unsigned int **)(param_1 + 0x90) = &DAT_00472350;
     *(unsigned int **)(param_1 + 0x94) = &DAT_00472354;
     *(unsigned int **)(param_1 + 0x98) = &DAT_00472358;
-    FUN_002bcc54();
+    nw_snd_SoundSystem_SetMasterVolume();
     temp_v2 = FUN_0013ac60();
     if (temp_v2 == 0) {
       param_1[1] = '\0';

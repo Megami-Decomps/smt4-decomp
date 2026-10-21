@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192608(void);
-int FUN_0048026c(...);
+int equipmentGetCappedUpgradeBonuses(...);
 
 /* stack frame of param_2: 1 slot(s), 2 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_0048026c. */
+/* Supplied declaration required: equipmentGetCappedUpgradeBonuses. */
 
 
 int FUN_0034f678(unsigned short *param_1,unsigned short *param_2)
@@ -30,8 +30,8 @@ int FUN_0034f678(unsigned short *param_1,unsigned short *param_2)
   FUN_00192608();
   temp_v1 = (unsigned int)*param_2;
   FUN_00192608();
-  FUN_0048026c(*param_1,temp_v3);
-  FUN_0048026c(*param_2,temp_v4);
+  equipmentGetCappedUpgradeBonuses(*param_1,temp_v3);
+  equipmentGetCappedUpgradeBonuses(*param_2,temp_v4);
   temp_v2 = (int)*(short *)(temp_v0 + 0x36) - (int)*(short *)(temp_v1 + 0x36);
   if (temp_v2 == 0) {
     temp_v0 = (unsigned int)*param_1;

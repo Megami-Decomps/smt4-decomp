@@ -20,7 +20,7 @@ typedef struct {
     unsigned short sp10; /* 0x10: local_10 */
 } param_4_stack;
 
-extern int FUN_00168518(int, unsigned short);
+extern int dataTableGetCategoryEntry(int, unsigned short);
 extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_001fef70. */
 
@@ -37,7 +37,7 @@ unsigned short FUN_004da0b4(fn_004da0b4_arg0 *param_1,unsigned int param_2,unsig
   temp_v0 = gameGetOptions();
   temp_v1 = gameGetOptions();
   if ((*(short *)(temp_v1 + 0x62) != 0) && (*(short *)(temp_v1 + 300) != 0)) {
-    temp_v0 = FUN_00168518((int)*(short *)(temp_v0 + 300),*(unsigned short *)(temp_v0 + 0x12e));
+    temp_v0 = dataTableGetCategoryEntry((int)*(short *)(temp_v0 + 300),*(unsigned short *)(temp_v0 + 0x12e));
     temp_v2 = (unsigned int)(*(unsigned short *)(temp_v0 + (int)param_1 * 2 + 0x28) & 0xfc00);
   }
   else {

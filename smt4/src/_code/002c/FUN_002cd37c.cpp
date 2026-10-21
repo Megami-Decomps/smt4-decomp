@@ -5,7 +5,7 @@
 extern "C" {
 
 int bitsetSetBit(short *, int);
-int FUN_00288154(...);
+int gameRecordCopy(...);
 int FUN_0029c6b0(short *);
 int devilGetRecord(void);
 int memClear(short *, int);
@@ -68,9 +68,9 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: bitsetSetBit. */
-/* Supplied declaration required: FUN_00288154. */
+/* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern unsigned int FUN_0029c8f4(short *);
+extern unsigned int flagCountUnlockedSlots(short *);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 
@@ -141,12 +141,12 @@ unsigned int FUN_002cd37c(short *param_1)
   
   temp_v0 = param_1[0x23];
   temp_v7 = (unsigned int)temp_v0;
-  temp_v3 = FUN_00288154(temp_v7,temp_v58);
+  temp_v3 = gameRecordCopy(temp_v7,temp_v58);
   temp_v6 = 0;
   if (temp_v3 != 0) {
     temp_v4 = temp_v7;
     devilGetRecord();
-    FUN_00288154(temp_v7,temp_v8);
+    gameRecordCopy(temp_v7,temp_v8);
     memClear(&temp_v31,0x604);
     temp_v56 = temp_v8[0];
     temp_v31 = temp_v20;
@@ -202,7 +202,7 @@ unsigned int FUN_002cd37c(short *param_1)
     if ((unsigned int)(unsigned short)param_1[0x2cc] + (int)param_1[6] != (int)temp_v37) {
       temp_v6 = 0;
     }
-    temp_v7 = FUN_0029c8f4(param_1);
+    temp_v7 = flagCountUnlockedSlots(param_1);
     temp_v3 = 0;
     if (temp_v3 < (int)temp_v7) {
       do {

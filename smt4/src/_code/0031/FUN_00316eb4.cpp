@@ -4,13 +4,13 @@ extern "C" {
 
 int FUN_00270028(int a);
 int eventQueueAddUnique(int id);
-int FUN_0031eae4(void);
+int frameTexInitActive(void);
 extern int scrGetCommandFrame(void);
 
 u8 FUN_00316eb4(void)
 {
     if (scrGetCommandFrame() == 0) {
-        FUN_0031eae4();
+        frameTexInitActive();
         FUN_00270028(3);
         return 0;
     }

@@ -23,17 +23,17 @@ typedef struct Holder {
     /* 0x04 */ ObjectBlock *block;
 } Holder;
 
-extern s32 FUN_003ef9e0(ObjectBlock *block, Entry *entry);
+extern s32 idSetFindSubjectIndex(ObjectBlock *block, Entry *entry);
 extern Object *FUN_001568f8(ObjectBlock *block, s32 id);
-extern void FUN_003ec620(ObjectBlock *block, u32 value);
+extern void stateEntryFindById(ObjectBlock *block, u32 value);
 
 void FUN_00421b30(Holder *holder, s32 row, s32 column)
 {
     Entry *entry = (Entry *)((u8 *)holder->block->entries + (row * 0x20 - column) * 0x10);
-    s32 slot = FUN_003ef9e0(holder->block, entry);
+    s32 slot = idSetFindSubjectIndex(holder->block, entry);
     Object *object = FUN_001568f8(holder->block, entry->id);
 
-    FUN_003ec620(holder->block, object->slots[slot]);
+    stateEntryFindById(holder->block, object->slots[slot]);
 }
 
 } /* extern "C" */

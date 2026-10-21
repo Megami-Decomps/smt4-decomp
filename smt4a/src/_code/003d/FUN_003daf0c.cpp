@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0023f604(...);
-int FUN_003250ec(...);
+int campRebuildEnabledFlagList(...);
+int flagBanksResetPendingState(...);
 int FUN_003a7c00(...);
 int FUN_003c5fc4(...);
 int flagValueSub(...);
@@ -18,13 +18,13 @@ int FUN_0020b660(...);
 int FUN_0021b274(...);
 int FUN_00228b04(int, int);
 int FUN_0028b088(...);
-int FUN_002adce8(...);
+int campTouchRegionsRemoveGroup(...);
 int FUN_002cb278(int, int);
-int FUN_002e1b3c(...);
+int buttonHelpScriptStart(...);
 int FUN_0031f208(...);
-int FUN_0031f27c(int, int);
+int sortMenuAcquire(int, int);
 int FUN_003450d4(int, unsigned int, int, int, int, int, char [8], int, int);
-int FUN_00388758(...);
+int messageDismissNumericBanner(...);
 int FUN_003da8f4(int, unsigned int);
 int FUN_0048144c(void);
 
@@ -48,22 +48,22 @@ extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0020b660. */
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: FUN_00228b04. */
-/* Supplied declaration required: FUN_0023f604. */
-extern int FUN_0026272c(void);
+/* Supplied declaration required: campRebuildEnabledFlagList. */
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: FUN_0028b088. */
 extern int FUN_002a21e8(void);
 extern int FUN_002a4860(int);
 extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 extern int FUN_002a4b74(void);
-/* Supplied declaration required: FUN_002adce8. */
+/* Supplied declaration required: campTouchRegionsRemoveGroup. */
 /* Supplied declaration required: FUN_002cb278. */
-/* Supplied declaration required: FUN_002e1b3c. */
+/* Supplied declaration required: buttonHelpScriptStart. */
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
-/* Supplied declaration required: FUN_003250ec. */
+/* Supplied declaration required: sortMenuAcquire. */
+/* Supplied declaration required: flagBanksResetPendingState. */
 /* Supplied declaration required: FUN_003450d4. */
-/* Supplied declaration required: FUN_00388758. */
+/* Supplied declaration required: messageDismissNumericBanner. */
 /* Supplied declaration required: FUN_003a7c00. */
 /* Supplied declaration required: FUN_003c5fc4. */
 /* Supplied declaration required: FUN_003da8f4. */
@@ -127,7 +127,7 @@ void FUN_003daf0c(int param_1)
         FUN_0021b274(3,0xffffffff,0);
         *(unsigned int *)(temp_v5 + 0x24) = 6;
         FUN_0020b660(5);
-        FUN_002adce8(temp_v7,1);
+        campTouchRegionsRemoveGroup(temp_v7,1);
       }
       else {
         temp_v7 = 9;
@@ -140,14 +140,14 @@ void FUN_003daf0c(int param_1)
         }
         if (param_1 != 0xb) {
           if (param_1 == 0xe) {
-            FUN_0031f27c(4,0);
+            sortMenuAcquire(4,0);
             FUN_0031f208(0x21);
             FUN_0031f208(0x10);
             FUN_0031f208(3);
           }
         }
         else {
-          FUN_0031f27c(3,0);
+          sortMenuAcquire(3,0);
           FUN_0031f208(0xc);
           FUN_0031f208(0x10);
           FUN_0031f208(3);
@@ -174,12 +174,12 @@ void FUN_003daf0c(int param_1)
     temp_v0 = *(short *)(temp_v6 + 0x21b0);
     if (temp_v0 == 0x79f) {
       eventQueueAddUniqueIfValid(0x100020e);
-      FUN_002e1b3c(3);
+      buttonHelpScriptStart(3);
       temp_v7 = 2;
     }
     else if (temp_v0 == 0x7af) {
       eventQueueAddUniqueIfValid(0x100021c);
-      FUN_002e1b3c(5);
+      buttonHelpScriptStart(5);
       temp_v7 = 4;
     }
     else if (temp_v0 == 0x7b6) {
@@ -198,8 +198,8 @@ void FUN_003daf0c(int param_1)
         FUN_0021b274(3,0xffffffff,0);
         *(unsigned int *)(temp_v5 + 0x24) = 0xb;
         FUN_0020b660(5);
-        FUN_002adce8(temp_v7,1);
-        FUN_00388758(1);
+        campTouchRegionsRemoveGroup(temp_v7,1);
+        messageDismissNumericBanner(1);
         uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
         eventQueueAddUniqueIfValid(0x100020e);
         if (*(short *)(temp_v6 + 0x21b0) == 0x7a5 || *(short *)(temp_v6 + 0x21b0) == 0x7a6) {
@@ -223,7 +223,7 @@ void FUN_003daf0c(int param_1)
       flagValueSub(0x79f,1);
       temp_v5 = flagValueIsPositive(0x79f);
       if (temp_v5 == 0) {
-        FUN_0023f604(0xb);
+        campRebuildEnabledFlagList(0xb);
       }
       FUN_0020b660(0x4d);
       return;
@@ -232,7 +232,7 @@ void FUN_003daf0c(int param_1)
     *(int *)(temp_v5 + 0x20) = temp_v7;
     return;
   case 3:
-    temp_v7 = FUN_0026272c();
+    temp_v7 = messageMainIsIdle();
     if (temp_v7 != 0) {
       FUN_003c5fc4(0);
       *(unsigned int *)(temp_v5 + 0x20) = 1;
@@ -241,22 +241,22 @@ void FUN_003daf0c(int param_1)
     break;
   case 4:
     temp_v7 = FUN_002a21e8();
-    if ((temp_v7 != 0) && (temp_v7 = FUN_0026272c(), temp_v7 != 0)) {
+    if ((temp_v7 != 0) && (temp_v7 = messageMainIsIdle(), temp_v7 != 0)) {
       flagValueSub(0x7af,1);
       temp_v7 = flagValueIsPositive(0x7af);
       if (temp_v7 == 0) {
-        FUN_0023f604(0xb);
+        campRebuildEnabledFlagList(0xb);
       }
-      FUN_003250ec(1);
+      flagBanksResetPendingState(1);
       *(unsigned int *)(temp_v5 + 0x20) = 1;
       return;
     }
     break;
   case 5:
-    temp_v6 = FUN_0026272c();
+    temp_v6 = messageMainIsIdle();
     if (temp_v6 != 0) {
-      FUN_002adce8(temp_v7,1);
-      FUN_00388758(1);
+      campTouchRegionsRemoveGroup(temp_v7,1);
+      messageDismissNumericBanner(1);
       uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xc;
@@ -265,10 +265,10 @@ void FUN_003daf0c(int param_1)
     }
     break;
   case 6:
-    temp_v6 = FUN_0026272c();
+    temp_v6 = messageMainIsIdle();
     if (temp_v6 != 0) {
-      FUN_002adce8(temp_v7,1);
-      FUN_00388758(1);
+      campTouchRegionsRemoveGroup(temp_v7,1);
+      messageDismissNumericBanner(1);
       uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xd;
@@ -277,10 +277,10 @@ void FUN_003daf0c(int param_1)
     }
     break;
   case 7:
-    temp_v6 = FUN_0026272c();
+    temp_v6 = messageMainIsIdle();
     if (temp_v6 != 0) {
-      FUN_002adce8(temp_v7,1);
-      FUN_00388758(1);
+      campTouchRegionsRemoveGroup(temp_v7,1);
+      messageDismissNumericBanner(1);
       uiSpriteSetImageKeyframe(g_camp + 0x1634,7,0);
       FUN_0021b274(3,0xffffffff,0);
       *(unsigned int *)(temp_v5 + 0x24) = 0xe;

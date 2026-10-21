@@ -27,7 +27,7 @@ extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
 extern int battleTalkGetBustState(void);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
-extern unsigned int FUN_003874fc(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 
 
 void FUN_004d3360(int param_1,int param_2)
@@ -41,7 +41,7 @@ void FUN_004d3360(int param_1,int param_2)
   unsigned int temp_v3;
   unsigned int *puVar6;
   
-  temp_v0 = FUN_003874fc(*(unsigned int *)(param_1 + 0x10));
+  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   puVar6 = (unsigned int *)(param_2 + 0x45a8);
   switch(temp_v0) {
   case 0:

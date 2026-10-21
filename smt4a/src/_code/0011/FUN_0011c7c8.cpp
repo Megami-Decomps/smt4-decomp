@@ -21,7 +21,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0011ae64. */
 extern unsigned int FUN_0011afd8(void);
-extern unsigned int FUN_002e6e26(void);
+extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
 extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
@@ -75,7 +75,7 @@ void FUN_0011c7c8(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
       param_1[2] = uStack_2c;
       return;
     }
-    temp_v2 = FUN_002e6e26();
+    temp_v2 = onlineContextGetInstance();
     FUN_002e78d0(temp_v2,temp_v1,0);
     puVar4 = (unsigned int *)&temp_v7;
     temp_v7 = 0x10001;

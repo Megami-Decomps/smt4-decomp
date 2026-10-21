@@ -1,25 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a1460` (_code @ 0x3a1460, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: large-offset flag addressing uses literal offsets rather than retail's shared 0x15d00 base. */
+#include "common.h"
+
+struct PrioritizedValues {
+    u8 unk00000[0x15d58];
+    u32 first; // 0x15d58
+    u32 second; // 0x15d5c
+    u32 fallback; // 0x15d60
+    u8 useFirst; // 0x15d64
+    u8 useSecond; // 0x15d65
+};
 
 extern "C" {
-
-
-unsigned int FUN_003a1460(int param_1)
-
+// Select the first enabled override, otherwise the fallback value.
+u32 FUN_003a1460(PrioritizedValues *values)
 {
-  unsigned int *puVar1;
-  
-  if (*(char *)(param_1 + 0x15d64) != '\0') {
-    puVar1 = (unsigned int *)(param_1 + 0x15d58);
-  }
-  else {
-    if (*(char *)(param_1 + 0x15d65) == '\0') {
-      return *(unsigned int *)(param_1 + 0x15d60);
+    u32 selected = values->fallback;
+    if (values->useFirst != 0) {
+        selected = values->first;
+    } else if (values->useSecond != 0) {
+        selected = values->second;
     }
-    puVar1 = (unsigned int *)(param_1 + 0x15d5c);
-  }
-  return *puVar1;
+    return selected;
 }
-
-} /* extern "C" */
+}

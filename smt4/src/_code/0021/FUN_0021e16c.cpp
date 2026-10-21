@@ -9,7 +9,7 @@ typedef struct {
     unsigned int sp4; /* 0x4: local_4 */
 } param_1_stack;
 
-extern int DAT_00447e40; /* 0x447e40 */
+extern int g_vectorQueueWork; /* 0x447e40 */
 
 
 char * FUN_0021e16c(int param_1)
@@ -25,9 +25,9 @@ char * FUN_0021e16c(int param_1)
   unsigned int temp_v4;
   
   temp_v1 = 0;
-  temp_v2 = DAT_00447e40 + param_1 * 0x284;
+  temp_v2 = g_vectorQueueWork + param_1 * 0x284;
   do {
-    temp_v0 = DAT_00447e40 + temp_v1 * 0x30;
+    temp_v0 = g_vectorQueueWork + temp_v1 * 0x30;
     pcVar2 = (char *)(temp_v0 + 0x2844);
     if (*pcVar2 == '\0') {
       *pcVar2 = '\x01';

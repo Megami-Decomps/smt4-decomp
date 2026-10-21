@@ -1,21 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `btlUnitGet` (_code @ 0x4ee568, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains separate signed bounds branches and adds the unit-array header after indexing; compiled code schedules those operations differently. */
+#include "common.h"
+
+struct BattleUnit {
+    u32 storage[0x495]; // 0x1254-byte unit work slot
+};
+struct BattleUnitArray {
+    u32 unk00;           // 0x00
+    BattleUnit units[12]; // 0x04
+};
+struct BattleActionState {
+    u32 unk00;              // 0x00
+    BattleUnitArray* units; // 0x04
+};
+struct BattleUnitReference {
+    u8 unk00[0xa4]; // 0x00
+    s32 index;      // 0xa4
+};
 
 extern "C" {
+extern BattleActionState g_btlAction;
 
-extern int g_btlScriptUnit; /* 0x57113c */
-
-
-int btlUnitGet(int *param_1)
-
+// Resolves a reference to one of the twelve battle-unit work slots.
+BattleUnit* btlUnitGet(BattleUnitReference* const* reference)
 {
-  int temp_v0;
-  
-  if (((*param_1 != 0) && (temp_v0 = *(int *)(*param_1 + 0xa4), -1 < temp_v0)) && (temp_v0 < 0xc)) {
-    return g_btlScriptUnit + temp_v0 * 0x1254 + 4;
-  }
-  return 0;
+    if (*reference != NULL) {
+        s32 index = (*reference)->index;
+        if (index < 0) {
+            return NULL;
+        }
+        if (index < 12) {
+            return &g_btlAction.units->units[index];
+        }
+        return NULL;
+    }
+    return NULL;
 }
-
-} /* extern "C" */
+}

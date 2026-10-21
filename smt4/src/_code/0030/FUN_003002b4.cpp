@@ -1,36 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003002b4` (_code @ 0x3002b4, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
+u32 scrGetArg(u32 index);
+BtlMainState* btlGetMainState(void);
+BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, u32 id);
 
-int btlMainFindEntryByListedId(int, unsigned int);
-int scrGetArg(int);
-
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-extern int btlGetMainState(void);
-/* Supplied declaration required: scrGetArg. */
-
-
-unsigned int FUN_003002b4(void)
-
+u32 FUN_003002b4(void)
 {
-/* irregular: 2 native warning(s); review required */
-  short temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v1 = scrGetArg(0);
-  temp_v2 = scrGetArg(1);
-  temp_v0 = scrGetArg(2);
-  temp_v3 = btlGetMainState();
-  btlMainFindEntryByListedId(temp_v3,temp_v1);
-  if (((temp_v3 != 0) && (-1 < temp_v2)) && (temp_v2 < 9)) {
-    temp_v3 = temp_v3 + temp_v2 * 2;
-    *(short *)(temp_v3 + 0xae) = *(short *)(temp_v3 + 0xae) + temp_v0;
-  }
-  return 1;
+    u32 id = scrGetArg(0);
+    s32 index = scrGetArg(1);
+    u32 amount = scrGetArg(2);
+    BtlEntry* entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+    if (entry != NULL && index >= 0 && index < 9) {
+        entry->modifiers.values[index] += amount;
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

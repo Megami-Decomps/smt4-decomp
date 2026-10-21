@@ -24,14 +24,14 @@ extern RangeSetup DAT_00439960[];
 
 extern s32 rangeIsValid(Range *range);
 extern void rangeInit(Range *range, f32 min, f32 max, s32 mode, s32 arg);
-extern void FUN_00227228(Range *range);
+extern void objClearFields(Range *range);
 
 void FUN_003d6420(RangeOwner *owner, s32 index)
 {
     if (index < 0) return;
 
     if (rangeIsValid(&owner->range) == 0) {
-        FUN_00227228(&owner->range);
+        objClearFields(&owner->range);
     }
     RangeSetup *setup = &DAT_00439960[index];
 

@@ -3,11 +3,11 @@
 
 extern "C" {
 
-void FUN_001632fc(void);
+void infoWinHasValue(void);
 
 void FUN_001632f8(void)
 {
-    FUN_001632fc();
+    infoWinHasValue();
 }
 
 }

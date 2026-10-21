@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00141870(void);
+int asdProcessSetAuxiliaryCallback(void);
 int asdProcessCreateSimple(...);
 
 /* stack frame of param_4: 2 slot(s), 8 byte(s) */
@@ -20,7 +20,7 @@ extern unsigned char LAB_00145f94; /* 0x145f94 */
 extern unsigned char LAB_00146040; /* 0x146040 */
 extern int FUN_00146048(...); /* 0x146048 */
 
-/* Supplied declaration required: FUN_00141870. */
+/* Supplied declaration required: asdProcessSetAuxiliaryCallback. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 
 
@@ -36,7 +36,7 @@ void FUN_0013b3d0(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   puVar1 = &LAB_0013b47c;
   asdProcessCreateSimple(&LAB_0013b47c,param_3,0,0,FUN_00146048,0,param_1);
   *(unsigned char **)(param_1 + 0x44) = puVar1;
-  FUN_00141870();
+  asdProcessSetAuxiliaryCallback();
   puVar1 = &LAB_0013b498;
   asdProcessCreateSimple(&LAB_0013b498,param_4,0,0,&LAB_00146040,0,param_1);
   *(unsigned char **)(param_1 + 0x48) = puVar1;

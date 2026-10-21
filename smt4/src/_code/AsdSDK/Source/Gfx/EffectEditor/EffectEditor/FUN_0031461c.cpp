@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00246c8c(unsigned int);
+int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(void);
 int FUN_0024b830(...);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int SUB41(...);
 int VectorFloatToUnsigned(...);
@@ -116,10 +116,10 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
-/* Supplied declaration required: FUN_00246c8c. */
+/* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b830. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -195,12 +195,12 @@ void FUN_0031461c(fn_0031461c_arg0 *param_1)
       pfVar14 = *(float **)(*(int *)(temp_v8 + 8) + 0x30);
       puVar15 = *(unsigned char **)(*(int *)(temp_v8 + 8) + 0x38);
       *(unsigned int *)(temp_v8 + 0x54) = *(unsigned int *)(temp_v8 + 0x54) | 0x21;
-      FUN_00246c8c(*(unsigned int *)&pfVar17->field_0x58);
+      asdSetNormalizedColorRgba(*(unsigned int *)&pfVar17->field_0x58);
       temp_v7 = DAT_004ea928;
       temp_v6 = DAT_004ea924;
       temp_v5 = DAT_004ea920;
       temp_v4 = DAT_004ea91c;
-      FUN_00246c8c(*(unsigned int *)&pfVar17->field_0x5c);
+      asdSetNormalizedColorRgba(*(unsigned int *)&pfVar17->field_0x5c);
       temp_v15 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v20 = (float)VectorSignedToFloat(temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v1 = pfVar17->field_0x54;
@@ -253,7 +253,7 @@ void FUN_0031461c(fn_0031461c_arg0 *param_1)
                 temp_v20 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v33 = (pfVar16[1] + (pfVar16[2] + temp_v30 * temp_v20 * temp_v38) * temp_v20) * temp_v36;
                 temp_v20 = temp_v33;
-                FUN_002b7064();
+                phaseCosInterpolate();
                 FUN_002b70cc();
                 DAT_004ea91c = temp_v33 * temp_v24;
                 DAT_004ea924 = temp_v20 * temp_v24;

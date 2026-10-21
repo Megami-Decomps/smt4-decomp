@@ -2,14 +2,14 @@
 
 extern "C" {
 
-extern ScopedHalfwordState DAT_005b4028;
+extern ScopedHalfwordState g_allocationAddressRanges;
 
 /* Restores the saved halfword after leaving the outermost scope. */
 void FUN_001b4e80(void)
 {
-    if (DAT_005b4028.depth != 0) {
-        if (--DAT_005b4028.depth == 0) {
-            DAT_005b4028.target->value = DAT_005b4028.previous;
+    if (g_allocationAddressRanges.depth != 0) {
+        if (--g_allocationAddressRanges.depth == 0) {
+            g_allocationAddressRanges.target->value = g_allocationAddressRanges.previous;
         }
     }
 }

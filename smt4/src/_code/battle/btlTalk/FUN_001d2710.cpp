@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00267d3c(...);
+int btlUiPlaySceneFadeOutWhenReady(...);
 int jobIsValid(...);
 int __aeabi_memset4(...);
 int asdMemAlloc(...);
@@ -23,7 +23,7 @@ extern int btlTalkDestroy(...); /* 0x20f4c0 */
 extern int *g_btlTalk; /* 0x439b58 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
-/* Supplied declaration required: FUN_00267d3c. */
+/* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
 /* Supplied declaration required: jobIsValid. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -56,7 +56,7 @@ void FUN_001d2710(unsigned int *param_1,int param_2,int param_3,int param_4)
   piVar1[0x32] = -1;
   piVar1[0xc] = (int)*(short *)(*(int *)(param_2 + 0x28) + 0x14e);
   __aeabi_memset4(piVar1 + 0xd,0x80,0xffffffff);
-  FUN_00267d3c(g_btlUiBlock);
+  btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
   piVar1[6] = 0;
   return;
 }

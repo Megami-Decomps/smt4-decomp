@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00295c04. */
 extern int FUN_002973ec(void);
 /* Supplied declaration required: FUN_0029be5c. */
-extern unsigned int FUN_002ae3c4(unsigned int);
+extern unsigned int aocEntryGetKind(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 
@@ -43,7 +43,7 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
       FUN_00250d84(*param_1,-param_2);
       if (param_3 != 0) {
         temp_v1 = (unsigned int)*param_1;
-        temp_v0 = FUN_002ae3c4(temp_v1);
+        temp_v0 = aocEntryGetKind(temp_v1);
         temp_v2 = 0;
         switch(temp_v0) {
         case 1:
@@ -90,7 +90,7 @@ void FUN_002306f8(unsigned short *param_1,int param_2,int param_3)
       FUN_00295a18();
       if (param_3 != 0) {
         temp_v1 = (unsigned int)*param_1;
-        temp_v0 = FUN_002ae3c4(temp_v1);
+        temp_v0 = aocEntryGetKind(temp_v1);
         temp_v2 = 0;
         switch(temp_v0) {
         case 1:

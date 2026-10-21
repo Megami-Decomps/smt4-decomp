@@ -1,32 +1,29 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f0b28` (_code @ 0x3f0b28, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed vector copies retain the camera pointer; retail reloads it after each copied vector. */
+#include "shard/W5_W5Match8_CameraTransition.h"
+
+struct BattleCameraSnapshot {
+    W5Match8Vec3 position;
+    W5Match8Vec3 target;
+    u32 parameter;
+};
+struct BattleCameraSource {
+    u8 unk00[0x1c];
+    BattleCameraSnapshot snapshot; // 0x1c
+};
+struct BattleCameraOwner {
+    u8 unk0000[0x1ee0];
+    BattleCameraSnapshot snapshot; // 0x1ee0
+};
 
 extern "C" {
+extern BattleCameraSource *g_btlCamera;
 
-extern int g_btlCamera; /* 0x571508 */
-
-
-void FUN_003f0b28(int param_1)
-
+void FUN_003f0b28(BattleCameraOwner *owner)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  if (g_btlCamera != 0) {
-    temp_v0 = *(unsigned int *)(g_btlCamera + 0x20);
-    temp_v1 = *(unsigned int *)(g_btlCamera + 0x24);
-    *(unsigned int *)(param_1 + 0x1ee0) = *(unsigned int *)(g_btlCamera + 0x1c);
-    *(unsigned int *)(param_1 + 0x1ee4) = temp_v0;
-    *(unsigned int *)(param_1 + 0x1ee8) = temp_v1;
-    temp_v0 = *(unsigned int *)(g_btlCamera + 0x2c);
-    temp_v1 = *(unsigned int *)(g_btlCamera + 0x30);
-    *(unsigned int *)(param_1 + 0x1eec) = *(unsigned int *)(g_btlCamera + 0x28);
-    *(unsigned int *)(param_1 + 0x1ef0) = temp_v0;
-    *(unsigned int *)(param_1 + 0x1ef4) = temp_v1;
-    *(unsigned int *)(param_1 + 0x1ef8) = *(unsigned int *)(g_btlCamera + 0x34);
-  }
-  return;
+    if (g_btlCamera != NULL) {
+        owner->snapshot.position = g_btlCamera->snapshot.position;
+        owner->snapshot.target = g_btlCamera->snapshot.target;
+        owner->snapshot.parameter = g_btlCamera->snapshot.parameter;
+    }
 }
-
-} /* extern "C" */
+}

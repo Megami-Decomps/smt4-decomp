@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0010befc(void);
+int asdProcessSetAuxiliaryCallback(void);
 int asdMdlManagerStart(void);
 int asdMemFree(unsigned int *);
 int asdMemAlloc(int, int, int, int, int);
@@ -26,7 +26,7 @@ extern unsigned char LAB_0010b844; /* 0x10b844 */
 extern int FUN_0010b854(...); /* 0x10b854 */
 extern unsigned char *g_asdModelProcess; /* 0x464be8 */
 
-/* Supplied declaration required: FUN_0010befc. */
+/* Supplied declaration required: asdProcessSetAuxiliaryCallback. */
 /* Supplied declaration required: asdMdlManagerStart. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -54,7 +54,7 @@ unsigned char * FUN_00104074(int param_1,unsigned int param_2,unsigned int param
     puVar2 = &LAB_00104198;
     asdProcessCreateSimple(&LAB_00104198,param_2,0,0,FUN_0010b854,0,puVar1);
     *puVar1 = (unsigned int)puVar2;
-    FUN_0010befc();
+    asdProcessSetAuxiliaryCallback();
     puVar2 = &LAB_001041b4;
     asdProcessCreateSimple(&LAB_001041b4,param_3,0,0,&LAB_0010b844,0,puVar1);
     puVar1[2] = (unsigned int)puVar2;

@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003743a4` (_code @ 0x3743a4, 0x12cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
 int FUN_0015f858(...);
 int FUN_001676b0(...);
 int FUN_00167860(...);
-int FUN_001689e8(...);
 int FUN_00184310(void);
 int FUN_00389d9c(...);
 int dataRecordGetKindValue(...);
@@ -67,7 +67,6 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001676b0. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
-/* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
@@ -447,8 +446,7 @@ void FUN_003743a4(int param_1)
         VectorSignedToFloat(*(short *)(temp_v6 + 8) + temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_00162790(3,0x57d8ffff,temp_v19);
         temp_v6 = FUN_001834a4(0xd,0x12f);
-        temp_v16[0] = 0;
-        FUN_001689e8(temp_v8,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,0xc9);
+        uiDrawItemCategoryIcon(temp_v8,*(short *)(temp_v6 + 8) + temp_v4,*(short *)(temp_v6 + 10) + temp_v2,0xc9,0);
         temp_v6 = FUN_001834a4(0xd,0x12d);
         temp_v17 = &LAB_00375334;
         temp_v16[0] = 1;

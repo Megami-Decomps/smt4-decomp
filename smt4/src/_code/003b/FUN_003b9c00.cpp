@@ -26,7 +26,7 @@ typedef struct {
 extern unsigned char DAT_00404e04; /* 0x404e04 */
 extern int DAT_0044cfb8; /* 0x44cfb8 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022afc4. */
 extern int FUN_0022b238(int, int);
 /* Supplied declaration required: FUN_0022b29c. */
@@ -73,7 +73,7 @@ void FUN_003b9c00(int param_1)
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v13);
           scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
-            temp_v5 = FUN_0019e0c0(temp_v3);
+            temp_v5 = scrRunOpcodesStub(temp_v3);
           } while (temp_v5 != 2);
           if (((DAT_0044cfb8 != 0) ||
               ((*(short *)(temp_v2 + 0x3c) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) ||
@@ -92,7 +92,7 @@ LAB_003b9cf0:
           temp_v4 = tableGroupFindEntryIndex(temp_v11,temp_v12);
           scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
-            temp_v5 = FUN_0019e0c0(temp_v3);
+            temp_v5 = scrRunOpcodesStub(temp_v3);
           } while (temp_v5 != 2);
           if (((DAT_0044cfb8 == 0) &&
               ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
@@ -117,7 +117,7 @@ LAB_003b9cf0:
         temp_v4 = tableGroupFindEntryIndex(temp_v11,temp_v12);
         scrScriptProcessStartEntry(temp_v3,temp_v4);
         do {
-          temp_v5 = FUN_0019e0c0(temp_v3);
+          temp_v5 = scrRunOpcodesStub(temp_v3);
         } while (temp_v5 != 2);
         if (((DAT_0044cfb8 == 0) &&
             ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&

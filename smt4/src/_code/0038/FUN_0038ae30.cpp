@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00234624(unsigned char [4], unsigned int, unsigned int);
 int asdOperatorNewB(void);
-int FUN_002a12d8(int);
+int legacyResourceIdRemap(int);
 int jyoucyuGetTableEntry(int);
 int asdOperatorDelete(int);
 int FUN_00354608(int *, int, int);
@@ -27,7 +27,7 @@ extern int g_aocMain; /* 0x432fc8 */
 extern unsigned int FUN_00234618(unsigned char *);
 /* Supplied declaration required: FUN_00234624. */
 /* Supplied declaration required: asdOperatorNewB. */
-/* Supplied declaration required: FUN_002a12d8. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 extern int objGetFlagBit0(unsigned short *);
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: asdOperatorDelete. */
@@ -60,7 +60,7 @@ unsigned char * FUN_0038ae30(int param_1)
   FUN_00354608(&temp_v8,g_aocMain + 0x20,g_aocMain + 0x18);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_5c;
-  temp_v0 = FUN_002a12d8(param_1 + 0xc);
+  temp_v0 = legacyResourceIdRemap(param_1 + 0xc);
   if ((unsigned char *)-(temp_v0 >> 0x1f) != (unsigned char *)0x0) {
     return (unsigned char *)-(temp_v0 >> 0x1f);
   }
@@ -78,9 +78,9 @@ unsigned char * FUN_0038ae30(int param_1)
         FUN_003df0c4(&temp_v10,temp_v9,temp_v12,temp_v11);
         *(unsigned int *)(param_1 + 0xc) = temp_v10;
         *(unsigned int *)(param_1 + 0x10) = uStack_44;
-        temp_v2 = FUN_002a12d8(param_1 + 0xc);
+        temp_v2 = legacyResourceIdRemap(param_1 + 0xc);
         if (temp_v2 < 0) {
-          FUN_002a12d8(param_1 + 0xc);
+          legacyResourceIdRemap(param_1 + 0xc);
           asdOperatorDelete(temp_v0);
           return temp_v9;
         }
@@ -96,9 +96,9 @@ unsigned char * FUN_0038ae30(int param_1)
     FUN_003df4dc(&temp_v6,temp_v3 + 0x20,temp_v0,temp_v5);
     *(unsigned int *)(param_1 + 0xc) = temp_v6;
     *(unsigned int *)(param_1 + 0x10) = temp_v7;
-    temp_v3 = FUN_002a12d8(param_1 + 0xc);
+    temp_v3 = legacyResourceIdRemap(param_1 + 0xc);
     if (temp_v3 < 0) {
-      FUN_002a12d8(param_1 + 0xc);
+      legacyResourceIdRemap(param_1 + 0xc);
       asdOperatorDelete(temp_v0);
       return temp_v9;
     }

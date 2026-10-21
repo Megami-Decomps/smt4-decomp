@@ -8,7 +8,7 @@ int eventQueueAddUniqueIfValid(int);
 int FUN_002be8d0(void);
 int scrollListSetSelection(int, int);
 int FUN_00340f2c(int, int, int);
-int FUN_00340f58(void);
+int labelsReset(void);
 int __aeabi_idivmod(...);
 
 /* stack frame of param_2: 4 slot(s), 16 byte(s) */
@@ -25,7 +25,7 @@ extern int padButtonIsPressed(unsigned char);
 /* Supplied declaration required: FUN_002be8d0. */
 /* Supplied declaration required: scrollListSetSelection. */
 /* Supplied declaration required: FUN_00340f2c. */
-/* Supplied declaration required: FUN_00340f58. */
+/* Supplied declaration required: labelsReset. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -90,7 +90,7 @@ unsigned char FUN_00228b04(int param_1,int param_2)
         temp_v2 = 1;
       }
     }
-    FUN_00340f58();
+    labelsReset();
     temp_v4 = *(int *)(param_1 + 0x48);
     temp_v9 = *(int *)(param_1 + 0x50);
     __aeabi_idivmod(temp_v9,temp_v8);

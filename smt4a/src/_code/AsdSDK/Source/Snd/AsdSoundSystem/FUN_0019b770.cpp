@@ -50,7 +50,7 @@ extern float DAT_0064c01c; /* 0x64c01c */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_001640cc. */
-extern unsigned int FUN_00168854(unsigned int);
+extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int FUN_00184df8(unsigned int);
 /* Supplied declaration required: FUN_001879d0. */
@@ -250,7 +250,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
     temp_v14 = temp_v17;
     temp_v3 = FUN_00184df8(*(unsigned int *)(g_renderCtx + 0x52c));
     temp_v11 = (float)VectorUnsignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v3 = FUN_00168854(*(unsigned int *)(g_renderCtx + 0x52c));
+    temp_v3 = asdGxPresetsGetByKind(*(unsigned int *)(g_renderCtx + 0x52c));
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v16 < temp_v11) << 0x1f) |
             ((unsigned int)(temp_v16 == temp_v11) << 0x1e);
     temp_v7 = temp_v6 | ((unsigned int)((temp_v16 != temp_v16) || (temp_v11 != temp_v11)) << 0x1c);

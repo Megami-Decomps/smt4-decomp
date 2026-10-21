@@ -13,7 +13,7 @@ int devilGetRecord(void);
 
 int btlGetMainState(void);
 int dataTable00FindById(void);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002b6940(...);
 int FUN_002b6c34(...);
 int FUN_002bdf94(...);
@@ -67,13 +67,12 @@ extern int FUN_0029efc0(unsigned int);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: FUN_002b6940. */
 /* Supplied declaration required: FUN_002b6c34. */
 /* Supplied declaration required: FUN_002b6db0. */
 /* Supplied declaration required: FUN_002b6dd8. */
 /* Supplied declaration required: devilGetRecord. */
-extern unsigned int FUN_002bce00(int);
+extern unsigned int aocIndexValueOrDefault(int);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: FUN_002be370. */
 /* Supplied declaration required: FUN_002be5a4. */
@@ -251,7 +250,7 @@ void FUN_002f1558(int param_1)
         }
         else {
           temp_v6 = FUN_002bf4f8(0x15,*(unsigned int *)(temp_v13 + 0x5780));
-          FUN_002b6758((int)*(short *)(temp_v13 + 0x5760),*(short *)(temp_v6 + 8) + temp_v4,
+          uiDrawDemonIcon((int)*(short *)(temp_v13 + 0x5760),*(short *)(temp_v6 + 8) + temp_v4,
                        *(short *)(temp_v6 + 10) + temp_v2,0xc9,0);
           if (*(char *)(temp_v13 + 0x5788) != '\0') {
             efctSetSpeed();
@@ -302,7 +301,7 @@ void FUN_002f1558(int param_1)
         btlGetMainState();
         temp_v1 = FUN_0028d24c();
       }
-      temp_v10 = FUN_002bce00((int)temp_v1);
+      temp_v10 = aocIndexValueOrDefault((int)temp_v1);
       textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v10);
       temp_v3 = FUN_002bf4f8(0x15,0x12e);
       VectorSignedToFloat(*(short *)(temp_v3 + 10) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -397,13 +396,13 @@ void FUN_002f1558(int param_1)
       temp_v3 = btlGetMainState();
       if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x40) != 0) {
         temp_v6 = (int)(short)temp_v5;
-        temp_v9 = FUN_002bce00(temp_v6);
+        temp_v9 = aocIndexValueOrDefault(temp_v6);
         textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v9);
         temp_v9 = FUN_0029a924(temp_v6);
       }
       else {
         temp_v6 = (int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 0x10 + temp_v5 * 2 + 0x341a);
-        temp_v9 = FUN_002bce00(temp_v6);
+        temp_v9 = aocIndexValueOrDefault(temp_v6);
         textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v9);
         temp_v9 = FUN_0029a924(temp_v6);
       }
@@ -448,14 +447,14 @@ void FUN_002f1558(int param_1)
         temp_v3 = btlGetMainState();
         if ((*(unsigned int *)(temp_v3 + 0x44a8) & 0x40) != 0) {
           temp_v6 = (int)(short)(((short)temp_v5 - (short)temp_v13) + 1);
-          temp_v9 = FUN_002bce00(temp_v6);
+          temp_v9 = aocIndexValueOrDefault(temp_v6);
           textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v9);
           temp_v9 = FUN_0029a9d4(temp_v6,1);
         }
         else {
           temp_v6 = (int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 0x10 + (temp_v5 - temp_v13) * 2
                                  + 0x341c);
-          temp_v9 = FUN_002bce00(temp_v6);
+          temp_v9 = aocIndexValueOrDefault(temp_v6);
           textFormatBuffer(temp_v18,&LAB_002f1ff4,temp_v9);
           temp_v9 = FUN_0029a9d4(temp_v6,1);
         }

@@ -19,7 +19,7 @@ typedef struct {
 
 /* Supplied declaration required: dataTable08Sub0GetRecord. */
 /* Supplied declaration required: categoryIdFromIndex. */
-extern unsigned int FUN_002ae3c4(void);
+extern unsigned int aocEntryGetKind(void);
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 /* Supplied declaration required: gameGetPlayerData. */
@@ -39,7 +39,7 @@ void FUN_002be370(unsigned int param_1,unsigned int param_2,unsigned int param_3
   
   temp_v4 = 0;
   temp_v1 = 0;
-  temp_v2 = FUN_002ae3c4();
+  temp_v2 = aocEntryGetKind();
   switch(temp_v2) {
   case 0:
     dataTable08Sub0GetRecord();

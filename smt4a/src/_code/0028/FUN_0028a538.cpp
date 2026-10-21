@@ -9,7 +9,7 @@ int FUN_00203b40(int, int, int, int, int, int);
 int FUN_0032fea0(...);
 int unitRecordBuild(...);
 int FUN_0034c340(...);
-int FUN_003c3f1c(void);
+int findSkillMetadataById(void);
 int getUnlockedSlotCount(...);
 
 /* stack frame of param_3: 8 slot(s), 32 byte(s) */
@@ -31,7 +31,7 @@ extern int g_unite; /* 0x57f290 */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: unitRecordBuild. */
 /* Supplied declaration required: FUN_0034c340. */
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: getUnlockedSlotCount. */
 
 
@@ -94,7 +94,7 @@ void FUN_0028a538(unsigned short *param_1,int param_2,int param_3)
     temp_v4 = param_2 + temp_v3 * 2;
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v4 + 0x34);
     if (temp_v1 != 0) {
-      FUN_003c3f1c();
+      findSkillMetadataById();
       if ((*(unsigned char *)(temp_v1 + 3) & 0x20) != 0) {
         temp_v2 = temp_v8;
         FUN_0032fea0(temp_v8,0x18,*(unsigned short *)(temp_v4 + 0x34));
@@ -129,7 +129,7 @@ LAB_0028a6c4:
     temp_v4 = param_3 + temp_v3 * 2;
     temp_v1 = (unsigned int)*(unsigned short *)(temp_v4 + 0x34);
     if (temp_v1 != 0) {
-      FUN_003c3f1c();
+      findSkillMetadataById();
       if ((*(unsigned char *)(temp_v1 + 3) & 0x20) != 0) {
         temp_v2 = temp_v8;
         FUN_0032fea0(temp_v8,0x18,*(unsigned short *)(temp_v4 + 0x34));

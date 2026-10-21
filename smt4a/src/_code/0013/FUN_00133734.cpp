@@ -8,7 +8,7 @@ int asdOperatorDeleteArray(int);
 int FUN_00307b44(int, int, int, int *);
 int FUN_00307b78(...);
 int vectorCountx18_00307b8a(...);
-int FUN_0030c8c0(int *);
+int elemVectorCount(int *);
 int FUN_0030d200(...);
 int vectorDestroyRangeStride24(int *, int, int);
 
@@ -24,7 +24,7 @@ extern int rt_malloc(void);
 extern int vectorGrowCapacity_00307b66(unsigned int, int *);
 /* Supplied declaration required: FUN_00307b78. */
 /* Supplied declaration required: vectorCountx18_00307b8a. */
-/* Supplied declaration required: FUN_0030c8c0. */
+/* Supplied declaration required: elemVectorCount. */
 /* Supplied declaration required: FUN_0030d200. */
 /* Supplied declaration required: vectorDestroyRangeStride24. */
 extern int __aeabi_idivmod(int, unsigned int);
@@ -43,7 +43,7 @@ void FUN_00133734(int *param_1,int param_2,unsigned int param_3)
   int temp_v6;
   
   temp_v0 = vectorCountx18_00307b8a();
-  temp_v1 = FUN_0030c8c0(param_1);
+  temp_v1 = elemVectorCount(param_1);
   if (temp_v1 < temp_v0) {
     temp_v5 = param_1[1];
     temp_v4 = temp_v5 - 0x18;
@@ -57,7 +57,7 @@ void FUN_00133734(int *param_1,int param_2,unsigned int param_3)
     FUN_00307b78(param_2,param_3);
   }
   else {
-    temp_v2 = FUN_0030c8c0(param_1);
+    temp_v2 = elemVectorCount(param_1);
     temp_v4 = vectorGrowCapacity_00307b66(temp_v2,param_1);
     temp_v5 = rt_malloc();
     FUN_00307b44(*param_1,param_2,temp_v5,param_1);
@@ -65,7 +65,7 @@ void FUN_00133734(int *param_1,int param_2,unsigned int param_3)
     FUN_0030d200(param_1,temp_v3 * 0x18 + temp_v5,param_3);
     temp_v3 = __aeabi_idivmod(param_2 - *param_1,0x18);
     FUN_00307b44(param_2,param_1[1],temp_v3 * 0x18 + temp_v5 + 0x18,param_1);
-    temp_v3 = FUN_0030c8c0(param_1);
+    temp_v3 = elemVectorCount(param_1);
     vectorDestroyRangeStride24(param_1,*param_1,param_1[1]);
     temp_v6 = *param_1;
     vectorCountx18_00307b8a(param_1);

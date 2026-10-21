@@ -15,7 +15,7 @@ int FUN_00275bc8(...);
 int FUN_002a7324(...);
 int FUN_002c85b0(...);
 int btlTalkBustUpCreate(...);
-int FUN_00334214(...);
+int statusDisplayBindUnitRecord(...);
 int soundChannelRequestIfEnabled(...);
 
 typedef struct fn_004cbb38_arg0 fn_004cbb38_arg0;
@@ -62,7 +62,7 @@ extern int gameGetSlotRecord(int);
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern int FUN_003316b4(int);
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 extern int loadSlotIsLoaded(unsigned int);
 extern unsigned int recordContainsPairedId(int, short);
@@ -148,7 +148,7 @@ LAB_004cbbbc:
       *(unsigned int *)&param_1->field_0x20 = temp_v4;
       btlTalkBustUpCreate();
       FUN_002c85b0(6);
-      FUN_00334214(temp_v1,0,0);
+      statusDisplayBindUnitRecord(temp_v1,0,0);
       FUN_002a7324(1);
       soundChannelRequestIfEnabled(0x100002d,0,0x3c);
       FUN_0022e774();

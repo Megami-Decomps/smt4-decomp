@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int nw_gfx_RenderContext_TransformToViewCoordinate(...);
 int nw_gfx_internal_NWCopyVec4Reverse(...);
 
@@ -33,7 +33,7 @@ extern float DAT_004efd3c; /* 0x4efd3c */
 extern float DAT_004efd40; /* 0x4efd40 */
 extern float DAT_004efd44; /* 0x4efd44 */
 
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nw_gfx_RenderContext_TransformToViewCoordinate. */
 /* Supplied declaration required: nw_gfx_internal_NWCopyVec4Reverse. */
@@ -116,7 +116,7 @@ void FUN_0015a8b4(int param_1,int param_2,int param_3)
       temp_v13 = temp_v4;
       if ((temp_v3 > temp_v4) && (0x40490fda >= (int)temp_v3)) {
         temp_v3 = temp_v3 * 40.743664f;
-        FUN_002b7064();
+        phaseCosInterpolate();
         temp_v11 = temp_v3;
         temp_v17 = temp_v5;
       }

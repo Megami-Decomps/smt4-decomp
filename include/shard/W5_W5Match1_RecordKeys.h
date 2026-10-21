@@ -95,13 +95,33 @@ struct WorkCommandState {
     /* 0x00 */ u8 state;
     /* 0x01 */ u8 unk01[0x43];
     /* 0x44 */ u32 command;
-    /* 0x48 */ u32 unk48;
+    union {
+        /* 0x48 */ u32 unk48;
+        /* 0x48 */ void *object;
+    };
     /* 0x4C */ u32 argument;
-    /* 0x50 */ u8 unk50[0x18];
+    union {
+        /* 0x50 */ u8 unk50[0x18];
+        struct {
+            /* 0x50 */ s32 phase;
+        } playback;
+    };
     /* 0x68 */ u32 flags;
     /* 0x6C */ u8 unk6C[0x0A];
     /* 0x76 */ u8 complete;
 };
+
+static __inline WorkCommandState *workCommandGetSlot(WorkCommandState *slots, u32 index)
+{
+    return index < 4 ? &slots[index] : NULL;
+}
+
+/* The aligned timer word is inside the opaque tail; a u32 union over that odd-sized
+ * array would round it up and move complete. */
+static __inline u32 &workCommandTimer(WorkCommandState *slot)
+{
+    return *(u32 *)(slot->unk6C + 4);
+}
 
 struct GraphicsPoolEntry {
     /* 0x00 */ u8 unk00;
@@ -430,6 +450,7 @@ struct RenderChannelTable {
     /* 0x4E00 */ u16 selected;
     /* 0x4E02 */ u16 unk4E02;
     /* 0x4E04 */ u16 previous;
+    /* 0x4E06 */ u16 mode;
 };
 
 struct RenderChannelState {
@@ -437,6 +458,7 @@ struct RenderChannelState {
     /* 0x01 */ u8 ready;
     /* 0x02 */ u8 unk02[2];
     /* 0x04 */ RenderChannelTable *table;
+    /* 0x08 */ void *capture;
 };
 
 struct MatrixTranslation {

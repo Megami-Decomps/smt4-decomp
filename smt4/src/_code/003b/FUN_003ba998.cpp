@@ -1,20 +1,21 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ba998` (_code @ 0x3ba998, 0x6e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_NodeEnable.h"
 
 extern "C" {
 
 int FUN_0022afb0(...);
 int FUN_0022afc4(...);
-int FUN_0022b03c(int);
+int objBlockInitAndMark(int);
 int FUN_0022b064(int);
-int FUN_0022b244(...);
+int modelSetVisible(...);
 int FUN_0022b6c4(int);
 int FUN_00234cd8(...);
-int FUN_00234f04(...);
+void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
 int FUN_00234f5c(...);
 int FUN_00235250(void);
-int FUN_0026374c(...);
+int placeWinStartText(...);
 int FUN_00270028(...);
 int FUN_00275dec(void);
 int dialogOpen(...);
@@ -47,9 +48,9 @@ int FUN_0027d948(void);
 int FUN_00287c34(int);
 int FUN_00289880(void);
 int FUN_0028a420(int);
-int FUN_00295ba4(int);
+int infoWinStartTimer(int);
 int FUN_00296e90(void);
-int FUN_0029c3c0(int, int, int);
+int slotSetRequest(int, int, int);
 int FUN_002a4bac(unsigned int);
 int asdMemFreeNonNull(int);
 int dataTable1bOr1cGetRecord(void);
@@ -76,24 +77,24 @@ extern int FUN_0017fb54(void);
 /* Supplied declaration required: FUN_0022af9c. */
 /* Supplied declaration required: FUN_0022afb0. */
 /* Supplied declaration required: FUN_0022afc4. */
-/* Supplied declaration required: FUN_0022b03c. */
+/* Supplied declaration required: objBlockInitAndMark. */
 /* Supplied declaration required: FUN_0022b064. */
 extern int FUN_0022b14c(int);
-/* Supplied declaration required: FUN_0022b244. */
+/* Supplied declaration required: modelSetVisible. */
 /* Supplied declaration required: FUN_0022b29c. */
 /* Supplied declaration required: FUN_0022b6c4. */
 /* Supplied declaration required: FUN_0022b778. */
 extern int FUN_0022b8c0(int);
 /* Supplied declaration required: listScrollToId. */
 /* Supplied declaration required: FUN_002305e8. */
-extern unsigned short FUN_0023360c(int);
+extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233808. */
 /* Supplied declaration required: FUN_00234cd8. */
-/* Supplied declaration required: FUN_00234f04. */
+/* Supplied declaration required: nodeOwnerSetEnabled. */
 /* Supplied declaration required: FUN_00234f5c. */
 /* Supplied declaration required: FUN_00235250. */
 /* Supplied declaration required: FUN_002636b0. */
-/* Supplied declaration required: FUN_0026374c. */
+/* Supplied declaration required: placeWinStartText. */
 /* Supplied declaration required: FUN_0026faa4. */
 /* Supplied declaration required: FUN_0026fe0c. */
 /* Supplied declaration required: FUN_0026ff54. */
@@ -109,13 +110,13 @@ extern unsigned short FUN_0023360c(int);
 /* Supplied declaration required: FUN_0027d948. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_0027e7b4. */
-extern int FUN_00282b28(void);
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: FUN_0028a420. */
-/* Supplied declaration required: FUN_00295ba4. */
+/* Supplied declaration required: infoWinStartTimer. */
 /* Supplied declaration required: FUN_00296e90. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: FUN_002a0400. */
 /* Supplied declaration required: FUN_002a4bac. */
@@ -130,7 +131,7 @@ extern int gameFlagIsSet(void);
 extern int FUN_002c2218(int);
 /* Supplied declaration required: asdOperatorNew. */
 extern int gameGetMapBlock(void);
-extern unsigned int FUN_002c3124(unsigned char *, int, unsigned int);
+extern unsigned int fileLoadSync(unsigned char *, int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_002e1ba8. */
 /* Supplied declaration required: dataTable33GetEntries. */
@@ -174,7 +175,7 @@ void FUN_003ba998(int param_1)
     *(int *)(param_1 + 0x2c) = temp_v6;
     break;
   case 1:
-    FUN_00295ba4(0);
+    infoWinStartTimer(0);
     *(int *)(param_1 + 0x2c) = *(int *)(param_1 + 0x2c) + 1;
     *(unsigned int *)(param_1 + 0x30) = 0;
     FUN_002e1ba8();
@@ -210,7 +211,7 @@ void FUN_003ba998(int param_1)
     temp_v6 = FUN_0017fb54();
     if ((temp_v6 != 0) || (temp_v6 = FUN_002b8694(), temp_v6 == 0)) {
       if (DAT_0049f950 == '\0') {
-        FUN_0029c3c0(1,10,0xff);
+        slotSetRequest(1,10,0xff);
       }
       temp_v6 = *(int *)(param_1 + 0x2c) + 1;
       *(int *)(param_1 + 0x2c) = temp_v6;
@@ -221,7 +222,7 @@ void FUN_003ba998(int param_1)
     if (temp_v6 != 0) {
       return;
     }
-    temp_v6 = FUN_00282b28();
+    temp_v6 = screenFadeIsBusy();
     if (temp_v6 != 0) {
       return;
     }
@@ -292,12 +293,12 @@ void FUN_003ba998(int param_1)
       temp_v0 = *(unsigned char *)(temp_v6 + 0x20);
       FUN_0022b29c(param_1,(int)*(short *)(param_1 + 0x3c),*(unsigned int *)(param_1 + 0xd64));
       listScrollToId(param_1 + 0x9c,temp_v0);
-      temp_v2 = FUN_0023360c(param_1 + 0x9c);
+      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x9c);
       *(unsigned short *)(param_1 + 0x4c) = temp_v2;
     }
     FUN_00275be8(0);
     FUN_00289880();
-    FUN_0022b03c(param_1 + 0x9c);
+    objBlockInitAndMark(param_1 + 0x9c);
     FUN_0022b6c4(param_1 + 0x9c);
     *(unsigned char *)(param_1 + 0x6cc) = 0;
     FUN_0022b064(param_1);
@@ -346,7 +347,7 @@ void FUN_003ba998(int param_1)
             do {
               textFormatBuffer(temp_v9,&LAB_003bb098,puVar10);
               temp_v7 = param_1 + temp_v4 * 4;
-              temp_v5 = FUN_002c3124(temp_v9,temp_v7 + 0xe88,1);
+              temp_v5 = fileLoadSync(temp_v9,temp_v7 + 0xe88,1);
               *(unsigned int *)(temp_v7 + 0xe60) = temp_v5;
               puVar10 = puVar10 + 0x20;
               temp_v4 = temp_v4 + 1;
@@ -361,22 +362,22 @@ void FUN_003ba998(int param_1)
       }
       if ((!(*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) ||
          (!(*(short *)(temp_v6 + 0x28) == 0 || *(short *)(temp_v6 + 0x28) == 6))) {
-        FUN_0022b244(*(unsigned int *)(param_1 + 0xe5c),0);
+        modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),0);
         temp_v6 = *piVar12;
         temp_v5 = 1;
       }
       else {
-        FUN_0022b244(*(unsigned int *)(param_1 + 0xe5c),1);
+        modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),1);
         temp_v6 = *piVar12;
         temp_v5 = 0;
       }
-      FUN_00234f04(temp_v6,temp_v5);
+      nodeOwnerSetEnabled((NodeEnableOwner*)temp_v6,temp_v5);
     }
     if (*(char *)(param_1 + 0xdac) == '\0') {
       dialogOpen(0);
       FUN_0027e7b4(*(unsigned int *)(param_1 + 0xd80),
                    *(unsigned char *)(*(int *)(param_1 + 0xd5c) + 0x3f));
-      FUN_0026374c(*(int *)(param_1 + 0xd5c) + 2);
+      placeWinStartText(*(int *)(param_1 + 0xd5c) + 2);
       FUN_002305e8(1);
       FUN_0022af9c(1);
       return;
@@ -384,7 +385,7 @@ void FUN_003ba998(int param_1)
     break;
   case 6:
     temp_v6 = FUN_0022b14c(param_1 + 0x9c);
-    if ((temp_v6 != 0) && (temp_v6 = FUN_00282b28(), temp_v6 == 0)) {
+    if ((temp_v6 != 0) && (temp_v6 = screenFadeIsBusy(), temp_v6 == 0)) {
       if (*(char *)(param_1 + 0xdac) == '\0') {
         temp_v6 = 5;
         piVar12 = (int *)(param_1 + 0x28);

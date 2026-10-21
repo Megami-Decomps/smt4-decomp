@@ -6,11 +6,11 @@ struct Entry {
     u8 work;
 };
 extern Entry DAT_0063afc8[];
-void FUN_0019b738(void *,u32);
+void memClearWords(void *,u32);
 void FUN_001654f8(u32,void *,u32);
 void FUN_003180c4(u32 index,u32 value) {
     void *work=&DAT_0063afc8[index].work;
-    FUN_0019b738(work,104);
+    memClearWords(work,104);
     FUN_001654f8(value,work,104);
 }
 }

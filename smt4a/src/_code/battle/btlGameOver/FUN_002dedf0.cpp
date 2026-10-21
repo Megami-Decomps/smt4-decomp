@@ -20,7 +20,7 @@ extern unsigned int DAT_005738e0; /* 0x5738e0 */
 extern unsigned int DAT_005738e4; /* 0x5738e4 */
 
 extern int jobGetWork(void);
-extern int FUN_00317408(unsigned int);
+extern int asdProcessGetFrames(unsigned int);
 /* Supplied declaration required: FUN_003e6f50. */
 
 
@@ -57,7 +57,7 @@ int FUN_002dedf0(void)
         return temp_v1;
       }
     }
-    temp_v0 = FUN_00317408(*(unsigned int *)(temp_v0 + 0x4c));
+    temp_v0 = asdProcessGetFrames(*(unsigned int *)(temp_v0 + 0x4c));
     temp_v1 = 0;
     if (temp_v0 != 0) {
       temp_v1 = -1;

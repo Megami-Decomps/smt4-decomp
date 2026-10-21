@@ -25,7 +25,7 @@ int FUN_0029bd4c(void);
 int FUN_0029bed8(...);
 int FUN_0029c424(...);
 int FUN_0029c6b0(...);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int FUN_0029d8f4(int, int);
 int scrScriptProcessDestroy(unsigned int);
 int gameGetPlayerData(void);
@@ -55,7 +55,7 @@ typedef struct {
 extern unsigned char LAB_00217614; /* 0x217614 */
 extern unsigned char LAB_002c6e64; /* 0x2c6e64 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001ce0fc. */
 /* Supplied declaration required: FUN_001ddbbc. */
 /* Supplied declaration required: FUN_00215b40. */
@@ -66,7 +66,7 @@ extern int FUN_0026a9cc(unsigned short, unsigned char, int, short *, unsigned ch
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: FUN_002954f4. */
-extern int FUN_002955fc(void);
+extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00296774. */
@@ -77,8 +77,8 @@ extern int FUN_002973d8(void);
 /* Supplied declaration required: FUN_0029bed8. */
 /* Supplied declaration required: FUN_0029c424. */
 /* Supplied declaration required: FUN_0029c6b0. */
-extern int FUN_0029c8f4(int);
-/* Supplied declaration required: FUN_0029ca58. */
+extern int flagCountUnlockedSlots(int);
+/* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029d8f4. */
 extern int FUN_0029ea68(void);
 extern int sys43e188GetState(void);
@@ -99,7 +99,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
-extern unsigned int FUN_002c5c04(unsigned char *);
+extern unsigned int asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: FUN_0033bb94. */
 extern unsigned int FUN_0033c0c0(int);
 
@@ -162,7 +162,7 @@ void FUN_00216e64(int param_1)
       FUN_0033bb94(temp_v2,temp_v4);
       temp_v0 = 0;
       if (temp_v3 != 0) {
-        temp_v3 = FUN_0029c8f4(temp_v2);
+        temp_v3 = flagCountUnlockedSlots(temp_v2);
         temp_v9 = 0;
         do {
           if ((*(short *)(pcVar15 + temp_v9 * 2 + 0x608) != 0) && (temp_v5 = 0, 0 < temp_v3)) {
@@ -268,7 +268,7 @@ void FUN_00216e64(int param_1)
       pcVar15 = (char *)0x0;
 LAB_002174ac:
       textFormatBuffer(temp_v17,&LAB_00217614,pcVar15 + 1);
-      temp_v4 = FUN_002c5c04(temp_v17);
+      temp_v4 = asdLoadFileSyncDefault(temp_v17);
       *(unsigned int *)(param_1 + 0x3578) = temp_v4;
       temp_v8 = *(unsigned int *)(param_1 + 0x3570);
       FUN_00297060(temp_v8,temp_v4);
@@ -296,7 +296,7 @@ LAB_002174ac:
     switch(temp_v3) {
     case 0:
       if (*(int *)(temp_v11 + 0x3c6c) != 2) {
-        FUN_0029ca58();
+        beginStatusPanelClose();
         FUN_0029bd4c();
         temp_v2 = *piVar13 + 1;
         *piVar13 = temp_v2;
@@ -308,7 +308,7 @@ LAB_002174ac:
       gameGetPlayerData();
       if (((int)(*(unsigned char *)(temp_v6 + 0x29) - 2) <= (int)(unsigned int)*(unsigned char *)(temp_v2 + 0x48)) &&
          ((unsigned int)*(unsigned char *)(temp_v2 + 0x48) < (unsigned int)*(unsigned char *)(temp_v6 + 0x29))) {
-        FUN_0029ca58();
+        beginStatusPanelClose();
         FUN_0029bd4c();
         *piVar13 = *piVar13 + 1;
         return;
@@ -318,7 +318,7 @@ LAB_002174ac:
     case 1:
       temp_v3 = FUN_00295618();
       if (temp_v3 != 0) {
-        temp_v3 = FUN_002955fc();
+        temp_v3 = btlTalkBustUpGetValue();
         if (temp_v3 == 0) {
           FUN_002954f4(*(unsigned short *)(temp_v2 + 0x46),1);
           btlTalkBustUpSetUnk2F4(1);
@@ -350,7 +350,7 @@ LAB_002174ac:
       }
       break;
     case 2:
-      temp_v2 = FUN_0019e0c0(*puVar16);
+      temp_v2 = scrRunOpcodesStub(*puVar16);
       if (temp_v2 == 2) {
         temp_v2 = FUN_002973d8();
         if (temp_v2 == 0) {
@@ -374,7 +374,7 @@ LAB_002174ac:
       *piVar13 = *piVar13 + 1;
       return;
     case 4:
-      temp_v2 = FUN_0019e0c0(*puVar16);
+      temp_v2 = scrRunOpcodesStub(*puVar16);
       if (temp_v2 == 2) {
         *piVar17 = 0;
         *piVar13 = *piVar13 + 1;
@@ -389,7 +389,7 @@ LAB_002174ac:
     if (temp_v3 != 0xb) {
       if (temp_v3 < 0xb) {
         if (temp_v3 == 6) {
-          temp_v2 = FUN_0019e0c0(*puVar16);
+          temp_v2 = scrRunOpcodesStub(*puVar16);
           if (temp_v2 != 2) {
             return;
           }
@@ -422,10 +422,10 @@ LAB_002174ac:
         FUN_00296774(param_1,0x10);
         return;
       }
-      temp_v2 = FUN_0019e0c0(*puVar16);
+      temp_v2 = scrRunOpcodesStub(*puVar16);
     }
     else {
-      temp_v2 = FUN_0019e0c0(*puVar16);
+      temp_v2 = scrRunOpcodesStub(*puVar16);
     }
     if (temp_v2 == 2) {
       FUN_0029c424(0);

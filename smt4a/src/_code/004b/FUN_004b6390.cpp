@@ -9,7 +9,7 @@ int paramsInit(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int asdTMTexLoadMainHeap(int, int);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002c7ce8(...);
 int FUN_002c7e6c(void);
 int FUN_002c8538(...);
@@ -21,7 +21,7 @@ int objBMarkAndInit20D4(void);
 int stateHolderMarkAndInit2588(void);
 int FUN_003e4140(...);
 int loadSlotRequestAsync(int, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -43,7 +43,7 @@ extern unsigned char DAT_00533768; /* 0x533768 */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002c7ce8. */
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
@@ -55,7 +55,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: stateHolderMarkAndInit2588. */
 /* Supplied declaration required: FUN_003e4140. */
 /* Supplied declaration required: loadSlotRequestAsync. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_004b6390(int param_1)
@@ -87,9 +87,9 @@ void FUN_004b6390(int param_1)
   *(unsigned int *)(param_1 + 0x43a4) = 0;
   *(unsigned int *)(param_1 + 0x43a8) = 0;
   *(unsigned int *)(param_1 + 0x43a0) = 0;
-  FUN_002804b0("battle/Result.bf",param_1 + 0x439c,0);
-  FUN_002804b0("battle/ResultMsg.mbm",param_1 + 0x43a4,0);
-  FUN_002804b0("battle/DevilLvUp.bf",param_1 + 0x43a8,0);
+  asdLoadFileAsyncSimple("battle/Result.bf",param_1 + 0x439c,0);
+  asdLoadFileAsyncSimple("battle/ResultMsg.mbm",param_1 + 0x43a4,0);
+  asdLoadFileAsyncSimple("battle/DevilLvUp.bf",param_1 + 0x43a8,0);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x28;
@@ -147,7 +147,7 @@ void FUN_004b6390(int param_1)
   *(unsigned int *)(param_1 + 0x754f) = 0;
   *(unsigned int *)(param_1 + 0x7553) = 0;
   *(unsigned char *)(param_1 + 0x7557) = 0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1);
+  paramsClearPacket(param_1);
   paramsInit(param_1,&DAT_0053356c,0x60,&DAT_005335cc,0xfc,&DAT_005336c8,0x84,&DAT_0053374c,0x1c,
                &DAT_00533768,0x508);
   FUN_0014e188(param_1 + 0x20,0x1d,0,param_1,1);

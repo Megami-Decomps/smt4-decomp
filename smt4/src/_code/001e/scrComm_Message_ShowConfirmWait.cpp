@@ -14,7 +14,7 @@ typedef struct MessageMainView {
 
 extern MessageMainView g_messageMain;
 
-s32 FUN_0028dc98(s32 arg);
+s32 scrCommMessageSetMode(s32 arg);
 u32 FUN_002865f8(void);
 u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
@@ -32,7 +32,7 @@ static void showMessage(s32 mode, s32 wait)
 /* Script command: clears the message state, puts it in mode 0x14 and shows a confirm message, waiting for it. */
 void scrComm_Message_ShowConfirmWait(void)
 {
-    FUN_0028dc98(0);
+    scrCommMessageSetMode(0);
     if (g_messageMain.state != NULL) {
         g_messageMain.state->mode = 0x14;
     }

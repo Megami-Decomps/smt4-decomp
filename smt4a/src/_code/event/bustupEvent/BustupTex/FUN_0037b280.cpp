@@ -27,7 +27,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int FUN_00191e00(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 extern int dataTableGetEntries(void);
-extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: sysMemClear. */
 
 
@@ -58,7 +58,7 @@ void FUN_0037b280(int param_1)
   }
   else {
     if (puVar1[5] != -1) {
-      temp_v1 = FUN_001a6508(g_aocSystem,puVar1[4],puVar1[5],1);
+      temp_v1 = aocRunByName(g_aocSystem,puVar1[4],puVar1[5],1);
       if (temp_v1 != 0) {
         temp_v0 = FUN_00191e00(g_aocSystem,puVar1[4],puVar1[5],0x10000);
       }

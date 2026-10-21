@@ -1,31 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f364c` (_code @ 0x2f364c, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail tests enabled before calculating the word and mask; compiler schedules it afterward. */
+#include "common.h"
 
-extern "C" {
+struct MapToggleFlags {
+    u8 unk000[0xc98]; // 0x000
+    u32 flags[1];      // 0xc98
+};
 
-extern int gameGetMapBlock(void);
+extern "C" MapToggleFlags* gameGetMapBlock();
 
-
-void FUN_002f364c(int param_1,int param_2)
-
+// Set or clear one bit in the map's toggle-flag bank.
+extern "C" void FUN_002f364c(s32 flagIndex, s32 enabled)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v1 = gameGetMapBlock();
-  temp_v1 = temp_v1 + ((int)(param_1 + ((unsigned int)(param_1 >> 0x1f) >> 0x1b)) >> 5) * 4;
-  temp_v2 = *(unsigned int *)(temp_v1 + 0xc98);
-  temp_v0 = 1 << ((param_1 % 0x20) & 0xffU);
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v0;
-  }
-  else {
-    temp_v2 = temp_v2 & ~temp_v0;
-  }
-  *(unsigned int *)(temp_v1 + 0xc98) = temp_v2;
-  return;
+    MapToggleFlags* map = gameGetMapBlock();
+    u32 bits = map->flags[flagIndex / 32];
+    u32 mask = 1u << (flagIndex % 32);
+    if (enabled != 0) {
+        bits |= mask;
+    } else {
+        bits &= ~mask;
+    }
+    map->flags[flagIndex / 32] = bits;
 }
-
-} /* extern "C" */

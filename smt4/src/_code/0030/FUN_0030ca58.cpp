@@ -12,7 +12,7 @@ int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
 int FUN_0024b830(...);
 int FUN_002a2c7c(void);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -72,7 +72,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0024b830. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: FUN_002a2c7c. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -228,7 +228,7 @@ void FUN_0030ca58(int param_1)
             pfVar7[4] = (pfVar7[4] - temp_v16 * temp_v9) + pfVar7[5];
             temp_v9 = (pfVar7[3] + temp_v12 * temp_v9) * temp_v17;
             temp_v21 = CONCAT44(temp_v10,temp_v9);
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v9 = temp_v9 * temp_v14;
             temp_v10 = (float)temp_v21;
             temp_v12 = pfVar7[4];
@@ -298,7 +298,7 @@ void FUN_0030ca58(int param_1)
             temp_v17 = (float)temp_v15;
             pfVar7[3] = temp_v2 * temp_v22;
             temp_v2 = (float)((unsigned long long)temp_v15 >> 0x20);
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v10 = (float)puVar9[0x32];
             temp_v12 = (float)puVar9[0x33];
             temp_v9 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -306,7 +306,7 @@ void FUN_0030ca58(int param_1)
             pfVar7[5] = (temp_v12 * temp_v2 - temp_v10 * temp_v2) / temp_v9;
             temp_v9 = *pfVar7;
             temp_v2 = pfVar7[3] * temp_v17;
-            FUN_002b7064();
+            phaseCosInterpolate();
             temp_v2 = temp_v2 * temp_v9;
             temp_v12 = pfVar7[4];
             temp_v10 = pfVar7[3] * temp_v17;
@@ -378,7 +378,7 @@ void FUN_0030ca58(int param_1)
               temp_v12 = *pfVar7 + pfVar7[1] * temp_v9;
               *pfVar7 = temp_v12;
               temp_v10 = pfVar7[3] * temp_v17;
-              FUN_002b7064();
+              phaseCosInterpolate();
               temp_v21 = CONCAT44(temp_v2,temp_v10 * temp_v12);
               temp_v10 = pfVar7[4];
               temp_v2 = pfVar7[3] * temp_v17;

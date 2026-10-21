@@ -7,7 +7,7 @@ extern "C" {
 int linkHolderApplyFlag(unsigned int, int);
 int cecProcessForward(int);
 int campCecDispatchMode(int);
-int FUN_002e2680(int);
+int campCecSetObjectValue(int);
 int rt_aeabi_memclr(int, int);
 int FUN_002f4014(int);
 int cecProcessCall2(void);
@@ -44,9 +44,9 @@ struct fn_00387bb8_arg0 {
 extern int FUN_00284e94(void);
 extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: cecProcessForward. */
-extern int FUN_002c334c(void);
+extern int partyPanelExists(void);
 /* Supplied declaration required: campCecDispatchMode. */
-/* Supplied declaration required: FUN_002e2680. */
+/* Supplied declaration required: campCecSetObjectValue. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002f4014. */
 /* Supplied declaration required: cecProcessCall2. */
@@ -89,7 +89,7 @@ unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
     param_1->field_0xec = 0xffffffff;
     param_1->field_0x14c = 0;
     param_1->field_0x112 = 1;
-    FUN_002e2680(0);
+    campCecSetObjectValue(0);
     FUN_0031d890();
     temp_v1 = 3;
   }
@@ -110,7 +110,7 @@ unsigned int FUN_00387bb8(fn_00387bb8_arg0 *param_1)
       break;
     case 6:
       if (param_1->field_0x108 != 0) {
-        temp_v0 = FUN_002c334c();
+        temp_v0 = partyPanelExists();
         if (temp_v0 == 0) {
           return 0;
         }

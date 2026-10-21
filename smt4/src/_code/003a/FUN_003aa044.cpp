@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00230aec(...);
 int FUN_00230d84(int, int, int, int, int);
-int FUN_00231258(...);
+void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int dataTable00FindById(void);
 int FUN_002bd06c(void);
@@ -14,7 +14,7 @@ int FUN_002be56c(...);
 int textFormatBuffer(...);
 int FUN_002bf4f0(...);
 int efctSetSpeed(void);
-int FUN_0039fbc8(...);
+int devilDrawIconRelative(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -35,7 +35,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00230aec. */
 /* Supplied declaration required: FUN_00230d84. */
-/* Supplied declaration required: FUN_00231258. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int curveEvaluateStandard(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
@@ -47,7 +46,7 @@ extern int vec2GetYInt(int);
 extern int vec2GetXInt(void);
 /* Supplied declaration required: FUN_002bf4f0. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0039fbc8. */
+/* Supplied declaration required: devilDrawIconRelative. */
 
 
 void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
@@ -96,7 +95,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     FUN_00231bcc(param_1 + 200,0x103d,temp_v11,temp_v3,temp_v10,1);
     FUN_00231bcc(param_1 + 200,0x103e,temp_v11,temp_v3,temp_v10,1);
     temp_v4 = FUN_002bf4f0(param_1 + 200,0x1041);
-    FUN_00231258(*(short *)(temp_v4 + 8) + temp_v11,*(short *)(temp_v4 + 10) + temp_v3,
+    gxSetClippedBottomScreenScissor(*(short *)(temp_v4 + 8) + temp_v11,*(short *)(temp_v4 + 10) + temp_v3,
                  (int)**(short **)(temp_v4 + 0xc),(int)(*(short **)(temp_v4 + 0xc))[1]);
     temp_v4 = FUN_002bf4f0(param_1 + 200,0x1040);
     temp_v5 = param_1 + 0x2a0;
@@ -121,7 +120,7 @@ void FUN_003aa044(int param_1,int param_2,int param_3,unsigned int param_4)
     else {
       temp_v4 = FUN_002bf4f0(param_1 + 200,0x1058);
     }
-    FUN_0039fbc8(param_1 + 200,(int)(short)param_4,*(short *)(temp_v4 + 8) + temp_v11,
+    devilDrawIconRelative(param_1 + 200,(int)(short)param_4,*(short *)(temp_v4 + 8) + temp_v11,
                  *(short *)(temp_v4 + 10) + temp_v3,temp_v10);
     if (param_3 == 0) {
       temp_v14 = 2;

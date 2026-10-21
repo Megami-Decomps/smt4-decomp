@@ -1,27 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045b538` (_code @ 0x45b538, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the loop index to r3 and increments r1 before loading the node; compiler indexes directly then increments. */
+#include "common.h"
 
-extern "C" {
+struct FlaggedNode {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u16 flags;
+};
 
+struct FlaggedNodeList {
+    /* 0x00 */ u8 unk00[0x0c];
+    /* 0x0C */ FlaggedNode** entries;
+    /* 0x10 */ u16 count;
+};
 
-void FUN_0045b538(int param_1)
+struct FlaggedNodeOwner {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ FlaggedNodeList* list;
+};
 
+// Set flag 0x40 on every node in the owner's collection.
+extern "C" void FUN_0045b538(FlaggedNodeOwner* owner)
 {
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = 0;
-  if (*(short *)(*(int *)(param_1 + 0x30) + 0x10) != 0) {
-    do {
-      temp_v1 = temp_v0 + 1;
-      temp_v2 = *(int *)(*(int *)(*(int *)(param_1 + 0x30) + 0xc) + temp_v0 * 4);
-      *(unsigned short *)(temp_v2 + 4) = *(unsigned short *)(temp_v2 + 4) | 0x40;
-      temp_v0 = temp_v1;
-    } while (temp_v1 < *(unsigned short *)(*(int *)(param_1 + 0x30) + 0x10));
-  }
-  return;
+    u32 index = 0;
+    if (index < owner->list->count) {
+        do {
+            FlaggedNode* node = owner->list->entries[index];
+            ++index;
+            node->flags |= 0x40;
+        } while (index < owner->list->count);
+    }
 }
-
-} /* extern "C" */

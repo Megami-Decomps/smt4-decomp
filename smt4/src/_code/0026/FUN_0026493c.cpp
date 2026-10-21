@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0019dc04(void);
+int mapIfTimerStep(void);
 int FUN_0020d7f4(void);
 int FUN_0021dfbc(void);
 int FUN_002648e8(int);
@@ -53,8 +53,8 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-/* Supplied declaration required: FUN_0019dc04. */
-extern int FUN_0019e0c0(unsigned int);
+/* Supplied declaration required: mapIfTimerStep. */
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0020d7f4. */
 /* Supplied declaration required: FUN_0021dfbc. */
 /* Supplied declaration required: FUN_002648e8. */
@@ -103,7 +103,7 @@ void FUN_0026493c(int param_1)
   float temp_v13;
   float temp_v14 [11];
   
-  FUN_0019dc04();
+  mapIfTimerStep();
   temp_v7 = g_lmapScene;
   temp_v11 = 0.0f;
   temp_v13 = 2.0f;
@@ -354,7 +354,7 @@ LAB_00264b84:
         FUN_002bf810(0x10001fe);
       }
       *(int *)(param_1 + 0xd4) = *(int *)(param_1 + 0xd4) + 1;
-      temp_v7 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0x9ac));
+      temp_v7 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x9ac));
       if ((temp_v7 == 2) && (*(int *)(param_1 + 0xd4) >= 0xf1)) {
         *(int *)(param_1 + 0xd0) = *(int *)(param_1 + 0xd0) + 1;
         *(unsigned int *)(param_1 + 0xd4) = 0;

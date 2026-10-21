@@ -7,7 +7,7 @@ s32 jobIsValid(u32 job);
 void FUN_0024dc64(void);
 void eventCommandSetPendingCleanup(s32 arg);
 void asdMemoryFreeLockedAlt(void);
-void FUN_00262a38(void);
+void textureCacheReleaseAll(void);
 void jobStop(u32 job, s32 arg);
 
 extern EventCommandGlobals g_eventCommand;
@@ -21,7 +21,7 @@ s32 eventCommandEnd(void)
         eventCommandSetPendingCleanup(0);
     }
     if (jobIsValid(g_eventCommand.job) != 0) {
-        FUN_00262a38();
+        textureCacheReleaseAll();
         FUN_0024dc64();
         jobStop(g_eventCommand.job, 0);
     }

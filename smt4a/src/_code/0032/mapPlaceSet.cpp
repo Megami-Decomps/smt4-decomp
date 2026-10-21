@@ -9,7 +9,7 @@ extern int DAT_005f1c9c; /* 0x5f1c9c */
 extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
 
-extern char *FUN_003798f0(int);
+extern char *dataTableGetRecord23(int);
 extern int dataTable23Type1CountWithAoc(void);
 
 
@@ -30,7 +30,7 @@ void mapPlaceSet(int param_1,int param_2,unsigned int param_3)
     temp_v0 = dataTable23Type1CountWithAoc();
     if (0 < temp_v0) {
       do {
-        pcVar2 = (char *)FUN_003798f0(temp_v1);
+        pcVar2 = (char *)dataTableGetRecord23(temp_v1);
         temp_v0 = (int)*pcVar2;
         temp_v2 = temp_v0 == param_1;
         if (temp_v2) {

@@ -1,40 +1,57 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001327b4` (_code @ 0x1327b4, 0x56 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: placement construction adds a null guard; the string wrapper also loses retail's constructor-return pointer chaining. */
+#include "shard/W6_W6Match2_OnlineString.h"
+#include <new>
 
 extern "C" {
-
-extern unsigned char DAT_00559524; /* 0x559524 */
-extern unsigned char DAT_00559ef4; /* 0x559ef4 */
-
-extern int onlineStringCopyConstruct(int *, int);
-extern int *FUN_0030710c(int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-
-void FUN_001327b4(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-  int *piVar1;
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = **(int **)(param_1 + 0x10);
-  piVar1 = (int *)FUN_0030710c(param_1,0,param_3,param_4,param_4);
-  piVar1[2] = (int)&DAT_00559ef4;
-  *(unsigned char *)(piVar1 + 3) = *(unsigned char *)(param_2 + 4);
-  piVar1[4] = *(int *)(param_2 + 8);
-  piVar1[5] = *(int *)(param_2 + 0xc);
-  piVar1[6] = *(int *)(param_2 + 0x10);
-  piVar1[7] = *(int *)(param_2 + 0x14);
-  temp_v0 = onlineStringCopyConstruct(piVar1 + 8,param_2 + 0x18);
-  *(unsigned int *)(temp_v0 + 8) = *(unsigned int *)(param_2 + 0x20);
-  *(unsigned char **)(temp_v0 - 0x18) = &DAT_00559524;
-  *piVar1 = temp_v1;
-  piVar1[1] = *(int *)(temp_v1 + 4);
-  **(int **)(temp_v1 + 4) = (int)piVar1;
-  *(int **)(temp_v1 + 4) = piVar1;
-  *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) + 1;
-  return;
+extern const u8 _ZTV9Obj559eec[];
+extern const u8 DAT_00559524[];
 }
 
-} /* extern "C" */
+struct OnlineMessageValue {
+    const void *vtable; // 0x00
+    u8 kind; // 0x04
+    u8 unk05[3];
+    u32 first; // 0x08
+    u32 second; // 0x0c
+    u32 third; // 0x10
+    u32 fourth; // 0x14
+    OnlineStringValue text; // 0x18
+    u32 flags; // 0x20
+
+    OnlineMessageValue(const OnlineMessageValue &other)
+        : vtable(_ZTV9Obj559eec + 8), kind(other.kind), first(other.first),
+          second(other.second), third(other.third), fourth(other.fourth),
+          text(other.text), flags(other.flags)
+    {
+        vtable = DAT_00559524;
+    }
+};
+struct OnlineMessageNode {
+    OnlineMessageNode *next;
+    OnlineMessageNode *previous;
+    OnlineMessageValue value;
+};
+struct OnlineMessageListRoot {
+    OnlineMessageNode *sentinel;
+};
+struct OnlineMessageList {
+    u8 pool[0x10];
+    OnlineMessageListRoot *root; // 0x10
+    u32 count; // 0x14
+};
+
+extern "C" {
+OnlineMessageNode *FUN_0030710c(OnlineMessageList *, u32);
+
+void FUN_001327b4(OnlineMessageList *list, const OnlineMessageValue *value)
+{
+    OnlineMessageNode *sentinel = list->root->sentinel;
+    OnlineMessageNode *node = FUN_0030710c(list, 0);
+    new (&node->value) OnlineMessageValue(*value);
+    node->next = sentinel;
+    node->previous = sentinel->previous;
+    sentinel->previous->next = node;
+    sentinel->previous = node;
+    ++list->count;
+}
+}

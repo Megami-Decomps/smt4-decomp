@@ -8,7 +8,7 @@ s32 asdTMTexTableNodeIsLoaded(s32 table, ...);
 void asdTMTexTableReleaseNode(s32 table, s32 index);
 void uiSpriteSetImageKeyframe(SceneSprite *sprite, s32 keyframe, s32 arg2);
 s32 FUN_002bf818(SceneSprite *sprite);
-s32 FUN_0023360c(SceneWidget *widget);
+s32 flaggedValueHolderGetTotal(SceneWidget *widget);
 
 /* Whether the sprite's image is up. */
 static __inline s32 sceneSpriteIsReady(SceneSprite *sprite)
@@ -24,7 +24,7 @@ void FUN_003bb454(SceneWidget *widget)
         widget->frame = (widget->frame + 1) % 16;
     }
     if (widget->queuedKey != -1 && asdTMTexTableNodeIsLoaded(SCENE_TEXTURE_TABLE) != 0 && sceneSpriteIsReady(&widget->sprite) != 0) {
-        s32 index = FUN_0023360c(widget);
+        s32 index = flaggedValueHolderGetTotal(widget);
 
         if (widget->queuedKey == widget->entries[index]->lastKey + 1) {
             s32 queuedTex = widget->queuedTex;

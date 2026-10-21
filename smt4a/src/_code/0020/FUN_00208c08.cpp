@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00167458(...);
 int FUN_00340a94(...);
-int FUN_004ff364(...);
+int asdAnimGetTrackLastFrame(...);
 int __aeabi_uidivmod(...);
 
 int FUN_001517b4(...);
@@ -43,7 +43,7 @@ int linkHolderApplyFirst(...);
 int linkHolderClearFlag(...);
 int FUN_003fce08(...);
 int FUN_0040a244(void);
-int FUN_0040b0f8(...);
+int resourceOwnerLoadNamed(...);
 int FUN_0040b27c(...);
 int FUN_0040b730(...);
 int FUN_0040ba38(void);
@@ -93,7 +93,7 @@ extern int useCounterIsFinished(void);
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_002a6fb8. */
 /* Supplied declaration required: aocDataBlockResolveEntries. */
-extern int FUN_002c7ca0(void);
+extern int statusDownGetFlag(void);
 extern int FUN_002c7cb4(void);
 /* Supplied declaration required: statusCameraApply. */
 extern int FUN_002effbc(void);
@@ -126,11 +126,11 @@ extern unsigned int FUN_00409fe8(int, unsigned int);
 /* Supplied declaration required: FUN_0040a244. */
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(int);
-/* Supplied declaration required: FUN_0040b0f8. */
+/* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: FUN_0040b27c. */
 /* Supplied declaration required: FUN_0040b730. */
 /* Supplied declaration required: FUN_0040ba38. */
-/* Supplied declaration required: FUN_004ff364. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -341,7 +341,7 @@ unsigned int FUN_00208c08(void)
           }
         }
         else {
-          FUN_0040b0f8(g_handleRegistry,&LAB_002092ac);
+          resourceOwnerLoadNamed(g_handleRegistry,&LAB_002092ac);
         }
       }
       *(unsigned int *)(temp_v2 + 5000) = 0;
@@ -621,7 +621,7 @@ LAB_00209b8c:
         else {
           if ((((((*(char *)(DAT_00588fd4 + 0x2012) != '\0') &&
                  (*(char *)(DAT_00588fd4 + 0x2011) != '\0')) && (temp_v7 = FUN_00334044(), temp_v7 >= 2))
-               && ((temp_v7 = FUN_002c7ca0(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)))) &&
+               && ((temp_v7 = statusDownGetFlag(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)))) &&
               (temp_v3 = FUN_002c7cb4(), temp_v3 != 0)) &&
              (((temp_v3 = FUN_002effbc(), temp_v3 != 0 && (temp_v3 = objStateNotEnding(), temp_v3 != 0)) &&
               (temp_v3 = FUN_0039c1f4(), temp_v3 == 0)))) {
@@ -650,7 +650,7 @@ LAB_00209b8c:
             temp_v8 = (unsigned int)*(unsigned char *)(DAT_00588fd4 + 0x2011);
           }
           if (((temp_v11 && temp_v8 != 0) && (temp_v7 = FUN_00334044(), temp_v7 >= 2)) &&
-             (((temp_v7 = FUN_002c7ca0(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)) &&
+             (((temp_v7 = statusDownGetFlag(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)) &&
               ((((temp_v3 = FUN_002c7cb4(), temp_v3 != 0 && (temp_v3 = FUN_002effbc(), temp_v3 != 0)) &&
                 (temp_v3 = objStateNotEnding(), temp_v3 != 0)) && (temp_v3 = FUN_0039c1f4(), temp_v3 == 0)))))) {
             temp_v3 = 7;
@@ -675,7 +675,7 @@ LAB_00209b8c:
             temp_v8 = (unsigned int)*(unsigned char *)(DAT_00588fd4 + 0x2011);
           }
           if ((((temp_v11 && temp_v8 != 0) && (temp_v7 = FUN_00334044(), temp_v7 >= 2)) &&
-              ((temp_v7 = FUN_002c7ca0(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)))) &&
+              ((temp_v7 = statusDownGetFlag(), temp_v7 != 0 || (*(int *)(temp_v3 + 0x14) >= 0xc)))) &&
              ((((temp_v3 = FUN_002c7cb4(), temp_v3 != 0 && (temp_v3 = FUN_002effbc(), temp_v3 != 0)) &&
                (temp_v3 = objStateNotEnding(), temp_v3 != 0)) &&
               ((temp_v3 = FUN_0039c1f4(), temp_v3 == 0 && (*(int *)(temp_v2 + 0x1374) != 0)))))) {
@@ -810,7 +810,7 @@ LAB_00209dc4:
     }
     if ((0 < *(short *)(temp_v2 + 0x138e)) && (*(int *)(temp_v2 + 0x2028) != 0)) {
       *(int *)(temp_v2 + 0x202c) = *(int *)(temp_v2 + 0x202c) + 2;
-      FUN_004ff364(*(int *)(temp_v2 + 0x2028),0);
+      asdAnimGetTrackLastFrame(*(int *)(temp_v2 + 0x2028),0);
       __aeabi_uidivmod(*(unsigned int *)(temp_v2 + 0x202c),(int)temp_v12);
       *(unsigned int *)(temp_v2 + 0x202c) = temp_v10;
     }

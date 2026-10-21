@@ -2,6 +2,9 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct NameEntryMenu;
+struct NameBuffer;
+
 extern "C" {
 
 int sysPlaySe(int);
@@ -10,7 +13,7 @@ int uiSpriteSetImageKeyframe(int, int, int);
 int scrScriptProcessStartEntry(unsigned int, int);
 int FUN_003180c4(int, int *);
 int logFormatBuffer(int *, int, int);
-int FUN_00484264(int, int *);
+void nameEntryCopyEditedName(NameEntryMenu*, NameBuffer*);
 int stateSetterEnterState(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -21,14 +24,13 @@ typedef struct {
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int FUN_00224880(unsigned int);
-extern int FUN_0026272c(void);
+extern int scrRunOpcodesStub(unsigned int);
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: logFormatBuffer. */
 extern int convertToBufferAndStore(unsigned int *, int);
-/* Supplied declaration required: FUN_00484264. */
 /* Supplied declaration required: stateSetterEnterState. */
 
 
@@ -45,7 +47,7 @@ void FUN_00484378(int param_1)
   
   piVar3 = &uStack_30;
   if (*(char *)(param_1 + 0x270) != '\0') {
-    temp_v1 = FUN_00224880(*(unsigned int *)(param_1 + 0x26c));
+    temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x26c));
     if (temp_v1 == 2) {
       temp_v1 = FUN_002a4b74();
       if (temp_v1 != 0) {
@@ -59,7 +61,7 @@ void FUN_00484378(int param_1)
         stateSetterEnterState(param_1,7);
         return;
       }
-      FUN_00484264(param_1,&uStack_30);
+      nameEntryCopyEditedName((NameEntryMenu*)param_1,(NameBuffer*)&uStack_30);
       temp_v1 = 0;
       do {
         temp_v3 = -0x7ec0;
@@ -105,9 +107,9 @@ LAB_00484524:
     }
   }
   else {
-    temp_v1 = FUN_0026272c();
+    temp_v1 = messageMainIsIdle();
     if (temp_v1 != 0) {
-      FUN_00484264(param_1,&uStack_30);
+      nameEntryCopyEditedName((NameEntryMenu*)param_1,(NameBuffer*)&uStack_30);
       FUN_003180c4(0x32,&uStack_30);
       scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x26c),1);
       *(unsigned char *)(param_1 + 0x270) = 1;

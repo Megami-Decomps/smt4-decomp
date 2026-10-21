@@ -11,7 +11,7 @@ int asdOperatorNew(int, unsigned int *);
 int asdMemoryAlloc(int, int, int, int, int);
 int FUN_002f5020(unsigned int *, unsigned char *, int, int);
 int FUN_0036b644(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -43,7 +43,7 @@ extern unsigned int *g_btlTargetSelect; /* 0x57a9a8 */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_0036b644. */
 extern unsigned int FUN_004093f4(void);
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_00363990(unsigned int *param_1)
@@ -91,7 +91,7 @@ void FUN_00363990(unsigned int *param_1)
   param_1[0xf] = (unsigned int)puVar7;
   taskCreateDraw(&LAB_00363bb4,0x7e,0,0,payloadWorkRelease,0,puVar1,puVar7);
   taskCreateDraw(&LAB_00363bcc,0xda,0,0,payloadWorkRelease,0,puVar1,param_1[0xf]);
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar1 + 3);
+  paramsClearPacket(puVar1 + 3);
   paramsInit(puVar1 + 3,0,0,0,0,0,0,&DAT_0052aa0c,0x10,0,0);
   FUN_0014e188(puVar1 + 0xb,0xc,0x71,puVar1 + 3,1);
   FUN_0036b644(puVar1 + 0xb,0);

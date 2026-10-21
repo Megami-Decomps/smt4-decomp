@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0023c368(int, int, int, int, int, int, int, int);
-int FUN_003ddd6c(...);
+int btlReflectCreateKind21(...);
 
 /* stack frame of param_3: 3 slot(s), 12 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: FUN_0023c368. */
-/* Supplied declaration required: FUN_003ddd6c. */
+/* Supplied declaration required: btlReflectCreateKind21. */
 
 
 unsigned int FUN_003cfc84(int *param_1,int param_2,int param_3)
@@ -50,7 +50,7 @@ unsigned int FUN_003cfc84(int *param_1,int param_2,int param_3)
           temp_v1 = *(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114;
           temp_v0 = *(unsigned int *)(temp_v1 + 0x50);
           if (((temp_v0 & 1) != 0 && (temp_v0 & 2) != 0) && (temp_v0 & 0x400) != 0) {
-            FUN_003ddd6c(0,param_2,temp_v1,*(unsigned int *)(temp_v1 + 0x68),5,1);
+            btlReflectCreateKind21(0,param_2,temp_v1,*(unsigned int *)(temp_v1 + 0x68),5,1);
           }
           temp_v2 = temp_v2 + 1;
         } while (temp_v2 < 0x36);
@@ -61,7 +61,7 @@ unsigned int FUN_003cfc84(int *param_1,int param_2,int param_3)
         temp_v1 = *(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114;
         temp_v0 = *(unsigned int *)(temp_v1 + 0x50);
         if (((temp_v0 & 1) != 0 && (temp_v0 & 2) != 0) && (temp_v0 & 0x400) != 0) {
-          FUN_003ddd6c(0,param_2,temp_v1,0,10,1);
+          btlReflectCreateKind21(0,param_2,temp_v1,0,10,1);
         }
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 0x36);

@@ -7,12 +7,12 @@ extern "C" {
 int FUN_001006ec(int, int, int);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_001a79e8(unsigned int, unsigned int);
-int FUN_002e32a4(int, unsigned char *, unsigned char *, unsigned int, int);
+void FUN_002e32a4(int kind, ...);
 int FUN_003fd7c0(unsigned int, unsigned int, int);
 int FUN_003fd924(unsigned int, unsigned int, int);
-int FUN_003fda08(unsigned int, unsigned int, int);
+int animationSelectClip(unsigned int, unsigned int, int);
 int FUN_003fe544(void);
-int FUN_004ffa80(unsigned int, unsigned int);
+int ownerSlotSetText(unsigned int, unsigned int);
 int FUN_004ffab8(unsigned int, unsigned int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -31,11 +31,11 @@ extern unsigned int *FUN_001006c2(int, unsigned int);
 /* Supplied declaration required: FUN_002e32a4. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
-/* Supplied declaration required: FUN_003fda08. */
+/* Supplied declaration required: animationSelectClip. */
 extern unsigned int FUN_003fdadc(unsigned int);
 /* Supplied declaration required: FUN_003fe544. */
 extern unsigned int FUN_003feb80(void);
-/* Supplied declaration required: FUN_004ffa80. */
+/* Supplied declaration required: ownerSlotSetText. */
 /* Supplied declaration required: FUN_004ffab8. */
 
 
@@ -159,7 +159,7 @@ void FUN_00405dec(int param_1,int param_2)
     temp_v5 = *puVar11;
     temp_v1 = FUN_003fdadc(temp_v5);
     temp_v6 = temp_v5;
-    FUN_004ffa80(temp_v5,temp_v1);
+    ownerSlotSetText(temp_v5,temp_v1);
     if ((temp_v6 & 0xffff) != 0xffff) {
       FUN_003fd924(temp_v5,temp_v6 & 0xffff,1);
     }
@@ -171,7 +171,7 @@ void FUN_00405dec(int param_1,int param_2)
     temp_v6 = temp_v5;
     FUN_004ffab8(temp_v5,temp_v1);
     if ((temp_v6 & 0xffff) != 0xffff) {
-      FUN_003fda08(temp_v5,temp_v6 & 0xffff,1);
+      animationSelectClip(temp_v5,temp_v6 & 0xffff,1);
     }
   }
   return;

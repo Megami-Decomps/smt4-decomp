@@ -19,7 +19,7 @@ int FUN_0040a908(int, int);
 int FUN_0040a918(...);
 int moriModelContentCopyBody(void);
 int FUN_0040aad4(int, int);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 int FUN_0046c35c(...);
 int VectorSignedToFloat(...);
 
@@ -49,8 +49,8 @@ extern int FUN_003b564c(void);
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(int);
-extern int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_0046c35c. */
 
 
@@ -211,7 +211,7 @@ LAB_002961a0:
         FUN_00178b04(0x20,&LAB_00296470,0x115);
         temp_v5 = 0;
         if (temp_v4 != 0) {
-          temp_v5 = FUN_0040ac08();
+          temp_v5 = modelListInit();
         }
         piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
         moriModelContentCopyBody();
@@ -223,7 +223,7 @@ LAB_002961f8:
         FUN_00178b04(0x20,&LAB_00296470,0x120);
         temp_v5 = 0;
         if (temp_v4 != 0) {
-          temp_v5 = FUN_0040ac08();
+          temp_v5 = modelListInit();
         }
         piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
         FUN_001cd3ec();
@@ -237,7 +237,7 @@ LAB_002961f8:
       FUN_00178b04(0x20,&LAB_00296470,300);
       temp_v5 = 0;
       if (temp_v4 != 0) {
-        temp_v5 = FUN_0040ac08();
+        temp_v5 = modelListInit();
       }
       piVar12[temp_v3 * 0xf + 0x10] = temp_v5;
       FUN_001cd3ec();
@@ -277,7 +277,7 @@ LAB_002961f8:
   FUN_0040aad4(piVar12[temp_v5 * 0xf + 0x10],0);
   temp_v9 = *(unsigned int *)(piVar12[temp_v5 * 0xf + 0x10] + 4);
   FUN_003fe86c(temp_v9,0,2);
-  FUN_0040ace8(g_handleRegistry,temp_v9);
+  handleRegistryRegisterObject(g_handleRegistry,temp_v9);
   temp_v3 = DAT_00581280[1];
   dataTable2aGetEntryWithAoc();
   FUN_00385964();

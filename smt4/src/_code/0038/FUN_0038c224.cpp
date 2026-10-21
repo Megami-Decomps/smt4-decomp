@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038c224` (_code @ 0x38c224, 0x9b0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_ArchiveIcon.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ int jyoucyuGetTableEntry(...);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int FUN_002c5e80(...);
 int asdOperatorDelete(...);
-int FUN_00352764(...);
 int FUN_0038bee4(...);
 int FUN_003def38(...);
 int FUN_003df0c4(...);
@@ -77,7 +77,7 @@ extern int FUN_00234618(unsigned char *);
 /* Supplied declaration required: FUN_00234624. */
 /* Supplied declaration required: FUN_0026281c. */
 /* Supplied declaration required: asdOperatorNewB. */
-extern int FUN_002a12d8(int);
+extern int legacyResourceIdRemap(int);
 extern unsigned char objGetFlagBit0(int);
 extern unsigned char objGetFlagBit1(int);
 /* Supplied declaration required: FUN_002b4b80. */
@@ -89,7 +89,6 @@ extern unsigned char objGetFlagBit1(int);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_002c5e80. */
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_00352764. */
 /* Supplied declaration required: FUN_0038bee4. */
 extern int FUN_003def24(unsigned char *);
 /* Supplied declaration required: FUN_003def38. */
@@ -456,13 +455,15 @@ int FUN_0038c224(int param_1)
           memClear(temp_v44,0x1200);
         }
         else {
-          FUN_002c5e80(temp_v7,0,10);
+          temp_v7 = static_cast<u16>(FUN_002c5e80(temp_v7,0,10));
           *(short *)(temp_v40 + 0xa8) = (short)temp_v7;
           if ((temp_v7 & 0xffff) != 0xffff) {
-            FUN_00352764(&temp_v14,temp_v8 + 0x28,temp_v44);
-            *(int *)(temp_v46 + 0xc) = temp_v14;
-            *(unsigned int *)(temp_v46 + 0x10) = temp_v15;
-            temp_v9 = FUN_002a12d8(temp_v46 + 0xc);
+            ValidationPair iconResult = archiveReadIcon(
+                reinterpret_cast<const ArchiveIconSource *>(temp_v8 + 0x28),
+                reinterpret_cast<void *>(temp_v44), temp_v7);
+            *(int *)(temp_v46 + 0xc) = static_cast<s32>(iconResult.first);
+            *(unsigned int *)(temp_v46 + 0x10) = iconResult.second;
+            temp_v9 = legacyResourceIdRemap(temp_v46 + 0xc);
             if (temp_v9 < 0) {
               return temp_v9;
             }
@@ -475,7 +476,7 @@ int FUN_0038c224(int param_1)
         FUN_003df140(&temp_v43,temp_v17,temp_v34);
         *(unsigned int *)(temp_v46 + 0xc) = temp_v43;
         *(unsigned int *)(temp_v46 + 0x10) = uStack_1a5c;
-        temp_v9 = FUN_002a12d8(temp_v46 + 0xc);
+        temp_v9 = legacyResourceIdRemap(temp_v46 + 0xc);
         if (temp_v9 < 0) {
           return temp_v9;
         }
@@ -498,7 +499,7 @@ int FUN_0038c224(int param_1)
           FUN_002345a4(&temp_v14,temp_v8 + 0x84,&temp_v19,&temp_v25);
           *(int *)(temp_v46 + 0xc) = temp_v14;
           *(unsigned int *)(temp_v46 + 0x10) = temp_v15;
-          temp_v9 = FUN_002a12d8(temp_v46 + 0xc);
+          temp_v9 = legacyResourceIdRemap(temp_v46 + 0xc);
           if (temp_v9 < 0) {
             return temp_v9;
           }
@@ -531,10 +532,10 @@ int FUN_0038c224(int param_1)
         FUN_003df0c4(&temp_v20,temp_v17,&temp_v33,temp_v9);
         *(unsigned int *)(temp_v46 + 0xc) = temp_v20;
         *(unsigned int *)(temp_v46 + 0x10) = uStack_1c04;
-        temp_v3 = FUN_002a12d8(temp_v46 + 0xc);
+        temp_v3 = legacyResourceIdRemap(temp_v46 + 0xc);
         if (temp_v3 < 0) {
           asdOperatorDelete(temp_v9);
-          temp_v8 = FUN_002a12d8(temp_v46 + 0xc);
+          temp_v8 = legacyResourceIdRemap(temp_v46 + 0xc);
           return temp_v8;
         }
         temp_v3 = 0;

@@ -10,7 +10,7 @@ int _ZN9Obj55b28cD1Ev(int *);
 typedef int romwright_code(...);
 extern unsigned char g_systemTable; /* 0x59935c */
 
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 
@@ -28,7 +28,7 @@ void FUN_001165c0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   uStack_18 = param_2;
   uStack_14 = param_3;
   uStack_10 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(&uStack_18,temp_v0 + 0x58);
   piVar1 = (*(int * *)((unsigned char *)&g_systemTable + 0xc));
   if (((*(int * *)((unsigned char *)&g_systemTable + 0xc)) != (int *)0x0) &&

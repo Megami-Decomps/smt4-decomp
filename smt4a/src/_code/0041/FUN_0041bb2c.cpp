@@ -8,8 +8,8 @@ int FUN_0017fc94(...);
 int FUN_001ab810(unsigned int, unsigned char [48]);
 int FUN_001aff14(unsigned char [48], int);
 int controllerSetDestination(...);
-int FUN_003fdb18(int);
-int FUN_003fe9b4(int, int);
+int controllerSetRotationEulerDegrees(int);
+int tripleOwnerSetValue(int, int);
 int nn_math_ARMv6_MTX34CopyAsm(int, unsigned int *);
 int nn_math_ARMv6_MTX34MultAsm(int, unsigned char [48]);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(int *, int);
@@ -43,8 +43,8 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 /* Supplied declaration required: FUN_001aff14. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fdb18. */
-/* Supplied declaration required: FUN_003fe9b4. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
+/* Supplied declaration required: tripleOwnerSetValue. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -70,8 +70,8 @@ void FUN_0041bb2c(int param_1)
   if (temp_v0 == 0) {
     temp_v0 = *(int *)(*(int *)(param_1 + 4) + 4);
     controllerSetDestination(temp_v0,param_1 + 0x90);
-    FUN_003fdb18(temp_v0);
-    FUN_003fe9b4(temp_v0,param_1 + 0xa8);
+    controllerSetRotationEulerDegrees(temp_v0);
+    tripleOwnerSetValue(temp_v0,param_1 + 0xa8);
     *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
     return;
   }

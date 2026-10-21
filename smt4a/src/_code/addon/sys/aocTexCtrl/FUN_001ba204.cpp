@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(...);
 int asdMemoryAllocAligned(int, int, int, int, unsigned int, int);
-int FUN_001aeb40(unsigned char *, unsigned char *);
+void lzDecompressBytes(const unsigned char *, unsigned char *);
 int FUN_001aec9c(unsigned char *, unsigned char *);
 int FUN_001aeddc(unsigned char *, unsigned char *);
 
@@ -18,7 +18,6 @@ typedef struct {
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-/* Supplied declaration required: FUN_001aeb40. */
 /* Supplied declaration required: FUN_001aec9c. */
 /* Supplied declaration required: FUN_001aeddc. */
 extern int FUN_001aeecc(unsigned char *);
@@ -65,7 +64,7 @@ unsigned char * FUN_001ba204(unsigned char *param_1,unsigned int param_2,unsigne
       }
     }
     else {
-      FUN_001aeb40(param_1,pbVar2);
+      lzDecompressBytes(param_1,pbVar2);
     }
     asdMemFree(param_1);
   }

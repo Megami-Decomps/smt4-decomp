@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysFatalBreak(void);
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int FUN_00427a10(unsigned int, unsigned char *);
 int FUN_00427e68(int, int);
 int rt_memcpy(unsigned char *, unsigned int, unsigned int);
@@ -27,7 +27,7 @@ extern int FUN_0015a410(void);
 extern int appletIsExitRequested(void);
 extern unsigned int FUN_0016ccfc(void);
 /* Supplied declaration required: sysFatalBreak. */
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: FUN_00427a10. */
 extern int FUN_00427e28(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00427e68. */
@@ -50,7 +50,7 @@ void FUN_00429210(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
   
   if (param_5 >= 0x41) {
     temp_v4 = 0xe0613880;
-    FUN_001b57a8(param_1,temp_v4);
+    resultPairInitialize(param_1,temp_v4);
     return;
   }
   temp_v1 = *param_2;
@@ -100,12 +100,12 @@ void FUN_00429210(unsigned int param_1,int *param_2,unsigned int *param_3,unsign
           return;
         }
         temp_v4 = 0xc9413891;
-        FUN_001b57a8(param_1,temp_v4);
+        resultPairInitialize(param_1,temp_v4);
         return;
       }
     }
   }
-  FUN_001b57a8(param_1,temp_v1);
+  resultPairInitialize(param_1,temp_v1);
   return;
 }
 

@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0023392c(int, unsigned int, int);
 int FUN_00233db8(int, int);
-int FUN_002ac8b0(int, int, int);
+int multibyteToUtf16(int, int, int);
 int FUN_0038b544(int, int, unsigned char *, int, int, int, int);
 
 typedef int romwright_code(...);
@@ -22,7 +22,7 @@ extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: FUN_00233db8. */
-/* Supplied declaration required: FUN_002ac8b0. */
+/* Supplied declaration required: multibyteToUtf16. */
 /* Supplied declaration required: FUN_0038b544. */
 
 
@@ -62,7 +62,7 @@ void FUN_0038efb8(int param_1)
         *(unsigned int *)(param_1 + 0xc) = 3;
         return;
       }
-      FUN_002ac8b0(g_aocMain + 0x6d4,g_aocMain + 0x694,0x40);
+      multibyteToUtf16(g_aocMain + 0x6d4,g_aocMain + 0x694,0x40);
       *(unsigned int *)(param_1 + 4) = 0xe;
       *(unsigned int *)(param_1 + 8) = 0;
       if (*(int **)(param_1 + 0x208) != (int *)0x0) {

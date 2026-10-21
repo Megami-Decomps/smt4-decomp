@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e0798(unsigned int);
+int gameDataAddCappedPoints(unsigned int);
 int FUN_00408184(int, unsigned int);
 int FUN_0049cd18(unsigned int *, unsigned int, int);
 int FUN_004a0ef4(unsigned int);
@@ -20,7 +20,7 @@ typedef struct {
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 extern int FUN_00192718(short);
-/* Supplied declaration required: FUN_002e0798. */
+/* Supplied declaration required: gameDataAddCappedPoints. */
 /* Supplied declaration required: FUN_00408184. */
 extern int FUN_0049ccec(short);
 /* Supplied declaration required: FUN_0049cd18. */
@@ -56,7 +56,7 @@ void FUN_004963f8(int param_1,unsigned int param_2,unsigned int param_3,unsigned
       }
       else {
         temp_v1 = FUN_0049ccec(temp_v0);
-        FUN_002e0798(temp_v1 * temp_v3);
+        gameDataAddCappedPoints(temp_v1 * temp_v3);
         temp_v4 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v4 + 2)),temp_v0) & 0xfc00ffff;
         FUN_0049cd18(&temp_v4,-temp_v3,0);
       }

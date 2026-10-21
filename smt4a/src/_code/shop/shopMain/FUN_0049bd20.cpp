@@ -10,20 +10,20 @@ int FUN_004964e0(...);
 int sendEvent1000210(void);
 
 int ifTouchRegionRemove(void);
-int FUN_00184528(int, int);
+int uiSpriteBankApplyPreset(int, int);
 int FUN_0019de98(...);
-int FUN_00224880(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int panelSetTarget(int);
 int FUN_0037e0b8(...);
 int FUN_0038b010(int);
 int FUN_003fd7b4(unsigned int);
 int FUN_0040aad4(int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 int FUN_004954e8(int);
 int FUN_0049706c(...);
 int FUN_00498494(int, int);
-int FUN_00498994(int);
+int messageChoiceShowCurrent(int);
 int FUN_004989f0(...);
 int FUN_00498de0(...);
 int FUN_0049af90(int);
@@ -41,10 +41,10 @@ extern unsigned char LAB_0049c3b4; /* 0x49c3b4 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 
 /* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_00184528. */
+/* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_00284140(int);
 /* Supplied declaration required: FUN_002f0384. */
@@ -57,18 +57,18 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_003fd7b4. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(void);
-/* Supplied declaration required: FUN_0040ace8. */
+/* Supplied declaration required: handleRegistryRegisterObject. */
 /* Supplied declaration required: FUN_004954e8. */
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: FUN_0049706c. */
 /* Supplied declaration required: FUN_00498494. */
-/* Supplied declaration required: FUN_00498994. */
+/* Supplied declaration required: messageChoiceShowCurrent. */
 /* Supplied declaration required: FUN_004989f0. */
 /* Supplied declaration required: FUN_00498de0. */
 /* Supplied declaration required: FUN_0049af90. */
 extern unsigned int FUN_0049cad0(unsigned short *);
 extern int btlRollClamped(unsigned short, unsigned int);
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
 /* Supplied declaration required: sendEvent1000210. */
@@ -107,7 +107,7 @@ void FUN_0049bd20(int param_1)
     if (*(int *)(*(int *)(param_1 + 0x16028) + 4) == 0) {
       FUN_0040aad4(*(int *)(param_1 + 0x16028),0);
       temp_v2 = *(unsigned int *)(*(int *)(param_1 + 0x16028) + 4);
-      FUN_0040ace8(g_handleRegistry,temp_v2);
+      handleRegistryRegisterObject(g_handleRegistry,temp_v2);
       FUN_003fd7b4(temp_v2);
     }
   }
@@ -125,13 +125,13 @@ void FUN_0049bd20(int param_1)
     FUN_0037e0b8(1);
   }
   temp_v1 = FUN_004954e8(param_1);
-  FUN_00498994(param_1);
+  messageChoiceShowCurrent(param_1);
   if ((0 < *(int *)(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb68)) &&
      (temp_v3 = FUN_004d0584(), temp_v3 != 0)) {
     temp_v1 = 1;
   }
   temp_v3 = *(int *)(param_1 + 0xb40);
-  temp_v4 = FUN_004cfe4c(param_1 + temp_v3 * 0x74 + 0xb60);
+  temp_v4 = flaggedValueHolderGetTotal(param_1 + temp_v3 * 0x74 + 0xb60);
   puVar7 = (unsigned short *)(param_1 + temp_v3 * 0x1002 + 0xf74 + temp_v4 * 4);
   if (*(int *)(param_1 + 0xb40) != 8) {
     temp_v2 = FUN_0049cad0(puVar7);
@@ -158,7 +158,7 @@ LAB_0049be70:
       }
       if (!(temp_v1 == 0 || temp_v0 == '\0')) {
         FUN_0038b010(0);
-        FUN_00184528(param_1 + 0x3cc,1);
+        uiSpriteBankApplyPreset(param_1 + 0x3cc,1);
         sendEvent100020F();
         FUN_0049af90(param_1);
         releaseEntriesB(*(unsigned int *)(param_1 + 0xb3c));
@@ -193,7 +193,7 @@ LAB_0049be70:
           if (*(int *)(param_1 + 0x1601c) >= 2) {
             temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_0049c3b4);
             scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
-            FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
+            scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
             FUN_004989f0(param_1,1);
             *(unsigned int *)(param_1 + 8) = 3;
             FUN_0019de98(0,0xf4f4f4ff);
@@ -219,7 +219,7 @@ LAB_0049be70:
           if (*(int *)(param_1 + 0x1601c) >= 2) {
             temp_v2 = tableGroupFindEntryIndex(*(unsigned int *)(param_1 + 0x184),&LAB_0049c3b4);
             scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x18c),temp_v2);
-            FUN_00224880(*(unsigned int *)(param_1 + 0x18c));
+            scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
             FUN_004989f0(param_1,2);
             *(unsigned int *)(param_1 + 8) = 4;
             FUN_0019de98(0,0xf4f4f4ff);

@@ -17,7 +17,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0014afd0. */
-extern int FUN_00153f64(unsigned int, int);
+extern int asdTMTexTableGetHeaderValue(unsigned int, int);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int dataTable2EGetEntry(int);
 /* Supplied declaration required: dataTable2ECount. */
@@ -93,7 +93,7 @@ void FUN_0048821c(int param_1,int param_2)
     } while (temp_v4 < temp_v3);
   }
   FUN_0014afd0(0x28,*piVar9);
-  temp_v3 = FUN_00153f64(0x28,*piVar9);
+  temp_v3 = asdTMTexTableGetHeaderValue(0x28,*piVar9);
   temp_v4 = 0;
   temp_v5 = 0x20;
   *(unsigned int *)(temp_v3 + 0x3c) = 1;

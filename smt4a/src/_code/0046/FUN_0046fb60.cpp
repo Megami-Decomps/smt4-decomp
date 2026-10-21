@@ -20,7 +20,7 @@ extern int g_aocMain; /* 0x570260 */
 extern int objGetFlagBit0(unsigned int *);
 extern int objGetFlagBit1(void);
 extern unsigned char *FUN_001d25a0(unsigned int, unsigned int);
-extern int FUN_001d25ec(unsigned char *);
+extern int legacyResourceIdRemap(unsigned char *);
 /* Supplied declaration required: FUN_005004a8. */
 
 
@@ -46,10 +46,10 @@ void FUN_0046fb60(unsigned int param_1,int param_2)
   FUN_005004a8(&temp_v9,param_2 + 8,temp_v8,temp_v7,0x20,0);
   *(unsigned int *)(puVar1 + 4) = temp_v9;
   *(unsigned int *)(puVar1 + 8) = uStack_1c;
-  temp_v0 = FUN_001d25ec(puVar1 + 4);
+  temp_v0 = legacyResourceIdRemap(puVar1 + 4);
   if (temp_v0 < 0) {
     *puVar1 = 100;
-    temp_v0 = FUN_001d25ec(puVar1 + 4);
+    temp_v0 = legacyResourceIdRemap(puVar1 + 4);
     if (temp_v0 != -0x36bec6eb) {
       if ((*(unsigned int *)(g_aocMain + 0x754) & 0x100) == 0) {
         temp_v1 = 0x96;

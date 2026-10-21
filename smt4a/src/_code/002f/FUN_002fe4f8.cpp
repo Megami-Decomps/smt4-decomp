@@ -1,36 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fe4f8` (_code @ 0x2fe4f8, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: constructor requires native class recovery; member initialization and saved registers differ. */
+#include "common.h"
+
+struct RequestState {
+    u8 unk00[0x6c]; // 0x00
+    u32 first;       // 0x6c
+    u32 second;      // 0x70
+    s32 status;      // 0x74
+    u32 unk78;       // 0x78
+    u32 third;       // 0x7c
+    u32 fourth;      // 0x80
+    u32 parameter;   // 0x84
+    u32 fifth;       // 0x88
+    u32 context;     // 0x8c
+};
+
+struct RequestObject {
+    const void* vtable; // 0x00
+    RequestState state; // 0x04
+};
 
 extern "C" {
+extern const u32 DAT_0055b2d0[];
+RequestState* FUN_002fd5d4(RequestState* state, u32 first, u32 second, u32 parameter);
+void FUN_002fe39c(RequestObject* object, u32 second);
 
-int FUN_002fe39c(int, unsigned int);
-
-extern unsigned char DAT_0055b2d0; /* 0x55b2d0 */
-
-extern int FUN_002fd5d4(unsigned int *, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002fe39c. */
-
-
-int FUN_002fe4f8(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                unsigned int param_5)
-
+// Initialize request state and bind its request-specific parameters.
+RequestObject* FUN_002fe4f8(RequestObject* object, u32 first, u32 second, u32 parameter, u32 context)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  *param_1 = (unsigned int)&DAT_0055b2d0;
-  temp_v0 = FUN_002fd5d4(param_1 + 1,param_2,param_3,param_4,param_4);
-  *(unsigned int *)(temp_v0 + 0x70) = 0;
-  *(unsigned int *)(temp_v0 + 0x6c) = 0;
-  *(unsigned int *)(temp_v0 + 0x74) = 0xffffffff;
-  *(unsigned int *)(temp_v0 + 0x80) = 0;
-  *(unsigned int *)(temp_v0 + 0x7c) = 0;
-  *(unsigned int *)(temp_v0 + 0x8c) = param_5;
-  *(unsigned int *)(temp_v0 + 0x84) = param_4;
-  *(unsigned int *)(temp_v0 + 0x88) = 0;
-  FUN_002fe39c(temp_v0 - 4,param_3);
-  return temp_v0 - 4;
+    object->vtable = DAT_0055b2d0;
+    FUN_002fd5d4(&object->state, first, second, parameter);
+    object->state.second = 0;
+    object->state.first = 0;
+    object->state.status = -1;
+    object->state.fourth = 0;
+    object->state.third = 0;
+    object->state.context = context;
+    object->state.parameter = parameter;
+    object->state.fifth = 0;
+    FUN_002fe39c(object, second);
+    return object;
 }
-
-} /* extern "C" */
+}

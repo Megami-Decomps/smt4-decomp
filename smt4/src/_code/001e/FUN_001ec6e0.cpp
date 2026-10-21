@@ -11,7 +11,7 @@ int FUN_002597c0(void);
 int FUN_00262f78(void);
 int btlTalkBustUpCreate(void);
 int fileSlotLoad(int);
-int FUN_00297468(unsigned char *, int *, int);
+int asdLoadFileAsyncSimple(unsigned char *, int *, int);
 int asdTMTexTableLoadEntryAsync(int, int);
 int threadSleepDuration(...);
 int FUN_002bd2b4(...);
@@ -58,7 +58,7 @@ extern unsigned int FUN_00259800(void);
 /* Supplied declaration required: FUN_00262f78. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 /* Supplied declaration required: fileSlotLoad. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: asdTMTexTableLoadEntryAsync. */
 /* Supplied declaration required: threadSleepDuration. */
 /* Supplied declaration required: FUN_002bd2b4. */
@@ -98,10 +98,10 @@ void FUN_001ec6e0(fn_001ec6e0_arg0 *param_1)
       cecProcessStart();
       fileSlotLoad(0x25);
       btlTalkBustUpCreate();
-      FUN_00297468(&LAB_001ec94c,&param_1->field_0xcec,0);
-      FUN_00297468(&LAB_001ec964,&param_1->field_0xcf0,0);
-      FUN_00297468(&LAB_001ec97c,&param_1->field_0xcf4,0);
-      FUN_00297468(&LAB_001ec990,temp_v6,0);
+      asdLoadFileAsyncSimple(&LAB_001ec94c,&param_1->field_0xcec,0);
+      asdLoadFileAsyncSimple(&LAB_001ec964,&param_1->field_0xcf0,0);
+      asdLoadFileAsyncSimple(&LAB_001ec97c,&param_1->field_0xcf4,0);
+      asdLoadFileAsyncSimple(&LAB_001ec990,temp_v6,0);
       asdTMTexTableLoadSprites(0x39);
       asdTMTexTableLoadEntryAsync(0x39,0);
       temp_v4 = FUN_00259800();

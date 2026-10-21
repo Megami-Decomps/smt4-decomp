@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002c0b98(...);
-int FUN_002c0dbc(int, int);
+int mapCollisionQueueQuad(int, int);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_002c0b98. */
-/* Supplied declaration required: FUN_002c0dbc. */
+/* Supplied declaration required: mapCollisionQueueQuad. */
 
 
 void FUN_00331efc(void)
@@ -34,7 +34,7 @@ void FUN_00331efc(void)
   temp_v2 = gameFlagsGetBlock();
   VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe04),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)*(char *)(temp_v2 + 0xe05),(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002c0dbc(0,0);
+  mapCollisionQueueQuad(0,0);
   temp_v5 = 1;
   if (temp_v5 < *(char *)(temp_v2 + 0xe05) - 1) {
     do {

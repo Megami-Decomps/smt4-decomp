@@ -5,14 +5,14 @@
 extern "C" {
 
 int controllerSetDestination(int, int *);
-int FUN_003fdb18(int);
+int controllerSetRotationEulerDegrees(int);
 
 int ptrListRemoveClearOwner(unsigned int);
 int FUN_001f3eec(void);
 int FUN_00281b94(int);
 int FUN_00294854(void);
-int FUN_002b5cb4(void);
-int FUN_002ddda4(...);
+int distSpatial(void);
+int mapTableValueSet(...);
 int FUN_00319f64(int);
 int FUN_00352e9c(int, int);
 int FUN_003b51a4(void);
@@ -20,7 +20,7 @@ int FUN_003d2150(void);
 int FUN_003fd7c0(...);
 int FUN_003fd924(...);
 int FUN_003fe86c(...);
-int FUN_004ff920(int);
+int candidateGetPreferredValue(int);
 int FUN_004ff98c(...);
 int VectorSignedToFloat(int, int);
 
@@ -39,15 +39,15 @@ extern signed char DAT_005f161f; /* 0x5f161f */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
-extern int FUN_0016345c(void);
+extern int querySlotHasHandle(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: FUN_00281b94. */
 /* Supplied declaration required: FUN_00294854. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 extern int FUN_002ddd7c(void);
-/* Supplied declaration required: FUN_002ddda4. */
+/* Supplied declaration required: mapTableValueSet. */
 /* Supplied declaration required: FUN_00319f64. */
 extern int FUN_0033bfac(void);
 extern int FUN_00352cd8(int);
@@ -57,13 +57,13 @@ extern int FUN_00352cd8(int);
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 extern int FUN_0040ab8c(int);
-/* Supplied declaration required: FUN_004ff920. */
+/* Supplied declaration required: candidateGetPreferredValue. */
 extern int FUN_004ff970(unsigned int);
 /* Supplied declaration required: FUN_004ff98c. */
-extern int FUN_004ff9b4(unsigned int);
+extern int animationIsClipComplete(unsigned int);
 extern int FUN_004ffa14(int);
 extern int slots4FGetActiveValue(int);
 extern int FUN_004ffba8(int);
@@ -177,7 +177,7 @@ void FUN_002737a8(void)
                 g_mapGimic[0x1b] = temp_v2;
                 break;
               case 2:
-                FUN_004ff920(temp_v1);
+                candidateGetPreferredValue(temp_v1);
                 piVar2 = g_mapGimic;
                 if (in_s0 >= 0x42700000) {
                   g_mapGimic[0x1b] = 3;
@@ -190,7 +190,7 @@ void FUN_002737a8(void)
                 FUN_001f3eec();
                 in_s0 = (int)temp_v8;
                 g_mapGimic[0x1c] = g_mapGimic[0x1c] + 1;
-                FUN_002ddda4(in_s0);
+                mapTableValueSet(in_s0);
                 temp_v2 = FUN_004ffba8(temp_v1);
                 if (temp_v2 == 0) break;
                 in_s0 = (int)temp_v9;
@@ -200,7 +200,7 @@ void FUN_002737a8(void)
                 break;
               case 4:
                 temp_v7 = 0;
-                FUN_002ddda4(temp_v7);
+                mapTableValueSet(temp_v7);
               }
             }
             else {
@@ -209,7 +209,7 @@ void FUN_002737a8(void)
               temp_v2 = FUN_002ddd7c();
               if (temp_v2 != -0xff) {
                 temp_v7 = 0xffffff01;
-                FUN_002ddda4(temp_v7);
+                mapTableValueSet(temp_v7);
               }
             }
           }
@@ -312,7 +312,7 @@ void FUN_002737a8(void)
             }
             if ((short)piVar1[temp_v4 * 0xf + 0x29] == 0) {
               temp_v8 = (float)piVar1[temp_v4 * 0xf + 0x25];
-              FUN_002b5cb4();
+              distSpatial();
               temp_v2 = (int)temp_v8;
               in_s0 = temp_v2;
               if (temp_v2 < 0x3e9) {
@@ -504,7 +504,7 @@ LAB_00274348:
           if (*(char *)((int)piVar1 + temp_v4 * 0x3c + 0x91) != '\0') {
             controllerSetDestination(temp_v1,piVar1 + temp_v4 * 0xf + 0x25);
             in_s0 = (int)temp_v9;
-            FUN_003fdb18(temp_v1);
+            controllerSetRotationEulerDegrees(temp_v1);
             temp_v2 = slots4FGetActiveValue(temp_v1);
             if (temp_v2 != (short)piVar1[temp_v4 * 0xf + 0x29]) {
               in_s0 = (int)temp_v9;
@@ -529,7 +529,7 @@ LAB_00274348:
             temp_v7 = *(unsigned int *)(g_mapGimic[temp_v0 * 6 + 0x233] + 4);
             temp_v4 = FUN_004ff970(temp_v7);
             if ((temp_v4 == *(short *)((int)piVar1 + temp_v0 * 0x18 + 0x8c6)) &&
-               (temp_v4 = FUN_004ff9b4(temp_v7), temp_v4 != 0)) {
+               (temp_v4 = animationIsClipComplete(temp_v7), temp_v4 != 0)) {
               temp_v4 = piVar1[temp_v0 * 6 + 0x234];
               piVar1[temp_v0 * 6 + 0x234] = temp_v4 - 1;
               if (temp_v4 - 1 < 1) {
@@ -549,7 +549,7 @@ LAB_00274348:
                 (temp_v4 = FUN_0040ab8c(piVar1[temp_v0 * 6 + 0x233]), temp_v4 != 0)) &&
                (temp_v4 = *(int *)(piVar1[temp_v0 * 6 + 0x233] + 4), temp_v4 != 0)) {
               *(unsigned char *)(piVar1 + temp_v0 * 6 + 0x236) = 1;
-              temp_v1 = FUN_0016345c();
+              temp_v1 = querySlotHasHandle();
               if (temp_v1 != 0) {
                 temp_v1 = FUN_004ff98c(temp_v4);
                 if (temp_v1 != 2) {

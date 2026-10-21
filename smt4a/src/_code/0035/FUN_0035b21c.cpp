@@ -10,7 +10,7 @@ int asdTMTexTableReleaseNode(int, int);
 int scrScriptProcessDestroy(void);
 int FUN_002c85b0(int);
 int asdTMTexTableFreeEntry(int);
-int FUN_00318d6c(void);
+int helpTexturesRelease(void);
 int FUN_00333f6c(void);
 int FUN_003343f0(int);
 int uiFadeClose(void);
@@ -44,7 +44,7 @@ extern unsigned int *DAT_0057f214; /* 0x57f214 */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_002c85b0. */
 /* Supplied declaration required: asdTMTexTableFreeEntry. */
-/* Supplied declaration required: FUN_00318d6c. */
+/* Supplied declaration required: helpTexturesRelease. */
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: uiFadeClose. */
@@ -88,7 +88,7 @@ void FUN_0035b21c(fn_0035b21c_arg0 *param_1,unsigned int param_2,unsigned int pa
   }
   if (param_1->field_0x1c != 0) {
     campButtonHelpRelease();
-    FUN_00318d6c();
+    helpTexturesRelease();
     param_1->field_0x1c = 0;
   }
   puVar1 = DAT_0057f20c;

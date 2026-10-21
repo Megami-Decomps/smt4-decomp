@@ -4,7 +4,7 @@
 extern "C" {
 
 extern u8 DAT_005b40c8;
-extern void FUN_0014374c(void);
+extern void globalBlockGetFirst(void);
 extern s32 FUN_001a0380(void);
 extern void FUN_0013ebd8(void);
 
@@ -14,7 +14,7 @@ bool FUN_001387c0(void)
     if (DAT_005b40c8 == 0) {
         return true;
     }
-    FUN_0014374c();
+    globalBlockGetFirst();
     s32 status = FUN_001a0380();
     FUN_0013ebd8();
     if (status >= 0) {

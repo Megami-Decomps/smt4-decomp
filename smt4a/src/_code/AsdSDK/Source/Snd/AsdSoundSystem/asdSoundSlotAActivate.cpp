@@ -1,130 +1,88 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `asdSoundSlotAActivate` (_code @ 0x141da8, 0x1a0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: O3 drops the selector's active recheck, splits duck timing stores and reloads flags; pointer/register scheduling differs. */
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+
+struct SoundSlotSystemApoc {
+    u8 unk000[0x764];
+    AsdSndSlotA slotsA[ASD_SND_SLOT_A_COUNT];
+    u8 unk854[0xad0];
+    AsdSndSlotA *currentSlotA;
+};
+
+struct SoundDuckBlockApoc {
+    AsdSndDuck duck;
+    AsdSndStatusApoc status;
+};
 
 extern "C" {
-
-int asdMemoryAlloc(int, int, int, int, int);
-int FUN_001742e4(int, int);
-int nw_snd_SoundHeap_Create(int, unsigned int, int);
-int nw_snd_SoundHeap_LoadState(int, unsigned int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char DAT_0063e984; /* 0x63e984 */
-extern unsigned char DAT_0063e986; /* 0x63e986 */
-extern unsigned char DAT_0063e987; /* 0x63e987 */
-extern unsigned int g_asdSoundDuck; /* 0x63f4c8 */
-extern unsigned int DAT_0063f4cc; /* 0x63f4cc */
-extern unsigned int DAT_0063f4d0; /* 0x63f4d0 */
-extern unsigned int DAT_0063f4d4; /* 0x63f4d4 */
-extern unsigned int DAT_0063f4d8; /* 0x63f4d8 */
-extern unsigned char DAT_0063f4e0; /* 0x63f4e0 */
-extern unsigned char DAT_0063f4e2; /* 0x63f4e2 */
-extern signed char DAT_0063f4ff; /* 0x63f4ff */
-extern int DAT_0063f50c; /* 0x63f50c */
-
-/* Supplied declaration required: asdMemoryAlloc. */
-/* Supplied declaration required: FUN_001742e4. */
-/* Supplied declaration required: nw_snd_SoundHeap_Create. */
-/* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
-extern unsigned int nw_snd_SoundHeap_SaveState(int);
-
-
-unsigned int asdSoundSlotAActivate(unsigned int param_1,int param_2)
-
-{
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  
-  if (param_1 < 4) {
-    temp_v0 = param_1 * 0x3c;
-    if ((&DAT_0063e986)[temp_v0] == '\0') {
-      if (param_2 != 0) {
-        temp_v1 = 0x10000;
-        asdMemoryAlloc(0x10000,0x100,0,param_2,1);
-        *(unsigned int *)(temp_v0 + 0x63e97c) = temp_v1;
-        nw_snd_SoundHeap_Create(temp_v0 + 0x63e94c,temp_v1,param_2);
-        temp_v1 = nw_snd_SoundHeap_SaveState(temp_v0 + 0x63e94c);
-        *(unsigned int *)(temp_v0 + 0x63e980) = temp_v1;
-        (&DAT_0063e987)[temp_v0] = 1;
-      }
-      (&DAT_0063e986)[temp_v0] = 1;
-      *(char *)(temp_v0 + 0x63e985) = (char)param_1;
-      (&DAT_0063e984)[temp_v0] = 0x40;
-      g_asdSoundDuck = 0x3f000000;
-      DAT_0063f4e0 = DAT_0063f4e0 | 1;
-      DAT_0063f4cc = 0x1e;
-      DAT_0063f4d0 = 0x1e;
-      DAT_0063f4d4 = 0xf;
-      DAT_0063f4d8 = 0xf;
-      if (DAT_0063f4ff != '\0') {
-        DAT_0063f4e2 = 1;
-      }
-      temp_v2 = 0;
-      while ((&DAT_0063e986)[temp_v2 * 0x3c] == '\0') {
-        temp_v2 = temp_v2 + 1;
-        if ((int)temp_v2 >= 4) {
-          DAT_0063f4d8 = 0xf;
-          DAT_0063f4d4 = 0xf;
-          DAT_0063f4d0 = 0x1e;
-          DAT_0063f4cc = 0x1e;
-          g_asdSoundDuck = 0x3f000000;
-          return 1;
-        }
-      }
-      if (temp_v2 == 0xffffffff) {
-        g_asdSoundDuck = 0x3f000000;
-        DAT_0063f4cc = 0x1e;
-        DAT_0063f4d0 = 0x1e;
-        DAT_0063f4d4 = 0xf;
-        DAT_0063f4d8 = 0xf;
-        DAT_0063f50c = 0;
-        return 1;
-      }
-      if (temp_v2 >= 4) {
-        g_asdSoundDuck = 0x3f000000;
-        DAT_0063f4cc = 0x1e;
-        DAT_0063f4d0 = 0x1e;
-        DAT_0063f4d4 = 0xf;
-        DAT_0063f4d8 = 0xf;
-        return 1;
-      }
-      temp_v0 = temp_v2 * 0x3c;
-      if ((&DAT_0063e986)[temp_v0] == '\0') {
-        g_asdSoundDuck = 0x3f000000;
-        DAT_0063f4cc = 0x1e;
-        DAT_0063f4d0 = 0x1e;
-        DAT_0063f4d4 = 0xf;
-        DAT_0063f4d8 = 0xf;
-        return 1;
-      }
-      if (DAT_0063f4e0 != 0) {
-        temp_v4 = 0;
-        do {
-          temp_v3 = *(int *)(temp_v0 + 0x63e94c + temp_v4 * 4 + 0x20);
-          if (temp_v3 != 0) {
-            FUN_001742e4(temp_v3,0);
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < 4);
-        (&DAT_0063e984)[temp_v0] = 0x40;
-        if ((&DAT_0063e987)[temp_v0] != '\0') {
-          nw_snd_SoundHeap_LoadState(temp_v0 + 0x63e94c,*(unsigned int *)(temp_v0 + 0x63e980));
-        }
-      }
-      DAT_0063f50c = temp_v0 + 0x63e94c;
-      return 1;
-    }
-  }
-  return 0;
+extern SoundSlotSystemApoc g_asdSoundSystem;
+extern AsdSndDuck g_asdSoundDuck;
+void *asdMemoryAlloc(s32 heap, u32 alignment, u32 flags, s32 size, u32 fromFront);
+u32 nw_snd_SoundHeap_Create(void *heap, void *buffer, u32 size);
+u32 nw_snd_SoundHeap_SaveState(void *heap);
+void nw_snd_SoundHeap_LoadState(void *heap, u32 state);
+void asdSoundObjectStop(AsdSndObject *sound, s32 frames);
 }
 
-} /* extern "C" */
+static inline void selectActiveSoundSlotA(u32 index, u32 reset)
+{
+    if (index == ~0u) {
+        g_asdSoundSystem.currentSlotA = NULL;
+        return;
+    }
+    if (index >= ASD_SND_SLOT_A_COUNT) {
+        return;
+    }
+    AsdSndSlotA *slot = &g_asdSoundSystem.slotsA[index];
+    if (slot->active == 0) {
+        return;
+    }
+    if (reset != 0) {
+        for (s32 i = 0; i < 4; ++i) {
+            if (slot->handles[i] != 0) {
+                asdSoundObjectStop(reinterpret_cast<AsdSndObject *>(slot->handles[i]), 0);
+            }
+        }
+        slot->volume = ASD_SND_VOLUME_DEFAULT;
+        if (slot->hasHeap != 0) {
+            nw_snd_SoundHeap_LoadState(slot, slot->savedState);
+        }
+    }
+    g_asdSoundSystem.currentSlotA = slot;
+}
+
+extern "C" u32 asdSoundSlotAActivate(u32 index, s32 heapSize)
+{
+    if (index >= ASD_SND_SLOT_A_COUNT || g_asdSoundSystem.slotsA[index].active != 0) {
+        return 0;
+    }
+    AsdSndSlotA *slot = &g_asdSoundSystem.slotsA[index];
+    if (heapSize != 0) {
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 0x134a);
+        slot->heapBuffer = asdMemoryAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, heapSize, 1);
+        nw_snd_SoundHeap_Create(slot, slot->heapBuffer, heapSize);
+        slot->savedState = nw_snd_SoundHeap_SaveState(slot);
+        slot->hasHeap = 1;
+    }
+    slot->active = 1;
+    slot->index = index;
+    slot->volume = ASD_SND_VOLUME_DEFAULT;
+    SoundDuckBlockApoc &duckState = *reinterpret_cast<SoundDuckBlockApoc *>(&g_asdSoundDuck);
+    duckState.duck.level = 0.5f;
+    duckState.duck.flags |= 1;
+    duckState.duck.holdFrames = 30;
+    duckState.duck.unk08 = 30;
+    duckState.duck.fadeInFrames = 15;
+    duckState.duck.fadeOutFrames = 15;
+    if (duckState.status.hasStream != 0) {
+        duckState.duck.active = 1;
+    }
+    for (s32 i = 0; i < ASD_SND_SLOT_A_COUNT; ++i) {
+        if (g_asdSoundSystem.slotsA[i].active != 0) {
+            selectActiveSoundSlotA(i, duckState.duck.flags);
+            break;
+        }
+    }
+    return 1;
+}

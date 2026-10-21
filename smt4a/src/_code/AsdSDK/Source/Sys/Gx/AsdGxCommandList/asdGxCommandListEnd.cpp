@@ -5,7 +5,7 @@ extern "C" {
 extern AsdGxState g_asdGxState;
 extern AsdGxCommandList *g_asdGxCommandListStack[];
 
-void FUN_0017d920(u32 param, u32 *out);
+void gxGetCommandListParameter(u32 param, u32 *out);
 void FUN_0017dd84(void);
 void FUN_0017dfa8(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
@@ -39,7 +39,7 @@ void asdGxCommandListEnd(AsdGxCommandList *list, s32 restoreCopy, u32 unk08, u32
         asdModelResetCommandBuffer();
         nngxBindCmdlist(list->boundList);
         if (restoreCopy != 0 && list->entries[0].copy != NULL) {
-            FUN_0017d920(0x207, &bound);
+            gxGetCommandListParameter(0x207, &bound);
             FUN_0017db14(bound, list->entries[0].copy, list->entries[0].copySize);
             nngxGetError();
         }

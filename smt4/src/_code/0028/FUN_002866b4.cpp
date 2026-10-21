@@ -5,13 +5,13 @@
 extern "C" {
 
 int messageSlotSet(int);
-int FUN_0028dc98(unsigned int);
+int scrCommMessageSetMode(unsigned int);
 int scrSetResult(unsigned int);
 int FUN_0028dcf4(int, int);
 int FUN_0028e6d0(...);
 int FUN_002b8244(void);
 int buttonHelpSetPreset(int);
-int FUN_002b89e4(int, int);
+int titleOverlaySetModeAnimation(int, int);
 int msgBoxFlagsClear(unsigned int, int);
 int objFlagsSetBits(unsigned int, int);
 
@@ -28,7 +28,7 @@ extern int DAT_0043e190; /* 0x43e190 */
 extern int DAT_0043e194; /* 0x43e194 */
 
 /* Supplied declaration required: messageSlotSet. */
-/* Supplied declaration required: FUN_0028dc98. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: scrSetResult. */
 extern int buttonHelpGetEntryValue(unsigned int);
 /* Supplied declaration required: FUN_0028dcf4. */
@@ -37,13 +37,13 @@ extern unsigned int FUN_002b753c(unsigned int);
 /* Supplied declaration required: FUN_002b8244. */
 extern int FUN_002b8660(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern unsigned char FUN_002b898c(void);
-/* Supplied declaration required: FUN_002b89e4. */
+extern unsigned char buttonHelpGetStatus(void);
+/* Supplied declaration required: titleOverlaySetModeAnimation. */
 /* Supplied declaration required: msgBoxFlagsClear. */
 extern int FUN_002c1d5c(void);
 /* Supplied declaration required: objFlagsSetBits. */
 extern unsigned short FUN_002d6624(unsigned int);
-extern unsigned char FUN_002f5b74(unsigned int);
+extern unsigned char buttonHelpGetSlotByte(unsigned int);
 
 
 unsigned int
@@ -115,7 +115,7 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
       }
       if (temp_v2 == 0 || temp_v6 == '\0') {
         scrSetResult(*(unsigned int *)(temp_v5 + 0x18));
-        FUN_0028dc98(0xffffffff);
+        scrCommMessageSetMode(0xffffffff);
         messageSlotSet(0);
         return 1;
       }
@@ -174,7 +174,7 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
       temp_v3 = 0;
       *(unsigned char *)(temp_v5 + 0xa12) = 0;
       do {
-        temp_v0 = FUN_002f5b74(temp_v3 & 0xff);
+        temp_v0 = buttonHelpGetSlotByte(temp_v3 & 0xff);
         *(unsigned char *)(temp_v5 + temp_v3 + 0xa13) = temp_v0;
         temp_v1 = FUN_002d6624(temp_v3 & 0xff);
         temp_v2 = temp_v3 * 2;
@@ -185,7 +185,7 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
       if (((temp_v6 == '\a' || temp_v6 == '\b') || temp_v6 == '\t') &&
          (temp_v2 = buttonHelpGetEntryValue(0), temp_v2 == 5)) {
         *(unsigned char *)(temp_v5 + 0xa26) = 1;
-        temp_v0 = FUN_002b898c();
+        temp_v0 = buttonHelpGetStatus();
         *(unsigned char *)(temp_v5 + 0xa12) = temp_v0;
         buttonHelpSetPreset(0xdc);
       }
@@ -197,7 +197,7 @@ FUN_002866b4(unsigned int param_1,unsigned int param_2,int param_3,int param_4,i
     }
     *(unsigned char *)(temp_v5 + 0x2e) = 1;
   }
-  FUN_002b89e4(temp_v5,*(unsigned char *)(temp_v5 + 9));
+  titleOverlaySetModeAnimation(temp_v5,*(unsigned char *)(temp_v5 + 9));
   *(unsigned char *)(temp_v5 + 8) = 3;
   *(unsigned char *)(temp_v5 + 0x35) = 0;
   return 0;

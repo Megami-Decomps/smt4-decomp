@@ -7,14 +7,14 @@ extern "C" {
 int FUN_00275b10(int);
 int eventTexSetJobParam(void);
 int scrSetResult(unsigned int);
-int FUN_00389f60(unsigned int);
+int eventTexStoreHandle(unsigned int);
 int FUN_0039b0f8(unsigned int);
 
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: FUN_00275b10. */
 /* Supplied declaration required: eventTexSetJobParam. */
 /* Supplied declaration required: scrSetResult. */
-/* Supplied declaration required: FUN_00389f60. */
+/* Supplied declaration required: eventTexStoreHandle. */
 /* Supplied declaration required: FUN_0039b0f8. */
 extern int eventTexHasMissingValue(void);
 
@@ -35,7 +35,7 @@ unsigned int FUN_002e5618(void)
   if (temp_v1 != 0) {
     FUN_0039b0f8(temp_v0);
     eventTexSetJobParam();
-    FUN_00389f60(temp_v0);
+    eventTexStoreHandle(temp_v0);
     temp_v2 = temp_v0;
   }
   scrSetResult(temp_v2);

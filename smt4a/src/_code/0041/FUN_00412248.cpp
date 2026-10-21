@@ -22,7 +22,7 @@ typedef struct {
 
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Supplied declaration required: btlGetMainState. */
@@ -70,7 +70,7 @@ void FUN_00412248(unsigned int *param_1)
         }
       }
       else {
-        temp_v1 = FUN_004fa0d8(DAT_00573808);
+        temp_v1 = FUN_004fa0d8(g_btlAux);
         if (temp_v1 != 0) {
           param_1[4] = param_1[4] + 1;
           return;
@@ -78,10 +78,10 @@ void FUN_00412248(unsigned int *param_1)
       }
     }
     else {
-      temp_v1 = DAT_00573808;
-      FUN_004f9b94(DAT_00573808,1);
+      temp_v1 = g_btlAux;
+      FUN_004f9b94(g_btlAux,1);
       if (temp_v1 != 0) {
-        FUN_004f950c(DAT_00573808,1);
+        FUN_004f950c(g_btlAux,1);
         param_1[4] = param_1[4] + 1;
         return;
       }
@@ -111,7 +111,7 @@ void FUN_00412248(unsigned int *param_1)
     return;
   case 7:
     *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xffffbfff;
-    FUN_004f8f08(DAT_00573808);
+    FUN_004f8f08(g_btlAux);
     temp_v0 = 0;
     param_1[2] = temp_v0;
     return;

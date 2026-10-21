@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0010b3de` (_code @ 0x10b3de, 0x32 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_ChunkPool.h"
+
+struct WordTreeNode;
 
 extern "C" {
 
@@ -19,7 +22,7 @@ struct fn_0010b3de_arg0 {
     undefined4 field_0x20; /* +0x20 */
 };
 
-extern void *FUN_002f49cc(void);
+extern WordTreeNode* nodePoolAcquireWordTreeNode(ChunkPool*);
 
 
 int FUN_0010b3de(fn_0010b3de_arg0 *param_1,unsigned int param_2)
@@ -35,7 +38,7 @@ int FUN_0010b3de(fn_0010b3de_arg0 *param_1,unsigned int param_2)
   param_1->field_0x10 = 0;
   param_1->field_0xc = 0;
   param_1->field_0x8 = 0;
-  pvVar1 = (void *)FUN_002f49cc();
+  pvVar1 = (void *)nodePoolAcquireWordTreeNode((ChunkPool*)((unsigned char*)param_1 + 4));
   param_1->field_0x14 = pvVar1;
   *(unsigned int *)((int)pvVar1 + 4) = 0;
   *(void **)((int)param_1->field_0x14 + 8) = param_1->field_0x14;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004dd800` (_code @ 0x4dd800, 0x504 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
 
@@ -9,15 +10,14 @@ int FUN_004a9308(...);
 int dataTable04FindById(void);
 int FUN_003e8bb0(...);
 int FUN_004c9160(...);
-int FUN_004e0114(...);
 int FUN_004e5a90(...);
 int FUN_004e5b5c(...);
 int FUN_004e6880(...);
 int FUN_004e7c04(...);
 int FUN_004e8454(...);
 int FUN_004e8b54(int *, unsigned int *);
-int FUN_004e9168(...);
-int FUN_004e9f74(...);
+int btlActionClassifyTargetSide(...);
+int btlUnitMarkTargetCandidates(...);
 int FUN_004eb838(...);
 int FUN_004fd508(unsigned int, unsigned int *, int, unsigned int, int);
 
@@ -44,15 +44,14 @@ extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004c9160. */
-/* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004e5a90. */
 /* Supplied declaration required: FUN_004e5b5c. */
 /* Supplied declaration required: FUN_004e6880. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: FUN_004e8454. */
 /* Supplied declaration required: FUN_004e8b54. */
-/* Supplied declaration required: FUN_004e9168. */
-/* Supplied declaration required: FUN_004e9f74. */
+/* Supplied declaration required: btlActionClassifyTargetSide. */
+/* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: FUN_004eb838. */
 /* Supplied declaration required: FUN_004fd508. */
 
@@ -83,7 +82,7 @@ void FUN_004dd800(int *param_1,unsigned int *param_2)
     }
     FUN_004c9160(0x29,param_2[8],0,1);
     FUN_004fd508(temp_v5,param_2,0,param_2[9],1);
-    FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
     temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
 LAB_004ddb40:
     *(unsigned char *)(temp_v1 + 9) = 0x1d;
@@ -103,7 +102,7 @@ LAB_004ddb40:
           }
           FUN_004c9160(0x29,param_2[8],0,1);
           FUN_004fd508(temp_v5,param_2,0,param_2[9],1);
-          FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
+      btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
           temp_v1 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
           goto LAB_004ddb40;
         }
@@ -112,7 +111,7 @@ LAB_004ddb40:
       FUN_004e8454(param_1);
       temp_v6 = 0;
       temp_v7 = 0;
-      FUN_004e9168(param_1,param_2[8],piVar3,&temp_v6,&temp_v7);
+      btlActionClassifyTargetSide(param_1,param_2[8],piVar3,&temp_v6,&temp_v7);
       if (temp_v6 == 1) {
         temp_v6 = 0;
       }
@@ -126,7 +125,7 @@ LAB_004ddb40:
       FUN_003e8bb0(temp_v8,*param_1,param_2[8]);
       if (temp_v7 != 0) {
         if (temp_v7 == 1 || temp_v7 == 2) {
-          FUN_004e9f74(param_1,temp_v6);
+          btlUnitMarkTargetCandidates(param_1,temp_v6);
         }
       }
       else {
@@ -169,7 +168,7 @@ LAB_004ddb40:
         *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v4) = temp_v2 & 0xfffffffb;
         *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v4) = temp_v2 & 0xfffffff3;
       } while (temp_v3 != 0);
-      FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
       FUN_004eb838(param_1,param_2);
       *(unsigned char *)((int)param_2 + 0x59d) = 1;
       temp_v2 = param_2[8];
@@ -193,11 +192,11 @@ LAB_004ddb48:
       if (temp_v9 != '\0') {
         if (temp_v9 != '\x01') {
           if (temp_v9 == '\x02') {
-            FUN_004e9f74(param_1,temp_v0,2);
+            btlUnitMarkTargetCandidates(param_1,temp_v0,2);
           }
         }
         else {
-          FUN_004e9f74(param_1,temp_v0,1);
+          btlUnitMarkTargetCandidates(param_1,temp_v0,1);
         }
       }
       else {
@@ -213,7 +212,7 @@ LAB_004ddb48:
         *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v4) = temp_v2 & 0xfffffffb;
         *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v4) = temp_v2 & 0xfffffff3;
       } while (temp_v3 != 0);
-      FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
       FUN_004eb838(param_1,param_2);
       *(unsigned char *)((int)param_2 + 0x59d) = 1;
       temp_v2 = param_2[8];

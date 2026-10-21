@@ -3,7 +3,7 @@
 extern "C" {
 
 int btlGetMainState(void);
-int FUN_00295228(u32 a, u32 b);
+int devilCreateRaceEffect(u32 a, u32 b);
 extern u32 scrGetArg(u32 index);
 
 u32 FUN_0030bb94(void)
@@ -14,7 +14,7 @@ u32 FUN_0030bb94(void)
     btlGetMainState();
     a = scrGetArg(0);
     b = scrGetArg(1);
-    FUN_00295228(a, b);
+    devilCreateRaceEffect(a, b);
     return 1;
 }
 

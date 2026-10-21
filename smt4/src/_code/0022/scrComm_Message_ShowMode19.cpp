@@ -3,7 +3,7 @@
 extern "C" {
 
 void FUN_002866b4(u32 unit, u32 arg, u32 value, s32 kind, s32 a, s32 b);
-void FUN_0028dc98(s32 arg);
+void scrCommMessageSetMode(s32 arg);
 u32 FUN_002865f8(void);
 u32 scrGetCommandFrame(void);
 u32 scrGetArg(u32 index);
@@ -20,7 +20,7 @@ static void showMessage(s32 kind)
 
 void scrComm_Message_ShowMode19(void)
 {
-    FUN_0028dc98(0);
+    scrCommMessageSetMode(0);
     showMessage(0x13);
 }
 

@@ -5,12 +5,12 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int FUN_00246014(void);
 int mapIfOverlayRelease(void);
 int FUN_00313648(...);
 
-int FUN_0013c1ec(...);
+int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f162e; /* 0x5f162e */
 extern unsigned int DAT_005f16a0; /* 0x5f16a0 */
@@ -44,14 +44,14 @@ extern float DAT_005f16b4; /* 0x5f16b4 */
 extern unsigned int DAT_005f16b8; /* 0x5f16b8 */
 extern unsigned char DAT_005f185a; /* 0x5f185a */
 
-/* Supplied declaration required: FUN_0013c1ec. */
-extern unsigned int FUN_00145868(void);
+/* Supplied declaration required: soundVolumeSettingSet. */
+extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_00246014. */
 /* Supplied declaration required: mapIfOverlayRelease. */
@@ -88,7 +88,7 @@ void FUN_0036785c(void)
   unsigned int temp_v8;
   float temp_v9;
   
-  temp_v0 = FUN_00145868();
+  temp_v0 = soundVolumeSettingGet();
   if (*(int *)(g_lmapScene + 4) < 10) {
     FUN_002dae68();
     temp_v1 = g_lmapScene;
@@ -111,7 +111,7 @@ void FUN_0036785c(void)
       temp_v6 = 0.017453292f;
       if (temp_v2 == 0x32) {
         DAT_005f185a = 0;
-        *(unsigned int *)(DAT_005806a4 + 0xc) = 2;
+        *(unsigned int *)(g_lmapView + 0xc) = 2;
         *(unsigned int *)(temp_v1 + 0x54) = 5;
         *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
         temp_v6 = *(float *)(temp_v1 + 0xa0) - *(float *)(temp_v1 + 0x1c);
@@ -199,9 +199,9 @@ LAB_00367d2c:
         FUN_001bc124();
         FUN_001bbf0c();
         FUN_0014af98();
-        FUN_0013c1ec();
+        soundVolumeSettingSet();
         FUN_003d2150(0x10002e5);
-        FUN_0013c1ec(temp_v0);
+        soundVolumeSettingSet(temp_v0);
         temp_v1 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x68) = 0x41000000;
         *(float *)(temp_v1 + 0x20) = *(float *)(temp_v1 + 0x20) + 8.0f;
@@ -231,8 +231,8 @@ LAB_00367d2c:
             else {
               temp_v1 = padButtonIsPressed(5);
               if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
-                temp_v1 = DAT_005806a4;
-                *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+                temp_v1 = g_lmapView;
+                *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v1 + 0xb0) = 0;
                 FUN_00303460(0);
                 temp_v1 = g_lmapScene;
@@ -285,7 +285,7 @@ LAB_00367d2c:
       FUN_001bbf0c();
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v6 * temp_v4;
       FUN_00303460(10);
-      *(unsigned int *)(DAT_005806a4 + 0xb0) = 0xffffffff;
+      *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
       sysPlaySe(0xdd);
       FUN_00233e10(1,DAT_005f16ac);
       FUN_001bc124();
@@ -320,8 +320,8 @@ LAB_00367d2c:
         mapIfReleaseSlot3();
         temp_v2 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x68) = temp_v8;
-        temp_v1 = DAT_005806a4;
-        *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(temp_v2 + 0x50);
+        temp_v1 = g_lmapView;
+        *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(temp_v2 + 0x50);
         *(unsigned int *)(temp_v1 + 0xb0) = 0;
         FUN_00303460(0);
         temp_v1 = g_lmapScene;
@@ -364,8 +364,8 @@ LAB_00367d2c:
       FUN_003d2150(0x1000112);
     }
     if (*(int *)(g_lmapScene + 8) == 0x1e) {
-      FUN_001f4908(0,10,0xff);
-      FUN_001f4908(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
     }
     if ((*(int *)(g_lmapScene + 8) < 0x1f) || (temp_v1 = FUN_002e07f4(), temp_v1 == 0)) {
       FUN_002e364c(g_lmapScene + 0x28);

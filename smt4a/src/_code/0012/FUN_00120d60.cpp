@@ -30,7 +30,7 @@ extern unsigned int FUN_001175a4(void);
 /* Supplied declaration required: FUN_00120cd8. */
 /* Supplied declaration required: FUN_00122dd0. */
 extern unsigned int FUN_00123100(int, unsigned int, unsigned int);
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 extern int FUN_002e7168(int, unsigned int);
@@ -113,7 +113,7 @@ int FUN_00120d60(void)
     temp_v2 = FUN_001175a4();
   }
   *(unsigned int *)(temp_v0 - 0x34) = temp_v2;
-  temp_v1 = FUN_002e6e26();
+  temp_v1 = onlineContextGetInstance();
   FUN_002e6e34(temp_v5,temp_v1 + 0x58);
   FUN_002fd210(*(unsigned int *)(*(int *)(temp_v0 - 0x38) + 0x44));
   _ZN9Obj55b28cD1Ev(temp_v5);

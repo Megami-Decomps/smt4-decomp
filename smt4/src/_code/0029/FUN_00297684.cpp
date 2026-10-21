@@ -11,11 +11,11 @@ int animPlayerSetLoopPolicy(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, unsigned char [12]);
 int nodeSetTranslation3f(unsigned int, int);
 int FUN_002a0428(int, unsigned int);
-int FUN_002a5710(unsigned int, int);
+int modelSelectPrimaryMotion(unsigned int, int);
 int asdMdlManagerDestroy(unsigned int);
 int FUN_002b2ae8(unsigned int, int, unsigned char [12]);
 int asdMemFree(unsigned int);
-int FUN_002cbad0(unsigned int, int, unsigned char [20]);
+int objectValueGetChecked(unsigned int, int, unsigned char [20]);
 int FUN_003353cc(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -31,12 +31,12 @@ extern unsigned int FUN_0019df10(void);
 /* Supplied declaration required: nodeSetTranslation. */
 /* Supplied declaration required: nodeSetTranslation3f. */
 /* Supplied declaration required: FUN_002a0428. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 extern int FUN_002adee0(void);
 /* Supplied declaration required: FUN_002b2ae8. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002cbad0. */
+/* Supplied declaration required: objectValueGetChecked. */
 extern unsigned int asdMdlManagerCreateFromSourceAndNode(int, unsigned int, unsigned short, unsigned int);
 /* Supplied declaration required: FUN_003353cc. */
 
@@ -70,7 +70,7 @@ void FUN_00297684(int param_1)
         }
         nodeSetTranslation3f(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0);
         animPlayerSetLoopPolicy(*(unsigned int *)(*(int *)(param_1 + 8) + 8),1);
-        FUN_002a5710(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0);
+        modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0);
         temp_v0 = *(int *)(*(int *)(*(int *)(*(int *)(*(int *)(param_1 + 8) + 8) + 0x2c) + 0x220) + 8)
         ;
         *(unsigned int *)(temp_v0 + 0x28) = *(unsigned int *)(temp_v0 + 0x28) | 1;
@@ -120,7 +120,7 @@ void FUN_00297684(int param_1)
     case 1:
       if ((*(int *)(temp_v3 + 0x18) != 0) && (temp_v4 = FUN_002adee0(), temp_v4 != 0)) {
         FUN_002b2ae8(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0,temp_v9);
-        FUN_002cbad0(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0,temp_v10);
+        objectValueGetChecked(*(unsigned int *)(*(int *)(param_1 + 8) + 8),0,temp_v10);
         if (*(int *)(*(int *)(*(int *)(temp_v3 + 0x18) + 8) + 0xc) < 0) {
           FUN_002a0428(*(int *)(temp_v3 + 0x18),*(unsigned int *)(param_1 + 0xc));
         }

@@ -9,7 +9,7 @@ int FUN_0024bc98(...);
 int FUN_0024bda8(...);
 int FUN_002907c4(...);
 int FUN_00295660(...);
-int FUN_00296ae8(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_0029ede8(...);
 int devilGetRecord(...);
 int textFormatBuffer(...);
@@ -44,7 +44,7 @@ extern int DAT_0043da30; /* 0x43da30 */
 /* Supplied declaration required: FUN_0024bda8. */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -115,7 +115,7 @@ void FUN_0029da34(int param_1,unsigned int param_2,fn_0029da34_arg2 *param_3,uns
     temp_v2 = 3;
     iStack_ac = param_1;
     temp_v3[0] = param_2;
-    FUN_00296ae8(*(unsigned int *)(temp_v1 + 0x558),3,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x558),3,0xffffffff,0);
   }
   return;
 }

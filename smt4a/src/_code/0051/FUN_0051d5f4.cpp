@@ -1,41 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0051d5f4` (_code @ 0x51d5f4, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the compiler hoists the active-list sentinel and saves six registers; retail recomputes it and saves four. */
+#include "shard/Shard0046.h"
+#include <stddef.h>
 
-extern "C" {
+struct CallerActivityList {
+    u32 count;
+    CallerListLink end;
+};
 
-int FUN_001b6668(int, int *);
-int callerARelease78(int *);
-int nw_ut_internal_LinkListImpl_insert(int, int, int *);
+struct CallerActivityOwner {
+    u8 unk00[0x14];
+    CallerActivityList idle;   // 0x14
+    CallerActivityList active; // 0x20
+};
 
-/* Supplied declaration required: FUN_001b6668. */
-extern int FUN_0046588c(int *);
-/* Supplied declaration required: callerARelease78. */
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
+struct ActiveCallerView {
+    CallerA caller;
+    u8 unk7c[4];
+    CallerListLink link; // 0x80
+};
 
-
-void FUN_0051d5f4(int param_1)
-
+static __inline CallerA *activityCaller(CallerListLink *link)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  
-  piVar2 = *(int **)(param_1 + 0x24);
-  if (piVar2 != (int *)(param_1 + 0x24)) {
-    do {
-      piVar3 = (int *)*piVar2;
-      temp_v0 = FUN_0046588c(piVar2 + -0x20);
-      if (temp_v0 == 0) {
-        callerARelease78(piVar2 + -0x20);
-        FUN_001b6668(param_1 + 0x20,piVar2);
-        nw_ut_internal_LinkListImpl_insert(param_1 + 0x14,param_1 + 0x18,piVar2);
-      }
-      piVar2 = piVar3;
-    } while (piVar3 != (int *)(param_1 + 0x24));
-  }
-  return;
+    return reinterpret_cast<CallerA *>(
+        reinterpret_cast<u8 *>(link) - offsetof(ActiveCallerView, link));
 }
 
-} /* extern "C" */
+extern "C" {
+u32 FUN_0046588c(CallerA *caller);
+void callerARelease78(CallerA *caller);
+void FUN_001b6668(CallerActivityList *list, CallerListLink *link);
+void nw_ut_internal_LinkListImpl_insert(CallerActivityList *list,
+                                       CallerListLink *position, CallerListLink *link);
+
+// Move inactive callers to the idle list, advancing before unlinking each entry.
+void FUN_0051d5f4(CallerActivityOwner *owner)
+{
+    CallerListLink *cursor = owner->active.end.next;
+    while (cursor != &owner->active.end) {
+        CallerListLink *current = cursor;
+        cursor = cursor->next;
+        if (FUN_0046588c(activityCaller(current)) == 0) {
+            callerARelease78(activityCaller(current));
+            FUN_001b6668(&owner->active, current);
+            nw_ut_internal_LinkListImpl_insert(&owner->idle, &owner->idle.end, current);
+        }
+    }
+}
+}

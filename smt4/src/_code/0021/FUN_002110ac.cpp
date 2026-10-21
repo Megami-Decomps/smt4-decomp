@@ -19,12 +19,12 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int gameDataBlocksGetFlagByteA(void);
 extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: btlTalkBustUpReleaseAllSlots. */
 /* Supplied declaration required: FUN_0028bf2c. */
-extern int FUN_002955fc(void);
+extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -53,7 +53,7 @@ unsigned int FUN_002110ac(int param_1)
   temp_v4 = 0;
   switch(*(unsigned int *)(param_1 + 0xd38)) {
   case 0:
-    temp_v2 = FUN_002955fc();
+    temp_v2 = btlTalkBustUpGetValue();
     if (temp_v2 == 0) {
       return 0;
     }
@@ -61,7 +61,7 @@ unsigned int FUN_002110ac(int param_1)
     temp_v2 = *(int *)(param_1 + 0xd38) + 1;
     break;
   case 1:
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd08));
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd08));
     if (temp_v2 == 2) {
       *piVar5 = *(int *)(param_1 + 0xd38) + 1;
       *(unsigned int *)(param_1 + 0xd50) = 0;
@@ -93,7 +93,7 @@ unsigned int FUN_002110ac(int param_1)
     *(unsigned int *)(param_1 + 0xd38) = temp_v4;
     return 0;
   case 3:
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd04));
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
     if (temp_v2 != 2) {
       return 0;
     }
@@ -149,7 +149,7 @@ joined_r0x00211274:
     return temp_v4;
   case 5:
 LAB_002112f8:
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0xd04));
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0xd04));
     if (temp_v2 != 2) {
       return 0;
     }

@@ -1,13 +1,15 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00435318` (_code @ 0x435318, 0x654 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_IntervalList.h"
+#include "shard/W6_W6Match3_IdList.h"
 
 extern "C" {
 
 int FUN_00437cac(...);
 int FUN_00437e98(void);
-int FUN_004383d8(void);
-int FUN_004386c4(...);
+IdList* idListFind(unsigned int id);
+int rangeSetAddPresetGroup(...);
 int FUN_004387bc(int, unsigned char *, int);
 
 /* stack frame of param_2: 3 slot(s), 12 byte(s) */
@@ -22,9 +24,8 @@ extern int *idListCheck(int *, unsigned int);
 /* Supplied declaration required: FUN_00437cac. */
 extern int FUN_00437e50(unsigned int, unsigned char **);
 /* Supplied declaration required: FUN_00437e98. */
-extern int FUN_00438204(unsigned int, unsigned char **);
-/* Supplied declaration required: FUN_004383d8. */
-/* Supplied declaration required: FUN_004386c4. */
+/* Supplied declaration required: idListFind. */
+/* Supplied declaration required: rangeSetAddPresetGroup. */
 /* Supplied declaration required: FUN_004387bc. */
 
 
@@ -60,7 +61,7 @@ int * FUN_00435318(int *param_1,unsigned int param_2)
         return (int *)0x2;
       }
       temp_v4 = 0x2d;
-      FUN_004383d8();
+      temp_v4 = (int)idListFind(temp_v4);
       if (temp_v4 != 0) {
         temp_v7 = 0;
         do {
@@ -112,7 +113,7 @@ LAB_004354ac:
                 break;
               }
               temp_v5 = temp_v8;
-              FUN_004383d8();
+              temp_v5 = (int)idListFind(temp_v5);
               if (temp_v5 != 0) {
                 temp_v4 = 0;
                 do {
@@ -200,7 +201,7 @@ LAB_004354ac:
     else {
       if (temp_v0 != 6) {
         if (temp_v0 == 7) {
-          temp_v4 = FUN_004386c4(param_2,*(unsigned char *)(temp_v4 + 10));
+          temp_v4 = rangeSetAddPresetGroup(param_2,*(unsigned char *)(temp_v4 + 10));
           if (temp_v4 == 0) {
             return (int *)0x2;
           }
@@ -218,7 +219,7 @@ LAB_004354ac:
         temp_v12 = param_1[5];
         temp_v10 = (unsigned char *)&temp_v10;
         temp_v11 = (unsigned char *)&temp_v10;
-        temp_v4 = FUN_004386c4(&temp_v10,*(unsigned char *)(*param_1 + 10));
+        temp_v4 = rangeSetAddPresetGroup(&temp_v10,*(unsigned char *)(*param_1 + 10));
         if (temp_v4 != 0) {
           ppuVar9 = &temp_v10;
           FUN_00437e98();
@@ -278,7 +279,7 @@ LAB_004354ac:
         }
         return piVar6;
       }
-      temp_v4 = FUN_00438204(param_2,&temp_v10);
+      temp_v4 = intersectInclusiveRangeSet((RangeSet *)param_2,(const RangeSet *)&temp_v10);
       if (temp_v4 == 0) {
         if (temp_v12 == 0) {
           return (int *)0x2;

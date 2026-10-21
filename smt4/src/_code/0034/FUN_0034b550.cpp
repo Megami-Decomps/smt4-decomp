@@ -1,10 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034b550` (_code @ 0x34b550, 0x170 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: Filter4Poly-family member and nested virtual motion controller require class/member symbol migration before an honest C++ match. */
 #include "romwright_types.h"
 
 extern "C" {
 
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(unsigned int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -14,7 +13,7 @@ typedef int romwright_code(...);
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern unsigned int randBetween(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 extern unsigned int randNextInRange(unsigned int);
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -59,7 +58,7 @@ void FUN_0034b550(int param_1)
         temp_v4 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         temp_v7 = temp_v4 * temp_v9 * (float)temp_v10;
         temp_v4 = temp_v7;
-        FUN_002b7064();
+        phaseCosInterpolate();
         FUN_002b70cc();
         *(float *)&puVar3[0x10] = temp_v7;
         *(float *)&puVar3[0x11] = temp_v4;

@@ -78,7 +78,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_00162880(void);
+extern int engineCleanupIsDone(void);
 extern int FUN_00162ea4(void);
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_00164b5c. */
@@ -157,7 +157,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
     temp_v15 = 0.0f;
     temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(*(float *)(temp_v2 + 0x24) == 0.0f) << 0x1e);
     if ((!romwright_subpiece_4_1_0(temp_v6 >> 0x1e,0)) &&
-       ((temp_v3 = FUN_00162ea4(), temp_v3 == 0 || (temp_v3 = FUN_00162880(), temp_v3 == 0)))) {
+       ((temp_v3 = FUN_00162ea4(), temp_v3 == 0 || (temp_v3 = engineCleanupIsDone(), temp_v3 == 0)))) {
       temp_v12 = 1.0f;
       temp_v14 = *(float *)(temp_v2 + 0x24);
       temp_v13 = temp_v12;

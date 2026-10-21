@@ -20,7 +20,7 @@ void nn_snd_CTR_Voice_SetMixParam(u32 voice, const f32 *mix);
 void nn_snd_CTR_Voice_SetPitch(u32 voice, f32 pitch);
 void FUN_00147370(u32 voice, f32 volume);
 void nn_snd_CTR_InitializeWaveBuffer(void *waveBuffer);
-void FUN_001290cc(u32 voice, void *data, void *waveBuffer0, void *waveBuffer1, s32 unk);
+void soundQueueArchiveWaveBuffers(u32 voice, void *data, void *waveBuffer0, void *waveBuffer1, s32 unk);
 
 /* Starts a sound whose samples are `size` bytes at `data`: copies them to the extra heap, takes a
  * voice at full pitch and volume (centered) and queues the first two wave buffers. */
@@ -52,7 +52,7 @@ AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
     for (i = 0; i < 2; i++) {
         nn_snd_CTR_InitializeWaveBuffer(sound->waveBuffers[i]);
     }
-    FUN_001290cc(sound->voice, sound->data, sound->waveBuffers[0], sound->waveBuffers[1], 0);
+    soundQueueArchiveWaveBuffers(sound->voice, sound->data, sound->waveBuffers[0], sound->waveBuffers[1], 0);
     nn_os_CriticalSection_Leave(lock);
     return sound;
 }

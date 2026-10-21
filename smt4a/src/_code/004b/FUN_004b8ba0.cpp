@@ -24,7 +24,7 @@ extern int DAT_0058800c; /* 0x58800c */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_004080bc. */
@@ -62,7 +62,7 @@ void FUN_004b8ba0(int param_1)
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v8);
           scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
-            temp_v5 = FUN_00224880(temp_v3);
+            temp_v5 = scrRunOpcodesStub(temp_v3);
           } while (temp_v5 != 2);
           if (((DAT_0058800c != 0) ||
               ((*(short *)(temp_v2 + 0x3c) != 0 && (temp_v5 = gameFlagIsSet(), temp_v5 == 0)))) ||
@@ -81,7 +81,7 @@ LAB_004b8c94:
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v7);
           scrScriptProcessStartEntry(temp_v3,temp_v4);
           do {
-            temp_v5 = FUN_00224880(temp_v3);
+            temp_v5 = scrRunOpcodesStub(temp_v3);
           } while (temp_v5 != 2);
           if (((DAT_0058800c == 0) &&
               ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&
@@ -106,7 +106,7 @@ LAB_004b8c94:
         temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v7);
         scrScriptProcessStartEntry(temp_v3,temp_v4);
         do {
-          temp_v5 = FUN_00224880(temp_v3);
+          temp_v5 = scrRunOpcodesStub(temp_v3);
         } while (temp_v5 != 2);
         if (((DAT_0058800c == 0) &&
             ((*(short *)(temp_v2 + 0x3c) == 0 || (temp_v5 = gameFlagIsSet(), temp_v5 != 0)))) &&

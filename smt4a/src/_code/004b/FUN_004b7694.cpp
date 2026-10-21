@@ -34,7 +34,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int menu4CGetEntry(int);
 extern int menu4CGetCurrentEntry(int);
 extern int FUN_004babd8(int);
-extern unsigned short FUN_004cfe4c(int);
+extern unsigned short flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: sendEvent100020F. */
 /* Supplied declaration required: sendEvent100020E. */
 extern int inputIsQuestConfirmPressed(void);
@@ -100,7 +100,7 @@ void FUN_004b7694(int param_1)
     *(unsigned int *)(param_1 + 0x84) = temp_v11;
     *(unsigned int *)(param_1 + 0x8c) = temp_v4;
     *(unsigned int *)(param_1 + 0x88) = 0;
-    temp_v1 = FUN_004cfe4c(param_1 + 0x9c);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x9c);
     *(unsigned short *)(param_1 + 0x4c) = temp_v1;
     if (*(char *)(param_1 + 0x1214) != '\0') {
       temp_v5 = menu4CGetEntry(param_1 + 0x9c);

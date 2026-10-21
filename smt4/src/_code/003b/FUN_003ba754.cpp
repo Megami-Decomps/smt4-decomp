@@ -9,7 +9,7 @@ int bgmReleaseStopped(void);
 int mapDepartSetTarget(unsigned int, unsigned int);
 int FUN_0027d98c(void);
 int FUN_0027db24(int);
-int FUN_00285ca4(int);
+int gameRestoreWorkSave(int);
 int FUN_00297060(int, unsigned int);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(int, int);
@@ -31,7 +31,7 @@ extern signed char DAT_0049fc14; /* 0x49fc14 */
 extern int FUN_0027d8c8(void);
 /* Supplied declaration required: FUN_0027d98c. */
 /* Supplied declaration required: FUN_0027db24. */
-/* Supplied declaration required: FUN_00285ca4. */
+/* Supplied declaration required: gameRestoreWorkSave. */
 extern int FUN_00287894(void);
 extern int FUN_002903f0(void);
 /* Supplied declaration required: FUN_00297060. */
@@ -106,13 +106,13 @@ void FUN_003ba754(int param_1)
       if (temp_v1 != 1) {
         temp_v1 = FUN_0027d98c();
         if (temp_v1 == 5) {
-          FUN_00285ca4(1);
+          gameRestoreWorkSave(1);
           FUN_0027db24(0);
           *(unsigned int *)(param_1 + 0xdb0) = 4;
         }
       }
       else {
-        FUN_00285ca4(1);
+        gameRestoreWorkSave(1);
         FUN_0027db24(0);
         temp_v1 = FUN_0027d8c8();
         if (temp_v1 != 0) {
@@ -124,7 +124,7 @@ void FUN_003ba754(int param_1)
       }
     }
     else {
-      FUN_00285ca4(2);
+      gameRestoreWorkSave(2);
       FUN_0027db24(0);
     }
   }

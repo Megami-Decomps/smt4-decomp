@@ -26,7 +26,7 @@ extern unsigned int DAT_00464b1c; /* 0x464b1c */
 extern unsigned int DAT_00464b78; /* 0x464b78 */
 extern unsigned int DAT_00464b80; /* 0x464b80 */
 extern int DAT_00464b88; /* 0x464b88 */
-extern int DAT_00464b90; /* 0x464b90 */
+extern int sceneGroup4Root; /* 0x464b90 */
 extern int DAT_00464bb8; /* 0x464bb8 */
 extern int DAT_004dad98; /* 0x4dad98 */
 extern signed char DAT_004dad9c; /* 0x4dad9c */
@@ -62,9 +62,9 @@ void FUN_001183d8(void)
     FUN_001325c4(DAT_00464bb8,DAT_00464b80,DAT_00464b1c,1);
     temp_v0 = DAT_00464b88;
     if ((DAT_004dad9c != '\0') && (DAT_004dad9d == '\0')) {
-      temp_v1 = DAT_00464b90;
+      temp_v1 = sceneGroup4Root;
       piVar4 = *(int **)(DAT_00464b88 + 0x1c);
-      for (piVar2 = *(int **)(DAT_00464b88 + 0x18); (piVar2 != piVar4 && (*piVar2 != DAT_00464b90));
+      for (piVar2 = *(int **)(DAT_00464b88 + 0x18); (piVar2 != piVar4 && (*piVar2 != sceneGroup4Root));
           piVar2 = piVar2 + 1) {
       }
       piVar3 = piVar2;
@@ -83,7 +83,7 @@ void FUN_001183d8(void)
       FUN_00131c98(DAT_00464bb8,DAT_00464b80,1);
     }
     if ((DAT_004dad9c != '\0') && (DAT_004dad9d == '\0')) {
-      nw_gfx_SceneNode_AttachChild(DAT_00464b88,DAT_00464b90);
+      nw_gfx_SceneNode_AttachChild(DAT_00464b88,sceneGroup4Root);
       sceneTraverserVisit(DAT_00464b80,DAT_00464b88);
     }
     FUN_0013231c(DAT_00464bb8,DAT_00464b1c,2,0);

@@ -18,7 +18,7 @@ int FUN_004e6fb0(int *);
 int FUN_004e7c04(int *, int);
 int FUN_004e8454(int *);
 int FUN_004e8668(int *, unsigned int *);
-int FUN_004e9f74(int *, int);
+int btlUnitMarkTargetCandidates(int *, int);
 int FUN_004eae30(...);
 int FUN_004eb42c(int *, unsigned int *);
 int FUN_004eb838(...);
@@ -58,13 +58,13 @@ extern int FUN_002a7410(void);
 extern int FUN_004aa098(unsigned int, unsigned int);
 extern unsigned int FUN_004aba54(unsigned int);
 /* Supplied declaration required: FUN_004aba84. */
-extern int FUN_004abb54(unsigned int);
+extern int btlUiIsMenuReady(unsigned int);
 /* Supplied declaration required: FUN_004abde4. */
 /* Supplied declaration required: FUN_004e6fb0. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: FUN_004e8454. */
 /* Supplied declaration required: FUN_004e8668. */
-/* Supplied declaration required: FUN_004e9f74. */
+/* Supplied declaration required: btlUnitMarkTargetCandidates. */
 /* Supplied declaration required: FUN_004eae30. */
 /* Supplied declaration required: FUN_004eb42c. */
 /* Supplied declaration required: FUN_004eb838. */
@@ -260,7 +260,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
     FUN_004e8454(param_1);
     FUN_004e7c04(param_1,1);
     if (temp_v20 != 0) {
-      FUN_004e9f74(param_1,1);
+      btlUnitMarkTargetCandidates(param_1,1);
     }
     else {
       FUN_004e6fb0(param_1);
@@ -335,7 +335,7 @@ int FUN_004e15fc(int *param_1,unsigned int *param_2)
     else {
       temp_v3 = padButtonIsPressed(1);
       if (((temp_v3 != 0) || (temp_v3 = FUN_004aa098(g_btlUiBlock,1), temp_v3 != 0)) &&
-         ((temp_v3 = FUN_002a7410(), temp_v3 == 0 && (temp_v3 = FUN_004abb54(g_btlUiBlock), temp_v3 != 0))))
+         ((temp_v3 = FUN_002a7410(), temp_v3 == 0 && (temp_v3 = btlUiIsMenuReady(g_btlUiBlock), temp_v3 != 0))))
       {
         FUN_0047fa50(0x100020f);
         temp_v14 = 1;

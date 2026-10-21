@@ -30,8 +30,8 @@ typedef struct Queue0015e068 {
     /* 0x184 */ u32 clock;
 } Queue0015e068;
 
-Queue0015e068 *FUN_00175678(void);
-QueueNode0015e068 *FUN_0019102c(Queue0015e068 *queue, s32 type);
+Queue0015e068 *objectCommandQueueGet(void);
+QueueNode0015e068 *objectCommandReserveWords(Queue0015e068 *queue, s32 type);
 void listAppendNode(Queue0015e068 *queue, QueueNode0015e068 *node);
 
 /* Queues a kind-0x34 node for the requester on a channel when the requester accepts; returns whether it did. */
@@ -40,8 +40,8 @@ u8 queueRequesterNode(u8 channel, Requester0015e068 *requester)
     s32 accepted = requester->vtbl->accepts(requester);
 
     if (accepted != 0) {
-        Queue0015e068 *queue = FUN_00175678();
-        QueueNode0015e068 *node = FUN_0019102c(queue, 7);
+        Queue0015e068 *queue = objectCommandQueueGet();
+        QueueNode0015e068 *node = objectCommandReserveWords(queue, 7);
 
         node->stamp = queue->clock;
         node->kind = 0x34;

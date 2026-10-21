@@ -1,25 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d0058` (_code @ 0x4d0058, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mode-one call block is merged before the comparison instead of placed after the return. */
+#include "common.h"
+
+struct StateCounter { u8 data[0x64]; };
+struct StateWindow {
+    u8 mode; // 0x00
+    u8 unk01[7];
+    s32 limit; // 0x08
+    u32 unk0c;
+    StateCounter counter; // 0x10
+};
 
 extern "C" {
+s32 FUN_002a4844(const StateCounter *counter);
+s32 FUN_002a4860(const StateCounter *counter);
 
-extern int FUN_002a4844(char *);
-extern int FUN_002a4860(void);
-
-
-unsigned char FUN_004d0058(char *param_1,int param_2)
-
+// Check whether the mode-selected counter plus an offset remains below its limit.
+s32 FUN_004d0058(StateWindow *window, s32 offset)
 {
-  int temp_v0;
-  
-  if (*param_1 != '\x01') {
-    temp_v0 = FUN_002a4860();
-  }
-  else {
-    temp_v0 = FUN_002a4844(param_1 + 0x10);
-  }
-  return temp_v0 + param_2 < *(int *)(param_1 + 8);
+    s32 value;
+    if (window->mode != 1) {
+        value = FUN_002a4860(&window->counter);
+    } else {
+        value = FUN_002a4844(&window->counter);
+    }
+    return window->limit > value + offset;
 }
-
-} /* extern "C" */
+}

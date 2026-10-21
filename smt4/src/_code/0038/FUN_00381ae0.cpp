@@ -9,7 +9,7 @@ int jyoucyuGetTableEntry(int);
 int flagEntryReset(unsigned int);
 int FUN_00348e10(void);
 
-extern int FUN_00240a6c(unsigned int);
+extern int questRequirementsMet(unsigned int);
 extern int FUN_00298fa0(unsigned int, unsigned int);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -30,7 +30,7 @@ int FUN_00381ae0(unsigned int param_1)
   temp_v2 = 0;
   do {
     temp_v0 = FUN_00298fa0(temp_v2 & 0xffff,0);
-    if ((temp_v0 == 0) && (temp_v0 = FUN_00240a6c(temp_v2 & 0xffff), temp_v0 != 0)) {
+    if ((temp_v0 == 0) && (temp_v0 = questRequirementsMet(temp_v2 & 0xffff), temp_v0 != 0)) {
       temp_v1 = temp_v2;
       dataTable1bOr1cGetRecord();
       if ((temp_v1 != 0) &&

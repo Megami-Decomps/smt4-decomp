@@ -8,11 +8,11 @@ int sysPlaySe(...);
 int FUN_00182084(void);
 int FUN_00183318(...);
 int FUN_00183f58(...);
-int FUN_0019d36c(void);
+int ifTouchDecrementTimer(void);
 int FUN_0019de98(...);
 int FUN_002bf4f4(int);
 int FUN_003423cc(int);
-int FUN_004cfe4c(unsigned int *);
+int flaggedValueHolderGetTotal(unsigned int *);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -25,13 +25,13 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_00182084. */
 /* Supplied declaration required: FUN_00183318. */
 /* Supplied declaration required: FUN_00183f58. */
-/* Supplied declaration required: FUN_0019d36c. */
+/* Supplied declaration required: ifTouchDecrementTimer. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_002bf4f4. */
 /* Supplied declaration required: FUN_003423cc. */
 extern int countOwnerIsValidIndex(int, unsigned int);
 extern int FUN_0047d7f0(int);
-/* Supplied declaration required: FUN_004cfe4c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 
 
 void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
@@ -49,7 +49,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
     sysPlaySe(0xcb);
     temp_v2 = 0;
     do {
-      FUN_0019d36c();
+      ifTouchDecrementTimer();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 6);
     FUN_00182084();
@@ -60,7 +60,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
       sysPlaySe(0xcc);
       temp_v2 = 0;
       do {
-        FUN_0019d36c();
+        ifTouchDecrementTimer();
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 6);
       FUN_00182084();
@@ -75,12 +75,12 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
   case 2:
     *param_1 = *param_1 | 0x100000;
     temp_v2 = g_aocMain;
-    FUN_004cfe4c(param_1 + 0x90);
+    flaggedValueHolderGetTotal(param_1 + 0x90);
     if (param_3 != 0) {
       sysPlaySe(0xcd);
       temp_v1 = 0;
       do {
-        FUN_0019d36c();
+        ifTouchDecrementTimer();
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 6);
       FUN_00182084();
@@ -89,10 +89,10 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
     FUN_00183f58(1,0);
     FUN_00183f58(2,0xb,0x4b,1);
     FUN_00183f58(3,0,0,1);
-    temp_v0 = FUN_004cfe4c(param_1 + 0x90);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x90);
     temp_v1 = countOwnerIsValidIndex(temp_v2,temp_v0);
     if (temp_v1 != 0) {
-      temp_v1 = FUN_004cfe4c(param_1 + 0x90);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
       if (*(char *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9b3) != '\0') {
         FUN_00183f58(4,0xf,0x4f,0);
         FUN_00183f58(5,0,0);
@@ -100,7 +100,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
         FUN_0019de98(param_1 + 0x44c,0xf4f4f4ff);
         return;
       }
-      temp_v1 = FUN_004cfe4c(param_1 + 0x90);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
       temp_v2 = FUN_0047d7f0(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8);
       if (temp_v2 == 0) {
         FUN_00183f58(4,0xc,0x4c,0);
@@ -141,7 +141,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
       sysPlaySe(0xcc);
       temp_v2 = 0;
       do {
-        FUN_0019d36c();
+        ifTouchDecrementTimer();
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 6);
       FUN_00182084();
@@ -168,7 +168,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
       FUN_00183318(0);
       temp_v2 = 0;
       do {
-        FUN_0019d36c();
+        ifTouchDecrementTimer();
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 6);
       return;

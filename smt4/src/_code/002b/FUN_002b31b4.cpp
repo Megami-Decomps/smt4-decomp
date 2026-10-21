@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00145148(void);
-int FUN_00145370(int);
+int textHistoryAppendCodepoint(int);
 int gfxSetSelectedChannelActive(int);
 int FUN_0014553c(void);
 int FUN_00145628(unsigned int, unsigned int);
@@ -22,7 +22,7 @@ extern unsigned char DAT_004def28; /* 0x4def28 */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 /* Supplied declaration required: FUN_00145148. */
-/* Supplied declaration required: FUN_00145370. */
+/* Supplied declaration required: textHistoryAppendCodepoint. */
 /* Supplied declaration required: gfxSetSelectedChannelActive. */
 /* Supplied declaration required: FUN_0014553c. */
 /* Supplied declaration required: FUN_00145628. */
@@ -61,7 +61,7 @@ int FUN_002b31b4(int *param_1)
     temp_v4 = param_1[3];
     if (temp_v4 < param_1[4] + temp_v4) {
       do {
-        FUN_00145370(*(unsigned short *)(*param_1 + temp_v4 * 0x20));
+        textHistoryAppendCodepoint(*(unsigned short *)(*param_1 + temp_v4 * 0x20));
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < param_1[3] + param_1[4]);
     }
@@ -230,7 +230,7 @@ joined_r0x002b3444:
     temp_v4 = param_1[3];
     if (temp_v4 < param_1[4] + temp_v4) {
       do {
-        FUN_00145370(*(unsigned short *)(*param_1 + temp_v4 * 0x20));
+        textHistoryAppendCodepoint(*(unsigned short *)(*param_1 + temp_v4 * 0x20));
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < param_1[4] + param_1[3]);
     }
@@ -319,7 +319,7 @@ LAB_002b3880:
     temp_v8 = param_1[3];
     if (temp_v8 < param_1[4] + temp_v8) {
       do {
-        FUN_00145370(*(unsigned short *)(*param_1 + temp_v8 * 0x20));
+        textHistoryAppendCodepoint(*(unsigned short *)(*param_1 + temp_v8 * 0x20));
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < param_1[3] + param_1[4]);
     }

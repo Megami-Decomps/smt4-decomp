@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_002a43bc(int, unsigned int, int);
-int FUN_002a6e00(int);
+int aocTexExpandCompressedData(int, unsigned int, int);
+int asdTextureEntryApply(int);
 int FUN_002a6e2c(int, int);
 int asdTextureCreate(void);
 
@@ -16,8 +16,8 @@ typedef struct {
 
 extern unsigned char LAB_00394114; /* 0x394114 */
 
-/* Supplied declaration required: FUN_002a43bc. */
-/* Supplied declaration required: FUN_002a6e00. */
+/* Supplied declaration required: aocTexExpandCompressedData. */
+/* Supplied declaration required: asdTextureEntryApply. */
 /* Supplied declaration required: FUN_002a6e2c. */
 /* Supplied declaration required: asdTextureCreate. */
 extern int rt_memcmp(int, unsigned char *, unsigned int);
@@ -42,7 +42,7 @@ void FUN_00393fa4(unsigned int *param_1,int *param_2)
     if ((*(unsigned int *)(temp_v3 + 0x10) & 0x10000) != 0) {
       temp_v2 = 3;
     }
-    FUN_002a43bc(temp_v4,temp_v2,0x80);
+    aocTexExpandCompressedData(temp_v4,temp_v2,0x80);
   }
   temp_v0 = rt_memcmp(temp_v4,&LAB_00394114,4);
   if (temp_v0 != 0) {
@@ -79,7 +79,7 @@ void FUN_00393fa4(unsigned int *param_1,int *param_2)
       FUN_002a6e2c(temp_v3,0x30000);
     }
   }
-  FUN_002a6e00(temp_v3);
+  asdTextureEntryApply(temp_v3);
   return;
 }
 

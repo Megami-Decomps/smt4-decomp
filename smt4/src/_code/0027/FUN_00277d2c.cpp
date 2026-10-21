@@ -9,7 +9,7 @@ int FUN_0021dbc0(...);
 int CONCAT44(...);
 int FUN_0020e738(...);
 int contentEntryGetD(void);
-int FUN_00291c20(...);
+int mapCollisionQueueQuad(...);
 int dataTable2cSub0GetCount(void);
 int contentEntryGetC(void);
 int dataTable2cSub3GetCount(void);
@@ -102,7 +102,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0020e738. */
 /* Supplied declaration required: FUN_0021dbc0. */
 /* Supplied declaration required: contentEntryGetD. */
-/* Supplied declaration required: FUN_00291c20. */
+/* Supplied declaration required: mapCollisionQueueQuad. */
 /* Supplied declaration required: dataTable2cSub0GetCount. */
 extern int gameFlagIsSet(void);
 extern int randNextInRange(unsigned int);
@@ -450,7 +450,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
               temp_v10 = (float)VectorSignedToFloat((int)*(short *)(pcVar4 + 8),
                                                   (unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v46 = temp_v46 + temp_v10;
-              FUN_00291c20(pcVar4[2],(int)*(short *)(pcVar4 + 0x12),(int)pcVar4[3]);
+              mapCollisionQueueQuad(pcVar4[2],(int)*(short *)(pcVar4 + 0x12),(int)pcVar4[3]);
               temp_v0 = pcVar4[2];
               puVar3 = &g_gameState + temp_v0;
               (&DAT_0049faf0)[temp_v0] = (&DAT_0049faf0)[temp_v0] + 1;
@@ -729,13 +729,13 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
             puVar3 = (unsigned int *)(int)pcVar4[2];
             if (puVar3 != (unsigned int *)0x1) {
               if (puVar3 == (unsigned int *)0x3) {
-                FUN_00291c20(10,(int)pcVar4[3],0);
+                mapCollisionQueueQuad(10,(int)pcVar4[3],0);
                 puVar3 = (unsigned int *)((int)DAT_0049fb18 + 1);
                 DAT_0049fb18 = puVar3;
               }
             }
             else {
-              FUN_00291c20(9,(int)pcVar4[3],0);
+              mapCollisionQueueQuad(9,(int)pcVar4[3],0);
               puVar3 = (unsigned int *)((int)DAT_0049fb14 + 1);
               DAT_0049fb14 = puVar3;
             }
@@ -974,7 +974,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
               temp_v28 = (float)VectorSignedToFloat((int)*(short *)(temp_v2 + 6),
                                                   (unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v46 = temp_v46 + temp_v28;
-              FUN_00291c20(0xd,(int)(short)temp_v0,(int)*(short *)(temp_v1 + temp_v4 * 2 + 0xe04));
+              mapCollisionQueueQuad(0xd,(int)(short)temp_v0,(int)*(short *)(temp_v1 + temp_v4 * 2 + 0xe04));
               DAT_0049fb24 = DAT_0049fb24 + 1;
             }
           }
@@ -1161,7 +1161,7 @@ void FUN_00277d2c(unsigned int *param_1,unsigned int *param_2)
             temp_v28 = (float)VectorSignedToFloat((int)*(short *)(temp_v2 + 6),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v46 = temp_v46 + temp_v28;
-            FUN_00291c20(0xb,(int)*(char *)(temp_v2 + 0xf),(int)*(short *)(temp_v1 + temp_v4 * 2 + 0xe04))
+            mapCollisionQueueQuad(0xb,(int)*(char *)(temp_v2 + 0xf),(int)*(short *)(temp_v1 + temp_v4 * 2 + 0xe04))
             ;
             DAT_0049fb1c = DAT_0049fb1c + 1;
           }
@@ -1385,7 +1385,7 @@ LAB_0027907c:
                 temp_v10 = (float)VectorSignedToFloat((int)*(short *)(pcVar6 + 6),
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v46 = temp_v46 + temp_v10;
-                FUN_00291c20(0xb,(int)pcVar6[0xf]);
+                mapCollisionQueueQuad(0xb,(int)pcVar6[0xf]);
                 DAT_0049fb1c = DAT_0049fb1c + 1;
                 *(unsigned char *)(*(char *)(temp_v1 + 0xde3) + temp_v62) = 1;
                 *(char *)(*(char *)(temp_v1 + 0xde3) + temp_v63) = (char)(int)pcVar4;
@@ -1605,7 +1605,7 @@ LAB_00279850:
                 temp_v10 = (float)VectorSignedToFloat((int)*(short *)(pcVar6 + 6),
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v46 = temp_v46 + temp_v10;
-                FUN_00291c20(0xd,(int)(short)(int)pcVar4);
+                mapCollisionQueueQuad(0xd,(int)(short)(int)pcVar4);
                 DAT_0049fb24 = DAT_0049fb24 + 1;
                 *(unsigned char *)((int)*(char *)(temp_v1 + 0xde3) + temp_v1 + 0xde4) = 3;
                 *(char *)(*(char *)(temp_v1 + 0xde3) + temp_v64) = (char)(int)pcVar4;

@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00343a04(u32 amount);
-int FUN_00343a2c(u32 amount);
+int gameAddPointsClamped(u32 amount);
 int FUN_00343a74(u32 amount);
 int questCenterAddPoints(u32 amount);
 extern u32 *gameGetCounters(void);
@@ -32,7 +32,7 @@ void FUN_0029be5c(int index, u32 amount)
         FUN_00343a04(amount);
         return;
     case 0x26:
-        FUN_00343a2c(amount);
+        gameAddPointsClamped(amount);
         return;
     }
 }

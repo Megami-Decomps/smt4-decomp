@@ -12,7 +12,7 @@ int FUN_0018152c(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0022fb78(int, int);
-int FUN_00282bf4(void);
+int dataTable0cFindByKey(void);
 int FUN_00344cd0(...);
 int FUN_0035ae58(...);
 int FUN_0035bd4c(...);
@@ -48,10 +48,10 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0022fb78. */
 extern int FUN_0026264c(unsigned short);
-/* Supplied declaration required: FUN_00282bf4. */
+/* Supplied declaration required: dataTable0cFindByKey. */
 extern int FUN_002a4860(void);
 extern int FUN_002a4894(int);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 extern unsigned short *FUN_002c7e24(void);
 extern int FUN_002c7e3c(void);
 /* Supplied declaration required: FUN_00344cd0. */
@@ -121,7 +121,7 @@ void FUN_003d3a4c(int param_1,int param_2)
       }
       else {
         temp_v10 = (unsigned int)*(unsigned short *)(temp_v7 + 0x6e2);
-        FUN_00282bf4();
+        dataTable0cFindByKey();
         if (temp_v10 != 0) {
           VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v9 + 10) + param_2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -224,7 +224,7 @@ void FUN_003d3a4c(int param_1,int param_2)
                  (int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,0xc9);
   }
-  temp_v4 = FUN_002c2c68(temp_v3);
+  temp_v4 = objectApplyIfUnblocked(temp_v3);
   if (temp_v4 < 1) {
     FUN_00164b5c(2,0x12,0x1b,param_1,param_2,0xdd);
   }

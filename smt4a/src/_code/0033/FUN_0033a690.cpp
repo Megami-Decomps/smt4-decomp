@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00352a14(void);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f1600; /* 0x5f1600 */
 
@@ -32,13 +32,13 @@ void FUN_0033a690(int param_1,int param_2)
   unsigned int temp_v11;
   unsigned int temp_v12;
   
-  *(unsigned char *)(DAT_005806a4 + 0x305) = 0;
+  *(unsigned char *)(g_lmapView + 0x305) = 0;
   FUN_00352a14();
-  temp_v0 = DAT_005806a4;
+  temp_v0 = g_lmapView;
   temp_v3 = 0x42c80000;
   temp_v2 = 0;
   if (param_1 == 10 && param_2 == 8) {
-    *(unsigned int *)(DAT_005806a4 + 0xd8) = 0x42c80000;
+    *(unsigned int *)(g_lmapView + 0xd8) = 0x42c80000;
     *(unsigned int *)(temp_v0 + 0x118) = 0x43480000;
     *(unsigned int *)(temp_v0 + 0x158) = 0;
     *(unsigned int *)(temp_v0 + 0x198) = 0x43be0000;
@@ -58,8 +58,8 @@ void FUN_0033a690(int param_1,int param_2)
       return;
     }
     temp_v0 = gameFlagIsSet(0x72);
-    if ((temp_v0 != 0) && (temp_v1 = gameFlagIsSet(0xb1), temp_v0 = DAT_005806a4, temp_v1 == 0)) {
-      *(unsigned int *)(DAT_005806a4 + 0x114) = 0x42dc0000;
+    if ((temp_v0 != 0) && (temp_v1 = gameFlagIsSet(0xb1), temp_v0 = g_lmapView, temp_v1 == 0)) {
+      *(unsigned int *)(g_lmapView + 0x114) = 0x42dc0000;
       *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
       *(unsigned int *)(temp_v0 + 0x194) = temp_v4;
       *(unsigned int *)(temp_v0 + 0x1d4) = temp_v6;
@@ -81,8 +81,8 @@ void FUN_0033a690(int param_1,int param_2)
       return;
     }
     temp_v0 = gameFlagIsSet(0xf4);
-    if ((temp_v0 != 0) && (temp_v1 = gameFlagIsSet(0xf6), temp_v0 = DAT_005806a4, temp_v1 == 0)) {
-      *(unsigned int *)(DAT_005806a4 + 0x114) = temp_v3;
+    if ((temp_v0 != 0) && (temp_v1 = gameFlagIsSet(0xf6), temp_v0 = g_lmapView, temp_v1 == 0)) {
+      *(unsigned int *)(g_lmapView + 0x114) = temp_v3;
       *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
       *(unsigned int *)(temp_v0 + 0x194) = temp_v4;
       *(unsigned int *)(temp_v0 + 0x1d4) = temp_v6;
@@ -99,10 +99,10 @@ void FUN_0033a690(int param_1,int param_2)
       *(unsigned int *)(temp_v0 + 0xd8) = temp_v11;
     }
   }
-  temp_v0 = DAT_005806a4;
+  temp_v0 = g_lmapView;
   if (g_gameState == 0x19) {
     if (DAT_005f1600 == 1) {
-      *(unsigned int *)(DAT_005806a4 + 0xd4) = temp_v5;
+      *(unsigned int *)(g_lmapView + 0xd4) = temp_v5;
       *(unsigned int *)(temp_v0 + 0x114) = 0x43520000;
       *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
       *(unsigned int *)(temp_v0 + 0x194) = 0x438c0000;
@@ -119,11 +119,11 @@ void FUN_0033a690(int param_1,int param_2)
       *(unsigned int *)(temp_v0 + 0x1dc) = 0x42960000;
       if (g_gameState != 0x19) goto LAB_0033a890;
     }
-    temp_v0 = DAT_005806a4;
+    temp_v0 = g_lmapView;
     if (DAT_005f1600 != 2) {
       return;
     }
-    *(unsigned int *)(DAT_005806a4 + 0xd4) = temp_v5;
+    *(unsigned int *)(g_lmapView + 0xd4) = temp_v5;
     *(unsigned int *)(temp_v0 + 0x114) = 0x43520000;
     *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
     *(unsigned int *)(temp_v0 + 0x194) = 0x438c0000;
@@ -140,10 +140,10 @@ void FUN_0033a690(int param_1,int param_2)
     *(unsigned int *)(temp_v0 + 0x1dc) = 0x42960000;
   }
 LAB_0033a890:
-  temp_v0 = DAT_005806a4;
+  temp_v0 = g_lmapView;
   if ((g_gameState == 0x1c || g_gameState == 0x1d) ||
      ((g_gameState == 0x1e || g_gameState == 0x1f) || g_gameState == 0x20)) {
-    *(unsigned int *)(DAT_005806a4 + 0xd4) = temp_v5;
+    *(unsigned int *)(g_lmapView + 0xd4) = temp_v5;
     *(unsigned int *)(temp_v0 + 0x114) = temp_v7;
     *(unsigned int *)(temp_v0 + 0x154) = temp_v2;
     *(unsigned int *)(temp_v0 + 0x194) = 0x43f50000;

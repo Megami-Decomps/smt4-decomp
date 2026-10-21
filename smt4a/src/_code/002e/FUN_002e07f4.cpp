@@ -1,24 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e07f4` (_code @ 0x2e07f4, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_PairedAvailability.h"
 
 extern "C" {
+extern AvailabilityState DAT_006357d8;
+extern AvailabilityState DAT_006357ec;
 
-extern int DAT_006357dc; /* 0x6357dc */
-extern signed char DAT_006357e8; /* 0x6357e8 */
-extern int DAT_006357f0; /* 0x6357f0 */
-extern signed char DAT_006357fc; /* 0x6357fc */
-
-
-unsigned int FUN_002e07f4(void)
-
+u32 FUN_002e07f4(void)
 {
-  if ((DAT_006357e8 == '\0') || ((DAT_006357e8 == '\x03' && (0 < DAT_006357dc)))) {
-    if ((DAT_006357fc == '\0') || ((DAT_006357fc == '\x03' && (0 < DAT_006357f0)))) {
-      return 1;
+    if (availabilityStateReady(&DAT_006357d8)) {
+        if (availabilityStateReady(&DAT_006357ec))
+            return 1;
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

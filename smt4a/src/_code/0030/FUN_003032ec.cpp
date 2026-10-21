@@ -1,31 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003032ec` (_code @ 0x3032ec, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: saved arguments and list-link temporaries use different registers from retail. */
+#include "common.h"
+
+struct NodeValue {
+    const void* vtable; // 0x00
+    u32 first;          // 0x04
+    u32 second;         // 0x08
+    u32 third;          // 0x0c
+};
+
+struct ValueNode {
+    ValueNode* next;     // 0x00
+    ValueNode* previous; // 0x04
+    NodeValue value;     // 0x08
+};
+
+struct ValueCollection {
+    u8 unk00[0x14];      // 0x00
+    u32 count;           // 0x14
+};
 
 extern "C" {
+extern const u32 DAT_00559144[];
+ValueNode* FUN_00307d00(ValueCollection* collection, s32 mode, ValueNode** position, const NodeValue* value);
 
-extern unsigned char DAT_00559144; /* 0x559144 */
-
-extern int *FUN_00307d00(int, unsigned int, int *, int, int);
-
-
-void FUN_003032ec(int *param_1,int param_2,int *param_3,int param_4)
-
+// Copy a value into a new list node and insert it before the requested position.
+void FUN_003032ec(ValueNode** result, ValueCollection* collection, ValueNode** position, const NodeValue* value)
 {
-  int *piVar1;
-  
-  piVar1 = (int *)FUN_00307d00(param_2,0,param_3,param_4,param_4);
-  piVar1[2] = (int)&DAT_00559144;
-  piVar1[3] = *(int *)(param_4 + 4);
-  piVar1[4] = *(int *)(param_4 + 8);
-  piVar1[5] = *(int *)(param_4 + 0xc);
-  *piVar1 = *param_3;
-  piVar1[1] = *(int *)(*param_3 + 4);
-  **(int **)(*param_3 + 4) = (int)piVar1;
-  *(int **)(*param_3 + 4) = piVar1;
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) + 1;
-  *param_1 = (int)piVar1;
-  return;
+    ValueNode* node = FUN_00307d00(collection, 0, position, value);
+    NodeValue* copy = &node->value;
+    copy->vtable = DAT_00559144;
+    copy->first = value->first;
+    copy->second = value->second;
+    copy->third = value->third;
+    node->next = *position;
+    node->previous = (*position)->previous;
+    (*position)->previous->next = node;
+    (*position)->previous = node;
+    ++collection->count;
+    *result = node;
 }
-
-} /* extern "C" */
+}

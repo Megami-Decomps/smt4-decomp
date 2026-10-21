@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004bea0c` (_code @ 0x4bea0c, 0x458 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int FUN_0032d0c8(...);
 int FUN_003343f0(int);
 int screenShowMessage(...);
 int FUN_0035d03c(int);
-int FUN_0037e0d0(...);
 int FUN_003e4d68(...);
 int FUN_004be49c(int);
 int FUN_004be990(...);
@@ -49,14 +49,13 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: FUN_002a7324. */
-extern int FUN_002f036c(void);
+extern int gameGetMode(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: screenShowMessage. */
 extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0035d03c. */
 extern int FUN_0035db94(void);
-/* Supplied declaration required: FUN_0037e0d0. */
 /* Supplied declaration required: FUN_003e4d68. */
 extern int FUN_004801ac(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004be49c. */
@@ -104,7 +103,7 @@ void FUN_004bea0c(int param_1)
   temp_v0 = temp_v0 + temp_v3 * 4;
   *(int *)(param_1 + 0x2f4) = temp_v0;
   *(int *)(param_1 + 0x32c) = temp_v0;
-  temp_v3 = FUN_002f036c();
+  temp_v3 = gameGetMode();
   if (temp_v3 == 0) {
     if ((*(char *)(param_1 + 0x2c1) != '\0') || (*(char *)(param_1 + 0x2c0) != '\0')) {
       *(unsigned char *)(param_1 + 0x2c1) = 0;
@@ -113,7 +112,7 @@ void FUN_004bea0c(int param_1)
       temp_v4 = FUN_00187168();
       if (temp_v4 != 0) {
         temp_v2 = FUN_003e4d68(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) & 0xffff);
-        FUN_0037e0d0(temp_v2,0);
+        statusRequestUnitDetails((const UnitCategoryRecord*)temp_v2,0,0);
         FUN_002a7324(1);
       }
       if (*(int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) ==
@@ -179,7 +178,7 @@ void FUN_004bea0c(int param_1)
           if (temp_v4 != 0) {
             temp_v2 = FUN_003e4d68(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) & 0xffff
                                 );
-            FUN_0037e0d0(temp_v2,0);
+            statusRequestUnitDetails((const UnitCategoryRecord*)temp_v2,0,0);
             FUN_002a7324(1);
           }
         }

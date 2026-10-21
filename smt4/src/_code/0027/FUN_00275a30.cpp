@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_0028c668(unsigned int);
-int FUN_0029bb14(unsigned int);
+void nodeSetPropertyScale(unsigned int, float);
+int FUN_0029bb14(unsigned int, float);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 
 extern int g_mapDepartWork; /* 0x4474d8 */
 
-/* Supplied declaration required: FUN_0028c668. */
+/* Supplied declaration required: nodeSetPropertyScale. */
 /* Supplied declaration required: FUN_0029bb14. */
 
 
@@ -33,17 +33,17 @@ void FUN_00275a30(void)
       if ((temp_v1 & 2) != 0) {
         *puVar1 = temp_v1 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
-        FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8));
+        FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8), 1.0f);
         temp_v0 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8);
-        FUN_0028c668(temp_v0);
+        nodeSetPropertyScale(temp_v0, 1.0f);
       }
     }
     else if ((temp_v1 & 2) == 0) {
       *puVar1 = temp_v1 | 2;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8));
+      FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8), 0.0f);
       temp_v0 = *(unsigned int *)(*(int *)(g_mapDepartWork + 0xc) + 8);
-      FUN_0028c668(temp_v0);
+      nodeSetPropertyScale(temp_v0, 0.0f);
     }
   }
   puVar1 = *(unsigned int **)(g_mapDepartWork + 0x10);
@@ -53,16 +53,16 @@ void FUN_00275a30(void)
       if ((temp_v1 & 2) != 0) {
         *puVar1 = temp_v1 & 0xfffffffd;
         *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 1;
-        FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8));
-        FUN_0028c668(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8));
+        FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8), 1.0f);
+        nodeSetPropertyScale(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8), 1.0f);
         return;
       }
     }
     else if ((temp_v1 & 2) == 0) {
       *puVar1 = temp_v1 | 2;
       *(unsigned char *)(*(int *)(puVar1[2] + 0x2c) + 0x1f6) = 0;
-      FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8));
-      FUN_0028c668(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8));
+      FUN_0029bb14(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8), 0.0f);
+      nodeSetPropertyScale(*(unsigned int *)(*(int *)(g_mapDepartWork + 0x10) + 8), 0.0f);
       return;
     }
   }

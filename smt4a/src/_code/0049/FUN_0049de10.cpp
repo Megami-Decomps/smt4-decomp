@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a1f60(unsigned int, int, unsigned int, int, int, unsigned int, unsigned int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, unsigned int);
 int FUN_0049dd74(int);
 int SBORROW4(...);
 
@@ -16,7 +16,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 extern unsigned int FUN_001688c4(unsigned int);
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0049dd74. */
 
 
@@ -81,7 +81,7 @@ void FUN_0049de10(int param_1)
         *(unsigned char *)(temp_v5 + 0xa0) = 1;
         *(int *)(temp_v5 + 0xa4) = temp_v9;
         temp_v5 = param_1 + temp_v9 * 4;
-        FUN_002a1f60(*(unsigned int *)(temp_v5 + 0x88),3,0xffffffff,0,3,*(unsigned int *)(param_1 + 8),
+        asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v5 + 0x88),3,0xffffffff,0,3,*(unsigned int *)(param_1 + 8),
                      temp_v9 + (unsigned int)temp_v1 * 10);
         temp_v4 = FUN_001688c4(*(unsigned int *)(temp_v5 + 0x88));
         temp_v9 = temp_v9 + 1;

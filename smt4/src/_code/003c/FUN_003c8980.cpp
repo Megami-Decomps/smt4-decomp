@@ -15,7 +15,7 @@ int memClear(int, int);
 /* Supplied declaration required: FUN_0029c6b0. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029dc74. */
-extern unsigned char *FUN_002b066c(unsigned short);
+extern unsigned char *partyMemberFindById(unsigned short);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
 
@@ -69,7 +69,7 @@ void FUN_003c8980(unsigned int param_1,unsigned short *param_2,int param_3)
         }
       }
       else {
-        unaff_r4 = (unsigned char *)FUN_002b066c(temp_v1);
+        unaff_r4 = (unsigned char *)partyMemberFindById(temp_v1);
       }
       temp_v3 = 0;
       do {

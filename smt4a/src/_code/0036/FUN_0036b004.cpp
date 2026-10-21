@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00352d30(unsigned int *);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapMain; /* 0x581274 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
@@ -50,7 +50,7 @@ void FUN_0036b004(void)
   DAT_005f1b80 = *(unsigned int *)(g_lmapScene + 0x1c);
   DAT_005f1b84 = *(unsigned int *)(g_lmapScene + 0x20);
   DAT_005f1b8c = DAT_005f16bc + 180.0f;
-  DAT_005f1b90 = *(unsigned int *)(DAT_005806a4 + 0x18);
+  DAT_005f1b90 = *(unsigned int *)(g_lmapView + 0x18);
   DAT_005f1b94 = *(unsigned int *)(temp_v0 + 0x30);
   DAT_005f1b98 = *(unsigned int *)(temp_v0 + 0x34);
   DAT_005f1b9c = DAT_005f16c0;

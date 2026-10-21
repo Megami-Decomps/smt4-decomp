@@ -4,19 +4,19 @@
 
 extern "C" {
 
-int FUN_001656e0(unsigned int, int);
-int FUN_0016572c(unsigned int, int);
-int FUN_00167f24(int);
+int jobSetIntensity(unsigned int, int);
+int jobBlendSetRate(unsigned int, int);
+int messageMainSetMode(int);
 int scrGetArg(int);
 
 extern int g_eventTex; /* 0x57f3b0 */
 
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_001656e0. */
-/* Supplied declaration required: FUN_0016572c. */
+/* Supplied declaration required: jobSetIntensity. */
+/* Supplied declaration required: jobBlendSetRate. */
 extern short eventTexJobGetId(unsigned int);
 extern short FUN_00167898(unsigned int);
-/* Supplied declaration required: FUN_00167f24. */
+/* Supplied declaration required: messageMainSetMode. */
 extern unsigned char FUN_00169580(unsigned int);
 extern unsigned char FUN_00169590(unsigned int);
 /* Supplied declaration required: scrGetArg. */
@@ -46,9 +46,9 @@ unsigned int FUN_0034858c(void)
         temp_v6 = temp_v0 + temp_v4 * 4;
         temp_v5 = jobIsValid(*(unsigned int *)(temp_v6 + 4));
         if (((temp_v5 != 0) && (temp_v3 = eventTexJobGetId(*(unsigned int *)(temp_v6 + 4)), temp_v3 == temp_v2)) &&
-           (FUN_001656e0(*(unsigned int *)(temp_v6 + 4),temp_v7), temp_v7)) {
+           (jobSetIntensity(*(unsigned int *)(temp_v6 + 4),temp_v7), temp_v7)) {
           temp_v1 = FUN_00169580(*(unsigned int *)(temp_v6 + 4));
-          FUN_00167f24(temp_v1);
+          messageMainSetMode(temp_v1);
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < *(int *)(temp_v0 + 0x44));
@@ -58,9 +58,9 @@ unsigned int FUN_0034858c(void)
       temp_v6 = temp_v0 + temp_v4 * 4;
       temp_v5 = jobIsValid(*(unsigned int *)(temp_v6 + 0x4c));
       if (((temp_v5 != 0) && (temp_v3 = FUN_00167898(*(unsigned int *)(temp_v6 + 0x4c)), temp_v3 == temp_v2)) &&
-         (FUN_0016572c(*(unsigned int *)(temp_v6 + 0x4c),temp_v7), temp_v7)) {
+         (jobBlendSetRate(*(unsigned int *)(temp_v6 + 0x4c),temp_v7), temp_v7)) {
         temp_v1 = FUN_00169590(*(unsigned int *)(temp_v6 + 0x4c));
-        FUN_00167f24(temp_v1);
+        messageMainSetMode(temp_v1);
       }
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 0x10);

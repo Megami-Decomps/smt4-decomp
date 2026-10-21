@@ -10,7 +10,7 @@ int FUN_0019a0fc(...);
 int FUN_0019e3d0(...);
 int FUN_001a1c28(...);
 int FUN_0021252c(...);
-int FUN_00215a24(...);
+int facingUpdateAngles(...);
 int matrixSetTranslation(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX33CopyAsm(...);
@@ -111,7 +111,7 @@ extern int FUN_00199f84(unsigned char *, int);
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a1c28. */
 /* Supplied declaration required: FUN_0021252c. */
-/* Supplied declaration required: FUN_00215a24. */
+/* Supplied declaration required: facingUpdateAngles. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: matrixSetTranslation. */
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
@@ -327,7 +327,7 @@ void FUN_00238490(int param_1)
     FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
-    FUN_00215a24(param_1,1);
+    facingUpdateAngles(param_1,1);
   }
   if ((*(unsigned char *)(param_1 + 0x130) & 1) != 0) {
     if (*(char *)(param_1 + 0x380) == '\x01') {

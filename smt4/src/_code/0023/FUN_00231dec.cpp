@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int FUN_00231bcc(...);
 int lmapSceneGetObj(int);
 int FUN_0025090c(unsigned int, unsigned int, int, unsigned char [128]);
@@ -17,7 +17,7 @@ int FUN_002bee04(...);
 int FUN_002bf380(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int libc_strcpy(...);
-int FUN_0039f63c(...);
+int drawEffectResourceWithColors(...);
 int FUN_0039fb38(...);
 int NaviMain_GetCurrentMap(...);
 int NaviMain_GetPosY(int);
@@ -39,7 +39,7 @@ extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
 /* Supplied declaration required: lmapSceneGetObj. */
 extern unsigned int curveEvaluateStandard(int, unsigned int);
@@ -61,7 +61,7 @@ extern int gameGetMapBlock(void);
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002e039c(int);
-/* Supplied declaration required: FUN_0039f63c. */
+/* Supplied declaration required: drawEffectResourceWithColors. */
 /* Supplied declaration required: FUN_0039fb38. */
 /* Supplied declaration required: NaviMain_GetCurrentMap. */
 extern unsigned int NaviMain_GetPosX(void);
@@ -104,7 +104,7 @@ void FUN_00231dec(int param_1)
   temp_v17 = 0.0f;
   temp_v16 = 0.0f;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x1000000) != 0) {
-    FUN_00231bb8(param_1 + 0x164,&temp_v16);
+    pairCopy(param_1 + 0x164,&temp_v16);
   }
   efctSetSpeed();
   FUN_002bed3c();
@@ -248,7 +248,7 @@ LAB_002323cc:
             FUN_0039fb38(temp_v10,(int)temp_v12,(int)(temp_v13 + temp_v17),DAT_0044cdd8,1);
           }
           else {
-            FUN_0039f63c(temp_v10,(int)temp_v12,(int)(temp_v13 + temp_v17),DAT_0044cdd8,0x80,1);
+            drawEffectResourceWithColors(temp_v10,(int)temp_v12,(int)(temp_v13 + temp_v17),DAT_0044cdd8,0x80,1);
           }
           temp_v9 = temp_v9 + 1;
         } while (temp_v9 < 5);

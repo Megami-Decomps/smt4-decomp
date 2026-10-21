@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(int);
 int asdMemFree(void);
 int FUN_00275748(unsigned int *, int);
-int FUN_002c76c0(...);
+int scrCommMessageSetMode(...);
 int FUN_003180c4(int, unsigned int);
 int saveDataClearValues(void);
 
@@ -26,7 +26,7 @@ extern int jobFind(unsigned int);
 extern unsigned int scrGetArg(unsigned int);
 extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: FUN_00275748. */
-/* Supplied declaration required: FUN_002c76c0. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 /* Supplied declaration required: FUN_003180c4. */
 extern unsigned int gameBlockGetArea221AA(void);
 /* Supplied declaration required: saveDataClearValues. */
@@ -48,7 +48,7 @@ unsigned int FUN_003311d4(void)
     DAT_0058810d = '\x01';
     temp_v2 = 2;
   }
-  FUN_002c76c0(1);
+  scrCommMessageSetMode(1);
   if (g_name == '\0') {
     if ((temp_v2 >= 2) && (temp_v2 == 2)) {
       saveDataClearValues();
@@ -78,7 +78,7 @@ unsigned int FUN_003311d4(void)
     FUN_003180c4(0x33,temp_v1);
   }
   g_name = 0;
-  FUN_002c76c0(0xffffffff);
+  scrCommMessageSetMode(0xffffffff);
   if (DAT_0058810d != '\0') {
     DAT_0058810d = '\0';
     sysPlaySe(0x92);

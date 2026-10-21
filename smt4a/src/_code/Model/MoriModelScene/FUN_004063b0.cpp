@@ -8,7 +8,7 @@ int asdMemoryAlloc(...);
 int FUN_002f5020(...);
 int FUN_0045a6a4(...);
 int FUN_0045ab0c(...);
-int FUN_0050d6a4(...);
+int asdMemoryAllocDefault(...);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -21,7 +21,7 @@ extern unsigned char LAB_0040633c; /* 0x40633c */
 /* Supplied declaration required: FUN_002f5020. */
 /* Supplied declaration required: FUN_0045a6a4. */
 /* Supplied declaration required: FUN_0045ab0c. */
-/* Supplied declaration required: FUN_0050d6a4. */
+/* Supplied declaration required: asdMemoryAllocDefault. */
 
 
 void FUN_004063b0(int param_1,int param_2)
@@ -54,7 +54,7 @@ void FUN_004063b0(int param_1,int param_2)
   FUN_0045a6a4(param_1 + 0x10,temp_v1,param_2);
   temp_v2 = (unsigned int)*(unsigned short *)(param_1 + 0xf2);
   puVar3 = (unsigned int *)(temp_v2 * 0x704 + 8);
-  FUN_0050d6a4(puVar3,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelScene.cpp",0x58);
+  asdMemoryAllocDefault(puVar3,"c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelScene.cpp",0x58);
   puVar4 = (unsigned int *)0x0;
   if (puVar3 != (unsigned int *)0x0) {
     puVar4 = puVar3 + 2;

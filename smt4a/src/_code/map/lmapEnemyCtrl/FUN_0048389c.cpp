@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(unsigned int, int);
-int FUN_0040ace8(unsigned int, int);
+int handleRegistryRegisterObject(unsigned int, int);
 
 extern unsigned char LAB_0048394c; /* 0x48394c */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
@@ -15,8 +15,8 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 void FUN_0048389c(int param_1)
@@ -30,25 +30,25 @@ void FUN_0048389c(int param_1)
   FUN_00178b04(0x20,&LAB_0048394c,0xe2);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   *(unsigned int *)(param_1 + 0x98) = temp_v1;
   FUN_0040aa6c();
   FUN_0040aad4(*(unsigned int *)(param_1 + 0x98),0);
   temp_v0 = *(int *)(*(int *)(param_1 + 0x98) + 4);
-  FUN_0040ace8(g_handleRegistry,temp_v0);
+  handleRegistryRegisterObject(g_handleRegistry,temp_v0);
   *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
   temp_v0 = 0x20;
   FUN_00178b04(0x20,&LAB_0048394c,0xec);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   *(unsigned int *)(param_1 + 0x9c) = temp_v1;
   FUN_0040aa6c();
   FUN_0040aad4(*(unsigned int *)(param_1 + 0x9c),0);
   temp_v0 = *(int *)(*(int *)(param_1 + 0x9c) + 4);
-  FUN_0040ace8(g_handleRegistry,temp_v0);
+  handleRegistryRegisterObject(g_handleRegistry,temp_v0);
   *(unsigned int *)(temp_v0 + 4) = *(unsigned int *)(temp_v0 + 4) | 3;
   return;
 }

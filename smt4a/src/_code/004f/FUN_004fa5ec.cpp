@@ -1,38 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fa5ec` (_code @ 0x4fa5ec, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: all instructions match; aggregate snapshot copy calls __aeabi_memcpy4 instead of retail rt_memcpy_w. Explicit standard memcpy produces the same different helper symbol. */
+#include "common.h"
+
+struct ReadinessRecord {
+    u32 unk00;
+    u32 state;
+    u8 unk08[0x80];
+    u8 flags;
+    u8 unk89[3];
+};
+struct PairedReadinessOwner {
+    u8 unk0000[0x3284];
+    ReadinessRecord records[2];
+};
 
 extern "C" {
-
-int rt_memcpy_w(unsigned char [4], int, int);
-
-/* stack frame of param_1: 2 slot(s), 5 byte(s) */
-typedef struct {
-    unsigned char sp10; /* 0x10: local_10 */
-    unsigned int sp94; /* 0x94: local_94 */
-} param_1_stack;
-
-/* Supplied declaration required: rt_memcpy_w. */
-
-
-unsigned int FUN_004fa5ec(int param_1)
-
+bool FUN_004fa5ec(const PairedReadinessOwner *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned char temp_v1 [4];
-  int temp_v2;
-  unsigned char temp_v3;
-  
-  temp_v0 = 0;
-  while ((rt_memcpy_w(temp_v1,param_1 + temp_v0 * 0x8c + 0x3284,0x8c), (temp_v3 & 1) == 0 ||
-         (temp_v2 != 0))) {
-    temp_v0 = temp_v0 + 1;
-    if (temp_v0 >= 2) {
-      return 1;
+    for (s32 i = 0; i < 2; ++i) {
+        ReadinessRecord record = owner->records[i];
+        if ((record.flags & 1) != 0 && record.state == 0) {
+            return false;
+        }
     }
-  }
-  return 0;
+    return true;
 }
-
-} /* extern "C" */
+}

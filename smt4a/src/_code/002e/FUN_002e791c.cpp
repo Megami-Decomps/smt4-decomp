@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e6e26(void);
+int onlineContextGetInstance(void);
 int FUN_002e6e34(unsigned char [12], int);
 int _ZN9Obj55b28cD1Ev(unsigned char [12]);
 int sharedRefRelease(void);
@@ -44,7 +44,7 @@ typedef struct {
 
 extern int FUN_00103fd4(void);
 extern int FUN_0011997c(int, unsigned int, fn_002e791c_arg0 *, unsigned int, unsigned char *, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002e6e26. */
+/* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
@@ -81,7 +81,7 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
   temp_v7 = param_4;
   temp_v0 = onlineInstantiationContextGetCurrent();
   FUN_002f7218(temp_v0,0);
-  temp_v1 = FUN_002e6e26();
+  temp_v1 = onlineContextGetInstance();
   FUN_002e6e34(temp_v3,temp_v1 + 0x58);
   if (param_1->field_0x9c != 0) {
     if (*(char *)(param_1->field_0x9c + 0x22) != '\x05') {
@@ -136,7 +136,7 @@ FUN_002e791c(fn_002e791c_arg0 *param_1,int param_2,unsigned int param_3,unsigned
       temp_v1 = 0;
     }
     sharedRefAddRef(temp_v1);
-    temp_v0 = FUN_002e6e26();
+    temp_v0 = onlineContextGetInstance();
     FUN_002e78d0(temp_v0,param_1->field_0x94,0);
     _ZN9Obj55b28cD1Ev(temp_v3);
     return 1;

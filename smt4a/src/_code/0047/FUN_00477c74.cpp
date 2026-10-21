@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_00183318(int);
-int FUN_0019d36c(void);
-int FUN_001f4908(int, int, int);
+int ifTouchDecrementTimer(void);
+int slotSetRequest(int, int, int);
 int FUN_003423cc(int, unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 int soundChannelStopAll(int);
 
@@ -17,8 +17,8 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00183318. */
-/* Supplied declaration required: FUN_0019d36c. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: ifTouchDecrementTimer. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_002e07f4(void);
 /* Supplied declaration required: FUN_003423cc. */
 /* Supplied declaration required: soundChannelStopAll. */
@@ -45,8 +45,8 @@ void FUN_00477c74(unsigned int *param_1,unsigned int param_2,unsigned int param_
     return;
   }
   soundChannelStopAll(0xf);
-  FUN_001f4908(0,10,0xff);
-  FUN_001f4908(1,10,0xff);
+  slotSetRequest(0,10,0xff);
+  slotSetRequest(1,10,0xff);
   param_1[2] = 1;
   FUN_003423cc(0,0xffffffff,0,param_4,unaff_r4,unaff_r5,unaff_r6);
   if ((*param_1 & 0x100000) != 0) {
@@ -54,7 +54,7 @@ void FUN_00477c74(unsigned int *param_1,unsigned int param_2,unsigned int param_
     FUN_00183318(0);
     temp_v0 = 0;
     do {
-      FUN_0019d36c();
+      ifTouchDecrementTimer();
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 6);
     return;

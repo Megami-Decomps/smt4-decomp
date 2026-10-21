@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002344d8(...);
 int FUN_002345a4(...);
 int FUN_002ba81c(int, unsigned char [96], int);
-int FUN_002baa40(unsigned int *, int);
+int resultPairInitialize(unsigned int *, int);
 int FUN_002bad5c(int *);
 int FUN_00353154(int *, int, unsigned char [32]);
 
@@ -20,9 +20,9 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002344d8. */
 /* Supplied declaration required: FUN_002345a4. */
-extern int FUN_002a12d8(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: FUN_002ba81c. */
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: resultPairInitialize. */
 /* Supplied declaration required: FUN_002bad5c. */
 /* Supplied declaration required: FUN_00353154. */
 
@@ -48,31 +48,31 @@ void FUN_002341d4(unsigned int *param_1,int param_2)
   FUN_00353154(&temp_v9,param_2 + 0x84,temp_v7);
   temp_v5 = temp_v9;
   temp_v6 = uStack_14;
-  temp_v0 = FUN_002a12d8((unsigned int *)&temp_v5);
+  temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v5);
   if (-1 < temp_v0) {
     FUN_002345a4(&temp_v9,param_2 + 0x84,temp_v3,temp_v7);
     temp_v5 = temp_v9;
     temp_v6 = uStack_14;
-    temp_v0 = FUN_002a12d8((unsigned int *)&temp_v5);
+    temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v5);
     if (-1 < temp_v0) {
       FUN_002ba81c(param_2 + 0x638,temp_v4,0x40);
       FUN_002345a4(&temp_v9,param_2 + 0x84,temp_v1,temp_v7);
       temp_v5 = temp_v9;
       temp_v6 = uStack_14;
-      temp_v0 = FUN_002a12d8((unsigned int *)&temp_v5);
+      temp_v0 = legacyResourceIdRemap((unsigned int *)&temp_v5);
       if (-1 < temp_v0) {
         temp_v0 = param_2;
         FUN_002344d8(param_2,param_2 + 0x5b8,0x20,temp_v1);
         puVar2 = temp_v8;
-        FUN_002baa40(puVar2,temp_v0);
+        resultPairInitialize(puVar2,temp_v0);
         temp_v5 = *puVar2;
         temp_v6 = puVar2[1];
         FUN_002344d8(param_2,param_2 + 0x5f8,0x20,temp_v2);
         puVar2 = temp_v8;
-        FUN_002baa40(puVar2,param_2);
+        resultPairInitialize(puVar2,param_2);
         temp_v5 = *puVar2;
         temp_v6 = puVar2[1];
-        FUN_002baa40(param_1,0);
+        resultPairInitialize(param_1,0);
         return;
       }
     }

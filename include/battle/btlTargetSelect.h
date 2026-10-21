@@ -15,4 +15,7 @@ typedef struct BtlTargetSelect {
     /* 0x04 */ BtlUiObject *secondary;
 } BtlTargetSelect;
 
+struct BtlMainState;
+extern "C" void btlTargetSelectCreate(BtlMainState *owner);
+
 #endif

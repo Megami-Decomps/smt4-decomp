@@ -4,8 +4,8 @@
 
 extern "C" {
 
-int FUN_00137ea0(int);
-int FUN_001386e8(int);
+int gameDataFlagsClearBits(int);
+int gameDataBlocksReleaseHold(int);
 int FUN_001469a8(...);
 int asdMemFree(unsigned int);
 int FUN_001a0d08(void);
@@ -19,8 +19,8 @@ int rt_aeabi_memclr(int, int);
 int software_interrupt(int);
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_00137ea0. */
-/* Supplied declaration required: FUN_001386e8. */
+/* Supplied declaration required: gameDataFlagsClearBits. */
+/* Supplied declaration required: gameDataBlocksReleaseHold. */
 /* Supplied declaration required: FUN_001469a8. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001a0d08. */
@@ -62,8 +62,8 @@ unsigned int FUN_0035a840(int param_1)
     *(unsigned int *)(param_1 + 0x7f8) = 0;
     asdMemFree(*(unsigned int *)(param_1 + 0x804));
     *(unsigned int *)(param_1 + 0x804) = 0;
-    FUN_001386e8(2);
-    FUN_00137ea0(2);
+    gameDataBlocksReleaseHold(2);
+    gameDataFlagsClearBits(2);
     temp_v1 = *(int *)(param_1 + 0x350);
     FUN_00275bc8(temp_v1,*(unsigned int *)(param_1 + 0x354));
     *(int *)(param_1 + 0x360) = temp_v1;

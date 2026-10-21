@@ -6,7 +6,7 @@ extern "C" {
 
 int dataTable1bOr1cGetRecord(void);
 
-extern int FUN_00240a6c(unsigned int);
+extern int questRequirementsMet(unsigned int);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int gameGetQuestCenterBlock(void);
 
@@ -30,7 +30,7 @@ void FUN_00348e10(unsigned int param_1)
     dataTable1bOr1cGetRecord();
     if ((((temp_v1 != 0) && ((*(unsigned char *)(temp_v1 + 7) & 1) == 0)) &&
         (*(unsigned short *)(temp_v1 + 0x19c) == param_1)) &&
-       (temp_v0 = FUN_00240a6c(temp_v2 & 0xffff), temp_v0 != 0)) {
+       (temp_v0 = questRequirementsMet(temp_v2 & 0xffff), temp_v0 != 0)) {
       temp_v3 = temp_v3 + 1;
     }
     temp_v2 = temp_v2 + 1;

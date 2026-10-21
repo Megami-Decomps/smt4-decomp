@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002491b4(void);
+int spriteGroupCreateFromFile(void);
 int handleBlockRefDrop(void);
 int FUN_002826d4(...);
 int FUN_00282780(unsigned int, unsigned int, int, int);
@@ -28,7 +28,7 @@ extern unsigned int *DAT_004ea7f4; /* 0x4ea7f4 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_002491b4. */
+/* Supplied declaration required: spriteGroupCreateFromFile. */
 extern unsigned int FUN_0024c3c8(unsigned int);
 /* Supplied declaration required: handleBlockRefDrop. */
 /* Supplied declaration required: FUN_002826d4. */
@@ -179,7 +179,7 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                       else {
                         temp_v5 = piVar2[2];
                         if (temp_v5 != 0) {
-                          FUN_002491b4();
+                          spriteGroupCreateFromFile();
                           param_1[0x10] = temp_v5;
                         }
                         else {
@@ -202,7 +202,7 @@ unsigned long long FUN_002f82ac(unsigned int *param_1)
                             param_1[0x10] = 0;
                           }
                           temp_v0 = temp_v1;
-                          FUN_002491b4();
+                          spriteGroupCreateFromFile();
                           param_1[0x10] = temp_v0;
                           asdMemFree(temp_v1);
                         }

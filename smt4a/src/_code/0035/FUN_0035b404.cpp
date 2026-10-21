@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdOperatorNew(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_002c7e6c(...);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
@@ -29,7 +29,7 @@ extern unsigned int *DAT_0058812c; /* 0x58812c */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
@@ -63,8 +63,8 @@ void FUN_0035b404(unsigned int param_1)
   *puVar1 = (unsigned int)pcVar2;
   taskCreateDraw("DEVIL_MARKET DD",0xeb,0,0,&LAB_0036edf4,0,0,pcVar2);
   puVar1[0x27] = param_1;
-  FUN_002804b0("npc_shop/DevilMarket/DevilMarket.mbm",puVar1 + 4,0);
-  FUN_002804b0("npc_shop/DevilMarket/DevilMarket.bf",puVar1 + 5,0);
+  asdLoadFileAsyncSimple("npc_shop/DevilMarket/DevilMarket.mbm",puVar1 + 4,0);
+  asdLoadFileAsyncSimple("npc_shop/DevilMarket/DevilMarket.bf",puVar1 + 5,0);
   *(unsigned char *)(puVar1 + 7) = 0;
   temp_v0 = loadSlotIsLoaded(0x4f);
   if (temp_v0 == 0) {

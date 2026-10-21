@@ -35,7 +35,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int *DAT_005806a4; /* 0x5806a4 */
+extern int *g_lmapView; /* 0x5806a4 */
 extern float DAT_005f16f0; /* 0x5f16f0 */
 extern float DAT_005f16f4; /* 0x5f16f4 */
 extern float DAT_005f16f8; /* 0x5f16f8 */
@@ -167,8 +167,8 @@ unsigned int FUN_003702b4(void)
   DAT_005f1700 = temp_v16;
   DAT_005f1704 = temp_v17;
   DAT_005f1708 = temp_v18;
-  if (*DAT_005806a4 != 3) {
-    *(unsigned char *)(DAT_005806a4 + 0x2a) = 1;
+  if (*g_lmapView != 3) {
+    *(unsigned char *)(g_lmapView + 0x2a) = 1;
     FUN_00303460(3);
     FUN_00313648(0x1d);
   }

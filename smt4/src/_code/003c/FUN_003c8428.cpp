@@ -38,7 +38,7 @@ struct fn_003c8428_arg0 {
 
 extern int gameGetPlayerData(void);
 extern int FUN_002b6a54(fn_003c8428_arg0 *, unsigned int);
-extern unsigned short *gameGetOptions(void);
+extern unsigned short *gameGetSupportUnitData(void);
 /* Supplied declaration required: memClear. */
 extern unsigned int tableEntryIndexByKey(fn_003c8428_arg0 *, unsigned char);
 
@@ -58,7 +58,7 @@ void FUN_003c8428(fn_003c8428_arg0 *param_1)
   int temp_v7;
   unsigned int temp_v8;
   
-  puVar8 = (unsigned short *)gameGetOptions();
+  puVar8 = (unsigned short *)gameGetSupportUnitData();
   temp_v8 = 0xffffffff;
   temp_v7 = 0;
   do {

@@ -29,7 +29,7 @@ extern int *g_aocSystem; /* 0x433158 */
 
 extern int FUN_0023e3a4(int *, int, unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
-extern int *FUN_002c5c04(unsigned char *);
+extern int *asdLoadFileSyncDefault(unsigned char *);
 /* Supplied declaration required: FUN_00389528. */
 
 
@@ -52,7 +52,7 @@ void FUN_0033e7c4(fn_0033e7c4_arg0 *param_1,int param_2)
     FUN_00389528(g_aocSystem,param_2,temp_v2);
   }
   else {
-    piVar3 = (int *)FUN_002c5c04(temp_v2);
+    piVar3 = (int *)asdLoadFileSyncDefault(temp_v2);
   }
   param_1->field_0x28 = piVar3;
   param_1->field_0x4 = param_2;

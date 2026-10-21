@@ -1,36 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043128c` (_code @ 0x43128c, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses r0 for the callback-global base and reloads reason before the callback; retail uses r3 and retains r0. */
+#include "common.h"
 
 extern "C" {
+extern void (*DAT_00589280)(u32, u32, u32, u32, u32, u32);
+u32 FUN_0019a2f8(u32 reason, u32 first, u32 second);
 
-int software_interrupt(int);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-    unsigned int sp10; /* 0x10: local_10 */
-} param_3_stack;
-
-extern romwright_code *DAT_00589280; /* 0x589280 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_0043128c(unsigned int param_1,unsigned int param_2,unsigned int param_3)
-
+// Consume the one-shot break callback before issuing the break request.
+u32 FUN_0043128c(u32 reason, u32, u32 detail)
 {
-/* irregular: 1 native warning(s); review required */
-  romwright_code *pcVar1;
-  
-  pcVar1 = DAT_00589280;
-  if (DAT_00589280 != (romwright_code *)0x0) {
-    DAT_00589280 = (romwright_code *)0x0;
-    (*pcVar1)(param_1,0,0,0,0,param_3);
-  }
-  software_interrupt(0x3c);
-  return param_1;
+    void (*callback)(u32, u32, u32, u32, u32, u32) = DAT_00589280;
+    if (callback != NULL) {
+        DAT_00589280 = NULL;
+        callback(reason, 0, 0, 0, 0, detail);
+    }
+    return FUN_0019a2f8(reason, 0, 0);
 }
-
-} /* extern "C" */
+}

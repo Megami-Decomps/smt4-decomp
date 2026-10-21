@@ -21,7 +21,7 @@ typedef struct {
 
 extern signed char DAT_005b448e; /* 0x5b448e */
 extern signed char DAT_005b448f; /* 0x5b448f */
-extern unsigned int DAT_006426c0; /* 0x6426c0 */
+extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x6426c0 */
 extern unsigned int DAT_006426cc; /* 0x6426cc */
 
 /* Supplied declaration required: FUN_00430e58. */
@@ -54,7 +54,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
   iStack_30 = param_2;
   temp_v10 = param_3;
   uStack_28 = param_4;
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_006426c0);
+  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxCriticalSection);
   temp_v1 = param_1[1];
   if (temp_v1 == 0) {
     temp_v2 = 0xc8810bea;
@@ -100,7 +100,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
         }
         if (temp_v1 < 0) {
           *(unsigned int *)(param_2 + 0x14) = 0;
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
           return 0xc8610bf3;
         }
         temp_v1 = (**(romwright_code **)(*param_1 + 0x34))
@@ -136,7 +136,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
         }
         if (temp_v1 < 0) {
           *(unsigned int *)(param_2 + 0x14) = 0;
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
           return 0xc8610bf3;
         }
         temp_v1 = (**(romwright_code **)(*param_1 + 0x34))
@@ -147,7 +147,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
         if (((temp_v6 < 0x20) ||
             (rt_memcpy(param_2,temp_v4,0x20), *(unsigned int *)(param_2 + 4) != temp_v6)) ||
            (temp_v1 = *(int *)(param_2 + 0x14), temp_v6 < temp_v1 * 0x70 + 0x20U)) {
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
           return 0xc8e1086a;
         }
         temp_v0 = temp_v4 + 0x20;
@@ -159,7 +159,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
           do {
             rt_memcpy(temp_v8,temp_v0,0x70);
             if ((temp_v8[0] != temp_v4) || (temp_v9 != param_1[1])) {
-              nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+              nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
               return 0xc8e1086a;
             }
             *(int *)(temp_v10 + temp_v3 * 4) = temp_v0;
@@ -169,7 +169,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
         }
         if (temp_v5 != 0) {
           temp_v2 = 0;
-          nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+          nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
           return temp_v2;
         }
       }
@@ -194,7 +194,7 @@ unsigned int FUN_0042d798(int *param_1,int param_2,int param_3,unsigned int para
     }
     temp_v2 = 0xc8810bef;
   }
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
   return temp_v2;
 }
 

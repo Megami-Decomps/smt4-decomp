@@ -23,7 +23,7 @@ extern int FUN_00140924(unsigned int, unsigned int);
 extern int FUN_001414d4(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001418b8. */
 /* Supplied declaration required: asdSoundHandleListFind. */
-extern unsigned int FUN_00145868(void);
+extern unsigned int soundVolumeSettingGet(void);
 extern int jyoucyuGetTableEntry(unsigned int);
 extern int rt_memcmp(void);
 
@@ -167,7 +167,7 @@ void FUN_0013ab18(void)
                       temp_v7 = temp_v3 == 0x1000095;
                     }
                     if (!temp_v7) {
-                      temp_v1 = FUN_00145868();
+                      temp_v1 = soundVolumeSettingGet();
                     }
                   }
                 }

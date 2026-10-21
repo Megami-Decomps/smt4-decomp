@@ -1,34 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003edf30` (_code @ 0x3edf30, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: generated static-initialization boundaries and the registered destructor are not recovered. */
+#include "common.h"
+
+struct DepartureArguments {
+    u8 unk00[0x18]; // 0x00
+    u32 first;      // 0x18
+    u32 second;     // 0x1c
+};
+
+struct DepartureCounters {
+    u32 first;  // 0x00
+    u32 second; // 0x04
+};
+
+struct DepartureState {
+    u8 unk00[0x50]; // 0x00
+    f32 first;      // 0x50
+    u8 unk54[8];    // 0x54
+    f32 second;     // 0x5c
+    u8 unk60[8];    // 0x60
+    f32 x;          // 0x68
+    f32 y;          // 0x6c
+    f32 z;          // 0x70
+};
 
 extern "C" {
+extern DepartureCounters DAT_00447510;
+extern DepartureState DAT_0049f890;
+void FUN_002c2218(DepartureState* state);
 
-int FUN_002c2218(unsigned char *);
-
-extern unsigned int DAT_00447510; /* 0x447510 */
-extern unsigned int DAT_00447514; /* 0x447514 */
-extern unsigned char DAT_0049f890; /* 0x49f890 */
-extern unsigned int DAT_0049f8f8; /* 0x49f8f8 */
-extern unsigned int DAT_0049f8fc; /* 0x49f8fc */
-extern unsigned int DAT_0049f900; /* 0x49f900 */
-
-/* Supplied declaration required: FUN_002c2218. */
-
-
-void FUN_003edf30(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Reset the shared departure state and its initial position.
+void FUN_003edf30(u32 first, u32 second, DepartureArguments* arguments)
 {
-/* irregular: 1 native warning(s); review required */
-  *(unsigned int *)(param_3 + 0x18) = param_1;
-  *(unsigned int *)(param_3 + 0x1c) = param_2;
-  DAT_00447510 = 0;
-  DAT_00447514 = 0;
-  FUN_002c2218(&DAT_0049f890);
-  DAT_0049f8f8 = 0x439b0000;
-  DAT_0049f8fc = 0x42340000;
-  DAT_0049f900 = 0;
-  return;
+    arguments->first = first;
+    arguments->second = second;
+    DAT_00447510.first = 0;
+    DAT_00447510.second = 0;
+    FUN_002c2218(&DAT_0049f890);
+    DAT_0049f890.x = 310.0f;
+    DAT_0049f890.y = 45.0f;
+    DAT_0049f890.z = 0.0f;
 }
-
-} /* extern "C" */
+}

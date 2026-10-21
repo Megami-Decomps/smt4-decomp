@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00215b5c(int, unsigned int);
 int FUN_0026a978(unsigned int *, int);
-int FUN_002b066c(...);
+int partyMemberFindById(...);
 int rt_memcpy(int, unsigned int, unsigned int);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
@@ -24,8 +24,8 @@ extern unsigned char g_gameGlobals; /* 0x44e140 */
 /* Supplied declaration required: FUN_0026a978. */
 extern char FUN_0026a9cc(short, unsigned short, int, unsigned int *, unsigned char);
 extern unsigned int FUN_0029aafc(void);
-extern unsigned int FUN_0029c8f4(void);
-/* Supplied declaration required: FUN_002b066c. */
+extern unsigned int flagCountUnlockedSlots(void);
+/* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -52,8 +52,8 @@ void FUN_001ce0fc(unsigned int param_1)
     temp_v4 = FUN_0029aafc();
   }
   else if ((0 < *psVar6) && (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x1e66) != '\x06')) {
-    FUN_002b066c(*psVar6);
-    temp_v4 = FUN_0029c8f4();
+    partyMemberFindById(*psVar6);
+    temp_v4 = flagCountUnlockedSlots();
   }
   temp_v1 = temp_v3 + 0x1348;
   rt_memcpy(temp_v1,param_1,temp_v4 << 1);
@@ -63,10 +63,10 @@ void FUN_001ce0fc(unsigned int param_1)
   temp_v7 = 0;
   temp_v8 = 0;
   if ((*psVar6 >= 1) && (*(char *)(temp_v3 + 0x1e66) != '\x06')) {
-    temp_v2 = FUN_002b066c(*psVar6);
+    temp_v2 = partyMemberFindById(*psVar6);
     temp_v0 = *(char *)(temp_v3 + 0x1e66);
     if (temp_v0 == '\x02' || temp_v0 == '\x03') {
-      temp_v2 = FUN_002b066c();
+      temp_v2 = partyMemberFindById();
     }
     temp_v0 = '\0';
     if (temp_v2 != 0) {

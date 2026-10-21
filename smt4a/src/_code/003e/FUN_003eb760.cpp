@@ -27,7 +27,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern int FUN_00168518(int, unsigned short);
+extern int dataTableGetCategoryEntry(int, unsigned short);
 extern int FUN_00177654(void);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: rt_memclr. */
@@ -111,7 +111,7 @@ void FUN_003eb760(fn_003eb760_arg0 *param_1,unsigned char *param_2,unsigned int 
       param_2[temp_v9 + 0x1a6] = (char)(temp_v8 & 0x3f);
       temp_v9 = temp_v10;
     } while ((int)temp_v10 < 0x15);
-    temp_v7 = FUN_00168518((int)*(short *)(param_3 + 300),*(unsigned short *)(param_3 + 0x12e));
+    temp_v7 = dataTableGetCategoryEntry((int)*(short *)(param_3 + 300),*(unsigned short *)(param_3 + 0x12e));
     param_2[0x1bb] = (char)*(unsigned int *)(temp_v7 + 0xc);
   }
   else {

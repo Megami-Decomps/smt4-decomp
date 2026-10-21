@@ -1,31 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017ce88` (_code @ 0x17ce88, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler forwards stack arguments with VFP loads/stores; retail uses integer LDM/STM and more saved registers. */
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
+extern AsdGfxContext g_asdGfxContext;
+void FUN_0017e22c(AsdCmdBuffer* buffer, u32 source, u32 sourceWidth, u32 sourceHeight,
+                  u32 sourceFormat, u32 destination, u32 destinationWidth,
+                  u32 destinationHeight, u32 destinationFormat, u32 mode, u32 flags, u32 option);
 
-int FUN_0017e22c(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_11: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_11_stack;
-
-extern unsigned char g_asdGfxContext; /* 0x61a470 */
-
-/* Supplied declaration required: FUN_0017e22c. */
-
-
-void FUN_0017ce88(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6,unsigned int param_7,unsigned int param_8,
-                 unsigned int param_9,unsigned int param_10,unsigned int param_11)
-
+// Queue an image transfer on the current graphics command buffer.
+void FUN_0017ce88(u32 source, u32 sourceWidth, u32 sourceHeight, u32 sourceFormat,
+                  u32 destination, u32 destinationWidth, u32 destinationHeight,
+                  u32 destinationFormat, u32 mode, u32 flags, u32 option)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0017e22c((*(unsigned int *)((unsigned char *)&g_asdGfxContext + 0x9c)),param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,param_9,
-               param_10,param_11);
-  return;
+    FUN_0017e22c(g_asdGfxContext.cmdBuffer, source, sourceWidth, sourceHeight, sourceFormat,
+                 destination, destinationWidth, destinationHeight, destinationFormat,
+                 mode, flags, option);
 }
-
-} /* extern "C" */
+}

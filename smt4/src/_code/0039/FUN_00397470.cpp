@@ -45,7 +45,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int buttonHelpGetState(void);
 /* Supplied declaration required: FUN_002636d0. */
 /* Supplied declaration required: FUN_00296ee0. */
@@ -65,7 +65,7 @@ void FUN_00397470(fn_00397470_arg0 *param_1)
     if (temp_v0 != 0) {
       FUN_002636d0(0);
     }
-    temp_v0 = FUN_0019e0c0(*(unsigned int *)&param_1->field_0x654);
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)&param_1->field_0x654);
     if (temp_v0 == 2) {
       temp_v0 = FUN_002973d8();
       if (temp_v0 != 0) {

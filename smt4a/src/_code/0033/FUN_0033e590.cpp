@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int mapIfReleaseResource(void);
 int FUN_00313648(...);
 
-int FUN_0013c1ec(...);
+int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
 int FUN_001bbf0c(void);
@@ -31,7 +31,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned char DAT_005f162e; /* 0x5f162e */
 extern unsigned int DAT_005f16ac; /* 0x5f16ac */
@@ -42,14 +42,14 @@ extern unsigned int DAT_005f16bc; /* 0x5f16bc */
 extern float DAT_005f16cc; /* 0x5f16cc */
 extern unsigned char DAT_005f185a; /* 0x5f185a */
 
-/* Supplied declaration required: FUN_0013c1ec. */
-extern unsigned int FUN_00145868(void);
+/* Supplied declaration required: soundVolumeSettingSet. */
+extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_0022368c. */
 /* Supplied declaration required: FUN_00233e10. */
 /* Supplied declaration required: FUN_002342b8. */
@@ -82,7 +82,7 @@ void FUN_0033e590(void)
   unsigned int temp_v5;
   float temp_v6;
   
-  temp_v0 = FUN_00145868();
+  temp_v0 = soundVolumeSettingGet();
   if (*(int *)(g_lmapScene + 4) < 10) {
     FUN_002dae68();
     temp_v1 = g_lmapScene;
@@ -118,8 +118,8 @@ void FUN_0033e590(void)
                 else {
                   temp_v1 = padButtonIsPressed(6);
                   if ((temp_v1 != 0) || (temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0)) {
-                    temp_v1 = DAT_005806a4;
-                    *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+                    temp_v1 = g_lmapView;
+                    *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                     *(unsigned int *)(temp_v1 + 0xb0) = 0;
                     FUN_00303460(0);
                     temp_v1 = g_lmapScene;
@@ -168,7 +168,7 @@ void FUN_0033e590(void)
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v4 * temp_v6;
           *(unsigned int *)(temp_v1 + 0x50) = DAT_005f16bc;
           FUN_00303460(0xd);
-          *(unsigned int *)(DAT_005806a4 + 0xb0) = 1;
+          *(unsigned int *)(g_lmapView + 0xb0) = 1;
           sysPlaySe(0xdc);
           FUN_00233e10(1,DAT_005f16ac);
           FUN_0022368c();
@@ -187,8 +187,8 @@ void FUN_0033e590(void)
             return;
           }
           mapIfReleaseSlot4();
-          temp_v1 = DAT_005806a4;
-          *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+          temp_v1 = g_lmapView;
+          *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
           *(unsigned int *)(temp_v1 + 0xb0) = 0;
           FUN_00303460(0);
           temp_v2 = *(int *)(g_lmapScene + 4);
@@ -235,9 +235,9 @@ LAB_0033e908:
           FUN_001bc124();
           FUN_001bbf0c();
           FUN_0014af98();
-          FUN_0013c1ec();
+          soundVolumeSettingSet();
           FUN_003d2150(0x10002e5);
-          FUN_0013c1ec(temp_v0);
+          soundVolumeSettingSet(temp_v0);
           FUN_002342b8();
           temp_v2 = *(int *)(g_lmapScene + 4);
           temp_v1 = g_lmapScene;
@@ -245,7 +245,7 @@ LAB_0033e908:
       }
       else {
         DAT_005f185a = 0;
-        *(unsigned int *)(DAT_005806a4 + 0xc) = 1;
+        *(unsigned int *)(g_lmapView + 0xc) = 1;
         *(unsigned int *)(temp_v1 + 0x54) = 0x15;
         *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
         temp_v2 = *(int *)(temp_v1 + 4);
@@ -282,13 +282,13 @@ LAB_0033e908:
       }
       else {
         temp_v2 = FUN_002e07f4();
-        temp_v1 = DAT_005806a4;
+        temp_v1 = g_lmapView;
         if (temp_v2 == 0) {
           FUN_002e364c(g_lmapScene + 0x28);
           FUN_00327ee8();
           return;
         }
-        *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+        *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
         *(unsigned int *)(temp_v1 + 0xb0) = 0;
         FUN_00303460(0);
         temp_v1 = g_lmapScene;
@@ -301,7 +301,7 @@ LAB_0033e908:
       }
     }
     else {
-      FUN_001f4908(0,10,0xff);
+      slotSetRequest(0,10,0xff);
       temp_v2 = *(int *)(g_lmapScene + 4);
       temp_v1 = g_lmapScene;
     }

@@ -22,7 +22,7 @@ typedef struct {
 extern int jobDispatchOptionalOwner(...); /* 0x1e4a50 */
 extern unsigned char LAB_001f80f0; /* 0x1f80f0 */
 extern unsigned char LAB_001f8104; /* 0x1f8104 */
-extern int FUN_0020edd8(...); /* 0x20edd8 */
+extern int battleEditorRunForJob(...); /* 0x20edd8 */
 extern int FUN_002c9edc(...); /* 0x2c9edc */
 extern int g_btlMain; /* 0x4342c8 */
 extern unsigned int *DAT_00435ce8; /* 0x435ce8 */
@@ -47,7 +47,7 @@ void FUN_001f7fac(unsigned int *param_1)
   puVar1 = &LAB_001f80f0;
   taskCreateDraw(&LAB_001f80f0,2,0,0,jobDispatchOptionalOwner,FUN_002c9edc,param_1,*param_1);
   param_1[0x16] = (unsigned int)puVar1;
-  taskCreateDraw(&LAB_001f8104,0x73,0,0,FUN_0020edd8,0,param_1,puVar1);
+  taskCreateDraw(&LAB_001f8104,0x73,0,0,battleEditorRunForJob,0,param_1,puVar1);
   puVar2 = (unsigned int *)0x100;
   asdMemAlloc(0x100,0x100,0,0x18,1);
   DAT_00435ce8 = puVar2;

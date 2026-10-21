@@ -4,20 +4,20 @@
 
 extern "C" {
 
-int FUN_003306cc(void);
+int commonBgStopAndResetFade(void);
 int FUN_00342334(int);
-int FUN_00370b8c(int, unsigned int);
+int mobiclipProcessCreate(int, unsigned int);
 int gameFlagSetValue(int, int);
 
 extern unsigned char g_eventCommand; /* 0x57f554 */
 
-extern int FUN_0016345c(void);
+extern int querySlotHasHandle(void);
 extern int jobIsValid(int);
 extern unsigned int gameFlagIsSet(void);
 extern int scrGetArg(unsigned int);
-/* Supplied declaration required: FUN_003306cc. */
+/* Supplied declaration required: commonBgStopAndResetFade. */
 /* Supplied declaration required: FUN_00342334. */
-/* Supplied declaration required: FUN_00370b8c. */
+/* Supplied declaration required: mobiclipProcessCreate. */
 /* Supplied declaration required: gameFlagSetValue. */
 
 
@@ -31,15 +31,15 @@ unsigned int FUN_002a3e10(void)
   
   temp_v0 = scrGetArg(0);
   if ((*(int *)((unsigned char *)&g_eventCommand + 0x8)) == 0) {
-    temp_v1 = FUN_0016345c();
+    temp_v1 = querySlotHasHandle();
     if (temp_v1 != 0) {
       return 0;
     }
     FUN_00342334(0);
-    FUN_003306cc();
+    commonBgStopAndResetFade();
     temp_v1 = temp_v0 + 0x800;
     temp_v2 = gameFlagIsSet();
-    FUN_00370b8c(temp_v0,temp_v2);
+    mobiclipProcessCreate(temp_v0,temp_v2);
     (*(int *)((unsigned char *)&g_eventCommand + 0x8)) = temp_v0;
     gameFlagSetValue(temp_v1,1);
   }

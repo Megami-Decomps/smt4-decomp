@@ -1,102 +1,58 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `sortMenuCreate` (_code @ 0x29e39c, 0x218 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: paramsInit stack-argument scratch register, aligned memset helper and equivalent parameter-data relocation differ; -O2 candidate. */
+#include "shard/W6_W6Match6_SortMenu.h"
+#include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include <string.h>
 
+struct SortMenuParameterData { u8 first[24], second[36], third[168]; };
 extern "C" {
+extern SortMenuSingleton g_useCounter;
+extern const SortMenuParameterData DAT_00402d1c;
+void *asdMemAlloc(u32, u32, u32, u32, u32);
+void memClear(void *, u32);
+u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
+u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
+s32 FUN_001a1f8c(u32);
+s32 FUN_001a26dc(u32);
+void drawParameterBlockClear(SortMenuParameters *);
+void paramsInit(SortMenuParameters *, const void *, u32, const void *, u32, const void *, u32,
+                const void *, u32, const void *, u32);
+void FUN_002bd954(SortMenuSprite *, u32, u32, SortMenuParameters *, u32, f32);
+void uiSpriteSetImageKeyframe(SortMenuSprite *, u32, u32);
+void FUN_002bee58(SortMenuSprite *, u32);
+void timerStart(SortMenuSprite *, u32, u32);
 
-int uiSpriteSetImageKeyframe(...);
-int timerStart(...);
-int FUN_002bd954(...);
-int FUN_002bee58(...);
-int paramsInit(...);
-int __aeabi_memset4(...);
-int memClear(...);
-int asdMemAlloc(...);
-int taskCreateDraw(...);
-int asdProcessCreateSimple(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
-
-/* stack frame of param_2: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_2_stack;
-
-extern int FUN_001a1f8c(...); /* 0x1a1f8c */
-extern int FUN_001a26dc(...); /* 0x1a26dc */
-extern unsigned char LAB_0029e5fc; /* 0x29e5fc */
-extern unsigned char LAB_0029e60c; /* 0x29e60c */
-extern unsigned char DAT_00402d1c; /* 0x402d1c */
-extern unsigned char DAT_00402d34; /* 0x402d34 */
-extern unsigned char DAT_00402d58; /* 0x402d58 */
-extern signed char g_useCounter; /* 0x43dd20 */
-extern unsigned int *DAT_0043dd24; /* 0x43dd24 */
-
-/* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: timerStart. */
-/* Supplied declaration required: FUN_002bd954. */
-/* Supplied declaration required: FUN_002bee58. */
-/* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
-
-
-void sortMenuCreate(unsigned int param_1,unsigned char param_2)
-
+void sortMenuCreate(u32 owner, u8 option)
 {
-/* irregular: 13 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  unsigned char *puVar3;
-  unsigned char *puVar4;
-  int temp_v0;
-  
-  if (g_useCounter < '\x01') {
-    if (DAT_0043dd24 == (unsigned int *)0x0) {
-      puVar2 = (unsigned int *)0x100;
-      asdMemAlloc(0x100,0x100,0,0x878,1);
-      DAT_0043dd24 = puVar2;
+    if (g_useCounter.useCount <= 0) {
+        if (!g_useCounter.work) {
+            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\SortMenu\\SortMenu.cpp", 614);
+            g_useCounter.work = (SortMenuWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(SortMenuWork), 1);
+        }
+        SortMenuWork *work = g_useCounter.work;
+        memClear(work, sizeof(SortMenuWork));
+        work->calculate = asdProcessCreateSimple("SORT CALC", 2, 0, 0, FUN_001a1f8c, NULL, 0);
+        work->draw = taskCreateDraw("SORT DDRAW", 231, 0, 0, FUN_001a26dc, NULL, 0, work->calculate);
+        SortMenuWork *current = g_useCounter.work;
+        drawParameterBlockClear(&current->parameters);
+        paramsInit(&current->parameters, DAT_00402d1c.first, 24, DAT_00402d1c.second, 36,
+                   NULL, 0, NULL, 0, DAT_00402d1c.third, 168);
+        for (s32 i = 0; i < 13; ++i) {
+            FUN_002bd954(&current->sprites[i], 30, 0, &current->parameters, 1, 1.0f);
+            uiSpriteSetImageKeyframe(&current->sprites[i], 0, 0);
+        }
+        FUN_002bd954(&current->sprites[10], 30, 0, &current->parameters, 1, 1.0f);
+        FUN_002bee58(&current->sprites[10], 0);
+        FUN_002bd954(&current->sprites[11], 30, 0, &current->parameters, 1, 1.0f);
+        timerStart(&current->sprites[11], 0, 0);
+        FUN_002bd954(&current->sprites[12], 30, 0, &current->parameters, 1, 1.0f);
+        FUN_002bee58(&current->sprites[12], 1);
+        memset(current->ids, -1, sizeof(current->ids));
+        current->frame = 0;
+        current->initialized = 1;
+        work->option = option;
+        work->owner = owner;
     }
-    puVar2 = DAT_0043dd24;
-    memClear();
-    puVar3 = &LAB_0029e5fc;
-    asdProcessCreateSimple(&LAB_0029e5fc,2,0,0,FUN_001a1f8c,0,0);
-    *puVar2 = (unsigned int)puVar3;
-    puVar4 = &LAB_0029e60c;
-    taskCreateDraw(&LAB_0029e60c,0xe7,0,0,FUN_001a26dc,0,0,puVar3);
-    puVar2[1] = (unsigned int)puVar4;
-    puVar1 = DAT_0043dd24;
-    Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(DAT_0043dd24 + 2);
-    paramsInit(puVar1 + 2,&DAT_00402d1c,0x18,&DAT_00402d34,0x24,0,0,0,0,&DAT_00402d58,0xa8);
-    temp_v0 = 0;
-    do {
-      FUN_002bd954(puVar1 + temp_v0 * 0x23 + 10,0x1e,0,puVar1 + 2,1);
-      uiSpriteSetImageKeyframe(puVar1 + temp_v0 * 0x23 + 10,0);
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0xd);
-    FUN_002bd954(puVar1 + 0x168,0x1e,0,puVar1 + 2,1);
-    FUN_002bee58(puVar1 + 0x168,0);
-    FUN_002bd954(puVar1 + 0x18b,0x1e,0,puVar1 + 2,1);
-    timerStart(puVar1 + 0x18b,0);
-    FUN_002bd954(puVar1 + 0x1ae,0x1e,0,puVar1 + 2,1);
-    FUN_002bee58(puVar1 + 0x1ae,1);
-    __aeabi_memset4(puVar1 + 0x1db,0x1a,0xffffffff);
-    puVar1[0x1d1] = 0;
-    *(unsigned char *)((int)puVar1 + 0x74d) = 1;
-    *(unsigned char *)((int)puVar2 + 0x74e) = param_2;
-    puVar2[0x1d4] = param_1;
-  }
-  g_useCounter = g_useCounter + '\x01';
-  return;
+    ++g_useCounter.useCount;
 }
-
-} /* extern "C" */
+}

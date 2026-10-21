@@ -8,7 +8,7 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_00352d30(unsigned int *);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapMain; /* 0x581274 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int DAT_005f1604; /* 0x5f1604 */
@@ -67,7 +67,7 @@ void FUN_0036b0cc(void)
   FUN_001bbf0c();
   DAT_005f1b88 = DAT_005f1b88 + temp_v3 * temp_v4;
   DAT_005f1b8c = DAT_005f16bc + temp_v2;
-  DAT_005f1b90 = *(unsigned int *)(DAT_005806a4 + 0x18);
+  DAT_005f1b90 = *(unsigned int *)(g_lmapView + 0x18);
   DAT_005f1b94 = *(unsigned int *)(temp_v0 + 0x30);
   DAT_005f1b98 = *(unsigned int *)(temp_v0 + 0x34);
   DAT_005f1b9c = DAT_005f16c0;

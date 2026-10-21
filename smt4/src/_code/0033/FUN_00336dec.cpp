@@ -1,34 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00336dec` (_code @ 0x336dec, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct FilteredEntry {
+    u8 unk00[0x44];
+    s8 category; // 0x44
+    u8 unk45[0x0b];
+    u32 flags; // 0x50
+    u8 unk054[0xc0];
+};
+struct EntryFilterOwner {
+    u8 unk0000[0x1e98];
+    FilteredEntry *entries; // 0x1e98
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-
-int FUN_00336dec(int param_1,int param_2)
-
+extern "C" s32 FUN_00336dec(const EntryFilterOwner *owner, s32 category)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = 0;
-  temp_v1 = 4;
-  do {
-    temp_v2 = *(int *)(param_1 + 0x1e98) + temp_v1 * 0x114;
-    temp_v3 = *(unsigned int *)(temp_v2 + 0x50);
-    if (((temp_v3 & 1) != 0 && (temp_v3 & 0x80) != 0) && (*(char *)(temp_v2 + 0x44) == param_2)) {
-      temp_v0 = temp_v0 + 1;
+    s32 count = 0;
+    for (s32 index = 4; index < 0x36; ++index) {
+        const FilteredEntry &entry = owner->entries[index];
+        if ((entry.flags & 1) != 0 && (entry.flags & 0x80) != 0
+                && entry.category == category)
+            ++count;
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x36);
-  return temp_v0;
+    return count;
 }
-
-} /* extern "C" */

@@ -1,49 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fdce8` (_code @ 0x2fdce8, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail folds stack reservation into PUSH and copies the result with scalar loads; compiled code uses SUB and LDM. */
+#include "common.h"
+
+struct OnlineResult {
+    s32 status; // 0x00
+    u32 value;  // 0x04
+    u32 detail; // 0x08
+};
+
+struct OnlineJob {
+    u8 unk00[0x70]; // 0x00
+    u8 error[0x60]; // 0x70
+    u32 instanceId; // 0xd0
+};
+struct OnlineInstance;
+struct OnlineInstanceTable;
 
 extern "C" {
+OnlineInstanceTable* onlineInstanceTableGetCurrent(void);
+OnlineInstance* onlineInstanceTableFind(OnlineInstanceTable* table, u32 id);
+void FUN_002f3dc4(OnlineInstance* instance, OnlineResult* result);
+void FUN_002f3dde(OnlineInstance* instance, OnlineResult* result);
+void FUN_002e9f00(void* error, s32 code);
+void onlineJobSetStateDone(OnlineJob* job);
 
-int onlineInstanceTableFind(int, unsigned int);
-int FUN_002e9f00(int, int);
-int onlineJobSetStateDone(int);
-int FUN_002f3dc4(void);
-int FUN_002f3dde(void);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_2_stack;
-
-extern int onlineInstanceTableGetCurrent(void);
-/* Supplied declaration required: onlineInstanceTableFind. */
-/* Supplied declaration required: FUN_002e9f00. */
-/* Supplied declaration required: onlineJobSetStateDone. */
-/* Supplied declaration required: FUN_002f3dc4. */
-/* Supplied declaration required: FUN_002f3dde. */
-
-
-void FUN_002fdce8(int param_1,int *param_2)
-
+// Delivers a completion result to the instance and finishes the job.
+void FUN_002fdce8(OnlineJob* job, const OnlineResult* status)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = onlineInstanceTableGetCurrent();
-  onlineInstanceTableFind(temp_v0,*(unsigned int *)(param_1 + 0xd0));
-  if (temp_v0 != 0) {
-    if (*param_2 >= 0) {
-      FUN_002f3dc4();
+    OnlineInstance* instance = onlineInstanceTableFind(
+        onlineInstanceTableGetCurrent(), job->instanceId);
+    if (instance != NULL) {
+        OnlineResult result = *status;
+        if (result.status >= 0) {
+            FUN_002f3dc4(instance, &result);
+        } else {
+            FUN_002f3dde(instance, &result);
+        }
+    } else {
+        FUN_002e9f00(job->error, 4);
     }
-    else {
-      FUN_002f3dde();
-    }
-  }
-  else {
-    FUN_002e9f00(param_1 + 0x70,4);
-  }
-  onlineJobSetStateDone(param_1);
-  return;
+    onlineJobSetStateDone(job);
 }
-
-} /* extern "C" */
+}

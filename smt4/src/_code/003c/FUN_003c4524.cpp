@@ -6,7 +6,7 @@ extern "C" {
 
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int);
-extern unsigned int FUN_0025628c(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 
 
 void FUN_003c4524(int param_1,int param_2)
@@ -18,7 +18,7 @@ void FUN_003c4524(int param_1,int param_2)
   unsigned int temp_v2;
   unsigned int *puVar5;
   
-  temp_v0 = FUN_0025628c(*(unsigned int *)(param_1 + 0x10));
+  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   puVar5 = (unsigned int *)(param_2 + 0x44a8);
   switch(temp_v0) {
   case 0:

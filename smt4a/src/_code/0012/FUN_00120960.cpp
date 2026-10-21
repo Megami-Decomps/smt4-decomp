@@ -7,9 +7,9 @@ extern "C" {
 int sharedRefRelease(int);
 int sharedRefAddRef(int);
 int streamReset(int *);
-int FUN_002f2b24(int, int *);
+int strHolderAssignHolderValue(int, int *);
 int FUN_002f2da0(...);
-int FUN_002f2dd8(int);
+int objectCountIncrement(int);
 int listIteratorNext2(int *);
 int FUN_00310510(int *, unsigned char **, int *);
 int FUN_00310578(unsigned char **);
@@ -49,11 +49,11 @@ extern int FUN_002eb5f4(void);
 /* Supplied declaration required: streamReset. */
 extern int FUN_002efd4a(unsigned int *, unsigned int);
 extern int *FUN_002f2afc(void);
-/* Supplied declaration required: FUN_002f2b24. */
+/* Supplied declaration required: strHolderAssignHolderValue. */
 extern int FUN_002f2b30(void);
 extern int FUN_002f2c38(int, int);
 /* Supplied declaration required: FUN_002f2da0. */
-/* Supplied declaration required: FUN_002f2dd8. */
+/* Supplied declaration required: objectCountIncrement. */
 /* Supplied declaration required: listIteratorNext2. */
 extern int wordRefsDiffer_002f2dec(int *, int);
 /* Supplied declaration required: FUN_00310510. */
@@ -176,7 +176,7 @@ LAB_00120aa8:
         else {
           temp_v16 = *(int *)(temp_v16 + 0x14);
         }
-        FUN_002f2b24(param_5,piVar5);
+        strHolderAssignHolderValue(param_5,piVar5);
       }
       if (piVar5 != (int *)0x0) {
         (**(romwright_code **)(*piVar5 + 4))(piVar5);
@@ -194,7 +194,7 @@ LAB_00120aa8:
     }
     temp_v6 = temp_v2;
     temp_v9 = temp_v9 + 1;
-    FUN_002f2dd8(temp_v2);
+    objectCountIncrement(temp_v2);
     temp_v3 = *(int *)(temp_v20 + 0x34) + temp_v3;
     if (*(unsigned short *)(temp_v19 + 2) < DAT_00594988) {
       listIteratorNext2(&temp_v13);

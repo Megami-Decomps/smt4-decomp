@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0012b540` (_code @ 0x12b540, 0xe8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_OnlineValueCompletion.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int refIsNonNegative(unsigned int *);
 int FUN_002f7c94(unsigned int, unsigned int, unsigned int);
 int onlineJobSetStateWaiting(int);
 int FUN_002f7cba(int, int, unsigned int);
-int FUN_0030c96e(int, unsigned int *);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 13 byte(s) */
@@ -42,7 +42,6 @@ extern unsigned int FUN_002ea3c0(int, unsigned char *, unsigned int, unsigned ch
 /* Supplied declaration required: FUN_002f7c94. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
-/* Supplied declaration required: FUN_0030c96e. */
 
 
 void FUN_0012b540(int param_1)
@@ -108,7 +107,7 @@ void FUN_0012b540(int param_1)
     temp_v8[0] = 0x80010004;
     puVar4 = (unsigned int *)FUN_002e7908(&temp_v7,temp_v8);
   }
-  FUN_0030c96e(param_1,puVar4);
+  onlineJobFinishValueRequest((OnlineValueJob *)param_1, (const OnlineCallbackResult *)puVar4);
   return;
 }
 

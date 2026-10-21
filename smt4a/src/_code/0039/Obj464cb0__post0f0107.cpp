@@ -16,7 +16,7 @@ struct Obj464cb0RenderContext {
 };
 
 extern "C" {
-void FUN_00167ba0(void);
+void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
 void FUN_003c8538(s32 arg);
 extern Obj464cb0RenderContext *g_renderCtx;
@@ -29,7 +29,7 @@ void Obj464cb0::post0f0107()
 {
     Obj464cb0Menu *menu;
 
-    FUN_00167ba0();
+    cursorResetFromParam();
     menu = &g_renderCtx->menu;
     DAT_005b3fe4[DAT_005b3fe8] = (menu->words[menu->selection] & 0xfffff0ff) | (u32)this;
     DAT_005b3fe4[DAT_005b3fe8 + 1] = 0xf0107;

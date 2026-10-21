@@ -7,8 +7,8 @@ extern "C" {
 int sysMemClear(int, int);
 
 typedef int romwright_code(...);
-extern romwright_code *DAT_0058918c; /* 0x58918c */
-extern romwright_code *DAT_00589190; /* 0x589190 */
+extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
+extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
 extern int g_commandBufferCursor; /* 0x5b40e0 */
 extern int g_commandBufferEnd; /* 0x5b40e4 */
 extern unsigned int *DAT_0061a50c; /* 0x61a50c */
@@ -27,16 +27,16 @@ void FUN_0016120c(int param_1,int param_2)
   puVar1 = DAT_0061a50c;
   if (DAT_0061a50c != (unsigned int *)0x0) {
     if (DAT_0061a50c[1] != 0) {
-      in_r12 = DAT_00589190;
+      in_r12 = g_gfxReleaseCallback;
     }
     if (DAT_0061a50c[1] != 0 && in_r12 != (romwright_code *)0x0) {
       (*in_r12)(0x10000,0x105,*DAT_0061a50c);
     }
-    if (DAT_0058918c == (romwright_code *)0x0) {
+    if (g_gfxAllocateCallback == (romwright_code *)0x0) {
       temp_v0 = 0;
     }
     else {
-      temp_v0 = (*DAT_0058918c)(0x10000,0x105,*puVar1,param_1 + param_2 * 0x1c);
+      temp_v0 = (*g_gfxAllocateCallback)(0x10000,0x105,*puVar1,param_1 + param_2 * 0x1c);
     }
     puVar1[2] = param_1;
     puVar1[3] = 0;

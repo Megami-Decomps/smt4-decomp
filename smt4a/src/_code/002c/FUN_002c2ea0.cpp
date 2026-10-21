@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00229264(unsigned int *);
-int FUN_002a649c(unsigned int, int *, int *, unsigned int *, unsigned int);
+int vectorKeyPrepareNextStep(unsigned int, int *, int *, unsigned int *, unsigned int);
 
 /* stack frame of param_7: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -13,7 +13,7 @@ typedef struct {
 } param_7_stack;
 
 /* Supplied declaration required: FUN_00229264. */
-/* Supplied declaration required: FUN_002a649c. */
+/* Supplied declaration required: vectorKeyPrepareNextStep. */
 
 
 void FUN_002c2ea0(unsigned int param_1,int *param_2,int *param_3,int *param_4,unsigned int *param_5,
@@ -38,7 +38,7 @@ void FUN_002c2ea0(unsigned int param_1,int *param_2,int *param_3,int *param_4,un
     param_6[1] = 0x3f000000;
     param_6[2] = 0x3f000000;
     param_6[3] = 0;
-    FUN_002a649c(param_1,param_3,param_4,param_6,param_7);
+    vectorKeyPrepareNextStep(param_1,param_3,param_4,param_6,param_7);
     return;
   }
   FUN_00229264(param_5);

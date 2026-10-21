@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001747dc` (_code @ 0x1747dc, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: unit starts mid-flow using incoming r5/sl/lr and ends through an interior-register return; not a standalone C function. */
 #include "romwright_types.h"
 
 extern "C" {

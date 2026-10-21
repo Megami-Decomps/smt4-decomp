@@ -5,7 +5,7 @@
 extern "C" {
 
 int paramsInit(unsigned int *, unsigned char *, int, unsigned char *, int, unsigned char *, int, int, int, unsigned char *, int);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned int *);
+int drawParameterBlockClear(unsigned int *);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern unsigned char DAT_003ff39c; /* 0x3ff39c */
 extern unsigned char DAT_003ff3f0; /* 0x3ff3f0 */
 
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_002ba78c(unsigned int *param_1)
@@ -40,7 +40,7 @@ void FUN_002ba78c(unsigned int *param_1)
   *(unsigned char *)((int)param_1 + 0x415) = 1;
   param_1[0x107] = 0;
   param_1[0x106] = 0;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x108);
+  drawParameterBlockClear(param_1 + 0x108);
   paramsInit(param_1 + 0x108,&DAT_003ff2dc,0x78,&DAT_003ff354,0x48,&DAT_003ff39c,0x54,0,0,
                &DAT_003ff3f0,0x310);
   return;

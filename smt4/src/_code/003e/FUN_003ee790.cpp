@@ -1,32 +1,43 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ee790` (_code @ 0x3ee790, 0x4c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: original static-initializer class identity is unrecovered; retail retains an unused 0x0044e360 pool word and clears its counters with STM. */
+#include "common.h"
+
+struct InitializationArguments {
+    u32 unk00[4]; // 0x00
+    u32 first;    // 0x10
+    u32 second;   // 0x14
+};
+struct InitializationCounters {
+    u32 first;
+    u32 second;
+};
+struct InitializedState {
+    const char* name; // 0x00
+    u32 first;       // 0x04
+    u32 second;      // 0x08
+    u32 third;       // 0x0c
+};
 
 extern "C" {
+extern InitializationCounters DAT_0044e378;
+extern InitializedState DAT_004c641c;
+extern const char DAT_00407e34[];
+extern u32 DAT_0044e368;
+void FUN_00385b60(void* state);
+void entry(void);
+__weak s32 __aeabi_atexit(void* object, void (*destructor)(void*), void* handle);
 
-extern unsigned char DAT_00407e34; /* 0x407e34 */
-extern unsigned int DAT_0044e368; /* 0x44e368 */
-extern unsigned int DAT_0044e378; /* 0x44e378 */
-extern unsigned int DAT_0044e37c; /* 0x44e37c */
-extern unsigned char *DAT_004c641c; /* 0x4c641c */
-extern unsigned int DAT_004c6420; /* 0x4c6420 */
-extern unsigned int DAT_004c6424; /* 0x4c6424 */
-extern unsigned int DAT_004c6428; /* 0x4c6428 */
-
-
-void FUN_003ee790(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Initializes the shared state and registers its static destructor.
+void FUN_003ee790(u32 first, u32 second, InitializationArguments* arguments)
 {
-  *(unsigned int *)(param_3 + 0x10) = param_1;
-  *(unsigned int *)(param_3 + 0x14) = param_2;
-  DAT_0044e378 = 0;
-  DAT_0044e37c = 0;
-  DAT_004c6424 = 0;
-  DAT_004c6420 = 0;
-  DAT_004c6428 = 0;
-  DAT_004c641c = &DAT_00407e34;
-  DAT_0044e368 = 0;
-  return;
+    arguments->first = first;
+    arguments->second = second;
+    DAT_0044e378.first = 0;
+    DAT_0044e378.second = 0;
+    DAT_004c641c.second = 0;
+    DAT_004c641c.first = 0;
+    DAT_004c641c.third = 0;
+    DAT_004c641c.name = DAT_00407e34;
+    __aeabi_atexit(&DAT_004c641c, FUN_00385b60, reinterpret_cast<void*>(entry));
+    DAT_0044e368 = 0;
 }
-
-} /* extern "C" */
+}

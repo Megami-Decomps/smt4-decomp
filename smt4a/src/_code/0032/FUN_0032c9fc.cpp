@@ -1,37 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032c9fc` (_code @ 0x32c9fc, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler merges cleanup exits; retail duplicates them and preserves the error code across cleanup. */
+#include "common.h"
+
+struct ResourceRequest;
 
 extern "C" {
+s32 FUN_002e0e04(const ResourceRequest* request, u8* scratch, s32 mode);
+void FUN_001886bc();
+u32 FUN_00188444(u8* scratch);
+void FUN_0013ebd8();
 
-int FUN_0013ebd8(void);
-int FUN_00188444(unsigned char [496]);
-int FUN_001886bc(void);
-int FUN_002e0e04(int, unsigned char [496], int);
-
-/* Supplied declaration required: FUN_0013ebd8. */
-/* Supplied declaration required: FUN_00188444. */
-/* Supplied declaration required: FUN_001886bc. */
-/* Supplied declaration required: FUN_002e0e04. */
-
-
-unsigned char * FUN_0032c9fc(int param_1)
-
+// Process a mode-zero resource request and return its result code.
+u32 FUN_0032c9fc(const ResourceRequest* request)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned char *puVar1;
-  unsigned char temp_v0 [496];
-  
-  puVar1 = temp_v0;
-  FUN_002e0e04(param_1,temp_v0,0);
-  if (param_1 != 0) {
-    FUN_001886bc();
-    FUN_00188444(temp_v0);
+    u8 scratch[496];
+    u32 result;
+    if (FUN_002e0e04(request, scratch, 0) != 0) {
+        FUN_001886bc();
+        result = FUN_00188444(scratch);
+    } else {
+        result = 0xe0e046bc;
+    }
     FUN_0013ebd8();
-    return puVar1;
-  }
-  FUN_0013ebd8();
-  return (unsigned char *)0xe0e046bc;
+    return result;
 }
-
-} /* extern "C" */
+}

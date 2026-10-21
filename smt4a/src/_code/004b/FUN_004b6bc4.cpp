@@ -15,7 +15,7 @@ int FUN_004b9ff4(...);
 int menu4CScrollToKind(int, int);
 int FUN_004baa7c(int, int, int);
 int menu4CReset(...);
-int FUN_004bb064(int);
+int widgetShow(int);
 int dataTable33Type0Count(void);
 int dataTable33GroupCount(unsigned char *, unsigned int);
 int VectorSignedToFloat(...);
@@ -34,7 +34,7 @@ extern unsigned char g_gameState; /* 0x5f15fc */
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: FUN_001b4a74. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: sysMemClear. */
 extern int gameStateIsFlagSetAndLarge(void);
@@ -47,7 +47,7 @@ extern int menu4CGetCurrentEntry(int);
 /* Supplied declaration required: menu4CScrollToKind. */
 /* Supplied declaration required: FUN_004baa7c. */
 /* Supplied declaration required: menu4CReset. */
-/* Supplied declaration required: FUN_004bb064. */
+/* Supplied declaration required: widgetShow. */
 extern int dataTable33Type0GetEntry(unsigned char *, unsigned int);
 extern int dataTable33GetEntryByGroup(unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: dataTable33Type0Count. */
@@ -111,7 +111,7 @@ void FUN_004b6bc4(int param_1,int param_2,int param_3)
           temp_v5 = tableGroupFindEntryIndex(temp_v8,temp_v9);
           scrScriptProcessStartEntry(temp_v4,temp_v5);
           do {
-            temp_v2 = FUN_00224880(temp_v4);
+            temp_v2 = scrRunOpcodesStub(temp_v4);
           } while (temp_v2 != 2);
           if (DAT_0058800c != 0) goto LAB_004b6d80;
         }
@@ -141,7 +141,7 @@ LAB_004b6d80:
           temp_v4 = tableGroupFindEntryIndex(temp_v4,temp_v9);
           scrScriptProcessStartEntry(temp_v5,temp_v4);
           do {
-            temp_v2 = FUN_00224880(temp_v5);
+            temp_v2 = scrRunOpcodesStub(temp_v5);
           } while (temp_v2 != 2);
           if (DAT_0058800c != 0) goto LAB_004b6ea0;
         }
@@ -155,7 +155,7 @@ LAB_004b6ea0:
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v0);
   }
-  FUN_004bb064(param_1 + 0x9c);
+  widgetShow(param_1 + 0x9c);
   temp_v1 = gameStateIsFlagSetAndLarge();
   temp_v0 = -1;
   if (temp_v1 != 0) {

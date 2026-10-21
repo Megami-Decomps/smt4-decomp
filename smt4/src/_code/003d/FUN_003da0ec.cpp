@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003da0ec` (_code @ 0x3da0ec, 0x4b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ActionController.h"
 
 extern "C" {
 
@@ -8,22 +9,22 @@ int FUN_002a0428(...);
 int FUN_002a5960(...);
 int FUN_002a5dc4(...);
 
-int FUN_00226c20(...);
-int FUN_00226de8(...);
+int actionSequenceDispatchTriggers(...);
+int actionSequenceUpdateLoopTransition(...);
 int FUN_00226fc0(int);
 int FUN_0023aa28(unsigned int, unsigned int *, int);
-int FUN_0023aaf0(...);
+int animationSelectThirdPart(...);
 int FUN_0024679c(void);
 int FUN_00249e54(unsigned int, char *);
 int FUN_002505c0(...);
 int FUN_00257e74(unsigned int);
 int asdOperatorNew(void);
 int FUN_0034c7a8(unsigned int, float *);
-int FUN_0034c86c(...);
-int FUN_0034c8d0(unsigned int);
+int animationSelectSecondPart(...);
+int animationSelectFirstPart(unsigned int);
 int deadEffectStartLoad(void);
 int FUN_003dc19c(int);
-int FUN_003dcfdc(int);
+void battleActionFinishPlacement(ActionController*);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 int nw_ut_ResDicPatricia_Get(...);
 int rt_memcpy_w(float *, int, int);
@@ -67,16 +68,16 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 #define ROMWRIGHT_PIECE_3_1_DEFINED
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
-/* Supplied declaration required: FUN_00226c20. */
-/* Supplied declaration required: FUN_00226de8. */
+/* Supplied declaration required: actionSequenceDispatchTriggers. */
+/* Supplied declaration required: actionSequenceUpdateLoopTransition. */
 /* Supplied declaration required: FUN_00226fc0. */
 extern int rangeIsValid(void);
 /* Supplied declaration required: FUN_0023aa28. */
-/* Supplied declaration required: FUN_0023aaf0. */
+/* Supplied declaration required: animationSelectThirdPart. */
 extern int FUN_00246708(void);
 /* Supplied declaration required: FUN_0024679c. */
 /* Supplied declaration required: FUN_00249e54. */
-extern unsigned int FUN_0024a6b0(int);
+extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00257e74. */
 /* Supplied declaration required: FUN_002a0428. */
@@ -88,12 +89,12 @@ extern int *asdMemoryGetDefaultAllocator(void);
 extern unsigned int libc_strlen(int *);
 extern int asdMdlManagerCreateFromSourceB(int, unsigned int, unsigned short);
 /* Supplied declaration required: FUN_0034c7a8. */
-/* Supplied declaration required: FUN_0034c86c. */
-/* Supplied declaration required: FUN_0034c8d0. */
+/* Supplied declaration required: animationSelectSecondPart. */
+/* Supplied declaration required: animationSelectFirstPart. */
 /* Supplied declaration required: deadEffectStartLoad. */
 extern unsigned int _ZN9Obj4209ccC1Ev(void);
 /* Supplied declaration required: FUN_003dc19c. */
-/* Supplied declaration required: FUN_003dcfdc. */
+/* Supplied declaration required: battleActionFinishPlacement. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nw_ut_ResDicPatricia_Get. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -217,7 +218,7 @@ void FUN_003da0ec(int param_1)
         temp_v15 = pcVar20[2] == 'R';
       }
       if (temp_v15) {
-        temp_v16 = FUN_0024a6b0(temp_v7 + 0x3078);
+        temp_v16 = keyedRecordRegisterName(temp_v7 + 0x3078);
         *(char *)(temp_v7 + 0x3070) = (char)temp_v16;
         FUN_00249e54(temp_v16,pcVar20);
         *(char *)(temp_v7 + 0x3070) = (char)temp_v16;
@@ -242,7 +243,7 @@ void FUN_003da0ec(int param_1)
         temp_v15 = pcVar20[2] == 'R';
       }
       if (temp_v15) {
-        temp_v16 = FUN_0024a6b0(temp_v7 + 0x3078);
+        temp_v16 = keyedRecordRegisterName(temp_v7 + 0x3078);
         *(char *)(temp_v7 + 0x3070) = (char)temp_v16;
         FUN_00249e54(temp_v16,pcVar20);
         *(char *)(temp_v7 + 0x3070) = (char)temp_v16;
@@ -282,10 +283,10 @@ void FUN_003da0ec(int param_1)
     *(unsigned char *)(param_1 + 0x3040) = 6;
     break;
   case 6:
-    FUN_003dcfdc(param_1);
+    battleActionFinishPlacement(reinterpret_cast<ActionController*>(param_1));
     break;
   case 7:
-    FUN_0034c8d0(*(unsigned int *)(param_1 + 0x304c));
+    animationSelectFirstPart(*(unsigned int *)(param_1 + 0x304c));
     *(unsigned char *)(param_1 + 0x3040) = 8;
     FUN_00226fc0(param_1);
     temp_v1 = *(short *)(*(int *)(param_1 + 0x3054) + 4);
@@ -303,17 +304,17 @@ void FUN_003da0ec(int param_1)
     FUN_00226fc0(param_1);
     break;
   case 9:
-    FUN_0034c86c(*(unsigned int *)(param_1 + 0x304c));
+    animationSelectSecondPart(*(unsigned int *)(param_1 + 0x304c));
     *(unsigned char *)(param_1 + 0x3040) = 10;
-    FUN_00226de8(param_1);
+    actionSequenceUpdateLoopTransition(param_1);
     break;
   case 10:
-    FUN_00226de8(param_1);
+    actionSequenceUpdateLoopTransition(param_1);
     break;
   case 0xb:
-    FUN_0023aaf0(*(unsigned int *)(param_1 + 0x304c));
+    animationSelectThirdPart(*(unsigned int *)(param_1 + 0x304c));
     *(unsigned char *)(param_1 + 0x3040) = 0xc;
-    FUN_00226c20(param_1);
+    actionSequenceDispatchTriggers(param_1);
     temp_v1 = *(short *)(*(int *)(param_1 + 0x3054) + 4);
     temp_v19 = 0.0f;
     temp_v20 = 0.0f;
@@ -326,7 +327,7 @@ void FUN_003da0ec(int param_1)
     }
     break;
   case 0xc:
-    FUN_00226c20(param_1);
+    actionSequenceDispatchTriggers(param_1);
   }
 LAB_003da57c:
   temp_v22 = *(int *)(param_1 + 0x304c);

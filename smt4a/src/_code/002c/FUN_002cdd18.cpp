@@ -6,13 +6,13 @@ extern "C" {
 
 int FUN_00163aa4(int);
 int uiSpriteSelectAnim(int, int);
-int FUN_001f4908(int, int, unsigned int);
+int slotSetRequest(int, int, unsigned int);
 int FUN_00212204(int);
 
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163e84(unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: FUN_00212204. */
 
 
@@ -68,7 +68,7 @@ void FUN_002cdd18(int param_1)
     break;
   case 7:
     if (*(int *)(param_1 + 0x404) < 0) {
-      FUN_001f4908(0,2,0xff0000ff);
+      slotSetRequest(0,2,0xff0000ff);
       *(unsigned int *)(param_1 + 0x3f4) = 0;
       *(unsigned int *)(param_1 + 0x3f8) = 8;
     }

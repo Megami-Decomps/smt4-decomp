@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0020214c(void);
 int btlStageLoadTable(void);
 int FUN_00275bc8(void);
-int FUN_002cc92c(void);
+int battleMapAccessoryLoad(void);
 int FUN_003cdb28(void);
 int FUN_003ce360(void);
 int loadSlotEnsureLoaded(int);
@@ -35,7 +35,7 @@ extern char *DAT_0057396c; /* 0x57396c */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: btlStageLoadTable. */
 /* Supplied declaration required: FUN_00275bc8. */
-/* Supplied declaration required: FUN_002cc92c. */
+/* Supplied declaration required: battleMapAccessoryLoad. */
 /* Supplied declaration required: FUN_003cdb28. */
 /* Supplied declaration required: FUN_003ce360. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
@@ -100,7 +100,7 @@ void FUN_003f0794(int param_1)
       FUN_0020214c();
       DAT_0057396c = pcVar4;
       btlStageLoadTable();
-      FUN_002cc92c();
+      battleMapAccessoryLoad();
       temp_v1 = *(unsigned short *)(param_1 + 0x4d0a) + 1;
       *(short *)(param_1 + 0x4d0a) = (short)temp_v1;
     case 1:

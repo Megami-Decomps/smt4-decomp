@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_001db608(int, int);
+int memClearWords(int, int);
 int FUN_001dba90(int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_001db608. */
+/* Supplied declaration required: memClearWords. */
 /* Supplied declaration required: FUN_001dba90. */
 
 
@@ -21,7 +21,7 @@ void FUN_0029ede8(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   int temp_v0;
   
   temp_v0 = param_1 * 0x60 + 0x4def48;
-  FUN_001db608(temp_v0,0x60);
+  memClearWords(temp_v0,0x60);
   FUN_001dba90(temp_v0,param_2,param_3,param_4);
   return;
 }

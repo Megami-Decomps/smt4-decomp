@@ -1,49 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f2834` (_code @ 0x2f2834, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler keeps the iterator comparison at loop entry rather than rotating it to the bottom. */
+#include "common.h"
+
+struct SharedReference;
+struct ReferenceTreeNode {
+    u8 unk00[8];
+    ReferenceTreeNode *left; // 0x08
+    u8 unk0c[0xc];
+    SharedReference *reference; // 0x18
+};
+struct ReferenceIterator {
+    ReferenceTreeNode *node;
+    ReferenceIterator() {}
+    explicit ReferenceIterator(ReferenceTreeNode *value) : node(value) {}
+};
+struct ReferenceTree {
+    u8 unk00[0x10];
+    ReferenceTreeNode *sentinel; // 0x10
+};
+struct ReferenceTreeOwner {
+    u32 unk00;
+    ReferenceTree tree; // 0x04
+};
 
 extern "C" {
+void sharedRefRelease(SharedReference *);
+s32 wordRefsDiffer_00300366(const ReferenceIterator &, const ReferenceIterator &);
+void wordMoveOut_00300376(ReferenceIterator *, ReferenceIterator *, s32);
+void FUN_00300386(ReferenceIterator *, ReferenceTree *, ReferenceIterator *);
 
-int sharedRefRelease(unsigned int);
-int wordMoveOut_00300376(int *, int *, int);
-int FUN_00300386(unsigned char [4], int, int *);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp14; /* 0x14: local_14 */
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-/* Supplied declaration required: sharedRefRelease. */
-extern int wordRefsDiffer_00300366(int *, unsigned int *);
-/* Supplied declaration required: wordMoveOut_00300376. */
-/* Supplied declaration required: FUN_00300386. */
-
-
-void FUN_002f2834(int param_1)
-
+// Release each shared reference while erasing its node from the tree.
+void FUN_002f2834(ReferenceTreeOwner *owner)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5 [4];
-  
-  temp_v1 = *(int *)(*(int *)(param_1 + 0x14) + 8);
-  while( 1 ) {
-    temp_v2 = *(unsigned int *)(param_1 + 0x14);
-    temp_v0 = wordRefsDiffer_00300366(&temp_v1,(unsigned int *)&temp_v2);
-    if (temp_v0 == 0) break;
-    sharedRefRelease(*(unsigned int *)(temp_v1 + 0x18));
-    wordMoveOut_00300376(&temp_v3,&temp_v1,0);
-    temp_v4 = temp_v3;
-    FUN_00300386(temp_v5,param_1 + 4,&temp_v4);
-  }
-  return;
+    ReferenceIterator iterator(owner->tree.sentinel->left);
+    while (wordRefsDiffer_00300366(iterator, ReferenceIterator(owner->tree.sentinel))) {
+        sharedRefRelease(iterator.node->reference);
+        ReferenceIterator old;
+        wordMoveOut_00300376(&old, &iterator, 0);
+        ReferenceIterator position = old;
+        ReferenceIterator next;
+        FUN_00300386(&next, &owner->tree, &position);
+    }
 }
-
-} /* extern "C" */
+}

@@ -23,7 +23,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_0019de98. */
 extern unsigned char *slotRecordFindById(unsigned int);
 extern int btlMainGetUnk14(void);
-extern unsigned int FUN_002cab18(void);
+extern unsigned int partyPanelGetSelectedDemonId(void);
 extern int FUN_002cad18(void);
 /* Supplied declaration required: FUN_0032d0c8. */
 /* Supplied declaration required: unitRecordBuild. */
@@ -46,7 +46,7 @@ void FUN_0023f900(void)
   
   temp_v5 = g_partyPanel;
   temp_v1 = FUN_002cad18();
-  temp_v2 = FUN_002cab18();
+  temp_v2 = partyPanelGetSelectedDemonId();
   if (*(int *)(temp_v5 + 0x1218) != 1) {
     if (temp_v1 != 0) {
       FUN_003aeb18(0);

@@ -13,14 +13,14 @@ int FUN_00178b04(int, unsigned char *, int);
 int FUN_00186e2c(unsigned char [12], unsigned int);
 int FUN_001cd3ec(void);
 int FUN_00249ce4(int);
-int FUN_002804b0(...);
-int FUN_00297988(int, int);
+int asdLoadFileAsyncSimple(...);
+int mapEnvironmentApplyPreset(int, int);
 int campCommonBgAcquire(void);
 int FUN_0031e198(void);
 int campButtonHelpAcquire(void);
 int FUN_0036b824(...);
 int FUN_0040ae70(unsigned int, int);
-int FUN_0040b0f8(int, unsigned char *);
+int resourceOwnerLoadNamed(int, unsigned char *);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -45,17 +45,17 @@ extern int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: FUN_00186e2c. */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_00249ce4. */
-/* Supplied declaration required: FUN_002804b0. */
-/* Supplied declaration required: FUN_00297988. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
+/* Supplied declaration required: mapEnvironmentApplyPreset. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_0031e198. */
 /* Supplied declaration required: campButtonHelpAcquire. */
 /* Supplied declaration required: FUN_0036b824. */
 extern unsigned int FUN_00387350(unsigned char *);
-extern unsigned int FUN_0040ac08(void);
+extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(unsigned int);
-/* Supplied declaration required: FUN_0040b0f8. */
+/* Supplied declaration required: resourceOwnerLoadNamed. */
 
 
 void FUN_004cdddc(int param_1)
@@ -74,7 +74,7 @@ void FUN_004cdddc(int param_1)
   FUN_00178b04(0x20,&LAB_004cdfc4,0x18d);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   *(unsigned int *)(param_1 + 0x20) = temp_v1;
   FUN_001cd3ec();
@@ -82,7 +82,7 @@ void FUN_004cdddc(int param_1)
   FUN_00178b04(0x20,&LAB_004cdfc4,0x191);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   *(unsigned int *)(param_1 + 0x24) = temp_v1;
   FUN_001cd3ec();
@@ -93,7 +93,7 @@ void FUN_004cdddc(int param_1)
     FUN_00178b04(0x20,&LAB_004cdfc4,0x198);
     temp_v1 = 0;
     if (temp_v2 != 0) {
-      temp_v1 = FUN_0040ac08();
+      temp_v1 = modelListInit();
     }
     *(unsigned int *)(param_1 + temp_v0 * 4 + 0x28) = temp_v1;
     FUN_001cd3ec();
@@ -101,13 +101,13 @@ void FUN_004cdddc(int param_1)
     temp_v0 = temp_v0 + 1;
   } while (temp_v0 < 3);
   *(int *)(param_1 + 0x558) = g_handleRegistry;
-  FUN_0040b0f8(temp_v2,&LAB_004ce044);
+  resourceOwnerLoadNamed(temp_v2,&LAB_004ce044);
   temp_v0 = FUN_0040af60(*(unsigned int *)(param_1 + 0x558));
   if (temp_v0 != 0) {
     FUN_0040ae70(*(unsigned int *)(param_1 + 0x558),1);
   }
   FUN_00249ce4(200);
-  FUN_00297988(4,0);
+  mapEnvironmentApplyPreset(4,0);
   temp_v1 = FUN_00387350(&LAB_004ce05c);
   *(unsigned int *)(param_1 + 0x34) = 0;
   *(unsigned int *)(param_1 + 0x544) = temp_v1;
@@ -121,9 +121,9 @@ void FUN_004cdddc(int param_1)
   *(int *)(g_handleRegistry + 0xc) = param_1 + 0x38;
   campCommonBgAcquire();
   campButtonHelpAcquire();
-  FUN_002804b0(&LAB_004ce07c,param_1 + 0x10,0);
-  FUN_002804b0(&LAB_004ce094,param_1 + 0x14,0);
-  FUN_002804b0(&LAB_004ce0ac,param_1 + 0x58c,0);
+  asdLoadFileAsyncSimple(&LAB_004ce07c,param_1 + 0x10,0);
+  asdLoadFileAsyncSimple(&LAB_004ce094,param_1 + 0x14,0);
+  asdLoadFileAsyncSimple(&LAB_004ce0ac,param_1 + 0x58c,0);
   FUN_0031e198();
   return;
 }

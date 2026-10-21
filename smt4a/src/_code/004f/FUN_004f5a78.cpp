@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdMemFree(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int libc_strcpy(...);
 int sysMemClear(...);
 int FUN_003478dc(...);
@@ -19,14 +19,14 @@ typedef struct {
     unsigned int sp124; /* 0x124: local_124 */
 } param_1_stack;
 
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int FUN_00100d60(unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: libc_strcpy. */
-extern unsigned int FUN_002e4c2c(int);
+extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003478dc. */
 extern int findRecordByKey(int);
@@ -53,7 +53,7 @@ unsigned int FUN_004f5a78(int param_1)
   unsigned char temp_v10 [8];
   unsigned char temp_v11;
   
-  temp_v5 = DAT_00573808;
+  temp_v5 = g_btlAux;
   temp_v1 = *(int *)(param_1 + 0x3050);
   if (temp_v1 != 0) {
     if (temp_v1 != 1) {
@@ -87,14 +87,14 @@ unsigned int FUN_004f5a78(int param_1)
       libc_strcpy(temp_v3 + 0x2e28,temp_v2 + 1);
       temp_v2 = findRecordByKey(temp_v3 + 0x2e28);
       if (temp_v2 == 0xff) {
-        FUN_002804b0(temp_v8,temp_v3 + 0x2e24,1);
+        asdLoadFileAsyncSimple(temp_v8,temp_v3 + 0x2e24,1);
         *(unsigned char *)(temp_v3 + 0x2ea8) = *(unsigned char *)(temp_v3 + 0x2ea8) | 1;
       }
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < 4);
     *(unsigned int *)(param_1 + 0x3050) = 1;
   }
-  temp_v5 = DAT_00573808;
+  temp_v5 = g_btlAux;
   temp_v1 = 0;
   do {
     rt_memcpy_w(temp_v8,temp_v5 + temp_v1 * 0x8c + 0x2e20,0x8c);
@@ -117,7 +117,7 @@ unsigned int FUN_004f5a78(int param_1)
       temp_v7 = pcVar7[2] == 'R';
     }
     if (temp_v7) {
-      temp_v4 = FUN_002e4c2c(temp_v3 + 0x2e28);
+      temp_v4 = keyedRecordRegisterName(temp_v3 + 0x2e28);
       *(char *)(temp_v3 + 0x2e20) = (char)temp_v4;
       FUN_003478dc(temp_v4,pcVar7);
       *(char *)(temp_v3 + 0x2e20) = (char)temp_v4;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002e32a4(int, unsigned char *, unsigned char *);
+void FUN_002e32a4(int kind, ...);
 int asdOperatorDeleteArray(void);
 int vectorCount4_002eccc4(int *);
 int FUN_00307824(int, int, int, int *);

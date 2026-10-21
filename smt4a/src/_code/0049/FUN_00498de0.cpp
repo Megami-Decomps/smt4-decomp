@@ -29,7 +29,7 @@ extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_00372100. */
 /* Supplied declaration required: FUN_0038b5fc. */
 /* Supplied declaration required: FUN_003df7c4. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 extern unsigned int FUN_004d02e0(int);
 /* Supplied declaration required: rt_memcpy_w. */
 
@@ -54,7 +54,7 @@ void FUN_00498de0(int param_1)
   unsigned short temp_v13;
   
   temp_v1 = *(int *)(param_1 + 0xb40);
-  temp_v2 = FUN_004cfe4c(param_1 + temp_v1 * 0x74 + 0xb60);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + temp_v1 * 0x74 + 0xb60);
   temp_v0 = *(unsigned short *)(param_1 + temp_v1 * 0x1002 + 0xf74 + temp_v2 * 4);
   temp_v5 = (unsigned int)temp_v0;
   temp_v3 = FUN_004d02e0(param_1 + *(int *)(param_1 + 0xb40) * 0x74 + 0xb60);

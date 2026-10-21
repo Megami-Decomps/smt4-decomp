@@ -15,7 +15,7 @@ extern int g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_002d1cc8(void);
+extern int lmapMainGetFlag(void);
 
 
 void FUN_00275f00(void)
@@ -40,7 +40,7 @@ void FUN_00275f00(void)
     }
   }
   else {
-    temp_v0 = FUN_002d1cc8();
+    temp_v0 = lmapMainGetFlag();
     if (temp_v0 != 0) {
       buttonHelpSetPreset(0xde);
       return;

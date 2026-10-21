@@ -10,13 +10,13 @@ int gameFlagIsSet(...);
 int FUN_001cd3ec(...);
 int FUN_003563fc(void);
 int FUN_003fd7c0(...);
-int FUN_003fda08(unsigned int, int, int);
+int animationSelectClip(unsigned int, int, int);
 int FUN_003fe86c(unsigned int, int, int);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
 int moriModelContentCopyBody(...);
 int FUN_0040aad4(int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 
 extern unsigned char LAB_0033c4c0; /* 0x33c4c0 */
@@ -33,15 +33,15 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_003563fc. */
 extern int FUN_003a3238(void);
 /* Supplied declaration required: FUN_003fd7c0. */
-/* Supplied declaration required: FUN_003fda08. */
+/* Supplied declaration required: animationSelectClip. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 /* Supplied declaration required: moriModelContentCopyBody. */
 /* Supplied declaration required: FUN_0040aad4. */
 extern int FUN_0040ab8c(unsigned int);
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 unsigned int FUN_0033bfac(void)
@@ -121,7 +121,7 @@ unsigned int FUN_0033bfac(void)
     temp_v8 = 0;
     temp_v6 = *(unsigned int *)(*(int *)(temp_v3 + 0xa8) + 4);
     FUN_003fe86c(temp_v6,0,2);
-    FUN_0040ace8(g_handleRegistry,temp_v6);
+    handleRegistryRegisterObject(g_handleRegistry,temp_v6);
     if (*(short *)(temp_v3 + 0xa6) == 0x26) {
       *(unsigned char *)(g_mapGimic + 0x68) = 0;
       temp_v4 = *(int *)(*(int *)(temp_v3 + 0xa8) + 4);
@@ -157,7 +157,7 @@ unsigned int FUN_0033bfac(void)
     }
     if (temp_v7 && temp_v5 == 1) {
       *(unsigned short *)(temp_v3 + 0xa4) = 1;
-      FUN_003fda08(*(unsigned int *)(*(int *)(temp_v3 + 0xa8) + 4),1,2);
+      animationSelectClip(*(unsigned int *)(*(int *)(temp_v3 + 0xa8) + 4),1,2);
     }
     temp_v0 = *(short *)(temp_v3 + 0xa6);
     if (temp_v0 == 0x27) {
@@ -252,7 +252,7 @@ unsigned int FUN_0033bfac(void)
                 FUN_00178b04(0x20,&LAB_0033c4d8,0x214);
                 temp_v6 = 0;
                 if (temp_v1 != 0) {
-                  temp_v6 = FUN_0040ac08();
+                  temp_v6 = modelListInit();
                 }
                 *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
                 moriModelContentCopyBody();
@@ -265,7 +265,7 @@ unsigned int FUN_0033bfac(void)
               FUN_00178b04(0x20,&LAB_0033c4d8,0x20d);
               temp_v6 = 0;
               if (temp_v1 != 0) {
-                temp_v6 = FUN_0040ac08();
+                temp_v6 = modelListInit();
               }
               *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
               FUN_001cd3ec();
@@ -290,7 +290,7 @@ unsigned int FUN_0033bfac(void)
           }
           temp_v6 = 0;
           if (temp_v1 != 0) {
-            temp_v6 = FUN_0040ac08();
+            temp_v6 = modelListInit();
           }
           *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
           FUN_001cd3ec();
@@ -300,7 +300,7 @@ unsigned int FUN_0033bfac(void)
           FUN_00178b04(0x20,&LAB_0033c4d8,0x1f2);
           temp_v6 = 0;
           if (temp_v1 != 0) {
-            temp_v6 = FUN_0040ac08();
+            temp_v6 = modelListInit();
           }
           *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
           FUN_001cd3ec();
@@ -314,7 +314,7 @@ unsigned int FUN_0033bfac(void)
           FUN_00178b04(0x20,&LAB_0033c4d8,0x1e5);
           temp_v6 = 0;
           if (temp_v1 != 0) {
-            temp_v6 = FUN_0040ac08();
+            temp_v6 = modelListInit();
           }
           *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
           FUN_0040a908();
@@ -331,7 +331,7 @@ unsigned int FUN_0033bfac(void)
         FUN_00178b04(0x20,&LAB_0033c4d8,0x1dc);
         temp_v6 = 0;
         if (temp_v1 != 0) {
-          temp_v6 = FUN_0040ac08();
+          temp_v6 = modelListInit();
         }
         *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
         FUN_0040a908();
@@ -348,7 +348,7 @@ unsigned int FUN_0033bfac(void)
         FUN_00178b04(0x20,&LAB_0033c4d8,0x1cc);
         temp_v6 = 0;
         if (temp_v1 != 0) {
-          temp_v6 = FUN_0040ac08();
+          temp_v6 = modelListInit();
         }
         *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
         FUN_0040a908();
@@ -364,7 +364,7 @@ unsigned int FUN_0033bfac(void)
       FUN_00178b04(0x20,&LAB_0033c4d8,0x1c3);
       temp_v6 = 0;
       if (temp_v1 != 0) {
-        temp_v6 = FUN_0040ac08();
+        temp_v6 = modelListInit();
       }
       *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
       FUN_0040a908();
@@ -381,7 +381,7 @@ unsigned int FUN_0033bfac(void)
       FUN_00178b04(0x20,&LAB_0033c4d8,0x1b3);
       temp_v6 = 0;
       if (temp_v1 != 0) {
-        temp_v6 = FUN_0040ac08();
+        temp_v6 = modelListInit();
       }
       *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
       FUN_0040a908();
@@ -397,7 +397,7 @@ unsigned int FUN_0033bfac(void)
     FUN_00178b04(0x20,&LAB_0033c4d8,0x1aa);
     temp_v6 = 0;
     if (temp_v1 != 0) {
-      temp_v6 = FUN_0040ac08();
+      temp_v6 = modelListInit();
     }
     *(unsigned int *)(temp_v2 + 0xa8) = temp_v6;
     FUN_0040a908();

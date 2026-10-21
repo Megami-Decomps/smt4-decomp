@@ -8,7 +8,7 @@ int FUN_00157558(int);
 int FUN_00164b5c(int, int, int, int, int, int);
 int renderCtxResetColorScale(int);
 int skinObjectUpdateMatrices(int);
-int FUN_0018291c(int *, int *, int *, int *, int, int);
+int quadSetOrderedVectors(int *, int *, int *, int *, int, int);
 int FUN_001835b4(int, int, int, int, int, int);
 
 typedef int romwright_code(...);
@@ -41,7 +41,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
-/* Supplied declaration required: FUN_0018291c. */
+/* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: FUN_001835b4. */
 
 
@@ -107,7 +107,7 @@ int FUN_002a3600(int param_1)
       temp_v6 = 0x3f800000;
       temp_v7 = 0x3f800000;
       temp_v8 = 0x3f800000;
-      FUN_0018291c(&temp_v5,&temp_v9,&temp_v13,&temp_v17,0,1);
+      quadSetOrderedVectors(&temp_v5,&temp_v9,&temp_v13,&temp_v17,0,1);
       FUN_001835b4(2,9,0,0,0,1);
     }
     else {

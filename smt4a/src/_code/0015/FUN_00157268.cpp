@@ -10,7 +10,7 @@ int vectorClear(int *);
 int FUN_0016bb74(int *, int);
 int FUN_0016d1f4(unsigned char [24]);
 int FUN_00177abc(unsigned int *, unsigned char *);
-int FUN_00177cdc(unsigned char *, int, int);
+int gpuEmitDepthBufferCommands(unsigned char *, int, int);
 
 /* stack frame of param_1: 2 slot(s), 5 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0016bb74. */
 /* Supplied declaration required: FUN_0016d1f4. */
 /* Supplied declaration required: FUN_00177abc. */
-/* Supplied declaration required: FUN_00177cdc. */
+/* Supplied declaration required: gpuEmitDepthBufferCommands. */
 
 
 void FUN_00157268(int *param_1)
@@ -47,7 +47,7 @@ void FUN_00157268(int *param_1)
   temp_v4[0] = 0;
   temp_v5[0] = 0;
   puVar1 = temp_v4;
-  FUN_00177cdc(puVar1,*piVar3,1);
+  gpuEmitDepthBufferCommands(puVar1,*piVar3,1);
   *piVar3 = (int)puVar1;
   puVar2 = temp_v5;
   FUN_00177abc(puVar2,puVar1);

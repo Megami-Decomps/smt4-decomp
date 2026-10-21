@@ -1,34 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b84bc` (_code @ 0x3b84bc, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail retains an unused pool word 0x0057113c after the function return; adding dead data to reproduce it is not allowed. */
+#include "shard/W5_W5Match7_ScriptUnit.h"
+
+struct UnitFlagMasks {
+    u8 unk00[0x38]; // 0x00
+    u64 masks[3];   // 0x38
+};
 
 extern "C" {
+extern UnitFlagMasks g_btlCandidateMasks;
 
-extern unsigned int DAT_005702c0; /* 0x5702c0 */
-extern unsigned int DAT_005702c4; /* 0x5702c4 */
-extern unsigned int DAT_005702c8; /* 0x5702c8 */
-extern unsigned int DAT_005702cc; /* 0x5702cc */
-extern unsigned int DAT_005702d0; /* 0x5702d0 */
-extern unsigned int DAT_005702d4; /* 0x5702d4 */
-
-extern int btlUnitGet(unsigned int);
-
-
-unsigned int FUN_003b84bc(unsigned int *param_1)
-
+// Adds all three preset masks to the referenced script unit's leading flag word.
+u32 FUN_003b84bc(const u32* unitId)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int *puVar4;
-  
-  temp_v1 = btlUnitGet(*param_1);
-  temp_v0 = DAT_005702d0;
-  puVar4 = *(unsigned int **)(temp_v1 + 0x20);
-  temp_v2 = DAT_005702c0 | *puVar4 | DAT_005702c8;
-  puVar4[1] = puVar4[1] | DAT_005702c4 | DAT_005702cc | DAT_005702d4;
-  *puVar4 = temp_v2 | temp_v0;
-  return 1;
+    ScriptUnit* unit = btlUnitGet(*unitId);
+    // The opaque entry's first eight bytes are its combined flags.
+    u64& flags = *reinterpret_cast<u64*>(unit->entryView.entry);
+    flags |= g_btlCandidateMasks.masks[0] | g_btlCandidateMasks.masks[1] | g_btlCandidateMasks.masks[2];
+    return 1;
 }
-
-} /* extern "C" */
+}

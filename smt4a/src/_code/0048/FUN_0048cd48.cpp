@@ -10,7 +10,7 @@ int FUN_0048a378(int);
 
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int FUN_002bf444(void);
+extern int buttonHelpIsNotActive(void);
 /* Supplied declaration required: FUN_0048a378. */
 
 
@@ -35,7 +35,7 @@ void FUN_0048cd48(int param_1)
     } while (temp_v0 < 6);
     FUN_00163aa4(param_1 + 0x112c);
     FUN_00163aa4(param_1 + 0x10a0);
-    if ((*(char *)(param_1 + 0xf86) != '\0') && (temp_v0 = FUN_002bf444(), temp_v0 != 0)) {
+    if ((*(char *)(param_1 + 0xf86) != '\0') && (temp_v0 = buttonHelpIsNotActive(), temp_v0 != 0)) {
       *(unsigned int *)(param_1 + 4) = 2;
       *(unsigned int *)(param_1 + 8) = 0;
     }

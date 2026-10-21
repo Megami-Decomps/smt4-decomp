@@ -8,7 +8,7 @@ extern const char DAT_005449ec[]; /* __FILE__ */
 EffMiscObject *FUN_00271be0(u32 kind, void *params);
 void *resourceResolveHeaderPointer(EffMiscDesc *desc);
 u32 *resourceResolveDataPointer(EffMiscDesc *desc);
-void *FUN_0037a834(u32 id);
+void *sysGetTableWord(u32 id);
 void *textureCreateFromImage(u32 *resource);
 void *asdEffectTextureCreate(u32 *resource);
 void *memAlloc(int, int, int, int size, int align, int);
@@ -44,7 +44,7 @@ EffMiscObject *FUN_00321fc8(EffMiscDesc *desc)
         shared->resource = textureCreateFromImage(resource);
         break;
     case 4:
-        shared->resource = FUN_0037a834(*resource & 0xffff);
+        shared->resource = sysGetTableWord(*resource & 0xffff);
         break;
     case 9:
         shared->resource = asdEffectTextureCreate(resource);

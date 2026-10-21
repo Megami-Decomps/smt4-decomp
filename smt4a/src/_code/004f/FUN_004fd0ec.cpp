@@ -9,7 +9,7 @@ int FUN_004102d8(int, int, int, unsigned int);
 extern int g_btlActionReflect; /* 0x5712f0 */
 
 /* Supplied declaration required: FUN_004102d8. */
-extern short FUN_004c3a98(int, unsigned int);
+extern short btlFindEntryValue(int, unsigned int);
 
 
 int FUN_004fd0ec(short param_1,short param_2,unsigned int param_3,int param_4,unsigned int param_5,
@@ -50,7 +50,7 @@ int FUN_004fd0ec(short param_1,short param_2,unsigned int param_3,int param_4,un
     temp_v2 = 0;
   }
   else {
-    temp_v2 = FUN_004c3a98((int)*(short *)(param_4 + 0x6a),1);
+    temp_v2 = btlFindEntryValue((int)*(short *)(param_4 + 0x6a),1);
     temp_v2 = temp_v2 - 1;
   }
   *(short *)(temp_v4 + 0x24) = temp_v2;

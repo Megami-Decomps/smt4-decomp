@@ -15,7 +15,7 @@ typedef struct {
     u8 moving;         /* 0x128 */
 } Transition;
 
-s32 FUN_0024eaac(Transition *transition, u8 moving);
+s32 uiAnimateStaggeredSlidesAndFades(Transition *transition, u8 moving);
 
 s32 FUN_002ec514(Transition *transition)
 {
@@ -28,7 +28,7 @@ s32 FUN_002ec514(Transition *transition)
     if (transition->state == 2 && transition->queued == 0) {
         moving = 0;
     }
-    if (FUN_0024eaac(transition, moving) != 0) {
+    if (uiAnimateStaggeredSlidesAndFades(transition, moving) != 0) {
         if (moving == 0) {
             transition->moving = 0;
         }

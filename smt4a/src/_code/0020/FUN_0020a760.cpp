@@ -18,9 +18,9 @@ int FUN_002a4878(...);
 int FUN_002a4894(...);
 int FUN_002a4914(...);
 int FUN_002a4964(...);
-int FUN_002c2c88(...);
+int objClearFlagPair(...);
 int FUN_0031f208(int);
-int FUN_0031f27c(int);
+int sortMenuAcquire(int);
 int FUN_003343f0(int);
 int SBORROW4(...);
 
@@ -39,9 +39,9 @@ extern int g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: FUN_002a4914. */
 /* Supplied declaration required: FUN_002a4964. */
 extern int FUN_002a7410(void);
-/* Supplied declaration required: FUN_002c2c88. */
+/* Supplied declaration required: objClearFlagPair. */
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: FUN_003343f0. */
 /* Supplied declaration required: FUN_003f3a04. */
 /* Supplied declaration required: FUN_003f5220. */
@@ -79,7 +79,7 @@ unsigned int FUN_0020a760(int param_1)
     if (temp_v5 == 0) {
       return 0;
     }
-    FUN_0031f27c(0);
+    sortMenuAcquire(0);
     FUN_0031f208(2);
     FUN_0031f208(1);
     FUN_0031f208(4);
@@ -153,7 +153,7 @@ unsigned int FUN_0020a760(int param_1)
           FUN_002a4964(temp_v5 + 0xd50,temp_v2);
         }
         temp_v4 = temp_v5 + 0xd50;
-        FUN_002c2c88(temp_v4);
+        objClearFlagPair(temp_v4);
       }
     }
   }
@@ -201,7 +201,7 @@ unsigned int FUN_0020a760(int param_1)
       temp_v2 = FUN_002a4894(temp_v3);
       FUN_002a4964(temp_v4,temp_v2);
     }
-    FUN_002c2c88(temp_v4);
+    objClearFlagPair(temp_v4);
   }
   temp_v1 = 0;
   do {

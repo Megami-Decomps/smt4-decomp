@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038d598` (_code @ 0x38d598, 0x6b0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_ArchiveIcon.h"
 
 extern "C" {
 
@@ -16,9 +17,8 @@ int jyoucyuGetTableEntry(...);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int FUN_002c5e80(...);
 int asdOperatorDelete(...);
-int FUN_00352764(...);
 int FUN_0038bee4(...);
-int FUN_003df318(unsigned char [4], unsigned int, unsigned int);
+int ownerTableEntryGet(unsigned char [4], unsigned int, unsigned int);
 int FUN_003df648(...);
 int FUN_003df7d4(...);
 int FUN_003df850(...);
@@ -65,7 +65,7 @@ extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: FUN_002344d8. */
 /* Supplied declaration required: FUN_0026281c. */
 /* Supplied declaration required: asdOperatorNewB. */
-extern int FUN_002a12d8(int);
+extern int legacyResourceIdRemap(int);
 extern unsigned char objGetFlagBit0(int);
 extern unsigned char objGetFlagBit1(int);
 /* Supplied declaration required: FUN_002b4b80. */
@@ -75,9 +75,8 @@ extern unsigned char objGetFlagBit1(int);
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_002c5e80. */
 /* Supplied declaration required: asdOperatorDelete. */
-/* Supplied declaration required: FUN_00352764. */
 /* Supplied declaration required: FUN_0038bee4. */
-/* Supplied declaration required: FUN_003df318. */
+/* Supplied declaration required: ownerTableEntryGet. */
 extern int FUN_003df63c(unsigned char *);
 /* Supplied declaration required: FUN_003df648. */
 /* Supplied declaration required: FUN_003df7d4. */
@@ -256,7 +255,7 @@ int FUN_0038d598(int param_1)
   if (*(int *)(temp_v7 + 0x68c) != 0) {
     temp_v38 = temp_v7 + 0x4a8;
     do {
-      FUN_003df318(temp_v40,*(unsigned int *)(temp_v7 + 0x5b0),temp_v31);
+      ownerTableEntryGet(temp_v40,*(unsigned int *)(temp_v7 + 0x5b0),temp_v31);
       temp_v12 = *(int *)(temp_v7 + 0x688) + temp_v32 * 0x9c8;
       temp_v39 = temp_v12 + 0x900;
       *(short *)(temp_v12 + 0x9aa) = (short)temp_v31;
@@ -431,13 +430,15 @@ int FUN_0038d598(int param_1)
         memClear(temp_v41,0x1200);
       }
       else {
-        FUN_002c5e80(temp_v6,0,10);
+        temp_v6 = static_cast<u16>(FUN_002c5e80(temp_v6,0,10));
         *(short *)(temp_v39 + 0xa8) = (short)temp_v6;
         if ((temp_v6 & 0xffff) != 0xffff) {
-          FUN_00352764(&temp_v13,temp_v7 + 0x28,temp_v41);
-          *(int *)(temp_v42 + 0xc) = temp_v13;
-          *(unsigned int *)(temp_v42 + 0x10) = temp_v14;
-          temp_v9 = FUN_002a12d8(temp_v42 + 0xc);
+          ValidationPair iconResult = archiveReadIcon(
+              reinterpret_cast<const ArchiveIconSource *>(temp_v7 + 0x28),
+              reinterpret_cast<void *>(temp_v41), temp_v6);
+          *(int *)(temp_v42 + 0xc) = static_cast<s32>(iconResult.first);
+          *(unsigned int *)(temp_v42 + 0x10) = iconResult.second;
+          temp_v9 = legacyResourceIdRemap(temp_v42 + 0xc);
           if (temp_v9 < 0) {
             return temp_v9;
           }
@@ -450,7 +451,7 @@ int FUN_0038d598(int param_1)
       FUN_003df850(&temp_v39,temp_v16,&temp_v37);
       *(int *)(temp_v42 + 0xc) = temp_v39;
       *(unsigned int *)(temp_v42 + 0x10) = uStack_1a3c;
-      temp_v9 = FUN_002a12d8(temp_v42 + 0xc);
+      temp_v9 = legacyResourceIdRemap(temp_v42 + 0xc);
       if (temp_v9 < 0) {
         return temp_v9;
       }
@@ -468,10 +469,10 @@ int FUN_0038d598(int param_1)
       FUN_003df7d4(&temp_v19,temp_v16,&temp_v15,temp_v9);
       *(unsigned int *)(temp_v42 + 0xc) = temp_v19;
       *(unsigned int *)(temp_v42 + 0x10) = uStack_1bfc;
-      temp_v5 = FUN_002a12d8(temp_v42 + 0xc);
+      temp_v5 = legacyResourceIdRemap(temp_v42 + 0xc);
       if (temp_v5 < 0) {
         asdOperatorDelete(temp_v9);
-        temp_v7 = FUN_002a12d8(temp_v42 + 0xc);
+        temp_v7 = legacyResourceIdRemap(temp_v42 + 0xc);
         return temp_v7;
       }
       temp_v5 = 0;

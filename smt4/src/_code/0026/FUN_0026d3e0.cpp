@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0026cba4(int, int, unsigned int);
-int FUN_0028caf8(...);
+int btlItemComputeValues(...);
 int FUN_00292be4(unsigned int, int, int);
 int FUN_00298d28(int, int);
 int objectPartRunUnlessLocked(...);
@@ -19,7 +19,7 @@ typedef struct {
 extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_0026cba4. */
-/* Supplied declaration required: FUN_0028caf8. */
+/* Supplied declaration required: btlItemComputeValues. */
 /* Supplied declaration required: FUN_00292be4. */
 /* Supplied declaration required: FUN_00298d28. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
@@ -62,12 +62,12 @@ void FUN_0026d3e0(unsigned int param_1,int param_2)
     if (temp_v2 < 1) {
       temp_v2 = objectPartRunUnlessLocked(param_1);
       if (temp_v2 != 0) {
-        FUN_0028caf8((int)*(char *)(temp_v1 + temp_v2 + 0x9107),*(unsigned short *)(temp_v0 + 0x36),&temp_v5,
+        btlItemComputeValues((int)*(char *)(temp_v1 + temp_v2 + 0x9107),*(unsigned short *)(temp_v0 + 0x36),&temp_v5,
                      &temp_v6);
         temp_v4 = (int)*(char *)(temp_v1 + temp_v2 + 0x9107);
       }
       else {
-        FUN_0028caf8(0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v5,&temp_v6);
+        btlItemComputeValues(0xffffffff,*(unsigned short *)(temp_v0 + 0x36),&temp_v5,&temp_v6);
       }
       FUN_00292be4(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x6c8),temp_v5,temp_v6);
       FUN_00298d28(temp_v5,temp_v6);
@@ -89,7 +89,7 @@ void FUN_0026d3e0(unsigned int param_1,int param_2)
     temp_v2 = temp_v2 - 4;
   }
   temp_v1 = temp_v0 + temp_v2 * 8;
-  FUN_0028caf8(*(unsigned int *)(temp_v1 + 0x738),*(unsigned short *)(temp_v0 + 0x36),&temp_v5,&temp_v6);
+  btlItemComputeValues(*(unsigned int *)(temp_v1 + 0x738),*(unsigned short *)(temp_v0 + 0x36),&temp_v5,&temp_v6);
   FUN_00292be4(*(unsigned int *)(temp_v0 + temp_v2 * 4 + 0x6d8),temp_v5,temp_v6);
   FUN_00298d28(temp_v5,temp_v6);
   temp_v4 = *(int *)(temp_v1 + 0x738);

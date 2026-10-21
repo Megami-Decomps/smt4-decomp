@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002a43bc(int, unsigned int, int);
+int aocTexExpandCompressedData(int, unsigned int, int);
 int FUN_002a4584(int, unsigned char [128], unsigned char [128], int *, unsigned int, int, unsigned int);
 int libc_strcat(...);
 int asdTextureCreate(void);
@@ -22,7 +22,7 @@ extern unsigned char LAB_0014ce18; /* 0x14ce18 */
 extern unsigned char LAB_0014ce24; /* 0x14ce24 */
 extern int g_aocDisplay; /* 0x433130 */
 
-/* Supplied declaration required: FUN_002a43bc. */
+/* Supplied declaration required: aocTexExpandCompressedData. */
 /* Supplied declaration required: FUN_002a4584. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: asdTextureCreate. */
@@ -84,7 +84,7 @@ unsigned int FUN_0014cbcc(unsigned int param_1,int *param_2,unsigned int param_3
       FUN_002a4584(g_aocDisplay,temp_v6,temp_v5,&temp_v4,temp_v0,0x80,param_3);
       if (temp_v2 != 0) {
         if (*(char *)(param_2[1] + 0xd) != '\0') {
-          FUN_002a43bc(temp_v2,temp_v3,0x80);
+          aocTexExpandCompressedData(temp_v2,temp_v3,0x80);
         }
         temp_v1 = rt_memcmp(temp_v2,&LAB_0014ce24,4);
         if (temp_v1 == 0) {

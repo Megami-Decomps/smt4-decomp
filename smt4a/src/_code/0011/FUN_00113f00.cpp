@@ -5,7 +5,7 @@
 extern "C" {
 
 int maxValueTrackerUpdate(unsigned int);
-int FUN_002e32a4(int, unsigned char *, unsigned char *, unsigned int, unsigned int);
+void FUN_002e32a4(int kind, ...);
 int __aeabi_uidivmod(unsigned int, unsigned int);
 
 typedef struct fn_00113f00_arg0 fn_00113f00_arg0;

@@ -1,11 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cc6d0` (_code @ 0x1cc6d0, 0x8ac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match1_QueuedRequestToken.h"
 
 extern "C" {
 
 int FUN_001ba1c0(...);
-int FUN_001d1038(...);
+u32 FUN_001d1038(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
 int FUN_001d10c0(void);
 int FUN_001d1108(void);
 
@@ -17,12 +18,12 @@ int vcallSlot12IfValid(...);
 int sysFatalBreak(void);
 int asdMemFree(void);
 int asdMemoryAllocAligned(...);
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 int FUN_001bcfb4(int, unsigned int, unsigned int);
-int FUN_001cd404(int, unsigned int, unsigned int, unsigned int);
+int asdLoadFileAsyncWrap(int, unsigned int, unsigned int, unsigned int);
 int FUN_001d0ea0(int *, unsigned int, int);
 int FUN_001d0fcc(...);
-int FUN_001d25ec(...);
+int legacyResourceIdRemap(...);
 int FUN_002e3c44(unsigned int *, int, int, int *);
 
 typedef int romwright_code(...);
@@ -67,12 +68,12 @@ extern int FUN_00100836(int, unsigned int, unsigned int *);
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-extern int FUN_001af210(int);
-/* Supplied declaration required: FUN_001b57a8. */
+extern int sysLightEventTryWait(int);
+/* Supplied declaration required: resultPairInitialize. */
 extern unsigned int FUN_001b5acc(char *);
 /* Supplied declaration required: FUN_001ba1c0. */
 /* Supplied declaration required: FUN_001bcfb4. */
-/* Supplied declaration required: FUN_001cd404. */
+/* Supplied declaration required: asdLoadFileAsyncWrap. */
 /* Supplied declaration required: FUN_001d0ea0. */
 /* Supplied declaration required: FUN_001d0fcc. */
 /* Supplied declaration required: FUN_001d1038. */
@@ -80,7 +81,7 @@ extern int objGetFlagBit16(int);
 extern int byteIsAtLeast100(unsigned int *);
 /* Supplied declaration required: FUN_001d10c0. */
 /* Supplied declaration required: FUN_001d1108. */
-/* Supplied declaration required: FUN_001d25ec. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_002e3c44. */
 extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
 extern unsigned int nn_fs_detail_FileBase_TryRead(unsigned int, int *, unsigned int, unsigned int);
@@ -124,10 +125,6 @@ void FUN_001cc6d0(int param_1,int param_2)
   unsigned int uStack_280;
   unsigned int uStack_27c;
   int temp_v19;
-  char acStack_78 [4];
-  unsigned int uStack_74;
-  unsigned int uStack_70;
-  unsigned int uStack_6c;
   int temp_v20;
   unsigned int temp_v21;
   int temp_v22;
@@ -153,13 +150,13 @@ void FUN_001cc6d0(int param_1,int param_2)
   puVar3[2] = 0;
   puVar3[3] = 0;
   pcVar4 = temp_v9;
-  FUN_001b57a8(pcVar4,0);
+  resultPairInitialize(pcVar4,0);
   temp_v4 = *(unsigned int *)(pcVar4 + 4);
   *puVar3 = *(unsigned int *)pcVar4;
   puVar3[1] = temp_v4;
   (*(unsigned char *)((unsigned char *)&temp_v15 + 0)) = 1;
   temp_v17 = 0;
-  FUN_001b57a8(&temp_v7,0);
+  resultPairInitialize(&temp_v7,0);
   (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar5;
   uStack_298 = *(unsigned int *)(pcVar5 + 4);
   (*(unsigned char *)((unsigned char *)&temp_v15 + 0)) = 100;
@@ -184,7 +181,7 @@ void FUN_001cc6d0(int param_1,int param_2)
                        *(unsigned int *)(param_2 + 0x28));
         }
         else {
-          FUN_001cd404(param_2 + 0x70,*(unsigned int *)(param_2 + 0x18),
+          asdLoadFileAsyncWrap(param_2 + 0x70,*(unsigned int *)(param_2 + 0x18),
                        *(unsigned int *)(param_2 + 0x28),*(unsigned int *)(param_2 + 0x2c));
         }
         *(unsigned char *)(param_2 + 8) = 2;
@@ -201,7 +198,7 @@ void FUN_001cc6d0(int param_1,int param_2)
   else {
     temp_v3 = objGetFlagBit16(g_aocMain);
     if (temp_v3 != 0) {
-      temp_v3 = FUN_001af210(g_aocMain + 0x98);
+      temp_v3 = sysLightEventTryWait(g_aocMain + 0x98);
       if (temp_v3 != 0) {
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
         temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),200);
@@ -249,10 +246,10 @@ void FUN_001cc6d0(int param_1,int param_2)
           puVar8[2] = 0;
           FUN_001883b0(puVar8,&temp_v18,temp_v4);
           pcVar4 = acStack_40;
-          FUN_001b57a8(pcVar4,puVar8);
+          resultPairInitialize(pcVar4,puVar8);
           (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
           uStack_298 = *(unsigned int *)(pcVar4 + 4);
-          temp_v3 = FUN_001d25ec(temp_v16);
+          temp_v3 = legacyResourceIdRemap(temp_v16);
           if (temp_v3 < 0) {
             if ((temp_v10 & 0xfffffffe) != 0) {
               if ((temp_v10 & 1) != 0) {
@@ -267,10 +264,10 @@ void FUN_001cc6d0(int param_1,int param_2)
             uStack_5c = 0;
             temp_v5 = nn_fs_detail_FileBase_TryGetSize((unsigned int)&temp_v10,(long long *)&temp_v22);
             pcVar4 = acStack_40;
-            FUN_001b57a8(pcVar4,temp_v5);
+            resultPairInitialize(pcVar4,temp_v5);
             (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
             uStack_298 = *(unsigned int *)(pcVar4 + 4);
-            temp_v3 = FUN_001d25ec(temp_v16);
+            temp_v3 = legacyResourceIdRemap(temp_v16);
             if (temp_v3 < 0) {
               if ((temp_v10 & 0xfffffffe) != 0) {
                 if ((temp_v10 & 1) != 0) {
@@ -321,15 +318,15 @@ void FUN_001cc6d0(int param_1,int param_2)
                                  ((unsigned int)&temp_v10,&temp_v20,*(unsigned int *)(param_2 + 0x14),
                                   *(unsigned int *)(param_2 + 0x24));
               pcVar4 = acStack_40;
-              FUN_001b57a8(pcVar4,temp_v5);
+              resultPairInitialize(pcVar4,temp_v5);
               (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar4;
               uStack_298 = *(unsigned int *)(pcVar4 + 4);
               if (temp_v20 == 0) {
-                FUN_001b57a8(&temp_v7,0xd9004586);
+                resultPairInitialize(&temp_v7,0xd9004586);
                 (*(unsigned int *)temp_v16) = (unsigned int)*(char (*) [4])pcVar9;
                 uStack_298 = *(unsigned int *)(pcVar9 + 4);
               }
-              temp_v3 = FUN_001d25ec(temp_v16);
+              temp_v3 = legacyResourceIdRemap(temp_v16);
               if (temp_v3 < 0) {
                 if ((temp_v10 & 0xfffffffe) != 0) {
                   if ((temp_v10 & 1) != 0) {
@@ -410,12 +407,12 @@ LAB_001ccc7c:
       if (*(unsigned int **)(param_2 + 0x18) != (unsigned int *)0x0) {
         **(unsigned int **)(param_2 + 0x18) = 0;
       }
-      temp_v3 = FUN_001d25ec(temp_v16);
+      temp_v3 = legacyResourceIdRemap(temp_v16);
       if (temp_v3 == -0x36bec76f) {
         jyoucyuGetTableEntry(0);
         return;
       }
-      temp_v3 = FUN_001af210(g_aocMain + 0x98);
+      temp_v3 = sysLightEventTryWait(g_aocMain + 0x98);
       if (temp_v3 != 0) {
         *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) & 0xfffeffff;
       }
@@ -434,16 +431,15 @@ LAB_001ccc7c:
       FUN_001ba1c0(g_aocMain,&temp_v8);
       temp_v6 = 1;
 LAB_001cce80:
-      temp_v19 = temp_v15;
-      acStack_78[0] = temp_v16[0];
-      acStack_78[1] = temp_v16[1];
-      acStack_78[2] = temp_v16[2];
-      acStack_78[3] = temp_v16[3];
-      uStack_74 = uStack_298;
-      uStack_70 = temp_v17;
-      uStack_6c = uStack_290;
-      temp_v3 = g_aocMain;
-      FUN_001d1038(g_aocMain,&temp_v19,(*(unsigned int *)temp_v16),uStack_298);
+      {
+        RequestParameters parameters = {{
+          static_cast<u32>(temp_v15), *(unsigned int*)temp_v16,
+          uStack_298, temp_v17, uStack_290
+        }};
+        QueuedRequestHandle handle = {parameters.words[1], parameters.words[2]};
+        temp_v3 = FUN_001d1038(reinterpret_cast<QueuedRequestTokenState*>(g_aocMain),
+                              &parameters, handle);
+      }
       if (temp_v3 != 0) {
         temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
         *(unsigned char *)(param_2 + 8) = 1;
@@ -460,23 +456,23 @@ LAB_001cce80:
           jyoucyuGetTableEntry(0);
           temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
           *(unsigned char *)(param_2 + 8) = 1;
-          FUN_001d25ec(temp_v16);
+          legacyResourceIdRemap(temp_v16);
           return;
         }
       }
       temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
       *(unsigned char *)(param_2 + 8) = 1;
-      temp_v5 = FUN_001d25ec(temp_v16);
+      temp_v5 = legacyResourceIdRemap(temp_v16);
       if ((temp_v5 & 0x80000000) != 0) {
         temp_v5 = (temp_v5 >> 0x1b) - 0x20;
       }
       else {
         temp_v5 = temp_v5 >> 0x1b;
       }
-      if ((temp_v5 == 0xfffffffc) && (temp_v3 = FUN_001d25ec(temp_v16), temp_v3 < 0)) {
+      if ((temp_v5 == 0xfffffffc) && (temp_v3 = legacyResourceIdRemap(temp_v16), temp_v3 < 0)) {
         sysFatalBreak();
       }
-      temp_v5 = FUN_001d25ec(temp_v16);
+      temp_v5 = legacyResourceIdRemap(temp_v16);
       if ((temp_v5 & 0x80000000) != 0) {
         temp_v5 = (temp_v5 >> 0x1b) - 0x20;
       }
@@ -486,7 +482,7 @@ LAB_001cce80:
       if (temp_v5 != 0xfffffffb) {
         return;
       }
-      temp_v3 = FUN_001d25ec(temp_v16);
+      temp_v3 = legacyResourceIdRemap(temp_v16);
       if (temp_v3 < 0) {
         sysFatalBreak();
       }

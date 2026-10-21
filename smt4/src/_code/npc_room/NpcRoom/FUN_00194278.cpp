@@ -7,8 +7,8 @@ extern "C" {
 int npcRoomDestroy(void);
 int FUN_00290d5c(...);
 
-int FUN_0019e0c0(...);
-int FUN_00290ed8(int);
+int scrRunOpcodesStub(...);
+void FUN_00290ed8(unsigned int frames);
 int bgmFadeOut(int);
 int buttonHelpRelease(void);
 int uiFadeRelease(void);
@@ -16,13 +16,13 @@ int FUN_00296e90(void);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int soundChannelStopAll(int);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_002a03d8(...);
 int fileSlotFree(int);
 int scrScriptProcessDestroy(...);
 int asdTMTexTableReleaseNode(int, int);
-int FUN_002b71d0(unsigned int, int);
+int jobSetIntensity(unsigned int, int);
 int FUN_002b827c(...);
 int buttonHelpSetPreset(...);
 int textFormatBuffer(...);
@@ -55,14 +55,13 @@ extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
 extern int slotIsReady(unsigned int);
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: npcRoomDestroy. */
 /* Supplied declaration required: FUN_00290d5c. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 extern int FUN_00290e78(void);
 extern int FUN_00290e9c(void);
 extern int messageWindowIsState1(void);
-/* Supplied declaration required: FUN_00290ed8. */
 /* Supplied declaration required: bgmFadeOut. */
 /* Supplied declaration required: buttonHelpRelease. */
 /* Supplied declaration required: uiFadeRelease. */
@@ -71,14 +70,14 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: FUN_00297060. */
 extern int FUN_002973d8(void);
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: FUN_002a03d8. */
 /* Supplied declaration required: fileSlotFree. */
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned short);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
-/* Supplied declaration required: FUN_002b71d0. */
+/* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: FUN_002b827c. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -89,7 +88,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
-extern unsigned int FUN_002c5c04(unsigned int *);
+extern unsigned int asdLoadFileSyncDefault(unsigned int *);
 /* Supplied declaration required: FUN_00323f40. */
 /* Supplied declaration required: eventTexAddHandle. */
 
@@ -184,7 +183,7 @@ unsigned int FUN_00194278(void)
           do {
             temp_v7 = (int)*(short *)((int)puVar3 + temp_v2 * 2 + temp_v5 * 0x10 + 100);
             if (-1 < temp_v7) {
-              FUN_002b71d0(puVar3[temp_v7 + 1],0);
+              jobSetIntensity(puVar3[temp_v7 + 1],0);
             }
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < 8);
@@ -241,15 +240,15 @@ LAB_001945e8:
         do {
           temp_v1 = (int)*(short *)((int)puVar3 + temp_v7 * 2 + temp_v5 * 0x10 + 100);
           if (-1 < temp_v1) {
-            FUN_002b71d0(puVar3[temp_v1 + 1],temp_v2 == temp_v5);
+            jobSetIntensity(puVar3[temp_v1 + 1],temp_v2 == temp_v5);
           }
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < 8);
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < (int)puVar3[0x39]);
     }
-    FUN_0019e0c0(puVar3[0x14]);
-    FUN_0019e0c0(puVar3[0x15]);
+    scrRunOpcodesStub(puVar3[0x14]);
+    scrRunOpcodesStub(puVar3[0x15]);
     temp_v5 = FUN_00290e78();
     if (temp_v5 == 0) break;
     FUN_00296e90();
@@ -264,7 +263,7 @@ LAB_001945e8:
       puVar3[0x41] = puVar3[0x3f];
       break;
     }
-    FUN_0029c3c0(0,10,0xff);
+    slotSetRequest(0,10,0xff);
     puVar2 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar2[0x3c] = 6;
@@ -280,11 +279,11 @@ LAB_001945e8:
     } while (temp_v5 < 8);
     textFormatBuffer(&temp_v9,&LAB_00194a44,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
                  *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
-    temp_v3 = FUN_002c5c04(&temp_v9);
+    temp_v3 = asdLoadFileSyncDefault(&temp_v9);
     puVar3[0x16] = temp_v3;
     textFormatBuffer(&temp_v9,&LAB_00194a60,*(unsigned short *)puVar3[puVar3[0x3e] + 10],
                  *(unsigned short *)puVar3[puVar3[0x3e] + 10]);
-    temp_v3 = FUN_002c5c04(&temp_v9);
+    temp_v3 = asdLoadFileSyncDefault(&temp_v9);
     puVar3[0x17] = temp_v3;
     FUN_00297060(temp_v3,puVar3[0x16]);
     puVar3[0x18] = temp_v3;
@@ -297,7 +296,7 @@ LAB_001945e8:
     buttonHelpSetPreset(0xa2);
     break;
   case 4:
-    temp_v5 = FUN_0019e0c0(g_npcRoom[0x18]);
+    temp_v5 = scrRunOpcodesStub(g_npcRoom[0x18]);
     if (temp_v5 != 2) break;
     scrScriptProcessDestroy(puVar3[0x18]);
     asdMemFree(puVar3[0x17]);
@@ -360,15 +359,15 @@ LAB_001945e8:
         break;
       }
     }
-    FUN_0029c3c0(0,10,0xff);
+    slotSetRequest(0,10,0xff);
     puVar2 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar2[0x3c] = 6;
     break;
   case 5:
-    temp_v5 = FUN_0019e0c0(g_npcRoom[0x14]);
+    temp_v5 = scrRunOpcodesStub(g_npcRoom[0x14]);
     if (temp_v5 != 2) break;
-    FUN_0029c3c0(0,10,0xff);
+    slotSetRequest(0,10,0xff);
     puVar2 = g_npcRoom;
     g_npcRoom[0x3b] = 0;
     puVar2[0x3c] = 6;

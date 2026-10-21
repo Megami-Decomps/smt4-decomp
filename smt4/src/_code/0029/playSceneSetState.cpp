@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00292dd0(void);
+void battleSelectButtonHelpPreset(int);
 int flagBitIsSet(int);
 int FUN_00292f4c(void);
 int btlGetMainState(void);
@@ -25,7 +25,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00292dd0. */
 /* Supplied declaration required: flagBitIsSet. */
 /* Supplied declaration required: FUN_00292f4c. */
 extern int FUN_00293230(void);
@@ -41,7 +40,7 @@ extern int FUN_0029ee54(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern int FUN_002b898c(void);
+extern int buttonHelpGetStatus(void);
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: __aeabi_memset4. */
 
@@ -71,7 +70,7 @@ void playSceneSetState(int param_1,int param_2,int param_3)
     buttonHelpGetMode();
     buttonHelpSetPreset();
   }
-  temp_v1 = FUN_002b898c();
+  temp_v1 = buttonHelpGetStatus();
   if (temp_v1 == 0x3d) {
     btlGetMainState();
     temp_v1 = FUN_00293230();
@@ -93,12 +92,12 @@ void playSceneSetState(int param_1,int param_2,int param_3)
     if (((!(param_2 == 9 || param_2 == 8)) && (!(param_2 == 0xb || param_2 == 10))) &&
        (!(param_2 == 0xd || param_2 == 0xc))) {
       if (param_2 == 1) {
-        objectPartRunUnlessLocked(param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088);
-        FUN_00292dd0();
+        battleSelectButtonHelpPreset(objectPartRunUnlessLocked(
+            param_1 + *(int *)(param_1 + 0x305c) * 100 + 0x3088) == 0);
       }
     }
     else {
-      FUN_00292dd0();
+      battleSelectButtonHelpPreset(0);
     }
   }
   else {

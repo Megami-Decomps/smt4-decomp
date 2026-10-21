@@ -8,7 +8,7 @@ int FUN_002646d4(int);
 int FUN_00277bdc(void);
 int FUN_0027b65c(unsigned int, unsigned int);
 int FUN_00281784(void);
-int FUN_00284838(void);
+int mapSpawnActiveSlotEffects(void);
 int FUN_002849a4(int);
 int FUN_00285574(void);
 int FUN_00297a00(void);
@@ -25,7 +25,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_00277bdc. */
 /* Supplied declaration required: FUN_0027b65c. */
 /* Supplied declaration required: FUN_00281784. */
-/* Supplied declaration required: FUN_00284838. */
+/* Supplied declaration required: mapSpawnActiveSlotEffects. */
 /* Supplied declaration required: FUN_002849a4. */
 /* Supplied declaration required: FUN_00285574. */
 /* Supplied declaration required: FUN_00297a00. */
@@ -48,7 +48,7 @@ void FUN_00273b78(void)
     FUN_00297a00();
     FUN_0027b65c(temp_v3,temp_v2);
     FUN_00277bdc();
-    FUN_00284838();
+    mapSpawnActiveSlotEffects();
     FUN_002646d4(1);
     return;
   }
@@ -65,7 +65,7 @@ void FUN_00273b78(void)
   FUN_00281784();
   FUN_00297a00();
   FUN_002849a4(1);
-  FUN_00284838();
+  mapSpawnActiveSlotEffects();
   FUN_002646d4(1);
   return;
 }

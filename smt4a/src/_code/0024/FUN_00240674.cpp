@@ -18,7 +18,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 extern int gameGetSlotRecord(int);
 extern int gameGetSlotTable(void);
 extern float FUN_001b4874(unsigned int, unsigned int);
-extern int FUN_003e4940(void);
+extern int actorIsActive(void);
 extern int FUN_003e4cb4(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 extern unsigned int FUN_004ccbf0(int);
@@ -119,7 +119,7 @@ void FUN_00240674(int param_1)
   do {
     temp_v8 = temp_v9;
     FUN_003e503c();
-    temp_v1 = FUN_003e4940();
+    temp_v1 = actorIsActive();
     if (temp_v1 != 0) {
       temp_v1 = temp_v9 + 0x19;
       if (temp_v1 >= 0x25) {

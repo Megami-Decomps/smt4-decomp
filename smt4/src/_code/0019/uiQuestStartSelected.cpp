@@ -23,12 +23,12 @@ typedef struct UiQuest00199024 {
     /* 0x78a */ u16 ids[1];
 } UiQuest00199024;
 
-s32 FUN_0028ed3c(u32 id, s32 a, s32 b);
-void FUN_0028ee90(void);
+s32 uiBindRecordRewardText(u32 id, s32 a, s32 b);
+void gameOptionsEnableAndReset(void);
 void FUN_0028eeb8(u32 id);
 void FUN_0028ffb8(u32 id);
 void FUN_00290404(void);
-void FUN_002b6b38(void);
+void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
 void FUN_002bee58(u8 *panel, s32 value);
 s32 scrScriptProcessStartEntry(u32 script, s32 entry);
@@ -51,11 +51,11 @@ void uiQuestStartSelected(void)
     offset = FUN_0029efa8(quest->list);
     id = quest->ids[offset + base];
     FUN_0028eeb8(id);
-    FUN_002b6b38();
-    FUN_0028ee90();
+    gameGetOptionProgressStatus();
+    gameOptionsEnableAndReset();
     FUN_0028ffb8(id);
     FUN_002bee58(quest->panel, 2);
-    FUN_0028ed3c(id, 0, 1);
+    uiBindRecordRewardText(id, 0, 1);
     if (scrScriptProcessStartEntry(quest->script, 3) != 0) {
         buttonHelpSetPreset(0x9e);
         FUN_00290404();

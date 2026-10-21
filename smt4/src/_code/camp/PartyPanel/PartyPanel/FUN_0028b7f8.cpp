@@ -8,7 +8,7 @@ int slotPlacementSetSlot(...);
 int FUN_0026b9bc(...);
 int FUN_0026bc6c(...);
 int FUN_0028c040(...);
-int FUN_00297468(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_0029e788(...);
 int FUN_0029e874(...);
 int FUN_0029f848(...);
@@ -23,7 +23,7 @@ int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
 int FUN_003c9c94(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int drawParameterBlockClear(...);
 
 /* stack frame of param_1: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -53,7 +53,7 @@ extern unsigned int *g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: FUN_0026bc6c. */
 /* Supplied declaration required: FUN_0028c040. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: FUN_0029e874. */
 /* Supplied declaration required: FUN_0029f848. */
@@ -69,7 +69,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: FUN_003c9c94. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void FUN_0028b7f8(int param_1)
@@ -102,8 +102,8 @@ void FUN_0028b7f8(int param_1)
   puVar5 = &LAB_0028bbf4;
   taskCreateDraw(&LAB_0028bbf4,0xe6,0,0,FUN_00212538,0,0,puVar4);
   puVar2[2] = (unsigned int)puVar5;
-  FUN_00297468(&LAB_0028bc00,puVar2 + 3,1);
-  FUN_00297468(&LAB_0028bc14,puVar2 + 4,1);
+  asdLoadFileAsyncSimple(&LAB_0028bc00,puVar2 + 3,1);
+  asdLoadFileAsyncSimple(&LAB_0028bc14,puVar2 + 4,1);
   FUN_0028c040();
   if (param_1 != 0) {
     FUN_0029e874(1);
@@ -147,7 +147,7 @@ void FUN_0028b7f8(int param_1)
   puVar8 = g_partyPanel + 0x12;
   *(unsigned short *)((int)g_partyPanel + 0x36) = 0;
   *(unsigned short *)(puVar2 + 0xe) = 0xffff;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(puVar8);
+  drawParameterBlockClear(puVar8);
   paramsInit(puVar2 + 0x12,&DAT_00402a4c,0x6c,&DAT_00402ab8,0x3c,&DAT_00402af4,0x18,0,0,
                &DAT_00402b0c,0x1f8);
   FUN_002bd954(puVar2 + 0x1a,0x19,0x24,puVar2 + 0x12,0x6a);

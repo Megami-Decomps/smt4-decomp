@@ -115,7 +115,7 @@ extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00192550. */
-extern unsigned int FUN_0019f240(unsigned int);
+extern unsigned int padGetMappedValue(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 extern int FUN_0028cb6c(void);
 /* Supplied declaration required: sysMemClear. */
@@ -643,7 +643,7 @@ unsigned int FUN_004c16c8(unsigned int param_1,int param_2,unsigned int param_3,
             temp_v10 = temp_v2;
             dataTable04FindById();
             if (temp_v10 != 0) {
-              temp_v5 = FUN_0019f240(temp_v2);
+              temp_v5 = padGetMappedValue(temp_v2);
               FUN_002efc44(temp_v10,temp_v5,3);
               temp_v18 = (float)VectorSignedToFloat(temp_v10,(unsigned char)(in_fpscr >> 0x16) & 3);
             }

@@ -1,32 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `MapNavi_SetDiscoveredCell` (_code @ 0x408544, 0x54 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler reassociates the bitset address and removes the post-store byte mask before comparison. */
+#include "shard/W6_W6Match5_MapDiscovery.h"
 
-extern "C" {
+extern "C" MapDiscoveryState *FUN_002c2710(void);
 
-extern int FUN_002c2710(void);
-
-
-unsigned char MapNavi_SetDiscoveredCell(unsigned int param_1,int param_2)
-
+// Update a cell's discovered bit and report whether its containing byte changed.
+extern "C" u8 MapNavi_SetDiscoveredCell(u32 cell, s32 discovered)
 {
-  int temp_v0;
-  unsigned char *pbVar2;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = FUN_002c2710();
-  pbVar2 = (unsigned char *)(temp_v0 + 0x12f0 + (param_1 >> 3));
-  temp_v1 = (unsigned int)*pbVar2;
-  temp_v2 = (1 << (param_1 & 7)) & 0xff;
-  if (param_2 != 0) {
-    temp_v2 = temp_v2 | temp_v1;
-  }
-  else {
-    temp_v2 = temp_v1 & ~temp_v2;
-  }
-  *pbVar2 = (unsigned char)temp_v2;
-  return temp_v2 != temp_v1;
+    MapDiscoveryState *state = FUN_002c2710();
+    u8 *byte = &state->discovered[cell >> 3];
+    u8 previous = *byte;
+    u8 mask = 1u << (cell & 7);
+    u8 updated = discovered != 0 ? mask | previous : previous & ~mask;
+    *byte = updated;
+    return updated != previous;
 }
-
-} /* extern "C" */

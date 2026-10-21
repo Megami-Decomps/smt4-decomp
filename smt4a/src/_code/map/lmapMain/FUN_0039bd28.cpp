@@ -27,7 +27,7 @@ extern unsigned int DAT_005f1bb0; /* 0x5f1bb0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: scrGetArg. */
-extern int FUN_003798f0(void);
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_003b5714. */
 
 
@@ -55,7 +55,7 @@ unsigned int FUN_0039bd28(unsigned int param_1,int param_2)
   temp_v6 = temp_v0;
   FUN_003b5714(temp_v0,temp_v1,temp_v2);
   if (temp_v6 != -1) {
-    temp_v6 = FUN_003798f0();
+    temp_v6 = dataTableGetRecord23();
     DAT_005f1b7c = (unsigned int)*(unsigned char *)(temp_v6 + 3);
     DAT_005f1b80 = VectorSignedToFloat((int)*(short *)(temp_v6 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
     DAT_005f1b84 = VectorSignedToFloat((int)*(short *)(temp_v6 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -68,7 +68,7 @@ unsigned int FUN_0039bd28(unsigned int param_1,int param_2)
   temp_v6 = temp_v3;
   FUN_003b5714(temp_v3,temp_v4,temp_v5);
   if (temp_v6 != -1) {
-    temp_v6 = FUN_003798f0();
+    temp_v6 = dataTableGetRecord23();
     DAT_005f1b9c = VectorSignedToFloat((int)*(short *)(temp_v6 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
     DAT_005f1bb0 = (unsigned int)*(unsigned char *)(temp_v6 + 3);
     DAT_005f1ba0 = VectorSignedToFloat((int)*(short *)(temp_v6 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);

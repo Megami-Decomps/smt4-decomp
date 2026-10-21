@@ -25,12 +25,25 @@ typedef struct VoiceOwner {
     /* 0x130 */ VoiceB *voices;
 } VoiceOwner;
 
+typedef struct CallerListLink {
+    /* 0x00 */ struct CallerListLink *next;
+    /* 0x04 */ struct CallerListLink *prev;
+} CallerListLink;
+
 typedef struct CallerA {
     /* 0x00 */ u8 unk00[0x24];
     /* 0x24 */ u32 unk24;
     /* 0x28 */ u8 unk28[0x14];
     /* 0x3C */ s32 unk3C;
-    /* 0x40 */ u8 unk40[0x38];
+    struct Pending {
+        u32 unk40;
+        /* 0x44 */ CallerListLink node;
+        u8 unk4c[0x2c];
+    };
+    union {
+        /* 0x40 */ u8 unk40[0x38];
+        Pending pending;
+    };
     /* 0x78 */ s32 unk78;
 } CallerA;
 

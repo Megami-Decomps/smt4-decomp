@@ -45,7 +45,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_00140918. */
-extern unsigned int FUN_00141af8(unsigned int **);
+extern unsigned int optionalNestedValueGet(unsigned int **);
 /* Supplied declaration required: FUN_00141fd0. */
 /* Supplied declaration required: FUN_0014d3cc. */
 extern int FUN_0014d3fc(int, unsigned int, unsigned int *);
@@ -109,7 +109,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
         (**(romwright_code **)(*param_1 + 8))(param_1,temp_v4,temp_v5);
       }
       else if (temp_v1 == 0) {
-        temp_v1 = FUN_00141af8(temp_v19);
+        temp_v1 = optionalNestedValueGet(temp_v19);
         temp_v2 = 0;
         if (temp_v1 == 0) {
           return;
@@ -128,7 +128,7 @@ void FUN_001308dc(int *param_1,unsigned int param_2,unsigned int param_3,unsigne
       temp_v1 = temp_v1 + 1;
     } while (temp_v1 < temp_v2);
   }
-  temp_v18 = FUN_00141af8(temp_v19);
+  temp_v18 = optionalNestedValueGet(temp_v19);
   if (temp_v18 != 0) {
     unaff_r9 = &temp_v5;
     unaff_r8 = 0xffffffff;

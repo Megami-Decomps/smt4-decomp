@@ -8,7 +8,7 @@ int gameFlagsGetBlock(void);
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_0040aa6c(void);
 int FUN_0040aad4(unsigned int, int);
-int FUN_0040ace8(unsigned int, unsigned int);
+int handleRegistryRegisterObject(unsigned int, unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -35,8 +35,8 @@ extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
 
 
 void FUN_003276f0(int param_1,int param_2)
@@ -62,7 +62,7 @@ void FUN_003276f0(int param_1,int param_2)
   FUN_00178b04(0x20,&LAB_00327864,0x3cb);
   temp_v2 = 0;
   if (temp_v1 != 0) {
-    temp_v2 = FUN_0040ac08();
+    temp_v2 = modelListInit();
   }
   *(unsigned int *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10) * 8 + 0x20) = temp_v2
   ;
@@ -106,7 +106,7 @@ LAB_003277b0:
   temp_v2 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
   temp_v0 = *(short *)((*(unsigned int *)&s__a_a_00587f08.u1[0]) + 10);
   *(int *)(temp_v1 + 0xdc) = (int)temp_v0;
-  FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + temp_v0 * 8 + 0x20) + 4));
+  handleRegistryRegisterObject(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + temp_v0 * 8 + 0x20) + 4));
   return;
 }
 

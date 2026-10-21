@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } void_stack;
 
-extern unsigned int DAT_00570d78; /* 0x570d78 */
+extern unsigned int g_battleMaskPresets; /* 0x570d78 */
 extern unsigned int DAT_00570d7c; /* 0x570d7c */
 extern unsigned int DAT_00570d90; /* 0x570d90 */
 extern unsigned int DAT_00570d94; /* 0x570d94 */
@@ -33,7 +33,7 @@ extern unsigned int DAT_00570d94; /* 0x570d94 */
 extern int btlGetMainState(void);
 extern int saveSlotFindSelected(void);
 extern int gameGetSlotTable(void);
-extern int FUN_00213b5c(void);
+extern int gameDataBlocksGetTableFlag(void);
 extern unsigned int FUN_003e0154(void);
 extern unsigned int FUN_003e0164(void);
 extern int gameDataFlagTestBit(unsigned int);
@@ -66,12 +66,12 @@ unsigned int FUN_0035f2f4(void)
   temp_v2 = FUN_003e0154();
   temp_v3 = FUN_003e0164();
   FUN_004fb798(0,0,0,*(int *)(temp_v1 + 0x1ed4),0,temp_v2,temp_v3,0xffffffff,2,0,0,9,0,0,1);
-  temp_v4 = FUN_00213b5c();
+  temp_v4 = gameDataBlocksGetTableFlag();
   if ((temp_v4 == 4) || (temp_v4 = gameDataFlagTestBit(0x80), temp_v4 != 0)) {
     temp_v4 = 1;
     do {
       puVar7 = (unsigned int *)(*(int *)(temp_v1 + 0x1ffc) + temp_v4 * 0x408);
-      if (((DAT_00570d78 & *puVar7) != 0 || (DAT_00570d7c & puVar7[1]) != 0) &&
+      if (((g_battleMaskPresets & *puVar7) != 0 || (DAT_00570d7c & puVar7[1]) != 0) &&
          ((puVar7[1] & DAT_00570d94) == 0 && (*puVar7 & DAT_00570d90) == 0)) {
         temp_v7 = 0;
         temp_v5 = 0;

@@ -6,7 +6,7 @@ extern "C" {
 
 int randRange(...);
 int FUN_00184310(void);
-int FUN_003c3f1c(void);
+int findSkillMetadataById(void);
 int FUN_003f39ac(void);
 
 typedef struct fn_003f36a4_arg2 fn_003f36a4_arg2;
@@ -47,7 +47,7 @@ typedef struct {
 #endif
 /* Supplied declaration required: randRange. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: findSkillMetadataById. */
 extern int gameDataFlagTestBit(unsigned int);
 /* Supplied declaration required: FUN_003f39ac. */
 
@@ -79,7 +79,7 @@ short FUN_003f36a4(unsigned int *param_1,int param_2,fn_003f36a4_arg2 *param_3)
     return 0;
   }
   temp_v1 = (unsigned int)*(unsigned short *)((int)param_1 + param_2 * 2);
-  FUN_003c3f1c();
+  findSkillMetadataById();
   temp_v0 = *(unsigned char *)(temp_v1 + 3);
   temp_v2 = temp_v0 & 0x1f;
   temp_v1 = temp_v2;
@@ -129,7 +129,7 @@ short FUN_003f36a4(unsigned int *param_1,int param_2,fn_003f36a4_arg2 *param_3)
   temp_v15 = romwright_piece_2_2(param_3->field_0x6e,param_3->field_0x6a);
   do {
     psVar6 = psVar9;
-    FUN_003c3f1c();
+    findSkillMetadataById();
     if (((psVar6 != (short *)0x0) && ((*(unsigned char *)((int)psVar6 + 3) & 0x80) != 0)) &&
        ((*(unsigned char *)((int)psVar6 + 3) & 0x1f) == temp_v2)) {
       temp_v5 = 0;
@@ -147,7 +147,7 @@ LAB_003f384c:
     psVar9 = (short *)0x1;
     do {
       psVar6 = psVar9;
-      FUN_003c3f1c();
+      findSkillMetadataById();
       if (((psVar6 != (short *)0x0) && ((*(unsigned char *)((int)psVar6 + 3) & 0x80) != 0)) &&
          ((*(unsigned char *)((int)psVar6 + 3) & 0x1f) == temp_v2)) {
         temp_v5 = 0;

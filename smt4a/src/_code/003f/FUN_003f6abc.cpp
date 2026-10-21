@@ -7,8 +7,8 @@ extern "C" {
 int fileSectionGetData(unsigned int, int, int);
 int FUN_001688c4(unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
-int FUN_002a1f60(unsigned int, int, unsigned int, int, int, unsigned int, int);
-int FUN_002e08b0(int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int, int, unsigned int, int);
+int flagsSetOrClearBit(int, int);
 int FUN_003ff1d4(int, int);
 int FUN_003ff20c(int, int);
 
@@ -21,8 +21,8 @@ typedef struct {
 /* Supplied declaration required: fileSectionGetData. */
 /* Supplied declaration required: FUN_001688c4. */
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002a1f60. */
-/* Supplied declaration required: FUN_002e08b0. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
+/* Supplied declaration required: flagsSetOrClearBit. */
 extern int flagsBGetBit1(unsigned short);
 /* Supplied declaration required: FUN_003ff1d4. */
 extern int flagsBGetBit2(unsigned short);
@@ -44,13 +44,13 @@ void FUN_003f6abc(int param_1)
   *(unsigned int *)(param_1 + 0x128) = 0;
   temp_v1 = **(unsigned short **)(param_1 + 0x5e0);
   fileSectionGetData(*(unsigned int *)(param_1 + 0x28),temp_v1,0);
-  FUN_002a1f60(*(unsigned int *)(param_1 + 0x5d8),3,0xffffffff,0,3,*(unsigned int *)(param_1 + 0x28),
+  asdTextDrawDirectoryEntry(*(unsigned int *)(param_1 + 0x5d8),3,0xffffffff,0,3,*(unsigned int *)(param_1 + 0x28),
                temp_v1);
   temp_v2 = FUN_001688c4(*(unsigned int *)(param_1 + 0x5d8));
   *(unsigned int *)(param_1 + 0x5dc) = temp_v2;
   temp_v3 = FUN_001688c4(*(unsigned int *)(param_1 + 0x5d8));
   FUN_00203b40(param_1 + 0xbc,*(int *)(param_1 + 0x128) + temp_v3,7,1,0,1);
-  FUN_002e08b0(param_1 + 0xbc,0);
+  flagsSetOrClearBit(param_1 + 0xbc,0);
   *(unsigned int *)(param_1 + 0x124) = 0;
   temp_v3 = flagsBGetBit2(temp_v0);
   if (temp_v3 == 0) {

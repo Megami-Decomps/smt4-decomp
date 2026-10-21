@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0023553c(int);
+int messageMainSetTargetFlags(int);
 int FUN_0029c43c(int, int);
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_00212088(void);
-extern unsigned int FUN_0022ea28(void);
-extern int FUN_0023360c(int);
-/* Supplied declaration required: FUN_0023553c. */
+extern unsigned int gameSlotTableGetHeader(void);
+extern int flaggedValueHolderGetTotal(int);
+/* Supplied declaration required: messageMainSetTargetFlags. */
 extern int FUN_00262cb0(unsigned short);
 extern int FUN_0026aa78(void);
 extern int FUN_002973d8(void);
@@ -29,20 +29,20 @@ void FUN_003ab9a4(int param_1)
   char *pcVar5;
   unsigned int temp_v4;
   
-  temp_v1 = FUN_0019e0c0(*(unsigned int *)(param_1 + 0x5a0));
+  temp_v1 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x5a0));
   if (temp_v1 == 2) {
     temp_v1 = FUN_002973d8();
     if (temp_v1 == 0) {
       pcVar5 = (char *)(param_1 + 0xa5b0);
       *pcVar5 = '\0';
-      temp_v1 = FUN_0023360c(param_1 + 0x20);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
       temp_v4 = *(unsigned int *)(param_1 + temp_v1 * 0x20 + 0x5b4);
-      temp_v2 = FUN_0022ea28();
+      temp_v2 = gameSlotTableGetHeader();
       if (temp_v2 < temp_v4) {
         *pcVar5 = '\x01';
       }
       else {
-        temp_v1 = FUN_0023360c(param_1 + 0x20);
+        temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
         temp_v1 = FUN_00262cb0(*(unsigned short *)(param_1 + temp_v1 * 0x20 + 0x5ac));
         if (temp_v1 != 0) {
           temp_v0 = '\x02';
@@ -58,24 +58,24 @@ void FUN_003ab9a4(int param_1)
         }
       }
       if (*pcVar5 == '\0') {
-        temp_v1 = FUN_0023360c(param_1 + 0x20);
+        temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
         FUN_0029c43c(-*(int *)(param_1 + temp_v1 * 0x20 + 0x5b4),0);
         *(unsigned int *)(param_1 + 0x14) = 6;
         *(unsigned int *)(param_1 + 0x18) = 0;
         return;
       }
       if (*pcVar5 == '\x05') {
-        FUN_0023553c(0);
+        messageMainSetTargetFlags(0);
         *(unsigned int *)(param_1 + 0x14) = 9;
         *(unsigned int *)(param_1 + 0x18) = 0;
         return;
       }
-      FUN_0023553c(0);
+      messageMainSetTargetFlags(0);
       *(unsigned int *)(param_1 + 0x14) = 8;
       *(unsigned int *)(param_1 + 0x18) = 0;
       return;
     }
-    FUN_0023553c(0);
+    messageMainSetTargetFlags(0);
     *(unsigned int *)(param_1 + 0x14) = 3;
     *(unsigned int *)(param_1 + 0x18) = 0;
   }

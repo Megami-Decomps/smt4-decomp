@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0022ab08(unsigned int, int *);
 int FUN_0022abe0(void);
 int btlMainFindEntryByListedId(...);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int btlGetMainState(void);
 
 /* stack frame of param_4: 6 slot(s), 24 byte(s) */
@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022ab08. */
 /* Supplied declaration required: FUN_0022abe0. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: btlGetMainState. */
 
 
@@ -132,7 +132,7 @@ unsigned int FUN_00246134(unsigned int param_1,unsigned int param_2,int param_3,
   temp_v3 = 0;
   do {
     temp_v5 = (unsigned int)temp_v10[temp_v3];
-    if (((temp_v5 != 0) && (FUN_00283e48(), temp_v5 != 0)) &&
+    if (((temp_v5 != 0) && (passiveSkillLookupRecord(), temp_v5 != 0)) &&
        (param_2 == (*(unsigned int *)(temp_v5 + 0x38) & 0xffff) >> 0xb)) {
       temp_v5 = (*(unsigned int *)(temp_v5 + 0x38) & 0xfffff) >> 0x10;
       if (temp_v5 == 1) {

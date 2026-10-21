@@ -13,17 +13,17 @@ int gameGetSlotTable(void);
 int dataTable1bOr1cGetRecord(void);
 
 /* Supplied declaration required: bitArrayCountSet1to500. */
-extern int FUN_0025b6e8(unsigned short);
+extern int unlockFlagTest(unsigned short);
 /* Supplied declaration required: FUN_0027d98c. */
 /* Supplied declaration required: FUN_00287800. */
 /* Supplied declaration required: FUN_0028fb40. */
-extern int FUN_0029bcf0(unsigned short);
+extern int partyFindActiveSlotById(unsigned short);
 /* Supplied declaration required: gameGetUnitRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
 extern int gameCountUnits(void);
-extern int FUN_002ae3c4(unsigned short);
+extern int aocEntryGetKind(unsigned short);
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
-extern int FUN_002b6b38(void);
+extern int gameGetOptionProgressStatus(void);
 extern int FUN_00348b7c(int);
 extern int bitsetTestBit(unsigned int, unsigned short);
 
@@ -50,7 +50,7 @@ void FUN_00250ec0(int param_1)
   if (temp_v3 != 0) {
     temp_v0 = *(char *)(temp_v3 + 6);
     if (temp_v0 == '\x04' || temp_v0 == '\x05') {
-      temp_v3 = FUN_002b6b38();
+      temp_v3 = gameGetOptionProgressStatus();
       if (temp_v3 != 0) {
         FUN_00287800();
       }
@@ -59,7 +59,7 @@ void FUN_00250ec0(int param_1)
       FUN_0027d98c();
     }
     else {
-      temp_v2 = FUN_002b6b38();
+      temp_v2 = gameGetOptionProgressStatus();
       if ((temp_v2 != 2) || (temp_v2 = FUN_00287800(), temp_v2 == 0)) {
         if (*(short *)(temp_v3 + 0x16c) == 5) {
           temp_v2 = gameCountUnits();
@@ -105,7 +105,7 @@ void FUN_00250ec0(int param_1)
                 }
               }
               else {
-                temp_v10 = FUN_0029bcf0(*(unsigned short *)(temp_v10 + 0x16e));
+                temp_v10 = partyFindActiveSlotById(*(unsigned short *)(temp_v10 + 0x16e));
                 if (temp_v10 < 0) {
                   return;
                 }
@@ -137,11 +137,11 @@ void FUN_00250ec0(int param_1)
                 }
               } while( 1 );
             case 7:
-              temp_v9 = FUN_002ae3c4(*(unsigned short *)(temp_v10 + 0x16e));
+              temp_v9 = aocEntryGetKind(*(unsigned short *)(temp_v10 + 0x16e));
               if (temp_v9 != 0xb) {
                 return;
               }
-              temp_v9 = FUN_0025b6e8(*(unsigned short *)(temp_v10 + 0x16e));
+              temp_v9 = unlockFlagTest(*(unsigned short *)(temp_v10 + 0x16e));
               if (temp_v9 == 0) {
                 return;
               }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001b3428(int);
 int FUN_001d10c0(void);
 int FUN_001d1108(void);
-int FUN_001d25ec(int);
+int legacyResourceIdRemap(int);
 int FUN_00473d74(int, unsigned int, unsigned int);
 int FUN_0047bc90(int, int *);
 
@@ -22,7 +22,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: FUN_001b3428. */
 /* Supplied declaration required: FUN_001d10c0. */
 /* Supplied declaration required: FUN_001d1108. */
-/* Supplied declaration required: FUN_001d25ec. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 extern int queryResultFailureOnly(int);
 /* Supplied declaration required: FUN_00473d74. */
 /* Supplied declaration required: FUN_0047bc90. */
@@ -45,7 +45,7 @@ void FUN_00476e58(int param_1,unsigned int param_2,unsigned int param_3)
   
   temp_v1 = g_aocMain;
   FUN_001b3428(g_aocMain + 0x88);
-  temp_v0 = FUN_001d25ec(param_1 + 0x214);
+  temp_v0 = legacyResourceIdRemap(param_1 + 0x214);
   if (temp_v0 != -0x36bec76f) {
     FUN_00473d74(g_aocMain,*(unsigned int *)(param_1 + 0x214),*(unsigned int *)(param_1 + 0x218));
     temp_v0 = param_1 + 0x214;
@@ -64,7 +64,7 @@ void FUN_00476e58(int param_1,unsigned int param_2,unsigned int param_3)
         *(unsigned int *)(param_1 + 8) = 0;
       }
       else {
-        temp_v2 = FUN_001d25ec(param_1 + 0x214);
+        temp_v2 = legacyResourceIdRemap(param_1 + 0x214);
         temp_v3 = temp_v2 >> 0x1b;
         if ((temp_v2 & 0x80000000) != 0) {
           temp_v3 = temp_v3 - 0x20;
@@ -79,12 +79,12 @@ LAB_00476f88:
           FUN_0047bc90(param_1,&temp_v4);
           return;
         }
-        temp_v2 = FUN_001d25ec(param_1 + 0x214);
+        temp_v2 = legacyResourceIdRemap(param_1 + 0x214);
         temp_v3 = temp_v2 >> 0x1b;
         if ((temp_v2 & 0x80000000) != 0) {
           temp_v3 = temp_v3 - 0x20;
         }
-        if ((temp_v3 == 0xfffffffb) || (temp_v1 = FUN_001d25ec(param_1 + 0x214), temp_v1 == -0x377ec770))
+        if ((temp_v3 == 0xfffffffb) || (temp_v1 = legacyResourceIdRemap(param_1 + 0x214), temp_v1 == -0x377ec770))
         goto LAB_00476f88;
         *(unsigned int *)(param_1 + 4) = param_3;
         piVar2 = *(int **)(param_1 + 0x208);

@@ -7,10 +7,10 @@ extern "C" {
 int FUN_00232848(void);
 int FUN_002328b4(void);
 int FUN_00233240(...);
-int FUN_002332f4(int);
+int uiOwnerUpdateAnimationChannels(int);
 int FUN_00233818(int);
-int FUN_00233854(unsigned int);
-int FUN_0029ca58(void);
+int ifTouchRegionClearAll(unsigned int);
+int beginStatusPanelClose(void);
 int FUN_0029da34(int, int, int);
 int useCounterStart(void);
 int FUN_0029e328(int);
@@ -31,14 +31,14 @@ typedef struct {
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: FUN_002332f4. */
-extern int FUN_0023360c(int);
+/* Supplied declaration required: uiOwnerUpdateAnimationChannels. */
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 extern int inputIsQuestCancelPressed(void);
 extern int gameGetNavigationState(void);
 extern int inputIsQuestMenuPressed(void);
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029da34. */
 extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: useCounterStart. */
@@ -67,10 +67,10 @@ void FUN_003a98b8(int param_1)
   int temp_v8;
   int temp_v9;
   
-  temp_v2 = FUN_0023360c(param_1 + 0x20);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v1 = *(short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
-  FUN_002332f4(param_1);
-  temp_v2 = FUN_0023360c(param_1 + 0x20);
+  uiOwnerUpdateAnimationChannels(param_1);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
   temp_v0 = *(short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
   if (temp_v0 != temp_v1) {
     FUN_0029da34(0,1,temp_v0);
@@ -135,7 +135,7 @@ void FUN_003a98b8(int param_1)
     }
     *(unsigned short *)(param_1 + 0xa5b2) = temp_v4;
     FUN_00233240(param_1 + 0xdc,temp_v4);
-    FUN_00233854(*(unsigned int *)(param_1 + 0x590));
+    ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x590));
     FUN_00233818(param_1 + 0x55c);
     return;
   }
@@ -157,7 +157,7 @@ void FUN_003a98b8(int param_1)
     FUN_002328b4();
     return;
   }
-  FUN_0029ca58();
+  beginStatusPanelClose();
   FUN_0029ee6c(0,0x323232ff);
   FUN_00233240(param_1 + 0xdc,1);
   FUN_002a0cc8(1);

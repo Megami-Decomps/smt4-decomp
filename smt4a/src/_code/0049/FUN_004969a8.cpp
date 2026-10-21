@@ -1,12 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004969a8` (_code @ 0x4969a8, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail unit ends with fallthrough into separately named FUN_00496a0c after restoring LR; draft absorbed that following list-builder body, so the function boundary must be resolved first. */
 #include "romwright_types.h"
 
 extern "C" {
 
 int qsort(...);
 int FUN_0028a888(...);
-int FUN_002a1f60(...);
+int asdTextDrawDirectoryEntry(...);
 int cellListAppend(...);
 int FUN_004964e0(...);
 int FUN_00499d14(void);
@@ -24,14 +23,14 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_0028a888. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int FUN_0046e458(unsigned int, short);
 extern int dataTableValue0f(void);
 extern int FUN_00481100(unsigned int);
 /* Supplied declaration required: cellListAppend. */
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: FUN_00499d14. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_004cfeb0. */
 /* Supplied declaration required: FUN_004cff88. */
 
@@ -228,7 +227,7 @@ void FUN_004969a8(int param_1)
   FUN_004cff88(param_1 + 0xf00,0);
   FUN_004964e0(param_1,1);
   temp_v2 = *(int *)(param_1 + 0xb40);
-  temp_v3 = FUN_004cfe4c(param_1 + temp_v2 * 0x74 + 0xb60);
+  temp_v3 = flaggedValueHolderGetTotal(param_1 + temp_v2 * 0x74 + 0xb60);
   temp_v1 = DAT_0057f0c8;
   temp_v0 = *(short *)(param_1 + temp_v2 * 0x1002 + 0xf74 + temp_v3 * 4);
   if (temp_v0 == 0) {
@@ -242,7 +241,7 @@ void FUN_004969a8(int param_1)
       temp_v2 = dataTableValue0f();
     }
     FUN_0028a888(temp_v0);
-    FUN_002a1f60(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0,3,temp_v2,temp_v0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0,3,temp_v2,temp_v0);
   }
   return;
 }

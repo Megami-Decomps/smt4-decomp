@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021775c` (_code @ 0x21775c, 0x7b8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int FUN_0015f858(...);
 int FUN_00162790(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -47,7 +47,6 @@ extern int g_camp; /* 0x57f108 */
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -61,7 +60,7 @@ extern unsigned int FUN_001ba3d4(unsigned int);
 extern int FUN_00284140(int);
 extern int FUN_002a4860(int);
 extern int FUN_002a4894(int);
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: FUN_0048144c. */
 
 
@@ -158,7 +157,7 @@ void FUN_0021775c(int param_1,int param_2)
       temp_v7 = 0;
       do {
         temp_v4 = FUN_002a4860(temp_v12);
-        temp_v5 = FUN_002c2c68(temp_v12);
+        temp_v5 = objectApplyIfUnblocked(temp_v12);
         if (temp_v5 <= temp_v4 + temp_v7) break;
         temp_v4 = FUN_002a4860(temp_v12);
         temp_v0 = *(unsigned short *)(temp_v8 + (temp_v4 + temp_v7) * 2);
@@ -195,7 +194,7 @@ void FUN_0021775c(int param_1,int param_2)
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,1,0x6f,
                      &LAB_00217ea4);
         temp_v5 = FUN_001834a4(0x14,0x46f);
-        FUN_001689e8((int)(short)temp_v0,
+        uiDrawItemCategoryIcon((int)(short)temp_v0,
                      (int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,0x6f,0);
         temp_v7 = temp_v7 + 1;
@@ -242,7 +241,7 @@ void FUN_0021775c(int param_1,int param_2)
         FUN_001835b4(2,0x14,0x475,*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,0x83)
         ;
         temp_v8 = FUN_001834a4(0x14,0x476);
-        FUN_001689e8((int)(short)temp_v0,
+        uiDrawItemCategoryIcon((int)(short)temp_v0,
                      (int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                      (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,0x88,0);
       }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001742e4(int, int);
+int asdSoundObjectStop(int, int);
 int asdMemFree(...);
 int nw_snd_SoundHandle_DetachSound(...);
 int nw_snd_SoundHeap_Destroy(int);
@@ -20,7 +20,7 @@ extern unsigned char DAT_0063e984; /* 0x63e984 */
 extern unsigned char DAT_0063e986; /* 0x63e986 */
 extern unsigned char DAT_0063e987; /* 0x63e987 */
 
-/* Supplied declaration required: FUN_001742e4. */
+/* Supplied declaration required: asdSoundObjectStop. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
 /* Supplied declaration required: nw_snd_SoundHeap_Destroy. */
@@ -74,7 +74,7 @@ void FUN_00141b24(void)
       if ((int)temp_v2 >= 2) {
         while (piVar2 != (int *)0x0) {
           if (*piVar2 != 0) {
-            FUN_001742e4(*piVar2,0);
+            asdSoundObjectStop(*piVar2,0);
             nw_snd_SoundHandle_DetachSound(piVar2);
           }
           piVar6 = (int *)piVar2[5];
@@ -94,7 +94,7 @@ void FUN_00141b24(void)
                 temp_v4 = temp_v5 + temp_v3 * 4;
                 temp_v1 = *(int *)(temp_v4 + 0x20);
                 if (temp_v1 != 0) {
-                  FUN_001742e4(temp_v1,0);
+                  asdSoundObjectStop(temp_v1,0);
                   nw_snd_SoundHandle_DetachSound(temp_v4 + 0x20);
                 }
                 temp_v3 = temp_v3 + 1;
@@ -111,7 +111,7 @@ void FUN_00141b24(void)
                 do {
                   temp_v1 = *(int *)(temp_v5 + temp_v3 * 4 + 0x20);
                   if (temp_v1 != 0) {
-                    FUN_001742e4(temp_v1,0);
+                    asdSoundObjectStop(temp_v1,0);
                   }
                   temp_v3 = temp_v3 + 1;
                 } while (temp_v3 < 4);

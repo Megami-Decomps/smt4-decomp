@@ -24,7 +24,7 @@ extern int DAT_00589558; /* 0x589558 */
 extern unsigned char DAT_0062d704; /* 0x62d704 */
 
 extern int libc_strncmp(unsigned char *, unsigned char *, unsigned int);
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringAssign. */
@@ -58,7 +58,7 @@ void FUN_0011ae64(unsigned int param_1,int param_2,unsigned int param_3,int para
   iStack_20 = param_2;
   uStack_1c = param_3;
   iStack_18 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v4,temp_v0 + 0x58);
   *(unsigned int *)(param_2 + 0x68) = param_3;
   *(int *)(param_2 + 0x6c) = param_4;

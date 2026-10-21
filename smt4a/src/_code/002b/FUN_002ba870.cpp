@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0014bd84(unsigned int);
-int FUN_00212234(void);
+int textDrawDefaultString(void);
 int FUN_004d0f48(int *, unsigned int);
 int FUN_004d1198(int *, unsigned int);
 
@@ -14,8 +14,8 @@ extern int *DAT_00571600; /* 0x571600 */
 
 /* Supplied declaration required: FUN_0014bd84. */
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_00212234. */
-extern int FUN_003874fc(int);
+/* Supplied declaration required: textDrawDefaultString. */
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 extern unsigned int FUN_003e83b4(int, int, unsigned int);
 /* Supplied declaration required: FUN_004d0f48. */
 /* Supplied declaration required: FUN_004d1198. */
@@ -40,10 +40,10 @@ unsigned int FUN_002ba870(void)
           if (temp_v1 != 0xe) {
             return 0;
           }
-          temp_v1 = FUN_003874fc(DAT_00571600[4]);
+          temp_v1 = asdListBoxGetSelectedItemId(DAT_00571600[4]);
         }
         else {
-          temp_v1 = FUN_003874fc(DAT_00571600[4]);
+          temp_v1 = asdListBoxGetSelectedItemId(DAT_00571600[4]);
         }
         if (temp_v1 == 0) {
           temp_v2 = FUN_003e83b4(temp_v0,piVar1[7],1);
@@ -51,10 +51,10 @@ unsigned int FUN_002ba870(void)
         }
       }
       else {
-        temp_v1 = FUN_003874fc(DAT_00571600[4]);
+        temp_v1 = asdListBoxGetSelectedItemId(DAT_00571600[4]);
         if (temp_v1 == 0xc) {
           FUN_0014bd84(*(unsigned int *)(temp_v0 + 0x4cd4));
-          FUN_00212234();
+          textDrawDefaultString();
         }
       }
     }

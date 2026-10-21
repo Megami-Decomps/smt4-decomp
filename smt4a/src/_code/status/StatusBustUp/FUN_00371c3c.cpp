@@ -7,7 +7,7 @@ extern "C" {
 int asdTMTexTableNodeIsLoaded(...);
 int FUN_00184310(void);
 int dataTable00FindById(void);
-int FUN_001a6508(...);
+int aocRunByName(...);
 int FUN_001a6568(...);
 int asdTMTexLoadMainHeap(...);
 
@@ -19,7 +19,7 @@ extern int DAT_00588fe0; /* 0x588fe0 */
 /* Supplied declaration required: FUN_00184310. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_001a6508. */
+/* Supplied declaration required: aocRunByName. */
 /* Supplied declaration required: FUN_001a6568. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 
@@ -53,7 +53,7 @@ void FUN_00371c3c(unsigned int param_1,int param_2)
           if (temp_v0 < 0x9a) {
             if ((*(char *)(DAT_00588fe0 + temp_v0) < '\x01') &&
                (temp_v2 = asdTMTexTableNodeIsLoaded(0x19,temp_v0), temp_v2 == 0)) {
-              temp_v2 = FUN_001a6508(g_aocSystem,0x19,temp_v0,1);
+              temp_v2 = aocRunByName(g_aocSystem,0x19,temp_v0,1);
               if (temp_v2 != 0) {
                 FUN_001a6568(g_aocSystem,0x19,temp_v0,0x10000);
               }
@@ -79,7 +79,7 @@ void FUN_00371c3c(unsigned int param_1,int param_2)
   }
   if ((*(char *)(DAT_00588fdc + param_1) < '\x01') &&
      (temp_v0 = asdTMTexTableNodeIsLoaded(0xf,param_1), temp_v0 == 0)) {
-    temp_v0 = FUN_001a6508(g_aocSystem,0xf,param_1,1);
+    temp_v0 = aocRunByName(g_aocSystem,0xf,param_1,1);
     if (temp_v0 != 0) {
       FUN_001a6568(g_aocSystem,0xf,param_1,0x10000);
     }

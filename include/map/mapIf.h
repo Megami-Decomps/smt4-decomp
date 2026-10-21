@@ -34,7 +34,14 @@ typedef struct MapIfState {
     /* 0x0030 */ s32 unk30;
     /* 0x0034 */ s32 unk34;
     /* 0x0038 */ s32 unk38;
-    /* 0x003C */ u8 unk3C[0xCBB0];
+    /* 0x003C */ union {
+        u8 unk3C[0xCBB0];
+        struct {
+            u8 unk3C[0x194];
+            u8 records[0x80][0x194]; // 0x01d0
+            u8 unkCBD0[0x1c];
+        } recordPool;
+    };
     /* 0xCBEC */ u32 unkCBEC;
     /* 0xCBF0 */ MapIfSlot slots[MAP_IF_SLOTS];
     /* 0xCC70 */ u8 unkCC70[0x48];
@@ -46,6 +53,14 @@ typedef struct MapIfState {
     /* 0xCCDC */ u32 unkCCDC;
 } MapIfState;
 
+struct Rec194;
+
+/* Typed view without importing the generic shard headers into the map interface. */
+static __inline Rec194 *mapIfGetRecords(MapIfState *state)
+{
+    return (Rec194 *)state->recordPool.records;
+}
+
 /* The module global: the state block and the widget table's pointers, side by side. */
 typedef struct MapIfGlobals {
     /* 0x00 */ MapIfState *state;
@@ -54,14 +69,22 @@ typedef struct MapIfGlobals {
 
 #define MAP_IF_SLOTS_A 5
 
+struct MapIfResourceVtable;
+
 /* A resource object whose handle sits at +4. */
 typedef struct MapIfResource {
-    /* 0x00 */ u8 unk00[4];
+    /* 0x00 */ union {
+        u8 unk00[4];
+        MapIfResourceVtable *vtable;
+    };
     /* 0x04 */ u32 handle;
 } MapIfResource;
 
 typedef struct MapIfSlotA {
-    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x00 */ union {
+        u8 unk00[0x1C];
+        u8 active;
+    };
     /* 0x1C */ MapIfResource *resource;
 } MapIfSlotA;
 

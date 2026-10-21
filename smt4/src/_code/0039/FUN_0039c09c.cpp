@@ -2,17 +2,19 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct MapNaviDisplay;
+
 extern "C" {
 
 int pointConvertToFloat(...);
-int FUN_0023150c(int, int);
+void mapNaviDisplayLoadMap(MapNaviDisplay*, int);
 int FUN_002316e8(int, int);
 int FUN_00233240(int, int);
 int commonBgReset(void);
 int FUN_00275f00(void);
 int FUN_00289880(void);
 int FUN_002bf818(int);
-int FUN_0039f838(int, int);
+int naviMainSetCurrentMap(int, int);
 int FUN_0039f860(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -23,7 +25,6 @@ typedef struct {
 extern unsigned char g_gameState; /* 0x49f91c */
 
 /* Supplied declaration required: pointConvertToFloat. */
-/* Supplied declaration required: FUN_0023150c. */
 /* Supplied declaration required: FUN_002316e8. */
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: commonBgReset. */
@@ -33,7 +34,7 @@ extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf818. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0039f838. */
+/* Supplied declaration required: naviMainSetCurrentMap. */
 /* Supplied declaration required: FUN_0039f860. */
 extern int NaviMain_GetCurrentMap(void);
 extern int NaviMain_GetPosX(int);
@@ -112,7 +113,7 @@ void FUN_0039c09c(int param_1)
     temp_v1 = NaviMain_GetPosX(temp_v0);
     if (temp_v4 != temp_v1) {
       temp_v4 = NaviMain_GetPosX(temp_v0);
-      FUN_0039f838(temp_v0,temp_v4);
+      naviMainSetCurrentMap(temp_v0,temp_v4);
       FUN_0039f860(temp_v0,0);
       *(unsigned int *)(param_1 + 0x18) = 0;
       if (temp_v4 >= 100) {
@@ -121,7 +122,7 @@ void FUN_0039c09c(int param_1)
         return;
       }
       *(unsigned char *)(param_1 + 0xc) = 1;
-      FUN_0023150c(param_1,temp_v4);
+      mapNaviDisplayLoadMap((MapNaviDisplay*)param_1,temp_v4);
       return;
     }
   }

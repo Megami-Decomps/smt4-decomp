@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022b92c(...);
 int FUN_0022bc54(...);
-int FUN_0022bcc4(...);
+int moLiveByteVectorResizeFill(...);
 int FUN_0022be6c(...);
 int poolNodeUnlink(...);
 int FUN_003fb694(...);
@@ -51,7 +51,7 @@ extern unsigned char LAB_003b27b8; /* 0x3b27b8 */
 #endif
 /* Supplied declaration required: FUN_0022b92c. */
 /* Supplied declaration required: FUN_0022bc54. */
-/* Supplied declaration required: FUN_0022bcc4. */
+/* Supplied declaration required: moLiveByteVectorResizeFill. */
 /* Supplied declaration required: FUN_0022be6c. */
 /* Supplied declaration required: poolNodeUnlink. */
 extern int FUN_003af8d0(int);
@@ -259,7 +259,7 @@ unsigned int FUN_003b2318(long long *param_1,int param_2,unsigned int *param_3,u
         temp_v11[0] = 0;
         if (((*(unsigned int *)(temp_v5 + 0x18) < *(unsigned int *)(temp_v5 + 0x14)) ||
             (temp_v4 = *(unsigned int *)(temp_v5 + 0x10), (temp_v4 & 3) == 0)) ||
-           (temp_v1 = FUN_0022bcc4(temp_v5 + 4,(temp_v4 + 4) - (temp_v4 & 3),temp_v11), temp_v1 != 0)) {
+           (temp_v1 = moLiveByteVectorResizeFill(temp_v5 + 4,(temp_v4 + 4) - (temp_v4 & 3),temp_v11), temp_v1 != 0)) {
           temp_v1 = temp_v5 + 4;
           FUN_0022bc54(temp_v28,temp_v1);
           puVar14 = (unsigned char *)(*param_3 + param_2 + temp_v6);
@@ -359,7 +359,7 @@ unsigned int FUN_003b2318(long long *param_1,int param_2,unsigned int *param_3,u
               if (*(unsigned int *)(temp_v5 + 0x18) <= *(unsigned int *)(temp_v5 + 0x14)) {
                 temp_v16[0] = *puVar12;
                 temp_v7 = *(int *)(temp_v5 + 0x10);
-                temp_v8 = FUN_0022bcc4(temp_v1,(*(int *)(temp_v5 + 0x1c) - temp_v9) +
+                temp_v8 = moLiveByteVectorResizeFill(temp_v1,(*(int *)(temp_v5 + 0x1c) - temp_v9) +
                                             *(unsigned int *)(temp_v5 + 0x14),temp_v16);
                 if (temp_v8 == 0) {
                   return 0x44;
@@ -417,7 +417,7 @@ unsigned int FUN_003b2318(long long *param_1,int param_2,unsigned int *param_3,u
               return 0x44;
             }
             temp_v24[0] = 0;
-            temp_v8 = FUN_0022bcc4(temp_v1,0,temp_v24);
+            temp_v8 = moLiveByteVectorResizeFill(temp_v1,0,temp_v24);
             if (temp_v8 == 0) {
               return 0x44;
             }
@@ -547,7 +547,7 @@ LAB_003b2a4c:
                   if (*(unsigned int *)(temp_v5 + 0x18) <= *(unsigned int *)(temp_v5 + 0x14)) {
                     temp_v25 = (unsigned char *)romwright_piece_3_1((((unsigned int)(temp_v25) >> 8) & 0xffffffU),temp_v17[0]);
                     temp_v7 = *(int *)(temp_v5 + 0x10);
-                    temp_v8 = FUN_0022bcc4(temp_v6,(*(int *)(temp_v5 + 0x1c) - temp_v9) +
+                    temp_v8 = moLiveByteVectorResizeFill(temp_v6,(*(int *)(temp_v5 + 0x1c) - temp_v9) +
                                                  *(unsigned int *)(temp_v5 + 0x14),&temp_v25);
                     if (temp_v8 == 0) {
                       return 0x44;
@@ -605,7 +605,7 @@ LAB_003b2a4c:
                   return 0x44;
                 }
                 temp_v24[0] = 0;
-                temp_v8 = FUN_0022bcc4(temp_v6,0,temp_v24);
+                temp_v8 = moLiveByteVectorResizeFill(temp_v6,0,temp_v24);
                 if (temp_v8 == 0) {
                   return 0x44;
                 }

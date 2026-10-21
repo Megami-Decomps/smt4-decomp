@@ -18,7 +18,7 @@ extern int g_gameState; /* 0x49f91c */
 extern int DAT_0049f920; /* 0x49f920 */
 extern signed char DAT_0049f942; /* 0x49f942 */
 
-extern int FUN_002757c8(void);
+extern int mapEnemyHasAvailableSecondaryState(void);
 extern unsigned int FUN_00285574(void);
 extern int FUN_00298dc8(short);
 /* Supplied declaration required: gameFlagIsSet. */
@@ -43,7 +43,7 @@ unsigned char * FUN_002765d0(void)
   unsigned char temp_v7;
   
   temp_v0 = gameGetMapBlock();
-  temp_v1 = FUN_002757c8();
+  temp_v1 = mapEnemyHasAvailableSecondaryState();
   if (DAT_0049f942 != '\0') {
     temp_v2 = FUN_00285574();
     if (temp_v2 != 0) {

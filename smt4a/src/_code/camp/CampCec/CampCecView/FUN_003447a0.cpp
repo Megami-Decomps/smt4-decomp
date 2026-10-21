@@ -9,7 +9,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
 int sysPlaySe(...);
 int FUN_00182054(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int sysMemClear(...);
 int rt_aeabi_memclr(...);
 int FUN_00319aec(...);
@@ -33,7 +33,7 @@ typedef struct {
 extern unsigned char LAB_0025d62c; /* 0x25d62c */
 extern int FUN_0025d6a0(...); /* 0x25d6a0 */
 extern unsigned char LAB_002a2c78; /* 0x2a2c78 */
-extern int FUN_002e241c(...); /* 0x2e241c */
+extern int campCecViewDrawEntries(...); /* 0x2e241c */
 extern unsigned char LAB_00344b08; /* 0x344b08 */
 extern unsigned char LAB_00344b20; /* 0x344b20 */
 extern unsigned char LAB_00344b3c; /* 0x344b3c */
@@ -48,7 +48,7 @@ extern unsigned int *g_campCecView; /* 0x57f130 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00182054. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 extern unsigned int overlayGetStatusScene(void);
@@ -91,7 +91,7 @@ void FUN_003447a0(void)
   taskCreateDraw(&LAB_00344b3c,0xcc,0,0,&LAB_002a2c78,0,0,*puVar3);
   taskCreateDraw(&LAB_00344b5c,0x86,0,0,&LAB_0025d62c,0,0,*puVar3);
   taskCreateDraw(&LAB_00344b74,0xe2,0,0,&LAB_0025d62c,0,0,*puVar3);
-  taskCreateDraw(&LAB_00344b90,0xea,0,0,FUN_002e241c,0,0,*puVar3);
+  taskCreateDraw(&LAB_00344b90,0xea,0,0,campCecViewDrawEntries,0,0,*puVar3);
   puVar3[0x45] = 0;
   puVar3[0x46] = 0;
   puVar3[0x47] = 0;
@@ -118,7 +118,7 @@ void FUN_003447a0(void)
     }
     temp_v4 = temp_v4 + 1;
   } while (temp_v4 < 0x20);
-  FUN_002804b0(&LAB_00344ba8,puVar3 + 0x4e,0);
+  asdLoadFileAsyncSimple(&LAB_00344ba8,puVar3 + 0x4e,0);
   temp_v2 = overlayGetStatusScene();
   puVar3[2] = temp_v2;
   temp_v1 = gameDataGetMarkEntry(puVar3[0x45]);

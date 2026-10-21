@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_00293a04(int, int);
+int asdAnimGetTrackLastFrame(int, int);
 int randBetween(...);
 int __aeabi_idivmod(int, double);
 
-/* Supplied declaration required: FUN_00293a04. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: randBetween. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
@@ -29,7 +29,7 @@ void FUN_002e27c4(int param_1,int param_2,int param_3,int param_4)
     do {
       temp_v3 = param_1 + temp_v2 * 0x20;
       if (-1 < *(char *)(temp_v3 + 6)) {
-        FUN_00293a04(param_4 + *(char *)(temp_v3 + 6) * 0x48,0);
+        asdAnimGetTrackLastFrame(param_4 + *(char *)(temp_v3 + 6) * 0x48,0);
         temp_v4 = (float)(int)in_s0;
         in_s0 = temp_v4;
         if (param_3 == 0) {

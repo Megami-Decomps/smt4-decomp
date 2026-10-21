@@ -1,33 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN9Obj55a5a8D1Ev` (_code @ 0x433650, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: entry uses ADD/STR rather than post-index STR/MOV; virtual child destruction loads its vtable through R0 instead of R1. Remaining default code, including the hint NOP, matches. */
+#include "shard/W6_W6Match1_Obj55a5a8.h"
 
-extern "C" {
+extern "C" void asdOperatorDeleteArray(void* array);
 
-int asdOperatorDeleteArray(unsigned int);
-
-typedef int romwright_code(...);
-extern unsigned char DAT_0055a5b0; /* 0x55a5b0 */
-
-/* Supplied declaration required: asdOperatorDeleteArray. */
-
-
-unsigned int * _ZN9Obj55a5a8D1Ev(unsigned int *param_1)
-
+inline Obj55a5a8RawArray::~Obj55a5a8RawArray()
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  
-  *param_1 = (unsigned int)&DAT_0055a5b0;
-  puVar2 = (unsigned int *)param_1[0x14];
-  for (puVar1 = (unsigned int *)param_1[0x13]; puVar1 != puVar2; puVar1 = puVar1 + 2) {
-    (**(romwright_code **)*puVar1)(puVar1);
-  }
-  asdOperatorDeleteArray(param_1[0x13]);
-  asdOperatorDeleteArray(param_1[6]);
-  asdOperatorDeleteArray(param_1[2]);
-  return param_1;
+    asdOperatorDeleteArray(begin);
 }
 
-} /* extern "C" */
+inline Obj55a5a8ElementArray::~Obj55a5a8ElementArray()
+{
+    Obj55a5a8Element* last = end;
+    for (Obj55a5a8Element* element = begin; element != last; ++element) {
+        element->~Obj55a5a8Element();
+    }
+    asdOperatorDeleteArray(begin);
+}
+
+Obj55a5a8::~Obj55a5a8()
+{
+    // Owned arrays release their elements and storage in reverse declaration order.
+}

@@ -10,7 +10,7 @@ int FUN_00178b04(...);
 int FUN_001cd3ec(void);
 int FUN_0040ae70(int, int);
 int FUN_0040afe0(int, int, int);
-int FUN_0040b0f8(int, int *);
+int resourceOwnerLoadNamed(int, int *);
 int VectorUnsignedToFloat(unsigned int, int);
 
 /* stack frame of param_4: 17 slot(s), 68 byte(s) */
@@ -50,11 +50,11 @@ extern int dataTableGetEntries(void);
 extern unsigned int dataTableFileGetTable(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001cd3ec. */
 extern int FUN_00240c34(unsigned int *);
-extern unsigned int FUN_0040ac08(void);
+extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(int);
 /* Supplied declaration required: FUN_0040afe0. */
-/* Supplied declaration required: FUN_0040b0f8. */
+/* Supplied declaration required: resourceOwnerLoadNamed. */
 
 
 void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -142,7 +142,7 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   if (temp_v4 == 0) {
     textFormatBuffer(&temp_v10,&LAB_004010f0,&LAB_004010dc,1,1);
   }
-  FUN_0040b0f8(temp_v1,&temp_v10);
+  resourceOwnerLoadNamed(temp_v1,&temp_v10);
   temp_v4 = FUN_0040af60(temp_v1);
   if (temp_v4 != 0) {
     if ((param_2 != 8) || (!(param_3 == 6 || param_3 == 7))) {
@@ -166,7 +166,7 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\StageModel\\btlStageModel.cpp");
   temp_v0 = 0;
   if (temp_v1 != 0) {
-    temp_v0 = FUN_0040ac08();
+    temp_v0 = modelListInit();
   }
   *(unsigned int *)(param_1 + 0x1c) = temp_v0;
   FUN_001cd3ec();
@@ -198,7 +198,7 @@ void FUN_00400d80(int param_1,unsigned int param_2,unsigned int param_3,unsigned
                        0xf6);
           temp_v0 = 0;
           if (temp_v6 != 0) {
-            temp_v0 = FUN_0040ac08();
+            temp_v0 = modelListInit();
           }
           *(unsigned int *)(param_1 + temp_v4 * 4 + 0x20) = temp_v0;
           FUN_001cd3ec();

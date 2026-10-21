@@ -36,7 +36,7 @@ typedef struct {
 
 extern int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_001c88b8(void);
+extern int placeWinGetValue(void);
 extern int FUN_001dd8f0(void);
 extern int FUN_001dd910(void);
 /* Supplied declaration required: FUN_002bed3c. */
@@ -76,7 +76,7 @@ void FUN_003a2f88(fn_003a2f88_arg0 *param_1)
   }
   if (*(int *)&param_1->field_0x10 != 1) {
     FUN_003a37dc(param_1);
-    temp_v1 = FUN_001c88b8();
+    temp_v1 = placeWinGetValue();
     if (temp_v1 != 0) {
       temp_v1 = FUN_001dd8f0();
       temp_v0 = FUN_001dd910();

@@ -4,16 +4,16 @@
 
 extern "C" {
 
-int FUN_00325b84(void);
+int mapDepartExtraClear(void);
 int FUN_003538d0(void);
 int naviMainFinishRequest(void);
 
 extern unsigned char DAT_005806b4; /* 0x5806b4 */
 
-/* Supplied declaration required: FUN_00325b84. */
+/* Supplied declaration required: mapDepartExtraClear. */
 extern int FUN_0033e1d4(void);
 /* Supplied declaration required: FUN_003538d0. */
-extern int FUN_00377fe0(void);
+extern int mapGimicIsIdle(void);
 /* Supplied declaration required: naviMainFinishRequest. */
 
 
@@ -32,12 +32,12 @@ unsigned int FUN_003a7480(void)
         }
       }
       else {
-        FUN_00325b84();
+        mapDepartExtraClear();
         (*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) = 3;
       }
     }
     else {
-      temp_v0 = FUN_00377fe0();
+      temp_v0 = mapGimicIsIdle();
       if (temp_v0 != 0) {
         (*(int *)((unsigned char *)&DAT_005806b4 + 0x8)) = 2;
       }

@@ -36,7 +36,7 @@ typedef struct {
     unsigned int spF8; /* 0xf8: local_f8 */
 } param_5_stack;
 
-extern unsigned int DAT_006426c0; /* 0x6426c0 */
+extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x6426c0 */
 
 /* Supplied declaration required: FUN_00193038. */
 /* Supplied declaration required: wordPairCopy. */
@@ -109,33 +109,33 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   iStack_30 = param_2;
   iStack_2c = param_3;
   temp_v25 = param_4;
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_006426c0);
+  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxCriticalSection);
   temp_v8 = 0;
   asdCecMessageIdInit(temp_v12);
   temp_v16 = 0;
   temp_v15 = 0;
   if ((*(char *)((int)param_1 + 9) == '\0') && (piVar3 = param_1, FUN_0042f79c(), (int)piVar3 < 0))
   {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return piVar3;
   }
   if (param_1[1] == 0) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return (int *)0xc8810bea;
   }
   if (*(int *)(param_2 + 0xc) == 0) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return (int *)0xc8810bef;
   }
   temp_v17 = 0;
   temp_v3 = param_2;
   nn_cec_CTR_Message_GetExHeader(param_2,2,temp_v24,&temp_v17);
   if (temp_v3 < 0) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return (int *)0xc8810bef;
   }
   if (param_1[1] != *(int *)(param_2 + 0x10)) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return (int *)0xc8e1086b;
   }
   nn_cec_CTR_Message_GetMessageId(&temp_v9,param_2,temp_v12);
@@ -162,7 +162,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
     temp_v1 = *(unsigned char *)(param_2 + 0x6d);
   }
   if (temp_v1 >= 2) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return (int *)0xe0e10bee;
   }
   temp_v18 = param_1 + 0x224;
@@ -187,7 +187,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
       puVar9 = *(unsigned char **)(param_2 + 4);
     }
     if (puVar8 != (unsigned char *)0x0 && puVar8 < puVar9) {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return piVar3;
     }
   }
@@ -209,7 +209,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
       puVar9 = *(unsigned char **)(param_2 + 4);
     }
     if ((temp_v0 || puVar8 <= puVar9) && (!temp_v0 && puVar9 != puVar8)) {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return piVar3;
     }
   }
@@ -223,7 +223,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
         temp_v3 = *(int *)(temp_v2 + 4);
       }
       if ((temp_v5 != 0) && (temp_v5 < *(int *)(param_2 + 4) + (temp_v6 - temp_v3))) {
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+        nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
         return (int *)0xc8e10865;
       }
       temp_v16 = *(int *)(param_2 + 4) - temp_v3;
@@ -231,7 +231,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   }
   else {
     if ((temp_v5 != 0) && (temp_v5 < *(int *)(param_2 + 4) + temp_v6)) {
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return (int *)0xc8e10865;
     }
     temp_v16 = *(int *)(param_2 + 4);
@@ -239,7 +239,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   if (temp_v7 != 0) {
     if (!temp_v8) {
       if (temp_v7 < temp_v23 + 1U) {
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+        nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
         return (int *)0xc8e10866;
       }
       temp_v15 = 1;
@@ -250,7 +250,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
   }
   temp_v20 = (int *)handlerRefForward(*(unsigned int *)(param_2 + 4),4);
   if (temp_v20 == (int *)0x0) {
-    nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+    nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
     return (int *)0xc8610bf3;
   }
   nn_cec_CTR_Message_MakeMessageBinary(param_2,(unsigned int)temp_v20);
@@ -275,12 +275,12 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
     }
     if ((int)piVar6 < 0) {
       FUN_00430e58(temp_v20);
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return piVar6;
     }
     if ((int)piVar3 < 0) {
       FUN_00430e58(temp_v20);
-      nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+      nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
       return piVar3;
     }
   }
@@ -299,7 +299,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
       *(unsigned char *)((int)param_1 + 10) = 1;
       if ((int)piVar3 < 0) {
         FUN_00430e58(temp_v20);
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+        nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
         return piVar3;
       }
       *temp_v21 = param_1[0x222] + temp_v16;
@@ -320,7 +320,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
       *(unsigned char *)((int)param_1 + 0xb) = 1;
       if ((int)piVar3 < 0) {
         FUN_00430e58(temp_v20);
-        nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+        nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
         return piVar3;
       }
       *temp_v19 = param_1[0x22a] + temp_v16;
@@ -343,7 +343,7 @@ int * FUN_0042ddac(int *param_1,int param_2,int param_3,unsigned int param_4,int
     }
   }
   FUN_00430e58(temp_v20);
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_006426c0);
+  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
   return piVar3;
 }
 

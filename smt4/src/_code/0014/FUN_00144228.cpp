@@ -9,7 +9,7 @@ int VectorFloatToUnsigned(double, int);
 
 extern unsigned int *g_commandBufferCursor; /* 0x4652a0 */
 extern unsigned int g_commandBufferEnd; /* 0x4652a4 */
-extern int DAT_004655c0; /* 0x4655c0 */
+extern int g_textureBindingState; /* 0x4655c0 */
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern unsigned int nnosConvertVirtToPhys(int);
@@ -33,12 +33,12 @@ int FUN_00144228(int *param_1,int param_2)
   int temp_v9;
   float temp_v10;
   
-  temp_v0 = DAT_004655c0;
+  temp_v0 = g_textureBindingState;
   temp_v4 = 0x502;
   if (param_2 != 0) {
     return 0x502;
   }
-  puVar3 = (unsigned int *)(DAT_004655c0 + 0x770);
+  puVar3 = (unsigned int *)(g_textureBindingState + 0x770);
   temp_v1 = 1;
   do {
     temp_v2 = param_1[temp_v1 * 0x11 + 0xd];
@@ -54,16 +54,16 @@ int FUN_00144228(int *param_1,int param_2)
   if (temp_v1 == 6) {
     temp_v4 = 0;
   }
-  if ((*(char *)(DAT_004655c0 + 0x107) == '\0') || (temp_v4 != 0)) {
+  if ((*(char *)(g_textureBindingState + 0x107) == '\0') || (temp_v4 != 0)) {
     *puVar3 = *puVar3 & 0xfffffffe;
     return temp_v4;
   }
   temp_v8 = (float)param_1[7];
   temp_v10 = (float)param_1[6];
-  temp_v2 = *(unsigned int *)(DAT_004655c0 + 0x77c);
+  temp_v2 = *(unsigned int *)(g_textureBindingState + 0x77c);
   temp_v6 = (float)param_1[8];
   temp_v7 = (float)param_1[9];
-  *(unsigned int *)(DAT_004655c0 + 0x77c) = temp_v2 & 0xfeefffff;
+  *(unsigned int *)(g_textureBindingState + 0x77c) = temp_v2 & 0xfeefffff;
   temp_v4 = VectorFloatToUnsigned(temp_v8 * 255.0f,3);
   temp_v5 = VectorFloatToUnsigned(temp_v10 * 255.0f,3);
   temp_v1 = VectorFloatToUnsigned(temp_v6 * 255.0f,3);

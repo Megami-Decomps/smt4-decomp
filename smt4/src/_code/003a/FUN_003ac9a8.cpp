@@ -1,38 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ac9a8` (_code @ 0x3ac9a8, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
-extern "C" {
+struct DevilPrimaryKeyView {
+    DevilSortRecord base;
+    u8 unk04[0x12];
+    u16 key; // 0x16; do not extend the shared record prefix.
+};
 
-int devilGetRecord(void);
-
-/* Supplied declaration required: devilGetRecord. */
-
-
-int FUN_003ac9a8(unsigned short *param_1,unsigned short *param_2)
-
+extern "C" s32 FUN_003ac9a8(const u16 *left, const u16 *right)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = (unsigned int)*param_1;
-  devilGetRecord();
-  temp_v1 = (unsigned int)*param_2;
-  devilGetRecord();
-  temp_v2 = (unsigned int)*(unsigned short *)(temp_v0 + 0x16) - (unsigned int)*(unsigned short *)(temp_v1 + 0x16);
-  if (temp_v2 == 0) {
-    temp_v0 = (unsigned int)*param_1;
-    devilGetRecord();
-    temp_v1 = (unsigned int)*param_2;
-    devilGetRecord();
-    temp_v2 = (unsigned int)*(unsigned char *)(temp_v1 + 3) - (unsigned int)*(unsigned char *)(temp_v0 + 3);
-    if (temp_v2 == 0) {
-      temp_v2 = (unsigned int)*param_1 - (unsigned int)*param_2;
+    const DevilPrimaryKeyView *leftRecord =
+        reinterpret_cast<const DevilPrimaryKeyView *>(devilGetRecord(*left));
+    const DevilPrimaryKeyView *rightRecord =
+        reinterpret_cast<const DevilPrimaryKeyView *>(devilGetRecord(*right));
+    s32 comparison = leftRecord->key - rightRecord->key;
+    if (comparison == 0) {
+        leftRecord = reinterpret_cast<const DevilPrimaryKeyView *>(devilGetRecord(*left));
+        rightRecord = reinterpret_cast<const DevilPrimaryKeyView *>(devilGetRecord(*right));
+        comparison = rightRecord->base.level - leftRecord->base.level;
+        if (comparison == 0)
+            comparison = *left - *right;
     }
-  }
-  return temp_v2;
+    return comparison;
 }
-
-} /* extern "C" */

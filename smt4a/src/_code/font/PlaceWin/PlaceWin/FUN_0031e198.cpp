@@ -11,7 +11,7 @@ int taskCreateDraw(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int uiSpriteSelectAnim(...);
 int sysMemClear(void);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned int *);
+int paramsClearPacket(unsigned int *);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
 typedef struct {
@@ -28,7 +28,7 @@ typedef struct {
 extern unsigned char LAB_0031e310; /* 0x31e310 */
 extern unsigned char LAB_0031e324; /* 0x31e324 */
 extern unsigned char LAB_0031e338; /* 0x31e338 */
-extern int FUN_003d0110(...); /* 0x3d0110 */
+extern int placeWinDraw(...); /* 0x3d0110 */
 extern unsigned char LAB_003d08c8; /* 0x3d08c8 */
 extern unsigned char DAT_0052fb2c; /* 0x52fb2c */
 extern unsigned char DAT_0052fb44; /* 0x52fb44 */
@@ -42,7 +42,7 @@ extern unsigned int *g_placeWin; /* 0x57f578 */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_0031e198(void)
@@ -62,10 +62,10 @@ void FUN_0031e198(void)
   puVar2 = &LAB_0031e310;
   asdProcessCreateSimple(&LAB_0031e310,3,0,0,&LAB_003d08c8,0,0);
   *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0031e324,0x86,0,0,FUN_003d0110,0,0,puVar2);
-  taskCreateDraw(&LAB_0031e338,0xe2,0,0,FUN_003d0110,0,0,*puVar1);
+  taskCreateDraw(&LAB_0031e324,0x86,0,0,placeWinDraw,0,0,puVar2);
+  taskCreateDraw(&LAB_0031e338,0xe2,0,0,placeWinDraw,0,0,*puVar1);
   puVar1 = g_placeWin;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_placeWin + 5);
+  paramsClearPacket(g_placeWin + 5);
   paramsInit(puVar1 + 5,&DAT_0052fb2c,0x18,&DAT_0052fb44,0x18,0,0,0,0,&DAT_0052fb5c,0x70);
   FUN_0014e188(puVar1 + 0xd,8,0x87,puVar1 + 5,1);
   uiSpriteSelectAnim(puVar1 + 0xd,0);

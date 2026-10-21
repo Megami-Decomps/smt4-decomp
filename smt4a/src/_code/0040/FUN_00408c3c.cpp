@@ -14,7 +14,7 @@ int FUN_00180310(...);
 int FUN_001835b4(...);
 int FUN_001879d0(int);
 int FUN_003d3020(int, int, int);
-int FUN_00409294(int, float *, float *, unsigned int, int);
+int drawFacingElbowSegments(int, float *, float *, unsigned int, int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -48,7 +48,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: FUN_003d3020. */
-/* Supplied declaration required: FUN_00409294. */
+/* Supplied declaration required: drawFacingElbowSegments. */
 
 
 void FUN_00408c3c(int param_1)
@@ -150,7 +150,7 @@ void FUN_00408c3c(int param_1)
     temp_v1 = 400 - temp_v2;
   }
   FUN_00168e00(temp_v2,0,temp_v1,0xf0);
-  FUN_00409294(param_1,&temp_v14,&temp_v15,
+  drawFacingElbowSegments(param_1,&temp_v14,&temp_v15,
                *(unsigned int *)(param_1 + (unsigned int)(*(char *)(param_1 + 0x55) != '\0') * 4 + 0x9c),0x41)
   ;
   temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);

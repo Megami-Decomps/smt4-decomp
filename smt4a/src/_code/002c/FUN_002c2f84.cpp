@@ -1,28 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c2f84` (_code @ 0x2c2f84, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: game-state base and branch constant registers differ from retail. */
+#include "common.h"
+
+struct ScriptGameFlags {
+    u8 unk000[0x25d];
+    u8 flag25d;
+    u8 flag25e;
+    u8 unk25f[2];
+    u8 flag261;
+    u8 unk262[0x1e];
+    u8 flag280;
+};
 
 extern "C" {
+extern ScriptGameFlags g_gameState;
+s32 scrGetArg(u32 argument);
 
-extern unsigned char DAT_005f1859; /* 0x5f1859 */
-extern unsigned char DAT_005f185a; /* 0x5f185a */
-extern unsigned char DAT_005f185d; /* 0x5f185d */
-extern unsigned char DAT_005f187c; /* 0x5f187c */
-
-extern int scrGetArg(void);
-
-
-unsigned int FUN_002c2f84(void)
-
+// Toggle the three related state flags and clear the transition byte.
+u32 FUN_002c2f84(u32 argument)
 {
-  int temp_v0;
-  
-  temp_v0 = scrGetArg();
-  DAT_005f185d = temp_v0 == 0;
-  DAT_005f187c = 0;
-  DAT_005f185a = DAT_005f185d;
-  DAT_005f1859 = DAT_005f185d;
-  return 1;
+    if (scrGetArg(argument) != 0) {
+        g_gameState.flag261 = 0;
+        g_gameState.flag280 = 0;
+        g_gameState.flag25d = 0;
+        g_gameState.flag25e = 0;
+    } else {
+        g_gameState.flag261 = 1;
+        g_gameState.flag280 = 0;
+        g_gameState.flag25d = 1;
+        g_gameState.flag25e = 1;
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

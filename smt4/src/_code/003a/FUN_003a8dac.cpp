@@ -18,8 +18,8 @@ typedef struct {
 
 extern int utilityReturnSuccess(int);
 /* Supplied declaration required: FUN_00233240. */
-extern int FUN_0023360c(int *);
-extern int FUN_00287758(void);
+extern int flaggedValueHolderGetTotal(int *);
+extern int stageAssetsLoaded(void);
 /* Supplied declaration required: FUN_0029d684. */
 /* Supplied declaration required: FUN_0029defc. */
 /* Supplied declaration required: FUN_0029dfc0. */
@@ -43,7 +43,7 @@ void FUN_003a8dac(int *param_1)
   if (temp_v0 != 0) {
     return;
   }
-  if (((char)param_1[0x169] == '\x01') && (temp_v0 = FUN_00287758(), temp_v0 == 0)) {
+  if (((char)param_1[0x169] == '\x01') && (temp_v0 = stageAssetsLoaded(), temp_v0 == 0)) {
     return;
   }
   param_1[5] = 1;
@@ -59,9 +59,9 @@ void FUN_003a8dac(int *param_1)
     buttonHelpSetPreset(temp_v1);
   }
   if ((short)param_1[0x16a] != 0) {
-    temp_v0 = FUN_0023360c(param_1 + 8);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);
     temp_v2 = (short)param_1[temp_v0 * 8 + 0x16b];
-    temp_v0 = FUN_0023360c(param_1 + 8);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 8);
     if ((char)param_1[temp_v0 * 8 + 0x171] == '\0') {
       temp_v2 = 0;
     }

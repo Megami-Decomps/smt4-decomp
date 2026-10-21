@@ -15,7 +15,7 @@ int FUN_0029e328(int);
 int sortMenuCreate(int, int);
 int FUN_0029ee6c(int, int);
 int FUN_0029efd8(int, int);
-int FUN_0029f5d8(int, unsigned int, int, int, int, int, char [4], int, int);
+int uiScrollHandleActionsOrTouch(int, unsigned int, int, int, int, int, char [4], int, int);
 int eventQueueAddUniqueIfValid(void);
 int timerStart(...);
 int FUN_002c1658(...);
@@ -45,8 +45,8 @@ extern unsigned int objectPartRunUnlessLocked(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
-/* Supplied declaration required: FUN_0029f5d8. */
-extern unsigned char FUN_002b898c(void);
+/* Supplied declaration required: uiScrollHandleActionsOrTouch. */
+extern unsigned char buttonHelpGetStatus(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
 extern unsigned int FUN_002bf4f8(unsigned int, unsigned int);
@@ -83,7 +83,7 @@ void FUN_00331158(int param_1)
       temp_v7[0] = '\0';
       temp_v2 = FUN_002bf4f8(0x1d,0x56d);
       temp_v3 = temp_v6;
-      FUN_0029f5d8(temp_v6,temp_v2,temp_v0 + 0xe0c,(int)*(short *)(temp_v0 + 0xe02),
+      uiScrollHandleActionsOrTouch(temp_v6,temp_v2,temp_v0 + 0xe0c,(int)*(short *)(temp_v0 + 0xe02),
                    (int)*(short *)(temp_v0 + 0xe04),(int)*(short *)(temp_v0 + 0xe06),temp_v7,0,1);
       if ((temp_v3 != 0) || (temp_v3 = temp_v6, FUN_0029efd8(temp_v6,1), temp_v3 != 0)) {
         temp_v2 = objectPartRunUnlessLocked(temp_v0 + 0x34);
@@ -132,7 +132,7 @@ void FUN_00331158(int param_1)
             FUN_0029e328(3);
           }
           FUN_0029ee6c(0,0x323232ff);
-          temp_v1 = FUN_002b898c();
+          temp_v1 = buttonHelpGetStatus();
           *(unsigned char *)(temp_v0 + 0x31) = temp_v1;
           temp_v0 = g_camp;
           puVar7 = (unsigned int *)(g_camp + 0x18);

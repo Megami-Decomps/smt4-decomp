@@ -23,7 +23,7 @@ extern unsigned int *FUN_001006c2(int, unsigned int);
 /* Supplied declaration required: FUN_001006ec. */
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_001abbc4. */
-extern int FUN_001ad588(unsigned short *);
+extern int asdAtbcGetEntryCount(unsigned short *);
 extern unsigned int FUN_001ad5d8(unsigned short *);
 /* Supplied declaration required: FUN_001ad70c. */
 
@@ -58,7 +58,7 @@ void FUN_0019f888(int param_1)
   if (*(int *)(param_1 + 0xc) != temp_v1) {
     *(unsigned int *)(param_1 + 0x10) = temp_v1 - ((temp_v1 - *(int *)(param_1 + 0xc)) & 0xfffffffcU);
   }
-  temp_v1 = FUN_001ad588(puVar2);
+  temp_v1 = asdAtbcGetEntryCount(puVar2);
   *(unsigned int *)(param_1 + 8) = 0;
   temp_v8 = 0;
   if (temp_v8 < temp_v1) {

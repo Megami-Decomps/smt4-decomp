@@ -6,9 +6,9 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00192608(void);
-int FUN_0020d164(unsigned char [132], unsigned int);
+int battleAttributeFormatName(unsigned char [132], unsigned int);
 int FUN_00230c1c(unsigned char [132], int);
-int FUN_002a1f60(unsigned int, int, unsigned int, int);
+int asdTextDrawDirectoryEntry(unsigned int, int, unsigned int, int);
 int FUN_002c0940(...);
 int FUN_003180c4(int, unsigned char [132]);
 int FUN_00359974(int, int, unsigned int, int);
@@ -35,9 +35,9 @@ extern int DAT_0057f0cc; /* 0x57f0cc */
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192608. */
-/* Supplied declaration required: FUN_0020d164. */
+/* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: FUN_00230c1c. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_002c0940. */
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_00359974. */
@@ -80,7 +80,7 @@ void FUN_00399e20(int param_1,unsigned int param_2)
       textFormatBuffer(temp_v7,&LAB_0039a038,&temp_v5,temp_v6);
       FUN_003180c4(0x25,temp_v7);
     }
-    FUN_0020d164(temp_v7,*(unsigned int *)(temp_v4 + 0x24) >> 0x14);
+    battleAttributeFormatName(temp_v7,*(unsigned int *)(temp_v4 + 0x24) >> 0x14);
     FUN_003180c4(0x26,temp_v7);
     FUN_00230c1c(temp_v7,*(unsigned char *)(temp_v3 + 0x29));
     FUN_003180c4(0x27,temp_v7);
@@ -121,7 +121,7 @@ void FUN_00399e20(int param_1,unsigned int param_2)
     temp_v5 = 3;
     iStack_ac = param_1;
     temp_v6[0] = param_2;
-    FUN_002a1f60(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0);
   }
   return;
 }

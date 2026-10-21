@@ -64,7 +64,7 @@ extern unsigned int DAT_005f1b6c; /* 0x5f1b6c */
 /* Supplied declaration required: FUN_0037b150. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
-extern unsigned int FUN_0040ac08(void);
+extern unsigned int modelListInit(void);
 
 
 void FUN_002326b4(void)
@@ -94,7 +94,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x279);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b10 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232ad8);
@@ -104,7 +104,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x27f);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b14 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232af0);
@@ -114,7 +114,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x284);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b18 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232b08);
@@ -124,7 +124,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x289);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b1c = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232b24);
@@ -134,7 +134,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x28e);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b20 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232b40);
@@ -144,7 +144,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x293);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b2c = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232af0);
@@ -154,7 +154,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x299);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b24 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232b60);
@@ -164,7 +164,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x29e);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b28 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232b7c);
@@ -174,7 +174,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x2a4);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b30 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232b94);
@@ -184,7 +184,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x2a9);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b34 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232bb0);
@@ -194,7 +194,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x2af);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b38 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232bc8);
@@ -204,7 +204,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x2d2);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b4c = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232cf8);
@@ -214,7 +214,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x2eb);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b60 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232d10);
@@ -224,7 +224,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x2f1);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b64 = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232d28);
@@ -234,7 +234,7 @@ void FUN_002326b4(void)
   FUN_00178b04(0x20,&LAB_00232aa8,0x2fe);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   DAT_005f1b6c = temp_v1;
   textFormatBuffer(temp_v2,&LAB_00232d40);

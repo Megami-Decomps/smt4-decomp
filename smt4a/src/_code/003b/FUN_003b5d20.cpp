@@ -13,7 +13,7 @@ int FUN_002ddea0(void);
 int FUN_00311b74(void);
 int FUN_00313440(void);
 int FUN_00364740(unsigned int, unsigned int);
-int FUN_00376f94(void);
+int lmapGetSpawnIndex(void);
 int FUN_003cb744(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -34,7 +34,7 @@ extern signed char DAT_005f1623; /* 0x5f1623 */
 /* Supplied declaration required: FUN_00311b74. */
 /* Supplied declaration required: FUN_00313440. */
 /* Supplied declaration required: FUN_00364740. */
-/* Supplied declaration required: FUN_00376f94. */
+/* Supplied declaration required: lmapGetSpawnIndex. */
 /* Supplied declaration required: FUN_003cb744. */
 
 
@@ -52,11 +52,11 @@ void FUN_003b5d20(void)
   
   temp_v0 = g_mapMain;
   if (DAT_005f1623 != '\0') {
-    temp_v2 = FUN_00376f94();
+    temp_v2 = lmapGetSpawnIndex();
     if (temp_v2 != 0) {
       FUN_00244ac8();
       FUN_002747dc();
-      temp_v3 = FUN_00376f94();
+      temp_v3 = lmapGetSpawnIndex();
       FUN_00364740(*(unsigned int *)(temp_v0 + 0x30),temp_v3);
       FUN_002c670c(1);
     }

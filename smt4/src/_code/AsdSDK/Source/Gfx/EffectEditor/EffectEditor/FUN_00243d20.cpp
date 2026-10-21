@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(int, double);
-int FUN_0024dd00(...);
+int asdDebugLog(...);
 int effEditorNodeChainApply(...);
 int FUN_0024dd80(...);
 int FUN_0024dd90(...);
@@ -70,7 +70,7 @@ extern float DAT_004d92c0; /* 0x4d92c0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_0024dd00. */
+/* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: effEditorNodeChainApply. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: FUN_0024dd90. */
@@ -752,7 +752,7 @@ LAB_002444b0:
   *(unsigned int *)(temp_v4 + 0x14) = 0x40;
   *(unsigned int *)(temp_v4 + 0x18) = 0xffffffff;
   effMenuListAppend();
-  FUN_0024dd00(0xa4,0x44,8,&LAB_00244d88,temp_v21);
+  asdDebugLog(0xa4,0x44,8,&LAB_00244d88,temp_v21);
   temp_v4 = padIsButtonPressed(1);
   if (temp_v4 == 0) {
     FUN_0024dd80(1);

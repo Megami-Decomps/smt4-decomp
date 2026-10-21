@@ -1,13 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00328fa4` (_code @ 0x328fa4, 0x7c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
-int asdTextureSetImage(int);
 int asdMemFree(unsigned int);
 
-/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: asdMemFree. */
 
 
@@ -35,7 +34,7 @@ void FUN_00328fa4(void)
       *(unsigned int *)(*piVar3 + 0x3c) = 1;
       *(unsigned int *)(*piVar3 + 0x40) = 1;
       *(unsigned int *)(*piVar3 + 0x38) = 0;
-      asdTextureSetImage(*piVar3);
+      asdTextureSetImage((AsdTexture*)*piVar3);
       *(unsigned char *)(temp_v0 + 0x4332e8) = 1;
       asdMemFree(*(unsigned int *)(temp_v0 + 0x4332e4));
       *(unsigned int *)(temp_v0 + 0x4332e4) = 0;

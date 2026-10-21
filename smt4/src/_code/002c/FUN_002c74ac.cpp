@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int eventDispatchIfSet(...);
-int FUN_0024c370(...);
+int requestHandlerDispatch(...);
 int handlerTableCall(...);
 int FUN_0024f880(...);
 int FUN_0024f890(...);
@@ -76,7 +76,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: eventDispatchIfSet. */
-/* Supplied declaration required: FUN_0024c370. */
+/* Supplied declaration required: requestHandlerDispatch. */
 /* Supplied declaration required: handlerTableCall. */
 /* Supplied declaration required: FUN_0024f880. */
 /* Supplied declaration required: FUN_0024f890. */
@@ -290,7 +290,7 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
             DAT_004ea984 = temp_v18;
             DAT_004ea998 = temp_v25;
             handlerTableCall(*puVar3);
-            FUN_0024c370(*puVar3,&temp_v27);
+            requestHandlerDispatch(*puVar3,&temp_v27);
             eventDispatch(*puVar3);
           }
           temp_v1 = temp_v1 + 1;
@@ -309,7 +309,7 @@ void FUN_002c74ac(fn_002c74ac_arg0 *param_1)
           }
           if (-1 < (int)pfVar2[4]) {
             handlerTableCall(*puVar3);
-            FUN_0024c370(*puVar3,pfVar2);
+            requestHandlerDispatch(*puVar3,pfVar2);
             eventDispatch(*puVar3);
           }
           temp_v1 = temp_v1 + 1;

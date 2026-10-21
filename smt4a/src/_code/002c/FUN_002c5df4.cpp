@@ -3,11 +3,12 @@
 #include "romwright_types.h"
 
 extern "C" {
+extern unsigned char* g_lmapView;
 
-int FUN_0035d1e0(void);
-int cameraGetHeadingDegrees(void);
+void FUN_0035d1e0(float x, float z, float heading);
+float cameraGetHeadingDegrees(void);
 int controllerSetDestination(...);
-int FUN_003fdb18(...);
+int controllerSetRotationEulerDegrees(...);
 int VectorSignedToFloat(int, int);
 
 /* stack frame of void: 11 slot(s), 44 byte(s) */
@@ -39,11 +40,9 @@ extern int DAT_006105e0; /* 0x6105e0 */
 extern int gameFlagsGetBlock(void);
 extern int FUN_00297008(int);
 extern int FUN_00355418(int);
-/* Supplied declaration required: FUN_0035d1e0. */
-/* Supplied declaration required: cameraGetHeadingDegrees. */
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 /* Supplied declaration required: controllerSetDestination. */
-/* Supplied declaration required: FUN_003fdb18. */
+/* Supplied declaration required: controllerSetRotationEulerDegrees. */
 
 
 void FUN_002c5df4(void)
@@ -136,8 +135,10 @@ void FUN_002c5df4(void)
            *(unsigned int *)(*(int *)(DAT_006105e0 + 4) + 4) & 0xfffffffc;
     }
     if (DAT_0060ff9c != '\0') {
-      cameraGetHeadingDegrees();
-      FUN_0035d1e0();
+      {
+        float cameraHeading = cameraGetHeadingDegrees();
+        FUN_0035d1e0(*(float*)(g_lmapView + 0x50),*(float*)(g_lmapView + 0x58),cameraHeading);
+      }
       temp_v5 = temp_v22;
       temp_v23[0] = 0;
       temp_v23[1] = 0;
@@ -184,7 +185,7 @@ void FUN_002c5df4(void)
                             if (temp_v7 != 0) {
                               temp_v11 = *(int *)(temp_v7 + 4);
                               controllerSetDestination(temp_v11,&temp_v19);
-                              FUN_003fdb18(temp_v11);
+                              controllerSetRotationEulerDegrees(temp_v11);
                               *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                             }
                           }
@@ -196,7 +197,7 @@ void FUN_002c5df4(void)
                           if (temp_v7 != 0) {
                             temp_v11 = *(int *)(temp_v7 + 4);
                             controllerSetDestination(temp_v11,&temp_v19);
-                            FUN_003fdb18(temp_v11);
+                            controllerSetRotationEulerDegrees(temp_v11);
                             *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                           }
                         }
@@ -224,7 +225,7 @@ LAB_002c61b0:
                         if (temp_v7 != 0) {
                           temp_v11 = *(int *)(temp_v7 + 4);
                           controllerSetDestination(temp_v11,&temp_v19);
-                          FUN_003fdb18(temp_v11);
+                          controllerSetRotationEulerDegrees(temp_v11);
                           *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                         }
                       }
@@ -236,7 +237,7 @@ LAB_002c61b0:
                       if (temp_v7 != 0) {
                         temp_v11 = *(int *)(temp_v7 + 4);
                         controllerSetDestination(temp_v11,&temp_v19);
-                        FUN_003fdb18(temp_v11);
+                        controllerSetRotationEulerDegrees(temp_v11);
                         *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                       }
                     }
@@ -288,7 +289,7 @@ LAB_002c61b0:
                     if (temp_v7 != 0) {
                       temp_v11 = *(int *)(temp_v7 + 4);
                       controllerSetDestination(temp_v11,&temp_v19);
-                      FUN_003fdb18(temp_v11);
+                      controllerSetRotationEulerDegrees(temp_v11);
                       *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                     }
                   }
@@ -300,13 +301,13 @@ LAB_002c61b0:
                   if (temp_v7 != 0) {
                     temp_v11 = *(int *)(temp_v7 + 4);
                     controllerSetDestination(temp_v11,&temp_v19);
-                    FUN_003fdb18(temp_v11);
+                    controllerSetRotationEulerDegrees(temp_v11);
                     *(unsigned int *)(temp_v11 + 4) = *(unsigned int *)(temp_v11 + 4) & 0xfffffffc;
                   }
                 }
 LAB_002c63b8:
                 if (*(char *)(temp_v6 + 0x3e) == '\x01') {
-                  temp_v11 = FUN_00376f94();
+                  temp_v11 = lmapGetSpawnIndex();
                   if ((temp_v11 < 100) ||
                      (((temp_v2 = FUN_00355418((int)*(float *)(temp_v23[6] + 0x1c4)),
                        temp_v11 = DAT_006105d8, temp_v2 != 0 &&
@@ -344,11 +345,11 @@ LAB_002c63b8:
                     }
                     temp_v8 = *(unsigned int *)(temp_v11 + 4);
                     controllerSetDestination(temp_v8,&temp_v19);
-                    FUN_003fdb18(temp_v8);
+                    controllerSetRotationEulerDegrees(temp_v8);
                   }
                 }
                 if (*(char *)(temp_v6 + 0x3f) == '\x01') {
-                  temp_v11 = FUN_00376f94();
+                  temp_v11 = lmapGetSpawnIndex();
                   temp_v7 = iRam006104d8;
                   if ((temp_v11 >= 100) &&
                      (temp_v11 = FUN_00297008((int)*(float *)(temp_v23[6] + 0x1c4)),
@@ -383,7 +384,7 @@ LAB_002c63b8:
                     }
                     temp_v8 = *(unsigned int *)(temp_v7 + 4);
                     controllerSetDestination(temp_v8,&temp_v19);
-                    FUN_003fdb18(temp_v8);
+                    controllerSetRotationEulerDegrees(temp_v8);
                   }
                 }
                 temp_v15 = (unsigned int)(temp_v14 >> 0x20);
@@ -406,7 +407,7 @@ LAB_002c63b8:
                       }
                       temp_v8 = *(unsigned int *)(temp_v7 + 4);
                       controllerSetDestination(temp_v8,&temp_v19);
-                      FUN_003fdb18(temp_v8);
+                      controllerSetRotationEulerDegrees(temp_v8);
                     }
                     temp_v9 = temp_v9 + 1;
                   }
@@ -417,7 +418,7 @@ LAB_002c63b8:
                     temp_v8 = *(unsigned int *)(temp_v6 + 4);
                     temp_v14 = (unsigned long long)temp_v15 << 0x20;
                     controllerSetDestination(temp_v8,&temp_v19);
-                    FUN_003fdb18(temp_v8);
+                    controllerSetRotationEulerDegrees(temp_v8);
                   }
                   temp_v9 = temp_v9 + 1;
                 }

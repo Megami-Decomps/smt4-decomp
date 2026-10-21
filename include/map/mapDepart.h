@@ -87,7 +87,10 @@ typedef struct GameStateA {
     /* 0x2C9 */ u8 unk2C9;
     /* 0x2CA */ u8 unk2CA[0x3E];
     /* 0x308 */ u32 unk308;
-    /* 0x30C */ u8 unk30C[0x148];
+    union {
+        /* 0x30C */ u8 unk30C[0x148];
+        /* 0x30C */ s32 popupElapsedFrames;
+    };
     /* 0x454 */ s32 unk454;
     /* 0x458 */ u8 unk458[0x2C];
     /* 0x484 */ u32 unk484;
@@ -97,6 +100,7 @@ typedef struct GameStateA {
     /* 0x574 */ s8 unk574;
     /* 0x575 */ u8 unk575[3];
     /* 0x578 */ s32 unk578;
+    /* 0x57C */ s32 unk57c;
 } GameStateA;
 
 #endif

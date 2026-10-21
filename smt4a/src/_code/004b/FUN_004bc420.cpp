@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00148d68(unsigned int, unsigned int, int);
 int gameDataGetTableEntry(...);
 int dataTable00FindById(void);
-int FUN_0046fd8c(int, unsigned int);
+int resourceFindType27Record(int, unsigned int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -23,8 +23,8 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_0046fd8c. */
-extern int FUN_004bb80c(void);
+/* Supplied declaration required: resourceFindType27Record. */
+extern int FUN_004bb80c(int index);
 
 
 unsigned short FUN_004bc420(unsigned int param_1,unsigned int param_2,int param_3)
@@ -53,7 +53,7 @@ unsigned short FUN_004bc420(unsigned int param_1,unsigned int param_2,int param_
   temp_v1 = dataTableGetEntries();
   temp_v2 = dataTableGetCount(temp_v0);
   temp_v6 = temp_v1;
-  if ((temp_v4 < temp_v2) && (temp_v6 = g_aocSystem, FUN_0046fd8c(g_aocSystem,temp_v4), temp_v6 == 0)) {
+  if ((temp_v4 < temp_v2) && (temp_v6 = g_aocSystem, resourceFindType27Record(g_aocSystem,temp_v4), temp_v6 == 0)) {
     temp_v6 = temp_v1 + temp_v4 * 0x78;
   }
   temp_v7 = 0;
@@ -62,7 +62,7 @@ unsigned short FUN_004bc420(unsigned int param_1,unsigned int param_2,int param_
     psVar9 = (short *)(temp_v6 + temp_v1 * 4);
     if (*psVar9 != 0) {
       if (param_3 != 0) {
-        temp_v3 = FUN_004bb80c();
+        temp_v3 = FUN_004bb80c((unsigned short)*psVar9);
         temp_v5 = 0;
         do {
           temp_v4 = (unsigned int)*(unsigned short *)(temp_v3 + temp_v5 * 2 + 0x14);

@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: FUN_00103a60. */
 /* Supplied declaration required: FUN_00103ab8. */
 extern int FUN_00123f04(int, unsigned int, unsigned int);
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineStringDestroy. */
@@ -53,7 +53,7 @@ unsigned int FUN_001139e8(int param_1,unsigned int param_2)
   unsigned char temp_v6 [8];
   unsigned int temp_v7 [2];
   
-  temp_v1 = FUN_002e6e26();
+  temp_v1 = onlineContextGetInstance();
   FUN_002e6e34(temp_v3,temp_v1 + 0x58);
   if ((*(int *)(param_1 + 8) != 0) && (temp_v1 = FUN_002ee978(param_2), temp_v1 != 0)) {
     *(int *)(param_1 + 0xf0) = *(int *)(param_1 + 0xf0) + 1;

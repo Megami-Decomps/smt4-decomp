@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001b57a8(...);
+int resultPairInitialize(...);
 
-/* Supplied declaration required: FUN_001b57a8. */
+/* Supplied declaration required: resultPairInitialize. */
 
 
 void FUN_00427a10(unsigned int *param_1,int param_2)
@@ -18,7 +18,7 @@ void FUN_00427a10(unsigned int *param_1,int param_2)
   
   temp_v0 = *(int *)(param_2 + 0x20);
   if (temp_v0 == 1) {
-    FUN_001b57a8(param_1,0);
+    resultPairInitialize(param_1,0);
     return;
   }
   if (temp_v0 < 2) {
@@ -30,32 +30,32 @@ void FUN_00427a10(unsigned int *param_1,int param_2)
     }
     if (temp_v0 == -2) {
       if (-1 < *(int *)(param_2 + 0x24)) {
-        FUN_001b57a8(param_1,0xf9613919);
+        resultPairInitialize(param_1,0xf9613919);
         return;
       }
-      FUN_001b57a8();
+      resultPairInitialize();
       return;
     }
     if (temp_v0 == 0) {
-      FUN_001b57a8(param_1,0xc9213801);
+      resultPairInitialize(param_1,0xc9213801);
       return;
     }
   }
   else {
     if (temp_v0 == 10) {
-      FUN_001b57a8(param_1,0xc9213802);
+      resultPairInitialize(param_1,0xc9213802);
       return;
     }
     if (temp_v0 == 0xb) {
-      FUN_001b57a8(param_1,0xc9213803);
+      resultPairInitialize(param_1,0xc9213803);
       return;
     }
     if (temp_v0 == 0xc) {
-      FUN_001b57a8(param_1,0xc9213804);
+      resultPairInitialize(param_1,0xc9213804);
       return;
     }
   }
-  FUN_001b57a8(param_1,0xc9613918);
+  resultPairInitialize(param_1,0xc9613918);
   return;
 }
 

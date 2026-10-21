@@ -7,7 +7,7 @@ extern "C" {
 int onlineInstanceTableFind(int, unsigned int);
 int onlineJobSetStateTimed(int, int);
 int FUN_002f4c9c(...);
-int FUN_0030cae0(int, unsigned int);
+int onlineJobCompleteWithResult(int, unsigned int);
 int rt_memcpy(unsigned int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
@@ -29,7 +29,7 @@ extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineJobSetStateTimed. */
 /* Supplied declaration required: FUN_002f4c9c. */
 extern int FUN_0030cad0(void);
-/* Supplied declaration required: FUN_0030cae0. */
+/* Supplied declaration required: onlineJobCompleteWithResult. */
 /* Supplied declaration required: rt_memcpy. */
 
 
@@ -61,7 +61,7 @@ void FUN_0012a59c(int param_1)
     temp_v6 = 0x80010004;
     puVar5 = (unsigned int *)&temp_v6;
     temp_v2 = FUN_002e7908(puVar4,puVar5);
-    FUN_0030cae0(param_1,temp_v2);
+    onlineJobCompleteWithResult(param_1,temp_v2);
     return;
   }
   temp_v8 = param_1 + 0x15c;
@@ -89,7 +89,7 @@ LAB_0012a64c:
         temp_v11 = 0x10001;
         puVar4 = (unsigned int *)temp_v10;
         temp_v2 = FUN_002e7908(puVar4,puVar5);
-        FUN_0030cae0(param_1,temp_v2);
+        onlineJobCompleteWithResult(param_1,temp_v2);
         return;
       }
       *(unsigned char *)(param_1 + 0x192) = 0;
@@ -131,7 +131,7 @@ LAB_0012a64c:
         temp_v6 = 0x10001;
         puVar4 = (unsigned int *)temp_v9;
         temp_v2 = FUN_002e7908(puVar4,puVar5);
-        FUN_0030cae0(param_1,temp_v2);
+        onlineJobCompleteWithResult(param_1,temp_v2);
         return;
       }
       temp_v6 = 0x80050017;
@@ -139,7 +139,7 @@ LAB_0012a64c:
   }
   puVar5 = (unsigned int *)&temp_v6;
   temp_v2 = FUN_002e7908(puVar4,puVar5);
-  FUN_0030cae0(param_1,temp_v2);
+  onlineJobCompleteWithResult(param_1,temp_v2);
   return;
 }
 

@@ -14,7 +14,7 @@ int FUN_002e9f00(void);
 int vectorDestroyWords(unsigned int **);
 
 extern unsigned int FUN_00103e8e(int, unsigned int);
-extern int FUN_002e6e26(void);
+extern int onlineContextGetInstance(void);
 /* Supplied declaration required: FUN_002e6e34. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: onlineInstanceTableGetCurrent. */
@@ -36,7 +36,7 @@ unsigned int FUN_002e9ef8(int param_1,unsigned int param_2)
   unsigned int *puStack_24;
   unsigned char temp_v2 [16];
   
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   FUN_002e6e34(temp_v2,temp_v0 + 0x58);
   vectorInitEmpty(&puStack_28);
   temp_v1 = onlineInstanceTableGetCurrent();

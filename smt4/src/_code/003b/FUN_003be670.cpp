@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0022abe0(int, unsigned short [16]);
 int btlMainFindEntryByListedId(...);
-int FUN_00283e48(void);
+int passiveSkillLookupRecord(void);
 int btlGetMainState(void);
 int VectorUnsignedToFloat(int, int);
 
@@ -22,7 +22,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0022abe0. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: btlGetMainState. */
 
 
@@ -58,7 +58,7 @@ void FUN_003be670(unsigned int param_1,unsigned int param_2)
       temp_v0 = 0;
       do {
         temp_v1 = (unsigned int)temp_v3[temp_v0];
-        if ((temp_v1 != 0) && (FUN_00283e48(), temp_v1 != 0)) {
+        if ((temp_v1 != 0) && (passiveSkillLookupRecord(), temp_v1 != 0)) {
           temp_v2 = *(unsigned short *)(temp_v1 + 0x36) + temp_v2;
         }
         temp_v0 = temp_v0 + 1;

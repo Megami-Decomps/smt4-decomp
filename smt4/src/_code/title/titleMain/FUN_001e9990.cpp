@@ -20,17 +20,17 @@ int FUN_0028703c(...);
 int FUN_00287c34(...);
 int uiFadeRelease(void);
 int soundChannelStopAll(...);
-int FUN_0029c3c0(...);
+int slotSetRequest(...);
 int asdModelSlotRelease(...);
 int FUN_002b827c(...);
 int ifTouchRegionRemove(void);
 int jobStop(...);
 int asdSequenceRequest(...);
-int FUN_002f4ce8(void);
+int titleConfigCreate(void);
 int FUN_0030a9d8(void);
 
 int FUN_00210194(...);
-int FUN_00211bd0(void);
+int commonBgBeginExit(void);
 int commonBgReset(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
@@ -95,10 +95,10 @@ extern int DAT_0049fd14; /* 0x49fd14 */
 /* Supplied declaration required: FUN_0019213c. */
 /* Supplied declaration required: FUN_00210104. */
 /* Supplied declaration required: FUN_00210194. */
-/* Supplied declaration required: FUN_00211bd0. */
+/* Supplied declaration required: commonBgBeginExit. */
 extern int FUN_00215a14(void);
 extern int effIsFinished(unsigned int);
-extern int FUN_0025a084(void);
+extern int frameTexPollTransitionComplete(void);
 /* Supplied declaration required: commonBgReset. */
 extern unsigned int FUN_00263c1c(unsigned char *);
 /* Supplied declaration required: FUN_0026e324. */
@@ -122,7 +122,7 @@ extern int FUN_002896bc(void);
 /* Supplied declaration required: asdMdlManagerCreateLoaded. */
 /* Supplied declaration required: FUN_0029c2cc. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: FUN_0029c3c0. */
+/* Supplied declaration required: slotSetRequest. */
 extern int FUN_0029d65c(int);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
@@ -154,7 +154,7 @@ extern int FUN_002c2a04(unsigned int);
 extern unsigned int FUN_002c501c(void);
 /* Supplied declaration required: asdSequenceRequest. */
 extern int gaugeTaskIsIdle(unsigned int);
-/* Supplied declaration required: FUN_002f4ce8. */
+/* Supplied declaration required: titleConfigCreate. */
 extern int titleConfigIsClosed(void);
 /* Supplied declaration required: FUN_0030a9d8. */
 /* Supplied declaration required: FUN_003bc9d0. */
@@ -253,7 +253,7 @@ unsigned int FUN_001e9990(void)
       commonBgReset();
     }
     else {
-      FUN_00211bd0();
+      commonBgBeginExit();
     }
     temp_v1 = FUN_002b8584(0x11,0x14);
     *(unsigned short *)(puVar13 + 0x1d) = temp_v1;
@@ -325,7 +325,7 @@ unsigned int FUN_001e9990(void)
     break;
   case 5:
     temp_v4 = FUN_002896bc();
-    if ((temp_v4 == 0) || (temp_v4 = FUN_0025a084(), puVar2 = g_titleMain, temp_v4 == 0))
+    if ((temp_v4 == 0) || (temp_v4 = frameTexPollTransitionComplete(), puVar2 = g_titleMain, temp_v4 == 0))
     goto LAB_001ea720;
     temp_v8 = 1.0f;
     g_titleMain[0x19] = (float)g_titleMain[0x19] + 1.0f;
@@ -389,7 +389,7 @@ unsigned int FUN_001e9990(void)
       puVar3 = g_titleMain;
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 4);
-    if ((*(char *)((int)g_titleMain + 0x96) != '\0') && (temp_v4 = FUN_0025a084(), temp_v4 != 0)) {
+    if ((*(char *)((int)g_titleMain + 0x96) != '\0') && (temp_v4 = frameTexPollTransitionComplete(), temp_v4 != 0)) {
       *(unsigned char *)((int)puVar3 + 0x96) = 0;
       temp_v6 = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
       if (*(char *)(puVar3 + 0x25) != '\0') {
@@ -490,8 +490,8 @@ unsigned int FUN_001e9990(void)
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 4);
           puVar13[0x27] = 0xb;
-          FUN_0029c3c0(0,10,0xff);
-          FUN_0029c3c0(1,10,0xff);
+          slotSetRequest(0,10,0xff);
+          slotSetRequest(1,10,0xff);
         }
         goto LAB_001ea720;
       }
@@ -516,8 +516,8 @@ unsigned int FUN_001e9990(void)
         ifTouchRegionRemove();
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 4);
-      FUN_0029c3c0(0,0xc,0xffffffff);
-      FUN_0029c3c0(1,0xc,0xffffffff);
+      slotSetRequest(0,0xc,0xffffffff);
+      slotSetRequest(1,0xc,0xffffffff);
       soundChannelStopAll(0xf);
       temp_v4 = 6;
     }
@@ -543,7 +543,7 @@ unsigned int FUN_001e9990(void)
   case 9:
     if (*(char *)(g_titleMain + 0x1f) != '\0') goto LAB_001ea720;
     asdModelSlotRelease(0);
-    FUN_002f4ce8();
+    titleConfigCreate();
     temp_v4 = 10;
     break;
   case 10:

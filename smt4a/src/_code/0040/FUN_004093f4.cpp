@@ -14,7 +14,7 @@ extern unsigned char DAT_00557be0; /* 0x557be0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00153f64(unsigned int, unsigned int);
+extern int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 extern int FUN_001834a4(unsigned int, unsigned int);
 
 
@@ -95,9 +95,9 @@ unsigned int * FUN_004093f4(unsigned int *param_1)
   temp_v5 = VectorFloatToUnsigned(*(float *)(temp_v0 + 0x18) * temp_v6,3);
   temp_v3 = VectorFloatToUnsigned(*(float *)(temp_v0 + 0x1c) * temp_v6,3);
   param_1[0x28] = (temp_v4 << 0x18) | (temp_v2 << 0x10) | (temp_v5 << 8) | temp_v3;
-  temp_v0 = FUN_00153f64(0xc,3);
+  temp_v0 = asdTMTexTableGetHeaderValue(0xc,3);
   *(unsigned int *)(temp_v0 + 0x38) = 3;
-  temp_v0 = FUN_00153f64(0xc,2);
+  temp_v0 = asdTMTexTableGetHeaderValue(0xc,2);
   *(unsigned int *)(temp_v0 + 0x38) = 2;
   return param_1;
 }

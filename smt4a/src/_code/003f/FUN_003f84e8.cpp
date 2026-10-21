@@ -9,7 +9,7 @@ int paramsInit(int, unsigned char *, int, unsigned char *, int, int, int, int, i
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(int);
+int paramsClearPacket(int);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -30,14 +30,14 @@ extern unsigned char DAT_0052d200; /* 0x52d200 */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_003f84e8(int param_1)
 
 {
 /* irregular: 6 native warning(s); review required */
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x14c);
+  paramsClearPacket(param_1 + 0x14c);
   paramsInit(param_1 + 0x14c,&DAT_0052d140,0x54,&DAT_0052d194,0x6c,0,0,0,0,&DAT_0052d200,0x16c);
   FUN_0014e188(param_1 + 0x16c,0x31,0,param_1 + 0x14c,0xc9);
   uiSpriteSetKeyframe(param_1 + 0x16c,1,0);

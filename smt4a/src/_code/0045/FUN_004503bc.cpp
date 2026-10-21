@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-extern romwright_code *DAT_0058918c; /* 0x58918c */
+extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
 
 /* Supplied declaration required: FUN_0017cf74. */
 /* Supplied declaration required: FUN_001c4598. */
@@ -42,7 +42,7 @@ void FUN_004503bc(unsigned int param_1,int param_2,unsigned int param_3)
   }
   if ((int)temp_v0 < 0x2010000) {
     if (temp_v0 == 0x1010000) {
-      temp_v1 = (*DAT_0058918c)(0x10000,0x102,param_1,temp_v2);
+      temp_v1 = (*g_gfxAllocateCallback)(0x10000,0x102,param_1,temp_v2);
       if (*(int *)(param_2 + 0x18) != 0) {
         temp_v3 = *(int *)(param_2 + 0x18) + param_2 + 0x18;
       }
@@ -53,7 +53,7 @@ void FUN_004503bc(unsigned int param_1,int param_2,unsigned int param_3)
     }
   }
   else if (temp_v0 == 0x2020000 || temp_v0 == 0x2030000) {
-    temp_v1 = (*DAT_0058918c)(param_3 & 0x30000,0x102,param_1,temp_v2);
+    temp_v1 = (*g_gfxAllocateCallback)(param_3 & 0x30000,0x102,param_1,temp_v2);
     if (*(int *)(param_2 + 0x18) != 0) {
       temp_v3 = *(int *)(param_2 + 0x18) + param_2 + 0x18;
     }

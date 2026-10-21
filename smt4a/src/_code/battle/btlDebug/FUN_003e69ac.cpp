@@ -8,7 +8,7 @@ int sysPlaySe(...);
 int dialogClose(...);
 int FUN_00275bc8(...);
 int scrScriptProcessStartEntry(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int FUN_003756c8(...);
 int FUN_003ebc08(...);
 int gameFlagSetValue(...);
@@ -27,18 +27,18 @@ extern unsigned int DAT_005715e8; /* 0x5715e8 */
 extern unsigned int DAT_005715ec; /* 0x5715ec */
 extern unsigned int DAT_005715f0; /* 0x5715f0 */
 extern unsigned int DAT_005715f4; /* 0x5715f4 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int btlGetMainState(void);
 /* Supplied declaration required: sysPlaySe. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dialogClose. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: FUN_003756c8. */
 /* Supplied declaration required: FUN_003ebc08. */
 /* Supplied declaration required: gameFlagSetValue. */
@@ -61,7 +61,7 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
   
   switch(*param_1) {
   case 0:
-    FUN_002804b0("battle/Common/continue.bf",param_1 + 1,0);
+    asdLoadFileAsyncSimple("battle/Common/continue.bf",param_1 + 1,0);
     temp_v3 = 1;
     break;
   case 1:
@@ -93,7 +93,7 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
     *param_1 = 4;
     return 0;
   case 4:
-    temp_v2 = FUN_00224880(param_1[2]);
+    temp_v2 = scrRunOpcodesStub(param_1[2]);
     if (temp_v2 != 2) {
       return 0;
     }
@@ -115,7 +115,7 @@ unsigned int FUN_003e69ac(unsigned int *param_1)
       }
     }
     FUN_003756c8(0);
-    FUN_004f8f08(DAT_00573808);
+    FUN_004f8f08(g_btlAux);
     FUN_004ab734(g_btlUiBlock);
     temp_v3 = 5;
     break;

@@ -1,30 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039411c` (_code @ 0x39411c, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler computes the state base twice and hoists its signed active-byte load. */
+#include "shard/W6_W6Match2_StatusBytes.h"
 
-extern "C" {
-
-
-unsigned int FUN_0039411c(int param_1)
-
+// Decode the active, alternate, and pending status bytes.
+extern "C" u32 FUN_0039411c(const StatusBytes* status)
 {
-  unsigned int temp_v0;
-  
-  if (*(char *)(param_1 + 0x9af) != '\0') {
-    if (*(char *)(param_1 + 0x9ac) == '\0') {
-      return 0;
+    const StatusFields& state = status->state;
+    if (state.pending != 0) {
+        if (state.active == 0) {
+            return 0;
+        }
+    } else if (state.active == 0) {
+        return 3;
     }
-  }
-  else if (*(char *)(param_1 + 0x9ac) == '\0') {
-    return 3;
-  }
-  if (*(char *)(param_1 + 0x9ad) == '\0') {
-    temp_v0 = 1;
-  }
-  else {
-    temp_v0 = 2;
-  }
-  return temp_v0;
+    return state.alternate != 0 ? 2 : 1;
 }
-
-} /* extern "C" */

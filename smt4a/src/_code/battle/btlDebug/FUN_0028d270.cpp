@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028d270` (_code @ 0x28d270, 0x24cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ int FUN_0014bd84(...);
 int FUN_0015f858(...);
 int FUN_00162790(...);
 int efctSetSpeed(void);
-int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -90,7 +90,6 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_001676b0. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
-/* Supplied declaration required: FUN_001689e8. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001835b4. */
@@ -104,7 +103,7 @@ extern int FUN_00284140(int);
 extern int btlMainGetUnk14(void);
 extern int FUN_002a4860(unsigned int);
 extern int FUN_002a4894(unsigned int);
-extern int FUN_002c2c68(unsigned int);
+extern int objectApplyIfUnblocked(unsigned int);
 extern int FUN_002cc9e0(int, unsigned int);
 extern unsigned int FUN_002ccd74(int, int);
 /* Supplied declaration required: FUN_002ccdb4. */
@@ -365,7 +364,7 @@ void FUN_0028d270(int param_1)
                 FUN_00162790(2,0x9b9b9bff,temp_v20,temp_v9);
               }
               temp_v4 = FUN_001834a4(0xd,0x8c);
-              FUN_001689e8(temp_v15,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
+              uiDrawItemCategoryIcon(temp_v15,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                            (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,0x49,0)
               ;
               temp_v4 = FUN_001834a4(0xd,0x8a);
@@ -813,7 +812,7 @@ LAB_0028d9e0:
           FUN_00162790(3,0x9b9b9bff,temp_v20,(int)*(short *)(temp_v4 + 10));
         }
         temp_v3 = FUN_001834a4(0xd,0xa9);
-        FUN_001689e8(temp_v9,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
+        uiDrawItemCategoryIcon(temp_v9,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,0x74,0);
         temp_v3 = FUN_001834a4(0xd,0xa7);
         temp_v14[1] = &LAB_0028f5a0;
@@ -1029,7 +1028,7 @@ LAB_0028d9e0:
     FUN_00180310(2,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v1,
                  (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v2,1,4);
   }
-  temp_v11 = FUN_002c2c68(*temp_v24);
+  temp_v11 = objectApplyIfUnblocked(*temp_v24);
   if (temp_v11 >= 7) {
     if (*temp_v25 == 1) {
       temp_v6 = 200;

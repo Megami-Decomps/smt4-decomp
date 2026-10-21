@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00231bb8(...);
+int pairCopy(...);
 int FUN_00231dec(...);
 int FUN_002bed3c(void);
 int FUN_002c18e4(...);
@@ -46,7 +46,7 @@ extern signed char DAT_0049f941; /* 0x49f941 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231dec. */
 extern unsigned int lmapSceneGetObj(void);
 extern int FUN_00288f78(int);
@@ -304,7 +304,7 @@ LAB_0039f450:
       temp_v4 = *(int *)(param_1 + 4);
     }
     if ((temp_v6 != 0 && temp_v4 != 0) &&
-       (FUN_00231bb8(param_1 + 0x164,temp_v22), (unsigned int)temp_v22[0] < 0xc39f8001)) {
+       (pairCopy(param_1 + 0x164,temp_v22), (unsigned int)temp_v22[0] < 0xc39f8001)) {
       FUN_002c39a4(g_titleScene);
       FUN_002bed3c();
       if ((g_gameState != 0x13) ||

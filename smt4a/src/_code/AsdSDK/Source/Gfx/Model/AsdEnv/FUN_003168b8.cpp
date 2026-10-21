@@ -1,13 +1,15 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003168b8` (_code @ 0x3168b8, 0xadc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+struct SceneChildSet;
+struct SceneNodePrefix;
 
 extern "C" {
 
 int asdMemoryGetDefaultAllocator(void);
 int FUN_0018d9f0(int *, unsigned int, int);
 int FUN_001aa528(...);
-int FUN_001b0758(int, int);
+void sceneNodeAttachDeclaredChild(SceneChildSet *, SceneNodePrefix *);
 int nw_gfx_SceneBuilder_CreateObject(...);
 int nw_gfx_SceneNode_IsCircularReference(...);
 int rt_memcpy(short *, int, int);
@@ -58,7 +60,7 @@ extern unsigned char DAT_00636d20; /* 0x636d20 */
 /* Supplied declaration required: FUN_0018d9f0. */
 /* Supplied declaration required: FUN_001aa528. */
 extern unsigned int asdMemoryGetAllocatorA(void);
-/* Supplied declaration required: FUN_001b0758. */
+/* Supplied declaration required: sceneNodeAttachDeclaredChild. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 extern short wstrlen(int);
 extern int asdModelGetSlotArray2(fn_003168b8_arg1 *);
@@ -452,7 +454,7 @@ LAB_00316f40:
     temp_v14 = piVar9;
     if (!temp_v0) break;
     for (; piVar2 != piVar4; piVar2 = piVar2 + 1) {
-      FUN_001b0758(*piVar21,*piVar2);
+      sceneNodeAttachDeclaredChild((SceneChildSet *)*piVar21,(SceneNodePrefix *)*piVar2);
     }
     piVar20 = temp_v13;
     piVar9 = temp_v14;

@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b1ad4(int);
-int FUN_002b1c44(int);
+int spriteSequencePlayerAdvance(int);
+struct ScaleController;
+void controllerUpdateUniformScaleTrack(ScaleController *);
 int FUN_002b1e08(int);
 int timerStart(int, int, int);
 int __aeabi_idivmod(...);
 
-/* Supplied declaration required: FUN_002b1ad4. */
-/* Supplied declaration required: FUN_002b1c44. */
+/* Supplied declaration required: spriteSequencePlayerAdvance. */
 /* Supplied declaration required: FUN_002b1e08. */
 /* Supplied declaration required: timerStart. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -108,8 +108,8 @@ int FUN_002bf818(int param_1)
     }
   }
   FUN_002b1e08(param_1);
-  FUN_002b1c44(param_1);
-  FUN_002b1ad4(param_1);
+  controllerUpdateUniformScaleTrack((ScaleController *)param_1);
+  spriteSequencePlayerAdvance(param_1);
   temp_v3 = *(char *)(param_1 + 0x86) != '\0';
   temp_v1 = '\0';
   if (temp_v3) {

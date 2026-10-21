@@ -1,30 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c2f8c` (_code @ 0x3c2f8c, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: final comparison operands are reversed, emitting GT/LE instead of retail LT/GE. */
+#include "common.h"
+
+struct DemonStockState {
+    u8 unk0000[0x90f0];
+    s8 slots[0x18]; // 0x90f0: negative marks the end of the occupied prefix
+    u8 unk9108[3];
+    u8 capacity; // 0x910b
+};
 
 extern "C" {
+DemonStockState *gameGetSlotTable(void);
 
-extern int gameGetSlotTable(void);
-
-
-unsigned char FUN_003c2f8c(void)
-
+bool FUN_003c2f8c(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v0 = gameGetSlotTable();
-  temp_v1 = gameGetSlotTable();
-  temp_v3 = 0;
-  temp_v2 = 0;
-  do {
-    if (*(char *)(temp_v1 + temp_v2 + 0x90f0) < '\0') break;
-    temp_v2 = temp_v2 + 1;
-    temp_v3 = temp_v3 + 1;
-  } while (temp_v2 < 0x18);
-  return temp_v3 < (int)(unsigned int)*(unsigned char *)(temp_v0 + 0x910b);
+    DemonStockState *capacityState = gameGetSlotTable();
+    DemonStockState *stock = gameGetSlotTable();
+    s32 count = 0;
+    for (s32 index = 0; index < 0x18; ++index) {
+        if (stock->slots[index] < 0)
+            break;
+        ++count;
+    }
+    return count < capacityState->capacity;
 }
-
-} /* extern "C" */
+}

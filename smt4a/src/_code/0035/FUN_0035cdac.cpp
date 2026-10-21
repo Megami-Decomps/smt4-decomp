@@ -5,11 +5,11 @@
 extern "C" {
 
 int FUN_00184964(...);
-int FUN_004ff364(int, int);
+int asdAnimGetTrackLastFrame(int, int);
 int __aeabi_idivmod(int, double);
 
 /* Supplied declaration required: FUN_00184964. */
-/* Supplied declaration required: FUN_004ff364. */
+/* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -29,7 +29,7 @@ void FUN_0035cdac(int param_1,int param_2,int param_3,int param_4)
     do {
       temp_v3 = param_1 + temp_v2 * 0x20;
       if (-1 < *(char *)(temp_v3 + 6)) {
-        FUN_004ff364(param_4 + *(char *)(temp_v3 + 6) * 0x48,0);
+        asdAnimGetTrackLastFrame(param_4 + *(char *)(temp_v3 + 6) * 0x48,0);
         temp_v4 = (float)(int)in_s0;
         in_s0 = temp_v4;
         if (param_3 == 0) {

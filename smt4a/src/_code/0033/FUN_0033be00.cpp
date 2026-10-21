@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 extern int g_mapEnemy; /* 0x5806d4 */
 extern int g_lmapScene; /* 0x581288 */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 unsigned int FUN_0033be00(int param_1)
@@ -30,7 +30,7 @@ unsigned int FUN_0033be00(int param_1)
     return 0;
   }
   temp_v5 = *(float *)(g_lmapScene + 0x1c);
-  FUN_002b5cb4();
+  distSpatial();
   temp_v7 = 300.0f;
   temp_v2 = 0;
   if (*(int *)(param_1 + 0x84) == 2) {
@@ -45,7 +45,7 @@ unsigned int FUN_0033be00(int param_1)
     }
     if (temp_v4 && temp_v0 != '\0') {
       temp_v6 = *(float *)(g_lmapScene + 0x1c);
-      FUN_002b5cb4();
+      distSpatial();
       if (*(int *)(temp_v3 + 0xb8) == 2) {
         temp_v6 = temp_v6 + temp_v7;
       }

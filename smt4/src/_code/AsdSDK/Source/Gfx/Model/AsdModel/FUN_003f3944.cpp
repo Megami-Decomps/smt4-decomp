@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f3944` (_code @ 0x3f3944, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: array-constructor callback 0x0017f6c0 has no function symbol; retail also retains unreferenced pool word 0x004720a0. */
 #include "romwright_types.h"
 
 extern "C" {

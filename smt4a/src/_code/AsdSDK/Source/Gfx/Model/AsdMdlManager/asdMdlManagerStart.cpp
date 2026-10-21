@@ -5,7 +5,7 @@
 extern "C" {
 
 void *asdMemoryAllocTracked(int, int, int, s32 size, int);
-void FUN_0014aa88(u32 *list);
+void tripleClear(u32 *list);
 void *asdProcessCreateSimple(void (*entry)(void), u32 arg, s32 a, s32 b, void (*onExit)(void), void (*onStart)(void), void *userData);
 void asdMemFree(void *block);
 void LAB_0014340c(void);
@@ -27,8 +27,8 @@ void asdMdlManagerStart(u32 arg)
 
     if (state != NULL) {
         *state = 0;
-        FUN_0014aa88(&g_asdMdlList);
-        FUN_0014aa88(&g_asdMdlList2);
+        tripleClear(&g_asdMdlList);
+        tripleClear(&g_asdMdlList2);
         g_asdMdlWorker = asdProcessCreateSimple(LAB_0014340c, arg, 0, 0, LAB_00151d9c, asdMdlManagerReleaseBlock, state);
         if (g_asdMdlWorker == NULL) {
             asdMemFree(state);

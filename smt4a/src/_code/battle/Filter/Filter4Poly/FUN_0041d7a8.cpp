@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041d7a8` (_code @ 0x41d7a8, 0x15c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: vtable-backed Filter4Poly member requires class/member symbol migration; retail calls virtual slot 0x10 on this. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -8,7 +7,7 @@ int asdMemoryAlloc(int, int, int, int, int);
 int mtx44Copy(int, unsigned int);
 int asdTMTexLoadMainHeap(int, unsigned int);
 int resourceApplyNodeFlag(int, unsigned int);
-int asdTMTexNodeSetMode(int, unsigned int);
+void* asdTMTexNodeSetMode(int, int);
 int FUN_0041d910(int *);
 
 typedef int romwright_code(...);
@@ -22,7 +21,6 @@ extern unsigned int FUN_0018aeb8(void);
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: resourceApplyNodeFlag. */
-/* Supplied declaration required: asdTMTexNodeSetMode. */
 /* Supplied declaration required: FUN_0041d910. */
 
 
@@ -50,7 +48,7 @@ void FUN_0041d7a8(int *param_1,int param_2,unsigned int param_3)
     }
     else if ((param_3 & 0x40) != 0) {
       temp_v1 = 0xe;
-      asdTMTexNodeSetMode(0xe,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
+      temp_v1 = (int)asdTMTexNodeSetMode(0xe,*(unsigned int *)(param_1[7] + temp_v2 * 0x28 + 0x1c));
       *(unsigned int *)(param_1[6] + temp_v2 * 0x44 + 0x40) = temp_v1;
     }
     else if ((param_3 & 1) != 0) {

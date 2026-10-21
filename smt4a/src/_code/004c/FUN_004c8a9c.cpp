@@ -6,7 +6,7 @@ extern "C" {
 
 extern int *g_btlHelp; /* 0x5738e8 */
 
-extern int FUN_001632fc(void);
+extern int infoWinHasValue(void);
 
 
 unsigned int FUN_004c8a9c(void)
@@ -23,7 +23,7 @@ unsigned int FUN_004c8a9c(void)
     }
     temp_v1 = *(int *)(temp_v0 + 0x874);
   } while ((((*(short *)(temp_v0 + 0x872) < 0) || (*(short *)(temp_v0 + 2) != 1)) ||
-           ((*(unsigned short *)(temp_v0 + 6) & 1) != 0)) || (temp_v0 = FUN_001632fc(), temp_v0 == 0));
+           ((*(unsigned short *)(temp_v0 + 6) & 1) != 0)) || (temp_v0 = infoWinHasValue(), temp_v0 == 0));
   return 1;
 }
 

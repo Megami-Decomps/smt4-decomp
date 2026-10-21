@@ -7,7 +7,7 @@ extern "C" {
 int animPlayerSetLoopPolicy(unsigned int, int);
 int nodeSetScale(unsigned int, int);
 int FUN_002a0428(int, int);
-int FUN_002d582c(unsigned int);
+void FUN_002d582c(unsigned int, float);
 
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: nodeSetScale. */
@@ -30,7 +30,7 @@ unsigned int FUN_00339860(int param_1)
       FUN_002a0428(*(int *)(param_1 + 0x4398),1);
       nodeSetScale(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),0);
       animPlayerSetLoopPolicy(*(unsigned int *)(*(int *)(param_1 + 0x4398) + 8),1);
-      FUN_002d582c(*(unsigned int *)(param_1 + 0x4398));
+      FUN_002d582c(*(unsigned int *)(param_1 + 0x4398), 1.0f);
     }
     temp_v1 = 1;
   }

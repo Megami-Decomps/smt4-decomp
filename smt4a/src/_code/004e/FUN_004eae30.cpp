@@ -12,9 +12,9 @@ int FUN_003e7fa4(...);
 int FUN_003e8bb0(...);
 int FUN_003f0e20(...);
 int FUN_004c0f74(...);
-int FUN_004c3a98(...);
+int btlFindEntryValue(...);
 int kindIdStore(...);
-int FUN_004c3cb0(...);
+int btlCombatantGetSummaryValues(...);
 int FUN_004c8340(...);
 
 /* stack frame of param_4: 13 slot(s), 52 byte(s) */
@@ -46,9 +46,9 @@ extern unsigned int DAT_0057116c; /* 0x57116c */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004c0f74. */
-/* Supplied declaration required: FUN_004c3a98. */
+/* Supplied declaration required: btlFindEntryValue. */
 /* Supplied declaration required: kindIdStore. */
-/* Supplied declaration required: FUN_004c3cb0. */
+/* Supplied declaration required: btlCombatantGetSummaryValues. */
 /* Supplied declaration required: FUN_004c8340. */
 extern int __aeabi_idivmod(int, unsigned int);
 
@@ -116,7 +116,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
       if (temp_v0 != 0) {
         temp_v9 = 0;
         temp_v10 = 0;
-        FUN_004c3cb0((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v9,&temp_v10);
+        btlCombatantGetSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v9,&temp_v10);
         temp_v3 = (unsigned int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a);
         FUN_004c8340(temp_v3,param_3,temp_v9,temp_v10,0xffffffff);
         if ((temp_v3 & 0x20000) != 0) {
@@ -143,7 +143,7 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
       if (temp_v4 == 1 || temp_v4 == 4) {
         temp_v9 = 0;
         temp_v10 = 0;
-        FUN_004c3cb0((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v9,&temp_v10);
+        btlCombatantGetSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v9,&temp_v10);
         kindIdStore(temp_v9,temp_v11);
         temp_v3 = *(unsigned int *)(param_4 + 0x20);
         FUN_004c0f74(temp_v3,temp_v11[0] & 0xff);
@@ -152,13 +152,13 @@ void FUN_004eae30(unsigned int *param_1,int param_2,int param_3,int param_4)
     else {
       temp_v10 = 0;
       temp_v9 = 0;
-      FUN_004c3cb0((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v10,&temp_v9);
+      btlCombatantGetSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v10,&temp_v9);
       if (temp_v9 != 0) {
-        temp_v0 = FUN_004c3a98(param_3,0x15);
+        temp_v0 = btlFindEntryValue(param_3,0x15);
         temp_v8 = 0 < temp_v0;
       }
       else {
-        temp_v0 = FUN_004c3a98(param_3,0x14);
+        temp_v0 = btlFindEntryValue(param_3,0x14);
         temp_v6 = 0 < temp_v0;
       }
     }
@@ -232,7 +232,7 @@ LAB_004eafdc:
         if (temp_v4 != 0) {
           temp_v10 = 0;
           temp_v11[0] = 0;
-          FUN_004c3cb0((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v10,temp_v11);
+          btlCombatantGetSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v10,temp_v11);
           temp_v3 = (unsigned int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a);
           FUN_004c8340(temp_v3,temp_v1,temp_v10,temp_v11[0],0xffffffff);
           if ((temp_v3 & 0x20000) != 0) {
@@ -259,7 +259,7 @@ LAB_004eafdc:
         if (temp_v7 == 1 || temp_v7 == 4) {
           temp_v11[0] = 0;
           temp_v16 = 0;
-          FUN_004c3cb0((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),temp_v11,&temp_v16);
+          btlCombatantGetSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),temp_v11,&temp_v16);
           kindIdStore(temp_v11[0],temp_v17);
           temp_v1 = *(unsigned int *)(param_4 + 0x20);
           FUN_004c0f74(temp_v1,temp_v17[0] & 0xff);
@@ -268,13 +268,13 @@ LAB_004eafdc:
       else {
         temp_v16 = 0;
         temp_v11[0] = 0;
-        FUN_004c3cb0((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v16,temp_v11);
+        btlCombatantGetSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x6a),&temp_v16,temp_v11);
         if (temp_v11[0] != 0) {
-          temp_v4 = FUN_004c3a98(temp_v9,0x15);
+          temp_v4 = btlFindEntryValue(temp_v9,0x15);
           temp_v3 = (unsigned int)(0 < temp_v4);
         }
         else {
-          temp_v4 = FUN_004c3a98(temp_v9,0x14);
+          temp_v4 = btlFindEntryValue(temp_v9,0x14);
           temp_v8 = 0 < temp_v4;
         }
       }

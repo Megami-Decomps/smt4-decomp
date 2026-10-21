@@ -7,7 +7,7 @@ extern "C" {
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(...);
-int FUN_001cd404(...);
+int asdLoadFileAsyncWrap(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_4: 4 slot(s), 16 byte(s) */
@@ -26,7 +26,7 @@ extern unsigned char LAB_0038b7f0; /* 0x38b7f0 */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_001cd404. */
+/* Supplied declaration required: asdLoadFileAsyncWrap. */
 
 
 unsigned int event3dEventEffectCreate(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
@@ -64,7 +64,7 @@ unsigned int event3dEventEffectCreate(unsigned int param_1,unsigned int param_2,
   puVar1[7] = temp_v0;
   puVar1[8] = temp_v1;
   puVar1[9] = temp_v2;
-  FUN_001cd404(param_1,puVar1 + 2,1,0x80);
+  asdLoadFileAsyncWrap(param_1,puVar1 + 2,1,0x80);
   return *puVar1;
 }
 

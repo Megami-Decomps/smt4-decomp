@@ -7,8 +7,8 @@ extern "C" {
 int sysPlaySe(...);
 int dataTableValueOrZero(...);
 int FUN_00203b40(int, unsigned int, int, int, int, int);
-int FUN_002a1f60(...);
-int FUN_002e08b0(int, int);
+int asdTextDrawDirectoryEntry(...);
+int flagsSetOrClearBit(int, int);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -23,10 +23,10 @@ extern int g_statusDown; /* 0x588fe8 */
 extern unsigned int FUN_001688c4(unsigned int);
 /* Supplied declaration required: dataTableValueOrZero. */
 /* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int FUN_002c7e3c(void);
-/* Supplied declaration required: FUN_002e08b0. */
-extern int FUN_0031f6fc(void);
+/* Supplied declaration required: flagsSetOrClearBit. */
+extern int gameWorkStateGet(void);
 extern int fieldStateAllowsAction(void);
 extern int FUN_0046fca8(unsigned int, int);
 
@@ -68,20 +68,20 @@ void FUN_00333de0(int param_1)
     }
   }
   *(short *)(temp_v0 + 0x598) = (short)param_1;
-  if ((param_1 >= 0) && (temp_v1 = FUN_0031f6fc(), temp_v1 != 0)) {
+  if ((param_1 >= 0) && (temp_v1 = gameWorkStateGet(), temp_v1 != 0)) {
     temp_v1 = FUN_0046fca8(g_aocSystem,param_1);
     if (temp_v1 == 0) {
       temp_v1 = dataTableValueOrZero();
     }
-    FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x23b8),3,0xffffffff,0,3,temp_v1,param_1);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x23b8),3,0xffffffff,0,3,temp_v1,param_1);
   }
   else {
     temp_v2 = dataTableValueOrZero(0x3f);
-    FUN_002a1f60(*(unsigned int *)(temp_v0 + 0x23b8),3,0xffffffff,0,3,temp_v2,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v0 + 0x23b8),3,0xffffffff,0,3,temp_v2,0);
   }
   temp_v2 = FUN_001688c4(*(unsigned int *)(temp_v0 + 0x23b8));
   FUN_00203b40(temp_v0 + 0x23c0,temp_v2,10,1,0,1);
-  FUN_002e08b0(temp_v0 + 0x23c0,0);
+  flagsSetOrClearBit(temp_v0 + 0x23c0,0);
   *(unsigned char *)(temp_v0 + 0x528) = 1;
   return;
 }

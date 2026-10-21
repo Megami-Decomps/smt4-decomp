@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050f8d0` (_code @ 0x50f8d0, 0x48 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: constructor/static-initializer wrapper has a removed registration call at +0x2c and an unreferenced 0x00647610 pool word; its missing call symbol needs recovery. */
 #include "romwright_types.h"
 
 extern "C" {

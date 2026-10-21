@@ -10,7 +10,7 @@ int FUN_00275bc8(void *, unsigned int);
 int scrScriptProcessStartEntry(int, int);
 int linkHolderApplyFlag(int, int);
 int FUN_002e2114(void);
-int FUN_0032ed10(void);
+int progressConditionsUpdateUnlocks(void);
 int FUN_0035a204(int);
 
 typedef struct fn_002e2284_arg0 fn_002e2284_arg0;
@@ -35,7 +35,7 @@ extern int bgmGetStateById(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 /* Supplied declaration required: FUN_002e2114. */
-/* Supplied declaration required: FUN_0032ed10. */
+/* Supplied declaration required: progressConditionsUpdateUnlocks. */
 extern int textureGetIndexedResource(unsigned int);
 /* Supplied declaration required: FUN_0035a204. */
 extern int loadSlotIsLoaded(unsigned int);
@@ -62,7 +62,7 @@ unsigned int FUN_002e2284(fn_002e2284_arg0 *param_1)
       FUN_00275bc8(pvVar2,*(unsigned int *)&param_1->field_0xe8);
       param_1->field_0xf4 = (int)pvVar2;
       *(unsigned int *)((int)pvVar2 + 0x108) = 2;
-      FUN_0032ed10();
+      progressConditionsUpdateUnlocks();
       temp_v0 = gameFlagIsSet(0x4aa);
       if (temp_v0 != 0) {
         param_1->field_0x144 = 1;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int jyoucyuGetTableEntry(int);
-int FUN_00235dc4(int *, int);
+int questCenterInitialize(int *, int);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -14,7 +14,7 @@ typedef struct {
 } void_stack;
 
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-/* Supplied declaration required: FUN_00235dc4. */
+/* Supplied declaration required: questCenterInitialize. */
 extern unsigned int scrGetArg(unsigned int);
 extern int scrGetCommandFrame(void);
 extern int stateAt4IsAbove2(void);
@@ -40,7 +40,7 @@ unsigned int FUN_003b0684(void)
     temp_v4 = 1;
     temp_v3 = temp_v1;
     uStack_14 = temp_v2;
-    FUN_00235dc4(&temp_v3,0xc);
+    questCenterInitialize(&temp_v3,0xc);
   }
   temp_v0 = QuestCenter_GetActiveEntry();
   if ((temp_v0 == 0) || (temp_v0 = stateAt4IsAbove2(), temp_v0 == 0)) {

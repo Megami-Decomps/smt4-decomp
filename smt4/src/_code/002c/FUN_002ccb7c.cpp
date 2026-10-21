@@ -20,7 +20,7 @@ struct fn_002ccb7c_arg0 {
     uint field_0xd58; /* +0xd58 */
 };
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0026e630. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: eventQueueAddUnique. */
@@ -37,7 +37,7 @@ unsigned int FUN_002ccb7c(fn_002ccb7c_arg0 *param_1)
   unsigned int temp_v2;
   
   temp_v2 = 0;
-  temp_v0 = FUN_0019e0c0(param_1->field_0xd04);
+  temp_v0 = scrRunOpcodesStub(param_1->field_0xd04);
   if (temp_v0 == 2) {
     param_1->field_0xd38 = 0;
     FUN_0026e630(0x28);

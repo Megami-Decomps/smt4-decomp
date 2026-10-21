@@ -44,7 +44,7 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_002027fc. */
-extern int FUN_0022994c(void);
+extern int s4LoadIsInProgress(void);
 
 
 unsigned int FUN_0032b0d4(void)
@@ -70,7 +70,7 @@ unsigned int FUN_0032b0d4(void)
   
   temp_v2 = DAT_00589170;
   if (((*(int *)(DAT_00589170 + 0x78) != 0x16 && *(int *)(DAT_00589170 + 0x78) != 0x17) ||
-      (temp_v1 = FUN_0022994c(), temp_v1 == 0)) && (*(char *)(temp_v2 + 0x61) != '\0')) {
+      (temp_v1 = s4LoadIsInProgress(), temp_v1 == 0)) && (*(char *)(temp_v2 + 0x61) != '\0')) {
     temp_v2 = *(int *)(temp_v2 + 0x78);
     temp_v11 = 0;
     if (!((temp_v2 == 3 || temp_v2 == 4) || temp_v2 == 6)) {

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001bd12c(unsigned int *, unsigned int, int, int, unsigned int, int, int *);
+int trackCombinationInitialize(unsigned int *, unsigned int, int, int, unsigned int, int, int *);
 int FUN_001c398c(...);
 int FUN_001c3bb8(...);
 int FUN_001cd01c(unsigned int *, unsigned int);
@@ -27,8 +27,8 @@ extern unsigned char LAB_001b8bac; /* 0x1b8bac */
 extern unsigned char LAB_001bd330; /* 0x1bd330 */
 
 extern int FUN_001af0d0(unsigned int *, unsigned int);
-/* Supplied declaration required: FUN_001bd12c. */
-extern int FUN_001bd300(void);
+/* Supplied declaration required: trackCombinationInitialize. */
+extern int objectInitDefaults(void);
 /* Supplied declaration required: FUN_001c398c. */
 /* Supplied declaration required: FUN_001c3bb8. */
 extern unsigned int *FUN_001c3d20(unsigned int *, int, unsigned int);
@@ -65,7 +65,7 @@ void FUN_001b8798(int param_1,int *param_2,int *param_3,int param_4,int param_5)
       }
       *param_2 = temp_v0 + 0x104;
       if (temp_v0 != 0) {
-        temp_v1 = FUN_001bd300();
+        temp_v1 = objectInitDefaults();
         temp_v1 = temp_v1 + 0xcc;
         FUN_002f5020(temp_v1,&LAB_001bd330,8,3);
         unaff_r5 = (unsigned int *)(temp_v1 - 0xcc);
@@ -97,7 +97,7 @@ void FUN_001b8798(int param_1,int *param_2,int *param_3,int param_4,int param_5)
         temp_v0 = (*param_2 + 3U) & 0xfffffffc;
         *param_2 = (int)puVar3 + temp_v0;
       }
-      FUN_001bd12c(unaff_r5,*puVar6,(int)*(short *)(puVar6 + 8),(int)*(short *)((int)puVar6 + 0x22),
+      trackCombinationInitialize(unaff_r5,*puVar6,(int)*(short *)(puVar6 + 8),(int)*(short *)((int)puVar6 + 0x22),
                    temp_v0,param_1,piVar10);
       if (*(short *)((int)puVar6 + 0x22) != -1) {
         *(unsigned char *)(unaff_r5 + 0x28) = 3;

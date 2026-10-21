@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `campCommonBgAcquire` (_code @ 0x31a400, 0x15c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: taskCreateDraw's fade callback is raw address 0x2a37a4 with no symbol/unit; recover the callback boundary before matching. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -18,7 +17,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } void_stack;
 
-extern int FUN_00227c5c(...); /* 0x227c5c */
+extern int commonBackgroundUpdateFade(...); /* 0x227c5c */
 extern unsigned char LAB_002a35fc; /* 0x2a35fc */
 extern unsigned char LAB_002a3600; /* 0x2a3600 */
 extern unsigned char LAB_002a37a4; /* 0x2a37a4 */
@@ -58,7 +57,7 @@ void campCommonBgAcquire(void)
     puVar1[4] = 0;
     puVar1[5] = 0;
     puVar2 = &LAB_0031a5a4;
-    asdProcessCreateSimple(&LAB_0031a5a4,4,0,0,FUN_00227c5c,&LAB_002a35fc,0);
+    asdProcessCreateSimple(&LAB_0031a5a4,4,0,0,commonBackgroundUpdateFade,&LAB_002a35fc,0);
     *puVar1 = (unsigned int)puVar2;
     taskCreateDraw(&LAB_0031a5b4,0xe8,0,0,&LAB_002a3600,0,0,puVar2);
     taskCreateDraw(&LAB_0031a5c8,0x15f,0,0,&LAB_002a37a4,0,0,*puVar1);

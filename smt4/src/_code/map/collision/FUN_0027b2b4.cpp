@@ -39,7 +39,7 @@ extern int *DAT_00447018; /* 0x447018 */
 /* Supplied declaration required: FUN_001c24e4. */
 /* Supplied declaration required: FUN_001c2778. */
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_002c3124(unsigned char *, unsigned char *, unsigned int);
+extern int fileLoadSync(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemoryAlloc. */
 
@@ -89,7 +89,7 @@ void FUN_0027b2b4(int param_1,unsigned int param_2,int param_3,unsigned int para
       textFormatBuffer(temp_v6,&LAB_0027b5ec,param_3,param_3,param_4);
     }
   }
-  temp_v1 = FUN_002c3124(temp_v5,temp_v4,0);
+  temp_v1 = fileLoadSync(temp_v5,temp_v4,0);
   piVar5 = (int *)(*(int *)(temp_v1 + 0xc) + temp_v1);
   DAT_00447010 = temp_v1;
   DAT_00447014 = temp_v1;
@@ -119,7 +119,7 @@ void FUN_0027b2b4(int param_1,unsigned int param_2,int param_3,unsigned int para
   asdMemFree(DAT_00447010);
   DAT_00447010 = 0;
   if (temp_v0) {
-    temp_v1 = FUN_002c3124(temp_v6,temp_v4,0);
+    temp_v1 = fileLoadSync(temp_v6,temp_v4,0);
     piVar5 = (int *)(*(int *)(temp_v1 + 0xc) + temp_v1);
     DAT_00447010 = temp_v1;
     DAT_00447014 = temp_v1;

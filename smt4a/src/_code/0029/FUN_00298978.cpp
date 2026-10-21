@@ -11,8 +11,8 @@ int FUN_00275bc8(...);
 
 int textFormatBuffer(unsigned char [128], unsigned char *, unsigned int, unsigned int);
 int jobStop(unsigned int, int);
-int FUN_001656e0(unsigned int, int);
-int FUN_00167f94(void);
+int jobSetIntensity(unsigned int, int);
+unsigned int asdLoadFileExists(const char *);
 int FUN_001695a0(void);
 int gameFlagIsSet(void);
 int asdMemFree(void);
@@ -47,8 +47,7 @@ extern unsigned int *g_aocJob; /* 0x57f568 */
 /* Supplied declaration required: jobStop. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: FUN_001656e0. */
-/* Supplied declaration required: FUN_00167f94. */
+/* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 extern int jyoucyuGetTableEntry(unsigned int);
@@ -57,17 +56,17 @@ extern int jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0020214c. */
 /* Supplied declaration required: FUN_00212204. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
 /* Supplied declaration required: asdLoadFileSetUseRawPaths. */
-extern int FUN_00239414(void);
+extern int messageAnyWindowActive(void);
 /* Supplied declaration required: scrScriptProcessGetEntry. */
 /* Supplied declaration required: FUN_00275bc8. */
 extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: messageSlotSet. */
-extern int FUN_002a4b60(void);
+extern int messageMainGetValue(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: campButtonHelpAcquire. */
@@ -102,7 +101,6 @@ unsigned int FUN_00298978(void)
   unsigned char temp_v5 [128];
   
   puVar2 = g_aocJob;
-  puVar7 = temp_v4;
   puVar8 = temp_v4;
   if ((*(unsigned int *)(g_aocMain + 0x754) & 4) != 0 || (*(unsigned int *)(g_aocMain + 0x754) & 8) != 0) {
     return 0;
@@ -111,9 +109,9 @@ unsigned int FUN_00298978(void)
   if (temp_v1 == 3) {
     temp_v0 = 0;
     g_aocJob[3] = g_aocJob[3] + 1;
-    temp_v1 = FUN_00224880(puVar2[0xc]);
+    temp_v1 = scrRunOpcodesStub(puVar2[0xc]);
     if (temp_v1 != 2) {
-      temp_v1 = FUN_00239414();
+      temp_v1 = messageAnyWindowActive();
       if ((temp_v1 == 0) && (temp_v1 = padButtonIsPressed(2), temp_v1 != 0)) {
         if (*(char *)(puVar2 + 9) != '\0') {
           if (puVar2[7] != 0) {
@@ -132,15 +130,15 @@ unsigned int FUN_00298978(void)
       temp_v1 = 0;
       do {
         if (puVar2[temp_v1 * 2 + 0xf] != 0) {
-          FUN_001656e0(puVar2[temp_v1 * 2 + 0xf],0);
+          jobSetIntensity(puVar2[temp_v1 * 2 + 0xf],0);
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 8);
       temp_v1 = 0;
       do {
         if ((puVar2[temp_v1 * 2 + 0xf] != 0) &&
-           (temp_v2 = FUN_002a4b60(), temp_v2 == puVar2[temp_v1 * 2 + 0x10])) {
-          FUN_001656e0(puVar2[temp_v1 * 2 + 0xf],1);
+           (temp_v2 = messageMainGetValue(), temp_v2 == puVar2[temp_v1 * 2 + 0x10])) {
+          jobSetIntensity(puVar2[temp_v1 * 2 + 0xf],1);
         }
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 8);
@@ -237,8 +235,7 @@ unsigned int FUN_00298978(void)
       }
     }
     else {
-      FUN_00167f94();
-      if (puVar7 == (unsigned char *)0x0) {
+      if (asdLoadFileExists((const char *)temp_v4) == 0) {
         puVar2[2] = 1;
         puVar2[3] = 0;
         return 0;

@@ -3,6 +3,7 @@
 #define SHARD_NAVIMAIN_H
 
 #include "common.h"
+#include "shard/W6_W6Match1_NaviTransitionState.h"
 
 typedef struct NaviMain {
     /* 0x0000 */ u32 job;
@@ -17,9 +18,16 @@ typedef struct NaviMain {
     /* 0x0028 */ u32 currentMap;
     /* 0x002C */ u8 unk002C[0xC];
     /* 0x0038 */ u8 cursorPos[1];
-    /* 0x0039 */ u8 unk0039[0x7];
+    /* 0x0039 */ u8 unk0039[0x3];
+    /* 0x003C */ u32 alternateMap;
     /* 0x0040 */ u32 unk00040[1];
-    /* 0x0044 */ u8 unk0044[0x122F0];
+    union {
+        /* 0x0044 */ u8 unk0044[0x122F0];
+        struct {
+            /* 0x0044 */ u8 unk0044BeforeTransition[0x24];
+            /* 0x0068 */ NaviTransitionState transition;
+        } stateView;
+    };
     /* 0x12334 */ u8 unk12334[1];
 } NaviMain;
 

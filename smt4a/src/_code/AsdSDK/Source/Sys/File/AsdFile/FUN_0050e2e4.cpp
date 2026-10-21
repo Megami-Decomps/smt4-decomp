@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050e2e4` (_code @ 0x50e2e4, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail retains unused pool word 0x005b3fcc at +0x50 and removed destructor-registration calls as NOPs at +0x1c/+0x30. */
 #include "romwright_types.h"
 
 extern "C" {

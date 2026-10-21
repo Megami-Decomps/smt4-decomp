@@ -17,10 +17,10 @@ typedef struct {
 #define ROMWRIGHT_PIECE_2_2_DEFINED
 #define romwright_piece_2_2(upper, lower) ((unsigned int)(((unsigned int)(unsigned short)(upper) << 16) | (unsigned short)(lower)))
 #endif
-extern int FUN_0019271c(void);
+extern int aocEntryGetKind(void);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
-extern unsigned int FUN_0049c848(unsigned int, unsigned int, unsigned int, unsigned int);
+extern unsigned int resolveWeightedItemChoice(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0049cc10. */
 
 
@@ -35,9 +35,9 @@ unsigned int FUN_0038b388(void)
   
   temp_v2 = ((in_r3 >> 0x10) & 0xfc00) << 0x10;
   temp_v0 = scrGetArg(0);
-  temp_v1 = FUN_0019271c();
+  temp_v1 = aocEntryGetKind();
   if (temp_v1 == 9) {
-    temp_v0 = FUN_0049c848(temp_v0,0xffff,0xffff,0);
+    temp_v0 = resolveWeightedItemChoice(temp_v0,0xffff,0xffff,0);
   }
   temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),(short)temp_v0);
   FUN_0049cc10(&temp_v2);

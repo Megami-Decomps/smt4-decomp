@@ -46,7 +46,7 @@ extern unsigned int *DAT_004dae64; /* 0x4dae64 */
 extern unsigned int asdMemoryGetDefaultAllocator(void);
 extern unsigned int asdMemoryGetAllocatorA(void);
 extern unsigned int libc_strlen(unsigned char *);
-extern int FUN_002c3124(unsigned char *, unsigned int, unsigned int);
+extern int fileLoadSync(unsigned char *, unsigned int, unsigned int);
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
@@ -83,7 +83,7 @@ void FUN_001049ac(void)
   
   DAT_00464af1 = 1;
   FUN_0010bb84();
-  DAT_00464b5c = FUN_002c3124(&LAB_00104d58,0,1);
+  DAT_00464b5c = fileLoadSync(&LAB_00104d58,0,1);
   temp_v4 = *(int *)(DAT_00464b5c + 0x20);
   if (temp_v4 != 0) {
     temp_v4 = DAT_00464b5c + 0x20 + temp_v4;
@@ -145,7 +145,7 @@ LAB_00104aec:
   }
   DAT_00464b44 = (int *)0x0;
 LAB_00104b28:
-  temp_v5 = FUN_002c3124(&LAB_00104d80,0,1);
+  temp_v5 = fileLoadSync(&LAB_00104d80,0,1);
   temp_v0 = asdMemoryGetDefaultAllocator();
   nw_gfx_res_ResGraphicsFile_Setup(&temp_v5,temp_v0,temp_v5);
   temp_v1 = *(int *)(temp_v5 + 0x40);

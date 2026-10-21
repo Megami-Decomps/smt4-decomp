@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: moriModelContentCreateBinding. */
 /* Supplied declaration required: FUN_0040a9a0. */
 /* Supplied declaration required: FUN_0040ab9c. */
-extern int FUN_0040ac08(void);
+extern int modelListInit(void);
 /* Supplied declaration required: FUN_00416168. */
 
 
@@ -46,7 +46,7 @@ void FUN_003a3b88(int *param_1)
     FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp",0x265d);
     temp_v1 = 0;
     if (temp_v0 != 0) {
-      temp_v1 = FUN_0040ac08();
+      temp_v1 = modelListInit();
     }
     piVar3 = (int *)(temp_v2 + 0x4ef8);
     *piVar3 = temp_v1;

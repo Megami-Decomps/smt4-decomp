@@ -19,7 +19,7 @@ extern int g_mapGimic; /* 0x580ca0 */
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
-extern unsigned int FUN_0040ac08(void);
+extern unsigned int modelListInit(void);
 
 
 void FUN_003537c8(int param_1)
@@ -47,7 +47,7 @@ void FUN_003537c8(int param_1)
   FUN_00178b04(0x20,&LAB_003538a0,0x9c6);
   temp_v1 = 0;
   if (temp_v0 != 0) {
-    temp_v1 = FUN_0040ac08();
+    temp_v1 = modelListInit();
   }
   *(unsigned int *)(temp_v2 + 0x8cc) = temp_v1;
   FUN_001cd3ec();

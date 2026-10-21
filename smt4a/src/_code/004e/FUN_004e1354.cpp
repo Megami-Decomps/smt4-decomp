@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e1354` (_code @ 0x4e1354, 0x294 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
 
-int FUN_004e0114(int *, unsigned int *, int, int, int, int);
 int FUN_004e753c(int *, unsigned int *, int);
 int FUN_004e81bc(int *, unsigned int *, int);
 int FUN_004f8f08(unsigned int);
@@ -21,12 +21,11 @@ extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571260; /* 0x571260 */
 extern unsigned int DAT_00571264; /* 0x571264 */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int g_btlEvent; /* 0x573898 */
 
 extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int isEntryUsable(unsigned int);
-/* Supplied declaration required: FUN_004e0114. */
 /* Supplied declaration required: FUN_004e753c. */
 /* Supplied declaration required: FUN_004e81bc. */
 /* Supplied declaration required: FUN_004f8f08. */
@@ -48,7 +47,7 @@ unsigned int FUN_004e1354(int *param_1,unsigned int *param_2)
     temp_v0 = chainCountIdUnflagged(g_btlActionReflect,param_2);
     if (temp_v0 == 0) {
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
-      FUN_004f8f08(DAT_00573808);
+      FUN_004f8f08(g_btlAux);
       return 1;
     }
     return 0;
@@ -87,7 +86,7 @@ unsigned int FUN_004e1354(int *param_1,unsigned int *param_2)
     temp_v0 = chainCountIdUnflagged(g_btlActionReflect,param_2);
     if ((temp_v0 < 1) && (piVar2 != (int *)0x0)) {
       param_2[0x48c] = 0x1e;
-      FUN_004e0114(param_1,param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x11,0x11);
+    btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x11,0x11);
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 0x1d;
       *param_2 = *param_2 & 0xffffdfff;
       return 1;

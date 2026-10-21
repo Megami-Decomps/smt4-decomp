@@ -5,10 +5,10 @@
 extern "C" {
 
 int devilGetRecord(void);
-int FUN_0031ed94(unsigned int, int);
+int dataTable05FindByPriorityAndKey(unsigned int, int);
 
 /* Supplied declaration required: devilGetRecord. */
-/* Supplied declaration required: FUN_0031ed94. */
+/* Supplied declaration required: dataTable05FindByPriorityAndKey. */
 extern unsigned int FUN_003c8c2c(void);
 extern unsigned int FUN_003c8ffc(unsigned int, unsigned int, unsigned int, unsigned int *);
 extern unsigned int FUN_003c911c(unsigned int, unsigned int, unsigned int, unsigned int *);
@@ -39,7 +39,7 @@ unsigned int FUN_003c9b94(unsigned int param_1,unsigned int param_2,unsigned int
     temp_v2 = param_3;
     devilGetRecord();
     temp_v1 = (unsigned int)*(unsigned char *)(temp_v1 + 2);
-    FUN_0031ed94(temp_v1,*(unsigned char *)(temp_v2 + 2));
+    dataTable05FindByPriorityAndKey(temp_v1,*(unsigned char *)(temp_v2 + 2));
     temp_v3 = 0;
     if (param_2 != param_3 && temp_v1 != 0) {
       temp_v2 = param_4[1];

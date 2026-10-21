@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00184c40(int, int, int);
+int pairSetHalves(int, int, int);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */
 typedef struct {
@@ -16,7 +16,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001834a4(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00184c40. */
+/* Supplied declaration required: pairSetHalves. */
 
 
 void FUN_00162ec0(int param_1)
@@ -72,9 +72,9 @@ void FUN_00162ec0(int param_1)
       temp_v2 = FUN_001834a4(8,temp_v3[*(int *)(param_1 + 0x18)]);
     }
   }
-  FUN_00184c40(param_1 + 0x358,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10));
-  FUN_00184c40(param_1 + 0x18ac,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10));
-  FUN_00184c40(param_1 + 0x470,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10));
+  pairSetHalves(param_1 + 0x358,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10));
+  pairSetHalves(param_1 + 0x18ac,(int)*(short *)(temp_v1 + 8),(int)*(short *)(temp_v1 + 10));
+  pairSetHalves(param_1 + 0x470,(int)*(short *)(temp_v2 + 8),(int)*(short *)(temp_v2 + 10));
   return;
 }
 

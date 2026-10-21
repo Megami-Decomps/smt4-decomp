@@ -6,7 +6,7 @@ extern "C" {
 
 int textFormatBuffer(...);
 int asdMemFree(...);
-int FUN_002804b0(...);
+int asdLoadFileAsyncSimple(...);
 int libc_strcpy(...);
 int sysMemClear(...);
 
@@ -23,7 +23,7 @@ typedef struct {
 extern int FUN_00100d60(unsigned char *, unsigned int);
 extern unsigned int btlGetMainState(void);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_002804b0. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
 extern int findRecordByKey(int);
@@ -70,7 +70,7 @@ unsigned int FUN_004f913c(int param_1)
     libc_strcpy(temp_v0 + 0x33ec,temp_v1 + 1);
     temp_v1 = findRecordByKey(temp_v0 + 0x33ec);
     if (temp_v1 == 0xff) {
-      FUN_002804b0(temp_v3,temp_v0 + 0x33e8,1);
+      asdLoadFileAsyncSimple(temp_v3,temp_v0 + 0x33e8,1);
       *(unsigned char *)(temp_v0 + 0x346c) = *(unsigned char *)(temp_v0 + 0x346c) | 1;
     }
     temp_v2 = temp_v2 + 1;

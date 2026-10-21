@@ -16,7 +16,7 @@ typedef struct {
 extern int FUN_001ba3d4(unsigned int);
 extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: FUN_004a8750. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 extern unsigned int FUN_004d05b4(void);
 extern int FUN_004d0bf0(unsigned int);
 extern int FUN_004d0cd4(void);
@@ -34,7 +34,7 @@ unsigned int FUN_004a34a0(int param_1,unsigned int param_2)
   
   temp_v1 = param_2;
   FUN_004a8750(param_2,*(unsigned char *)(param_1 + 0x861),0,'c' < *(char *)(param_1 + 0x94),0);
-  temp_v2 = FUN_004cfe4c(param_1 + 0x20);
+  temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
   if (*(char *)(param_1 + 0x861) == '\0') {
     FUN_00184310(*(unsigned short *)(param_1 + temp_v2 * 0x20 + 0x868));
   }

@@ -9,7 +9,7 @@ int memClear(...);
 int asdMemAlloc(...);
 int taskCreateDraw(...);
 int asdProcessCreateSimple(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int drawParameterBlockClear(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -38,7 +38,7 @@ extern int g_btlTalkBustUp; /* 0x434210 */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: drawParameterBlockClear. */
 
 
 void btlTalkBustUpCreate(void)
@@ -65,7 +65,7 @@ void btlTalkBustUpCreate(void)
     *(unsigned char **)(temp_v0 + 0x2e4) = puVar2;
     taskCreateDraw(&LAB_002958c4,0x7d,0,0,FUN_0022535c,0,0,puVar2);
     taskCreateDraw(&LAB_002958d8,0xdb,0,0,FUN_0022535c,0,0,*(unsigned int *)(temp_v0 + 0x2e4));
-    Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(temp_v0);
+    drawParameterBlockClear(temp_v0);
     paramsInit(temp_v0,&DAT_003ff838,0x60,&DAT_003ff898,0x144,&DAT_003ff9dc,0x90,0,0,&DAT_003ffa6c,
                  0x9bc);
   }

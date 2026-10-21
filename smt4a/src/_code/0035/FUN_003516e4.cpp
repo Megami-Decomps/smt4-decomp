@@ -8,7 +8,7 @@ int FUN_0018a924(...);
 int mtx44Copy(...);
 int FUN_0019a0fc(...);
 int FUN_001d3e14(...);
-int FUN_001d3e54(...);
+int mtx44TransformPosition(...);
 int refCountIncrement(...);
 int FUN_00290c28(...);
 int entryListSetPhase(...);
@@ -138,7 +138,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_001d3e14. */
-/* Supplied declaration required: FUN_001d3e54. */
+/* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: refCountIncrement. */
 /* Supplied declaration required: FUN_00290c28. */
 /* Supplied declaration required: entryListSetPhase. */
@@ -460,7 +460,7 @@ void FUN_003516e4(int param_1)
   pfVar7 = &temp_v57;
   temp_v3 = 0;
   do {
-    FUN_001d3e54(pfVar6,temp_v28,pfVar7);
+    mtx44TransformPosition(pfVar6,temp_v28,pfVar7);
     temp_v3 = temp_v3 + 1;
     pfVar6 = pfVar6 + 4;
     pfVar7 = pfVar7 + 3;

@@ -3,7 +3,7 @@
 extern "C" {
 
 s32 vectorCount4_0030c774(void *vector);
-void FUN_002e32a4(s32 code, const char *file, const char *expression, u32 index, u32 count);
+void FUN_002e32a4(int kind, ...);
 
 /* Address of the 4-byte element `index` of a vector (reports an out-of-range index). */
 u8 *vectorAt4(u8 **vector, u32 index)

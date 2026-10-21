@@ -11,7 +11,7 @@ extern TitleFlags g_titleFlags;
 extern u32 g_titleScene;
 
 s32 asdProcessSetCommandListRecording(s32 arg);
-s32 FUN_0010f488(u32 scene);
+s32 objResetCounters(u32 scene);
 s32 FUN_002c5210(void);
 
 /* Runs the title scene update, first starting asdProcessSetCommandListRecording when the flags and FUN_002c5210 allow it; always returns 0. */
@@ -20,7 +20,7 @@ u32 FUN_00103d8c(void)
     if (g_titleFlags.first == 0 && FUN_002c5210() == 1 && g_titleFlags.second != 0) {
         asdProcessSetCommandListRecording(1);
     }
-    FUN_0010f488(g_titleScene);
+    objResetCounters(g_titleScene);
     return 0;
 }
 

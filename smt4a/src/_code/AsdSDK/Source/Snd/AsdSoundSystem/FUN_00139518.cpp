@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00141b24(void);
-int FUN_00146dc8(void);
+int dspUnloadIdleComponent(void);
 int FUN_00146e30(void);
 int FUN_00147120(void);
 int sndSystemFinalize(void);
@@ -36,7 +36,7 @@ extern signed char DAT_0063f4fd; /* 0x63f4fd */
 
 /* Unsupported intrinsic, declaration required: coproc_moveto_Data_Memory_Barrier (CALLOTHER). */
 /* Supplied declaration required: FUN_00141b24. */
-/* Supplied declaration required: FUN_00146dc8. */
+/* Supplied declaration required: dspUnloadIdleComponent. */
 /* Supplied declaration required: FUN_00146e30. */
 /* Supplied declaration required: FUN_00147120. */
 /* Supplied declaration required: sndSystemFinalize. */
@@ -106,7 +106,7 @@ void FUN_00139518(void)
   }
   sndSystemFinalize();
   FUN_00147120();
-  FUN_00146dc8();
+  dspUnloadIdleComponent();
   FUN_00146e30();
   return;
 }

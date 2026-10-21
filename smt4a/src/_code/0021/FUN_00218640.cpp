@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00218640` (_code @ 0x218640, 0x13b8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int FUN_00164168(...);
 int FUN_00164b5c(...);
 int vec2GetXInt(...);
 int efctSetSpeed(void);
-int FUN_001689e8(...);
 int FUN_00180310(...);
 int FUN_001834a4(...);
 int FUN_001835b4(...);
@@ -24,7 +24,7 @@ int FUN_001879d0(...);
 int gameFlagBlockGet(void);
 int FUN_001ad9b4(void);
 int FUN_002c0940(...);
-int FUN_0037ce80(...);
+int partyDrawCategorySelectionIcon(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -68,7 +68,6 @@ extern unsigned int FUN_00156868(unsigned int);
 /* Supplied declaration required: vec2GetXInt. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_001689e8. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned int);
 /* Supplied declaration required: FUN_00180310. */
@@ -87,7 +86,7 @@ extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002c0940. */
 /* Supplied declaration required: FUN_002ebda8. */
 /* Supplied declaration required: FUN_002f7730. */
-/* Supplied declaration required: FUN_0037ce80. */
+/* Supplied declaration required: partyDrawCategorySelectionIcon. */
 extern int FUN_003de75c(unsigned int);
 extern int recordIsAvailable(unsigned int);
 extern unsigned int aocGetEntryData(unsigned short);
@@ -206,7 +205,7 @@ void FUN_00218640(void)
     }
     temp_v13 = FUN_001834a4(0x1e,0x11);
     temp_v12 = temp_v4 + (int)temp_v18;
-    FUN_0037ce80(temp_v25,*(short *)(temp_v13 + 8) + temp_v12,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
+    partyDrawCategorySelectionIcon(temp_v25,*(short *)(temp_v13 + 8) + temp_v12,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
     temp_v13 = FUN_001834a4(0x1e,0x12);
     temp_v8 = FUN_00156850(temp_v25,0);
     textFormatBuffer(temp_v27,&LAB_00218a40,temp_v8);
@@ -266,7 +265,7 @@ void FUN_00218640(void)
     }
     else if (*(short *)(temp_v19 + 0xf2) != 0) {
       temp_v13 = FUN_001834a4(0x1e,0x1b);
-      FUN_001689e8((int)*(short *)(temp_v19 + 0xf2),*(short *)(temp_v13 + 8) + temp_v12,
+      uiDrawItemCategoryIcon((int)*(short *)(temp_v19 + 0xf2),*(short *)(temp_v13 + 8) + temp_v12,
                    *(short *)(temp_v13 + 10) + temp_v5,0x6a,0);
       temp_v13 = FUN_001834a4(0x1e,0x1c);
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v19 + 0xf2);

@@ -1,34 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e9888` (_code @ 0x3e9888, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the state pointer to R3 before the two address additions; compiled code updates R0 directly, omitting that MOV. Remaining loop instructions match. */
+#include "battle/btlMain.h"
 
-extern "C" {
+struct ActionKindSlot {
+    u8 unk00[0x44]; // 0x00
+    s8 kind;         // 0x44
+    u8 unk45[0x0b]; // 0x45
+    u32 flags;       // 0x50
+    u8 unk54[0x17c]; // 0x54
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-
-int FUN_003e9888(int param_1,int param_2)
-
+// Counts active flagged action slots of the requested kind, excluding the four reserved slots.
+extern "C" s32 FUN_003e9888(BtlMainStateA* state, s32 kind)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = 0;
-  temp_v1 = 4;
-  do {
-    temp_v2 = *(int *)(param_1 + 0x1ed4) + temp_v1 * 0x1d0;
-    temp_v3 = *(unsigned int *)(temp_v2 + 0x50);
-    if (((temp_v3 & 1) != 0 && (temp_v3 & 0x80) != 0) && (*(char *)(temp_v2 + 0x44) == param_2)) {
-      temp_v0 = temp_v0 + 1;
+    ActionKindSlot* slots = reinterpret_cast<ActionKindSlot*>(state->unk1ED4);
+    s32 count = 0;
+    for (s32 index = 4; index < 54; ++index) {
+        ActionKindSlot* slot = &slots[index];
+        if ((slot->flags & 1) && (slot->flags & 0x80) && slot->kind == kind) {
+            ++count;
+        }
     }
-    temp_v1 = temp_v1 + 1;
-  } while (temp_v1 < 0x36);
-  return temp_v0;
+    return count;
 }
-
-} /* extern "C" */

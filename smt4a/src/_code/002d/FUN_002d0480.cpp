@@ -7,8 +7,8 @@ extern "C" {
 int CONCAT44(unsigned int, double);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_00272e64(void);
-int FUN_002b5cb4(void);
+int calcHeadingRoundedToCardinalDirection(void);
+int distSpatial(void);
 int FUN_002b5cd4(void);
 int FUN_00330108(float *, float *, unsigned char [56]);
 int mathPositionHeadingDegrees(void);
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern float DAT_005f0c94; /* 0x5f0c94 */
 extern float DAT_005f0c98; /* 0x5f0c98 */
 extern float DAT_005f0c9c; /* 0x5f0c9c */
@@ -35,8 +35,8 @@ extern float DAT_005f1720; /* 0x5f1720 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-/* Supplied declaration required: FUN_00272e64. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: calcHeadingRoundedToCardinalDirection. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_00330108. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -70,7 +70,7 @@ void FUN_002d0480(int param_1)
   temp_v5 = 0.0f;
   temp_v6 = 400.0f;
   if (param_1 != 0) {
-    temp_v0 = *(float *)(DAT_005806a4 + 0x218) != 0.0f;
+    temp_v0 = *(float *)(g_lmapView + 0x218) != 0.0f;
     DAT_005f170c = DAT_005f0c94;
     temp_v2 = temp_v5;
     if (temp_v0) {
@@ -101,7 +101,7 @@ void FUN_002d0480(int param_1)
     FUN_00330108(pfVar2,&temp_v13,temp_v14);
     if (pfVar2 != (float *)0xffffffff) {
       temp_v2 = temp_v13;
-      FUN_002b5cb4();
+      distSpatial();
       temp_v7 = 90.0f;
       mathPositionHeadingDegrees();
       temp_v3 = temp_v4;
@@ -113,7 +113,7 @@ void FUN_002d0480(int param_1)
       do {
         temp_v9 = (unsigned int)((unsigned long long)temp_v15 >> 0x20);
         temp_v4 = DAT_005f0ca0 + temp_v5;
-        FUN_00272e64();
+        calcHeadingRoundedToCardinalDirection();
         temp_v8 = temp_v4 * (float)temp_v10;
         temp_v15 = CONCAT44(temp_v9,temp_v8);
         FUN_001bc124();
@@ -134,11 +134,11 @@ void FUN_002d0480(int param_1)
           return;
         }
         temp_v8 = temp_v13;
-        FUN_002b5cb4();
+        distSpatial();
         if (temp_v8 < temp_v2) {
           temp_v2 = temp_v13;
           temp_v3 = temp_v4;
-          FUN_002b5cb4();
+          distSpatial();
         }
         temp_v4 = (float)((unsigned long long)temp_v15 >> 0x20);
         temp_v5 = temp_v5 + temp_v7;

@@ -14,7 +14,7 @@ extern unsigned int DAT_00435e20; /* 0x435e20 */
 
 extern unsigned int *asdListBoxGetItemText(unsigned int, unsigned int);
 extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
-extern unsigned int FUN_0025628c(unsigned int);
+extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 
 
 void FUN_003c49bc(int param_1)
@@ -25,7 +25,7 @@ void FUN_003c49bc(int param_1)
   unsigned int *puVar3;
   unsigned char *puVar4;
   
-  temp_v1 = FUN_0025628c(*(unsigned int *)(param_1 + 0x10));
+  temp_v1 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
   switch(temp_v1) {
   case 0:
     puVar3 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),0);

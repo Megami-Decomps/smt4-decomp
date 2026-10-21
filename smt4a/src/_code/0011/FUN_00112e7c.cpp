@@ -36,7 +36,7 @@ typedef struct {
 extern unsigned char LAB_00113108; /* 0x113108 */
 
 extern unsigned int FUN_001127d8(unsigned char *);
-extern unsigned int FUN_001322ae(int *);
+extern unsigned int iteratorAdvance(int *);
 /* Supplied declaration required: FUN_002e9acc. */
 extern int onlineInstanceTableGetCurrent(void);
 /* Supplied declaration required: onlineInstanceTableFind. */
@@ -129,7 +129,7 @@ void FUN_00112e7c(int param_1)
   temp_v8 = (unsigned int *)(param_1 + 0x180);
   if (temp_v4 != 0) {
     temp_v14 = *(unsigned int *)(param_1 + 0x130);
-    temp_v3 = FUN_001322ae(temp_v11);
+    temp_v3 = iteratorAdvance(temp_v11);
     temp_v4 = wordRefsDiffer_002fd750(temp_v3,&temp_v14);
     if ((temp_v4 != 0) && (*(char *)(temp_v8 + 6) == '\x03')) {
       temp_v3 = FUN_002ea704();

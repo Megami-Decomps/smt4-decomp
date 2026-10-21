@@ -14,9 +14,9 @@ typedef struct Registry {
 extern Registry *g_camp;
 
 int ifTouchRegionRemove(void);
-int FUN_002a49b4(void);
+int ifTouchResetRecord(void);
 
-/* If the registry is loaded, releases every used slot id (setting it to -1), clears its flags and runs FUN_002a49b4. */
+/* If the registry is loaded, releases every used slot id (setting it to -1), clears its flags and runs ifTouchResetRecord. */
 void FUN_002309dc(void)
 {
     Registry *registry = g_camp;
@@ -35,7 +35,7 @@ void FUN_002309dc(void)
     } while (i < SLOT_COUNT);
     registry->loaded = 0;
     registry->ready = 0;
-    FUN_002a49b4();
+    ifTouchResetRecord();
 }
 
 } /* extern "C" */

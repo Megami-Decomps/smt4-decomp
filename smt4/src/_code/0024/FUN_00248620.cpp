@@ -1,31 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00248620` (_code @ 0x248620, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail prefix loads g_aocSystem then forces its query result to zero; missing optimized/stubbed AOC query cannot be expressed as honest dead code. */
+#include "gamedata/DataTable.h"
 
 extern "C" {
-
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
-
-int FUN_00248620(unsigned int param_1)
-
+// Look up one four-byte record in table five's ninth section.
+u32 *FUN_00248620(u32 index)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = dataTableGet(5,9);
-  temp_v1 = dataTableGetEntries();
-  temp_v2 = dataTableGetCount(temp_v0);
-  if (param_1 >= temp_v2) {
-    temp_v1 = 0;
-  }
-  else {
-    temp_v1 = temp_v1 + param_1 * 4;
-  }
-  return temp_v1;
+    void *section = dataTableGet(5, 9);
+    u32 *entries = (u32 *)dataTableGetEntries(section);
+    u32 count = dataTableGetCount(section);
+    if (index >= count) {
+        return NULL;
+    }
+    return entries + index;
 }
-
-} /* extern "C" */
+}

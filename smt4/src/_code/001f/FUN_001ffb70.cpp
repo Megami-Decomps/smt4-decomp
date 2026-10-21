@@ -1,25 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ffb70` (_code @ 0x1ffb70, 0x5c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: compiler uses IP for the seek call and compares masked results with INT_MIN; retail calls through R1 and uses signed mask-versus-zero branches, with different argument scheduling. */
+#include "nn/Result.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
-extern "C" {
-
-typedef int romwright_code(...);
-
-unsigned int FUN_001ffb70(int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Seeks to a zero-extended offset, performs a transfer, and normalizes successful results.
+extern "C" u32 FUN_001ffb70(PositionedStream* stream, u32 offset, void* buffer, u32 size)
 {
-  unsigned int temp_v0;
-  int uStack_18;
-  
-  uStack_18 = param_4;
-  temp_v0 = (**(romwright_code **)(*param_1 + 0x18))(param_1,*(romwright_code **)(*param_1 + 0x18),param_2,0);
-  if ((-1 < (int)temp_v0) &&
-     (temp_v0 = (**(romwright_code **)(*param_1 + 0x28))(param_1,&uStack_18,param_3,param_4),
-     (temp_v0 & 0x80000000) == 0)) {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    u32 result = stream->vtable->seek(stream, static_cast<u64>(offset));
+    if (nnResultIsSuccess(result)) {
+        u32 completed;
+        result = stream->vtable->transfer(stream, &completed, buffer, size);
+        if (nnResultIsSuccess(result)) {
+            result = 0;
+        }
+    }
+    return result;
 }
-
-} /* extern "C" */

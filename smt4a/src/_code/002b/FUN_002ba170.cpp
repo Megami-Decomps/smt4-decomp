@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 
 extern int g_lmapScene; /* 0x581288 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
@@ -21,7 +21,7 @@ typedef char romwright_storage_s__a_a_00587f08_9_1_s1_width_check[(sizeof(((unio
 #endif
 extern union romwright_storage_s__a_a_00587f08_9_1 s__a_a_00587f08; /* 0x587f08 */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 
 
 void FUN_002ba170(void)
@@ -52,7 +52,7 @@ void FUN_002ba170(void)
       }
       if (temp_v8 && temp_v0 != '\0') {
         temp_v10 = *(unsigned int *)(g_lmapScene + 0x1c);
-        FUN_002b5cb4();
+        distSpatial();
         *(unsigned int *)(temp_v4 + 0xe8) = temp_v10;
         *(unsigned int *)(temp_v4 + 0xec) = 999;
       }

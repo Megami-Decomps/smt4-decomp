@@ -2,7 +2,7 @@
 #include "common.h"
 struct Vector3 {f32 x,y,z;};
 extern "C" {
-void FUN_0015a21c();extern Vector3 DAT_005f15d8;
+void floatPairClear();extern Vector3 DAT_005f15d8;
 /* Initializes the module's default vector after its base initializer. */
-void FUN_0050f640(){FUN_0015a21c();DAT_005f15d8.x=310.0f;DAT_005f15d8.y=45.0f;DAT_005f15d8.z=0.0f;}
+void FUN_0050f640(){floatPairClear();DAT_005f15d8.x=310.0f;DAT_005f15d8.y=45.0f;DAT_005f15d8.z=0.0f;}
 }

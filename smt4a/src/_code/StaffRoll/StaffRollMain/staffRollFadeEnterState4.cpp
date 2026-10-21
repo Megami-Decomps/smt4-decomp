@@ -5,14 +5,14 @@
 
 extern "C" {
 
-int FUN_001f4908(int layer, int frames, int alpha);
+int slotSetRequest(int layer, int frames, int alpha);
 
 extern StaffRollWork *g_staffRoll;
 
 void staffRollFadeEnterState4(int layer, int frames, int alpha)
 {
-    FUN_001f4908(layer, frames, alpha);
-    FUN_001f4908(1, 0x3c, 0xff);
+    slotSetRequest(layer, frames, alpha);
+    slotSetRequest(1, 0x3c, 0xff);
     g_staffRoll->state = 4;
 }
 

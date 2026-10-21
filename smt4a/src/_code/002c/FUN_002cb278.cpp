@@ -9,7 +9,7 @@ int FUN_001643b4(int, int);
 extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: FUN_001643b4. */
-extern int FUN_002c2c68(unsigned int);
+extern int objectApplyIfUnblocked(unsigned int);
 extern int uiSearchPrimary(unsigned int);
 
 
@@ -23,7 +23,7 @@ void FUN_002cb278(unsigned int param_1,int param_2)
   int temp_v3;
   
   temp_v0 = g_camp;
-  temp_v2 = FUN_002c2c68(param_1);
+  temp_v2 = objectApplyIfUnblocked(param_1);
   temp_v3 = uiSearchPrimary(param_1);
   if (temp_v3 < temp_v2) {
     if (param_2 == 0) {
@@ -38,7 +38,7 @@ LAB_002cb390:
       temp_v2 = uiSearchPrimary(param_1);
       if (0 < temp_v2) {
         do {
-          temp_v2 = FUN_002c2c68(param_1);
+          temp_v2 = objectApplyIfUnblocked(param_1);
           if (temp_v2 <= temp_v3) break;
           temp_v1 = FUN_001643b4(0x14,temp_v3 + 0x40f);
           temp_v2 = temp_v3 * 2;
@@ -65,7 +65,7 @@ LAB_002cb390:
   temp_v2 = uiSearchPrimary(param_1);
   if (0 < temp_v2) {
     do {
-      temp_v2 = FUN_002c2c68(param_1);
+      temp_v2 = objectApplyIfUnblocked(param_1);
       if (temp_v2 <= temp_v3) {
         return;
       }

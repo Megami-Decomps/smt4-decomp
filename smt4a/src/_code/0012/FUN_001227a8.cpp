@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0010d29c(int);
-int FUN_002e6e26(void);
+int onlineContextGetInstance(void);
 int _ZN9Obj55b28cD1Ev(unsigned char **);
 int sharedRefRelease(void);
 int FUN_002e78d0(unsigned int, unsigned int, int);
@@ -26,7 +26,7 @@ extern unsigned char DAT_0055b294; /* 0x55b294 */
 #endif
 extern int FUN_00105c54(int, unsigned int, int);
 /* Supplied declaration required: FUN_0010d29c. */
-/* Supplied declaration required: FUN_002e6e26. */
+/* Supplied declaration required: onlineContextGetInstance. */
 /* Supplied declaration required: _ZN9Obj55b28cD1Ev. */
 /* Supplied declaration required: sharedRefRelease. */
 extern int operatorNew(unsigned int);
@@ -51,7 +51,7 @@ void FUN_001227a8(int param_1,unsigned char *param_2,unsigned int param_3,unsign
   temp_v3 = param_2;
   temp_v4 = param_3;
   temp_v5 = param_4;
-  temp_v0 = FUN_002e6e26();
+  temp_v0 = onlineContextGetInstance();
   temp_v3 = &DAT_0055b294;
   temp_v4 = romwright_piece_3_1((((unsigned int)(temp_v4) >> 8) & 0xffffffU),1);
   temp_v5 = temp_v0 + 0x58;
@@ -72,7 +72,7 @@ void FUN_001227a8(int param_1,unsigned char *param_2,unsigned int param_3,unsign
     }
     *(int *)(param_1 + 0x120) = temp_v0;
     FUN_002f4f20(temp_v0 + 4,1);
-    temp_v2 = FUN_002e6e26();
+    temp_v2 = onlineContextGetInstance();
     FUN_002e78d0(temp_v2,*(unsigned int *)(param_1 + 0x120),0);
   }
   _ZN9Obj55b28cD1Ev(&temp_v3);

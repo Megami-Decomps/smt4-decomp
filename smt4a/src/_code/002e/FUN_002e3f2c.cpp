@@ -3,14 +3,14 @@
 extern "C" {
 struct Header { s32 references; u32 reserved, size; };
 struct String { u8 *data; };
-void FUN_002e40f8(Header *header);
+void refCounterAddUnlessEmpty(Header *header);
 Header *FUN_002e410c(u32 size, u32 capacity);
 void FUN_002e40ec(u8 *output, const u8 *source, u32 size);
 String *FUN_002e3f2c(String *output, const String *source) {
     Header *header = (Header *)source->data - 1;
     if (header->references != -1) {
         output->data = source->data;
-        FUN_002e40f8(header);
+        refCounterAddUnlessEmpty(header);
     } else {
         Header *copy = FUN_002e410c(header->size, header->size);
         output->data = (u8 *)(copy + 1);

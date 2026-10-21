@@ -5,7 +5,7 @@
 extern "C" {
 
 int cameraRegistryRemove(void *camera);
-int FUN_001ad6d8(void);
+int asdCameraInitAreas(void);
 int asdMemFree(void *ptr);               /* heap free */
 int lmapSceneGetScript(void);
 int FUN_00303710(void);
@@ -18,7 +18,7 @@ void statusCameraDestroy(void)
     void *camera = g_statusCamera;
 
     cameraRegistryRemove(camera);
-    FUN_001ad6d8();
+    asdCameraInitAreas();
     asdMemFree(camera);
     g_statusCamera = NULL;
     if (lmapSceneGetScript() != 0) {

@@ -28,7 +28,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 extern int FUN_0040ab8c(unsigned int);
-extern unsigned int FUN_0040ac08(void);
+extern unsigned int modelListInit(void);
 
 
 unsigned int FUN_00339270(void)
@@ -65,7 +65,7 @@ unsigned int FUN_00339270(void)
       FUN_00178b04(0x20,&LAB_00339680,0x4c7);
       temp_v2 = 0;
       if (temp_v1 != 0) {
-        temp_v2 = FUN_0040ac08();
+        temp_v2 = modelListInit();
       }
       temp_v1 = g_mapDepartWork;
       *(unsigned int *)(g_mapDepartWork + 0x10) = temp_v2;
@@ -99,7 +99,7 @@ unsigned int FUN_00339270(void)
   FUN_00178b04(0x20,&LAB_00339680,0x4fe);
   temp_v2 = 0;
   if (temp_v1 != 0) {
-    temp_v2 = FUN_0040ac08();
+    temp_v2 = modelListInit();
   }
   temp_v1 = g_mapDepartWork;
   *(unsigned int *)(g_mapDepartWork + 0xc) = temp_v2;
@@ -142,7 +142,7 @@ unsigned int FUN_00339270(void)
   FUN_00178b04(0x20,&LAB_00339680,0x528);
   temp_v2 = 0;
   if (temp_v1 != 0) {
-    temp_v2 = FUN_0040ac08();
+    temp_v2 = modelListInit();
   }
   temp_v1 = g_mapDepartWork;
   *(unsigned int *)(g_mapDepartWork + 0x14) = temp_v2;

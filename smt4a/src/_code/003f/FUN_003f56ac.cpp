@@ -25,7 +25,7 @@ typedef struct {
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int FUN_002a4860(int);
 /* Supplied declaration required: FUN_002a48e0. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 extern int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_003f5268. */
 /* Supplied declaration required: FUN_003f6f68. */
@@ -51,12 +51,12 @@ void FUN_003f56ac(int param_1)
   }
   temp_v0 = 10;
   FUN_001517b4(10,0);
-  if ((temp_v0 != 0) && (temp_v0 = FUN_002c2c68(param_1 + 0xbc), temp_v0 >= 7)) {
+  if ((temp_v0 != 0) && (temp_v0 = objectApplyIfUnblocked(param_1 + 0xbc), temp_v0 >= 7)) {
     temp_v0 = FUN_002a4860(param_1 + 0xbc);
-    temp_v1 = FUN_002c2c68(param_1 + 0xbc);
+    temp_v1 = objectApplyIfUnblocked(param_1 + 0xbc);
     if ((temp_v0 != temp_v1 - 7) &&
        ((temp_v0 = flaggedEntryGetValueA(param_1 + 0xbc), temp_v0 != 0 ||
-        (temp_v0 = FUN_002c2c68(param_1 + 0xbc), temp_v0 >= 7)))) {
+        (temp_v0 = objectApplyIfUnblocked(param_1 + 0xbc), temp_v0 >= 7)))) {
       eventQueueAddUniqueIfValid(0x100020d);
       *(int *)(param_1 + 0x50) = *(int *)(param_1 + 0x50) + 1;
       FUN_002a48e0(param_1 + 0xbc);

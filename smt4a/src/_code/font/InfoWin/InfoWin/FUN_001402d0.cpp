@@ -7,14 +7,14 @@ extern "C" {
 int FUN_0014e188(...);
 int asdProcessCreateSimple(...);
 int paramsInit(...);
-int FUN_00151408(...);
+int positionStateSet(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
 int asdMemoryAllocTracked(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int sysMemClear(...);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(...);
+int paramsClearPacket(...);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
 typedef struct {
@@ -40,14 +40,14 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: FUN_00151408. */
+/* Supplied declaration required: positionStateSet. */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void FUN_001402d0(void)
@@ -71,7 +71,7 @@ void FUN_001402d0(void)
   taskCreateDraw(&LAB_00140524,0x86,0,0,FUN_00155ca8,0,0,puVar2);
   taskCreateDraw(&LAB_00140538,0xe2,0,0,FUN_00155ca8,0,0,*puVar1);
   puVar1 = g_infoWin;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(g_infoWin + 0xd);
+  paramsClearPacket(g_infoWin + 0xd);
   paramsInit(puVar1 + 0xd,&DAT_0052facc,0x48,&DAT_0052fb14,0x18,0,0,0,0,0,0);
   FUN_0014e188(puVar1 + 0x15,8,0x87,puVar1 + 0xd,1);
   uiSpriteSetKeyframe(puVar1 + 0x15,0);
@@ -83,7 +83,7 @@ void FUN_001402d0(void)
   temp_v0 = spriteHandleCreate(0);
   puVar1[0xca] = temp_v0;
   FUN_001527d8(temp_v0,0xffffffff);
-  FUN_00151408(puVar1[0xca],0,0x646464ff);
+  positionStateSet(puVar1[0xca],0,0x646464ff);
   puVar1[4] = 0x1e;
   puVar1[8] = 0;
   puVar1[9] = 0;

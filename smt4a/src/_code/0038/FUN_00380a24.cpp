@@ -14,7 +14,7 @@ extern unsigned int DAT_00571108; /* 0x571108 */
 extern unsigned int DAT_0057110c; /* 0x57110c */
 
 extern int btlGetMainState(void);
-extern int FUN_001ba514(unsigned int);
+extern int partyFindSlotById(unsigned int);
 extern unsigned int scrGetArg(unsigned int);
 /* Supplied declaration required: scrSetResult. */
 
@@ -51,7 +51,7 @@ unsigned int FUN_00380a24(void)
     }
     temp_v4 = temp_v4 + 1;
     if (temp_v4 >= 0x6d) {
-      temp_v4 = FUN_001ba514(temp_v0 & 0xffff);
+      temp_v4 = partyFindSlotById(temp_v0 & 0xffff);
       if (-1 < temp_v4) {
         temp_v5 = temp_v4 + 0x6d;
       }

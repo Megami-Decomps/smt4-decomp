@@ -30,7 +30,7 @@ extern int DAT_005f1c5c; /* 0x5f1c5c */
 #endif
 /* Supplied declaration required: gameFlagsGetBlock. */
 extern int gameFlagIsSet(void);
-extern int FUN_00376fcc(int);
+extern int gameFlagsBitTest(int);
 extern int FUN_00384d34(int);
 extern int gameOwnedBitTest2(int);
 extern int FUN_004083a8(unsigned char, unsigned char);
@@ -116,7 +116,7 @@ void FUN_0049177c(int param_1)
       if (temp_v1 != -1) {
         if (temp_v1 != -2) {
           if (temp_v1 == -3) {
-            temp_v5 = FUN_00376fcc((int)*(short *)(temp_v4 + 0x17ba));
+            temp_v5 = gameFlagsBitTest((int)*(short *)(temp_v4 + 0x17ba));
             goto joined_r0x00491998;
           }
         }

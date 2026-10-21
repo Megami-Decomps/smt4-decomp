@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001eb584(char *, unsigned char *, int);
 int FUN_00247fc0(...);
-int FUN_002aeaac(...);
+int recordTableGet(...);
 int asdMemFree(void);
 int asdMemAlloc(int, int, int, int, int);
 int FUN_002d609c(unsigned char *, unsigned char *, int);
@@ -36,7 +36,7 @@ extern unsigned char DAT_004def28; /* 0x4def28 */
 /* Supplied declaration required: FUN_001eb584. */
 /* Supplied declaration required: FUN_00247fc0. */
 extern int FUN_002ae424(unsigned int);
-/* Supplied declaration required: FUN_002aeaac. */
+/* Supplied declaration required: recordTableGet. */
 extern int FUN_002b31b4(int *);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdMemAlloc. */
@@ -69,20 +69,20 @@ void FUN_002869e8(int *param_1,unsigned int param_2,int param_3,unsigned int par
   param_1[8] = param_3;
   param_1[6] = temp_v3;
   param_1[7] = temp_v2;
-  temp_v2 = FUN_002aeaac(param_2);
+  temp_v2 = recordTableGet(param_2);
   param_1[5] = temp_v2;
   if (param_1[0x14] == -1) {
     param_1[0x15] = 0;
   }
   else {
-    temp_v2 = FUN_002aeaac();
+    temp_v2 = recordTableGet();
     param_1[0x15] = temp_v2;
   }
   if (param_1[0x27] == -1) {
     param_1[0x29] = 0;
   }
   else {
-    temp_v2 = FUN_002aeaac();
+    temp_v2 = recordTableGet();
     param_1[0x29] = temp_v2;
   }
   temp_v2 = 0;

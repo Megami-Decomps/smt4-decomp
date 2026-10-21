@@ -23,7 +23,7 @@ extern NameBuffer *gameDataGetSecondName(void);
 extern NameBuffer *gameDataGetPlayerName(void);
 extern NameBuffer *FUN_002bd1fc(void);
 extern int FUN_002bf818(void *a);
-extern int FUN_002327e0(NameTask *task, NameBuffer *name);
+extern void nameEntryCopyEditedName(NameTask *task, NameBuffer *name);
 extern int FUN_00296ee0(NameTask *task, int arg);
 
 /* Clears the name buffer selected by the form's name kind and applies it to the task. */
@@ -41,7 +41,7 @@ void nameFormApply(NameTask *task)
         name->words[2] = 0;
         name->words[3] = 0;
         name->tail = 0;
-        FUN_002327e0(task, name);
+        nameEntryCopyEditedName(task, name);
     }
     if (task->form.nameKind == 1) {
         name = gameDataGetPlayerName();
@@ -50,7 +50,7 @@ void nameFormApply(NameTask *task)
         name->words[2] = 0;
         name->words[3] = 0;
         name->tail = 0;
-        FUN_002327e0(task, name);
+        nameEntryCopyEditedName(task, name);
     }
     if (task->form.nameKind == 2) {
         name = gameDataGetSecondName();
@@ -59,7 +59,7 @@ void nameFormApply(NameTask *task)
         name->words[2] = 0;
         name->words[3] = 0;
         name->tail = 0;
-        FUN_002327e0(task, name);
+        nameEntryCopyEditedName(task, name);
     }
     FUN_00296ee0(task, 8);
 }

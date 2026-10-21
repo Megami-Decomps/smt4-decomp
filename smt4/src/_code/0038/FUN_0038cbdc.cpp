@@ -8,9 +8,9 @@ int FUN_002341d4(...);
 int recordGetOptionalValue(...);
 int FUN_00234330(int *, int, unsigned int, unsigned int);
 int recordClearWideHandle(...);
-int FUN_0023499c(int *, int, int);
+int archiveFileReplaceHandle(int *, int, int);
 int stringFormatUnbounded(...);
-int FUN_002a12d8(...);
+int legacyResourceIdRemap(...);
 int textFormatBuffer(...);
 int FUN_00352e6c(...);
 int FUN_00352f9c(int *, unsigned char [1024], int);
@@ -48,9 +48,9 @@ extern int g_aocMain; /* 0x432fc8 */
 extern unsigned int FUN_0023445c(int);
 extern unsigned int FUN_00234468(int);
 /* Supplied declaration required: recordClearWideHandle. */
-/* Supplied declaration required: FUN_0023499c. */
+/* Supplied declaration required: archiveFileReplaceHandle. */
 /* Supplied declaration required: stringFormatUnbounded. */
-/* Supplied declaration required: FUN_002a12d8. */
+/* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00352e6c. */
 /* Supplied declaration required: FUN_00352f9c. */
@@ -106,10 +106,10 @@ int * FUN_0038cbdc(int param_1)
   unsigned int uStack_24;
   
   temp_v0 = g_aocMain;
-  FUN_0023499c(&temp_v11,g_aocMain + 0x28,g_aocMain + 0x18);
+  archiveFileReplaceHandle(&temp_v11,g_aocMain + 0x28,g_aocMain + 0x18);
   *(unsigned int *)(param_1 + 0xc) = temp_v11;
   *(unsigned int *)(param_1 + 0x10) = uStack_a4;
-  temp_v1 = FUN_002a12d8(param_1 + 0xc);
+  temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
   piVar6 = (int *)-(temp_v1 >> 0x1f);
   if (piVar6 == (int *)0x0) {
     piVar6 = temp_v14;
@@ -212,7 +212,7 @@ int * FUN_0038cbdc(int param_1)
                    piVar6);
       *(unsigned int *)(param_1 + 0xc) = temp_v11;
       *(unsigned int *)(param_1 + 0x10) = uStack_a4;
-      temp_v1 = FUN_002a12d8(param_1 + 0xc);
+      temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
       if (temp_v1 < 0) break;
       temp_v4 = recordGetOptionalValue(*(unsigned int *)(temp_v0 + 0x5a8));
       if ((*(unsigned int *)(temp_v0 + 0x684) < temp_v4) ||
@@ -228,7 +228,7 @@ int * FUN_0038cbdc(int param_1)
         FUN_003531dc(&temp_v11,temp_v0 + 0x84,&temp_v18);
         *(unsigned int *)(param_1 + 0xc) = temp_v11;
         *(unsigned int *)(param_1 + 0x10) = uStack_a4;
-        temp_v1 = FUN_002a12d8(param_1 + 0xc);
+        temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
         if (-1 < temp_v1) {
           temp_v1 = nn_fnd_DateTime_GetDay((unsigned int)&temp_v18);
           temp_v5 = nn_fnd_DateTime_GetMonth((unsigned int)&temp_v18);
@@ -242,7 +242,7 @@ int * FUN_0038cbdc(int param_1)
             FUN_002341d4(&temp_v11,temp_v0);
             *(unsigned int *)(param_1 + 0xc) = temp_v11;
             *(unsigned int *)(param_1 + 0x10) = uStack_a4;
-            FUN_002a12d8(param_1 + 0xc);
+            legacyResourceIdRemap(param_1 + 0xc);
           }
           return piVar6;
         }

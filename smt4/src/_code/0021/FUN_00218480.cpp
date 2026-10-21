@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0025043c(...);
 int FUN_002621b4(...);
-int FUN_0028caf8(...);
+int btlItemComputeValues(...);
 int FUN_0028cb40(...);
 int FUN_0028cdec(...);
 int playSceneSetState(int, int, int);
@@ -30,10 +30,10 @@ typedef struct {
 
 /* Supplied declaration required: FUN_0025043c. */
 /* Supplied declaration required: FUN_002621b4. */
-/* Supplied declaration required: FUN_0028caf8. */
+/* Supplied declaration required: btlItemComputeValues. */
 /* Supplied declaration required: FUN_0028cb40. */
 /* Supplied declaration required: FUN_0028cdec. */
-extern int FUN_00295d08(unsigned int);
+extern int playerPadTestBit(unsigned int);
 /* Supplied declaration required: playSceneSetState. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
 extern int objectPartRunUnlessLocked(int);
@@ -129,7 +129,7 @@ void FUN_00218480(int param_1)
     }
     if (((*(char *)(temp_v2 + 0x23) == '\x03') && ((*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5 == 2)) &&
        (((*(unsigned short *)(temp_v2 + 0x36) & 0xfff) != 0 &&
-        (((*(unsigned int *)(temp_v2 + 0x38) & 0x7f) != 1 && (temp_v2 = FUN_00295d08(1), temp_v2 != 0)))))) {
+        (((*(unsigned int *)(temp_v2 + 0x38) & 0x7f) != 1 && (temp_v2 = playerPadTestBit(1), temp_v2 != 0)))))) {
       temp_v2 = 0;
       do {
         if (*(char *)(param_1 + temp_v2 + 0x345d) != '\0') {
@@ -195,7 +195,7 @@ void FUN_00218480(int param_1)
       }
       if (((*(char *)(temp_v4 + 0x23) == '\x03') && ((*(unsigned int *)(temp_v4 + 0x28) & 0x1ff) >> 5 == 2)) &&
          (((*(unsigned short *)(temp_v4 + 0x36) & 0xfff) != 0 &&
-          (((*(unsigned int *)(temp_v4 + 0x38) & 0x7f) != 1 && (temp_v2 = FUN_00295d08(1), temp_v2 != 0)))))) {
+          (((*(unsigned int *)(temp_v4 + 0x38) & 0x7f) != 1 && (temp_v2 = playerPadTestBit(1), temp_v2 != 0)))))) {
         temp_v2 = 0;
         do {
           if (*(char *)(param_1 + temp_v2 + 0x345d) != '\0') {
@@ -214,12 +214,12 @@ void FUN_00218480(int param_1)
         temp_v14[0] = 0;
         temp_v10[0] = 0;
         FUN_0028cb40(param_1,temp_v14,temp_v10);
-        FUN_0028caf8(0xffffffff,(int)temp_v10[0],temp_v9,param_1 + 0x3470);
+        btlItemComputeValues(0xffffffff,(int)temp_v10[0],temp_v9,param_1 + 0x3470);
         temp_v6 = 1;
         do {
           temp_v3 = gameGetSlotTable();
           temp_v5 = param_1 + temp_v6 * 4;
-          FUN_0028caf8((int)*(char *)(temp_v3 + temp_v6 + 0x9107),(int)temp_v10[0],temp_v5 + 0x3460,
+          btlItemComputeValues((int)*(char *)(temp_v3 + temp_v6 + 0x9107),(int)temp_v10[0],temp_v5 + 0x3460,
                        temp_v5 + 0x3470);
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 4);
@@ -232,7 +232,7 @@ void FUN_00218480(int param_1)
         if (temp_v6 != 0) {
           temp_v3 = gameGetSlotTable();
           temp_v5 = param_1 + temp_v6 * 4;
-          FUN_0028caf8((int)*(char *)(temp_v3 + temp_v6 + 0x9107),(int)temp_v10[0],temp_v5 + 0x3460,
+          btlItemComputeValues((int)*(char *)(temp_v3 + temp_v6 + 0x9107),(int)temp_v10[0],temp_v5 + 0x3460,
                        temp_v5 + 0x3470);
           temp_v3 = gameGetSlotTable();
           if (*(char *)(temp_v3 + temp_v6 + 0x9107) < '\0') {
@@ -240,7 +240,7 @@ void FUN_00218480(int param_1)
           }
         }
         else {
-          FUN_0028caf8(0xffffffff,(int)temp_v10[0],temp_v9,param_1 + 0x3470);
+          btlItemComputeValues(0xffffffff,(int)temp_v10[0],temp_v9,param_1 + 0x3470);
         }
       }
       temp_v6 = FUN_0025043c(0xffffffff,(int)temp_v8[0]);
@@ -272,7 +272,7 @@ void FUN_00218480(int param_1)
             return;
           }
         }
-        temp_v2 = FUN_00295d08(1);
+        temp_v2 = playerPadTestBit(1);
         if (temp_v2 != 0) {
           temp_v2 = 0;
           while (*(char *)(param_1 + temp_v2 + 0x345d) == '\0') {

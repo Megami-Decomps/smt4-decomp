@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001469a8(int);
-int FUN_00146dc8(void);
+int dspUnloadIdleComponent(void);
 int FUN_00146e30(void);
 int FUN_00147120(void);
 int asdMemFree(unsigned int);
@@ -35,7 +35,7 @@ extern unsigned int DAT_00618520; /* 0x618520 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_001469a8. */
-/* Supplied declaration required: FUN_00146dc8. */
+/* Supplied declaration required: dspUnloadIdleComponent. */
 /* Supplied declaration required: FUN_00146e30. */
 /* Supplied declaration required: FUN_00147120. */
 /* Supplied declaration required: asdMemFree. */
@@ -100,7 +100,7 @@ LAB_00423070:
     (**(romwright_code **)(*DAT_005880d4 + 4))(DAT_005880d4,DAT_005880d8);
     DAT_005880d4 = (int *)0x0;
     FUN_00147120();
-    FUN_00146dc8();
+    dspUnloadIdleComponent();
     FUN_00146e30();
     return;
   }

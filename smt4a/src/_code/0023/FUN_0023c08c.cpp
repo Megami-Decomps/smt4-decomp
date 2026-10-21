@@ -3,7 +3,7 @@
 extern "C" {
 
 void sysPlaySe(s32 id);
-s32 FUN_00224880(u32 handle);
+s32 scrRunOpcodesStub(u32 handle);
 s32 FUN_003343f0(s32 value);
 s32 scrScriptProcessStartEntry(u32 handle, s32 request);
 
@@ -31,7 +31,7 @@ u32 FUN_0023c08c(s32 request)
         } else {
             accepted = scrScriptProcessStartEntry(g_unite->handle, request);
             if (accepted != 0) {
-                FUN_00224880(record->handle);
+                scrRunOpcodesStub(record->handle);
                 if (((!(request == 8 || request == 9)) && (!(request == 10 || request == 0xB))) &&
                     (!(request == 0xC || request == 0xE))) {
                     if (request == 0xD) {

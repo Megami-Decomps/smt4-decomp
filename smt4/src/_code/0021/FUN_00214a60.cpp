@@ -11,7 +11,7 @@ int FUN_0028f4b4(...);
 int FUN_002907c4(...);
 int FUN_0029ee6c(int, int);
 int FUN_002ae038(...);
-int FUN_002b6758(...);
+void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int drawSetColorFromRGBA8(...);
 int FUN_002be5a4(...);
 int textFormatBuffer(...);
@@ -76,7 +76,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002ae038. */
-/* Supplied declaration required: FUN_002b6758. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: textFormatBuffer. */
@@ -296,7 +295,7 @@ unsigned int FUN_00214a60(void)
           temp_v9 = FUN_002bf4f8(0x36,0x18);
           FUN_002bf288(2,0x36,0x16,*(int *)(temp_v5 + 0x68) + (int)*(short *)(temp_v9 + 8),
                        (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v9 + 10),0x15);
-          FUN_002b6758(0xffffffff,*(int *)(temp_v5 + 0x68) + (int)*(short *)(temp_v9 + 8),
+          uiDrawDemonIcon(0xffffffff,*(int *)(temp_v5 + 0x68) + (int)*(short *)(temp_v9 + 8),
                        (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v6 + 10),2,0);
           temp_v9 = 0;
           do {
@@ -305,7 +304,7 @@ unsigned int FUN_00214a60(void)
               temp_v15 = FUN_002bf4f8(0x36,temp_v9 + 0x19);
               FUN_002bf288(2,0x36,0x16,*(int *)(temp_v5 + 0x68) + (int)*(short *)(temp_v15 + 8),
                            (int)*(short *)(temp_v15 + 10) + (int)*(short *)(temp_v6 + 10),0xb);
-              FUN_002b6758((int)*(short *)(temp_v10 + 0x5c),
+              uiDrawDemonIcon((int)*(short *)(temp_v10 + 0x5c),
                            *(int *)(temp_v5 + 0x68) + (int)*(short *)(temp_v15 + 8),
                            (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v15 + 10),0x15,0);
             }

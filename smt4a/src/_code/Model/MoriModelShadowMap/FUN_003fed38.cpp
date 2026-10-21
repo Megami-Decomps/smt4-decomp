@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00158bf8(unsigned char *);
+int gfxCombinerStateInitialize(unsigned char *);
 int FUN_0015fcec(unsigned char *, unsigned int);
 int asdMemoryAlloc(int, int, int, int);
 int FUN_0016d1f4(unsigned char [24]);
 int FUN_00177abc(float *, unsigned char *);
-int FUN_00177cdc(unsigned char *, unsigned char *, int);
+int gpuEmitDepthBufferCommands(unsigned char *, unsigned char *, int);
 int FUN_0018a924(float *, unsigned int **);
 int asdMemoryAllocAligned(...);
 int FUN_0045af48(unsigned int, unsigned int, unsigned int, int);
@@ -96,15 +96,15 @@ typedef struct {
 
 extern unsigned int DAT_0056fcc4; /* 0x56fcc4 */
 
-/* Supplied declaration required: FUN_00158bf8. */
+/* Supplied declaration required: gfxCombinerStateInitialize. */
 /* Supplied declaration required: FUN_0015fcec. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: FUN_0016d1f4. */
 /* Supplied declaration required: FUN_00177abc. */
-/* Supplied declaration required: FUN_00177cdc. */
+/* Supplied declaration required: gpuEmitDepthBufferCommands. */
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
-extern unsigned int FUN_001a04e0(unsigned int, unsigned int);
+extern unsigned int asdGxAppendStateReset(unsigned int, unsigned int);
 extern int FUN_001af0d0(float *, unsigned int);
 extern unsigned int FUN_0042cbd8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0045af48. */
@@ -241,7 +241,7 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   temp_v28 = 0x140;
   temp_v29 = 0x100;
   temp_v30 = 0x140;
-  FUN_00158bf8(&temp_v12);
+  gfxCombinerStateInitialize(&temp_v12);
   FUN_0016d1f4(temp_v42);
   temp_v20 = 0;
   temp_v21 = 0;
@@ -271,11 +271,11 @@ void FUN_003fed38(int param_1,fn_003fed38_arg1 *param_2)
   FUN_005015b0(puVar4,puVar3);
   temp_v0 = FUN_00500994(*(unsigned int *)(param_1 + 4),puVar4,1);
   temp_v0 = FUN_0042cbd8(temp_v0,1);
-  temp_v0 = FUN_001a04e0(temp_v0,1);
+  temp_v0 = asdGxAppendStateReset(temp_v0,1);
   puVar4 = &temp_v12;
   FUN_0015fcec(puVar4,temp_v0);
   puVar5 = temp_v43;
-  FUN_00177cdc(puVar5,puVar4,1);
+  gpuEmitDepthBufferCommands(puVar5,puVar4,1);
   pfVar6 = temp_v45;
   FUN_00177abc(pfVar6,puVar5);
   temp_v2 = (((int)pfVar6 - temp_v1) & 0xfffffffcU) + 8;

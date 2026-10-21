@@ -8,7 +8,7 @@ int FUN_0013c174(unsigned char *, int);
 int asdMemFree(void);
 int dataTableFileGetTable(void);
 int __aeabi_memset4(void);
-int FUN_001f4908(...);
+int slotSetRequest(...);
 int asdOperatorNewD(void);
 int asdOperatorDeleteC(unsigned int *);
 int FUN_003d54f8(...);
@@ -27,7 +27,7 @@ int FUN_004f3ee0(...);
 int FUN_004f41b0(...);
 int FUN_004f5238(...);
 int FUN_004fb43c(...);
-int FUN_004feef8(unsigned int, unsigned int, int, unsigned int);
+void btlReflectCreateKind43(int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_004fef70(unsigned int, int, unsigned int, int **);
 int fillThreeWordsWithByte(...);
 int rt_memcpy_w(unsigned int ****, unsigned char *, int);
@@ -63,7 +63,7 @@ extern unsigned char DAT_005297d4; /* 0x5297d4 */
 extern unsigned char DAT_00529834; /* 0x529834 */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern int g_btlPartnerAttack; /* 0x573c50 */
 extern unsigned int DAT_00573c68; /* 0x573c68 */
 extern unsigned int DAT_00573c6c; /* 0x573c6c */
@@ -85,7 +85,7 @@ extern unsigned int dataTableGetEntries(void);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_001f4908. */
+/* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
 /* Supplied declaration required: FUN_003d54f8. */
@@ -105,7 +105,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004fb43c. */
-/* Supplied declaration required: FUN_004feef8. */
+/* Supplied declaration required: btlReflectCreateKind43. */
 /* Supplied declaration required: FUN_004fef70. */
 /* Supplied declaration required: fillThreeWordsWithByte. */
 /* Supplied declaration required: rt_memcpy_w. */
@@ -188,8 +188,7 @@ void FUN_00410628(int param_1)
         temp_v12 = (unsigned int ***)&temp_v14;
         FUN_003f1b3c(temp_v16,temp_v2,5,&temp_v13);
         FUN_004fef70(temp_v6 * 5,0,temp_v6,temp_v13);
-        temp_v12 = (unsigned int ***)0x1;
-        FUN_004feef8(temp_v6 * 5,0xffffffff,0,temp_v6);
+        btlReflectCreateKind43(temp_v6 * 5,0xffffffff,0,temp_v6,1);
         temp_v3 = param_1 + temp_v6;
         *(unsigned int ****)(param_1 + temp_v6 * 4 + 0x18c) = temp_v14;
         temp_v6 = (unsigned int)(short)((short)temp_v6 + 1);
@@ -345,8 +344,8 @@ void FUN_00410628(int param_1)
     uStack_9c = 1;
     temp_v15 = 0;
     temp_v12 = (unsigned int ***)0x0;
-    temp_v2 = DAT_00573808;
-    FUN_004f5238(DAT_00573808,0,0,10);
+    temp_v2 = g_btlAux;
+    FUN_004f5238(g_btlAux,0,0,10);
     *(unsigned int *)(param_1 + 0x2c) = temp_v2;
     temp_v12 = (unsigned int ***)0x0;
     temp_v13 = (int **)0x0;
@@ -357,7 +356,7 @@ void FUN_00410628(int param_1)
     if (*(int *)(*(int *)(param_1 + 0x2c) + 4) < *(int *)(*(int *)(param_1 + 0x2c) + 8)) {
       return;
     }
-    FUN_001f4908(0,0,0xff);
+    slotSetRequest(0,0,0xff);
     *(unsigned int *)(param_1 + 0x14) = 0;
     *(int *)(param_1 + 0x10) = *(int *)(param_1 + 0x10) + 1;
     FUN_004f3ee0(g_btlCamera,1,0);
@@ -388,8 +387,8 @@ void FUN_00410628(int param_1)
     uStack_9c = 1;
     temp_v15 = 0;
     temp_v12 = (unsigned int ***)0x1;
-    temp_v2 = DAT_00573808;
-    FUN_004f5238(DAT_00573808,0,0,10);
+    temp_v2 = g_btlAux;
+    FUN_004f5238(g_btlAux,0,0,10);
     *(unsigned int *)(param_1 + 0x2c) = temp_v2;
     FUN_003d54f8(0);
     FUN_004f41b0(g_btlCamera,0,8);

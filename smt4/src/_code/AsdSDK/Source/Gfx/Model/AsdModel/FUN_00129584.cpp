@@ -1,50 +1,40 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00129584` (_code @ 0x129584, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: head/node use opposite r1/r2 assignments, and the compiler places the common zero-return block after the empty-list initialization. */
+#include "common.h"
 
-extern "C" {
+struct ModelRegistryLink {
+    ModelRegistryLink *next;     // 0x00
+    ModelRegistryLink *previous; // 0x04
+};
 
-extern int *DAT_00471b98; /* 0x471b98 */
+struct ModelRegistryEntry {
+    u32 unk00;
+    ModelRegistryLink link; // 0x04
+    u32 parameter;          // 0x0c
+};
 
-
-unsigned int FUN_00129584(int param_1,unsigned int param_2)
-
+static __inline ModelRegistryLink *modelRegistryGetLink(ModelRegistryEntry *entry)
 {
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  *(unsigned int *)(param_1 + 0xc) = param_2;
-  piVar1 = DAT_00471b98;
-  if (param_1 != 0) {
-    piVar2 = (int *)(param_1 + 4);
-  }
-  else {
-    piVar2 = (int *)0x0;
-  }
-  if (DAT_00471b98 != (int *)0x0) {
-    piVar2[1] = (int)DAT_00471b98;
-    *(int **)(*piVar1 + 4) = piVar2;
-    *piVar2 = *piVar1;
-    *piVar1 = (int)piVar2;
-  }
-  else {
-    if (param_1 != 0) {
-      temp_v0 = param_1 + 4;
-    }
-    else {
-      temp_v0 = 0;
-    }
-    *(int *)(param_1 + 8) = temp_v0;
-    *(int *)(param_1 + 4) = temp_v0;
-    if (param_1 != 0) {
-      DAT_00471b98 = (int *)(param_1 + 4);
-    }
-    else {
-      DAT_00471b98 = (int *)0x0;
-    }
-  }
-  return 0;
+    return entry != NULL ? &entry->link : NULL;
 }
 
-} /* extern "C" */
+extern "C" {
+extern ModelRegistryLink *DAT_00471b98;
+
+// Retain the model parameter and insert its node into the circular registry.
+u32 FUN_00129584(ModelRegistryEntry *entry, u32 parameter)
+{
+    entry->parameter = parameter;
+    ModelRegistryLink *head = DAT_00471b98;
+    ModelRegistryLink *node = modelRegistryGetLink(entry);
+    if (head != NULL) {
+        node->previous = head;
+        head->next->previous = node;
+        node->next = head->next;
+        head->next = node;
+        return 0;
+    }
+    entry->link.next = entry->link.previous = modelRegistryGetLink(entry);
+    DAT_00471b98 = modelRegistryGetLink(entry);
+    return 0;
+}
+}

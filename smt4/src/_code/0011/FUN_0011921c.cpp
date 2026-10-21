@@ -9,7 +9,7 @@ int FUN_002bff38(int);
 
 extern int g_bustupCutAnim; /* 0x43dfc0 */
 
-extern unsigned char FUN_00126520(unsigned int, unsigned int);
+extern unsigned char jobRecordGetTableValue(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002b7160. */
 extern int jobWorkGetFirstWord(unsigned int);
 extern int jobIsValid(unsigned int);
@@ -45,7 +45,7 @@ unsigned int FUN_0011921c(int param_1)
           if (*(unsigned int *)(temp_v0 + 0x604) < 0xf) {
             temp_v2 = 2;
           }
-          temp_v1 = FUN_00126520(*(unsigned int *)(temp_v5 + 0x630),temp_v2);
+          temp_v1 = jobRecordGetTableValue(*(unsigned int *)(temp_v5 + 0x630),temp_v2);
           FUN_002bff38(temp_v1);
           temp_v2 = 1;
         }

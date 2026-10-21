@@ -17,11 +17,11 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_002469d0(void);
 int FUN_0025ef68(int, int, int);
-int FUN_00293f1c(void);
-int FUN_00293f94(void);
+float mathSnapHeading16(float angle);
+float calcHeadingRoundedTo32Directions(float angle);
 int FUN_00294c28(void);
 int FUN_00295108(int);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002b5cd4(void);
 int FUN_002b80b8(void);
 int FUN_002e364c(...);
@@ -29,7 +29,7 @@ int FUN_00313648(...);
 int FUN_00317af8(float *, unsigned int *, int);
 int FUN_00325998(...);
 int FUN_00327ee8(void);
-int FUN_0033f224(int);
+void lmapSceneStartMovement(unsigned char);
 int FUN_00354098(void);
 int FUN_00408184(...);
 int FUN_004a01c8(...);
@@ -46,7 +46,7 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern char s______________________00581290[67]; /* 0x581290 */
 extern int g_gameState; /* 0x5f15fc */
@@ -82,11 +82,9 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002469d0. */
 /* Supplied declaration required: FUN_0025ef68. */
 extern unsigned int FUN_0029202c(void);
-/* Supplied declaration required: FUN_00293f1c. */
-/* Supplied declaration required: FUN_00293f94. */
 /* Supplied declaration required: FUN_00294c28. */
 /* Supplied declaration required: FUN_00295108. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b5cd4. */
 /* Supplied declaration required: FUN_002b621c. */
 /* Supplied declaration required: FUN_002b80b8. */
@@ -98,7 +96,6 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: FUN_00325998. */
 /* Supplied declaration required: FUN_00327ee8. */
 /* Supplied declaration required: FUN_0033ad04. */
-/* Supplied declaration required: FUN_0033f224. */
 /* Supplied declaration required: FUN_00354098. */
 /* Supplied declaration required: FUN_003d2150. */
 extern unsigned int FUN_003d4ed8(unsigned int);
@@ -210,7 +207,7 @@ void FUN_002b81ec(void)
           if (temp_v6 != 0) {
             temp_v5 = g_gameState;
           }
-          if ((((temp_v6 != 0 && temp_v5 != 0x24) && (*(int *)(DAT_005806a4 + 0xb0) == 0)) &&
+          if ((((temp_v6 != 0 && temp_v5 != 0x24) && (*(int *)(g_lmapView + 0xb0) == 0)) &&
               (temp_v5 = gameFlagIsSet(0x49a), temp_v5 != 0)) && (DAT_005f19ee == '\0' && !temp_v10)) {
             *(unsigned int *)(temp_v2 + 0xdc8) = 0;
             *(unsigned int *)(temp_v2 + 0x1518) = 0;
@@ -224,7 +221,7 @@ void FUN_002b81ec(void)
             FUN_002e364c(g_lmapScene + 0x28);
             FUN_00327ee8();
             if (*(int *)(g_lmapScene + 0x1d0) == 1 || *(int *)(g_lmapScene + 0x1d0) == 9) {
-              FUN_0033f224(0);
+              lmapSceneStartMovement(0);
             }
             return;
           }
@@ -258,7 +255,7 @@ void FUN_002b81ec(void)
         temp_v1 = 1;
       }
       temp_v24 = CONCAT44(0x447a0000,temp_v14);
-      if (*(int *)(DAT_005806a4 + 0xb0) != 0) {
+      if (*(int *)(g_lmapView + 0xb0) != 0) {
         temp_v1 = 1;
       }
       if ((DAT_005f161e != '\0') && (DAT_005f1c48 == '\0')) {
@@ -364,7 +361,7 @@ void FUN_002b81ec(void)
         }
         *(unsigned char *)(g_lmapScene + 0x10) = 1;
         temp_v22 = CONCAT44(temp_v21,0x43b40000);
-        temp_v21 = temp_v26 - *(float *)(DAT_005806a4 + 0x18);
+        temp_v21 = temp_v26 - *(float *)(g_lmapView + 0x18);
         temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v21) << 0x1d);
         if (!romwright_subpiece_4_1_0(temp_v4 >> 0x1d,0)) {
           temp_v21 = temp_v21 + 360.0f;
@@ -372,11 +369,11 @@ void FUN_002b81ec(void)
         if ((int)temp_v21 >= 0x43b40001) {
           temp_v21 = temp_v21 - 360.0f;
         }
-        if (*(int *)(DAT_005806a4 + 200) != 3) {
-          FUN_00293f94();
+        if (*(int *)(g_lmapView + 200) != 3) {
+          temp_v21 = calcHeadingRoundedTo32Directions(temp_v21);
         }
         else {
-          FUN_00293f1c();
+          temp_v21 = mathSnapHeading16(temp_v21);
         }
         temp_v21 = -temp_v21;
         temp_v13 = *(float *)(g_lmapScene + 0x50);
@@ -462,7 +459,7 @@ void FUN_002b81ec(void)
       temp_v8 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
       if (((g_gameState != 0x24) && (temp_v5 = FUN_004a0e38(2,5), temp_v5 != 0)) && (!temp_v1)) {
         temp_v14 = (float)temp_v15;
-        FUN_002b5cb4();
+        distSpatial();
         temp_v14 = *(float *)(g_lmapScene + 0x160) - temp_v14;
         *(float *)(g_lmapScene + 0x160) = temp_v14;
         in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v14) << 0x1d);
@@ -477,7 +474,7 @@ void FUN_002b81ec(void)
         }
       }
       temp_v13 = (float)temp_v15;
-      FUN_002b5cb4();
+      distSpatial();
       temp_v14 = *(float *)(temp_v2 + 0xde8) + temp_v13;
       *(float *)(temp_v2 + 0xde8) = temp_v14;
       if ((int)temp_v14 >= 0x47c35001) {
@@ -573,7 +570,7 @@ void FUN_002b81ec(void)
       temp_v14 = (float)temp_v15;
       if ((temp_v9 & 2) != 0) {
         if (!temp_v1) {
-          FUN_002b5cb4();
+          distSpatial();
           temp_v14 = *(float *)(g_lmapScene + 0x15c) - temp_v14;
           *(float *)(g_lmapScene + 0x15c) = temp_v14;
           in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v18 <= temp_v14) << 0x1d);
@@ -602,7 +599,7 @@ void FUN_002b81ec(void)
         temp_v0 = (unsigned char)(temp_v4 >> 0x18);
         temp_v13 = temp_v18;
         if (!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(temp_v12 >> 0x1c) & 1)) {
-          FUN_002b5cb4();
+          distSpatial();
           *(float *)(g_lmapScene + 0x15c) = *(float *)(g_lmapScene + 0x15c) - temp_v14;
         }
         temp_v14 = *(float *)(g_lmapScene + 0x15c);

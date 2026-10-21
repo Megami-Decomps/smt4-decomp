@@ -8,7 +8,7 @@ int FUN_0024bc98(...);
 int FUN_0024bda8(...);
 int FUN_002907c4(...);
 int FUN_00295660(...);
-int FUN_00296ae8(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_0029ede8(...);
 int FUN_002ae164(void);
 int dataTable08Sub2GetRecord(void);
@@ -54,14 +54,14 @@ extern int DAT_0043da2c; /* 0x43da2c */
 /* Supplied declaration required: FUN_002907c4. */
 /* Supplied declaration required: FUN_00295660. */
 extern int FUN_00295cec(void);
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_0029ede8. */
 /* Supplied declaration required: FUN_002ae164. */
-extern unsigned int FUN_002ae3c4(int);
+extern unsigned int aocEntryGetKind(int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern unsigned int recordPackedValue(int);
-extern unsigned int FUN_002bce00(void);
+extern unsigned int aocIndexValueOrDefault(void);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
 extern unsigned int dataTableValue0f(void);
@@ -110,13 +110,13 @@ void FUN_0029212c(int param_1)
   temp_v19 = param_1;
   temp_v17 = dataTableValue0f();
   temp_v5 = temp_v19;
-  temp_v4 = FUN_002ae3c4(temp_v19);
+  temp_v4 = aocEntryGetKind(temp_v19);
   switch(temp_v4) {
   default:
     temp_v12 = 3;
     uStack_124 = temp_v17;
     iStack_120 = temp_v19;
-    FUN_00296ae8(*(unsigned int *)(temp_v16 + 0x558),3,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v16 + 0x558),3,0xffffffff,0);
     return;
   case 1:
     temp_v8 = temp_v5;
@@ -149,7 +149,7 @@ void FUN_0029212c(int param_1)
     temp_v12 = 3;
     uStack_124 = temp_v17;
     iStack_120 = temp_v19;
-    FUN_00296ae8(*(unsigned int *)(temp_v16 + 0x558),3,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v16 + 0x558),3,0xffffffff,0);
     return;
   case 2:
   case 3:
@@ -323,7 +323,7 @@ void FUN_0029212c(int param_1)
     } while (temp_v11 < 5);
     FUN_00295660(0x29,&temp_v12);
     if (*(short *)(temp_v5 + 0x6a) != 0) {
-      temp_v4 = FUN_002bce00();
+      temp_v4 = aocIndexValueOrDefault();
       textFormatBuffer(&temp_v12,&LAB_00292650,temp_v4);
     }
     else {
@@ -335,7 +335,7 @@ void FUN_0029212c(int param_1)
   temp_v12 = 3;
   uStack_124 = temp_v17;
   iStack_120 = temp_v19;
-  FUN_00296ae8(*(unsigned int *)(temp_v16 + 0x558),3,0xffffffff,0);
+  asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v16 + 0x558),3,0xffffffff,0);
   return;
 }
 

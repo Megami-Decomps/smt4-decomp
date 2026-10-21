@@ -1,12 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d1b94` (_code @ 0x2d1b94, 0x124 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 
-int FUN_00264444(int);
+void FUN_00264444(LmapObj *);
 int FUN_002664d8(int);
-int FUN_002666a0(int, int, unsigned int);
+int objSetBaseAndValue(int, int, unsigned int);
 int FUN_00266a2c(void);
 int FUN_002702dc(void);
 int mapDepartSetTarget(...);
@@ -26,12 +27,12 @@ extern unsigned int DAT_0049f920; /* 0x49f920 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00264444. */
 /* Supplied declaration required: FUN_002664d8. */
-/* Supplied declaration required: FUN_002666a0. */
+/* Supplied declaration required: objSetBaseAndValue. */
 /* Supplied declaration required: FUN_00266a2c. */
 /* Supplied declaration required: FUN_002702dc. */
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027b2b4. */
-extern char *FUN_0027d748(void);
+extern char *dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 
 
@@ -47,7 +48,7 @@ void FUN_002d1b94(unsigned int param_1,unsigned int param_2)
   
   temp_v0 = g_lmapMainState;
   FUN_0027d7b0(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
-  pcVar3 = (char *)FUN_0027d748();
+  pcVar3 = (char *)dataTableGetRecord23();
   mapDepartSetTarget((int)*pcVar3,(int)pcVar3[1],pcVar3[2]);
   *(unsigned int *)(temp_v0 + 0x48) = param_1;
   temp_v1 = g_lmapScene;
@@ -69,8 +70,8 @@ void FUN_002d1b94(unsigned int param_1,unsigned int param_2)
   FUN_002702dc();
   FUN_0027b2b4(*(unsigned int *)(temp_v0 + 0x40),*(unsigned int *)(temp_v0 + 0x48));
   FUN_00266a2c();
-  FUN_00264444(temp_v0 + 0xec);
-  FUN_002666a0(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
+  FUN_00264444((LmapObj *)(temp_v0 + 0xec));
+  objSetBaseAndValue(temp_v0 + 0xec,*(int *)(temp_v0 + 0x40) - 100,*(unsigned int *)(temp_v0 + 0x48));
   FUN_002664d8(temp_v0 + 0xec);
   temp_v0 = g_lmapMainState;
   if (*(int *)(g_lmapMainState + 0xcc) != 3) {

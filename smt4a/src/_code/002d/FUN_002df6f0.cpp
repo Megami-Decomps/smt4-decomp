@@ -26,7 +26,7 @@ typedef struct Global57aa00 {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ Object *object;
 } Global57aa00;
-extern Global57aa00 DAT_0057aa00;
+extern Global57aa00 g_battleEffectSettings;
 
 /* Stops the task's job if it is valid, runs FUN_0040afcc and destroys the global object at 0x57AA08. */
 void FUN_002df6f0(void)
@@ -40,9 +40,9 @@ void FUN_002df6f0(void)
         jobStop(task->job, 0);
     }
     FUN_0040afcc(g_handleRegistry);
-    if (DAT_0057aa00.object != NULL) {
-        DAT_0057aa00.object->vtbl->destroy(DAT_0057aa00.object);
-        DAT_0057aa00.object = NULL;
+    if (g_battleEffectSettings.object != NULL) {
+        g_battleEffectSettings.object->vtbl->destroy(g_battleEffectSettings.object);
+        g_battleEffectSettings.object = NULL;
     }
 }
 

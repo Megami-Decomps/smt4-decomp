@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00432b10` (_code @ 0x432b10, 0x1d8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: Obj55a5a8 constructor needs C1 symbol mapping before honest C++ structor emission; vtable _ZTV9Obj55a5a8 is stored at entry. */
 #include "romwright_types.h"
 
 extern "C" {

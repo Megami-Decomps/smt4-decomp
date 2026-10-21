@@ -5,7 +5,7 @@
 extern "C" {
 
 int eventQueueAddUniqueIfValid(...);
-int FUN_0035d8a4(void);
+int useCounterRelease(void);
 int uiQuestSortListByEntryKind(...);
 
 int FUN_001517b4(...);
@@ -19,7 +19,7 @@ int rt_aeabi_memclr(...);
 int FUN_002f15f8(...);
 int FUN_003d2150(...);
 int FUN_003d498c(...);
-int FUN_003dc38c(...);
+void uiQuestRefreshDetailPages(int);
 int gameFlagSetValue(...);
 int FUN_00417a60(...);
 int FUN_00418070(...);
@@ -62,7 +62,7 @@ extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_0021a4b0. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: asdMemFreeSlot. */
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0023eaf8. */
@@ -73,25 +73,24 @@ extern int scrScriptProcessStartEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002a4894. */
 extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002ae320. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002f15f8. */
 /* Supplied declaration required: FUN_00320834. */
 extern int FUN_00335384(int);
 /* Supplied declaration required: buttonHelpGetValue. */
-/* Supplied declaration required: FUN_0035d8a4. */
+/* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: uiQuestSortListByEntryKind. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_003d474c. */
 /* Supplied declaration required: FUN_003d498c. */
-/* Supplied declaration required: FUN_003dc38c. */
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00418070. */
 extern int FUN_004186a4(void);
 /* Supplied declaration required: FUN_004186e0. */
-extern unsigned char FUN_00418714(unsigned short);
+extern unsigned char partyEntryIsAvailable(unsigned short);
 extern int gameBlockByte27E98Is1To3(void);
 /* Supplied declaration required: FUN_0047dd18. */
 /* Supplied declaration required: flagValueAdd. */
@@ -140,7 +139,7 @@ unsigned int FUN_00215cb8(void)
     if (temp_v6 == 0) {
       temp_v5 = 0;
       do {
-        temp_v6 = FUN_002c2c68(temp_v9);
+        temp_v6 = objectApplyIfUnblocked(temp_v9);
         if (temp_v6 <= temp_v5) break;
         temp_v3 = FUN_001643b4(0x1e,temp_v5 + 0x9e);
         temp_v6 = temp_v5 * 2;
@@ -319,7 +318,7 @@ unsigned int FUN_00215cb8(void)
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 6:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -351,7 +350,7 @@ unsigned int FUN_00215cb8(void)
     temp_v7 = 2;
     break;
   case 7:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -373,7 +372,7 @@ unsigned int FUN_00215cb8(void)
       temp_v7 = FUN_004186e0();
       FUN_002f15f8(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x93f) = 1;
-      temp_v2 = FUN_00418714(*(unsigned short *)(temp_v1 + 0xccc));
+      temp_v2 = partyEntryIsAvailable(*(unsigned short *)(temp_v1 + 0xccc));
       *(unsigned char *)(temp_v1 + 0x940) = temp_v2;
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -386,7 +385,7 @@ unsigned int FUN_00215cb8(void)
     temp_v7 = 0x10;
     break;
   case 8:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -408,7 +407,7 @@ unsigned int FUN_00215cb8(void)
       temp_v7 = FUN_004186e0();
       FUN_002f15f8(temp_v7,0);
       *(unsigned char *)(temp_v1 + 0x93f) = 1;
-      temp_v2 = FUN_00418714(*(unsigned short *)(temp_v1 + 0xccc));
+      temp_v2 = partyEntryIsAvailable(*(unsigned short *)(temp_v1 + 0xccc));
       *(unsigned char *)(temp_v1 + 0x940) = temp_v2;
       *(unsigned char *)(temp_v1 + 0x942) = 1;
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
@@ -422,7 +421,7 @@ unsigned int FUN_00215cb8(void)
     temp_v7 = 9;
     break;
   case 9:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -447,7 +446,7 @@ unsigned int FUN_00215cb8(void)
     *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
     return 0;
   case 10:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -456,7 +455,7 @@ unsigned int FUN_00215cb8(void)
     temp_v7 = 2;
     break;
   case 0xb:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -504,7 +503,7 @@ unsigned int FUN_00215cb8(void)
   case 0xc:
     FUN_00163aa4(temp_v1 + 0x264);
     if ((*(char *)(temp_v1 + 0x2ee) == '\0') ||
-       (temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc)), temp_v9 != 2)) {
+       (temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc)), temp_v9 != 2)) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
@@ -557,7 +556,7 @@ unsigned int FUN_00215cb8(void)
     temp_v7 = 3;
     break;
   case 0xe:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -585,7 +584,7 @@ joined_r0x002167bc:
     temp_v7 = 3;
     break;
   case 0xf:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -607,7 +606,7 @@ joined_r0x002167bc:
     temp_v7 = 3;
     break;
   case 0x10:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x8fc));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x8fc));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -712,7 +711,7 @@ joined_r0x002167bc:
         if (*(char *)(temp_v1 + 0x93e) != '\0') {
           temp_v3 = *(unsigned short *)(temp_v1 + 0xcca);
         }
-        FUN_003dc38c(temp_v3);
+        uiQuestRefreshDetailPages(temp_v3);
         temp_v9 = g_uiQuest;
         *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
         *(unsigned int *)(temp_v9 + 4) = 0x15;
@@ -904,7 +903,7 @@ joined_r0x002167bc:
     temp_v7 = 0;
     break;
   case 0x1a:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x908));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x908));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -912,7 +911,7 @@ joined_r0x002167bc:
     temp_v7 = 2;
     break;
   case 0x1b:
-    temp_v9 = FUN_00224880(*(unsigned int *)(temp_v1 + 0x908));
+    temp_v9 = scrRunOpcodesStub(*(unsigned int *)(temp_v1 + 0x908));
     if (temp_v9 != 2) {
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
@@ -1041,7 +1040,7 @@ LAB_00217264:
       *(int *)(temp_v1 + 0x10) = *(int *)(temp_v1 + 0x10) + 1;
       return 0;
     }
-    FUN_0035d8a4();
+    useCounterRelease();
     FUN_0023ff10();
     FUN_003d474c();
     temp_v7 = 2;

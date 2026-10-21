@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_00293520(void);
+int partyPanelRebuildTouchRegions(void);
 int FUN_00293700(...);
 int FUN_0029378c(...);
 
-int FUN_00293348(int, int);
-int FUN_002937d0(...);
+int partyPanelSetState(int, int);
+int objClearFlagPair(...);
 int FUN_002937e0(void);
 int useCounterStart(void);
 int FUN_0029e328(int);
@@ -27,11 +27,11 @@ int SBORROW4(...);
 extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_00293348. */
-/* Supplied declaration required: FUN_00293520. */
+/* Supplied declaration required: partyPanelSetState. */
+/* Supplied declaration required: partyPanelRebuildTouchRegions. */
 /* Supplied declaration required: FUN_00293700. */
 /* Supplied declaration required: FUN_0029378c. */
-/* Supplied declaration required: FUN_002937d0. */
+/* Supplied declaration required: objClearFlagPair. */
 /* Supplied declaration required: FUN_002937e0. */
 extern int FUN_0029e02c(void);
 /* Supplied declaration required: useCounterStart. */
@@ -87,7 +87,7 @@ unsigned int FUN_0026d6a4(int param_1)
     FUN_0029e328(0x1f);
     FUN_0029e328(3);
     useCounterStart();
-    FUN_00293348(0xf,1);
+    partyPanelSetState(0xf,1);
     FUN_002a0cc8(1);
     eventQueueAddUniqueIfValid(0x100016d);
     return 1;
@@ -153,7 +153,7 @@ unsigned int FUN_0026d6a4(int param_1)
           temp_v2 = FUN_0029efa8(temp_v3);
           FUN_0029eb5c(temp_v1,temp_v2);
         }
-        FUN_002937d0(temp_v1);
+        objClearFlagPair(temp_v1);
       }
     }
   }
@@ -201,7 +201,7 @@ unsigned int FUN_0026d6a4(int param_1)
       FUN_0029eb5c(temp_v5 + 0x940,temp_v2);
     }
     temp_v1 = temp_v5 + 0x940;
-    FUN_002937d0(temp_v1);
+    objClearFlagPair(temp_v1);
   }
   temp_v1 = 0;
   do {
@@ -218,7 +218,7 @@ unsigned int FUN_0026d6a4(int param_1)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x18);
   if (*(int *)(temp_v5 + 0x1c) != 1) {
-    FUN_00293520();
+    partyPanelRebuildTouchRegions();
   }
   return 1;
 }

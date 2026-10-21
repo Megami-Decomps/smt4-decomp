@@ -38,7 +38,7 @@ extern unsigned char DAT_00646b38; /* 0x646b38 */
 extern unsigned int FUN_00174ae0(void);
 /* Supplied declaration required: FUN_00174b5c. */
 /* Supplied declaration required: FUN_0017561c. */
-extern unsigned int FUN_00175678(void);
+extern unsigned int objectCommandQueueGet(void);
 /* Supplied declaration required: FUN_001757fc. */
 /* Supplied declaration required: FUN_00175858. */
 /* Supplied declaration required: FUN_00175a38. */
@@ -75,7 +75,7 @@ void FUN_0015de34(unsigned int *param_1,int param_2)
     if (DAT_0059dba6 == '\0') {
       temp_v0 = param_1[3];
       temp_v4 = param_1[6];
-      temp_v1 = FUN_00175678();
+      temp_v1 = objectCommandQueueGet();
       FUN_0017561c(temp_v1,param_2,param_1[3]);
       temp_v1 = FUN_00191330();
       FUN_0017561c(temp_v1,temp_v0 + param_2,param_1[6]);

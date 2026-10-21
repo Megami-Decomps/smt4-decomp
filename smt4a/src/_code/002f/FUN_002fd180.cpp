@@ -1,57 +1,35 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fd180` (_code @ 0x2fd180, 0x66 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: native erase returns a copied value iterator; this compile-safe explicit-out interface retains different stack/register allocation. */
+#include "shard/Shard0031.h"
 
 extern "C" {
+int wordRefsDiffer_002ee774(ListNode *const *left, ListNode *const *right);
+void FUN_00306d50(ListNode **next, ListOwner *list, ListNode *const *position);
+void asdOperatorDeleteArray(void *allocation);
 
-int asdOperatorDeleteArray(...);
-int FUN_00306d50(int *, int *, unsigned int [2]);
-
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: asdOperatorDeleteArray. */
-extern int wordRefsDiffer_002ee774(unsigned int *, unsigned int **);
-/* Supplied declaration required: FUN_00306d50. */
-
-
-int * FUN_002fd180(int *param_1)
-
+ListOwner *FUN_002fd180(ListOwner *list)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int temp_v1;
-  unsigned int *temp_v2;
-  int temp_v3;
-  unsigned int temp_v4 [2];
-  
-  temp_v2 = (unsigned int *)param_1[4];
-  if (temp_v2 != (unsigned int *)0x0) {
-    temp_v1 = *temp_v2;
-    while (temp_v0 = wordRefsDiffer_002ee774((unsigned int *)&temp_v1,&temp_v2), temp_v0 != 0) {
-      temp_v4[0] = temp_v1;
-      FUN_00306d50(&temp_v3,param_1,temp_v4);
-      temp_v1 = temp_v3;
+    if (list->list.sentinel != 0) {
+        ListNode *end = list->list.sentinel;
+        ListNode *current = end->next;
+        while (wordRefsDiffer_002ee774(&current, &end)) {
+            ListNode *position = current;
+            ListNode *following;
+            FUN_00306d50(&following, list, &position);
+            current = following;
+        }
+        ListNode *sentinel = list->list.sentinel;
+        sentinel->next = (ListNode *)list->pool.freeList;
+        list->pool.freeList = sentinel;
+        while (list->pool.chunks != 0) {
+            PoolChunk *chunk = list->pool.chunks;
+            list->pool.chunks = chunk->next;
+            asdOperatorDeleteArray(chunk->data);
+            asdOperatorDeleteArray(chunk);
+        }
+        list->pool.freeList = 0;
+        list->pool.cursor = 0;
+        list->pool.limit = 0;
     }
-    piVar2 = (int *)param_1[4];
-    *piVar2 = param_1[1];
-    param_1[1] = (int)piVar2;
-    while (piVar2 = (int *)*param_1, piVar2 != (int *)0x0) {
-      *param_1 = *piVar2;
-      asdOperatorDeleteArray(piVar2[2]);
-      asdOperatorDeleteArray(piVar2);
-    }
-    param_1[1] = 0;
-    param_1[2] = 0;
-    param_1[3] = 0;
-  }
-  return param_1;
+    return list;
 }
-
-} /* extern "C" */
+}

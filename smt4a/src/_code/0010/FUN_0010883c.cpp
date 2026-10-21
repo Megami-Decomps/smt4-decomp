@@ -11,10 +11,10 @@ int arrayElementAddress_002eee88(int, int);
 int FUN_002efcf2(...);
 int FUN_002efcfc(int *, unsigned int);
 int FUN_002efd12(int, int *);
-int FUN_002efdb4(unsigned int);
+int onlineLockRelease(unsigned int);
 int FUN_002f07c2(...);
 int vectorInitEmpty3(int [3]);
-int FUN_002f1306(int [3], int);
+int vecPushBack(int [3], int);
 int wordMoveOut_002f1324(unsigned char [4], int *, int);
 int vectorTeardown_002f135a(...);
 
@@ -40,10 +40,10 @@ extern unsigned int FUN_002ef9e0(unsigned char *, unsigned short);
 /* Supplied declaration required: FUN_002efcf2. */
 /* Supplied declaration required: FUN_002efcfc. */
 /* Supplied declaration required: FUN_002efd12. */
-/* Supplied declaration required: FUN_002efdb4. */
+/* Supplied declaration required: onlineLockRelease. */
 /* Supplied declaration required: FUN_002f07c2. */
 /* Supplied declaration required: vectorInitEmpty3. */
-/* Supplied declaration required: FUN_002f1306. */
+/* Supplied declaration required: vecPushBack. */
 /* Supplied declaration required: wordMoveOut_002f1324. */
 extern int seq16IsGreaterOrFlag(unsigned char *, unsigned char *);
 extern unsigned int vectorCount8_002f1352(int *);
@@ -103,7 +103,7 @@ void FUN_0010883c(int param_1,int param_2)
       temp_v0 = 0;
     }
     if (!temp_v0) break;
-    FUN_002f1306(temp_v9,temp_v10 + 0x10);
+    vecPushBack(temp_v9,temp_v10 + 0x10);
     wordMoveOut_002f1324(temp_v16,&temp_v10,0);
     temp_v15 = temp_v10;
     piVar3 = (int *)arrayElementAddress_002eee88(temp_v12,0);
@@ -111,7 +111,7 @@ void FUN_0010883c(int param_1,int param_2)
     FUN_002efd12(temp_v1,&temp_v15);
   } while( 1 );
   puVar2 = (unsigned int *)arrayElementAddress_002eee88(temp_v12,0);
-  FUN_002efdb4(*puVar2);
+  onlineLockRelease(*puVar2);
   for (temp_v4 = 0; temp_v2 = vectorCount8_002f1352(temp_v9), temp_v4 < temp_v2; temp_v4 = temp_v4 + 1) {
     temp_v1 = temp_v9[0] + temp_v4 * 8;
     FUN_002efcf2(&temp_v15,param_2);

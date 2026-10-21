@@ -24,10 +24,10 @@ extern unsigned int DAT_00464b7c; /* 0x464b7c */
 extern unsigned int DAT_00464b80; /* 0x464b80 */
 extern unsigned int g_asdModelTransformBuilder; /* 0x464b84 */
 extern unsigned int DAT_00464b88; /* 0x464b88 */
-extern unsigned int DAT_00464b8c; /* 0x464b8c */
-extern int DAT_00464b90; /* 0x464b90 */
-extern int DAT_00464b94; /* 0x464b94 */
-extern int DAT_00464b98; /* 0x464b98 */
+extern unsigned int sceneGroup1Root; /* 0x464b8c */
+extern int sceneGroup4Root; /* 0x464b90 */
+extern int sceneGroup2Root; /* 0x464b94 */
+extern int sceneGroup5Root; /* 0x464b98 */
 extern int g_asdLightCount; /* 0x4dad80 */
 extern unsigned char DAT_004dad84; /* 0x4dad84 */
 extern unsigned char DAT_004dad85; /* 0x4dad85 */
@@ -59,21 +59,21 @@ void FUN_00152c00(fn_00152c00_arg0 *param_1)
   piVar1 = (int *)param_1->field_0x14;
   if (piVar1 == (int *)0x0) {
     temp_v3 = param_1->field_0xc;
-    piVar1 = (int *)&DAT_00464b8c;
+    piVar1 = (int *)&sceneGroup1Root;
     if (temp_v3 != 1) {
       if (temp_v3 == 2) {
         temp_v0 = 0;
-        temp_v5 = DAT_00464b94;
+        temp_v5 = sceneGroup2Root;
         FUN_002a2dc8(temp_v0);
       }
       else {
-        temp_v5 = DAT_00464b90;
+        temp_v5 = sceneGroup4Root;
         if (temp_v3 != 4) {
           if (temp_v3 != 5) {
             return;
           }
           temp_v0 = 1;
-          temp_v5 = DAT_00464b98;
+          temp_v5 = sceneGroup5Root;
           FUN_002a2dc8(temp_v0);
         }
       }
@@ -90,10 +90,10 @@ void FUN_00152c00(fn_00152c00_arg0 *param_1)
   }
   temp_v3 = -1;
   temp_v5 = *(int *)(*param_1->field_0x24 + 0xc);
-  if (DAT_00464b94 == temp_v5) {
+  if (sceneGroup2Root == temp_v5) {
     temp_v3 = 0;
   }
-  else if (DAT_00464b98 == temp_v5) {
+  else if (sceneGroup5Root == temp_v5) {
     temp_v3 = 1;
   }
   temp_v7 = 0;
@@ -154,7 +154,7 @@ void FUN_00152c00(fn_00152c00_arg0 *param_1)
   if ((-1 < temp_v3) && (*(int *)(temp_v5 + 0x18) == *(int *)(temp_v5 + 0x1c))) {
     (&DAT_004dad84)[temp_v3 * 0x18] = 0;
     (&DAT_004dad85)[temp_v3 * 0x18] = 0;
-    nw_gfx_SceneNode_AttachChild((&g_asdModelTransformBuilder)[temp_v3],(&DAT_00464b94)[temp_v3]);
+    nw_gfx_SceneNode_AttachChild((&g_asdModelTransformBuilder)[temp_v3],(&sceneGroup2Root)[temp_v3]);
     sceneTraverserVisit((&DAT_00464b7c)[temp_v3],(&g_asdModelTransformBuilder)[temp_v3]);
   }
   if (param_1->field_0x14 != (void *)0x0) {

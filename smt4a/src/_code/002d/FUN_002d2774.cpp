@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d2774` (_code @ 0x2d2774, 0xa8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" {
 
 int FUN_0013c174(unsigned char *, int *, int);
 int asdMemFree(unsigned char *);
 int asdTextureCreate(void);
-int asdTextureSetImage(int);
 int FUN_00226970(int, unsigned char *, int, int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -21,7 +21,6 @@ extern int *g_activeTextureSlot; /* 0x5806cc */
 /* Supplied declaration required: FUN_0013c174. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
-/* Supplied declaration required: asdTextureSetImage. */
 /* Supplied declaration required: FUN_00226970. */
 
 
@@ -44,7 +43,7 @@ void FUN_002d2774(void)
   FUN_0013c174(&LAB_002d2820,&temp_v2,0);
   FUN_00226970(temp_v0,puVar3,temp_v2,0x10000);
   asdMemFree(puVar3);
-  asdTextureSetImage(temp_v0);
+  asdTextureSetImage((AsdTexture*)temp_v0);
   piVar1 = g_activeTextureSlot;
   *(unsigned int *)(*g_activeTextureSlot + 0x3c) = 1;
   *(unsigned int *)(*piVar1 + 0x40) = 1;

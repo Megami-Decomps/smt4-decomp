@@ -24,7 +24,7 @@ typedef struct {
 } param_7_stack;
 
 /* Supplied declaration required: FUN_0011a8b8. */
-extern unsigned int FUN_002e6e26(void);
+extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: onlineJobWaitComplete. */
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
@@ -71,7 +71,7 @@ FUN_0010c9bc(unsigned int *param_1,int param_2,unsigned int param_3,unsigned int
     temp_v0 = 0;
   }
   sharedRefAddRef(temp_v0);
-  temp_v1 = FUN_002e6e26();
+  temp_v1 = onlineContextGetInstance();
   FUN_002e78d0(temp_v1,temp_v0,0);
   if (param_5 != 0) {
     sharedRefRelease(temp_v0);

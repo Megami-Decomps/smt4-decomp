@@ -7,7 +7,7 @@ extern "C" {
 int FUN_003478dc(unsigned int, char *);
 int FUN_003afd30(void);
 
-extern unsigned int FUN_002e4c2c(int);
+extern unsigned int keyedRecordRegisterName(int);
 /* Supplied declaration required: FUN_003478dc. */
 /* Supplied declaration required: FUN_003afd30. */
 
@@ -38,7 +38,7 @@ unsigned int FUN_004fa0ec(int param_1)
       temp_v5 = pcVar5[2] == 'R';
     }
     if (temp_v5) {
-      temp_v2 = FUN_002e4c2c(temp_v1 + 0x328c);
+      temp_v2 = keyedRecordRegisterName(temp_v1 + 0x328c);
       *(char *)(temp_v1 + 0x3284) = (char)temp_v2;
       FUN_003478dc(temp_v2,pcVar5);
       *(char *)(temp_v1 + 0x3284) = (char)temp_v2;

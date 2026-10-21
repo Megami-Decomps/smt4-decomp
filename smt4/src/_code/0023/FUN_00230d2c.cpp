@@ -1,35 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230d2c` (_code @ 0x230d2c, 0x58 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail bulk-loads the four position components; compiler uses scalar loads and different VFP/core temporary scheduling while copying the integer marker. */
+#include "shard/W6_W6Match2_OffsetPosition2D.h"
 
-extern "C" {
+extern "C" void FUN_002be370(u32 id, s32 x, s32 y, s32 layer, s32 equippedFlag);
 
-int FUN_002be370(unsigned int, int, int, unsigned int, unsigned int);
-int VectorSignedToFloat(unsigned int, int);
-
-/* stack frame of param_6: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_6_stack;
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_002be370. */
-
-
-void FUN_00230d2c(float *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned int param_5,unsigned int param_6)
-
+// Add the local and base offsets, truncate the coordinates, and forward the draw.
+extern "C" void FUN_00230d2c(const OffsetPosition2D* position, u32 id, s32 x, s32 y,
+                            s32 layer, s32 equippedFlag)
 {
-/* irregular: irregular input(s): in_fpscr; 3 native warning(s); review required */
-  unsigned int in_fpscr;
-  float temp_v0;
-  float temp_v1;
-  
-  temp_v0 = (float)VectorSignedToFloat(param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = (float)VectorSignedToFloat(param_4,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be370(param_2,(int)(*param_1 + param_1[2] + temp_v0),(int)(param_1[1] + param_1[3] + temp_v1),
-               param_5,param_6);
-  return;
+    f32 screenX = position->x + position->offsetX + f32(x);
+    f32 screenY = position->y + position->offsetY + f32(y);
+    FUN_002be370(id, s32(screenX), s32(screenY), layer, equippedFlag);
 }
-
-} /* extern "C" */

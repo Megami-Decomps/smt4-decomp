@@ -33,7 +33,7 @@ extern unsigned int g_btlEvent; /* 0x573898 */
 /* Supplied declaration required: FUN_003e1114. */
 /* Supplied declaration required: FUN_003e2470. */
 extern int valueAtF0IsReady(fn_003e11ac_arg1 *);
-extern int FUN_003f0f40(fn_003e11ac_arg1 *);
+extern int loadSlotMainIsLoaded(fn_003e11ac_arg1 *);
 /* Supplied declaration required: FUN_003f1334. */
 extern int loadSlotIsLoaded(unsigned int);
 /* Supplied declaration required: loadSlotRequestAsync. */
@@ -60,7 +60,7 @@ unsigned int * FUN_003e11ac(unsigned int *param_1,fn_003e11ac_arg1 *param_2)
       *param_1 = 5;
       param_1[4] = 0;
       param_1[3] = 0;
-      temp_v0 = FUN_003f0f40(param_2);
+      temp_v0 = loadSlotMainIsLoaded(param_2);
       if (temp_v0 == 0) {
         return (unsigned int *)0x0;
       }

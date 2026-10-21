@@ -4,10 +4,10 @@
 
 extern "C" {
 
-int FUN_00287098(unsigned int, unsigned int);
+int modelSelectSecondaryMotion(unsigned int, unsigned int);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int, char *);
-int FUN_002a5710(unsigned int);
+int modelSelectPrimaryMotion(unsigned int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -16,10 +16,10 @@ typedef struct {
 
 extern unsigned char g_gameState; /* 0x49f91c */
 
-/* Supplied declaration required: FUN_00287098. */
+/* Supplied declaration required: modelSelectSecondaryMotion. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_002a5710. */
+/* Supplied declaration required: modelSelectPrimaryMotion. */
 
 
 void FUN_002531bc(char *param_1)
@@ -51,8 +51,8 @@ void FUN_002531bc(char *param_1)
       nodeSetTranslation(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0,param_1 + 0xc);
       FUN_0028c618(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),0);
       if (*(int *)(*(int *)(*(int *)(param_1 + 0x20) + 8) + 0x38) != *(int *)(param_1 + 0x1c)) {
-        FUN_002a5710(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8));
-        FUN_00287098(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),*(unsigned int *)(param_1 + 0x1c));
+        modelSelectPrimaryMotion(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8));
+        modelSelectSecondaryMotion(*(unsigned int *)(*(int *)(param_1 + 0x20) + 8),*(unsigned int *)(param_1 + 0x1c));
         return;
       }
     }

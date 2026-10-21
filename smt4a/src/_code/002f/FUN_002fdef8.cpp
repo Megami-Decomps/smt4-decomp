@@ -16,7 +16,7 @@ typedef int romwright_code(...);
 /* Supplied declaration required: strInit. */
 /* Supplied declaration required: strDestroy. */
 /* Supplied declaration required: FUN_002fd03a. */
-extern int FUN_002fd078(unsigned char *, unsigned char *);
+extern int stringRefEqual(unsigned char *, unsigned char *);
 
 
 unsigned int FUN_002fdef8(int *param_1,int param_2)
@@ -49,7 +49,7 @@ unsigned int FUN_002fdef8(int *param_1,int param_2)
       if (*(unsigned char *)(param_1 + 2) < temp_v3) {
         FUN_002fd03a(param_1,temp_v4);
       }
-      temp_v1 = FUN_002fd078(temp_v5,temp_v4);
+      temp_v1 = stringRefEqual(temp_v5,temp_v4);
       if (temp_v1 != 0) {
         strDestroy(temp_v4);
         strDestroy(temp_v5);

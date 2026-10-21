@@ -13,22 +13,22 @@ typedef struct QuestRecord {
 } QuestRecord;
 
 extern QuestRecord *questRecordFindById(u16 id);
-extern Options *gameGetOptions(void);
-extern s32 FUN_002b6b38(void);
+extern Options *gameGetSupportUnitData(void);
+extern s32 gameGetOptionProgressStatus(void);
 
-/* Returns 1 when FUN_002b6b38 reports mode 1, or mode 2 and the option's quest record is not done. */
+/* Returns 1 when gameGetOptionProgressStatus reports mode 1, or mode 2 and the option's quest record is not done. */
 u32 FUN_00245c78(void)
 {
     u32 result = 0;
 
-    switch (FUN_002b6b38()) {
+    switch (gameGetOptionProgressStatus()) {
     case 0:
         break;
     case 1:
         result = 1;
         break;
     case 2:
-        if (questRecordFindById(gameGetOptions()->questId)->done == 0) {
+        if (questRecordFindById(gameGetSupportUnitData()->questId)->done == 0) {
             result = 1;
         }
         break;

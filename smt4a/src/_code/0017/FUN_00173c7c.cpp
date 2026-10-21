@@ -13,7 +13,7 @@ int nw_snd_internal_driver_StreamBufferPool_Finalize(...);
 int nw_ut_internal_LinkListImpl_erase_2AC900(...);
 
 typedef int romwright_code(...);
-extern unsigned int FUN_00175678(void);
+extern unsigned int objectCommandQueueGet(void);
 /* Supplied declaration required: FUN_0018fe70. */
 extern unsigned int FUN_001911a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001912cc. */
@@ -49,7 +49,7 @@ void FUN_00173c7c(int param_1)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < *(unsigned int *)(param_1 + 0x18));
   }
-  temp_v1 = FUN_00175678();
+  temp_v1 = objectCommandQueueGet();
   temp_v2 = FUN_001911a4(temp_v1,1);
   FUN_001912cc(temp_v1,temp_v2);
   *(unsigned int *)(param_1 + 0x18) = 0;

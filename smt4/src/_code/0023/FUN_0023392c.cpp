@@ -4,12 +4,12 @@
 
 extern "C" {
 
-int FUN_0023360c(unsigned int *);
+int flaggedValueHolderGetTotal(unsigned int *);
 int FUN_002636d0(int);
 int FUN_00289c98(...);
 int FUN_00290d5c(int);
 int FUN_0029ee6c(...);
-int FUN_002a87e8(void);
+int ifTouchDecrementTimer(void);
 int FUN_002ae5e0(void);
 int FUN_002b8454(...);
 int buttonHelpSetPreset(...);
@@ -22,12 +22,12 @@ typedef struct {
 extern int g_aocMain; /* 0x432fc8 */
 
 extern int FUN_002335f8(int, unsigned int);
-/* Supplied declaration required: FUN_0023360c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: FUN_002636d0. */
 /* Supplied declaration required: FUN_00289c98. */
 /* Supplied declaration required: FUN_00290d5c. */
 /* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: FUN_002a87e8. */
+/* Supplied declaration required: ifTouchDecrementTimer. */
 /* Supplied declaration required: FUN_002ae5e0. */
 /* Supplied declaration required: FUN_002b8454. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -49,7 +49,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
     buttonHelpSetPreset(0xc9);
     temp_v2 = 0;
     do {
-      FUN_002a87e8();
+      ifTouchDecrementTimer();
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 6);
     FUN_002ae5e0();
@@ -60,7 +60,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
       buttonHelpSetPreset(0xca);
       temp_v2 = 0;
       do {
-        FUN_002a87e8();
+        ifTouchDecrementTimer();
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 6);
       FUN_002ae5e0();
@@ -75,12 +75,12 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
   case 2:
     *param_1 = *param_1 | 0x100000;
     temp_v2 = g_aocMain;
-    FUN_0023360c(param_1 + 0x90);
+    flaggedValueHolderGetTotal(param_1 + 0x90);
     if (param_3 != 0) {
       buttonHelpSetPreset(0xcb);
       temp_v1 = 0;
       do {
-        FUN_002a87e8();
+        ifTouchDecrementTimer();
         temp_v1 = temp_v1 + 1;
       } while (temp_v1 < 6);
       FUN_002ae5e0();
@@ -89,10 +89,10 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
     FUN_002b8454(1,0);
     FUN_002b8454(2,0xb,0x4b,1);
     FUN_002b8454(3,0,0,1);
-    temp_v0 = FUN_0023360c(param_1 + 0x90);
+    temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x90);
     temp_v1 = FUN_002335f8(temp_v2,temp_v0);
     if (temp_v1 != 0) {
-      temp_v1 = FUN_0023360c(param_1 + 0x90);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
       if (*(char *)(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8 + 0x9b3) != '\0') {
         FUN_002b8454(4,0xf,0x4f,0);
         FUN_002b8454(5,0,0);
@@ -100,7 +100,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
         FUN_0029ee6c(param_1 + 0x44c,0x323232ff);
         return;
       }
-      temp_v1 = FUN_0023360c(param_1 + 0x90);
+      temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
       temp_v2 = FUN_0039411c(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8);
       if (temp_v2 == 0) {
         FUN_002b8454(4,0xc,0x4c,0);
@@ -141,7 +141,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
       buttonHelpSetPreset(0xca);
       temp_v2 = 0;
       do {
-        FUN_002a87e8();
+        ifTouchDecrementTimer();
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 6);
       FUN_002ae5e0();
@@ -168,7 +168,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
       FUN_00289c98(0);
       temp_v2 = 0;
       do {
-        FUN_002a87e8();
+        ifTouchDecrementTimer();
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < 6);
       return;

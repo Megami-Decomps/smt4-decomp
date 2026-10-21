@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern int FUN_0029903c(unsigned short, unsigned int);
+extern int affinityShouldReplaceState(unsigned short, unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 
 
@@ -48,7 +48,7 @@ void FUN_00394edc(int param_1,unsigned short *param_2)
     do {
       if (temp_v6[temp_v1] != 0) {
         temp_v0 = ((int)*(short *)(temp_v6[temp_v1] + temp_v3) & 0x3ffffU) >> 10;
-        temp_v2 = FUN_0029903c(*param_2 >> 10,temp_v0);
+        temp_v2 = affinityShouldReplaceState(*param_2 >> 10,temp_v0);
         if (temp_v2 != 0) {
           *param_2 = (*param_2 & 0x3ff) | (unsigned short)(temp_v0 << 10);
           temp_v5 = (int)((unsigned int)*(unsigned short *)(temp_v6[temp_v1] + temp_v3) << 0x16) >> 0x16;

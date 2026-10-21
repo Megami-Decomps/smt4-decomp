@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00336b64(int, unsigned short *);
+int resourceRequestRegisterOrUpdate(int, unsigned short *);
 int FUN_0036d318(unsigned int, unsigned char [304]);
 int randomGetUpperSixBits(unsigned char *, unsigned int);
 
@@ -26,7 +26,7 @@ typedef struct {
 
 extern unsigned char g_btlUi; /* 0x57a9b8 */
 
-/* Supplied declaration required: FUN_00336b64. */
+/* Supplied declaration required: resourceRequestRegisterOrUpdate. */
 /* Supplied declaration required: FUN_0036d318. */
 /* Supplied declaration required: randomGetUpperSixBits. */
 
@@ -78,7 +78,7 @@ void FUN_004aaebc(unsigned int param_1,unsigned int param_2,unsigned int param_3
       temp_v1 = temp_v2;
     } while ((int)temp_v2 < 8);
   }
-  FUN_00336b64(temp_v0 + 0x28c4,&temp_v3);
+  resourceRequestRegisterOrUpdate(temp_v0 + 0x28c4,&temp_v3);
   return;
 }
 

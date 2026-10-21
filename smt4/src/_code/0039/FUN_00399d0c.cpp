@@ -8,16 +8,16 @@ int FUN_00231dec(...);
 
 int CONCAT44(double, double);
 int FUN_00231ad4(...);
-int FUN_00231bb8(int, float *);
+int pairCopy(int, float *);
 int FUN_00231bcc(...);
-int FUN_00231d2c(...);
+float FUN_00231d2c(int);
 int FUN_00232554(...);
 int FUN_002b04e8(...);
 int gameGetMapBlock(void);
 int FUN_0039e8b8(...);
 int FUN_0039eb4c(...);
 int NaviMain_GetPosY(int);
-int NaviMain_GetState(...);
+float NaviMain_GetState(void);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_1: 21 slot(s), 84 byte(s) */
@@ -54,10 +54,9 @@ extern int DAT_0049fcfc; /* 0x49fcfc */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern unsigned int FUN_002319e0(unsigned int, int, int);
 /* Supplied declaration required: FUN_00231ad4. */
-/* Supplied declaration required: FUN_00231bb8. */
+/* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
-extern int FUN_00231ca4(int);
-/* Supplied declaration required: FUN_00231d2c. */
+extern unsigned char FUN_00231ca4(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
 /* Supplied declaration required: FUN_00232554. */
 extern float *lmapSceneGetObj(int);
@@ -71,7 +70,6 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int *NaviMain_GetCursorPos(int);
 extern int NaviMain_GetPosX(void);
 /* Supplied declaration required: NaviMain_GetPosY. */
-/* Supplied declaration required: NaviMain_GetState. */
 
 
 void FUN_00399d0c(int param_1)
@@ -139,7 +137,7 @@ void FUN_00399d0c(int param_1)
   puVar6 = (unsigned int *)NaviMain_GetCursorPos(temp_v37);
   temp_v22 = (unsigned long long)*puVar6 << 0x20;
   temp_v23 = (float)puVar6[1];
-  FUN_00231bb8(temp_v44 + 0x164,&temp_v35);
+  pairCopy(temp_v44 + 0x164,&temp_v35);
   DAT_0044cdd8 = 0xb;
   if ((*(unsigned int *)(temp_v44 + 0x10) & 2) != 0) {
     DAT_0044cdd8 = 0xb;
@@ -869,13 +867,11 @@ LAB_0039aba4:
   temp_v23 = temp_v23 + 120.0f;
   temp_v15 = temp_v15 + temp_v13;
   if (temp_v12 == 0) {
-    FUN_00231d2c(temp_v37);
-    temp_v3 = FUN_00231ca4(temp_v44);
+    temp_v3 = FUN_00231ca4(temp_v44,FUN_00231d2c(temp_v37));
     temp_v18 = (int)temp_v23;
     temp_v4 = (int)temp_v15;
     FUN_00231bcc(temp_v44 + 0x164,temp_v3 + 0xbc1,temp_v4,temp_v18,0xb,1);
-    NaviMain_GetState(temp_v37);
-    temp_v3 = FUN_00231ca4(temp_v44);
+    temp_v3 = FUN_00231ca4(temp_v44,NaviMain_GetState());
     FUN_00231bcc(temp_v44 + 0x164,temp_v3 + 0xbb9,temp_v4,temp_v18,0xb,1);
   }
   FUN_00232554(temp_v44,0);

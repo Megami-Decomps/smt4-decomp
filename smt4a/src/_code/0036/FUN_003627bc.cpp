@@ -6,7 +6,7 @@ extern "C" {
 
 int asdMemFree(...);
 int objectBufferFree(void);
-int FUN_0036bc10(int);
+int asdLightSelectActive(int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern int g_asdLightCount; /* 0x636e00 */
 
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: objectBufferFree. */
-/* Supplied declaration required: FUN_0036bc10. */
+/* Supplied declaration required: asdLightSelectActive. */
 
 
 void FUN_003627bc(int param_1)
@@ -38,7 +38,7 @@ void FUN_003627bc(int param_1)
     objectBufferFree();
   }
   if (*(int *)(param_1 + 0x54) != 0) {
-    FUN_0036bc10(1);
+    asdLightSelectActive(1);
     piVar8 = *(int **)(param_1 + 0xa0);
     temp_v3 = 0;
     if (*(int *)(*(int *)(param_1 + 0x9c) + 8) != 0) {

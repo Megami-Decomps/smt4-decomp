@@ -1,33 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00229264` (_code @ 0x229264, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: clamp branch ordering and negative-step floating comparison differ from retail. */
+#include "common.h"
 
-extern "C" {
-
-
-void FUN_00229264(float *param_1)
-
+static __inline float clampStep(float value, float step, float destination)
 {
-/* irregular: irregular input(s): in_s0, in_s1; 2 native warning(s); review required */
-  float in_s0;
-  float in_s1;
-  float temp_v0;
-  
-  temp_v0 = *param_1 + in_s0;
-  *param_1 = temp_v0;
-  if (in_s0 >= 0.0f) {
-    if (in_s1 < temp_v0) {
-      *param_1 = in_s1;
-      return;
+    if (step >= 0.0f) {
+        if (value > destination) {
+            return destination;
+        }
+    } else if (value <= destination) {
+        return destination;
     }
-  }
-  else if (temp_v0 <= in_s1) {
-    *param_1 = in_s1;
-    return;
-  }
-  in_s1 = temp_v0;
-  *param_1 = in_s1;
-  return;
+    return value;
 }
 
-} /* extern "C" */
+extern "C" {
+// Advance a value by a signed step without crossing the destination.
+void FUN_00229264(float *value, float step, float destination)
+{
+    *value += step;
+    *value = clampStep(*value, step, destination);
+}
+}

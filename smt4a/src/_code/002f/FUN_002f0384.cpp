@@ -1,40 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f0384` (_code @ 0x2f0384, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: preset/tail-call block layout and VFP constant-pool ordering differ. */
+#include "common.h"
+
+struct StatusCameraGameStateA {
+    u8 unk0000[0x2018];
+    u8 mode; // 0x2018
+};
+struct StatusCameraGlobalsA {
+    u32 unk00;
+    StatusCameraGameStateA *data; // 0x04
+};
 
 extern "C" {
+extern StatusCameraGlobalsA g_gameGlobals;
+void FUN_00240170(void);
+void statusCameraSetEye(f32, f32, f32);
+void statusCameraApply(void);
 
-int FUN_00240170(void);
-int statusCameraSetEye(void);
-int statusCameraApply(void);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned char g_gameGlobals; /* 0x588fd0 */
-
-/* Supplied declaration required: FUN_00240170. */
-/* Supplied declaration required: statusCameraSetEye. */
-/* Supplied declaration required: statusCameraApply. */
-
-
-void FUN_002f0384(int param_1)
-
+// Restore the configured or default camera preset in the two supported screen modes.
+void FUN_002f0384(s32 configured)
 {
-/* irregular: 3 native warning(s); review required */
-  if (*(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2018) != '\x03' && *(char *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x2018) != '\n') {
-    return;
-  }
-  if (param_1 != 0) {
-    FUN_00240170();
-  }
-  else {
-    statusCameraSetEye();
-  }
-  statusCameraApply();
-  return;
+    u8 mode = g_gameGlobals.data->mode;
+    if (mode != 3 && mode != 10)
+        return;
+    if (configured != 0)
+        FUN_00240170();
+    else
+        statusCameraSetEye(mode == 10 ? 125.0f : 100.0f, 6.3f, 4.5f);
+    statusCameraApply();
 }
-
-} /* extern "C" */
+}

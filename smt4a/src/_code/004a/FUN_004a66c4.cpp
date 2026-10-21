@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(...);
 int FUN_00184310(void);
 int FUN_003343f0(int);
-int FUN_0035d8a4(void);
+int useCounterRelease(void);
 int FUN_004a6610(int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -20,9 +20,9 @@ typedef struct {
 extern int useCounterIsFinished(void);
 extern int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: FUN_0035d8a4. */
+/* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: FUN_004a6610. */
-extern int FUN_004cfe4c(int);
+extern int flaggedValueHolderGetTotal(int);
 
 
 void FUN_004a66c4(int param_1)
@@ -35,12 +35,12 @@ void FUN_004a66c4(int param_1)
   
   temp_v0 = useCounterIsFinished();
   if (temp_v0 != 0) {
-    FUN_0035d8a4();
+    useCounterRelease();
     if ((*(char *)(param_1 + 0x860) == '\x01') || (*(char *)(param_1 + 0x860) != '\0')) {
       sysPlaySe(0x48);
     }
     else {
-      temp_v0 = FUN_004cfe4c(param_1 + 0x20);
+      temp_v0 = flaggedValueHolderGetTotal(param_1 + 0x20);
       temp_v1 = (unsigned int)*(unsigned short *)(param_1 + temp_v0 * 0x20 + 0x868);
       FUN_00184310();
       if ((*(unsigned char *)(temp_v1 + 0xb3) & 2) == 0) {

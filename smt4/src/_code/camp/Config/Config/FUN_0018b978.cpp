@@ -10,7 +10,7 @@ int eventQueueAddUnique(...);
 int eventQueueAddUniqueIfValid(...);
 
 int FUN_00195510(...);
-int FUN_0019e0c0(unsigned int);
+int scrRunOpcodesStub(unsigned int);
 int FUN_001d15fc(void);
 int scrScriptProcessStartEntry(...);
 int FUN_00297050(...);
@@ -34,7 +34,7 @@ typedef struct {
 extern int g_config; /* 0x43dc58 */
 
 /* Supplied declaration required: FUN_00195510. */
-/* Supplied declaration required: FUN_0019e0c0. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_001d15fc. */
 /* Supplied declaration required: FUN_00296e90. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -147,7 +147,7 @@ void FUN_0018b978(void)
     if (temp_v2 != 2) {
       return;
     }
-    temp_v2 = FUN_0019e0c0(*(unsigned int *)(g_config + 0xb4));
+    temp_v2 = scrRunOpcodesStub(*(unsigned int *)(g_config + 0xb4));
     if (temp_v2 != 2) {
       return;
     }
@@ -211,7 +211,7 @@ LAB_0018bf50:
     return;
   }
   FUN_002bf4f8(0x2f,0x59);
-  FUN_0019e0c0(*(unsigned int *)(temp_v8 + 0xb4));
+  scrRunOpcodesStub(*(unsigned int *)(temp_v8 + 0xb4));
   temp_v2 = g_config;
   temp_v3 = FUN_0029efc0(g_config);
   temp_v4 = FUN_0029efa8(temp_v2);

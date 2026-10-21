@@ -1,13 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fa15c` (_code @ 0x4fa15c, 0xc8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
-int FUN_00420dec(...);
+int animationGetModeChannelValue(...);
 int FUN_00420fc0(...);
 int FUN_004f6254(...);
-int FUN_004fa228(...);
+void btlUpdateAttackAnimation(BtlAuxA *);
 int FUN_004fbdd4(...);
 int VectorUnsignedToFloat(...);
 
@@ -33,11 +34,10 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00420dec. */
+/* Supplied declaration required: animationGetModeChannelValue. */
 /* Supplied declaration required: FUN_00420fc0. */
 extern int FUN_004212b8(unsigned int);
 /* Supplied declaration required: FUN_004f6254. */
-/* Supplied declaration required: FUN_004fa228. */
 /* Supplied declaration required: FUN_004fbdd4. */
 
 
@@ -52,7 +52,7 @@ void FUN_004fa15c(fn_004fa15c_arg0 *param_1)
   
   temp_v0 = FUN_004212b8(param_1->field_0x33c0);
   if (temp_v0 == 0) {
-    FUN_00420dec(param_1->field_0x33c0);
+    animationGetModeChannelValue(param_1->field_0x33c0);
     if ((int)*(short *)param_1->field_0x33c4 == (int)in_s0) {
       pvVar2 = param_1->field_0x33c8;
       VectorUnsignedToFloat((unsigned int)*(unsigned char *)((int)pvVar2 + 0xb),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -67,7 +67,7 @@ void FUN_004fa15c(fn_004fa15c_arg0 *param_1)
   if (temp_v0 != 0) {
     FUN_00420fc0(param_1->field_0x33c0);
     param_1->field_0x33b4 = 10;
-    FUN_004fa228(param_1);
+    btlUpdateAttackAnimation((BtlAuxA *)param_1);
     return;
   }
   return;

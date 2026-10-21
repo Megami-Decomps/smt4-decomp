@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013bfbc(int, int);
+int randomStateSeed(int, int);
 int FUN_0013c884(unsigned char *, int);
 int FUN_0014f0dc(unsigned char *, unsigned int *, unsigned int *);
 int FUN_001523b8(unsigned char *, int);
@@ -23,7 +23,7 @@ extern unsigned char DAT_0059dbe9; /* 0x59dbe9 */
 extern unsigned int DAT_0059dbec; /* 0x59dbec */
 extern unsigned char *DAT_0059dc08; /* 0x59dc08 */
 extern unsigned char DAT_0059e970; /* 0x59e970 */
-extern unsigned int DAT_005c10c4; /* 0x5c10c4 */
+extern unsigned int g_uiDrawOffset; /* 0x5c10c4 */
 extern unsigned int DAT_005c10c8; /* 0x5c10c8 */
 extern unsigned char DAT_00634c50; /* 0x634c50 */
 extern unsigned int DAT_00634c90; /* 0x634c90 */
@@ -47,7 +47,7 @@ extern unsigned int DAT_006352dc; /* 0x6352dc */
 extern unsigned int DAT_006352e0; /* 0x6352e0 */
 extern unsigned int DAT_006352e4; /* 0x6352e4 */
 
-/* Supplied declaration required: FUN_0013bfbc. */
+/* Supplied declaration required: randomStateSeed. */
 /* Supplied declaration required: FUN_0013c884. */
 /* Supplied declaration required: FUN_0014f0dc. */
 /* Supplied declaration required: FUN_001523b8. */
@@ -62,7 +62,7 @@ void FUN_002830cc(void)
   unsigned int temp_v0;
   unsigned int temp_v1;
   
-  FUN_0013bfbc(0,0x12345678);
+  randomStateSeed(0,0x12345678);
   FUN_00387454();
   temp_v0 = 0;
   DAT_006352ac = 0;
@@ -96,7 +96,7 @@ void FUN_002830cc(void)
   DAT_00634c94 = 0;
   DAT_00634c98 = 0;
   DAT_00634c9c = temp_v1;
-  DAT_005c10c4 = temp_v0;
+  g_uiDrawOffset = temp_v0;
   DAT_005c10c8 = temp_v0;
   return;
 }

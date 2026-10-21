@@ -21,7 +21,13 @@ typedef struct RenderCtx {
     /* 0x0528 */ u32 unk0528;
     /* 0x052C */ u8 unk052C[0xD20];
     /* 0x124C */ RenderStateStack stackA;
-    /* 0x126C */ u8 unk126C[0x40];
+    union {
+        /* 0x126C */ u8 unk126C[0x40];
+        struct {
+            /* 0x126C */ RenderStateStack stackC;
+            /* 0x128C */ u8 unk128c[0x20];
+        } additional;
+    };
     /* 0x12AC */ RenderStateStack stackB;
 } RenderCtx;
 
@@ -31,7 +37,13 @@ typedef struct RenderCtxA {
     /* 0x052C */ u32 unk052C;
     /* 0x0530 */ u8 unk0530[0xD28];
     /* 0x1258 */ RenderStateStack stackA;
-    /* 0x1278 */ u8 unk1278[0x40];
+    union {
+        /* 0x1278 */ u8 unk1278[0x40];
+        struct {
+            /* 0x1278 */ RenderStateStack stackC;
+            /* 0x1298 */ u8 unk1298[0x20];
+        } additional;
+    };
     /* 0x12B8 */ RenderStateStack stackB;
 } RenderCtxA;
 
@@ -58,6 +70,17 @@ static __inline void renderStackPop(RenderStateStack *st)
     cur = st->entries[st->count];
     if (st->dirty != 0 || top != cur) {
         st->apply(cur);
+        st->dirty = 0;
+    }
+}
+
+/* Replaces the current state without changing the stack depth. */
+static __inline void renderStackSet(RenderStateStack *st, int state)
+{
+    int previous = st->entries[st->count];
+    st->entries[st->count] = state;
+    if (st->dirty != 0 || previous != state) {
+        st->apply(state);
         st->dirty = 0;
     }
 }

@@ -3,7 +3,7 @@
 extern "C" {
 int jobStop(int job, int arg);
 int countdownTimerUpdate(void);
-int FUN_003ad390(void);
+int countdownTick(void);
 }
 
 /* The child object an owner releases when it stops. */
@@ -46,7 +46,7 @@ void jobOwnerStop(JobOwner *owner)
         owner->child = NULL;
     }
     countdownTimerUpdate();
-    FUN_003ad390();
+    countdownTick();
     owner->finish();
     jobStop(owner->job, 0);
 }

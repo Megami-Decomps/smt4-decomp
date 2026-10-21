@@ -28,7 +28,7 @@ typedef struct Globals {
     /* 0x04 */ Pool *pool;
 } Globals;
 
-extern Globals DAT_0044e650;
+extern Globals g_titleContentFileSystem;
 
 void nn_os_CriticalSection_Enter(void *cs);
 void nn_os_CriticalSection_Leave(void *cs);
@@ -40,7 +40,7 @@ void FUN_0035658c(PoolObject *object)
     void *lock;
 
     object->vtbl->destroy(object);
-    pool = DAT_0044e650.pool;
+    pool = g_titleContentFileSystem.pool;
     lock = pool->lock;
     nn_os_CriticalSection_Enter(lock);
     object->nextFree = pool->freeList;

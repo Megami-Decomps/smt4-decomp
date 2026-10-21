@@ -30,7 +30,7 @@ extern unsigned char DAT_005b40b4; /* 0x5b40b4 */
 extern unsigned char *FUN_002bee0c(unsigned char **);
 extern unsigned char *FUN_002befc0(void);
 extern unsigned char *FUN_002e09b4(unsigned char **, int, unsigned int);
-extern unsigned char *FUN_002e0c48(unsigned char **);
+extern unsigned char *holderReleaseObject(unsigned char **);
 /* Supplied declaration required: FUN_002e0c80. */
 extern unsigned char *FUN_002e0fac(void);
 extern unsigned char *taggedOwnerRelease(unsigned char **);
@@ -174,7 +174,7 @@ unsigned int FUN_0037adac(int param_1,int param_2,unsigned int param_3,unsigned 
           }
         }
         else {
-          puVar5 = (unsigned char *)FUN_002e0c48(&temp_v0);
+          puVar5 = (unsigned char *)holderReleaseObject(&temp_v0);
         }
       }
       else {

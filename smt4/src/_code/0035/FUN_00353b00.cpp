@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_00239ed0(unsigned int *, unsigned char *);
 int FUN_00239fc4(unsigned int *, unsigned int);
-int FUN_002ba8e8(int *);
-int FUN_002baa40(...);
+int clearWord(int *);
+int resultPairInitialize(...);
 int FUN_003535f0(unsigned int *, int);
 int FUN_003538bc(unsigned int, unsigned int, unsigned int, int);
 int FUN_00353948(void);
@@ -43,10 +43,10 @@ extern unsigned long long libc_strtoul(unsigned int, unsigned int, unsigned int)
 /* Supplied declaration required: FUN_00239ed0. */
 extern unsigned int *FUN_00239f84(unsigned char *, unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_00239fc4. */
-extern int FUN_002a12d8(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 extern unsigned int FUN_002b5c44(void);
-/* Supplied declaration required: FUN_002ba8e8. */
-/* Supplied declaration required: FUN_002baa40. */
+/* Supplied declaration required: clearWord. */
+/* Supplied declaration required: resultPairInitialize. */
 extern int FUN_002c55b4(void);
 extern int appletIsExitRequested(void);
 extern unsigned int *FUN_003520d8(unsigned char *, unsigned int, unsigned int *);
@@ -92,7 +92,7 @@ void FUN_00353b00(unsigned int *param_1,unsigned int *param_2,unsigned int *para
   temp_v17 = param_3;
   puStack_28 = param_4;
   if (param_7 >= 0x41) {
-    FUN_002baa40(param_1,0xe0613881);
+    resultPairInitialize(param_1,0xe0613881);
     return;
   }
   temp_v3 = 0;
@@ -112,7 +112,7 @@ void FUN_00353b00(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         temp_v2 = 0x10;
       }
       if ((temp_v2 != 0x8c) && (temp_v2 != 0xd)) {
-        FUN_002baa40(param_1,0xe0e13883);
+        resultPairInitialize(param_1,0xe0e13883);
         return;
       }
       temp_v3 = temp_v3 + 1;
@@ -176,20 +176,20 @@ void FUN_00353b00(unsigned int *param_1,unsigned int *param_2,unsigned int *para
     if (-1 < (int)puVar4) {
       temp_v2 = appletIsExitRequested();
       if ((temp_v2 != 0) || (temp_v2 = FUN_002c55b4(), temp_v2 != 0)) {
-        FUN_002baa40(temp_v15,0xc9413891);
+        resultPairInitialize(temp_v15,0xc9413891);
         return;
       }
       FUN_00239ed0(&temp_v7,&DAT_004c7000);
       temp_v11 = temp_v7;
       puStack_54 = temp_v8;
-      temp_v2 = FUN_002a12d8(&temp_v11);
+      temp_v2 = legacyResourceIdRemap(&temp_v11);
       if (temp_v2 < 0) {
         *temp_v15 = temp_v11;
         temp_v15[1] = (unsigned int)puStack_54;
         return;
       }
       temp_v10 = FUN_002b5c44();
-      FUN_002ba8e8(&temp_v9);
+      clearWord(&temp_v9);
       temp_v8 = &DAT_004c743c;
       temp_v7 = param_5;
       puVar4 = (unsigned int *)FUN_00353840(temp_v10,(unsigned int *)&temp_v9,*param_4,param_4[1]);
@@ -201,7 +201,7 @@ void FUN_00353b00(unsigned int *param_1,unsigned int *param_2,unsigned int *para
             temp_v8 = *(unsigned char **)(temp_v3 * 8 + 0x4c723c);
             puVar4 = (unsigned int *)FUN_003520d8(temp_v12,1,&temp_v7);
             if ((int)puVar4 < 0) {
-              FUN_002baa40(temp_v15,puVar4);
+              resultPairInitialize(temp_v15,puVar4);
               return;
             }
             temp_v4 = (temp_v7 >> 8) | ((int)temp_v8 << 0x18);
@@ -268,13 +268,13 @@ void FUN_00353b00(unsigned int *param_1,unsigned int *param_2,unsigned int *para
         if ((-1 < (int)puVar4) &&
            (puVar4 = temp_v16, FUN_003535f0(temp_v16,temp_v9), -1 < (int)puVar4)) {
           *temp_v17 = temp_v9;
-          FUN_002baa40(temp_v15,0);
+          resultPairInitialize(temp_v15,0);
           return;
         }
       }
     }
   }
-  FUN_002baa40(temp_v15,puVar4);
+  resultPairInitialize(temp_v15,puVar4);
   return;
 }
 

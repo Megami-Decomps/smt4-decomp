@@ -19,7 +19,7 @@ extern BtlUi g_btlUi;
 s32 menu32ModeIsNot6(u8 *menu);
 s32 FUN_0039ebcc(u8 *panel);
 s32 FUN_00321500(u8 *menu);
-s32 FUN_00184748(u8 *panel);
+s32 uiSpriteSetKeyframeThree(u8 *panel);
 
 /* Refreshes the battle UI menu and panel when the menu is not in mode 6 and FUN_0039ebcc succeeds. */
 void FUN_004ab734(void)
@@ -29,7 +29,7 @@ void FUN_004ab734(void)
     if (menu32ModeIsNot6(data->menu) != 0) {
         if (FUN_0039ebcc(data->panel) != 0) {
             FUN_00321500(data->menu);
-            FUN_00184748(data->panel);
+            uiSpriteSetKeyframeThree(data->panel);
         }
     }
 }

@@ -13,7 +13,7 @@ int FUN_0029d684(int);
 int FUN_0029defc(int, int);
 int FUN_0029dfc0(int);
 int FUN_003a98b8(int);
-int FUN_003aab78(int);
+int objectWordsClear(int);
 int FUN_003c2b74(int);
 int FUN_003c2c6c(int);
 
@@ -27,8 +27,8 @@ typedef struct {
 /* Supplied declaration required: FUN_00233240. */
 /* Supplied declaration required: FUN_00233344. */
 /* Supplied declaration required: FUN_00233404. */
-extern int FUN_0023360c(int);
-extern int FUN_00233718(int);
+extern int flaggedValueHolderGetTotal(int);
+extern int rangeLimitMin(int);
 extern int FUN_00240d5c(int);
 extern int gameGetNavigationState(void);
 extern int FUN_00293aac(void);
@@ -42,7 +42,7 @@ extern int FUN_0029e924(int);
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
 /* Supplied declaration required: FUN_003a98b8. */
-/* Supplied declaration required: FUN_003aab78. */
+/* Supplied declaration required: objectWordsClear. */
 /* Supplied declaration required: FUN_003c2b74. */
 /* Supplied declaration required: FUN_003c2c6c. */
 
@@ -108,9 +108,9 @@ void FUN_003aa510(int param_1)
   }
   temp_v7 = param_1 + 0x5a8;
   if (*(short *)(param_1 + 0x5a8) != 0) {
-    temp_v1 = FUN_0023360c(param_1 + 0x20);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v5 = *(short *)(temp_v7 + temp_v1 * 0x20 + 4);
-    temp_v1 = FUN_0023360c(param_1 + 0x20);
+    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x20);
     if (*(char *)(temp_v7 + temp_v1 * 0x20 + 0x1c) == '\0') {
       temp_v5 = 0;
     }
@@ -133,8 +133,8 @@ void FUN_003aa510(int param_1)
   else {
     FUN_0029dfc0(0);
   }
-  FUN_003aab78(param_1 + 0x96);
-  temp_v1 = FUN_00233718(param_1 + 0x20);
+  objectWordsClear(param_1 + 0x96);
+  temp_v1 = rangeLimitMin(param_1 + 0x20);
   temp_v6 = 0;
   if (temp_v6 < temp_v1) {
     do {

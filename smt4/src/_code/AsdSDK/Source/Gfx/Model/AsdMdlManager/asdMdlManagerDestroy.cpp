@@ -4,9 +4,9 @@
 extern "C" {
 
 void FUN_00152c00(AsdMdlNode *node);
-void FUN_00155b2c(AsdMdlObject *obj);
+void asdMdlListDestroyModels(AsdMdlObject *obj);
 void FUN_00152894(AsdMdlNode *node, void *data);
-s32 FUN_00153228(u32 *list, AsdMdlObject *obj);
+s32 lookupListFindByKey(u32 *list, AsdMdlObject *obj);
 void FUN_002b26d4(u32 *list);
 void asdMemFree(void *block);
 
@@ -22,7 +22,7 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
         obj->flags |= 0x200000;
         FUN_00152c00(obj->node);
     }
-    FUN_00155b2c(obj);
+    asdMdlListDestroyModels(obj);
     if (obj->records != NULL) {
         s32 count = obj->node->count;
         s32 i = 0;
@@ -37,7 +37,7 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
         obj->records = NULL;
     }
     FUN_00152894(obj->node, obj->request);
-    removed = FUN_00153228(&g_asdMdlList, obj);
+    removed = lookupListFindByKey(&g_asdMdlList, obj);
     if (removed != 0) {
         FUN_002b26d4(&g_asdMdlList);
     }

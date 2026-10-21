@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0046ba10` (_code @ 0x46ba10, 0x184 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_QuestInteraction.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct {
 } param_1_stack;
 
 extern int _ZN9Obj5333c015chooseNextStateEv(...); /* 0x468028 */
-extern int FUN_0046805c(...); /* 0x46805c */
 extern int FUN_00468574(...); /* 0x468574 */
 extern int FUN_004688c8(...); /* 0x4688c8 */
 extern int FUN_00468e98(...); /* 0x468e98 */
@@ -20,10 +20,9 @@ extern int jobStateObjWaitDone(...); /* 0x4693d4 */
 extern int FUN_00469400(...); /* 0x469400 */
 extern int FUN_00469d38(...); /* 0x469d38 */
 extern int scenePartAdvanceState(...); /* 0x469e1c */
-extern int FUN_00469eb0(...); /* 0x469eb0 */
+extern int questCenterUpdateTalkMasterScript(...); /* 0x469eb0 */
 extern int jobStateObjWaitDone2(...); /* 0x46a0b8 */
 extern int FUN_0046aab4(...); /* 0x46aab4 */
-extern int FUN_0046ac00(...); /* 0x46ac00 */
 extern int FUN_0046af60(...); /* 0x46af60 */
 extern int FUN_0046b18c(...); /* 0x46b18c */
 
@@ -54,9 +53,9 @@ void FUN_0046ba10(int param_1)
   *(unsigned int *)(param_1 + 0x2cc) = 0;
   *(romwright_code **)(param_1 + 0x2d0) = _ZN9Obj5333c015chooseNextStateEv;
   *(unsigned int *)(param_1 + 0x2d4) = 0;
-  *(romwright_code **)(param_1 + 0x2d8) = FUN_0046ac00;
+  *(romwright_code **)(param_1 + 0x2d8) = reinterpret_cast<romwright_code *>(questCenterBeginConversation);
   *(unsigned int *)(param_1 + 0x2dc) = 0;
-  *(romwright_code **)(param_1 + 0x2e0) = FUN_0046805c;
+  *(romwright_code **)(param_1 + 0x2e0) = reinterpret_cast<romwright_code *>(questInteractionChooseEntry);
   *(unsigned int *)(param_1 + 0x2e4) = 0;
   *(romwright_code **)(param_1 + 0x2e8) = FUN_00468fec;
   *(unsigned int *)(param_1 + 0x2ec) = 0;
@@ -64,7 +63,7 @@ void FUN_0046ba10(int param_1)
   *(unsigned int *)(param_1 + 0x2f4) = 0;
   *(romwright_code **)(param_1 + 0x2f8) = FUN_0046b18c;
   *(unsigned int *)(param_1 + 0x2fc) = 0;
-  *(romwright_code **)(param_1 + 0x308) = FUN_00469eb0;
+  *(romwright_code **)(param_1 + 0x308) = questCenterUpdateTalkMasterScript;
   *(unsigned int *)(param_1 + 0x30c) = 0;
   *(romwright_code **)(param_1 + 0x300) = FUN_004688c8;
   *(unsigned int *)(param_1 + 0x304) = 0;

@@ -5,7 +5,7 @@
 extern "C" {
 
 int asdModelCommandBlockRelease(void);
-int FUN_002b703c(void);
+int cursorResetFromParam(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -17,7 +17,7 @@ extern int DAT_004729e0; /* 0x4729e0 */
 extern int DAT_004729e4; /* 0x4729e4 */
 
 /* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: FUN_002b703c. */
+/* Supplied declaration required: cursorResetFromParam. */
 
 
 void FUN_00248ae8(int param_1)
@@ -31,7 +31,7 @@ void FUN_00248ae8(int param_1)
   unsigned int temp_v4;
   unsigned int temp_v5;
   
-  FUN_002b703c();
+  cursorResetFromParam();
   temp_v0 = DAT_004729e0;
   if (param_1 != 0) {
     *(unsigned int *)(DAT_004729e0 + DAT_004729e4 * 4) = 1;

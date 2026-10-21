@@ -19,9 +19,9 @@ extern int g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: FUN_00183f58. */
 extern int gameFlagIsSet(unsigned int);
 extern int FUN_0022e714(void);
-extern int FUN_00237608(void);
+extern int campCecHasObject(void);
 /* Supplied declaration required: FUN_002c7e24. */
-extern int FUN_002cab18(void);
+extern int partyPanelGetSelectedDemonId(void);
 extern int FUN_002cad18(void);
 extern int FUN_002f1964(void);
 extern int FUN_003aeaf0(unsigned int);
@@ -46,7 +46,7 @@ void FUN_0023fc38(void)
     temp_v1 = 0;
   }
   temp_v2 = FUN_002cad18();
-  temp_v3 = FUN_002cab18();
+  temp_v3 = partyPanelGetSelectedDemonId();
   if (temp_v2 != 0) {
     if (temp_v1) {
       if (*(char *)(temp_v5 + 0x9b4) != '\x10') {
@@ -169,7 +169,7 @@ void FUN_0023fc38(void)
       sysPlaySe(temp_v4);
     }
     temp_v2 = FUN_0022e714();
-    if ((temp_v2 != 0) && (temp_v2 = FUN_00237608(), temp_v2 != 0)) {
+    if ((temp_v2 != 0) && (temp_v2 = campCecHasObject(), temp_v2 != 0)) {
       if (*(char *)(temp_v5 + 0x42) == '\0') {
         temp_v4 = 0xe5;
       }

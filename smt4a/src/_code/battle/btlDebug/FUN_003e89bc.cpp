@@ -21,7 +21,7 @@ typedef struct {
 
 extern unsigned char LAB_00221b34; /* 0x221b34 */
 extern int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00573808; /* 0x573808 */
+extern unsigned int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_0057a634; /* 0x57a634 */
 extern unsigned int DAT_0057a638; /* 0x57a638 */
 extern unsigned int DAT_0057a63c; /* 0x57a63c */
@@ -61,7 +61,7 @@ void FUN_003e89bc(int param_1)
   
   *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
   temp_v13 = param_1;
-  FUN_004f9450(DAT_00573808);
+  FUN_004f9450(g_btlAux);
   temp_v9 = 0;
   piVar8 = (int *)(temp_v13 + 0x1ed4);
   temp_v6 = 4;

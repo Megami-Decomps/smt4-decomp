@@ -1,16 +1,17 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d3594` (_code @ 0x3d3594, 0x198 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_MovieRead.h"
 
 extern "C" {
 
 int mobiclipPlayerReleaseHandle(unsigned int *);
-int FUN_00158314(unsigned int *);
+int asdSndApplyPendingVoiceState(unsigned int *);
 int FUN_0015836c(unsigned char *);
 int FUN_0015842c(unsigned char *);
 int FUN_00423c0c(unsigned int *);
 int playHandleStart(unsigned int *);
-int FUN_00424018(unsigned char *);
+int movieSyncDrainSourcePositions(unsigned char *);
 int FUN_004241e0(unsigned char *);
 int FUN_00424268(void);
 int block158OwnerCheck(void);
@@ -34,14 +35,13 @@ extern int DAT_00617f4c; /* 0x617f4c */
 #define romwright_zext_4_8(value) ((unsigned long long)(unsigned int)(value))
 #endif
 /* Supplied declaration required: mobiclipPlayerReleaseHandle. */
-/* Supplied declaration required: FUN_00158314. */
+/* Supplied declaration required: asdSndApplyPendingVoiceState. */
 /* Supplied declaration required: FUN_0015836c. */
 /* Supplied declaration required: FUN_0015842c. */
-extern int FUN_0031f03c(void);
+extern int mobiclipProcessPollStopEvent(void);
 /* Supplied declaration required: FUN_00423c0c. */
 /* Supplied declaration required: playHandleStart. */
-extern int FUN_00423c7c(unsigned int *);
-/* Supplied declaration required: FUN_00424018. */
+/* Supplied declaration required: movieSyncDrainSourcePositions. */
 /* Supplied declaration required: FUN_004241e0. */
 /* Supplied declaration required: FUN_00424268. */
 /* Supplied declaration required: block158OwnerCheck. */
@@ -70,16 +70,16 @@ unsigned char FUN_003d3594(void)
   temp_v3 = 0;
   temp_v4 = 0;
   do {
-    temp_v0 = FUN_0031f03c();
+    temp_v0 = mobiclipProcessPollStopEvent();
     if (temp_v0 == 0) {
       temp_v3 = 1;
     }
-    temp_v0 = FUN_00423c7c(&DAT_00617f18);
+    temp_v0 = mobiclipReadIsComplete((MovieReadHandle*)&DAT_00617f18);
     if (temp_v0 != 0) {
       mobiclipPlayerReleaseHandle(&DAT_00617f18);
       FUN_0015836c(&DAT_00617f40);
       FUN_0015842c(&DAT_00617f40);
-      FUN_00158314(&DAT_00617f18);
+      asdSndApplyPendingVoiceState(&DAT_00617f18);
     }
     temp_v0 = block158OwnerHasRemaining(&DAT_00617f40);
     if (temp_v0 == 0) {
@@ -107,7 +107,7 @@ unsigned char FUN_003d3594(void)
       if ((int)(temp_v2 - (temp_v0 + (unsigned int)temp_v5)) < 0 ==
           (SBORROW4(temp_v2,temp_v0) != SBORROW4(temp_v2 - temp_v0,(unsigned int)temp_v5))) {
         FUN_00423c0c(&DAT_00617f18);
-        FUN_00424018(&DAT_00617f40);
+        movieSyncDrainSourcePositions(&DAT_00617f40);
         FUN_004241e0(&DAT_00617f40);
       }
       else if (-1 < temp_v2) {

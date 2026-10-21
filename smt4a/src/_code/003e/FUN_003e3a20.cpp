@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002a7324(int);
 int FUN_002f01e0(int *, int);
 int unitRecordBuild(int, unsigned char [4]);
-int FUN_00334214(unsigned char [4], int, int);
+int statusDisplayBindUnitRecord(unsigned char [4], int, int);
 int objBInitBlock19D0(unsigned char [300], int, int);
 int FUN_0033449c(int);
 int FUN_0035da74(short [10], int);
@@ -52,7 +52,7 @@ typedef struct {
 /* Supplied declaration required: FUN_002a7324. */
 /* Supplied declaration required: FUN_002f01e0. */
 /* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0035da74. */
@@ -156,7 +156,7 @@ void FUN_003e3a20(int param_1,fn_003e3a20_arg1 *param_2)
   *(int *)(param_1 + 0xa4) = temp_v3;
   *(int *)(param_1 + 0xa8) = temp_v1;
   FUN_0033449c(1);
-  FUN_00334214(temp_v4,0,0);
+  statusDisplayBindUnitRecord(temp_v4,0,0);
   objBInitBlock19D0(temp_v14,1,0);
   FUN_002a7324(1);
   FUN_002f01e0(&temp_v15,8);

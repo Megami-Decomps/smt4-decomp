@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011a388` (_code @ 0x11a388, 0x124 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
@@ -14,7 +15,7 @@ int FUN_002ec8f8(void);
 int onlineJobSetStateWaiting(int);
 int FUN_002f8728(unsigned char [28]);
 int FUN_002fd108(int, unsigned char *, unsigned int, unsigned int);
-int FUN_002fd180(unsigned char [28]);
+ListOwner *FUN_002fd180(ListOwner *);
 int onlineJobSetStateRunning(int);
 
 typedef int romwright_code(...);
@@ -48,7 +49,6 @@ extern unsigned int FUN_002e7908(unsigned char **, unsigned int *);
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f8728. */
 /* Supplied declaration required: FUN_002fd108. */
-/* Supplied declaration required: FUN_002fd180. */
 extern int FUN_002fde5c(void);
 /* Supplied declaration required: onlineJobSetStateRunning. */
 
@@ -123,7 +123,7 @@ void FUN_0011a388(int param_1)
       *(unsigned char *)(param_1 + 0x3b) = 4;
       onlineJobSetStateRunning(param_1);
     }
-    FUN_002fd180(temp_v15);
+    FUN_002fd180((ListOwner *)temp_v15);
   }
   else {
     temp_v6 = 0x80050003;

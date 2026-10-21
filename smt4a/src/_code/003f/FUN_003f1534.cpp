@@ -32,7 +32,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: FUN_001568f8. */
 /* Supplied declaration required: sysMemClear. */
-extern int FUN_003ec620(int, unsigned int);
+extern int stateEntryFindById(int, unsigned int);
 extern int btlUnitGet(unsigned int);
 
 
@@ -100,7 +100,7 @@ LAB_003f15c0:
   temp_v3 = param_1;
   temp_v17 = temp_v16;
   FUN_001568f8(param_1,(int)*(short *)((int)param_2 + 0x6a));
-  temp_v3 = FUN_003ec620(param_1,*(unsigned int *)(temp_v3 + 0xc));
+  temp_v3 = stateEntryFindById(param_1,*(unsigned int *)(temp_v3 + 0xc));
   if (temp_v3 == 0) {
     return 0;
   }
@@ -220,7 +220,7 @@ LAB_003f1864:
     }
     temp_v1 = param_1;
     FUN_001568f8(param_1,(int)*(short *)(temp_v3 + 0x6a));
-    temp_v1 = FUN_003ec620(param_1,*(unsigned int *)(temp_v1 + 0xc));
+    temp_v1 = stateEntryFindById(param_1,*(unsigned int *)(temp_v1 + 0xc));
     if (temp_v1 == 0) {
       return 0;
     }

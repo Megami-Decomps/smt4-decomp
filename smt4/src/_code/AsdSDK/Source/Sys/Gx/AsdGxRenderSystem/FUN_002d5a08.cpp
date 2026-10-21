@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002a66e0(int, int, int);
-int FUN_002bc11c(void);
+int osVirtToPhysAddress(void);
 int asdTextureCreate(void);
 int asdMemoryAllocAligned(...);
 int asdMemoryAlloc(...);
@@ -16,7 +16,7 @@ typedef struct {
 } param_7_stack;
 
 /* Supplied declaration required: FUN_002a66e0. */
-/* Supplied declaration required: FUN_002bc11c. */
+/* Supplied declaration required: osVirtToPhysAddress. */
 /* Supplied declaration required: asdTextureCreate. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -143,11 +143,11 @@ LAB_002d5b24:
     asdMemoryAllocAligned(0x10000,0x100,0,temp_v2,0x40,1);
   }
   piVar2[2] = temp_v4;
-  temp_v2 = FUN_002bc11c();
+  temp_v2 = osVirtToPhysAddress();
   piVar2[3] = temp_v2;
   piVar2[5] = temp_v6;
   piVar1[2] = piVar2[2];
-  temp_v3 = FUN_002bc11c();
+  temp_v3 = osVirtToPhysAddress();
   temp_v6 = 0;
   *(unsigned int *)(piVar1[3] + 0x30) = temp_v3;
   temp_v4 = 0;
@@ -181,7 +181,7 @@ LAB_002d5b24:
     if (param_7 != 0x20000) {
       if (param_7 != 0x30000) {
         piVar2[8] = temp_v0;
-        temp_v0 = FUN_002bc11c();
+        temp_v0 = osVirtToPhysAddress();
         piVar2[9] = temp_v0;
         piVar2[0xb] = temp_v6;
         piVar1[1] = (int)(piVar2 + 6);
@@ -200,7 +200,7 @@ LAB_002d5b24:
     asdMemoryAllocAligned(0x10000,0x100,0,temp_v2,0x40,1);
   }
   piVar2[8] = temp_v0;
-  temp_v0 = FUN_002bc11c();
+  temp_v0 = osVirtToPhysAddress();
   piVar2[9] = temp_v0;
   piVar2[0xb] = temp_v6;
   piVar1[1] = (int)(piVar2 + 6);

@@ -20,7 +20,7 @@ int FUN_002f7e38(int, unsigned int);
 int FUN_00306f3e(int, unsigned char *);
 int FUN_00306f9a(unsigned char [8], unsigned char *, int);
 int FUN_00306fe0(unsigned int, unsigned int, unsigned int);
-int FUN_0030cae0(...);
+int onlineJobCompleteWithResult(...);
 int FUN_00310eb4(unsigned char [12], unsigned int, int, unsigned char [8]);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -56,7 +56,7 @@ extern int FUN_002f7896(int, unsigned char *);
 /* Supplied declaration required: FUN_00306f3e. */
 /* Supplied declaration required: FUN_00306f9a. */
 /* Supplied declaration required: FUN_00306fe0. */
-/* Supplied declaration required: FUN_0030cae0. */
+/* Supplied declaration required: onlineJobCompleteWithResult. */
 /* Supplied declaration required: FUN_00310eb4. */
 
 
@@ -127,7 +127,7 @@ void FUN_0012a6e4(int param_1)
       else {
         temp_v7 = 0x8001000d;
         temp_v2 = FUN_002e7908(&temp_v5,&temp_v7);
-        FUN_0030cae0(param_1,temp_v2);
+        onlineJobCompleteWithResult(param_1,temp_v2);
       }
       onlineStringDestroy(temp_v8);
       return;
@@ -140,7 +140,7 @@ void FUN_0012a6e4(int param_1)
     temp_v7 = 0x80010004;
     puVar2 = (unsigned int *)FUN_002e7908(&temp_v5,&temp_v7);
   }
-  FUN_0030cae0(param_1,puVar2);
+  onlineJobCompleteWithResult(param_1,puVar2);
   return;
 }
 

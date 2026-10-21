@@ -2,11 +2,11 @@
 
 extern "C" {
 
-int FUN_002bc02c(void);
+int workCommandRefreshActiveSlots(void);
 
 u32 FUN_001ed5fc(void)
 {
-    FUN_002bc02c();
+    workCommandRefreshActiveSlots();
     return 1;
 }
 

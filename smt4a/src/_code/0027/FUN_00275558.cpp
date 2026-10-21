@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int asd3dSoundActorIsPlaying(void);
 int FUN_003d5000(...);
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int DAT_005821a0; /* 0x5821a0 */
 
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: asd3dSoundActorIsPlaying. */
 extern unsigned int FUN_003d4ed8(unsigned int);
 /* Supplied declaration required: FUN_003d5000. */
@@ -36,8 +36,8 @@ void FUN_00275558(void)
       temp_v4 = DAT_005821a0 + temp_v3 * 0x20;
       if ((*(char *)(temp_v4 + 0xc) != '\0') && (*(short *)(temp_v4 + 0x1c) == 1)) {
         temp_v6 = *(float *)(*(int *)(temp_v4 + 0x10) * 4 - 0x3a7ea8c);
-        temp_v5 = *(float *)(DAT_005806a4 + 0x50);
-        FUN_002b5cb4();
+        temp_v5 = *(float *)(g_lmapView + 0x50);
+        distSpatial();
         if (*(int *)(temp_v4 + 0x18) != 0) {
           temp_v1 = *(int *)(temp_v4 + 0x14);
           if (temp_v5 > temp_v6 + temp_v7) {

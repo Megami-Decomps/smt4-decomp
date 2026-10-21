@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_0024d7d0(int, unsigned char [1552]);
+int btlBuildUnitSnapshot(int, unsigned char [1552]);
 int FUN_0024d94c(int, unsigned int);
 int FUN_0026a858(void);
 int FUN_0029dc74(unsigned int, unsigned char [1552]);
 
 extern unsigned char g_gameGlobals; /* 0x44e140 */
 
-/* Supplied declaration required: FUN_0024d7d0. */
+/* Supplied declaration required: btlBuildUnitSnapshot. */
 /* Supplied declaration required: FUN_0024d94c. */
 /* Supplied declaration required: FUN_0026a858. */
 /* Supplied declaration required: FUN_0029dc74. */
@@ -36,13 +36,13 @@ void FUN_0029defc(unsigned int param_1,int param_2)
   else {
     if (param_2 == 0) {
       FUN_0029dc74(param_1 & 0xffff,temp_v3);
-      FUN_0024d7d0(temp_v0 + 0x1300,temp_v3);
+      btlBuildUnitSnapshot(temp_v0 + 0x1300,temp_v3);
       *(unsigned char *)(temp_v0 + 0x1e66) = 1;
       *(unsigned char *)(temp_v0 + 0x1eb8) = 1;
       return;
     }
     FUN_0026a858();
-    FUN_0024d7d0(temp_v0 + 0x1300,temp_v3);
+    btlBuildUnitSnapshot(temp_v0 + 0x1300,temp_v3);
     temp_v2 = 6;
   }
   *(unsigned char *)(temp_v0 + 0x1e66) = temp_v2;

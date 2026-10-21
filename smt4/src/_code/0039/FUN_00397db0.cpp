@@ -28,7 +28,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0028cfbc. */
 extern int objectPartRunUnlessLocked(int);
-extern int FUN_002aeaac(unsigned int, int);
+extern int recordTableGet(unsigned int, int);
 /* Supplied declaration required: FUN_002be5a4. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
@@ -100,7 +100,7 @@ void FUN_00397db0(int param_1)
         temp_v2 = *(short *)(temp_v5 + 10);
         temp_v3 = *(short *)(temp_v6 + 10);
         if (temp_v10 != -1) {
-          temp_v5 = FUN_002aeaac(3,(int)temp_v1);
+          temp_v5 = recordTableGet(3,(int)temp_v1);
           temp_v5 = (**(romwright_code **)(**(int **)(temp_v5 + 8) + 0x44))(*(int **)(temp_v5 + 8),temp_v10);
           (*(unsigned int *)temp_v4) = (*(unsigned int *)temp_v12);
           if (temp_v5 == 0) {

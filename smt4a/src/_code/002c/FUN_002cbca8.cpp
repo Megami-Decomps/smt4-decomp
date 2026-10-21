@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00192550(void);
-int FUN_00334214(unsigned int, int, int);
+int statusDisplayBindUnitRecord(unsigned int, int, int);
 int objBInitBlock19D0(int, int);
 int FUN_0033449c(int);
 int gameGlobalsQueueValues(unsigned int, int);
@@ -106,7 +106,7 @@ extern int g_partyPanel; /* 0x57f268 */
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00192550. */
 extern unsigned int gameGetSlotRecord(fn_002cbca8_arg0 *);
-/* Supplied declaration required: FUN_00334214. */
+/* Supplied declaration required: statusDisplayBindUnitRecord. */
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: gameGlobalsQueueValues. */
@@ -161,7 +161,7 @@ void FUN_002cbca8(fn_002cbca8_arg0 *param_1,fn_002cbca8_arg1 *param_2,fn_002cbca
       return;
     }
     temp_v5 = gameGetSlotRecord(param_1);
-    FUN_00334214(temp_v5,0,0);
+    statusDisplayBindUnitRecord(temp_v5,0,0);
     return;
   }
   if (0x7b6 >= temp_v1) {
@@ -282,7 +282,7 @@ LAB_002cbe5c:
         return;
       }
       temp_v5 = gameGetSlotRecord(param_1);
-      FUN_00334214(temp_v5,0,0);
+      statusDisplayBindUnitRecord(temp_v5,0,0);
       return;
     }
   }
@@ -295,7 +295,7 @@ LAB_002cbffc:
     return;
   }
   temp_v5 = gameGetSlotRecord(param_1);
-  FUN_00334214(temp_v5,0,0);
+  statusDisplayBindUnitRecord(temp_v5,0,0);
   objBInitBlock19D0(temp_v2 + 0x10e4,0);
   return;
 }

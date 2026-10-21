@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_4_stack;
 
-extern unsigned int DAT_004d4358; /* 0x4d4358 */
+extern unsigned int g_titleContentAdapterHeap; /* 0x4d4358 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 extern unsigned int recordRequireValue(int);
@@ -45,7 +45,7 @@ int FUN_0035633c(int param_1,unsigned int *param_2,unsigned int *param_3,unsigne
     if (-1 < temp_v0) {
       puVar2 = (unsigned int *)
                nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate
-                         (&DAT_004d4358);
+                         (&g_titleContentAdapterHeap);
       if (puVar2 != (unsigned int *)0x0) {
         puVar2[1] = temp_v1;
         *puVar2 = (unsigned int)"扄5抄5兀=慬5";

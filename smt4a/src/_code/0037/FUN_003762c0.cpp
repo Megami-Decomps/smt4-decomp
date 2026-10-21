@@ -11,7 +11,7 @@ int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
 extern int g_renderCtx; /* 0x59dbb4 */
-extern float DAT_005c10c4; /* 0x5c10c4 */
+extern float g_uiDrawOffset; /* 0x5c10c4 */
 extern float DAT_005c10c8; /* 0x5c10c8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -44,7 +44,7 @@ void FUN_003762c0(unsigned int param_1,unsigned int param_2,unsigned int param_3
   temp_v0 = g_renderCtx;
   temp_v5 = (float)VectorSignedToFloat(param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v6 = (float)VectorSignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v7 = romwright_piece_4_4((int)(temp_v6 + DAT_005c10c8),(int)(temp_v5 + DAT_005c10c4));
+  temp_v7 = romwright_piece_4_4((int)(temp_v6 + DAT_005c10c8),(int)(temp_v5 + g_uiDrawOffset));
   temp_v1 = FUN_001692ac(1);
   piVar6 = (int *)(temp_v0 + 0x1258);
   temp_v3 = *piVar6;

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0039c244` (_code @ 0x39c244, 0x5c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: native allocation/C1/virtual-start reconstruction for the 0x730-byte Obj557e3c needs coordinated mangled-symbol cutover; the draft also drops initializer argument zero and virtual arguments (0,1). */
 #include "romwright_types.h"
 
 extern "C" {

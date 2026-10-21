@@ -10,11 +10,11 @@ int FUN_00408184(...);
 int qsort(...);
 int FUN_00184310(void);
 int slotRecordFindById(...);
-int FUN_001ba514(int);
+int partyFindSlotById(int);
 int FUN_002a5e7c(...);
 int FUN_0032fea0(...);
 int FUN_0035ad50(unsigned int, unsigned char [98]);
-int FUN_003c3f1c(void);
+int findSkillMetadataById(void);
 int FUN_004bcd90(...);
 int FUN_004bd17c(...);
 int dispatchIfFound(unsigned int, unsigned int, int);
@@ -51,7 +51,7 @@ typedef struct {
     unsigned int sp410; /* 0x410: local_410 */
 } param_1_stack;
 
-extern int FUN_0034f3b4(...); /* 0x34f3b4 */
+extern int uiCompareMaskedRecordRankDescending(...); /* 0x34f3b4 */
 extern int *g_unite; /* 0x57f290 */
 
 /* Supplied declaration required: qsort. */
@@ -60,13 +60,13 @@ extern unsigned short FUN_0017760c(int);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: slotRecordFindById. */
 extern int gameGetSlotRecord(void);
-/* Supplied declaration required: FUN_001ba514. */
+/* Supplied declaration required: partyFindSlotById. */
 extern int FUN_002a4b28(unsigned int);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: FUN_002a6894. */
 /* Supplied declaration required: FUN_0032fea0. */
 /* Supplied declaration required: FUN_0035ad50. */
-/* Supplied declaration required: FUN_003c3f1c. */
+/* Supplied declaration required: findSkillMetadataById. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: FUN_004bd17c. */
@@ -178,20 +178,20 @@ unsigned char FUN_001ff014(int param_1)
       piVar1[param_1 * 2 + 0x4ef] = (temp_v5 << 2) | (piVar1[param_1 * 2 + 0x4ef] & 0xfffe0003U);
     }
   }
-  temp_v2 = FUN_001ba514(temp_v33);
+  temp_v2 = partyFindSlotById(temp_v33);
   if ((temp_v2 < 0x18) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
     bitsAt60Clear(temp_v1,4);
   }
-  temp_v2 = FUN_001ba514(temp_v31);
+  temp_v2 = partyFindSlotById(temp_v31);
   if ((temp_v2 < 0x18) && (temp_v1 = gameGetSlotRecord(), temp_v1 != 0)) {
     bitsAt60Clear(temp_v1,4);
   }
   if ((unsigned int)piVar1[param_1 * 2 + 0x4ee] >> 0x1e == 1) {
-    FUN_001ba514(temp_v33);
+    partyFindSlotById(temp_v33);
     FUN_004d0d70();
   }
   if ((piVar1[param_1 * 2 + 0x4ef] & 3U) == 1) {
-    FUN_001ba514(temp_v31);
+    partyFindSlotById(temp_v31);
     FUN_004d0d70();
   }
   temp_v3 = FUN_004d0cd4();
@@ -238,7 +238,7 @@ unsigned char FUN_001ff014(int param_1)
     do {
       temp_v8 = temp_v5 + temp_v7 * 2;
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v8 + 0x40);
-      if ((temp_v2 != 0) && (FUN_003c3f1c(), (*(unsigned char *)(temp_v2 + 3) & 0x20) != 0)) {
+      if ((temp_v2 != 0) && (findSkillMetadataById(), (*(unsigned char *)(temp_v2 + 3) & 0x20) != 0)) {
         puVar7 = &temp_v14;
         FUN_0032fea0(puVar7,0x20,*(unsigned short *)(temp_v8 + 0x40));
         if (puVar7 == (unsigned int *)0x0) {
@@ -254,7 +254,7 @@ unsigned char FUN_001ff014(int param_1)
       do {
         temp_v8 = temp_v4 + temp_v7 * 2;
         temp_v5 = (unsigned int)*(unsigned short *)(temp_v8 + 0x34);
-        FUN_003c3f1c();
+        findSkillMetadataById();
         if ((*(unsigned char *)(temp_v5 + 3) & 0x20) != 0) {
           puVar7 = &temp_v14;
           FUN_0032fea0(&temp_v14,0x20,*(unsigned short *)(temp_v8 + 0x34));
@@ -265,8 +265,8 @@ unsigned char FUN_001ff014(int param_1)
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 8);
-      qsort(temp_v4 + 0x34,8,2,FUN_0034f3b4);
-      qsort(&temp_v14,0x20,2,FUN_0034f3b4);
+      qsort(temp_v4 + 0x34,8,2,uiCompareMaskedRecordRankDescending);
+      qsort(&temp_v14,0x20,2,uiCompareMaskedRecordRankDescending);
       temp_v7 = getUnlockedSlotCount(temp_v4);
       temp_v8 = 0;
       if (temp_v8 < temp_v7) {
@@ -292,14 +292,14 @@ unsigned char FUN_001ff014(int param_1)
               *(unsigned short *)(temp_v9 + 0x34) = (unsigned short)temp_v14;
               temp_v14 = temp_v14 & 0xffff0000;
             }
-            qsort(&temp_v14,0x20,2,FUN_0034f3b4);
+            qsort(&temp_v14,0x20,2,uiCompareMaskedRecordRankDescending);
           }
           temp_v8 = temp_v8 + 1;
         } while (temp_v8 < temp_v7);
       }
     }
     else {
-      qsort(&temp_v14,0x20,2,FUN_0034f3b4);
+      qsort(&temp_v14,0x20,2,uiCompareMaskedRecordRankDescending);
       temp_v7 = getUnlockedSlotCount(temp_v4);
       temp_v8 = 0;
       do {

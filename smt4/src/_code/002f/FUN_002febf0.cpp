@@ -20,8 +20,8 @@ typedef struct {
 /* Supplied declaration required: FUN_00246570. */
 /* Supplied declaration required: scrSetResult. */
 extern unsigned int scrGetArg(unsigned int);
-extern int FUN_002ae3c4(void);
-extern unsigned int FUN_003a61b4(unsigned int, unsigned int, unsigned int, unsigned int);
+extern int aocEntryGetKind(void);
+extern unsigned int resolveWeightedItemChoice(unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 unsigned int FUN_002febf0(void)
@@ -35,9 +35,9 @@ unsigned int FUN_002febf0(void)
   
   temp_v2 = ((in_r3 >> 0x10) & 0xfc00) << 0x10;
   temp_v0 = scrGetArg(0);
-  temp_v1 = FUN_002ae3c4();
+  temp_v1 = aocEntryGetKind();
   if (temp_v1 == 9) {
-    temp_v0 = FUN_003a61b4(temp_v0,0xffff,0xffff,0);
+    temp_v0 = resolveWeightedItemChoice(temp_v0,0xffff,0xffff,0);
   }
   temp_v2 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v2 + 2)),(short)temp_v0);
   FUN_00246570(&temp_v2);

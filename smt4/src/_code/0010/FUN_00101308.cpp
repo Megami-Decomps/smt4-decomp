@@ -30,9 +30,9 @@ int FUN_001052d8(...);
 int FUN_00105394(...);
 int FUN_001058a4(...);
 int FUN_00105970(...);
-int FUN_00105c08(...);
-int FUN_00105e00(...);
-int FUN_00105e98(...);
+int asdGxResumeAndApplyPreset(...);
+int asdGxPresetsGetDepth(...);
+int asdGxSetChannelFlags(...);
 int FUN_00105f98(...);
 int FUN_0010633c(...);
 int dataTable02Sub3GetRecord(...);
@@ -40,7 +40,7 @@ int FUN_00107264(...);
 int FUN_00107598(...);
 int FUN_0010b5e8(...);
 int FUN_00123934(...);
-int FUN_002c5630(...);
+int mobiclipCloseSlot(...);
 int asdProcessSetGroupEnabled(...);
 int FUN_002c567c(...);
 int gameDataFlagsClear(...);
@@ -96,14 +96,14 @@ int gfxSetupResGraphicsFile(...);
 int FUN_001054bc(...);
 int FUN_00105a10(...);
 int FUN_00105b94(...);
-int FUN_00105e10(...);
+int asdGxPresetVectorSet(...);
 int FUN_00105e28(...);
 int asdGxPresetRequest(...);
 int asdMemorySetUseAllocatorA(...);
 int FUN_00106c28(...);
 int FUN_00106d40(...);
 int FUN_00106e10(...);
-int FUN_00107734(...);
+int randomStateSeed(...);
 int FUN_0010dc00(...);
 int asdGxCommandListCreate(...);
 int asdLoadFileSync(...);
@@ -161,7 +161,7 @@ extern unsigned char LAB_00101d48; /* 0x101d48 */
 extern unsigned char LAB_00101d58; /* 0x101d58 */
 extern unsigned char LAB_00101d6c; /* 0x101d6c */
 extern int titleEndCommandList(...); /* 0x1026a8 */
-extern int FUN_001026ec(...); /* 0x1026ec */
+extern int titleSubmitCommandList(...); /* 0x1026ec */
 extern int FUN_00102738(...); /* 0x102738 */
 extern int titleBeginCommandList(...); /* 0x102798 */
 extern int titleSceneStep(...); /* 0x1027d4 */
@@ -295,7 +295,7 @@ extern unsigned long long FUN_00103d38(unsigned int);
 /* Supplied declaration required: FUN_00103d48. */
 extern int FUN_00103e50(void);
 /* Supplied declaration required: randSetSeed. */
-extern unsigned long long FUN_00103e70(void);
+extern unsigned long long appletProcessSleepQuery(void);
 extern int FUN_00103ec8(void);
 /* Supplied declaration required: FUN_00103f74. */
 /* Supplied declaration required: FUN_00103f90. */
@@ -332,17 +332,17 @@ extern unsigned long long FUN_00105478(void);
 /* Supplied declaration required: FUN_00105970. */
 /* Supplied declaration required: FUN_00105a10. */
 /* Supplied declaration required: FUN_00105b94. */
-/* Supplied declaration required: FUN_00105c08. */
+/* Supplied declaration required: asdGxResumeAndApplyPreset. */
 /* Supplied declaration required: FUN_00105c78. */
 extern unsigned int asdModelGetStatic54(void);
 /* Supplied declaration required: FUN_00105cac. */
-/* Supplied declaration required: FUN_00105e00. */
-/* Supplied declaration required: FUN_00105e10. */
+/* Supplied declaration required: asdGxPresetsGetDepth. */
+/* Supplied declaration required: asdGxPresetVectorSet. */
 /* Supplied declaration required: FUN_00105e28. */
 /* Supplied declaration required: asdGxPresetRequest. */
 /* Supplied declaration required: FUN_00105e50. */
 /* Supplied declaration required: asdMemorySetUseAllocatorA. */
-/* Supplied declaration required: FUN_00105e98. */
+/* Supplied declaration required: asdGxSetChannelFlags. */
 /* Supplied declaration required: FUN_00105ef8. */
 /* Supplied declaration required: FUN_00105f98. */
 /* Supplied declaration required: FUN_00106080. */
@@ -363,7 +363,7 @@ extern unsigned int FUN_00106708(void);
 /* Supplied declaration required: FUN_00107264. */
 extern int FUN_00107538(unsigned int);
 /* Supplied declaration required: FUN_00107598. */
-/* Supplied declaration required: FUN_00107734. */
+/* Supplied declaration required: randomStateSeed. */
 /* Supplied declaration required: FUN_0010b5e8. */
 /* Supplied declaration required: FUN_0010dc00. */
 /* Supplied declaration required: FUN_00123934. */
@@ -374,7 +374,7 @@ extern unsigned long long FUN_002c5434(unsigned int);
 /* Supplied declaration required: sleepQueryAnswer. */
 /* Supplied declaration required: FUN_002c560c. */
 /* Supplied declaration required: FUN_002c5620. */
-/* Supplied declaration required: FUN_002c5630. */
+/* Supplied declaration required: mobiclipCloseSlot. */
 extern unsigned long long jyoucyuGetTableEntry(unsigned int);
 /* Supplied declaration required: asdProcessSetGroupEnabled. */
 /* Supplied declaration required: FUN_002c567c. */
@@ -464,7 +464,7 @@ void FUN_00101308(void)
   
   ppcVar5 = &temp_v26;
   nn_cfg_CTR_Initialize();
-  FUN_00107734(0,0x12345678);
+  randomStateSeed(0,0x12345678);
   asdMemoryInit(0x100000);
   asdMemorySetUseAllocatorA(1);
   FUN_0010250c();
@@ -501,8 +501,8 @@ void FUN_00101308(void)
   temp_v3 = FUN_002c5d80(5,1);
   *(unsigned int *)(temp_v2 + 0x1378) = temp_v3;
   FUN_001042dc();
-  FUN_00105e10(0);
-  FUN_00105e10(1);
+  asdGxPresetVectorSet(0);
+  asdGxPresetVectorSet(1);
   __aeabi_vec_ctor_nocookie_nodtor(&temp_v26,&LAB_001071c8,0x3c,2);
   *(unsigned int *)((int)ppcVar5 + 0x80) = 0;
   *(unsigned short *)((int)ppcVar5 + 0x84) = 0x8058;
@@ -630,7 +630,7 @@ void FUN_00101308(void)
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c14,0x83,0);
-  temp_v26 = FUN_001026ec;
+  temp_v26 = titleSubmitCommandList;
   temp_v27 = 0;
   temp_v28 = 0;
   asdProcessCreateSimple(&LAB_00101c5c,0xcb,0);
@@ -731,7 +731,7 @@ LAB_00101b80:
           asdProcessSetGroupEnabled(0xde,0);
           asdProcessSetGroupEnabled(0xdf,0);
         }
-        FUN_00105e98(0,temp_v2 == 0);
+        asdGxSetChannelFlags(0,temp_v2 == 0);
         temp_v2 = 0;
         if ((DAT_00446db1 != '\0') && (temp_v2 = iRam00446dcc + 1, iRam00446dcc + 1 >= 3)) {
           temp_v2 = 2;
@@ -802,7 +802,7 @@ LAB_00101b80:
         temp_v12 = temp_v4 + temp_v14;
         uRam00446dd8.whole = temp_v24;
         uRam00446dd0.whole = temp_v23;
-        FUN_00105e00();
+        asdGxPresetsGetDepth();
         temp_v17 = (float)VectorSignedToFloat((((temp_v13 + temp_v12) >> 7) |
                                             ((temp_v2 * 0x20c49ba5 +
                                               (int)((unsigned long long)temp_v6 * 0x20c49ba5 >> 0x20) +
@@ -816,7 +816,7 @@ LAB_00101b80:
             FUN_001052d8();
           }
           else {
-            FUN_00105c08();
+            asdGxResumeAndApplyPreset();
           }
         }
         if (DAT_00446db3 != 0) {
@@ -824,7 +824,7 @@ LAB_00101b80:
           if (temp_v2 != 0) {
             FUN_00123934();
             if (g_mobiclipProcess != 0) {
-              FUN_002c5630(3);
+              mobiclipCloseSlot(3);
             }
             FUN_00107598();
             temp_v2 = FUN_001041c8();
@@ -844,11 +844,11 @@ LAB_00101b80:
             appletCloseApplication();
           }
         }
-        temp_v24 = FUN_00103e70();
+        temp_v24 = appletProcessSleepQuery();
         temp_v3 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
         if ((int)temp_v24 == 2) {
           if (g_mobiclipProcess != 0) {
-            FUN_002c5630(2);
+            mobiclipCloseSlot(2);
           }
           appletReplySleepQueryAllow();
           FUN_002c5620();
@@ -872,7 +872,7 @@ LAB_00101b80:
           }
           else {
             if (g_mobiclipProcess != 0) {
-              FUN_002c5630(0);
+              mobiclipCloseSlot(0);
             }
             FUN_00123934();
             FUN_00106e60();
@@ -883,7 +883,7 @@ LAB_00101b80:
               temp_v3 = (unsigned int)((unsigned long long)temp_v24 >> 0x20);
               if ((int)temp_v24 != 0) {
                 if (g_mobiclipProcess != 0) {
-                  FUN_002c5630(3);
+                  mobiclipCloseSlot(3);
                   nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
                   temp_v3 = temp_v10;
                 }
@@ -892,7 +892,7 @@ LAB_00101b80:
             }
             else {
               if (g_mobiclipProcess != 0) {
-                FUN_002c5630(3);
+                mobiclipCloseSlot(3);
                 nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
                 temp_v3 = temp_v10;
               }
@@ -921,7 +921,7 @@ LAB_00101b80:
   } while ((int)temp_v25 == 0);
   sleepQueryAnswer(1);
   if (g_mobiclipProcess != 0) {
-    FUN_002c5630(1);
+    mobiclipCloseSlot(1);
   }
   FUN_00123934();
   FUN_00106f70();
@@ -931,7 +931,7 @@ LAB_00101b80:
     temp_v2 = FUN_002c55b4();
     if (temp_v2 != 0) {
       if (g_mobiclipProcess != 0) {
-        FUN_002c5630(3);
+        mobiclipCloseSlot(3);
         nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
       }
       DAT_00446db3 = 1;
@@ -939,7 +939,7 @@ LAB_00101b80:
   }
   else {
     if (g_mobiclipProcess != 0) {
-      FUN_002c5630(3);
+      mobiclipCloseSlot(3);
       nn_applet_CTR_detail_CloseApplication((unsigned char *)0x0,0,DAT_0044e368);
     }
     DAT_00446db3 = 1;

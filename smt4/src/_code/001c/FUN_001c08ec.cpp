@@ -1,12 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c08ec` (_code @ 0x1c08ec, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: five hard-float inputs were lost by the draft; retail tail branches to 0x2b7d94 without a symbol/relocation, so the required callee boundary is unavailable. */
 #include "romwright_types.h"
 
 extern "C" {
 
 int FUN_002adba8(unsigned long long *, int, int);
 int FUN_002b7dc4(unsigned int, unsigned int, unsigned int);
-int FUN_002b81e4(void);
+int gpuSubmitDefaultPacket(void);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +14,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002adba8. */
 /* Supplied declaration required: FUN_002b7dc4. */
-/* Supplied declaration required: FUN_002b81e4. */
+/* Supplied declaration required: gpuSubmitDefaultPacket. */
 
 
 void FUN_001c08ec(void)
@@ -26,7 +25,7 @@ void FUN_001c08ec(void)
   unsigned long long uStack_18;
   unsigned long long uStack_10;
   
-  FUN_002b81e4();
+  gpuSubmitDefaultPacket();
   FUN_002b7dc4(0xffffffff,0xffffffff,0xffffffff);
   uStack_20 = 0x1024500000001;
   uStack_18 = 0xf023100000001;

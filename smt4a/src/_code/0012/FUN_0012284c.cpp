@@ -36,7 +36,7 @@ extern unsigned int FUN_00104694(void);
 /* Supplied declaration required: FUN_0010a108. */
 /* Supplied declaration required: FUN_0010d0cc. */
 /* Supplied declaration required: FUN_00122250. */
-extern unsigned int FUN_002e6e26(void);
+extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
 extern int operatorNew(unsigned int);
 extern int FUN_002e789a(int);
@@ -148,7 +148,7 @@ void FUN_0012284c(unsigned int param_1,int param_2,int param_3,char *param_4,int
                 uStack_68 = param_9;
                 FUN_00122250(temp_v0,*(unsigned int *)(param_3 + 0x44),temp_v9,param_2);
                 FUN_002f4f20(*(int *)(param_2 + 0x11c) + 4,1);
-                temp_v0 = FUN_002e6e26();
+                temp_v0 = onlineContextGetInstance();
                 FUN_002e78d0(temp_v0,*(unsigned int *)(param_2 + 0x11c),0);
                 piVar5 = &temp_v5;
                 temp_v5 = 0x10001;

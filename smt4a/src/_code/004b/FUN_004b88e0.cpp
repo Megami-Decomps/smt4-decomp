@@ -35,7 +35,7 @@ extern unsigned char DAT_005f1798; /* 0x5f1798 */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0020214c. */
-extern int FUN_00224880(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -56,7 +56,7 @@ void FUN_004b88e0(fn_004b88e0_arg0 *param_1)
   puVar3 = temp_v2;
   FUN_004b75d0();
   if (param_1->field_0x2c != 0) {
-    if ((param_1->field_0x2c == 1) && (temp_v0 = FUN_00224880(param_1->field_0x1178), temp_v0 == 2)) {
+    if ((param_1->field_0x2c == 1) && (temp_v0 = scrRunOpcodesStub(param_1->field_0x1178), temp_v0 == 2)) {
       scrScriptProcessDestroy(param_1->field_0x1178);
       param_1->field_0x1178 = 0;
       asdMemFree(param_1->field_0x1170);

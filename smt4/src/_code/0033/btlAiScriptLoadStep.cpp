@@ -6,17 +6,17 @@ extern "C" {
 
 int scrScriptProcessStartEntry(int, int);
 int FUN_00297060(int, int);
-int FUN_00297468(int *, int *, int);
+int asdLoadFileAsyncSimple(int *, int *, int);
 int scrScriptProcessDestroy(void);
 int asdMemFree(void);
 int aocQueueType1d(int, int, int *, int *);
 
 extern int g_aocSystem; /* 0x433158 */
 
-extern int FUN_0019e0c0(int);
+extern int scrRunOpcodesStub(int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_00297468. */
+/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: aocQueueType1d. */
@@ -35,7 +35,7 @@ unsigned int btlAiScriptLoadStep(int *param_1)
       *(unsigned int *)(g_aocSystem + 0x444) = 0xffffffff;
     }
     else {
-      FUN_00297468(param_1 + 4,param_1,0);
+      asdLoadFileAsyncSimple(param_1 + 4,param_1,0);
     }
     param_1[3] = 2;
     break;
@@ -52,7 +52,7 @@ unsigned int btlAiScriptLoadStep(int *param_1)
     param_1[3] = temp_v0;
     break;
   case 3:
-    temp_v0 = FUN_0019e0c0(param_1[1]);
+    temp_v0 = scrRunOpcodesStub(param_1[1]);
     if (temp_v0 != 2) {
       return 0;
     }

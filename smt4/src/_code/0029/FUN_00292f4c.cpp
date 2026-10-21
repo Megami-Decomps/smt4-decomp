@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00292f4c` (_code @ 0x292f4c, 0x2dc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 
 extern "C" {
 
@@ -10,7 +11,7 @@ int FUN_0029c94c(unsigned int);
 int FUN_0029da34(unsigned int, int, int, unsigned int);
 int FUN_0029ee6c(unsigned int, int);
 int FUN_00309bc8(unsigned int, int);
-int FUN_003170b0(unsigned int, int);
+void updateEquippedWeaponHelp(RelativeDirectory *, unsigned int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -33,11 +34,11 @@ extern int FUN_00297ca4(int, unsigned int);
 extern int FUN_0029efa8(unsigned int);
 extern int FUN_0029efc0(unsigned int);
 extern int gameGetUnitRecord(int);
-extern unsigned int FUN_002b066c(unsigned short);
+extern unsigned int partyMemberFindById(unsigned short);
 extern unsigned int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00309bc8. */
-/* Supplied declaration required: FUN_003170b0. */
+/* Supplied declaration required: updateEquippedWeaponHelp. */
 
 
 void FUN_00292f4c(int param_1)
@@ -111,7 +112,7 @@ void FUN_00292f4c(int param_1)
   if (*(int *)(param_1 + 0x305c) != 0) {
     if (temp_v3 == 0) {
       temp_v0 = gameGetUnitRecord((int)*(short *)(param_1 + *(int *)(param_1 + 0x305c) * 2 + 0x38f4));
-      temp_v2 = FUN_002b066c(*(unsigned short *)(temp_v0 + 0x46));
+      temp_v2 = partyMemberFindById(*(unsigned short *)(temp_v0 + 0x46));
       FUN_0029da34(*puVar6,2,*(unsigned short *)(temp_v0 + 0x46),temp_v2);
       return;
     }
@@ -124,7 +125,7 @@ void FUN_00292f4c(int param_1)
   }
   else {
     if (temp_v3 == 0) {
-      FUN_003170b0(*puVar6,0);
+      updateEquippedWeaponHelp((RelativeDirectory *)*puVar6,0);
       return;
     }
     if ((temp_v3 == 1) && (temp_v0 = gameFlagIsSet(0x410), temp_v0 != 0)) {

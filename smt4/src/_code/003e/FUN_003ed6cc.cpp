@@ -12,7 +12,7 @@ typedef struct {
 } param_3_stack;
 
 extern unsigned char LAB_0033b5a0; /* 0x33b5a0 */
-extern int FUN_00348784(...); /* 0x348784 */
+extern int vecContainerDestroy(...); /* 0x348784 */
 extern unsigned int DAT_0044ea68; /* 0x44ea68 */
 extern unsigned int DAT_0044ea6c; /* 0x44ea6c */
 extern unsigned int DAT_004d4924; /* 0x4d4924 */
@@ -54,7 +54,7 @@ unsigned long long FUN_003ed6cc(unsigned int param_1,unsigned int param_2,int pa
   DAT_004d4944 = 0;
   puVar1 = &DAT_004d494c;
   __aeabi_vec_ctor_nocookie_nodtor(&DAT_004d494c,&LAB_0033b5a0,0x544,2);
-  return romwright_piece_4_4(FUN_00348784,puVar1 + -4);
+  return romwright_piece_4_4(vecContainerDestroy,puVar1 + -4);
 }
 
 } /* extern "C" */

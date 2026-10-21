@@ -21,7 +21,7 @@ extern EplSlots *g_eplSlots;
 
 void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags,
                            u32 size, s32 fromFront);
-void FUN_0014aa88(EplSlots *slots);
+void tripleClear(EplSlots *slots);
 
 void mapEplSlotsInit(void)
 {
@@ -29,7 +29,7 @@ void mapEplSlotsInit(void)
 
     EplSlots *slots = g_eplSlots = static_cast<EplSlots *>(
         asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EplSlots), 1));
-    FUN_0014aa88(slots);
+    tripleClear(slots);
 
     for (s32 index = 0; index < 16; ++index) {
         EplSlot *slot = &slots->unk0C[index];

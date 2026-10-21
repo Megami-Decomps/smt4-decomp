@@ -28,7 +28,7 @@ extern int gameGetSlotTable(void);
 extern int FUN_0022fd80(int, unsigned int);
 /* Supplied declaration required: FUN_0034a290. */
 extern int playerHasFlagBit(unsigned int);
-extern int FUN_003e4940(void);
+extern int actorIsActive(void);
 extern int FUN_003e4cb4(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */
 extern int bitsAt60Test(int, unsigned int);
@@ -161,7 +161,7 @@ void FUN_002ed428(int param_1)
       do {
         temp_v5 = temp_v4 & 0xffff;
         FUN_003e503c();
-        temp_v2 = FUN_003e4940();
+        temp_v2 = actorIsActive();
         if (temp_v2 != 0) {
           temp_v2 = FUN_003e4cb4(temp_v5);
           temp_v8 = dataTable9Type3GetClamped(*(unsigned short *)(temp_v5 + 100),temp_v11);

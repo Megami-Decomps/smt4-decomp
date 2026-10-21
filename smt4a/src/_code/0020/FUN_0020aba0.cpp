@@ -18,8 +18,8 @@ extern int g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: FUN_002884c8. */
 extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
-extern unsigned int FUN_002c2c4c(int);
-extern int FUN_002c2c68(int);
+extern unsigned int widgetSubCallIfVisible(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: __aeabi_idivmod. */
 
 
@@ -40,13 +40,13 @@ unsigned int FUN_0020aba0(int param_1,int param_2)
     return 0;
   }
   temp_v6 = 3;
-  temp_v0 = FUN_002c2c4c(param_1);
+  temp_v0 = widgetSubCallIfVisible(param_1);
   __aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v0);
   if (temp_v4 != 0) {
     temp_v1 = FUN_002a4894(param_1);
-    temp_v2 = FUN_002c2c68(param_1);
+    temp_v2 = objectApplyIfUnblocked(param_1);
     if (temp_v1 == temp_v2 - 1) {
-      temp_v0 = FUN_002c2c4c(param_1);
+      temp_v0 = widgetSubCallIfVisible(param_1);
       __aeabi_idivmod(*(unsigned int *)(param_1 + 0x50),temp_v0);
       temp_v6 = temp_v5 - 1;
     }

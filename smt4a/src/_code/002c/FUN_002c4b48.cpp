@@ -16,7 +16,7 @@ int messageForwardDefaultMode(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageSlotSet(int);
-int FUN_002c76c0(...);
+int scrCommMessageSetMode(...);
 int libc_strcpy(unsigned int [32], unsigned int);
 int sysMemClear(unsigned int [32], int);
 int FUN_003180c4(int, unsigned int [32]);
@@ -42,13 +42,13 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_002292ac. */
 /* Supplied declaration required: messageForwardDefaultMode. */
-extern int FUN_0026272c(void);
+extern int messageMainIsIdle(void);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageSlotSet. */
 extern int FUN_002a4b74(void);
 extern int FUN_002ba85c(void);
-/* Supplied declaration required: FUN_002c76c0. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 extern int scrGetCommandFrame(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: sysMemClear. */
@@ -87,7 +87,7 @@ unsigned int FUN_002c4b48(void)
   
   temp_v3 = QuestCenter_GetActiveEntry();
   if (temp_v3 == 0) {
-    FUN_002c76c0(0xffffffff);
+    scrCommMessageSetMode(0xffffffff);
     messageSlotSet(0);
     return 1;
   }
@@ -99,11 +99,11 @@ unsigned int FUN_002c4b48(void)
     scrWorkSetValue(3,0);
     puVar5 = (unsigned int *)QuestCenter_GetActiveEntry();
     *puVar5 = *puVar5 & 0xfffeffff;
-    FUN_002c76c0(1);
+    scrCommMessageSetMode(1);
   }
   temp_v3 = scrWorkGetValue(0);
   if (temp_v3 == 100) {
-    FUN_002c76c0(0xffffffff);
+    scrCommMessageSetMode(0xffffffff);
     messageSlotSet(0);
     return 1;
   }
@@ -167,7 +167,7 @@ unsigned int FUN_002c4b48(void)
   }
   temp_v9 = scrWorkGetValue(0);
   if (temp_v9 == 5) {
-    temp_v3 = FUN_0026272c();
+    temp_v3 = messageMainIsIdle();
     if (temp_v3 == 0) {
       return 0;
     }

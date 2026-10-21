@@ -6,9 +6,9 @@ extern "C" {
 
 int dataTable17Sub1GetCount(...);
 int dataTable17Sub1GetRecord(...);
-int FUN_0026374c(...);
+int placeWinStartText(...);
 int FUN_00297060(...);
-int FUN_0029e620(...);
+int messageTargetSetValue(...);
 int FUN_0029e648(...);
 int FUN_0029ee6c(...);
 int FUN_002a03d8(...);
@@ -37,10 +37,10 @@ struct fn_003a0d64_arg0 {
 extern int eventTexJobSlotsDone(unsigned int);
 /* Supplied declaration required: dataTable17Sub1GetCount. */
 /* Supplied declaration required: dataTable17Sub1GetRecord. */
-/* Supplied declaration required: FUN_0026374c. */
+/* Supplied declaration required: placeWinStartText. */
 extern int FUN_0028e9d0(unsigned int);
 /* Supplied declaration required: FUN_00297060. */
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a03d8. */
@@ -89,7 +89,7 @@ void FUN_003a0d64(fn_003a0d64_arg0 *param_1)
         FUN_002a03d8(0,10);
         FUN_002a03d8(1,10);
         FUN_0029e648(1,0);
-        FUN_0029e620(0);
+        messageTargetSetValue(0);
         temp_v0 = param_1->field_0x14;
         temp_v6 = param_1->field_0x18;
         temp_v2 = dataTable17Sub1GetRecord(temp_v8,0);
@@ -112,7 +112,7 @@ void FUN_003a0d64(fn_003a0d64_arg0 *param_1)
           } while (temp_v4 < (int)puVar5);
         }
         dataTable17Sub1GetRecord(temp_v9,temp_v1);
-        FUN_0026374c();
+        placeWinStartText();
         temp_v5 = 0x3b7;
         do {
           temp_v1 = FUN_0028e9d0(temp_v5);

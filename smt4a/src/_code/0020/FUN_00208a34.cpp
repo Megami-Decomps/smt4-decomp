@@ -25,7 +25,7 @@ extern int FUN_00163fd4(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
-extern int FUN_001a6508(unsigned int, unsigned int, int, unsigned int);
+extern int aocRunByName(unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_001a6568. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 
@@ -58,7 +58,7 @@ void FUN_00208a34(int param_1,unsigned int param_2)
     temp_v5[0] = (unsigned short)param_1;
     libc_bsearch(puVar5,temp_v3,temp_v2,4,&LAB_002321f8);
     if ((puVar5 != (unsigned short *)0x0) && (temp_v1 = (int)(short)puVar5[1], -1 < temp_v1)) {
-      temp_v4 = FUN_001a6508(g_aocSystem,0x34,temp_v1,1);
+      temp_v4 = aocRunByName(g_aocSystem,0x34,temp_v1,1);
       if (temp_v4 != 0) {
         FUN_001a6568(g_aocSystem,0x34,temp_v1,0x10000);
       }

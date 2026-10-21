@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0023553c(int);
+int messageMainSetTargetFlags(int);
 int FUN_002355ac(int);
 int FUN_00273c54(void);
 int FUN_00273d34(void);
@@ -13,7 +13,7 @@ int mapClearPendingEntries(void);
 int gameFlagSetValue(...);
 int FUN_00289c98(int);
 int FUN_00296934(void);
-int FUN_0029e620(unsigned int, int);
+int messageTargetSetValue(unsigned int, int);
 int FUN_0029e648(int, int);
 int FUN_0029ee6c(int, int);
 
@@ -44,7 +44,7 @@ extern unsigned char DAT_0049fa1c; /* 0x49fa1c */
 
 extern int questGetPrimaryState(void);
 extern unsigned char questGetSecondaryState(void);
-/* Supplied declaration required: FUN_0023553c. */
+/* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: FUN_002355ac. */
 extern int FUN_00241990(void);
 /* Supplied declaration required: FUN_00273c54. */
@@ -54,7 +54,7 @@ extern int FUN_00241990(void);
 /* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00289c98. */
 /* Supplied declaration required: FUN_00296934. */
-/* Supplied declaration required: FUN_0029e620. */
+/* Supplied declaration required: messageTargetSetValue. */
 /* Supplied declaration required: FUN_0029e648. */
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int gameGetMapBlock(void);
@@ -127,8 +127,8 @@ void FUN_00382cd8(fn_00382cd8_arg0 *param_1)
     if (temp_v2 == 0) {
       if (param_1[1].field_0x1 != '\0') {
         FUN_0029e648(1,0);
-        FUN_0029e620(0xffffff9c,0);
-        FUN_0023553c(1);
+        messageTargetSetValue(0xffffff9c,0);
+        messageMainSetTargetFlags(1);
         param_1[1].field_0x1 = 0;
       }
       FUN_00296934();

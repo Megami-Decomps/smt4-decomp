@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001517b4(void);
 int sysPlaySe(int);
 int FUN_00183e58(void);
-int FUN_001f4908(int, int, int);
+int slotSetRequest(int, int, int);
 int msgWindowReset(void);
 int FUN_002bf4f4(int);
 int pickObjStart(int, unsigned char *);
@@ -22,10 +22,10 @@ extern unsigned char LAB_0046b060; /* 0x46b060 */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00183e58. */
-/* Supplied declaration required: FUN_001f4908. */
-extern int FUN_00224880(unsigned int);
+/* Supplied declaration required: slotSetRequest. */
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_00239480(void);
-extern int FUN_002802c8(void);
+extern int screenFadeIsBusy(void);
 /* Supplied declaration required: msgWindowReset. */
 /* Supplied declaration required: FUN_002bf4f4. */
 extern int FUN_002e19f8(void);
@@ -46,7 +46,7 @@ void FUN_0046af60(int param_1)
     return;
   }
   if (temp_v0 != 1) {
-    if (((temp_v0 == 2) && (temp_v0 = FUN_002802c8(), temp_v0 == 0)) &&
+    if (((temp_v0 == 2) && (temp_v0 = screenFadeIsBusy(), temp_v0 == 0)) &&
        (temp_v0 = FUN_002e19f8(), temp_v0 != 0)) {
       *(unsigned int *)(param_1 + 4) = 0x12;
       *(unsigned int *)(param_1 + 8) = 0;
@@ -54,10 +54,10 @@ void FUN_0046af60(int param_1)
   }
   else {
     FUN_002bf4f4(0);
-    temp_v0 = FUN_00224880(**(unsigned int **)(param_1 + 0x2b4));
+    temp_v0 = scrRunOpcodesStub(**(unsigned int **)(param_1 + 0x2b4));
     if (temp_v0 == 2) {
-      FUN_001f4908(0,10,0xff);
-      FUN_001f4908(1,10,0xff);
+      slotSetRequest(0,10,0xff);
+      slotSetRequest(1,10,0xff);
       FUN_00183e58();
       *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
       return;

@@ -21,11 +21,11 @@ typedef struct Action {
     /* 0x10 */ u32 unk10;
 } Action;
 
-extern void FUN_003f12d4(Context *ctx, s32 arg);
+extern void btlLoadEnemyModelInfo(Context *ctx, s32 arg);
 extern s32 FUN_003f0f2c(Context *ctx);
 extern void FUN_003e03b0(Action *action, Context *ctx);
 
-/* Starts the action: state 7 (after FUN_003f12d4) when one of entries 4-53 is active and
+/* Starts the action: state 7 (after btlLoadEnemyModelInfo) when one of entries 4-53 is active and
  * FUN_003f0f2c refuses, otherwise state 8 through FUN_003e03b0. */
 void FUN_003e1114(Action *action, Context *ctx)
 {
@@ -35,7 +35,7 @@ void FUN_003e1114(Action *action, Context *ctx)
 
     for (i = 4; i < 54; i++) {
         if (entries[i].active != 0) {
-            FUN_003f12d4(ctx, 1);
+            btlLoadEnemyModelInfo(ctx, 1);
             action->state = 7;
             action->unk10 = 0;
             action->unk0C = 0;

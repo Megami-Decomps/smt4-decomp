@@ -1,13 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013af10` (_code @ 0x13af10, 0x32c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 
 int asdSoundObjectRegister(unsigned int, int, int);
 int asdSoundObjectFadeOut(unsigned int);
-int FUN_001419ac(unsigned int, unsigned int);
-int FUN_0014375c(void);
+AsdSndObject *asdSoundObjectCreate(u32 data, u32 option, u32 kind, f32 gain0, f32 gain1);
+void FUN_0014375c(AsdSndObject *sound, f32 leftGain, f32 rightGain);
 int FUN_001517b4(int, int);
 int FUN_00152bf8(unsigned int);
 int asdMemFree(void);
@@ -18,8 +19,6 @@ extern signed char DAT_00619972; /* 0x619972 */
 
 /* Supplied declaration required: asdSoundObjectRegister. */
 /* Supplied declaration required: asdSoundObjectFadeOut. */
-/* Supplied declaration required: FUN_001419ac. */
-/* Supplied declaration required: FUN_0014375c. */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00152bf8. */
 extern int FUN_00162ea4(void);
@@ -55,10 +54,12 @@ LAB_0013af58:
     if ((*(unsigned int *)(pcVar8 + 0x68) & 1) != 0) {
       if ((pcVar8[0x74] & 2U) == 0) {
 LAB_0013aff0:
-        temp_v1 = *(unsigned int *)(pcVar8 + 0x44);
-        FUN_001419ac(temp_v1,*(unsigned int *)(pcVar8 + 0x4c));
+        temp_v1 = (unsigned int)asdSoundObjectCreate(*(unsigned int *)(pcVar8 + 0x44),
+            *(unsigned int *)(pcVar8 + 0x4c), (unsigned char)pcVar8[0x77] == 1 ? 3 : 1,
+            0.0f, 0.0f);
         *(unsigned int *)(pcVar8 + 0x48) = temp_v1;
-        FUN_0014375c();
+        FUN_0014375c((AsdSndObject *)temp_v1, *(float *)(pcVar8 + 0x5c),
+            *(float *)(pcVar8 + 0x58));
         if (*(int *)(pcVar8 + 0x50) != 3) {
           asdSoundObjectRegister(*(unsigned int *)(pcVar8 + 0x48),pcVar8[0x75],0);
         }

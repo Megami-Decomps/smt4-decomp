@@ -1,34 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004a75b0` (_code @ 0x4a75b0, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_DevilSort.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
-extern "C" {
+struct SlotSecondarySortInfo {
+    u8 unk00[6];
+    u16 secondaryOrder; // 0x06; beyond SlotSortInfo's preserved three-byte prefix.
+};
 
-int FUN_00184310(void);
-
-/* Supplied declaration required: FUN_00184310. */
-
-
-int FUN_004a75b0(unsigned short *param_1,unsigned short *param_2)
-
+// Sort by entry rank, descending secondary metadata, then ascending ID.
+extern "C" s32 FUN_004a75b0(const RankedDevilEntry *first, const RankedDevilEntry *second)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = (unsigned int)(unsigned char)param_1[1] - (unsigned int)(unsigned char)param_2[1];
-  if (temp_v0 == 0) {
-    temp_v1 = (unsigned int)*param_1;
-    FUN_00184310();
-    temp_v2 = (unsigned int)*param_2;
-    FUN_00184310();
-    temp_v0 = (unsigned int)*(unsigned short *)(temp_v2 + 6) - (unsigned int)*(unsigned short *)(temp_v1 + 6);
-    if (temp_v0 == 0) {
-      temp_v0 = (unsigned int)*param_1 - (unsigned int)*param_2;
+    s32 order = first->rank - second->rank;
+    if (order == 0) {
+        const SlotSecondarySortInfo *firstRecord =
+            reinterpret_cast<const SlotSecondarySortInfo *>(FUN_00184310(first->id));
+        const SlotSecondarySortInfo *secondRecord =
+            reinterpret_cast<const SlotSecondarySortInfo *>(FUN_00184310(second->id));
+        order = secondRecord->secondaryOrder - firstRecord->secondaryOrder;
+        if (order == 0)
+            order = first->id - second->id;
     }
-  }
-  return temp_v0;
+    return order;
 }
-
-} /* extern "C" */

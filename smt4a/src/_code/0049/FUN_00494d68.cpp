@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00494d68` (_code @ 0x494d68, 0x750 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int efctSetSpeed(void);
 int FUN_0018349c(...);
 int FUN_001ba3d0(...);
 int FUN_0047fc38(void);
-int FUN_00493344(...);
 int FUN_0049339c(...);
 int FUN_00493408(...);
 int FUN_004934ac(...);
@@ -44,7 +44,6 @@ extern unsigned char LAB_004954e0; /* 0x4954e0 */
 /* Supplied declaration required: FUN_0047fc38. */
 extern int FUN_0047fe44(unsigned int);
 extern int FUN_00480960(unsigned int);
-/* Supplied declaration required: FUN_00493344. */
 /* Supplied declaration required: FUN_0049339c. */
 /* Supplied declaration required: FUN_00493408. */
 /* Supplied declaration required: FUN_004934ac. */
@@ -137,7 +136,7 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
   if (param_3 != 0) {
     FUN_0049368c(param_1 + 0x3a4,0xaa,temp_v11,temp_v3,temp_v9,1);
   }
-  FUN_00493344(param_1 + 0x3a4,(int)(short)temp_v0,temp_v4,temp_v1 + temp_v3,temp_v9,temp_v16 != 0);
+  FUN_00493344((const OffsetPosition2D *)(param_1 + 0x3a4),(int)(short)temp_v0,temp_v4,temp_v1 + temp_v3,temp_v9,temp_v16 != 0);
   if (temp_v16 != 0) {
     if ((param_4[1] & 1) != 0) {
       if (param_3 != 0) {

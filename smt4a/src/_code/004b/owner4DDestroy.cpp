@@ -25,7 +25,7 @@ extern u32 dialogIsActive(void);
 extern void dialogClose(s32 a);
 extern void FUN_00168980(u32 id);
 extern void campButtonHelpRelease(void);
-extern void FUN_00318d6c(void);
+extern void helpTexturesRelease(void);
 extern void campCommonBgRelease(void);
 extern void asdTMTexTableFreeEntry(s32 index);
 
@@ -64,7 +64,7 @@ void owner4DDestroy(Owner4D *obj)
     }
     FUN_00168980(3);
     campButtonHelpRelease();
-    FUN_00318d6c();
+    helpTexturesRelease();
     campCommonBgRelease();
     asdTMTexTableFreeEntry(0x18);
 }

@@ -6,7 +6,7 @@ extern "C" {
 
 int eventTexCallIfIdle(...);
 int FUN_00154bbc(...);
-int FUN_00167f24(...);
+int messageMainSetMode(...);
 int rt_memcpy_w(...);
 
 int textFormatBuffer(unsigned char [128], unsigned char *);
@@ -54,7 +54,7 @@ extern int saveSlotFindSelected(void);
 /* Supplied declaration required: FUN_0016432c. */
 /* Supplied declaration required: FUN_001654f0. */
 /* Supplied declaration required: FUN_001654f8. */
-/* Supplied declaration required: FUN_00167f24. */
+/* Supplied declaration required: messageMainSetMode. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: libc_strcpy. */
@@ -215,7 +215,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         if (temp_v7 != 0) {
           return 1;
         }
-        FUN_00167f24(2);
+        messageMainSetMode(2);
         return 1;
       case 0xf87b:
         wstrBufferPutChar(param_3,param_5,*(unsigned short *)(param_2 + *param_4 * 2),param_6);

@@ -12,7 +12,7 @@ int FUN_001834a4(...);
 int FUN_001835b4(...);
 int FUN_0023723c(...);
 int FUN_0025cc78(...);
-int FUN_002a1f60(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_00344bc8(...);
 int VectorSignedToFloat(...);
 
@@ -35,7 +35,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_0023723c. */
 /* Supplied declaration required: FUN_0025cc78. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 extern int FUN_0032ecac(void);
 /* Supplied declaration required: FUN_00344bc8. */
 extern unsigned int FUN_0035aa90(int);
@@ -82,7 +82,7 @@ void FUN_0036cb0c(unsigned int param_1,unsigned int param_2,int param_3,int para
   if (param_8 != 0) {
     if (param_8 != 1) {
       if (!(param_8 != 2 && param_8 != 3)) {
-        FUN_002a1f60(param_1,3,0xffffffff,0,3,param_2,param_4);
+        asdTextDrawDirectoryEntry(param_1,3,0xffffffff,0,3,param_2,param_4);
       }
     }
     else {
@@ -92,7 +92,7 @@ void FUN_0036cb0c(unsigned int param_1,unsigned int param_2,int param_3,int para
     }
   }
   else {
-    FUN_002a1f60(param_1,3,0xffffffff,0,3,param_2,param_4);
+    asdTextDrawDirectoryEntry(param_1,3,0xffffffff,0,3,param_2,param_4);
   }
   FUN_001835b4(2,0x2e,0xe3,(int)*(short *)(temp_v0 + 8),(int)*(short *)(temp_v0 + 10),0xd);
   if (param_6 != 0) {

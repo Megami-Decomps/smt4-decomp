@@ -29,7 +29,7 @@ extern unsigned int requestKindToId(unsigned int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int idIsAbove400(void);
 /* Supplied declaration required: FUN_0019d390. */
-extern int FUN_0019f240(unsigned int);
+extern int padGetMappedValue(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 
 
@@ -71,7 +71,7 @@ void FUN_00185e84(unsigned int param_1,int param_2,int param_3,int param_4,int p
   }
   FUN_0017ffa8(2,0xb,temp_v0,param_2,param_3,param_4);
   if (param_5 != 0) {
-    temp_v1 = FUN_0019f240(param_1);
+    temp_v1 = padGetMappedValue(param_1);
     temp_v2 = (temp_v1 + param_6) & 0xff;
     FUN_0019d390();
     if ((int)param_1 < (int)temp_v2) {

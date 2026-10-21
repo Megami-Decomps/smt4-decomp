@@ -11,14 +11,14 @@ int memClear(...);
 int FUN_00233404(void);
 int FUN_00233410(unsigned int *);
 int FUN_002335f8(...);
-int FUN_0023360c(...);
+int flaggedValueHolderGetTotal(...);
 int FUN_0023392c(...);
 int FUN_0023478c(...);
 int recordClearWideHandle(unsigned int *);
-int FUN_0023499c(unsigned int *, unsigned int *, unsigned int *);
+int archiveFileReplaceHandle(unsigned int *, unsigned int *, unsigned int *);
 int FUN_002869e8(...);
 int FUN_00287328(int);
-int FUN_00296ae8(...);
+int asdTextDrawDirectoryEntry(...);
 int scrScriptProcessStartEntry(...);
 int FUN_002b8244(...);
 int eventQueueAddUniqueIfValid(...);
@@ -45,17 +45,17 @@ extern unsigned char LAB_0039095c; /* 0x39095c */
 extern unsigned char LAB_0039096c; /* 0x39096c */
 extern unsigned int *g_aocMain; /* 0x432fc8 */
 
-extern int FUN_0019e0c0(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_002333a4(unsigned int *, unsigned int);
 extern unsigned int FUN_002333f0(unsigned int *);
 /* Supplied declaration required: FUN_00233404. */
 /* Supplied declaration required: FUN_00233410. */
 /* Supplied declaration required: FUN_002335f8. */
-/* Supplied declaration required: FUN_0023360c. */
+/* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: FUN_0023392c. */
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: recordClearWideHandle. */
-/* Supplied declaration required: FUN_0023499c. */
+/* Supplied declaration required: archiveFileReplaceHandle. */
 extern int FUN_00240d5c(unsigned int *);
 extern int FUN_0026ee68(unsigned int);
 /* Supplied declaration required: FUN_002869e8. */
@@ -63,11 +63,11 @@ extern int FUN_0026ee68(unsigned int);
 extern int bgmGetStateById(unsigned int);
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00295660. */
-/* Supplied declaration required: FUN_00296ae8. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002973d8(void);
 extern int FUN_0029d65c(int);
-extern int FUN_002a12d8(unsigned int *);
+extern int legacyResourceIdRemap(unsigned int *);
 extern int FUN_002af600(int);
 /* Supplied declaration required: FUN_002b8244. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
@@ -106,10 +106,10 @@ void FUN_003901bc(unsigned int *param_1)
   case 0:
     FUN_002b8244(0);
     *param_1 = *param_1 & 0xfffeffff;
-    FUN_0023499c(&temp_v9,puVar1 + 10,puVar1 + 6);
+    archiveFileReplaceHandle(&temp_v9,puVar1 + 10,puVar1 + 6);
     temp_v7 = temp_v9;
     temp_v8 = puStack_9c;
-    temp_v2 = FUN_002a12d8(&temp_v7);
+    temp_v2 = legacyResourceIdRemap(&temp_v7);
     if (temp_v2 < 0) {
       param_1[2] = 9999;
       *(unsigned char *)(param_1 + 0x84) = 100;
@@ -121,7 +121,7 @@ void FUN_003901bc(unsigned int *param_1)
       param_1[2] = 1;
       param_1[0x44a] = 0;
       param_1[1099] = 0;
-      temp_v2 = FUN_0023360c(param_1 + 0x90);
+      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
       puVar1 = g_aocMain;
       temp_v4 = FUN_002335f8(g_aocMain,temp_v2);
       if ((temp_v4 != 0) && (temp_v2 = puVar1[0x19e] + temp_v2 * 0x9c8, temp_v2 != 0)) {
@@ -131,7 +131,7 @@ void FUN_003901bc(unsigned int *param_1)
           temp_v7 = 3;
           temp_v9 = 0xc;
           temp_v8 = puVar1;
-          FUN_00296ae8(*temp_v10,3,0xffffffff,0);
+          asdTextDrawDirectoryEntry(*temp_v10,3,0xffffffff,0);
         }
         else {
           temp_v8 = (unsigned int *)(temp_v2 + 0x180);
@@ -148,7 +148,7 @@ void FUN_003901bc(unsigned int *param_1)
     }
     break;
   case 1:
-    temp_v11 = FUN_0023360c(param_1 + 0x90);
+    temp_v11 = flaggedValueHolderGetTotal(param_1 + 0x90);
     FUN_00233410(param_1 + 0x90);
     temp_v8 = param_1 + 0x90;
     temp_v3 = param_1[0xae];
@@ -207,9 +207,9 @@ void FUN_003901bc(unsigned int *param_1)
       }
     }
     _ZN13ObjBase3c2ef07vfunc0cEv(param_1 + 0xba,param_1 + 0x90);
-    temp_v2 = FUN_0023360c(param_1 + 0x90);
+    temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
     if (temp_v2 != temp_v11) {
-      temp_v2 = FUN_0023360c(param_1 + 0x90);
+      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
       puVar3 = g_aocMain;
       temp_v4 = FUN_002335f8(g_aocMain,temp_v2);
       if ((temp_v4 != 0) && (temp_v2 = puVar3[0x19e] + temp_v2 * 0x9c8, temp_v2 != 0)) {
@@ -219,7 +219,7 @@ void FUN_003901bc(unsigned int *param_1)
           temp_v7 = 3;
           temp_v9 = 0xc;
           temp_v8 = puVar3;
-          FUN_00296ae8(*temp_v10,3,0xffffffff,0);
+          asdTextDrawDirectoryEntry(*temp_v10,3,0xffffffff,0);
         }
         else {
           temp_v8 = (unsigned int *)(temp_v2 + 0x180);
@@ -233,10 +233,10 @@ void FUN_003901bc(unsigned int *param_1)
       temp_v1 = FUN_002333f0(param_1 + 0xad);
       temp_v2 = FUN_002333a4(param_1 + 0x90,temp_v1);
       if (temp_v2 != 0) {
-        temp_v1 = FUN_0023360c(param_1 + 0x90);
+        temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
         temp_v2 = FUN_002335f8(puVar1,temp_v1);
         if (temp_v2 != 0) {
-          temp_v2 = FUN_0023360c(param_1 + 0x90);
+          temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
           if (*(char *)(puVar1[0x19e] + temp_v2 * 0x9c8 + 0x9b3) != '\0') {
 LAB_003907d0:
             param_1[2] = 6;
@@ -246,7 +246,7 @@ LAB_003907d0:
             *(unsigned char *)(param_1 + 0xd3) = 0;
             return;
           }
-          temp_v2 = FUN_0023360c(param_1 + 0x90);
+          temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
           temp_v2 = FUN_0039411c(puVar1[0x19e] + temp_v2 * 0x9c8);
           if (temp_v2 == 0) goto LAB_00390634;
           if (temp_v2 == 1) goto LAB_00390684;
@@ -316,13 +316,13 @@ LAB_003906d4:
   case 4:
   case 5:
   case 6:
-    temp_v2 = FUN_0023360c(param_1 + 0x90);
+    temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
     temp_v3 = puVar1[0x19e];
     memClear(&temp_v7,0x80);
     textFormatBuffer(&temp_v7,&LAB_0039096c,temp_v3 + temp_v2 * 0x9c8);
     FUN_00295660(0,&temp_v7);
     FUN_002b8244(1);
-    temp_v2 = FUN_0019e0c0(param_1[0xd6]);
+    temp_v2 = scrRunOpcodesStub(param_1[0xd6]);
     if (temp_v2 == 2) {
       temp_v2 = FUN_002973d8();
       if (temp_v2 != 0) {

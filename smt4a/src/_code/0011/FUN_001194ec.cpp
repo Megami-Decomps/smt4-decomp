@@ -54,7 +54,7 @@ extern unsigned int FUN_002ea3c0(int, unsigned int, unsigned int, unsigned char 
 /* Supplied declaration required: wideBufferAppend. */
 /* Supplied declaration required: onlineJobSetStateWaiting. */
 /* Supplied declaration required: FUN_002f7cba. */
-extern unsigned int FUN_002fbd00(unsigned int, int);
+extern unsigned int wideBufferAppendHolderValue(unsigned int, int);
 /* Supplied declaration required: FUN_003054f0. */
 /* Supplied declaration required: FUN_0030568e. */
 extern unsigned long long ownerChildValue(unsigned int, unsigned int *);
@@ -81,7 +81,7 @@ void FUN_001194ec(int param_1)
   
   FUN_002ea2e8(temp_v5);
   temp_v0 = wideBufferAppend(temp_v5,&LAB_00119630);
-  temp_v0 = FUN_002fbd00(temp_v0,param_1 + 0x78);
+  temp_v0 = wideBufferAppendHolderValue(temp_v0,param_1 + 0x78);
   temp_v0 = wideBufferAppend(temp_v0,&LAB_00119650);
   temp_v0 = FUN_0030568e(temp_v0,*(unsigned short *)(param_1 + 0x80));
   temp_v0 = wideBufferAppend(temp_v0,&LAB_00119660);

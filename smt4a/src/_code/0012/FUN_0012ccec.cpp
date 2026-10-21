@@ -9,7 +9,7 @@ int onlineInstanceTableFind(int, unsigned int);
 int FUN_002ea3d0(int, unsigned int);
 int FUN_002ea41e(int *);
 int FUN_0030c720(...);
-int FUN_0030c846(int, int, unsigned int, unsigned int);
+int holderSetPairAndFlush(int, int, unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -31,7 +31,7 @@ extern unsigned int FUN_002ea3c0(unsigned char *, unsigned char *, unsigned int,
 /* Supplied declaration required: FUN_002ea41e. */
 extern unsigned long long rangeIsEmpty4(int);
 /* Supplied declaration required: FUN_0030c720. */
-/* Supplied declaration required: FUN_0030c846. */
+/* Supplied declaration required: holderSetPairAndFlush. */
 
 
 void FUN_0012ccec(int param_1)
@@ -59,7 +59,7 @@ void FUN_0012ccec(int param_1)
       }
       temp_v2 = rangeIsEmpty4(param_1 + 0x110);
       if ((int)temp_v2 != 0) {
-        FUN_0030c846(param_1 + 0x280,(int)((unsigned long long)temp_v2 >> 0x20),*(unsigned int *)(param_1 + 0xf8)
+        holderSetPairAndFlush(param_1 + 0x280,(int)((unsigned long long)temp_v2 >> 0x20),*(unsigned int *)(param_1 + 0xf8)
                      ,*(unsigned int *)(param_1 + 0xfc));
         temp_v4 = *(unsigned int *)(param_1 + 0x294);
         temp_v3 = *(unsigned int *)(param_1 + 0x290);

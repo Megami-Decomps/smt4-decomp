@@ -28,7 +28,7 @@ typedef struct {
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_lmapScene; /* 0x447e88 */
 
-extern int FUN_002820a4(void);
+extern int vectorPairTransitionStep(void);
 /* Supplied declaration required: FUN_00282228. */
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
@@ -125,7 +125,7 @@ void FUN_00208504(void)
     *(unsigned int *)(temp_v1 + 8) = 0;
     break;
   case 1:
-    temp_v0 = FUN_002820a4();
+    temp_v0 = vectorPairTransitionStep();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
       uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
@@ -169,7 +169,7 @@ void FUN_00208504(void)
     }
     break;
   case 2:
-    temp_v0 = FUN_002820a4();
+    temp_v0 = vectorPairTransitionStep();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
       uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
@@ -212,7 +212,7 @@ void FUN_00208504(void)
     }
     break;
   case 3:
-    temp_v0 = FUN_002820a4();
+    temp_v0 = vectorPairTransitionStep();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
       uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
@@ -255,7 +255,7 @@ void FUN_00208504(void)
     }
     break;
   case 4:
-    temp_v0 = FUN_002820a4();
+    temp_v0 = vectorPairTransitionStep();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
       uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
@@ -298,7 +298,7 @@ void FUN_00208504(void)
     }
     break;
   case 5:
-    temp_v0 = FUN_002820a4();
+    temp_v0 = vectorPairTransitionStep();
     if (temp_v0 != 0) {
       temp_v14 = *(unsigned int *)(temp_v1 + 0x30);
       uStack_b4 = *(unsigned int *)(temp_v1 + 0x34);
@@ -342,7 +342,7 @@ void FUN_00208504(void)
     }
     break;
   case 6:
-    temp_v1 = FUN_002820a4();
+    temp_v1 = vectorPairTransitionStep();
     if (temp_v1 != 0) {
       temp_v1 = DAT_004474f4;
       *(int *)(DAT_004474f4 + 4) = *(int *)(DAT_004474f4 + 4) + 1;

@@ -11,7 +11,7 @@ int FUN_00402290(int);
 extern int btlGetMainState(void);
 /* Supplied declaration required: FUN_001568f8. */
 extern unsigned int FUN_003eae20(int, int, unsigned short);
-extern int FUN_003ef9e0(int, int);
+extern int idSetFindSubjectIndex(int, int);
 /* Supplied declaration required: FUN_00401d18. */
 /* Supplied declaration required: FUN_00402290. */
 
@@ -29,7 +29,7 @@ unsigned int FUN_004f7924(int param_1,int param_2)
   
   if ((*(unsigned int *)(param_2 + 0x50) & 0x20000) == 0) {
     temp_v1 = btlGetMainState();
-    temp_v2 = FUN_003ef9e0(temp_v1,param_2);
+    temp_v2 = idSetFindSubjectIndex(temp_v1,param_2);
     if (temp_v2 < 0) {
       temp_v2 = 0;
     }

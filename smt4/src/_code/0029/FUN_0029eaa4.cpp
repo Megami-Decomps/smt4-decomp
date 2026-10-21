@@ -11,7 +11,7 @@ typedef struct {
     unsigned short sp12; /* 0x12: local_12 */
 } param_2_stack;
 
-extern int FUN_00288154(unsigned short, unsigned char *);
+extern int gameRecordCopy(unsigned short, unsigned char *);
 /* Supplied declaration required: devilGetRecord. */
 extern int gameFlagIsSet(void);
 
@@ -31,10 +31,10 @@ unsigned int FUN_0029eaa4(unsigned int param_1,unsigned short *param_2)
     temp_v0 = param_2[0x1a];
     if ((temp_v0 & 1) != 0) {
       if ((temp_v0 & 0xfffe) != 0) {
-        temp_v1 = FUN_00288154(temp_v0 >> 1,temp_v2);
+        temp_v1 = gameRecordCopy(temp_v0 >> 1,temp_v2);
       }
       else {
-        temp_v1 = FUN_00288154(*param_2,temp_v2);
+        temp_v1 = gameRecordCopy(*param_2,temp_v2);
       }
       if (temp_v1 == 0) {
         return 0;

@@ -2,10 +2,10 @@
 
 extern "C" {
 
-void FUN_00262a38(void);
+void textureCacheReleaseAll(void);
 void asdMemFree(void *block);
 void jobStop(u32 job, s32 arg);
-void FUN_002cd8d4(void);
+void nodeTreeClearItem(void);
 void textureSlotsReleaseAll(void);
 void taskUpdateAll(void);
 s32 jobIsValid(u32 job);
@@ -24,8 +24,8 @@ void effectProcessDestroy(u32 job)
     if (jobIsValid(process->jobB) != 0) {
         jobStop(process->jobB, 0);
     }
-    FUN_00262a38();
-    FUN_002cd8d4();
+    textureCacheReleaseAll();
+    nodeTreeClearItem();
     if (process->keepScene == 0) {
         textureSlotsReleaseAll();
     }

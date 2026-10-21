@@ -30,7 +30,7 @@ typedef struct Owner003a8c64 {
 
 void jobStop(u32 job, s32 flags);
 void fileSlotFree(s32 slot);
-void FUN_003aabd8(u8 *part);
+void indexedSlotsClear(u8 *part);
 void FUN_00291998(void);
 
 /* Shuts the owner down: releases its child, clears its part, runs its stop slot, frees file slot 0x22 and stops its job. */
@@ -42,7 +42,7 @@ void ownerShutdownFile(Owner003a8c64 *owner)
         child->vtbl->release(child);
         owner->child = NULL;
     }
-    FUN_003aabd8(owner->part);
+    indexedSlotsClear(owner->part);
     if (owner->busy == 1) {
         FUN_00291998();
     }

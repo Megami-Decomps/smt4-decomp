@@ -6,7 +6,7 @@ extern "C" {
 
 int wordTripleClear(...);
 int FUN_002039d0(...);
-int FUN_0023ab04(...);
+int colorKeyTrackAdvanceRgb(...);
 int FUN_00268334(...);
 int FUN_00285320(...);
 int FUN_002853ec(...);
@@ -45,7 +45,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: wordTripleClear. */
 /* Supplied declaration required: FUN_002039d0. */
-/* Supplied declaration required: FUN_0023ab04. */
+/* Supplied declaration required: colorKeyTrackAdvanceRgb. */
 /* Supplied declaration required: FUN_00268334. */
 /* Supplied declaration required: FUN_00285320. */
 /* Supplied declaration required: FUN_002853ec. */
@@ -152,7 +152,7 @@ void FUN_00213d1c(int param_1,fn_00213d1c_arg1 *param_2)
       *(unsigned int *)(param_1 + 0x20c) = temp_v2;
     }
   }
-  FUN_0023ab04(param_1,param_2);
+  colorKeyTrackAdvanceRgb(param_1,param_2);
   FUN_00285320(param_1,param_2);
   FUN_002853ec(param_1,param_2);
   FUN_002a65fc(param_1,param_2);

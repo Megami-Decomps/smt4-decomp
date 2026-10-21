@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00227784(...);
+int btlGetListedSummaryValues(...);
 int FUN_0022aa38(...);
 int FUN_0022ab08(...);
 int FUN_0023cd08(...);
@@ -15,7 +15,7 @@ int btlMainFindEntryByListedId(...);
 int btlGetMainState(void);
 int FUN_002eb278(...);
 int FUN_002eb340(...);
-int FUN_002eb3dc(...);
+int btlTargetSelectSetInfoPanel(...);
 
 /* stack frame of param_4: 14 slot(s), 56 byte(s) */
 typedef struct {
@@ -37,7 +37,7 @@ typedef struct {
 
 extern unsigned int g_btlAction; /* 0x434278 */
 
-/* Supplied declaration required: FUN_00227784. */
+/* Supplied declaration required: btlGetListedSummaryValues. */
 /* Supplied declaration required: FUN_0022aa38. */
 /* Supplied declaration required: FUN_0022ab08. */
 /* Supplied declaration required: FUN_0023cd08. */
@@ -49,7 +49,7 @@ extern int battleGetEntryHalfword(unsigned int, unsigned int);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: FUN_002eb278. */
 /* Supplied declaration required: FUN_002eb340. */
-/* Supplied declaration required: FUN_002eb3dc. */
+/* Supplied declaration required: btlTargetSelectSetInfoPanel. */
 extern int __aeabi_idivmod(int, int);
 
 
@@ -117,7 +117,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
       if (temp_v3 != 0) {
         temp_v9 = 0;
         temp_v10 = 0;
-        FUN_00227784((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v9,&temp_v10);
+        btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v9,&temp_v10);
         temp_v8 = param_3;
         FUN_00246134(param_3,temp_v9,temp_v10,0xffffffff);
         if ((temp_v8 & 0x20000) != 0) {
@@ -144,7 +144,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
       if (temp_v4 == 1 || temp_v4 == 4) {
         temp_v11 = 0;
         temp_v13[5] = 0;
-        FUN_00227784((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v11,temp_v13 + 5);
+        btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v11,temp_v13 + 5);
         FUN_0022ab08(temp_v11,temp_v13 + 6);
         temp_v8 = *(unsigned int *)(param_4 + 0x20);
         FUN_0022aa38(temp_v8,temp_v13[6] & 0xff);
@@ -153,7 +153,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
     else {
       temp_v13[5] = 0;
       temp_v11 = 0;
-      FUN_00227784((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),temp_v13 + 5,&temp_v11);
+      btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),temp_v13 + 5,&temp_v11);
       if (temp_v11 != 0) {
         temp_v3 = battleGetEntryHalfword(param_3,0x13);
         temp_v5 = (unsigned int)(0 < temp_v3);
@@ -166,7 +166,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
     temp_v10 = (*(unsigned short *)(temp_v0 + 0xfa) & 0x10) >> 4;
     temp_v9 = temp_v5;
     temp_v11 = temp_v8;
-    FUN_002eb3dc(temp_v13 + 1,*(unsigned short *)(temp_v0 + 2),temp_v4,temp_v13[0],temp_v6);
+    btlTargetSelectSetInfoPanel(temp_v13 + 1,*(unsigned short *)(temp_v0 + 2),temp_v4,temp_v13[0],temp_v6);
     temp_v1 = 1;
   }
   else {
@@ -231,7 +231,7 @@ LAB_002292ac:
         if (temp_v3 != 0) {
           temp_v10 = 0;
           temp_v11 = 0;
-          FUN_00227784((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v10,&temp_v11);
+          btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v10,&temp_v11);
           FUN_00246134(temp_v8,temp_v10,temp_v11,0xffffffff);
           if ((temp_v8 & 0x20000) != 0) {
             temp_v7 = 3;
@@ -257,7 +257,7 @@ LAB_002292ac:
         if (temp_v7 == 1 || temp_v7 == 4) {
           temp_v12 = 0;
           temp_v16 = 0;
-          FUN_00227784((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v12,&temp_v16);
+          btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v12,&temp_v16);
           FUN_0022ab08(temp_v12,temp_v17);
           temp_v3 = *(int *)(param_4 + 0x20);
           FUN_0022aa38(temp_v3,temp_v17[0] & 0xff);
@@ -266,7 +266,7 @@ LAB_002292ac:
       else {
         temp_v16 = 0;
         temp_v12 = 0;
-        FUN_00227784((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v16,&temp_v12);
+        btlGetListedSummaryValues((int)*(short *)(*(int *)(param_4 + 0x24) + 0x62),&temp_v16,&temp_v12);
         if (temp_v12 != 0) {
           temp_v2 = battleGetEntryHalfword(temp_v9,0x13);
           temp_v8 = (unsigned int)(0 < temp_v2);

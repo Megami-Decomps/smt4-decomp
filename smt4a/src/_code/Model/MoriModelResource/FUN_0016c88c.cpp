@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016c88c` (_code @ 0x16c88c, 0x214 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match7_MaterialTextures.h"
 
 extern "C" {
 
 int FUN_00178b04(int, unsigned char *, int);
 int FUN_00187e08(int, unsigned int, unsigned int, unsigned int);
-int FUN_0018f4e4(unsigned int, unsigned int, int, unsigned int);
 int FUN_0018f69c(...);
 int FUN_0018f9c0(int, int);
 
@@ -22,7 +22,6 @@ extern int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int FUN_00186118(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_00187e08. */
 extern unsigned int _ZN9Obj557dccC1Ev(void);
-/* Supplied declaration required: FUN_0018f4e4. */
 /* Supplied declaration required: FUN_0018f69c. */
 /* Supplied declaration required: FUN_0018f9c0. */
 
@@ -82,8 +81,13 @@ void FUN_0016c88c(unsigned int *param_1,int param_2,unsigned int param_3,unsigne
         if (temp_v4 != 0) {
           do {
             temp_v6 = *(unsigned int *)(param_2 + 100);
-            FUN_0018f4e4(*(unsigned int *)(**(int **)(param_2 + 0x3c) + temp_v2 * 4),
-                         *(unsigned int *)(temp_v0 + 0x1c),temp_v0,*(unsigned int *)(param_2 + 0x7c));
+            gfxModelBindTextureByName(
+                reinterpret_cast<ModelTextureBindings*>(
+                    *(unsigned int *)(**(int **)(param_2 + 0x3c) + temp_v2 * 4)),
+                reinterpret_cast<const char*>(*(unsigned int *)(temp_v0 + 0x1c)),
+                reinterpret_cast<NamedModelTexture*>(temp_v0),
+                reinterpret_cast<u8*>(*(unsigned int *)(param_2 + 0x7c)),
+                reinterpret_cast<const u8*>(temp_v6));
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < temp_v4);
         }

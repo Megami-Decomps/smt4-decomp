@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00229264(...);
-int FUN_0023ab04(int);
+int colorKeyTrackAdvanceRgb(int);
 int FUN_00285320(void);
 int FUN_002853ec(void);
 int FUN_002a65fc(void);
@@ -21,7 +21,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_00229264. */
-/* Supplied declaration required: FUN_0023ab04. */
+/* Supplied declaration required: colorKeyTrackAdvanceRgb. */
 /* Supplied declaration required: FUN_00285320. */
 /* Supplied declaration required: FUN_002853ec. */
 /* Supplied declaration required: FUN_002a65fc. */
@@ -48,7 +48,7 @@ void FUN_00213fe4(int param_1,unsigned int param_2)
       *(unsigned int *)(param_1 + 0x210) = 0;
       *(unsigned int *)(param_1 + 0x214) = 0;
       *(unsigned int *)(param_1 + 0x218) = 0;
-      FUN_0023ab04(param_1);
+      colorKeyTrackAdvanceRgb(param_1);
     }
     else {
       FUN_00229264(param_1 + 0x1e4);

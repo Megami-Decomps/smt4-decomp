@@ -33,7 +33,7 @@ extern int dataTableGetEntries(void);
 extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: aocRecordLookup83. */
 /* Supplied declaration required: flagValueAdd. */
-extern int FUN_004813bc(int);
+extern int gamePackedFlagTest(int);
 
 
 int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
@@ -188,7 +188,7 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
                 do {
                   temp_v15 = randRange((unsigned int)temp_v21 & 0xffff);
                   temp_v17 = (int)asStack_1e0[temp_v15];
-                  temp_v15 = FUN_004813bc(temp_v17);
+                  temp_v15 = gamePackedFlagTest(temp_v17);
                   temp_v13 = 1;
                   *(unsigned char *)(temp_v26 + temp_v19) = temp_v15 == 0;
                   flagValueAdd(temp_v17,1);

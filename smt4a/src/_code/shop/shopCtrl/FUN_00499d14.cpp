@@ -20,9 +20,9 @@ s32 FUN_0033449c(s32 arg);
 s32 gameGlobalsQueueValues(u32 data, s32 arg);
 s32 FUN_00372100(u32 data, s32 arg);
 s32 FUN_00345718(void);
-s32 FUN_00284f90(s32 arg);
+s32 placeWinSetValue(s32 arg);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
-void *FUN_0040ac08(void *memory);
+void *modelListInit(void *memory);
 void FUN_0040aa6c(void *list, const char *name);
 
 /* Resets the scene's player state and creates its second model list on first use. */
@@ -46,11 +46,11 @@ void FUN_00499d14(Scene *scene)
     FUN_00372100(player, 0);
     scene->active = 1;
     FUN_00345718();
-    FUN_00284f90(0);
+    placeWinSetValue(0);
     if (scene->secondList == NULL) {
         list = FUN_00178b04(0x20, "c:\\SMT4F\\SMT4F\\sdds4\\program\\shop\\shopCtrl.cpp", 1997);
         if (list != NULL) {
-            list = FUN_0040ac08(list);
+            list = modelListInit(list);
         }
         scene->secondList = list;
         FUN_0040aa6c(list, "player/pl_dammy.bam");

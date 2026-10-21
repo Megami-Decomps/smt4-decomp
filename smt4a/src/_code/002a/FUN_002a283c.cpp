@@ -19,7 +19,7 @@ struct fn_002a283c_arg0 {
     int field_0x150; /* +0x150 */
 };
 
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_002277d8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_0031d890. */
@@ -34,7 +34,7 @@ unsigned int FUN_002a283c(fn_002a283c_arg0 *param_1)
   
   temp_v1 = 0;
   if (param_1->field_0x150 != 0) {
-    if ((param_1->field_0x150 == 1) && (temp_v0 = FUN_00224880(param_1->field_0xf4), temp_v0 == 2)) {
+    if ((param_1->field_0x150 == 1) && (temp_v0 = scrRunOpcodesStub(param_1->field_0xf4), temp_v0 == 2)) {
       param_1->field_0x14c = 0;
       param_1->field_0x144 = 1;
       param_1->field_0x150 = 0;

@@ -46,7 +46,7 @@ extern int wordRefsDiffer_002ee774(unsigned int **, unsigned int *);
 extern int FUN_002ee96a(unsigned int *, unsigned char *);
 extern unsigned int FUN_002ee978(int);
 /* Supplied declaration required: FUN_002f8aa8. */
-extern unsigned int FUN_002fd444(int);
+extern unsigned int textHolderSetDefault(int);
 extern int FUN_002fd454(unsigned int *);
 extern unsigned int FUN_002fd624(unsigned int *);
 /* Supplied declaration required: FUN_003031f4. */
@@ -110,7 +110,7 @@ LAB_00119254:
         onlineStringDestroy(&uStack_3c);
         onlineStringDestroy(temp_v6);
         if (temp_v2 != 0) {
-          temp_v3 = FUN_002fd444(temp_v0);
+          temp_v3 = textHolderSetDefault(temp_v0);
           FUN_00103e4c(temp_v5 + 2,temp_v3);
           temp_v3 = FUN_002ee978(temp_v0);
           FUN_00305644(temp_v5 + 2,temp_v3);

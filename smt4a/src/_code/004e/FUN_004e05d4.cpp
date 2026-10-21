@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e05d4` (_code @ 0x4e05d4, 0xd80 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
@@ -8,8 +9,8 @@ int FUN_004e76cc(...);
 int FUN_004fcde0(...);
 
 int FUN_002a49e4(unsigned int, unsigned int);
-int FUN_002c2cc4(int, int, int, int, int);
-int FUN_003e9cd0(int);
+int uiNavigatorStart(int, int, int, int, int);
+int stateFinishIfPresent(int);
 int FUN_003ee0c0(int);
 int FUN_003f0e20(...);
 int FUN_003f1b3c(int, unsigned int, unsigned int, unsigned int *, int *);
@@ -67,19 +68,18 @@ extern int lcgRandomRange(unsigned int);
 extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 extern int dialogIsActive(void);
 /* Supplied declaration required: FUN_002a49e4. */
-/* Supplied declaration required: FUN_002c2cc4. */
-/* Supplied declaration required: FUN_003e9cd0. */
+/* Supplied declaration required: uiNavigatorStart. */
+/* Supplied declaration required: stateFinishIfPresent. */
 extern int FUN_003eb1cc(int);
-extern int FUN_003ec814(void);
-extern int FUN_003eccd0(int);
-extern int FUN_003eda88(int);
+extern int btlFindMarkedReserveRecord(int);
+extern unsigned int contentGetFirstFlaggedValue(void);
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f1b3c. */
 extern int chainCountIdUnflagged(unsigned int);
 /* Supplied declaration required: FUN_0047f4cc. */
 /* Supplied declaration required: FUN_004aa878. */
-extern int FUN_004c3a98(int, unsigned int);
+extern int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004c571c. */
@@ -163,7 +163,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
         FUN_003f1b3c(temp_v2,temp_v5,temp_v8,&temp_v10,&temp_v11);
         FUN_0047f4cc(temp_v11);
         FUN_002a49e4(*(unsigned int *)(*param_1 + 0x4d64),temp_v10 & 0xffff);
-        FUN_002c2cc4(temp_v0,1,1,0,0);
+        uiNavigatorStart(temp_v0,1,1,0,0);
         temp_v2 = *param_1;
         temp_v7 = DAT_005712b0 | *(unsigned int *)(temp_v2 + 0x45a0);
         temp_v9 = DAT_005712b4 | *(unsigned int *)(temp_v2 + 0x45a4);
@@ -208,7 +208,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
   temp_v4 = ~DAT_005712b0;
   *(unsigned int *)(temp_v2 + 0x45a4) = temp_v7 & ~DAT_005712b4;
   *(unsigned int *)(temp_v2 + 0x45a0) = temp_v9 & temp_v4;
-  FUN_003e9cd0(*param_1);
+  stateFinishIfPresent(*param_1);
   FUN_004fe7e4(0,param_2,5);
   temp_v2 = 0;
   do {
@@ -226,7 +226,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
     *puVar7 = *puVar7 & ~DAT_00571158;
     puVar7[1] = puVar7[1] & temp_v4;
   }
-  temp_v2 = FUN_003eccd0(*param_1);
+  temp_v2 = btlFindMarkedReserveRecord(*param_1);
   if (temp_v2 != 0) {
     *(unsigned int *)(temp_v2 + 0x50) = *(unsigned int *)(temp_v2 + 0x50) & 0xff7fffff;
   }
@@ -307,7 +307,7 @@ LAB_004e0ac0:
       temp_v2 = (int)*(short *)(param_2[9] + 0x6a);
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x80) != 0) {
         if (((DAT_00571260 & temp_v4) == 0 && (temp_v7 & DAT_00571264) == 0) &&
-           (temp_v3 = FUN_004c3a98(temp_v2,0x1b), temp_v3 == 0)) {
+           (temp_v3 = btlFindEntryValue(temp_v2,0x1b), temp_v3 == 0)) {
           FUN_004c571c(temp_v2,0x1b,1,0);
         }
       }
@@ -318,7 +318,7 @@ LAB_004e0ac0:
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x40) != 0) {
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
              (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0) &&
-           (temp_v3 = FUN_004c3a98(temp_v2,0x1c), temp_v3 == 0)) {
+           (temp_v3 = btlFindEntryValue(temp_v2,0x1c), temp_v3 == 0)) {
           FUN_004c571c(temp_v2,0x1c,1,0);
         }
       }
@@ -329,7 +329,7 @@ LAB_004e0ac0:
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x100) != 0) {
         if (((DAT_00571260 & *(unsigned int *)(*param_1 + 0x45a0)) == 0 &&
              (*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0) &&
-           (temp_v3 = FUN_004c3a98(temp_v2,0x1d), temp_v3 == 0)) {
+           (temp_v3 = btlFindEntryValue(temp_v2,0x1d), temp_v3 == 0)) {
           FUN_004c571c(temp_v2,0x1d,1,0);
         }
       }
@@ -340,7 +340,7 @@ LAB_004e0ac0:
       if ((*(unsigned short *)(param_2[10] + 0x110) & 8) != 0) {
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
              (DAT_00571260 & *(unsigned int *)(*param_1 + 0x45a0)) == 0) &&
-           (temp_v3 = FUN_004c3a98(temp_v2,0x1e), temp_v3 == 0)) {
+           (temp_v3 = btlFindEntryValue(temp_v2,0x1e), temp_v3 == 0)) {
           FUN_004c571c(temp_v2,0x1e,1,0);
         }
       }
@@ -351,7 +351,7 @@ LAB_004e0ac0:
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x800) != 0) {
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
              (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0) &&
-           (temp_v3 = FUN_004c3a98(temp_v2,0x1f), temp_v3 == 0)) {
+           (temp_v3 = btlFindEntryValue(temp_v2,0x1f), temp_v3 == 0)) {
           FUN_004c571c(temp_v2,0x1f,1,0);
         }
       }
@@ -366,7 +366,7 @@ LAB_004e0ac0:
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x2000) != 0) {
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
              (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0) &&
-           (temp_v3 = FUN_004c3a98(temp_v2,0x21), temp_v3 == 0)) {
+           (temp_v3 = btlFindEntryValue(temp_v2,0x21), temp_v3 == 0)) {
           FUN_004c571c(temp_v2,0x21,1,0);
         }
       }
@@ -427,8 +427,8 @@ LAB_004e0ac0:
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x6d);
-  if (((*(int *)(*param_1 + 0xa8) == 0) && (temp_v2 = FUN_003ec814(), temp_v2 != 0)) &&
-     (temp_v2 = FUN_003eda88(*param_1), temp_v2 != 0)) {
+  if (((*(int *)(*param_1 + 0xa8) == 0) && (temp_v2 = battlePartyIsDefeated(reinterpret_cast<const BtlMainStateA *>(*param_1)), temp_v2 != 0)) &&
+     (temp_v2 = contentGetFirstFlaggedValue(), temp_v2 != 0)) {
     temp_v6 = 0x18;
     temp_v2 = g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254;
   }

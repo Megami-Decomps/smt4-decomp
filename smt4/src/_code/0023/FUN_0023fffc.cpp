@@ -25,7 +25,7 @@ typedef struct {
 extern unsigned int g_btlMain; /* 0x4342c8 */
 
 /* Supplied declaration required: FUN_0023fbdc. */
-extern int FUN_002405c8(int, unsigned short);
+extern int pairedEntryTableContains(int, unsigned short);
 /* Supplied declaration required: FUN_002505c0. */
 /* Supplied declaration required: FUN_00270028. */
 /* Supplied declaration required: FUN_0027da30. */
@@ -93,7 +93,7 @@ void FUN_0023fffc(unsigned int *param_1,int param_2)
            (*(unsigned short *)(temp_v7 + 0x58) & 0x800) == 0)) {
           temp_v6 = param_2;
           FUN_0027da30(param_2,(int)*(short *)(temp_v7 + 0x62));
-          temp_v6 = FUN_002405c8(param_2,*(unsigned short *)(temp_v6 + 2));
+          temp_v6 = pairedEntryTableContains(param_2,*(unsigned short *)(temp_v6 + 2));
           if (temp_v6 == 0) {
             *(unsigned short *)(temp_v7 + 0x58) = *(unsigned short *)(temp_v7 + 0x58) | 0x800;
           }

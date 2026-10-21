@@ -8,7 +8,7 @@ int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_00230a50(int *, int [3], int);
-int FUN_003a6c64(...);
+void drawParameterChangeBadge(unsigned int, int, int, int, int);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -33,7 +33,6 @@ extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00230a50. */
 extern int FUN_0026264c(unsigned short);
-/* Supplied declaration required: FUN_003a6c64. */
 extern unsigned int FUN_003a6f84(unsigned int);
 
 
@@ -96,12 +95,11 @@ void FUN_0022e9c8(void)
         if ((*(char *)(temp_v7 + 0x2017) != '\x0e') &&
            (((*(char *)(temp_v7 + 0x2017) != '\a' || (temp_v6 = FUN_0026264c(*puVar9), temp_v6 != 0)) &&
             (*(char *)(temp_v7 + 0x2017) != '\x10')))) {
-          FUN_003a6c64(*(unsigned int *)(puVar9 + temp_v3 * 4 + 0x2dc) & 0xff,
-                       (int)*(char *)(puVar9 + temp_v3 * 4 + 0x2de),temp_v5,temp_v8,0xdf);
+          drawParameterChangeBadge(*(unsigned int *)(puVar9 + temp_v3 * 4 + 0x2dc) & 0xff,
+                       (int)*(signed char *)(puVar9 + temp_v3 * 4 + 0x2de),temp_v5,temp_v8,0xdf);
         }
         else {
-          FUN_003a6c64(temp_v14 & 0xff,(int)*(char *)(puVar9 + temp_v3 * 4 + 0x2de),temp_v5,temp_v8,0xdf)
-          ;
+          drawParameterChangeBadge(temp_v14 & 0xff,(int)*(signed char *)(puVar9 + temp_v3 * 4 + 0x2de),temp_v5,temp_v8,0xdf);
         }
         temp_v9 = temp_v9 + 1;
       }

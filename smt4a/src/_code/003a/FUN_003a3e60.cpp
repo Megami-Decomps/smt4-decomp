@@ -88,7 +88,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -204,7 +204,7 @@ void FUN_003a3e60(fn_003a3e60_arg0 *param_1,int param_2)
     temp_v31 = temp_v9 * temp_v13 + temp_v7 * temp_v6 * temp_v34;
   }
   else {
-    temp_v6 = *(float *)(DAT_005806a4 + 0x50) - param_1->field_0x68;
+    temp_v6 = *(float *)(g_lmapView + 0x50) - param_1->field_0x68;
     FUN_0050d8e4();
     temp_v13 = temp_v6 * 57.32484f * temp_v13;
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v11 <= temp_v13) << 0x1d);

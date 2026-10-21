@@ -10,7 +10,7 @@ int FUN_0048e46c(int, int);
 int MapNaviTable_GetCategoryCount(void);
 
 /* Supplied declaration required: FUN_0014afd0. */
-extern int FUN_00153f64(unsigned int, int);
+extern int asdTMTexTableGetHeaderValue(unsigned int, int);
 extern int asdTMTexTableReleaseNode(unsigned int);
 extern int dataTable2EGetEntry(int);
 /* Supplied declaration required: dataTable2ECount. */
@@ -55,7 +55,7 @@ void FUN_0048cee0(int param_1,int param_2,unsigned int param_3,unsigned int para
     } while (temp_v3 < temp_v2);
   }
   FUN_0014afd0(0x28,*piVar8);
-  temp_v2 = FUN_00153f64(0x28,*piVar8);
+  temp_v2 = asdTMTexTableGetHeaderValue(0x28,*piVar8);
   temp_v3 = 0;
   temp_v4 = 0x20;
   *(unsigned int *)(temp_v2 + 0x3c) = 1;

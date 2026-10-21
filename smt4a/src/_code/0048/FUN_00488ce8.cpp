@@ -9,14 +9,14 @@ int uiSpriteSetKeyframe(...);
 int sysPlaySe(...);
 int FUN_00183e58(void);
 int FUN_00317af8(...);
-int FUN_00357a48(void);
+int naviRequestSelectedMap(void);
 int FUN_003a35a4(void);
 int FUN_003d2150(...);
 int FUN_00489480(int);
 int FUN_0048981c(void);
 int FUN_0048d248(...);
 int rectRecRead(int, int, int *, unsigned int **);
-int FUN_00492ab4(...);
+int naviMainGetValue(...);
 int sub68OwnerGetBlock60(...);
 int FUN_00492bc0(...);
 int FUN_00492c18(...);
@@ -54,7 +54,7 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern float DAT_00587f10; /* 0x587f10 */
+extern float g_uiTextFontSettings; /* 0x587f10 */
 extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned char DAT_005f1614; /* 0x5f1614 */
 extern signed char DAT_005f161d; /* 0x5f161d */
@@ -79,14 +79,14 @@ extern int FUN_00167c0c(unsigned int **, int *);
 /* Supplied declaration required: FUN_00183e58. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: FUN_00317af8. */
-/* Supplied declaration required: FUN_00357a48. */
+/* Supplied declaration required: naviRequestSelectedMap. */
 /* Supplied declaration required: FUN_003a35a4. */
 /* Supplied declaration required: FUN_003d2150. */
 /* Supplied declaration required: FUN_00489480. */
 /* Supplied declaration required: FUN_0048981c. */
 /* Supplied declaration required: FUN_0048d248. */
 /* Supplied declaration required: rectRecRead. */
-/* Supplied declaration required: FUN_00492ab4. */
+/* Supplied declaration required: naviMainGetValue. */
 /* Supplied declaration required: sub68OwnerGetBlock60. */
 /* Supplied declaration required: FUN_00492bc0. */
 /* Supplied declaration required: FUN_00492c18. */
@@ -228,7 +228,7 @@ unsigned int FUN_00488ce8(int param_1)
       *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) | 0x20000;
     }
   }
-  temp_v5 = DAT_00587f10;
+  temp_v5 = g_uiTextFontSettings;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0) {
     in_s0 = *(unsigned int **)(param_1 + 0x3c);
     if (((int)romwright_fabs_4(romwright_u2f((unsigned int)(in_s0))) < 0x3f000001) && ((int)romwright_fabs_4(*(float *)(param_1 + 0x40)) < 0x3f000001)
@@ -237,7 +237,7 @@ unsigned int FUN_00488ce8(int param_1)
       *(unsigned int *)(param_1 + 0x40) = temp_v7;
     }
     else {
-      *(float *)(param_1 + 0x3c) = romwright_u2f((unsigned int)(in_s0)) * DAT_00587f10;
+      *(float *)(param_1 + 0x3c) = romwright_u2f((unsigned int)(in_s0)) * g_uiTextFontSettings;
       *(float *)(param_1 + 0x40) = *(float *)(param_1 + 0x40) * temp_v5;
       pfVar4 = (float *)sub68OwnerGetBlock60(temp_v14);
       temp_v8 = (float *)romwright_f2u((float)((*pfVar4 + *(float *)(param_1 + 0x3c))));
@@ -248,7 +248,7 @@ unsigned int FUN_00488ce8(int param_1)
   }
   if ((DAT_005f161d != '\0') && ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0)) {
     FUN_00317af8(&temp_v10,temp_v15,0);
-    FUN_00492ab4(temp_v14);
+    naviMainGetValue(temp_v14);
     pfVar4 = (float *)sub68OwnerGetBlock60(temp_v14);
     temp_v10 = -(temp_v10 * 13.0f);
     temp_v15[0] = -(temp_v15[0] * 13.0f);
@@ -275,7 +275,7 @@ unsigned int FUN_00488ce8(int param_1)
           *puVar8 = 1;
           *puVar7 = 1;
         }
-        FUN_00357a48();
+        naviRequestSelectedMap();
       }
       else {
         *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
@@ -361,7 +361,7 @@ unsigned int FUN_00488ce8(int param_1)
                 temp_v1 = FUN_00492bc0(temp_v14);
                 temp_v0 = NaviMain_GetCurrentMap(temp_v14);
                 if ((temp_v1 != temp_v0) && (DAT_005f1a5c == '\0')) {
-                  FUN_00357a48();
+                  naviRequestSelectedMap();
                   temp_v1 = 0;
                   do {
                     uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,7,0);

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int g_gameState; /* 0x5f15fc */
 extern unsigned int DAT_005f1600; /* 0x5f1600 */
@@ -35,7 +35,7 @@ void FUN_0033a988(void)
     *(unsigned int *)(puVar3 + 8) = *(unsigned int *)(temp_v1 + 0x20);
     *(unsigned int *)(puVar3 + 0xc) = *(unsigned int *)(temp_v1 + 0x24);
     *(unsigned int *)(puVar3 + 0x10) = *(unsigned int *)(temp_v1 + 0x50);
-    *(unsigned int *)(puVar3 + 0x14) = *(unsigned int *)(DAT_005806a4 + 0x18);
+    *(unsigned int *)(puVar3 + 0x14) = *(unsigned int *)(g_lmapView + 0x18);
     return;
   }
   if (temp_v2 != 2) {

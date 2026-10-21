@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int FUN_001742e4(void);
+int asdSoundObjectStop(void);
 
 extern int *DAT_0063e944; /* 0x63e944 */
 extern int DAT_0063e948; /* 0x63e948 */
 
 extern int FUN_0016003c(void);
-/* Supplied declaration required: FUN_001742e4. */
+/* Supplied declaration required: asdSoundObjectStop. */
 
 
 unsigned int FUN_00140924(int param_1)
@@ -27,7 +27,7 @@ unsigned int FUN_00140924(int param_1)
       if (piVar2[6] == param_1) {
         if ((*(unsigned char *)(piVar2 + 3) & 0x10) == 0) {
           if (*piVar2 != 0) {
-            FUN_001742e4();
+            asdSoundObjectStop();
           }
           *(unsigned char *)(piVar2 + 3) = *(unsigned char *)(piVar2 + 3) | 0x10;
         }

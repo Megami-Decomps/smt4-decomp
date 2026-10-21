@@ -1,27 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003872b8` (_code @ 0x3872b8, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: output/first-record registers r4/r5 and x/y source registers r2/r3 are exchanged. */
+#include "shard/W6_W6Match3_PointDifference.h"
 
-extern "C" {
+extern "C" const PointLookupRecord* FUN_001834a4(u32 bank, u32 index);
 
-extern int FUN_001834a4(unsigned int, unsigned int);
-
-
-void FUN_003872b8(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+// Store the coordinate difference between two records in the same bank.
+extern "C" void FUN_003872b8(PointDeltaWork* output, u32 bank, u32 firstIndex, u32 secondIndex)
 {
-  short temp_v0;
-  short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  
-  temp_v2 = FUN_001834a4(param_2,param_3);
-  temp_v3 = FUN_001834a4(param_2,param_4);
-  temp_v0 = *(short *)(temp_v2 + 10);
-  temp_v1 = *(short *)(temp_v3 + 10);
-  *(short *)(param_1 + 0x18) = *(short *)(temp_v2 + 8) - *(short *)(temp_v3 + 8);
-  *(short *)(param_1 + 0x1a) = temp_v0 - temp_v1;
-  return;
+    const PointLookupRecord* first = FUN_001834a4(bank, firstIndex);
+    const PointLookupRecord* second = FUN_001834a4(bank, secondIndex);
+    s16 firstY = first->y;
+    s16 secondY = second->y;
+    output->x = first->x - second->x;
+    output->y = firstY - secondY;
 }
-
-} /* extern "C" */

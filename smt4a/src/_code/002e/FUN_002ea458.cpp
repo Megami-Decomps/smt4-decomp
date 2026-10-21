@@ -14,7 +14,7 @@ typedef struct {
 } param_4_stack;
 
 /* Supplied declaration required: FUN_0017fd20. */
-extern int FUN_001d3ed4(int);
+extern int svcClearEvent(int);
 /* Supplied declaration required: FUN_002e3140. */
 /* Supplied declaration required: onlineHandleClose. */
 
@@ -48,7 +48,7 @@ void FUN_002ea458(int param_1,unsigned int param_2,unsigned int param_3,int para
   if ((int)piVar1 < 0) {
     FUN_002e3140();
   }
-  temp_v0 = FUN_001d3ed4(*piVar3);
+  temp_v0 = svcClearEvent(*piVar3);
   if (temp_v0 < 0) {
     FUN_002e3140();
   }

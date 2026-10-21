@@ -5,13 +5,13 @@
 extern "C" {
 
 int moriModelContentCopyBody(void);
-int FUN_0040ace8(...);
+int handleRegistryRegisterObject(...);
 
 int randRange(...);
 int FUN_00178b04(...);
 int gameFlagIsSet(...);
 int dataTable00FindById(void);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_002b64c0(...);
 int FUN_002b67a0(int);
 int FUN_00356308(void);
@@ -86,14 +86,14 @@ extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002b64c0. */
 /* Supplied declaration required: FUN_002b67a0. */
 extern int FUN_002d7c88(unsigned int);
 extern char *FUN_00332fcc(void);
 /* Supplied declaration required: FUN_00356308. */
 extern char *FUN_00371058(void);
-extern int FUN_00376f94(void);
+extern int lmapGetSpawnIndex(void);
 /* Supplied declaration required: contentEntryGetB. */
 extern char *dataTableGetRecordFortyOne(void);
 /* Supplied declaration required: contentEntryGetC. */
@@ -109,13 +109,13 @@ extern int FUN_003c311c(void);
 /* Supplied declaration required: dataTable2FType0Count. */
 extern int FUN_003cb88c(int, unsigned int);
 /* Supplied declaration required: moriModelContentCopyBody. */
-extern unsigned int FUN_0040ac08(void);
-/* Supplied declaration required: FUN_0040ace8. */
-extern int FUN_004bb510(unsigned int);
+extern unsigned int modelListInit(void);
+/* Supplied declaration required: handleRegistryRegisterObject. */
+extern int lookupConditionalSixBitValue(unsigned int);
 extern int FUN_004bb870(unsigned int);
 /* Supplied declaration required: FUN_004bc420. */
 extern int FUN_004bc5a4(unsigned int);
-extern int FUN_004bc850(void);
+extern int FUN_004bc850(int index);
 extern unsigned int __aeabi_idivmod(void);
 
 
@@ -294,7 +294,7 @@ void FUN_00303f48(void)
   if (DAT_005f1623 != '\0') {
     temp_v17 = (char *)FUN_00371058();
     temp_v18 = (char *)FUN_00332fcc();
-    temp_v1 = FUN_00376f94();
+    temp_v1 = lmapGetSpawnIndex();
     if (temp_v1 != 0) {
       temp_v2 = 0;
       dataTable2FType0Count();
@@ -302,7 +302,7 @@ void FUN_00303f48(void)
         do {
           piVar5 = (int *)dataTable2FType0GetEntry(temp_v2);
           if (*piVar5 == -1) break;
-          temp_v1 = FUN_00376f94();
+          temp_v1 = lmapGetSpawnIndex();
           if (temp_v1 == (short)piVar5[2]) {
             *(char *)(temp_v0 + 0x3a) = (char)(short)piVar5[3];
             *(char *)(temp_v0 + 0x3b) = (char)*(unsigned short *)((int)piVar5 + 0xe);
@@ -497,7 +497,7 @@ LAB_0030444c:
     temp_v11 = VectorSignedToFloat((int)*(short *)(pcVar7 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v12 = VectorSignedToFloat((int)*(short *)(pcVar7 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v9 = *(unsigned int *)(g_lmapScene + 0x1c);
-    FUN_002b5cb4();
+    distSpatial();
     temp_v13 = romwright_piece_4_4(temp_v9,temp_v11);
     temp_v0 = 0;
     do {
@@ -547,14 +547,13 @@ LAB_0030444c:
     temp_v14 = (float)((unsigned long long)temp_v13 >> 0x20);
     if (temp_v0 != 0) break;
 LAB_00304874:
-    temp_v0 = temp_v16;
-    FUN_004bc420(temp_v16,temp_v1,0);
+    temp_v0 = FUN_004bc420(temp_v16,temp_v1,0);
     *(int *)(temp_v2 + 0xa4) = temp_v0;
-    temp_v0 = FUN_004bc850();
+    temp_v0 = FUN_004bc850(temp_v0);
     *(int *)(temp_v2 + 0xa8) = temp_v0;
     dataTable00FindById();
     *(unsigned short *)(temp_v2 + 0x1a8) = *(unsigned short *)(temp_v0 + 2) & 0x7fff;
-    temp_v0 = FUN_004bb510(*(unsigned int *)(temp_v2 + 0xa4));
+    temp_v0 = lookupConditionalSixBitValue(*(unsigned int *)(temp_v2 + 0xa4));
     if (temp_v0 != 0) {
       if ((*(int *)(temp_v2 + 0xa8) < 0x3e9) && (temp_v4 = gameFlagIsSet(0x52a), temp_v4 != 0)) {
         *(int *)(temp_v2 + 0x1b0) = temp_v0;
@@ -635,11 +634,11 @@ LAB_00304874:
         FUN_00178b04(0x20,&LAB_00304cd0,0x8d5);
         temp_v9 = 0;
         if (temp_v0 != 0) {
-          temp_v9 = FUN_0040ac08();
+          temp_v9 = modelListInit();
         }
         *(unsigned int *)(temp_v2 + 0x1b4) = temp_v9;
         moriModelContentCopyBody();
-        FUN_0040ace8(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x1b4) + 4));
+        handleRegistryRegisterObject(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x1b4) + 4));
         *(unsigned char *)(temp_v2 + 0x1b9) = 1;
       }
       else {

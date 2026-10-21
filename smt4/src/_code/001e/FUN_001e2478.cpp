@@ -12,7 +12,7 @@ extern int g_lmapMainState; /* 0x447060 */
 extern int g_lmapScene; /* 0x447e88 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0027d748(void);
+extern int dataTableGetRecord23(void);
 /* Supplied declaration required: FUN_0027d7b0. */
 /* Supplied declaration required: FUN_00287aec. */
 
@@ -35,7 +35,7 @@ void FUN_001e2478(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   temp_v0 = g_lmapMainState;
   if (param_1 != 0) {
     FUN_0027d7b0(*(unsigned int *)(g_lmapMainState + 0x40),param_1,param_2);
-    temp_v1 = FUN_0027d748();
+    temp_v1 = dataTableGetRecord23();
     temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(temp_v0 + 0x4ebc) = temp_v2;
     temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -51,7 +51,7 @@ void FUN_001e2478(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     *(unsigned int *)(temp_v0 + 0x4ec4) = temp_v5;
   }
   FUN_0027d7b0(*(unsigned int *)(temp_v0 + 0x40),param_3,param_4);
-  temp_v1 = FUN_0027d748();
+  temp_v1 = dataTableGetRecord23();
   temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v0 + 0x4ec8) = temp_v2;
   temp_v2 = VectorSignedToFloat((int)*(short *)(temp_v1 + 6),(unsigned char)(in_fpscr >> 0x16) & 3);

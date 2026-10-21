@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_003dfa2c(unsigned int *, unsigned int *, int);
 int FUN_003dfaf0(unsigned int *, unsigned int *);
-int FUN_003dfd10(unsigned int *, unsigned int *, int, int);
+int gpuEmitDepthBufferCommands(unsigned int *, unsigned int *, int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -15,7 +15,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_003dfa2c. */
 /* Supplied declaration required: FUN_003dfaf0. */
-/* Supplied declaration required: FUN_003dfd10. */
+/* Supplied declaration required: gpuEmitDepthBufferCommands. */
 
 
 unsigned int * FUN_0023a724(unsigned int *param_1,unsigned int *param_2,int param_3)
@@ -72,7 +72,7 @@ unsigned int * FUN_0023a724(unsigned int *param_1,unsigned int *param_2,int para
     *puVar7 = 0xf0102;
   }
   puVar6 = param_1 + 6;
-  FUN_003dfd10(puVar6,puVar5,0,1);
+  gpuEmitDepthBufferCommands(puVar6,puVar5,0,1);
   *puVar6 = (unsigned int)(*(char *)(param_1 + 0xc) != '\0') | ((unsigned int)*(unsigned char *)((int)param_1 + 0x32) << 4) |
             ((unsigned int)*(unsigned char *)((int)param_1 + 0x31) << 8);
   puVar6[1] = 0x30104;

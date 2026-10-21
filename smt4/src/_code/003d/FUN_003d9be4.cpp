@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d9be4` (_code @ 0x3d9be4, 0x184 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: effect-resource cleanup needs recovered C++ destructor interfaces for both resource fields; manager constructor FUN_0034a1ec installs vtable address point 0x4208dc. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -9,7 +8,7 @@ int FUN_0022708c(void);
 int FUN_002276f8(int);
 int FUN_00241d58(int);
 int FUN_0024dc64(void);
-int FUN_00262a38(void);
+int textureCacheReleaseAll(void);
 int FUN_0027de24(int);
 int asdMdlManagerDestroy(int);
 int asdMemFree(void);
@@ -24,7 +23,7 @@ extern int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: FUN_002276f8. */
 /* Supplied declaration required: FUN_00241d58. */
 /* Supplied declaration required: FUN_0024dc64. */
-/* Supplied declaration required: FUN_00262a38. */
+/* Supplied declaration required: textureCacheReleaseAll. */
 /* Supplied declaration required: FUN_0027de24. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: asdMemFree. */
@@ -63,7 +62,7 @@ void FUN_003d9be4(int param_1)
   FUN_002276f8(param_1);
   *(unsigned int *)(param_1 + 0x2f98) = 0;
   FUN_0024dc64();
-  FUN_00262a38();
+  textureCacheReleaseAll();
   if (g_btlMain != 0) {
     *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xf7ffffff;
   }

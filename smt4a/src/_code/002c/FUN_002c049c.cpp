@@ -21,7 +21,7 @@ int gameFlagSetValue(int, int);
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameGetSlotTable. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int cecQueryOptionalProcess(void);
@@ -64,7 +64,7 @@ unsigned int FUN_002c049c(int *param_1,int param_2)
         return 0;
       }
       if ((*(unsigned char *)(temp_v3 + 0x3c) & 1) != 0) {
-        temp_v1 = FUN_00224880(*(unsigned int *)(temp_v3 + 4));
+        temp_v1 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 4));
         if (temp_v1 == 2) {
           temp_v1 = *(int *)(temp_v3 + 0x38);
           if (temp_v1 != 0) {
@@ -80,7 +80,7 @@ unsigned int FUN_002c049c(int *param_1,int param_2)
               *(unsigned char *)(temp_v3 + 0x3c) = 0;
               *(unsigned char *)(temp_v3 + 0x40) = 1;
               if ((*(char *)(temp_v3 + 0x3f) != '\0') &&
-                 (temp_v1 = FUN_00224880(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
+                 (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
                 *(unsigned char *)(temp_v3 + 0x40) = 1;
               }
               return 0;
@@ -101,7 +101,7 @@ unsigned int FUN_002c049c(int *param_1,int param_2)
                   *(unsigned char *)(temp_v3 + 0x40) = 1;
                 }
                 if ((*(char *)(temp_v3 + 0x3f) != '\0') &&
-                   (temp_v1 = FUN_00224880(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
+                   (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
                   *(unsigned char *)(temp_v3 + 0x40) = 1;
                 }
                 return 0;
@@ -148,7 +148,7 @@ unsigned int FUN_002c049c(int *param_1,int param_2)
                     cecProcessCall4();
                   }
                   if ((*(char *)(temp_v3 + 0x3f) != '\0') &&
-                     (temp_v1 = FUN_00224880(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
+                     (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
                     *(unsigned char *)(temp_v3 + 0x40) = 1;
                   }
                   return 0;
@@ -165,14 +165,14 @@ unsigned int FUN_002c049c(int *param_1,int param_2)
 LAB_002c0648:
               *(int *)(temp_v3 + 0x38) = temp_v1;
               if ((*(char *)(temp_v3 + 0x3f) != '\0') &&
-                 (temp_v1 = FUN_00224880(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
+                 (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
                 *(unsigned char *)(temp_v3 + 0x40) = 1;
               }
               return 0;
             }
             if (temp_v1 != 1) {
               if ((*(char *)(temp_v3 + 0x3f) != '\0') &&
-                 (temp_v1 = FUN_00224880(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
+                 (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
                 *(unsigned char *)(temp_v3 + 0x40) = 1;
               }
               return 0;
@@ -219,7 +219,7 @@ LAB_002c0810:
     }
   }
   if ((*(char *)(temp_v3 + 0x3f) != '\0') &&
-     (temp_v1 = FUN_00224880(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
+     (temp_v1 = scrRunOpcodesStub(*(unsigned int *)(temp_v3 + 4)), temp_v1 == 2)) {
     *(unsigned char *)(temp_v3 + 0x40) = 1;
   }
   return 0;

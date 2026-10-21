@@ -1,41 +1,42 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f4264` (_code @ 0x1f4264, 0x64 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "event/2dEvent/2dEventTex.h"
+
+struct MotionOffset {
+    f32 x;
+    f32 y;
+};
+
+struct ScreenShakeState {
+    MotionOffset amplitude; // 0x00
+    MotionOffset offset;    // 0x08
+    s16 duration;           // 0x10
+    s16 elapsed;            // 0x12
+};
+
+struct EventTexMotionView {
+    EventTex base;
+    MotionOffset shake; // 0x60; keep the shared EventTex prefix unchanged.
+};
 
 extern "C" {
+extern EventTex *g_eventTex;
+u32 eventCommandGetPendingCleanup(void);
+void FUN_00257e74(ScreenShakeState *shake);
+const MotionOffset *FUN_0018f654(ScreenShakeState *shake);
 
-int FUN_00257e74(void);
-
-extern int g_eventTex; /* 0x43ded0 */
-
-extern float *FUN_0018f654(int);
-/* Supplied declaration required: FUN_00257e74. */
-extern int eventCommandGetPendingCleanup(void);
-
-
-unsigned int FUN_001f4264(void)
-
+// Refresh the current event-texture shake offset when the updated motion is nonzero.
+u32 FUN_001f4264(void)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  float *pfVar2;
-  unsigned char temp_v1;
-  
-  temp_v0 = eventCommandGetPendingCleanup();
-  if (temp_v0 != 0) {
-    FUN_00257e74();
-    pfVar2 = (float *)FUN_0018f654(temp_v0);
-    temp_v0 = g_eventTex;
-    temp_v1 = 0;
-    if (*pfVar2 == 0.0f) {
-      temp_v1 = pfVar2[1] == 0.0f;
+    ScreenShakeState *shake =
+        reinterpret_cast<ScreenShakeState *>(eventCommandGetPendingCleanup());
+    if (shake != NULL) {
+        FUN_00257e74(shake);
+        const MotionOffset *offset = FUN_0018f654(shake);
+        if (offset->x != 0.0f || offset->y != 0.0f) {
+            EventTexMotionView *texture = reinterpret_cast<EventTexMotionView *>(g_eventTex);
+            texture->shake.x = offset->x * 30.0f;
+            texture->shake.y = offset->y * 30.0f;
+        }
     }
-    if (!temp_v1) {
-      *(float *)(g_eventTex + 0x60) = *pfVar2 * 30.0f;
-      *(float *)(temp_v0 + 100) = pfVar2[1] * 30.0f;
-    }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002aea44(unsigned char [6]);
-int FUN_002aea50(int *, int *, int);
+int callbackBindingInitFromKind(int *, int *, int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -22,7 +22,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002aea44. */
-/* Supplied declaration required: FUN_002aea50. */
+/* Supplied declaration required: callbackBindingInitFromKind. */
 extern int libc_strlen(int);
 
 
@@ -52,7 +52,7 @@ void FUN_0028f4b4(int param_1,unsigned int *param_2)
   if ((DAT_00464a70 != 0 && param_2 < puVar1) &&
      (temp_v0 = DAT_00464a70 + (int)param_2 * 0x2c, temp_v0 != 0)) {
     piVar6 = *(int **)(temp_v0 + 8);
-    FUN_002aea50(&temp_v4,piVar6,0x30);
+    callbackBindingInitFromKind(&temp_v4,piVar6,0x30);
     temp_v4 = param_1;
     temp_v0 = libc_strlen(param_1);
     pcVar5 = temp_v5;

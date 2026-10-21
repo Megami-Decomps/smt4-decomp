@@ -4,7 +4,7 @@ extern "C" {
 extern AsdGxState g_asdGxState;
 extern AsdGxCommandList *g_asdGxCommandListStack[]; /* lists begun and not yet ended, innermost last */
 
-void FUN_0017d920(u32 param, u32 *out);
+void gxGetCommandListParameter(u32 param, u32 *out);
 void FUN_0017dd84(void);
 void FUN_0017dfa8(u32 *a, u32 *b, u32 *c, u32 *d);
 void asdGxCommandListRefreshCopy(AsdGxCommandList *list);
@@ -18,7 +18,7 @@ void asdGxCommandListBegin(AsdGxCommandList *list)
 {
     AsdGxCommandList *outer;
 
-    FUN_0017d920(0x207, &list->boundList);
+    gxGetCommandListParameter(0x207, &list->boundList);
     if (g_asdGxState.depth != 0) {
         outer = g_asdGxCommandListStack[g_asdGxState.depth - 1];
         FUN_0017dd84();

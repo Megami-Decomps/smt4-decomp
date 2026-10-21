@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_00244c70(...);
-int FUN_003534b0(...);
+int sceneRegisterBoxEffect(...);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -34,7 +34,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00244c70. */
 extern int gameFlagsTestFirstBank(int);
-/* Supplied declaration required: FUN_003534b0. */
+/* Supplied declaration required: sceneRegisterBoxEffect. */
 
 
 void FUN_002b7ce0(void)
@@ -56,7 +56,7 @@ void FUN_002b7ce0(void)
       if (temp_v0 != 0) {
         FUN_001bc124();
         FUN_001bbf0c();
-        FUN_003534b0(0x203,0,&LAB_002b7f08,0x35,0,0xffffffff,0,0,0,0,0,0,0,0,0,
+        sceneRegisterBoxEffect(0x203,0,&LAB_002b7f08,0x35,0,0xffffffff,0,0,0,0,0,0,0,0,0,
                      *(unsigned int *)(temp_v4 + 0x80),0,0,99);
         temp_v1 = *(unsigned int *)(temp_v4 + 0x80);
         temp_v2 = 0x25;
@@ -64,7 +64,7 @@ void FUN_002b7ce0(void)
       else {
         FUN_001bc124();
         FUN_001bbf0c();
-        FUN_003534b0(0,0,&LAB_002b7f0c,0x4d,0,0xffffffff,0,0,0,0,0,0,0,0,0,
+        sceneRegisterBoxEffect(0,0,&LAB_002b7f0c,0x4d,0,0xffffffff,0,0,0,0,0,0,0,0,0,
                      *(unsigned int *)(temp_v4 + 0x80),0,0,99);
         temp_v1 = *(unsigned int *)(temp_v4 + 0x80);
         temp_v2 = 0x28;

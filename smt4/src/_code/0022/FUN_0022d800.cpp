@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00230d84(int, int, int, int, unsigned int);
-int FUN_00231258(...);
+void gxSetClippedBottomScreenScissor(int, int, int, int);
 int FUN_00231bcc(...);
 int FUN_002bf4f0(...);
 int efctSetSpeed(void);
@@ -19,7 +19,6 @@ typedef struct {
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00230d84. */
-/* Supplied declaration required: FUN_00231258. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
@@ -54,7 +53,7 @@ void FUN_0022d800(int param_1,int param_2,unsigned int param_3,int param_4)
     FUN_00231bcc(param_1 + 200,0x42a,temp_v4,temp_v1,param_3,1);
   }
   temp_v2 = FUN_002bf4f0(param_1 + 200,0x42a);
-  FUN_00231258(*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,
+  gxSetClippedBottomScreenScissor(*(short *)(temp_v2 + 8) + temp_v4,*(short *)(temp_v2 + 10) + temp_v1,
                (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1]);
   temp_v2 = FUN_002bf4f0(param_1 + 200,0x42c);
   temp_v3 = vec2GetXInt(param_1 + 0x2a0);

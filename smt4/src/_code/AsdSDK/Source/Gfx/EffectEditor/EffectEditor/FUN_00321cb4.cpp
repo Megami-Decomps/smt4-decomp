@@ -8,12 +8,12 @@ int CONCAT44(double, double);
 int FUN_00243224(...);
 int FUN_00249678(void);
 int FUN_0024c418(void);
-int FUN_0024dd00(...);
+int asdDebugLog(...);
 int FUN_0024dd80(...);
 int effMenuListAppend(...);
 int FUN_0028836c(void);
 int FUN_002a2c00(void);
-int FUN_002b7064(void);
+int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int padIsButtonRepeat(...);
 int padIsButtonPressed(...);
@@ -98,12 +98,12 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00243224. */
 /* Supplied declaration required: FUN_00249678. */
 /* Supplied declaration required: FUN_0024c418. */
-/* Supplied declaration required: FUN_0024dd00. */
+/* Supplied declaration required: asdDebugLog. */
 /* Supplied declaration required: FUN_0024dd80. */
 /* Supplied declaration required: effMenuListAppend. */
 /* Supplied declaration required: FUN_0028836c. */
 /* Supplied declaration required: FUN_002a2c00. */
-/* Supplied declaration required: FUN_002b7064. */
+/* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: padIsButtonRepeat. */
 /* Supplied declaration required: padIsButtonPressed. */
@@ -154,9 +154,9 @@ unsigned int FUN_00321cb4(void)
   float temp_v32;
   
   temp_v12 = 1;
-  FUN_0024dd00(8,8,0,&LAB_00322084);
-  FUN_0024dd00(8,0x14,0,&LAB_0032209c);
-  FUN_0024dd00(8,0x20,0,&LAB_003220b0);
+  asdDebugLog(8,8,0,&LAB_00322084);
+  asdDebugLog(8,0x14,0,&LAB_0032209c);
+  asdDebugLog(8,0x20,0,&LAB_003220b0);
   temp_v10 = padIsButtonRepeat(5);
   if (temp_v10 == 0) {
     FUN_0024dd80(5);
@@ -310,7 +310,7 @@ LAB_00321f54:
     temp_v15 = temp_v18;
     FUN_002b70cc();
     temp_v30 = temp_v16 + temp_v18 * temp_v21;
-    FUN_002b7064();
+    phaseCosInterpolate();
     if (DAT_0044ea82 == temp_v10) {
       in_d10 = CONCAT44(temp_v30,temp_v31);
       temp_v24 = temp_v15 * temp_v22;
@@ -383,7 +383,7 @@ LAB_00321f54:
   temp_v20 = (float)VectorSignedToFloat((int)DAT_0044ea83,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v19 = temp_v20 * 0.3926991f * temp_v19;
   temp_v20 = temp_v19;
-  FUN_002b7064();
+  phaseCosInterpolate();
   temp_v29 = temp_v26 - temp_v19 * temp_v24;
   temp_v30 = temp_v27;
   temp_v19 = temp_v20;
@@ -391,7 +391,7 @@ LAB_00321f54:
   temp_v31 = temp_v28 - temp_v20 * temp_v24;
   FUN_00243224(&temp_v29,&temp_v26,0xff00c0c0,0);
   temp_v20 = temp_v19;
-  FUN_002b7064();
+  phaseCosInterpolate();
   temp_v29 = temp_v21 + temp_v19 * temp_v24;
   temp_v30 = (float)((unsigned long long)in_d10 >> 0x20);
   FUN_002b70cc();
@@ -436,7 +436,7 @@ LAB_00321f54:
     DAT_004d9284 = DAT_004ea920;
     DAT_004d9288 = DAT_004ea924;
   }
-  FUN_0024dd00(8,0x30,0,&LAB_00322474,DAT_0044ea82 + 8,(int)DAT_0044ea83,(int)DAT_0044ea84);
+  asdDebugLog(8,0x30,0,&LAB_00322474,DAT_0044ea82 + 8,(int)DAT_0044ea83,(int)DAT_0044ea84);
   DAT_004d8bc8 = DAT_0044ea82;
   DAT_004d8bc9 = DAT_0044ea83;
   DAT_004d8bca = DAT_0044ea84;

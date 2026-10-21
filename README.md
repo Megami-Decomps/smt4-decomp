@@ -45,8 +45,8 @@ NintendoWare, NEX, Mobiclip and the ARM runtime still relink with everything els
 
 | Version | First-party functions | Proven by relink | Readable | Third-party (not counted) |
 |---|---|---|---|---|
-| `smt4` | 7,421 | 2,742 | 871 | 2,577 |
-| `smt4a` | 9,997 | 3,553 | 1,339 | 5,839 |
+| `smt4` | 7,278 | 2,943 | 1,213 | 2,761 |
+| `smt4a` | 9,856 | 3,765 | 1,680 | 6,031 |
 
 "Proven" is the number that counts: objdiff ignores some operand differences, relink does not. The
 [project notes](docs/project.md#proof) explain the measurements and the six functions per game that

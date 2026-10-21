@@ -34,7 +34,7 @@ extern int FUN_001bd100(unsigned int);
 /* Supplied declaration required: FUN_002a48e0. */
 /* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: gameDataGetIndexedPair. */
-extern int FUN_002c2c68(int);
+extern int objectApplyIfUnblocked(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: flaggedEntrySetValueA. */
@@ -191,7 +191,7 @@ LAB_001ff9d0:
     temp_v8 = gameDataGetIndexedPair(0);
     temp_v6 = *(int *)(temp_v8 + 4);
     temp_v8 = uiSearchPrimary(temp_v1);
-    temp_v9 = FUN_002c2c68(temp_v1);
+    temp_v9 = objectApplyIfUnblocked(temp_v1);
     if (temp_v9 < temp_v6 + temp_v8) {
       temp_v8 = gameDataGetIndexedPair(0);
       *(unsigned int *)(temp_v8 + 4) = 0;
@@ -216,7 +216,7 @@ LAB_001ff9d0:
     temp_v5 = gameDataGetIndexedPair(1);
     temp_v9 = *(int *)(temp_v5 + 4);
     temp_v5 = uiSearchPrimary(temp_v3);
-    temp_v8 = FUN_002c2c68(temp_v3);
+    temp_v8 = objectApplyIfUnblocked(temp_v3);
     if (temp_v9 + temp_v5 <= temp_v8) {
       temp_v5 = gameDataGetIndexedPair(1);
       FUN_002a48e0(temp_v3,*(unsigned int *)(temp_v5 + 4));

@@ -1,47 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ee094` (_code @ 0x3ee094, 0x44 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: original array element class and its constructor identity remain unrecovered. */
+#include "common.h"
+
+struct InitializationArguments {
+    u32 unk00[2]; // 0x00
+    u32 first;    // 0x08
+    u32 second;   // 0x0c
+};
+
+struct InitializationCounters {
+    u32 first;    // 0x00
+    u32 second;   // 0x04
+};
+
+struct InitializedElement {
+    u8 unk00[0x4c]; // 0x00
+};
 
 extern "C" {
+extern InitializationCounters DAT_0044cd98;
+extern InitializedElement DAT_004bdc04[35];
+void FUN_0034203c(InitializedElement* element);
+InitializedElement* __aeabi_vec_ctor_nocookie_nodtor(
+    InitializedElement* elements, void (*constructor)(InitializedElement*), u32 stride, u32 count);
+InitializedElement* FUN_002c5d54(
+    InitializedElement* elements, void (*constructor)(InitializedElement*), u32 stride, u32 count);
 
-int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
-
-typedef int romwright_code(...);
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-extern unsigned char LAB_0034203c; /* 0x34203c */
-extern unsigned int DAT_0044cd98; /* 0x44cd98 */
-extern unsigned int DAT_0044cd9c; /* 0x44cd9c */
-extern unsigned char DAT_004bdc04; /* 0x4bdc04 */
-
-/* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-
-
-unsigned char * FUN_003ee094(unsigned int param_1,unsigned int param_2,int param_3)
-
+// Initialize the two groups of shared elements and clear their counters.
+InitializedElement* FUN_003ee094(u32 first, u32 second, InitializationArguments* arguments)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  unsigned char *puVar3;
-  unsigned char temp_v1;
-  
-  *(unsigned int *)(param_3 + 8) = param_1;
-  *(unsigned int *)(param_3 + 0xc) = param_2;
-  DAT_0044cd98 = 0;
-  DAT_0044cd9c = 0;
-  puVar1 = &DAT_004bdc04;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_004bdc04,&LAB_0034203c,0x4c,0x20);
-  temp_v0 = 3;
-  puVar3 = puVar1 + 0x980;
-  while (temp_v1 = temp_v0 != 0, temp_v0 = temp_v0 - 1, temp_v1) {
-    (*(romwright_code *)&LAB_0034203c)(puVar3);
-    puVar3 = puVar3 + 0x4c;
-  }
-  return puVar1 + 0x980;
+    arguments->first = first;
+    arguments->second = second;
+    DAT_0044cd98.first = 0;
+    DAT_0044cd98.second = 0;
+    InitializedElement* elements = __aeabi_vec_ctor_nocookie_nodtor(
+        DAT_004bdc04, FUN_0034203c, sizeof(InitializedElement), 32);
+    return FUN_002c5d54(elements + 32, FUN_0034203c, sizeof(InitializedElement), 3);
 }
-
-} /* extern "C" */
+}

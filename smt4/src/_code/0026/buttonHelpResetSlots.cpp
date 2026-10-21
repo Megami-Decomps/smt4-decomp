@@ -28,7 +28,7 @@ typedef struct HelpHolder {
 
 extern HelpHolder g_buttonHelp;
 
-extern void FUN_002a87e8(void);
+extern void ifTouchDecrementTimer(void);
 extern void FUN_002bee58(HelpButton *button, s32 flag);
 
 /* Resets every button of the button help block and releases the held slots, then rewinds the
@@ -42,13 +42,13 @@ void buttonHelpResetSlots(void)
         FUN_002bee58(&help->buttons[i], 1);
         if (help->slots[i].kind != 0) {
             if (help->slots[i].kind == 7 || help->slots[i].kind == 9) {
-                FUN_002a87e8();
+                ifTouchDecrementTimer();
             }
             if (help->slots[i].kind == 8) {
-                FUN_002a87e8();
-                FUN_002a87e8();
+                ifTouchDecrementTimer();
+                ifTouchDecrementTimer();
             }
-            FUN_002a87e8();
+            ifTouchDecrementTimer();
         }
     }
     g_buttonHelp.block->state = 3;

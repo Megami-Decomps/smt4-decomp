@@ -28,7 +28,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int FUN_00144eec(void);
 /* Supplied declaration required: FUN_00145084. */
-extern unsigned int FUN_00153f64(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001640cc. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -65,7 +65,7 @@ unsigned int FUN_0013a9c8(void)
       temp_v5 = temp_v5 * 0.05f;
     }
     if (0.0f < temp_v5) {
-      temp_v0 = FUN_00153f64(0x21,0);
+      temp_v0 = asdTMTexTableGetHeaderValue(0x21,0);
       FUN_0016c4b8(g_renderCtx,temp_v0);
       FUN_001640cc(&temp_v2);
       skinObjectUpdateMatrices(g_renderCtx);

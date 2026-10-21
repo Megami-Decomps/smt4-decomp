@@ -18,7 +18,7 @@ struct fn_0035a7c4_arg0 {
     uint field_0x3dc; /* +0x3dc */
 };
 
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int maskToCode(void);
 
@@ -33,7 +33,7 @@ unsigned int FUN_0035a7c4(fn_0035a7c4_arg0 *param_1)
   
   temp_v2 = 0;
   if (param_1->field_0x3bc != 0) {
-    if ((param_1->field_0x3bc == 1) && (temp_v0 = FUN_00224880(param_1->field_0x360), temp_v0 == 2)) {
+    if ((param_1->field_0x3bc == 1) && (temp_v0 = scrRunOpcodesStub(param_1->field_0x360), temp_v0 == 2)) {
       param_1->field_0x3dc = param_1->field_0x3dc & 0xffffffef;
       param_1->field_0x3bc = 0;
       temp_v1 = maskToCode();

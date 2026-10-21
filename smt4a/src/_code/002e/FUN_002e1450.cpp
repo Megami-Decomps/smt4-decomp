@@ -1,30 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e1450` (_code @ 0x2e1450, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W5_W5Match2_PlainData.h"
 
-extern "C" {
-
-
-void FUN_002e1450(unsigned int *param_1)
-
+// Set a four-by-four matrix to the identity transform.
+extern "C" void FUN_002e1450(Matrix44 *matrix)
 {
-  param_1[0xf] = 0x3f800000;
-  param_1[10] = 0x3f800000;
-  param_1[5] = 0x3f800000;
-  *param_1 = 0x3f800000;
-  param_1[3] = 0;
-  param_1[7] = 0;
-  param_1[0xb] = 0;
-  param_1[4] = 0;
-  param_1[2] = 0;
-  param_1[1] = 0;
-  param_1[9] = 0;
-  param_1[8] = 0;
-  param_1[6] = 0;
-  param_1[0xe] = 0;
-  param_1[0xd] = 0;
-  param_1[0xc] = 0;
-  return;
+    matrix->values[0] = matrix->values[5] = matrix->values[10] = matrix->values[15] = 1.0f;
+    matrix->values[3] = 0.0f;
+    matrix->values[7] = 0.0f;
+    matrix->values[11] = 0.0f;
+    matrix->values[4] = 0.0f;
+    matrix->values[2] = 0.0f;
+    matrix->values[1] = 0.0f;
+    matrix->values[9] = 0.0f;
+    matrix->values[8] = 0.0f;
+    matrix->values[6] = 0.0f;
+    matrix->values[14] = 0.0f;
+    matrix->values[13] = 0.0f;
+    matrix->values[12] = 0.0f;
 }
-
-} /* extern "C" */

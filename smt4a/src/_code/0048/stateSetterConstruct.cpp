@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
+struct StateSetterSpriteWork;
+
 extern "C" {
 
 int asdTMTexTableLoadSprites(int);
@@ -15,7 +17,7 @@ int FUN_0020214c(void);
 int FUN_00203b40(unsigned char *, int, int, int, int, int);
 int FUN_00275bc8(void);
 int campButtonHelpAcquire(void);
-int Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(unsigned char *);
+int paramsClearPacket(unsigned char *);
 
 typedef int romwright_code(...);
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -36,7 +38,7 @@ extern unsigned char LAB_0048502c; /* 0x48502c */
 extern unsigned char LAB_0048503c; /* 0x48503c */
 extern int stateSetterStart9(...); /* 0x4850c4 */
 extern int rect48Init(...); /* 0x4850e4 */
-extern int FUN_004852a0(...); /* 0x4852a0 */
+extern void FUN_004852a0(StateSetterSpriteWork*); /* 0x4852a0 */
 extern int FUN_00485308(...); /* 0x485308 */
 extern int nameEntryMenuClearTarget(...); /* 0x48550c */
 extern unsigned char DAT_00532e94; /* 0x532e94 */
@@ -60,7 +62,7 @@ extern unsigned int *gameDataGetPlayerName(void);
 extern unsigned int *FUN_002840ac(void);
 /* Supplied declaration required: campButtonHelpAcquire. */
 extern unsigned int *gameBlockGetArea221AA(void);
-/* Supplied declaration required: Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object. */
+/* Supplied declaration required: paramsClearPacket. */
 
 
 void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
@@ -72,7 +74,7 @@ void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
   
   *(romwright_code **)(param_1 + 0xd4) = rect48Init;
   *(unsigned int *)(param_1 + 0xd8) = 0;
-  *(romwright_code **)(param_1 + 0xdc) = FUN_004852a0;
+  *(romwright_code **)(param_1 + 0xdc) = reinterpret_cast<romwright_code *>(FUN_004852a0);
   *(unsigned int *)(param_1 + 0xe0) = 0;
   *(romwright_code **)(param_1 + 0xe4) = FUN_00483d34;
   *(unsigned int *)(param_1 + 0xe8) = 0;
@@ -161,7 +163,7 @@ void stateSetterConstruct(unsigned char *param_1,unsigned char param_2)
   *(unsigned char **)(param_1 + 0x268) = puVar2;
   FUN_00275bc8();
   *(unsigned char **)(param_1 + 0x26c) = puVar2;
-  Sound_SoundOnishiPlayer_SoundOnishiPlayer_sub_object(param_1 + 0x274);
+  paramsClearPacket(param_1 + 0x274);
   paramsInit(param_1 + 0x274,&DAT_00532e94,0x18,&DAT_00532eac,0x24,0,0,0,0,&DAT_00532ed0,0x70);
   FUN_0014e188(param_1 + 0x294,0x23,0,param_1 + 0x274,1);
   uiSpriteSelectAnim(param_1 + 0x294,0);

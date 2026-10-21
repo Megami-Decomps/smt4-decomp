@@ -8,11 +8,11 @@ int FUN_00232848(void);
 int FUN_002328b4(void);
 int FUN_00233240(int, int);
 int FUN_00233818(int);
-int FUN_00233854(unsigned int);
+int ifTouchRegionClearAll(unsigned int);
 int FUN_0026c57c(void);
 int FUN_00295660(int, int [388]);
 int scrScriptProcessStartEntry(...);
-int FUN_0029ca58(void);
+int beginStatusPanelClose(void);
 int FUN_0029cc44(int);
 int FUN_0029d770(int, int [388]);
 int FUN_0029da34(...);
@@ -33,9 +33,9 @@ extern unsigned char DAT_0043d9c8; /* 0x43d9c8 */
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
 /* Supplied declaration required: FUN_00233240. */
-extern int FUN_0023360c(int);
+extern int flaggedValueHolderGetTotal(int);
 /* Supplied declaration required: FUN_00233818. */
-/* Supplied declaration required: FUN_00233854. */
+/* Supplied declaration required: ifTouchRegionClearAll. */
 extern int inputIsQuestConfirmPressed(void);
 extern int inputIsQuestCancelPressed(void);
 /* Supplied declaration required: FUN_0026c57c. */
@@ -44,14 +44,14 @@ extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
 /* Supplied declaration required: FUN_00295660. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
-/* Supplied declaration required: FUN_0029ca58. */
+/* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029cc44. */
 /* Supplied declaration required: FUN_0029d770. */
 /* Supplied declaration required: FUN_0029da34. */
 extern int gameGetFlagByte12e8(void);
 /* Supplied declaration required: FUN_0029ee6c. */
 /* Supplied declaration required: FUN_002a0cc8. */
-extern unsigned int FUN_002b066c(unsigned short);
+extern unsigned int partyMemberFindById(unsigned short);
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern unsigned int FUN_002bce30(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
@@ -102,12 +102,12 @@ void FUN_003a6f80(int param_1)
     if (*(char *)(param_1 + 0x5a4) == '\0') {
       FUN_0029cc44(1);
     }
-    FUN_00233854(*(unsigned int *)(param_1 + 0x590));
+    ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x590));
     FUN_00233818(temp_v10[0]);
     return;
   }
   if (temp_v7 != 0) {
-    temp_v2 = FUN_0023360c(param_1 + 0x20);
+    temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
     temp_v6 = (unsigned int)*(unsigned short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
     temp_v4 = temp_v6;
     FUN_002bd06c(temp_v6);
@@ -128,7 +128,7 @@ void FUN_003a6f80(int param_1)
         FUN_0029cc44(1);
       }
       FUN_0029ee6c(0,0x323232ff);
-      FUN_0029ca58();
+      beginStatusPanelClose();
       FUN_00233240(param_1 + 0xdc,1);
       FUN_002a0cc8(1);
       *(unsigned int *)(param_1 + 0x14) = 0xb;
@@ -153,10 +153,10 @@ void FUN_003a6f80(int param_1)
         temp_v5 = 0x4d;
       }
       buttonHelpSetPreset(temp_v5);
-      temp_v2 = FUN_0023360c(param_1 + 0x20);
+      temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
       temp_v0 = *(unsigned short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
       if (*(char *)(param_1 + 0x5a5) == '\x01') {
-        temp_v5 = FUN_002b066c(temp_v0);
+        temp_v5 = partyMemberFindById(temp_v0);
         FUN_0029da34(0,1,temp_v0,temp_v5);
         return;
       }

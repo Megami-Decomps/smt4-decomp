@@ -1,36 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `QcUtility_CountFlaggedSubQuests` (_code @ 0x348b2c, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: current C compilation omits the retail ARM hint NOP after each record lookup; the original source/inlining shape remains unrecovered. */
+#include "common.h"
+
+struct QuestRecord;
+struct QuestFlagEntry {
+    u8 flags;     // 0x00
+    u8 unk01[3];  // 0x01
+};
+struct QuestFlagState {
+    u8 unk000[0x200];       // 0x000
+    QuestFlagEntry entries[400]; // 0x200
+};
 
 extern "C" {
+QuestRecord* dataTable1bOr1cGetRecord(u16 id);
+QuestFlagState* gameGetFlagBlock(void);
 
-int dataTable1bOr1cGetRecord(void);
-
-extern int gameGetFlagBlock(void);
-/* Supplied declaration required: dataTable1bOr1cGetRecord. */
-
-
-int QcUtility_CountFlaggedSubQuests(void)
-
+// Counts existing subquests 100-399 whose saved flag bit 3 is set.
+s32 QcUtility_CountFlaggedSubQuests(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  
-  temp_v3 = 0;
-  temp_v2 = 100;
-  do {
-    temp_v0 = temp_v2;
-    dataTable1bOr1cGetRecord();
-    if ((temp_v0 != 0) &&
-       (temp_v1 = gameGetFlagBlock(), (*(unsigned char *)(temp_v1 + (temp_v2 & 0xffff) * 4 + 0x200) & 8) != 0)) {
-      temp_v3 = temp_v3 + 1;
+    s32 count = 0;
+    for (s32 id = 100; id < 400; ++id) {
+        if (dataTable1bOr1cGetRecord(static_cast<u16>(id)) != NULL) {
+            u16 index = static_cast<u16>(id);
+            if ((gameGetFlagBlock()->entries[index].flags & 8) != 0) {
+                ++count;
+            }
+        }
     }
-    temp_v2 = temp_v2 + 1;
-  } while ((int)temp_v2 < 400);
-  return temp_v3;
+    return count;
 }
-
-} /* extern "C" */
+}

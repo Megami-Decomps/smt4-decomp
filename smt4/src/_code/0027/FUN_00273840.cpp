@@ -24,7 +24,7 @@ extern signed char DAT_0049fb6d; /* 0x49fb6d */
 /* Supplied declaration required: FUN_00289880. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_002d1cc8(void);
+extern int lmapMainGetFlag(void);
 extern int NaviMain_IsMapOpen(void);
 
 
@@ -73,7 +73,7 @@ void FUN_00273840(int param_1)
         }
       }
       else {
-        temp_v0 = FUN_002d1cc8();
+        temp_v0 = lmapMainGetFlag();
         if (temp_v0 != 0) {
           buttonHelpSetPreset(0xde);
           return;

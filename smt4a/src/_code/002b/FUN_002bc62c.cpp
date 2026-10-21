@@ -33,7 +33,7 @@ extern int DAT_005f1c00; /* 0x5f1c00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern unsigned int FUN_00153f64(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -183,7 +183,7 @@ unsigned int FUN_002bc62c(void)
     }
     *(float *)(temp_v3 + 0xe8) = temp_v6;
     temp_v7 = *(unsigned int *)(temp_v3 + 0xe4);
-    temp_v2 = FUN_00153f64(8,2);
+    temp_v2 = asdTMTexTableGetHeaderValue(8,2);
     FUN_0016c4b8(g_renderCtx,temp_v2);
     temp_v1 = g_renderCtx;
     temp_v3 = packNibblesAndByte(6,7,0);

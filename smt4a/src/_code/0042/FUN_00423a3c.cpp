@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00423a3c` (_code @ 0x423a3c, 0x44 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: this is Obj420a2c::Obj420a2c and its entry-array callback is Obj420a2cEntry::Obj420a2cEntry; both units need constructor-symbol migration before a genuine C++ implementation. */
 #include "romwright_types.h"
 
 extern "C" {

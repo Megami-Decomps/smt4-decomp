@@ -1,33 +1,27 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c033c` (_code @ 0x3c033c, 0x54 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: alternate/option saved registers and stacked argument setup order differ; compiler adds a separate zero setup. */
+#include "common.h"
+
+struct BattleHelpState {
+    /* 0x0000 */ u8 unk0000[0x2230];
+    /* 0x2230 */ u32 resource;
+};
+
+struct BattleHelpRequest {
+    /* 0x00 */ u8 unk00[6];
+    /* 0x06 */ u16 flags;
+};
 
 extern "C" {
+BattleHelpState* btlGetMainState(void);
+BattleHelpRequest* FUN_0022a4ac(u16 first, u16 second, u32 kind, u32 resource,
+                              const void* data, u8 option, s32 last);
 
-int FUN_0022a4ac(void);
-int btlGetMainState(void);
-
-/* stack frame of void: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-    unsigned int sp18; /* 0x18: local_18 */
-} void_stack;
-
-/* Supplied declaration required: FUN_0022a4ac. */
-/* Supplied declaration required: btlGetMainState. */
-
-
-void FUN_003c033c(void)
-
+// Queue one of the two battle-help kinds and mark the request active.
+void FUN_003c033c(u32 alternate, u8 option)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  btlGetMainState();
-  temp_v0 = 0;
-  FUN_0022a4ac();
-  *(unsigned short *)(temp_v0 + 6) = *(unsigned short *)(temp_v0 + 6) | 1;
-  return;
+    BattleHelpState* state = btlGetMainState();
+    BattleHelpRequest* request = FUN_0022a4ac(
+        0, 0, alternate != 0 ? 7 : 6, state->resource, NULL, option, -1);
+    request->flags |= 1;
 }
-
-} /* extern "C" */
+}

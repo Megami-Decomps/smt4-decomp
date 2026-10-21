@@ -10,11 +10,11 @@ int efctSetSpeed(void);
 int FUN_00180118(void);
 int FUN_0018349c(...);
 int dataTable00FindById(void);
-int FUN_004932ec(...);
+int devilDrawIconRelative(...);
 int FUN_00493408(...);
 int FUN_004934ac(int, int, int, int, int);
 int FUN_0049368c(...);
-int FUN_004cfb64(...);
+void renderSetClippedScissor(int, int, int, int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -42,12 +42,12 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_0018349c. */
 /* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: FUN_004932ec. */
+/* Supplied declaration required: devilDrawIconRelative. */
 /* Supplied declaration required: FUN_00493408. */
 /* Supplied declaration required: FUN_004934ac. */
 /* Supplied declaration required: FUN_0049368c. */
 extern int curveEvaluateStandard(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_004cfb64. */
+/* Supplied declaration required: renderSetClippedScissor. */
 
 
 void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
@@ -95,7 +95,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     FUN_0049368c(param_1 + 200,0x103d,temp_v10,temp_v2,temp_v9,1);
     FUN_0049368c(param_1 + 200,0x103e,temp_v10,temp_v2,temp_v9,1);
     temp_v3 = FUN_0018349c(param_1 + 200,0x1041);
-    FUN_004cfb64(*(short *)(temp_v3 + 8) + temp_v10,*(short *)(temp_v3 + 10) + temp_v2,
+    renderSetClippedScissor(*(short *)(temp_v3 + 8) + temp_v10,*(short *)(temp_v3 + 10) + temp_v2,
                  (int)**(short **)(temp_v3 + 0xc),(int)(*(short **)(temp_v3 + 0xc))[1]);
     temp_v3 = FUN_0018349c(param_1 + 200,0x1040);
     temp_v4 = param_1 + 0x2a0;
@@ -120,7 +120,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     else {
       temp_v3 = FUN_0018349c(param_1 + 200,0x1058);
     }
-    FUN_004932ec(param_1 + 200,(int)(short)param_4,*(short *)(temp_v3 + 8) + temp_v10,
+    devilDrawIconRelative(param_1 + 200,(int)(short)param_4,*(short *)(temp_v3 + 8) + temp_v10,
                  *(short *)(temp_v3 + 10) + temp_v2,temp_v9);
     if (param_3 == 0) {
       temp_v13 = 2;

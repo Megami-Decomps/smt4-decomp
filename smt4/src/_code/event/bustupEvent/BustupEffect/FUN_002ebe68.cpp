@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_2_stack;
 
-extern int FUN_001f3740(...); /* 0x1f3740 */
+extern int randomOffsetJobUpdate(...); /* 0x1f3740 */
 extern unsigned char LAB_002d65b4; /* 0x2d65b4 */
 extern unsigned char LAB_002ebf70; /* 0x2ebf70 */
 
@@ -49,7 +49,7 @@ void FUN_002ebe68(unsigned int param_1,unsigned int param_2)
     *(float *)&puVar2[1] = in_s1;
     puVar2[3] = in_s0;
     puVar2[4] = in_s0;
-    asdProcessCreateSimple(&LAB_002ebf70,2,0,0,FUN_001f3740,&LAB_002d65b4,puVar2);
+    asdProcessCreateSimple(&LAB_002ebf70,2,0,0,randomOffsetJobUpdate,&LAB_002d65b4,puVar2);
   }
   return;
 }

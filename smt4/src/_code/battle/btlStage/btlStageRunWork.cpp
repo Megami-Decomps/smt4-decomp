@@ -10,15 +10,15 @@ typedef struct BtlStageGlobals {
 extern BtlStageGlobals g_btlStage;
 
 extern u32 jobGetWork(void);
-extern s32 FUN_003c81c8(void *stage, u32 work);
+extern s32 btlStageUpdate(void *stage, u32 work);
 
-/* Passes the current battle stage and job work to FUN_003c81c8; 0 when there is no stage. */
+/* Passes the current battle stage and job work to btlStageUpdate; 0 when there is no stage. */
 s32 btlStageRunWork(void)
 {
     u32 work = jobGetWork();
 
     if (g_btlStage.stage != NULL) {
-        return FUN_003c81c8(g_btlStage.stage, work);
+        return btlStageUpdate(g_btlStage.stage, work);
     }
     return 0;
 }

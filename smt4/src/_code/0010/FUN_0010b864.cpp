@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001190b0(int, unsigned int);
+int asdWaveVoicePrepareFade(int, unsigned int);
 int VectorUnsignedToFloat(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -16,7 +16,7 @@ extern int g_asdSoundStatus; /* 0x4e3154 */
 extern int DAT_004e3158; /* 0x4e3158 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001190b0. */
+/* Supplied declaration required: asdWaveVoicePrepareFade. */
 
 
 void FUN_0010b864(int param_1,int param_2,unsigned int param_3)
@@ -38,7 +38,7 @@ void FUN_0010b864(int param_1,int param_2,unsigned int param_3)
         if (param_2 != 0) {
           VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
         }
-        FUN_001190b0(param_1,param_3);
+        asdWaveVoicePrepareFade(param_1,param_3);
         return;
       }
       temp_v0 = *(int *)(temp_v1 + 0x70);
@@ -54,7 +54,7 @@ void FUN_0010b864(int param_1,int param_2,unsigned int param_3)
   if (param_2 != 0) {
     VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   }
-  FUN_001190b0(param_1,param_3);
+  asdWaveVoicePrepareFade(param_1,param_3);
   return;
 }
 

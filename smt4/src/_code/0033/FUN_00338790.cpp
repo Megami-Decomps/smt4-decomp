@@ -6,12 +6,12 @@ extern "C" {
 
 int recordClampCurrentCount(int, int);
 int FUN_002485d4(int, unsigned short [30]);
-int FUN_00262410(int);
-int FUN_00283e48(void);
+int padClearBits(int);
+int passiveSkillLookupRecord(void);
 int FUN_00283f30(unsigned short [30], int);
 int FUN_00333fc0(int);
 int FUN_00333fec(int);
-int FUN_003bc988(int, int);
+int selectionStateSetClamped(int, int);
 int VectorSignedToFloat(...);
 
 typedef struct fn_00338790_arg0 fn_00338790_arg0;
@@ -41,11 +41,11 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: recordClampCurrentCount. */
 /* Supplied declaration required: FUN_002485d4. */
-/* Supplied declaration required: FUN_00262410. */
-/* Supplied declaration required: FUN_00283e48. */
+/* Supplied declaration required: padClearBits. */
+/* Supplied declaration required: passiveSkillLookupRecord. */
 /* Supplied declaration required: FUN_00283f30. */
 extern short FUN_0028d310(void);
-extern int FUN_00295d08(unsigned int);
+extern int playerPadTestBit(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
@@ -55,7 +55,7 @@ extern short FUN_00333fb0(void);
 /* Supplied declaration required: FUN_00333fec. */
 extern unsigned int FUN_00334038(void);
 extern unsigned int FUN_00334048(void);
-/* Supplied declaration required: FUN_003bc988. */
+/* Supplied declaration required: selectionStateSetClamped. */
 
 
 void FUN_00338790(fn_00338790_arg0 *param_1)
@@ -97,7 +97,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
     temp_v6 = 0;
     do {
       temp_v2 = (unsigned int)temp_v19[temp_v6];
-      if ((temp_v2 != 0) && (FUN_00283e48(), temp_v2 != 0)) {
+      if ((temp_v2 != 0) && (passiveSkillLookupRecord(), temp_v2 != 0)) {
         switch((*(unsigned int *)(temp_v2 + 0x38) & 0x1f) >> 2) {
         case 1:
           temp_v10 = temp_v10 + temp_v13;
@@ -127,10 +127,10 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
     if ((romwright_subpiece_4_1_0(temp_v2 >> 0x1d,0)) && (temp_v10 = temp_v9, (int)temp_v9 >= 0x42c80001)) {
       temp_v10 = temp_v17;
     }
-    temp_v6 = FUN_00295d08(1);
+    temp_v6 = playerPadTestBit(1);
     temp_v18 = 0x3c23d70a;
-    if (((temp_v6 == 0) && (temp_v6 = FUN_00295d08(10), temp_v6 == 0)) &&
-       (temp_v6 = FUN_00295d08(2), temp_v6 == 0)) {
+    if (((temp_v6 == 0) && (temp_v6 = playerPadTestBit(10), temp_v6 == 0)) &&
+       (temp_v6 = playerPadTestBit(2), temp_v6 == 0)) {
       temp_v1 = FUN_0028d310();
       temp_v3 = FUN_00334038();
       temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(temp_v2 >> 0x16) & 3);
@@ -172,7 +172,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
           temp_v7 = 0;
           do {
             temp_v5 = (unsigned int)temp_v19[temp_v7];
-            if ((temp_v5 != 0) && (FUN_00283e48(), temp_v5 != 0)) {
+            if ((temp_v5 != 0) && (passiveSkillLookupRecord(), temp_v5 != 0)) {
               switch((*(unsigned int *)(temp_v5 + 0x38) & 0x1f) >> 2) {
               case 1:
                 temp_v9 = temp_v9 + temp_v13;
@@ -217,7 +217,7 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
                                                 (unsigned char)(temp_v2 >> 0x16) & 3);
             temp_v7 = (int)(short)((short)(int)(temp_v10 * temp_v9 * (float)temp_v18) +
                                 *(short *)(temp_v4 + 0x2c));
-            FUN_003bc988(temp_v4,temp_v7);
+            selectionStateSetClamped(temp_v4,temp_v7);
             if (temp_v7 == 0) {
               *(unsigned short *)(temp_v4 + 0x2c) = 0;
             }
@@ -227,11 +227,11 @@ void FUN_00338790(fn_00338790_arg0 *param_1)
       } while (temp_v8 < (int)(unsigned int)temp_v0);
     }
   }
-  temp_v6 = FUN_00295d08(1);
+  temp_v6 = playerPadTestBit(1);
   if (temp_v6 == 0) {
     return;
   }
-  FUN_00262410(2);
+  padClearBits(2);
   FUN_00333fc0(1);
   return;
 }

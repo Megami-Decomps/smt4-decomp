@@ -21,7 +21,7 @@ typedef struct Menu {
     /* 0xFC */ Cursor cursor;
 } Menu;
 
-int FUN_00231184(void);
+int buttonHelpIsNotActive(void);
 int pointConvertToFloat(void *layout, u32 a, u32 b);
 int FUN_0029d960(Menu *menu);
 int FUN_002a0cc8(int arg);
@@ -29,7 +29,7 @@ int FUN_002b8ee0(Cursor *cursor, int arg);
 u32 vec2GetYInt(Cursor *cursor);
 u32 vec2GetXInt(Cursor *cursor);
 
-/* Refreshes the menu layout from its cursor; if the cursor is enabled and FUN_00231184 allows it, switches the menu to state (2, 0) and refreshes again. */
+/* Refreshes the menu layout from its cursor; if the cursor is enabled and buttonHelpIsNotActive allows it, switches the menu to state (2, 0) and refreshes again. */
 void FUN_003a7834(Menu *menu)
 {
     Cursor *cursor = &menu->cursor;
@@ -40,7 +40,7 @@ void FUN_003a7834(Menu *menu)
     width = vec2GetYInt(cursor);
     height = vec2GetXInt(cursor);
     pointConvertToFloat(menu->layout, height, width);
-    if (cursor->enabled != 0 && FUN_00231184() != 0) {
+    if (cursor->enabled != 0 && buttonHelpIsNotActive() != 0) {
         FUN_002a0cc8(0);
         menu->state.first = 2;
         menu->state.second = 0;

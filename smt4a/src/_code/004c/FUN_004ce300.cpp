@@ -6,8 +6,8 @@ extern "C" {
 
 int scrScriptProcessStartEntry(undefined4);
 int panelSetMode3(int, int);
-int FUN_00388758(int);
-int FUN_004a0ef8(int);
+int messageDismissNumericBanner(int);
+int partyAddMoneyClamped(int);
 
 typedef struct fn_004ce300_arg0 fn_004ce300_arg0;
 struct fn_004ce300_arg0 {
@@ -25,13 +25,13 @@ struct fn_004ce300_arg0 {
 };
 
 extern int *gameGetSlotTable(void);
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: panelSetMode3. */
 extern int FUN_0034919c(void);
 extern int tableGroupFindEntryIndex(unsigned int, char *);
-/* Supplied declaration required: FUN_00388758. */
-/* Supplied declaration required: FUN_004a0ef8. */
+/* Supplied declaration required: messageDismissNumericBanner. */
+/* Supplied declaration required: partyAddMoneyClamped. */
 
 
 void FUN_004ce300(fn_004ce300_arg0 *param_1)
@@ -46,7 +46,7 @@ void FUN_004ce300(fn_004ce300_arg0 *param_1)
   if (*piVar1 < temp_v0) {
     temp_v0 = FUN_0034919c();
     if (temp_v0 != 0) {
-      FUN_00388758(0);
+      messageDismissNumericBanner(0);
     }
     temp_v0 = tableGroupFindEntryIndex(param_1->field_0x10,"fountian_no_money");
     if (-1 < temp_v0) {
@@ -61,9 +61,9 @@ void FUN_004ce300(fn_004ce300_arg0 *param_1)
     scrScriptProcessStartEntry(param_1->field_0x18);
   }
   param_1->field_0x598 = 9;
-  temp_v0 = FUN_00224880(param_1->field_0x18);
+  temp_v0 = scrRunOpcodesStub(param_1->field_0x18);
   if (temp_v0 == 2) {
-    FUN_004a0ef8(-*(int *)(param_1->field_0x590 + param_1->field_0x554 * 4));
+    partyAddMoneyClamped(-*(int *)(param_1->field_0x590 + param_1->field_0x554 * 4));
     param_1->field_0x598 = 10;
   }
   return;

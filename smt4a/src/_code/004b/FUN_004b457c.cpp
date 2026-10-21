@@ -70,7 +70,7 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00185dd4. */
 /* Supplied declaration required: FUN_001879d0. */
 /* Supplied declaration required: libc_strcpy. */
-extern int FUN_003e4940(void);
+extern int actorIsActive(void);
 extern int FUN_004ccbf0(int);
 
 
@@ -139,7 +139,7 @@ void FUN_004b457c(int param_1,int param_2,int param_3)
   temp_v25 = 0;
   temp_v26 = 0;
   temp_v0 = saveSlotFindSelected();
-  temp_v1 = FUN_003e4940();
+  temp_v1 = actorIsActive();
   temp_v2 = g_renderCtx;
   if (temp_v1 != 0) {
     temp_v8 = (unsigned int)*(unsigned short *)(temp_v0 + 100);

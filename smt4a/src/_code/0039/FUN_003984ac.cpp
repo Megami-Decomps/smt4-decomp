@@ -13,7 +13,7 @@ int FUN_003e892c(int);
 int FUN_003eaf20(void);
 int FUN_003ebca0(void);
 int FUN_004abba8(...);
-int FUN_004abbe8(unsigned int);
+int btlUiIdsRefresh(unsigned int);
 int FUN_004c1114(...);
 int btlSlotSetStoreValue(...);
 int FUN_004c571c(...);
@@ -82,7 +82,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003ebca0. */
 /* Supplied declaration required: FUN_003f034c. */
 /* Supplied declaration required: FUN_004abba8. */
-/* Supplied declaration required: FUN_004abbe8. */
+/* Supplied declaration required: btlUiIdsRefresh. */
 /* Supplied declaration required: FUN_004c1114. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int FUN_004c53fc(unsigned int);
@@ -148,7 +148,7 @@ void FUN_003984ac(int param_1)
              ((DAT_00573a70 & temp_v3) == 0 && (temp_v5 & DAT_00573a74) == 0)) {
             FUN_003e892c(param_1);
           }
-          FUN_004abbe8(g_btlUiBlock);
+          btlUiIdsRefresh(g_btlUiBlock);
           temp_v5 = ~DAT_00573a70;
           temp_v3 = ~DAT_00573a10;
           *(unsigned int *)(param_1 + 0x45a4) = *(unsigned int *)(param_1 + 0x45a4) & ~DAT_00573a14 & ~DAT_00573a74;

@@ -72,7 +72,7 @@ extern unsigned int FUN_001bce18(void);
 /* Supplied declaration required: FUN_003e4f04. */
 /* Supplied declaration required: FUN_003e5354. */
 /* Supplied declaration required: flagValueAdd. */
-extern unsigned char FUN_004bca20(void);
+extern unsigned char partySlotFindIndex(void);
 /* Supplied declaration required: dispatchIfFound. */
 
 
@@ -168,7 +168,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
           do {
             temp_v5 = gameGetSlotRecord(temp_v11);
             if (*(unsigned short *)(temp_v5 + 0x62) == puVar10[temp_v3 + 0x1c]) {
-              temp_v1 = FUN_004bca20();
+              temp_v1 = partySlotFindIndex();
               temp_v11 = temp_v4 + 0x1ca0;
               temp_v4 = temp_v4 + 1;
               *(unsigned char *)((int)puVar6 + temp_v11) = temp_v1;

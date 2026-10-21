@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002342b8(void);
 int FUN_00313648(unsigned int);
 
-int FUN_0013c1ec(...);
+int soundVolumeSettingSet(...);
 int FUN_0014af98(void);
 int sysPlaySe(int);
 int FUN_001bbf0c(void);
@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern int g_gameState; /* 0x5f15fc */
 extern int DAT_005f164c; /* 0x5f164c */
@@ -43,8 +43,8 @@ extern unsigned int DAT_005f16b8; /* 0x5f16b8 */
 extern unsigned int DAT_005f16bc; /* 0x5f16bc */
 extern unsigned char DAT_005f185a; /* 0x5f185a */
 
-/* Supplied declaration required: FUN_0013c1ec. */
-extern unsigned int FUN_00145868(void);
+/* Supplied declaration required: soundVolumeSettingSet. */
+extern unsigned int soundVolumeSettingGet(void);
 /* Supplied declaration required: FUN_0014af98. */
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
@@ -88,7 +88,7 @@ void FUN_00366e24(void)
   unsigned int uStack_38;
   float temp_v10 [7];
   
-  temp_v0 = FUN_00145868();
+  temp_v0 = soundVolumeSettingGet();
   if (*(int *)(g_lmapScene + 4) < 10) {
     FUN_002dae68();
     temp_v2 = g_lmapScene;
@@ -124,9 +124,9 @@ void FUN_00366e24(void)
                 FUN_001bc124();
                 FUN_001bbf0c();
                 FUN_0014af98();
-                FUN_0013c1ec();
+                soundVolumeSettingSet();
                 FUN_003d2150(0x10002e7);
-                FUN_0013c1ec(temp_v0);
+                soundVolumeSettingSet(temp_v0);
               }
               temp_v2 = g_lmapScene;
               if (*(int *)(g_lmapScene + 8) == 2) {
@@ -164,7 +164,7 @@ void FUN_00366e24(void)
               else {
                 temp_v0 = 4;
               }
-              *(unsigned int *)(DAT_005806a4 + 0xc) = temp_v0;
+              *(unsigned int *)(g_lmapView + 0xc) = temp_v0;
               temp_v9 = *(unsigned int *)(temp_v2 + 0x28);
               fStack_3c = *(float *)(temp_v2 + 0x2c);
               uStack_38 = *(unsigned int *)(temp_v2 + 0x30);
@@ -194,8 +194,8 @@ void FUN_00366e24(void)
             else {
               temp_v2 = padButtonIsPressed(5);
               if ((temp_v2 != 0) || (temp_v2 = inputIsQuestMenuPressed(), temp_v2 != 0)) {
-                temp_v2 = DAT_005806a4;
-                *(unsigned int *)(DAT_005806a4 + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
+                temp_v2 = g_lmapView;
+                *(unsigned int *)(g_lmapView + 0x18) = *(unsigned int *)(g_lmapScene + 0x50);
                 *(unsigned int *)(temp_v2 + 0xb0) = 0;
                 FUN_00303460(0);
                 temp_v2 = g_lmapScene;
@@ -234,7 +234,7 @@ void FUN_00366e24(void)
         *(unsigned int *)(temp_v2 + 0x30) = temp_v8;
         *(unsigned int *)(temp_v2 + 0x50) = DAT_005f16bc;
         FUN_00303460(0xc);
-        *(unsigned int *)(DAT_005806a4 + 0xb0) = 0xfffffffd;
+        *(unsigned int *)(g_lmapView + 0xb0) = 0xfffffffd;
         sysPlaySe(0xdd);
         FUN_00233e10(1,DAT_005f16ac);
         FUN_001bc124();
@@ -300,8 +300,8 @@ void FUN_00366e24(void)
     }
     if ((*(int *)(g_lmapScene + 8) >= 0x1f) && (temp_v2 = mapIfHasSelection(), temp_v2 == 0)) {
       mapIfOverlayRelease();
-      temp_v2 = DAT_005806a4;
-      *(float *)(DAT_005806a4 + 0x18) = *(float *)(g_lmapScene + 0x50) + temp_v4;
+      temp_v2 = g_lmapView;
+      *(float *)(g_lmapView + 0x18) = *(float *)(g_lmapScene + 0x50) + temp_v4;
       *(unsigned int *)(temp_v2 + 0xb0) = 0;
       FUN_00303460(0);
       temp_v2 = g_lmapScene;

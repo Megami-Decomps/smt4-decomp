@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_0019e3d0(...);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int mapRenderApplySecondary(void);
 int FUN_0050d8e4(void);
 int VectorFloatToUnsigned(...);
@@ -50,7 +50,7 @@ extern unsigned int DAT_00536d14; /* 0x536d14 */
 extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
-extern int DAT_005806a4; /* 0x5806a4 */
+extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern float DAT_005f0c94; /* 0x5f0c94 */
 extern float DAT_005f0c98; /* 0x5f0c98 */
@@ -75,7 +75,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019e3d0. */
-/* Supplied declaration required: FUN_002b5cb4. */
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mapRenderApplySecondary. */
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -147,8 +147,8 @@ void FUN_002cfb18(void)
     temp_v17 = 20.0f;
     temp_v15 = DAT_005f0c94;
     temp_v16 = DAT_005f0c9c;
-    FUN_002b5cb4();
-    temp_v6 = *(float *)(DAT_005806a4 + 0x50) - temp_v15;
+    distSpatial();
+    temp_v6 = *(float *)(g_lmapView + 0x50) - temp_v15;
     FUN_0050d8e4();
     temp_v6 = temp_v6 * 57.32484f * 0.7111111f;
     temp_v7 = 0;

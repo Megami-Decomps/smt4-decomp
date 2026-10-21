@@ -9,11 +9,11 @@ int FUN_0021bdac(unsigned int, int, int, int, int, int);
 int FUN_0023723c(unsigned int, int, unsigned int, int, int, unsigned char *, unsigned char *);
 int useCounterStart(void);
 int FUN_002686b8(void);
-int FUN_002c76c0(int);
+int scrCommMessageSetMode(int);
 int FUN_0031f208(int);
-int FUN_0031f27c(unsigned int, int);
+int sortMenuAcquire(unsigned int, int);
 int obj04Finish(void);
-int FUN_0035d8a4(void);
+int useCounterRelease(void);
 int rt_memcpy_w(unsigned int [19], unsigned char *, int);
 
 /* stack frame of param_3: 5 slot(s), 20 byte(s) */
@@ -40,12 +40,12 @@ extern int gameFlagIsSet(unsigned int);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 /* Supplied declaration required: FUN_002686b8. */
-/* Supplied declaration required: FUN_002c76c0. */
+/* Supplied declaration required: scrCommMessageSetMode. */
 extern unsigned int FUN_002c7c54(void);
 /* Supplied declaration required: FUN_0031f208. */
-/* Supplied declaration required: FUN_0031f27c. */
+/* Supplied declaration required: sortMenuAcquire. */
 /* Supplied declaration required: obj04Finish. */
-/* Supplied declaration required: FUN_0035d8a4. */
+/* Supplied declaration required: useCounterRelease. */
 /* Supplied declaration required: rt_memcpy_w. */
 
 
@@ -87,7 +87,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
   temp_v7[0xd] = 'b';
   temp_v7[0xe] = 'X';
   temp_v7[0xf] = 'd';
-  FUN_002c76c0(0);
+  scrCommMessageSetMode(0);
   temp_v5 = 0;
   temp_v4 = 0;
   do {
@@ -113,7 +113,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
       msgBoxFlagsSetBit7(*(unsigned int *)(temp_v0 + 4));
       *(unsigned char *)(temp_v0 + 0x19c4) = 0;
       *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0xc) | 0x20;
-      FUN_0031f27c(0xffffffff,3);
+      sortMenuAcquire(0xffffffff,3);
       temp_v4 = 0;
       do {
         temp_v5 = gameFlagIsSet(temp_v6[temp_v4]);
@@ -130,7 +130,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
       g_lmapMain = 0;
       (*(unsigned int *)((unsigned char *)&g_gameState + 0x504)) = 0;
       FUN_002686b8();
-      FUN_0035d8a4();
+      useCounterRelease();
       obj04Finish();
       temp_v2 = 0xffffffff;
     }
@@ -141,7 +141,7 @@ unsigned int FUN_002841b8(int param_1,int param_2,unsigned int param_3)
       g_lmapMain = 0;
       (*(unsigned int *)((unsigned char *)&g_gameState + 0x504)) = 0;
       FUN_002686b8();
-      FUN_0035d8a4();
+      useCounterRelease();
       obj04Finish();
       if (temp_v3 == 0x55) {
         temp_v2 = 1;

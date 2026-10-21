@@ -9,7 +9,7 @@ int FUN_001bcfb4(...);
 int FUN_001cd3ec(...);
 int FUN_0024400c(...);
 int gameFlagSetValue(...);
-int FUN_0040ac08(...);
+int modelListInit(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -31,7 +31,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_0024400c. */
 /* Supplied declaration required: gameFlagSetValue. */
-/* Supplied declaration required: FUN_0040ac08. */
+/* Supplied declaration required: modelListInit. */
 
 
 void FUN_0029203c(void)
@@ -65,7 +65,7 @@ void FUN_0029203c(void)
     FUN_00178b04(0x20,0x531448,0x233);
     temp_v0 = 0;
     if (temp_v2 != 0) {
-      temp_v0 = FUN_0040ac08();
+      temp_v0 = modelListInit();
     }
     DAT_005f0c88 = temp_v0;
     FUN_001cd3ec();
@@ -73,7 +73,7 @@ void FUN_0029203c(void)
     FUN_00178b04(0x20,0x531448,0x236);
     temp_v0 = 0;
     if (temp_v2 != 0) {
-      temp_v0 = FUN_0040ac08();
+      temp_v0 = modelListInit();
     }
     DAT_005f0c8c = temp_v0;
     FUN_001cd3ec();
@@ -81,7 +81,7 @@ void FUN_0029203c(void)
     FUN_00178b04(0x20,0x531448,0x239);
     temp_v0 = 0;
     if (temp_v2 != 0) {
-      temp_v0 = FUN_0040ac08();
+      temp_v0 = modelListInit();
     }
     DAT_005f0c90 = temp_v0;
     FUN_001cd3ec();
@@ -89,7 +89,7 @@ void FUN_0029203c(void)
     FUN_00178b04(0x20,0x531448,0x23c);
     temp_v0 = 0;
     if (temp_v2 != 0) {
-      temp_v0 = FUN_0040ac08();
+      temp_v0 = modelListInit();
     }
     DAT_005f0d44 = temp_v0;
     FUN_001cd3ec();
@@ -97,7 +97,7 @@ void FUN_0029203c(void)
     FUN_00178b04(0x20,0x531448,0x23f);
     temp_v0 = 0;
     if (temp_v2 != 0) {
-      temp_v0 = FUN_0040ac08();
+      temp_v0 = modelListInit();
     }
     DAT_005f0d48 = temp_v0;
     FUN_001cd3ec();
@@ -105,7 +105,7 @@ void FUN_0029203c(void)
     FUN_00178b04(0x20,0x531448,0x242);
     temp_v2 = 0;
     if (temp_v1 != 0) {
-      temp_v2 = FUN_0040ac08();
+      temp_v2 = modelListInit();
     }
     DAT_005f0d4c = temp_v2;
     FUN_001bcfb4("map/all/furin_lg.bam",temp_v2 + 0x10,1,0,0,0x80,unaff_r4,in_lr);

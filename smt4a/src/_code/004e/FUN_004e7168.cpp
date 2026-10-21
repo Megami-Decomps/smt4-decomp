@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003f0e20(...);
-int FUN_004e626c(int *, unsigned int);
+int btlUnitClearRecordFields(int *, unsigned int);
 int FUN_004fcde0(int, unsigned int *, int);
 int FUN_004fd508(int, unsigned int *, unsigned int, unsigned int, int);
 
@@ -26,7 +26,7 @@ extern unsigned int DAT_00571270; /* 0x571270 */
 extern unsigned int DAT_00571274; /* 0x571274 */
 
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004e626c. */
+/* Supplied declaration required: btlUnitClearRecordFields. */
 /* Supplied declaration required: FUN_004fcde0. */
 /* Supplied declaration required: FUN_004fd508. */
 
@@ -119,7 +119,7 @@ void FUN_004e7168(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
   if (temp_v1 == 0) {
     *(unsigned int *)(*param_1 + 0xa8) = 10;
   }
-  FUN_004e626c(param_1,*(unsigned int *)(*param_1 + 0xa4));
+  btlUnitClearRecordFields(param_1,*(unsigned int *)(*param_1 + 0xa4));
   temp_v1 = 0;
   do {
     param_2[temp_v1 * 4 + 0x279] = 0;

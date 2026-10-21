@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0013c1ec(unsigned int);
+int soundVolumeSettingSet(unsigned int);
 int FUN_002bf09c(void);
 int scrSetResult(unsigned int);
 int VectorFloatToUnsigned(double, int);
@@ -14,8 +14,8 @@ int VectorUnsignedToFloat(unsigned int, int);
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0013c1ec. */
-extern unsigned int FUN_00145868(void);
+/* Supplied declaration required: soundVolumeSettingSet. */
+extern unsigned int soundVolumeSettingGet(void);
 extern unsigned int scrGetArg(unsigned int);
 extern int scrGetArgString(unsigned int);
 /* Supplied declaration required: FUN_002bf09c. */
@@ -36,16 +36,16 @@ void FUN_00348b68(void)
   float temp_v5;
   
   temp_v0 = scrGetArg(1);
-  temp_v1 = FUN_00145868();
+  temp_v1 = soundVolumeSettingGet();
   temp_v3 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v5 = (float)VectorUnsignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v4 = VectorFloatToUnsigned(temp_v3 * temp_v5 * 0.0125f,3);
-  FUN_0013c1ec(temp_v4 & 0xff);
+  soundVolumeSettingSet(temp_v4 & 0xff);
   temp_v2 = scrGetArgString(0);
   FUN_002bf09c();
   if (-1 < temp_v2) {
     temp_v0 = FUN_003d2150();
-    FUN_0013c1ec(temp_v1);
+    soundVolumeSettingSet(temp_v1);
     scrSetResult(temp_v0);
   }
   return;

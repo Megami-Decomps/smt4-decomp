@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_00433b04(...);
+int branchNodeFollowEnabledEdges(...);
 
-/* Supplied declaration required: FUN_00433b04. */
+/* Supplied declaration required: branchNodeFollowEnabledEdges. */
 extern int FUN_0052285c(int, unsigned short);
 
 
@@ -26,11 +26,11 @@ int FUN_00433b58(int *param_1,int param_2,unsigned short *param_3)
   
   temp_v6 = 1;
   *param_1 = *(int *)(param_2 + 4);
-  FUN_00433b04(param_1,0x11);
+  branchNodeFollowEnabledEdges(param_1,0x11);
   temp_v0 = *param_3;
   if (temp_v0 == 0) {
     temp_v3 = 8;
-    FUN_00433b04(param_1,temp_v3 | 0x62);
+    branchNodeFollowEnabledEdges(param_1,temp_v3 | 0x62);
     return (int)*(char *)(*param_1 + 0x2c);
   }
   do {
@@ -49,7 +49,7 @@ int FUN_00433b58(int *param_1,int param_2,unsigned short *param_3)
         else {
           temp_v7 = 1;
         }
-        FUN_00433b04(param_1,2);
+        branchNodeFollowEnabledEdges(param_1,2);
       }
       else if (!(temp_v0 == 0x2028 || temp_v0 == 0x2029)) {
 LAB_00433bb4:
@@ -57,12 +57,12 @@ LAB_00433bb4:
       }
       else {
         temp_v7 = 1;
-        FUN_00433b04(param_1,2);
+        branchNodeFollowEnabledEdges(param_1,2);
       }
     }
     else {
       temp_v7 = 1;
-      FUN_00433b04(param_1,2);
+      branchNodeFollowEnabledEdges(param_1,2);
     }
     do {
       temp_v3 = (unsigned int)*param_3;
@@ -101,7 +101,7 @@ LAB_00433c30:
       else {
         temp_v4 = 4;
       }
-      FUN_00433b04(param_1,temp_v4);
+      branchNodeFollowEnabledEdges(param_1,temp_v4);
       temp_v1 = *param_1;
       temp_v0 = *param_3;
       temp_v5 = *(int *)(temp_v1 + 0xc);
@@ -115,18 +115,18 @@ LAB_00433c30:
       }
       *param_1 = *(int *)(temp_v5 + 8);
       if ((temp_v7 != -1) && (temp_v7 = temp_v7 - 1, temp_v7 == 0)) {
-        FUN_00433b04(param_1,1);
+        branchNodeFollowEnabledEdges(param_1,1);
       }
       param_3 = param_3 + 1;
       temp_v0 = *param_3;
       if (temp_v0 == 0) {
         if (temp_v6 != 0) {
           temp_v3 = 8;
-          FUN_00433b04(param_1,temp_v3 | 0x62);
+          branchNodeFollowEnabledEdges(param_1,temp_v3 | 0x62);
           return (int)*(char *)(*param_1 + 0x2c);
         }
         temp_v3 = 4;
-        FUN_00433b04(param_1,temp_v3 | 0x62);
+        branchNodeFollowEnabledEdges(param_1,temp_v3 | 0x62);
         return (int)*(char *)(*param_1 + 0x2c);
       }
       temp_v5 = temp_v6;

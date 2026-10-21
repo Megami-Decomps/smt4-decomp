@@ -10,7 +10,7 @@ int FUN_002e78d0(unsigned int, unsigned int, int);
 int FUN_002ec738(int);
 
 extern unsigned int FUN_0011a268(int, unsigned int, int, unsigned int, unsigned int);
-extern unsigned int FUN_002e6e26(void);
+extern unsigned int onlineContextGetInstance(void);
 /* Supplied declaration required: sharedRefRelease. */
 /* Supplied declaration required: sharedRefAddRef. */
 extern int operatorNew(unsigned int);
@@ -45,7 +45,7 @@ unsigned int FUN_002f71b0(int param_1,int param_2,unsigned int param_3,unsigned 
     }
     *(unsigned int *)(param_1 + 0x98) = temp_v1;
     sharedRefAddRef();
-    temp_v1 = FUN_002e6e26();
+    temp_v1 = onlineContextGetInstance();
     FUN_002e78d0(temp_v1,*(unsigned int *)(param_1 + 0x98),0);
   }
   else {

@@ -15,11 +15,11 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_2_stack;
 
-extern signed char DAT_004656d0; /* 0x4656d0 */
+extern signed char g_asdCecModuleFlags; /* 0x4656d0 */
 extern unsigned char DAT_004656d1; /* 0x4656d1 */
 extern signed char DAT_004656d3; /* 0x4656d3 */
 extern signed char DAT_004656d4; /* 0x4656d4 */
-extern unsigned int DAT_004e62a8; /* 0x4e62a8 */
+extern unsigned int g_asdCecMessageBoxCriticalSection; /* 0x4e62a8 */
 extern unsigned int DAT_004e62b4; /* 0x4e62b4 */
 
 /* Supplied declaration required: FUN_002399ec. */
@@ -37,7 +37,7 @@ void FUN_00238f4c(int *param_1,int param_2)
 /* irregular: 3 native warning(s); review required */
   unsigned char temp_v0 [8];
   
-  nn_os_CriticalSection_Enter((unsigned int)&DAT_004e62a8);
+  nn_os_CriticalSection_Enter((unsigned int)&g_asdCecMessageBoxCriticalSection);
   if (param_2 == 0) {
     if (param_1[1] != 0) {
       if (*(char *)((int)param_1 + 10) != '\0') {
@@ -46,7 +46,7 @@ void FUN_00238f4c(int *param_1,int param_2)
       if (*(char *)((int)param_1 + 0xb) != '\0') {
         nn_cec_CTR_MessageBox_WriteBoxInfo((unsigned int)param_1,1,(unsigned int)(param_1 + 0xeb),(unsigned int *)(param_1 + 0xf3));
       }
-      if (DAT_004656d0 != '\0') {
+      if (g_asdCecModuleFlags != '\0') {
         (**(romwright_code **)(*param_1 + 8))(param_1,param_1[1],0x96,0x14,temp_v0);
         nn_cec_CTR_MessageBox_WriteMessageBoxInfo((unsigned int)param_1);
       }
@@ -94,8 +94,8 @@ void FUN_00238f4c(int *param_1,int param_2)
     FUN_0024ee68(0);
     DAT_004656d1 = 0;
   }
-  DAT_004656d0 = 0;
-  nn_os_CriticalSection_Leave((unsigned int)&DAT_004e62a8);
+  g_asdCecModuleFlags = 0;
+  nn_os_CriticalSection_Leave((unsigned int)&g_asdCecMessageBoxCriticalSection);
   return;
 }
 

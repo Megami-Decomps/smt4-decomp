@@ -6,9 +6,9 @@ extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00184310(...);
-int FUN_0020d164(...);
+int battleAttributeFormatName(...);
 int FUN_00230c1c(...);
-int FUN_002a1f60(...);
+int asdTextDrawDirectoryEntry(...);
 int FUN_002ad414(...);
 int FUN_002c0940(...);
 int FUN_003180c4(...);
@@ -44,9 +44,9 @@ extern int DAT_0057f0cc; /* 0x57f0cc */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_0020d164. */
+/* Supplied declaration required: battleAttributeFormatName. */
 /* Supplied declaration required: FUN_00230c1c. */
-/* Supplied declaration required: FUN_002a1f60. */
+/* Supplied declaration required: asdTextDrawDirectoryEntry. */
 /* Supplied declaration required: FUN_002ad414. */
 /* Supplied declaration required: FUN_002c0940. */
 /* Supplied declaration required: FUN_003180c4. */
@@ -84,7 +84,7 @@ void FUN_0032d0c8(int param_1,unsigned int param_2,fn_0032d0c8_arg2 *param_3,uns
       textFormatBuffer(temp_v4,&LAB_0032d2f4,&temp_v2,temp_v3);
       FUN_003180c4(0x25,temp_v4);
     }
-    FUN_0020d164(temp_v4,pfVar3->field_0xc);
+    battleAttributeFormatName(temp_v4,pfVar3->field_0xc);
     FUN_003180c4(0x26,temp_v4);
     FUN_00230c1c(temp_v4,(pfVar3->field_0xa & 0x1f) >> 1);
     FUN_003180c4(0x27,temp_v4);
@@ -127,7 +127,7 @@ void FUN_0032d0c8(int param_1,unsigned int param_2,fn_0032d0c8_arg2 *param_3,uns
     temp_v2 = 3;
     iStack_ac = param_1;
     temp_v3[0] = param_2;
-    FUN_002a1f60(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0);
+    asdTextDrawDirectoryEntry(*(unsigned int *)(temp_v1 + 0x678),2,0xffffffff,0);
   }
   return;
 }

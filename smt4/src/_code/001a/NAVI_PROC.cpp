@@ -11,13 +11,13 @@ typedef struct NaviMain {
 
 extern NaviMain *g_naviMain;
 
-s32 FUN_00287758(void);
+s32 stageAssetsLoaded(void);
 int NaviMain_DispatchState(void *state);
 
-/* Navi main task: while FUN_00287758 reports ready and the navi object isn't busy, dispatches its state; always returns 0. */
+/* Navi main task: while stageAssetsLoaded reports ready and the navi object isn't busy, dispatches its state; always returns 0. */
 u32 NAVI_PROC(void)
 {
-    if (FUN_00287758() == 0) {
+    if (stageAssetsLoaded() == 0) {
         return 0;
     }
     if (g_naviMain->busy != 0) {

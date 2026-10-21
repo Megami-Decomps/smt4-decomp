@@ -5,14 +5,13 @@
 extern "C" {
 
 int FUN_003f3f08(unsigned int);
-int FUN_003f4b44(unsigned int);
+void partyStatusIconTick(void*);
 
 extern int g_partyPanel; /* 0x57f268 */
 
 extern int gameGetSlotRecord(unsigned int);
 extern short *FUN_002c7e24(void);
 /* Supplied declaration required: FUN_003f3f08. */
-/* Supplied declaration required: FUN_003f4b44. */
 
 
 unsigned int FUN_0021c1e0(void)
@@ -31,7 +30,7 @@ unsigned int FUN_0021c1e0(void)
   temp_v4 = 0xffffffff;
   do {
     temp_v3 = temp_v0 + temp_v2 * 4;
-    FUN_003f4b44(*(unsigned int *)(temp_v3 + 0xa10));
+    partyStatusIconTick(reinterpret_cast<void*>(*(unsigned int *)(temp_v3 + 0xa10)));
     psVar2 = (short *)FUN_002c7e24();
     if (*(int *)(*(int *)(temp_v3 + 0xa10) + 0x34) < 0) {
       if (*psVar2 < 0) {
@@ -55,7 +54,7 @@ unsigned int FUN_0021c1e0(void)
   temp_v2 = 0;
   do {
     temp_v3 = temp_v0 + temp_v2 * 4;
-    FUN_003f4b44(*(unsigned int *)(temp_v3 + 0xa20));
+    partyStatusIconTick(reinterpret_cast<void*>(*(unsigned int *)(temp_v3 + 0xa20)));
     psVar2 = (short *)FUN_002c7e24();
     if (*(int *)(*(int *)(temp_v3 + 0xa20) + 0x34) < 0) {
       if (*psVar2 < 0) {

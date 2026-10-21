@@ -11,7 +11,7 @@ int FUN_0025cc34(void);
 int FUN_0025cc8c(void);
 int communicationBeginTransition(int);
 int communicationSetResultPointer(void);
-int FUN_0026c7b8(unsigned char [68]);
+void FUN_0026c7b8(const unsigned char* text);
 int devilGetRecord(void);
 int textFormatBuffer(...);
 int FUN_002be650(unsigned int, int);
@@ -38,13 +38,12 @@ extern unsigned char g_btlUi; /* 0x439c88 */
 /* Supplied declaration required: FUN_0025cc8c. */
 /* Supplied declaration required: communicationBeginTransition. */
 /* Supplied declaration required: communicationSetResultPointer. */
-/* Supplied declaration required: FUN_0026c7b8. */
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 extern int FUN_002b6a54(int, unsigned short);
-extern int gameGetOptions(void);
+extern int gameGetSupportUnitData(void);
 /* Supplied declaration required: devilGetRecord. */
-extern unsigned int FUN_002bce00(unsigned short);
+extern unsigned int aocIndexValueOrDefault(unsigned short);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002be650. */
 /* Supplied declaration required: FUN_002cd750. */
@@ -93,9 +92,9 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
       }
     }
     else if (param_6 != 0) {
-      temp_v2 = gameGetOptions();
+      temp_v2 = gameGetSupportUnitData();
       temp_v0 = *(unsigned short *)(temp_v2 + 0x606);
-      temp_v2 = gameGetOptions();
+      temp_v2 = gameGetSupportUnitData();
       temp_v2 = FUN_002b6a54((int)*(short *)(temp_v2 + 0x604),temp_v0);
       if ((*(unsigned int *)(temp_v2 + 8) & 0x3fffff) >> 0x11 != 1) {
         temp_v5 = (short)(int)temp_v6;
@@ -123,7 +122,7 @@ void FUN_00227334(unsigned int param_1,unsigned int param_2,int param_3,int para
     break;
   case 2:
   case 3:
-    temp_v3 = FUN_002bce00(*(unsigned short *)(temp_v2 + 0xc9e8));
+    temp_v3 = aocIndexValueOrDefault(*(unsigned short *)(temp_v2 + 0xc9e8));
     textFormatBuffer(temp_v6,&LAB_00227618,temp_v3);
     FUN_00211868((int)*(short *)(temp_v2 + 0xc9e8),param_4 != 0);
     break;

@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } void_stack;
 
-extern int FUN_001082b0(...); /* 0x1082b0 */
+extern int memoryDebugRefresh(...); /* 0x1082b0 */
 extern unsigned char LAB_0010a510; /* 0x10a510 */
 extern int DAT_00465128; /* 0x465128 */
 extern char *DAT_00465130; /* 0x465130 */
@@ -40,7 +40,7 @@ void FUN_00102e34(void)
     *(unsigned int *)(temp_v0 + 0xc) = *(unsigned int *)(temp_v0 + 0xc) | 1;
     DAT_0046515c = 0;
     pcVar2 = "asdMemMap";
-    asdProcessCreateSimple("asdMemMap",0x15e,0,0,FUN_001082b0,&LAB_0010a510,&DAT_0046515c);
+    asdProcessCreateSimple("asdMemMap",0x15e,0,0,memoryDebugRefresh,&LAB_0010a510,&DAT_0046515c);
     if (pcVar2 == (char *)0x0) {
       pcVar2 = (char *)0x0;
     }

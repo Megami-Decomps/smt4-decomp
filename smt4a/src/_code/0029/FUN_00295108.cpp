@@ -7,7 +7,7 @@ extern "C" {
 int gameFlagIsSet(...);
 int dataTableGetCount(unsigned int);
 int dataTableGetEntries(void);
-int FUN_002d8c90(int);
+int popupQueueInsertUnique(int);
 int gameFlagSetValue(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -25,7 +25,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
 extern int FUN_002d8b58(unsigned int);
-/* Supplied declaration required: FUN_002d8c90. */
+/* Supplied declaration required: popupQueueInsertUnique. */
 /* Supplied declaration required: gameFlagSetValue. */
 
 
@@ -53,7 +53,7 @@ void FUN_00295108(int param_1)
     if (temp_v1 + 1 >= 11) {
       return;
     }
-    FUN_002d8c90(0x12);
+    popupQueueInsertUnique(0x12);
     return;
   }
   temp_v1 = gameFlagIsSet(0x8d);

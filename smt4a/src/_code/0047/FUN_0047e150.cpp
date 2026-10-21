@@ -20,7 +20,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -88,7 +88,7 @@ unsigned int FUN_0047e150(unsigned int *param_1)
     temp_v1 = 2;
     break;
   case 2:
-    temp_v2 = FUN_00224880(param_1[5]);
+    temp_v2 = scrRunOpcodesStub(param_1[5]);
     if (temp_v2 != 2) {
       return 0;
     }

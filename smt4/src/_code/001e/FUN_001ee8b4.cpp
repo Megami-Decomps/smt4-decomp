@@ -9,7 +9,7 @@ int FUN_0029eb5c(...);
 int FUN_0029f848(int, int, int, int, int, int);
 int devilGetRecord(void);
 int memClear(int, int);
-int FUN_0032c288(void);
+int statusInventorySort(void);
 
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
@@ -24,7 +24,7 @@ extern int g_statusDown; /* 0x44e190 */
 /* Supplied declaration required: FUN_0029f848. */
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_0032c288. */
+/* Supplied declaration required: statusInventorySort. */
 
 
 void FUN_001ee8b4(int param_1)
@@ -74,7 +74,7 @@ void FUN_001ee8b4(int param_1)
     FUN_0029eb5c(temp_v3,(int)*(short *)(temp_v2 + 0x2236));
     FUN_0029e8b8(temp_v3,(int)*(short *)(temp_v2 + 0x2234));
   }
-  FUN_0032c288();
+  statusInventorySort();
   *(unsigned char *)(temp_v2 + 0x410) = 1;
   return;
 }

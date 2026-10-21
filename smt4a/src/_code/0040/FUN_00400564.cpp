@@ -34,7 +34,7 @@ extern int FUN_00291e14(void);
 extern int FUN_002b4dcc(int);
 /* Supplied declaration required: FUN_002b4e7c. */
 /* Supplied declaration required: FUN_003ff524. */
-extern int FUN_003ff5b8(unsigned int);
+extern int btlCanSelectReservePartyMember(unsigned int);
 extern int FUN_003ff888(void);
 
 
@@ -149,7 +149,7 @@ unsigned int FUN_00400564(int param_1,int param_2,fn_00400564_arg2 *param_3)
       }
     }
   }
-  if (((temp_v6 & 0x1000000) != 0) && (temp_v2 = FUN_003ff5b8(0), temp_v2 != 0)) {
+  if (((temp_v6 & 0x1000000) != 0) && (temp_v2 = btlCanSelectReservePartyMember(0), temp_v2 != 0)) {
     temp_v4 = temp_v4 | 0x1000000;
   }
   if (((temp_v6 & 0x2000000) != 0) && (temp_v2 = FUN_003ff888(), temp_v2 != 0)) {

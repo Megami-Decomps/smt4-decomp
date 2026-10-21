@@ -17,7 +17,7 @@ typedef struct Globals {
 
 extern Globals *g_mapIf;
 
-int FUN_00254e10(int id);
+int gameMapBlockGetValue(int id);
 int FUN_00285574(void);
 
 /* Queues command `id` with `arg`, unless it is suppressed by the current state (id 0x24, or a blocking condition on id / 0x29). */
@@ -28,10 +28,10 @@ void FUN_00277b5c(int id, u16 arg)
     if (id == 0x24) {
         return;
     }
-    if (FUN_00285574() == 1 && FUN_00254e10(0x29) == 1) {
+    if (FUN_00285574() == 1 && gameMapBlockGetValue(0x29) == 1) {
         return;
     }
-    if (id != 0x18 && id < 100 && FUN_00254e10(id) == 1) {
+    if (id != 0x18 && id < 100 && gameMapBlockGetValue(id) == 1) {
         return;
     }
     globals->command.pending = 1;

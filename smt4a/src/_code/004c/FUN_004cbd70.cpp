@@ -14,7 +14,7 @@ int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
-int FUN_00224880(...);
+int scrRunOpcodesStub(...);
 int FUN_0023acdc(int);
 int scrScriptProcessStartEntry(...);
 int FUN_002a7288(void);
@@ -40,10 +40,10 @@ typedef struct {
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 extern int gameGetSlotRecord(unsigned int);
-/* Supplied declaration required: FUN_00224880. */
+/* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: FUN_0023acdc. */
 extern int FUN_002613f0(unsigned int);
-extern int FUN_0026272c(void);
+extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_0026c3c4. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
@@ -51,7 +51,7 @@ extern int FUN_002a4b74(void);
 /* Supplied declaration required: FUN_002a7288. */
 extern int FUN_002c7cb4(void);
 extern int FUN_002effbc(void);
-extern int FUN_0032169c(void);
+extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_00336de4. */
 /* Supplied declaration required: obj04Finish. */
@@ -134,7 +134,7 @@ LAB_004cbdc8:
           if (temp_v3 != 0x15) {
             return;
           }
-          temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x14));
+          temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x14));
           if (temp_v0 != 2) {
             return;
           }
@@ -148,7 +148,7 @@ LAB_004cbdc8:
           }
         }
         else {
-          temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x14));
+          temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x14));
           if (temp_v0 != 2) {
             return;
           }
@@ -164,7 +164,7 @@ LAB_004cbdc8:
         sysPlaySe(0x67);
         return;
       }
-      temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x20));
+      temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x20));
       if (temp_v0 != 2) {
         return;
       }
@@ -196,7 +196,7 @@ LAB_004cbdc8:
       }
       temp_v3 = FUN_002c7cb4();
       if (temp_v3 != 0) {
-        temp_v3 = FUN_0032169c();
+        temp_v3 = btlTalkBustUpGetValue();
         if (temp_v3 == 0) {
           FUN_00336de4(*(unsigned short *)(temp_v1 + 0x62),1);
           btlTalkBustUpSetUnk2F4(1);
@@ -209,7 +209,7 @@ LAB_004cbdc8:
       }
       return;
     case 2:
-      FUN_00224880(*(unsigned int *)(param_1 + 0x20));
+      scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x20));
       if (*(int *)(param_1 + 0xc) < 0x21) {
         return;
       }
@@ -250,7 +250,7 @@ LAB_004cbdc8:
       }
       break;
     case 4:
-      temp_v0 = FUN_0026272c();
+      temp_v0 = messageMainIsIdle();
       if (temp_v0 == 0) {
         return;
       }
@@ -259,7 +259,7 @@ LAB_004cbdc8:
       FUN_0015f490(*(unsigned short *)(temp_v1 + 0x62),9,1,0);
       break;
     case 5:
-      temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x20));
+      temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x20));
       if (temp_v0 != 2) {
         return;
       }
@@ -285,7 +285,7 @@ LAB_004cbdc8:
     }
   }
   else {
-    temp_v0 = FUN_0026272c();
+    temp_v0 = messageMainIsIdle();
     if (temp_v0 == 0) {
       return;
     }

@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c40b4` (_code @ 0x3c40b4, 0x184 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
 int FUN_0015f858(int, int);
 int FUN_00162790(...);
-int FUN_001689e8(int, int, int, int, int);
 int FUN_001835b4(int, int, int, int, int, int);
 int FUN_003cd2c4(int, int, unsigned int);
 int VectorSignedToFloat(int, int);
@@ -23,7 +23,6 @@ extern unsigned char DAT_0052bfdc; /* 0x52bfdc */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
-/* Supplied declaration required: FUN_001689e8. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int FUN_00284140(unsigned int);
@@ -49,7 +48,7 @@ void FUN_003c40b4(int param_1,int param_2,int param_3,short param_4,int param_5,
   FUN_003cd2c4(param_1,param_2,temp_v1);
   FUN_001835b4(2,0x12,0x474,param_1,param_2,0xc4);
   temp_v0 = FUN_001834a4(0x12,0x475);
-  FUN_001689e8((int)param_4,*(short *)(temp_v0 + 8) + param_1,*(short *)(temp_v0 + 10) + param_2,0xc4,0)
+  uiDrawItemCategoryIcon((int)param_4,*(short *)(temp_v0 + 8) + param_1,*(short *)(temp_v0 + 10) + param_2,0xc4,0)
   ;
   temp_v0 = FUN_001834a4(0x12,0x476);
   if (0 < param_3) {

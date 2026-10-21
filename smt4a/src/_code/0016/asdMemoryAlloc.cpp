@@ -15,7 +15,7 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_5_stack;
 
-extern unsigned char DAT_005b4028; /* 0x5b4028 */
+extern unsigned char g_allocationAddressRanges; /* 0x5b4028 */
 
 /* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
 /* Supplied declaration required: FUN_0018003c. */
@@ -36,13 +36,13 @@ int asdMemoryAlloc(int param_1,unsigned int param_2,unsigned int param_3,int par
     asdMemoryAllocImpl(param_1,param_2,param_3,(param_4 + 0x13fU) & 0xffffff80,param_5);
     param_1 = FUN_001844ac();
     rt_memclr(param_1,param_4);
-    temp_v0 = *(*(int * *)((unsigned char *)&DAT_005b4028 + 0x4));
+    temp_v0 = *(*(int * *)((unsigned char *)&g_allocationAddressRanges + 0x4));
     software_interrupt(0x14);
   }
   else {
     FUN_0018003c();
     asdMemoryAllocImpl(param_1,param_2,param_3,param_4,param_5);
-    temp_v0 = *(*(int * *)((unsigned char *)&DAT_005b4028 + 0x4));
+    temp_v0 = *(*(int * *)((unsigned char *)&g_allocationAddressRanges + 0x4));
     software_interrupt(0x14);
   }
   if (temp_v0 < 0) {

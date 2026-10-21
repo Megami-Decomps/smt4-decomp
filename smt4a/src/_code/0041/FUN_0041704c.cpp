@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041704c` (_code @ 0x41704c, 0x1e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int FUN_0031f718(unsigned int, int);
 int FUN_00333dc8(int);
 int FUN_0035da20(unsigned int [5], int);
 int statusDownEnterStateOne(void);
-int FUN_0037e0d0(unsigned int, int);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned int saveSlotFindById(unsigned int);
 /* Supplied declaration required: FUN_00215bd0. */
-extern int FUN_00224880(unsigned int);
+extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_0023b3d0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002a7324. */
@@ -38,7 +38,6 @@ extern int FUN_002c7cb4(void);
 /* Supplied declaration required: FUN_00333dc8. */
 /* Supplied declaration required: FUN_0035da20. */
 /* Supplied declaration required: statusDownEnterStateOne. */
-/* Supplied declaration required: FUN_0037e0d0. */
 
 
 unsigned int FUN_0041704c(int param_1)
@@ -76,7 +75,7 @@ LAB_004170bc:
     else {
       temp_v1 = saveSlotFindById(*(unsigned int *)(param_1 + 0x34) & 0xffff);
       FUN_002c85b0(0xc);
-      FUN_0037e0d0(temp_v1,0);
+      statusRequestUnitDetails((const UnitCategoryRecord*)temp_v1,0,0);
       FUN_002a7324(1);
       temp_v2[1] = 0;
       temp_v2[2] = 0;
@@ -100,7 +99,7 @@ LAB_004170bc:
     }
     break;
   case 4:
-    temp_v0 = FUN_00224880(*(unsigned int *)(param_1 + 0x1c));
+    temp_v0 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x1c));
     if (temp_v0 == 2) {
       FUN_00333dc8(0);
       *(unsigned int *)(param_1 + 0xc) = 5;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_0011be58(void);
 int FUN_0011bf24(void);
 int FUN_0011cc1c(void);
-int FUN_002bcc54(void);
+int nw_snd_SoundSystem_SetMasterVolume(void);
 int FUN_002bcc60(unsigned int *, int *, unsigned char *, unsigned int [2], unsigned int, int, unsigned int, int);
 int resultReportIfFailed(void);
 int asdOperatorNew(void);
@@ -46,7 +46,7 @@ extern unsigned int DAT_004c40f8; /* 0x4c40f8 */
 /* Supplied declaration required: FUN_0011be58. */
 /* Supplied declaration required: FUN_0011bf24. */
 /* Supplied declaration required: FUN_0011cc1c. */
-/* Supplied declaration required: FUN_002bcc54. */
+/* Supplied declaration required: nw_snd_SoundSystem_SetMasterVolume. */
 /* Supplied declaration required: FUN_002bcc60. */
 /* Supplied declaration required: resultReportIfFailed. */
 /* Supplied declaration required: asdOperatorNew. */
@@ -77,7 +77,7 @@ unsigned int FUN_0034e43c(unsigned int *param_1,int param_2,int param_3,int para
     FUN_0011bf24();
   }
   FUN_0011cc1c();
-  FUN_002bcc54();
+  nw_snd_SoundSystem_SetMasterVolume();
   if (DAT_0044d0fc != (unsigned int *)0x0) {
     temp_v0 = 0;
   }

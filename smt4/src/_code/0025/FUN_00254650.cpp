@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0020ffe8(unsigned int, unsigned int);
 int statusCameraSetEye(void);
-int FUN_00293db0(unsigned int, int);
+int objSetAnglesDegrees(unsigned int, int);
 int FUN_00293e08(unsigned int);
 int VectorSignedToFloat(int, int);
 
@@ -18,7 +18,7 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0020ffe8. */
 /* Supplied declaration required: statusCameraSetEye. */
-/* Supplied declaration required: FUN_00293db0. */
+/* Supplied declaration required: objSetAnglesDegrees. */
 /* Supplied declaration required: FUN_00293e08. */
 
 
@@ -52,23 +52,23 @@ void FUN_00254650(int param_1,unsigned int param_2)
     temp_v1 = *(float *)(param_1 + 0x10) + 5.0f;
     *(float *)(param_1 + 0x10) = temp_v1;
     if ((int)temp_v1 < 0x43b40001) {
-      FUN_00293db0(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
+      objSetAnglesDegrees(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
       return;
     }
     temp_v1 = temp_v1 - 360.0f;
     *(float *)(param_1 + 0x10) = temp_v1;
-    FUN_00293db0(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
+    objSetAnglesDegrees(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
     return;
   case 3:
     temp_v1 = *(float *)(param_1 + 0x10) - 5.0f;
     *(float *)(param_1 + 0x10) = temp_v1;
     if (0.0f <= temp_v1) {
-      FUN_00293db0(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
+      objSetAnglesDegrees(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
       return;
     }
     temp_v1 = temp_v1 + 360.0f;
     *(float *)(param_1 + 0x10) = temp_v1;
-    FUN_00293db0(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
+    objSetAnglesDegrees(*(unsigned int *)(param_1 + 0x1c),param_1 + 0xc);
     return;
   case 4:
     temp_v2[0] = 0;

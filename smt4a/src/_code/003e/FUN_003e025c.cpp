@@ -46,12 +46,12 @@ typedef struct {
 } param_2_stack;
 
 extern unsigned int g_btlCamera; /* 0x571508 */
-extern int DAT_00573808; /* 0x573808 */
+extern int g_btlAux; /* 0x573808 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_003e1068. */
 extern int FUN_003eca48(fn_003e025c_arg1 *, unsigned short);
-extern int FUN_003eccd0(fn_003e025c_arg1 *);
+extern int btlFindMarkedReserveRecord(fn_003e025c_arg1 *);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: btlCameraObjectCreate. */
 extern int FUN_004f2294(unsigned int);
@@ -81,12 +81,12 @@ void FUN_003e025c(unsigned int *param_1,fn_003e025c_arg1 *param_2)
   unsigned int temp_v15;
   unsigned int temp_v16;
   
-  temp_v0 = FUN_003eccd0(param_2);
+  temp_v0 = btlFindMarkedReserveRecord(param_2);
   if ((temp_v0 != 0) &&
      (pfVar2 = param_2, FUN_003f0e20(param_2,(int)*(short *)(temp_v0 + 0x6a)),
      pfVar2 != (fn_003e025c_arg1 *)0x0)) {
     temp_v0 = FUN_003eca48(param_2,*(unsigned short *)&pfVar2->field_0x166);
-    *(unsigned int *)(DAT_00573808 + 0x9c70) = *(unsigned int *)(temp_v0 + 0x34);
+    *(unsigned int *)(g_btlAux + 0x9c70) = *(unsigned int *)(temp_v0 + 0x34);
     if ((temp_v0 != 0) && ((*(unsigned char *)(temp_v0 + 3) & 1) != 0)) {
       temp_v1 = 0;
       temp_v2 = 0;

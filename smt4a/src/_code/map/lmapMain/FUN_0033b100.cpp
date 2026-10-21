@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
-int FUN_002b5cb4(void);
+int distSpatial(void);
 int FUN_0032714c(void);
 int mathPositionHeadingDegrees(void);
 int FUN_00367fac(void);
@@ -47,8 +47,8 @@ extern int gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
-extern unsigned int FUN_00261424(void);
-/* Supplied declaration required: FUN_002b5cb4. */
+extern unsigned int gameDataGetTableValue(void);
+/* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_0032714c. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 extern int FUN_00367f98(void);
@@ -106,7 +106,7 @@ unsigned int FUN_0033b100(int param_1)
   }
   if (DAT_005f19d4 != '\0' && puVar7 != (unsigned int *)0x0) {
     temp_v12 = DAT_005f19d8;
-    FUN_002b5cb4();
+    distSpatial();
     temp_v13 = *(float *)(temp_v3 + 0x1528);
     temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v13 < temp_v12) << 0x1f) |
             ((unsigned int)(temp_v13 == temp_v12) << 0x1e);
@@ -220,7 +220,7 @@ unsigned int FUN_0033b100(int param_1)
     return 0;
   }
   temp_v12 = DAT_005f17b0;
-  FUN_002b5cb4();
+  distSpatial();
   temp_v0 = (in_fpscr & 0xfffffff) | ((unsigned int)(350.0f < temp_v12) << 0x1f) |
           ((unsigned int)(temp_v12 == 350.0f) << 0x1e);
   temp_v10 = temp_v0 | ((unsigned int)(temp_v12 != temp_v12) << 0x1c);
@@ -240,7 +240,7 @@ unsigned int FUN_0033b100(int param_1)
     FUN_001bc124();
     FUN_001bbf0c();
     temp_v12 = DAT_005f17b0;
-    FUN_002b5cb4();
+    distSpatial();
     if ((int)temp_v12 >= 0x43af0000) {
       DAT_005f19c4 = 2;
       return 0;
@@ -283,7 +283,7 @@ unsigned int FUN_0033b100(int param_1)
     temp_v7 = FUN_003d21dc();
     temp_v5 = (int)temp_v1;
     if (temp_v7 != 0) {
-      temp_v6 = FUN_00261424();
+      temp_v6 = gameDataGetTableValue();
       temp_v14 = (float)VectorSignedToFloat(temp_v6,(unsigned char)(temp_v10 >> 0x16) & 3);
       temp_v12 = (float)VectorSignedToFloat((int)*(short *)(param_1 + 0x174),
                                           (unsigned char)(temp_v10 >> 0x16) & 3);

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_003efc40(int);
-int FUN_003efe78(int);
+int btlSelectSingleRandomTarget(int);
 int FUN_003f2aec(int, int);
 
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -36,7 +36,7 @@ extern unsigned int DAT_00573ae4; /* 0x573ae4 */
 
 extern short FUN_0034ef58(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003efc40. */
-/* Supplied declaration required: FUN_003efe78. */
+/* Supplied declaration required: btlSelectSingleRandomTarget. */
 /* Supplied declaration required: FUN_003f2aec. */
 
 
@@ -69,7 +69,7 @@ void FUN_003f26d4(int param_1)
   temp_v2 = *(unsigned int *)(param_1 + 0x45a0);
   temp_v6 = *(unsigned int *)(param_1 + 0x45a4);
   if ((DAT_00573ac8 & temp_v2) != 0 || (DAT_00573acc & temp_v6) != 0) {
-    FUN_003efe78(param_1);
+    btlSelectSingleRandomTarget(param_1);
     return;
   }
   if (((0 < *(int *)(param_1 + 0x4d6c)) &&

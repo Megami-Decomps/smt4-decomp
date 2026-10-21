@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001ad2dc(...);
+int colorKeyTrackAdvanceRgb(...);
 int FUN_001ca604(...);
 int FUN_001dd974(...);
 int FUN_001dda40(...);
@@ -43,7 +43,7 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001ad2dc. */
+/* Supplied declaration required: colorKeyTrackAdvanceRgb. */
 /* Supplied declaration required: FUN_001ca604. */
 /* Supplied declaration required: FUN_001dd974. */
 /* Supplied declaration required: FUN_001dda40. */
@@ -152,7 +152,7 @@ void FUN_00193c70(int param_1,fn_00193c70_arg1 *param_2)
       *(unsigned int *)(param_1 + 0x20c) = temp_v2;
     }
   }
-  FUN_001ad2dc(param_1,param_2);
+  colorKeyTrackAdvanceRgb(param_1,param_2);
   FUN_001dd974(param_1,param_2);
   FUN_001dda40(param_1,param_2);
   FUN_001ee200(param_1,param_2);

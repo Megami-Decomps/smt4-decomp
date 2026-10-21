@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_00192de4(int, unsigned int *, int);
+int gxEmitFramebufferAccessMasks(int, unsigned int *, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int spC; /* 0xc: local_c */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00192de4. */
+/* Supplied declaration required: gxEmitFramebufferAccessMasks. */
 
 
 void FUN_00500cac(char *param_1,unsigned int *param_2,int param_3)
@@ -26,7 +26,7 @@ void FUN_00500cac(char *param_1,unsigned int *param_2,int param_3)
                ((unsigned int)(unsigned char)param_1[0x12] << 8);
   param_2[3] = 0xf0106;
   if (param_3 != 0) {
-    FUN_00192de4(*(int *)(param_1 + 0x14) + 0x7c,param_2 + 4,1);
+    gxEmitFramebufferAccessMasks(*(int *)(param_1 + 0x14) + 0x7c,param_2 + 4,1);
     return;
   }
   return;

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038a5f4` (_code @ 0x38a5f4, 0x60 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: retail updates 64-bit semaphore counters and emits SVC 0x18 directly; the required intrinsic/assembly is forbidden by this assignment. */
 #include "romwright_types.h"
 
 extern "C" {
